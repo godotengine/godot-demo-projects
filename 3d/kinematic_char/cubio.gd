@@ -83,4 +83,5 @@ func _ready():
 
 
 func _on_tcube_body_enter(body):
-	get_node("../ty").show()
+	if (body == self):
+		get_node("../ty").show()
