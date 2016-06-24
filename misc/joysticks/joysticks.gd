@@ -59,3 +59,13 @@ func _on_joy_connection_changed(device_id, connected):
 			get_node("joy_name").set_text(Input.get_joy_name(device_id))
 		else:
 			get_node("joy_name").set_text("")
+
+func _on_start_vibration_pressed():
+	var weak = get_node("Vibration_weak_value").get_value()
+	var strong = get_node("Vibration_strong_value").get_value()
+	var duration = get_node("Vibration_duration_value").get_value()
+
+	Input.start_joy_vibration(cur_joy, weak, strong, duration)
+
+func _on_stop_vibration_pressed():
+	Input.stop_joy_vibration(cur_joy)
