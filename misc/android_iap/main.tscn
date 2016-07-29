@@ -1,0 +1,113 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://iap_demo.gd" type="Script" id=1]
+
+[node name="Control" type="Control"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+script/script = ExtResource( 1 )
+
+[node name="purchase" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 40.0
+margin/top = 40.0
+margin/right = 250.0
+margin/bottom = 120.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Purchase in app"
+flat = false
+
+[node name="consume" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 40.0
+margin/top = 150.0
+margin/right = 250.0
+margin/bottom = 230.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Consume in app"
+flat = false
+
+[node name="request" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 40.0
+margin/top = 260.0
+margin/right = 250.0
+margin/bottom = 340.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Request purchased"
+flat = false
+
+[node name="query" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 40.0
+margin/top = 370.0
+margin/right = 250.0
+margin/bottom = 450.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Query in app items"
+flat = false
+
+[node name="alert" type="AcceptDialog" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 290.0
+margin/top = 60.0
+margin/right = 700.0
+margin/bottom = 290.0
+popup/exclusive = false
+window/title = "Alert!"
+dialog/hide_on_ok = true
+
+[node name="Label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 300.0
+margin/top = 40.0
+margin/right = 932.0
+margin/bottom = 207.0
+text = "\"iap\" is located in Autoloads. See Scene > Project Settings > AutoLoad\n\nTo enable IAP module\n\n1. Scene > Project Settings\n2. write [Category : android] / [Property : modules] / [Type : String] and click Add\n3. Click \"Android\" on left panel\n4. double click on right filed of \"modules\"\n5. write \"org/godotengine/godot/GodotPaymentV3\"\n\nTo test in-app purchase on android device,\n\n1. Need to add \"com.android.vending.BILLING\" permission at Export > Android > User Permissions\n2. Export APK and upload it as alpha or beta stage to Google Play Developer Console and publish it.\n    (It\'s not published to public, but you and tester can access it.)\n3. There should be activated in-app item\n4. Any changes on Developer console will take 2~3 hours to take effect"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+
