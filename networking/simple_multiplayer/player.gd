@@ -14,6 +14,8 @@ sync func setup_bomb(name,pos,by_who):
 	bomb.set_name( name ) #ensure unique name for the bomb
 	bomb.set_pos( pos )	
 	bomb.owner=by_who
+	#no need to set network mode to bomb, will be owned by master by
+	#default
 	get_node("../..").add_child(bomb)
 	
 var current_anim=""

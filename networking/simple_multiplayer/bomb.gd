@@ -12,7 +12,6 @@ func explode():
 	if (not is_network_master()):
 		#but will call explosion only on master
 		return
-	
 	for p in in_area:
 		if (p.has_method("exploded")):
 			p.rpc("exploded",owner) #exploded has a master keyword, so it will only be received by the master
