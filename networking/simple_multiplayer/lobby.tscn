@@ -1,0 +1,215 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://lobby.gd" type="Script" id=1]
+
+[node name="lobby" type="Control"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+script/script = ExtResource( 1 )
+
+[node name="players" type="Panel" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 393.0
+margin/top = 113.0
+margin/right = 645.0
+margin/bottom = 468.0
+
+[node name="label" type="Label" parent="players"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 26.0
+margin/top = 18.0
+margin/right = 142.0
+margin/bottom = 32.0
+text = "Awaiting Players..."
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="start" type="Button" parent="players"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 68.0
+margin/top = 307.0
+margin/right = 193.0
+margin/bottom = 336.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "START!"
+flat = false
+
+[node name="list" type="ItemList" parent="players"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 25.0
+margin/top = 37.0
+margin/right = 229.0
+margin/bottom = 296.0
+
+[node name="connect" type="Panel" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 370.0
+margin/top = 157.0
+margin/right = 647.0
+margin/bottom = 324.0
+
+[node name="name_label" type="Label" parent="connect"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 14.0
+margin/top = 11.0
+margin/right = 56.0
+margin/bottom = 25.0
+text = "Name:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="name" type="LineEdit" parent="connect"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 17.0
+margin/top = 30.0
+margin/right = 173.0
+margin/bottom = 54.0
+text = "The Warrior"
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="ip_label" type="Label" parent="connect"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 15.0
+margin/top = 66.0
+margin/right = 57.0
+margin/bottom = 80.0
+text = "IP:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="ip" type="LineEdit" parent="connect"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 17.0
+margin/top = 85.0
+margin/right = 173.0
+margin/bottom = 109.0
+text = "127.0.0.1"
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="host" type="Button" parent="connect"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 181.0
+margin/top = 31.0
+margin/right = 246.0
+margin/bottom = 51.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Host"
+flat = false
+
+[node name="join" type="Button" parent="connect"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 181.0
+margin/top = 87.0
+margin/right = 246.0
+margin/bottom = 107.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Join"
+flat = false
+
+[node name="error_label" type="Label" parent="connect"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 15.0
+margin/top = 125.0
+margin/right = 257.0
+margin/bottom = 139.0
+custom_colors/font_color = Color( 0.820312, 0.291595, 0.291595, 1 )
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="error" type="AcceptDialog" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 55.0
+margin/bottom = 58.0
+popup/exclusive = false
+window/title = "Alert!"
+dialog/hide_on_ok = true
+
+[connection signal="pressed" from="players/start" to="." method="_on_start_pressed"]
+
+[connection signal="pressed" from="connect/host" to="." method="_on_host_pressed"]
+
+[connection signal="pressed" from="connect/join" to="." method="_on_join_pressed"]
+
+

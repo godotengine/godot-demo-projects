@@ -62,6 +62,7 @@ func _input(event):
 	if(event.type == InputEvent.MOUSE_MOTION):
 		r_pos = event.relative_pos
 	
+	
 	if(impulse(event, "ui_cancel")):
 		if(state == STATE_GRAB):
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
