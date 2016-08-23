@@ -1,6 +1,7 @@
 
 extends Control
 
+const DEFAULT_IP = "0.0.0.0" # bind to all available IPs
 const DEFAULT_PORT = 8910 # some random number, pick your port properly
 
 #### Network callbacks from SceneTree ####
@@ -66,7 +67,7 @@ func _set_status(text,isok):
 func _on_host_pressed():
 	
 	var host = NetworkedMultiplayerENet.new()
-	var err = host.create_server(DEFAULT_PORT,1) # max: 1 peer, since it's a 2 players game
+	var err = host.create_server(DEFAULT_IP, DEFAULT_PORT,1) # max: 1 peer, since it's a 2 players game
 	if (err!=OK):
 		#is another server running?
 		_set_status("Can't host, address in use.",false)
