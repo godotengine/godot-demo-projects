@@ -1,6 +1,9 @@
 
 extends Node
 
+#bind on every IP
+const DEFAULT_IP = "0.0.0.0"
+
 #default game port
 const DEFAULT_PORT = 10567
 
@@ -133,7 +136,7 @@ remote func ready_to_start(id):
 func host_game( name ):
 	player_name=name
 	var host = NetworkedMultiplayerENet.new()
-	host.create_server(DEFAULT_PORT,4)
+	host.create_server(DEFAULT_IP, DEFAULT_PORT,4)
 	get_tree().set_network_peer(host)
 	
 func join_game(ip, name):
