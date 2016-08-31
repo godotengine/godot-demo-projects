@@ -1,9 +1,10 @@
 
 extends Control
 
+onready var observer = get_node("../Observer")
+
 # Member variables
 var mousepos
-
 
 func _fixed_process(delta):
 	var modetext = "Mode:\n"
@@ -24,9 +25,9 @@ func _fixed_process(delta):
 	
 	if(Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED):
 		modetext += "MouseGrab\n"
-		get_node("Label_MouseGrab_KeyInfo").show()
+		get_node("Label_MOUSE_MODE_CAPTURED_KeyInfo").show()
 	else:
-		get_node("Label_MouseGrab_KeyInfo").hide()
+		get_node("Label_MOUSE_MODE_CAPTURED_KeyInfo").hide()
 	
 	get_node("Label_Mode").set_text(modetext)
 	
@@ -66,7 +67,9 @@ func _fixed_process(delta):
 	get_node("Button_FixedSize").set_pressed(!OS.is_window_resizable())
 	get_node("Button_Minimized").set_pressed(OS.is_window_minimized())
 	get_node("Button_Maximized").set_pressed(OS.is_window_maximized())
-	get_node("Button_Mouse_Grab").set_pressed(Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED)
+	get_node("Button_MOUSE_MODE_VISIBLE").set_pressed(Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE)
+	get_node("Button_MOUSE_MODE_HIDDEN").set_pressed(Input.get_mouse_mode() == Input.MOUSE_MODE_HIDDEN)
+	get_node("Button_MOUSE_MODE_CAPTURED").set_pressed(Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED)
 
 
 func check_wm_api():
@@ -140,6 +143,18 @@ func _ready():
 func _input(event):
 	if (event.type == InputEvent.MOUSE_MOTION):
 		mousepos = event.pos
+	
+	if (event.type == InputEvent.KEY):
+		if Input.is_action_pressed("F1_MOUSE_MODE_VISIBLE"):
+			observer.state = observer.STATE_MENU
+			_on_Button_MOUSE_MODE_VISIBLE_pressed()
+		
+		if Input.is_action_pressed("F2_MOUSE_MODE_HIDDEN"):
+			observer.state = observer.STATE_MENU
+			_on_Button_MOUSE_MODE_HIDDEN_pressed()
+		
+		if Input.is_action_pressed("F3_MOUSE_MODE_CAPTURED"):
+			_on_Button_MOUSE_MODE_CAPTURED_pressed()
 
 
 func _on_Button_MoveTo_pressed():
@@ -186,6 +201,19 @@ func _on_Button_Maximized_pressed():
 		OS.set_window_maximized(true)
 
 
-func _on_Button_Mouse_Grab_pressed():
-	var observer = get_node("../Observer")
+func _on_Button_MOUSE_MODE_VISIBLE_pressed():
+	Input.set_mouse_mode( Input.MOUSE_MODE_VISIBLE )
+
+
+func _on_Button_MOUSE_MODE_HIDDEN_pressed():
+	Input.set_mouse_mode( Input.MOUSE_MODE_HIDDEN )
+
+
+func _on_Button_MOUSE_MODE_CAPTURED_pressed():
 	observer.state = observer.STATE_GRAB
+
+
+
+
+
+
