@@ -1,0 +1,551 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://observer/observer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://control.gd" type="Script" id=2]
+
+[node name="Spatial" type="Spatial"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="Observer" parent="." instance=ExtResource( 1 )]
+
+transform/local = Transform( 0.910685, 0, -0.4131, 0, 1, 0, 0.4131, 0, 0.910685, -4.81287, -0.152566, 9.90641 )
+
+[node name="TestCube" type="TestCube" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = true
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
+
+[node name="Control" type="Control" parent="."]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+script/script = ExtResource( 2 )
+
+[node name="Button_Fullscreen" type="Button" parent="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 20.0
+margin/top = 20.0
+margin/right = 120.0
+margin/bottom = 45.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "Fullscreen"
+flat = false
+
+[node name="Button_FixedSize" type="Button" parent="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 20.0
+margin/top = 60.0
+margin/right = 120.0
+margin/bottom = 85.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "FixedSize"
+flat = false
+
+[node name="Button_Minimized" type="Button" parent="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 20.0
+margin/top = 100.0
+margin/right = 120.0
+margin/bottom = 125.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "Minimized"
+flat = false
+
+[node name="Button_Maximized" type="Button" parent="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 20.0
+margin/top = 140.0
+margin/right = 120.0
+margin/bottom = 165.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "Maximized"
+flat = false
+
+[node name="Button_MoveTo" type="Button" parent="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 20.0
+margin/top = 178.0
+margin/right = 120.0
+margin/bottom = 203.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "MoveTo"
+flat = false
+
+[node name="Button_Resize" type="Button" parent="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 20.0
+margin/top = 218.0
+margin/right = 120.0
+margin/bottom = 243.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Resize"
+flat = false
+
+[node name="Button_Screen0" type="Button" parent="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 20.0
+margin/top = 258.0
+margin/right = 120.0
+margin/bottom = 283.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Screen0"
+flat = false
+
+[node name="Button_Screen1" type="Button" parent="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 20.0
+margin/top = 298.0
+margin/right = 120.0
+margin/bottom = 323.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Screen1"
+flat = false
+
+[node name="Button_MouseModeVisible" type="Button" parent="Control"]
+
+anchor/top = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 20.0
+margin/top = 221.0
+margin/right = 225.0
+margin/bottom = 196.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "[F1] MOUSE_MODE_VISIBLE"
+flat = false
+align = 0
+
+[node name="Button_MouseModeHidden" type="Button" parent="Control"]
+
+anchor/top = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 20.0
+margin/top = 186.0
+margin/right = 225.0
+margin/bottom = 161.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "[F2] MOUSE_MODE_HIDDEN"
+flat = false
+align = 0
+
+[node name="Button_MouseModeCaptured" type="Button" parent="Control"]
+
+anchor/top = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 20.0
+margin/top = 151.0
+margin/right = 225.0
+margin/bottom = 126.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "[F3] MOUSE_MODE_CAPTURED"
+flat = false
+align = 0
+
+[node name="Label_Mode" type="Label" parent="Control"]
+
+anchor/left = 1
+anchor/right = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 140.0
+margin/top = 140.0
+margin/right = 20.0
+margin/bottom = 153.0
+text = "Mode:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label_Position" type="Label" parent="Control"]
+
+anchor/left = 1
+anchor/right = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 140.0
+margin/top = 60.0
+margin/right = 20.0
+margin/bottom = 73.0
+text = "Position:"
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label_Size" type="Label" parent="Control"]
+
+anchor/left = 1
+anchor/right = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 140.0
+margin/top = 100.0
+margin/right = 20.0
+margin/bottom = 113.0
+text = "Size:"
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label_MousePosition" type="Label" parent="Control"]
+
+anchor/left = 1
+anchor/right = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 140.0
+margin/top = 220.0
+margin/right = 20.0
+margin/bottom = 153.0
+text = "Mouse Position:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label_Screen_Count" type="Label" parent="Control"]
+
+anchor/left = 1
+anchor/right = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 140.0
+margin/top = 300.0
+margin/right = 20.0
+margin/bottom = 317.0
+text = "Screen_Count:"
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label_Screen_Current" type="Label" parent="Control"]
+
+anchor/left = 1
+anchor/right = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 140.0
+margin/top = 20.0
+margin/right = 20.0
+margin/bottom = 40.0
+text = "Screen:"
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label_Screen0_Resolution" type="Label" parent="Control"]
+
+anchor/left = 1
+anchor/right = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 140.0
+margin/top = 340.0
+margin/right = 16.0
+margin/bottom = 353.0
+text = "Screen0 Resolution: "
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label_Screen0_Position" type="Label" parent="Control"]
+
+anchor/left = 1
+anchor/right = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 140.0
+margin/top = 380.0
+margin/right = 16.0
+margin/bottom = 396.0
+text = "Screen0 Position: "
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label_Screen0_DPI" type="Label" parent="Control"]
+
+anchor/left = 1
+anchor/right = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 140.0
+margin/top = 416.0
+margin/right = 16.0
+margin/bottom = 432.0
+text = "Screen0 DPI:"
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label_Screen1_Resolution" type="Label" parent="Control"]
+
+anchor/left = 1
+anchor/right = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 140.0
+margin/top = 451.0
+margin/right = 16.0
+margin/bottom = 467.0
+text = "Screen1 Resolution: "
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label_Screen1_Position" type="Label" parent="Control"]
+
+anchor/left = 1
+anchor/right = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 140.0
+margin/top = 489.0
+margin/right = 16.0
+margin/bottom = 505.0
+text = "Screen1 Position: "
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label_Screen1_DPI" type="Label" parent="Control"]
+
+anchor/left = 1
+anchor/right = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 140.0
+margin/top = 524.0
+margin/right = 16.0
+margin/bottom = 540.0
+text = "Screen1 DPI:"
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label_KeyInfo" type="Label" parent="Control"]
+
+anchor/top = 1
+anchor/bottom = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 20.0
+margin/top = 122.0
+margin/right = 286.0
+margin/bottom = 63.0
+text = "F1: activate MOUSE_MODE_VISIBLE\nF2: activate MOUSE_MODE_HIDDEN\nF3: activate MOUSE_MODE_CAPTURED"
+valign = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label_MouseModeCaptured_KeyInfo" type="Label" parent="Control"]
+
+anchor/top = 1
+anchor/bottom = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 20.0
+margin/top = 65.0
+margin/right = 286.0
+margin/bottom = 11.0
+text = "ESC: deactivate MOUSE_MODE_CAPTURED\nW, S: move forward, backward\nA, D: strafe left, right"
+valign = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label_MouseModes" type="Label" parent="Control"]
+
+anchor/top = 1
+anchor/bottom = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 20.0
+margin/top = 249.0
+margin/right = 286.0
+margin/bottom = 227.0
+text = "MouseModes:"
+valign = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="ImplementationDialog" type="AcceptDialog" parent="Control"]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 200.0
+margin/top = 100.0
+margin/right = 600.0
+margin/bottom = 450.0
+popup/exclusive = false
+window/title = "Please be advised..."
+dialog/hide_on_ok = true
+
+[node name="Text" type="Label" parent="Control/ImplementationDialog"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 16.0
+margin/top = 20.0
+margin/right = 378.0
+margin/bottom = 298.0
+text = "This is an Implementation-Test-Demo\n\nIt is used to help implementing a new window handling api\nacross platforms.\n\nYour platform lacks at the moment the following methods:\n"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[connection signal="pressed" from="Control/Button_Fullscreen" to="Control" method="_on_Button_Fullscreen_pressed"]
+
+[connection signal="pressed" from="Control/Button_FixedSize" to="Control" method="_on_Button_FixedSize_pressed"]
+
+[connection signal="pressed" from="Control/Button_Minimized" to="Control" method="_on_Button_Minimized_pressed"]
+
+[connection signal="pressed" from="Control/Button_Maximized" to="Control" method="_on_Button_Maximized_pressed"]
+
+[connection signal="pressed" from="Control/Button_MoveTo" to="Control" method="_on_Button_MoveTo_pressed"]
+
+[connection signal="pressed" from="Control/Button_Resize" to="Control" method="_on_Button_Resize_pressed"]
+
+[connection signal="pressed" from="Control/Button_Screen0" to="Control" method="_on_Button_Screen0_pressed"]
+
+[connection signal="pressed" from="Control/Button_Screen1" to="Control" method="_on_Button_Screen1_pressed"]
+
+[connection signal="pressed" from="Control/Button_MouseModeVisible" to="Control" method="_on_Button_MouseModeVisible_pressed"]
+
+[connection signal="pressed" from="Control/Button_MouseModeHidden" to="Control" method="_on_Button_MouseModeHidden_pressed"]
+
+[connection signal="pressed" from="Control/Button_MouseModeCaptured" to="Control" method="_on_Button_MouseModeCaptured_pressed"]
+
+
