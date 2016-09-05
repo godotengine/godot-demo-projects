@@ -54,7 +54,7 @@ func _fixed_process(delta):
 	linear_vel.x = lerp( linear_vel.x, target_speed, 0.1 )
 	
 	# Jumping
-	if (Input.is_action_just_pressed("jump")):
+	if (on_floor and Input.is_action_just_pressed("jump")):
 		linear_vel.y=-JUMP_SPEED
 		get_node("sound").play("jump")
 	
