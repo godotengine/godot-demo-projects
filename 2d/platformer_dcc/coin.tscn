@@ -19,8 +19,7 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 0, 1, 2, 3, 2, 1, 0 ] }
+tracks/0/keys = { "cont":false, "times":FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1 ), "values":[ 0, 1, 2, 3, 2, 1, 0 ] }
 
 [sub_resource type="Animation" id=3]
 
@@ -30,32 +29,26 @@ step = 0.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ 0 ] }
+tracks/0/keys = { "cont":true, "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "values":[ 0 ] }
 tracks/1/type = "value"
 tracks/1/path = NodePath("sound:play/play")
 tracks/1/interp = 1
-tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ "coin" ] }
+tracks/1/keys = { "cont":false, "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "values":[ "coin" ] }
 tracks/2/type = "value"
 tracks/2/path = NodePath("particles:visibility/self_opacity")
 tracks/2/interp = 1
-tracks/2/imported = false
-tracks/2/keys = { "times":FloatArray( 0, 1.66 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ 1.0, 0.0 ] }
+tracks/2/keys = { "cont":true, "times":FloatArray( 0, 1.66 ), "transitions":FloatArray( 1, 1 ), "values":[ 1.0, 0.0 ] }
 tracks/3/type = "value"
 tracks/3/path = NodePath("sprite:visibility/self_opacity")
 tracks/3/interp = 1
-tracks/3/imported = false
-tracks/3/keys = { "times":FloatArray( 0, 0.4 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ 1.0, 0.0 ] }
+tracks/3/keys = { "cont":true, "times":FloatArray( 0, 0.4 ), "transitions":FloatArray( 1, 1 ), "values":[ 1.0, 0.0 ] }
 tracks/4/type = "value"
 tracks/4/path = NodePath("particles:config/emitting")
 tracks/4/interp = 1
-tracks/4/imported = false
-tracks/4/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ true ] }
+tracks/4/keys = { "cont":false, "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "values":[ true ] }
 tracks/5/type = "method"
 tracks/5/path = NodePath(".")
 tracks/5/interp = 1
-tracks/5/imported = false
 tracks/5/keys = { "times":FloatArray( 2.7 ), "transitions":FloatArray( 1 ), "values":[ { "args":[  ], "method":"queue_free" } ] }
 
 [sub_resource type="SampleLibrary" id=4]
@@ -145,10 +138,9 @@ rect = Rect2( -10, -10, 20, 20 )
 enabler/pause_animations = true
 enabler/freeze_bodies = true
 enabler/pause_particles = true
-enabler/pause_animated_sprites = true
 enabler/process_parent = false
 enabler/fixed_process_parent = false
 
-[connection signal="body_enter" from="." to="." method="_on_coin_body_enter"]
+[connection signal="body_enter" from="." to="." method="_on_body_enter"]
 
 

@@ -21,17 +21,14 @@ step = 0.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("particles:config/emitting")
 tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ false ] }
+tracks/0/keys = { "cont":false, "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "values":[ false ] }
 tracks/1/type = "value"
 tracks/1/path = NodePath("sprite:visibility/self_opacity")
 tracks/1/interp = 1
-tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0, 1.00394 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ 1.0, 0.0 ] }
+tracks/1/keys = { "cont":true, "times":FloatArray( 0, 1.00394 ), "transitions":FloatArray( 1, 1 ), "values":[ 1.0, 0.0 ] }
 tracks/2/type = "method"
 tracks/2/path = NodePath(".")
 tracks/2/interp = 1
-tracks/2/imported = false
 tracks/2/keys = { "times":FloatArray( 1.31 ), "transitions":FloatArray( 1 ), "values":[ { "args":[  ], "method":"queue_free" } ] }
 
 [node name="bullet" type="RigidBody2D"]
@@ -49,8 +46,8 @@ bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 2
-contacts_reported = 3
-contact_monitor = true
+contacts_reported = 0
+contact_monitor = false
 sleeping = false
 can_sleep = true
 velocity/linear = Vector2( 0, 0 )
@@ -100,7 +97,7 @@ _update_shape_index = -1
 process_mode = 1
 wait_time = 1.0
 one_shot = true
-autostart = true
+autostart = false
 
 [node name="anim" type="AnimationPlayer" parent="."]
 
@@ -113,8 +110,6 @@ playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
 
-[connection signal="body_enter" from="." to="." method="_on_bullet_body_enter"]
-
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="disable"]
 
 

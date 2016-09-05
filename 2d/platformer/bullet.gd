@@ -1,16 +1,9 @@
 
 extends RigidBody2D
 
-# Member variables
-var disabled = false
-
-
-func disable():
-	if (disabled):
-		return
+func _on_bullet_body_enter( body ):
+	if (body.has_method("hit_by_bullet")):
+		body.call("hit_by_bullet")
+	
+func _on_Timer_timeout():
 	get_node("anim").play("shutdown")
-	disabled = true
-
-
-func _ready():
-	get_node("Timer").start()
