@@ -34,11 +34,10 @@ func _on_join_pressed():
 	get_node("connect/error_label").set_text("")
 	get_node("connect/host").set_disabled(true)
 	get_node("connect/join").set_disabled(true)
-	get_node("players/start").set_disabled(true)
 
 	var name = get_node("connect/name").get_text()
 	gamestate.join_game(ip, name)
-	refresh_lobby()
+	# refresh_lobby() gets called by the player_list_changed signal
 
 func _on_connection_success():
 	get_node("connect").hide()

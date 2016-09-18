@@ -3,6 +3,9 @@ extends Node
 # Default game port
 const DEFAULT_PORT = 10567
 
+# Max number of players
+const MAX_PEERS = 12
+
 # Name for my player
 var player_name = "The Warrior"
 
@@ -55,11 +58,10 @@ func _connected_fail():
 
 remote func register_player(id, name):
 	if (get_tree().is_network_server()):
-		# If we are the server, let everyone know about the new players
+		# If we are the server, let everyone know about the new player
 		rpc_id(id, "register_player", 1, player_name) # Send myself to new dude
 		for p_id in players: # Then, for each remote player
 			rpc_id(id, "register_player", p_id, players[p_id]) # Send player to new dude
-			rpc_id(p_id, "register_player", id, name) # Send new dude to player
 
 	players[id] = name
 	emit_signal("player_list_changed")
@@ -77,21 +79,21 @@ remote func pre_start_game(spawn_points):
 
 	var player_scene = load("res://player.tscn")
 
-	for p in spawn_points:
-		var spawn_pos = world.get_node("spawn_points/" + str(spawn_points[p])).get_pos()
+	for p_id in spawn_points:
+		var spawn_pos = world.get_node("spawn_points/" + str(spawn_points[p_id])).get_pos()
 		var player = player_scene.instance()
 
-		player.set_name(str(p)) # Use unique ID as node name
+		player.set_name(str(p_id)) # Use unique ID as node name
 		player.set_pos(spawn_pos)
 
-		if (p == get_tree().get_network_unique_id()):
+		if (p_id == get_tree().get_network_unique_id()):
 			# If node for this peer id, set master
 			player.set_network_mode(NETWORK_MODE_MASTER)
 			player.set_player_name(player_name)
 		else:
 			# Otherwise set slave
 			player.set_network_mode(NETWORK_MODE_SLAVE)
-			player.set_player_name(players[p])
+			player.set_player_name(players[p_id])
 
 		world.get_node("players").add_child(player)
 
@@ -125,7 +127,7 @@ remote func ready_to_start(id):
 func host_game(name):
 	player_name = name
 	var host = NetworkedMultiplayerENet.new()
-	host.create_server(DEFAULT_PORT, 4)
+	host.create_server(DEFAULT_PORT, MAX_PEERS)
 	get_tree().set_network_peer(host)
 
 func join_game(ip, name):
