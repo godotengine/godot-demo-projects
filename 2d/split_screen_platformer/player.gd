@@ -17,7 +17,7 @@ var on_floor = false
 var shoot_time=99999 #time since last shot
 
 var anim=""
-export var index=1
+export(int, "None", "Player 1", "Player 2") var index = 1
 
 #cache the sprite here for fast access (we will set scale to flip it often)
 onready var sprite = get_node("sprite")
