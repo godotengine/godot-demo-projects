@@ -62,6 +62,7 @@ remote func register_player(id, name):
 		rpc_id(id, "register_player", 1, player_name) # Send myself to new dude
 		for p_id in players: # Then, for each remote player
 			rpc_id(id, "register_player", p_id, players[p_id]) # Send player to new dude
+			rpc_id(p_id, "register_player", id, name) # Send new dude to player
 
 	players[id] = name
 	emit_signal("player_list_changed")
