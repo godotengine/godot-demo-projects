@@ -85,7 +85,14 @@ func _fixed_process(delta):
 			new_anim="run"
 			
 	else:
-		
+		# We want the character to immediately change facing side when the player
+		# tries to change direction, during air control.
+		# This allows for example the player to shoot quickly left then right.
+		if (Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right")):
+			sprite.set_scale( Vector2( -1, 1 ) )
+		if (Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left")):
+			sprite.set_scale( Vector2( 1, 1 ) )
+
 		if (linear_vel.y < 0 ):
 			new_anim="jumping"
 		else:
