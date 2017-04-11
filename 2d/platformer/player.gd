@@ -119,6 +119,14 @@ func _integrate_forces(s):
 
 	# Process jump
 	if (jumping):
+		# We want the character to immediately change facing side when the player
+		# tries to change direction, during air control.
+		# This allows for example the player to shoot quickly left then right.
+		if (move_left and not move_right):
+			get_node("sprite").set_scale(Vector2(-1, 1))
+		if (move_right and not move_left):
+			get_node("sprite").set_scale(Vector2(1, 1))
+
 		if (lv.y > 0):
 			# Set off the jumping flag if going down
 			jumping = false
