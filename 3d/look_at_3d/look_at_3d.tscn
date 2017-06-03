@@ -1,0 +1,226 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://object.tscn" type="PackedScene" id=1]
+[ext_resource path="res://animation_player.gd" type="Script" id=2]
+
+[sub_resource type="ProceduralSky" id=1]
+
+radiance_size = 4
+sky_top_color = Color( 0.0470588, 0.454902, 0.976471, 1 )
+sky_horizon_color = Color( 0.556863, 0.823529, 0.909804, 1 )
+sky_curve = 0.25
+sky_energy = 1.0
+ground_bottom_color = Color( 0.101961, 0.145098, 0.188235, 1 )
+ground_horizon_color = Color( 0.482353, 0.788235, 0.952941, 1 )
+ground_curve = 0.01
+ground_energy = 1.0
+sun_color = Color( 1, 1, 1, 1 )
+sun_latitude = 35.0
+sun_longitude = 0.0
+sun_angle_min = 1.0
+sun_angle_max = 100.0
+sun_curve = 0.05
+sun_energy = 16.0
+texture_size = 2
+
+[sub_resource type="Environment" id=2]
+
+background_mode = 2
+background_sky = SubResource( 1 )
+background_sky_custom_fov = 0.0
+background_color = Color( 0, 0, 0, 1 )
+background_energy = 1.0
+background_canvas_max_layer = 0
+ambient_light_color = Color( 0, 0, 0, 1 )
+ambient_light_energy = 1.0
+ambient_light_sky_contribution = 1.0
+fog_enabled = false
+fog_color = Color( 0.5, 0.6, 0.7, 1 )
+fog_sun_color = Color( 1, 0.9, 0.7, 1 )
+fog_sun_amount = 0.0
+fog_depth_enabled = true
+fog_depth_begin = 10.0
+fog_depth_curve = 1.0
+fog_transmit_enabled = false
+fog_transmit_curve = 1.0
+fog_height_enabled = false
+fog_height_min = 0.0
+fog_height_max = 100.0
+fog_height_curve = 1.0
+tonemap_mode = 0
+tonemap_exposure = 1.0
+tonemap_white = 1.0
+auto_exposure_enabled = false
+auto_exposure_scale = 0.4
+auto_exposure_min_luma = 0.05
+auto_exposure_max_luma = 8.0
+auto_exposure_speed = 0.5
+ss_reflections_enabled = false
+ss_reflections_max_steps = 64
+ss_reflections_fade_in = 0.15
+ss_reflections_fade_out = 2.0
+ss_reflections_depth_tolerance = 0.2
+ss_reflections_roughness = true
+ssao_enabled = false
+ssao_radius = 1.0
+ssao_intensity = 1.0
+ssao_radius2 = 0.0
+ssao_intensity2 = 1.0
+ssao_bias = 0.01
+ssao_light_affect = 0.0
+ssao_color = Color( 0, 0, 0, 1 )
+ssao_quality = 0
+ssao_blur = 3
+ssao_edge_sharpness = 4.0
+dof_blur_far_enabled = false
+dof_blur_far_distance = 10.0
+dof_blur_far_transition = 5.0
+dof_blur_far_amount = 0.1
+dof_blur_far_quality = 1
+dof_blur_near_enabled = false
+dof_blur_near_distance = 2.0
+dof_blur_near_transition = 1.0
+dof_blur_near_amount = 0.1
+dof_blur_near_quality = 1
+glow_enabled = false
+glow_levels/1 = false
+glow_levels/2 = false
+glow_levels/3 = true
+glow_levels/4 = false
+glow_levels/5 = true
+glow_levels/6 = false
+glow_levels/7 = false
+glow_intensity = 0.8
+glow_strength = 1.0
+glow_bloom = 0.0
+glow_blend_mode = 2
+glow_hdr_threshold = 1.0
+glow_hdr_scale = 2.0
+glow_bicubic_upscale = false
+adjustment_enabled = false
+adjustment_brightness = 1.0
+adjustment_contrast = 1.0
+adjustment_saturation = 1.0
+_sections_unfolded = [ "Background" ]
+
+[sub_resource type="SphereMesh" id=3]
+
+custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
+flip_faces = false
+radius = 1.0
+height = 2.0
+radial_segments = 64
+rings = 32
+is_hemisphere = false
+
+[sub_resource type="Animation" id=4]
+
+resource_name = "target_move"
+length = 7.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("target:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -15, 0, 15 ), Vector3( 20, 0, 15 ), Vector3( 20, 0, 15 ) ]
+}
+
+[node name="Spatial" type="Spatial" index="0"]
+
+[node name="direct" parent="." index="0" instance=ExtResource( 1 )]
+transform = Transform( -0.868016, 0, -0.496537, 0, 1, 0, 0.496537, 0, -0.868016, -12, 0, 0 )
+_sections_unfolded = [ "Transform" ]
+mode = 0
+
+[node name="direct_transform" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( -0.998894, 0, 0.0470269, 0, 1, 0, -0.0470269, 0, -0.998894, -4, 0, 0 )
+_sections_unfolded = [ "Transform" ]
+mode = 1
+
+[node name="constant" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -0.81763, 0, 0.575744, 0, 1, 0, -0.575744, 0, -0.81763, 4, 0, 0 )
+_sections_unfolded = [ "Transform" ]
+mode = 2
+
+[node name="smooth" parent="." index="3" instance=ExtResource( 1 )]
+transform = Transform( -0.983699, 0, 0.789259, 0, 1, 0, 0.179821, 0, -0.614061, 12, 0, 0 )
+_sections_unfolded = [ "Transform" ]
+mode = 3
+
+[node name="Camera" type="Camera" parent="." index="4"]
+transform = Transform( 0.855505, -0.242229, 0.457643, -0.0893645, 0.801497, 0.591285, -0.510025, -0.546744, 0.664038, 14.5324, 11.2945, 24.7525 )
+keep_aspect = 1
+cull_mask = 1048575
+environment = null
+h_offset = 0.0
+v_offset = 0.0
+doppler_tracking = 0
+projection = 0
+current = false
+fov = 70.0
+size = 1.0
+near = 0.05
+far = 100.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="5"]
+environment = SubResource( 2 )
+_sections_unfolded = [ "environment" ]
+
+[node name="target" type="MeshInstance" parent="." index="6"]
+transform = Transform( 0.999964, 3.72121e-10, 0.00851314, -3.72121e-10, 1, -1.58408e-12, -0.00851314, -1.58408e-12, 0.999964, -4.60834, 0, 12.9217 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 3 )
+skeleton = NodePath("..")
+material/0 = null
+_sections_unfolded = [ "Transform" ]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/target_move = SubResource( 4 )
+blend_times = [  ]
+script = ExtResource( 2 )
+
+[node name="play_button" type="Button" parent="." index="8"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 49.0
+margin_top = 47.0
+margin_right = 155.0
+margin_bottom = 67.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Play animation"
+flat = false
+align = 1
+
+[connection signal="toggled" from="play_button" to="AnimationPlayer" method="_on_play_button_toggled"]
