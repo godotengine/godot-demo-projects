@@ -56,18 +56,18 @@ func _fixed_process(delta):
 	# Jumping
 	if (on_floor and Input.is_action_just_pressed("jump")):
 		linear_vel.y=-JUMP_SPEED
-		get_node("sound").play("jump")
+		get_node("sound_jump").play()
 	
 	# Shooting		
 	
 	if (Input.is_action_just_pressed("shoot")):
 		
 		var bullet = preload("res://bullet.tscn").instance()
-		bullet.set_pos( get_node("sprite/bullet_shoot").get_global_pos() ) #use node for shoot position
-		bullet.set_linear_velocity( Vector2( sprite.get_scale().x * BULLET_VELOCITY,0 ) )		
+		bullet.position = get_node("sprite/bullet_shoot").global_position #use node for shoot position
+		bullet.linear_velocity = Vector2( sprite.scale.x * BULLET_VELOCITY,0 ) 		
 		bullet.add_collision_exception_with(self) # don't want player to collide with bullet
 		get_parent().add_child( bullet ) #don't want bullet to move with me, so add it as child of parent
-		get_node("sound").play("shoot")
+		get_node("sound_shoot").play()
 		shoot_time=0
 		
 		
@@ -77,11 +77,11 @@ func _fixed_process(delta):
 	
 	if (on_floor):
 		if (linear_vel.x < -SIDING_CHANGE_SPEED):
-			sprite.set_scale( Vector2( -1, 1 ) )
+			sprite.scale.x = -1
 			new_anim="run"
 			
 		if (linear_vel.x > SIDING_CHANGE_SPEED):
-			sprite.set_scale( Vector2( 1, 1 ) )
+			sprite.scale.x = 1
 			new_anim="run"
 			
 	else:
@@ -89,9 +89,9 @@ func _fixed_process(delta):
 		# tries to change direction, during air control.
 		# This allows for example the player to shoot quickly left then right.
 		if (Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right")):
-			sprite.set_scale( Vector2( -1, 1 ) )
+			sprite.scale.x = -1
 		if (Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left")):
-			sprite.set_scale( Vector2( 1, 1 ) )
+			sprite.scale.x = 1
 
 		if (linear_vel.y < 0 ):
 			new_anim="jumping"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://bullet.gd" type="Script" id=1]
 [ext_resource path="res://bullet.png" type="Texture" id=2]
@@ -8,40 +8,103 @@
 custom_solver_bias = 0.0
 radius = 10.0
 
-[sub_resource type="ColorRamp" id=2]
+[sub_resource type="CanvasItemMaterial" id=2]
 
-offsets = FloatArray( 0, 1 )
-colors = ColorArray( 1, 1, 1, 1, 1, 0, 0, 0 )
+blend_mode = 0
+light_mode = 0
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="GradientTexture" id=3]
+
+width = 2048
+offsets = PoolFloatArray( 0, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+
+trail_divisor = 1
+emission_shape = 0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 45.0
+flatness = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 1.0
+initial_velocity_random = 0.0
+angular_velocity = 0.0
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 1.0
+scale_random = 0.0
+color_ramp = SubResource( 3 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+
+[sub_resource type="Animation" id=5]
 
 length = 1.5
 loop = false
 step = 0.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("particles:config/emitting")
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ false ] }
+tracks/0/keys = {
+"times": PoolFloatArray( 1.31 ),
+"transitions": PoolFloatArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
 tracks/1/type = "value"
-tracks/1/path = NodePath("sprite:visibility/self_opacity")
+tracks/1/path = NodePath("sprite:self_modulate")
 tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0, 1.00394 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ 1.0, 0.0 ] }
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
+tracks/1/keys = {
+"times": PoolFloatArray( 0, 0.99 ),
+"transitions": PoolFloatArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("particles:emitting")
 tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/keys = { "times":FloatArray( 1.31 ), "transitions":FloatArray( 1 ), "values":[ { "args":[  ], "method":"queue_free" } ] }
+tracks/2/keys = {
+"times": PoolFloatArray( 0 ),
+"transitions": PoolFloatArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [node name="bullet" type="RigidBody2D"]
 
-input/pickable = false
+input_pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
+collision_layer = 1
+collision_mask = 1
 mode = 0
 mass = 1.0
 friction = 1.0
@@ -53,40 +116,37 @@ contacts_reported = 3
 contact_monitor = true
 sleeping = false
 can_sleep = true
-velocity/linear = Vector2( 0, 0 )
-velocity/angular = 0.0
-damp_override/linear = -1.0
-damp_override/angular = -1.0
-script/script = ExtResource( 1 )
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+script = ExtResource( 1 )
 
 [node name="particles" type="Particles2D" parent="."]
 
-visibility/opacity = 0.559322
-visibility/blend_mode = 1
-config/amount = 24
-config/lifetime = 0.1
-config/local_space = false
-config/texture = ExtResource( 2 )
-params/direction = 0.0
-params/spread = 10.0
-params/linear_velocity = 0.0
-params/spin_velocity = 0.0
-params/orbit_velocity = 0.0
-params/gravity_direction = 0.0
-params/gravity_strength = 0.0
-params/radial_accel = 0.0
-params/tangential_accel = 0.0
-params/damping = 0.0
-params/initial_angle = 0.0
-params/initial_size = 1.0
-params/final_size = 0.0
-params/hue_variation = 0.0
-params/anim_speed_scale = 1.0
-params/anim_initial_pos = 0.0
-color/color_ramp = SubResource( 2 )
+modulate = Color( 1, 1, 1, 0.244784 )
+material = SubResource( 2 )
+emitting = true
+amount = 50
+lifetime = 0.1
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+fixed_fps = 0
+fract_delta = true
+draw_order = 0
+process_material = SubResource( 4 )
+texture = ExtResource( 2 )
+normal_map = null
+h_frames = 1
+v_frames = 1
 
 [node name="sprite" type="Sprite" parent="."]
 
+self_modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -104,16 +164,16 @@ autostart = true
 
 [node name="anim" type="AnimationPlayer" parent="."]
 
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
-anims/shutdown = SubResource( 3 )
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+root_node = NodePath("..")
+anims/shutdown = SubResource( 5 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
 
-[connection signal="body_enter" from="." to="." method="_on_bullet_body_enter"]
+[connection signal="body_entered" from="." to="." method="_on_bullet_body_enter"]
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
