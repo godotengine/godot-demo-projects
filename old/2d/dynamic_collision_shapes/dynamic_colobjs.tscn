@@ -44,19 +44,43 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("base/circle:transform/pos")
 tracks/0/interp = 1
-tracks/0/keys = { "cont":true, "times":FloatArray( 0, 2 ), "transitions":FloatArray( 1, 1 ), "values":[ Vector2( 0, 0 ), Vector2( 52.7569, -70.845 ) ] }
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 2 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 52.7569, -70.845 ) ]
+}
 tracks/1/type = "value"
 tracks/1/path = NodePath("base/box:transform/pos")
 tracks/1/interp = 1
-tracks/1/keys = { "cont":true, "times":FloatArray( 0, 2 ), "transitions":FloatArray( 1, 1 ), "values":[ Vector2( 193.173, -2.72076 ), Vector2( 195.894, -72.0999 ) ] }
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0, 2 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 193.173, -2.72076 ), Vector2( 195.894, -72.0999 ) ]
+}
 tracks/2/type = "value"
 tracks/2/path = NodePath("base/box:transform/rot")
 tracks/2/interp = 1
-tracks/2/keys = { "cont":true, "times":FloatArray( 0, 2 ), "transitions":FloatArray( 1, 1 ), "values":[ 0.0, 92.8111 ] }
+tracks/2/imported = false
+tracks/2/keys = {
+"times": FloatArray( 0, 2 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 92.8111 ]
+}
 tracks/3/type = "value"
 tracks/3/path = NodePath("base/polygon:transform/pos")
 tracks/3/interp = 1
-tracks/3/keys = { "cont":true, "times":FloatArray( 0, 2 ), "transitions":FloatArray( 1, 1 ), "values":[ Vector2( 382.265, -2.72076 ), Vector2( 495.176, -10.883 ) ] }
+tracks/3/imported = false
+tracks/3/keys = {
+"times": FloatArray( 0, 2 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 382.265, -2.72076 ), Vector2( 495.176, -10.883 ) ]
+}
 
 [sub_resource type="Animation" id=8]
 
@@ -67,11 +91,23 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("base/box:trigger")
 tracks/0/interp = 1
-tracks/0/keys = { "cont":false, "times":FloatArray( 0, 4 ), "transitions":FloatArray( 1, 1 ), "values":[ false, true ] }
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 4 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 tracks/1/type = "value"
 tracks/1/path = NodePath("base/box:visibility/opacity")
 tracks/1/interp = 1
-tracks/1/keys = { "cont":false, "times":FloatArray( 0, 4 ), "transitions":FloatArray( 1, 1 ), "values":[ 1.0, 0.2 ] }
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0, 4 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ 1.0, 0.2 ]
+}
 
 [node name="base" type="Node2D"]
 
@@ -166,11 +202,15 @@ autoplay = "toggletrigger"
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
+size_flags/vertical = 0
 margin/left = 21.0
 margin/top = 21.0
 margin/right = 719.0
 margin/bottom = 73.0
-text = "This demo simply shows that it\'s possible now to move a CollisionShape and CollisionPolygon after it was created\nand also turn it into a trigger at run-time. CollisionShape will remain alive during the running game and you can\ninteract with them, even though they are just meant to be helpers.\nIt is always recommended in a real use-case scenario, to move a body instead of a shape, as that path is better optimized."
+text = "This demo simply shows that it's possible now to move a CollisionShape and CollisionPolygon after it was created
+and also turn it into a trigger at run-time. CollisionShape will remain alive during the running game and you can
+interact with them, even though they are just meant to be helpers.
+It is always recommended in a real use-case scenario, to move a body instead of a shape, as that path is better optimized."
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1

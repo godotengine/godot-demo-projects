@@ -36,7 +36,7 @@ func _fixed_process(delta):
 	# Move and Slide
 	linear_vel = move_and_slide( linear_vel, FLOOR_NORMAL, SLOPE_SLIDE_STOP )
 	# Detect Floor
-	if (is_move_and_slide_on_floor()):
+	if (is_on_floor()):
 		onair_time=0		
 		
 	on_floor = onair_time < MIN_ONAIR_TIME

@@ -43,6 +43,7 @@ func _fixed_process(delta):
 	else:
 		new_anim="explode"
 		
+	
 	if (anim!=new_anim):
 		anim=new_anim
 		get_node("anim").play(anim)
