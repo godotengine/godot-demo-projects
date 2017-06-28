@@ -1,0 +1,85 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://rich_text_bbcode.gd" type="Script" id=1]
+[ext_resource path="res://Titillium-BoldItalic.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://Titillium-RegularItalic.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://Titillium-Bold.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://Titillium-Regular.otf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 20
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=2]
+
+size = 20
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 3 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=3]
+
+size = 20
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 4 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=4]
+
+size = 20
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 5 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[node name="Panel" type="Panel"]
+
+anchor_right = 1
+anchor_bottom = 1
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource( 1 )
+__meta__ = {
+"__editor_plugin_screen__": "2D"
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+
+anchor_right = 1
+anchor_bottom = 1
+margin_left = 49.0
+margin_top = 55.0
+margin_right = 55.0
+margin_bottom = 44.0
+mouse_filter = 0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+custom_fonts/bold_italics_font = SubResource( 1 )
+custom_fonts/italics_font = SubResource( 2 )
+custom_fonts/bold_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[b][u]Rich Text Test[/u][/b]
+
+RichTextLabel is a flexible way of adding text to your game, with support for [i]italics[/i], [b]bold[/b] and [i][b]both[/b][/i]. [u]Underline[/u] works too.
+It is also possible to include [img]res://unicorn_icon.png[/img] custom images, as well as [color=aqua][url=http://www.google.com]Custom URLs[/url][/color].
+
+Left alignment is default,[center]but center alignment is supported,[/center][right]as well as right alignment.[/right]
+[fill]Fill alignment is also supported, and allows writing very long text that will end up fitting the horizontal space entirely with  words of joy.[/fill]
+
+For full reference [color=aqua][url=https://github.com/godotengine/godot/wiki/richtext_bbcode]check the wiki.[/url][/color]
+"
+visible_characters = -1
+_sections_unfolded = [ "BBCode", "custom_fonts" ]
+
+[connection signal="meta_clicked" from="RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
+
+

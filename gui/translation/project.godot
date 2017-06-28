@@ -1,0 +1,20 @@
+config_version=3
+config_version=null
+
+[application]
+
+name="Translation Demo"
+main_scene="res://main.scn"
+icon="res://icon.png"
+
+[locale]
+
+translation_remaps={
+"res://flag_uk.png": [ "res://flag_spain.png:es", "res://flag_japan.png:ja" ],
+"res://hello_en.wav": PoolStringArray( "res://hello_es.wav:es", "res://hello_jp.wav:ja" )
+}
+translations=PoolStringArray( "res://text.en.translation", "res://text.es.translation", "res://text.ja.translation" )
+
+[memory]
+
+multithread/thread_rid_pool_prealloc=60
