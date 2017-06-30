@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://regex.gd" type="Script" id=1]
+
+[node name="VBoxContainer" type="VBoxContainer"]
+
+anchor_right = 1
+anchor_bottom = 1
+rect_clip_content = false
+mouse_filter = 1
+alignment = 0
+script = ExtResource( 1 )
+_sections_unfolded = [ "Size Flags" ]
+
+[node name="Expression" type="LineEdit" parent="."]
+
+margin_right = 1024.0
+margin_bottom = 24.0
+rect_clip_content = false
+mouse_filter = 0
+text = "\"((?:\\\\.|[^\"])*)\""
+expand_to_len = false
+focus_mode = 2
+placeholder_alpha = 0.6
+caret_blink = false
+caret_blink_speed = 0.65
+_sections_unfolded = [ "Size Flags" ]
+
+[node name="Text" type="TextEdit" parent="."]
+
+margin_top = 28.0
+margin_right = 1024.0
+margin_bottom = 328.0
+rect_min_size = Vector2( 0, 300 )
+rect_clip_content = false
+mouse_filter = 0
+syntax_highlighting = false
+show_line_numbers = false
+highlight_all_occurrences = false
+caret_block_mode = false
+caret_blink = false
+caret_blink_speed = 0.65
+_sections_unfolded = [ "Rect", "Size Flags" ]
+
+[node name="List" type="VBoxContainer" parent="."]
+
+margin_top = 332.0
+margin_right = 1024.0
+margin_bottom = 332.0
+rect_clip_content = false
+mouse_filter = 1
+alignment = 0
+_sections_unfolded = [ "Rect", "Size Flags" ]
+
+[connection signal="text_changed" from="Expression" to="." method="update_expression"]
+
+[connection signal="text_changed" from="Text" to="." method="update_text"]
+
+
