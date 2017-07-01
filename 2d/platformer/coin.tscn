@@ -5,12 +5,7 @@
 [ext_resource path="res://sound_coin.wav" type="AudioStream" id=3]
 [ext_resource path="res://bullet.png" type="Texture" id=4]
 
-[sub_resource type="CircleShape2D" id=1]
-
-custom_solver_bias = 0.0
-radius = 10.0
-
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 
 resource_name = "spin"
 length = 1.5
@@ -28,7 +23,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 2, 1, 0 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 
 length = 8.0
 loop = false
@@ -91,6 +86,11 @@ tracks/4/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="CircleShape2D" id=3]
+
+custom_solver_bias = 0.0
+radius = 10.0
+
 [sub_resource type="CanvasItemMaterial" id=4]
 
 blend_mode = 1
@@ -99,8 +99,6 @@ light_mode = 0
 [sub_resource type="GradientTexture" id=5]
 
 width = 2048
-offsets = PoolFloatArray( 0, 0.338633, 0.578696, 0.991256, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.515898, 1, 1, 1, 0.0155017, 1, 1, 1, 0.0068208, 1, 1, 1, 0 )
 
 [sub_resource type="ParticlesMaterial" id=6]
 
@@ -143,9 +141,6 @@ anim_loop = false
 [node name="coin" type="Area2D"]
 
 input_pickable = true
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
@@ -164,8 +159,8 @@ hframes = 4
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 root_node = NodePath("..")
-anims/spin = SubResource( 2 )
-anims/taken = SubResource( 3 )
+anims/spin = SubResource( 1 )
+anims/taken = SubResource( 2 )
 playback/active = true
 playback/speed = 3.0
 blend_times = [  ]
@@ -173,9 +168,7 @@ autoplay = "spin"
 
 [node name="collision" type="CollisionShape2D" parent="."]
 
-shape = SubResource( 1 )
-trigger = false
-_update_shape_index = -1
+shape = SubResource( 3 )
 
 [node name="sound" type="AudioStreamPlayer2D" parent="."]
 
@@ -193,14 +186,15 @@ material = SubResource( 4 )
 emitting = false
 amount = 8
 lifetime = 2.0
+one_shot = false
 preprocess = 0.0
 speed_scale = 1.0
 explosiveness = 1.0
 randomness = 0.0
-visibility_rect = Rect2( -100, -100, 200, 200 )
-local_coords = true
 fixed_fps = 0
 fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
 draw_order = 65793
 process_material = SubResource( 6 )
 texture = ExtResource( 4 )
