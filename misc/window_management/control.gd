@@ -53,7 +53,7 @@ func _fixed_process(delta):
 		$Label_Screen1_Resolution.hide()
 		$Label_Screen1_Position.hide()
 		$Label_Screen1_DPI.hide()
-	
+
 	$Button_Fullscreen.set_pressed(OS.is_window_fullscreen())
 	$Button_FixedSize.set_pressed(!OS.is_window_resizable())
 	$Button_Minimized.set_pressed(OS.is_window_minimized())
@@ -67,55 +67,55 @@ func check_wm_api():
 	var s = ""
 	if (!OS.has_method("get_screen_count")):
 		s += " - get_screen_count()\n"
-	
+
 	if (!OS.has_method("get_current_screen")):
 		s += " - get_current_screen()\n"
-	
+
 	if (!OS.has_method("set_current_screen")):
 		s += " - set_current_screen()\n"
-	
+
 	if (!OS.has_method("get_screen_position")):
 		s += " - get_screen_position()\n"
-	
+
 	if (!OS.has_method("get_screen_size")):
 		s += " - get_screen_size()\n"
-	
+
 	if (!OS.has_method("get_window_position")):
 		s += " - get_window_position()\n"
-	
+
 	if (!OS.has_method("set_window_position")):
 		s += " - set_window_position()\n"
-	
+
 	if (!OS.has_method("get_window_size")):
 		s += " - get_window_size()\n"
-	
+
 	if (!OS.has_method("set_window_size")):
 		s += " - set_window_size()\n"
-	
+
 	if (!OS.has_method("set_window_fullscreen")):
 		s += " - set_window_fullscreen()\n"
-	
+
 	if (!OS.has_method("is_window_fullscreen")):
 		s += " - is_window_fullscreen()\n"
-	
+
 	if (!OS.has_method("set_window_resizable")):
 		s += " - set_window_resizable()\n"
-	
+
 	if (!OS.has_method("is_window_resizable")):
 		s += " - is_window_resizable()\n"
-	
+
 	if (!OS.has_method("set_window_minimized")):
 		s += " - set_window_minimized()\n"
-	
+
 	if (!OS.has_method("is_window_minimized")):
 		s += " - is_window_minimized()\n"
-	
+
 	if (!OS.has_method("set_window_maximized")):
 		s += " - set_window_maximized()\n"
-	
+
 	if (!OS.has_method("is_window_maximized")):
 		s += " - is_window_maximized()\n"
-	
+
 	if (s.length() == 0):
 		return true
 	else:
@@ -133,16 +133,16 @@ func _ready():
 func _input(event):
 	if (event is InputEventMouseMotion):
 		mousepos = event.position
-	
+
 	if (event is InputEventKey):
 		if Input.is_action_pressed("mouse_mode_visible"):
 			observer.state = observer.STATE_MENU
 			_on_Button_MouseModeVisible_pressed()
-		
+
 		if Input.is_action_pressed("mouse_mode_hidden"):
 			observer.state = observer.STATE_MENU
 			_on_Button_MouseModeHidden_pressed()
-		
+
 		if Input.is_action_pressed("mouse_mode_captured"):
 			_on_Button_MouseModeCaptured_pressed()
 
