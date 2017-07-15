@@ -25,11 +25,11 @@ func _ready():
 		var name = modes[index]
 		get_node("modes/" + name).connect("pressed", self, "on_modes_changed", [name])
 	
-	get_node("color/color_from").set_color(Color(1, 0, 0, 1))
-	get_node("color/color_from").connect("color_changed", self, "on_color_changed")
+	get_node("colors/color_from/picker").set_color(Color(1, 0, 0, 1))
+	get_node("colors/color_from/picker").connect("color_changed", self, "on_color_changed")
 	
-	get_node("color/color_to").set_color(Color(0, 1, 1, 1))
-	get_node("color/color_to").connect("color_changed", self, "on_color_changed")
+	get_node("colors/color_to/picker").set_color(Color(0, 1, 1, 1))
+	get_node("colors/color_to/picker").connect("color_changed", self, "on_color_changed")
 	
 	get_node("trans/linear").set_pressed(true)
 	get_node("eases/in").set_pressed(true)
@@ -96,8 +96,8 @@ func reset_tween():
 		tween.interpolate_property(sprite, "transform/pos", Vector2(size.width, size.height), Vector2(0, 0), 2, state.trans, state.eases, 2)
 	
 	if get_node("modes/color").is_pressed():
-		tween.interpolate_method(sprite, "set_modulate", get_node("color/color_from").get_color(), get_node("color/color_to").get_color(), 2, state.trans, state.eases)
-		tween.interpolate_property(sprite, "modulate", get_node("color/color_to").get_color(), get_node("color/color_from").get_color(), 2, state.trans, state.eases, 2)
+		tween.interpolate_method(sprite, "set_modulate", get_node("colors/color_from/picker").get_color(), get_node("colors/color_to/picker").get_color(), 2, state.trans, state.eases)
+		tween.interpolate_property(sprite, "modulate", get_node("colors/color_to/picker").get_color(), get_node("colors/color_from/picker").get_color(), 2, state.trans, state.eases, 2)
 	else:
 		sprite.set_modulate(Color(1,1,1,1))
 	
