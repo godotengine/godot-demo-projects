@@ -35,7 +35,7 @@ func _fixed_process(delta):
 	
 	set_pos(pos)
 	
-	if (shooting and not prev_shooting):
+	if (shooting and not prev_shooting and not killed):
 		# Just pressed
 		var shot = preload("res://shot.tscn").instance()
 		# Use the Position2D as reference
@@ -65,7 +65,6 @@ func _hit_something():
 	get_node("../hud/game_over").show()
 	get_node("/root/game_state").game_over()
 	get_parent().stop()
-	set_process(false)
 
 
 func _on_ship_body_enter(body):
