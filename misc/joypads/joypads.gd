@@ -9,7 +9,7 @@ extends Node2D
 
 # Member variables
 var joy_num
-var cur_joy
+var cur_joy = -1
 var axis_value
 
 const DEADZONE = 0.2
