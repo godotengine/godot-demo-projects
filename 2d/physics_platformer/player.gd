@@ -213,7 +213,7 @@ func _integrate_forces(s):
 	
 	# Apply floor velocity
 	if (found_floor):
-		floor_h_velocity = s.get_contact_collider_velocity_at_pos(floor_index).x
+		floor_h_velocity = s.get_contact_collider_velocity_at_position(floor_index).x
 		lv.x += floor_h_velocity
 	
 	# Finally, apply gravity and set back the linear velocity
