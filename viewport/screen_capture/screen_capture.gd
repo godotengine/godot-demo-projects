@@ -7,7 +7,7 @@ func _ready():
 
 
 func _on_button_pressed():
-  get_viewport().clear()
+  get_viewport().set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)
   # Let two frames pass to make sure the screen was captured
   yield(get_tree(), "idle_frame")
   yield(get_tree(), "idle_frame")
