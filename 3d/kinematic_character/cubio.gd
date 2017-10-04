@@ -11,7 +11,7 @@ const DEACCEL= 4
 const MAX_SLOPE_ANGLE = 30
 
 
-func _fixed_process(delta):
+func _physics_process(delta):
 	var dir = Vector3() # Where does the player intend to walk to
 	var cam_xform = get_node("target/camera").get_global_transform()
 	

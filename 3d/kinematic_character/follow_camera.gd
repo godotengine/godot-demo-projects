@@ -12,7 +12,7 @@ var max_height = 2.0
 var min_height = 0
 
 
-func _fixed_process(dt):
+func _physics_process(dt):
 	var target = get_parent().global_transform.origin
 	var pos = global_transform.origin
 	var up = Vector3(0, 1, 0)

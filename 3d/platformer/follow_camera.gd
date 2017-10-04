@@ -11,7 +11,7 @@ export var autoturn_speed = 50
 var max_height = 2.0
 var min_height = 0
 
-func _fixed_process(dt):
+func _physics_process(dt):
 	var target = get_parent().get_global_transform().origin
 	var pos = get_global_transform().origin
 	var up = Vector3(0, 1, 0)
@@ -75,6 +75,6 @@ func _ready():
 			break
 		else:
 			node = node.get_parent()
-	set_fixed_process(true)
+	set_physics_process(true)
 	# This detaches the camera transform from the parent spatial node
 	set_as_toplevel(true)

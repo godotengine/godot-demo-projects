@@ -56,7 +56,7 @@ func adjust_facing(p_facing, p_target, p_step, p_adjust_rate, current_gn):
 	return (n*cos(ang) + t*sin(ang))*p_facing.length()
 
 
-func _fixed_process(delta):
+func _physics_process(delta):
 	
 	var lv = linear_velocity
 	var g = Vector3(0,-9.8,0)

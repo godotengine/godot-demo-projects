@@ -14,7 +14,7 @@ var axis_value
 
 const DEADZONE = 0.2
 
-func _fixed_process(delta):
+func _physics_process(delta):
 	# Get the joypad device number from the spinbox
 	joy_num = get_node("device_info/joy_num").get_value()
 
@@ -48,7 +48,7 @@ func _fixed_process(delta):
 			get_node("diagram/buttons/" + str(btn)).hide()
 
 func _ready():
-	set_fixed_process(true)
+	set_physics_process(true)
 	Input.connect("joy_connection_changed", self, "_on_joy_connection_changed")
 
 #Called whenever a joypad has been connected or disconnected.

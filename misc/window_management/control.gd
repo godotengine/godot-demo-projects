@@ -5,7 +5,7 @@ var mousepos
 
 onready var observer = $"../Observer"
 
-func _fixed_process(delta):
+func _physics_process(delta):
 	var modetext = "Mode:\n"
 
 	if (OS.is_window_fullscreen()):
@@ -126,7 +126,7 @@ func check_wm_api():
 
 func _ready():
 	if (not check_wm_api()):
-		set_fixed_process(false)
+		set_physics_process(false)
 		set_process_input(false)
 
 
