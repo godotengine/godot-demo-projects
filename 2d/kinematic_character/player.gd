@@ -29,7 +29,7 @@ var jumping = false
 var prev_jump_pressed = false
 
 
-func _fixed_process(delta):
+func _physics_process(delta):
 	# Create forces
 	var force = Vector2(0, GRAVITY)
 	

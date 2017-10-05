@@ -15,7 +15,7 @@ func direction(vector):
 	return v
 
 
-func _fixed_process(delta):
+func _physics_process(delta):
 	if (state != STATE_GRAB):
 		return
 

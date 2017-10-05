@@ -21,7 +21,7 @@ onready var detect_floor_right = get_node("detect_floor_right")
 onready var detect_wall_right = get_node("detect_wall_right")
 onready var sprite = get_node("sprite")
 
-func _fixed_process(delta):
+func _physics_process(delta):
 
 	var new_anim="idle"
 
@@ -54,6 +54,6 @@ func hit_by_bullet():
 	state=STATE_KILLED
 
 func _ready():
-	set_fixed_process(true)
+	set_physics_process(true)
 
 

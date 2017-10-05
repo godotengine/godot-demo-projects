@@ -20,7 +20,7 @@ var current_anim = ""
 var prev_bombing = false
 var bomb_index = 0
 
-func _fixed_process(delta):
+func _physics_process(delta):
 	var motion = Vector2()
 
 	if (is_network_master()):

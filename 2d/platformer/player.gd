@@ -21,7 +21,7 @@ var anim=""
 #cache the sprite here for fast access (we will set scale to flip it often)
 onready var sprite = get_node("sprite")
 
-func _fixed_process(delta):
+func _physics_process(delta):
 
 	#increment counters
 
@@ -107,5 +107,5 @@ func _fixed_process(delta):
 
 
 func _ready():
-	set_fixed_process(true)
+	set_physics_process(true)
 
