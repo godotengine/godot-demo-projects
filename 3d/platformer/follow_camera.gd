@@ -58,7 +58,7 @@ func _fixed_process(dt):
 
 	pos = target + delta
 	
-	look_at_from_pos(pos, target, up)
+	look_at_from_position(pos, target, up)
 	
 	# Turn a little up or down
 	var t = get_transform()
