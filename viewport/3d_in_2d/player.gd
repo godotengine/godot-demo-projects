@@ -6,9 +6,9 @@ var model = null
 const SPEED = 40
 
 func _ready():
-  model = get_node("Armature")
-  set_process(true)
+	model = get_node("Armature")
+	set_process(true)
 
 
 func _process(delta):
-  model.rotation_deg.y += delta * SPEED
+	model.rotation_deg.y += delta * SPEED
