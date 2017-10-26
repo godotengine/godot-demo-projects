@@ -34,7 +34,7 @@ func _physics_process(delta):
 
 	dir = dir.normalized()
 
-	move(dir * 10 * delta)
+	move_and_collide(dir * 10 * delta)
 	var d = delta * 0.1
 
 	var yaw = get_transform().rotated(Vector3(0, 1, 0), d * r_pos.x)
