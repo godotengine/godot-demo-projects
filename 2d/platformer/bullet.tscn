@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://bullet.gd" type="Script" id=1]
 [ext_resource path="res://bullet.png" type="Texture" id=2]
@@ -8,9 +8,11 @@
 blend_mode = 0
 light_mode = 0
 
-[sub_resource type="GradientTexture" id=2]
+[sub_resource type="CanvasItemMaterial" id=2]
 
-width = 2048
+blend_mode = 1
+light_mode = 0
+_sections_unfolded = [ "Resource" ]
 
 [sub_resource type="ParticlesMaterial" id=3]
 
@@ -19,9 +21,9 @@ emission_shape = 0
 flag_align_y = false
 flag_rotate_y = false
 flag_disable_z = true
-spread = 45.0
+spread = 10.0
 flatness = 0.0
-gravity = Vector3( 0, 0, 0 )
+gravity = Vector3( 0, 98, 0 )
 initial_velocity = 1.0
 initial_velocity_random = 0.0
 angular_velocity = 0.0
@@ -40,21 +42,27 @@ angle = 0.0
 angle_random = 0.0
 scale = 1.0
 scale_random = 0.0
-color_ramp = SubResource( 2 )
+color = Color( 1, 1, 1, 1 )
 hue_variation = 0.0
 hue_variation_random = 0.0
-anim_speed = 0.0
+anim_speed = 1.0
 anim_speed_random = 0.0
 anim_offset = 0.0
 anim_offset_random = 0.0
 anim_loop = false
+_sections_unfolded = [ "Angle", "Angular Velocity", "Animation", "Color", "Damping", "Emission Shape", "Flags", "Gravity", "Hue Variation", "Initial Velocity", "Linear Accel", "Orbit Velocity", "Radial Accel", "Scale", "Spread", "Tangential Accel", "Trail" ]
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CanvasItemMaterial" id=4]
+
+blend_mode = 0
+light_mode = 0
+
+[sub_resource type="CircleShape2D" id=5]
 
 custom_solver_bias = 0.0
 radius = 10.0
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 
 length = 1.5
 loop = false
@@ -78,7 +86,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.99 ),
+"times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -97,6 +105,7 @@ tracks/2/keys = {
 
 [node name="bullet" type="RigidBody2D"]
 
+material = SubResource( 1 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -107,7 +116,7 @@ bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 2
-contacts_reported = 3
+contacts_reported = 1
 contact_monitor = true
 sleeping = false
 can_sleep = true
@@ -116,18 +125,19 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
+_sections_unfolded = [ "Angular", "Collision", "Linear", "Material", "Pickable", "Transform", "Visibility", "Z" ]
 
 [node name="particles" type="Particles2D" parent="."]
 
-modulate = Color( 1, 1, 1, 0.244784 )
-material = SubResource( 1 )
-emitting = true
-amount = 50
+modulate = Color( 1, 1, 1, 0.56 )
+material = SubResource( 2 )
+emitting = false
+amount = 24
 lifetime = 0.1
 one_shot = false
 preprocess = 0.0
 speed_scale = 1.0
-explosiveness = 0.0
+explosiveness = 1.0
 randomness = 0.0
 fixed_fps = 0
 fract_delta = true
@@ -139,15 +149,18 @@ texture = ExtResource( 2 )
 normal_map = null
 h_frames = 1
 v_frames = 1
+_sections_unfolded = [ "Drawing", "Material", "Process Material", "Textures", "Time", "Transform", "Visibility", "Z" ]
 
 [node name="sprite" type="Sprite" parent="."]
 
-self_modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 4 )
 texture = ExtResource( 2 )
+_sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Transform", "Visibility", "Z" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-shape = SubResource( 4 )
+shape = SubResource( 5 )
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z" ]
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -161,7 +174,7 @@ autostart = true
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 root_node = NodePath("..")
-anims/shutdown = SubResource( 5 )
+anims/shutdown = SubResource( 6 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]

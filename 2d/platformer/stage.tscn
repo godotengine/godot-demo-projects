@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://coin.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://enemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://parallax_bg.tscn" type="PackedScene" id=7]
+[ext_resource path="res://music.ogg" type="AudioStream" id=8]
 
 [node name="stage" type="Node"]
 
@@ -345,10 +346,15 @@ position = Vector2( 2215.3, 1429.39 )
 
 [node name="Label" type="Label" parent="."]
 
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 12.0
 margin_top = -202.0
 margin_right = 358.0
 margin_bottom = -10.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 size_flags_horizontal = 2
@@ -358,5 +364,13 @@ autowrap = true
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+
+stream = ExtResource( 8 )
+volume_db = 0.0
+autoplay = true
+mix_target = 0
+bus = "Master"
 
 
