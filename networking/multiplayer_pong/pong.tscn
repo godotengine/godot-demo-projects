@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://pong.gd" type="Script" id=1]
 [ext_resource path="res://separator.png" type="Texture" id=2]
@@ -36,14 +36,19 @@ position = Vector2( 320.387, 189.525 )
 
 [node name="score_left" type="Label" parent="."]
 
-focus_ignore_mouse = true
-focus_stop_mouse = true
-size_flags_horizontal = 2
-size_flags_vertical = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 240.0
 margin_top = 10.0
 margin_right = 280.0
 margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
 text = "0"
 align = 1
 percent_visible = 1.0
@@ -52,14 +57,19 @@ max_lines_visible = -1
 
 [node name="score_right" type="Label" parent="."]
 
-focus_ignore_mouse = true
-focus_stop_mouse = true
-size_flags_horizontal = 2
-size_flags_vertical = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 360.0
 margin_top = 10.0
 margin_right = 400.0
 margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
 text = "0"
 align = 1
 percent_visible = 1.0
@@ -69,14 +79,19 @@ max_lines_visible = -1
 [node name="winner_left" type="Label" parent="."]
 
 visible = false
-focus_ignore_mouse = true
-focus_stop_mouse = true
-size_flags_horizontal = 2
-size_flags_vertical = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 190.0
 margin_top = 170.0
 margin_right = 267.0
 margin_bottom = 184.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
 text = "The Winner!"
 percent_visible = 1.0
 lines_skipped = 0
@@ -85,14 +100,19 @@ max_lines_visible = -1
 [node name="winner_right" type="Label" parent="."]
 
 visible = false
-focus_ignore_mouse = true
-focus_stop_mouse = true
-size_flags_horizontal = 2
-size_flags_vertical = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 380.0
 margin_top = 170.0
 margin_right = 457.0
 margin_bottom = 184.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
 text = "The Winner!"
 percent_visible = 1.0
 lines_skipped = 0
@@ -101,20 +121,28 @@ max_lines_visible = -1
 [node name="exit_game" type="Button" parent="."]
 
 visible = false
-focus_ignore_mouse = false
-focus_stop_mouse = true
-size_flags_horizontal = 2
-size_flags_vertical = 2
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 280.0
 margin_top = 340.0
 margin_right = 360.0
 margin_bottom = 360.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 2
+size_flags_vertical = 2
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
+group = null
 text = "Exit Game"
 flat = false
 
-[connection signal="pressed"  from="exit_game"  to="." method="_on_exit_game_pressed" binds=[  ]]
+[connection signal="pressed" from="exit_game" to="." method="_on_exit_game_pressed"]
+
+
 [editable path="player1"]
 [editable path="player2"]

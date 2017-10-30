@@ -7,7 +7,7 @@
 [sub_resource type="Environment" id=1]
 
 background_mode = 3
-background_sky_scale = 1.0
+background_sky_custom_fov = 0.0
 background_color = Color( 0, 0, 0, 1 )
 background_energy = 1.0
 background_canvas_max_layer = 0
@@ -49,7 +49,9 @@ ssao_intensity2 = 1.0
 ssao_bias = 0.01
 ssao_light_affect = 0.0
 ssao_color = Color( 0, 0, 0, 1 )
-ssao_blur = true
+ssao_quality = 0
+ssao_blur = 1
+ssao_edge_sharpness = 4.0
 dof_blur_far_enabled = false
 dof_blur_far_distance = 10.0
 dof_blur_far_transition = 5.0
@@ -72,7 +74,7 @@ glow_intensity = 0.8
 glow_strength = 0.88
 glow_bloom = 0.0
 glow_blend_mode = 0
-glow_hdr_treshold = 1.0
+glow_hdr_threshold = 1.0
 glow_hdr_scale = 2.0
 glow_bicubic_upscale = true
 adjustment_enabled = false
@@ -104,8 +106,13 @@ environment = SubResource( 1 )
 
 [node name="Label" type="Label" parent="."]
 
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 13.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 size_flags_horizontal = 2

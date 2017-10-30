@@ -15,7 +15,7 @@ signal consume_not_required
 signal sku_details_complete
 signal sku_details_error
 
-onready var payment = GlobalConfig.get_singleton("GodotPayments")
+onready var payment = ProjectSettings.get_singleton("GodotPayments")
 
 func _ready():
 	if payment:

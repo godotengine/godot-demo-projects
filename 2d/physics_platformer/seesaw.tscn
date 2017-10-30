@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://plank.png" type="Texture" id=1]
 [ext_resource path="res://plankpin.png" type="Texture" id=2]
@@ -10,13 +10,9 @@ extents = Vector2( 128, 8 )
 
 [node name="seesaw" type="Node2D"]
 
-
 [node name="plank" type="RigidBody2D" parent="."]
 
 input_pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
 collision_layer = 1
 collision_mask = 1
 mode = 0
@@ -31,9 +27,9 @@ contact_monitor = false
 sleeping = false
 can_sleep = true
 linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
 angular_velocity = 0.0
-damp_override/linear = -1.0
-damp_override/angular = -1.0
+angular_damp = -1.0
 
 [node name="sprite" type="Sprite" parent="plank"]
 
@@ -42,8 +38,6 @@ texture = ExtResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="plank"]
 
 shape = SubResource( 1 )
-trigger = false
-_update_shape_index = -1
 
 [node name="pin" type="PinJoint2D" parent="."]
 
@@ -57,3 +51,5 @@ softness = 0.0
 
 position = Vector2( -0.290825, 20.2425 )
 texture = ExtResource( 2 )
+
+

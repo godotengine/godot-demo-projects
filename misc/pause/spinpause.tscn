@@ -36,7 +36,6 @@ layers = 1
 material_override = null
 cast_shadow = 1
 extra_cull_margin = 0.0
-visible_in_all_rooms = false
 use_in_baked_light = false
 lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
@@ -59,6 +58,7 @@ cull_mask = 1048575
 environment = null
 h_offset = 0.0
 v_offset = 0.0
+doppler/tracking = 0
 
 [node name="anim" type="AnimationPlayer" parent="."]
 
@@ -84,7 +84,7 @@ shadow_enabled = false
 shadow_color = Color( 0, 0, 0, 1 )
 shadow_bias = 0.15
 shadow_contact = 0.0
-shadow_max_distance = 0.0
+shadow_reverse_cull_face = false
 editor_only = false
 spot_range = 6.0
 spot_attenuation = 1.0
@@ -94,10 +94,15 @@ _sections_unfolded = [ "Spot" ]
 
 [node name="pause" type="Button" parent="."]
 
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 24.0
 margin_top = 24.0
 margin_right = 120.0
 margin_bottom = 56.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 2
@@ -114,10 +119,15 @@ flat = false
 pause_mode = 2
 visible = false
 self_modulate = Color( 1, 1, 1, 0.7 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 185.0
 margin_top = 72.0
 margin_right = 638.0
 margin_bottom = 433.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 2
@@ -127,10 +137,15 @@ _sections_unfolded = [ "Pause" ]
 
 [node name="text" type="Label" parent="pause_popup"]
 
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 73.0
 margin_top = 49.0
 margin_right = 389.0
 margin_bottom = 154.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 size_flags_horizontal = 2
@@ -143,10 +158,15 @@ max_lines_visible = -1
 
 [node name="unpause" type="Button" parent="pause_popup"]
 
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 185.0
 margin_top = 288.0
 margin_right = 281.0
 margin_bottom = 320.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 2

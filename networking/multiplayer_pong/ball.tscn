@@ -11,13 +11,12 @@ radius = 5.11969
 [node name="ball" type="Area2D"]
 
 input_pickable = true
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
 script = ExtResource( 1 )
 
 [node name="sprite" type="Sprite" parent="."]
@@ -27,5 +26,5 @@ texture = ExtResource( 2 )
 [node name="shape" type="CollisionShape2D" parent="."]
 
 shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
+
+

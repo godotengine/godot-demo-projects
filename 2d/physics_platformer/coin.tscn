@@ -93,23 +93,25 @@ radius = 10.0
 
 [sub_resource type="CanvasItemMaterial" id=4]
 
+render_priority = 0
 blend_mode = 1
 light_mode = 0
 
 [sub_resource type="Curve" id=5]
 
+min_value = 0.0
+max_value = 1.0
 bake_resolution = 100
-_data = [ Vector2( 0, 0.865234 ), 0.0, 0.0, Vector2( 1, 0 ), 0.0, 0.0 ]
+_data = [  ]
 
 [sub_resource type="CurveTexture" id=6]
 
-min = 0.0
-max = 1.0
 width = 2048
 curve = SubResource( 5 )
 
 [sub_resource type="ParticlesMaterial" id=7]
 
+render_priority = 0
 trail_divisor = 1
 emission_shape = 1
 emission_sphere_radius = 20.0
@@ -201,10 +203,10 @@ preprocess = 0.0
 speed_scale = 1.0
 explosiveness = 0.7
 randomness = 0.0
-visibility_rect = Rect2( -100, -100, 200, 200 )
-local_coords = true
 fixed_fps = 0
 fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
 draw_order = 0
 process_material = SubResource( 7 )
 texture = ExtResource( 4 )

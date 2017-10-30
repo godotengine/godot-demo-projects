@@ -40,8 +40,11 @@ _sections_unfolded = [ "Font", "Settings" ]
 
 [node name="Panel" type="Panel"]
 
-anchor_right = 1
-anchor_bottom = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 2
@@ -53,12 +56,15 @@ __meta__ = {
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 
-anchor_right = 1
-anchor_bottom = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 49.0
 margin_top = 55.0
-margin_right = 55.0
-margin_bottom = 44.0
+margin_right = -48.0
+margin_bottom = -62.0
+rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -78,6 +84,8 @@ Left alignment is default,[center]but center alignment is supported,[/center][ri
 For full reference [color=aqua][url=https://github.com/godotengine/godot/wiki/richtext_bbcode]check the wiki.[/url][/color]
 "
 visible_characters = -1
+percent_visible = 1.0
+override_selected_font_color = false
 _sections_unfolded = [ "BBCode", "custom_fonts" ]
 
 [connection signal="meta_clicked" from="RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]

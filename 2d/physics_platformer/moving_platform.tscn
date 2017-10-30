@@ -1,12 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://moving_platform.gd" type="Script" id=1]
 [ext_resource path="res://moving_platform.png" type="Texture" id=2]
-
-[sub_resource type="ConvexPolygonShape2D" id=1]
-
-custom_solver_bias = 0.0
-points = PoolVector2Array( -88, 24, -88, -24, 88, -24, 88, 24 )
 
 [node name="moving_platform" type="Node2D"]
 
@@ -17,9 +12,6 @@ cycle = 1.0
 [node name="platform" type="RigidBody2D" parent="."]
 
 input_pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
 collision_layer = 1
 collision_mask = 1
 mode = 3
@@ -34,9 +26,9 @@ contact_monitor = false
 sleeping = false
 can_sleep = true
 linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
 angular_velocity = 0.0
-damp_override/linear = -1.0
-damp_override/angular = -1.0
+angular_damp = -1.0
 
 [node name="Sprite" type="Sprite" parent="platform"]
 
@@ -46,5 +38,5 @@ texture = ExtResource( 2 )
 
 build_mode = 0
 polygon = PoolVector2Array( -88, -24, 88, -24, 88, 24, -88, 24 )
-shape_range = Vector2( -1, -1 )
-trigger = false
+
+

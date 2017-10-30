@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://troll.gd" type="Script" id=1]
 [ext_resource path="res://troll.png" type="Texture" id=2]
@@ -11,12 +11,9 @@ radius = 16.0
 [node name="troll" type="KinematicBody2D"]
 
 input_pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Transform2D( 1, 0, 0, 1, 3.24216, 19.453 )
-shapes/0/trigger = false
 collision_layer = 1
 collision_mask = 1
-collision/margin = 0.001
+collision/safe_margin = 0.08
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -27,8 +24,6 @@ texture = ExtResource( 2 )
 
 position = Vector2( 3.24216, 19.453 )
 shape = SubResource( 1 )
-trigger = false
-_update_shape_index = -1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -40,11 +35,17 @@ limit_left = -10000000
 limit_top = -10000000
 limit_right = 10000000
 limit_bottom = 10000000
-drag_margin/h_enabled = true
-drag_margin/v_enabled = true
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
 smoothing_enabled = false
 smoothing_speed = 5.0
 drag_margin_left = 0.2
 drag_margin_top = 0.2
 drag_margin_right = 0.2
 drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+
+

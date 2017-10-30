@@ -22,6 +22,7 @@ width = 2048
 
 [sub_resource type="ParticlesMaterial" id=3]
 
+render_priority = 0
 trail_divisor = 1
 emission_shape = 0
 flag_align_y = false
@@ -273,10 +274,10 @@ preprocess = 0.0
 speed_scale = 1.0
 explosiveness = 1.0
 randomness = 0.0
-visibility_rect = Rect2( -100, -100, 200, 200 )
-local_coords = false
 fixed_fps = 0
 fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
 draw_order = 97
 process_material = SubResource( 3 )
 texture = ExtResource( 3 )
@@ -323,6 +324,9 @@ drag_margin_left = 0.2
 drag_margin_top = 0.2
 drag_margin_right = 0.2
 drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
 
 [node name="bullet_shoot" type="Position2D" parent="."]
 

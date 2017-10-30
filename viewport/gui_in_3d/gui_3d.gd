@@ -8,7 +8,7 @@ var viewport = null
 
 
 func _input(event):
-	#Check if the event is a non-mouse event
+	# Check if the event is a non-mouse event
 	var is_mouse_event = false
 	var mouse_events = [InputEventMouseButton, InputEventMouseMotion, InputEventScreenDrag, InputEventScreenTouch]
 	for mouse_event in mouse_events:

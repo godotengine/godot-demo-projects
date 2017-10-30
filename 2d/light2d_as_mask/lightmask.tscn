@@ -5,6 +5,7 @@
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
+render_priority = 0
 blend_mode = 0
 light_mode = 2
 
@@ -49,8 +50,11 @@ tracks/2/keys = {
 
 [node name="lightmask_demo" type="Control"]
 
-anchor_right = 1
-anchor_bottom = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 2
@@ -59,8 +63,13 @@ size_flags_vertical = 2
 [node name="burano" type="TextureRect" parent="."]
 
 material = SubResource( 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 800.0
 margin_bottom = 600.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 2
@@ -75,7 +84,7 @@ enabled = true
 editor_only = false
 texture = ExtResource( 2 )
 offset = Vector2( 0, 0 )
-scale = 1.0
+texture_scale = 1.0
 color = Color( 1, 1, 1, 1 )
 energy = 1.0
 mode = 2
@@ -100,7 +109,7 @@ enabled = true
 editor_only = false
 texture = ExtResource( 2 )
 offset = Vector2( 0, 0 )
-scale = 1.0
+texture_scale = 1.0
 color = Color( 1, 1, 1, 1 )
 energy = 1.0
 mode = 2
@@ -125,7 +134,7 @@ enabled = true
 editor_only = false
 texture = ExtResource( 2 )
 offset = Vector2( 0, 0 )
-scale = 1.0
+texture_scale = 1.0
 color = Color( 1, 1, 1, 1 )
 energy = 1.0
 mode = 2

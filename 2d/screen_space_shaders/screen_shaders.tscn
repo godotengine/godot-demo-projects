@@ -24,6 +24,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=2]
 
+render_priority = 0
 shader = SubResource( 1 )
 shader_param/vignette = ExtResource( 6 )
 _sections_unfolded = [ "shader", "shader_param" ]
@@ -41,6 +42,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=4]
 
+render_priority = 0
 shader = SubResource( 3 )
 shader_param/amount = 4.0
 _sections_unfolded = [ "shader", "shader_param" ]
@@ -62,6 +64,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=6]
 
+render_priority = 0
 shader = SubResource( 5 )
 shader_param/size_x = null
 shader_param/size_y = null
@@ -86,6 +89,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=8]
 
+render_priority = 0
 shader = SubResource( 7 )
 shader_param/rotation = null
 _sections_unfolded = [ "shader" ]
@@ -109,6 +113,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=10]
 
+render_priority = 0
 shader = SubResource( 9 )
 shader_param/base = Color( 0.54451, 0.408353, 0.403137, 1 )
 _sections_unfolded = [ "shader", "shader_param" ]
@@ -127,6 +132,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=12]
 
+render_priority = 0
 shader = SubResource( 11 )
 _sections_unfolded = [ "shader" ]
 
@@ -144,6 +150,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=14]
 
+render_priority = 0
 shader = SubResource( 13 )
 _sections_unfolded = [ "shader" ]
 
@@ -159,6 +166,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=16]
 
+render_priority = 0
 shader = SubResource( 15 )
 _sections_unfolded = [ "shader" ]
 
@@ -184,6 +192,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=18]
 
+render_priority = 0
 shader = SubResource( 17 )
 shader_param/brightness = null
 shader_param/contrast = null
@@ -211,6 +220,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=20]
 
+render_priority = 0
 shader = SubResource( 19 )
 shader_param/frequency = null
 shader_param/depth = null
@@ -257,6 +267,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=22]
 
+render_priority = 0
 shader = SubResource( 21 )
 shader_param/base = Color( 0.450274, 0.361255, 0.335059, 1 )
 shader_param/grain_strength = 0.3
@@ -269,8 +280,11 @@ _sections_unfolded = [ "shader", "shader_param" ]
 
 [node name="Control" type="Control"]
 
-anchor_right = 1
-anchor_bottom = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 2
@@ -280,8 +294,11 @@ _sections_unfolded = [ "Pause" ]
 
 [node name="pictures" type="Control" parent="."]
 
-anchor_right = 1
-anchor_bottom = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 2
@@ -289,8 +306,13 @@ size_flags_vertical = 2
 
 [node name="burano" type="TextureRect" parent="pictures"]
 
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 2
@@ -301,8 +323,13 @@ stretch_mode = 0
 [node name="roby" type="TextureRect" parent="pictures"]
 
 visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 2
@@ -313,8 +340,13 @@ stretch_mode = 0
 [node name="mountains" type="TextureRect" parent="pictures"]
 
 visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 2
@@ -325,8 +357,13 @@ stretch_mode = 0
 [node name="forest" type="TextureRect" parent="pictures"]
 
 visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 2
@@ -336,19 +373,27 @@ stretch_mode = 0
 
 [node name="effects" type="Control" parent="."]
 
-anchor_right = 1
-anchor_bottom = 1
-margin_right = -20.0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
+_sections_unfolded = [ "Rect" ]
 
 [node name="disabled" type="Control" parent="effects"]
 
 visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 2
@@ -358,8 +403,11 @@ size_flags_vertical = 2
 
 visible = false
 material = SubResource( 2 )
-anchor_right = 1
-anchor_bottom = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 2
@@ -373,8 +421,11 @@ _sections_unfolded = [ "Material" ]
 
 visible = false
 material = SubResource( 4 )
-anchor_right = 1
-anchor_bottom = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 2
@@ -388,8 +439,11 @@ _sections_unfolded = [ "Material" ]
 
 visible = false
 material = SubResource( 6 )
-anchor_right = 1
-anchor_bottom = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 2
@@ -403,8 +457,11 @@ _sections_unfolded = [ "Material" ]
 
 visible = false
 material = SubResource( 8 )
-anchor_right = 1
-anchor_bottom = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 2
@@ -418,10 +475,13 @@ _sections_unfolded = [ "Material" ]
 
 visible = false
 material = SubResource( 10 )
-anchor_right = 1
-anchor_bottom = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_right = 14.0
 margin_bottom = -2.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 2
@@ -435,8 +495,11 @@ _sections_unfolded = [ "Material", "Visibility" ]
 
 visible = false
 material = SubResource( 12 )
-anchor_right = 1
-anchor_bottom = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 2
@@ -450,8 +513,11 @@ _sections_unfolded = [ "Material" ]
 
 visible = false
 material = SubResource( 14 )
-anchor_right = 1
-anchor_bottom = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 2
@@ -465,8 +531,11 @@ _sections_unfolded = [ "Material" ]
 
 visible = false
 material = SubResource( 16 )
-anchor_right = 1
-anchor_bottom = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 2
@@ -480,10 +549,13 @@ _sections_unfolded = [ "Material" ]
 
 visible = false
 material = SubResource( 18 )
-anchor_right = 1
-anchor_bottom = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_top = 3.0
 margin_bottom = -3.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 2
@@ -497,8 +569,11 @@ _sections_unfolded = [ "Material" ]
 
 visible = false
 material = SubResource( 20 )
-anchor_right = 1
-anchor_bottom = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 2
@@ -512,10 +587,13 @@ _sections_unfolded = [ "Material" ]
 
 visible = false
 material = SubResource( 22 )
-anchor_right = 1
-anchor_bottom = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = -3.0
 margin_right = 3.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 2
@@ -527,10 +605,15 @@ _sections_unfolded = [ "Material" ]
 
 [node name="picture" type="OptionButton" parent="."]
 
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 8.0
 margin_top = 7.0
 margin_right = 131.0
 margin_bottom = 28.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 2
@@ -546,10 +629,15 @@ items = [  ]
 
 [node name="effect" type="OptionButton" parent="."]
 
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 137.0
 margin_top = 7.0
 margin_right = 260.0
 margin_bottom = 28.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 2

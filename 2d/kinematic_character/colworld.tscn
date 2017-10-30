@@ -21,8 +21,11 @@ extents = Vector2( 8, 8 )
 0/region = Rect2( 0, 0, 0, 0 )
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 8, 8 )
-0/shapes = [ SubResource( 1 ) ]
+0/shapes = [ {
+"one_way": false,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 8, 8 )
+} ]
 
 [sub_resource type="RectangleShape2D" id=3]
 
@@ -148,7 +151,6 @@ tile_data = PoolIntArray( 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 
 [node name="player" parent="." instance=ExtResource( 3 )]
 
 position = Vector2( 233.06, 223.436 )
-collision/safe_margin = 0.08
 
 [node name="moving_platform1" type="KinematicBody2D" parent="."]
 
@@ -227,10 +229,15 @@ texture = ExtResource( 4 )
 [node name="youwin" type="Label" parent="."]
 
 visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 196.0
 margin_top = 41.0
 margin_right = 344.0
 margin_bottom = 67.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 size_flags_horizontal = 2
