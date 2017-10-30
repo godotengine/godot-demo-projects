@@ -12,7 +12,7 @@ func update_text():
 		child.queue_free()
 	if regex.is_valid():
 		var matches = regex.search($Text.get_text())
-		for result in matches.get_group_array():
+		for result in matches.get_strings():
 			var label = Label.new()
 			label.text = result
 			$List.add_child(label)
