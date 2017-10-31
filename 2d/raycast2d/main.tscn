@@ -1,0 +1,88 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://RayCastManager.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://detectable_body.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Animation" id=1]
+
+resource_name = "swivel"
+length = 3.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_deg")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -55.8, 55.8, -55.8 ]
+}
+
+[node name="root" type="Node2D"]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+position = Vector2( 537, 180 )
+rotation = 0.802488
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, 500 )
+collision_mask = 1
+type_mask = 15
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RayCast2D"]
+
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+root_node = NodePath("..")
+anims/swivel = SubResource( 1 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "swivel"
+
+[node name="Sprite" type="Sprite" parent="RayCast2D"]
+
+texture = ExtResource( 2 )
+flip_v = true
+_sections_unfolded = [ "Offset" ]
+
+[node name="Bodies" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="PhysicsBodyDetected" parent="Bodies" instance=ExtResource( 3 )]
+
+[node name="PhysicsBodyDetected2" parent="Bodies" instance=ExtResource( 3 )]
+
+position = Vector2( 634, 358 )
+
+[node name="PhysicsBodyDetected3" parent="Bodies" instance=ExtResource( 3 )]
+
+position = Vector2( 698, 312 )
+
+[node name="PhysicsBodyDetected4" parent="Bodies" instance=ExtResource( 3 )]
+
+position = Vector2( 434, 358 )
+
+[node name="SpriteNotDetected" type="Sprite" parent="Bodies"]
+
+modulate = Color( 1, 1, 1, 0.469608 )
+position = Vector2( 501, 390 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="SpriteNotDetected2" type="Sprite" parent="Bodies"]
+
+modulate = Color( 1, 1, 1, 0.469608 )
+position = Vector2( 368, 323 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Visibility" ]
+
+
