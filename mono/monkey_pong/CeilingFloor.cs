@@ -10,7 +10,7 @@ public class CeilingFloor : Area2D
     {
         if (area is Ball ball)
         {
-            ball.SetDirection(ball.GetDirection() + new Vector2(0, yDirection));
+            ball.direction += new Vector2(0, yDirection);
         }
     }
 }

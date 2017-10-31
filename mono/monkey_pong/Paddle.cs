@@ -13,17 +13,13 @@ public class Paddle : Area2D
         String which = GetName();
 
         // Move up and down based on input
-        if (Input.IsActionPressed(which + "_move_up") && GetPosition().y > 0)
+        if (Input.IsActionPressed(which + "_move_up") && Position.y > 0)
         {
-            Vector2 pos = GetPosition();
-            pos.y -= MoveSpeed * delta;
-            SetPosition(pos);
+            Position -= new Vector2(0, MoveSpeed * delta);
         }
-        if (Input.IsActionPressed(which + "_move_down") && GetPosition().y < GetViewportRect().Size.y)
+        if (Input.IsActionPressed(which + "_move_down") && Position.y < GetViewportRect().Size.y)
         {
-            Vector2 pos = GetPosition();
-            pos.y += MoveSpeed * delta;
-            SetPosition(pos);
+            Position += new Vector2(0, MoveSpeed * delta);
         }
     }
 
@@ -32,7 +28,7 @@ public class Paddle : Area2D
         if (area is Ball ball)
         {
             // Assign new direction
-            ball.SetDirection(new Vector2(ballDir, (float)new Random().NextDouble() * 2 - 1).normalized());
+            ball.direction = new Vector2(ballDir, (float)new Random().NextDouble() * 2 - 1).normalized();
         }
     }
 }
