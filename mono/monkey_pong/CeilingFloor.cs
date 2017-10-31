@@ -8,9 +8,8 @@ public class CeilingFloor : Area2D
 
     public void OnAreaEntered(Area2D area)
     {
-        if (area is Ball)
+        if (area is Ball ball)
         {
-            Ball ball = (Ball)area;
             ball.SetDirection(ball.GetDirection() + new Vector2(0, yDirection));
         }
     }
