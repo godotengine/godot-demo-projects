@@ -3,10 +3,10 @@ using System;
 
 public class Ball : Area2D
 {
-    private const int BALL_SPEED = 100;
+    private const int BallSpeed = 100;
 
     private Vector2 direction = new Vector2(-1, 0);
-    private int speed = BALL_SPEED;
+    private int speed = BallSpeed;
 
     private Vector2 initialPos;
 
@@ -22,7 +22,7 @@ public class Ball : Area2D
     public void Reset()
     {
         SetPosition(initialPos);
-        speed = BALL_SPEED;
+        speed = BallSpeed;
         direction = new Vector2(-1, 0);
     }
 
