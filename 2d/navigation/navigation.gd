@@ -1,4 +1,3 @@
-
 extends Navigation2D
 
 # Member variables
@@ -10,13 +9,13 @@ var path = []
 
 
 func _process(delta):
-	if (path.size() > 1):
-		var to_walk = delta*SPEED
-		while(to_walk > 0 and path.size() >= 2):
+	if path.size() > 1:
+		var to_walk = delta * SPEED
+		while to_walk > 0 and path.size() >= 2:
 			var pfrom = path[path.size() - 1]
 			var pto = path[path.size() - 2]
 			var d = pfrom.distance_to(pto)
-			if (d <= to_walk):
+			if d <= to_walk:
 				path.remove(path.size() - 1)
 				to_walk -= d
 			else:
@@ -24,9 +23,9 @@ func _process(delta):
 				to_walk = 0
 		
 		var atpos = path[path.size() - 1]
-		get_node("agent").position=atpos
+		$agent.position = atpos
 		
-		if (path.size() < 2):
+		if path.size() < 2:
 			path = []
 			set_process(false)
 	else:
@@ -35,16 +34,15 @@ func _process(delta):
 
 func _update_path():
 	var p = get_simple_path(begin, end, true)
-	path = Array(p) # Vector2array too complex to use, convert to regular array
+	path = Array(p) # PoolVector2Array too complex to use, convert to regular array
 	path.invert()
 	
 	set_process(true)
 
 
 func _input(event):
-	if (event is InputEventMouseButton and event.pressed and event.button_index == 1):
-		begin = get_node("agent").position
+	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
+		begin = $agent.position
 		# Mouse to local navigation coordinates
 		end = event.position - position
 		_update_path()
-
