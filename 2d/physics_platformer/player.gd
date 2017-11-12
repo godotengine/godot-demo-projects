@@ -1,4 +1,3 @@
-
 extends RigidBody2D
 
 # Character Demo, written by Juan Linietsky.
@@ -71,7 +70,7 @@ func _integrate_forces(s):
 		var e = enemy.instance()
 		var p = position
 		p.y = p.y - 100
-		e.position=p
+		e.position = p
 		get_parent().add_child(e)
 	
 	# Deapply prev floor velocity
@@ -84,35 +83,35 @@ func _integrate_forces(s):
 	
 	for x in range(s.get_contact_count()):
 		var ci = s.get_contact_local_normal(x)
-		if (ci.dot(Vector2(0, -1)) > 0.6):
+		if ci.dot(Vector2(0, -1)) > 0.6:
 			found_floor = true
 			floor_index = x
 	
-	# A good idea when impementing characters of all kinds,
-	# compensates for physics imprecission, as well as human reaction delay.
-	if (shoot and not shooting):
+	# A good idea when implementing characters of all kinds,
+	# compensates for physics imprecision, as well as human reaction delay.
+	if shoot and not shooting:
 		shoot_time = 0
 		var bi = bullet.instance()
 		var ss
-		if (siding_left):
+		if siding_left:
 			ss = -1.0
 		else:
 			ss = 1.0
-		var pos = position + get_node("bullet_shoot").position*Vector2(ss, 1.0)
+		var pos = position + $bullet_shoot.position * Vector2(ss, 1.0)
 		
-		bi.position=pos
+		bi.position = pos
 		get_parent().add_child(bi)
 		
-		bi.linear_velocity=Vector2(800.0*ss, -80)
+		bi.linear_velocity = Vector2(800.0 * ss, -80)
 		
-		get_node("sprite/smoke").restart()
-		get_node("sound_shoot").play()
+		$sprite/smoke.restart()
+		$sound_shoot.play()
 		
 		add_collision_exception_with(bi) # Make bullet and this not collide
 	else:
 		shoot_time += step
 	
-	if (found_floor):
+	if found_floor:
 		airborne_time = 0.0
 	else:
 		airborne_time += step # Time it spent in the air
@@ -120,104 +119,102 @@ func _integrate_forces(s):
 	var on_floor = airborne_time < MAX_FLOOR_AIRBORNE_TIME
 
 	# Process jump
-	if (jumping):
-		if (lv.y > 0):
+	if jumping:
+		if lv.y > 0:
 			# Set off the jumping flag if going down
 			jumping = false
-		elif (not jump):
+		elif not jump:
 			stopping_jump = true
 		
-		if (stopping_jump):
-			lv.y += STOP_JUMP_FORCE*step
+		if stopping_jump:
+			lv.y += STOP_JUMP_FORCE * step
 	
-	if (on_floor):
+	if on_floor:
 		# Process logic when character is on floor
-		if (move_left and not move_right):
-			if (lv.x > -WALK_MAX_VELOCITY):
-				lv.x -= WALK_ACCEL*step
-		elif (move_right and not move_left):
-			if (lv.x < WALK_MAX_VELOCITY):
-				lv.x += WALK_ACCEL*step
+		if move_left and not move_right:
+			if lv.x > -WALK_MAX_VELOCITY:
+				lv.x -= WALK_ACCEL * step
+		elif move_right and not move_left:
+			if lv.x < WALK_MAX_VELOCITY:
+				lv.x += WALK_ACCEL * step
 		else:
 			var xv = abs(lv.x)
-			xv -= WALK_DEACCEL*step
-			if (xv < 0):
+			xv -= WALK_DEACCEL * step
+			if xv < 0:
 				xv = 0
-			lv.x = sign(lv.x)*xv
+			lv.x = sign(lv.x) * xv
 		
 		# Check jump
-		if (not jumping and jump):
+		if not jumping and jump:
 			lv.y = -JUMP_VELOCITY
 			jumping = true
 			stopping_jump = false
-			get_node("sound_jump").play()
+			$sound_jump.play()
 		
 		# Check siding
-		if (lv.x < 0 and move_left):
+		if lv.x < 0 and move_left:
 			new_siding_left = true
-		elif (lv.x > 0 and move_right):
+		elif lv.x > 0 and move_right:
 			new_siding_left = false
-		if (jumping):
+		if jumping:
 			new_anim = "jumping"
-		elif (abs(lv.x) < 0.1):
-			if (shoot_time < MAX_SHOOT_POSE_TIME):
+		elif abs(lv.x) < 0.1:
+			if shoot_time < MAX_SHOOT_POSE_TIME:
 				new_anim = "idle_weapon"
 			else:
 				new_anim = "idle"
 		else:
-			if (shoot_time < MAX_SHOOT_POSE_TIME):
+			if shoot_time < MAX_SHOOT_POSE_TIME:
 				new_anim = "run_weapon"
 			else:
 				new_anim = "run"
 	else:
 		# Process logic when the character is in the air
-		if (move_left and not move_right):
-			if (lv.x > -WALK_MAX_VELOCITY):
-				lv.x -= AIR_ACCEL*step
-		elif (move_right and not move_left):
-			if (lv.x < WALK_MAX_VELOCITY):
-				lv.x += AIR_ACCEL*step
+		if move_left and not move_right:
+			if lv.x > -WALK_MAX_VELOCITY:
+				lv.x -= AIR_ACCEL * step
+		elif move_right and not move_left:
+			if lv.x < WALK_MAX_VELOCITY:
+				lv.x += AIR_ACCEL * step
 		else:
 			var xv = abs(lv.x)
-			xv -= AIR_DEACCEL*step
-			if (xv < 0):
+			xv -= AIR_DEACCEL * step
+			if xv < 0:
 				xv = 0
-			lv.x = sign(lv.x)*xv
+			lv.x = sign(lv.x) * xv
 		
-		if (lv.y < 0):
-			if (shoot_time < MAX_SHOOT_POSE_TIME):
+		if lv.y < 0:
+			if shoot_time < MAX_SHOOT_POSE_TIME:
 				new_anim = "jumping_weapon"
 			else:
 				new_anim = "jumping"
 		else:
-			if (shoot_time < MAX_SHOOT_POSE_TIME):
+			if shoot_time < MAX_SHOOT_POSE_TIME:
 				new_anim = "falling_weapon"
 			else:
 				new_anim = "falling"
 	
 	# Update siding
-	if (new_siding_left != siding_left):
-		if (new_siding_left):
-			get_node("sprite").scale.x=-1
+	if new_siding_left != siding_left:
+		if new_siding_left:
+			$sprite.scale.x = -1
 		else:
-			get_node("sprite").scale.x=1
+			$sprite.scale.x = 1
 		
 		siding_left = new_siding_left
 	
 	# Change animation
-	if (new_anim != anim):
+	if new_anim != anim:
 		anim = new_anim
-		get_node("anim").play(anim)
+		$anim.play(anim)
 	
 	shooting = shoot
 	
 	# Apply floor velocity
-	if (found_floor):
+	if found_floor:
 		floor_h_velocity = s.get_contact_collider_velocity_at_position(floor_index).x
 		lv.x += floor_h_velocity
 	
 	# Finally, apply gravity and set back the linear velocity
-	lv += s.get_total_gravity()*step
+	lv += s.get_total_gravity() * step
 	s.set_linear_velocity(lv)
-
-

@@ -1,4 +1,3 @@
-
 extends RigidBody2D
 
 # Member variables
@@ -10,8 +9,8 @@ var state = STATE_WALKING
 var direction = -1
 var anim = ""
 
-onready var rc_left = get_node("raycast_left")
-onready var rc_right = get_node("raycast_right")
+onready var rc_left = $raycast_left
+onready var rc_right = $raycast_right
 
 var WALK_SPEED = 50
 
@@ -24,22 +23,22 @@ func _die():
 
 func _pre_explode():
 	#make sure nothing collides against this
-	get_node("shape1").queue_free()
-	get_node("shape2").queue_free()
-	get_node("shape3").queue_free()
+	$shape1.queue_free()
+	$shape2.queue_free()
+	$shape3.queue_free()
 	
 	# Stay there
-	set_mode(MODE_STATIC)
-	get_node("sound_explode").play()
+	mode = MODE_STATIC
+	$sound_explode.play()
 
 
 func _integrate_forces(s):
 	var lv = s.get_linear_velocity()
 	var new_anim = anim
 
-	if (state == STATE_DYING):
+	if state == STATE_DYING:
 		new_anim = "explode"
-	elif (state == STATE_WALKING):
+	elif state == STATE_WALKING:
 		new_anim = "walk"
 		
 		var wall_side = 0.0
@@ -48,38 +47,36 @@ func _integrate_forces(s):
 			var cc = s.get_contact_collider_object(i)
 			var dp = s.get_contact_local_normal(i)
 			
-			if (cc):
-				if (cc is bullet_class and not cc.disabled):
-					set_mode(MODE_RIGID)
+			if cc:
+				if cc is bullet_class and not cc.disabled:
+					mode = MODE_RIGID
 					state = STATE_DYING
-					#lv = s.get_contact_local_normal(i)*400
-					s.set_angular_velocity(sign(dp.x)*33.0)
+					#lv = s.get_contact_local_normal(i) * 400
+					s.set_angular_velocity(sign(dp.x) * 33.0)
 					set_friction(1)
 					cc.disable()
-					get_node("sound_hit").play()
+					$sound_hit.play()
 					break
 			
-			if (dp.x > 0.9):
+			if dp.x > 0.9:
 				wall_side = 1.0
-			elif (dp.x < -0.9):
+			elif dp.x < -0.9:
 				wall_side = -1.0
 		
-		if (wall_side != 0 and wall_side != direction):
+		if wall_side != 0 and wall_side != direction:
 			direction = -direction
-			get_node("sprite").scale.x=-direction
-		if (direction < 0 and not rc_left.is_colliding() and rc_right.is_colliding()):
+			$sprite.scale.x = -direction
+		if direction < 0 and not rc_left.is_colliding() and rc_right.is_colliding():
 			direction = -direction
-			get_node("sprite").scale.x=-direction
-		elif (direction > 0 and not rc_right.is_colliding() and rc_left.is_colliding()):
+			$sprite.scale.x = -direction
+		elif direction > 0 and not rc_right.is_colliding() and rc_left.is_colliding():
 			direction = -direction
-			get_node("sprite").scale.x=-direction
+			$sprite.scale.x = -direction
 		
-		lv.x = direction*WALK_SPEED
+		lv.x = direction * WALK_SPEED
 	
-	if(anim != new_anim):
+	if anim != new_anim:
 		anim = new_anim
-		get_node("anim").play(anim)
+		$anim.play(anim)
 	
 	s.set_linear_velocity(lv)
-
-
