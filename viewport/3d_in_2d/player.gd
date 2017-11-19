@@ -11,4 +11,4 @@ func _ready():
 
 
 func _process(delta):
-	model.rotation_deg.y += delta * SPEED
+	model.rotation_degrees.y += delta * SPEED
