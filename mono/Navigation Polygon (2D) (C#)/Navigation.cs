@@ -5,16 +5,17 @@ using System.Linq;
 
 public class Navigation : Navigation2D
 {
+	// member variables
     private const int SPEED = 200;
 
-    private Vector2 begin = new Vector2();
-    private Vector2 end = new Vector2();
+    private Vector2 begin;
+    private Vector2 end;
     private List<Vector2> path = new List<Vector2>();
 
-    Sprite agent;
+    private Sprite agent;
 
     public override void _Ready()
-    {
+    {		
         agent = GetNode("Agent") as Sprite;
     }
 
@@ -22,12 +23,12 @@ public class Navigation : Navigation2D
     {
         if (path.Count > 1)
         {
-            var toWalk = delta * SPEED;
+            float toWalk = delta * SPEED;
             while (toWalk > 0 && path.Count >= 2)
             {
-                var pFrom = path.Last();
-                var pTo = path[path.Count - 2];
-                var d = pFrom.DistanceTo(pTo);
+                Vector2 pFrom = path.Last();
+                Vector2 pTo = path[path.Count - 2];
+                float d = pFrom.DistanceTo(pTo);
 
                 if (d <= toWalk)
                 {
@@ -54,7 +55,7 @@ public class Navigation : Navigation2D
             SetProcess(false);
     }
 
-    void UpdatePath()
+    private void UpdatePath()
     {
         path = GetSimplePath(begin, end, true).ToList();
         path.Reverse();
@@ -68,11 +69,13 @@ public class Navigation : Navigation2D
         {
             if (mouse.Pressed && mouse.ButtonIndex == 1)
             {
-				GD.Print($"Click Pos: {mouse.Position}");
+                GD.Print($"Click Pos: {mouse.Position}");
                 begin = agent.Position;
+
+				// Mouse to local navigation coordinates
                 end = mouse.Position - this.Position;
                 UpdatePath();
             }
         }
-    }
+	}
 }
