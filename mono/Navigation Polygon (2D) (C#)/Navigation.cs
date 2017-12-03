@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Navigation : Navigation2D
 {
-	// member variables
+    // member variables
     private const int SPEED = 200;
 
     private Vector2 begin;
@@ -15,7 +15,7 @@ public class Navigation : Navigation2D
     private Sprite agent;
 
     public override void _Ready()
-    {		
+    {
         agent = GetNode("Agent") as Sprite;
     }
 
@@ -72,10 +72,10 @@ public class Navigation : Navigation2D
                 GD.Print($"Click Pos: {mouse.Position}");
                 begin = agent.Position;
 
-				// Mouse to local navigation coordinates
+                // Mouse to local navigation coordinates
                 end = mouse.Position - this.Position;
                 UpdatePath();
             }
         }
-	}
+    }
 }
