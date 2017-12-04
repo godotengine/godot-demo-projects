@@ -69,8 +69,3 @@ func _ready():
 	viewport = get_node("Viewport")
 	get_node("Area").connect("input_event", self, "_on_area_input_event")
   
-	# Set the quad's albedo texture to the viewport texture
-	var tex = viewport.get_texture()
-	get_node("Area/Quad").material_override.albedo_texture = tex
-  
-	set_process_input(true)

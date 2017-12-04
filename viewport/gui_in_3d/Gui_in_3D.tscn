@@ -1,28 +1,33 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://gui_3d.gd" type="Script" id=1]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="PlaneMesh" id=1]
 
-script/source = "tool
-extends Object
-func e():
-	return 1
-"
+size = Vector2( 2, 2 )
+subdivide_width = 0
+subdivide_depth = 0
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="ViewportTexture" id=2]
 
+resource_local_to_scene = true
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="SpatialMaterial" id=3]
+
+resource_local_to_scene = true
 render_priority = 0
 flags_transparent = false
-flags_unshaded = false
+flags_unshaded = true
 flags_vertex_lighting = false
 flags_no_depth_test = false
 flags_use_point_size = false
 flags_world_triplanar = false
 flags_fixed_size = false
+flags_albedo_tex_force_srgb = true
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
-params_diffuse_mode = 0
+params_diffuse_mode = 1
 params_specular_mode = 0
 params_blend_mode = 0
 params_cull_mode = 0
@@ -33,12 +38,16 @@ params_billboard_mode = 0
 params_grow = false
 params_use_alpha_scissor = false
 albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = SubResource( 2 )
 metallic = 0.0
 metallic_specular = 0.5
 metallic_texture_channel = 0
-roughness = 1.0
+roughness = 0.0
 roughness_texture_channel = 0
-emission_enabled = false
+emission_enabled = true
+emission = Color( 0, 0, 0, 1 )
+emission_energy = 1.0
+emission_operator = 0
 normal_enabled = false
 rim_enabled = false
 clearcoat_enabled = false
@@ -59,24 +68,8 @@ uv2_triplanar = false
 uv2_triplanar_sharpness = 1.0
 proximity_fade_enable = false
 distance_fade_enable = false
-script = SubResource( 1 )
-_sections_unfolded = [ "UV1" ]
-
-[sub_resource type="PlaneMesh" id=3]
-
-size = Vector2( 2, 2 )
-subdivide_width = 0
-subdivide_depth = 0
 
 [sub_resource type="GDScript" id=4]
-
-script/source = "tool
-extends Object
-func e():
-	return 90
-"
-
-[sub_resource type="GDScript" id=5]
 
 script/source = "tool
 extends Object
@@ -84,14 +77,13 @@ func e():
 	return 0.01
 "
 
-[sub_resource type="BoxShape" id=6]
+[sub_resource type="BoxShape" id=5]
 
 extents = Vector3( 1, 1, 0.01 )
-script = SubResource( 5 )
+script = SubResource( 4 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 
-resource_name = "Move_camera"
 length = 6.0
 loop = true
 step = 0.1
@@ -107,13 +99,13 @@ tracks/0/keys = {
 "values": [ Transform( 0.994592, 0, 0.103856, 0, 1, 0, -0.103856, 0, 0.994592, 0.465682, 0, 1.78523 ), Transform( 0.962984, 0, -0.269557, 0, 1, 0, 0.269557, 0, 0.962984, -0.462237, 0, 2.41934 ), Transform( 0.806599, 0, -0.591098, 0, 1, 0, 0.591098, 0, 0.806599, -1.59502, 0, 2.05358 ), Transform( 0.994592, 0, 0.103856, 0, 1, 0, -0.103856, 0, 0.994592, 0.465682, 0, 1.78523 ) ]
 }
 
-[sub_resource type="PlaneMesh" id=8]
+[sub_resource type="PlaneMesh" id=7]
 
 size = Vector2( 2, 2 )
 subdivide_width = 0
 subdivide_depth = 0
 
-[sub_resource type="GDScript" id=9]
+[sub_resource type="GDScript" id=8]
 
 script/source = "tool
 extends Object
@@ -121,7 +113,7 @@ func e():
 	return 0
 "
 
-[sub_resource type="GDScript" id=10]
+[sub_resource type="GDScript" id=9]
 
 script/source = "tool
 extends Object
@@ -129,7 +121,7 @@ func e():
 	return 90
 "
 
-[sub_resource type="GDScript" id=11]
+[sub_resource type="GDScript" id=10]
 
 script/source = "tool
 extends Object
@@ -137,14 +129,14 @@ func e():
 	return 0
 "
 
-[sub_resource type="CubeMesh" id=12]
+[sub_resource type="CubeMesh" id=11]
 
 size = Vector3( 2, 2, 2 )
 subdivide_width = 0
 subdivide_height = 0
 subdivide_depth = 0
 
-[sub_resource type="SpatialMaterial" id=13]
+[sub_resource type="SpatialMaterial" id=12]
 
 render_priority = 0
 flags_transparent = false
@@ -154,6 +146,7 @@ flags_no_depth_test = false
 flags_use_point_size = false
 flags_world_triplanar = false
 flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
 params_diffuse_mode = 0
@@ -195,7 +188,7 @@ proximity_fade_enable = false
 distance_fade_enable = false
 _sections_unfolded = [ "Albedo" ]
 
-[sub_resource type="GDScript" id=14]
+[sub_resource type="GDScript" id=13]
 
 script/source = "tool
 extends Object
@@ -334,15 +327,14 @@ rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-expand_to_len = false
 focus_mode = 2
 placeholder_alpha = 0.6
 caret_blink = false
 caret_blink_speed = 0.65
+context_menu_enabled = true
 
 [node name="Area" type="Area" parent="."]
 
-editor/display_folded = true
 input_ray_pickable = true
 input_capture_on_drag = true
 space_override = 0
@@ -369,7 +361,7 @@ _sections_unfolded = [ "Transform" ]
 
 transform = Transform( -1, 8.74228e-08, -4.37114e-08, -4.37114e-08, 1.91069e-15, 1, 8.74228e-08, 1, 1.91069e-15, 0, 0, 0 )
 layers = 1
-material_override = SubResource( 2 )
+material_override = null
 cast_shadow = 1
 extra_cull_margin = 0.0
 use_in_baked_light = false
@@ -377,15 +369,14 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 3 )
+mesh = SubResource( 1 )
 skeleton = NodePath("..")
-material/0 = null
-script = SubResource( 4 )
+material/0 = SubResource( 3 )
 _sections_unfolded = [ "Geometry", "Transform", "material" ]
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 disabled = false
 
 [node name="Camera" type="Camera" parent="."]
@@ -410,6 +401,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38866, 1.2413, 2.72141 )
 layers = 1
 light_color = Color( 1, 1, 1, 1 )
 light_energy = 1.0
+light_indirect_energy = 1.0
 light_negative = false
 light_specular = 0.5
 light_cull_mask = -1
@@ -430,7 +422,7 @@ _sections_unfolded = [ "Light", "Omni", "Shadow" ]
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 root_node = NodePath("..")
-anims/Move_camera = SubResource( 7 )
+anims/Move_camera = SubResource( 6 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -452,10 +444,10 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 7 )
 skeleton = NodePath("..")
 material/0 = null
-script = SubResource( 9 )
+script = SubResource( 8 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Wall2" type="MeshInstance" parent="3D_background"]
@@ -470,10 +462,10 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 7 )
 skeleton = NodePath("..")
 material/0 = null
-script = SubResource( 9 )
+script = SubResource( 8 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Wall3" type="MeshInstance" parent="3D_background"]
@@ -488,10 +480,10 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 7 )
 skeleton = NodePath("..")
 material/0 = null
-script = SubResource( 10 )
+script = SubResource( 9 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Floor" type="MeshInstance" parent="3D_background"]
@@ -506,10 +498,10 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 7 )
 skeleton = NodePath("..")
 material/0 = null
-script = SubResource( 11 )
+script = SubResource( 10 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Floor2" type="MeshInstance" parent="3D_background"]
@@ -524,10 +516,10 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 7 )
 skeleton = NodePath("..")
 material/0 = null
-script = SubResource( 11 )
+script = SubResource( 10 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Cube" type="MeshInstance" parent="3D_background"]
@@ -542,10 +534,10 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 12 )
+mesh = SubResource( 11 )
 skeleton = NodePath("..")
-material/0 = SubResource( 13 )
-script = SubResource( 14 )
+material/0 = SubResource( 12 )
+script = SubResource( 13 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Cube2" type="MeshInstance" parent="3D_background"]
@@ -560,10 +552,10 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 12 )
+mesh = SubResource( 11 )
 skeleton = NodePath("..")
-material/0 = SubResource( 13 )
-script = SubResource( 14 )
+material/0 = SubResource( 12 )
+script = SubResource( 13 )
 _sections_unfolded = [ "Transform" ]
 
 
