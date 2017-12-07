@@ -1,0 +1,256 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://GestureArea.gd" type="Script" id=1]
+[ext_resource path="res://CubeScene.tscn" type="PackedScene" id=2]
+
+[node name="VBoxContainer" type="VBoxContainer"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+alignment = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 512.0
+margin/bottom = 254.0
+alignment = 0
+
+[node name="GestureArea" type="Control" parent="HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 254.0
+margin/bottom = 254.0
+script/script = ExtResource( 1 )
+target = NodePath("Viewport/Spatial/TestCube")
+min_scale = 0.1
+max_scale = 3.0
+one_finger_rot_x = true
+one_finger_rot_y = false
+two_fingers_rot_z = false
+two_fingers_zoom = false
+
+[node name="Viewport" type="Viewport" parent="HBoxContainer/GestureArea"]
+
+rect = Rect2( 0, 0, 254, 254 )
+own_world = true
+world = null
+transparent_bg = false
+render_target/enabled = false
+render_target/v_flip = false
+render_target/clear_on_new_frame = true
+render_target/filter = false
+render_target/gen_mipmaps = false
+render_target/update_mode = 2
+audio_listener/enable_2d = false
+audio_listener/enable_3d = false
+physics/object_picking = false
+gui/disable_input = false
+
+[node name="Spatial" parent="HBoxContainer/GestureArea/Viewport" instance=ExtResource( 2 )]
+
+[node name="Label" type="Label" parent="HBoxContainer/GestureArea"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 7.0
+margin/top = 6.0
+margin/right = 157.0
+margin/bottom = 20.0
+text = "One-finger rot around X"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="GestureArea_1" type="Control" parent="HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 258.0
+margin/top = 0.0
+margin/right = 512.0
+margin/bottom = 254.0
+script/script = ExtResource( 1 )
+target = NodePath("Viewport/Spatial/TestCube")
+min_scale = 0.1
+max_scale = 3.0
+one_finger_rot_x = true
+one_finger_rot_y = true
+two_fingers_rot_z = false
+two_fingers_zoom = false
+
+[node name="Viewport" type="Viewport" parent="HBoxContainer/GestureArea_1"]
+
+rect = Rect2( 0, 0, 254, 254 )
+own_world = true
+world = null
+transparent_bg = false
+render_target/enabled = false
+render_target/v_flip = false
+render_target/clear_on_new_frame = true
+render_target/filter = false
+render_target/gen_mipmaps = false
+render_target/update_mode = 2
+audio_listener/enable_2d = false
+audio_listener/enable_3d = false
+physics/object_picking = false
+gui/disable_input = false
+
+[node name="Spatial" parent="HBoxContainer/GestureArea_1/Viewport" instance=ExtResource( 2 )]
+
+[node name="Label2" type="Label" parent="HBoxContainer/GestureArea_1"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 15.0
+margin/top = 6.0
+margin/right = 55.0
+margin/bottom = 20.0
+text = "One-finger rot around X and Y"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="HBoxContainer_1" type="HBoxContainer" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 258.0
+margin/right = 512.0
+margin/bottom = 512.0
+alignment = 0
+
+[node name="GestureArea" type="Control" parent="HBoxContainer_1"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 254.0
+margin/bottom = 254.0
+script/script = ExtResource( 1 )
+target = NodePath("Viewport/Spatial/TestCube")
+min_scale = 0.1
+max_scale = 3.0
+one_finger_rot_x = true
+one_finger_rot_y = true
+two_fingers_rot_z = true
+two_fingers_zoom = false
+
+[node name="Viewport" type="Viewport" parent="HBoxContainer_1/GestureArea"]
+
+rect = Rect2( 0, 0, 254, 254 )
+own_world = true
+world = null
+transparent_bg = false
+render_target/enabled = false
+render_target/v_flip = false
+render_target/clear_on_new_frame = true
+render_target/filter = false
+render_target/gen_mipmaps = false
+render_target/update_mode = 2
+audio_listener/enable_2d = false
+audio_listener/enable_3d = false
+physics/object_picking = false
+gui/disable_input = false
+
+[node name="Spatial" parent="HBoxContainer_1/GestureArea/Viewport" instance=ExtResource( 2 )]
+
+[node name="Label2" type="Label" parent="HBoxContainer_1/GestureArea"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 7.0
+margin/top = 12.0
+margin/right = 47.0
+margin/bottom = 26.0
+text = "One-finger X/Y rot + two-finger Z rot"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="GestureArea_1" type="Control" parent="HBoxContainer_1"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 258.0
+margin/top = 0.0
+margin/right = 512.0
+margin/bottom = 254.0
+script/script = ExtResource( 1 )
+target = NodePath("Viewport/Spatial/TestCube")
+min_scale = 0.1
+max_scale = 3.0
+one_finger_rot_x = true
+one_finger_rot_y = true
+two_fingers_rot_z = true
+two_fingers_zoom = true
+
+[node name="Viewport" type="Viewport" parent="HBoxContainer_1/GestureArea_1"]
+
+rect = Rect2( 0, 0, 254, 254 )
+own_world = true
+world = null
+transparent_bg = false
+render_target/enabled = false
+render_target/v_flip = false
+render_target/clear_on_new_frame = true
+render_target/filter = false
+render_target/gen_mipmaps = false
+render_target/update_mode = 2
+audio_listener/enable_2d = false
+audio_listener/enable_3d = false
+physics/object_picking = false
+gui/disable_input = false
+
+[node name="Spatial" parent="HBoxContainer_1/GestureArea_1/Viewport" instance=ExtResource( 2 )]
+
+[node name="Label3" type="Label" parent="HBoxContainer_1/GestureArea_1"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 15.0
+margin/top = 12.0
+margin/right = 55.0
+margin/bottom = 26.0
+text = "One-finger X/Y, two-finger Z + pinch"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+

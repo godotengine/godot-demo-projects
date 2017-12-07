@@ -1,0 +1,151 @@
+[gd_scene load_steps=3 format=1]
+
+[sub_resource type="FixedMaterial" id=1]
+
+flags/visible = true
+flags/double_sided = false
+flags/invert_faces = false
+flags/unshaded = false
+flags/on_top = false
+flags/lightmap_on_uv2 = true
+flags/colarray_is_srgb = true
+params/blend_mode = 0
+params/depth_draw = 1
+params/line_width = 0.0
+fixed_flags/use_alpha = false
+fixed_flags/use_color_array = false
+fixed_flags/use_point_size = false
+fixed_flags/discard_alpha = false
+fixed_flags/use_xy_normalmap = false
+params/diffuse = Color( 0.259476, 0.699219, 0.379718, 1 )
+params/specular = Color( 1, 1, 1, 1 )
+params/emission = Color( 0, 0, 0, 1 )
+params/specular_exp = 40
+params/detail_mix = 1.0
+params/normal_depth = 1
+params/shader = 0
+params/shader_param = 0.5
+params/glow = 0
+params/point_size = 1.0
+uv_xform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+textures/diffuse_tc = 0
+textures/detail_tc = 0
+textures/specular_tc = 0
+textures/emission_tc = 0
+textures/specular_exp_tc = 0
+textures/glow_tc = 0
+textures/normal_tc = 0
+textures/shade_param_tc = 0
+
+[sub_resource type="Environment" id=2]
+
+ambient_light/enabled = true
+ambient_light/color = Color( 0.601563, 0.696429, 1, 1 )
+ambient_light/energy = 0.5
+fxaa/enabled = true
+background/mode = 1
+background/color = Color( 0, 0, 0, 1 )
+background/energy = 1.0
+background/scale = 1.0
+background/glow = 0.0
+background/canvas_max_layer = null
+glow/enabled = false
+glow/blur_passes = 1
+glow/blur_scale = 1
+glow/blur_strength = 1
+glow/blur_blend_mode = null
+glow/bloom = 0.0
+glow/bloom_treshold = 0.5
+dof_blur/enabled = false
+dof_blur/blur_passes = 1
+dof_blur/begin = 100.0
+dof_blur/range = 10.0
+hdr/enabled = false
+hdr/tonemapper = 0
+hdr/exposure = 0.4
+hdr/white = 1.0
+hdr/glow_treshold = 0.95
+hdr/glow_scale = 0.2
+hdr/min_luminance = 0.4
+hdr/max_luminance = 8.0
+hdr/exposure_adj_speed = 0.5
+fog/enabled = false
+fog/begin = 100.0
+fog/begin_color = Color( 0, 0, 0, 1 )
+fog/end_color = Color( 0, 0, 0, 1 )
+fog/attenuation = 1.0
+fog/bg = true
+bcs/enabled = false
+bcs/brightness = 1.0
+bcs/contrast = 1.0
+bcs/saturation = 1.0
+srgb/enabled = false
+
+[node name="Spatial" type="Spatial"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="TestCube" type="TestCube" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 0.707107, 0, -0.707107, -0.353553, 0.866025, -0.353553, 0.612372, 0.5, 0.612372, 0, 0, 0 )
+layers = 1
+geometry/visible = true
+geometry/material_override = SubResource( 1 )
+geometry/cast_shadow = 1
+geometry/receive_shadows = true
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
+
+[node name="Camera" type="Camera" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.09558 )
+projection = 0
+fov = 50.0
+near = 0.1
+far = 100.0
+keep_aspect = 1
+current = false
+visible_layers = 1048575
+environment = null
+h_offset = 0.0
+v_offset = 0.0
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 0.926535, 0.11439, -0.358396, 0.199614, 0.658013, 0.726067, 0.318884, -0.744267, 0.586839, 0, 4.14991, 0 )
+layers = 1
+params/enabled = true
+params/editor_only = false
+params/bake_mode = 0
+params/energy = 1.0
+colors/diffuse = Color( 1, 1, 1, 1 )
+colors/specular = Color( 1, 1, 1, 1 )
+shadow/shadow = false
+shadow/darkening = 0.0
+shadow/z_offset = 0.05
+shadow/z_slope_scale = 0.0
+shadow/esm_multiplier = 60.0
+shadow/blur_passes = 1.0
+projector = null
+operator = 0
+shadow/mode = 0
+shadow/max_distance = 0.0
+shadow/split_weight = 0.5
+shadow/zoffset_scale = 2.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+environment = SubResource( 2 )
+
+
