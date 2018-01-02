@@ -109,7 +109,7 @@ func reset_tween():
 
 	if get_node("modes/rotate").is_pressed():
 		tween.interpolate_method(sprite, "set_rotation_in_degrees", 0, 360, 2, state.trans, state.eases)
-		tween.interpolate_property(sprite, "rotation_deg", 360, 0, 2, state.trans, state.eases, 2)
+		tween.interpolate_property(sprite, "rotation_degrees", 360, 0, 2, state.trans, state.eases, 2)
 
 	if get_node("modes/callback").is_pressed():
 		tween.interpolate_callback(self, 0.5, "on_callback", "0.5 second's after")
