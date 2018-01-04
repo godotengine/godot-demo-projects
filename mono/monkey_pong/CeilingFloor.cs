@@ -7,7 +7,7 @@ public class CeilingFloor : Area2D
     {
         if (area is Ball ball)
         {
-            ball.direction += new Vector2(ball.direction.x, -ball.direction.y);
+            ball.direction = new Vector2(ball.direction.x, -ball.direction.y);
         }
     }
 }
