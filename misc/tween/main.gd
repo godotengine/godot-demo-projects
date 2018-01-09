@@ -108,7 +108,7 @@ func reset_tween():
 		sprite.set_scale(Vector2(1,1))
 
 	if get_node("modes/rotate").is_pressed():
-		tween.interpolate_method(sprite, "set_rotation_in_degrees", 0, 360, 2, state.trans, state.eases)
+		tween.interpolate_method(sprite, "set_rotation_degrees", 0, 360, 2, state.trans, state.eases)
 		tween.interpolate_property(sprite, "rotation_degrees", 360, 0, 2, state.trans, state.eases, 2)
 
 	if get_node("modes/callback").is_pressed():
