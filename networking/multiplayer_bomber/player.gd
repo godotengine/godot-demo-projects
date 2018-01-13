@@ -8,9 +8,9 @@ slave var slave_motion = Vector2()
 export var stunned = false
 
 # Use sync because it will be called everywhere
-sync func setup_bomb(name, pos, by_who):
+sync func setup_bomb(namespace, pos, by_who):
 	var bomb = preload("res://bomb.tscn").instance()
-	bomb.set_name(name) # Ensure unique name for the bomb
+	bomb.set_namespace(namespace) # Ensure unique namespace for the bomb
 	bomb.position=pos
 	bomb.owner = by_who
 	# No need to set network mode to bomb, will be owned by master by default
@@ -40,9 +40,9 @@ func _physics_process(delta):
 			motion = Vector2()
 
 		if (bombing and not prev_bombing):
-			var bomb_name = get_name() + str(bomb_index)
+			var bomb_namespace = get_namespace() + str(bomb_index)
 			var bomb_pos = position
-			rpc("setup_bomb", bomb_name, bomb_pos, get_tree().get_network_unique_id())
+			rpc("setup_bomb", bomb_namespace, bomb_pos, get_tree().get_network_unique_id())
 
 		prev_bombing = bombing
 
@@ -83,8 +83,8 @@ master func exploded(by_who):
 	rpc("stun") # Stun slaves
 	stun() # Stun master - could use sync to do both at once
 
-func set_player_name(name):
-	get_node("label").set_text(name)
+func set_player_namespace(namespace):
+	get_node("label").set_text(namespace)
 
 func _ready():
 	stunned = false

@@ -1,7 +1,6 @@
 extends Area2D
 
 var in_area = []
-var owner
 
 # Called from the animation
 func explode():
