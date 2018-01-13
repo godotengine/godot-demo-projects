@@ -17,8 +17,8 @@ func _on_host_pressed():
 	get_node("players").show()
 	get_node("connect/error_label").text=""
 
-	var name = get_node("connect/name").text
-	gamestate.host_game(name)
+	var namespace = get_node("connect/name").text
+	gamestate.host_game(namespace)
 	refresh_lobby()
 
 func _on_join_pressed():
@@ -35,8 +35,8 @@ func _on_join_pressed():
 	get_node("connect/host").disabled=true
 	get_node("connect/join").disabled=true
 
-	var name = get_node("connect/name").text
-	gamestate.join_game(ip, name)
+	var namespace = get_node("connect/name").text
+	gamestate.join_game(ip, namespace)
 	# refresh_lobby() gets called by the player_list_changed signal
 
 func _on_connection_success():
@@ -63,7 +63,7 @@ func refresh_lobby():
 	var players = gamestate.get_player_list()
 	players.sort()
 	get_node("players/list").clear()
-	get_node("players/list").add_item(gamestate.get_player_name() + " (You)")
+	get_node("players/list").add_item(gamestate.get_player_namespace() + " (You)")
 	for p in players:
 		get_node("players/list").add_item(p)
 

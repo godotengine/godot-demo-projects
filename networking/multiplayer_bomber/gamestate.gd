@@ -6,10 +6,10 @@ const DEFAULT_PORT = 10567
 # Max number of players
 const MAX_PEERS = 12
 
-# Name for my player
-var player_name = "The Warrior"
+# namespace for my player
+var player_namespace = "The Warrior"
 
-# Names for remote players in id:name format
+# namespaces for remote players in id:namespace format
 var players = {}
 
 # Signals to let lobby GUI know what's going on
@@ -41,7 +41,7 @@ func _player_disconnected(id):
 # Callback from SceneTree, only for clients (not server)
 func _connected_ok():
 	# Registration of a client beings here, tell everyone that we are here
-	rpc("register_player", get_tree().get_network_unique_id(), player_name)
+	rpc("register_player", get_tree().get_network_unique_id(), player_namespace)
 	emit_signal("connection_succeeded")
 
 # Callback from SceneTree, only for clients (not server)
@@ -56,15 +56,15 @@ func _connected_fail():
 
 # Lobby management functions
 
-remote func register_player(id, name):
+remote func register_player(id, namespace):
 	if (get_tree().is_network_server()):
 		# If we are the server, let everyone know about the new player
-		rpc_id(id, "register_player", 1, player_name) # Send myself to new dude
+		rpc_id(id, "register_player", 1, player_namespace) # Send myself to new dude
 		for p_id in players: # Then, for each remote player
 			rpc_id(id, "register_player", p_id, players[p_id]) # Send player to new dude
-			rpc_id(p_id, "register_player", id, name) # Send new dude to player
+			rpc_id(p_id, "register_player", id, namespace) # Send new dude to player
 
-	players[id] = name
+	players[id] = namespace
 	emit_signal("player_list_changed")
 
 remote func unregister_player(id):
@@ -84,21 +84,21 @@ remote func pre_start_game(spawn_points):
 		var spawn_pos = world.get_node("spawn_points/" + str(spawn_points[p_id])).position
 		var player = player_scene.instance()
 
-		player.set_name(str(p_id)) # Use unique ID as node name
+		player.set_player_namespace(str(p_id)) # Use unique ID as node namespace
 		player.position=spawn_pos
 		player.set_network_master(p_id) #set unique id as master
 
 		if (p_id == get_tree().get_network_unique_id()):
-			# If node for this peer id, set name
-			player.set_player_name(player_name)
+			# If node for this peer id, set namespace
+			player.set_player_namespace(player_namespace)
 		else:
-			# Otherwise set name from peer
-			player.set_player_name(players[p_id])
+			# Otherwise set namespace from peer
+			player.set_player_namespace(players[p_id])
 
 		world.get_node("players").add_child(player)
 
 	# Set up score
-	world.get_node("score").add_player(get_tree().get_network_unique_id(), player_name)
+	world.get_node("score").add_player(get_tree().get_network_unique_id(), player_namespace)
 	for pn in players:
 		world.get_node("score").add_player(pn, players[pn])
 
@@ -124,14 +124,14 @@ remote func ready_to_start(id):
 			rpc_id(p, "post_start_game")
 		post_start_game()
 
-func host_game(name):
-	player_name = name
+func host_game(namespace):
+	player_namespace = namespace
 	var host = NetworkedMultiplayerENet.new()
 	host.create_server(DEFAULT_PORT, MAX_PEERS)
 	get_tree().set_network_peer(host)
 
-func join_game(ip, name):
-	player_name = name
+func join_game(ip, namespace):
+	player_namespace = namespace
 	var host = NetworkedMultiplayerENet.new()
 	host.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(host)
@@ -139,8 +139,8 @@ func join_game(ip, name):
 func get_player_list():
 	return players.values()
 
-func get_player_name():
-	return player_name
+func get_player_namespace():
+	return player_namespace
 
 func begin_game():
 	assert(get_tree().is_network_server())
