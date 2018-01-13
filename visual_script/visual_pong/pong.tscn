@@ -29,9 +29,9 @@ extents = Vector2( 10, 200 )
 custom_solver_bias = 0.0
 extents = Vector2( 320, 10 )
 
-[node name="game" type="Node2D"]
+[node name="game" type="Node2D" index="0"]
 
-[node name="left" type="Area2D" parent="."]
+[node name="left" type="Area2D" parent="." index="0"]
 
 position = Vector2( 67.6285, 192.594 )
 input_pickable = true
@@ -45,16 +45,16 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 ball_dir = 1.0
 
-[node name="sprite" type="Sprite" parent="left"]
+[node name="sprite" type="Sprite" parent="left" index="0"]
 
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="collision" type="CollisionShape2D" parent="left"]
+[node name="collision" type="CollisionShape2D" parent="left" index="1"]
 
 shape = SubResource( 1 )
 
-[node name="right" type="Area2D" parent="."]
+[node name="right" type="Area2D" parent="." index="1"]
 
 position = Vector2( 563.815, 188.919 )
 input_pickable = true
@@ -67,16 +67,16 @@ audio_bus_name = "Master"
 script = ExtResource( 1 )
 ball_dir = -1.0
 
-[node name="sprite" type="Sprite" parent="right"]
+[node name="sprite" type="Sprite" parent="right" index="0"]
 
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="collision" type="CollisionShape2D" parent="right"]
+[node name="collision" type="CollisionShape2D" parent="right" index="1"]
 
 shape = SubResource( 1 )
 
-[node name="ball" type="Area2D" parent="."]
+[node name="ball" type="Area2D" parent="." index="2"]
 
 position = Vector2( 320.5, 191.124 )
 input_pickable = true
@@ -89,21 +89,21 @@ audio_bus_name = "Master"
 script = ExtResource( 4 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="sprite" type="Sprite" parent="ball"]
+[node name="sprite" type="Sprite" parent="ball" index="0"]
 
 texture = ExtResource( 5 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="collision" type="CollisionShape2D" parent="ball"]
+[node name="collision" type="CollisionShape2D" parent="ball" index="1"]
 
 shape = SubResource( 2 )
 
-[node name="separator" type="Sprite" parent="."]
+[node name="separator" type="Sprite" parent="." index="3"]
 
 position = Vector2( 320, 200 )
 texture = ExtResource( 6 )
 
-[node name="left_wall" type="Area2D" parent="."]
+[node name="left_wall" type="Area2D" parent="." index="4"]
 
 position = Vector2( -10, 200 )
 input_pickable = true
@@ -116,11 +116,11 @@ audio_bus_name = "Master"
 script = ExtResource( 7 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="collision" type="CollisionShape2D" parent="left_wall"]
+[node name="collision" type="CollisionShape2D" parent="left_wall" index="0"]
 
 shape = SubResource( 3 )
 
-[node name="right_wall" type="Area2D" parent="."]
+[node name="right_wall" type="Area2D" parent="." index="5"]
 
 position = Vector2( 650, 200 )
 input_pickable = true
@@ -133,11 +133,11 @@ audio_bus_name = "Master"
 script = ExtResource( 7 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="collision" type="CollisionShape2D" parent="right_wall"]
+[node name="collision" type="CollisionShape2D" parent="right_wall" index="0"]
 
 shape = SubResource( 3 )
 
-[node name="ceiling" type="Area2D" parent="."]
+[node name="ceiling" type="Area2D" parent="." index="6"]
 
 position = Vector2( 320, -10 )
 input_pickable = true
@@ -151,11 +151,11 @@ script = ExtResource( 8 )
 _sections_unfolded = [ "Transform" ]
 y_direction = 1.0
 
-[node name="collision" type="CollisionShape2D" parent="ceiling"]
+[node name="collision" type="CollisionShape2D" parent="ceiling" index="0"]
 
 shape = SubResource( 4 )
 
-[node name="floor" type="Area2D" parent="."]
+[node name="floor" type="Area2D" parent="." index="7"]
 
 position = Vector2( 320, 410 )
 input_pickable = true
@@ -169,7 +169,7 @@ script = ExtResource( 8 )
 _sections_unfolded = [ "Transform" ]
 y_direction = -1.0
 
-[node name="collision" type="CollisionShape2D" parent="floor"]
+[node name="collision" type="CollisionShape2D" parent="floor" index="0"]
 
 shape = SubResource( 4 )
 
