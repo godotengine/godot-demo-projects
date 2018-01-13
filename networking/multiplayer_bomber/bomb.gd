@@ -1,7 +1,7 @@
 extends Area2D
 
 var in_area = []
-var owner
+var from_player
 
 # Called from the animation
 func explode():
@@ -10,7 +10,7 @@ func explode():
 		return
 	for p in in_area:
 		if (p.has_method("exploded")):
-			p.rpc("exploded", owner) # Exploded has a master keyword, so it will only be received by the master
+			p.rpc("exploded", from_player) # Exploded has a master keyword, so it will only be received by the master
 
 func done():
 	queue_free()
