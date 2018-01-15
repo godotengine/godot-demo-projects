@@ -3,9 +3,6 @@ using System;
 
 public class Paddle : Area2D
 {
-    [Export]
-    private int ballDir = 1;
-
     private const int MoveSpeed = 100;
 
     public override void _Process(float delta)
@@ -28,7 +25,7 @@ public class Paddle : Area2D
         if (area is Ball ball)
         {
             // Assign new direction
-            ball.direction = new Vector2(ballDir, (float)new Random().NextDouble() * 2 - 1).Normalized();
+            ball.direction = new Vector2(-ball.direction.x, (float)new Random().NextDouble() * 2 - 1).Normalized();
         }
     }
 }
