@@ -10,9 +10,6 @@ background_sky_custom_fov = 0.0
 background_color = Color( 0, 0, 0, 1 )
 background_energy = 1.0
 background_canvas_max_layer = 0
-background_camera_feed_id = 1
-background_camera_feed_h_flip = false
-background_camera_feed_v_flip = true
 ambient_light_color = Color( 0.648438, 0.64578, 0.64578, 1 )
 ambient_light_energy = 1.0
 ambient_light_sky_contribution = 1.0
@@ -103,6 +100,7 @@ flags_no_depth_test = false
 flags_use_point_size = false
 flags_world_triplanar = false
 flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
 params_diffuse_mode = 1
@@ -162,6 +160,7 @@ flags_no_depth_test = false
 flags_use_point_size = false
 flags_world_triplanar = false
 flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
 params_diffuse_mode = 1
@@ -213,6 +212,7 @@ flags_no_depth_test = false
 flags_use_point_size = false
 flags_world_triplanar = false
 flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
 params_diffuse_mode = 1
@@ -271,6 +271,7 @@ flags_no_depth_test = false
 flags_use_point_size = false
 flags_world_triplanar = false
 flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
 params_diffuse_mode = 1
@@ -313,11 +314,11 @@ proximity_fade_enable = false
 distance_fade_enable = false
 _sections_unfolded = [ "Albedo" ]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -326,13 +327,13 @@ anchor_bottom = 0.0
 margin_right = 1025.0
 margin_bottom = 602.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 _sections_unfolded = [ "Anchor", "Grow Direction", "Hint", "Margin", "Rect", "Size Flags" ]
 
-[node name="Accelerometer" type="Label" parent="Control"]
+[node name="Accelerometer" type="Label" parent="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -342,8 +343,8 @@ margin_right = 340.0
 margin_bottom = 14.0
 rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 text = "Accelerometer"
@@ -352,7 +353,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "Rect", "Size Flags" ]
 
-[node name="Magnetometer" type="Label" parent="Control"]
+[node name="Magnetometer" type="Label" parent="Control" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -363,8 +364,8 @@ margin_right = 340.0
 margin_bottom = 44.0
 rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 text = "Magnetometer"
@@ -373,7 +374,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "Rect", "Size Flags" ]
 
-[node name="Gyroscope" type="Label" parent="Control"]
+[node name="Gyroscope" type="Label" parent="Control" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -384,8 +385,8 @@ margin_right = 340.0
 margin_bottom = 74.0
 rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 text = "Gyroscope"
@@ -394,29 +395,30 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "Rect", "Size Flags" ]
 
-[node name="Camera" type="Camera" parent="."]
+[node name="Camera" type="Camera" parent="." index="1"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.285209, 0, 11.9833 )
-projection = 0
-fov = 65.0
-near = 0.1
-far = 100.0
 keep_aspect = 1
-current = false
 cull_mask = 1048575
 environment = SubResource( 1 )
 h_offset = 0.0
 v_offset = 0.0
-doppler/tracking = 0
+doppler_tracking = 0
+projection = 0
+current = false
+fov = 65.0
+size = 1.0
+near = 0.1
+far = 100.0
 
-[node name="Arrows" type="Spatial" parent="."]
+[node name="Arrows" type="Spatial" parent="." index="2"]
 
-[node name="AccelerometerArrow" type="Spatial" parent="Arrows"]
+[node name="AccelerometerArrow" type="Spatial" parent="Arrows" index="0"]
 
 transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Bottom" type="MeshInstance" parent="Arrows/AccelerometerArrow"]
+[node name="Bottom" type="MeshInstance" parent="Arrows/AccelerometerArrow" index="0"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 layers = 1
@@ -433,7 +435,7 @@ skeleton = NodePath("..")
 material/0 = SubResource( 3 )
 _sections_unfolded = [ "Transform", "material" ]
 
-[node name="Top" type="MeshInstance" parent="Arrows/AccelerometerArrow"]
+[node name="Top" type="MeshInstance" parent="Arrows/AccelerometerArrow" index="1"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
 layers = 1
@@ -450,12 +452,12 @@ skeleton = NodePath("..")
 material/0 = SubResource( 3 )
 _sections_unfolded = [ "Transform", "material" ]
 
-[node name="MagnetoArrow" type="Spatial" parent="Arrows"]
+[node name="MagnetoArrow" type="Spatial" parent="Arrows" index="1"]
 
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Bottom" type="MeshInstance" parent="Arrows/MagnetoArrow"]
+[node name="Bottom" type="MeshInstance" parent="Arrows/MagnetoArrow" index="0"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 layers = 1
@@ -472,7 +474,7 @@ skeleton = NodePath("..")
 material/0 = SubResource( 5 )
 _sections_unfolded = [ "Transform", "material" ]
 
-[node name="Top" type="MeshInstance" parent="Arrows/MagnetoArrow"]
+[node name="Top" type="MeshInstance" parent="Arrows/MagnetoArrow" index="1"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
 layers = 1
@@ -489,12 +491,12 @@ skeleton = NodePath("..")
 material/0 = SubResource( 5 )
 _sections_unfolded = [ "Transform", "material" ]
 
-[node name="NorthArrow" type="Spatial" parent="Arrows"]
+[node name="NorthArrow" type="Spatial" parent="Arrows" index="2"]
 
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Bottom" type="MeshInstance" parent="Arrows/NorthArrow"]
+[node name="Bottom" type="MeshInstance" parent="Arrows/NorthArrow" index="0"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 layers = 1
@@ -511,7 +513,7 @@ skeleton = NodePath("..")
 material/0 = SubResource( 6 )
 _sections_unfolded = [ "Transform", "material" ]
 
-[node name="Top" type="MeshInstance" parent="Arrows/NorthArrow"]
+[node name="Top" type="MeshInstance" parent="Arrows/NorthArrow" index="1"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
 layers = 1
@@ -528,9 +530,9 @@ skeleton = NodePath("..")
 material/0 = SubResource( 6 )
 _sections_unfolded = [ "Transform", "material" ]
 
-[node name="Boxes" type="Spatial" parent="."]
+[node name="Boxes" type="Spatial" parent="." index="3"]
 
-[node name="MagAndGrav" type="MeshInstance" parent="Boxes"]
+[node name="MagAndGrav" type="MeshInstance" parent="Boxes" index="0"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -4, 0 )
 layers = 1
@@ -547,7 +549,7 @@ skeleton = NodePath("..")
 material/0 = SubResource( 8 )
 _sections_unfolded = [ "Transform", "material" ]
 
-[node name="GyroAndGrav" type="MeshInstance" parent="Boxes"]
+[node name="GyroAndGrav" type="MeshInstance" parent="Boxes" index="1"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -4, 0 )
 layers = 1
@@ -564,14 +566,16 @@ skeleton = NodePath("..")
 material/0 = SubResource( 8 )
 _sections_unfolded = [ "Transform", "material" ]
 
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
+[node name="DirectionalLight" type="DirectionalLight" parent="." index="4"]
 
 transform = Transform( 0.884838, -0.329433, 0.329449, 0, 0.707124, 0.707089, -0.4659, -0.625659, 0.62569, 0, 4.69444, 0 )
 layers = 1
 light_color = Color( 1, 1, 1, 1 )
 light_energy = 1.0
+light_indirect_energy = 1.0
 light_negative = false
 light_specular = 0.5
+light_bake_mode = 1
 light_cull_mask = -1
 shadow_enabled = false
 shadow_color = Color( 0, 0, 0, 1 )

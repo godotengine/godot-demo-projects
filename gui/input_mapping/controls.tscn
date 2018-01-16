@@ -2,7 +2,7 @@
 
 [ext_resource path="res://controls.gd" type="Script" id=1]
 
-[node name="controls_ui" type="Control"]
+[node name="controls_ui" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -11,8 +11,8 @@ anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 1 )
@@ -20,7 +20,7 @@ __meta__ = {
 "__editor_plugin_screen__": "2D"
 }
 
-[node name="contextual_help" type="Label" parent="."]
+[node name="contextual_help" type="Label" parent="." index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -31,8 +31,8 @@ margin_top = 50.0
 margin_right = 465.0
 margin_bottom = 89.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Click on a key binding to reassign it, or press the Cancel action."
@@ -40,7 +40,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="bindings" type="Control" parent="."]
+[node name="bindings" type="Control" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -51,12 +51,12 @@ margin_top = 50.0
 margin_right = 90.0
 margin_bottom = 90.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="move_up" type="Control" parent="bindings"]
+[node name="move_up" type="Control" parent="bindings" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -67,12 +67,12 @@ margin_top = 50.0
 margin_right = 90.0
 margin_bottom = 90.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="Label" type="Label" parent="bindings/move_up"]
+[node name="Label" type="Label" parent="bindings/move_up" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -83,8 +83,8 @@ margin_top = 8.0
 margin_right = 45.0
 margin_bottom = 21.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Up"
@@ -92,7 +92,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Button" type="Button" parent="bindings/move_up"]
+[node name="Button" type="Button" parent="bindings/move_up" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -103,8 +103,9 @@ margin_top = -1.0
 margin_right = 144.0
 margin_bottom = 29.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
+focus_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = false
@@ -112,8 +113,9 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 flat = false
+align = 1
 
-[node name="move_down" type="Control" parent="bindings"]
+[node name="move_down" type="Control" parent="bindings" index="1"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -125,12 +127,12 @@ margin_top = 100.0
 margin_right = 90.0
 margin_bottom = 140.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="Label" type="Label" parent="bindings/move_down"]
+[node name="Label" type="Label" parent="bindings/move_down" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -141,8 +143,8 @@ margin_top = 8.0
 margin_right = 45.0
 margin_bottom = 21.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Down"
@@ -150,7 +152,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Button" type="Button" parent="bindings/move_down"]
+[node name="Button" type="Button" parent="bindings/move_down" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -161,8 +163,9 @@ margin_top = -1.0
 margin_right = 144.0
 margin_bottom = 29.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
+focus_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = false
@@ -170,8 +173,9 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 flat = false
+align = 1
 
-[node name="move_left" type="Control" parent="bindings"]
+[node name="move_left" type="Control" parent="bindings" index="2"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -183,12 +187,12 @@ margin_top = 150.0
 margin_right = 90.0
 margin_bottom = 190.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="Label" type="Label" parent="bindings/move_left"]
+[node name="Label" type="Label" parent="bindings/move_left" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -199,8 +203,8 @@ margin_top = 8.0
 margin_right = 45.0
 margin_bottom = 21.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Left"
@@ -208,7 +212,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Button" type="Button" parent="bindings/move_left"]
+[node name="Button" type="Button" parent="bindings/move_left" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -219,8 +223,9 @@ margin_top = -1.0
 margin_right = 144.0
 margin_bottom = 29.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
+focus_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = false
@@ -228,8 +233,9 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 flat = false
+align = 1
 
-[node name="move_right" type="Control" parent="bindings"]
+[node name="move_right" type="Control" parent="bindings" index="3"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -241,12 +247,12 @@ margin_top = 200.0
 margin_right = 90.0
 margin_bottom = 240.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="Label" type="Label" parent="bindings/move_right"]
+[node name="Label" type="Label" parent="bindings/move_right" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -257,8 +263,8 @@ margin_top = 8.0
 margin_right = 45.0
 margin_bottom = 21.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Right"
@@ -266,7 +272,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Button" type="Button" parent="bindings/move_right"]
+[node name="Button" type="Button" parent="bindings/move_right" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -277,8 +283,9 @@ margin_top = -1.0
 margin_right = 144.0
 margin_bottom = 29.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
+focus_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = false
@@ -286,8 +293,9 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 flat = false
+align = 1
 
-[node name="jump" type="Control" parent="bindings"]
+[node name="jump" type="Control" parent="bindings" index="4"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -299,12 +307,12 @@ margin_top = 250.0
 margin_right = 90.0
 margin_bottom = 290.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="Label" type="Label" parent="bindings/jump"]
+[node name="Label" type="Label" parent="bindings/jump" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -315,8 +323,8 @@ margin_top = 8.0
 margin_right = 45.0
 margin_bottom = 21.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Jump"
@@ -324,7 +332,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Button" type="Button" parent="bindings/jump"]
+[node name="Button" type="Button" parent="bindings/jump" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -335,8 +343,9 @@ margin_top = -1.0
 margin_right = 144.0
 margin_bottom = 29.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
+focus_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = false
@@ -344,5 +353,6 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 flat = false
+align = 1
 
 
