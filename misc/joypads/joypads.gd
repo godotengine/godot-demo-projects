@@ -35,7 +35,9 @@ func _physics_process(delta):
 				get_node("diagram/axes/" + str(axis) + "-").hide()
 			elif (axis_value > 0):
 				get_node("diagram/axes/" + str(axis) + "+").show()
+				get_node("diagram/axes/" + str(axis) + "-").hide()
 			else:
+				get_node("diagram/axes/" + str(axis) + "+").hide()
 				get_node("diagram/axes/" + str(axis) + "-").show()
 
 	# Loop through the buttons and highlight the ones that are pressed

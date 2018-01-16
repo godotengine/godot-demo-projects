@@ -12,10 +12,11 @@ func update_text():
 		child.queue_free()
 	if regex.is_valid():
 		var matches = regex.search($Text.get_text())
-		for result in matches.get_strings():
-			var label = Label.new()
-			label.text = result
-			$List.add_child(label)
+		if matches != null:
+			for result in matches.get_strings():
+				var label = Label.new()
+				label.text = result
+				$List.add_child(label)
 
 func _ready():
 	$Text.set_text("They asked me \"What's going on \\\"in the manor\\\"?\"")

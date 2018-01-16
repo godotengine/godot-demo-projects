@@ -6,15 +6,15 @@
 [ext_resource path="res://flag_uk.png" type="Texture" id=4]
 [ext_resource path="res://hello_en.wav" type="AudioStream" id=5]
 
-[node name="Panel" type="Panel"]
+[node name="Panel" type="Panel" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 1 )
@@ -22,7 +22,7 @@ __meta__ = {
 "__editor_plugin_screen__": "2D"
 }
 
-[node name="english" type="Button" parent="."]
+[node name="english" type="Button" parent="." index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -33,8 +33,9 @@ margin_top = 64.0
 margin_right = 192.0
 margin_bottom = 88.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
+focus_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = false
@@ -43,8 +44,9 @@ shortcut = null
 group = null
 text = "Use English"
 flat = false
+align = 1
 
-[node name="spanish" type="Button" parent="."]
+[node name="spanish" type="Button" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -55,8 +57,9 @@ margin_top = 112.0
 margin_right = 192.0
 margin_bottom = 136.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
+focus_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = false
@@ -65,8 +68,9 @@ shortcut = null
 group = null
 text = "Use Spanish"
 flat = false
+align = 1
 
-[node name="japanese" type="Button" parent="."]
+[node name="japanese" type="Button" parent="." index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -77,8 +81,9 @@ margin_top = 160.0
 margin_right = 192.0
 margin_bottom = 184.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
+focus_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = false
@@ -87,8 +92,9 @@ shortcut = null
 group = null
 text = "Use Japanese"
 flat = false
+align = 1
 
-[node name="description" type="Label" parent="."]
+[node name="description" type="Label" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -99,8 +105,8 @@ margin_top = 42.0
 margin_right = 808.0
 margin_bottom = 312.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 2 )
@@ -118,7 +124,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="HSeparator" type="HSeparator" parent="."]
+[node name="HSeparator" type="HSeparator" parent="." index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -129,12 +135,12 @@ margin_top = 330.0
 margin_right = 1001.0
 margin_bottom = 370.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="label" type="Label" parent="."]
+[node name="label" type="Label" parent="." index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -145,8 +151,8 @@ margin_top = 381.0
 margin_right = 324.0
 margin_bottom = 400.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 2 )
@@ -156,7 +162,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="play" type="Button" parent="."]
+[node name="play" type="Button" parent="." index="6"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -167,8 +173,9 @@ margin_top = 442.0
 margin_right = 475.0
 margin_bottom = 467.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
+focus_mode = 2
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 2 )
@@ -179,9 +186,10 @@ group = null
 text = "KEY_PUSH"
 icon = ExtResource( 3 )
 flat = false
+align = 1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." index="7"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -192,14 +200,14 @@ margin_top = 382.0
 margin_right = 213.0
 margin_bottom = 467.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 1
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 texture = ExtResource( 4 )
 stretch_mode = 0
 
-[node name="audio" type="AudioStreamPlayer" parent="."]
+[node name="audio" type="AudioStreamPlayer" parent="." index="8"]
 
 stream = ExtResource( 5 )
 volume_db = 0.0
