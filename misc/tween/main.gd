@@ -14,16 +14,13 @@ var state = {
 
 func _ready():
 	for index in range(trans.size()):
-		var name = trans[index]
-		get_node("trans/" + name).connect("pressed", self, "on_trans_changed", [name, index])
+		get_node("trans/" + trans[index]).connect("pressed", self, "on_trans_changed", [trans[index], index])
 
 	for index in range(eases.size()):
-		var name = eases[index]
-		get_node("eases/" + name).connect("pressed", self, "on_eases_changed", [name, index])
+		get_node("eases/" + eases[index]).connect("pressed", self, "on_eases_changed", [eases[index], index])
 
 	for index in range(modes.size()):
-		var name = modes[index]
-		get_node("modes/" + name).connect("pressed", self, "on_modes_changed", [name])
+		get_node("modes/" + modes[index]).connect("pressed", self, "on_modes_changed", [modes[index]])
 
 	get_node("colors/color_from/picker").set_pick_color(Color(1, 0, 0, 1))
 	get_node("colors/color_from/picker").connect("color_changed", self, "on_color_changed")
@@ -39,9 +36,9 @@ func _ready():
 	reset_tween()
 
 
-func on_trans_changed(name, index):
+func on_trans_changed(trans_name, index):
 	for index in range(trans.size()):
-		var pressed = trans[index] == name
+		var pressed = trans[index] == trans_name
 		var btn = get_node("trans/" + trans[index])
 
 		btn.set_pressed(pressed)
@@ -51,9 +48,9 @@ func on_trans_changed(name, index):
 	reset_tween()
 
 
-func on_eases_changed(name, index):
+func on_eases_changed(ease_name, index):
 	for index in range(eases.size()):
-		var pressed = eases[index] == name
+		var pressed = eases[index] == ease_name
 		var btn = get_node("eases/" + eases[index])
 
 		btn.set_pressed(pressed)
@@ -63,9 +60,9 @@ func on_eases_changed(name, index):
 	reset_tween()
 
 
-func on_modes_changed(name):
+func on_modes_changed(mode_name):
 	var tween = get_node("tween")
-	if name == "pause":
+	if mode_name == "pause":
 		if get_node("modes/pause").is_pressed():
 			tween.stop_all()
 			get_node("timeline").set_mouse_filter(Control.MOUSE_FILTER_PASS)
@@ -108,7 +105,7 @@ func reset_tween():
 		sprite.set_scale(Vector2(1,1))
 
 	if get_node("modes/rotate").is_pressed():
-		tween.interpolate_method(sprite, "set_rotation_in_degrees", 0, 360, 2, state.trans, state.eases)
+		tween.interpolate_method(sprite, "set_rotation_degrees", 0, 360, 2, state.trans, state.eases)
 		tween.interpolate_property(sprite, "rotation_degrees", 360, 0, 2, state.trans, state.eases, 2)
 
 	if get_node("modes/callback").is_pressed():

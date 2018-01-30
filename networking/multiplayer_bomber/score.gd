@@ -21,10 +21,10 @@ sync func increase_score(for_who):
 	pl.score += 1
 	pl.label.set_text(pl.name + "\n" + str(pl.score))
 
-func add_player(id, name):
+func add_player(id, new_player_name):
 	var l = Label.new()
 	l.set_align(Label.ALIGN_CENTER)
-	l.set_text(name + "\n" + "0")
+	l.set_text(new_player_name + "\n" + "0")
 	l.set_h_size_flags(SIZE_EXPAND_FILL)
 	var font = DynamicFont.new()
 	font.set_size(18)
@@ -32,7 +32,7 @@ func add_player(id, name):
 	l.add_font_override("font", font)
 	add_child(l)
 
-	player_labels[id] = { name = name, label = l, score = 0 }
+	player_labels[id] = { name = new_player_name, label = l, score = 0 }
 
 func _ready():
 	get_node("../winner").hide()

@@ -17,8 +17,8 @@ func _on_host_pressed():
 	get_node("players").show()
 	get_node("connect/error_label").text=""
 
-	var name = get_node("connect/name").text
-	gamestate.host_game(name)
+	var player_name = get_node("connect/name").text
+	gamestate.host_game(player_name)
 	refresh_lobby()
 
 func _on_join_pressed():
@@ -35,8 +35,8 @@ func _on_join_pressed():
 	get_node("connect/host").disabled=true
 	get_node("connect/join").disabled=true
 
-	var name = get_node("connect/name").text
-	gamestate.join_game(ip, name)
+	var player_name = get_node("connect/name").text
+	gamestate.join_game(ip, player_name)
 	# refresh_lobby() gets called by the player_list_changed signal
 
 func _on_connection_success():
@@ -56,7 +56,7 @@ func _on_game_ended():
 	get_node("connect/join").disabled
 
 func _on_game_error(errtxt):
-	get_node("error").text=errtxt
+	get_node("error").dialog_text = errtxt
 	get_node("error").popup_centered_minsize()
 
 func refresh_lobby():

@@ -56,15 +56,15 @@ func _connected_fail():
 
 # Lobby management functions
 
-remote func register_player(id, name):
+remote func register_player(id, new_player_name):
 	if (get_tree().is_network_server()):
 		# If we are the server, let everyone know about the new player
 		rpc_id(id, "register_player", 1, player_name) # Send myself to new dude
 		for p_id in players: # Then, for each remote player
 			rpc_id(id, "register_player", p_id, players[p_id]) # Send player to new dude
-			rpc_id(p_id, "register_player", id, name) # Send new dude to player
+			rpc_id(p_id, "register_player", id, new_player_name) # Send new dude to player
 
-	players[id] = name
+	players[id] = new_player_name
 	emit_signal("player_list_changed")
 
 remote func unregister_player(id):
@@ -124,14 +124,14 @@ remote func ready_to_start(id):
 			rpc_id(p, "post_start_game")
 		post_start_game()
 
-func host_game(name):
-	player_name = name
+func host_game(new_player_name):
+	player_name = new_player_name
 	var host = NetworkedMultiplayerENet.new()
 	host.create_server(DEFAULT_PORT, MAX_PEERS)
 	get_tree().set_network_peer(host)
 
-func join_game(ip, name):
-	player_name = name
+func join_game(ip, new_player_name):
+	player_name = new_player_name
 	var host = NetworkedMultiplayerENet.new()
 	host.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(host)
