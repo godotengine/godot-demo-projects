@@ -1,6 +1,8 @@
 
 extends Node
 
+const IAP_PLATFORM = "Android"
+
 signal purchase_success(item_name)
 signal purchase_fail
 signal purchase_cancel
@@ -15,7 +17,13 @@ signal consume_not_required
 signal sku_details_complete
 signal sku_details_error
 
+signal iap_disconnected
+signal iap_connected
+
 onready var payment = Globals.get_singleton("GodotPayments")
+
+# Used to be able to stub the android behavior
+onready var is_debug_build = OS.is_debug_build() and OS.get_name() != IAP_PLATFORM
 
 func _ready():
 	if payment:
@@ -26,7 +34,6 @@ func _ready():
 func set_auto_consume(auto):
 	if payment:
 		payment.setAutoConsume(auto)
-
 
 # request user owned item, callback : has_purchased
 func request_purchased():
@@ -41,13 +48,14 @@ func has_purchased(receipt, signature, sku):
 		print("has_purchased : ", sku)
 		emit_signal("has_purchased", sku)
 
-
 # purchase item
 # callback : purchase_success, purchase_fail, purchase_cancel, purchase_owned
 func purchase(item_name):
 	if payment:
 		# transaction_id could be any string that used for validation internally in java
 		payment.purchase(item_name, "transaction_id")
+	elif is_debug_build:
+		call_deferred("purchase_success", null, null, item_name)
 
 func purchase_success(receipt, signature, sku):
 	print("purchase_success : ", sku)
@@ -71,11 +79,15 @@ func purchase_owned(sku):
 func consume(item_name):
 	if payment:
 		payment.consume(item_name)
+	elif is_debug_build:
+		consume_success(null, null, item_name)
 
 # consume all purchased items
 func consume_all():
 	if payment:
 		payment.consumeUnconsumedPurchases()
+	elif is_debug_build:
+		consume_not_required()
 
 func consume_success(receipt, signature, sku):
 	print("consume_success : ", sku)
@@ -84,25 +96,27 @@ func consume_success(receipt, signature, sku):
 # if consume fail, need to call request_purchased() to get purchase token from google
 # then try to consume again
 func consume_fail():
+	print("consume_fail")
 	emit_signal("consume_fail")
 
 # no purchased item to consume
 func consume_not_required():
+	print("consume_not_required")
 	emit_signal("consume_not_required")
 
 
 # detail info of IAP items
 # sku_details = {
-#     product_id (String) : {
-#         type (String),
-#         product_id (String),
-#         title (String),
-#         description (String),
-#         price (String),  # this can be used to display price for each country with their own currency
-#         price_currency_code (String),
-#         price_amount (float)
-#     },
-#     ...
+#		 product_id (String) : {
+#				 type (String),
+#				 product_id (String),
+#				 title (String),
+#				 description (String),
+#				 price (String),	# this can be used to display price for each country with their own currency
+#				 price_currency_code (String),
+#				 price_amount (float)
+#		 },
+#		 ...
 # }
 var sku_details = {}
 
@@ -111,7 +125,10 @@ var sku_details = {}
 func sku_details_query(list):
 	if payment:
 		var sku_list = StringArray(list)
+
 		payment.querySkuDetails(sku_list)
+	elif is_debug_build:
+		sku_details_complete({})
 
 func sku_details_complete(result):
 	print("sku_details_complete : ", result)
@@ -122,3 +139,21 @@ func sku_details_complete(result):
 func sku_details_error(error_message):
 	print("error_sku_details = ", error_message)
 	emit_signal("sku_details_error")
+
+func iap_disconnected():
+	print("iap_disconnected")
+
+	emit_signal("iap_disconnected")
+
+func iap_connected():
+	print("iap_connected")
+
+	emit_signal("iap_connected")
+
+func is_connected():
+	var connected = is_debug_build
+
+	if payment:
+		connected = payment.isConnected()
+
+	return connected

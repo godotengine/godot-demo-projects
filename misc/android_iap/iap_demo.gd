@@ -5,14 +5,17 @@ onready var alert = get_node("alert")
 
 func _ready():
 	iap.set_auto_consume(false)
-	iap.connect("purchase_success", self, "on_purchase_success")
-	iap.connect("purchase_fail", self, "on_purchase_fail")
-	iap.connect("purchase_cancel", self, "on_purchase_cancel")
-	iap.connect("purchase_owned", self, "on_purchase_owned")
-	iap.connect("has_purchased", self, "on_has_purchased")
-	iap.connect("consume_success", self, "on_consume_success")
-	iap.connect("consume_fail", self, "on_consume_fail")
-	iap.connect("sku_details_complete", self, "on_sku_details_complete")
+
+	# Note:
+	# Use 'CONNECT_DEFERRED' otherwise the callback will run on the UI Thread and will freeze the app
+	iap.connect("purchase_success", self, "on_purchase_success", [], CONNECT_DEFERRED)
+	iap.connect("purchase_fail", self, "on_purchase_fail", [], CONNECT_DEFERRED)
+	iap.connect("purchase_cancel", self, "on_purchase_cancel", [], CONNECT_DEFERRED)
+	iap.connect("purchase_owned", self, "on_purchase_owned", [], CONNECT_DEFERRED)
+	iap.connect("has_purchased", self, "on_has_purchased", [], CONNECT_DEFERRED)
+	iap.connect("consume_success", self, "on_consume_success", [], CONNECT_DEFERRED)
+	iap.connect("consume_fail", self, "on_consume_fail", [], CONNECT_DEFERRED)
+	iap.connect("sku_details_complete", self, "on_sku_details_complete", [], CONNECT_DEFERRED)
 	
 	get_node("purchase").connect("pressed", self, "button_purchase")
 	get_node("consume").connect("pressed", self, "button_consume")
