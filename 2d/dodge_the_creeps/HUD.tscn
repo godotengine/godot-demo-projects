@@ -1,0 +1,126 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://HUD.gd" type="Script" id=1]
+[ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 64
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=2]
+
+size = 72
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=3]
+
+size = 48
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[node name="HUD" type="CanvasLayer"]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+script = ExtResource( 1 )
+
+[node name="ScoreLabel" type="Label" parent="." index="0"]
+
+anchor_left = 0.5
+anchor_top = 0.0
+anchor_right = 0.5
+anchor_bottom = 0.0
+margin_left = -25.0
+margin_right = 25.0
+margin_bottom = 100.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+text = "0"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "Margin", "custom_fonts" ]
+
+[node name="MessageLabel" type="Label" parent="." index="1"]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -150.0
+margin_right = 200.0
+margin_bottom = 50.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 2 )
+text = "Dodge the
+Creeps!"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "Margin", "custom_fonts" ]
+
+[node name="MessageTimer" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = true
+autostart = false
+
+[node name="StartButton" type="Button" parent="." index="3"]
+
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -100.0
+margin_top = -200.0
+margin_right = 100.0
+margin_bottom = -100.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 3 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Start"
+flat = false
+align = 1
+_sections_unfolded = [ "Anchor", "Margin", "Visibility", "custom_fonts" ]
+
+[connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
+
+[connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
+
+

@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Mob.gd" type="Script" id=1]
+[ext_resource path="res://art/enemyWalking_1.png" type="Texture" id=2]
+[ext_resource path="res://art/enemyWalking_2.png" type="Texture" id=3]
+[ext_resource path="res://art/enemyFlyingAlt_1.png" type="Texture" id=4]
+[ext_resource path="res://art/enemyFlyingAlt_2.png" type="Texture" id=5]
+[ext_resource path="res://art/enemySwimming_1.png" type="Texture" id=6]
+[ext_resource path="res://art/enemySwimming_2.png" type="Texture" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "walk",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "fly",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "swim",
+"speed": 4.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 34.8222
+height = 28.8308
+
+[node name="Mob" type="RigidBody2D"]
+
+input_pickable = true
+collision_layer = 1
+collision_mask = 0
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 0.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = 0.1
+angular_velocity = 0.0
+angular_damp = 1.0
+script = ExtResource( 1 )
+_sections_unfolded = [ "Angular", "Collision", "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+MIN_SPEED = 150
+MAX_SPEED = 250
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
+
+scale = Vector2( 0.75, 0.75 )
+frames = SubResource( 1 )
+animation = "swim"
+playing = true
+_sections_unfolded = [ "Transform" ]
+
+[node name="Collision" type="CollisionShape2D" parent="." index="1"]
+
+rotation = 1.5708
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="Visibility" type="VisibilityNotifier2D" parent="." index="2"]
+
+rect = Rect2( -10, -10, 20, 20 )
+
+
