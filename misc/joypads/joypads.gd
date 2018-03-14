@@ -29,11 +29,11 @@ func _physics_process(delta):
 		get_node("axes/axis_prog" + str(axis)).set_value(100*axis_value)
 		get_node("axes/axis_val" + str(axis)).set_text(str(axis_value))
 		# Show joypad direction indicators
-		if (axis <= JOY_ANALOG_RY):
-			if (abs(axis_value) < DEADZONE):
+		if axis <= JOY_ANALOG_RY:
+			if abs(axis_value) < DEADZONE:
 				get_node("diagram/axes/" + str(axis) + "+").hide()
 				get_node("diagram/axes/" + str(axis) + "-").hide()
-			elif (axis_value > 0):
+			elif axis_value > 0:
 				get_node("diagram/axes/" + str(axis) + "+").show()
 				get_node("diagram/axes/" + str(axis) + "-").hide()
 			else:
@@ -42,7 +42,7 @@ func _physics_process(delta):
 
 	# Loop through the buttons and highlight the ones that are pressed
 	for btn in range(JOY_BUTTON_0, JOY_BUTTON_MAX):
-		if (Input.is_joy_button_pressed(joy_num, btn)):
+		if Input.is_joy_button_pressed(joy_num, btn):
 			get_node("buttons/btn" + str(btn)).add_color_override("font_color", Color(1, 1, 1, 1))
 			get_node("diagram/buttons/" + str(btn)).show()
 		else:

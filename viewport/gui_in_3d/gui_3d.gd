@@ -1,4 +1,3 @@
-
 extends Spatial
 
 # Member variables
@@ -12,12 +11,12 @@ func _input(event):
 	var is_mouse_event = false
 	var mouse_events = [InputEventMouseButton, InputEventMouseMotion, InputEventScreenDrag, InputEventScreenTouch]
 	for mouse_event in mouse_events:
-		if (event is mouse_event):
+		if event is mouse_event:
 			is_mouse_event = true
 			break
   
 	# If it is, then pass the event to the viewport
-	if (is_mouse_event == false):
+	if is_mouse_event == false:
 		viewport.input(event)
 
 
@@ -26,7 +25,7 @@ func _on_area_input_event(camera, event, click_pos, click_normal, shape_idx):
 	# Use click pos (click in 3d space, convert to area space)
 	var pos = get_node("Area").get_global_transform().affine_inverse()
 	# the click pos is not zero, then use it to convert from 3D space to area space
-	if (click_pos.x != 0 or click_pos.y != 0 or click_pos.z != 0):
+	if click_pos.x != 0 or click_pos.y != 0 or click_pos.z != 0:
 		pos *= click_pos
 		last_click_pos = click_pos
 	else:
@@ -34,7 +33,7 @@ func _on_area_input_event(camera, event, click_pos, click_normal, shape_idx):
 		# and move it according to the relative position of the event.
 		# NOTE: this is not an exact 1-1 conversion, but it's pretty close
 		pos *= last_click_pos
-		if (event is InputEventMouseMotion or event is InputEventScreenDrag):
+		if event is InputEventMouseMotion or event is InputEventScreenDrag:
 			pos.x += event.relative.x / viewport.size.x
 			pos.y += event.relative.y / viewport.size.y
 			last_click_pos = pos
@@ -55,9 +54,9 @@ func _on_area_input_event(camera, event, click_pos, click_normal, shape_idx):
 	# Set the position in event
 	event.position = pos
 	event.global_position = pos
-	if (prev_pos == null):
+	if not prev_pos:
 		prev_pos = pos
-	if (event is InputEventMouseMotion):
+	if event is InputEventMouseMotion:
 		event.relative = pos - prev_pos
 	prev_pos = pos
 	

@@ -22,7 +22,7 @@ func _bg_load_done():
 
 
 func _on_load_pressed():
-	if (thread.is_active()):
+	if thread.is_active():
 		# Already working
 		return
 	print("START THREAD!")
