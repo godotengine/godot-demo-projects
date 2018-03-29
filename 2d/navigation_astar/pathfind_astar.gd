@@ -27,13 +27,13 @@ func _ready():
 
 # Click and Shift force the start and end position of the path to update
 # and the node to redraw everything
-func _input(event):
-	if event.is_action_pressed('click') and Input.is_key_pressed(KEY_SHIFT):
-		# To call the setter method from this script we have to use the explicit self.
-		self.path_start_position = world_to_map(get_global_mouse_position())
-	elif event.is_action_pressed('click'):
-		self.path_end_position = world_to_map(get_global_mouse_position())
-		
+#func _input(event):
+#	if event.is_action_pressed('click') and Input.is_key_pressed(KEY_SHIFT):
+#		# To call the setter method from this script we have to use the explicit self.
+#		self.path_start_position = world_to_map(get_global_mouse_position())
+#	elif event.is_action_pressed('click'):
+#		self.path_end_position = world_to_map(get_global_mouse_position())
+
 
 # Loops through all cells within the map's bounds and
 # adds all points to the astar_node, except the obstacles
@@ -82,7 +82,8 @@ func astar_connect_walkable_cells(points_array):
 			# Note the 3rd argument. It tells the astar_node that we want the
 			# connection to be bilateral: from point A to B and B to A
 			# If you set this value to false, it becomes a one-way path
-			astar_node.connect_points(point_index, point_relative_index, true)
+			# As we loop through all points we can set it to false
+			astar_node.connect_points(point_index, point_relative_index, false)
 
 
 # This is a variation of the method above
@@ -110,7 +111,18 @@ func calculate_point_index(point):
 	return point.x + map_size.x * point.y
 
 
-func recalculate_path():
+func get_path(world_start, world_end):
+	self.path_start_position = world_to_map(world_start)
+	self.path_end_position = world_to_map(world_end)
+	_recalculate_path()
+	var path_world = []
+	for point in _point_path:
+		var point_world = map_to_world(Vector2(point.x, point.y)) + _half_cell_size
+		path_world.append(point_world)
+	return path_world
+
+
+func _recalculate_path():
 	clear_previous_path_drawing()
 	var start_point_index = calculate_point_index(path_start_position)
 	var end_point_index = calculate_point_index(path_end_position)
@@ -158,7 +170,7 @@ func _set_path_start_position(value):
 	set_cell(value.x, value.y, 1)
 	path_start_position = value
 	if path_end_position and path_end_position != path_start_position:
-		recalculate_path()
+		_recalculate_path()
 
 
 func _set_path_end_position(value):
@@ -171,4 +183,4 @@ func _set_path_end_position(value):
 	set_cell(value.x, value.y, 2)
 	path_end_position = value
 	if path_start_position != value:
-		recalculate_path()
+		_recalculate_path()

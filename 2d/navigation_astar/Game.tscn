@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://tileset/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://pathfind_astar.gd" type="Script" id=2]
+[ext_resource path="res://character.gd" type="Script" id=3]
+[ext_resource path="res://sprites/character.png" type="Texture" id=4]
 
 [node name="Game" type="Node" index="0"]
 
@@ -27,5 +29,15 @@ tile_data = PoolIntArray( 65537, 0, 0, 65541, 0, 0, 65545, 0, 0, 65550, 0, 0, 19
 script = ExtResource( 2 )
 _sections_unfolded = [ "Cell" ]
 map_size = Vector2( 16, 16 )
+
+[node name="Character" type="Position2D" parent="." index="1"]
+
+script = ExtResource( 3 )
+SPEED = 200.0
+
+[node name="Sprite" type="Sprite" parent="Character" index="0"]
+
+position = Vector2( 7, 0 )
+texture = ExtResource( 4 )
 
 
