@@ -20,7 +20,6 @@ func load_pressed():
 
 
 func save_file_selected(path):
-	
 	# Get the values from the sliders and color picker
 	var color = get_node("ColorPicker_albedo").color
 	var metallic = get_node("HSlider_metallic").value
@@ -45,13 +44,10 @@ func save_file_selected(path):
 	return true
 
 
-
 func load_file_selected(path):
-	
 	# Using the passed in editor interface, get the selected nodes in the editor
 	var editor_selection = editor_interface.get_selection()
 	var selected_nodes = editor_selection.get_selected_nodes()
-	
 	
 	var file = File.new()
 	var SpatialMaterial_Silly = null
@@ -91,7 +87,5 @@ func load_file_selected(path):
 	else:
 		return false
 	
-	
 	# If we somehow get here, then return false (failure)
 	return false
-

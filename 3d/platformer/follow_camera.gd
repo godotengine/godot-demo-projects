@@ -21,15 +21,15 @@ func _physics_process(dt):
 	# Regular delta follow
 	
 	# Check ranges
-	if (delta.length() < min_distance):
-		delta = delta.normalized()*min_distance
-	elif (delta.length() > max_distance):
-		delta = delta.normalized()*max_distance
+	if  delta.length() < min_distance:
+		delta = delta.normalized() * min_distance
+	elif  delta.length() > max_distance:
+		delta = delta.normalized() * max_distance
 	
 	# Check upper and lower height
-	if (delta.y > max_height):
+	if delta.y > max_height:
 		delta.y = max_height
-	if (delta.y < min_height):
+	if delta.y < min_height:
 		delta.y = min_height
 		
 	# Check autoturn
@@ -39,22 +39,22 @@ func _physics_process(dt):
 	var col = ds.intersect_ray(target, target + delta, collision_exception)
 	var col_right = ds.intersect_ray(target, target + Basis(up, deg2rad(-autoturn_ray_aperture)).xform(delta), collision_exception)
 	
-	if (!col.empty()):
+	if !col.empty():
 		# If main ray was occluded, get camera closer, this is the worst case scenario
 		delta = col.position - target	
-	elif (!col_left.empty() and col_right.empty()):
+	elif !col_left.empty() and col_right.empty():
 		# If only left ray is occluded, turn the camera around to the right
-		delta = Basis(up, deg2rad(-dt*autoturn_speed)).xform(delta)
-	elif (col_left.empty() and !col_right.empty()):
+		delta = Basis(up, deg2rad(-dt * autoturn_speed)).xform(delta)
+	elif col_left.empty() and !col_right.empty():
 		# If only right ray is occluded, turn the camera around to the left
-		delta = Basis(up, deg2rad(dt*autoturn_speed)).xform(delta)
+		delta = Basis(up, deg2rad(dt  *autoturn_speed)).xform(delta)
 	else:
 		# Do nothing otherwise, left and right are occluded but center is not, so do not autoturn
 		pass
 	
 	# Apply lookat
-	if (delta == Vector3()):
-		delta = (pos - target).normalized()*0.0001
+	if delta == Vector3():
+		delta = (pos - target).normalized() * 0.0001
 
 	pos = target + delta
 	
@@ -62,15 +62,15 @@ func _physics_process(dt):
 	
 	# Turn a little up or down
 	var t = get_transform()
-	t.basis = Basis(t.basis[0], deg2rad(angle_v_adjust))*t.basis
+	t.basis = Basis(t.basis[0], deg2rad(angle_v_adjust)) * t.basis
 	set_transform(t)
 
 
 func _ready():
 	# Find collision exceptions for ray
 	var node = self
-	while(node):
-		if (node is RigidBody):
+	while node:
+		if node is RigidBody:
 			collision_exception.append(node.get_rid())
 			break
 		else:

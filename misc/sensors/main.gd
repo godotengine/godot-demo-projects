@@ -19,7 +19,7 @@ func get_basis_for_arrow(p_vector):
 	
 	# get an arbitrary vector we can use to calculate our other two vectors
 	var v = Vector3(1.0, 0.0, 0.0)
-	if (abs(v.dot(rotate.y)) > 0.9):
+	if abs(v.dot(rotate.y)) > 0.9:
 		v = Vector3(0.0, 1.0, 0.0)
 	
 	# use our vector to get a vector perpendicular to our two vectors
@@ -82,7 +82,7 @@ func drift_correction(p_basis, p_grav):
 	var dot = p_basis.y.dot(real_up)
 	
 	# if our dot is 1.0 we're good
-	if (dot < 1.0):
+	if dot < 1.0:
 		# the cross between our two vectors gives us a vector perpendicular to our two vectors
 		var axis = p_basis.y.cross(real_up).normalized()
 		var correction = Basis(axis, acos(dot))
@@ -138,4 +138,3 @@ func _process(delta):
 	gyro_and_grav.transform.basis = drift_correction(new_basis, grav)
 	
 	
-

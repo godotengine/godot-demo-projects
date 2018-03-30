@@ -41,7 +41,7 @@ func get_option_visibility(option, options):
 func import(source_file, save_path, options, r_platform_variants, r_gen_files):
 	var file = File.new()
 	var err = file.open(source_file, File.READ)
-	if (err != OK):
+	if err != OK:
 		return err
 
 	var line = file.get_line()

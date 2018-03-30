@@ -7,7 +7,6 @@ extends Node
 #
 # See material_import.gd for more information
 
-
 var albedo_color
 var metallic_strength
 var roughness_strength
@@ -58,4 +57,3 @@ func make_material():
 	mat.roughness = roughness_strength
 	
 	return mat
-

@@ -22,15 +22,15 @@ func _physics_process(dt):
 	# Regular delta follow
 	
 	# Check ranges
-	if (delta.length() < min_distance):
-		delta = delta.normalized()*min_distance
-	elif (delta.length() > max_distance):
-		delta = delta.normalized()*max_distance
+	if delta.length() < min_distance:
+		delta = delta.normalized() * min_distance
+	elif delta.length() > max_distance:
+		delta = delta.normalized() * max_distance
 	
 	# Check upper and lower height
-	if (delta.y > max_height):
+	if delta.y > max_height:
 		delta.y = max_height
-	if (delta.y < min_height):
+	if delta.y < min_height:
 		delta.y = min_height
 	
 	pos = target + delta
@@ -39,15 +39,15 @@ func _physics_process(dt):
 	
 	# Turn a little up or down
 	var t = transform
-	t.basis = Basis(t.basis[0], deg2rad(angle_v_adjust))*t.basis
+	t.basis = Basis(t.basis[0], deg2rad(angle_v_adjust)) * t.basis
 	transform = t
 
 
 func _ready():
 	# Find collision exceptions for ray
 	var node = self
-	while(node):
-		if (node is RigidBody):
+	while node:
+		if node is RigidBody:
 			collision_exception.append(node.get_rid())
 			break
 		else:

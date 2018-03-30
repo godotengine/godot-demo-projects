@@ -96,13 +96,13 @@ func reset_tween():
 		tween.interpolate_method(sprite, "set_modulate", get_node("colors/color_from/picker").get_pick_color(), get_node("colors/color_to/picker").get_pick_color(), 2, state.trans, state.eases)
 		tween.interpolate_property(sprite, "modulate", get_node("colors/color_to/picker").get_pick_color(), get_node("colors/color_from/picker").get_pick_color(), 2, state.trans, state.eases, 2)
 	else:
-		sprite.set_modulate(Color(1,1,1,1))
+		sprite.set_modulate(Color(1, 1, 1, 1))
 
 	if get_node("modes/scale").is_pressed():
 		tween.interpolate_method(sprite, "set_scale", Vector2(0.5, 0.5), Vector2(1.5, 1.5), 2, state.trans, state.eases)
 		tween.interpolate_property(sprite, "scale", Vector2(1.5, 1.5), Vector2(0.5, 0.5), 2, state.trans, state.eases, 2)
 	else:
-		sprite.set_scale(Vector2(1,1))
+		sprite.set_scale(Vector2(1, 1))
 
 	if get_node("modes/rotate").is_pressed():
 		tween.interpolate_method(sprite, "set_rotation_degrees", 0, 360, 2, state.trans, state.eases)
@@ -144,7 +144,7 @@ func _on_tween_step(object, key, elapsed, value):
 	var tween = get_node("tween")
 	var runtime = tween.get_runtime()
 
-	var ratio = 100*(elapsed/runtime)
+	var ratio = 100 * (elapsed / runtime)
 	timeline.set_value(ratio)
 
 
@@ -154,7 +154,7 @@ func _on_timeline_value_changed(value):
 
 	var tween = get_node("tween")
 	var runtime = tween.get_runtime()
-	tween.seek(runtime*value/100)
+	tween.seek(runtime * value / 100)
 
 
 func on_callback(arg):

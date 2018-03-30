@@ -18,7 +18,7 @@ func _enter_tree():
 	io_material_dialog = preload("res://addons/custom_import_plugin/Custom_material_dock.tscn").instance()
 	io_material_dialog.editor_interface = get_editor_interface();
 	
-	add_control_to_dock( DOCK_SLOT_LEFT_UL, io_material_dialog )
+	add_control_to_dock(DOCK_SLOT_LEFT_UL, io_material_dialog)
 
 func _exit_tree():
 	remove_control_from_docks(io_material_dialog)
