@@ -2,12 +2,12 @@
 
 [ext_resource path="res://addons/sade/editor_gizmo_texture.png" type="Texture" id=1]
 [ext_resource path="res://godot_battle_bot.dae" type="PackedScene" id=2]
-[ext_resource path="res://Target_From_MousePos.gd" type="Script" id=3]
+[ext_resource path="res://target_from_mousepos.gd" type="Script" id=3]
 [ext_resource path="res://addons/sade/ik_look_at.gd" type="Script" id=4]
 [ext_resource path="res://addons/sade/ik_look_at.png" type="Texture" id=5]
-[ext_resource path="res://addons/SADE/IK_FABRIK.gd" type="Script" id=6]
-[ext_resource path="res://addons/SADE/IK_FABRIK.png" type="Texture" id=7]
-[ext_resource path="res://Button_Change_Scene.gd" type="Script" id=8]
+[ext_resource path="res://addons/sade/ik_fabrik.gd" type="Script" id=6]
+[ext_resource path="res://addons/sade/ik_fabrik.png" type="Texture" id=7]
+[ext_resource path="res://button_change_scene.gd" type="Script" id=8]
 
 [sub_resource type="PlaneMesh" id=1]
 
@@ -314,9 +314,9 @@ skeleton_path = NodePath("../../../BattleBot/Armature/Skeleton")
 bone_name = "Head"
 update_mode = 0
 look_at_axis = 1
-use_our_rot_x = false
-use_our_rot_y = false
-use_our_rot_z = false
+use_our_rotation_x = false
+use_our_rotation_y = false
+use_our_rotation_z = false
 use_negative_our_rot = false
 additional_rotation = Vector3( 90, 0, 0 )
 debug_messages = false
@@ -353,9 +353,9 @@ skeleton_path = NodePath("../../../../../BattleBot/Armature/Skeleton")
 bone_name = "Left_Hand"
 update_mode = 0
 look_at_axis = 1
-use_our_rot_x = false
-use_our_rot_y = false
-use_our_rot_z = false
+use_our_rotation_x = false
+use_our_rotation_y = false
+use_our_rotation_z = false
 use_negative_our_rot = false
 additional_rotation = Vector3( 0, 0, 90 )
 debug_messages = false
@@ -366,11 +366,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.16849, 0, -5.31922 )
 
 [node name="Left_UpperArm" type="Spatial" parent="Camera/targets/IK_FABRIK_Left_Arm" index="2"]
 
-transform = Transform( -0.66477, 0.0771345, -0.743055, -2.23517e-08, 0.994655, 0.103252, 0.747048, 0.0686391, -0.661217, 1.53444, 0.300478, -3.63533 )
+transform = Transform( -0.664762, 0.077136, -0.743062, -2.23517e-08, 0.994655, 0.103253, 0.747055, 0.068639, -0.661209, 1.53443, 0.300478, -3.63529 )
 
 [node name="Left_LowerArm" type="Spatial" parent="Camera/targets/IK_FABRIK_Left_Arm" index="3"]
 
-transform = Transform( -0.773624, -0.0228999, 0.633231, 2.98023e-08, 0.999347, 0.03614, -0.633645, 0.0279588, -0.773119, 2.94998, 0.10378, -2.37569 )
+transform = Transform( -0.773622, -0.022882, 0.633234, 1.49012e-08, 0.999348, 0.0361116, -0.633648, 0.0279367, -0.773117, 2.94998, 0.103698, -2.37567 )
 
 [node name="IK_FABRIK_Right_Arm" type="Spatial" parent="Camera/targets" index="2"]
 
@@ -404,9 +404,9 @@ skeleton_path = NodePath("../../../../../BattleBot/Armature/Skeleton")
 bone_name = "Right_Hand"
 update_mode = 0
 look_at_axis = 1
-use_our_rot_x = false
-use_our_rot_y = false
-use_our_rot_z = false
+use_our_rotation_x = false
+use_our_rotation_y = false
+use_our_rotation_z = false
 use_negative_our_rot = false
 additional_rotation = Vector3( 0, 0, 90 )
 debug_messages = false
@@ -417,15 +417,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.34515, 0, -3.7843 )
 
 [node name="Right_UpperArm" type="Spatial" parent="Camera/targets/IK_FABRIK_Right_Arm" index="2"]
 
-transform = Transform( -0.694982, -0.0753926, 0.715064, -7.45058e-09, 0.994488, 0.104854, -0.719028, 0.0728714, -0.691151, -1.53339, 0.300478, -3.63533 )
+transform = Transform( -0.694976, -0.0753919, 0.715069, 5.96046e-08, 0.994488, 0.104852, -0.719033, 0.0728695, -0.691145, -1.5334, 0.300478, -3.63531 )
 
 [node name="Right_LowerArm" type="Spatial" parent="Camera/targets/IK_FABRIK_Right_Arm" index="3"]
 
-transform = Transform( -0.792024, 0.0165705, -0.610266, 0, 0.999631, 0.0271429, 0.61049, 0.0214978, -0.791732, -2.89561, 0.100753, -2.31866 )
+transform = Transform( -0.792023, 0.0165762, -0.610266, 0, 0.999631, 0.0271522, 0.610491, 0.0215051, -0.791731, -2.89562, 0.100769, -2.31865 )
 
 [node name="Right_Hand" type="Spatial" parent="Camera/targets/IK_FABRIK_Right_Arm" index="4"]
 
-transform = Transform( -0.678335, 0.00698586, -0.734719, -1.86265e-09, 0.999955, 0.00950778, 0.734753, 0.00644946, -0.678304, -1.07914, 0.0200729, 0.0379109 )
+transform = Transform( -0.678313, 0.00695222, -0.73474, 9.31323e-10, 0.999955, 0.00946173, 0.734773, 0.00641802, -0.678282, -1.0791, 0.0200329, 0.0379918 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Camera/targets" index="3"]
 
