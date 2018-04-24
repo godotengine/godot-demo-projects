@@ -39,13 +39,6 @@ export (bool) var reset_iterations_on_update = false
 export (bool) var use_middle_joint_target = false
 var middle_joint_target = null
 
-# NOT WORKING.
-# A boolean to track whether or not we want to constrain the bones in the bone chain.
-#export (bool) var constrained = false
-# A array of strings contraining the bone constraints for each bone (assuming the order is the same
-# as bones_in_chain). (ORDER: Left,Right,Up,Down)
-#export (PoolStringArray) var bone_constraints
-
 # Have we called _set_skeleton_path or not already. Due to some issues using exported NodePaths,
 # we need to ignore the first _set_skeleton_path call.
 var first_call = true
@@ -222,25 +215,6 @@ func _set_bone_chain_lengths(new_value):
 	total_length = null
 
 
-# NOT USED -- part of the (not working) constraint system
-"""
-func get_bone_constraints(index):
-	# NOTE: assumed angle constraint order:
-		#	Left angle in degrees, right angle in degrees, up angle in degress, down angle in degrees.
-	if index <= bones_in_chain.size()-1:
-		var index_str = bone_constraints[index]
-		var floats = index_str.split_floats(",", false)
-		if (floats.size() >= 4):
-			return floats
-		else:
-			print (self.name, " - IK_FABRIK: Not all constraints are present for bone number ", index, " found!")
-			return null
-	
-	print (self.name, " - IK_FABRIK: No constraints for bone number ", index, " found!")
-	return null
-"""
-
-
 # Various upate methods
 # ---------------------
 func _process(delta):
@@ -396,8 +370,6 @@ func solve_chain():
 func chain_backward():
 	# Backward reaching pass
 	
-	#var dir = -target.global_transform.basis.z.normalized()
-	
 	# Get the direction of the final bone by using the next to last bone if there is more than 2 bones.
 	# If there are only 2 bones, we use the target's forward Z vector instead (not ideal, but it works fairly well)
 	var dir
@@ -437,90 +409,10 @@ func chain_forward():
 		# Set the new joint position
 		var new_pos = (1 - l) * bone_nodes[i].global_transform.origin + l * bone_nodes[i+1].global_transform.origin
 		
-		# Apply constraints (if we have them)
-		# NOTE: this does not work. It is left in as an example to help others if they decide to add constraints
-		"""
-		if (constrained == true):
-			
-			var cf = bone_nodes[i].global_transform
-			cf = cf.looking_at(bone_nodes[i+1].global_transform.origin, Vector3(0, 1, 0))
-			
-			var line = (new_pos - bone_nodes[i+1].global_transform.origin).normalized() * bones_in_chain_lengths[i]
-			
-			new_pos += chain_constrain(new_pos, line, cf, i+1)
-		"""
-		
 		# Apply the new joint position, (potentially with constraints), to the bone node
 		bone_nodes[i+1].global_transform.origin = new_pos
 		
 		i += 1
-	
-
-
-# NOT USED -- part of the (not working) constraint system
-"""
-func chain_constrain(calc, line, cf, bone):
-	var scalar = calc.dot(line) / line.length()
-	var proj = scalar * line.normalized()
-	# NOTE: Something in the calculation for proj may be wrong.
-	
-	# get axis that is closest
-	# NOTE: Not sure if we need to do a calculation or not. For now, we are just going to use Basis	
-	var tmp = cf.looking_at(cf.origin - Vector3(0, 1, 0), Vector3(1, 0, 0))
-	var upvec = cf.basis.x
-	tmp = cf.looking_at(cf.origin - Vector3(1, 0, 0), Vector3(0, 1, 0))
-	var rightvec = cf.basis.z
-	
-	
-	# Get the vector from the projection to the calculated vector
-	var adjust = calc - proj
-	if scalar > 0:
-		# If we are below the cone, flip the projection vector
-		proj = -proj
-		pass
-	
-	# Get the 2D components
-	var xaspect = adjust.dot(rightvec)
-	var yaspect = adjust.dot(upvec)
-	
-	# Get the cross section of the cone
-	var constraint_angles = get_bone_constraints(bone)
-	var left = -(proj.length() * tan(deg2rad(constraint_angles[0])) )
-	var right = (proj.length() * tan(deg2rad(constraint_angles[1])) )
-	var up = (proj.length() * tan(deg2rad(constraint_angles[2])) )
-	var down = -(proj.length() * tan(deg2rad(constraint_angles[3])) )
-	
-	# Find the quadrant
-	var xbound = xaspect >= 0 and right or left
-	var ybound = yaspect >= 0 and up or down
-	
-	if xbound == true:
-		xbound = 1
-	else:
-		xbound = 0
-	if ybound == true:
-		ybound = 1
-	else:
-		ybound = 0
-	
-	
-	var f = calc
-	# Check if in 2D point lies in the ellipse
-	var ellipse = pow(xaspect, 2)/pow(xbound, 2) + pow(yaspect, 2)/pow(ybound, 2)
-	var inbounds = ellipse <= 1 and scalar >= 0
-	
-	if not inbounds:
-		# Get the angle of our out of ellipse point
-		var a = atan2(yaspect, xaspect)
-		# Find the nearest point
-		var x = xbound * cos(a)
-		var y = ybound * sin(a)
-		# Convert back to 3D
-		#f = (proj + rightvec * x + upvec * y ).normalized() * calc.length()
-		f = (proj + rightvec * x + upvec * y ).normalized() * bones_in_chain_lengths[bone]
-	
-	return f
-"""
 
 
 func chain_apply_rotation():

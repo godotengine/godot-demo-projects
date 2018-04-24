@@ -5,9 +5,9 @@ export (NodePath) var skeleton_path setget _set_skeleton_path
 export (String) var bone_name = ""
 export (int, "_process", "_physics_process", "_notification", "none") var update_mode = 0 setget _set_update
 export (int, "X-up", "Y-up", "Z-up") var look_at_axis = 1
-export (bool) var use_our_rot_x = false
-export (bool) var use_our_rot_y = false
-export (bool) var use_our_rot_z = false
+export (bool) var use_our_rotation_x = false
+export (bool) var use_our_rotation_y = false
+export (bool) var use_our_rotation_z = false
 export (bool) var use_negative_our_rot = false
 export (Vector3) var additional_rotation = Vector3()
 export (bool) var debug_messages = false
@@ -174,11 +174,11 @@ func update_skeleton():
 		self_euler = -self_euler
 	
 	# Apply our rotation euler, if wanted/required
-	if use_our_rot_x == true:
+	if use_our_rotation_x == true:
 		rest_euler.x = self_euler.x
-	if use_our_rot_y == true:
+	if use_our_rotation_y == true:
 		rest_euler.y = self_euler.y
-	if use_our_rot_z == true:
+	if use_our_rotation_z == true:
 		rest_euler.z = self_euler.z
 	
 	# Rotate the bone by the (potentially) changed euler angle(s)

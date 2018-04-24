@@ -1,12 +1,12 @@
 [gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://addons/sade/editor_gizmo_texture.png" type="Texture" id=1]
-[ext_resource path="res://Button_Change_Scene.gd" type="Script" id=2]
+[ext_resource path="res://button_change_scene.gd" type="Script" id=2]
 [ext_resource path="res://example_player.gd" type="Script" id=3]
 [ext_resource path="res://addons/sade/ik_look_at.gd" type="Script" id=4]
 [ext_resource path="res://addons/sade/ik_look_at.png" type="Texture" id=5]
-[ext_resource path="res://addons/SADE/IK_FABRIK.gd" type="Script" id=6]
-[ext_resource path="res://addons/SADE/IK_FABRIK.png" type="Texture" id=7]
+[ext_resource path="res://addons/sade/ik_fabrik.gd" type="Script" id=6]
+[ext_resource path="res://addons/sade/ik_fabrik.png" type="Texture" id=7]
 [ext_resource path="res://weapon_pistol.dae" type="PackedScene" id=8]
 [ext_resource path="res://godot_battle_bot.dae" type="PackedScene" id=9]
 
@@ -429,7 +429,7 @@ tracks/2/keys = {
 "values": [ 80.0 ]
 }
 
-[node name="LookAt_IK" type="Spatial" index="0"]
+[node name="LookAt_IK" type="Spatial"]
 
 [node name="Level" type="Spatial" parent="." index="0"]
 
@@ -1382,7 +1382,7 @@ curve = SubResource( 11 )
 
 [node name="PathFollow" type="PathFollow" parent="KinematicBody/CameraHolder/Lean_Path" index="0"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0412404, 0.205172, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0412405, 0.205172, 0 )
 offset = 2.71865
 h_offset = 0.0
 v_offset = 0.0
@@ -1402,9 +1402,9 @@ skeleton_path = NodePath("../../../../BattleBot/Armature/Skeleton")
 bone_name = "Chest"
 update_mode = 0
 look_at_axis = 2
-use_our_rot_x = false
-use_our_rot_y = false
-use_our_rot_z = false
+use_our_rotation_x = false
+use_our_rotation_y = false
+use_our_rotation_z = false
 use_negative_our_rot = false
 additional_rotation = Vector3( -10, 0, 0 )
 debug_messages = false
@@ -1463,9 +1463,9 @@ skeleton_path = NodePath("../../../../../../../../BattleBot/Armature/Skeleton")
 bone_name = "Left_Hand"
 update_mode = 0
 look_at_axis = 1
-use_our_rot_x = false
-use_our_rot_y = false
-use_our_rot_z = true
+use_our_rotation_x = false
+use_our_rotation_y = false
+use_our_rotation_z = false
 use_negative_our_rot = true
 additional_rotation = Vector3( 0, 0, 90 )
 debug_messages = false
@@ -1517,9 +1517,9 @@ skeleton_path = NodePath("../../../../../../../../BattleBot/Armature/Skeleton")
 bone_name = "Right_Hand"
 update_mode = 0
 look_at_axis = 1
-use_our_rot_x = false
-use_our_rot_y = false
-use_our_rot_z = true
+use_our_rotation_x = false
+use_our_rotation_y = false
+use_our_rotation_z = false
 use_negative_our_rot = true
 additional_rotation = Vector3( 0, 0, 90 )
 debug_messages = false
@@ -1557,9 +1557,9 @@ skeleton_path = NodePath("../../../../BattleBot/Armature/Skeleton")
 bone_name = "Head"
 update_mode = 0
 look_at_axis = 1
-use_our_rot_x = false
-use_our_rot_y = false
-use_our_rot_z = false
+use_our_rotation_x = false
+use_our_rotation_y = false
+use_our_rotation_z = false
 use_negative_our_rot = false
 additional_rotation = Vector3( 0, 0, 0 )
 debug_messages = false
