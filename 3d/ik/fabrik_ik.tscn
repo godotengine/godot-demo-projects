@@ -1,13 +1,15 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://addons/sade/editor_gizmo_texture.png" type="Texture" id=1]
 [ext_resource path="res://godot_battle_bot.dae" type="PackedScene" id=2]
-[ext_resource path="res://target_from_mousepos.gd" type="Script" id=3]
-[ext_resource path="res://addons/sade/ik_look_at.gd" type="Script" id=4]
-[ext_resource path="res://addons/sade/ik_look_at.png" type="Texture" id=5]
-[ext_resource path="res://addons/sade/ik_fabrik.gd" type="Script" id=6]
-[ext_resource path="res://addons/sade/ik_fabrik.png" type="Texture" id=7]
-[ext_resource path="res://button_change_scene.gd" type="Script" id=8]
+[ext_resource path="res://battle_bot_color.tres" type="Material" id=3]
+[ext_resource path="res://battle_bot_emission.tres" type="Material" id=4]
+[ext_resource path="res://target_from_mousepos.gd" type="Script" id=5]
+[ext_resource path="res://addons/sade/ik_look_at.gd" type="Script" id=6]
+[ext_resource path="res://addons/sade/ik_look_at.png" type="Texture" id=7]
+[ext_resource path="res://addons/sade/ik_fabrik.gd" type="Script" id=8]
+[ext_resource path="res://addons/sade/ik_fabrik.png" type="Texture" id=9]
+[ext_resource path="res://button_change_scene.gd" type="Script" id=10]
 
 [sub_resource type="PlaneMesh" id=1]
 
@@ -227,7 +229,7 @@ proximity_fade_enable = false
 distance_fade_enable = false
 _sections_unfolded = [ "Albedo" ]
 
-[node name="FABRIK_IK" type="Spatial"]
+[node name="FABRIK_IK" type="Spatial" index="0"]
 
 [node name="Floor_plane" type="MeshInstance" parent="." index="0"]
 
@@ -278,10 +280,15 @@ environment = SubResource( 4 )
 
 [node name="BattleBot" parent="." index="3" instance=ExtResource( 2 )]
 
-editor/display_folded = true
+[node name="godot_battle_bot" parent="BattleBot/Armature/Skeleton" index="0"]
+
+material/0 = ExtResource( 3 )
+material/1 = ExtResource( 4 )
+_sections_unfolded = [ "material" ]
 
 [node name="Camera" type="Camera" parent="." index="4"]
 
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5014, 8.81922 )
 keep_aspect = 1
 cull_mask = 1048575
@@ -295,7 +302,7 @@ fov = 70.0
 size = 1.0
 near = 0.05
 far = 100.0
-script = ExtResource( 3 )
+script = ExtResource( 5 )
 MOVEMENT_SPEED = -6.0
 flip_axis = true
 
@@ -305,10 +312,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.41814 )
 
 [node name="IK_LookAt_Head" type="Spatial" parent="Camera/targets" index="0"]
 
-script = ExtResource( 4 )
+script = ExtResource( 6 )
 _sections_unfolded = [ "Transform" ]
 __meta__ = {
-"_editor_icon": ExtResource( 5 )
+"_editor_icon": ExtResource( 7 )
 }
 skeleton_path = NodePath("../../../BattleBot/Armature/Skeleton")
 bone_name = "Head"
@@ -324,9 +331,9 @@ debug_messages = false
 [node name="IK_FABRIK_Left_Arm" type="Spatial" parent="Camera/targets" index="1"]
 
 editor/display_folded = true
-script = ExtResource( 6 )
+script = ExtResource( 8 )
 __meta__ = {
-"_editor_icon": ExtResource( 7 )
+"_editor_icon": ExtResource( 9 )
 }
 skeleton_path = NodePath("../../../BattleBot/Armature/Skeleton")
 bones_in_chain = PoolStringArray( "Left_UpperArm", "Left_LowerArm" )
@@ -345,9 +352,9 @@ transform = Transform( 0.518503, 0, -0.855076, 0, 1, 0, 0.855076, 0, 0.518503, 1
 [node name="IK_LookAt_LH" type="Spatial" parent="Camera/targets/IK_FABRIK_Left_Arm/target" index="0"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.343393, -0.133381, 0.836605 )
-script = ExtResource( 4 )
+script = ExtResource( 6 )
 __meta__ = {
-"_editor_icon": ExtResource( 5 )
+"_editor_icon": ExtResource( 7 )
 }
 skeleton_path = NodePath("../../../../../BattleBot/Armature/Skeleton")
 bone_name = "Left_Hand"
@@ -375,9 +382,9 @@ transform = Transform( -0.773622, -0.022882, 0.633234, 1.49012e-08, 0.999348, 0.
 [node name="IK_FABRIK_Right_Arm" type="Spatial" parent="Camera/targets" index="2"]
 
 editor/display_folded = true
-script = ExtResource( 6 )
+script = ExtResource( 8 )
 __meta__ = {
-"_editor_icon": ExtResource( 7 )
+"_editor_icon": ExtResource( 9 )
 }
 skeleton_path = NodePath("../../../BattleBot/Armature/Skeleton")
 bones_in_chain = PoolStringArray( "Right_UpperArm", "Right_LowerArm", "Right_Hand" )
@@ -396,9 +403,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.229958, 0, 0.929313 )
 [node name="IK_LookAt_RH" type="Spatial" parent="Camera/targets/IK_FABRIK_Right_Arm/target" index="0"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0544824, -0.133381, 0.332403 )
-script = ExtResource( 4 )
+script = ExtResource( 6 )
 __meta__ = {
-"_editor_icon": ExtResource( 5 )
+"_editor_icon": ExtResource( 7 )
 }
 skeleton_path = NodePath("../../../../../BattleBot/Armature/Skeleton")
 bone_name = "Right_Hand"
@@ -425,7 +432,7 @@ transform = Transform( -0.792023, 0.0165762, -0.610266, 0, 0.999631, 0.0271522, 
 
 [node name="Right_Hand" type="Spatial" parent="Camera/targets/IK_FABRIK_Right_Arm" index="4"]
 
-transform = Transform( -0.678313, 0.00695222, -0.73474, 9.31323e-10, 0.999955, 0.00946173, 0.734773, 0.00641802, -0.678282, -1.0791, 0.0200329, 0.0379918 )
+transform = Transform( -0.678334, 0.00700453, -0.73472, 1.39698e-09, 0.999955, 0.00953316, 0.734753, 0.00646667, -0.678303, -1.07909, 0.0201073, 0.0379558 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Camera/targets" index="3"]
 
@@ -595,7 +602,7 @@ group = null
 text = "Next scene"
 flat = false
 align = 1
-script = ExtResource( 8 )
+script = ExtResource( 10 )
 scene_to_change_to = "res://fps_example.tscn"
 
 [node name="Button_Previous" type="Button" parent="Control" index="2"]
@@ -622,7 +629,7 @@ group = null
 text = "Previous scene"
 flat = false
 align = 1
-script = ExtResource( 8 )
+script = ExtResource( 10 )
 scene_to_change_to = "res://look_at_ik.tscn"
 
 

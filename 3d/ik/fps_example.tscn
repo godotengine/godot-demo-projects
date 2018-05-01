@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://addons/sade/editor_gizmo_texture.png" type="Texture" id=1]
 [ext_resource path="res://button_change_scene.gd" type="Script" id=2]
@@ -8,7 +8,11 @@
 [ext_resource path="res://addons/sade/ik_fabrik.gd" type="Script" id=6]
 [ext_resource path="res://addons/sade/ik_fabrik.png" type="Texture" id=7]
 [ext_resource path="res://weapon_pistol.dae" type="PackedScene" id=8]
-[ext_resource path="res://godot_battle_bot.dae" type="PackedScene" id=9]
+[ext_resource path="res://gun_color.tres" type="Material" id=9]
+[ext_resource path="res://gun_emission.tres" type="Material" id=10]
+[ext_resource path="res://godot_battle_bot.dae" type="PackedScene" id=11]
+[ext_resource path="res://battle_bot_color.tres" type="Material" id=12]
+[ext_resource path="res://battle_bot_emission.tres" type="Material" id=13]
 
 [sub_resource type="PlaneMesh" id=1]
 
@@ -1586,13 +1590,23 @@ transform = Transform( 0.999391, 0, -0.0348995, 0, 1, 0, 0.0348995, 0, 0.999391,
 [node name="Pistol_textured" parent="KinematicBody/CameraHolder/Weapon/Pistol" index="0"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-_sections_unfolded = [ "Transform" ]
+material/0 = ExtResource( 9 )
+material/1 = ExtResource( 10 )
+_sections_unfolded = [ "Transform", "material" ]
 
 [node name="Pistol_end" type="Spatial" parent="KinematicBody/CameraHolder/Weapon/Pistol" index="1"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0161836, 0.315914, 1.41329 )
 
-[node name="BattleBot" parent="KinematicBody" index="2" instance=ExtResource( 9 )]
+[node name="BattleBot" parent="KinematicBody" index="2" instance=ExtResource( 11 )]
+
+editor/display_folded = true
+
+[node name="godot_battle_bot" parent="KinematicBody/BattleBot/Armature/Skeleton" index="0"]
+
+material/0 = ExtResource( 12 )
+material/1 = ExtResource( 13 )
+_sections_unfolded = [ "material" ]
 
 
 [editable path="KinematicBody/CameraHolder/Weapon/Pistol"]
