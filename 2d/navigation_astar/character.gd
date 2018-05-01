@@ -18,7 +18,7 @@ func _ready():
 func _change_state(new_state):
 	if new_state == FOLLOW:
 		path = get_parent().get_node('TileMap').get_path(position, target_position)
-		if not path:
+		if not path or len(path) == 1:
 			_change_state(IDLE)
 			return
 		# The index 0 is the starting cell
