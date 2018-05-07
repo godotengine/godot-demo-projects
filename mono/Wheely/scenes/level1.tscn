@@ -1,0 +1,95 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/Player.cs" type="Script" id=1]
+[ext_resource path="res://media/player.png" type="Texture" id=2]
+[ext_resource path="res://src/PlatformCollision.cs" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 12.1689
+
+[node name="main" type="Node2D" index="0"]
+
+_sections_unfolded = [ "Transform" ]
+
+[node name="Player" type="KinematicBody2D" parent="." index="0"]
+
+position = Vector2( 40.9198, 323.644 )
+input_pickable = true
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Player" index="0"]
+
+position = Vector2( 2.26469, 1.31337 )
+scale = Vector2( 0.342427, 0.342427 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Collision" type="CollisionShape2D" parent="Player" index="1"]
+
+position = Vector2( 2.32071, 1.28775 )
+scale = Vector2( 1.12074, 1.11832 )
+shape = SubResource( 1 )
+
+[node name="Platforms" type="StaticBody2D" parent="." index="1"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="PlatformCollision" type="CollisionPolygon2D" parent="Platforms" index="0"]
+
+position = Vector2( -243.013, 124.592 )
+build_mode = 0
+polygon = PoolVector2Array( 183.324, 299.951, 182.889, -100.055, 254.911, -100.055, 255.422, 227.607, 488.692, 227.607, 591.822, 169.903, 591.822, 225.151, 710.913, 225.151, 738.341, 220.929, 766.139, 213.614, 791.498, 201.422, 809.054, 186.304, 829.767, 155.427, 845.334, 125.07, 862.098, 81.9612, 866.888, 61.0692, 867.949, 41.7332, 865.314, 25.6585, 860.571, 15.5788, 853.192, 7.93676, 840.016, 1.61227, 825.786, -0.495888, 811.029, -1.28645, 792.846, -1.28645, 792.984, -26.7587, 926.238, -26.3092, 929.123, 301.802 )
+script = ExtResource( 3 )
+
+[node name="VisiblePolygon" type="Polygon2D" parent="Platforms/PlatformCollision" index="0"]
+
+polygon = PoolVector2Array(  )
+uv = PoolVector2Array(  )
+color = Color( 1, 1, 1, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+_sections_unfolded = [ "Pause" ]
+
+[node name="PlatformCollision2" type="CollisionPolygon2D" parent="Platforms" index="1"]
+
+position = Vector2( 309.837, -13.9389 )
+scale = Vector2( 0.459089, 0.875961 )
+build_mode = 0
+polygon = PoolVector2Array( 548.897, 246.965, 555.055, 247.258, 560.361, 247.893, 564.852, 249.312, 569.051, 250.779, 573.53, 253.42, 577.169, 256.354, 579.129, 259.435, 580.528, 262.81, 581.928, 266.184, 581.844, 270.797, 579.234, 274.216, 571.637, 277.25, 561.507, 279.146, 551.016, 280.094, 537.269, 280.284, 350.705, 279.047, 100.234, 273.773, -282.833, 275.531, -581.229, 271.429, -584.584, 129.609, -515.257, 256.778, -465.022, 256.982, -458.051, 233.182, -450.757, 245.287, -445.453, 231.388, -437.498, 247.14, -426.89, 233.55, -419.229, 251.927, -409.799, 240.654, -392.691, 250.791, -387.174, 229.333, -370.933, 239.908, -366.504, 226.238, -351.408, 234.13, -328.61, 230.992, -314.419, 217.973, -298.765, 246.689, -272.232, 234.492, -238.85, 258.985, -183.518, 259.309, -176.907, 172.537, -119.44, 238.017, -98.8402, 238.293, -97.2872, 238.208, -96.4698, 237.951, -96.1429, 237.48, -95.8721, 237.029, -95.7635, 236.517, -95.4382, 236.091, -94.6248, 235.835, -93.8657, 236.119, -93.215, 236.716, -92.9439, 237.398, -92.3474, 237.796, -91.1545, 238.023, -82.5052, 238.052, -81.8003, 237.739, -81.3665, 237.142, -81.0954, 236.489, -80.77, 235.949, -80.0651, 235.664, -79.0349, 235.863, -78.7094, 236.403, -78.5212, 237.248, -77.5275, 238.091, -76.1458, 238.625, -71.0015, 239.272, -64.0006, 239.218, -59.915, 238.732, -55.6437, 238.634, -51.558, 238.926, -47.101, 239.413, -41.5297, 239.802, -35.2714, 239.435, -28.7415, 238.355, -22.2116, 237.814, -15.338, 239.255, -9.15186, 240.696, -1.59088, 241.236, 3.90796, 240.336, 10.4379, 238.355, 17.3115, 237.454, 25.5598, 239.075, 32.0897, 241.417, 39.5825, 242.497, 45.0814, 241.777, 49.8929, 239.796, 53.6734, 236.733, 57.6323, 233.17, 65.5803, 231.455, 72.5933, 234.395, 77.7361, 238.561, 81.9438, 242.236, 91.2945, 243.952, 99.7101, 242.971, 106.723, 239.786, 109.996, 234.395, 112.801, 228.27, 117.476, 223.859, 124.022, 222.389, 131.97, 223.369, 138.515, 226.809, 142.723, 231.709, 146.463, 236.855, 153.944, 241.511, 165.165, 244.451, 175.443, 244.918, 189.124, 244.679, 200.296, 243.604, 212.608, 242.887, 225.052, 243.121, 235.601, 244.669, 247.137, 246.001, 257.062, 246.489, 266.057, 246.489, 275.982, 245.839, 284.977, 244.701, 293.662, 242.912, 301.416, 241.937, 309.481, 241.449, 316.73, 241.951, 324.848, 243.272, 333.526, 244.885, 344.443, 246.059, 353.121, 245.472, 359.559, 243.565, 364.878, 240.631, 371.596, 237.99, 379.994, 237.697, 386.432, 239.897, 390.803, 243.215, 396.401, 246.443, 404.239, 248.056, 414.317, 248.497, 424.114, 247.323, 429.993, 244.682, 433.912, 241.161, 438.111, 236.32, 441.19, 230.891, 444.549, 226.49, 448.468, 224.436, 454.627, 221.942, 463.024, 220.915, 471.422, 221.942, 478.7, 225.17, 484.019, 228.984, 489.338, 235.293, 496.056, 239.694, 505.294, 243.508, 514.811, 245.709, 524.004, 246.463, 533.626, 246.657 )
+script = ExtResource( 3 )
+
+[node name="VisiblePolygon" type="Polygon2D" parent="Platforms/PlatformCollision2" index="0"]
+
+polygon = PoolVector2Array(  )
+uv = PoolVector2Array(  )
+color = Color( 1, 1, 1, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+_sections_unfolded = [ "Pause" ]
+
+
