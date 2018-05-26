@@ -110,7 +110,7 @@ var sku_details = {}
 # callback : sku_details_complete
 func sku_details_query(list):
 	if payment:
-		var sku_list = StringArray(list)
+		var sku_list = PoolStringArray(list)
 		payment.querySkuDetails(sku_list)
 
 func sku_details_complete(result):
