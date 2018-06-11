@@ -1,6 +1,6 @@
 extends TileMap
 
-enum CELL_TYPES { ACTOR, OBSTACLE, OBJECT }
+enum CELL_TYPES { EMPTY = -1, ACTOR, OBSTACLE, OBJECT}
 
 func _ready():
 	for child in get_children():
@@ -19,7 +19,7 @@ func request_move(pawn, direction):
 	
 	var cell_target_type = get_cellv(cell_target)
 	match cell_target_type:
-		-1:
+		EMPTY:
 			return update_pawn_position(pawn, cell_start, cell_target)
 		OBJECT:
 			var object_pawn = get_cell_pawn(cell_target)
@@ -32,5 +32,5 @@ func request_move(pawn, direction):
 
 func update_pawn_position(pawn, cell_start, cell_target):
 	set_cellv(cell_target, pawn.type)
-	set_cellv(cell_start, -1)
+	set_cellv(cell_start, EMPTY)
 	return map_to_world(cell_target) + cell_size / 2
