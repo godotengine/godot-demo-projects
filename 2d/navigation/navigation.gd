@@ -32,7 +32,7 @@ func move_along_path(distance):
 	for index in range(path.size()):
 		var distance_between_points = last_point.distance_to(path[0])
 		# the position to move to falls between two points
-		if distance <= distance_between_points:
+		if distance <= distance_between_points and distance >= 0.0:
 			$Character.position = last_point.linear_interpolate(path[0], distance / distance_between_points)
 			break
 		# the character reached the end of the path
