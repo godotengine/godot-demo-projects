@@ -8,5 +8,5 @@ func _ready():
 func _physics_process(delta):
 	rect_position = $"../BodyPivot".position + start_position
 
-func _on_Player_state_changed(states_stack):
-	text = states_stack[0].get_name()
+func _on_StateMachine_state_changed(current_state):
+	text = current_state.get_name()

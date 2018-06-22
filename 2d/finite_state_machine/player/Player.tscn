@@ -1,21 +1,20 @@
 [gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://player/state-machine.gd" type="Script" id=1]
-[ext_resource path="res://player/shadow.png" type="Texture" id=2]
-[ext_resource path="res://player/body.png" type="Texture" id=3]
-[ext_resource path="res://player/weapon/weapon_pivot.gd" type="Script" id=4]
-[ext_resource path="res://player/weapon/Sword.tscn" type="PackedScene" id=5]
-[ext_resource path="res://player/health/Health.tscn" type="PackedScene" id=6]
-[ext_resource path="res://player/states/motion/on_ground/idle.gd" type="Script" id=7]
-[ext_resource path="res://player/states/motion/on_ground/move.gd" type="Script" id=8]
-[ext_resource path="res://player/states/motion/in_air/jump.gd" type="Script" id=9]
-[ext_resource path="res://player/states/combat/stagger.gd" type="Script" id=10]
-[ext_resource path="res://player/states/combat/attack.gd" type="Script" id=11]
-[ext_resource path="res://player/states/die.gd" type="Script" id=12]
+[ext_resource path="res://player/player_controller.gd" type="Script" id=1]
+[ext_resource path="res://player/player_state_machine.gd" type="Script" id=2]
+[ext_resource path="res://player/states/motion/on_ground/idle.gd" type="Script" id=3]
+[ext_resource path="res://player/states/motion/on_ground/move.gd" type="Script" id=4]
+[ext_resource path="res://player/states/motion/in_air/jump.gd" type="Script" id=5]
+[ext_resource path="res://player/states/combat/stagger.gd" type="Script" id=6]
+[ext_resource path="res://player/states/combat/attack.gd" type="Script" id=7]
+[ext_resource path="res://player/states/die.gd" type="Script" id=8]
+[ext_resource path="res://player/shadow.png" type="Texture" id=9]
+[ext_resource path="res://player/body.png" type="Texture" id=10]
+[ext_resource path="res://player/weapon/weapon_pivot.gd" type="Script" id=11]
+[ext_resource path="res://player/weapon/Sword.tscn" type="PackedScene" id=12]
 [ext_resource path="res://player/bullet/bullet_spawner.gd" type="Script" id=13]
 [ext_resource path="res://fonts/SourceCodePro-Bold.ttf" type="DynamicFontData" id=14]
-[ext_resource path="res://player/states/debug/state-name-displayer.gd" type="Script" id=15]
-
+[ext_resource path="res://player/states/debug/state_name_displayer.gd" type="Script" id=15]
 
 [sub_resource type="Animation" id=1]
 
@@ -55,7 +54,7 @@ use_filter = true
 font_data = ExtResource( 14 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" index="0"]
 
 position = Vector2( 628.826, 391.266 )
 input_pickable = false
@@ -68,7 +67,45 @@ __meta__ = {
 "_edit_horizontal_guides_": [  ]
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
+[node name="StateMachine" type="Node" parent="." index="0"]
+
+script = ExtResource( 2 )
+START_STATE = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" index="0"]
+
+script = ExtResource( 3 )
+
+[node name="Move" type="Node" parent="StateMachine" index="1"]
+
+script = ExtResource( 4 )
+MAX_WALK_SPEED = 450
+MAX_RUN_SPEED = 700
+
+[node name="Jump" type="Node" parent="StateMachine" index="2"]
+
+script = ExtResource( 5 )
+BASE_MAX_HORIZONTAL_SPEED = 400.0
+AIR_ACCELERATION = 1000.0
+AIR_DECCELERATION = 2000.0
+AIR_STEERING_POWER = 50.0
+JUMP_HEIGHT = 120.0
+JUMP_DURATION = 0.8
+GRAVITY = 1600.0
+
+[node name="Stagger" type="Node" parent="StateMachine" index="3"]
+
+script = ExtResource( 6 )
+
+[node name="Attack" type="Node" parent="StateMachine" index="4"]
+
+script = ExtResource( 7 )
+
+[node name="Die" type="Node" parent="StateMachine" index="5"]
+
+script = ExtResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 
 root_node = NodePath("..")
 autoplay = ""
@@ -80,74 +117,40 @@ anims/stagger = SubResource( 2 )
 anims/walk = SubResource( 3 )
 blend_times = [  ]
 
-[node name="Shadow" type="Sprite" parent="." index="1"]
+[node name="Shadow" type="Sprite" parent="." index="2"]
 
 self_modulate = Color( 1, 1, 1, 0.361098 )
 position = Vector2( 0, -4 )
-texture = ExtResource( 2 )
+texture = ExtResource( 9 )
 _sections_unfolded = [ "Visibility" ]
 
-[node name="BodyPivot" type="Position2D" parent="." index="2"]
+[node name="BodyPivot" type="Position2D" parent="." index="3"]
+
+editor/display_folded = true
 
 [node name="Body" type="Sprite" parent="BodyPivot" index="0"]
 
 position = Vector2( 0, -58.8242 )
-texture = ExtResource( 3 )
+texture = ExtResource( 10 )
 
-[node name="WeaponPivot" type="Position2D" parent="." index="3"]
+[node name="WeaponPivot" type="Position2D" parent="." index="4"]
 
+editor/display_folded = true
 position = Vector2( 1.17401, -61.266 )
-script = ExtResource( 4 )
+script = ExtResource( 11 )
 
 [node name="Offset" type="Position2D" parent="WeaponPivot" index="0"]
 
 position = Vector2( 110, 0 )
 
-[node name="Sword" parent="WeaponPivot/Offset" index="0" instance=ExtResource( 5 )]
+[node name="Sword" parent="WeaponPivot/Offset" index="0" instance=ExtResource( 12 )]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="4"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="5"]
 
 build_mode = 0
 polygon = PoolVector2Array( -20, 0, -20, -20, 20, -20, 20, 0 )
 
-[node name="Health" parent="." index="5" instance=ExtResource( 6 )]
-
-[node name="States" type="Node" parent="." index="6"]
-
-[node name="Idle" type="Node" parent="States" index="0"]
-
-script = ExtResource( 7 )
-
-[node name="Move" type="Node" parent="States" index="1"]
-
-script = ExtResource( 8 )
-MAX_WALK_SPEED = 450
-MAX_RUN_SPEED = 700
-
-[node name="Jump" type="Node" parent="States" index="2"]
-
-script = ExtResource( 9 )
-BASE_MAX_HORIZONTAL_SPEED = 400.0
-AIR_ACCELERATION = 1000.0
-AIR_DECCELERATION = 2000.0
-AIR_STEERING_POWER = 50.0
-JUMP_HEIGHT = 120.0
-JUMP_DURATION = 0.8
-GRAVITY = 1600.0
-
-[node name="Stagger" type="Node" parent="States" index="3"]
-
-script = ExtResource( 10 )
-
-[node name="Attack" type="Node" parent="States" index="4"]
-
-script = ExtResource( 11 )
-
-[node name="Die" type="Node" parent="States" index="5"]
-
-script = ExtResource( 12 )
-
-[node name="BulletSpawn" type="Node2D" parent="." index="7"]
+[node name="BulletSpawn" type="Node2D" parent="." index="6"]
 
 editor/display_folded = true
 position = Vector2( 1.17401, -61.266 )
@@ -161,7 +164,7 @@ wait_time = 0.2
 one_shot = true
 autostart = false
 
-[node name="StateNameDisplayer" type="Label" parent="." index="8"]
+[node name="StateNameDisplayer" type="Label" parent="." index="7"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -189,10 +192,12 @@ max_lines_visible = -1
 script = ExtResource( 15 )
 _sections_unfolded = [ "Rect", "custom_fonts" ]
 
-[connection signal="state_changed" from="." to="StateNameDisplayer" method="_on_Player_state_changed"]
+[connection signal="state_changed" from="StateMachine" to="StateNameDisplayer" method="_on_StateMachine_state_changed"]
 
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
+[connection signal="state_changed" from="StateMachine" to="WeaponPivot/Offset/Sword" method="_on_StateMachine_state_changed"]
 
-[connection signal="attack_finished" from="WeaponPivot/Offset/Sword" to="States/Attack" method="_on_Sword_attack_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_finished"]
+
+[connection signal="attack_finished" from="WeaponPivot/Offset/Sword" to="StateMachine/Attack" method="_on_Sword_attack_finished"]
 
 
