@@ -1,4 +1,3 @@
-tool
 extends Panel
 
 onready var fsm_node = get_node("../Player/StateMachine")
