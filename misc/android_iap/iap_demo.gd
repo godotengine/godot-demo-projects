@@ -52,7 +52,7 @@ func on_consume_fail():
 	alert.popup()
 
 func on_sku_details_complete():
-	alert.set_text("Got detail info : " + iap.sku_details["item_test_a"].to_json())
+	alert.set_text("Got detail info : " + to_json(iap.sku_details["item_test_a"]))
 	alert.popup()
 
 
