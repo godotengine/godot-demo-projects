@@ -20,7 +20,7 @@ onready var payment = Engine.get_singleton("GodotPayments")
 func _ready():
 	if payment:
 		# set callback with this script instance
-		payment.setPurchaseCallbackId(get_instance_ID())
+		payment.setPurchaseCallbackId(get_instance_id())
 
 # set consume purchased item automatically after purchase, defulat value is true
 func set_auto_consume(auto):
