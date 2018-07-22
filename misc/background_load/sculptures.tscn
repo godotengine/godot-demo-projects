@@ -1,0 +1,162 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://sculptures.gd" type="Script" id=1]
+[ext_resource path="res://sculpture_fountain.jpg" type="Texture" id=2]
+[ext_resource path="res://sculpture_four_parts_of_earth.jpg" type="Texture" id=3]
+[ext_resource path="res://sculpture_david.jpg" type="Texture" id=4]
+[ext_resource path="res://sculpture_lincoln.jpg" type="Texture" id=5]
+[ext_resource path="res://sculpture_thinker.jpg" type="Texture" id=6]
+[ext_resource path="res://sculpture_venus.png" type="Texture" id=7]
+
+[sub_resource type="Animation" id=1]
+
+resource_name = "colorcycle"
+length = 8.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("sculpture_four_parts_of_earth:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.827451, 0.25098, 0.25098, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("sculpture_fountain:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("sculpture_lincoln:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 4.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.32549, 0.407843, 0.862745, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("sculpture_david:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 4.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.180392, 0.866667, 0.137255, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("sculpture_thinker:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 4.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.898039, 0, 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("sculpture_venus:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 4.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[node name="Node2D" type="Node2D" index="0"]
+script = ExtResource( 1 )
+
+[node name="sculpture_fountain" type="Sprite" parent="." index="0"]
+position = Vector2( 152.971, 513.499 )
+scale = Vector2( 0.191615, 0.191615 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="sculpture_four_parts_of_earth" type="Sprite" parent="." index="1"]
+position = Vector2( 480.743, 588.027 )
+scale = Vector2( 0.198693, 0.198693 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="sculpture_david" type="Sprite" parent="." index="2"]
+position = Vector2( 567.784, 196.577 )
+scale = Vector2( 0.447348, 0.447348 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="sculpture_lincoln" type="Sprite" parent="." index="3"]
+position = Vector2( 211.852, 203.688 )
+scale = Vector2( 0.386179, 0.378971 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="sculpture_thinker" type="Sprite" parent="." index="4"]
+position = Vector2( 854.336, 202.363 )
+scale = Vector2( 0.182302, 0.182302 )
+texture = ExtResource( 6 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="sculpture_venus" type="Sprite" parent="." index="5"]
+position = Vector2( 848.731, 495.153 )
+scale = Vector2( 0.402249, 0.402249 )
+texture = ExtResource( 7 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+root_node = NodePath("..")
+autoplay = "colorcycle"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/colorcycle = SubResource( 1 )
+blend_times = [  ]
+
+[node name="switch" type="Button" parent="." index="7"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 5.0
+margin_top = 6.0
+margin_right = 137.0
+margin_bottom = 26.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Switch to Paintings"
+flat = false
+align = 1
+
+[connection signal="pressed" from="switch" to="." method="_on_switch_pressed"]
