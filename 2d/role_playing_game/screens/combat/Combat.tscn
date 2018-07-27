@@ -1,0 +1,244 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://turn_combat_system/turn_queue/TurnQueue.tscn" type="PackedScene" id=1]
+[ext_resource path="res://theme/theme.tres" type="Theme" id=2]
+[ext_resource path="res://screens/combat/interface/UI.gd" type="Script" id=3]
+[ext_resource path="res://screens/combat/interface/ActorInfo.tscn" type="PackedScene" id=4]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Node
+
+signal combat_finished(winner, loser)
+
+func initialize(combat_actors):
+	for actor in combat_actors:
+		actor = actor.instance()
+		if actor is load(\"res://turn_combat_system/actors/Actor.gd\"):
+			$Actors.add_actor(actor)
+			actor.get_node(\"Health\").connect(\"dead\", self, \"_on_actor_death\", [actor])
+		else:
+			actor.queue_free()
+	$UI.initialize()
+	$TurnQueue.initialize()
+	$TurnQueue.play_turn()
+	$UI/Buttons/GridContainer/Attack.grab_focus()
+
+func _on_actor_death(actor):
+	var winner
+	if not actor.name == \"Player\":
+		winner = $Actors/Player
+	else:
+		for n in $Actors.get_children():
+			if not n.name == \"Player\":
+				winner = n
+				break
+	emit_signal(\"combat_finished\", winner, actor)
+	
+func clear_combat():
+	for n in $Actors.get_children():
+		n.queue_free()
+	for n in $UI/Actors.get_children():
+		n.queue_free()"
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "extends Node2D
+
+func add_actor(actor):
+	actor.position.x += 200 * get_child_count()
+	add_child(actor)"
+
+[node name="Combat" type="Node2D"]
+
+script = SubResource( 1 )
+
+[node name="TurnQueue" parent="." index="0" instance=ExtResource( 1 )]
+
+actors_node = NodePath("../Actors")
+
+[node name="Actors" type="Node2D" parent="." index="1"]
+
+position = Vector2( 539, 275 )
+script = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="UI" type="Control" parent="." index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1280.0
+margin_bottom = 720.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 2 )
+script = ExtResource( 3 )
+_sections_unfolded = [ "Theme" ]
+actors_node = NodePath("../Actors")
+actor_info = ExtResource( 4 )
+
+[node name="Actors" type="HBoxContainer" parent="UI" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 77.0
+margin_right = 1280.0
+margin_bottom = 328.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_constants/separation = 360
+alignment = 0
+_sections_unfolded = [ "custom_constants" ]
+
+[node name="Buttons" type="PanelContainer" parent="UI" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 80.0
+margin_top = 376.0
+margin_right = 1200.0
+margin_bottom = 698.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Theme" ]
+
+[node name="GridContainer" type="GridContainer" parent="UI/Buttons" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 90.0
+margin_top = 35.0
+margin_right = 1030.0
+margin_bottom = 277.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+_sections_unfolded = [ "Size Flags" ]
+
+[node name="Attack" type="Button" parent="UI/Buttons/GridContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 468.0
+margin_bottom = 119.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Attack"
+flat = false
+align = 1
+
+[node name="Deffend" type="Button" parent="UI/Buttons/GridContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 472.0
+margin_right = 940.0
+margin_bottom = 119.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Deffend"
+flat = false
+align = 1
+
+[node name="Inventory" type="Button" parent="UI/Buttons/GridContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 123.0
+margin_right = 468.0
+margin_bottom = 242.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Inventory"
+flat = false
+align = 1
+
+[node name="Flee" type="Button" parent="UI/Buttons/GridContainer" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 472.0
+margin_top = 123.0
+margin_right = 940.0
+margin_bottom = 242.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Flee"
+flat = false
+align = 1
+
+[connection signal="button_up" from="UI/Buttons/GridContainer/Attack" to="UI" method="_on_Attack_button_up"]
+
+[connection signal="button_up" from="UI/Buttons/GridContainer/Deffend" to="UI" method="_on_Deffend_button_up"]
+
+[connection signal="button_up" from="UI/Buttons/GridContainer/Flee" to="UI" method="_on_Flee_button_up"]
+
+

@@ -1,0 +1,3 @@
+extends Panel
+
+func _on_actor_health_changed
