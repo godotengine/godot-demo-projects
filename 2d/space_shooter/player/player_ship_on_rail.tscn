@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://player/rail.gd" type="Script" id=1]
+[ext_resource path="res://player/player_ship.tscn" type="PackedScene" id=2]
+
+
+[node name="rail" type="Node2D"]
+
+script/script = ExtResource( 1 )
+
+[node name="ship" parent="." instance=ExtResource( 2 )]
+
+[node name="camera" type="Camera2D" parent="."]
+
+anchor_mode = 0
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = false
+smoothing/speed = 5.0
+drag_margin/left = 0.2
+drag_margin/top = 0.2
+drag_margin/right = 0.2
+drag_margin/bottom = 0.2
+
+
