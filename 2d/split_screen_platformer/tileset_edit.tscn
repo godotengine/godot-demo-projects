@@ -1,0 +1,324 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://tiles_demo.png" type="Texture" id=1]
+
+[node name="Node" type="Node"]
+
+[node name="floor" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[node name="collision" type="StaticBody2D" parent="floor"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="floor/collision"]
+
+build_mode = 0
+polygon = PoolVector2Array( 32, -24, 32, 32, -32, 32, -32, -24 )
+
+[node name="edge" type="Sprite" parent="."]
+
+position = Vector2( 64, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 64, 0, 64, 64 )
+
+[node name="collision" type="StaticBody2D" parent="edge"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="edge/collision"]
+
+build_mode = 0
+polygon = PoolVector2Array( -32, -24, 24, -24, 24, 32, -32, 32 )
+
+[node name="wall" type="Sprite" parent="."]
+
+position = Vector2( 64, 64 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 64, 64, 64, 64 )
+
+[node name="collision" type="StaticBody2D" parent="wall"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="wall/collision"]
+
+build_mode = 0
+polygon = PoolVector2Array( -32, -32, 24, -32, 24, 32, -32, 32 )
+
+[node name="wall_deco" type="Sprite" parent="."]
+
+position = Vector2( 96, 128 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 320, 128, 128, 64 )
+
+[node name="collision" type="StaticBody2D" parent="wall_deco"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="wall_deco/collision"]
+
+build_mode = 0
+polygon = PoolVector2Array( -64, -32, -8, -32, -8, 32, -64, 32 )
+
+[node name="corner" type="Sprite" parent="."]
+
+position = Vector2( 64, 192 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 64, 128, 64, 64 )
+
+[node name="collision" type="StaticBody2D" parent="corner"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="corner/collision"]
+
+build_mode = 0
+polygon = PoolVector2Array( -32, -32, 24, -32, 32, -24, 32, 32, -32, 32 )
+
+[node name="flowers" type="Sprite" parent="."]
+
+position = Vector2( 128, 192 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 192, 192, 64, 64 )
+
+[node name="collision" type="StaticBody2D" parent="flowers"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="flowers/collision"]
+
+build_mode = 0
+polygon = PoolVector2Array( -32, 32, 32, 32, 32, -24, -32, -24 )
+
+[node name="tree_base" type="Sprite" parent="."]
+
+position = Vector2( 192, 192 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 256, 192, 64, 64 )
+
+[node name="collision" type="StaticBody2D" parent="tree_base"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="tree_base/collision"]
+
+build_mode = 0
+polygon = PoolVector2Array( -32, 32, 32, 32, 32, -24, -32, -24 )
+
+[node name="tree_mid" type="Sprite" parent="."]
+
+position = Vector2( 192, 128 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 256, 128, 64, 64 )
+
+[node name="tree_mid 2" type="Sprite" parent="."]
+
+position = Vector2( 192, 64 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 256, 64, 64, 64 )
+
+[node name="tree_top" type="Sprite" parent="."]
+
+position = Vector2( 192, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 256, 0, 64, 64 )
+
+[node name="solid" type="Sprite" parent="."]
+
+position = Vector2( 0, 64 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 64, 64, 64 )
+
+[node name="ceiling" type="Sprite" parent="."]
+
+position = Vector2( 0, 128 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 384, 64, 64, 64 )
+
+[node name="collision" type="StaticBody2D" parent="ceiling"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ceiling/collision"]
+
+build_mode = 0
+polygon = PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32 )
+
+[node name="ramp" type="Sprite" parent="."]
+
+position = Vector2( 256, 224 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 128, 128, 64, 128 )
+
+[node name="collision" type="StaticBody2D" parent="ramp"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ramp/collision"]
+
+build_mode = 0
+polygon = PoolVector2Array( -32, -56, 32, 8, 32, 64, -32, 64 )
+
+[node name="ceiling2wall" type="Sprite" parent="."]
+
+position = Vector2( 0, 192 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 448, 64, 64, 64 )
+
+[node name="collision" type="StaticBody2D" parent="ceiling2wall"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ceiling2wall/collision"]
+
+build_mode = 0
+polygon = PoolVector2Array( -32, -32, 24, -32, 24, 32, -32, 32 )
+
+[node name="platform_floor" type="Sprite" parent="."]
+
+position = Vector2( 0, 256 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 64, 64 )
+
+[node name="collision" type="StaticBody2D" parent="platform_floor"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="platform_floor/collision"]
+
+build_mode = 0
+polygon = PoolVector2Array( 32, -24, 32, 24, -32, 24, -32, -24 )
+
+[node name="platform_edge" type="Sprite" parent="."]
+
+position = Vector2( 64, 256 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 192, 0, 64, 64 )
+
+[node name="collision" type="StaticBody2D" parent="platform_edge"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="platform_edge/collision"]
+
+build_mode = 0
+polygon = PoolVector2Array( 24, -24, 24, 24, -32, 24, -32, -24 )
+
+[node name="help" type="Label" parent="."]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1.0
+margin_top = 331.0
+margin_right = 727.0
+margin_bottom = 422.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "This scene serves as a tool for editing the tileset.
+Nodes (sprites) and their respective collisionsare edited here.
+
+To create a tileset from this, a \"TileSet\" resoucre must be created. Use the helper in: Scene -> Convert To -> TileSet.
+This will save a tileset. Saving over it will merge your changes.
+
+Finally, the saved tileset resource (tileset.tres in this case), can be opened to be used into a TileMap node for editing a tile map."
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+

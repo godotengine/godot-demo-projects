@@ -1,0 +1,329 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://enemy.gd" type="Script" id=1]
+[ext_resource path="res://enemy.png" type="Texture" id=2]
+[ext_resource path="res://bullet.png" type="Texture" id=3]
+[ext_resource path="res://sound_hit.wav" type="AudioStream" id=4]
+[ext_resource path="res://sound_explode.wav" type="AudioStream" id=5]
+
+[sub_resource type="Animation" id=1]
+
+resource_name = "explode"
+length = 5.0
+loop = false
+step = 0.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3.2 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ 0.0, 180.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("sprite:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/keys = {
+"times": PoolRealArray( 2.6, 3.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("explosion:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("explosion:process_material:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/keys = {
+"times": PoolRealArray( 2.8, 3.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 4.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("sound_hit:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/keys = {
+"times": PoolRealArray( 0.00999999 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("sound_explode:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/keys = {
+"times": PoolRealArray( 2.9 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/7/type = "method"
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/keys = {
+"times": PoolRealArray( 4.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[sub_resource type="Animation" id=2]
+
+length = 6.75
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.75, 1.5, 2.25, 3, 3.75, 4.5, 5.25, 6, 6.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 6, 5, 6, 5, 6, 7, 6, 7, 5 ]
+}
+
+[sub_resource type="Animation" id=3]
+
+resource_name = "walk"
+length = 1.25
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 0 ]
+}
+
+[sub_resource type="CanvasItemMaterial" id=4]
+
+render_priority = 0
+blend_mode = 0
+light_mode = 0
+
+[sub_resource type="CapsuleShape2D" id=5]
+
+custom_solver_bias = 0.0
+radius = 13.4556
+height = 14.2002
+
+[sub_resource type="CanvasItemMaterial" id=6]
+
+render_priority = 0
+blend_mode = 1
+light_mode = 0
+
+[sub_resource type="ParticlesMaterial" id=7]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 180.0
+flatness = 0.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 90.0
+initial_velocity_random = 0.0
+angular_velocity = 2.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 1.0
+scale_random = 0.0
+color = Color( 0.929688, 0.488931, 0.0617371, 1 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 1.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Angle", "Angular Velocity", "Animation", "Color", "Damping", "Emission Shape", "Flags", "Gravity", "Hue Variation", "Initial Velocity", "Linear Accel", "Orbit Velocity", "Radial Accel", "Scale", "Spread", "Tangential Accel" ]
+
+[node name="enemy" type="KinematicBody2D"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "Z", "collision" ]
+
+[node name="enabler" type="VisibilityEnabler2D" parent="."]
+
+position = Vector2( 16.2569, 11.0034 )
+scale = Vector2( 23.5056, 10.8629 )
+rect = Rect2( -10, -10, 20, 20 )
+pause_animations = true
+freeze_bodies = true
+pause_particles = false
+pause_animated_sprites = true
+process_parent = false
+physics_process_parent = false
+
+[node name="anim" type="AnimationPlayer" parent="."]
+
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+root_node = NodePath("..")
+anims/explode = SubResource( 1 )
+anims/idle = SubResource( 2 )
+anims/walk = SubResource( 3 )
+playback/active = true
+playback/speed = 3.0
+blend_times = [  ]
+autoplay = ""
+_sections_unfolded = [ "Playback Options", "playback" ]
+
+[node name="sprite" type="Sprite" parent="."]
+
+material = SubResource( 4 )
+texture = ExtResource( 2 )
+flip_h = true
+hframes = 8
+_sections_unfolded = [ "Animation", "Material", "Region", "Transform", "Visibility" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+position = Vector2( -0.00525069, -0.727495 )
+rotation = -1.5708
+shape = SubResource( 5 )
+
+[node name="detect_floor_left" type="RayCast2D" parent="."]
+
+position = Vector2( -33.2868, -9.34363 )
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, 45 )
+collision_mask = 1
+type_mask = 15
+
+[node name="detect_wall_left" type="RayCast2D" parent="."]
+
+position = Vector2( -12.1361, -0.739977 )
+rotation = 1.5708
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, 20 )
+collision_mask = 1
+type_mask = 15
+
+[node name="detect_wall_right" type="RayCast2D" parent="."]
+
+position = Vector2( 3.2788, -0.381488 )
+rotation = -1.5708
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, 20 )
+collision_mask = 1
+type_mask = 15
+
+[node name="detect_floor_right" type="RayCast2D" parent="."]
+
+position = Vector2( 29.1987, -9.34363 )
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, 45 )
+collision_mask = 1
+type_mask = 15
+
+[node name="explosion" type="Particles2D" parent="."]
+
+self_modulate = Color( 1, 1, 1, 0.12 )
+material = SubResource( 6 )
+emitting = false
+amount = 32
+lifetime = 0.5
+one_shot = true
+preprocess = 0.0
+speed_scale = 1.2
+explosiveness = 0.1
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 215832976
+process_material = SubResource( 7 )
+texture = ExtResource( 3 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Material", "Process Material", "Textures", "Time", "Visibility" ]
+
+[node name="sound_hit" type="AudioStreamPlayer2D" parent="."]
+
+stream = ExtResource( 4 )
+volume_db = 0.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="sound_explode" type="AudioStreamPlayer2D" parent="."]
+
+stream = ExtResource( 5 )
+volume_db = 0.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+
