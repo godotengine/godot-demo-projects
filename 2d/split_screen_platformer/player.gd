@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+export(int, "Player 1", "Player 2") var player_number = 0
+
 const GRAVITY_VEC = Vector2(0, 900)
 const FLOOR_NORMAL = Vector2(0, -1)
 const SLOPE_SLIDE_STOP = 25.0
@@ -42,21 +44,21 @@ func _physics_process(delta):
 
 	# Horizontal Movement
 	var target_speed = 0
-	if Input.is_action_pressed("move_left"):
+	if get_input("move_left"):
 		target_speed += -1
-	if Input.is_action_pressed("move_right"):
+	if get_input("move_right"):
 		target_speed +=  1
 
 	target_speed *= WALK_SPEED
 	linear_vel.x = lerp(linear_vel.x, target_speed, 0.1)
 
 	# Jumping
-	if on_floor and Input.is_action_just_pressed("jump"):
+	if on_floor and get_input("jump"):
 		linear_vel.y = -JUMP_SPEED
 		$sound_jump.play()
 
 	# Shooting
-	if Input.is_action_just_pressed("shoot"):
+	if get_input("shoot"):
 		var bullet = preload("res://bullet.tscn").instance()
 		bullet.position = $sprite/bullet_shoot.global_position #use node for shoot position
 		bullet.linear_velocity = Vector2(sprite.scale.x * BULLET_VELOCITY, 0)
@@ -81,9 +83,9 @@ func _physics_process(delta):
 		# We want the character to immediately change facing side when the player
 		# tries to change direction, during air control.
 		# This allows for example the player to shoot quickly left then right.
-		if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
+		if get_input("move_left") and not get_input("move_right"):
 			sprite.scale.x = -1
-		if Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left"):
+		if get_input("move_right") and not get_input("move_left"):
 			sprite.scale.x = 1
 
 		if linear_vel.y < 0:
@@ -97,3 +99,33 @@ func _physics_process(delta):
 	if new_anim != anim:
 		anim = new_anim
 		$anim.play(anim)
+
+
+func get_input(name):
+	# player 1
+	if player_number == 0:
+		match name:
+			"move_left":
+				return Input.is_action_pressed("move_left")
+			"move_right":
+				return Input.is_action_pressed("move_right")
+			"jump":
+				return Input.is_action_just_pressed("jump")
+			"shoot":
+				return Input.is_action_just_pressed("shoot")
+
+	# player 2
+	elif player_number == 1:
+		match name:
+			"move_left":
+				return Input.is_action_pressed("move_left_1")
+			"move_right":
+				return Input.is_action_pressed("move_right_1")
+			"jump":
+				return Input.is_action_just_pressed("jump_1")
+			"shoot":
+				return Input.is_action_just_pressed("shoot_1")
+
+	else:
+		print("unknown player number %s" % player_number)
+		return null
