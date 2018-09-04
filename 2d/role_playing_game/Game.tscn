@@ -3,7 +3,7 @@
 [ext_resource path="res://screens/combat/Combat.tscn" type="PackedScene" id=1]
 [ext_resource path="res://screens/exploration/Exploration.tscn" type="PackedScene" id=2]
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id=1]
 
 script/source = "extends Node
 
@@ -58,7 +58,7 @@ func _on_combat_finished(winner, loser):
 	yield(dialog, \"dialog_finished\")
 	dialog.queue_free()"
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 
 length = 0.5
 loop = false
@@ -78,7 +78,7 @@ tracks/0/keys = {
 
 [node name="Game" type="Node" index="0"]
 
-script = SubResource( 2 )
+script = SubResource( 1 )
 combat_screen = NodePath("Combat")
 exploration_screen = NodePath("Exploration")
 
@@ -89,7 +89,7 @@ autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/fade = SubResource( 3 )
+anims/fade = SubResource( 2 )
 blend_times = [  ]
 
 [node name="Transition" type="CanvasLayer" parent="." index="1"]

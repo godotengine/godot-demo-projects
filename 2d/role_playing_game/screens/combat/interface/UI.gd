@@ -22,13 +22,13 @@ func _on_Attack_button_up():
 		return
 	actors_node.get_node("Player").attack(actors_node.get_node("Opponent"))
 
-func _on_Deffend_button_up():
+func _on_Defend_button_up():
 	if not actors_node.get_node("Player").active:
 		return
-	actors_node.get_node("Player").deffend()
+	actors_node.get_node("Player").defend()
 
 func _on_Flee_button_up():
 	if not actors_node.get_node("Player").active:
 		return
 	actors_node.get_node("Player").flee()
-	get_parent().emit_signal("combat_finished", $"../Actors/Opponent")
+	get_parent().emit_signal("combat_finished", $"../Actors/Opponent", $"../Actors/Player")

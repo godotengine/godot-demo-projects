@@ -15,7 +15,7 @@ func attack(target):
 	target.take_damage(damage)
 	emit_signal("turn_finished")
 
-func deffend():
+func defend():
 	$Health.armor += defense
 	emit_signal("turn_finished")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://grid_movement/tilesets/grid_lines/grid_lines_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://grid_movement/tilesets/grid/grid_tileset.tres" type="TileSet" id=2]
@@ -9,32 +9,7 @@
 [ext_resource path="res://screens/combat/actors/Opponent.tscn" type="PackedScene" id=7]
 [ext_resource path="res://dialog_system/dialog_player/DialogPlayer.tscn" type="PackedScene" id=8]
 [ext_resource path="res://grid_movement/pawns/pawn.gd" type="Script" id=9]
-[ext_resource path="res://theme/theme.tres" type="Theme" id=10]
-
-[sub_resource type="GDScript" id=1]
-
-script/source = "extends Control
-
-var dialog_node = null
-func _ready():
-	hide()
-
-func show_dialog(player, dialog):
-	show()
-	$Button.grab_focus()
-	dialog_node = dialog
-	dialog_node.connect(\"dialog_started\", player, \"set_active\", [false])
-	dialog_node.connect(\"dialog_finished\", player, \"set_active\", [true])
-	dialog_node.connect(\"dialog_finished\", self, \"hide\")
-	dialog_node.start_dialog()
-	$Name.text = dialog_node.dialog_name
-	$Text.text = dialog_node.dialog_text
-	
-func _on_Button_button_up():
-	dialog_node.next_dialog()
-	$Name.text = dialog_node.dialog_name
-	$Text.text = dialog_node.dialog_text
-"
+[ext_resource path="res://dialog_system/interface/DialogUI.tscn" type="PackedScene" id=10]
 
 [node name="Exploration" type="Node2D"]
 
@@ -127,109 +102,10 @@ combat_actor = null
 
 dialog_file = "res://dialog_system/dialogs/object.json"
 
-[node name="DialogUI" type="Panel" parent="." index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 544.0
-margin_right = 1280.0
-margin_bottom = 720.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-script = SubResource( 1 )
-
-[node name="Name" type="RichTextLabel" parent="DialogUI" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 40.0
-margin_top = 16.0
-margin_right = 1072.0
-margin_bottom = 56.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-bbcode_enabled = false
-bbcode_text = ""
-visible_characters = -1
-percent_visible = 1.0
-meta_underlined = true
-tab_size = 4
-text = "Name"
-scroll_active = false
-scroll_following = false
-selection_enabled = false
-override_selected_font_color = false
-
-[node name="Text" type="RichTextLabel" parent="DialogUI" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 40.0
-margin_top = 64.0
-margin_right = 1064.0
-margin_bottom = 152.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-bbcode_enabled = false
-bbcode_text = ""
-visible_characters = -1
-percent_visible = 1.0
-meta_underlined = true
-tab_size = 4
-text = "Dialog Text"
-scroll_active = true
-scroll_following = false
-selection_enabled = false
-override_selected_font_color = false
-
-[node name="Button" type="Button" parent="DialogUI" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 1104.0
-margin_top = 32.0
-margin_right = 1264.0
-margin_bottom = 151.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Next"
-flat = false
-align = 1
+[node name="DialogUI" parent="." index="2" instance=ExtResource( 10 )]
 
 [connection signal="dialog_finished" from="Grid/Opponent/DialogPlayer" to="Grid/Opponent" method="set_active" binds= [ true ]]
 
 [connection signal="dialog_started" from="Grid/Opponent/DialogPlayer" to="Grid/Opponent" method="set_active" binds= [ false ]]
-
-[connection signal="button_up" from="DialogUI/Button" to="DialogUI" method="_on_Button_button_up"]
 
 
