@@ -29,4 +29,3 @@ func flee():
 func take_damage(damage):
 	$Health.take_damage(damage)
 	$Sprite/AnimationPlayer.play("take_damage")
-	pass

@@ -56,7 +56,8 @@ func _on_combat_finished(winner, loser):
 	exploration_screen.get_node(\"DialogUI\").show_dialog(player, dialog)
 	combat_screen.clear_combat()
 	yield(dialog, \"dialog_finished\")
-	dialog.queue_free()"
+	dialog.queue_free()
+"
 
 [sub_resource type="Animation" id=2]
 
@@ -76,7 +77,7 @@ tracks/0/keys = {
 "values": [ Color( 0.0703125, 0.0703125, 0.0703125, 0 ), Color( 0.0703125, 0.0703125, 0.0703125, 1 ) ]
 }
 
-[node name="Game" type="Node" index="0"]
+[node name="Game" type="Node"]
 
 script = SubResource( 1 )
 combat_screen = NodePath("Combat")
