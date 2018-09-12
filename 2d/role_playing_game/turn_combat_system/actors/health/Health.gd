@@ -7,10 +7,10 @@ export var life = 0
 export var max_life = 10
 export var armor = 0
 
-
 func take_damage(damage):
-	life = life - damage + armor
-	if life <= 0:
+	var applied_damage = max(damage - armor, 0)
+	life = max(life - applied_damage, 0)
+	if life == 0:
 		emit_signal('dead')
 	else:
 		emit_signal("health_changed", life)

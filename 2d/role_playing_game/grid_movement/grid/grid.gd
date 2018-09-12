@@ -7,14 +7,12 @@ func _ready():
 	for child in get_children():
 		set_cellv(world_to_map(child.position), child.type)
 
-
 func get_cell_pawn(cell, type = ACTOR):
 	for node in get_children():
 		if node.type != type:
 			continue
 		if world_to_map(node.position) == cell:
 			return(node)
-
 
 func request_move(pawn, direction):
 	var cell_start = world_to_map(pawn.position)
@@ -33,4 +31,3 @@ func request_move(pawn, direction):
 			if not target_pawn.has_node("DialogPlayer"):
 				return
 			get_node(dialog_ui).show_dialog(pawn, target_pawn.get_node("DialogPlayer"))
-			
