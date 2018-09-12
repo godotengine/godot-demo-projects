@@ -1,0 +1,234 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://theme/theme.tres" type="Theme" id=1]
+[ext_resource path="res://theme/labels/Title.tscn" type="PackedScene" id=2]
+[ext_resource path="res://theme/fonts/montserrat_extra_bold_24.tres" type="DynamicFont" id=3]
+[ext_resource path="res://theme/progressbar/foreground_stylebox_red.tres" type="StyleBox" id=4]
+[ext_resource path="res://theme/progressbar/foreground_stylebox_blue.tres" type="StyleBox" id=5]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends VBoxContainer
+
+func _ready():
+	set_process(false)
+
+func _process(delta):
+	for p in get_children():
+		$ProgressBarBlue.value += 10 * delta
+		$ProgressBarRed.value += 10 * delta
+
+
+func _on_Button_button_down():
+	set_process(true)
+
+
+func _on_Button_button_up():
+	set_process(false)
+"
+
+[node name="Control" type="Control" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1024.0
+margin_bottom = 600.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 1 )
+_sections_unfolded = [ "Size Flags", "Theme" ]
+
+[node name="Panel" type="Panel" parent="." index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 128.0
+margin_top = 64.0
+margin_right = 896.0
+margin_bottom = 536.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Title" parent="Panel" index="0" instance=ExtResource( 2 )]
+
+margin_right = 767.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 128.0
+margin_top = 180.0
+margin_right = 524.0
+margin_bottom = 424.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 5
+alignment = 0
+script = SubResource( 1 )
+_sections_unfolded = [ "custom_constants" ]
+
+[node name="Speed" type="Label" parent="Panel/VBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 396.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 3 )
+text = "Speed"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+
+[node name="ProgressBarRed" type="ProgressBar" parent="Panel/VBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 45.0
+margin_right = 396.0
+margin_bottom = 109.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+custom_styles/fg = ExtResource( 4 )
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+page = 0.0
+value = 0.0
+exp_edit = false
+rounded = false
+percent_visible = false
+_sections_unfolded = [ "Percent", "custom_styles" ]
+
+[node name="BlankSpace" type="ReferenceRect" parent="Panel/VBoxContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 114.0
+margin_right = 396.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 0, 16 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+_sections_unfolded = [ "Rect", "Size Flags" ]
+
+[node name="Acceleration" type="Label" parent="Panel/VBoxContainer" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 135.0
+margin_right = 396.0
+margin_bottom = 175.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 3 )
+text = "Acceleration"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors" ]
+
+[node name="ProgressBarBlue" type="ProgressBar" parent="Panel/VBoxContainer" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 180.0
+margin_right = 396.0
+margin_bottom = 244.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+custom_styles/fg = ExtResource( 5 )
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+page = 0.0
+value = 0.0
+exp_edit = false
+rounded = false
+percent_visible = false
+_sections_unfolded = [ "Percent", "custom_styles" ]
+
+[node name="Button" type="Button" parent="Panel" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 531.0
+margin_top = 258.0
+margin_right = 664.0
+margin_bottom = 377.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Add"
+flat = false
+align = 1
+_sections_unfolded = [ "Size Flags" ]
+
+[connection signal="button_down" from="Panel/Button" to="Panel/VBoxContainer" method="_on_Button_button_down"]
+
+[connection signal="button_up" from="Panel/Button" to="Panel/VBoxContainer" method="_on_Button_button_up"]
+
+
