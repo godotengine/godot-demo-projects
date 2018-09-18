@@ -16,6 +16,7 @@ tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
@@ -33,6 +34,7 @@ tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -44,6 +46,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 2.7 ),
 "transitions": PoolRealArray( 1 ),
@@ -57,6 +60,7 @@ tracks/2/path = NodePath("particles:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 0.98 ),
 "transitions": PoolRealArray( 1, 1 ),
@@ -68,6 +72,7 @@ tracks/3/path = NodePath("sprite:self_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0, 0.33 ),
 "transitions": PoolRealArray( 1, 1 ),
@@ -79,6 +84,7 @@ tracks/4/path = NodePath("sound:playing")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
+tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0.01 ),
 "transitions": PoolRealArray( 1 ),
@@ -99,6 +105,7 @@ light_mode = 0
 
 [sub_resource type="GradientTexture" id=5]
 
+flags = 4
 width = 2048
 
 [sub_resource type="ParticlesMaterial" id=6]
@@ -141,7 +148,6 @@ anim_offset_random = 0.0
 anim_loop = false
 
 [node name="coin" type="Area2D"]
-
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -152,38 +158,34 @@ audio_bus_name = "Master"
 script = ExtResource( 1 )
 
 [node name="sprite" type="Sprite" parent="."]
-
 texture = ExtResource( 2 )
 hframes = 4
 
 [node name="anim" type="AnimationPlayer" parent="."]
-
+root_node = NodePath("..")
+autoplay = "spin"
 playback_process_mode = 1
 playback_default_blend_time = 0.0
-root_node = NodePath("..")
+playback_speed = 1.0
 anims/spin = SubResource( 1 )
 anims/taken = SubResource( 2 )
-playback/active = true
-playback/speed = 3.0
 blend_times = [  ]
-autoplay = "spin"
 
 [node name="collision" type="CollisionShape2D" parent="."]
-
 shape = SubResource( 3 )
 
 [node name="sound" type="AudioStreamPlayer2D" parent="."]
-
 stream = ExtResource( 3 )
 volume_db = 0.0
+pitch_scale = 1.0
 autoplay = false
+stream_paused = false
 max_distance = 2000.0
 attenuation = 1.0
 bus = "Master"
 area_mask = 1
 
 [node name="particles" type="Particles2D" parent="."]
-
 material = SubResource( 4 )
 emitting = false
 amount = 8
@@ -205,7 +207,6 @@ h_frames = 1
 v_frames = 1
 
 [node name="enabler" type="VisibilityEnabler2D" parent="."]
-
 rect = Rect2( -10, -10, 20, 20 )
 pause_animations = true
 freeze_bodies = true
@@ -215,5 +216,3 @@ process_parent = false
 physics_process_parent = false
 
 [connection signal="body_entered" from="." to="." method="_on_coin_body_enter"]
-
-
