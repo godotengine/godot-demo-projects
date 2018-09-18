@@ -1,0 +1,192 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://bullet.gd" type="Script" id=1]
+[ext_resource path="res://bullet.png" type="Texture" id=2]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+
+render_priority = 0
+blend_mode = 0
+light_mode = 0
+
+[sub_resource type="CanvasItemMaterial" id=8]
+
+render_priority = 0
+blend_mode = 1
+light_mode = 0
+
+[sub_resource type="ParticlesMaterial" id=7]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 0.0
+flatness = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 0.0
+initial_velocity_random = 0.0
+angular_velocity = 0.0
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 0.8
+scale_random = 0.0
+color = Color( 1, 1, 1, 0.705882 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Color", "Trail" ]
+
+[sub_resource type="CanvasItemMaterial" id=4]
+
+render_priority = 0
+blend_mode = 0
+light_mode = 0
+
+[sub_resource type="CircleShape2D" id=5]
+
+custom_solver_bias = 0.0
+radius = 10.0
+
+[sub_resource type="Animation" id=6]
+
+length = 1.5
+loop = false
+step = 0.1
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.31 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("sprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Particles2D:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="bullet" type="RigidBody2D" index="0"]
+
+material = SubResource( 1 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 2
+contacts_reported = 1
+contact_monitor = true
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+script = ExtResource( 1 )
+_sections_unfolded = [ "Angular", "Collision", "Linear", "Material", "Pickable", "Transform", "Visibility", "Z" ]
+
+[node name="Particles2D" type="Particles2D" parent="." index="0"]
+
+material = SubResource( 8 )
+emitting = true
+amount = 8
+lifetime = 0.3
+one_shot = false
+preprocess = 0.0
+speed_scale = 3.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+draw_order = 0
+process_material = SubResource( 7 )
+texture = ExtResource( 2 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Process Material", "Time", "Visibility" ]
+
+[node name="sprite" type="Sprite" parent="." index="1"]
+
+material = SubResource( 4 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Transform", "Visibility", "Z" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+
+shape = SubResource( 5 )
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z" ]
+
+[node name="Timer" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = true
+
+[node name="anim" type="AnimationPlayer" parent="." index="4"]
+
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+root_node = NodePath("..")
+anims/shutdown = SubResource( 6 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[connection signal="body_entered" from="." to="." method="_on_bullet_body_enter"]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+

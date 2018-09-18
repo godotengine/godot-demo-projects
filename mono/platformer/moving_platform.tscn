@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://moving_platform.gd" type="Script" id=1]
+[ext_resource path="res://moving_platform.png" type="Texture" id=2]
+
+[node name="moving_platform" type="Node2D"]
+
+script = ExtResource( 1 )
+motion = Vector2( 0, 0 )
+cycle = 1.0
+
+[node name="platform" type="KinematicBody2D" parent="."]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+
+[node name="Sprite" type="Sprite" parent="platform"]
+
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="platform"]
+
+build_mode = 0
+polygon = PoolVector2Array( -88, -24, 88, -24, 88, 24, -88, 24 )
+
+
