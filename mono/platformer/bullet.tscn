@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://bullet.gd" type="Script" id=1]
+[ext_resource path="res://Bullet.cs" type="Script" id=1]
 [ext_resource path="res://bullet.png" type="Texture" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
@@ -176,5 +176,5 @@ playback_speed = 1.0
 anims/shutdown = SubResource( 6 )
 blend_times = [  ]
 
-[connection signal="body_entered" from="." to="." method="_on_bullet_body_enter"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="body_entered" from="." to="." method="_OnBulletBodyEnter"]
+[connection signal="timeout" from="Timer" to="." method="_OnTimerTimeout"]
