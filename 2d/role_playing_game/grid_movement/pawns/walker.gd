@@ -1,6 +1,7 @@
 extends 'pawn.gd'
 
 onready var Grid = get_parent()
+export (PackedScene) var combat_actor
 var lost = false
 
 func _ready():

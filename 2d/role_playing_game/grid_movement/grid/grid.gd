@@ -1,7 +1,7 @@
 extends TileMap
 
 enum CELL_TYPES { ACTOR, OBSTACLE, OBJECT }
-export(NodePath) var dialog_ui
+export(NodePath) var dialogue_ui
 
 func _ready():
 	for child in get_children():
@@ -30,7 +30,7 @@ func request_move(pawn, direction):
 			var target_pawn = get_cell_pawn(cell_target, cell_tile_id)
 			print("Cell %s contains %s" % [cell_target, target_pawn.name])
 			
-			if not target_pawn.has_node("DialogPlayer"):
+			if not target_pawn.has_node("DialoguePlayer"):
 				return
-			get_node(dialog_ui).show_dialog(pawn, target_pawn.get_node("DialogPlayer"))
+			get_node(dialogue_ui).show_dialogue(pawn, target_pawn.get_node("DialoguePlayer"))
 			

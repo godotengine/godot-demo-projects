@@ -11,6 +11,11 @@ func set_active(value):
 	set_process(value)
 	set_process_input(value)
 	
+	if not active:
+		return
+	if $Health.armor >= $Health.base_armor + defense:
+		$Health.armor = $Health.base_armor
+	
 func attack(target):
 	target.take_damage(damage)
 	emit_signal("turn_finished")

@@ -1,34 +1,37 @@
 extends Control
 
-export (NodePath) var actors_node
-export (PackedScene) var actor_info
+export (NodePath) var combatants_node
+export (PackedScene) var info_scene
 
 func _ready():
-	actors_node = get_node(actors_node)
+	combatants_node = get_node(combatants_node)
 	
 func initialize():
-	for actor in actors_node.get_children():
-		var health = actor.get_node("Health")
-		var info = actor_info.instance()
+	for combatant in combatants_node.get_children():
+		var health = combatant.get_node("Health")
+		var info = info_scene.instance()
 		var health_info = info.get_node("VBoxContainer/Health")
 		health_info.value = health.life
 		health_info.max_value = health.max_life
-		info.get_node("VBoxContainer/Name").text = actor.name
+		info.get_node("VBoxContainer/Name").text = combatant.name
 		health.connect("health_changed", health_info, "set_value")
-		$Actors.add_child(info)
+		$Combatants.add_child(info)
+	$Buttons/GridContainer/Attack.grab_focus()
 
 func _on_Attack_button_up():
-	if not actors_node.get_node("Player").active:
+	if not combatants_node.get_node("Player").active:
 		return
-	actors_node.get_node("Player").attack(actors_node.get_node("Opponent"))
+	combatants_node.get_node("Player").attack(combatants_node.get_node("Opponent"))
 
 func _on_Defend_button_up():
-	if not actors_node.get_node("Player").active:
+	if not combatants_node.get_node("Player").active:
 		return
-	actors_node.get_node("Player").defend()
+	combatants_node.get_node("Player").defend()
 
 func _on_Flee_button_up():
-	if not actors_node.get_node("Player").active:
+	if not combatants_node.get_node("Player").active:
 		return
-	actors_node.get_node("Player").flee()
-	get_parent().emit_signal("combat_finished", $"../Actors/Opponent", $"../Actors/Player")
+	combatants_node.get_node("Player").flee()
+	var loser = combatants_node.get_node("Player")
+	var winner = combatants_node.get_node("Opponent")
+	get_parent().finish_combat(winner, loser)
