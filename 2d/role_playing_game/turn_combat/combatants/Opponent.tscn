@@ -1,30 +1,12 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://turn_combat/combatants/Combatant.tscn" type="PackedScene" id=1]
-[ext_resource path="res://turn_combat/combatants/sprites/green.png" type="Texture" id=2]
-
-[sub_resource type="GDScript" id=1]
-
-script/source = "extends \"combatant.gd\"
-
-func set_active(value):
-	.set_active(value)
-	if not active:
-		return
-	
-	$Timer.start()
-	yield($Timer, \"timeout\")
-	var target
-	for actor in get_parent().get_children():
-		if not actor == self:
-			target = actor
-			break
-	attack(target)
-"
+[ext_resource path="res://turn_combat/combatants/Opponent.gd" type="Script" id=2]
+[ext_resource path="res://turn_combat/combatants/sprites/green.png" type="Texture" id=3]
 
 [node name="Opponent" instance=ExtResource( 1 )]
 
-script = SubResource( 1 )
+script = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 damage = 3
 
@@ -35,7 +17,7 @@ max_life = 7
 
 [node name="Body" parent="Sprite/Pivot" index="1"]
 
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="Timer" type="Timer" parent="." index="2"]
 

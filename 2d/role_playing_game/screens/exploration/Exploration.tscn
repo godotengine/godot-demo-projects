@@ -2,13 +2,13 @@
 
 [ext_resource path="res://grid_movement/tilesets/grid_lines/grid_lines_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://grid_movement/tilesets/grid/grid_tileset.tres" type="TileSet" id=2]
-[ext_resource path="res://grid_movement/grid/grid.gd" type="Script" id=3]
+[ext_resource path="res://grid_movement/grid/Grid.gd" type="Script" id=3]
 [ext_resource path="res://grid_movement/pawns/Character.tscn" type="PackedScene" id=4]
 [ext_resource path="res://turn_combat/combatants/Player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://grid_movement/pawns/character.gd" type="Script" id=6]
+[ext_resource path="res://grid_movement/pawns/Character.gd" type="Script" id=6]
 [ext_resource path="res://turn_combat/combatants/Opponent.tscn" type="PackedScene" id=7]
 [ext_resource path="res://dialogue/dialogue_player/DialoguePlayer.tscn" type="PackedScene" id=8]
-[ext_resource path="res://grid_movement/pawns/pawn.gd" type="Script" id=9]
+[ext_resource path="res://grid_movement/pawns/Pawn.gd" type="Script" id=9]
 [ext_resource path="res://dialogue/interface/Interface.tscn" type="PackedScene" id=10]
 
 [node name="Exploration" type="Node2D"]
@@ -81,7 +81,7 @@ combat_actor = ExtResource( 7 )
 
 [node name="DialoguePlayer" parent="Grid/Opponent" index="3" instance=ExtResource( 8 )]
 
-dialogue_file = "res://dialogue/dialogue_data/npc_01.json"
+dialogue_file = "res://dialogue/dialogue_data/npc.json"
 
 [node name="Timer" type="Timer" parent="Grid/Opponent" index="4"]
 
@@ -92,12 +92,13 @@ autostart = true
 
 [node name="Object" type="Node2D" parent="Grid" index="2"]
 
-editor/display_folded = true
 position = Vector2( 544, 288 )
 script = ExtResource( 9 )
 type = 2
 
-[node name="DialogPlayer" parent="Grid/Object" index="0" instance=ExtResource( 8 )]
+[node name="DialoguePlayer" parent="Grid/Object" index="0" instance=ExtResource( 8 )]
+
+dialogue_file = "res://dialogue/dialogue_data/object.json"
 
 [node name="DialogueUI" parent="." index="2" instance=ExtResource( 10 )]
 

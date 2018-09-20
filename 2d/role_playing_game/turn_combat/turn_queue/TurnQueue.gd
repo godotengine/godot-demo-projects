@@ -1,6 +1,6 @@
 extends Node
 
-const combatant = preload("../combatants/combatant.gd")
+const combatant = preload("../combatants/Combatant.gd")
 
 export (NodePath) var combatants_list
 var queue = [] setget set_queue

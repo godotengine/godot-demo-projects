@@ -25,12 +25,12 @@ func next_dialogue():
 	dialogue_name = dialogue_keys[current].name
 		
 func index_dialogue():
-	var dialogue = load_dialogueue(dialogue_file)
+	var dialogue = load_dialogue(dialogue_file)
 	dialogue_keys.clear()
 	for key in dialogue:
 		dialogue_keys.append(dialogue[key])
 		
-func load_dialogueue(file_path):
+func load_dialogue(file_path):
 	var file = File.new()
 	if file.file_exists(file_path):
 		file.open(file_path, file.READ)

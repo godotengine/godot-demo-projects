@@ -1,4 +1,4 @@
-extends 'pawn.gd'
+extends 'Pawn.gd'
 
 export (PackedScene) var combat_actor
 var lost = false

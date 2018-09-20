@@ -1,4 +1,4 @@
-extends 'pawn.gd'
+extends 'Pawn.gd'
 
 onready var Grid = get_parent()
 export (PackedScene) var combat_actor

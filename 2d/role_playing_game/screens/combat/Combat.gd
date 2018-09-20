@@ -1,7 +1,7 @@
 extends Node
 
 signal combat_finished(winner, loser)
-const Combatant = preload("res://turn_combat/combatants/combatant.gd")
+const Combatant = preload("res://turn_combat/combatants/Combatant.gd")
 
 func initialize(combat_combatants):
 	for combatant in combat_combatants:
