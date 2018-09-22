@@ -15,9 +15,14 @@ signal consume_not_required
 signal sku_details_complete
 signal sku_details_error
 
-onready var payment = Engine.get_singleton("GodotPayments")
+var payment
 
 func _ready():
+	if Engine.has_singleton("GodotPayment"):
+		payment = Engine.get_singleton("GodotPayments")
+	else:
+		print("GodotPayment singleton is only available on Android devices.")
+
 	if payment:
 		# set callback with this script instance
 		payment.setPurchaseCallbackId(get_instance_id())
