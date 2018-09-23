@@ -10,9 +10,9 @@
 [ext_resource path="res://player/states/die.gd" type="Script" id=8]
 [ext_resource path="res://player/shadow.png" type="Texture" id=9]
 [ext_resource path="res://player/body.png" type="Texture" id=10]
-[ext_resource path="res://player/weapon/weapon_pivot.gd" type="Script" id=11]
-[ext_resource path="res://player/weapon/Sword.tscn" type="PackedScene" id=12]
-[ext_resource path="res://player/bullet/bullet_spawner.gd" type="Script" id=13]
+[ext_resource path="res://player/bullet/bullet_spawner.gd" type="Script" id=11]
+[ext_resource path="res://player/weapon/weapon_pivot.gd" type="Script" id=12]
+[ext_resource path="res://player/weapon/Sword.tscn" type="PackedScene" id=13]
 [ext_resource path="res://fonts/SourceCodePro-Bold.ttf" type="DynamicFontData" id=14]
 [ext_resource path="res://player/states/debug/state_name_displayer.gd" type="Script" id=15]
 
@@ -126,45 +126,42 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="BodyPivot" type="Position2D" parent="." index="3"]
 
-editor/display_folded = true
-
 [node name="Body" type="Sprite" parent="BodyPivot" index="0"]
 
 position = Vector2( 0, -58.8242 )
 texture = ExtResource( 10 )
 
-[node name="WeaponPivot" type="Position2D" parent="." index="4"]
+[node name="BulletSpawn" type="Node2D" parent="BodyPivot" index="1"]
 
 editor/display_folded = true
 position = Vector2( 1.17401, -61.266 )
 script = ExtResource( 11 )
-
-[node name="Offset" type="Position2D" parent="WeaponPivot" index="0"]
-
-position = Vector2( 110, 0 )
-
-[node name="Sword" parent="WeaponPivot/Offset" index="0" instance=ExtResource( 12 )]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="5"]
-
-build_mode = 0
-polygon = PoolVector2Array( -20, 0, -20, -20, 20, -20, 20, 0 )
-
-[node name="BulletSpawn" type="Node2D" parent="." index="6"]
-
-editor/display_folded = true
-position = Vector2( 1.17401, -61.266 )
-script = ExtResource( 13 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="CooldownTimer" type="Timer" parent="BulletSpawn" index="0"]
+[node name="CooldownTimer" type="Timer" parent="BodyPivot/BulletSpawn" index="0"]
 
 process_mode = 1
 wait_time = 0.2
 one_shot = true
 autostart = false
 
-[node name="StateNameDisplayer" type="Label" parent="." index="7"]
+[node name="WeaponPivot" type="Position2D" parent="BodyPivot" index="2"]
+
+position = Vector2( 1.17401, -61.266 )
+script = ExtResource( 12 )
+
+[node name="Offset" type="Position2D" parent="BodyPivot/WeaponPivot" index="0"]
+
+position = Vector2( 110, 0 )
+
+[node name="Sword" parent="BodyPivot/WeaponPivot/Offset" index="0" instance=ExtResource( 13 )]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="4"]
+
+build_mode = 0
+polygon = PoolVector2Array( -20, 0, -20, -20, 20, -20, 20, 0 )
+
+[node name="StateNameDisplayer" type="Label" parent="." index="5"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -192,12 +189,12 @@ max_lines_visible = -1
 script = ExtResource( 15 )
 _sections_unfolded = [ "Rect", "custom_fonts" ]
 
-[connection signal="state_changed" from="StateMachine" to="StateNameDisplayer" method="_on_StateMachine_state_changed"]
+[connection signal="state_changed" from="StateMachine" to="BodyPivot/WeaponPivot/Offset/Sword" method="_on_StateMachine_state_changed"]
 
-[connection signal="state_changed" from="StateMachine" to="WeaponPivot/Offset/Sword" method="_on_StateMachine_state_changed"]
+[connection signal="state_changed" from="StateMachine" to="StateNameDisplayer" method="_on_StateMachine_state_changed"]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_finished"]
 
-[connection signal="attack_finished" from="WeaponPivot/Offset/Sword" to="StateMachine/Attack" method="_on_Sword_attack_finished"]
+[connection signal="attack_finished" from="BodyPivot/WeaponPivot/Offset/Sword" to="StateMachine/Attack" method="_on_Sword_attack_finished"]
 
 

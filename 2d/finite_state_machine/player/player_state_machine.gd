@@ -27,7 +27,7 @@ func _input(event):
 	otherwise we let the state node handle it
 	"""
 	if event.is_action_pressed("attack"):
-		if current_state == $Attack:
+		if current_state in [$Attack, $Stagger]:
 			return
 		_change_state("attack")
 		return
