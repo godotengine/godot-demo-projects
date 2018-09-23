@@ -3,15 +3,13 @@
 [ext_resource path="res://grid_movement/tilesets/grid_lines/grid_lines_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://grid_movement/tilesets/grid/grid_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://grid_movement/grid/Grid.gd" type="Script" id=3]
-[ext_resource path="res://grid_movement/pawns/Actor.tscn" type="PackedScene" id=4]
-[ext_resource path="res://screens/combat/actors/Player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://grid_movement/pawns/IdleActor.gd" type="Script" id=6]
-[ext_resource path="res://screens/combat/actors/Opponent.tscn" type="PackedScene" id=7]
-[ext_resource path="res://dialog_system/dialog_player/DialogPlayer.tscn" type="PackedScene" id=8]
-[ext_resource path="res://grid_movement/pawns/pawn.gd" type="Script" id=9]
-[ext_resource path="res://dialog_system/interface/DialogUI.tscn" type="PackedScene" id=10]
-
-
+[ext_resource path="res://grid_movement/pawns/Character.tscn" type="PackedScene" id=4]
+[ext_resource path="res://turn_combat/combatants/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://grid_movement/pawns/Character.gd" type="Script" id=6]
+[ext_resource path="res://turn_combat/combatants/Opponent.tscn" type="PackedScene" id=7]
+[ext_resource path="res://dialogue/dialogue_player/DialoguePlayer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://grid_movement/pawns/Pawn.gd" type="Script" id=9]
+[ext_resource path="res://dialogue/interface/Interface.tscn" type="PackedScene" id=10]
 
 [node name="Exploration" type="Node2D"]
 
@@ -66,7 +64,7 @@ _sections_unfolded = [ "Visibility" ]
 __meta__ = {
 "_edit_lock_": true
 }
-dialog_ui = NodePath("../DialogUI")
+dialogue_ui = NodePath("../DialogueUI")
 
 [node name="Player" parent="Grid" index="0" instance=ExtResource( 4 )]
 
@@ -81,9 +79,9 @@ rotation = -1.5708
 script = ExtResource( 6 )
 combat_actor = ExtResource( 7 )
 
-[node name="DialogPlayer" parent="Grid/Opponent" index="3" instance=ExtResource( 8 )]
+[node name="DialoguePlayer" parent="Grid/Opponent" index="3" instance=ExtResource( 8 )]
 
-dialog_file = "res://dialog_system/dialogs/npc_01.json"
+dialogue_file = "res://dialogue/dialogue_data/npc.json"
 
 [node name="Timer" type="Timer" parent="Grid/Opponent" index="4"]
 
@@ -94,20 +92,16 @@ autostart = true
 
 [node name="Object" type="Node2D" parent="Grid" index="2"]
 
-editor/display_folded = true
 position = Vector2( 544, 288 )
 script = ExtResource( 9 )
 type = 2
-combat_actor = null
 
-[node name="DialogPlayer" parent="Grid/Object" index="0" instance=ExtResource( 8 )]
+[node name="DialoguePlayer" parent="Grid/Object" index="0" instance=ExtResource( 8 )]
 
-dialog_file = "res://dialog_system/dialogs/object.json"
+dialogue_file = "res://dialogue/dialogue_data/object.json"
 
-[node name="DialogUI" parent="." index="2" instance=ExtResource( 10 )]
+[node name="DialogueUI" parent="." index="2" instance=ExtResource( 10 )]
 
-[connection signal="dialog_finished" from="Grid/Opponent/DialogPlayer" to="Grid/Opponent" method="set_active" binds= [ true ]]
-
-[connection signal="dialog_started" from="Grid/Opponent/DialogPlayer" to="Grid/Opponent" method="set_active" binds= [ false ]]
+visible = false
 
 

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://turn_combat/combatants/Combatant.gd" type="Script" id=1]
+[ext_resource path="res://turn_combat/combatants/health/Health.tscn" type="PackedScene" id=2]
+[ext_resource path="res://turn_combat/combatants/sprites/Sprite.tscn" type="PackedScene" id=3]
+
+
+[node name="Combatant" type="Node2D"]
+
+script = ExtResource( 1 )
+damage = 2
+defense = 1
+
+[node name="Health" parent="." index="0" instance=ExtResource( 2 )]
+
+life = 10
+base_armor = 0
+
+[node name="Sprite" parent="." index="1" instance=ExtResource( 3 )]
+
+

@@ -1,46 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://theme/theme.tres" type="Theme" id=1]
+[ext_resource path="res://dialogue/interface/Interface.gd" type="Script" id=2]
 
-[sub_resource type="GDScript" id=1]
 
-script/source = "extends Control
-
-var dialog_node = null
-func _ready():
-	hide()
-
-func show_dialog(player, dialog):
-	show()
-	$Button.grab_focus()
-	dialog_node = dialog
-	for c in dialog.get_signal_connection_list(\"dialog_finished\"):
-		if self == c.target:
-			dialog_node.start_dialog()
-			break
-			return
-	dialog_node.connect(\"dialog_started\", player, \"set_active\", [false])
-	dialog_node.connect(\"dialog_finished\", player, \"set_active\", [true])
-	dialog_node.connect(\"dialog_finished\", self, \"hide\")
-	dialog_node.connect(\"dialog_finished\", self, \"_on_dialog_finished\", [player])
-	dialog_node.start_dialog()
-	$Name.text = dialog_node.dialog_name
-	$Text.text = dialog_node.dialog_text
-
-	
-func _on_Button_button_up():
-	dialog_node.next_dialog()
-	$Name.text = dialog_node.dialog_name
-	$Text.text = dialog_node.dialog_text
-
-func _on_dialog_finished(player):
-	dialog_node.disconnect(\"dialog_started\", player, \"set_active\")
-	dialog_node.disconnect(\"dialog_finished\", player, \"set_active\")
-	dialog_node.disconnect(\"dialog_finished\", self, \"hide\")
-	dialog_node.disconnect(\"dialog_finished\", self, \"_on_dialog_finished\")
-"
-
-[node name="DialogUI" type="Panel" index="0"]
+[node name="Dialogue" type="Panel"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -56,7 +20,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 theme = ExtResource( 1 )
-script = SubResource( 1 )
+script = ExtResource( 2 )
 
 [node name="Name" type="RichTextLabel" parent="." index="0"]
 
@@ -108,7 +72,7 @@ visible_characters = -1
 percent_visible = 1.0
 meta_underlined = true
 tab_size = 4
-text = "Dialog Text"
+text = "Dialogue Text"
 scroll_active = true
 scroll_following = false
 selection_enabled = false
