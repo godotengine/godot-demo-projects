@@ -18,7 +18,7 @@ signal sku_details_error
 var payment
 
 func _ready():
-	if Engine.has_singleton("GodotPayment"):
+	if Engine.has_singleton("GodotPayments"):
 		payment = Engine.get_singleton("GodotPayments")
 	else:
 		print("GodotPayment singleton is only available on Android devices.")
