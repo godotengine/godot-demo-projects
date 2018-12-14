@@ -1,54 +1,20 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://observer/observer.gd" type="Script" id=1]
 
-[node name="Observer" type="KinematicBody" index="0"]
+[sub_resource type="BoxShape" id=1]
 
-input_ray_pickable = true
-input_capture_on_drag = false
-collision_layer = 1
-collision_mask = 1
-axis_lock_linear_x = false
-axis_lock_linear_y = false
-axis_lock_linear_z = false
-axis_lock_angular_x = false
-axis_lock_angular_y = false
-axis_lock_angular_z = false
-collision/safe_margin = 0.001
+
+[node name="Observer" type="KinematicBody"]
 script = ExtResource( 1 )
 
-[node name="Camera" type="Camera" parent="." index="0"]
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
 
-keep_aspect = 1
-cull_mask = 1048575
-environment = null
-h_offset = 0.0
-v_offset = 0.0
-doppler_tracking = 0
-projection = 0
-current = false
+[node name="Camera" type="Camera" parent="."]
 fov = 74.0
-size = 1.0
 near = 0.1
 far = 1000.0
 
-[node name="OmniLight" type="OmniLight" parent="." index="1"]
+[node name="OmniLight" type="OmniLight" parent="."]
 
-layers = 1
-light_color = Color( 1, 1, 1, 1 )
-light_energy = 1.0
-light_indirect_energy = 1.0
-light_negative = false
-light_specular = 0.5
-light_bake_mode = 1
-light_cull_mask = -1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 1 )
-shadow_bias = 0.15
-shadow_contact = 0.0
-shadow_reverse_cull_face = false
-editor_only = false
-omni_range = 5.0
-omni_attenuation = 1.0
-omni_shadow_mode = 1
-omni_shadow_detail = 1

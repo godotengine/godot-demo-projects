@@ -1,4 +1,4 @@
-extends Spatial
+extends KinematicBody
 
 # Constants
 const STATE_MENU = 0
