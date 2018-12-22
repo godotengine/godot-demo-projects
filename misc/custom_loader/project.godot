@@ -1,0 +1,31 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "ResourceFormatLoader",
+"class": "AlpacaLoader",
+"language": "GDScript",
+"path": "res://alpaca_loader.gd"
+}, {
+"base": "ResourceFormatSaver",
+"class": "AlpacaSaver",
+"language": "GDScript",
+"path": "res://alpaca_saver.gd"
+} ]
+_global_script_class_icons={
+"AlpacaLoader": "",
+"AlpacaSaver": ""
+}
+
+[application]
+
+config/name="Custom Loader Demo"
+run/main_scene="res://main.tscn"
+config/icon="res://icon.png"
