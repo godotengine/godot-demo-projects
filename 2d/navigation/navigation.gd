@@ -29,7 +29,7 @@ func _process(delta):
 
 func move_along_path(distance):
 	var last_point = $Character.position
-	for index in range(path.size()):
+	for _index in range(path.size()):
 		var distance_between_points = last_point.distance_to(path[0])
 		# the position to move to falls between two points
 		if distance <= distance_between_points and distance >= 0.0:

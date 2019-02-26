@@ -10,89 +10,46 @@
 
 [node name="Game" type="Node"]
 
-[node name="GridLines" type="TileMap" parent="." index="0"]
-
+[node name="GridLines" type="TileMap" parent="."]
 modulate = Color( 1, 1, 1, 0.271059 )
 z_index = -1
 z_as_relative = false
-mode = 0
 tile_set = ExtResource( 1 )
-cell_size = Vector2( 64, 64 )
-cell_quadrant_size = 16
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-cell_half_offset = 2
-cell_tile_origin = 0
-cell_y_sort = false
-cell_clip_uv = false
-collision_use_kinematic = false
-collision_friction = 1.0
-collision_bounce = 0.0
-collision_layer = 1
-collision_mask = 1
-occluder_light_mask = 1
 format = 1
 tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 65547, 0, 0, 65548, 0, 0, 65549, 0, 0, 65550, 0, 0, 65551, 0, 0, 65552, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 131082, 0, 0, 131083, 0, 0, 131084, 0, 0, 131085, 0, 0, 131086, 0, 0, 131087, 0, 0, 131088, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 196623, 0, 0, 196624, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 262158, 0, 0, 262159, 0, 0, 262160, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327695, 0, 0, 327696, 0, 0, 393216, 0, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 393229, 0, 0, 393230, 0, 0, 393231, 0, 0, 393232, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0, 458767, 0, 0, 458768, 0, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 0, 0, 524304, 0, 0, 589824, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0, 589839, 0, 0, 589840, 0, 0 )
-_sections_unfolded = [ "Visibility", "Z Index" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Grid" type="TileMap" parent="." index="1"]
-
-mode = 0
+[node name="Grid" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
-cell_size = Vector2( 64, 64 )
-cell_quadrant_size = 16
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-cell_half_offset = 2
-cell_tile_origin = 0
-cell_y_sort = false
-cell_clip_uv = false
-collision_use_kinematic = false
-collision_friction = 1.0
-collision_bounce = 0.0
-collision_layer = 1
-collision_mask = 1
-occluder_light_mask = 1
 format = 1
 tile_data = PoolIntArray( 18, 1, 0, 19, 1, 0, 65554, 1, 0, 65555, 1, 0, 131090, 1, 0, 131091, 1, 0, 196615, 1, 0, 196616, 1, 0, 196617, 1, 0, 196626, 1, 0, 196627, 1, 0, 262151, 1, 0, 262162, 1, 0, 262163, 1, 0, 327687, 1, 0, 327688, 1, 0, 327689, 1, 0, 327698, 1, 0, 327699, 1, 0, 393234, 1, 0, 393235, 1, 0, 458753, 1, 0, 458754, 1, 0, 458770, 1, 0, 458771, 1, 0, 524289, 1, 0, 524290, 1, 0, 524306, 1, 0, 524307, 1, 0, 589825, 1, 0, 589826, 1, 0, 589827, 1, 0, 589828, 1, 0, 589829, 1, 0, 589830, 1, 0, 589831, 1, 0, 589842, 1, 0, 589843, 1, 0, 655360, 1, 0, 655361, 1, 0, 655362, 1, 0, 655363, 1, 0, 655364, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 1, 0, 655369, 1, 0, 655370, 1, 0, 655371, 1, 0, 655372, 1, 0, 655373, 1, 0, 655374, 1, 0, 655375, 1, 0, 655376, 1, 0, 655377, 1, 0, 655378, 1, 0, 655379, 1, 0, 720896, 1, 0, 720897, 1, 0, 720898, 1, 0, 720899, 1, 0, 720900, 1, 0, 720901, 1, 0, 720902, 1, 0, 720903, 1, 0, 720904, 1, 0, 720905, 1, 0, 720906, 1, 0, 720907, 1, 0, 720908, 1, 0, 720909, 1, 0, 720910, 1, 0, 720911, 1, 0, 720912, 1, 0, 720913, 1, 0, 720914, 1, 0, 720915, 1, 0 )
 script = ExtResource( 3 )
-_sections_unfolded = [ "Visibility" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Actor" parent="Grid" index="0" instance=ExtResource( 4 )]
-
+[node name="Actor" parent="Grid" instance=ExtResource( 4 )]
 editor/display_folded = true
 position = Vector2( 416, 288 )
 
-[node name="Sprite" parent="Grid/Actor/Pivot" index="0"]
-
-position = Vector2( 1.43051e-06, -1.90735e-06 )
-
-[node name="Actor2" type="Node2D" parent="Grid" index="1"]
-
+[node name="Actor2" type="Node2D" parent="Grid"]
 editor/display_folded = true
 position = Vector2( 480, 480 )
 z_index = 1
 script = ExtResource( 5 )
-_sections_unfolded = [ "Offset" ]
-type = 0
 
-[node name="Sprite" type="Sprite" parent="Grid/Actor2" index="0"]
-
+[node name="Sprite" type="Sprite" parent="Grid/Actor2"]
 texture = ExtResource( 6 )
 
-[node name="Object" type="Node2D" parent="Grid" index="2"]
-
+[node name="Object" type="Node2D" parent="Grid"]
 editor/display_folded = true
 position = Vector2( 544, 288 )
 script = ExtResource( 5 )
 type = 2
 
-[node name="Sprite" type="Sprite" parent="Grid/Object" index="0"]
-
+[node name="Sprite" type="Sprite" parent="Grid/Object"]
 texture = ExtResource( 7 )
 
 

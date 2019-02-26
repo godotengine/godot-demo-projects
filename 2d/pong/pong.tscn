@@ -10,177 +10,86 @@
 [ext_resource path="res://ceiling_floor.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
 extents = Vector2( 4, 16 )
 
 [sub_resource type="RectangleShape2D" id=2]
-
-custom_solver_bias = 0.0
 extents = Vector2( 4, 4 )
 
 [sub_resource type="RectangleShape2D" id=3]
-
-custom_solver_bias = 0.0
 extents = Vector2( 10, 200 )
 
 [sub_resource type="RectangleShape2D" id=4]
-
-custom_solver_bias = 0.0
 extents = Vector2( 320, 10 )
 
 [node name="game" type="Node2D"]
 
 [node name="left" type="Area2D" parent="."]
-
 position = Vector2( 67.6285, 192.594 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
 script = ExtResource( 1 )
-ball_dir = 1
 
 [node name="sprite" type="Sprite" parent="left"]
-
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
 
 [node name="collision" type="CollisionShape2D" parent="left"]
-
 shape = SubResource( 1 )
 
 [node name="right" type="Area2D" parent="."]
-
 position = Vector2( 563.815, 188.919 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
 script = ExtResource( 1 )
 ball_dir = -1
 
 [node name="sprite" type="Sprite" parent="right"]
-
 texture = ExtResource( 3 )
-_sections_unfolded = [ "Transform" ]
 
 [node name="collision" type="CollisionShape2D" parent="right"]
-
 shape = SubResource( 1 )
 
 [node name="ball" type="Area2D" parent="."]
-
 position = Vector2( 320.5, 191.124 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
 script = ExtResource( 4 )
 
 [node name="sprite" type="Sprite" parent="ball"]
-
 texture = ExtResource( 5 )
-_sections_unfolded = [ "Transform" ]
 
 [node name="collision" type="CollisionShape2D" parent="ball"]
-
 shape = SubResource( 2 )
 
 [node name="separator" type="Sprite" parent="."]
-
 position = Vector2( 320, 200 )
 texture = ExtResource( 6 )
 
 [node name="left_wall" type="Area2D" parent="."]
-
 position = Vector2( -10, 200 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
 script = ExtResource( 7 )
-_sections_unfolded = [ "Transform" ]
 
 [node name="collision" type="CollisionShape2D" parent="left_wall"]
-
 shape = SubResource( 3 )
 
 [node name="right_wall" type="Area2D" parent="."]
-
 position = Vector2( 650, 200 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
 script = ExtResource( 7 )
-_sections_unfolded = [ "Transform" ]
 
 [node name="collision" type="CollisionShape2D" parent="right_wall"]
-
 shape = SubResource( 3 )
 
 [node name="ceiling" type="Area2D" parent="."]
-
 position = Vector2( 320, -10 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
 script = ExtResource( 8 )
-_sections_unfolded = [ "Transform" ]
-y_direction = 1
 
 [node name="collision" type="CollisionShape2D" parent="ceiling"]
-
 shape = SubResource( 4 )
 
 [node name="floor" type="Area2D" parent="."]
-
 position = Vector2( 320, 410 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
 script = ExtResource( 8 )
-_sections_unfolded = [ "Transform" ]
 y_direction = -1
 
 [node name="collision" type="CollisionShape2D" parent="floor"]
-
 shape = SubResource( 4 )
 
 [connection signal="area_entered" from="left" to="left" method="_on_area_entered"]
-
 [connection signal="area_entered" from="right" to="right" method="_on_area_entered"]
-
 [connection signal="area_entered" from="left_wall" to="left_wall" method="_on_wall_area_entered"]
-
 [connection signal="area_entered" from="right_wall" to="right_wall" method="_on_wall_area_entered"]
-
 [connection signal="area_entered" from="ceiling" to="ceiling" method="_on_area_entered"]
-
 [connection signal="area_entered" from="floor" to="floor" method="_on_area_entered"]
-
-

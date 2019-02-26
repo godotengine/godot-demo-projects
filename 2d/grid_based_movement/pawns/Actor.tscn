@@ -4,10 +4,8 @@
 [ext_resource path="res://pawns/sprites/character.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
-
 resource_name = "bump"
 length = 0.1
-loop = false
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Sprite:position")
@@ -23,10 +21,8 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=2]
-
 resource_name = "walk"
 length = 0.25
-loop = false
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Sprite:self_modulate")
@@ -65,47 +61,25 @@ tracks/2/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.20007, 0.917384 ), Vector2( 0.916712, 1.13495 ), Vector2( 1, 1 ) ]
 }
 
-[node name="Actor" type="Node2D" index="0"]
-
+[node name="Actor" type="Node2D"]
 position = Vector2( 32, 32 )
 z_index = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Offset", "Transform", "Z Index" ]
 __meta__ = {
 "_edit_group_": true
 }
-type = 0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
-
-root_node = NodePath("..")
-autoplay = ""
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/bump = SubResource( 1 )
 anims/walk = SubResource( 2 )
-blend_times = [  ]
 
-[node name="Tween" type="Tween" parent="." index="1"]
+[node name="Tween" type="Tween" parent="."]
 
-repeat = false
-playback_process_mode = 1
-playback_speed = 1.0
-playback/active = false
-playback/repeat = false
-playback/speed = 1.0
+[node name="Pivot" type="Position2D" parent="."]
 
-[node name="Pivot" type="Position2D" parent="." index="2"]
-
-_sections_unfolded = [ "Transform" ]
-
-[node name="Sprite" type="Sprite" parent="Pivot" index="0"]
-
+[node name="Sprite" type="Sprite" parent="Pivot"]
 position = Vector2( 1.43051e-06, -1.90735e-06 )
 texture = ExtResource( 2 )
 centered = false
 offset = Vector2( -32, -32 )
-_sections_unfolded = [ "Transform", "Visibility" ]
-
 

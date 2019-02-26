@@ -27,7 +27,7 @@ func _change_state(new_state):
 	_state = new_state
 
 
-func _process(delta):
+func _process(_delta):
 	if not _state == STATES.FOLLOW:
 		return
 	var arrived_to_next_point = move_to(target_point_world)

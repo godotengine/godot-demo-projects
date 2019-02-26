@@ -2,24 +2,14 @@
 
 [ext_resource path="res://player/bullet/bullet.gd" type="Script" id=1]
 
-
 [sub_resource type="CircleShape2D" id=1]
-
-custom_solver_bias = 0.0
 radius = 12.0
 
 [node name="Bullet" type="KinematicBody2D"]
-
-input_pickable = false
 collision_layer = 2
 collision_mask = 2
-collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "collision" ]
-SPEED = 1000.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
-
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
-
 

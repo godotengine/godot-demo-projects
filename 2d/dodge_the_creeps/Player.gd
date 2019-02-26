@@ -13,7 +13,8 @@ func _ready():
 func start(pos):
 	position = pos
 	show()
-	$Collision.disabled = false
+	# Must be deferred as we can't change physics properties on a physics callback
+	$Collision.set_deferred("disabled", false)
 
 func _process(delta):
 	velocity = Vector2()
@@ -45,10 +46,8 @@ func _process(delta):
 		$AnimatedSprite.animation = "up"
 		$AnimatedSprite.flip_v = velocity.y > 0
 
-func _on_Player_body_entered( body ):
-	$Collision.disabled = true
+func _on_Player_body_entered(_body):
+	# Must be deferred as we can't change physics properties on a physics callback
+	$Collision.set_deferred("disabled", true)
 	hide()
 	emit_signal("hit")
-
-
-

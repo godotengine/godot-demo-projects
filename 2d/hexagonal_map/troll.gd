@@ -7,7 +7,7 @@ extends KinematicBody2D
 const MOTION_SPEED = 160 # Pixels/second
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var motion = Vector2()
 	
 	if Input.is_action_pressed("move_up"):

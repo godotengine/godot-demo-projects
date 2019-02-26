@@ -4,21 +4,17 @@
 [ext_resource path="res://splat.png" type="Texture" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
-
-render_priority = 0
-blend_mode = 0
 light_mode = 2
 
 [sub_resource type="Animation" id=2]
-
 length = 4.0
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("light1:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 1, 2, 3 ),
 "transitions": PoolRealArray( -2, -2, -2, -2 ),
@@ -30,6 +26,7 @@ tracks/1/path = NodePath("light2:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 1, 2, 3 ),
 "transitions": PoolRealArray( -2, -2, -2, -2 ),
@@ -41,6 +38,7 @@ tracks/2/path = NodePath("light3:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 1, 2, 3 ),
 "transitions": PoolRealArray( -2, -2, -2, -2 ),
@@ -49,118 +47,35 @@ tracks/2/keys = {
 }
 
 [node name="lightmask_demo" type="Control"]
-
-anchor_left = 0.0
-anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
 [node name="burano" type="TextureRect" parent="."]
-
 material = SubResource( 1 )
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_right = 800.0
 margin_bottom = 600.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
 size_flags_horizontal = 2
 size_flags_vertical = 2
 texture = ExtResource( 1 )
-stretch_mode = 0
 
 [node name="light1" type="Light2D" parent="."]
-
 position = Vector2( 601.028, 242.639 )
-enabled = true
-editor_only = false
 texture = ExtResource( 2 )
-offset = Vector2( 0, 0 )
-texture_scale = 1.0
-color = Color( 1, 1, 1, 1 )
-energy = 1.0
 mode = 2
-range_height = 0.0
-range_z_min = -1024
-range_z_max = 1024
-range_layer_min = 0
-range_layer_max = 0
-range_item_cull_mask = 1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 0 )
-shadow_buffer_size = 2048
-shadow_gradient_length = 0.0
-shadow_filter = 0
-shadow_filter_smooth = 0.0
-shadow_item_cull_mask = 1
 
 [node name="light2" type="Light2D" parent="."]
-
 position = Vector2( 196.528, 185.139 )
-enabled = true
-editor_only = false
 texture = ExtResource( 2 )
-offset = Vector2( 0, 0 )
-texture_scale = 1.0
-color = Color( 1, 1, 1, 1 )
-energy = 1.0
 mode = 2
-range_height = 0.0
-range_z_min = -1024
-range_z_max = 1024
-range_layer_min = 0
-range_layer_max = 0
-range_item_cull_mask = 1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 0 )
-shadow_buffer_size = 2048
-shadow_gradient_length = 0.0
-shadow_filter = 0
-shadow_filter_smooth = 0.0
-shadow_item_cull_mask = 1
 
 [node name="light3" type="Light2D" parent="."]
-
 position = Vector2( 442.528, 411.139 )
-enabled = true
-editor_only = false
 texture = ExtResource( 2 )
-offset = Vector2( 0, 0 )
-texture_scale = 1.0
-color = Color( 1, 1, 1, 1 )
-energy = 1.0
 mode = 2
-range_height = 0.0
-range_z_min = -1024
-range_z_max = 1024
-range_layer_min = 0
-range_layer_max = 0
-range_item_cull_mask = 1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 0 )
-shadow_buffer_size = 2048
-shadow_gradient_length = 0.0
-shadow_filter = 0
-shadow_filter_smooth = 0.0
-shadow_item_cull_mask = 1
 
 [node name="anim" type="AnimationPlayer" parent="."]
-
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-root_node = NodePath("..")
-anims/maskmotion = SubResource( 2 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
 autoplay = "maskmotion"
-
+anims/maskmotion = SubResource( 2 )
 

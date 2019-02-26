@@ -4,11 +4,7 @@
 [ext_resource path="res://player/weapon/sword.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
-
 resource_name = "SETUP"
-length = 1.0
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
@@ -71,10 +67,8 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id=2]
-
 resource_name = "attack_circular"
 length = 0.3
-loop = false
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -114,9 +108,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=3]
-
 length = 0.45
-loop = false
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -173,10 +165,8 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-
 resource_name = "attack_medium"
 length = 0.5
-loop = false
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -216,10 +206,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=5]
-
 length = 0.01
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
@@ -234,45 +221,24 @@ tracks/0/keys = {
 }
 
 [node name="Sword" type="Area2D"]
-
 input_pickable = false
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
 monitorable = false
 collision_layer = 16
 collision_mask = 3
-audio_bus_override = false
-audio_bus_name = "Master"
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
-
-root_node = NodePath("..")
-autoplay = ""
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/SETUP = SubResource( 1 )
 anims/attack_circular = SubResource( 2 )
 anims/attack_fast = SubResource( 3 )
 anims/attack_medium = SubResource( 4 )
 anims/idle = SubResource( 5 )
-blend_times = [  ]
-_sections_unfolded = [ "Playback Options" ]
 
-[node name="sword" type="Sprite" parent="." index="1"]
-
+[node name="sword" type="Sprite" parent="."]
 position = Vector2( 4, 0 )
 texture = ExtResource( 2 )
 offset = Vector2( 67, 0 )
-_sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="2"]
-
-build_mode = 0
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( 28.0001, -15.9999, 136, -15.9995, 160, 0, 136, 16.0005, 27.9999, 16.0001 )
-
 

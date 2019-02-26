@@ -18,15 +18,8 @@
 
 [sub_resource type="Animation" id=1]
 
-length = 1.0
-loop = false
-step = 0.1
-
 [sub_resource type="Animation" id=2]
-
 length = 0.6
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("BodyPivot/Body:modulate")
 tracks/0/interp = 1
@@ -42,159 +35,91 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 
-length = 1.0
-loop = false
-step = 0.1
-
 [sub_resource type="DynamicFont" id=4]
-
 size = 20
-use_mipmaps = false
 use_filter = true
 font_data = ExtResource( 14 )
-_sections_unfolded = [ "Font", "Settings" ]
 
-[node name="Player" type="KinematicBody2D" index="0"]
-
+[node name="Player" type="KinematicBody2D"]
 position = Vector2( 628.826, 391.266 )
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Visibility" ]
 __meta__ = {
 "_edit_horizontal_guides_": [  ]
 }
 
-[node name="StateMachine" type="Node" parent="." index="0"]
-
+[node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 2 )
 START_STATE = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" index="0"]
-
+[node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource( 3 )
 
-[node name="Move" type="Node" parent="StateMachine" index="1"]
-
+[node name="Move" type="Node" parent="StateMachine"]
 script = ExtResource( 4 )
-MAX_WALK_SPEED = 450
-MAX_RUN_SPEED = 700
 
-[node name="Jump" type="Node" parent="StateMachine" index="2"]
-
+[node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )
-BASE_MAX_HORIZONTAL_SPEED = 400.0
-AIR_ACCELERATION = 1000.0
-AIR_DECCELERATION = 2000.0
-AIR_STEERING_POWER = 50.0
-JUMP_HEIGHT = 120.0
-JUMP_DURATION = 0.8
-GRAVITY = 1600.0
 
-[node name="Stagger" type="Node" parent="StateMachine" index="3"]
-
+[node name="Stagger" type="Node" parent="StateMachine"]
 script = ExtResource( 6 )
 
-[node name="Attack" type="Node" parent="StateMachine" index="4"]
-
+[node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource( 7 )
 
-[node name="Die" type="Node" parent="StateMachine" index="5"]
-
+[node name="Die" type="Node" parent="StateMachine"]
 script = ExtResource( 8 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
-
-root_node = NodePath("..")
-autoplay = ""
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/idle = SubResource( 1 )
 anims/stagger = SubResource( 2 )
 anims/walk = SubResource( 3 )
-blend_times = [  ]
 
-[node name="Shadow" type="Sprite" parent="." index="2"]
-
+[node name="Shadow" type="Sprite" parent="."]
 self_modulate = Color( 1, 1, 1, 0.361098 )
 position = Vector2( 0, -4 )
 texture = ExtResource( 9 )
-_sections_unfolded = [ "Visibility" ]
 
-[node name="BodyPivot" type="Position2D" parent="." index="3"]
+[node name="BodyPivot" type="Position2D" parent="."]
 
-[node name="Body" type="Sprite" parent="BodyPivot" index="0"]
-
+[node name="Body" type="Sprite" parent="BodyPivot"]
 position = Vector2( 0, -58.8242 )
 texture = ExtResource( 10 )
 
-[node name="BulletSpawn" type="Node2D" parent="BodyPivot" index="1"]
-
+[node name="BulletSpawn" type="Node2D" parent="BodyPivot"]
 editor/display_folded = true
 position = Vector2( 1.17401, -61.266 )
 script = ExtResource( 11 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="CooldownTimer" type="Timer" parent="BodyPivot/BulletSpawn" index="0"]
-
-process_mode = 1
+[node name="CooldownTimer" type="Timer" parent="BodyPivot/BulletSpawn"]
 wait_time = 0.2
 one_shot = true
-autostart = false
 
-[node name="WeaponPivot" type="Position2D" parent="BodyPivot" index="2"]
-
+[node name="WeaponPivot" type="Position2D" parent="BodyPivot"]
 position = Vector2( 1.17401, -61.266 )
 script = ExtResource( 12 )
 
-[node name="Offset" type="Position2D" parent="BodyPivot/WeaponPivot" index="0"]
-
+[node name="Offset" type="Position2D" parent="BodyPivot/WeaponPivot"]
 position = Vector2( 110, 0 )
 
-[node name="Sword" parent="BodyPivot/WeaponPivot/Offset" index="0" instance=ExtResource( 13 )]
+[node name="Sword" parent="BodyPivot/WeaponPivot/Offset" instance=ExtResource( 13 )]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="4"]
-
-build_mode = 0
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -20, 0, -20, -20, 20, -20, 20, 0 )
 
-[node name="StateNameDisplayer" type="Label" parent="." index="5"]
-
+[node name="StateNameDisplayer" type="Label" parent="."]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = -109.0
 margin_top = -172.0
 margin_right = 110.0
 margin_bottom = -138.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 custom_fonts/font = SubResource( 4 )
 text = "Test"
 align = 1
 valign = 1
 uppercase = true
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 script = ExtResource( 15 )
-_sections_unfolded = [ "Rect", "custom_fonts" ]
 
 [connection signal="state_changed" from="StateMachine" to="BodyPivot/WeaponPivot/Offset/Sword" method="_on_StateMachine_state_changed"]
-
 [connection signal="state_changed" from="StateMachine" to="StateNameDisplayer" method="_on_StateMachine_state_changed"]
-
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_finished"]
-
 [connection signal="attack_finished" from="BodyPivot/WeaponPivot/Offset/Sword" to="StateMachine/Attack" method="_on_Sword_attack_finished"]
-
-
