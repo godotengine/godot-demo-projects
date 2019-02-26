@@ -4,373 +4,165 @@
 [ext_resource path="res://CubeScene.tscn" type="PackedScene" id=2]
 
 [node name="VBoxContainer" type="VBoxContainer"]
-
-anchor_left = 0.0
-anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
 size_flags_horizontal = 0
 size_flags_vertical = 0
-alignment = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 512.0
-margin_bottom = 254.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
+margin_right = 1024.0
+margin_bottom = 298.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 0
 
 [node name="ViewportContainer" type="ViewportContainer" parent="HBoxContainer"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 254.0
-margin_bottom = 254.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
+margin_right = 510.0
+margin_bottom = 298.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
-stretch_shrink = 1
 script = ExtResource( 1 )
 target = NodePath("Viewport/Spatial/MeshInstance")
-min_scale = 0.1
-max_scale = 3.0
-one_finger_rot_x = true
 one_finger_rot_y = false
 two_fingers_rot_z = false
 two_fingers_zoom = false
 
 [node name="Viewport" type="Viewport" parent="HBoxContainer/ViewportContainer"]
-
-arvr = false
-size = Vector2( 254, 254 )
+size = Vector2( 510, 298 )
 own_world = true
-world = null
 transparent_bg = true
-msaa = 0
+handle_input_locally = false
 hdr = false
-disable_3d = false
-usage = 2
-debug_draw = 0
-render_target_v_flip = false
-render_target_clear_mode = 0
 render_target_update_mode = 3
-audio_listener_enable_2d = false
-audio_listener_enable_3d = false
-physics_object_picking = false
-gui_disable_input = false
-gui_snap_controls_to_pixels = true
-shadow_atlas_size = 0
-shadow_atlas_quad_0 = 2
-shadow_atlas_quad_1 = 2
-shadow_atlas_quad_2 = 3
-shadow_atlas_quad_3 = 4
 
 [node name="Spatial" parent="HBoxContainer/ViewportContainer/Viewport" instance=ExtResource( 2 )]
 
-[node name="DirectionalLight" parent="HBoxContainer/ViewportContainer/Viewport/Spatial"]
+[node name="DirectionalLight" parent="HBoxContainer/ViewportContainer/Viewport/Spatial" index="1"]
+light_cull_mask = 4294967295
 
-light_cull_mask = -1
-
-[node name="Camera" parent="HBoxContainer/ViewportContainer/Viewport/Spatial"]
-
+[node name="Camera" parent="HBoxContainer/ViewportContainer/Viewport/Spatial" index="2"]
 current = true
 
 [node name="Label" type="Label" parent="HBoxContainer/ViewportContainer"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 7.0
 margin_top = 11.0
 margin_right = 157.0
 margin_bottom = 25.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "One-finger rot around X"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="ViewportContainer2" type="ViewportContainer" parent="HBoxContainer"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 258.0
-margin_right = 512.0
-margin_bottom = 254.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
+margin_left = 514.0
+margin_right = 1024.0
+margin_bottom = 298.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
-stretch_shrink = 1
 script = ExtResource( 1 )
 target = NodePath("Viewport/Spatial/MeshInstance")
-min_scale = 0.1
-max_scale = 3.0
-one_finger_rot_x = true
-one_finger_rot_y = true
 two_fingers_rot_z = false
 two_fingers_zoom = false
 
 [node name="Viewport" type="Viewport" parent="HBoxContainer/ViewportContainer2"]
-
-arvr = false
-size = Vector2( 254, 254 )
+size = Vector2( 510, 298 )
 own_world = true
-world = null
 transparent_bg = true
-msaa = 0
+handle_input_locally = false
 hdr = false
-disable_3d = false
-usage = 2
-debug_draw = 0
-render_target_v_flip = false
-render_target_clear_mode = 0
 render_target_update_mode = 3
-audio_listener_enable_2d = false
-audio_listener_enable_3d = false
-physics_object_picking = false
-gui_disable_input = false
-gui_snap_controls_to_pixels = true
-shadow_atlas_size = 0
-shadow_atlas_quad_0 = 2
-shadow_atlas_quad_1 = 2
-shadow_atlas_quad_2 = 3
-shadow_atlas_quad_3 = 4
 
 [node name="Spatial" parent="HBoxContainer/ViewportContainer2/Viewport" instance=ExtResource( 2 )]
 
-[node name="DirectionalLight" parent="HBoxContainer/ViewportContainer2/Viewport/Spatial"]
+[node name="DirectionalLight" parent="HBoxContainer/ViewportContainer2/Viewport/Spatial" index="1"]
+light_cull_mask = 4294967295
 
-light_cull_mask = -1
-
-[node name="Camera" parent="HBoxContainer/ViewportContainer2/Viewport/Spatial"]
-
+[node name="Camera" parent="HBoxContainer/ViewportContainer2/Viewport/Spatial" index="2"]
 current = true
 
 [node name="Label2" type="Label" parent="HBoxContainer/ViewportContainer2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 8.0
 margin_top = 11.0
 margin_right = 196.0
 margin_bottom = 25.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "One-finger rot around X and Y"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 258.0
-margin_right = 512.0
-margin_bottom = 512.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
+margin_top = 302.0
+margin_right = 1024.0
+margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 0
 
 [node name="ViewportContainer" type="ViewportContainer" parent="HBoxContainer2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 254.0
-margin_bottom = 254.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
+margin_right = 510.0
+margin_bottom = 298.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
-stretch_shrink = 1
 script = ExtResource( 1 )
 target = NodePath("Viewport/Spatial/MeshInstance")
-min_scale = 0.1
-max_scale = 3.0
-one_finger_rot_x = true
-one_finger_rot_y = true
-two_fingers_rot_z = true
 two_fingers_zoom = false
 
 [node name="Viewport" type="Viewport" parent="HBoxContainer2/ViewportContainer"]
-
-arvr = false
-size = Vector2( 254, 254 )
+size = Vector2( 510, 298 )
 own_world = true
-world = null
 transparent_bg = true
-msaa = 0
+handle_input_locally = false
 hdr = false
-disable_3d = false
-usage = 2
-debug_draw = 0
-render_target_v_flip = false
-render_target_clear_mode = 0
 render_target_update_mode = 3
-audio_listener_enable_2d = false
-audio_listener_enable_3d = false
-physics_object_picking = false
-gui_disable_input = false
-gui_snap_controls_to_pixels = true
-shadow_atlas_size = 0
-shadow_atlas_quad_0 = 2
-shadow_atlas_quad_1 = 2
-shadow_atlas_quad_2 = 3
-shadow_atlas_quad_3 = 4
 
 [node name="Spatial" parent="HBoxContainer2/ViewportContainer/Viewport" instance=ExtResource( 2 )]
 
-[node name="DirectionalLight" parent="HBoxContainer2/ViewportContainer/Viewport/Spatial"]
+[node name="DirectionalLight" parent="HBoxContainer2/ViewportContainer/Viewport/Spatial" index="1"]
+light_cull_mask = 4294967295
 
-light_cull_mask = -1
-
-[node name="Camera" parent="HBoxContainer2/ViewportContainer/Viewport/Spatial"]
-
+[node name="Camera" parent="HBoxContainer2/ViewportContainer/Viewport/Spatial" index="2"]
 current = true
 
 [node name="Label3" type="Label" parent="HBoxContainer2/ViewportContainer"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 8.0
 margin_top = 9.0
 margin_right = 236.0
 margin_bottom = 23.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "One-finger X/Y rot + two-finger Z rot"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="ViewportContainer2" type="ViewportContainer" parent="HBoxContainer2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 258.0
-margin_right = 512.0
-margin_bottom = 254.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
+margin_left = 514.0
+margin_right = 1024.0
+margin_bottom = 298.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
-stretch_shrink = 1
 script = ExtResource( 1 )
 target = NodePath("Viewport/Spatial/MeshInstance")
-min_scale = 0.1
-max_scale = 3.0
-one_finger_rot_x = true
-one_finger_rot_y = true
-two_fingers_rot_z = true
-two_fingers_zoom = true
 
 [node name="Viewport" type="Viewport" parent="HBoxContainer2/ViewportContainer2"]
-
-arvr = false
-size = Vector2( 254, 254 )
+size = Vector2( 510, 298 )
 own_world = true
-world = null
 transparent_bg = true
-msaa = 0
+handle_input_locally = false
 hdr = false
-disable_3d = false
-usage = 2
-debug_draw = 0
-render_target_v_flip = false
-render_target_clear_mode = 0
 render_target_update_mode = 3
-audio_listener_enable_2d = false
-audio_listener_enable_3d = false
-physics_object_picking = false
-gui_disable_input = false
-gui_snap_controls_to_pixels = true
-shadow_atlas_size = 0
-shadow_atlas_quad_0 = 2
-shadow_atlas_quad_1 = 2
-shadow_atlas_quad_2 = 3
-shadow_atlas_quad_3 = 4
 
 [node name="Spatial" parent="HBoxContainer2/ViewportContainer2/Viewport" instance=ExtResource( 2 )]
 
-[node name="DirectionalLight" parent="HBoxContainer2/ViewportContainer2/Viewport/Spatial"]
+[node name="DirectionalLight" parent="HBoxContainer2/ViewportContainer2/Viewport/Spatial" index="1"]
+light_cull_mask = 4294967295
 
-light_cull_mask = -1
-
-[node name="Camera" parent="HBoxContainer2/ViewportContainer2/Viewport/Spatial"]
-
+[node name="Camera" parent="HBoxContainer2/ViewportContainer2/Viewport/Spatial" index="2"]
 current = true
 
 [node name="Label2" type="Label" parent="HBoxContainer2/ViewportContainer2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 12.0
 margin_top = 9.0
 margin_right = 279.0
 margin_bottom = 23.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "One-finger X/Y, two-finger Z + pinch"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 
 [editable path="HBoxContainer/ViewportContainer/Viewport/Spatial"]
+
 [editable path="HBoxContainer/ViewportContainer2/Viewport/Spatial"]
+
 [editable path="HBoxContainer2/ViewportContainer/Viewport/Spatial"]
+
 [editable path="HBoxContainer2/ViewportContainer2/Viewport/Spatial"]

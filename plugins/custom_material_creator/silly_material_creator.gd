@@ -1,7 +1,7 @@
 tool
 extends Panel
 
-var silly_material_resource = preload("res://addons/custom_import_plugin/Silly_material_resource.gd")
+var silly_material_resource = preload("res://addons/custom_material_creator/silly_material_resource.gd")
 var editor_interface
 
 func _ready():

@@ -38,7 +38,7 @@ func request_purchased():
 	if payment:
 		payment.requestPurchased()
 
-func has_purchased(receipt, signature, sku):
+func has_purchased(_receipt, _signature, sku):
 	if sku == "":
 		print("has_purchased : nothing")
 		emit_signal("has_purchased", null)
@@ -54,7 +54,7 @@ func purchase(item_name):
 		# transaction_id could be any string that used for validation internally in java
 		payment.purchase(item_name, "transaction_id")
 
-func purchase_success(receipt, signature, sku):
+func purchase_success(_receipt, _signature, sku):
 	print("purchase_success : ", sku)
 	emit_signal("purchase_success", sku)
 
@@ -82,7 +82,7 @@ func consume_all():
 	if payment:
 		payment.consumeUnconsumedPurchases()
 
-func consume_success(receipt, signature, sku):
+func consume_success(_receipt, _signature, sku):
 	print("consume_success : ", sku)
 	emit_signal("consume_success", sku)
 

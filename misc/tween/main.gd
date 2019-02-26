@@ -73,7 +73,7 @@ func on_modes_changed(mode_name):
 		reset_tween()
 
 
-func on_color_changed(color):
+func on_color_changed(_color):
 	reset_tween()
 
 
@@ -138,7 +138,7 @@ func reset_tween():
 		#get_node("timeline").set_ignore_mouse(true)
 
 
-func _on_tween_step(object, key, elapsed, value):
+func _on_tween_step(_object, _key, elapsed, _value):
 	var timeline = get_node("timeline")
 
 	var tween = get_node("tween")

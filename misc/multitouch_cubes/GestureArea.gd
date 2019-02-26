@@ -27,7 +27,6 @@ func _gui_input(event):
 #		(event is InputEventScreenTouch && (!event.pressed || get_global_rect().has_point(event.position)))):
 #		return
 
-	var finger_count_changed = false
 	var finger_count = base_state.size()
 
 	if finger_count == 0:

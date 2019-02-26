@@ -4,16 +4,9 @@
 
 [sub_resource type="CubeMesh" id=1]
 
-size = Vector3( 2, 2, 2 )
-subdivide_width = 0
-subdivide_height = 0
-subdivide_depth = 0
-
 [sub_resource type="Animation" id=2]
-
 length = 10.0
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("cube:rotation_degrees")
 tracks/0/interp = 1
@@ -27,165 +20,63 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, -360, 0 ) ]
 }
 
-[node name="pause_scene" type="Spatial" index="0"]
-
+[node name="pause_scene" type="Spatial"]
 script = ExtResource( 1 )
 
-[node name="cube" type="MeshInstance" parent="." index="0"]
-
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
+[node name="cube" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
-skeleton = NodePath("..")
 material/0 = null
 
-[node name="camera" type="Camera" parent="." index="1"]
-
+[node name="camera" type="Camera" parent="."]
 transform = Transform( 0.571594, 0.275303, -0.772974, 0, 0.942035, 0.335515, 0.820537, -0.191779, 0.538461, -5.59754, 2.75935, 4.01344 )
-keep_aspect = 1
-cull_mask = 1048575
-environment = null
-h_offset = 0.0
-v_offset = 0.0
-doppler_tracking = 0
-projection = 0
-current = false
 fov = 74.0
-size = 1.0
 near = 0.1
-far = 100.0
 
-[node name="anim" type="AnimationPlayer" parent="." index="2"]
-
-root_node = NodePath("..")
+[node name="anim" type="AnimationPlayer" parent="."]
 autoplay = "spin"
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
 anims/spin = SubResource( 2 )
-blend_times = [  ]
-autoplay = "spin"
 
-[node name="spot" type="SpotLight" parent="." index="3"]
-
+[node name="spot" type="SpotLight" parent="."]
 transform = Transform( 0.792992, 0.251051, -0.555101, 0, 0.911149, 0.412078, 0.609232, -0.326775, 0.722534, -3.05357, 1.80053, 3.64099 )
-layers = 1
-light_color = Color( 1, 1, 1, 1 )
-light_energy = 1.0
-light_indirect_energy = 1.0
-light_negative = false
-light_specular = 0.5
-light_bake_mode = 1
-light_cull_mask = -1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 1 )
-shadow_bias = 0.15
-shadow_contact = 0.0
-shadow_reverse_cull_face = false
-editor_only = false
 spot_range = 6.0
-spot_attenuation = 1.0
-spot_angle = 45.0
-spot_angle_attenuation = 1.0
-_sections_unfolded = [ "Spot" ]
 
-[node name="pause" type="Button" parent="." index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="pause" type="Button" parent="."]
 margin_left = 24.0
 margin_top = 24.0
 margin_right = 120.0
 margin_bottom = 56.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "PAUSE!"
-flat = false
-align = 1
 
-[node name="pause_popup" type="PopupPanel" parent="." index="5"]
-
+[node name="pause_popup" type="PopupPanel" parent="."]
 pause_mode = 2
-visible = false
 self_modulate = Color( 1, 1, 1, 0.7 )
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 185.0
 margin_top = 72.0
 margin_right = 638.0
 margin_bottom = 433.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-popup_exclusive = false
-_sections_unfolded = [ "Pause" ]
 
-[node name="text" type="Label" parent="pause_popup" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 73.0
-margin_top = 49.0
-margin_right = 389.0
-margin_bottom = 154.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
+[node name="text" type="Label" parent="pause_popup"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 449.0
+margin_bottom = 357.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "The game has been paused! Nodes are not processing anymore, but this popup can still process!"
 autowrap = true
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="unpause" type="Button" parent="pause_popup" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 185.0
-margin_top = 288.0
-margin_right = 281.0
-margin_bottom = 320.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
+[node name="unpause" type="Button" parent="pause_popup"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 449.0
+margin_bottom = 357.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "UN-PAUSE!"
-flat = false
-align = 1
 
 [connection signal="pressed" from="pause" to="." method="_on_pause_pressed"]
-
 [connection signal="pressed" from="pause_popup/unpause" to="." method="_on_unpause_pressed"]

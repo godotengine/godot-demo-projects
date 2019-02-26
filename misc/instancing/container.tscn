@@ -1,69 +1,87 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://container.png" type="Texture" id=1]
 [ext_resource path="res://ball.tscn" type="PackedScene" id=2]
+
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 0.4
+
+[sub_resource type="PhysicsMaterial" id=2]
+bounce = 0.4
+
+[sub_resource type="PhysicsMaterial" id=3]
+bounce = 0.4
+
+[sub_resource type="PhysicsMaterial" id=4]
+bounce = 0.4
+
+[sub_resource type="PhysicsMaterial" id=5]
+bounce = 0.4
+
+[sub_resource type="PhysicsMaterial" id=6]
+bounce = 0.4
+
+[sub_resource type="PhysicsMaterial" id=7]
+bounce = 0.4
+
+[sub_resource type="PhysicsMaterial" id=8]
+bounce = 0.4
+
+[sub_resource type="PhysicsMaterial" id=9]
+bounce = 0.4
+
+[sub_resource type="PhysicsMaterial" id=10]
+bounce = 0.4
 
 [node name="container" type="Node"]
 
 [node name="static" type="StaticBody2D" parent="."]
 
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
 [node name="sprite" type="Sprite" parent="static"]
-
 position = Vector2( 3, -4 )
 texture = ExtResource( 1 )
 centered = false
 
 [node name="collision" type="CollisionPolygon2D" parent="static"]
-
-build_mode = 0
 polygon = PoolVector2Array( 8.68994, 22.1976, 50.4445, 556.656, 292.621, 501.54, 335.36, 550.855, 510.039, 563.135, 542.137, 526.368, 567.463, 515.822, 612.463, 506.822, 667.291, 495.079, 747.553, 553.575, 793.806, 6.70509, 802.465, 601.097, 4.43558, 596.186 )
 
 [node name="ball 1" parent="." instance=ExtResource( 2 )]
-
 position = Vector2( 223.823, 161.773 )
+physics_material_override = SubResource( 1 )
 
 [node name="ball 2" parent="." instance=ExtResource( 2 )]
-
 position = Vector2( 388.078, 213.215 )
+physics_material_override = SubResource( 2 )
 
 [node name="ball 3" parent="." instance=ExtResource( 2 )]
-
 position = Vector2( 439.52, 104.013 )
+physics_material_override = SubResource( 3 )
 
 [node name="ball 4" parent="." instance=ExtResource( 2 )]
-
 position = Vector2( 235.555, 336.858 )
+physics_material_override = SubResource( 4 )
 
 [node name="ball 5" parent="." instance=ExtResource( 2 )]
-
 position = Vector2( 509.555, 362.858 )
+physics_material_override = SubResource( 5 )
 
 [node name="ball 6" parent="." instance=ExtResource( 2 )]
-
 position = Vector2( 635.555, 147.858 )
+physics_material_override = SubResource( 6 )
 
 [node name="ball 7" parent="." instance=ExtResource( 2 )]
-
 position = Vector2( 631.872, 325.88 )
+physics_material_override = SubResource( 7 )
 
 [node name="ball 8" parent="." instance=ExtResource( 2 )]
-
 position = Vector2( 529.97, 205.561 )
+physics_material_override = SubResource( 8 )
 
 [node name="ball 9" parent="." instance=ExtResource( 2 )]
-
 position = Vector2( 101.489, 167.502 )
+physics_material_override = SubResource( 9 )
 
 [node name="ball 10" parent="." instance=ExtResource( 2 )]
-
 position = Vector2( 143.756, 295.139 )
-
+physics_material_override = SubResource( 10 )
 

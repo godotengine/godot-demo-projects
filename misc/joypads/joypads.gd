@@ -14,7 +14,7 @@ var axis_value
 
 const DEADZONE = 0.2
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Get the joypad device number from the spinbox
 	joy_num = get_node("device_info/joy_num").get_value()
 
