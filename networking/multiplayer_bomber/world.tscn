@@ -6,400 +6,283 @@
 [ext_resource path="res://montserrat.otf" type="DynamicFontData" id=4]
 
 [sub_resource type="DynamicFont" id=1]
-
 size = 44
-use_mipmaps = false
-use_filter = false
 font_data = ExtResource( 4 )
 
 [node name="world" type="Node2D"]
 
-[node name="map" type="TileMap" parent="." index="0"]
-
-mode = 0
+[node name="map" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 48, 48 )
-cell_quadrant_size = 16
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-cell_half_offset = 2
-cell_tile_origin = 0
-cell_y_sort = false
-cell_clip_uv = false
-collision_use_kinematic = false
-collision_friction = 1.0
-collision_bounce = 0.0
-collision_layer = 1
-collision_mask = 1
-occluder_light_mask = 1
 format = 1
 tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 65536, 0, 0, 65537, 1, 0, 65538, 1, 0, 65539, 1, 0, 65540, 1, 0, 65541, 1, 0, 65542, 1, 0, 65543, 1, 0, 65544, 1, 0, 65545, 1, 0, 65546, 1, 0, 65547, 1, 0, 65548, 1, 0, 65549, 1, 0, 65550, 1, 0, 65551, 1, 0, 65552, 1, 0, 65553, 1, 0, 65554, 1, 0, 65555, 1, 0, 65556, 0, 0, 65557, 0, 0, 131072, 0, 0, 131073, 1, 0, 131074, 0, 0, 131075, 1, 0, 131076, 0, 0, 131077, 1, 0, 131078, 0, 0, 131079, 1, 0, 131080, 0, 0, 131081, 1, 0, 131082, 0, 0, 131083, 0, 0, 131084, 0, 0, 131085, 0, 0, 131086, 0, 0, 131087, 1, 0, 131088, 0, 0, 131089, 1, 0, 131090, 0, 0, 131091, 1, 0, 131092, 0, 0, 131093, 0, 0, 196608, 0, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 196612, 0, 0, 196613, 1, 0, 196614, 1, 0, 196615, 1, 0, 196616, 1, 0, 196617, 1, 0, 196618, 0, 0, 196619, 1, 0, 196620, 1, 0, 196621, 1, 0, 196622, 1, 0, 196623, 1, 0, 196624, 1, 0, 196625, 1, 0, 196626, 1, 0, 196627, 1, 0, 196628, 0, 0, 196629, 0, 0, 262144, 0, 0, 262145, 1, 0, 262146, 0, 0, 262147, 1, 0, 262148, 0, 0, 262149, 1, 0, 262150, 0, 0, 262151, 1, 0, 262152, 0, 0, 262153, 1, 0, 262154, 0, 0, 262155, 1, 0, 262156, 0, 0, 262157, 1, 0, 262158, 0, 0, 262159, 1, 0, 262160, 0, 0, 262161, 1, 0, 262162, 0, 0, 262163, 1, 0, 262164, 0, 0, 262165, 0, 0, 327680, 0, 0, 327681, 1, 0, 327682, 1, 0, 327683, 1, 0, 327684, 1, 0, 327685, 1, 0, 327686, 0, 0, 327687, 1, 0, 327688, 1, 0, 327689, 1, 0, 327690, 1, 0, 327691, 1, 0, 327692, 1, 0, 327693, 1, 0, 327694, 1, 0, 327695, 1, 0, 327696, 1, 0, 327697, 1, 0, 327698, 0, 0, 327699, 1, 0, 327700, 0, 0, 327701, 0, 0, 393216, 0, 0, 393217, 1, 0, 393218, 0, 0, 393219, 1, 0, 393220, 0, 0, 393221, 1, 0, 393222, 0, 0, 393223, 1, 0, 393224, 0, 0, 393225, 1, 0, 393226, 0, 0, 393227, 1, 0, 393228, 0, 0, 393229, 0, 0, 393230, 0, 0, 393231, 0, 0, 393232, 0, 0, 393233, 1, 0, 393234, 0, 0, 393235, 1, 0, 393236, 0, 0, 393237, 0, 0, 458752, 0, 0, 458753, 1, 0, 458754, 1, 0, 458755, 1, 0, 458756, 1, 0, 458757, 1, 0, 458758, 1, 0, 458759, 1, 0, 458760, 1, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 1, 0, 458765, 1, 0, 458766, 1, 0, 458767, 1, 0, 458768, 1, 0, 458769, 1, 0, 458770, 1, 0, 458771, 1, 0, 458772, 0, 0, 458773, 0, 0, 524288, 0, 0, 524289, 1, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 1, 0, 524294, 0, 0, 524295, 1, 0, 524296, 0, 0, 524297, 1, 0, 524298, 0, 0, 524299, 1, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 1, 0, 524304, 0, 0, 524305, 1, 0, 524306, 0, 0, 524307, 1, 0, 524308, 0, 0, 524309, 0, 0, 589824, 0, 0, 589825, 1, 0, 589826, 1, 0, 589827, 1, 0, 589828, 1, 0, 589829, 1, 0, 589830, 1, 0, 589831, 1, 0, 589832, 0, 0, 589833, 1, 0, 589834, 1, 0, 589835, 1, 0, 589836, 0, 0, 589837, 1, 0, 589838, 1, 0, 589839, 1, 0, 589840, 1, 0, 589841, 1, 0, 589842, 1, 0, 589843, 1, 0, 589844, 0, 0, 589845, 0, 0, 655360, 0, 0, 655361, 1, 0, 655362, 0, 0, 655363, 1, 0, 655364, 0, 0, 655365, 1, 0, 655366, 0, 0, 655367, 1, 0, 655368, 0, 0, 655369, 1, 0, 655370, 0, 0, 655371, 1, 0, 655372, 0, 0, 655373, 1, 0, 655374, 0, 0, 655375, 1, 0, 655376, 0, 0, 655377, 1, 0, 655378, 0, 0, 655379, 1, 0, 655380, 0, 0, 655381, 0, 0, 720896, 0, 0, 720897, 1, 0, 720898, 1, 0, 720899, 1, 0, 720900, 1, 0, 720901, 1, 0, 720902, 1, 0, 720903, 1, 0, 720904, 1, 0, 720905, 1, 0, 720906, 1, 0, 720907, 1, 0, 720908, 1, 0, 720909, 1, 0, 720910, 1, 0, 720911, 1, 0, 720912, 1, 0, 720913, 1, 0, 720914, 1, 0, 720915, 1, 0, 720916, 0, 0, 720917, 0, 0, 786432, 0, 0, 786433, 0, 0, 786434, 0, 0, 786435, 0, 0, 786436, 0, 0, 786437, 0, 0, 786438, 0, 0, 786439, 0, 0, 786440, 0, 0, 786441, 0, 0, 786442, 0, 0, 786443, 0, 0, 786444, 0, 0, 786445, 0, 0, 786446, 0, 0, 786447, 0, 0, 786448, 0, 0, 786449, 0, 0, 786450, 0, 0, 786451, 0, 0, 786452, 0, 0, 786453, 0, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="spawn_points" type="Node2D" parent="." index="1"]
-
+[node name="spawn_points" type="Node2D" parent="."]
 editor/display_folded = true
 
-[node name="0" type="Position2D" parent="spawn_points" index="0"]
-
+[node name="0" type="Position2D" parent="spawn_points"]
 position = Vector2( 72, 72 )
 
-[node name="1" type="Position2D" parent="spawn_points" index="1"]
-
+[node name="1" type="Position2D" parent="spawn_points"]
 position = Vector2( 264, 216 )
 
-[node name="2" type="Position2D" parent="spawn_points" index="2"]
-
+[node name="2" type="Position2D" parent="spawn_points"]
 position = Vector2( 72, 456 )
 
-[node name="3" type="Position2D" parent="spawn_points" index="3"]
-
+[node name="3" type="Position2D" parent="spawn_points"]
 position = Vector2( 360, 552 )
 
-[node name="4" type="Position2D" parent="spawn_points" index="4"]
-
+[node name="4" type="Position2D" parent="spawn_points"]
 position = Vector2( 840, 360 )
 
-[node name="5" type="Position2D" parent="spawn_points" index="5"]
-
+[node name="5" type="Position2D" parent="spawn_points"]
 position = Vector2( 456, 264 )
 
-[node name="6" type="Position2D" parent="spawn_points" index="6"]
-
+[node name="6" type="Position2D" parent="spawn_points"]
 position = Vector2( 696, 264 )
 
-[node name="7" type="Position2D" parent="spawn_points" index="7"]
-
+[node name="7" type="Position2D" parent="spawn_points"]
 position = Vector2( 744, 456 )
 
-[node name="8" type="Position2D" parent="spawn_points" index="8"]
-
+[node name="8" type="Position2D" parent="spawn_points"]
 position = Vector2( 312, 456 )
 
-[node name="9" type="Position2D" parent="spawn_points" index="9"]
-
+[node name="9" type="Position2D" parent="spawn_points"]
 position = Vector2( 696, 72 )
 
-[node name="10" type="Position2D" parent="spawn_points" index="10"]
-
+[node name="10" type="Position2D" parent="spawn_points"]
 position = Vector2( 504, 72 )
 
-[node name="11" type="Position2D" parent="spawn_points" index="11"]
-
+[node name="11" type="Position2D" parent="spawn_points"]
 position = Vector2( 936, 72 )
 
-[node name="rocks" type="Node2D" parent="." index="2"]
+[node name="rocks" type="Node2D" parent="."]
 
-[node name="rock" parent="rocks" index="0" instance=ExtResource( 2 )]
-
+[node name="rock" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 120, 72 )
 
-[node name="rock1" parent="rocks" index="1" instance=ExtResource( 2 )]
-
+[node name="rock1" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 264, 168 )
 
-[node name="rock2" parent="rocks" index="2" instance=ExtResource( 2 )]
-
+[node name="rock2" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 264, 120 )
 
-[node name="rock3" parent="rocks" index="3" instance=ExtResource( 2 )]
-
+[node name="rock3" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 216, 72 )
 
-[node name="rock4" parent="rocks" index="4" instance=ExtResource( 2 )]
-
+[node name="rock4" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 264, 72 )
 
-[node name="rock5" parent="rocks" index="5" instance=ExtResource( 2 )]
-
+[node name="rock5" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 312, 72 )
 
-[node name="rock6" parent="rocks" index="6" instance=ExtResource( 2 )]
-
+[node name="rock6" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 552, 168 )
 
-[node name="rock7" parent="rocks" index="7" instance=ExtResource( 2 )]
-
+[node name="rock7" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 600, 168 )
 
-[node name="rock8" parent="rocks" index="8" instance=ExtResource( 2 )]
-
+[node name="rock8" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 552, 216 )
 
-[node name="rock9" parent="rocks" index="9" instance=ExtResource( 2 )]
-
+[node name="rock9" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 264, 312 )
 
-[node name="rock10" parent="rocks" index="10" instance=ExtResource( 2 )]
-
+[node name="rock10" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 120, 360 )
 
-[node name="rock11" parent="rocks" index="11" instance=ExtResource( 2 )]
-
+[node name="rock11" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 168, 360 )
 
-[node name="rock12" parent="rocks" index="12" instance=ExtResource( 2 )]
-
+[node name="rock12" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 216, 360 )
 
-[node name="rock13" parent="rocks" index="13" instance=ExtResource( 2 )]
-
+[node name="rock13" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 120, 264 )
 
-[node name="rock14" parent="rocks" index="14" instance=ExtResource( 2 )]
-
+[node name="rock14" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 168, 216 )
 
-[node name="rock15" parent="rocks" index="15" instance=ExtResource( 2 )]
-
+[node name="rock15" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 72, 360 )
 
-[node name="rock16" parent="rocks" index="16" instance=ExtResource( 2 )]
-
+[node name="rock16" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 72, 312 )
 
-[node name="rock17" parent="rocks" index="17" instance=ExtResource( 2 )]
-
+[node name="rock17" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 72, 264 )
 
-[node name="rock18" parent="rocks" index="18" instance=ExtResource( 2 )]
-
+[node name="rock18" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 360, 360 )
 
-[node name="rock19" parent="rocks" index="19" instance=ExtResource( 2 )]
-
+[node name="rock19" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 408, 360 )
 
-[node name="rock20" parent="rocks" index="20" instance=ExtResource( 2 )]
-
+[node name="rock20" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 504, 360 )
 
-[node name="rock21" parent="rocks" index="21" instance=ExtResource( 2 )]
-
+[node name="rock21" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 600, 360 )
 
-[node name="rock22" parent="rocks" index="22" instance=ExtResource( 2 )]
-
+[node name="rock22" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 648, 360 )
 
-[node name="rock23" parent="rocks" index="23" instance=ExtResource( 2 )]
-
+[node name="rock23" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 504, 456 )
 
-[node name="rock24" parent="rocks" index="24" instance=ExtResource( 2 )]
-
+[node name="rock24" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 552, 456 )
 
-[node name="rock25" parent="rocks" index="25" instance=ExtResource( 2 )]
-
+[node name="rock25" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 552, 408 )
 
-[node name="rock26" parent="rocks" index="26" instance=ExtResource( 2 )]
-
+[node name="rock26" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 360, 456 )
 
-[node name="rock27" parent="rocks" index="27" instance=ExtResource( 2 )]
-
+[node name="rock27" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 360, 504 )
 
-[node name="rock28" parent="rocks" index="28" instance=ExtResource( 2 )]
-
+[node name="rock28" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 264, 504 )
 
-[node name="rock29" parent="rocks" index="29" instance=ExtResource( 2 )]
-
+[node name="rock29" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 264, 552 )
 
-[node name="rock30" parent="rocks" index="30" instance=ExtResource( 2 )]
-
+[node name="rock30" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 168, 456 )
 
-[node name="rock31" parent="rocks" index="31" instance=ExtResource( 2 )]
-
+[node name="rock31" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 168, 504 )
 
-[node name="rock32" parent="rocks" index="32" instance=ExtResource( 2 )]
-
+[node name="rock32" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 72, 552 )
 
-[node name="rock33" parent="rocks" index="33" instance=ExtResource( 2 )]
-
+[node name="rock33" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 120, 552 )
 
-[node name="rock34" parent="rocks" index="34" instance=ExtResource( 2 )]
-
+[node name="rock34" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 504, 552 )
 
-[node name="rock35" parent="rocks" index="35" instance=ExtResource( 2 )]
-
+[node name="rock35" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 600, 552 )
 
-[node name="rock36" parent="rocks" index="36" instance=ExtResource( 2 )]
-
+[node name="rock36" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 648, 552 )
 
-[node name="rock37" parent="rocks" index="37" instance=ExtResource( 2 )]
-
+[node name="rock37" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 648, 504 )
 
-[node name="rock38" parent="rocks" index="38" instance=ExtResource( 2 )]
-
+[node name="rock38" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 456, 216 )
 
-[node name="rock39" parent="rocks" index="39" instance=ExtResource( 2 )]
-
+[node name="rock39" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 360, 216 )
 
-[node name="rock40" parent="rocks" index="40" instance=ExtResource( 2 )]
-
+[node name="rock40" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 360, 168 )
 
-[node name="rock41" parent="rocks" index="41" instance=ExtResource( 2 )]
-
+[node name="rock41" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 456, 120 )
 
-[node name="rock42" parent="rocks" index="42" instance=ExtResource( 2 )]
-
+[node name="rock42" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 456, 408 )
 
-[node name="rock43" parent="rocks" index="43" instance=ExtResource( 2 )]
-
+[node name="rock43" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 456, 456 )
 
-[node name="rock44" parent="rocks" index="44" instance=ExtResource( 2 )]
-
+[node name="rock44" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 456, 504 )
 
-[node name="rock45" parent="rocks" index="45" instance=ExtResource( 2 )]
-
+[node name="rock45" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 600, 264 )
 
-[node name="rock46" parent="rocks" index="46" instance=ExtResource( 2 )]
-
+[node name="rock46" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 600, 72 )
 
-[node name="rock47" parent="rocks" index="47" instance=ExtResource( 2 )]
-
+[node name="rock47" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 408, 72 )
 
-[node name="rock48" parent="rocks" index="48" instance=ExtResource( 2 )]
-
+[node name="rock48" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 792, 168 )
 
-[node name="rock49" parent="rocks" index="49" instance=ExtResource( 2 )]
-
+[node name="rock49" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 744, 168 )
 
-[node name="rock50" parent="rocks" index="50" instance=ExtResource( 2 )]
-
+[node name="rock50" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 744, 264 )
 
-[node name="rock51" parent="rocks" index="51" instance=ExtResource( 2 )]
-
+[node name="rock51" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 792, 264 )
 
-[node name="rock52" parent="rocks" index="52" instance=ExtResource( 2 )]
-
+[node name="rock52" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 744, 360 )
 
-[node name="rock53" parent="rocks" index="53" instance=ExtResource( 2 )]
-
+[node name="rock53" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 744, 408 )
 
-[node name="rock54" parent="rocks" index="54" instance=ExtResource( 2 )]
-
+[node name="rock54" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 792, 552 )
 
-[node name="rock55" parent="rocks" index="55" instance=ExtResource( 2 )]
-
+[node name="rock55" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 840, 552 )
 
-[node name="rock56" parent="rocks" index="56" instance=ExtResource( 2 )]
-
+[node name="rock56" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 840, 504 )
 
-[node name="rock57" parent="rocks" index="57" instance=ExtResource( 2 )]
-
+[node name="rock57" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 840, 312 )
 
-[node name="rock58" parent="rocks" index="58" instance=ExtResource( 2 )]
-
+[node name="rock58" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 840, 264 )
 
-[node name="rock59" parent="rocks" index="59" instance=ExtResource( 2 )]
-
+[node name="rock59" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 840, 216 )
 
-[node name="rock60" parent="rocks" index="60" instance=ExtResource( 2 )]
-
+[node name="rock60" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 840, 120 )
 
-[node name="rock61" parent="rocks" index="61" instance=ExtResource( 2 )]
-
+[node name="rock61" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 792, 72 )
 
-[node name="rock62" parent="rocks" index="62" instance=ExtResource( 2 )]
-
+[node name="rock62" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 840, 72 )
 
-[node name="rock63" parent="rocks" index="63" instance=ExtResource( 2 )]
-
+[node name="rock63" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 936, 216 )
 
-[node name="rock64" parent="rocks" index="64" instance=ExtResource( 2 )]
-
+[node name="rock64" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 936, 264 )
 
-[node name="rock65" parent="rocks" index="65" instance=ExtResource( 2 )]
-
+[node name="rock65" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 936, 408 )
 
-[node name="rock66" parent="rocks" index="66" instance=ExtResource( 2 )]
-
+[node name="rock66" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 888, 456 )
 
-[node name="rock67" parent="rocks" index="67" instance=ExtResource( 2 )]
-
+[node name="rock67" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 936, 456 )
 
-[node name="rock68" parent="rocks" index="68" instance=ExtResource( 2 )]
-
+[node name="rock68" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 792, 456 )
 
-[node name="rock69" parent="rocks" index="69" instance=ExtResource( 2 )]
-
+[node name="rock69" parent="rocks" instance=ExtResource( 2 )]
 position = Vector2( 840, 456 )
 
-[node name="players" type="Node2D" parent="." index="3"]
+[node name="players" type="Node2D" parent="."]
 
-[node name="score" type="HBoxContainer" parent="." index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="score" type="HBoxContainer" parent="."]
 margin_right = 1024.0
 margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-alignment = 0
 script = ExtResource( 3 )
 
-[node name="winner" type="Label" parent="." index="5"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="winner" type="Label" parent="."]
 margin_right = 1031.0
 margin_bottom = 617.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 1 )
@@ -411,35 +294,15 @@ text = "THE WINNER IS:
 YOU"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="exit_game" type="Button" parent="winner" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="exit_game" type="Button" parent="winner"]
 margin_left = 384.0
 margin_top = 408.0
 margin_right = 649.0
 margin_bottom = 469.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 custom_fonts/font = SubResource( 1 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "EXIT GAME"
-flat = false
-align = 1
 
 [connection signal="pressed" from="winner/exit_game" to="score" method="_on_exit_game_pressed"]
-
-

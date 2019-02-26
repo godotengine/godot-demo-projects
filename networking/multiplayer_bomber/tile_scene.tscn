@@ -3,36 +3,22 @@
 [ext_resource path="res://brickfloor.png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
 extents = Vector2( 24, 24 )
 
 [node name="Node2D" type="Node2D"]
 
-[node name="wall" type="Sprite" parent="." index="0"]
-
+[node name="wall" type="Sprite" parent="."]
 position = Vector2( 24, 24 )
 texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 48, 48 )
 
-[node name="col" type="StaticBody2D" parent="wall" index="0"]
+[node name="col" type="StaticBody2D" parent="wall"]
 
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="wall/col" index="0"]
-
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall/col"]
 shape = SubResource( 1 )
 
-[node name="floor" type="Sprite" parent="." index="1"]
-
+[node name="floor" type="Sprite" parent="."]
 position = Vector2( 72, 24 )
 texture = ExtResource( 1 )
 region_rect = Rect2( 48, 0, 48, 48 )
-
 

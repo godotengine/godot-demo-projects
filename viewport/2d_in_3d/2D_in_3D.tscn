@@ -9,12 +9,7 @@
 
 [sub_resource type="PlaneMesh" id=1]
 
-size = Vector2( 2, 2 )
-subdivide_width = 0
-subdivide_depth = 0
-
 [sub_resource type="GDScript" id=2]
-
 script/source = "tool
 extends Object
 func e():
@@ -22,80 +17,18 @@ func e():
 "
 
 [sub_resource type="SpatialMaterial" id=3]
-
-render_priority = 0
-flags_transparent = false
-flags_unshaded = false
-flags_vertex_lighting = false
-flags_no_depth_test = false
-flags_use_point_size = false
-flags_world_triplanar = false
-flags_fixed_size = false
-flags_albedo_tex_force_srgb = false
-vertex_color_use_as_albedo = false
-vertex_color_is_srgb = false
-params_diffuse_mode = 0
-params_specular_mode = 0
-params_blend_mode = 0
-params_cull_mode = 0
-params_depth_draw_mode = 0
-params_line_width = 1.0
-params_point_size = 1.0
-params_billboard_mode = 0
-params_grow = false
-params_use_alpha_scissor = false
-albedo_color = Color( 1, 1, 1, 1 )
-metallic = 0.0
-metallic_specular = 0.5
-metallic_texture_channel = 0
 roughness = 0.7
-roughness_texture_channel = 0
-emission_enabled = false
-normal_enabled = false
-rim_enabled = false
-clearcoat_enabled = false
-anisotropy_enabled = false
-ao_enabled = false
-depth_enabled = false
-subsurf_scatter_enabled = false
-transmission_enabled = false
-refraction_enabled = false
-detail_enabled = false
-uv1_scale = Vector3( 1, 1, 1 )
-uv1_offset = Vector3( 0, 0, 0 )
-uv1_triplanar = false
-uv1_triplanar_sharpness = 1.0
-uv2_scale = Vector3( 1, 1, 1 )
-uv2_offset = Vector3( 0, 0, 0 )
-uv2_triplanar = false
-uv2_triplanar_sharpness = 1.0
-proximity_fade_enable = false
-distance_fade_enable = false
 script = SubResource( 2 )
-_sections_unfolded = [ "Roughness" ]
 
 [sub_resource type="ProceduralSky" id=4]
-
-radiance_size = 4
 sky_top_color = Color( 0.0470588, 0.454902, 0.976471, 1 )
 sky_horizon_color = Color( 0.556863, 0.823529, 0.909804, 1 )
 sky_curve = 0.25
-sky_energy = 1.0
 ground_bottom_color = Color( 0.101961, 0.145098, 0.188235, 1 )
 ground_horizon_color = Color( 0.482353, 0.788235, 0.952941, 1 )
 ground_curve = 0.01
-ground_energy = 1.0
-sun_color = Color( 1, 1, 1, 1 )
-sun_latitude = 35.0
-sun_longitude = 0.0
-sun_angle_min = 1.0
-sun_angle_max = 100.0
-sun_curve = 0.05
-sun_energy = 16.0
-texture_size = 2
 
 [sub_resource type="GDScript" id=5]
-
 script/source = "tool
 extends Object
 func e():
@@ -103,147 +36,21 @@ func e():
 "
 
 [sub_resource type="Environment" id=6]
-
 background_mode = 2
 background_sky = SubResource( 4 )
-background_sky_custom_fov = 0.0
 background_color = Color( 0.445312, 0.445312, 0.445312, 1 )
-background_energy = 1.0
-background_canvas_max_layer = 0
 ambient_light_color = Color( 0.511719, 0.511719, 0.511719, 1 )
-ambient_light_energy = 1.0
 ambient_light_sky_contribution = 0.4
-fog_enabled = false
-fog_color = Color( 0.5, 0.6, 0.7, 1 )
-fog_sun_color = Color( 1, 0.9, 0.7, 1 )
-fog_sun_amount = 0.0
-fog_depth_enabled = true
-fog_depth_begin = 10.0
-fog_depth_curve = 1.0
-fog_transmit_enabled = false
-fog_transmit_curve = 1.0
-fog_height_enabled = false
-fog_height_min = 0.0
-fog_height_max = 100.0
-fog_height_curve = 1.0
-tonemap_mode = 0
-tonemap_exposure = 1.0
-tonemap_white = 1.0
-auto_exposure_enabled = false
-auto_exposure_scale = 0.4
-auto_exposure_min_luma = 0.05
-auto_exposure_max_luma = 8.0
-auto_exposure_speed = 0.5
-ss_reflections_enabled = false
-ss_reflections_max_steps = 64
-ss_reflections_fade_in = 0.15
-ss_reflections_fade_out = 2.0
-ss_reflections_depth_tolerance = 0.2
-ss_reflections_roughness = true
-ssao_enabled = false
-ssao_radius = 1.0
-ssao_intensity = 1.0
-ssao_radius2 = 0.0
-ssao_intensity2 = 1.0
-ssao_bias = 0.01
-ssao_light_affect = 0.0
-ssao_color = Color( 0, 0, 0, 1 )
-ssao_quality = 0
 ssao_blur = 1
-ssao_edge_sharpness = 4.0
-dof_blur_far_enabled = false
-dof_blur_far_distance = 10.0
-dof_blur_far_transition = 5.0
-dof_blur_far_amount = 0.1
-dof_blur_far_quality = 1
-dof_blur_near_enabled = false
-dof_blur_near_distance = 2.0
-dof_blur_near_transition = 1.0
-dof_blur_near_amount = 0.1
-dof_blur_near_quality = 1
-glow_enabled = false
-glow_levels/1 = false
-glow_levels/2 = false
-glow_levels/3 = true
-glow_levels/4 = false
-glow_levels/5 = true
-glow_levels/6 = false
-glow_levels/7 = false
-glow_intensity = 0.8
-glow_strength = 1.0
-glow_bloom = 0.0
-glow_blend_mode = 2
-glow_hdr_threshold = 1.0
-glow_hdr_scale = 2.0
-glow_bicubic_upscale = false
-adjustment_enabled = false
-adjustment_brightness = 1.0
-adjustment_contrast = 1.0
-adjustment_saturation = 1.0
 script = SubResource( 5 )
-_sections_unfolded = [ "Ambient Light", "Background" ]
 
 [sub_resource type="CubeMesh" id=7]
 
-size = Vector3( 2, 2, 2 )
-subdivide_width = 0
-subdivide_height = 0
-subdivide_depth = 0
-
 [sub_resource type="SpatialMaterial" id=8]
-
-render_priority = 0
-flags_transparent = false
-flags_unshaded = false
-flags_vertex_lighting = false
-flags_no_depth_test = false
-flags_use_point_size = false
-flags_world_triplanar = false
-flags_fixed_size = false
-flags_albedo_tex_force_srgb = false
-vertex_color_use_as_albedo = false
-vertex_color_is_srgb = false
-params_diffuse_mode = 0
-params_specular_mode = 0
-params_blend_mode = 0
-params_cull_mode = 0
-params_depth_draw_mode = 0
-params_line_width = 1.0
-params_point_size = 1.0
-params_billboard_mode = 0
-params_grow = false
-params_use_alpha_scissor = false
 albedo_color = Color( 0.652344, 0.652344, 0.652344, 1 )
-metallic = 0.0
-metallic_specular = 0.5
-metallic_texture_channel = 0
 roughness = 0.0
-roughness_texture_channel = 0
-emission_enabled = false
-normal_enabled = false
-rim_enabled = false
-clearcoat_enabled = false
-anisotropy_enabled = false
-ao_enabled = false
-depth_enabled = false
-subsurf_scatter_enabled = false
-transmission_enabled = false
-refraction_enabled = false
-detail_enabled = false
-uv1_scale = Vector3( 1, 1, 1 )
-uv1_offset = Vector3( 0, 0, 0 )
-uv1_triplanar = false
-uv1_triplanar_sharpness = 1.0
-uv2_scale = Vector3( 1, 1, 1 )
-uv2_offset = Vector3( 0, 0, 0 )
-uv2_triplanar = false
-uv2_triplanar_sharpness = 1.0
-proximity_fade_enable = false
-distance_fade_enable = false
-_sections_unfolded = [ "Albedo" ]
 
 [sub_resource type="GDScript" id=9]
-
 script/source = "tool
 extends Object
 func e():
@@ -251,7 +58,6 @@ func e():
 "
 
 [sub_resource type="GDScript" id=10]
-
 script/source = "tool
 extends Object
 func e():
@@ -259,7 +65,6 @@ func e():
 "
 
 [sub_resource type="GDScript" id=11]
-
 script/source = "tool
 extends Object
 func e():
@@ -267,353 +72,115 @@ func e():
 "
 
 [sub_resource type="CubeMesh" id=12]
-
 size = Vector3( 1.1, 0.8, 0.1 )
-subdivide_width = 0
-subdivide_height = 0
-subdivide_depth = 0
 script = SubResource( 11 )
 
 [sub_resource type="SpatialMaterial" id=13]
 
-render_priority = 0
-flags_transparent = false
-flags_unshaded = false
-flags_vertex_lighting = false
-flags_no_depth_test = false
-flags_use_point_size = false
-flags_world_triplanar = false
-flags_fixed_size = false
-flags_albedo_tex_force_srgb = false
-vertex_color_use_as_albedo = false
-vertex_color_is_srgb = false
-params_diffuse_mode = 0
-params_specular_mode = 0
-params_blend_mode = 0
-params_cull_mode = 0
-params_depth_draw_mode = 0
-params_line_width = 1.0
-params_point_size = 1.0
-params_billboard_mode = 0
-params_grow = false
-params_use_alpha_scissor = false
-albedo_color = Color( 1, 1, 1, 1 )
-metallic = 0.0
-metallic_specular = 0.5
-metallic_texture_channel = 0
-roughness = 1.0
-roughness_texture_channel = 0
-emission_enabled = false
-normal_enabled = false
-rim_enabled = false
-clearcoat_enabled = false
-anisotropy_enabled = false
-ao_enabled = false
-depth_enabled = false
-subsurf_scatter_enabled = false
-transmission_enabled = false
-refraction_enabled = false
-detail_enabled = false
-uv1_scale = Vector3( 1, 1, 1 )
-uv1_offset = Vector3( 0, 0, 0 )
-uv1_triplanar = false
-uv1_triplanar_sharpness = 1.0
-uv2_scale = Vector3( 1, 1, 1 )
-uv2_offset = Vector3( 0, 0, 0 )
-uv2_triplanar = false
-uv2_triplanar_sharpness = 1.0
-proximity_fade_enable = false
-distance_fade_enable = false
-
-[node name="2D_in_3D" type="Spatial" index="0"]
-
+[node name="2D_in_3D" type="Spatial"]
 script = ExtResource( 1 )
 
-[node name="Camera" type="Camera" parent="." index="0"]
-
+[node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26906, -1.2526 )
-keep_aspect = 1
-cull_mask = 1048575
-environment = null
-h_offset = 0.0
-v_offset = 0.0
-doppler_tracking = 0
-projection = 0
-current = false
 fov = 74.0
-size = 1.0
 near = 0.1
-far = 100.0
 
-[node name="Floor" type="MeshInstance" parent="." index="1"]
-
+[node name="Floor" type="MeshInstance" parent="."]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -1, -4 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
 mesh = SubResource( 1 )
-skeleton = NodePath("..")
 material/0 = SubResource( 3 )
-_sections_unfolded = [ "Geometry", "Transform", "material" ]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="2"]
-
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 6 )
 
-[node name="Pillar" type="Spatial" parent="." index="3"]
-
+[node name="Pillar" type="Spatial" parent="."]
 editor/display_folded = true
 transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -3, -0.255171, -5 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="Pillar_bottom" type="MeshInstance" parent="Pillar" index="0"]
-
+[node name="Pillar_bottom" type="MeshInstance" parent="Pillar"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.242229, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
 mesh = SubResource( 7 )
-skeleton = NodePath("..")
 material/0 = SubResource( 8 )
 script = SubResource( 9 )
-_sections_unfolded = [ "Transform", "material" ]
 
-[node name="Pillar_top" type="MeshInstance" parent="Pillar" index="1"]
-
+[node name="Pillar_top" type="MeshInstance" parent="Pillar"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.48747, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
 mesh = SubResource( 7 )
-skeleton = NodePath("..")
 material/0 = SubResource( 8 )
 script = SubResource( 9 )
-_sections_unfolded = [ "Transform", "material" ]
 
-[node name="Pillar_middle" type="MeshInstance" parent="Pillar" index="2"]
-
+[node name="Pillar_middle" type="MeshInstance" parent="Pillar"]
 transform = Transform( 0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, 0, 2.65279, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
 mesh = SubResource( 7 )
-skeleton = NodePath("..")
 material/0 = SubResource( 8 )
 script = SubResource( 10 )
-_sections_unfolded = [ "Transform", "material" ]
 
-[node name="Pillar2" type="Spatial" parent="." index="4"]
-
+[node name="Pillar2" type="Spatial" parent="."]
 editor/display_folded = true
 transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 3, -0.255171, -5 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="Pillar_bottom" type="MeshInstance" parent="Pillar2" index="0"]
-
+[node name="Pillar_bottom" type="MeshInstance" parent="Pillar2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.242229, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
 mesh = SubResource( 7 )
-skeleton = NodePath("..")
 material/0 = SubResource( 8 )
 script = SubResource( 9 )
-_sections_unfolded = [ "Transform", "material" ]
 
-[node name="Pillar_top" type="MeshInstance" parent="Pillar2" index="1"]
-
+[node name="Pillar_top" type="MeshInstance" parent="Pillar2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.48747, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
 mesh = SubResource( 7 )
-skeleton = NodePath("..")
 material/0 = SubResource( 8 )
 script = SubResource( 9 )
-_sections_unfolded = [ "Transform", "material" ]
 
-[node name="Pillar_middle" type="MeshInstance" parent="Pillar2" index="2"]
-
+[node name="Pillar_middle" type="MeshInstance" parent="Pillar2"]
 transform = Transform( 0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, 0, 2.65279, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
 mesh = SubResource( 7 )
-skeleton = NodePath("..")
 material/0 = SubResource( 8 )
 script = SubResource( 10 )
-_sections_unfolded = [ "Transform", "material" ]
 
-[node name="Pillar_back" type="MeshInstance" parent="." index="5"]
-
+[node name="Pillar_back" type="MeshInstance" parent="."]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 1.22418, -5.48399 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
 mesh = SubResource( 12 )
-skeleton = NodePath("..")
 material/0 = SubResource( 8 )
-_sections_unfolded = [ "Transform", "material" ]
 
-[node name="DirectionalLight" type="DirectionalLight" parent="." index="6"]
-
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.623013, -0.733525, 0.271654, 0.321394, 0.55667, 0.766044, -0.713134, -0.389948, 0.582563, 9.02684, 0, 1.28613 )
-layers = 1
-light_color = Color( 1, 1, 1, 1 )
-light_energy = 1.0
-light_indirect_energy = 1.0
-light_negative = false
-light_specular = 0.5
-light_bake_mode = 1
-light_cull_mask = -1
 shadow_enabled = true
-shadow_color = Color( 0, 0, 0, 1 )
-shadow_bias = 0.1
-shadow_contact = 0.0
-shadow_reverse_cull_face = false
-editor_only = false
-directional_shadow_mode = 2
-directional_shadow_split_1 = 0.1
-directional_shadow_split_2 = 0.2
-directional_shadow_split_3 = 0.5
 directional_shadow_blend_splits = true
 directional_shadow_normal_bias = 0.2
-directional_shadow_bias_split_scale = 0.25
-directional_shadow_depth_range = 0
-directional_shadow_max_distance = 200.0
-_sections_unfolded = [ "Directional Shadow" ]
 
-[node name="Viewport_quad" type="MeshInstance" parent="." index="7"]
-
+[node name="Viewport_quad" type="MeshInstance" parent="."]
 transform = Transform( -2, 8.74228e-08, 0, 7.64274e-15, 4.37114e-08, 1.333, 1.74846e-07, 1, -5.82673e-08, 0, 1.20996, -5.25875 )
-layers = 1
 material_override = SubResource( 13 )
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
 mesh = SubResource( 1 )
-skeleton = NodePath("..")
 material/0 = null
-_sections_unfolded = [ "Geometry", "Transform", "material" ]
 
-[node name="Viewport" type="Viewport" parent="." index="8"]
-
-arvr = false
+[node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 600, 400 )
-own_world = false
-world = null
-transparent_bg = false
-msaa = 0
 hdr = false
-disable_3d = false
 usage = 0
-debug_draw = 0
 render_target_v_flip = true
-render_target_clear_mode = 0
-render_target_update_mode = 2
-audio_listener_enable_2d = false
-audio_listener_enable_3d = false
-physics_object_picking = false
-gui_disable_input = false
-gui_snap_controls_to_pixels = true
-shadow_atlas_size = 0
-shadow_atlas_quad_0 = 2
-shadow_atlas_quad_1 = 2
-shadow_atlas_quad_2 = 3
-shadow_atlas_quad_3 = 4
-_sections_unfolded = [ "Render Target" ]
 
-[node name="2D_World" type="Node2D" parent="Viewport" index="0"]
-
+[node name="2D_World" type="Node2D" parent="Viewport"]
 editor/display_folded = true
 script = ExtResource( 2 )
 
-[node name="BG" type="Panel" parent="Viewport/2D_World" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="BG" type="Panel" parent="Viewport/2D_World"]
 margin_right = 600.0
 margin_bottom = 400.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 
-[node name="ball" type="Sprite" parent="Viewport/2D_World" index="1"]
-
+[node name="ball" type="Sprite" parent="Viewport/2D_World"]
 position = Vector2( 300, 200 )
 texture = ExtResource( 3 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="left" type="Sprite" parent="Viewport/2D_World" index="2"]
-
+[node name="left" type="Sprite" parent="Viewport/2D_World"]
 position = Vector2( 20, 200 )
 texture = ExtResource( 4 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="right" type="Sprite" parent="Viewport/2D_World" index="3"]
-
+[node name="right" type="Sprite" parent="Viewport/2D_World"]
 position = Vector2( 580, 200 )
 texture = ExtResource( 5 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="separator" type="Sprite" parent="Viewport/2D_World" index="4"]
-
+[node name="separator" type="Sprite" parent="Viewport/2D_World"]
 position = Vector2( 298, 200 )
 texture = ExtResource( 6 )
-_sections_unfolded = [ "Transform" ]
+

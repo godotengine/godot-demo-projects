@@ -2,298 +2,126 @@
 
 [ext_resource path="res://lobby.gd" type="Script" id=1]
 
-[node name="lobby" type="Control" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="lobby" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 1 )
 
-[node name="players" type="Panel" parent="." index="0"]
-
+[node name="players" type="Panel" parent="."]
 visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 393.0
 margin_top = 113.0
 margin_right = 645.0
 margin_bottom = 468.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="label" type="Label" parent="players" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="label" type="Label" parent="players"]
 margin_left = 26.0
 margin_top = 18.0
 margin_right = 142.0
 margin_bottom = 32.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Awaiting Players..."
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="start" type="Button" parent="players" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="start" type="Button" parent="players"]
 margin_left = 68.0
 margin_top = 307.0
 margin_right = 193.0
 margin_bottom = 336.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "START!"
-flat = false
-align = 1
 
-[node name="list" type="ItemList" parent="players" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="list" type="ItemList" parent="players"]
 margin_left = 25.0
 margin_top = 37.0
 margin_right = 229.0
 margin_bottom = 296.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-items = [  ]
-select_mode = 0
-icon_mode = 1
-fixed_icon_size = Vector2( 0, 0 )
 
-[node name="connect" type="Panel" parent="." index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="connect" type="Panel" parent="."]
 margin_left = 370.0
 margin_top = 157.0
 margin_right = 647.0
 margin_bottom = 324.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="name_label" type="Label" parent="connect" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="name_label" type="Label" parent="connect"]
 margin_left = 14.0
 margin_top = 11.0
 margin_right = 56.0
 margin_bottom = 25.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Name:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="name" type="LineEdit" parent="connect" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="name" type="LineEdit" parent="connect"]
 margin_left = 17.0
 margin_top = 30.0
 margin_right = 173.0
 margin_bottom = 54.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 1
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "The Warrior"
-focus_mode = 2
-context_menu_enabled = true
-placeholder_alpha = 0.6
-caret_blink = false
-caret_blink_speed = 0.65
-caret_position = 0
 
-[node name="ip_label" type="Label" parent="connect" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="ip_label" type="Label" parent="connect"]
 margin_left = 15.0
 margin_top = 66.0
 margin_right = 57.0
 margin_bottom = 80.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "IP:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="ip" type="LineEdit" parent="connect" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="ip" type="LineEdit" parent="connect"]
 margin_left = 17.0
 margin_top = 85.0
 margin_right = 173.0
 margin_bottom = 109.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 1
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "127.0.0.1"
-focus_mode = 2
-context_menu_enabled = true
-placeholder_alpha = 0.6
-caret_blink = false
-caret_blink_speed = 0.65
-caret_position = 0
 
-[node name="host" type="Button" parent="connect" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="host" type="Button" parent="connect"]
 margin_left = 181.0
 margin_top = 31.0
 margin_right = 246.0
 margin_bottom = 51.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Host"
-flat = false
-align = 1
 
-[node name="join" type="Button" parent="connect" index="5"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="join" type="Button" parent="connect"]
 margin_left = 181.0
 margin_top = 87.0
 margin_right = 246.0
 margin_bottom = 107.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Join"
-flat = false
-align = 1
 
-[node name="error_label" type="Label" parent="connect" index="6"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="error_label" type="Label" parent="connect"]
 margin_left = 15.0
 margin_top = 125.0
 margin_right = 257.0
 margin_bottom = 139.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 custom_colors/font_color = Color( 0.820312, 0.291595, 0.291595, 1 )
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="error" type="AcceptDialog" parent="." index="2"]
-
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="error" type="AcceptDialog" parent="."]
 margin_right = 55.0
 margin_bottom = 58.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-popup_exclusive = false
-window_title = "Alert!"
-resizable = false
-dialog_hide_on_ok = true
 
 [connection signal="pressed" from="players/start" to="." method="_on_start_pressed"]
-
 [connection signal="pressed" from="connect/host" to="." method="_on_host_pressed"]
-
 [connection signal="pressed" from="connect/join" to="." method="_on_join_pressed"]
-
-
