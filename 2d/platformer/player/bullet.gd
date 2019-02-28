@@ -1,6 +1,6 @@
-class_name Bullet
-
 extends RigidBody2D
+
+class_name Bullet
 
 
 func _on_bullet_body_enter(body):

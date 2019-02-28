@@ -1,6 +1,6 @@
-class_name MovingPlatform
-
 extends Node2D
+
+class_name MovingPlatform
 
 
 # Member variables

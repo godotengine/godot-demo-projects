@@ -1,21 +1,20 @@
-class_name Enemy
-
 extends KinematicBody2D
+
+class_name Enemy
 
 
 const GRAVITY_VEC = Vector2(0, 900)
 const FLOOR_NORMAL = Vector2(0, -1)
+
+const STATE_WALKING = 0
+const STATE_KILLED = 1
+const WALK_SPEED = 70 
 
 var linear_velocity = Vector2()
 var direction = -1
 var anim = ""
 
 # state machine
-enum { 
-	STATE_WALKING = 0, 
-	STATE_KILLED = 1, 
-	WALK_SPEED = 70 
-}
 var state = STATE_WALKING
 
 onready var detect_floor_left = $detect_floor_left

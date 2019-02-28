@@ -1,6 +1,6 @@
-class_name Coin
-
 extends Area2D
+
+class_name Coin
 
 
 var taken = false
