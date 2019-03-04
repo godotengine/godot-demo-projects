@@ -13,8 +13,8 @@ var state = STATE_WALKING
 var direction = -1
 var anim = ""
 
-onready var rc_left = $raycast_left
-onready var rc_right = $raycast_right
+onready var rc_left = $RaycastLeft
+onready var rc_right = $RaycastRight
 
 var Bullet = preload("res://player/bullet.gd")
 
@@ -24,13 +24,13 @@ func _die():
 
 func _pre_explode():
 	#make sure nothing collides against this
-	$shape1.queue_free()
-	$shape2.queue_free()
-	$shape3.queue_free()
+	$Shape1.queue_free()
+	$Shape2.queue_free()
+	$Shape3.queue_free()
 	
 	# Stay there
 	mode = MODE_STATIC
-	($sound_explode as AudioStreamPlayer2D).play()
+	($SoundExplode as AudioStreamPlayer2D).play()
 	
 func _bullet_collider(cc, s, dp):
 	mode = MODE_RIGID
@@ -39,7 +39,7 @@ func _bullet_collider(cc, s, dp):
 	s.set_angular_velocity(sign(dp.x) * 33.0)
 	set_friction(1)
 	cc.disable()
-	($sound_hit as AudioStreamPlayer2D).play()
+	($SoundHit as AudioStreamPlayer2D).play()
 
 func _integrate_forces(s):
 	var lv = s.get_linear_velocity()
@@ -69,18 +69,18 @@ func _integrate_forces(s):
 		
 		if wall_side != 0 and wall_side != direction:
 			direction = -direction
-			($sprite as Sprite).scale.x = -direction
+			($Sprite as Sprite).scale.x = -direction
 		if direction < 0 and not rc_left.is_colliding() and rc_right.is_colliding():
 			direction = -direction
-			($sprite as Sprite).scale.x = -direction
+			($Sprite as Sprite).scale.x = -direction
 		elif direction > 0 and not rc_right.is_colliding() and rc_left.is_colliding():
 			direction = -direction
-			($sprite as Sprite).scale.x = -direction
+			($Sprite as Sprite).scale.x = -direction
 		
 		lv.x = direction * WALK_SPEED
 	
 	if anim != new_anim:
 		anim = new_anim
-		($anim as AnimationPlayer).play(anim)
+		($Anim as AnimationPlayer).play(anim)
 	
 	s.set_linear_velocity(lv)

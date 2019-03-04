@@ -35,7 +35,7 @@ tracks/0/keys = {
 } ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("sprite:modulate")
+tracks/1/path = NodePath("Sprite:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -59,7 +59,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[node name="bullet" type="RigidBody2D"]
+[node name="Bullet" type="RigidBody2D"]
 continuous_cd = 2
 script = ExtResource( 1 )
 
@@ -71,7 +71,7 @@ local_coords = false
 process_material = SubResource( 2 )
 texture = ExtResource( 2 )
 
-[node name="sprite" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -80,7 +80,7 @@ shape = SubResource( 3 )
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="anim" type="AnimationPlayer" parent="."]
+[node name="Anim" type="AnimationPlayer" parent="."]
 anims/shutdown = SubResource( 4 )
 
 [connection signal="timeout" from="Timer" to="." method="disable"]

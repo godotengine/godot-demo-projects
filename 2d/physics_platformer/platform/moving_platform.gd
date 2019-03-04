@@ -17,4 +17,4 @@ func _physics_process(delta):
 	var xf = Transform2D()
 	
 	xf[2]= motion * d 
-	($platform as RigidBody2D).transform = xf
+	($Platform as RigidBody2D).transform = xf

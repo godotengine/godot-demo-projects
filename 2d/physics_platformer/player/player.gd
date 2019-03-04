@@ -46,8 +46,8 @@ var floor_h_velocity = 0.0
 var airborne_time = 1e20
 var shoot_time = 1e20
 
-var Bullet = preload("res://player/bullet.tscn")
-var Enemy = preload("res://enemy/enemy.tscn")
+var Bullet = preload("res://player/Bullet.tscn")
+var Enemy = preload("res://enemy/Enemy.tscn")
 
 
 func _shot_bullet():
@@ -58,15 +58,15 @@ func _shot_bullet():
 		ss = -1.0
 	else:
 		ss = 1.0
-	var pos = position + ($bullet_shoot as Position2D).position * Vector2(ss, 1.0)
+	var pos = position + ($BulletShoot as Position2D).position * Vector2(ss, 1.0)
 		
 	bi.position = pos
 	get_parent().add_child(bi)
 	
 	bi.linear_velocity = Vector2(800.0 * ss, -80)
 	
-	($sprite/smoke as Particles2D).restart()
-	($sound_shoot as AudioStreamPlayer2D).play()
+	($Sprite/Smoke as Particles2D).restart()
+	($SoundShoot as AudioStreamPlayer2D).play()
 	
 	add_collision_exception_with(bi) # Make bullet and this not collide
 
@@ -153,7 +153,7 @@ func _integrate_forces(s):
 			lv.y = -JUMP_VELOCITY
 			jumping = true
 			stopping_jump = false
-			($sound_jump as AudioStreamPlayer2D).play()
+			($SoundJump as AudioStreamPlayer2D).play()
 		
 		# Check siding
 		if lv.x < 0 and move_left:
@@ -202,16 +202,16 @@ func _integrate_forces(s):
 	# Update siding
 	if new_siding_left != siding_left:
 		if new_siding_left:
-			($sprite as Sprite).scale.x = -1
+			($Sprite as Sprite).scale.x = -1
 		else:
-			($sprite as Sprite).scale.x = 1
+			($Sprite as Sprite).scale.x = 1
 		
 		siding_left = new_siding_left
 	
 	# Change animation
 	if new_anim != anim:
 		anim = new_anim
-		($anim as AnimationPlayer).play(anim)
+		($Anim as AnimationPlayer).play(anim)
 	
 	shooting = shoot
 	
