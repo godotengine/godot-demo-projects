@@ -1,0 +1,159 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://tiles_demo.png" type="Texture" id=1]
+
+[node name="Node" type="Node"]
+
+[node name="Floor" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[node name="Collision" type="StaticBody2D" parent="Floor"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Floor/Collision"]
+polygon = PoolVector2Array( 32, -24, 32, 32, -32, 32, -32, -24 )
+
+[node name="Edge" type="Sprite" parent="."]
+position = Vector2( 64, 0 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 64, 0, 64, 64 )
+
+[node name="Collision" type="StaticBody2D" parent="Edge"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Edge/Collision"]
+polygon = PoolVector2Array( -32, -24, 24, -24, 24, 32, -32, 32 )
+
+[node name="Wall" type="Sprite" parent="."]
+position = Vector2( 64, 64 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 64, 64, 64, 64 )
+
+[node name="Collision" type="StaticBody2D" parent="Wall"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall/Collision"]
+polygon = PoolVector2Array( -32, -32, 24, -32, 24, 32, -32, 32 )
+
+[node name="WallDeco" type="Sprite" parent="."]
+position = Vector2( 96, 128 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 320, 128, 128, 64 )
+
+[node name="Collision" type="StaticBody2D" parent="WallDeco"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WallDeco/Collision"]
+polygon = PoolVector2Array( -64, -32, -8, -32, -8, 32, -64, 32 )
+
+[node name="Corner" type="Sprite" parent="."]
+position = Vector2( 64, 192 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 64, 128, 64, 64 )
+
+[node name="Collision" type="StaticBody2D" parent="Corner"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Corner/Collision"]
+polygon = PoolVector2Array( -32, -32, 24, -32, 32, -24, 32, 32, -32, 32 )
+
+[node name="Flowers" type="Sprite" parent="."]
+position = Vector2( 128, 192 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 192, 192, 64, 64 )
+
+[node name="Collision" type="StaticBody2D" parent="Flowers"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Flowers/Collision"]
+polygon = PoolVector2Array( -32, 32, 32, 32, 32, -24, -32, -24 )
+
+[node name="TreeBase" type="Sprite" parent="."]
+position = Vector2( 192, 192 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 256, 192, 64, 64 )
+
+[node name="Collision" type="StaticBody2D" parent="TreeBase"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TreeBase/Collision"]
+polygon = PoolVector2Array( -32, 32, 32, 32, 32, -24, -32, -24 )
+
+[node name="TreeMid" type="Sprite" parent="."]
+position = Vector2( 192, 128 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 256, 128, 64, 64 )
+
+[node name="TreeMid2" type="Sprite" parent="."]
+position = Vector2( 192, 64 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 256, 64, 64, 64 )
+
+[node name="TreeTop" type="Sprite" parent="."]
+position = Vector2( 192, 0 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 256, 0, 64, 64 )
+
+[node name="Solid" type="Sprite" parent="."]
+position = Vector2( 0, 64 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 64, 64, 64 )
+
+[node name="Ceiling" type="Sprite" parent="."]
+position = Vector2( 0, 128 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 384, 64, 64, 64 )
+
+[node name="Collision" type="StaticBody2D" parent="Ceiling"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ceiling/Collision"]
+polygon = PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32 )
+
+[node name="Ramp" type="Sprite" parent="."]
+position = Vector2( 256, 224 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 128, 128, 64, 128 )
+
+[node name="Collision" type="StaticBody2D" parent="Ramp"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ramp/Collision"]
+polygon = PoolVector2Array( -32, -56, 32, 8, 32, 64, -32, 64 )
+
+[node name="CeilingWall" type="Sprite" parent="."]
+position = Vector2( 0, 192 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 448, 64, 64, 64 )
+
+[node name="Collision" type="StaticBody2D" parent="CeilingWall"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CeilingWall/Collision"]
+polygon = PoolVector2Array( -32, -32, 24, -32, 24, 32, -32, 32 )
+
+[node name="PlatformFloor" type="Sprite" parent="."]
+position = Vector2( 0, 256 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 128, 0, 64, 64 )
+
+[node name="Collision" type="StaticBody2D" parent="PlatformFloor"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlatformFloor/Collision"]
+polygon = PoolVector2Array( 32, -24, 32, 24, -32, 24, -32, -24 )
+
+[node name="PlatformEdge" type="Sprite" parent="."]
+position = Vector2( 64, 256 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 192, 0, 64, 64 )
+
+[node name="Collision" type="StaticBody2D" parent="PlatformEdge"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlatformEdge/Collision"]
+polygon = PoolVector2Array( 24, -24, 24, 24, -32, 24, -32, -24 )
+
+[node name="Help" type="Label" parent="."]
+margin_left = 1.0
+margin_top = 331.0
+margin_right = 727.0
+margin_bottom = 422.0
+size_flags_horizontal = 2
+text = "This scene serves as a tool for editing the tileset.
+Nodes (sprites) and their respective collisionsare edited here.
+
+To create a tileset from this, a \"TileSet\" resoucre must be created. Use the helper in: Scene -> Convert To -> TileSet.
+This will save a tileset. Saving over it will merge your changes.
+
+Finally, the saved tileset resource (tileset.tres in this case), can be opened to be used into a TileMap node for editing a tile map."
+
