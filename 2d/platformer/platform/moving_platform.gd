@@ -14,4 +14,4 @@ func _physics_process(delta):
 	var d = sin(accum)
 	var xf = Transform2D()
 	xf[2] = motion * d
-	($platform as KinematicBody2D).transform = xf
+	($Platform as KinematicBody2D).transform = xf

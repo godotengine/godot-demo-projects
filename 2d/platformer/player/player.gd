@@ -18,9 +18,9 @@ var shoot_time = 99999 # time since last shot
 var anim = ""
 
 # cache the sprite here for fast access (we will set scale to flip it often)
-onready var sprite = $sprite
+onready var sprite = $Sprite
 # cache bullet for fast access
-var Bullet = preload("res://player/bullet.tscn")
+var Bullet = preload("res://player/Bullet.tscn")
 
 
 func _physics_process(delta):
@@ -51,16 +51,16 @@ func _physics_process(delta):
 	# Jumping
 	if on_floor and Input.is_action_just_pressed("jump"):
 		linear_vel.y = -JUMP_SPEED
-		($sound_jump as AudioStreamPlayer2D).play()
+		($SoundJump as AudioStreamPlayer2D).play()
 
 	# Shooting
 	if Input.is_action_just_pressed("shoot"):
 		var bullet = Bullet.instance()
-		bullet.position = ($sprite/bullet_shoot as Position2D).global_position # use node for shoot position
+		bullet.position = ($Sprite/BulletShoot as Position2D).global_position # use node for shoot position
 		bullet.linear_velocity = Vector2(sprite.scale.x * BULLET_VELOCITY, 0)
 		bullet.add_collision_exception_with(self) # don't want player to collide with bullet
 		get_parent().add_child(bullet) # don't want bullet to move with me, so add it as child of parent
-		($sound_shoot as AudioStreamPlayer2D).play()
+		($SoundShoot as AudioStreamPlayer2D).play()
 		shoot_time = 0
 
 	### ANIMATION ###
@@ -94,4 +94,4 @@ func _physics_process(delta):
 
 	if new_anim != anim:
 		anim = new_anim
-		($anim as AnimationPlayer).play(anim)
+		($Anim as AnimationPlayer).play(anim)

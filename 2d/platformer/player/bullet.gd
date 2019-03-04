@@ -8,4 +8,4 @@ func _on_bullet_body_enter(body):
 		body.call("hit_by_bullet")
 
 func _on_Timer_timeout():
-	($anim as AnimationPlayer).play("shutdown")
+	($Anim as AnimationPlayer).play("shutdown")
