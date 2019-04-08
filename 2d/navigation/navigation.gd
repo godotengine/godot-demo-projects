@@ -29,17 +29,18 @@ func _process(delta):
 
 func move_along_path(distance):
 	var last_point = $Character.position
-	for _index in range(path.size()):
+	while path.size():
 		var distance_between_points = last_point.distance_to(path[0])
+		
 		# the position to move to falls between two points
-		if distance <= distance_between_points and distance >= 0.0:
+		if distance <= distance_between_points:
 			$Character.position = last_point.linear_interpolate(path[0], distance / distance_between_points)
-			break
-		# the character reached the end of the path
-		elif distance < 0.0:
-			$Character.position = path[0]
-			set_process(false)
-			break
+			return
+		
+		# the position is past the end of the segment
 		distance -= distance_between_points
 		last_point = path[0]
 		path.remove(0)
+	# the character reached the end of the path
+	$Character.position = last_point
+	set_process(false)
