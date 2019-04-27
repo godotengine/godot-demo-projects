@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://the_comeback2.ogg" type="AudioStream" id=1]
+[ext_resource path="res://Control.gd" type="Script" id=2]
+[ext_resource path="res://lcd.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://play_button.png" type="Texture" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+outline_size = 2
+outline_color = Color( 0.588235, 0.886275, 0.435294, 0.239216 )
+font_data = ExtResource( 3 )
+
+[node name="Control" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 106.895
+margin_top = 427.158
+margin_right = 914.895
+margin_bottom = 488.158
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.552941, 0.984314, 0.501961, 1 )
+align = 1
+
+[node name="Button" type="TextureButton" parent="."]
+margin_left = 433.316
+margin_top = 244.158
+margin_right = 561.316
+margin_bottom = 372.158
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 4 )
+
+[node name="Player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
