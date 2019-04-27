@@ -1,9 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://the_comeback2.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Control.gd" type="Script" id=2]
 [ext_resource path="res://lcd.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://play_button.png" type="Texture" id=4]
+[ext_resource path="res://play_system_button.png" type="Texture" id=4]
+[ext_resource path="res://play_sound_button.png" type="Texture" id=5]
+[ext_resource path="res://play_system_button_hl.png" type="Texture" id=6]
+[ext_resource path="res://play_sound_button_hl.png" type="Texture" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
@@ -29,14 +32,25 @@ custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.552941, 0.984314, 0.501961, 1 )
 align = 1
 
-[node name="Button" type="TextureButton" parent="."]
-margin_left = 433.316
-margin_top = 244.158
-margin_right = 561.316
-margin_bottom = 372.158
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 4 )
-
 [node name="Player" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+
+[node name="PlaySystem" type="TextureButton" parent="."]
+margin_left = 214.737
+margin_top = 187.368
+margin_right = 342.737
+margin_bottom = 315.368
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 6 )
+
+[node name="PlaySound" type="TextureButton" parent="."]
+margin_left = 622.105
+margin_top = 183.158
+margin_right = 750.105
+margin_bottom = 311.158
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 7 )
+[connection signal="pressed" from="PlaySystem" to="." method="_on_PlaySystem_pressed"]
+[connection signal="pressed" from="PlaySound" to="." method="_on_PlaySound_pressed"]
