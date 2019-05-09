@@ -1,10 +1,17 @@
 extends Control
 
+#The OpenSimplexNoise object
 var noise = OpenSimplexNoise.new()
+var noise_texture = NoiseTexture.new()
 
+#Various noise parameters
 var noise_size = 500
 var min_noise = -1
 var max_noise = 1
+
+#Are we using a NoiseTexture instead?
+#Noise textures automatically grab and apply the noise data to an ImageTexture, instead of manually
+const use_noise_texture = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,12 +26,13 @@ func _ready():
 	#Render the noise
 	_refresh_noise_images()
 	
+	#Do we need to set up a noise texture?
+	if use_noise_texture:
+		noise_texture.noise = noise
+		$SeamlessNoiseTexture.texture = noise_texture
+	
 
 func _refresh_noise_images():
-	
-	#Get a new image
-	var image = noise.get_seamless_image(500)
-	var image_texture = ImageTexture.new()
 	
 	#Adjust min/max for shader
 	var _min = ((min_noise + 1)/2)
@@ -32,6 +40,14 @@ func _refresh_noise_images():
 	var _material = $SeamlessNoiseTexture.material
 	_material.set_shader_param("min_value", _min)
 	_material.set_shader_param("max_value", _max)
+	
+	#Are we using noise textures instead?
+	if use_noise_texture:
+		return
+	
+	#Get a new image if we aren't using a NoiseTexture
+	var image = noise.get_seamless_image(500)
+	var image_texture = ImageTexture.new()
 	
 	#Draw it
 	image_texture.create_from_image(image)
