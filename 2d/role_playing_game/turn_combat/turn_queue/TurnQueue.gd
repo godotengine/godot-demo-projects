@@ -37,7 +37,6 @@ func remove(combatant):
 
 func set_queue(new_queue):
 	queue.clear()
-	var names = []
 	for node in new_queue:
 		if not node is combatant:
 			continue
