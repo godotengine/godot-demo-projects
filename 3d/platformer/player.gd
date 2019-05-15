@@ -135,7 +135,7 @@ func _physics_process(delta):
 		else:
 			anim = ANIM_AIR_DOWN
 		
-		var hs
+		# var hs
 		if dir.length() > 0.1:
 			hv += target_dir * (accel * 0.2) * delta
 			if (hv.length() > max_speed):
