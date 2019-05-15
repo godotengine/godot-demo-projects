@@ -10,379 +10,116 @@
 [ext_resource path="res://button_change_scene.gd" type="Script" id=8]
 
 [sub_resource type="PlaneMesh" id=1]
-
 size = Vector2( 40, 40 )
-subdivide_width = 0
-subdivide_depth = 0
 
 [sub_resource type="SpatialMaterial" id=2]
-
-render_priority = 0
-flags_transparent = false
-flags_unshaded = false
-flags_vertex_lighting = false
-flags_no_depth_test = false
-flags_use_point_size = false
-flags_world_triplanar = false
-flags_fixed_size = false
-flags_albedo_tex_force_srgb = false
-vertex_color_use_as_albedo = false
-vertex_color_is_srgb = false
-params_diffuse_mode = 0
-params_specular_mode = 0
-params_blend_mode = 0
-params_cull_mode = 0
-params_depth_draw_mode = 0
-params_line_width = 1.0
-params_point_size = 1.0
-params_billboard_mode = 0
-params_grow = false
-params_use_alpha_scissor = false
-albedo_color = Color( 1, 1, 1, 1 )
 albedo_texture = ExtResource( 1 )
-metallic = 0.0
-metallic_specular = 0.5
-metallic_texture_channel = 0
 roughness = 0.2
-roughness_texture_channel = 0
-emission_enabled = false
-normal_enabled = false
-rim_enabled = false
-clearcoat_enabled = false
-anisotropy_enabled = false
-ao_enabled = false
-depth_enabled = false
-subsurf_scatter_enabled = false
-transmission_enabled = false
-refraction_enabled = false
-detail_enabled = false
 uv1_scale = Vector3( 0.25, 0.25, 0.25 )
-uv1_offset = Vector3( 0, 0, 0 )
 uv1_triplanar = true
-uv1_triplanar_sharpness = 1.0
-uv2_scale = Vector3( 1, 1, 1 )
-uv2_offset = Vector3( 0, 0, 0 )
-uv2_triplanar = false
-uv2_triplanar_sharpness = 1.0
-proximity_fade_enable = false
-distance_fade_enable = false
-_sections_unfolded = [ "UV1" ]
 
 [sub_resource type="ProceduralSky" id=3]
-
-radiance_size = 4
 sky_top_color = Color( 0.0470588, 0.454902, 0.976471, 1 )
 sky_horizon_color = Color( 0.556863, 0.823529, 0.909804, 1 )
 sky_curve = 0.25
-sky_energy = 1.0
 ground_bottom_color = Color( 0.101961, 0.145098, 0.188235, 1 )
 ground_horizon_color = Color( 0.482353, 0.788235, 0.952941, 1 )
 ground_curve = 0.01
-ground_energy = 1.0
-sun_color = Color( 1, 1, 1, 1 )
-sun_latitude = 35.0
-sun_longitude = 0.0
-sun_angle_min = 1.0
-sun_angle_max = 100.0
-sun_curve = 0.05
 sun_energy = 16.0
-texture_size = 2
 
 [sub_resource type="Environment" id=4]
-
 background_mode = 2
 background_sky = SubResource( 3 )
-background_sky_custom_fov = 0.0
-background_color = Color( 0, 0, 0, 1 )
-background_energy = 1.0
-background_canvas_max_layer = 0
-ambient_light_color = Color( 0, 0, 0, 1 )
-ambient_light_energy = 1.0
-ambient_light_sky_contribution = 1.0
-fog_enabled = false
-fog_color = Color( 0.5, 0.6, 0.7, 1 )
-fog_sun_color = Color( 1, 0.9, 0.7, 1 )
-fog_sun_amount = 0.0
-fog_depth_enabled = true
-fog_depth_begin = 10.0
-fog_depth_curve = 1.0
-fog_transmit_enabled = false
-fog_transmit_curve = 1.0
-fog_height_enabled = false
-fog_height_min = 0.0
-fog_height_max = 100.0
-fog_height_curve = 1.0
 tonemap_mode = 3
-tonemap_exposure = 1.0
-tonemap_white = 1.0
-auto_exposure_enabled = false
-auto_exposure_scale = 0.4
-auto_exposure_min_luma = 0.05
-auto_exposure_max_luma = 8.0
-auto_exposure_speed = 0.5
-ss_reflections_enabled = false
-ss_reflections_max_steps = 64
-ss_reflections_fade_in = 0.15
-ss_reflections_fade_out = 2.0
-ss_reflections_depth_tolerance = 0.2
-ss_reflections_roughness = true
-ssao_enabled = false
-ssao_radius = 1.0
-ssao_intensity = 1.0
-ssao_radius2 = 0.0
-ssao_intensity2 = 1.0
-ssao_bias = 0.01
-ssao_light_affect = 0.0
-ssao_color = Color( 0, 0, 0, 1 )
-ssao_quality = 0
-ssao_blur = 3
-ssao_edge_sharpness = 4.0
-dof_blur_far_enabled = false
-dof_blur_far_distance = 10.0
-dof_blur_far_transition = 5.0
-dof_blur_far_amount = 0.1
-dof_blur_far_quality = 1
-dof_blur_near_enabled = false
-dof_blur_near_distance = 2.0
-dof_blur_near_transition = 1.0
-dof_blur_near_amount = 0.1
-dof_blur_near_quality = 1
 glow_enabled = true
 glow_levels/1 = true
 glow_levels/2 = true
-glow_levels/3 = true
-glow_levels/4 = false
 glow_levels/5 = false
-glow_levels/6 = false
-glow_levels/7 = false
 glow_intensity = 0.2
-glow_strength = 1.0
 glow_bloom = 0.03
 glow_blend_mode = 0
-glow_hdr_threshold = 1.0
-glow_hdr_scale = 2.0
-glow_bicubic_upscale = false
-adjustment_enabled = false
-adjustment_brightness = 1.0
-adjustment_contrast = 1.0
-adjustment_saturation = 1.0
-_sections_unfolded = [ "Glow", "Glow/levels" ]
 
 [node name="LookAt_IK" type="Spatial"]
 
-[node name="Floor_plane" type="MeshInstance" parent="." index="0"]
-
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
+[node name="Floor_plane" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
-skeleton = NodePath("..")
 material/0 = SubResource( 2 )
-_sections_unfolded = [ "material" ]
 
-[node name="DirectionalLight" type="DirectionalLight" parent="." index="1"]
-
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.56827, 0.673454, -0.472789, 0, 0.574581, 0.818448, 0.822842, -0.465099, 0.326517, -9.77531, 11.5204, 11.766 )
-layers = 1
-light_color = Color( 1, 1, 1, 1 )
-light_energy = 1.0
-light_indirect_energy = 1.0
-light_negative = false
-light_specular = 0.5
-light_bake_mode = 1
-light_cull_mask = -1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 1 )
-shadow_bias = 0.1
-shadow_contact = 0.0
-shadow_reverse_cull_face = false
-editor_only = false
-directional_shadow_mode = 2
-directional_shadow_split_1 = 0.1
-directional_shadow_split_2 = 0.2
-directional_shadow_split_3 = 0.5
-directional_shadow_blend_splits = false
-directional_shadow_normal_bias = 0.8
-directional_shadow_bias_split_scale = 0.25
-directional_shadow_depth_range = 0
-directional_shadow_max_distance = 200.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="2"]
-
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 4 )
 
-[node name="BattleBot" parent="." index="3" instance=ExtResource( 2 )]
+[node name="BattleBot" parent="." instance=ExtResource( 2 )]
 
 [node name="godot_battle_bot" parent="BattleBot/Armature/Skeleton" index="0"]
-
 material/0 = ExtResource( 3 )
 material/1 = ExtResource( 4 )
-_sections_unfolded = [ "material" ]
 
-[node name="Camera" type="Camera" parent="." index="4"]
-
+[node name="Camera" type="Camera" parent="."]
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5014, 8.81922 )
-keep_aspect = 1
-cull_mask = 1048575
-environment = null
-h_offset = 0.0
-v_offset = 0.0
-doppler_tracking = 0
-projection = 0
-current = false
 fov = 74.0
-size = 1.0
-near = 0.05
-far = 100.0
 script = ExtResource( 5 )
 MOVEMENT_SPEED = -2.0
 flip_axis = true
 
-[node name="targets" type="Spatial" parent="Camera" index="0"]
+[node name="targets" type="Spatial" parent="Camera"]
 
-[node name="IK_LookAt_Head" type="Spatial" parent="Camera/targets" index="0"]
-
+[node name="IK_LookAt_Head" type="Spatial" parent="Camera/targets"]
 script = ExtResource( 6 )
-_sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
 skeleton_path = NodePath("../../../BattleBot/Armature/Skeleton")
 bone_name = "Head"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
-use_negative_our_rot = false
 additional_rotation = Vector3( 90, 0, 0 )
-debug_messages = false
 
-[node name="IK_LookAt_LeftArm" type="Spatial" parent="Camera/targets" index="1"]
-
+[node name="IK_LookAt_LeftArm" type="Spatial" parent="Camera/targets"]
 script = ExtResource( 6 )
-_sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
 skeleton_path = NodePath("../../../BattleBot/Armature/Skeleton")
 bone_name = "Left_UpperArm"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
-use_negative_our_rot = false
-additional_rotation = Vector3( 0, 0, 0 )
-debug_messages = false
 
-[node name="IK_LookAt_RightArm" type="Spatial" parent="Camera/targets" index="2"]
-
+[node name="IK_LookAt_RightArm" type="Spatial" parent="Camera/targets"]
 script = ExtResource( 6 )
-_sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
 skeleton_path = NodePath("../../../BattleBot/Armature/Skeleton")
 bone_name = "Right_UpperArm"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
-use_negative_our_rot = false
 additional_rotation = Vector3( 0, 0, 180 )
-debug_messages = false
 
-[node name="Control" type="Control" parent="." index="5"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Control" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 
-[node name="Panel" type="Panel" parent="Control" index="0"]
-
+[node name="Panel" type="Panel" parent="Control"]
 modulate = Color( 1, 1, 1, 0.784314 )
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = -2.0
 margin_top = 530.0
 margin_right = 1028.0
 margin_bottom = 600.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Visibility" ]
 
-[node name="Label" type="Label" parent="Control/Panel" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Label" type="Label" parent="Control/Panel"]
 margin_left = 12.0
 margin_top = 10.0
 margin_right = 1012.0
 margin_bottom = 41.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "LookAt IK
 Move mouse to move IK targets"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Button_Next" type="Button" parent="Control" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Button_Next" type="Button" parent="Control"]
 margin_left = 900.0
 margin_top = 540.0
 margin_right = 1019.0
 margin_bottom = 590.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Next scene"
-flat = false
-align = 1
 script = ExtResource( 8 )
 scene_to_change_to = "res://fabrik_ik.tscn"
 
