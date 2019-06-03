@@ -500,7 +500,7 @@ rect_rotation = 90.0
 script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 7, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 7, 0 )
 shape = SubResource( 10 )
 
 [node name="CameraHolder" type="Spatial" parent="KinematicBody"]
@@ -529,7 +529,7 @@ look_at_axis = 2
 additional_rotation = Vector3( -10, 0, 0 )
 
 [node name="Camera" type="Camera" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest"]
-transform = Transform( -1, 0, -8.74228e-008, 0, 1, 0, 8.74228e-008, 0, -1, 0, 0, 0 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 fov = 74.0
 
 [node name="Aim_pos" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest"]
@@ -544,10 +544,8 @@ __meta__ = {
 skeleton_path = NodePath("../../../../../../BattleBot/Armature/Skeleton")
 bones_in_chain = PoolStringArray( "Left_UpperArm", "Left_LowerArm", "Left_Hand" )
 bones_in_chain_lengths = PoolRealArray( 1.97, 3, 0.1 )
-update_mode = 0
 chain_iterations = 6
 limit_chain_iterations = false
-reset_iterations_on_update = false
 use_middle_joint_target = true
 
 [node name="target" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK"]
@@ -584,10 +582,8 @@ __meta__ = {
 skeleton_path = NodePath("../../../../../../BattleBot/Armature/Skeleton")
 bones_in_chain = PoolStringArray( "Right_UpperArm", "Right_LowerArm", "Right_Hand" )
 bones_in_chain_lengths = PoolRealArray( 1.97, 3, 0.1 )
-update_mode = 0
 chain_iterations = 3
 limit_chain_iterations = false
-reset_iterations_on_update = false
 use_middle_joint_target = true
 
 [node name="target" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK_RightArm"]
@@ -653,7 +649,6 @@ editor/display_folded = true
 [node name="godot_battle_bot" parent="KinematicBody/BattleBot/Armature/Skeleton" index="0"]
 material/0 = ExtResource( 12 )
 material/1 = ExtResource( 13 )
-
 
 [editable path="KinematicBody/CameraHolder/Weapon/Pistol"]
 

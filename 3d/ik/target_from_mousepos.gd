@@ -18,3 +18,4 @@ func _process(delta):
 		mouse_to_world = -mouse_to_world
 	
 	targets.transform.origin = mouse_to_world
+	
