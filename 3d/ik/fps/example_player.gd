@@ -52,7 +52,7 @@ var current_anim = "Starter"
 # The end of the pistol
 var pistol_end = null
 # The simple bullet rigidbody
-var simple_bullet = preload("res://simple_bullet.tscn")
+var simple_bullet = preload("res://fps/simple_bullet.tscn")
 
 
 func _ready():
