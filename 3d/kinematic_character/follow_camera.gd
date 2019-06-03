@@ -6,51 +6,42 @@ var collision_exception = []
 export var min_distance = 0.5
 export var max_distance = 5.5
 export var angle_v_adjust = 0.0
-export var autoturn_ray_aperture = 25
-export var autoturn_speed = 50
 var max_height = 2.0
 var min_height = 0
+onready var target_node: Spatial = get_parent()
 
 
-func _physics_process(dt):
-	var target = get_parent().global_transform.origin
-	var pos = global_transform.origin
-	var up = Vector3(0, 1, 0)
+func _ready():
+	collision_exception.append(target_node.get_parent().get_rid())
+	# Detaches the camera transform from the parent spatial node
+	set_as_toplevel(true)
 
-	var delta = pos - target
+
+func _physics_process(_delta):
+	var target_pos: Vector3 = target_node.global_transform.origin
+	var camera_pos: Vector3 = global_transform.origin
+
+	var delta_pos: Vector3 = camera_pos - target_pos
 
 	# Regular delta follow
 
 	# Check ranges
-	if delta.length() < min_distance:
-		delta = delta.normalized() * min_distance
-	elif delta.length() > max_distance:
-		delta = delta.normalized() * max_distance
+	if delta_pos.length() < min_distance:
+		delta_pos = delta_pos.normalized() * min_distance
+	elif delta_pos.length() > max_distance:
+		delta_pos = delta_pos.normalized() * max_distance
 
 	# Check upper and lower height
-	if delta.y > max_height:
-		delta.y = max_height
-	if delta.y < min_height:
-		delta.y = min_height
+	if delta_pos.y > max_height:
+		delta_pos.y = max_height
+	if delta_pos.y < min_height:
+		delta_pos.y = min_height
 
-	pos = target + delta
+	camera_pos = target_pos + delta_pos
 
-	look_at_from_position(pos, target, up)
+	look_at_from_position(camera_pos, target_pos, Vector3.UP)
 
 	# Turn a little up or down
 	var t = transform
 	t.basis = Basis(t.basis[0], deg2rad(angle_v_adjust)) * t.basis
 	transform = t
-
-
-func _ready():
-	# Find collision exceptions for ray
-	var node = self
-	while node:
-		if node is RigidBody:
-			collision_exception.append(node.get_rid())
-			break
-		else:
-			node = node.get_parent()
-	# This detaches the camera transform from the parent spatial node
-	set_as_toplevel(true)
