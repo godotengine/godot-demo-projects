@@ -11,7 +11,7 @@ func _ready():
 	combat_screen = get_node(combat_screen)
 	combat_screen.connect("combat_finished", self, "_on_combat_finished")
 	for n in $Exploration/Grid.get_children():
-		if not n.type == n.ACTOR:
+		if not n.type == n.CELL_TYPES.ACTOR:
 			continue
 		if not n.has_node("DialoguePlayer"):
 			continue

@@ -5,10 +5,7 @@
 [ext_resource path="res://screens/exploration/Exploration.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=1]
-
 length = 0.5
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Transition/ColorRect:color")
 tracks/0/interp = 1
@@ -22,52 +19,24 @@ tracks/0/keys = {
 "values": [ Color( 0.0703125, 0.0703125, 0.0703125, 0 ), Color( 0.0703125, 0.0703125, 0.0703125, 1 ) ]
 }
 
-[node name="Game" type="Node" index="0"]
-
+[node name="Game" type="Node"]
 script = ExtResource( 1 )
-_sections_unfolded = [ "Pause" ]
 combat_screen = NodePath("Combat")
 exploration_screen = NodePath("Exploration")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
-
-root_node = NodePath("..")
-autoplay = ""
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/fade = SubResource( 1 )
-blend_times = [  ]
 
-[node name="Transition" type="CanvasLayer" parent="." index="1"]
+[node name="Transition" type="CanvasLayer" parent="."]
 
-layer = 1
-offset = Vector2( 0, 0 )
-rotation = 0.0
-scale = Vector2( 1, 1 )
-transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-
-[node name="ColorRect" type="ColorRect" parent="Transition" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="ColorRect" type="ColorRect" parent="Transition"]
 margin_right = 1280.0
 margin_bottom = 720.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 color = Color( 0.0703125, 0.0703125, 0.0703125, 0 )
-_sections_unfolded = [ "Focus", "Mouse", "Visibility" ]
 
-[node name="Combat" parent="." index="2" instance=ExtResource( 2 )]
-
+[node name="Combat" parent="." instance=ExtResource( 2 )]
 visible = false
 
-[node name="Exploration" parent="." index="3" instance=ExtResource( 3 )]
-
+[node name="Exploration" parent="." instance=ExtResource( 3 )]
 

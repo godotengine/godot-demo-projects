@@ -19,6 +19,8 @@ func _integrate_forces(state):
 	var delta = state.get_step()
 	var lv = state.get_linear_velocity()
 	var g = state.get_total_gravity()
+	# get_total_gravity returns zero for the first few frames, leading to errors
+	if g == Vector3.ZERO: g = Vector3 (0, -9.8, 0)
 
 	lv += g * delta # Apply gravity
 	var up = -g.normalized()

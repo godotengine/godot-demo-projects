@@ -1,123 +1,38 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://simple_bullet.gd" type="Script" id=1]
 
-[sub_resource type="SphereMesh" id=1]
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 0.5
 
-radius = 1.0
-height = 2.0
-radial_segments = 64
-rings = 32
-is_hemisphere = false
+[sub_resource type="SphereMesh" id=2]
 
-[sub_resource type="SpatialMaterial" id=2]
-
-render_priority = 0
-flags_transparent = false
-flags_unshaded = false
-flags_vertex_lighting = false
-flags_no_depth_test = false
-flags_use_point_size = false
-flags_world_triplanar = false
-flags_fixed_size = false
-flags_albedo_tex_force_srgb = false
-vertex_color_use_as_albedo = false
-vertex_color_is_srgb = false
-params_diffuse_mode = 0
-params_specular_mode = 0
-params_blend_mode = 0
-params_cull_mode = 0
-params_depth_draw_mode = 0
-params_line_width = 1.0
-params_point_size = 1.0
-params_billboard_mode = 0
-params_grow = false
-params_use_alpha_scissor = false
+[sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0.769531, 0.486969, 0, 1 )
-metallic = 0.0
-metallic_specular = 0.5
-metallic_texture_channel = 0
-roughness = 1.0
-roughness_texture_channel = 0
 emission_enabled = true
 emission = Color( 1, 0.445313, 0, 1 )
 emission_energy = 1.8
 emission_operator = 0
 emission_on_uv2 = false
-normal_enabled = false
-rim_enabled = false
-clearcoat_enabled = false
-anisotropy_enabled = false
-ao_enabled = false
-depth_enabled = false
-subsurf_scatter_enabled = false
-transmission_enabled = false
-refraction_enabled = false
-detail_enabled = false
-uv1_scale = Vector3( 1, 1, 1 )
-uv1_offset = Vector3( 0, 0, 0 )
-uv1_triplanar = false
-uv1_triplanar_sharpness = 1.0
-uv2_scale = Vector3( 1, 1, 1 )
-uv2_offset = Vector3( 0, 0, 0 )
-uv2_triplanar = false
-uv2_triplanar_sharpness = 1.0
-proximity_fade_enable = false
-distance_fade_enable = false
 
-[sub_resource type="SphereShape" id=3]
-
+[sub_resource type="SphereShape" id=4]
 radius = 0.4
 
 [node name="SimpleBullet" type="RigidBody"]
-
-input_ray_pickable = true
-input_capture_on_drag = false
-collision_layer = 1
-collision_mask = 1
-mode = 0
 mass = 2.0
-friction = 1.0
-bounce = 0.5
+physics_material_override = SubResource( 1 )
 gravity_scale = 3.0
-custom_integrator = false
 continuous_cd = true
-contacts_reported = 0
-contact_monitor = false
-sleeping = false
 can_sleep = false
-axis_lock_linear_x = false
-axis_lock_linear_y = false
-axis_lock_linear_z = false
-axis_lock_angular_x = false
-axis_lock_angular_y = false
-axis_lock_angular_z = false
-linear_velocity = Vector3( 0, 0, 0 )
 linear_damp = 0.4
-angular_velocity = Vector3( 0, 0, 0 )
-angular_damp = -1.0
 script = ExtResource( 1 )
 
-[node name="MeshInstance" type="MeshInstance" parent="." index="0"]
-
+[node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0 )
-layers = 1
-material_override = null
 cast_shadow = 0
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = SubResource( 1 )
-skeleton = NodePath("..")
-material/0 = SubResource( 2 )
-_sections_unfolded = [ "Geometry", "Transform", "material" ]
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
 
-[node name="CollisionShape" type="CollisionShape" parent="." index="1"]
-
-shape = SubResource( 3 )
-disabled = false
-
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 4 )
 
