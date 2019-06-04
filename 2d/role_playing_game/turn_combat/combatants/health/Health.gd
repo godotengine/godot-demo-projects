@@ -20,7 +20,7 @@ func take_damage(damage):
 
 func heal(amount):
 	life += amount
-	clamp(life, life, max_life)
+	life = clamp(life, life, max_life)
 	emit_signal("health_changed", life)
 
 func get_health_ratio():

@@ -11,7 +11,7 @@ func _ready():
 	combat_screen = get_node(combat_screen)
 	combat_screen.connect("combat_finished", self, "_on_combat_finished")
 	for n in $Exploration/Grid.get_children():
-		if not n.type == n.CELL_TYPES.ACTOR:
+		if not n.type == n.CellType.ACTOR:
 			continue
 		if not n.has_node("DialoguePlayer"):
 			continue
@@ -35,7 +35,7 @@ func start_combat(combat_actors):
 	combat_screen.initialize(combat_actors)
 	$AnimationPlayer.play_backwards("fade")
 	
-func _on_combat_finished(winner, loser):
+func _on_combat_finished(winner, _loser):
 	remove_child(combat_screen)
 	$AnimationPlayer.play_backwards("fade")
 	add_child(exploration_screen)

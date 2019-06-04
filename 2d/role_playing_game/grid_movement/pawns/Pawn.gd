@@ -1,7 +1,7 @@
 extends Node2D
 
-enum CELL_TYPES { ACTOR, OBSTACLE, OBJECT }
-export(CELL_TYPES) var type = CELL_TYPES.ACTOR
+enum CellType { ACTOR, OBSTACLE, OBJECT }
+export(CellType) var type = CellType.ACTOR
 
 var active = true setget set_active
 
