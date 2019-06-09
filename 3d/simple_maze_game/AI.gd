@@ -19,6 +19,7 @@ const UPDATE_TIME = 5
 
 const LOSE_SCREEN_PATH = "res://LoseScreen.tscn"
 
+
 func _ready():
 	get_node("Agent/VisionArea").connect("body_entered", self, "body_entered_vision")
 	get_node("Agent/VisionArea").connect("body_exited", self, "body_exited_vision")
@@ -47,11 +48,9 @@ func _physics_process(delta):
 				set_path()
 	else:
 		update_timer -= delta
-  
 
 
 func _process(delta):
-  
 	# If we have a path to follow
 	if route_path.size() > 1:
 		
@@ -112,16 +111,17 @@ func set_path():
 	set_process(true)
 
 
-
 func body_entered_vision(body):
 	if has_setup == true:
 		if body.get_name() == "Player":
 			seen_player = true
 
+
 func body_exited_vision(body):
 	if has_setup == true:
 		if body.get_name() == "Player":
 			seen_player = false
+
 
 func body_entered_grab(body):
 	if has_setup == true:

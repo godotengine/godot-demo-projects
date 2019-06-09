@@ -4,7 +4,6 @@ extends Spatial
 # the code is modified to work in Godot, but the link below has the algorithm this demo is based on.
 # (http://weblog.jamisbuck.org/2011/1/27/maze-generation-growing-tree-algorithm)
 
-
 # The data for the maze
 var data = []
 # all of the cells (the tiles we need to process)
@@ -31,6 +30,7 @@ export (bool) var Generate_imperfect_maze = false
 # What is the chance we'll remove a wall when we find a tile we've already visited?
 export (float, 0, 100) var Imperfect_maze_wall_removal_chance = 25
 
+
 func _ready():
 	
 	# Generate the maze and the nav_mesh
@@ -53,7 +53,6 @@ func _ready():
 
 
 func generate(size):
-	
 	# Erase all of the objects in data, if there is any to erase.
 	if data.size() > 0:
 		for x in range(0, data.size()-1):
@@ -128,7 +127,6 @@ func generate(size):
 
 
 func generate_nav_mesh(size):
-	
 	# A couple pool arrays for holding verticies and indicies for the navmesh.
 	# We have to use pool arrays because that is what mesh uses.
 	var verticies = PoolVector3Array()
@@ -202,11 +200,9 @@ func generate_nav_mesh(size):
 		get_node("DebugNavmesh").mesh = mesh
 	else:
 		get_node("DebugNavmesh").queue_free()
-	
 
 
 func add_quad(quad_center, quad_size, quad_verticies, quad_indicies):
-	
 	# Check if a there is a vertex at the position we're considering. If there is, then we can use that.
 	# This is so we can make a mesh that has no floating triangles (floating triangles do not work with navmeshes)
 	var vert_index_BL = findInPoolArray(quad_verticies, Vector3(quad_center.x - quad_size.x, quad_center.y, quad_center.z + quad_size.z))
@@ -332,7 +328,6 @@ func shuffleArray(array):
 	var i = array.size() - 1
 	while i > 0:
 		var j = floor(randf() * (i + 1))
-		var temp = array[i]
 		array[i] = array[j]
 		array[j] = array[i]
 		i -= 1

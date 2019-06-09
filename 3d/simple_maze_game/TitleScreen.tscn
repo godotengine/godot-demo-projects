@@ -5,7 +5,6 @@
 [ext_resource path="res://Titillium-Bold.otf" type="DynamicFontData" id=3]
 
 [sub_resource type="GDScript" id=1]
-
 script/source = "tool
 extends Object
 func e():
@@ -13,37 +12,12 @@ func e():
 "
 
 [sub_resource type="StyleBoxFlat" id=2]
-
-content_margin_left = -1.0
-content_margin_right = -1.0
-content_margin_top = -1.0
-content_margin_bottom = -1.0
 bg_color = Color( 0.378906, 0.378906, 0.378906, 1 )
-draw_center = true
-border_width_left = 0
-border_width_top = 0
-border_width_right = 0
-border_width_bottom = 0
-border_color = Color( 0.8, 0.8, 0.8, 1 )
 border_blend = true
-corner_radius_top_left = 0
-corner_radius_top_right = 0
-corner_radius_bottom_right = 0
-corner_radius_bottom_left = 0
-corner_detail = 8
-expand_margin_left = 0.0
-expand_margin_right = 0.0
-expand_margin_top = 0.0
-expand_margin_bottom = 0.0
-shadow_color = Color( 0, 0, 0, 0.6 )
-shadow_size = 0
 anti_aliasing = false
-anti_aliasing_size = 1
 script = SubResource( 1 )
-_sections_unfolded = [ "Border Width" ]
 
 [sub_resource type="GDScript" id=3]
-
 script/source = "tool
 extends Object
 func e():
@@ -51,16 +25,12 @@ func e():
 "
 
 [sub_resource type="DynamicFont" id=4]
-
 size = 52
-use_mipmaps = false
 use_filter = true
 font_data = ExtResource( 3 )
 script = SubResource( 3 )
-_sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="GDScript" id=5]
-
 script/source = "tool
 extends Object
 func e():
@@ -68,111 +38,45 @@ func e():
 "
 
 [sub_resource type="DynamicFont" id=6]
-
 size = 72
-use_mipmaps = false
 use_filter = true
 font_data = ExtResource( 3 )
 script = SubResource( 5 )
-_sections_unfolded = [ "Font", "Settings" ]
 
-[node name="TitleScreen" type="Control" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="TitleScreen" type="Control"]
 margin_right = 40.0
 margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 script = ExtResource( 1 )
 game_scene = ExtResource( 2 )
 
-[node name="BGPanel" type="Panel" parent="." index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="BGPanel" type="Panel" parent="."]
 margin_right = 1024.0
 margin_bottom = 600.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_styles/panelf = SubResource( 2 )
 custom_styles/panel = SubResource( 2 )
 custom_styles/panelnc = SubResource( 2 )
-_sections_unfolded = [ "custom_styles" ]
 
-[node name="StartButton" type="Button" parent="." index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="StartButton" type="Button" parent="."]
 margin_left = 390.0
 margin_top = 470.0
 margin_right = 629.0
 margin_bottom = 544.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_fonts/font = SubResource( 4 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "START"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_fonts" ]
 
-[node name="TitleLabel" type="Label" parent="." index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="TitleLabel" type="Label" parent="."]
 margin_right = 1025.0
 margin_bottom = 200.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 custom_fonts/font = SubResource( 6 )
 text = "Simple Maze Game!"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
 
-[node name="DescriptionLabel" type="Label" parent="." index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="DescriptionLabel" type="Label" parent="."]
 margin_top = 140.0
 margin_right = 1717.0
 margin_bottom = 357.0
 rect_scale = Vector2( 0.6, 0.6 )
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 custom_fonts/font = SubResource( 4 )
 text = "Find the key to escape the maze!
 Watch out for the robot!
@@ -180,82 +84,30 @@ Move with WASD or arrow keys.
 Use the mouse to look around."
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Rect" ]
 
-[node name="SeedLabel" type="Label" parent="." index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="SeedLabel" type="Label" parent="."]
 margin_left = 220.0
 margin_top = 320.0
 margin_right = 820.0
 margin_bottom = 372.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 custom_fonts/font = SubResource( 4 )
 text = "Seed:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
 
-[node name="SeedLabel2" type="Label" parent="." index="5"]
-
+[node name="SeedLabel2" type="Label" parent="."]
 modulate = Color( 1, 1, 1, 0.392157 )
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 20.0
 margin_top = 560.0
 margin_right = 2000.0
 margin_bottom = 612.0
 rect_scale = Vector2( 0.5, 0.5 )
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 custom_fonts/font = SubResource( 4 )
 text = "NOTE: the game may freeze while generating the maze"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
 
-[node name="SeedLineEdit" type="LineEdit" parent="." index="6"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="SeedLineEdit" type="LineEdit" parent="."]
 margin_left = 220.0
 margin_top = 380.0
 margin_right = 820.0
 margin_bottom = 442.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 1
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_fonts/font = SubResource( 4 )
-focus_mode = 2
-context_menu_enabled = true
 placeholder_text = "Leave blank for random"
-placeholder_alpha = 0.6
-caret_blink = false
-caret_blink_speed = 0.65
-caret_position = 0
-_sections_unfolded = [ "Placeholder", "custom_fonts" ]
-
-

@@ -3,12 +3,13 @@ extends Control
 # The path to the game scene
 export (PackedScene) var game_scene;
 
+
 func _ready():
+	# warning-ignore:return_value_discarded
 	get_node("StartButton").connect("pressed", self, "start_pressed")
 
 
 func start_pressed():
-	
 	var seed_line_edit = get_node("SeedLineEdit")
 	
 	# If there is text in the LineEdit
@@ -32,4 +33,5 @@ func start_pressed():
 		randomize()
 	
 	# Change the scene
+	# warning-ignore:return_value_discarded
 	get_tree().change_scene_to(game_scene);

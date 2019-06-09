@@ -13,16 +13,13 @@ const ACCEL= 1.5
 const DEACCEL= 10
 const MAX_SLOPE_ANGLE = 30
 
-
 var camera
 var camera_holder
 const MOUSE_SENSITIVITY = 0.1
 
-
 # The key node and AI node are needed for the GUI
 var key
 var AI
-
 
 var label_distance_key
 var label_distance_robot
@@ -42,7 +39,6 @@ func _ready():
 func _physics_process(delta):
 	var dir = Vector3() # Where does the player intend to walk to
 	var cam_xform = camera.get_global_transform()
-	
 	
 	if Input.is_key_pressed(KEY_UP) or Input.is_key_pressed(KEY_W):
 		dir += -cam_xform.basis[2]

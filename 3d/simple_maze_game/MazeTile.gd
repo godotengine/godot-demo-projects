@@ -7,8 +7,10 @@ var visited = false
 # Because the maze generation algorithm destroys walls, we make them all true by default
 var walls = {"NORTH":true, "SOUTH":true, "EAST":true, "WEST":true}
 
+
 func _ready():
 	walls = {"NORTH":true, "SOUTH":true, "EAST":true, "WEST":true}
+
 
 # A simple function that makes walls and pillars if they are needed
 func setup_walls():
@@ -17,7 +19,7 @@ func setup_walls():
 			show_wall(wall_name)
 		else:
 			delete_wall(wall_name)
-
+	
 	setup_pillars()
 
 
@@ -37,22 +39,22 @@ func setup_pillars():
 	if walls["WEST"]:
 		pillars["NW"] = true
 		pillars["SW"] = true
-
+	
 	if pillars["NE"]:
 		get_node("Pillars/NE").visible = true
 	else:
 		get_node("Pillars/NE").queue_free()
-
+	
 	if pillars["NW"]:
 		get_node("Pillars/NW").visible = true
 	else:
 		get_node("Pillars/NW").queue_free()
-
+	
 	if pillars["SE"]:
 		get_node("Pillars/SE").visible = true
 	else:
 		get_node("Pillars/SE").queue_free()
-
+	
 	if pillars["SW"]:
 		get_node("Pillars/SW").visible = true
 	else:
