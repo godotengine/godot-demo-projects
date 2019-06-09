@@ -6,27 +6,20 @@
 [ext_resource path="res://spot.png" type="Texture" id=4]
 
 [sub_resource type="OccluderPolygon2D" id=1]
-
-closed = true
-cull_mode = 0
 polygon = PoolVector2Array( -15.913, -15.9738, 15.9079, -16.0785, 15.6986, 15.847, -16.1223, 15.9517 )
 
 [sub_resource type="CanvasItemMaterial" id=2]
-
-render_priority = 0
 blend_mode = 1
-light_mode = 0
 
 [sub_resource type="Animation" id=3]
-
 length = 16.0
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 4, 8, 12 ),
 "transitions": PoolRealArray( -2, -2, -2, -2 ),
@@ -35,15 +28,14 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-
 length = 16.0
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 4.1, 8.1, 11.8 ),
 "transitions": PoolRealArray( -2, -2, -2, -2 ),
@@ -52,27 +44,20 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CanvasItemMaterial" id=5]
-
-render_priority = 0
 blend_mode = 1
-light_mode = 0
 
 [sub_resource type="CanvasItemMaterial" id=6]
-
-render_priority = 0
 blend_mode = 1
-light_mode = 0
 
 [sub_resource type="Animation" id=7]
-
 length = 16.0
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 4.1, 7.9, 12.1 ),
 "transitions": PoolRealArray( -2, -2, -2, -2 ),
@@ -83,11 +68,9 @@ tracks/0/keys = {
 [node name="base" type="Node2D"]
 
 [node name="ambient" type="CanvasModulate" parent="."]
-
 color = Color( 0.27451, 0.27451, 0.27451, 1 )
 
 [node name="bg" type="Sprite" parent="."]
-
 position = Vector2( 401.251, 301.906 )
 scale = Vector2( 6.39454, 4.82665 )
 texture = ExtResource( 1 )
@@ -95,280 +78,162 @@ texture = ExtResource( 1 )
 [node name="casters" type="Node2D" parent="."]
 
 [node name="shadow_caster" type="Sprite" parent="casters"]
-
 position = Vector2( 95.2909, 85.3186 )
 texture = ExtResource( 2 )
 
 [node name="occluder" type="LightOccluder2D" parent="casters/shadow_caster"]
-
 occluder = SubResource( 1 )
-light_mask = 1
 
 [node name="shadow_caster1" type="Sprite" parent="casters"]
-
 position = Vector2( 200.291, 313.319 )
 texture = ExtResource( 2 )
 
 [node name="occluder" type="LightOccluder2D" parent="casters/shadow_caster1"]
-
 occluder = SubResource( 1 )
-light_mask = 1
 
 [node name="shadow_caster2" type="Sprite" parent="casters"]
-
 position = Vector2( 76.2909, 405.319 )
 texture = ExtResource( 2 )
 
 [node name="occluder" type="LightOccluder2D" parent="casters/shadow_caster2"]
-
 occluder = SubResource( 1 )
-light_mask = 1
 
 [node name="shadow_caster3" type="Sprite" parent="casters"]
-
 position = Vector2( 348.291, 206.319 )
 texture = ExtResource( 2 )
 
 [node name="occluder" type="LightOccluder2D" parent="casters/shadow_caster3"]
-
 occluder = SubResource( 1 )
-light_mask = 1
 
 [node name="shadow_caster4" type="Sprite" parent="casters"]
-
 position = Vector2( 239.291, 48.3186 )
 texture = ExtResource( 2 )
 
 [node name="occluder" type="LightOccluder2D" parent="casters/shadow_caster4"]
-
 occluder = SubResource( 1 )
-light_mask = 1
 
 [node name="shadow_caster5" type="Sprite" parent="casters"]
-
 position = Vector2( 140.291, 561.319 )
 texture = ExtResource( 2 )
 
 [node name="occluder" type="LightOccluder2D" parent="casters/shadow_caster5"]
-
 occluder = SubResource( 1 )
-light_mask = 1
 
 [node name="shadow_caster6" type="Sprite" parent="casters"]
-
 position = Vector2( 392.291, 499.319 )
 texture = ExtResource( 2 )
 
 [node name="occluder" type="LightOccluder2D" parent="casters/shadow_caster6"]
-
 occluder = SubResource( 1 )
-light_mask = 1
 
 [node name="shadow_caster7" type="Sprite" parent="casters"]
-
 position = Vector2( 735.291, 552.319 )
 texture = ExtResource( 2 )
 
 [node name="occluder" type="LightOccluder2D" parent="casters/shadow_caster7"]
-
 occluder = SubResource( 1 )
-light_mask = 1
 
 [node name="shadow_caster8" type="Sprite" parent="casters"]
-
 position = Vector2( 661.291, 371.319 )
 texture = ExtResource( 2 )
 
 [node name="occluder" type="LightOccluder2D" parent="casters/shadow_caster8"]
-
 occluder = SubResource( 1 )
-light_mask = 1
 
 [node name="shadow_caster9" type="Sprite" parent="casters"]
-
 position = Vector2( 567.291, 574.319 )
 texture = ExtResource( 2 )
 
 [node name="occluder" type="LightOccluder2D" parent="casters/shadow_caster9"]
-
 occluder = SubResource( 1 )
-light_mask = 1
 
 [node name="shadow_caster10" type="Sprite" parent="casters"]
-
 position = Vector2( 420.291, 350.319 )
 texture = ExtResource( 2 )
 
 [node name="occluder" type="LightOccluder2D" parent="casters/shadow_caster10"]
-
 occluder = SubResource( 1 )
-light_mask = 1
 
 [node name="shadow_caster11" type="Sprite" parent="casters"]
-
 position = Vector2( 463.291, 106.319 )
 texture = ExtResource( 2 )
 
 [node name="occluder" type="LightOccluder2D" parent="casters/shadow_caster11"]
-
 occluder = SubResource( 1 )
-light_mask = 1
 
 [node name="shadow_caster12" type="Sprite" parent="casters"]
-
 position = Vector2( 621.291, 78.3186 )
 texture = ExtResource( 2 )
 
 [node name="occluder" type="LightOccluder2D" parent="casters/shadow_caster12"]
-
 occluder = SubResource( 1 )
-light_mask = 1
 
 [node name="shadow_caster13" type="Sprite" parent="casters"]
-
 position = Vector2( 761.291, 240.319 )
 texture = ExtResource( 2 )
 
 [node name="occluder" type="LightOccluder2D" parent="casters/shadow_caster13"]
-
 occluder = SubResource( 1 )
-light_mask = 1
 
 [node name="shadow_caster14" type="Sprite" parent="casters"]
-
 position = Vector2( 771.291, 29.3186 )
 texture = ExtResource( 2 )
 
 [node name="occluder" type="LightOccluder2D" parent="casters/shadow_caster14"]
-
 occluder = SubResource( 1 )
-light_mask = 1
 
 [node name="red_light" type="Light2D" parent="."]
-
 position = Vector2( 159.289, 452.441 )
-enabled = true
-editor_only = false
 texture = ExtResource( 3 )
-offset = Vector2( 0, 0 )
-texture_scale = 1.0
 color = Color( 1, 0.446392, 0.0576646, 1 )
-energy = 1.0
-mode = 0
-range_height = 0.0
-range_z_min = -1024
-range_z_max = 1024
-range_layer_min = 0
-range_layer_max = 0
-range_item_cull_mask = 1
 shadow_enabled = true
-shadow_color = Color( 0, 0, 0, 0 )
-shadow_buffer_size = 2048
 shadow_gradient_length = 1.3
 shadow_filter = 3
 shadow_filter_smooth = 11.1
-shadow_item_cull_mask = 1
 
 [node name="blob" type="Sprite" parent="red_light"]
-
 material = SubResource( 2 )
 texture = ExtResource( 4 )
 
 [node name="anim" type="AnimationPlayer" parent="red_light"]
-
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-root_node = NodePath("..")
+autoplay = "motion"
 anims/motion = SubResource( 3 )
 anims/motion2 = SubResource( 4 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
-autoplay = "motion"
 
 [node name="green_light" type="Light2D" parent="."]
-
 position = Vector2( 753.756, 314.336 )
-enabled = true
-editor_only = false
 texture = ExtResource( 3 )
-offset = Vector2( 0, 0 )
-texture_scale = 1.0
 color = Color( 0.49247, 0.878537, 0.409146, 1 )
-energy = 1.0
-mode = 0
-range_height = 0.0
-range_z_min = -1024
-range_z_max = 1024
-range_layer_min = 0
-range_layer_max = 0
-range_item_cull_mask = 1
 shadow_enabled = true
-shadow_color = Color( 0, 0, 0, 0 )
-shadow_buffer_size = 2048
 shadow_gradient_length = 1.2
 shadow_filter = 3
 shadow_filter_smooth = 7.1
-shadow_item_cull_mask = 1
 
 [node name="blob" type="Sprite" parent="green_light"]
-
 material = SubResource( 5 )
 texture = ExtResource( 4 )
 
 [node name="anim" type="AnimationPlayer" parent="green_light"]
-
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-root_node = NodePath("..")
+autoplay = "m2"
 anims/m2 = SubResource( 4 )
 anims/motion = SubResource( 3 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
-autoplay = "m2"
 
 [node name="blue_light" type="Light2D" parent="."]
-
 position = Vector2( 692.078, 29.8849 )
-enabled = true
-editor_only = false
 texture = ExtResource( 3 )
-offset = Vector2( 0, 0 )
-texture_scale = 1.0
 color = Color( 0.396752, 0.446392, 0.929792, 1 )
-energy = 1.0
-mode = 0
-range_height = 0.0
-range_z_min = -1024
-range_z_max = 1024
-range_layer_min = 0
-range_layer_max = 0
-range_item_cull_mask = 1
 shadow_enabled = true
-shadow_color = Color( 0, 0, 0, 0 )
-shadow_buffer_size = 2048
 shadow_gradient_length = 1.4
 shadow_filter = 3
 shadow_filter_smooth = 5.3
-shadow_item_cull_mask = 1
 
 [node name="blob" type="Sprite" parent="blue_light"]
-
 material = SubResource( 6 )
 texture = ExtResource( 4 )
 
 [node name="anim" type="AnimationPlayer" parent="blue_light"]
-
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-root_node = NodePath("..")
+autoplay = "motion3"
 anims/motion = SubResource( 3 )
 anims/motion2 = SubResource( 4 )
 anims/motion3 = SubResource( 7 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
-autoplay = "motion3"
-
 

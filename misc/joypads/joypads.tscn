@@ -3,1421 +3,649 @@
 [ext_resource path="res://joypads.gd" type="Script" id=1]
 [ext_resource path="res://jsdiagram.tscn" type="PackedScene" id=2]
 
-[node name="joypads" type="Node2D" index="0"]
-
+[node name="joypads" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="diagram" parent="." index="0" instance=ExtResource( 2 )]
-
+[node name="diagram" parent="." instance=ExtResource( 2 )]
 position = Vector2( 400, 200 )
 
-[node name="device_info" type="Control" parent="." index="1"]
-
+[node name="device_info" type="Control" parent="."]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 
-[node name="label_device" type="Label" parent="device_info" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="label_device" type="Label" parent="device_info"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 60.0
 margin_bottom = 30.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Device"
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="joy_num" type="SpinBox" parent="device_info" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="joy_num" type="SpinBox" parent="device_info"]
 margin_left = 65.0
 margin_top = 10.0
 margin_right = 139.0
 margin_bottom = 34.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-min_value = 0.0
 max_value = 16.0
-step = 1.0
-page = 0.0
-value = 0.0
-exp_edit = false
-rounded = false
-editable = true
-prefix = ""
-suffix = ""
 
-[node name="joy_name" type="Label" parent="device_info" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="joy_name" type="Label" parent="device_info"]
 margin_left = 10.0
 margin_top = 35.0
 margin_right = 250.0
 margin_bottom = 50.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 custom_colors/font_color = Color( 0.229156, 1, 0.239205, 1 )
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="axes" type="Control" parent="." index="2"]
-
+[node name="axes" type="Control" parent="."]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 
-[node name="axis_prog0" type="ProgressBar" parent="axes" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_prog0" type="ProgressBar" parent="axes"]
 margin_left = 60.0
 margin_top = 60.0
 margin_right = 260.0
 margin_bottom = 76.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
-size_flags_vertical = 0
 min_value = -100.0
-max_value = 100.0
 step = 0.0001
-page = 0.0
-value = 0.0
-exp_edit = false
-rounded = false
 percent_visible = false
 
-[node name="axis_prog1" type="ProgressBar" parent="axes" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_prog1" type="ProgressBar" parent="axes"]
 margin_left = 60.0
 margin_top = 80.0
 margin_right = 260.0
 margin_bottom = 96.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
-size_flags_vertical = 0
 min_value = -100.0
-max_value = 100.0
 step = 0.0001
-page = 0.0
-value = 0.0
-exp_edit = false
-rounded = false
 percent_visible = false
 
-[node name="axis_prog2" type="ProgressBar" parent="axes" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_prog2" type="ProgressBar" parent="axes"]
 margin_left = 60.0
 margin_top = 100.0
 margin_right = 260.0
 margin_bottom = 116.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
-size_flags_vertical = 0
 min_value = -100.0
-max_value = 100.0
 step = 0.0001
-page = 0.0
-value = 0.0
-exp_edit = false
-rounded = false
 percent_visible = false
 
-[node name="axis_prog3" type="ProgressBar" parent="axes" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_prog3" type="ProgressBar" parent="axes"]
 margin_left = 60.0
 margin_top = 120.0
 margin_right = 260.0
 margin_bottom = 136.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
-size_flags_vertical = 0
 min_value = -100.0
-max_value = 100.0
 step = 0.0001
-page = 0.0
-value = 0.0
-exp_edit = false
-rounded = false
 percent_visible = false
 
-[node name="axis_prog4" type="ProgressBar" parent="axes" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_prog4" type="ProgressBar" parent="axes"]
 margin_left = 60.0
 margin_top = 140.0
 margin_right = 260.0
 margin_bottom = 156.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
-size_flags_vertical = 0
 min_value = -100.0
-max_value = 100.0
 step = 0.0001
-page = 0.0
-value = 0.0
-exp_edit = false
-rounded = false
 percent_visible = false
 
-[node name="axis_prog5" type="ProgressBar" parent="axes" index="5"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_prog5" type="ProgressBar" parent="axes"]
 margin_left = 60.0
 margin_top = 160.0
 margin_right = 260.0
 margin_bottom = 176.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
-size_flags_vertical = 0
 min_value = -100.0
-max_value = 100.0
 step = 0.0001
-page = 0.0
-value = 0.0
-exp_edit = false
-rounded = false
 percent_visible = false
 
-[node name="axis_prog6" type="ProgressBar" parent="axes" index="6"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_prog6" type="ProgressBar" parent="axes"]
 margin_left = 60.0
 margin_top = 180.0
 margin_right = 260.0
 margin_bottom = 196.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
-size_flags_vertical = 0
 min_value = -100.0
-max_value = 100.0
 step = 0.0001
-page = 0.0
-value = 0.0
-exp_edit = false
-rounded = false
 percent_visible = false
 
-[node name="axis_prog7" type="ProgressBar" parent="axes" index="7"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_prog7" type="ProgressBar" parent="axes"]
 margin_left = 60.0
 margin_top = 200.0
 margin_right = 260.0
 margin_bottom = 216.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
-size_flags_vertical = 0
 min_value = -100.0
-max_value = 100.0
 step = 0.0001
-page = 0.0
-value = 0.0
-exp_edit = false
-rounded = false
 percent_visible = false
 
-[node name="axis_prog8" type="ProgressBar" parent="axes" index="8"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_prog8" type="ProgressBar" parent="axes"]
 margin_left = 60.0
 margin_top = 220.0
 margin_right = 260.0
 margin_bottom = 236.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
-size_flags_vertical = 0
 min_value = -100.0
-max_value = 100.0
 step = 0.0001
-page = 0.0
-value = 0.0
-exp_edit = false
-rounded = false
 percent_visible = false
 
-[node name="axis_prog9" type="ProgressBar" parent="axes" index="9"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_prog9" type="ProgressBar" parent="axes"]
 margin_left = 60.0
 margin_top = 240.0
 margin_right = 260.0
 margin_bottom = 256.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
-size_flags_vertical = 0
 min_value = -100.0
-max_value = 100.0
 step = 0.0001
-page = 0.0
-value = 0.0
-exp_edit = false
-rounded = false
 percent_visible = false
 
-[node name="axis_prog10" type="ProgressBar" parent="axes" index="10"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_prog10" type="ProgressBar" parent="axes"]
 margin_left = 60.0
 margin_top = 260.0
 margin_right = 260.0
 margin_bottom = 276.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
-size_flags_vertical = 0
 min_value = -100.0
-max_value = 100.0
 step = 0.0001
-page = 0.0
-value = 0.0
-exp_edit = false
-rounded = false
 percent_visible = false
 
-[node name="axis_val0" type="Label" parent="axes" index="11"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_val0" type="Label" parent="axes"]
 margin_left = 60.0
 margin_top = 60.0
 margin_right = 260.0
 margin_bottom = 75.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="axis_val1" type="Label" parent="axes" index="12"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_val1" type="Label" parent="axes"]
 margin_left = 60.0
 margin_top = 80.0
 margin_right = 260.0
 margin_bottom = 95.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="axis_val2" type="Label" parent="axes" index="13"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_val2" type="Label" parent="axes"]
 margin_left = 60.0
 margin_top = 100.0
 margin_right = 260.0
 margin_bottom = 115.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="axis_val3" type="Label" parent="axes" index="14"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_val3" type="Label" parent="axes"]
 margin_left = 60.0
 margin_top = 120.0
 margin_right = 260.0
 margin_bottom = 135.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="axis_val4" type="Label" parent="axes" index="15"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_val4" type="Label" parent="axes"]
 margin_left = 60.0
 margin_top = 140.0
 margin_right = 260.0
 margin_bottom = 155.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="axis_val5" type="Label" parent="axes" index="16"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_val5" type="Label" parent="axes"]
 margin_left = 60.0
 margin_top = 160.0
 margin_right = 260.0
 margin_bottom = 175.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="axis_val6" type="Label" parent="axes" index="17"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_val6" type="Label" parent="axes"]
 margin_left = 60.0
 margin_top = 180.0
 margin_right = 260.0
 margin_bottom = 195.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="axis_val7" type="Label" parent="axes" index="18"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_val7" type="Label" parent="axes"]
 margin_left = 60.0
 margin_top = 200.0
 margin_right = 260.0
 margin_bottom = 215.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="axis_val8" type="Label" parent="axes" index="19"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_val8" type="Label" parent="axes"]
 margin_left = 60.0
 margin_top = 220.0
 margin_right = 260.0
 margin_bottom = 235.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="axis_val9" type="Label" parent="axes" index="20"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_val9" type="Label" parent="axes"]
 margin_left = 60.0
 margin_top = 240.0
 margin_right = 260.0
 margin_bottom = 255.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="axis_val10" type="Label" parent="axes" index="21"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="axis_val10" type="Label" parent="axes"]
 margin_left = 60.0
 margin_top = 260.0
 margin_right = 260.0
 margin_bottom = 275.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="label_axis0" type="Label" parent="axes" index="22"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="label_axis0" type="Label" parent="axes"]
 margin_left = 10.0
 margin_top = 60.0
 margin_right = 51.0
 margin_bottom = 75.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 0"
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="label_axis1" type="Label" parent="axes" index="23"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="label_axis1" type="Label" parent="axes"]
 margin_left = 10.0
 margin_top = 80.0
 margin_right = 51.0
 margin_bottom = 95.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 1"
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="label_axis2" type="Label" parent="axes" index="24"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="label_axis2" type="Label" parent="axes"]
 margin_left = 10.0
 margin_top = 100.0
 margin_right = 51.0
 margin_bottom = 115.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 2"
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="label_axis3" type="Label" parent="axes" index="25"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="label_axis3" type="Label" parent="axes"]
 margin_left = 10.0
 margin_top = 120.0
 margin_right = 51.0
 margin_bottom = 135.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 3"
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="label_axis4" type="Label" parent="axes" index="26"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="label_axis4" type="Label" parent="axes"]
 margin_left = 10.0
 margin_top = 140.0
 margin_right = 51.0
 margin_bottom = 155.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 4"
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="label_axis5" type="Label" parent="axes" index="27"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="label_axis5" type="Label" parent="axes"]
 margin_left = 10.0
 margin_top = 160.0
 margin_right = 51.0
 margin_bottom = 175.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 5"
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="label_axis6" type="Label" parent="axes" index="28"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="label_axis6" type="Label" parent="axes"]
 margin_left = 10.0
 margin_top = 180.0
 margin_right = 51.0
 margin_bottom = 195.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 6"
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="label_axis7" type="Label" parent="axes" index="29"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="label_axis7" type="Label" parent="axes"]
 margin_left = 10.0
 margin_top = 200.0
 margin_right = 51.0
 margin_bottom = 215.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 7"
 valign = 2
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="label_axis8" type="Label" parent="axes" index="30"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="label_axis8" type="Label" parent="axes"]
 margin_left = 10.0
 margin_top = 220.0
 margin_right = 51.0
 margin_bottom = 235.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 8"
 valign = 2
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="label_axis9" type="Label" parent="axes" index="31"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="label_axis9" type="Label" parent="axes"]
 margin_left = 10.0
 margin_top = 240.0
 margin_right = 51.0
 margin_bottom = 255.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 9"
 valign = 2
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="label_axis10" type="Label" parent="axes" index="32"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="label_axis10" type="Label" parent="axes"]
 margin_left = 10.0
 margin_top = 260.0
 margin_right = 51.0
 margin_bottom = 275.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 10"
 valign = 2
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="buttons" type="Control" parent="." index="3"]
-
+[node name="buttons" type="Control" parent="."]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 
-[node name="label_buttons" type="Label" parent="buttons" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="label_buttons" type="Label" parent="buttons"]
 margin_left = 10.0
 margin_top = 290.0
 margin_right = 65.0
 margin_bottom = 304.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Buttons:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="btn0" type="Label" parent="buttons" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="btn0" type="Label" parent="buttons"]
 margin_left = 20.0
 margin_top = 310.0
 margin_right = 45.0
 margin_bottom = 324.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "0"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="btn1" type="Label" parent="buttons" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="btn1" type="Label" parent="buttons"]
 margin_left = 45.0
 margin_top = 310.0
 margin_right = 70.0
 margin_bottom = 324.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "1"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="btn2" type="Label" parent="buttons" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="btn2" type="Label" parent="buttons"]
 margin_left = 70.0
 margin_top = 310.0
 margin_right = 95.0
 margin_bottom = 324.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "2"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="btn3" type="Label" parent="buttons" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="btn3" type="Label" parent="buttons"]
 margin_left = 95.0
 margin_top = 310.0
 margin_right = 120.0
 margin_bottom = 324.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "3"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="btn4" type="Label" parent="buttons" index="5"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="btn4" type="Label" parent="buttons"]
 margin_left = 120.0
 margin_top = 310.0
 margin_right = 145.0
 margin_bottom = 324.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "4"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="btn5" type="Label" parent="buttons" index="6"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="btn5" type="Label" parent="buttons"]
 margin_left = 145.0
 margin_top = 310.0
 margin_right = 170.0
 margin_bottom = 324.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "5"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="btn6" type="Label" parent="buttons" index="7"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="btn6" type="Label" parent="buttons"]
 margin_left = 170.0
 margin_top = 310.0
 margin_right = 195.0
 margin_bottom = 324.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "6"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="btn7" type="Label" parent="buttons" index="8"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="btn7" type="Label" parent="buttons"]
 margin_left = 195.0
 margin_top = 310.0
 margin_right = 220.0
 margin_bottom = 324.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "7"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="btn8" type="Label" parent="buttons" index="9"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="btn8" type="Label" parent="buttons"]
 margin_left = 220.0
 margin_top = 310.0
 margin_right = 245.0
 margin_bottom = 324.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "8"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="btn9" type="Label" parent="buttons" index="10"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="btn9" type="Label" parent="buttons"]
 margin_left = 20.0
 margin_top = 330.0
 margin_right = 45.0
 margin_bottom = 344.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "9"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="btn10" type="Label" parent="buttons" index="11"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="btn10" type="Label" parent="buttons"]
 margin_left = 45.0
 margin_top = 330.0
 margin_right = 70.0
 margin_bottom = 344.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "10"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="btn11" type="Label" parent="buttons" index="12"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="btn11" type="Label" parent="buttons"]
 margin_left = 70.0
 margin_top = 330.0
 margin_right = 95.0
 margin_bottom = 344.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "11"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="btn12" type="Label" parent="buttons" index="13"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="btn12" type="Label" parent="buttons"]
 margin_left = 95.0
 margin_top = 330.0
 margin_right = 120.0
 margin_bottom = 344.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "12"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="btn13" type="Label" parent="buttons" index="14"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="btn13" type="Label" parent="buttons"]
 margin_left = 120.0
 margin_top = 330.0
 margin_right = 145.0
 margin_bottom = 344.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "13"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="btn14" type="Label" parent="buttons" index="15"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="btn14" type="Label" parent="buttons"]
 margin_left = 145.0
 margin_top = 330.0
 margin_right = 170.0
 margin_bottom = 344.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "14"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="btn15" type="Label" parent="buttons" index="16"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="btn15" type="Label" parent="buttons"]
 margin_left = 170.0
 margin_top = 330.0
 margin_right = 195.0
 margin_bottom = 344.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "15"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="vibration" type="Control" parent="." index="4"]
-
+[node name="vibration" type="Control" parent="."]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 
-[node name="weak_label" type="Label" parent="vibration" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="weak_label" type="Label" parent="vibration"]
 margin_left = 10.0
 margin_top = 375.0
 margin_right = 152.0
 margin_bottom = 389.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Vibration Weak Motor:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="strong_label" type="Label" parent="vibration" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="strong_label" type="Label" parent="vibration"]
 margin_left = 10.0
 margin_top = 413.0
 margin_right = 157.0
 margin_bottom = 427.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Vibration Strong Motor:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="duration_label" type="Label" parent="vibration" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="duration_label" type="Label" parent="vibration"]
 margin_left = 10.0
 margin_top = 454.0
 margin_right = 157.0
 margin_bottom = 468.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Vibration Duration:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="vibration_weak_value" type="SpinBox" parent="vibration" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="vibration_weak_value" type="SpinBox" parent="vibration"]
 margin_left = 165.0
 margin_top = 370.0
 margin_right = 239.0
 margin_bottom = 394.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-min_value = 0.0
 max_value = 1.0
 step = 0.05
-page = 0.0
 value = 1.0
-exp_edit = false
-rounded = false
-editable = true
-prefix = ""
-suffix = ""
 
-[node name="vibration_strong_value" type="SpinBox" parent="vibration" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="vibration_strong_value" type="SpinBox" parent="vibration"]
 margin_left = 165.0
 margin_top = 408.0
 margin_right = 239.0
 margin_bottom = 432.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-min_value = 0.0
 max_value = 1.0
 step = 0.05
-page = 0.0
 value = 1.0
-exp_edit = false
-rounded = false
-editable = true
-prefix = ""
-suffix = ""
 
-[node name="vibration_duration_value" type="SpinBox" parent="vibration" index="5"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="vibration_duration_value" type="SpinBox" parent="vibration"]
 margin_left = 165.0
 margin_top = 449.0
 margin_right = 239.0
 margin_bottom = 473.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-min_value = 0.0
 max_value = 10.0
 step = 0.1
-page = 0.0
 value = 1.0
-exp_edit = false
-rounded = false
-editable = true
-prefix = ""
-suffix = ""
 
-[node name="start_vibration" type="Button" parent="vibration" index="6"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="start_vibration" type="Button" parent="vibration"]
 margin_left = 290.0
 margin_top = 400.0
 margin_right = 392.0
 margin_bottom = 420.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
+focus_mode = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-toggle_mode = false
 enabled_focus_mode = 0
-shortcut = null
-group = null
 text = "Start Vibration"
-flat = false
-align = 1
 
-[node name="stop_vibration" type="Button" parent="vibration" index="7"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="stop_vibration" type="Button" parent="vibration"]
 margin_left = 408.0
 margin_top = 400.0
 margin_right = 509.0
 margin_bottom = 420.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Stop Vibration"
-flat = false
-align = 1
 
 [connection signal="pressed" from="vibration/start_vibration" to="." method="_on_start_vibration_pressed"]
-
 [connection signal="pressed" from="vibration/stop_vibration" to="." method="_on_stop_vibration_pressed"]
-
-

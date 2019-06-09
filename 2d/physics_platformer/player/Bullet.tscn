@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://player/bullet.gd" type="Script" id=1]
+[ext_resource path="res://player/bullet.png" type="Texture" id=2]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="ParticlesMaterial" id=2]
+flag_disable_z = true
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 1.0
+angular_velocity = 38.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.8
+
+[sub_resource type="CircleShape2D" id=3]
+
+[sub_resource type="Animation" id=4]
+length = 1.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.31 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Particles2D:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="Bullet" type="RigidBody2D"]
+continuous_cd = 2
+script = ExtResource( 1 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+material = SubResource( 1 )
+lifetime = 0.3
+speed_scale = 3.0
+local_coords = false
+process_material = SubResource( 2 )
+texture = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+anims/shutdown = SubResource( 4 )
+
+[connection signal="timeout" from="Timer" to="." method="disable"]

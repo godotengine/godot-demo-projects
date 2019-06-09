@@ -5,39 +5,18 @@
 [ext_resource path="res://character.gd" type="Script" id=3]
 [ext_resource path="res://sprites/character.png" type="Texture" id=4]
 
-[node name="Game" type="Node" index="0"]
+[node name="Game" type="Node"]
 
-[node name="TileMap" type="TileMap" parent="." index="0"]
-
-mode = 0
+[node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
-cell_size = Vector2( 64, 64 )
-cell_quadrant_size = 16
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-cell_half_offset = 2
-cell_tile_origin = 0
-cell_y_sort = false
-cell_clip_uv = false
-collision_use_kinematic = false
-collision_friction = 1.0
-collision_bounce = 0.0
-collision_layer = 1
-collision_mask = 1
-occluder_light_mask = 1
 format = 1
 tile_data = PoolIntArray( 65537, 0, 0, 65541, 0, 0, 65545, 0, 0, 65550, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 327683, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 458761, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0 )
 script = ExtResource( 2 )
-_sections_unfolded = [ "Cell" ]
-map_size = Vector2( 16, 16 )
 
-[node name="Character" type="Position2D" parent="." index="1"]
-
+[node name="Character" type="Position2D" parent="."]
 script = ExtResource( 3 )
-SPEED = 200.0
 
-[node name="Sprite" type="Sprite" parent="Character" index="0"]
-
+[node name="Sprite" type="Sprite" parent="Character"]
 position = Vector2( 7, 0 )
 texture = ExtResource( 4 )
-
 

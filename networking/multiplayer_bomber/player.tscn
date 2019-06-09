@@ -5,21 +5,18 @@
 [ext_resource path="res://montserrat.otf" type="DynamicFontData" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-
-custom_solver_bias = 0.0
 radius = 20.0
 
 [sub_resource type="Animation" id=2]
-
 resource_name = "standing"
 length = 0.8
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
@@ -28,16 +25,14 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=3]
-
 resource_name = "stunned"
 length = 1.2
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -49,6 +44,7 @@ tracks/1/path = NodePath("sprite:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 1, 1.1 ),
 "transitions": PoolRealArray( 1, 0, 1 ),
@@ -60,6 +56,7 @@ tracks/2/path = NodePath(".:stunned")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 1 ),
 "transitions": PoolRealArray( 1 ),
@@ -68,15 +65,14 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-
 length = 0.8
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
@@ -85,7 +81,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=5]
-
 length = 0.8
 loop = true
 step = 0.2
@@ -94,6 +89,7 @@ tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
@@ -102,7 +98,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=6]
-
 length = 0.8
 loop = true
 step = 0.2
@@ -111,6 +106,7 @@ tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
@@ -119,7 +115,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=7]
-
 length = 0.8
 loop = true
 step = 0.2
@@ -128,6 +123,7 @@ tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
@@ -136,23 +132,13 @@ tracks/0/keys = {
 }
 
 [sub_resource type="DynamicFont" id=8]
-
 size = 14
-use_mipmaps = false
-use_filter = false
 font_data = ExtResource( 3 )
 
 [node name="player" type="KinematicBody2D"]
-
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-collision/safe_margin = 0.08
 script = ExtResource( 1 )
-stunned = false
 
 [node name="sprite" type="Sprite" parent="."]
-
 position = Vector2( 0.0750351, 6.23615 )
 texture = ExtResource( 2 )
 offset = Vector2( -0.0750351, -6.23615 )
@@ -160,40 +146,24 @@ vframes = 4
 hframes = 4
 
 [node name="shape" type="CollisionShape2D" parent="."]
-
 shape = SubResource( 1 )
 
 [node name="anim" type="AnimationPlayer" parent="."]
-
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-root_node = NodePath("..")
 anims/standing = SubResource( 2 )
 anims/stunned = SubResource( 3 )
 anims/walk_down = SubResource( 4 )
 anims/walk_left = SubResource( 5 )
 anims/walk_right = SubResource( 6 )
 anims/walk_up = SubResource( 7 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
-autoplay = ""
 
 [node name="label" type="Label" parent="."]
-
 margin_left = -82.0
 margin_top = -35.0
 margin_right = 85.0
 margin_bottom = -14.0
-rect_clip_content = false
-mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 8 )
 text = "Player 1"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
 

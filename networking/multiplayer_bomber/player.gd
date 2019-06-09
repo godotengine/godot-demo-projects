@@ -2,8 +2,8 @@ extends KinematicBody2D
 
 const MOTION_SPEED = 90.0
 
-slave var slave_pos = Vector2()
-slave var slave_motion = Vector2()
+puppet var puppet_pos = Vector2()
+puppet var puppet_motion = Vector2()
 
 export var stunned = false
 
@@ -20,7 +20,7 @@ var current_anim = ""
 var prev_bombing = false
 var bomb_index = 0
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var motion = Vector2()
 
 	if is_network_master():
@@ -46,11 +46,11 @@ func _physics_process(delta):
 
 		prev_bombing = bombing
 
-		rset("slave_motion", motion)
-		rset("slave_pos", position)
+		rset("puppet_motion", motion)
+		rset("puppet_pos", position)
 	else:
-		position = slave_pos
-		motion = slave_motion
+		position = puppet_pos
+		motion = puppet_motion
 
 	var new_anim = "standing"
 	if motion.y < 0:
@@ -72,15 +72,15 @@ func _physics_process(delta):
 	# FIXME: Use move_and_slide
 	move_and_slide(motion * MOTION_SPEED)
 	if not is_network_master():
-		slave_pos = position # To avoid jitter
+		puppet_pos = position # To avoid jitter
 
-slave func stun():
+puppet func stun():
 	stunned = true
 
-master func exploded(by_who):
+master func exploded(_by_who):
 	if stunned:
 		return
-	rpc("stun") # Stun slaves
+	rpc("stun") # Stun puppets
 	stun() # Stun master - could use sync to do both at once
 
 func set_player_name(new_name):
@@ -88,4 +88,4 @@ func set_player_name(new_name):
 
 func _ready():
 	stunned = false
-	slave_pos = position
+	puppet_pos = position

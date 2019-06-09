@@ -1,664 +1,342 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://observer/observer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://control.gd" type="Script" id=2]
 
-[sub_resource type="CubeMesh" id=1]
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.835294, 0.133333, 0.133333, 1 )
 
-size = Vector3( 2, 2, 2 )
-subdivide_width = 0
-subdivide_height = 0
-subdivide_depth = 0
+[sub_resource type="CubeMesh" id=2]
+material = SubResource( 1 )
+size = Vector3( 5, 5, 5 )
 
-[node name="Spatial" type="Spatial" index="0"]
+[node name="Spatial" type="Spatial"]
 
-[node name="Observer" parent="." index="0" instance=ExtResource( 1 )]
-
+[node name="Observer" parent="." instance=ExtResource( 1 )]
 transform = Transform( 0.910685, 0, -0.4131, 0, 1, 0, 0.4131, 0, 0.910685, -4.81287, -0.152566, 9.90641 )
 
-[node name="MeshInstance" type="MeshInstance" parent="." index="1"]
-
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = SubResource( 1 )
-skeleton = NodePath("..")
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 2 )
 material/0 = null
 
-[node name="Control" type="Control" parent="." index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="Control" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 2 )
 
-[node name="Button_Fullscreen" type="Button" parent="Control" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Button_Fullscreen" type="Button" parent="Control"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 120.0
 margin_bottom = 45.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Fullscreen"
-flat = false
-align = 1
 
-[node name="Button_FixedSize" type="Button" parent="Control" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Button_FixedSize" type="Button" parent="Control"]
 margin_left = 20.0
 margin_top = 60.0
 margin_right = 120.0
 margin_bottom = 85.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "FixedSize"
-flat = false
-align = 1
 
-[node name="Button_Minimized" type="Button" parent="Control" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Button_Minimized" type="Button" parent="Control"]
 margin_left = 20.0
 margin_top = 100.0
 margin_right = 120.0
 margin_bottom = 125.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Minimized"
-flat = false
-align = 1
 
-[node name="Button_Maximized" type="Button" parent="Control" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Button_Maximized" type="Button" parent="Control"]
 margin_left = 20.0
 margin_top = 140.0
 margin_right = 120.0
 margin_bottom = 165.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Maximized"
-flat = false
-align = 1
 
-[node name="Button_MoveTo" type="Button" parent="Control" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Button_MoveTo" type="Button" parent="Control"]
 margin_left = 20.0
 margin_top = 178.0
 margin_right = 120.0
 margin_bottom = 203.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "MoveTo"
-flat = false
-align = 1
 
-[node name="Button_Resize" type="Button" parent="Control" index="5"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Button_Resize" type="Button" parent="Control"]
 margin_left = 20.0
 margin_top = 218.0
 margin_right = 120.0
 margin_bottom = 243.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Resize"
-flat = false
-align = 1
 
-[node name="Button_Screen0" type="Button" parent="Control" index="6"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Button_Screen0" type="Button" parent="Control"]
 margin_left = 20.0
 margin_top = 258.0
 margin_right = 120.0
 margin_bottom = 283.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Screen0"
-flat = false
-align = 1
 
-[node name="Button_Screen1" type="Button" parent="Control" index="7"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Button_Screen1" type="Button" parent="Control"]
 margin_left = 20.0
 margin_top = 298.0
 margin_right = 120.0
 margin_bottom = 323.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Screen1"
-flat = false
-align = 1
 
-[node name="Button_MouseModeVisible" type="Button" parent="Control" index="8"]
-
-anchor_left = 0.0
+[node name="Button_MouseModeVisible" type="Button" parent="Control"]
 anchor_top = 1.0
-anchor_right = 0.0
 anchor_bottom = 1.0
 margin_left = 20.0
 margin_top = -221.0
 margin_right = 225.0
 margin_bottom = -196.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "[F1] MOUSE_MODE_VISIBLE"
-flat = false
 align = 0
 
-[node name="Button_MouseModeHidden" type="Button" parent="Control" index="9"]
-
-anchor_left = 0.0
+[node name="Button_MouseModeHidden" type="Button" parent="Control"]
 anchor_top = 1.0
-anchor_right = 0.0
 anchor_bottom = 1.0
 margin_left = 20.0
 margin_top = -186.0
 margin_right = 225.0
 margin_bottom = -161.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "[F2] MOUSE_MODE_HIDDEN"
-flat = false
 align = 0
 
-[node name="Button_MouseModeCaptured" type="Button" parent="Control" index="10"]
-
-anchor_left = 0.0
+[node name="Button_MouseModeCaptured" type="Button" parent="Control"]
 anchor_top = 1.0
-anchor_right = 0.0
 anchor_bottom = 1.0
 margin_left = 20.0
 margin_top = -151.0
 margin_right = 225.0
 margin_bottom = -126.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "[F3] MOUSE_MODE_CAPTURED"
-flat = false
 align = 0
 
-[node name="Label_Mode" type="Label" parent="Control" index="11"]
-
+[node name="Label_Mode" type="Label" parent="Control"]
 anchor_left = 1.0
-anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 0.0
 margin_left = -140.0
 margin_top = 140.0
 margin_right = -20.0
 margin_bottom = 153.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Mode:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Label_Position" type="Label" parent="Control" index="12"]
-
+[node name="Label_Position" type="Label" parent="Control"]
 anchor_left = 1.0
-anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 0.0
 margin_left = -140.0
 margin_top = 60.0
 margin_right = -20.0
 margin_bottom = 73.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Position:"
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Label_Size" type="Label" parent="Control" index="13"]
-
+[node name="Label_Size" type="Label" parent="Control"]
 anchor_left = 1.0
-anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 0.0
 margin_left = -140.0
 margin_top = 100.0
 margin_right = -20.0
 margin_bottom = 113.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Size:"
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Label_MousePosition" type="Label" parent="Control" index="14"]
-
+[node name="Label_MousePosition" type="Label" parent="Control"]
 anchor_left = 1.0
-anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 0.0
 margin_left = -140.0
 margin_top = 220.0
 margin_right = -20.0
 margin_bottom = 153.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Mouse Position:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Label_Screen_Count" type="Label" parent="Control" index="15"]
-
+[node name="Label_Screen_Count" type="Label" parent="Control"]
 anchor_left = 1.0
-anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 0.0
 margin_left = -140.0
 margin_top = 300.0
 margin_right = -20.0
 margin_bottom = 314.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Screen_Count:"
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Label_Screen_Current" type="Label" parent="Control" index="16"]
-
+[node name="Label_Screen_Current" type="Label" parent="Control"]
 anchor_left = 1.0
-anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 0.0
 margin_left = -140.0
 margin_top = 20.0
 margin_right = -20.0
 margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Screen:"
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Label_Screen0_Resolution" type="Label" parent="Control" index="17"]
-
+[node name="Label_Screen0_Resolution" type="Label" parent="Control"]
 anchor_left = 1.0
-anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 0.0
 margin_left = -140.0
 margin_top = 340.0
 margin_right = -16.0
 margin_bottom = 353.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Screen0 Resolution: "
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Label_Screen0_Position" type="Label" parent="Control" index="18"]
-
+[node name="Label_Screen0_Position" type="Label" parent="Control"]
 anchor_left = 1.0
-anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 0.0
 margin_left = -140.0
 margin_top = 380.0
 margin_right = -16.0
 margin_bottom = 396.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Screen0 Position: "
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Label_Screen0_DPI" type="Label" parent="Control" index="19"]
-
+[node name="Label_Screen0_DPI" type="Label" parent="Control"]
 anchor_left = 1.0
-anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 0.0
 margin_left = -140.0
 margin_top = 416.0
 margin_right = -16.0
 margin_bottom = 432.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Screen0 DPI:"
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Label_Screen1_Resolution" type="Label" parent="Control" index="20"]
-
+[node name="Label_Screen1_Resolution" type="Label" parent="Control"]
 anchor_left = 1.0
-anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 0.0
 margin_left = -140.0
 margin_top = 451.0
 margin_right = -16.0
 margin_bottom = 467.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Screen1 Resolution: "
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Label_Screen1_Position" type="Label" parent="Control" index="21"]
-
+[node name="Label_Screen1_Position" type="Label" parent="Control"]
 anchor_left = 1.0
-anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 0.0
 margin_left = -140.0
 margin_top = 489.0
 margin_right = -16.0
 margin_bottom = 505.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Screen1 Position: "
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Label_Screen1_DPI" type="Label" parent="Control" index="22"]
-
+[node name="Label_Screen1_DPI" type="Label" parent="Control"]
 anchor_left = 1.0
-anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 0.0
 margin_left = -140.0
 margin_top = 524.0
 margin_right = -16.0
 margin_bottom = 540.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Screen1 DPI:"
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Label_KeyInfo" type="Label" parent="Control" index="23"]
-
-anchor_left = 0.0
+[node name="Label_KeyInfo" type="Label" parent="Control"]
 anchor_top = 1.0
-anchor_right = 0.0
 anchor_bottom = 1.0
 margin_left = 20.0
 margin_top = -122.0
 margin_right = 286.0
 margin_bottom = -63.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "F1: activate MOUSE_MODE_VISIBLE
 F2: activate MOUSE_MODE_HIDDEN
 F3: activate MOUSE_MODE_CAPTURED"
 valign = 2
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Label_MouseModeCaptured_KeyInfo" type="Label" parent="Control" index="24"]
-
-anchor_left = 0.0
+[node name="Label_MouseModeCaptured_KeyInfo" type="Label" parent="Control"]
 anchor_top = 1.0
-anchor_right = 0.0
 anchor_bottom = 1.0
 margin_left = 20.0
 margin_top = -65.0
 margin_right = 286.0
 margin_bottom = -11.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "ESC: deactivate MOUSE_MODE_CAPTURED
 W, S: move forward, backward
 A, D: strafe left, right"
 valign = 2
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Label_MouseModes" type="Label" parent="Control" index="25"]
-
-anchor_left = 0.0
+[node name="Label_MouseModes" type="Label" parent="Control"]
 anchor_top = 1.0
-anchor_right = 0.0
 anchor_bottom = 1.0
 margin_left = 20.0
 margin_top = -249.0
 margin_right = 286.0
 margin_bottom = -227.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "MouseModes:"
 valign = 2
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="ImplementationDialog" type="AcceptDialog" parent="Control" index="26"]
-
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="ImplementationDialog" type="AcceptDialog" parent="Control"]
 margin_left = 200.0
 margin_top = 100.0
 margin_right = 600.0
 margin_bottom = 450.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-popup_exclusive = false
 window_title = "Please be advised..."
-resizable = false
-dialog_hide_on_ok = true
 
-[node name="Text" type="Label" parent="Control/ImplementationDialog" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Text" type="Label" parent="Control/ImplementationDialog"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 392.0
 margin_bottom = 314.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "This is an Implementation-Test-Demo
@@ -668,30 +346,15 @@ across platforms.
 
 Your platform lacks at the moment the following methods:
 "
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [connection signal="pressed" from="Control/Button_Fullscreen" to="Control" method="_on_Button_Fullscreen_pressed"]
-
 [connection signal="pressed" from="Control/Button_FixedSize" to="Control" method="_on_Button_FixedSize_pressed"]
-
 [connection signal="pressed" from="Control/Button_Minimized" to="Control" method="_on_Button_Minimized_pressed"]
-
 [connection signal="pressed" from="Control/Button_Maximized" to="Control" method="_on_Button_Maximized_pressed"]
-
 [connection signal="pressed" from="Control/Button_MoveTo" to="Control" method="_on_Button_MoveTo_pressed"]
-
 [connection signal="pressed" from="Control/Button_Resize" to="Control" method="_on_Button_Resize_pressed"]
-
 [connection signal="pressed" from="Control/Button_Screen0" to="Control" method="_on_Button_Screen0_pressed"]
-
 [connection signal="pressed" from="Control/Button_Screen1" to="Control" method="_on_Button_Screen1_pressed"]
-
 [connection signal="pressed" from="Control/Button_MouseModeVisible" to="Control" method="_on_Button_MouseModeVisible_pressed"]
-
 [connection signal="pressed" from="Control/Button_MouseModeHidden" to="Control" method="_on_Button_MouseModeHidden_pressed"]
-
 [connection signal="pressed" from="Control/Button_MouseModeCaptured" to="Control" method="_on_Button_MouseModeCaptured_pressed"]
-
-

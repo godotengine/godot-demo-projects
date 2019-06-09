@@ -15,12 +15,17 @@ signal consume_not_required
 signal sku_details_complete
 signal sku_details_error
 
-onready var payment = Engine.get_singleton("GodotPayments")
+var payment
 
 func _ready():
+	if Engine.has_singleton("GodotPayments"):
+		payment = Engine.get_singleton("GodotPayments")
+	else:
+		print("GodotPayment singleton is only available on Android devices.")
+
 	if payment:
 		# set callback with this script instance
-		payment.setPurchaseCallbackId(get_instance_ID())
+		payment.setPurchaseCallbackId(get_instance_id())
 
 # set consume purchased item automatically after purchase, defulat value is true
 func set_auto_consume(auto):
@@ -33,7 +38,7 @@ func request_purchased():
 	if payment:
 		payment.requestPurchased()
 
-func has_purchased(receipt, signature, sku):
+func has_purchased(_receipt, _signature, sku):
 	if sku == "":
 		print("has_purchased : nothing")
 		emit_signal("has_purchased", null)
@@ -49,7 +54,7 @@ func purchase(item_name):
 		# transaction_id could be any string that used for validation internally in java
 		payment.purchase(item_name, "transaction_id")
 
-func purchase_success(receipt, signature, sku):
+func purchase_success(_receipt, _signature, sku):
 	print("purchase_success : ", sku)
 	emit_signal("purchase_success", sku)
 
@@ -77,7 +82,7 @@ func consume_all():
 	if payment:
 		payment.consumeUnconsumedPurchases()
 
-func consume_success(receipt, signature, sku):
+func consume_success(_receipt, _signature, sku):
 	print("consume_success : ", sku)
 	emit_signal("consume_success", sku)
 
@@ -110,7 +115,7 @@ var sku_details = {}
 # callback : sku_details_complete
 func sku_details_query(list):
 	if payment:
-		var sku_list = StringArray(list)
+		var sku_list = PoolStringArray(list)
 		payment.querySkuDetails(sku_list)
 
 func sku_details_complete(result):

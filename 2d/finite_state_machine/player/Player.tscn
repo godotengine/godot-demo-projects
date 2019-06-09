@@ -1,0 +1,125 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://player/player_controller.gd" type="Script" id=1]
+[ext_resource path="res://player/player_state_machine.gd" type="Script" id=2]
+[ext_resource path="res://player/states/motion/on_ground/idle.gd" type="Script" id=3]
+[ext_resource path="res://player/states/motion/on_ground/move.gd" type="Script" id=4]
+[ext_resource path="res://player/states/motion/in_air/jump.gd" type="Script" id=5]
+[ext_resource path="res://player/states/combat/stagger.gd" type="Script" id=6]
+[ext_resource path="res://player/states/combat/attack.gd" type="Script" id=7]
+[ext_resource path="res://player/states/die.gd" type="Script" id=8]
+[ext_resource path="res://player/shadow.png" type="Texture" id=9]
+[ext_resource path="res://player/body.png" type="Texture" id=10]
+[ext_resource path="res://player/bullet/bullet_spawner.gd" type="Script" id=11]
+[ext_resource path="res://player/weapon/weapon_pivot.gd" type="Script" id=12]
+[ext_resource path="res://player/weapon/Sword.tscn" type="PackedScene" id=13]
+[ext_resource path="res://fonts/SourceCodePro-Bold.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://player/states/debug/state_name_displayer.gd" type="Script" id=15]
+
+[sub_resource type="Animation" id=1]
+
+[sub_resource type="Animation" id=2]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+use_filter = true
+font_data = ExtResource( 14 )
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 628.826, 391.266 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 2 )
+START_STATE = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 3 )
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+
+[node name="Stagger" type="Node" parent="StateMachine"]
+script = ExtResource( 6 )
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+
+[node name="Die" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 1 )
+anims/stagger = SubResource( 2 )
+anims/walk = SubResource( 3 )
+
+[node name="Shadow" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.361098 )
+position = Vector2( 0, -4 )
+texture = ExtResource( 9 )
+
+[node name="BodyPivot" type="Position2D" parent="."]
+
+[node name="Body" type="Sprite" parent="BodyPivot"]
+position = Vector2( 0, -58.8242 )
+texture = ExtResource( 10 )
+
+[node name="BulletSpawn" type="Node2D" parent="BodyPivot"]
+editor/display_folded = true
+position = Vector2( 1.17401, -61.266 )
+script = ExtResource( 11 )
+
+[node name="CooldownTimer" type="Timer" parent="BodyPivot/BulletSpawn"]
+wait_time = 0.2
+one_shot = true
+
+[node name="WeaponPivot" type="Position2D" parent="BodyPivot"]
+position = Vector2( 1.17401, -61.266 )
+script = ExtResource( 12 )
+
+[node name="Offset" type="Position2D" parent="BodyPivot/WeaponPivot"]
+position = Vector2( 110, 0 )
+
+[node name="Sword" parent="BodyPivot/WeaponPivot/Offset" instance=ExtResource( 13 )]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -20, 0, -20, -20, 20, -20, 20, 0 )
+
+[node name="StateNameDisplayer" type="Label" parent="."]
+editor/display_folded = true
+margin_left = -109.0
+margin_top = -172.0
+margin_right = 110.0
+margin_bottom = -138.0
+custom_fonts/font = SubResource( 4 )
+text = "Test"
+align = 1
+valign = 1
+uppercase = true
+script = ExtResource( 15 )
+
+[connection signal="state_changed" from="StateMachine" to="BodyPivot/WeaponPivot/Offset/Sword" method="_on_StateMachine_state_changed"]
+[connection signal="state_changed" from="StateMachine" to="StateNameDisplayer" method="_on_StateMachine_state_changed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_finished"]
+[connection signal="attack_finished" from="BodyPivot/WeaponPivot/Offset/Sword" to="StateMachine/Attack" method="_on_Sword_attack_finished"]

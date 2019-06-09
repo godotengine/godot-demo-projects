@@ -20,7 +20,7 @@ signal game_ended()
 signal game_error(what)
 
 # Callback from SceneTree
-func _player_connected(id):
+func _player_connected(_id):
 	# This is not used in this demo, because _connected_ok is called for clients
 	# on success and will do the job.
 	pass

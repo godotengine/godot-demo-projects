@@ -146,9 +146,8 @@ func update_skeleton():
 			print (name, " - IK_LookAt: No bone in skeleton found with name [", bone_name, "]!")
 		return
 	
-	# get the bone's rest position, and our position
+	# get the bone's rest position
 	var rest = skeleton_to_use.get_bone_global_pose(bone)
-	var our_position = global_transform.origin
 	
 	# Convert our position relative to the skeleton's transform
 	var target_pos = skeleton_to_use.global_transform.xform_inv(global_transform.origin)

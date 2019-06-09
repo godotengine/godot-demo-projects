@@ -5,7 +5,7 @@ var mousepos
 
 onready var observer = $"../Observer"
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var modetext = "Mode:\n"
 
 	if OS.is_window_fullscreen():

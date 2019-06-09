@@ -1,0 +1,183 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://enemy/enemy.gd" type="Script" id=1]
+[ext_resource path="res://enemy/enemy.png" type="Texture" id=2]
+[ext_resource path="res://player/bullet.png" type="Texture" id=3]
+[ext_resource path="res://audio/sound_hit.wav" type="AudioStream" id=4]
+[ext_resource path="res://audio/sound_explode.wav" type="AudioStream" id=5]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
+
+[sub_resource type="Animation" id=2]
+length = 6.0
+step = 0.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 4 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 3.47394 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 3.20357, 5.07305 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "_pre_explode"
+}, {
+"args": [  ],
+"method": "_die"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 3.55, 4.32 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 6.75
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.75, 1.5, 2.25, 3, 3.75, 4.5, 5.25, 6, 6.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 6, 5, 6, 5, 6, 7, 6, 7, 5 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 1.25
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 0 ]
+}
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 14.0
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0, 0.564972, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.915254, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+emission_shape = 1
+emission_sphere_radius = 20.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 322.73
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.4
+color_ramp = SubResource( 7 )
+
+[node name="Enemy" type="RigidBody2D"]
+mode = 2
+physics_material_override = SubResource( 1 )
+contacts_reported = 4
+script = ExtResource( 1 )
+
+[node name="Enabler" type="VisibilityEnabler2D" parent="."]
+position = Vector2( 16.2569, 11.0034 )
+scale = Vector2( 23.5056, 10.8629 )
+pause_particles = false
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+anims/explode = SubResource( 2 )
+anims/idle = SubResource( 3 )
+anims/walk = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+hframes = 8
+frame = 4
+
+[node name="Shape1" type="CollisionShape2D" parent="."]
+position = Vector2( -1.08072, -2.16144 )
+shape = SubResource( 5 )
+
+[node name="Shape2" type="CollisionShape2D" parent="."]
+position = Vector2( 6.48431, 3.24216 )
+shape = SubResource( 5 )
+
+[node name="Shape3" type="CollisionShape2D" parent="."]
+position = Vector2( -12.495, 3.53415 )
+shape = SubResource( 5 )
+
+[node name="RaycastLeft" type="RayCast2D" parent="."]
+position = Vector2( -33.2868, -9.34363 )
+enabled = true
+cast_to = Vector2( 0, 45 )
+
+[node name="RaycastRight" type="RayCast2D" parent="."]
+position = Vector2( 29.1987, -9.34363 )
+enabled = true
+cast_to = Vector2( 0, 45 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+modulate = Color( 1, 1, 1, 0.685843 )
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.86
+draw_order = 4
+process_material = SubResource( 8 )
+texture = ExtResource( 3 )
+
+[node name="SoundHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="SoundExplode" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+

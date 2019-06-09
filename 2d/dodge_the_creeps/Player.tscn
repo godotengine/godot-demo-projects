@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://art/playerGrey_walk1.png" type="Texture" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://art/playerGrey_up2.png" type="Texture" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
-
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
@@ -21,125 +20,21 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
-
-custom_solver_bias = 0.0
-radius = 26.5155
-height = 13.8847
-
-[sub_resource type="Gradient" id=3]
-
-offsets = PoolRealArray( 0, 1 )
-colors = PoolColorArray( 1, 1, 1, 0.523804, 1, 1, 1, 0 )
-
-[sub_resource type="GradientTexture" id=4]
-
-flags = 4
-gradient = SubResource( 3 )
-width = 2048
-
-[sub_resource type="Curve" id=5]
-
-min_value = 0.0
-max_value = 1.0
-bake_resolution = 100
-_data = [ Vector2( 0, 0.446289 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.306641 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=6]
-
-flags = 4
-width = 2048
-curve = SubResource( 5 )
-
-[sub_resource type="ParticlesMaterial" id=7]
-
-render_priority = 0
-trail_divisor = 1
-emission_shape = 0
-flag_align_y = false
-flag_rotate_y = false
-flag_disable_z = true
-spread = 45.0
-flatness = 0.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 1.0
-initial_velocity_random = 0.0
-angular_velocity = 1.56945e-43
-angular_velocity_random = 0.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel = 0.0
-linear_accel_random = 0.0
-radial_accel = 0.0
-radial_accel_random = 0.0
-tangential_accel = 0.0
-tangential_accel_random = 0.0
-damping = 0.0
-damping_random = 0.0
-angle = 0.0
-angle_random = 0.0
-scale = 1.0
-scale_random = 0.0
-scale_curve = SubResource( 6 )
-color_ramp = SubResource( 4 )
-hue_variation = 0.0
-hue_variation_random = 0.0
-anim_speed = 0.0
-anim_speed_random = 0.0
-anim_offset = 0.0
-anim_offset_random = 0.0
-anim_loop = false
-_sections_unfolded = [ "Color", "Gravity", "Scale" ]
+radius = 26.1701
+height = 14.822
 
 [node name="Player" type="Area2D"]
-
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_group_": true
 }
-SPEED = 400
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
-
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
 animation = "right"
-_sections_unfolded = [ "Region", "Transform", "Z" ]
 
-[node name="Collision" type="CollisionShape2D" parent="." index="1"]
-
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
 
-[node name="Trail" type="Particles2D" parent="." index="2"]
-
-show_behind_parent = true
-emitting = true
-amount = 10
-lifetime = 1.0
-one_shot = false
-preprocess = 0.0
-speed_scale = 2.0
-explosiveness = 0.0
-randomness = 0.0
-fixed_fps = 0
-fract_delta = true
-visibility_rect = Rect2( -100, -100, 200, 200 )
-local_coords = false
-draw_order = 0
-process_material = SubResource( 7 )
-texture = ExtResource( 4 )
-normal_map = null
-h_frames = 1
-v_frames = 1
-_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time", "Transform", "Visibility" ]
-
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
-
-

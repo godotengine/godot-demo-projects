@@ -1,420 +1,322 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://godotea.png" type="Texture" id=1]
 
 [sub_resource type="Shader" id=1]
-
 code = "shader_type canvas_item;
-uniform float outline_width=2.0;
-uniform vec4 outline_color: hint_color;
 
-void fragment(){
-vec4 col = texture(TEXTURE,UV);
-vec2 ps = TEXTURE_PIXEL_SIZE;
-float a;
-float maxa=col.a;
-float mina=col.a;
-a=texture(TEXTURE,UV+vec2(0,-outline_width)*ps).a;
-maxa=max(a,maxa); 
-mina=min(a,mina);
-a=texture(TEXTURE,UV+vec2(0,outline_width)*ps).a;
-maxa=max(a,maxa); 
-mina=min(a,mina);
-a=texture(TEXTURE,UV+vec2(-outline_width,0)*ps).a;
-maxa=max(a,maxa); 
-mina=min(a,mina);
-a=texture(TEXTURE,UV+vec2(outline_width,0)*ps).a;
-maxa=max(a,maxa); 
-mina=min(a,mina);
+uniform float outline_width = 2.0;
+uniform vec4 outline_color : hint_color;
 
-COLOR=mix(col,outline_color,maxa-mina);
+void fragment() {
+	vec4 col = texture(TEXTURE, UV);
+	vec2 ps = TEXTURE_PIXEL_SIZE;
+	float a;
+	float maxa = col.a;
+	float mina = col.a;
+
+	a = texture(TEXTURE, UV + vec2(0.0, -outline_width) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	a = texture(TEXTURE, UV + vec2(0.0, outline_width) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	a = texture(TEXTURE, UV + vec2(-outline_width, 0.0) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	a = texture(TEXTURE, UV + vec2(outline_width, 0.0) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	COLOR = mix(col, outline_color, maxa - mina);
 }"
 
 [sub_resource type="ShaderMaterial" id=2]
-
-render_priority = 0
 shader = SubResource( 1 )
-shader_param/outline_width = null
+shader_param/outline_width = 2.0
 shader_param/outline_color = Color( 0, 1, 0.109375, 1 )
-_sections_unfolded = [ "shader_param" ]
 
 [sub_resource type="ShaderMaterial" id=3]
 
-render_priority = 0
-
-[sub_resource type="Shader" id=4]
-
-code = "shader_type canvas_item;
-uniform float outline_width = 2.0;
-uniform vec4 outline_color: hint_color;
-
-void fragment(){
-	vec4 col = texture(TEXTURE, UV);
-	vec2 ps = TEXTURE_PIXEL_SIZE;
-	float a;
-	float maxa = col.a;
-	float mina = col.a;
-
-	a = texture(TEXTURE, UV + vec2(0, -outline_width)*ps).a;
-	maxa = max(a, maxa); 
-	mina = min(a, mina);
-	
-	a = texture(TEXTURE, UV + vec2(0, outline_width)*ps).a;
-	maxa = max(a, maxa); 
-	mina = min(a, mina);
-	
-	a = texture(TEXTURE, UV + vec2(-outline_width,0)*ps).a;
-	maxa = max(a, maxa); 
-	mina = min(a, mina);
-	
-	a = texture(TEXTURE, UV + vec2(outline_width, 0)*ps).a;
-	maxa = max(a, maxa); 
-	mina = min(a, mina);
-	
-	COLOR = mix(col, outline_color, maxa-mina);
-	}"
-
-[sub_resource type="ShaderMaterial" id=5]
-
-render_priority = 0
-shader = SubResource( 4 )
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 1 )
 shader_param/outline_width = 4.0
 shader_param/outline_color = Color( 0, 0, 0, 1 )
-_sections_unfolded = [ "Resource", "shader_param" ]
 
-[sub_resource type="Shader" id=6]
-
+[sub_resource type="Shader" id=5]
 code = "shader_type canvas_item;
 render_mode blend_premul_alpha;
 
-//this shader only works properly with premultiplied alpha blend mode
+// This shader only works properly with premultiplied alpha blend mode
 uniform float aura_width = 2.0;
-uniform vec4 aura_color:hint_color; 
+uniform vec4 aura_color : hint_color;
 
-void fragment(){
+void fragment() {
 	vec4 col = texture(TEXTURE, UV);
 	vec2 ps = TEXTURE_PIXEL_SIZE;
 	float a;
 	float maxa = col.a;
 	float mina = col.a;
-	
-	a = texture(TEXTURE, UV + vec2(0, -aura_width)*ps).a;
-	maxa = max(a, maxa); 
+
+	a = texture(TEXTURE, UV + vec2(0.0, -aura_width) * ps).a;
+	maxa = max(a, maxa);
 	mina = min(a, mina);
-	
-	a = texture(TEXTURE, UV + vec2(0, aura_width)*ps).a;
-	maxa = max(a, maxa); 
+
+	a = texture(TEXTURE, UV + vec2(0.0, aura_width) * ps).a;
+	maxa = max(a, maxa);
 	mina = min(a, mina);
-	
-	a = texture(TEXTURE, UV + vec2(-aura_width, 0)*ps).a;
-	maxa = max(a, maxa); 
+
+	a = texture(TEXTURE, UV + vec2(-aura_width, 0.0) * ps).a;
+	maxa = max(a, maxa);
 	mina = min(a, mina);
-	
-	a = texture(TEXTURE, UV + vec2(aura_width, 0)*ps).a;
-	maxa = max(a, maxa); 
+
+	a = texture(TEXTURE, UV + vec2(aura_width, 0.0) * ps).a;
+	maxa = max(a, maxa);
 	mina = min(a, mina);
-	
+
 	col.rgb *= col.a;
-	
+
 	COLOR = col;
-	float auraa = (maxa-mina);
-	
-	COLOR.rgb += aura_color.rgb*(auraa);
-	
-	}"
+	COLOR.rgb += aura_color.rgb * (maxa - mina);
+}"
 
-[sub_resource type="ShaderMaterial" id=7]
-
-render_priority = 0
-shader = SubResource( 6 )
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
 shader_param/aura_width = 6.0
 shader_param/aura_color = Color( 0.143326, 0.33235, 0.677765, 0.442 )
-_sections_unfolded = [ "shader_param" ]
 
-[sub_resource type="Shader" id=8]
-
+[sub_resource type="Shader" id=7]
 code = "shader_type canvas_item;
 render_mode blend_mix;
 
 uniform float radius = 4.0;
 
-void fragment(){
+void fragment() {
 	vec4 col = texture(TEXTURE, UV);
 	vec2 ps = TEXTURE_PIXEL_SIZE;
-	
-	col += texture(TEXTURE, UV + vec2(0, -radius)*ps);
-	col += texture(TEXTURE, UV + vec2(0, radius)*ps);
-	col += texture(TEXTURE, UV + vec2(-radius, 0)*ps);
-	col += texture(TEXTURE, UV + vec2(radius, 0)*ps);
+
+	col += texture(TEXTURE, UV + vec2(0.0, -radius) * ps);
+	col += texture(TEXTURE, UV + vec2(0.0, radius) * ps);
+	col += texture(TEXTURE, UV + vec2(-radius, 0.0) * ps);
+	col += texture(TEXTURE, UV + vec2(radius, 0.0) * ps);
 	col /= 5.0;
-	
+
 	COLOR = col;
-	}"
+}"
 
-[sub_resource type="ShaderMaterial" id=9]
-
-render_priority = 0
-shader = SubResource( 8 )
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 7 )
 shader_param/radius = 4.0
-_sections_unfolded = [ "shader_param" ]
 
-[sub_resource type="Shader" id=10]
-
+[sub_resource type="Shader" id=9]
 code = "shader_type canvas_item;
 
 render_mode blend_mix;
 uniform float fattyness = 2.0;
 
-void fragment(){
-	vec2 ruv = UV - vec2(0.5,0.5);
+void fragment() {
+	vec2 ruv = UV - vec2(0.5, 0.5);
 	vec2 dir = normalize(ruv);
 	float len = length(ruv);	
-	
-	len = pow(len*2.0, fattyness)*0.5;
-	ruv = len*dir;
-	
+
+	len = pow(len * 2.0, fattyness) * 0.5;
+	ruv = len * dir;
+
 	vec4 col = texture(TEXTURE, ruv + vec2(0.5, 0.5));
-	
+
 	COLOR = col;
 }"
 
-[sub_resource type="ShaderMaterial" id=11]
-
-render_priority = 0
-shader = SubResource( 10 )
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 9 )
 shader_param/fattyness = 3.0
-_sections_unfolded = [ "shader_param" ]
 
-[sub_resource type="Shader" id=12]
-
+[sub_resource type="Shader" id=11]
 code = "shader_type canvas_item;
 render_mode blend_mix;
 
 uniform float radius = 5.0;
-uniform vec4  modulate:hint_color;
+uniform vec4  modulate : hint_color;
 
-void fragment(){
+void fragment() {
 	vec2 ps = TEXTURE_PIXEL_SIZE;
-	
-	vec4 shadow = texture(TEXTURE, UV + vec2(-radius, -radius)*ps);
-	
-	shadow += texture(TEXTURE, UV + vec2(-radius, 0)*ps);
-	shadow += texture(TEXTURE, UV + vec2(-radius, radius)*ps);
-	shadow += texture(TEXTURE, UV + vec2(0, -radius)*ps);
-	shadow += texture(TEXTURE, UV + vec2(0, radius)*ps);
-	shadow += texture(TEXTURE, UV + vec2(radius, -radius)*ps);
-	shadow += texture(TEXTURE, UV + vec2(radius, 0)*ps);
-	shadow += texture(TEXTURE, UV + vec2(radius, radius)*ps);
+
+	vec4 shadow = texture(TEXTURE, UV + vec2(-radius, -radius) * ps);
+
+	shadow += texture(TEXTURE, UV + vec2(-radius, 0.0) * ps);
+	shadow += texture(TEXTURE, UV + vec2(-radius, radius) * ps);
+	shadow += texture(TEXTURE, UV + vec2(0.0, -radius) * ps);
+	shadow += texture(TEXTURE, UV + vec2(0.0, radius) * ps);
+	shadow += texture(TEXTURE, UV + vec2(radius, -radius) * ps);
+	shadow += texture(TEXTURE, UV + vec2(radius, 0.0) * ps);
+	shadow += texture(TEXTURE, UV + vec2(radius, radius) * ps);
 	shadow /= 8.0;
 	shadow *= modulate;
-	
+
 	vec4 col = texture(TEXTURE, UV);
 	COLOR = mix(shadow, col, col.a);
-	}"
+}"
 
-[sub_resource type="ShaderMaterial" id=13]
-
-render_priority = 0
-shader = SubResource( 12 )
+[sub_resource type="ShaderMaterial" id=12]
+shader = SubResource( 11 )
 shader_param/radius = 8.0
 shader_param/modulate = Color( 0, 0, 0, 0.501961 )
-_sections_unfolded = [ "shader_param" ]
 
-[sub_resource type="Shader" id=14]
-
+[sub_resource type="Shader" id=13]
 code = "shader_type canvas_item;
 render_mode blend_mix;
 
-uniform vec2 offset = vec2(8,8);
-uniform vec4 modulate:hint_color;
+uniform vec2 offset = vec2(8.0, 8.0);
+uniform vec4 modulate : hint_color;
 
-void fragment(){
+void fragment() {
 	vec2 ps = TEXTURE_PIXEL_SIZE;
-	
-	vec4 shadow = vec4(modulate.rgb, texture(TEXTURE, UV - offset*ps).a*modulate.a);
+
+	vec4 shadow = vec4(modulate.rgb, texture(TEXTURE, UV - offset * ps).a * modulate.a);
 	vec4 col = texture(TEXTURE, UV);
-	
+
 	COLOR = mix(shadow, col, col.a);
-	}"
+}"
 
-[sub_resource type="ShaderMaterial" id=15]
-
-render_priority = 0
-shader = SubResource( 14 )
+[sub_resource type="ShaderMaterial" id=14]
+shader = SubResource( 13 )
 shader_param/offset = Vector2( 20, 20 )
 shader_param/modulate = Color( 0.90625, 0.269043, 0.746948, 1 )
-_sections_unfolded = [ "shader_param" ]
 
-[sub_resource type="Shader" id=16]
-
+[sub_resource type="Shader" id=15]
 code = "shader_type canvas_item;
 
 render_mode blend_mix;
-uniform vec4 modulate:hint_color;
+uniform vec4 modulate : hint_color;
 
-void fragment(){
-	
-	COLOR = vec4(modulate.rgb, texture(TEXTURE, UV).a*modulate.a);
-	
-	}"
+void fragment() {
+	COLOR = vec4(modulate.rgb, texture(TEXTURE, UV).a * modulate.a);
+}"
 
-[sub_resource type="ShaderMaterial" id=17]
-
-render_priority = 0
-shader = SubResource( 16 )
+[sub_resource type="ShaderMaterial" id=16]
+shader = SubResource( 15 )
 shader_param/modulate = Color( 1, 0.0234375, 0.481201, 0.596706 )
-_sections_unfolded = [ "shader_param" ]
 
-[sub_resource type="Shader" id=18]
-
+[sub_resource type="Shader" id=17]
 code = "shader_type canvas_item;
 render_mode blend_premul_alpha;
 
 uniform float radius = 2.0;
 uniform float amount = 0.6;
 
-void fragment(){
+void fragment() {
 	float r = radius;
 	vec2 ps = TEXTURE_PIXEL_SIZE;
 	vec4 col = texture(TEXTURE, UV);
 	vec4 glow = col;
-	
-	glow += texture(TEXTURE, UV + vec2(-r, -r)*ps);
-	glow += texture(TEXTURE, UV + vec2(-r, 0)*ps);
-	glow += texture(TEXTURE, UV + vec2(-r, r)*ps);
-	glow += texture(TEXTURE, UV + vec2(0, -r)*ps);
-	glow += texture(TEXTURE, UV + vec2(0, r)*ps);
-	glow += texture(TEXTURE, UV + vec2(r, -r)*ps);
-	glow += texture(TEXTURE, UV + vec2(r, 0)*ps);
-	glow += texture(TEXTURE, UV + vec2(r, r)*ps);
-	
+
+	glow += texture(TEXTURE, UV + vec2(-r, -r) * ps);
+	glow += texture(TEXTURE, UV + vec2(-r, 0.0) * ps);
+	glow += texture(TEXTURE, UV + vec2(-r, r) * ps);
+	glow += texture(TEXTURE, UV + vec2(0.0, -r) * ps);
+	glow += texture(TEXTURE, UV + vec2(0.0, r) * ps);
+	glow += texture(TEXTURE, UV + vec2(r, -r) * ps);
+	glow += texture(TEXTURE, UV + vec2(r, 0.0) * ps);
+	glow += texture(TEXTURE, UV + vec2(r, r) * ps);
+
 	r *= 2.0;
-	glow += texture(TEXTURE, UV + vec2(-r, -r)*ps);
-	glow += texture(TEXTURE, UV + vec2(-r, 0)*ps);
-	glow += texture(TEXTURE, UV + vec2(-r, r)*ps);
-	glow += texture(TEXTURE, UV + vec2(0, -r)*ps);
-	glow += texture(TEXTURE, UV + vec2(0, r)*ps);
-	glow += texture(TEXTURE, UV + vec2(r, -r)*ps);
-	glow += texture(TEXTURE, UV + vec2(r, 0)*ps);
-	glow += texture(TEXTURE, UV + vec2(r, r)*ps);
-	
+	glow += texture(TEXTURE, UV + vec2(-r, -r) * ps);
+	glow += texture(TEXTURE, UV + vec2(-r, 0.0) * ps);
+	glow += texture(TEXTURE, UV + vec2(-r, r) * ps);
+	glow += texture(TEXTURE, UV + vec2(0.0, -r) * ps);
+	glow += texture(TEXTURE, UV + vec2(0.0, r) * ps);
+	glow += texture(TEXTURE, UV + vec2(r, -r) * ps);
+	glow += texture(TEXTURE, UV + vec2(r, 0.0) * ps);
+	glow += texture(TEXTURE, UV + vec2(r, r) * ps);
+
 	glow /= 17.0;
 	glow *= amount;
 	col.rgb *= col.a;
-	
+
 	COLOR = glow + col;
-	
-	}"
+}"
 
-[sub_resource type="ShaderMaterial" id=19]
-
-render_priority = 0
-shader = SubResource( 18 )
+[sub_resource type="ShaderMaterial" id=18]
+shader = SubResource( 17 )
 shader_param/radius = 12.0
 shader_param/amount = 0.5
-_sections_unfolded = [ "shader_param" ]
 
-[sub_resource type="Shader" id=20]
-
+[sub_resource type="Shader" id=19]
 code = "shader_type canvas_item;
 render_mode blend_mix;
 
 uniform float amount = 20.0;
 
-void fragment(){
-	
-	vec2 uv = UV*0.05;
-	float a = fract(sin(dot(UV, vec2(12.9898, 78.233)))*438.5453);
+void fragment() {
+	vec2 uv = UV * 0.05;
+	float a = fract(sin(dot(UV, vec2(12.9898, 78.233))) * 438.5453);
 	vec4 col = texture(TEXTURE, UV);
-	
+
 	col.a *= pow(a, amount);
-	
+
 	COLOR = col;
-	}"
+}"
 
-[sub_resource type="ShaderMaterial" id=21]
-
-render_priority = 0
-shader = SubResource( 20 )
+[sub_resource type="ShaderMaterial" id=20]
+shader = SubResource( 19 )
 shader_param/amount = 4.0
-_sections_unfolded = [ "shader_param" ]
 
-[node name="shaders" type="Node2D" index="0"]
-
+[node name="shaders" type="Node2D"]
 material = SubResource( 2 )
 position = Vector2( 263.737, 179.444 )
 scale = Vector2( 0.3, 0.3 )
-_sections_unfolded = [ "Material", "Region", "Transform" ]
 
-[node name="normal" type="Sprite" parent="." index="0"]
-
+[node name="normal" type="Sprite" parent="."]
 material = SubResource( 3 )
 position = Vector2( -2.16144, 0 )
 texture = ExtResource( 1 )
-_sections_unfolded = [ "Material", "Offset" ]
 
-[node name="outline" type="Sprite" parent="." index="1"]
-
-material = SubResource( 5 )
+[node name="outline" type="Sprite" parent="."]
+material = SubResource( 4 )
 position = Vector2( 400, 0 )
 texture = ExtResource( 1 )
-_sections_unfolded = [ "Material", "Transform" ]
 
-[node name="aura" type="Sprite" parent="." index="2"]
-
-material = SubResource( 7 )
+[node name="aura" type="Sprite" parent="."]
+material = SubResource( 6 )
 position = Vector2( 800, 0 )
 texture = ExtResource( 1 )
-_sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Transform", "Visibility", "Z Index" ]
 
-[node name="blur" type="Sprite" parent="." index="3"]
-
-material = SubResource( 9 )
+[node name="blur" type="Sprite" parent="."]
+material = SubResource( 8 )
 position = Vector2( 1200, 0 )
 texture = ExtResource( 1 )
-_sections_unfolded = [ "Material", "Transform" ]
 
-[node name="fatty" type="Sprite" parent="." index="4"]
-
-material = SubResource( 11 )
+[node name="fatty" type="Sprite" parent="."]
+material = SubResource( 10 )
 position = Vector2( 1600, 0 )
 texture = ExtResource( 1 )
-_sections_unfolded = [ "Material", "Transform" ]
 
-[node name="dropshadow" type="Sprite" parent="." index="5"]
-
-material = SubResource( 13 )
+[node name="dropshadow" type="Sprite" parent="."]
+material = SubResource( 12 )
 position = Vector2( 0, 800 )
 texture = ExtResource( 1 )
-_sections_unfolded = [ "Material", "Transform" ]
 
-[node name="offsetshadow" type="Sprite" parent="." index="6"]
-
-material = SubResource( 15 )
+[node name="offsetshadow" type="Sprite" parent="."]
+material = SubResource( 14 )
 position = Vector2( 400, 800 )
 texture = ExtResource( 1 )
-_sections_unfolded = [ "Material", "Transform" ]
 
-[node name="silouette" type="Sprite" parent="." index="7"]
-
-material = SubResource( 17 )
+[node name="silouette" type="Sprite" parent="."]
+material = SubResource( 16 )
 position = Vector2( 800, 800 )
 texture = ExtResource( 1 )
-_sections_unfolded = [ "Material", "Transform" ]
 
-[node name="glow" type="Sprite" parent="." index="8"]
-
-material = SubResource( 19 )
+[node name="glow" type="Sprite" parent="."]
+material = SubResource( 18 )
 position = Vector2( 1200, 800 )
 texture = ExtResource( 1 )
-_sections_unfolded = [ "Material", "Transform", "Z Index" ]
 
-[node name="dissintegrate" type="Sprite" parent="." index="9"]
-
-material = SubResource( 21 )
+[node name="dissintegrate" type="Sprite" parent="."]
+material = SubResource( 20 )
 position = Vector2( 1600, 800 )
 texture = ExtResource( 1 )
 region_rect = Rect2( 141, 115, 39, 6 )
-_sections_unfolded = [ "Material", "Transform" ]
-
 

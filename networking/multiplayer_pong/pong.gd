@@ -34,7 +34,7 @@ func _on_exit_game_pressed():
 
 func _ready():
 	# by default, all nodes in server inherit from master
-	# while all nodes in clients inherit from slave
+	# while all nodes in clients inherit from puppet
 	if get_tree().is_network_server():		
 		#if in the server, get control of player 2 to the other peeer, this function is tree recursive by default
 		get_node("player2").set_network_master(get_tree().get_network_connected_peers()[0])

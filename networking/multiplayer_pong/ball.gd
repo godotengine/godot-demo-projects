@@ -47,7 +47,7 @@ func _process(delta):
 			get_parent().rpc("update_score", false)
 			rpc("_reset_ball", false)
 	else:
-		# only the slave will decide when the ball is out in the right side (it's own side)
+		# only the puppet will decide when the ball is out in the right side (it's own side)
 		# this makes the game playable even if latency is high and ball is going fast
 		# otherwise ball might be out in the other player's screen but not this one
 		

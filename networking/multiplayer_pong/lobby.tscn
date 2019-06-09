@@ -3,188 +3,86 @@
 [ext_resource path="res://lobby.gd" type="Script" id=1]
 
 [node name="lobby" type="Control"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 1 )
 
 [node name="title" type="Label" parent="."]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 210.0
 margin_top = 40.0
 margin_right = 430.0
 margin_bottom = 80.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Multiplayer Pong"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="panel" type="Panel" parent="."]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 210.0
 margin_top = 160.0
 margin_right = 430.0
 margin_bottom = 270.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
 [node name="address_label" type="Label" parent="panel"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 62.0
 margin_bottom = 24.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Address"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="address" type="LineEdit" parent="panel"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 10.0
 margin_top = 30.0
 margin_right = 210.0
 margin_bottom = 54.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "127.0.0.1"
-expand_to_len = false
-focus_mode = 2
-placeholder_alpha = 0.6
-caret_blink = false
-caret_blink_speed = 0.65
 
 [node name="host" type="Button" parent="panel"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 10.0
 margin_top = 60.0
 margin_right = 90.0
 margin_bottom = 80.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Host"
-flat = false
 
 [node name="join" type="Button" parent="panel"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 130.0
 margin_top = 60.0
 margin_right = 210.0
 margin_bottom = 80.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Join"
-flat = false
 
 [node name="status_ok" type="Label" parent="panel"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 10.0
 margin_top = 90.0
 margin_right = 210.0
 margin_bottom = 104.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 custom_colors/font_color = Color( 0, 1, 0.015625, 1 )
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="status_fail" type="Label" parent="panel"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 10.0
 margin_top = 90.0
 margin_right = 210.0
 margin_bottom = 104.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [connection signal="pressed" from="panel/host" to="." method="_on_host_pressed"]
-
 [connection signal="pressed" from="panel/join" to="." method="_on_join_pressed"]
-
-

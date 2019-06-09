@@ -2,7 +2,7 @@ extends HBoxContainer
 
 var player_labels = {}
 
-func _process(delta):
+func _process(_delta):
 	var rocks_left = get_node("../rocks").get_child_count()
 	if rocks_left == 0:
 		var winner_name = ""

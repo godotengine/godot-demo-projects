@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://screens/combat/actors/sprites/shadow.png" type="Texture" id=1]
+[ext_resource path="res://screens/combat/actors/sprites/blue.png" type="Texture" id=2]
+
+
+[sub_resource type="Animation" id=1]
+
+resource_name = "take_damage"
+length = 0.2
+loop = false
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 3, 0.253906, 0.253906, 1 ), Color( 1, 1, 1, 1 ), Color( 3, 0.253906, 0.253906, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Sprite" type="Node2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/take_damage = SubResource( 1 )
+blend_times = [  ]
+
+[node name="Tween" type="Tween" parent="." index="1"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+
+[node name="Pivot" type="Position2D" parent="." index="2"]
+
+[node name="Shadow" type="Sprite" parent="Pivot" index="0"]
+
+position = Vector2( 0, -15 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Body" type="Sprite" parent="Pivot" index="1"]
+
+position = Vector2( 0, -76 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Visibility" ]
+
+

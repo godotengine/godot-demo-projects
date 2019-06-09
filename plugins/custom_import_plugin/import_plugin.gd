@@ -23,12 +23,12 @@ func get_preset_count():
 
 func get_preset_name(preset):
 	match preset:
-		PRESET_DEFAULT: return "Default"
+		Presets.PRESET_DEFAULT: return "Default"
 		_ : return "Unknown"
 
 func get_import_options(preset):
 	match preset:
-		PRESET_DEFAULT:
+		Presets.PRESET_DEFAULT:
 			return [{
 					"name": "use_red_anyway",
 					"default_value": false

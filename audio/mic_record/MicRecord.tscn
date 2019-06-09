@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://MicRecord.gd" type="Script" id=1]
+[ext_resource path="res://Intro.ogg" type="AudioStream" id=2]
+
+[sub_resource type="AudioStreamMicrophone" id=1]
+
+[node name="MicRecord" type="Node"]
+script = ExtResource( 1 )
+
+[node name="AudioStreamRecord" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 1 )
+autoplay = true
+bus = "Record"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -6.0
+
+[node name="RecordButton" type="Button" parent="."]
+margin_left = 120.0
+margin_top = 60.0
+margin_right = 240.0
+margin_bottom = 100.0
+text = "Record"
+
+[node name="SaveButton" type="Button" parent="."]
+margin_left = 120.0
+margin_top = 140.0
+margin_right = 240.0
+margin_bottom = 180.0
+disabled = true
+text = "Save WAV To:"
+
+[node name="Filename" type="LineEdit" parent="SaveButton"]
+margin_left = 180.0
+margin_right = 340.0
+margin_bottom = 40.0
+text = "user://record.wav"
+
+[node name="PlayButton" type="Button" parent="."]
+margin_left = 300.0
+margin_top = 60.0
+margin_right = 420.0
+margin_bottom = 100.0
+disabled = true
+text = "Play"
+
+[node name="PlayMusic" type="Button" parent="."]
+margin_left = 120.0
+margin_top = 220.0
+margin_right = 240.0
+margin_bottom = 260.0
+text = "Play Music"
+
+[node name="Status" type="Label" parent="."]
+margin_left = 120.0
+margin_top = 300.0
+margin_right = 520.0
+margin_bottom = 340.0
+
+[connection signal="pressed" from="RecordButton" to="." method="_on_RecordButton_pressed"]
+[connection signal="pressed" from="SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="PlayMusic" to="." method="_on_Play_Music_pressed"]

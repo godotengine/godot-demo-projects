@@ -4,16 +4,10 @@
 [ext_resource path="res://brickfloor.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
 extents = Vector2( 24, 24 )
 
 [sub_resource type="Animation" id=2]
-
 resource_name = "explode"
-length = 1.0
-loop = false
-step = 0.1
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
@@ -42,33 +36,16 @@ tracks/1/keys = {
 }
 
 [node name="rock" type="KinematicBody2D"]
-
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-collision/safe_margin = 0.08
 script = ExtResource( 1 )
 
-[node name="sprite" type="Sprite" parent="." index="0"]
-
+[node name="sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 96, 0, 48, 48 )
-_sections_unfolded = [ "Region" ]
 
-[node name="shape" type="CollisionShape2D" parent="." index="1"]
-
+[node name="shape" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="anim" type="AnimationPlayer" parent="." index="2"]
-
-root_node = NodePath("..")
-autoplay = ""
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
+[node name="anim" type="AnimationPlayer" parent="."]
 anims/explode = SubResource( 2 )
-blend_times = [  ]
-autoplay = ""
-
 

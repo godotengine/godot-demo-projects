@@ -10,7 +10,7 @@ var you_hidden = false
 onready var screen_size = get_viewport_rect().size
 
 #synchronize position and speed to the other peers
-slave func set_pos_and_motion(p_pos, p_motion):
+puppet func set_pos_and_motion(p_pos, p_motion):
 	position = p_pos
 	motion = p_motion
 

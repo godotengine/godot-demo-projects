@@ -3,15 +3,14 @@
 [ext_resource path="res://font.font" type="BitmapFont" id=1]
 
 [sub_resource type="Animation" id=1]
-
 length = 15.0
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 15 ),
 "transitions": PoolRealArray( 1, 1 ),
@@ -20,15 +19,14 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=2]
-
 length = 10.0
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 5 ),
 "transitions": PoolRealArray( 1, 1 ),
@@ -39,57 +37,26 @@ tracks/0/keys = {
 [node name="Root Node" type="Node2D"]
 
 [node name="base" type="Position2D" parent="."]
-
 position = Vector2( 450, 300 )
-_sections_unfolded = [ "Transform" ]
 
 [node name="rotate" type="AnimationPlayer" parent="base"]
-
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-root_node = NodePath("..")
+autoplay = "rotate"
 anims/rotate = SubResource( 1 )
 anims/zoomin_zoomout = SubResource( 2 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
-autoplay = "rotate"
 
 [node name="zoom" type="AnimationPlayer" parent="base"]
-
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-root_node = NodePath("..")
-anims/zoomin_zoomout = SubResource( 2 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
 autoplay = "zoomin_zoomout"
+anims/zoomin_zoomout = SubResource( 2 )
 
 [node name="Label" type="Label" parent="base"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = -169.0
 margin_top = -49.0
 margin_right = 172.0
 margin_bottom = 56.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-size_flags_horizontal = 1
-size_flags_vertical = 4
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.853858, 0.771714, 0.753746, 1 )
 custom_colors/font_color_shadow = Color( 0.56592, 0.454525, 0.518426, 1 )
 text = "Signed Distance
 Field Font!!"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
 
