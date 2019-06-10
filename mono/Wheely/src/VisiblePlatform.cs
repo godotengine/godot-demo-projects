@@ -1,10 +1,9 @@
 using Godot;
 using System;
 
-/// This code is only necessary to make the CollisionPolygon2D
-/// drawn in the editor visible. (Note: you must have a 
-/// have a visible "Polygon2D" child for this to work)
-public class PlatformCollision : CollisionPolygon2D{
+public class VisiblePlatform : CollisionPolygon2D{
+    /// Using this class makes the Polygon2D child visible in the game
+    
     public override void _Ready(){
         for(int i=0; i<this.GetChildCount(); i++){
             var child = this.GetChild(i);
@@ -14,6 +13,6 @@ public class PlatformCollision : CollisionPolygon2D{
                 return;
             }
         }
-        throw new Exception("PlatformCollison must have visible Polygon2D Child");
+        throw new Exception("VisiblePlatform must have visible Polygon2D Child");
     }
 }

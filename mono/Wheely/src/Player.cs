@@ -71,7 +71,6 @@ public class Player : KinematicBody2D{
             }
             //Apply the friction effect
             this.velocity *= FRICTION_EFFECT;
-            break; //For now, only process 1 collision (buggy with multiple atm)
         }
     }
 
@@ -97,7 +96,7 @@ public class Player : KinematicBody2D{
         return adjustedForwardAngle;
     }
     private void applyPhysics(float delta){
-        MoveAndSlide(linearVelocity: this.velocity);
+        this.MoveAndSlide(linearVelocity: this.velocity);
     }
 
     private void updateSprite(float delta){
