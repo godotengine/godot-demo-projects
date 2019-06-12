@@ -4,72 +4,19 @@
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
 [sub_resource type="QuadMesh" id=1]
-
-custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 size = Vector2( 3, 2 )
 
 [sub_resource type="ViewportTexture" id=2]
-
-resource_local_to_scene = true
-flags = 0
 viewport_path = NodePath("Viewport")
 
 [sub_resource type="SpatialMaterial" id=3]
-
 resource_local_to_scene = true
-render_priority = 0
 flags_transparent = true
 flags_unshaded = true
-flags_vertex_lighting = false
-flags_no_depth_test = false
-flags_use_point_size = false
-flags_world_triplanar = false
-flags_fixed_size = false
 flags_albedo_tex_force_srgb = true
-vertex_color_use_as_albedo = false
-vertex_color_is_srgb = false
-params_diffuse_mode = 0
-params_specular_mode = 0
-params_blend_mode = 0
-params_cull_mode = 0
-params_depth_draw_mode = 0
-params_line_width = 1.0
-params_point_size = 1.0
-params_billboard_mode = 0
-params_grow = false
-params_use_alpha_scissor = false
-albedo_color = Color( 1, 1, 1, 1 )
 albedo_texture = SubResource( 2 )
-metallic = 0.0
-metallic_specular = 0.5
-metallic_texture_channel = 0
-roughness = 0.0
-roughness_texture_channel = 0
-emission_enabled = false
-normal_enabled = false
-rim_enabled = false
-clearcoat_enabled = false
-anisotropy_enabled = false
-ao_enabled = false
-depth_enabled = false
-subsurf_scatter_enabled = false
-transmission_enabled = false
-refraction_enabled = false
-detail_enabled = false
-uv1_scale = Vector3( 1, 1, 1 )
-uv1_offset = Vector3( 0, 0, 0 )
-uv1_triplanar = false
-uv1_triplanar_sharpness = 1.0
-uv2_scale = Vector3( 1, 1, 1 )
-uv2_offset = Vector3( 0, 0, 0 )
-uv2_triplanar = false
-uv2_triplanar_sharpness = 1.0
-proximity_fade_enable = false
-distance_fade_enable = false
-_sections_unfolded = [ "Flags", "Parameters", "Vertex Color" ]
 
 [sub_resource type="GDScript" id=4]
-
 script/source = "tool
 extends Object
 func e():
@@ -77,194 +24,63 @@ func e():
 "
 
 [sub_resource type="BoxShape" id=5]
-
 extents = Vector3( 1.5, 1, 0.01 )
 script = SubResource( 4 )
 
-[node name="GUI_3D" type="Spatial" index="0"]
-
+[node name="GUI_3D" type="Spatial"]
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="Viewport" type="Viewport" parent="." index="0"]
-
-arvr = false
+[node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 280, 180 )
-own_world = false
-world = null
-transparent_bg = false
-msaa = 0
 hdr = false
-disable_3d = false
 usage = 0
-debug_draw = 0
 render_target_v_flip = true
-render_target_clear_mode = 0
 render_target_update_mode = 3
-audio_listener_enable_2d = false
-audio_listener_enable_3d = false
-physics_object_picking = false
-gui_disable_input = false
-gui_snap_controls_to_pixels = true
-shadow_atlas_size = 0
-shadow_atlas_quad_0 = 2
-shadow_atlas_quad_1 = 2
-shadow_atlas_quad_2 = 3
-shadow_atlas_quad_3 = 4
 
-[node name="GUI" type="Control" parent="Viewport" index="0"]
-
+[node name="GUI" type="Control" parent="Viewport"]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_right = 280.0
 margin_bottom = 180.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 
-[node name="Panel" type="Panel" parent="Viewport/GUI" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="Panel" type="Panel" parent="Viewport/GUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Rect" ]
 
-[node name="Label" type="Label" parent="Viewport/GUI/Panel" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Label" type="Label" parent="Viewport/GUI/Panel"]
 margin_left = 44.0
 margin_top = 27.0
 margin_right = 121.0
 margin_bottom = 41.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "Hello world!"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Button" type="Button" parent="Viewport/GUI/Panel" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Button" type="Button" parent="Viewport/GUI/Panel"]
 margin_left = 14.0
 margin_top = 46.0
 margin_right = 154.0
 margin_bottom = 74.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "A button!"
-flat = false
-align = 1
-_sections_unfolded = [ "Rect" ]
 
-[node name="TextEdit" type="LineEdit" parent="Viewport/GUI/Panel" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="TextEdit" type="LineEdit" parent="Viewport/GUI/Panel"]
 margin_left = 14.0
 margin_top = 87.0
 margin_right = 154.0
 margin_bottom = 111.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 1
-size_flags_horizontal = 1
-size_flags_vertical = 1
-focus_mode = 2
-context_menu_enabled = true
-placeholder_alpha = 0.6
-caret_blink = false
-caret_blink_speed = 0.65
-caret_position = 0
-_sections_unfolded = [ "Rect" ]
 
-[node name="HSlider" type="HSlider" parent="Viewport/GUI/Panel" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="HSlider" type="HSlider" parent="Viewport/GUI/Panel"]
 margin_left = 14.0
 margin_top = 118.0
 margin_right = 154.0
 margin_bottom = 143.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 0
-min_value = 0.0
-max_value = 100.0
-step = 1.0
-page = 0.0
-value = 0.0
-exp_edit = false
-rounded = false
-editable = true
-tick_count = 0
-ticks_on_borders = false
-focus_mode = 2
-_sections_unfolded = [ "Rect" ]
 
-[node name="ColorRect" type="ColorRect" parent="Viewport/GUI/Panel" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="ColorRect" type="ColorRect" parent="Viewport/GUI/Panel"]
 margin_left = 180.0
 margin_top = 26.0
 margin_right = 244.0
 margin_bottom = 90.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 color = Color( 1, 0, 0, 1 )
-_sections_unfolded = [ "Rect" ]
 
-[node name="TextureRect" type="TextureRect" parent="Viewport/GUI/Panel" index="5"]
-
+[node name="TextureRect" type="TextureRect" parent="Viewport/GUI/Panel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -273,117 +89,31 @@ margin_left = 52.0
 margin_top = -52.0
 margin_right = 92.0
 margin_bottom = -12.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 texture = ExtResource( 2 )
 expand = true
-stretch_mode = 0
 
-[node name="VSlider" type="VSlider" parent="Viewport/GUI/Panel" index="6"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="VSlider" type="VSlider" parent="Viewport/GUI/Panel"]
 margin_left = 260.0
 margin_top = 26.0
 margin_right = 276.0
 margin_bottom = 166.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 0
-size_flags_vertical = 1
-min_value = 0.0
-max_value = 100.0
-step = 1.0
-page = 0.0
-value = 0.0
-exp_edit = false
-rounded = false
-editable = true
-tick_count = 0
-ticks_on_borders = false
-focus_mode = 2
-_sections_unfolded = [ "Rect" ]
 
-[node name="OptionButton" type="OptionButton" parent="Viewport/GUI/Panel" index="7"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="OptionButton" type="OptionButton" parent="Viewport/GUI/Panel"]
 margin_left = 170.0
 margin_top = 111.0
 margin_right = 252.0
 margin_bottom = 165.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-action_mode = 0
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Item 0"
-flat = false
-align = 0
 items = [ "Item 0", null, false, -1, null, "Item 1", null, false, -1, null, "Item 2", null, false, -1, null ]
 selected = 0
-_sections_unfolded = [ "Rect" ]
 
-[node name="Quad" type="MeshInstance" parent="." index="1"]
-
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
+[node name="Quad" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
-skeleton = NodePath("..")
 material/0 = SubResource( 3 )
-_sections_unfolded = [ "Geometry", "Transform", "material" ]
 
-[node name="Area" type="Area" parent="Quad" index="0"]
-
-input_ray_pickable = true
+[node name="Area" type="Area" parent="Quad"]
 input_capture_on_drag = true
-space_override = 0
-gravity_point = false
-gravity_distance_scale = 0.0
-gravity_vec = Vector3( 0, -1, 0 )
-gravity = 9.8
-linear_damp = 0.1
-angular_damp = 1.0
-priority = 0.0
-monitoring = true
-monitorable = true
 collision_layer = 2
-collision_mask = 1
-audio_bus_override = false
-audio_bus_name = "Master"
-reverb_bus_enable = false
-reverb_bus_name = "Master"
-reverb_bus_amount = 0.0
-reverb_bus_uniformity = 0.0
 
-[node name="CollisionShape" type="CollisionShape" parent="Quad/Area" index="0"]
-
+[node name="CollisionShape" type="CollisionShape" parent="Quad/Area"]
 shape = SubResource( 5 )
-disabled = false
-
-

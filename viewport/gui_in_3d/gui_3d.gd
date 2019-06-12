@@ -14,19 +14,25 @@ var last_mouse_pos2D = null
 onready var node_viewport = $Viewport
 onready var node_quad = $Quad
 onready var node_area = $Quad/Area
-onready var node_collision = $Quad/Area/CollisionShape
+
 
 func _ready():
 	node_area.connect("mouse_entered", self, "_mouse_entered_area")
-	print(node_quad.get_surface_material(0).params_billboard_mode)
+	
+	# If the material is NOT set to use billboard settings, then avoid running billboard specific code
+	if node_quad.get_surface_material(0).params_billboard_mode == 0:
+		set_process(false)
+
 
 func _process(delta):
 	#NOTE: Remove this function if you don't plan on using billboard settings.
 	rotate_area_to_billboard()
 
+
 func _mouse_entered_area():
 	mouse_inside = true
-	
+
+
 func _input(event):
 	# Check if the event is a non-mouse/non-touch event
 	var is_mouse_event = false
@@ -35,12 +41,14 @@ func _input(event):
 			is_mouse_event = true
 			break
 	
-	# If the event is not a mouse/touch event, then pass the event to the viewport as we do not
-	# need to do any conversions for these events.
+	# If the event is a mouse/touch event and/or the mouse is either held or inside the area, then
+	# we need to do some additional processing in the handle_mouse function before passing the event to the viewport.
+	# If the event is not a mouse/touch event, then we can just pass the event directly to the viewport.
 	if is_mouse_event and (mouse_inside or mouse_held):
 		handle_mouse(event)
 	elif not is_mouse_event:
 		node_viewport.input(event)
+
 
 # Handle mouse events inside Area. (Area.input_event had many issues with dragging)
 func handle_mouse(event):
@@ -102,6 +110,7 @@ func handle_mouse(event):
 	# Finally, send the processed input event to the viewport.
 	node_viewport.input(event)
 
+
 func find_mouse(global_position):
 	var camera = get_viewport().get_camera()
 	
@@ -112,12 +121,13 @@ func find_mouse(global_position):
 	
 	
 	#Manually raycasts the are to find the mouse position
-	var result = get_world().direct_space_state.intersect_ray(from, to, [], node_area.collision_layer) #,false,true) #for 3.1 changes
+	var result = get_world().direct_space_state.intersect_ray(from, to, [], node_area.collision_layer,false,true) #for 3.1 changes
 	
 	if result.size() > 0:
 		return result.position
 	else:
 		return null
+
 
 func find_further_distance_to(origin):
 	#Find edges of collision and change to global positions
@@ -136,6 +146,7 @@ func find_further_distance_to(origin):
 			far_dist = temp_dist
 	
 	return far_dist
+
 
 func rotate_area_to_billboard():
 	var billboard_mode = node_quad.get_surface_material(0).params_billboard_mode
