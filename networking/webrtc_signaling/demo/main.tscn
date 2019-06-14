@@ -1,0 +1,91 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://demo/main.gd" type="Script" id=1]
+[ext_resource path="res://demo/client_ui.tscn" type="PackedScene" id=2]
+[ext_resource path="res://server/ws_webrtc_server.gd" type="Script" id=3]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="vbox" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 50
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Signaling" type="HBoxContainer" parent="vbox"]
+margin_right = 1024.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="vbox/Signaling"]
+margin_top = 5.0
+margin_right = 104.0
+margin_bottom = 19.0
+text = "Signaling server:"
+
+[node name="port" type="SpinBox" parent="vbox/Signaling"]
+margin_left = 108.0
+margin_right = 182.0
+margin_bottom = 24.0
+min_value = 1025.0
+max_value = 65535.0
+value = 9080.0
+
+[node name="listen" type="Button" parent="vbox/Signaling"]
+margin_left = 186.0
+margin_right = 237.0
+margin_bottom = 24.0
+toggle_mode = true
+text = "Listen"
+
+[node name="CenterContainer" type="CenterContainer" parent="vbox/Signaling"]
+margin_left = 241.0
+margin_right = 1024.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LinkButton" type="LinkButton" parent="vbox/Signaling/CenterContainer"]
+margin_left = 118.0
+margin_top = 5.0
+margin_right = 664.0
+margin_bottom = 19.0
+text = "Make sure to download the GDNative WebRTC Plugin and place it in the project folder"
+
+[node name="Clients" type="GridContainer" parent="vbox"]
+margin_top = 74.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="ClientUI" parent="vbox/Clients" instance=ExtResource( 2 )]
+margin_right = 510.0
+margin_bottom = 261.0
+
+[node name="ClientUI2" parent="vbox/Clients" instance=ExtResource( 2 )]
+margin_left = 514.0
+margin_bottom = 261.0
+
+[node name="ClientUI3" parent="vbox/Clients" instance=ExtResource( 2 )]
+margin_top = 265.0
+margin_right = 510.0
+margin_bottom = 526.0
+
+[node name="ClientUI4" parent="vbox/Clients" instance=ExtResource( 2 )]
+margin_left = 514.0
+margin_top = 265.0
+margin_bottom = 526.0
+
+[node name="Server" type="Node" parent="."]
+script = ExtResource( 3 )
+[connection signal="toggled" from="vbox/Signaling/listen" to="." method="_on_listen_toggled"]
+[connection signal="pressed" from="vbox/Signaling/CenterContainer/LinkButton" to="." method="_on_LinkButton_pressed"]
