@@ -2,7 +2,7 @@ extends Navigation
 
 # How fast we are moving
 const SPEED_NORMAL = 1
-const SPEED_RUN = 1.6
+const SPEED_RUN = 2
 
 # The path
 var route_path = []
@@ -15,15 +15,19 @@ var agent
 var has_setup = false;
 
 var update_timer = 1
-const UPDATE_TIME = 5
+const UPDATE_TIME = 2
 
 const LOSE_SCREEN_PATH = "res://LoseScreen.tscn"
 
 
 func _ready():
+	#warning-ignore-all:return_value_discarded
 	get_node("Agent/VisionArea").connect("body_entered", self, "body_entered_vision")
 	get_node("Agent/VisionArea").connect("body_exited", self, "body_exited_vision")
 	get_node("Agent/GrabArea").connect("body_entered", self, "body_entered_grab")
+	
+	set_physics_process(false)
+	
 	return
 
 
@@ -39,7 +43,7 @@ func _physics_process(delta):
 	# We only want to update our path to the player every five seconds
 	# so we'll make a simple timer
 	if update_timer <= 0:
-		update_timer = UPDATE_TIME
+		update_timer += UPDATE_TIME
 		
 		# If we have a player and the player has an origin, then we should move towards it
 		if player != null:
@@ -60,7 +64,6 @@ func _process(delta):
 			to_walk *= SPEED_RUN
 		else:
 			to_walk *= SPEED_NORMAL
-		
 		
 		var to_watch = Vector3(0, 1, 0)
 		while to_walk > 0 and route_path.size() >= 2:
@@ -90,12 +93,12 @@ func _process(delta):
 		if route_path.size() < 2:
 			route_path = []
 			set_process(false)
+	
 	else:
 		set_process(false)
 
 
 func set_path():
-	
 	# The path should begin at the closest point to our agent
 	var path_begin = get_closest_point(agent.global_transform.origin)
 	

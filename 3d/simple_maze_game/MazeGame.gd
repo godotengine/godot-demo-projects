@@ -32,7 +32,6 @@ export (float, 0, 100) var Imperfect_maze_wall_removal_chance = 25
 
 
 func _ready():
-	
 	# Generate the maze and the nav_mesh
 	generate(Maze_size)
 	generate_nav_mesh(Maze_size)
@@ -138,10 +137,14 @@ func generate_nav_mesh(size):
 		
 			var tile = data[x][y]
 			var quad = null
-			var pos = tile.get_transform().origin
+			var pos = tile.global_transform.origin
+			
+			# NOTE: If the AI agent is offset when the navmesh is passed, you will need to adjust the
+			# "pos" variable according to that offset. For example, if the AI agent is at position (0, 0, 3)
+			# in world space, you will need to add 3 to "pos" (pos.z += 3) to correct for the offset.
 			
 			# Add the main floor, that is ALWAYS present
-			quad = add_quad(pos + Vector3(0, 0, 0), Vector3(0.9, 1, 0.9), verticies, indicies)
+			quad = add_quad(pos, Vector3(0.5, 1, 0.5), verticies, indicies)
 			verticies = quad[0]
 			indicies = quad[1]
 			
@@ -150,32 +153,29 @@ func generate_nav_mesh(size):
 			
 			# North floor
 			if tile.walls["NORTH"] == false:
-				quad = add_quad(pos + Vector3(0, 0, 0.95), Vector3(0.9, 1, 0.05), verticies, indicies)
+				quad = add_quad(pos + Vector3(0, 0, 0.75), Vector3(0.5, 1, 0.25), verticies, indicies)
 				verticies = quad[0]
 				indicies = quad[1]
 			
 			# South floor
 			if tile.walls["SOUTH"] == false:
-				quad = add_quad(pos + Vector3(0, 0, -0.95), Vector3(0.9, 1, 0.05), verticies, indicies)
+				quad = add_quad(pos + Vector3(0, 0, -0.75), Vector3(0.5, 1, 0.25), verticies, indicies)
 				verticies = quad[0]
 				indicies = quad[1]
 			
-			# East floor
 			if tile.walls["EAST"] == false:
-				quad = add_quad(pos + Vector3(-0.95, 0, 0), Vector3(0.05, 1, 0.9), verticies, indicies)
+				quad = add_quad(pos + Vector3(-0.75, 0, 0), Vector3(0.25, 1, 0.5), verticies, indicies)
 				verticies = quad[0]
 				indicies = quad[1]
 			
-			# West floor
 			if tile.walls["WEST"] == false:
-				quad = add_quad(pos + Vector3(0.95, 0, 0), Vector3(0.05, 1, 0.9), verticies, indicies)
+				quad = add_quad(pos + Vector3(0.75, 0, 0), Vector3(0.25, 1, 0.5), verticies, indicies)
 				verticies = quad[0]
 				indicies = quad[1]
 	
-	
-	# If we want to see the nav_mesh (using a mesh instance), then change this to true.
-	# It's easier to understand how the navmesh is constructed when you can see it!
-	var DRAW_MESH = false
+	# NOTE: To see and debug the generated Navmesh, check the "Visible Navigation" checkbox in the Debug
+	# menu drop down at the top left corner of the Godot editor! This will make it much easier to see
+	# the generated navigation mesh.
 	
 	# Make a new mesh and surface tool. Tell the surface tool to begin and that we'll be passing triangles
 	var mesh = Mesh.new()
@@ -194,12 +194,6 @@ func generate_nav_mesh(size):
 	# Create a new navigation mesh and create it's navmesh from the mesh we've just generated
 	nav_mesh = NavigationMesh.new()
 	nav_mesh.create_from_mesh(mesh)
-	
-	# If we are drawing the mesh, then assign the mesh to the mesh instance too
-	if DRAW_MESH:
-		get_node("DebugNavmesh").mesh = mesh
-	else:
-		get_node("DebugNavmesh").queue_free()
 
 
 func add_quad(quad_center, quad_size, quad_verticies, quad_indicies):

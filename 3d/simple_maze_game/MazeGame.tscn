@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://MazeGame.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Key.gd" type="Script" id=4]
 
 [sub_resource type="GDScript" id=1]
-
 script/source = "tool
 extends Object
 func e():
@@ -14,143 +13,29 @@ func e():
 "
 
 [sub_resource type="Environment" id=2]
-
 background_mode = 1
-background_sky_custom_fov = 0.0
-background_color = Color( 0, 0, 0, 1 )
 background_energy = 0.0
-background_canvas_max_layer = 0
-ambient_light_color = Color( 0, 0, 0, 1 )
 ambient_light_energy = 0.0
 ambient_light_sky_contribution = 0.0
-fog_enabled = false
 fog_color = Color( 0.152344, 0.152344, 0.152344, 1 )
-fog_sun_color = Color( 1, 0.9, 0.7, 1 )
-fog_sun_amount = 0.0
-fog_depth_enabled = true
 fog_depth_begin = 0.2
-fog_depth_curve = 1.0
-fog_transmit_enabled = false
-fog_transmit_curve = 1.0
-fog_height_enabled = false
-fog_height_min = 0.0
-fog_height_max = 100.0
-fog_height_curve = 1.0
 tonemap_mode = 2
-tonemap_exposure = 1.0
-tonemap_white = 1.0
-auto_exposure_enabled = false
-auto_exposure_scale = 0.4
-auto_exposure_min_luma = 0.05
-auto_exposure_max_luma = 8.0
-auto_exposure_speed = 0.5
-ss_reflections_enabled = false
-ss_reflections_max_steps = 64
-ss_reflections_fade_in = 0.15
-ss_reflections_fade_out = 2.0
-ss_reflections_depth_tolerance = 0.2
-ss_reflections_roughness = true
 ssao_enabled = true
-ssao_radius = 1.0
-ssao_intensity = 1.0
-ssao_radius2 = 0.0
-ssao_intensity2 = 1.0
-ssao_bias = 0.01
 ssao_light_affect = 1.0
-ssao_color = Color( 0, 0, 0, 1 )
-ssao_quality = 0
 ssao_blur = 1
-ssao_edge_sharpness = 4.0
-dof_blur_far_enabled = false
-dof_blur_far_distance = 10.0
-dof_blur_far_transition = 5.0
-dof_blur_far_amount = 0.1
-dof_blur_far_quality = 1
-dof_blur_near_enabled = false
-dof_blur_near_distance = 2.0
-dof_blur_near_transition = 1.0
-dof_blur_near_amount = 0.1
-dof_blur_near_quality = 1
 glow_enabled = true
-glow_levels/1 = false
 glow_levels/2 = true
-glow_levels/3 = true
 glow_levels/4 = true
 glow_levels/5 = false
-glow_levels/6 = false
-glow_levels/7 = false
 glow_intensity = 0.5
-glow_strength = 1.0
 glow_bloom = 0.4
 glow_blend_mode = 0
-glow_hdr_threshold = 1.0
-glow_hdr_scale = 2.0
-glow_bicubic_upscale = false
 adjustment_enabled = true
 adjustment_brightness = 0.8
 adjustment_contrast = 1.2
-adjustment_saturation = 1.0
 script = SubResource( 1 )
-_sections_unfolded = [ "Adjustments", "Glow/levels" ]
-
-[sub_resource type="SpatialMaterial" id=3]
-
-render_priority = 0
-flags_transparent = false
-flags_unshaded = false
-flags_vertex_lighting = false
-flags_no_depth_test = false
-flags_use_point_size = false
-flags_world_triplanar = false
-flags_fixed_size = false
-flags_albedo_tex_force_srgb = false
-vertex_color_use_as_albedo = false
-vertex_color_is_srgb = false
-params_diffuse_mode = 0
-params_specular_mode = 0
-params_blend_mode = 0
-params_cull_mode = 0
-params_depth_draw_mode = 0
-params_line_width = 1.0
-params_point_size = 1.0
-params_billboard_mode = 0
-params_grow = false
-params_use_alpha_scissor = false
-albedo_color = Color( 0.507812, 0.838501, 1, 1 )
-metallic = 0.0
-metallic_specular = 0.5
-metallic_texture_channel = 0
-roughness = 0.0
-roughness_texture_channel = 0
-emission_enabled = true
-emission = Color( 0.285156, 0.765442, 1, 1 )
-emission_energy = 1.0
-emission_operator = 0
-emission_on_uv2 = false
-normal_enabled = false
-rim_enabled = false
-clearcoat_enabled = false
-anisotropy_enabled = false
-ao_enabled = false
-depth_enabled = false
-subsurf_scatter_enabled = false
-transmission_enabled = false
-refraction_enabled = false
-detail_enabled = false
-uv1_scale = Vector3( 1, 1, 1 )
-uv1_offset = Vector3( 0, 0, 0 )
-uv1_triplanar = false
-uv1_triplanar_sharpness = 1.0
-uv2_scale = Vector3( 1, 1, 1 )
-uv2_offset = Vector3( 0, 0, 0 )
-uv2_triplanar = false
-uv2_triplanar_sharpness = 1.0
-proximity_fade_enable = false
-distance_fade_enable = false
-_sections_unfolded = [ "Emission" ]
 
 [sub_resource type="GDScript" id=4]
-
 script/source = "tool
 extends Object
 func e():
@@ -158,68 +43,17 @@ func e():
 "
 
 [sub_resource type="SphereMesh" id=5]
-
 radius = 0.7
 height = 1.2
 radial_segments = 32
 rings = 16
-is_hemisphere = false
 script = SubResource( 4 )
 
 [sub_resource type="SpatialMaterial" id=6]
-
-render_priority = 0
-flags_transparent = false
-flags_unshaded = false
-flags_vertex_lighting = false
-flags_no_depth_test = false
-flags_use_point_size = false
-flags_world_triplanar = false
-flags_fixed_size = false
-flags_albedo_tex_force_srgb = false
-vertex_color_use_as_albedo = false
-vertex_color_is_srgb = false
-params_diffuse_mode = 0
-params_specular_mode = 0
-params_blend_mode = 0
-params_cull_mode = 0
-params_depth_draw_mode = 0
-params_line_width = 1.0
-params_point_size = 1.0
-params_billboard_mode = 0
-params_grow = false
-params_use_alpha_scissor = false
 albedo_color = Color( 0.105469, 0.105469, 0.105469, 1 )
-metallic = 0.0
-metallic_specular = 0.5
-metallic_texture_channel = 0
 roughness = 0.0
-roughness_texture_channel = 0
-emission_enabled = false
-normal_enabled = false
-rim_enabled = false
-clearcoat_enabled = false
-anisotropy_enabled = false
-ao_enabled = false
-depth_enabled = false
-subsurf_scatter_enabled = false
-transmission_enabled = false
-refraction_enabled = false
-detail_enabled = false
-uv1_scale = Vector3( 1, 1, 1 )
-uv1_offset = Vector3( 0, 0, 0 )
-uv1_triplanar = false
-uv1_triplanar_sharpness = 1.0
-uv2_scale = Vector3( 1, 1, 1 )
-uv2_offset = Vector3( 0, 0, 0 )
-uv2_triplanar = false
-uv2_triplanar_sharpness = 1.0
-proximity_fade_enable = false
-distance_fade_enable = false
-_sections_unfolded = [ "Albedo" ]
 
 [sub_resource type="GDScript" id=7]
-
 script/source = "tool
 extends Object
 func e():
@@ -227,66 +61,13 @@ func e():
 "
 
 [sub_resource type="CubeMesh" id=8]
-
 size = Vector3( 0.75, 2, 0.75 )
-subdivide_width = 0
-subdivide_height = 0
-subdivide_depth = 0
 script = SubResource( 7 )
 
 [sub_resource type="SpatialMaterial" id=9]
-
-render_priority = 0
-flags_transparent = false
-flags_unshaded = false
-flags_vertex_lighting = false
-flags_no_depth_test = false
-flags_use_point_size = false
-flags_world_triplanar = false
-flags_fixed_size = false
-flags_albedo_tex_force_srgb = false
-vertex_color_use_as_albedo = false
-vertex_color_is_srgb = false
-params_diffuse_mode = 0
-params_specular_mode = 0
-params_blend_mode = 0
-params_cull_mode = 0
-params_depth_draw_mode = 0
-params_line_width = 1.0
-params_point_size = 1.0
-params_billboard_mode = 0
-params_grow = false
-params_use_alpha_scissor = false
-albedo_color = Color( 1, 1, 1, 1 )
-metallic = 0.0
-metallic_specular = 0.5
-metallic_texture_channel = 0
 roughness = 0.0
-roughness_texture_channel = 0
-emission_enabled = false
-normal_enabled = false
-rim_enabled = false
-clearcoat_enabled = false
-anisotropy_enabled = false
-ao_enabled = false
-depth_enabled = false
-subsurf_scatter_enabled = false
-transmission_enabled = false
-refraction_enabled = false
-detail_enabled = false
-uv1_scale = Vector3( 1, 1, 1 )
-uv1_offset = Vector3( 0, 0, 0 )
-uv1_triplanar = false
-uv1_triplanar_sharpness = 1.0
-uv2_scale = Vector3( 1, 1, 1 )
-uv2_offset = Vector3( 0, 0, 0 )
-uv2_triplanar = false
-uv2_triplanar_sharpness = 1.0
-proximity_fade_enable = false
-distance_fade_enable = false
 
 [sub_resource type="GDScript" id=10]
-
 script/source = "tool
 extends Object
 func e():
@@ -294,509 +75,194 @@ func e():
 "
 
 [sub_resource type="PrismMesh" id=11]
-
-left_to_right = 0.5
 size = Vector3( 0.5, 0.5, 0.5 )
-subdivide_width = 0
-subdivide_height = 0
-subdivide_depth = 0
 script = SubResource( 10 )
 
 [sub_resource type="SpatialMaterial" id=12]
-
-render_priority = 0
-flags_transparent = false
-flags_unshaded = false
-flags_vertex_lighting = false
-flags_no_depth_test = false
-flags_use_point_size = false
-flags_world_triplanar = false
-flags_fixed_size = false
-flags_albedo_tex_force_srgb = false
-vertex_color_use_as_albedo = false
-vertex_color_is_srgb = false
-params_diffuse_mode = 0
-params_specular_mode = 0
-params_blend_mode = 0
-params_cull_mode = 0
-params_depth_draw_mode = 0
-params_line_width = 1.0
-params_point_size = 1.0
-params_billboard_mode = 0
-params_grow = false
-params_use_alpha_scissor = false
 albedo_color = Color( 1, 0, 0, 1 )
-metallic = 0.0
-metallic_specular = 0.5
-metallic_texture_channel = 0
 roughness = 0.0
-roughness_texture_channel = 0
 emission_enabled = true
 emission = Color( 1, 0, 0, 1 )
 emission_energy = 1.0
 emission_operator = 0
 emission_on_uv2 = false
-normal_enabled = false
-rim_enabled = false
-clearcoat_enabled = false
-anisotropy_enabled = false
-ao_enabled = false
-depth_enabled = false
-subsurf_scatter_enabled = false
-transmission_enabled = false
-refraction_enabled = false
-detail_enabled = false
-uv1_scale = Vector3( 1, 1, 1 )
-uv1_offset = Vector3( 0, 0, 0 )
-uv1_triplanar = false
-uv1_triplanar_sharpness = 1.0
-uv2_scale = Vector3( 1, 1, 1 )
-uv2_offset = Vector3( 0, 0, 0 )
-uv2_triplanar = false
-uv2_triplanar_sharpness = 1.0
-proximity_fade_enable = false
-distance_fade_enable = false
-_sections_unfolded = [ "Emission" ]
 
 [sub_resource type="SphereShape" id=13]
-
 radius = 0.6
 
-[sub_resource type="SphereShape" id=28]
-
+[sub_resource type="SphereShape" id=14]
 radius = 3.0
 
-[sub_resource type="GDScript" id=16]
-
+[sub_resource type="GDScript" id=15]
 script/source = "tool
 extends Object
 func e():
 	return .5
 "
 
-[sub_resource type="GDScript" id=17]
-
+[sub_resource type="GDScript" id=16]
 script/source = "tool
 extends Object
 func e():
 	return 16
 "
 
-[sub_resource type="CylinderMesh" id=18]
-
+[sub_resource type="CylinderMesh" id=17]
 top_radius = 0.2
 bottom_radius = 0.2
 height = 3.0
 radial_segments = 16
 rings = 2
-script = SubResource( 17 )
+script = SubResource( 16 )
 
-[sub_resource type="GDScript" id=19]
-
+[sub_resource type="GDScript" id=18]
 script/source = "tool
 extends Object
 func e():
 	return .2
 "
 
-[sub_resource type="SpatialMaterial" id=20]
-
-render_priority = 0
-flags_transparent = false
-flags_unshaded = false
-flags_vertex_lighting = false
-flags_no_depth_test = false
-flags_use_point_size = false
-flags_world_triplanar = false
-flags_fixed_size = false
-flags_albedo_tex_force_srgb = false
-vertex_color_use_as_albedo = false
-vertex_color_is_srgb = false
-params_diffuse_mode = 0
-params_specular_mode = 0
-params_blend_mode = 0
-params_cull_mode = 0
-params_depth_draw_mode = 0
-params_line_width = 1.0
-params_point_size = 1.0
-params_billboard_mode = 0
-params_grow = false
-params_use_alpha_scissor = false
+[sub_resource type="SpatialMaterial" id=19]
 albedo_color = Color( 1, 0.849548, 0.335938, 1 )
 metallic = 0.2
-metallic_specular = 0.5
-metallic_texture_channel = 0
 roughness = 0.1
-roughness_texture_channel = 0
-emission_enabled = false
-normal_enabled = false
-rim_enabled = false
-clearcoat_enabled = false
-anisotropy_enabled = false
-ao_enabled = false
-depth_enabled = false
-subsurf_scatter_enabled = false
-transmission_enabled = false
-refraction_enabled = false
-detail_enabled = false
-uv1_scale = Vector3( 1, 1, 1 )
-uv1_offset = Vector3( 0, 0, 0 )
-uv1_triplanar = false
-uv1_triplanar_sharpness = 1.0
-uv2_scale = Vector3( 1, 1, 1 )
-uv2_offset = Vector3( 0, 0, 0 )
-uv2_triplanar = false
-uv2_triplanar_sharpness = 1.0
-proximity_fade_enable = false
-distance_fade_enable = false
-script = SubResource( 19 )
+script = SubResource( 18 )
 
-[sub_resource type="GDScript" id=21]
-
+[sub_resource type="GDScript" id=20]
 script/source = "tool
 extends Object
 func e():
 	return 1.2
 "
 
-[sub_resource type="SphereMesh" id=22]
-
+[sub_resource type="SphereMesh" id=21]
 radius = 0.6
 height = 1.2
 radial_segments = 32
 rings = 16
-is_hemisphere = false
-script = SubResource( 21 )
+script = SubResource( 20 )
 
-[sub_resource type="GDScript" id=23]
-
+[sub_resource type="GDScript" id=22]
 script/source = "tool
 extends Object
 func e():
 	return .2
 "
 
-[sub_resource type="PrismMesh" id=24]
-
-left_to_right = 0.5
+[sub_resource type="PrismMesh" id=23]
 size = Vector3( 0.5, 0.5, 0.2 )
-subdivide_width = 0
-subdivide_height = 0
-subdivide_depth = 0
-script = SubResource( 23 )
+script = SubResource( 22 )
 
-[sub_resource type="GDScript" id=25]
-
+[sub_resource type="GDScript" id=24]
 script/source = "tool
 extends Object
 func e():
 	return 90
 "
 
-[sub_resource type="BoxShape" id=29]
-
+[sub_resource type="BoxShape" id=25]
 extents = Vector3( 0.5, 1, 0.5 )
 
 [node name="MazeGame" type="Spatial"]
-
 script = ExtResource( 1 )
-Maze_size = Vector2( 14, 14 )
 Generate_imperfect_maze = true
-Imperfect_maze_wall_removal_chance = 25
 
-[node name="Tiles" type="Spatial" parent="." index="0"]
+[node name="Tiles" type="Spatial" parent="."]
 
-_sections_unfolded = [ "Transform" ]
-
-[node name="Player" parent="." index="1" instance=ExtResource( 2 )]
-
+[node name="Player" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.61495, 9.53674e-07, 2.44451 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="2"]
-
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
 
-[node name="DebugNavmesh" type="MeshInstance" parent="." index="3"]
-
-layers = 1
-material_override = SubResource( 3 )
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = null
-skeleton = NodePath("..")
-_sections_unfolded = [ "Geometry" ]
-
-[node name="AI" type="Navigation" parent="." index="4"]
-
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.91779 )
-up_vector = Vector3( 0, 1, 0 )
+[node name="AI" type="Navigation" parent="."]
+editor/display_folded = true
 script = ExtResource( 3 )
 
-[node name="Agent" type="Spatial" parent="AI" index="0"]
+[node name="Agent" type="Spatial" parent="AI"]
+editor/display_folded = true
 
-[node name="Mesh" type="Spatial" parent="AI/Agent" index="0"]
-
+[node name="Mesh" type="Spatial" parent="AI/Agent"]
 editor/display_folded = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.15913, 0 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="Wheel" type="MeshInstance" parent="AI/Agent/Mesh" index="0"]
-
+[node name="Wheel" type="MeshInstance" parent="AI/Agent/Mesh"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26639, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
 mesh = SubResource( 5 )
-skeleton = NodePath("..")
 material/0 = SubResource( 6 )
-_sections_unfolded = [ "material" ]
 
-[node name="Body" type="MeshInstance" parent="AI/Agent/Mesh" index="1"]
-
+[node name="Body" type="MeshInstance" parent="AI/Agent/Mesh"]
 transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 1.3589, -0.47622 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
 mesh = SubResource( 8 )
-skeleton = NodePath("..")
 material/0 = SubResource( 9 )
-_sections_unfolded = [ "Transform", "material" ]
 
-[node name="Arm_L" type="MeshInstance" parent="AI/Agent/Mesh" index="2"]
-
+[node name="Arm_L" type="MeshInstance" parent="AI/Agent/Mesh"]
 transform = Transform( 0.5, 0, 0, 0, 0.408737, -0.419224, 0, 0.628836, 0.272491, -0.55, 1.3589, -1.22765 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
 mesh = SubResource( 8 )
-skeleton = NodePath("..")
 material/0 = null
-_sections_unfolded = [ "Transform", "material" ]
 
-[node name="Arm_R" type="MeshInstance" parent="AI/Agent/Mesh" index="3"]
-
+[node name="Arm_R" type="MeshInstance" parent="AI/Agent/Mesh"]
 transform = Transform( 0.5, 0, 0, 0, 0.408737, -0.419224, 0, 0.628836, 0.272491, 0.55, 1.3589, -1.22765 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
 mesh = SubResource( 8 )
-skeleton = NodePath("..")
 material/0 = null
-_sections_unfolded = [ "Transform", "material" ]
 
-[node name="Head" type="MeshInstance" parent="AI/Agent/Mesh" index="4"]
-
+[node name="Head" type="MeshInstance" parent="AI/Agent/Mesh"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.86932, -1.04698 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
 mesh = SubResource( 11 )
-skeleton = NodePath("..")
 material/0 = SubResource( 12 )
-_sections_unfolded = [ "Transform", "material" ]
 
-[node name="GrabArea" type="Area" parent="AI/Agent" index="1"]
-
+[node name="GrabArea" type="Area" parent="AI/Agent"]
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.729277, -0.871535 )
 input_ray_pickable = false
-input_capture_on_drag = false
-space_override = 0
-gravity_point = false
-gravity_distance_scale = 0.0
-gravity_vec = Vector3( 0, -1, 0 )
-gravity = 9.8
-linear_damp = 0.1
-angular_damp = 1.0
-priority = 0.0
-monitoring = true
 monitorable = false
-collision_layer = 1
-collision_mask = 1
-audio_bus_override = false
-audio_bus_name = "Master"
-reverb_bus_enable = false
-reverb_bus_name = "Master"
-reverb_bus_amount = 0.0
-reverb_bus_uniformity = 0.0
 
-[node name="CollisionShape" type="CollisionShape" parent="AI/Agent/GrabArea" index="0"]
-
+[node name="CollisionShape" type="CollisionShape" parent="AI/Agent/GrabArea"]
 shape = SubResource( 13 )
-disabled = false
 
-[node name="VisionArea" type="Area" parent="AI/Agent" index="2"]
-
+[node name="VisionArea" type="Area" parent="AI/Agent"]
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.729277, -0.71547 )
 input_ray_pickable = false
-input_capture_on_drag = false
-space_override = 0
-gravity_point = false
-gravity_distance_scale = 0.0
-gravity_vec = Vector3( 0, -1, 0 )
-gravity = 9.8
-linear_damp = 0.1
-angular_damp = 1.0
-priority = 0.0
-monitoring = true
 monitorable = false
-collision_layer = 1
-collision_mask = 1
-audio_bus_override = false
-audio_bus_name = "Master"
-reverb_bus_enable = false
-reverb_bus_name = "Master"
-reverb_bus_amount = 0.0
-reverb_bus_uniformity = 0.0
 
-[node name="CollisionShape" type="CollisionShape" parent="AI/Agent/VisionArea" index="0"]
+[node name="CollisionShape" type="CollisionShape" parent="AI/Agent/VisionArea"]
+shape = SubResource( 14 )
 
-shape = SubResource( 28 )
-disabled = false
-
-[node name="Key" type="Spatial" parent="." index="5"]
-
+[node name="Key" type="Spatial" parent="."]
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.51503 )
 script = ExtResource( 4 )
 
-[node name="Mesh" type="Spatial" parent="Key" index="0"]
-
+[node name="Mesh" type="Spatial" parent="Key"]
 editor/display_folded = true
 transform = Transform( 0.459401, -0.197359, 0, 0.197359, 0.459401, 0, 0, 0, 0.5, 0.0392989, 0.832543, 0 )
-script = SubResource( 16 )
-_sections_unfolded = [ "Transform" ]
+script = SubResource( 15 )
 
-[node name="Key_length" type="MeshInstance" parent="Key/Mesh" index="0"]
+[node name="Key_length" type="MeshInstance" parent="Key/Mesh"]
+mesh = SubResource( 17 )
+material/0 = SubResource( 19 )
 
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = SubResource( 18 )
-skeleton = NodePath("..")
-material/0 = SubResource( 20 )
-_sections_unfolded = [ "material" ]
-
-[node name="Key_handle" type="MeshInstance" parent="Key/Mesh" index="1"]
-
+[node name="Key_handle" type="MeshInstance" parent="Key/Mesh"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26893, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = SubResource( 22 )
-skeleton = NodePath("..")
-material/0 = SubResource( 20 )
-_sections_unfolded = [ "material" ]
+mesh = SubResource( 21 )
+material/0 = SubResource( 19 )
 
-[node name="Key_tooth" type="MeshInstance" parent="Key/Mesh" index="2"]
-
+[node name="Key_tooth" type="MeshInstance" parent="Key/Mesh"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.386283, -0.840534, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = SubResource( 24 )
-skeleton = NodePath("..")
-material/0 = SubResource( 20 )
-script = SubResource( 25 )
-_sections_unfolded = [ "Transform", "material" ]
+mesh = SubResource( 23 )
+material/0 = SubResource( 19 )
+script = SubResource( 24 )
 
-[node name="Key_tooth2" type="MeshInstance" parent="Key/Mesh" index="3"]
-
+[node name="Key_tooth2" type="MeshInstance" parent="Key/Mesh"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.386283, -1.24462, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = SubResource( 24 )
-skeleton = NodePath("..")
-material/0 = SubResource( 20 )
-script = SubResource( 25 )
-_sections_unfolded = [ "Transform", "material" ]
+mesh = SubResource( 23 )
+material/0 = SubResource( 19 )
+script = SubResource( 24 )
 
-[node name="Area" type="Area" parent="Key" index="1"]
-
+[node name="Area" type="Area" parent="Key"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.946537, 0 )
 input_ray_pickable = false
-input_capture_on_drag = false
-space_override = 0
-gravity_point = false
-gravity_distance_scale = 0.0
-gravity_vec = Vector3( 0, -1, 0 )
-gravity = 9.8
-linear_damp = 0.1
-angular_damp = 1.0
-priority = 0.0
-monitoring = true
-monitorable = true
-collision_layer = 1
-collision_mask = 1
-audio_bus_override = false
-audio_bus_name = "Master"
-reverb_bus_enable = false
-reverb_bus_name = "Master"
-reverb_bus_amount = 0.0
-reverb_bus_uniformity = 0.0
 
-[node name="CollisionShape" type="CollisionShape" parent="Key/Area" index="0"]
-
-shape = SubResource( 29 )
-disabled = false
-
-
+[node name="CollisionShape" type="CollisionShape" parent="Key/Area"]
+shape = SubResource( 25 )

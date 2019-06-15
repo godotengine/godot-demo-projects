@@ -41,35 +41,43 @@ func setup_pillars():
 		pillars["SW"] = true
 	
 	if pillars["NE"]:
-		get_node("Pillars/NE").visible = true
+		get_node("Meshes/Pillar_NE").visible = true
 	else:
-		get_node("Pillars/NE").queue_free()
+		get_node("Meshes/Pillar_NE").visible = false
+		get_node("StaticBody/Pillar_NE_CollisionShape").disabled = true
 	
 	if pillars["NW"]:
-		get_node("Pillars/NW").visible = true
+		get_node("Meshes/Pillar_NW").visible = true
 	else:
-		get_node("Pillars/NW").queue_free()
+		get_node("Meshes/Pillar_NW").visible = false
+		get_node("StaticBody/Pillar_NW_CollisionShape").disabled = true
 	
 	if pillars["SE"]:
-		get_node("Pillars/SE").visible = true
+		get_node("Meshes/Pillar_SE").visible = true
 	else:
-		get_node("Pillars/SE").queue_free()
+		get_node("Meshes/Pillar_SE").visible = false
+		get_node("StaticBody/Pillar_SE_CollisionShape").disabled = true
 	
 	if pillars["SW"]:
-		get_node("Pillars/SW").visible = true
+		get_node("Meshes/Pillar_SW").visible = true
 	else:
-		get_node("Pillars/SW").queue_free()
+		get_node("Meshes/Pillar_SW").visible = false
+		get_node("StaticBody/Pillar_SW_CollisionShape").disabled = true
 
 
 func show_wall(wall_name):
 	if wall_name == "NORTH":
-		get_node("Walls/North").visible = true
+		get_node("Meshes/Wall_North").visible = true
+		get_node("StaticBody/Wall_North_CollisionShape").disabled = false
 	elif wall_name == "SOUTH":
-		get_node("Walls/South").visible = true
+		get_node("Meshes/Wall_South").visible = true
+		get_node("StaticBody/Wall_South_CollisionShape").disabled = false
 	elif wall_name == "EAST":
-		get_node("Walls/East").visible = true
+		get_node("Meshes/Wall_East").visible = true
+		get_node("StaticBody/Wall_East_CollisionShape").disabled = false
 	elif wall_name == "WEST":
-		get_node("Walls/West").visible = true
+		get_node("Meshes/Wall_West").visible = true
+		get_node("StaticBody/Wall_West_CollisionShape").disabled = false
 	else:
 		print ("Maze_tile: Unknown wall passed into show_wall")
 	return
@@ -77,13 +85,17 @@ func show_wall(wall_name):
 
 func delete_wall(wall_name):
 	if wall_name == "NORTH":
-		get_node("Walls/North").queue_free()
+		get_node("Meshes/Wall_North").visible = false
+		get_node("StaticBody/Wall_North_CollisionShape").disabled = true
 	elif wall_name == "SOUTH":
-		get_node("Walls/South").queue_free()
+		get_node("Meshes/Wall_South").visible = false
+		get_node("StaticBody/Wall_South_CollisionShape").disabled = true
 	elif wall_name == "EAST":
-		get_node("Walls/East").queue_free()
+		get_node("Meshes/Wall_East").visible = false
+		get_node("StaticBody/Wall_East_CollisionShape").disabled = true
 	elif wall_name == "WEST":
-		get_node("Walls/West").queue_free()
+		get_node("Meshes/Wall_West").visible = false
+		get_node("StaticBody/Wall_West_CollisionShape").disabled = true
 	else:
 		print ("Maze_tile: Unknown wall passed into delete_wall")
 		return
