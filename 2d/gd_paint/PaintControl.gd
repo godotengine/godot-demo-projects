@@ -51,7 +51,7 @@ func _ready():
 	set_process(true)
 
 
-func _process(delta):
+func _process(_delta):
 	var mouse_pos = get_viewport().get_mouse_position()
 	
 	# Check if the mouse is currently inside the canvas/drawing-area
@@ -135,6 +135,7 @@ func undo_stroke():
 		# Figure out how many elements/brushes we've added in the last stroke
 		var elements_to_remove = brush_data_list.size() - undo_element_list_num
 		# Remove all of the elements we've added this in the last stroke
+		#warning-ignore:unused_variable
 		for elment_num in range(0, elements_to_remove):
 			brush_data_list.pop_back()
 		

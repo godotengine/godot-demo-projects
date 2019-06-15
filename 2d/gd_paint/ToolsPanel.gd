@@ -16,6 +16,7 @@ func _ready():
 	paint_control = get_parent().get_node("PaintControl")
 	save_dialog = get_parent().get_node("SaveFileDialog")
 
+	# warning-ignore-all:return_value_discarded
 	# Assign all of the needed signals for the oppersation buttons
 	get_node("ButtonUndo").connect("pressed", self, "button_pressed", ["undo_stroke"])
 	get_node("ButtonSave").connect("pressed", self, "button_pressed", ["save_picture"])
@@ -47,7 +48,7 @@ func _ready():
 	set_physics_process(true)
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Update the status label with the newest brush element count
 	label_stats.text = "Brush objects: " + String(paint_control.brush_data_list.size())
 
