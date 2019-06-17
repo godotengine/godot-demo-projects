@@ -46,8 +46,8 @@ var first_call = true
 # A boolean to track whether or not we want to print debug messages
 var debug_messages = false
 
+
 func _ready():
-	
 	if (target == null):
 		# NOTE: you HAVE to have a node called target as a child of this node!
 		# so we create one if one doesn't already exist
@@ -210,6 +210,7 @@ func _set_bone_chain_bones(new_value):
 	
 	_make_bone_nodes()
 
+
 func _set_bone_chain_lengths(new_value):
 	bones_in_chain_lengths = new_value
 	total_length = null
@@ -217,14 +218,18 @@ func _set_bone_chain_lengths(new_value):
 
 # Various upate methods
 # ---------------------
-func _process(delta):
+func _process(_delta):
 	if reset_iterations_on_update == true:
 		chain_iterations = 0
 	update_skeleton()
-func _physics_process(delta):
+
+
+func _physics_process(_delta):
 	if reset_iterations_on_update == true:
 		chain_iterations = 0
 	update_skeleton()
+
+
 func _notification(what):
 	if what == NOTIFICATION_TRANSFORM_CHANGED:
 		if reset_iterations_on_update == true:

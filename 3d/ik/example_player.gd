@@ -175,7 +175,7 @@ func process_input(delta):
 		var lerp_value = (lean_value - 0.5) * 2
 		path_follow_node.rotation_degrees.z = (-20 * lerp_value)
 	# ----------------------------------
-	
+
 
 func process_movement(delta):
 	
@@ -234,7 +234,7 @@ func _input(event):
 		pass
 
 
-func animation_finished(anim):
+func animation_finished(_anim):
 	anim_done = true
 
 

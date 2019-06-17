@@ -16,6 +16,7 @@ var skeleton_to_use
 var first_call = true
 const empty_vector = Vector3()
 
+
 func _ready():
 	
 	set_process(false)
@@ -195,10 +196,14 @@ func update_skeleton():
 
 # Various upate methods
 # ---------------------
-func _process(delta):
+func _process(_delta):
 	update_skeleton()
-func _physics_process(delta):
+
+
+func _physics_process(_delta):
 	update_skeleton()
+
+
 func _notification(what):
 	if what == NOTIFICATION_TRANSFORM_CHANGED:
 		update_skeleton()
