@@ -1,0 +1,104 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://demo/client_ui.gd" type="Script" id=1]
+[ext_resource path="res://client/multiplayer_client.gd" type="Script" id=2]
+
+[node name="ClientUI" type="Control"]
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Client" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="vbox" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="connect" type="HBoxContainer" parent="vbox"]
+margin_right = 1024.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="vbox/connect"]
+margin_top = 5.0
+margin_right = 73.0
+margin_bottom = 19.0
+text = "Connect to:"
+
+[node name="host" type="LineEdit" parent="vbox/connect"]
+margin_left = 77.0
+margin_right = 921.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "ws://localhost:9080"
+
+[node name="Room" type="Label" parent="vbox/connect"]
+margin_left = 925.0
+margin_right = 962.0
+margin_bottom = 24.0
+size_flags_vertical = 5
+text = "Room"
+valign = 1
+
+[node name="RoomSecret" type="LineEdit" parent="vbox/connect"]
+margin_left = 966.0
+margin_right = 1024.0
+margin_bottom = 24.0
+placeholder_text = "secret"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="vbox"]
+margin_top = 28.0
+margin_right = 1024.0
+margin_bottom = 48.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Button" parent="vbox/HBoxContainer"]
+margin_right = 41.0
+margin_bottom = 20.0
+text = "Start"
+
+[node name="Stop" type="Button" parent="vbox/HBoxContainer"]
+margin_left = 45.0
+margin_right = 85.0
+margin_bottom = 20.0
+text = "Stop"
+
+[node name="Seal" type="Button" parent="vbox/HBoxContainer"]
+margin_left = 89.0
+margin_right = 127.0
+margin_bottom = 20.0
+text = "Seal"
+
+[node name="Ping" type="Button" parent="vbox/HBoxContainer"]
+margin_left = 131.0
+margin_right = 170.0
+margin_bottom = 20.0
+text = "Ping"
+
+[node name="Peers" type="Button" parent="vbox/HBoxContainer"]
+margin_left = 174.0
+margin_right = 256.0
+margin_bottom = 20.0
+text = "Print peers"
+
+[node name="TextEdit" type="TextEdit" parent="vbox"]
+margin_top = 52.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_vertical = 3
+readonly = true
+[connection signal="pressed" from="vbox/HBoxContainer/Start" to="." method="start"]
+[connection signal="pressed" from="vbox/HBoxContainer/Stop" to="." method="stop"]
+[connection signal="pressed" from="vbox/HBoxContainer/Seal" to="." method="_on_Seal_pressed"]
+[connection signal="pressed" from="vbox/HBoxContainer/Ping" to="." method="ping"]
+[connection signal="pressed" from="vbox/HBoxContainer/Peers" to="." method="_on_Peers_pressed"]
