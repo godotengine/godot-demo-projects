@@ -20,28 +20,23 @@ signal game_ended()
 signal game_error(what)
 
 # Callback from SceneTree
-func _player_connected(_id):
-	# This is not used in this demo, because _connected_ok is called for clients
-	# on success and will do the job.
-	pass
+func _player_connected(id):
+	# Registration of a client beings here, tell the connected player that we are here
+	rpc_id(id, "register_player", player_name)
 
 # Callback from SceneTree
 func _player_disconnected(id):
-	if get_tree().is_network_server():
-		if has_node("/root/world"): # Game is in progress
+	if has_node("/root/world"): # Game is in progress
+		if get_tree().is_network_server():
 			emit_signal("game_error", "Player " + players[id] + " disconnected")
 			end_game()
-		else: # Game is not in progress
-			# If we are the server, send to the new dude all the already registered players
-			unregister_player(id)
-			for p_id in players:
-				# Erase in the server
-				rpc_id(p_id, "unregister_player", id)
+	else: # Game is not in progress
+		# Unregister this player
+		unregister_player(id)
 
 # Callback from SceneTree, only for clients (not server)
 func _connected_ok():
-	# Registration of a client beings here, tell everyone that we are here
-	rpc("register_player", get_tree().get_network_unique_id(), player_name)
+	# We just connected to a server
 	emit_signal("connection_succeeded")
 
 # Callback from SceneTree, only for clients (not server)
@@ -56,18 +51,13 @@ func _connected_fail():
 
 # Lobby management functions
 
-remote func register_player(id, new_player_name):
-	if get_tree().is_network_server():
-		# If we are the server, let everyone know about the new player
-		rpc_id(id, "register_player", 1, player_name) # Send myself to new dude
-		for p_id in players: # Then, for each remote player
-			rpc_id(id, "register_player", p_id, players[p_id]) # Send player to new dude
-			rpc_id(p_id, "register_player", id, new_player_name) # Send new dude to player
-
+remote func register_player(new_player_name):
+	var id = get_tree().get_rpc_sender_id()
+	print(id)
 	players[id] = new_player_name
 	emit_signal("player_list_changed")
 
-remote func unregister_player(id):
+func unregister_player(id):
 	players.erase(id)
 	emit_signal("player_list_changed")
 
