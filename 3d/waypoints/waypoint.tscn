@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://waypoint.gd" type="Script" id=1]
+[ext_resource path="res://waypoint.svg" type="Texture" id=2]
+[ext_resource path="res://noto_sans_regular.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[node name="Waypoint" type="Control"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+text = "Blue Waypoint"
+
+[node name="Label" type="Label" parent="."]
+margin_left = -200.0
+margin_top = -37.0
+margin_right = 200.0
+margin_bottom = -14.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.501961 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Marker" type="TextureRect" parent="."]
+margin_left = -21.0
+margin_top = -25.0
+margin_right = 107.0
+margin_bottom = 103.0
+rect_scale = Vector2( 0.15, 0.15 )
+rect_pivot_offset = Vector2( 13, 17 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "An high-resolution texture is used and scaled down so the demo looks good at higher resolutions."
+}
