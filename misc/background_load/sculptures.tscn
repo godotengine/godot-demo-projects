@@ -122,11 +122,19 @@ texture = ExtResource( 7 )
 autoplay = "colorcycle"
 anims/colorcycle = SubResource( 1 )
 
-[node name="switch" type="Button" parent="."]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 137.0
-margin_bottom = 26.0
-text = "Switch to Paintings"
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 512, 300 )
+current = true
 
-[connection signal="pressed" from="switch" to="." method="_on_switch_pressed"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="switch" type="Button" parent="CanvasLayer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 142.0
+margin_bottom = 30.0
+text = "Switch to Paintings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="CanvasLayer/switch" to="." method="_on_switch_pressed"]

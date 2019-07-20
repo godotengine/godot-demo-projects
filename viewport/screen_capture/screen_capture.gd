@@ -14,7 +14,7 @@ func _on_button_pressed():
 
 	# Retrieve the captured image
 	var img = get_viewport().get_texture().get_data()
-  
+
 	# Flip it on the y-axis (because it's flipped)
 	img.flip_y()
 

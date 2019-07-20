@@ -23,13 +23,20 @@ size = 20
 font_data = ExtResource( 5 )
 
 [node name="Panel" type="Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 1 )
 __meta__ = {
-"__editor_plugin_screen__": "2D"
+"__editor_plugin_screen__": "2D",
+"_edit_use_anchors_": false
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
@@ -49,22 +56,24 @@ bbcode_enabled = true
 bbcode_text = "[b][u]Rich Text Test[/u][/b]
 
 RichTextLabel is a flexible way of adding text to your game, with support for [i]italics[/i], [b]bold[/b] and [i][b]both[/b][/i]. [u]Underline[/u] works too.
-It is also possible to include [img]res://unicorn_icon.png[/img] custom images, as well as [color=aqua][url=https://godotengine.org]Custom URLs[/url][/color].
+It is also possible to include [img]res://unicorn_icon.png[/img] custom images, as well as [color=aqua][url=https://godotengine.org]custom URLs[/url][/color].
 
 Left alignment is default,[center]but center alignment is supported,[/center][right]as well as right alignment.[/right]
-[fill]Fill alignment is also supported, and allows writing very long text that will end up fitting the horizontal space entirely with  words of joy.[/fill]
+[fill]Fill alignment is also supported, and allows writing very long text that will end up fitting the horizontal space entirely with words of joy.[/fill]
 
-For full reference [color=aqua][url=https://docs.godotengine.org/en/latest/tutorials/gui/bbcode_in_richtextlabel.html]check the documentation.[/url][/color]
+For full reference, [color=aqua][url=https://docs.godotengine.org/en/latest/tutorials/gui/bbcode_in_richtextlabel.html]check the documentation.[/url][/color]
 "
 text = "Rich Text Test
 
 RichTextLabel is a flexible way of adding text to your game, with support for italics, bold and both. Underline works too.
-It is also possible to include  custom images, as well as Custom URLs.
+It is also possible to include  custom images, as well as custom URLs.
 
 Left alignment is default,but center alignment is supported,as well as right alignment.
-Fill alignment is also supported, and allows writing very long text that will end up fitting the horizontal space entirely with  words of joy.
+Fill alignment is also supported, and allows writing very long text that will end up fitting the horizontal space entirely with words of joy.
 
-For full reference check the documentation.
+For full reference, check the documentation.
 "
-
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="meta_clicked" from="RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]

@@ -99,6 +99,6 @@ func _ready():
 		var button = get_node("bindings").get_node(action).get_node("Button")
 		button.text = OS.get_scancode_string(input_event.scancode)
 		button.connect("pressed", self, "wait_for_input", [action])
-	
+
 	# Do not start processing input until a button is pressed
 	set_process_input(false)

@@ -7,13 +7,20 @@
 [ext_resource path="res://hello_en.wav" type="AudioStream" id=5]
 
 [node name="Panel" type="Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 1 )
 __meta__ = {
-"__editor_plugin_screen__": "2D"
+"__editor_plugin_screen__": "2D",
+"_edit_use_anchors_": false
 }
 
 [node name="english" type="Button" parent="."]
@@ -94,7 +101,6 @@ texture = ExtResource( 4 )
 
 [node name="audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
-
 [connection signal="pressed" from="english" to="." method="_on_english_pressed"]
 [connection signal="pressed" from="spanish" to="." method="_on_spanish_pressed"]
 [connection signal="pressed" from="japanese" to="." method="_on_japanese_pressed"]

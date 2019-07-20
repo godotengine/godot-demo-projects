@@ -33,4 +33,4 @@ func clear_combat():
 
 func finish_combat(winner, loser):
 	emit_signal("combat_finished", winner, loser)
-	
+

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
-[ext_resource path="res://screens/combat/Combat.tscn" type="PackedScene" id=2]
-[ext_resource path="res://screens/exploration/Exploration.tscn" type="PackedScene" id=3]
+[ext_resource path="res://screens/exploration/Exploration.tscn" type="PackedScene" id=2]
+[ext_resource path="res://screens/combat/Combat.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=1]
 length = 0.5
@@ -30,13 +30,19 @@ anims/fade = SubResource( 1 )
 [node name="Transition" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="Transition"]
-margin_right = 1280.0
-margin_bottom = 720.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 mouse_filter = 1
 color = Color( 0.0703125, 0.0703125, 0.0703125, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Combat" parent="." instance=ExtResource( 2 )]
+[node name="Combat" parent="." instance=ExtResource( 3 )]
 visible = false
 
-[node name="Exploration" parent="." instance=ExtResource( 3 )]
+[node name="Exploration" parent="." instance=ExtResource( 2 )]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 640, 360 )
+current = true

@@ -4,14 +4,22 @@
 [ext_resource path="res://godot.png" type="Texture" id=2]
 
 [node name="main" type="Control"]
-margin_right = 800.0
-margin_bottom = 600.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -384.0
+margin_right = 512.0
+margin_bottom = 384.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="trans" type="VBoxContainer" parent="."]
-editor/display_folded = true
 margin_left = 56.0
 margin_top = 288.0
 margin_right = 129.0
@@ -118,7 +126,6 @@ toggle_mode = true
 text = "back"
 
 [node name="eases" type="VBoxContainer" parent="."]
-editor/display_folded = true
 margin_left = 152.0
 margin_top = 288.0
 margin_right = 215.0
@@ -162,7 +169,6 @@ toggle_mode = true
 text = "out_in"
 
 [node name="modes" type="VBoxContainer" parent="."]
-editor/display_folded = true
 margin_left = 240.0
 margin_top = 288.0
 margin_right = 317.0
@@ -243,15 +249,18 @@ text = "pause"
 
 [node name="colors" type="HBoxContainer" parent="."]
 margin_left = 352.0
-margin_top = 288.0
-margin_right = 858.0
-margin_bottom = 626.0
+margin_top = 273.0
+margin_right = 1008.0
+margin_bottom = 753.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 custom_constants/separation = 40
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="color_from" type="VBoxContainer" parent="colors"]
-margin_right = 290.0
+margin_right = 308.0
 margin_bottom = 480.0
 rect_min_size = Vector2( 0, 320 )
 size_flags_horizontal = 2
@@ -266,15 +275,15 @@ text = "Color From:"
 
 [node name="picker" type="ColorPicker" parent="colors/color_from"]
 margin_top = 18.0
-margin_right = 290.0
+margin_right = 308.0
 margin_bottom = 480.0
 rect_min_size = Vector2( 0, 320 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
 [node name="color_to" type="VBoxContainer" parent="colors"]
-margin_left = 330.0
-margin_right = 620.0
+margin_left = 348.0
+margin_right = 656.0
 margin_bottom = 480.0
 rect_min_size = Vector2( 0, 320 )
 size_flags_horizontal = 2
@@ -289,7 +298,7 @@ text = "Color To:"
 
 [node name="picker" type="ColorPicker" parent="colors/color_to"]
 margin_top = 18.0
-margin_right = 290.0
+margin_right = 308.0
 margin_bottom = 480.0
 rect_min_size = Vector2( 0, 320 )
 size_flags_horizontal = 2
@@ -300,10 +309,14 @@ repeat = true
 playback/repeat = true
 
 [node name="area" type="Panel" parent="tween"]
-margin_left = 32.0
-margin_top = 32.0
-margin_right = 896.0
-margin_bottom = 232.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -420.0
+margin_top = -352.0
+margin_right = 444.0
+margin_bottom = -152.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
@@ -327,12 +340,18 @@ position = Vector2( 736, 0 )
 texture = ExtResource( 2 )
 
 [node name="timeline" type="HSlider" parent="."]
-margin_left = 48.0
-margin_top = 240.0
-margin_right = 880.0
-margin_bottom = 256.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -416.0
+margin_top = -144.0
+margin_right = 416.0
+margin_bottom = -128.0
 size_flags_horizontal = 2
 value = 1.0
-
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="tween_step" from="tween" to="." method="_on_tween_step"]
 [connection signal="value_changed" from="timeline" to="." method="_on_timeline_value_changed"]
