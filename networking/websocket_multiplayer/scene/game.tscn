@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://script/game.gd" type="Script" id=1]
+
+[node name="Game" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
+margin_right = 510.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+__meta__ = {
+
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 514.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+__meta__ = {
+
+}
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_right = 510.0
+margin_bottom = 14.0
+text = "Players:"
+__meta__ = {
+
+}
+
+[node name="ItemList" type="ItemList" parent="HBoxContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 510.0
+margin_bottom = 576.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+same_column_width = true
+__meta__ = {
+
+}
+
+[node name="Action" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_top = 580.0
+margin_right = 510.0
+margin_bottom = 600.0
+disabled = true
+text = "Do Action!"
+__meta__ = {
+
+}
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Action" to="." method="_on_Action_pressed"]
