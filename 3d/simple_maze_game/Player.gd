@@ -1,21 +1,20 @@
 extends KinematicBody
 
 # NOTE: most of this is the same as kinematic character demo
-# The biggest changes are the mouse look and updating the labels,
-# other than that, everything is basically the same.
+# The biggest changes are the mouse look, updating the labels,
+# the lack of gravity, and the inability to jump.
+# other than those things, everything else is basically the same.
 
 # Member variables
-var grav = -9.8
 var vel = Vector3()
 const MAX_SPEED = 3
-const JUMP_SPEED = 4
 const ACCEL= 1.5
 const DEACCEL= 10
 const MAX_SLOPE_ANGLE = 30
 
 var camera
 var camera_holder
-const MOUSE_SENSITIVITY = 0.1
+const MOUSE_SENSITIVITY = 0.002
 
 # The key node and AI node are needed for the GUI
 var key
@@ -58,8 +57,6 @@ func _physics_process(delta):
 	dir.y = 0
 	dir = dir.normalized()
 	
-	vel.y += delta*grav
-	
 	var hvel = vel
 	hvel.y = 0
 	
@@ -75,10 +72,7 @@ func _physics_process(delta):
 	vel.x = hvel.x
 	vel.z = hvel.z
 	
-	vel = move_and_slide(vel,Vector3(0,1,0))
-	
-	if is_on_floor() and Input.is_key_pressed(KEY_SPACE):
-		vel.y = JUMP_SPEED
+	vel = move_and_slide(vel, Vector3.UP)
 	
 	# Update the gui
 	label_distance_robot.text = str(round(self.global_transform.origin.distance_to(AI.agent.global_transform.origin)))
@@ -91,8 +85,8 @@ func _input(event):
 		
 		# We rotate the camera holder on one axis so the eular angles do not get messed up.
 		# If we rotate the camera on both the X and Y axis, then the camera rotates strangely.
-		camera_holder.rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY * -1))
-		camera.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY * -1))
+		camera_holder.rotate_y(event.relative.x * MOUSE_SENSITIVITY * -1)
+		camera.rotate_x(event.relative.y * MOUSE_SENSITIVITY * -1)
 		
 		# We need to clamp the camera's rotation so we cannot rotate ourselves upside down
 		var camera_rot = camera.get_rotation_degrees()

@@ -1,8 +1,8 @@
 extends Navigation
 
 # How fast we are moving
-const SPEED_NORMAL = 1
-const SPEED_RUN = 2
+const SPEED_NORMAL = 1.5
+const SPEED_RUN = 3
 
 # The path
 var route_path = []
@@ -65,7 +65,7 @@ func _process(delta):
 		else:
 			to_walk *= SPEED_NORMAL
 		
-		var to_watch = Vector3(0, 1, 0)
+		var to_watch = Vector3.UP
 		while to_walk > 0 and route_path.size() >= 2:
 			var pfrom = route_path[route_path.size() - 1]
 			var pto = route_path[route_path.size() - 2]
@@ -86,7 +86,7 @@ func _process(delta):
 		var t = Transform()
 		t.origin = atpos
 		t.origin.y = 0
-		t=t.looking_at(atpos + atdir, Vector3(0, 1, 0))
+		t=t.looking_at(atpos + atdir, Vector3.UP)
 		agent.global_transform = t
 		
 		# If there is less than two points on the path, then we've reached the end of the path

@@ -1,0 +1,115 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://AI.gd" type="Script" id=1]
+
+[sub_resource type="GDScript" id=3]
+script/source = "tool
+extends Object
+func e():
+	return 1.25
+"
+
+[sub_resource type="SphereMesh" id=4]
+radius = 0.7
+height = 1.2
+radial_segments = 32
+rings = 16
+script = SubResource( 3 )
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.105469, 0.105469, 0.105469, 1 )
+roughness = 0.0
+
+[sub_resource type="GDScript" id=6]
+script/source = "tool
+extends Object
+func e():
+	return 0.75
+"
+
+[sub_resource type="CubeMesh" id=7]
+size = Vector3( 0.75, 2, 0.75 )
+script = SubResource( 6 )
+
+[sub_resource type="SpatialMaterial" id=8]
+roughness = 0.0
+
+[sub_resource type="GDScript" id=9]
+script/source = "tool
+extends Object
+func e():
+	return 0.5
+"
+
+[sub_resource type="PrismMesh" id=10]
+size = Vector3( 0.5, 0.5, 0.5 )
+script = SubResource( 9 )
+
+[sub_resource type="SpatialMaterial" id=11]
+albedo_color = Color( 1, 0, 0, 1 )
+roughness = 0.0
+emission_enabled = true
+emission = Color( 1, 0, 0, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SphereShape" id=12]
+radius = 0.6
+
+[sub_resource type="SphereShape" id=13]
+radius = 3.0
+
+[node name="AI" type="Navigation"]
+editor/display_folded = true
+script = ExtResource( 1 )
+
+[node name="Agent" type="Spatial" parent="."]
+editor/display_folded = true
+
+[node name="Mesh" type="Spatial" parent="Agent"]
+editor/display_folded = true
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.15913, 0 )
+
+[node name="Wheel" type="MeshInstance" parent="Agent/Mesh"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26639, 0 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="Body" type="MeshInstance" parent="Agent/Mesh"]
+transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 1.3589, -0.47622 )
+mesh = SubResource( 7 )
+material/0 = SubResource( 8 )
+
+[node name="Arm_L" type="MeshInstance" parent="Agent/Mesh"]
+transform = Transform( 0.5, 0, 0, 0, 0.408737, -0.419224, 0, 0.628836, 0.272491, -0.55, 1.3589, -1.22765 )
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="Arm_R" type="MeshInstance" parent="Agent/Mesh"]
+transform = Transform( 0.5, 0, 0, 0, 0.408737, -0.419224, 0, 0.628836, 0.272491, 0.55, 1.3589, -1.22765 )
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="Head" type="MeshInstance" parent="Agent/Mesh"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.86932, -1.04698 )
+mesh = SubResource( 10 )
+material/0 = SubResource( 11 )
+
+[node name="GrabArea" type="Area" parent="Agent"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.729277, -0.871535 )
+input_ray_pickable = false
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="Agent/GrabArea"]
+shape = SubResource( 12 )
+
+[node name="VisionArea" type="Area" parent="Agent"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.729277, -0.71547 )
+input_ray_pickable = false
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="Agent/VisionArea"]
+shape = SubResource( 13 )

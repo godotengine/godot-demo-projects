@@ -1,9 +1,9 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://MazeGame.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://AI.gd" type="Script" id=3]
-[ext_resource path="res://Key.gd" type="Script" id=4]
+[ext_resource path="res://AI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Key.tscn" type="PackedScene" id=4]
 
 [sub_resource type="GDScript" id=1]
 script/source = "tool
@@ -20,7 +20,6 @@ ambient_light_sky_contribution = 0.0
 fog_color = Color( 0.152344, 0.152344, 0.152344, 1 )
 fog_depth_begin = 0.2
 tonemap_mode = 2
-ssao_enabled = true
 ssao_light_affect = 1.0
 ssao_blur = 1
 glow_enabled = true
@@ -35,134 +34,6 @@ adjustment_brightness = 0.8
 adjustment_contrast = 1.2
 script = SubResource( 1 )
 
-[sub_resource type="GDScript" id=4]
-script/source = "tool
-extends Object
-func e():
-	return 1.25
-"
-
-[sub_resource type="SphereMesh" id=5]
-radius = 0.7
-height = 1.2
-radial_segments = 32
-rings = 16
-script = SubResource( 4 )
-
-[sub_resource type="SpatialMaterial" id=6]
-albedo_color = Color( 0.105469, 0.105469, 0.105469, 1 )
-roughness = 0.0
-
-[sub_resource type="GDScript" id=7]
-script/source = "tool
-extends Object
-func e():
-	return 0.75
-"
-
-[sub_resource type="CubeMesh" id=8]
-size = Vector3( 0.75, 2, 0.75 )
-script = SubResource( 7 )
-
-[sub_resource type="SpatialMaterial" id=9]
-roughness = 0.0
-
-[sub_resource type="GDScript" id=10]
-script/source = "tool
-extends Object
-func e():
-	return 0.5
-"
-
-[sub_resource type="PrismMesh" id=11]
-size = Vector3( 0.5, 0.5, 0.5 )
-script = SubResource( 10 )
-
-[sub_resource type="SpatialMaterial" id=12]
-albedo_color = Color( 1, 0, 0, 1 )
-roughness = 0.0
-emission_enabled = true
-emission = Color( 1, 0, 0, 1 )
-emission_energy = 1.0
-emission_operator = 0
-emission_on_uv2 = false
-
-[sub_resource type="SphereShape" id=13]
-radius = 0.6
-
-[sub_resource type="SphereShape" id=14]
-radius = 3.0
-
-[sub_resource type="GDScript" id=15]
-script/source = "tool
-extends Object
-func e():
-	return .5
-"
-
-[sub_resource type="GDScript" id=16]
-script/source = "tool
-extends Object
-func e():
-	return 16
-"
-
-[sub_resource type="CylinderMesh" id=17]
-top_radius = 0.2
-bottom_radius = 0.2
-height = 3.0
-radial_segments = 16
-rings = 2
-script = SubResource( 16 )
-
-[sub_resource type="GDScript" id=18]
-script/source = "tool
-extends Object
-func e():
-	return .2
-"
-
-[sub_resource type="SpatialMaterial" id=19]
-albedo_color = Color( 1, 0.849548, 0.335938, 1 )
-metallic = 0.2
-roughness = 0.1
-script = SubResource( 18 )
-
-[sub_resource type="GDScript" id=20]
-script/source = "tool
-extends Object
-func e():
-	return 1.2
-"
-
-[sub_resource type="SphereMesh" id=21]
-radius = 0.6
-height = 1.2
-radial_segments = 32
-rings = 16
-script = SubResource( 20 )
-
-[sub_resource type="GDScript" id=22]
-script/source = "tool
-extends Object
-func e():
-	return .2
-"
-
-[sub_resource type="PrismMesh" id=23]
-size = Vector3( 0.5, 0.5, 0.2 )
-script = SubResource( 22 )
-
-[sub_resource type="GDScript" id=24]
-script/source = "tool
-extends Object
-func e():
-	return 90
-"
-
-[sub_resource type="BoxShape" id=25]
-extents = Vector3( 0.5, 1, 0.5 )
-
 [node name="MazeGame" type="Spatial"]
 script = ExtResource( 1 )
 Generate_imperfect_maze = true
@@ -175,94 +46,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.61495, 9.53674e-07, 2.44451
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
 
-[node name="AI" type="Navigation" parent="."]
-editor/display_folded = true
-script = ExtResource( 3 )
+[node name="AI" parent="." instance=ExtResource( 3 )]
 
-[node name="Agent" type="Spatial" parent="AI"]
-editor/display_folded = true
-
-[node name="Mesh" type="Spatial" parent="AI/Agent"]
-editor/display_folded = true
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.15913, 0 )
-
-[node name="Wheel" type="MeshInstance" parent="AI/Agent/Mesh"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26639, 0 )
-mesh = SubResource( 5 )
-material/0 = SubResource( 6 )
-
-[node name="Body" type="MeshInstance" parent="AI/Agent/Mesh"]
-transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 1.3589, -0.47622 )
-mesh = SubResource( 8 )
-material/0 = SubResource( 9 )
-
-[node name="Arm_L" type="MeshInstance" parent="AI/Agent/Mesh"]
-transform = Transform( 0.5, 0, 0, 0, 0.408737, -0.419224, 0, 0.628836, 0.272491, -0.55, 1.3589, -1.22765 )
-mesh = SubResource( 8 )
-material/0 = null
-
-[node name="Arm_R" type="MeshInstance" parent="AI/Agent/Mesh"]
-transform = Transform( 0.5, 0, 0, 0, 0.408737, -0.419224, 0, 0.628836, 0.272491, 0.55, 1.3589, -1.22765 )
-mesh = SubResource( 8 )
-material/0 = null
-
-[node name="Head" type="MeshInstance" parent="AI/Agent/Mesh"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.86932, -1.04698 )
-mesh = SubResource( 11 )
-material/0 = SubResource( 12 )
-
-[node name="GrabArea" type="Area" parent="AI/Agent"]
-editor/display_folded = true
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.729277, -0.871535 )
-input_ray_pickable = false
-monitorable = false
-
-[node name="CollisionShape" type="CollisionShape" parent="AI/Agent/GrabArea"]
-shape = SubResource( 13 )
-
-[node name="VisionArea" type="Area" parent="AI/Agent"]
-editor/display_folded = true
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.729277, -0.71547 )
-input_ray_pickable = false
-monitorable = false
-
-[node name="CollisionShape" type="CollisionShape" parent="AI/Agent/VisionArea"]
-shape = SubResource( 14 )
-
-[node name="Key" type="Spatial" parent="."]
-editor/display_folded = true
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.51503 )
-script = ExtResource( 4 )
-
-[node name="Mesh" type="Spatial" parent="Key"]
-editor/display_folded = true
-transform = Transform( 0.459401, -0.197359, 0, 0.197359, 0.459401, 0, 0, 0, 0.5, 0.0392989, 0.832543, 0 )
-script = SubResource( 15 )
-
-[node name="Key_length" type="MeshInstance" parent="Key/Mesh"]
-mesh = SubResource( 17 )
-material/0 = SubResource( 19 )
-
-[node name="Key_handle" type="MeshInstance" parent="Key/Mesh"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26893, 0 )
-mesh = SubResource( 21 )
-material/0 = SubResource( 19 )
-
-[node name="Key_tooth" type="MeshInstance" parent="Key/Mesh"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.386283, -0.840534, 0 )
-mesh = SubResource( 23 )
-material/0 = SubResource( 19 )
-script = SubResource( 24 )
-
-[node name="Key_tooth2" type="MeshInstance" parent="Key/Mesh"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.386283, -1.24462, 0 )
-mesh = SubResource( 23 )
-material/0 = SubResource( 19 )
-script = SubResource( 24 )
-
-[node name="Area" type="Area" parent="Key"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.946537, 0 )
-input_ray_pickable = false
-
-[node name="CollisionShape" type="CollisionShape" parent="Key/Area"]
-shape = SubResource( 25 )
+[node name="Key" parent="." instance=ExtResource( 4 )]

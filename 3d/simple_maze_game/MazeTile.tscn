@@ -1,14 +1,14 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://MazeTile.gd" type="Script" id=1]
-[ext_resource path="res://rock_albedo.jpg" type="Texture" id=2]
-[ext_resource path="res://rock_ao.jpg" type="Texture" id=3]
-[ext_resource path="res://rock_metal.jpg" type="Texture" id=4]
-[ext_resource path="res://rock_rough.jpg" type="Texture" id=5]
-[ext_resource path="res://sand_albedo.jpg" type="Texture" id=6]
-[ext_resource path="res://sand_metal.jpg" type="Texture" id=7]
-[ext_resource path="res://sand_normal.jpg" type="Texture" id=8]
-[ext_resource path="res://sand_rough.jpg" type="Texture" id=9]
+[ext_resource path="res://Images/rock_albedo.jpg" type="Texture" id=2]
+[ext_resource path="res://Images/rock_ao.jpg" type="Texture" id=3]
+[ext_resource path="res://Images/rock_metal.jpg" type="Texture" id=4]
+[ext_resource path="res://Images/rock_rough.jpg" type="Texture" id=5]
+[ext_resource path="res://Images/sand_albedo.jpg" type="Texture" id=6]
+[ext_resource path="res://Images/sand_metal.jpg" type="Texture" id=7]
+[ext_resource path="res://Images/sand_normal.jpg" type="Texture" id=8]
+[ext_resource path="res://Images/sand_rough.jpg" type="Texture" id=9]
 
 [sub_resource type="GDScript" id=1]
 script/source = "tool
@@ -88,38 +88,27 @@ normal_scale = 0.4
 normal_texture = ExtResource( 4 )
 script = SubResource( 10 )
 
-[sub_resource type="GDScript" id=17]
+[sub_resource type="GDScript" id=12]
 script/source = "tool
 extends Object
 func e():
 	return .85
 "
 
-[sub_resource type="BoxShape" id=18]
+[sub_resource type="BoxShape" id=13]
 extents = Vector3( 0.05, 1, 0.85 )
-script = SubResource( 17 )
+script = SubResource( 12 )
 
-[sub_resource type="GDScript" id=19]
-script/source = "tool
-extends Object
-func e():
-	return 0.01
-"
-
-[sub_resource type="BoxShape" id=20]
-extents = Vector3( 0.5, 0.5, 0.01 )
-script = SubResource( 19 )
-
-[sub_resource type="GDScript" id=12]
+[sub_resource type="GDScript" id=16]
 script/source = "tool
 extends Object
 func e():
 	return 0.15
 "
 
-[sub_resource type="BoxShape" id=13]
+[sub_resource type="BoxShape" id=17]
 extents = Vector3( 0.15, 1, 0.15 )
-script = SubResource( 12 )
+script = SubResource( 16 )
 
 [node name="MazeTile" type="Spatial"]
 script = ExtResource( 1 )
@@ -190,36 +179,32 @@ editor/display_folded = true
 
 [node name="Wall_West_CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.95, 1, 0 )
-shape = SubResource( 18 )
+shape = SubResource( 13 )
 
 [node name="Wall_East_CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.95, 1, 0 )
-shape = SubResource( 18 )
+shape = SubResource( 13 )
 
 [node name="Wall_South_CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, -0.95 )
-shape = SubResource( 18 )
+shape = SubResource( 13 )
 
 [node name="Wall_North_CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0.95 )
-shape = SubResource( 18 )
-
-[node name="Floor_CollisionShape" type="CollisionShape" parent="StaticBody"]
-transform = Transform( 2, -3.49691e-07, -6.03751e-11, -6.03751e-11, -0.000690611, 2, -3.49691e-07, -2, -0.000690611, 0, 0, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 13 )
 
 [node name="Pillar_NE_CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1 )
-shape = SubResource( 13 )
+shape = SubResource( 17 )
 
 [node name="Pillar_NW_CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1 )
-shape = SubResource( 13 )
+shape = SubResource( 17 )
 
 [node name="Pillar_SE_CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -1 )
-shape = SubResource( 13 )
+shape = SubResource( 17 )
 
 [node name="Pillar_SW_CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -1 )
-shape = SubResource( 13 )
+shape = SubResource( 17 )
