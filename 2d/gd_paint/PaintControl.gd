@@ -256,6 +256,4 @@ func save_picture(path):
 	
 	# Save the image with the passed in path we got from the save dialog
 	cropped_image.save_png(path)
-	
-	return
 
