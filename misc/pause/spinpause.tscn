@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://spinpause.gd" type="Script" id=1]
+[ext_resource path="res://pause_button.gd" type="Script" id=1]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -21,7 +21,6 @@ tracks/0/keys = {
 }
 
 [node name="pause_scene" type="Spatial"]
-script = ExtResource( 1 )
 
 [node name="cube" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
@@ -40,43 +39,17 @@ anims/spin = SubResource( 2 )
 transform = Transform( 0.792992, 0.251051, -0.555101, 0, 0.911149, 0.412078, 0.609232, -0.326775, 0.722534, -3.05357, 1.80053, 3.64099 )
 spot_range = 6.0
 
-[node name="pause" type="Button" parent="."]
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 120.0
-margin_bottom = 56.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-text = "PAUSE!"
-
-[node name="pause_popup" type="PopupPanel" parent="."]
+[node name="pause_button" type="Button" parent="."]
 pause_mode = 2
-self_modulate = Color( 1, 1, 1, 0.7 )
-margin_left = 185.0
-margin_top = 72.0
-margin_right = 638.0
-margin_bottom = 433.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-
-[node name="text" type="Label" parent="pause_popup"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 449.0
-margin_bottom = 357.0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-text = "The game has been paused! Nodes are not processing anymore, but this popup can still process!"
-autowrap = true
-
-[node name="unpause" type="Button" parent="pause_popup"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 449.0
-margin_bottom = 357.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-text = "UN-PAUSE!"
-
-[connection signal="pressed" from="pause" to="." method="_on_pause_pressed"]
-[connection signal="pressed" from="pause_popup/unpause" to="." method="_on_unpause_pressed"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = 150.0
+margin_right = 125.0
+margin_bottom = 200.0
+rect_pivot_offset = Vector2( 123, 25 )
+toggle_mode = true
+text = "Pause"
+script = ExtResource( 1 )
