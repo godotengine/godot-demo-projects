@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://gui_3d.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -16,16 +16,8 @@ flags_unshaded = true
 flags_albedo_tex_force_srgb = true
 albedo_texture = SubResource( 2 )
 
-[sub_resource type="GDScript" id=4]
-script/source = "tool
-extends Object
-func e():
-	return 0.01
-"
-
-[sub_resource type="BoxShape" id=5]
-extents = Vector3( 1.5, 1, 0.01 )
-script = SubResource( 4 )
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 1.5, 1, 0.05 )
 
 [node name="GUI_3D" type="Spatial"]
 script = ExtResource( 1 )
@@ -72,6 +64,7 @@ margin_left = 14.0
 margin_top = 118.0
 margin_right = 154.0
 margin_bottom = 143.0
+ticks_on_borders = true
 
 [node name="ColorRect" type="ColorRect" parent="Viewport/GUI/Panel"]
 margin_left = 180.0
@@ -97,6 +90,7 @@ margin_left = 260.0
 margin_top = 26.0
 margin_right = 276.0
 margin_bottom = 166.0
+ticks_on_borders = false
 
 [node name="OptionButton" type="OptionButton" parent="Viewport/GUI/Panel"]
 margin_left = 170.0
@@ -116,4 +110,4 @@ input_capture_on_drag = true
 collision_layer = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="Quad/Area"]
-shape = SubResource( 5 )
+shape = SubResource( 4 )
