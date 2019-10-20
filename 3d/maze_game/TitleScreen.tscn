@@ -1,47 +1,19 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://TitleScreen.gd" type="Script" id=1]
 [ext_resource path="res://MazeGame.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Titillium-Bold.otf" type="DynamicFontData" id=3]
 
-[sub_resource type="GDScript" id=1]
-script/source = "tool
-extends Object
-func e():
-	return 0
-"
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.380392, 0.380392, 0.380392, 1 )
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.378906, 0.378906, 0.378906, 1 )
-border_blend = true
-anti_aliasing = false
-script = SubResource( 1 )
-
-[sub_resource type="GDScript" id=3]
-script/source = "tool
-extends Object
-func e():
-	return 52
-"
-
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=8]
 size = 52
-use_filter = true
 font_data = ExtResource( 3 )
-script = SubResource( 3 )
 
-[sub_resource type="GDScript" id=5]
-script/source = "tool
-extends Object
-func e():
-	return 72
-"
-
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=5]
 size = 72
-use_filter = true
 font_data = ExtResource( 3 )
-script = SubResource( 5 )
 
 [node name="TitleScreen" type="Control"]
 margin_right = 40.0
@@ -52,23 +24,23 @@ game_scene = ExtResource( 2 )
 [node name="BGPanel" type="Panel" parent="."]
 margin_right = 1024.0
 margin_bottom = 600.0
-custom_styles/panelf = SubResource( 2 )
-custom_styles/panel = SubResource( 2 )
-custom_styles/panelnc = SubResource( 2 )
+custom_styles/panelf = SubResource( 7 )
+custom_styles/panel = SubResource( 7 )
+custom_styles/panelnc = SubResource( 7 )
 
 [node name="StartButton" type="Button" parent="."]
 margin_left = 390.0
 margin_top = 470.0
 margin_right = 629.0
 margin_bottom = 544.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 8 )
 text = "START"
 
 [node name="TitleLabel" type="Label" parent="."]
 margin_right = 1025.0
 margin_bottom = 200.0
-custom_fonts/font = SubResource( 6 )
-text = "Simple Maze Game!"
+custom_fonts/font = SubResource( 5 )
+text = "3D Maze Game!"
 align = 1
 valign = 1
 
@@ -77,7 +49,7 @@ margin_top = 140.0
 margin_right = 1717.0
 margin_bottom = 357.0
 rect_scale = Vector2( 0.6, 0.6 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 8 )
 text = "Find the key to escape the maze!
 Watch out for the robot!
 Move with WASD or arrow keys.
@@ -90,7 +62,7 @@ margin_left = 220.0
 margin_top = 320.0
 margin_right = 820.0
 margin_bottom = 372.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 8 )
 text = "Seed:"
 
 [node name="SeedLabel2" type="Label" parent="."]
@@ -100,7 +72,7 @@ margin_top = 560.0
 margin_right = 2000.0
 margin_bottom = 612.0
 rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 8 )
 text = "NOTE: the game may freeze while generating the maze"
 align = 1
 
@@ -109,5 +81,5 @@ margin_left = 220.0
 margin_top = 380.0
 margin_right = 820.0
 margin_bottom = 442.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 8 )
 placeholder_text = "Leave blank for random"

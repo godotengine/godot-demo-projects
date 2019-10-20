@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://MazeTile.gd" type="Script" id=1]
 [ext_resource path="res://Images/rock_albedo.jpg" type="Texture" id=2]
@@ -10,201 +10,142 @@
 [ext_resource path="res://Images/sand_normal.jpg" type="Texture" id=8]
 [ext_resource path="res://Images/sand_rough.jpg" type="Texture" id=9]
 
-[sub_resource type="GDScript" id=1]
-script/source = "tool
-extends Object
-func e():
-	return 1.7
-"
-
-[sub_resource type="CubeMesh" id=2]
+[sub_resource type="CubeMesh" id=24]
 size = Vector3( 0.1, 2, 1.7 )
-script = SubResource( 1 )
 
-[sub_resource type="GDScript" id=3]
-script/source = "tool
-extends Object
-func e():
-	return .3
-"
-
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=17]
 albedo_texture = ExtResource( 2 )
 metallic = 1.0
 metallic_texture = ExtResource( 4 )
 roughness_texture = ExtResource( 5 )
-roughness_texture_channel = 4
 ao_enabled = true
-ao_light_affect = 0.0
+ao_light_affect = 1.0
 ao_texture = ExtResource( 3 )
 ao_on_uv2 = false
 ao_texture_channel = 0
-script = SubResource( 3 )
 
-[sub_resource type="QuadMesh" id=5]
+[sub_resource type="QuadMesh" id=18]
 
-[sub_resource type="GDScript" id=6]
-script/source = "tool
-extends Object
-func e():
-	return .5
-"
-
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="SpatialMaterial" id=19]
 albedo_texture = ExtResource( 6 )
-metallic = 1.0
+metallic = 0.5
 metallic_texture = ExtResource( 7 )
-metallic_texture_channel = 4
 roughness_texture = ExtResource( 9 )
-roughness_texture_channel = 4
 normal_enabled = true
 normal_scale = 1.0
 normal_texture = ExtResource( 8 )
-script = SubResource( 6 )
 
-[sub_resource type="GDScript" id=8]
-script/source = "tool
-extends Object
-func e():
-	return 0.3
-"
+[sub_resource type="QuadMesh" id=20]
 
-[sub_resource type="CubeMesh" id=9]
+[sub_resource type="CubeMesh" id=21]
 size = Vector3( 0.3, 2, 0.3 )
-script = SubResource( 8 )
 
-[sub_resource type="GDScript" id=10]
-script/source = "tool
-extends Object
-func e():
-	return 0.4
-"
-
-[sub_resource type="SpatialMaterial" id=11]
-albedo_color = Color( 0.554688, 0.554688, 0.554688, 1 )
-roughness_texture_channel = 3
+[sub_resource type="SpatialMaterial" id=25]
+albedo_color = Color( 0.556863, 0.556863, 0.556863, 1 )
 normal_enabled = true
-normal_scale = 0.4
-normal_texture = ExtResource( 4 )
-script = SubResource( 10 )
+normal_scale = 1.0
+normal_texture = ExtResource( 5 )
+uv1_scale = Vector3( 1, 2, 1 )
 
-[sub_resource type="GDScript" id=12]
-script/source = "tool
-extends Object
-func e():
-	return .85
-"
-
-[sub_resource type="BoxShape" id=13]
+[sub_resource type="BoxShape" id=22]
 extents = Vector3( 0.05, 1, 0.85 )
-script = SubResource( 12 )
 
-[sub_resource type="GDScript" id=16]
-script/source = "tool
-extends Object
-func e():
-	return 0.15
-"
-
-[sub_resource type="BoxShape" id=17]
+[sub_resource type="BoxShape" id=23]
 extents = Vector3( 0.15, 1, 0.15 )
-script = SubResource( 16 )
 
 [node name="MazeTile" type="Spatial"]
 script = ExtResource( 1 )
 
 [node name="Meshes" type="Spatial" parent="."]
-editor/display_folded = true
 
 [node name="Wall_North" type="MeshInstance" parent="Meshes"]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0.95 )
+transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, 0, 1, 0.95 )
 visible = false
-mesh = SubResource( 2 )
-material/0 = SubResource( 4 )
+mesh = SubResource( 24 )
+material/0 = SubResource( 17 )
 
 [node name="Wall_South" type="MeshInstance" parent="Meshes"]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, -0.95 )
+transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, 0, 1, -0.95 )
 visible = false
-mesh = SubResource( 2 )
-material/0 = SubResource( 4 )
+mesh = SubResource( 24 )
+material/0 = SubResource( 17 )
 
 [node name="Wall_East" type="MeshInstance" parent="Meshes"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.95, 1, 0 )
 visible = false
-mesh = SubResource( 2 )
-material/0 = SubResource( 4 )
+mesh = SubResource( 24 )
+material/0 = SubResource( 17 )
 
 [node name="Wall_West" type="MeshInstance" parent="Meshes"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.95, 1, 0 )
 visible = false
-mesh = SubResource( 2 )
-material/0 = SubResource( 4 )
+mesh = SubResource( 24 )
+material/0 = SubResource( 17 )
 
 [node name="Floor" type="MeshInstance" parent="Meshes"]
-transform = Transform( 2, -3.49691e-07, -6.03751e-11, -6.03751e-11, -0.000690611, 2, -3.49691e-07, -2, -0.000690611, 0, 0, 0 )
-mesh = SubResource( 5 )
-material/0 = SubResource( 7 )
+transform = Transform( 2, -3.49691e-007, -6.03751e-011, -6.03751e-011, -0.000690611, 2, -3.49691e-007, -2, -0.000690611, 0, 0, 0 )
+mesh = SubResource( 18 )
+material/0 = SubResource( 19 )
 
 [node name="Ceiling" type="MeshInstance" parent="Meshes"]
-transform = Transform( 2, -1.42109e-14, -6.03751e-11, -6.03751e-11, -0.000690611, -2, -1.42109e-14, 2, -0.000690611, 0, 1.96694, 0 )
-mesh = SubResource( 5 )
-material/0 = SubResource( 4 )
+transform = Transform( 2, -1.42109e-014, -6.03751e-011, -6.03751e-011, -0.000690611, -2, -1.42109e-014, 2, -0.000690611, 0, 1.96694, 0 )
+mesh = SubResource( 20 )
+material/0 = SubResource( 17 )
 
 [node name="Pillar_NE" type="MeshInstance" parent="Meshes"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1 )
 visible = false
-mesh = SubResource( 9 )
-material/0 = SubResource( 11 )
+mesh = SubResource( 21 )
+material/0 = SubResource( 25 )
 
 [node name="Pillar_NW" type="MeshInstance" parent="Meshes"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1 )
 visible = false
-mesh = SubResource( 9 )
-material/0 = SubResource( 11 )
+mesh = SubResource( 21 )
+material/0 = SubResource( 25 )
 
 [node name="Pillar_SE" type="MeshInstance" parent="Meshes"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -1 )
 visible = false
-mesh = SubResource( 9 )
-material/0 = SubResource( 11 )
+mesh = SubResource( 21 )
+material/0 = SubResource( 25 )
 
 [node name="Pillar_SW" type="MeshInstance" parent="Meshes"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -1 )
 visible = false
-mesh = SubResource( 9 )
-material/0 = SubResource( 11 )
+mesh = SubResource( 21 )
+material/0 = SubResource( 25 )
 
 [node name="StaticBody" type="StaticBody" parent="."]
-editor/display_folded = true
 
 [node name="Wall_West_CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.95, 1, 0 )
-shape = SubResource( 13 )
+shape = SubResource( 22 )
 
 [node name="Wall_East_CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.95, 1, 0 )
-shape = SubResource( 13 )
+shape = SubResource( 22 )
 
 [node name="Wall_South_CollisionShape" type="CollisionShape" parent="StaticBody"]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, -0.95 )
-shape = SubResource( 13 )
+transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, 0, 1, -0.95 )
+shape = SubResource( 22 )
 
 [node name="Wall_North_CollisionShape" type="CollisionShape" parent="StaticBody"]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0.95 )
-shape = SubResource( 13 )
+transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, 0, 1, 0.95 )
+shape = SubResource( 22 )
 
 [node name="Pillar_NE_CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1 )
-shape = SubResource( 17 )
+shape = SubResource( 23 )
 
 [node name="Pillar_NW_CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1 )
-shape = SubResource( 17 )
+shape = SubResource( 23 )
 
 [node name="Pillar_SE_CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -1 )
-shape = SubResource( 17 )
+shape = SubResource( 23 )
 
 [node name="Pillar_SW_CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -1 )
-shape = SubResource( 17 )
+shape = SubResource( 23 )

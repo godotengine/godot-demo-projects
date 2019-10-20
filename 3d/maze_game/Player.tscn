@@ -1,43 +1,25 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Titillium-Bold.otf" type="DynamicFontData" id=2]
 [ext_resource path="res://Crosshair.png" type="Texture" id=3]
 
-[sub_resource type="GDScript" id=1]
-script/source = "tool
-extends Object
-func e():
-	return 0.5
-"
-
-[sub_resource type="CapsuleShape" id=2]
+[sub_resource type="CapsuleShape" id=6]
 radius = 0.3
 height = 0.5
-script = SubResource( 1 )
 
-[sub_resource type="GDScript" id=3]
-script/source = "tool
-extends Object
-func e():
-	return 36
-"
-
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 size = 36
-use_filter = true
 font_data = ExtResource( 2 )
-script = SubResource( 3 )
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.552506, 0 )
-shape = SubResource( 2 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0.552506, 0 )
+shape = SubResource( 6 )
 
 [node name="CameraHolder" type="Spatial" parent="."]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.952506, 0 )
 
 [node name="Camera" type="Camera" parent="CameraHolder"]
@@ -61,7 +43,7 @@ margin_left = 20.0
 margin_top = 40.0
 margin_right = 266.0
 margin_bottom = 76.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "Distance from key:"
 
 [node name="LabelDistanceKey" type="Label" parent="GUI"]
@@ -69,7 +51,7 @@ margin_left = 310.0
 margin_top = 40.0
 margin_right = 556.0
 margin_bottom = 76.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0.148438, 1, 0, 1 )
 text = "100"
 
@@ -78,7 +60,7 @@ margin_left = 20.0
 margin_top = 80.0
 margin_right = 266.0
 margin_bottom = 116.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "Distance from robot:"
 
 [node name="LabelDistanceRobot" type="Label" parent="GUI"]
@@ -86,7 +68,7 @@ margin_left = 340.0
 margin_top = 80.0
 margin_right = 658.0
 margin_bottom = 116.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "100"
 

@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Key.gd" type="Script" id=1]
+
+[sub_resource type="CylinderMesh" id=10]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 3.0
+
+[sub_resource type="SpatialMaterial" id=13]
+albedo_color = Color( 1, 0.701961, 0, 1 )
+metallic = 0.2
+roughness = 0.1
+
+[sub_resource type="SphereMesh" id=11]
+radius = 0.6
+height = 1.2
+
+[sub_resource type="PrismMesh" id=12]
+size = Vector3( 0.5, 0.5, 0.2 )
+
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 0.5, 1, 0.5 )
+
+[node name="Key" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.51503 )
+script = ExtResource( 1 )
+
+[node name="Mesh" type="Spatial" parent="."]
+transform = Transform( 0.459401, -0.197359, 0, 0.197359, 0.459401, 0, 0, 0, 0.5, 0.0392989, 0.832543, 0 )
+
+[node name="Key_length" type="MeshInstance" parent="Mesh"]
+mesh = SubResource( 10 )
+material/0 = SubResource( 13 )
+
+[node name="Key_handle" type="MeshInstance" parent="Mesh"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26893, 0 )
+mesh = SubResource( 11 )
+material/0 = SubResource( 13 )
+
+[node name="Key_tooth" type="MeshInstance" parent="Mesh"]
+transform = Transform( -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0, 0, 1, -0.386283, -0.840534, 0 )
+mesh = SubResource( 12 )
+material/0 = SubResource( 13 )
+
+[node name="Key_tooth2" type="MeshInstance" parent="Mesh"]
+transform = Transform( -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0, 0, 1, -0.386283, -1.24462, 0 )
+mesh = SubResource( 12 )
+material/0 = SubResource( 13 )
+
+[node name="Area" type="Area" parent="."]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.946537, 0 )
+input_ray_pickable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 9 )

@@ -1,38 +1,18 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://MazeGame.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://AI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Key.tscn" type="PackedScene" id=4]
 
-[sub_resource type="GDScript" id=1]
-script/source = "tool
-extends Object
-func e():
-	return 1.2
-"
-
-[sub_resource type="Environment" id=2]
+[sub_resource type="Environment" id=1]
 background_mode = 1
-background_energy = 0.0
 ambient_light_energy = 0.0
-ambient_light_sky_contribution = 0.0
-fog_color = Color( 0.152344, 0.152344, 0.152344, 1 )
-fog_depth_begin = 0.2
 tonemap_mode = 2
-ssao_light_affect = 1.0
-ssao_blur = 1
 glow_enabled = true
-glow_levels/2 = true
-glow_levels/4 = true
-glow_levels/5 = false
-glow_intensity = 0.5
-glow_bloom = 0.4
+glow_strength = 1.2
 glow_blend_mode = 0
-adjustment_enabled = true
-adjustment_brightness = 0.8
-adjustment_contrast = 1.2
-script = SubResource( 1 )
+glow_bicubic_upscale = true
 
 [node name="MazeGame" type="Spatial"]
 script = ExtResource( 1 )
@@ -41,10 +21,10 @@ Generate_imperfect_maze = true
 [node name="Tiles" type="Spatial" parent="."]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.61495, 9.53674e-07, 2.44451 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.61495, 9.53674e-007, 2.44451 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 2 )
+environment = SubResource( 1 )
 
 [node name="AI" parent="." instance=ExtResource( 3 )]
 
