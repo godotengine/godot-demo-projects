@@ -2,23 +2,25 @@ extends KinematicBody
 
 # Walking variables.
 const norm_grav = -38.8
-var vel = Vector3()
 const MAX_SPEED = 22
 const JUMP_SPEED = 26
 const ACCEL= 8.5
-
-# A vector for storing the direction the player intends to walk towards.
-var dir = Vector3()
-
 # Sprinting variables. Similar to the varibles above, just allowing for quicker movement
 const MAX_SPRINT_SPEED = 34
 const SPRINT_ACCEL = 18
-# A boolean to track whether or not we are sprinting
-var is_sprinting = false
-
 # How fast we slow down, and the steepest angle we can climb.
 const DEACCEL= 28
 const MAX_SLOPE_ANGLE = 40
+# How fast the bullets launch
+const LEFT_MOUSE_FIRE_TIME = 0.15
+const BULLET_SPEED = 100
+
+var vel = Vector3()
+# A vector for storing the direction the player intends to walk towards.
+var dir = Vector3()
+# A boolean to track whether or not we are sprinting
+var is_sprinting = false
+
 
 # We need the camera for getting directional vectors. We rotate ourselves on the Y-axis using
 # the camera_holder to avoid rotating on more than one axis at a time.
@@ -38,9 +40,6 @@ var path_follow_node = null
 var right_mouse_down = false
 # A variable for tracking if we can fire using the left mouse button
 var left_mouse_timer = 0
-const LEFT_MOUSE_FIRE_TIME = 0.15
-# How fast the bullets launch
-const BULLET_SPEED = 100
 
 # The animation player for aiming down the sights
 var anim_player = null

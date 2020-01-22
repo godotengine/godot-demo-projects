@@ -1,9 +1,9 @@
 extends Camera
 
-var targets = null
+export(float) var MOVEMENT_SPEED = 10
+export(bool) var flip_axis = false
 
-export (float) var MOVEMENT_SPEED = 10
-export (bool) var flip_axis = false
+var targets = null
 
 
 func _ready():

@@ -1,6 +1,7 @@
 extends RigidBody
 
-const KILL_TIME = 5
+const DESPAWN_TIME = 5
+
 var timer = 0
 
 
@@ -10,6 +11,6 @@ func _ready():
 
 func _physics_process(delta):
 	timer += delta
-	if timer > KILL_TIME:
+	if timer > DESPAWN_TIME:
 		queue_free()
 		timer = 0 # Make sure we are destroyed before we call this again!
