@@ -67,8 +67,7 @@ material/0 = ExtResource( 3 )
 material/1 = ExtResource( 4 )
 
 [node name="Camera" type="Camera" parent="."]
-editor/display_folded = true
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5014, 8.81922 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5, 8.8 )
 fov = 74.0
 script = ExtResource( 5 )
 MOVEMENT_SPEED = -6.0
@@ -84,10 +83,16 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../BattleBot/Armature/Skeleton")
 bone_name = "Head"
+update_mode = 0
+look_at_axis = 1
+use_our_rotation_x = false
+use_our_rotation_y = false
+use_our_rotation_z = false
+use_negative_our_rot = false
 additional_rotation = Vector3( 90, 0, 0 )
+debug_messages = false
 
 [node name="IK_FABRIK_Left_Arm" type="Spatial" parent="Camera/targets"]
-editor/display_folded = true
 script = ExtResource( 8 )
 __meta__ = {
 "_editor_icon": ExtResource( 9 )
@@ -102,7 +107,6 @@ reset_iterations_on_update = false
 use_middle_joint_target = true
 
 [node name="target" type="Spatial" parent="Camera/targets/IK_FABRIK_Left_Arm"]
-editor/display_folded = true
 transform = Transform( 0.518503, 0, -0.855076, 0, 1, 0, 0.855076, 0, 0.518503, 1.13159, 0, -0.155596 )
 
 [node name="IK_LookAt_LH" type="Spatial" parent="Camera/targets/IK_FABRIK_Left_Arm/target"]
@@ -113,19 +117,25 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../../BattleBot/Armature/Skeleton")
 bone_name = "Left_Hand"
+update_mode = 0
+look_at_axis = 1
+use_our_rotation_x = false
+use_our_rotation_y = false
+use_our_rotation_z = false
+use_negative_our_rot = false
 additional_rotation = Vector3( 0, 0, 90 )
+debug_messages = false
 
 [node name="middle_joint_target" type="Spatial" parent="Camera/targets/IK_FABRIK_Left_Arm"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.16849, 0, -5.31922 )
 
 [node name="Left_UpperArm" type="Spatial" parent="Camera/targets/IK_FABRIK_Left_Arm"]
-transform = Transform( -0.66477, 0.0771345, -0.743055, -2.23517e-008, 0.994655, 0.103252, 0.747048, 0.0686391, -0.661217, 1.53444, 0.300478, -3.63533 )
+transform = Transform( -0.66477, 0.0771345, -0.743055, -2.23517e-08, 0.994655, 0.103252, 0.747048, 0.0686391, -0.661217, 1.53444, 0.300478, -3.63533 )
 
 [node name="Left_LowerArm" type="Spatial" parent="Camera/targets/IK_FABRIK_Left_Arm"]
-transform = Transform( -0.773624, -0.0228999, 0.633231, 2.98023e-008, 0.999347, 0.03614, -0.633645, 0.0279588, -0.773119, 2.94998, 0.10378, -2.37569 )
+transform = Transform( -0.773624, -0.0228999, 0.633231, 2.98023e-08, 0.999347, 0.03614, -0.633645, 0.0279588, -0.773119, 2.94998, 0.10378, -2.37569 )
 
 [node name="IK_FABRIK_Right_Arm" type="Spatial" parent="Camera/targets"]
-editor/display_folded = true
 script = ExtResource( 8 )
 __meta__ = {
 "_editor_icon": ExtResource( 9 )
@@ -140,7 +150,6 @@ reset_iterations_on_update = false
 use_middle_joint_target = true
 
 [node name="target" type="Spatial" parent="Camera/targets/IK_FABRIK_Right_Arm"]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.229958, 0, 0.929313 )
 
 [node name="IK_LookAt_RH" type="Spatial" parent="Camera/targets/IK_FABRIK_Right_Arm/target"]
@@ -151,19 +160,26 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../../BattleBot/Armature/Skeleton")
 bone_name = "Right_Hand"
+update_mode = 0
+look_at_axis = 1
+use_our_rotation_x = false
+use_our_rotation_y = false
+use_our_rotation_z = false
+use_negative_our_rot = false
 additional_rotation = Vector3( 0, 0, 90 )
+debug_messages = false
 
 [node name="middle_joint_target" type="Spatial" parent="Camera/targets/IK_FABRIK_Right_Arm"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.34515, 0, -3.7843 )
 
 [node name="Right_UpperArm" type="Spatial" parent="Camera/targets/IK_FABRIK_Right_Arm"]
-transform = Transform( -0.694982, -0.0753926, 0.715064, -7.45058e-009, 0.994488, 0.104854, -0.719028, 0.0728714, -0.691151, -1.53339, 0.300478, -3.63533 )
+transform = Transform( -0.694982, -0.0753926, 0.715064, -7.45058e-09, 0.994488, 0.104854, -0.719028, 0.0728714, -0.691151, -1.53339, 0.300478, -3.63533 )
 
 [node name="Right_LowerArm" type="Spatial" parent="Camera/targets/IK_FABRIK_Right_Arm"]
-transform = Transform( -0.792023, 0.0165711, -0.610266, -1.49012e-008, 0.999631, 0.0271438, 0.610491, 0.0214986, -0.791732, -2.89561, 0.100755, -2.31866 )
+transform = Transform( -0.792023, 0.0165711, -0.610266, -1.49012e-08, 0.999631, 0.0271438, 0.610491, 0.0214986, -0.791732, -2.89561, 0.100755, -2.31866 )
 
 [node name="Right_Hand" type="Spatial" parent="Camera/targets/IK_FABRIK_Right_Arm"]
-transform = Transform( -0.678336, 0.00698721, -0.734719, -2.32831e-009, 0.999955, 0.00950961, 0.734752, 0.00645071, -0.678305, -1.07914, 0.020072, 0.03791 )
+transform = Transform( -0.678336, 0.00698721, -0.734719, -2.32831e-09, 0.999955, 0.00950961, 0.734752, 0.00645071, -0.678305, -1.07914, 0.020072, 0.03791 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Camera/targets"]
 mesh = SubResource( 5 )
@@ -225,9 +241,9 @@ margin_right = 1019.0
 margin_bottom = 590.0
 text = "Next scene"
 script = ExtResource( 10 )
-scene_to_change_to = "res://fps_example.tscn"
+scene_to_change_to = "res://fps/fps_example.tscn"
 
-[node name="Button_Previous" type="Button" parent="Control"]
+[node name="Button_Prev" type="Button" parent="Control"]
 margin_left = 10.0
 margin_top = 540.0
 margin_right = 129.0
@@ -235,6 +251,5 @@ margin_bottom = 590.0
 text = "Previous scene"
 script = ExtResource( 10 )
 scene_to_change_to = "res://look_at_ik.tscn"
-
 
 [editable path="BattleBot"]
