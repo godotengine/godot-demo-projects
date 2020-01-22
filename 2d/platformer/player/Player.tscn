@@ -247,17 +247,24 @@ passby_press = true
 action = "move_right"
 visibility_mode = 1
 
-[node name="Jump" type="TouchScreenButton" parent="UI"]
-position = Vector2( 666.224, 359.02 )
+[node name="BottomRightAnchor" type="Control" parent="UI"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -40.0
+
+[node name="Jump" type="TouchScreenButton" parent="UI/BottomRightAnchor"]
+position = Vector2( -98.151, -83.768 )
 scale = Vector2( 1.49157, 1.46265 )
 normal = ExtResource( 7 )
 action = "jump"
 visibility_mode = 1
 
-[node name="Fire" type="TouchScreenButton" parent="UI"]
-position = Vector2( 668.073, 262.788 )
+[node name="Fire" type="TouchScreenButton" parent="UI/BottomRightAnchor"]
+position = Vector2( -96.302, -180 )
 scale = Vector2( 1.49157, 1.46265 )
 normal = ExtResource( 8 )
 action = "shoot"
 visibility_mode = 1
-
