@@ -1,0 +1,176 @@
+[gd_scene load_steps=12 format=1]
+
+[ext_resource path="res://player/ship.gd" type="Script" id=1]
+[ext_resource path="res://player/ship.png" type="Texture" id=2]
+[ext_resource path="res://effects/particles/fire.png" type="Texture" id=3]
+[ext_resource path="res://effects/particles/explosion.tscn" type="PackedScene" id=4]
+[ext_resource path="res://effects/sounds/sound_shoot.wav" type="Sample" id=5]
+[ext_resource path="res://effects/sounds/sound_explode.wav" type="Sample" id=6]
+
+
+
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 25.9104, 1.3603, -20.5637, 14.8656, -20.5637, -15.3227 )
+
+[sub_resource type="ColorRamp" id=2]
+
+offsets = FloatArray( 0, 0.474062, 0.653631, 1 )
+colors = ColorArray( 0.154794, 0.413313, 0.991004, 1, 0.555474, 0.971578, 0, 1, 0.82934, 0.989088, 0.616085, 0.383915, 1, 1, 1, 0 )
+
+[sub_resource type="Animation" id=3]
+
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:visibility/visible")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.1 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("thruster:config/emitting")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("explosion:config/emitting")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = {
+"times": FloatArray( 0, 0.1 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="ColorRamp" id=4]
+
+offsets = FloatArray( 0, 0.364725, 0.77494, 1 )
+colors = ColorArray( 1, 1, 1, 1, 1, 0, 0, 1, 0.184473, 0.181601, 0.181345, 1, 1, 1, 1, 0 )
+
+[sub_resource type="SampleLibrary" id=5]
+
+samples/shoot = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 5 )
+}
+samples/sound_explode = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 6 )
+}
+
+[node name="ship" type="Area2D" groups=[
+"player",
+]]
+
+transform/pos = Vector2( 253.607, 282.275 )
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+
+[node name="sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+build_mode = 0
+polygon = Vector2Array( -20.5637, -15.3227, 25.9104, 1.3603, -20.5637, 14.8656 )
+shape_range = Vector2( -1, -1 )
+trigger = false
+
+[node name="thruster" type="Particles2D" parent="."]
+
+visibility/blend_mode = 1
+transform/pos = Vector2( -26.528, -0.358481 )
+transform/rot = -91.1436
+config/amount = 32
+config/lifetime = 2.0
+config/time_scale = 5.0
+config/emitting = false
+config/process_mode = 1
+config/local_space = false
+config/texture = ExtResource( 3 )
+params/direction = 0.0
+params/spread = 10.0
+params/linear_velocity = 20.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 0.0
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 1.0
+params/final_size = 1.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+color/color_ramp = SubResource( 2 )
+
+[node name="anim" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/explode = SubResource( 3 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[node name="shoot_from" type="Position2D" parent="."]
+
+transform/pos = Vector2( 35.3307, 0.875969 )
+
+[node name="explosion" parent="." instance=ExtResource( 4 )]
+
+config/process_mode = 1
+color/color_ramp = SubResource( 4 )
+
+[node name="sfx" type="SamplePlayer" parent="."]
+
+config/polyphony = 1
+config/samples = SubResource( 5 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 0.0
+default/filter/resonance = 0.0
+default/filter/gain = 0.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
+
+[connection signal="area_enter" from="." to="." method="_on_ship_area_enter"]
+
+[connection signal="body_enter" from="." to="." method="_on_ship_body_enter"]
+
+
