@@ -14,9 +14,10 @@ extends EditorPlugin
 var io_material_dialog
 
 func _enter_tree():
-	io_material_dialog = preload("res://addons/custom_material_creator/custom_material_dock.tscn").instance()
+	io_material_dialog = preload("res://addons/material_creator/material_dock.tscn").instance()
 	io_material_dialog.editor_interface = get_editor_interface()
 	add_control_to_dock(DOCK_SLOT_LEFT_UL, io_material_dialog)
+
 
 func _exit_tree():
 	remove_control_from_docks(io_material_dialog)

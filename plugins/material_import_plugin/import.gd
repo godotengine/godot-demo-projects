@@ -6,25 +6,32 @@ enum Presets { PRESET_DEFAULT }
 func get_importer_name():
 	return "demos.sillymaterial"
 
+
 func get_visible_name():
 	return "Silly Material"
+
 
 func get_recognized_extensions():
 	return ["mtxt"]
 
+
 func get_save_extension():
 	return "res"
+
 
 func get_resource_type():
 	return "Material"
 
+
 func get_preset_count():
-	return 1
+	return Presets.size()
+
 
 func get_preset_name(preset):
 	match preset:
 		Presets.PRESET_DEFAULT: return "Default"
-		_ : return "Unknown"
+		_: return "Unknown"
+
 
 func get_import_options(preset):
 	match preset:
@@ -35,8 +42,10 @@ func get_import_options(preset):
 					}]
 		_: return []
 
+
 func get_option_visibility(option, options):
 	return true
+
 
 func import(source_file, save_path, options, r_platform_variants, r_gen_files):
 	var file = File.new()

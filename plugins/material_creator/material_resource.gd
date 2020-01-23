@@ -44,8 +44,6 @@ func from_json(json_dict_as_string):
 	
 	metallic_strength = json_dict["metallic_strength"]
 	roughness_strength = json_dict["roughness_strength"]
-	
-	return
 
 
 # Make a SpatialMaterial using our variables.
