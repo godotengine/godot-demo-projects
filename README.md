@@ -6,9 +6,12 @@ be used with [Godot Engine](https://godotengine.org), the open source
 
 ## Important note
 
-- The `master` branch is compatible with the latest Godot version (currently 3.1).
-- Use the appropriate branch for your Godot version, such as the
-  [`2.1`](https://github.com/godotengine/godot-demo-projects/tree/2.1) branch
+- The `master` branch is compatible with the latest stable Godot version (currently 3.1).
+- If you are using an older version of Godot, use the appropriate branch for your Godot version:
+
+  - [`3.0`](https://github.com/godotengine/godot-demo-projects/tree/3.0) branch
+  for Godot 3.0.x.
+  - [`2.1`](https://github.com/godotengine/godot-demo-projects/tree/2.1) branch
   for Godot 2.1.x.
 
 ## Useful links
