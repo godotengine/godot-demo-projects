@@ -1,0 +1,849 @@
+[gd_scene load_steps=59 format=2]
+
+[ext_resource path="res://default_env.tres" type="Environment" id=1]
+[ext_resource path="res://CameraController.gd" type="Script" id=2]
+[ext_resource path="res://SplitScreen.shader" type="Shader" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://PlayerMovement.gd" type="Script" id=5]
+[ext_resource path="res://Walls.gd" type="Script" id=6]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 3 )
+shader_param/viewport_size = null
+shader_param/split_active = null
+shader_param/player1_position = null
+shader_param/player2_position = null
+shader_param/split_line_thickness = null
+shader_param/split_line_color = null
+
+[sub_resource type="CapsuleMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.933333, 0.0784314, 0.0784314, 1 )
+
+[sub_resource type="CapsuleShape" id=4]
+radius = 1.00505
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.0784314, 0.411765, 0.933333, 1 )
+
+[sub_resource type="SpatialMaterial" id=6]
+
+[sub_resource type="PlaneMesh" id=7]
+material = SubResource( 6 )
+size = Vector2( 200, 200 )
+
+[sub_resource type="BoxShape" id=8]
+
+[sub_resource type="BoxShape" id=9]
+
+[sub_resource type="SpatialMaterial" id=10]
+albedo_color = Color( 0.0163026, 0.114588, 0.818035, 1 )
+
+[sub_resource type="CubeMesh" id=11]
+
+[sub_resource type="SpatialMaterial" id=12]
+albedo_color = Color( 0.442023, 0.852067, 0.785551, 1 )
+
+[sub_resource type="SpatialMaterial" id=13]
+albedo_color = Color( 0.133977, 0.584249, 0.0821372, 1 )
+
+[sub_resource type="SpatialMaterial" id=14]
+albedo_color = Color( 0.395405, 0.147314, 0.511854, 1 )
+
+[sub_resource type="SpatialMaterial" id=15]
+albedo_color = Color( 0.358208, 0.341966, 0.750179, 1 )
+
+[sub_resource type="SpatialMaterial" id=16]
+albedo_color = Color( 0.0385181, 0.653927, 0.576283, 1 )
+
+[sub_resource type="SpatialMaterial" id=17]
+albedo_color = Color( 0.443924, 0.573921, 0.930779, 1 )
+
+[sub_resource type="SpatialMaterial" id=18]
+albedo_color = Color( 0.128483, 0.778405, 0.110868, 1 )
+
+[sub_resource type="SpatialMaterial" id=19]
+albedo_color = Color( 0.543521, 0.0840736, 0.594072, 1 )
+
+[sub_resource type="SpatialMaterial" id=20]
+albedo_color = Color( 0.352389, 0.490206, 0.798489, 1 )
+
+[sub_resource type="SpatialMaterial" id=21]
+albedo_color = Color( 0.822321, 0.472029, 0.983391, 1 )
+
+[sub_resource type="SpatialMaterial" id=22]
+albedo_color = Color( 0.583607, 0.676134, 0.544426, 1 )
+
+[sub_resource type="SpatialMaterial" id=23]
+albedo_color = Color( 0.649951, 0.0237741, 0.247833, 1 )
+
+[sub_resource type="SpatialMaterial" id=24]
+albedo_color = Color( 0.353433, 0.617191, 0.257219, 1 )
+
+[sub_resource type="SpatialMaterial" id=25]
+albedo_color = Color( 0.906253, 0.193018, 0.0109898, 1 )
+
+[sub_resource type="SpatialMaterial" id=26]
+albedo_color = Color( 0.36634, 0.452803, 0.191172, 1 )
+
+[sub_resource type="SpatialMaterial" id=27]
+albedo_color = Color( 0.349107, 0.206072, 0.887825, 1 )
+
+[sub_resource type="SpatialMaterial" id=28]
+albedo_color = Color( 0.843479, 0.273944, 0.505478, 1 )
+
+[sub_resource type="SpatialMaterial" id=29]
+albedo_color = Color( 0.264661, 0.38266, 0.480852, 1 )
+
+[sub_resource type="SpatialMaterial" id=30]
+albedo_color = Color( 0.687662, 0.696755, 0.680426, 1 )
+
+[sub_resource type="SpatialMaterial" id=31]
+albedo_color = Color( 0.814134, 0.00935292, 0.638229, 1 )
+
+[sub_resource type="SpatialMaterial" id=32]
+albedo_color = Color( 0.384184, 0.377533, 0.0302155, 1 )
+
+[sub_resource type="SpatialMaterial" id=33]
+albedo_color = Color( 0.184496, 0.339946, 0.324298, 1 )
+
+[sub_resource type="SpatialMaterial" id=34]
+albedo_color = Color( 0.194326, 0.60499, 0.171343, 1 )
+
+[sub_resource type="SpatialMaterial" id=35]
+albedo_color = Color( 0.508901, 0.490152, 0.30141, 1 )
+
+[sub_resource type="SpatialMaterial" id=36]
+albedo_color = Color( 0.624739, 0.704332, 0.00355822, 1 )
+
+[sub_resource type="SpatialMaterial" id=37]
+albedo_color = Color( 0.0771367, 0.774939, 0.45235, 1 )
+
+[sub_resource type="SpatialMaterial" id=38]
+albedo_color = Color( 0.399716, 0.336696, 0.825879, 1 )
+
+[sub_resource type="SpatialMaterial" id=39]
+albedo_color = Color( 0.856053, 0.924137, 0.107357, 1 )
+
+[sub_resource type="SpatialMaterial" id=40]
+albedo_color = Color( 0.127189, 0.0391242, 0.264593, 1 )
+
+[sub_resource type="SpatialMaterial" id=41]
+albedo_color = Color( 0.424077, 0.60127, 0.504344, 1 )
+
+[sub_resource type="SpatialMaterial" id=42]
+albedo_color = Color( 0.30571, 0.480934, 0.532849, 1 )
+
+[sub_resource type="SpatialMaterial" id=43]
+albedo_color = Color( 0.892993, 0.368143, 0.294531, 1 )
+
+[sub_resource type="SpatialMaterial" id=44]
+albedo_color = Color( 0.871162, 0.297536, 0.598131, 1 )
+
+[sub_resource type="SpatialMaterial" id=45]
+albedo_color = Color( 0.00162285, 0.940276, 0.765143, 1 )
+
+[sub_resource type="SpatialMaterial" id=46]
+albedo_color = Color( 0.827975, 0.106024, 0.433734, 1 )
+
+[sub_resource type="SpatialMaterial" id=47]
+albedo_color = Color( 0.82613, 0.553719, 0.978482, 1 )
+
+[sub_resource type="SpatialMaterial" id=48]
+albedo_color = Color( 0.0476994, 0.153394, 0.0724453, 1 )
+
+[sub_resource type="SpatialMaterial" id=49]
+albedo_color = Color( 0.102562, 0.788223, 0.515108, 1 )
+
+[sub_resource type="SpatialMaterial" id=50]
+albedo_color = Color( 0.663143, 0.185048, 0.580067, 1 )
+
+[sub_resource type="SpatialMaterial" id=51]
+albedo_color = Color( 0.905171, 0.0303818, 0.0867862, 1 )
+
+[sub_resource type="SpatialMaterial" id=52]
+albedo_color = Color( 0.318201, 0.572828, 0.773561, 1 )
+
+[node name="World" type="Spatial"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 1 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="WorldEnvironment"]
+transform = Transform( 1, 0, 0, 0, -0.818651, 0.574291, 0, -0.574291, -0.818651, 0, 70.567, -72.3668 )
+shadow_enabled = true
+shadow_color = Color( 0.6, 0.6, 0.6, 1 )
+
+[node name="Cameras" type="Spatial" parent="."]
+script = ExtResource( 2 )
+
+[node name="View" type="TextureRect" parent="Cameras"]
+material = SubResource( 1 )
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="Viewport1" type="Viewport" parent="Cameras"]
+render_target_v_flip = true
+render_target_update_mode = 3
+
+[node name="Camera1" type="Camera" parent="Cameras/Viewport1"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 20, 0 )
+current = true
+
+[node name="Viewport2" type="Viewport" parent="Cameras"]
+render_target_v_flip = true
+render_target_update_mode = 3
+
+[node name="Camera2" type="Camera" parent="Cameras/Viewport2"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 20, 0 )
+current = true
+
+[node name="Player1" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
+script = ExtResource( 5 )
+
+[node name="Mesh" type="MeshInstance" parent="Player1"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Player1"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="Player2" type="KinematicBody" parent="."]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.18358, 1.25, 3.01882 )
+script = ExtResource( 5 )
+player_id = 2
+
+[node name="Mesh" type="MeshInstance" parent="Player2"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Player2"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="Ground" type="StaticBody" parent="."]
+
+[node name="Mesh" type="MeshInstance" parent="Ground"]
+transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0 )
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Ground"]
+transform = Transform( 200, 0, 0, 0, 1, 0, 0, 0, 200, 0, -1, 0 )
+shape = SubResource( 8 )
+
+[node name="Walls" type="Spatial" parent="."]
+script = ExtResource( 6 )
+
+[node name="Group1" type="Spatial" parent="Walls"]
+
+[node name="Wall1" type="StaticBody" parent="Walls/Group1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.08384, 1, -5.90156 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group1/Wall1"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group1/Wall1" groups=[
+"walls",
+]]
+material_override = SubResource( 10 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall2" type="StaticBody" parent="Walls/Group1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3812, 1, -2.68735 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group1/Wall2"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group1/Wall2" groups=[
+"walls",
+]]
+material_override = SubResource( 12 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall3" type="StaticBody" parent="Walls/Group1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.99091, 1, -13.3028 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group1/Wall3"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group1/Wall3" groups=[
+"walls",
+]]
+material_override = SubResource( 13 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall4" type="StaticBody" parent="Walls/Group1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10164, 1, 4.39061 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group1/Wall4"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group1/Wall4" groups=[
+"walls",
+]]
+material_override = SubResource( 14 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall5" type="StaticBody" parent="Walls/Group1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12965, 1, -9.09735 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group1/Wall5"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group1/Wall5" groups=[
+"walls",
+]]
+material_override = SubResource( 15 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall6" type="StaticBody" parent="Walls/Group1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99301, 1, 1.77014 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group1/Wall6"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group1/Wall6" groups=[
+"walls",
+]]
+material_override = SubResource( 16 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Group2" type="Spatial" parent="Walls"]
+editor/display_folded = true
+transform = Transform( 0.988065, 0, -0.154039, 0, 1, 0, 0.154039, 0, 0.988065, -22.59, 0, -3.1796 )
+
+[node name="Wall1" type="StaticBody" parent="Walls/Group2"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.08384, 1, -5.90156 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group2/Wall1"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group2/Wall1" groups=[
+"walls",
+]]
+material_override = SubResource( 17 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall2" type="StaticBody" parent="Walls/Group2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3812, 1, -2.68735 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group2/Wall2"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group2/Wall2" groups=[
+"walls",
+]]
+material_override = SubResource( 18 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall3" type="StaticBody" parent="Walls/Group2"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.99091, 1, -13.3028 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group2/Wall3"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group2/Wall3" groups=[
+"walls",
+]]
+material_override = SubResource( 19 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall4" type="StaticBody" parent="Walls/Group2"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10164, 1, 4.39061 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group2/Wall4"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group2/Wall4" groups=[
+"walls",
+]]
+material_override = SubResource( 20 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall5" type="StaticBody" parent="Walls/Group2"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12965, 1, -9.09735 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group2/Wall5"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group2/Wall5" groups=[
+"walls",
+]]
+material_override = SubResource( 21 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall6" type="StaticBody" parent="Walls/Group2"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99301, 1, 1.77014 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group2/Wall6"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group2/Wall6" groups=[
+"walls",
+]]
+material_override = SubResource( 22 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Group3" type="Spatial" parent="Walls"]
+editor/display_folded = true
+transform = Transform( 0.905096, 0, 0.425207, 0, 1, 0, -0.425207, 0, 0.905096, -12.7693, 0, 17.7449 )
+
+[node name="Wall1" type="StaticBody" parent="Walls/Group3"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.08384, 1, -5.90156 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group3/Wall1"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group3/Wall1" groups=[
+"walls",
+]]
+material_override = SubResource( 23 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall2" type="StaticBody" parent="Walls/Group3"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3812, 1, -2.68735 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group3/Wall2"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group3/Wall2" groups=[
+"walls",
+]]
+material_override = SubResource( 24 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall3" type="StaticBody" parent="Walls/Group3"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.99091, 1, -13.3028 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group3/Wall3"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group3/Wall3" groups=[
+"walls",
+]]
+material_override = SubResource( 25 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall4" type="StaticBody" parent="Walls/Group3"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10164, 1, 4.39061 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group3/Wall4"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group3/Wall4" groups=[
+"walls",
+]]
+material_override = SubResource( 26 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall5" type="StaticBody" parent="Walls/Group3"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12965, 1, -9.09735 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group3/Wall5"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group3/Wall5" groups=[
+"walls",
+]]
+material_override = SubResource( 27 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall6" type="StaticBody" parent="Walls/Group3"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99301, 1, 1.77014 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group3/Wall6"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group3/Wall6" groups=[
+"walls",
+]]
+material_override = SubResource( 28 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Group4" type="Spatial" parent="Walls"]
+transform = Transform( 0.155702, 0, -0.987804, 0, 1, 0, 0.987804, 0, 0.155702, 14.0374, 0, 12.1476 )
+
+[node name="Wall1" type="StaticBody" parent="Walls/Group4"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.08384, 1, -5.90156 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group4/Wall1"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group4/Wall1" groups=[
+"walls",
+]]
+material_override = SubResource( 29 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall2" type="StaticBody" parent="Walls/Group4"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3812, 1, -2.68735 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group4/Wall2"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group4/Wall2" groups=[
+"walls",
+]]
+material_override = SubResource( 30 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall3" type="StaticBody" parent="Walls/Group4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.99091, 1, -13.3028 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group4/Wall3"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group4/Wall3" groups=[
+"walls",
+]]
+material_override = SubResource( 31 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall4" type="StaticBody" parent="Walls/Group4"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10164, 1, 4.39061 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group4/Wall4"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group4/Wall4" groups=[
+"walls",
+]]
+material_override = SubResource( 32 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall5" type="StaticBody" parent="Walls/Group4"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12965, 1, -9.09735 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group4/Wall5"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group4/Wall5" groups=[
+"walls",
+]]
+material_override = SubResource( 33 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall6" type="StaticBody" parent="Walls/Group4"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99301, 1, 1.77014 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group4/Wall6"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group4/Wall6" groups=[
+"walls",
+]]
+material_override = SubResource( 34 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Group5" type="Spatial" parent="Walls"]
+editor/display_folded = true
+transform = Transform( 0.999549, 0, 0.0300306, 0, 1, 0, -0.0300306, 0, 0.999549, 0.500639, 0, 27.6888 )
+
+[node name="Wall1" type="StaticBody" parent="Walls/Group5"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.08384, 1, -5.90156 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group5/Wall1"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group5/Wall1" groups=[
+"walls",
+]]
+material_override = SubResource( 35 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall2" type="StaticBody" parent="Walls/Group5"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3812, 1, -2.68735 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group5/Wall2"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group5/Wall2" groups=[
+"walls",
+]]
+material_override = SubResource( 36 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall3" type="StaticBody" parent="Walls/Group5"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.99091, 1, -13.3028 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group5/Wall3"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group5/Wall3" groups=[
+"walls",
+]]
+material_override = SubResource( 37 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall4" type="StaticBody" parent="Walls/Group5"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10164, 1, 4.39061 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group5/Wall4"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group5/Wall4" groups=[
+"walls",
+]]
+material_override = SubResource( 38 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall5" type="StaticBody" parent="Walls/Group5"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12965, 1, -9.09735 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group5/Wall5"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group5/Wall5" groups=[
+"walls",
+]]
+material_override = SubResource( 39 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall6" type="StaticBody" parent="Walls/Group5"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99301, 1, 1.77014 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group5/Wall6"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group5/Wall6" groups=[
+"walls",
+]]
+material_override = SubResource( 40 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Group6" type="Spatial" parent="Walls"]
+editor/display_folded = true
+transform = Transform( 0.613129, 0, -0.789983, 0, 1, 0, 0.789983, 0, 0.613129, 21.2586, 0, -14.244 )
+
+[node name="Wall1" type="StaticBody" parent="Walls/Group6"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.08384, 1, -5.90156 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group6/Wall1"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group6/Wall1" groups=[
+"walls",
+]]
+material_override = SubResource( 41 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall2" type="StaticBody" parent="Walls/Group6"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3812, 1, -2.68735 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group6/Wall2"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group6/Wall2" groups=[
+"walls",
+]]
+material_override = SubResource( 42 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall3" type="StaticBody" parent="Walls/Group6"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.99091, 1, -13.3028 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group6/Wall3"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group6/Wall3" groups=[
+"walls",
+]]
+material_override = SubResource( 43 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall4" type="StaticBody" parent="Walls/Group6"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10164, 1, 4.39061 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group6/Wall4"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group6/Wall4" groups=[
+"walls",
+]]
+material_override = SubResource( 44 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall5" type="StaticBody" parent="Walls/Group6"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12965, 1, -9.09735 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group6/Wall5"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group6/Wall5" groups=[
+"walls",
+]]
+material_override = SubResource( 45 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall6" type="StaticBody" parent="Walls/Group6"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99301, 1, 1.77014 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group6/Wall6"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group6/Wall6" groups=[
+"walls",
+]]
+material_override = SubResource( 46 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Group7" type="Spatial" parent="Walls"]
+editor/display_folded = true
+transform = Transform( -0.999329, 0, -0.0366257, 0, 1, 0, 0.0366257, 0, -0.999329, -8.83615, 0, -32.7996 )
+
+[node name="Wall1" type="StaticBody" parent="Walls/Group7"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.08384, 1, -5.90156 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group7/Wall1"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group7/Wall1" groups=[
+"walls",
+]]
+material_override = SubResource( 47 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall2" type="StaticBody" parent="Walls/Group7"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3812, 1, -2.68735 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group7/Wall2"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group7/Wall2" groups=[
+"walls",
+]]
+material_override = SubResource( 48 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall3" type="StaticBody" parent="Walls/Group7"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.99091, 1, -13.3028 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group7/Wall3"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group7/Wall3" groups=[
+"walls",
+]]
+material_override = SubResource( 49 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall4" type="StaticBody" parent="Walls/Group7"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10164, 1, 4.39061 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group7/Wall4"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group7/Wall4" groups=[
+"walls",
+]]
+material_override = SubResource( 50 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall5" type="StaticBody" parent="Walls/Group7"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12965, 1, -9.09735 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group7/Wall5"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group7/Wall5" groups=[
+"walls",
+]]
+material_override = SubResource( 51 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Wall6" type="StaticBody" parent="Walls/Group7"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99301, 1, 1.77014 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls/Group7/Wall6"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Walls/Group7/Wall6" groups=[
+"walls",
+]]
+material_override = SubResource( 52 )
+mesh = SubResource( 11 )
+material/0 = null
