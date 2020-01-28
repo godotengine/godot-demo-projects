@@ -6,13 +6,20 @@
 [ext_resource path="res://Images/choose_tow.png" type="Texture" id=4]
 
 [node name="base" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 1 )
 __meta__ = {
-"__editor_plugin_screen__": "2D"
+"__editor_plugin_screen__": "2D",
+"_edit_use_anchors_": false
 }
 
 [node name="van 1" type="Button" parent="."]
@@ -41,7 +48,6 @@ margin_bottom = 400.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 icon = ExtResource( 4 )
-
 [connection signal="pressed" from="van 1" to="." method="_on_van_1_pressed"]
 [connection signal="pressed" from="van 2" to="." method="_on_van_2_pressed"]
 [connection signal="pressed" from="van 3" to="." method="_on_van_3_pressed"]

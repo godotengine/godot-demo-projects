@@ -3,11 +3,20 @@
 [ext_resource path="res://lobby.gd" type="Script" id=1]
 
 [node name="lobby" type="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -200.0
+margin_right = 320.0
+margin_bottom = 200.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="title" type="Label" parent="."]
 margin_left = 210.0
@@ -83,6 +92,5 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 align = 1
-
 [connection signal="pressed" from="panel/host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="panel/join" to="." method="_on_join_pressed"]

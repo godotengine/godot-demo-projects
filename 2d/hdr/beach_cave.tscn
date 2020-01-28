@@ -27,6 +27,8 @@ modulate = Color( 2, 2, 2, 1 )
 self_modulate = Color( 2, 2, 2, 1 )
 texture = ExtResource( 2 )
 centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 3840, 720 )
 
 [node name="cave" type="Sprite" parent="."]
 self_modulate = Color( 0.233166, 0.221219, 0.23582, 1 )
@@ -37,11 +39,18 @@ centered = false
 [node name="environment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
 
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 540, 360 )
+current = true
+
 [node name="Label" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 13.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 135.0
+margin_bottom = 24.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
-custom_colors/font_color = Color( 0.213955, 0.205626, 0.20313, 1 )
-text = "Drag  Left and Right"
-
+text = "Drag Left and Right"
+__meta__ = {
+"_edit_use_anchors_": false
+}

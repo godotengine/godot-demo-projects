@@ -6,15 +6,21 @@
 script = ExtResource( 1 )
 
 [node name="load" type="Button" parent="."]
-margin_left = 192.0
-margin_top = 32.0
-margin_right = 320.0
-margin_bottom = 64.0
+margin_left = 432.0
+margin_top = 82.0
+margin_right = 560.0
+margin_bottom = 114.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Load in Thread"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="sprite" type="Sprite" parent="."]
-position = Vector2( 248, 256 )
+position = Vector2( 494, 336 )
 
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 512, 300 )
+current = true
 [connection signal="pressed" from="load" to="." method="_on_load_pressed"]

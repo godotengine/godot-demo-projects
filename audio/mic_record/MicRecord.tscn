@@ -5,8 +5,19 @@
 
 [sub_resource type="AudioStreamMicrophone" id=1]
 
-[node name="MicRecord" type="Node"]
+[node name="MicRecord" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -240.0
+margin_right = 320.0
+margin_bottom = 240.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AudioStreamRecord" type="AudioStreamPlayer" parent="."]
 stream = SubResource( 1 )
@@ -22,16 +33,16 @@ volume_db = -6.0
 
 [node name="RecordButton" type="Button" parent="."]
 margin_left = 120.0
-margin_top = 60.0
+margin_top = 100.0
 margin_right = 240.0
-margin_bottom = 100.0
+margin_bottom = 140.0
 text = "Record"
 
 [node name="SaveButton" type="Button" parent="."]
 margin_left = 120.0
-margin_top = 140.0
+margin_top = 180.0
 margin_right = 240.0
-margin_bottom = 180.0
+margin_bottom = 220.0
 disabled = true
 text = "Save WAV To:"
 
@@ -40,25 +51,27 @@ margin_left = 180.0
 margin_right = 340.0
 margin_bottom = 40.0
 text = "user://record.wav"
+caret_blink = true
+caret_blink_speed = 0.5
 
 [node name="PlayButton" type="Button" parent="."]
 margin_left = 300.0
-margin_top = 60.0
+margin_top = 100.0
 margin_right = 420.0
-margin_bottom = 100.0
+margin_bottom = 140.0
 disabled = true
 text = "Play"
 
 [node name="PlayMusic" type="Button" parent="."]
 margin_left = 120.0
-margin_top = 220.0
+margin_top = 260.0
 margin_right = 240.0
-margin_bottom = 260.0
+margin_bottom = 300.0
 text = "Play Music"
 
 [node name="Status" type="Label" parent="."]
 margin_left = 120.0
-margin_top = 300.0
+margin_top = 340.0
 margin_right = 520.0
 margin_bottom = 340.0
 [connection signal="pressed" from="RecordButton" to="." method="_on_RecordButton_pressed"]

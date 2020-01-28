@@ -1,9 +1,6 @@
 extends Panel
 
-onready var fsm_node = get_node("../Player/StateMachine")
-
-func _ready():
-	set_as_toplevel(true)
+onready var fsm_node = get_node("../../Player/StateMachine")
 
 func _process(delta):
 	var states_names = ''

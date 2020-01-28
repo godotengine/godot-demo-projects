@@ -13,7 +13,7 @@ func _ready():
 	iap.connect("consume_success", self, "on_consume_success")
 	iap.connect("consume_fail", self, "on_consume_fail")
 	iap.connect("sku_details_complete", self, "on_sku_details_complete")
-	
+
 	get_node("purchase").connect("pressed", self, "button_purchase")
 	get_node("consume").connect("pressed", self, "button_consume")
 	get_node("request").connect("pressed", self, "button_request")

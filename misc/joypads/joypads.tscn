@@ -3,16 +3,29 @@
 [ext_resource path="res://joypads.gd" type="Script" id=1]
 [ext_resource path="res://jsdiagram.tscn" type="PackedScene" id=2]
 
-[node name="joypads" type="Node2D"]
+[node name="joypads" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -270.0
+margin_top = -240.0
+margin_right = 270.0
+margin_bottom = 240.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="diagram" parent="." instance=ExtResource( 2 )]
 position = Vector2( 400, 200 )
 
 [node name="device_info" type="Control" parent="."]
-editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="label_device" type="Label" parent="device_info"]
 margin_left = 10.0
@@ -23,6 +36,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Device"
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="joy_num" type="SpinBox" parent="device_info"]
 margin_left = 65.0
@@ -32,6 +48,9 @@ margin_bottom = 34.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 max_value = 16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="joy_name" type="Label" parent="device_info"]
 margin_left = 10.0
@@ -41,11 +60,16 @@ margin_bottom = 50.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 custom_colors/font_color = Color( 0.229156, 1, 0.239205, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axes" type="Control" parent="."]
-editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_prog0" type="ProgressBar" parent="axes"]
 margin_left = 60.0
@@ -56,6 +80,9 @@ size_flags_horizontal = 2
 min_value = -100.0
 step = 0.0001
 percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_prog1" type="ProgressBar" parent="axes"]
 margin_left = 60.0
@@ -66,6 +93,9 @@ size_flags_horizontal = 2
 min_value = -100.0
 step = 0.0001
 percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_prog2" type="ProgressBar" parent="axes"]
 margin_left = 60.0
@@ -76,6 +106,9 @@ size_flags_horizontal = 2
 min_value = -100.0
 step = 0.0001
 percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_prog3" type="ProgressBar" parent="axes"]
 margin_left = 60.0
@@ -86,6 +119,9 @@ size_flags_horizontal = 2
 min_value = -100.0
 step = 0.0001
 percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_prog4" type="ProgressBar" parent="axes"]
 margin_left = 60.0
@@ -96,6 +132,9 @@ size_flags_horizontal = 2
 min_value = -100.0
 step = 0.0001
 percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_prog5" type="ProgressBar" parent="axes"]
 margin_left = 60.0
@@ -106,6 +145,9 @@ size_flags_horizontal = 2
 min_value = -100.0
 step = 0.0001
 percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_prog6" type="ProgressBar" parent="axes"]
 margin_left = 60.0
@@ -116,6 +158,9 @@ size_flags_horizontal = 2
 min_value = -100.0
 step = 0.0001
 percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_prog7" type="ProgressBar" parent="axes"]
 margin_left = 60.0
@@ -126,6 +171,9 @@ size_flags_horizontal = 2
 min_value = -100.0
 step = 0.0001
 percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_prog8" type="ProgressBar" parent="axes"]
 margin_left = 60.0
@@ -136,6 +184,9 @@ size_flags_horizontal = 2
 min_value = -100.0
 step = 0.0001
 percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_prog9" type="ProgressBar" parent="axes"]
 margin_left = 60.0
@@ -146,6 +197,9 @@ size_flags_horizontal = 2
 min_value = -100.0
 step = 0.0001
 percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_prog10" type="ProgressBar" parent="axes"]
 margin_left = 60.0
@@ -156,6 +210,9 @@ size_flags_horizontal = 2
 min_value = -100.0
 step = 0.0001
 percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_val0" type="Label" parent="axes"]
 margin_left = 60.0
@@ -167,6 +224,9 @@ size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_val1" type="Label" parent="axes"]
 margin_left = 60.0
@@ -178,6 +238,9 @@ size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_val2" type="Label" parent="axes"]
 margin_left = 60.0
@@ -189,6 +252,9 @@ size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_val3" type="Label" parent="axes"]
 margin_left = 60.0
@@ -200,6 +266,9 @@ size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_val4" type="Label" parent="axes"]
 margin_left = 60.0
@@ -211,6 +280,9 @@ size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_val5" type="Label" parent="axes"]
 margin_left = 60.0
@@ -222,6 +294,9 @@ size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_val6" type="Label" parent="axes"]
 margin_left = 60.0
@@ -233,6 +308,9 @@ size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_val7" type="Label" parent="axes"]
 margin_left = 60.0
@@ -244,6 +322,9 @@ size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_val8" type="Label" parent="axes"]
 margin_left = 60.0
@@ -255,6 +336,9 @@ size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_val9" type="Label" parent="axes"]
 margin_left = 60.0
@@ -266,6 +350,9 @@ size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="axis_val10" type="Label" parent="axes"]
 margin_left = 60.0
@@ -277,6 +364,9 @@ size_flags_vertical = 0
 text = "0"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="label_axis0" type="Label" parent="axes"]
 margin_left = 10.0
@@ -287,6 +377,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 0"
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="label_axis1" type="Label" parent="axes"]
 margin_left = 10.0
@@ -297,6 +390,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 1"
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="label_axis2" type="Label" parent="axes"]
 margin_left = 10.0
@@ -307,6 +403,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 2"
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="label_axis3" type="Label" parent="axes"]
 margin_left = 10.0
@@ -317,6 +416,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 3"
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="label_axis4" type="Label" parent="axes"]
 margin_left = 10.0
@@ -327,6 +429,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 4"
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="label_axis5" type="Label" parent="axes"]
 margin_left = 10.0
@@ -337,6 +442,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 5"
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="label_axis6" type="Label" parent="axes"]
 margin_left = 10.0
@@ -347,6 +455,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 6"
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="label_axis7" type="Label" parent="axes"]
 margin_left = 10.0
@@ -357,6 +468,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 7"
 valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="label_axis8" type="Label" parent="axes"]
 margin_left = 10.0
@@ -367,6 +481,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 8"
 valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="label_axis9" type="Label" parent="axes"]
 margin_left = 10.0
@@ -377,6 +494,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 9"
 valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="label_axis10" type="Label" parent="axes"]
 margin_left = 10.0
@@ -387,11 +507,16 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Axis 10"
 valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="buttons" type="Control" parent="."]
-editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="label_buttons" type="Label" parent="buttons"]
 margin_left = 10.0
@@ -401,6 +526,9 @@ margin_bottom = 304.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Buttons:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btn0" type="Label" parent="buttons"]
 margin_left = 20.0
@@ -411,6 +539,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "0"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btn1" type="Label" parent="buttons"]
 margin_left = 45.0
@@ -421,6 +552,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "1"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btn2" type="Label" parent="buttons"]
 margin_left = 70.0
@@ -431,6 +565,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "2"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btn3" type="Label" parent="buttons"]
 margin_left = 95.0
@@ -441,6 +578,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "3"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btn4" type="Label" parent="buttons"]
 margin_left = 120.0
@@ -451,6 +591,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "4"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btn5" type="Label" parent="buttons"]
 margin_left = 145.0
@@ -461,6 +604,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "5"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btn6" type="Label" parent="buttons"]
 margin_left = 170.0
@@ -471,6 +617,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "6"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btn7" type="Label" parent="buttons"]
 margin_left = 195.0
@@ -481,6 +630,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "7"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btn8" type="Label" parent="buttons"]
 margin_left = 220.0
@@ -491,6 +643,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "8"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btn9" type="Label" parent="buttons"]
 margin_left = 20.0
@@ -501,6 +656,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "9"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btn10" type="Label" parent="buttons"]
 margin_left = 45.0
@@ -511,6 +669,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "10"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btn11" type="Label" parent="buttons"]
 margin_left = 70.0
@@ -521,6 +682,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "11"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btn12" type="Label" parent="buttons"]
 margin_left = 95.0
@@ -531,6 +695,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "12"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btn13" type="Label" parent="buttons"]
 margin_left = 120.0
@@ -541,6 +708,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "13"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btn14" type="Label" parent="buttons"]
 margin_left = 145.0
@@ -551,6 +721,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "14"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btn15" type="Label" parent="buttons"]
 margin_left = 170.0
@@ -561,11 +734,16 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "15"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="vibration" type="Control" parent="."]
-editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="weak_label" type="Label" parent="vibration"]
 margin_left = 10.0
@@ -575,6 +753,9 @@ margin_bottom = 389.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Vibration Weak Motor:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="strong_label" type="Label" parent="vibration"]
 margin_left = 10.0
@@ -584,6 +765,9 @@ margin_bottom = 427.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Vibration Strong Motor:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="duration_label" type="Label" parent="vibration"]
 margin_left = 10.0
@@ -593,6 +777,9 @@ margin_bottom = 468.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Vibration Duration:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="vibration_weak_value" type="SpinBox" parent="vibration"]
 margin_left = 165.0
@@ -604,6 +791,9 @@ size_flags_vertical = 2
 max_value = 1.0
 step = 0.05
 value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="vibration_strong_value" type="SpinBox" parent="vibration"]
 margin_left = 165.0
@@ -615,6 +805,9 @@ size_flags_vertical = 2
 max_value = 1.0
 step = 0.05
 value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="vibration_duration_value" type="SpinBox" parent="vibration"]
 margin_left = 165.0
@@ -626,6 +819,9 @@ size_flags_vertical = 2
 max_value = 10.0
 step = 0.1
 value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="start_vibration" type="Button" parent="vibration"]
 margin_left = 290.0
@@ -637,6 +833,9 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 enabled_focus_mode = 0
 text = "Start Vibration"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="stop_vibration" type="Button" parent="vibration"]
 margin_left = 408.0
@@ -646,6 +845,8 @@ margin_bottom = 420.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Stop Vibration"
-
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="vibration/start_vibration" to="." method="_on_start_vibration_pressed"]
 [connection signal="pressed" from="vibration/stop_vibration" to="." method="_on_stop_vibration_pressed"]

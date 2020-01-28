@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 # Joypads demo, written by Dana Olson <dana@shineuponthee.com>
 #

@@ -23,6 +23,14 @@ extents = Vector2( 320, 10 )
 
 [node name="game" type="Node2D"]
 
+[node name="TextureRect" type="ColorRect" parent="."]
+margin_right = 640.0
+margin_bottom = 400.0
+color = Color( 0.141176, 0.152941, 0.164706, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="left" type="Area2D" parent="."]
 position = Vector2( 67.6285, 192.594 )
 script = ExtResource( 1 )
@@ -87,6 +95,9 @@ y_direction = -1.0
 [node name="collision" type="CollisionShape2D" parent="floor"]
 shape = SubResource( 4 )
 
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 320, 200 )
+current = true
 [connection signal="area_entered" from="left" to="left" method="_on_area_entered"]
 [connection signal="area_entered" from="right" to="right" method="_on_area_entered"]
 [connection signal="area_entered" from="left_wall" to="left_wall" method="_on_area_entered"]
