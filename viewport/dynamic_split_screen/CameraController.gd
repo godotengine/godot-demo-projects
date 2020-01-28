@@ -21,7 +21,7 @@ extends Spatial
 
 export(float) var max_separation = 20.0
 export(float) var split_line_thickness = 3.0
-export(Color, RGBA) var split_line_color = Color(0.0, 0.0, 0.0, 1.0)
+export(Color, RGBA) var split_line_color = Color.black
 export(bool) var adaptive_split_line_thickness = true
 
 onready var player1 = $'../Player1'
@@ -41,7 +41,7 @@ func _ready():
 	view.material.set_shader_param('viewport2', $Viewport2.get_texture())
 
 
-func _process(delta):
+func _process(_delta):
 	_move_cameras()
 	_update_splitscreen()
 
@@ -62,14 +62,8 @@ func _move_cameras():
 
 func _update_splitscreen():
 	var screen_size = get_viewport().get_visible_rect().size
-	
-	var player1_position = camera1.unproject_position(player1.translation)
-	player1_position.x /= screen_size.x;
-	player1_position.y /= screen_size.y;
-
-	var player2_position = camera2.unproject_position(player2.translation)
-	player2_position.x /= screen_size.x;
-	player2_position.y /= screen_size.y;
+	var player1_position = camera1.unproject_position(player1.translation) / screen_size
+	var player2_position = camera2.unproject_position(player2.translation) / screen_size
 	
 	var thickness
 	if adaptive_split_line_thickness:
