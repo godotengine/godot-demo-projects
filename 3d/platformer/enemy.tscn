@@ -6,7 +6,7 @@
 [ext_resource path="res://sound_explode.wav" type="AudioStream" id=4]
 [ext_resource path="res://shine.png" type="Texture" id=5]
 
-[sub_resource type="PhysicsMaterial" id=22]
+[sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
 
 [sub_resource type="SpatialMaterial" id=2]
@@ -67,7 +67,7 @@ surfaces/2 = {
 "vertex_count": 28
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 length = 2.5
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Armature/Skeleton:r-backleg.001")
@@ -147,11 +147,11 @@ tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = PoolRealArray( 0, 1, 0, 5.96046e-08, 0, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=7]
 resource_name = "explode"
 length = 3.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("explosion:emitting")
+tracks/0/path = NodePath("Explosion:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -175,7 +175,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 tracks/2/type = "method"
-tracks/2/path = NodePath(".:")
+tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -189,7 +189,7 @@ tracks/2/keys = {
 } ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("sound_explode:playing")
+tracks/3/path = NodePath("SoundExplode:playing")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -201,7 +201,7 @@ tracks/3/keys = {
 "values": [ true ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("sound_walk_loop:playing")
+tracks/4/path = NodePath("SoundWalkLoop:playing")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -213,8 +213,7 @@ tracks/4/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "idle"
+[sub_resource type="Animation" id=8]
 length = 2.5
 loop = true
 tracks/0/type = "transform"
@@ -375,7 +374,7 @@ tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = PoolRealArray( 0, 1, 0, 5.96046e-08, 0, 0, 0, 0, 1, 1, 1, 1, 2.5, 1, 0, 5.96046e-08, 0, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=10]
 length = 1.66667
 loop = true
 tracks/0/type = "transform"
@@ -456,35 +455,35 @@ tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = PoolRealArray( 0, 1, 0, -0.149993, 0, 0, 0, 0, 1, 1, 1, 1, 0.05, 1, 0, -0.12914, 0, 0, 0, 0, 1, 1, 1, 1, 0.15, 1, 0, -0.0283493, 0, 0, 0, 0, 1, 1, 1, 1, 0.2, 1, 0, -0.00266618, 0, 0, 0, 0, 1, 1, 1, 1, 0.25, 1, 0, -0.0155987, 0.0483675, 0, 0, 0, 1, 1, 1, 1, 0.3, 1, 0, -0.0777871, 0.182986, 0, 0, 3.55271e-15, 1, 1, 1, 1, 0.35, 1, 0, -0.171135, 0.269949, 0, 0, 0, 1, 1, 1, 1, 0.4, 1, 0, -0.273424, 0.297207, 0, 0, 0, 1, 1, 1, 1, 0.45, 1, 0, -0.3, 0.278664, 0, 0, 0, 1, 1, 1, 1, 0.5, 1, 0, -0.3, 0.198231, 0, 0, 0, 1, 1, 1, 1, 0.55, 1, 0, -0.3, 0.0867803, 0, 0, 0, 1, 1, 1, 1, 0.6, 1, 0, -0.3, 0.0160092, 0, 0, 0, 1, 1, 1, 1, 0.65, 1, 0, -0.296009, -5.96046e-08, 0, 0, 0, 1, 1, 1, 1, 0.7, 1, 0, -0.277333, -5.96046e-08, 0, 0, 0, 1, 1, 1, 1, 0.75, 1, 0, -0.240782, 0, 0, 0, 0, 1, 1, 1, 1, 0.95, 1, 0, -0.0331749, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, -0.00665081, 0, 0, 0, 0, 1, 1, 1, 1, 1.05, 1, 0, -0.00311971, 0.0096736, 0, 0, 0, 1, 1, 1, 1, 1.1, 1, 0, -0.0353009, 0.0950568, 0, 0, 0, 1, 1, 1, 1, 1.15, 1, 0, -0.103653, 0.218778, 0, 0, 0, 1, 1, 1, 1, 1.2, 1, 0, -0.212752, 0.285328, 0, 0, 0, 1, 1, 1, 1, 1.25, 1, 0, -0.3, 0.3, 0, 0, 0, 1, 1, 1, 1, 1.3, 1, 0, -0.3, 0.258311, 0, 0, 0, 1, 1, 1, 1, 1.4, 1, 0, -0.3, 0.0567318, 0, 0, 0, 1, 1, 1, 1, 1.45, 1, 0, -0.3, 0.00533658, 0, 0, 0, 1, 1, 1, 1, 1.5, 1, 0, -0.286666, -5.96046e-08, 0, 0, 0, 1, 1, 1, 1, 1.6, 1, 0, -0.185874, 0, 0, 0, 0, 1, 1, 1, 1, 1.65, 1, 0, -0.15533, 0, 0, 0, 0, 1, 1, 1, 1, 1.7, 1, 0, -0.149993, 0, 0, 0, 0, 1, 1, 1, 1, 2.5, 1, 0, -0.149993, 0, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="SphereShape" id=13]
+[sub_resource type="SphereShape" id=11]
 radius = 0.68
 
-[sub_resource type="SphereShape" id=1]
+[sub_resource type="SphereShape" id=12]
 radius = 0.4
 
-[sub_resource type="BoxShape" id=16]
+[sub_resource type="BoxShape" id=13]
 extents = Vector3( 0.57253, 0.388409, 0.560511 )
 
-[sub_resource type="AudioStreamRandomPitch" id=15]
+[sub_resource type="AudioStreamRandomPitch" id=14]
 audio_stream = ExtResource( 2 )
 
-[sub_resource type="Curve" id=17]
+[sub_resource type="Curve" id=15]
 max_value = 3.0
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.0349232, 2.1123 ), 0.0, 0.0, 0, 0, Vector2( 0.151192, 0.823242 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=18]
-curve = SubResource( 17 )
+[sub_resource type="CurveTexture" id=16]
+curve = SubResource( 15 )
 
-[sub_resource type="ParticlesMaterial" id=19]
+[sub_resource type="ParticlesMaterial" id=17]
 emission_shape = 1
 emission_sphere_radius = 1.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 0.15
 angular_velocity = 351.05
 angular_velocity_random = 1.0
-scale_curve = SubResource( 18 )
+scale_curve = SubResource( 16 )
 
-[sub_resource type="SpatialMaterial" id=20]
+[sub_resource type="SpatialMaterial" id=18]
 flags_transparent = true
 flags_unshaded = true
 params_blend_mode = 1
@@ -494,12 +493,12 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 albedo_texture = ExtResource( 5 )
 
-[sub_resource type="QuadMesh" id=21]
-material = SubResource( 20 )
+[sub_resource type="QuadMesh" id=19]
+material = SubResource( 18 )
 
-[node name="enemy" type="RigidBody"]
+[node name="Enemy" type="RigidBody"]
 mode = 2
-physics_material_override = SubResource( 22 )
+physics_material_override = SubResource( 1 )
 custom_integrator = true
 contacts_reported = 5
 contact_monitor = true
@@ -570,75 +569,73 @@ bones/10/bound_children = [  ]
 [node name="Sphere" type="MeshInstance" parent="Armature/Skeleton"]
 layers = 2
 mesh = SubResource( 5 )
-skeleton = NodePath("..:")
 material/0 = null
 material/1 = null
 material/2 = null
 
-[node name="ray_floor" type="RayCast" parent="Armature"]
+[node name="RayFloor" type="RayCast" parent="Armature"]
 transform = Transform( 1, 0, 0, 0, 0.576528, 0.817077, 0, -0.817077, 0.576528, 0, 0.643772, 0.803052 )
 enabled = true
 cast_to = Vector3( 0, -2, 0 )
 
-[node name="ray_wall" type="RayCast" parent="Armature"]
+[node name="RayWall" type="RayCast" parent="Armature"]
 transform = Transform( 1, 0, 0, 0, -0.0374391, 0.999299, 0, -0.999299, -0.0374391, 0, 0.643772, 0.310413 )
 enabled = true
 cast_to = Vector3( 0, -3, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("..:")
 autoplay = "walk-cycle"
 playback_default_blend_time = 0.5
-anims/default = SubResource( 7 )
-anims/explode = SubResource( 10 )
-anims/idle = SubResource( 6 )
+anims/default = SubResource( 6 )
+anims/explode = SubResource( 7 )
+anims/idle = SubResource( 8 )
 anims/impact = SubResource( 9 )
-anims/walk-cycle = SubResource( 8 )
+anims/walk-cycle = SubResource( 10 )
 
-[node name="sphere" type="CollisionShape" parent="."]
+[node name="Sphere1" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74185, 0.267137 )
+shape = SubResource( 11 )
+
+[node name="Sphere2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.491839, 0.74185, 0.852485 )
+shape = SubResource( 12 )
+
+[node name="Sphere3" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.652943, 0.74185, 0.852485 )
+shape = SubResource( 12 )
+
+[node name="Sphere4" type="CollisionShape" parent="."]
+transform = Transform( 0.617236, 0, 0.786778, 0, 1, 0, -0.786778, 0, 0.617236, -0.0445105, 1.04515, 0.0531231 )
 shape = SubResource( 13 )
 
-[node name="sphere 2" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.491839, 0.74185, 0.852485 )
-shape = SubResource( 1 )
-
-[node name="sphere 3" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.652943, 0.74185, 0.852485 )
-shape = SubResource( 1 )
-
-[node name="sphere 4" type="CollisionShape" parent="."]
-transform = Transform( 0.617236, 0, 0.786778, 0, 1, 0, -0.786778, 0, 0.617236, -0.0445105, 1.04515, 0.0531231 )
-shape = SubResource( 16 )
-
-[node name="box" type="CollisionShape" parent="."]
+[node name="Box" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.678859, 0.74185, -0.335599 )
-shape = SubResource( 1 )
+shape = SubResource( 12 )
 
-[node name="sound" type="Spatial" parent="."]
+[node name="Sound" type="Spatial" parent="."]
 
-[node name="sound_walk_loop" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource( 15 )
+[node name="SoundWalkLoop" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource( 14 )
 unit_db = 12.0
 autoplay = true
 max_distance = 30.0
 out_of_range_mode = 1
 doppler_tracking = 1
 
-[node name="sound_hit" type="AudioStreamPlayer3D" parent="."]
+[node name="SoundHit" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 3 )
 unit_db = 6.0
 doppler_tracking = 1
 
-[node name="sound_explode" type="AudioStreamPlayer3D" parent="."]
+[node name="SoundExplode" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 4 )
 unit_db = 18.0
 doppler_tracking = 1
 
-[node name="explosion" type="Particles" parent="."]
+[node name="Explosion" type="Particles" parent="."]
 emitting = false
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 19 )
-draw_pass_1 = SubResource( 21 )
+process_material = SubResource( 17 )
+draw_pass_1 = SubResource( 19 )

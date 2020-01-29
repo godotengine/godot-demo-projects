@@ -85,23 +85,24 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="SphereShape" id=7]
+[sub_resource type="SphereShape" id=5]
 radius = 0.312546
 
-[sub_resource type="Gradient" id=8]
+[sub_resource type="Gradient" id=6]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=9]
-gradient = SubResource( 8 )
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=10]
+[sub_resource type="ParticlesMaterial" id=8]
 emission_shape = 2
 emission_box_extents = Vector3( 0.3, 0.3, 0.3 )
 initial_velocity = 5.51
+angular_velocity = 4.27461e-05
 scale = 0.1
-color_ramp = SubResource( 9 )
+color_ramp = SubResource( 7 )
 
-[sub_resource type="SpatialMaterial" id=11]
+[sub_resource type="SpatialMaterial" id=9]
 flags_transparent = true
 flags_unshaded = true
 vertex_color_use_as_albedo = true
@@ -114,8 +115,8 @@ particles_anim_loop = false
 albedo_color = Color( 1, 1, 0.759137, 1 )
 albedo_texture = ExtResource( 3 )
 
-[sub_resource type="QuadMesh" id=12]
-material = SubResource( 11 )
+[sub_resource type="QuadMesh" id=10]
+material = SubResource( 9 )
 
 [node name="Coin" type="Area"]
 input_ray_pickable = false
@@ -128,18 +129,16 @@ __meta__ = {
 transform = Transform( 0.2, 0, 0, 0, -3.25841e-08, 0.2, 0, -0.2, -3.25841e-08, 0.00550658, 0.532125, 0.000651598 )
 layers = 2
 mesh = SubResource( 2 )
-skeleton = NodePath("..:")
 material/0 = null
 
 [node name="Animation" type="AnimationPlayer" parent="."]
-root_node = NodePath("..:")
 autoplay = "spin"
 anims/spin = SubResource( 3 )
 anims/take = SubResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00894194, 0.575859, 0.0193955 )
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="VisibilityEnabler" type="VisibilityEnabler" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0321827, 0.57887, 0.0268312 )
@@ -155,6 +154,6 @@ emitting = false
 one_shot = true
 explosiveness = 1.0
 visibility_aabb = AABB( -4.12919, -4, -4, 8.25837, 8, 8 )
-process_material = SubResource( 10 )
-draw_pass_1 = SubResource( 12 )
+process_material = SubResource( 8 )
+draw_pass_1 = SubResource( 10 )
 [connection signal="body_entered" from="." to="." method="_on_coin_body_enter"]

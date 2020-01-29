@@ -1,110 +1,68 @@
-
 extends KinematicBody
 
-# Member variables
 const ANIM_FLOOR = 0
 const ANIM_AIR_UP = 1
 const ANIM_AIR_DOWN = 2
 
 const SHOOT_TIME = 1.5
 const SHOOT_SCALE = 2
-
 const CHAR_SCALE = Vector3(0.3, 0.3, 0.3)
+const TURN_SPEED = 40
 
-var facing_dir = Vector3(1, 0, 0)
+var facing_dir = Vector3.RIGHT
 var movement_dir = Vector3()
+var linear_velocity = Vector3()
 
 var jumping = false
 
-var turn_speed = 40
-var keep_jump_inertia = true
 var air_idle_deaccel = false
 var accel = 19.0
 var deaccel = 14.0
 var sharp_turn_threshold = 140
-
 var max_speed = 3.1
 
 var prev_shoot = false
-
-var linear_velocity=Vector3()
-
 var shoot_blend = 0
 
-func adjust_facing(p_facing, p_target, p_step, p_adjust_rate, current_gn):
-	var n = p_target # Normal
-	var t = n.cross(current_gn).normalized()
-	 
-	var x = n.dot(p_facing)
-	var y = t.dot(p_facing)
-	
-	var ang = atan2(y,x)
-	
-	if abs(ang) < 0.001: # Too small
-		return p_facing
-	
-	var s = sign(ang)
-	ang = ang * s
-	var turn = ang * p_adjust_rate * p_step
-	var a
-	if ang < turn:
-		a = ang
-	else:
-		a = turn
-	ang = (ang - a) * s
-	
-	return (n * cos(ang) + t * sin(ang)) * p_facing.length()
+onready var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * ProjectSettings.get_setting("physics/3d/default_gravity_vector")
+
+func _ready():
+	get_node("AnimationTreePlayer").set_active(true)
 
 
 func _physics_process(delta):
-	
-	var lv = linear_velocity
-	var g = Vector3(0, -9.8, 0)
-
-#	var d = 1.0 - delta*state.get_total_density()
-#	if (d < 0):
-#		d = 0
-	lv += g * delta # Apply gravity
+	linear_velocity += gravity * delta
 	
 	var anim = ANIM_FLOOR
 	
-	var up = -g.normalized() # (up is against gravity)
-	var vv = up.dot(lv) # Vertical velocity
-	var hv = lv - up * vv # Horizontal velocity
+	var vv = linear_velocity.y # Vertical velocity.
+	var hv = Vector3(linear_velocity.x, 0, linear_velocity.z) # Horizontal velocity.
 	
-	var hdir = hv.normalized() # Horizontal direction
-	var hspeed = hv.length() # Horizontal speed
+	var hdir = hv.normalized() # Horizontal direction.
+	var hspeed = hv.length() # Horizontal speed.
 	
-	var dir = Vector3() # Where does the player intend to walk to
-	var cam_xform = get_node("Target/Camera").get_global_transform()
-	
-	if Input.is_action_pressed("move_forward"):
-		dir += -cam_xform.basis[2]
-	if Input.is_action_pressed("move_backwards"):
-		dir += cam_xform.basis[2]
-	if Input.is_action_pressed("move_left"):
-		dir += -cam_xform.basis[0]
-	if Input.is_action_pressed("move_right"):
-		dir += cam_xform.basis[0]
+	# Player input
+	var cam_basis = get_node("Target/Camera").get_global_transform().basis
+	var dir = Vector3() # Where does the player intend to walk to.
+	dir = Input.get_action_strength("move_right") * cam_basis[0]
+	dir -= Input.get_action_strength("move_left") * cam_basis[0]
+	dir += Input.get_action_strength("move_backwards") * cam_basis[2]
+	dir -= Input.get_action_strength("move_forward") * cam_basis[2]
+	dir.y = 0
+	dir = dir.normalized()
 	
 	var jump_attempt = Input.is_action_pressed("jump")
 	var shoot_attempt = Input.is_action_pressed("shoot")
 	
-	var target_dir = (dir - up * dir.dot(up)).normalized()
-	
 	if is_on_floor():
-		var sharp_turn = hspeed > 0.1 and rad2deg(acos(target_dir.dot(hdir))) > sharp_turn_threshold
+		var sharp_turn = hspeed > 0.1 and rad2deg(acos(dir.dot(hdir))) > sharp_turn_threshold
 		
 		if dir.length() > 0.1 and !sharp_turn:
 			if hspeed > 0.001:
-				#linear_dir = linear_h_velocity/linear_vel
-				#if (linear_vel > brake_velocity_limit and linear_dir.dot(ctarget_dir) < -cos(Math::deg2rad(brake_angular_limit)))
-				#	brake = true
-				#else
-				hdir = adjust_facing(hdir, target_dir, delta, 1.0 / hspeed * turn_speed, up)
+				hdir = adjust_facing(hdir, dir, delta, 1.0 / hspeed * TURN_SPEED, Vector3.UP)
 				facing_dir = hdir
 			else:
-				hdir = target_dir
+				hdir = dir
 			
 			if hspeed < max_speed:
 				hspeed += accel * delta
@@ -117,11 +75,11 @@ func _physics_process(delta):
 		
 		var mesh_xform = get_node("Armature").get_transform()
 		var facing_mesh = -mesh_xform.basis[0].normalized()
-		facing_mesh = (facing_mesh - up * facing_mesh.dot(up)).normalized()
+		facing_mesh = (facing_mesh - Vector3.UP * facing_mesh.dot(Vector3.UP)).normalized()
 		
-		if hspeed>0:
-			facing_mesh = adjust_facing(facing_mesh, target_dir, delta, 1.0/hspeed*turn_speed, up)
-		var m3 = Basis(-facing_mesh, up, -facing_mesh.cross(up).normalized()).scaled(CHAR_SCALE)
+		if hspeed > 0:
+			facing_mesh = adjust_facing(facing_mesh, dir, delta, 1.0 / hspeed * TURN_SPEED, Vector3.UP)
+		var m3 = Basis(-facing_mesh, Vector3.UP, -facing_mesh.cross(Vector3.UP).normalized()).scaled(CHAR_SCALE)
 		
 		get_node("Armature").set_transform(Transform(m3, mesh_xform.origin))
 		
@@ -135,14 +93,13 @@ func _physics_process(delta):
 		else:
 			anim = ANIM_AIR_DOWN
 		
-		# var hs
 		if dir.length() > 0.1:
-			hv += target_dir * (accel * 0.2) * delta
-			if (hv.length() > max_speed):
-				hv = hv.normalized()*max_speed
+			hv += dir * (accel * 0.2 * delta)
+			if hv.length() > max_speed:
+				hv = hv.normalized() * max_speed
 		else:
 			if air_idle_deaccel:
-				hspeed = hspeed - (deaccel * 0.2) * delta
+				hspeed = hspeed - (deaccel * 0.2 * delta)
 				if hspeed < 0:
 					hspeed = 0
 				hv = hdir * hspeed
@@ -150,12 +107,12 @@ func _physics_process(delta):
 	if jumping and vv < 0:
 		jumping = false
 	
-	lv = hv + up*vv
+	linear_velocity = hv + Vector3.UP * vv
 	
 	if is_on_floor():
-		movement_dir = lv
+		movement_dir = linear_velocity
 		
-	linear_velocity = move_and_slide(lv,-g.normalized())
+	linear_velocity = move_and_slide(linear_velocity, -gravity.normalized())
 	
 	if shoot_blend > 0:
 		shoot_blend -= delta * SHOOT_SCALE
@@ -168,7 +125,7 @@ func _physics_process(delta):
 		bullet.set_transform(get_node("Armature/Bullet").get_global_transform().orthonormalized())
 		get_parent().add_child(bullet)
 		bullet.set_linear_velocity(get_node("Armature/Bullet").get_global_transform().basis[2].normalized() * 20)
-		bullet.add_collision_exception_with(self) # Add it to bullet
+		bullet.add_collision_exception_with(self) # Add it to bullet.
 		get_node("SoundShoot").play()
 	
 	prev_shoot = shoot_attempt
@@ -178,8 +135,28 @@ func _physics_process(delta):
 	
 	get_node("AnimationTreePlayer").transition_node_set_current("state", anim)
 	get_node("AnimationTreePlayer").blend2_node_set_amount("gun", min(shoot_blend, 1.0))
-#	state.set_angular_velocity(Vector3())
 
 
-func _ready():
-	get_node("AnimationTreePlayer").set_active(true)
+func adjust_facing(p_facing, p_target, p_step, p_adjust_rate, current_gn):
+	var n = p_target # Normal.
+	var t = n.cross(current_gn).normalized()
+	 
+	var x = n.dot(p_facing)
+	var y = t.dot(p_facing)
+	
+	var ang = atan2(y,x)
+	
+	if abs(ang) < 0.001: # Too small.
+		return p_facing
+	
+	var s = sign(ang)
+	ang = ang * s
+	var turn = ang * p_adjust_rate * p_step
+	var a
+	if ang < turn:
+		a = ang
+	else:
+		a = turn
+	ang = (ang - a) * s
+	
+	return (n * cos(ang) + t * sin(ang)) * p_facing.length()

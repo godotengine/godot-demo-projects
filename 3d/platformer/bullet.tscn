@@ -25,7 +25,7 @@ surfaces/0 = {
 "vertex_count": 34
 }
 
-[sub_resource type="SpatialMaterial" id=6]
+[sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0.7, 0.7, 0.7, 1 )
 metallic = 0.1
 roughness = 0.0
@@ -35,8 +35,7 @@ emission_energy = 3.71
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="Animation" id=3]
-resource_name = "life"
+[sub_resource type="Animation" id=4]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sphere:visible")
@@ -63,7 +62,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 tracks/2/type = "method"
-tracks/2/path = NodePath(".:")
+tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -77,19 +76,19 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Gradient" id=8]
+[sub_resource type="Gradient" id=5]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=9]
-gradient = SubResource( 8 )
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
 
 [sub_resource type="ParticlesMaterial" id=7]
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 scale = 0.3
-color_ramp = SubResource( 9 )
+color_ramp = SubResource( 6 )
 
-[sub_resource type="SphereShape" id=5]
+[sub_resource type="SphereShape" id=8]
 radius = 0.27
 
 [node name="Bullet" type="RigidBody"]
@@ -102,13 +101,11 @@ __meta__ = {
 [node name="Sphere" type="MeshInstance" parent="."]
 transform = Transform( 0.24972, 0, 0, 0, 0.24972, 0, 0, 0, 0.24972, 0.00159812, 0.0110106, 0.0045104 )
 mesh = SubResource( 2 )
-skeleton = NodePath("..:")
-material/0 = SubResource( 6 )
+material/0 = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("..:")
 autoplay = "life"
-anims/life = SubResource( 3 )
+anims/life = SubResource( 4 )
 
 [node name="Particles" type="Particles" parent="."]
 amount = 16
@@ -120,4 +117,4 @@ process_material = SubResource( 7 )
 draw_pass_1 = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 5 )
+shape = SubResource( 8 )
