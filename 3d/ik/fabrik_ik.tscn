@@ -165,21 +165,28 @@ mesh = SubResource( 5 )
 material/0 = SubResource( 6 )
 
 [node name="Control" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Panel" type="Panel" parent="Control"]
 modulate = Color( 1, 1, 1, 0.784314 )
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = -2.0
-margin_top = 530.0
-margin_right = 1028.0
-margin_bottom = 600.0
+margin_top = -70.0
+margin_right = 4.0
 
 [node name="Label" type="Label" parent="Control/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 12.0
 margin_top = 10.0
-margin_right = 1012.0
-margin_bottom = 41.0
+margin_right = -18.0
+margin_bottom = -29.0
 text = "F.A.B.R.I.K IK
 Move mouse to move IK targets
 (Using 3 bones in the right hand, only 2 in the left. 3+ recommended)"
@@ -187,10 +194,12 @@ align = 1
 valign = 1
 
 [node name="Label_extra" type="Label" parent="Control/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 12.0
 margin_top = 80.0
-margin_right = 1012.0
-margin_bottom = 128.0
+margin_right = -18.0
+margin_bottom = 58.0
 text = "NOTE: You will get a few errors when saving with FABRIK IK nodes in your scene
 This is a known bug. Please ignore the errors for now, as they do not do anything
 (They're just annoying. If you find a fix, please add it to the demo repository!)"
@@ -198,9 +207,11 @@ align = 1
 valign = 1
 
 [node name="Label_left" type="Label" parent="Control/Panel"]
-margin_left = 782.0
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -248.0
 margin_top = 4.0
-margin_right = 895.0
+margin_right = -135.0
 margin_bottom = 18.0
 text = "Left Hand"
 align = 1
@@ -214,19 +225,25 @@ text = "Right Hand"
 align = 1
 
 [node name="Button_Next" type="Button" parent="Control"]
-margin_left = 900.0
-margin_top = 540.0
-margin_right = 1019.0
-margin_bottom = 590.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -124.0
+margin_top = -60.0
+margin_right = -5.0
+margin_bottom = -10.0
 text = "Next scene"
 script = ExtResource( 10 )
-scene_to_change_to = "res://fps/fps_example.tscn"
+scene_to_change_to = "res://skeleton_ik.tscn"
 
 [node name="Button_Prev" type="Button" parent="Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
 margin_left = 10.0
-margin_top = 540.0
+margin_top = -60.0
 margin_right = 129.0
-margin_bottom = 590.0
+margin_bottom = -10.0
 text = "Previous scene"
 script = ExtResource( 10 )
 scene_to_change_to = "res://look_at_ik.tscn"
