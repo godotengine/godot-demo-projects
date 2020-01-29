@@ -15,6 +15,10 @@ export(bool) var debug_messages = false
 var skeleton_to_use
 var first_call = true
 
+export (bool) var position_using_additional_bone = false
+export (String) var additional_bone_name = ""
+export (float) var additional_bone_length = 1
+
 
 func _ready():
 	set_process(false)
@@ -115,8 +119,13 @@ func update_skeleton():
 		rest.basis = rest.basis.rotated(rest.basis.y, deg2rad(additional_rotation.y))
 		rest.basis = rest.basis.rotated(rest.basis.z, deg2rad(additional_rotation.z))
 	
+	if position_using_additional_bone:
+		var additional_bone_id = skeleton_to_use.find_bone(additional_bone_name)
+		var additional_bone_pos = skeleton_to_use.get_bone_global_pose(additional_bone_id)
+		rest.origin = additional_bone_pos.origin - additional_bone_pos.basis.z.normalized() * additional_bone_length
+	
 	# Finally, apply the bone rotation to the skeleton
-	skeleton_to_use.set_bone_global_pose(bone, rest)
+	skeleton_to_use.set_bone_global_pose_override(bone, rest, 1.0, true)
 
 
 func _setup_for_editor():

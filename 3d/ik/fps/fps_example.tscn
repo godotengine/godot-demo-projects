@@ -14,75 +14,68 @@
 [ext_resource path="res://battle_bot_color.tres" type="Material" id=12]
 [ext_resource path="res://battle_bot_emission.tres" type="Material" id=13]
 
-[sub_resource type="PlaneMesh" id=1]
+[sub_resource type="PlaneMesh" id=5]
 size = Vector2( 40, 40 )
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=6]
 albedo_texture = ExtResource( 1 )
 roughness = 0.2
 uv1_scale = Vector3( 0.25, 0.25, 0.25 )
 uv1_triplanar = true
 
-[sub_resource type="BoxShape" id=3]
+[sub_resource type="BoxShape" id=7]
 extents = Vector3( 20, 1, 20 )
 
-[sub_resource type="CubeMesh" id=4]
+[sub_resource type="CubeMesh" id=8]
 size = Vector3( 4, 4, 4 )
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=9]
 albedo_color = Color( 0.148438, 1, 0, 1 )
 albedo_texture = ExtResource( 1 )
 uv1_triplanar = true
 
-[sub_resource type="BoxShape" id=6]
+[sub_resource type="BoxShape" id=10]
 extents = Vector3( 2, 2, 2 )
 
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="SpatialMaterial" id=11]
 albedo_color = Color( 0, 0.882813, 1, 1 )
 albedo_texture = ExtResource( 1 )
 uv1_triplanar = true
 
-[sub_resource type="ProceduralSky" id=8]
+[sub_resource type="ProceduralSky" id=3]
 sky_top_color = Color( 0.0470588, 0.454902, 0.976471, 1 )
 sky_horizon_color = Color( 0.556863, 0.823529, 0.909804, 1 )
 sky_curve = 0.25
 ground_bottom_color = Color( 0.101961, 0.145098, 0.188235, 1 )
 ground_horizon_color = Color( 0.482353, 0.788235, 0.952941, 1 )
 ground_curve = 0.01
-sun_energy = 16.0
 
-[sub_resource type="Environment" id=9]
+[sub_resource type="Environment" id=4]
 background_mode = 2
-background_sky = SubResource( 8 )
-ambient_light_color = Color( 1, 1, 1, 1 )
-ambient_light_energy = 0.4
-ambient_light_sky_contribution = 0.0
-fog_depth_begin = 20.0
-fog_depth_curve = 0.406126
-fog_transmit_enabled = true
+background_sky = SubResource( 3 )
+ambient_light_color = Color( 1, 0.909804, 0.784314, 1 )
+ambient_light_energy = 1.4
+ambient_light_sky_contribution = 0.72
 tonemap_mode = 3
-ss_reflections_max_steps = 32
-ssao_enabled = true
-ssao_light_affect = 1.0
 glow_enabled = true
 glow_levels/1 = true
 glow_levels/2 = true
 glow_levels/5 = false
-glow_intensity = 0.6
-glow_bloom = 0.06
+glow_intensity = 0.2
+glow_bloom = 0.03
 glow_blend_mode = 0
 
-[sub_resource type="CapsuleShape" id=10]
+[sub_resource type="CapsuleShape" id=12]
 radius = 4.0
 height = 6.0
 
-[sub_resource type="Curve3D" id=11]
+[sub_resource type="Curve3D" id=13]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -2.43129, -0.955339, 0, 0, 0, 0, 0, 0, 0, -0.670561, 0.183959, 0, 0, 0, 0, 0, 0, 0, 0.64629, 0.228347, 0, 0, 0, 0, 0, 0, 0, 2.31825, -0.925747, 0 ),
 "tilts": PoolRealArray( 0, 0, 0, 0 )
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=14]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos:translation")
 tracks/0/interp = 1
@@ -120,7 +113,7 @@ tracks/2/keys = {
 "values": [ 80.0, 60.0 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=15]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Lean_Path/PathFollow/IK_LookAt_Chest/Camera:fov")
 tracks/0/interp = 1
@@ -158,7 +151,7 @@ tracks/2/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, -2, 0 ) ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=16]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos:translation")
 tracks/0/interp = 1
@@ -202,206 +195,206 @@ tracks/2/keys = {
 
 [node name="Floor_plane" type="MeshInstance" parent="Level"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Floor_plane"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Floor_plane/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.956119, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 7 )
 
 [node name="Walls" type="Spatial" parent="Level"]
 
 [node name="LargeWall" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( 1, 0, 0, 0, 10, 0, 0, 0, 10, -39.9997, 20.0003, 20.0002 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/LargeWall"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/LargeWall/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="LargeWall2" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( 1, 0, 0, 0, 10, 0, 0, 0, 10, -39.9997, 20.0003, -19.9998 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/LargeWall2"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/LargeWall2/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="LargeWall3" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( -4.37114e-08, 0, -10, 0, 10, 0, 1, 0, -4.37114e-07, -18.9997, 20.0003, -40.9998 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/LargeWall3"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/LargeWall3/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="LargeWall4" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( -4.37114e-08, 0, -10, 0, 10, 0, 1, 0, -4.37114e-07, 21.0003, 20.0003, -40.9998 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/LargeWall4"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/LargeWall4/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="LargeWall5" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( -1, 0, 8.74228e-07, 0, 10, 0, -8.74228e-08, 0, -10, 41.0003, 20.0003, -19.9998 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/LargeWall5"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/LargeWall5/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="LargeWall6" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( -1, 0, 8.74228e-07, 0, 10, 0, -8.74228e-08, 0, -10, 41.0003, 20.0003, 20.0002 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/LargeWall6"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/LargeWall6/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="LargeWall7" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( 1.31134e-07, 0, 10, 0, 10, 0, -1, 0, 1.31134e-06, 21.0003, 20.0003, 40.0002 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/LargeWall7"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/LargeWall7/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="LargeWall8" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( 1.31134e-07, 0, 10, 0, 10, 0, -1, 0, 1.31134e-06, -18.9997, 20.0003, 40.0002 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/LargeWall8"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/LargeWall8/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="Wall" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( 7.54979e-08, 0, 4, 0, 4, 0, -1, 0, 3.01992e-07, -9.9997, 8.00032, 22.0005 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 7 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 11 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/Wall"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/Wall/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="Wall2" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( 1, 0, -4.76837e-07, 0, 4, 0, 1.19209e-07, 0, 4, -19.9997, 8.00032, 16.0005 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 7 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 11 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/Wall2"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/Wall2/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="Wall3" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( 1, 0, -3.57627e-07, 0, 4, 0, 1.19209e-07, 0, 3, -19.9997, 8.00032, 2.00049 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 7 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 11 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/Wall3"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/Wall3/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="Wall4" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( 1, 0, -4.76837e-07, 0, 4, 0, 1.19209e-07, 0, 4, -19.9997, 8.00032, -21.9995 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 7 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 11 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/Wall4"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/Wall4/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="Wall5" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( -1.62921e-07, 0, -4, 0, 4, 0, 1, 0, -6.51683e-07, -9.9997, 8.00032, -27.9995 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 7 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 11 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/Wall5"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/Wall5/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="Wall6" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( -1, 0, 8.26528e-07, 0, 4, 0, -2.06632e-07, 0, -4, 0.000319004, 8.00032, -21.9995 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 7 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 11 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/Wall6"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/Wall6/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="Wall7" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( -1.62921e-07, 0, -4, 0, 4, 0, 1, 0, -6.51683e-07, 10.0003, 8.00032, -15.9995 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 7 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 11 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/Wall7"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/Wall7/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="Wall9" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( 1, 0, -4.76837e-07, 0, 4, 0, 1.19209e-07, 0, 4, 25.0003, 8.00032, -25.9995 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 7 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 11 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/Wall9"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/Wall9/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="Wall10" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( 0.573577, 0, 3.27661, 0, 4, 0, -0.819152, 0, 2.29431, 23.0003, 8.00032, 3.00049 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 7 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 11 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/Wall10"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/Wall10/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="Wall11" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( -0.819152, 0, 2.29431, 0, 4, 0, -0.573577, 0, -3.27661, 22.2126, 8.00032, 14.7123 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 7 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 11 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/Wall11"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/Wall11/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="Wall12" type="MeshInstance" parent="Level/Walls"]
 transform = Transform( -0.627507, 2.10616, 2.29431, 0.642788, 3.06418, 0, -0.439385, 1.47475, -3.27661, 14.8402, 8.00032, 9.55015 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 7 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 11 )
 
 [node name="StaticBody" type="StaticBody" parent="Level/Walls/Wall12"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Walls/Wall12/StaticBody"]
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.388878, -0.754027, 0.529355, 0, 0.574581, 0.818448, -0.921289, -0.318277, 0.223442, -9.77531, 11.5204, 11.766 )
@@ -409,7 +402,7 @@ light_color = Color( 1, 0.925598, 0.820313, 1 )
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 9 )
+environment = SubResource( 4 )
 
 [node name="Control" type="Control" parent="."]
 margin_right = 40.0
@@ -466,13 +459,13 @@ script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 7, 0 )
-shape = SubResource( 10 )
+shape = SubResource( 12 )
 
 [node name="CameraHolder" type="Spatial" parent="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 0 )
 
 [node name="Lean_Path" type="Path" parent="KinematicBody/CameraHolder"]
-curve = SubResource( 11 )
+curve = SubResource( 13 )
 
 [node name="PathFollow" type="PathFollow" parent="KinematicBody/CameraHolder/Lean_Path"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0412404, 0.205172, 0 )
@@ -488,14 +481,8 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../BattleBot/Armature/Skeleton")
 bone_name = "Chest"
-update_mode = 0
 look_at_axis = 2
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
-use_negative_our_rot = false
 additional_rotation = Vector3( -10, 0, 0 )
-debug_messages = false
 
 [node name="Camera" type="Camera" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
@@ -512,10 +499,8 @@ __meta__ = {
 skeleton_path = NodePath("../../../../../../BattleBot/Armature/Skeleton")
 bones_in_chain = PoolStringArray( "Left_UpperArm", "Left_LowerArm", "Left_Hand" )
 bones_in_chain_lengths = PoolRealArray( 1.97, 3, 0.1 )
-update_mode = 0
-chain_iterations = 6
+chain_iterations = 5
 limit_chain_iterations = false
-reset_iterations_on_update = false
 use_middle_joint_target = true
 
 [node name="target" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK"]
@@ -529,14 +514,8 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../../../../../BattleBot/Armature/Skeleton")
 bone_name = "Left_Hand"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
 use_negative_our_rot = true
 additional_rotation = Vector3( 0, 0, 90 )
-debug_messages = false
 
 [node name="middle_joint_target" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.85263, -2.91316, -2.77555 )
@@ -558,10 +537,8 @@ __meta__ = {
 skeleton_path = NodePath("../../../../../../BattleBot/Armature/Skeleton")
 bones_in_chain = PoolStringArray( "Right_UpperArm", "Right_LowerArm", "Right_Hand" )
 bones_in_chain_lengths = PoolRealArray( 1.97, 3, 0.1 )
-update_mode = 0
 chain_iterations = 3
 limit_chain_iterations = false
-reset_iterations_on_update = false
 use_middle_joint_target = true
 
 [node name="target" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK_RightArm"]
@@ -575,14 +552,8 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../../../../../BattleBot/Armature/Skeleton")
 bone_name = "Right_Hand"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
 use_negative_our_rot = true
 additional_rotation = Vector3( 0, 0, 90 )
-debug_messages = false
 
 [node name="middle_joint_target" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK_RightArm"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.73318, -2.91316, -2.77555 )
@@ -606,21 +577,13 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../BattleBot/Armature/Skeleton")
 bone_name = "Head"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
-use_negative_our_rot = false
-additional_rotation = Vector3( 0, 0, 0 )
-debug_messages = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="KinematicBody/CameraHolder"]
 autoplay = "Start"
 playback_speed = 4.0
-anims/Aiming = SubResource( 12 )
-anims/Idle = SubResource( 13 )
-anims/Start = SubResource( 14 )
+anims/Aiming = SubResource( 14 )
+anims/Idle = SubResource( 15 )
+anims/Start = SubResource( 16 )
 
 [node name="Weapon" type="Spatial" parent="KinematicBody/CameraHolder"]
 
