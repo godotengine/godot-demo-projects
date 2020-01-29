@@ -1,11 +1,26 @@
 extends Camera
 
-var collision_exception = []
 export var min_distance = 0.5
 export var max_distance = 4.0
 export var angle_v_adjust = 0.0
+
+var collision_exception = []
 var max_height = 2.0
 var min_height = 0
+
+func _ready():
+	# Find collision exceptions for ray.
+	var node = self
+	while(node):
+		if (node is RigidBody):
+			collision_exception.append(node.get_rid())
+			break
+		else:
+			node = node.get_parent()
+	
+	# This detaches the camera transform from the parent spatial node.
+	set_as_toplevel(true)
+
 
 func _physics_process(_delta):
 	var target = get_parent().get_global_transform().origin
@@ -33,17 +48,3 @@ func _physics_process(_delta):
 	var t = get_transform()
 	t.basis = Basis(t.basis[0], deg2rad(angle_v_adjust)) * t.basis
 	set_transform(t)
-
-
-func _ready():
-	# Find collision exceptions for ray.
-	var node = self
-	while(node):
-		if (node is RigidBody):
-			collision_exception.append(node.get_rid())
-			break
-		else:
-			node = node.get_parent()
-	
-	# This detaches the camera transform from the parent spatial node.
-	set_as_toplevel(true)

@@ -2,19 +2,24 @@ extends Control
 
 var town = null
 
-func _back():
-	town.queue_free()
-	show()
+func _process(_delta):
+	if Input.is_action_just_pressed("back"):
+		_on_Back_pressed()
 
 
 func _load_scene(car):
 	var tt = load(car).instance()
 	tt.set_name("car")
 	town = load("res://town_scene.tscn").instance()
-	town.get_node("instance_pos").add_child(tt)
-	town.get_node("back").connect("pressed", self, "_back")
+	town.get_node("InstancePos").add_child(tt)
+	town.get_node("Back").connect("pressed", self, "_on_Back_pressed")
 	get_parent().add_child(town)
 	hide()
+
+
+func _on_Back_pressed():
+	town.queue_free()
+	show()
 
 
 func _on_MiniVan_pressed():
