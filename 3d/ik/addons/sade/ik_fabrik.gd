@@ -193,47 +193,23 @@ func solve_chain():
 			var middle_point_pos = middle_joint_target.global_transform
 			bone_nodes[bone_nodes.size()/2].global_transform.origin = middle_point_pos.origin
 	
-	# Get the distance from the origin to the target
-	var distance = (chain_origin - target_pos).length()
+	# Get the difference between our end effector (the final bone in the chain) and the target
+	var dif = (bone_nodes[bone_nodes.size()-1].global_transform.origin - target_pos).length()
 	
-	# If the distance is farther than our total reach, the target cannot be reached.
-	# Make the bone chain a straight line pointing towards the target
-	if distance > total_length:
-		for i in range (0, bones_in_chain.size()):
-			# Create a direct line to target and make this bone travel down that line
-			var curr_origin = bone_nodes[i].global_transform.origin
-			var r =(target_pos - curr_origin).length()
-			var l = bones_in_chain_lengths[i] / r
-			
-			# Find new join position
-			var new_pos = curr_origin.linear_interpolate(target_pos, l)
-			
-			# Apply it to the bone node
-			bone_nodes[i].look_at(new_pos, Vector3.UP)
-			bone_nodes[i].global_transform.origin = new_pos
+	# Check to see if the distance from the end effector to the target is within our error margin (CHAIN_TOLERANCE).
+	# If it not, move the chain towards the target (going forwards, backwards, and then applying rotation)
+	while dif > CHAIN_TOLERANCE:
+		chain_backward()
+		chain_forward()
+		chain_apply_rotation()
 		
-		# Apply the rotation to the first node in the bone chain, making it look at the next bone in the bone chain
-		bone_nodes[0].look_at(bone_nodes[1].global_transform.origin, Vector3.UP)
-	
-	# If the distance is NOT farther than our total reach, the target can be reached.
-	else:
-		# Get the difference between our end effector (the final bone in the chain) and the target
-		var dif = (bone_nodes[bone_nodes.size()-1].global_transform.origin - target_pos).length()
+		# Update the difference between our end effector (the final bone in the chain) and the target
+		dif = (bone_nodes[bone_nodes.size()-1].global_transform.origin - target_pos).length()
 		
-		# Check to see if the distance from the end effector to the target is within our error margin (CHAIN_TOLERANCE).
-		# If it not, move the chain towards the target (going forwards, backwards, and then applying rotation)
-		while dif > CHAIN_TOLERANCE:
-			chain_backward()
-			chain_forward()
-			chain_apply_rotation()
-			
-			# Update the difference between our end effector (the final bone in the chain) and the target
-			dif = (bone_nodes[bone_nodes.size()-1].global_transform.origin - target_pos).length()
-			
-			# Add one to chain_iterations. If we have reached our max iterations, then break
-			chain_iterations = chain_iterations + 1
-			if chain_iterations >= CHAIN_MAX_ITER:
-				break
+		# Add one to chain_iterations. If we have reached our max iterations, then break
+		chain_iterations = chain_iterations + 1
+		if chain_iterations >= CHAIN_MAX_ITER:
+			break
 	
 	# Reset the bone node transforms to the skeleton bone transforms
 	for i in range(0, bone_nodes.size()):

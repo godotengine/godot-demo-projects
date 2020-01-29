@@ -69,14 +69,14 @@ material/0 = ExtResource( 3 )
 material/1 = ExtResource( 4 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5, 8.8 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5, 11 )
 fov = 74.0
 script = ExtResource( 5 )
-MOVEMENT_SPEED = -6.0
+MOVEMENT_SPEED = -8.0
 flip_axis = true
 
 [node name="targets" type="Spatial" parent="Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.41814 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8 )
 
 [node name="IK_LookAt_Head" type="Spatial" parent="Camera/targets"]
 script = ExtResource( 6 )
@@ -95,6 +95,7 @@ __meta__ = {
 skeleton_path = NodePath("../../../BattleBot/Armature/Skeleton")
 bones_in_chain = PoolStringArray( "Left_UpperArm", "Left_LowerArm" )
 bones_in_chain_lengths = PoolRealArray( 1.97, 3 )
+chain_iterations = 10
 limit_chain_iterations = false
 use_middle_joint_target = true
 
