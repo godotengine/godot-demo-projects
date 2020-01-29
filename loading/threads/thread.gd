@@ -1,6 +1,5 @@
 extends Node2D
 
-# Member variables
 var thread = Thread.new()
 
 # This function runs in a thread!
@@ -18,7 +17,7 @@ func _bg_load_done():
 	# Wait for the thread to complete, get the returned value
 	var tex = thread.wait_to_finish()
 	# Set to the sprite
-	get_node("sprite").set_texture(tex)
+	get_node("Sprite").set_texture(tex)
 
 
 func _on_load_pressed():
