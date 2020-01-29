@@ -76,7 +76,7 @@ func _physics_process(delta):
 	var hspeed = hv.length() # Horizontal speed
 	
 	var dir = Vector3() # Where does the player intend to walk to
-	var cam_xform = get_node("target/camera").get_global_transform()
+	var cam_xform = get_node("Target/Camera").get_global_transform()
 	
 	if Input.is_action_pressed("move_forward"):
 		dir += -cam_xform.basis[2]
@@ -128,7 +128,7 @@ func _physics_process(delta):
 		if not jumping and jump_attempt:
 			vv = 7.0
 			jumping = true
-			get_node("sound_jump").play()
+			get_node("SoundJump").play()
 	else:
 		if vv > 0:
 			anim = ANIM_AIR_UP
@@ -164,12 +164,12 @@ func _physics_process(delta):
 	
 	if shoot_attempt and not prev_shoot:
 		shoot_blend = SHOOT_TIME
-		var bullet = preload("res://bullet.scn").instance()
-		bullet.set_transform(get_node("Armature/bullet").get_global_transform().orthonormalized())
+		var bullet = preload("res://bullet.tscn").instance()
+		bullet.set_transform(get_node("Armature/Bullet").get_global_transform().orthonormalized())
 		get_parent().add_child(bullet)
-		bullet.set_linear_velocity(get_node("Armature/bullet").get_global_transform().basis[2].normalized() * 20)
+		bullet.set_linear_velocity(get_node("Armature/Bullet").get_global_transform().basis[2].normalized() * 20)
 		bullet.add_collision_exception_with(self) # Add it to bullet
-		get_node("sound_shoot").play()
+		get_node("SoundShoot").play()
 	
 	prev_shoot = shoot_attempt
 	
