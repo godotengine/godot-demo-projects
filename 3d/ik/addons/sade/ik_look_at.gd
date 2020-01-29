@@ -10,14 +10,14 @@ export(bool) var use_our_rotation_y = false
 export(bool) var use_our_rotation_z = false
 export(bool) var use_negative_our_rot = false
 export(Vector3) var additional_rotation = Vector3()
+export (bool) var position_using_additional_bone = false
+export (String) var additional_bone_name = ""
+export (float) var additional_bone_length = 1
 export(bool) var debug_messages = false
 
 var skeleton_to_use
 var first_call = true
-
-export (bool) var position_using_additional_bone = false
-export (String) var additional_bone_name = ""
-export (float) var additional_bone_length = 1
+var _editor_indicator = null
 
 
 func _ready():
@@ -131,9 +131,9 @@ func update_skeleton():
 func _setup_for_editor():
 	# So we can see the target in the editor, let's create a mesh instance,
 	# Add it as our child, and name it
-	var indicator = MeshInstance.new()
-	add_child(indicator)
-	indicator.name = "(EditorOnly) Visual indicator"
+	_editor_indicator = MeshInstance.new()
+	add_child(_editor_indicator)
+	_editor_indicator.name = "(EditorOnly) Visual indicator"
 
 	# We need to make a mesh for the mesh instance.
 	# The code below makes a small sphere mesh
@@ -150,7 +150,7 @@ func _setup_for_editor():
 	indicator_material.albedo_texture = preload("editor_gizmo_texture.png")
 	indicator_material.albedo_color = Color(1, 0.5, 0, 1)
 	indicator_mesh.material = indicator_material
-	indicator.mesh = indicator_mesh
+	_editor_indicator.mesh = indicator_mesh
 
 
 func _set_update(new_value):

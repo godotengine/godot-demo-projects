@@ -320,12 +320,12 @@ func chain_apply_rotation():
 				
 				# A bit of a hack. Because we only have two bones, we have to use the previous
 				# bone to position the last bone in the chain.
-				var last_bone = bone_nodes[i-1].global_transform;
+				var last_bone = bone_nodes[i-1].global_transform
 				# Because we know the length of adjacent bone to this bone in the chain, we can
 				# position this bone by taking the last bone's position plus the length of the
 				# bone on the Z axis.
 				# This will place the position of the bone at the end of the last bone
-				bone_trans.origin = last_bone.origin - last_bone.basis.z.normalized() * bones_in_chain_lengths[i-1];
+				bone_trans.origin = last_bone.origin - last_bone.basis.z.normalized() * bones_in_chain_lengths[i-1]
 		
 		# If this is NOT the last bone in the bone chain, rotate the bone to look at the next
 		# bone in the bone chain.
