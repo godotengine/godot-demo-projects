@@ -190,8 +190,9 @@ func solve_chain():
 	# If we are using middle joint target (and have more than 2 bones), move our middle joint towards it!
 	if use_middle_joint_target == true:
 		if bone_nodes.size() > 2:
-			var middle_point_pos = middle_joint_target.global_transform
-			bone_nodes[bone_nodes.size()/2].global_transform.origin = middle_point_pos.origin
+			var middle_point_pos = middle_joint_target.global_transform.origin
+			var middle_point_pos_diff = (middle_point_pos - bone_nodes[bone_nodes.size()/2].global_transform.origin)
+			bone_nodes[bone_nodes.size()/2].global_transform.origin += middle_point_pos_diff.normalized()
 	
 	# Get the difference between our end effector (the final bone in the chain) and the target
 	var dif = (bone_nodes[bone_nodes.size()-1].global_transform.origin - target_pos).length()
