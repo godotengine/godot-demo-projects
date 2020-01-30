@@ -1,5 +1,4 @@
-
 extends RigidBody
 
-# Member variables
-var disabled = false
+#warning-ignore:unused_class_variable
+var enabled = true

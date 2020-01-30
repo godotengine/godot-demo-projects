@@ -1,0 +1,159 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://coin.gd" type="Script" id=1]
+[ext_resource path="res://sound_coin.wav" type="AudioStream" id=2]
+[ext_resource path="res://shine.png" type="Texture" id=3]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 1, 0.837686, 0, 1 )
+metallic = 0.86
+roughness = 0.0
+emission_enabled = true
+emission = Color( 0.219922, 0.109961, 0, 1 )
+emission_energy = 1.71
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="ArrayMesh" id=2]
+resource_name = "Circle"
+surfaces/0 = {
+"aabb": AABB( -1, -0.191052, -1, 2, 0.407182, 2.64929 ),
+"array_data": PoolByteArray( 0, 184, 29, 178, 237, 186, 0, 60, 0, 130, 0, 0, 0, 0, 29, 178, 255, 187, 0, 60, 0, 130, 0, 0, 255, 55, 29, 178, 237, 186, 0, 60, 0, 130, 0, 0, 237, 58, 29, 178, 0, 184, 0, 60, 0, 130, 0, 0, 237, 186, 29, 178, 255, 183, 0, 60, 0, 130, 0, 0, 0, 60, 29, 178, 0, 0, 0, 60, 0, 130, 0, 0, 0, 188, 29, 178, 0, 0, 0, 60, 0, 130, 0, 0, 0, 60, 29, 178, 49, 57, 0, 60, 0, 130, 0, 0, 0, 188, 29, 178, 49, 57, 0, 60, 0, 130, 0, 0, 237, 58, 29, 178, 152, 60, 0, 60, 0, 130, 0, 0, 237, 186, 29, 178, 152, 60, 0, 60, 0, 130, 0, 0, 0, 56, 29, 178, 15, 62, 0, 60, 0, 130, 0, 0, 0, 184, 29, 178, 15, 62, 0, 60, 0, 130, 0, 0, 0, 0, 29, 178, 152, 62, 0, 60, 0, 130, 0, 0, 255, 55, 234, 50, 237, 186, 0, 60, 0, 127, 0, 0, 0, 0, 234, 50, 255, 187, 0, 60, 0, 127, 0, 0, 0, 184, 234, 50, 237, 186, 0, 60, 0, 127, 0, 0, 237, 58, 234, 50, 0, 184, 0, 60, 0, 127, 0, 0, 237, 186, 234, 50, 255, 183, 0, 60, 0, 127, 0, 0, 0, 60, 234, 50, 0, 0, 0, 60, 0, 127, 0, 0, 0, 188, 234, 50, 0, 0, 0, 60, 0, 127, 0, 0, 0, 60, 234, 50, 49, 57, 0, 60, 0, 127, 0, 0, 0, 188, 234, 50, 49, 57, 0, 60, 0, 127, 0, 0, 237, 58, 234, 50, 152, 60, 0, 60, 0, 127, 0, 0, 237, 186, 234, 50, 152, 60, 0, 60, 0, 127, 0, 0, 0, 56, 234, 50, 15, 62, 0, 60, 0, 127, 0, 0, 0, 184, 234, 50, 15, 62, 0, 60, 0, 127, 0, 0, 0, 0, 234, 50, 152, 62, 0, 60, 0, 127, 0, 0, 0, 0, 29, 178, 152, 62, 0, 60, 0, 0, 126, 0, 0, 0, 234, 50, 152, 62, 0, 60, 0, 0, 126, 0, 0, 184, 234, 50, 15, 62, 0, 60, 193, 0, 109, 0, 0, 184, 29, 178, 15, 62, 0, 60, 193, 0, 109, 0, 0, 0, 29, 178, 255, 187, 0, 60, 0, 0, 129, 0, 0, 0, 234, 50, 255, 187, 0, 60, 0, 0, 129, 0, 255, 55, 234, 50, 237, 186, 0, 60, 63, 0, 147, 0, 255, 55, 29, 178, 237, 186, 0, 60, 63, 0, 147, 0, 237, 186, 234, 50, 152, 60, 0, 60, 147, 0, 63, 0, 237, 186, 29, 178, 152, 60, 0, 60, 147, 0, 63, 0, 237, 58, 234, 50, 0, 184, 0, 60, 109, 0, 193, 0, 237, 58, 29, 178, 0, 184, 0, 60, 109, 0, 193, 0, 0, 188, 234, 50, 49, 57, 0, 60, 131, 0, 16, 0, 0, 188, 29, 178, 49, 57, 0, 60, 131, 0, 16, 0, 0, 60, 234, 50, 0, 0, 0, 60, 125, 0, 240, 0, 0, 60, 29, 178, 0, 0, 0, 60, 125, 0, 240, 0, 0, 60, 29, 178, 49, 57, 0, 60, 125, 0, 16, 0, 0, 60, 234, 50, 49, 57, 0, 60, 125, 0, 16, 0, 237, 58, 234, 50, 152, 60, 0, 60, 109, 0, 63, 0, 237, 58, 29, 178, 152, 60, 0, 60, 109, 0, 63, 0, 0, 188, 29, 178, 0, 0, 0, 60, 131, 0, 240, 0, 0, 188, 234, 50, 0, 0, 0, 60, 131, 0, 240, 0, 237, 186, 234, 50, 255, 183, 0, 60, 147, 0, 193, 0, 237, 186, 29, 178, 255, 183, 0, 60, 147, 0, 193, 0, 0, 56, 234, 50, 15, 62, 0, 60, 63, 0, 109, 0, 0, 56, 29, 178, 15, 62, 0, 60, 63, 0, 109, 0, 0, 184, 234, 50, 237, 186, 0, 60, 193, 0, 147, 0, 0, 184, 29, 178, 237, 186, 0, 60, 193, 0, 147, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 0, 0, 3, 0, 2, 0, 0, 0, 4, 0, 3, 0, 3, 0, 4, 0, 5, 0, 5, 0, 4, 0, 6, 0, 5, 0, 6, 0, 7, 0, 7, 0, 6, 0, 8, 0, 7, 0, 8, 0, 9, 0, 9, 0, 8, 0, 10, 0, 9, 0, 10, 0, 11, 0, 11, 0, 10, 0, 12, 0, 11, 0, 12, 0, 13, 0, 14, 0, 16, 0, 15, 0, 14, 0, 17, 0, 16, 0, 16, 0, 17, 0, 18, 0, 18, 0, 17, 0, 19, 0, 18, 0, 19, 0, 20, 0, 20, 0, 19, 0, 21, 0, 20, 0, 21, 0, 22, 0, 22, 0, 21, 0, 23, 0, 22, 0, 23, 0, 24, 0, 24, 0, 23, 0, 25, 0, 24, 0, 25, 0, 26, 0, 26, 0, 25, 0, 27, 0, 28, 0, 30, 0, 29, 0, 28, 0, 31, 0, 30, 0, 32, 0, 34, 0, 33, 0, 32, 0, 35, 0, 34, 0, 31, 0, 36, 0, 30, 0, 31, 0, 37, 0, 36, 0, 35, 0, 38, 0, 34, 0, 35, 0, 39, 0, 38, 0, 37, 0, 40, 0, 36, 0, 37, 0, 41, 0, 40, 0, 39, 0, 42, 0, 38, 0, 39, 0, 43, 0, 42, 0, 44, 0, 46, 0, 45, 0, 44, 0, 47, 0, 46, 0, 48, 0, 50, 0, 49, 0, 48, 0, 51, 0, 50, 0, 47, 0, 52, 0, 46, 0, 47, 0, 53, 0, 52, 0, 44, 0, 42, 0, 43, 0, 44, 0, 45, 0, 42, 0, 51, 0, 54, 0, 50, 0, 51, 0, 55, 0, 54, 0, 53, 0, 29, 0, 52, 0, 53, 0, 28, 0, 29, 0, 41, 0, 49, 0, 40, 0, 41, 0, 48, 0, 49, 0, 55, 0, 33, 0, 54, 0, 55, 0, 32, 0, 33, 0 ),
+"blend_shape_data": [  ],
+"format": 98051,
+"index_count": 156,
+"material": SubResource( 1 ),
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 56
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "spin"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Circle:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -90, 0, 0 ), Vector3( -90, 0, -360 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "take"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Circle:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="SphereShape" id=5]
+radius = 0.312546
+
+[sub_resource type="Gradient" id=6]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+emission_shape = 2
+emission_box_extents = Vector3( 0.3, 0.3, 0.3 )
+initial_velocity = 5.51
+angular_velocity = 4.27461e-05
+scale = 0.1
+color_ramp = SubResource( 7 )
+
+[sub_resource type="SpatialMaterial" id=9]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 1, 1, 0.759137, 1 )
+albedo_texture = ExtResource( 3 )
+
+[sub_resource type="QuadMesh" id=10]
+material = SubResource( 9 )
+
+[node name="Coin" type="Area"]
+input_ray_pickable = false
+script = ExtResource( 1 )
+__meta__ = {
+"__editor_plugin_screen__": "3D"
+}
+
+[node name="Circle" type="MeshInstance" parent="."]
+transform = Transform( 0.2, 0, 0, 0, -3.25841e-08, 0.2, 0, -0.2, -3.25841e-08, 0.00550658, 0.532125, 0.000651598 )
+layers = 2
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+autoplay = "spin"
+anims/spin = SubResource( 3 )
+anims/take = SubResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00894194, 0.575859, 0.0193955 )
+shape = SubResource( 5 )
+
+[node name="VisibilityEnabler" type="VisibilityEnabler" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0321827, 0.57887, 0.0268312 )
+aabb = AABB( -0.29109, -0.328186, -0.295852, 0.582181, 0.656373, 0.591703 )
+freeze_bodies = false
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 2 )
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000732422, 0.542954, 0 )
+emitting = false
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB( -4.12919, -4, -4, 8.25837, 8, 8 )
+process_material = SubResource( 8 )
+draw_pass_1 = SubResource( 10 )
+[connection signal="body_entered" from="." to="." method="_on_coin_body_enter"]
