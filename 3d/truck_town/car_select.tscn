@@ -5,7 +5,7 @@
 [ext_resource path="res://Images/choose_trailer.png" type="Texture" id=3]
 [ext_resource path="res://Images/choose_tow.png" type="Texture" id=4]
 
-[node name="base" type="Control"]
+[node name="CarSelect" type="Control"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -22,7 +22,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="van 1" type="Button" parent="."]
+[node name="MiniVan" type="Button" parent="."]
 margin_left = 4.0
 margin_top = 160.0
 margin_right = 340.0
@@ -31,7 +31,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 icon = ExtResource( 2 )
 
-[node name="van 2" type="Button" parent="."]
+[node name="TrailerTruck" type="Button" parent="."]
 margin_left = 344.0
 margin_top = 160.0
 margin_right = 680.0
@@ -40,7 +40,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 icon = ExtResource( 3 )
 
-[node name="van 3" type="Button" parent="."]
+[node name="TowTruck" type="Button" parent="."]
 margin_left = 684.0
 margin_top = 160.0
 margin_right = 1020.0
@@ -48,6 +48,6 @@ margin_bottom = 400.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 icon = ExtResource( 4 )
-[connection signal="pressed" from="van 1" to="." method="_on_van_1_pressed"]
-[connection signal="pressed" from="van 2" to="." method="_on_van_2_pressed"]
-[connection signal="pressed" from="van 3" to="." method="_on_van_3_pressed"]
+[connection signal="pressed" from="MiniVan" to="." method="_on_MiniVan_pressed"]
+[connection signal="pressed" from="TrailerTruck" to="." method="_on_TrailerTruck_pressed"]
+[connection signal="pressed" from="TowTruck" to="." method="_on_TowTruck_pressed"]
