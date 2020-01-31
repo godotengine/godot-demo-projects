@@ -1,84 +1,75 @@
 extends Spatial
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
-
 const INTERP_SPEED = 2
-var tester_index = 0
-const ROT_SPEED = 0.15
-var rot_x = 0
-var rot_y = 0
-var zoom = 0
-var base_height = ProjectSettings.get_setting("display/window/size/height")
+const ROT_SPEED = 0.003
 const ZOOM_SPEED = 0.1
 const ZOOM_MAX = 2.5
+const MAIN_BUTTONS = BUTTON_MASK_LEFT | BUTTON_MASK_RIGHT | BUTTON_MASK_MIDDLE
 
-var hdrs=[
-	{ path="res://schelde.hdr", name="Riverside"},
-	{ path="res://lobby.hdr", name="Lobby"},
-	{ path="res://park.hdr", name="Park"},
-	{ path="res://night.hdr", name="Night"},
-	{ path="res://experiment.hdr", name="Experiment"},
+var tester_index = 0
+var rot_x = -0.5 # This must be kept in sync with RotationX.
+var rot_y = -0.5 # This must be kept in sync with CameraHolder.
+var zoom = 5
+var base_height = ProjectSettings.get_setting("display/window/size/height")
+
+var backgrounds = [
+	{ path = "res://backgrounds/schelde.hdr", name = "Riverside"},
+	{ path = "res://backgrounds/lobby.hdr", name = "Lobby"},
+	{ path = "res://backgrounds/park.hdr", name = "Park"},
+	{ path = "res://backgrounds/night.hdr", name = "Night"},
+	{ path = "res://backgrounds/experiment.hdr", name = "Experiment"},
 ]
 
+onready var testers = $Testers
+onready var material_name = $UI/MaterialName
+
+onready var camera_holder = $CameraHolder # Has a position and rotates on Y.
+onready var rotation_x = $CameraHolder/RotationX
+onready var camera = $CameraHolder/RotationX/Camera
+
 func _ready():
-	for h in hdrs:
-		get_node("ui/bg").add_item(h.name)
+	for background in backgrounds:
+		get_node("UI/Background").add_item(background.name)
+
 
 func _unhandled_input(ev):
-
-	if ev is InputEventMouseButton and ev.button_index == BUTTON_WHEEL_UP:
-		if zoom < ZOOM_MAX:
-			zoom += ZOOM_SPEED
-			get_node("camera/base/rotation/camera").translation.z = -zoom
-
-	if ev is InputEventMouseButton and ev.button_index == BUTTON_WHEEL_DOWN:
-		if zoom > 0:
+	if ev is InputEventMouseButton :
+		if ev.button_index == BUTTON_WHEEL_UP:
 			zoom -= ZOOM_SPEED
-			get_node("camera/base/rotation/camera").translation.z = -zoom
-
-	if ev is InputEventMouseMotion and ev.button_mask & BUTTON_MASK_LEFT:
-		# Compensate motion speed to be resolution-independent (based on the window height)
+		if ev.button_index == BUTTON_WHEEL_DOWN:
+			zoom += ZOOM_SPEED
+		zoom = clamp(zoom, 2, 8)
+		camera.translation.z = zoom
+	
+	if ev is InputEventMouseMotion and ev.button_mask & MAIN_BUTTONS:
+		# Compensate motion speed to be resolution-independent (based on the window height).
 		var relative_motion = ev.relative * get_viewport().size.y / base_height
-
-		rot_y += relative_motion.x * ROT_SPEED
-		rot_x += relative_motion.y * ROT_SPEED
-		rot_y = clamp(rot_y, -180, 180)
-		rot_x = clamp(rot_x, 0, 150)
-		var t = Transform()
-		t = t.rotated(Vector3(0, 0, 1), rot_x * PI / 180.0)
-		t = t.rotated(Vector3(0, 1, 0), -rot_y * PI / 180.0)
-		get_node("camera/base").transform.basis = t.basis
+		rot_y -= relative_motion.x * ROT_SPEED
+		rot_x -= relative_motion.y * ROT_SPEED
+		rot_y = clamp(rot_y, -1.6, 1.6)
+		rot_x = clamp(rot_x, -1.4, 0.5)
+		camera_holder.transform.basis = Basis(Vector3(0, rot_y, 0))
+		rotation_x.transform.basis = Basis(Vector3(rot_x, 0, 0))
 
 
 func _process(delta):
-	var xform = get_node("testers").get_child(tester_index).get_node("MeshInstance").global_transform
-	var p = xform.origin
-	var r = xform.basis.get_rotation_quat()
-	var from_xform = get_node("camera").transform
-	var from_p = from_xform.origin
-	var from_r = Quat(from_xform.basis)
-
-	p = from_p.linear_interpolate(p, INTERP_SPEED * delta)
-	r = from_r.slerp(r, INTERP_SPEED * delta)
-
-	var m = Transform(r)
-	m.origin = p
-
-	get_node("camera").transform = m
-	get_node("ui/label").text = get_node("testers").get_child(tester_index).get_name()
+	var current_tester = testers.get_child(tester_index)
+	material_name.text = current_tester.get_name()
+	# This code assumes CameraHolder's Y and Z coordinates are already correct.
+	var target_position = current_tester.transform.origin.x
+	var current_position = camera_holder.transform.origin.x
+	camera_holder.transform.origin.x = lerp(current_position, target_position, INTERP_SPEED * delta)
 
 
-func _on_prev_pressed():
+func _on_Previous_pressed():
 	if tester_index > 0:
 		tester_index -= 1
 
 
-func _on_next_pressed():
-	if tester_index < get_node("testers").get_child_count() -1:
+func _on_Next_pressed():
+	if tester_index < testers.get_child_count() -1:
 		tester_index += 1
 
 
-func _on_bg_item_selected( ID ):
-	get_node("environment").environment.background_sky.panorama = load(hdrs[ID].path)
+func _on_bg_item_selected(index):
+	get_node("WorldEnvironment").environment.background_sky.panorama = load(backgrounds[index].path)
