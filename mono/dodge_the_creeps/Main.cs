@@ -4,16 +4,12 @@ using System;
 public class Main : Node
 {
     [Export]
-    public PackedScene Mob;
+    public PackedScene mob;
 
     private int _score;
 
     // We use 'System.Random' as an alternative to GDScript's random methods.
     private Random _random = new Random();
-
-    public override void _Ready()
-    {
-    }
 
     // We'll use this later because C# doesn't support GDScript's randi().
     private float RandRange(float min, float max)
@@ -64,12 +60,16 @@ public class Main : Node
 
     public void OnMobTimerTimeout()
     {
+        // Note: Normally it is best to use explicit types rather than the var keyword.
+        // However, var is acceptable to use here because the types are obviously
+        // PathFollow2D and RigidBody2D, since they appear later on the line.
+
         // Choose a random location on Path2D.
         var mobSpawnLocation = GetNode<PathFollow2D>("MobPath/MobSpawnLocation");
         mobSpawnLocation.SetOffset(_random.Next());
 
         // Create a Mob instance and add it to the scene.
-        var mobInstance = (RigidBody2D)Mob.Instance();
+        var mobInstance = (RigidBody2D)mob.Instance();
         AddChild(mobInstance);
 
         // Set the mob's direction perpendicular to the path direction.

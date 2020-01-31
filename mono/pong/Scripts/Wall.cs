@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public class Wall : Area2D
 {
@@ -7,7 +6,7 @@ public class Wall : Area2D
     {
         if (area is Ball ball)
         {
-            // Oops, ball went out of game place, reset
+            // Ball went off the side of the screen, reset it.
             ball.Reset();
         }
     }
