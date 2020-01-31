@@ -3,23 +3,18 @@ extends Area2D
 signal hit
 
 export var speed = 400
-var extents
 var screen_size
 
 func _ready():
 	screen_size = get_viewport_rect().size
 	hide()
 
+
 func _process(delta):
 	var velocity = Vector2()
-	if Input.is_action_pressed("ui_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("ui_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("ui_up"):
-		velocity.y -= 1
-	if Input.is_action_pressed("ui_down"):
-		velocity.y += 1
+	velocity.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	velocity.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 		$AnimatedSprite.play()
@@ -37,12 +32,14 @@ func _process(delta):
 		$AnimatedSprite.animation = "up"
 		$AnimatedSprite.flip_v = velocity.y > 0
 
-func _on_Player_body_entered(body):
-	hide()
-	emit_signal("hit")
-	$CollisionShape2D.set_deferred("disabled", true)
 
 func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
+
+
+func _on_Player_body_entered(_body):
+	hide()
+	emit_signal("hit")
+	$CollisionShape2D.set_deferred("disabled", true)

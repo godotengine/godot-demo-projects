@@ -4,21 +4,17 @@
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=1]
-
 size = 64
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
-
 size = 64
 font_data = ExtResource( 2 )
 
 [sub_resource type="InputEventAction" id=3]
-
 action = "ui_select"
 
 [sub_resource type="ShortCut" id=4]
-
 shortcut = SubResource( 3 )
 
 [node name="HUD" type="CanvasLayer"]
@@ -57,6 +53,5 @@ text = "Start"
 
 [node name="MessageTimer" type="Timer" parent="."]
 one_shot = true
-
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]

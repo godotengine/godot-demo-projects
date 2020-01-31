@@ -9,7 +9,7 @@
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -0.901337, 0.225891, 0, 0, 0, 0, 480.262, 1.29041, 0, 0, 0, 0, 481.327, 700.681, 0, 0, 0, 0, 0.163177, 698.552, 0, 0, 0, 0, -0.901337, 0.225891 )
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 720, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 0 )
 }
 
 [node name="Main" type="Node"]
@@ -19,7 +19,7 @@ Mob = ExtResource( 2 )
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.223529, 0.317647, 0.368627, 1 )
+color = Color( 0.219608, 0.372549, 0.380392, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 
@@ -39,8 +39,6 @@ position = Vector2( 240, 450 )
 curve = SubResource( 1 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
-position = Vector2( -0.901337, 0.225891 )
-rotation = 0.00221238
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 
@@ -49,7 +47,6 @@ stream = ExtResource( 5 )
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
-
 [connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
