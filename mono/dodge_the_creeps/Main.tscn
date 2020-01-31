@@ -14,12 +14,12 @@ _data = {
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
-Mob = ExtResource( 2 )
+mob = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 480.0
-margin_bottom = 720.0
-color = Color( 0.253451, 0.425288, 0.429412, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.219608, 0.372549, 0.380392, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 
@@ -47,7 +47,6 @@ stream = ExtResource( 5 )
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
-
 [connection signal="Hit" from="Player" to="." method="GameOver"]
 [connection signal="timeout" from="MobTimer" to="." method="OnMobTimerTimeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="OnScoreTimerTimeout"]

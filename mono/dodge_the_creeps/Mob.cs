@@ -4,16 +4,15 @@ using System;
 public class Mob : RigidBody2D
 {
     [Export]
-    public int MinSpeed; // Minimum speed range.
+    public int minSpeed; // Minimum speed range.
 
     [Export]
-    public int MaxSpeed; // Maximum speed range.
+    public int maxSpeed; // Maximum speed range.
 
-    private String[] _mobTypes = {"walk", "swim", "fly"};
+    private String[] _mobTypes = { "walk", "swim", "fly" };
 
-    // C# doesn't implement GDScript's random methods, so we use 'System.Random'
-    // as an alternative.
-    static private Random _random = new Random();
+    // C# doesn't have GDScript's random methods, so we use System.Random insetad.
+    private static Random _random = new Random();
 
     public override void _Ready()
     {
@@ -24,5 +23,4 @@ public class Mob : RigidBody2D
     {
         QueueFree();
     }
-
 }

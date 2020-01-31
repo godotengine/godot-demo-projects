@@ -3,7 +3,7 @@ using System.Reflection;
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle("DodgeTheCreepsCS")]
+[assembly: AssemblyTitle("Dodge the Creeps C#")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
