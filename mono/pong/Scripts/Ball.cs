@@ -2,17 +2,12 @@ using Godot;
 
 public class Ball : Area2D
 {
-    private const int BallSpeed = 100;
+    private const int DefaultSpeed = 100;
 
     public Vector2 direction = Vector2.Left;
 
     private Vector2 _initialPos;
-
-    public void Reset()
-    {
-        Position = _initialPos;
-        direction = Vector2.Left;
-    }
+    private float _speed = DefaultSpeed;
 
     public override void _Ready()
     {
@@ -21,6 +16,14 @@ public class Ball : Area2D
 
     public override void _Process(float delta)
     {
-        Position += BallSpeed * delta * direction;
+        _speed += delta * 2;
+        Position += _speed * delta * direction;
+    }
+
+    public void Reset()
+    {
+        direction = Vector2.Left;
+        Position = _initialPos;
+        _speed = DefaultSpeed;
     }
 }

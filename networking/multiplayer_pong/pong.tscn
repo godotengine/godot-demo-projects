@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://pong.gd" type="Script" id=1]
+[ext_resource path="res://scripts/pong.gd" type="Script" id=1]
 [ext_resource path="res://separator.png" type="Texture" id=2]
-[ext_resource path="res://ball.tscn" type="PackedScene" id=3]
-[ext_resource path="res://paddle.tscn" type="PackedScene" id=4]
+[ext_resource path="res://paddle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ball.tscn" type="PackedScene" id=4]
 
-[node name="pong" type="Node2D"]
+[node name="Pong" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -16,26 +16,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="separator" type="Sprite" parent="."]
+[node name="Separator" type="Sprite" parent="."]
 position = Vector2( 320, 200 )
 texture = ExtResource( 2 )
 
-[node name="player1" parent="." instance=ExtResource( 4 )]
+[node name="Player1" parent="." instance=ExtResource( 3 )]
 position = Vector2( 32.49, 188.622 )
+left = true
 
-[node name="sprite" parent="player1" index="0"]
-self_modulate = Color( 1, 0, 0.960938, 1 )
+[node name="Sprite" parent="Player1" index="0"]
+self_modulate = Color( 0, 1, 1, 1 )
 
-[node name="player2" parent="." instance=ExtResource( 4 )]
+[node name="Player2" parent="." instance=ExtResource( 3 )]
+self_modulate = Color( 1, 0, 1, 1 )
 position = Vector2( 608.88, 188.622 )
 
-[node name="sprite" parent="player2" index="0"]
-self_modulate = Color( 0, 0.929688, 1, 1 )
+[node name="Sprite" parent="Player2" index="0"]
+self_modulate = Color( 1, 0, 1, 1 )
 
-[node name="ball" parent="." instance=ExtResource( 3 )]
+[node name="Ball" parent="." instance=ExtResource( 4 )]
 position = Vector2( 320.387, 189.525 )
 
-[node name="score_left" type="Label" parent="."]
+[node name="ScoreLeft" type="Label" parent="."]
 margin_left = 240.0
 margin_top = 10.0
 margin_right = 280.0
@@ -45,7 +47,7 @@ size_flags_vertical = 0
 text = "0"
 align = 1
 
-[node name="score_right" type="Label" parent="."]
+[node name="ScoreRight" type="Label" parent="."]
 margin_left = 360.0
 margin_top = 10.0
 margin_right = 400.0
@@ -55,7 +57,7 @@ size_flags_vertical = 0
 text = "0"
 align = 1
 
-[node name="winner_left" type="Label" parent="."]
+[node name="WinnerLeft" type="Label" parent="."]
 visible = false
 margin_left = 190.0
 margin_top = 170.0
@@ -65,7 +67,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "The Winner!"
 
-[node name="winner_right" type="Label" parent="."]
+[node name="WinnerRight" type="Label" parent="."]
 visible = false
 margin_left = 380.0
 margin_top = 170.0
@@ -75,7 +77,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "The Winner!"
 
-[node name="exit_game" type="Button" parent="."]
+[node name="ExitGame" type="Button" parent="."]
 visible = false
 margin_left = 280.0
 margin_top = 340.0
@@ -88,8 +90,8 @@ text = "Exit Game"
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 320, 200 )
 current = true
-[connection signal="pressed" from="exit_game" to="." method="_on_exit_game_pressed"]
+[connection signal="pressed" from="ExitGame" to="." method="_on_exit_game_pressed"]
 
-[editable path="player1"]
+[editable path="Player1"]
 
-[editable path="player2"]
+[editable path="Player2"]

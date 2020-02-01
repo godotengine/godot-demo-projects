@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://paddle.gd" type="Script" id=1]
+[ext_resource path="res://scripts/paddle.gd" type="Script" id=1]
 [ext_resource path="res://left_pallete.png" type="Texture" id=2]
 [ext_resource path="res://right_pallete.png" type="Texture" id=3]
-[ext_resource path="res://ball.gd" type="Script" id=4]
+[ext_resource path="res://scripts/ball.gd" type="Script" id=4]
 [ext_resource path="res://ball.png" type="Texture" id=5]
 [ext_resource path="res://separator.png" type="Texture" id=6]
-[ext_resource path="res://wall.gd" type="Script" id=7]
-[ext_resource path="res://ceiling_floor.gd" type="Script" id=8]
+[ext_resource path="res://scripts/wall.gd" type="Script" id=7]
+[ext_resource path="res://scripts/ceiling_floor.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 16 )
@@ -21,9 +21,9 @@ extents = Vector2( 10, 200 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 320, 10 )
 
-[node name="game" type="Node2D"]
+[node name="Pong" type="Node2D"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 margin_right = 640.0
 margin_bottom = 400.0
 color = Color( 0.141176, 0.152941, 0.164706, 1 )
@@ -31,76 +31,75 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="left" type="Area2D" parent="."]
+[node name="Left" type="Area2D" parent="."]
 position = Vector2( 67.6285, 192.594 )
 script = ExtResource( 1 )
 
-[node name="sprite" type="Sprite" parent="left"]
+[node name="Sprite" type="Sprite" parent="Left"]
 texture = ExtResource( 2 )
 
-[node name="collision" type="CollisionShape2D" parent="left"]
+[node name="Collision" type="CollisionShape2D" parent="Left"]
 shape = SubResource( 1 )
 
-[node name="right" type="Area2D" parent="."]
+[node name="Right" type="Area2D" parent="."]
 position = Vector2( 563.815, 188.919 )
 script = ExtResource( 1 )
-ball_dir = -1
 
-[node name="sprite" type="Sprite" parent="right"]
+[node name="Sprite" type="Sprite" parent="Right"]
 texture = ExtResource( 3 )
 
-[node name="collision" type="CollisionShape2D" parent="right"]
+[node name="Collision" type="CollisionShape2D" parent="Right"]
 shape = SubResource( 1 )
 
-[node name="ball" type="Area2D" parent="."]
+[node name="Ball" type="Area2D" parent="."]
 position = Vector2( 320.5, 191.124 )
 script = ExtResource( 4 )
 
-[node name="sprite" type="Sprite" parent="ball"]
+[node name="Sprite" type="Sprite" parent="Ball"]
 texture = ExtResource( 5 )
 
-[node name="collision" type="CollisionShape2D" parent="ball"]
+[node name="Collision" type="CollisionShape2D" parent="Ball"]
 shape = SubResource( 2 )
 
-[node name="separator" type="Sprite" parent="."]
+[node name="Separator" type="Sprite" parent="."]
 position = Vector2( 320, 200 )
 texture = ExtResource( 6 )
 
-[node name="left_wall" type="Area2D" parent="."]
+[node name="LeftWall" type="Area2D" parent="."]
 position = Vector2( -10, 200 )
 script = ExtResource( 7 )
 
-[node name="collision" type="CollisionShape2D" parent="left_wall"]
+[node name="Collision" type="CollisionShape2D" parent="LeftWall"]
 shape = SubResource( 3 )
 
-[node name="right_wall" type="Area2D" parent="."]
+[node name="RightWall" type="Area2D" parent="."]
 position = Vector2( 650, 200 )
 script = ExtResource( 7 )
 
-[node name="collision" type="CollisionShape2D" parent="right_wall"]
+[node name="Collision" type="CollisionShape2D" parent="RightWall"]
 shape = SubResource( 3 )
 
-[node name="ceiling" type="Area2D" parent="."]
+[node name="Ceiling" type="Area2D" parent="."]
 position = Vector2( 320, -10 )
 script = ExtResource( 8 )
 
-[node name="collision" type="CollisionShape2D" parent="ceiling"]
+[node name="Collision" type="CollisionShape2D" parent="Ceiling"]
 shape = SubResource( 4 )
 
-[node name="floor" type="Area2D" parent="."]
+[node name="Floor" type="Area2D" parent="."]
 position = Vector2( 320, 410 )
 script = ExtResource( 8 )
-y_direction = -1
+_bounce_direction = -1
 
-[node name="collision" type="CollisionShape2D" parent="floor"]
+[node name="Collision" type="CollisionShape2D" parent="Floor"]
 shape = SubResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 320, 200 )
 current = true
-[connection signal="area_entered" from="left" to="left" method="_on_area_entered"]
-[connection signal="area_entered" from="right" to="right" method="_on_area_entered"]
-[connection signal="area_entered" from="left_wall" to="left_wall" method="_on_wall_area_entered"]
-[connection signal="area_entered" from="right_wall" to="right_wall" method="_on_wall_area_entered"]
-[connection signal="area_entered" from="ceiling" to="ceiling" method="_on_area_entered"]
-[connection signal="area_entered" from="floor" to="floor" method="_on_area_entered"]
+[connection signal="area_entered" from="Left" to="Left" method="_on_area_entered"]
+[connection signal="area_entered" from="Right" to="Right" method="_on_area_entered"]
+[connection signal="area_entered" from="LeftWall" to="LeftWall" method="_on_wall_area_entered"]
+[connection signal="area_entered" from="RightWall" to="RightWall" method="_on_wall_area_entered"]
+[connection signal="area_entered" from="Ceiling" to="Ceiling" method="_on_area_entered"]
+[connection signal="area_entered" from="Floor" to="Floor" method="_on_area_entered"]
