@@ -1,5 +1,5 @@
 extends Spatial
-# Member variables
+
 # The size of the quad mesh itself.
 var quad_mesh_size
 # Used for checking if the mouse is inside the Area
@@ -10,11 +10,10 @@ var is_mouse_held = false
 var last_mouse_pos3D = null
 # The last processed input touch/mouse event. To calculate relative movement.
 var last_mouse_pos2D = null
-# Most used nodes
+
 onready var node_viewport = $Viewport
 onready var node_quad = $Quad
 onready var node_area = $Quad/Area
-
 
 func _ready():
 	node_area.connect("mouse_entered", self, "_mouse_entered_area")
@@ -169,4 +168,3 @@ func rotate_area_to_billboard():
 		
 		# Rotate in the Z axis to compensate camera tilt
 		node_area.rotate_object_local(Vector3.BACK, camera.rotation.z)
-

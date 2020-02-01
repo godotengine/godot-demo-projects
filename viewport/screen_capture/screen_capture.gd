@@ -1,26 +1,22 @@
+extends Node
 
-extends Control
+onready var captured_image = $CapturedImage
 
-
-func _ready():
-	get_node("Button").connect("pressed", self, "_on_button_pressed");
-
-
-func _on_button_pressed():
+func _on_CaptureButton_pressed():
 	get_viewport().set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)
-	# Let two frames pass to make sure the screen was captured
+	# Let two frames pass to make sure the screen was captured.
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 
-	# Retrieve the captured image
+	# Retrieve the captured image.
 	var img = get_viewport().get_texture().get_data()
 
-	# Flip it on the y-axis (because it's flipped)
+	# Flip it on the y-axis (because it's flipped).
 	img.flip_y()
 
-	# Create a texture for it
+	# Create a texture for it.
 	var tex = ImageTexture.new()
 	tex.create_from_image(img)
 
-	# Set it to the capture node
-	get_node("capture").set_texture(tex)
+	# Set the texture to the captured image node.
+	captured_image.set_texture(tex)
