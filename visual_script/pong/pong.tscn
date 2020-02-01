@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Scripts/Paddle.cs" type="Script" id=1]
+[ext_resource path="res://scripts/paddle.vs" type="Script" id=1]
 [ext_resource path="res://left_pallete.png" type="Texture" id=2]
 [ext_resource path="res://right_pallete.png" type="Texture" id=3]
-[ext_resource path="res://Scripts/Ball.cs" type="Script" id=4]
+[ext_resource path="res://scripts/ball.vs" type="Script" id=4]
 [ext_resource path="res://ball.png" type="Texture" id=5]
 [ext_resource path="res://separator.png" type="Texture" id=6]
-[ext_resource path="res://Scripts/Wall.cs" type="Script" id=7]
-[ext_resource path="res://Scripts/CeilingFloor.cs" type="Script" id=8]
+[ext_resource path="res://scripts/wall.vs" type="Script" id=7]
+[ext_resource path="res://scripts/ceiling_floor.vs" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 16 )
@@ -27,6 +27,9 @@ extents = Vector2( 320, 10 )
 margin_right = 640.0
 margin_bottom = 400.0
 color = Color( 0.141176, 0.152941, 0.164706, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Left" type="Area2D" parent="."]
 position = Vector2( 67.6285, 192.594 )
@@ -41,6 +44,7 @@ shape = SubResource( 1 )
 [node name="Right" type="Area2D" parent="."]
 position = Vector2( 563.815, 188.919 )
 script = ExtResource( 1 )
+ball_dir = -1.0
 
 [node name="Sprite" type="Sprite" parent="Right"]
 texture = ExtResource( 3 )
@@ -61,8 +65,6 @@ shape = SubResource( 2 )
 [node name="Separator" type="Sprite" parent="."]
 position = Vector2( 320, 200 )
 texture = ExtResource( 6 )
-
-[node name="Node2D" type="Node2D" parent="."]
 
 [node name="LeftWall" type="Area2D" parent="."]
 position = Vector2( -10, 200 )
@@ -88,13 +90,17 @@ shape = SubResource( 4 )
 [node name="Floor" type="Area2D" parent="."]
 position = Vector2( 320, 410 )
 script = ExtResource( 8 )
-_bounceDirection = -1
+bounce_direction = -1.0
 
 [node name="Collision" type="CollisionShape2D" parent="Floor"]
 shape = SubResource( 4 )
-[connection signal="area_entered" from="Left" to="Left" method="OnAreaEntered"]
-[connection signal="area_entered" from="Right" to="Right" method="OnAreaEntered"]
-[connection signal="area_entered" from="LeftWall" to="LeftWall" method="OnWallAreaEntered"]
-[connection signal="area_entered" from="RightWall" to="RightWall" method="OnWallAreaEntered"]
-[connection signal="area_entered" from="Ceiling" to="Ceiling" method="OnAreaEntered"]
-[connection signal="area_entered" from="Floor" to="Floor" method="OnAreaEntered"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 320, 200 )
+current = true
+[connection signal="area_entered" from="Left" to="Left" method="_on_area_entered"]
+[connection signal="area_entered" from="Right" to="Right" method="_on_area_entered"]
+[connection signal="area_entered" from="LeftWall" to="LeftWall" method="_on_area_entered"]
+[connection signal="area_entered" from="RightWall" to="RightWall" method="_on_area_entered"]
+[connection signal="area_entered" from="Ceiling" to="Ceiling" method="_on_area_entered"]
+[connection signal="area_entered" from="Floor" to="Floor" method="_on_area_entered"]
