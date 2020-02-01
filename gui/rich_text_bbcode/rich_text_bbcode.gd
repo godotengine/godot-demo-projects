@@ -1,6 +1,4 @@
-
 extends Panel
-
 
 func _on_RichTextLabel_meta_clicked(meta):
 	var err = OS.shell_open(meta)
