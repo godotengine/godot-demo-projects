@@ -1,6 +1,6 @@
-extends Position2D
+extends Node2D
 
-export (PackedScene) var ball_scene = preload("res://ball.tscn")
+export(PackedScene) var ball_scene = preload("res://ball.tscn")
 
 func _unhandled_input(event):
 	if event.is_echo():
@@ -10,7 +10,7 @@ func _unhandled_input(event):
 			spawn(get_global_mouse_position())
 
 
-func spawn(spawn_global_position = global_position):
+func spawn(spawn_global_position):
 	var instance = ball_scene.instance()
 	instance.global_position = spawn_global_position
 	add_child(instance)
