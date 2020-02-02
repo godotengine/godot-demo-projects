@@ -1,27 +1,27 @@
 extends Control
 
-# Member variables
 var mousepos
 
 onready var observer = $"../Observer"
 
+func _ready():
+	if not check_wm_api():
+		set_physics_process(false)
+		set_process_input(false)
+
+
 func _physics_process(_delta):
 	var modetext = "Mode:\n"
-
 	if OS.is_window_fullscreen():
 		modetext += "Fullscreen\n"
 	else:
 		modetext += "Windowed\n"
-
 	if !OS.is_window_resizable():
 		modetext += "FixedSize\n"
-
 	if OS.is_window_minimized():
 		modetext += "Minimized\n"
-
 	if OS.is_window_maximized():
 		modetext += "Maximized\n"
-
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		modetext += "MouseGrab\n"
 		$Label_MouseModeCaptured_KeyInfo.show()
@@ -63,73 +63,6 @@ func _physics_process(_delta):
 	$Button_MouseModeCaptured.set_pressed(Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED)
 
 
-func check_wm_api():
-	var s = ""
-	if !OS.has_method("get_screen_count"):
-		s += " - get_screen_count()\n"
-
-	if !OS.has_method("get_current_screen"):
-		s += " - get_current_screen()\n"
-
-	if !OS.has_method("set_current_screen"):
-		s += " - set_current_screen()\n"
-
-	if !OS.has_method("get_screen_position"):
-		s += " - get_screen_position()\n"
-
-	if !OS.has_method("get_screen_size"):
-		s += " - get_screen_size()\n"
-
-	if !OS.has_method("get_window_position"):
-		s += " - get_window_position()\n"
-
-	if !OS.has_method("set_window_position"):
-		s += " - set_window_position()\n"
-
-	if !OS.has_method("get_window_size"):
-		s += " - get_window_size()\n"
-
-	if !OS.has_method("set_window_size"):
-		s += " - set_window_size()\n"
-
-	if !OS.has_method("set_window_fullscreen"):
-		s += " - set_window_fullscreen()\n"
-
-	if !OS.has_method("is_window_fullscreen"):
-		s += " - is_window_fullscreen()\n"
-
-	if !OS.has_method("set_window_resizable"):
-		s += " - set_window_resizable()\n"
-
-	if !OS.has_method("is_window_resizable"):
-		s += " - is_window_resizable()\n"
-
-	if !OS.has_method("set_window_minimized"):
-		s += " - set_window_minimized()\n"
-
-	if !OS.has_method("is_window_minimized"):
-		s += " - is_window_minimized()\n"
-
-	if !OS.has_method("set_window_maximized"):
-		s += " - set_window_maximized()\n"
-
-	if !OS.has_method("is_window_maximized"):
-		s += " - is_window_maximized()\n"
-
-	if s.length() == 0:
-		return true
-	else:
-		$"ImplementationDialog/Text".text += s
-		$ImplementationDialog.show()
-		return false
-
-
-func _ready():
-	if not check_wm_api():
-		set_physics_process(false)
-		set_process_input(false)
-
-
 func _input(event):
 	if event is InputEventMouseMotion:
 		mousepos = event.position
@@ -145,6 +78,51 @@ func _input(event):
 
 		if Input.is_action_pressed("mouse_mode_captured"):
 			_on_Button_MouseModeCaptured_pressed()
+
+
+func check_wm_api():
+	var s = ""
+	if !OS.has_method("get_screen_count"):
+		s += " - get_screen_count()\n"
+	if !OS.has_method("get_current_screen"):
+		s += " - get_current_screen()\n"
+	if !OS.has_method("set_current_screen"):
+		s += " - set_current_screen()\n"
+	if !OS.has_method("get_screen_position"):
+		s += " - get_screen_position()\n"
+	if !OS.has_method("get_screen_size"):
+		s += " - get_screen_size()\n"
+	if !OS.has_method("get_window_position"):
+		s += " - get_window_position()\n"
+	if !OS.has_method("set_window_position"):
+		s += " - set_window_position()\n"
+	if !OS.has_method("get_window_size"):
+		s += " - get_window_size()\n"
+	if !OS.has_method("set_window_size"):
+		s += " - set_window_size()\n"
+	if !OS.has_method("set_window_fullscreen"):
+		s += " - set_window_fullscreen()\n"
+	if !OS.has_method("is_window_fullscreen"):
+		s += " - is_window_fullscreen()\n"
+	if !OS.has_method("set_window_resizable"):
+		s += " - set_window_resizable()\n"
+	if !OS.has_method("is_window_resizable"):
+		s += " - is_window_resizable()\n"
+	if !OS.has_method("set_window_minimized"):
+		s += " - set_window_minimized()\n"
+	if !OS.has_method("is_window_minimized"):
+		s += " - is_window_minimized()\n"
+	if !OS.has_method("set_window_maximized"):
+		s += " - set_window_maximized()\n"
+	if !OS.has_method("is_window_maximized"):
+		s += " - is_window_maximized()\n"
+
+	if s.length() == 0:
+		return true
+	else:
+		$"ImplementationDialog/Text".text += s
+		$ImplementationDialog.show()
+		return false
 
 
 func _on_Button_MoveTo_pressed():
@@ -200,4 +178,5 @@ func _on_Button_MouseModeHidden_pressed():
 
 
 func _on_Button_MouseModeCaptured_pressed():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	observer.state = observer.STATE_GRAB
