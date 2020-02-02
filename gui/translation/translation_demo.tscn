@@ -1,12 +1,12 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://main.gd" type="Script" id=1]
+[ext_resource path="res://translation_demo.gd" type="Script" id=1]
 [ext_resource path="res://font/droid_sans.tres" type="DynamicFont" id=2]
 [ext_resource path="res://speaker.png" type="Texture" id=3]
 [ext_resource path="res://flag_uk.png" type="Texture" id=4]
 [ext_resource path="res://hello_en.wav" type="AudioStream" id=5]
 
-[node name="Panel" type="Panel"]
+[node name="TranslationDemo" type="Panel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -23,7 +23,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="english" type="Button" parent="."]
+[node name="English" type="Button" parent="."]
 margin_left = 32.0
 margin_top = 64.0
 margin_right = 192.0
@@ -32,7 +32,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Use English"
 
-[node name="spanish" type="Button" parent="."]
+[node name="Spanish" type="Button" parent="."]
 margin_left = 32.0
 margin_top = 112.0
 margin_right = 192.0
@@ -41,7 +41,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Use Spanish"
 
-[node name="japanese" type="Button" parent="."]
+[node name="Japanese" type="Button" parent="."]
 margin_left = 32.0
 margin_top = 160.0
 margin_right = 192.0
@@ -50,10 +50,10 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Use Japanese"
 
-[node name="description" type="Label" parent="."]
+[node name="Description" type="Label" parent="."]
 margin_left = 243.0
 margin_top = 42.0
-margin_right = 808.0
+margin_right = 804.0
 margin_bottom = 312.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -62,7 +62,7 @@ text = "This is a demo of how a game can be internationalized.
 Translations are created in a CSV file and then imported into Godot.
 
 Using a TTF/OTF font with CJK is required for this demo to run. One is provided
-in the font/ folder for your games.
+in the font/ folder that you can use for your games.
 
 Godot allows internationalized text to change automatically when the locale is
 modified. Resources can also be set internationalized alternatives and replaced
@@ -74,7 +74,7 @@ margin_top = 330.0
 margin_right = 1001.0
 margin_bottom = 370.0
 
-[node name="label" type="Label" parent="."]
+[node name="HelloText" type="Label" parent="."]
 margin_left = 246.0
 margin_top = 381.0
 margin_right = 324.0
@@ -83,7 +83,7 @@ size_flags_vertical = 0
 custom_fonts/font = ExtResource( 2 )
 text = "KEY_HELLO"
 
-[node name="play" type="Button" parent="."]
+[node name="PlayAudio" type="Button" parent="."]
 margin_left = 243.0
 margin_top = 442.0
 margin_right = 475.0
@@ -92,16 +92,16 @@ custom_fonts/font = ExtResource( 2 )
 text = "KEY_PUSH"
 icon = ExtResource( 3 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Flag" type="TextureRect" parent="."]
 margin_left = 85.0
 margin_top = 382.0
 margin_right = 213.0
 margin_bottom = 467.0
 texture = ExtResource( 4 )
 
-[node name="audio" type="AudioStreamPlayer" parent="."]
+[node name="Audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
-[connection signal="pressed" from="english" to="." method="_on_english_pressed"]
-[connection signal="pressed" from="spanish" to="." method="_on_spanish_pressed"]
-[connection signal="pressed" from="japanese" to="." method="_on_japanese_pressed"]
-[connection signal="pressed" from="play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="English" to="." method="_on_english_pressed"]
+[connection signal="pressed" from="Spanish" to="." method="_on_spanish_pressed"]
+[connection signal="pressed" from="Japanese" to="." method="_on_japanese_pressed"]
+[connection signal="pressed" from="PlayAudio" to="." method="_on_play_pressed"]

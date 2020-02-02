@@ -1,6 +1,4 @@
-
 extends ColorPickerButton
-
 
 func get_drag_data(_pos):
 	# Use another colorpicker as drag preview
