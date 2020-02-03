@@ -5,7 +5,6 @@ uniform float contrast = 1.5;
 uniform float saturation = 1.8;
 
 void fragment() {
-
 	vec3 c = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0).rgb;
 	
 	c.rgb = mix(vec3(0.0), c.rgb, brightness);

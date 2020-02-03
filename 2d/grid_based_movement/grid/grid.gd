@@ -1,6 +1,6 @@
 extends TileMap
 
-enum CellType { EMPTY = -1, ACTOR, OBSTACLE, OBJECT}
+enum CellType { EMPTY = -1, ACTOR, OBSTACLE, OBJECT }
 
 func _ready():
 	for child in get_children():

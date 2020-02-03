@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform vec4 base : hint_color;
+uniform vec4 base: hint_color;
 uniform sampler2D grain;
 uniform float grain_strength = 0.3;
 uniform sampler2D vignette;
@@ -9,7 +9,6 @@ uniform float stretch = 0.5;
 uniform float flashing = 0.01;
 
 float make_grain(float time, vec2 uv) {
-
 	vec2 ofs = vec2(sin(41.0 * time * sin(time * 123.0)), sin(27.0 * time * sin(time * 312.0)));
 	return texture(grain, (uv + mod(ofs, vec2(1.0, 1.0))) * stretch).r;
 }
