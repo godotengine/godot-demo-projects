@@ -1,9 +1,9 @@
 extends "pawn.gd"
 
-onready var Grid = get_parent()
+onready var grid = get_parent()
 
 func _ready():
-	update_look_direction(Vector2(1, 0))
+	update_look_direction(Vector2.RIGHT)
 
 
 func _process(_delta):
@@ -12,7 +12,7 @@ func _process(_delta):
 		return
 	update_look_direction(input_direction)
 
-	var target_position = Grid.request_move(self, input_direction)
+	var target_position = grid.request_move(self, input_direction)
 	if target_position:
 		move_to(target_position)
 	else:
@@ -21,8 +21,8 @@ func _process(_delta):
 
 func get_input_direction():
 	return Vector2(
-		int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left")),
-		int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
+		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	)
 
 
