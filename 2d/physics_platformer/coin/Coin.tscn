@@ -105,6 +105,7 @@ emission_sphere_radius = 20.0
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 1.0
+angular_velocity = 0.0191222
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.3
@@ -117,7 +118,7 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 hframes = 4
 
-[node name="Anim" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "spin"
 anims/spin = SubResource( 1 )
 anims/taken = SubResource( 2 )
@@ -139,5 +140,4 @@ texture = ExtResource( 4 )
 
 [node name="Enabler" type="VisibilityEnabler2D" parent="."]
 pause_particles = false
-
 [connection signal="body_entered" from="." to="." method="_on_body_enter"]
