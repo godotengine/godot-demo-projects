@@ -1,7 +1,7 @@
 extends "on_ground.gd"
 
-export(float) var MAX_WALK_SPEED = 450
-export(float) var MAX_RUN_SPEED = 700
+export(float) var max_walk_speed = 450
+export(float) var max_run_speed = 700
 
 func enter():
 	speed = 0.0
@@ -11,21 +11,24 @@ func enter():
 	update_look_direction(input_direction)
 	owner.get_node("AnimationPlayer").play("walk")
 
+
 func handle_input(event):
 	return .handle_input(event)
 
-func update(delta):
+
+func update(_delta):
 	var input_direction = get_input_direction()
 	if not input_direction:
 		emit_signal("finished", "idle")
 	update_look_direction(input_direction)
 
-	speed = MAX_RUN_SPEED if Input.is_action_pressed("run") else MAX_WALK_SPEED
+	speed = max_run_speed if Input.is_action_pressed("run") else max_walk_speed
 	var collision_info = move(speed, input_direction)
 	if not collision_info:
 		return
-	if speed == MAX_RUN_SPEED and collision_info.collider.is_in_group("environment"):
+	if speed == max_run_speed and collision_info.collider.is_in_group("environment"):
 		return null
+
 
 func move(speed, direction):
 	velocity = direction.normalized() * speed

@@ -9,10 +9,9 @@ func _ready():
 		"attack": $Attack,
 	}
 
+
 func _change_state(state_name):
-	"""
-	The base state_machine interface this node extends does most of the work
-	"""
+	# The base state_machine interface this node extends does most of the work.
 	if not _active:
 		return
 	if state_name in ["stagger", "jump", "attack"]:
@@ -21,11 +20,10 @@ func _change_state(state_name):
 		$Jump.initialize($Move.speed, $Move.velocity)
 	._change_state(state_name)
 
+
 func _input(event):
-	"""
-	Here we only handle input that can interrupt states, attacking in this case
-	otherwise we let the state node handle it
-	"""
+	# Here we only handle input that can interrupt states, attacking in this case,
+	# otherwise we let the state node handle it.
 	if event.is_action_pressed("attack"):
 		if current_state in [$Attack, $Stagger]:
 			return
