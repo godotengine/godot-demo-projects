@@ -14,6 +14,18 @@ func initialize(combat_combatants):
 	$UI.initialize()
 	$TurnQueue.initialize()
 
+
+func clear_combat():
+	for n in $Combatants.get_children():
+		n.queue_free()
+	for n in $UI/Combatants.get_children():
+		n.queue_free()
+
+
+func finish_combat(winner, loser):
+	emit_signal("combat_finished", winner, loser)
+
+
 func _on_combatant_death(combatant):
 	var winner
 	if not combatant.name == "Player":
@@ -24,13 +36,3 @@ func _on_combatant_death(combatant):
 				winner = n
 				break
 	finish_combat(winner, combatant)
-
-func clear_combat():
-	for n in $Combatants.get_children():
-		n.queue_free()
-	for n in $UI/Combatants.get_children():
-		n.queue_free()
-
-func finish_combat(winner, loser):
-	emit_signal("combat_finished", winner, loser)
-

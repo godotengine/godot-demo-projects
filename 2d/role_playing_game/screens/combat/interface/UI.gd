@@ -5,7 +5,8 @@ export (PackedScene) var info_scene
 
 func _ready():
 	combatants_node = get_node(combatants_node)
-	
+
+
 func initialize():
 	for combatant in combatants_node.get_children():
 		var health = combatant.get_node("Health")
@@ -18,15 +19,18 @@ func initialize():
 		$Combatants.add_child(info)
 	$Buttons/GridContainer/Attack.grab_focus()
 
+
 func _on_Attack_button_up():
 	if not combatants_node.get_node("Player").active:
 		return
 	combatants_node.get_node("Player").attack(combatants_node.get_node("Opponent"))
 
+
 func _on_Defend_button_up():
 	if not combatants_node.get_node("Player").active:
 		return
 	combatants_node.get_node("Player").defend()
+
 
 func _on_Flee_button_up():
 	if not combatants_node.get_node("Player").active:

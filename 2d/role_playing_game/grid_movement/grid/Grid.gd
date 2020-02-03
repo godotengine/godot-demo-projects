@@ -33,4 +33,3 @@ func request_move(pawn, direction):
 			if not target_pawn.has_node("DialoguePlayer"):
 				return
 			get_node(dialogue_ui).show_dialogue(pawn, target_pawn.get_node("DialoguePlayer"))
-			

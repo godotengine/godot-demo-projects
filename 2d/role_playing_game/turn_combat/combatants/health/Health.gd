@@ -11,6 +11,7 @@ var armor = 0
 func _ready():
 	armor = base_armor
 
+
 func take_damage(damage):
 	life = life - damage + armor
 	if life <= 0:
@@ -18,10 +19,12 @@ func take_damage(damage):
 	else:
 		emit_signal("health_changed", life)
 
+
 func heal(amount):
 	life += amount
 	life = clamp(life, life, max_life)
 	emit_signal("health_changed", life)
+
 
 func get_health_ratio():
 	return life / max_life
