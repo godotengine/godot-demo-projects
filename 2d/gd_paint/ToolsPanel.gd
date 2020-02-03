@@ -1,83 +1,80 @@
 extends Panel
 
-
 var paint_control
 
-var label_tools
-var label_brush_size
-var label_brush_shape
-var label_stats
+onready var brush_settings = $BrushSettings
+onready var label_tools = $LabelTools
+onready var label_brush_size = $BrushSettings/LabelBrushSize
+onready var label_brush_shape = $BrushSettings/LabelBrushShape
+onready var label_stats = $LabelStats
 
 var save_dialog
 
-
 func _ready():
-	# Get PaintControl and SaveFileDialog
+	# Get PaintControl and SaveFileDialog.
 	paint_control = get_parent().get_node("PaintControl")
 	save_dialog = get_parent().get_node("SaveFileDialog")
 
 	# warning-ignore-all:return_value_discarded
-	# Assign all of the needed signals for the oppersation buttons
-	get_node("ButtonUndo").connect("pressed", self, "button_pressed", ["undo_stroke"])
-	get_node("ButtonSave").connect("pressed", self, "button_pressed", ["save_picture"])
-	get_node("ButtonClear").connect("pressed", self, "button_pressed", ["clear_picture"])
+	# Assign all of the needed signals for the oppersation buttons.
+	$ButtonUndo.connect("pressed", self, "button_pressed", ["undo_stroke"])
+	$ButtonSave.connect("pressed", self, "button_pressed", ["save_picture"])
+	$ButtonClear.connect("pressed", self, "button_pressed", ["clear_picture"])
 
-	# Assign all of the needed signals for the brush buttons
-	get_node("ButtonToolPencil").connect("pressed", self, "button_pressed", ["mode_pencil"])
-	get_node("ButtonToolEraser").connect("pressed", self, "button_pressed", ["mode_eraser"])
-	get_node("ButtonToolRectangle").connect("pressed", self, "button_pressed", ["mode_rectangle"])
-	get_node("ButtonToolCircle").connect("pressed", self, "button_pressed", ["mode_circle"])
-	get_node("ButtonShapeBox").connect("pressed", self, "button_pressed", ["shape_rectangle"])
-	get_node("ButtonShapeCircle").connect("pressed", self, "button_pressed", ["shape_circle"])
+	# Assign all of the needed signals for the brush buttons.
+	$ButtonToolPencil.connect("pressed", self, "button_pressed", ["mode_pencil"])
+	$ButtonToolEraser.connect("pressed", self, "button_pressed", ["mode_eraser"])
+	$ButtonToolRectangle.connect("pressed", self, "button_pressed", ["mode_rectangle"])
+	$ButtonToolCircle.connect("pressed", self, "button_pressed", ["mode_circle"])
+	$BrushSettings/ButtonShapeBox.connect("pressed", self, "button_pressed", ["shape_rectangle"])
+	$BrushSettings/ButtonShapeCircle.connect("pressed", self, "button_pressed", ["shape_circle"])
 
-	# Assign all of the needed signals for the other brush settings (and ColorPickerBackground)
-	get_node("ColorPickerBrush").connect("color_changed", self, "brush_color_changed")
-	get_node("ColorPickerBackground").connect("color_changed", self, "background_color_changed")
-	get_node("HScrollBarBrushSize").connect("value_changed", self, "brush_size_changed")
+	# Assign all of the needed signals for the other brush settings (and ColorPickerBackground).
+	$ColorPickerBrush.connect("color_changed", self, "brush_color_changed")
+	$ColorPickerBackground.connect("color_changed", self, "background_color_changed")
+	$BrushSettings/HScrollBarBrushSize.connect("value_changed", self, "brush_size_changed")
 
-	# Assign the 'file_selected' signal in SaveFileDialog
+	# Assign the 'file_selected' signal in SaveFileDialog.
 	save_dialog.connect("file_selected", self, "save_file_selected")
 
-	# Get all of the labels so we can update them when settings change
-	label_tools = get_node("LabelTools")
-	label_brush_size = get_node("LabelBrushSize")
-	label_brush_shape = get_node("LabelBrushShape")
-	label_stats = get_node("LabelStats")
-
-	# Set physics process so we can update the status label
+	# Set physics process so we can update the status label.
 	set_physics_process(true)
 
 
 func _physics_process(_delta):
-	# Update the status label with the newest brush element count
+	# Update the status label with the newest brush element count.
 	label_stats.text = "Brush objects: " + String(paint_control.brush_data_list.size())
 
 
 func button_pressed(button_name):
-	# If a brush mode button is pressed
+	# If a brush mode button is pressed.
 	var tool_name = null
 	var shape_name = null
 	
 	if button_name == "mode_pencil":
-		paint_control.brush_mode = paint_control.BRUSH_MODES.pencil
-		tool_name = "pencil"
+		paint_control.brush_mode = paint_control.BrushModes.PENCIL
+		brush_settings.modulate = Color(1, 1, 1, 1)
+		tool_name = "Pencil"
 	elif button_name == "mode_eraser":
-		paint_control.brush_mode = paint_control.BRUSH_MODES.eraser
-		tool_name = "eraser"
+		paint_control.brush_mode = paint_control.BrushModes.ERASER
+		brush_settings.modulate = Color(1, 1, 1, 1)
+		tool_name = "Eraser"
 	elif button_name == "mode_rectangle":
-		paint_control.brush_mode = paint_control.BRUSH_MODES.rectangle_shape
-		tool_name = "rectangle shape"
+		paint_control.brush_mode = paint_control.BrushModes.RECTANGLE_SHAPE
+		brush_settings.modulate = Color(1, 1, 1, 0.5)
+		tool_name = "Rectangle shape"
 	elif button_name == "mode_circle":
-		paint_control.brush_mode = paint_control.BRUSH_MODES.circle_shape
-		tool_name = "circle shape"
+		paint_control.brush_mode = paint_control.BrushModes.CIRCLE_SHAPE
+		brush_settings.modulate = Color(1, 1, 1, 0.5)
+		tool_name = "Circle shape"
 
 	# If a brush shape button is pressed
 	elif button_name == "shape_rectangle":
-		paint_control.brush_shape = paint_control.BRUSH_SHAPES.rectangle
-		shape_name = "rectangle"
+		paint_control.brush_shape = paint_control.BrushShapes.RECTANGLE
+		shape_name = "Rectangle"
 	elif button_name == "shape_circle":
-		paint_control.brush_shape = paint_control.BRUSH_SHAPES.circle
-		shape_name = "circle";
+		paint_control.brush_shape = paint_control.BrushShapes.CIRCLE
+		shape_name = "Circle";
 
 	# If a opperation button is pressed
 	elif button_name == "clear_picture":
@@ -88,7 +85,7 @@ func button_pressed(button_name):
 	elif button_name == "undo_stroke":
 		paint_control.undo_stroke()
 	
-	# Update the labels (in case the brush mode or brush shape has changed)
+	# Update the labels (in case the brush mode or brush shape has changed).
 	if tool_name != null:
 		label_tools.text = "Selected tool: " + tool_name
 	if shape_name != null:
@@ -96,25 +93,24 @@ func button_pressed(button_name):
 
 
 func brush_color_changed(color):
-	# Change the brush color to whatever color the color picker is
+	# Change the brush color to whatever color the color picker is.
 	paint_control.brush_color = color
 
 
 func background_color_changed(color):
-	# Change the background color to whatever colorthe background color picker is
+	# Change the background color to whatever colorthe background color picker is.
 	get_parent().get_node("DrawingAreaBG").modulate = color
 	paint_control.bg_color = color
-	# Because of how the eraser works we also need to redraw the paint control
+	# Because of how the eraser works we also need to redraw the paint control.
 	paint_control.update()
 
 
 func brush_size_changed(value):
-	# Change the size of the brush, and update the label to reflect the new value
+	# Change the size of the brush, and update the label to reflect the new value.
 	paint_control.brush_size = ceil(value)
 	label_brush_size.text = "Brush size: " + String(ceil(value)) + "px"
 
 
 func save_file_selected(path):
-	# Call save_picture in paint_control, passing in the path we recieved from SaveFileDialog
+	# Call save_picture in paint_control, passing in the path we recieved from SaveFileDialog.
 	paint_control.save_picture(path)
-

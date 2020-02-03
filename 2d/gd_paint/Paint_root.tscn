@@ -37,7 +37,7 @@ margin_left = 20.0
 margin_top = 10.0
 margin_right = 330.0
 margin_bottom = 24.0
-text = "Selected tool: pencil"
+text = "Selected tool: Pencil"
 align = 1
 
 [node name="ButtonToolPencil" type="Button" parent="ToolsPanel"]
@@ -105,52 +105,59 @@ margin_left = 20.0
 margin_top = 140.0
 margin_right = 330.0
 margin_bottom = 190.0
-color = Color( 1, 1, 1, 1 )
 
-[node name="LabelBrushSize" type="Label" parent="ToolsPanel"]
+[node name="BrushSettings" type="Control" parent="ToolsPanel"]
+margin_top = 200.0
+margin_right = 350.0
+margin_bottom = 375.0
+
+[node name="LabelBrushSize" type="Label" parent="ToolsPanel/BrushSettings"]
 margin_left = 20.0
-margin_top = 210.0
+margin_top = 10.0
 margin_right = 330.0
-margin_bottom = 224.0
+margin_bottom = 24.0
 text = "Brush size: 32px"
 align = 1
 
-[node name="HScrollBarBrushSize" type="HScrollBar" parent="ToolsPanel"]
+[node name="HScrollBarBrushSize" type="HScrollBar" parent="ToolsPanel/BrushSettings"]
 margin_left = 20.0
-margin_top = 230.0
+margin_top = 30.0
 margin_right = 330.0
-margin_bottom = 260.0
-min_value = 1.0
+margin_bottom = 60.0
+min_value = 2.0
+step = 1.0
 value = 32.0
 
-[node name="LabelBrushShape" type="Label" parent="ToolsPanel"]
+[node name="LabelBrushShape" type="Label" parent="ToolsPanel/BrushSettings"]
 margin_left = 20.0
-margin_top = 280.0
+margin_top = 80.0
 margin_right = 330.0
-margin_bottom = 294.0
-text = "Brush shape: circle"
+margin_bottom = 94.0
+text = "Brush shape: Circle"
 align = 1
 
-[node name="ButtonShapeBox" type="Button" parent="ToolsPanel"]
+[node name="ButtonShapeBox" type="Button" parent="ToolsPanel/BrushSettings"]
+editor/display_folded = true
 margin_left = 100.0
-margin_top = 300.0
+margin_top = 100.0
 margin_right = 160.0
-margin_bottom = 360.0
+margin_bottom = 160.0
 
-[node name="Sprite" type="Sprite" parent="ToolsPanel/ButtonShapeBox"]
+[node name="Sprite" type="Sprite" parent="ToolsPanel/BrushSettings/ButtonShapeBox"]
 position = Vector2( 30, 30 )
 scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 16, 16, 16 )
 
-[node name="ButtonShapeCircle" type="Button" parent="ToolsPanel"]
+[node name="ButtonShapeCircle" type="Button" parent="ToolsPanel/BrushSettings"]
+editor/display_folded = true
 margin_left = 190.0
-margin_top = 300.0
+margin_top = 100.0
 margin_right = 250.0
-margin_bottom = 360.0
+margin_bottom = 160.0
 
-[node name="Sprite" type="Sprite" parent="ToolsPanel/ButtonShapeCircle"]
+[node name="Sprite" type="Sprite" parent="ToolsPanel/BrushSettings/ButtonShapeCircle"]
 position = Vector2( 30, 30 )
 scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 3 )
@@ -209,5 +216,5 @@ margin_bottom = 400.0
 resizable = true
 access = 2
 filters = PoolStringArray( "*.png" )
-current_dir = "/home/ubuntu_noah/Documents/New_2019_GitHub_Repositories/godot-demo-projects/2d/gd_paint"
-current_path = "/home/ubuntu_noah/Documents/New_2019_GitHub_Repositories/godot-demo-projects/2d/gd_paint/"
+current_dir = "/home/aaronfranke/workspace/godot-demo-projects/2d/gd_paint"
+current_path = "/home/aaronfranke/workspace/godot-demo-projects/2d/gd_paint/"
