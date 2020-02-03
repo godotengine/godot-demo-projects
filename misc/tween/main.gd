@@ -1,45 +1,54 @@
-
 extends Control
 
-# Member variables
-var trans = ["linear", "sine", "quint", "quart", "quad", "expo", "elastic", "cubic", "circ", "bounce", "back"]
-var eases = ["in", "out", "in_out", "out_in"]
-var modes = ["move", "color", "scale", "rotate", "callback", "follow", "repeat", "pause"]
+const trans_list = ["Linear", "Sine", "Quint", "Quart", "Quad", "Expo", "Elastic", "Cubic", "Circ", "Bounce", "Back"]
+const eases_list = ["In", "Out", "InOut", "OutIn"]
+const modes_list = ["Move", "Color", "Scale", "Rotate", "Callback", "Follow", "Repeat", "Pause"]
 
 var state = {
 	trans = Tween.TRANS_LINEAR,
 	eases = Tween.EASE_IN,
 }
 
+onready var trans = $Trans
+onready var eases = $Eases
+onready var modes = $Modes
+onready var tween = $Tween
+onready var timeline = $Timeline
+onready var color_from_picker = $Colors/ColorFrom/Picker
+onready var color_to_picker = $Colors/ColorTo/Picker
+onready var sprite = $Tween/Area/Sprite
+onready var follow = $Tween/Area/Follow
+onready var follow_2 = $Tween/Area/Follow2
+onready var size = $Tween/Area.get_size()
 
 func _ready():
-	for index in range(trans.size()):
-		get_node("trans/" + trans[index]).connect("pressed", self, "on_trans_changed", [trans[index], index])
+	for index in range(trans_list.size()):
+		trans.get_node(trans_list[index]).connect("pressed", self, "on_trans_changed", [trans_list[index], index])
 
-	for index in range(eases.size()):
-		get_node("eases/" + eases[index]).connect("pressed", self, "on_eases_changed", [eases[index], index])
+	for index in range(eases_list.size()):
+		eases.get_node(eases_list[index]).connect("pressed", self, "on_eases_changed", [eases_list[index], index])
 
-	for index in range(modes.size()):
-		get_node("modes/" + modes[index]).connect("pressed", self, "on_modes_changed", [modes[index]])
+	for index in range(modes_list.size()):
+		modes.get_node(modes_list[index]).connect("pressed", self, "on_modes_changed", [modes_list[index]])
 
-	get_node("colors/color_from/picker").set_pick_color(Color(1, 0, 0, 1))
-	get_node("colors/color_from/picker").connect("color_changed", self, "on_color_changed")
+	color_from_picker.set_pick_color(Color.red)
+	color_from_picker.connect("color_changed", self, "on_color_changed")
 
-	get_node("colors/color_to/picker").set_pick_color(Color(0, 1, 1, 1))
-	get_node("colors/color_to/picker").connect("color_changed", self, "on_color_changed")
+	color_to_picker.set_pick_color(Color.cyan)
+	color_to_picker.connect("color_changed", self, "on_color_changed")
 
-	get_node("trans/linear").set_pressed(true)
-	get_node("eases/in").set_pressed(true)
-	get_node("modes/move").set_pressed(true)
-	get_node("modes/repeat").set_pressed(true)
+	$Trans/Linear.set_pressed(true)
+	$Eases/In.set_pressed(true)
+	$Modes/Move.set_pressed(true)
+	$Modes/Repeat.set_pressed(true)
 
 	reset_tween()
 
 
 func on_trans_changed(trans_name, index):
-	for index in range(trans.size()):
-		var pressed = trans[index] == trans_name
-		var btn = get_node("trans/" + trans[index])
+	for index in range(trans_list.size()):
+		var pressed = trans_list[index] == trans_name
+		var btn = trans.get_node(trans_list[index])
 
 		btn.set_pressed(pressed)
 		set_mouse_filter(Control.MOUSE_FILTER_IGNORE if pressed else Control.MOUSE_FILTER_PASS)
@@ -49,9 +58,9 @@ func on_trans_changed(trans_name, index):
 
 
 func on_eases_changed(ease_name, index):
-	for index in range(eases.size()):
-		var pressed = eases[index] == ease_name
-		var btn = get_node("eases/" + eases[index])
+	for index in range(eases_list.size()):
+		var pressed = eases_list[index] == ease_name
+		var btn = eases.get_node(eases_list[index])
 
 		btn.set_pressed(pressed)
 		set_mouse_filter(Control.MOUSE_FILTER_IGNORE if pressed else Control.MOUSE_FILTER_PASS)
@@ -61,14 +70,13 @@ func on_eases_changed(ease_name, index):
 
 
 func on_modes_changed(mode_name):
-	var tween = get_node("tween")
 	if mode_name == "pause":
-		if get_node("modes/pause").is_pressed():
+		if $Modes/Pause.is_pressed():
 			tween.stop_all()
-			get_node("timeline").set_mouse_filter(Control.MOUSE_FILTER_PASS)
+			timeline.set_mouse_filter(Control.MOUSE_FILTER_PASS)
 		else:
 			tween.resume_all()
-			get_node("timeline").set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
+			timeline.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
 	else:
 		reset_tween()
 
@@ -78,41 +86,35 @@ func on_color_changed(_color):
 
 
 func reset_tween():
-	var tween = get_node("tween")
 	var pos = tween.tell()
 	tween.reset_all()
 	tween.remove_all()
 
-	var sprite = get_node("tween/area/sprite")
-	var follow = get_node("tween/area/follow")
-	var follow_2 = get_node("tween/area/follow_2")
-	var size = get_node("tween/area").get_size()
-
-	if get_node("modes/move").is_pressed():
+	if $Modes/Move.is_pressed():
 		tween.interpolate_method(sprite, "set_position", Vector2(0, 0), Vector2(size.x, size.y), 2, state.trans, state.eases)
 		tween.interpolate_property(sprite, "position", Vector2(size.x, size.y), Vector2(0, 0), 2, state.trans, state.eases, 2)
 
-	if get_node("modes/color").is_pressed():
-		tween.interpolate_method(sprite, "set_modulate", get_node("colors/color_from/picker").get_pick_color(), get_node("colors/color_to/picker").get_pick_color(), 2, state.trans, state.eases)
-		tween.interpolate_property(sprite, "modulate", get_node("colors/color_to/picker").get_pick_color(), get_node("colors/color_from/picker").get_pick_color(), 2, state.trans, state.eases, 2)
+	if $Modes/Color.is_pressed():
+		tween.interpolate_method(sprite, "set_modulate", color_from_picker.get_pick_color(), color_to_picker.get_pick_color(), 2, state.trans, state.eases)
+		tween.interpolate_property(sprite, "modulate", color_to_picker.get_pick_color(), color_from_picker.get_pick_color(), 2, state.trans, state.eases, 2)
 	else:
-		sprite.set_modulate(Color(1, 1, 1, 1))
+		sprite.set_modulate(Color.white)
 
-	if get_node("modes/scale").is_pressed():
+	if $Modes/Scale.is_pressed():
 		tween.interpolate_method(sprite, "set_scale", Vector2(0.5, 0.5), Vector2(1.5, 1.5), 2, state.trans, state.eases)
 		tween.interpolate_property(sprite, "scale", Vector2(1.5, 1.5), Vector2(0.5, 0.5), 2, state.trans, state.eases, 2)
 	else:
-		sprite.set_scale(Vector2(1, 1))
+		sprite.set_scale(Vector2.ONE)
 
-	if get_node("modes/rotate").is_pressed():
+	if $Modes/Rotate.is_pressed():
 		tween.interpolate_method(sprite, "set_rotation_degrees", 0, 360, 2, state.trans, state.eases)
 		tween.interpolate_property(sprite, "rotation_degrees", 360, 0, 2, state.trans, state.eases, 2)
 
-	if get_node("modes/callback").is_pressed():
+	if $Modes/Callback.is_pressed():
 		tween.interpolate_callback(self, 0.5, "on_callback", "0.5 second's after")
 		tween.interpolate_callback(self, 0.2, "on_callback", "1.2 second's after")
 
-	if get_node("modes/follow").is_pressed():
+	if $Modes/Follow.is_pressed():
 		follow.show()
 		follow_2.show()
 
@@ -125,38 +127,31 @@ func reset_tween():
 		follow.hide()
 		follow_2.hide()
 
-	tween.set_repeat(get_node("modes/repeat").is_pressed())
+	tween.set_repeat($Modes/Repeat.is_pressed())
 	tween.start()
 	tween.seek(pos)
 
-	if get_node("modes/pause").is_pressed():
+	if $Modes/Pause.is_pressed():
 		tween.stop_all()
 		#get_node("timeline").set_ignore_mouse(false)
-		get_node("timeline").set_value(0)
+		timeline.set_value(0)
 	else:
 		tween.resume_all()
 		#get_node("timeline").set_ignore_mouse(true)
 
 
 func _on_tween_step(_object, _key, elapsed, _value):
-	var timeline = get_node("timeline")
-
-	var tween = get_node("tween")
 	var runtime = tween.get_runtime()
-
 	var ratio = 100 * (elapsed / runtime)
 	timeline.set_value(ratio)
 
 
 func _on_timeline_value_changed(value):
-	if !get_node("modes/pause").is_pressed():
+	if !$Modes/Pause.is_pressed():
 		return
-
-	var tween = get_node("tween")
 	var runtime = tween.get_runtime()
 	tween.seek(runtime * value / 100)
 
 
 func on_callback(arg):
-	var label = get_node("tween/area/label")
-	label.add_text("on_callback -> " + arg + "\n")
+	$Tween/Area/Label.add_text("on_callback -> " + arg + "\n")

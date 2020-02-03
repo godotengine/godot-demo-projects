@@ -1,11 +1,16 @@
 extends VBoxContainer
 
-# Member variables
 var regex = RegEx.new()
+
+func _ready():
+	$Text.set_text("They asked me \"What's going on \\\"in the manor\\\"?\"")
+	update_expression($Expression.text)
+
 
 func update_expression(text):
 	regex.compile(text)
 	update_text()
+
 
 func update_text():
 	for child in $List.get_children():
@@ -17,7 +22,3 @@ func update_text():
 				var label = Label.new()
 				label.text = result
 				$List.add_child(label)
-
-func _ready():
-	$Text.set_text("They asked me \"What's going on \\\"in the manor\\\"?\"")
-	update_expression($Expression.text)
