@@ -3,7 +3,8 @@
 
 ************************************************************************
 
- Copyright (c) 2007-2016 Juan Linietsky, Ariel Manzur.
+ Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.
+ Copyright (c) 2014-2020 Godot Engine contributors.
 
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
