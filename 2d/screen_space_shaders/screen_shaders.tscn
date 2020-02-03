@@ -71,27 +71,27 @@ shader_param/flashing = 0.01
 shader_param/grain = ExtResource( 19 )
 shader_param/vignette = ExtResource( 7 )
 
-[node name="Control" type="Control"]
+[node name="ScreenShaders" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 1 )
 
-[node name="pictures" type="Control" parent="."]
+[node name="Pictures" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="burano" type="TextureRect" parent="pictures"]
+[node name="Burano" type="TextureRect" parent="Pictures"]
 margin_right = 40.0
 margin_bottom = 40.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 texture = ExtResource( 2 )
 
-[node name="roby" type="TextureRect" parent="pictures"]
+[node name="Roby" type="TextureRect" parent="Pictures"]
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
@@ -99,7 +99,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 texture = ExtResource( 3 )
 
-[node name="mountains" type="TextureRect" parent="pictures"]
+[node name="Mountains" type="TextureRect" parent="Pictures"]
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
@@ -107,7 +107,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 texture = ExtResource( 4 )
 
-[node name="forest" type="TextureRect" parent="pictures"]
+[node name="Forest" type="TextureRect" parent="Pictures"]
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
@@ -115,20 +115,20 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 texture = ExtResource( 5 )
 
-[node name="effects" type="Control" parent="."]
+[node name="Effects" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="disabled" type="Control" parent="effects"]
+[node name="Disabled" type="Control" parent="Effects"]
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="vignette" type="TextureRect" parent="effects"]
+[node name="Vignette" type="TextureRect" parent="Effects"]
 visible = false
 material = SubResource( 1 )
 anchor_right = 1.0
@@ -138,7 +138,7 @@ size_flags_vertical = 2
 texture = ExtResource( 8 )
 expand = true
 
-[node name="blur" type="TextureRect" parent="effects"]
+[node name="Blur" type="TextureRect" parent="Effects"]
 visible = false
 material = SubResource( 2 )
 anchor_right = 1.0
@@ -148,7 +148,7 @@ size_flags_vertical = 2
 texture = ExtResource( 8 )
 expand = true
 
-[node name="pixelize" type="TextureRect" parent="effects"]
+[node name="Pixelize" type="TextureRect" parent="Effects"]
 visible = false
 material = SubResource( 3 )
 anchor_right = 1.0
@@ -158,7 +158,7 @@ size_flags_vertical = 2
 texture = ExtResource( 8 )
 expand = true
 
-[node name="whirl" type="TextureRect" parent="effects"]
+[node name="Whirl" type="TextureRect" parent="Effects"]
 visible = false
 material = SubResource( 4 )
 anchor_right = 1.0
@@ -168,7 +168,7 @@ size_flags_vertical = 2
 texture = ExtResource( 8 )
 expand = true
 
-[node name="sepia" type="TextureRect" parent="effects"]
+[node name="Sepia" type="TextureRect" parent="Effects"]
 visible = false
 material = SubResource( 5 )
 anchor_right = 1.0
@@ -180,7 +180,7 @@ size_flags_vertical = 2
 texture = ExtResource( 8 )
 expand = true
 
-[node name="negative" type="TextureRect" parent="effects"]
+[node name="Negative" type="TextureRect" parent="Effects"]
 visible = false
 material = SubResource( 6 )
 anchor_right = 1.0
@@ -190,7 +190,7 @@ size_flags_vertical = 2
 texture = ExtResource( 8 )
 expand = true
 
-[node name="contrasted" type="TextureRect" parent="effects"]
+[node name="Contrasted" type="TextureRect" parent="Effects"]
 visible = false
 material = SubResource( 7 )
 anchor_right = 1.0
@@ -200,7 +200,7 @@ size_flags_vertical = 2
 texture = ExtResource( 8 )
 expand = true
 
-[node name="normalized" type="TextureRect" parent="effects"]
+[node name="Normalized" type="TextureRect" parent="Effects"]
 visible = false
 material = SubResource( 8 )
 anchor_right = 1.0
@@ -210,7 +210,7 @@ size_flags_vertical = 2
 texture = ExtResource( 8 )
 expand = true
 
-[node name="BCS" type="TextureRect" parent="effects"]
+[node name="BCS" type="TextureRect" parent="Effects"]
 visible = false
 material = SubResource( 9 )
 anchor_right = 1.0
@@ -222,7 +222,7 @@ size_flags_vertical = 2
 texture = ExtResource( 8 )
 expand = true
 
-[node name="mirage" type="TextureRect" parent="effects"]
+[node name="Mirage" type="TextureRect" parent="Effects"]
 visible = false
 material = SubResource( 10 )
 anchor_right = 1.0
@@ -232,7 +232,7 @@ size_flags_vertical = 2
 texture = ExtResource( 8 )
 expand = true
 
-[node name="old_film" type="TextureRect" parent="effects"]
+[node name="OldFilm" type="TextureRect" parent="Effects"]
 visible = false
 material = SubResource( 11 )
 anchor_right = 1.0
@@ -244,7 +244,7 @@ size_flags_vertical = 2
 texture = ExtResource( 8 )
 expand = true
 
-[node name="picture" type="OptionButton" parent="."]
+[node name="Picture" type="OptionButton" parent="."]
 margin_left = 8.0
 margin_top = 7.0
 margin_right = 131.0
@@ -252,12 +252,12 @@ margin_bottom = 28.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="effect" type="OptionButton" parent="."]
+[node name="Effect" type="OptionButton" parent="."]
 margin_left = 137.0
 margin_top = 7.0
 margin_right = 260.0
 margin_bottom = 28.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-[connection signal="item_selected" from="picture" to="." method="_on_picture_item_selected"]
-[connection signal="item_selected" from="effect" to="." method="_on_effect_item_selected"]
+[connection signal="item_selected" from="Picture" to="." method="_on_picture_item_selected"]
+[connection signal="item_selected" from="Effect" to="." method="_on_effect_item_selected"]
