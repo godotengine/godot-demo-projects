@@ -1,8 +1,10 @@
 extends Control
 
 var dialogue_node = null
+
 func _ready():
 	hide()
+
 
 func show_dialogue(player, dialogue):
 	show()
@@ -21,11 +23,12 @@ func show_dialogue(player, dialogue):
 	$Name.text = dialogue_node.dialogue_name
 	$Text.text = dialogue_node.dialogue_text
 
-	
+
 func _on_Button_button_up():
 	dialogue_node.next_dialogue()
 	$Name.text = dialogue_node.dialogue_name
 	$Text.text = dialogue_node.dialogue_text
+
 
 func _on_dialogue_finished(player):
 	dialogue_node.disconnect("dialogue_started", player, "set_active")
