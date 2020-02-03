@@ -6,6 +6,7 @@ func _input(event):
 	if event.is_action_pressed("fire"):
 		fire(owner.look_direction)
 
+
 func fire(direction):
 	if not $CooldownTimer.is_stopped():
 		return
