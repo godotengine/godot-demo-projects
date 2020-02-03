@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://coin/Coin.tscn" type="PackedScene" id=2]
@@ -8,14 +8,7 @@
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://enemy/Enemy.tscn" type="PackedScene" id=7]
 [ext_resource path="res://background/ParallaxBg.tscn" type="PackedScene" id=8]
-
-
-
-
-
-
-
-
+[ext_resource path="res://audio/music.ogg" type="AudioStream" id=9]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -53,7 +46,7 @@ friction = 0.0
 [sub_resource type="PhysicsMaterial" id=12]
 friction = 0.0
 
-[node name="Stage" type="Node"]
+[node name="Stage" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -64,7 +57,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Coins" type="Node" parent="."]
+[node name="Coins" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Coin" parent="Coins" instance=ExtResource( 2 )]
 position = Vector2( 672, 1179 )
@@ -192,7 +186,8 @@ position = Vector2( 4236.75, 541.058 )
 [node name="Coin42" parent="Coins" instance=ExtResource( 2 )]
 position = Vector2( 4172.75, 541.058 )
 
-[node name="Props" type="Node" parent="."]
+[node name="Props" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="MovingPlatform" parent="Props" instance=ExtResource( 3 )]
 position = Vector2( 1451.86, 742.969 )
@@ -219,7 +214,8 @@ position = Vector2( 927.698, 1120.81 )
 position = Vector2( 251.684, 1045.6 )
 physics_material_override = SubResource( 1 )
 
-[node name="Enemies" type="Node" parent="."]
+[node name="Enemies" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource( 7 )]
 position = Vector2( 834.664, 1309.6 )
@@ -277,3 +273,6 @@ size_flags_vertical = 0
 text = "This is a simple demo on how to make a platformer game with Godot.\"This version uses physics and the 2D physics engine for motion and collision.\"\"The demo also shows the benefits of using the scene system, where coins,\"enemies and the player are edited separatedly and instanced in the stage.\"\"To edit the base tiles for the  tileset, open the tileset_edit.tscn file and follow \"instructions.\""
 autowrap = true
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+autoplay = true

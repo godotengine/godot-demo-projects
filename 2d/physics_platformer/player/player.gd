@@ -1,30 +1,28 @@
+class_name Player
 extends RigidBody2D
 
-class_name Player
+# Character Demo, written by Juan Linietsky.
+#
+#  Implementation of a 2D Character controller.
+#  This implementation uses the physics engine for
+#  controlling a character, in a very similar way
+#  than a 3D character controller would be implemented.
+#
+#  Using the physics engine for this has the main advantages:
+#    - Easy to write.
+#    - Interaction with other physics-based objects is free
+#    - Only have to deal with the object linear velocity, not position
+#    - All collision/area framework available
+#
+#  But also has the following disadvantages:
+#    - Objects may bounce a little bit sometimes
+#    - Going up ramps sends the chracter flying up, small hack is needed.
+#    - A ray collider is needed to avoid sliding down on ramps and
+#      undesiderd bumps, small steps and rare numerical precision errors.
+#      (another alternative may be to turn on friction when the character is not moving).
+#    - Friction cant be used, so floor velocity must be considered
+#      for moving platforms.
 
-""" Character Demo, written by Juan Linietsky.
-
-  Implementation of a 2D Character controller.
-  This implementation uses the physics engine for
-  controlling a character, in a very similar way
-  than a 3D character controller would be implemented.
-
-  Using the physics engine for this has the main advantages:
-    - Easy to write.
-    - Interaction with other physics-based objects is free
-    - Only have to deal with the object linear velocity, not position
-    - All collision/area framework available
-
-  But also has the following disadvantages:
-    - Objects may bounce a little bit sometimes
-    - Going up ramps sends the chracter flying up, small hack is needed.
-    - A ray collider is needed to avoid sliding down on ramps and  
-      undesiderd bumps, small steps and rare numerical precision errors.
-      (another alternative may be to turn on friction when the character is not moving).
-    - Friction cant be used, so floor velocity must be considered
-      for moving platforms. """
-
-# Member variables
 const WALK_ACCEL = 800.0
 const WALK_DEACCEL = 800.0
 const WALK_MAX_VELOCITY = 200.0
@@ -49,27 +47,6 @@ var shoot_time = 1e20
 var Bullet = preload("res://player/Bullet.tscn")
 var Enemy = preload("res://enemy/Enemy.tscn")
 
-
-func _shot_bullet():
-	shoot_time = 0
-	var bi = Bullet.instance()
-	var ss
-	if siding_left:
-		ss = -1.0
-	else:
-		ss = 1.0
-	var pos = position + ($BulletShoot as Position2D).position * Vector2(ss, 1.0)
-		
-	bi.position = pos
-	get_parent().add_child(bi)
-	
-	bi.linear_velocity = Vector2(800.0 * ss, -80)
-	
-	($Sprite/Smoke as Particles2D).restart()
-	($SoundShoot as AudioStreamPlayer2D).play()
-	
-	add_collision_exception_with(bi) # Make bullet and this not collide
-
 func _integrate_forces(s):
 	var lv = s.get_linear_velocity()
 	var step = s.get_step()
@@ -77,7 +54,7 @@ func _integrate_forces(s):
 	var new_anim = anim
 	var new_siding_left = siding_left
 	
-	# Get the controls
+	# Get the controls.
 	var move_left = Input.is_action_pressed("move_left")
 	var move_right = Input.is_action_pressed("move_right")
 	var jump = Input.is_action_pressed("jump")
@@ -85,19 +62,13 @@ func _integrate_forces(s):
 	var spawn = Input.is_action_pressed("spawn")
 	
 	if spawn:
-		var e = Enemy.instance()
-		var p = position
-		
-		p.y = p.y - 100
-		e.position = p
-		
-		get_parent().add_child(e)
+		call_deferred("_spawn_enemy_above")
 	
-	# Deapply prev floor velocity
+	# Deapply prev floor velocity.
 	lv.x -= floor_h_velocity
 	floor_h_velocity = 0.0
 	
-	# Find the floor (a contact with upwards facing collision normal)
+	# Find the floor (a contact with upwards facing collision normal).
 	var found_floor = false
 	var floor_index = -1
 	
@@ -118,14 +89,14 @@ func _integrate_forces(s):
 	if found_floor:
 		airborne_time = 0.0
 	else:
-		airborne_time += step # Time it spent in the air
+		airborne_time += step # Time it spent in the air.
 	
 	var on_floor = airborne_time < MAX_FLOOR_AIRBORNE_TIME
 
-	# Process jump
+	# Process jump.
 	if jumping:
 		if lv.y > 0:
-			# Set off the jumping flag if going down
+			# Set off the jumping flag if going down.
 			jumping = false
 		elif not jump:
 			stopping_jump = true
@@ -134,7 +105,7 @@ func _integrate_forces(s):
 			lv.y += STOP_JUMP_FORCE * step
 	
 	if on_floor:
-		# Process logic when character is on floor
+		# Process logic when character is on floor.
 		if move_left and not move_right:
 			if lv.x > -WALK_MAX_VELOCITY:
 				lv.x -= WALK_ACCEL * step
@@ -148,14 +119,14 @@ func _integrate_forces(s):
 				xv = 0
 			lv.x = sign(lv.x) * xv
 		
-		# Check jump
+		# Check jump.
 		if not jumping and jump:
 			lv.y = -JUMP_VELOCITY
 			jumping = true
 			stopping_jump = false
 			($SoundJump as AudioStreamPlayer2D).play()
 		
-		# Check siding
+		# Check siding.
 		if lv.x < 0 and move_left:
 			new_siding_left = true
 		elif lv.x > 0 and move_right:
@@ -173,7 +144,7 @@ func _integrate_forces(s):
 			else:
 				new_anim = "run"
 	else:
-		# Process logic when the character is in the air
+		# Process logic when the character is in the air.
 		if move_left and not move_right:
 			if lv.x > -WALK_MAX_VELOCITY:
 				lv.x -= AIR_ACCEL * step
@@ -199,7 +170,7 @@ func _integrate_forces(s):
 			else:
 				new_anim = "falling"
 	
-	# Update siding
+	# Update siding.
 	if new_siding_left != siding_left:
 		if new_siding_left:
 			($Sprite as Sprite).scale.x = -1
@@ -208,18 +179,45 @@ func _integrate_forces(s):
 		
 		siding_left = new_siding_left
 	
-	# Change animation
+	# Change animation.
 	if new_anim != anim:
 		anim = new_anim
-		($Anim as AnimationPlayer).play(anim)
+		($AnimationPlayer as AnimationPlayer).play(anim)
 	
 	shooting = shoot
 	
-	# Apply floor velocity
+	# Apply floor velocity.
 	if found_floor:
 		floor_h_velocity = s.get_contact_collider_velocity_at_position(floor_index).x
 		lv.x += floor_h_velocity
 	
-	# Finally, apply gravity and set back the linear velocity
+	# Finally, apply gravity and set back the linear velocity.
 	lv += s.get_total_gravity() * step
 	s.set_linear_velocity(lv)
+
+
+func _shot_bullet():
+	shoot_time = 0
+	var bi = Bullet.instance()
+	var ss
+	if siding_left:
+		ss = -1.0
+	else:
+		ss = 1.0
+	var pos = position + ($BulletShoot as Position2D).position * Vector2(ss, 1.0)
+		
+	bi.position = pos
+	get_parent().add_child(bi)
+	
+	bi.linear_velocity = Vector2(800.0 * ss, -80)
+	
+	($Sprite/Smoke as Particles2D).restart()
+	($SoundShoot as AudioStreamPlayer2D).play()
+	
+	add_collision_exception_with(bi) # Make bullet and this not collide.
+
+
+func _spawn_enemy_above():
+	var e = Enemy.instance()
+	e.position = position + 100 * Vector2.UP
+	get_parent().add_child(e)
