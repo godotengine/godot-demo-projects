@@ -8,7 +8,10 @@ onready var floor_detector_right = $FloorDetectorRight
 onready var sprite = $Sprite
 onready var animation_player = $AnimationPlayer
 
-enum State {WALKING, DEAD}
+enum State {
+	WALKING,
+	DEAD
+}
 
 var _state = State.WALKING
 

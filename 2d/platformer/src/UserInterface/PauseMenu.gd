@@ -17,10 +17,10 @@ func close():
 	visible = false
 
 
-func _on_ResumeButton_pressed() -> void:
+func _on_ResumeButton_pressed():
 	get_tree().paused = false
 	visible = false
 
 
-func _on_QuitButton_pressed() -> void:
+func _on_QuitButton_pressed():
 	get_tree().quit()

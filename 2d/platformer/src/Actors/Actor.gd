@@ -6,7 +6,7 @@ class_name Actor
 
 
 export var speed = Vector2(400.0, 500.0)
-export var gravity = 3500.0
+export(float) var gravity = ProjectSettings.get("physics/2d/gravity_default")
 
 const FLOOR_NORMAL = Vector2.UP
 
