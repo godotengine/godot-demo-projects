@@ -4,11 +4,13 @@ Each folder containing a `project.godot` file is a demo project meant to
 be used with [Godot Engine](https://godotengine.org), the open source
 2D and 3D game engine.
 
-## Important note
+## Godot versions
 
-- The `master` branch is compatible with the latest stable Godot version (currently 3.1).
+- The [`master`](https://github.com/godotengine/godot-demo-projects) branch is compatible with the latest stable Godot version (currently 3.2).
 - If you are using an older version of Godot, use the appropriate branch for your Godot version:
 
+  - [`3.1`](https://github.com/godotengine/godot-demo-projects/tree/3.1) branch
+  for Godot 3.1.x.
   - [`3.0`](https://github.com/godotengine/godot-demo-projects/tree/3.0) branch
   for Godot 3.0.x.
   - [`2.1`](https://github.com/godotengine/godot-demo-projects/tree/2.1) branch
