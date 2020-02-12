@@ -23,3 +23,7 @@ We invite you to open the demo's GDScript files in the editor as they contain a 
 - Pixel art visuals.
 - Sound effects and music.
 
+## Screenshots
+
+![Player shooting in the direction of an enemy](screenshots/shoot.png)
+![The entire level layout viewed in the editor](screenshots/layout.png)
