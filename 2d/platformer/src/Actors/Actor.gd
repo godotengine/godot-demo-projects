@@ -1,8 +1,8 @@
-extends KinematicBody2D
 class_name Actor
+extends KinematicBody2D
 
-# Both the Player and Enemy inherit this scene as they have shared behaviours such as
-# speed and are affected by gravity.
+# Both the Player and Enemy inherit this scene as they have shared behaviours
+# such as speed and are affected by gravity.
 
 
 export var speed = Vector2(400.0, 500.0)

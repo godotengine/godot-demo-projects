@@ -1,5 +1,5 @@
-extends Actor
 class_name Player
+extends Actor
 
 
 const FLOOR_DETECT_DISTANCE = 40.0
@@ -23,12 +23,12 @@ onready var gun = $Sprite/Gun
 # 5. Shoots bullets.
 # 6. Updates the animation.
 
-# # Splitting the physics process logic into functions not only makes it easier to read, it help to
-# change or improve the code later on:
-# - If you need to change a calculation, you can use Go To -> Function (Ctrl Alt F) to quickly
-#   jump to the corresponding function.
-# - If you split the character into a state machine or more advanced pattern, you can easily move
-#   individual functions.
+# Splitting the physics process logic into functions not only makes it
+# easier to read, it help to change or improve the code later on:
+# - If you need to change a calculation, you can use Go To -> Function
+#   (Ctrl Alt F) to quickly jump to the corresponding function.
+# - If you split the character into a state machine or more advanced pattern,
+#   you can easily move individual functions.
 func _physics_process(_delta):
 	var direction = get_direction()
 
@@ -38,7 +38,7 @@ func _physics_process(_delta):
 	var snap_vector = Vector2.DOWN * FLOOR_DETECT_DISTANCE if direction.y == 0.0 else Vector2.ZERO
 	var is_on_platform = platform_detector.is_colliding()
 	_velocity = move_and_slide_with_snap(
-		_velocity, snap_vector, FLOOR_NORMAL, not is_on_platform, 4,  0.9, false
+		_velocity, snap_vector, FLOOR_NORMAL, not is_on_platform, 4, 0.9, false
 	)
 
 	# When the character’s direction changes, we want to to scale the Sprite accordingly to flip it.

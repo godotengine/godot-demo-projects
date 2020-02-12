@@ -1,6 +1,6 @@
+extends Node
 # This class contains controls that should always be accessible, like pausing
 # the game or toggling the window full-screen.
-extends Node
 
 
 # The "_" prefix is a convention to indicate that variables are private,

@@ -8,13 +8,13 @@ func _ready():
 	visible = false
 
 
+func close():
+	visible = false
+
+
 func open():
 	visible = true
 	resume_button.grab_focus()
-
-
-func close():
-	visible = false
 
 
 func _on_ResumeButton_pressed():

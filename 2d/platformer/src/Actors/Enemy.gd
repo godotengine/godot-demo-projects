@@ -1,12 +1,6 @@
-extends Actor
 class_name Enemy
+extends Actor
 
-
-onready var platform_detector = $PlatformDetector
-onready var floor_detector_left = $FloorDetectorLeft
-onready var floor_detector_right = $FloorDetectorRight
-onready var sprite = $Sprite
-onready var animation_player = $AnimationPlayer
 
 enum State {
 	WALKING,
@@ -14,6 +8,12 @@ enum State {
 }
 
 var _state = State.WALKING
+
+onready var platform_detector = $PlatformDetector
+onready var floor_detector_left = $FloorDetectorLeft
+onready var floor_detector_right = $FloorDetectorRight
+onready var sprite = $Sprite
+onready var animation_player = $AnimationPlayer
 
 # This function is called when the scene enters the scene tree.
 # We can initialize variables here.
@@ -29,12 +29,12 @@ func _ready():
 # 3. Updates the sprite direction.
 # 4. Updates the animation.
 
-# Splitting the physics process logic into functions not only makes it easier to read, it help to
-# change or improve the code later on:
-# - If you need to change a calculation, you can use Go To -> Function (Ctrl Alt F) to quickly
-#   jump to the corresponding function.
-# - If you split the character into a state machine or more advanced pattern, you can easily move
-#   individual functions.
+# Splitting the physics process logic into functions not only makes it
+# easier to read, it help to change or improve the code later on:
+# - If you need to change a calculation, you can use Go To -> Function
+#   (Ctrl Alt F) to quickly jump to the corresponding function.
+# - If you split the character into a state machine or more advanced pattern,
+#   you can easily move individual functions.
 func _physics_process(_delta):
 	_velocity = calculate_move_velocity(_velocity)
 
@@ -49,16 +49,9 @@ func _physics_process(_delta):
 		animation_player.play(animation)
 
 
-func destroy():
-	_state = State.DEAD
-	_velocity = Vector2.ZERO
-
-
 # This function calculates a new velocity whenever you need it.
 # If the enemy encounters a wall or an edge, the horizontal velocity is flipped.
-func calculate_move_velocity(
-		linear_velocity
-	):
+func calculate_move_velocity(linear_velocity):
 	var velocity = linear_velocity
 
 	if not floor_detector_left.is_colliding():
@@ -70,6 +63,11 @@ func calculate_move_velocity(
 		velocity.x *= -1
 
 	return velocity
+
+
+func destroy():
+	_state = State.DEAD
+	_velocity = Vector2.ZERO
 
 
 func get_new_animation():
