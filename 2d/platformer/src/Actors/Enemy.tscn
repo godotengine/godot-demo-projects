@@ -169,8 +169,8 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CapsuleShape2D" id=5]
-radius = 13.4556
-height = 14.2002
+radius = 11.0
+height = 7.0
 
 [sub_resource type="CanvasItemMaterial" id=6]
 blend_mode = 1
@@ -195,7 +195,6 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 720.0
 angle_random = 1.0
-scale = 0.4
 scale_random = 1.0
 color_ramp = SubResource( 8 )
 hue_variation = 0.05
@@ -205,25 +204,25 @@ hue_variation_random = 0.46
 collision_layer = 2
 collision_mask = 24
 script = ExtResource( 5 )
-speed = Vector2( 150, 500 )
-gravity = 1800.0
+speed = Vector2( 75, 250 )
+gravity = 900.0
 
 [node name="PlatformDetector" type="RayCast2D" parent="."]
-position = Vector2( 0, 12 )
+position = Vector2( 0, 6 )
 enabled = true
 cast_to = Vector2( 0, 8 )
 collision_mask = 8
 
 [node name="FloorDetectorLeft" type="RayCast2D" parent="."]
-position = Vector2( -30, -8 )
+position = Vector2( -15, -4 )
 enabled = true
-cast_to = Vector2( 0, 70 )
+cast_to = Vector2( 0, 35 )
 collision_mask = 24
 
 [node name="FloorDetectorRight" type="RayCast2D" parent="."]
-position = Vector2( 31.16, -8 )
+position = Vector2( 15.5, -3 )
 enabled = true
-cast_to = Vector2( 0, 70 )
+cast_to = Vector2( 0, 35 )
 collision_mask = 24
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -231,7 +230,7 @@ material = SubResource( 1 )
 texture = ExtResource( 4 )
 flip_h = true
 hframes = 8
-frame = 5
+frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/destroy = SubResource( 2 )
