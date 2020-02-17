@@ -10,14 +10,14 @@ export(bool) var use_our_rotation_y = false
 export(bool) var use_our_rotation_z = false
 export(bool) var use_negative_our_rot = false
 export(Vector3) var additional_rotation = Vector3()
-export (bool) var position_using_additional_bone = false
-export (String) var additional_bone_name = ""
-export (float) var additional_bone_length = 1
+export(bool) var position_using_additional_bone = false
+export(String) var additional_bone_name = ""
+export(float) var additional_bone_length = 1
 export(bool) var debug_messages = false
 
-var skeleton_to_use
-var first_call = true
-var _editor_indicator = null
+var skeleton_to_use: Skeleton = null
+var first_call: bool = true
+var _editor_indicator: Spatial = null
 
 
 func _ready():
@@ -68,7 +68,7 @@ func update_skeleton():
 		return
 	
 	# Get the bone
-	var bone = skeleton_to_use.find_bone(bone_name)
+	var bone : int = skeleton_to_use.find_bone(bone_name)
 	
 	# If no bone is found (-1), then return (and optionally print an error)
 	if bone == -1:
