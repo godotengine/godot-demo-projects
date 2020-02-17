@@ -10,10 +10,14 @@ export(bool) var use_our_rotation_y = false
 export(bool) var use_our_rotation_z = false
 export(bool) var use_negative_our_rot = false
 export(Vector3) var additional_rotation = Vector3()
+export(bool) var position_using_additional_bone = false
+export(String) var additional_bone_name = ""
+export(float) var additional_bone_length = 1
 export(bool) var debug_messages = false
 
-var skeleton_to_use
-var first_call = true
+var skeleton_to_use: Skeleton = null
+var first_call: bool = true
+var _editor_indicator: Spatial = null
 
 
 func _ready():
@@ -63,42 +67,42 @@ func update_skeleton():
 	if update_mode >= 3:
 		return
 	
-	# Get the bone
-	var bone = skeleton_to_use.find_bone(bone_name)
+	# Get the bone index.
+	var bone: int = skeleton_to_use.find_bone(bone_name)
 	
-	# If no bone is found (-1), then return (and optionally print an error)
+	# If no bone is found (-1), then return and optionally print an error.
 	if bone == -1:
 		if debug_messages == true:
 			print (name, " - IK_LookAt: No bone in skeleton found with name [", bone_name, "]!")
 		return
 	
-	# get the bone's rest position
+	# get the bone's global transform pose.
 	var rest = skeleton_to_use.get_bone_global_pose(bone)
 	
-	# Convert our position relative to the skeleton's transform
+	# Convert our position relative to the skeleton's transform.
 	var target_pos = skeleton_to_use.global_transform.xform_inv(global_transform.origin)
 	
 	# Call helper's look_at function with the chosen up axis.
 	if look_at_axis == 0:
-		rest = rest.looking_at(target_pos, Vector3(1, 0, 0))
+		rest = rest.looking_at(target_pos, Vector3.RIGHT)
 	elif look_at_axis == 1:
-		rest = rest.looking_at(target_pos, Vector3(0, 1, 0))
+		rest = rest.looking_at(target_pos, Vector3.UP)
 	elif look_at_axis == 2:
-		rest = rest.looking_at(target_pos, Vector3(0, 0, 1))
+		rest = rest.looking_at(target_pos, Vector3.FORWARD)
 	else:
-		rest = rest.looking_at(target_pos, Vector3(0, 1, 0))
+		rest = rest.looking_at(target_pos, Vector3.UP)
 		if debug_messages == true:
 			print (name, " - IK_LookAt: Unknown look_at_axis value!")
 	
-	# Get our rotation euler, and the bone's rotation euler
+	# Get the rotation euler of the bone and of this node.
 	var rest_euler = rest.basis.get_euler()
 	var self_euler = global_transform.basis.orthonormalized().get_euler()
 	
-	# If we using negative rotation, we flip our rotation euler
+	# Flip the rotation euler if using negative rotation.
 	if use_negative_our_rot == true:
 		self_euler = -self_euler
 	
-	# Apply our rotation euler, if wanted/required
+	# Apply this node's rotation euler on each axis, if wanted/required.
 	if use_our_rotation_x == true:
 		rest_euler.x = self_euler.x
 	if use_our_rotation_y == true:
@@ -106,53 +110,61 @@ func update_skeleton():
 	if use_our_rotation_z == true:
 		rest_euler.z = self_euler.z
 	
-	# Rotate the bone by the (potentially) changed euler angle(s)
+	# Make a new basis with the, potentially, changed euler angles.
 	rest.basis = Basis(rest_euler)
 	
-	# If we have additional rotation, then rotate it by the local rotation vectors
+	# Apply additional rotation stored in additional_rotation to the bone.
 	if additional_rotation != Vector3.ZERO:
 		rest.basis = rest.basis.rotated(rest.basis.x, deg2rad(additional_rotation.x))
 		rest.basis = rest.basis.rotated(rest.basis.y, deg2rad(additional_rotation.y))
 		rest.basis = rest.basis.rotated(rest.basis.z, deg2rad(additional_rotation.z))
 	
-	# Finally, apply the bone rotation to the skeleton
-	skeleton_to_use.set_bone_global_pose(bone, rest)
+	# If the position is set using an additional bone, then set the origin
+	# based on that bone and its length.
+	if position_using_additional_bone:
+		var additional_bone_id = skeleton_to_use.find_bone(additional_bone_name)
+		var additional_bone_pos = skeleton_to_use.get_bone_global_pose(additional_bone_id)
+		rest.origin = additional_bone_pos.origin - additional_bone_pos.basis.z.normalized() * additional_bone_length
+	
+	# Finally, apply the new rotation to the bone in the skeleton.
+	skeleton_to_use.set_bone_global_pose_override(bone, rest, 1.0, true)
 
 
 func _setup_for_editor():
-	# So we can see the target in the editor, let's create a mesh instance,
-	# Add it as our child, and name it
-	var indicator = MeshInstance.new()
-	add_child(indicator)
-	indicator.name = "(EditorOnly) Visual indicator"
+	# To see the target in the editor, let's create a MeshInstance,
+	# add it as a child of this node, and name it.
+	_editor_indicator = MeshInstance.new()
+	add_child(_editor_indicator)
+	_editor_indicator.name = "(EditorOnly) Visual indicator"
 
-	# We need to make a mesh for the mesh instance.
-	# The code below makes a small sphere mesh
+	# Make a sphere mesh for the MeshInstance
 	var indicator_mesh = SphereMesh.new()
 	indicator_mesh.radius = 0.1
 	indicator_mesh.height = 0.2
 	indicator_mesh.radial_segments = 8
 	indicator_mesh.rings = 4
 
-	# The mesh needs a material (unless we want to use the defualt one).
-	# Let's create a material and use the EditorGizmoTexture to texture it.
+	# Create a new SpatialMaterial for the sphere and give it the editor
+	# gizmo texture so it is textured.
 	var indicator_material = SpatialMaterial.new()
 	indicator_material.flags_unshaded = true
 	indicator_material.albedo_texture = preload("editor_gizmo_texture.png")
 	indicator_material.albedo_color = Color(1, 0.5, 0, 1)
+	
+	# Assign the material and mesh to the MeshInstance.
 	indicator_mesh.material = indicator_material
-	indicator.mesh = indicator_mesh
+	_editor_indicator.mesh = indicator_mesh
 
 
 func _set_update(new_value):
 	update_mode = new_value
 	
-	# Set all of our processes to false
+	# Set all of our processes to false.
 	set_process(false)
 	set_physics_process(false)
 	set_notify_transform(false)
 	
-	# Based on the value of upate, change how we handle updating the skeleton
+	# Based on the value of passed to update, enable the correct process.
 	if update_mode == 0:
 		set_process(true)
 		if debug_messages == true:
@@ -171,13 +183,13 @@ func _set_update(new_value):
 
 
 func _set_skeleton_path(new_value):
-	# Because get_node doesn't work in the first call, we just want to assign instead
-	# This is to get around a issue with NodePaths exposed to the editor
+	# Because get_node doesn't work in the first call, we just want to assign instead.
+	# This is to get around a issue with NodePaths exposed to the editor.
 	if first_call == true:
 		skeleton_path = new_value
 		return
 	
-	# Assign skeleton_path to whatever value is passed
+	# Assign skeleton_path to whatever value is passed.
 	skeleton_path = new_value
 	
 	if skeleton_path == null:
@@ -185,15 +197,13 @@ func _set_skeleton_path(new_value):
 			print (name, " - IK_LookAt: No Nodepath selected for skeleton_path!")
 		return
 	
-	# Get the node at that location, if there is one
+	# Get the node at that location, if there is one.
 	var temp = get_node(skeleton_path)
 	if temp != null:
-		# If the node has the method "find_bone" then we can assume it is (likely) a skeleton
-		if temp.has_method("find_bone") == true:
+		if temp is Skeleton:
 			skeleton_to_use = temp
 			if debug_messages == true:
 				print (name, " - IK_LookAt: attached to (new) skeleton")
-		# If not, then it's (likely) not a skeleton
 		else:
 			skeleton_to_use = null
 			if debug_messages == true:

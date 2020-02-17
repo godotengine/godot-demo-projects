@@ -49,27 +49,20 @@ sky_curve = 0.25
 ground_bottom_color = Color( 0.101961, 0.145098, 0.188235, 1 )
 ground_horizon_color = Color( 0.482353, 0.788235, 0.952941, 1 )
 ground_curve = 0.01
-sun_energy = 16.0
 
 [sub_resource type="Environment" id=9]
 background_mode = 2
 background_sky = SubResource( 8 )
-ambient_light_color = Color( 1, 1, 1, 1 )
-ambient_light_energy = 0.4
-ambient_light_sky_contribution = 0.0
-fog_depth_begin = 20.0
-fog_depth_curve = 0.406126
-fog_transmit_enabled = true
+ambient_light_color = Color( 1, 0.909804, 0.784314, 1 )
+ambient_light_energy = 1.4
+ambient_light_sky_contribution = 0.72
 tonemap_mode = 3
-ss_reflections_max_steps = 32
-ssao_enabled = true
-ssao_light_affect = 1.0
 glow_enabled = true
 glow_levels/1 = true
 glow_levels/2 = true
 glow_levels/5 = false
-glow_intensity = 0.6
-glow_bloom = 0.06
+glow_intensity = 0.2
+glow_bloom = 0.03
 glow_blend_mode = 0
 
 [sub_resource type="CapsuleShape" id=10]
@@ -412,47 +405,63 @@ shadow_enabled = true
 environment = SubResource( 9 )
 
 [node name="Control" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="Panel" type="Panel" parent="Control"]
 modulate = Color( 1, 1, 1, 0.784314 )
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = -2.0
-margin_top = 530.0
-margin_right = 1028.0
-margin_bottom = 600.0
+margin_top = -70.0
+margin_right = 4.0
 
 [node name="Label" type="Label" parent="Control/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 12.0
 margin_top = 10.0
-margin_right = 1012.0
-margin_bottom = 41.0
-text = "Example use case: Dynamic FPS Animations
+margin_right = -18.0
+margin_bottom = -29.0
+text = "F.A.B.R.I.K IK Example use case: Dynamic FPS Animations
 Controls: WASD/Arrows to move, left click to fire, right click to look down sights, Q/E to lean left/right
 Escape to free/lock mouse cursor"
 align = 1
 valign = 1
 
 [node name="Button_Prev" type="Button" parent="Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
 margin_left = 10.0
-margin_top = 540.0
+margin_top = -60.0
 margin_right = 129.0
-margin_bottom = 590.0
+margin_bottom = -10.0
 text = "Previous scene"
 script = ExtResource( 2 )
 scene_to_change_to = "res://fabrik_ik.tscn"
 
 [node name="Crosshair" type="Control" parent="Control"]
 modulate = Color( 1, 1, 1, 0.784314 )
-margin_left = 492.0
-margin_top = 280.0
-margin_right = 532.0
-margin_bottom = 320.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect" type="ColorRect" parent="Control/Crosshair"]
 margin_left = 19.0
 margin_right = 21.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect2" type="ColorRect" parent="Control/Crosshair"]
 margin_left = 40.0
@@ -488,14 +497,8 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../BattleBot/Armature/Skeleton")
 bone_name = "Chest"
-update_mode = 0
 look_at_axis = 2
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
-use_negative_our_rot = false
 additional_rotation = Vector3( -10, 0, 0 )
-debug_messages = false
 
 [node name="Camera" type="Camera" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
@@ -512,10 +515,7 @@ __meta__ = {
 skeleton_path = NodePath("../../../../../../BattleBot/Armature/Skeleton")
 bones_in_chain = PoolStringArray( "Left_UpperArm", "Left_LowerArm", "Left_Hand" )
 bones_in_chain_lengths = PoolRealArray( 1.97, 3, 0.1 )
-update_mode = 0
-chain_iterations = 6
 limit_chain_iterations = false
-reset_iterations_on_update = false
 use_middle_joint_target = true
 
 [node name="target" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK"]
@@ -529,14 +529,8 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../../../../../BattleBot/Armature/Skeleton")
 bone_name = "Left_Hand"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
 use_negative_our_rot = true
 additional_rotation = Vector3( 0, 0, 90 )
-debug_messages = false
 
 [node name="middle_joint_target" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.85263, -2.91316, -2.77555 )
@@ -558,10 +552,7 @@ __meta__ = {
 skeleton_path = NodePath("../../../../../../BattleBot/Armature/Skeleton")
 bones_in_chain = PoolStringArray( "Right_UpperArm", "Right_LowerArm", "Right_Hand" )
 bones_in_chain_lengths = PoolRealArray( 1.97, 3, 0.1 )
-update_mode = 0
-chain_iterations = 3
 limit_chain_iterations = false
-reset_iterations_on_update = false
 use_middle_joint_target = true
 
 [node name="target" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK_RightArm"]
@@ -575,14 +566,8 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../../../../../BattleBot/Armature/Skeleton")
 bone_name = "Right_Hand"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
 use_negative_our_rot = true
 additional_rotation = Vector3( 0, 0, 90 )
-debug_messages = false
 
 [node name="middle_joint_target" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK_RightArm"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.73318, -2.91316, -2.77555 )
@@ -606,14 +591,6 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../BattleBot/Armature/Skeleton")
 bone_name = "Head"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
-use_negative_our_rot = false
-additional_rotation = Vector3( 0, 0, 0 )
-debug_messages = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="KinematicBody/CameraHolder"]
 autoplay = "Start"

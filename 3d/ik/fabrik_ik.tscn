@@ -27,11 +27,13 @@ sky_curve = 0.25
 ground_bottom_color = Color( 0.101961, 0.145098, 0.188235, 1 )
 ground_horizon_color = Color( 0.482353, 0.788235, 0.952941, 1 )
 ground_curve = 0.01
-sun_energy = 16.0
 
 [sub_resource type="Environment" id=4]
 background_mode = 2
 background_sky = SubResource( 3 )
+ambient_light_color = Color( 1, 0.909804, 0.784314, 1 )
+ambient_light_energy = 1.4
+ambient_light_sky_contribution = 0.72
 tonemap_mode = 3
 glow_enabled = true
 glow_levels/1 = true
@@ -67,14 +69,14 @@ material/0 = ExtResource( 3 )
 material/1 = ExtResource( 4 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5, 8.8 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5, 11 )
 fov = 74.0
 script = ExtResource( 5 )
-MOVEMENT_SPEED = -6.0
+MOVEMENT_SPEED = -8.0
 flip_axis = true
 
 [node name="targets" type="Spatial" parent="Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.41814 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8 )
 
 [node name="IK_LookAt_Head" type="Spatial" parent="Camera/targets"]
 script = ExtResource( 6 )
@@ -83,14 +85,7 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../BattleBot/Armature/Skeleton")
 bone_name = "Head"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
-use_negative_our_rot = false
 additional_rotation = Vector3( 90, 0, 0 )
-debug_messages = false
 
 [node name="IK_FABRIK_Left_Arm" type="Spatial" parent="Camera/targets"]
 script = ExtResource( 8 )
@@ -100,10 +95,8 @@ __meta__ = {
 skeleton_path = NodePath("../../../BattleBot/Armature/Skeleton")
 bones_in_chain = PoolStringArray( "Left_UpperArm", "Left_LowerArm" )
 bones_in_chain_lengths = PoolRealArray( 1.97, 3 )
-update_mode = 0
 chain_iterations = 10
 limit_chain_iterations = false
-reset_iterations_on_update = false
 use_middle_joint_target = true
 
 [node name="target" type="Spatial" parent="Camera/targets/IK_FABRIK_Left_Arm"]
@@ -117,14 +110,10 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../../BattleBot/Armature/Skeleton")
 bone_name = "Left_Hand"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
-use_negative_our_rot = false
 additional_rotation = Vector3( 0, 0, 90 )
-debug_messages = false
+position_using_additional_bone = true
+additional_bone_name = "Left_LowerArm"
+additional_bone_length = 3.0
 
 [node name="middle_joint_target" type="Spatial" parent="Camera/targets/IK_FABRIK_Left_Arm"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.16849, 0, -5.31922 )
@@ -143,10 +132,7 @@ __meta__ = {
 skeleton_path = NodePath("../../../BattleBot/Armature/Skeleton")
 bones_in_chain = PoolStringArray( "Right_UpperArm", "Right_LowerArm", "Right_Hand" )
 bones_in_chain_lengths = PoolRealArray( 1.97, 3, 1.2 )
-update_mode = 0
-chain_iterations = 2
 limit_chain_iterations = false
-reset_iterations_on_update = false
 use_middle_joint_target = true
 
 [node name="target" type="Spatial" parent="Camera/targets/IK_FABRIK_Right_Arm"]
@@ -160,14 +146,7 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../../BattleBot/Armature/Skeleton")
 bone_name = "Right_Hand"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
-use_negative_our_rot = false
 additional_rotation = Vector3( 0, 0, 90 )
-debug_messages = false
 
 [node name="middle_joint_target" type="Spatial" parent="Camera/targets/IK_FABRIK_Right_Arm"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.34515, 0, -3.7843 )
@@ -186,21 +165,28 @@ mesh = SubResource( 5 )
 material/0 = SubResource( 6 )
 
 [node name="Control" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Panel" type="Panel" parent="Control"]
 modulate = Color( 1, 1, 1, 0.784314 )
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = -2.0
-margin_top = 530.0
-margin_right = 1028.0
-margin_bottom = 600.0
+margin_top = -70.0
+margin_right = 4.0
 
 [node name="Label" type="Label" parent="Control/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 12.0
 margin_top = 10.0
-margin_right = 1012.0
-margin_bottom = 41.0
+margin_right = -18.0
+margin_bottom = -29.0
 text = "F.A.B.R.I.K IK
 Move mouse to move IK targets
 (Using 3 bones in the right hand, only 2 in the left. 3+ recommended)"
@@ -208,20 +194,27 @@ align = 1
 valign = 1
 
 [node name="Label_extra" type="Label" parent="Control/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 12.0
 margin_top = 80.0
-margin_right = 1012.0
-margin_bottom = 128.0
+margin_right = -18.0
+margin_bottom = 58.0
 text = "NOTE: You will get a few errors when saving with FABRIK IK nodes in your scene
 This is a known bug. Please ignore the errors for now, as they do not do anything
 (They're just annoying. If you find a fix, please add it to the demo repository!)"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label_left" type="Label" parent="Control/Panel"]
-margin_left = 782.0
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -248.0
 margin_top = 4.0
-margin_right = 895.0
+margin_right = -135.0
 margin_bottom = 18.0
 text = "Left Hand"
 align = 1
@@ -235,19 +228,25 @@ text = "Right Hand"
 align = 1
 
 [node name="Button_Next" type="Button" parent="Control"]
-margin_left = 900.0
-margin_top = 540.0
-margin_right = 1019.0
-margin_bottom = 590.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -124.0
+margin_top = -60.0
+margin_right = -5.0
+margin_bottom = -10.0
 text = "Next scene"
 script = ExtResource( 10 )
-scene_to_change_to = "res://fps/fps_example.tscn"
+scene_to_change_to = "res://skeleton_ik.tscn"
 
 [node name="Button_Prev" type="Button" parent="Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
 margin_left = 10.0
-margin_top = 540.0
+margin_top = -60.0
 margin_right = 129.0
-margin_bottom = 590.0
+margin_bottom = -10.0
 text = "Previous scene"
 script = ExtResource( 10 )
 scene_to_change_to = "res://look_at_ik.tscn"
