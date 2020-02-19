@@ -24,13 +24,13 @@ tracks/0/keys = {
 "values": [ 4 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Particles2D:emitting")
+tracks/1/path = NodePath("Explosion:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 3.47394 ),
+"times": PoolRealArray( 1 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
@@ -42,7 +42,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 3.20357, 5.07305 ),
+"times": PoolRealArray( 0.8, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -59,7 +59,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 3.55, 4.32 ),
+"times": PoolRealArray( 0.5, 1.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -103,23 +103,24 @@ tracks/0/keys = {
 radius = 7.0
 
 [sub_resource type="Gradient" id=6]
-offsets = PoolRealArray( 0, 0.564972, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.915254, 1, 1, 1, 0 )
+offsets = PoolRealArray( 0.5, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.501961, 0, 0, 0, 0 )
 
 [sub_resource type="GradientTexture" id=7]
 gradient = SubResource( 6 )
 
 [sub_resource type="ParticlesMaterial" id=8]
 emission_shape = 1
-emission_sphere_radius = 20.0
+emission_sphere_radius = 8.0
 flag_disable_z = true
 spread = 180.0
-gravity = Vector3( 0, 98, 0 )
-initial_velocity = 322.73
-angular_velocity = 1.5
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 120.0
+initial_velocity_random = 0.5
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale = 2.4
+angle_random = 1.0
+scale_random = 1.0
 color_ramp = SubResource( 7 )
 
 [node name="Enemy" type="RigidBody2D"]
@@ -165,12 +166,14 @@ position = Vector2( 11, -4.672 )
 enabled = true
 cast_to = Vector2( 0, 22.5 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="Explosion" type="Particles2D" parent="."]
 modulate = Color( 1, 1, 1, 0.685843 )
 emitting = false
+amount = 32
 lifetime = 0.5
 one_shot = true
-explosiveness = 0.86
+speed_scale = 1.2
+explosiveness = 0.76
 process_material = SubResource( 8 )
 texture = ExtResource( 3 )
 
