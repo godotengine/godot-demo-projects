@@ -1,9 +1,9 @@
 extends Node
 
 export var autojoin = true
-export var lobby = "" # Will create a new lobby if empty
+export var lobby = "" # Will create a new lobby if empty.
 
-var client : WebSocketClient = WebSocketClient.new()
+var client: WebSocketClient = WebSocketClient.new()
 var code = 1000
 var reason = "Unknown"
 
@@ -24,26 +24,32 @@ func _init():
 	client.connect("connection_error", self, "_closed")
 	client.connect("server_close_request", self, "_close_request")
 
-func connect_to_url(url : String):
+
+func connect_to_url(url):
 	close()
 	code = 1000
 	reason = "Unknown"
 	client.connect_to_url(url)
 
+
 func close():
 	client.disconnect_from_host()
 
-func _closed(was_clean : bool = false):
+
+func _closed(was_clean = false):
 	emit_signal("disconnected")
 
-func _close_request(code : int, reason : String):
+
+func _close_request(code, reason):
 	self.code = code
 	self.reason = reason
+
 
 func _connected(protocol = ""):
 	client.get_peer(1).set_write_mode(WebSocketPeer.WRITE_MODE_TEXT)
 	if autojoin:
 		join_lobby(lobby)
+
 
 func _parse_msg():
 	var pkt_str : String = client.get_peer(1).get_packet().get_string_from_utf8()
@@ -92,23 +98,30 @@ func _parse_msg():
 			return
 		emit_signal("candidate_received", src_id, candidate[0], int(candidate[1]), candidate[2])
 
-func join_lobby(lobby : String):
+
+func join_lobby(lobby):
 	return client.get_peer(1).put_packet(("J: %s\n" % lobby).to_utf8())
+
 
 func seal_lobby():
 	return client.get_peer(1).put_packet("S: \n".to_utf8())
 
-func send_candidate(id : int, mid : String, index : int, sdp : String) -> int:
+
+func send_candidate(id, mid, index, sdp) -> int:
 	return _send_msg("C", id, "\n%s\n%d\n%s" % [mid, index, sdp])
 
-func send_offer(id : int, offer : String) -> int:
+
+func send_offer(id, offer) -> int:
 	return _send_msg("O", id, offer)
 
-func send_answer(id : int, answer : String) -> int:
+
+func send_answer(id, answer) -> int:
 	return _send_msg("A", id, answer)
 
-func _send_msg(type : String, id : int, data : String) -> int:
+
+func _send_msg(type, id, data) -> int:
 	return client.get_peer(1).put_packet(("%s: %d\n%s" % [type, id, data]).to_utf8())
+
 
 func _process(delta):
 	var status : int = client.get_connection_status()

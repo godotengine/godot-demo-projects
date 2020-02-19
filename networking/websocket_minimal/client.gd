@@ -1,9 +1,9 @@
 extends Node
 
-# The URL we will connect to
+# The URL we will connect to.
 export var websocket_url = "ws://localhost:9080"
 
-# Our WebSocketClient instance
+# Our WebSocketClient instance.
 var _client = WebSocketClient.new()
 
 func _ready():
@@ -22,11 +22,13 @@ func _ready():
 		print("Unable to connect")
 		set_process(false)
 
+
 func _closed(was_clean = false):
 	# was_clean will tell you if the disconnection was correctly notified
 	# by the remote peer before closing the socket.
 	print("Closed, clean: ", was_clean)
 	set_process(false)
+
 
 func _connected(proto = ""):
 	# This is called on connection, "proto" will be the selected WebSocket
@@ -36,16 +38,19 @@ func _connected(proto = ""):
 	# and not put_packet directly when not using the MultiplayerAPI.
 	_client.get_peer(1).put_packet("Test packet".to_utf8())
 
+
 func _on_data():
 	# Print the received packet, you MUST always use get_peer(1).get_packet
 	# to receive data from server, and not get_packet directly when not
 	# using the MultiplayerAPI.
 	print("Got data from server: ", _client.get_peer(1).get_packet().get_string_from_utf8())
 
+
 func _process(delta):
 	# Call this in _process or _physics_process. Data transfer, and signals
 	# emission will only happen when calling this function.
 	_client.poll()
+
 
 func _exit_tree():
 	_client.disconnect_from_host()

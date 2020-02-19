@@ -1,12 +1,12 @@
 extends Control
 
-onready var _server = get_node("Server")
-onready var _port = get_node("Panel/VBoxContainer/HBoxContainer/Port")
-onready var _line_edit = get_node("Panel/VBoxContainer/HBoxContainer3/LineEdit")
-onready var _write_mode = get_node("Panel/VBoxContainer/HBoxContainer2/WriteMode")
-onready var _log_dest = get_node("Panel/VBoxContainer/RichTextLabel")
-onready var _multiplayer = get_node("Panel/VBoxContainer/HBoxContainer2/MPAPI")
-onready var _destination = get_node("Panel/VBoxContainer/HBoxContainer2/Destination")
+onready var _server = $Server
+onready var _port = $Panel/VBoxContainer/HBoxContainer/Port
+onready var _line_edit = $Panel/VBoxContainer/HBoxContainer3/LineEdit
+onready var _write_mode = $Panel/VBoxContainer/HBoxContainer2/WriteMode
+onready var _log_dest = $Panel/VBoxContainer/RichTextLabel
+onready var _multiplayer = $Panel/VBoxContainer/HBoxContainer2/MPAPI
+onready var _destination = $Panel/VBoxContainer/HBoxContainer2/Destination
 
 func _ready():
 	_write_mode.clear()
@@ -24,7 +24,8 @@ func _ready():
 	_destination.set_item_metadata(2, -1)
 	_destination.select(0)
 
-func _on_Listen_toggled( pressed ):
+
+func _on_Listen_toggled(pressed):
 	if pressed:
 		var use_multiplayer = _multiplayer.pressed
 		_multiplayer.disabled = true
@@ -49,6 +50,7 @@ func _on_Listen_toggled( pressed ):
 		_destination.disabled = false
 		Utils._log(_log_dest, "Server stopped")
 
+
 func _on_Send_pressed():
 	if _line_edit.text == "":
 		return
@@ -63,5 +65,6 @@ func _on_Send_pressed():
 	_server.send_data(_line_edit.text, dest)
 	_line_edit.text = ""
 
-func _on_WriteMode_item_selected( ID ):
+
+func _on_WriteMode_item_selected(_id):
 	_server.set_write_mode(_write_mode.get_selected_metadata())

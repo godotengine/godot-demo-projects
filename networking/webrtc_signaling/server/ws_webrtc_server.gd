@@ -6,6 +6,11 @@ const ALFNUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
 var _alfnum = ALFNUM.to_ascii()
 
+var rand: RandomNumberGenerator = RandomNumberGenerator.new()
+var lobbies: Dictionary = {}
+var server: WebSocketServer = WebSocketServer.new()
+var peers: Dictionary = {}
+
 class Peer extends Reference:
 	var id = -1
 	var lobby = ""
@@ -13,6 +18,8 @@ class Peer extends Reference:
 
 	func _init(peer_id):
 		id = peer_id
+
+
 
 class Lobby extends Reference:
 	var peers : Array = []
@@ -23,7 +30,7 @@ class Lobby extends Reference:
 	func _init(host_id : int):
 		host = host_id
 
-	func join(peer_id : int, server : WebSocketServer) -> bool:
+	func join(peer_id, server) -> bool:
 		if sealed: return false
 		if not server.has_peer(peer_id): return false
 		var new_peer : WebSocketPeer = server.get_peer(peer_id)
@@ -36,27 +43,29 @@ class Lobby extends Reference:
 		peers.push_back(peer_id)
 		return true
 
-	func leave(peer_id : int, server : WebSocketServer) -> bool:
+
+	func leave(peer_id, server) -> bool:
 		if not peers.has(peer_id): return false
 		peers.erase(peer_id)
 		var close = false
 		if peer_id == host:
-			# The room host disconnected, will disconnect all peers
+			# The room host disconnected, will disconnect all peers.
 			close = true
 		if sealed: return close
-		# Notify other peers
+		# Notify other peers.
 		for p in peers:
 			if not server.has_peer(p): return close
 			if close:
-				# Disconnect peers
+				# Disconnect peers.
 				server.disconnect_peer(p)
 			else:
-				# Notify disconnection
+				# Notify disconnection.
 				server.get_peer(p).put_packet(("D: %d\n" % peer_id).to_utf8())
 		return close
 
-	func seal(peer_id : int, server : WebSocketServer) -> bool:
-		# Only host can seal the room
+
+	func seal(peer_id, server) -> bool:
+		# Only host can seal the room.
 		if host != peer_id: return false
 		sealed = true
 		for p in peers:
@@ -64,27 +73,28 @@ class Lobby extends Reference:
 		time = OS.get_ticks_msec()
 		return true
 
-var rand : RandomNumberGenerator = RandomNumberGenerator.new()
-var lobbies : Dictionary = {}
-var server : WebSocketServer = WebSocketServer.new()
-var peers : Dictionary = {}
+
 
 func _init():
 	server.connect("data_received", self, "_on_data")
 	server.connect("client_connected", self, "_peer_connected")
 	server.connect("client_disconnected", self, "_peer_disconnected")
 
+
 func _process(delta):
 	poll()
 
-func listen(port : int):
+
+func listen(port):
 	stop()
 	rand.seed = OS.get_unix_time()
 	server.listen(port)
 
+
 func stop():
 	server.stop()
 	peers.clear()
+
 
 func poll():
 	if not server.is_listening():
@@ -92,23 +102,25 @@ func poll():
 
 	server.poll()
 
-	# Peers timeout
+	# Peers timeout.
 	for p in peers.values():
 		if p.lobby == "" and OS.get_ticks_msec() - p.time > TIMEOUT:
 			server.disconnect_peer(p.id)
-	# Lobby seal
+	# Lobby seal.
 	for k in lobbies:
 		if not lobbies[k].sealed:
 			continue
 		if lobbies[k].time + SEAL_TIME < OS.get_ticks_msec():
-			# Close lobby
+			# Close lobby.
 			for p in lobbies[k].peers:
 				server.disconnect_peer(p)
 
-func _peer_connected(id : int, protocol = ""):
+
+func _peer_connected(id, protocol = ""):
 	peers[id] = Peer.new(id)
 
-func _peer_disconnected(id : int, was_clean : bool = false):
+
+func _peer_disconnected(id, was_clean = false):
 	var lobby = peers[id].lobby
 	print("Peer %d disconnected from lobby: '%s'" % [id, lobby])
 	if lobby and lobbies.has(lobby):
@@ -119,9 +131,10 @@ func _peer_disconnected(id : int, was_clean : bool = false):
 			lobbies.erase(lobby)
 	peers.erase(id)
 
-func _join_lobby(peer, lobby : String) -> bool:
+
+func _join_lobby(peer, lobby) -> bool:
 	if lobby == "":
-		for i in range(0, 32):
+		for _i in range(0, 32):
 			lobby += char(_alfnum[rand.randi_range(0, ALFNUM.length()-1)])
 		lobbies[lobby] = Lobby.new(peer.id)
 	elif not lobbies.has(lobby):
@@ -133,19 +146,21 @@ func _join_lobby(peer, lobby : String) -> bool:
 	print("Peer %d joined lobby: '%s'" % [peer.id, lobby])
 	return true
 
-func _on_data(id : int):
+
+func _on_data(id):
 	if not _parse_msg(id):
 		print("Parse message failed from peer %d" % id)
 		server.disconnect_peer(id)
 
-func _parse_msg(id : int) -> bool:
-	var pkt_str : String = server.get_peer(id).get_packet().get_string_from_utf8()
 
-	var req : PoolStringArray = pkt_str.split('\n', true, 1)
+func _parse_msg(id) -> bool:
+	var pkt_str: String = server.get_peer(id).get_packet().get_string_from_utf8()
+
+	var req = pkt_str.split('\n', true, 1)
 	if req.size() != 2: # Invalid request size
 		return false
 
-	var type : String = req[0]
+	var type = req[0]
 	if type.length() < 3: # Invalid type size
 		return false
 
