@@ -1,15 +1,13 @@
 extends KinematicBody
 
 const ANIM_FLOOR = 0
-const ANIM_AIR_UP = 1
-const ANIM_AIR_DOWN = 2
+const ANIM_AIR = 1
 
 const SHOOT_TIME = 1.5
 const SHOOT_SCALE = 2
 const CHAR_SCALE = Vector3(0.3, 0.3, 0.3)
 const TURN_SPEED = 40
 
-var facing_dir = Vector3.RIGHT
 var movement_dir = Vector3()
 var linear_velocity = Vector3()
 
@@ -27,7 +25,7 @@ var shoot_blend = 0
 onready var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * ProjectSettings.get_setting("physics/3d/default_gravity_vector")
 
 func _ready():
-	get_node("AnimationTreePlayer").set_active(true)
+	get_node("AnimationTree").set_active(true)
 
 
 func _physics_process(delta):
@@ -41,13 +39,11 @@ func _physics_process(delta):
 	var hdir = hv.normalized() # Horizontal direction.
 	var hspeed = hv.length() # Horizontal speed.
 	
-	# Player input
+	# Player input.
 	var cam_basis = get_node("Target/Camera").get_global_transform().basis
 	var dir = Vector3() # Where does the player intend to walk to.
-	dir = Input.get_action_strength("move_right") * cam_basis[0]
-	dir -= Input.get_action_strength("move_left") * cam_basis[0]
-	dir += Input.get_action_strength("move_backwards") * cam_basis[2]
-	dir -= Input.get_action_strength("move_forward") * cam_basis[2]
+	dir = (Input.get_action_strength("move_right") - Input.get_action_strength("move_left")) * cam_basis[0]
+	dir += (Input.get_action_strength("move_backwards") - Input.get_action_strength("move_forward")) * cam_basis[2]
 	dir.y = 0
 	dir = dir.normalized()
 	
@@ -60,7 +56,6 @@ func _physics_process(delta):
 		if dir.length() > 0.1 and !sharp_turn:
 			if hspeed > 0.001:
 				hdir = adjust_facing(hdir, dir, delta, 1.0 / hspeed * TURN_SPEED, Vector3.UP)
-				facing_dir = hdir
 			else:
 				hdir = dir
 			
@@ -88,10 +83,7 @@ func _physics_process(delta):
 			jumping = true
 			get_node("SoundJump").play()
 	else:
-		if vv > 0:
-			anim = ANIM_AIR_UP
-		else:
-			anim = ANIM_AIR_DOWN
+		anim = ANIM_AIR
 		
 		if dir.length() > 0.1:
 			hv += dir * (accel * 0.2 * delta)
@@ -131,10 +123,11 @@ func _physics_process(delta):
 	prev_shoot = shoot_attempt
 	
 	if is_on_floor():
-		get_node("AnimationTreePlayer").blend2_node_set_amount("walk", hspeed / max_speed)
+		$AnimationTree["parameters/walk/blend_amount"] = hspeed / max_speed
 	
-	get_node("AnimationTreePlayer").transition_node_set_current("state", anim)
-	get_node("AnimationTreePlayer").blend2_node_set_amount("gun", min(shoot_blend, 1.0))
+	$AnimationTree["parameters/state/current"] = anim
+	$AnimationTree["parameters/air_dir/blend_amount"] = clamp(-linear_velocity.y / 4 + 0.5, 0, 1)
+	$AnimationTree["parameters/gun/blend_amount"] = min(shoot_blend, 1.0)
 
 
 func adjust_facing(p_facing, p_target, p_step, p_adjust_rate, current_gn):
