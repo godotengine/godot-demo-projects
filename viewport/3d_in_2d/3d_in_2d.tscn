@@ -17,18 +17,12 @@ frame = 4
 
 [node name="ViewportSprite" type="Sprite" parent="."]
 position = Vector2( 600, 320 )
-rotation = 3.14159
+scale = Vector2( -1, -1 )
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 300, 300 )
-own_world = true
-transparent_bg = true
-msaa = 2
-hdr = false
-usage = 3
+handle_input_locally = false
+render_target_update_mode = 3
+shadow_atlas_size = 4096
 
 [node name="Robot3D" parent="Viewport" instance=ExtResource( 3 )]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 512, 300 )
-current = true
