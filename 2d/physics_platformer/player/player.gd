@@ -23,12 +23,12 @@ extends RigidBody2D
 #    - Friction cant be used, so floor velocity must be considered
 #      for moving platforms.
 
-const WALK_ACCEL = 400.0
-const WALK_DEACCEL = 400.0
-const WALK_MAX_VELOCITY = 100.0
+const WALK_ACCEL = 500.0
+const WALK_DEACCEL = 500.0
+const WALK_MAX_VELOCITY = 140.0
 const AIR_ACCEL = 100.0
 const AIR_DEACCEL = 100.0
-const JUMP_VELOCITY = 230
+const JUMP_VELOCITY = 380
 const STOP_JUMP_FORCE = 450.0
 const MAX_SHOOT_POSE_TIME = 0.3
 const MAX_FLOOR_AIRBORNE_TIME = 0.15
