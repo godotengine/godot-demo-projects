@@ -184,13 +184,13 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 10, 27 )
+extents = Vector2( 10, 14 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 30
 script = ExtResource( 1 )
-speed = Vector2( 300, 700 )
-gravity = 1800.0
+speed = Vector2( 150, 350 )
+gravity = 900.0
 
 [node name="ShootAnimation" type="Timer" parent="."]
 process_mode = 0
@@ -203,14 +203,14 @@ cast_to = Vector2( 0, 6 )
 collision_mask = 8
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -28 )
+position = Vector2( 0, -14 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 16
 frame = 16
 
 [node name="Gun" type="Position2D" parent="Sprite"]
-position = Vector2( 30.6589, 6.13176 )
+position = Vector2( 14, 1 )
 script = ExtResource( 9 )
 
 [node name="Shoot" type="AudioStreamPlayer2D" parent="Sprite/Gun"]
@@ -241,7 +241,7 @@ current = true
 process_mode = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -27 )
+position = Vector2( 0, -14 )
 shape = SubResource( 11 )
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="."]

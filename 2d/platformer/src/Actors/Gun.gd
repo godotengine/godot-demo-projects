@@ -4,7 +4,7 @@ extends Position2D
 # The Cooldown timer controls the cooldown duration between shots.
 
 
-const BULLET_VELOCITY = 1000.0
+const BULLET_VELOCITY = 500.0
 const Bullet = preload("res://src/Objects/Bullet.tscn")
 
 onready var sound_shoot = $Shoot

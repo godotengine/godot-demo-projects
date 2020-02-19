@@ -203,10 +203,11 @@ tracks/0/keys = {
 
 [sub_resource type="RayShape2D" id=15]
 custom_solver_bias = 0.5
+length = 18.0
 
 [node name="Player" type="RigidBody2D"]
 mode = 2
-mass = 3.0
+mass = 1.5
 physics_material_override = SubResource( 1 )
 custom_integrator = true
 contacts_reported = 3
@@ -219,7 +220,7 @@ hframes = 16
 
 [node name="Smoke" type="Particles2D" parent="Sprite"]
 self_modulate = Color( 1, 1, 1, 0.26702 )
-position = Vector2( 20.7312, 3.21187 )
+position = Vector2( 10, 1.5 )
 rotation = -1.45648
 emitting = false
 lifetime = 0.3
@@ -243,19 +244,19 @@ anims/standing_weapon_ready = SubResource( 14 )
 
 [node name="Camera" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 0.5, 0.5 )
 limit_left = 0
 limit_top = 0
 
 [node name="BulletShoot" type="Position2D" parent="."]
-position = Vector2( 31.2428, 4.08784 )
+position = Vector2( 15, 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.291992, -12.1587 )
-scale = Vector2( 1, 1.76469 )
+position = Vector2( 0.15, -6 )
 shape = SubResource( 15 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -0.138023, 16.5036, -19.902, -24.8691, 19.3625, -24.6056 )
+polygon = PoolVector2Array( -0.138, 8.25, -10, -12, 11, -12 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 0

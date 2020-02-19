@@ -2,7 +2,7 @@ class_name Player
 extends Actor
 
 
-const FLOOR_DETECT_DISTANCE = 40.0
+const FLOOR_DETECT_DISTANCE = 20.0
 
 onready var platform_detector = $PlatformDetector
 onready var sprite = $Sprite

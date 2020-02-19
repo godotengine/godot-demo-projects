@@ -23,13 +23,13 @@ extends RigidBody2D
 #    - Friction cant be used, so floor velocity must be considered
 #      for moving platforms.
 
-const WALK_ACCEL = 800.0
-const WALK_DEACCEL = 800.0
-const WALK_MAX_VELOCITY = 200.0
-const AIR_ACCEL = 200.0
-const AIR_DEACCEL = 200.0
-const JUMP_VELOCITY = 460
-const STOP_JUMP_FORCE = 900.0
+const WALK_ACCEL = 400.0
+const WALK_DEACCEL = 400.0
+const WALK_MAX_VELOCITY = 100.0
+const AIR_ACCEL = 100.0
+const AIR_DEACCEL = 100.0
+const JUMP_VELOCITY = 230
+const STOP_JUMP_FORCE = 450.0
 const MAX_SHOOT_POSE_TIME = 0.3
 const MAX_FLOOR_AIRBORNE_TIME = 0.15
 
@@ -209,7 +209,7 @@ func _shot_bullet():
 	bi.position = pos
 	get_parent().add_child(bi)
 	
-	bi.linear_velocity = Vector2(800.0 * ss, -80)
+	bi.linear_velocity = Vector2(400.0 * ss, -40)
 	
 	($Sprite/Smoke as Particles2D).restart()
 	($SoundShoot as AudioStreamPlayer2D).play()
@@ -219,5 +219,5 @@ func _shot_bullet():
 
 func _spawn_enemy_above():
 	var e = Enemy.instance()
-	e.position = position + 100 * Vector2.UP
+	e.position = position + 50 * Vector2.UP
 	get_parent().add_child(e)
