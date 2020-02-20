@@ -113,7 +113,7 @@ func _physics_process(delta):
 	
 	if shoot_attempt and not prev_shoot:
 		shoot_blend = SHOOT_TIME
-		var bullet = preload("res://bullet.tscn").instance()
+		var bullet = preload("res://player/bullet/bullet.tscn").instance()
 		bullet.set_transform(get_node("Armature/Bullet").get_global_transform().orthonormalized())
 		get_parent().add_child(bullet)
 		bullet.set_linear_velocity(get_node("Armature/Bullet").get_global_transform().basis[2].normalized() * 20)

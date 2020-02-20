@@ -1,13 +1,13 @@
 [gd_scene load_steps=32 format=2]
 
-[ext_resource path="res://player.gd" type="Script" id=1]
-[ext_resource path="res://follow_camera.gd" type="Script" id=2]
-[ext_resource path="res://osb_up.png" type="Texture" id=3]
-[ext_resource path="res://osb_down.png" type="Texture" id=4]
-[ext_resource path="res://osb_left.png" type="Texture" id=5]
-[ext_resource path="res://osb_right.png" type="Texture" id=6]
-[ext_resource path="res://sound_shoot.wav" type="AudioStream" id=7]
-[ext_resource path="res://sound_jump.wav" type="AudioStream" id=8]
+[ext_resource path="res://player/player.gd" type="Script" id=1]
+[ext_resource path="res://player/follow_camera.gd" type="Script" id=2]
+[ext_resource path="res://player/controls/osb_up.png" type="Texture" id=3]
+[ext_resource path="res://player/controls/osb_down.png" type="Texture" id=4]
+[ext_resource path="res://player/controls/osb_left.png" type="Texture" id=5]
+[ext_resource path="res://player/controls/osb_right.png" type="Texture" id=6]
+[ext_resource path="res://player/sound_shoot.wav" type="AudioStream" id=7]
+[ext_resource path="res://player/sound_jump.wav" type="AudioStream" id=8]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.4
@@ -1603,60 +1603,60 @@ tracks/26/imported = false
 tracks/26/enabled = true
 tracks/26/keys = PoolRealArray( 0, 1, 5.17831e-08, 0.00292331, 0.204329, 3.25963e-09, -2.17324e-11, 3.00563e-10, 1, 1, 1, 1, 1.25, 1, 5.17831e-08, 0.00292331, 0.204329, 3.25963e-09, -2.17324e-11, 3.00563e-10, 1, 1, 1, 1 )
 
-[sub_resource type="AnimationNodeAnimation" id=15]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "walk-cycle"
 
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "jump-up-cycle"
 
-[sub_resource type="AnimationNodeAnimation" id=17]
+[sub_resource type="AnimationNodeAnimation" id=15]
 animation = "falling-cycle"
 
-[sub_resource type="AnimationNodeAnimation" id=18]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "shooting_standing"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "idle"
 
-[sub_resource type="AnimationNodeBlend2" id=23]
+[sub_resource type="AnimationNodeBlend2" id=18]
 
 [sub_resource type="AnimationNodeBlend2" id=19]
 
-[sub_resource type="AnimationNodeTimeScale" id=21]
+[sub_resource type="AnimationNodeTimeScale" id=20]
 
-[sub_resource type="AnimationNodeTransition" id=22]
+[sub_resource type="AnimationNodeTransition" id=21]
 input_count = 2
 input_0/name = "on floor"
 input_0/auto_advance = false
 input_1/name = "in air"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeBlend2" id=20]
+[sub_resource type="AnimationNodeBlend2" id=22]
 
-[sub_resource type="AnimationNodeBlendTree" id=14]
+[sub_resource type="AnimationNodeBlendTree" id=23]
 graph_offset = Vector2( -294.243, -77.71 )
-nodes/Animation/node = SubResource( 13 )
+nodes/Animation/node = SubResource( 17 )
 nodes/Animation/position = Vector2( -260, -280 )
-"nodes/Animation 2/node" = SubResource( 15 )
+"nodes/Animation 2/node" = SubResource( 13 )
 "nodes/Animation 2/position" = Vector2( -260, -160 )
-"nodes/Animation 3/node" = SubResource( 16 )
+"nodes/Animation 3/node" = SubResource( 14 )
 "nodes/Animation 3/position" = Vector2( -260, -40 )
-"nodes/Animation 4/node" = SubResource( 17 )
+"nodes/Animation 4/node" = SubResource( 15 )
 "nodes/Animation 4/position" = Vector2( -260, 80 )
-"nodes/Animation 5/node" = SubResource( 18 )
+"nodes/Animation 5/node" = SubResource( 16 )
 "nodes/Animation 5/position" = Vector2( -260, 200 )
-nodes/air_dir/node = SubResource( 23 )
+nodes/air_dir/node = SubResource( 18 )
 nodes/air_dir/position = Vector2( 140, 20 )
 nodes/gun/node = SubResource( 19 )
 nodes/gun/position = Vector2( 680, 140 )
 nodes/output/position = Vector2( 880, 140 )
-nodes/scale/node = SubResource( 21 )
+nodes/scale/node = SubResource( 20 )
 nodes/scale/position = Vector2( 180, -120 )
-nodes/state/node = SubResource( 22 )
+nodes/state/node = SubResource( 21 )
 nodes/state/position = Vector2( 440, 0 )
-nodes/walk/node = SubResource( 20 )
+nodes/walk/node = SubResource( 22 )
 nodes/walk/position = Vector2( -40, -240 )
-node_connections = [ "scale", 0, "walk", "output", 0, "gun", "state", 0, "scale", "state", 1, "air_dir", "gun", 0, "state", "gun", 1, "Animation 5", "walk", 0, "Animation", "walk", 1, "Animation 2", "air_dir", 0, "Animation 3", "air_dir", 1, "Animation 4" ]
+node_connections = [ "scale", 0, "walk", "output", 0, "gun", "state", 0, "scale", "state", 1, "air_dir", "air_dir", 0, "Animation 3", "air_dir", 1, "Animation 4", "gun", 0, "state", "gun", 1, "Animation 5", "walk", 0, "Animation", "walk", 1, "Animation 2" ]
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -1837,7 +1837,7 @@ anims/shooting_standing = SubResource( 11 )
 anims/walk-cycle = SubResource( 12 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 14 )
+tree_root = SubResource( 23 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/air_dir/blend_amount = 0.0
 parameters/gun/blend_amount = 0

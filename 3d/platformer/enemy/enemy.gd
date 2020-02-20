@@ -34,7 +34,7 @@ func _integrate_forces(state):
 		var dp = state.get_contact_local_normal(i)
 		
 		if cc:
-			if cc is preload("res://bullet.gd") and cc.enabled:
+			if cc is preload("res://player/bullet/bullet.gd") and cc.enabled:
 				set_mode(MODE_RIGID)
 				dying = true
 				state.set_angular_velocity(-dp.cross(up).normalized() * 33.0)
