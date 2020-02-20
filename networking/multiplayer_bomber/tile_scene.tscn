@@ -5,19 +5,19 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 24 )
 
-[node name="Node2D" type="Node2D"]
+[node name="TileScene" type="Node2D"]
 
-[node name="wall" type="Sprite" parent="."]
+[node name="Wall" type="Sprite" parent="."]
 position = Vector2( 24, 24 )
 texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 48, 48 )
 
-[node name="col" type="StaticBody2D" parent="wall"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="wall/col"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/StaticBody2D"]
 shape = SubResource( 1 )
 
-[node name="floor" type="Sprite" parent="."]
+[node name="Floor" type="Sprite" parent="."]
 position = Vector2( 72, 24 )
 texture = ExtResource( 1 )
 region_rect = Rect2( 48, 0, 48, 48 )
