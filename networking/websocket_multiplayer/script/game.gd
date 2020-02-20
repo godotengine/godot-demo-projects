@@ -12,10 +12,12 @@ master func set_player_name(name):
 	var sender = get_tree().get_rpc_sender_id()
 	rpc("update_player_name", sender, name)
 
+
 sync func update_player_name(player, name):
 	var pos = _players.find(player)
 	if pos != -1:
 		_list.set_item_text(pos, name)
+
 
 master func request_action(action):
 	var sender = get_tree().get_rpc_sender_id()
@@ -25,10 +27,12 @@ master func request_action(action):
 	do_action(action)
 	next_turn()
 
+
 sync func do_action(action):
 	var name = _list.get_item_text(_turn)
 	var val = randi() % 100
 	rpc("_log", "%s: %ss %d" % [name, action, val])
+
 
 sync func set_turn(turn):
 	_turn = turn
@@ -41,6 +45,7 @@ sync func set_turn(turn):
 			_list.set_item_icon(i, null)
 	_action.disabled = _players[turn] != get_tree().get_network_unique_id()
 
+
 sync func del_player(id):
 	var pos = _players.find(id)
 	if pos == -1:
@@ -52,6 +57,7 @@ sync func del_player(id):
 	if get_tree().is_network_server():
 		rpc("set_turn", _turn)
 
+
 sync func add_player(id, name=""):
 	_players.append(id)
 	if name == "":
@@ -59,11 +65,13 @@ sync func add_player(id, name=""):
 	else:
 		_list.add_item(name, null, false)
 
+
 func get_player_name(pos):
 	if pos < _list.get_item_count():
 		return _list.get_item_text(pos)
 	else:
 		return "Error!"
+
 
 func next_turn():
 	_turn += 1
@@ -71,14 +79,17 @@ func next_turn():
 		_turn = 0
 	rpc("set_turn", _turn)
 
+
 func start():
 	set_turn(0)
+
 
 func stop():
 	_players.clear()
 	_list.clear()
 	_turn = 0
 	_action.disabled = true
+
 
 func on_peer_add(id):
 	if not get_tree().is_network_server():
@@ -88,13 +99,16 @@ func on_peer_add(id):
 	rpc("add_player", id)
 	rpc_id(id, "set_turn", _turn)
 
+
 func on_peer_del(id):
 	if not get_tree().is_network_server():
 		return
 	rpc("del_player", id)
 
+
 sync func _log(what):
 	$HBoxContainer/RichTextLabel.add_text(what + "\n")
+
 
 func _on_Action_pressed():
 	if get_tree().is_network_server():

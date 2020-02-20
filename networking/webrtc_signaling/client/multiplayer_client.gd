@@ -1,6 +1,6 @@
 extends "ws_webrtc_client.gd"
 
-var rtc_mp : WebRTCMultiplayer = WebRTCMultiplayer.new()
+var rtc_mp: WebRTCMultiplayer = WebRTCMultiplayer.new()
 var sealed = false
 
 func _init():
@@ -16,17 +16,20 @@ func _init():
 	connect("peer_connected", self, "peer_connected")
 	connect("peer_disconnected", self, "peer_disconnected")
 
+
 func start(url, lobby = ""):
 	stop()
 	sealed = false
 	self.lobby = lobby
 	connect_to_url(url)
 
+
 func stop():
 	rtc_mp.close()
 	close()
 
-func _create_peer(id : int):
+
+func _create_peer(id):
 	var peer : WebRTCPeerConnection = WebRTCPeerConnection.new()
 	peer.initialize({
 		"iceServers": [ { "urls": ["stun:stun.l.google.com:19302"] } ]
@@ -38,10 +41,12 @@ func _create_peer(id : int):
 		peer.create_offer()
 	return peer
 
-func _new_ice_candidate(mid_name : String, index_name : int, sdp_name : String, id : int):
+
+func _new_ice_candidate(mid_name, index_name, sdp_name, id):
 	send_candidate(id, mid_name, index_name, sdp_name)
 
-func _offer_created(type : String, data : String, id : int):
+
+func _offer_created(type, data, id):
 	if not rtc_mp.has_peer(id):
 		return
 	print("created", type)
@@ -49,38 +54,47 @@ func _offer_created(type : String, data : String, id : int):
 	if type == "offer": send_offer(id, data)
 	else: send_answer(id, data)
 
-func connected(id : int):
+
+func connected(id):
 	print("Connected %d" % id)
 	rtc_mp.initialize(id, true)
 
-func lobby_joined(lobby : String):
+
+func lobby_joined(lobby):
 	self.lobby = lobby
+
 
 func lobby_sealed():
 	sealed = true
+
 
 func disconnected():
 	print("Disconnected: %d: %s" % [code, reason])
 	if not sealed:
 		stop() # Unexpected disconnect
 
-func peer_connected(id : int):
+
+func peer_connected(id):
 	print("Peer connected %d" % id)
 	_create_peer(id)
 
-func peer_disconnected(id : int):
+
+func peer_disconnected(id):
 	if rtc_mp.has_peer(id): rtc_mp.remove_peer(id)
 
-func offer_received(id : int, offer : String):
+
+func offer_received(id, offer):
 	print("Got offer: %d" % id)
 	if rtc_mp.has_peer(id):
 		rtc_mp.get_peer(id).connection.set_remote_description("offer", offer)
 
-func answer_received(id : int, answer : String):
+
+func answer_received(id, answer):
 	print("Got answer: %d" % id)
 	if rtc_mp.has_peer(id):
 		rtc_mp.get_peer(id).connection.set_remote_description("answer", answer)
 
-func candidate_received(id : int, mid : String, index : int, sdp : String):
+
+func candidate_received(id, mid, index, sdp):
 	if rtc_mp.has_peer(id):
 		rtc_mp.get_peer(id).connection.add_ice_candidate(mid, index, sdp)

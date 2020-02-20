@@ -1,12 +1,12 @@
 extends Control
 
-onready var _client = get_node("Client")
-onready var _log_dest = get_node("Panel/VBoxContainer/RichTextLabel")
-onready var _line_edit = get_node("Panel/VBoxContainer/Send/LineEdit")
-onready var _host = get_node("Panel/VBoxContainer/Connect/Host")
-onready var _multiplayer = get_node("Panel/VBoxContainer/Settings/Multiplayer")
-onready var _write_mode = get_node("Panel/VBoxContainer/Settings/Mode")
-onready var _destination = get_node("Panel/VBoxContainer/Settings/Destination")
+onready var _client = $Client
+onready var _log_dest = $Panel/VBoxContainer/RichTextLabel
+onready var _line_edit = $Panel/VBoxContainer/Send/LineEdit
+onready var _host = $Panel/VBoxContainer/Connect/Host
+onready var _multiplayer = $Panel/VBoxContainer/Settings/Multiplayer
+onready var _write_mode = $Panel/VBoxContainer/Settings/Mode
+onready var _destination = $Panel/VBoxContainer/Settings/Destination
 
 func _ready():
 	_write_mode.clear()
@@ -23,8 +23,10 @@ func _ready():
 	_destination.set_item_metadata(2, -1)
 	_destination.select(0)
 
-func _on_Mode_item_selected( ID ):
+
+func _on_Mode_item_selected(_id):
 	_client.set_write_mode(_write_mode.get_selected_metadata())
+
 
 func _on_Send_pressed():
 	if _line_edit.text == "":
@@ -39,6 +41,7 @@ func _on_Send_pressed():
 	Utils._log(_log_dest, "Sending data %s to %s" % [_line_edit.text, dest])
 	_client.send_data(_line_edit.text, dest)
 	_line_edit.text = ""
+
 
 func _on_Connect_toggled( pressed ):
 	if pressed:

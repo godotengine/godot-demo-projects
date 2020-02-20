@@ -16,7 +16,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="vbox" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 50
@@ -24,17 +24,17 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Signaling" type="HBoxContainer" parent="vbox"]
-margin_right = 996.0
+[node name="Signaling" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 995.0
 margin_bottom = 24.0
 
-[node name="Label" type="Label" parent="vbox/Signaling"]
+[node name="Label" type="Label" parent="VBoxContainer/Signaling"]
 margin_top = 5.0
 margin_right = 104.0
 margin_bottom = 19.0
 text = "Signaling server:"
 
-[node name="port" type="SpinBox" parent="vbox/Signaling"]
+[node name="Port" type="SpinBox" parent="VBoxContainer/Signaling"]
 margin_left = 108.0
 margin_right = 182.0
 margin_bottom = 24.0
@@ -42,52 +42,52 @@ min_value = 1025.0
 max_value = 65535.0
 value = 9080.0
 
-[node name="listen" type="Button" parent="vbox/Signaling"]
+[node name="ListenButton" type="Button" parent="VBoxContainer/Signaling"]
 margin_left = 186.0
 margin_right = 237.0
 margin_bottom = 24.0
 toggle_mode = true
 text = "Listen"
 
-[node name="CenterContainer" type="CenterContainer" parent="vbox/Signaling"]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/Signaling"]
 margin_left = 241.0
-margin_right = 996.0
+margin_right = 995.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="LinkButton" type="LinkButton" parent="vbox/Signaling/CenterContainer"]
+[node name="LinkButton" type="LinkButton" parent="VBoxContainer/Signaling/CenterContainer"]
 margin_left = 104.0
 margin_top = 5.0
 margin_right = 650.0
 margin_bottom = 19.0
 text = "Make sure to download the GDNative WebRTC Plugin and place it in the project folder"
 
-[node name="Clients" type="GridContainer" parent="vbox"]
+[node name="Clients" type="GridContainer" parent="VBoxContainer"]
 margin_top = 74.0
-margin_right = 996.0
-margin_bottom = 580.0
+margin_right = 995.0
+margin_bottom = 579.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 15
 custom_constants/hseparation = 15
 columns = 2
 
-[node name="ClientUI" parent="vbox/Clients" instance=ExtResource( 2 )]
+[node name="ClientUI" parent="VBoxContainer/Clients" instance=ExtResource( 2 )]
 margin_right = 490.0
 margin_bottom = 245.0
 
-[node name="ClientUI2" parent="vbox/Clients" instance=ExtResource( 2 )]
+[node name="ClientUI2" parent="VBoxContainer/Clients" instance=ExtResource( 2 )]
 margin_left = 505.0
 margin_right = 995.0
 margin_bottom = 245.0
 
-[node name="ClientUI3" parent="vbox/Clients" instance=ExtResource( 2 )]
+[node name="ClientUI3" parent="VBoxContainer/Clients" instance=ExtResource( 2 )]
 margin_top = 260.0
 margin_right = 490.0
 margin_bottom = 505.0
 
-[node name="ClientUI4" parent="vbox/Clients" instance=ExtResource( 2 )]
+[node name="ClientUI4" parent="VBoxContainer/Clients" instance=ExtResource( 2 )]
 margin_left = 505.0
 margin_top = 260.0
 margin_right = 995.0
@@ -95,5 +95,5 @@ margin_bottom = 505.0
 
 [node name="Server" type="Node" parent="."]
 script = ExtResource( 3 )
-[connection signal="toggled" from="vbox/Signaling/listen" to="." method="_on_listen_toggled"]
-[connection signal="pressed" from="vbox/Signaling/CenterContainer/LinkButton" to="." method="_on_LinkButton_pressed"]
+[connection signal="toggled" from="VBoxContainer/Signaling/ListenButton" to="." method="_on_listen_toggled"]
+[connection signal="pressed" from="VBoxContainer/Signaling/CenterContainer/LinkButton" to="." method="_on_LinkButton_pressed"]
