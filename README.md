@@ -16,12 +16,22 @@ be used with [Godot Engine](https://godotengine.org), the open source
   - [`2.1`](https://github.com/godotengine/godot-demo-projects/tree/2.1) branch
   for Godot 2.1.x.
 
+## Importing all demos
+
+To import all demos at once in the project manager:
+
+- Clone this repository or [download a ZIP archive](https://github.com/godotengine/godot-demo-projects/archive/master.zip).
+  - If you've downloaded a ZIP archive, extract it somewhere.
+- Open the Godot project manager and click the **Scan** button on the right.
+- Choose the path to the folder containing all demos.
+- All demos should now appear in the project manager.
+
 ## Useful links
 
- - [Main website](https://godotengine.org)
- - [Source code](https://github.com/godotengine/godot)
- - [Documentation](http://docs.godotengine.org)
- - [Community hub](https://godotengine.org/community)
+- [Main website](https://godotengine.org)
+- [Source code](https://github.com/godotengine/godot)
+- [Documentation](http://docs.godotengine.org)
+- [Community hub](https://godotengine.org/community)
 
 ## License
 
