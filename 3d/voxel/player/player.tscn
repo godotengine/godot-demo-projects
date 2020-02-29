@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://player/player.gd" type="Script" id=1]
+[ext_resource path="res://world/textures/texture_sheet.png" type="Texture" id=2]
+
+[sub_resource type="CylinderShape" id=1]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 3
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
+
+[node name="Player" type="KinematicBody"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0 )
+shape = SubResource( 1 )
+
+[node name="Head" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
+
+[node name="Camera" type="Camera" parent="Head"]
+fov = 75.0
+near = 0.02
+far = 1000.0
+
+[node name="RayCast" type="RayCast" parent="Head"]
+enabled = true
+cast_to = Vector3( 0, 0, -5 )
+
+[node name="SelectedBlock" type="TextureRect" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -128.0
+margin_top = -128.0
+margin_right = -64.0
+margin_bottom = -64.0
+rect_min_size = Vector2( 64, 64 )
+rect_scale = Vector2( 2, 2 )
+texture = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
