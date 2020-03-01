@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://addons/node25d-cs/YSort25D.cs" type="Script" id=1]
+[ext_resource path="res://assets/mr_mrs_robot.ogg" type="AudioStream" id=2]
 [ext_resource path="res://assets/ui/overlay.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/player/player_25d.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/shadow/shadow_25d.tscn" type="PackedScene" id=5]
@@ -26,6 +27,7 @@ extents = Vector3( 5, 0.5, 5 )
 [node name="Overlay" parent="." instance=ExtResource( 3 )]
 
 [node name="Player25D" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, -226.274 )
 z_index = -3952
 
 [node name="Shadow25D" parent="." instance=ExtResource( 5 )]
@@ -610,3 +612,8 @@ script = ExtResource( 9 )
 
 [node name="YSort25D" type="Node" parent="."]
 script = ExtResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -20.0
+autoplay = true

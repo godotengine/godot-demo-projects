@@ -29,3 +29,7 @@ The plugin also adds YSort25D to sort Node25D nodes, and ShadowMath25D for calcu
 ![Cube](screenshots/cube.png)
 
 ![2.5D Editor Viewport](screenshots/editor.png)
+
+## Music License
+
+`assets/mr_mrs_robot.ogg` Copyright &copy; circa 2008 Juan Linietsky, CC-BY: Attribution.
