@@ -5,6 +5,7 @@ using real_t = System.Double;
 using real_t = System.Single;
 #endif
 
+[Tool]
 public class PlayerSprite : Sprite
 {
     private static Texture _stand = ResourceLoader.Load<Texture>("res://assets/player/textures/stand.png");
@@ -25,6 +26,10 @@ public class PlayerSprite : Sprite
 
     public override void _Process(real_t delta)
     {
+	    if (Engine.EditorHint)
+        {
+		    return; // Don't run this in the editor.
+        }
         SpriteBasis();
         bool movement = CheckMovement(); // Always run to get direction, but don't always use return bool.
 

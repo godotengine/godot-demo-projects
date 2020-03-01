@@ -83,6 +83,10 @@ public class Node25D : Node2D, IComparable<Node25D>
     /// </summary>
     protected void Node25DProcess()
     {
+        if (transform25D.basis == new Basis25D())
+        {
+            SetViewMode(0);
+        }
         CheckViewMode();
         if (spatialNode != null)
         {
@@ -92,34 +96,60 @@ public class Node25D : Node2D, IComparable<Node25D>
         {
             spatialNode = GetChild<Spatial>(0);
         }
+        
         GlobalPosition = transform25D.FlatPosition;
+    }
+
+    public void SetViewMode(int viewModeIndex)
+    {
+        switch (viewModeIndex)
+        {
+            case 0:
+                transform25D.basis = Basis25D.FortyFive * SCALE;
+                break;
+            case 1:
+                transform25D.basis = Basis25D.Isometric * SCALE;
+                break;
+            case 2:
+                transform25D.basis = Basis25D.TopDown * SCALE;
+                break;
+            case 3:
+                transform25D.basis = Basis25D.FrontSide * SCALE;
+                break;
+            case 4:
+                transform25D.basis = Basis25D.ObliqueY * SCALE;
+                break;
+            case 5:
+                transform25D.basis = Basis25D.ObliqueZ * SCALE;
+                break;
+        }
     }
 
     private void CheckViewMode()
     {
-        if (Input.IsActionJustPressed("top_down_mode"))
+        if (Input.IsActionJustPressed("forty_five_mode"))
         {
-            transform25D.basis = Basis25D.TopDown * SCALE;
-        }
-        else if (Input.IsActionJustPressed("front_side_mode"))
-        {
-            transform25D.basis = Basis25D.FrontSide * SCALE;
-        }
-        else if (Input.IsActionJustPressed("forty_five_mode"))
-        {
-            transform25D.basis = Basis25D.FortyFive * SCALE;
+            SetViewMode(0);
         }
         else if (Input.IsActionJustPressed("isometric_mode"))
         {
-            transform25D.basis = Basis25D.Isometric * SCALE;
+            SetViewMode(1);
+        }
+        else if (Input.IsActionJustPressed("top_down_mode"))
+        {
+            SetViewMode(2);
+        }
+        else if (Input.IsActionJustPressed("front_side_mode"))
+        {
+            SetViewMode(3);
         }
         else if (Input.IsActionJustPressed("oblique_y_mode"))
         {
-            transform25D.basis = Basis25D.ObliqueY * SCALE;
+            SetViewMode(4);
         }
         else if (Input.IsActionJustPressed("oblique_z_mode"))
         {
-            transform25D.basis = Basis25D.ObliqueZ * SCALE;
+            SetViewMode(5);
         }
     }
 
