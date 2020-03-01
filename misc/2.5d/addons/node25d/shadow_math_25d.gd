@@ -3,7 +3,7 @@
 # is below the target object in the scene tree (not as a child).
 tool
 extends KinematicBody
-class_name ShadowMath25D, "res://addons/node25d/icons/shadowmath25d_icon.png"
+class_name ShadowMath25D, "res://addons/node25d/icons/shadow_math_25d_icon.png"
 
 # The maximum distance below objects that shadows will appear (in 3D units).
 var shadow_length = 1000.0

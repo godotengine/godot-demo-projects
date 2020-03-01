@@ -1,12 +1,12 @@
 tool
 extends Sprite
 
-onready var _fortyFive = preload("res://assets/shadow/textures/fortyfive.png")
-onready var _isometric = preload("res://assets/shadow/textures/isometric.png")
-onready var _topDown = preload("res://assets/shadow/textures/topdown.png")
-onready var _frontSide = preload("res://assets/shadow/textures/frontside.png")
-onready var _obliqueY = preload("res://assets/shadow/textures/obliqueY.png")
-onready var _obliqueZ = preload("res://assets/shadow/textures/obliqueZ.png")
+onready var _forty_five = preload("res://assets/platform/textures/forty_five.png")
+onready var _isometric = preload("res://assets/platform/textures/isometric.png")
+onready var _top_down = preload("res://assets/platform/textures/top_down.png")
+onready var _front_side = preload("res://assets/platform/textures/front_side.png")
+onready var _oblique_y = preload("res://assets/platform/textures/oblique_y.png")
+onready var _oblique_z = preload("res://assets/platform/textures/oblique_z.png")
 
 func _process(_delta):
 	if Input.is_action_pressed("forty_five_mode"):
@@ -26,14 +26,14 @@ func _process(_delta):
 func set_view_mode(view_mode_index):
 	match view_mode_index:
 		0: # 45 Degrees
-			texture = _fortyFive;
+			texture = _forty_five;
 		1: # Isometric
 			texture = _isometric
 		2: # Top Down
-			texture = _topDown
+			texture = _top_down
 		3: # Front Side
-			texture = _frontSide
+			texture = _front_side
 		4: # Oblique Y
-			texture = _obliqueY
+			texture = _oblique_y
 		5: # Oblique Z
-			texture = _obliqueZ
+			texture = _oblique_z

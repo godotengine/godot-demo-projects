@@ -12,7 +12,7 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("view_cube_demo"):
 		#warning-ignore:return_value_discarded
-		get_tree().change_scene("res://assets/cube/Cube.tscn")
+		get_tree().change_scene("res://assets/cube/cube.tscn")
 		return
 	
 	if Input.is_action_just_pressed("toggle_isometric_controls"):

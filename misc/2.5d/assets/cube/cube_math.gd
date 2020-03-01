@@ -1,6 +1,6 @@
 extends Spatial
 
-onready var _cube_point_scene: PackedScene = preload("res://assets/cube/CubePoint.tscn")
+onready var _cube_point_scene: PackedScene = preload("res://assets/cube/cube_point.tscn")
 
 onready var _parent = get_parent()
 var _is_parent_ready := false
@@ -29,7 +29,7 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("view_cube_demo"):
 		# warning-ignore:return_value_discarded
-		get_tree().change_scene("res://assets/DemoScene.tscn")
+		get_tree().change_scene("res://assets/demo_scene.tscn")
 		return
 	
 	if _is_parent_ready:
