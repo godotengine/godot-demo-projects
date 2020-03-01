@@ -4,7 +4,7 @@ This demo shows how you can organize background loading using multiple threads.
 
 ## Godot versions
 
-- Ñompatible with the latest stable Godot version (currently 3.2).
+- Compatible with the latest stable Godot version (currently 3.2).
 
 ## Useful links
 
