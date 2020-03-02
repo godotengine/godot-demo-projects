@@ -41,3 +41,7 @@ func make_visible(visible):
 
 func get_plugin_name():
 	return "2.5D"
+
+
+func get_plugin_icon():
+	return preload("res://addons/node25d/icons/viewport_25d.svg")
