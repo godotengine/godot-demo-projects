@@ -12,7 +12,7 @@ font_data = ExtResource( 1 )
 default_font = SubResource( 1 )
 
 [sub_resource type="ViewportTexture" id=3]
-viewport_path = NodePath("TextureRect/Viewport")
+viewport_path = NodePath("Viewport")
 
 [node name="HUD" type="Control"]
 anchor_right = 1.0
@@ -22,6 +22,15 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 1024, 600 )
+handle_input_locally = false
+usage = 3
+render_target_update_mode = 3
+shadow_atlas_size = 4096
+
+[node name="Spatial" parent="Viewport" instance=ExtResource( 2 )]
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_right = 1.0
@@ -33,15 +42,6 @@ __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
 }
-
-[node name="Viewport" type="Viewport" parent="TextureRect"]
-size = Vector2( 1024, 600 )
-handle_input_locally = false
-usage = 3
-render_target_update_mode = 3
-shadow_atlas_size = 4096
-
-[node name="Spatial" parent="TextureRect/Viewport" instance=ExtResource( 2 )]
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 anchor_right = 1.0
