@@ -23,4 +23,7 @@ func _on_ResumeButton_pressed():
 
 
 func _on_QuitButton_pressed():
+	if get_parent().get_parent().name == "Splitscreen":
+		# We need to clean up a little bit first to avoid Viewport errors.
+		$"../../Black/SplitContainer/ViewportContainer1".free()
 	get_tree().quit()
