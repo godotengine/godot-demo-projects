@@ -497,8 +497,17 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../BattleBot/Armature/Skeleton")
 bone_name = "Chest"
+update_mode = 0
 look_at_axis = 2
+use_our_rotation_x = false
+use_our_rotation_y = false
+use_our_rotation_z = false
+use_negative_our_rot = false
 additional_rotation = Vector3( -10, 0, 0 )
+position_using_additional_bone = false
+additional_bone_name = ""
+additional_bone_length = 1.0
+debug_messages = false
 
 [node name="Camera" type="Camera" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
@@ -515,7 +524,10 @@ __meta__ = {
 skeleton_path = NodePath("../../../../../../BattleBot/Armature/Skeleton")
 bones_in_chain = PoolStringArray( "Left_UpperArm", "Left_LowerArm", "Left_Hand" )
 bones_in_chain_lengths = PoolRealArray( 1.97, 3, 0.1 )
+update_mode = 0
+chain_iterations = 0
 limit_chain_iterations = false
+reset_iterations_on_update = false
 use_middle_joint_target = true
 
 [node name="target" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK"]
@@ -529,8 +541,17 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../../../../../BattleBot/Armature/Skeleton")
 bone_name = "Left_Hand"
+update_mode = 0
+look_at_axis = 1
+use_our_rotation_x = false
+use_our_rotation_y = false
+use_our_rotation_z = false
 use_negative_our_rot = true
 additional_rotation = Vector3( 0, 0, 90 )
+position_using_additional_bone = false
+additional_bone_name = ""
+additional_bone_length = 1.0
+debug_messages = false
 
 [node name="middle_joint_target" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.85263, -2.91316, -2.77555 )
@@ -552,7 +573,10 @@ __meta__ = {
 skeleton_path = NodePath("../../../../../../BattleBot/Armature/Skeleton")
 bones_in_chain = PoolStringArray( "Right_UpperArm", "Right_LowerArm", "Right_Hand" )
 bones_in_chain_lengths = PoolRealArray( 1.97, 3, 0.1 )
+update_mode = 0
+chain_iterations = 0
 limit_chain_iterations = false
+reset_iterations_on_update = false
 use_middle_joint_target = true
 
 [node name="target" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK_RightArm"]
@@ -566,8 +590,17 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../../../../../BattleBot/Armature/Skeleton")
 bone_name = "Right_Hand"
+update_mode = 0
+look_at_axis = 1
+use_our_rotation_x = false
+use_our_rotation_y = false
+use_our_rotation_z = false
 use_negative_our_rot = true
 additional_rotation = Vector3( 0, 0, 90 )
+position_using_additional_bone = false
+additional_bone_name = ""
+additional_bone_length = 1.0
+debug_messages = false
 
 [node name="middle_joint_target" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK_RightArm"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.73318, -2.91316, -2.77555 )
@@ -591,6 +624,17 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../BattleBot/Armature/Skeleton")
 bone_name = "Head"
+update_mode = 0
+look_at_axis = 1
+use_our_rotation_x = false
+use_our_rotation_y = false
+use_our_rotation_z = false
+use_negative_our_rot = false
+additional_rotation = Vector3( 0, 0, 0 )
+position_using_additional_bone = false
+additional_bone_name = ""
+additional_bone_length = 1.0
+debug_messages = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="KinematicBody/CameraHolder"]
 autoplay = "Start"

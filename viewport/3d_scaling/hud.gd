@@ -10,7 +10,7 @@ extends Control
 var scale_factor = 1.0
 
 onready var texture_rect = $TextureRect
-onready var viewport = $TextureRect/Viewport
+onready var viewport = $Viewport
 onready var scale_label = $VBoxContainer/Scale
 onready var filter_label = $VBoxContainer/Filter
 

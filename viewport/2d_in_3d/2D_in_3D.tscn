@@ -50,18 +50,18 @@ script = SubResource( 5 )
 albedo_color = Color( 0.652344, 0.652344, 0.652344, 1 )
 roughness = 0.0
 
-[sub_resource type="GDScript" id=11]
+[sub_resource type="GDScript" id=9]
 script/source = "tool
 extends Object
 func e():
 	return 0.1
 "
 
-[sub_resource type="CubeMesh" id=12]
+[sub_resource type="CubeMesh" id=10]
 size = Vector3( 1.1, 0.8, 0.1 )
-script = SubResource( 11 )
+script = SubResource( 9 )
 
-[sub_resource type="SpatialMaterial" id=13]
+[sub_resource type="SpatialMaterial" id=11]
 
 [node name="2D_in_3D" type="Spatial"]
 script = ExtResource( 1 )
@@ -117,7 +117,7 @@ material/0 = SubResource( 8 )
 
 [node name="Pillar_back" type="MeshInstance" parent="."]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 1.2, -4.5 )
-mesh = SubResource( 12 )
+mesh = SubResource( 10 )
 material/0 = SubResource( 8 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
@@ -128,7 +128,7 @@ directional_shadow_normal_bias = 0.2
 
 [node name="Viewport_quad" type="MeshInstance" parent="."]
 transform = Transform( 2, 0, 0, 0, 0, -1.333, 0, 1, 0, 0, 1.2, -4.25 )
-material_override = SubResource( 13 )
+material_override = SubResource( 11 )
 mesh = SubResource( 1 )
 material/0 = null
 
