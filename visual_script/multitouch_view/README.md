@@ -10,4 +10,4 @@ Note: There is a GDScript version available [here](https://github.com/godotengin
 
 ## Screenshots
 
-![Screenshot](screenshots/multitouch.png)
+![Screenshot](../../misc/multitouch_view/screenshots/multitouch.png)
