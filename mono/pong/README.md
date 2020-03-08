@@ -1,14 +1,14 @@
-# Pong with GDScript
+# Pong with C#
 
 A simple Pong game. This demo shows best practices
 for game development in Godot, including
 [signals](https://docs.godotengine.org/en/latest/getting_started/step_by_step/signals.html).
 
-Language: GDScript
+Language: [C#](https://docs.godotengine.org/en/latest/getting_started/scripting/c_sharp/index.html)
 
 Renderer: GLES 2
 
-Note: There is a C# version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/pong).
+Note: There is a GDScript version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/2d/pong).
 
 Note: There is a VisualScript version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/visual_script/pong).
 
@@ -21,4 +21,4 @@ they emit signals and modify the ball.
 
 ## Screenshots
 
-![Screenshot](screenshots/pong.png)
+![Screenshot](../../2d/pong/screenshots/pong.png)
