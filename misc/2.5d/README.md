@@ -4,6 +4,10 @@ This demo project shows a way to create a 2.5D game in Godot by mixing 2D and 3D
 
 Note: There is a Mono C# version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/2.5d).
 
+Language: GDScript
+
+Renderer: GLES 2
+
 ## How does it work?
 
 Custom node types are added in a Godot plugin to allow 2.5D objects. Node25D serves as the base for all 2.5D objects. Its first child must be a 3D Spatial, which is used to calculate its position. Then, add a 2D Sprite (or similar) to display the object.
