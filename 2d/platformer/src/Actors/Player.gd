@@ -4,11 +4,24 @@ extends Actor
 
 const FLOOR_DETECT_DISTANCE = 20.0
 
+export(String) var action_suffix = ""
+
 onready var platform_detector = $PlatformDetector
 onready var sprite = $Sprite
 onready var animation_player = $AnimationPlayer
 onready var shoot_timer = $ShootAnimation
 onready var gun = $Sprite/Gun
+
+
+func _ready():
+	# Static types are necessary to avoid
+	var camera: Camera2D = $Camera
+	if action_suffix == "_p1":
+		camera.custom_viewport = $"../.."
+	elif action_suffix == "_p2":
+		var viewport: Viewport = $"../../../../ViewportContainer2/Viewport"
+		viewport.world_2d = ($"../.." as Viewport).world_2d
+		camera.custom_viewport = viewport
 
 
 # Physics process is a built-in loop in Godot.
@@ -32,7 +45,7 @@ onready var gun = $Sprite/Gun
 func _physics_process(_delta):
 	var direction = get_direction()
 
-	var is_jump_interrupted = Input.is_action_just_released("jump") and _velocity.y < 0.0
+	var is_jump_interrupted = Input.is_action_just_released("jump" + action_suffix) and _velocity.y < 0.0
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
 
 	var snap_vector = Vector2.DOWN * FLOOR_DETECT_DISTANCE if direction.y == 0.0 else Vector2.ZERO
@@ -44,14 +57,14 @@ func _physics_process(_delta):
 	# When the character’s direction changes, we want to to scale the Sprite accordingly to flip it.
 	# This will make Robi face left or right depending on the direction you move.
 	if direction.x != 0:
-		sprite.scale.x = direction.x
+		sprite.scale.x = 1 if direction.x > 0 else -1
 
 	# We use the sprite's scale to store Robi’s look direction which allows us to shoot
 	# bullets forward.
 	# There are many situations like these where you can reuse existing properties instead of
 	# creating new variables.
 	var is_shooting = false
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot" + action_suffix):
 		is_shooting = gun.shoot(sprite.scale.x)
 
 	var animation = get_new_animation(is_shooting)
@@ -63,8 +76,8 @@ func _physics_process(_delta):
 
 func get_direction():
 	return Vector2(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		-Input.get_action_strength("jump") if is_on_floor() and Input.is_action_just_pressed("jump") else 0.0
+		Input.get_action_strength("move_right" + action_suffix) - Input.get_action_strength("move_left" + action_suffix),
+		-1 if is_on_floor() and Input.is_action_just_pressed("jump" + action_suffix) else 0
 	)
 
 

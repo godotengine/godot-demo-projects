@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/art/tileset/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Actors/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Platforms/Platform.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Objects/Coin.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Actors/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
 [ext_resource path="res://assets/art/platforms/moving_platform.png" type="Texture" id=6]
 [ext_resource path="res://src/Level/ParallaxBackground.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/audio/music/music.ogg" type="AudioStream" id=8]
+[ext_resource path="res://src/Level/Music.gd" type="Script" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "move"
@@ -44,6 +45,7 @@ tracks/0/keys = {
 
 [node name="Level" type="Node2D"]
 pause_mode = 1
+script = ExtResource( 5 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -257,25 +259,9 @@ position = Vector2( 632.725, 78.5545 )
 [node name="Enemy4" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 828.515, 77.262 )
 
-[node name="Player" parent="." instance=ExtResource( 5 )]
-position = Vector2( 86.647, 546.51 )
-
-[node name="Sprite" parent="Player" index="2"]
-frame = 22
-
-[node name="Camera" parent="Player" index="4"]
-zoom = Vector2( 0.5, 0.5 )
-limit_left = -315
-limit_top = -250
-limit_right = 955
-limit_bottom = 690
-limit_smoothed = true
-editor_draw_limits = true
-
 [node name="ParallaxBackground" parent="." instance=ExtResource( 7 )]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 autoplay = true
-
-[editable path="Player"]
+script = ExtResource( 9 )
