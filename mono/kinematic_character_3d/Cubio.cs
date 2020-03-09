@@ -2,21 +2,19 @@ using Godot;
 
 public class Cubio : KinematicBody
 {
+    private const float Gravity = -9.8f;
+    private const float MaxSpeed = 5.0f;
+    private const float JumpSpeed = 7.0f;
+    private const float Acceleration = 2.0f;
+    private const float Deacceleration = 4.0f;
+    private const float MaxSlopeAngle = 30.0f;
+    private static readonly Vector3 InitialPosition = new Vector3(-3, 4, 8);
 
-    private const float GRAVITY = -9.8f;
-    private const float MAX_SPEED = 5.0f;
-    private const float JUMP_SPEED = 7.0f;
-    private const float ACCELERATION = 2.0f;
-    private const float DEACCELERATION = 4.0f;
-    private const float MAX_SLOPE_ANGLE = 30.0f;
-    private static readonly Vector3 INITIAL_POSITION = new Vector3(-3, 4, 8);
-
-
-    private Vector3 velocity;
+    private Vector3 _velocity;
 
     public override void _Ready()
     {
-        this.velocity = new Vector3();
+        _velocity = new Vector3();
     }
 
     public override void _PhysicsProcess(float delta)
@@ -25,7 +23,7 @@ public class Cubio : KinematicBody
 
         if (cubioInput.ResetPosition)
         {
-            this.Translation = INITIAL_POSITION;
+            Translation = InitialPosition;
         }
 
         Vector3 direction = CalculateDirectionBasedOnInput(cubioInput);
@@ -34,20 +32,20 @@ public class Cubio : KinematicBody
         direction = direction.Normalized();
 
         Vector3 newVelocity = calculateNewVelocity(direction, delta);
-        this.velocity.x = newVelocity.x;
-        this.velocity.z = newVelocity.z;
+        _velocity.x = newVelocity.x;
+        _velocity.z = newVelocity.z;
 
-        this.velocity = MoveAndSlide(this.velocity, Vector3.Up);
+        _velocity = MoveAndSlide(_velocity, Vector3.Up);
 
         if (IsOnFloor() && cubioInput.Jump)
         {
-            this.velocity.y = JUMP_SPEED;
+            _velocity.y = JumpSpeed;
         }
     }
 
     public void OnCubioBodyEntered(PhysicsBody body)
     {
-        if (this.Equals(body))
+        if (Equals(body))
         {
             CanvasItem winText = GetNode("WinText") as CanvasItem;
             winText.Show();
@@ -95,15 +93,14 @@ public class Cubio : KinematicBody
 
     private Vector3 calculateNewVelocity(Vector3 direction, float delta)
     {
-        this.velocity.y += delta * GRAVITY;
-        Vector3 newVelocity = this.velocity;
+        _velocity.y += delta * Gravity;
+        Vector3 newVelocity = _velocity;
 
         newVelocity.y = 0;
-        Vector3 target = direction * MAX_SPEED;
-        float acceleration = direction.Dot(newVelocity) > 0 ? ACCELERATION : DEACCELERATION;
+        Vector3 target = direction * MaxSpeed;
+        float acceleration = direction.Dot(newVelocity) > 0 ? Acceleration : Deacceleration;
         newVelocity = newVelocity.LinearInterpolate(target, acceleration * delta);
 
         return newVelocity;
     }
-
 }

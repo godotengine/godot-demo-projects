@@ -1,6 +1,5 @@
 public class CubioInput
 {
-
     public bool MoveLeft { get; set; }
     public bool MoveRight { get; set; }
     public bool MoveForward { get; set; }
@@ -11,12 +10,11 @@ public class CubioInput
 
     public CubioInput(bool moveLeft, bool moveRight, bool moveForward, bool moveBackwards, bool resetPosition, bool jump)
     {
-        this.MoveLeft = moveLeft;
-        this.MoveRight = moveRight;
-        this.MoveForward = moveForward;
-        this.MoveBackWards = moveBackwards;
-        this.ResetPosition = resetPosition;
-        this.Jump = jump;
+        MoveLeft = moveLeft;
+        MoveRight = moveRight;
+        MoveForward = moveForward;
+        MoveBackWards = moveBackwards;
+        ResetPosition = resetPosition;
+        Jump = jump;
     }
-
 }
