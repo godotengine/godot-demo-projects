@@ -3,49 +3,48 @@ using System.Collections.Generic;
 
 public class Character : Position2D
 {
-
-    private const float DEFAULT_SPEED = 200.0f;
-    private const float MASS = 10.0f;
-    private const float ARRIVE_DISTANCE = 10.0f;
-    private const int NEXT_POSITION_INDEX = 0;
-    private const int NO_MORE_PATHS = 0;
+    private const float DefaultSpeed = 200.0f;
+    private const float Mass = 10.0f;
+    private const float ArriveDistance = 10.0f;
+    private const int NextPositionIndex = 0;
+    private const int NoMorePaths = 0;
 
     [Export]
-    private float speed = DEFAULT_SPEED;
+    private float _speed = DefaultSpeed;
 
-    private CharacterState state;
-    private List<Vector2> path;
-    private Vector2 targetPointWorld;
-    private Vector2 targetPosition;
-    private Vector2 velocity;
+    private CharacterState _state;
+    private List<Vector2> _path;
+    private Vector2 _targetPointWorld;
+    private Vector2 _targetPosition;
+    private Vector2 _velocity;
 
     public override void _Ready()
     {
-        this.path = new List<Vector2>();
-        this.targetPointWorld = new Vector2();
-        this.targetPosition = new Vector2();
-        this.velocity = new Vector2();
+        _path = new List<Vector2>();
+        _targetPointWorld = new Vector2();
+        _targetPosition = new Vector2();
+        _velocity = new Vector2();
 
         ChangeState(CharacterState.IDLE);
     }
 
     public override void _Process(float delta)
     {
-        if (state.Equals(CharacterState.FOLLOW))
+        if (_state.Equals(CharacterState.FOLLOW))
         {
-            MoveTo(this.targetPointWorld);
+            MoveTo(_targetPointWorld);
 
-            if (ArrivedTo(this.targetPointWorld))
+            if (ArrivedTo(_targetPointWorld))
             {
-                this.path.RemoveAt(NEXT_POSITION_INDEX);
+                _path.RemoveAt(NextPositionIndex);
 
-                if (this.path.Count == NO_MORE_PATHS)
+                if (_path.Count == NoMorePaths)
                 {
                     ChangeState(CharacterState.IDLE);
                     return;
                 }
 
-                this.targetPointWorld = path[NEXT_POSITION_INDEX];
+                _targetPointWorld = _path[NextPositionIndex];
             }
         }
     }
@@ -57,11 +56,11 @@ public class Character : Position2D
             Vector2 globalMousePosition = GetGlobalMousePosition();
             if (Input.IsKeyPressed((int)KeyList.Shift))
             {
-                this.GlobalPosition = globalMousePosition;
+                GlobalPosition = globalMousePosition;
             }
             else
             {
-                this.targetPosition = globalMousePosition;
+                _targetPosition = globalMousePosition;
             }
 
             ChangeState(CharacterState.FOLLOW);
@@ -73,31 +72,30 @@ public class Character : Position2D
         if (newState.Equals(CharacterState.FOLLOW))
         {
             PathFindingAStarTileSet tileMap = GetParent().GetNode("TileMap") as PathFindingAStarTileSet;
-            this.path = tileMap.GetPath(this.Position, this.targetPosition);
+            _path = tileMap.GetPath(Position, _targetPosition);
 
-            if (path == null || path.Count == 1)
+            if (_path == null || _path.Count == 1)
             {
                 ChangeState(CharacterState.IDLE);
                 return;
             }
 
-            this.targetPointWorld = path[1];
+            _targetPointWorld = _path[1];
         }
-        this.state = newState;
+        _state = newState;
     }
 
     private void MoveTo(Vector2 destination)
     {
-        Vector2 desiredVelocity = (destination - this.Position).Normalized() * this.speed;
-        Vector2 steering = desiredVelocity - this.velocity;
-        this.velocity += steering / MASS;
-        this.Position += this.velocity * GetProcessDeltaTime();
-        this.Rotation = this.velocity.Angle();
+        Vector2 desiredVelocity = (destination - Position).Normalized() * _speed;
+        Vector2 steering = desiredVelocity - _velocity;
+        _velocity += steering / Mass;
+        Position += _velocity * GetProcessDeltaTime();
+        Rotation = _velocity.Angle();
     }
 
     private bool ArrivedTo(Vector2 destination)
     {
-        return this.Position.DistanceTo(destination) < ARRIVE_DISTANCE;
+        return Position.DistanceTo(destination) < ArriveDistance;
     }
-
 }
