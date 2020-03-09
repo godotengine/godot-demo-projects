@@ -7,10 +7,10 @@ extends Node
 
 signal state_changed(current_state)
 
-# You must set a starting node from the inspector or on
+# You can set a starting node from the inspector or on
 # the node that inherits from this state machine interface.
-# If you don't the game will crash (on purpose, so you won't
-# forget to initialize the state machine).
+# If you don't the first child of the state machine will be used
+# as the starting state
 export(NodePath) var start_state
 var states_map = {}
 
