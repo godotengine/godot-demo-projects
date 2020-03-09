@@ -8,9 +8,13 @@ You will find most of the demo’s content in the `Level.tscn` scene. You can op
 
 We invite you to open the demo's GDScript files in the editor as they contain a lot of comments that explain how each class works.
 
+Language: GDScript
+
+Renderer: GLES 3 (particles are not available in GLES 2)
+
 ## Features
 
-- Side-scrolling player controller.
+- Side-scrolling player controller using [`KinematicBody2D`](https://docs.godotengine.org/en/latest/classes/class_kinematicbody2d.html).
     - Can walk on and snap to slopes.
     - Can shoot, including while jumping.
 - Enemies that crawl on the floor and change direction when they encounter an obstacle.
@@ -26,4 +30,5 @@ We invite you to open the demo's GDScript files in the editor as they contain a 
 ## Screenshots
 
 ![Player shooting in the direction of an enemy](screenshots/shoot.png)
+
 ![The entire level layout viewed in the editor](screenshots/layout.png)

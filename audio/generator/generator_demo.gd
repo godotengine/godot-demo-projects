@@ -10,10 +10,10 @@ func _fill_buffer():
 	var increment = pulse_hz / sample_hz
 	
 	var to_fill = playback.get_frames_available()
-	while (to_fill > 0):
+	while to_fill > 0:
 		playback.push_frame(Vector2.ONE * sin(phase * TAU)) # Audio frames are stereo.
 		phase = fmod(phase + increment, 1.0)
-		to_fill -= 1;
+		to_fill -= 1
 
 
 func _process(_delta):

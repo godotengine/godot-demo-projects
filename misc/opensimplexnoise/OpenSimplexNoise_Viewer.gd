@@ -32,8 +32,8 @@ func _ready():
 
 func _refresh_noise_images():
 	# Adjust min/max for shader.
-	var _min = ((min_noise + 1)/2)
-	var _max = ((max_noise + 1)/2)
+	var _min = (min_noise + 1) / 2
+	var _max = (max_noise + 1) / 2
 	var _material = $SeamlessNoiseTexture.material
 	_material.set_shader_param("min_value", _min)
 	_material.set_shader_param("max_value", _max)
