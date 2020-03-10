@@ -4,7 +4,7 @@ const BASE_LINE_WIDTH = 3.0
 const DRAW_COLOR = Color.white
 
 # The Tilemap node doesn't have clear bounds so we're defining the map's limits here.
-export(Vector2) var map_size = Vector2(16, 16)
+export(Vector2) var map_size = Vector2.ONE * 16
 
 # The path start and end variables use setter methods.
 # You can find them at the bottom of the script.
@@ -85,10 +85,11 @@ func astar_connect_walkable_cells(points_array):
 		# left and bottom of it. If it's in the map and not an obstalce.
 		# We connect the current point with it.
 		var points_relative = PoolVector2Array([
-			Vector2(point.x + 1, point.y),
-			Vector2(point.x - 1, point.y),
-			Vector2(point.x, point.y + 1),
-			Vector2(point.x, point.y - 1)])
+			point + Vector2.RIGHT,
+			point + Vector2.LEFT,
+			point + Vector2.DOWN,
+			point + Vector2.UP,
+		])
 		for point_relative in points_relative:
 			var point_relative_index = calculate_point_index(point_relative)
 			if is_outside_map_bounds(point_relative):
@@ -135,7 +136,7 @@ func is_outside_map_bounds(point):
 	return point.x < 0 or point.y < 0 or point.x >= map_size.x or point.y >= map_size.y
 
 
-func _get_path(world_start, world_end):
+func get_astar_path(world_start, world_end):
 	self.path_start_position = world_to_map(world_start)
 	self.path_end_position = world_to_map(world_end)
 	_recalculate_path()
