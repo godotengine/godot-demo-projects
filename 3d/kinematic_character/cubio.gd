@@ -1,55 +1,58 @@
-
 extends KinematicBody
 
-# Member variables
-var g = -9.8
-var vel: Vector3
 const MAX_SPEED = 5
 const JUMP_SPEED = 7
-const ACCEL= 2
-const DEACCEL= 4
+const ACCELERATION = 2
+const DECELERATION = 4
 const MAX_SLOPE_ANGLE = 30
 
+onready var gravity = -ProjectSettings.get_setting("physics/3d/default_gravity")
+var velocity: Vector3
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("exit"):
+		get_tree().quit()
 	if Input.is_action_just_pressed("reset_position"):
 		translation = Vector3(-3, 4, 8)
-	var dir = Vector3() # Where does the player intend to walk to
-	var cam_xform = $Target/Camera.get_global_transform()
+	
+	var dir = Vector3()
+	dir.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	dir.z = Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
+	
+	# Get the camera's transform basis, but remove the X rotation such
+	# that the Y axis is up and Z is horizontal.
+	var cam_basis = $Target/Camera.global_transform.basis
+	var basis = cam_basis.rotated(cam_basis.x, -cam_basis.get_euler().x)
+	dir = basis.xform(dir)
+	
+	# Limit the input to a length of 1. length_squared is faster to check.
+	if dir.length_squared() > 1:
+		dir /= dir.length()
 
-	if Input.is_action_pressed("move_forward"):
-		dir += -cam_xform.basis[2]
-	if Input.is_action_pressed("move_backwards"):
-		dir += cam_xform.basis[2]
-	if Input.is_action_pressed("move_left"):
-		dir += -cam_xform.basis[0]
-	if Input.is_action_pressed("move_right"):
-		dir += cam_xform.basis[0]
+	# Apply gravity.
+	velocity.y += delta * gravity
 
-	dir.y = 0
-	dir = dir.normalized()
-
-	vel.y += delta * g
-
-	var hvel = vel
+	# Using only the horizontal velocity, interpolate towards the input.
+	var hvel = velocity
 	hvel.y = 0
 
 	var target = dir * MAX_SPEED
-	var accel
+	var acceleration
 	if dir.dot(hvel) > 0:
-		accel = ACCEL
+		acceleration = ACCELERATION
 	else:
-		accel = DEACCEL
+		acceleration = DECELERATION
 
-	hvel = hvel.linear_interpolate(target, accel * delta)
+	hvel = hvel.linear_interpolate(target, acceleration * delta)
 
-	vel.x = hvel.x
-	vel.z = hvel.z
+	# Assign hvel's values back to velocity, and then move.
+	velocity.x = hvel.x
+	velocity.z = hvel.z
+	velocity = move_and_slide(velocity, Vector3.UP)
 
-	vel = move_and_slide(vel, Vector3.UP)
-
+	# Jumping code. is_on_floor() must come after move_and_slide().
 	if is_on_floor() and Input.is_action_pressed("jump"):
-		vel.y = JUMP_SPEED
+		velocity.y = JUMP_SPEED
 
 
 func _on_tcube_body_entered(body):
