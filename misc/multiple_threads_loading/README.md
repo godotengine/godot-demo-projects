@@ -2,14 +2,14 @@
 
 This demo shows how you can organize background loading using multiple threads.
 
-## Godot versions
+Language: GDScript
 
-- Compatible with the latest stable Godot version (currently 3.2).
+Renderer: GLES 2
 
-## Useful links
+## How does it work?
 
-- [Official documentation - Using multiple threads](http://docs.godotengine.org/en/3.2/tutorials/io/background_loading.html#using-multiple-threads)
+[Official documentation - Using multiple threads](http://docs.godotengine.org/en/3.2/tutorials/io/background_loading.html#using-multiple-threads)
 
-## License
+## Screenshots
 
-Those demo are distributed under the terms of the MIT license
+![Screenshot](screenshots/screenshot.png)
