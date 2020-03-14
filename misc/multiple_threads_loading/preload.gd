@@ -6,7 +6,7 @@ var Queue
 
 func _ready():
 	# Initialize
-	Queue = preload("res://resource_queue.gd").new()
+	Queue = preload("res://loading/resource_queue.gd").new()
 	# Call after you instance the class to start the thread.
 	Queue.start()
 
