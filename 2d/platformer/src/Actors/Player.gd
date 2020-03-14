@@ -14,7 +14,7 @@ onready var gun = $Sprite/Gun
 
 
 func _ready():
-	# Static types are necessary to avoid
+	# Static types are necessary here to avoid warnings.
 	var camera: Camera2D = $Camera
 	if action_suffix == "_p1":
 		camera.custom_viewport = $"../.."
