@@ -1,11 +1,11 @@
 [gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://world.gd" type="Script" id=1]
-[ext_resource path="res://obstacle.png" type="Texture" id=2]
-[ext_resource path="res://player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://princess.png" type="Texture" id=4]
-[ext_resource path="res://circle.png" type="Texture" id=5]
-[ext_resource path="res://long_obstacle.png" type="Texture" id=6]
+[ext_resource path="res://level/obstacle.png" type="Texture" id=2]
+[ext_resource path="res://player/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://level/princess.png" type="Texture" id=4]
+[ext_resource path="res://level/circle.png" type="Texture" id=5]
+[ext_resource path="res://level/long_obstacle.png" type="Texture" id=6]
+[ext_resource path="res://level/princess.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -19,6 +19,11 @@ extents = Vector2( 8, 8 )
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 8, 8 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 8, 8 )
+0/shape = SubResource( 1 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
 0/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
@@ -112,7 +117,6 @@ extents = Vector2( 8, 8 )
 extents = Vector2( 32, 8 )
 
 [node name="World" type="Node2D"]
-script = ExtResource( 1 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
@@ -154,6 +158,7 @@ anims/updown = SubResource( 6 )
 
 [node name="Princess" type="Area2D" parent="."]
 position = Vector2( 97, 72 )
+script = ExtResource( 7 )
 
 [node name="Collision" type="CollisionShape2D" parent="Princess"]
 shape = SubResource( 7 )
@@ -261,4 +266,4 @@ shape = SubResource( 12 )
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 265, 247 )
 current = true
-[connection signal="body_entered" from="Princess" to="." method="_on_princess_body_enter"]
+[connection signal="body_entered" from="Princess" to="Princess" method="_on_body_entered"]
