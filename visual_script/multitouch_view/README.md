@@ -1,6 +1,7 @@
 # Multitouch View with VisualScript
 
-Simple debugger for multitouch input. Shows red dots everywhere you press.
+Simple debugger for multitouch input.
+Shows red dots everywhere you press.
 
 Language: [VisualScript](https://docs.godotengine.org/en/latest/getting_started/scripting/visual_script/index.html)
 

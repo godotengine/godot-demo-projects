@@ -1,4 +1,4 @@
-# 3D Platformer
+# Platformer 3D
 
 3D Platformer demo using a
 [`KinematicBody`](https://docs.godotengine.org/en/latest/classes/class_kinematicbody.html).
