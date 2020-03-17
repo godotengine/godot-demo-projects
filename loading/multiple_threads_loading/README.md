@@ -1,6 +1,7 @@
 # Multiple-threads loading demo
 
-This demo shows how you can organize background loading using multiple threads.
+This demo shows how you can organize
+background loading using multiple threads.
 
 Language: GDScript
 

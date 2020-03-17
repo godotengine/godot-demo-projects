@@ -1,6 +1,8 @@
 # 2.5D Demo Project with C#
 
-This demo project shows a way to create a 2.5D game in Godot by mixing 2D and 3D nodes. It also adds a 2.5D editor viewport for easily editing 2.5D levels.
+This demo project shows a way to create a 2.5D game
+in Godot by mixing 2D and 3D nodes. It also adds a
+2.5D editor viewport for easily editing 2.5D levels.
 
 Language: [C#](https://docs.godotengine.org/en/latest/getting_started/scripting/c_sharp/index.html) and a little bit of GDScript
 

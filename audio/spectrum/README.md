@@ -1,7 +1,6 @@
 # Audio Spectrum
 
-This is a demo showing how a spectrum analyzer
-can be built using Godot.
+This is a demo showing how a spectrum analyzer can be built using Godot.
 
 Language: GDScript
 
