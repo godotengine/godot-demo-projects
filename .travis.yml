@@ -1,0 +1,18 @@
+dist: bionic
+
+stages:
+  - build
+
+matrix:
+  include:
+    - name: Static checks (format.sh)
+      stage: build
+      os: linux
+      addons:
+        apt:
+          packages:
+            - dos2unix
+            - recode
+
+script:
+  - bash ./format.sh
