@@ -1,9 +1,8 @@
 extends VehicleBody
 
-const STEER_SPEED = 0.2
+const STEER_SPEED = 1
 const STEER_LIMIT = 0.4
 
-var steer_angle = 0
 var steer_target = 0
 
 export var engine_force_value = 40
@@ -27,4 +26,4 @@ func _physics_process(delta):
 	else:
 		brake = 0.0
 	
-	steering = lerp(steering, steer_target, STEER_SPEED)
+	steering = move_toward(steering, steer_target, STEER_SPEED*delta)
