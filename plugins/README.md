@@ -11,7 +11,7 @@ Renderer: GLES 2
 
 # How does it work?
 
-This project contains 3 plugins:
+This project contains 4 plugins:
 
 * The custom node plugin shows how to create a custom node type
   using `add_custom_type`. [More info](addons/custom_node).
@@ -21,6 +21,9 @@ This project contains 3 plugins:
 
 * The material creator plugin shows how to add a custom dock with some
   simple functionality. [More info](addons/material_creator).
+
+* The main screen plugin is a minimal example of how to create a plugin
+  with a main screen. [More info](addons/main_screen).
 
 To use these plugins in another project, copy any of these
 folders to the `addons/` folder in a Godot project, and then
