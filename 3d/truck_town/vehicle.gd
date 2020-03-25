@@ -3,7 +3,6 @@ extends VehicleBody
 const STEER_SPEED = 1
 const STEER_LIMIT = 0.4
 
-var steer_angle = 0
 var steer_target = 0
 
 export var engine_force_value = 40
@@ -27,13 +26,4 @@ func _physics_process(delta):
 	else:
 		brake = 0.0
 	
-	if steer_target < steer_angle:
-		steer_angle -= STEER_SPEED * delta
-		if steer_target > steer_angle:
-			steer_angle = steer_target
-	elif steer_target > steer_angle:
-		steer_angle += STEER_SPEED * delta
-		if steer_target < steer_angle:
-			steer_angle = steer_target
-	
-	steering = steer_angle
+	steering = move_toward(steering, steer_target, STEER_SPEED * delta)
