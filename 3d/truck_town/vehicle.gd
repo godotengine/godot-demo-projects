@@ -26,4 +26,4 @@ func _physics_process(delta):
 	else:
 		brake = 0.0
 	
-	steering = move_toward(steering, steer_target, STEER_SPEED*delta)
+	steering = move_toward(steering, steer_target, STEER_SPEED * delta)
