@@ -22,6 +22,9 @@ func _unhandled_key_input(event):
 	# you want to work with gamepads.
 	remap_action_to(event)
 	pressed = false
+	
+	# Stop processing inputs once the action has been remapped.
+	set_process_unhandled_key_input(false)
 
 
 func remap_action_to(event):
