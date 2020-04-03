@@ -33,6 +33,8 @@ func _on_MobTimer_timeout():
 	direction += rand_range(-PI / 4, PI / 4)
 	mob.rotation = direction
 	mob.linear_velocity = Vector2(rand_range(mob.min_speed, mob.max_speed), 0).rotated(direction)
+	# warning-ignore:return_value_discarded
+	$HUD.connect("start_game", mob, "_on_start_game")
 
 
 func _on_ScoreTimer_timeout():
