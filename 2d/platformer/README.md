@@ -40,6 +40,6 @@ Renderer: GLES 3 (particles are not available in GLES 2)
 
 ![The entire level layout viewed in the editor](screenshots/layout.png)
 
-# Music
+## Music
 
 "Pompy" by Hubert Lamontagne (madbr) https://soundcloud.com/madbr/pompy
