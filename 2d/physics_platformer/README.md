@@ -26,3 +26,7 @@ the physics engine, inside of `_integrate_forces()`.
 ![Screenshot of the beginning](screenshots/beginning.png)
 
 ![Screenshot of the seesaw and the player riding an enemy](screenshots/seesaw-riding.png)
+
+## Music
+
+"Pompy" by Hubert Lamontagne (madbr) https://soundcloud.com/madbr/pompy
