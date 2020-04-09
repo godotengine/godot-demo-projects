@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scr/gameplay/CameraLook.cs" type="Script" id=1]
+[ext_resource path="res://objects/Character/CharSubzero.tscn" type="PackedScene" id=2]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="ConcavePolygonShape" id=2]
+data = PoolVector3Array( 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="CharSubzero" parent="." instance=ExtResource( 2 )]
+gravity = -0.5
+max_speed = 5.0
+path_animation = NodePath("subzero/AnimationPlayer")
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 71.28, 0, 0, 0, 71.28, 0, 0, 0, 71.28, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
+shape = SubResource( 2 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62674, 2.65703 )
+script = ExtResource( 1 )
+target_path = NodePath("../CharSubzero")
+
+[editable path="CharSubzero"]
