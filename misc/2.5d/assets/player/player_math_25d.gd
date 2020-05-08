@@ -3,6 +3,7 @@ extends KinematicBody
 class_name PlayerMath25D # No icon necessary
 
 var vertical_speed := 0.0
+var move_dir := Vector3()
 var isometric_controls := true
 onready var _parent_node25d: Node25D = get_parent()
 
@@ -35,11 +36,12 @@ func _horizontal_movement(delta):
 		localZ = Vector3(0.70710678118, 0, 0.70710678118)
 	
 	# Gather player input and add directional movement to a Vector3 variable.
-	var move_dir = Vector3()
-	move_dir += localX * (Input.get_action_strength("move_right") - Input.get_action_strength("move_left"))
-	move_dir += localZ * (Input.get_action_strength("move_back") - Input.get_action_strength("move_forward"))
+	if vertical_speed == 0.0:
+		move_dir = Vector3()
+		move_dir += localX * (Input.get_action_strength("move_right") - Input.get_action_strength("move_left"))
+		move_dir += localZ * (Input.get_action_strength("move_back") - Input.get_action_strength("move_forward"))
+		move_dir = move_dir.normalized() * delta * 600;
 	
-	move_dir = move_dir.normalized() * delta * 600;
 	if Input.is_action_pressed("movement_modifier"):
 		move_dir /= 2;
 	
