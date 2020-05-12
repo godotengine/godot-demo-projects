@@ -5,7 +5,7 @@ Many common full-res effects are implemented here for reference.
 
 Language: [GDSL](https://docs.godotengine.org/en/latest/tutorials/shading/shading_reference/shading_language.html) and GDScript
 
-Renderer: GLES 2
+Renderer: GLES 3
 
 ## Screenshots
 
