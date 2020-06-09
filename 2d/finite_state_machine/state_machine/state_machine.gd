@@ -41,7 +41,7 @@ func set_active(value):
 		current_state = null
 
 
-func _input(event):
+func _unhandled_input(event):
 	current_state.handle_input(event)
 
 

@@ -2,7 +2,7 @@ extends Node2D
 
 var bullet = preload("Bullet.tscn")
 
-func _input(event):
+func _unhandled_input(event):
 	if event.is_action_pressed("fire"):
 		fire(owner.look_direction)
 

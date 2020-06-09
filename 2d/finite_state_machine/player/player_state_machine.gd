@@ -21,7 +21,7 @@ func _change_state(state_name):
 	._change_state(state_name)
 
 
-func _input(event):
+func _unhandled_input(event):
 	# Here we only handle input that can interrupt states, attacking in this case,
 	# otherwise we let the state node handle it.
 	if event.is_action_pressed("attack"):

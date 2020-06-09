@@ -235,6 +235,3 @@ func _input(event):
 
 func animation_finished(_anim):
 	anim_done = true
-
-
-

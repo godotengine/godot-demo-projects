@@ -59,7 +59,7 @@ func _change_state(new_state):
 	state = new_state
 
 
-func _input(event):
+func _unhandled_input(event):
 	if not state == States.ATTACK:
 		return
 	if attack_input_state != AttackInputStates.LISTENING:
