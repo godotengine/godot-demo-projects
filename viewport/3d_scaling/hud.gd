@@ -20,7 +20,7 @@ func _ready():
 	get_viewport().connect("size_changed", self, "_root_viewport_size_changed")
 
 
-func _input(event):
+func _unhandled_input(event):
 	if event.is_action_pressed("cycle_viewport_resolution"):
 		scale_factor = wrapf(scale_factor + 0.25, 0.25, 2.25)
 		viewport.size = get_viewport().size * scale_factor

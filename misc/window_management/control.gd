@@ -63,7 +63,7 @@ func _physics_process(_delta):
 	$Button_MouseModeCaptured.set_pressed(Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED)
 
 
-func _input(event):
+func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		mousepos = event.position
 

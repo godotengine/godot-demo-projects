@@ -32,7 +32,7 @@ func _mouse_entered_area():
 	is_mouse_inside = true
 
 
-func _input(event):
+func _unhandled_input(event):
 	# Check if the event is a non-mouse/non-touch event
 	var is_mouse_event = false
 	for mouse_event in [InputEventMouseButton, InputEventMouseMotion, InputEventScreenDrag, InputEventScreenTouch]:
@@ -161,7 +161,7 @@ func rotate_area_to_billboard():
 		look = node_area.translation + look
 		
 		# Y-Billboard: Lock Y rotation, but gives bad results if the camera is tilted.
-		if billboard_mode == 2: 
+		if billboard_mode == 2:
 			look = Vector3(look.x, 0, look.z)
 		
 		node_area.look_at(look, Vector3.UP)

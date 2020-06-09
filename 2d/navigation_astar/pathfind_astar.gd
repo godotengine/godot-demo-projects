@@ -42,16 +42,6 @@ func _draw():
 		last_point = current_point
 
 
-# Click and Shift force the start and end position of the path to update,
-# and the node to redraw everything.
-#func _input(event):
-#	if event.is_action_pressed('click') and Input.is_key_pressed(KEY_SHIFT):
-#		# To call the setter method from this script we have to use the explicit self.
-#		self.path_start_position = world_to_map(get_global_mouse_position())
-#	elif event.is_action_pressed('click'):
-#		self.path_end_position = world_to_map(get_global_mouse_position())
-
-
 # Loops through all cells within the map's bounds and
 # adds all points to the astar_node, except the obstacles.
 func astar_add_walkable_cells(obstacle_list = []):

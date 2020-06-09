@@ -10,7 +10,7 @@ func _process(delta):
 
 # The 'click' event is a custom input action defined in
 # Project > Project Settings > Input Map tab.
-func _input(event):
+func _unhandled_input(event):
 	if not event.is_action_pressed("click"):
 		return
 	_update_navigation_path($Character.position, get_local_mouse_position())

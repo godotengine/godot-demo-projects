@@ -27,7 +27,7 @@ func _process(_delta):
 		_target_point_world = _path[0]
 
 
-func _input(event):
+func _unhandled_input(event):
 	if event.is_action_pressed("click"):
 		var global_mouse_pos = get_global_mouse_position()
 		if Input.is_key_pressed(KEY_SHIFT):

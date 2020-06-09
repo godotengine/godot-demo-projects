@@ -50,7 +50,7 @@ func _process(delta):
 		set_process(false)
 
 
-func _input(event):
+func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 		var from = get_node("CameraBase/Camera").project_ray_origin(event.position)
 		var to = from + get_node("CameraBase/Camera").project_ray_normal(event.position) * 100
