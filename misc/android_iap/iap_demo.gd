@@ -84,8 +84,8 @@ func _on_purchase_acknowledgement_error(code, message):
 	show_alert("Purchase acknowledgement error %d: %s" % [code, message])
 
 
-func _on_purchase_consumption_error(code, message):
-	show_alert("Purchase consumption error %d: %s" % [code, message])
+func _on_purchase_consumption_error(code, message, purchase_token):
+	show_alert("Purchase consumption error %d: %s, purchase token: %s" % [code, message, purchase_token])
 
 
 func _on_sku_details_query_error(code, message):
@@ -100,7 +100,7 @@ func _on_disconnected():
 
 # GUI
 func _on_QuerySkuDetailsButton_pressed():
-	payment.querySkuDetails([TEST_ITEM_SKU])
+	payment.querySkuDetails([TEST_ITEM_SKU], "inapp") # Use "subs" for subscriptions
 
 
 func _on_PurchaseButton_pressed():
