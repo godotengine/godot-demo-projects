@@ -1,0 +1,15 @@
+name: Continuous integration
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Lint demo projects
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -qq dos2unix recode
+          bash ./format.sh

@@ -1,18 +1,21 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -uo pipefail
+IFS=$'\n\t'
 
 # Loops through all text files tracked by Git.
 git grep -zIl '' |
 while IFS= read -rd '' f; do
     # Exclude csproj and hdr files.
-    if [[ $f == *"csproj" ]]; then
+    if [[ "$f" == *"csproj" ]]; then
         continue
-    elif [[ $f == *"hdr" ]]; then
+    elif [[ "$f" == *"hdr" ]]; then
         continue
     fi
     # Ensures that files are UTF-8 formatted.
-    recode UTF-8 $f 2> /dev/null
+    recode UTF-8 "$f" 2> /dev/null
     # Ensures that files have LF line endings.
-    dos2unix $f 2> /dev/null
+    dos2unix "$f" 2> /dev/null
     # Ensures that files do not contain a BOM.
     sed -i '1s/^\xEF\xBB\xBF//' "$f"
     # Ensures that files end with newline characters.
@@ -20,7 +23,7 @@ while IFS= read -rd '' f; do
 done
 
 git diff > patch.patch
-FILESIZE=$(stat -c%s patch.patch)
+FILESIZE="$(stat -c%s patch.patch)"
 MAXSIZE=5
 
 # If no patch has been generated all is OK, clean up, and exit.
