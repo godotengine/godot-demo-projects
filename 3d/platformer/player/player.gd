@@ -133,7 +133,7 @@ func _physics_process(delta):
 func adjust_facing(p_facing, p_target, p_step, p_adjust_rate, current_gn):
 	var n = p_target # Normal.
 	var t = n.cross(current_gn).normalized()
-	 
+	
 	var x = n.dot(p_facing)
 	var y = t.dot(p_facing)
 	

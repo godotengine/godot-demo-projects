@@ -1,6 +1,6 @@
 # Loading with Threads
 
-An example using a thread to load an image. 
+An example using a thread to load an image.
 
 Language: GDScript
 

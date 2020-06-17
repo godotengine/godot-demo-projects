@@ -59,7 +59,7 @@ public class Viewport25D : Control
         {
             return;
         }
-        
+
         // View mode polling.
         var viewModeChangedThisFrame = false;
         var newViewMode = viewModeButtonGroup.GetPressedButton().GetIndex();
@@ -69,7 +69,7 @@ public class Viewport25D : Control
             viewModeChangedThisFrame = true;
             RecursiveChangeViewMode(GetTree().EditedSceneRoot);
         }
-        
+
         // Zooming.
         if (Input.IsMouseButtonPressed((int)ButtonList.WheelUp))
         {
@@ -80,11 +80,11 @@ public class Viewport25D : Control
             zoomLevel -= 1;
         }
         float zoom = GetZoomAmount();
-        
+
         // Viewport size.
         Vector2 size = GetGlobalRect().Size;
         viewport2d.Size = size;
-        
+
         // Viewport transform.
         Transform2D viewportTrans = Transform2D.Identity;
         viewportTrans.x *= zoom;
@@ -92,7 +92,7 @@ public class Viewport25D : Control
         viewportTrans.origin = viewportTrans.BasisXform(viewportCenter) + size / 2;
         viewport2d.CanvasTransform = viewportTrans;
         viewportOverlay.CanvasTransform = viewportTrans;
-        
+
         // Delete unused gizmos.
         var selection = editorInterface.GetSelection().GetSelectedNodes();
         var overlayChildren = viewportOverlay.GetChildren();

@@ -1,11 +1,11 @@
 extends Node
 
-# Below are a number of helper functions that show how you can use the raw sensor data to determine the orientation 
+# Below are a number of helper functions that show how you can use the raw sensor data to determine the orientation
 # of your phone/device. The cheapest phones only have an accelerometer only the most expensive phones have all three.
 # Note that none of this logic filters data. Filters introduce lag but also provide stability. There are plenty
 # of examples on the internet on how to implement these. I wanted to keep this straight forward.
 
-# We draw a few arrow objects to visualize the vectors and two cubes to show two implementation for orientating 
+# We draw a few arrow objects to visualize the vectors and two cubes to show two implementation for orientating
 # these cubes to our phones orientation.
 # This is a 3D example however reading the phones orientation is also invaluable for 2D
 
@@ -73,7 +73,7 @@ func rotate_by_gyro(p_gyro, p_basis, p_delta):
 	
 	return rotate * p_basis
 
-# This function corrects the drift in our matrix by our gravity vector 
+# This function corrects the drift in our matrix by our gravity vector
 func drift_correction(p_basis, p_grav):
 	# as always, make sure our vector is normalized but also invert as our gravity points down
 	var real_up = -p_grav.normalized()
@@ -110,7 +110,7 @@ func _process(delta):
 		else:
 			# The gravity vector is calculated by the OS by combining the other sensor inputs.
 			# If we don't have a gravity vector, from now on, use accelerometer...
-			grav = acc 
+			grav = acc
 	
 	if mag.length() < 0.1:
 		mag = Vector3(1.0, 0.0, 0.0)

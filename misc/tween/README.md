@@ -1,6 +1,6 @@
 # Tween Interpolation
 
-A demo showing advanced tween usage. 
+A demo showing advanced tween usage.
 
 Language: GDScript
 

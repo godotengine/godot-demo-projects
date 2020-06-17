@@ -32,7 +32,7 @@ achieve the effect.
 
 The cameras are placed on the segment joining the two players,
 either in the middle if they're close enough or at a fixed
-distance otherwise. 
+distance otherwise.
 
 ## How to use it
 

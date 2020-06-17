@@ -17,6 +17,8 @@ while IFS= read -rd '' f; do
     sed -i '1s/^\xEF\xBB\xBF//' "$f"
     # Ensures that files end with newline characters.
     tail -c1 < "$f" | read -r _ || echo >> "$f";
+    # Remove trailing space characters.
+    sed -z -i 's/\x20\x0A/\x0A/g' "$f"
 done
 
 git diff > patch.patch
