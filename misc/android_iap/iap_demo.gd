@@ -9,10 +9,10 @@ var payment = null
 var test_item_purchase_token = null
 
 func _ready():
-	if Engine.has_singleton("GodotPayment"):
+	if Engine.has_singleton("GodotGooglePlayBilling"):
 		label.text += "\n\n\nTest item SKU: %s" % TEST_ITEM_SKU
 
-		payment = Engine.get_singleton("GodotPayment")
+		payment = Engine.get_singleton("GodotGooglePlayBilling")
 		payment.connect("connected", self, "_on_connected") # No params
 		payment.connect("disconnected", self, "_on_disconnected") # No params
 		payment.connect("connect_error", self, "_on_connect_error") # Response ID (int), Debug message (string)
@@ -26,7 +26,7 @@ func _ready():
 		payment.connect("purchase_consumption_error", self, "_on_purchase_consumption_error") # Response ID (int), Debug message (string), Purchase token (string)
 		payment.startConnection()
 	else:
-		show_alert("Android IAP support is not enabled. Make sure you have enabled 'Custom Build' and the GodotPayment plugin in your Android export settings! This application will not work.")
+		show_alert("Android IAP support is not enabled. Make sure you have enabled 'Custom Build' and installed and enabled the GodotGooglePlayBilling plugin in your Android export settings! This application will not work.")
 
 
 func show_alert(text):
@@ -93,7 +93,7 @@ func _on_sku_details_query_error(code, message):
 
 
 func _on_disconnected():
-	show_alert("GodotPayment disconnected. Will try to reconnect in 10s...")
+	show_alert("GodotGooglePlayBilling disconnected. Will try to reconnect in 10s...")
 	yield(get_tree().create_timer(10), "timeout")
 	payment.startConnection()
 
