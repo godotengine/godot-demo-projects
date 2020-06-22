@@ -96,7 +96,7 @@ public class Node25D : Node2D, IComparable<Node25D>
         {
             spatialNode = GetChild<Spatial>(0);
         }
-        
+
         GlobalPosition = transform25D.FlatPosition;
     }
 

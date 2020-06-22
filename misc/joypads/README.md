@@ -1,6 +1,6 @@
 # Joypads Demo
 
-A tool for testing joypad input. 
+A tool for testing joypad input.
 
 Language: GDScript
 

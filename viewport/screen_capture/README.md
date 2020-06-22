@@ -1,6 +1,6 @@
 # Screen Capture
 
-An example showing how to take screenshots of the screen. 
+An example showing how to take screenshots of the screen.
 
 Language: GDScript
 

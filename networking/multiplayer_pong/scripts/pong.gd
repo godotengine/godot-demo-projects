@@ -18,7 +18,7 @@ func _ready():
 	# while all nodes in clients inherit from puppet.
 	# set_network_master is tree-recursive by default.
 	if get_tree().is_network_server():
-		# For the server, give control of player 2 to the other peer. 
+		# For the server, give control of player 2 to the other peer.
 		player2.set_network_master(get_tree().get_network_connected_peers()[0])
 	else:
 		# For the client, give control of player 2 to itself.

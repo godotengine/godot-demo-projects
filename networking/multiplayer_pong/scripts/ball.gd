@@ -14,7 +14,7 @@ func _process(delta):
 	# even if it's sightly out of sync between them,
 	# so each player sees the motion as smooth and not jerky.
 	if not stopped:
-		translate(_speed * delta * direction) 
+		translate(_speed * delta * direction)
 	
 	# Check screen bounds to make ball bounce.
 	var ball_pos = position

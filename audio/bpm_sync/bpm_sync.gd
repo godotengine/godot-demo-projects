@@ -31,7 +31,7 @@ func _process(_delta):
 		return
 	
 	var time = 0.0
-	if sync_source == SyncSource.SYSTEM_CLOCK: 
+	if sync_source == SyncSource.SYSTEM_CLOCK:
 		# Obtain from ticks.
 		time = (OS.get_ticks_usec() - time_begin) / 1000000.0
 		# Compensate.

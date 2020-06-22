@@ -3,7 +3,7 @@
 This demo shows a traditional isometric view with depth sorting.
 
 A character can move around the level and will also slide around objects,
-as well as be occluded when standing in front or behind them. 
+as well as be occluded when standing in front or behind them.
 
 Language: GDScript
 

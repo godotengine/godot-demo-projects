@@ -11,7 +11,7 @@ Renderer: GLES 2
 The Pong game is rendered to a custom
 [`Viewport`](https://docs.godotengine.org/en/latest/classes/class_viewport.html)
 node rather than the main Viewport. In the code,
-`get_texture()` is called on the Viewport to get a 
+`get_texture()` is called on the Viewport to get a
 [`ViewportTexture`](https://docs.godotengine.org/en/latest/classes/class_viewporttexture.html),
 which is then assigned to the quad's material's albedo texture.
 

@@ -8,7 +8,7 @@ A demo showing the various window management features available through
 - Minimizing and maximizing.
 - Moving the window around.
 - Capturing or hiding the mouse.
-- Getting various information about the screens, including DPI. 
+- Getting various information about the screens, including DPI.
 
 Language: GDScript
 
