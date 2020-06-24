@@ -1,4 +1,4 @@
-extends Panel
+extends Node
 
 onready var rtl = $HBoxContainer/Features
 onready var mono_test = $MonoTest

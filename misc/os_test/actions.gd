@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends Node
 
 
 func _on_OpenShellWeb_pressed():
