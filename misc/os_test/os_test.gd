@@ -1,6 +1,7 @@
-extends Panel
+extends Node
 
 onready var rtl = $HBoxContainer/Features
+onready var mono_test = $MonoTest
 
 
 # Returns a human-readable string from a date and time, date, or time dictionary.
@@ -98,6 +99,13 @@ func _ready():
 	add_line("Value of `PATH`", OS.get_environment("PATH"))
 	add_line("Value of `path`", OS.get_environment("path"))
 
+	add_header("Hardware")
+	add_line("Model name", OS.get_model_name())
+	add_line("Processor count", OS.get_processor_count())
+	add_line("Device unique ID", OS.get_unique_id())
+	add_line("Video adapter name", VisualServer.get_video_adapter_name())
+	add_line("Video adapter vendor", VisualServer.get_video_adapter_vendor())
+
 	add_header("Input")
 	add_line("Latin keyboard variant", OS.get_latin_keyboard_variant())
 	add_line("Device has touch screen", OS.has_touchscreen_ui_hint())
@@ -107,15 +115,18 @@ func _ready():
 	add_header("Localization")
 	add_line("Locale", OS.get_locale())
 
-	add_header("Hardware")
-	add_line("Model name", OS.get_model_name())
-	add_line("Processor count", OS.get_processor_count())
-	add_line("Device unique ID", OS.get_unique_id())
-	add_line("Video adapter name", VisualServer.get_video_adapter_name())
-	add_line("Video adapter vendor", VisualServer.get_video_adapter_vendor())
-
 	add_header("Mobile")
 	add_line("Granted permissions", OS.get_granted_permissions())
+
+	add_header("Mono (C#)")
+	var mono_enabled = ResourceLoader.exists("res://MonoTest.cs")
+	add_line("Mono module enabled", "Yes" if mono_enabled else "No")
+	if mono_enabled:
+		mono_test.set_script(load("res://MonoTest.cs"))
+		add_line("Architecture", mono_test.Architecture())
+		add_line("Operating System", mono_test.OperatingSystem())
+		add_line("Platform Type", mono_test.PlatformType())
+		add_line("Texture Compression", mono_test.TextureCompression())
 
 	add_header("Software")
 	add_line("OS name", OS.get_name())
