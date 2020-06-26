@@ -1,7 +1,8 @@
 tool
 extends Spatial
 
-# Set a random color to all objects in the 'walls' group
+# Set a random color to all objects in the "walls" group.
+# To use, attach this script to the "Walls" node.
 
 func _ready():
 	randomize()

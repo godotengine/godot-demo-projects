@@ -13,8 +13,8 @@ func goto_scene(path):
 
 	# The way around this is deferring the load to a later time, when
 	# it is ensured that no code from the current scene is running:
-
 	call_deferred("_deferred_goto_scene", path)
+
 
 func _deferred_goto_scene(path):
 	# Immediately free the current scene, there is no risk here.
