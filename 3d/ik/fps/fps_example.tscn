@@ -77,7 +77,7 @@ _data = {
 
 [sub_resource type="Animation" id=12]
 tracks/0/type = "value"
-tracks/0/path = NodePath("Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos:translation")
+tracks/0/path = NodePath("LeanPath/PathFollow/IK_LookAt_Chest/AimPos:translation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -89,7 +89,7 @@ tracks/0/keys = {
 "values": [ Vector3( 0.570504, -2.2654, 2.93826 ), Vector3( 0, -1.36445, 3.78817 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos:rotation_degrees")
+tracks/1/path = NodePath("LeanPath/PathFollow/IK_LookAt_Chest/AimPos:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -101,7 +101,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, -2, 0 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Lean_Path/PathFollow/IK_LookAt_Chest/Camera:fov")
+tracks/2/path = NodePath("LeanPath/PathFollow/IK_LookAt_Chest/Camera:fov")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -115,7 +115,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=13]
 tracks/0/type = "value"
-tracks/0/path = NodePath("Lean_Path/PathFollow/IK_LookAt_Chest/Camera:fov")
+tracks/0/path = NodePath("LeanPath/PathFollow/IK_LookAt_Chest/Camera:fov")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -127,7 +127,7 @@ tracks/0/keys = {
 "values": [ 60.0, 80.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos:translation")
+tracks/1/path = NodePath("LeanPath/PathFollow/IK_LookAt_Chest/AimPos:translation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -139,7 +139,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, -1.36445, 3.78817 ), Vector3( 0.570504, -2.2654, 2.93826 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos:rotation_degrees")
+tracks/2/path = NodePath("LeanPath/PathFollow/IK_LookAt_Chest/AimPos:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -153,7 +153,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=14]
 tracks/0/type = "value"
-tracks/0/path = NodePath("Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos:translation")
+tracks/0/path = NodePath("LeanPath/PathFollow/IK_LookAt_Chest/AimPos:translation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -165,7 +165,7 @@ tracks/0/keys = {
 "values": [ Vector3( 0.570504, -2.2654, 2.93826 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos:rotation_degrees")
+tracks/1/path = NodePath("LeanPath/PathFollow/IK_LookAt_Chest/AimPos:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -177,7 +177,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, -2, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Lean_Path/PathFollow/IK_LookAt_Chest/Camera:fov")
+tracks/2/path = NodePath("LeanPath/PathFollow/IK_LookAt_Chest/Camera:fov")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -189,18 +189,18 @@ tracks/2/keys = {
 "values": [ 80.0 ]
 }
 
-[node name="LookAt_IK" type="Spatial"]
+[node name="FPSExample" type="Spatial"]
 
 [node name="Level" type="Spatial" parent="."]
 
-[node name="Floor_plane" type="MeshInstance" parent="Level"]
+[node name="Floor" type="MeshInstance" parent="Level"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
-[node name="StaticBody" type="StaticBody" parent="Level/Floor_plane"]
+[node name="StaticBody" type="StaticBody" parent="Level/Floor"]
 
-[node name="CollisionShape" type="CollisionShape" parent="Level/Floor_plane/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="Level/Floor/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.956119, 0 )
 shape = SubResource( 3 )
 
@@ -430,7 +430,7 @@ Escape to free/lock mouse cursor"
 align = 1
 valign = 1
 
-[node name="Button_Prev" type="Button" parent="Control"]
+[node name="ButtonPrev" type="Button" parent="Control"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -439,7 +439,10 @@ margin_right = 129.0
 margin_bottom = -10.0
 text = "Previous scene"
 script = ExtResource( 2 )
-scene_to_change_to = "res://fabrik_ik.tscn"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+scene_to_change_to = "res://skeleton_ik.tscn"
 
 [node name="Crosshair" type="Control" parent="Control"]
 modulate = Color( 1, 1, 1, 0.784314 )
@@ -480,16 +483,16 @@ shape = SubResource( 10 )
 [node name="CameraHolder" type="Spatial" parent="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 0 )
 
-[node name="Lean_Path" type="Path" parent="KinematicBody/CameraHolder"]
+[node name="LeanPath" type="Path" parent="KinematicBody/CameraHolder"]
 curve = SubResource( 11 )
 
-[node name="PathFollow" type="PathFollow" parent="KinematicBody/CameraHolder/Lean_Path"]
+[node name="PathFollow" type="PathFollow" parent="KinematicBody/CameraHolder/LeanPath"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0412404, 0.205172, 0 )
 offset = 2.71865
 rotation_mode = 0
 loop = false
 
-[node name="IK_LookAt_Chest" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow"]
+[node name="IK_LookAt_Chest" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.451559, 0 )
 script = ExtResource( 4 )
 __meta__ = {
@@ -497,26 +500,17 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../BattleBot/Armature/Skeleton")
 bone_name = "Chest"
-update_mode = 0
 look_at_axis = 2
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
-use_negative_our_rot = false
 additional_rotation = Vector3( -10, 0, 0 )
-position_using_additional_bone = false
-additional_bone_name = ""
-additional_bone_length = 1.0
-debug_messages = false
 
-[node name="Camera" type="Camera" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest"]
+[node name="Camera" type="Camera" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 fov = 74.0
 
-[node name="Aim_pos" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest"]
+[node name="AimPos" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest"]
 transform = Transform( 0.999391, 0, -0.0348995, 0, 1, 0, 0.0348995, 0, 0.999391, 0.570504, -2.2654, 2.93826 )
 
-[node name="IK_FABRIK" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos"]
+[node name="IK_FABRIK" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/AimPos"]
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
@@ -524,16 +518,13 @@ __meta__ = {
 skeleton_path = NodePath("../../../../../../BattleBot/Armature/Skeleton")
 bones_in_chain = PoolStringArray( "Left_UpperArm", "Left_LowerArm", "Left_Hand" )
 bones_in_chain_lengths = PoolRealArray( 1.97, 3, 0.1 )
-update_mode = 0
-chain_iterations = 0
 limit_chain_iterations = false
-reset_iterations_on_update = false
 use_middle_joint_target = true
 
-[node name="target" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK"]
+[node name="Target" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/AimPos/IK_FABRIK"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.54883, -0.0335302, -0.934144 )
 
-[node name="IK_LookAt" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK/target"]
+[node name="IK_LookAt" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/AimPos/IK_FABRIK/Target"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300601, 0, 0.714191 )
 script = ExtResource( 4 )
 __meta__ = {
@@ -541,31 +532,22 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../../../../../BattleBot/Armature/Skeleton")
 bone_name = "Left_Hand"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
 use_negative_our_rot = true
 additional_rotation = Vector3( 0, 0, 90 )
-position_using_additional_bone = false
-additional_bone_name = ""
-additional_bone_length = 1.0
-debug_messages = false
 
-[node name="middle_joint_target" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK"]
+[node name="MiddleJoint" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/AimPos/IK_FABRIK"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.85263, -2.91316, -2.77555 )
 
-[node name="Left_UpperArm" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK"]
+[node name="Left_UpperArm" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/AimPos/IK_FABRIK"]
 transform = Transform( -0.985848, -0.0154234, 0.16693, -0.0140715, 0.999858, 0.00927825, -0.167049, 0.00679813, -0.985925, 1.5529, -1.84646, -6.07288 )
 
-[node name="Left_LowerArm" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK"]
+[node name="Left_LowerArm" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/AimPos/IK_FABRIK"]
 transform = Transform( -0.980952, 0.0992109, 0.167001, 0.116307, 0.988573, 0.0958931, -0.155579, 0.11349, -0.981282, 1.2349, -1.86413, -4.19466 )
 
-[node name="Left_Hand" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK"]
+[node name="Left_Hand" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/AimPos/IK_FABRIK"]
 transform = Transform( -0.962426, 0.0909643, 0.255854, 0.128209, 0.982809, 0.132853, -0.23937, 0.160664, -0.957543, 0.737802, -2.14957, -1.27378 )
 
-[node name="IK_FABRIK_RightArm" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos"]
+[node name="IK_FABRIK_RightArm" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/AimPos"]
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
@@ -573,16 +555,13 @@ __meta__ = {
 skeleton_path = NodePath("../../../../../../BattleBot/Armature/Skeleton")
 bones_in_chain = PoolStringArray( "Right_UpperArm", "Right_LowerArm", "Right_Hand" )
 bones_in_chain_lengths = PoolRealArray( 1.97, 3, 0.1 )
-update_mode = 0
-chain_iterations = 0
 limit_chain_iterations = false
-reset_iterations_on_update = false
 use_middle_joint_target = true
 
-[node name="target" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK_RightArm"]
+[node name="Target" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/AimPos/IK_FABRIK_RightArm"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.285662, -0.0335302, -1.05271 )
 
-[node name="IK_LookAt" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK_RightArm/target"]
+[node name="IK_LookAt" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/AimPos/IK_FABRIK_RightArm/Target"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00396007, 0, 0.834561 )
 script = ExtResource( 4 )
 __meta__ = {
@@ -590,33 +569,24 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../../../../../BattleBot/Armature/Skeleton")
 bone_name = "Right_Hand"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
 use_negative_our_rot = true
 additional_rotation = Vector3( 0, 0, 90 )
-position_using_additional_bone = false
-additional_bone_name = ""
-additional_bone_length = 1.0
-debug_messages = false
 
-[node name="middle_joint_target" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK_RightArm"]
+[node name="MiddleJoint" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/AimPos/IK_FABRIK_RightArm"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.73318, -2.91316, -2.77555 )
 
-[node name="Right_UpperArm" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK_RightArm"]
+[node name="Right_UpperArm" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/AimPos/IK_FABRIK_RightArm"]
 
-[node name="Right_LowerArm" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK_RightArm"]
+[node name="Right_LowerArm" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/AimPos/IK_FABRIK_RightArm"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.85263, -2.91316, -2.77555 )
 
-[node name="Right_Hand" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos/IK_FABRIK_RightArm"]
+[node name="Right_Hand" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/AimPos/IK_FABRIK_RightArm"]
 
-[node name="RemoteTransform" type="RemoteTransform" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Aim_pos"]
+[node name="RemoteTransform" type="RemoteTransform" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/AimPos"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.505047, 0.268441 )
 remote_path = NodePath("../../../../../Weapon/Pistol")
 
-[node name="IK_LookAt_Head" type="Spatial" parent="KinematicBody/CameraHolder/Lean_Path/PathFollow"]
+[node name="IK_LookAt_Head" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.14041, -2.57003 )
 script = ExtResource( 4 )
 __meta__ = {
@@ -624,17 +594,6 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../BattleBot/Armature/Skeleton")
 bone_name = "Head"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
-use_negative_our_rot = false
-additional_rotation = Vector3( 0, 0, 0 )
-position_using_additional_bone = false
-additional_bone_name = ""
-additional_bone_length = 1.0
-debug_messages = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="KinematicBody/CameraHolder"]
 autoplay = "Start"
@@ -653,7 +612,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 material/0 = ExtResource( 9 )
 material/1 = ExtResource( 10 )
 
-[node name="Pistol_end" type="Spatial" parent="KinematicBody/CameraHolder/Weapon/Pistol"]
+[node name="PistolEnd" type="Spatial" parent="KinematicBody/CameraHolder/Weapon/Pistol"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0161836, 0.315914, 1.41329 )
 
 [node name="BattleBot" parent="KinematicBody" instance=ExtResource( 11 )]

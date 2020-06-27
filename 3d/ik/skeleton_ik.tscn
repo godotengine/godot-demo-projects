@@ -49,9 +49,9 @@ size = Vector3( 1, 1, 1 )
 albedo_color = Color( 0, 0.191406, 0.765625, 1 )
 roughness = 0.0
 
-[node name="Skeleton_IK" type="Spatial"]
+[node name="SkeletonIK" type="Spatial"]
 
-[node name="Floor_plane" type="MeshInstance" parent="."]
+[node name="Floor" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
@@ -61,28 +61,28 @@ transform = Transform( 0.56827, 0.673454, -0.472789, 0, 0.574581, 0.818448, 0.82
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 4 )
 
-[node name="BattleBot" parent="." instance=ExtResource( 4 )]
+[node name="GodotBattleBot" parent="." instance=ExtResource( 4 )]
 
-[node name="godot_battle_bot" parent="BattleBot/Armature/Skeleton" index="0"]
+[node name="godot_battle_bot" parent="GodotBattleBot/Armature/Skeleton" index="0"]
 material/0 = ExtResource( 6 )
 material/1 = ExtResource( 7 )
 
-[node name="SkeletonIK_Left" type="SkeletonIK" parent="BattleBot/Armature/Skeleton" index="1"]
+[node name="SkeletonIK_Left" type="SkeletonIK" parent="GodotBattleBot/Armature/Skeleton" index="1"]
 process_priority = 1
 root_bone = "Left_UpperArm"
 tip_bone = "Left_Hand"
 use_magnet = true
 magnet = Vector3( 8, 6, 0 )
-target_node = NodePath("../../../../Camera/targets/Target_Left")
+target_node = NodePath("../../../../Camera/Targets/TargetLeft")
 script = ExtResource( 1 )
 
-[node name="SkeletonIK_Right" type="SkeletonIK" parent="BattleBot/Armature/Skeleton" index="2"]
+[node name="SkeletonIK_Right" type="SkeletonIK" parent="GodotBattleBot/Armature/Skeleton" index="2"]
 process_priority = 1
 root_bone = "Right_UpperArm"
 tip_bone = "Right_Hand"
 use_magnet = true
 magnet = Vector3( -8, 6, 0 )
-target_node = NodePath("../../../../Camera/targets/Target_Right")
+target_node = NodePath("../../../../Camera/Targets/TargetRight")
 script = ExtResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
@@ -92,36 +92,26 @@ script = ExtResource( 5 )
 MOVEMENT_SPEED = -8.0
 flip_axis = true
 
-[node name="targets" type="Spatial" parent="Camera"]
+[node name="Targets" type="Spatial" parent="Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8 )
 
-[node name="IK_LookAt_Head" type="Spatial" parent="Camera/targets"]
+[node name="IK_LookAt_Head" type="Spatial" parent="Camera/Targets"]
 script = ExtResource( 9 )
 __meta__ = {
 "_editor_icon": ExtResource( 2 )
 }
-skeleton_path = NodePath("../../../../Skeleton_IK/BattleBot/Armature/Skeleton")
+skeleton_path = NodePath("../../../GodotBattleBot/Armature/Skeleton")
 bone_name = "Head"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
-use_negative_our_rot = false
 additional_rotation = Vector3( 90, 0, 0 )
-position_using_additional_bone = false
-additional_bone_name = ""
-additional_bone_length = 1.0
-debug_messages = false
 
-[node name="MeshInstance" type="MeshInstance" parent="Camera/targets"]
+[node name="1MeterCube" type="MeshInstance" parent="Camera/Targets"]
 mesh = SubResource( 5 )
 material/0 = SubResource( 6 )
 
-[node name="Target_Left" type="Position3D" parent="Camera/targets"]
+[node name="TargetLeft" type="Position3D" parent="Camera/Targets"]
 transform = Transform( -0.179447, 0.98366, -0.0145678, 0.981822, 0.178142, -0.0654973, -0.0618319, -0.0260563, -0.997746, 0.653517, -0.112305, -0.760886 )
 
-[node name="Target_Right" type="Position3D" parent="Camera/targets"]
+[node name="TargetRight" type="Position3D" parent="Camera/Targets"]
 transform = Transform( -0.0217688, 0.998559, -0.0490576, 0.992503, 0.0274873, 0.119085, 0.120262, -0.0460975, -0.991671, -0.683053, 0.0251284, -0.811513 )
 
 [node name="Control" type="Control" parent="."]
@@ -158,7 +148,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button_Next" type="Button" parent="Control"]
+[node name="ButtonNext" type="Button" parent="Control"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -169,9 +159,12 @@ margin_right = -5.0
 margin_bottom = -10.0
 text = "Next scene"
 script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 scene_to_change_to = "res://fps/fps_example.tscn"
 
-[node name="Button_Prev" type="Button" parent="Control"]
+[node name="ButtonPrev" type="Button" parent="Control"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -180,6 +173,9 @@ margin_right = 129.0
 margin_bottom = -10.0
 text = "Previous scene"
 script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 scene_to_change_to = "res://fabrik_ik.tscn"
 
-[editable path="BattleBot"]
+[editable path="GodotBattleBot"]

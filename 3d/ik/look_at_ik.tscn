@@ -41,9 +41,9 @@ glow_intensity = 0.2
 glow_bloom = 0.03
 glow_blend_mode = 0
 
-[node name="LookAt_IK" type="Spatial"]
+[node name="LookAtIK" type="Spatial"]
 
-[node name="Floor_plane" type="MeshInstance" parent="."]
+[node name="Floor" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
@@ -66,64 +66,33 @@ script = ExtResource( 5 )
 MOVEMENT_SPEED = -3.0
 flip_axis = true
 
-[node name="targets" type="Spatial" parent="Camera"]
+[node name="Targets" type="Spatial" parent="Camera"]
 
-[node name="IK_LookAt_Head" type="Spatial" parent="Camera/targets"]
+[node name="IK_LookAt_Head" type="Spatial" parent="Camera/Targets"]
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
 skeleton_path = NodePath("../../../BattleBot/Armature/Skeleton")
 bone_name = "Head"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
-use_negative_our_rot = false
 additional_rotation = Vector3( 90, 0, 0 )
-position_using_additional_bone = false
-additional_bone_name = ""
-additional_bone_length = 1.0
-debug_messages = false
 
-[node name="IK_LookAt_LeftArm" type="Spatial" parent="Camera/targets"]
+[node name="IK_LookAt_LeftArm" type="Spatial" parent="Camera/Targets"]
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
 skeleton_path = NodePath("../../../BattleBot/Armature/Skeleton")
 bone_name = "Left_UpperArm"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
-use_negative_our_rot = false
-additional_rotation = Vector3( 0, 0, 0 )
-position_using_additional_bone = false
-additional_bone_name = ""
-additional_bone_length = 1.0
-debug_messages = false
 
-[node name="IK_LookAt_RightArm" type="Spatial" parent="Camera/targets"]
+[node name="IK_LookAt_RightArm" type="Spatial" parent="Camera/Targets"]
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
 skeleton_path = NodePath("../../../BattleBot/Armature/Skeleton")
 bone_name = "Right_UpperArm"
-update_mode = 0
-look_at_axis = 1
-use_our_rotation_x = false
-use_our_rotation_y = false
-use_our_rotation_z = false
-use_negative_our_rot = false
 additional_rotation = Vector3( 0, 0, 180 )
-position_using_additional_bone = false
-additional_bone_name = ""
-additional_bone_length = 1.0
-debug_messages = false
 
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
@@ -156,7 +125,7 @@ Move mouse to move IK targets"
 align = 1
 valign = 1
 
-[node name="Button_Next" type="Button" parent="Control"]
+[node name="ButtonNext" type="Button" parent="Control"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0

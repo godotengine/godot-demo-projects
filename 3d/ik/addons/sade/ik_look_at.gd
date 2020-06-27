@@ -32,10 +32,10 @@ func _ready():
 	elif update_mode == 2:
 		set_notify_transform(true)
 	else:
-		if debug_messages == true:
-			print (name, " - IK_LookAt: Unknown update mode. NOT updating skeleton")
+		if debug_messages:
+			print(name, " - IK_LookAt: Unknown update mode. NOT updating skeleton")
 	
-	if Engine.editor_hint == true:
+	if Engine.editor_hint:
 		_setup_for_editor()
 
 
@@ -55,7 +55,7 @@ func _notification(what):
 func update_skeleton():
 	# NOTE: Because get_node doesn't work in _ready, we need to skip
 	# a call before doing anything.
-	if first_call == true:
+	if first_call:
 		first_call = false
 		if skeleton_to_use == null:
 			_set_skeleton_path(skeleton_path)
@@ -70,10 +70,10 @@ func update_skeleton():
 	# Get the bone index.
 	var bone: int = skeleton_to_use.find_bone(bone_name)
 	
-	# If no bone is found (-1), then return and optionally print an error.
+	# If no bone is found (-1), then return and optionally printan error.
 	if bone == -1:
-		if debug_messages == true:
-			print (name, " - IK_LookAt: No bone in skeleton found with name [", bone_name, "]!")
+		if debug_messages:
+			print(name, " - IK_LookAt: No bone in skeleton found with name [", bone_name, "]!")
 		return
 	
 	# get the bone's global transform pose.
@@ -91,23 +91,23 @@ func update_skeleton():
 		rest = rest.looking_at(target_pos, Vector3.FORWARD)
 	else:
 		rest = rest.looking_at(target_pos, Vector3.UP)
-		if debug_messages == true:
-			print (name, " - IK_LookAt: Unknown look_at_axis value!")
+		if debug_messages:
+			print(name, " - IK_LookAt: Unknown look_at_axis value!")
 	
 	# Get the rotation euler of the bone and of this node.
 	var rest_euler = rest.basis.get_euler()
 	var self_euler = global_transform.basis.orthonormalized().get_euler()
 	
 	# Flip the rotation euler if using negative rotation.
-	if use_negative_our_rot == true:
+	if use_negative_our_rot:
 		self_euler = -self_euler
 	
 	# Apply this node's rotation euler on each axis, if wanted/required.
-	if use_our_rotation_x == true:
+	if use_our_rotation_x:
 		rest_euler.x = self_euler.x
-	if use_our_rotation_y == true:
+	if use_our_rotation_y:
 		rest_euler.y = self_euler.y
-	if use_our_rotation_z == true:
+	if use_our_rotation_z:
 		rest_euler.z = self_euler.z
 	
 	# Make a new basis with the, potentially, changed euler angles.
@@ -167,25 +167,25 @@ func _set_update(new_value):
 	# Based on the value of passed to update, enable the correct process.
 	if update_mode == 0:
 		set_process(true)
-		if debug_messages == true:
-			print (name, " - IK_LookAt: updating skeleton using _process...")
+		if debug_messages:
+			print(name, " - IK_LookAt: updating skeleton using _process...")
 	elif update_mode == 1:
 		set_physics_process(true)
-		if debug_messages == true:
-			print (name, " - IK_LookAt: updating skeleton using _physics_process...")
+		if debug_messages:
+			print(name, " - IK_LookAt: updating skeleton using _physics_process...")
 	elif update_mode == 2:
 		set_notify_transform(true)
-		if debug_messages == true:
-			print (name, " - IK_LookAt: updating skeleton using _notification...")
+		if debug_messages:
+			print(name, " - IK_LookAt: updating skeleton using _notification...")
 	else:
-		if debug_messages == true:
-			print (name, " - IK_LookAt: NOT updating skeleton due to unknown update method...")
+		if debug_messages:
+			print(name, " - IK_LookAt: NOT updating skeleton due to unknown update method...")
 
 
 func _set_skeleton_path(new_value):
 	# Because get_node doesn't work in the first call, we just want to assign instead.
 	# This is to get around a issue with NodePaths exposed to the editor.
-	if first_call == true:
+	if first_call:
 		skeleton_path = new_value
 		return
 	
@@ -193,8 +193,8 @@ func _set_skeleton_path(new_value):
 	skeleton_path = new_value
 	
 	if skeleton_path == null:
-		if debug_messages == true:
-			print (name, " - IK_LookAt: No Nodepath selected for skeleton_path!")
+		if debug_messages:
+			print(name, " - IK_LookAt: No Nodepath selected for skeleton_path!")
 		return
 	
 	# Get the node at that location, if there is one.
@@ -202,12 +202,12 @@ func _set_skeleton_path(new_value):
 	if temp != null:
 		if temp is Skeleton:
 			skeleton_to_use = temp
-			if debug_messages == true:
-				print (name, " - IK_LookAt: attached to (new) skeleton")
+			if debug_messages:
+				print(name, " - IK_LookAt: attached to (new) skeleton")
 		else:
 			skeleton_to_use = null
-			if debug_messages == true:
-				print (name, " - IK_LookAt: skeleton_path does not point to a skeleton!")
+			if debug_messages:
+				print(name, " - IK_LookAt: skeleton_path does not point to a skeleton!")
 	else:
-		if debug_messages == true:
-			print (name, " - IK_LookAt: No Nodepath selected for skeleton_path!")
+		if debug_messages:
+			print(name, " - IK_LookAt: No Nodepath selected for skeleton_path!")

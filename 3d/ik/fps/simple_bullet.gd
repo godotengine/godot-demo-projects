@@ -13,4 +13,4 @@ func _physics_process(delta):
 	timer += delta
 	if timer > DESPAWN_TIME:
 		queue_free()
-		timer = 0 # Make sure we are destroyed before we call this again!
+		timer = 0
