@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://addons/sade/editor_gizmo_texture.png" type="Texture" id=1]
 [ext_resource path="res://button_change_scene.gd" type="Script" id=2]
@@ -42,40 +42,17 @@ albedo_color = Color( 0, 0.882813, 1, 1 )
 albedo_texture = ExtResource( 1 )
 uv1_triplanar = true
 
-[sub_resource type="ProceduralSky" id=8]
-sky_top_color = Color( 0.0470588, 0.454902, 0.976471, 1 )
-sky_horizon_color = Color( 0.556863, 0.823529, 0.909804, 1 )
-sky_curve = 0.25
-ground_bottom_color = Color( 0.101961, 0.145098, 0.188235, 1 )
-ground_horizon_color = Color( 0.482353, 0.788235, 0.952941, 1 )
-ground_curve = 0.01
-
-[sub_resource type="Environment" id=9]
-background_mode = 2
-background_sky = SubResource( 8 )
-ambient_light_color = Color( 1, 0.909804, 0.784314, 1 )
-ambient_light_energy = 1.4
-ambient_light_sky_contribution = 0.72
-tonemap_mode = 3
-glow_enabled = true
-glow_levels/1 = true
-glow_levels/2 = true
-glow_levels/5 = false
-glow_intensity = 0.2
-glow_bloom = 0.03
-glow_blend_mode = 0
-
-[sub_resource type="CapsuleShape" id=10]
+[sub_resource type="CapsuleShape" id=8]
 radius = 4.0
 height = 6.0
 
-[sub_resource type="Curve3D" id=11]
+[sub_resource type="Curve3D" id=9]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -2.43129, -0.955339, 0, 0, 0, 0, 0, 0, 0, -0.670561, 0.183959, 0, 0, 0, 0, 0, 0, 0, 0.64629, 0.228347, 0, 0, 0, 0, 0, 0, 0, 2.31825, -0.925747, 0 ),
 "tilts": PoolRealArray( 0, 0, 0, 0 )
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=10]
 tracks/0/type = "value"
 tracks/0/path = NodePath("LeanPath/PathFollow/IK_LookAt_Chest/AimPos:translation")
 tracks/0/interp = 1
@@ -113,7 +90,7 @@ tracks/2/keys = {
 "values": [ 80.0, 60.0 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=11]
 tracks/0/type = "value"
 tracks/0/path = NodePath("LeanPath/PathFollow/IK_LookAt_Chest/Camera:fov")
 tracks/0/interp = 1
@@ -151,7 +128,7 @@ tracks/2/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, -2, 0 ) ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=12]
 tracks/0/type = "value"
 tracks/0/path = NodePath("LeanPath/PathFollow/IK_LookAt_Chest/AimPos:translation")
 tracks/0/interp = 1
@@ -401,9 +378,6 @@ transform = Transform( 0.388878, -0.754027, 0.529355, 0, 0.574581, 0.818448, -0.
 light_color = Color( 1, 0.925598, 0.820313, 1 )
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 9 )
-
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -478,13 +452,13 @@ script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 7, 0 )
-shape = SubResource( 10 )
+shape = SubResource( 8 )
 
 [node name="CameraHolder" type="Spatial" parent="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 0 )
 
 [node name="LeanPath" type="Path" parent="KinematicBody/CameraHolder"]
-curve = SubResource( 11 )
+curve = SubResource( 9 )
 
 [node name="PathFollow" type="PathFollow" parent="KinematicBody/CameraHolder/LeanPath"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0412404, 0.205172, 0 )
@@ -598,9 +572,9 @@ bone_name = "Head"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="KinematicBody/CameraHolder"]
 autoplay = "Start"
 playback_speed = 4.0
-anims/Aiming = SubResource( 12 )
-anims/Idle = SubResource( 13 )
-anims/Start = SubResource( 14 )
+anims/Aiming = SubResource( 10 )
+anims/Idle = SubResource( 11 )
+anims/Start = SubResource( 12 )
 
 [node name="Weapon" type="Spatial" parent="KinematicBody/CameraHolder"]
 
