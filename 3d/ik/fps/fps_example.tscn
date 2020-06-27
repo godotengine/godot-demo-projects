@@ -10,9 +10,9 @@
 [ext_resource path="res://fps/weapon_pistol.dae" type="PackedScene" id=8]
 [ext_resource path="res://fps/gun_color.tres" type="Material" id=9]
 [ext_resource path="res://fps/gun_emission.tres" type="Material" id=10]
-[ext_resource path="res://godot_battle_bot.dae" type="PackedScene" id=11]
-[ext_resource path="res://battle_bot_color.tres" type="Material" id=12]
-[ext_resource path="res://battle_bot_emission.tres" type="Material" id=13]
+[ext_resource path="res://model/godot_battle_bot.dae" type="PackedScene" id=11]
+[ext_resource path="res://model/battle_bot_color.tres" type="Material" id=12]
+[ext_resource path="res://model/battle_bot_emission.tres" type="Material" id=13]
 
 [sub_resource type="PlaneMesh" id=1]
 size = Vector2( 40, 40 )
@@ -472,7 +472,7 @@ script = ExtResource( 4 )
 __meta__ = {
 "_editor_icon": ExtResource( 5 )
 }
-skeleton_path = NodePath("../../../../BattleBot/Armature/Skeleton")
+skeleton_path = NodePath("../../../../GodotBattleBot/Armature/Skeleton")
 bone_name = "Chest"
 look_at_axis = 2
 additional_rotation = Vector3( -10, 0, 0 )
@@ -489,7 +489,7 @@ script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-skeleton_path = NodePath("../../../../../../BattleBot/Armature/Skeleton")
+skeleton_path = NodePath("../../../../../../GodotBattleBot/Armature/Skeleton")
 bones_in_chain = PoolStringArray( "Left_UpperArm", "Left_LowerArm", "Left_Hand" )
 bones_in_chain_lengths = PoolRealArray( 1.97, 3, 0.1 )
 limit_chain_iterations = false
@@ -504,7 +504,7 @@ script = ExtResource( 4 )
 __meta__ = {
 "_editor_icon": ExtResource( 5 )
 }
-skeleton_path = NodePath("../../../../../../../../BattleBot/Armature/Skeleton")
+skeleton_path = NodePath("../../../../../../../../GodotBattleBot/Armature/Skeleton")
 bone_name = "Left_Hand"
 use_negative_our_rot = true
 additional_rotation = Vector3( 0, 0, 90 )
@@ -526,7 +526,7 @@ script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-skeleton_path = NodePath("../../../../../../BattleBot/Armature/Skeleton")
+skeleton_path = NodePath("../../../../../../GodotBattleBot/Armature/Skeleton")
 bones_in_chain = PoolStringArray( "Right_UpperArm", "Right_LowerArm", "Right_Hand" )
 bones_in_chain_lengths = PoolRealArray( 1.97, 3, 0.1 )
 limit_chain_iterations = false
@@ -541,7 +541,7 @@ script = ExtResource( 4 )
 __meta__ = {
 "_editor_icon": ExtResource( 5 )
 }
-skeleton_path = NodePath("../../../../../../../../BattleBot/Armature/Skeleton")
+skeleton_path = NodePath("../../../../../../../../GodotBattleBot/Armature/Skeleton")
 bone_name = "Right_Hand"
 use_negative_our_rot = true
 additional_rotation = Vector3( 0, 0, 90 )
@@ -566,7 +566,7 @@ script = ExtResource( 4 )
 __meta__ = {
 "_editor_icon": ExtResource( 5 )
 }
-skeleton_path = NodePath("../../../../BattleBot/Armature/Skeleton")
+skeleton_path = NodePath("../../../../GodotBattleBot/Armature/Skeleton")
 bone_name = "Head"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="KinematicBody/CameraHolder"]
@@ -589,12 +589,12 @@ material/1 = ExtResource( 10 )
 [node name="PistolEnd" type="Spatial" parent="KinematicBody/CameraHolder/Weapon/Pistol"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0161836, 0.315914, 1.41329 )
 
-[node name="BattleBot" parent="KinematicBody" instance=ExtResource( 11 )]
+[node name="GodotBattleBot" parent="KinematicBody" instance=ExtResource( 11 )]
 
-[node name="godot_battle_bot" parent="KinematicBody/BattleBot/Armature/Skeleton" index="0"]
+[node name="godot_battle_bot" parent="KinematicBody/GodotBattleBot/Armature/Skeleton" index="0"]
 material/0 = ExtResource( 12 )
 material/1 = ExtResource( 13 )
 
 [editable path="KinematicBody/CameraHolder/Weapon/Pistol"]
 
-[editable path="KinematicBody/BattleBot"]
+[editable path="KinematicBody/GodotBattleBot"]
