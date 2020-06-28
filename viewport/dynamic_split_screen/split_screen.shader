@@ -31,8 +31,7 @@ void fragment() {
 		
 		if (dx.y != 0.0) {
 			split_slope = dx.x / dx.y;
-		}
-		else {
+		} else {
 			split_slope = 100000.0; // High value (vertical split) if dx.y = 0
 		}
 		
@@ -44,8 +43,7 @@ void fragment() {
 		// Draw split border if close enough
 		if (distance_to_split_line < split_line_thickness) {
 			COLOR = split_line_color;
-		}
-		else {
+		} else {
 			float split_current_y = (split_origin.x - UV.x) * split_slope + split_origin.y;
 			float split_player1_position_y = (split_origin.x - player1_position.x) * split_slope + split_origin.y;
 
@@ -53,22 +51,18 @@ void fragment() {
 			if (UV.y > split_current_y) {
 				if (player1_position.y > split_player1_position_y) {
 					COLOR = vec4(view1, 1.0);
-				}
-				else {
+				} else {
 					COLOR = vec4(view2, 1.0);
 				}
-			}
-			else {
+			} else {
 				if (player1_position.y < split_player1_position_y) {
 					COLOR = vec4(view1, 1.0);
-				}
-				else {
+				} else {
 					COLOR = vec4(view2, 1.0);
 				}
 			}
 		}
-	}
-	else {
+	} else {
 		COLOR = vec4(view1, 1.0);
 	}
 }

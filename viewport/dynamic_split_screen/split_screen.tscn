@@ -1,11 +1,10 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://default_env.tres" type="Environment" id=1]
-[ext_resource path="res://CameraController.gd" type="Script" id=2]
-[ext_resource path="res://SplitScreen.shader" type="Shader" id=3]
+[ext_resource path="res://camera_controller.gd" type="Script" id=2]
+[ext_resource path="res://split_screen.shader" type="Shader" id=3]
 [ext_resource path="res://icon.png" type="Texture" id=4]
-[ext_resource path="res://PlayerMovement.gd" type="Script" id=5]
-[ext_resource path="res://Walls.gd" type="Script" id=6]
+[ext_resource path="res://player.gd" type="Script" id=5]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -180,12 +179,16 @@ script = ExtResource( 2 )
 
 [node name="View" type="TextureRect" parent="Cameras"]
 material = SubResource( 1 )
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 texture = ExtResource( 4 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Viewport1" type="Viewport" parent="Cameras"]
+size = Vector2( 100, 100 )
 render_target_v_flip = true
 render_target_update_mode = 3
 
@@ -194,6 +197,7 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 20, 
 current = true
 
 [node name="Viewport2" type="Viewport" parent="Cameras"]
+size = Vector2( 100, 100 )
 render_target_v_flip = true
 render_target_update_mode = 3
 
@@ -240,7 +244,6 @@ transform = Transform( 200, 0, 0, 0, 1, 0, 0, 0, 200, 0, -1, 0 )
 shape = SubResource( 8 )
 
 [node name="Walls" type="Spatial" parent="."]
-script = ExtResource( 6 )
 
 [node name="Group1" type="Spatial" parent="Walls"]
 
