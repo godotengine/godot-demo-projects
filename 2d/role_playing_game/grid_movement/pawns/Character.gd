@@ -1,7 +1,7 @@
-extends 'Pawn.gd'
+extends "Pawn.gd"
 
 #warning-ignore:unused_class_variable
-export (PackedScene) var combat_actor
+export(PackedScene) var combat_actor
 #warning-ignore:unused_class_variable
 var lost = false
 

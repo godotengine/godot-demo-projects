@@ -22,6 +22,7 @@ func initialize(speed, velocity):
 	max_horizontal_speed = speed if speed > 0.0 else base_max_horizontal_speed
 	enter_velocity = velocity
 
+	
 func enter():
 	var input_direction = get_input_direction()
 	update_look_direction(input_direction)
@@ -31,6 +32,7 @@ func enter():
 
 	owner.get_node("AnimationPlayer").play("idle")
 
+
 func update(delta):
 	var input_direction = get_input_direction()
 	update_look_direction(input_direction)
@@ -39,6 +41,7 @@ func update(delta):
 	animate_jump_height(delta)
 	if height <= 0.0:
 		emit_signal("finished", "previous")
+
 
 func move_horizontally(delta, direction):
 	if direction:
@@ -52,6 +55,7 @@ func move_horizontally(delta, direction):
 	horizontal_velocity += steering_velocity
 
 	owner.move_and_slide(horizontal_velocity)
+
 
 func animate_jump_height(delta):
 	vertical_speed -= gravity * delta

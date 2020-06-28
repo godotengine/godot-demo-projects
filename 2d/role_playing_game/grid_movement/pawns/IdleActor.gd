@@ -1,4 +1,4 @@
-extends 'Actor.gd'
+extends "Actor.gd"
 
 func _ready():
 	set_process(false)

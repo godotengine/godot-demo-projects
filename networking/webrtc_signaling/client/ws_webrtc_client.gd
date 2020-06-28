@@ -52,13 +52,13 @@ func _connected(protocol = ""):
 
 
 func _parse_msg():
-	var pkt_str : String = client.get_peer(1).get_packet().get_string_from_utf8()
+	var pkt_str: String = client.get_peer(1).get_packet().get_string_from_utf8()
 
-	var req : PoolStringArray = pkt_str.split('\n', true, 1)
+	var req: PoolStringArray = pkt_str.split("\n", true, 1)
 	if req.size() != 2: # Invalid request size
 		return
 
-	var type : String = req[0]
+	var type: String = req[0]
 	if type.length() < 3: # Invalid type size
 		return
 
@@ -69,11 +69,11 @@ func _parse_msg():
 		emit_signal("lobby_sealed")
 		return
 
-	var src_str : String = type.substr(3, type.length() - 3)
+	var src_str: String = type.substr(3, type.length() - 3)
 	if not src_str.is_valid_integer(): # Source id is not an integer
 		return
 
-	var src_id : int = int(src_str)
+	var src_id: int = int(src_str)
 
 	if type.begins_with("I: "):
 		emit_signal("connected", src_id)
@@ -91,7 +91,7 @@ func _parse_msg():
 		emit_signal("answer_received", src_id, req[1])
 	elif type.begins_with("C: "):
 		# Candidate received
-		var candidate : PoolStringArray = req[1].split('\n', false)
+		var candidate: PoolStringArray = req[1].split("\n", false)
 		if candidate.size() != 3:
 			return
 		if not candidate[1].is_valid_integer():
@@ -124,6 +124,6 @@ func _send_msg(type, id, data) -> int:
 
 
 func _process(delta):
-	var status : int = client.get_connection_status()
+	var status: int = client.get_connection_status()
 	if status == WebSocketClient.CONNECTION_CONNECTING or status == WebSocketClient.CONNECTION_CONNECTED:
 		client.poll()

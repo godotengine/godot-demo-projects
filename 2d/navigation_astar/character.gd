@@ -2,6 +2,9 @@ extends Node2D
 
 enum States { IDLE, FOLLOW }
 
+const MASS = 10.0
+const ARRIVE_DISTANCE = 10.0
+
 export(float) var speed = 200.0
 var _state = null
 
@@ -38,9 +41,6 @@ func _unhandled_input(event):
 
 
 func _move_to(world_position):
-	var MASS = 10.0
-	var ARRIVE_DISTANCE = 10.0
-
 	var desired_velocity = (world_position - position).normalized() * speed
 	var steering = desired_velocity - _velocity
 	_velocity += steering / MASS
@@ -55,7 +55,7 @@ func _change_state(new_state):
 		if not _path or len(_path) == 1:
 			_change_state(States.IDLE)
 			return
-		# The index 0 is the starting cell
-		# we don't want the character to move back to it in this example
+		# The index 0 is the starting cell.
+		# We don't want the character to move back to it in this example.
 		_target_point_world = _path[1]
 	_state = new_state

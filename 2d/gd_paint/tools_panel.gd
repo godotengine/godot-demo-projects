@@ -1,20 +1,16 @@
 extends Panel
 
-var paint_control
-
 onready var brush_settings = $BrushSettings
-onready var label_tools = $LabelTools
-onready var label_brush_size = $BrushSettings/LabelBrushSize
-onready var label_brush_shape = $BrushSettings/LabelBrushShape
+onready var label_brush_size = brush_settings.get_node(@"LabelBrushSize")
+onready var label_brush_shape = brush_settings.get_node(@"LabelBrushShape")
 onready var label_stats = $LabelStats
+onready var label_tools = $LabelTools
 
-var save_dialog
+onready var _parent = get_parent()
+onready var save_dialog = _parent.get_node(@"SaveFileDialog")
+onready var paint_control = _parent.get_node(@"PaintControl")
 
 func _ready():
-	# Get PaintControl and SaveFileDialog.
-	paint_control = get_parent().get_node("PaintControl")
-	save_dialog = get_parent().get_node("SaveFileDialog")
-
 	# warning-ignore-all:return_value_discarded
 	# Assign all of the needed signals for the oppersation buttons.
 	$ButtonUndo.connect("pressed", self, "button_pressed", ["undo_stroke"])
@@ -34,7 +30,7 @@ func _ready():
 	$ColorPickerBackground.connect("color_changed", self, "background_color_changed")
 	$BrushSettings/HScrollBarBrushSize.connect("value_changed", self, "brush_size_changed")
 
-	# Assign the 'file_selected' signal in SaveFileDialog.
+	# Assign the "file_selected" signal in SaveFileDialog.
 	save_dialog.connect("file_selected", self, "save_file_selected")
 
 	# Set physics process so we can update the status label.

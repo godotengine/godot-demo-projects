@@ -232,11 +232,9 @@ func _draw():
 				draw_circle(brush.brush_pos, brush.brush_shape_circle_radius, brush.brush_color)
 
 
-
 func save_picture(path):
-	# Wait a couple frames so the save dialog isn't in the way.
-	yield (get_tree(), "idle_frame")
-	yield (get_tree(), "idle_frame")
+	# Wait until the frame has finished before getting the texture.
+	yield(VisualServer, "frame_post_draw")
 	
 	# Get the viewport image.
 	var img = get_viewport().get_texture().get_data()

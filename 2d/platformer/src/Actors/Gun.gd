@@ -11,6 +11,7 @@ onready var sound_shoot = $Shoot
 onready var timer = $Cooldown
 
 
+# This method is only called by Player.gd.
 func shoot(direction = 1):
 	if not timer.is_stopped():
 		return false

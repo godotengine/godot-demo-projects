@@ -7,10 +7,10 @@ const FLOOR_DETECT_DISTANCE = 20.0
 export(String) var action_suffix = ""
 
 onready var platform_detector = $PlatformDetector
-onready var sprite = $Sprite
 onready var animation_player = $AnimationPlayer
 onready var shoot_timer = $ShootAnimation
-onready var gun = $Sprite/Gun
+onready var sprite = $Sprite
+onready var gun = sprite.get_node(@"Gun")
 
 
 func _ready():

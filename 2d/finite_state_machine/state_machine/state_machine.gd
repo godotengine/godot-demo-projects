@@ -21,7 +21,9 @@ func _ready():
 	if not start_state:
 		start_state = get_child(0).get_path()
 	for child in get_children():
-		child.connect("finished", self, "_change_state")
+		var err = child.connect("finished", self, "_change_state")
+		if err:
+			printerr(err)
 	initialize(start_state)
 
 

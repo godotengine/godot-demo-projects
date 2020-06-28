@@ -111,8 +111,8 @@ func reset_tween():
 		tween.interpolate_property(sprite, "rotation_degrees", 360, 0, 2, state.trans, state.eases, 2)
 
 	if $Modes/Callback.is_pressed():
-		tween.interpolate_callback(self, 0.5, "on_callback", "0.5 second's after")
-		tween.interpolate_callback(self, 0.2, "on_callback", "1.2 second's after")
+		tween.interpolate_callback(self, 0.5, "on_callback", "0.5 seconds after")
+		tween.interpolate_callback(self, 0.2, "on_callback", "1.2 seconds after")
 
 	if $Modes/Follow.is_pressed():
 		follow.show()

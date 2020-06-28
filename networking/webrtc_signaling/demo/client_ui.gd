@@ -43,11 +43,11 @@ func _mp_server_disconnect():
 	_log("Multiplayer is disconnected (I am %d)" % client.rtc_mp.get_unique_id())
 
 
-func _mp_peer_connected(id : int):
+func _mp_peer_connected(id: int):
 	_log("Multiplayer peer %d connected" % id)
 
 
-func _mp_peer_disconnected(id : int):
+func _mp_peer_disconnected(id: int):
 	_log("Multiplayer peer %d disconnected" % id)
 
 

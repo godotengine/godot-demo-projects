@@ -22,18 +22,18 @@ class Peer extends Reference:
 
 
 class Lobby extends Reference:
-	var peers : Array = []
-	var host : int = -1
-	var sealed : bool = false
+	var peers: Array = []
+	var host: int = -1
+	var sealed: bool = false
 	var time = 0
 
-	func _init(host_id : int):
+	func _init(host_id: int):
 		host = host_id
 
 	func join(peer_id, server) -> bool:
 		if sealed: return false
 		if not server.has_peer(peer_id): return false
-		var new_peer : WebSocketPeer = server.get_peer(peer_id)
+		var new_peer: WebSocketPeer = server.get_peer(peer_id)
 		new_peer.put_packet(("I: %d\n" % (1 if peer_id == host else peer_id)).to_utf8())
 		for p in peers:
 			if not server.has_peer(p):
@@ -156,7 +156,7 @@ func _on_data(id):
 func _parse_msg(id) -> bool:
 	var pkt_str: String = server.get_peer(id).get_packet().get_string_from_utf8()
 
-	var req = pkt_str.split('\n', true, 1)
+	var req = pkt_str.split("\n", true, 1)
 	if req.size() != 2: # Invalid request size
 		return false
 
@@ -181,11 +181,11 @@ func _parse_msg(id) -> bool:
 		# Client is sealing the room
 		return lobby.seal(id, server)
 
-	var dest_str : String = type.substr(3, type.length() - 3)
+	var dest_str: String = type.substr(3, type.length() - 3)
 	if not dest_str.is_valid_integer(): # Destination id is not an integer
 		return false
 
-	var dest_id : int = int(dest_str)
+	var dest_id: int = int(dest_str)
 	if dest_id == NetworkedMultiplayerPeer.TARGET_PEER_SERVER:
 		dest_id = lobby.host
 

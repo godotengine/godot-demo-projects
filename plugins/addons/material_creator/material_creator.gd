@@ -31,7 +31,7 @@ func apply_pressed():
 		printerr("Material Creator: Can't apply the material, because there are no nodes selected!")
 	
 	var material = _silly_resource_from_values().make_material()
-	# Go through the selected nodes and see if they have the 'set_surface_material'
+	# Go through the selected nodes and see if they have the "set_surface_material"
 	# function (which only MeshInstance has by default). If they do, then set the material
 	# to the silly material.
 	for node in selected_nodes:

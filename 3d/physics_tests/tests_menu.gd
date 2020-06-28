@@ -1,7 +1,7 @@
 extends OptionMenu
 
 
-class TestData :
+class TestData:
 	var id
 	var scene_path
 

@@ -98,9 +98,9 @@ func _process(delta):
 	var gyro = Input.get_gyroscope()
 	
 	# Show our base values
-	get_node("Control/Accelerometer").text = 'Accelerometer: ' + str(acc) + ', gravity: ' + str(grav)
-	get_node("Control/Magnetometer").text = 'Magnetometer: ' + str(mag)
-	get_node("Control/Gyroscope").text = 'Gyroscope: ' + str(gyro)
+	get_node("Control/Accelerometer").text = "Accelerometer: " + str(acc) + ", gravity: " + str(grav)
+	get_node("Control/Magnetometer").text = "Magnetometer: " + str(mag)
+	get_node("Control/Gyroscope").text = "Gyroscope: " + str(gyro)
 	
 	# Check if we have all needed data
 	if grav.length() < 0.1:
@@ -136,5 +136,3 @@ func _process(delta):
 	var gyro_and_grav = get_node("Boxes/GyroAndGrav")
 	var new_basis = rotate_by_gyro(gyro, gyro_and_grav.transform.basis, delta).orthonormalized()
 	gyro_and_grav.transform.basis = drift_correction(new_basis, grav)
-	
-	

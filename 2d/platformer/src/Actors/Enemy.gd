@@ -36,7 +36,14 @@ func _ready():
 # - If you split the character into a state machine or more advanced pattern,
 #   you can easily move individual functions.
 func _physics_process(_delta):
-	_velocity = calculate_move_velocity(_velocity)
+	# If the enemy encounters a wall or an edge, the horizontal velocity is flipped.
+	if not floor_detector_left.is_colliding():
+		_velocity.x = speed.x
+	elif not floor_detector_right.is_colliding():
+		_velocity.x = -speed.x
+
+	if is_on_wall():
+		_velocity.x *= -1
 
 	# We only update the y value of _velocity as we want to handle the horizontal movement ourselves.
 	_velocity.y = move_and_slide(_velocity, FLOOR_NORMAL).y
@@ -47,22 +54,6 @@ func _physics_process(_delta):
 	var animation = get_new_animation()
 	if animation != animation_player.current_animation:
 		animation_player.play(animation)
-
-
-# This function calculates a new velocity whenever you need it.
-# If the enemy encounters a wall or an edge, the horizontal velocity is flipped.
-func calculate_move_velocity(linear_velocity):
-	var velocity = linear_velocity
-
-	if not floor_detector_left.is_colliding():
-		velocity.x = speed.x
-	elif not floor_detector_right.is_colliding():
-		velocity.x = -speed.x
-
-	if is_on_wall():
-		velocity.x *= -1
-
-	return velocity
 
 
 func destroy():

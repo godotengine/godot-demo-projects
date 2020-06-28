@@ -30,7 +30,7 @@ func stop():
 
 
 func _create_peer(id):
-	var peer : WebRTCPeerConnection = WebRTCPeerConnection.new()
+	var peer: WebRTCPeerConnection = WebRTCPeerConnection.new()
 	peer.initialize({
 		"iceServers": [ { "urls": ["stun:stun.l.google.com:19302"] } ]
 	})
