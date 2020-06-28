@@ -48,41 +48,41 @@ var debug_messages = false
 
 func _ready():
 	if target == null:
-		# NOTE: you HAVE to have a node called target as a child of this node!
-		# so we create one if one doesn't already exist
-		if has_node("target") == false:
+		# NOTE: You MUST have a node called Target as a child of this node!
+		# So we create one if one doesn't already exist.
+		if not has_node("Target"):
 			target = Spatial.new()
 			add_child(target)
 			
-			if Engine.editor_hint == true:
+			if Engine.editor_hint:
 				if get_tree() != null:
 					if get_tree().edited_scene_root != null:
 						target.set_owner(get_tree().edited_scene_root)
 			
-			target.name = "target"
+			target.name = "Target"
 		else:
-			target = get_node("target")
+			target = $Target
 		
 		# If we are in the editor, we want to make a sphere at this node
-		if Engine.editor_hint == true:
-			_make_editor_sphere_at_node(target, Color(1, 0, 1, 1))
+		if Engine.editor_hint:
+			_make_editor_sphere_at_node(target, Color.magenta)
 	
 	if middle_joint_target == null:
-		if has_node("middle_joint_target") == false:
+		if not has_node("MiddleJoint"):
 			middle_joint_target = Spatial.new()
 			add_child(middle_joint_target)
 			
-			if Engine.editor_hint == true:
+			if Engine.editor_hint:
 				if get_tree() != null:
 					if get_tree().edited_scene_root != null:
 						middle_joint_target.set_owner(get_tree().edited_scene_root)
 			
-			middle_joint_target.name = "middle_joint_target"
+			middle_joint_target.name = "MiddleJoint"
 		else:
-			middle_joint_target = get_node("middle_joint_target")
+			middle_joint_target = get_node("MiddleJoint")
 	
 		# If we are in the editor, we want to make a sphere at this node
-		if Engine.editor_hint == true:
+		if Engine.editor_hint:
 			_make_editor_sphere_at_node(middle_joint_target, Color(1, 0.24, 1, 1))
 	
 	# Make all of the bone nodes for each bone in the IK chain
@@ -94,20 +94,20 @@ func _ready():
 
 # Various upate methods
 func _process(_delta):
-	if reset_iterations_on_update == true:
+	if reset_iterations_on_update:
 		chain_iterations = 0
 	update_skeleton()
 
 
 func _physics_process(_delta):
-	if reset_iterations_on_update == true:
+	if reset_iterations_on_update:
 		chain_iterations = 0
 	update_skeleton()
 
 
 func _notification(what):
 	if what == NOTIFICATION_TRANSFORM_CHANGED:
-		if reset_iterations_on_update == true:
+		if reset_iterations_on_update:
 			chain_iterations = 0
 		update_skeleton()
 
@@ -116,7 +116,7 @@ func _notification(what):
 
 func update_skeleton():
 	#### ERROR CHECKING conditions
-	if first_call == true:
+	if first_call:
 		_set_skeleton_path(skeleton_path)
 		first_call = false
 		
@@ -126,16 +126,16 @@ func update_skeleton():
 		return
 	
 	if bones_in_chain == null:
-		if debug_messages == true:
+		if debug_messages:
 			printerr(name, " - IK_FABRIK: No Bones in IK chain defined!")
 		return
 	if bones_in_chain_lengths == null:
-		if debug_messages == true:
+		if debug_messages:
 			printerr(name, " - IK_FABRIK: No Bone lengths in IK chain defined!")
 		return
 	
 	if bones_in_chain.size() != bones_in_chain_lengths.size():
-		if debug_messages == true:
+		if debug_messages:
 			printerr(name, " - IK_FABRIK: bones_in_chain and bones_in_chain_lengths!")
 		return
 	
@@ -168,7 +168,7 @@ func update_skeleton():
 func solve_chain():
 	# If we have reached our max chain iteration, and we are limiting ourselves, then return.
 	# Otherwise set chain_iterations to zero (so we constantly update)
-	if chain_iterations >= CHAIN_MAX_ITER and limit_chain_iterations == true:
+	if chain_iterations >= CHAIN_MAX_ITER and limit_chain_iterations:
 		return
 	else:
 		chain_iterations = 0
@@ -188,7 +188,7 @@ func solve_chain():
 	var target_pos = target.global_transform.origin + (dir * bones_in_chain_lengths[bone_nodes.size()-1])
 	
 	# If we are using middle joint target (and have more than 2 bones), move our middle joint towards it!
-	if use_middle_joint_target == true:
+	if use_middle_joint_target:
 		if bone_nodes.size() > 2:
 			var middle_point_pos = middle_joint_target.global_transform.origin
 			var middle_point_pos_diff = (middle_point_pos - bone_nodes[bone_nodes.size()/2].global_transform.origin)
@@ -336,7 +336,7 @@ func get_bone_transform(bone, convert_to_world_space = true):
 	
 	# If we need to convert the bone position from bone/skeleton space to world space, we
 	# use the Xform of the skeleton (because bone/skeleton space is relative to the position of the skeleton node).
-	if convert_to_world_space == true:
+	if convert_to_world_space:
 		ret.origin = skeleton.global_transform.xform(ret.origin)
 	
 	return ret
@@ -390,43 +390,43 @@ func _set_update_mode(new_value):
 	elif update_mode == 2:
 		set_notify_transform(true)
 	else:
-		if debug_messages == true:
+		if debug_messages:
 			printerr(name, " - IK_FABRIK: Unknown update mode. NOT updating skeleton")
 		return
 
 
 func _set_skeleton_path(new_value):
 	# Because get_node doesn't work in the first call, we just want to assign instead
-	if first_call == true:
+	if first_call:
 		skeleton_path = new_value
 		return
 	
 	skeleton_path = new_value
 	
 	if skeleton_path == null:
-		if debug_messages == true:
+		if debug_messages:
 			printerr(name, " - IK_FABRIK: No Nodepath selected for skeleton_path!")
 		return
 	
 	var temp = get_node(skeleton_path)
 	if temp != null:
 		# If it has the method "get_bone_global_pose" it is likely a Skeleton
-		if temp.has_method("get_bone_global_pose") == true:
+		if temp.has_method("get_bone_global_pose"):
 			skeleton = temp
 			bone_IDs = {}
 			
 			# (Delete all of the old bone nodes and) Make all of the bone nodes for each bone in the IK chain
 			_make_bone_nodes()
 			
-			if debug_messages == true:
+			if debug_messages:
 				printerr(name, " - IK_FABRIK: Attached to a new skeleton")
 		# If not, then it's (likely) not a Skeleton node
 		else:
 			skeleton = null
-			if debug_messages == true:
+			if debug_messages:
 				printerr(name, " - IK_FABRIK: skeleton_path does not point to a skeleton!")
 	else:
-		if debug_messages == true:
+		if debug_messages:
 			printerr(name, " - IK_FABRIK: No Nodepath selected for skeleton_path!")
 
 
@@ -439,12 +439,12 @@ func _make_bone_nodes():
 	for bone in range(0, bones_in_chain.size()):
 		
 		var bone_name = bones_in_chain[bone]
-		if has_node(bone_name) == false:
+		if not has_node(bone_name):
 			var new_node = Spatial.new()
 			bone_nodes[bone] = new_node
 			add_child(bone_nodes[bone])
 			
-			if Engine.editor_hint == true:
+			if Engine.editor_hint:
 				if get_tree() != null:
 					if get_tree().edited_scene_root != null:
 						bone_nodes[bone].set_owner(get_tree().edited_scene_root)
@@ -455,7 +455,7 @@ func _make_bone_nodes():
 			bone_nodes[bone] = get_node(bone_name)
 		
 		# If we are in the editor, we want to make a sphere at this node
-		if Engine.editor_hint == true:
+		if Engine.editor_hint:
 			_make_editor_sphere_at_node(bone_nodes[bone], Color(0.65, 0, 1, 1))
 
 

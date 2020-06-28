@@ -22,10 +22,6 @@ var dir = Vector3()
 var is_sprinting = false
 
 
-# We need the camera for getting directional vectors. We rotate ourselves on the Y-axis using
-# the camera_holder to avoid rotating on more than one axis at a time.
-var camera
-var camera_holder
 # You may need to adjust depending on the sensitivity of your mouse
 var MOUSE_SENSITIVITY = 0.08
 
@@ -34,36 +30,34 @@ var jump_button_down = false
 
 # The current lean value (our position on the lean track) and the path follow node
 var lean_value = 0.5
-var path_follow_node = null
 
 # A variable for tracking if the right mouse button is down.
 var right_mouse_down = false
 # A variable for tracking if we can fire using the left mouse button
 var left_mouse_timer = 0
 
-# The animation player for aiming down the sights
-var anim_player = null
 # A boolean for tracking whether we can change animations or not
 var anim_done = true
 # The current animation name
 var current_anim = "Starter"
 
-# The end of the pistol
-var pistol_end = null
 # The simple bullet rigidbody
 var simple_bullet = preload("res://fps/simple_bullet.tscn")
 
 
+# We need the camera for getting directional vectors. We rotate ourselves on the Y-axis using
+# the camera_holder to avoid rotating on more than one axis at a time.
+onready var camera_holder = $CameraHolder
+onready var camera = $CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/Camera
+onready var path_follow_node = $CameraHolder/LeanPath/PathFollow
+# The animation player for aiming down the sights.
+onready var anim_player = $CameraHolder/AnimationPlayer
+# The end of the pistol.
+onready var pistol_end = $CameraHolder/Weapon/Pistol/PistolEnd
+
+
 func _ready():
-	
-	camera = get_node("CameraHolder/Lean_Path/PathFollow/IK_LookAt_Chest/Camera")
-	camera_holder = get_node("CameraHolder")
-	path_follow_node = get_node("CameraHolder/Lean_Path/PathFollow")
-	
-	anim_player = get_node("CameraHolder/AnimationPlayer")
 	anim_player.connect("animation_finished", self, "animation_finished")
-	
-	pistol_end = get_node("CameraHolder/Weapon/Pistol/Pistol_end")
 	
 	set_physics_process(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -100,10 +94,10 @@ func process_input(delta):
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	if Input.is_mouse_button_pressed(2):
-		if right_mouse_down == false:
+		if not right_mouse_down:
 			right_mouse_down = true
 			
-			if anim_done == true:
+			if anim_done:
 				if current_anim != "Aiming":
 					anim_player.play("Aiming")
 					current_anim = "Aiming"
@@ -140,7 +134,7 @@ func process_input(delta):
 	# ----------------------------------
 	# Jumping
 	if Input.is_key_pressed(KEY_SPACE):
-		if jump_button_down == false:
+		if not jump_button_down:
 			jump_button_down = true
 			if is_on_floor():
 				vel.y = JUMP_SPEED
@@ -197,7 +191,7 @@ func process_movement(delta):
 	
 	var accel
 	if dir.dot(hvel) > 0:
-		if is_sprinting == false:
+		if not is_sprinting:
 			accel = ACCEL
 		else:
 			accel = SPRINT_ACCEL
