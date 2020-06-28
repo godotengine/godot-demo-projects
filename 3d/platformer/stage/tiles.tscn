@@ -2,7 +2,6 @@
 
 [ext_resource path="res://stage/texture.png" type="Texture" id=1]
 
-
 [sub_resource type="SpatialMaterial" id=1]
 params_diffuse_mode = 1
 roughness = 0.0
@@ -385,12 +384,12 @@ material/0 = SubResource( 3 )
 
 [node name="FloorCornerCol" type="StaticBody" parent="FloorCorner"]
 
-[node name="flooredge" type="MeshInstance" parent="."]
+[node name="FloorEdge" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 0 )
 mesh = SubResource( 17 )
 material/0 = SubResource( 3 )
 
-[node name="FloorEdgeCol" type="StaticBody" parent="flooredge"]
+[node name="FloorEdgeCol" type="StaticBody" parent="FloorEdge"]
 
 [node name="Floor" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, 0 )
