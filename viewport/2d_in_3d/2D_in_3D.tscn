@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://2D_in_3D.gd" type="Script" id=1]
 [ext_resource path="res://pong.gd" type="Script" id=2]
@@ -19,30 +19,6 @@ func e():
 [sub_resource type="SpatialMaterial" id=3]
 roughness = 0.7
 script = SubResource( 2 )
-
-[sub_resource type="ProceduralSky" id=4]
-sky_top_color = Color( 0.0470588, 0.454902, 0.976471, 1 )
-sky_horizon_color = Color( 0.556863, 0.823529, 0.909804, 1 )
-sky_curve = 0.25
-ground_bottom_color = Color( 0.101961, 0.145098, 0.188235, 1 )
-ground_horizon_color = Color( 0.482353, 0.788235, 0.952941, 1 )
-ground_curve = 0.01
-
-[sub_resource type="GDScript" id=5]
-script/source = "tool
-extends Object
-func e():
-	return .4
-"
-
-[sub_resource type="Environment" id=6]
-background_mode = 2
-background_sky = SubResource( 4 )
-background_color = Color( 0.445312, 0.445312, 0.445312, 1 )
-ambient_light_color = Color( 0.511719, 0.511719, 0.511719, 1 )
-ambient_light_sky_contribution = 0.4
-ssao_blur = 1
-script = SubResource( 5 )
 
 [sub_resource type="CubeMesh" id=7]
 
@@ -75,9 +51,6 @@ near = 0.1
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -1, -2 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 3 )
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 6 )
 
 [node name="Pillar" type="Spatial" parent="."]
 transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -3, -0.2, -4 )
