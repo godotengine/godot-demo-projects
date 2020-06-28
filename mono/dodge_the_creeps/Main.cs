@@ -73,13 +73,13 @@ public class Main : Node
         AddChild(mobInstance);
 
         // Set the mob's direction perpendicular to the path direction.
-        float direction = mobSpawnLocation.Rotation + Mathf.Pi / 2;
+        float direction = mobSpawnLocation.Rotation + Mathf.Tau / 4;
 
         // Set the mob's position to a random location.
         mobInstance.Position = mobSpawnLocation.Position;
 
         // Add some randomness to the direction.
-        direction += RandRange(-Mathf.Pi / 4, Mathf.Pi / 4);
+        direction += RandRange(-Mathf.Tau / 8, Mathf.Tau / 8);
         mobInstance.Rotation = direction;
 
         // Choose the velocity.

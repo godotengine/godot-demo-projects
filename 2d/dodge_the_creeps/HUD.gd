@@ -13,7 +13,7 @@ func show_game_over():
 	yield($MessageTimer, "timeout")
 	$MessageLabel.text = "Dodge the\nCreeps"
 	$MessageLabel.show()
-	yield(get_tree().create_timer(1), 'timeout')
+	yield(get_tree().create_timer(1), "timeout")
 	$StartButton.show()
 
 

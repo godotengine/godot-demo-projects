@@ -33,7 +33,7 @@ func _ready():
 
 
 func _unhandled_input(ev):
-	if ev is InputEventMouseButton :
+	if ev is InputEventMouseButton:
 		if ev.button_index == BUTTON_WHEEL_UP:
 			zoom -= ZOOM_SPEED
 		if ev.button_index == BUTTON_WHEEL_DOWN:

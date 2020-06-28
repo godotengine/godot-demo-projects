@@ -1,8 +1,8 @@
-extends 'Pawn.gd'
+extends "Pawn.gd"
 
 onready var Grid = get_parent()
 #warning-ignore:unused_class_variable
-export (PackedScene) var combat_actor
+export(PackedScene) var combat_actor
 #warning-ignore:unused_class_variable
 var lost = false
 
