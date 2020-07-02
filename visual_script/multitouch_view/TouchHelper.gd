@@ -12,7 +12,7 @@ func _unhandled_input(event):
 	if event is InputEventScreenTouch:
 		if event.pressed: # Down.
 			if !_os2own.has(event.index): # Defensively discard index if already known.
-				var ptr_id = _find_free_pointer_id()
+				var ptr_id = state.size()
 				state[ptr_id] = event.position
 				_os2own[event.index] = ptr_id
 		else: # Up.
@@ -27,11 +27,3 @@ func _unhandled_input(event):
 			var ptr_id = _os2own[event.index]
 			state[ptr_id] = event.position
 		get_tree().set_input_as_handled()
-
-
-func _find_free_pointer_id():
-	var used = state.keys()
-	var i = 0
-	while i in used:
-		i += 1
-	return i
