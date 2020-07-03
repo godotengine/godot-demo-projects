@@ -7,8 +7,10 @@ const OPTION_TYPE_CAPSULE = "Shape type/Capsule"
 const OPTION_TYPE_CYLINDER = "Shape type/Cylinder"
 const OPTION_TYPE_CONVEX = "Shape type/Convex"
 const OPTION_TYPE_SPHERE = "Shape type/Sphere"
+export(Array) var spawns = Array()
 
-export(int) var spawn_count = 1
+export(int) var spawn_count = 100
+export(int, 1, 10) var spawn_multipiler = 5
 
 var _object_templates = []
 
@@ -116,18 +118,19 @@ func _start_all_types():
 
 func _spawn_objects(type_index):
 	var template_node = _object_templates[type_index]
-	var spawn_parent = $SpawnTarget
-	
-	Log.print_log("* Spawning: " + template_node.name)
-	
-	for node_index in spawn_count:
-		var node = template_node.duplicate() as Spatial
-		node.transform = Transform.IDENTITY
-		spawn_parent.add_child(node)
+	for spawn in spawns:
+		var spawn_parent = get_node(spawn)
+		
+		Log.print_log("* Spawning: " + template_node.name)
+		
+		for _index in range(spawn_multipiler):
+			for _node_index in spawn_count / spawn_multipiler:
+				var node = template_node.duplicate() as Spatial
+				spawn_parent.add_child(node)
 
 
 func _activate_objects():
-	var spawn_parent = $SpawnTarget
+	var spawn_parent = $SpawnTarget1
 	
 	Log.print_log("* Activating")
 	
@@ -137,15 +140,16 @@ func _activate_objects():
 
 
 func _despawn_objects():
-	var spawn_parent = $SpawnTarget
+	for spawn in spawns:
+		var spawn_parent = get_node(spawn)
 	
-	if spawn_parent.get_child_count() == 0:
-		return
-	
-	Log.print_log("* Despawning")
-	
-	while spawn_parent.get_child_count():
-		var node_index = spawn_parent.get_child_count() - 1
-		var node = spawn_parent.get_child(node_index)
-		spawn_parent.remove_child(node)
-		node.queue_free()
+		if spawn_parent.get_child_count() == 0:
+			return
+		
+		Log.print_log("* Despawning")
+		
+		while spawn_parent.get_child_count():
+			var node_index = spawn_parent.get_child_count() - 1
+			var node = spawn_parent.get_child(node_index)
+			spawn_parent.remove_child(node)
+			node.queue_free()
