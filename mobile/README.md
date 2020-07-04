@@ -4,6 +4,6 @@ These demos depend on features only available in mobile phones or tablets.
 
 The Android IAP demo only runs on Android.
 
-Language: All are GDScript
+Languages: All are GDScript
 
-Renderer: All are GLES 2
+Renderers: All are GLES 2

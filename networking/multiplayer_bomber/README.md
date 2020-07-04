@@ -6,7 +6,7 @@ should type in his address and press "play".
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: GLES 3
 
 ## Screenshots
 
