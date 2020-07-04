@@ -6,7 +6,7 @@
 length = 15.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/path = NodePath(".:rect_rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -22,7 +22,7 @@ tracks/0/keys = {
 length = 10.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:scale")
+tracks/0/path = NodePath(".:rect_scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -34,10 +34,18 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 7, 7 ) ]
 }
 
-[node name="SDFFontDemo" type="Node2D"]
+[node name="SDFFontDemo" type="CenterContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Base" type="Position2D" parent="."]
-position = Vector2( 500, 300 )
+[node name="Base" type="Control" parent="."]
+margin_left = 512.0
+margin_top = 300.0
+margin_right = 512.0
+margin_bottom = 300.0
 
 [node name="Rotate" type="AnimationPlayer" parent="Base"]
 autoplay = "rotate"
@@ -48,11 +56,11 @@ anims/zoomin_zoomout = SubResource( 2 )
 autoplay = "zoomin_zoomout"
 anims/zoomin_zoomout = SubResource( 2 )
 
-[node name="Label" type="Label" parent="Base"]
-margin_left = -169.0
-margin_top = -49.0
-margin_right = 172.0
-margin_bottom = 56.0
+[node name="TextLabel" type="Label" parent="Base"]
+margin_left = -128.0
+margin_top = -50.0
+margin_right = 128.0
+margin_bottom = 51.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.853858, 0.771714, 0.753746, 1 )
 custom_colors/font_color_shadow = Color( 0.56592, 0.454525, 0.518426, 1 )
@@ -62,7 +70,3 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 512, 300 )
-current = true
