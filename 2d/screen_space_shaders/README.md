@@ -5,7 +5,7 @@ Many common full-res effects are implemented here for reference.
 
 Language: [GDSL](https://docs.godotengine.org/en/latest/tutorials/shading/shading_reference/shading_language.html) and GDScript
 
-Renderer: GLES 3
+Renderer: GLES 3 (the blur effect is not available in GLES 2, the rest work)
 
 ## Screenshots
 
