@@ -1,6 +1,6 @@
 extends Navigation
 
-const SPEED = 4.0
+const SPEED = 10.0
 
 var camrot = 0.0
 
