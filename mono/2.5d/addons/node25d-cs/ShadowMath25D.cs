@@ -50,5 +50,4 @@ public class ShadowMath25D : KinematicBody
             GlobalTransform = Transform;
         }
     }
-
 }

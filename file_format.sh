@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
+# This script ensures proper POSIX text file formatting and a few other things.
+
 set -uo pipefail
 IFS=$'\n\t'
 
 # Loops through all text files tracked by Git.
 git grep -zIl '' |
 while IFS= read -rd '' f; do
-    # Exclude csproj and hdr files.
+    # Exclude some types of files.
     if [[ "$f" == *"csproj" ]]; then
         continue
     elif [[ "$f" == *"hdr" ]]; then
@@ -22,6 +24,18 @@ while IFS= read -rd '' f; do
     tail -c1 < "$f" | read -r _ || echo >> "$f";
     # Remove trailing space characters.
     sed -z -i 's/\x20\x0A/\x0A/g' "$f"
+    # Remove the character sequence "== true" if it has a leading space.
+    sed -z -i 's/\x20== true//g' "$f"
+    # We don't want to change lines around braces in godot/tscn files.
+    if [[ "$f" == *"godot" ]]; then
+        continue
+    elif [[ "$f" == *"tscn" ]]; then
+        continue
+    fi
+    # Disallow empty lines after the opening brace.
+    sed -z -i 's/\x7B\x0A\x0A/\x7B\x0A/g' "$f"
+    # Disallow some empty lines before the closing brace.
+    sed -z -i 's/\x0A\x0A\x7D/\x0A\x7D/g' "$f"
 done
 
 git diff > patch.patch

@@ -177,5 +177,4 @@ public class Node25D : Node2D, IComparable<Node25D>
         }
         return 0;
     }
-
 }
