@@ -108,7 +108,7 @@ func check_if_mouse_is_inside_canvas():
 		if mouse_click_start_pos.x > TL_node.global_position.x:
 			if mouse_click_start_pos.y > TL_node.global_position.y:
 				# Make sure the current mouse position is inside the canvas.
-				if is_mouse_in_drawing_area == true:
+				if is_mouse_in_drawing_area:
 					return true
 	return false
 

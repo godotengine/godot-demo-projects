@@ -1,15 +1,19 @@
-name: Continuous integration
+name: Static Checks
 on: [push, pull_request]
 
 jobs:
-  build:
+  format:
+    name: File formatting (file_format.sh)
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Lint demo projects
+      - name: Install dependencies
         run: |
           sudo apt-get update -qq
           sudo apt-get install -qq dos2unix recode
-          bash ./format.sh
+
+      - name: File formatting checks (file_format.sh)
+        run: |
+          bash ./file_format.sh
