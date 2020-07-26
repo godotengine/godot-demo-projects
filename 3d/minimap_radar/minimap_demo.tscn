@@ -1,0 +1,244 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://minimap_demo.gd" type="Script" id=1]
+[ext_resource path="res://minimap_camera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://player_robot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://enemy_robot.tscn" type="PackedScene" id=4]
+[ext_resource path="res://minimap_environment_material.tres" type="Material" id=5]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.109804, 0.109804, 0.109804, 1 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 1, 1, 1, 1 )
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="ViewportTexture" id=2]
+flags = 4
+viewport_path = NodePath("Minimap_Viewport")
+
+[sub_resource type="ProceduralSky" id=3]
+
+[sub_resource type="Environment" id=4]
+background_mode = 3
+background_sky = SubResource( 3 )
+background_color = Color( 0.109804, 0.109804, 0.109804, 1 )
+fog_enabled = true
+fog_color = Color( 0.109804, 0.109804, 0.109804, 1 )
+fog_depth_end = 30.0
+
+[sub_resource type="CubeMesh" id=5]
+size = Vector3( 16, 2, 16 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.466667, 0.447059, 0, 1 )
+
+[sub_resource type="CubeMesh" id=7]
+size = Vector3( 10, 2, 20 )
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_color = Color( 0.298039, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_color = Color( 0.109804, 0.447059, 0.196078, 1 )
+
+[sub_resource type="CubeMesh" id=10]
+size = Vector3( 8, 2, 8 )
+
+[sub_resource type="SpatialMaterial" id=11]
+albedo_color = Color( 0.376471, 0, 0.341176, 1 )
+
+[sub_resource type="SpatialMaterial" id=12]
+albedo_color = Color( 0, 0.0509804, 0.611765, 1 )
+
+[node name="Minimap_Demo" type="Spatial"]
+script = ExtResource( 1 )
+environment_color = Color( 0.72549, 0.937255, 1, 1 )
+minimap_geometry_color = Color( 0.909804, 0.909804, 0.909804, 1 )
+minimap_enemy_color = Color( 1, 0, 0, 1 )
+minimap_player_color = Color( 0, 0.717647, 1, 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -216.0
+margin_bottom = 216.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Minimap" type="TextureRect" parent="CanvasLayer/PanelContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 208.0
+margin_bottom = 208.0
+rect_min_size = Vector2( 200, 200 )
+mouse_filter = 2
+texture = SubResource( 2 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -37.5
+margin_top = 30.0
+margin_right = 37.5
+margin_bottom = 38.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Height_Label" type="Label" parent="CanvasLayer/VBoxContainer"]
+margin_right = 75.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "height level"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Height_Value" type="Label" parent="CanvasLayer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 75.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Minimap_Viewport" type="Viewport" parent="."]
+size = Vector2( 200, 200 )
+transparent_bg = true
+hdr = false
+debug_draw = 1
+render_target_v_flip = true
+render_target_update_mode = 3
+
+[node name="Minimap_Camera" parent="Minimap_Viewport" instance=ExtResource( 2 )]
+
+[node name="Player_Robot" parent="." instance=ExtResource( 3 )]
+
+[node name="Environment" type="Spatial" parent="."]
+
+[node name="DirectionalLight" type="DirectionalLight" parent="Environment"]
+transform = Transform( 0.612326, -0.740168, 0.277863, 0.391452, 0.589191, 0.706838, -0.686893, -0.324045, 0.650517, 4.37624, 8.60467, 8.26549 )
+light_energy = 4.0
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource( 4 )
+
+[node name="Level" type="Spatial" parent="."]
+
+[node name="Floor_Level2" type="MeshInstance" parent="Level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0266, 19, -14.0676 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="Enemy_Robot" parent="Level/Floor_Level2" instance=ExtResource( 4 )]
+transform = Transform( 0.42529, 0, -0.905057, 0, 1, 0, 0.905057, 0, 0.42529, 0, 0.985884, 0 )
+
+[node name="Enemy_Robot2" parent="Level/Floor_Level2" instance=ExtResource( 4 )]
+transform = Transform( 0.42529, 0, -0.905057, 0, 1, 0, 0.905057, 0, 0.42529, -2.89458, 0.985884, 4.11152 )
+
+[node name="Minimap_Floor_Level2" type="MeshInstance" parent="Level/Floor_Level2" groups=[
+"minimap_environment_meshes",
+]]
+layers = 512
+mesh = SubResource( 5 )
+material/0 = ExtResource( 5 )
+
+[node name="Floor_Level1" type="MeshInstance" parent="Level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.1057, 9, 0 )
+mesh = SubResource( 7 )
+material/0 = SubResource( 8 )
+
+[node name="Enemy_Robot" parent="Level/Floor_Level1" instance=ExtResource( 4 )]
+transform = Transform( 0.752438, 0, 0.658663, 0, 1, 0, -0.658663, 0, 0.752438, 0.643696, 1.72156, 8.07341 )
+
+[node name="Enemy_Robot2" parent="Level/Floor_Level1" instance=ExtResource( 4 )]
+transform = Transform( 0.893575, 0, -0.448914, 0, 1, 0, 0.448914, 0, 0.893575, -3.38131, 1.72156, -0.698327 )
+
+[node name="Minimap_Floor_Level1" type="MeshInstance" parent="Level/Floor_Level1" groups=[
+"minimap_environment_meshes",
+]]
+layers = 512
+mesh = SubResource( 7 )
+material/0 = ExtResource( 5 )
+
+[node name="Floor_Level0" type="MeshInstance" parent="Level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1003, -1, 0 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 9 )
+
+[node name="Enemy_Robot" parent="Level/Floor_Level0" instance=ExtResource( 4 )]
+transform = Transform( -0.733125, 0, -0.680094, 0, 1, 0, 0.680094, 0, -0.733125, 4.98722, 0.999999, -4.47208 )
+
+[node name="Enemy_Robot2" parent="Level/Floor_Level0" instance=ExtResource( 4 )]
+transform = Transform( 0.893575, 0, -0.448914, 0, 1, 0, 0.448914, 0, 0.893575, 4.65552, 0.999999, 4.9446 )
+
+[node name="Minimap_Floor_Level3" type="MeshInstance" parent="Level/Floor_Level0" groups=[
+"minimap_environment_meshes",
+]]
+layers = 512
+mesh = SubResource( 5 )
+material/0 = ExtResource( 5 )
+
+[node name="Floor_Level_-1" type="MeshInstance" parent="Level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.62202, -15.054, -8.44498 )
+mesh = SubResource( 10 )
+material/0 = SubResource( 11 )
+
+[node name="Enemy_Robot" parent="Level/Floor_Level_-1" instance=ExtResource( 4 )]
+transform = Transform( 0.550437, 0, 0.834877, 0, 1, 0, -0.834877, 0, 0.550437, -2.76663, 1.55684, 3.31266 )
+
+[node name="Enemy_Robot2" parent="Level/Floor_Level_-1" instance=ExtResource( 4 )]
+transform = Transform( 0.515233, 0, 0.857051, 0, 1, 0, -0.857051, 0, 0.515233, 1.60557, 1.55684, -0.334606 )
+
+[node name="Minimap_Floor_Level_-1" type="MeshInstance" parent="Level/Floor_Level_-1" groups=[
+"minimap_environment_meshes",
+]]
+layers = 512
+mesh = SubResource( 10 )
+material/0 = ExtResource( 5 )
+
+[node name="Floor_Level_-2" type="MeshInstance" parent="Level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.10775, -21, 10.9605 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 12 )
+
+[node name="Enemy_Robot" parent="Level/Floor_Level_-2" instance=ExtResource( 4 )]
+transform = Transform( 0.903821, 0, -0.42791, 0, 1, 0, 0.42791, 0, 0.903821, 0, 2.21208, 0 )
+
+[node name="Enemy_Robot2" parent="Level/Floor_Level_-2" instance=ExtResource( 4 )]
+transform = Transform( 0.903821, 0, -0.42791, 0, 1, 0, 0.42791, 0, 0.903821, 3.60103, 2.21208, 4.10337 )
+
+[node name="Enemy_Robot3" parent="Level/Floor_Level_-2" instance=ExtResource( 4 )]
+transform = Transform( 0.785986, 0, -0.618244, 0, 1, 0, 0.618244, 0, 0.785986, -3.93024, 2.21208, 5.00306 )
+
+[node name="Minimap_Floor_Level_-2" type="MeshInstance" parent="Level/Floor_Level_-2" groups=[
+"minimap_environment_meshes",
+]]
+layers = 512
+mesh = SubResource( 5 )
+material/0 = ExtResource( 5 )
