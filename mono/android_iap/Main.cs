@@ -99,11 +99,11 @@ namespace Android_Iap
             var result = _googlePlayBilling.Purchase("android.test.purchased");
             if (result != null && result.Status == (int)Error.Ok)
             {
-                GD.Print("Bought");
+                GD.Print("Purchase Requested");
             }
             else
             {
-                GD.Print("Failed");
+                GD.Print($"Purchase Failed {result.ResponseCode} {result.DebugMessage}");
             }
         }
 
@@ -112,11 +112,11 @@ namespace Android_Iap
             var result = _googlePlayBilling.Purchase("android.test.canceled");
             if (result != null && result.Status == (int)Error.Ok)
             {
-                GD.Print("Bought");
+                GD.Print("Purchase Requested");
             }
             else
             {
-                GD.Print("Failed");
+                GD.Print($"Purchase Failed {result.ResponseCode} {result.DebugMessage}");
             }
         }
         private void OnButton2_pressed()
@@ -124,11 +124,11 @@ namespace Android_Iap
             var result = _googlePlayBilling.Purchase("android.test.refunded");
             if (result != null && result.Status == (int)Error.Ok)
             {
-                GD.Print("Bought");
+                GD.Print("Purchase Requested");
             }
             else
             {
-                GD.Print("Failed");
+                GD.Print($"Purchase Failed {result.ResponseCode} {result.DebugMessage}");
             }
         }
         private void OnButton3_pressed()
@@ -136,11 +136,11 @@ namespace Android_Iap
             var result = _googlePlayBilling.Purchase("android.test.item_unavailable");
             if (result != null && result.Status == (int)Error.Ok)
             {
-                GD.Print("Bought");
+                GD.Print("Purchase Requested");
             }
             else
             {
-                GD.Print("Failed");
+                GD.Print($"Purchase Failed {result.ResponseCode} {result.DebugMessage}");
             }
         }
 

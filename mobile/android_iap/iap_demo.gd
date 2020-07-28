@@ -116,7 +116,7 @@ func _on_QuerySkuDetailsButton_pressed():
 func _on_PurchaseButton_pressed():
 	var response = payment.purchase(TEST_ITEM_SKU)
 	if response.status != OK:
-		show_alert("Purchase error %d: %s" % [response.response_code, response.debug_message])
+		show_alert("Purchase error %s: %s" % [response.response_code, response.debug_message])
 
 
 func _on_ConsumeButton_pressed():
