@@ -1,6 +1,6 @@
 # Multitouch View with GDScript
 
-Simple debugger for multitouch input. Shows red dots everywhere you press.
+Simple debugger for multitouch input. Shows colored dots everywhere you press.
 
 Language: GDScript
 
