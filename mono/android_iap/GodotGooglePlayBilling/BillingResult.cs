@@ -51,7 +51,7 @@ namespace Android_Iap.GodotGooglePlayBilling
             try
             {
                 Status = (int)billingResult["status"];
-                ResponseCode = (billingResult.Contains("response_code") ? (BillingResponseCode)billingResult["response_code"] : BillingResponseCode.Ok);
+                ResponseCode = (billingResult.Contains("response_code") ? (BillingResponseCode?)billingResult["response_code"] : null);
                 DebugMessage = (billingResult.Contains("debug_message") ? (string)billingResult["debug_message"] : null);
             }
             catch (System.Exception ex)
@@ -61,7 +61,7 @@ namespace Android_Iap.GodotGooglePlayBilling
         }
 
         public int Status { get; set; }
-        public BillingResponseCode ResponseCode { get; set; }
+        public BillingResponseCode? ResponseCode { get; set; }
         public string DebugMessage { get; set; }
     }
 }
