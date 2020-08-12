@@ -1,7 +1,7 @@
 using Godot;
 using Godot.Collections;
 
-namespace Android_Iap.GodotGooglePlayBilling
+namespace AndroidInAppPurchasesWithCSharp.GodotGooglePlayBilling
 {
     // https://developer.android.com/reference/com/android/billingclient/api/BillingClient.BillingResponseCode
     public enum BillingResponseCode

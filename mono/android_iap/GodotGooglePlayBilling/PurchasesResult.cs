@@ -1,7 +1,7 @@
 using Godot;
 using Godot.Collections;
 
-namespace Android_Iap.GodotGooglePlayBilling
+namespace AndroidInAppPurchasesWithCSharp.GodotGooglePlayBilling
 {
     public class PurchasesResult : BillingResult
     {
