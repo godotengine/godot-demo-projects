@@ -1,0 +1,105 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://test.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.16, 0.678, 1, 0.12549 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.266667, 0.266667, 0.266667, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.4, 0.4, 0.4, 1 )
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+bg_color = Color( 0.2, 0.2, 0.2, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.333333, 0.333333, 0.333333, 1 )
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.133333, 0.133333, 0.133333, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.266667, 0.266667, 0.266667, 1 )
+border_blend = true
+
+[sub_resource type="Theme" id=5]
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = null
+Button/styles/focus = SubResource( 1 )
+Button/styles/hover = SubResource( 2 )
+Button/styles/normal = SubResource( 3 )
+Button/styles/pressed = SubResource( 4 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 5 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -75.5
+margin_top = -157.0
+margin_right = 75.5
+margin_bottom = 89.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 151.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 0, 48 )
+text = "GUI Theming Overrides"
+align = 1
+valign = 1
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+margin_top = 68.0
+margin_right = 151.0
+margin_bottom = 114.0
+text = "Click Me"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+margin_top = 134.0
+margin_right = 151.0
+margin_bottom = 180.0
+text = "Click Me"
+
+[node name="ResetAllButton" type="Button" parent="VBoxContainer"]
+margin_top = 200.0
+margin_right = 151.0
+margin_bottom = 246.0
+text = "Reset All"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_button2_pressed"]
+[connection signal="pressed" from="VBoxContainer/ResetAllButton" to="." method="_on_reset_all_button_pressed"]
