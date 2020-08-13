@@ -1,0 +1,87 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Main.cs" type="Script" id=1]
+[ext_resource path="res://GodotGooglePlayBilling/GooglePlayBilling.cs" type="Script" id=2]
+
+[node name="Main" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.711
+margin_top = -300.0
+margin_right = 511.289
+margin_bottom = 300.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AlertDialog" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 64.0
+margin_top = 64.0
+margin_right = -64.0
+margin_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 400, 0 )
+size_flags_vertical = 4
+popup_exclusive = true
+dialog_autowrap = true
+
+[node name="Label" type="Label" parent="."]
+margin_left = 300.0
+margin_top = 40.0
+margin_right = 996.0
+margin_bottom = 156.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "To test in-app purchase on android device,
+
+1. Make sure you have enabled \"Custom Build\" and the GodotPayment plugin in your Android export settings
+2. Export APK and upload it as alpha or beta stage to Google Play Developer Console and publish it.
+    (It's not published to public, but you and other testers can access it.)
+3. There should be an activate in-app item. Copy its SKU into the TEST_ITEM_SKU constant in iap_demo.gd
+4. Changes you make in the Play Console may take some time before taking effect"
+
+[node name="QuerySkuDetailsButton" type="Button" parent="."]
+margin_left = 40.5697
+margin_top = 39.9347
+margin_right = 221.57
+margin_bottom = 91.9347
+text = "Query SKU details"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PurchaseButton" type="Button" parent="."]
+margin_left = 40.5697
+margin_top = 101.203
+margin_right = 221.57
+margin_bottom = 153.203
+text = "Purchase"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConsumeButton" type="Button" parent="."]
+margin_left = 40.5697
+margin_top = 162.142
+margin_right = 221.57
+margin_bottom = 214.142
+text = "Consume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GooglePlayBilling" type="Node" parent="."]
+script = ExtResource( 2 )
+[connection signal="pressed" from="QuerySkuDetailsButton" to="." method="OnQuerySkuDetailsButton_pressed"]
+[connection signal="pressed" from="PurchaseButton" to="." method="OnPurchaseButton_pressed"]
+[connection signal="pressed" from="ConsumeButton" to="." method="OnConsumeButton_pressed"]

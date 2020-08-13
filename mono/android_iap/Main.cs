@@ -1,170 +1,82 @@
-using Android_Iap.GodotGooglePlayBilling;
+using AndroidInAppPurchasesWithCSharp.GodotGooglePlayBilling;
 using Godot;
-using CoreGeneric = System.Collections.Generic;
 using System.Linq;
 using System;
 
-namespace Android_Iap
+namespace AndroidInAppPurchasesWithCSharp
 {
-    /*
-    test skus
-    android.test.purchased
-    android.test.canceled
-    android.test.refunded
-    android.test.item_unavailable
-    */
-    public class Main : Node2D
+    public class Main : Control
     {
-        private readonly string[] ArrInAppProductsSKUs = new string[]
-        {
-            "android.test.purchased",
-            "android.test.canceled",
-            "android.test.refunded",
-            "android.test.item_unavailable"
-        };
+        const string TestItemSku = "my_in_app_purchase_sku";
 
+        private AcceptDialog _alertDialog;
+        private Label _label;
 
-        private Button _buyPotionButton;
-        private Label _totalPotionsLabel;
+        private GooglePlayBilling _payment;
 
-        private Panel _panel;
-        private Label _processLabel;
-        private Label _thanksLabel;
-
-        private ProgressBar _playerLife;
-        private StyleBoxFlat _playerLifeStyleBoxFlat;
-
-        private GooglePlayBilling _googlePlayBilling;
-        private int _totalPotion = 5;
-
-        CoreGeneric.Dictionary<string, string> _purchases = new CoreGeneric.Dictionary<string, string>();
+        private string _testItemPurchaseToken;
 
         public override void _Ready()
         {
-            _googlePlayBilling = GetNode<GooglePlayBilling>("GooglePlayBilling");
+            _payment = GetNode<GooglePlayBilling>("GooglePlayBilling");
+            _alertDialog = GetNode<AcceptDialog>("AlertDialog");
+            _label = GetNode<Label>("Label");
 
-            _buyPotionButton = GetNode<Button>("VBoxContainer2/BuyPotionButton");
-            _totalPotionsLabel = GetNode<Label>("VBoxContainer/Label");
-
-            _panel = GetNode<Panel>("Panel");
-            _processLabel = GetNode<Label>("Panel/ProcessLabel");
-            _thanksLabel = GetNode<Label>("Panel/ThanksLabel");
-
-            _playerLife = GetNode<ProgressBar>("Sprite/ProgressBar");
-
-            _playerLifeStyleBoxFlat = _playerLife.Get("custom_styles/fg") as StyleBoxFlat;
-            _playerLifeStyleBoxFlat.BgColor = Colors.Red.LinearInterpolate(Colors.Green, 1);
-
-            _playerLife.Value = 1;
-
-            _panel.Hide();
-            _processLabel.Hide();
-            _thanksLabel.Hide();
-            _buyPotionButton.Hide();
-            _totalPotionsLabel.Text = $"{_totalPotion} Potions";
-        }
-
-        public override void _Process(float delta)
-        {
-            if (_playerLife.Value > 0.5)
+            if (_payment.IsAvailable)
             {
-                _playerLife.Value -= delta;
-            }
-            else if (_playerLife.Value > 0.2)
-            {
-                _playerLife.Value -= delta / 2;
-            }
-            else if (_playerLife.Value > 0.1)
-            {
-                _playerLife.Value -= delta / 4;
-            }
+                _label.Text += $"\n\n\nTest item SKU: {TestItemSku}";
 
-            _playerLifeStyleBoxFlat.BgColor = Colors.Red.LinearInterpolate(Colors.Green, Convert.ToSingle(_playerLife.Value));
-        }
-
-        private void OnUsePotionButton_pressed()
-        {
-            if (_totalPotion > 0)
-            {
-                _totalPotion -= 1;
-                _totalPotionsLabel.Text = $"{_totalPotion} Potions";
-                _playerLifeStyleBoxFlat.BgColor = Colors.Red.LinearInterpolate(Colors.Green, Convert.ToSingle(_playerLife.Value));
-
-                _playerLife.Value += 20;
-            }
-        }
-
-        private void OnBuyPotionButton_pressed()
-        {
-            var result = _googlePlayBilling.Purchase("android.test.purchased");
-            if (result != null && result.Status == (int)Error.Ok)
-            {
-                GD.Print("Purchase Requested");
+                // No params.
+                _payment.Connect(nameof(GooglePlayBilling.Connected), this, nameof(OnConnected));
+                // No params.
+                _payment.Connect(nameof(GooglePlayBilling.Disconnected), this, nameof(OnDisconnected));
+                // Response ID (int), Debug message (string).
+                _payment.Connect(nameof(GooglePlayBilling.ConnectError), this, nameof(OnConnectError));
+                // Purchases (Dictionary[]).
+                _payment.Connect(nameof(GooglePlayBilling.PurchasesUpdated), this, nameof(OnPurchasesUpdated));
+                // Response ID (int), Debug message (string).
+                _payment.Connect(nameof(GooglePlayBilling.PurchaseError), this, nameof(OnPurchaseError));
+                // SKUs (Dictionary[]).
+                _payment.Connect(nameof(GooglePlayBilling.SkuDetailsQueryCompleted), this, nameof(OnSkuDetailsQueryCompleted));
+                // Response ID (int), Debug message (string), Queried SKUs (string[]).
+                _payment.Connect(nameof(GooglePlayBilling.SkuDetailsQueryError), this, nameof(OnSkuDetailsQueryError));
+                // Purchase token (string).
+                _payment.Connect(nameof(GooglePlayBilling.PurchaseAcknowledged), this, nameof(OnPurchaseAcknowledged));
+                // Response ID (int), Debug message (string), Purchase token (string).
+                _payment.Connect(nameof(GooglePlayBilling.PurchaseAcknowledgementError), this, nameof(OnPurchaseAcknowledgementError));
+                // Purchase token (string).
+                _payment.Connect(nameof(GooglePlayBilling.PurchaseConsumed), this, nameof(OnPurchaseConsumed));
+                // Response ID (int), Debug message (string), Purchase token (string).
+                _payment.Connect(nameof(GooglePlayBilling.PurchaseConsumptionError), this, nameof(OnPurchaseConsumptionError));
+                _payment.StartConnection();
             }
             else
             {
-                GD.Print($"Purchase Failed {result.ResponseCode} {result.DebugMessage}");
+                ShowAlert("Android IAP support is not enabled. Make sure you have enabled 'Custom Build' and installed and enabled the GodotGooglePlayBilling plugin in your Android export settings! This application will not work.");
             }
         }
 
-        private void OnButton1_pressed()
+        private void ShowAlert(string text)
         {
-            var result = _googlePlayBilling.Purchase("android.test.canceled");
-            if (result != null && result.Status == (int)Error.Ok)
-            {
-                GD.Print("Purchase Requested");
-            }
-            else
-            {
-                GD.Print($"Purchase Failed {result.ResponseCode} {result.DebugMessage}");
-            }
-        }
-        private void OnButton2_pressed()
-        {
-            var result = _googlePlayBilling.Purchase("android.test.refunded");
-            if (result != null && result.Status == (int)Error.Ok)
-            {
-                GD.Print("Purchase Requested");
-            }
-            else
-            {
-                GD.Print($"Purchase Failed {result.ResponseCode} {result.DebugMessage}");
-            }
-        }
-        private void OnButton3_pressed()
-        {
-            var result = _googlePlayBilling.Purchase("android.test.item_unavailable");
-            if (result != null && result.Status == (int)Error.Ok)
-            {
-                GD.Print("Purchase Requested");
-            }
-            else
-            {
-                GD.Print($"Purchase Failed {result.ResponseCode} {result.DebugMessage}");
-            }
+            _alertDialog.DialogText = text;
+            _alertDialog.PopupCentered();
         }
 
-        private void OnOkButton_pressed()
+        private void OnConnected()
         {
-            _panel.Hide();
-            _processLabel.Hide();
-            _thanksLabel.Hide();
-        }
+            GD.Print("PurchaseManager connected");
 
-        private void OnGooglePlayBilling_Connected()
-        {
-            _googlePlayBilling.QuerySkuDetails(ArrInAppProductsSKUs, PurchaseType.InApp);
-
-            var purchasesResult = _googlePlayBilling.QueryPurchases(PurchaseType.InApp);
+            // We must acknowledge all puchases.
+            // See https://developer.android.com/google/play/billing/integrate#process for more information
+            var purchasesResult = _payment.QueryPurchases(PurchaseType.InApp);
             if (purchasesResult.Status == (int)Error.Ok)
             {
                 foreach (var purchase in purchasesResult.Purchases)
                 {
-                    _purchases.Add(purchase.PurchaseToken, purchase.Sku);
-                    // We only expect this SKU
-                    if (purchase.Sku == "android.test.purchased")
+                    if (!purchase.IsAcknowledged)
                     {
-                        _googlePlayBilling.AcknowledgePurchase(purchase.PurchaseToken);
+                        GD.Print($"Purchase {purchase.Sku} has not been acknowledged. Acknowledging...");
+                        _payment.AcknowledgePurchase(purchase.PurchaseToken);
                     }
                 }
             }
@@ -174,59 +86,105 @@ namespace Android_Iap
             }
         }
 
-        private void OnGooglePlayBilling_SkuDetailsQueryCompleted(Godot.Collections.Array arrSkuDetails)
+        private async void OnDisconnected()
         {
-            var skuDetails = GooglePlayBillingUtils.ConvertSkuDetailsDictionaryArray(arrSkuDetails);
-            foreach (var sku in skuDetails)
-            {
-                switch (sku.Sku)
-                {
-                    // our fake potion
-                    case "android.test.purchased":
-                        _buyPotionButton.Text = $"Buy {sku.Price}";
-                        _buyPotionButton.Show();
-                        break;
-                }
-            }
+            ShowAlert("GodotGooglePlayBilling disconnected. Will try to reconnect in 10s...");
+            await ToSignal(GetTree().CreateTimer(10), "timeout");
+            _payment.StartConnection();
         }
 
-        private void OnGooglePlayBilling_PurchasesUpdated(Godot.Collections.Array arrPurchases)
+        private void OnConnectError()
         {
-            _panel.Show();
-            _processLabel.Show();
-            _thanksLabel.Hide();
+            ShowAlert("PurchaseManager connect error");
+        }
 
+        private void OnPurchasesUpdated(Godot.Collections.Array arrPurchases)
+        {
+            GD.Print($"Purchases updated: {JSON.Print(arrPurchases)}");
+
+            // See OnConnected
             var purchases = GooglePlayBillingUtils.ConvertPurchaseDictionaryArray(arrPurchases);
 
             foreach (var purchase in purchases)
             {
-                _purchases.Add(purchase.PurchaseToken, purchase.Sku);
-                // We only expect this SKU
-                if (purchase.Sku == "android.test.purchased")
+                if (!purchase.IsAcknowledged)
                 {
-                    _googlePlayBilling.AcknowledgePurchase(purchase.PurchaseToken);
+                    GD.Print($"Purchase {purchase.Sku} has not been acknowledged. Acknowledging...");
+                    _payment.AcknowledgePurchase(purchase.PurchaseToken);
                 }
             }
-        }
 
-        private void OnGooglePlayBilling_PurchaseAcknowledged(string purchaseToken)
-        {
-            _googlePlayBilling.ConsumePurchase(purchaseToken);
-        }
-
-        private void OnGooglePlayBilling_PurchaseConsumed(string purchaseToken)
-        {
-            if (_purchases[purchaseToken] == "android.test.purchased")
+            if (purchases.Length > 0)
             {
-                _totalPotion += 5;
-                _totalPotionsLabel.Text = $"{_totalPotion} Potions";
-                _purchases.Remove(purchaseToken);
-
-                _processLabel.Hide();
-                _thanksLabel.Show();
-
+                _testItemPurchaseToken = purchases.Last().PurchaseToken;
             }
-            GD.Print("OnGooglePlayBilling_PurchaseConsumed ", purchaseToken);
+        }
+
+        private void OnPurchaseError(int code, string message)
+        {
+            ShowAlert($"Purchase error {code}: {message}");
+        }
+
+        private void OnSkuDetailsQueryCompleted(Godot.Collections.Array arrSkuDetails)
+        {
+            ShowAlert(JSON.Print(arrSkuDetails));
+
+            var skuDetails = GooglePlayBillingUtils.ConvertSkuDetailsDictionaryArray(arrSkuDetails);
+            foreach (var skuDetail in skuDetails)
+            {
+                GD.Print($"Sku {skuDetail.Sku}");
+            }
+        }
+
+        private void OnSkuDetailsQueryError(int code, string message)
+        {
+            ShowAlert($"SKU details query error {code}: {message}");
+        }
+
+        private void OnPurchaseAcknowledged(string purchaseToken)
+        {
+            ShowAlert($"Purchase acknowledged: {purchaseToken}");
+        }
+
+        private void OnPurchaseAcknowledgementError(int code, string message)
+        {
+            ShowAlert($"Purchase acknowledgement error {code}: {message}");
+        }
+
+        private void OnPurchaseConsumed(string purchaseToken)
+        {
+            ShowAlert($"Purchase consumed successfully: {purchaseToken}");
+        }
+
+        private void OnPurchaseConsumptionError(int code, string message)
+        {
+            ShowAlert($"Purchase acknowledgement error {code}: {message}");
+        }
+
+        // GUI
+        private void OnQuerySkuDetailsButton_pressed()
+        {
+            _payment.QuerySkuDetails(new string[] { TestItemSku }, PurchaseType.InApp); // Use "subs" for subscriptions.
+        }
+
+        private void OnPurchaseButton_pressed()
+        {
+            var response = _payment.Purchase(TestItemSku);
+            if (response != null && response.Status != (int)Error.Ok)
+            {
+                ShowAlert($"Purchase error {response.ResponseCode} {response.DebugMessage}");
+            }
+        }
+
+        private void OnConsumeButton_pressed()
+        {
+            if (string.IsNullOrEmpty(_testItemPurchaseToken))
+            {
+                ShowAlert("You need to set 'test_item_purchase_token' first! (either by hand or in code)");
+                return;
+            }
+
+            _payment.ConsumePurchase(_testItemPurchaseToken);
         }
     }
 }

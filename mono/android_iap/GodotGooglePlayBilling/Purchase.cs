@@ -2,7 +2,7 @@ using System;
 using Godot;
 using Godot.Collections;
 
-namespace Android_Iap.GodotGooglePlayBilling
+namespace AndroidInAppPurchasesWithCSharp.GodotGooglePlayBilling
 {
     // https://developer.android.com/reference/com/android/billingclient/api/Purchase.PurchaseState
     public enum PurchaseState
