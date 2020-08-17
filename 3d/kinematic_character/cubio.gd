@@ -14,17 +14,17 @@ func _physics_process(delta):
 		get_tree().quit()
 	if Input.is_action_just_pressed("reset_position"):
 		translation = Vector3(-3, 4, 8)
-	
+
 	var dir = Vector3()
 	dir.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	dir.z = Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
-	
+
 	# Get the camera's transform basis, but remove the X rotation such
 	# that the Y axis is up and Z is horizontal.
 	var cam_basis = $Target/Camera.global_transform.basis
 	var basis = cam_basis.rotated(cam_basis.x, -cam_basis.get_euler().x)
 	dir = basis.xform(dir)
-	
+
 	# Limit the input to a length of 1. length_squared is faster to check.
 	if dir.length_squared() > 1:
 		dir /= dir.length()
