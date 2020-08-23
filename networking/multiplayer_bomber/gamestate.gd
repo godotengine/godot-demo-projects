@@ -6,6 +6,8 @@ const DEFAULT_PORT = 10567
 # Max number of players.
 const MAX_PEERS = 12
 
+var peer = null
+
 # Name for my player.
 var player_name = "The Warrior"
 
@@ -125,16 +127,16 @@ remote func ready_to_start(id):
 
 func host_game(new_player_name):
 	player_name = new_player_name
-	var host = NetworkedMultiplayerENet.new()
-	host.create_server(DEFAULT_PORT, MAX_PEERS)
-	get_tree().set_network_peer(host)
+	peer = NetworkedMultiplayerENet.new()
+	peer.create_server(DEFAULT_PORT, MAX_PEERS)
+	get_tree().set_network_peer(peer)
 
 
 func join_game(ip, new_player_name):
 	player_name = new_player_name
-	var client = NetworkedMultiplayerENet.new()
-	client.create_client(ip, DEFAULT_PORT)
-	get_tree().set_network_peer(client)
+	peer = NetworkedMultiplayerENet.new()
+	peer.create_client(ip, DEFAULT_PORT)
+	get_tree().set_network_peer(peer)
 
 
 func get_player_list():
