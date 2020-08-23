@@ -10,6 +10,8 @@ onready var _name_edit = $Panel/VBoxContainer/HBoxContainer/NameEdit
 onready var _host_edit = $Panel/VBoxContainer/HBoxContainer2/Hostname
 onready var _game = $Panel/VBoxContainer/Game
 
+var peer = null
+
 func _ready():
 	#warning-ignore-all:return_value_discarded
 	get_tree().connect("network_peer_disconnected", self, "_peer_disconnected")
@@ -68,10 +70,10 @@ func _peer_disconnected(id):
 
 
 func _on_Host_pressed():
-	var host = WebSocketServer.new()
-	host.listen(DEF_PORT, PoolStringArray(["ludus"]), true)
+	peer = WebSocketServer.new()
+	peer.listen(DEF_PORT, PoolStringArray(["ludus"]), true)
 	get_tree().connect("server_disconnected", self, "_close_network")
-	get_tree().set_network_peer(host)
+	get_tree().set_network_peer(peer)
 	_game.add_player(1, _name_edit.text)
 	start_game()
 
@@ -81,9 +83,9 @@ func _on_Disconnect_pressed():
 
 
 func _on_Connect_pressed():
-	var host = WebSocketClient.new()
-	host.connect_to_url("ws://" + _host_edit.text + ":" + str(DEF_PORT), PoolStringArray([PROTO_NAME]), true)
+	peer = WebSocketClient.new()
+	peer.connect_to_url("ws://" + _host_edit.text + ":" + str(DEF_PORT), PoolStringArray([PROTO_NAME]), true)
 	get_tree().connect("connection_failed", self, "_close_network")
 	get_tree().connect("connected_to_server", self, "_connected")
-	get_tree().set_network_peer(host)
+	get_tree().set_network_peer(peer)
 	start_game()
