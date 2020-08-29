@@ -5,8 +5,8 @@ the use of localized resources and texts.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Vulkan
 
 ## Screenshots
 
-![Screenshot](screenshots/translation.png)
+![Screenshot](translation.png)

@@ -1,0 +1,157 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Images/speaker.png" type="Texture2D" id=1]
+[ext_resource path="res://Audio/hello_en.wav" type="AudioStream" id=2]
+[ext_resource path="res://Images/flag_uk.png" type="Texture2D" id=3]
+[ext_resource path="res://Fonts/droid_sans.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Scripts/translation_po.gd" type="Script" id=5]
+[ext_resource path="res://Fonts/DroidSans.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+font_data = ExtResource( 6 )
+
+[node name="TranslationDemoPO" type="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+margin_left = 422.0
+margin_right = 602.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 1 )
+text = "PO Example"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="English" type="Button" parent="."]
+margin_left = 32.0
+margin_top = 78.592
+margin_right = 192.0
+margin_bottom = 102.592
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Use English"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spanish" type="Button" parent="."]
+margin_left = 32.0
+margin_top = 126.592
+margin_right = 192.0
+margin_bottom = 150.592
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Use Spanish"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Japanese" type="Button" parent="."]
+margin_left = 32.0
+margin_top = 174.592
+margin_right = 192.0
+margin_bottom = 198.592
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Use Japanese"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description" type="Label" parent="."]
+margin_left = 243.0
+margin_top = 56.592
+margin_right = 929.0
+margin_bottom = 326.592
+size_flags_horizontal = 2
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 4 )
+text = "This second demo shows translation using PO files.
+
+The resouce remapping process is the same with CSV. The in-game text translation
+process is also the same - use keys to fetch the appropriate translation.
+
+The main difference between PO files and CSV files is the way both of them store
+the translated data in their files.  Have a look at \"TranslationFiles/PO\" folder
+and \"TranslationFiles/CSV\" folder to see the files involved in translation.
+
+To find out more about PO files, search Godot's online documentation \"Localization using gettext\""
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_left = 33.0
+margin_top = 330.0
+margin_right = 1001.0
+margin_bottom = 370.0
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HelloText" type="Label" parent="."]
+margin_left = 246.0
+margin_top = 381.0
+margin_right = 325.0
+margin_bottom = 400.0
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 4 )
+text = "Hello!"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayAudio" type="Button" parent="."]
+margin_left = 243.0
+margin_top = 442.0
+margin_right = 475.0
+margin_bottom = 468.0
+custom_fonts/font = ExtResource( 4 )
+text = "Push Me!"
+icon = ExtResource( 1 )
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Flag" type="TextureRect" parent="."]
+margin_left = 85.0
+margin_top = 382.0
+margin_right = 213.0
+margin_bottom = 467.0
+texture = ExtResource( 3 )
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+skew = 4.37114e-08
+stream = ExtResource( 2 )
+script = null
+[connection signal="pressed" from="English" to="." method="_on_english_pressed"]
+[connection signal="pressed" from="Spanish" to="." method="_on_spanish_pressed"]
+[connection signal="pressed" from="Japanese" to="." method="_on_japanese_pressed"]
+[connection signal="pressed" from="PlayAudio" to="." method="_on_play_pressed"]

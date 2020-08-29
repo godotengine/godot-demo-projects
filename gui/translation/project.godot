@@ -16,33 +16,18 @@ _global_script_class_icons={
 [application]
 
 config/name="Translation Demo"
-config/description="A demo showing how Godot seamlessly enables
-the use of localized resources and texts."
-run/main_scene="res://translation_demo.tscn"
-config/icon="res://icon.png"
-
-[display]
-
-window/stretch/mode="2d"
-window/stretch/aspect="expand"
-
-[gdnative]
-
-singletons=[  ]
+run/main_scene="res://translation_demo_csv.tscn"
+config/icon="res://Images/icon.png"
 
 [locale]
 
+translations=PackedStringArray( "res://TranslationFiles/CSV/text.en.translation", "res://TranslationFiles/CSV/text.es.translation", "res://TranslationFiles/CSV/text.ja.translation", "res://TranslationFiles/CSV/text.ru.translation", "res://TranslationFiles/PO/translation_demo_es.po", "res://TranslationFiles/PO/translation_demo_ja.po" )
 translation_remaps={
-"res://flag_uk.png": [ "res://flag_spain.png:es", "res://flag_japan.png:ja" ],
-"res://hello_en.wav": PoolStringArray( "res://hello_es.wav:es", "res://hello_jp.wav:ja" )
+"res://Audio/hello_en.wav": PackedStringArray( "res://Audio/hello_es.wav:es", "res://Audio/hello_jp.wav:ja", "res://Audio/hello_ru.wav:ru" ),
+"res://Images/flag_uk.png": PackedStringArray( "res://Images/flag_spain.png:es", "res://Images/flag_japan.png:ja", "res://Images/flag_russia.png:ru" )
 }
-translations=PoolStringArray( "res://text.en.translation", "res://text.es.translation", "res://text.ja.translation" )
-
-[memory]
-
-multithread/thread_rid_pool_prealloc=60
+translations_pot_files=PackedStringArray( "res://translation_po.gd", "res://translation_demo_po.tscn" )
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
-environment/default_clear_color=Color( 0.145098, 0.145098, 0.164706, 1 )
+environment/default_environment="res://default_env.tres"

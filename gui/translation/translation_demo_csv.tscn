@@ -1,12 +1,17 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://translation_demo.gd" type="Script" id=1]
-[ext_resource path="res://font/droid_sans.tres" type="DynamicFont" id=2]
-[ext_resource path="res://speaker.png" type="Texture" id=3]
-[ext_resource path="res://flag_uk.png" type="Texture" id=4]
-[ext_resource path="res://hello_en.wav" type="AudioStream" id=5]
+[ext_resource path="res://Images/speaker.png" type="Texture2D" id=1]
+[ext_resource path="res://Audio/hello_en.wav" type="AudioStream" id=2]
+[ext_resource path="res://Images/flag_uk.png" type="Texture2D" id=3]
+[ext_resource path="res://Fonts/droid_sans.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Scripts/translation_csv.gd" type="Script" id=5]
+[ext_resource path="res://Fonts/DroidSans.ttf" type="DynamicFontData" id=6]
 
-[node name="TranslationDemo" type="Panel"]
+[sub_resource type="DynamicFont" id=1]
+size = 24
+font_data = ExtResource( 6 )
+
+[node name="TranslationDemoCSV" type="Panel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -17,47 +22,82 @@ margin_right = 512.0
 margin_bottom = 300.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-script = ExtResource( 1 )
+script = ExtResource( 5 )
 __meta__ = {
-"__editor_plugin_screen__": "2D",
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+margin_left = 422.0
+margin_right = 602.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 1 )
+text = "CSV Example"
+script = null
+__meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="English" type="Button" parent="."]
 margin_left = 32.0
-margin_top = 64.0
+margin_top = 81.9594
 margin_right = 192.0
-margin_bottom = 88.0
+margin_bottom = 105.959
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Use English"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Spanish" type="Button" parent="."]
 margin_left = 32.0
-margin_top = 112.0
+margin_top = 129.959
 margin_right = 192.0
-margin_bottom = 136.0
+margin_bottom = 153.959
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Use Spanish"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Japanese" type="Button" parent="."]
 margin_left = 32.0
-margin_top = 160.0
+margin_top = 177.959
 margin_right = 192.0
-margin_bottom = 184.0
+margin_bottom = 201.959
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Use Japanese"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Russian" type="Button" parent="."]
+margin_left = 32.0
+margin_top = 225.959
+margin_right = 192.0
+margin_bottom = 249.959
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Use Russian"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Description" type="Label" parent="."]
 margin_left = 243.0
-margin_top = 42.0
+margin_top = 59.9594
 margin_right = 804.0
-margin_bottom = 312.0
+margin_bottom = 329.959
 size_flags_horizontal = 2
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
 text = "This is a demo of how a game can be internationalized.
 Translations are created in a CSV file and then imported into Godot.
 
@@ -67,12 +107,20 @@ in the font/ folder that you can use for your games.
 Godot allows internationalized text to change automatically when the locale is
 modified. Resources can also be set internationalized alternatives and replaced
 automatically on locale change."
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HSeparator" type="HSeparator" parent="."]
 margin_left = 33.0
 margin_top = 330.0
 margin_right = 1001.0
 margin_bottom = 370.0
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HelloText" type="Label" parent="."]
 margin_left = 246.0
@@ -80,28 +128,43 @@ margin_top = 381.0
 margin_right = 324.0
 margin_bottom = 400.0
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
 text = "KEY_HELLO"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PlayAudio" type="Button" parent="."]
 margin_left = 243.0
 margin_top = 442.0
 margin_right = 475.0
-margin_bottom = 467.0
-custom_fonts/font = ExtResource( 2 )
+margin_bottom = 468.0
+custom_fonts/font = ExtResource( 4 )
 text = "KEY_PUSH"
-icon = ExtResource( 3 )
+icon = ExtResource( 1 )
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Flag" type="TextureRect" parent="."]
 margin_left = 85.0
 margin_top = 382.0
 margin_right = 213.0
 margin_bottom = 467.0
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Audio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+skew = 4.37114e-08
+stream = ExtResource( 2 )
+script = null
 [connection signal="pressed" from="English" to="." method="_on_english_pressed"]
 [connection signal="pressed" from="Spanish" to="." method="_on_spanish_pressed"]
 [connection signal="pressed" from="Japanese" to="." method="_on_japanese_pressed"]
+[connection signal="pressed" from="Russian" to="." method="_on_russian_pressed"]
 [connection signal="pressed" from="PlayAudio" to="." method="_on_play_pressed"]
