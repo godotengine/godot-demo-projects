@@ -5,13 +5,15 @@ physics engine.
 
 They can be used for different purpose:
 - Functional tests to check for regressions and
-compare the behavior between physics engines
+  compare the behavior between physics engines
 - Performance tests to evaluate and compare
-performance between physics engines
+  performance between physics engines
 
 Language: GDScript
 
 Renderer: GLES 2
+
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/675
 
 ## Screenshots
 

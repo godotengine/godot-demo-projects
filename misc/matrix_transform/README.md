@@ -6,6 +6,12 @@ Do not "run" this project. You are only meant to use it within the Godot editor.
 
 For more information, see the [Matrices and Transforms](https://docs.godotengine.org/en/latest/tutorials/math/matrices_and_transforms.html) article.
 
+Language: GDScript
+
+Renderer: GLES 2
+
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/584
+
 ## How does it work?
 
 In both 2D and 3D, colored lines are drawn indicating the basis vectors as well as the origin vector. For 3D, this means cuboids. If you translate, rotate, scale, or shear the AxisMarker objects, you will be able to see how it affects the transform's component vectors, and all children objects are also appropriately transformed.

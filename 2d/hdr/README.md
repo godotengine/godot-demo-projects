@@ -9,6 +9,8 @@ Language: GDScript
 
 Renderer: GLES 3 (HDR is not available in GLES 2)
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/110
+
 ## Screenshots
 
 ![Screenshot](screenshots/left.png)

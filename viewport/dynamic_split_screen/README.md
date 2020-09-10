@@ -10,6 +10,8 @@ Renderer: GLES 2
 Note: An HTML5 export is testable
 [here](https://benjaminnavarro.github.io/godot_dynamic_split_screen/index.html).
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/541
+
 ## Details
 
 A dynamic split screen system displays a single screen when

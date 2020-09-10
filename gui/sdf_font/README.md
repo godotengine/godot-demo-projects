@@ -8,6 +8,8 @@ Language: This demo contains no code.
 
 Renderer: GLES 3 (this effect is not available in GLES 2)
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/521
+
 ## Screenshots
 
 ![Screenshot](screenshots/sdf.png)

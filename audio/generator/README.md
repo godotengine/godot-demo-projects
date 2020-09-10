@@ -8,6 +8,8 @@ Language: GDScript
 
 Renderer: GLES 2
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/526
+
 ## How does it work?
 
 It uses the `push_frame()` method on an [`AudioStreamGeneratorPlayback`](https://docs.godotengine.org/en/latest/classes/class_audiostreamgeneratorplayback.html)

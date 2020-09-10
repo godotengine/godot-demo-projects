@@ -7,6 +7,8 @@ Language: GDScript
 
 Renderer: GLES 3
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/126
+
 ## How does it work?
 
 This demo uses a [`KinematicBody`](https://docs.godotengine.org/en/latest/classes/class_kinematicbody.html)

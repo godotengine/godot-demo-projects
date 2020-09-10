@@ -6,6 +6,8 @@ Language: GDScript
 
 Renderer: GLES 2
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/129
+
 ## How does it work?
 
 The Pong game is rendered to a custom

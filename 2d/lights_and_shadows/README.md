@@ -8,6 +8,8 @@ Language: GDScript
 
 Renderer: GLES 2
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/116
+
 ## Screenshots
 
 ![Screenshot](screenshots/lights.png)

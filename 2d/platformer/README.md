@@ -19,6 +19,8 @@ Language: GDScript
 
 Renderer: GLES 3 (particles are not available in GLES 2)
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/120
+
 ## Features
 
 - Side-scrolling player controller using [`KinematicBody2D`](https://docs.godotengine.org/en/latest/classes/class_kinematicbody2d.html).

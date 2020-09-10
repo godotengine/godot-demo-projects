@@ -9,6 +9,8 @@ Language: GDScript
 
 Renderer: GLES 2
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/585
+
 # How does it work?
 
 This project contains 4 plugins:

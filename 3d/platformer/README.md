@@ -9,6 +9,8 @@ Language: GDScript
 
 Renderer: GLES 3
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/125
+
 ## Screenshots
 
 ![Screenshot](screenshots/face.png)

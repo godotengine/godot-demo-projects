@@ -7,6 +7,8 @@ Language: [GDSL](https://docs.godotengine.org/en/latest/tutorials/shading/shadin
 
 Renderer: GLES 2
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/522
+
 ## Screenshots
 
 ![Screenshot](screenshots/sprite.png)
