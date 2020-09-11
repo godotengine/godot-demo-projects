@@ -11,6 +11,8 @@ Language: GDScript
 
 Renderer: GLES 3 (particles are not available in GLES 2)
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/119
+
 ## How does it work?
 
 The player and enemies use dynamic character

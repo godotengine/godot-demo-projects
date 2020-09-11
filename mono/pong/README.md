@@ -12,6 +12,8 @@ Note: There is a GDScript version available [here](https://github.com/godotengin
 
 Note: There is a VisualScript version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/visual_script/pong).
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/535
+
 ## How does it work?
 
 The walls, paddle, and ball are all

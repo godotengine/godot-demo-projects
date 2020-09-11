@@ -9,6 +9,8 @@ Renderer: GLES 2
 
 Note: There is a GDScript version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/misc/multitouch_view).
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/135
+
 ## Screenshots
 
 ![Screenshot](../../misc/multitouch_view/screenshots/multitouch.png)

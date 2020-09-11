@@ -12,6 +12,8 @@ Language: GDScript and some [C#](https://docs.godotengine.org/en/latest/getting_
 
 Renderer: GLES 2
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/677
+
 ## How does it work?
 
 The [`OS`](https://docs.godotengine.org/en/latest/classes/class_os.html)

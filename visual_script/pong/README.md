@@ -12,6 +12,8 @@ Note: There is a GDScript version available [here](https://github.com/godotengin
 
 Note: There is a C# version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/pong).
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/136
+
 ## How does it work?
 
 The walls, paddle, and ball are all

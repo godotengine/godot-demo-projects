@@ -10,6 +10,8 @@ Renderer: GLES 2
 
 Note: There is a Mono C# version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/2.5d).
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/583
+
 ## How does it work?
 
 Custom node types are added in a Godot plugin to allow 2.5D objects. Node25D serves as the base for all 2.5D objects. Its first child must be a 3D Spatial, which is used to calculate its position. Then, add a 2D Sprite (or similar) to display the object.

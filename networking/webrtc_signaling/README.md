@@ -10,6 +10,8 @@ This demo is devided in 4 parts:
 
 **NOTE**: You must extract the [latest version](https://github.com/godotengine/webrtc-native/releases) of the WebRTC GDNative plugin in the project folder to run from desktop.
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/537
+
 ## Protocol
 
 The protocol is text based, and composed by a command and possibly multiple payload arguments, each separated by a new line.

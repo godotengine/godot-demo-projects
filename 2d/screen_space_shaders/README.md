@@ -7,6 +7,8 @@ Language: [GDSL](https://docs.godotengine.org/en/latest/tutorials/shading/shadin
 
 Renderer: GLES 3 (the blur effect is not available in GLES 2, the rest work)
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/122
+
 ## Screenshots
 
 ![Screenshot](screenshots/whirl.png)

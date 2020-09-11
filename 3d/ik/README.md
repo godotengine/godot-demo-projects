@@ -8,6 +8,8 @@ Language: GDScript
 
 Renderer: GLES 3
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/523
+
 ## How does it work?
 
 This demo shows how to implement IK using two different methods. One uses the

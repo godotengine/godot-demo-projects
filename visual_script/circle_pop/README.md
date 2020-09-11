@@ -8,6 +8,8 @@ Language: [VisualScript](https://docs.godotengine.org/en/latest/getting_started/
 
 Renderer: GLES 2
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/137
+
 ## Screenshots
 
 ![Screenshot](screenshots/circle.png)
