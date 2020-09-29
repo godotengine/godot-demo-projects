@@ -123,10 +123,8 @@ func _ready():
 	add_line("Mono module enabled", "Yes" if mono_enabled else "No")
 	if mono_enabled:
 		mono_test.set_script(load("res://MonoTest.cs"))
-		add_line("Architecture", mono_test.Architecture())
 		add_line("Operating System", mono_test.OperatingSystem())
 		add_line("Platform Type", mono_test.PlatformType())
-		add_line("Texture Compression", mono_test.TextureCompression())
 
 	add_header("Software")
 	add_line("OS name", OS.get_name())

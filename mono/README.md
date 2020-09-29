@@ -8,7 +8,7 @@ Languages: All have [C#](https://docs.godotengine.org/en/latest/getting_started/
 
 Renderers: Dodge the Creeps is GLES 3, rest are GLES 2
 
-# Note: Godot 3.2.2 or newer is required
+# Note: Godot 3.2.3 or newer is required
 
 While most of the demos work with any 3.2.x version, these demos require
-at least Godot 3.2.2 since there are large C#-specific changes in 3.2.2.
+at least Godot 3.2.3 since there are large C#-specific changes in 3.2.3.
