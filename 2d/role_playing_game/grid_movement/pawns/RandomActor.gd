@@ -7,7 +7,7 @@ func get_input_direction():
 		return Vector2()
 	var random_x = DIRECTIONS[randi() % DIRECTIONS.size()]
 	var random_y = DIRECTIONS[randi() % DIRECTIONS.size()]
-	
+
 	var random_axis = randi() % 2
 	if random_axis > 0:
 		random_x = 0

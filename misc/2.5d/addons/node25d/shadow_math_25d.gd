@@ -23,7 +23,7 @@ func _process(_delta):
 		if _shadow_root != null:
 			_shadow_root.visible = false
 		return # Shadow is not in a valid place or you're viewing the Shadow25D scene.
-	
+
 	translation = _target_math.translation
 	var k = move_and_collide(Vector3.DOWN * shadow_length)
 	if k == null:

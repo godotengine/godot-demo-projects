@@ -8,7 +8,7 @@ var playback: AudioStreamPlayback = null # Actual playback stream, assigned in _
 
 func _fill_buffer():
 	var increment = pulse_hz / sample_hz
-	
+
 	var to_fill = playback.get_frames_available()
 	while to_fill > 0:
 		playback.push_frame(Vector2.ONE * sin(phase * TAU)) # Audio frames are stereo.

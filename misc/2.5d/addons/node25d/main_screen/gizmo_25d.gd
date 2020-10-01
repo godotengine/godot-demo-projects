@@ -44,14 +44,14 @@ func _process(_delta):
 			# If we're not hovering over a line, ensure they are placed correctly.
 			lines_root.global_position = node_25d.global_position
 			return
-	
+
 	lines[dominant_axis].modulate.a = 1
 	if !wants_to_move:
 		_moving = false
 	elif wants_to_move and !_moving:
 		_moving = true
 		_start_position = mouse_position
-	
+
 	if _moving:
 		# Change modulate of unselected axes.
 		lines[(dominant_axis + 1) % 3].modulate.a = 0.5
@@ -94,12 +94,12 @@ func _distance_to_segment_at_index(index, point):
 		return INF
 	if point.length_squared() < 400:
 		return INF
-	
+
 	var segment_end = lines[index].points[1]
 	var length_squared = segment_end.length_squared()
 	if length_squared < 400:
 		return INF
-	
+
 	var t = clamp(point.dot(segment_end) / length_squared, 0, 1)
 	var projection = t * segment_end
 	return point.distance_to(projection)

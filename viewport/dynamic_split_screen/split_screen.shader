@@ -24,22 +24,22 @@ void fragment() {
 
 	float width = viewport_size.x;
 	float height = viewport_size.y;
-	
+
 	if (split_active) {
 		vec2 dx = player2_position - player1_position;
 		float split_slope;
-		
+
 		if (dx.y != 0.0) {
 			split_slope = dx.x / dx.y;
 		} else {
 			split_slope = 100000.0; // High value (vertical split) if dx.y = 0
 		}
-		
+
 		vec2 split_origin = vec2(0.5, 0.5);
 		vec2 split_line_start = vec2(0.0, height * ((split_origin.x - 0.0) * split_slope + split_origin.y));
 		vec2 split_line_end = vec2(width, height * ((split_origin.x - 1.0) * split_slope + split_origin.y));
 		float distance_to_split_line = distanceToLine(split_line_start, split_line_end, vec2(UV.x * width, UV.y * height));
-		
+
 		// Draw split border if close enough
 		if (distance_to_split_line < split_line_thickness) {
 			COLOR = split_line_color;

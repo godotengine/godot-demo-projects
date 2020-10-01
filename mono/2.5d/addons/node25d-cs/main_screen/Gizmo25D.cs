@@ -72,7 +72,7 @@ public class Gizmo25D : Node2D
     			return;
             }
         }
-	
+
         Color modulate = lines[dominantAxis].Modulate;
     	modulate.a = 1;
         lines[dominantAxis].Modulate = modulate;
@@ -86,7 +86,7 @@ public class Gizmo25D : Node2D
     		_moving = true;
     		_startPosition = mousePosition;
         }
-	
+
     	if (_moving)
         {
     		// Change modulate of unselected axes.
@@ -153,14 +153,14 @@ public class Gizmo25D : Node2D
         {
 		    return Mathf.Inf;
         }
-	
+
 	    Vector2 segmentEnd = lines[index].Points[1];
 	    float lengthSquared = segmentEnd.LengthSquared();
 	    if (lengthSquared < 400)
         {
     		return Mathf.Inf;
         }
-	
+
 	    var t = Mathf.Clamp(point.Dot(segmentEnd) / lengthSquared, 0, 1);
     	var projection = t * segmentEnd;
 	    return point.DistanceTo(projection);

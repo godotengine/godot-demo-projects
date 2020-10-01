@@ -36,7 +36,7 @@ func _ready():
 func _process(delta):
 	if !editor_interface: # Something's not right... bail!
 		return
-	
+
 	# View mode polling.
 	var view_mode_changed_this_frame = false
 	var new_view_mode = view_mode_button_group.get_pressed_button().get_index()
@@ -44,18 +44,18 @@ func _process(delta):
 		view_mode_index = new_view_mode
 		view_mode_changed_this_frame = true
 		_recursive_change_view_mode(get_tree().edited_scene_root)
-	
+
 	# Zooming.
 	if Input.is_mouse_button_pressed(BUTTON_WHEEL_UP):
 		zoom_level += 1
 	elif Input.is_mouse_button_pressed(BUTTON_WHEEL_DOWN):
 		zoom_level -= 1
 	var zoom = _get_zoom_amount()
-	
+
 	# Viewport size.
 	var size = get_global_rect().size
 	viewport_2d.size = size
-	
+
 	# Viewport transform.
 	var viewport_trans = Transform2D.IDENTITY
 	viewport_trans.x *= zoom
@@ -63,7 +63,7 @@ func _process(delta):
 	viewport_trans.origin = viewport_trans.basis_xform(viewport_center) + size / 2
 	viewport_2d.canvas_transform = viewport_trans
 	viewport_overlay.canvas_transform = viewport_trans
-	
+
 	# Delete unused gizmos.
 	var selection = editor_interface.get_selection().get_selected_nodes()
 	var overlay_children = viewport_overlay.get_children()
@@ -74,7 +74,7 @@ func _process(delta):
 				contains = true
 		if !contains:
 			overlay_child.queue_free()
-	
+
 	# Add new gizmos.
 	for selected in selection:
 		if selected.has_method("Node25DReady"):

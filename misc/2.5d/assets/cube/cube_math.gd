@@ -9,7 +9,7 @@ var _cube_math_spatials = []
 
 func _ready():
 	_parent = get_parent()
-	
+
 	for i in range(27):
 		# warning-ignore:integer_division
 		var a: int = (i / 9) - 1
@@ -26,12 +26,12 @@ func _ready():
 func _process(delta):
 	if Input.is_action_pressed("exit"):
 		get_tree().quit()
-	
+
 	if Input.is_action_just_pressed("view_cube_demo"):
 		# warning-ignore:return_value_discarded
 		get_tree().change_scene("res://assets/demo_scene.tscn")
 		return
-	
+
 	if _is_parent_ready:
 		if Input.is_action_just_pressed("reset_position"):
 			transform = Transform.IDENTITY

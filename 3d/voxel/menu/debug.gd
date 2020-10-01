@@ -8,7 +8,7 @@ onready var voxel_world = $"../VoxelWorld"
 func _process(_delta):
 	if Input.is_action_just_pressed("debug"):
 		visible = !visible
-	
+
 	text = "Position: " + _vector_to_string_appropriate_digits(player.transform.origin)
 	text += "\nEffective render distance: " + str(voxel_world.effective_render_distance)
 	text += "\nLooking: " + _cardinal_string_from_radians(player.transform.basis.get_euler().y)
@@ -26,7 +26,7 @@ func _vector_to_string_appropriate_digits(vector):
 				factors[i] = factors[i] / 10
 				if abs(vector[i]) > 524288:
 					factors[i] = factors[i] / 10
-	
+
 	return "(" + \
 			str(round(vector.x * factors[0]) / factors[0]) + ", " + \
 			str(round(vector.y * factors[1]) / factors[1]) + ", " + \

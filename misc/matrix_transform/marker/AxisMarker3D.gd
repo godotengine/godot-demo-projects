@@ -10,7 +10,7 @@ func _process(_delta):
 		holder.transform = Transform()
 		cube.transform = Transform().scaled(Vector3.ONE * 0.0001)
 		return
-	
+
 	holder.transform = Transform(Basis(), translation / 2)
 	holder.transform = holder.transform.looking_at(translation, Vector3.UP)
 	holder.transform = get_parent().global_transform * holder.transform

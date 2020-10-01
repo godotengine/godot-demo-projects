@@ -20,17 +20,17 @@ onready var player = $"../Player"
 func _process(_delta):
 	_set_render_distance(Settings.render_distance)
 	var player_chunk = (player.transform.origin / Chunk.CHUNK_SIZE).round()
-	
+
 	if _deleting or player_chunk != _old_player_chunk:
 		_delete_far_away_chunks(player_chunk)
 		_generating = true
-	
+
 	if not _generating:
 		return
-	
+
 	# Try to generate chunks ahead of time based on where the player is moving.
 	player_chunk.y += round(clamp(player.velocity.y, -render_distance / 4, render_distance / 4))
-	
+
 	# Check existing chunks within range. If it doesn't exist, create it.
 	for x in range(player_chunk.x - effective_render_distance, player_chunk.x + effective_render_distance):
 		for y in range(player_chunk.y - effective_render_distance, player_chunk.y + effective_render_distance):
@@ -38,16 +38,16 @@ func _process(_delta):
 				var chunk_position = Vector3(x, y, z)
 				if player_chunk.distance_to(chunk_position) > render_distance:
 					continue
-				
+
 				if _chunks.has(chunk_position):
 					continue
-				
+
 				var chunk = Chunk.new()
 				chunk.chunk_position = chunk_position
 				_chunks[chunk_position] = chunk
 				add_child(chunk)
 				return
-	
+
 	# If we didn't generate any chunks (and therefore didn't return), what next?
 	if effective_render_distance < render_distance:
 		# We can move on to the next stage by increasing the effective distance.
@@ -76,7 +76,7 @@ func set_block_global_position(block_global_position, block_id):
 	else:
 		chunk.data[sub_position] = block_id
 	chunk.regenerate()
-	
+
 	# We also might need to regenerate some neighboring chunks.
 	if Chunk.is_block_transparent(block_id):
 		if sub_position.x == 0:
@@ -108,7 +108,7 @@ func _delete_far_away_chunks(player_chunk):
 	_old_player_chunk = player_chunk
 	# If we need to delete chunks, give the new chunk system a chance to catch up.
 	effective_render_distance = max(1, effective_render_distance - 1)
-	
+
 	var deleted_this_frame = 0
 	# We should delete old chunks more aggressively if moving fast.
 	# An easy way to calculate this is by using the effective render distance.
@@ -128,7 +128,7 @@ func _delete_far_away_chunks(player_chunk):
 				# Continue deleting next frame.
 				_deleting = true
 				return
-	
+
 	# We're done deleting.
 	_deleting = false
 

@@ -23,14 +23,14 @@ static func random_blocks():
 
 static func flat(chunk_position):
 	var data = {}
-	
+
 	if chunk_position.y != -1:
 		return data
-	
+
 	for x in range(CHUNK_SIZE):
 		for z in range(CHUNK_SIZE):
 			data[Vector3(x, 0, z)] = 3
-	
+
 	return data
 
 
@@ -38,5 +38,5 @@ static func flat(chunk_position):
 static func origin_grass(chunk_position):
 	if chunk_position == Vector3.ZERO:
 		return {Vector3.ZERO: 3}
-	
+
 	return {}

@@ -37,7 +37,7 @@ func _unhandled_input(event):
 		else:
 			_pause_menu.close()
 		get_tree().set_input_as_handled()
-	
+
 	elif event.is_action_pressed("splitscreen"):
 		if name == "Splitscreen":
 			# We need to clean up a little bit first to avoid Viewport errors.

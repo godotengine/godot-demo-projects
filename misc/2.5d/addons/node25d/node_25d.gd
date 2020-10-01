@@ -47,11 +47,11 @@ func Node25D_process():
 	if _spatial_node == null:
 		return
 	_spatial_position = _spatial_node.translation
-	
+
 	var flat_pos = _spatial_position.x * _basisX
 	flat_pos += _spatial_position.y * _basisY
 	flat_pos += _spatial_position.z * _basisZ
-	
+
 	global_position = flat_pos
 
 

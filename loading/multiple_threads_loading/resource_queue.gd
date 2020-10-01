@@ -98,7 +98,7 @@ func get_resource(path):
 				var pos = queue.find(res)
 				queue.remove(pos)
 				queue.insert(0, res)
-			
+
 			res = _wait_for_resource(res, path)
 			pending.erase(path)
 			_unlock("return")
@@ -116,13 +116,13 @@ func get_resource(path):
 func thread_process():
 	_wait("thread_process")
 	_lock("process")
-	
+
 	while queue.size() > 0:
 		var res = queue[0]
 		_unlock("process_poll")
 		var ret = res.poll()
 		_lock("process_check_queue")
-		
+
 		if ret == ERR_FILE_EOF || ret != OK:
 			var path = res.get_meta("path")
 			if path in pending: # Else, it was already retrieved.

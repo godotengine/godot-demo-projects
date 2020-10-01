@@ -10,5 +10,5 @@ func _ready():
 	for wall in walls:
 		var material = SpatialMaterial.new()
 		material.albedo_color = Color(randf(), randf(), randf())
-		
+
 		wall.material_override = material

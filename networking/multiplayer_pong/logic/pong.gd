@@ -33,7 +33,7 @@ sync func update_score(add_to_left):
 	else:
 		score_right += 1
 		score_right_node.set_text(str(score_right))
-	
+
 	var game_ended = false
 	if score_left == SCORE_TO_WIN:
 		winner_left.show()
@@ -41,7 +41,7 @@ sync func update_score(add_to_left):
 	elif score_right == SCORE_TO_WIN:
 		winner_right.show()
 		game_ended = true
-	
+
 	if game_ended:
 		$ExitGame.show()
 		$Ball.rpc("stop")
