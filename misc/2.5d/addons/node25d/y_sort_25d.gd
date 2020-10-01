@@ -29,7 +29,7 @@ func sort():
 		# The Z index only goes from -4096 to 4096, and we want room for objects having multiple layers.
 		printerr("Sorting failed: Max number of YSort25D nodes is 4000.")
 		return
-	
+
 	# We only want to get Node25D children.
 	# Currently, it also grabs Node2D children.
 	var node25d_nodes = []
@@ -37,7 +37,7 @@ func sort():
 		if n.get_class() == "Node2D":
 			node25d_nodes.append(n)
 	node25d_nodes.sort_custom(Node25D, "y_sort_slight_xz")
-	
+
 	var z_index = -4000
 	for i in range(0, node25d_nodes.size()):
 		node25d_nodes[i].z_index = z_index

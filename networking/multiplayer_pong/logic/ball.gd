@@ -15,12 +15,12 @@ func _process(delta):
 	# so each player sees the motion as smooth and not jerky.
 	if not stopped:
 		translate(_speed * delta * direction)
-	
+
 	# Check screen bounds to make ball bounce.
 	var ball_pos = position
 	if (ball_pos.y < 0 and direction.y < 0) or (ball_pos.y > _screen_size.y and direction.y > 0):
 		direction.y = -direction.y
-		
+
 	if is_network_master():
 		# Only master will decide when the ball is out in the left side (it's own side).
 		# This makes the game playable even if latency is high and ball is going fast.
@@ -43,7 +43,7 @@ sync func bounce(left, random):
 		direction.x = abs(direction.x)
 	else:
 		direction.x = -abs(direction.x)
-	
+
 	_speed *= 1.1
 	direction.y = random * 2.0 - 1
 	direction = direction.normalized()

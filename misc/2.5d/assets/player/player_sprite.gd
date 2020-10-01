@@ -20,10 +20,10 @@ func _ready():
 func _process(delta):
 	if Engine.is_editor_hint():
 		return # Don't run this in the editor.
-	
+
 	_sprite_basis()
 	var movement = _check_movement() # Always run to get direction, but don't always use return bool.
-	
+
 	# Test-only move and collide, check if the player is on the ground.
 	var k = _parent_math.move_and_collide(Vector3.DOWN * 10 * delta, true, true, true)
 	if k != null:
@@ -90,7 +90,7 @@ func _check_movement() -> bool:
 	# Gather player input and store movement to these int variables. Note: These indeed have to be integers.
 	var x := 0
 	var z := 0
-	
+
 	if Input.is_action_pressed("move_right"):
 		x += 1
 	if Input.is_action_pressed("move_left"):
@@ -99,7 +99,7 @@ func _check_movement() -> bool:
 		z -= 1
 	if Input.is_action_pressed("move_back"):
 		z += 1
-	
+
 	# Check for isometric controls and add more to movement accordingly.
 	# For efficiency, only check the X axis since this X axis value isn't used anywhere else.
 	if !_parent_math.isometric_controls && is_equal_approx(Node25D.SCALE * 0.86602540378, _parent_node25d.get_basis()[0].x):
@@ -111,7 +111,7 @@ func _check_movement() -> bool:
 			x += 1
 		if Input.is_action_pressed("move_back"):
 			x -= 1
-	
+
 	# Set the direction based on which inputs were pressed.
 	if x == 0:
 		if z == 0:

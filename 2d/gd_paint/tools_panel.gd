@@ -46,7 +46,7 @@ func button_pressed(button_name):
 	# If a brush mode button is pressed.
 	var tool_name = null
 	var shape_name = null
-	
+
 	if button_name == "mode_pencil":
 		paint_control.brush_mode = paint_control.BrushModes.PENCIL
 		brush_settings.modulate = Color(1, 1, 1, 1)
@@ -80,7 +80,7 @@ func button_pressed(button_name):
 		save_dialog.popup_centered()
 	elif button_name == "undo_stroke":
 		paint_control.undo_stroke()
-	
+
 	# Update the labels (in case the brush mode or brush shape has changed).
 	if tool_name != null:
 		label_tools.text = "Selected tool: " + tool_name

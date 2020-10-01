@@ -12,5 +12,5 @@ func _physics_process(_delta):
 	velocity.z += Input.get_action_strength("move_down_player" + str(player_id))
 	velocity.x = -Input.get_action_strength("move_left_player" + str(player_id))
 	velocity.x +=  Input.get_action_strength("move_right_player" + str(player_id))
-	
+
 	move_and_slide(velocity.normalized() * walk_speed)

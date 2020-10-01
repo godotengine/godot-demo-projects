@@ -8,10 +8,10 @@ var main_panel_instance
 func _enter_tree():
 	main_panel_instance = MainPanel.instance()
 	main_panel_instance.get_child(1).editor_interface = get_editor_interface()
-	
+
 	# Add the main panel to the editor's main viewport.
 	get_editor_interface().get_editor_viewport().add_child(main_panel_instance)
-	
+
 	# Hide the main panel.
 	make_visible(false)
 	# When this plugin node enters tree, add the custom types.

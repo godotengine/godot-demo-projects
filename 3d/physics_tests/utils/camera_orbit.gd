@@ -17,10 +17,10 @@ func _unhandled_input(event):
 		if mouse_button_event.button_index == BUTTON_LEFT:
 			_rotation_enabled = mouse_button_event.pressed
 		return
-	
+
 	if not _rotation_enabled:
 		return
-	
+
 	var mouse_motion_event = event as InputEventMouseMotion
 	if mouse_motion_event:
 		var rotation_delta = mouse_motion_event.relative.x

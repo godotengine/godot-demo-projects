@@ -24,15 +24,15 @@ func _integrate_forces(state):
 
 	lv += g * delta # Apply gravity.
 	var up = -g.normalized()
-	
+
 	if dying:
 		state.set_linear_velocity(lv)
 		return
-	
+
 	for i in range(state.get_contact_count()):
 		var cc = state.get_contact_collider_object(i)
 		var dp = state.get_contact_local_normal(i)
-		
+
 		if cc:
 			if cc is preload("res://player/bullet/bullet.gd") and cc.enabled:
 				set_mode(MODE_RIGID)
@@ -43,15 +43,15 @@ func _integrate_forces(state):
 				cc.enabled = false
 				get_node("SoundHit").play()
 				return
-	
+
 	var col_floor = get_node("Armature/RayFloor").is_colliding()
 	var col_wall = get_node("Armature/RayWall").is_colliding()
-	
+
 	var advance = col_floor and not col_wall
-	
+
 	var dir = get_node("Armature").get_transform().basis[2].normalized()
 	var deaccel_dir = dir
-	
+
 	if advance:
 		if dir.dot(lv) < max_speed:
 			lv += dir * accel * delta
@@ -59,17 +59,17 @@ func _integrate_forces(state):
 	else:
 		if prev_advance:
 			rot_dir = 1
-		
+
 		dir = Basis(up, rot_dir * rot_speed * delta).xform(dir)
 		get_node("Armature").set_transform(Transform().looking_at(-dir, up))
-	
+
 	var dspeed = deaccel_dir.dot(lv)
 	dspeed -= deaccel * delta
 	if dspeed < 0:
 		dspeed = 0
-	
+
 	lv = lv - deaccel_dir * deaccel_dir.dot(lv) + deaccel_dir * dspeed
-	
+
 	state.set_linear_velocity(lv)
 	prev_advance = advance
 

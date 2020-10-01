@@ -14,10 +14,10 @@ func start_timer(timeout):
 		_timer.connect("timeout", self, "_on_timer_done")
 	else:
 		cancel_timer()
-	
+
 	_timer.start(timeout)
 	_timer_started = true
-	
+
 	return _timer
 
 

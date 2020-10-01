@@ -14,7 +14,7 @@ func _process(delta):
 	var velocity = Vector2()
 	velocity.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	velocity.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-	
+
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 		$AnimatedSprite.play()

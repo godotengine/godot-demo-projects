@@ -51,20 +51,20 @@ func _ready():
 
 func _process(_delta):
 	var mouse_pos = get_viewport().get_mouse_position()
-	
+
 	# Check if the mouse is currently inside the canvas/drawing-area.
 	is_mouse_in_drawing_area = false
 	if mouse_pos.x > TL_node.global_position.x:
 		if mouse_pos.y > TL_node.global_position.y:
 			is_mouse_in_drawing_area = true
-	
+
 	if Input.is_mouse_button_pressed(BUTTON_LEFT):
 		# If we do not have a position for when the mouse was first clicked, then this must
 		# be the first time is_mouse_button_pressed has been called since the mouse button was
 		# released, so we need to store the position.
 		if mouse_click_start_pos == null:
 			mouse_click_start_pos = mouse_pos
-		
+
 		# If the mouse is inside the canvas and the mouse is 1px away from the position of the mouse last _process call.
 		if check_if_mouse_is_inside_canvas():
 			if mouse_pos.distance_to(last_mouse_pos) >= 1:
@@ -77,11 +77,11 @@ func _process(_delta):
 						undo_element_list_num = brush_data_list.size()
 					# Add the brush object to draw_elements_array.
 					add_brush(mouse_pos, brush_mode)
-	
+
 	else:
 		# We've finished our stroke, so we can set a new undo (if a new storke is made).
 		undo_set = false
-		
+
 		# If the mouse is inside the canvas.
 		if check_if_mouse_is_inside_canvas():
 			# If we're using either the circle shape mode, or the rectangle shape mode, then
@@ -94,7 +94,7 @@ func _process(_delta):
 		# Since we've released the left mouse, we need to get a new mouse_click_start_pos next time
 		#is_mouse_button_pressed is true.
 		mouse_click_start_pos = null
-	
+
 	# Store mouse_pos as last_mouse_pos now that we're done with _process.
 	last_mouse_pos = mouse_pos
 
@@ -117,17 +117,17 @@ func undo_stroke():
 	# Only undo a stroke if we have one.
 	if undo_element_list_num == UNDO_NONE:
 		return
-	
+
 	# If we are undoing a shape, then we can just remove the latest brush.
 	if undo_element_list_num == UNDO_MODE_SHAPE:
 		if brush_data_list.size() > 0:
 			brush_data_list.remove(brush_data_list.size() - 1)
-		
+
 		# Now that we've undone a shape, we cannot undo again until another stoke is added.
 		undo_element_list_num = UNDO_NONE
 		# NOTE: if we only had shape brushes, then we could remove the above line and could let the user
 		# undo until we have a empty element list.
-	
+
 	# Otherwise we're removing a either a pencil stroke or a eraser stroke.
 	else:
 		# Figure out how many elements/brushes we've added in the last stroke.
@@ -136,7 +136,7 @@ func undo_stroke():
 		#warning-ignore:unused_variable
 		for elment_num in range(0, elements_to_remove):
 			brush_data_list.pop_back()
-		
+
 		# Now that we've undone a stoke, we cannot undo again until another stoke is added.
 		undo_element_list_num = UNDO_NONE
 
@@ -147,7 +147,7 @@ func undo_stroke():
 func add_brush(mouse_pos, type):
 	# Make new brush dictionary that will hold all of the data we need for the brush.
 	var new_brush = {}
-	
+
 	# Populate the dictionary with values based on the global brush variables.
 	# We will override these as needed if the brush is a rectange or circle.
 	new_brush.brush_type = type
@@ -155,13 +155,13 @@ func add_brush(mouse_pos, type):
 	new_brush.brush_shape = brush_shape
 	new_brush.brush_size = brush_size
 	new_brush.brush_color = brush_color
-	
+
 	# If the new bursh is a rectangle shape, we need to calculate the top left corner of the rectangle and the
 	# bottom right corner of the rectangle.
 	if type == BrushModes.RECTANGLE_SHAPE:
 		var TL_pos = Vector2()
 		var BR_pos = Vector2()
-		
+
 		# Figure out the left and right positions of the corners and assign them to the proper variable.
 		if mouse_pos.x < mouse_click_start_pos.x:
 			TL_pos.x = mouse_pos.x
@@ -169,7 +169,7 @@ func add_brush(mouse_pos, type):
 		else:
 			TL_pos.x = mouse_click_start_pos.x
 			BR_pos.x = mouse_pos.x
-		
+
 		# Figure out the top and bottom positions of the corners and assign them to the proper variable.
 		if mouse_pos.y < mouse_click_start_pos.y:
 			TL_pos.y = mouse_pos.y
@@ -177,11 +177,11 @@ func add_brush(mouse_pos, type):
 		else:
 			TL_pos.y = mouse_click_start_pos.y
 			BR_pos.y = mouse_pos.y
-		
+
 		# Assign the positions to the brush.
 		new_brush.brush_pos = TL_pos
 		new_brush.brush_shape_rect_pos_BR = BR_pos
-	
+
 	# If the brush isa circle shape, then we need to calculate the radius of the circle.
 	if type == BrushModes.CIRCLE_SHAPE:
 		# Get the center point inbetween the mouse position and the position of the mouse when we clicked.
@@ -190,7 +190,7 @@ func add_brush(mouse_pos, type):
 		# the center to the top/bottom positon of the mouse.
 		new_brush.brush_pos = center_pos
 		new_brush.brush_shape_circle_radius = center_pos.distance_to(Vector2(center_pos.x, mouse_pos.y))
-	
+
 	# Add the brush and update/draw all of the brushes.
 	brush_data_list.append(new_brush)
 	update()
@@ -214,7 +214,7 @@ func _draw():
 			BrushModes.ERASER:
 				# NOTE: this is a really cheap way of erasing that isn't really erasing!
 				# However, this gives similar results in a fairy simple way!
-				
+
 				# Erasing works exactly the same was as pencil does for both the rectangle shape and the circle shape,
 				# but instead of using brush.brush_color, we instead use bg_color instead.
 				if brush.brush_shape == BrushShapes.RECTANGLE:
@@ -235,13 +235,13 @@ func _draw():
 func save_picture(path):
 	# Wait until the frame has finished before getting the texture.
 	yield(VisualServer, "frame_post_draw")
-	
+
 	# Get the viewport image.
 	var img = get_viewport().get_texture().get_data()
 	# Crop the image so we only have canvas area.
 	var cropped_image = img.get_rect(Rect2(TL_node.global_position, IMAGE_SIZE))
 	# Flip the image on the Y-axis (it's flipped upside down by default).
 	cropped_image.flip_y()
-	
+
 	# Save the image with the passed in path we got from the save dialog.
 	cropped_image.save_png(path)

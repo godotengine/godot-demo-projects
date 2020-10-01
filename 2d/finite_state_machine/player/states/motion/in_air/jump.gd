@@ -22,7 +22,7 @@ func initialize(speed, velocity):
 	max_horizontal_speed = speed if speed > 0.0 else base_max_horizontal_speed
 	enter_velocity = velocity
 
-	
+
 func enter():
 	var input_direction = get_input_direction()
 	update_look_direction(input_direction)

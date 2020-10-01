@@ -15,7 +15,7 @@ func _enter_tree():
 		printerr("Please delete the instance at: " + get_path())
 	else:
 		Settings._loaded = true
-	
+
 	var file = File.new()
 	if file.file_exists(_save_path):
 		file.open(_save_path, File.READ)

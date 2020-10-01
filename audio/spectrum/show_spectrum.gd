@@ -14,7 +14,7 @@ func _draw():
 	#warning-ignore:integer_division
 	var w = WIDTH / VU_COUNT
 	var prev_hz = 0
-	for i in range(1, VU_COUNT+1):	
+	for i in range(1, VU_COUNT+1):
 		var hz = i * FREQ_MAX / VU_COUNT;
 		var magnitude: float = spectrum.get_magnitude_for_frequency_range(prev_hz, hz).length()
 		var energy = clamp((MIN_DB + linear2db(magnitude)) / MIN_DB, 0, 1)
