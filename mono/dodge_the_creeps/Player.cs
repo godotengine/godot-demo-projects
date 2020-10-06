@@ -5,14 +5,17 @@ public class Player : Area2D
     [Signal]
     public delegate void Hit();
 
+    // These only need to be accessed in this script, so we can make them private.
+    // Private variables in C# in Godot have their name starting with an
+    // underscore and also have the "private" keyword instead of "public".
     [Export]
-    public int speed; // How fast the player will move (pixels/sec).
+    private int _speed = 400; // How fast the player will move (pixels/sec).
 
     private Vector2 _screenSize; // Size of the game window.
 
     public override void _Ready()
     {
-        _screenSize = GetViewport().GetSize();
+        _screenSize = GetViewportRect().Size;
         Hide();
     }
 
@@ -26,7 +29,7 @@ public class Player : Area2D
 
         if (velocity.Length() > 0)
         {
-            velocity = velocity.Normalized() * speed;
+            velocity = velocity.Normalized() * _speed;
             animatedSprite.Play();
         }
         else
@@ -59,14 +62,14 @@ public class Player : Area2D
         Position = pos;
         Show();
         // Must be deferred as we can't change physics properties on a physics callback.
-        GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("Disabled", false);
+        GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", false);
     }
 
     public void OnPlayerBodyEntered(PhysicsBody2D body)
     {
         Hide(); // Player disappears after being hit.
-        EmitSignal("Hit");
+        EmitSignal(nameof(Hit));
         // Must be deferred as we can't change physics properties on a physics callback.
-        GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("Disabled", true);
+        GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
     }
 }

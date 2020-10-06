@@ -4,19 +4,17 @@ using System;
 public class Mob : RigidBody2D
 {
     [Export]
-    public int minSpeed; // Minimum speed range.
+    public int minSpeed;
 
     [Export]
-    public int maxSpeed; // Maximum speed range.
-
-    private String[] _mobTypes = { "walk", "swim", "fly" };
-
-    // C# doesn't have GDScript's random methods, so we use System.Random insetad.
-    private static Random _random = new Random();
+    public int maxSpeed;
 
     public override void _Ready()
     {
-        GetNode<AnimatedSprite>("AnimatedSprite").Animation = _mobTypes[_random.Next(0, _mobTypes.Length)];
+        var animSprite = GetNode<AnimatedSprite>("AnimatedSprite");
+        animSprite.Playing = true;
+        string[] mobTypes = animSprite.Frames.GetAnimationNames();
+        animSprite.Animation = mobTypes[GD.Randi() % mobTypes.Length];
     }
 
     public void OnVisibilityScreenExited()

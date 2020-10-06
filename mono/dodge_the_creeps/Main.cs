@@ -1,20 +1,18 @@
 using Godot;
-using System;
 
 public class Main : Node
 {
+#pragma warning disable 649
+    // We assign this in the editor, so we don't need the warning about not being assigned.
     [Export]
-    public PackedScene mob;
+    private PackedScene _mobScene;
+#pragma warning restore 649
 
     private int _score;
 
-    // We use 'System.Random' as an alternative to GDScript's random methods.
-    private Random _random = new Random();
-
-    // We'll use this later because C# doesn't support GDScript's randi().
-    private float RandRange(float min, float max)
+    public override void _Ready()
     {
-        return (float)_random.NextDouble() * (max - min) + min;
+        GD.Randomize();
     }
 
     public void GameOver()
@@ -30,6 +28,9 @@ public class Main : Node
 
     public void NewGame()
     {
+        // Note that for calling Godot-provided methods with strings,
+        // we have to use the original Godot snake_case name.
+        GetTree().CallGroup("mobs", "queue_free");
         _score = 0;
 
         var player = GetNode<Player>("Player");
@@ -60,16 +61,16 @@ public class Main : Node
 
     public void OnMobTimerTimeout()
     {
-        // Note: Normally it is best to use explicit types rather than the var keyword.
-        // However, var is acceptable to use here because the types are obviously
-        // PathFollow2D and RigidBody2D, since they appear later on the line.
+        // Note: Normally it is best to use explicit types rather than the `var`
+        // keyword. However, var is acceptable to use here because the types are
+        // obviously PathFollow2D and Mob, since they appear later on the line.
 
         // Choose a random location on Path2D.
         var mobSpawnLocation = GetNode<PathFollow2D>("MobPath/MobSpawnLocation");
-        mobSpawnLocation.SetOffset(_random.Next());
+        mobSpawnLocation.Offset = GD.Randi();
 
         // Create a Mob instance and add it to the scene.
-        var mobInstance = (RigidBody2D)mob.Instance();
+        var mobInstance = (Mob)_mobScene.Instance();
         AddChild(mobInstance);
 
         // Set the mob's direction perpendicular to the path direction.
@@ -79,12 +80,10 @@ public class Main : Node
         mobInstance.Position = mobSpawnLocation.Position;
 
         // Add some randomness to the direction.
-        direction += RandRange(-Mathf.Tau / 8, Mathf.Tau / 8);
+        direction += (float)GD.RandRange(-Mathf.Tau / 8, Mathf.Tau / 8);
         mobInstance.Rotation = direction;
 
         // Choose the velocity.
-        mobInstance.SetLinearVelocity(new Vector2(RandRange(150f, 250f), 0).Rotated(direction));
-
-        GetNode("HUD").Connect("StartGame", mobInstance, "OnStartGame");
+        mobInstance.LinearVelocity = new Vector2((float)GD.RandRange(mobInstance.minSpeed, mobInstance.maxSpeed), 0).Rotated(direction);
     }
 }
