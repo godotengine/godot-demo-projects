@@ -1,0 +1,381 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://noto_font.tres" type="Font" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+func _ready():
+	$Label.text = TranslationServer.get_locale()
+
+func _on_Button_pressed():
+	if TranslationServer.get_locale() != \"ar\":
+		TranslationServer.set_locale(\"ar\")
+	else:
+		TranslationServer.set_locale(\"en\")
+	$Label.text = TranslationServer.get_locale()
+"
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelLTR" type="Panel" parent="."]
+self_modulate = Color( 0.494118, 1, 0.737255, 1 )
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 35.0
+margin_top = -200.0
+margin_right = 275.0
+margin_bottom = -50.0
+layout_direction = 2
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="PanelLTR"]
+margin_right = 40.0
+margin_bottom = 40.0
+columns = 3
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonNW" type="Button" parent="PanelLTR/GridContainer"]
+margin_right = 77.3438
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "NorthWest"
+script = null
+
+[node name="ButtonN" type="Button" parent="PanelLTR/GridContainer"]
+margin_left = 81.0
+margin_right = 128.719
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "North"
+script = null
+
+[node name="ButtonNE" type="Button" parent="PanelLTR/GridContainer"]
+margin_left = 132.0
+margin_right = 204.859
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "NorthEast"
+script = null
+
+[node name="ButtonW" type="Button" parent="PanelLTR/GridContainer"]
+margin_top = 27.0
+margin_right = 77.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "West"
+script = null
+
+[node name="ButtonCenter" type="Button" parent="PanelLTR/GridContainer"]
+margin_left = 81.0
+margin_top = 27.0
+margin_right = 128.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "*"
+script = null
+
+[node name="ButtonE" type="Button" parent="PanelLTR/GridContainer"]
+margin_left = 132.0
+margin_top = 27.0
+margin_right = 204.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "Еast"
+script = null
+
+[node name="ButtonSW" type="Button" parent="PanelLTR/GridContainer"]
+margin_top = 54.0
+margin_right = 77.0
+margin_bottom = 77.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "SouthWest"
+script = null
+
+[node name="ButtonS" type="Button" parent="PanelLTR/GridContainer"]
+margin_left = 81.0
+margin_top = 54.0
+margin_right = 128.016
+margin_bottom = 77.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "South"
+script = null
+
+[node name="ButtonSE" type="Button" parent="PanelLTR/GridContainer"]
+margin_left = 132.0
+margin_top = 54.0
+margin_right = 204.156
+margin_bottom = 77.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "SouthEast"
+script = null
+
+[node name="PanelLocale" type="Panel" parent="PanelLTR"]
+self_modulate = Color( 0.819608, 0.254902, 0.254902, 1 )
+margin_left = 20.0
+margin_top = 90.0
+margin_right = 170.0
+margin_bottom = 130.0
+layout_direction = 1
+script = null
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelLTR/PanelLocale"]
+margin_right = 107.0
+margin_bottom = 34.0005
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonPrev" type="Button" parent="PanelLTR/PanelLocale/HBoxContainer"]
+margin_left = -0.34375
+margin_right = 63.0
+margin_bottom = 34.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "Previous"
+script = null
+
+[node name="ButtonNext" type="Button" parent="PanelLTR/PanelLocale/HBoxContainer"]
+margin_left = 66.2656
+margin_right = 107.0
+margin_bottom = 34.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "Next"
+script = null
+
+[node name="PanelRTL" type="Panel" parent="."]
+self_modulate = Color( 0.0705882, 0.235294, 1, 1 )
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 33.9999
+margin_top = -200.0
+margin_right = 284.0
+margin_bottom = -50.0
+layout_direction = 3
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="PanelRTL"]
+margin_right = 40.0
+margin_bottom = 40.0
+columns = 3
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonNW" type="Button" parent="PanelRTL/GridContainer"]
+margin_right = 80.0
+margin_bottom = 27.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "الشمال الشرقي"
+script = null
+
+[node name="ButtonN" type="Button" parent="PanelRTL/GridContainer"]
+margin_left = 84.0
+margin_right = 128.0
+margin_bottom = 27.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "الشمال"
+script = null
+
+[node name="ButtonNE" type="Button" parent="PanelRTL/GridContainer"]
+margin_left = 132.0
+margin_right = 218.0
+margin_bottom = 27.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "الشمال الغربي"
+script = null
+
+[node name="ButtonW" type="Button" parent="PanelRTL/GridContainer"]
+margin_top = 31.0
+margin_right = 80.0
+margin_bottom = 58.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "الشرق"
+script = null
+
+[node name="ButtonCenter" type="Button" parent="PanelRTL/GridContainer"]
+margin_left = 84.0
+margin_top = 31.0
+margin_right = 128.0
+margin_bottom = 58.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "*"
+script = null
+
+[node name="ButtonE" type="Button" parent="PanelRTL/GridContainer"]
+margin_left = 132.0
+margin_top = 31.0
+margin_right = 218.0
+margin_bottom = 58.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "الغرب"
+script = null
+
+[node name="ButtonSW" type="Button" parent="PanelRTL/GridContainer"]
+margin_left = -0.59375
+margin_top = 62.0
+margin_right = 80.0
+margin_bottom = 89.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "الجنوب الشرقي"
+script = null
+
+[node name="ButtonS" type="Button" parent="PanelRTL/GridContainer"]
+margin_left = 83.0469
+margin_top = 62.0
+margin_right = 128.0
+margin_bottom = 89.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "الجنوب"
+script = null
+
+[node name="ButtonSE" type="Button" parent="PanelRTL/GridContainer"]
+margin_left = 131.734
+margin_top = 62.0
+margin_right = 218.0
+margin_bottom = 89.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = " 	الجنوب الغربي"
+script = null
+
+[node name="ButtonSwapLocale" type="Button" parent="."]
+margin_left = 670.0
+margin_top = 25.0
+margin_right = 820.0
+margin_bottom = 65.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "Swap locale"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelSide" type="Panel" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -20.0
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 140.0
+margin_bottom = 60.0
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonBack" type="Button" parent="HBoxContainer"]
+margin_left = -0.921875
+margin_right = 40.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "Back"
+script = null
+
+[node name="ButtonFwd" type="Button" parent="HBoxContainer"]
+margin_left = 43.2188
+margin_right = 105.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "Forward"
+script = null
+
+[node name="Label" type="Label" parent="."]
+margin_left = 670.0
+margin_top = 70.0
+margin_right = 820.0
+margin_bottom = 100.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+align = 1
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelInfo" type="Label" parent="."]
+margin_left = 100.0
+margin_top = 100.0
+margin_right = 550.0
+margin_bottom = 300.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "Click \"Swap Locale\" button to swap locale between \"en  and \"ar\".
+
+Green tinted controls - LTR layout direction.
+Blue tinted controls - RTL layout direction.
+Red tinted controls - Layout direction from locale.
+Gray (default) controls - Inherited layout direction."
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionButton" type="OptionButton" parent="."]
+margin_left = 129.0
+margin_top = 240.0
+margin_right = 264.0
+margin_bottom = 260.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+script = null
+
+[node name="CheckBox" type="CheckBox" parent="."]
+margin_left = 124.0
+margin_top = 265.0
+margin_right = 184.0
+margin_bottom = 290.0
+custom_fonts/font = ExtResource( 1 )
+custom_font_sizes/font_size = 12
+text = "Test"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="ButtonSwapLocale" to="." method="_on_Button_pressed"]
