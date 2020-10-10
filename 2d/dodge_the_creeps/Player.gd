@@ -2,30 +2,34 @@ extends Area2D
 
 signal hit
 
-# These only need to be accessed in this script, so we can make them private.
-# Private variables in GDScript have their name starting with an underscore.
-export var _speed = 400 # How fast the player will move (pixels/sec).
-var _screen_size # Size of the game window.
+export var speed = 400 # How fast the player will move (pixels/sec).
+var screen_size # Size of the game window.
 
 func _ready():
-	_screen_size = get_viewport_rect().size
+	screen_size = get_viewport_rect().size
 	hide()
 
 
 func _process(delta):
-	var velocity = Vector2() # The player's movement vector.
-	velocity.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	velocity.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	var velocity = Vector2.ZERO # The player's movement vector.
+	if Input.is_action_pressed("move_right"):
+		velocity.x += 1
+	if Input.is_action_pressed("move_left"):
+		velocity.x -= 1
+	if Input.is_action_pressed("move_down"):
+		velocity.y += 1
+	if Input.is_action_pressed("move_up"):
+		velocity.y -= 1
 
 	if velocity.length() > 0:
-		velocity = velocity.normalized() * _speed
+		velocity = velocity.normalized() * speed
 		$AnimatedSprite.play()
 	else:
 		$AnimatedSprite.stop()
 
 	position += velocity * delta
-	position.x = clamp(position.x, 0, _screen_size.x)
-	position.y = clamp(position.y, 0, _screen_size.y)
+	position.x = clamp(position.x, 0, screen_size.x)
+	position.y = clamp(position.y, 0, screen_size.y)
 
 	if velocity.x != 0:
 		$AnimatedSprite.animation = "right"
@@ -39,8 +43,7 @@ func _process(delta):
 func start(pos):
 	position = pos
 	show()
-	# Must be deferred as we can't change physics properties on a physics callback.
-	$CollisionShape2D.set_deferred("disabled", false)
+	$CollisionShape2D.disabled = false
 
 
 func _on_Player_body_entered(_body):
