@@ -3,13 +3,13 @@ extends Navigation
 const SPEED = 10.0
 
 var camrot = 0.0
-
-var begin = Vector3()
-var end = Vector3()
 var m = SpatialMaterial.new()
 
 var path = []
-var draw_path = true
+var show_path = true
+
+onready var robot  = get_node("RobotBase")
+onready var camera = get_node("CameraBase/Camera")
 
 func _ready():
 	set_process_input(true)
@@ -18,47 +18,54 @@ func _ready():
 	m.albedo_color = Color.white
 
 
-func _process(delta):
-	if path.size() > 1:
-		var to_walk = delta * SPEED
-		var to_watch = Vector3.UP
-		while to_walk > 0 and path.size() >= 2:
-			var pfrom = path[path.size() - 1]
-			var pto = path[path.size() - 2]
-			to_watch = (pto - pfrom).normalized()
-			var d = pfrom.distance_to(pto)
-			if d <= to_walk:
-				path.remove(path.size() - 1)
-				to_walk -= d
-			else:
-				path[path.size() - 1] = pfrom.linear_interpolate(pto, to_walk / d)
-				to_walk = 0
+func _physics_process(delta):
+	var direction = Vector3()
 
-		var atpos = path[path.size() - 1]
-		var atdir = to_watch
-		atdir.y = 0
+	# We need to scale the movement speed by how much delta has passed,
+	# otherwise the motion won't be smooth.
+	var step_size = delta * SPEED
 
-		var t = Transform()
-		t.origin = atpos
-		t = t.looking_at(atpos + atdir, Vector3.UP)
-		get_node("RobotBase").set_transform(t)
+	if path.size() > 0:
+		# Direction is the difference between where we are now
+		# and where we want to go.
+		var destination = path[0]
+		direction = destination - robot.translation
 
-		if path.size() < 2:
-			path = []
-			set_process(false)
-	else:
-		set_process(false)
+		# If the next node is closer than we intend to 'step', then
+		# take a smaller step. Otherwise we would go past it and
+		# potentially go through a wall or over a cliff edge!
+		if step_size > direction.length():
+			step_size = direction.length()
+			# We should also remove this node since we're about to reach it.
+			path.remove(0)
+
+		# Move the robot towards the path node, by how far we want to travel.
+		# Note: For a KinematicBody, we would instead use move_and_slide
+		# so collisions work properly.
+		robot.translation += direction.normalized() * step_size
+
+		# Lastly let's make sure we're looking in the direction we're traveling.
+		# Clamp y to 0 so the robot only looks left and right, not up/down.
+		direction.y = 0
+		if direction:
+			# Direction is relative, so apply it to the robot's location to
+			# get a point we can actually look at.
+			var look_at_point = robot.translation + direction.normalized()
+			# Make the robot look at the point.
+			robot.look_at(look_at_point, Vector3.UP)
 
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
-		var from = get_node("CameraBase/Camera").project_ray_origin(event.position)
-		var to = from + get_node("CameraBase/Camera").project_ray_normal(event.position) * 100
-		var p = get_closest_point_to_segment(from, to)
+		var from = camera.project_ray_origin(event.position)
+		var to = from + camera.project_ray_normal(event.position) * 1000
+		var target_point = get_closest_point_to_segment(from, to)
 
-		begin = get_closest_point(get_node("RobotBase").get_translation())
-		end = p
-		_update_path()
+		# Set the path between the robots current location and our target.
+		path = get_simple_path(robot.translation, target_point, true)
+
+		if show_path:
+			draw_path(path)
 
 	if event is InputEventMouseMotion:
 		if event.button_mask & (BUTTON_MASK_MIDDLE + BUTTON_MASK_RIGHT):
@@ -67,21 +74,15 @@ func _unhandled_input(event):
 			print("Camera Rotation: ", camrot)
 
 
-func _update_path():
-	var p = get_simple_path(begin, end, true)
-	path = Array(p) # Vector3 array too complex to use, convert to regular array.
-	path.invert()
-	set_process(true)
-
-	if draw_path:
-		var im = get_node("Draw")
-		im.set_material_override(m)
-		im.clear()
-		im.begin(Mesh.PRIMITIVE_POINTS, null)
-		im.add_vertex(begin)
-		im.add_vertex(end)
-		im.end()
-		im.begin(Mesh.PRIMITIVE_LINE_STRIP, null)
-		for x in p:
-			im.add_vertex(x)
-		im.end()
+func draw_path(path_array):
+	var im = get_node("Draw")
+	im.set_material_override(m)
+	im.clear()
+	im.begin(Mesh.PRIMITIVE_POINTS, null)
+	im.add_vertex(path_array[0])
+	im.add_vertex(path_array[path_array.size() - 1])
+	im.end()
+	im.begin(Mesh.PRIMITIVE_LINE_STRIP, null)
+	for x in path:
+		im.add_vertex(x)
+	im.end()
