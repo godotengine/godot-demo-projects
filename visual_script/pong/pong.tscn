@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/paddle.vs" type="Script" id=1]
-[ext_resource path="res://left_pallete.png" type="Texture" id=2]
-[ext_resource path="res://right_pallete.png" type="Texture" id=3]
+[ext_resource path="res://paddle.png" type="Texture" id=2]
 [ext_resource path="res://scripts/ball.vs" type="Script" id=4]
 [ext_resource path="res://ball.png" type="Texture" id=5]
 [ext_resource path="res://separator.png" type="Texture" id=6]
@@ -32,6 +31,7 @@ __meta__ = {
 }
 
 [node name="Left" type="Area2D" parent="."]
+modulate = Color( 0, 1, 1, 1 )
 position = Vector2( 67.6285, 192.594 )
 script = ExtResource( 1 )
 
@@ -42,12 +42,13 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Right" type="Area2D" parent="."]
+modulate = Color( 1, 0, 1, 1 )
 position = Vector2( 563.815, 188.919 )
 script = ExtResource( 1 )
 ball_dir = -1.0
 
 [node name="Sprite" type="Sprite" parent="Right"]
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 
 [node name="Collision" type="CollisionShape2D" parent="Right"]
 shape = SubResource( 1 )

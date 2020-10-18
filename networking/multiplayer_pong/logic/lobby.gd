@@ -40,7 +40,7 @@ func _player_disconnected(_id):
 
 # Callback from SceneTree, only for clients (not server).
 func _connected_ok():
-	pass # We don't need this function.
+	pass # This function is not needed for this project.
 
 
 # Callback from SceneTree, only for clients (not server).
@@ -59,7 +59,8 @@ func _server_disconnected():
 
 func _end_game(with_error = ""):
 	if has_node("/root/Pong"):
-		# Erase immediately, otherwise network might show errors (this is why we connected deferred above).
+		# Erase immediately, otherwise network might show
+		# errors (this is why we connected deferred above).
 		get_node("/root/Pong").free()
 		show()
 

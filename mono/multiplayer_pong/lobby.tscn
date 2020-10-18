@@ -1,0 +1,102 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://logic/Lobby.cs" type="Script" id=1]
+
+[node name="Lobby" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -200.0
+margin_right = 320.0
+margin_bottom = 200.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+margin_left = 210.0
+margin_top = 40.0
+margin_right = 430.0
+margin_bottom = 80.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Multiplayer Pong"
+align = 1
+valign = 1
+
+[node name="LobbyPanel" type="Panel" parent="."]
+margin_left = 210.0
+margin_top = 160.0
+margin_right = 430.0
+margin_bottom = 270.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AddressLabel" type="Label" parent="LobbyPanel"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 62.0
+margin_bottom = 24.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Address"
+
+[node name="Address" type="LineEdit" parent="LobbyPanel"]
+margin_left = 10.0
+margin_top = 30.0
+margin_right = 210.0
+margin_bottom = 54.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "127.0.0.1"
+
+[node name="HostButton" type="Button" parent="LobbyPanel"]
+margin_left = 10.0
+margin_top = 60.0
+margin_right = 90.0
+margin_bottom = 80.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="LobbyPanel"]
+margin_left = 130.0
+margin_top = 60.0
+margin_right = 210.0
+margin_bottom = 80.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Join"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatusOk" type="Label" parent="LobbyPanel"]
+margin_left = 10.0
+margin_top = 90.0
+margin_right = 210.0
+margin_bottom = 104.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0, 1, 0.015625, 1 )
+align = 1
+
+[node name="StatusFail" type="Label" parent="LobbyPanel"]
+margin_left = 10.0
+margin_top = 90.0
+margin_right = 210.0
+margin_bottom = 104.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+align = 1
+[connection signal="pressed" from="LobbyPanel/HostButton" to="LobbyPanel" method="OnHostPressed"]
+[connection signal="pressed" from="LobbyPanel/JoinButton" to="LobbyPanel" method="OnJoinPressed"]
