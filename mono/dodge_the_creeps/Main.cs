@@ -5,10 +5,10 @@ public class Main : Node
 #pragma warning disable 649
     // We assign this in the editor, so we don't need the warning about not being assigned.
     [Export]
-    private PackedScene _mobScene;
+    public PackedScene mobScene;
 #pragma warning restore 649
 
-    private int _score;
+    public int score;
 
     public override void _Ready()
     {
@@ -31,7 +31,7 @@ public class Main : Node
         // Note that for calling Godot-provided methods with strings,
         // we have to use the original Godot snake_case name.
         GetTree().CallGroup("mobs", "queue_free");
-        _score = 0;
+        score = 0;
 
         var player = GetNode<Player>("Player");
         var startPosition = GetNode<Position2D>("StartPosition");
@@ -40,7 +40,7 @@ public class Main : Node
         GetNode<Timer>("StartTimer").Start();
 
         var hud = GetNode<HUD>("HUD");
-        hud.UpdateScore(_score);
+        hud.UpdateScore(score);
         hud.ShowMessage("Get Ready!");
 
         GetNode<AudioStreamPlayer>("Music").Play();
@@ -54,9 +54,9 @@ public class Main : Node
 
     public void OnScoreTimerTimeout()
     {
-        _score++;
+        score++;
 
-        GetNode<HUD>("HUD").UpdateScore(_score);
+        GetNode<HUD>("HUD").UpdateScore(score);
     }
 
     public void OnMobTimerTimeout()
@@ -70,20 +70,21 @@ public class Main : Node
         mobSpawnLocation.Offset = GD.Randi();
 
         // Create a Mob instance and add it to the scene.
-        var mobInstance = (Mob)_mobScene.Instance();
-        AddChild(mobInstance);
+        var mob = (Mob)mobScene.Instance();
+        AddChild(mob);
 
         // Set the mob's direction perpendicular to the path direction.
-        float direction = mobSpawnLocation.Rotation + Mathf.Tau / 4;
+        float direction = mobSpawnLocation.Rotation + Mathf.Pi / 2;
 
         // Set the mob's position to a random location.
-        mobInstance.Position = mobSpawnLocation.Position;
+        mob.Position = mobSpawnLocation.Position;
 
         // Add some randomness to the direction.
-        direction += (float)GD.RandRange(-Mathf.Tau / 8, Mathf.Tau / 8);
-        mobInstance.Rotation = direction;
+        direction += (float)GD.RandRange(-Mathf.Pi / 4, Mathf.Pi / 4);
+        mob.Rotation = direction;
 
         // Choose the velocity.
-        mobInstance.LinearVelocity = new Vector2((float)GD.RandRange(mobInstance.minSpeed, mobInstance.maxSpeed), 0).Rotated(direction);
+        var velocity = new Vector2((float)GD.RandRange(mob.minSpeed, mob.maxSpeed), 0);
+        mob.LinearVelocity = velocity.Rotated(direction);
     }
 }
