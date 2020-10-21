@@ -22,16 +22,20 @@ func _process(delta):
 		direction.y = -direction.y
 
 	if is_network_master():
-		# Only master will decide when the ball is out in the left side (it's own side).
-		# This makes the game playable even if latency is high and ball is going fast.
-		# Otherwise ball might be out in the other player's screen but not this one.
+		# Only the master will decide when the ball is out in
+		# the left side (it's own side). This makes the game
+		# playable even if latency is high and ball is going
+		# fast. Otherwise ball might be out in the other
+		# player's screen but not this one.
 		if ball_pos.x < 0:
 			get_parent().rpc("update_score", false)
 			rpc("_reset_ball", false)
 	else:
-		# Only the puppet will decide when the ball is out in the right side (it's own side).
-		# This makes the game playable even if latency is high and ball is going fast.
-		# Otherwise ball might be out in the other player's screen but not this one.
+		# Only the puppet will decide when the ball is out in
+		# the right side, which is it's own side. This makes
+		# the game playable even if latency is high and ball
+		# is going fast. Otherwise ball might be out in the
+		# other player's screen but not this one.
 		if ball_pos.x > _screen_size.x:
 			get_parent().rpc("update_score", true)
 			rpc("_reset_ball", true)

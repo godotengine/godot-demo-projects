@@ -1,11 +1,11 @@
 extends Node2D
 
+signal game_finished()
+
 const SCORE_TO_WIN = 10
 
 var score_left = 0
 var score_right = 0
-
-signal game_finished()
 
 onready var player2 = $Player2
 onready var score_left_node = $ScoreLeft
@@ -23,7 +23,8 @@ func _ready():
 	else:
 		# For the client, give control of player 2 to itself.
 		player2.set_network_master(get_tree().get_network_unique_id())
-	print("unique id: ", get_tree().get_network_unique_id())
+
+	print("Unique id: ", get_tree().get_network_unique_id())
 
 
 sync func update_score(add_to_left):

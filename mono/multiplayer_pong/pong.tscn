@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://logic/pong.gd" type="Script" id=1]
+[ext_resource path="res://logic/Pong.cs" type="Script" id=1]
 [ext_resource path="res://separator.png" type="Texture" id=2]
 [ext_resource path="res://paddle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ball.tscn" type="PackedScene" id=4]
@@ -23,14 +23,14 @@ texture = ExtResource( 2 )
 [node name="Player1" parent="." instance=ExtResource( 3 )]
 modulate = Color( 0, 1, 1, 1 )
 position = Vector2( 32.49, 188.622 )
-left = true
+_left = true
 
 [node name="Player2" parent="." instance=ExtResource( 3 )]
 modulate = Color( 1, 0, 1, 1 )
 position = Vector2( 608.88, 188.622 )
 
 [node name="Ball" parent="." instance=ExtResource( 4 )]
-position = Vector2( 320.387, 189.525 )
+position = Vector2( 320.206, 184 )
 
 [node name="ScoreLeft" type="Label" parent="."]
 margin_left = 240.0
@@ -85,7 +85,7 @@ text = "Exit Game"
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 320, 200 )
 current = true
-[connection signal="pressed" from="ExitGame" to="." method="_on_exit_game_pressed"]
+[connection signal="pressed" from="ExitGame" to="." method="OnExitGamePressed"]
 
 [editable path="Player1"]
 

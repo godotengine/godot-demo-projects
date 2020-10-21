@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://logic/Paddle.cs" type="Script" id=1]
+[ext_resource path="res://paddle.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 4.78568
+height = 23.6064
+
+[node name="Paddle" type="Area2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="You" type="Label" parent="."]
+margin_left = -26.0
+margin_top = -33.0
+margin_right = 27.0
+margin_bottom = -19.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "You"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="area_entered" from="." to="." method="OnPaddleAreaEnter"]
