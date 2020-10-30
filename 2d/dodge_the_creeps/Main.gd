@@ -27,7 +27,7 @@ func new_game():
 
 func _on_MobTimer_timeout():
 	# Choose a random location on Path2D.
-	var mob_spawn_location = get_node("MobPath/MobSpawnLocation");
+	var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
 	mob_spawn_location.offset = randi()
 
 	# Create a Mob instance and add it to the scene.
