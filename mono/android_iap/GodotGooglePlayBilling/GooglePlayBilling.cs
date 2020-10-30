@@ -6,7 +6,7 @@ namespace AndroidInAppPurchasesWithCSharp.GodotGooglePlayBilling
     public enum PurchaseType
     {
         InApp,
-        Subs
+        Subs,
     }
 
     public class GooglePlayBilling : Node

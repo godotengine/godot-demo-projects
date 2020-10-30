@@ -9,10 +9,15 @@ const IMAGE_SIZE = Vector2(930, 720)
 
 # Enums for the various modes and brush shapes that can be applied.
 enum BrushModes {
-	PENCIL, ERASER, CIRCLE_SHAPE, RECTANGLE_SHAPE
+	PENCIL,
+	ERASER,
+	CIRCLE_SHAPE,
+	RECTANGLE_SHAPE,
 }
+
 enum BrushShapes {
-	RECTANGLE, CIRCLE
+	RECTANGLE,
+	CIRCLE,
 }
 
 # The top-left position of the canvas.

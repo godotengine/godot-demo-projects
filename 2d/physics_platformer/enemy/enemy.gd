@@ -5,7 +5,7 @@ const WALK_SPEED = 50
 
 enum State {
 	WALKING,
-	DYING
+	DYING,
 }
 
 var state = State.WALKING
