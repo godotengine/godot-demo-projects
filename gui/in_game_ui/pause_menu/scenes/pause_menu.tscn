@@ -1,0 +1,107 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://gd_scripts/pause_menu.gd" type="Script" id=1]
+[ext_resource path="res://RES/Px437_DOS-V_TWN19.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://RES/ui_theme.tres" type="Theme" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 28
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="PauseMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+hue_shift_from = Color( 1, 0.537255, 0, 1 )
+hue_shift_to = Color( 1, 1, 1, 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackGround" type="Panel" parent="CenterContainer"]
+margin_left = 337.0
+margin_top = 87.0
+margin_right = 687.0
+margin_bottom = 512.0
+rect_min_size = Vector2( 350, 425 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/BackGround"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_right = -40.0
+custom_constants/separation = 18
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" type="Label" parent="CenterContainer/BackGround/VBoxContainer"]
+margin_top = 49.0
+margin_right = 270.0
+margin_bottom = 106.0
+custom_fonts/font = SubResource( 1 )
+text = "Pause Menu"
+align = 1
+
+[node name="Info" type="Label" parent="CenterContainer/BackGround/VBoxContainer"]
+margin_top = 124.0
+margin_right = 270.0
+margin_bottom = 189.0
+rect_min_size = Vector2( 0, 65 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
+custom_constants/line_spacing = -6
+text = "Move focus using Up,Down Arrow keys Or W,S keys."
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Resume" type="Button" parent="CenterContainer/BackGround/VBoxContainer"]
+margin_top = 207.0
+margin_right = 270.0
+margin_bottom = 251.0
+text = "Resume"
+
+[node name="ClickMe" type="Button" parent="CenterContainer/BackGround/VBoxContainer"]
+margin_top = 269.0
+margin_right = 270.0
+margin_bottom = 313.0
+text = "Click Me"
+
+[node name="Quit" type="Button" parent="CenterContainer/BackGround/VBoxContainer"]
+margin_top = 331.0
+margin_right = 270.0
+margin_bottom = 375.0
+text = "Quit"
+
+[node name="Tween" type="Tween" parent="CenterContainer"]
+
+[node name="Label" type="Label" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -80.5
+margin_right = 296.0
+margin_bottom = 80.5
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
+text = "Change the Exported 'Showing Animation' and 'Hidding Animation' Vars, for more Animations."
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

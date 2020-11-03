@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/pause_menu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://RES/text_font_style.tres" type="DynamicFont" id=3]
+[ext_resource path="res://textures/map.png" type="Texture" id=4]
+
+[node name="Demo" type="Node"]
+
+[node name="player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 665.167, 302.902 )
+z_index = 1
+
+[node name="MapTexture" type="TextureRect" parent="."]
+show_behind_parent = true
+margin_right = 1987.0
+margin_bottom = 1328.0
+rect_scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 4 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GUI" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="PauseMenu" parent="GUI" instance=ExtResource( 2 )]
+visible = false
+
+[node name="Info" type="Label" parent="GUI"]
+show_behind_parent = true
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -120.0
+custom_fonts/font = ExtResource( 3 )
+text = "Move with the Up, Down, Left and Right arrow Keys,
+Or with W,A,S,D Keys. 
+press Esc key to pause the demo"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
