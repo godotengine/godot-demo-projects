@@ -2,6 +2,9 @@ class_name Player
 extends Actor
 
 
+# warning-ignore:unused_signal
+signal collect_coin()
+
 const FLOOR_DETECT_DISTANCE = 20.0
 
 export(String) var action_suffix = ""
