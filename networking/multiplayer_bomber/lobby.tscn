@@ -51,6 +51,24 @@ margin_bottom = 296.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
+[node name="PortForward" type="Label" parent="Players"]
+margin_left = -124.0
+margin_top = 375.0
+margin_right = 128.0
+margin_bottom = 429.0
+custom_constants/line_spacing = 6
+text = "If you want non-LAN clients to connect,
+make sure the port 10567 in UDP
+is forwarded on your router."
+align = 1
+
+[node name="FindPublicIP" type="LinkButton" parent="Players"]
+margin_left = 168.0
+margin_top = 393.5
+margin_right = 341.0
+margin_bottom = 407.5
+text = "Find your public IP address"
+
 [node name="Connect" type="Panel" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -133,5 +151,6 @@ margin_bottom = 58.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 [connection signal="pressed" from="Players/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Players/FindPublicIP" to="." method="_on_find_public_ip_pressed"]
 [connection signal="pressed" from="Connect/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Connect/Join" to="." method="_on_join_pressed"]

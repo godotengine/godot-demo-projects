@@ -92,5 +92,32 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 align = 1
+
+[node name="PortForward" type="Label" parent="LobbyPanel"]
+visible = false
+margin_left = -128.0
+margin_top = 136.0
+margin_right = 124.0
+margin_bottom = 184.0
+custom_constants/line_spacing = 6
+text = "If you want non-LAN clients to connect,
+make sure the port 8910 in UDP
+is forwarded on your router."
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FindPublicIP" type="LinkButton" parent="LobbyPanel"]
+visible = false
+margin_left = 155.0
+margin_top = 152.0
+margin_right = 328.0
+margin_bottom = 166.0
+text = "Find your public IP address"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="LobbyPanel/HostButton" to="LobbyPanel" method="_on_host_pressed"]
 [connection signal="pressed" from="LobbyPanel/JoinButton" to="LobbyPanel" method="_on_join_pressed"]
+[connection signal="pressed" from="LobbyPanel/FindPublicIP" to="LobbyPanel" method="_on_find_public_ip_pressed"]
