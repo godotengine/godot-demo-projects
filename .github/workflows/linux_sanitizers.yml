@@ -1,0 +1,603 @@
+name: 🐧 Linux Build Sanitizer
+on: [push, pull_request]
+
+jobs:
+  test-projects:
+    runs-on: "ubuntu-20.04"
+    name: Test demo projects
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Change sources.list
+        run: |
+          sudo rm -f /etc/apt/sources.list.d/*
+          sudo cp -f sources.list /etc/apt/sources.list
+          sudo apt-get update
+
+      - name: Compile Godot
+        run: |
+          sudo apt-get install -y build-essential pkg-config libx11-dev libxcursor-dev libxinerama-dev libgl1-mesa-dev libglu-dev libasound2-dev libpulse-dev libudev-dev libxi-dev libxrandr-dev yasm git scons
+          git clone https://github.com/godotengine/godot.git godot-git
+          cd godot-git
+          git checkout 3.2
+          scons p=x11 target=debug use_asan=yes use_ubsan=yes -j2
+          cd ..
+          mv godot-git/bin/godot.x11.tools.64s godot
+          chmod +x ./godot
+
+      - name: loading/autoload
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path loading/autoload 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path loading/autoload 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path loading/autoload 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: loading/threads
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path loading/threads 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path loading/threads 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path loading/threads 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: loading/scene_changer
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path loading/scene_changer 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path loading/scene_changer 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path loading/scene_changer 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: loading/multiple_threads_loading
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path loading/multiple_threads_loading 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path loading/multiple_threads_loading 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path loading/multiple_threads_loading 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+#
+#      - name: loading/background_load
+#        run: |
+#          echo "" > sanitizers_log.txt
+#          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path loading/background_load 2>&1 | tee -a sanitizers_log.txt || true
+#          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path loading/background_load 2>&1 | tee -a sanitizers_log.txt || true
+#          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path loading/background_load 2>&1 | tee -a sanitizers_log.txt || true
+#          ./check_ci_log.py sanitizers_log.txt
+
+      - name: audio/generator
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path audio/generator 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path audio/generator 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path audio/generator 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: audio/device_changer
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path audio/device_changer 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path audio/device_changer 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path audio/device_changer 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+#
+#      - name: audio/mic_record
+#        run: |
+#          echo "" > sanitizers_log.txt
+#          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path audio/mic_record 2>&1 | tee -a sanitizers_log.txt || true
+#          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path audio/mic_record 2>&1 | tee -a sanitizers_log.txt || true
+#          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path audio/mic_record 2>&1 | tee -a sanitizers_log.txt || true
+#          ./check_ci_log.py sanitizers_log.txt
+
+      - name: audio/spectrum
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path audio/spectrum 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path audio/spectrum 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path audio/spectrum 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: audio/bpm_sync
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path audio/bpm_sync 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path audio/bpm_sync 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path audio/bpm_sync 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: misc/pause
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path misc/pause 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path misc/pause 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path misc/pause 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: misc/joypads
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path misc/joypads 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path misc/joypads 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path misc/joypads 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+#
+#      - name: misc/2.5d
+#        run: |
+#          echo "" > sanitizers_log.txt
+#          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path misc/2.5d 2>&1 | tee -a sanitizers_log.txt || true
+#          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path misc/2.5d 2>&1 | tee -a sanitizers_log.txt || true
+#          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path misc/2.5d 2>&1 | tee -a sanitizers_log.txt || true
+#          ./check_ci_log.py sanitizers_log.txt
+
+      - name: misc/opensimplexnoise
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path misc/opensimplexnoise 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path misc/opensimplexnoise 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path misc/opensimplexnoise 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: misc/matrix_transform
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path misc/matrix_transform 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path misc/matrix_transform 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path misc/matrix_transform 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: misc/window_management
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path misc/window_management 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path misc/window_management 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path misc/window_management 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: misc/os_test
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path misc/os_test 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path misc/os_test 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path misc/os_test 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: visual_script/circle_pop
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path visual_script/circle_pop 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path visual_script/circle_pop 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path visual_script/circle_pop 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: visual_script/pong
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path visual_script/pong 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path visual_script/pong 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path visual_script/pong 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: visual_script/multitouch_view
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path visual_script/multitouch_view 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path visual_script/multitouch_view 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path visual_script/multitouch_view 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 3d/navmesh
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 3d/navmesh 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 3d/navmesh 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 3d/navmesh 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 3d/kinematic_character
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 3d/kinematic_character 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 3d/kinematic_character 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 3d/kinematic_character 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 3d/truck_town
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 3d/truck_town 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 3d/truck_town 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 3d/truck_town 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+#
+#      - name: 3d/material_testers
+#        run: |
+#          echo "" > sanitizers_log.txt
+#          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 3d/material_testers 2>&1 | tee -a sanitizers_log.txt || true
+#          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 3d/material_testers 2>&1 | tee -a sanitizers_log.txt || true
+#          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 3d/material_testers 2>&1 | tee -a sanitizers_log.txt || true
+#          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 3d/physics_tests
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 3d/physics_tests 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 3d/physics_tests 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 3d/physics_tests 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+#
+#      - name: 3d/ik
+#        run: |
+#          echo "" > sanitizers_log.txt
+#          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 3d/ik 2>&1 | tee -a sanitizers_log.txt || true
+#          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 3d/ik 2>&1 | tee -a sanitizers_log.txt || true
+#          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 3d/ik 2>&1 | tee -a sanitizers_log.txt || true
+#          ./check_ci_log.py sanitizers_log.txt
+#
+#      - name: 3d/platformer
+#        run: |
+#          echo "" > sanitizers_log.txt
+#          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 3d/platformer 2>&1 | tee -a sanitizers_log.txt || true
+#          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 3d/platformer 2>&1 | tee -a sanitizers_log.txt || true
+#          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 3d/platformer 2>&1 | tee -a sanitizers_log.txt || true
+#          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 3d/voxel
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 3d/voxel 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 3d/voxel 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 3d/voxel 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: mobile/android_iap
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path mobile/android_iap 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path mobile/android_iap 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path mobile/android_iap 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: mobile/multitouch_view
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path mobile/multitouch_view 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path mobile/multitouch_view 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path mobile/multitouch_view 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: mobile/sensors
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path mobile/sensors 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path mobile/sensors 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path mobile/sensors 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: mobile/multitouch_cubes
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path mobile/multitouch_cubes 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path mobile/multitouch_cubes 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path mobile/multitouch_cubes 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: gui/rich_text_bbcode
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path gui/rich_text_bbcode 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path gui/rich_text_bbcode 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path gui/rich_text_bbcode 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: gui/translation
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path gui/translation 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path gui/translation 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path gui/translation 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: gui/sdf_font
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path gui/sdf_font 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path gui/sdf_font 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path gui/sdf_font 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: gui/regex
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path gui/regex 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path gui/regex 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path gui/regex 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: gui/input_mapping
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path gui/input_mapping 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path gui/input_mapping 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path gui/input_mapping 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: gui/drag_and_drop
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path gui/drag_and_drop 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path gui/drag_and_drop 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path gui/drag_and_drop 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: gui/theming_override
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path gui/theming_override 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path gui/theming_override 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path gui/theming_override 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: viewport/2d_in_3d
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path viewport/2d_in_3d 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path viewport/2d_in_3d 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path viewport/2d_in_3d 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: viewport/dynamic_split_screen
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path viewport/dynamic_split_screen 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path viewport/dynamic_split_screen 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path viewport/dynamic_split_screen 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: viewport/gui_in_3d
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path viewport/gui_in_3d 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path viewport/gui_in_3d 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path viewport/gui_in_3d 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: viewport/screen_capture
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path viewport/screen_capture 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path viewport/screen_capture 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path viewport/screen_capture 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: viewport/3d_in_2d
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path viewport/3d_in_2d 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path viewport/3d_in_2d 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path viewport/3d_in_2d 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: viewport/3d_scaling
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path viewport/3d_scaling 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path viewport/3d_scaling 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path viewport/3d_scaling 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/hexagonal_map
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/hexagonal_map 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/hexagonal_map 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/hexagonal_map 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+#
+#      - name: 2d/physics_platformer
+#        run: |
+#          echo "" > sanitizers_log.txt
+#          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/physics_platformer 2>&1 | tee -a sanitizers_log.txt || true
+#          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/physics_platformer 2>&1 | tee -a sanitizers_log.txt || true
+#          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/physics_platformer 2>&1 | tee -a sanitizers_log.txt || true
+#          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/navigation
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/navigation 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/navigation 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/navigation 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/hdr
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/hdr 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/hdr 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/hdr 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/kinematic_character
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/kinematic_character 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/kinematic_character 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/kinematic_character 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/pong
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/pong 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/pong 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/pong 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/gd_paint
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/gd_paint 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/gd_paint 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/gd_paint 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/isometric
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/isometric 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/isometric 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/isometric 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/light2d_as_mask
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/light2d_as_mask 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/light2d_as_mask 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/light2d_as_mask 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/dodge_the_creeps
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/dodge_the_creeps 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/dodge_the_creeps 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/dodge_the_creeps 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/screen_space_shaders
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/screen_space_shaders 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/screen_space_shaders 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/screen_space_shaders 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/navigation_astar
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/navigation_astar 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/navigation_astar 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/navigation_astar 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/sprite_shaders
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/sprite_shaders 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/sprite_shaders 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/sprite_shaders 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/finite_state_machine
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/finite_state_machine 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/finite_state_machine 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/finite_state_machine 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/role_playing_game
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/role_playing_game 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/role_playing_game 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/role_playing_game 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/platformer
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/platformer 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/platformer 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/platformer 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/particles
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/particles 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/particles 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/particles 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/lights_and_shadows
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/lights_and_shadows 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/lights_and_shadows 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/lights_and_shadows 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/tween
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/tween 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/tween 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/tween 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: 2d/instancing
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path 2d/instancing 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path 2d/instancing 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path 2d/instancing 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: networking/websocket_multiplayer
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path networking/websocket_multiplayer 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path networking/websocket_multiplayer 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path networking/websocket_multiplayer 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: networking/websocket_chat
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path networking/websocket_chat 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path networking/websocket_chat 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path networking/websocket_chat 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: networking/websocket_minimal
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path networking/websocket_minimal 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path networking/websocket_minimal 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path networking/websocket_minimal 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: networking/multiplayer_bomber
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path networking/multiplayer_bomber 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path networking/multiplayer_bomber 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path networking/multiplayer_bomber 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: networking/webrtc_minimal
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path networking/webrtc_minimal 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path networking/webrtc_minimal 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path networking/webrtc_minimal 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: networking/webrtc_signaling
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path networking/webrtc_signaling 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path networking/webrtc_signaling 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path networking/webrtc_signaling 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
+
+      - name: networking/multiplayer_pong
+        run: |
+          echo "" > sanitizers_log.txt
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy -e    --path networking/multiplayer_pong 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0             xvfb-run ./godot --audio-driver Dummy -e -q --path networking/multiplayer_pong 2>&1 | tee -a sanitizers_log.txt || true
+          DRI_PRIME=0 timeout 50s xvfb-run ./godot --audio-driver Dummy       --path networking/multiplayer_pong 2>&1 | tee -a sanitizers_log.txt || true
+          ./check_ci_log.py sanitizers_log.txt
