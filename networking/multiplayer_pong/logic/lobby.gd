@@ -1,12 +1,17 @@
 extends Control
 
-const DEFAULT_PORT = 8910 # An arbitrary number.
+# Default game server port. Can be any number between 1024 and 49151.
+# Not on the list of registered or common ports as of November 2020:
+# https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers
+const DEFAULT_PORT = 8910
 
 onready var address = $Address
 onready var host_button = $HostButton
 onready var join_button = $JoinButton
 onready var status_ok = $StatusOk
 onready var status_fail = $StatusFail
+onready var port_forward_label = $PortForward
+onready var find_public_ip_button = $FindPublicIP
 
 var peer = null
 
@@ -95,6 +100,10 @@ func _on_host_pressed():
 	join_button.set_disabled(true)
 	_set_status("Waiting for player...", true)
 
+	# Only show hosting instructions when relevant.
+	port_forward_label.visible = true
+	find_public_ip_button.visible = true
+
 
 func _on_join_pressed():
 	var ip = address.get_text()
@@ -108,3 +117,7 @@ func _on_join_pressed():
 	get_tree().set_network_peer(peer)
 
 	_set_status("Connecting...", true)
+
+
+func _on_find_public_ip_pressed():
+	OS.shell_open("https://icanhazip.com/")
