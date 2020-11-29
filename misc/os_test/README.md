@@ -7,7 +7,7 @@ new platform or to check for regressions.
 In a nutshell, this demo shows how you can get information from the
 operating system, or interact with the operating system.
 
-Language: GDScript and some [C#](https://docs.godotengine.org/en/latest/getting_started/scripting/c_sharp/index.html)
+Language: GDScript and some [C#](https://docs.godotengine.org/en/latest/tutorials/scripting/c_sharp/index.html)
 (Mono is NOT required to run this demo)
 
 Renderer: GLES 2
@@ -29,7 +29,7 @@ which gathers information about the OS using the OS class.
 
 On a Mono-enabled version of Godot, Godot will load `MonoTest.cs` into
 the `MonoTest` node. Then, information determined by
-[`C# preprocessor defines`](https://docs.godotengine.org/en/latest/getting_started/scripting/c_sharp/c_sharp_features.html#preprocessor-defines)
+[`C# preprocessor defines`](https://docs.godotengine.org/en/latest/tutorials/scripting/c_sharp/c_sharp_features.html#preprocessor-defines)
 will be added to the left panel.
 
 ## Screenshots

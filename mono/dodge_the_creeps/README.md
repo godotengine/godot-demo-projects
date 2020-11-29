@@ -8,7 +8,7 @@ This is a finished version of the game featured in the
 tutorial in the documentation, but ported to C#. For more details,
 consider following the tutorial in the documentation.
 
-Language: [C#](https://docs.godotengine.org/en/latest/getting_started/scripting/c_sharp/index.html)
+Language: [C#](https://docs.godotengine.org/en/latest/tutorials/scripting/c_sharp/index.html)
 
 Renderer: GLES 3 (particles are not available in GLES 2)
 
