@@ -1,8 +1,7 @@
 # Pong Multiplayer
 
-A multiplayer demo of the classical pong game.
-One of the players should press "host", while the
-other should select the address and press "join".
+A multiplayer demo of Pong. One player presses "host".
+The other presses "join". This only works locally.
 
 Language: GDScript
 

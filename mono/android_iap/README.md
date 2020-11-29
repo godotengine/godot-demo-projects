@@ -10,3 +10,5 @@ Renderer: GLES 2
 
 Note: There is a GDScript version available
 [here](https://github.com/godotengine/godot-demo-projects/tree/master/mobile/android_iap).
+
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/787
