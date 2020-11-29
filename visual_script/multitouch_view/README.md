@@ -3,7 +3,7 @@
 Simple debugger for multitouch input.
 Shows red dots everywhere you press.
 
-Language: [VisualScript](https://docs.godotengine.org/en/latest/getting_started/scripting/visual_script/index.html)
+Language: [VisualScript](https://docs.godotengine.org/en/latest/tutorials/scripting/visual_script/index.html)
 
 Renderer: GLES 2
 

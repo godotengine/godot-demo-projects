@@ -2,7 +2,7 @@
 
 A multiplayer demo of Pong. One player presses "host". The other presses "join". This only works locally.
 
-Language: [C#](https://docs.godotengine.org/en/latest/getting_started/scripting/c_sharp/index.html)
+Language: [C#](https://docs.godotengine.org/en/latest/tutorials/scripting/c_sharp/index.html)
 
 Renderer: GLES 2
 

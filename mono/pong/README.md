@@ -4,7 +4,7 @@ A simple Pong game. This demo shows best practices
 for game development in Godot, including
 [signals](https://docs.godotengine.org/en/latest/getting_started/step_by_step/signals.html).
 
-Language: [C#](https://docs.godotengine.org/en/latest/getting_started/scripting/c_sharp/index.html)
+Language: [C#](https://docs.godotengine.org/en/latest/tutorials/scripting/c_sharp/index.html)
 
 Renderer: GLES 2
 
