@@ -15,6 +15,22 @@ var _tests = [
 		"path": "res://tests/functional/test_friction.tscn",
 	},
 	{
+		"id": "Functional Tests/Box Stack",
+		"path": "res://tests/functional/test_stack.tscn",
+	},
+	{
+		"id": "Functional Tests/Box Pyramid",
+		"path": "res://tests/functional/test_pyramid.tscn",
+	},
+	{
+		"id": "Functional Tests/Raycasting",
+		"path": "res://tests/functional/test_raycasting.tscn",
+	},
+	{
+		"id": "Performance Tests/Broadphase",
+		"path": "res://tests/performance/test_perf_broadphase.tscn",
+	},
+	{
 		"id": "Performance Tests/Contacts",
 		"path": "res://tests/performance/test_perf_contacts.tscn",
 	},

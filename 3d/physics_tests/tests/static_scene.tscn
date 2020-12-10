@@ -1,25 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/robot_head/godot3_robot_head_collision.tres" type="Shape" id=1]
 [ext_resource path="res://assets/robot_head/godot3_robot_head.mesh" type="ArrayMesh" id=2]
-
-[sub_resource type="PlaneMesh" id=1]
-
-[sub_resource type="ConcavePolygonShape" id=2]
-data = PoolVector3Array( -1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1 )
+[ext_resource path="res://tests/static_scene_plane.tscn" type="PackedScene" id=3]
 
 [node name="StaticScene" type="Spatial"]
 
-[node name="StaticBodyPlane" type="StaticBody" parent="."]
-
-[node name="MeshInstance" type="MeshInstance" parent="StaticBodyPlane"]
-transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = null
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBodyPlane"]
-transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0 )
-shape = SubResource( 2 )
+[node name="StaticBodyPlane" parent="." instance=ExtResource( 3 )]
 
 [node name="StaticBodyHead" type="StaticBody" parent="."]
 transform = Transform( 10, 0, 0, 0, 8.66025, 5, 0, -5, 8.66025, 0, -11.1389, 2.29332 )

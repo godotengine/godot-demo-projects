@@ -13,6 +13,10 @@ func _enter_tree():
 	remove_child(_entry_template)
 
 
+func _exit_tree():
+	_entry_template.free()
+
+
 func clear():
 	while get_child_count():
 		var entry = get_child(get_child_count() - 1)

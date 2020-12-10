@@ -10,7 +10,7 @@ const OPTION_TYPE_SPHERE = "Shape type/Sphere"
 export(Array) var spawns = Array()
 
 export(int) var spawn_count = 100
-export(int, 1, 10) var spawn_multipiler = 5
+export(int, 1, 10) var spawn_multiplier = 5
 
 var _object_templates = []
 
@@ -34,6 +34,11 @@ func _ready():
 	$Options.connect("option_selected", self, "_on_option_selected")
 
 	_start_all_types()
+
+
+func _exit_tree():
+	for object_template in _object_templates:
+		object_template.free()
 
 
 func _on_option_selected(option):
@@ -123,9 +128,10 @@ func _spawn_objects(type_index):
 
 		Log.print_log("* Spawning: " + template_node.name)
 
-		for _index in range(spawn_multipiler):
-			for _node_index in spawn_count / spawn_multipiler:
+		for _index in range(spawn_multiplier):
+			for _node_index in spawn_count / spawn_multiplier:
 				var node = template_node.duplicate() as Spatial
+				node.transform.origin = Vector3.ZERO
 				spawn_parent.add_child(node)
 
 
