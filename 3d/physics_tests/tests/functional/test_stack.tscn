@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://tests/functional/test_stack.gd" type="Script" id=1]
+[ext_resource path="res://tests/static_scene_plane.tscn" type="PackedScene" id=2]
+[ext_resource path="res://utils/camera_orbit.gd" type="Script" id=4]
+
+[node name="Test" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Stack" type="Spatial" parent="."]
+
+[node name="StaticBodyPlane" parent="." instance=ExtResource( 2 )]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.53602, 12.2684 )
+script = ExtResource( 4 )
