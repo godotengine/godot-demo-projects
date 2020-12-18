@@ -3,12 +3,12 @@ extends Test
 
 const OPTION_TYPE_ALL = "Shape type/All"
 const OPTION_TYPE_BOX = "Shape type/Box"
+const OPTION_TYPE_SPHERE = "Shape type/Sphere"
 const OPTION_TYPE_CAPSULE = "Shape type/Capsule"
 const OPTION_TYPE_CYLINDER = "Shape type/Cylinder"
 const OPTION_TYPE_CONVEX = "Shape type/Convex"
-const OPTION_TYPE_SPHERE = "Shape type/Sphere"
-export(Array) var spawns = Array()
 
+export(Array) var spawns = Array()
 export(int) var spawn_count = 100
 export(int, 1, 10) var spawn_multiplier = 5
 
@@ -27,10 +27,10 @@ func _ready():
 
 	$Options.add_menu_item(OPTION_TYPE_ALL)
 	$Options.add_menu_item(OPTION_TYPE_BOX)
+	$Options.add_menu_item(OPTION_TYPE_SPHERE)
 	$Options.add_menu_item(OPTION_TYPE_CAPSULE)
 	$Options.add_menu_item(OPTION_TYPE_CYLINDER)
 	$Options.add_menu_item(OPTION_TYPE_CONVEX)
-	$Options.add_menu_item(OPTION_TYPE_SPHERE)
 	$Options.connect("option_selected", self, "_on_option_selected")
 
 	_start_all_types()
@@ -51,14 +51,14 @@ func _on_option_selected(option):
 			_start_all_types()
 		OPTION_TYPE_BOX:
 			_start_type(_find_type_index("Box"))
+		OPTION_TYPE_SPHERE:
+			_start_type(_find_type_index("Sphere"))
 		OPTION_TYPE_CAPSULE:
 			_start_type(_find_type_index("Capsule"))
 		OPTION_TYPE_CYLINDER:
 			_start_type(_find_type_index("Cylinder"))
 		OPTION_TYPE_CONVEX:
 			_start_type(_find_type_index("Convex"))
-		OPTION_TYPE_SPHERE:
-			_start_type(_find_type_index("Sphere"))
 
 
 func _find_type_index(type_name):

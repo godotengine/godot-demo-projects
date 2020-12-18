@@ -13,22 +13,23 @@ func _ready():
 
 
 func _physics_process(_delta):
-	if !_do_raycasts:
+	if not _do_raycasts:
 		return
 
 	_do_raycasts = false
 
 	Log.print_log("* Start Raycasting...")
 
-	clear_lines()
+	clear_drawn_nodes()
 
-	for shape in $Shapes.get_children():
-		var body = shape as PhysicsBody2D
+	for node in $Shapes.get_children():
+		var body = node as PhysicsBody2D
 		var space_state = body.get_world_2d().direct_space_state
+		var body_name = body.name.substr("RigidBody".length())
 
-		Log.print_log("* Testing: %s" % body.name)
+		Log.print_log("* Testing: %s" % body_name)
 
-		var center = body.global_transform.origin
+		var center = body.position
 
 		# Raycast entering from the top.
 		var res = _add_raycast(space_state, center - Vector2(0, 100), center)

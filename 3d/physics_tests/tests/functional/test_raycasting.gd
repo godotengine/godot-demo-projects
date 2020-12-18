@@ -23,7 +23,7 @@ func _ready():
 
 
 func _physics_process(_delta):
-	if !_do_raycasts:
+	if not _do_raycasts:
 		return
 
 	_do_raycasts = false
