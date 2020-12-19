@@ -13,7 +13,7 @@ func _ready():
 func _create_pyramid():
 	var root_node = $Pyramid
 
-	var template_body = create_rigidbody_box(box_size)
+	var template_body = create_rigidbody_box(box_size, true)
 
 	var pos_y = -0.5 * box_size.y - box_spacing.y
 

@@ -52,16 +52,16 @@ func _ready():
 
 func _input(event):
 	var key_event = event as InputEventKey
-	if (key_event and not key_event.pressed):
-		if (key_event.scancode == KEY_1):
+	if key_event and not key_event.pressed:
+		if key_event.scancode == KEY_1:
 			_on_option_selected(OPTION_TYPE_RECTANGLE)
-		elif (key_event.scancode == KEY_2):
+		elif key_event.scancode == KEY_2:
 			_on_option_selected(OPTION_TYPE_SPHERE)
-		elif (key_event.scancode == KEY_3):
+		elif key_event.scancode == KEY_3:
 			_on_option_selected(OPTION_TYPE_CAPSULE)
-		elif (key_event.scancode == KEY_4):
+		elif key_event.scancode == KEY_4:
 			_on_option_selected(OPTION_TYPE_CONVEX_POLYGON)
-		elif (key_event.scancode == KEY_5):
+		elif key_event.scancode == KEY_5:
 			_on_option_selected(OPTION_TYPE_CONCAVE_SEGMENTS)
 
 

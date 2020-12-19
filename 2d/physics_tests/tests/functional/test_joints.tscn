@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://tests/functional/test_joints.gd" type="Script" id=2]
+[ext_resource path="res://tests/test_options.tscn" type="PackedScene" id=4]
+
+[node name="JointTest2D" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="LabelJointType" type="Label" parent="."]
+margin_left = 14.0
+margin_top = 79.0
+margin_right = 145.0
+margin_bottom = 93.0
+text = "Joint Type: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" parent="." instance=ExtResource( 4 )]
+
+[node name="Joints" type="Node2D" parent="."]
+position = Vector2( 512, 200 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Joints"]
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="Joints"]
+
+[node name="GrooveJoint2D" type="GrooveJoint2D" parent="Joints"]
+
+[node name="Objects" type="Node2D" parent="."]
+position = Vector2( 512, 200 )

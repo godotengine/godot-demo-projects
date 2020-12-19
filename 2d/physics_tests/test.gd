@@ -22,9 +22,9 @@ var _drawn_nodes = []
 
 
 func _physics_process(_delta):
-	if (_wait_physics_ticks_counter > 0):
+	if _wait_physics_ticks_counter > 0:
 		_wait_physics_ticks_counter -= 1
-		if (_wait_physics_ticks_counter == 0):
+		if _wait_physics_ticks_counter == 0:
 			emit_signal("wait_done")
 
 
@@ -61,17 +61,28 @@ func clear_drawn_nodes():
 	_drawn_nodes.clear()
 
 
-func create_rigidbody_box(size):
-	var template_shape = RectangleShape2D.new()
-	template_shape.extents = 0.5 * size
+func create_rigidbody_box(size, pickable = false, use_icon = false):
+	var shape = RectangleShape2D.new()
+	shape.extents = 0.5 * size
 
-	var template_collision = CollisionShape2D.new()
-	template_collision.shape = template_shape
+	var collision = CollisionShape2D.new()
+	collision.shape = shape
 
-	var template_body = RigidBody2D.new()
-	template_body.add_child(template_collision)
+	var body = RigidBody2D.new()
+	body.add_child(collision)
 
-	return template_body
+	if pickable:
+		var script = load("res://utils/rigidbody_pick.gd")
+		body.set_script(script)
+
+	if use_icon:
+		var texture = load("res://icon.png")
+		var icon = Sprite.new()
+		icon.texture = texture
+		icon.scale = size / texture.get_size()
+		body.add_child(icon)
+
+	return body
 
 
 func start_timer(timeout):

@@ -15,14 +15,7 @@ func _ready():
 func _create_pyramid():
 	var root_node = $Pyramid
 
-	var template_shape = BoxShape.new()
-	template_shape.extents = 0.5 * box_size
-
-	var template_collision = CollisionShape.new()
-	template_collision.shape = template_shape
-
-	var template_body = RigidBody.new()
-	template_body.add_child(template_collision)
+	var template_body = create_rigidbody_box(box_size, true)
 
 	var pos_y = 0.5 * box_size.y + box_spacing.y
 
