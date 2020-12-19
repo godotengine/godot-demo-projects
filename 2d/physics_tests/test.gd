@@ -9,13 +9,16 @@ var _timer_started = false
 
 var _wait_physics_ticks_counter = 0
 
-
-class Line:
-	var pos_start
-	var pos_end
+class Circle2D:
+	extends Node2D
+	var center
+	var radius
 	var color
 
-var _lines = []
+	func _draw():
+		draw_circle(center, radius, color)
+
+var _drawn_nodes = []
 
 
 func _physics_process(_delta):
@@ -25,23 +28,37 @@ func _physics_process(_delta):
 			emit_signal("wait_done")
 
 
-func _draw():
-	for line in _lines:
-		draw_line(line.pos_start, line.pos_end, line.color, 1.5)
-
-
 func add_line(pos_start, pos_end, color):
-	var line = Line.new()
-	line.pos_start = pos_start
-	line.pos_end = pos_end
-	line.color = color
-	_lines.push_back(line)
-	update()
+	var line = Line2D.new()
+	line.points = [pos_start, pos_end]
+	line.width = 1.5
+	line.default_color = color
+	_drawn_nodes.push_back(line)
+	add_child(line)
 
 
-func clear_lines():
-	_lines.clear()
-	update()
+func add_circle(pos, radius, color):
+	var circle = Circle2D.new()
+	circle.center = pos
+	circle.radius = radius
+	circle.color = color
+	_drawn_nodes.push_back(circle)
+	add_child(circle)
+
+
+func add_shape(shape, transform, color):
+	var collision = CollisionShape2D.new()
+	collision.shape = shape
+	collision.transform = transform
+	collision.modulate = color
+	_drawn_nodes.push_back(collision)
+	add_child(collision)
+
+
+func clear_drawn_nodes():
+	for node in _drawn_nodes:
+		node.queue_free()
+	_drawn_nodes.clear()
 
 
 func create_rigidbody_box(size):

@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/robot_head/godot3_robot_head_collision.tres" type="Shape" id=1]
-[ext_resource path="res://tests/functional/test_raycasting.gd" type="Script" id=2]
+[ext_resource path="res://tests/functional/test_collision_pairs.gd" type="Script" id=2]
 [ext_resource path="res://utils/exception_cylinder.gd" type="Script" id=3]
 [ext_resource path="res://utils/camera_orbit.gd" type="Script" id=4]
+[ext_resource path="res://tests/test_options.tscn" type="PackedScene" id=5]
 
 [sub_resource type="BoxShape" id=1]
 
@@ -18,6 +19,97 @@ points = PoolVector3Array( -0.7, 0, -0.7, -0.3, 0, 0.8, 0.8, 0, -0.3, 0, -1, 0 )
 
 [node name="Test" type="Spatial"]
 script = ExtResource( 2 )
+
+[node name="Options" parent="." instance=ExtResource( 5 )]
+
+[node name="Controls" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+margin_top = 417.0
+margin_right = -806.0
+margin_bottom = -141.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OffsetX" type="HBoxContainer" parent="Controls"]
+margin_right = 193.0
+margin_bottom = 16.0
+custom_constants/separation = 20
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Controls/OffsetX"]
+margin_left = 2.0
+margin_top = 1.0
+margin_right = 53.0
+margin_bottom = 15.0
+text = "Offset X"
+
+[node name="HSlider" type="HSlider" parent="Controls/OffsetX"]
+margin_left = 73.0
+margin_right = 193.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 120, 0 )
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+
+[node name="OffsetY" type="HBoxContainer" parent="Controls"]
+margin_top = 26.0
+margin_right = 193.0
+margin_bottom = 42.0
+custom_constants/separation = 20
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Controls/OffsetY"]
+margin_left = 3.0
+margin_top = 1.0
+margin_right = 53.0
+margin_bottom = 15.0
+text = "Offset Y"
+
+[node name="HSlider" type="HSlider" parent="Controls/OffsetY"]
+margin_left = 73.0
+margin_right = 193.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 120, 0 )
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+
+[node name="OffsetZ" type="HBoxContainer" parent="Controls"]
+margin_top = 52.0
+margin_right = 193.0
+margin_bottom = 68.0
+custom_constants/separation = 20
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Controls/OffsetZ"]
+margin_left = 2.0
+margin_top = 1.0
+margin_right = 53.0
+margin_bottom = 15.0
+text = "Offset Z"
+
+[node name="HSlider" type="HSlider" parent="Controls/OffsetZ"]
+margin_left = 73.0
+margin_right = 193.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 120, 0 )
+min_value = -1.0
+max_value = 1.0
+step = 0.01
 
 [node name="Shapes" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.35591, 0 )
@@ -62,13 +154,16 @@ mode = 3
 transform = Transform( 2, 0, 0, 0, 2.89766, -0.517939, 0, 0.776908, 1.93177, 0, 0.3533, 0 )
 shape = SubResource( 4 )
 
-[node name="StaticBodyHead" type="StaticBody" parent="Shapes"]
+[node name="RigidBodyConcavePolygon" type="StaticBody" parent="Shapes"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -6, 3.93357 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Shapes/StaticBodyHead"]
+[node name="CollisionShape" type="CollisionShape" parent="Shapes/RigidBodyConcavePolygon"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 shape = ExtResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.8667, 11.8164 )
 script = ExtResource( 4 )
+[connection signal="value_changed" from="Controls/OffsetX/HSlider" to="." method="set_x_offset"]
+[connection signal="value_changed" from="Controls/OffsetY/HSlider" to="." method="set_y_offset"]
+[connection signal="value_changed" from="Controls/OffsetZ/HSlider" to="." method="set_z_offset"]

@@ -1,6 +1,7 @@
 class_name Test
 extends Node
 
+
 signal wait_done()
 
 var _timer
@@ -8,12 +9,55 @@ var _timer_started = false
 
 var _wait_physics_ticks_counter = 0
 
+var _drawn_nodes = []
+
 
 func _physics_process(_delta):
 	if (_wait_physics_ticks_counter > 0):
 		_wait_physics_ticks_counter -= 1
 		if (_wait_physics_ticks_counter == 0):
 			emit_signal("wait_done")
+
+
+func add_sphere(pos, radius, color):
+	var sphere = MeshInstance.new()
+
+	var sphere_mesh = SphereMesh.new()
+	sphere_mesh.radius = radius
+	sphere_mesh.height = radius * 2.0
+	sphere.mesh = sphere_mesh
+
+	var material = SpatialMaterial.new()
+	material.flags_unshaded = true
+	material.albedo_color = color
+	sphere.material_override = material
+
+	_drawn_nodes.push_back(sphere)
+	add_child(sphere)
+
+	sphere.global_transform.origin = pos
+
+
+func add_shape(shape, transform, color):
+	var collision = CollisionShape.new()
+	collision.shape = shape
+
+	_drawn_nodes.push_back(collision)
+	add_child(collision)
+
+	var mesh_instance = collision.get_child(0)
+	var material = SpatialMaterial.new()
+	material.flags_unshaded = true
+	material.albedo_color = color
+	mesh_instance.material_override = material
+
+	collision.global_transform = transform
+
+
+func clear_drawn_nodes():
+	for node in _drawn_nodes:
+		node.queue_free()
+	_drawn_nodes.clear()
 
 
 func create_rigidbody_box(size):
