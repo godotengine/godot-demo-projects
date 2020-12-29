@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://OG_FPS_Template/Textures/Enemy/Monster.png" type="Texture" id=1]
+[ext_resource path="res://FPSEnemy.gd" type="Script" id=2]
+
+[sub_resource type="SphereShape" id=1]
+
+[node name="Enemy" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="RigidBody" type="RigidBody" parent="."]
+transform = Transform( 2.55921, 0, 0, 0, 2.55921, 0, 0, 0, 2.55921, -0.00749999, -0.00768686, 0.00171727 )
+collision_layer = 2
+collision_mask = 2147483649
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
+transform = Transform( 0.721981, 0, 0, 0, 0.721981, 0, 0, 0, 0.721981, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 7.60998, 0, 0, 0, 7.60998, 0, 0, 0, 7.60998, 0.0171202, 0.0175468, -0.00392002 )
+billboard = 1
+texture = ExtResource( 1 )

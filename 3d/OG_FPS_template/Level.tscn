@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemy.tscn" type="PackedScene" id=3]
+
+[sub_resource type="BoxShape" id=1]
+
+[node name="Level" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004426, -0.047724, -0.000473022 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.742133, 0 )
+player_radius = 1.5
+mouse_sensitivity = 0.5
+max_speed = 0.4
+jump_force = 0.5
+
+[node name="StaticBody" type="StaticBody" parent="."]
+transform = Transform( 12.3467, 0, 0, 0, 0.078189, 0, 0, 0, 12.3467, 0, -0.030714, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="StaticBody"]
+
+[node name="StaticBody2" type="StaticBody" parent="."]
+transform = Transform( 4.0705, 0, 0, 0, 1.6753, 0, 0, 0, 1.21871, 0.236936, 1.03217, -4.87002 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="StaticBody2"]
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9921, 6.74603 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15184, 7.88237, 1.57709 )
+omni_range = 15.1898
+
+[node name="Enemy" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.57278, 2.83786, 6.65366 )
