@@ -154,13 +154,13 @@ func _physics_process(delta):
 func _fire():
 	animator.set_animation_state(animator.ANIMATION_STATES.FIRING);
 	# cast ray from center of camera location to a point as far as the range on our weapon
-	var ray_hit_result = space_state.intersect_ray(main_camera.global_transform.origin, main_camera.global_transform.origin + gun_range * main_camera.global_transform.basis[2] * -1, [self], 1 << 1)
+	var ray_hit_result = space_state.intersect_ray(main_camera.global_transform.origin, main_camera.global_transform.origin + gun_range * main_camera.global_transform.basis[2] * -1, [self])
 	if (ray_hit_result):
 		var root = ray_hit_result.collider;
 		# iterate up the tree until we find something that has the FPSEnemy script attatched or until there are no more parents to get
 		while(true):
 			if (root.script == FPSEnemy):
-				print("HIT");
+				root.take_damage(10, global_transform.origin - root.global_transform.origin, 100);
 				return;
 			if (!root.get_parent()):
 				return;

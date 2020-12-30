@@ -4,17 +4,16 @@
 [ext_resource path="res://FPSEnemy.gd" type="Script" id=2]
 
 [sub_resource type="SphereShape" id=1]
+radius = 2.46734
 
-[node name="Enemy" type="Spatial"]
+[node name="Enemy" type="RigidBody"]
+collision_mask = 2147483649
+gravity_scale = 0.0
+linear_damp = 10.0
 script = ExtResource( 2 )
 
-[node name="RigidBody" type="RigidBody" parent="."]
-transform = Transform( 2.55921, 0, 0, 0, 2.55921, 0, 0, 0, 2.55921, -0.00749999, -0.00768686, 0.00171727 )
-collision_layer = 2
-collision_mask = 2147483649
-
-[node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
-transform = Transform( 0.721981, 0, 0, 0, 0.721981, 0, 0, 0, 0.721981, 0, 0, 0 )
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.721981, 0, 0, 0, 0.721981, 0, 0, 0, 0.721981, -0.00749999, -0.00768686, 0.00171727 )
 shape = SubResource( 1 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
