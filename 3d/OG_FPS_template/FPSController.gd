@@ -94,23 +94,19 @@ func _physics_process(delta):
 	# normalise direction to ensure the player always accelerates at the same speed
 	direction_input = direction_input.normalized();
 	
+	# seperating horisontal and vertical velocity as we want to modify them seperately
+	# also means later on in the update function we can add a y component to horizontal velocity if we want to implement climbing slopes
+	var horizontal_velocity = Vector3(velocity.x, 0, velocity.z);
+	var vertical_velocity = Vector3(0, velocity.y, 0);
+	
 	# add horizontal movement onto velocity if direction is not zero, else we want to decelerate	
 	if (direction_input != Vector3(0,0,0)):
-		var forward_velocity = Vector3();
-		var right_velocity = Vector3();
-		right_velocity = direction_input.x * global_transform.basis[0] * accel_speed * delta;
-		forward_velocity = direction_input.z * global_transform.basis[2] * accel_speed * delta;
-		velocity += right_velocity + forward_velocity;
+		horizontal_velocity = (direction_input.x * global_transform.basis[0] + direction_input.z * global_transform.basis[2]) * accel_speed * delta;
 	else:
-		velocity.x *= 0.5;
-		velocity.z *= 0.5;
+		horizontal_velocity *= 0.5;
 	
-	# Clamp horizontal components of velocity to the max movespeed, only interested in the x and z components
-	var clamped_velocity = velocity.normalized() * min(velocity.length(), max_speed);
-	velocity.x = clamped_velocity.x;
-	velocity.z = clamped_velocity.z;
-	
-	var horisontal_velocity = Vector3(velocity.x, 0, velocity.z);
+	# Clamp horizontal components of velocity to the max movespeed
+	horizontal_velocity = horizontal_velocity.normalized() * min(horizontal_velocity.length(), max_speed);
 	
 	# COLLISIONS
 	# horizontal collisons
@@ -126,18 +122,18 @@ func _physics_process(delta):
 			for y in num_of_vertical_rays:
 				if (y == 0):
 					ray_origin.y += ground_padding; # add a little padding for rays starting at feet so player doesn't get stuck on slight edges in geometry
-				ray_hit_result = space_state.intersect_ray(ray_origin, ray_origin + horisontal_velocity + player_radius * horisontal_velocity.normalized(), [self], 1 << 0);
+				ray_hit_result = space_state.intersect_ray(ray_origin, ray_origin + horizontal_velocity + player_radius * horizontal_velocity.normalized(), [self], 1 << 0);
 				if (ray_hit_result):
 					#if our ray hits something, move along it at a speed based on how shallow the angle is (lower speeds the closer the player is to perpendicular to the wall) 
 					var wall_direction = ray_hit_result.normal.cross(-Vector3.UP);
-					var angle = rad2deg(ray_hit_result.normal.angle_to(-horisontal_velocity.normalized()))
+					var angle = rad2deg(ray_hit_result.normal.angle_to(-horizontal_velocity.normalized()))
 					
-					if (velocity.x * -ray_hit_result.normal.z > velocity.z * -ray_hit_result.normal.x):
+					if (horizontal_velocity.x * -ray_hit_result.normal.z > horizontal_velocity.z * -ray_hit_result.normal.x):
 						wall_direction *= -1;
 					
 					var velocity_modifier = angle / 90;
-					velocity.x = wall_direction.x * accel_speed * delta * velocity_modifier;
-					velocity.z = wall_direction.z * accel_speed * delta * velocity_modifier;
+					horizontal_velocity.x = wall_direction.x * accel_speed * delta * velocity_modifier;
+					horizontal_velocity.z = wall_direction.z * accel_speed * delta * velocity_modifier;
 				ray_origin += vertical_spacing;
 			ray_origin.y = global_transform.origin.y - player_height * 0.5;
 			ray_origin += horisontal_spacing;
@@ -146,24 +142,25 @@ func _physics_process(delta):
 	# only need to cast one ray down this time
 	var ray_hit_result = space_state.intersect_ray(global_transform.origin, global_transform.origin + Vector3.DOWN * player_height * 0.5);
 	if (ray_hit_result):
-		velocity.y = 0;
+		vertical_velocity.y = 0;
 		# if the ray hit, set the players position to half their height where they hit the ground, stops them sinking into the floor
 		set_translation(Vector3(get_translation().x, ray_hit_result.position.y + player_height * 0.45, get_translation().z));
 		#reset jumps taken on land
 		jumps_taken = 0;
 	else:
 		grounded = false;
-		velocity.y -= gravity * delta;
+		vertical_velocity.y -= gravity * delta;
 	
 	# JUMPING
 	# needs to be checked after collisions
 	if (Input.is_action_just_pressed("jump") && (grounded || jumps_taken < max_jumps)):
-		velocity.y = jump_force;
+		vertical_velocity.y = jump_force;
 		jumps_taken += 1;
+	
+	velocity = horizontal_velocity + vertical_velocity;
 	
 	# FINAL TRANSLATION
 	set_translation(get_translation() + velocity);
-	pass;
 
 
 func _fire():
