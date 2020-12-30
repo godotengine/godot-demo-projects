@@ -83,6 +83,7 @@ func _physics_process(delta):
 	var pitch_delta = main_camera.global_transform.basis.get_euler().x - clamp(main_camera.global_transform.basis.get_euler().x + (mouse_delta.y * delta), -1.5, 1.5);
 	main_camera.rotate_x(pitch_delta);
 	rotate_y(mouse_delta.x * delta); # rotating the player around the y axis instead as it saves us some trouble
+	mouse_delta = Vector2(0,0); # reset mouse delta after it's used, else the camera will rotate until the next mouse motion
 	
 	# MOVEMENT
 	# adding the corrosponding direction inputs together to get a final direction input vector
@@ -158,7 +159,6 @@ func _physics_process(delta):
 	
 	# FINAL TRANSLATION
 	set_translation(get_translation() + velocity);
-
 
 func _fire():
 	can_fire = false;
