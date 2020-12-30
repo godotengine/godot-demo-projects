@@ -9,13 +9,16 @@ export(int) var num_of_vertical_rays = 3;
 export(float) var ground_padding = 0.01;
 export(float) var player_height  = 4.0;
 export(float) var player_radius = 2.0;
+
 # CAMERA PROPERTIES
 export(float) var mouse_sensitivity = 1.0;
+
 # MOVEMENT PROPERTIES
 export(float) var accel_speed = 10;
 export(float) var max_speed = 0.4;
 export(float) var gravity = 2.0;
 export(float) var gun_range = 100000;
+
 # JUMP PROPERTIES
 export(float) var jump_force = 0.65;
 export(int) var max_jumps = 2;
@@ -23,15 +26,22 @@ export(int) var max_jumps = 2;
 # PLAYER VARIABLES
 # INPUT
 var direction_input = Vector3();
-var fire_pressed = false;
+
 # MOVEMENT
 var velocity = Vector3();
+
 # CAMERA
 var main_camera;
 var mouse_delta = Vector2();
+
 # JUMPING
 var grounded = false;
 var jumps_taken = 0;
+
+# FIRING
+var rate_of_fire_timer;
+var firing_recovery_time = 0.8; # if we wanted to switch weapons, this value might be stored on the weapon itself
+var can_fire = true;
 
 # ANIMATION
 var animator;
@@ -39,30 +49,36 @@ var animator;
 # ENGINE REFS
 var space_state;
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	main_camera = get_node("./Camera");
 	space_state = get_world().direct_space_state;
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN);
+	main_camera = get_node("./Camera");
 	animator = get_node("Control");
-	pass; # Replace with function body.
+
+	rate_of_fire_timer = get_node("RateOfFireTimer");
+	rate_of_fire_timer.set_wait_time(firing_recovery_time);
+	rate_of_fire_timer.one_shot = true;
+
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN);
+
 
 # Input, called whenever an input event is triggered
 func _input(event):
 	if (event is InputEventMouse):
 		var screen_center = get_viewport().get_visible_rect().size * 0.5;
+
 		# raw delta is inverted, however later code assumes it is by default, so no need to invert here
 		mouse_delta = (screen_center - event.position) * mouse_sensitivity;
 		Input.warp_mouse_position(screen_center);
-	pass; 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
+# all movement takes place in the fixed update / physics process to avoid frame dependancies
+# if you want the movement to appear smoother, my approach would be to lerp to the new location each frame based on the fixed timestep
+# but only update the new location at that fixed timestep (in _physics_process)
 func _physics_process(delta):
 	#FIRING
-	if (Input.is_action_just_pressed("fire")):
+	if (Input.is_action_pressed("fire") && can_fire):
 		_fire();
 	
 	#CAMERA ROTATION
@@ -75,15 +91,13 @@ func _physics_process(delta):
 	# adding the corrosponding direction inputs together to get a final direction input vector
 	# y is zero here as we use this for horisontal movement only
 	direction_input = Vector3(Input.get_action_strength("left") - Input.get_action_strength("right"), 0, Input.get_action_strength("forward") - Input.get_action_strength("back"));
-
 	# normalise direction to ensure the player always accelerates at the same speed
 	direction_input = direction_input.normalized();
 	
-	# add horizontal movement onto velocity if direction is not zero, else we want to decelerate
-	var forward_velocity = Vector3();
-	var right_velocity = Vector3();
-	
+	# add horizontal movement onto velocity if direction is not zero, else we want to decelerate	
 	if (direction_input != Vector3(0,0,0)):
+		var forward_velocity = Vector3();
+		var right_velocity = Vector3();
 		right_velocity = direction_input.x * global_transform.basis[0] * accel_speed * delta;
 		forward_velocity = direction_input.z * global_transform.basis[2] * accel_speed * delta;
 		velocity += right_velocity + forward_velocity;
@@ -147,11 +161,14 @@ func _physics_process(delta):
 		velocity.y = jump_force;
 		jumps_taken += 1;
 	
-	# TRANSLATING
+	# FINAL TRANSLATION
 	set_translation(get_translation() + velocity);
 	pass;
 
+
 func _fire():
+	can_fire = false;
+	rate_of_fire_timer.start();
 	animator.set_animation_state(animator.ANIMATION_STATES.FIRING);
 	# cast ray from center of camera location to a point as far as the range on our weapon
 	var ray_hit_result = space_state.intersect_ray(main_camera.global_transform.origin, main_camera.global_transform.origin + gun_range * main_camera.global_transform.basis[2] * -1, [self])
@@ -168,3 +185,8 @@ func _fire():
 		
 	pass;
 
+
+# rate of fire timer listener
+func _on_RateOfFireTimer_timeout():
+	can_fire = true;
+	pass # Replace with function body.

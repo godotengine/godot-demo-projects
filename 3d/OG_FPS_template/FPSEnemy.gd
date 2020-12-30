@@ -41,7 +41,11 @@ func _physics_process(delta):
 			recovering = false;
 			enemy_sprite.modulate = base_colour;
 			recovery_timer = 0;
-	
+	if (velocity.length() < 0.001):
+		velocity = Vector3(rand_range(-1000,1000), 0, rand_range(-1000,1000));
 	velocity *= decel_multiplier;
-	apply_central_impulse(velocity * delta);
+	apply_central_impulse(velocity * delta);	
 	pass
+	
+func TimerTimeout():
+	print("t");
