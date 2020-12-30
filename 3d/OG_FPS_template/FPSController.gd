@@ -60,17 +60,14 @@ func _ready():
 	rate_of_fire_timer.set_wait_time(firing_recovery_time);
 	rate_of_fire_timer.one_shot = true;
 
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN);
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
 
 
 # Input, called whenever an input event is triggered
 func _input(event):
-	if (event is InputEventMouse):
-		var screen_center = get_viewport().get_visible_rect().size * 0.5;
+	if (event is InputEventMouseMotion):
+		mouse_delta = -event.relative * mouse_sensitivity;
 
-		# raw delta is inverted, however later code assumes it is by default, so no need to invert here
-		mouse_delta = (screen_center - event.position) * mouse_sensitivity;
-		Input.warp_mouse_position(screen_center);
 
 
 # all movement takes place in the fixed update / physics process to avoid frame dependancies
