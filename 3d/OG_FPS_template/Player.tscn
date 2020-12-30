@@ -18,12 +18,9 @@ transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-idle_animaton = ExtResource( 6 )
-fire_animation = ExtResource( 5 )
 
 [node name="Hand" type="TextureRect" parent="Control"]
 material = SubResource( 1 )
@@ -34,9 +31,14 @@ margin_right = 315.983
 margin_bottom = 600.0
 texture = ExtResource( 2 )
 stretch_mode = 1
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+idle_animaton = ExtResource( 6 )
+fire_animation = ExtResource( 5 )
+
+[node name="AnimationTimer" type="Timer" parent="Control/Hand"]
 
 [node name="Ret" type="TextureRect" parent="Control"]
 anchor_left = 0.5
@@ -54,4 +56,5 @@ __meta__ = {
 }
 
 [node name="RateOfFireTimer" type="Timer" parent="."]
+[connection signal="timeout" from="Control/Hand/AnimationTimer" to="Control/Hand" method="_on_AnimationTimer_timeout"]
 [connection signal="timeout" from="RateOfFireTimer" to="." method="_on_RateOfFireTimer_timeout"]

@@ -53,8 +53,8 @@ var space_state;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	space_state = get_world().direct_space_state;
-	main_camera = get_node("./Camera");
-	animator = get_node("Control");
+	main_camera = get_node("Camera");
+	animator = get_node("Control/Hand");
 
 	rate_of_fire_timer = get_node("RateOfFireTimer");
 	rate_of_fire_timer.set_wait_time(firing_recovery_time);
@@ -182,11 +182,8 @@ func _fire():
 			if (!root.get_parent()):
 				return;
 			root = root.get_parent();
-		
-	pass;
 
 
 # rate of fire timer listener
 func _on_RateOfFireTimer_timeout():
 	can_fire = true;
-	pass # Replace with function body.
