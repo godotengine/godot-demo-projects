@@ -33,7 +33,10 @@ var mouse_delta = Vector2();
 var grounded = false;
 var jumps_taken = 0;
 
-# REF
+# ANIMATION
+var animator;
+
+# ENGINE REFS
 var space_state;
 
 # Called when the node enters the scene tree for the first time.
@@ -41,6 +44,7 @@ func _ready():
 	main_camera = get_node("./Camera");
 	space_state = get_world().direct_space_state;
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN);
+	animator = get_node("Control");
 	pass; # Replace with function body.
 
 # Input, called whenever an input event is triggered
@@ -148,11 +152,12 @@ func _physics_process(delta):
 	pass;
 
 func _fire():
-	print("FIRING");
+	animator.set_animation_state(animator.ANIMATION_STATES.FIRING);
 	# cast ray from center of camera location to a point as far as the range on our weapon
 	var ray_hit_result = space_state.intersect_ray(main_camera.global_transform.origin, main_camera.global_transform.origin + gun_range * main_camera.global_transform.basis[2] * -1, [self], 1 << 1)
 	if (ray_hit_result):
 		var root = ray_hit_result.collider;
+		# iterate up the tree until we find something that has the FPSEnemy script attatched or until there are no more parents to get
 		while(true):
 			if (root.script == FPSEnemy):
 				print("HIT");
