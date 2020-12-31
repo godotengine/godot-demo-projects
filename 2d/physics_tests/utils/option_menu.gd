@@ -6,7 +6,7 @@ signal option_selected(item_path)
 signal option_changed(item_path, checked)
 
 
-func add_menu_item(item_path, checkbox = false, checked = false):
+func add_menu_item(item_path, checkbox = false, checked = false, radio = false):
 	var path_elements = item_path.split("/", false)
 	var path_element_count = path_elements.size()
 	assert(path_element_count > 0)
@@ -19,7 +19,10 @@ func add_menu_item(item_path, checkbox = false, checked = false):
 		popup = _add_popup(popup, path, popup_label)
 
 	var label = path_elements[path_element_count - 1]
-	if checkbox:
+	if radio:
+		popup.add_radio_check_item(label)
+		popup.set_item_checked(popup.get_item_count() - 1, checked)
+	elif checkbox:
 		popup.add_check_item(label)
 		popup.set_item_checked(popup.get_item_count() - 1, checked)
 	else:
@@ -52,7 +55,15 @@ func _add_popup(parent_popup, path, label):
 func _on_item_pressed(item_index, popup_menu, path):
 	var item_path = path + popup_menu.get_item_text(item_index)
 
-	if popup_menu.is_item_checkable(item_index):
+	if popup_menu.is_item_radio_checkable(item_index):
+		var checked = popup_menu.is_item_checked(item_index)
+		if not checked:
+			popup_menu.set_item_checked(item_index, true)
+			for other_index in popup_menu.get_item_count():
+				if other_index != item_index:
+					popup_menu.set_item_checked(other_index, false)
+			emit_signal("option_selected", item_path)
+	elif popup_menu.is_item_checkable(item_index):
 		var checked = not popup_menu.is_item_checked(item_index)
 		popup_menu.set_item_checked(item_index, checked)
 		emit_signal("option_changed", item_path, checked)
