@@ -13,9 +13,9 @@ var _drawn_nodes = []
 
 
 func _physics_process(_delta):
-	if (_wait_physics_ticks_counter > 0):
+	if _wait_physics_ticks_counter > 0:
 		_wait_physics_ticks_counter -= 1
-		if (_wait_physics_ticks_counter == 0):
+		if _wait_physics_ticks_counter == 0:
 			emit_signal("wait_done")
 
 
@@ -60,17 +60,21 @@ func clear_drawn_nodes():
 	_drawn_nodes.clear()
 
 
-func create_rigidbody_box(size):
-	var template_shape = BoxShape.new()
-	template_shape.extents = 0.5 * size
+func create_rigidbody_box(size, pickable):
+	var shape = BoxShape.new()
+	shape.extents = 0.5 * size
 
-	var template_collision = CollisionShape.new()
-	template_collision.shape = template_shape
+	var collision = CollisionShape.new()
+	collision.shape = shape
 
-	var template_body = RigidBody.new()
-	template_body.add_child(template_collision)
+	var body = RigidBody.new()
+	body.add_child(collision)
 
-	return template_body
+	if pickable:
+		var script = load("res://utils/rigidbody_pick.gd")
+		body.set_script(script)
+
+	return body
 
 
 func start_timer(timeout):

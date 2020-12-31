@@ -19,6 +19,10 @@ var _tests = [
 		"path": "res://tests/functional/test_collision_pairs.tscn",
 	},
 	{
+		"id": "Functional Tests/Joints",
+		"path": "res://tests/functional/test_joints.tscn",
+	},
+	{
 		"id": "Functional Tests/Raycasting",
 		"path": "res://tests/functional/test_raycasting.tscn",
 	},
