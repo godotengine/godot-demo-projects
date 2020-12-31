@@ -1,5 +1,12 @@
 extends Spatial
 
+# Uses raycasted solution for collisions
+# my justification for this is that using a rigid body to move / rotate the player
+# using impulses would make the camera movement feel unresponsive and as of now
+# I can't seem to find a way to use a hybrid (using rigid body for horizontal movement
+# but hard setting the camera movement) 
+# raycasts will also give us more information about our environment,
+# allowing us to implement mechanics like slope climbing
 class_name FPSController
 
 # PLAYER PROPERTIES
@@ -32,7 +39,7 @@ var velocity = Vector3();
 
 # CAMERA
 var main_camera;
-var mouse_delta = Vector2();
+var mouse_delta;
 
 # JUMPING
 var grounded = false;
@@ -49,7 +56,6 @@ var animator;
 # ENGINE REFS
 var space_state;
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	space_state = get_world().direct_space_state;
@@ -61,6 +67,7 @@ func _ready():
 	rate_of_fire_timer.one_shot = true;
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
+	mouse_delta = Vector2(); # set mouse delta to 0 before the first process so camera doesn't rotate after being snapped to center
 
 
 # Input, called whenever an input event is triggered
