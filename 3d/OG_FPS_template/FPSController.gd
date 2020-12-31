@@ -146,6 +146,11 @@ func _physics_process(delta):
 		#reset jumps taken on land
 		jumps_taken = 0;
 	else:
+		# collision checks above player if the player is in the air
+		ray_hit_result = space_state.intersect_ray(global_transform.origin, global_transform.origin + Vector3.UP * player_height * 0.5);
+		if (ray_hit_result):
+			vertical_velocity.y = 0;
+		# setting grounded and subtracting gravity, has to be done after else the ray cast above will always hit
 		grounded = false;
 		vertical_velocity.y -= gravity * delta;
 	
