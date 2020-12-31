@@ -6,21 +6,21 @@ class_name FPSController
 # COLLISION PROPERTIES
 export(int) var num_of_horisontal_rays = 3;
 export(int) var num_of_vertical_rays = 3;
-export(float) var ground_padding = 0.01;
+export(float) var ground_padding = 0.2;
 export(float) var player_height  = 4.0;
-export(float) var player_radius = 2.0;
+export(float) var player_radius = 1.5;
 
 # CAMERA PROPERTIES
-export(float) var mouse_sensitivity = 1.0;
+export(float) var mouse_sensitivity = 0.5;
 
 # MOVEMENT PROPERTIES
-export(float) var accel_speed = 10;
-export(float) var max_speed = 0.4;
-export(float) var gravity = 2.0;
+export(float) var accel_speed = 20;
+export(float) var max_speed = 0.5;
+export(float) var gravity = 1.0;
 export(float) var gun_range = 100000;
 
 # JUMP PROPERTIES
-export(float) var jump_force = 0.65;
+export(float) var jump_force = 0.3;
 export(int) var max_jumps = 2;
 
 # PLAYER VARIABLES
@@ -142,7 +142,7 @@ func _physics_process(delta):
 	if (ray_hit_result):
 		vertical_velocity.y = 0;
 		# if the ray hit, set the players position to half their height where they hit the ground, stops them sinking into the floor
-		set_translation(Vector3(get_translation().x, ray_hit_result.position.y + player_height * 0.45, get_translation().z));
+		set_translation(Vector3(get_translation().x, ray_hit_result.position.y + player_height * 0.5, get_translation().z));
 		#reset jumps taken on land
 		jumps_taken = 0;
 	else:
