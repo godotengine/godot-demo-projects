@@ -149,8 +149,11 @@ func _physics_process(delta):
 		# collision checks above player if the player is in the air
 		ray_hit_result = space_state.intersect_ray(global_transform.origin, global_transform.origin + Vector3.UP * player_height * 0.5);
 		if (ray_hit_result):
-			vertical_velocity.y = 0;
-		# setting grounded and subtracting gravity, has to be done after else the ray cast above will always hit
+			vertical_velocity.y  = 0;
+			# setting position similar to above, only subtracting just out of ray distance
+			# stops player sticking to ceilings in some circumstances
+			set_translation(Vector3(get_translation().x, ray_hit_result.position.y - player_height * 0.52, get_translation().z));
+			# setting grounded and subtracting gravity
 		grounded = false;
 		vertical_velocity.y -= gravity * delta;
 	
