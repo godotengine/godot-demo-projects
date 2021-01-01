@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://oldschool_fps/Textures/Level/controls.png" type="Texture" id=2]
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=3]
 
 [sub_resource type="BoxShape" id=1]
@@ -9,13 +10,13 @@
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004426, -0.047724, -0.000473022 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 4.2318, 2.40711, 5.80863 )
+transform = Transform( -0.999755, 0, -0.0221467, 0, 1, 0, 0.0221467, 0, -0.999755, -6.35357, 3.47953, 14.1546 )
 ground_padding = 0.8
 mouse_sensitivity = 0.1
 max_speed = 0.25
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.55885, 2.82108, 6.66188 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.51741, 2.82108, -1.7904 )
 
 [node name="Floor" type="StaticBody" parent="."]
 transform = Transform( 48.7747, 0, 0, 0, 0.078189, 0, 0, 0, 48.7747, 0, -0.030714, 0 )
@@ -208,3 +209,7 @@ shadow_enabled = true
 shadow_reverse_cull_face = true
 omni_range = 11.0929
 omni_attenuation = 1.56917
+
+[node name="controls" type="Sprite3D" parent="."]
+transform = Transform( 8.61086, 0, 0, 0, 8.61086, 0, 0, 0, 1, -6.52611, 3.61437, 7.93472 )
+texture = ExtResource( 2 )
