@@ -33,8 +33,8 @@ func take_damage(var damage, var direction, var knockback):
 
 
 func _physics_process(delta):
-	if (velocity.length() < 0.001):
-		velocity = Vector3(rand_range(-1000,1000), 0, rand_range(-1000,1000));
+	if (velocity.length() < 0.001): #TODO : change this not to be hardcoded vadiables ( use a const var with a name for this like you did for other stuff )
+		velocity = Vector3(rand_range(-1000,1000), 0, rand_range(-1000,1000));  #TODO : change this not to be hardcoded vadiables ( use a const var with a name for this like you did for other stuff )
 	velocity *= decel_multiplier;
 	apply_central_impulse(velocity * delta);	
 

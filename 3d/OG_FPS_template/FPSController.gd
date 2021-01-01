@@ -1,12 +1,6 @@
 extends Spatial
 
-# Uses raycasted solution for collisions
-# my justification for this is that using a rigid body to move / rotate the player
-# using impulses would make the camera movement feel unresponsive and as of now
-# I can't seem to find a way to use a hybrid (using rigid body for horizontal movement
-# but hard setting the camera movement) 
-# raycasts will also give us more information about our environment,
-# allowing us to implement mechanics like slope climbing
+# Uses raycasted solution for old school collisions.
 class_name FPSController
 
 # PLAYER PROPERTIES
@@ -78,8 +72,6 @@ func _input(event):
 
 
 # all movement takes place in the fixed update / physics process to avoid frame dependancies
-# if you want the movement to appear smoother, my approach would be to lerp to the new location each frame based on the fixed timestep
-# but only update the new location at that fixed timestep (in _physics_process)
 func _physics_process(delta):
 	#FIRING
 	if (Input.is_action_pressed("fire") && can_fire):
@@ -89,18 +81,18 @@ func _physics_process(delta):
 	# first need to clamp the pitch delta so we don't over rotate
 	var pitch_delta = main_camera.global_transform.basis.get_euler().x - clamp(main_camera.global_transform.basis.get_euler().x + (mouse_delta.y * delta), -1.5, 1.5);
 	main_camera.rotate_x(pitch_delta);
-	rotate_y(mouse_delta.x * delta); # rotating the player around the y axis instead as it saves us some trouble
+	rotate_y(mouse_delta.x * delta); # rotating the player around the y axis as it saves us some trouble
 	mouse_delta = Vector2(0,0); # reset mouse delta after it's used, else the camera will rotate until the next mouse motion
 	
 	# MOVEMENT
-	# adding the corrosponding direction inputs together to get a final direction input vector
+	# adding the corresponding direction inputs together to get a final direction input vector
 	# y is zero here as we use this for horisontal movement only
 	direction_input = Vector3(Input.get_action_strength("left") - Input.get_action_strength("right"), 0, Input.get_action_strength("forward") - Input.get_action_strength("back"));
 	# normalise direction to ensure the player always accelerates at the same speed
 	direction_input = direction_input.normalized();
 	
-	# seperating horisontal and vertical velocity as we want to modify them seperately
-	# also means later on in the update function we can add a y component to horizontal velocity if we want to implement climbing slopes
+	# seperating horizontal and vertical velocity as we want to modify them seperately
+	# also means later in the update function we can add a y component to horizontal velocity if we want to implement climbing slopes
 	var horizontal_velocity = Vector3(velocity.x, 0, velocity.z);
 	var vertical_velocity = Vector3(0, velocity.y, 0);
 	
@@ -116,9 +108,9 @@ func _physics_process(delta):
 	# COLLISIONS
 	# horizontal collisons
 	if (velocity != Vector3(0,0,0)):
-		# calculate ray the ray starting point (bottom left of player) then work out spacing based on radius / height and num of rays
+		# calculate the ray starting point (bottom left of player) then work out spacing based on radius / height and num of rays
 		var ray_origin = global_transform.origin - (global_transform.basis[0] * player_radius * 0.5 + Vector3(0, player_height * 0.5, 0));
-		var horisontal_spacing = global_transform.basis[0] * (player_radius / num_of_horisontal_rays);
+		var horizontal_spacing = global_transform.basis[0] * (player_radius / num_of_horisontal_rays);
 		var vertical_spacing = Vector3(0, player_height / num_of_vertical_rays, 0);
 		var ray_hit_result;
 		
@@ -141,7 +133,7 @@ func _physics_process(delta):
 					horizontal_velocity.z = wall_direction.z * accel_speed * delta * velocity_modifier;
 				ray_origin += vertical_spacing;
 			ray_origin.y = global_transform.origin.y - player_height * 0.5;
-			ray_origin += horisontal_spacing;
+			ray_origin += horizontal_spacing;
 	
 	# vertical collisions
 	# only need to cast one ray down this time
