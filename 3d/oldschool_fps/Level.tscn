@@ -1,0 +1,210 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemy.tscn" type="PackedScene" id=3]
+
+[sub_resource type="BoxShape" id=1]
+
+[node name="Level" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004426, -0.047724, -0.000473022 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 4.2318, 2.40711, 5.80863 )
+ground_padding = 0.8
+mouse_sensitivity = 0.1
+max_speed = 0.25
+
+[node name="Enemy" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.55885, 2.82108, 6.66188 )
+
+[node name="Floor" type="StaticBody" parent="."]
+transform = Transform( 48.7747, 0, 0, 0, 0.078189, 0, 0, 0, 48.7747, 0, -0.030714, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="Floor"]
+
+[node name="Floor2" type="StaticBody" parent="."]
+transform = Transform( -30, 0, -6.99382e-07, 0, 0.173772, 0, 2.62268e-06, 0, -8, 0.495645, 0.417433, -2.07916 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor2"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="Floor2"]
+
+[node name="Floor3" type="StaticBody" parent="."]
+transform = Transform( -30, 0, -6.99382e-07, 0, 0.187714, 0, 2.88389e-06, 0, -8.79677, 0.495645, 0.186873, -2.07916 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor3"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="Floor3"]
+
+[node name="Floor4" type="StaticBody" parent="."]
+transform = Transform( -30, 0, -6.99382e-07, 0, 0.187714, 0, 3.17443e-06, 0, -9.68301, 0.32192, 0.0216598, -2.13287 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor4"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="Floor4"]
+
+[node name="Roof" type="StaticBody" parent="."]
+transform = Transform( 48.7747, 2.33578e-05, -0.00317805, -0.0145712, 0.078189, -0.0082132, 0.00317565, 1.31678e-05, 48.7747, -1.3791, 8.56922, -0.233257 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Roof"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="Roof"]
+
+[node name="OuterWall" type="StaticBody" parent="."]
+transform = Transform( -2.04686e-06, 0, 1.23673, 0, 14.4022, 0, -50.5703, 0, -8.11028e-07, -29.31, 10.9961, 0.695978 )
+
+[node name="CollisionShape" type="CollisionShape" parent="OuterWall"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="OuterWall"]
+transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.41061e-13, 0, 1, 0, 0, 0 )
+
+[node name="OuterWall2" type="StaticBody" parent="."]
+transform = Transform( -2.04686e-06, 0, 1.23673, 0, 14.4022, 0, -50.5703, 0, -8.11028e-07, 18.545, 10.6521, 0.695978 )
+
+[node name="CollisionShape" type="CollisionShape" parent="OuterWall2"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="OuterWall2"]
+transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.41061e-13, 0, 1, 0, 0, 0 )
+
+[node name="OuterWall3" type="StaticBody" parent="."]
+transform = Transform( 50.5703, 0, 0, 0, 15.6958, 0, 0, 0, 1.23673, -0.316583, 11.9476, -28.6999 )
+
+[node name="CollisionShape" type="CollisionShape" parent="OuterWall3"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="OuterWall3"]
+transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.41061e-13, 0, 1, 0, 0, 0 )
+
+[node name="OuterWall4" type="StaticBody" parent="."]
+transform = Transform( 50.5703, 0, 0, 0, 14.766, 0, 0, 0, 1.23673, -0.316583, 10.94, 18.8431 )
+
+[node name="CollisionShape" type="CollisionShape" parent="OuterWall4"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="OuterWall4"]
+transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.41061e-13, 0, 1, 0, 0, 0 )
+
+[node name="InnerWall" type="StaticBody" parent="."]
+transform = Transform( -3.25841e-07, 0, 1, 0, 14.402, 0, -2, 0, -1.62921e-07, -15.7425, 3.11037, -2.0646 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InnerWall"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="InnerWall"]
+transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.41061e-13, 0, 1, 0, 0, 0 )
+
+[node name="InnerWall2" type="StaticBody" parent="."]
+transform = Transform( -3.25841e-07, 0, 1, 0, 14.402, 0, -2, 0, -1.62921e-07, 2.22184, 3.65798, -2.07286 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InnerWall2"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="InnerWall2"]
+transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.41061e-13, 0, 1, 0, 0, 0 )
+
+[node name="InnerWall3" type="StaticBody" parent="."]
+transform = Transform( 8, 0, 0, 0, 15.696, 0, 0, 0, 1, -6.75659, 9.14081, -11.0297 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InnerWall3"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="InnerWall3"]
+transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.41061e-13, 0, 1, 0, 0, 0 )
+
+[node name="InnerWall4" type="StaticBody" parent="."]
+transform = Transform( 8, 0, 0, 0, 14.766, 0, 0, 0, 1, -6.76217, 10.059, 6.93421 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InnerWall4"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="InnerWall4"]
+transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.41061e-13, 0, 1, 0, 0, 0 )
+
+[node name="InnerCorner" type="StaticBody" parent="."]
+transform = Transform( 0.989949, 0, 0.919239, 0, 12, 0, -0.98995, 0, 0.919239, -14.817, 3.89147, -10.1211 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InnerCorner"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="InnerCorner"]
+transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.41061e-13, 0, 1, 0, 0, 0 )
+
+[node name="InnerCorner2" type="StaticBody" parent="."]
+transform = Transform( 0.989949, 0, 0.919239, 0, 12, 0, -0.98995, 0, 0.919239, 1.29981, 3.88156, 6.00434 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InnerCorner2"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="InnerCorner2"]
+transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.41061e-13, 0, 1, 0, 0, 0 )
+
+[node name="InnerCorner3" type="StaticBody" parent="."]
+transform = Transform( 0.919239, 0, 0.98995, 0, 12, 0, -0.919239, 0, 0.98995, -14.8102, 3.88156, 5.99904 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InnerCorner3"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="InnerCorner3"]
+transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.41061e-13, 0, 1, 0, 0, 0 )
+
+[node name="InnerCorner4" type="StaticBody" parent="."]
+transform = Transform( 0.919239, 0, 0.98995, 0, 12, 0, -0.919239, 0, 0.98995, 1.3045, 3.88156, -10.1526 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InnerCorner4"]
+shape = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="InnerCorner4"]
+transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 3.41061e-13, 0, 1, 0, 0, 0 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, -2.98023e-08, 2.02811e-11, 0, 0.000680522, 1, -2.98023e-08, -1, 0.000680522, 6.18588, 6.07297, 12.0591 )
+light_energy = 0.17
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.0013, 6.64905, -5.51858 )
+light_bake_mode = 2
+shadow_enabled = true
+shadow_reverse_cull_face = true
+omni_range = 22.3349
+omni_attenuation = 1.56917
+
+[node name="OmniLight3" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.41478, 6.64905, -5.51858 )
+light_bake_mode = 2
+shadow_enabled = true
+shadow_reverse_cull_face = true
+omni_range = 22.3349
+omni_attenuation = 1.56917
+
+[node name="OmniLight2" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.56513, 6.80848, -18.1085 )
+light_bake_mode = 2
+shadow_enabled = true
+shadow_reverse_cull_face = true
+omni_range = 16.8211
+omni_attenuation = 1.56917
+
+[node name="OmniLight4" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.56513, 6.80848, 11.4457 )
+light_bake_mode = 2
+shadow_enabled = true
+shadow_reverse_cull_face = true
+omni_range = 16.8211
+omni_attenuation = 1.56917
+
+[node name="OmniLight5" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.56513, 6.80848, -2.36321 )
+light_bake_mode = 2
+shadow_enabled = true
+shadow_reverse_cull_face = true
+omni_range = 11.0929
+omni_attenuation = 1.56917
