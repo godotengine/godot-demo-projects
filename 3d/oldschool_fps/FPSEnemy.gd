@@ -29,7 +29,7 @@ const ENEMY_SPEED_RANGE = 1000;
 func _ready():
 	enemy_sprite = get_node("Sprite3D");
 	recovery_timer = get_node("RecoveryTimer");
-	enemy_manager = get_tree().get_current_scene().get_node("EnemyManager");
+	enemy_manager = get_node("../..");
 	
 	base_colour = enemy_sprite.modulate;
 
