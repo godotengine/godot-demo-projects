@@ -9,17 +9,27 @@ var state = {
 	eases = Tween.EASE_IN,
 }
 
-onready var trans = $Trans
-onready var eases = $Eases
-onready var modes = $Modes
 onready var tween = $Tween
-onready var timeline = $Timeline
-onready var color_from_picker = $Colors/ColorFrom/Picker
-onready var color_to_picker = $Colors/ColorTo/Picker
-onready var sprite = $Tween/Area/Sprite
-onready var follow = $Tween/Area/Follow
-onready var follow_2 = $Tween/Area/Follow2
-onready var size = $Tween/Area.get_size()
+onready var trans = $Controls/Transitions
+onready var eases = $Controls/Eases
+onready var modes = $Controls/Modes
+onready var timeline = $Top/Timeline
+onready var color_from_picker = $Controls/ColorFrom/ColorPicker
+onready var color_to_picker = $Controls/ColorTo/ColorPicker
+onready var area_label = $Top/Area/RichTextLabel
+onready var sprite = $Top/Area/Sprite
+onready var follow = $Top/Area/Follow
+onready var follow_2 = $Top/Area/Follow2
+onready var size = $Top/Area.get_size()
+
+onready var move_mode = modes.get_node(@"Move")
+onready var color_mode = modes.get_node(@"Color")
+onready var scale_mode = modes.get_node(@"Scale")
+onready var rotate_mode = modes.get_node(@"Rotate")
+onready var callback_mode = modes.get_node(@"Callback")
+onready var follow_mode = modes.get_node(@"Follow")
+onready var repeat_mode = modes.get_node(@"Repeat")
+onready var paused_mode = modes.get_node(@"Pause")
 
 func _ready():
 	for index in range(trans_list.size()):
@@ -37,10 +47,9 @@ func _ready():
 	color_to_picker.set_pick_color(Color.cyan)
 	color_to_picker.connect("color_changed", self, "on_color_changed")
 
-	$Trans/Linear.set_pressed(true)
-	$Eases/In.set_pressed(true)
-	$Modes/Move.set_pressed(true)
-	$Modes/Repeat.set_pressed(true)
+	for node in [trans, eases, modes]:
+		node.get_child(1).set_pressed(true)
+	modes.get_node(@"Repeat").set_pressed(true)
 
 	reset_tween()
 
@@ -71,7 +80,7 @@ func on_eases_changed(ease_name, index):
 
 func on_modes_changed(mode_name):
 	if mode_name == "pause":
-		if $Modes/Pause.is_pressed():
+		if paused_mode.is_pressed():
 			tween.stop_all()
 			timeline.set_mouse_filter(Control.MOUSE_FILTER_PASS)
 		else:
@@ -81,7 +90,7 @@ func on_modes_changed(mode_name):
 		reset_tween()
 
 
-func on_color_changed(_color):
+func _on_ColorPicker_color_changed(_color):
 	reset_tween()
 
 
@@ -90,31 +99,31 @@ func reset_tween():
 	tween.reset_all()
 	tween.remove_all()
 
-	if $Modes/Move.is_pressed():
+	if move_mode.is_pressed():
 		tween.interpolate_method(sprite, "set_position", Vector2(0, 0), Vector2(size.x, size.y), 2, state.trans, state.eases)
 		tween.interpolate_property(sprite, "position", Vector2(size.x, size.y), Vector2(0, 0), 2, state.trans, state.eases, 2)
 
-	if $Modes/Color.is_pressed():
+	if color_mode.is_pressed():
 		tween.interpolate_method(sprite, "set_modulate", color_from_picker.get_pick_color(), color_to_picker.get_pick_color(), 2, state.trans, state.eases)
 		tween.interpolate_property(sprite, "modulate", color_to_picker.get_pick_color(), color_from_picker.get_pick_color(), 2, state.trans, state.eases, 2)
 	else:
 		sprite.set_modulate(Color.white)
 
-	if $Modes/Scale.is_pressed():
+	if scale_mode.is_pressed():
 		tween.interpolate_method(sprite, "set_scale", Vector2(0.5, 0.5), Vector2(1.5, 1.5), 2, state.trans, state.eases)
 		tween.interpolate_property(sprite, "scale", Vector2(1.5, 1.5), Vector2(0.5, 0.5), 2, state.trans, state.eases, 2)
 	else:
 		sprite.set_scale(Vector2.ONE)
 
-	if $Modes/Rotate.is_pressed():
+	if rotate_mode.is_pressed():
 		tween.interpolate_method(sprite, "set_rotation_degrees", 0, 360, 2, state.trans, state.eases)
 		tween.interpolate_property(sprite, "rotation_degrees", 360, 0, 2, state.trans, state.eases, 2)
 
-	if $Modes/Callback.is_pressed():
+	if callback_mode.is_pressed():
 		tween.interpolate_callback(self, 0.5, "on_callback", "0.5 seconds after")
 		tween.interpolate_callback(self, 0.2, "on_callback", "1.2 seconds after")
 
-	if $Modes/Follow.is_pressed():
+	if follow_mode.is_pressed():
 		follow.show()
 		follow_2.show()
 
@@ -127,31 +136,29 @@ func reset_tween():
 		follow.hide()
 		follow_2.hide()
 
-	tween.set_repeat($Modes/Repeat.is_pressed())
+	tween.set_repeat(repeat_mode.is_pressed())
 	tween.start()
 	tween.seek(pos)
 
-	if $Modes/Pause.is_pressed():
+	if paused_mode.is_pressed():
 		tween.stop_all()
-		#get_node("timeline").set_ignore_mouse(false)
 		timeline.set_value(0)
 	else:
 		tween.resume_all()
-		#get_node("timeline").set_ignore_mouse(true)
 
 
-func _on_tween_step(_object, _key, elapsed, _value):
+func _on_Tween_tween_step(_object, _key, elapsed, _value):
 	var runtime = tween.get_runtime()
 	var ratio = 100 * (elapsed / runtime)
 	timeline.set_value(ratio)
 
 
-func _on_timeline_value_changed(value):
-	if !$Modes/Pause.is_pressed():
+func _on_Timeline_value_changed(value):
+	if not paused_mode.is_pressed():
 		return
 	var runtime = tween.get_runtime()
 	tween.seek(runtime * value / 100)
 
 
 func on_callback(arg):
-	$Tween/Area/Label.add_text("on_callback -> " + arg + "\n")
+	area_label.add_text("on_callback -> " + arg + "\n")
