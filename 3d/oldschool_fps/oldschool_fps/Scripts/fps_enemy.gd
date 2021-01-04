@@ -26,7 +26,7 @@ func _ready():
 	enemy_sprite = get_node("Sprite3D")
 	recovery_timer = get_node("RecoveryTimer")
 	enemy_manager = get_node("../..")
-	
+
 	base_colour = enemy_sprite.modulate
 
 
@@ -35,7 +35,7 @@ func _physics_process(delta):
 		if velocity.length() < MIN_SPEED_BEFORE_CHANGING_DIR:
 			velocity = Vector3(rand_range(-ENEMY_SPEED_RANGE,ENEMY_SPEED_RANGE),
 					 0, rand_range(-ENEMY_SPEED_RANGE,ENEMY_SPEED_RANGE))
-		
+
 		velocity *= decel_multiplier
 		apply_central_impulse(velocity * delta)
 
@@ -46,15 +46,15 @@ func take_damage(var damage, var direction, var knockback):
 	# react to the damage
 	enemy_sprite.modulate = hit_colour
 	velocity += -direction.normalized() * knockback
-	
+
 	if hp <= 0:
 		die()
 		return
-	
+
 	recovery_timer.start(recovery_time)
 
 
-# pooling deactivation 
+# pooling deactivation
 func die():
 	set_translation(enemy_manager.DEFAULT_ENEMY_SPAWN_POINT)
 	active = false

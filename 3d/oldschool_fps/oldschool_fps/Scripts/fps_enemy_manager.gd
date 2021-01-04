@@ -21,13 +21,13 @@ func _ready():
 
 	spawn_locations = get_node("SpawnPoints").get_children()
 	enemies_in_level = get_node("Enemies").get_children()
-	
+
 	for i in starting_num_of_enemies:
 		enemies_in_level[i].set_translation(spawn_locations[i % spawn_locations.size() - 1].global_transform.origin)
 		enemies_in_level[i].active = true
-	
+
 	spawn_location_index = starting_num_of_enemies - 1
-	
+
 
 # if one enemy is still active this will return out before spawning a new wave
 func handle_death():
@@ -35,7 +35,7 @@ func handle_death():
 		if enemies_in_level[i].active:
 			return
 	spawn_new_enemy_wave()
-	
+
 
 func spawn_new_enemy_wave():
 	num_of_enemies_in_wave += 1

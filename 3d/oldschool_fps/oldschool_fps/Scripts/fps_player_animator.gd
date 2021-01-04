@@ -36,10 +36,10 @@ func set_animation_state(var anim_state):
 				set_texture(idle_animaton)
 			ANIMATION_STATES.FIRING:
 				set_texture(fire_animation)
-	
+
 		# set the current frame to the first one
 		texture.current_frame = 0
-		# set the animation length for the counter based on the number of frames for the current animation and it's frame rate 
+		# set the animation length for the counter based on the number of frames for the current animation and it's frame rate
 		animation_length = texture.frames / fire_animation.fps
 		animation_timer.start(animation_length)
 		current_state = anim_state

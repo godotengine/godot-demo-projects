@@ -14,13 +14,11 @@ export(float) var player_radius = 1.5
 
 export(float) var mouse_sensitivity = 0.5
 
-
 export(float) var accel_speed = 20
 export(float) var decel_multiplier = 0.5
 export(float) var max_speed = 0.5
 export(float) var gravity = 1.0
 export(float) var gun_range = 100000
-
 
 export(float) var jump_force = 0.3
 export(int) var max_jumps = 2
@@ -61,12 +59,12 @@ func _ready():
 	rate_of_fire_timer = get_node("RateOfFireTimer")
 	rate_of_fire_timer.set_wait_time(firing_recovery_time)
 	rate_of_fire_timer.one_shot = true
-	
+
 	new_position = get_translation()
 	old_position = new_position
-	
+
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	mouse_delta = Vector2(0, 0) 
+	mouse_delta = Vector2(0, 0)
 
 
 # Input, called whenever an input event is triggered
@@ -85,84 +83,76 @@ func _physics_process(delta):
 	camera_rotation_delta = Vector2(pitch_delta, mouse_delta.x * delta)
 	mouse_delta = Vector2(0,0) # reset mouse delta after we're done with it, doesn't get reset if there is no mouse input
 
-	direction_input = Vector3(Input.get_action_strength("left") - Input.get_action_strength("right"), 0, 
-			Input.get_action_strength("forward") - Input.get_action_strength("back"))
+	direction_input = Vector3(Input.get_action_strength("left") - Input.get_action_strength("right"), 0, Input.get_action_strength("forward") - Input.get_action_strength("back"))
 	direction_input = direction_input.normalized()
-	
+
 	# seperating horizontal and vertical velocity as we want to modify them seperately
 	# POTENTIAL EXPANSION: later in the update function we can add a y component to horizontal velocity if we want to implement climbing slopes
 	var horizontal_velocity = Vector3(velocity.x, 0, velocity.z)
 	var vertical_velocity = Vector3(0, velocity.y, 0)
-	
+
 	if direction_input != Vector3(0, 0, 0):
-		horizontal_velocity = (direction_input.x * global_transform.basis[0] + 
-				direction_input.z * global_transform.basis[2]) * accel_speed * delta
+		horizontal_velocity = (direction_input.x * global_transform.basis[0] + direction_input.z * global_transform.basis[2]) * accel_speed * delta
 	else:
 		horizontal_velocity *= decel_multiplier
-	
+
 	horizontal_velocity = clamp_vector_magnitude(horizontal_velocity, max_speed)
-	
+
 	# horizontal collisons, calculate the ray starting point (bottom left of player) then work out spacing based on radius / height and num of rays
 	if velocity != Vector3(0, 0, 0):
-		var ray_origin = global_transform.origin - (global_transform.basis[0] * player_half_radius + 
-				Vector3(0, player_half_height - ground_padding, 0))
+		var ray_origin = global_transform.origin - (global_transform.basis[0] * player_half_radius + Vector3(0, player_half_height - ground_padding, 0))
 
 		var horizontal_spacing = global_transform.basis[0] * (player_radius / num_of_horisontal_rays)
 		var vertical_spacing = Vector3(0, player_height / num_of_vertical_rays, 0)
-		
-		# if our ray hits something, move along it at a speed based on how shallow the angle is (lower speeds the closer the player is to perpendicular to the wall) 
+
+		# if our ray hits something, move along it at a speed based on how shallow the angle is (lower speeds the closer the player is to perpendicular to the wall)
 		for x in num_of_horisontal_rays:
 			for y in num_of_vertical_rays:
-				var ray_hit_result = space_state.intersect_ray(ray_origin, 
-						ray_origin + horizontal_velocity + player_radius * horizontal_velocity.normalized())
-				
+				var ray_hit_result = space_state.intersect_ray(ray_origin, ray_origin + horizontal_velocity + player_radius * horizontal_velocity.normalized())
+
 				if ray_hit_result:
 					var wall_direction = ray_hit_result.normal.cross(-Vector3.UP)
 					var angle = ray_hit_result.normal.angle_to(-horizontal_velocity.normalized())
-										
+
 					if horizontal_velocity.x * -ray_hit_result.normal.z > horizontal_velocity.z * -ray_hit_result.normal.x:
 						wall_direction *= -1
-					
+
 					var velocity_modifier = angle / RADIAN_RIGHT_ANGLE
 					horizontal_velocity = wall_direction * accel_speed * delta * velocity_modifier
-					
+
 				ray_origin += vertical_spacing
-				
+
 			ray_origin.y = (global_transform.origin.y - player_half_height) + ground_padding
 			ray_origin += horizontal_spacing
-	
+
 	# vertical collisions, could use this ray info for slope detection
-	var ray_hit_result = space_state.intersect_ray(global_transform.origin, 
-			global_transform.origin + Vector3.DOWN * player_half_height)
+	var ray_hit_result = space_state.intersect_ray(global_transform.origin, global_transform.origin + Vector3.DOWN * player_half_height)
 
 	if ray_hit_result:
 		vertical_velocity.y = 0
 		# stop them sinking into the floor ever
-		set_translation(Vector3(get_translation().x, 
-				ray_hit_result.position.y + player_half_height, get_translation().z))
-		
+		set_translation(Vector3(get_translation().x, ray_hit_result.position.y + player_half_height, get_translation().z))
+
 		jumps_taken = 0
 	else:
 		# collision checks above player if the player is in the air
-		ray_hit_result = space_state.intersect_ray(global_transform.origin, 
-				global_transform.origin + Vector3.UP * player_half_height)
+		ray_hit_result = space_state.intersect_ray(global_transform.origin, global_transform.origin + Vector3.UP * player_half_height)
 		if (ray_hit_result):
 			vertical_velocity.y  = 0
 			# stop them sticking to the ceiling
-			set_translation(Vector3(get_translation().x, 
-					ray_hit_result.position.y - player_half_height, get_translation().z))
+			set_translation(Vector3(get_translation().x, ray_hit_result.position.y - player_half_height, get_translation().z))
 		grounded = false
 		vertical_velocity.y -= gravity * delta
-	
+
 	if Input.is_action_just_pressed("jump") and (grounded or jumps_taken < max_jumps):
 		vertical_velocity.y = jump_force
 		jumps_taken += 1
-	
+
 	velocity = horizontal_velocity + vertical_velocity
-	
+
 	old_position = get_translation()
 	new_position = old_position + velocity
-	
+
 	time_since_last_physics_process = 0
 
 
@@ -173,7 +163,7 @@ func _process(delta):
 	var percent_til_next_physics_process = time_since_last_physics_process / get_physics_process_delta_time()
 	var position = old_position + (new_position - old_position) * percent_til_next_physics_process
 	set_translation(position)
-	
+
 	# lerp camera rotation
 	main_camera.rotate_x(camera_rotation_delta.x * percent_til_next_physics_process)
 	rotate_y(camera_rotation_delta.y * percent_til_next_physics_process)
@@ -184,12 +174,12 @@ func fire():
 	can_fire = false
 	rate_of_fire_timer.start()
 	animator.set_animation_state(animator.ANIMATION_STATES.FIRING)
-	
+
 	var ray_hit_result = space_state.intersect_ray(main_camera.global_transform.origin,
 			 main_camera.global_transform.origin + gun_range * main_camera.global_transform.basis[2] * -1)
 	if ray_hit_result:
 		var root = ray_hit_result.collider
-		
+
 		while true:
 			if root.script == FPSEnemy:
 				root.take_damage(10, global_transform.origin - root.global_transform.origin, 100)
