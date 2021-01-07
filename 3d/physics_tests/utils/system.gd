@@ -11,6 +11,8 @@ var _engine = PhysicsEngine.OTHER
 
 
 func _enter_tree():
+	pause_mode = Node.PAUSE_MODE_PROCESS
+
 	get_tree().debug_collisions_hint = true
 
 	var engine_string = ProjectSettings.get_setting("physics/3d/physics_engine")
@@ -36,6 +38,9 @@ func _process(_delta):
 			Log.print_log("Debug Collision ON")
 		else:
 			Log.print_log("Debug Collision OFF")
+
+	if Input.is_action_just_pressed("toggle_pause"):
+		get_tree().paused = not get_tree().paused
 
 	if Input.is_action_just_pressed("exit"):
 		get_tree().quit()
