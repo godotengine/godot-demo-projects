@@ -30,7 +30,7 @@ func _horizontal_movement(delta):
 	var localX = Vector3.RIGHT
 	var localZ = Vector3.BACK
 
-	if isometric_controls && is_equal_approx(Node25D.SCALE * 0.86602540378, _parent_node25d.get_basis()[0].x):
+	if isometric_controls and is_equal_approx(Node25D.SCALE * 0.86602540378, _parent_node25d.get_basis()[0].x):
 		localX = Vector3(0.70710678118, 0, -0.70710678118)
 		localZ = Vector3(0.70710678118, 0, 0.70710678118)
 

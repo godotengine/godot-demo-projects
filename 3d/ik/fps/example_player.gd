@@ -209,7 +209,7 @@ func process_movement(delta):
 # Mouse based camera movement
 func _input(event):
 
-	if event is InputEventMouseMotion && Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 
 		rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY * -1))
 		camera_holder.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))

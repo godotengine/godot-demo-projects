@@ -24,8 +24,8 @@ func _ready():
 
 func _gui_input(event):
 	# We must start touching inside, but we can drag or unpress outside.
-#	if !(event is InputEventScreenDrag ||
-#		(event is InputEventScreenTouch && (!event.pressed || get_global_rect().has_point(event.position)))):
+#	if !(event is InputEventScreenDrag or
+#		(event is InputEventScreenTouch and (!event.pressed or get_global_rect().has_point(event.position)))):
 #		return
 
 	var finger_count = base_state.size()
@@ -75,7 +75,7 @@ func _gui_input(event):
 		# Two fingers => To pinch-zoom and rotate around Z.
 		# Accept unpress or drag.
 		if event is InputEventScreenTouch:
-			if !event.pressed && base_state.has(event.index):
+			if !event.pressed and base_state.has(event.index):
 				# Some known touching finger released.
 
 				# Remove released finger from the base state.

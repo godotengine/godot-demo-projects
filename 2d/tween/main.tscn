@@ -1,358 +1,387 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://godot.png" type="Texture" id=2]
+[ext_resource path="res://noto_sans_ui_regular.ttf" type="DynamicFontData" id=3]
 
-[node name="Main" type="Control"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -512.0
-margin_top = -384.0
-margin_right = 512.0
-margin_bottom = 384.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[node name="Main" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 2 )
+alignment = 1
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Trans" type="VBoxContainer" parent="."]
-margin_left = 56.0
-margin_top = 288.0
-margin_right = 129.0
-margin_bottom = 614.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-
-[node name="Linear" type="Button" parent="Trans"]
-margin_right = 48.0
-margin_bottom = 20.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "linear"
-
-[node name="Sine" type="Button" parent="Trans"]
-margin_top = 30.0
-margin_right = 39.0
-margin_bottom = 50.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "sine"
-
-[node name="Quint" type="Button" parent="Trans"]
-margin_top = 60.0
-margin_right = 45.0
-margin_bottom = 80.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "quint"
-
-[node name="Quart" type="Button" parent="Trans"]
-margin_top = 90.0
-margin_right = 45.0
-margin_bottom = 110.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "quart"
-
-[node name="Quad" type="Button" parent="Trans"]
-margin_top = 120.0
-margin_right = 43.0
-margin_bottom = 140.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "quad"
-
-[node name="Expo" type="Button" parent="Trans"]
-margin_top = 150.0
-margin_right = 43.0
-margin_bottom = 170.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "expo"
-
-[node name="Elastic" type="Button" parent="Trans"]
-margin_top = 180.0
-margin_right = 54.0
-margin_bottom = 200.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "elastic"
-
-[node name="Cubic" type="Button" parent="Trans"]
-margin_top = 210.0
-margin_right = 46.0
-margin_bottom = 230.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "cubic"
-
-[node name="Circ" type="Button" parent="Trans"]
-margin_top = 240.0
-margin_right = 35.0
-margin_bottom = 260.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "circ"
-
-[node name="Bounce" type="Button" parent="Trans"]
-margin_top = 270.0
-margin_right = 59.0
-margin_bottom = 290.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "bounce"
-
-[node name="Back" type="Button" parent="Trans"]
-margin_top = 300.0
-margin_right = 41.0
-margin_bottom = 320.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "back"
-
-[node name="Eases" type="VBoxContainer" parent="."]
-margin_left = 152.0
-margin_top = 288.0
-margin_right = 215.0
-margin_bottom = 404.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-
-[node name="In" type="Button" parent="Eases"]
-margin_right = 24.0
-margin_bottom = 20.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "in"
-
-[node name="Out" type="Button" parent="Eases"]
-margin_top = 30.0
-margin_right = 33.0
-margin_bottom = 50.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "out"
-
-[node name="InOut" type="Button" parent="Eases"]
-margin_top = 60.0
-margin_right = 51.0
-margin_bottom = 80.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "in_out"
-
-[node name="OutIn" type="Button" parent="Eases"]
-margin_top = 90.0
-margin_right = 51.0
-margin_bottom = 110.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "out_in"
-
-[node name="Modes" type="VBoxContainer" parent="."]
-margin_left = 240.0
-margin_top = 288.0
-margin_right = 317.0
-margin_bottom = 524.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-
-[node name="Move" type="Button" parent="Modes"]
-margin_right = 48.0
-margin_bottom = 20.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "move"
-
-[node name="Color" type="Button" parent="Modes"]
-margin_top = 30.0
-margin_right = 44.0
-margin_bottom = 50.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "color"
-
-[node name="Scale" type="Button" parent="Modes"]
-margin_top = 60.0
-margin_right = 45.0
-margin_bottom = 80.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "scale"
-
-[node name="Rotate" type="Button" parent="Modes"]
-margin_top = 90.0
-margin_right = 50.0
-margin_bottom = 110.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "rotate"
-
-[node name="Callback" type="Button" parent="Modes"]
-margin_top = 120.0
-margin_right = 63.0
-margin_bottom = 140.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "callback"
-
-[node name="Follow" type="Button" parent="Modes"]
-margin_top = 150.0
-margin_right = 50.0
-margin_bottom = 170.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "follow"
-
-[node name="Repeat" type="Button" parent="Modes"]
-margin_top = 180.0
-margin_right = 53.0
-margin_bottom = 200.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "repeat"
-
-[node name="Pause" type="Button" parent="Modes"]
-margin_top = 210.0
-margin_right = 50.0
-margin_bottom = 230.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = true
-text = "pause"
-
-[node name="Colors" type="HBoxContainer" parent="."]
-margin_left = 352.0
-margin_top = 273.0
-margin_right = 1008.0
-margin_bottom = 753.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-custom_constants/separation = 40
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorFrom" type="VBoxContainer" parent="Colors"]
-margin_right = 308.0
-margin_bottom = 480.0
-rect_min_size = Vector2( 0, 320 )
-size_flags_horizontal = 2
-size_flags_vertical = 2
-
-[node name="Label" type="Label" parent="Colors/ColorFrom"]
-margin_right = 74.0
-margin_bottom = 14.0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-text = "Color From:"
-
-[node name="Picker" type="ColorPicker" parent="Colors/ColorFrom"]
-margin_top = 18.0
-margin_right = 308.0
-margin_bottom = 480.0
-rect_min_size = Vector2( 0, 320 )
-size_flags_horizontal = 2
-size_flags_vertical = 2
-
-[node name="ColorTo" type="VBoxContainer" parent="Colors"]
-margin_left = 348.0
-margin_right = 656.0
-margin_bottom = 480.0
-rect_min_size = Vector2( 0, 320 )
-size_flags_horizontal = 2
-size_flags_vertical = 2
-
-[node name="Label" type="Label" parent="Colors/ColorTo"]
-margin_right = 56.0
-margin_bottom = 14.0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-text = "Color To:"
-
-[node name="Picker" type="ColorPicker" parent="Colors/ColorTo"]
-margin_top = 18.0
-margin_right = 308.0
-margin_bottom = 480.0
-rect_min_size = Vector2( 0, 320 )
-size_flags_horizontal = 2
-size_flags_vertical = 2
-
 [node name="Tween" type="Tween" parent="."]
 repeat = true
 playback/repeat = true
 
-[node name="Area" type="Panel" parent="Tween"]
+[node name="Top" type="VBoxContainer" parent="."]
+margin_left = 112.0
+margin_right = 912.0
+margin_bottom = 230.0
+rect_min_size = Vector2( 800, 230 )
+size_flags_horizontal = 6
+alignment = 2
+
+[node name="Area" type="Panel" parent="Top"]
+margin_top = 18.0
+margin_right = 800.0
+margin_bottom = 178.0
+rect_min_size = Vector2( 800, 160 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Top/Area"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -420.0
-margin_top = -352.0
-margin_right = 444.0
-margin_bottom = -152.0
+margin_left = -120.0
+margin_top = -60.0
+margin_right = 120.0
+margin_bottom = 60.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="RichTextLabel" parent="Tween/Area"]
-margin_left = 176.0
-margin_top = 24.0
-margin_right = 552.0
-margin_bottom = 160.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-
-[node name="Sprite" type="Sprite" parent="Tween/Area"]
+[node name="Sprite" type="Sprite" parent="Top/Area"]
+z_index = 1
 texture = ExtResource( 2 )
 
-[node name="Follow" type="Sprite" parent="Tween/Area"]
-position = Vector2( 0, 184 )
+[node name="Follow" type="Sprite" parent="Top/Area"]
+position = Vector2( 0, 160 )
+z_index = 1
 texture = ExtResource( 2 )
 
-[node name="Follow2" type="Sprite" parent="Tween/Area"]
-position = Vector2( 736, 0 )
+[node name="Follow2" type="Sprite" parent="Top/Area"]
+position = Vector2( 800, 0 )
+z_index = 1
 texture = ExtResource( 2 )
 
-[node name="Timeline" type="HSlider" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -416.0
-margin_top = -144.0
-margin_right = 416.0
-margin_bottom = -128.0
-size_flags_horizontal = 2
+[node name="Timeline" type="HSlider" parent="Top"]
+margin_top = 182.0
+margin_right = 800.0
+margin_bottom = 230.0
+rect_min_size = Vector2( 0, 48 )
+size_flags_horizontal = 3
 value = 1.0
 ticks_on_borders = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="tween_step" from="Tween" to="." method="_on_tween_step"]
-[connection signal="value_changed" from="Timeline" to="." method="_on_timeline_value_changed"]
+
+[node name="Controls" type="HBoxContainer" parent="."]
+margin_top = 234.0
+margin_right = 1024.0
+margin_bottom = 804.0
+rect_min_size = Vector2( 1000, 550 )
+custom_constants/separation = 20
+alignment = 1
+
+[node name="Modes" type="VBoxContainer" parent="Controls"]
+margin_left = 37.0
+margin_right = 110.0
+margin_bottom = 383.0
+rect_min_size = Vector2( 70, 0 )
+size_flags_vertical = 0
+custom_constants/separation = 16
+
+[node name="ModesLabel" type="Label" parent="Controls/Modes"]
+margin_right = 73.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+text = "Modes"
+align = 1
+
+[node name="Move" type="Button" parent="Controls/Modes"]
+margin_top = 39.0
+margin_right = 73.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+toggle_mode = true
+text = "move"
+
+[node name="Color" type="Button" parent="Controls/Modes"]
+margin_top = 84.0
+margin_right = 73.0
+margin_bottom = 113.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+toggle_mode = true
+text = "color"
+
+[node name="Scale" type="Button" parent="Controls/Modes"]
+margin_top = 129.0
+margin_right = 73.0
+margin_bottom = 158.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+toggle_mode = true
+text = "scale"
+
+[node name="Rotate" type="Button" parent="Controls/Modes"]
+margin_top = 174.0
+margin_right = 73.0
+margin_bottom = 203.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+toggle_mode = true
+text = "rotate"
+
+[node name="Callback" type="Button" parent="Controls/Modes"]
+margin_top = 219.0
+margin_right = 73.0
+margin_bottom = 248.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+toggle_mode = true
+text = "callback"
+
+[node name="Follow" type="Button" parent="Controls/Modes"]
+margin_top = 264.0
+margin_right = 73.0
+margin_bottom = 293.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+toggle_mode = true
+text = "follow"
+
+[node name="Repeat" type="Button" parent="Controls/Modes"]
+margin_top = 309.0
+margin_right = 73.0
+margin_bottom = 338.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+toggle_mode = true
+text = "repeat"
+
+[node name="Pause" type="Button" parent="Controls/Modes"]
+margin_top = 354.0
+margin_right = 73.0
+margin_bottom = 383.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+toggle_mode = true
+text = "pause"
+
+[node name="Transitions" type="VBoxContainer" parent="Controls"]
+margin_left = 130.0
+margin_right = 215.0
+margin_bottom = 518.0
+rect_min_size = Vector2( 70, 0 )
+size_flags_vertical = 0
+custom_constants/separation = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TransLabel" type="Label" parent="Controls/Transitions"]
+margin_right = 85.0
+margin_bottom = 23.0
+text = "Transitions"
+align = 1
+
+[node name="Linear" type="Button" parent="Controls/Transitions"]
+margin_top = 39.0
+margin_right = 85.0
+margin_bottom = 68.0
+size_flags_vertical = 2
+toggle_mode = true
+text = "linear"
+
+[node name="Sine" type="Button" parent="Controls/Transitions"]
+margin_top = 84.0
+margin_right = 85.0
+margin_bottom = 113.0
+size_flags_vertical = 2
+toggle_mode = true
+text = "sine"
+
+[node name="Quint" type="Button" parent="Controls/Transitions"]
+margin_top = 129.0
+margin_right = 85.0
+margin_bottom = 158.0
+size_flags_vertical = 2
+toggle_mode = true
+text = "quint"
+
+[node name="Quart" type="Button" parent="Controls/Transitions"]
+margin_top = 174.0
+margin_right = 85.0
+margin_bottom = 203.0
+size_flags_vertical = 2
+toggle_mode = true
+text = "quart"
+
+[node name="Quad" type="Button" parent="Controls/Transitions"]
+margin_top = 219.0
+margin_right = 85.0
+margin_bottom = 248.0
+size_flags_vertical = 2
+toggle_mode = true
+text = "quad"
+
+[node name="Expo" type="Button" parent="Controls/Transitions"]
+margin_top = 264.0
+margin_right = 85.0
+margin_bottom = 293.0
+size_flags_vertical = 2
+toggle_mode = true
+text = "expo"
+
+[node name="Elastic" type="Button" parent="Controls/Transitions"]
+margin_top = 309.0
+margin_right = 85.0
+margin_bottom = 338.0
+size_flags_vertical = 2
+toggle_mode = true
+text = "elastic"
+
+[node name="Cubic" type="Button" parent="Controls/Transitions"]
+margin_top = 354.0
+margin_right = 85.0
+margin_bottom = 383.0
+size_flags_vertical = 2
+toggle_mode = true
+text = "cubic"
+
+[node name="Circ" type="Button" parent="Controls/Transitions"]
+margin_top = 399.0
+margin_right = 85.0
+margin_bottom = 428.0
+size_flags_vertical = 2
+toggle_mode = true
+text = "circ"
+
+[node name="Bounce" type="Button" parent="Controls/Transitions"]
+margin_top = 444.0
+margin_right = 85.0
+margin_bottom = 473.0
+size_flags_vertical = 2
+toggle_mode = true
+text = "bounce"
+
+[node name="Back" type="Button" parent="Controls/Transitions"]
+margin_top = 489.0
+margin_right = 85.0
+margin_bottom = 518.0
+size_flags_vertical = 2
+toggle_mode = true
+text = "back"
+
+[node name="Eases" type="VBoxContainer" parent="Controls"]
+margin_left = 235.0
+margin_right = 305.0
+margin_bottom = 203.0
+rect_min_size = Vector2( 70, 0 )
+size_flags_vertical = 0
+custom_constants/separation = 16
+
+[node name="EasesLabel" type="Label" parent="Controls/Eases"]
+margin_right = 70.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+text = "Eases"
+align = 1
+
+[node name="In" type="Button" parent="Controls/Eases"]
+margin_top = 39.0
+margin_right = 70.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+toggle_mode = true
+text = "in"
+
+[node name="Out" type="Button" parent="Controls/Eases"]
+margin_top = 84.0
+margin_right = 70.0
+margin_bottom = 113.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+toggle_mode = true
+text = "out"
+
+[node name="InOut" type="Button" parent="Controls/Eases"]
+margin_top = 129.0
+margin_right = 70.0
+margin_bottom = 158.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+toggle_mode = true
+text = "in_out"
+
+[node name="OutIn" type="Button" parent="Controls/Eases"]
+margin_top = 174.0
+margin_right = 70.0
+margin_bottom = 203.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+toggle_mode = true
+text = "out_in"
+
+[node name="ColorFrom" type="VBoxContainer" parent="Controls"]
+margin_left = 325.0
+margin_right = 646.0
+margin_bottom = 570.0
+rect_min_size = Vector2( 320, 570 )
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="Controls/ColorFrom"]
+margin_right = 89.0
+margin_bottom = 23.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Color From:"
+
+[node name="ColorPicker" type="ColorPicker" parent="Controls/ColorFrom"]
+margin_top = 27.0
+margin_right = 321.0
+margin_bottom = 539.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorTo" type="VBoxContainer" parent="Controls"]
+margin_left = 666.0
+margin_right = 987.0
+margin_bottom = 570.0
+rect_min_size = Vector2( 320, 570 )
+rect_clip_content = true
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="Controls/ColorTo"]
+margin_right = 68.0
+margin_bottom = 23.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Color To:"
+
+[node name="ColorPicker" type="ColorPicker" parent="Controls/ColorTo"]
+margin_top = 27.0
+margin_right = 321.0
+margin_bottom = 539.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="tween_step" from="Tween" to="." method="_on_Tween_tween_step"]
+[connection signal="value_changed" from="Top/Timeline" to="." method="_on_Timeline_value_changed"]
+[connection signal="color_changed" from="Controls/ColorFrom/ColorPicker" to="." method="_on_ColorPicker_color_changed"]
+[connection signal="color_changed" from="Controls/ColorTo/ColorPicker" to="." method="_on_ColorPicker_color_changed"]
