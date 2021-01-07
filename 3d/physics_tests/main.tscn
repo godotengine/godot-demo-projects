@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://utils/label_fps.gd" type="Script" id=1]
 [ext_resource path="res://utils/label_version.gd" type="Script" id=2]
 [ext_resource path="res://utils/label_engine.gd" type="Script" id=3]
 [ext_resource path="res://tests_menu.gd" type="Script" id=4]
 [ext_resource path="res://utils/label_test.gd" type="Script" id=5]
+[ext_resource path="res://utils/label_pause.gd" type="Script" id=6]
 [ext_resource path="res://utils/container_log.gd" type="Script" id=10]
 [ext_resource path="res://utils/scroll_log.gd" type="Script" id=11]
 [ext_resource path="res://tests.gd" type="Script" id=12]
@@ -22,6 +23,7 @@ __meta__ = {
 }
 
 [node name="TestsMenu" type="MenuButton" parent="."]
+pause_mode = 2
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 125.0
@@ -34,6 +36,7 @@ __meta__ = {
 }
 
 [node name="LabelControls" type="Label" parent="."]
+pause_mode = 2
 margin_left = 157.0
 margin_top = 13.0
 margin_right = 375.0
@@ -44,6 +47,7 @@ __meta__ = {
 }
 
 [node name="LabelFPS" type="Label" parent="."]
+pause_mode = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -57,6 +61,7 @@ __meta__ = {
 }
 
 [node name="LabelEngine" type="Label" parent="."]
+pause_mode = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -70,6 +75,7 @@ __meta__ = {
 }
 
 [node name="LabelVersion" type="Label" parent="."]
+pause_mode = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -83,6 +89,7 @@ __meta__ = {
 }
 
 [node name="LabelTest" type="Label" parent="."]
+pause_mode = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -95,7 +102,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="LabelPause" type="Label" parent="."]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -25.5
+margin_top = -25.0
+margin_right = 25.5
+margin_bottom = -11.0
+text = "PAUSED"
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="PanelLog" type="Panel" parent="."]
+pause_mode = 2
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
