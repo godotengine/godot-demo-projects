@@ -1,6 +1,7 @@
 extends Test
 tool
 
+
 const OPTION_OBJECT_TYPE_RIGIDBODY = "Object type/Rigid body (1)"
 const OPTION_OBJECT_TYPE_KINEMATIC = "Object type/Kinematic body (2)"
 
