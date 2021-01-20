@@ -4,12 +4,19 @@ extends Node
 
 signal wait_done()
 
+export var _enable_debug_collision = true
+
 var _timer
 var _timer_started = false
 
 var _wait_physics_ticks_counter = 0
 
 var _drawn_nodes = []
+
+
+func _enter_tree():
+	if not _enable_debug_collision:
+		get_tree().debug_collisions_hint = false
 
 
 func _physics_process(_delta):
@@ -60,7 +67,7 @@ func clear_drawn_nodes():
 	_drawn_nodes.clear()
 
 
-func create_rigidbody_box(size, pickable):
+func create_rigidbody_box(size, pickable = false):
 	var shape = BoxShape.new()
 	shape.extents = 0.5 * size
 

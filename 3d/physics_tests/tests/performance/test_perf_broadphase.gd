@@ -16,29 +16,36 @@ var _log_physics_time_start = 0
 
 
 func _ready():
-	_create_objects()
+	yield(start_timer(1.0), "timeout")
+	if is_timer_canceled():
+		return
 
 	_log_physics_start()
+
+	_create_objects()
+
 	yield(wait_for_physics_ticks(5), "wait_done")
 	_log_physics_stop()
 
 	yield(start_timer(1.0), "timeout")
 	if is_timer_canceled():
 		return
+
+	_log_physics_start()
 
 	_add_objects()
 
-	_log_physics_start()
 	yield(wait_for_physics_ticks(5), "wait_done")
 	_log_physics_stop()
 
 	yield(start_timer(1.0), "timeout")
 	if is_timer_canceled():
 		return
+
+	_log_physics_start()
 
 	_move_objects()
 
-	_log_physics_start()
 	yield(wait_for_physics_ticks(5), "wait_done")
 	_log_physics_stop()
 
@@ -46,9 +53,10 @@ func _ready():
 	if is_timer_canceled():
 		return
 
+	_log_physics_start()
+
 	_remove_objects()
 
-	_log_physics_start()
 	yield(wait_for_physics_ticks(5), "wait_done")
 	_log_physics_stop()
 
@@ -86,9 +94,6 @@ func _log_physics_stop():
 func _create_objects():
 	_objects.clear()
 
-	var template_body = create_rigidbody_box(BOX_SIZE)
-	template_body.gravity_scale = 0.0
-
 	Log.print_log("* Creating objects...")
 	var timer = OS.get_ticks_usec()
 
@@ -101,9 +106,10 @@ func _create_objects():
 			var pos_z = -0.5 * (depth_size - 1) * BOX_SPACE.z
 
 			for depth in depth_size:
-				var box = template_body.duplicate()
+				# Create a new object and shape every time to avoid the overhead of connecting many bodies to the same shape.
+				var box = create_rigidbody_box(BOX_SIZE)
+				box.gravity_scale = 0.0
 				box.transform.origin = Vector3(pos_x, pos_y, pos_z)
-				box.name = "Box%03d" % (row * column + 1)
 				_objects.push_back(box)
 
 				pos_z += BOX_SPACE.z
@@ -114,8 +120,6 @@ func _create_objects():
 
 	timer = OS.get_ticks_usec() - timer
 	Log.print_log("  Create Time: %.3f ms" % (0.001 * timer))
-
-	template_body.queue_free()
 
 
 func _add_objects():
@@ -148,8 +152,10 @@ func _remove_objects():
 	Log.print_log("* Removing objects...")
 	var timer = OS.get_ticks_usec()
 
-	for object in _objects:
-		root_node.remove_child(object)
+	# Remove objects in reversed order to avoid the overhead of changing children index in parent.
+	var object_count = _objects.size()
+	for object_index in object_count:
+		root_node.remove_child(_objects[object_count - object_index - 1])
 
 	timer = OS.get_ticks_usec() - timer
 	Log.print_log("  Remove Time: %.3f ms" % (0.001 * timer))

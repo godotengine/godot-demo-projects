@@ -4,6 +4,8 @@ extends Node2D
 
 signal wait_done()
 
+export var _enable_debug_collision = true
+
 var _timer
 var _timer_started = false
 
@@ -19,6 +21,11 @@ class Circle2D:
 		draw_circle(center, radius, color)
 
 var _drawn_nodes = []
+
+
+func _enter_tree():
+	if not _enable_debug_collision:
+		get_tree().debug_collisions_hint = false
 
 
 func _physics_process(_delta):
