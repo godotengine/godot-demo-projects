@@ -19,6 +19,14 @@ var _tests = [
 		"path": "res://tests/functional/test_collision_pairs.tscn",
 	},
 	{
+		"id": "Functional Tests/Character - Slopes",
+		"path": "res://tests/functional/test_character_slopes.tscn",
+	},
+	{
+		"id": "Functional Tests/Character - Tilemap",
+		"path": "res://tests/functional/test_character_tilemap.tscn",
+	},
+	{
 		"id": "Functional Tests/One Way Collision",
 		"path": "res://tests/functional/test_one_way_collision.tscn",
 	},
