@@ -32,7 +32,7 @@ func _process(_delta):
 	# Display the name of the joypad if we haven't already.
 	if joy_num != cur_joy:
 		cur_joy = joy_num
-		joypad_name.set_text(Input.get_joy_name(joy_num))
+		joypad_name.set_text(Input.get_joy_name(joy_num) + "\n" + Input.get_joy_guid(joy_num))
 
 	# Loop through the axes and show their current values.
 	for axis in range(JOY_AXIS_MAX):
@@ -64,7 +64,10 @@ func _process(_delta):
 # Called whenever a joypad has been connected or disconnected.
 func _on_joy_connection_changed(device_id, connected):
 	if device_id == cur_joy:
-		joypad_name.set_text(Input.get_joy_name(device_id) if connected else "")
+		if connected:
+			joypad_name.set_text(Input.get_joy_name(device_id) + "\n" + Input.get_joy_guid(device_id))
+		else:
+			joypad_name.set_text("")
 
 
 func _on_start_vibration_pressed():
@@ -76,3 +79,19 @@ func _on_start_vibration_pressed():
 
 func _on_stop_vibration_pressed():
 	Input.stop_joy_vibration(cur_joy)
+
+
+func _on_Remap_pressed():
+	$RemapWizard.start(cur_joy)
+
+
+func _on_Clear_pressed():
+	var guid = Input.get_joy_guid(cur_joy)
+	if guid.empty():
+		printerr("No gamepad selected")
+		return
+	Input.remove_joy_mapping(guid)
+
+
+func _on_Show_pressed():
+	$RemapWizard.show_map()
