@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://noto_sans_ui_regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://cubes.tscn" type="PackedScene" id=2]
@@ -11,9 +11,6 @@ font_data = ExtResource( 1 )
 [sub_resource type="Theme" id=2]
 default_font = SubResource( 1 )
 
-[sub_resource type="ViewportTexture" id=3]
-viewport_path = NodePath("Viewport")
-
 [node name="HUD" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,32 +20,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewport" type="Viewport" parent="."]
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 1024, 600 )
 handle_input_locally = false
 usage = 3
 render_target_update_mode = 3
 shadow_atlas_size = 4096
 
-[node name="Cubes" parent="Viewport" instance=ExtResource( 2 )]
-
-[node name="TextureRect" type="TextureRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = SubResource( 3 )
-expand = true
-flip_v = true
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
-
-[node name="ViewportContainer" type="ViewportContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Cubes" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
 
 [node name="Help" type="Label" parent="."]
 anchor_top = 1.0
@@ -98,7 +85,7 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 0.752941 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
 custom_constants/shadow_as_outline = 0
-text = "Filter: Disabled"
+text = "Filter: Enabled"
 __meta__ = {
 "_edit_use_anchors_": false
 }
