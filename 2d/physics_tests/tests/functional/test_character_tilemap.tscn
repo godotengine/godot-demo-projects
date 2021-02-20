@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://tests/functional/test_character_tilemap.gd" type="Script" id=1]
 [ext_resource path="res://tests/test_options.tscn" type="PackedScene" id=3]
@@ -11,13 +11,16 @@
 friction = 0.0
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 16, 32 )
+extents = Vector2( 16, 31.9 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 16, 24 )
 
 [sub_resource type="RayShape2D" id=4]
 length = 24.0
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 16.0
 
 [node name="Test" type="Node2D"]
 script = ExtResource( 1 )
@@ -95,6 +98,22 @@ shape = SubResource( 4 )
 [node name="CollisionShapeRay2DRight" type="CollisionShape2D" parent="KinematicBodyRay2D"]
 position = Vector2( 16, 8 )
 shape = SubResource( 4 )
+
+[node name="JumpTargetArea2D" type="Area2D" parent="."]
+visible = false
+position = Vector2( 810, 390 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpTargetArea2D"]
+shape = SubResource( 5 )
+disabled = true
+
+[node name="FallTargetArea2D" type="Area2D" parent="."]
+visible = false
+position = Vector2( 250, 480 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallTargetArea2D"]
+shape = SubResource( 5 )
+disabled = true
 
 [node name="StaticSceneFlat" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, 12 )

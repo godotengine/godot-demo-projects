@@ -27,6 +27,10 @@ var _tests = [
 		"path": "res://tests/functional/test_character_tilemap.tscn",
 	},
 	{
+		"id": "Functional Tests/Character - Pixels",
+		"path": "res://tests/functional/test_character_pixels.tscn",
+	},
+	{
 		"id": "Functional Tests/One Way Collision",
 		"path": "res://tests/functional/test_one_way_collision.tscn",
 	},

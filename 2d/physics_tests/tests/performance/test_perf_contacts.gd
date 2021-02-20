@@ -7,10 +7,12 @@ const OPTION_TYPE_SPHERE = "Shape type/Sphere"
 const OPTION_TYPE_CAPSULE = "Shape type/Capsule"
 const OPTION_TYPE_CONVEX_POLYGON = "Shape type/Convex Polygon"
 const OPTION_TYPE_CONCAVE_POLYGON = "Shape type/Concave Polygon"
-export(Array) var spawns = Array()
 
+export(Array) var spawns = Array()
 export(int) var spawn_count = 100
 export(int, 1, 10) var spawn_multiplier = 5
+
+onready var options = $Options
 
 var _object_templates = []
 
@@ -20,19 +22,20 @@ func _ready():
 	if is_timer_canceled():
 		return
 
-	while $DynamicShapes.get_child_count():
-		var type_node = $DynamicShapes.get_child(0)
+	var dynamic_shapes = $DynamicShapes
+	while dynamic_shapes.get_child_count():
+		var type_node = dynamic_shapes.get_child(0)
 		type_node.position = Vector2.ZERO
 		_object_templates.push_back(type_node)
-		$DynamicShapes.remove_child(type_node)
+		dynamic_shapes.remove_child(type_node)
 
-	$Options.add_menu_item(OPTION_TYPE_ALL)
-	$Options.add_menu_item(OPTION_TYPE_RECTANGLE)
-	$Options.add_menu_item(OPTION_TYPE_SPHERE)
-	$Options.add_menu_item(OPTION_TYPE_CAPSULE)
-	$Options.add_menu_item(OPTION_TYPE_CONVEX_POLYGON)
-	$Options.add_menu_item(OPTION_TYPE_CONCAVE_POLYGON)
-	$Options.connect("option_selected", self, "_on_option_selected")
+	options.add_menu_item(OPTION_TYPE_ALL)
+	options.add_menu_item(OPTION_TYPE_RECTANGLE)
+	options.add_menu_item(OPTION_TYPE_SPHERE)
+	options.add_menu_item(OPTION_TYPE_CAPSULE)
+	options.add_menu_item(OPTION_TYPE_CONVEX_POLYGON)
+	options.add_menu_item(OPTION_TYPE_CONCAVE_POLYGON)
+	options.connect("option_selected", self, "_on_option_selected")
 
 	_start_all_types()
 
