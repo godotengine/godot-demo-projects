@@ -1,11 +1,11 @@
 extends VehicleBody
 
-const STEER_SPEED = 1
+const STEER_SPEED = 1.5
 const STEER_LIMIT = 0.4
 
 var steer_target = 0
 
-export var engine_force_value = 40
+export var engine_force_value = 85
 
 func _physics_process(delta):
 	var fwd_mps = transform.basis.xform_inv(linear_velocity).x
