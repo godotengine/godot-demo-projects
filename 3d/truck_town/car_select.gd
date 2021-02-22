@@ -18,8 +18,13 @@ func _load_scene(car):
 
 
 func _on_Back_pressed():
-	town.queue_free()
-	show()
+	if is_instance_valid(town):
+		# Currently in the town, go back to main menu.
+		town.queue_free()
+		show()
+	else:
+		# In main menu, exit the game.
+		get_tree().quit()
 
 
 func _on_MiniVan_pressed():

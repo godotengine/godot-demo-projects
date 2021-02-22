@@ -1,12 +1,11 @@
 extends Camera
 
-export var min_distance = 0.5
+export var min_distance = 2.0
 export var max_distance = 4.0
 export var angle_v_adjust = 0.0
 
 var collision_exception = []
-var max_height = 2.0
-var min_height = 0
+export var height = 1.5
 
 func _ready():
 	# Find collision exceptions for ray.
@@ -34,11 +33,7 @@ func _physics_process(_delta):
 	elif from_target.length() > max_distance:
 		from_target = from_target.normalized() * max_distance
 
-	# Check upper and lower height.
-	if from_target.y > max_height:
-		from_target.y = max_height
-	if from_target.y < min_height:
-		from_target.y = min_height
+	from_target.y = height
 
 	pos = target + from_target
 
