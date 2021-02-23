@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://town_mesh.tscn" type="PackedScene" id=1]
+[ext_resource path="res://spedometer.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="Theme" id=2]
+Button/styles/focus = SubResource( 1 )
 
 [node name="TownScene" type="Spatial"]
 
@@ -8,6 +14,27 @@
 
 [node name="InstancePos" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2039, 6.67095, -37.6042 )
+
+[node name="Panel" type="Panel" parent="InstancePos"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -130.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 120, 40 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spedometer" type="Button" parent="InstancePos/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 2 )
+text = "Speed: ???"
+flat = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Back" type="Button" parent="."]
 margin_left = 17.0
@@ -19,3 +46,4 @@ text = "<- Back!"
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -0.629475, 0.777021, 0, -0.777021, -0.629475, 0, 24.4076, 0 )
 shadow_enabled = true
+[connection signal="pressed" from="InstancePos/Panel/Spedometer" to="InstancePos/Panel/Spedometer" method="_on_Spedometer_pressed"]
