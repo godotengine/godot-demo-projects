@@ -5,6 +5,7 @@ export(NodePath) var skeleton_path setget _set_skeleton_path
 export(String) var bone_name = ""
 export(int, "_process", "_physics_process", "_notification", "none") var update_mode = 0 setget _set_update
 export(int, "X-up", "Y-up", "Z-up") var look_at_axis = 1
+export(float, 0,1,0.001) var interpolation = 0;
 export(bool) var use_our_rotation_x = false
 export(bool) var use_our_rotation_y = false
 export(bool) var use_our_rotation_z = false
@@ -127,7 +128,7 @@ func update_skeleton():
 		rest.origin = additional_bone_pos.origin - additional_bone_pos.basis.z.normalized() * additional_bone_length
 
 	# Finally, apply the new rotation to the bone in the skeleton.
-	skeleton_to_use.set_bone_global_pose_override(bone, rest, 1.0, true)
+	skeleton_to_use.set_bone_global_pose_override(bone, rest, interpolation, true)
 
 
 func _setup_for_editor():
