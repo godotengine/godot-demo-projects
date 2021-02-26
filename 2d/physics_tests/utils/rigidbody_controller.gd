@@ -3,6 +3,9 @@ extends RigidBody2D
 
 var _initial_velocity = Vector2.ZERO
 var _constant_velocity = Vector2.ZERO
+var _motion_speed = 400.0
+var _gravity_force = 50.0
+var _jump_force = 1000.0
 var _velocity = Vector2.ZERO
 var _on_floor = false
 var _jumping = false
@@ -22,12 +25,12 @@ func _physics_process(_delta):
 	# Handle horizontal controls.
 	if Input.is_action_pressed("character_left"):
 		if position.x > 0.0:
-			_velocity.x = -400.0
+			_velocity.x = -_motion_speed
 			_keep_velocity = false
 			_constant_velocity = Vector2.ZERO
 	elif Input.is_action_pressed("character_right"):
 		if position.x < 1024.0:
-			_velocity.x = 400.0
+			_velocity.x = _motion_speed
 			_keep_velocity = false
 			_constant_velocity = Vector2.ZERO
 
@@ -36,14 +39,14 @@ func _physics_process(_delta):
 		if not _jumping and Input.is_action_just_pressed("character_jump"):
 			# Start jumping.
 			_jumping = true
-			_velocity.y = -1000.0
+			_velocity.y = -_jump_force
 		elif not _jumping:
-			# Apply velocity when standing for floor detection.
-			_velocity.y = 10.0
+			# Reset gravity.
+			_velocity.y = 0.0
 	else:
 		# Apply gravity and get jump ready.
+		_velocity.y += _gravity_force
 		_jumping = false
-		_velocity.y += 50.0
 
 	linear_velocity = _velocity
 

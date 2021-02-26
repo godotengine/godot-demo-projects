@@ -17,13 +17,19 @@ const OPTION_MOVE_KINEMATIC_STOP_ON_SLOPE = "Move Options/Use stop on slope (Kin
 
 export(Vector2) var _initial_velocity = Vector2.ZERO
 export(Vector2) var _constant_velocity = Vector2.ZERO
+export(float) var _motion_speed = 400.0
+export(float) var _gravity_force = 50.0
+export(float) var _jump_force = 1000.0
 export(float) var _snap_distance = 0.0
 export(float) var _floor_max_angle = 45.0
 export(E_BodyType) var _body_type = 0
 
+onready var options = $Options
+
 var _use_snap = true
 var _use_stop_on_slope = true
 
+var _body_parent = null
 var _rigid_body_template = null
 var _kinematic_body_template = null
 var _kinematic_body_ray_template = null
@@ -31,43 +37,47 @@ var _moving_body = null
 
 
 func _ready():
-	$Options.connect("option_selected", self, "_on_option_selected")
-	$Options.connect("option_changed", self, "_on_option_changed")
+	options.connect("option_selected", self, "_on_option_selected")
+	options.connect("option_changed", self, "_on_option_changed")
 
 	_rigid_body_template = find_node("RigidBody2D")
 	if _rigid_body_template:
-		remove_child(_rigid_body_template)
+		_body_parent = _rigid_body_template.get_parent()
+		_body_parent.remove_child(_rigid_body_template)
 		var enabled = _body_type == E_BodyType.RIGID_BODY
-		$Options.add_menu_item(OPTION_OBJECT_TYPE_RIGIDBODY, true, enabled, true)
+		options.add_menu_item(OPTION_OBJECT_TYPE_RIGIDBODY, true, enabled, true)
 
 	_kinematic_body_template = find_node("KinematicBody2D")
 	if _kinematic_body_template:
-		remove_child(_kinematic_body_template)
+		_body_parent = _kinematic_body_template.get_parent()
+		_body_parent.remove_child(_kinematic_body_template)
 		var enabled = _body_type == E_BodyType.KINEMATIC_BODY
-		$Options.add_menu_item(OPTION_OBJECT_TYPE_KINEMATIC, true, enabled, true)
+		options.add_menu_item(OPTION_OBJECT_TYPE_KINEMATIC, true, enabled, true)
 
 	_kinematic_body_ray_template = find_node("KinematicBodyRay2D")
 	if _kinematic_body_ray_template:
-		remove_child(_kinematic_body_ray_template)
+		_body_parent = _kinematic_body_ray_template.get_parent()
+		_body_parent.remove_child(_kinematic_body_ray_template)
 		var enabled = _body_type == E_BodyType.KINEMATIC_BODY_RAY_SHAPE
-		$Options.add_menu_item(OPTION_OBJECT_TYPE_KINEMATIC_RAYSHAPE, true, enabled, true)
+		options.add_menu_item(OPTION_OBJECT_TYPE_KINEMATIC_RAYSHAPE, true, enabled, true)
 
-	$Options.add_menu_item(OPTION_MOVE_KINEMATIC_SNAP, true, _use_snap)
-	$Options.add_menu_item(OPTION_MOVE_KINEMATIC_STOP_ON_SLOPE, true, _use_stop_on_slope)
+	options.add_menu_item(OPTION_MOVE_KINEMATIC_SNAP, true, _use_snap)
+	options.add_menu_item(OPTION_MOVE_KINEMATIC_STOP_ON_SLOPE, true, _use_stop_on_slope)
 
 	_start_test()
 
 
 func _process(_delta):
+	var label_floor = $LabelFloor
 	if _moving_body:
 		if _moving_body.is_on_floor():
-			$LabelFloor.text = "ON FLOOR"
-			$LabelFloor.self_modulate = Color.green
+			label_floor.text = "ON FLOOR"
+			label_floor.self_modulate = Color.green
 		else:
-			$LabelFloor.text = "OFF FLOOR"
-			$LabelFloor.self_modulate = Color.red
+			label_floor.text = "OFF FLOOR"
+			label_floor.self_modulate = Color.red
 	else:
-		$LabelFloor.visible = false
+		label_floor.visible = false
 
 
 func _input(event):
@@ -118,7 +128,7 @@ func _on_option_changed(option, checked):
 
 func _start_test():
 	if _moving_body:
-		remove_child(_moving_body)
+		_body_parent.remove_child(_moving_body)
 		_moving_body.queue_free()
 		_moving_body = null
 
@@ -135,10 +145,14 @@ func _start_test():
 
 	test_label += template.name
 	_moving_body = template.duplicate()
-	add_child(_moving_body)
+	_body_parent.add_child(_moving_body)
 
 	_moving_body._initial_velocity = _initial_velocity
 	_moving_body._constant_velocity = _constant_velocity
+
+	_moving_body._motion_speed = _motion_speed
+	_moving_body._gravity_force = _gravity_force
+	_moving_body._jump_force = _jump_force
 
 	if _moving_body is KinematicBody2D:
 		if _use_snap:

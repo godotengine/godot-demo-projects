@@ -18,6 +18,8 @@ const OFFSET_RANGE = 120.0
 
 export(Vector2) var offset = Vector2.ZERO
 
+onready var options = $Options
+
 var _update_collision = false
 var _collision_test_index = 0
 var _current_offset = Vector2.ZERO
@@ -27,21 +29,21 @@ var _collision_shapes = []
 func _ready():
 	_initialize_collision_shapes()
 
-	$Options.add_menu_item(OPTION_TYPE_RECTANGLE)
-	$Options.add_menu_item(OPTION_TYPE_SPHERE)
-	$Options.add_menu_item(OPTION_TYPE_CAPSULE)
-	$Options.add_menu_item(OPTION_TYPE_CONVEX_POLYGON)
-	$Options.add_menu_item(OPTION_TYPE_CONCAVE_SEGMENTS)
+	options.add_menu_item(OPTION_TYPE_RECTANGLE)
+	options.add_menu_item(OPTION_TYPE_SPHERE)
+	options.add_menu_item(OPTION_TYPE_CAPSULE)
+	options.add_menu_item(OPTION_TYPE_CONVEX_POLYGON)
+	options.add_menu_item(OPTION_TYPE_CONCAVE_SEGMENTS)
 
-	$Options.add_menu_item(OPTION_SHAPE_RECTANGLE, true, true)
-	$Options.add_menu_item(OPTION_SHAPE_SPHERE, true, true)
-	$Options.add_menu_item(OPTION_SHAPE_CAPSULE, true, true)
-	$Options.add_menu_item(OPTION_SHAPE_CONVEX_POLYGON, true, true)
-	$Options.add_menu_item(OPTION_SHAPE_CONCAVE_POLYGON, true, true)
-	$Options.add_menu_item(OPTION_SHAPE_CONCAVE_SEGMENTS, true, true)
+	options.add_menu_item(OPTION_SHAPE_RECTANGLE, true, true)
+	options.add_menu_item(OPTION_SHAPE_SPHERE, true, true)
+	options.add_menu_item(OPTION_SHAPE_CAPSULE, true, true)
+	options.add_menu_item(OPTION_SHAPE_CONVEX_POLYGON, true, true)
+	options.add_menu_item(OPTION_SHAPE_CONCAVE_POLYGON, true, true)
+	options.add_menu_item(OPTION_SHAPE_CONCAVE_SEGMENTS, true, true)
 
-	$Options.connect("option_selected", self, "_on_option_selected")
-	$Options.connect("option_changed", self, "_on_option_changed")
+	options.connect("option_selected", self, "_on_option_selected")
+	options.connect("option_changed", self, "_on_option_changed")
 
 	yield(start_timer(0.5), "timeout")
 	if is_timer_canceled():
