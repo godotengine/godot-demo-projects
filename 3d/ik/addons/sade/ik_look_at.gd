@@ -5,7 +5,7 @@ export(NodePath) var skeleton_path setget _set_skeleton_path
 export(String) var bone_name = ""
 export(int, "_process", "_physics_process", "_notification", "none") var update_mode = 0 setget _set_update
 export(int, "X-up", "Y-up", "Z-up") var look_at_axis = 1
-export(float, 0.0, 1.0, 0.001) var interpolation = 1.0;
+export(float, 0.0, 1.0, 0.001) var interpolation = 1.0
 export(bool) var use_our_rotation_x = false
 export(bool) var use_our_rotation_y = false
 export(bool) var use_our_rotation_z = false
