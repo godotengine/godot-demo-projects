@@ -75,7 +75,7 @@ jobs:
 
             # Append the demo to the list of demos for the website.
             PROJECT_NAME=$(cat project.godot | grep "config/name" | cut -d '"' -f 2 | tr -d "\n")
-            echo "<li><a href='$demo'><img width="64" height="64" src="$demo/favicon.png" alt=""> $PROJECT_NAME</a></li>" >> "$BASEDIR/.github/dist/demos.html"
+            echo "<li><a href='$demo'><img width="64" height="64" src="$demo/favicon.png" alt=""><p>$PROJECT_NAME</p></a></li>" >> "$BASEDIR/.github/dist/demos.html"
           done
 
           cat "$BASEDIR/.github/dist/header.html" "$BASEDIR/.github/dist/demos.html" "$BASEDIR/.github/dist/footer.html" > "$BASEDIR/.github/dist/index.html"
