@@ -26,6 +26,14 @@ To import all demos at once in the project manager:
 - Choose the path to the folder containing all demos.
 - All demos should now appear in the project manager.
 
+## Try the demos in your browser
+
+Most of the demos are exported to GitHub Pages. They can be viewed
+[here](https://godotengine.github.io/godot-demo-projects/).
+
+**Note:** The performance of Godot in a browser is lower than natively on
+desktop. For the best performance, consider downloading the demos.
+
 ## Useful links
 
 - [Main website](https://godotengine.org)
