@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://bullets.gd" type="Script" id=2]
+[ext_resource path="res://face_happy.png" type="Texture" id=3]
+[ext_resource path="res://face_sad.png" type="Texture" id=4]
+[ext_resource path="res://player.gd" type="Script" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 27.0
+
+[node name="Shower" type="Node2D"]
+
+[node name="Bullets" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="Player" type="Area2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
+frames = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 2 )
+[connection signal="body_shape_entered" from="Player" to="Player" method="_on_body_shape_entered"]
+[connection signal="body_shape_exited" from="Player" to="Player" method="_on_body_shape_exited"]
