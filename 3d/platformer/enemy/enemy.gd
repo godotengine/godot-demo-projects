@@ -1,18 +1,16 @@
 extends RigidBody
 
-const STATE_WALKING = 0
-const STATE_DYING = 1
+const ACCEL = 5.0
+const DEACCEL = 20.0
+const MAX_SPEED = 2.0
+const ROT_SPEED = 1.0
 
 var prev_advance = false
-var deaccel = 20.0
-var accel = 5
-var max_speed = 2
-var rot_dir = 4
-var rot_speed = 1
-
 var dying = false
+var rot_dir = 4
 
 onready var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * ProjectSettings.get_setting("physics/3d/default_gravity_vector")
+
 
 func _integrate_forces(state):
 	var delta = state.get_step()
@@ -53,18 +51,18 @@ func _integrate_forces(state):
 	var deaccel_dir = dir
 
 	if advance:
-		if dir.dot(lv) < max_speed:
-			lv += dir * accel * delta
+		if dir.dot(lv) < MAX_SPEED:
+			lv += dir * ACCEL * delta
 		deaccel_dir = dir.cross(g).normalized()
 	else:
 		if prev_advance:
 			rot_dir = 1
 
-		dir = Basis(up, rot_dir * rot_speed * delta).xform(dir)
+		dir = Basis(up, rot_dir * ROT_SPEED * delta).xform(dir)
 		get_node("Armature").set_transform(Transform().looking_at(-dir, up))
 
 	var dspeed = deaccel_dir.dot(lv)
-	dspeed -= deaccel * delta
+	dspeed -= DEACCEL * delta
 	if dspeed < 0:
 		dspeed = 0
 

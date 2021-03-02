@@ -1,28 +1,31 @@
 extends KinematicBody
 
-const ANIM_FLOOR = 0
-const ANIM_AIR = 1
+enum Anim {
+	FLOOR,
+	AIR,
+}
 
 const SHOOT_TIME = 1.5
 const SHOOT_SCALE = 2
 const CHAR_SCALE = Vector3(0.3, 0.3, 0.3)
+const MAX_SPEED = 4.5
 const TURN_SPEED = 40
+const JUMP_VELOCITY = 8.5
+const BULLET_SPEED = 20
+const AIR_IDLE_DEACCEL = false
+const ACCEL = 14.0
+const DEACCEL = 14.0
+const AIR_ACCEL_FACTOR = 0.4
+const SHARP_TURN_THRESHOLD = 140
 
 var movement_dir = Vector3()
 var linear_velocity = Vector3()
-
 var jumping = false
-
-var air_idle_deaccel = false
-var accel = 19.0
-var deaccel = 14.0
-var sharp_turn_threshold = 140
-var max_speed = 3.1
-
 var prev_shoot = false
 var shoot_blend = 0
 
 onready var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * ProjectSettings.get_setting("physics/3d/default_gravity_vector")
+
 
 func _ready():
 	get_node("AnimationTree").set_active(true)
@@ -31,7 +34,7 @@ func _ready():
 func _physics_process(delta):
 	linear_velocity += gravity * delta
 
-	var anim = ANIM_FLOOR
+	var anim = Anim.FLOOR
 
 	var vv = linear_velocity.y # Vertical velocity.
 	var hv = Vector3(linear_velocity.x, 0, linear_velocity.z) # Horizontal velocity.
@@ -51,7 +54,7 @@ func _physics_process(delta):
 	var shoot_attempt = Input.is_action_pressed("shoot")
 
 	if is_on_floor():
-		var sharp_turn = hspeed > 0.1 and rad2deg(acos(dir.dot(hdir))) > sharp_turn_threshold
+		var sharp_turn = hspeed > 0.1 and rad2deg(acos(dir.dot(hdir))) > SHARP_TURN_THRESHOLD
 
 		if dir.length() > 0.1 and !sharp_turn:
 			if hspeed > 0.001:
@@ -59,10 +62,10 @@ func _physics_process(delta):
 			else:
 				hdir = dir
 
-			if hspeed < max_speed:
-				hspeed += accel * delta
+			if hspeed < MAX_SPEED:
+				hspeed += ACCEL * delta
 		else:
-			hspeed -= deaccel * delta
+			hspeed -= DEACCEL * delta
 			if hspeed < 0:
 				hspeed = 0
 
@@ -79,22 +82,21 @@ func _physics_process(delta):
 		get_node("Armature").set_transform(Transform(m3, mesh_xform.origin))
 
 		if not jumping and jump_attempt:
-			vv = 7.0
+			vv = JUMP_VELOCITY
 			jumping = true
 			get_node("SoundJump").play()
 	else:
-		anim = ANIM_AIR
+		anim = Anim.AIR
 
 		if dir.length() > 0.1:
-			hv += dir * (accel * 0.2 * delta)
-			if hv.length() > max_speed:
-				hv = hv.normalized() * max_speed
-		else:
-			if air_idle_deaccel:
-				hspeed = hspeed - (deaccel * 0.2 * delta)
-				if hspeed < 0:
-					hspeed = 0
-				hv = hdir * hspeed
+			hv += dir * (ACCEL * AIR_ACCEL_FACTOR * delta)
+			if hv.length() > MAX_SPEED:
+				hv = hv.normalized() * MAX_SPEED
+		elif AIR_IDLE_DEACCEL:
+			hspeed = hspeed - (DEACCEL * AIR_ACCEL_FACTOR * delta)
+			if hspeed < 0:
+				hspeed = 0
+			hv = hdir * hspeed
 
 	if jumping and vv < 0:
 		jumping = false
@@ -116,14 +118,14 @@ func _physics_process(delta):
 		var bullet = preload("res://player/bullet/bullet.tscn").instance()
 		bullet.set_transform(get_node("Armature/Bullet").get_global_transform().orthonormalized())
 		get_parent().add_child(bullet)
-		bullet.set_linear_velocity(get_node("Armature/Bullet").get_global_transform().basis[2].normalized() * 20)
+		bullet.set_linear_velocity(get_node("Armature/Bullet").get_global_transform().basis[2].normalized() * BULLET_SPEED)
 		bullet.add_collision_exception_with(self) # Add it to bullet.
 		get_node("SoundShoot").play()
 
 	prev_shoot = shoot_attempt
 
 	if is_on_floor():
-		$AnimationTree["parameters/walk/blend_amount"] = hspeed / max_speed
+		$AnimationTree["parameters/walk/blend_amount"] = hspeed / MAX_SPEED
 
 	$AnimationTree["parameters/state/current"] = anim
 	$AnimationTree["parameters/air_dir/blend_amount"] = clamp(-linear_velocity.y / 4 + 0.5, 0, 1)

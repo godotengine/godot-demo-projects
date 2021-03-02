@@ -1,5 +1,8 @@
 extends Camera
 
+const MAX_HEIGHT = 2.0
+const MIN_HEIGHT = 0
+
 export var min_distance = 0.5
 export var max_distance = 3.5
 export var angle_v_adjust = 0.0
@@ -7,8 +10,6 @@ export var autoturn_ray_aperture = 25
 export var autoturn_speed = 50
 
 var collision_exception = []
-var max_height = 2.0
-var min_height = 0
 
 func _ready():
 	# Find collision exceptions for ray.
@@ -39,10 +40,7 @@ func _physics_process(dt):
 		delta = delta.normalized() * max_distance
 
 	# Check upper and lower height.
-	if delta.y > max_height:
-		delta.y = max_height
-	if delta.y < min_height:
-		delta.y = min_height
+	delta.y = clamp(delta.y, MIN_HEIGHT, MAX_HEIGHT)
 
 	# Check autoturn.
 	var ds = PhysicsServer.space_get_direct_state(get_world().get_space())
