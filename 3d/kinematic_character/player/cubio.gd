@@ -5,14 +5,16 @@ const JUMP_SPEED = 5
 const ACCELERATION = 2
 const DECELERATION = 4
 
+onready var camera = $Target/Camera
 onready var gravity = -ProjectSettings.get_setting("physics/3d/default_gravity")
+onready var start_position = translation
 var velocity: Vector3
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("exit"):
 		get_tree().quit()
 	if Input.is_action_just_pressed("reset_position"):
-		translation = Vector3(-3, 4, 8)
+		translation = start_position
 
 	var dir = Vector3()
 	dir.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -20,7 +22,7 @@ func _physics_process(delta):
 
 	# Get the camera's transform basis, but remove the X rotation such
 	# that the Y axis is up and Z is horizontal.
-	var cam_basis = $Target/Camera.global_transform.basis
+	var cam_basis = camera.global_transform.basis
 	var basis = cam_basis.rotated(cam_basis.x, -cam_basis.get_euler().x)
 	dir = basis.xform(dir)
 
