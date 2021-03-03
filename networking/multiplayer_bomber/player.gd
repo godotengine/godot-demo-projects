@@ -20,6 +20,7 @@ var current_anim = ""
 var prev_bombing = false
 var bomb_index = 0
 
+
 func _physics_process(_delta):
 	var motion = Vector2()
 
@@ -74,8 +75,10 @@ func _physics_process(_delta):
 	if not is_network_master():
 		puppet_pos = position # To avoid jitter
 
+
 puppet func stun():
 	stunned = true
+
 
 master func exploded(_by_who):
 	if stunned:
@@ -83,8 +86,10 @@ master func exploded(_by_who):
 	rpc("stun") # Stun puppets
 	stun() # Stun master - could use sync to do both at once
 
+
 func set_player_name(new_name):
 	get_node("label").set_text(new_name)
+
 
 func _ready():
 	stunned = false

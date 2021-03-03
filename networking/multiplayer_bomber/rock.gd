@@ -4,6 +4,7 @@ extends KinematicBody2D
 puppet func do_explosion():
 	$"AnimationPlayer".play("explode")
 
+
 # Received by owner of the rock
 master func exploded(by_who):
 	rpc("do_explosion") # Re-sent to puppet rocks
