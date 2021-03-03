@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://stage/tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://stage/floor_mesh.tres" type="ArrayMesh" id=2]
 [ext_resource path="res://coin/coin.tscn" type="PackedScene" id=3]
 [ext_resource path="res://enemy/enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://default_env.tres" type="Environment" id=6]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -34,6 +35,68 @@ extents = Vector3( 12.887, 10.0961, 4.31324 )
 __meta__ = {
 "__editor_plugin_screen__": "3D"
 }
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 6 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="WorldEnvironment"]
+transform = Transform( 0.707107, 0.45452, -0.541675, 0, 0.766044, 0.642788, 0.707107, -0.454519, 0.541675, 0, 0, 0 )
+shadow_enabled = true
+shadow_bias = 0.13
+directional_shadow_normal_bias = 0.1
+
+[node name="Reflection1" type="ReflectionProbe" parent="WorldEnvironment"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -1 )
+intensity = 0.5
+max_distance = 60.0
+extents = Vector3( 15, 10, 22 )
+origin_offset = Vector3( 0, 4, 0 )
+box_projection = true
+cull_mask = 1048573
+interior_enable = true
+interior_ambient_color = Color( 0.403137, 0.55498, 0.884824, 1 )
+
+[node name="Reflection2" type="ReflectionProbe" parent="WorldEnvironment"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0 )
+intensity = 0.5
+extents = Vector3( 8, 2.5, 3 )
+origin_offset = Vector3( 0, -0.22168, 0 )
+box_projection = true
+cull_mask = 1048573
+interior_enable = true
+interior_ambient_color = Color( 0.403137, 0.55498, 0.884824, 1 )
+
+[node name="Reflection3" type="ReflectionProbe" parent="WorldEnvironment"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 4 )
+intensity = 0.5
+max_distance = 18.7
+extents = Vector3( 3, 3, 6 )
+origin_offset = Vector3( 0, -0.22168, 0 )
+box_projection = true
+cull_mask = 1048573
+interior_enable = true
+interior_ambient_color = Color( 0.403137, 0.55498, 0.884824, 1 )
+
+[node name="Reflection4" type="ReflectionProbe" parent="WorldEnvironment"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 1, 15 )
+intensity = 0.5
+max_distance = 60.0
+extents = Vector3( 12, 10, 8 )
+origin_offset = Vector3( 0, 2.00781, 0 )
+box_projection = true
+cull_mask = 1048573
+interior_enable = true
+interior_ambient_color = Color( 0.403137, 0.55498, 0.884824, 1 )
+
+[node name="Reflection5" type="ReflectionProbe" parent="WorldEnvironment"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 1, 8 )
+intensity = 0.5
+max_distance = 60.0
+extents = Vector3( 13, 10, 20 )
+origin_offset = Vector3( 0, 2.00781, 0 )
+cull_mask = 1048573
+interior_enable = true
+interior_ambient_color = Color( 0.403137, 0.55498, 0.884824, 1 )
 
 [node name="GridMap" type="GridMap" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, -6, -12 )
@@ -87,12 +150,6 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 11, 9 )
 mesh = ExtResource( 2 )
 material/0 = null
-
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.522923, 0.663002, -0.535705, -0.24539, 0.718971, 0.650281, 0.816294, -0.20859, 0.53866, -16, -6, -12 )
-shadow_enabled = true
-shadow_bias = 0.13
-directional_shadow_normal_bias = 0.1
 
 [node name="Coins" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, -6, -12 )
@@ -250,59 +307,6 @@ physics_material_override = SubResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 transform = Transform( 0.0160683, 0, -0.999871, 0, 1, 0, 0.999871, 0, 0.0160683, -7.49833, -1.84189, 3.9334 )
-
-[node name="Reflection1" type="ReflectionProbe" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -1 )
-intensity = 0.5
-max_distance = 60.0
-extents = Vector3( 15, 10, 22 )
-origin_offset = Vector3( 0, 4, 0 )
-box_projection = true
-cull_mask = 1048573
-interior_enable = true
-interior_ambient_color = Color( 0.403137, 0.55498, 0.884824, 1 )
-
-[node name="Reflection2" type="ReflectionProbe" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0 )
-intensity = 0.5
-extents = Vector3( 8, 2.5, 3 )
-origin_offset = Vector3( 0, -0.22168, 0 )
-box_projection = true
-cull_mask = 1048573
-interior_enable = true
-interior_ambient_color = Color( 0.403137, 0.55498, 0.884824, 1 )
-
-[node name="Reflection3" type="ReflectionProbe" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 4 )
-intensity = 0.5
-max_distance = 18.7
-extents = Vector3( 3, 3, 6 )
-origin_offset = Vector3( 0, -0.22168, 0 )
-box_projection = true
-cull_mask = 1048573
-interior_enable = true
-interior_ambient_color = Color( 0.403137, 0.55498, 0.884824, 1 )
-
-[node name="Reflection4" type="ReflectionProbe" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 1, 15 )
-intensity = 0.5
-max_distance = 60.0
-extents = Vector3( 12, 10, 8 )
-origin_offset = Vector3( 0, 2.00781, 0 )
-box_projection = true
-cull_mask = 1048573
-interior_enable = true
-interior_ambient_color = Color( 0.403137, 0.55498, 0.884824, 1 )
-
-[node name="Reflection5" type="ReflectionProbe" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 1, 8 )
-intensity = 0.5
-max_distance = 60.0
-extents = Vector3( 13, 10, 20 )
-origin_offset = Vector3( 0, 2.00781, 0 )
-cull_mask = 1048573
-interior_enable = true
-interior_ambient_color = Color( 0.403137, 0.55498, 0.884824, 1 )
 
 [node name="SoundArea1" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, -6, -12 )

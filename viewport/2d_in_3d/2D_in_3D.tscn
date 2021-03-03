@@ -20,24 +20,24 @@ func e():
 roughness = 0.7
 script = SubResource( 2 )
 
-[sub_resource type="CubeMesh" id=7]
+[sub_resource type="CubeMesh" id=4]
 
-[sub_resource type="SpatialMaterial" id=8]
+[sub_resource type="SpatialMaterial" id=5]
 albedo_color = Color( 0.652344, 0.652344, 0.652344, 1 )
 roughness = 0.0
 
-[sub_resource type="GDScript" id=9]
+[sub_resource type="GDScript" id=6]
 script/source = "tool
 extends Object
 func e():
 	return 0.1
 "
 
-[sub_resource type="CubeMesh" id=10]
+[sub_resource type="CubeMesh" id=7]
 size = Vector3( 1.1, 0.8, 0.1 )
-script = SubResource( 9 )
+script = SubResource( 6 )
 
-[sub_resource type="SpatialMaterial" id=11]
+[sub_resource type="SpatialMaterial" id=8]
 
 [node name="2Din3D" type="Spatial"]
 script = ExtResource( 1 )
@@ -57,41 +57,41 @@ transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -3, -0.2, -4 )
 
 [node name="PillarBottom" type="MeshInstance" parent="Pillar1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
-mesh = SubResource( 7 )
-material/0 = SubResource( 8 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
 
 [node name="PillarTop" type="MeshInstance" parent="Pillar1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0 )
-mesh = SubResource( 7 )
-material/0 = SubResource( 8 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
 
 [node name="PillarMiddle" type="MeshInstance" parent="Pillar1"]
 transform = Transform( 0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, 0, 2.5, 0 )
-mesh = SubResource( 7 )
-material/0 = SubResource( 8 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
 
 [node name="Pillar2" type="Spatial" parent="."]
 transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 3, -0.2, -4 )
 
 [node name="PillarBottom" type="MeshInstance" parent="Pillar2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
-mesh = SubResource( 7 )
-material/0 = SubResource( 8 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
 
 [node name="PillarTop" type="MeshInstance" parent="Pillar2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0 )
-mesh = SubResource( 7 )
-material/0 = SubResource( 8 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
 
 [node name="PillarMiddle" type="MeshInstance" parent="Pillar2"]
 transform = Transform( 0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, 0, 2.5, 0 )
-mesh = SubResource( 7 )
-material/0 = SubResource( 8 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
 
 [node name="PillarBack" type="MeshInstance" parent="."]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 1.2, -4.5 )
-mesh = SubResource( 10 )
-material/0 = SubResource( 8 )
+mesh = SubResource( 7 )
+material/0 = SubResource( 5 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.623013, -0.733525, 0.271654, 0.321394, 0.55667, 0.766044, -0.713134, -0.389948, 0.582563, 0, 10, 0 )
@@ -101,7 +101,7 @@ directional_shadow_normal_bias = 0.2
 
 [node name="ViewportQuad" type="MeshInstance" parent="."]
 transform = Transform( 2, 0, 0, 0, 0, -1.333, 0, 1, 0, 0, 1.2, -4.25 )
-material_override = SubResource( 11 )
+material_override = SubResource( 8 )
 mesh = SubResource( 1 )
 material/0 = null
 
