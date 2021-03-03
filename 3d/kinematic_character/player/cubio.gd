@@ -1,10 +1,9 @@
 extends KinematicBody
 
-const MAX_SPEED = 5
-const JUMP_SPEED = 7
+const MAX_SPEED = 3
+const JUMP_SPEED = 5
 const ACCELERATION = 2
 const DECELERATION = 4
-const MAX_SLOPE_ANGLE = 30
 
 onready var gravity = -ProjectSettings.get_setting("physics/3d/default_gravity")
 var velocity: Vector3
