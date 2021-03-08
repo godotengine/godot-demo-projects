@@ -88,12 +88,25 @@ func _test_all():
 
 	# RigidBody tests.
 	yield(_start_test_case(OPTION_TEST_CASE_JUMP_ONE_WAY_RIGID), "completed")
+	if is_timer_canceled():
+		return
+
 	yield(_start_test_case(OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_RIGID), "completed")
+	if is_timer_canceled():
+		return
 
 	# KinematicBody tests.
 	yield(_start_test_case(OPTION_TEST_CASE_JUMP_ONE_WAY_KINEMATIC), "completed")
+	if is_timer_canceled():
+		return
+
 	yield(_start_test_case(OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_KINEMATIC), "completed")
+	if is_timer_canceled():
+		return
+
 	yield(_start_test_case(OPTION_TEST_CASE_FALL_ONE_WAY_KINEMATIC), "completed")
+	if is_timer_canceled():
+		return
 
 	Log.print_log("* Done.")
 

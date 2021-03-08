@@ -115,7 +115,7 @@ func cancel_timer():
 
 
 func is_timer_canceled():
-	return _timer.paused
+	return _timer and _timer.paused
 
 
 func wait_for_physics_ticks(tick_count):

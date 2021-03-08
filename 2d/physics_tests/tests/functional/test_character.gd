@@ -127,6 +127,8 @@ func _on_option_changed(option, checked):
 
 
 func _start_test():
+	cancel_timer()
+
 	if _moving_body:
 		_body_parent.remove_child(_moving_body)
 		_moving_body.queue_free()

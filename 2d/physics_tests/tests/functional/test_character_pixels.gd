@@ -101,10 +101,14 @@ func _test_all():
 
 	# Test floor detection with no snapping.
 	yield(_start_test_case(OPTION_TEST_CASE_DETECT_FLOOR_NO_SNAP), "completed")
+	if is_timer_canceled():
+		return
 
 	# Test floor detection with no snapping.
 	# In this test case, motion alternates different speeds.
 	yield(_start_test_case(OPTION_TEST_CASE_DETECT_FLOOR_MOTION_CHANGES), "completed")
+	if is_timer_canceled():
+		return
 
 	Log.print_log("* Done.")
 
