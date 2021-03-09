@@ -44,6 +44,8 @@ var _test_step = 0
 var _test_all_angles = false
 var _lock_controls = false
 
+var _test_canceled = false
+
 
 func _ready():
 	if not Engine.editor_hint:
@@ -225,16 +227,24 @@ func _test_all_rigid_body():
 	_set_platform_size(64.0, false)
 	_set_rigidbody_angle(0.0, false)
 	yield(_start_test_case(OPTION_TEST_CASE_ALL_ANGLES_RIGID), "completed")
+	if _test_canceled:
+		return
 
 	_set_platform_size(64.0, false)
 	_set_rigidbody_angle(45.0, false)
 	yield(_start_test_case(OPTION_TEST_CASE_ALL_ANGLES_RIGID), "completed")
+	if _test_canceled:
+		return
 
 	_set_platform_size(32.0, false)
 	_set_rigidbody_angle(45.0, false)
 	yield(_start_test_case(OPTION_TEST_CASE_ALL_ANGLES_RIGID), "completed")
+	if _test_canceled:
+		return
 
 	yield(_start_test_case(OPTION_TEST_CASE_MOVING_PLATFORM_RIGID), "completed")
+	if _test_canceled:
+		return
 
 
 func _test_all_kinematic_body():
@@ -243,16 +253,24 @@ func _test_all_kinematic_body():
 	_set_platform_size(64.0, false)
 	_set_rigidbody_angle(0.0, false)
 	yield(_start_test_case(OPTION_TEST_CASE_ALL_ANGLES_KINEMATIC), "completed")
+	if _test_canceled:
+		return
 
 	_set_platform_size(64.0, false)
 	_set_rigidbody_angle(45.0, false)
 	yield(_start_test_case(OPTION_TEST_CASE_ALL_ANGLES_KINEMATIC), "completed")
+	if _test_canceled:
+		return
 
 	_set_platform_size(32.0, false)
 	_set_rigidbody_angle(45.0, false)
 	yield(_start_test_case(OPTION_TEST_CASE_ALL_ANGLES_KINEMATIC), "completed")
+	if _test_canceled:
+		return
 
 	yield(_start_test_case(OPTION_TEST_CASE_MOVING_PLATFORM_KINEMATIC), "completed")
+	if _test_canceled:
+		return
 
 
 func _test_moving_platform():
@@ -265,9 +283,13 @@ func _test_moving_platform():
 
 	_set_platform_angle(90.0, false)
 	yield(_wait_for_test(), "completed")
+	if _test_canceled:
+		return
 
 	_set_platform_angle(-90.0, false)
 	yield(_wait_for_test(), "completed")
+	if _test_canceled:
+		return
 
 	Log.print_log("* Platform moving towards body...")
 	_set_platform_size(64.0, false)
@@ -276,9 +298,13 @@ func _test_moving_platform():
 
 	_set_platform_angle(90.0, false)
 	yield(_wait_for_test(), "completed")
+	if _test_canceled:
+		return
 
 	_set_platform_angle(-90.0, false)
 	yield(_wait_for_test(), "completed")
+	if _test_canceled:
+		return
 
 	_platform_speed = 0.0
 	emit_signal("all_tests_done")
@@ -288,7 +314,12 @@ func _test_all():
 	Log.print_log("* TESTING ALL...")
 
 	yield(_test_all_rigid_body(), "completed")
+	if _test_canceled:
+		return
+
 	yield(_test_all_kinematic_body(), "completed")
+	if _test_canceled:
+		return
 
 	Log.print_log("* Done.")
 
@@ -342,7 +373,9 @@ func _start_test():
 
 
 func _reset_test(cancel_test = true):
-	$Timer.stop()
+	_test_canceled = true
+	_on_timeout()
+	_test_canceled = false
 
 	_test_step = 0
 
@@ -415,13 +448,27 @@ func _should_collide():
 
 
 func _on_timeout():
+	cancel_timer()
+
+	if $Timer.is_stopped():
+		return
+
+	$Timer.stop()
+
+	if _test_canceled:
+		emit_signal("test_done")
+		emit_signal("all_tests_done")
+		return
+
 	if not _contact_detected and not _target_entered:
 		Log.print_log("Test TIMEOUT")
 		_set_result()
 
-	$Timer.stop()
-
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield(start_timer(0.5), "timeout")
+	if _test_canceled:
+		emit_signal("test_done")
+		emit_signal("all_tests_done")
+		return
 
 	var was_all_angles = _test_all_angles
 
