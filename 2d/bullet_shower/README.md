@@ -11,6 +11,8 @@ Language: GDScript
 
 Renderer: GLES 2
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/887
+
 ## Screenshots
 
 ![No collision](screenshots/no_collision.png)
