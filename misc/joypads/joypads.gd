@@ -23,6 +23,8 @@ onready var joypad_number = $DeviceInfo/JoyNumber
 func _ready():
 	set_physics_process(true)
 	Input.connect("joy_connection_changed", self, "_on_joy_connection_changed")
+	# Guide button, not supported <= 3.2.3, so manually hide to account for that case.
+	joypad_buttons.get_child(16).hide()
 
 
 func _process(_delta):
@@ -52,13 +54,15 @@ func _process(_delta):
 				joypad_axes.get_node(str(axis) + "-").show()
 
 	# Loop through the buttons and highlight the ones that are pressed.
-	for btn in range(JOY_BUTTON_0, JOY_BUTTON_MAX):
+	for btn in range(JOY_BUTTON_0, int(min(JOY_BUTTON_MAX, 24))):
 		if Input.is_joy_button_pressed(joy_num, btn):
-			button_grid.get_node(str(btn)).add_color_override("font_color", Color.white)
-			joypad_buttons.get_node(str(btn)).show()
+			button_grid.get_child(btn).add_color_override("font_color", Color.white)
+			if btn < 17:
+				joypad_buttons.get_child(btn).show()
 		else:
-			button_grid.get_node(str(btn)).add_color_override("font_color", Color(0.2, 0.1, 0.3, 1))
-			joypad_buttons.get_node(str(btn)).hide()
+			button_grid.get_child(btn).add_color_override("font_color", Color(0.2, 0.1, 0.3, 1))
+			if btn < 17:
+				joypad_buttons.get_child(btn).hide()
 
 
 # Called whenever a joypad has been connected or disconnected.
