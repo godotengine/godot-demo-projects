@@ -9,7 +9,7 @@ be used with [Godot Engine](https://godotengine.org), the open source
 - The [`master`](https://github.com/godotengine/godot-demo-projects) branch is compatible with the latest stable Godot version (currently 3.3.x).
 - If you are using an older version of Godot, use the appropriate branch for your Godot version:
 
-  - [`3.2`](https://github.com/godotengine/godot-demo-projects/tree/3.2)
+  - [***`3.2`***](https://github.com/godotengine/godot-demo-projects/tree/3.2)
     branch for Godot 3.2.x.
   - [`3.1`](https://github.com/godotengine/godot-demo-projects/tree/3.1)
     branch for Godot 3.1.x.
@@ -22,7 +22,7 @@ be used with [Godot Engine](https://godotengine.org), the open source
 
 To import all demos at once in the project manager:
 
-- Clone this repository or [download a ZIP archive](https://github.com/godotengine/godot-demo-projects/archive/master.zip).
+- Clone this repository or [download a ZIP archive](https://github.com/godotengine/godot-demo-projects/archive/3.2.zip).
   - If you've downloaded a ZIP archive, extract it somewhere.
 - Open the Godot project manager and click the **Scan** button on the right.
 - Choose the path to the folder containing all demos.
