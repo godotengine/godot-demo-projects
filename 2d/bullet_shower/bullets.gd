@@ -52,21 +52,24 @@ func _ready():
 		bullets.push_back(bullet)
 
 
-func _process(delta):
+func _process(_delta):
+	# Order the CanvasItem to update every frame.
+	update()
+
+
+func _physics_process(delta):
 	var transform2d = Transform2D()
+	var offset = get_viewport_rect().size.x + 16
 	for bullet in bullets:
 		bullet.position.x -= bullet.speed * delta
 
 		if bullet.position.x < -16:
 			# The bullet has left the screen; move it back to the right.
-			bullet.position.x = get_viewport_rect().size.x + 16
+			bullet.position.x = offset
 
 		transform2d.origin = bullet.position
 
 		Physics2DServer.body_set_state(bullet.body, Physics2DServer.BODY_STATE_TRANSFORM, transform2d)
-
-	# Order the CanvasItem to update since bullets are moving every frame.
-	update()
 
 
 # Instead of drawing each bullet individually in a script attached to each bullet,
