@@ -22,7 +22,11 @@ func update(_delta):
 		emit_signal("finished", "idle")
 	update_look_direction(input_direction)
 
-	speed = max_run_speed if Input.is_action_pressed("run") else max_walk_speed
+	if Input.is_action_pressed("run"):
+		speed = max_run_speed
+	else:
+		speed = max_walk_speed
+
 	var collision_info = move(speed, input_direction)
 	if not collision_info:
 		return

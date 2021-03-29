@@ -13,7 +13,10 @@ func _process(_delta):
 		pause.visible = crosshair.visible
 		crosshair.visible = !crosshair.visible
 		options.visible = false
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if crosshair.visible else Input.MOUSE_MODE_VISIBLE)
+		if crosshair.visible:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func _on_Resume_pressed():

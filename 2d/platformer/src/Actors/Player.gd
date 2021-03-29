@@ -51,7 +51,9 @@ func _physics_process(_delta):
 	var is_jump_interrupted = Input.is_action_just_released("jump" + action_suffix) and _velocity.y < 0.0
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
 
-	var snap_vector = Vector2.DOWN * FLOOR_DETECT_DISTANCE if direction.y == 0.0 else Vector2.ZERO
+	var snap_vector = Vector2.ZERO
+	if direction.y == 0.0:
+		snap_vector = Vector2.DOWN * FLOOR_DETECT_DISTANCE
 	var is_on_platform = platform_detector.is_colliding()
 	_velocity = move_and_slide_with_snap(
 		_velocity, snap_vector, FLOOR_NORMAL, not is_on_platform, 4, 0.9, false
@@ -60,7 +62,10 @@ func _physics_process(_delta):
 	# When the character’s direction changes, we want to to scale the Sprite accordingly to flip it.
 	# This will make Robi face left or right depending on the direction you move.
 	if direction.x != 0:
-		sprite.scale.x = 1 if direction.x > 0 else -1
+		if direction.x > 0:
+			sprite.scale.x = 1
+		else:
+			sprite.scale.x = -1
 
 	# We use the sprite's scale to store Robi’s look direction which allows us to shoot
 	# bullets forward.
@@ -106,9 +111,15 @@ func calculate_move_velocity(
 func get_new_animation(is_shooting = false):
 	var animation_new = ""
 	if is_on_floor():
-		animation_new = "run" if abs(_velocity.x) > 0.1 else "idle"
+		if abs(_velocity.x) > 0.1:
+			animation_new = "run"
+		else:
+			animation_new = "idle"
 	else:
-		animation_new = "falling" if _velocity.y > 0 else "jumping"
+		if _velocity.y > 0:
+			animation_new = "falling"
+		else:
+			animation_new = "jumping"
 	if is_shooting:
 		animation_new += "_weapon"
 	return animation_new

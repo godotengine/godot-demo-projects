@@ -12,7 +12,10 @@ func _ready():
 	var n = name.to_lower()
 	_up = n + "_move_up"
 	_down = n + "_move_down"
-	_ball_dir = 1 if n == "left" else -1
+	if n == "left":
+		_ball_dir = 1
+	else:
+		_ball_dir = -1
 
 
 func _process(delta):

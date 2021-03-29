@@ -30,9 +30,10 @@ func _input(event):
 			map.inverted = joy_mapping_axis_invert.pressed
 			if joy_mapping_full_axis.pressed:
 				map.axis = JoyMapping.AXIS.FULL
+			elif motion.axis_value > 0:
+				map.axis = JoyMapping.AXIS.HALF_PLUS
 			else:
-				var plus = motion.axis_value > 0
-				map.axis = JoyMapping.AXIS.HALF_PLUS if plus else JoyMapping.AXIS.HALF_MINUS
+				map.axis = JoyMapping.AXIS.HALF_MINUS
 			joy_mapping_text.text = map.to_human_string()
 			cur_mapping[steps[cur_step]] = map
 	elif event is InputEventJoypadButton and event.pressed:
