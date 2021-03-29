@@ -49,7 +49,10 @@ func _physics_process(_delta):
 	_velocity.y = move_and_slide(_velocity, FLOOR_NORMAL).y
 
 	# We flip the Sprite depending on which way the enemy is moving.
-	sprite.scale.x = 1 if _velocity.x > 0 else -1
+	if _velocity.x > 0:
+		sprite.scale.x = 1
+	else:
+		sprite.scale.x = -1
 
 	var animation = get_new_animation()
 	if animation != animation_player.current_animation:
@@ -64,7 +67,10 @@ func destroy():
 func get_new_animation():
 	var animation_new = ""
 	if _state == State.WALKING:
-		animation_new = "walk" if abs(_velocity.x) > 0 else "idle"
+		if _velocity.x == 0:
+			animation_new = "idle"
+		else:
+			animation_new = "walk"
 	else:
 		animation_new = "destroy"
 	return animation_new

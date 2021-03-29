@@ -2,7 +2,7 @@ extends AudioStreamPlayer
 
 const DOUBLE_VOLUME_DB = 6 # Do not change. Represents doubling of sound pressure.
 
-export(int) var base_volume_db = -4
+export(int) var base_volume_db = -14
 
 func _ready():
 	# To avoid AudioStreamPlayer2D sounds playing on top of each other and

@@ -19,7 +19,10 @@ var height = 0.0
 
 func initialize(speed, velocity):
 	horizontal_speed = speed
-	max_horizontal_speed = speed if speed > 0.0 else base_max_horizontal_speed
+	if speed > 0.0:
+		max_horizontal_speed = speed
+	else:
+		max_horizontal_speed = base_max_horizontal_speed
 	enter_velocity = velocity
 
 
@@ -27,7 +30,10 @@ func enter():
 	var input_direction = get_input_direction()
 	update_look_direction(input_direction)
 
-	horizontal_velocity = enter_velocity if input_direction else Vector2()
+	if input_direction:
+		horizontal_velocity = enter_velocity
+	else:
+		horizontal_velocity = Vector2()
 	vertical_speed = 600.0
 
 	owner.get_node("AnimationPlayer").play("idle")
