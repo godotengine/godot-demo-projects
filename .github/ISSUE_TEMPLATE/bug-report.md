@@ -1,9 +1,9 @@
 ---
 name: Bug Report
 about: Report a bug with one of the demo projects.
-title: ''
+title: ""
 labels: bug
-assignees: ''
+assignees: ""
 
 ---
 

@@ -6,15 +6,17 @@ be used with [Godot Engine](https://godotengine.org), the open source
 
 ## Godot versions
 
-- The [`master`](https://github.com/godotengine/godot-demo-projects) branch is compatible with the latest stable Godot version (currently 3.2).
+- The [`master`](https://github.com/godotengine/godot-demo-projects) branch is compatible with the latest stable Godot version (currently 3.3.x).
 - If you are using an older version of Godot, use the appropriate branch for your Godot version:
 
-  - [`3.1`](https://github.com/godotengine/godot-demo-projects/tree/3.1) branch
-  for Godot 3.1.x.
-  - [`3.0`](https://github.com/godotengine/godot-demo-projects/tree/3.0) branch
-  for Godot 3.0.x.
-  - [`2.1`](https://github.com/godotengine/godot-demo-projects/tree/2.1) branch
-  for Godot 2.1.x.
+  - [`3.2`](https://github.com/godotengine/godot-demo-projects/tree/3.2)
+    branch for Godot 3.2.x.
+  - [`3.1`](https://github.com/godotengine/godot-demo-projects/tree/3.1)
+    branch for Godot 3.1.x.
+  - [`3.0`](https://github.com/godotengine/godot-demo-projects/tree/3.0)
+    branch for Godot 3.0.x.
+  - [`2.1`](https://github.com/godotengine/godot-demo-projects/tree/2.1)
+    branch for Godot 2.1.x.
 
 ## Importing all demos
 
@@ -40,6 +42,7 @@ desktop. For the best performance, consider downloading the demos.
 - [Source code](https://github.com/godotengine/godot)
 - [Documentation](http://docs.godotengine.org)
 - [Community hub](https://godotengine.org/community)
+- [TPS demo](https://github.com/godotengine/tps-demo)
 
 ## License
 

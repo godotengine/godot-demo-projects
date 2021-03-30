@@ -17,6 +17,7 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
 The protocol is text based, and composed by a command and possibly multiple payload arguments, each separated by a new line.
 
 Messages without payload must still end with a newline and are the following:
+
 - `J: ` (or `J: <ROOM>`), must be sent by client immediately after connection to get a lobby assigned or join a known one.
   This messages is also sent by server back to the client to notify assigned lobby, or simply a successful join.
 - `I: <ID>`, sent by server to identify the client when it joins a room.
@@ -27,6 +28,7 @@ Messages without payload must still end with a newline and are the following:
 When a lobby is sealed, no new client will be able to join, and the lobby will be destroyed (and clients disconnected) after 10 seconds.
 
 Messages with payload (used to transfer WebRTC parameters) are:
+
 - `O: <ID>`, used to send an offer.
 - `A: <ID>`, used to send an answer.
 - `C: <ID>`, used to send a candidate.
