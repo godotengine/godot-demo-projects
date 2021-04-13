@@ -24,23 +24,26 @@ var _joint_types = {}
 
 
 func _ready():
-	for joint_index in $Joints.get_child_count():
-		var joint_node = $Joints.get_child(joint_index)
+	var options = $Options
+
+	var joints = $Joints
+	for joint_index in joints.get_child_count():
+		var joint_node = joints.get_child(joint_index)
 		joint_node.visible = false
 		var joint_name = joint_node.name
 		var joint_short = joint_name.substr(0, joint_name.length() - 5)
 		var option_name = OPTION_JOINT_TYPE % [joint_short, joint_index + 1]
-		$Options.add_menu_item(option_name)
+		options.add_menu_item(option_name)
 		_joint_types[option_name] = joint_node
 
-	$Options.add_menu_item(OPTION_TEST_CASE_BODIES_COLLIDE, true, false)
-	$Options.add_menu_item(OPTION_TEST_CASE_WORLD_ATTACHMENT, true, false)
-	$Options.add_menu_item(OPTION_TEST_CASE_DYNAMIC_ATTACHMENT, true, false)
-	$Options.add_menu_item(OPTION_TEST_CASE_DESTROY_BODY, true, false)
-	$Options.add_menu_item(OPTION_TEST_CASE_CHANGE_POSITIONS, true, false)
+	options.add_menu_item(OPTION_TEST_CASE_BODIES_COLLIDE, true, false)
+	options.add_menu_item(OPTION_TEST_CASE_WORLD_ATTACHMENT, true, false)
+	options.add_menu_item(OPTION_TEST_CASE_DYNAMIC_ATTACHMENT, true, false)
+	options.add_menu_item(OPTION_TEST_CASE_DESTROY_BODY, true, false)
+	options.add_menu_item(OPTION_TEST_CASE_CHANGE_POSITIONS, true, false)
 
-	$Options.connect("option_selected", self, "_on_option_selected")
-	$Options.connect("option_changed", self, "_on_option_changed")
+	options.connect("option_selected", self, "_on_option_selected")
+	options.connect("option_changed", self, "_on_option_changed")
 
 	_selected_joint = _joint_types.values()[0]
 	_update_joint = true

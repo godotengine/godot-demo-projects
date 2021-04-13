@@ -17,12 +17,13 @@ points = PoolVector3Array( -0.7, 0, -0.7, -0.3, 0, 0.8, 0.8, 0, -0.3, 0, -1, 0 )
 
 [sub_resource type="SphereShape" id=5]
 
-[sub_resource type="ConcavePolygonShape" id=6]
-data = PoolVector3Array( -1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1 )
+[sub_resource type="PlaneShape" id=6]
 
 [node name="Test" type="Spatial"]
 script = ExtResource( 2 )
+_enable_debug_collision = false
 spawns = [ "SpawnTarget1" ]
+spawn_count = 500
 
 [node name="Options" parent="." instance=ExtResource( 4 )]
 
@@ -65,19 +66,19 @@ shape = SubResource( 5 )
 [node name="StaticBodyWalls" type="StaticBody" parent="."]
 
 [node name="CollisionShape1" type="CollisionShape" parent="StaticBodyWalls"]
-transform = Transform( -1.62921e-05, 1, 0, -100, -1.62921e-07, 0, 0, 0, 100, -5, 0, 0 )
+transform = Transform( -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0, 1, -5, 0, 0 )
 shape = SubResource( 6 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="StaticBodyWalls"]
-transform = Transform( -1.62921e-05, -1, 0, 100, -1.62921e-07, 0, 0, 0, 100, 5, 0, 0 )
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 5, 0, 0 )
 shape = SubResource( 6 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="StaticBodyWalls"]
-transform = Transform( 2.65431e-12, 1.62921e-07, 100, 100, -1.62921e-07, 0, 1.62921e-05, 1, -1.62921e-05, 0, 0, -5 )
+transform = Transform( 2.6543e-14, 1.62921e-07, 1, 1, -1.62921e-07, 1.56125e-19, 1.62921e-07, 1, -1.62921e-07, 0, 0, -5 )
 shape = SubResource( 6 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="StaticBodyWalls"]
-transform = Transform( 2.65431e-12, 1.62921e-07, -100, 100, -1.62921e-07, 0, -1.62921e-05, -1, -1.62921e-05, 0, 0, 5 )
+transform = Transform( 2.6543e-14, 1.62921e-07, -1, 1, -1.62921e-07, -1.56125e-19, -1.62921e-07, -1, -1.62921e-07, 0, 0, 5 )
 shape = SubResource( 6 )
 
 [node name="StaticScene" parent="." instance=ExtResource( 1 )]

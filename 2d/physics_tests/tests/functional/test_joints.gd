@@ -11,8 +11,6 @@ const OPTION_TEST_CASE_CHANGE_POSITIONS = "Test case/Set body positions after ad
 
 const BOX_SIZE = Vector2(64, 64)
 
-onready var options = $Options
-
 var _update_joint = false
 var _selected_joint = null
 
@@ -27,8 +25,10 @@ var _joint_types = {}
 
 
 func _ready():
+	var options = $Options
+
 	var joints = $Joints
-	for joint_index in joints.get_child_count():
+	for joint_index in range(joints.get_child_count()):
 		var joint_node = joints.get_child(joint_index)
 		joint_node.visible = false
 		var joint_name = joint_node.name
