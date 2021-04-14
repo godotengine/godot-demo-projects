@@ -148,7 +148,7 @@ func _remove_objects():
 
 	# Remove objects in reversed order to avoid the overhead of changing children index in parent.
 	var object_count = _objects.size()
-	for object_index in object_count:
+	for object_index in range(object_count):
 		root_node.remove_child(_objects[object_count - object_index - 1])
 
 	timer = OS.get_ticks_usec() - timer

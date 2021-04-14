@@ -13,7 +13,7 @@ func add_menu_item(item_path, checkbox = false, checked = false):
 
 	var path = ""
 	var popup = get_popup()
-	for element_index in path_element_count - 1:
+	for element_index in range(path_element_count - 1):
 		var popup_label = path_elements[element_index]
 		path += popup_label + "/"
 		popup = _add_popup(popup, path, popup_label)

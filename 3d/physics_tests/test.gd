@@ -67,12 +67,10 @@ func clear_drawn_nodes():
 	_drawn_nodes.clear()
 
 
-func create_rigidbody_box(size, pickable = false):
-	var shape = BoxShape.new()
-	shape.extents = 0.5 * size
-
+func create_rigidbody(shape, pickable = false, transform = Transform.IDENTITY):
 	var collision = CollisionShape.new()
 	collision.shape = shape
+	collision.transform = transform
 
 	var body = RigidBody.new()
 	body.add_child(collision)
@@ -82,6 +80,13 @@ func create_rigidbody_box(size, pickable = false):
 		body.set_script(script)
 
 	return body
+
+
+func create_rigidbody_box(size, pickable = false, transform = Transform.IDENTITY):
+	var shape = BoxShape.new()
+	shape.extents = 0.5 * size
+
+	return create_rigidbody(shape, pickable, transform)
 
 
 func start_timer(timeout):

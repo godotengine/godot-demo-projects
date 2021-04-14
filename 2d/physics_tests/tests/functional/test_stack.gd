@@ -26,7 +26,7 @@ func _create_stack():
 
 		var pos_x = -0.5 * (width - 1) * (box_size.x + box_spacing.x)
 
-		for box_index in width:
+		for box_index in range(width):
 			var box = template_body.duplicate()
 			box.position = Vector2(pos_x, 0.0)
 			box.name = "Box%02d" % (box_index + 1)

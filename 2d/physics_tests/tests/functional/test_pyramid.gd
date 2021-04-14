@@ -28,7 +28,7 @@ func _create_pyramid():
 
 		var pos_x = -0.5 * (num_boxes - 1) * (box_size.x + box_spacing.x)
 
-		for box_index in num_boxes:
+		for box_index in range(num_boxes):
 			var box = template_body.duplicate()
 			box.position = Vector2(pos_x, 0.0)
 			box.name = "Box%02d" % (box_index + 1)

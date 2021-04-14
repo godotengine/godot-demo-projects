@@ -13,7 +13,7 @@ func add_menu_item(item_path, checkbox = false, checked = false, radio = false):
 
 	var path = ""
 	var popup = get_popup()
-	for element_index in path_element_count - 1:
+	for element_index in range(path_element_count - 1):
 		var popup_label = path_elements[element_index]
 		path += popup_label + "/"
 		popup = _add_popup(popup, path, popup_label)
@@ -59,7 +59,7 @@ func _on_item_pressed(item_index, popup_menu, path):
 		var checked = popup_menu.is_item_checked(item_index)
 		if not checked:
 			popup_menu.set_item_checked(item_index, true)
-			for other_index in popup_menu.get_item_count():
+			for other_index in range(popup_menu.get_item_count()):
 				if other_index != item_index:
 					popup_menu.set_item_checked(other_index, false)
 			emit_signal("option_selected", item_path)
