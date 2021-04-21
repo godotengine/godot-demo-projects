@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/robot_head/godot3_robot_head_collision.tres" type="Shape" id=1]
 [ext_resource path="res://tests/functional/test_raycasting.gd" type="Script" id=2]
-[ext_resource path="res://utils/exception_cylinder.gd" type="Script" id=3]
 [ext_resource path="res://utils/camera_orbit.gd" type="Script" id=4]
 
 [sub_resource type="BoxShape" id=1]
@@ -48,7 +47,6 @@ shape = SubResource( 3 )
 [node name="RigidBodyCylinder" type="RigidBody" parent="Shapes"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0 )
 mode = 3
-script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Shapes/RigidBodyCylinder"]
 transform = Transform( 0.772741, -0.258819, 2.59821e-08, 0.2, 0.933013, -0.207055, 0.0535898, 0.25, 0.772741, 0, 0, 0 )
