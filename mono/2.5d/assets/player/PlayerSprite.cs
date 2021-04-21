@@ -105,29 +105,32 @@ public class PlayerSprite : Sprite
     /// </summary>
     private void SpriteBasis()
     {
-        if (Input.IsActionPressed("forty_five_mode"))
+        if (!Engine.EditorHint)
         {
-            SetViewMode(0);
-        }
-        else if (Input.IsActionPressed("isometric_mode"))
-        {
-            SetViewMode(1);
-        }
-        else if (Input.IsActionPressed("top_down_mode"))
-        {
-            SetViewMode(2);
-        }
-        else if (Input.IsActionPressed("front_side_mode"))
-        {
-            SetViewMode(3);
-        }
-        else if (Input.IsActionPressed("oblique_y_mode"))
-        {
-            SetViewMode(4);
-        }
-        else if (Input.IsActionPressed("oblique_z_mode"))
-        {
-            SetViewMode(5);
+            if (Input.IsActionPressed("forty_five_mode"))
+            {
+                SetViewMode(0);
+            }
+            else if (Input.IsActionPressed("isometric_mode"))
+            {
+                SetViewMode(1);
+            }
+            else if (Input.IsActionPressed("top_down_mode"))
+            {
+                SetViewMode(2);
+            }
+            else if (Input.IsActionPressed("front_side_mode"))
+            {
+                SetViewMode(3);
+            }
+            else if (Input.IsActionPressed("oblique_y_mode"))
+            {
+                SetViewMode(4);
+            }
+            else if (Input.IsActionPressed("oblique_z_mode"))
+            {
+                SetViewMode(5);
+            }
         }
     }
 

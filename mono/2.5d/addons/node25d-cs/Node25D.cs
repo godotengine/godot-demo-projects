@@ -127,29 +127,32 @@ public class Node25D : Node2D, IComparable<Node25D>
 
     private void CheckViewMode()
     {
-        if (Input.IsActionJustPressed("forty_five_mode"))
+        if (!Engine.EditorHint)
         {
-            SetViewMode(0);
-        }
-        else if (Input.IsActionJustPressed("isometric_mode"))
-        {
-            SetViewMode(1);
-        }
-        else if (Input.IsActionJustPressed("top_down_mode"))
-        {
-            SetViewMode(2);
-        }
-        else if (Input.IsActionJustPressed("front_side_mode"))
-        {
-            SetViewMode(3);
-        }
-        else if (Input.IsActionJustPressed("oblique_y_mode"))
-        {
-            SetViewMode(4);
-        }
-        else if (Input.IsActionJustPressed("oblique_z_mode"))
-        {
-            SetViewMode(5);
+            if (Input.IsActionJustPressed("forty_five_mode"))
+            {
+                SetViewMode(0);
+            }
+            else if (Input.IsActionJustPressed("isometric_mode"))
+            {
+                SetViewMode(1);
+            }
+            else if (Input.IsActionJustPressed("top_down_mode"))
+            {
+                SetViewMode(2);
+            }
+            else if (Input.IsActionJustPressed("front_side_mode"))
+            {
+                SetViewMode(3);
+            }
+            else if (Input.IsActionJustPressed("oblique_y_mode"))
+            {
+                SetViewMode(4);
+            }
+            else if (Input.IsActionJustPressed("oblique_z_mode"))
+            {
+                SetViewMode(5);
+            }
         }
     }
 

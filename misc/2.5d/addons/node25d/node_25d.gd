@@ -106,18 +106,19 @@ func set_view_mode(view_mode_index):
 # Check if anyone presses the view mode buttons and change the basis accordingly.
 # This can be changed or removed in actual games where you only need one view mode.
 func _check_view_mode():
-	if Input.is_action_just_pressed("forty_five_mode"):
-		set_view_mode(0)
-	elif Input.is_action_just_pressed("isometric_mode"):
-		set_view_mode(1)
-	elif Input.is_action_just_pressed("top_down_mode"):
-		set_view_mode(2)
-	elif Input.is_action_just_pressed("front_side_mode"):
-		set_view_mode(3)
-	elif Input.is_action_just_pressed("oblique_y_mode"):
-		set_view_mode(4)
-	elif Input.is_action_just_pressed("oblique_z_mode"):
-		set_view_mode(5)
+	if not Engine.editor_hint:
+		if Input.is_action_just_pressed("forty_five_mode"):
+			set_view_mode(0)
+		elif Input.is_action_just_pressed("isometric_mode"):
+			set_view_mode(1)
+		elif Input.is_action_just_pressed("top_down_mode"):
+			set_view_mode(2)
+		elif Input.is_action_just_pressed("front_side_mode"):
+			set_view_mode(3)
+		elif Input.is_action_just_pressed("oblique_y_mode"):
+			set_view_mode(4)
+		elif Input.is_action_just_pressed("oblique_z_mode"):
+			set_view_mode(5)
 
 
 # Used by YSort25D
