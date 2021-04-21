@@ -8,8 +8,9 @@ const OPTION_TYPE_CAPSULE = "Shape type/Capsule"
 const OPTION_TYPE_CYLINDER = "Shape type/Cylinder"
 const OPTION_TYPE_CONVEX = "Shape type/Convex"
 
-export(Array) var spawns = Array()
+export(Array, NodePath) var spawns = Array()
 export(int) var spawn_count = 100
+export(Vector3) var spawn_randomize
 
 var _object_templates = []
 
@@ -148,25 +149,35 @@ func _start_all_types():
 
 func _spawn_objects(type_index):
 	var template_node = _object_templates[type_index]
+
+	Log.print_log("* Spawning: " + template_node.name)
+
 	for spawn in spawns:
 		var spawn_parent = get_node(spawn)
 
-		Log.print_log("* Spawning: " + template_node.name)
-
 		for _node_index in range(spawn_count):
 			# Create a new object and shape every time to avoid the overhead of connecting many bodies to the same shape.
-			var collision = template_node.get_child(0) as CollisionShape
-			var shape = collision.shape.duplicate()
-			var body = create_rigidbody(shape, false, collision.transform)
+			var collision = template_node.get_child(0).duplicate()
+			collision.shape = collision.shape.duplicate()
+			var body = template_node.duplicate()
+			body.transform = Transform.IDENTITY
+			if spawn_randomize != Vector3.ZERO:
+				body.transform.origin.x = randf() * spawn_randomize.x
+				body.transform.origin.y = randf() * spawn_randomize.y
+				body.transform.origin.z = randf() * spawn_randomize.z
+			var prev_collision = body.get_child(0)
+			body.remove_child(prev_collision)
+			prev_collision.queue_free()
+			body.add_child(collision)
 			body.set_sleeping(true)
 			spawn_parent.add_child(body)
 
 
 func _activate_objects():
+	Log.print_log("* Activating")
+
 	for spawn in spawns:
 		var spawn_parent = get_node(spawn)
-
-		Log.print_log("* Activating")
 
 		for node_index in range(spawn_parent.get_child_count()):
 			var node = spawn_parent.get_child(node_index) as RigidBody
@@ -174,10 +185,10 @@ func _activate_objects():
 
 
 func _despawn_objects():
+	Log.print_log("* Despawning")
+
 	for spawn in spawns:
 		var spawn_parent = get_node(spawn)
-
-		Log.print_log("* Despawning")
 
 		# Remove objects in reversed order to avoid the overhead of changing children index in parent.
 		var object_count = spawn_parent.get_child_count()

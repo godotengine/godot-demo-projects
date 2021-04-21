@@ -50,6 +50,10 @@ var _tests = [
 		"id": "Performance Tests/Contacts",
 		"path": "res://tests/performance/test_perf_contacts.tscn",
 	},
+	{
+		"id" : "Performance Tests/Contact Islands",
+		"path" : "res://tests/performance/test_perf_contact_islands.tscn",
+	},
 ]
 
 
