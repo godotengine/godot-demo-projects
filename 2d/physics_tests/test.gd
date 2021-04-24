@@ -83,23 +83,6 @@ func create_rigidbody(shape, pickable = false, transform = Transform.IDENTITY):
 	return body
 
 
-func create_rigidbody_collision(collision, pickable = false, transform = Transform.IDENTITY):
-	var collision_copy = collision.duplicate()
-	collision_copy.transform = transform
-
-	if collision is CollisionShape2D:
-		collision_copy.shape = collision.shape.duplicate()
-
-	var body = RigidBody2D.new()
-	body.add_child(collision_copy)
-
-	if pickable:
-		var script = load("res://utils/rigidbody_pick.gd")
-		body.set_script(script)
-
-	return body
-
-
 func create_rigidbody_box(size, pickable = false, use_icon = false, transform = Transform.IDENTITY):
 	var shape = RectangleShape2D.new()
 	shape.extents = 0.5 * size

@@ -6,15 +6,21 @@
 [ext_resource path="res://tests/static_scene.tscn" type="PackedScene" id=5]
 
 [sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.5, 0.5, 0.5 )
 
 [sub_resource type="CapsuleShape" id=2]
+radius = 0.5
+height = 0.5
 
 [sub_resource type="CylinderShape" id=3]
+radius = 0.5
+height = 1.0
 
 [sub_resource type="ConvexPolygonShape" id=4]
 points = PoolVector3Array( -0.7, 0, -0.7, -0.3, 0, 0.8, 0.8, 0, -0.3, 0, -1, 0 )
 
 [sub_resource type="SphereShape" id=5]
+radius = 0.5
 
 [sub_resource type="PlaneShape" id=6]
 
@@ -22,7 +28,8 @@ points = PoolVector3Array( -0.7, 0, -0.7, -0.3, 0, 0.8, 0.8, 0, -0.3, 0, -1, 0 )
 script = ExtResource( 1 )
 _enable_debug_collision = false
 spawns = [ "SpawnTarget1", "SpawnTarget2", "SpawnTarget3", "SpawnTarget4", "SpawnTarget5", "SpawnTarget6", "SpawnTarget7", "SpawnTarget8", "SpawnTarget9", "SpawnTarget10", "SpawnTarget11", "SpawnTarget12", "SpawnTarget13", "SpawnTarget14", "SpawnTarget15", "SpawnTarget16" ]
-spawn_count = 50
+spawn_count = 200
+spawn_randomize = Vector3( 0.2, 0.2, 0.2 )
 
 [node name="Options" parent="." instance=ExtResource( 4 )]
 
@@ -98,6 +105,7 @@ shape = SubResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="DynamicShapes/RigidBodyConvex"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 shape = SubResource( 4 )
 
 [node name="RigidBodySphere" type="RigidBody" parent="DynamicShapes"]
