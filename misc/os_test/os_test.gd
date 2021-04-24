@@ -95,6 +95,7 @@ func _ready():
 	][OS.screen_orientation])
 
 	add_header("Engine")
+	add_line("Version", Engine.get_version_info()["string"])
 	add_line("Command-line arguments", str(OS.get_cmdline_args()))
 	add_line("Is debug build", OS.is_debug_build())
 	add_line("Executable path", OS.get_executable_path())
