@@ -46,28 +46,19 @@ func add_sphere(pos, radius, color):
 
 
 func add_shape(shape, transform, color):
-	var body = StaticBody.new()
-	body.collision_layer = 0
-	body.collision_mask = 0
+	var debug_mesh = shape.get_debug_mesh()
 
-	var collision = CollisionShape.new()
-	collision.transform = transform
-	collision.shape = shape
+	var mesh_instance = MeshInstance.new()
+	mesh_instance.transform = transform
+	mesh_instance.mesh = debug_mesh
 
-	body.add_child(collision)
-
-	add_child(body)
-	_drawn_nodes.push_back(body)
-
-	call_deferred("initialize_shape_material", body, color)
-
-
-func initialize_shape_material(body, color):
-	var mesh_instance = body.get_child(1)
 	var material = SpatialMaterial.new()
 	material.flags_unshaded = true
 	material.albedo_color = color
 	mesh_instance.material_override = material
+
+	add_child(mesh_instance)
+	_drawn_nodes.push_back(mesh_instance)
 
 
 func clear_drawn_nodes():
