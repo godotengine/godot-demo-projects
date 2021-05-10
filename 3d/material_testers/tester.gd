@@ -1,10 +1,10 @@
-extends Spatial
+extends Node3D
 
 const INTERP_SPEED = 2
 const ROT_SPEED = 0.003
 const ZOOM_SPEED = 0.1
 const ZOOM_MAX = 2.5
-const MAIN_BUTTONS = BUTTON_MASK_LEFT | BUTTON_MASK_RIGHT | BUTTON_MASK_MIDDLE
+const MAIN_BUTTONS = MOUSE_BUTTON_MASK_LEFT | MOUSE_BUTTON_MASK_MIDDLE | MOUSE_BUTTON_MASK_RIGHT
 
 var tester_index = 0
 var rot_x = -0.5 # This must be kept in sync with RotationX.
@@ -20,12 +20,12 @@ var backgrounds = [
 	{ path = "res://backgrounds/experiment.hdr", name = "Experiment"},
 ]
 
-onready var testers = $Testers
-onready var material_name = $UI/MaterialName
+@onready var testers: Node3D = $Testers
+@onready var material_name: Label = $UI/MaterialName
 
-onready var camera_holder = $CameraHolder # Has a position and rotates on Y.
-onready var rotation_x = $CameraHolder/RotationX
-onready var camera = $CameraHolder/RotationX/Camera
+@onready var camera_holder: Node3D = $CameraHolder # Has a position and rotates on Y.
+@onready var rotation_x: Node3D = $CameraHolder/RotationX
+@onready var camera: Camera3D = $CameraHolder/RotationX/Camera
 
 func _ready():
 	for background in backgrounds:
@@ -34,12 +34,13 @@ func _ready():
 
 func _unhandled_input(ev):
 	if ev is InputEventMouseButton:
-		if ev.button_index == BUTTON_WHEEL_UP:
+		if ev.button_index == MOUSE_BUTTON_WHEEL_UP:
 			zoom -= ZOOM_SPEED
-		if ev.button_index == BUTTON_WHEEL_DOWN:
+		if ev.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			zoom += ZOOM_SPEED
 		zoom = clamp(zoom, 2, 8)
-		camera.translation.z = zoom
+		camera.position.z = zoom
+
 
 	if ev is InputEventMouseMotion and ev.button_mask & MAIN_BUTTONS:
 		# Compensate motion speed to be resolution-independent (based on the window height).
@@ -60,6 +61,8 @@ func _process(delta):
 	var current_position = camera_holder.transform.origin.x
 	camera_holder.transform.origin.x = lerp(current_position, target_position, INTERP_SPEED * delta)
 
+	$UI/FPS.text = "FPS: " + str(Performance.get_monitor(Performance.TIME_FPS))
+
 
 func _on_Previous_pressed():
 	if tester_index > 0:
@@ -72,4 +75,10 @@ func _on_Next_pressed():
 
 
 func _on_bg_item_selected(index):
-	get_node("WorldEnvironment").environment.background_sky.panorama = load(backgrounds[index].path)
+	var sky_material : PanoramaSkyMaterial = $WorldEnvironment.environment.sky.sky_material
+
+	sky_material.panorama = load(backgrounds[index].path)
+
+
+func _on_Quit_pressed():
+	get_tree().quit()
