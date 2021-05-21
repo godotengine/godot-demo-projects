@@ -36,7 +36,11 @@ var _tests = [
 	},
 	{
 		"id": "Functional Tests/RiggidBody impact",
-		"path": "res://tests/functional/test_RigidBody_impact.tscn",
+		"path": "res://tests/functional/test_rigidbody_impact.tscn",
+	},
+	{
+		"id": "Functional Tests/RiggidBody ground check",
+		"path": "res://tests/functional/test_rigidbody_ground_check.tscn",
 	},
 	{
 		"id": "Performance Tests/Broadphase",
