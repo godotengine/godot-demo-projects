@@ -15,12 +15,12 @@ func _integrate_forces(state:PhysicsDirectBodyState):
 	var delta = state.step
 	var velocity:Vector3 = (_forward *_dir *_walk_spd *delta) +(state.linear_velocity  *Vector3(0,1,0))
 	state.linear_velocity = state.linear_velocity.move_toward(velocity, _acceleration * delta)
-	
+
 	if state.transform.origin.z < -_distance:
 		_dir = -1
 	if state.transform.origin.z > _distance:
 		_dir = 1
-	
+
 	ground_check()
 
 func ground_check()->void:
