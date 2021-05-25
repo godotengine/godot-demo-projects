@@ -35,7 +35,7 @@ var _tests = [
 		"path": "res://tests/functional/test_raycasting.tscn",
 	},
 	{
-		"id": "Functional Tests/RiggidBody impact",
+		"id": "Functional Tests/RigidBody impact",
 		"path": "res://tests/functional/test_rigidbody_impact.tscn",
 	},
 	{
