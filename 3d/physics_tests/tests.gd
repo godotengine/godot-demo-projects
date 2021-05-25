@@ -39,7 +39,7 @@ var _tests = [
 		"path": "res://tests/functional/test_rigidbody_impact.tscn",
 	},
 	{
-		"id": "Functional Tests/RiggidBody ground check",
+		"id": "Functional Tests/RigidBody ground check",
 		"path": "res://tests/functional/test_rigidbody_ground_check.tscn",
 	},
 	{
