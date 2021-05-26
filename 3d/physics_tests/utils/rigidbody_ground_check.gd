@@ -1,7 +1,7 @@
 extends RigidBody
 
 
-onready var _forward = -transform.basis.z
+onready var _forward = - transform.basis.z
 onready var _collision_shape = $CollisionShape
 onready var _material = $CollisionShape/MeshInstance.get_surface_material(0)
 
@@ -18,9 +18,10 @@ func _process(_delta):
 	else:
 		_material.albedo_color = Color.red
 
+
 func _integrate_forces(state):
 	var delta = state.step
-	var velocity = (_forward *_dir *_walk_spd *delta) +(state.linear_velocity  *Vector3(0,1,0))
+	var velocity = (_forward * _dir * _walk_spd * delta) + (state.linear_velocity  * Vector3(0,1,0))
 	state.linear_velocity = state.linear_velocity.move_toward(velocity, _acceleration * delta)
 
 	if state.transform.origin.z < -_distance:
@@ -29,6 +30,7 @@ func _integrate_forces(state):
 		_dir = 1
 
 	ground_check()
+
 
 func ground_check():
 	var space_state = get_world().direct_space_state
