@@ -12,6 +12,7 @@ var _acceleration = 22.0
 var _gravity_impulse = 30.0
 var _is_on_floor = false
 
+
 func _process(_delta):
 	if _is_on_floor:
 		_material.albedo_color = Color.white
@@ -21,7 +22,7 @@ func _process(_delta):
 
 func _integrate_forces(state):
 	var delta = state.step
-	var velocity = (_forward * _dir * _walk_spd * delta) + (state.linear_velocity  * Vector3(0, 1, 0))
+	var velocity = (_forward * _dir * _walk_spd * delta) + (state.linear_velocity  * Vector3.UP)
 	state.linear_velocity = state.linear_velocity.move_toward(velocity, _acceleration * delta)
 
 	if state.transform.origin.z < -_distance:
