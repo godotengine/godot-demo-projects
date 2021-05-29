@@ -47,7 +47,8 @@ func _physics_process(delta):
 			world_delta = camera_basis * world_delta
 
 			var camera_dist = camera.global_transform.origin.distance_to(global_transform.origin)
-			world_delta *= CAMERA_DISTANCE_COEFFICIENT * camera_dist
+			var fov_coefficient = camera.fov / 70.0
+			world_delta *= CAMERA_DISTANCE_COEFFICIENT * camera_dist * fov_coefficient
 
 		if mode == MODE_STATIC:
 			global_transform.origin += world_delta
