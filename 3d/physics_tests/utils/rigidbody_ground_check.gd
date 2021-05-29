@@ -44,4 +44,3 @@ func ground_check():
 		_is_on_floor = true
 	else:
 		_is_on_floor = false
-
