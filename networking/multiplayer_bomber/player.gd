@@ -1,66 +1,58 @@
 extends CharacterBody2D
 
 const MOTION_SPEED = 90.0
+const BOMB_RATE = 0.5
 
-puppet var puppet_pos = Vector2()
-puppet var puppet_motion = Vector2()
+@export
+var synced_position := Vector2()
 
-@export var stunned = false
+@export
+var stunned = false
 
-# Use sync because it will be called everywhere
-remotesync func setup_bomb(bomb_name, pos, by_who):
-	var bomb = preload("res://bomb.tscn").instantiate()
-	bomb.set_name(bomb_name) # Ensure unique name for the bomb
-	bomb.position = pos
-	bomb.from_player = by_who
-	# No need to set network master to bomb, will be owned by server by default
-	get_node(^"../..").add_child(bomb)
-
+@onready
+var inputs = $Inputs
+var last_bomb_time = BOMB_RATE
 var current_anim = ""
-var prev_bombing = false
-var bomb_index = 0
+
+func _ready():
+	stunned = false
+	position = synced_position
+	if str(name).is_valid_int():
+		get_node("Inputs/InputsSync").set_multiplayer_authority(str(name).to_int())
 
 
-func _physics_process(_delta):
-	var motion = Vector2()
+func _physics_process(delta):
+	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
+		# The client which this player represent will update the controls state, and notify it to everyone.
+		inputs.update()
 
-	if is_network_master():
-		if Input.is_action_pressed(&"move_left"):
-			motion += Vector2(-1, 0)
-		if Input.is_action_pressed(&"move_right"):
-			motion += Vector2(1, 0)
-		if Input.is_action_pressed(&"move_up"):
-			motion += Vector2(0, -1)
-		if Input.is_action_pressed(&"move_down"):
-			motion += Vector2(0, 1)
-
-		var bombing = Input.is_action_pressed(&"set_bomb")
-
-		if stunned:
-			bombing = false
-			motion = Vector2()
-
-		if bombing and not prev_bombing:
-			var bomb_name = String(get_name()) + str(bomb_index)
-			var bomb_pos = position
-			rpc("setup_bomb", bomb_name, bomb_pos, get_tree().get_network_unique_id())
-
-		prev_bombing = bombing
-
-		rset("puppet_motion", motion)
-		rset("puppet_pos", position)
+	if multiplayer.multiplayer_peer == null or is_multiplayer_authority():
+		# The server updates the position that will be notified to the clients.
+		synced_position = position
+		# And increase the bomb cooldown spawning one if the client wants to.
+		last_bomb_time += delta
+		if not stunned and is_multiplayer_authority() and inputs.bombing and last_bomb_time >= BOMB_RATE:
+			last_bomb_time = 0.0
+			get_node("../../BombSpawner").spawn([position, str(name).to_int()])
 	else:
-		position = puppet_pos
-		motion = puppet_motion
+		# The client simply updates the position to the last known one.
+		position = synced_position
 
+	if not stunned:
+		# Everybody runs physics. I.e. clients tries to predict where they will be during the next frame.
+		velocity = inputs.motion * MOTION_SPEED
+		move_and_slide()
+
+	# Also update the animation based on the last known player input state
 	var new_anim = "standing"
-	if motion.y < 0:
+
+	if inputs.motion.y < 0:
 		new_anim = "walk_up"
-	elif motion.y > 0:
+	elif inputs.motion.y > 0:
 		new_anim = "walk_down"
-	elif motion.x < 0:
+	elif inputs.motion.x < 0:
 		new_anim = "walk_left"
-	elif motion.x > 0:
+	elif inputs.motion.x > 0:
 		new_anim = "walk_right"
 
 	if stunned:
@@ -68,30 +60,16 @@ func _physics_process(_delta):
 
 	if new_anim != current_anim:
 		current_anim = new_anim
-		get_node(^"anim").play(current_anim)
-
-	# TODO: This information should be set to the CharacterBody properties instead of arguments.
-	# FIXME: Use move_and_slide
-	move_and_slide(motion * MOTION_SPEED)
-	if not is_network_master():
-		puppet_pos = position # To avoid jitter
+		get_node("anim").play(current_anim)
 
 
-puppet func stun():
-	stunned = true
+func set_player_name(value):
+	get_node("label").text = value
 
 
-master func exploded(_by_who):
+@rpc(call_local)
+func exploded(_by_who):
 	if stunned:
 		return
-	rpc("stun") # Stun puppets
-	stun() # Stun master - could use sync to do both at once
-
-
-func set_player_name(new_name):
-	get_node(^"label").set_text(new_name)
-
-
-func _ready():
-	stunned = false
-	puppet_pos = position
+	stunned = true
+	get_node("anim").play("stunned")

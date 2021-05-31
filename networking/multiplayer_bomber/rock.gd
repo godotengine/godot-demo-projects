@@ -1,12 +1,6 @@
 extends CharacterBody2D
 
-# Sent to everyone else
-puppet func do_explosion():
+@rpc(call_local)
+func exploded(by_who):
+	$"../../Score".increase_score(by_who)
 	$"AnimationPlayer".play("explode")
-
-
-# Received by owner of the rock
-master func exploded(by_who):
-	rpc("do_explosion") # Re-sent to puppet rocks
-	$"../../Score".rpc("increase_score", by_who)
-	do_explosion()
