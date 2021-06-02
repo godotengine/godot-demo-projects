@@ -1,0 +1,86 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://utils/camera_orbit.gd" type="Script" id=1]
+[ext_resource path="res://tests/functional/test_moving_platform.gd" type="Script" id=2]
+[ext_resource path="res://tests/test_options.tscn" type="PackedScene" id=3]
+[ext_resource path="res://utils/kinematicbody_physics.gd" type="Script" id=4]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.3
+
+[sub_resource type="PhysicsMaterial" id=2]
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 2, 0.2, 1 )
+
+[sub_resource type="Animation" id=4]
+length = 4.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:translation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -7, -0.25, 0, 0.25, 0, -7, -0.25, 0, 0.245766, 0.531658, 6, -0.132614, -0.374802, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 4 )
+}
+
+[node name="Test" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="LabelBodyType" type="Label" parent="."]
+margin_left = 14.0
+margin_top = 78.0
+margin_right = 171.0
+margin_bottom = 92.0
+text = "Body Type: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" parent="." instance=ExtResource( 3 )]
+
+[node name="Bodies" type="Spatial" parent="."]
+
+[node name="KinematicBody" type="KinematicBody" parent="Bodies"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -1.95, 0 )
+collision_layer = 2
+script = ExtResource( 4 )
+_stop_on_slopes = true
+_use_snap = true
+
+[node name="CollisionShape" type="CollisionShape" parent="Bodies/KinematicBody"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, 0 )
+shape = SubResource( 1 )
+
+[node name="RigidBody" type="RigidBody" parent="Bodies"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -1.95, 0 )
+collision_layer = 4
+physics_material_override = SubResource( 2 )
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape" type="CollisionShape" parent="Bodies/RigidBody"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, 0 )
+shape = SubResource( 1 )
+
+[node name="Platforms" type="Spatial" parent="."]
+
+[node name="KinematicPlatform" type="KinematicBody" parent="Platforms"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -2, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Platforms/KinematicPlatform"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0 )
+shape = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/KinematicPlatform"]
+anims/Move = SubResource( 4 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
+script = ExtResource( 1 )
+
+[node name="OmniLight" type="OmniLight" parent="Camera"]
+omni_range = 50.0
