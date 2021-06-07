@@ -1,8 +1,7 @@
-extends KinematicBody
+extends Node
 
 # A simple script to rotate the model.
-onready var model = $Armature
-const SPEED = 40
+onready var model = $Model
 
 func _process(delta):
-	model.rotation_degrees.y += delta * SPEED
+	model.rotate_y(delta * 0.7)

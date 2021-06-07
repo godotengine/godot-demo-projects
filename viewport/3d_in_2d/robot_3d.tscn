@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://robot_3d.gd" type="Script" id=1]
 
@@ -65,157 +65,11 @@ emission_energy = 1.0
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="CapsuleShape" id=7]
-radius = 0.7
-height = 0.6
-
-[node name="Robot3D" type="KinematicBody"]
+[node name="Robot3D" type="Spatial"]
 script = ExtResource( 1 )
-__meta__ = {
-"__editor_plugin_screen__": "3D"
-}
 
-[node name="Armature" type="Spatial" parent="."]
+[node name="Model" type="MeshInstance" parent="."]
 transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0 )
-
-[node name="Skeleton" type="Skeleton" parent="Armature"]
-bones/0/name = "MASTER"
-bones/0/parent = -1
-bones/0/rest = Transform( 1, 0, 0, 0, 7.54979e-08, 1, 0, -1, 7.54979e-08, 0, -0.011277, 0 )
-bones/0/enabled = true
-bones/0/bound_children = [  ]
-bones/1/name = "hip"
-bones/1/parent = 0
-bones/1/rest = Transform( 1, -1.50996e-07, -3.60002e-14, -1.50996e-07, -1, -3.01992e-07, 9.59926e-15, 3.01992e-07, -1, -3.38813e-21, 2.58363e-07, 2.10612 )
-bones/1/enabled = true
-bones/1/bound_children = [  ]
-bones/2/name = "waist"
-bones/2/parent = 1
-bones/2/rest = Transform( 1, 1.50996e-07, 1.80001e-14, -1.50996e-07, 1, 0, -1.80001e-14, 0, 1, 3.38813e-21, 2.84217e-14, -0.384614 )
-bones/2/enabled = true
-bones/2/bound_children = [  ]
-bones/3/name = "chest"
-bones/3/parent = 2
-bones/3/rest = Transform( 1, -7.31455e-16, 4.86029e-17, 7.28861e-16, 0.999166, 0.040823, -7.84198e-17, -0.040823, 0.999166, 0, 4.84022e-11, -0.8217 )
-bones/3/enabled = true
-bones/3/bound_children = [  ]
-bones/4/name = "neck"
-bones/4/parent = 3
-bones/4/rest = Transform( -1, -1.10548e-06, -9.37766e-09, 1.08766e-06, -0.985328, 0.170671, -1.97913e-07, 0.170671, 0.985328, -1.64727e-13, 5.96046e-08, -1.24906 )
-bones/4/enabled = true
-bones/4/bound_children = [  ]
-bones/5/name = "headtracker"
-bones/5/parent = 4
-bones/5/rest = Transform( 1, 9.87793e-08, -1.09789e-06, 1.09743e-06, 0.00449866, 0.99999, 1.03717e-07, -0.99999, 0.00449866, 0, 5.96046e-08, -0.491774 )
-bones/5/enabled = true
-bones/5/bound_children = [  ]
-bones/6/name = "head"
-bones/6/parent = 5
-bones/6/rest = Transform( -1, 2.36978e-07, 1.97097e-07, -2.5035e-07, -0.25144, -0.967873, -1.79807e-07, -0.967873, 0.25144, -2.94648e-10, 4.76837e-07, 0.00400549 )
-bones/6/enabled = true
-bones/6/bound_children = [  ]
-bones/7/name = "vent"
-bones/7/parent = 6
-bones/7/rest = Transform( 1, -2.54965e-07, -1.4699e-08, 2.55005e-07, 0.999996, 0.00282324, 1.39791e-08, -0.00282325, 0.999996, -7.04808e-08, 0.270992, -1.2429 )
-bones/7/enabled = true
-bones/7/bound_children = [  ]
-bones/8/name = "r-arm"
-bones/8/parent = 3
-bones/8/rest = Transform( 0.11477, -0.699489, -0.705367, -0.802661, -0.483653, 0.349021, -0.585289, 0.526113, -0.616961, 0.940786, 0.107144, -0.773564 )
-bones/8/enabled = true
-bones/8/bound_children = [  ]
-bones/9/name = "r-forearm"
-bones/9/parent = 8
-bones/9/rest = Transform( -0.859542, 0.0564943, 0.507934, 0.107631, -0.951571, 0.287973, 0.499604, 0.302194, 0.811834, 2.38419e-07, -4.76837e-07, -0.935513 )
-bones/9/enabled = true
-bones/9/bound_children = [  ]
-bones/10/name = "l-arm"
-bones/10/parent = 3
-bones/10/rest = Transform( 0.11477, 0.699489, 0.705367, 0.802661, -0.483653, 0.349021, 0.585289, 0.526113, -0.616961, -0.940786, 0.107144, -0.773564 )
-bones/10/enabled = true
-bones/10/bound_children = [  ]
-bones/11/name = "l-forearm"
-bones/11/parent = 10
-bones/11/rest = Transform( -0.859542, -0.0564943, -0.507934, -0.107631, -0.951571, 0.287973, -0.499604, 0.302194, 0.811834, -2.38419e-07, -4.76837e-07, -0.935513 )
-bones/11/enabled = true
-bones/11/bound_children = [  ]
-bones/12/name = "r-thigh"
-bones/12/parent = 1
-bones/12/rest = Transform( 0.994883, -0.0545632, -0.085028, -0.0580629, -0.997541, -0.0392442, -0.0826777, 0.0439804, -0.995605, 0.349652, 0.0628238, -0.163877 )
-bones/12/enabled = true
-bones/12/bound_children = [  ]
-bones/13/name = "r-leg"
-bones/13/parent = 12
-bones/13/rest = Transform( -0.999508, -0.031366, -0.000870243, 0.0312939, -0.994411, -0.100835, 0.00229738, -0.100812, 0.994903, 5.96046e-08, 5.96046e-08, -0.644636 )
-bones/13/enabled = true
-bones/13/bound_children = [  ]
-bones/14/name = "r-foot"
-bones/14/parent = 13
-bones/14/rest = Transform( 0.996208, -0.0766666, -0.0411273, -0.0442384, -0.0393329, -0.998246, 0.0749145, 0.996281, -0.0425754, -5.96046e-08, 4.19095e-09, -1.43073 )
-bones/14/enabled = true
-bones/14/bound_children = [  ]
-bones/15/name = "l-thigh"
-bones/15/parent = 1
-bones/15/rest = Transform( 0.994883, 0.0545632, 0.085028, 0.0580633, -0.997541, -0.0392452, 0.0826776, 0.0439813, -0.995606, -0.349652, 0.0628238, -0.163877 )
-bones/15/enabled = true
-bones/15/bound_children = [  ]
-bones/16/name = "l-leg"
-bones/16/parent = 15
-bones/16/rest = Transform( -0.999508, 0.0313662, 0.000870456, -0.0312941, -0.994411, -0.100836, -0.00229725, -0.100814, 0.994903, 0, 1.49012e-08, -0.644636 )
-bones/16/enabled = true
-bones/16/bound_children = [  ]
-bones/17/name = "l-foot"
-bones/17/parent = 16
-bones/17/rest = Transform( 0.996208, 0.0766668, 0.0411275, 0.0442386, -0.0393327, -0.998246, -0.0749147, 0.996281, -0.0425752, 0, -8.3819e-09, -1.43073 )
-bones/17/enabled = true
-bones/17/bound_children = [  ]
-bones/18/name = "HEAD"
-bones/18/parent = 0
-bones/18/rest = Transform( 1, -1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, -1, 5.68434e-14, -5.79659, 6.35228 )
-bones/18/enabled = true
-bones/18/bound_children = [  ]
-bones/19/name = "r-LEGCONTROL"
-bones/19/parent = 0
-bones/19/rest = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.518863, 3.72276e-07, 0.204768 )
-bones/19/enabled = true
-bones/19/bound_children = [  ]
-bones/20/name = "l-LEGCONTROL"
-bones/20/parent = 0
-bones/20/rest = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.518863, 3.72276e-07, 0.204768 )
-bones/20/enabled = true
-bones/20/bound_children = [  ]
-bones/21/name = "r-LEGORIENT"
-bones/21/parent = 0
-bones/21/rest = Transform( -1, -1.50996e-07, -5.03577e-15, -3.75647e-14, 2.15429e-07, 1, -1.50996e-07, 1, -2.15429e-07, 0.411677, -0.66395, 1.62881 )
-bones/21/enabled = true
-bones/21/bound_children = [  ]
-bones/22/name = "l-LEGORIENT"
-bones/22/parent = 0
-bones/22/rest = Transform( -1, -1.50996e-07, -5.03577e-15, -3.75647e-14, 2.15429e-07, 1, -1.50996e-07, 1, -2.15429e-07, -0.411677, -0.66395, 1.62881 )
-bones/22/enabled = true
-bones/22/bound_children = [  ]
-bones/23/name = "r-ARMCONTROL"
-bones/23/parent = 0
-bones/23/rest = Transform( 1, 0, 0, 0, 7.54979e-08, -1, 0, 1, 7.54979e-08, 2.62535, -0.186879, 2.59016 )
-bones/23/enabled = true
-bones/23/bound_children = [  ]
-bones/24/name = "l-ARMCONTROL"
-bones/24/parent = 0
-bones/24/rest = Transform( 1, 0, 0, 0, 7.54979e-08, -1, 0, 1, 7.54979e-08, -2.62535, -0.186879, 2.59016 )
-bones/24/enabled = true
-bones/24/bound_children = [  ]
-bones/25/name = "r-ARMORIENT"
-bones/25/parent = 0
-bones/25/rest = Transform( 1, 0, 0, 0, 7.54979e-08, -1, 0, 1, 7.54979e-08, 1.57185, 0.510255, 3.44768 )
-bones/25/enabled = true
-bones/25/bound_children = [  ]
-bones/26/name = "l-ARMORIENT"
-bones/26/parent = 0
-bones/26/rest = Transform( 1, 0, 0, 0, 7.54979e-08, -1, 0, 1, 7.54979e-08, -1.57185, 0.510255, 3.44768 )
-bones/26/enabled = true
-bones/26/bound_children = [  ]
-
-[node name="Robot" type="MeshInstance" parent="Armature/Skeleton"]
 mesh = SubResource( 3 )
 material/0 = SubResource( 5 )
 material/1 = SubResource( 6 )
@@ -232,7 +86,3 @@ light_color = Color( 1, 0.915375, 0.816406, 1 )
 [node name="OmniLight2" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5788, 1.43155, 2.43657 )
 light_color = Color( 0.816406, 1, 0.995697, 1 )
-
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0 )
-shape = SubResource( 7 )
