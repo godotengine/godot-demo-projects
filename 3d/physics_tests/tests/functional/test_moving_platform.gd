@@ -46,7 +46,7 @@ func _ready():
 	options.connect("option_selected", self, "_on_option_selected")
 	options.connect("option_changed", self, "_on_option_changed")
 
-	_current_body_key = _key_list[_current_body_index]
+	spawn_body_index(_current_body_index)
 
 
 func _input(event):
@@ -89,9 +89,9 @@ func spawn_body_index(bodyIndex):
 		_current_body.queue_free()
 	_current_body_index = bodyIndex
 	_current_body_key = _key_list[bodyIndex]
-	var bodyParent = $Bodies
+	var body_parent = $Bodies
 	var body = _body_scene[ _key_list[bodyIndex] ].instance()
-	bodyParent.add_child(body)
+	body_parent.add_child(body)
 	_current_body = body
 	init_body()
 
@@ -101,9 +101,9 @@ func spawn_body_key(bodyKey):
 		_current_body.queue_free()
 	_current_body_key = bodyKey
 	_current_body_index = _key_list.find(bodyKey)
-	var bodyParent = $Bodies
+	var body_parent = $Bodies
 	var body = _body_scene[bodyKey].instance()
-	bodyParent.add_child(body)
+	body_parent.add_child(body)
 	_current_body = body
 	init_body()
 
@@ -117,10 +117,13 @@ func init_body():
 		_current_body.physics_material_override.rough = _rough
 		_current_body.physics_material_override.friction = 1.0 if _friction else 0.0
 
-	var animationPlayer = $Platforms/KinematicPlatform/AnimationPlayer
-	animationPlayer.stop()
-	animationPlayer.playback_process_mode = AnimationPlayer.ANIMATION_PROCESS_PHYSICS if _animation_physics else AnimationPlayer.ANIMATION_PROCESS_IDLE
-	animationPlayer.play("Move")
+	var animation_player = $Platforms/KinematicPlatform/AnimationPlayer
+	animation_player.stop()
+	if _animation_physics:
+		animation_player.playback_process_mode = AnimationPlayer.ANIMATION_PROCESS_PHYSICS 
+	else:
+		 animation_player.playback_process_mode = AnimationPlayer.ANIMATION_PROCESS_IDLE
+	animation_player.play("Move")
 
 	$LabelBodyType.text = "Body Type: " + _body_type[_current_body_index]
 
@@ -129,6 +132,6 @@ func get_packed_scene(node):
 	node.owner = self
 	for child in node.get_children():
 		child.owner = node
-	var packedScene = PackedScene.new()
-	packedScene.pack(node)
-	return packedScene
+	var packed_scene = PackedScene.new()
+	packed_scene.pack(node)
+	return packed_scene
