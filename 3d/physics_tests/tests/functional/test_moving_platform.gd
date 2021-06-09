@@ -84,25 +84,25 @@ func _on_option_changed(option, checked):
 			spawn_body_index(_current_body_index)
 
 
-func spawn_body_index(bodyIndex):
+func spawn_body_index(body_index):
 	if _current_body:
 		_current_body.queue_free()
-	_current_body_index = bodyIndex
-	_current_body_key = _key_list[bodyIndex]
+	_current_body_index = body_index
+	_current_body_key = _key_list[body_index]
 	var body_parent = $Bodies
-	var body = _body_scene[ _key_list[bodyIndex] ].instance()
+	var body = _body_scene[_key_list[body_index]].instance()
 	body_parent.add_child(body)
 	_current_body = body
 	init_body()
 
 
-func spawn_body_key(bodyKey):
+func spawn_body_key(body_key):
 	if _current_body:
 		_current_body.queue_free()
-	_current_body_key = bodyKey
-	_current_body_index = _key_list.find(bodyKey)
+	_current_body_key = body_key
+	_current_body_index = _key_list.find(body_key)
 	var body_parent = $Bodies
-	var body = _body_scene[bodyKey].instance()
+	var body = _body_scene[body_key].instance()
 	body_parent.add_child(body)
 	_current_body = body
 	init_body()
