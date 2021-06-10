@@ -35,12 +35,16 @@ var _tests = [
 		"path": "res://tests/functional/test_raycasting.tscn",
 	},
 	{
-		"id": "Functional Tests/RigidBody impact",
+		"id": "Functional Tests/RigidBody Impact",
 		"path": "res://tests/functional/test_rigidbody_impact.tscn",
 	},
 	{
-		"id": "Functional Tests/RigidBody ground check",
+		"id": "Functional Tests/RigidBody Ground Check",
 		"path": "res://tests/functional/test_rigidbody_ground_check.tscn",
+	},
+	{
+		"id": "Functional Tests/Moving Platform",
+		"path": "res://tests/functional/test_moving_platform.tscn",
 	},
 	{
 		"id": "Performance Tests/Broadphase",
