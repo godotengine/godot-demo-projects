@@ -1,14 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://preload.gd" type="Script" id=1]
-
-[sub_resource type="GDScript" id=1]
-script/source = "extends LinkButton
-
-func _on_LinkButton_button_up():
-	# warning-ignore:return_value_discarded
-	OS.shell_open(\"http://docs.godotengine.org/en/3.2/tutorials/io/background_loading.html#using-multiple-threads\")
-"
+[ext_resource path="res://link_button.gd" type="Script" id=2]
 
 [node name="Node" type="Node"]
 script = ExtResource( 1 )
@@ -63,7 +56,7 @@ margin_top = 80.0
 margin_right = 233.0
 margin_bottom = 94.0
 text = "http://docs.godotengine.org/en/3.2/tutorials/io/background_loading.html"
-script = SubResource( 1 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

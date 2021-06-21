@@ -2,13 +2,7 @@
 
 [ext_resource path="res://minimal.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main.gd" type="Script" id=2]
-
-[sub_resource type="GDScript" id=1]
-script/source = "extends LinkButton
-
-func _on_LinkButton_pressed():
-	OS.shell_open(\"https://github.com/godotengine/webrtc-native/releases\")
-"
+[ext_resource path="res://link_button.gd" type="Script" id=3]
 
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
@@ -28,7 +22,7 @@ margin_top = 293.0
 margin_right = 785.0
 margin_bottom = 307.0
 text = "Make sure to download the GDNative WebRTC Plugin and place it in the project folder"
-script = SubResource( 1 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
