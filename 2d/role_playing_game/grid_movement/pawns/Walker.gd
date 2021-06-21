@@ -1,6 +1,6 @@
-extends "Pawn.gd"
+extends Pawn
 
-onready var Grid = get_parent()
+onready var parent = get_parent()
 #warning-ignore:unused_class_variable
 export(PackedScene) var combat_actor
 #warning-ignore:unused_class_variable
@@ -16,7 +16,7 @@ func _process(_delta):
 		return
 	update_look_direction(input_direction)
 
-	var target_position = Grid.request_move(self, input_direction)
+	var target_position = parent.request_move(self, input_direction)
 	if target_position:
 		move_to(target_position)
 		$Tween.start()
