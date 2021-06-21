@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://combat/combatants/Combatant.gd" type="Script" id=1]
+[ext_resource path="res://combat/combatants/Health.gd" type="Script" id=2]
+[ext_resource path="res://combat/combatants/sprites/Sprite.tscn" type="PackedScene" id=3]
+
+[node name="Combatant" type="Node2D"]
+script = ExtResource( 1 )
+damage = 2
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource( 2 )
+life = 10
+
+[node name="Sprite" parent="." instance=ExtResource( 3 )]

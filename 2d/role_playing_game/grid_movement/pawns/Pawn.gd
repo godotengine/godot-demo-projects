@@ -1,3 +1,4 @@
+class_name Pawn
 extends Node2D
 
 enum CellType { ACTOR, OBSTACLE, OBJECT }

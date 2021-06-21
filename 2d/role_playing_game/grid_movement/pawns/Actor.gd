@@ -1,4 +1,4 @@
-extends "Pawn.gd"
+extends Pawn
 
 onready var Grid = get_parent()
 var lost = false

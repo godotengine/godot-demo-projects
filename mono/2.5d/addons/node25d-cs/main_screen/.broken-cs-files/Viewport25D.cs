@@ -24,8 +24,6 @@ public class Viewport25D : Control
     public async override void _Ready()
     {
         // Give Godot a chance to fully load the scene. Should take two frames.
-        //yield(get_tree(), "idle_frame");
-        //yield(get_tree(), "idle_frame");
         await ToSignal(GetTree(), "idle_frame");
         await ToSignal(GetTree(), "idle_frame");
         var editedSceneRoot = GetTree().EditedSceneRoot;
