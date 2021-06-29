@@ -11,4 +11,4 @@ func _physics_process(_delta):
 
 
 func _on_StateMachine_state_changed(current_state):
-	text = current_state.get_name()
+	text = String(current_state.get_name())

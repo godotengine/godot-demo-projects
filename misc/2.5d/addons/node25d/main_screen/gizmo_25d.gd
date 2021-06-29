@@ -23,14 +23,14 @@ onready var lines_root = $Lines
 onready var lines = [$Lines/X, $Lines/Y, $Lines/Z]
 
 func _process(_delta):
-	if !lines:
+	if not lines:
 		return # Somehow this node hasn't been set up yet.
-	if !node_25d:
+	if not node_25d:
 		return # We're most likely viewing the Gizmo25D scene.
 	# While getting the mouse position works in any viewport, it doesn't do
 	# anything significant unless the mouse is in the 2.5D viewport.
 	var mouse_position = get_local_mouse_position()
-	if !_moving:
+	if not _moving:
 		# If the mouse is farther than this many pixels, it won't grab anything.
 		var closest_distance = 20.0
 		dominant_axis = -1
@@ -46,9 +46,9 @@ func _process(_delta):
 			return
 
 	lines[dominant_axis].modulate.a = 1
-	if !wants_to_move:
+	if not wants_to_move:
 		_moving = false
-	elif wants_to_move and !_moving:
+	elif wants_to_move and not _moving:
 		_moving = true
 		_start_position = mouse_position
 
@@ -90,7 +90,7 @@ func initialize():
 # specialized for this script, it assumes that each segment starts at
 # (0, 0) and it provides a deadzone around the origin.
 func _distance_to_segment_at_index(index, point):
-	if !lines:
+	if not lines:
 		return INF
 	if point.length_squared() < 400:
 		return INF

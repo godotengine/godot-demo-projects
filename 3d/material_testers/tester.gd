@@ -54,7 +54,7 @@ func _unhandled_input(ev):
 
 func _process(delta):
 	var current_tester = testers.get_child(tester_index)
-	material_name.text = current_tester.get_name()
+	material_name.text = String(current_tester.get_name())
 	# This code assumes CameraHolder's Y and Z coordinates are already correct.
 	var target_position = current_tester.transform.origin.x
 	var current_position = camera_holder.transform.origin.x

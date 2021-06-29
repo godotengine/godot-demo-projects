@@ -53,7 +53,7 @@ func _on_connected():
 	var query = payment.queryPurchases("inapp") # Use "subs" for subscriptions.
 	if query.status == OK:
 		for purchase in query.purchases:
-			if !purchase.is_acknowledged:
+			if not purchase.is_acknowledged:
 				print("Purchase " + str(purchase.sku) + " has not been acknowledged. Acknowledging...")
 				payment.acknowledgePurchase(purchase.purchase_token)
 	else:
@@ -70,7 +70,7 @@ func _on_purchases_updated(purchases):
 
 	# See _on_connected
 	for purchase in purchases:
-		if !purchase.is_acknowledged:
+		if not purchase.is_acknowledged:
 			print("Purchase " + str(purchase.sku) + " has not been acknowledged. Acknowledging...")
 			payment.acknowledgePurchase(purchase.purchase_token)
 

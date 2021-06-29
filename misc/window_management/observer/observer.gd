@@ -28,7 +28,7 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		r_pos = -event.relative
 
-	if event.is_action("ui_cancel") and event.is_pressed() and !event.is_echo():
+	if event.is_action("ui_cancel") and event.is_pressed() and not event.is_echo():
 		if (state == STATE_GRAB):
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			state = STATE_MENU

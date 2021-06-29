@@ -49,13 +49,13 @@ func _physics_process(dt):
 	var col = ds.intersect_ray(target, target + delta, collision_exception)
 	var col_right = ds.intersect_ray(target, target + Basis(Vector3.UP, deg2rad(-autoturn_ray_aperture)).xform(delta), collision_exception)
 
-	if !col.empty():
+	if not col.empty():
 		# If main ray was occluded, get camera closer, this is the worst case scenario.
 		delta = col.position - target
-	elif !col_left.empty() and col_right.empty():
+	elif not col_left.empty() and col_right.empty():
 		# If only left ray is occluded, turn the camera around to the right.
 		delta = Basis(Vector3.UP, deg2rad(-dt * autoturn_speed)).xform(delta)
-	elif col_left.empty() and !col_right.empty():
+	elif col_left.empty() and not col_right.empty():
 		# If only right ray is occluded, turn the camera around to the left.
 		delta = Basis(Vector3.UP, deg2rad(dt  *autoturn_speed)).xform(delta)
 	# Do nothing otherwise, left and right are occluded but center is not, so do not autoturn.

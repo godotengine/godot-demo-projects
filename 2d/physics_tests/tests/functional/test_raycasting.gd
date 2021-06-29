@@ -25,7 +25,7 @@ func _physics_process(_delta):
 	for node in $Shapes.get_children():
 		var body = node as PhysicsBody2D
 		var space_state = body.get_world_2d().direct_space_state
-		var body_name = body.name.substr("RigidBody".length())
+		var body_name = String(body.name).substr("RigidBody".length())
 
 		Log.print_log("* Testing: %s" % body_name)
 
@@ -45,7 +45,7 @@ func _physics_process(_delta):
 		res = _add_raycast(space_state, center, center + Vector2(0, 40))
 		Log.print_log("Raycast inside: %s" % ("HIT" if res else "NO HIT"))
 
-		if body.name.ends_with("ConcavePolygon"):
+		if String(body.name).ends_with("ConcavePolygon"):
 			# Raycast inside an internal face.
 			center.x += 20
 			res = _add_raycast(space_state, center, center + Vector2(0, 40))

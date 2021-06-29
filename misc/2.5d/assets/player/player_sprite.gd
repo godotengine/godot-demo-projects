@@ -103,7 +103,7 @@ func _check_movement() -> bool:
 
 	# Check for isometric controls and add more to movement accordingly.
 	# For efficiency, only check the X axis since this X axis value isn't used anywhere else.
-	if !_parent_math.isometric_controls and is_equal_approx(Node25D.SCALE * 0.86602540378, _parent_node25d.get_basis()[0].x):
+	if not _parent_math.isometric_controls and is_equal_approx(Node25D.SCALE * 0.86602540378, _parent_node25d.get_basis()[0].x):
 		if Input.is_action_pressed("move_right"):
 			z += 1
 		if Input.is_action_pressed("move_left"):
