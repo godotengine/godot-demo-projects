@@ -41,7 +41,6 @@ use_filter = true
 font_data = ExtResource( 14 )
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 628.826, 391.266 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ]
@@ -81,11 +80,11 @@ texture = ExtResource( 9 )
 [node name="BodyPivot" type="Position2D" parent="."]
 
 [node name="Body" type="Sprite" parent="BodyPivot"]
-position = Vector2( 0, -58.8242 )
+position = Vector2( 0, -58 )
 texture = ExtResource( 10 )
 
 [node name="BulletSpawn" type="Node2D" parent="BodyPivot"]
-position = Vector2( 1.17401, -61.266 )
+position = Vector2( 0, -58 )
 script = ExtResource( 11 )
 
 [node name="CooldownTimer" type="Timer" parent="BodyPivot/BulletSpawn"]
@@ -93,7 +92,7 @@ wait_time = 0.2
 one_shot = true
 
 [node name="WeaponPivot" type="Position2D" parent="BodyPivot"]
-position = Vector2( 1.17401, -61.266 )
+position = Vector2( 0, -58 )
 script = ExtResource( 12 )
 
 [node name="Offset" type="Position2D" parent="BodyPivot/WeaponPivot"]
@@ -110,11 +109,14 @@ margin_top = -172.0
 margin_right = 110.0
 margin_bottom = -138.0
 custom_fonts/font = SubResource( 4 )
-text = "Test"
+text = "Idle"
 align = 1
 valign = 1
 uppercase = true
 script = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="state_changed" from="StateMachine" to="BodyPivot/WeaponPivot/Offset/Sword" method="_on_StateMachine_state_changed"]
 [connection signal="state_changed" from="StateMachine" to="StateNameDisplayer" method="_on_StateMachine_state_changed"]

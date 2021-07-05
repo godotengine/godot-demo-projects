@@ -4,14 +4,15 @@ var bullet = preload("Bullet.tscn")
 
 func _unhandled_input(event):
 	if event.is_action_pressed("fire"):
-		fire(owner.look_direction)
+		fire()
 
 
-func fire(direction):
+func fire():
 	if not $CooldownTimer.is_stopped():
 		return
 
 	$CooldownTimer.start()
 	var new_bullet = bullet.instance()
-	new_bullet.direction = direction
 	add_child(new_bullet)
+	new_bullet.position = global_position
+	new_bullet.direction = owner.look_direction
