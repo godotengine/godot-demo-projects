@@ -60,7 +60,7 @@ func get_basis():
 
 
 func get_spatial_position():
-	if !_spatial_node:
+	if not _spatial_node:
 		_spatial_node = get_child(0)
 	return _spatial_node.translation
 

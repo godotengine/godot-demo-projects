@@ -56,7 +56,7 @@ func _physics_process(delta):
 	if is_on_floor():
 		var sharp_turn = hspeed > 0.1 and rad2deg(acos(dir.dot(hdir))) > SHARP_TURN_THRESHOLD
 
-		if dir.length() > 0.1 and !sharp_turn:
+		if dir.length() > 0.1 and not sharp_turn:
 			if hspeed > 0.001:
 				hdir = adjust_facing(hdir, dir, delta, 1.0 / hspeed * TURN_SPEED, Vector3.UP)
 			else:

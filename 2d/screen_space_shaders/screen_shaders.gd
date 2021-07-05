@@ -8,9 +8,9 @@ onready var pictures = $Pictures
 
 func _ready():
 	for c in pictures.get_children():
-		picture.add_item("PIC: " + c.get_name())
+		picture.add_item("PIC: " + String(c.get_name()))
 	for c in effects.get_children():
-		effect.add_item("FX: " + c.get_name())
+		effect.add_item("FX: " + String(c.get_name()))
 
 
 func _on_picture_item_selected(ID):

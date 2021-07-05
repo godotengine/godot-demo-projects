@@ -7,7 +7,7 @@ onready var voxel_world = $"../VoxelWorld"
 
 func _process(_delta):
 	if Input.is_action_just_pressed("debug"):
-		visible = !visible
+		visible = not visible
 
 	text = "Position: " + _vector_to_string_appropriate_digits(player.transform.origin)
 	text += "\nEffective render distance: " + str(voxel_world.effective_render_distance)

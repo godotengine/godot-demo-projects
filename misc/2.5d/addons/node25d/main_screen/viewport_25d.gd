@@ -21,7 +21,7 @@ func _ready():
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	var edited_scene_root = get_tree().edited_scene_root
-	if !edited_scene_root:
+	if not edited_scene_root:
 		# Godot hasn't finished loading yet, so try loading the plugin again.
 		editor_interface.set_plugin_enabled("node25d", false)
 		editor_interface.set_plugin_enabled("node25d", true)
@@ -34,7 +34,7 @@ func _ready():
 
 
 func _process(delta):
-	if !editor_interface: # Something's not right... bail!
+	if not editor_interface: # Something's not right... bail!
 		return
 
 	# View mode polling.
@@ -70,9 +70,9 @@ func _process(delta):
 	for overlay_child in overlay_children:
 		var contains = false
 		for selected in selection:
-			if selected == overlay_child.node_25d and !view_mode_changed_this_frame:
+			if selected == overlay_child.node_25d and not view_mode_changed_this_frame:
 				contains = true
-		if !contains:
+		if not contains:
 			overlay_child.queue_free()
 
 	# Add new gizmos.

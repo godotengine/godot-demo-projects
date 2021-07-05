@@ -41,7 +41,7 @@ func _physics_process(_delta):
 			motion = Vector2()
 
 		if bombing and not prev_bombing:
-			var bomb_name = get_name() + str(bomb_index)
+			var bomb_name = String(get_name()) + str(bomb_index)
 			var bomb_pos = position
 			rpc("setup_bomb", bomb_name, bomb_pos, get_tree().get_network_unique_id())
 

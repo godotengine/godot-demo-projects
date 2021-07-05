@@ -87,7 +87,7 @@ func _on_option_selected(option):
 func _find_type_index(type_name):
 	for type_index in range(_object_templates.size()):
 		var type_node = _object_templates[type_index]
-		if type_node.name.find(type_name) > -1:
+		if String(type_node.name).find(type_name) > -1:
 			return type_index
 
 	Log.print_error("Invalid shape type: " + type_name)

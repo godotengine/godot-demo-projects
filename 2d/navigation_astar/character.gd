@@ -6,7 +6,7 @@ const MASS = 10.0
 const ARRIVE_DISTANCE = 10.0
 
 export(float) var speed = 200.0
-var _state = null
+var _state = States.IDLE
 
 var _path = []
 var _target_point_world = Vector2()

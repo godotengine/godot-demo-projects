@@ -16,7 +16,7 @@ func _process(delta):
 		return
 
 	if Input.is_action_just_pressed("toggle_isometric_controls"):
-		isometric_controls = !isometric_controls
+		isometric_controls = not isometric_controls
 	if Input.is_action_just_pressed("reset_position"):
 		transform = Transform(Basis(), Vector3.UP * 10)
 		vertical_speed = 0

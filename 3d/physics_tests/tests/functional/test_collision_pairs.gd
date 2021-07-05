@@ -95,7 +95,7 @@ func _initialize_collision_shapes():
 	for node in $Shapes.get_children():
 		var body = node as PhysicsBody
 		var shape = body.shape_owner_get_shape(0, 0)
-		shape.resource_name = node.name.substr("RigidBody".length())
+		shape.resource_name = String(node.name).substr("RigidBody".length())
 
 		_collision_shapes.push_back(shape)
 

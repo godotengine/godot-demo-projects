@@ -27,7 +27,7 @@ func strsec(secs):
 
 
 func _process(_delta):
-	if !playing or !$Player.playing:
+	if not playing or not $Player.playing:
 		return
 
 	var time = 0.0
