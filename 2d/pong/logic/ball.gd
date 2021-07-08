@@ -2,10 +2,10 @@ extends Area2D
 
 const DEFAULT_SPEED = 100
 
+var _speed = DEFAULT_SPEED
 var direction = Vector2.LEFT
 
 onready var _initial_pos = position
-onready var _speed = DEFAULT_SPEED
 
 func _process(delta):
 	_speed += delta * 2

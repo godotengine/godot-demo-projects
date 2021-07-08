@@ -12,7 +12,7 @@ var _loaded = false
 func _enter_tree():
 	if Settings._loaded:
 		printerr("Error: Settings is an AutoLoad singleton and it shouldn't be instanced elsewhere.")
-		printerr("Please delete the instance at: " + get_path())
+		printerr("Please delete the instance at: " + String(get_path()))
 	else:
 		Settings._loaded = true
 
