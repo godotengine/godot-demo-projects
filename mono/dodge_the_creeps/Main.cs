@@ -83,8 +83,8 @@ public class Main : Node
         direction += (float)GD.RandRange(-Mathf.Pi / 4, Mathf.Pi / 4);
         mob.Rotation = direction;
 
-        // Choose the velocity.
-        var velocity = new Vector2((float)GD.RandRange(mob.minSpeed, mob.maxSpeed), 0);
+        // Choose the velocity for the mob.
+        var velocity = new Vector2((float)GD.RandRange(150.0, 250.0), 0);
         mob.LinearVelocity = velocity.Rotated(direction);
     }
 }

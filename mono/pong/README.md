@@ -12,6 +12,8 @@ Note: There is a GDScript version available [here](https://github.com/godotengin
 
 Note: There is a VisualScript version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/visual_script/pong).
 
+Note: There is a GDNative C++ version available [here](https://github.com/godotengine/gdnative-demos/tree/master/cpp/pong).
+
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/535
 
 ## How does it work?
