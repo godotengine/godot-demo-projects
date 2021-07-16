@@ -72,19 +72,19 @@ height = 1.0
 [sub_resource type="PlaneMesh" id=23]
 size = Vector2( 50, 20 )
 
+[sub_resource type="ConvexPolygonShape" id=24]
+points = PoolVector3Array( 25, 0, 10, -25, 0, 10, 25, 0, -10, -25, 0, -10 )
+
 [sub_resource type="ConvexPolygonShape" id=25]
 points = PoolVector3Array( 25, 0, 10, -25, 0, 10, 25, 0, -10, -25, 0, -10 )
 
 [sub_resource type="ConvexPolygonShape" id=26]
-points = PoolVector3Array( 25, 0, 10, -25, 0, 10, 25, 0, -10, -25, 0, -10 )
-
-[sub_resource type="ConvexPolygonShape" id=31]
 points = PoolVector3Array( 50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, -50 )
 
-[sub_resource type="ConcavePolygonShape" id=24]
+[sub_resource type="ConcavePolygonShape" id=27]
 data = PoolVector3Array( -1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1 )
 
-[sub_resource type="ConcavePolygonShape" id=32]
+[sub_resource type="ConcavePolygonShape" id=28]
 data = PoolVector3Array( 50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50 )
 
 [sub_resource type="BoxShape" id=29]
@@ -227,7 +227,7 @@ mesh = SubResource( 23 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Floors/ConvexSmall/ConvexFloor"]
-shape = SubResource( 25 )
+shape = SubResource( 24 )
 
 [node name="ConvexFloor2" type="StaticBody" parent="Floors/ConvexSmall"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
@@ -240,8 +240,7 @@ mesh = SubResource( 23 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Floors/ConvexSmall/ConvexFloor2"]
-visible = false
-shape = SubResource( 26 )
+shape = SubResource( 25 )
 
 [node name="ConvexBig" type="Spatial" parent="Floors"]
 
@@ -255,7 +254,7 @@ mesh = SubResource( 23 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Floors/ConvexBig/ConvexFloor"]
-shape = SubResource( 31 )
+shape = SubResource( 26 )
 
 [node name="ConcaveSmall" type="Spatial" parent="Floors"]
 
@@ -271,7 +270,7 @@ material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Floors/ConcaveSmall/ConcaveFloor"]
 transform = Transform( 25, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0 )
-shape = SubResource( 24 )
+shape = SubResource( 27 )
 
 [node name="ConcaveFloor2" type="StaticBody" parent="Floors/ConcaveSmall"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
@@ -285,7 +284,7 @@ material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Floors/ConcaveSmall/ConcaveFloor2"]
 transform = Transform( 25, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0 )
-shape = SubResource( 24 )
+shape = SubResource( 27 )
 
 [node name="ConcaveBig" type="Spatial" parent="Floors"]
 
@@ -299,7 +298,7 @@ mesh = SubResource( 23 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Floors/ConcaveBig/ConcaveFloor"]
-shape = SubResource( 32 )
+shape = SubResource( 28 )
 
 [node name="BoxSmall" type="Spatial" parent="Floors"]
 
@@ -348,6 +347,7 @@ shape = SubResource( 30 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.604, 22.124 )
+far = 1000.0
 script = ExtResource( 4 )
 
 [node name="OmniLight" type="OmniLight" parent="Camera"]

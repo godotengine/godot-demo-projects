@@ -20,12 +20,12 @@ var _current_floor
 func _ready():
 	var options = $Options
 	_dynamic_shapes_scene = get_packed_scene($DynamicShapes/Bodies)
-	_floor_shapes[SHAPE_CONVEX+"Small"] = get_packed_scene($"Floors/ConvexSmall")
-	_floor_shapes[SHAPE_CONVEX+"Big"] = get_packed_scene($"Floors/ConvexBig")
-	_floor_shapes[SHAPE_CONCAVE+"Big"] = get_packed_scene($"Floors/ConcaveBig")
-	_floor_shapes[SHAPE_CONCAVE+"Small"] = get_packed_scene($"Floors/ConcaveSmall")
-	_floor_shapes[SHAPE_BOX+"Big"] = get_packed_scene($"Floors/BoxBig")
-	_floor_shapes[SHAPE_BOX+"Small"] = get_packed_scene($"Floors/BoxSmall")
+	_floor_shapes[SHAPE_CONVEX + "Small"] = get_packed_scene($"Floors/ConvexSmall")
+	_floor_shapes[SHAPE_CONVEX + "Big"] = get_packed_scene($"Floors/ConvexBig")
+	_floor_shapes[SHAPE_CONCAVE + "Big"] = get_packed_scene($"Floors/ConcaveBig")
+	_floor_shapes[SHAPE_CONCAVE + "Small"] = get_packed_scene($"Floors/ConcaveSmall")
+	_floor_shapes[SHAPE_BOX + "Big"] = get_packed_scene($"Floors/BoxBig")
+	_floor_shapes[SHAPE_BOX + "Small"] = get_packed_scene($"Floors/BoxSmall")
 	$DynamicShapes/Bodies.queue_free()
 	for floorNode in $Floors.get_children():
 		floorNode.queue_free()
