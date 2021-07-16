@@ -12,7 +12,7 @@ const OPTION_PROCESS_PHYSICS = "Physics options/AnimationPlayer physics process 
 
 const SHAPE_CAPSULE = "Collision shapes/Capsule"
 const SHAPE_BOX = "Collision shapes/Box"
-const SHAPE_CILINDER = "Collision shapes/Cilinder"
+const SHAPE_CYLINDER = "Collision shapes/Cylinder"
 const SHAPE_SPHERE = "Collision shapes/Sphere"
 const SHAPE_CONVEX = "Collision shapes/Convex"
 const SHAPE_RAY = "Collision shapes/Ray"
@@ -48,7 +48,7 @@ func _ready():
 
 	options.add_menu_item(SHAPE_CAPSULE)
 	options.add_menu_item(SHAPE_BOX)
-	options.add_menu_item(SHAPE_CILINDER)
+	options.add_menu_item(SHAPE_CYLINDER)
 	options.add_menu_item(SHAPE_SPHERE)
 	options.add_menu_item(SHAPE_CONVEX)
 	options.add_menu_item(SHAPE_RAY)
@@ -65,7 +65,7 @@ func _ready():
 
 	_shapes[SHAPE_CAPSULE] = "Capsule"
 	_shapes[SHAPE_BOX] = "Box"
-	_shapes[SHAPE_CILINDER] = "Cilinder"
+	_shapes[SHAPE_CYLINDER] = "Cylinder"
 	_shapes[SHAPE_SPHERE] = "Sphere"
 	_shapes[SHAPE_CONVEX] = "Convex"
 	_shapes[SHAPE_RAY] = "Ray"
@@ -93,8 +93,8 @@ func _on_option_selected(option):
 			SHAPE_BOX:
 				_current_shape = _shapes[SHAPE_BOX]
 				spawn_body_index(_current_body_index)
-			SHAPE_CILINDER:
-				_current_shape = _shapes[SHAPE_CILINDER]
+			SHAPE_CYLINDER:
+				_current_shape = _shapes[SHAPE_CYLINDER]
 				spawn_body_index(_current_body_index)
 			SHAPE_SPHERE:
 				_current_shape = _shapes[SHAPE_SPHERE]
