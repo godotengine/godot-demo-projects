@@ -69,7 +69,6 @@ func restart_scene():
 
 
 func get_packed_scene(node):
-	node.owner = self
 	for child in node.get_children():
 		child.owner = node
 		for child1 in child.get_children():

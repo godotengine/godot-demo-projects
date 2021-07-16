@@ -182,7 +182,6 @@ func start_test():
 
 
 func get_packed_scene(node):
-	node.owner = self
 	for child in node.get_children():
 		child.owner = node
 	var packed_scene = PackedScene.new()
