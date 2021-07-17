@@ -61,7 +61,7 @@ func restart_scene():
 	_current_bodies = dynamic_bodies
 	add_child(dynamic_bodies)
 
-	var floor_inst = _floor_shapes[_current_floor_name+_floor_size].instance()
+	var floor_inst = _floor_shapes[_current_floor_name + _floor_size].instance()
 	_current_floor = floor_inst
 	$Floors.add_child(floor_inst)
 
@@ -78,5 +78,4 @@ func get_packed_scene(node):
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(node)
 	return packed_scene
-
 
