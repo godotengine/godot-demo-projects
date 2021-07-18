@@ -78,12 +78,8 @@ func _gui_input(event):
 			if not event.pressed and base_state.has(event.index):
 				# Some known touching finger released.
 
-				# Remove released finger from the base state.
-				base_state.erase(event.index)
-				# Reset the base state to the now only toyching finger.
-				base_state = {
-					curr_state.keys()[0]: curr_state.values()[0],
-				}
+				# Clear the base state
+				base_state.clear()
 
 		elif event is InputEventScreenDrag:
 			if curr_state.has(event.index):
