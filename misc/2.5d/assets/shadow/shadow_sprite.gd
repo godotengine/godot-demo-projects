@@ -27,7 +27,7 @@ func _process(_delta):
 func set_view_mode(view_mode_index):
 	match view_mode_index:
 		0: # 45 Degrees
-			texture = _forty_five;
+			texture = _forty_five
 		1: # Isometric
 			texture = _isometric
 		2: # Top Down

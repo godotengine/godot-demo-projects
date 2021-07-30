@@ -63,12 +63,11 @@ public class PlayerMath25D : KinematicBody
             localZ = new Vector3(0.70710678118f, 0, 0.70710678118f);
         }
 
-        // Gather player input and add directional movement to force Vector3 variables
-        Vector3 moveDir = Vector3.Zero;
-        moveDir += localX * (Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left"));
-        moveDir += localZ * (Input.GetActionStrength("move_back") - Input.GetActionStrength("move_forward"));
+        // Gather player input and add directional movement to a Vector3 variable.
+        Vector2 movementVec2 = Input.GetVector("move_left", "move_right", "move_forward", "move_back");
+        Vector3 moveDir = localX * movementVec2.x + localZ * movementVec2.y;
 
-        moveDir = moveDir.Normalized() * delta * 600;
+        moveDir = moveDir * delta * 600;
         if (Input.IsActionPressed("movement_modifier"))
         {
             moveDir /= 2;

@@ -41,7 +41,7 @@ func regenerate():
 
 	# Then generate new ones.
 	_generate_chunk_collider()
-	_generate_chunk_mesh(0)
+	_generate_chunk_mesh()
 
 
 func _generate_chunk_collider():
@@ -61,7 +61,7 @@ func _generate_chunk_collider():
 			_create_block_collider(block_position)
 
 
-func _generate_chunk_mesh(_this_argument_exists_due_to_bug_9924):
+func _generate_chunk_mesh():
 	if data.empty():
 		return
 

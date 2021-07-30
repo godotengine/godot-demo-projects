@@ -35,13 +35,12 @@ func _horizontal_movement(delta):
 		localZ = Vector3(0.70710678118, 0, 0.70710678118)
 
 	# Gather player input and add directional movement to a Vector3 variable.
-	var move_dir = Vector3()
-	move_dir += localX * (Input.get_action_strength("move_right") - Input.get_action_strength("move_left"))
-	move_dir += localZ * (Input.get_action_strength("move_back") - Input.get_action_strength("move_forward"))
+	var movement_vec2 = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	var move_dir = localX * movement_vec2.x + localZ * movement_vec2.y
 
-	move_dir = move_dir.normalized() * delta * 600;
+	move_dir = move_dir * delta * 600
 	if Input.is_action_pressed("movement_modifier"):
-		move_dir /= 2;
+		move_dir /= 2
 
 	#warning-ignore:return_value_discarded
 	move_and_slide(move_dir)
@@ -53,6 +52,6 @@ func _vertical_movement(delta):
 	if Input.is_action_just_pressed("jump"):
 		vertical_speed = 1.25
 	vertical_speed -= delta * 5 # Gravity
-	var k = move_and_collide(localY * vertical_speed);
+	var k = move_and_collide(localY * vertical_speed)
 	if k != null:
 		vertical_speed = 0

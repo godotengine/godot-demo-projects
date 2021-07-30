@@ -67,11 +67,10 @@ func _physics_process(delta):
 		head.transform.origin = Vector3(0, 1.6, 0)
 
 	# Keyboard movement.
-	var movement = transform.basis.xform(Vector3(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		0,
-		Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
-	).normalized() * (1 if crouching else 5))
+	var movement_vec2 = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	var movement = transform.basis.xform(Vector3(movement_vec2.x, 0, movement_vec2.y))
+	if !crouching:
+		movement *= 5
 
 	# Gravity.
 	velocity.y -= gravity * delta
