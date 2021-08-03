@@ -36,7 +36,7 @@ func _ready():
 	options.add_menu_item(SHAPE_CONVEX)
 	options.add_menu_item(SHAPE_BOX)
 
-	options.connect("option_selected", self, "_on_option_selected")
+	options.connect("option_selected", Callable(self, "_on_option_selected"))
 	restart_scene()
 
 
@@ -57,11 +57,11 @@ func restart_scene():
 	if _current_floor:
 		_current_floor.queue_free()
 
-	var dynamic_bodies = _dynamic_shapes_scene.instance()
+	var dynamic_bodies = _dynamic_shapes_scene.instantiate()
 	_current_bodies = dynamic_bodies
 	add_child(dynamic_bodies)
 
-	var floor_inst = _floor_shapes[_current_floor_name + _floor_size].instance()
+	var floor_inst = _floor_shapes[_current_floor_name + _floor_size].instantiate()
 	_current_floor = floor_inst
 	$Floors.add_child(floor_inst)
 

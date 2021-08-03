@@ -9,11 +9,11 @@ class TestData:
 var _test_list = []
 
 var _current_test = null
-var _current_test_scene = null
+var _current_test_scene : Node = null
 
 
 func _ready():
-	connect("option_selected", self, "_on_option_selected")
+	connect("option_selected", Callable(self, "_on_option_selected"))
 
 
 func _process(_delta):
@@ -46,7 +46,7 @@ func _start_test(test):
 
 	Log.print_log("*** STARTING TEST: " + test.id)
 	var scene = load(test.scene_path)
-	_current_test_scene = scene.instance()
+	_current_test_scene = scene.instantiate()
 	get_tree().root.add_child(_current_test_scene)
 	get_tree().root.move_child(_current_test_scene, 0)
 

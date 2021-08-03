@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 
 var _initial_velocity = Vector2.ZERO
@@ -7,9 +7,11 @@ var _motion_speed = 400.0
 var _gravity_force = 50.0
 var _jump_force = 1000.0
 var _velocity = Vector2.ZERO
-var _snap = Vector2.ZERO
+var _snap = 0.0
 var _floor_max_angle = 45.0
 var _stop_on_slope = false
+var _move_on_floor_only = false
+var _constant_speed = false
 var _jumping = false
 var _keep_velocity = false
 
@@ -42,13 +44,17 @@ func _physics_process(_delta):
 			# Start jumping.
 			_jumping = true
 			_velocity.y = -_jump_force
+	else:
+		_velocity.y += _gravity_force
 
-	# Always apply gravity for floor detection.
-	_velocity.y += _gravity_force
-
-	var snap = _snap if not _jumping else Vector2.ZERO
-	var max_angle = deg2rad(_floor_max_angle)
-	_velocity = move_and_slide_with_snap(_velocity, snap, Vector2.UP, _stop_on_slope, 4, max_angle)
+	floor_snap_length = _snap
+	floor_stop_on_slope = _stop_on_slope
+	floor_block_on_wall = _move_on_floor_only
+	floor_constant_speed = _constant_speed
+	floor_max_angle = deg2rad(_floor_max_angle)
+	motion_velocity = _velocity
+	move_and_slide()
+	_velocity = motion_velocity
 
 	# Get next jump ready.
 	if _jumping:

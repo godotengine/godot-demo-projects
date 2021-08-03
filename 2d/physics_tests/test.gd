@@ -4,7 +4,7 @@ extends Node2D
 
 signal wait_done()
 
-export var _enable_debug_collision = true
+@export var _enable_debug_collision = true
 
 var _timer
 var _timer_started = false
@@ -53,10 +53,10 @@ func add_circle(pos, radius, color):
 	add_child(circle)
 
 
-func add_shape(shape, transform, color):
+func add_shape(shape, shape_transform, color):
 	var collision = CollisionShape2D.new()
 	collision.shape = shape
-	collision.transform = transform
+	collision.transform = shape_transform
 	collision.modulate = color
 	_drawn_nodes.push_back(collision)
 	add_child(collision)
@@ -68,12 +68,12 @@ func clear_drawn_nodes():
 	_drawn_nodes.clear()
 
 
-func create_rigidbody(shape, pickable = false, transform = Transform.IDENTITY):
+func create_rigidbody(shape, pickable = false, shape_transform = Transform2D.IDENTITY):
 	var collision = CollisionShape2D.new()
 	collision.shape = shape
-	collision.transform = transform
+	collision.transform = shape_transform
 
-	var body = RigidBody2D.new()
+	var body = RigidDynamicBody2D.new()
 	body.add_child(collision)
 
 	if pickable:
@@ -83,15 +83,15 @@ func create_rigidbody(shape, pickable = false, transform = Transform.IDENTITY):
 	return body
 
 
-func create_rigidbody_box(size, pickable = false, use_icon = false, transform = Transform.IDENTITY):
+func create_rigidbody_box(size, pickable = false, use_icon = false, shape_transform = Transform2D.IDENTITY):
 	var shape = RectangleShape2D.new()
-	shape.extents = 0.5 * size
+	shape.size = size
 
-	var body = create_rigidbody(shape, pickable, transform)
+	var body = create_rigidbody(shape, pickable, shape_transform)
 
 	if use_icon:
 		var texture = load("res://icon.png")
-		var icon = Sprite.new()
+		var icon = Sprite2D.new()
 		icon.texture = texture
 		icon.scale = size / texture.get_size()
 		body.add_child(icon)
@@ -104,7 +104,7 @@ func start_timer(timeout):
 		_timer = Timer.new()
 		_timer.one_shot = true
 		add_child(_timer)
-		_timer.connect("timeout", self, "_on_timer_done")
+		_timer.connect("timeout", Callable(self, "_on_timer_done"))
 	else:
 		cancel_timer()
 

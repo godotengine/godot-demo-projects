@@ -6,19 +6,19 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
-_global_script_classes=[ {
+_global_script_classes=[{
 "base": "MenuButton",
-"class": "OptionMenu",
-"language": "GDScript",
+"class": &"OptionMenu",
+"language": &"GDScript",
 "path": "res://utils/option_menu.gd"
 }, {
 "base": "Node",
-"class": "Test",
-"language": "GDScript",
+"class": &"Test",
+"language": &"GDScript",
 "path": "res://test.gd"
-} ]
+}]
 _global_script_class_icons={
 "OptionMenu": "",
 "Test": ""
@@ -27,14 +27,9 @@ _global_script_class_icons={
 [application]
 
 config/name="3D Physics Tests"
-config/description="This demo contains a series of tests for the 3D physics engine.
-
-They can be used for different purposes:
-
-- Functional tests to check for regressions and compare the behavior between physics engines
-- Performance tests to evaluate and compare performance between physics engines"
 run/main_scene="res://main.tscn"
 config/icon="res://icon.png"
+config/features=PackedStringArray("4.0")
 
 [autoload]
 
@@ -55,62 +50,62 @@ window/stretch/aspect="expand"
 
 ui_left={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 ui_right={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 ui_up={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 ui_down={
 "deadzone": 0.5,
-"events": [  ]
+"events": []
 }
 toggle_full_screen={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":70,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
 }
 exit={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":16777217,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
 }
 toggle_debug_collision={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":67,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":67,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
 }
 restart_test={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":82,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
 }
 toggle_pause={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":80,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":80,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
 }
 character_right={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":16777233,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":68,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
 }
 character_left={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":16777231,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":65,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
 }
 character_jump={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":16777232,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":87,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
 }
 
 [rendering]
@@ -118,5 +113,5 @@ character_jump={
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-environment/default_clear_color=Color( 0.184314, 0.184314, 0.184314, 1 )
+environment/default_clear_color=Color(0.184314, 0.184314, 0.184314, 1)
 quality/filters/msaa=2

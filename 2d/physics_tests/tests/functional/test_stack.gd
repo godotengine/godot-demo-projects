@@ -1,10 +1,10 @@
 extends Test
 
 
-export(int) var height = 10
-export(int) var width = 1
-export(Vector2) var box_size = Vector2(40.0, 40.0)
-export(Vector2) var box_spacing =  Vector2(0.0, 0.0)
+@export var height = 10
+@export var width = 1
+@export var box_size = Vector2(40.0, 40.0)
+@export var box_spacing =  Vector2(0.0, 0.0)
 
 
 func _ready():

@@ -1,148 +1,145 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://pm3t5nl2v6gj"]
 
-[ext_resource path="res://tests/functional/test_collision_pairs.gd" type="Script" id=1]
-[ext_resource path="res://assets/texture/godot-head.png" type="Texture" id=2]
-[ext_resource path="res://tests/test_options.tscn" type="PackedScene" id=3]
+[ext_resource type="Script" path="res://tests/functional/test_collision_pairs.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://c5duuyhbmd0m4" path="res://assets/texture/godot-head.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://blh3twy74kbkv" path="res://tests/test_options.tscn" id="3"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 40, 60 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(80, 120)
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id="2"]
 radius = 60.0
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id="3"]
 radius = 30.0
-height = 50.0
+height = 110.0
 
-[sub_resource type="ConcavePolygonShape2D" id=4]
-segments = PoolVector2Array( -5.93512, -43.2195, 6.44476, -42.9695, 6.44476, -42.9695, 11.127, -54.3941, 11.127, -54.3941, 26.9528, -49.4309, 26.9528, -49.4309, 26.2037, -36.508, 26.2037, -36.508, 37.5346, -28.1737, 37.5346, -28.1737, 47.6282, -34.3806, 47.6282, -34.3806, 58.0427, -20.9631, 58.0427, -20.9631, 51.113, -10.2876, 51.113, -10.2876, 50.9869, 35.2694, 50.9869, 35.2694, 38.8, 47.5, 38.8, 47.5, 15.9852, 54.3613, 15.9852, 54.3613, -14.9507, 54.1845, -14.9507, 54.1845, -36.5, 48.1, -36.5, 48.1, -50.4828, 36.33, -50.4828, 36.33, -51.3668, -9.98545, -51.3668, -9.98545, -57.8889, -20.5885, -57.8889, -20.5885, -46.9473, -34.7342, -46.9473, -34.7342, -37.4014, -28.547, -37.4014, -28.547, -26.0876, -37.0323, -26.0876, -37.0323, -26.9862, -49.15, -26.9862, -49.15, -11.4152, -54.5332, -11.4152, -54.5332, -5.93512, -43.2195 )
+[sub_resource type="ConcavePolygonShape2D" id="4"]
+segments = PackedVector2Array(-5.93512, -43.2195, 6.44476, -42.9695, 6.44476, -42.9695, 11.127, -54.3941, 11.127, -54.3941, 26.9528, -49.4309, 26.9528, -49.4309, 26.2037, -36.508, 26.2037, -36.508, 37.5346, -28.1737, 37.5346, -28.1737, 47.6282, -34.3806, 47.6282, -34.3806, 58.0427, -20.9631, 58.0427, -20.9631, 51.113, -10.2876, 51.113, -10.2876, 50.9869, 35.2694, 50.9869, 35.2694, 38.8, 47.5, 38.8, 47.5, 15.9852, 54.3613, 15.9852, 54.3613, -14.9507, 54.1845, -14.9507, 54.1845, -36.5, 48.1, -36.5, 48.1, -50.4828, 36.33, -50.4828, 36.33, -51.3668, -9.98545, -51.3668, -9.98545, -57.8889, -20.5885, -57.8889, -20.5885, -46.9473, -34.7342, -46.9473, -34.7342, -37.4014, -28.547, -37.4014, -28.547, -26.0876, -37.0323, -26.0876, -37.0323, -26.9862, -49.15, -26.9862, -49.15, -11.4152, -54.5332, -11.4152, -54.5332, -5.93512, -43.2195)
 
 [node name="Test" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource( "1" )
 
-[node name="Options" parent="." instance=ExtResource( 3 )]
+[node name="Options" parent="." instance=ExtResource( "3" )]
 
 [node name="Shapes" type="Node2D" parent="."]
 z_index = -1
 z_as_relative = false
 
-[node name="RigidBodyRectangle" type="RigidBody2D" parent="Shapes"]
-position = Vector2( 114.877, 248.76 )
-mode = 1
+[node name="RigidBodyRectangle" type="RigidDynamicBody2D" parent="Shapes"]
+position = Vector2(114.877, 248.76)
+freeze = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shapes/RigidBodyRectangle"]
 rotation = -1.19206
-scale = Vector2( 1.2, 1.2 )
-shape = SubResource( 1 )
+scale = Vector2(1.2, 1.2)
+shape = SubResource( "1" )
 
-[node name="RigidBodySphere" type="RigidBody2D" parent="Shapes"]
-position = Vector2( 314.894, 257.658 )
-mode = 1
+[node name="RigidBodySphere" type="RigidDynamicBody2D" parent="Shapes"]
+position = Vector2(314.894, 257.658)
+freeze = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shapes/RigidBodySphere"]
-shape = SubResource( 2 )
+shape = SubResource( "2" )
 
-[node name="RigidBodyCapsule" type="RigidBody2D" parent="Shapes"]
-position = Vector2( 465.629, 261.204 )
-mode = 1
+[node name="RigidBodyCapsule" type="RigidDynamicBody2D" parent="Shapes"]
+position = Vector2(465.629, 261.204)
+freeze = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shapes/RigidBodyCapsule"]
 rotation = -0.202458
-scale = Vector2( 1.2, 1.2 )
-shape = SubResource( 3 )
+scale = Vector2(1.2, 1.2)
+shape = SubResource( "3" )
 
-[node name="RigidBodyConvexPolygon" type="RigidBody2D" parent="Shapes"]
-position = Vector2( 613.385, 252.771 )
-mode = 1
+[node name="RigidBodyConvexPolygon" type="RigidDynamicBody2D" parent="Shapes"]
+position = Vector2(613.385, 252.771)
+freeze = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Shapes/RigidBodyConvexPolygon"]
-polygon = PoolVector2Array( 10.7, -54.5, 28.3596, -49.4067, 47.6282, -34.3806, 57.9717, -20.9447, 50.9869, 35.2694, 38.8, 47.5, 15.9852, 54.3613, -14.9507, 54.1845, -36.5, 48.1, -50.4828, 36.33, -58.0115, -20.515, -46.9473, -34.7342, -26.0876, -50.1138, -11.4152, -54.5332 )
+polygon = PackedVector2Array(10.7, -54.5, 28.3596, -49.4067, 47.6282, -34.3806, 57.9717, -20.9447, 50.9869, 35.2694, 38.8, 47.5, 15.9852, 54.3613, -14.9507, 54.1845, -36.5, 48.1, -50.4828, 36.33, -58.0115, -20.515, -46.9473, -34.7342, -26.0876, -50.1138, -11.4152, -54.5332)
 
-[node name="GodotIcon" type="Sprite" parent="Shapes/RigidBodyConvexPolygon"]
-modulate = Color( 1, 1, 1, 0.392157 )
-texture = ExtResource( 2 )
+[node name="GodotIcon" type="Sprite2D" parent="Shapes/RigidBodyConvexPolygon"]
+modulate = Color(1, 1, 1, 0.392157)
+texture = ExtResource( "2" )
 
-[node name="RigidBodyConcavePolygon" type="RigidBody2D" parent="Shapes"]
-position = Vector2( 771.159, 252.771 )
-mode = 1
+[node name="RigidBodyConcavePolygon" type="RigidDynamicBody2D" parent="Shapes"]
+position = Vector2(771.159, 252.771)
+freeze = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Shapes/RigidBodyConcavePolygon"]
-polygon = PoolVector2Array( -5.93512, -43.2195, 6.44476, -42.9695, 11.127, -54.3941, 26.9528, -49.4309, 26.2037, -36.508, 37.5346, -28.1737, 47.6282, -34.3806, 58.0427, -20.9631, 51.113, -10.2876, 50.9869, 35.2694, 38.8, 47.5, 15.9852, 54.3613, -14.9507, 54.1845, -36.5, 48.1, -50.4828, 36.33, -51.3668, -9.98545, -57.8889, -20.5885, -46.9473, -34.7342, -37.4014, -28.547, -26.0876, -37.0323, -26.9862, -49.15, -11.4152, -54.5332 )
+polygon = PackedVector2Array(-5.93512, -43.2195, 6.44476, -42.9695, 11.127, -54.3941, 26.9528, -49.4309, 26.2037, -36.508, 37.5346, -28.1737, 47.6282, -34.3806, 58.0427, -20.9631, 51.113, -10.2876, 50.9869, 35.2694, 38.8, 47.5, 15.9852, 54.3613, -14.9507, 54.1845, -36.5, 48.1, -50.4828, 36.33, -51.3668, -9.98545, -57.8889, -20.5885, -46.9473, -34.7342, -37.4014, -28.547, -26.0876, -37.0323, -26.9862, -49.15, -11.4152, -54.5332)
 
-[node name="GodotIcon" type="Sprite" parent="Shapes/RigidBodyConcavePolygon"]
-modulate = Color( 1, 1, 1, 0.392157 )
-texture = ExtResource( 2 )
+[node name="GodotIcon" type="Sprite2D" parent="Shapes/RigidBodyConcavePolygon"]
+modulate = Color(1, 1, 1, 0.392157)
+texture = ExtResource( "2" )
 
-[node name="RigidBodyConcaveSegments" type="RigidBody2D" parent="Shapes"]
-position = Vector2( 930.097, 252.771 )
-mode = 1
+[node name="RigidBodyConcaveSegments" type="RigidDynamicBody2D" parent="Shapes"]
+position = Vector2(930.097, 252.771)
+freeze = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shapes/RigidBodyConcaveSegments"]
-shape = SubResource( 4 )
+shape = SubResource( "4" )
 
-[node name="GodotIcon" type="Sprite" parent="Shapes/RigidBodyConcaveSegments"]
-modulate = Color( 1, 1, 1, 0.392157 )
-texture = ExtResource( 2 )
+[node name="GodotIcon" type="Sprite2D" parent="Shapes/RigidBodyConcaveSegments"]
+modulate = Color(1, 1, 1, 0.392157)
+texture = ExtResource( "2" )
 
 [node name="Controls" type="VBoxContainer" parent="."]
-pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 25.3619
-margin_top = 416.765
-margin_right = 218.362
-margin_bottom = 458.765
-custom_constants/separation = 10
+offset_left = 25.3619
+offset_top = 416.765
+offset_right = 218.362
+offset_bottom = 458.765
+theme_override_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="OffsetH" type="HBoxContainer" parent="Controls"]
-margin_right = 193.0
-margin_bottom = 16.0
-custom_constants/separation = 20
+offset_right = 204.0
+offset_bottom = 26.0
+theme_override_constants/separation = 20
 alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="Controls/OffsetH"]
-margin_top = 1.0
-margin_right = 53.0
-margin_bottom = 15.0
+offset_right = 64.0
+offset_bottom = 26.0
 text = "Offset H"
 
 [node name="HSlider" type="HSlider" parent="Controls/OffsetH"]
-margin_left = 73.0
-margin_right = 193.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 120, 0 )
+offset_left = 84.0
+offset_right = 204.0
+offset_bottom = 16.0
+rect_min_size = Vector2(120, 0)
 min_value = -1.0
 max_value = 1.0
 step = 0.01
 
 [node name="OffsetV" type="HBoxContainer" parent="Controls"]
-margin_top = 26.0
-margin_right = 193.0
-margin_bottom = 42.0
-custom_constants/separation = 20
+offset_top = 36.0
+offset_right = 204.0
+offset_bottom = 62.0
+theme_override_constants/separation = 20
 alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="Controls/OffsetV"]
-margin_left = 2.0
-margin_top = 1.0
-margin_right = 53.0
-margin_bottom = 15.0
+offset_left = 2.0
+offset_right = 64.0
+offset_bottom = 26.0
 text = "Offset V"
 
 [node name="HSlider" type="HSlider" parent="Controls/OffsetV"]
-margin_left = 73.0
-margin_right = 193.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 120, 0 )
+offset_left = 84.0
+offset_right = 204.0
+offset_bottom = 16.0
+rect_min_size = Vector2(120, 0)
 min_value = -1.0
 max_value = 1.0
 step = 0.01

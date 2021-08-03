@@ -1,9 +1,9 @@
-extends RigidBody
+extends RigidDynamicBody3D
 
 
-onready var _forward = - transform.basis.z
-onready var _collision_shape = $CollisionShape
-onready var _material = $CollisionShape/MeshInstance.get_surface_material(0)
+@onready var _forward = -transform.basis.z
+@onready var _collision_shape = $CollisionShape
+@onready var _material = $CollisionShape/MeshInstance3D.get_active_material(0)
 
 var _dir = 1.0
 var _distance = 10.0
@@ -13,11 +13,17 @@ var _gravity_impulse = 30.0
 var _is_on_floor = false
 
 
+func _ready():
+	if not _material:
+		_material = StandardMaterial3D.new()
+		$CollisionShape/MeshInstance3D.set_surface_override_material(0, _material)
+
+
 func _process(_delta):
 	if _is_on_floor:
-		_material.albedo_color = Color.white
+		_material.albedo_color = Color.WHITE
 	else:
-		_material.albedo_color = Color.red
+		_material.albedo_color = Color.RED
 
 
 func _integrate_forces(state):
@@ -34,8 +40,8 @@ func _integrate_forces(state):
 
 
 func ground_check():
-	var space_state = get_world().direct_space_state
-	var shape = PhysicsShapeQueryParameters.new()
+	var space_state = get_world_3d().direct_space_state
+	var shape = PhysicsShapeQueryParameters3D.new()
 	shape.transform = _collision_shape.global_transform
 	shape.shape_rid = _collision_shape.shape.get_rid()
 	shape.collision_mask = 2

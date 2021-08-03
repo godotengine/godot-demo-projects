@@ -7,7 +7,7 @@ var _entry_template
 
 
 func _enter_tree():
-	Log.connect("entry_logged", self, "_on_log_entry")
+	Log.connect("entry_logged", Callable(self, "_on_log_entry"))
 
 	_entry_template = get_child(0) as Label
 	remove_child(_entry_template)
@@ -29,9 +29,9 @@ func _on_log_entry(message, type):
 
 	new_entry.set_text(message)
 	if type == Log.LogType.ERROR:
-		new_entry.modulate = Color.red
+		new_entry.modulate = Color.RED
 	else:
-		new_entry.modulate = Color.white
+		new_entry.modulate = Color.WHITE
 
 	if get_child_count() >= MAX_ENTRIES:
 		var first_entry = get_child(0) as Label

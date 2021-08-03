@@ -1,82 +1,86 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://dwka2imbe5gcs"]
 
-[ext_resource path="res://assets/texture/godot-head.png" type="Texture" id=1]
-[ext_resource path="res://tests/functional/test_raycasting.gd" type="Script" id=2]
+[ext_resource type="Texture2D" uid="uid://c5duuyhbmd0m4" path="res://assets/texture/godot-head.png" id="1"]
+[ext_resource type="Script" path="res://tests/functional/test_raycasting.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://blh3twy74kbkv" path="res://tests/test_options.tscn" id="2_q8u1v"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 40, 60 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(80, 120)
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id="2"]
 radius = 60.0
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id="3"]
 radius = 30.0
-height = 50.0
-
-[sub_resource type="ConcavePolygonShape2D" id=4]
-segments = PoolVector2Array( -5.93512, -43.2195, 6.44476, -42.9695, 6.44476, -42.9695, 11.127, -54.3941, 11.127, -54.3941, 26.9528, -49.4309, 26.9528, -49.4309, 26.2037, -36.508, 26.2037, -36.508, 37.5346, -28.1737, 37.5346, -28.1737, 47.6282, -34.3806, 47.6282, -34.3806, 58.0427, -20.9631, 58.0427, -20.9631, 51.113, -10.2876, 51.113, -10.2876, 50.9869, 35.2694, 50.9869, 35.2694, 38.8, 47.5, 38.8, 47.5, 15.9852, 54.3613, 15.9852, 54.3613, -14.9507, 54.1845, -14.9507, 54.1845, -36.5, 48.1, -36.5, 48.1, -50.4828, 36.33, -50.4828, 36.33, -51.3668, -9.98545, -51.3668, -9.98545, -57.8889, -20.5885, -57.8889, -20.5885, -46.9473, -34.7342, -46.9473, -34.7342, -37.4014, -28.547, -37.4014, -28.547, -26.0876, -37.0323, -26.0876, -37.0323, -26.9862, -49.15, -26.9862, -49.15, -11.4152, -54.5332, -11.4152, -54.5332, -5.93512, -43.2195 )
+height = 110.0
 
 [node name="Test" type="Node2D"]
-script = ExtResource( 2 )
+script = ExtResource( "2" )
+
+[node name="Options" parent="." instance=ExtResource( "2_q8u1v" )]
+offset_right = 134.0
+offset_bottom = 135.719
+theme_override_font_sizes/font_size = 16
 
 [node name="Shapes" type="Node2D" parent="."]
 z_index = -1
 z_as_relative = false
 
-[node name="RigidBodyRectangle" type="RigidBody2D" parent="Shapes"]
-position = Vector2( 114.877, 248.76 )
-mode = 1
+[node name="RigidBodyRectangle" type="RigidDynamicBody2D" parent="Shapes"]
+position = Vector2(114.877, 248.76)
+freeze = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shapes/RigidBodyRectangle"]
 rotation = -1.19206
-scale = Vector2( 1.2, 1.2 )
-shape = SubResource( 1 )
+scale = Vector2(1.2, 1.2)
+shape = SubResource( "1" )
 
-[node name="RigidBodySphere" type="RigidBody2D" parent="Shapes"]
-position = Vector2( 314.894, 257.658 )
-mode = 1
+[node name="RigidBodySphere" type="RigidDynamicBody2D" parent="Shapes"]
+position = Vector2(314.894, 257.658)
+freeze = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shapes/RigidBodySphere"]
-shape = SubResource( 2 )
+shape = SubResource( "2" )
 
-[node name="RigidBodyCapsule" type="RigidBody2D" parent="Shapes"]
-position = Vector2( 465.629, 261.204 )
-mode = 1
+[node name="RigidBodyCapsule" type="RigidDynamicBody2D" parent="Shapes"]
+position = Vector2(465.629, 261.204)
+freeze = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shapes/RigidBodyCapsule"]
 rotation = -0.202458
-scale = Vector2( 1.2, 1.2 )
-shape = SubResource( 3 )
+scale = Vector2(1.2, 1.2)
+shape = SubResource( "3" )
 
-[node name="RigidBodyConvexPolygon" type="RigidBody2D" parent="Shapes"]
-position = Vector2( 613.385, 252.771 )
-mode = 1
+[node name="RigidBodyConvexPolygon" type="RigidDynamicBody2D" parent="Shapes"]
+position = Vector2(613.385, 252.771)
+freeze = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Shapes/RigidBodyConvexPolygon"]
-polygon = PoolVector2Array( 10.7, -54.5, 28.3596, -49.4067, 47.6282, -34.3806, 57.9717, -20.9447, 50.9869, 35.2694, 38.8, 47.5, 15.9852, 54.3613, -14.9507, 54.1845, -36.5, 48.1, -50.4828, 36.33, -58.0115, -20.515, -46.9473, -34.7342, -26.0876, -50.1138, -11.4152, -54.5332 )
+polygon = PackedVector2Array(10.7, -54.5, 28.3596, -49.4067, 47.6282, -34.3806, 57.9717, -20.9447, 50.9869, 35.2694, 38.8, 47.5, 15.9852, 54.3613, -14.9507, 54.1845, -36.5, 48.1, -50.4828, 36.33, -58.0115, -20.515, -46.9473, -34.7342, -26.0876, -50.1138, -11.4152, -54.5332)
 
-[node name="GodotIcon" type="Sprite" parent="Shapes/RigidBodyConvexPolygon"]
-modulate = Color( 1, 1, 1, 0.392157 )
-texture = ExtResource( 1 )
+[node name="GodotIcon" type="Sprite2D" parent="Shapes/RigidBodyConvexPolygon"]
+modulate = Color(1, 1, 1, 0.392157)
+texture = ExtResource( "1" )
 
-[node name="RigidBodyConcavePolygon" type="RigidBody2D" parent="Shapes"]
-position = Vector2( 771.159, 252.771 )
-mode = 1
+[node name="RigidBodyConcavePolygon" type="RigidDynamicBody2D" parent="Shapes"]
+position = Vector2(771.159, 252.771)
+freeze = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Shapes/RigidBodyConcavePolygon"]
-polygon = PoolVector2Array( -5.93512, -43.2195, 6.44476, -42.9695, 11.127, -54.3941, 26.9528, -49.4309, 26.2037, -36.508, 37.5346, -28.1737, 47.6282, -34.3806, 58.0427, -20.9631, 51.113, -10.2876, 50.9869, 35.2694, 38.8, 47.5, 15.9852, 54.3613, -14.9507, 54.1845, -36.5, 48.1, -50.4828, 36.33, -51.3668, -9.98545, -57.8889, -20.5885, -46.9473, -34.7342, -37.4014, -28.547, -26.0876, -37.0323, -26.9862, -49.15, -11.4152, -54.5332 )
+polygon = PackedVector2Array(-5.93512, -43.2195, 6.44476, -42.9695, 11.127, -54.3941, 26.9528, -49.4309, 26.2037, -36.508, 37.5346, -28.1737, 47.6282, -34.3806, 58.0427, -20.9631, 51.113, -10.2876, 50.9869, 35.2694, 38.8, 47.5, 15.9852, 54.3613, -14.9507, 54.1845, -36.5, 48.1, -50.4828, 36.33, -51.3668, -9.98545, -57.8889, -20.5885, -46.9473, -34.7342, -37.4014, -28.547, -26.0876, -37.0323, -26.9862, -49.15, -11.4152, -54.5332)
 
-[node name="GodotIcon" type="Sprite" parent="Shapes/RigidBodyConcavePolygon"]
-modulate = Color( 1, 1, 1, 0.392157 )
-texture = ExtResource( 1 )
+[node name="GodotIcon" type="Sprite2D" parent="Shapes/RigidBodyConcavePolygon"]
+modulate = Color(1, 1, 1, 0.392157)
+texture = ExtResource( "1" )
 
-[node name="RigidBodyConcaveSegments" type="RigidBody2D" parent="Shapes"]
-position = Vector2( 930.097, 252.771 )
-mode = 1
+[node name="RigidBodyConcaveSegments" type="RigidDynamicBody2D" parent="Shapes"]
+position = Vector2(930.097, 252.771)
+freeze = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shapes/RigidBodyConcaveSegments"]
-shape = SubResource( 4 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Shapes/RigidBodyConcaveSegments"]
+build_mode = 1
+polygon = PackedVector2Array(-5.93512, -43.2195, 6.44476, -42.9695, 11.127, -54.3941, 26.9528, -49.4309, 26.2037, -36.508, 37.5346, -28.1737, 47.6282, -34.3806, 58.0427, -20.9631, 51.113, -10.2876, 50.9869, 35.2694, 38.8, 47.5, 15.9852, 54.3613, -14.9507, 54.1845, -36.5, 48.1, -50.4828, 36.33, -51.3668, -9.98545, -57.8889, -20.5885, -46.9473, -34.7342, -37.4014, -28.547, -26.0876, -37.0323, -26.9862, -49.15, -11.4152, -54.5332)
 
-[node name="GodotIcon" type="Sprite" parent="Shapes/RigidBodyConcaveSegments"]
-modulate = Color( 1, 1, 1, 0.392157 )
-texture = ExtResource( 1 )
+[node name="GodotIcon" type="Sprite2D" parent="Shapes/RigidBodyConcaveSegments"]
+modulate = Color(1, 1, 1, 0.392157)
+texture = ExtResource( "1" )

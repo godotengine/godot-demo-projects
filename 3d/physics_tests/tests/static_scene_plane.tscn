@@ -1,17 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://3gkujifjokqw"]
 
-[sub_resource type="PlaneMesh" id=1]
+[sub_resource type="PlaneMesh" id="1"]
 
-[sub_resource type="ConcavePolygonShape" id=2]
-data = PoolVector3Array( -1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1 )
+[sub_resource type="ConcavePolygonShape3D" id="2"]
+data = PackedVector3Array(-1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
-[node name="StaticBodyPlane" type="StaticBody"]
+[node name="StaticBodyPlane" type="StaticBody3D"]
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = null
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
+mesh = SubResource( "1" )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0 )
-shape = SubResource( 2 )
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
+shape = SubResource( "2" )
