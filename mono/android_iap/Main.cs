@@ -156,7 +156,7 @@ namespace AndroidInAppPurchasesWithCSharp
             ShowAlert($"Purchase consumed successfully: {purchaseToken}");
         }
 
-        private void OnPurchaseConsumptionError(int code, string message)
+        private void OnPurchaseConsumptionError(int code, string message, string purchaseToken)
         {
             ShowAlert($"Purchase acknowledgement error {code}: {message}");
         }
