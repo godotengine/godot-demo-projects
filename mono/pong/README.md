@@ -25,4 +25,4 @@ they emit signals and modify the ball.
 
 ## Screenshots
 
-![Screenshot](../../2d/pong/screenshots/pong.png)
+![Screenshot](screenshots/pong.png)

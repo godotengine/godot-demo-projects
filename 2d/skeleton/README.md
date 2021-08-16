@@ -13,3 +13,7 @@ Renderer: GLES 2
 GBot character Copyright &copy; circa 2020 Andreas Esau, MIT License.
 
 Initial rigging and animating Copyright &copy; 2020 RustyStriker, MIT License.
+
+## Screenshots
+
+![Screenshot](screenshots/screenshot.png)

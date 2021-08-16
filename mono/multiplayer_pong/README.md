@@ -13,4 +13,4 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
 
 ## Screenshots
 
-![Screenshot](../../2d/pong/screenshots/pong.png)
+![Screenshot](screenshots/pong_multiplayer.png)
