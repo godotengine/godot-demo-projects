@@ -1,29 +1,21 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://OpenSimplexNoise_Viewer.gd" type="Script" id=1]
 [ext_resource path="res://OpenSimplexNoise_Viewer.tres" type="Material" id=2]
 
+[sub_resource type="OpenSimplexNoise" id=1]
+
+[sub_resource type="NoiseTexture" id=2]
+noise = SubResource( 1 )
+
 [node name="OpenSimplexNoise Viewer" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 8.42108
-margin_top = -5.26315
-margin_right = 8.42114
-margin_bottom = -5.26318
+margin_left = 24.0
+margin_top = 24.0
+margin_right = -24.0
+margin_bottom = -24.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="DocumentationButton" type="Button" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -170.0
-margin_top = 30.0
-margin_right = -33.0
-margin_bottom = 50.0
-grow_horizontal = 0
-text = "API Documentation"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -34,21 +26,48 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 40.0
-margin_top = -20.0
-margin_right = 80.0
-margin_bottom = 20.0
+margin_left = -196.0
+margin_top = -256.0
+margin_right = 316.0
+margin_bottom = 256.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -137.0
+margin_bottom = 44.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DocumentationButton" type="Button" parent="ButtonsContainer"]
+margin_right = 137.0
+margin_bottom = 20.0
+grow_horizontal = 0
+text = "API Documentation"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RandomSeedButton" type="Button" parent="ButtonsContainer"]
+margin_top = 24.0
+margin_right = 137.0
+margin_bottom = 44.0
+grow_horizontal = 0
+text = "Random Seed"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ParameterContainer" type="VBoxContainer" parent="."]
-margin_left = 20.0
-margin_top = 30.0
-margin_right = 300.0
-margin_bottom = 166.0
+margin_right = 280.0
+margin_bottom = 136.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -56,9 +75,8 @@ __meta__ = {
 [node name="SeedSpinBox" type="SpinBox" parent="ParameterContainer"]
 margin_right = 280.0
 margin_bottom = 24.0
-min_value = -1.53049e+09
-max_value = 1.53049e+09
-rounded = true
+min_value = -2.14748e+09
+max_value = 2.14748e+09
 allow_greater = true
 allow_lesser = true
 prefix = "Seed:"
@@ -67,8 +85,7 @@ prefix = "Seed:"
 margin_top = 28.0
 margin_right = 280.0
 margin_bottom = 52.0
-max_value = 1e+08
-step = 0.01
+step = 0.1
 allow_greater = true
 prefix = "Lacunarity:"
 
@@ -76,9 +93,8 @@ prefix = "Lacunarity:"
 margin_top = 56.0
 margin_right = 280.0
 margin_bottom = 80.0
-min_value = -1e+08
-max_value = 1e+08
-step = 0.01
+min_value = -100000.0
+max_value = 100000.0
 allow_greater = true
 prefix = "Period:"
 
@@ -86,8 +102,7 @@ prefix = "Period:"
 margin_top = 84.0
 margin_right = 280.0
 margin_bottom = 108.0
-max_value = 1e+08
-step = 0.01
+max_value = 1000.0
 allow_greater = true
 prefix = "Persistance:"
 
@@ -96,19 +111,19 @@ margin_top = 112.0
 margin_right = 280.0
 margin_bottom = 136.0
 min_value = 1.0
-max_value = 10.0
+max_value = 9.0
 value = 1.0
-allow_greater = true
 prefix = "Octaves:"
 
 [node name="ClipContainer" type="VBoxContainer" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 20.0
-margin_top = -72.0
-margin_right = 300.0
-margin_bottom = -20.0
+margin_top = -52.0
+margin_right = 280.0
 grow_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MinClipSpinBox" type="SpinBox" parent="ClipContainer"]
 margin_right = 280.0
@@ -129,7 +144,8 @@ step = 0.01
 value = 1.0
 prefix = "Max:"
 
-[connection signal="pressed" from="DocumentationButton" to="." method="_on_DocumentationButton_pressed"]
+[connection signal="pressed" from="ButtonsContainer/DocumentationButton" to="." method="_on_DocumentationButton_pressed"]
+[connection signal="pressed" from="ButtonsContainer/RandomSeedButton" to="." method="_on_RandomSeedButton_pressed"]
 [connection signal="value_changed" from="ParameterContainer/SeedSpinBox" to="." method="_on_SeedSpinBox_value_changed"]
 [connection signal="value_changed" from="ParameterContainer/LacunaritySpinBox" to="." method="_on_LacunaritySpinBox_value_changed"]
 [connection signal="value_changed" from="ParameterContainer/PeriodSpinBox" to="." method="_on_PeriodSpinBox_value_changed"]
