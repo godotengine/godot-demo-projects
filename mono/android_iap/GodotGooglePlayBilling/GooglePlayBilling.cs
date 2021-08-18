@@ -15,7 +15,7 @@ namespace AndroidInAppPurchasesWithCSharp.GodotGooglePlayBilling
         [Signal] public delegate void Disconnected();
         [Signal] public delegate void ConnectError(int code, string message);
         [Signal] public delegate void SkuDetailsQueryCompleted(Array skuDetails);
-        [Signal] public delegate void SkuDetailsQueryError(int code, string message);
+        [Signal] public delegate void SkuDetailsQueryError(int code, string message, string[] querySkuDetails);
         [Signal] public delegate void PurchasesUpdated(Array purchases);
         [Signal] public delegate void PurchaseError(int code, string message);
         [Signal] public delegate void PurchaseAcknowledged(string purchaseToken);
@@ -96,7 +96,7 @@ namespace AndroidInAppPurchasesWithCSharp.GodotGooglePlayBilling
 
         private void OnGodotGooglePlayBilling_sku_details_query_completed(Array skuDetails) => EmitSignal(nameof(SkuDetailsQueryCompleted), skuDetails);
 
-        private void OnGodotGooglePlayBilling_sku_details_query_error(int code, string message) => EmitSignal(nameof(SkuDetailsQueryError), code, message);
+        private void OnGodotGooglePlayBilling_sku_details_query_error(int code, string message, string[] querySkuDetails) => EmitSignal(nameof(SkuDetailsQueryError), code, message, querySkuDetails);
 
         private void OnGodotGooglePlayBilling_purchases_updated(Array purchases) => EmitSignal(nameof(PurchasesUpdated), purchases);
 

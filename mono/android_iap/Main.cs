@@ -93,7 +93,7 @@ namespace AndroidInAppPurchasesWithCSharp
             _payment.StartConnection();
         }
 
-        private void OnConnectError()
+        private void OnConnectError(int code, string message)
         {
             ShowAlert("PurchaseManager connect error");
         }
@@ -136,7 +136,7 @@ namespace AndroidInAppPurchasesWithCSharp
             }
         }
 
-        private void OnSkuDetailsQueryError(int code, string message)
+        private void OnSkuDetailsQueryError(int code, string message, string[] querySkuDetails)
         {
             ShowAlert($"SKU details query error {code}: {message}");
         }
