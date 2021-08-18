@@ -8,6 +8,8 @@ Language: GDScript
 
 Renderer: GLES 2
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/1027
+
 ## Licenses
 
 GBot character Copyright &copy; circa 2020 Andreas Esau, MIT License.
