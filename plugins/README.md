@@ -2,6 +2,8 @@
 
 This contains multiple plugin demos, all placed in a project for convenience.
 
+Due to bug 36713 you need to open the project to import the assets once, then close, then open.
+
 Please see the documentation for editor plugins:
 https://docs.godotengine.org/en/latest/tutorials/plugins/editor/index.html
 
@@ -38,3 +40,15 @@ If you make a zip that contains the folder, Godot will recognize
 it as a plugin and will allow you to install it.
 
 This can be done via the terminal: `zip -r custom_node.zip custom_node/*`
+
+## Screenshots
+
+![Heart Plugin](screenshots/heart_plugin.png)
+
+![Main Screen Plugin](screenshots/main_screen_plugin.png)
+
+![Material Import Plugin](screenshots/material_import_plugin.png)
+
+![Material Creator Plugin 1](screenshots/material_creator_plugin_1.png)
+
+![Material Creator Plugin 2](screenshots/material_creator_plugin_2.png)

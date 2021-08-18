@@ -22,6 +22,8 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
 
 ![GIF from the documentation](https://docs.godotengine.org/en/latest/_images/dodge_preview.gif)
 
+![Screenshot](screenshots/dodge.png)
+
 ## Copying
 
 `art/House In a Forest Loop.ogg` Copyright &copy; 2012 [HorrorPen](https://opengameart.org/users/horrorpen), [CC-BY 3.0: Attribution](http://creativecommons.org/licenses/by/3.0/). Source: https://opengameart.org/content/loop-house-in-a-forest

@@ -10,6 +10,10 @@ This demo is devided in 4 parts:
 
 **NOTE**: You must extract the [latest version](https://github.com/godotengine/webrtc-native/releases) of the WebRTC GDNative plugin in the project folder to run from desktop.
 
+Language: GDScript
+
+Renderer: GLES 2
+
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/537
 
 ## Protocol
@@ -34,3 +38,7 @@ Messages with payload (used to transfer WebRTC parameters) are:
 - `C: <ID>`, used to send a candidate.
 
 When sending the parameter, a client will set `<ID>` as the destination peer, the server will replace it with the id of the sending peer, and rely it to the proper destination.
+
+## Screenshots
+
+![Screenshot](screenshots/screenshot.png)
