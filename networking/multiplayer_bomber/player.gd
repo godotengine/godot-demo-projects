@@ -8,7 +8,7 @@ puppet var puppet_motion = Vector2()
 export var stunned = false
 
 # Use sync because it will be called everywhere
-sync func setup_bomb(bomb_name, pos, by_who):
+remotesync func setup_bomb(bomb_name, pos, by_who):
 	var bomb = preload("res://bomb.tscn").instance()
 	bomb.set_name(bomb_name) # Ensure unique name for the bomb
 	bomb.position = pos

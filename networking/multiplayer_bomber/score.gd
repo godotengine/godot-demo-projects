@@ -16,7 +16,7 @@ func _process(_delta):
 		$"../Winner".show()
 
 
-sync func increase_score(for_who):
+remotesync func increase_score(for_who):
 	assert(for_who in player_labels)
 	var pl = player_labels[for_who]
 	pl.score += 1

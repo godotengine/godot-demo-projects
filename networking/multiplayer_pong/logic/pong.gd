@@ -27,7 +27,7 @@ func _ready():
 	print("Unique id: ", get_tree().get_network_unique_id())
 
 
-sync func update_score(add_to_left):
+remotesync func update_score(add_to_left):
 	if add_to_left:
 		score_left += 1
 		score_left_node.set_text(str(score_left))

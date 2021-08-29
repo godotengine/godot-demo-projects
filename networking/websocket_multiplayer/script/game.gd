@@ -13,7 +13,7 @@ master func set_player_name(name):
 	rpc("update_player_name", sender, name)
 
 
-sync func update_player_name(player, name):
+remotesync func update_player_name(player, name):
 	var pos = _players.find(player)
 	if pos != -1:
 		_list.set_item_text(pos, name)
@@ -28,13 +28,13 @@ master func request_action(action):
 	next_turn()
 
 
-sync func do_action(action):
+remotesync func do_action(action):
 	var name = _list.get_item_text(_turn)
 	var val = randi() % 100
 	rpc("_log", "%s: %ss %d" % [name, action, val])
 
 
-sync func set_turn(turn):
+remotesync func set_turn(turn):
 	_turn = turn
 	if turn >= _players.size():
 		return
@@ -46,7 +46,7 @@ sync func set_turn(turn):
 	_action.disabled = _players[turn] != get_tree().get_network_unique_id()
 
 
-sync func del_player(id):
+remotesync func del_player(id):
 	var pos = _players.find(id)
 	if pos == -1:
 		return
@@ -58,7 +58,7 @@ sync func del_player(id):
 		rpc("set_turn", _turn)
 
 
-sync func add_player(id, name=""):
+remotesync func add_player(id, name=""):
 	_players.append(id)
 	if name == "":
 		_list.add_item("... connecting ...", null, false)
@@ -106,7 +106,7 @@ func on_peer_del(id):
 	rpc("del_player", id)
 
 
-sync func _log(what):
+remotesync func _log(what):
 	$HBoxContainer/RichTextLabel.add_text(what + "\n")
 
 
