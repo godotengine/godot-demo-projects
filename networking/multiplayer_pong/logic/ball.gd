@@ -41,7 +41,7 @@ func _process(delta):
 			rpc("_reset_ball", true)
 
 
-sync func bounce(left, random):
+remotesync func bounce(left, random):
 	# Using sync because both players can make it bounce.
 	if left:
 		direction.x = abs(direction.x)
@@ -53,11 +53,11 @@ sync func bounce(left, random):
 	direction = direction.normalized()
 
 
-sync func stop():
+remotesync func stop():
 	stopped = true
 
 
-sync func _reset_ball(for_left):
+remotesync func _reset_ball(for_left):
 	position = _screen_size / 2
 	if for_left:
 		direction = Vector2.LEFT
