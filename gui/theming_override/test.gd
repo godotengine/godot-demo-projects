@@ -9,7 +9,7 @@ onready var label = $VBoxContainer/Label
 onready var button = $VBoxContainer/Button
 onready var button2 = $VBoxContainer/Button2
 onready var reset_all_button = $VBoxContainer/ResetAllButton
-# Save the label color so it can be resetted
+# Save the label color so it can be reset.
 onready var default_label_color = label.get_color("font_color")
 
 func _ready():
