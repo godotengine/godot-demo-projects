@@ -16,6 +16,7 @@ func _ready():
 	# Focus the first button automatically for keyboard/controller-friendly navigation.
 	button.grab_focus()
 
+
 func _on_button_pressed():
 	# We have to modify the normal, hover and pressed styleboxes all at once
 	# to get a correct appearance when the button is hovered or pressed.
@@ -64,4 +65,3 @@ func _on_reset_all_button_pressed():
 	button2.add_stylebox_override("pressed", null)
 
 	label.add_color_override("font_color", default_label_color)
-
