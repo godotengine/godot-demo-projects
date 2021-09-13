@@ -9,7 +9,8 @@ onready var label = $VBoxContainer/Label
 onready var button = $VBoxContainer/Button
 onready var button2 = $VBoxContainer/Button2
 onready var reset_all_button = $VBoxContainer/ResetAllButton
-
+# Save the label color so it can be reset.
+onready var default_label_color = label.get_color("font_color")
 
 func _ready():
 	# Focus the first button automatically for keyboard/controller-friendly navigation.
@@ -63,7 +64,4 @@ func _on_reset_all_button_pressed():
 	button2.add_stylebox_override("hover", null)
 	button2.add_stylebox_override("pressed", null)
 
-	# If you don't have any references to the previous color value,
-	# you can instance a node at runtime to get this value.
-	var default_label_color = Label.new().get_color("font_color")
 	label.add_color_override("font_color", default_label_color)
