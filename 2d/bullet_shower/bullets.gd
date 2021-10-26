@@ -38,6 +38,10 @@ func _ready():
 
 		Physics2DServer.body_set_space(bullet.body, get_world_2d().get_space())
 		Physics2DServer.body_add_shape(bullet.body, shape)
+		# Don't make bullets check collision with other bullets to improve performance.
+		# Their collision mask is still configured to the default value, which allows
+		# bullets to detect collisions with the player.
+		Physics2DServer.body_set_collision_layer(bullet.body, 0)
 
 		# Place bullets randomly on the viewport and move bullets outside the
 		# play area so that they fade in nicely.
