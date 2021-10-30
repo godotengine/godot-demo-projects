@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://enemy/enemy.gd" type="Script" id=1]
 [ext_resource path="res://enemy/robot_walk.wav" type="AudioStream" id=2]
@@ -467,23 +467,7 @@ extents = Vector3( 0.57253, 0.388409, 0.560511 )
 [sub_resource type="AudioStreamRandomPitch" id=14]
 audio_stream = ExtResource( 2 )
 
-[sub_resource type="Curve" id=15]
-max_value = 3.0
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.0349232, 2.1123 ), 0.0, 0.0, 0, 0, Vector2( 0.151192, 0.823242 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=16]
-curve = SubResource( 15 )
-
-[sub_resource type="ParticlesMaterial" id=17]
-emission_shape = 1
-emission_sphere_radius = 1.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 0.15
-angular_velocity = 351.05
-angular_velocity_random = 1.0
-scale_curve = SubResource( 16 )
-
-[sub_resource type="SpatialMaterial" id=18]
+[sub_resource type="SpatialMaterial" id=15]
 flags_transparent = true
 flags_unshaded = true
 params_blend_mode = 1
@@ -493,8 +477,12 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 albedo_texture = ExtResource( 5 )
 
-[sub_resource type="QuadMesh" id=19]
-material = SubResource( 18 )
+[sub_resource type="QuadMesh" id=16]
+material = SubResource( 15 )
+
+[sub_resource type="Curve" id=17]
+max_value = 3.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.0349232, 2.1123 ), 0.0, 0.0, 0, 0, Vector2( 0.151192, 0.823242 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Enemy" type="RigidBody"]
 mode = 2
@@ -632,10 +620,16 @@ stream = ExtResource( 4 )
 unit_db = 18.0
 doppler_tracking = 1
 
-[node name="Explosion" type="Particles" parent="."]
+[node name="Explosion" type="CPUParticles" parent="."]
 emitting = false
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 17 )
-draw_pass_1 = SubResource( 19 )
+mesh = SubResource( 16 )
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 0.15
+angular_velocity = 351.05
+angular_velocity_random = 1.0
+scale_amount_curve = SubResource( 17 )
