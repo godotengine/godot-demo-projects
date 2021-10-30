@@ -17,7 +17,7 @@ they contain a lot of comments that explain how each class works.
 
 Language: GDScript
 
-Renderer: GLES 3 (particles are not available in GLES 2)
+Renderer: GLES 2
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/120
 
