@@ -44,9 +44,8 @@ func _physics_process(delta):
 
 	# Player input.
 	var cam_basis = get_node("Target/Camera").get_global_transform().basis
-	var dir = Vector3() # Where does the player intend to walk to.
-	dir = (Input.get_action_strength("move_right") - Input.get_action_strength("move_left")) * cam_basis[0]
-	dir += (Input.get_action_strength("move_backwards") - Input.get_action_strength("move_forward")) * cam_basis[2]
+	var movement_vec2 = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	var dir = cam_basis * Vector3(movement_vec2.x, 0, movement_vec2.y)
 	dir.y = 0
 	dir = dir.normalized()
 
