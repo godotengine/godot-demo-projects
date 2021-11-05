@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://coin/coin.gd" type="Script" id=1]
 [ext_resource path="res://coin/sound_coin.wav" type="AudioStream" id=2]
@@ -88,21 +88,7 @@ tracks/2/keys = {
 [sub_resource type="SphereShape" id=5]
 radius = 0.312546
 
-[sub_resource type="Gradient" id=6]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
-
-[sub_resource type="GradientTexture" id=7]
-gradient = SubResource( 6 )
-
-[sub_resource type="ParticlesMaterial" id=8]
-emission_shape = 2
-emission_box_extents = Vector3( 0.3, 0.3, 0.3 )
-initial_velocity = 5.51
-angular_velocity = 4.27461e-05
-scale = 0.1
-color_ramp = SubResource( 7 )
-
-[sub_resource type="SpatialMaterial" id=9]
+[sub_resource type="SpatialMaterial" id=6]
 flags_transparent = true
 flags_unshaded = true
 vertex_color_use_as_albedo = true
@@ -115,8 +101,11 @@ particles_anim_loop = false
 albedo_color = Color( 1, 1, 0.759137, 1 )
 albedo_texture = ExtResource( 3 )
 
-[sub_resource type="QuadMesh" id=10]
-material = SubResource( 9 )
+[sub_resource type="QuadMesh" id=7]
+material = SubResource( 6 )
+
+[sub_resource type="Gradient" id=8]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [node name="Coin" type="Area"]
 input_ray_pickable = false
@@ -148,13 +137,17 @@ freeze_bodies = false
 [node name="Sound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 2 )
 
-[node name="Particles" type="Particles" parent="."]
+[node name="Particles" type="CPUParticles" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000732422, 0.542954, 0 )
 emitting = false
 one_shot = true
 explosiveness = 1.0
-visibility_aabb = AABB( -4.12919, -4, -4, 8.25837, 8, 8 )
-process_material = SubResource( 8 )
-draw_pass_1 = SubResource( 10 )
+mesh = SubResource( 7 )
+emission_shape = 2
+emission_box_extents = Vector3( 0.3, 0.3, 0.3 )
+initial_velocity = 5.51
+angular_velocity = 4.27461e-05
+scale_amount = 0.1
+color_ramp = SubResource( 8 )
 
 [connection signal="body_entered" from="." to="." method="_on_coin_body_enter"]

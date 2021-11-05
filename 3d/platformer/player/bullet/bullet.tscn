@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://player/bullet/bullet.gd" type="Script" id=1]
 
@@ -79,16 +79,7 @@ tracks/2/keys = {
 [sub_resource type="Gradient" id=5]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=6]
-gradient = SubResource( 5 )
-
-[sub_resource type="ParticlesMaterial" id=7]
-spread = 0.0
-gravity = Vector3( 0, 0, 0 )
-scale = 0.3
-color_ramp = SubResource( 6 )
-
-[sub_resource type="SphereShape" id=8]
+[sub_resource type="SphereShape" id=6]
 radius = 0.27
 
 [node name="Bullet" type="RigidBody"]
@@ -107,14 +98,17 @@ material/0 = SubResource( 3 )
 autoplay = "life"
 anims/life = SubResource( 4 )
 
-[node name="Particles" type="Particles" parent="."]
+[node name="Particles" type="CPUParticles" parent="."]
 amount = 16
 lifetime = 0.4
 fixed_fps = 60
 fract_delta = false
 local_coords = false
-process_material = SubResource( 7 )
-draw_pass_1 = SubResource( 2 )
+mesh = SubResource( 2 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+scale_amount = 0.3
+color_ramp = SubResource( 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 8 )
+shape = SubResource( 6 )

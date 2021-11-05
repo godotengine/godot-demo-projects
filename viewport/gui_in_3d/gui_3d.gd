@@ -22,6 +22,12 @@ func _ready():
 	if node_quad.get_surface_material(0).params_billboard_mode == 0:
 		set_process(false)
 
+	if OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES2:
+		# Required to prevent the texture from being too dark when using GLES2.
+		# This should be left to `true` in GLES3 to prevent the texture from looking
+		# washed out there.
+		node_quad.get_surface_material(0).flags_albedo_tex_force_srgb = false
+
 
 func _process(_delta):
 	# NOTE: Remove this function if you don't plan on using billboard settings.
