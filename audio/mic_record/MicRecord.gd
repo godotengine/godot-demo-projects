@@ -30,7 +30,6 @@ func _on_PlayButton_pressed():
 	print(recording.mix_rate)
 	print(recording.stereo)
 	var data = recording.get_data()
-	print(data)
 	print(data.size())
 	$AudioStreamPlayer.stream = recording
 	$AudioStreamPlayer.play()
