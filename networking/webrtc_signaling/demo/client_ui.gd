@@ -28,6 +28,7 @@ func _disconnected():
 
 
 func _lobby_joined(lobby):
+	get_tree().network_peer = client.rtc_mp
 	_log("Joined lobby %s" % lobby)
 
 
@@ -77,3 +78,9 @@ func _on_Seal_pressed():
 
 func stop():
 	client.stop()
+
+func _on_RPC_pressed():
+	rpc("update_color", Color(rand_range(0, 1), rand_range(0, 1), rand_range(0, 1), 1))
+
+remotesync func update_color(color: Color):
+	$VBoxContainer/HBoxContainer/Label.modulate = color
