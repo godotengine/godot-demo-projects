@@ -1,20 +1,21 @@
 extends Node
 
 # The URL we will connect to.
-export var websocket_url = "ws://localhost:9080"
+@export
+var websocket_url = "ws://localhost:9080"
 
 # Our WebSocketClient instance.
 var _client = WebSocketClient.new()
 
 func _ready():
 	# Connect base signals to get notified of connection open, close, and errors.
-	_client.connect("connection_closed", self, "_closed")
-	_client.connect("connection_error", self, "_closed")
-	_client.connect("connection_established", self, "_connected")
+	_client.connect("connection_closed", _closed)
+	_client.connect("connection_error", _closed)
+	_client.connect("connection_established", _connected)
 	# This signal is emitted when not using the Multiplayer API every time
 	# a full packet is received.
 	# Alternatively, you could check get_peer(1).get_available_packets() in a loop.
-	_client.connect("data_received", self, "_on_data")
+	_client.connect("data_received", _on_data)
 
 	# Initiate connection to the given URL.
 	var err = _client.connect_to_url(websocket_url)
@@ -36,7 +37,7 @@ func _connected(proto = ""):
 	print("Connected with protocol: ", proto)
 	# You MUST always use get_peer(1).put_packet to send data to server,
 	# and not put_packet directly when not using the MultiplayerAPI.
-	_client.get_peer(1).put_packet("Test packet".to_utf8())
+	_client.get_peer(1).put_packet("Test packet".to_utf8_buffer())
 
 
 func _on_data():
