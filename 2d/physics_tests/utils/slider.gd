@@ -1,7 +1,7 @@
-extends Slider
+extends HSlider
 
 
-export(float) var snap_step = 1.0
+@export var snap_step = 1.0
 
 
 func _process(_delta):

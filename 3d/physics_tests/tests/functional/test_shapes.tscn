@@ -1,71 +1,71 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=10 format=3 uid="uid://dmvgjuovguvg7"]
 
-[ext_resource path="res://utils/rigidbody_pick.gd" type="Script" id=1]
-[ext_resource path="res://test.gd" type="Script" id=2]
-[ext_resource path="res://utils/camera_orbit.gd" type="Script" id=4]
-[ext_resource path="res://tests/static_scene.tscn" type="PackedScene" id=6]
+[ext_resource type="Script" path="res://utils/rigidbody_pick.gd" id="1"]
+[ext_resource type="Script" path="res://test.gd" id="2"]
+[ext_resource type="Script" path="res://utils/camera_orbit.gd" id="4"]
+[ext_resource type="PackedScene" uid="uid://cl2vpuxqgnylc" path="res://tests/static_scene.tscn" id="6"]
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="BoxShape3D" id="1"]
 
-[sub_resource type="CapsuleShape" id=2]
+[sub_resource type="CapsuleShape3D" id="2"]
 
-[sub_resource type="CylinderShape" id=3]
+[sub_resource type="CylinderShape3D" id="3"]
 
-[sub_resource type="ConvexPolygonShape" id=4]
-points = PoolVector3Array( -0.7, 0, -0.7, -0.3, 0, 0.8, 0.8, 0, -0.3, 0, -1, 0 )
+[sub_resource type="ConvexPolygonShape3D" id="4"]
+points = PackedVector3Array(-0.7, 0, -0.7, -0.3, 0, 0.8, 0.8, 0, -0.3, 0, -1, 0)
 
-[sub_resource type="SphereShape" id=5]
+[sub_resource type="SphereShape3D" id="5"]
 
-[node name="Test" type="Spatial"]
-script = ExtResource( 2 )
+[node name="Test" type="Node3D"]
+script = ExtResource( "2" )
 
-[node name="DynamicShapes" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.35591, 0 )
+[node name="DynamicShapes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.35591, 0)
 
-[node name="RigidBodyBox" type="RigidBody" parent="DynamicShapes"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0 )
-script = ExtResource( 1 )
+[node name="RigidBodyBox" type="RigidDynamicBody3D" parent="DynamicShapes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+script = ExtResource( "1" )
 
-[node name="CollisionShape" type="CollisionShape" parent="DynamicShapes/RigidBodyBox"]
-transform = Transform( 0.579556, 0.0885213, 0.145926, 0, 0.939693, -0.205212, -0.155291, 0.330366, 0.544604, 0, 0, 0 )
-shape = SubResource( 1 )
+[node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyBox"]
+transform = Transform3D(0.579556, 0.0885213, 0.145926, 0, 0.939693, -0.205212, -0.155291, 0.330366, 0.544604, 0, 0, 0)
+shape = SubResource( "1" )
 
-[node name="RigidBodyCapsule" type="RigidBody" parent="DynamicShapes"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0 )
-script = ExtResource( 1 )
+[node name="RigidBodyCapsule" type="RigidDynamicBody3D" parent="DynamicShapes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+script = ExtResource( "1" )
 
-[node name="CollisionShape" type="CollisionShape" parent="DynamicShapes/RigidBodyCapsule"]
-transform = Transform( 0.8, 0, 0, 0, -1.30337e-07, -0.8, 0, 0.8, -1.30337e-07, 0, 0, 0 )
-shape = SubResource( 2 )
+[node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyCapsule"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+shape = SubResource( "2" )
 
-[node name="RigidBodyCylinder" type="RigidBody" parent="DynamicShapes"]
-script = ExtResource( 1 )
+[node name="RigidBodyCylinder" type="RigidDynamicBody3D" parent="DynamicShapes"]
+script = ExtResource( "1" )
 
-[node name="CollisionShape" type="CollisionShape" parent="DynamicShapes/RigidBodyCylinder"]
-transform = Transform( 0.772741, -0.258819, 2.59821e-08, 0.2, 0.933013, -0.207055, 0.0535898, 0.25, 0.772741, 0, 0, 0 )
-shape = SubResource( 3 )
+[node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyCylinder"]
+transform = Transform3D(0.772741, -0.258819, 2.59821e-08, 0.2, 0.933013, -0.207055, 0.0535898, 0.25, 0.772741, 0, 0, 0)
+shape = SubResource( "3" )
 
-[node name="RigidBodyConvex" type="RigidBody" parent="DynamicShapes"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0 )
-script = ExtResource( 1 )
+[node name="RigidBodyConvex" type="RigidDynamicBody3D" parent="DynamicShapes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+script = ExtResource( "1" )
 
-[node name="CollisionShape" type="CollisionShape" parent="DynamicShapes/RigidBodyConvex"]
-transform = Transform( 1.5, 0, 0, 0, 1.93185, -0.388229, 0, 0.517638, 1.44889, 0, 0, 0 )
-shape = SubResource( 4 )
+[node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyConvex"]
+transform = Transform3D(1.5, 0, 0, 0, 1.93185, -0.388229, 0, 0.517638, 1.44889, 0, 0, 0)
+shape = SubResource( "4" )
 
-[node name="RigidBodySphere" type="RigidBody" parent="DynamicShapes"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0 )
-script = ExtResource( 1 )
+[node name="RigidBodySphere" type="RigidDynamicBody3D" parent="DynamicShapes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+script = ExtResource( "1" )
 
-[node name="CollisionShape" type="CollisionShape" parent="DynamicShapes/RigidBodySphere"]
-transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0 )
-shape = SubResource( 5 )
+[node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodySphere"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+shape = SubResource( "5" )
 
-[node name="StaticScene" parent="." instance=ExtResource( 6 )]
+[node name="StaticScene" parent="." instance=ExtResource( "6" )]
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.53602, 22.1236 )
-script = ExtResource( 4 )
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.53602, 22.1236)
+script = ExtResource( "4" )
 
-[node name="OmniLight" type="OmniLight" parent="Camera"]
+[node name="OmniLight" type="OmniLight3D" parent="Camera3D"]
 omni_range = 50.0

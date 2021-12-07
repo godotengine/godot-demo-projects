@@ -11,7 +11,7 @@ var _engine = PhysicsEngine.OTHER
 
 
 func _enter_tree():
-	pause_mode = Node.PAUSE_MODE_PROCESS
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
 	get_tree().debug_collisions_hint = true
 
@@ -21,7 +21,7 @@ func _enter_tree():
 			_engine = PhysicsEngine.BULLET
 		"Bullet":
 			_engine = PhysicsEngine.BULLET
-		"GodotPhysics":
+		"GodotPhysics3D":
 			_engine = PhysicsEngine.GODOT_PHYSICS
 		_:
 			_engine = PhysicsEngine.OTHER
@@ -29,7 +29,10 @@ func _enter_tree():
 
 func _process(_delta):
 	if Input.is_action_just_pressed("toggle_full_screen"):
-		OS.window_fullscreen = not OS.window_fullscreen
+		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 	if Input.is_action_just_pressed("toggle_debug_collision"):
 		var debug_collision_enabled = not _is_debug_collision_enabled()

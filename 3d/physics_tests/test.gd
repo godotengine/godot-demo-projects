@@ -4,7 +4,7 @@ extends Node
 
 signal wait_done()
 
-export var _enable_debug_collision = true
+@export var _enable_debug_collision = true
 
 var _timer
 var _timer_started = false
@@ -27,17 +27,17 @@ func _physics_process(_delta):
 
 
 func add_sphere(pos, radius, color):
-	var sphere = MeshInstance.new()
+	var sphere = MeshInstance3D.new()
 
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = radius
 	sphere_mesh.height = radius * 2.0
 	sphere.mesh = sphere_mesh
 
-	var material = SpatialMaterial.new()
+	var material = StandardMaterial3D.new()
 	material.flags_unshaded = true
 	material.albedo_color = color
-	sphere.material_override = material
+	sphere.set_surface_override_material(0, material)
 
 	_drawn_nodes.push_back(sphere)
 	add_child(sphere)
@@ -48,14 +48,14 @@ func add_sphere(pos, radius, color):
 func add_shape(shape, transform, color):
 	var debug_mesh = shape.get_debug_mesh()
 
-	var mesh_instance = MeshInstance.new()
+	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.transform = transform
 	mesh_instance.mesh = debug_mesh
 
-	var material = SpatialMaterial.new()
+	var material = StandardMaterial3D.new()
 	material.flags_unshaded = true
 	material.albedo_color = color
-	mesh_instance.material_override = material
+	mesh_instance.set_surface_override_material(0, material)
 
 	add_child(mesh_instance)
 	_drawn_nodes.push_back(mesh_instance)
@@ -68,12 +68,12 @@ func clear_drawn_nodes():
 	_drawn_nodes.clear()
 
 
-func create_rigidbody(shape, pickable = false, transform = Transform.IDENTITY):
-	var collision = CollisionShape.new()
+func create_rigidbody(shape, pickable = false, transform = Transform3D.IDENTITY):
+	var collision = CollisionShape3D.new()
 	collision.shape = shape
 	collision.transform = transform
 
-	var body = RigidBody.new()
+	var body = RigidDynamicBody3D.new()
 	body.add_child(collision)
 
 	if pickable:
@@ -83,9 +83,9 @@ func create_rigidbody(shape, pickable = false, transform = Transform.IDENTITY):
 	return body
 
 
-func create_rigidbody_box(size, pickable = false, transform = Transform.IDENTITY):
-	var shape = BoxShape.new()
-	shape.extents = 0.5 * size
+func create_rigidbody_box(size, pickable = false, transform = Transform3D.IDENTITY):
+	var shape = BoxShape3D.new()
+	shape.size = size
 
 	return create_rigidbody(shape, pickable, transform)
 
@@ -95,7 +95,7 @@ func start_timer(timeout):
 		_timer = Timer.new()
 		_timer.one_shot = true
 		add_child(_timer)
-		_timer.connect("timeout", self, "_on_timer_done")
+		_timer.connect("timeout", Callable(self, "_on_timer_done"))
 	else:
 		cancel_timer()
 

@@ -1,4 +1,4 @@
-extends Camera
+extends Camera3D
 
 
 const ROTATION_COEFF = 0.02
@@ -14,7 +14,7 @@ func _ready():
 func _unhandled_input(event):
 	var mouse_button_event = event as InputEventMouseButton
 	if mouse_button_event:
-		if mouse_button_event.button_index == BUTTON_RIGHT:
+		if mouse_button_event.button_index == MOUSE_BUTTON_RIGHT:
 			_rotation_enabled = mouse_button_event.pressed
 		return
 
@@ -28,7 +28,7 @@ func _unhandled_input(event):
 
 
 func _initialize_pivot():
-	_rotation_pivot = Spatial.new()
+	_rotation_pivot = Node3D.new()
 	var camera_parent = get_parent()
 	camera_parent.add_child(_rotation_pivot)
 	camera_parent.remove_child(self)

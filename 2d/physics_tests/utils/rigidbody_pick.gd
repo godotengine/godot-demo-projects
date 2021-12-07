@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends RigidDynamicBody2D
 
 
 var _picked = false
@@ -25,7 +25,7 @@ func _input_event(_viewport, event, _shape_idx):
 func _physics_process(delta):
 	if _picked:
 		var mouse_pos = get_global_mouse_position()
-		if mode == MODE_STATIC:
+		if freeze:
 			global_position = mouse_pos
 		else:
 			linear_velocity = (mouse_pos - _last_mouse_pos) / delta

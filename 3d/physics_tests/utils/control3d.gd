@@ -1,7 +1,7 @@
 extends Control
 
 
-export(Vector3) var world_offset
+@export var world_offset = Vector3.ZERO
 
 var _pos_offset
 var _attachment
@@ -9,7 +9,7 @@ var _attachment
 
 func _ready():
 	_pos_offset = rect_position
-	_attachment = get_parent() as Spatial
+	_attachment = get_parent() as Node3D
 
 
 func _process(_delta):
@@ -20,7 +20,7 @@ func _process(_delta):
 	if viewport == null:
 		return
 
-	var camera = viewport.get_camera()
+	var camera = viewport.get_camera_3d()
 	if camera == null:
 		return
 

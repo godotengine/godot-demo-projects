@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends RigidDynamicBody2D
 
 
 var _initial_velocity = Vector2.ZERO
@@ -7,10 +7,14 @@ var _motion_speed = 400.0
 var _gravity_force = 50.0
 var _jump_force = 1000.0
 var _velocity = Vector2.ZERO
+var _floor_max_angle = 45.0
 var _on_floor = false
 var _jumping = false
 var _keep_velocity = false
 
+
+func _ready():
+	gravity_scale = 0.0
 
 func _physics_process(_delta):
 	if _initial_velocity != Vector2.ZERO:
@@ -44,7 +48,6 @@ func _physics_process(_delta):
 			# Reset gravity.
 			_velocity.y = 0.0
 	else:
-		# Apply gravity and get jump ready.
 		_velocity.y += _gravity_force
 		_jumping = false
 
@@ -56,10 +59,16 @@ func _integrate_forces(state):
 
 	var contacts = state.get_contact_count()
 	for i in contacts:
-		var pos = state.get_contact_collider_position(i)
-		if pos.y > position.y:
+		var normal = state.get_contact_local_normal(i)
+
+		# Detect floor.
+		if acos(normal.dot(Vector2.UP)) <= deg2rad(_floor_max_angle) + 0.01:
 			_on_floor = true
 
+		# Detect ceiling.
+		if acos(normal.dot(-Vector2.UP)) <= deg2rad(_floor_max_angle) + 0.01:
+			_jumping = false
+			_velocity.y = 0.0
 
 func is_on_floor():
 	return _on_floor

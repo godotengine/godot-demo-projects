@@ -8,9 +8,9 @@ const OPTION_TYPE_CAPSULE = "Shape type/Capsule"
 const OPTION_TYPE_CYLINDER = "Shape type/Cylinder"
 const OPTION_TYPE_CONVEX = "Shape type/Convex"
 
-export(Array, NodePath) var spawns = Array()
-export(int) var spawn_count = 100
-export(Vector3) var spawn_randomize
+@export var spawns = []
+@export var spawn_count = 100
+@export var spawn_randomize = Vector3.ZERO
 
 var _object_templates = []
 
@@ -20,7 +20,7 @@ var _log_physics_time_start = 0
 
 
 func _ready():
-	yield(start_timer(0.5), "timeout")
+	await start_timer(0.5).timeout
 	if is_timer_canceled():
 		return
 
@@ -35,9 +35,9 @@ func _ready():
 	$Options.add_menu_item(OPTION_TYPE_CAPSULE)
 	$Options.add_menu_item(OPTION_TYPE_CYLINDER)
 	$Options.add_menu_item(OPTION_TYPE_CONVEX)
-	$Options.connect("option_selected", self, "_on_option_selected")
+	$Options.connect("option_selected", Callable(self, "_on_option_selected"))
 
-	_start_all_types()
+	await _start_all_types()
 
 
 func _exit_tree():
@@ -45,9 +45,11 @@ func _exit_tree():
 		object_template.free()
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
+	super._physics_process(delta)
+
 	if _log_physics:
-		var time = OS.get_ticks_usec()
+		var time = Time.get_ticks_usec()
 		var time_delta = time - _log_physics_time
 		var time_total = time - _log_physics_time_start
 		_log_physics_time = time
@@ -56,7 +58,7 @@ func _physics_process(_delta):
 
 func _log_physics_start():
 	_log_physics = true
-	_log_physics_time_start = OS.get_ticks_usec()
+	_log_physics_time_start = Time.get_ticks_usec()
 	_log_physics_time = _log_physics_time_start
 
 
@@ -71,17 +73,17 @@ func _on_option_selected(option):
 
 	match option:
 		OPTION_TYPE_ALL:
-			_start_all_types()
+			await _start_all_types()
 		OPTION_TYPE_BOX:
-			_start_type(_find_type_index("Box"))
+			await _start_type(_find_type_index("Box"))
 		OPTION_TYPE_SPHERE:
-			_start_type(_find_type_index("Sphere"))
+			await _start_type(_find_type_index("Sphere"))
 		OPTION_TYPE_CAPSULE:
-			_start_type(_find_type_index("Capsule"))
+			await _start_type(_find_type_index("Capsule"))
 		OPTION_TYPE_CYLINDER:
-			_start_type(_find_type_index("Cylinder"))
+			await _start_type(_find_type_index("Cylinder"))
 		OPTION_TYPE_CONVEX:
-			_start_type(_find_type_index("Convex"))
+			await _start_type(_find_type_index("Convex"))
 
 
 func _find_type_index(type_name):
@@ -100,7 +102,7 @@ func _start_type(type_index):
 	if type_index >= _object_templates.size():
 		return
 
-	yield(start_timer(1.0), "timeout")
+	await start_timer(1.0).timeout
 	if is_timer_canceled():
 		return
 
@@ -108,10 +110,10 @@ func _start_type(type_index):
 
 	_spawn_objects(type_index)
 
-	yield(wait_for_physics_ticks(5), "wait_done")
+	await wait_for_physics_ticks(5).wait_done
 	_log_physics_stop()
 
-	yield(start_timer(1.0), "timeout")
+	await start_timer(1.0).timeout
 	if is_timer_canceled():
 		return
 
@@ -119,10 +121,10 @@ func _start_type(type_index):
 
 	_activate_objects()
 
-	yield(wait_for_physics_ticks(5), "wait_done")
+	await wait_for_physics_ticks(5).wait_done
 	_log_physics_stop()
 
-	yield(start_timer(5.0), "timeout")
+	await start_timer(5.0).timeout
 	if is_timer_canceled():
 		return
 
@@ -130,17 +132,17 @@ func _start_type(type_index):
 
 	_despawn_objects()
 
-	yield(wait_for_physics_ticks(5), "wait_done")
+	await wait_for_physics_ticks(5).wait_done
 	_log_physics_stop()
 
-	yield(start_timer(1.0), "timeout")
+	await start_timer(1.0).timeout
 
 
 func _start_all_types():
 	Log.print_log("* Start all types.")
 
 	for type_index in range(_object_templates.size()):
-		yield(_start_type(type_index), "completed")
+		await _start_type(type_index)
 		if is_timer_canceled():
 			return
 
@@ -150,7 +152,7 @@ func _start_all_types():
 func _spawn_objects(type_index):
 	var template_node = _object_templates[type_index]
 
-	Log.print_log("* Spawning: " + template_node.name)
+	Log.print_log("* Spawning: " + String(template_node.name))
 
 	for spawn in spawns:
 		var spawn_parent = get_node(spawn)
@@ -160,7 +162,7 @@ func _spawn_objects(type_index):
 			var collision = template_node.get_child(0).duplicate()
 			collision.shape = collision.shape.duplicate()
 			var body = template_node.duplicate()
-			body.transform = Transform.IDENTITY
+			body.transform = Transform3D.IDENTITY
 			if spawn_randomize != Vector3.ZERO:
 				body.transform.origin.x = randf() * spawn_randomize.x
 				body.transform.origin.y = randf() * spawn_randomize.y
@@ -180,7 +182,7 @@ func _activate_objects():
 		var spawn_parent = get_node(spawn)
 
 		for node_index in range(spawn_parent.get_child_count()):
-			var node = spawn_parent.get_child(node_index) as RigidBody
+			var node = spawn_parent.get_child(node_index) as RigidDynamicBody3D
 			node.set_sleeping(false)
 
 

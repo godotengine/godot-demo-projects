@@ -1,5 +1,5 @@
+@tool
 extends Label
-tool
 
 
 func _process(_delta):

@@ -3,57 +3,61 @@ extends TestCharacter
 
 const OPTION_TEST_CASE_ALL = "Test Cases/TEST ALL (0)"
 const OPTION_TEST_CASE_JUMP_ONE_WAY_RIGID = "Test Cases/Jump through one-way tiles (Rigid Body)"
-const OPTION_TEST_CASE_JUMP_ONE_WAY_KINEMATIC = "Test Cases/Jump through one-way tiles (Kinematic Body)"
+const OPTION_TEST_CASE_JUMP_ONE_WAY_CHARACTER = "Test Cases/Jump through one-way tiles (Character Body)"
 const OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_RIGID = "Test Cases/Jump through one-way corner (Rigid Body)"
-const OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_KINEMATIC = "Test Cases/Jump through one-way corner (Kinematic Body)"
-const OPTION_TEST_CASE_FALL_ONE_WAY_KINEMATIC = "Test Cases/Fall and pushed on one-way tiles (Kinematic Body)"
+const OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_CHARACTER = "Test Cases/Jump through one-way corner (Character Body)"
+const OPTION_TEST_CASE_FALL_ONE_WAY_CHARACTER = "Test Cases/Fall and pushed on one-way tiles (Character Body)"
 
 var _test_jump_one_way = false
 var _test_jump_one_way_corner = false
 var _test_fall_one_way = false
 
-var _extra_body = null
+var _extra_body : PhysicsBody2D = null
 
 var _failed_reason = ""
 
 
 func _ready():
+	super._ready()
+
 	options.add_menu_item(OPTION_TEST_CASE_ALL)
 	options.add_menu_item(OPTION_TEST_CASE_JUMP_ONE_WAY_RIGID)
-	options.add_menu_item(OPTION_TEST_CASE_JUMP_ONE_WAY_KINEMATIC)
+	options.add_menu_item(OPTION_TEST_CASE_JUMP_ONE_WAY_CHARACTER)
 	options.add_menu_item(OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_RIGID)
-	options.add_menu_item(OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_KINEMATIC)
-	options.add_menu_item(OPTION_TEST_CASE_FALL_ONE_WAY_KINEMATIC)
+	options.add_menu_item(OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_CHARACTER)
+	options.add_menu_item(OPTION_TEST_CASE_FALL_ONE_WAY_CHARACTER)
 
 
 func _input(event):
+	super._input(event)
+
 	var key_event = event as InputEventKey
 	if key_event and not key_event.pressed:
-		if key_event.scancode == KEY_0:
-			_on_option_selected(OPTION_TEST_CASE_ALL)
+		if key_event.keycode == KEY_0:
+			await _on_option_selected(OPTION_TEST_CASE_ALL)
 
 
 func _on_option_selected(option):
 	match option:
 		OPTION_TEST_CASE_ALL:
-			_test_all()
+			await _test_all()
 		OPTION_TEST_CASE_JUMP_ONE_WAY_RIGID:
-			_start_test_case(option)
+			await _start_test_case(option)
 			return
-		OPTION_TEST_CASE_JUMP_ONE_WAY_KINEMATIC:
-			_start_test_case(option)
+		OPTION_TEST_CASE_JUMP_ONE_WAY_CHARACTER:
+			await _start_test_case(option)
 			return
 		OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_RIGID:
-			_start_test_case(option)
+			await _start_test_case(option)
 			return
-		OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_KINEMATIC:
-			_start_test_case(option)
+		OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_CHARACTER:
+			await _start_test_case(option)
 			return
-		OPTION_TEST_CASE_FALL_ONE_WAY_KINEMATIC:
-			_start_test_case(option)
+		OPTION_TEST_CASE_FALL_ONE_WAY_CHARACTER:
+			await _start_test_case(option)
 			return
 
-	._on_option_selected(option)
+	super._on_option_selected(option)
 
 
 func _start_test_case(option):
@@ -63,22 +67,22 @@ func _start_test_case(option):
 		OPTION_TEST_CASE_JUMP_ONE_WAY_RIGID:
 			_body_type = E_BodyType.RIGID_BODY
 			_test_jump_one_way_corner = false
-			yield(_start_jump_one_way(), "completed")
-		OPTION_TEST_CASE_JUMP_ONE_WAY_KINEMATIC:
-			_body_type = E_BodyType.KINEMATIC_BODY
+			await _start_jump_one_way()
+		OPTION_TEST_CASE_JUMP_ONE_WAY_CHARACTER:
+			_body_type = E_BodyType.CHARACTER_BODY
 			_test_jump_one_way_corner = false
-			yield(_start_jump_one_way(), "completed")
+			await _start_jump_one_way()
 		OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_RIGID:
 			_body_type = E_BodyType.RIGID_BODY
 			_test_jump_one_way_corner = true
-			yield(_start_jump_one_way(), "completed")
-		OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_KINEMATIC:
-			_body_type = E_BodyType.KINEMATIC_BODY
+			await _start_jump_one_way()
+		OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_CHARACTER:
+			_body_type = E_BodyType.CHARACTER_BODY
 			_test_jump_one_way_corner = true
-			yield(_start_jump_one_way(), "completed")
-		OPTION_TEST_CASE_FALL_ONE_WAY_KINEMATIC:
-			_body_type = E_BodyType.KINEMATIC_BODY
-			yield(_start_fall_one_way(), "completed")
+			await _start_jump_one_way()
+		OPTION_TEST_CASE_FALL_ONE_WAY_CHARACTER:
+			_body_type = E_BodyType.CHARACTER_BODY
+			await _start_fall_one_way()
 		_:
 			Log.print_error("Invalid test case.")
 
@@ -87,24 +91,24 @@ func _test_all():
 	Log.print_log("* TESTING ALL...")
 
 	# RigidBody tests.
-	yield(_start_test_case(OPTION_TEST_CASE_JUMP_ONE_WAY_RIGID), "completed")
+	await _start_test_case(OPTION_TEST_CASE_JUMP_ONE_WAY_RIGID)
 	if is_timer_canceled():
 		return
 
-	yield(_start_test_case(OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_RIGID), "completed")
+	await _start_test_case(OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_RIGID)
 	if is_timer_canceled():
 		return
 
-	# KinematicBody tests.
-	yield(_start_test_case(OPTION_TEST_CASE_JUMP_ONE_WAY_KINEMATIC), "completed")
+	# CharacterBody tests.
+	await _start_test_case(OPTION_TEST_CASE_JUMP_ONE_WAY_CHARACTER)
 	if is_timer_canceled():
 		return
 
-	yield(_start_test_case(OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_KINEMATIC), "completed")
+	await _start_test_case(OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_CHARACTER)
 	if is_timer_canceled():
 		return
 
-	yield(_start_test_case(OPTION_TEST_CASE_FALL_ONE_WAY_KINEMATIC), "completed")
+	await _start_test_case(OPTION_TEST_CASE_FALL_ONE_WAY_CHARACTER)
 	if is_timer_canceled():
 		return
 
@@ -118,7 +122,7 @@ func _set_result(test_passed):
 	else:
 		result = "FAILED"
 
-	if not test_passed and not _failed_reason.empty():
+	if not test_passed and not _failed_reason.is_empty():
 		result += _failed_reason
 	else:
 		result += "."
@@ -132,7 +136,7 @@ func _start_test():
 		_extra_body.queue_free()
 		_extra_body = null
 
-	._start_test()
+	super._start_test()
 
 	if _test_jump_one_way:
 		_test_jump_one_way = false
@@ -167,7 +171,7 @@ func _start_jump_one_way():
 	_test_jump_one_way = true
 	_start_test()
 
-	yield(start_timer(1.5), "timeout")
+	await start_timer(1.5).timeout
 	if is_timer_canceled():
 		return
 
@@ -178,7 +182,7 @@ func _start_fall_one_way():
 	_test_fall_one_way = true
 	_start_test()
 
-	yield(start_timer(1.0), "timeout")
+	await start_timer(1.0).timeout
 	if is_timer_canceled():
 		return
 

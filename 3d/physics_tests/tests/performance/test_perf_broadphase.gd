@@ -4,9 +4,9 @@ extends Test
 const BOX_SIZE = Vector3(0.8, 0.8, 0.8)
 const BOX_SPACE = Vector3(1.0, 1.0, 1.0)
 
-export(int, 1, 1000) var row_size = 20
-export(int, 1, 1000) var column_size = 20
-export(int, 1, 1000) var depth_size = 20
+@export_range(1, 1000) var row_size = 20
+@export_range(1, 1000) var column_size = 20
+@export_range(1, 1000) var depth_size = 20
 
 var _objects = []
 
@@ -16,7 +16,7 @@ var _log_physics_time_start = 0
 
 
 func _ready():
-	yield(start_timer(1.0), "timeout")
+	await start_timer(1.0).timeout
 	if is_timer_canceled():
 		return
 
@@ -24,10 +24,10 @@ func _ready():
 
 	_create_objects()
 
-	yield(wait_for_physics_ticks(5), "wait_done")
+	await wait_for_physics_ticks(5).wait_done
 	_log_physics_stop()
 
-	yield(start_timer(1.0), "timeout")
+	await start_timer(1.0).timeout
 	if is_timer_canceled():
 		return
 
@@ -35,10 +35,10 @@ func _ready():
 
 	_add_objects()
 
-	yield(wait_for_physics_ticks(5), "wait_done")
+	await wait_for_physics_ticks(5).wait_done
 	_log_physics_stop()
 
-	yield(start_timer(1.0), "timeout")
+	await start_timer(1.0).timeout
 	if is_timer_canceled():
 		return
 
@@ -46,10 +46,10 @@ func _ready():
 
 	_move_objects()
 
-	yield(wait_for_physics_ticks(5), "wait_done")
+	await wait_for_physics_ticks(5).wait_done
 	_log_physics_stop()
 
-	yield(start_timer(1.0), "timeout")
+	await start_timer(1.0).timeout
 	if is_timer_canceled():
 		return
 
@@ -57,10 +57,10 @@ func _ready():
 
 	_remove_objects()
 
-	yield(wait_for_physics_ticks(5), "wait_done")
+	await wait_for_physics_ticks(5).wait_done
 	_log_physics_stop()
 
-	yield(start_timer(1.0), "timeout")
+	await start_timer(1.0).timeout
 	if is_timer_canceled():
 		return
 
@@ -72,9 +72,11 @@ func _exit_tree():
 		object.free()
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
+	super._physics_process(delta)
+
 	if _log_physics:
-		var time = OS.get_ticks_usec()
+		var time = Time.get_ticks_usec()
 		var time_delta = time - _log_physics_time
 		var time_total = time - _log_physics_time_start
 		_log_physics_time = time
@@ -83,7 +85,7 @@ func _physics_process(_delta):
 
 func _log_physics_start():
 	_log_physics = true
-	_log_physics_time_start = OS.get_ticks_usec()
+	_log_physics_time_start = Time.get_ticks_usec()
 	_log_physics_time = _log_physics_time_start
 
 
@@ -95,7 +97,7 @@ func _create_objects():
 	_objects.clear()
 
 	Log.print_log("* Creating objects...")
-	var timer = OS.get_ticks_usec()
+	var timer = Time.get_ticks_usec()
 
 	var pos_x = -0.5 * (row_size - 1) * BOX_SPACE.x
 
@@ -118,7 +120,7 @@ func _create_objects():
 
 		pos_x += BOX_SPACE.x
 
-	timer = OS.get_ticks_usec() - timer
+	timer = Time.get_ticks_usec() - timer
 	Log.print_log("  Create Time: %.3f ms" % (0.001 * timer))
 
 
@@ -126,23 +128,23 @@ func _add_objects():
 	var root_node = $Objects
 
 	Log.print_log("* Adding objects...")
-	var timer = OS.get_ticks_usec()
+	var timer = Time.get_ticks_usec()
 
 	for object in _objects:
 		root_node.add_child(object)
 
-	timer = OS.get_ticks_usec() - timer
+	timer = Time.get_ticks_usec() - timer
 	Log.print_log("  Add Time: %.3f ms" % (0.001 * timer))
 
 
 func _move_objects():
 	Log.print_log("* Moving objects...")
-	var timer = OS.get_ticks_usec()
+	var timer = Time.get_ticks_usec()
 
 	for object in _objects:
 		object.transform.origin += BOX_SPACE
 
-	timer = OS.get_ticks_usec() - timer
+	timer = Time.get_ticks_usec() - timer
 	Log.print_log("  Move Time: %.3f ms" % (0.001 * timer))
 
 
@@ -150,12 +152,12 @@ func _remove_objects():
 	var root_node = $Objects
 
 	Log.print_log("* Removing objects...")
-	var timer = OS.get_ticks_usec()
+	var timer = Time.get_ticks_usec()
 
 	# Remove objects in reversed order to avoid the overhead of changing children index in parent.
 	var object_count = _objects.size()
 	for object_index in range(object_count):
 		root_node.remove_child(_objects[object_count - object_index - 1])
 
-	timer = OS.get_ticks_usec() - timer
+	timer = Time.get_ticks_usec() - timer
 	Log.print_log("  Remove Time: %.3f ms" % (0.001 * timer))

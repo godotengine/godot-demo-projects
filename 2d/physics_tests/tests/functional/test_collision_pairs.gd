@@ -16,9 +16,9 @@ const OPTION_SHAPE_CONCAVE_SEGMENTS = "Shape type/Concave Segments"
 
 const OFFSET_RANGE = 120.0
 
-export(Vector2) var offset = Vector2.ZERO
+@export var offset = Vector2.ZERO
 
-onready var options = $Options
+@onready var options = $Options
 
 var _update_collision = false
 var _collision_test_index = 0
@@ -42,10 +42,10 @@ func _ready():
 	options.add_menu_item(OPTION_SHAPE_CONCAVE_POLYGON, true, true)
 	options.add_menu_item(OPTION_SHAPE_CONCAVE_SEGMENTS, true, true)
 
-	options.connect("option_selected", self, "_on_option_selected")
-	options.connect("option_changed", self, "_on_option_changed")
+	options.connect("option_selected", Callable(self, "_on_option_selected"))
+	options.connect("option_changed", Callable(self, "_on_option_changed"))
 
-	yield(start_timer(0.5), "timeout")
+	await start_timer(0.5).timeout
 	if is_timer_canceled():
 		return
 
@@ -55,19 +55,21 @@ func _ready():
 func _input(event):
 	var key_event = event as InputEventKey
 	if key_event and not key_event.pressed:
-		if key_event.scancode == KEY_1:
+		if key_event.keycode == KEY_1:
 			_on_option_selected(OPTION_TYPE_RECTANGLE)
-		elif key_event.scancode == KEY_2:
+		elif key_event.keycode == KEY_2:
 			_on_option_selected(OPTION_TYPE_SPHERE)
-		elif key_event.scancode == KEY_3:
+		elif key_event.keycode == KEY_3:
 			_on_option_selected(OPTION_TYPE_CAPSULE)
-		elif key_event.scancode == KEY_4:
+		elif key_event.keycode == KEY_4:
 			_on_option_selected(OPTION_TYPE_CONVEX_POLYGON)
-		elif key_event.scancode == KEY_5:
+		elif key_event.keycode == KEY_5:
 			_on_option_selected(OPTION_TYPE_CONCAVE_SEGMENTS)
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
+	super._physics_process(delta)
+
 	if not _update_collision:
 		return
 
@@ -104,7 +106,7 @@ func _do_collision_test():
 
 	Log.print_log("* Start %s collision tests..." % shape.resource_name)
 
-	var shape_query = Physics2DShapeQueryParameters.new()
+	var shape_query = PhysicsShapeQueryParameters2D.new()
 	shape_query.set_shape(shape)
 	var shape_scale = Vector2(0.5, 0.5)
 	shape_query.transform = Transform2D.IDENTITY.scaled(shape_scale)
@@ -116,13 +118,13 @@ func _do_collision_test():
 		var body = node as PhysicsBody2D
 		var space_state = body.get_world_2d().direct_space_state
 
-		Log.print_log("* Testing: %s" % body.name)
+		Log.print_log("* Testing: %s" % String(body.name))
 
 		var center = body.position
 
 		# Collision at the center inside.
 		var res = _add_collision(space_state, center, shape, shape_query)
-		Log.print_log("Collision center inside: %s" % ("NO HIT" if res.empty() else "HIT"))
+		Log.print_log("Collision center inside: %s" % ("NO HIT" if res.is_empty() else "HIT"))
 
 	Log.print_log("* Done.")
 
@@ -132,17 +134,17 @@ func _add_collision(space_state, pos, shape, shape_query):
 	var results = space_state.collide_shape(shape_query)
 
 	var color
-	if results.empty():
-		color = Color.white.darkened(0.5)
+	if results.is_empty():
+		color = Color.WHITE.darkened(0.5)
 	else:
-		color = Color.green
+		color = Color.GREEN
 
 	# Draw collision query shape.
 	add_shape(shape, shape_query.transform, color)
 
 	# Draw contact positions.
 	for contact_pos in results:
-		add_circle(contact_pos, 1.0, Color.red)
+		add_circle(contact_pos, 1.0, Color.RED)
 
 	return results
 

@@ -2,8 +2,8 @@ extends TestCharacter
 
 
 const OPTION_TEST_CASE_ALL = "Test Cases/TEST ALL (0)"
-const OPTION_TEST_CASE_DETECT_FLOOR_NO_SNAP = "Test Cases/Floor detection (Kinematic Body)"
-const OPTION_TEST_CASE_DETECT_FLOOR_MOTION_CHANGES = "Test Cases/Floor detection with motion changes (Kinematic Body)"
+const OPTION_TEST_CASE_DETECT_FLOOR_NO_SNAP = "Test Cases/Floor detection (Character Body)"
+const OPTION_TEST_CASE_DETECT_FLOOR_MOTION_CHANGES = "Test Cases/Floor detection with motion changes (Character Body)"
 
 const MOTION_CHANGES_DIR = Vector2(1.0, 1.0)
 const MOTION_CHANGES_SPEEDS = [0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 50.0]
@@ -17,11 +17,15 @@ var _failed_reason = ""
 
 
 func _ready():
+	super._ready()
+
 	options.add_menu_item(OPTION_TEST_CASE_ALL)
 	options.add_menu_item(OPTION_TEST_CASE_DETECT_FLOOR_NO_SNAP)
 	options.add_menu_item(OPTION_TEST_CASE_DETECT_FLOOR_MOTION_CHANGES)
 
-func _physics_process(_delta):
+func _physics_process(delta):
+	super._physics_process(delta)
+
 	if _moving_body:
 		if _moving_body.is_on_floor():
 			_floor_detected = true
@@ -40,24 +44,26 @@ func _physics_process(_delta):
 
 
 func _input(event):
+	super._input(event)
+
 	var key_event = event as InputEventKey
 	if key_event and not key_event.pressed:
-		if key_event.scancode == KEY_0:
-			_on_option_selected(OPTION_TEST_CASE_ALL)
+		if key_event.keycode == KEY_0:
+			await _on_option_selected(OPTION_TEST_CASE_ALL)
 
 
 func _on_option_selected(option):
 	match option:
 		OPTION_TEST_CASE_ALL:
-			_test_all()
+			await _test_all()
 		OPTION_TEST_CASE_DETECT_FLOOR_NO_SNAP:
-			_start_test_case(option)
+			await _start_test_case(option)
 			return
 		OPTION_TEST_CASE_DETECT_FLOOR_MOTION_CHANGES:
-			_start_test_case(option)
+			await _start_test_case(option)
 			return
 
-	._on_option_selected(option)
+	super._on_option_selected(option)
 
 
 func _start_test_case(option):
@@ -68,10 +74,10 @@ func _start_test_case(option):
 			_test_floor_detection = true
 			_test_motion_changes = false
 			_use_snap = false
-			_body_type = E_BodyType.KINEMATIC_BODY
+			_body_type = E_BodyType.CHARACTER_BODY
 			_start_test()
 
-			yield(start_timer(1.0), "timeout")
+			await start_timer(1.0).timeout
 			if is_timer_canceled():
 				return
 
@@ -80,10 +86,10 @@ func _start_test_case(option):
 			_test_floor_detection = true
 			_test_motion_changes = true
 			_use_snap = false
-			_body_type = E_BodyType.KINEMATIC_BODY
+			_body_type = E_BodyType.CHARACTER_BODY
 			_start_test()
 
-			yield(start_timer(4.0), "timeout")
+			await start_timer(4.0).timeout
 			if is_timer_canceled():
 				_test_motion_changes = false
 				return
@@ -100,13 +106,13 @@ func _test_all():
 	Log.print_log("* TESTING ALL...")
 
 	# Test floor detection with no snapping.
-	yield(_start_test_case(OPTION_TEST_CASE_DETECT_FLOOR_NO_SNAP), "completed")
+	await _start_test_case(OPTION_TEST_CASE_DETECT_FLOOR_NO_SNAP)
 	if is_timer_canceled():
 		return
 
 	# Test floor detection with no snapping.
 	# In this test case, motion alternates different speeds.
-	yield(_start_test_case(OPTION_TEST_CASE_DETECT_FLOOR_MOTION_CHANGES), "completed")
+	await _start_test_case(OPTION_TEST_CASE_DETECT_FLOOR_MOTION_CHANGES)
 	if is_timer_canceled():
 		return
 
@@ -120,7 +126,7 @@ func _set_result(test_passed):
 	else:
 		result = "FAILED"
 
-	if not test_passed and not _failed_reason.empty():
+	if not test_passed and not _failed_reason.is_empty():
 		result += _failed_reason
 	else:
 		result += "."
@@ -129,7 +135,7 @@ func _set_result(test_passed):
 
 
 func _start_test():
-	._start_test()
+	super._start_test()
 
 	_failed_reason = ""
 
@@ -140,7 +146,7 @@ func _start_test():
 		_failed_reason = ": floor was not detected consistently."
 		if _test_motion_changes:
 			# Always use the same seed for reproducible results.
-			rand_seed(123456789)
+			seed(123456789)
 			_moving_body._gravity_force = 0.0
 			_moving_body._motion_speed = 0.0
 			_moving_body._jump_force = 0.0

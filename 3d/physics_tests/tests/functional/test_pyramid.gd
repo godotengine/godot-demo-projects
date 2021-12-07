@@ -1,11 +1,11 @@
 extends Test
 
 
-export(int, 1, 100) var height = 10
-export(int, 1, 100) var width_max = 100
-export(int, 1, 100) var depth_max = 1
-export(Vector3) var box_size = Vector3(1.0, 1.0, 1.0)
-export(Vector3) var box_spacing = Vector3(0.0, 0.0, 0.0)
+@export_range(1, 100) var height = 10
+@export_range(1, 100) var width_max = 100
+@export_range(1, 100) var depth_max = 1
+@export var box_size = Vector3(1.0, 1.0, 1.0)
+@export var box_spacing = Vector3(0.0, 0.0, 0.0)
 
 
 func _ready():
@@ -25,7 +25,7 @@ func _create_pyramid():
 		var num_boxes_width = min(num_boxes, width_max)
 		var num_boxes_depth = min(num_boxes, depth_max)
 
-		var row_node = Spatial.new()
+		var row_node = Node3D.new()
 		row_node.transform.origin = Vector3(0.0, pos_y, 0.0)
 		row_node.name = "Row%02d" % (level + 1)
 		root_node.add_child(row_node)

@@ -31,7 +31,7 @@ func _ready():
 	for joint_index in range(joints.get_child_count()):
 		var joint_node = joints.get_child(joint_index)
 		joint_node.visible = false
-		var joint_name = joint_node.name
+		var joint_name = String(joint_node.name)
 		var joint_short = joint_name.substr(0, joint_name.length() - 7)
 		var option_name = OPTION_JOINT_TYPE % [joint_short, joint_index + 1]
 		options.add_menu_item(option_name)
@@ -43,8 +43,8 @@ func _ready():
 	options.add_menu_item(OPTION_TEST_CASE_DESTROY_BODY, true, false)
 	options.add_menu_item(OPTION_TEST_CASE_CHANGE_POSITIONS, true, false)
 
-	options.connect("option_selected", self, "_on_option_selected")
-	options.connect("option_changed", self, "_on_option_changed")
+	options.connect("option_selected", Callable(self, "_on_option_selected"))
+	options.connect("option_changed", Callable(self, "_on_option_changed"))
 
 	_selected_joint = _joint_types.values()[0]
 	_update_joint = true
@@ -53,14 +53,14 @@ func _ready():
 func _process(_delta):
 	if _update_joint:
 		_update_joint = false
-		_create_joint()
-		$LabelJointType.text = "Joint Type: " + _selected_joint.name
+		await _create_joint()
+		$LabelJointType.text = "Joint Type: " + String(_selected_joint.name)
 
 
 func _input(event):
 	var key_event = event as InputEventKey
 	if key_event and not key_event.pressed:
-		var joint_index = key_event.scancode - KEY_1
+		var joint_index = key_event.keycode - KEY_1
 		if joint_index >= 0 and joint_index < _joint_types.size():
 			_selected_joint = _joint_types.values()[joint_index]
 			_update_joint = true
@@ -103,7 +103,6 @@ func _create_joint():
 		last_child.queue_free()
 
 	var child_body = create_rigidbody_box(BOX_SIZE, true, true)
-	child_body.mode = RigidBody2D.MODE_RIGID
 	if _change_positions:
 		root.add_child(child_body)
 		child_body.position = Vector2(0.0, 40)
@@ -115,11 +114,10 @@ func _create_joint():
 	if not _world_attachement:
 		parent_body = create_rigidbody_box(BOX_SIZE, true, true)
 		if _dynamic_attachement:
-			parent_body.mode = RigidBody2D.MODE_RIGID
 			parent_body.gravity_scale = 0.0
 			child_body.gravity_scale = 0.0
 		else:
-			parent_body.mode = RigidBody2D.MODE_STATIC
+			parent_body.freeze = true
 		if _change_positions:
 			root.add_child(parent_body)
 			parent_body.position = Vector2(0.0, -40)
@@ -130,13 +128,13 @@ func _create_joint():
 	var joint = _selected_joint.duplicate()
 	joint.visible = true
 	joint.disable_collision = not _bodies_collide
-	if parent_body:
-		joint.node_a = parent_body.get_path()
-	joint.node_b = child_body.get_path()
 	root.add_child(joint)
+	if parent_body:
+		joint.set_node_a(joint.get_path_to(parent_body))
+	joint.set_node_b(joint.get_path_to(child_body))
 
 	if _destroy_body:
-		yield(start_timer(0.5), "timeout")
+		await start_timer(0.5).timeout
 		if is_timer_canceled():
 			return
 

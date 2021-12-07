@@ -16,7 +16,7 @@ const OPTION_SHAPE_CONCAVE_POLYGON = "Shape type/Concave Polygon"
 
 const OFFSET_RANGE = 3.0
 
-export(Vector3) var offset = Vector3.ZERO
+@export var offset = Vector3.ZERO
 
 var _update_collision = false
 var _collision_test_index = 0
@@ -40,10 +40,10 @@ func _ready():
 	$Options.add_menu_item(OPTION_SHAPE_CONVEX_POLYGON, true, true)
 	$Options.add_menu_item(OPTION_SHAPE_CONCAVE_POLYGON, true, true)
 
-	$Options.connect("option_selected", self, "_on_option_selected")
-	$Options.connect("option_changed", self, "_on_option_changed")
+	$Options.connect("option_selected", Callable(self, "_on_option_selected"))
+	$Options.connect("option_changed", Callable(self, "_on_option_changed"))
 
-	yield(start_timer(0.5), "timeout")
+	await start_timer(0.5).timeout
 	if is_timer_canceled():
 		return
 
@@ -53,19 +53,21 @@ func _ready():
 func _input(event):
 	var key_event = event as InputEventKey
 	if key_event and not key_event.pressed:
-		if key_event.scancode == KEY_1:
+		if key_event.keycode == KEY_1:
 			_on_option_selected(OPTION_TYPE_BOX)
-		elif key_event.scancode == KEY_2:
+		elif key_event.keycode == KEY_2:
 			_on_option_selected(OPTION_TYPE_SPHERE)
-		elif key_event.scancode == KEY_3:
+		elif key_event.keycode == KEY_3:
 			_on_option_selected(OPTION_TYPE_CAPSULE)
-		elif key_event.scancode == KEY_4:
+		elif key_event.keycode == KEY_4:
 			_on_option_selected(OPTION_TYPE_CYLINDER)
-		elif key_event.scancode == KEY_5:
+		elif key_event.keycode == KEY_5:
 			_on_option_selected(OPTION_TYPE_CONVEX_POLYGON)
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
+	super._physics_process(delta)
+
 	if not _update_collision:
 		return
 
@@ -93,7 +95,7 @@ func _initialize_collision_shapes():
 	_collision_shapes.clear()
 
 	for node in $Shapes.get_children():
-		var body = node as PhysicsBody
+		var body = node as PhysicsBody3D
 		var shape = body.shape_owner_get_shape(0, 0)
 		shape.resource_name = String(node.name).substr("RigidBody".length())
 
@@ -107,17 +109,17 @@ func _do_collision_test():
 
 	Log.print_log("* Start %s collision tests..." % shape.resource_name)
 
-	var shape_query = PhysicsShapeQueryParameters.new()
+	var shape_query = PhysicsShapeQueryParameters3D.new()
 	shape_query.set_shape(shape)
 	var shape_scale = Vector3(0.5, 0.5, 0.5)
-	shape_query.transform = Transform.IDENTITY.scaled(shape_scale)
+	shape_query.transform = Transform3D.IDENTITY.scaled(shape_scale)
 
 	for node in $Shapes.get_children():
 		if not node.visible:
 			continue
 
-		var body = node as PhysicsBody
-		var space_state = body.get_world().direct_space_state
+		var body = node as PhysicsBody3D
+		var space_state = body.get_world_3d().direct_space_state
 
 		Log.print_log("* Testing: %s" % body.name)
 
@@ -125,7 +127,7 @@ func _do_collision_test():
 
 		# Collision at the center inside.
 		var res = _add_collision(space_state, center, shape, shape_query)
-		Log.print_log("Collision center inside: %s" % ("NO HIT" if res.empty() else "HIT"))
+		Log.print_log("Collision center inside: %s" % ("NO HIT" if res.is_empty() else "HIT"))
 
 	Log.print_log("* Done.")
 
@@ -135,17 +137,17 @@ func _add_collision(space_state, pos, shape, shape_query):
 	var results = space_state.collide_shape(shape_query)
 
 	var color
-	if results.empty():
-		color = Color.white.darkened(0.5)
+	if results.is_empty():
+		color = Color.WHITE.darkened(0.5)
 	else:
-		color = Color.green
+		color = Color.GREEN
 
 	# Draw collision query shape.
 	add_shape(shape, shape_query.transform, color)
 
 	# Draw contact positions.
 	for contact_pos in results:
-		add_sphere(contact_pos, 0.05, Color.red)
+		add_sphere(contact_pos, 0.05, Color.RED)
 
 	return results
 
