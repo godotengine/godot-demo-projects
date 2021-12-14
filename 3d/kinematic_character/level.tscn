@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://cubelib.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://player/cubio.tscn" type="PackedScene" id=2]
 [ext_resource path="res://models/cube.mesh" type="ArrayMesh" id=3]
-[ext_resource path="res://gi_probe_data.res" type="GIProbeData" id=4]
 [ext_resource path="res://models/mushroom.glb" type="PackedScene" id=5]
 
 [sub_resource type="BoxShape" id=1]
@@ -60,12 +59,6 @@ __meta__ = {
 "_editor_floor_": Vector3( 0, 12, 0 )
 }
 
-[node name="GIProbe" type="GIProbe" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 4 )
-extents = Vector3( 8, 8, 10 )
-propagation = 1.0
-data = ExtResource( 4 )
-
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( -0.173649, 0.806707, -0.564863, 0, 0.573576, 0.819152, 0.984808, 0.142244, -0.0996007, 0, 0, 0 )
 light_energy = 1.3
@@ -86,7 +79,6 @@ input_capture_on_drag = true
 
 [node name="Mesh" type="MeshInstance" parent="Elevator1"]
 mesh = ExtResource( 3 )
-material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Elevator1"]
 shape = SubResource( 1 )
@@ -101,7 +93,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 8.5, 4.5 )
 
 [node name="Mesh" type="MeshInstance" parent="Elevator2"]
 mesh = ExtResource( 3 )
-material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Elevator2"]
 shape = SubResource( 1 )
