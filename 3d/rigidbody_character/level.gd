@@ -4,7 +4,7 @@ func _ready():
 	pass
 
 
-# Random spawn of Rigidbody cubes. 
+# Random spawn of Rigidbody cubes.
 func _on_SpawnTimer_timeout():
 	var rb = preload("res://cubeRB.tscn")
 	var new_rb = rb.instance()
