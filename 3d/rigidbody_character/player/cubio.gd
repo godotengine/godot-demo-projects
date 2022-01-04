@@ -24,13 +24,15 @@ func _physics_process(_delta):
 	apply_central_impulse(dir.normalized() / 10)
 
 	# Jumping code.
-	if onGround() and Input.is_action_pressed("jump"):
+	if on_ground() and Input.is_action_pressed("jump"):
 		apply_central_impulse(Vector3.UP)
 
+
 # Test if there is a body below the player.
-func onGround():
+func on_ground():
 	if rc.is_colliding():
 		return true
+
 
 func _on_tcube_body_entered(body):
 	if body == self:

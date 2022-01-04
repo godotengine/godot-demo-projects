@@ -1,7 +1,5 @@
-
 extends Camera
 
-# Member variables
 var collision_exception = []
 export var min_distance = 0.5
 export var max_distance = 3.0
@@ -32,11 +30,7 @@ func _physics_process(_delta):
 		delta_pos = delta_pos.normalized() * max_distance
 
 	# Check upper and lower height
-	if delta_pos.y > max_height:
-		delta_pos.y = max_height
-	if delta_pos.y < min_height:
-		delta_pos.y = min_height
-
+	delta_pos.y = clamp(delta_pos.y, min_height, max_height)
 	camera_pos = target_pos + delta_pos
 
 	look_at_from_position(camera_pos, target_pos, Vector3.UP)

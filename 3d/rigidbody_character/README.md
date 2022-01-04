@@ -20,5 +20,4 @@ for the level. Each has colliders, the player moves itself via
 
 ![Screenshot](screenshots/editor.png)
 
-##Authors
-Alan T.
+
