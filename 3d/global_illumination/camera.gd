@@ -18,7 +18,7 @@ func _input(event):
 		rot.y -= event.relative.x * MOUSE_SENSITIVITY
 		# Vertical mouse look.
 		rot.x = clamp(rot.x - event.relative.y * MOUSE_SENSITIVITY, -1.57, 1.57)
-		transform.basis = Basis(rot)
+		transform.basis = Basis.from_euler(rot)
 
 	if event.is_action_pressed("toggle_mouse_capture"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -29,9 +29,9 @@ func _input(event):
 
 func _process(delta):
 	var motion = Vector3(
-			Input.get_axis(&"move_left", &"move_right"),
+			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 			0,
-			Input.get_axis(&"move_forward", &"move_back")
+			Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
 	)
 
 	# Normalize motion to prevent diagonal movement from being
