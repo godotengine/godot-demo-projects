@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://enemy/enemy.gd" type="Script" id=1]
 [ext_resource path="res://enemy/enemy.png" type="Texture" id=2]
@@ -106,23 +106,6 @@ radius = 7.0
 offsets = PoolRealArray( 0.5, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.501961, 0, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=7]
-gradient = SubResource( 6 )
-
-[sub_resource type="ParticlesMaterial" id=8]
-emission_shape = 1
-emission_sphere_radius = 8.0
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 120.0
-initial_velocity_random = 0.5
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-angle_random = 1.0
-scale_random = 1.0
-color_ramp = SubResource( 7 )
-
 [node name="Enemy" type="RigidBody2D"]
 mode = 2
 physics_material_override = SubResource( 1 )
@@ -166,7 +149,7 @@ position = Vector2( 11, -4.672 )
 enabled = true
 cast_to = Vector2( 0, 22.5 )
 
-[node name="Explosion" type="Particles2D" parent="."]
+[node name="Explosion" type="CPUParticles2D" parent="."]
 modulate = Color( 1, 1, 1, 0.685843 )
 emitting = false
 amount = 32
@@ -174,8 +157,16 @@ lifetime = 0.5
 one_shot = true
 speed_scale = 1.2
 explosiveness = 0.76
-process_material = SubResource( 8 )
 texture = ExtResource( 3 )
+emission_shape = 1
+emission_sphere_radius = 8.0
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 120.0
+initial_velocity_random = 0.5
+angle_random = 1.0
+scale_amount_random = 1.0
+color_ramp = SubResource( 6 )
 
 [node name="SoundHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )

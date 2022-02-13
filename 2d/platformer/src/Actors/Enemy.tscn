@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/art/player/bullet/bullet.png" type="Texture" id=1]
 [ext_resource path="res://assets/audio/sfx/explode.wav" type="AudioStream" id=2]
@@ -179,26 +179,6 @@ blend_mode = 1
 offsets = PoolRealArray( 0.5, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 1 )
 
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
-width = 256
-
-[sub_resource type="ParticlesMaterial" id=9]
-emission_shape = 1
-emission_sphere_radius = 8.0
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, 250, 0 )
-initial_velocity = 120.0
-initial_velocity_random = 0.5
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-angle_random = 1.0
-scale_random = 1.0
-color_ramp = SubResource( 8 )
-hue_variation = 0.05
-hue_variation_random = 0.46
-
 [node name="Enemy" type="KinematicBody2D"]
 collision_layer = 2
 collision_mask = 24
@@ -239,7 +219,7 @@ anims/walk = SubResource( 4 )
 rotation = -1.5708
 shape = SubResource( 5 )
 
-[node name="Explosion" type="Particles2D" parent="."]
+[node name="Explosion" type="CPUParticles2D" parent="."]
 self_modulate = Color( 1, 1, 1, 0.12 )
 material = SubResource( 6 )
 emitting = false
@@ -249,8 +229,18 @@ one_shot = true
 speed_scale = 1.2
 explosiveness = 0.76
 draw_order = 215832976
-process_material = SubResource( 9 )
 texture = ExtResource( 1 )
+emission_shape = 1
+emission_sphere_radius = 8.0
+spread = 180.0
+gravity = Vector2( 0, 250 )
+initial_velocity = 120.0
+initial_velocity_random = 0.5
+angle_random = 1.0
+scale_amount_random = 1.0
+color_ramp = SubResource( 7 )
+hue_variation = 0.05
+hue_variation_random = 0.46
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
