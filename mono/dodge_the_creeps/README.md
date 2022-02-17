@@ -4,7 +4,7 @@ This is a simple game where your character must move
 and avoid the enemies for as long as possible.
 
 This is a finished version of the game featured in the
-["Your first game"](https://docs.godotengine.org/en/latest/getting_started/step_by_step/your_first_game.html)
+["Your first 2D game"](https://docs.godotengine.org/en/latest/getting_started/first_2d_game/index.html)
 tutorial in the documentation, but ported to C#. For more details,
 consider following the tutorial in the documentation.
 
