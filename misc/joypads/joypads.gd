@@ -41,6 +41,8 @@ func _process(_delta):
 		axis_value = Input.get_joy_axis(joy_num, axis)
 		axes.get_node("Axis" + str(axis) + "/ProgressBar").set_value(100 * axis_value)
 		axes.get_node("Axis" + str(axis) + "/ProgressBar/Value").set_text(str(axis_value))
+		# Scaled value used for alpha channel using valid range rather than including unusable deadzone values.
+		var scaled_alpha_value = (abs(axis_value) - DEADZONE) / (1.0 - DEADZONE)
 		# Show joypad direction indicators
 		if axis <= JOY_ANALOG_RY:
 			if abs(axis_value) < DEADZONE:
@@ -49,19 +51,37 @@ func _process(_delta):
 			elif axis_value > 0:
 				joypad_axes.get_node(str(axis) + "+").show()
 				joypad_axes.get_node(str(axis) + "-").hide()
+				# Transparent white modulate, non-alpha color channels are not changed here.
+				joypad_axes.get_node(str(axis) + "+").self_modulate.a = scaled_alpha_value
 			else:
 				joypad_axes.get_node(str(axis) + "+").hide()
 				joypad_axes.get_node(str(axis) + "-").show()
+				# Transparent white modulate, non-alpha color channels are not changed here.
+				joypad_axes.get_node(str(axis) + "-").self_modulate.a = scaled_alpha_value
+		elif axis == JOY_ANALOG_L2:
+			if axis_value <= DEADZONE:
+				joypad_buttons.get_child(JOY_ANALOG_L2).hide()
+			else:
+				joypad_buttons.get_child(JOY_ANALOG_L2).show()
+				# Transparent white modulate, non-alpha color channels are not changed here.
+				joypad_buttons.get_child(JOY_ANALOG_L2).self_modulate.a = scaled_alpha_value
+		elif axis == JOY_ANALOG_R2:
+			if axis_value <= DEADZONE:
+				joypad_buttons.get_child(JOY_ANALOG_R2).hide()
+			else:
+				joypad_buttons.get_child(JOY_ANALOG_R2).show()
+				# Transparent white modulate, non-alpha color channels are not changed here.
+				joypad_buttons.get_child(JOY_ANALOG_R2).self_modulate.a = scaled_alpha_value
 
 	# Loop through the buttons and highlight the ones that are pressed.
 	for btn in range(JOY_BUTTON_0, int(min(JOY_BUTTON_MAX, 24))):
 		if Input.is_joy_button_pressed(joy_num, btn):
 			button_grid.get_child(btn).add_color_override("font_color", Color.white)
-			if btn < 17:
+			if btn < 17 and btn != JOY_ANALOG_L2 and btn != JOY_ANALOG_R2:
 				joypad_buttons.get_child(btn).show()
 		else:
 			button_grid.get_child(btn).add_color_override("font_color", Color(0.2, 0.1, 0.3, 1))
-			if btn < 17:
+			if btn < 17 and btn != JOY_ANALOG_L2 and btn != JOY_ANALOG_R2:
 				joypad_buttons.get_child(btn).hide()
 
 
