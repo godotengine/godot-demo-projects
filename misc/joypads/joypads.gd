@@ -8,6 +8,8 @@ extends Control
 # Licensed under the MIT license
 
 const DEADZONE = 0.2
+const FONT_COLOR_DEFAULT = Color(0.2, 0.1, 0.3, 1)
+const FONT_COLOR_ACTIVE  = Color.white
 
 var joy_num
 var cur_joy = -1
@@ -37,7 +39,7 @@ func _process(_delta):
 		joypad_name.set_text(Input.get_joy_name(joy_num) + "\n" + Input.get_joy_guid(joy_num))
 
 	# Loop through the axes and show their current values.
-	for axis in range(JOY_AXIS_MAX):
+	for axis in range(int(min(JOY_AXIS_MAX, 11))):
 		axis_value = Input.get_joy_axis(joy_num, axis)
 		axes.get_node("Axis" + str(axis) + "/ProgressBar").set_value(100 * axis_value)
 		axes.get_node("Axis" + str(axis) + "/ProgressBar/Value").set_text(str(axis_value))
@@ -72,15 +74,19 @@ func _process(_delta):
 				joypad_buttons.get_child(JOY_ANALOG_R2).show()
 				# Transparent white modulate, non-alpha color channels are not changed here.
 				joypad_buttons.get_child(JOY_ANALOG_R2).self_modulate.a = scaled_alpha_value
+		# Highlight axis labels that are within the "active" value range. Simular to the button highlighting for loop below.
+		axes.get_node("Axis" + str(axis) + "/Label").add_color_override("font_color", FONT_COLOR_DEFAULT)
+		if abs(axis_value) >= DEADZONE:
+			axes.get_node("Axis" + str(axis) + "/Label").add_color_override("font_color", FONT_COLOR_ACTIVE)
 
 	# Loop through the buttons and highlight the ones that are pressed.
 	for btn in range(JOY_BUTTON_0, int(min(JOY_BUTTON_MAX, 24))):
 		if Input.is_joy_button_pressed(joy_num, btn):
-			button_grid.get_child(btn).add_color_override("font_color", Color.white)
+			button_grid.get_child(btn).add_color_override("font_color", FONT_COLOR_ACTIVE)
 			if btn < 17 and btn != JOY_ANALOG_L2 and btn != JOY_ANALOG_R2:
 				joypad_buttons.get_child(btn).show()
 		else:
-			button_grid.get_child(btn).add_color_override("font_color", Color(0.2, 0.1, 0.3, 1))
+			button_grid.get_child(btn).add_color_override("font_color", FONT_COLOR_DEFAULT)
 			if btn < 17 and btn != JOY_ANALOG_L2 and btn != JOY_ANALOG_R2:
 				joypad_buttons.get_child(btn).hide()
 
