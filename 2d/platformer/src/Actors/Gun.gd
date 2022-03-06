@@ -23,5 +23,4 @@ func shoot(direction = 1):
 	add_child(bullet)
 	sound_shoot.play()
 	timer.start()
-	
 	return true
