@@ -26,13 +26,12 @@ func new_game():
 
 
 func _on_MobTimer_timeout():
+	# Create a new instance of the Mob scene.
+	var mob = mob_scene.instance()
+
 	# Choose a random location on Path2D.
 	var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
 	mob_spawn_location.offset = randi()
-
-	# Create a Mob instance and add it to the scene.
-	var mob = mob_scene.instance()
-	add_child(mob)
 
 	# Set the mob's direction perpendicular to the path direction.
 	var direction = mob_spawn_location.rotation + PI / 2
@@ -48,6 +47,8 @@ func _on_MobTimer_timeout():
 	var velocity = Vector2(rand_range(150.0, 250.0), 0.0)
 	mob.linear_velocity = velocity.rotated(direction)
 
+	# Spawn the mob by adding it to the Main scene.
+	add_child(mob)
 
 func _on_ScoreTimer_timeout():
 	score += 1
