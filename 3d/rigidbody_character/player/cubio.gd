@@ -1,6 +1,6 @@
 extends RigidBody
 
-onready var rc = $RayCast
+onready var raycast = $RayCast
 onready var camera = $Target/Camera
 onready var start_position = translation
 
@@ -30,7 +30,7 @@ func _physics_process(_delta):
 
 # Test if there is a body below the player.
 func on_ground():
-	if rc.is_colliding():
+	if raycast.is_colliding():
 		return true
 
 

@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://cubelib.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://player/cubio.tscn" type="PackedScene" id=2]
 [ext_resource path="res://models/cube.mesh" type="ArrayMesh" id=3]
-[ext_resource path="res://gi_probe_data.res" type="GIProbeData" id=4]
 [ext_resource path="res://models/mushroom.glb" type="PackedScene" id=5]
 [ext_resource path="res://level.gd" type="Script" id=6]
 [ext_resource path="res://cube_rigidbody.tscn" type="PackedScene" id=7]
@@ -62,12 +61,6 @@ __meta__ = {
 "_editor_clip_": 0,
 "_editor_floor_": Vector3( 0, 12, 0 )
 }
-
-[node name="GIProbe" type="GIProbe" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 4 )
-extents = Vector3( 8, 8, 10 )
-propagation = 1.0
-data = ExtResource( 4 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( -0.173649, 0.806707, -0.564863, 0, 0.573576, 0.819152, 0.984808, 0.142244, -0.0996007, 0, 0, 0 )
@@ -128,7 +121,7 @@ shape = SubResource( 4 )
 wait_time = 2.0
 autostart = true
 
-[node name="cubeRB" parent="." instance=ExtResource( 7 )]
+[node name="cube_rigidbody" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.416964, 3.3565, 2.6332 )
 
 [connection signal="body_entered" from="Princess" to="Cubio" method="_on_tcube_body_entered"]
