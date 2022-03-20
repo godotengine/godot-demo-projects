@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://piano_keys/piano_key.gd" type="Script" id=1]
+[ext_resource path="res://piano_keys/piano_key_color.gd" type="Script" id=2]
+
+[node name="PianoKey" type="Control"]
+margin_right = 20.0
+margin_bottom = 200.0
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_right = -1.0
+size_flags_horizontal = 3
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="ColorTimer" to="." method="deactivate"]

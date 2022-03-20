@@ -1,0 +1,44 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Control",
+"class": "PianoKey",
+"language": "GDScript",
+"path": "res://piano_keys/piano_key.gd"
+} ]
+_global_script_class_icons={
+"PianoKey": ""
+}
+
+[application]
+
+config/name="MIDI Piano Demo"
+run/main_scene="res://piano.tscn"
+config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1280
+window/size/height=200
+
+[network]
+
+limits/debugger_stdout/max_chars_per_second=2048000
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false

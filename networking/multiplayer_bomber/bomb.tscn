@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://bomb.gd" type="Script" id=1]
 [ext_resource path="res://brickfloor.png" type="Texture" id=2]
@@ -14,22 +14,7 @@ extents = Vector2( 96, 8 )
 max_value = 2.0
 _data = [ Vector2( 0.00150494, 0.398437 ), 0.0, 0.0, 0, 0, Vector2( 0.0152287, 1.42969 ), 0.0, 0.0, 0, 0, Vector2( 0.478607, 1.30078 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.291016 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
-
-[sub_resource type="ParticlesMaterial" id=5]
-emission_shape = 2
-emission_box_extents = Vector3( 80, 1, 1 )
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 1.0
-angular_velocity = 187.85
-angular_velocity_random = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale_curve = SubResource( 4 )
-
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:self_modulate")
@@ -100,25 +85,38 @@ shape = SubResource( 1 )
 [node name="Shape2" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
 
-[node name="Explosion1" type="Particles2D" parent="."]
+[node name="Explosion1" type="CPUParticles2D" parent="."]
 emitting = false
 lifetime = 0.5
 one_shot = true
 explosiveness = 0.95
-process_material = SubResource( 5 )
 texture = ExtResource( 3 )
+emission_shape = 2
+emission_rect_extents = Vector2( 80, 1 )
+gravity = Vector2( 0, 0 )
+initial_velocity = 1.0
+angular_velocity = 187.85
+angular_velocity_random = 1.0
+scale_amount_curve = SubResource( 3 )
 
-[node name="Explosion2" type="Particles2D" parent="."]
+[node name="Explosion2" type="CPUParticles2D" parent="."]
 rotation = 1.57162
+scale = Vector2( 1, 1 )
 emitting = false
 one_shot = true
 explosiveness = 0.95
-process_material = SubResource( 5 )
 texture = ExtResource( 3 )
+emission_shape = 2
+emission_rect_extents = Vector2( 80, 1 )
+gravity = Vector2( 0, 0 )
+initial_velocity = 1.0
+angular_velocity = 187.85
+angular_velocity_random = 1.0
+scale_amount_curve = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "anim"
-anims/anim = SubResource( 6 )
+anims/anim = SubResource( 4 )
 
 [connection signal="body_entered" from="." to="." method="_on_bomb_body_enter"]
 [connection signal="body_exited" from="." to="." method="_on_bomb_body_exit"]
