@@ -8,7 +8,7 @@ extends Control
 # Licensed under the MIT license
 
 const DEADZONE = 0.2
-const FONT_COLOR_DEFAULT = Color(0.2, 0.1, 0.3, 1)
+const FONT_COLOR_DEFAULT = Color(0.7, 0.0, 0.7, 1)#b200b2
 const FONT_COLOR_ACTIVE  = Color.white
 
 var joy_num
