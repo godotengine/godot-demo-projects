@@ -9,7 +9,7 @@ extends Control
 
 const DEADZONE = 0.2
 const FONT_COLOR_DEFAULT = Color(1.0, 1.0, 1.0, 0.5)
-const FONT_COLOR_ACTIVE  = Color.white
+const FONT_COLOR_ACTIVE = Color.white
 
 var joy_num
 var cur_joy = -1
