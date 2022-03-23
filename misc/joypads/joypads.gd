@@ -74,6 +74,7 @@ func _process(_delta):
 				joypad_buttons.get_child(JOY_ANALOG_R2).show()
 				# Transparent white modulate, non-alpha color channels are not changed here.
 				joypad_buttons.get_child(JOY_ANALOG_R2).self_modulate.a = scaled_alpha_value
+
 		# Highlight axis labels that are within the "active" value range. Simular to the button highlighting for loop below.
 		axes.get_node("Axis" + str(axis) + "/Label").add_color_override("font_color", FONT_COLOR_DEFAULT)
 		if abs(axis_value) >= DEADZONE:
