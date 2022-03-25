@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://joypads.gd" type="Script" id=1]
 [ext_resource path="res://joypad_diagram.tscn" type="PackedScene" id=2]
 [ext_resource path="res://remap/remap_wizard.tscn" type="PackedScene" id=3]
+[ext_resource path="res://indicators.png" type="Texture" id=4]
+[ext_resource path="res://diagram.png" type="Texture" id=5]
+[ext_resource path="res://deadzone.gd" type="Script" id=6]
 
 [node name="joypads" type="Control"]
 anchor_left = 0.5
@@ -74,9 +77,45 @@ margin_top = 50.0
 margin_right = 255.0
 margin_bottom = 310.0
 
-[node name="Axis0" type="HBoxContainer" parent="Axes"]
+[node name="Deadzone" type="HBoxContainer" parent="Axes"]
 margin_right = 260.0
-margin_bottom = 20.0
+margin_bottom = 24.0
+script = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="Axes/Deadzone"]
+margin_top = 5.0
+margin_right = 182.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "Axis Deadzone"
+
+[node name="Axis_Sprite" type="Sprite" parent="Axes/Deadzone"]
+position = Vector2( 140, 11 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+offset = Vector2( -1, 0 )
+region_enabled = true
+region_rect = Rect2( 144, 404, 70, 70 )
+region_filter_clip = true
+
+[node name="Mask" type="Sprite" parent="Axes/Deadzone/Axis_Sprite"]
+modulate = Color( 0, 0.0392157, 1, 1 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 46, 46 )
+
+[node name="SpinBox" type="SpinBox" parent="Axes/Deadzone"]
+margin_left = 186.0
+margin_right = 260.0
+margin_bottom = 24.0
+value = 20.0
+suffix = "%"
+
+[node name="Axis0" type="HBoxContainer" parent="Axes"]
+margin_top = 28.0
+margin_right = 260.0
+margin_bottom = 48.0
 rect_min_size = Vector2( 260, 20 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -119,9 +158,9 @@ __meta__ = {
 }
 
 [node name="Axis1" type="HBoxContainer" parent="Axes"]
-margin_top = 24.0
+margin_top = 52.0
 margin_right = 260.0
-margin_bottom = 44.0
+margin_bottom = 72.0
 rect_min_size = Vector2( 260, 20 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -164,9 +203,9 @@ __meta__ = {
 }
 
 [node name="Axis2" type="HBoxContainer" parent="Axes"]
-margin_top = 48.0
+margin_top = 76.0
 margin_right = 260.0
-margin_bottom = 68.0
+margin_bottom = 96.0
 rect_min_size = Vector2( 260, 20 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -209,9 +248,9 @@ __meta__ = {
 }
 
 [node name="Axis3" type="HBoxContainer" parent="Axes"]
-margin_top = 72.0
+margin_top = 100.0
 margin_right = 260.0
-margin_bottom = 92.0
+margin_bottom = 120.0
 rect_min_size = Vector2( 260, 20 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -254,9 +293,9 @@ __meta__ = {
 }
 
 [node name="Axis4" type="HBoxContainer" parent="Axes"]
-margin_top = 96.0
+margin_top = 124.0
 margin_right = 260.0
-margin_bottom = 116.0
+margin_bottom = 144.0
 rect_min_size = Vector2( 260, 20 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -299,9 +338,9 @@ __meta__ = {
 }
 
 [node name="Axis5" type="HBoxContainer" parent="Axes"]
-margin_top = 120.0
+margin_top = 148.0
 margin_right = 260.0
-margin_bottom = 140.0
+margin_bottom = 168.0
 rect_min_size = Vector2( 260, 20 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -344,9 +383,9 @@ __meta__ = {
 }
 
 [node name="Axis6" type="HBoxContainer" parent="Axes"]
-margin_top = 144.0
+margin_top = 172.0
 margin_right = 260.0
-margin_bottom = 164.0
+margin_bottom = 192.0
 rect_min_size = Vector2( 260, 20 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -389,9 +428,9 @@ __meta__ = {
 }
 
 [node name="Axis7" type="HBoxContainer" parent="Axes"]
-margin_top = 168.0
+margin_top = 196.0
 margin_right = 260.0
-margin_bottom = 188.0
+margin_bottom = 216.0
 rect_min_size = Vector2( 260, 20 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -434,9 +473,9 @@ __meta__ = {
 }
 
 [node name="Axis8" type="HBoxContainer" parent="Axes"]
-margin_top = 192.0
+margin_top = 220.0
 margin_right = 260.0
-margin_bottom = 212.0
+margin_bottom = 240.0
 rect_min_size = Vector2( 260, 20 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -479,9 +518,9 @@ __meta__ = {
 }
 
 [node name="Axis9" type="HBoxContainer" parent="Axes"]
-margin_top = 216.0
+margin_top = 244.0
 margin_right = 260.0
-margin_bottom = 236.0
+margin_bottom = 264.0
 rect_min_size = Vector2( 260, 20 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -524,9 +563,9 @@ __meta__ = {
 }
 
 [node name="Axis10" type="HBoxContainer" parent="Axes"]
-margin_top = 240.0
+margin_top = 268.0
 margin_right = 260.0
-margin_bottom = 260.0
+margin_bottom = 288.0
 rect_min_size = Vector2( 260, 20 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1161,6 +1200,7 @@ text = "Show"
 
 [node name="RemapWizard" parent="." instance=ExtResource( 3 )]
 
+[connection signal="value_changed" from="Axes/Deadzone/SpinBox" to="Axes/Deadzone" method="_on_SpinBox_value_changed"]
 [connection signal="pressed" from="Vibration/Buttons/Start" to="." method="_on_start_vibration_pressed"]
 [connection signal="pressed" from="Vibration/Buttons/Stop" to="." method="_on_stop_vibration_pressed"]
 [connection signal="pressed" from="VBoxContainer/Clear" to="." method="_on_Clear_pressed"]

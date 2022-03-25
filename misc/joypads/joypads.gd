@@ -7,10 +7,10 @@ extends Control
 #
 # Licensed under the MIT license
 
-const DEADZONE = 0.2
 const FONT_COLOR_DEFAULT = Color(1.0, 1.0, 1.0, 0.5)
 const FONT_COLOR_ACTIVE = Color.white
 
+export(float) var deadzone = 0.2
 var joy_num
 var cur_joy = -1
 var axis_value
@@ -44,10 +44,12 @@ func _process(_delta):
 		axes.get_node("Axis" + str(axis) + "/ProgressBar").set_value(100 * axis_value)
 		axes.get_node("Axis" + str(axis) + "/ProgressBar/Value").set_text(str(axis_value))
 		# Scaled value used for alpha channel using valid range rather than including unusable deadzone values.
-		var scaled_alpha_value = (abs(axis_value) - DEADZONE) / (1.0 - DEADZONE)
+		var scaled_alpha_value = 0.0
+		if(deadzone < 1.0):
+			scaled_alpha_value = (abs(axis_value) - deadzone) / (1.0 - deadzone)
 		# Show joypad direction indicators
 		if axis <= JOY_ANALOG_RY:
-			if abs(axis_value) < DEADZONE:
+			if abs(axis_value) < deadzone:
 				joypad_axes.get_node(str(axis) + "+").hide()
 				joypad_axes.get_node(str(axis) + "-").hide()
 			elif axis_value > 0:
@@ -61,14 +63,14 @@ func _process(_delta):
 				# Transparent white modulate, non-alpha color channels are not changed here.
 				joypad_axes.get_node(str(axis) + "-").self_modulate.a = scaled_alpha_value
 		elif axis == JOY_ANALOG_L2:
-			if axis_value <= DEADZONE:
+			if axis_value <= deadzone:
 				joypad_buttons.get_child(JOY_ANALOG_L2).hide()
 			else:
 				joypad_buttons.get_child(JOY_ANALOG_L2).show()
 				# Transparent white modulate, non-alpha color channels are not changed here.
 				joypad_buttons.get_child(JOY_ANALOG_L2).self_modulate.a = scaled_alpha_value
 		elif axis == JOY_ANALOG_R2:
-			if axis_value <= DEADZONE:
+			if axis_value <= deadzone:
 				joypad_buttons.get_child(JOY_ANALOG_R2).hide()
 			else:
 				joypad_buttons.get_child(JOY_ANALOG_R2).show()
@@ -77,7 +79,7 @@ func _process(_delta):
 
 		# Highlight axis labels that are within the "active" value range. Simular to the button highlighting for loop below.
 		axes.get_node("Axis" + str(axis) + "/Label").add_color_override("font_color", FONT_COLOR_DEFAULT)
-		if abs(axis_value) >= DEADZONE:
+		if abs(axis_value) >= deadzone:
 			axes.get_node("Axis" + str(axis) + "/Label").add_color_override("font_color", FONT_COLOR_ACTIVE)
 
 	# Loop through the buttons and highlight the ones that are pressed.
