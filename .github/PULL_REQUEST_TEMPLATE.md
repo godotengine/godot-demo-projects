@@ -1,8 +1,7 @@
 <!--
 Only submit a pull request if all of the following conditions are met:
 
-* It must work with the latest stable Godot version. Do not submit a
-  pull request if it only works with alpha/beta builds.
+* It must work with the latest Godot version of the branch you're submitting to.
 
 * It must follow all of the Godot style guides, including the GDScript
   style guide and the C# style guide.

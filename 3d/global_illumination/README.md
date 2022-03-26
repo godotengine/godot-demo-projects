@@ -13,6 +13,8 @@ Language: GDScript
 
 Renderer: GLES 3[^1]
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/1290
+
 ## How does it work?
 
 A glTF scene (which acts as the level mesh) is imported with its **Light Baking**
