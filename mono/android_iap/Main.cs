@@ -5,7 +5,7 @@ using System;
 
 namespace AndroidInAppPurchasesWithCSharp
 {
-    public class Main : Control
+    public partial class Main : Control
     {
         const string TestItemSku = "my_in_app_purchase_sku";
 

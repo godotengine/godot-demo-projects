@@ -1,11 +1,11 @@
 extends Button
 
-export(String, FILE) var scene_to_change_to = null
+@export var scene_to_change_to: String, FILE = null
 
 
 func _ready():
 	# warning-ignore:return_value_discarded
-	connect("pressed", self, "change_scene")
+	connect(&"pressed", self.change_scene)
 
 
 func change_scene():

@@ -1,8 +1,8 @@
 extends Label
 # Displays some useful debug information in a Label.
 
-onready var player = $"../Player"
-onready var voxel_world = $"../VoxelWorld"
+@onready var player = $"../Player"
+@onready var voxel_world = $"../VoxelWorld"
 
 
 func _process(_delta):

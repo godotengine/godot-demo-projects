@@ -19,7 +19,7 @@ func _draw():
 		var magnitude: float = spectrum.get_magnitude_for_frequency_range(prev_hz, hz).length()
 		var energy = clamp((MIN_DB + linear2db(magnitude)) / MIN_DB, 0, 1)
 		var height = energy * HEIGHT
-		draw_rect(Rect2(w * i, HEIGHT - height, w, height), Color.white)
+		draw_rect(Rect2(w * i, HEIGHT - height, w, height), Color.WHITE)
 		prev_hz = hz
 
 

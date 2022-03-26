@@ -10,9 +10,9 @@ var screen_size = Vector2(640, 400)
 var direction = Vector2.LEFT
 var pad_size = Vector2(8, 32)
 
-onready var ball = $Ball
-onready var left_paddle = $LeftPaddle
-onready var right_paddle = $RightPaddle
+@onready var ball = $Ball
+@onready var left_paddle = $LeftPaddle
+@onready var right_paddle = $RightPaddle
 
 func _ready():
 	screen_size = get_viewport_rect().size # Get actual size.

@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node2D
 
 # Not pixel perfect for all axes in all modes, but works well enough.
@@ -19,8 +19,8 @@ var _start_position = Vector2()
 # Stores state of closest or currently used axis.
 var dominant_axis
 
-onready var lines_root = $Lines
-onready var lines = [$Lines/X, $Lines/Y, $Lines/Z]
+@onready var lines_root = $Lines
+@onready var lines = [$Lines/X, $Lines/Y, $Lines/Z]
 
 func _process(_delta):
 	if not lines:

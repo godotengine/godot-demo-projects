@@ -1,22 +1,22 @@
-extends Spatial
+extends Node3D
 
 # The size of the quad mesh itself.
 var quad_mesh_size
-# Used for checking if the mouse is inside the Area
+# Used for checking if the mouse is inside the Area3D
 var is_mouse_inside = false
-# Used for checking if the mouse was pressed inside the Area
+# Used for checking if the mouse was pressed inside the Area3D
 var is_mouse_held = false
 # The last non-empty mouse position. Used when dragging outside of the box.
 var last_mouse_pos3D = null
 # The last processed input touch/mouse event. To calculate relative movement.
 var last_mouse_pos2D = null
 
-onready var node_viewport = $Viewport
-onready var node_quad = $Quad
-onready var node_area = $Quad/Area
+@onready var node_viewport = $SubViewport
+@onready var node_quad = $Quad
+@onready var node_area = $Quad/Area3D
 
 func _ready():
-	node_area.connect("mouse_entered", self, "_mouse_entered_area")
+	node_area.connect(&"mouse_entered", self._mouse_entered_area)
 
 	# If the material is NOT set to use billboard settings, then avoid running billboard specific code
 	if node_quad.get_surface_material(0).params_billboard_mode == 0:
@@ -55,7 +55,7 @@ func _unhandled_input(event):
 		node_viewport.input(event)
 
 
-# Handle mouse events inside Area. (Area.input_event had many issues with dragging)
+# Handle mouse events inside Area3D. (Area3D.input_event had many issues with dragging)
 func handle_mouse(event):
 	# Get mesh size to detect edges and make conversions. This code only support PlaneMesh and QuadMesh.
 	quad_mesh_size = node_quad.mesh.size
@@ -64,15 +64,15 @@ func handle_mouse(event):
 	if event is InputEventMouseButton or event is InputEventScreenTouch:
 		is_mouse_held = event.pressed
 
-	# Find mouse position in Area
+	# Find mouse position in Area3D
 	var mouse_pos3D = find_mouse(event.global_position)
 
 	# Check if the mouse is outside of bounds, use last position to avoid errors
 	# NOTE: mouse_exited signal was unrealiable in this situation
 	is_mouse_inside = mouse_pos3D != null
 	if is_mouse_inside:
-		# Convert click_pos from world coordinate space to a coordinate space relative to the Area node.
-		# NOTE: affine_inverse accounts for the Area node's scale, rotation, and translation in the scene!
+		# Convert click_pos from world coordinate space to a coordinate space relative to the Area3D node.
+		# NOTE: affine_inverse accounts for the Area3D node's scale, rotation, and position in the scene!
 		mouse_pos3D = node_area.global_transform.affine_inverse() * mouse_pos3D
 		last_mouse_pos3D = mouse_pos3D
 	else:
@@ -119,16 +119,16 @@ func handle_mouse(event):
 
 
 func find_mouse(global_position):
-	var camera = get_viewport().get_camera()
+	var camera = get_viewport().get_camera_3d()
 
-	# From camera center to the mouse position in the Area
+	# From camera center to the mouse position in the Area3D
 	var from = camera.project_ray_origin(global_position)
 	var dist = find_further_distance_to(camera.transform.origin)
 	var to = from + camera.project_ray_normal(global_position) * dist
 
 
 	# Manually raycasts the are to find the mouse position
-	var result = get_world().direct_space_state.intersect_ray(from, to, [], node_area.collision_layer,false,true) #for 3.1 changes
+	var result = get_world_3d().direct_space_state.intersect_ray(from, to, [], node_area.collision_layer,false,true) #for 3.1 changes
 
 	if result.size() > 0:
 		return result.position
@@ -161,10 +161,10 @@ func rotate_area_to_billboard():
 	# Try to match the area with the material's billboard setting, if enabled
 	if billboard_mode > 0:
 		# Get the camera
-		var camera = get_viewport().get_camera()
+		var camera = get_viewport().get_camera_3d()
 		# Look in the same direction as the camera
 		var look = camera.to_global(Vector3(0, 0, -100)) - camera.global_transform.origin
-		look = node_area.translation + look
+		look = node_area.position + look
 
 		# Y-Billboard: Lock Y rotation, but gives bad results if the camera is tilted.
 		if billboard_mode == 2:

@@ -2,13 +2,13 @@ extends Node2D
 
 var viewport_initial_size = Vector2()
 
-onready var viewport = $Viewport
-onready var viewport_sprite = $ViewportSprite
+@onready var viewport = $SubViewport
+@onready var viewport_sprite = $ViewportSprite
 
 func _ready():
-	$AnimatedSprite.play()
+	$AnimatedSprite2D.play()
 	#warning-ignore:return_value_discarded
-	get_viewport().connect("size_changed", self, "_root_viewport_size_changed")
+	get_viewport().connect(&"size_changed", self._root_viewport_size_changed)
 	viewport_initial_size = viewport.size
 
 

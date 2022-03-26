@@ -1,9 +1,9 @@
 extends Control
 
-onready var effect = $Effect
-onready var effects = $Effects
-onready var picture = $Picture
-onready var pictures = $Pictures
+@onready var effect = $Effect
+@onready var effects = $Effects
+@onready var picture = $Picture
+@onready var pictures = $Pictures
 
 
 func _ready():

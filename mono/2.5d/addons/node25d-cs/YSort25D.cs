@@ -10,7 +10,7 @@ using real_t = System.Single;
 /// Assigns Z-index values to Node25D children.
 /// </summary>
 [Tool] // Commented out because it sometimes crashes the editor when running the game...
-public class YSort25D : Node // Note: NOT Node2D, Node25D, or YSort
+public partial class YSort25D : Node // Note: NOT Node2D, Node25D, or Node2D
 {
     /// <summary>
     /// Whether or not to automatically call Sort() in _Process().

@@ -1,4 +1,4 @@
-tool
+@tool
 extends Panel
 # In this file, the word "silly" is used to make it obvious that the name is arbitrary.
 
@@ -7,20 +7,20 @@ var editor_interface
 
 func _ready():
 	# Connect all of the signals we'll need to save and load silly materials
-	get_node("VBoxContainer/ApplyButton").connect("pressed", self, "apply_pressed")
-	get_node("VBoxContainer/SaveButton").connect("pressed", self, "save_pressed")
-	get_node("VBoxContainer/LoadButton").connect("pressed", self, "load_pressed")
-	get_node("SaveMaterialDialog").connect("file_selected", self, "save_file_selected")
-	get_node("LoadMaterialDialog").connect("file_selected", self, "load_file_selected")
-	VisualServer.canvas_item_set_clip(get_canvas_item(), true)
+	get_node(^"VBoxContainer/ApplyButton").connect(&"pressed", self.apply_pressed)
+	get_node(^"VBoxContainer/SaveButton").connect(&"pressed", self.save_pressed)
+	get_node(^"VBoxContainer/LoadButton").connect(&"pressed", self.load_pressed)
+	get_node(^"SaveMaterialDialog").connect(&"file_selected", self.save_file_selected)
+	get_node(^"LoadMaterialDialog").connect(&"file_selected", self.load_file_selected)
+	RenderingServer.canvas_item_set_clip(get_canvas_item(), true)
 
 
 func save_pressed():
-	get_node("SaveMaterialDialog").popup_centered()
+	get_node(^"SaveMaterialDialog").popup_centered()
 
 
 func load_pressed():
-	get_node("LoadMaterialDialog").popup_centered()
+	get_node(^"LoadMaterialDialog").popup_centered()
 
 
 func apply_pressed():
@@ -32,7 +32,7 @@ func apply_pressed():
 
 	var material = _silly_resource_from_values().make_material()
 	# Go through the selected nodes and see if they have the "set_surface_material"
-	# function (which only MeshInstance has by default). If they do, then set the material
+	# function (which only MeshInstance3D has by default). If they do, then set the material
 	# to the silly material.
 	for node in selected_nodes:
 		if node.has_method("set_surface_material"):
@@ -71,9 +71,9 @@ func load_file_selected(path):
 			file.close()
 			return false
 
-		get_node("VBoxContainer/AlbedoColorPicker").color = silly_resource.albedo_color
-		get_node("VBoxContainer/MetallicSlider").value = silly_resource.metallic_strength
-		get_node("VBoxContainer/RoughnessSlider").value = silly_resource.roughness_strength
+		get_node(^"VBoxContainer/AlbedoColorPicker").color = silly_resource.albedo_color
+		get_node(^"VBoxContainer/MetallicSlider").value = silly_resource.metallic_strength
+		get_node(^"VBoxContainer/RoughnessSlider").value = silly_resource.roughness_strength
 
 		# Close the file and return true (success!)
 		file.close()
@@ -85,9 +85,9 @@ func load_file_selected(path):
 
 func _silly_resource_from_values():
 	# Get the values from the sliders and color picker
-	var color = get_node("VBoxContainer/AlbedoColorPicker").color
-	var metallic = get_node("VBoxContainer/MetallicSlider").value
-	var roughness = get_node("VBoxContainer/RoughnessSlider").value
+	var color = get_node(^"VBoxContainer/AlbedoColorPicker").color
+	var metallic = get_node(^"VBoxContainer/MetallicSlider").value
+	var roughness = get_node(^"VBoxContainer/RoughnessSlider").value
 	# Make a new silly resource (which in this case actually is a node) and initialize it
 	var silly_resource = silly_material_resource.new()
 	silly_resource.init()

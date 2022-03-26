@@ -7,11 +7,11 @@ const SCORE_TO_WIN = 10
 var score_left = 0
 var score_right = 0
 
-onready var player2 = $Player2
-onready var score_left_node = $ScoreLeft
-onready var score_right_node = $ScoreRight
-onready var winner_left = $WinnerLeft
-onready var winner_right = $WinnerRight
+@onready var player2 = $Player2
+@onready var score_left_node = $ScoreLeft
+@onready var score_right_node = $ScoreRight
+@onready var winner_left = $WinnerLeft
+@onready var winner_right = $WinnerRight
 
 func _ready():
 	# By default, all nodes in server inherit from master,

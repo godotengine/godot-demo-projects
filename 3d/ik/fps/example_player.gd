@@ -1,4 +1,4 @@
-extends KinematicBody
+extends CharacterBody3D
 
 # Walking variables.
 const norm_grav = -38.8
@@ -47,17 +47,17 @@ var simple_bullet = preload("res://fps/simple_bullet.tscn")
 
 # We need the camera for getting directional vectors. We rotate ourselves on the Y-axis using
 # the camera_holder to avoid rotating on more than one axis at a time.
-onready var camera_holder = $CameraHolder
-onready var camera = $CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/Camera
-onready var path_follow_node = $CameraHolder/LeanPath/PathFollow
+@onready var camera_holder = $CameraHolder
+@onready var camera = $CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/Camera3D
+@onready var path_follow_node = $CameraHolder/LeanPath/PathFollow3D
 # The animation player for aiming down the sights.
-onready var anim_player = $CameraHolder/AnimationPlayer
+@onready var anim_player = $CameraHolder/AnimationPlayer
 # The end of the pistol.
-onready var pistol_end = $CameraHolder/Weapon/Pistol/PistolEnd
+@onready var pistol_end = $CameraHolder/Weapon/Pistol/PistolEnd
 
 
 func _ready():
-	anim_player.connect("animation_finished", self, "animation_finished")
+	anim_player.connect(&"animation_finished", self.animation_finished)
 
 	set_physics_process(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -114,7 +114,7 @@ func process_input(delta):
 			left_mouse_timer = LEFT_MOUSE_FIRE_TIME
 
 			# Create a bullet
-			var new_bullet = simple_bullet.instance()
+			var new_bullet = simple_bullet.instantiate()
 			get_tree().root.add_child(new_bullet)
 			new_bullet.global_transform = pistol_end.global_transform
 			new_bullet.linear_velocity = new_bullet.global_transform.basis.z * BULLET_SPEED
@@ -198,12 +198,13 @@ func process_movement(delta):
 	else:
 		accel = DEACCEL
 
-	hvel = hvel.linear_interpolate(target, accel*delta)
+	hvel = hvel.lerp(target, accel*delta)
 
 	vel.x = hvel.x
 	vel.z = hvel.z
 
-	vel = move_and_slide(vel,Vector3(0,1,0))
+	# TODO: This information should be set to the CharacterBody properties instead of arguments.
+	move_and_slide(vel,Vector3(0,1,0))
 
 
 # Mouse based camera movement

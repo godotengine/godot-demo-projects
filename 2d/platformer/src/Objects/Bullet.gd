@@ -2,7 +2,7 @@ class_name Bullet
 extends RigidBody2D
 
 
-onready var animation_player = $AnimationPlayer
+@onready var animation_player = $AnimationPlayer
 
 
 func destroy():

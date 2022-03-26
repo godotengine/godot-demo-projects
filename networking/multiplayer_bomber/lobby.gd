@@ -2,11 +2,11 @@ extends Control
 
 func _ready():
 	# Called every time the node is added to the scene.
-	gamestate.connect("connection_failed", self, "_on_connection_failed")
-	gamestate.connect("connection_succeeded", self, "_on_connection_success")
-	gamestate.connect("player_list_changed", self, "refresh_lobby")
-	gamestate.connect("game_ended", self, "_on_game_ended")
-	gamestate.connect("game_error", self, "_on_game_error")
+	gamestate.connect(&"connection_failed", self._on_connection_failed)
+	gamestate.connect(&"connection_succeeded", self._on_connection_success)
+	gamestate.connect(&"player_list_changed", self.refresh_lobby)
+	gamestate.connect(&"game_ended", self._on_game_ended)
+	gamestate.connect(&"game_error", self._on_game_error)
 	# Set the player name according to the system username. Fallback to the path.
 	if OS.has_environment("USERNAME"):
 		$Connect/Name.text = OS.get_environment("USERNAME")
@@ -68,7 +68,7 @@ func _on_game_ended():
 
 func _on_game_error(errtxt):
 	$ErrorDialog.dialog_text = errtxt
-	$ErrorDialog.popup_centered_minsize()
+	$ErrorDialog.popup_centered_clamped()
 	$Connect/Host.disabled = false
 	$Connect/Join.disabled = false
 

@@ -1,7 +1,7 @@
 extends "on_ground.gd"
 
-export(float) var max_walk_speed = 450
-export(float) var max_run_speed = 700
+@export var max_walk_speed: float = 450
+@export var max_run_speed: float = 700
 
 func enter():
 	speed = 0.0
@@ -9,11 +9,11 @@ func enter():
 
 	var input_direction = get_input_direction()
 	update_look_direction(input_direction)
-	owner.get_node("AnimationPlayer").play("walk")
+	owner.get_node(^"AnimationPlayer").play("walk")
 
 
 func handle_input(event):
-	return .handle_input(event)
+	return super.handle_input(event)
 
 
 func update(_delta):
@@ -36,6 +36,7 @@ func update(_delta):
 
 func move(speed, direction):
 	velocity = direction.normalized() * speed
+	# TODO: This information should be set to the CharacterBody properties instead of arguments.
 	owner.move_and_slide(velocity, Vector2(), 5, 2)
 	if owner.get_slide_count() == 0:
 		return

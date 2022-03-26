@@ -1,32 +1,32 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://bomb.gd" type="Script" id=1]
-[ext_resource path="res://brickfloor.png" type="Texture" id=2]
-[ext_resource path="res://explosion.png" type="Texture" id=3]
+[ext_resource path="res://brickfloor.png" type="Texture2D" id=2]
+[ext_resource path="res://explosion.png" type="Texture2D" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 96 )
+extents = Vector2(8, 96)
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 96, 8 )
+extents = Vector2(96, 8)
 
 [sub_resource type="Curve" id=3]
 max_value = 2.0
-_data = [ Vector2( 0.00150494, 0.398437 ), 0.0, 0.0, 0, 0, Vector2( 0.0152287, 1.42969 ), 0.0, 0.0, 0, 0, Vector2( 0.478607, 1.30078 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.291016 ), 0.0, 0.0, 0, 0 ]
+_data = [Vector2(0.00150494, 0.398437), 0.0, 0.0, 0, 0, Vector2(0.0152287, 1.42969), 0.0, 0.0, 0, 0, Vector2(0.478607, 1.30078), 0.0, 0.0, 0, 0, Vector2(1, 0.291016), 0.0, 0.0, 0, 0]
 
 [sub_resource type="Animation" id=4]
 length = 4.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/path = NodePath("Sprite2D:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.6, 0.8, 1.1, 1.3, 1.5, 1.8, 1.9, 2, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.4, 0.6, 0.8, 1.1, 1.3, 1.5, 1.8, 1.9, 2, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 8, 8, 8, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 8, 8, 8, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 8, 8, 8, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 8, 8, 8, 1 ), Color( 1, 1, 1, 1 ), Color( 8, 8, 8, 1 ), Color( 1, 1, 1, 1 ), Color( 8, 8, 8, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(8, 8, 8, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(8, 8, 8, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(8, 8, 8, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(8, 8, 8, 1), Color(1, 1, 1, 1), Color(8, 8, 8, 1), Color(1, 1, 1, 1), Color(8, 8, 8, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -35,15 +35,15 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 2.8, 3.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [  ],
+"times": PackedFloat32Array(2.8, 3.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
 "method": "explode"
 }, {
-"args": [  ],
+"args": [],
 "method": "done"
-} ]
+}]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Explosion1:emitting")
@@ -52,10 +52,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 2.8 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 2.8),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ false, true ]
+"values": [false, true]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Explosion2:emitting")
@@ -64,20 +64,20 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 2.8 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 2.8),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ false, true ]
+"values": [false, true]
 }
 
 [node name="Bomb" type="Area2D"]
 script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -2.92606, -2.92606 )
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2.92606, -2.92606)
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 144, 0, 48, 48 )
+region_rect = Rect2(144, 0, 48, 48)
 
 [node name="Shape1" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -92,8 +92,8 @@ one_shot = true
 explosiveness = 0.95
 texture = ExtResource( 3 )
 emission_shape = 2
-emission_rect_extents = Vector2( 80, 1 )
-gravity = Vector2( 0, 0 )
+emission_rect_extents = Vector2(80, 1)
+gravity = Vector2(0, 0)
 initial_velocity = 1.0
 angular_velocity = 187.85
 angular_velocity_random = 1.0
@@ -101,14 +101,14 @@ scale_amount_curve = SubResource( 3 )
 
 [node name="Explosion2" type="CPUParticles2D" parent="."]
 rotation = 1.57162
-scale = Vector2( 1, 1 )
+scale = Vector2(1, 1)
 emitting = false
 one_shot = true
 explosiveness = 0.95
 texture = ExtResource( 3 )
 emission_shape = 2
-emission_rect_extents = Vector2( 80, 1 )
-gravity = Vector2( 0, 0 )
+emission_rect_extents = Vector2(80, 1)
+gravity = Vector2(0, 0)
 initial_velocity = 1.0
 angular_velocity = 187.85
 angular_velocity_random = 1.0

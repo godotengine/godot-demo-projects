@@ -13,7 +13,7 @@ var _current_test_scene : Node = null
 
 
 func _ready():
-	connect("option_selected", Callable(self, "_on_option_selected"))
+	connect(&"option_selected", Callable(self, "_on_option_selected"))
 
 
 func _process(_delta):
@@ -50,5 +50,5 @@ func _start_test(test):
 	get_tree().root.add_child(_current_test_scene)
 	get_tree().root.move_child(_current_test_scene, 0)
 
-	var label_test = get_node("../LabelTest")
+	var label_test = get_node(^"../LabelTest")
 	label_test.test_name = test.id

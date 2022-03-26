@@ -1,12 +1,12 @@
 extends Control
 
-onready var _client = $Client
-onready var _log_dest = $Panel/VBoxContainer/RichTextLabel
-onready var _line_edit = $Panel/VBoxContainer/Send/LineEdit
-onready var _host = $Panel/VBoxContainer/Connect/Host
-onready var _multiplayer = $Panel/VBoxContainer/Settings/Multiplayer
-onready var _write_mode = $Panel/VBoxContainer/Settings/Mode
-onready var _destination = $Panel/VBoxContainer/Settings/Destination
+@onready var _client = $Client
+@onready var _log_dest = $Panel/VBoxContainer/RichTextLabel
+@onready var _line_edit = $Panel/VBoxContainer/Send/LineEdit
+@onready var _host = $Panel/VBoxContainer/Connect/Host
+@onready var _multiplayer = $Panel/VBoxContainer/Settings/Multiplayer
+@onready var _write_mode = $Panel/VBoxContainer/Settings/Mode
+@onready var _destination = $Panel/VBoxContainer/Settings/Destination
 
 func _ready():
 	_write_mode.clear()
@@ -53,7 +53,7 @@ func _on_Connect_toggled( pressed ):
 		_multiplayer.disabled = true
 		if _host.text != "":
 			Utils._log(_log_dest, "Connecting to host: %s" % [_host.text])
-			var supported_protocols = PoolStringArray(["my-protocol2", "my-protocol", "binary"])
+			var supported_protocols = PackedStringArray(["my-protocol2", "my-protocol", "binary"])
 			_client.connect_to_url(_host.text, supported_protocols, multiplayer)
 	else:
 		_destination.disabled = false

@@ -2,8 +2,8 @@ extends Control
 
 const TEST_ITEM_SKU = "my_in_app_purchase_sku"
 
-onready var alert_dialog = $AlertDialog
-onready var label = $Label
+@onready var alert_dialog = $AlertDialog
+@onready var label = $Label
 
 var payment = null
 var test_item_purchase_token = null
@@ -14,29 +14,29 @@ func _ready():
 
 		payment = Engine.get_singleton("GodotGooglePlayBilling")
 		# No params.
-		payment.connect("connected", self, "_on_connected")
+		payment.connect(&"connected", self._on_connected)
 		# No params.
-		payment.connect("disconnected", self, "_on_disconnected")
+		payment.connect(&"disconnected", self._on_disconnected)
 		# Response ID (int), Debug message (string).
-		payment.connect("connect_error", self, "_on_connect_error")
+		payment.connect(&"connect_error", self._on_connect_error)
 		# Purchases (Dictionary[]).
-		payment.connect("purchases_updated", self, "_on_purchases_updated")
+		payment.connect(&"purchases_updated", self._on_purchases_updated)
 		# Response ID (int), Debug message (string).
-		payment.connect("purchase_error", self, "_on_purchase_error")
+		payment.connect(&"purchase_error", self._on_purchase_error)
 		# SKUs (Dictionary[]).
-		payment.connect("sku_details_query_completed", self, "_on_sku_details_query_completed")
+		payment.connect(&"sku_details_query_completed", self._on_sku_details_query_completed)
 		# Response ID (int), Debug message (string), Queried SKUs (string[]).
-		payment.connect("sku_details_query_error", self, "_on_sku_details_query_error")
+		payment.connect(&"sku_details_query_error", self._on_sku_details_query_error)
 		# Purchase token (string).
-		payment.connect("purchase_acknowledged", self, "_on_purchase_acknowledged")
+		payment.connect(&"purchase_acknowledged", self._on_purchase_acknowledged)
 		# Response ID (int), Debug message (string), Purchase token (string).
-		payment.connect("purchase_acknowledgement_error", self, "_on_purchase_acknowledgement_error")
+		payment.connect(&"purchase_acknowledgement_error", self._on_purchase_acknowledgement_error)
 		# Purchase token (string).
-		payment.connect("purchase_consumed", self, "_on_purchase_consumed")
+		payment.connect(&"purchase_consumed", self._on_purchase_consumed)
 		# Response ID (int), Debug message (string), Purchase token (string).
-		payment.connect("purchase_consumption_error", self, "_on_purchase_consumption_error")
+		payment.connect(&"purchase_consumption_error", self._on_purchase_consumption_error)
 		# Purchases (Dictionary[])
-		payment.connect("query_purchases_response", self, "_on_query_purchases_response")
+		payment.connect(&"query_purchases_response", self._on_query_purchases_response)
 		payment.startConnection()
 	else:
 		show_alert("Android IAP support is not enabled. Make sure you have enabled 'Custom Build' and installed and enabled the GodotGooglePlayBilling plugin in your Android export settings! This application will not work.")
@@ -68,11 +68,11 @@ func _on_query_purchases_response(query_result):
 
 func _on_sku_details_query_completed(sku_details):
 	for available_sku in sku_details:
-		show_alert(to_json(available_sku))
+		show_alert(JSON.new().stringify(available_sku))
 
 
 func _on_purchases_updated(purchases):
-	print("Purchases updated: %s" % to_json(purchases))
+	print("Purchases updated: %s" % JSON.new().stringify(purchases))
 
 	# See _on_connected
 	for purchase in purchases:
@@ -110,7 +110,7 @@ func _on_sku_details_query_error(code, message):
 
 func _on_disconnected():
 	show_alert("GodotGooglePlayBilling disconnected. Will try to reconnect in 10s...")
-	yield(get_tree().create_timer(10), "timeout")
+	await get_tree().create_timer(10).timeout
 	payment.startConnection()
 
 

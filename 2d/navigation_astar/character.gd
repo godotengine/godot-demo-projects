@@ -5,7 +5,7 @@ enum States { IDLE, FOLLOW }
 const MASS = 10.0
 const ARRIVE_DISTANCE = 10.0
 
-export(float) var speed = 200.0
+@export var speed: float = 200.0
 var _state = States.IDLE
 
 var _path = []
@@ -51,7 +51,7 @@ func _move_to(world_position):
 
 func _change_state(new_state):
 	if new_state == States.FOLLOW:
-		_path = get_parent().get_node("TileMap").get_astar_path(position, _target_position)
+		_path = get_parent().get_node(^"TileMap").get_astar_path(position, _target_position)
 		if not _path or len(_path) == 1:
 			_change_state(States.IDLE)
 			return

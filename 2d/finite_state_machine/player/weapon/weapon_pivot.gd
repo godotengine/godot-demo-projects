@@ -4,7 +4,7 @@ var z_index_start = 0
 
 func _ready():
 	#warning-ignore:return_value_discarded
-	owner.connect("direction_changed", self, "_on_Parent_direction_changed")
+	owner.connect(&"direction_changed", self._on_Parent_direction_changed)
 	z_index_start = z_index
 
 

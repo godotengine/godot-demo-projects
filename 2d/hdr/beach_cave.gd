@@ -2,7 +2,7 @@ extends Node2D
 
 const CAVE_LIMIT = 1000
 
-onready var cave = $Cave
+@onready var cave = $Cave
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion and event.button_mask > 0:

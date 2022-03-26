@@ -1,4 +1,4 @@
-tool
+@tool
 class_name AxisMarker2D, "res://marker/AxisMarker2D.svg"
 extends Node2D
 

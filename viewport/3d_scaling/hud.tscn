@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://noto_sans_ui_regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://noto_sans_ui_regular.ttf" type="FontData" id=1]
 [ext_resource path="res://cubes.tscn" type="PackedScene" id=2]
 [ext_resource path="res://hud.gd" type="Script" id=3]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="Font" id=1]
 size = 20
 font_data = ExtResource( 1 )
 
@@ -20,7 +20,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ViewportContainer" type="ViewportContainer" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 stretch = true
@@ -28,23 +28,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewport" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 1024, 600 )
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+size = Vector2(1024, 600)
 handle_input_locally = false
 usage = 3
 render_target_update_mode = 3
 shadow_atlas_size = 4096
 
-[node name="Cubes" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
+[node name="Cubes" parent="SubViewportContainer/SubViewport" instance=ExtResource( 2 )]
 
 [node name="Help" type="Label" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 16.0
-margin_top = -106.0
-margin_right = 554.0
-margin_bottom = -16.0
-custom_colors/font_color_shadow = Color( 0, 0, 0, 0.752941 )
+offset_left = 16.0
+offset_top = -106.0
+offset_right = 554.0
+offset_bottom = -16.0
+custom_colors/font_color_shadow = Color(0, 0, 0, 0.752941)
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
 custom_constants/shadow_as_outline = 0
@@ -57,18 +57,18 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 124.0
-margin_bottom = 76.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 124.0
+offset_bottom = 76.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Scale" type="Label" parent="VBoxContainer"]
-margin_right = 130.0
-margin_bottom = 28.0
-custom_colors/font_color_shadow = Color( 0, 0, 0, 0.752941 )
+offset_right = 130.0
+offset_bottom = 28.0
+custom_colors/font_color_shadow = Color(0, 0, 0, 0.752941)
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
 custom_constants/shadow_as_outline = 0
@@ -78,10 +78,10 @@ __meta__ = {
 }
 
 [node name="Filter" type="Label" parent="VBoxContainer"]
-margin_top = 32.0
-margin_right = 130.0
-margin_bottom = 60.0
-custom_colors/font_color_shadow = Color( 0, 0, 0, 0.752941 )
+offset_top = 32.0
+offset_right = 130.0
+offset_bottom = 60.0
+custom_colors/font_color_shadow = Color(0, 0, 0, 0.752941)
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
 custom_constants/shadow_as_outline = 0

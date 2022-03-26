@@ -1,24 +1,30 @@
 extends TileMap
 
 const BASE_LINE_WIDTH = 3.0
-const DRAW_COLOR = Color.white
+const DRAW_COLOR = Color.WHITE
 
 # The Tilemap node doesn't have clear bounds so we're defining the map's limits here.
-export(Vector2) var map_size = Vector2.ONE * 16
+@export var map_size: Vector2 = Vector2.ONE * 16
 
 # The path start and end variables use setter methods.
 # You can find them at the bottom of the script.
-var path_start_position = Vector2() setget _set_path_start_position
-var path_end_position = Vector2() setget _set_path_end_position
+var path_start_position = Vector2():
+	set(value):
+		# TODO: Manually copy the code from this method.
+		_set_path_start_position(value)
+var path_end_position = Vector2():
+	set(value):
+		# TODO: Manually copy the code from this method.
+		_set_path_end_position(value)
 
 var _point_path = []
 
 # You can only create an AStar node from code, not from the Scene tab.
-onready var astar_node = AStar.new()
+@onready var astar_node = AStar.new()
 # get_used_cells_by_id is a method from the TileMap node.
 # Here the id 0 corresponds to the grey tile, the obstacles.
-onready var obstacles = get_used_cells_by_id(0)
-onready var _half_cell_size = cell_size / 2
+@onready var obstacles = get_used_cells_by_id(0)
+@onready var _half_cell_size = cell_size / 2
 
 func _ready():
 	var walkable_cells_list = astar_add_walkable_cells(obstacles)
@@ -74,7 +80,7 @@ func astar_connect_walkable_cells(points_array):
 		# For every cell in the map, we check the one to the top, right.
 		# left and bottom of it. If it's in the map and not an obstalce.
 		# We connect the current point with it.
-		var points_relative = PoolVector2Array([
+		var points_relative = PackedVector2Array([
 			point + Vector2.RIGHT,
 			point + Vector2.LEFT,
 			point + Vector2.DOWN,

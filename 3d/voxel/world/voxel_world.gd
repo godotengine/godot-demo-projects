@@ -4,17 +4,20 @@ extends Node
 const CHUNK_MIDPOINT = Vector3(0.5, 0.5, 0.5) * Chunk.CHUNK_SIZE
 const CHUNK_END_SIZE = Chunk.CHUNK_SIZE - 1
 
-var render_distance setget _set_render_distance
+var render_distance:
+	set(value):
+		# TODO: Manually copy the code from this method.
+		_set_render_distance(value)
 var _delete_distance = 0
 var effective_render_distance = 0
-var _old_player_chunk = Vector3() # TODO: Vector3i
+var _old_player_chunk = Vector3i()
 
 var _generating = true
 var _deleting = false
 
 var _chunks = {}
 
-onready var player = $"../Player"
+@onready var player = $"../Player"
 
 
 func _process(_delta):

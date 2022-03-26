@@ -5,13 +5,13 @@ extends ScrollContainer
 
 
 func _ready():
-	var scrollbar = get_v_scrollbar()
-	scrollbar.connect("scrolling", Callable(self, "_on_scrolling"))
+	var scrollbar = get_v_scroll_bar()
+	scrollbar.connect(&"scrolling", Callable(self, "_on_scrolling"))
 
 
 func _process(_delta):
 	if auto_scroll:
-		var scrollbar = get_v_scrollbar()
+		var scrollbar = get_v_scroll_bar()
 		scrollbar.value = scrollbar.max_value
 
 

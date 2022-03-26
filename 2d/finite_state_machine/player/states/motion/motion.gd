@@ -8,8 +8,8 @@ func handle_input(event):
 
 func get_input_direction():
 	var input_direction = Vector2(
-			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-			Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+			Input.get_axis(&"move_left", &"move_right"),
+			Input.get_axis(&"move_up", &"move_down")
 	)
 	return input_direction
 

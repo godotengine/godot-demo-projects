@@ -1,4 +1,4 @@
-tool
+@tool
 extends Control
 
 var zoom_level := 0
@@ -10,16 +10,16 @@ var view_mode_index := 0
 var editor_interface: EditorInterface # Set in node25d_plugin.gd
 var moving = false
 
-onready var viewport_2d = $Viewport2D
-onready var viewport_overlay = $ViewportOverlay
-onready var view_mode_button_group: ButtonGroup = $"../TopBar/ViewModeButtons/45Degree".group
-onready var zoom_label: Label = $"../TopBar/Zoom/ZoomPercent"
-onready var gizmo_25d_scene = preload("res://addons/node25d-cs/main_screen/gizmo_25d.tscn")
+@onready var viewport_2d = $Viewport2D
+@onready var viewport_overlay = $ViewportOverlay
+@onready var view_mode_button_group: ButtonGroup = $"../TopBar/ViewModeButtons/45Degree".group
+@onready var zoom_label: Label = $"../TopBar/Zoom/ZoomPercent"
+@onready var gizmo_25d_scene = preload("res://addons/node25d-cs/main_screen/gizmo_25d.tscn")
 
 func _ready():
 	# Give Godot a chance to fully load the scene. Should take two frames.
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
+	await get_tree().process_frame
 	var edited_scene_root = get_tree().edited_scene_root
 	if not edited_scene_root:
 		# Godot hasn't finished loading yet, so try loading the plugin again.
@@ -46,17 +46,17 @@ func _process(delta):
 		_recursive_change_view_mode(get_tree().edited_scene_root)
 
 	# Zooming.
-	if Input.is_mouse_button_pressed(BUTTON_WHEEL_UP):
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_UP):
 		zoom_level += 1
-	elif Input.is_mouse_button_pressed(BUTTON_WHEEL_DOWN):
+	elif Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_DOWN):
 		zoom_level -= 1
 	var zoom = _get_zoom_amount()
 
-	# Viewport size.
+	# SubViewport size.
 	var size = get_global_rect().size
 	viewport_2d.size = size
 
-	# Viewport transform.
+	# SubViewport transform.
 	var viewport_trans = Transform2D.IDENTITY
 	viewport_trans.x *= zoom
 	viewport_trans.y *= zoom
@@ -83,7 +83,7 @@ func _process(delta):
 				if selected == overlay_child.get("node25d"):
 					new = false
 			if new:
-				var gizmo = gizmo_25d_scene.instance()
+				var gizmo = gizmo_25d_scene.instantiate()
 				viewport_overlay.add_child(gizmo)
 				gizmo.set("node25d", selected)
 				gizmo.call("Initialize")
@@ -93,25 +93,25 @@ func _process(delta):
 func _gui_input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-			if event.button_index == BUTTON_WHEEL_UP:
+			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 				zoom_level += 1
 				accept_event()
-			elif event.button_index == BUTTON_WHEEL_DOWN:
+			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				zoom_level -= 1
 				accept_event()
-			elif event.button_index == BUTTON_MIDDLE:
+			elif event.button_index == MOUSE_BUTTON_MIDDLE:
 				is_panning = true
 				pan_center = viewport_center - event.position
 				accept_event()
-			elif event.button_index == BUTTON_LEFT:
+			elif event.button_index == MOUSE_BUTTON_LEFT:
 				var overlay_children = viewport_overlay.get_children()
 				for overlay_child in overlay_children:
 					overlay_child.set("wantsToMove", true)
 				accept_event()
-		elif event.button_index == BUTTON_MIDDLE:
+		elif event.button_index == MOUSE_BUTTON_MIDDLE:
 			is_panning = false
 			accept_event()
-		elif event.button_index == BUTTON_LEFT:
+		elif event.button_index == MOUSE_BUTTON_LEFT:
 			var overlay_children = viewport_overlay.get_children()
 			for overlay_child in overlay_children:
 				overlay_child.set("wantsToMove", false)

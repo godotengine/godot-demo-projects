@@ -26,32 +26,32 @@ class Bullet:
 func _ready():
 	randomize()
 
-	shape = Physics2DServer.circle_shape_create()
+	shape = PhysicsServer2D.circle_shape_create()
 	# Set the collision shape's radius for each bullet in pixels.
-	Physics2DServer.shape_set_data(shape, 8)
+	PhysicsServer2D.shape_set_data(shape, 8)
 
 	for _i in BULLET_COUNT:
 		var bullet = Bullet.new()
 		# Give each bullet its own speed.
-		bullet.speed = rand_range(SPEED_MIN, SPEED_MAX)
-		bullet.body = Physics2DServer.body_create()
+		bullet.speed = randf_range(SPEED_MIN, SPEED_MAX)
+		bullet.body = PhysicsServer2D.body_create()
 
-		Physics2DServer.body_set_space(bullet.body, get_world_2d().get_space())
-		Physics2DServer.body_add_shape(bullet.body, shape)
+		PhysicsServer2D.body_set_space(bullet.body, get_world_2d().get_space())
+		PhysicsServer2D.body_add_shape(bullet.body, shape)
 		# Don't make bullets check collision with other bullets to improve performance.
 		# Their collision mask is still configured to the default value, which allows
 		# bullets to detect collisions with the player.
-		Physics2DServer.body_set_collision_layer(bullet.body, 0)
+		PhysicsServer2D.body_set_collision_layer(bullet.body, 0)
 
 		# Place bullets randomly on the viewport and move bullets outside the
 		# play area so that they fade in nicely.
 		bullet.position = Vector2(
-			rand_range(0, get_viewport_rect().size.x) + get_viewport_rect().size.x,
-			rand_range(0, get_viewport_rect().size.y)
+			randf_range(0, get_viewport_rect().size.x) + get_viewport_rect().size.x,
+			randf_range(0, get_viewport_rect().size.y)
 		)
 		var transform2d = Transform2D()
 		transform2d.origin = bullet.position
-		Physics2DServer.body_set_state(bullet.body, Physics2DServer.BODY_STATE_TRANSFORM, transform2d)
+		PhysicsServer2D.body_set_state(bullet.body, PhysicsServer2D.BODY_STATE_TRANSFORM, transform2d)
 
 		bullets.push_back(bullet)
 
@@ -73,7 +73,7 @@ func _physics_process(delta):
 
 		transform2d.origin = bullet.position
 
-		Physics2DServer.body_set_state(bullet.body, Physics2DServer.BODY_STATE_TRANSFORM, transform2d)
+		PhysicsServer2D.body_set_state(bullet.body, PhysicsServer2D.BODY_STATE_TRANSFORM, transform2d)
 
 
 # Instead of drawing each bullet individually in a script attached to each bullet,
@@ -87,7 +87,7 @@ func _draw():
 # Perform cleanup operations (required to exit without error messages in the console).
 func _exit_tree():
 	for bullet in bullets:
-		Physics2DServer.free_rid(bullet.body)
+		PhysicsServer2D.free_rid(bullet.body)
 
-	Physics2DServer.free_rid(shape)
+	PhysicsServer2D.free_rid(shape)
 	bullets.clear()

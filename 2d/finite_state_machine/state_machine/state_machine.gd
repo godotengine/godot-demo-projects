@@ -10,18 +10,21 @@ signal state_changed(current_state)
 # You should set a starting node from the inspector or on the node that inherits
 # from this state machine interface. If you don't, the game will default to
 # the first state in the state machine's children.
-export(NodePath) var start_state
+@export var start_state: NodePath
 var states_map = {}
 
 var states_stack = []
 var current_state = null
-var _active = false setget set_active
+var _active = false:
+	set(value):
+		# TODO: Manually copy the code from this method.
+		set_active(value)
 
 func _ready():
 	if not start_state:
 		start_state = get_child(0).get_path()
 	for child in get_children():
-		var err = child.connect("finished", self, "_change_state")
+		var err = child.connect(&"finished", self._change_state)
 		if err:
 			printerr(err)
 	initialize(start_state)

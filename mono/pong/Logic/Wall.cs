@@ -1,6 +1,6 @@
 using Godot;
 
-public class Wall : Area2D
+public partial class Wall : Area2D
 {
     public void OnWallAreaEntered(Area2D area)
     {

@@ -81,7 +81,7 @@ func is_ready(path):
 func _wait_for_resource(res, path):
 	_unlock("wait_for_resource")
 	while true:
-		VisualServer.sync()
+		RenderingServer.sync()
 		OS.delay_usec(16000) # Wait approximately 1 frame.
 		_lock("wait_for_resource")
 		if queue.size() == 0 or queue[0] != res:

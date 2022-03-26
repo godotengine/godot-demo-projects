@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorImportPlugin
 
 enum Presets { PRESET_DEFAULT }
@@ -62,7 +62,7 @@ func import(source_file, save_path, options, r_platform_variants, r_gen_files):
 		return ERR_PARSE_ERROR
 
 	var color = Color8(int(channels[0]), int(channels[1]), int(channels[2]))
-	var material = SpatialMaterial.new()
+	var material = StandardMaterial3D.new()
 
 	if options.use_red_anyway:
 		color = Color8(255, 0, 0)

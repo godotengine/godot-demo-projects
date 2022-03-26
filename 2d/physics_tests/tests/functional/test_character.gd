@@ -44,8 +44,8 @@ var _moving_body : PhysicsBody2D = null
 
 
 func _ready():
-	options.connect("option_selected", Callable(self, "_on_option_selected"))
-	options.connect("option_changed", Callable(self, "_on_option_changed"))
+	options.connect(&"option_selected", Callable(self, "_on_option_selected"))
+	options.connect(&"option_changed", Callable(self, "_on_option_changed"))
 
 	_character_body_template = find_node("CharacterBody2D")
 	if _character_body_template:

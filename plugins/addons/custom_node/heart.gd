@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node2D
 
 var heart = preload("res://addons/custom_node/heart.png")

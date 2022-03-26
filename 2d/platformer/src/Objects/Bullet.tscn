@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://assets/art/player/bullet/bullet.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/player/bullet/bullet.png" type="Texture2D" id=1]
 [ext_resource path="res://src/Objects/Bullet.gd" type="Script" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
@@ -23,36 +23,36 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.3 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
 "method": "queue_free"
-} ]
+}]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:self_modulate")
+tracks/1/path = NodePath("Sprite2D:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Particles2D:self_modulate")
+tracks/2/path = NodePath("GPUParticles2D:self_modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [node name="Bullet" type="RigidBody2D"]
@@ -64,7 +64,7 @@ contacts_reported = 1
 contact_monitor = true
 script = ExtResource( 2 )
 
-[node name="Particles2D" type="CPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="CPUParticles2D" parent="."]
 material = SubResource( 2 )
 emitting = false
 lifetime = 0.3
@@ -72,11 +72,11 @@ speed_scale = 3.0
 local_coords = false
 texture = ExtResource( 1 )
 spread = 0.0
-gravity = Vector2( 0, 0 )
+gravity = Vector2(0, 0)
 scale_amount = 0.8
-color = Color( 1, 1, 1, 0.705882 )
+color = Color(1, 1, 1, 0.705882)
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource( 3 )
 texture = ExtResource( 1 )
 

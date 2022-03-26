@@ -41,16 +41,16 @@ var undo_element_list_num = -1
 # The current brush settings: The mode, size, color, and shape we have currently selected.
 var brush_mode = BrushModes.PENCIL
 var brush_size = 32
-var brush_color = Color.black
+var brush_color = Color.BLACK
 var brush_shape = BrushShapes.CIRCLE;
 
 # The color of the background. We need this for the eraser (see the how we handle the eraser
 # in the _draw function for more details).
-var bg_color = Color.white
+var bg_color = Color.WHITE
 
 func _ready():
 	# Get the top left position node. We need this to find out whether or not the mouse is inside the canvas.
-	TL_node = get_node("TLPos")
+	TL_node = get_node(^"TLPos")
 	set_process(true)
 
 
@@ -63,7 +63,7 @@ func _process(_delta):
 		if mouse_pos.y > TL_node.global_position.y:
 			is_mouse_in_drawing_area = true
 
-	if Input.is_mouse_button_pressed(BUTTON_LEFT):
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		# If we do not have a position for when the mouse was first clicked, then this must
 		# be the first time is_mouse_button_pressed has been called since the mouse button was
 		# released, so we need to store the position.
@@ -239,7 +239,7 @@ func _draw():
 
 func save_picture(path):
 	# Wait until the frame has finished before getting the texture.
-	yield(VisualServer, "frame_post_draw")
+	await RenderingServer.frame_post_draw
 
 	# Get the viewport image.
 	var img = get_viewport().get_texture().get_data()

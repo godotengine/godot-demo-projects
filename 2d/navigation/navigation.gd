@@ -1,9 +1,9 @@
-extends Navigation2D
+extends Node2D
 
-export(float) var character_speed = 400.0
+@export var character_speed: float = 400.0
 var path = []
 
-onready var character = $Character
+@onready var character = $Character
 
 func _process(delta):
 	var walk_distance = character_speed * delta
@@ -24,7 +24,7 @@ func move_along_path(distance):
 		var distance_between_points = last_point.distance_to(path[0])
 		# The position to move to falls between two points.
 		if distance <= distance_between_points:
-			character.position = last_point.linear_interpolate(path[0], distance / distance_between_points)
+			character.position = last_point.lerp(path[0], distance / distance_between_points)
 			return
 		# The position is past the end of the segment.
 		distance -= distance_between_points
@@ -36,8 +36,8 @@ func move_along_path(distance):
 
 
 func _update_navigation_path(start_position, end_position):
-	# get_simple_path is part of the Navigation2D class.
-	# It returns a PoolVector2Array of points that lead you
+	# get_simple_path is part of the Node2D class.
+	# It returns a PackedVector2Array of points that lead you
 	# from the start_position to the end_position.
 	path = get_simple_path(start_position, end_position, true)
 	# The first point is always the start_position.

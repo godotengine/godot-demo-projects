@@ -1,13 +1,13 @@
 using Godot;
 
-public class CubeMath : Spatial
+public partial class CubeMath : Node3D
 {
     private static PackedScene cubePointScene = ResourceLoader.Load<PackedScene>("res://assets/cube/cube_point.tscn");
 
     private bool _isParentReady = false;
     private Node2D _parent;
-    private Spatial[] _cubePointsMath = new Spatial[27]; // The math node of each 2.5D cube point
-    private Spatial[] _cubeMathSpatials = new Spatial[27]; // The CubeMath children that find position.
+    private Node3D[] _cubePointsMath = new Node3D[27]; // The math node of each 2.5D cube point
+    private Node3D[] _cubeMathSpatials = new Node3D[27]; // The CubeMath children that find position.
 
     public override void _Ready()
     {
@@ -21,8 +21,8 @@ public class CubeMath : Spatial
             int c = (i % 3) - 1;
             Vector3 spatialPosition = 5 * (a * Vector3.Right + b * Vector3.Up + c * Vector3.Back);
 
-            _cubeMathSpatials[i] = new Spatial();
-            _cubeMathSpatials[i].Translation = spatialPosition;
+            _cubeMathSpatials[i] = new Node3D();
+            _cubeMathSpatials[i].Position = spatialPosition;
             _cubeMathSpatials[i].Name = "CubeMath #" + i + ", " + a + " " + b + " " + c;
             AddChild(_cubeMathSpatials[i]);
         }
@@ -48,7 +48,7 @@ public class CubeMath : Spatial
             RotateZ(delta * (Input.GetActionStrength("move_counterclockwise") - Input.GetActionStrength("move_clockwise")));
             if (Input.IsActionJustPressed("reset_position"))
             {
-                Transform = Transform.Identity;
+                Transform = Transform3D.Identity;
             }
             for (int i = 0; i < 27; i++)
             {
@@ -61,9 +61,9 @@ public class CubeMath : Spatial
             for (int i = 0; i < 27; i++)
             {
                 PackedScene myCubePointScene = cubePointScene.Duplicate(true) as PackedScene;
-                Node25D cubePoint = myCubePointScene.Instance() as Node25D;
+                Node25D cubePoint = myCubePointScene.Instantiate() as Node25D;
                 cubePoint.Name = "CubePoint #" + i;
-                _cubePointsMath[i] = cubePoint.GetChild<Spatial>(0);
+                _cubePointsMath[i] = cubePoint.GetChild<Node3D>(0);
                 _parent.AddChild(cubePoint);
             }
             _isParentReady = true;

@@ -27,7 +27,7 @@ func _on_ChangeWindowIcon_pressed():
 
 func _on_MoveWindowToForeground_pressed():
 	OS.set_window_title("Will move window to foreground in 5 seconds, try unfocusing the window...")
-	yield(get_tree().create_timer(5), "timeout")
+	await get_tree().create_timer(5).timeout
 	OS.move_window_to_foreground()
 	# Restore the previous window title.
 	OS.set_window_title(ProjectSettings.get_setting("application/config/name"))
@@ -35,7 +35,7 @@ func _on_MoveWindowToForeground_pressed():
 
 func _on_RequestAttention_pressed():
 	OS.set_window_title("Will request attention in 5 seconds, try unfocusing the window...")
-	yield(get_tree().create_timer(5), "timeout")
+	await get_tree().create_timer(5).timeout
 	OS.request_attention()
 	# Restore the previous window title.
 	OS.set_window_title(ProjectSettings.get_setting("application/config/name"))
@@ -50,7 +50,7 @@ func _on_VibrateDeviceLong_pressed():
 
 
 func _on_AddGlobalMenuItems_pressed():
-	OS.global_menu_add_item("Hello", "World", 0, null)
+	OS.global_menu_add_item("Hello", "World3D", 0, null)
 	OS.global_menu_add_separator("Hello")
 	OS.global_menu_add_item("Hello2", "World2", 0, null)
 

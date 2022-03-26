@@ -1,24 +1,30 @@
-tool
-extends Spatial
+@tool
+extends Node3D
 
-export(NodePath) var skeleton_path setget _set_skeleton_path
-export(String) var bone_name = ""
-export(int, "_process", "_physics_process", "_notification", "none") var update_mode = 0 setget _set_update
-export(int, "X-up", "Y-up", "Z-up") var look_at_axis = 1
-export(float, 0.0, 1.0, 0.001) var interpolation = 1.0
-export(bool) var use_our_rotation_x = false
-export(bool) var use_our_rotation_y = false
-export(bool) var use_our_rotation_z = false
-export(bool) var use_negative_our_rot = false
-export(Vector3) var additional_rotation = Vector3()
-export(bool) var position_using_additional_bone = false
-export(String) var additional_bone_name = ""
-export(float) var additional_bone_length = 1
-export(bool) var debug_messages = false
+@export var skeleton_path: NodePath:
+	set(value):
+		# TODO: Manually copy the code from this method.
+		_set_skeleton_path(value)
+@export var bone_name: String = ""
+@export var update_mode: int, "_process", "_physics_process", "_notification", "none" = 0:
+	set(value):
+		# TODO: Manually copy the code from this method.
+		_set_update(value)
+@export var look_at_axis: int, "X-up", "Y-up", "Z-up" = 1
+@export var interpolation: float, 0.0, 1.0, 0.001 = 1.0
+@export var use_our_rotation_x: bool = false
+@export var use_our_rotation_y: bool = false
+@export var use_our_rotation_z: bool = false
+@export var use_negative_our_rot: bool = false
+@export var additional_rotation: Vector3 = Vector3()
+@export var position_using_additional_bone: bool = false
+@export var additional_bone_name: String = ""
+@export var additional_bone_length: float = 1
+@export var debug_messages: bool = false
 
-var skeleton_to_use: Skeleton = null
+var skeleton_to_use: Skeleton3D = null
 var first_call: bool = true
-var _editor_indicator: Spatial = null
+var _editor_indicator: Node3D = null
 
 
 func _ready():
@@ -81,7 +87,7 @@ func update_skeleton():
 	var rest = skeleton_to_use.get_bone_global_pose(bone)
 
 	# Convert our position relative to the skeleton's transform.
-	var target_pos = skeleton_to_use.global_transform.xform_inv(global_transform.origin)
+	var target_pos = global_transform.origin * skeleton_to_use.global_transform
 
 	# Call helper's look_at function with the chosen up axis.
 	if look_at_axis == 0:
@@ -132,27 +138,27 @@ func update_skeleton():
 
 
 func _setup_for_editor():
-	# To see the target in the editor, let's create a MeshInstance,
+	# To see the target in the editor, let's create a MeshInstance3D,
 	# add it as a child of this node, and name it.
-	_editor_indicator = MeshInstance.new()
+	_editor_indicator = MeshInstance3D.new()
 	add_child(_editor_indicator)
 	_editor_indicator.name = "(EditorOnly) Visual indicator"
 
-	# Make a sphere mesh for the MeshInstance
+	# Make a sphere mesh for the MeshInstance3D
 	var indicator_mesh = SphereMesh.new()
 	indicator_mesh.radius = 0.1
 	indicator_mesh.height = 0.2
 	indicator_mesh.radial_segments = 8
 	indicator_mesh.rings = 4
 
-	# Create a new SpatialMaterial for the sphere and give it the editor
+	# Create a new StandardMaterial3D for the sphere and give it the editor
 	# gizmo texture so it is textured.
-	var indicator_material = SpatialMaterial.new()
+	var indicator_material = StandardMaterial3D.new()
 	indicator_material.flags_unshaded = true
 	indicator_material.albedo_texture = preload("editor_gizmo_texture.png")
 	indicator_material.albedo_color = Color(1, 0.5, 0, 1)
 
-	# Assign the material and mesh to the MeshInstance.
+	# Assign the material and mesh to the MeshInstance3D.
 	indicator_mesh.material = indicator_material
 	_editor_indicator.mesh = indicator_mesh
 
@@ -201,7 +207,7 @@ func _set_skeleton_path(new_value):
 	# Get the node at that location, if there is one.
 	var temp = get_node(skeleton_path)
 	if temp != null:
-		if temp is Skeleton:
+		if temp is Skeleton3D:
 			skeleton_to_use = temp
 			if debug_messages:
 				print(name, " - IK_LookAt: attached to (new) skeleton")

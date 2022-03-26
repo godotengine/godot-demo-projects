@@ -98,9 +98,9 @@ func _process(delta):
 	var gyro = Input.get_gyroscope()
 
 	# Show our base values
-	get_node("Control/Accelerometer").text = "Accelerometer: " + str(acc) + ", gravity: " + str(grav)
-	get_node("Control/Magnetometer").text = "Magnetometer: " + str(mag)
-	get_node("Control/Gyroscope").text = "Gyroscope: " + str(gyro)
+	get_node(^"Control/Accelerometer").text = "Accelerometer: " + str(acc) + ", gravity: " + str(grav)
+	get_node(^"Control/Magnetometer").text = "Magnetometer: " + str(mag)
+	get_node(^"Control/Gyroscope").text = "Gyroscope: " + str(gyro)
 
 	# Check if we have all needed data
 	if grav.length() < 0.1:
@@ -116,23 +116,23 @@ func _process(delta):
 		mag = Vector3(1.0, 0.0, 0.0)
 
 	# Update our arrow showing gravity
-	get_node("Arrows/AccelerometerArrow").transform.basis = get_basis_for_arrow(grav)
+	get_node(^"Arrows/AccelerometerArrow").transform.basis = get_basis_for_arrow(grav)
 
 	# Update our arrow showing our magnetometer
 	# Note that in absense of other strong magnetic forces this will point to magnetic north, which is not horizontal thanks to the earth being, uhm, round
-	get_node("Arrows/MagnetoArrow").transform.basis = get_basis_for_arrow(mag)
+	get_node(^"Arrows/MagnetoArrow").transform.basis = get_basis_for_arrow(mag)
 
 	# Calculate our north vector and show that
 	var north = calc_north(grav,mag)
-	get_node("Arrows/NorthArrow").transform.basis = get_basis_for_arrow(north)
+	get_node(^"Arrows/NorthArrow").transform.basis = get_basis_for_arrow(north)
 
 	# Combine our magnetometer and gravity vector to position our box. This will be fairly accurate
 	# but our magnetometer can be easily influenced by magnets. Cheaper phones often don't have gyros
 	# so it is a good backup.
-	var mag_and_grav = get_node("Boxes/MagAndGrav")
+	var mag_and_grav = get_node(^"Boxes/MagAndGrav")
 	mag_and_grav.transform.basis = orientate_by_mag_and_grav(mag, grav).orthonormalized()
 
 	# Using our gyro and do a drift correction using our gravity vector gives the best result
-	var gyro_and_grav = get_node("Boxes/GyroAndGrav")
+	var gyro_and_grav = get_node(^"Boxes/GyroAndGrav")
 	var new_basis = rotate_by_gyro(gyro, gyro_and_grav.transform.basis, delta).orthonormalized()
 	gyro_and_grav.transform.basis = drift_correction(new_basis, grav)

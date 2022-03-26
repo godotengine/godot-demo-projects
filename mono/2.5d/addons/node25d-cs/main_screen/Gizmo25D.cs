@@ -2,7 +2,7 @@ using Godot;
 
 // This is identical to the GDScript version, yet it doesn't work.
 [Tool]
-public class Gizmo25D : Node2D
+public partial class Gizmo25D : Node2D
 {
     // Not pixel perfect for all axes in all modes, but works well enough.
     // Rounding is not done until after the movement is finished.
@@ -10,7 +10,7 @@ public class Gizmo25D : Node2D
 
     // Set when the node is created.
     public Node25D node25d;
-    public Spatial spatialNode;
+    public Node3D spatialNode;
 
     // Input from Viewport25D, represents if the mouse is clicked.
     public bool wantsToMove = false;
@@ -106,7 +106,7 @@ public class Gizmo25D : Node2D
     			movement *= -1;
             }
     		// Apply movement.
-            Transform t = spatialNode.Transform;
+            Transform3D t = spatialNode.Transform;
     		t.origin += t.basis[dominantAxis] * movement;
             spatialNode.Transform = t;
         }
@@ -116,7 +116,7 @@ public class Gizmo25D : Node2D
     		GlobalPosition = node25d.GlobalPosition;
     		if (RoughlyRoundToPixels)
             {
-                Transform t = spatialNode.Transform;
+                Transform3D t = spatialNode.Transform;
     			t.origin = (t.origin * Node25D.SCALE).Round() / Node25D.SCALE;
                 spatialNode.Transform = t;
             }
@@ -136,7 +136,7 @@ public class Gizmo25D : Node2D
 		    lines[i].Points[1] = basis[i] * 3;
         }
 	    GlobalPosition = node25d.GlobalPosition;
-	    spatialNode = node25d.GetChild<Spatial>(0);
+	    spatialNode = node25d.GetChild<Node3D>(0);
     }
 
 

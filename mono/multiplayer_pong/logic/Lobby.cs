@@ -2,7 +2,7 @@ using Godot;
 using System;
 using Godot.Collections;
 
-public class Lobby : Control
+public partial class Lobby : Control
 {
     private const int DefaultPort = 8910; // An arbitrary number.
     private const int MaxNumberOfPeers = 1; // How many people we want to have in a game
@@ -38,7 +38,7 @@ public class Lobby : Control
     private void PlayerConnected(int id)
     {
         // Someone connected, start the game!
-        var pong = ResourceLoader.Load<PackedScene>("res://pong.tscn").Instance();
+        var pong = ResourceLoader.Load<PackedScene>("res://pong.tscn").Instantiate();
 
         // Connect deferred so we can safely erase it from the callback.
         pong.Connect("GameFinished", this, nameof(EndGame), new Godot.Collections.Array(), (int) ConnectFlags.Deferred);

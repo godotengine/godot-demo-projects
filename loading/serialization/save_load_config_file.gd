@@ -3,9 +3,9 @@ extends Button
 # ConfigFile can store any Godot type natively.
 
 # The root game node (so we can get and instance enemies).
-export(NodePath) var game_node
+@export var game_node: NodePath
 # The player node (so we can set/get its health and position).
-export(NodePath) var player_node
+@export var player_node: NodePath
 
 const SAVE_PATH = "user://save_config_file.ini"
 
@@ -26,7 +26,7 @@ func save_game():
 
 	config.save(SAVE_PATH)
 
-	get_node("../LoadConfigFile").disabled = false
+	get_node(^"../LoadConfigFile").disabled = false
 
 
 # `load()` is reserved.
@@ -47,6 +47,6 @@ func load_game():
 	var game = get_node(game_node)
 
 	for enemy_config in enemies:
-		var enemy = preload("res://enemy.tscn").instance()
+		var enemy = preload("res://enemy.tscn").instantiate()
 		enemy.position = enemy_config.position
 		game.add_child(enemy)

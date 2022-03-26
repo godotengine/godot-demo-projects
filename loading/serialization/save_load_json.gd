@@ -5,9 +5,9 @@ extends Button
 # and to store Vector2 and other non-JSON types you need `var2str()`.
 
 # The root game node (so we can get and instance enemies).
-export(NodePath) var game_node
+@export var game_node: NodePath
 # The player node (so we can set/get its health and position).
-export(NodePath) var player_node
+@export var player_node: NodePath
 
 const SAVE_PATH = "user://save_json.json"
 
@@ -32,16 +32,18 @@ func save_game():
 			position = var2str(enemy.position),
 		})
 
-	file.store_line(to_json(save_dict))
+	file.store_line(JSON.new().stringify(save_dict))
 
-	get_node("../LoadJSON").disabled = false
+	get_node(^"../LoadJSON").disabled = false
 
 
 # `load()` is reserved.
 func load_game():
 	var file = File.new()
 	file.open(SAVE_PATH, File.READ)
-	var save_dict = parse_json(file.get_line())
+	var json = JSON.new()
+	json.parse(file.get_line())
+	var save_dict = json.get_data()
 
 	var player = get_node(player_node)
 	# JSON doesn't support complex types such as Vector2.
@@ -57,6 +59,6 @@ func load_game():
 	var game = get_node(game_node)
 
 	for enemy_config in save_dict.enemies:
-		var enemy = preload("res://enemy.tscn").instance()
+		var enemy = preload("res://enemy.tscn").instantiate()
 		enemy.position = str2var(enemy_config.position)
 		game.add_child(enemy)

@@ -1,8 +1,14 @@
 extends Node
 
-export(NodePath) var combatants_list
-var queue = [] setget set_queue
-var active_combatant = null setget _set_active_combatant
+@export var combatants_list: NodePath
+var queue = []:
+	set(value):
+		# TODO: Manually copy the code from this method.
+		set_queue(value)
+var active_combatant = null:
+	set(value):
+		# TODO: Manually copy the code from this method.
+		_set_active_combatant(value)
 
 signal active_combatant_changed(active_combatant)
 
@@ -16,7 +22,7 @@ func initialize():
 
 
 func play_turn():
-	yield(active_combatant, "turn_finished")
+	await active_combatant.turn_finished
 	get_next_in_queue()
 	play_turn()
 

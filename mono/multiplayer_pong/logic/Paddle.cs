@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Paddle : Area2D
+public partial class Paddle : Area2D
 {
     private const int MotionSpeed = 150;
 

@@ -1,7 +1,7 @@
 extends Control
 
 # The OpenSimplexNoise object.
-onready var noise: OpenSimplexNoise = $SeamlessNoiseTexture.texture.noise
+@onready var noise: OpenSimplexNoise = $SeamlessNoiseTexture.texture.noise
 
 # Various noise parameters.
 var min_noise = -1
@@ -35,7 +35,7 @@ func _on_DocumentationButton_pressed():
 
 
 func _on_RandomSeedButton_pressed():
-	$ParameterContainer/SeedSpinBox.value = floor(rand_range(-2147483648, 2147483648))
+	$ParameterContainer/SeedSpinBox.value = floor(randf_range(-2147483648, 2147483648))
 
 
 func _on_SeedSpinBox_value_changed(value):

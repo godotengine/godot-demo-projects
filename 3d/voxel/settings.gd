@@ -21,7 +21,9 @@ func _enter_tree():
 		file.open(_save_path, File.READ)
 		while file.get_position() < file.get_len():
 			# Get the saved dictionary from the next line in the save file
-			var data = parse_json(file.get_line())
+			var json = JSON.new()
+			json.parse(file.get_line())
+			var data = json.get_data()
 			render_distance = data["render_distance"]
 			fog_enabled = data["fog_enabled"]
 		file.close()
@@ -36,5 +38,5 @@ func save_settings():
 		"render_distance": render_distance,
 		"fog_enabled": fog_enabled,
 	}
-	file.store_line(to_json(data))
+	file.store_line(JSON.new().stringify(data))
 	file.close()

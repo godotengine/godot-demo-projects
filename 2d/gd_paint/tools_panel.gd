@@ -1,37 +1,37 @@
 extends Panel
 
-onready var brush_settings = $BrushSettings
-onready var label_brush_size = brush_settings.get_node(@"LabelBrushSize")
-onready var label_brush_shape = brush_settings.get_node(@"LabelBrushShape")
-onready var label_stats = $LabelStats
-onready var label_tools = $LabelTools
+@onready var brush_settings = $BrushSettings
+@onready var label_brush_size = brush_settings.get_node(^"LabelBrushSize")
+@onready var label_brush_shape = brush_settings.get_node(^"LabelBrushShape")
+@onready var label_stats = $LabelStats
+@onready var label_tools = $LabelTools
 
-onready var _parent = get_parent()
-onready var save_dialog = _parent.get_node(@"SaveFileDialog")
-onready var paint_control = _parent.get_node(@"PaintControl")
+@onready var _parent = get_parent()
+@onready var save_dialog = _parent.get_node(^"SaveFileDialog")
+@onready var paint_control = _parent.get_node(^"PaintControl")
 
 func _ready():
 	# warning-ignore-all:return_value_discarded
 	# Assign all of the needed signals for the oppersation buttons.
-	$ButtonUndo.connect("pressed", self, "button_pressed", ["undo_stroke"])
-	$ButtonSave.connect("pressed", self, "button_pressed", ["save_picture"])
-	$ButtonClear.connect("pressed", self, "button_pressed", ["clear_picture"])
+	$ButtonUndo.connect(&"pressed", self.button_pressed, ["undo_stroke"])
+	$ButtonSave.connect(&"pressed", self.button_pressed, ["save_picture"])
+	$ButtonClear.connect(&"pressed", self.button_pressed, ["clear_picture"])
 
 	# Assign all of the needed signals for the brush buttons.
-	$ButtonToolPencil.connect("pressed", self, "button_pressed", ["mode_pencil"])
-	$ButtonToolEraser.connect("pressed", self, "button_pressed", ["mode_eraser"])
-	$ButtonToolRectangle.connect("pressed", self, "button_pressed", ["mode_rectangle"])
-	$ButtonToolCircle.connect("pressed", self, "button_pressed", ["mode_circle"])
-	$BrushSettings/ButtonShapeBox.connect("pressed", self, "button_pressed", ["shape_rectangle"])
-	$BrushSettings/ButtonShapeCircle.connect("pressed", self, "button_pressed", ["shape_circle"])
+	$ButtonToolPencil.connect(&"pressed", self.button_pressed, ["mode_pencil"])
+	$ButtonToolEraser.connect(&"pressed", self.button_pressed, ["mode_eraser"])
+	$ButtonToolRectangle.connect(&"pressed", self.button_pressed, ["mode_rectangle"])
+	$ButtonToolCircle.connect(&"pressed", self.button_pressed, ["mode_circle"])
+	$BrushSettings/ButtonShapeBox.connect(&"pressed", self.button_pressed, ["shape_rectangle"])
+	$BrushSettings/ButtonShapeCircle.connect(&"pressed", self.button_pressed, ["shape_circle"])
 
 	# Assign all of the needed signals for the other brush settings (and ColorPickerBackground).
-	$ColorPickerBrush.connect("color_changed", self, "brush_color_changed")
-	$ColorPickerBackground.connect("color_changed", self, "background_color_changed")
-	$BrushSettings/HScrollBarBrushSize.connect("value_changed", self, "brush_size_changed")
+	$ColorPickerBrush.connect(&"color_changed", self.brush_color_changed)
+	$ColorPickerBackground.connect(&"color_changed", self.background_color_changed)
+	$BrushSettings/HScrollBarBrushSize.connect(&"value_changed", self.brush_size_changed)
 
 	# Assign the "file_selected" signal in SaveFileDialog.
-	save_dialog.connect("file_selected", self, "save_file_selected")
+	save_dialog.connect(&"file_selected", self.save_file_selected)
 
 	# Set physics process so we can update the status label.
 	set_physics_process(true)
@@ -95,7 +95,7 @@ func brush_color_changed(color):
 
 func background_color_changed(color):
 	# Change the background color to whatever colorthe background color picker is.
-	get_parent().get_node("DrawingAreaBG").modulate = color
+	get_parent().get_node(^"DrawingAreaBG").modulate = color
 	paint_control.bg_color = color
 	# Because of how the eraser works we also need to redraw the paint control.
 	paint_control.update()

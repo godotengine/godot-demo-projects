@@ -1,16 +1,16 @@
 extends Control
 
-onready var client = $Client
+@onready var client = $Client
 
 func _ready():
-	client.connect("lobby_joined", self, "_lobby_joined")
-	client.connect("lobby_sealed", self, "_lobby_sealed")
-	client.connect("connected", self, "_connected")
-	client.connect("disconnected", self, "_disconnected")
-	client.rtc_mp.connect("peer_connected", self, "_mp_peer_connected")
-	client.rtc_mp.connect("peer_disconnected", self, "_mp_peer_disconnected")
-	client.rtc_mp.connect("server_disconnected", self, "_mp_server_disconnect")
-	client.rtc_mp.connect("connection_succeeded", self, "_mp_connected")
+	client.connect(&"lobby_joined", self._lobby_joined)
+	client.connect(&"lobby_sealed", self._lobby_sealed)
+	client.connect(&"connected", self._connected)
+	client.connect(&"disconnected", self._disconnected)
+	client.rtc_mp.connect(&"peer_connected", self._mp_peer_connected)
+	client.rtc_mp.connect(&"peer_disconnected", self._mp_peer_disconnected)
+	client.rtc_mp.connect(&"server_disconnected", self._mp_server_disconnect)
+	client.rtc_mp.connect(&"connection_succeeded", self._mp_connected)
 
 
 func _process(delta):

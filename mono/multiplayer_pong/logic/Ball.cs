@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Ball : Area2D
+public partial class Ball : Area2D
 {
     private const int DefaultSpeed = 100;
 

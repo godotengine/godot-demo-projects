@@ -1,9 +1,12 @@
 class_name Combatant
 extends Node
 
-export(int) var damage = 1
-export(int) var defense = 1
-var active = false setget set_active
+@export var damage: int = 1
+@export var defense: int = 1
+var active = false:
+	set(value):
+		# TODO: Manually copy the code from this method.
+		set_active(value)
 
 signal turn_finished
 
@@ -39,4 +42,4 @@ func flee():
 
 func take_damage(damage_to_take):
 	$Health.take_damage(damage_to_take)
-	$Sprite/AnimationPlayer.play("take_damage")
+	$Sprite2D/AnimationPlayer.play("take_damage")

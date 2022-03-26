@@ -1,17 +1,17 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/node25d-cs/Node25D.cs" type="Script" id=1]
-[ext_resource path="res://addons/node25d-cs/icons/node_25d_icon.png" type="Texture" id=2]
-[ext_resource path="res://assets/cube/godot.png" type="Texture" id=3]
+[ext_resource path="res://addons/node25d-cs/icons/node_25d_icon.png" type="Texture2D" id=2]
+[ext_resource path="res://assets/cube/godot.png" type="Texture2D" id=3]
 
 [node name="CubePoint" type="Node2D"]
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_icon": ExtResource( 2 )
 }
-spatialPosition = Vector3( 0, 0, 0 )
+spatialPosition = Vector3(0, 0, 0)
 
-[node name="CubePointMath" type="Spatial" parent="."]
+[node name="CubePointMath" type="Node3D" parent="."]
 
-[node name="CubePointSprite" type="Sprite" parent="."]
+[node name="CubePointSprite" type="Sprite2D" parent="."]
 texture = ExtResource( 3 )

@@ -1,4 +1,4 @@
-extends RigidBody
+extends RigidBody3D
 
 const ACCEL = 5.0
 const DEACCEL = 20.0
@@ -9,7 +9,7 @@ var prev_advance = false
 var dying = false
 var rot_dir = 4
 
-onready var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * ProjectSettings.get_setting("physics/3d/default_gravity_vector")
+@onready var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * ProjectSettings.get_setting("physics/3d/default_gravity_vector")
 
 
 func _integrate_forces(state):
@@ -36,18 +36,18 @@ func _integrate_forces(state):
 				set_mode(MODE_RIGID)
 				dying = true
 				state.set_angular_velocity(-dp.cross(up).normalized() * 33.0)
-				get_node("AnimationPlayer").play("impact")
-				get_node("AnimationPlayer").queue("explode")
+				get_node(^"AnimationPlayer").play("impact")
+				get_node(^"AnimationPlayer").queue("explode")
 				cc.enabled = false
-				get_node("SoundHit").play()
+				get_node(^"SoundHit").play()
 				return
 
-	var col_floor = get_node("Armature/RayFloor").is_colliding()
-	var col_wall = get_node("Armature/RayWall").is_colliding()
+	var col_floor = get_node(^"Armature/RayFloor").is_colliding()
+	var col_wall = get_node(^"Armature/RayWall").is_colliding()
 
 	var advance = col_floor and not col_wall
 
-	var dir = get_node("Armature").get_transform().basis[2].normalized()
+	var dir = get_node(^"Armature").get_transform().basis[2].normalized()
 	var deaccel_dir = dir
 
 	if advance:
@@ -58,8 +58,8 @@ func _integrate_forces(state):
 		if prev_advance:
 			rot_dir = 1
 
-		dir = Basis(up, rot_dir * ROT_SPEED * delta).xform(dir)
-		get_node("Armature").set_transform(Transform().looking_at(-dir, up))
+		dir = Basis(up, rot_dir * ROT_SPEED * (delta) * dir)
+		get_node(^"Armature").set_transform(Transform3D().looking_at(-dir, up))
 
 	var dspeed = deaccel_dir.dot(lv)
 	dspeed -= DEACCEL * delta

@@ -1,7 +1,7 @@
 extends TileMap
 
 enum CellType { ACTOR, OBSTACLE, OBJECT }
-export(NodePath) var dialogue_ui
+@export var dialogue_ui: NodePath
 
 func _ready():
 	for child in get_children():
@@ -32,4 +32,4 @@ func request_move(pawn, direction):
 
 			if not target_pawn.has_node("DialoguePlayer"):
 				return
-			get_node(dialogue_ui).show_dialogue(pawn, target_pawn.get_node("DialoguePlayer"))
+			get_node(dialogue_ui).show_dialogue(pawn, target_pawn.get_node(^"DialoguePlayer"))

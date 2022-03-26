@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 enum GIMode {
 	NONE,
@@ -13,15 +13,15 @@ const GI_MODE_TEXTS = [
 	"Environment Lighting (Fastest)",
 	"Baked Lightmap All (Fast)",
 	"Baked Lightmap Indirect (Average)",
-	"GIProbe (Slow)",
+	"VoxelGI (Slow)",
 ]
 
 var gi_mode = GIMode.NONE
 var use_reflection_probe = false
 
-onready var gi_mode_label = $GIMode
-onready var reflection_probe_mode_label = $ReflectionProbeMode
-onready var reflection_probe = $Camera/ReflectiveSphere/ReflectionProbe
+@onready var gi_mode_label = $GIMode
+@onready var reflection_probe_mode_label = $ReflectionProbeMode
+@onready var reflection_probe = $Camera3D/ReflectiveSphere/ReflectionProbe
 
 
 func _ready():
@@ -48,14 +48,14 @@ func set_gi_mode(p_gi_mode):
 			$ZdmNoBake.visible = true
 			$BakedLightmapIndirect.visible = false
 			$BakedLightmapAll.visible = false
-			$GIProbe.visible = false
+			$VoxelGI.visible = false
 
 			# There is no difference between Indirect and Disabled when no GI is used.
 			# Pick the default value (which is Indirect).
-			$Sun.light_bake_mode = Light.BAKE_INDIRECT
-			$GrateOmniLight.light_bake_mode = Light.BAKE_INDIRECT
-			$GarageOmniLight.light_bake_mode = Light.BAKE_INDIRECT
-			$CornerSpotLight.light_bake_mode = Light.BAKE_INDIRECT
+			$Sun.light_bake_mode = Light3D.BAKE_INDIRECT
+			$GrateOmniLight.light_bake_mode = Light3D.BAKE_INDIRECT
+			$GarageOmniLight.light_bake_mode = Light3D.BAKE_INDIRECT
+			$CornerSpotLight.light_bake_mode = Light3D.BAKE_INDIRECT
 
 		GIMode.BAKED_LIGHTMAP_ALL:
 			$ZdmBakeIndirect.visible = false
@@ -63,13 +63,13 @@ func set_gi_mode(p_gi_mode):
 			$ZdmNoBake.visible = false
 			$BakedLightmapIndirect.visible = false
 			$BakedLightmapAll.visible = true
-			$GIProbe.visible = false
+			$VoxelGI.visible = false
 
 			# Make lights not affect baked surfaces by setting their bake mode to All.
-			$Sun.light_bake_mode = Light.BAKE_ALL
-			$GrateOmniLight.light_bake_mode = Light.BAKE_ALL
-			$GarageOmniLight.light_bake_mode = Light.BAKE_ALL
-			$CornerSpotLight.light_bake_mode = Light.BAKE_ALL
+			$Sun.light_bake_mode = Light3D.BAKE_ALL
+			$GrateOmniLight.light_bake_mode = Light3D.BAKE_ALL
+			$GarageOmniLight.light_bake_mode = Light3D.BAKE_ALL
+			$CornerSpotLight.light_bake_mode = Light3D.BAKE_ALL
 
 		GIMode.BAKED_LIGHTMAP_INDIRECT:
 			$ZdmBakeIndirect.visible = true
@@ -77,12 +77,12 @@ func set_gi_mode(p_gi_mode):
 			$ZdmNoBake.visible = false
 			$BakedLightmapIndirect.visible = true
 			$BakedLightmapAll.visible = false
-			$GIProbe.visible = false
+			$VoxelGI.visible = false
 
-			$Sun.light_bake_mode = Light.BAKE_INDIRECT
-			$GrateOmniLight.light_bake_mode = Light.BAKE_INDIRECT
-			$GarageOmniLight.light_bake_mode = Light.BAKE_INDIRECT
-			$CornerSpotLight.light_bake_mode = Light.BAKE_INDIRECT
+			$Sun.light_bake_mode = Light3D.BAKE_INDIRECT
+			$GrateOmniLight.light_bake_mode = Light3D.BAKE_INDIRECT
+			$GarageOmniLight.light_bake_mode = Light3D.BAKE_INDIRECT
+			$CornerSpotLight.light_bake_mode = Light3D.BAKE_INDIRECT
 
 		GIMode.GI_PROBE:
 			$ZdmBakeIndirect.visible = false
@@ -90,17 +90,17 @@ func set_gi_mode(p_gi_mode):
 			$ZdmNoBake.visible = true
 			$BakedLightmapIndirect.visible = false
 			$BakedLightmapAll.visible = false
-			$GIProbe.visible = true
+			$VoxelGI.visible = true
 
 			# Bake mode must be Indirect, not Disabled. Otherwise, GI will
 			# not be visible for those lights.
 			# Moving/blinking lights should generally have their bake mode set to Disabled
-			# to avoid visible GI pop-ins. This is because GIProbe
+			# to avoid visible GI pop-ins. This is because VoxelGI
 			# can take a while to update.
-			$Sun.light_bake_mode = Light.BAKE_INDIRECT
-			$GrateOmniLight.light_bake_mode = Light.BAKE_INDIRECT
-			$GarageOmniLight.light_bake_mode = Light.BAKE_INDIRECT
-			$CornerSpotLight.light_bake_mode = Light.BAKE_INDIRECT
+			$Sun.light_bake_mode = Light3D.BAKE_INDIRECT
+			$GrateOmniLight.light_bake_mode = Light3D.BAKE_INDIRECT
+			$GarageOmniLight.light_bake_mode = Light3D.BAKE_INDIRECT
+			$CornerSpotLight.light_bake_mode = Light3D.BAKE_INDIRECT
 
 
 func set_use_reflection_probe(p_visible):
@@ -109,6 +109,6 @@ func set_use_reflection_probe(p_visible):
 	if p_visible:
 		reflection_probe_mode_label.text = "Current reflection probe mode: Enabled - Using reflection probe (Average)"
 	else:
-		reflection_probe_mode_label.text = "Current reflection probe mode: Disabled - Using environment or GIProbe reflections (Fast)"
+		reflection_probe_mode_label.text = "Current reflection probe mode: Disabled - Using environment or VoxelGI reflections (Fast)"
 
 	reflection_probe.visible = p_visible

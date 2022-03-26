@@ -7,28 +7,28 @@ signal collect_coin()
 
 const FLOOR_DETECT_DISTANCE = 20.0
 
-export(String) var action_suffix = ""
+@export var action_suffix: String = ""
 
-onready var platform_detector = $PlatformDetector
-onready var animation_player = $AnimationPlayer
-onready var shoot_timer = $ShootAnimation
-onready var sprite = $Sprite
-onready var sound_jump = $Jump
-onready var gun = sprite.get_node(@"Gun")
+@onready var platform_detector = $PlatformDetector
+@onready var animation_player = $AnimationPlayer
+@onready var shoot_timer = $ShootAnimation
+@onready var sprite = $Sprite2D
+@onready var sound_jump = $Jump
+@onready var gun = sprite.get_node(^"Gun")
 
 
 func _ready():
 	# Static types are necessary here to avoid warnings.
-	var camera: Camera2D = $Camera
+	var camera: Camera2D = $Camera3D
 	if action_suffix == "_p1":
 		camera.custom_viewport = $"../.."
-		yield(get_tree(), "idle_frame")
+		await get_tree().process_frame
 		camera.make_current()
 	elif action_suffix == "_p2":
-		var viewport: Viewport = $"../../../../ViewportContainer2/Viewport2"
-		viewport.world_2d = ($"../.." as Viewport).world_2d
+		var viewport: SubViewport = $"../../../../ViewportContainer2/Viewport2"
+		viewport.world_2d = ($"../.." as SubViewport).world_2d
 		camera.custom_viewport = viewport
-		yield(get_tree(), "idle_frame")
+		await get_tree().process_frame
 		camera.make_current()
 
 
@@ -64,11 +64,12 @@ func _physics_process(_delta):
 	if direction.y == 0.0:
 		snap_vector = Vector2.DOWN * FLOOR_DETECT_DISTANCE
 	var is_on_platform = platform_detector.is_colliding()
-	_velocity = move_and_slide_with_snap(
+	# TODO: This information should be set to the CharacterBody properties instead of arguments.
+	move_and_slide(
 		_velocity, snap_vector, FLOOR_NORMAL, not is_on_platform, 4, 0.9, false
 	)
 
-	# When the character’s direction changes, we want to to scale the Sprite accordingly to flip it.
+	# When the character’s direction changes, we want to to scale the Sprite2D accordingly to flip it.
 	# This will make Robi face left or right depending on the direction you move.
 	if direction.x != 0:
 		if direction.x > 0:

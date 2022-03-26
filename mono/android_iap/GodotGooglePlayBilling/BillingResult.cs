@@ -43,7 +43,7 @@ namespace AndroidInAppPurchasesWithCSharp.GodotGooglePlayBilling
         ItemNotOwned = 8,
     }
 
-    public class BillingResult
+    public partial class BillingResult
     {
         public BillingResult() { }
         public BillingResult(Dictionary billingResult)

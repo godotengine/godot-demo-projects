@@ -1,12 +1,12 @@
 extends Control
 
-export(NodePath) var target
-export var min_scale = 0.1
-export var max_scale = 3.0
-export var one_finger_rot_x = true
-export var one_finger_rot_y = true
-export var two_fingers_rot_z = true
-export var two_fingers_zoom = true
+@export var target: NodePath
+@export var min_scale = 0.1
+@export var max_scale = 3.0
+@export var one_finger_rot_x = true
+@export var one_finger_rot_y = true
+@export var two_fingers_rot_z = true
+@export var two_fingers_zoom = true
 
 var base_state
 var curr_state

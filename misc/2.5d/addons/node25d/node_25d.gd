@@ -1,6 +1,6 @@
 # This node converts a 3D position to 2D using a 2.5D transformation matrix.
 # The transformation of its 2D form is controlled by its 3D child.
-tool
+@tool
 extends Node2D
 class_name Node25D, "res://addons/node25d/icons/node_25d_icon.png"
 
@@ -8,7 +8,13 @@ class_name Node25D, "res://addons/node25d/icons/node_25d_icon.png"
 const SCALE = 32
 
 # Exported spatial position for editor usage.
-export(Vector3) var spatial_position setget set_spatial_position, get_spatial_position
+@export var spatial_position: Vector3:
+	get:
+		# TODO: Manually copy the code from this method.
+		return get_spatial_position()
+	set(value):
+		# TODO: Manually copy the code from this method.
+		set_spatial_position(value)
 
 # GDScript throws errors when Basis25D is its own structure.
 # There is a broken implementation in a hidden folder.
@@ -20,7 +26,7 @@ var _basisZ: Vector2
 
 # Cache the spatial stuff for internal use.
 var _spatial_position: Vector3
-var _spatial_node: Spatial
+var _spatial_node: Node3D
 
 
 # These are separated in case anyone wishes to easily extend Node25D.
@@ -46,7 +52,7 @@ func Node25D_process():
 	_check_view_mode()
 	if _spatial_node == null:
 		return
-	_spatial_position = _spatial_node.translation
+	_spatial_position = _spatial_node.position
 
 	var flat_pos = _spatial_position.x * _basisX
 	flat_pos += _spatial_position.y * _basisY
@@ -62,13 +68,13 @@ func get_basis():
 func get_spatial_position():
 	if not _spatial_node:
 		_spatial_node = get_child(0)
-	return _spatial_node.translation
+	return _spatial_node.position
 
 
 func set_spatial_position(value):
 	_spatial_position = value
 	if _spatial_node:
-		_spatial_node.translation = value
+		_spatial_node.position = value
 	elif get_child_count() > 0:
 		_spatial_node = get_child(0)
 

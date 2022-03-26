@@ -7,7 +7,7 @@ extends Node2D
 # The number of bullets currently touched by the player.
 var touching = 0
 
-onready var sprite = $AnimatedSprite
+@onready var sprite = $AnimatedSprite2D
 
 
 func _ready():

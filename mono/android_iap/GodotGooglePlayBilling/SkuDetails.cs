@@ -4,7 +4,7 @@ using Godot.Collections;
 
 namespace AndroidInAppPurchasesWithCSharp.GodotGooglePlayBilling
 {
-    public class SkuDetails
+    public partial class SkuDetails
     {
         public SkuDetails() { }
 

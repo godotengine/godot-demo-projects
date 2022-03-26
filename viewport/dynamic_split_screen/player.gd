@@ -1,9 +1,9 @@
-extends KinematicBody
+extends CharacterBody3D
 
 # Moves the player
 
-export(int, 1, 2) var player_id = 1
-export(float) var walk_speed = 20.0
+@export var player_id: int, 1, 2 = 1
+@export var walk_speed: float = 20.0
 
 
 func _physics_process(_delta):

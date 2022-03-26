@@ -1,4 +1,4 @@
-extends Camera
+extends Camera3D
 
 const MOUSE_SENSITIVITY = 0.002
 const MOVE_SPEED = 1.5
@@ -29,15 +29,15 @@ func _input(event):
 
 func _process(delta):
 	var motion = Vector3(
-			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+			Input.get_axis(&"move_left", &"move_right"),
 			0,
-			Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
+			Input.get_axis(&"move_forward", &"move_back")
 	)
 
 	# Normalize motion to prevent diagonal movement from being
 	# `sqrt(2)` times faster than straight movement.
 	motion = motion.normalized()
 
-	velocity += MOVE_SPEED * delta * transform.basis.xform(motion)
+	velocity += MOVE_SPEED * delta * (transform.basis * motion)
 	velocity *= 0.85
-	translation += velocity
+	position += velocity

@@ -3,9 +3,9 @@ extends Control
 
 var pitch_scale: float
 
-onready var key: ColorRect = $Key
-onready var start_color: Color = key.color
-onready var color_timer: Timer = $ColorTimer
+@onready var key: ColorRect = $Key
+@onready var start_color: Color = key.color
+@onready var color_timer: Timer = $ColorTimer
 
 
 func setup(pitch_index: int):
@@ -15,14 +15,14 @@ func setup(pitch_index: int):
 
 
 func activate():
-	key.color = (Color.yellow + start_color) / 2
+	key.color = (Color.YELLOW + start_color) / 2
 	var audio := AudioStreamPlayer.new()
 	add_child(audio)
 	audio.stream = preload("res://piano_keys/A440.wav")
 	audio.pitch_scale = pitch_scale
 	audio.play()
 	color_timer.start()
-	yield(get_tree().create_timer(8.0), "timeout")
+	await get_tree().create_timer(8.0).timeout
 	audio.queue_free()
 
 

@@ -36,7 +36,7 @@ func _ready():
 	options.add_menu_item(SHAPE_CONVEX)
 	options.add_menu_item(SHAPE_BOX)
 
-	options.connect("option_selected", Callable(self, "_on_option_selected"))
+	options.connect(&"option_selected", Callable(self, "_on_option_selected"))
 	restart_scene()
 
 

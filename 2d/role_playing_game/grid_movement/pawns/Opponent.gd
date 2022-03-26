@@ -1,7 +1,7 @@
 extends Pawn
 
 #warning-ignore:unused_class_variable
-export(PackedScene) var combat_actor
+@export var combat_actor: PackedScene
 #warning-ignore:unused_class_variable
 var lost = false
 

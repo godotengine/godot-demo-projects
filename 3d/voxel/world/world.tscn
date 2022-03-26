@@ -8,7 +8,7 @@
 [ext_resource path="res://menu/debug.gd" type="Script" id=6]
 [ext_resource path="res://menu/theme/theme.tres" type="Theme" id=7]
 
-[node name="World" type="Spatial"]
+[node name="World3D" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
@@ -16,9 +16,9 @@
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 20.0
-margin_right = -20.0
-margin_bottom = -20.0
+offset_left = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
 theme = ExtResource( 7 )
 script = ExtResource( 6 )
 __meta__ = {
@@ -34,5 +34,5 @@ script = ExtResource( 2 )
 environment = ExtResource( 3 )
 script = ExtResource( 4 )
 
-[node name="Sun" type="DirectionalLight" parent="Environment"]
-transform = Transform( 0.173648, -0.564863, 0.806707, 0, 0.819152, 0.573576, -0.984808, -0.0996005, 0.142244, 0, 0, 0 )
+[node name="Sun" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(0.173648, -0.564863, 0.806707, 0, 0.819152, 0.573576, -0.984808, -0.0996005, 0.142244, 0, 0, 0)

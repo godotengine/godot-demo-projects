@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Pong : Node2D
+public partial class Pong : Node2D
 {
     [Signal]
     private delegate void GameFinished(string withError);
