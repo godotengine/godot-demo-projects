@@ -1,0 +1,335 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://icon.png" type="Texture2D" id=1]
+[ext_resource path="res://Pseudolocalization.gd" type="Script" id=2]
+
+[node name="Pseudolocalization" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Title" type="Label" parent="."]
+offset_top = 27.0
+offset_right = 1024.0
+offset_bottom = 74.0
+custom_font_sizes/font_size = 30
+text = "Pseudolocalization Demo"
+align = 1
+valign = 1
+structured_text_bidi_override_options = []
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="icon" type="Sprite2D" parent="Title"]
+position = Vector2(67.1489, 33.8245)
+scale = Vector2(1.26563, 1.26563)
+skew = 4.37114e-08
+texture = ExtResource( 1 )
+script = null
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 13.0
+offset_top = 102.0
+offset_right = 1025.0
+offset_bottom = 560.0
+size_flags_vertical = 3
+custom_constants/separation = 40
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pseudolocalization_options" type="VBoxContainer" parent="HBoxContainer"]
+offset_right = 466.0
+offset_bottom = 458.0
+layout_direction = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = null
+
+[node name="toggle" type="CheckButton" parent="HBoxContainer/Pseudolocalization_options"]
+offset_right = 466.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+text = "Toggle Pseudolocalization"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="accents" type="CheckButton" parent="HBoxContainer/Pseudolocalization_options"]
+offset_top = 44.0
+offset_right = 466.0
+offset_bottom = 84.0
+size_flags_horizontal = 3
+text = "Toggle Accents"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="doublevowels" type="CheckButton" parent="HBoxContainer/Pseudolocalization_options"]
+offset_top = 88.0
+offset_right = 466.0
+offset_bottom = 128.0
+size_flags_horizontal = 3
+text = "Toggle Double Vowels"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fakebidi" type="CheckButton" parent="HBoxContainer/Pseudolocalization_options"]
+offset_top = 132.0
+offset_right = 466.0
+offset_bottom = 172.0
+rect_pivot_offset = Vector2(-370, -80)
+size_flags_horizontal = 3
+text = "Toggle Fake Bidi"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="override" type="CheckButton" parent="HBoxContainer/Pseudolocalization_options"]
+offset_top = 176.0
+offset_right = 466.0
+offset_bottom = 216.0
+rect_pivot_offset = Vector2(-370, -80)
+size_flags_horizontal = 3
+text = "Toggle Override"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="skipplaceholders" type="CheckButton" parent="HBoxContainer/Pseudolocalization_options"]
+offset_top = 220.0
+offset_right = 466.0
+offset_bottom = 260.0
+rect_pivot_offset = Vector2(-370, -80)
+size_flags_horizontal = 3
+text = "Skip Placeholders"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exp_ratio" type="HBoxContainer" parent="HBoxContainer/Pseudolocalization_options"]
+offset_top = 264.0
+offset_right = 466.0
+offset_bottom = 290.0
+size_flags_vertical = 0
+script = null
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Pseudolocalization_options/exp_ratio"]
+offset_right = 3.0
+offset_bottom = 26.0
+custom_constants/margin_left = 3
+script = null
+
+[node name="Label" type="Label" parent="HBoxContainer/Pseudolocalization_options/exp_ratio"]
+offset_left = 7.0
+offset_right = 141.0
+offset_bottom = 26.0
+size_flags_horizontal = 2
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+text = "Expansion Ratio : "
+valign = 1
+structured_text_bidi_override_options = []
+script = null
+
+[node name="TextEdit" type="TextEdit" parent="HBoxContainer/Pseudolocalization_options/exp_ratio"]
+offset_left = 375.0
+offset_right = 466.0
+offset_bottom = 26.0
+size_flags_horizontal = 3
+structured_text_bidi_override_options = []
+script = null
+
+[node name="prefix" type="Control" parent="HBoxContainer/Pseudolocalization_options"]
+offset_top = 294.0
+offset_right = 466.0
+offset_bottom = 294.0
+size_flags_horizontal = 3
+script = null
+
+[node name="TextEdit" type="TextEdit" parent="HBoxContainer/Pseudolocalization_options/prefix"]
+offset_left = 5.0
+offset_top = 32.8613
+offset_right = 385.0
+offset_bottom = 62.8613
+size_flags_horizontal = 3
+structured_text_bidi_override_options = []
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HBoxContainer/Pseudolocalization_options/prefix"]
+offset_left = 6.0
+offset_top = 2.86133
+offset_right = 297.0
+offset_bottom = 28.8613
+text = "Pseudolocalization Prefix :"
+structured_text_bidi_override_options = []
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="suffix" type="Control" parent="HBoxContainer/Pseudolocalization_options"]
+offset_top = 298.0
+offset_right = 466.0
+offset_bottom = 298.0
+size_flags_horizontal = 3
+script = null
+
+[node name="TextEdit" type="TextEdit" parent="HBoxContainer/Pseudolocalization_options/suffix"]
+offset_left = 3.811
+offset_top = 106.592
+offset_right = 383.811
+offset_bottom = 136.592
+size_flags_horizontal = 3
+structured_text_bidi_override_options = []
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HBoxContainer/Pseudolocalization_options/suffix"]
+offset_left = 6.0
+offset_top = 76.5923
+offset_right = 297.0
+offset_bottom = 102.592
+text = "Pseudolocalization Suffix :"
+structured_text_bidi_override_options = []
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pseudolocalizer" type="VBoxContainer" parent="HBoxContainer"]
+offset_left = 506.0
+offset_right = 972.0
+offset_bottom = 458.0
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HBoxContainer/Pseudolocalizer"]
+offset_right = 466.0
+offset_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "Pseudolocalization key :"
+structured_text_bidi_override_options = []
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="TextEdit" parent="HBoxContainer/Pseudolocalizer"]
+offset_top = 30.0
+offset_right = 466.0
+offset_bottom = 143.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "The quick brown fox jumped over the lazy dog."
+wrap_enabled = true
+structured_text_bidi_override_options = []
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="margin" type="MarginContainer" parent="HBoxContainer/Pseudolocalizer"]
+offset_top = 147.0
+offset_bottom = 152.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/margin_top = 5
+script = null
+
+[node name="Pseudolocalize" type="Button" parent="HBoxContainer/Pseudolocalizer"]
+offset_left = 170.0
+offset_top = 156.0
+offset_right = 295.0
+offset_bottom = 185.0
+size_flags_horizontal = 6
+text = "Pseudolocalize"
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="margin2" type="MarginContainer" parent="HBoxContainer/Pseudolocalizer"]
+offset_top = 189.0
+offset_bottom = 194.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/margin_top = 5
+script = null
+
+[node name="Label2" type="Label" parent="HBoxContainer/Pseudolocalizer"]
+offset_top = 198.0
+offset_right = 466.0
+offset_bottom = 224.0
+text = "Pseudolocalization result :"
+structured_text_bidi_override_options = []
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Result" type="TextEdit" parent="HBoxContainer/Pseudolocalizer"]
+offset_top = 228.0
+offset_right = 466.0
+offset_bottom = 341.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color = Color(1, 1, 1, 1)
+custom_colors/font_readonly_color = Color(1, 1, 1, 1)
+readonly = true
+wrap_enabled = true
+structured_text_bidi_override_options = []
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="A2Z" type="Label" parent="HBoxContainer/Pseudolocalizer"]
+offset_top = 345.0
+offset_right = 466.0
+offset_bottom = 458.0
+size_flags_vertical = 7
+custom_font_sizes/font_size = 16
+custom_colors/font_color = Color(0.0235294, 0.94902, 1, 1)
+text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ
+abcdefghijklmnopqrstuvwxyz"
+align = 1
+valign = 1
+structured_text_bidi_override_options = []
+script = null
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+offset_left = 1012.0
+offset_right = 1012.0
+offset_bottom = 458.0
+script = null
+
+[connection signal="toggled" from="HBoxContainer/Pseudolocalization_options/toggle" to="." method="_on_toggle_toggled"]
+[connection signal="toggled" from="HBoxContainer/Pseudolocalization_options/accents" to="." method="_on_accents_toggled"]
+[connection signal="toggled" from="HBoxContainer/Pseudolocalization_options/doublevowels" to="." method="_on_doublevowels_toggled"]
+[connection signal="toggled" from="HBoxContainer/Pseudolocalization_options/fakebidi" to="." method="_on_fakebidi_toggled"]
+[connection signal="toggled" from="HBoxContainer/Pseudolocalization_options/override" to="." method="_on_override_toggled"]
+[connection signal="toggled" from="HBoxContainer/Pseudolocalization_options/skipplaceholders" to="." method="_on_skipplaceholders_toggled"]
+[connection signal="text_changed" from="HBoxContainer/Pseudolocalization_options/exp_ratio/TextEdit" to="." method="_on_expansion_ratio_text_changed"]
+[connection signal="text_changed" from="HBoxContainer/Pseudolocalization_options/prefix/TextEdit" to="." method="_on_prefix_changed"]
+[connection signal="text_changed" from="HBoxContainer/Pseudolocalization_options/suffix/TextEdit" to="." method="_on_suffix_changed"]
+[connection signal="pressed" from="HBoxContainer/Pseudolocalizer/Pseudolocalize" to="." method="_on_Pseudolocalize_pressed"]
