@@ -6,12 +6,13 @@ extends Control
 # (SSAA), but filtering must be enabled for supersampling to work.
 var scale_factor = 1.0
 
+@onready var viewport_container = $SubViewportContainer
 @onready var viewport = $SubViewportContainer/SubViewport
 @onready var scale_label = $VBoxContainer/Scale
 @onready var filter_label = $VBoxContainer/Filter
 
 func _ready():
-	viewport.get_texture().flags = Texture2D.FLAG_FILTER
+	viewport_container.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 
 	# Required to change the 3D viewport's size when the window is resized.
 	# warning-ignore:return_value_discarded
@@ -26,10 +27,12 @@ func _unhandled_input(event):
 
 	if event.is_action_pressed("toggle_filtering"):
 		# Toggle the Filter flag on the ViewportTexture.
-		viewport.get_texture().flags ^= Texture2D.FLAG_FILTER
-
-		var filter_enabled = viewport.get_texture().flags & Texture2D.FLAG_FILTER
-		filter_label.text = "Filter: %s" % ("Enabled" if filter_enabled else "Disabled")
+		if viewport_container.texture_filter == CanvasItem.TEXTURE_FILTER_LINEAR:
+			viewport_container.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+			filter_label.text = "Filter: Disabled"
+		else:
+			viewport_container.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+			filter_label.text = "Filter: Enabled"
 
 
 # Called when the root's viewport size changes (i.e. when the window is resized).

@@ -1,102 +1,61 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=3 uid="uid://c587vtbfwth3k"]
 
-[ext_resource path="res://2D_in_3D.gd" type="Script" id=1]
-[ext_resource path="res://pong.gd" type="Script" id=2]
-[ext_resource path="res://ball.png" type="Texture2D" id=3]
-[ext_resource path="res://left_pallete.png" type="Texture2D" id=4]
-[ext_resource path="res://right_pallete.png" type="Texture2D" id=5]
-[ext_resource path="res://separator.png" type="Texture2D" id=6]
+[ext_resource type="Script" path="res://2D_in_3D.gd" id="1"]
+[ext_resource type="Script" path="res://pong.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://dbuw5tlmsx6ss" path="res://ball.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://gtbg1ogxcsl7" path="res://left_pallete.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bc2vi0nh1j1hs" path="res://right_pallete.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://wiyhsl0rfkrs" path="res://separator.png" id="6"]
 
-[sub_resource type="PlaneMesh" id=1]
+[sub_resource type="StandardMaterial3D" id="6"]
 
-[sub_resource type="StandardMaterial3D" id=2]
+[sub_resource type="PlaneMesh" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="2"]
 roughness = 0.7
 
-[sub_resource type="BoxMesh" id=3]
+[sub_resource type="BoxMesh" id="3"]
+size = Vector3(2, 2, 2)
 
-[sub_resource type="StandardMaterial3D" id=4]
+[sub_resource type="StandardMaterial3D" id="4"]
 albedo_color = Color(0.652344, 0.652344, 0.652344, 1)
 roughness = 0.0
 
-[sub_resource type="BoxMesh" id=5]
+[sub_resource type="BoxMesh" id="5"]
 size = Vector3(1.1, 0.8, 0.1)
 
-[sub_resource type="StandardMaterial3D" id=6]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cvh5i"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_7gemw"]
+sky_material = SubResource( "ProceduralSkyMaterial_cvh5i" )
+
+[sub_resource type="Environment" id="Environment_fvsgw"]
+background_mode = 2
+sky = SubResource( "Sky_7gemw" )
+tonemap_mode = 2
+glow_enabled = true
 
 [node name="2Din3D" type="Node3D"]
-script = ExtResource( 1 )
+script = ExtResource( "1" )
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 fov = 74.0
 near = 0.1
 
-[node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -1, -2)
-mesh = SubResource( 1 )
-surface_material_override/0 = SubResource( 2 )
-
-[node name="Pillar1" type="Node3D" parent="."]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -3, -0.2, -4)
-
-[node name="PillarBottom" type="MeshInstance3D" parent="Pillar1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource( 3 )
-surface_material_override/0 = SubResource( 4 )
-
-[node name="PillarTop" type="MeshInstance3D" parent="Pillar1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
-mesh = SubResource( 3 )
-surface_material_override/0 = SubResource( 4 )
-
-[node name="PillarMiddle" type="MeshInstance3D" parent="Pillar1"]
-transform = Transform3D(0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, 0, 2.5, 0)
-mesh = SubResource( 3 )
-surface_material_override/0 = SubResource( 4 )
-
-[node name="Pillar2" type="Node3D" parent="."]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 3, -0.2, -4)
-
-[node name="PillarBottom" type="MeshInstance3D" parent="Pillar2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource( 3 )
-surface_material_override/0 = SubResource( 4 )
-
-[node name="PillarTop" type="MeshInstance3D" parent="Pillar2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
-mesh = SubResource( 3 )
-surface_material_override/0 = SubResource( 4 )
-
-[node name="PillarMiddle" type="MeshInstance3D" parent="Pillar2"]
-transform = Transform3D(0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, 0, 2.5, 0)
-mesh = SubResource( 3 )
-surface_material_override/0 = SubResource( 4 )
-
-[node name="PillarBack" type="MeshInstance3D" parent="."]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 1.2, -4.5)
-mesh = SubResource( 5 )
-surface_material_override/0 = SubResource( 4 )
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.623013, -0.733525, 0.271654, 0.321394, 0.55667, 0.766044, -0.713134, -0.389948, 0.582563, 0, 10, 0)
-shadow_enabled = true
-directional_shadow_blend_splits = true
-directional_shadow_normal_bias = 0.2
-
 [node name="ViewportQuad" type="MeshInstance3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 0, -1.333, 0, 1, 0, 0, 1.2, -4.25)
-material_override = SubResource( 6 )
-mesh = SubResource( 1 )
-surface_material_override/0 = null
+material_override = SubResource( "6" )
+mesh = SubResource( "1" )
 
 [node name="SubViewport" type="SubViewport" parent="."]
-size = Vector2(600, 400)
-hdr = false
-usage = 0
-render_target_v_flip = true
+size = Vector2i(600, 400)
+render_target_update_mode = 4
 
 [node name="Pong" type="Node2D" parent="SubViewport"]
-script = ExtResource( 2 )
+script = ExtResource( "2" )
 
 [node name="Background" type="Panel" parent="SubViewport/Pong"]
 offset_right = 600.0
@@ -104,16 +63,74 @@ offset_bottom = 400.0
 
 [node name="Ball" type="Sprite2D" parent="SubViewport/Pong"]
 position = Vector2(300, 200)
-texture = ExtResource( 3 )
+texture = ExtResource( "3" )
 
 [node name="LeftPaddle" type="Sprite2D" parent="SubViewport/Pong"]
 position = Vector2(20, 200)
-texture = ExtResource( 4 )
+texture = ExtResource( "4" )
 
 [node name="RightPaddle" type="Sprite2D" parent="SubViewport/Pong"]
 position = Vector2(580, 200)
-texture = ExtResource( 5 )
+texture = ExtResource( "5" )
 
 [node name="Separator" type="Sprite2D" parent="SubViewport/Pong"]
 position = Vector2(298, 200)
-texture = ExtResource( 6 )
+texture = ExtResource( "6" )
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -1, -2)
+mesh = SubResource( "1" )
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource( "2" )
+
+[node name="Pillar1" type="Node3D" parent="Environment"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -3, -0.2, -4)
+
+[node name="PillarBottom" type="MeshInstance3D" parent="Environment/Pillar1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource( "3" )
+surface_material_override/0 = SubResource( "4" )
+
+[node name="PillarTop" type="MeshInstance3D" parent="Environment/Pillar1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+mesh = SubResource( "3" )
+surface_material_override/0 = SubResource( "4" )
+
+[node name="PillarMiddle" type="MeshInstance3D" parent="Environment/Pillar1"]
+transform = Transform3D(0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, 0, 2.5, 0)
+mesh = SubResource( "3" )
+surface_material_override/0 = SubResource( "4" )
+
+[node name="Pillar2" type="Node3D" parent="Environment"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 3, -0.2, -4)
+
+[node name="PillarBottom" type="MeshInstance3D" parent="Environment/Pillar2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource( "3" )
+surface_material_override/0 = SubResource( "4" )
+
+[node name="PillarTop" type="MeshInstance3D" parent="Environment/Pillar2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+mesh = SubResource( "3" )
+surface_material_override/0 = SubResource( "4" )
+
+[node name="PillarMiddle" type="MeshInstance3D" parent="Environment/Pillar2"]
+transform = Transform3D(0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, 0, 2.5, 0)
+mesh = SubResource( "3" )
+surface_material_override/0 = SubResource( "4" )
+
+[node name="PillarBack" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 1.2, -4.5)
+mesh = SubResource( "5" )
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource( "4" )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource( "Environment_fvsgw" )
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(0.623013, -0.733525, 0.271653, 0.321394, 0.55667, 0.766045, -0.713134, -0.389948, 0.582563, 0, 10, 0)
+shadow_enabled = true
+directional_shadow_blend_splits = true
