@@ -24,7 +24,7 @@ func _deferred_goto_scene(path):
 	var packed_scene = ResourceLoader.load(path)
 
 	# Instance the new scene
-	var instanced_scene = packed_scene.instance()
+	var instanced_scene = packed_scene.instantiate()
 
 	# Add it to the scene tree, as direct child of root
 	get_tree().get_root().add_child(instanced_scene)

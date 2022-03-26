@@ -9,7 +9,7 @@ namespace AndroidInAppPurchasesWithCSharp.GodotGooglePlayBilling
         Subs,
     }
 
-    public class GooglePlayBilling : Node
+    public partial class GooglePlayBilling : Node
     {
         [Signal] public delegate void Connected();
         [Signal] public delegate void Disconnected();

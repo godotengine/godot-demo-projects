@@ -6,11 +6,11 @@ using real_t = System.Single;
 #endif
 
 [Tool]
-public class PlayerSprite : Sprite
+public partial class PlayerSprite : Sprite2D
 {
-    private static Texture _stand = ResourceLoader.Load<Texture>("res://assets/player/textures/stand.png");
-    private static Texture _jump = ResourceLoader.Load<Texture>("res://assets/player/textures/jump.png");
-    private static Texture _run = ResourceLoader.Load<Texture>("res://assets/player/textures/run.png");
+    private static Texture2D _stand = ResourceLoader.Load<Texture2D>("res://assets/player/textures/stand.png");
+    private static Texture2D _jump = ResourceLoader.Load<Texture2D>("res://assets/player/textures/jump.png");
+    private static Texture2D _run = ResourceLoader.Load<Texture2D>("res://assets/player/textures/run.png");
     private const int FRAMERATE = 15;
 
     private int _direction;

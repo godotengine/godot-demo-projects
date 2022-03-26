@@ -47,12 +47,12 @@ var shoot_time = 1e20
 var Bullet = preload("res://player/Bullet.tscn")
 var Enemy = preload("res://enemy/Enemy.tscn")
 
-onready var sound_jump = $SoundJump
-onready var sound_shoot = $SoundShoot
-onready var sprite = $Sprite
-onready var sprite_smoke = sprite.get_node(@"Smoke")
-onready var animation_player = $AnimationPlayer
-onready var bullet_shoot = $BulletShoot
+@onready var sound_jump = $SoundJump
+@onready var sound_shoot = $SoundShoot
+@onready var sprite = $Sprite2D
+@onready var sprite_smoke = sprite.get_node(^"Smoke")
+@onready var animation_player = $AnimationPlayer
+@onready var bullet_shoot = $BulletShoot
 
 func _integrate_forces(s):
 	var lv = s.get_linear_velocity()
@@ -205,7 +205,7 @@ func _integrate_forces(s):
 
 func _shot_bullet():
 	shoot_time = 0
-	var bi = Bullet.instance()
+	var bi = Bullet.instantiate()
 	var ss
 	if siding_left:
 		ss = -1.0
@@ -225,6 +225,6 @@ func _shot_bullet():
 
 
 func _spawn_enemy_above():
-	var e = Enemy.instance()
+	var e = Enemy.instantiate()
 	e.position = position + 50 * Vector2.UP
 	get_parent().add_child(e)

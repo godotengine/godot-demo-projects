@@ -1,111 +1,111 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://gui_3d.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://icon.png" type="Texture2D" id=2]
 
 [sub_resource type="QuadMesh" id=1]
-size = Vector2( 3, 2 )
+size = Vector2(3, 2)
 
 [sub_resource type="ViewportTexture" id=2]
-viewport_path = NodePath("Viewport")
+viewport_path = NodePath("SubViewport")
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="StandardMaterial3D" id=3]
 resource_local_to_scene = true
 flags_transparent = true
 flags_unshaded = true
 flags_albedo_tex_force_srgb = true
 albedo_texture = SubResource( 2 )
 
-[sub_resource type="BoxShape" id=4]
-extents = Vector3( 1.5, 1, 0.05 )
+[sub_resource type="BoxShape3D" id=4]
+extents = Vector3(1.5, 1, 0.05)
 
-[node name="GUIPanel3D" type="Spatial"]
+[node name="GUIPanel3D" type="Node3D"]
 script = ExtResource( 1 )
 
-[node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 280, 180 )
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2(280, 180)
 hdr = false
 usage = 0
 render_target_v_flip = true
 render_target_update_mode = 3
 
-[node name="GUI" type="Control" parent="Viewport"]
-margin_right = 280.0
-margin_bottom = 180.0
+[node name="GUI" type="Control" parent="SubViewport"]
+offset_right = 280.0
+offset_bottom = 180.0
 mouse_filter = 1
 
-[node name="Panel" type="Panel" parent="Viewport/GUI"]
+[node name="Panel" type="Panel" parent="SubViewport/GUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Label" type="Label" parent="Viewport/GUI/Panel"]
-margin_left = 44.0
-margin_top = 27.0
-margin_right = 121.0
-margin_bottom = 41.0
+[node name="Label" type="Label" parent="SubViewport/GUI/Panel"]
+offset_left = 44.0
+offset_top = 27.0
+offset_right = 121.0
+offset_bottom = 41.0
 text = "Hello world!"
 
-[node name="Button" type="Button" parent="Viewport/GUI/Panel"]
-margin_left = 14.0
-margin_top = 46.0
-margin_right = 154.0
-margin_bottom = 74.0
+[node name="Button" type="Button" parent="SubViewport/GUI/Panel"]
+offset_left = 14.0
+offset_top = 46.0
+offset_right = 154.0
+offset_bottom = 74.0
 text = "A button!"
 
-[node name="TextEdit" type="LineEdit" parent="Viewport/GUI/Panel"]
-margin_left = 14.0
-margin_top = 87.0
-margin_right = 154.0
-margin_bottom = 111.0
+[node name="TextEdit" type="LineEdit" parent="SubViewport/GUI/Panel"]
+offset_left = 14.0
+offset_top = 87.0
+offset_right = 154.0
+offset_bottom = 111.0
 
-[node name="HSlider" type="HSlider" parent="Viewport/GUI/Panel"]
-margin_left = 14.0
-margin_top = 118.0
-margin_right = 154.0
-margin_bottom = 143.0
+[node name="HSlider" type="HSlider" parent="SubViewport/GUI/Panel"]
+offset_left = 14.0
+offset_top = 118.0
+offset_right = 154.0
+offset_bottom = 143.0
 ticks_on_borders = true
 
-[node name="ColorRect" type="ColorRect" parent="Viewport/GUI/Panel"]
-margin_left = 180.0
-margin_top = 26.0
-margin_right = 244.0
-margin_bottom = 90.0
-color = Color( 1, 0, 0, 1 )
+[node name="ColorRect" type="ColorRect" parent="SubViewport/GUI/Panel"]
+offset_left = 180.0
+offset_top = 26.0
+offset_right = 244.0
+offset_bottom = 90.0
+color = Color(1, 0, 0, 1)
 
-[node name="TextureRect" type="TextureRect" parent="Viewport/GUI/Panel"]
+[node name="TextureRect" type="TextureRect" parent="SubViewport/GUI/Panel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 52.0
-margin_top = -52.0
-margin_right = 92.0
-margin_bottom = -12.0
+offset_left = 52.0
+offset_top = -52.0
+offset_right = 92.0
+offset_bottom = -12.0
 texture = ExtResource( 2 )
 expand = true
 
-[node name="VSlider" type="VSlider" parent="Viewport/GUI/Panel"]
-margin_left = 260.0
-margin_top = 26.0
-margin_right = 276.0
-margin_bottom = 166.0
+[node name="VSlider" type="VSlider" parent="SubViewport/GUI/Panel"]
+offset_left = 260.0
+offset_top = 26.0
+offset_right = 276.0
+offset_bottom = 166.0
 
-[node name="OptionButton" type="OptionButton" parent="Viewport/GUI/Panel"]
-margin_left = 170.0
-margin_top = 111.0
-margin_right = 252.0
-margin_bottom = 165.0
+[node name="OptionButton" type="OptionButton" parent="SubViewport/GUI/Panel"]
+offset_left = 170.0
+offset_top = 111.0
+offset_right = 252.0
+offset_bottom = 165.0
 text = "Item 0"
-items = [ "Item 0", null, false, 0, null, "Item 1", null, false, 1, null, "Item 2", null, false, 2, null ]
+items = ["Item 0", null, false, 0, null, "Item 1", null, false, 1, null, "Item 2", null, false, 2, null]
 selected = 0
 
-[node name="Quad" type="MeshInstance" parent="."]
+[node name="Quad" type="MeshInstance3D" parent="."]
 mesh = SubResource( 1 )
-material/0 = SubResource( 3 )
+surface_material_override/0 = SubResource( 3 )
 
-[node name="Area" type="Area" parent="Quad"]
+[node name="Area3D" type="Area3D" parent="Quad"]
 collision_layer = 2
 input_capture_on_drag = true
 
-[node name="CollisionShape" type="CollisionShape" parent="Quad/Area"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Quad/Area3D"]
 shape = SubResource( 4 )

@@ -1,6 +1,6 @@
 extends Node
 
-onready var _log_dest = get_parent().get_node("Panel/VBoxContainer/RichTextLabel")
+@onready var _log_dest = get_parent().get_node(^"Panel/VBoxContainer/RichTextLabel")
 
 var _client = WebSocketClient.new()
 var _write_mode = WebSocketPeer.WRITE_MODE_BINARY
@@ -8,16 +8,16 @@ var _use_multiplayer = true
 var last_connected_client = 0
 
 func _init():
-	_client.connect("connection_established", self, "_client_connected")
-	_client.connect("connection_error", self, "_client_disconnected")
-	_client.connect("connection_closed", self, "_client_disconnected")
-	_client.connect("server_close_request", self, "_client_close_request")
-	_client.connect("data_received", self, "_client_received")
+	_client.connect(&"connection_established", self._client_connected)
+	_client.connect(&"connection_error", self._client_disconnected)
+	_client.connect(&"connection_closed", self._client_disconnected)
+	_client.connect(&"server_close_request", self._client_close_request)
+	_client.connect(&"data_received", self._client_received)
 
-	_client.connect("peer_packet", self, "_client_received")
-	_client.connect("peer_connected", self, "_peer_connected")
-	_client.connect("connection_succeeded", self, "_client_connected", ["multiplayer_protocol"])
-	_client.connect("connection_failed", self, "_client_disconnected")
+	_client.connect(&"peer_packet", self._client_received)
+	_client.connect(&"peer_connected", self._peer_connected)
+	_client.connect(&"connection_succeeded", self._client_connected, ["multiplayer_protocol"])
+	_client.connect(&"connection_failed", self._client_disconnected)
 
 
 func _client_close_request(code, reason):

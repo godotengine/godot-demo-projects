@@ -4,7 +4,7 @@ const SIMULATED_DELAY_SEC = 0.1
 
 var thread = null
 
-onready var progress = $Progress
+@onready var progress = $Progress
 
 func _thread_load(path):
 	var ril = ResourceLoader.load_interactive(path)
@@ -46,7 +46,7 @@ func _thread_done(resource):
 	progress.hide()
 
 	# Instantiate new scene.
-	var new_scene = resource.instance()
+	var new_scene = resource.instantiate()
 	# Free current scene.
 	get_tree().current_scene.free()
 	get_tree().current_scene = null

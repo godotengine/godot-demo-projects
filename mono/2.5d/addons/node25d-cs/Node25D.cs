@@ -11,7 +11,7 @@ using real_t = System.Single;
 /// The transformation of its 2D form is controlled by its 3D child.
 /// </summary>
 [Tool]
-public class Node25D : Node2D, IComparable<Node25D>
+public partial class Node25D : Node2D, IComparable<Node25D>
 {
     /// <summary>
     /// The number of 2D units in one 3D unit. Ideally, but not necessarily, an integer.
@@ -24,25 +24,25 @@ public class Node25D : Node2D, IComparable<Node25D>
         {
             if (spatialNode == null)
             {
-                spatialNode = GetChild<Spatial>(0);
+                spatialNode = GetChild<Node3D>(0);
             }
-            return spatialNode.Translation;
+            return spatialNode.Position;
         }
         set
         {
             transform25D.spatialPosition = value;
             if (spatialNode != null)
             {
-                spatialNode.Translation = value;
+                spatialNode.Position = value;
             }
             else if (GetChildCount() > 0)
             {
-                spatialNode = GetChild<Spatial>(0);
+                spatialNode = GetChild<Node3D>(0);
             }
         }
     }
 
-    private Spatial spatialNode;
+    private Node3D spatialNode;
     private Transform25D transform25D;
 
     public Basis25D Basis25D
@@ -72,7 +72,7 @@ public class Node25D : Node2D, IComparable<Node25D>
     {
         if (GetChildCount() > 0)
         {
-            spatialNode = GetChild<Spatial>(0);
+            spatialNode = GetChild<Node3D>(0);
         }
         // Changing the basis here will change the default for all Node25D instances.
         transform25D = new Transform25D(Basis25D.FortyFive * SCALE);
@@ -90,11 +90,11 @@ public class Node25D : Node2D, IComparable<Node25D>
         CheckViewMode();
         if (spatialNode != null)
         {
-            transform25D.spatialPosition = spatialNode.Translation;
+            transform25D.spatialPosition = spatialNode.Position;
         }
         else if (GetChildCount() > 0)
         {
-            spatialNode = GetChild<Spatial>(0);
+            spatialNode = GetChild<Node3D>(0);
         }
 
         GlobalPosition = transform25D.FlatPosition;

@@ -3,7 +3,7 @@ using Godot.Collections;
 
 namespace AndroidInAppPurchasesWithCSharp.GodotGooglePlayBilling
 {
-    public class PurchasesResult : BillingResult
+    public partial class PurchasesResult : BillingResult
     {
         public PurchasesResult() { }
         public PurchasesResult(Dictionary purchasesResult)

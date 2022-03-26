@@ -1,17 +1,17 @@
 extends Control
 
 
-export(Vector2) var _start_position = Vector2(0, -20)
-export(Vector2) var _end_position = Vector2.ZERO
-export(float) var fade_in_duration = 0.3
-export(float) var fade_out_duration = 0.2
+@export var _start_position: Vector2 = Vector2(0, -20)
+@export var _end_position: Vector2 = Vector2.ZERO
+@export var fade_in_duration: float = 0.3
+@export var fade_out_duration: float = 0.2
 
-onready var center_cont = $ColorRect/CenterContainer
-onready var resume_button = center_cont.get_node(@"VBoxContainer/ResumeButton")
+@onready var center_cont = $ColorRect/CenterContainer
+@onready var resume_button = center_cont.get_node(^"VBoxContainer/ResumeButton")
 
-onready var root = get_tree().get_root()
-onready var scene_root = root.get_child(root.get_child_count() - 1)
-onready var tween = $Tween
+@onready var root = get_tree().get_root()
+@onready var scene_root = root.get_child(root.get_child_count() - 1)
+@onready var tween = $Tween
 
 
 func _ready():
@@ -25,7 +25,7 @@ func close():
 	# Tween duration, Transition type, Easing type, Optional delay)
 	tween.interpolate_property(self, "modulate:a", 1.0, 0.0,
 			fade_out_duration, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	tween.interpolate_property(center_cont, "rect_position",
+	tween.interpolate_property(center_cont, "position",
 			_end_position, _start_position, fade_out_duration,
 			Tween.TRANS_CUBIC, Tween.EASE_OUT)
 	tween.start()
@@ -37,7 +37,7 @@ func open():
 
 	tween.interpolate_property(self, "modulate:a", 0.0, 1.0,
 			fade_in_duration, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	tween.interpolate_property(center_cont, "rect_position",
+	tween.interpolate_property(center_cont, "position",
 			_start_position, _end_position, fade_in_duration,
 			Tween.TRANS_CUBIC, Tween.EASE_OUT)
 	tween.start()

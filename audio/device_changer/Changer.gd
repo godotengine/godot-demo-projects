@@ -1,6 +1,6 @@
 extends Control
 
-onready var item_list = get_node("ItemList")
+@onready var item_list = get_node(^"ItemList")
 
 
 func _ready():

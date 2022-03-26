@@ -1,5 +1,5 @@
 class_name Chunk
-extends StaticBody
+extends StaticBody3D
 # These chunks are instanced and given data by VoxelWorld.
 # After that, chunks finish setting themselves up in the _ready() function.
 # If a chunk is changed, its "regenerate" method is called.
@@ -11,11 +11,11 @@ const CHUNK_LAST_INDEX = CHUNK_SIZE - 1
 const TEXTURE_TILE_SIZE = 1.0 / TEXTURE_SHEET_WIDTH
 
 var data = {}
-var chunk_position = Vector3() # TODO: Vector3i
+var chunk_position = Vector3i()
 
 var _thread
 
-onready var voxel_world = get_parent()
+@onready var voxel_world = get_parent()
 
 
 func _ready():
@@ -45,8 +45,8 @@ func regenerate():
 
 
 func _generate_chunk_collider():
-	if data.empty():
-		# Avoid errors caused by StaticBody not having colliders.
+	if data.is_empty():
+		# Avoid errors caused by StaticBody3D not having colliders.
 		_create_block_collider(Vector3.ZERO)
 		collision_layer = 0
 		collision_mask = 0
@@ -62,7 +62,7 @@ func _generate_chunk_collider():
 
 
 func _generate_chunk_mesh():
-	if data.empty():
+	if data.is_empty():
 		return
 
 	var surface_tool = SurfaceTool.new()
@@ -78,7 +78,7 @@ func _generate_chunk_mesh():
 	surface_tool.generate_tangents()
 	surface_tool.index()
 	var array_mesh = surface_tool.commit()
-	var mi = MeshInstance.new()
+	var mi = MeshInstance3D.new()
 	mi.mesh = array_mesh
 	mi.material_override = preload("res://world/textures/material.tres")
 	add_child(mi)
@@ -179,8 +179,8 @@ func _draw_block_face(surface_tool, verts, uvs):
 
 
 func _create_block_collider(block_sub_position):
-	var collider = CollisionShape.new()
-	collider.shape = BoxShape.new()
+	var collider = CollisionShape3D.new()
+	collider.shape = BoxShape3D.new()
 	collider.shape.extents = Vector3.ONE / 2
 	collider.transform.origin = block_sub_position + Vector3.ONE / 2
 	add_child(collider)

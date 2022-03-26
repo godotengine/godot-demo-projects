@@ -1,6 +1,6 @@
 using Godot;
 
-public class CeilingFloor : Area2D
+public partial class CeilingFloor : Area2D
 {
     [Export]
     private int _bounceDirection = 1;

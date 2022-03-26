@@ -1,19 +1,22 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 # The player's movement speed.
 const MOVE_SPEED = 240
 
-var health = 100 setget set_health
+var health = 100:
+	set(value):
+		# TODO: Manually copy the code from this method.
+		set_health(value)
 var motion = Vector2()
 
-onready var progress_bar = $Sprite/ProgressBar
+@onready var progress_bar = $Sprite2D/ProgressBar
 
 
 func _process(delta):
 	# Player movement (controller-friendly).
 	var velocity = Vector2.ZERO
-	velocity.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	velocity.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	velocity.x = Input.get_axis(&"move_left", &"move_right")
+	velocity.y = Input.get_axis(&"move_up", &"move_down")
 	position += velocity * MOVE_SPEED * delta
 
 	# Prevent the player from going outside the window.

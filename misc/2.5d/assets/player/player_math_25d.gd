@@ -1,10 +1,10 @@
-# Handles Player-specific behavior like moving. We calculate such things with KinematicBody.
-extends KinematicBody
+# Handles Player-specific behavior like moving. We calculate such things with CharacterBody3D.
+extends CharacterBody3D
 class_name PlayerMath25D # No icon necessary
 
 var vertical_speed := 0.0
 var isometric_controls := true
-onready var _parent_node25d: Node25D = get_parent()
+@onready var _parent_node25d: Node25D = get_parent()
 
 func _process(delta):
 	if Input.is_action_pressed("exit"):
@@ -18,7 +18,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("toggle_isometric_controls"):
 		isometric_controls = not isometric_controls
 	if Input.is_action_just_pressed("reset_position"):
-		transform = Transform(Basis(), Vector3.UP * 10)
+		transform = Transform3D(Basis(), Vector3.UP * 10)
 		vertical_speed = 0
 	else:
 		_horizontal_movement(delta)

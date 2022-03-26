@@ -1,11 +1,11 @@
 extends Node
 
-onready var captured_image = $CapturedImage
+@onready var captured_image = $CapturedImage
 
 func _on_CaptureButton_pressed():
-	get_viewport().set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)
+	get_viewport().set_clear_mode(SubViewport.CLEAR_MODE_ONLY_NEXT_FRAME)
 	# Wait until the frame has finished before getting the texture.
-	yield(VisualServer, "frame_post_draw")
+	await RenderingServer.frame_post_draw
 
 	# Retrieve the captured image.
 	var img = get_viewport().get_texture().get_data()

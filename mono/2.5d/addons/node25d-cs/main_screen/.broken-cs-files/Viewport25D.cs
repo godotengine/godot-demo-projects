@@ -2,7 +2,7 @@ using Godot;
 
 // This is identical to the GDScript version, yet it doesn't work.
 [Tool]
-public class Viewport25D : Control
+public partial class Viewport25D : Control
 {
     private int zoomLevel = 0;
     private bool isPanning = false;
@@ -15,8 +15,8 @@ public class Viewport25D : Control
     public EditorInterface editorInterface; // Set in node25d_plugin.gd
     private bool moving = false;
 
-    private Viewport viewport2d;
-    private Viewport viewportOverlay;
+    private SubViewport viewport2d;
+    private SubViewport viewportOverlay;
     private ButtonGroup viewModeButtonGroup;
     private Label zoomLabel;
     private PackedScene gizmo25dScene;
@@ -43,8 +43,8 @@ public class Viewport25D : Control
         viewport2d.World2d = world2d;
 
         // Onready vars.
-        viewport2d = GetNode<Viewport>("Viewport2D");
-        viewportOverlay = GetNode<Viewport>("ViewportOverlay");
+        viewport2d = GetNode<SubViewport>("Viewport2D");
+        viewportOverlay = GetNode<SubViewport>("ViewportOverlay");
         viewModeButtonGroup = GetParent().GetNode("TopBar").GetNode("ViewModeButtons").GetNode<Button>("45Degree").Group;
         zoomLabel = GetParent().GetNode("TopBar").GetNode("Zoom").GetNode<Label>("ZoomPercent");
         gizmo25dScene = ResourceLoader.Load<PackedScene>("res://addons/node25d/main_screen/gizmo_25d.tscn");
@@ -69,21 +69,21 @@ public class Viewport25D : Control
         }
 
         // Zooming.
-        if (Input.IsMouseButtonPressed((int)ButtonList.WheelUp))
+        if (Input.IsMouseButtonPressed((int)MouseButton.WheelUp))
         {
             zoomLevel += 1;
         }
-        else if (Input.IsMouseButtonPressed((int)ButtonList.WheelDown))
+        else if (Input.IsMouseButtonPressed((int)MouseButton.WheelDown))
         {
             zoomLevel -= 1;
         }
         float zoom = GetZoomAmount();
 
-        // Viewport size.
+        // SubViewport size.
         Vector2 size = GetGlobalRect().Size;
         viewport2d.Size = size;
 
-        // Viewport transform.
+        // SubViewport transform.
         Transform2D viewportTrans = Transform2D.Identity;
         viewportTrans.x *= zoom;
         viewportTrans.y *= zoom;
@@ -124,7 +124,7 @@ public class Viewport25D : Control
                 }
                 if (newNode)
                 {
-                    Gizmo25D gizmo = (Gizmo25D)gizmo25dScene.Instance();
+                    Gizmo25D gizmo = (Gizmo25D)gizmo25dScene.Instantiate();
                     viewportOverlay.AddChild(gizmo);
                     gizmo.node25d = selected;
                     gizmo.Initialize();
@@ -140,23 +140,23 @@ public class Viewport25D : Control
         {
             if (mouseButtonEvent.IsPressed())
             {
-                if ((ButtonList)mouseButtonEvent.ButtonIndex == ButtonList.WheelUp)
+                if ((MouseButton)mouseButtonEvent.ButtonIndex == MouseButton.WheelUp)
                 {
                     zoomLevel += 1;
                     AcceptEvent();
                 }
-                else if ((ButtonList)mouseButtonEvent.ButtonIndex == ButtonList.WheelDown)
+                else if ((MouseButton)mouseButtonEvent.ButtonIndex == MouseButton.WheelDown)
                 {
                     zoomLevel -= 1;
                     AcceptEvent();
                 }
-                else if ((ButtonList)mouseButtonEvent.ButtonIndex == ButtonList.Middle)
+                else if ((MouseButton)mouseButtonEvent.ButtonIndex == MouseButton.Middle)
                 {
                     isPanning = true;
                     panCenter = viewportCenter - mouseButtonEvent.Position;
                     AcceptEvent();
                 }
-                else if ((ButtonList)mouseButtonEvent.ButtonIndex == ButtonList.Left)
+                else if ((MouseButton)mouseButtonEvent.ButtonIndex == MouseButton.Left)
                 {
                     var overlayChildren2 = viewportOverlay.GetChildren();
                     foreach (Gizmo25D overlayChild in overlayChildren2)
@@ -166,12 +166,12 @@ public class Viewport25D : Control
                     AcceptEvent();
                 }
             }
-            else if ((ButtonList)mouseButtonEvent.ButtonIndex == ButtonList.Middle)
+            else if ((MouseButton)mouseButtonEvent.ButtonIndex == MouseButton.Middle)
             {
                 isPanning = false;
                 AcceptEvent();
             }
-            else if ((ButtonList)mouseButtonEvent.ButtonIndex == ButtonList.Left)
+            else if ((MouseButton)mouseButtonEvent.ButtonIndex == MouseButton.Left)
             {
                 var overlayChildren3 = viewportOverlay.GetChildren();
                 foreach (Gizmo25D overlayChild in overlayChildren3)

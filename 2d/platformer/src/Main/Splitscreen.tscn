@@ -7,7 +7,7 @@
 [ext_resource path="res://src/Level/ParallaxBackground.tscn" type="PackedScene" id=5]
 
 [node name="Splitscreen" type="Node"]
-pause_mode = 2
+process_mode = 3
 script = ExtResource( 2 )
 
 [node name="InterfaceLayer" type="CanvasLayer" parent="."]
@@ -18,9 +18,9 @@ layer = 100
 [node name="Black" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 6.10352e-05
-margin_bottom = 3.05176e-05
-color = Color( 0, 0, 0, 1 )
+offset_right = 6.10352e-05
+offset_bottom = 3.05176e-05
+color = Color(0, 0, 0, 1)
 
 [node name="SplitContainer" type="HSplitContainer" parent="Black"]
 anchor_right = 1.0
@@ -30,9 +30,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ViewportContainer1" type="ViewportContainer" parent="Black/SplitContainer"]
-margin_right = 394.0
-margin_bottom = 480.0
+[node name="ViewportContainer1" type="SubViewportContainer" parent="Black/SplitContainer"]
+offset_right = 394.0
+offset_bottom = 480.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
@@ -40,8 +40,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewport1" type="Viewport" parent="Black/SplitContainer/ViewportContainer1"]
-size = Vector2( 394, 480 )
+[node name="Viewport1" type="SubViewport" parent="Black/SplitContainer/ViewportContainer1"]
+size = Vector2(394, 480)
 size_override_stretch = true
 handle_input_locally = false
 usage = 0
@@ -51,17 +51,17 @@ audio_listener_enable_2d = true
 [node name="Level" parent="Black/SplitContainer/ViewportContainer1/Viewport1" instance=ExtResource( 3 )]
 
 [node name="Player1" parent="Black/SplitContainer/ViewportContainer1/Viewport1/Level" instance=ExtResource( 4 )]
-position = Vector2( 90, 546 )
+position = Vector2(90, 546)
 action_suffix = "_p1"
 
 [node name="Player2" parent="Black/SplitContainer/ViewportContainer1/Viewport1/Level" instance=ExtResource( 4 )]
-position = Vector2( 120, 546 )
+position = Vector2(120, 546)
 action_suffix = "_p2"
 
-[node name="ViewportContainer2" type="ViewportContainer" parent="Black/SplitContainer"]
-margin_left = 406.0
-margin_right = 800.0
-margin_bottom = 480.0
+[node name="ViewportContainer2" type="SubViewportContainer" parent="Black/SplitContainer"]
+offset_left = 406.0
+offset_right = 800.0
+offset_bottom = 480.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
@@ -69,8 +69,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewport2" type="Viewport" parent="Black/SplitContainer/ViewportContainer2"]
-size = Vector2( 394, 480 )
+[node name="Viewport2" type="SubViewport" parent="Black/SplitContainer/ViewportContainer2"]
+size = Vector2(394, 480)
 size_override_stretch = true
 handle_input_locally = false
 usage = 0

@@ -1,6 +1,6 @@
 using Godot;
 
-public class Main : Node
+public partial class Main : Node
 {
 #pragma warning disable 649
     // We assign this in the editor, so we don't need the warning about not being assigned.
@@ -70,7 +70,7 @@ public class Main : Node
         mobSpawnLocation.Offset = GD.Randi();
 
         // Create a Mob instance and add it to the scene.
-        var mob = (Mob)mobScene.Instance();
+        var mob = (Mob)mobScene.Instantiate();
         AddChild(mob);
 
         // Set the mob's direction perpendicular to the path direction.

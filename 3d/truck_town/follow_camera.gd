@@ -1,24 +1,24 @@
-extends Camera
+extends Camera3D
 
-export var min_distance = 2.0
-export var max_distance = 4.0
-export var angle_v_adjust = 0.0
+@export var min_distance = 2.0
+@export var max_distance = 4.0
+@export var angle_v_adjust = 0.0
 
 var collision_exception = []
-export var height = 1.5
+@export var height = 1.5
 
 func _ready():
 	# Find collision exceptions for ray.
 	var node = self
 	while(node):
-		if (node is RigidBody):
+		if (node is RigidBody3D):
 			collision_exception.append(node.get_rid())
 			break
 		else:
 			node = node.get_parent()
 
 	# This detaches the camera transform from the parent spatial node.
-	set_as_toplevel(true)
+	set_as_top_level(true)
 
 
 func _physics_process(_delta):

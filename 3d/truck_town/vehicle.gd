@@ -1,16 +1,16 @@
-extends VehicleBody
+extends VehicleBody3D
 
 const STEER_SPEED = 1.5
 const STEER_LIMIT = 0.4
 
 var steer_target = 0
 
-export var engine_force_value = 40
+@export var engine_force_value = 40
 
 func _physics_process(delta):
-	var fwd_mps = transform.basis.xform_inv(linear_velocity).x
+	var fwd_mps = (linear_velocity * transform.basis).x
 
-	steer_target = Input.get_action_strength("turn_left") - Input.get_action_strength("turn_right")
+	steer_target = Input.get_axis(&"turn_right", &"turn_left")
 	steer_target *= STEER_LIMIT
 
 	if Input.is_action_pressed("accelerate"):

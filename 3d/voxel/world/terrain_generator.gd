@@ -15,7 +15,7 @@ static func random_blocks():
 	for x in range(CHUNK_SIZE):
 		for y in range(CHUNK_SIZE):
 			for z in range(CHUNK_SIZE):
-				var vec = Vector3(x, y, z) # TODO: Vector3i
+				var vec = Vector3i(x, y, z)
 				if randf() < 0.01:
 					random_data[vec] = randi() % 29 + 1
 	return random_data

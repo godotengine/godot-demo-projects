@@ -2,12 +2,12 @@
 # This is different from the C# version of this project
 # because the execution order is different and otherwise
 # sorting is delayed by one frame.
-tool
-extends Node # Note: NOT Node2D, Node25D, or YSort
+@tool
+extends Node # Note: NOT Node2D, Node25D, or Node2D
 class_name YSort25D, "res://addons/node25d/icons/y_sort_25d_icon.png"
 
 # Whether or not to automatically call sort() in _process().
-export(bool) var sort_enabled := true
+@export var sort_enabled := true
 var _parent_node: Node2D # NOT Node25D
 
 
@@ -36,7 +36,7 @@ func sort():
 	for n in parent_children:
 		if n.get_class() == "Node2D":
 			node25d_nodes.append(n)
-	node25d_nodes.sort_custom(Node25D, "y_sort_slight_xz")
+	node25d_nodes.sort_custom(Callable(Node25D, &"y_sort_slight_xz"))
 
 	var z_index = -4000
 	for i in range(0, node25d_nodes.size()):

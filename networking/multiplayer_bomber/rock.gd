@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 # Sent to everyone else
 puppet func do_explosion():

@@ -1,12 +1,12 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 var direction = Vector2()
-export(float) var speed = 1000.0
+@export var speed: float = 1000.0
 
-onready var root = get_tree().root
+@onready var root = get_tree().root
 
 func _ready():
-	set_as_toplevel(true)
+	set_as_top_level(true)
 
 
 func _physics_process(delta):
@@ -20,4 +20,4 @@ func _physics_process(delta):
 
 
 func _draw():
-	draw_circle(Vector2(), $CollisionShape2D.shape.radius, Color.white)
+	draw_circle(Vector2(), $CollisionShape2D.shape.radius, Color.WHITE)

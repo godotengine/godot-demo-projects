@@ -8,7 +8,7 @@ var _attachment
 
 
 func _ready():
-	_pos_offset = rect_position
+	_pos_offset = position
 	_attachment = get_parent() as Node3D
 
 
@@ -27,4 +27,4 @@ func _process(_delta):
 	var world_pos = world_offset + _attachment.global_transform.origin
 	var screen_pos = camera.unproject_position(world_pos)
 
-	rect_position = _pos_offset + screen_pos - 0.5 * rect_size
+	position = _pos_offset + screen_pos - 0.5 * size

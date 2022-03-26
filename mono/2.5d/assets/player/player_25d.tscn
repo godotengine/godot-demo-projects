@@ -1,35 +1,35 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/node25d-cs/Node25D.cs" type="Script" id=1]
-[ext_resource path="res://addons/node25d-cs/icons/node_25d_icon.png" type="Texture" id=2]
+[ext_resource path="res://addons/node25d-cs/icons/node_25d_icon.png" type="Texture2D" id=2]
 [ext_resource path="res://assets/player/PlayerMath25D.cs" type="Script" id=3]
-[ext_resource path="res://assets/player/textures/stand.png" type="Texture" id=4]
+[ext_resource path="res://assets/player/textures/stand.png" type="Texture2D" id=4]
 [ext_resource path="res://assets/player/PlayerSprite.cs" type="Script" id=5]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.5, 1, 0.5 )
+[sub_resource type="BoxShape3D" id=1]
+extents = Vector3(0.5, 1, 0.5)
 
 [node name="Player25D" type="Node2D"]
-position = Vector2( 0, -226.274 )
+position = Vector2(0, -226.274)
 z_index = 100
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_icon": ExtResource( 2 )
 }
-spatialPosition = Vector3( 0, 10, 0 )
+spatialPosition = Vector3(0, 10, 0)
 
-[node name="PlayerMath25D" type="KinematicBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
+[node name="PlayerMath25D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 script = ExtResource( 3 )
 
-[node name="CollisionShape" type="CollisionShape" parent="PlayerMath25D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerMath25D"]
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlayerSprite" type="Sprite" parent="."]
-scale = Vector2( 1, 0.75 )
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+scale = Vector2(1, 0.75)
 z_index = 1
 texture = ExtResource( 4 )
 vframes = 5

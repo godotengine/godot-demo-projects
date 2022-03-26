@@ -2,17 +2,17 @@ extends Area2D
 
 const MOTION_SPEED = 150
 
-export var left = false
+@export var left = false
 
 var _motion = 0
 var _you_hidden = false
 
-onready var _screen_size_y = get_viewport_rect().size.y
+@onready var _screen_size_y = get_viewport_rect().size.y
 
 func _process(delta):
 	# Is the master of the paddle.
 	if is_network_master():
-		_motion = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+		_motion = Input.get_axis(&"move_up", &"move_down")
 
 		if not _you_hidden and _motion != 0:
 			_hide_you_label()
@@ -40,7 +40,7 @@ puppet func set_pos_and_motion(pos, motion):
 
 func _hide_you_label():
 	_you_hidden = true
-	get_node("You").hide()
+	get_node(^"You").hide()
 
 
 func _on_paddle_area_enter(area):

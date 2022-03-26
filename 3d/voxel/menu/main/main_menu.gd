@@ -1,10 +1,10 @@
 extends Control
 
-onready var tree = get_tree()
+@onready var tree = get_tree()
 
-onready var title = $TitleScreen
-onready var start = $StartGame
-onready var options = $Options
+@onready var title = $TitleScreen
+@onready var start = $StartGame
+@onready var options = $Options
 
 
 func _on_Start_pressed():

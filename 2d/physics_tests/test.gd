@@ -99,6 +99,13 @@ func create_rigidbody_box(size, pickable = false, use_icon = false, shape_transf
 	return body
 
 
+func find_node(node_name):
+	var nodes = find_nodes(node_name)
+	if nodes.size() > 0:
+		return nodes[0]
+	return null
+
+
 func start_timer(timeout):
 	if _timer == null:
 		_timer = Timer.new()

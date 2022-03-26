@@ -52,9 +52,9 @@ func _physics_process(_delta):
 	floor_block_on_wall = _move_on_floor_only
 	floor_constant_speed = _constant_speed
 	floor_max_angle = deg2rad(_floor_max_angle)
-	motion_velocity = _velocity
+	velocity = _velocity
 	move_and_slide()
-	_velocity = motion_velocity
+	_velocity = velocity
 
 	# Get next jump ready.
 	if _jumping:

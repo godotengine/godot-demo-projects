@@ -9,11 +9,11 @@ enum State {
 
 var _state = State.WALKING
 
-onready var platform_detector = $PlatformDetector
-onready var floor_detector_left = $FloorDetectorLeft
-onready var floor_detector_right = $FloorDetectorRight
-onready var sprite = $Sprite
-onready var animation_player = $AnimationPlayer
+@onready var platform_detector = $PlatformDetector
+@onready var floor_detector_left = $FloorDetectorLeft
+@onready var floor_detector_right = $FloorDetectorRight
+@onready var sprite = $Sprite2D
+@onready var animation_player = $AnimationPlayer
 
 # This function is called when the scene enters the scene tree.
 # We can initialize variables here.
@@ -46,9 +46,10 @@ func _physics_process(_delta):
 		_velocity.x *= -1
 
 	# We only update the y value of _velocity as we want to handle the horizontal movement ourselves.
-	_velocity.y = move_and_slide(_velocity, FLOOR_NORMAL).y
+	# TODO: This information should be set to the CharacterBody properties instead of arguments.
+	move_and_slide(_velocity, FLOOR_NORMAL).y
 
-	# We flip the Sprite depending on which way the enemy is moving.
+	# We flip the Sprite2D depending on which way the enemy is moving.
 	if _velocity.x > 0:
 		sprite.scale.x = 1
 	else:

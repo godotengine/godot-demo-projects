@@ -11,20 +11,20 @@ using real_t = System.Single;
 /// is below the target object in the scene tree (not as a child).
 /// </summary>
 [Tool]
-public class ShadowMath25D : KinematicBody
+public partial class ShadowMath25D : CharacterBody3D
 {
     /// <summary>
     /// The maximum distance below objects that shadows will appear.
     /// </summary>
     public real_t shadowLength = 1000;
     private Node25D shadowRoot;
-    private Spatial targetMath;
+    private Node3D targetMath;
 
     public override void _Ready()
     {
         shadowRoot = GetParent<Node25D>();
-        int index = shadowRoot.GetPositionInParent();
-        targetMath = shadowRoot.GetParent().GetChild<Node25D>(index - 1).GetChild<Spatial>(0);
+        int index = shadowRoot.GetIndex();
+        targetMath = shadowRoot.GetParent().GetChild<Node25D>(index - 1).GetChild<Node3D>(0);
     }
 
     public override void _Process(real_t delta)
@@ -38,7 +38,7 @@ public class ShadowMath25D : KinematicBody
             return; // Shadow is not in a valid place.
         }
 
-        Translation = targetMath.Translation;
+        Position = targetMath.Position;
         var k = MoveAndCollide(Vector3.Down * shadowLength);
         if (k == null)
         {

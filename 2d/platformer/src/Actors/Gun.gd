@@ -7,19 +7,19 @@ extends Position2D
 const BULLET_VELOCITY = 500.0
 const Bullet = preload("res://src/Objects/Bullet.tscn")
 
-onready var sound_shoot = $Shoot
-onready var timer = $Cooldown
+@onready var sound_shoot = $Shoot
+@onready var timer = $Cooldown
 
 
 # This method is only called by Player.gd.
 func shoot(direction = 1):
 	if not timer.is_stopped():
 		return false
-	var bullet = Bullet.instance()
+	var bullet = Bullet.instantiate()
 	bullet.global_position = global_position
 	bullet.linear_velocity = Vector2(direction * BULLET_VELOCITY, 0)
 
-	bullet.set_as_toplevel(true)
+	bullet.set_as_top_level(true)
 	add_child(bullet)
 	sound_shoot.play()
 	timer.start()

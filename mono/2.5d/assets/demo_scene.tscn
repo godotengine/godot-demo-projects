@@ -6,21 +6,21 @@
 [ext_resource path="res://assets/player/player_25d.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/shadow/shadow_25d.tscn" type="PackedScene" id=5]
 [ext_resource path="res://addons/node25d-cs/Node25D.cs" type="Script" id=6]
-[ext_resource path="res://addons/node25d-cs/icons/node_25d_icon.png" type="Texture" id=7]
-[ext_resource path="res://assets/platform/textures/forty_five.png" type="Texture" id=8]
+[ext_resource path="res://addons/node25d-cs/icons/node_25d_icon.png" type="Texture2D" id=7]
+[ext_resource path="res://assets/platform/textures/forty_five.png" type="Texture2D" id=8]
 [ext_resource path="res://assets/platform/platform_sprite.gd" type="Script" id=9]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 5, 0.5, 5 )
+[sub_resource type="BoxShape3D" id=1]
+extents = Vector3(5, 0.5, 5)
 
-[sub_resource type="BoxShape" id=2]
-extents = Vector3( 5, 0.5, 5 )
+[sub_resource type="BoxShape3D" id=2]
+extents = Vector3(5, 0.5, 5)
 
-[sub_resource type="BoxShape" id=3]
-extents = Vector3( 5, 0.5, 5 )
+[sub_resource type="BoxShape3D" id=3]
+extents = Vector3(5, 0.5, 5)
 
-[sub_resource type="BoxShape" id=4]
-extents = Vector3( 5, 0.5, 5 )
+[sub_resource type="BoxShape3D" id=4]
+extents = Vector3(5, 0.5, 5)
 
 [node name="DemoScene" type="Node2D"]
 
@@ -31,582 +31,582 @@ z_index = -3952
 
 [node name="Shadow25D" parent="." instance=ExtResource( 5 )]
 visible = true
-position = Vector2( 1.00261e-06, 11.2685 )
+position = Vector2(1.00261e-06, 11.2685)
 z_index = -3958
-spatialPosition = Vector3( 3.13315e-08, -0.498, 3.13315e-08 )
+spatialPosition = Vector3(3.13315e-08, -0.498, 3.13315e-08)
 
 [node name="Platform0" type="Node2D" parent="."]
-position = Vector2( -256, -113.137 )
+position = Vector2(-256, -113.137)
 z_index = -3954
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( -8, 5, 0 )
+spatialPosition = Vector3(-8, 5, 0)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 5, 0 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 5, 0)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform0/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform0/PlatformMath"]
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform0"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform0"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform1" type="Node2D" parent="."]
-position = Vector2( -256, -339.411 )
+position = Vector2(-256, -339.411)
 z_index = -3956
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( -8, 5, -10 )
+spatialPosition = Vector3(-8, 5, -10)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 5, -10 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 5, -10)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform1/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform1/PlatformMath"]
 shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform1"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform1"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform2" type="Node2D" parent="."]
-position = Vector2( 0, 22.6274 )
+position = Vector2(0, 22.6274)
 z_index = -3962
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( 0, -1, 0 )
+spatialPosition = Vector3(0, -1, 0)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform2/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform2/PlatformMath"]
 shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform2"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform2"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform3" type="Node2D" parent="."]
-position = Vector2( 320, 22.6274 )
+position = Vector2(320, 22.6274)
 z_index = -3960
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( 10, -1, 0 )
+spatialPosition = Vector3(10, -1, 0)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -1, 0 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -1, 0)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform3/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform3/PlatformMath"]
 shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform3"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform3"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform4" type="Node2D" parent="."]
-position = Vector2( 0, -203.647 )
+position = Vector2(0, -203.647)
 z_index = -3966
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( 0, -1, -10 )
+spatialPosition = Vector3(0, -1, -10)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -10 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -10)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform4/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform4/PlatformMath"]
 shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform4"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform4"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform5" type="Node2D" parent="."]
-position = Vector2( 320, -113.137 )
+position = Vector2(320, -113.137)
 z_index = -3984
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( 10, -5, -10 )
+spatialPosition = Vector3(10, -5, -10)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform5"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -5, -10 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -5, -10)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform5/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform5/PlatformMath"]
 shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform5"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform5"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform6" type="Node2D" parent="."]
-position = Vector2( 320, 113.137 )
+position = Vector2(320, 113.137)
 z_index = -3980
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( 10, -5, 0 )
+spatialPosition = Vector3(10, -5, 0)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform6"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -5, 0 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -5, 0)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform6/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform6/PlatformMath"]
 shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform6"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform6"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform7" type="Node2D" parent="."]
-position = Vector2( 320, 339.411 )
+position = Vector2(320, 339.411)
 z_index = -3978
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( 10, -5, 10 )
+spatialPosition = Vector3(10, -5, 10)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform7"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -5, 10 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -5, 10)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform7/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform7/PlatformMath"]
 shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform7"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform7"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform8" type="Node2D" parent="."]
-position = Vector2( 320, 565.685 )
+position = Vector2(320, 565.685)
 z_index = -3976
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( 10, -5, 20 )
+spatialPosition = Vector3(10, -5, 20)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform8"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -5, 20 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -5, 20)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform8/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform8/PlatformMath"]
 shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform8"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform8"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform21" type="Node2D" parent="."]
-position = Vector2( 320, 791.96 )
+position = Vector2(320, 791.96)
 z_index = -3972
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( 10, -5, 30 )
+spatialPosition = Vector3(10, -5, 30)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform21"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -5, 30 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -5, 30)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform21/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform21/PlatformMath"]
 shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform21"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform21"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform22" type="Node2D" parent="."]
-position = Vector2( 320, 1018.23 )
+position = Vector2(320, 1018.23)
 z_index = -3970
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( 10, -5, 40 )
+spatialPosition = Vector3(10, -5, 40)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform22"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -5, 40 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform22"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -5, 40)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform22/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform22/PlatformMath"]
 shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform22"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform22"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform9" type="Node2D" parent="."]
-position = Vector2( 640, 339.411 )
+position = Vector2(640, 339.411)
 z_index = -3974
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( 20, -5, 10 )
+spatialPosition = Vector3(20, -5, 10)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform9"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -5, 10 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -5, 10)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform9/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform9/PlatformMath"]
 shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform9"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform9"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform10" type="Node2D" parent="."]
-position = Vector2( 896, 294.156 )
+position = Vector2(896, 294.156)
 z_index = -3994
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( 28, -10, 3 )
+spatialPosition = Vector3(28, -10, 3)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform10"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, -10, 3 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, -10, 3)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform10/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform10/PlatformMath"]
 shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform10"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform10"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform11" type="Node2D" parent="."]
-position = Vector2( 896, 520.431 )
+position = Vector2(896, 520.431)
 z_index = -3990
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( 28, -10, 13 )
+spatialPosition = Vector3(28, -10, 13)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform11"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, -10, 13 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, -10, 13)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform11/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform11/PlatformMath"]
 shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform11"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform11"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform12" type="Node2D" parent="."]
-position = Vector2( 896, 746.705 )
+position = Vector2(896, 746.705)
 z_index = -3988
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( 28, -10, 23 )
+spatialPosition = Vector3(28, -10, 23)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform12"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, -10, 23 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, -10, 23)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform12/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform12/PlatformMath"]
 shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform12"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform12"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform13" type="Node2D" parent="."]
-position = Vector2( 576, 746.705 )
+position = Vector2(576, 746.705)
 z_index = -3992
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( 18, -10, 23 )
+spatialPosition = Vector3(18, -10, 23)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform13"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -10, 23 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -10, 23)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform13/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform13/PlatformMath"]
 shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform13"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform13"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform14" type="Node2D" parent="."]
-position = Vector2( 256, 746.705 )
+position = Vector2(256, 746.705)
 z_index = -3996
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( 8, -10, 23 )
+spatialPosition = Vector3(8, -10, 23)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform14"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -10, 23 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -10, 23)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform14/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform14/PlatformMath"]
 shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform14"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform14"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform15" type="Node2D" parent="."]
-position = Vector2( -64, 746.705 )
+position = Vector2(-64, 746.705)
 z_index = -3998
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( -2, -10, 23 )
+spatialPosition = Vector3(-2, -10, 23)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform15"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -10, 23 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -10, 23)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform15/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform15/PlatformMath"]
 shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform15"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform15"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform23" type="Node2D" parent="."]
-position = Vector2( -384, 746.705 )
+position = Vector2(-384, 746.705)
 z_index = -4000
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( -12, -10, 23 )
+spatialPosition = Vector3(-12, -10, 23)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform23"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -10, 23 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform23"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -10, 23)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform23/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform23/PlatformMath"]
 shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform23"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform23"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform16" type="Node2D" parent="."]
-position = Vector2( -320, 565.685 )
+position = Vector2(-320, 565.685)
 z_index = -3982
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( -10, -5, 20 )
+spatialPosition = Vector3(-10, -5, 20)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform16"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -5, 20 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -5, 20)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform16/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform16/PlatformMath"]
 shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform16"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform16"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform19" type="Node2D" parent="."]
-position = Vector2( -320, 339.411 )
+position = Vector2(-320, 339.411)
 z_index = -3986
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( -10, -5, 10 )
+spatialPosition = Vector3(-10, -5, 10)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform19"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -5, 10 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -5, 10)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform19/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform19/PlatformMath"]
 shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform19"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform19"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform17" type="Node2D" parent="."]
-position = Vector2( -480, 248.902 )
+position = Vector2(-480, 248.902)
 z_index = -3964
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( -15, -1, 10 )
+spatialPosition = Vector3(-15, -1, 10)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform17"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -1, 10 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -1, 10)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform17/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform17/PlatformMath"]
 shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform17"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform17"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Platform18" type="Node2D" parent="."]
-position = Vector2( -480, 22.6274 )
+position = Vector2(-480, 22.6274)
 z_index = -3968
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_icon": ExtResource( 7 )
 }
-spatialPosition = Vector3( -15, -1, 0 )
+spatialPosition = Vector3(-15, -1, 0)
 
-[node name="PlatformMath" type="StaticBody" parent="Platform18"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -1, 0 )
+[node name="PlatformMath" type="StaticBody3D" parent="Platform18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -1, 0)
 collision_layer = 1048575
 collision_mask = 1048575
 
-[node name="CollisionShape" type="CollisionShape" parent="Platform18/PlatformMath"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform18/PlatformMath"]
 shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlatformSprite" type="Sprite" parent="Platform18"]
-scale = Vector2( 0.5, 0.5 )
+[node name="PlatformSprite" type="Sprite2D" parent="Platform18"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 

@@ -8,13 +8,13 @@
 # This example should be replaced when EditorImportPlugin and EditorExportPlugin are both
 # fully working and you can save custom resources.
 
-tool
+@tool
 extends EditorPlugin
 
 var io_material_dialog
 
 func _enter_tree():
-	io_material_dialog = preload("res://addons/material_creator/material_dock.tscn").instance()
+	io_material_dialog = preload("res://addons/material_creator/material_dock.tscn").instantiate()
 	io_material_dialog.editor_interface = get_editor_interface()
 	add_control_to_dock(DOCK_SLOT_LEFT_UL, io_material_dialog)
 

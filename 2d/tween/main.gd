@@ -7,44 +7,44 @@ const modes_list = ["Move", "Color", "Scale", "Rotate", "Callback", "Follow", "R
 var current_trans = Tween.TRANS_LINEAR
 var current_ease = Tween.EASE_IN
 
-onready var tween = $Tween
-onready var trans_vbox = $Controls/Transitions
-onready var eases_vbox = $Controls/Eases
-onready var modes_vbox = $Controls/Modes
-onready var timeline = $Top/Timeline
-onready var color_from_picker = $Controls/ColorFrom/ColorPicker
-onready var color_to_picker = $Controls/ColorTo/ColorPicker
-onready var area_label = $Top/Area/RichTextLabel
-onready var sprite = $Top/Area/Sprite
-onready var follow = $Top/Area/Follow
-onready var follow_2 = $Top/Area/Follow2
-onready var size = $Top/Area.get_size()
+@onready var tween = $Tween
+@onready var trans_vbox = $Controls/Transitions
+@onready var eases_vbox = $Controls/Eases
+@onready var modes_vbox = $Controls/Modes
+@onready var timeline = $Top/Timeline
+@onready var color_from_picker = $Controls/ColorFrom/ColorPicker
+@onready var color_to_picker = $Controls/ColorTo/ColorPicker
+@onready var area_label = $Top/Area3D/RichTextLabel
+@onready var sprite = $Top/Area3D/Sprite2D
+@onready var follow = $Top/Area3D/Follow
+@onready var follow_2 = $Top/Area3D/Follow2
+@onready var size = $Top/Area3D.get_size()
 
-onready var move_mode = modes_vbox.get_node(@"Move")
-onready var color_mode = modes_vbox.get_node(@"Color")
-onready var scale_mode = modes_vbox.get_node(@"Scale")
-onready var rotate_mode = modes_vbox.get_node(@"Rotate")
-onready var callback_mode = modes_vbox.get_node(@"Callback")
-onready var follow_mode = modes_vbox.get_node(@"Follow")
-onready var repeat_mode = modes_vbox.get_node(@"Repeat")
-onready var paused_mode = modes_vbox.get_node(@"Pause")
+@onready var move_mode = modes_vbox.get_node(^"Move")
+@onready var color_mode = modes_vbox.get_node(^"Color")
+@onready var scale_mode = modes_vbox.get_node(^"Scale")
+@onready var rotate_mode = modes_vbox.get_node(^"Rotate")
+@onready var callback_mode = modes_vbox.get_node(^"Callback")
+@onready var follow_mode = modes_vbox.get_node(^"Follow")
+@onready var repeat_mode = modes_vbox.get_node(^"Repeat")
+@onready var paused_mode = modes_vbox.get_node(^"Pause")
 
 func _ready():
 	for index in range(trans_list.size()):
-		trans_vbox.get_node(trans_list[index]).connect("pressed", self, "on_trans_changed", [index])
+		trans_vbox.get_node(trans_list[index]).connect(&"pressed", self.on_trans_changed, [index])
 
 	for index in range(eases_list.size()):
-		eases_vbox.get_node(eases_list[index]).connect("pressed", self, "on_eases_changed", [index])
+		eases_vbox.get_node(eases_list[index]).connect(&"pressed", self.on_eases_changed, [index])
 
 	for index in range(modes_list.size()):
-		modes_vbox.get_node(modes_list[index]).connect("pressed", self, "on_modes_changed", [index])
+		modes_vbox.get_node(modes_list[index]).connect(&"pressed", self.on_modes_changed, [index])
 
-	color_from_picker.set_pick_color(Color.red)
-	color_to_picker.set_pick_color(Color.cyan)
+	color_from_picker.set_pick_color(Color.RED)
+	color_to_picker.set_pick_color(Color.CYAN)
 
 	for node in [trans_vbox, eases_vbox, modes_vbox]:
 		node.get_child(1).set_pressed(true)
-	modes_vbox.get_node(@"Repeat").set_pressed(true)
+	modes_vbox.get_node(^"Repeat").set_pressed(true)
 
 	reset_tween()
 
@@ -100,7 +100,7 @@ func reset_tween():
 		tween.interpolate_method(sprite, "set_modulate", color_from_picker.get_pick_color(), color_to_picker.get_pick_color(), 2, current_trans, current_ease)
 		tween.interpolate_property(sprite, "modulate", color_to_picker.get_pick_color(), color_from_picker.get_pick_color(), 2, current_trans, current_ease, 2)
 	else:
-		sprite.set_modulate(Color.white)
+		sprite.set_modulate(Color.WHITE)
 
 	if scale_mode.is_pressed():
 		tween.interpolate_method(sprite, "set_scale", Vector2(0.5, 0.5), Vector2(1.5, 1.5), 2, current_trans, current_ease)

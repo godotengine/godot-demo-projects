@@ -5,12 +5,12 @@ extends Control
 # This means that you should use `add_stylebox_override("normal", ...)`
 # instead of `set("custom_styles/normal", ...)`.
 
-onready var label = $VBoxContainer/Label
-onready var button = $VBoxContainer/Button
-onready var button2 = $VBoxContainer/Button2
-onready var reset_all_button = $VBoxContainer/ResetAllButton
+@onready var label = $VBoxContainer/Label
+@onready var button = $VBoxContainer/Button
+@onready var button2 = $VBoxContainer/Button2
+@onready var reset_all_button = $VBoxContainer/ResetAllButton
 # Save the label color so it can be reset.
-onready var default_label_color = label.get_color("font_color")
+@onready var default_label_color = label.get_color("font_color")
 
 func _ready():
 	# Focus the first button automatically for keyboard/controller-friendly navigation.

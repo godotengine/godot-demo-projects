@@ -1,6 +1,6 @@
 using Godot;
 
-public class MonoTest : Node
+public partial class MonoTest : Node
 {
     public string OperatingSystem()
     {

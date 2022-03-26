@@ -1,7 +1,7 @@
 extends Node
 
-export var autojoin = true
-export var lobby = "" # Will create a new lobby if empty.
+@export var autojoin = true
+@export var lobby = "" # Will create a new lobby if empty.
 
 var client: WebSocketClient = WebSocketClient.new()
 var code = 1000
@@ -18,11 +18,11 @@ signal candidate_received(id, mid, index, sdp)
 signal lobby_sealed()
 
 func _init():
-	client.connect("data_received", self, "_parse_msg")
-	client.connect("connection_established", self, "_connected")
-	client.connect("connection_closed", self, "_closed")
-	client.connect("connection_error", self, "_closed")
-	client.connect("server_close_request", self, "_close_request")
+	client.connect(&"data_received", self._parse_msg)
+	client.connect(&"connection_established", self._connected)
+	client.connect(&"connection_closed", self._closed)
+	client.connect(&"connection_error", self._closed)
+	client.connect(&"server_close_request", self._close_request)
 
 
 func connect_to_url(url):
@@ -54,7 +54,7 @@ func _connected(protocol = ""):
 func _parse_msg():
 	var pkt_str: String = client.get_peer(1).get_packet().get_string_from_utf8()
 
-	var req: PoolStringArray = pkt_str.split("\n", true, 1)
+	var req: PackedStringArray = pkt_str.split("\n", true, 1)
 	if req.size() != 2: # Invalid request size
 		return
 
@@ -70,7 +70,7 @@ func _parse_msg():
 		return
 
 	var src_str: String = type.substr(3, type.length() - 3)
-	if not src_str.is_valid_integer(): # Source id is not an integer
+	if not src_str.is_valid_int(): # Source id is not an integer
 		return
 
 	var src_id: int = int(src_str)
@@ -91,10 +91,10 @@ func _parse_msg():
 		emit_signal("answer_received", src_id, req[1])
 	elif type.begins_with("C: "):
 		# Candidate received
-		var candidate: PoolStringArray = req[1].split("\n", false)
+		var candidate: PackedStringArray = req[1].split("\n", false)
 		if candidate.size() != 3:
 			return
-		if not candidate[1].is_valid_integer():
+		if not candidate[1].is_valid_int():
 			return
 		emit_signal("candidate_received", src_id, candidate[0], int(candidate[1]), candidate[2])
 

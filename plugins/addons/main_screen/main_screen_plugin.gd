@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorPlugin
 
 const MainPanel = preload("res://addons/main_screen/main_panel.tscn")
@@ -6,7 +6,7 @@ const MainPanel = preload("res://addons/main_screen/main_panel.tscn")
 var main_panel_instance
 
 func _enter_tree():
-	main_panel_instance = MainPanel.instance()
+	main_panel_instance = MainPanel.instantiate()
 	# Add the main panel to the editor's main viewport.
 	get_editor_interface().get_editor_viewport().add_child(main_panel_instance)
 	# Hide the main panel. Very much required.
@@ -37,5 +37,5 @@ func get_plugin_name():
 
 
 func get_plugin_icon():
-	# Must return some kind of Texture for the icon.
+	# Must return some kind of Texture2D for the icon.
 	return get_editor_interface().get_base_control().get_icon("Node", "EditorIcons")

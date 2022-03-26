@@ -14,8 +14,8 @@ const BlackKeyScene = preload("res://piano_keys/black_piano_key.tscn")
 
 var piano_key_dict := Dictionary()
 
-onready var white_keys = $WhiteKeys
-onready var black_keys = $BlackKeys
+@onready var white_keys = $WhiteKeys
+@onready var black_keys = $BlackKeys
 
 func _ready():
 	# Sanity checks.
@@ -59,10 +59,10 @@ func _create_piano_key(pitch_index):
 	var note_index = _pitch_index_to_note_index(pitch_index)
 	var piano_key: PianoKey
 	if _is_note_index_sharp(note_index):
-		piano_key = BlackKeyScene.instance()
+		piano_key = BlackKeyScene.instantiate()
 		black_keys.add_child(piano_key)
 	else:
-		piano_key = WhiteKeyScene.instance()
+		piano_key = WhiteKeyScene.instantiate()
 		white_keys.add_child(piano_key)
 		if _is_note_index_lacking_sharp(note_index):
 			_add_placeholder_key(black_keys)

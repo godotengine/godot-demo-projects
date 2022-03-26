@@ -1,25 +1,25 @@
-extends RigidBody
+extends RigidBody3D
 
-onready var raycast = $RayCast
-onready var camera = $Target/Camera
-onready var start_position = translation
+@onready var raycast = $RayCast3D
+@onready var camera = $Target/Camera3D
+@onready var start_position = position
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("exit"):
 		get_tree().quit()
 	if Input.is_action_just_pressed("reset_position"):
-		translation = start_position
+		position = start_position
 		return
 
 	var dir = Vector3()
-	dir.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	dir.z = Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
+	dir.x = Input.get_axis(&"move_left", &"move_right")
+	dir.z = Input.get_axis(&"move_forward", &"move_back")
 
 	# Get the camera's transform basis, but remove the X rotation such
 	# that the Y axis is up and Z is horizontal.
 	var cam_basis = camera.global_transform.basis
 	var basis = cam_basis.rotated(cam_basis.x, -cam_basis.get_euler().x)
-	dir = basis.xform(dir)
+	dir = basis * (dir)
 
 	apply_central_impulse(dir.normalized() / 10)
 
@@ -36,4 +36,4 @@ func on_ground():
 
 func _on_tcube_body_entered(body):
 	if body == self:
-		get_node("WinText").show()
+		get_node(^"WinText").show()

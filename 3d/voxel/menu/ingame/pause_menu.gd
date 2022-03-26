@@ -1,11 +1,11 @@
 extends Control
 
-onready var tree = get_tree()
+@onready var tree = get_tree()
 
-onready var crosshair = $Crosshair
-onready var pause = $Pause
-onready var options = $Options
-onready var voxel_world = $"../VoxelWorld"
+@onready var crosshair = $Crosshair
+@onready var pause = $Pause
+@onready var options = $Options
+@onready var voxel_world = $"../VoxelWorld"
 
 
 func _process(_delta):

@@ -12,7 +12,7 @@ namespace AndroidInAppPurchasesWithCSharp.GodotGooglePlayBilling
         Pending = 2,
     }
 
-    public class Purchase
+    public partial class Purchase
     {
         public Purchase() { }
 

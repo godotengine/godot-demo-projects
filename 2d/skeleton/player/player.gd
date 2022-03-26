@@ -1,5 +1,5 @@
 class_name Player
-extends KinematicBody2D
+extends CharacterBody2D
 
 # Keep this in sync with the AnimationTree's state names and numbers.
 enum States {
@@ -16,9 +16,9 @@ var falling_slow = false
 var falling_fast = false
 var no_move_horizontal_time = 0.0
 
-onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-onready var sprite = $Sprite
-onready var sprite_scale = sprite.scale.x
+@onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+@onready var sprite = $Sprite2D
+@onready var sprite_scale = sprite.scale.x
 
 
 func _ready():
@@ -32,11 +32,13 @@ func _physics_process(delta):
 		velocity.x = 0.0
 		no_move_horizontal_time -= delta
 	else:
-		velocity.x = (Input.get_action_strength("move_right") - Input.get_action_strength("move_left")) * speed.x
+		velocity.x = (Input.get_axis(&"move_left", &"move_right")) * speed.x
 		if Input.is_action_pressed("walk"):
 			velocity.x *= 0.2
 	#warning-ignore:return_value_discarded
-	velocity = move_and_slide(velocity, Vector2.UP)
+	# TODO: This information should be set to the CharacterBody properties instead of arguments: , Vector2.UP
+	# TODO: Rename velocity to linear_velocity in the rest of the script.
+	move_and_slide()
 	# Calculate flipping and falling speed for animation purposes.
 	if velocity.x > 0:
 		sprite.transform.x = Vector2(sprite_scale, 0)

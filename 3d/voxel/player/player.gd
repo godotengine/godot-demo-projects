@@ -1,17 +1,17 @@
-extends KinematicBody
+extends CharacterBody3D
 
 var velocity = Vector3()
 
 var _mouse_motion = Vector2()
 var _selected_block = 6
 
-onready var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+@onready var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-onready var head = $Head
-onready var raycast = $Head/RayCast
-onready var selected_block_texture = $SelectedBlock
-onready var voxel_world = $"../VoxelWorld"
-onready var crosshair = $"../PauseMenu/Crosshair"
+@onready var head = $Head
+@onready var raycast = $Head/RayCast3D
+@onready var selected_block_texture = $SelectedBlock
+@onready var voxel_world = $"../VoxelWorld"
+@onready var crosshair = $"../PauseMenu/Crosshair"
 
 
 func _ready():
@@ -68,15 +68,16 @@ func _physics_process(delta):
 
 	# Keyboard movement.
 	var movement_vec2 = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-	var movement = transform.basis.xform(Vector3(movement_vec2.x, 0, movement_vec2.y))
-	if !crouching:
+	var movement = transform.basis * (Vector3(movement_vec2.x, 0, movement_vec2.y))
+	if not crouching:
 		movement *= 5
 
 	# Gravity.
 	velocity.y -= gravity * delta
 
 	#warning-ignore:return_value_discarded
-	velocity = move_and_slide(Vector3(movement.x, velocity.y, movement.z), Vector3.UP)
+	# TODO: This information should be set to the CharacterBody properties instead of arguments.
+	move_and_slide(Vector3(movement.x, velocity.y, movement.z), Vector3.UP)
 
 	# Jumping, applied next frame.
 	if is_on_floor() and Input.is_action_pressed("jump"):

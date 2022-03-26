@@ -8,11 +8,11 @@
 radius = 0.5
 mid_height = 0.7
 
-[sub_resource type="CapsuleShape" id=5]
+[sub_resource type="CapsuleShape3D" id=5]
 radius = 0.5
 height = 0.7
 
-[node name="RigidBody" type="RigidBody"]
+[node name="RigidBody3D" type="RigidBody3D"]
 can_sleep = false
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -20,22 +20,22 @@ axis_lock_angular_z = true
 linear_damp = 0.5
 script = ExtResource( 1 )
 
-[node name="CubeMesh" type="MeshInstance" parent="."]
+[node name="BoxMesh" type="MeshInstance3D" parent="."]
 _import_path = NodePath("cube-col")
-transform = Transform( 0.9, 0, 0, 0, -3.93403e-08, -0.9, 0, 0.9, -3.93403e-08, 0, 0, 0 )
+transform = Transform3D(0.9, 0, 0, 0, -3.93403e-08, -0.9, 0, 0.9, -3.93403e-08, 0, 0, 0)
 mesh = SubResource( 6 )
 skeleton = NodePath("")
-material/0 = ExtResource( 4 )
+surface_material_override/0 = ExtResource( 4 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 shape = SubResource( 5 )
 
-[node name="Target" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0 )
+[node name="Target" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 
-[node name="Camera" type="Camera" parent="Target"]
-transform = Transform( 0.34202, -0.321394, 0.883022, 0, 0.939693, 0.34202, -0.939693, -0.116978, 0.321394, 2, 0.5, 0.913381 )
+[node name="Camera3D" type="Camera3D" parent="Target"]
+transform = Transform3D(0.34202, -0.321394, 0.883022, 0, 0.939693, 0.34202, -0.939693, -0.116978, 0.321394, 2, 0.5, 0.913381)
 fov = 74.0
 near = 0.1
 far = 50.0
@@ -44,21 +44,21 @@ script = ExtResource( 3 )
 [node name="WinText" type="CenterContainer" parent="."]
 visible = false
 anchor_right = 1.0
-margin_bottom = 100.0
+offset_bottom = 100.0
 
 [node name="Holder" type="Control" parent="WinText"]
-margin_left = 512.0
-margin_top = 50.0
-margin_right = 512.0
-margin_bottom = 50.0
+offset_left = 512.0
+offset_top = 50.0
+offset_right = 512.0
+offset_bottom = 50.0
 
 [node name="TextLabel" type="Label" parent="WinText/Holder"]
-margin_left = -354.0
-margin_bottom = 14.0
-rect_scale = Vector2( 2, 2 )
+offset_left = -354.0
+offset_bottom = 14.0
+rect_scale = Vector2(2, 2)
 text = "Thank You, Cubio! But the Princess is in Another Demo!"
 align = 1
 valign = 1
 
-[node name="RayCast" type="RayCast" parent="."]
+[node name="RayCast3D" type="RayCast3D" parent="."]
 enabled = true

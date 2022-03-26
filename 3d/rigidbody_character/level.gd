@@ -1,9 +1,9 @@
-extends Spatial
+extends Node3D
 
 # Random spawn of Rigidbody cubes.
 func _on_SpawnTimer_timeout():
-	var new_rb = preload("res://cube_rigidbody.tscn").instance()
-	new_rb.translation.y = 15
-	new_rb.translation.x = rand_range(-5, 5)
-	new_rb.translation.z = rand_range(-5, 5)
+	var new_rb = preload("res://cube_rigidbody.tscn").instantiate()
+	new_rb.position.y = 15
+	new_rb.position.x = randf_range(-5, 5)
+	new_rb.position.z = randf_range(-5, 5)
 	add_child(new_rb)

@@ -11,7 +11,7 @@ var lobbies: Dictionary = {}
 var server: WebSocketServer = WebSocketServer.new()
 var peers: Dictionary = {}
 
-class Peer extends Reference:
+class Peer extends RefCounted:
 	var id = -1
 	var lobby = ""
 	var time = OS.get_ticks_msec()
@@ -21,7 +21,7 @@ class Peer extends Reference:
 
 
 
-class Lobby extends Reference:
+class Lobby extends RefCounted:
 	var peers: Array = []
 	var host: int = -1
 	var sealed: bool = false
@@ -76,9 +76,9 @@ class Lobby extends Reference:
 
 
 func _init():
-	server.connect("data_received", self, "_on_data")
-	server.connect("client_connected", self, "_peer_connected")
-	server.connect("client_disconnected", self, "_peer_disconnected")
+	server.connect(&"data_received", self._on_data)
+	server.connect(&"client_connected", self._peer_connected)
+	server.connect(&"client_disconnected", self._peer_disconnected)
 
 
 func _process(delta):
@@ -182,7 +182,7 @@ func _parse_msg(id) -> bool:
 		return lobby.seal(id, server)
 
 	var dest_str: String = type.substr(3, type.length() - 3)
-	if not dest_str.is_valid_integer(): # Destination id is not an integer
+	if not dest_str.is_valid_int(): # Destination id is not an integer
 		return false
 
 	var dest_id: int = int(dest_str)

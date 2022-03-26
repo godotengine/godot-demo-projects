@@ -95,7 +95,7 @@ func start_timer(timeout):
 		_timer = Timer.new()
 		_timer.one_shot = true
 		add_child(_timer)
-		_timer.connect("timeout", Callable(self, "_on_timer_done"))
+		_timer.connect(&"timeout", Callable(self, "_on_timer_done"))
 	else:
 		cancel_timer()
 

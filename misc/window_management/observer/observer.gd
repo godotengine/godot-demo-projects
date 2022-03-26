@@ -1,4 +1,4 @@
-extends KinematicBody
+extends CharacterBody3D
 
 const STATE_MENU = 0
 const STATE_GRAB = 1
@@ -6,14 +6,14 @@ const STATE_GRAB = 1
 var r_pos = Vector2()
 var state = STATE_MENU
 
-onready var camera = $Camera
+@onready var camera = $Camera3D
 
 func _process(delta):
 	if state != STATE_GRAB:
 		return
 
-	var x_movement = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	var z_movement = Input.get_action_strength("move_backwards") - Input.get_action_strength("move_forward")
+	var x_movement = Input.get_axis(&"move_left", &"move_right")
+	var z_movement = Input.get_axis(&"move_forward", &"move_backwards")
 	var dir = direction(Vector3(x_movement, 0, z_movement))
 	transform.origin += dir * 10 * delta
 

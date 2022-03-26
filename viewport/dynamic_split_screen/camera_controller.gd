@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 # Handle the motion of both player cameras as well as communication with the
 # SplitScreen shader to achieve the dynamic split screen effet
@@ -19,25 +19,25 @@ extends Spatial
 #       depending on the distance between players. If false, the thickness will
 #       be constant and equal to split_line_thickness
 
-export(float) var max_separation = 20.0
-export(float) var split_line_thickness = 3.0
-export(Color, RGBA) var split_line_color = Color.black
-export(bool) var adaptive_split_line_thickness = true
+@export var max_separation: float = 20.0
+@export var split_line_thickness: float = 3.0
+@export var split_line_color: Color, RGBA = Color.BLACK
+@export var adaptive_split_line_thickness: bool = true
 
-onready var player1 = $"../Player1"
-onready var player2 = $"../Player2"
-onready var view = $View
-onready var viewport1 = $Viewport1
-onready var viewport2 = $Viewport2
-onready var camera1 = viewport1.get_node(@"Camera1")
-onready var camera2 = viewport2.get_node(@"Camera2")
+@onready var player1 = $"../Player1"
+@onready var player2 = $"../Player2"
+@onready var view = $View
+@onready var viewport1 = $Viewport1
+@onready var viewport2 = $Viewport2
+@onready var camera1 = viewport1.get_node(^"Camera1")
+@onready var camera2 = viewport2.get_node(^"Camera2")
 
 
 func _ready():
 	_on_size_changed()
 	_update_splitscreen()
 
-	get_viewport().connect("size_changed", self, "_on_size_changed")
+	get_viewport().connect(&"size_changed", self._on_size_changed)
 
 	view.material.set_shader_param("viewport1", viewport1.get_texture())
 	view.material.set_shader_param("viewport2", viewport2.get_texture())
@@ -55,17 +55,17 @@ func _move_cameras():
 
 	position_difference = position_difference.normalized() * distance
 
-	camera1.translation.x = player1.translation.x + position_difference.x / 2.0
-	camera1.translation.z = player1.translation.z + position_difference.z / 2.0
+	camera1.position.x = player1.position.x + position_difference.x / 2.0
+	camera1.position.z = player1.position.z + position_difference.z / 2.0
 
-	camera2.translation.x = player2.translation.x - position_difference.x / 2.0
-	camera2.translation.z = player2.translation.z - position_difference.z / 2.0
+	camera2.position.x = player2.position.x - position_difference.x / 2.0
+	camera2.position.z = player2.position.z - position_difference.z / 2.0
 
 
 func _update_splitscreen():
 	var screen_size = get_viewport().get_visible_rect().size
-	var player1_position = camera1.unproject_position(player1.translation) / screen_size
-	var player2_position = camera2.unproject_position(player2.translation) / screen_size
+	var player1_position = camera1.unproject_position(player1.position) / screen_size
+	var player2_position = camera2.unproject_position(player2.position) / screen_size
 
 	var thickness
 	if adaptive_split_line_thickness:
@@ -101,7 +101,7 @@ func _on_size_changed():
 
 
 func _compute_position_difference_in_world():
-	return player2.translation - player1.translation
+	return player2.position - player1.position
 
 
 func _compute_horizontal_length(vec):

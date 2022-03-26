@@ -6,7 +6,7 @@ var direction = Vector2.LEFT
 var stopped = false
 var _speed = DEFAULT_SPEED
 
-onready var _screen_size = get_viewport_rect().size
+@onready var _screen_size = get_viewport_rect().size
 
 func _process(delta):
 	_speed += delta

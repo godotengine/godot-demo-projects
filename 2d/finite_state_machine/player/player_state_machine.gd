@@ -1,10 +1,10 @@
 extends "res://state_machine/state_machine.gd"
 
-onready var idle = $Idle
-onready var move = $Move
-onready var jump = $Jump
-onready var stagger = $Stagger
-onready var attack = $Attack
+@onready var idle = $Idle
+@onready var move = $Move
+@onready var jump = $Jump
+@onready var stagger = $Stagger
+@onready var attack = $Attack
 
 func _ready():
 	states_map = {
@@ -24,7 +24,7 @@ func _change_state(state_name):
 		states_stack.push_front(states_map[state_name])
 	if state_name == "jump" and current_state == move:
 		jump.initialize(move.speed, move.velocity)
-	._change_state(state_name)
+	super._change_state(state_name)
 
 
 func _unhandled_input(event):

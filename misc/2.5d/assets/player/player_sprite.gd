@@ -1,9 +1,9 @@
-tool
-extends Sprite
+@tool
+extends Sprite2D
 
-onready var _stand = preload("res://assets/player/textures/stand.png")
-onready var _jump = preload("res://assets/player/textures/jump.png")
-onready var _run = preload("res://assets/player/textures/run.png")
+@onready var _stand = preload("res://assets/player/textures/stand.png")
+@onready var _jump = preload("res://assets/player/textures/jump.png")
+@onready var _run = preload("res://assets/player/textures/run.png")
 
 const FRAMERATE = 15
 

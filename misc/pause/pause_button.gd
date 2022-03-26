@@ -5,7 +5,7 @@ func _ready():
 	# process even when the SceneTree is paused. Without that it would
 	# not be able to unpause the game. Note that you can set this through
 	# the inspector as well.
-	pause_mode = Node.PAUSE_MODE_PROCESS
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 func _toggled(button_pressed):

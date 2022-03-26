@@ -1,20 +1,20 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 const MOTION_SPEED = 90.0
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_motion = Vector2()
 
-export var stunned = false
+@export var stunned = false
 
 # Use sync because it will be called everywhere
 remotesync func setup_bomb(bomb_name, pos, by_who):
-	var bomb = preload("res://bomb.tscn").instance()
+	var bomb = preload("res://bomb.tscn").instantiate()
 	bomb.set_name(bomb_name) # Ensure unique name for the bomb
 	bomb.position = pos
 	bomb.from_player = by_who
 	# No need to set network master to bomb, will be owned by server by default
-	get_node("../..").add_child(bomb)
+	get_node(^"../..").add_child(bomb)
 
 var current_anim = ""
 var prev_bombing = false
@@ -68,8 +68,9 @@ func _physics_process(_delta):
 
 	if new_anim != current_anim:
 		current_anim = new_anim
-		get_node("anim").play(current_anim)
+		get_node(^"anim").play(current_anim)
 
+	# TODO: This information should be set to the CharacterBody properties instead of arguments.
 	# FIXME: Use move_and_slide
 	move_and_slide(motion * MOTION_SPEED)
 	if not is_network_master():
@@ -88,7 +89,7 @@ master func exploded(_by_who):
 
 
 func set_player_name(new_name):
-	get_node("label").set_text(new_name)
+	get_node(^"label").set_text(new_name)
 
 
 func _ready():

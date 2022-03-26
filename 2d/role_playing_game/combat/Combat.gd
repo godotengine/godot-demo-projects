@@ -4,10 +4,10 @@ signal combat_finished(winner, loser)
 
 func initialize(combat_combatants):
 	for combatant in combat_combatants:
-		combatant = combatant.instance()
+		combatant = combatant.instantiate()
 		if combatant is Combatant:
 			$Combatants.add_combatant(combatant)
-			combatant.get_node("Health").connect("dead", self, "_on_combatant_death", [combatant])
+			combatant.get_node(^"Health").connect(&"dead", self._on_combatant_death, [combatant])
 		else:
 			combatant.queue_free()
 	$UI.initialize()

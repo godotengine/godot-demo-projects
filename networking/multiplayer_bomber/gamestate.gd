@@ -32,7 +32,7 @@ func _player_connected(id):
 
 # Callback from SceneTree.
 func _player_disconnected(id):
-	if has_node("/root/World"): # Game is in progress.
+	if has_node("/root/World3D"): # Game is in progress.
 		if get_tree().is_network_server():
 			emit_signal("game_error", "Player " + players[id] + " disconnected")
 			end_game()
@@ -75,16 +75,16 @@ func unregister_player(id):
 
 remote func pre_start_game(spawn_points):
 	# Change scene.
-	var world = load("res://world.tscn").instance()
+	var world = load("res://world.tscn").instantiate()
 	get_tree().get_root().add_child(world)
 
-	get_tree().get_root().get_node("Lobby").hide()
+	get_tree().get_root().get_node(^"Lobby").hide()
 
 	var player_scene = load("res://player.tscn")
 
 	for p_id in spawn_points:
-		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
-		var player = player_scene.instance()
+		var spawn_pos = world.get_node(^"SpawnPoints/" + str(spawn_points[p_id])).position
+		var player = player_scene.instantiate()
 
 		player.set_name(str(p_id)) # Use unique ID as node name.
 		player.position=spawn_pos
@@ -97,12 +97,12 @@ remote func pre_start_game(spawn_points):
 			# Otherwise set name from peer.
 			player.set_player_name(players[p_id])
 
-		world.get_node("Players").add_child(player)
+		world.get_node(^"Players").add_child(player)
 
 	# Set up score.
-	world.get_node("Score").add_player(get_tree().get_network_unique_id(), player_name)
+	world.get_node(^"Score").add_player(get_tree().get_network_unique_id(), player_name)
 	for pn in players:
-		world.get_node("Score").add_player(pn, players[pn])
+		world.get_node(^"Score").add_player(pn, players[pn])
 
 	if not get_tree().is_network_server():
 		# Tell server we are ready to start.
@@ -167,17 +167,17 @@ func begin_game():
 
 
 func end_game():
-	if has_node("/root/World"): # Game is in progress.
+	if has_node("/root/World3D"): # Game is in progress.
 		# End it
-		get_node("/root/World").queue_free()
+		get_node(^"/root/World3D").queue_free()
 
 	emit_signal("game_ended")
 	players.clear()
 
 
 func _ready():
-	get_tree().connect("network_peer_connected", self, "_player_connected")
+	get_tree().connect(&"network_peer_connected", self._player_connected)
 	get_tree().connect("network_peer_disconnected", self,"_player_disconnected")
-	get_tree().connect("connected_to_server", self, "_connected_ok")
-	get_tree().connect("connection_failed", self, "_connected_fail")
-	get_tree().connect("server_disconnected", self, "_server_disconnected")
+	get_tree().connect(&"connected_to_server", self._connected_ok)
+	get_tree().connect(&"connection_failed", self._connected_fail)
+	get_tree().connect(&"server_disconnected", self._server_disconnected)

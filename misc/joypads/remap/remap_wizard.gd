@@ -11,11 +11,11 @@ var cur_step = -1
 var cur_mapping = {}
 var last_mapping = ""
 
-onready var joy_buttons = $Mapping/Margin/VBox/ViewportContainer/Viewport/JoypadDiagram/Buttons
-onready var joy_axes = $Mapping/Margin/VBox/ViewportContainer/Viewport/JoypadDiagram/Axes
-onready var joy_mapping_text = $Mapping/Margin/VBox/Info/Text/Value
-onready var joy_mapping_full_axis = $Mapping/Margin/VBox/Info/Extra/FullAxis
-onready var joy_mapping_axis_invert = $Mapping/Margin/VBox/Info/Extra/InvertAxis
+@onready var joy_buttons = $Mapping/Margin/VBox/SubViewportContainer/SubViewport/JoypadDiagram/Buttons
+@onready var joy_axes = $Mapping/Margin/VBox/SubViewportContainer/SubViewport/JoypadDiagram/Axes
+@onready var joy_mapping_text = $Mapping/Margin/VBox/Info/Text/Value
+@onready var joy_mapping_full_axis = $Mapping/Margin/VBox/Info/Extra/FullAxis
+@onready var joy_mapping_axis_invert = $Mapping/Margin/VBox/Info/Extra/InvertAxis
 
 
 func _input(event):
@@ -60,7 +60,7 @@ func create_mapping_string(mapping):
 func start(idx):
 	joy_guid = Input.get_joy_guid(idx)
 	joy_name = Input.get_joy_name(idx)
-	if joy_guid.empty():
+	if joy_guid.is_empty():
 		printerr("Unable to find controller")
 		return
 	if OS.get_name() == "HTML5":

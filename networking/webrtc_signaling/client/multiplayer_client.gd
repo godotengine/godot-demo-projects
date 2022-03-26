@@ -4,17 +4,17 @@ var rtc_mp: WebRTCMultiplayer = WebRTCMultiplayer.new()
 var sealed = false
 
 func _init():
-	connect("connected", self, "connected")
-	connect("disconnected", self, "disconnected")
+	connect(&"connected", self.connected)
+	connect(&"disconnected", self.disconnected)
 
-	connect("offer_received", self, "offer_received")
-	connect("answer_received", self, "answer_received")
-	connect("candidate_received", self, "candidate_received")
+	connect(&"offer_received", self.offer_received)
+	connect(&"answer_received", self.answer_received)
+	connect(&"candidate_received", self.candidate_received)
 
-	connect("lobby_joined", self, "lobby_joined")
-	connect("lobby_sealed", self, "lobby_sealed")
-	connect("peer_connected", self, "peer_connected")
-	connect("peer_disconnected", self, "peer_disconnected")
+	connect(&"lobby_joined", self.lobby_joined)
+	connect(&"lobby_sealed", self.lobby_sealed)
+	connect(&"peer_connected", self.peer_connected)
+	connect(&"peer_disconnected", self.peer_disconnected)
 
 
 func start(url, lobby = ""):
@@ -34,8 +34,8 @@ func _create_peer(id):
 	peer.initialize({
 		"iceServers": [ { "urls": ["stun:stun.l.google.com:19302"] } ]
 	})
-	peer.connect("session_description_created", self, "_offer_created", [id])
-	peer.connect("ice_candidate_created", self, "_new_ice_candidate", [id])
+	peer.connect(&"session_description_created", self._offer_created, [id])
+	peer.connect(&"ice_candidate_created", self._new_ice_candidate, [id])
 	rtc_mp.add_peer(peer, id)
 	if id > rtc_mp.get_unique_id():
 		peer.create_offer()

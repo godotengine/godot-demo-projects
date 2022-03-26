@@ -3,42 +3,45 @@ extends Control
 # Some margin to keep the marker away from the screen's corners.
 const MARGIN = 8
 
-onready var camera = get_viewport().get_camera()
-onready var parent = get_parent()
-onready var label = $Label
-onready var marker = $Marker
+@onready var camera = get_viewport().get_camera_3d()
+@onready var parent = get_parent()
+@onready var label = $Label
+@onready var marker = $Marker
 
 # The waypoint's text.
-export var text = "Waypoint" setget set_text
+@export var text = "Waypoint":
+	set(value):
+		# TODO: Manually copy the code from this method.
+		set_text(value)
 
 # If `true`, the waypoint sticks to the viewport's edges when moving off-screen.
-export var sticky = true
+@export var sticky = true
 
 
 func _ready() -> void:
 	self.text = text
 
-	if not parent is Spatial:
-		push_error("The waypoint's parent node must inherit from Spatial.")
+	if not parent is Node3D:
+		push_error("The waypoint's parent node must inherit from Node3D.")
 
 
 func _process(_delta):
 	if not camera.current:
 		# If the camera we have isn't the current one, get the current camera.
-		camera = get_viewport().get_camera()
-	var parent_translation = parent.global_transform.origin
+		camera = get_viewport().get_camera_3d()
+	var parent_position = parent.global_transform.origin
 	var camera_transform = camera.global_transform
-	var camera_translation = camera_transform.origin
+	var camera_position = camera_transform.origin
 
-	# We would use "camera.is_position_behind(parent_translation)", except
+	# We would use "camera.is_position_behind(parent_position)", except
 	# that it also accounts for the near clip plane, which we don't want.
-	var is_behind = camera_transform.basis.z.dot(parent_translation - camera_translation) > 0
+	var is_behind = camera_transform.basis.z.dot(parent_position - camera_position) > 0
 
 	# Fade the waypoint when the camera gets close.
-	var distance = camera_translation.distance_to(parent_translation)
+	var distance = camera_position.distance_to(parent_position)
 	modulate.a = clamp(range_lerp(distance, 0, 2, 0, 1), 0, 1 )
 
-	var unprojected_position = camera.unproject_position(parent_translation)
+	var unprojected_position = camera.unproject_position(parent_position)
 	# `get_size_override()` will return a valid size only if the stretch mode is `2d`.
 	# Otherwise, the viewport size is used directly.
 	var viewport_base_size = (
@@ -49,7 +52,7 @@ func _process(_delta):
 	if not sticky:
 		# For non-sticky waypoints, we don't need to clamp and calculate
 		# the position if the waypoint goes off screen.
-		rect_position = unprojected_position
+		position = unprojected_position
 		visible = not is_behind
 		return
 
@@ -70,11 +73,11 @@ func _process(_delta):
 	# This will be slightly off from the theoretical "ideal" position.
 	if is_behind or unprojected_position.x < MARGIN or \
 			unprojected_position.x > viewport_base_size.x - MARGIN:
-		var look = camera_transform.looking_at(parent_translation, Vector3.UP)
+		var look = camera_transform.looking_at(parent_position, Vector3.UP)
 		var diff = angle_diff(look.basis.get_euler().x, camera_transform.basis.get_euler().x)
 		unprojected_position.y = viewport_base_size.y * (0.5 + (diff / deg2rad(camera.fov)))
 
-	rect_position = Vector2(
+	position = Vector2(
 			clamp(unprojected_position.x, MARGIN, viewport_base_size.x - MARGIN),
 			clamp(unprojected_position.y, MARGIN, viewport_base_size.y - MARGIN)
 	)
@@ -85,22 +88,22 @@ func _process(_delta):
 	# one of the screen corners.
 	var overflow = 0
 
-	if rect_position.x <= MARGIN:
+	if position.x <= MARGIN:
 		# Left overflow.
 		overflow = -45
 		label.visible = false
 		rect_rotation = 90
-	elif rect_position.x >= viewport_base_size.x - MARGIN:
+	elif position.x >= viewport_base_size.x - MARGIN:
 		# Right overflow.
 		overflow = 45
 		label.visible = false
 		rect_rotation = 270
 
-	if rect_position.y <= MARGIN:
+	if position.y <= MARGIN:
 		# Top overflow.
 		label.visible = false
 		rect_rotation = 180 + overflow
-	elif rect_position.y >= viewport_base_size.y - MARGIN:
+	elif position.y >= viewport_base_size.y - MARGIN:
 		# Bottom overflow.
 		label.visible = false
 		rect_rotation = -overflow

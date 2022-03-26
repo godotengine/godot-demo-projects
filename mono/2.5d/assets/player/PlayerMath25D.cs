@@ -6,9 +6,9 @@ using real_t = System.Single;
 #endif
 
 /// <summary>
-/// Handles Player-specific behavior like moving. We calculate such things with KinematicBody.
+/// Handles Player-specific behavior like moving. We calculate such things with CharacterBody3D.
 /// </summary>
-public class PlayerMath25D : KinematicBody
+public partial class PlayerMath25D : CharacterBody3D
 {
     private Node25D _parent;
     public real_t verticalSpeed = 0;
@@ -39,7 +39,7 @@ public class PlayerMath25D : KinematicBody
 
         if (Input.IsActionPressed("reset_position"))
         {
-            Transform = new Transform(Basis.Identity, Vector3.Up * 10);
+            Transform = new Transform3D(Basis.Identity, Vector3.Up * 10);
             verticalSpeed = 0;
         }
         else

@@ -1,6 +1,6 @@
 using Godot;
 
-public class Player : Area2D
+public partial class Player : Area2D
 {
     [Signal]
     public delegate void Hit();
@@ -40,7 +40,7 @@ public class Player : Area2D
             velocity.y -= 1;
         }
 
-        var animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
+        var animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
         if (velocity.Length() > 0)
         {

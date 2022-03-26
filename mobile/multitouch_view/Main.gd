@@ -7,7 +7,7 @@ func _process(_delta):
 
 func _draw():
 	# Get the touch helper singleton.
-	var touch_helper = get_node("/root/TouchHelper")
+	var touch_helper = get_node(^"/root/TouchHelper")
 	# Draw every pointer as a circle.
 	for ptr_index in touch_helper.state.keys():
 		var pos = touch_helper.state[ptr_index]

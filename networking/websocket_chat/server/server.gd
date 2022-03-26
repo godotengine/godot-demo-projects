@@ -1,6 +1,6 @@
 extends Node
 
-onready var _log_dest = get_parent().get_node("Panel/VBoxContainer/RichTextLabel")
+@onready var _log_dest = get_parent().get_node(^"Panel/VBoxContainer/RichTextLabel")
 
 var _server = WebSocketServer.new()
 var _clients = {}
@@ -9,14 +9,14 @@ var _use_multiplayer = true
 var last_connected_client = 0
 
 func _init():
-	_server.connect("client_connected", self, "_client_connected")
-	_server.connect("client_disconnected", self, "_client_disconnected")
-	_server.connect("client_close_request", self, "_client_close_request")
-	_server.connect("data_received", self, "_client_receive")
+	_server.connect(&"client_connected", self._client_connected)
+	_server.connect(&"client_disconnected", self._client_disconnected)
+	_server.connect(&"client_close_request", self._client_close_request)
+	_server.connect(&"data_received", self._client_receive)
 
-	_server.connect("peer_packet", self, "_client_receive")
-	_server.connect("peer_connected", self, "_client_connected", ["multiplayer_protocol"])
-	_server.connect("peer_disconnected", self, "_client_disconnected")
+	_server.connect(&"peer_packet", self._client_receive)
+	_server.connect(&"peer_connected", self._client_connected, ["multiplayer_protocol"])
+	_server.connect(&"peer_disconnected", self._client_disconnected)
 
 
 func _exit_tree():

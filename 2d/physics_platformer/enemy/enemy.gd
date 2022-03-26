@@ -15,8 +15,8 @@ var anim = ""
 
 var Bullet = preload("res://player/bullet.gd")
 
-onready var rc_left = $RaycastLeft
-onready var rc_right = $RaycastRight
+@onready var rc_left = $RaycastLeft
+@onready var rc_right = $RaycastRight
 
 func _integrate_forces(s):
 	var lv = s.get_linear_velocity()
@@ -46,13 +46,13 @@ func _integrate_forces(s):
 
 		if wall_side != 0 and wall_side != direction:
 			direction = -direction
-			($Sprite as Sprite).scale.x = -direction
+			($Sprite2D as Sprite2D).scale.x = -direction
 		if direction < 0 and not rc_left.is_colliding() and rc_right.is_colliding():
 			direction = -direction
-			($Sprite as Sprite).scale.x = -direction
+			($Sprite2D as Sprite2D).scale.x = -direction
 		elif direction > 0 and not rc_right.is_colliding() and rc_left.is_colliding():
 			direction = -direction
-			($Sprite as Sprite).scale.x = -direction
+			($Sprite2D as Sprite2D).scale.x = -direction
 
 		lv.x = direction * WALK_SPEED
 

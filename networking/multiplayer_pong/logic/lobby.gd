@@ -5,32 +5,32 @@ extends Control
 # https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers
 const DEFAULT_PORT = 8910
 
-onready var address = $Address
-onready var host_button = $HostButton
-onready var join_button = $JoinButton
-onready var status_ok = $StatusOk
-onready var status_fail = $StatusFail
-onready var port_forward_label = $PortForward
-onready var find_public_ip_button = $FindPublicIP
+@onready var address = $Address
+@onready var host_button = $HostButton
+@onready var join_button = $JoinButton
+@onready var status_ok = $StatusOk
+@onready var status_fail = $StatusFail
+@onready var port_forward_label = $PortForward
+@onready var find_public_ip_button = $FindPublicIP
 
 var peer = null
 
 func _ready():
 	# Connect all the callbacks related to networking.
-	get_tree().connect("network_peer_connected", self, "_player_connected")
-	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
-	get_tree().connect("connected_to_server", self, "_connected_ok")
-	get_tree().connect("connection_failed", self, "_connected_fail")
-	get_tree().connect("server_disconnected", self, "_server_disconnected")
+	get_tree().connect(&"network_peer_connected", self._player_connected)
+	get_tree().connect(&"network_peer_disconnected", self._player_disconnected)
+	get_tree().connect(&"connected_to_server", self._connected_ok)
+	get_tree().connect(&"connection_failed", self._connected_fail)
+	get_tree().connect(&"server_disconnected", self._server_disconnected)
 
 #### Network callbacks from SceneTree ####
 
 # Callback from SceneTree.
 func _player_connected(_id):
 	# Someone connected, start the game!
-	var pong = load("res://pong.tscn").instance()
+	var pong = load("res://pong.tscn").instantiate()
 	# Connect deferred so we can safely erase it from the callback.
-	pong.connect("game_finished", self, "_end_game", [], CONNECT_DEFERRED)
+	pong.connect(&"game_finished", self._end_game, [], CONNECT_DEFERRED)
 
 	get_tree().get_root().add_child(pong)
 	hide()
@@ -66,7 +66,7 @@ func _end_game(with_error = ""):
 	if has_node("/root/Pong"):
 		# Erase immediately, otherwise network might show
 		# errors (this is why we connected deferred above).
-		get_node("/root/Pong").free()
+		get_node(^"/root/Pong").free()
 		show()
 
 	get_tree().set_network_peer(null) # Remove peer.

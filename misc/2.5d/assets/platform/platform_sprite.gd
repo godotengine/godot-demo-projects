@@ -1,12 +1,12 @@
-tool
-extends Sprite
+@tool
+extends Sprite2D
 
-onready var _forty_five = preload("res://assets/platform/textures/forty_five.png")
-onready var _isometric = preload("res://assets/platform/textures/isometric.png")
-onready var _top_down = preload("res://assets/platform/textures/top_down.png")
-onready var _front_side = preload("res://assets/platform/textures/front_side.png")
-onready var _oblique_y = preload("res://assets/platform/textures/oblique_y.png")
-onready var _oblique_z = preload("res://assets/platform/textures/oblique_z.png")
+@onready var _forty_five = preload("res://assets/platform/textures/forty_five.png")
+@onready var _isometric = preload("res://assets/platform/textures/isometric.png")
+@onready var _top_down = preload("res://assets/platform/textures/top_down.png")
+@onready var _front_side = preload("res://assets/platform/textures/front_side.png")
+@onready var _oblique_y = preload("res://assets/platform/textures/oblique_y.png")
+@onready var _oblique_z = preload("res://assets/platform/textures/oblique_z.png")
 
 func _process(_delta):
 	if not Engine.editor_hint:

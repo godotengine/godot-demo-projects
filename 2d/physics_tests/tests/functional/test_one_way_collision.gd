@@ -81,15 +81,15 @@ func _ready():
 		options.add_menu_item(OPTION_TEST_CASE_MOVING_PLATFORM_RIGID)
 		options.add_menu_item(OPTION_TEST_CASE_MOVING_PLATFORM_CHARACTER)
 
-		options.connect("option_selected", Callable(self, "_on_option_selected"))
+		options.connect(&"option_selected", Callable(self, "_on_option_selected"))
 
 		$Controls/PlatformSize/HSlider.value = _platform_size
 		$Controls/PlatformAngle/HSlider.value = _platform_angle
 		$Controls/BodyAngle/HSlider.value = _body_angle
 
 		remove_child(_target_area)
-		_target_area.connect("body_entered", Callable(self, "_on_target_entered"))
-		$Timer.connect("timeout", Callable(self, "_on_timeout"))
+		_target_area.connect(&"body_entered", Callable(self, "_on_target_entered"))
+		$Timer.connect(&"timeout", Callable(self, "_on_timeout"))
 
 		_rigid_body_template = $RigidBody2D
 		remove_child(_rigid_body_template)
@@ -373,7 +373,7 @@ func _start_test():
 		test_label += String(_rigid_body_template.name)
 		_moving_body = _rigid_body_template.duplicate()
 		_moving_body.linear_velocity = _body_velocity
-		_moving_body.connect("body_entered", Callable(self, "_on_contact_detected"))
+		_moving_body.connect(&"body_entered", Callable(self, "_on_contact_detected"))
 	add_child(_moving_body)
 
 	if _platform_speed != 0.0:

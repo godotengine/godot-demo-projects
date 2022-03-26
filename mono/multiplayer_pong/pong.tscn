@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://logic/Pong.cs" type="Script" id=1]
-[ext_resource path="res://separator.png" type="Texture" id=2]
+[ext_resource path="res://separator.png" type="Texture2D" id=2]
 [ext_resource path="res://paddle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ball.tscn" type="PackedScene" id=4]
 
@@ -9,44 +9,44 @@
 script = ExtResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 640.0
-margin_bottom = 400.0
-color = Color( 0.141176, 0.152941, 0.164706, 1 )
+offset_right = 640.0
+offset_bottom = 400.0
+color = Color(0.141176, 0.152941, 0.164706, 1)
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Separator" type="Sprite" parent="."]
-position = Vector2( 320, 200 )
+[node name="Separator" type="Sprite2D" parent="."]
+position = Vector2(320, 200)
 texture = ExtResource( 2 )
 
 [node name="Player1" parent="." instance=ExtResource( 3 )]
-modulate = Color( 0, 1, 1, 1 )
-position = Vector2( 32.49, 188.622 )
+modulate = Color(0, 1, 1, 1)
+position = Vector2(32.49, 188.622)
 _left = true
 
 [node name="Player2" parent="." instance=ExtResource( 3 )]
-modulate = Color( 1, 0, 1, 1 )
-position = Vector2( 608.88, 188.622 )
+modulate = Color(1, 0, 1, 1)
+position = Vector2(608.88, 188.622)
 
 [node name="Ball" parent="." instance=ExtResource( 4 )]
-position = Vector2( 320.206, 184 )
+position = Vector2(320.206, 184)
 
 [node name="ScoreLeft" type="Label" parent="."]
-margin_left = 240.0
-margin_top = 10.0
-margin_right = 280.0
-margin_bottom = 30.0
+offset_left = 240.0
+offset_top = 10.0
+offset_right = 280.0
+offset_bottom = 30.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "0"
 align = 1
 
 [node name="ScoreRight" type="Label" parent="."]
-margin_left = 360.0
-margin_top = 10.0
-margin_right = 400.0
-margin_bottom = 30.0
+offset_left = 360.0
+offset_top = 10.0
+offset_right = 400.0
+offset_bottom = 30.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "0"
@@ -54,36 +54,36 @@ align = 1
 
 [node name="WinnerLeft" type="Label" parent="."]
 visible = false
-margin_left = 190.0
-margin_top = 170.0
-margin_right = 267.0
-margin_bottom = 184.0
+offset_left = 190.0
+offset_top = 170.0
+offset_right = 267.0
+offset_bottom = 184.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "The Winner!"
 
 [node name="WinnerRight" type="Label" parent="."]
 visible = false
-margin_left = 380.0
-margin_top = 170.0
-margin_right = 457.0
-margin_bottom = 184.0
+offset_left = 380.0
+offset_top = 170.0
+offset_right = 457.0
+offset_bottom = 184.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "The Winner!"
 
 [node name="ExitGame" type="Button" parent="."]
 visible = false
-margin_left = 280.0
-margin_top = 340.0
-margin_right = 360.0
-margin_bottom = 360.0
+offset_left = 280.0
+offset_top = 340.0
+offset_right = 360.0
+offset_bottom = 360.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Exit Game"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 320, 200 )
+offset = Vector2(320, 200)
 current = true
 
 [connection signal="pressed" from="ExitGame" to="." method="OnExitGamePressed"]

@@ -2,8 +2,8 @@ extends Control
 
 const _crown = preload("res://img/crown.png")
 
-onready var _list = $HBoxContainer/VBoxContainer/ItemList
-onready var _action = $HBoxContainer/VBoxContainer/Action
+@onready var _list = $HBoxContainer/VBoxContainer/ItemList
+@onready var _action = $HBoxContainer/VBoxContainer/Action
 
 var _players = []
 var _turn = -1

@@ -3,9 +3,12 @@ extends Node2D
 
 enum CellType { ACTOR, OBSTACLE, OBJECT }
 #warning-ignore:unused_class_variable
-export(CellType) var type = CellType.ACTOR
+@export var type: CellType = CellType.ACTOR
 
-var active = true setget set_active
+var active = true:
+	set(value):
+		# TODO: Manually copy the code from this method.
+		set_active(value)
 
 func set_active(value):
 	active = value
