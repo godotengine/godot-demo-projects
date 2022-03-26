@@ -8,14 +8,14 @@ var _server = WebSocketServer.new()
 func _ready():
 	# Connect base signals to get notified of new client connections,
 	# disconnections, and disconnect requests.
-	_server.connect("client_connected", self, "_connected")
-	_server.connect("client_disconnected", self, "_disconnected")
-	_server.connect("client_close_request", self, "_close_request")
+	_server.connect("client_connected", _connected)
+	_server.connect("client_disconnected", _disconnected)
+	_server.connect("client_close_request", _close_request)
 	# This signal is emitted when not using the Multiplayer API every time a
 	# full packet is received.
 	# Alternatively, you could check get_peer(PEER_ID).get_available_packets()
 	# in a loop for each connected peer.
-	_server.connect("data_received", self, "_on_data")
+	_server.connect("data_received", _on_data)
 	# Start listening on the given port.
 	var err = _server.listen(PORT)
 	if err != OK:
@@ -23,10 +23,10 @@ func _ready():
 		set_process(false)
 
 
-func _connected(id, proto):
+func _connected(id, proto, rname):
 	# This is called when a new peer connects, "id" will be the assigned peer id,
 	# "proto" will be the selected WebSocket sub-protocol (which is optional)
-	print("Client %d connected with protocol: %s" % [id, proto])
+	print("Client %d connected with protocol %s and resource name %s" % [id, proto, rname])
 
 
 func _close_request(id, code, reason):
