@@ -35,6 +35,8 @@ func _ready():
 		payment.connect("purchase_consumed", self, "_on_purchase_consumed")
 		# Response ID (int), Debug message (string), Purchase token (string).
 		payment.connect("purchase_consumption_error", self, "_on_purchase_consumption_error")
+		# Purchases (Dictionary[])
+		payment.connect("query_purchases_response", self, "_on_query_purchases_response")
 		payment.startConnection()
 	else:
 		show_alert("Android IAP support is not enabled. Make sure you have enabled 'Custom Build' and installed and enabled the GodotGooglePlayBilling plugin in your Android export settings! This application will not work.")
@@ -47,17 +49,21 @@ func show_alert(text):
 
 func _on_connected():
 	print("PurchaseManager connected")
+	payment.queryPurchases("inapp") # Use "subs" for subscriptions.
 
-	# We must acknowledge all puchases.
-	# See https://developer.android.com/google/play/billing/integrate#process for more information
-	var query = payment.queryPurchases("inapp") # Use "subs" for subscriptions.
-	if query.status == OK:
-		for purchase in query.purchases:
+
+func _on_query_purchases_response(query_result):
+	if query_result.status == OK:
+		for purchase in query_result.purchases:
+			# We must acknowledge all puchases.
+			# See https://developer.android.com/google/play/billing/integrate#process for more information
 			if not purchase.is_acknowledged:
 				print("Purchase " + str(purchase.sku) + " has not been acknowledged. Acknowledging...")
 				payment.acknowledgePurchase(purchase.purchase_token)
 	else:
-		print("Purchase query failed: %d" % query.status)
+		print("queryPurchases failed, response code: ",
+				query_result.response_code,
+				" debug message: ", query_result.debug_message)
 
 
 func _on_sku_details_query_completed(sku_details):

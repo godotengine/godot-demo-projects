@@ -22,10 +22,14 @@ func _ready():
 	var camera: Camera2D = $Camera
 	if action_suffix == "_p1":
 		camera.custom_viewport = $"../.."
+		yield(get_tree(), "idle_frame")
+		camera.make_current()
 	elif action_suffix == "_p2":
-		var viewport: Viewport = $"../../../../ViewportContainer2/Viewport"
+		var viewport: Viewport = $"../../../../ViewportContainer2/Viewport2"
 		viewport.world_2d = ($"../.." as Viewport).world_2d
 		camera.custom_viewport = viewport
+		yield(get_tree(), "idle_frame")
+		camera.make_current()
 
 
 # Physics process is a built-in loop in Godot.

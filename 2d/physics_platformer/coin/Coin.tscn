@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://coin/coin.gd" type="Script" id=1]
 [ext_resource path="res://coin/coin.png" type="Texture" id=2]
@@ -97,21 +97,6 @@ blend_mode = 1
 
 [sub_resource type="Curve" id=5]
 
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
-
-[sub_resource type="ParticlesMaterial" id=7]
-emission_shape = 1
-emission_sphere_radius = 20.0
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 1.0
-angular_velocity = 0.0191222
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 0.3
-scale_curve = SubResource( 6 )
-
 [node name="Coin" type="Area2D"]
 script = ExtResource( 1 )
 
@@ -130,14 +115,20 @@ shape = SubResource( 3 )
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 
-[node name="Particles" type="Particles2D" parent="."]
+[node name="Particles" type="CPUParticles2D" parent="."]
 modulate = Color( 0.596863, 0.638745, 1, 1 )
 material = SubResource( 4 )
 emitting = false
 one_shot = true
 explosiveness = 0.7
-process_material = SubResource( 7 )
 texture = ExtResource( 4 )
+emission_shape = 1
+emission_sphere_radius = 20.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 1.0
+angular_velocity = 0.0191222
+scale_amount = 0.3
+scale_amount_curve = SubResource( 5 )
 
 [node name="Enabler" type="VisibilityEnabler2D" parent="."]
 rect = Rect2( -5, -5, 10, 10 )
