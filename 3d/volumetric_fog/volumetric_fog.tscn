@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://d1d6jy84lcpg7"]
 
 [ext_resource type="Script" path="res://camera.gd" id="1_mfjvp"]
-[ext_resource type="StreamTexture3D" uid="uid://bpvy0e34otmhk" path="res://icon_outlined.png" id="2_8fjmj"]
+[ext_resource type="CompressedTexture3D" uid="uid://bpvy0e34otmhk" path="res://icon_outlined.png" id="2_8fjmj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fefkn"]
 sky_top_color = Color(0.568627, 0.698039, 0.807843, 1)
@@ -89,7 +89,6 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_axnf8"]
 resource_name = "move_fog_volume"
 length = 10.0
-loop = true
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -140,18 +139,15 @@ edge_fade = 0.0
 density_texture = ExtResource( "2_8fjmj" )
 
 [node name="Node3D" type="Node3D"]
-script = null
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( "Environment_gsgar" )
-script = null
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.592126, -0.697883, 0.402923, -1.19487e-09, 0.5, 0.866026, -0.805846, 0.512796, -0.296063, 0, 0, 0)
 shadow_enabled = true
 shadow_bias = 0.12
 directional_shadow_max_distance = 250.0
-script = null
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 6, 18)
@@ -167,8 +163,6 @@ theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/shadow_outline_size = 0
 text = "Temporal reprojection: Disabled"
-structured_text_bidi_override_options = []
-script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -189,78 +183,64 @@ text = "W/A/S/D/Mouse: Move
 Left/Right arrows: Adjust global fog density
 Space: Toggle temporal reprojection
 Up/Down arrows or mouse wheel: Adjust temporal reprojection intensity"
-valign = 2
-structured_text_bidi_override_options = []
-script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Ground" type="CSGBox3D" parent="."]
 size = Vector3(150, 2, 150)
-script = null
 
 [node name="Ground2" type="CSGBox3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.282, 0, 5.62229)
 operation = 2
 size = Vector3(3, 2, 4)
-script = null
 
 [node name="Ground3" type="CSGBox3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.87312, 0, 2.69763)
 operation = 2
 size = Vector3(3, 2, 4)
-script = null
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 size = Vector3(8, 8, 8)
-script = null
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.4)
 operation = 2
 size = Vector3(7.5, 7.5, 7.5)
-script = null
 
 [node name="FogVolumeNegativeDensity" type="FogVolume" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 extents = Vector3(4, 4, 4)
 material = SubResource( "FogMaterial_sfd8y" )
-script = null
 
 [node name="FogVolumeEllipsoid" type="FogVolume" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 6, 6)
 extents = Vector3(2, 2, 2)
 shape = 0
 material = SubResource( "FogMaterial_v1f5u" )
-script = null
 
 [node name="FogVolumeEllipsoidHeightFalloff" type="FogVolume" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 6, 2)
 extents = Vector3(2, 2, 2)
 shape = 0
 material = SubResource( "FogMaterial_blauf" )
-script = null
 
 [node name="FogVolumeBox" type="FogVolume" parent="."]
 transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, -7.5189, 4.42465, -2.97368)
 extents = Vector3(2, 2, 2)
 material = SubResource( "FogMaterial_yvnd5" )
-script = null
 
 [node name="FogVolumeBoxHeightFalloff" type="FogVolume" parent="."]
 transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, -7.5189, 4.42465, -7.97368)
 extents = Vector3(2, 2, 2)
 material = SubResource( "FogMaterial_gcgmm" )
-script = null
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.823152, 1.836, 4.31818)
 light_color = Color(1, 0.929412, 0, 1)
 light_energy = 2.0
 omni_range = 6.0
-script = null
 
 [node name="OmniLight3DShadow" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.82315, 1.836, 4.31818)
@@ -268,40 +248,31 @@ light_color = Color(1, 0.929412, 0, 1)
 light_energy = 2.0
 shadow_enabled = true
 omni_range = 6.0
-script = null
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(0.966384, -0.226046, -0.1225, 0, 0.476461, -0.879196, 0.257105, 0.84964, 0.460444, -7.19085, -3.7099, 10.7572)
 light_color = Color(0, 0.439216, 1, 1)
 light_energy = 4.0
-script = null
 
 [node name="FogVolumeAlbedoTweak" type="FogVolume" parent="."]
 transform = Transform3D(-0.89393, -0.0897075, -0.439138, 0, 0.979766, -0.200148, 0.448207, -0.178918, -0.875842, -15.8913, -15.118, 8.26876)
 extents = Vector3(4, 4, 4)
 material = SubResource( "FogMaterial_8xcc6" )
-script = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "move_fog_volume"
 anims/RESET = SubResource( "Animation_jg7qq" )
 anims/move_fog_volume = SubResource( "Animation_axnf8" )
-blend_times = []
-script = null
 
 [node name="MovingBox" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 10)
 mesh = SubResource( "BoxMesh_fi43t" )
-surface_material_override/0 = null
-script = null
 
 [node name="FogVolumeBlue" type="FogVolume" parent="MovingBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 material = SubResource( "FogMaterial_ktn3i" )
-script = null
 
 [node name="FogVolumeTexture3D" type="FogVolume" parent="."]
 transform = Transform3D(-2.98023e-08, 4.82913e-08, -1, -4.2222e-08, -1, -4.82913e-08, -1, 4.2222e-08, -1.49012e-08, 17, 17, 12)
 extents = Vector3(16, 16, 2)
 material = SubResource( "FogMaterial_yomn8" )
-script = null
