@@ -9,6 +9,8 @@ Language: GDScript
 
 Renderer: GLES 3
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/1291
+
 ## How does it work?
 
 This demo uses a [`RigidBody`](https://docs.godotengine.org/en/stable/classes/class_rigidbody.html)
