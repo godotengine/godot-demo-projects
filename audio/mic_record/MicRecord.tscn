@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://dvjlkpjvjxn0h"]
 
-[ext_resource path="res://MicRecord.gd" type="Script" id=1]
-[ext_resource path="res://Intro.ogg" type="AudioStream" id=2]
+[ext_resource type="Script" path="res://MicRecord.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://c2re52petqrvx" path="res://Intro.ogg" id="2"]
 
-[sub_resource type="AudioStreamMicrophone" id=1]
+[sub_resource type="AudioStreamMicrophone" id="1"]
 
 [node name="MicRecord" type="Control"]
 anchor_left = 0.5
@@ -14,21 +14,21 @@ offset_left = -320.0
 offset_top = -240.0
 offset_right = 320.0
 offset_bottom = 240.0
-script = ExtResource( 1 )
+script = ExtResource( "1" )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AudioStreamRecord" type="AudioStreamPlayer" parent="."]
-stream = SubResource( 1 )
+stream = SubResource( "1" )
 autoplay = true
-bus = "Record"
+bus = &"Record"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 autoplay = true
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
+stream = ExtResource( "2" )
 volume_db = -6.0
 
 [node name="RecordButton" type="Button" parent="."]

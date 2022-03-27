@@ -1,12 +1,12 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://co1ys4ggr68mk"]
 
-[ext_resource path="res://Changer.gd" type="Script" id=1]
-[ext_resource path="res://Intro.ogg" type="AudioStream" id=2]
+[ext_resource type="Script" path="res://Changer.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://k0y5fyud50c1" path="res://Intro.ogg" id="2"]
 
 [node name="Changer" type="Control"]
 offset_right = 1023.0
 offset_bottom = 598.0
-script = ExtResource( 1 )
+script = ExtResource( "1" )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -25,7 +25,6 @@ offset_left = 321.0
 offset_top = 248.0
 offset_right = 660.0
 offset_bottom = 284.0
-align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -45,7 +44,7 @@ offset_bottom = 414.0
 text = "Play Audio"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
+stream = ExtResource( "2" )
 volume_db = -6.0
 
 [connection signal="button_down" from="SetDevice" to="." method="_on_Button_button_down"]
