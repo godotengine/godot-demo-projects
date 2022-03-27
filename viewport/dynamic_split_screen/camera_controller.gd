@@ -21,7 +21,7 @@ extends Node3D
 
 @export var max_separation: float = 20.0
 @export var split_line_thickness: float = 3.0
-@export var split_line_color: Color, RGBA = Color.BLACK
+@export var split_line_color: Color = Color.BLACK
 @export var adaptive_split_line_thickness: bool = true
 
 @onready var player1 = $"../Player1"

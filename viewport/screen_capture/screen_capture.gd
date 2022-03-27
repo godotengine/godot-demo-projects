@@ -3,15 +3,8 @@ extends Node
 @onready var captured_image = $CapturedImage
 
 func _on_CaptureButton_pressed():
-	get_viewport().set_clear_mode(SubViewport.CLEAR_MODE_ONLY_NEXT_FRAME)
-	# Wait until the frame has finished before getting the texture.
-	await RenderingServer.frame_post_draw
-
 	# Retrieve the captured image.
-	var img = get_viewport().get_texture().get_data()
-
-	# Flip it on the y-axis (because it's flipped).
-	img.flip_y()
+	var img = get_viewport().get_texture().get_image()
 
 	# Create a texture for it.
 	var tex = ImageTexture.new()

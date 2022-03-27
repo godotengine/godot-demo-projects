@@ -19,14 +19,8 @@ func _ready():
 	node_area.connect(&"mouse_entered", self._mouse_entered_area)
 
 	# If the material is NOT set to use billboard settings, then avoid running billboard specific code
-	if node_quad.get_surface_material(0).params_billboard_mode == 0:
+	if node_quad.get_surface_override_material(0).billboard_mode == BaseMaterial3D.BillboardMode.BILLBOARD_DISABLED:
 		set_process(false)
-
-	if OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES2:
-		# Required to prevent the texture from being too dark when using GLES2.
-		# This should be left to `true` in GLES3 to prevent the texture from looking
-		# washed out there.
-		node_quad.get_surface_material(0).flags_albedo_tex_force_srgb = false
 
 
 func _process(_delta):
@@ -52,7 +46,7 @@ func _unhandled_input(event):
 	if is_mouse_event and (is_mouse_inside or is_mouse_held):
 		handle_mouse(event)
 	elif not is_mouse_event:
-		node_viewport.input(event)
+		node_viewport.push_input(event)
 
 
 # Handle mouse events inside Area3D. (Area3D.input_event had many issues with dragging)
@@ -115,20 +109,23 @@ func handle_mouse(event):
 	last_mouse_pos2D = mouse_pos2D
 
 	# Finally, send the processed input event to the viewport.
-	node_viewport.input(event)
+	node_viewport.push_input(event)
 
 
 func find_mouse(global_position):
 	var camera = get_viewport().get_camera_3d()
-
-	# From camera center to the mouse position in the Area3D
-	var from = camera.project_ray_origin(global_position)
 	var dist = find_further_distance_to(camera.transform.origin)
-	var to = from + camera.project_ray_normal(global_position) * dist
 
+	# From camera center to the mouse position in the Area3D.
+	var parameters = PhysicsRayQueryParameters3D.new()
+	parameters.from = camera.project_ray_origin(global_position)
+	parameters.to = parameters.from + camera.project_ray_normal(global_position) * dist
 
-	# Manually raycasts the are to find the mouse position
-	var result = get_world_3d().direct_space_state.intersect_ray(from, to, [], node_area.collision_layer,false,true) #for 3.1 changes
+	# Manually raycasts the area to find the mouse position.
+	parameters.collision_mask = node_area.collision_layer
+	parameters.collide_with_bodies = false
+	parameters.collide_with_areas = true
+	var result = get_world_3d().direct_space_state.intersect_ray(parameters)
 
 	if result.size() > 0:
 		return result.position
@@ -156,7 +153,7 @@ func find_further_distance_to(origin):
 
 
 func rotate_area_to_billboard():
-	var billboard_mode = node_quad.get_surface_material(0).params_billboard_mode
+	var billboard_mode = node_quad.get_surface_override_material(0).params_billboard_mode
 
 	# Try to match the area with the material's billboard setting, if enabled
 	if billboard_mode > 0:
