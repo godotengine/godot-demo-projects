@@ -29,14 +29,14 @@ static func flat(chunk_position):
 
 	for x in range(CHUNK_SIZE):
 		for z in range(CHUNK_SIZE):
-			data[Vector3(x, 0, z)] = 3
+			data[Vector3i(x, 0, z)] = 3
 
 	return data
 
 
 # Used to create the project icon.
 static func origin_grass(chunk_position):
-	if chunk_position == Vector3.ZERO:
-		return {Vector3.ZERO: 3}
+	if chunk_position == Vector3i.ZERO:
+		return {Vector3i.ZERO: 3}
 
 	return {}

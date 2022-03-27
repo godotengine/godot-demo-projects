@@ -3,9 +3,11 @@ extends Node
 var render_distance = 7
 var fog_enabled = true
 
+var fog_distance = 32.0 # Not saved, only used during runtime.
 var world_type = 0 # Not saved, only used during runtime.
 
 var _save_path = "user://settings.json"
+@warning_ignore(unused_private_class_variable)
 var _loaded = false
 
 
@@ -19,7 +21,7 @@ func _enter_tree():
 	var file = File.new()
 	if file.file_exists(_save_path):
 		file.open(_save_path, File.READ)
-		while file.get_position() < file.get_len():
+		while file.get_position() < file.get_length():
 			# Get the saved dictionary from the next line in the save file
 			var json = JSON.new()
 			json.parse(file.get_line())

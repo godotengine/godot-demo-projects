@@ -1,18 +1,16 @@
-[gd_resource type="Environment" load_steps=2 format=2]
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://brymefbrev3s"]
 
-[sub_resource type="Sky" id=1]
-sun_longitude = 100.0
-sun_angle_min = 2.0
-sun_angle_max = 20.0
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rhfg5"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_iri27"]
+sky_material = SubResource( "ProceduralSkyMaterial_rhfg5" )
 
 [resource]
 background_mode = 2
-background_sky = SubResource( 1 )
+sky = SubResource( "Sky_iri27" )
+tonemap_mode = 2
+glow_enabled = true
 fog_enabled = true
-fog_color = Color( 0.501961, 0.6, 0.701961, 1 )
-fog_depth_begin = 32.0
-fog_depth_end = 64.0
-fog_transmit_enabled = true
-dof_blur_far_enabled = true
-dof_blur_far_transition = 32.0
-dof_blur_far_amount = 0.05
+fog_aerial_perspective = 0.5

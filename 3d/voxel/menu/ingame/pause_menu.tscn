@@ -1,132 +1,120 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://dk8arl1if3lyr"]
 
-[ext_resource path="res://player/crosshair.svg" type="Texture2D" id=1]
-[ext_resource path="res://menu/theme/theme.tres" type="Theme" id=2]
-[ext_resource path="res://menu/options/options.tscn" type="PackedScene" id=3]
-[ext_resource path="res://menu/ingame/pause_menu.gd" type="Script" id=4]
-[ext_resource path="res://menu/button.png" type="Texture2D" id=5]
+[ext_resource type="Texture2D" uid="uid://cgv7xgoy43rbc" path="res://player/crosshair.svg" id="1"]
+[ext_resource type="Theme" path="res://menu/theme/theme.tres" id="2"]
+[ext_resource type="PackedScene" uid="uid://e22n700qhxqr" path="res://menu/options/options.tscn" id="3"]
+[ext_resource type="Script" path="res://menu/ingame/pause_menu.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://ej6lqf2fptv8" path="res://menu/button.png" id="5"]
 
 [node name="PauseMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 2 )
-script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme = ExtResource( "2" )
+script = ExtResource( "4" )
 
 [node name="Crosshair" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect" type="TextureRect" parent="Crosshair"]
-offset_left = 784.0
-offset_top = 434.0
-offset_right = 816.0
-offset_bottom = 466.0
-texture = ExtResource( 1 )
+offset_left = 496.0
+offset_top = 284.0
+offset_right = 528.0
+offset_bottom = 316.0
+texture = ExtResource( "1" )
 
 [node name="Pause" type="VBoxContainer" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ButtonHolder" type="HBoxContainer" parent="Pause"]
-offset_right = 1600.0
-offset_bottom = 900.0
+offset_right = 1024.0
+offset_bottom = 600.0
 size_flags_vertical = 3
 alignment = 1
 
 [node name="MainButtons" type="VBoxContainer" parent="Pause/ButtonHolder"]
-offset_left = 608.0
-offset_right = 992.0
-offset_bottom = 900.0
-custom_constants/separation = 20
+offset_left = 320.0
+offset_right = 704.0
+offset_bottom = 600.0
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="Resume" type="TextureButton" parent="Pause/ButtonHolder/MainButtons"]
-offset_top = 292.0
+offset_top = 142.0
 offset_right = 384.0
-offset_bottom = 356.0
-rect_min_size = Vector2(384, 64)
-texture_normal = ExtResource( 5 )
+offset_bottom = 206.0
+texture_normal = ExtResource( "5" )
 
 [node name="Label" type="Label" parent="Pause/ButtonHolder/MainButtons/Resume"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -1.0
 offset_bottom = -18.0
+theme_override_font_sizes/font_size = 60
 text = "Resume Game"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Options" type="TextureButton" parent="Pause/ButtonHolder/MainButtons"]
-offset_top = 376.0
+offset_top = 226.0
 offset_right = 384.0
-offset_bottom = 440.0
-rect_min_size = Vector2(384, 64)
-texture_normal = ExtResource( 5 )
+offset_bottom = 290.0
+texture_normal = ExtResource( "5" )
 
 [node name="Label" type="Label" parent="Pause/ButtonHolder/MainButtons/Options"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -1.0
 offset_bottom = -18.0
+theme_override_font_sizes/font_size = 60
 text = "Options"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MainMenu" type="TextureButton" parent="Pause/ButtonHolder/MainButtons"]
-offset_top = 460.0
+offset_top = 310.0
 offset_right = 384.0
-offset_bottom = 524.0
-rect_min_size = Vector2(384, 64)
-texture_normal = ExtResource( 5 )
+offset_bottom = 374.0
+texture_normal = ExtResource( "5" )
 
 [node name="Label" type="Label" parent="Pause/ButtonHolder/MainButtons/MainMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -1.0
 offset_bottom = -18.0
+theme_override_font_sizes/font_size = 60
 text = "Main Menu"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Exit" type="TextureButton" parent="Pause/ButtonHolder/MainButtons"]
-offset_top = 544.0
+offset_top = 394.0
 offset_right = 384.0
-offset_bottom = 608.0
-rect_min_size = Vector2(384, 64)
-texture_normal = ExtResource( 5 )
+offset_bottom = 458.0
+texture_normal = ExtResource( "5" )
 
 [node name="Label" type="Label" parent="Pause/ButtonHolder/MainButtons/Exit"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -1.0
 offset_bottom = -18.0
+theme_override_font_sizes/font_size = 60
 text = "Exit Game"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Options" parent="." instance=ExtResource( 3 )]
+[node name="Options" parent="." instance=ExtResource( "3" )]
 
 [connection signal="pressed" from="Pause/ButtonHolder/MainButtons/Resume" to="." method="_on_Resume_pressed"]
 [connection signal="pressed" from="Pause/ButtonHolder/MainButtons/Options" to="." method="_on_Options_pressed"]

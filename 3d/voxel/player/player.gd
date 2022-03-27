@@ -1,7 +1,5 @@
 extends CharacterBody3D
 
-var velocity = Vector3()
-
 var _mouse_motion = Vector2()
 var _selected_block = 6
 
@@ -9,6 +7,7 @@ var _selected_block = 6
 
 @onready var head = $Head
 @onready var raycast = $Head/RayCast3D
+@onready var camera_effects = $Head/Camera3D.effects
 @onready var selected_block_texture = $SelectedBlock
 @onready var voxel_world = $"../VoxelWorld"
 @onready var crosshair = $"../PauseMenu/Crosshair"
@@ -21,15 +20,15 @@ func _ready():
 func _process(_delta):
 	# Mouse movement.
 	_mouse_motion.y = clamp(_mouse_motion.y, -1550, 1550)
-	transform.basis = Basis(Vector3(0, _mouse_motion.x * -0.001, 0))
-	head.transform.basis = Basis(Vector3(_mouse_motion.y * -0.001, 0, 0))
+	transform.basis = Basis.from_euler(Vector3(0, _mouse_motion.x * -0.001, 0))
+	head.transform.basis = Basis.from_euler(Vector3(_mouse_motion.y * -0.001, 0, 0))
 
 	# Block selection.
-	var position = raycast.get_collision_point()
-	var normal = raycast.get_collision_normal()
+	var ray_position = raycast.get_collision_point()
+	var ray_normal = raycast.get_collision_normal()
 	if Input.is_action_just_pressed("pick_block"):
 		# Block picking.
-		var block_global_position = (position - normal / 2).floor()
+		var block_global_position = Vector3i((ray_position - ray_normal / 2).floor())
 		_selected_block = voxel_world.get_block_global_position(block_global_position)
 	else:
 		# Block prev/next keys.
@@ -51,14 +50,17 @@ func _process(_delta):
 			return
 
 		if breaking:
-			var block_global_position = (position - normal / 2).floor()
+			var block_global_position = Vector3i((ray_position - ray_normal / 2).floor())
 			voxel_world.set_block_global_position(block_global_position, 0)
 		elif placing:
-			var block_global_position = (position + normal / 2).floor()
+			var block_global_position = Vector3i((ray_position + ray_normal / 2).floor())
 			voxel_world.set_block_global_position(block_global_position, _selected_block)
 
 
 func _physics_process(delta):
+	camera_effects.dof_blur_far_enabled = Settings.fog_enabled
+	camera_effects.dof_blur_far_distance = Settings.fog_distance * 1.5
+	camera_effects.dof_blur_far_transition = Settings.fog_distance / 8
 	# Crouching.
 	var crouching = Input.is_action_pressed("crouch")
 	if crouching:
@@ -76,8 +78,8 @@ func _physics_process(delta):
 	velocity.y -= gravity * delta
 
 	#warning-ignore:return_value_discarded
-	# TODO: This information should be set to the CharacterBody properties instead of arguments.
-	move_and_slide(Vector3(movement.x, velocity.y, movement.z), Vector3.UP)
+	velocity = Vector3(movement.x, velocity.y, movement.z)
+	move_and_slide()
 
 	# Jumping, applied next frame.
 	if is_on_floor() and Input.is_action_pressed("jump"):
@@ -91,4 +93,4 @@ func _input(event):
 
 
 func chunk_pos():
-	return (transform.origin / Chunk.CHUNK_SIZE).floor()
+	return Vector3i((transform.origin / Chunk.CHUNK_SIZE).floor())
