@@ -1,152 +1,147 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://csdy1t6j24awl"]
 
-[ext_resource path="res://menu/main/title.png" type="Texture2D" id=1]
-[ext_resource path="res://menu/main/splash_text.gd" type="Script" id=2]
-[ext_resource path="res://menu/main/main_menu.gd" type="Script" id=3]
-[ext_resource path="res://menu/main/dark_dirt.png" type="Texture2D" id=4]
-[ext_resource path="res://menu/options/options.tscn" type="PackedScene" id=5]
-[ext_resource path="res://menu/theme/theme.tres" type="Theme" id=6]
-[ext_resource path="res://menu/button.png" type="Texture2D" id=7]
+[ext_resource type="Texture2D" uid="uid://c2eorasvxyf5u" path="res://menu/main/title.png" id="1"]
+[ext_resource type="Script" path="res://menu/main/splash_text.gd" id="2"]
+[ext_resource type="Script" path="res://menu/main/main_menu.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://c514noc8ngc4x" path="res://menu/main/dark_dirt.png" id="4"]
+[ext_resource type="PackedScene" uid="uid://e22n700qhxqr" path="res://menu/options/options.tscn" id="5"]
+[ext_resource type="Theme" path="res://menu/theme/theme.tres" id="6"]
+[ext_resource type="Texture2D" uid="uid://ej6lqf2fptv8" path="res://menu/button.png" id="7"]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 6 )
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme = ExtResource( "6" )
+script = ExtResource( "3" )
 
 [node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 4 )
-stretch_mode = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource( "4" )
+stretch_mode = 1
 
 [node name="TitleScreen" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Logo" type="CenterContainer" parent="TitleScreen"]
-offset_right = 1600.0
-offset_bottom = 300.0
-rect_min_size = Vector2(0, 300)
+texture_repeat = 2
+minimum_size = Vector2(0, 240)
+offset_right = 1024.0
+offset_bottom = 240.0
 
 [node name="Logo" type="TextureRect" parent="TitleScreen/Logo"]
-offset_left = 432.0
-offset_top = 110.0
-offset_right = 1168.0
-offset_bottom = 190.0
-texture = ExtResource( 1 )
+offset_left = 144.0
+offset_top = 80.0
+offset_right = 880.0
+offset_bottom = 160.0
+texture = ExtResource( "1" )
 
 [node name="SplashHolder" type="Control" parent="TitleScreen/Logo/Logo"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_left = -36.0
+offset_right = -36.0
+script = ExtResource( "2" )
 
 [node name="SplashText" type="Label" parent="TitleScreen/Logo/Logo/SplashHolder"]
 modulate = Color(1, 1, 0, 1)
+texture_filter = 1
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -110.0
-offset_top = 10.0
-offset_right = -110.0
-offset_bottom = 12.0
-rect_rotation = -20.0
+offset_left = -120.0
+offset_right = 124.0
+offset_bottom = 52.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = -0.261799
+theme_override_font_sizes/font_size = 61
 text = "Made in Godot!"
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_layout_mode": 1,
+"_edit_use_anchors_": false,
+"_edit_use_custom_anchors": false
 }
 
 [node name="ButtonHolder" type="HBoxContainer" parent="TitleScreen"]
-offset_top = 304.0
-offset_right = 1600.0
-offset_bottom = 680.0
+offset_top = 244.0
+offset_right = 1024.0
+offset_bottom = 476.0
 size_flags_vertical = 3
 alignment = 1
 
 [node name="MainButtons" type="VBoxContainer" parent="TitleScreen/ButtonHolder"]
-offset_left = 608.0
-offset_right = 992.0
-offset_bottom = 376.0
-custom_constants/separation = 20
+offset_left = 320.0
+offset_right = 704.0
+offset_bottom = 232.0
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="Start" type="TextureButton" parent="TitleScreen/ButtonHolder/MainButtons"]
-offset_top = 72.0
 offset_right = 384.0
-offset_bottom = 136.0
-rect_min_size = Vector2(384, 64)
-texture_normal = ExtResource( 7 )
+offset_bottom = 64.0
+texture_normal = ExtResource( "7" )
 
 [node name="Label" type="Label" parent="TitleScreen/ButtonHolder/MainButtons/Start"]
+texture_filter = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -1.0
 offset_bottom = -18.0
+theme_override_font_sizes/font_size = 60
 text = "Start Game"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Options" type="TextureButton" parent="TitleScreen/ButtonHolder/MainButtons"]
-offset_top = 156.0
+offset_top = 84.0
 offset_right = 384.0
-offset_bottom = 220.0
-rect_min_size = Vector2(384, 64)
-texture_normal = ExtResource( 7 )
+offset_bottom = 148.0
+texture_normal = ExtResource( "7" )
 
 [node name="Label" type="Label" parent="TitleScreen/ButtonHolder/MainButtons/Options"]
+texture_filter = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -1.0
 offset_bottom = -18.0
+theme_override_font_sizes/font_size = 60
 text = "Options"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Exit" type="TextureButton" parent="TitleScreen/ButtonHolder/MainButtons"]
-offset_top = 240.0
+offset_top = 168.0
 offset_right = 384.0
-offset_bottom = 304.0
-rect_min_size = Vector2(384, 64)
-texture_normal = ExtResource( 7 )
+offset_bottom = 232.0
+texture_normal = ExtResource( "7" )
 
 [node name="Label" type="Label" parent="TitleScreen/ButtonHolder/MainButtons/Exit"]
+texture_filter = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -1.0
 offset_bottom = -18.0
+theme_override_font_sizes/font_size = 60
 text = "Exit Game"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Spacer" type="Control" parent="TitleScreen"]
-offset_top = 684.0
-offset_right = 1600.0
-offset_bottom = 900.0
-rect_min_size = Vector2(0, 216)
+minimum_size = Vector2(0, 120)
+offset_top = 480.0
+offset_right = 1024.0
+offset_bottom = 600.0
 
 [node name="StartGame" type="HBoxContainer" parent="."]
 visible = false
@@ -158,76 +153,75 @@ __meta__ = {
 }
 
 [node name="StartButtons" type="VBoxContainer" parent="StartGame"]
-offset_left = 608.0
-offset_right = 992.0
-offset_bottom = 900.0
-custom_constants/separation = 20
+offset_left = 320.0
+offset_right = 704.0
+offset_bottom = 600.0
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="Spacer" type="Control" parent="StartGame/StartButtons"]
-offset_top = 292.0
+offset_top = 198.0
 offset_right = 384.0
-offset_bottom = 356.0
-rect_min_size = Vector2(0, 64)
+offset_bottom = 198.0
 
 [node name="RandomBlocks" type="TextureButton" parent="StartGame/StartButtons"]
-offset_top = 376.0
+offset_top = 202.0
 offset_right = 384.0
-offset_bottom = 440.0
-rect_min_size = Vector2(384, 64)
-texture_normal = ExtResource( 7 )
+offset_bottom = 266.0
+texture_normal = ExtResource( "7" )
 
 [node name="Label" type="Label" parent="StartGame/StartButtons/RandomBlocks"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -1.0
 offset_bottom = -18.0
+theme_override_font_sizes/font_size = 60
 text = "Random Blocks"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="FlatGrass" type="TextureButton" parent="StartGame/StartButtons"]
-offset_top = 460.0
+offset_top = 270.0
 offset_right = 384.0
-offset_bottom = 524.0
-rect_min_size = Vector2(384, 64)
-texture_normal = ExtResource( 7 )
+offset_bottom = 334.0
+texture_normal = ExtResource( "7" )
 
 [node name="Label" type="Label" parent="StartGame/StartButtons/FlatGrass"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -1.0
 offset_bottom = -18.0
+theme_override_font_sizes/font_size = 60
 text = "Flat Grass"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="BackToTitle" type="TextureButton" parent="StartGame/StartButtons"]
-offset_top = 544.0
+offset_top = 338.0
 offset_right = 384.0
-offset_bottom = 608.0
-rect_min_size = Vector2(384, 64)
-texture_normal = ExtResource( 7 )
+offset_bottom = 402.0
+texture_normal = ExtResource( "7" )
 
 [node name="Label" type="Label" parent="StartGame/StartButtons/BackToTitle"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -1.0
 offset_bottom = -18.0
+theme_override_font_sizes/font_size = 60
 text = "Back"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Options" parent="." instance=ExtResource( 5 )]
+[node name="Options" parent="." instance=ExtResource( "5" )]
 
 [connection signal="pressed" from="TitleScreen/ButtonHolder/MainButtons/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="TitleScreen/ButtonHolder/MainButtons/Options" to="." method="_on_Options_pressed"]
