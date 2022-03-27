@@ -6,7 +6,7 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
@@ -15,18 +15,19 @@ config/description="This is an example showing how one can record audio from
 the microphone and later play it back or save it to a file."
 run/main_scene="res://MicRecord.tscn"
 config/icon="res://icon.png"
+config/features=PackedStringArray("4.0")
 
 [audio]
 
+driver/enable_input=true
 enable_audio_input=true
 
 [display]
 
-window/size/width=640
-window/size/height=480
-window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
+window/size/width=640
+window/size/height=480
 
 [rendering]
 
