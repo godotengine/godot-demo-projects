@@ -1,29 +1,19 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://deqpan4silm2n"]
 
-[ext_resource path="res://waypoint.gd" type="Script" id=1]
-[ext_resource path="res://waypoint.svg" type="Texture2D" id=2]
-[ext_resource path="res://noto_sans_regular.ttf" type="FontData" id=3]
-
-[sub_resource type="Font" id=1]
-font_data = ExtResource( 3 )
+[ext_resource type="Script" path="res://waypoint.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cgow8dqpnhb4h" path="res://waypoint.svg" id="2"]
 
 [node name="Waypoint" type="Control"]
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource( "1" )
 
 [node name="Label" type="Label" parent="."]
 offset_left = -200.0
 offset_top = -40.0
 offset_right = 200.0
 offset_bottom = -17.0
-custom_colors/font_color_shadow = Color(0, 0, 0, 0.501961)
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 1
-custom_fonts/font = SubResource( 1 )
 text = "Waypoint"
-align = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -31,11 +21,12 @@ __meta__ = {
 [node name="Marker" type="TextureRect" parent="."]
 offset_left = -8.0
 offset_top = -16.0
-offset_right = 120.0
-offset_bottom = 112.0
-rect_scale = Vector2(0.125, 0.125)
-texture = ExtResource( 2 )
+offset_right = 8.0
+texture = ExtResource( "2" )
+ignore_texture_size = true
 __meta__ = {
+"_edit_layout_mode": 0,
 "_edit_use_anchors_": false,
+"_edit_use_custom_anchors": false,
 "_editor_description_": "An high-resolution texture is used and scaled down so the demo looks good at higher resolutions."
 }

@@ -10,21 +10,68 @@ const CHAIN_MAX_ITER = 10
 
 @export var skeleton_path: NodePath:
 	set(value):
-		# TODO: Manually copy the code from this method.
-		_set_skeleton_path(value)
+		skeleton_path = value
+		# Because get_node doesn't work in the first call, we just want to assign instead
+		if first_call:
+			return
+
+		if skeleton_path == null:
+			if debug_messages:
+				printerr(name, " - IK_FABRIK: No Nodepath selected for skeleton_path!")
+			return
+
+		var temp = get_node(skeleton_path)
+		if temp != null:
+			# If it has the method "get_bone_global_pose" it is likely a Skeleton3D
+			if temp.has_method("get_bone_global_pose"):
+				skeleton = temp
+				bone_IDs = {}
+
+				# (Delete all of the old bone nodes and) Make all of the bone nodes for each bone in the IK chain
+				_make_bone_nodes()
+
+				if debug_messages:
+					printerr(name, " - IK_FABRIK: Attached to a new skeleton")
+			# If not, then it's (likely) not a Skeleton3D node
+			else:
+				skeleton = null
+				if debug_messages:
+					printerr(name, " - IK_FABRIK: skeleton_path does not point to a skeleton!")
+		else:
+			if debug_messages:
+				printerr(name, " - IK_FABRIK: No Nodepath selected for skeleton_path!")
+
+
 @export var bones_in_chain: PackedStringArray:
 	set(value):
-		# TODO: Manually copy the code from this method.
-		_set_bone_chain_bones(value)
+		bones_in_chain = value
+		_make_bone_nodes()
+
+
 @export var bones_in_chain_lengths: PackedFloat32Array:
 	set(value):
-		# TODO: Manually copy the code from this method.
-		_set_bone_chain_lengths(value)
+		bones_in_chain_lengths = value
+		total_length = INF
 
-@export var update_mode: int, "_process", "_physics_process", "_notification", "none" = 0:
+
+@export_enum("_process", "_physics_process", "_notification", "none") var update_mode: int = 0:
 	set(value):
-		# TODO: Manually copy the code from this method.
-		_set_update_mode(value)
+		update_mode = value
+
+		set_process(false)
+		set_physics_process(false)
+		set_notify_transform(false)
+
+		if update_mode == 0:
+			set_process(true)
+		elif update_mode == 1:
+			set_process(true)
+		elif update_mode == 2:
+			set_notify_transform(true)
+		else:
+			if debug_messages:
+				printerr(name, " - IK_FABRIK: Unknown update mode. NOT updating skeleton")
+			return
 
 var target: Node3D = null
 
@@ -101,7 +148,7 @@ func _ready():
 	_make_bone_nodes()
 
 	# Make sure we're using the right update mode
-	_set_update_mode(update_mode)
+	update_mode = update_mode
 
 
 # Various upate methods
@@ -129,11 +176,11 @@ func _notification(what):
 func update_skeleton():
 	#### ERROR CHECKING conditions
 	if first_call:
-		_set_skeleton_path(skeleton_path)
+		skeleton_path = skeleton_path
 		first_call = false
 
 		if skeleton == null:
-			_set_skeleton_path(skeleton_path)
+			skeleton_path = skeleton_path
 
 		return
 
@@ -385,63 +432,6 @@ func _make_editor_sphere_at_node(node, color):
 	indicator_mesh.material = indicator_material
 	indicator.mesh = indicator_mesh
 
-
-############# SETGET FUNCTIONS #############
-
-func _set_update_mode(new_value):
-	update_mode = new_value
-
-	set_process(false)
-	set_physics_process(false)
-	set_notify_transform(false)
-
-	if update_mode == 0:
-		set_process(true)
-	elif update_mode == 1:
-		set_process(true)
-	elif update_mode == 2:
-		set_notify_transform(true)
-	else:
-		if debug_messages:
-			printerr(name, " - IK_FABRIK: Unknown update mode. NOT updating skeleton")
-		return
-
-
-func _set_skeleton_path(new_value):
-	# Because get_node doesn't work in the first call, we just want to assign instead
-	if first_call:
-		skeleton_path = new_value
-		return
-
-	skeleton_path = new_value
-
-	if skeleton_path == null:
-		if debug_messages:
-			printerr(name, " - IK_FABRIK: No Nodepath selected for skeleton_path!")
-		return
-
-	var temp = get_node(skeleton_path)
-	if temp != null:
-		# If it has the method "get_bone_global_pose" it is likely a Skeleton3D
-		if temp.has_method("get_bone_global_pose"):
-			skeleton = temp
-			bone_IDs = {}
-
-			# (Delete all of the old bone nodes and) Make all of the bone nodes for each bone in the IK chain
-			_make_bone_nodes()
-
-			if debug_messages:
-				printerr(name, " - IK_FABRIK: Attached to a new skeleton")
-		# If not, then it's (likely) not a Skeleton3D node
-		else:
-			skeleton = null
-			if debug_messages:
-				printerr(name, " - IK_FABRIK: skeleton_path does not point to a skeleton!")
-	else:
-		if debug_messages:
-			printerr(name, " - IK_FABRIK: No Nodepath selected for skeleton_path!")
-
-
 ############# OTHER (NON IK SOLVER RELATED) FUNCTIONS #############
 
 func _make_bone_nodes():
@@ -469,14 +459,3 @@ func _make_bone_nodes():
 		# If we are in the editor, we want to make a sphere at this node
 		if Engine.editor_hint:
 			_make_editor_sphere_at_node(bone_nodes[bone], Color(0.65, 0, 1, 1))
-
-
-func _set_bone_chain_bones(new_value):
-	bones_in_chain = new_value
-
-	_make_bone_nodes()
-
-
-func _set_bone_chain_lengths(new_value):
-	bones_in_chain_lengths = new_value
-	total_length = INF

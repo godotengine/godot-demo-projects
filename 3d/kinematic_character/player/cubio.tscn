@@ -1,25 +1,25 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://c1j6vfe3s2bq8"]
 
-[ext_resource path="res://player/cubio.gd" type="Script" id=1]
-[ext_resource path="res://models/cube.mesh" type="ArrayMesh" id=2]
-[ext_resource path="res://player/follow_camera.gd" type="Script" id=3]
-[ext_resource path="res://models/white_cube_material.tres" type="Material" id=4]
+[ext_resource type="Script" path="res://player/cubio.gd" id="1"]
+[ext_resource type="ArrayMesh" uid="uid://ba7dqpj07mlsy" path="res://models/cube.mesh" id="2"]
+[ext_resource type="Script" path="res://player/follow_camera.gd" id="3"]
+[ext_resource type="Material" path="res://models/white_cube_material.tres" id="4"]
 
-[sub_resource type="BoxShape3D" id=1]
+[sub_resource type="BoxShape3D" id="1"]
 margin = 0.001
-extents = Vector3(0.45, 0.45, 0.45)
+size = Vector3(0.9, 0.9, 0.9)
 
 [node name="Cubio" type="CharacterBody3D"]
-script = ExtResource( 1 )
+script = ExtResource( "1" )
 
 [node name="BoxMesh" type="MeshInstance3D" parent="."]
 _import_path = NodePath("cube-col")
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
-mesh = ExtResource( 2 )
-surface_material_override/0 = ExtResource( 4 )
+mesh = ExtResource( "2" )
+surface_material_override/0 = ExtResource( "4" )
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( "1" )
 
 [node name="Target" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
@@ -29,7 +29,7 @@ transform = Transform3D(0.34202, -0.321394, 0.883022, 0, 0.939693, 0.34202, -0.9
 fov = 74.0
 near = 0.1
 far = 50.0
-script = ExtResource( 3 )
+script = ExtResource( "3" )
 
 [node name="WinText" type="CenterContainer" parent="."]
 visible = false
@@ -44,8 +44,13 @@ offset_bottom = 50.0
 
 [node name="TextLabel" type="Label" parent="WinText/Holder"]
 offset_left = -354.0
-offset_bottom = 14.0
-rect_scale = Vector2(2, 2)
+offset_right = 354.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 20
 text = "Thank You, Cubio! But the Princess is in Another Demo!"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+__meta__ = {
+"_edit_layout_mode": 0,
+"_edit_use_custom_anchors": false
+}
