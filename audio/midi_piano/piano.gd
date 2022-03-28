@@ -51,7 +51,7 @@ func _add_placeholder_key(container):
 	var placeholder = Control.new()
 	placeholder.size_flags_horizontal = SIZE_EXPAND_FILL
 	placeholder.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	placeholder.name = "Placeholder"
+	placeholder.name = &"Placeholder"
 	container.add_child(placeholder)
 
 

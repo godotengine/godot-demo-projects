@@ -26,15 +26,15 @@ func _process(_delta):
 	# Block selection.
 	var ray_position = raycast.get_collision_point()
 	var ray_normal = raycast.get_collision_normal()
-	if Input.is_action_just_pressed("pick_block"):
+	if Input.is_action_just_pressed(&"pick_block"):
 		# Block picking.
 		var block_global_position = Vector3i((ray_position - ray_normal / 2).floor())
 		_selected_block = voxel_world.get_block_global_position(block_global_position)
 	else:
 		# Block prev/next keys.
-		if Input.is_action_just_pressed("prev_block"):
+		if Input.is_action_just_pressed(&"prev_block"):
 			_selected_block -= 1
-		if Input.is_action_just_pressed("next_block"):
+		if Input.is_action_just_pressed(&"next_block"):
 			_selected_block += 1
 		_selected_block = wrapi(_selected_block, 1, 30)
 	# Set the appropriate texture.
@@ -43,8 +43,8 @@ func _process(_delta):
 
 	# Block breaking/placing.
 	if crosshair.visible and raycast.is_colliding():
-		var breaking = Input.is_action_just_pressed("break")
-		var placing = Input.is_action_just_pressed("place")
+		var breaking = Input.is_action_just_pressed(&"break")
+		var placing = Input.is_action_just_pressed(&"place")
 		# Either both buttons were pressed or neither are, so stop.
 		if breaking == placing:
 			return
@@ -62,7 +62,7 @@ func _physics_process(delta):
 	camera_effects.dof_blur_far_distance = Settings.fog_distance * 1.5
 	camera_effects.dof_blur_far_transition = Settings.fog_distance / 8
 	# Crouching.
-	var crouching = Input.is_action_pressed("crouch")
+	var crouching = Input.is_action_pressed(&"crouch")
 	if crouching:
 		head.transform.origin = Vector3(0, 1.2, 0)
 	else:
@@ -82,7 +82,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 	# Jumping, applied next frame.
-	if is_on_floor() and Input.is_action_pressed("jump"):
+	if is_on_floor() and Input.is_action_pressed(&"jump"):
 		velocity.y = 5
 
 

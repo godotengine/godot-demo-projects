@@ -142,7 +142,7 @@ func _setup_for_editor():
 	# add it as a child of this node, and name it.
 	_editor_indicator = MeshInstance3D.new()
 	add_child(_editor_indicator)
-	_editor_indicator.name = "(EditorOnly) Visual indicator"
+	_editor_indicator.name = &"(EditorOnly) Visual indicator"
 
 	# Make a sphere mesh for the MeshInstance3D
 	var indicator_mesh = SphereMesh.new()

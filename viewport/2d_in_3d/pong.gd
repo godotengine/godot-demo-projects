@@ -50,18 +50,18 @@ func _process(delta):
 	# Move left pad.
 	var left_pos = left_paddle.get_position()
 
-	if left_pos.y > 0 and Input.is_action_pressed("left_move_up"):
+	if left_pos.y > 0 and Input.is_action_pressed(&"left_move_up"):
 		left_pos.y += -PAD_SPEED * delta
-	if left_pos.y < screen_size.y and Input.is_action_pressed("left_move_down"):
+	if left_pos.y < screen_size.y and Input.is_action_pressed(&"left_move_down"):
 		left_pos.y += PAD_SPEED * delta
 
 	left_paddle.set_position(left_pos)
 
 	# Move right pad.
 	var right_pos = right_paddle.get_position()
-	if right_pos.y > 0 and Input.is_action_pressed("right_move_up"):
+	if right_pos.y > 0 and Input.is_action_pressed(&"right_move_up"):
 		right_pos.y += -PAD_SPEED * delta
-	if right_pos.y < screen_size.y and Input.is_action_pressed("right_move_down"):
+	if right_pos.y < screen_size.y and Input.is_action_pressed(&"right_move_down"):
 		right_pos.y += PAD_SPEED * delta
 
 	right_paddle.set_position(right_pos)

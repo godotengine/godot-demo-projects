@@ -49,8 +49,8 @@ func _physics_process(delta):
 	dir.y = 0
 	dir = dir.normalized()
 
-	var jump_attempt = Input.is_action_pressed("jump")
-	var shoot_attempt = Input.is_action_pressed("shoot")
+	var jump_attempt = Input.is_action_pressed(&"jump")
+	var shoot_attempt = Input.is_action_pressed(&"shoot")
 
 	if is_on_floor():
 		var sharp_turn = hspeed > 0.1 and rad2deg(acos(dir.dot(hdir))) > SHARP_TURN_THRESHOLD

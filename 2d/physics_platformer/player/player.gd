@@ -1,5 +1,5 @@
 class_name Player
-extends RigidBody2D
+extends RigidDynamicBody2D
 
 # Character Demo, written by Juan Linietsky.
 #
@@ -62,11 +62,11 @@ func _integrate_forces(s):
 	var new_siding_left = siding_left
 
 	# Get player input.
-	var move_left = Input.is_action_pressed("move_left")
-	var move_right = Input.is_action_pressed("move_right")
-	var jump = Input.is_action_pressed("jump")
-	var shoot = Input.is_action_pressed("shoot")
-	var spawn = Input.is_action_pressed("spawn")
+	var move_left = Input.is_action_pressed(&"move_left")
+	var move_right = Input.is_action_pressed(&"move_right")
+	var jump = Input.is_action_pressed(&"jump")
+	var shoot = Input.is_action_pressed(&"shoot")
+	var spawn = Input.is_action_pressed(&"spawn")
 
 	if spawn:
 		call_deferred("_spawn_enemy_above")

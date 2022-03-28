@@ -1,4 +1,4 @@
-extends RigidBody3D
+extends RigidDynamicBody3D
 
 const ACCEL = 5.0
 const DEACCEL = 20.0

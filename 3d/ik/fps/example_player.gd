@@ -87,7 +87,7 @@ func process_input(delta):
 	if Input.is_key_pressed(KEY_RIGHT) or Input.is_key_pressed(KEY_D):
 		dir += cam_xform.basis[0]
 
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed(&"ui_cancel"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		else:

@@ -91,7 +91,7 @@ func _ready():
 		_target_area.connect(&"body_entered", Callable(self, "_on_target_entered"))
 		$Timer.connect(&"timeout", Callable(self, "_on_timeout"))
 
-		_rigid_body_template = $RigidBody2D
+		_rigid_body_template = $RigidDynamicBody2D
 		remove_child(_rigid_body_template)
 
 		_character_body_template = $CharacterBody2D
@@ -105,7 +105,7 @@ func _ready():
 
 func _process(_delta):
 	if not Engine.is_editor_hint():
-		if Input.is_action_just_pressed("ui_accept"):
+		if Input.is_action_just_pressed(&"ui_accept"):
 			await _reset_test(false)
 
 
@@ -190,7 +190,7 @@ func _update_rigidbody_angle(value, reset = true):
 	_body_angle = value
 	if is_inside_tree():
 		if Engine.is_editor_hint():
-			$RigidBody2D.rotation = deg2rad(value)
+			$RigidDynamicBody2D.rotation = deg2rad(value)
 			$CharacterBody2D.rotation = deg2rad(value)
 		else:
 			if _moving_body:

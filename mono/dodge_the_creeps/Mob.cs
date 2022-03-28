@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class Mob : RigidBody2D
+public partial class Mob : RigidDynamicBody2D
 {
     public override void _Ready()
     {

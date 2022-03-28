@@ -1,5 +1,5 @@
 class_name Bullet
-extends RigidBody2D
+extends RigidDynamicBody2D
 
 
 @onready var animation_player = $AnimationPlayer

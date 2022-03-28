@@ -61,7 +61,7 @@ func _ready():
 		var enabled = _body_type == E_BodyType.CHARACTER_BODY_RAY
 		options.add_menu_item(OPTION_OBJECT_TYPE_CHARACTER_RAY, true, enabled, true)
 
-	_rigid_body_template = find_node("RigidBody2D")
+	_rigid_body_template = find_node("RigidDynamicBody2D")
 	if _rigid_body_template:
 		_body_parent = _rigid_body_template.get_parent()
 		_body_parent.remove_child(_rigid_body_template)

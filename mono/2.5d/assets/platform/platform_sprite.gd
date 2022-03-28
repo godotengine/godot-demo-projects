@@ -10,17 +10,17 @@ extends Sprite2D
 
 func _process(_delta):
 	if not Engine.editor_hint:
-		if Input.is_action_pressed("forty_five_mode"):
+		if Input.is_action_pressed(&"forty_five_mode"):
 			set_view_mode(0)
-		elif Input.is_action_pressed("isometric_mode"):
+		elif Input.is_action_pressed(&"isometric_mode"):
 			set_view_mode(1)
-		elif Input.is_action_pressed("top_down_mode"):
+		elif Input.is_action_pressed(&"top_down_mode"):
 			set_view_mode(2)
-		elif Input.is_action_pressed("front_side_mode"):
+		elif Input.is_action_pressed(&"front_side_mode"):
 			set_view_mode(3)
-		elif Input.is_action_pressed("oblique_y_mode"):
+		elif Input.is_action_pressed(&"oblique_y_mode"):
 			set_view_mode(4)
-		elif Input.is_action_pressed("oblique_z_mode"):
+		elif Input.is_action_pressed(&"oblique_z_mode"):
 			set_view_mode(5)
 
 

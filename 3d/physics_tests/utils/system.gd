@@ -28,13 +28,13 @@ func _enter_tree():
 
 
 func _process(_delta):
-	if Input.is_action_just_pressed("toggle_full_screen"):
+	if Input.is_action_just_pressed(&"toggle_full_screen"):
 		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		else:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
-	if Input.is_action_just_pressed("toggle_debug_collision"):
+	if Input.is_action_just_pressed(&"toggle_debug_collision"):
 		var debug_collision_enabled = not _is_debug_collision_enabled()
 		_set_debug_collision_enabled(debug_collision_enabled)
 		if debug_collision_enabled:
@@ -42,10 +42,10 @@ func _process(_delta):
 		else:
 			Log.print_log("Debug Collision OFF")
 
-	if Input.is_action_just_pressed("toggle_pause"):
+	if Input.is_action_just_pressed(&"toggle_pause"):
 		get_tree().paused = not get_tree().paused
 
-	if Input.is_action_just_pressed("exit"):
+	if Input.is_action_just_pressed(&"exit"):
 		get_tree().quit()
 
 

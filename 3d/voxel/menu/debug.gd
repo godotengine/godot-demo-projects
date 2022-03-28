@@ -6,7 +6,7 @@ extends Label
 
 
 func _process(_delta):
-	if Input.is_action_just_pressed("debug"):
+	if Input.is_action_just_pressed(&"debug"):
 		visible = not visible
 
 	text = "Position: " + _vector_to_string_appropriate_digits(player.transform.origin)

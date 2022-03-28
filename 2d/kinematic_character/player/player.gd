@@ -30,5 +30,5 @@ func _physics_process(delta):
 	move_and_slide()
 
 	# Check for jumping. is_on_floor() must be called after movement code.
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
+	if is_on_floor() and Input.is_action_just_pressed(&"jump"):
 		velocity.y = -JUMP_SPEED

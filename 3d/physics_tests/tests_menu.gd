@@ -17,7 +17,7 @@ func _ready():
 
 
 func _process(_delta):
-	if Input.is_action_just_pressed("restart_test"):
+	if Input.is_action_just_pressed(&"restart_test"):
 		if _current_test:
 			_start_test(_current_test)
 
