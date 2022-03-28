@@ -205,19 +205,19 @@ position = Vector2(512, 300)
 shape = SubResource( "2" )
 one_way_collision = true
 
-[node name="RigidBody2D" type="RigidDynamicBody2D" parent="."]
+[node name="RigidDynamicBody2D" type="RigidDynamicBody2D" parent="."]
 position = Vector2(300, 300)
 collision_mask = 2147483649
 gravity_scale = 0.0
 contacts_reported = 1
 contact_monitor = true
 
-[node name="Sprite" type="Sprite2D" parent="RigidBody2D"]
+[node name="Sprite" type="Sprite2D" parent="RigidDynamicBody2D"]
 self_modulate = Color(1, 1, 1, 0.501961)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource( "2" )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidDynamicBody2D"]
 shape = SubResource( "3" )
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]

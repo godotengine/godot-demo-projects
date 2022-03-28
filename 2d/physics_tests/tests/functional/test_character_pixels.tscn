@@ -74,7 +74,7 @@ shape = SubResource( "RectangleShape2D_scs3g" )
 position = Vector2(0, -2)
 shape = SubResource( "SeparationRayShape2D_vby12" )
 
-[node name="RigidBody2D" type="RigidDynamicBody2D" parent="ViewportContainer/Viewport"]
+[node name="RigidDynamicBody2D" type="RigidDynamicBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2(30, 40)
 collision_mask = 2147483649
 physics_material_override = SubResource( "1" )
@@ -83,7 +83,7 @@ contact_monitor = true
 lock_rotation = true
 script = ExtResource( "2" )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/RigidDynamicBody2D"]
 shape = SubResource( "2" )
 
 [node name="RigidBodyRay2D" type="RigidDynamicBody2D" parent="ViewportContainer/Viewport"]

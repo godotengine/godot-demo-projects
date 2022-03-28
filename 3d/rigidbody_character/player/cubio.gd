@@ -1,4 +1,4 @@
-extends RigidBody3D
+extends RigidDynamicBody3D
 
 @onready var raycast = $RayCast3D
 @onready var camera = $Target/Camera3D

@@ -1,11 +1,11 @@
 # Physics Platformer
 
-This demo uses [`RigidBody2D`](https://docs.godotengine.org/en/latest/classes/class_rigidbody2d.html)
+This demo uses [`RigidDynamicBody2D`](https://docs.godotengine.org/en/latest/classes/class_rigiddynamicbody2d.html)
 for the player and enemies.
 These character controllers are more powerful than
 [`KinematicBody2D`](https://docs.godotengine.org/en/latest/classes/class_kinematicbody2d.html),
 but can be more difficult to handle, as they require
-manual modification of the RigidBody velocity.
+manual modification of the RigidDynamicBody velocity.
 
 Language: GDScript
 
@@ -17,7 +17,7 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
 
 The player and enemies use dynamic character
 controllers for movement, made with
-[`RigidBody2D`](https://docs.godotengine.org/en/latest/classes/class_rigidbody2d.html),
+[`RigidDynamicBody2D`](https://docs.godotengine.org/en/latest/classes/class_rigiddynamicbody2d.html),
 which means that they can perfectly interact with physics
 (there is a see-saw, and you can even ride enemies).
 Because of this, all movement must be done in sync with

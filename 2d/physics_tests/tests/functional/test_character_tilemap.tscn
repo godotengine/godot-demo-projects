@@ -87,7 +87,7 @@ shape = SubResource( "RayShape2D_206f5" )
 position = Vector2(12, 8)
 shape = SubResource( "RayShape2D_206f5" )
 
-[node name="RigidBody2D" type="RigidDynamicBody2D" parent="."]
+[node name="RigidDynamicBody2D" type="RigidDynamicBody2D" parent="."]
 position = Vector2(250, 460)
 collision_mask = 2147483649
 physics_material_override = SubResource( "1" )
@@ -96,7 +96,7 @@ contact_monitor = true
 lock_rotation = true
 script = ExtResource( "6" )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidDynamicBody2D"]
 shape = SubResource( "2" )
 
 [node name="RigidBodyRay2D" type="RigidDynamicBody2D" parent="."]

@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends RigidDynamicBody2D
 
 func _ready():
 	$AnimatedSprite2D.playing = true

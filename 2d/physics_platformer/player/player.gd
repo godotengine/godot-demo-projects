@@ -1,5 +1,5 @@
 class_name Player
-extends RigidBody2D
+extends RigidDynamicBody2D
 
 # Character Demo, written by Juan Linietsky.
 #

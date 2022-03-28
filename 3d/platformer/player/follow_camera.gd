@@ -15,7 +15,7 @@ func _ready():
 	# Find collision exceptions for ray.
 	var node = self
 	while node:
-		if node is RigidBody3D:
+		if node is RigidDynamicBody3D:
 			collision_exception.append(node.get_rid())
 			break
 		else:

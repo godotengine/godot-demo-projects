@@ -1,5 +1,5 @@
 class_name Enemy
-extends RigidBody2D
+extends RigidDynamicBody2D
 
 const WALK_SPEED = 50
 

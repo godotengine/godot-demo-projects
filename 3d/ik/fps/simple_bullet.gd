@@ -1,4 +1,4 @@
-extends RigidBody3D
+extends RigidDynamicBody3D
 
 const DESPAWN_TIME = 5
 
