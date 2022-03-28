@@ -11,8 +11,10 @@ const MARGIN = 8
 # The waypoint's text.
 @export var text = "Waypoint":
 	set(value):
-		# TODO: Manually copy the code from this method.
-		set_text(value)
+		text = value
+		# The label's text can only be set once the node is ready.
+		if is_inside_tree():
+			label.text = value
 
 # If `true`, the waypoint sticks to the viewport's edges when moving off-screen.
 @export var sticky = true
@@ -45,7 +47,7 @@ func _process(_delta):
 	# `get_size_override()` will return a valid size only if the stretch mode is `2d`.
 	# Otherwise, the viewport size is used directly.
 	var viewport_base_size = (
-			get_viewport().get_size_override() if get_viewport().get_size_override() > Vector2(0, 0)
+			get_viewport().content_scale_size if get_viewport().content_scale_size > Vector2i(0, 0)
 			else get_viewport().size
 	)
 
@@ -83,38 +85,30 @@ func _process(_delta):
 	)
 
 	label.visible = true
-	rect_rotation = 0
+	rotation = 0
 	# Used to display a diagonal arrow when the waypoint is displayed in
 	# one of the screen corners.
 	var overflow = 0
 
 	if position.x <= MARGIN:
 		# Left overflow.
-		overflow = -45
+		overflow = -TAU / 8.0
 		label.visible = false
-		rect_rotation = 90
+		rotation = TAU / 4.0
 	elif position.x >= viewport_base_size.x - MARGIN:
 		# Right overflow.
-		overflow = 45
+		overflow = TAU / 8.0
 		label.visible = false
-		rect_rotation = 270
+		rotation = TAU * 3.0 / 4.0
 
 	if position.y <= MARGIN:
 		# Top overflow.
 		label.visible = false
-		rect_rotation = 180 + overflow
+		rotation = TAU / 2.0 + overflow
 	elif position.y >= viewport_base_size.y - MARGIN:
 		# Bottom overflow.
 		label.visible = false
-		rect_rotation = -overflow
-
-
-func set_text(p_text):
-	text = p_text
-
-	# The label's text can only be set once the node is ready.
-	if is_inside_tree():
-		label.text = p_text
+		rotation = -overflow
 
 
 static func angle_diff(from, to):

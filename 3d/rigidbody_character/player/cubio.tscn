@@ -1,35 +1,33 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://cbvuesb1ptdh4"]
 
-[ext_resource path="res://player/cubio.gd" type="Script" id=1]
-[ext_resource path="res://player/follow_camera.gd" type="Script" id=3]
-[ext_resource path="res://models/white_cube_material.tres" type="Material" id=4]
+[ext_resource type="Script" path="res://player/cubio.gd" id="1"]
+[ext_resource type="Script" path="res://player/follow_camera.gd" id="3"]
+[ext_resource type="Material" path="res://models/white_cube_material.tres" id="4"]
 
-[sub_resource type="CapsuleMesh" id=6]
-radius = 0.5
-mid_height = 0.7
+[sub_resource type="CapsuleMesh" id="6"]
+height = 1.7
 
-[sub_resource type="CapsuleShape3D" id=5]
-radius = 0.5
-height = 0.7
+[sub_resource type="CapsuleShape3D" id="5"]
+height = 1.7
 
 [node name="RigidDynamicBody3D" type="RigidDynamicBody3D"]
-can_sleep = false
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
+center_of_mass_mode = 1
+can_sleep = false
+linear_damp_mode = 1
 linear_damp = 0.5
-script = ExtResource( 1 )
+script = ExtResource( "1" )
 
 [node name="BoxMesh" type="MeshInstance3D" parent="."]
 _import_path = NodePath("cube-col")
-transform = Transform3D(0.9, 0, 0, 0, -3.93403e-08, -0.9, 0, 0.9, -3.93403e-08, 0, 0, 0)
-mesh = SubResource( 6 )
+mesh = SubResource( "6" )
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource( 4 )
+surface_material_override/0 = ExtResource( "4" )
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-shape = SubResource( 5 )
+shape = SubResource( "5" )
 
 [node name="Target" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
@@ -39,7 +37,7 @@ transform = Transform3D(0.34202, -0.321394, 0.883022, 0, 0.939693, 0.34202, -0.9
 fov = 74.0
 near = 0.1
 far = 50.0
-script = ExtResource( 3 )
+script = ExtResource( "3" )
 
 [node name="WinText" type="CenterContainer" parent="."]
 visible = false
@@ -54,11 +52,11 @@ offset_bottom = 50.0
 
 [node name="TextLabel" type="Label" parent="WinText/Holder"]
 offset_left = -354.0
-offset_bottom = 14.0
-rect_scale = Vector2(2, 2)
+offset_right = 354.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 20
 text = "Thank You, Cubio! But the Princess is in Another Demo!"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-enabled = true

@@ -8,7 +8,6 @@ const DECELERATION = 4
 @onready var camera = $Target/Camera3D
 @onready var gravity = -ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var start_position = position
-var velocity: Vector3
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed(&"exit"):
@@ -23,8 +22,8 @@ func _physics_process(delta):
 	# Get the camera's transform basis, but remove the X rotation such
 	# that the Y axis is up and Z is horizontal.
 	var cam_basis = camera.global_transform.basis
-	var basis = cam_basis.rotated(cam_basis.x, -cam_basis.get_euler().x)
-	dir = basis * (dir)
+	cam_basis = cam_basis.rotated(cam_basis.x, -cam_basis.get_euler().x)
+	dir = cam_basis * dir
 
 	# Limit the input to a length of 1. length_squared is faster to check.
 	if dir.length_squared() > 1:

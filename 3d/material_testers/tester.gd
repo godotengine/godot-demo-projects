@@ -10,7 +10,7 @@ var tester_index = 0
 var rot_x = -0.5 # This must be kept in sync with RotationX.
 var rot_y = -0.5 # This must be kept in sync with CameraHolder.
 var zoom = 5
-var base_height = ProjectSettings.get_setting("display/window/size/height")
+var base_height = ProjectSettings.get_setting("display/window/size/viewport_height")
 
 var backgrounds = [
 	{ path = "res://backgrounds/schelde.hdr", name = "Riverside"},
@@ -48,8 +48,8 @@ func _unhandled_input(ev):
 		rot_x -= relative_motion.y * ROT_SPEED
 		rot_y = clamp(rot_y, -1.6, 1.6)
 		rot_x = clamp(rot_x, -1.4, 0.5)
-		camera_holder.transform.basis = Basis(Vector3(0, rot_y, 0))
-		rotation_x.transform.basis = Basis(Vector3(rot_x, 0, 0))
+		camera_holder.transform.basis = Basis.from_euler(Vector3(0, rot_y, 0))
+		rotation_x.transform.basis = Basis.from_euler(Vector3(rot_x, 0, 0))
 
 
 func _process(delta):
@@ -72,4 +72,4 @@ func _on_Next_pressed():
 
 
 func _on_bg_item_selected(index):
-	get_node(^"WorldEnvironment").environment.background_sky.panorama = load(backgrounds[index].path)
+	get_node(^"WorldEnvironment").environment.sky.sky_material.panorama = load(backgrounds[index].path)

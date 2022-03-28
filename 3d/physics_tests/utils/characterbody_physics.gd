@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 
 @export var _stop_on_slopes = false
-@export var _use_snap = false
+@export var use_snap = false
 
 var _gravity = 20.0
 

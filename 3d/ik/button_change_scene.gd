@@ -1,6 +1,6 @@
 extends Button
 
-@export var scene_to_change_to: String, FILE = null
+@export_file var scene_to_change_to: String = null
 
 
 func _ready():
