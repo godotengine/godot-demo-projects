@@ -13,7 +13,7 @@ func _physics_process(delta):
 	steer_target = Input.get_axis(&"turn_right", &"turn_left")
 	steer_target *= STEER_LIMIT
 
-	if Input.is_action_pressed("accelerate"):
+	if Input.is_action_pressed(&"accelerate"):
 		# Increase engine force at low speeds to make the initial acceleration faster.
 		var speed = linear_velocity.length()
 		if speed < 5 and speed != 0:
@@ -23,7 +23,7 @@ func _physics_process(delta):
 	else:
 		engine_force = 0
 
-	if Input.is_action_pressed("reverse"):
+	if Input.is_action_pressed(&"reverse"):
 		# Increase engine force at low speeds to make the initial acceleration faster.
 		if fwd_mps >= -1:
 			var speed = linear_velocity.length()

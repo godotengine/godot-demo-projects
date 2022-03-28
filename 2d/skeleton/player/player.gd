@@ -33,7 +33,7 @@ func _physics_process(delta):
 		no_move_horizontal_time -= delta
 	else:
 		velocity.x = (Input.get_axis(&"move_left", &"move_right")) * speed.x
-		if Input.is_action_pressed("walk"):
+		if Input.is_action_pressed(&"walk"):
 			velocity.x *= 0.2
 	#warning-ignore:return_value_discarded
 	# TODO: This information should be set to the CharacterBody properties instead of arguments: , Vector2.UP
@@ -58,7 +58,7 @@ func _physics_process(delta):
 		elif falling_slow:
 			$AnimationTree["parameters/land/active"] = true
 			falling_slow = false
-		if Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed(&"jump"):
 			$AnimationTree["parameters/jump/active"] = true
 			velocity.y = -speed.y
 		if abs(velocity.x) > 50:

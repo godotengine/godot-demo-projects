@@ -27,12 +27,12 @@ func _physics_process(_delta):
 		_velocity.x = 0.0
 
 	# Handle horizontal controls.
-	if Input.is_action_pressed("character_left"):
+	if Input.is_action_pressed(&"character_left"):
 		if position.x > 0.0:
 			_velocity.x = -_motion_speed
 			_keep_velocity = false
 			_constant_velocity = Vector2.ZERO
-	elif Input.is_action_pressed("character_right"):
+	elif Input.is_action_pressed(&"character_right"):
 		if position.x < 1024.0:
 			_velocity.x = _motion_speed
 			_keep_velocity = false
@@ -40,7 +40,7 @@ func _physics_process(_delta):
 
 	# Handle jump controls and gravity.
 	if is_on_floor():
-		if not _jumping and Input.is_action_just_pressed("character_jump"):
+		if not _jumping and Input.is_action_just_pressed(&"character_jump"):
 			# Start jumping.
 			_jumping = true
 			_velocity.y = -_jump_force

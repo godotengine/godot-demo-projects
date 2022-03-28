@@ -24,16 +24,16 @@ func _ready():
 
 
 func _process(delta):
-	if Input.is_action_pressed("exit"):
+	if Input.is_action_pressed(&"exit"):
 		get_tree().quit()
 
-	if Input.is_action_just_pressed("view_cube_demo"):
+	if Input.is_action_just_pressed(&"view_cube_demo"):
 		# warning-ignore:return_value_discarded
 		get_tree().change_scene("res://assets/demo_scene.tscn")
 		return
 
 	if _is_parent_ready:
-		if Input.is_action_just_pressed("reset_position"):
+		if Input.is_action_just_pressed(&"reset_position"):
 			transform = Transform3D.IDENTITY
 		else:
 			rotate_x(delta * (Input.get_axis(&"move_forward", &"move_back")))

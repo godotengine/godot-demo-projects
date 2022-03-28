@@ -68,15 +68,15 @@ func _unhandled_input(event):
 		mousepos = event.position
 
 	if event is InputEventKey:
-		if Input.is_action_pressed("mouse_mode_visible"):
+		if Input.is_action_pressed(&"mouse_mode_visible"):
 			observer.state = observer.STATE_MENU
 			_on_Button_MouseModeVisible_pressed()
 
-		if Input.is_action_pressed("mouse_mode_hidden"):
+		if Input.is_action_pressed(&"mouse_mode_hidden"):
 			observer.state = observer.STATE_MENU
 			_on_Button_MouseModeHidden_pressed()
 
-		if Input.is_action_pressed("mouse_mode_captured"):
+		if Input.is_action_pressed(&"mouse_mode_captured"):
 			_on_Button_MouseModeCaptured_pressed()
 
 

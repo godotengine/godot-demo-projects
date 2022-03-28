@@ -11,9 +11,9 @@ const DECELERATION = 4
 var velocity: Vector3
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("exit"):
+	if Input.is_action_just_pressed(&"exit"):
 		get_tree().quit()
-	if Input.is_action_just_pressed("reset_position"):
+	if Input.is_action_just_pressed(&"reset_position"):
 		position = start_position
 
 	var dir = Vector3()
@@ -55,7 +55,7 @@ func _physics_process(delta):
 
 	# TODO: This information should be set to the CharacterBody properties instead of arguments.
 	# Jumping code. is_on_floor() must come after move_and_slide().
-	if is_on_floor() and Input.is_action_pressed("jump"):
+	if is_on_floor() and Input.is_action_pressed(&"jump"):
 		velocity.y = JUMP_SPEED
 
 

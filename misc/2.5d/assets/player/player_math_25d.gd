@@ -7,17 +7,17 @@ var isometric_controls := true
 @onready var _parent_node25d: Node25D = get_parent()
 
 func _process(delta):
-	if Input.is_action_pressed("exit"):
+	if Input.is_action_pressed(&"exit"):
 		get_tree().quit()
 
-	if Input.is_action_just_pressed("view_cube_demo"):
+	if Input.is_action_just_pressed(&"view_cube_demo"):
 		#warning-ignore:return_value_discarded
 		get_tree().change_scene("res://assets/cube/cube.tscn")
 		return
 
-	if Input.is_action_just_pressed("toggle_isometric_controls"):
+	if Input.is_action_just_pressed(&"toggle_isometric_controls"):
 		isometric_controls = not isometric_controls
-	if Input.is_action_just_pressed("reset_position"):
+	if Input.is_action_just_pressed(&"reset_position"):
 		transform = Transform3D(Basis(), Vector3.UP * 10)
 		vertical_speed = 0
 	else:
@@ -35,11 +35,11 @@ func _horizontal_movement(delta):
 		localZ = Vector3(0.70710678118, 0, 0.70710678118)
 
 	# Gather player input and add directional movement to a Vector3 variable.
-	var movement_vec2 = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	var movement_vec2 = Input.get_vector(&"move_left", &"move_right", &"move_forward", &"move_back")
 	var move_dir = localX * movement_vec2.x + localZ * movement_vec2.y
 
 	move_dir = move_dir * delta * 600
-	if Input.is_action_pressed("movement_modifier"):
+	if Input.is_action_pressed(&"movement_modifier"):
 		move_dir /= 2
 
 	#warning-ignore:return_value_discarded
@@ -49,7 +49,7 @@ func _horizontal_movement(delta):
 # Checks Jump and applies gravity and vertical speed via move_and_collide.
 func _vertical_movement(delta):
 	var localY = Vector3.UP
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed(&"jump"):
 		vertical_speed = 1.25
 	vertical_speed -= delta * 5 # Gravity
 	var k = move_and_collide(localY * vertical_speed)

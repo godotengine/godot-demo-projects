@@ -71,7 +71,7 @@ func _ready():
 					if get_tree().edited_scene_root != null:
 						target.set_owner(get_tree().edited_scene_root)
 
-			target.name = "Target"
+			target.name = &"Target"
 		else:
 			target = $Target
 
@@ -89,7 +89,7 @@ func _ready():
 					if get_tree().edited_scene_root != null:
 						middle_joint_target.set_owner(get_tree().edited_scene_root)
 
-			middle_joint_target.name = "MiddleJoint"
+			middle_joint_target.name = &"MiddleJoint"
 		else:
 			middle_joint_target = get_node(^"MiddleJoint")
 
@@ -366,7 +366,7 @@ func _make_editor_sphere_at_node(node, color):
 	# Add it as our child, and name it
 	var indicator = MeshInstance3D.new()
 	node.add_child(indicator)
-	indicator.name = "(EditorOnly) Visual indicator"
+	indicator.name = &"(EditorOnly) Visual indicator"
 
 	# We need to make a mesh for the mesh instance.
 	# The code below makes a small sphere mesh

@@ -9,7 +9,7 @@ extends Control
 
 
 func _process(_delta):
-	if Input.is_action_just_pressed("pause"):
+	if Input.is_action_just_pressed(&"pause"):
 		pause.visible = crosshair.visible
 		crosshair.visible = not crosshair.visible
 		options.visible = false

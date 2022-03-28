@@ -5,9 +5,9 @@ extends RigidDynamicBody3D
 @onready var start_position = position
 
 func _physics_process(_delta):
-	if Input.is_action_just_pressed("exit"):
+	if Input.is_action_just_pressed(&"exit"):
 		get_tree().quit()
-	if Input.is_action_just_pressed("reset_position"):
+	if Input.is_action_just_pressed(&"reset_position"):
 		position = start_position
 		return
 
@@ -24,7 +24,7 @@ func _physics_process(_delta):
 	apply_central_impulse(dir.normalized() / 10)
 
 	# Jumping code.
-	if on_ground() and Input.is_action_pressed("jump"):
+	if on_ground() and Input.is_action_pressed(&"jump"):
 		apply_central_impulse(Vector3.UP)
 
 

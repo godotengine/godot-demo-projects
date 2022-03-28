@@ -25,16 +25,16 @@ func _physics_process(_delta):
 	var motion = Vector2()
 
 	if is_network_master():
-		if Input.is_action_pressed("move_left"):
+		if Input.is_action_pressed(&"move_left"):
 			motion += Vector2(-1, 0)
-		if Input.is_action_pressed("move_right"):
+		if Input.is_action_pressed(&"move_right"):
 			motion += Vector2(1, 0)
-		if Input.is_action_pressed("move_up"):
+		if Input.is_action_pressed(&"move_up"):
 			motion += Vector2(0, -1)
-		if Input.is_action_pressed("move_down"):
+		if Input.is_action_pressed(&"move_down"):
 			motion += Vector2(0, 1)
 
-		var bombing = Input.is_action_pressed("set_bomb")
+		var bombing = Input.is_action_pressed(&"set_bomb")
 
 		if stunned:
 			bombing = false

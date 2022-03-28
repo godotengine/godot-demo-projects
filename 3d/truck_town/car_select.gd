@@ -3,13 +3,13 @@ extends Control
 var town = null
 
 func _process(_delta):
-	if Input.is_action_just_pressed("back"):
+	if Input.is_action_just_pressed(&"back"):
 		_on_Back_pressed()
 
 
 func _load_scene(car):
 	var tt = load(car).instantiate()
-	tt.set_name("car")
+	tt.name = &"car"
 	town = load("res://town_scene.tscn").instantiate()
 	town.get_node(^"InstancePos").add_child(tt)
 	town.get_node(^"Back").connect(&"pressed", self._on_Back_pressed)

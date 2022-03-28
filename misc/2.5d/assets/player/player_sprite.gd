@@ -30,7 +30,7 @@ func _process(delta):
 		if movement:
 			hframes = 6
 			texture = _run
-			if (Input.is_action_pressed("movement_modifier")):
+			if (Input.is_action_pressed(&"movement_modifier")):
 				delta /= 2
 			_progress = fmod((_progress + FRAMERATE * delta), 6)
 			frame = _direction * 6 + int(_progress)
@@ -72,17 +72,17 @@ func set_view_mode(view_mode_index):
 # Change the 2D basis of the sprite to try and make it "fit" multiple view modes.
 func _sprite_basis():
 	if not Engine.editor_hint:
-		if Input.is_action_pressed("forty_five_mode"):
+		if Input.is_action_pressed(&"forty_five_mode"):
 			set_view_mode(0)
-		elif Input.is_action_pressed("isometric_mode"):
+		elif Input.is_action_pressed(&"isometric_mode"):
 			set_view_mode(1)
-		elif Input.is_action_pressed("top_down_mode"):
+		elif Input.is_action_pressed(&"top_down_mode"):
 			set_view_mode(2)
-		elif Input.is_action_pressed("front_side_mode"):
+		elif Input.is_action_pressed(&"front_side_mode"):
 			set_view_mode(3)
-		elif Input.is_action_pressed("oblique_y_mode"):
+		elif Input.is_action_pressed(&"oblique_y_mode"):
 			set_view_mode(4)
-		elif Input.is_action_pressed("oblique_z_mode"):
+		elif Input.is_action_pressed(&"oblique_z_mode"):
 			set_view_mode(5)
 
 
@@ -92,25 +92,25 @@ func _check_movement() -> bool:
 	var x := 0
 	var z := 0
 
-	if Input.is_action_pressed("move_right"):
+	if Input.is_action_pressed(&"move_right"):
 		x += 1
-	if Input.is_action_pressed("move_left"):
+	if Input.is_action_pressed(&"move_left"):
 		x -= 1
-	if Input.is_action_pressed("move_forward"):
+	if Input.is_action_pressed(&"move_forward"):
 		z -= 1
-	if Input.is_action_pressed("move_back"):
+	if Input.is_action_pressed(&"move_back"):
 		z += 1
 
 	# Check for isometric controls and add more to movement accordingly.
 	# For efficiency, only check the X axis since this X axis value isn't used anywhere else.
 	if not _parent_math.isometric_controls and is_equal_approx(Node25D.SCALE * 0.86602540378, _parent_node25d.get_basis()[0].x):
-		if Input.is_action_pressed("move_right"):
+		if Input.is_action_pressed(&"move_right"):
 			z += 1
-		if Input.is_action_pressed("move_left"):
+		if Input.is_action_pressed(&"move_left"):
 			z -= 1
-		if Input.is_action_pressed("move_forward"):
+		if Input.is_action_pressed(&"move_forward"):
 			x += 1
-		if Input.is_action_pressed("move_back"):
+		if Input.is_action_pressed(&"move_back"):
 			x -= 1
 
 	# Set the direction based on which inputs were pressed.

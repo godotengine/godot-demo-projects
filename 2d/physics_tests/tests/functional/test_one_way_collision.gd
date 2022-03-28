@@ -105,7 +105,7 @@ func _ready():
 
 func _process(_delta):
 	if not Engine.is_editor_hint():
-		if Input.is_action_just_pressed("ui_accept"):
+		if Input.is_action_just_pressed(&"ui_accept"):
 			await _reset_test(false)
 
 
