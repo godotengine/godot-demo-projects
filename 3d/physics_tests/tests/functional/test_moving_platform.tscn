@@ -29,7 +29,7 @@ size = Vector3(4, 0.4, 2)
 [sub_resource type="Animation" id="9"]
 length = 9.0
 
-[node name="Test" type="Node3D"]
+[node name="Test2" type="Node3D"]
 script = ExtResource( "2" )
 
 [node name="LabelBodyType" type="Label" parent="."]
@@ -54,7 +54,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -4.18538, 0)
 collision_layer = 2
 script = ExtResource( "4" )
 _stop_on_slopes = true
-_use_snap = true
+use_snap = true
 
 [node name="Capsule" type="CollisionShape3D" parent="Bodies/CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
@@ -118,6 +118,7 @@ anims/Move = SubResource( "9" )
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+current = true
 script = ExtResource( "1" )
 
 [node name="OmniLight" type="OmniLight3D" parent="Camera3D"]

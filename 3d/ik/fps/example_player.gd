@@ -204,7 +204,8 @@ func process_movement(delta):
 	vel.z = hvel.z
 
 	# TODO: This information should be set to the CharacterBody properties instead of arguments.
-	move_and_slide(vel,Vector3(0,1,0))
+	velocity = vel
+	move_and_slide()
 
 
 # Mouse based camera movement

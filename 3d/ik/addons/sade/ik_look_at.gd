@@ -6,12 +6,35 @@ extends Node3D
 		# TODO: Manually copy the code from this method.
 		_set_skeleton_path(value)
 @export var bone_name: String = ""
-@export var update_mode: int, "_process", "_physics_process", "_notification", "none" = 0:
+@export_enum("_process", "_physics_process", "_notification", "none") var update_mode: int = 0:
 	set(value):
-		# TODO: Manually copy the code from this method.
-		_set_update(value)
-@export var look_at_axis: int, "X-up", "Y-up", "Z-up" = 1
-@export var interpolation: float, 0.0, 1.0, 0.001 = 1.0
+		update_mode = value
+
+		# Set all of our processes to false.
+		set_process(false)
+		set_physics_process(false)
+		set_notify_transform(false)
+
+		# Based on the value of passed to update, enable the correct process.
+		if update_mode == 0:
+			set_process(true)
+			if debug_messages:
+				print(name, " - IK_LookAt: updating skeleton using _process...")
+		elif update_mode == 1:
+			set_physics_process(true)
+			if debug_messages:
+				print(name, " - IK_LookAt: updating skeleton using _physics_process...")
+		elif update_mode == 2:
+			set_notify_transform(true)
+			if debug_messages:
+				print(name, " - IK_LookAt: updating skeleton using _notification...")
+		else:
+			if debug_messages:
+				print(name, " - IK_LookAt: NOT updating skeleton due to unknown update method...")
+
+
+@export_enum("X-up", "Y-up", "Z-up") var look_at_axis: int = 1
+@export_range(0.0, 1.0, 0.001) var interpolation: float = 1.0
 @export var use_our_rotation_x: bool = false
 @export var use_our_rotation_y: bool = false
 @export var use_our_rotation_z: bool = false
@@ -161,32 +184,6 @@ func _setup_for_editor():
 	# Assign the material and mesh to the MeshInstance3D.
 	indicator_mesh.material = indicator_material
 	_editor_indicator.mesh = indicator_mesh
-
-
-func _set_update(new_value):
-	update_mode = new_value
-
-	# Set all of our processes to false.
-	set_process(false)
-	set_physics_process(false)
-	set_notify_transform(false)
-
-	# Based on the value of passed to update, enable the correct process.
-	if update_mode == 0:
-		set_process(true)
-		if debug_messages:
-			print(name, " - IK_LookAt: updating skeleton using _process...")
-	elif update_mode == 1:
-		set_physics_process(true)
-		if debug_messages:
-			print(name, " - IK_LookAt: updating skeleton using _physics_process...")
-	elif update_mode == 2:
-		set_notify_transform(true)
-		if debug_messages:
-			print(name, " - IK_LookAt: updating skeleton using _notification...")
-	else:
-		if debug_messages:
-			print(name, " - IK_LookAt: NOT updating skeleton due to unknown update method...")
 
 
 func _set_skeleton_path(new_value):

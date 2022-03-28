@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://bbpqesu2qnd2j"]
 
-[ext_resource path="res://car_select.gd" type="Script" id=1]
-[ext_resource path="res://Images/choose_van.png" type="Texture2D" id=2]
-[ext_resource path="res://Images/choose_trailer.png" type="Texture2D" id=3]
-[ext_resource path="res://Images/choose_tow.png" type="Texture2D" id=4]
+[ext_resource type="Script" path="res://car_select.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bh7b4n4lg1uqt" path="res://Images/choose_van.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://hvkcmpdq1t0k" path="res://Images/choose_trailer.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://de7itkxhl0u28" path="res://Images/choose_tow.png" id="4"]
 
 [node name="CarSelect" type="Control"]
 anchor_left = 0.5
@@ -16,7 +16,7 @@ offset_right = 512.0
 offset_bottom = 300.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-script = ExtResource( 1 )
+script = ExtResource( "1" )
 __meta__ = {
 "__editor_plugin_screen__": "2D",
 "_edit_use_anchors_": false
@@ -29,7 +29,7 @@ offset_right = 340.0
 offset_bottom = 400.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-icon = ExtResource( 2 )
+icon = ExtResource( "2" )
 
 [node name="TrailerTruck" type="Button" parent="."]
 offset_left = 344.0
@@ -38,7 +38,7 @@ offset_right = 680.0
 offset_bottom = 401.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-icon = ExtResource( 3 )
+icon = ExtResource( "3" )
 
 [node name="TowTruck" type="Button" parent="."]
 offset_left = 684.0
@@ -47,7 +47,7 @@ offset_right = 1020.0
 offset_bottom = 400.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-icon = ExtResource( 4 )
+icon = ExtResource( "4" )
 
 [connection signal="pressed" from="MiniVan" to="." method="_on_MiniVan_pressed"]
 [connection signal="pressed" from="TrailerTruck" to="." method="_on_TrailerTruck_pressed"]

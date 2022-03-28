@@ -18,14 +18,15 @@ func _physics_process(_delta):
 	# Get the camera's transform basis, but remove the X rotation such
 	# that the Y axis is up and Z is horizontal.
 	var cam_basis = camera.global_transform.basis
-	var basis = cam_basis.rotated(cam_basis.x, -cam_basis.get_euler().x)
-	dir = basis * (dir)
+	cam_basis = cam_basis.rotated(cam_basis.x, -cam_basis.get_euler().x)
+	dir = cam_basis * dir
 
-	apply_central_impulse(dir.normalized() / 10)
-
-	# Jumping code.
-	if on_ground() and Input.is_action_pressed(&"jump"):
-		apply_central_impulse(Vector3.UP)
+	apply_central_impulse(dir.normalized() / 20)
+	if on_ground():
+		apply_central_impulse(dir.normalized() / 6)
+		# Jumping code.
+		if Input.is_action_pressed(&"jump"):
+			apply_central_impulse(Vector3.UP * 2)
 
 
 # Test if there is a body below the player.

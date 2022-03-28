@@ -9,7 +9,6 @@ var _dir = 1.0
 var _distance = 10.0
 var _walk_spd = 100.0
 var _acceleration = 22.0
-var _gravity_impulse = 30.0
 var _is_on_floor = false
 
 

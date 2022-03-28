@@ -146,7 +146,7 @@ func spawn_body_key(body_key):
 func init_body():
 	if _current_body is CharacterBody3D:
 		_current_body._stop_on_slopes = _slope
-		_current_body._use_snap = _snap
+		_current_body.use_snap = _snap
 	elif _current_body is RigidDynamicBody3D:
 		_current_body.physics_material_override.rough = _rough
 		_current_body.physics_material_override.friction = 1.0 if _friction else 0.0
