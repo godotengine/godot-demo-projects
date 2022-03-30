@@ -16,7 +16,7 @@ func _ready():
 
 	# Required to change the 3D viewport's size when the window is resized.
 	# warning-ignore:return_value_discarded
-	viewport.connect("size_changed" ,self._root_viewport_size_changed)
+	viewport.connect(&"size_changed", self._root_viewport_size_changed)
 
 
 func _unhandled_input(event):
