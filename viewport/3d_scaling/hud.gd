@@ -41,4 +41,3 @@ func _root_viewport_size_changed():
 	# The viewport is resized depending on the window height.
 	# To compensate for the larger resolution, the viewport sprite is scaled down.
 	viewport.size = get_viewport().size * scale_factor
-	
