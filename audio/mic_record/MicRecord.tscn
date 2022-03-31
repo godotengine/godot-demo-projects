@@ -10,14 +10,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -320.0
-offset_top = -240.0
-offset_right = 320.0
-offset_bottom = 240.0
+offset_left = -278.0
+offset_top = -224.0
+offset_right = 296.0
+offset_bottom = 226.0
 script = ExtResource( "1" )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AudioStreamRecord" type="AudioStreamPlayer" parent="."]
 stream = SubResource( "1" )
@@ -31,51 +28,168 @@ autoplay = true
 stream = ExtResource( "2" )
 volume_db = -6.0
 
+[node name="Status" type="Label" parent="."]
+anchor_right = 1.0
+offset_bottom = 26.0
+text = "Status: "
+horizontal_alignment = 1
+__meta__ = {
+"_edit_layout_mode": 0,
+"_edit_use_custom_anchors": false
+}
+
 [node name="RecordButton" type="Button" parent="."]
-offset_left = 120.0
-offset_top = 100.0
-offset_right = 240.0
-offset_bottom = 140.0
+minimum_size = Vector2(130, 40)
+offset_left = 29.0
+offset_top = 77.0
+offset_right = 159.0
+offset_bottom = 117.0
 text = "Record"
+__meta__ = {
+"_edit_layout_mode": 0,
+"_edit_use_custom_anchors": false
+}
+
+[node name="PlayButton" type="Button" parent="."]
+minimum_size = Vector2(130, 40)
+offset_left = 209.0
+offset_top = 77.0
+offset_right = 339.0
+offset_bottom = 117.0
+disabled = true
+text = "Play"
+__meta__ = {
+"_edit_layout_mode": 0,
+"_edit_use_custom_anchors": false
+}
+
+[node name="PlayMusic" type="Button" parent="."]
+minimum_size = Vector2(130, 40)
+offset_left = 30.0
+offset_top = 395.0
+offset_right = 160.0
+offset_bottom = 435.0
+text = "Play Music"
+__meta__ = {
+"_edit_layout_mode": 0,
+"_edit_use_custom_anchors": false
+}
+
+[node name="FormatLabel" type="Label" parent="."]
+offset_left = 33.0
+offset_top = 153.0
+offset_right = 102.0
+offset_bottom = 179.0
+text = "Format:"
+__meta__ = {
+"_edit_layout_mode": 0,
+"_edit_use_custom_anchors": false
+}
+
+[node name="FormatOptionButton" type="OptionButton" parent="."]
+offset_left = 131.0
+offset_top = 150.0
+offset_right = 315.0
+offset_bottom = 181.0
+item_count = 3
+selected = 1
+popup/item_0/text = "8 Bit audio codec"
+popup/item_0/id = 0
+popup/item_1/text = "16 Bit audio codec"
+popup/item_1/id = 1
+popup/item_2/text = "IMA ADPCM Compression"
+popup/item_2/id = 2
+__meta__ = {
+"_edit_layout_mode": 0,
+"_edit_use_custom_anchors": false
+}
+
+[node name="MixRateLabel" type="Label" parent="."]
+offset_left = 33.0
+offset_top = 192.0
+offset_right = 102.0
+offset_bottom = 218.0
+text = "Mix rate:"
+__meta__ = {
+"_edit_layout_mode": 0,
+"_edit_use_custom_anchors": false
+}
+
+[node name="MixRateOptionButton" type="OptionButton" parent="."]
+offset_left = 131.0
+offset_top = 189.0
+offset_right = 220.0
+offset_bottom = 220.0
+item_count = 6
+selected = 4
+popup/item_0/text = "11025"
+popup/item_0/id = 0
+popup/item_1/text = "16000"
+popup/item_1/id = 1
+popup/item_2/text = "22050"
+popup/item_2/id = 2
+popup/item_3/text = "32000"
+popup/item_3/id = 3
+popup/item_4/text = "44100"
+popup/item_4/id = 4
+popup/item_5/text = "48000"
+popup/item_5/id = 5
+__meta__ = {
+"_edit_layout_mode": 0,
+"_edit_use_custom_anchors": false
+}
+
+[node name="StereoLabel" type="Label" parent="."]
+offset_left = 33.0
+offset_top = 233.0
+offset_right = 102.0
+offset_bottom = 259.0
+text = "Stereo:"
+__meta__ = {
+"_edit_layout_mode": 0,
+"_edit_use_custom_anchors": false
+}
+
+[node name="StereoCheckButton" type="CheckButton" parent="."]
+offset_left = 126.0
+offset_top = 233.0
+offset_right = 170.0
+offset_bottom = 264.0
+button_pressed = true
+__meta__ = {
+"_edit_layout_mode": 0,
+"_edit_use_custom_anchors": false
+}
 
 [node name="SaveButton" type="Button" parent="."]
-offset_left = 120.0
-offset_top = 180.0
-offset_right = 240.0
-offset_bottom = 220.0
+minimum_size = Vector2(130, 40)
+offset_left = 29.0
+offset_top = 284.0
+offset_right = 159.0
+offset_bottom = 324.0
 disabled = true
 text = "Save WAV To:"
+__meta__ = {
+"_edit_layout_mode": 0,
+"_edit_use_custom_anchors": false
+}
 
 [node name="Filename" type="LineEdit" parent="SaveButton"]
 offset_left = 180.0
-offset_right = 340.0
+offset_right = 507.0
 offset_bottom = 40.0
 text = "user://record.wav"
 caret_blink = true
 caret_blink_speed = 0.5
-
-[node name="PlayButton" type="Button" parent="."]
-offset_left = 300.0
-offset_top = 100.0
-offset_right = 420.0
-offset_bottom = 140.0
-disabled = true
-text = "Play"
-
-[node name="PlayMusic" type="Button" parent="."]
-offset_left = 120.0
-offset_top = 260.0
-offset_right = 240.0
-offset_bottom = 300.0
-text = "Play Music"
-
-[node name="Status" type="Label" parent="."]
-offset_left = 120.0
-offset_top = 340.0
-offset_right = 520.0
-offset_bottom = 340.0
+__meta__ = {
+"_edit_layout_mode": 0,
+"_edit_use_custom_anchors": false
+}
 
 [connection signal="pressed" from="RecordButton" to="." method="_on_RecordButton_pressed"]
-[connection signal="pressed" from="SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="PlayMusic" to="." method="_on_Play_Music_pressed"]
+[connection signal="item_selected" from="FormatOptionButton" to="." method="_on_format_option_button_item_selected"]
+[connection signal="item_selected" from="MixRateOptionButton" to="." method="_on_mix_rate_option_button_item_selected"]
+[connection signal="toggled" from="StereoCheckButton" to="." method="_on_stereo_check_button_toggled"]
+[connection signal="pressed" from="SaveButton" to="." method="_on_SaveButton_pressed"]
