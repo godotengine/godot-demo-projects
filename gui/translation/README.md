@@ -5,7 +5,7 @@ the use of localized resources and texts.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Vulkan Mobile
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/134
 
