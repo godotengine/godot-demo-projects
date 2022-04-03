@@ -9,7 +9,7 @@ in the documentation for more information.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Vulkan Mobile
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/887
 
