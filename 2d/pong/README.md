@@ -6,7 +6,7 @@ for game development in Godot, including
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Vulkan Mobile
 
 Note: There is a C# version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/pong).
 

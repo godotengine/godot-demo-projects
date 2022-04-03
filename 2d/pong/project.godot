@@ -6,7 +6,7 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
@@ -15,19 +15,14 @@ config/description="A simple Pong game. This demo shows best practices
 for game development in Godot, including signals."
 run/main_scene="pong.tscn"
 config/icon="res://icon.png"
+config/features=PackedStringArray("4.0")
 
 [display]
 
-window/size/width=640
-window/size/height=400
-window/dpi/allow_hidpi=true
-window/stretch/mode="2d"
+window/size/viewport_width=640
+window/size/viewport_height=400
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-stretch_2d=true
-
-[gdnative]
-
-singletons=[]
 
 [input]
 
@@ -64,9 +59,5 @@ right_move_up={
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
+vulkan/rendering/back_end=1
 2d/snapping/use_gpu_pixel_snap=true
-vram_compression/import_etc=true
-vram_compression/import_etc2=false
-quality/2d/use_pixel_snap=true
-viewport/default_clear_color=Color(0, 0, 0, 1)
