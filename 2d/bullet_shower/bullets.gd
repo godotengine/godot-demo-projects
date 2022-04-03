@@ -10,7 +10,7 @@ const SPEED_MAX = 80
 
 const bullet_image = preload("res://bullet.png")
 
-var bullets = []
+var bullets := []
 var shape
 
 
@@ -32,16 +32,14 @@ func _ready():
 
 	for _i in BULLET_COUNT:
 		var bullet = Bullet.new()
-		# Give each bullet its own speed.
+		# Give each bullet its own random speed.
 		bullet.speed = randf_range(SPEED_MIN, SPEED_MAX)
 		bullet.body = PhysicsServer2D.body_create()
 
 		PhysicsServer2D.body_set_space(bullet.body, get_world_2d().get_space())
 		PhysicsServer2D.body_add_shape(bullet.body, shape)
 		# Don't make bullets check collision with other bullets to improve performance.
-		# Their collision mask is still configured to the default value, which allows
-		# bullets to detect collisions with the player.
-		PhysicsServer2D.body_set_collision_layer(bullet.body, 0)
+		PhysicsServer2D.body_set_collision_mask(bullet.body, 0)
 
 		# Place bullets randomly on the viewport and move bullets outside the
 		# play area so that they fade in nicely.
@@ -68,11 +66,10 @@ func _physics_process(delta):
 		bullet.position.x -= bullet.speed * delta
 
 		if bullet.position.x < -16:
-			# The bullet has left the screen; move it back to the right.
+			# Move the bullet back to the right when it left the screen.
 			bullet.position.x = offset
 
 		transform2d.origin = bullet.position
-
 		PhysicsServer2D.body_set_state(bullet.body, PhysicsServer2D.BODY_STATE_TRANSFORM, transform2d)
 
 
