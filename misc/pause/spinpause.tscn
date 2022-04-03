@@ -1,42 +1,40 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://cwa8rglnrg4yb"]
 
-[ext_resource path="res://pause_button.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://pause_button.gd" id="1"]
 
-[sub_resource type="BoxMesh" id=1]
+[sub_resource type="BoxMesh" id="1"]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 length = 10.0
-loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Cube:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Cube:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 10),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, -360, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, -6.28319, 0)]
 }
 
 [node name="PauseScene" type="Node3D"]
 
 [node name="Cube" type="MeshInstance3D" parent="."]
-mesh = SubResource( 1 )
-surface_material_override/0 = null
+mesh = SubResource( "1" )
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.571594, 0.275303, -0.772974, 0, 0.942035, 0.335515, 0.820537, -0.191779, 0.538461, -5.59754, 2.75935, 4.01344)
+transform = Transform3D(0.707107, -0.241845, 0.664463, 0, 0.939693, 0.34202, -0.707107, -0.241845, 0.664463, 2, 1, 2)
 fov = 74.0
 near = 0.1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "spin"
-anims/spin = SubResource( 2 )
+anims/spin = SubResource( "2" )
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(0.792992, 0.251051, -0.555101, 0, 0.911149, 0.412078, 0.609232, -0.326775, 0.722534, -3.05357, 1.80053, 3.64099)
+transform = Transform3D(0.707107, -0.353554, 0.612373, 0, 0.866026, 0.5, -0.707107, -0.353554, 0.612373, 2, 2, 2)
 spot_range = 6.0
 
 [node name="PauseButton" type="Button" parent="."]
@@ -49,7 +47,6 @@ offset_left = -125.0
 offset_top = 150.0
 offset_right = 125.0
 offset_bottom = 200.0
-rect_pivot_offset = Vector2(123, 25)
 toggle_mode = true
 text = "Pause"
-script = ExtResource( 1 )
+script = ExtResource( "1" )
