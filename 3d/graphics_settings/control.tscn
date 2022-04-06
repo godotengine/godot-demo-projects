@@ -1,0 +1,465 @@
+[gd_scene load_steps=6 format=3 uid="uid://ye05btta37gb"]
+
+[ext_resource type="Script" path="res://settings.gd" id="1_gm54x"]
+[ext_resource type="PackedScene" uid="uid://cbdt8lmycl8pc" path="res://3d_scene.tscn" id="2_hsbu5"]
+[ext_resource type="Texture2D" uid="uid://c5ujmv8i0y1pn" path="res://icon.png" id="3_xpykm"]
+
+[sub_resource type="Environment" id="Environment_1f0b2"]
+adjustment_enabled = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w3j8l"]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 50.0
+content_margin_bottom = 10.0
+bg_color = Color(0.231373, 0.231373, 0.231373, 0.768627)
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( "1_gm54x" )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( "Environment_1f0b2" )
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1024, 600)
+render_target_update_mode = 4
+
+[node name="Node3D" parent="SubViewportContainer/SubViewport" instance=ExtResource( "2_hsbu5" )]
+
+[node name="SettingsMenu" type="PanelContainer" parent="."]
+anchor_bottom = 1.0
+offset_right = 372.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource( "StyleBoxFlat_w3j8l" )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SettingsMenu"]
+clip_contents = false
+offset_left = 20.0
+offset_top = 50.0
+offset_right = 352.0
+offset_bottom = 590.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsMenu/ScrollContainer"]
+offset_right = 324.0
+offset_bottom = 613.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="UISection" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer"]
+offset_right = 324.0
+offset_bottom = 26.0
+text = "UI Section"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="SettingsMenu/ScrollContainer/VBoxContainer"]
+offset_top = 36.0
+offset_right = 324.0
+offset_bottom = 69.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/vseparation = 10
+columns = 2
+
+[node name="UIScaleLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer"]
+offset_top = 3.0
+offset_right = 160.0
+offset_bottom = 29.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "UI Scale:"
+
+[node name="UIScaleOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer"]
+minimum_size = Vector2(100, 33)
+offset_left = 164.0
+offset_right = 324.0
+offset_bottom = 33.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+item_count = 5
+selected = 2
+popup/item_0/text = "Extra Small"
+popup/item_0/id = 0
+popup/item_1/text = "Small"
+popup/item_1/id = 1
+popup/item_2/text = "Normal"
+popup/item_2/id = 2
+popup/item_3/text = "Big"
+popup/item_3/id = 3
+popup/item_4/text = "Extra Big"
+popup/item_4/id = 4
+
+[node name="ViewportSection" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer"]
+offset_top = 79.0
+offset_right = 324.0
+offset_bottom = 105.0
+text = "Quality Section"
+horizontal_alignment = 1
+
+[node name="GridContainer2" type="GridContainer" parent="SettingsMenu/ScrollContainer/VBoxContainer"]
+offset_top = 115.0
+offset_right = 324.0
+offset_bottom = 296.0
+columns = 2
+
+[node name="QualityLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
+offset_top = 3.0
+offset_right = 160.0
+offset_bottom = 29.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Quality:"
+
+[node name="QualityOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
+minimum_size = Vector2(100, 33)
+offset_left = 164.0
+offset_right = 324.0
+offset_bottom = 33.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+item_count = 5
+selected = 2
+popup/item_0/text = "Extra Low"
+popup/item_0/id = 0
+popup/item_1/text = "Low"
+popup/item_1/id = 1
+popup/item_2/text = "Medium"
+popup/item_2/id = 2
+popup/item_3/text = "High"
+popup/item_3/id = 3
+popup/item_4/text = "Extra High"
+popup/item_4/id = 4
+
+[node name="FilterLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
+offset_top = 40.0
+offset_right = 160.0
+offset_bottom = 66.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Filter:"
+
+[node name="FilterOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
+minimum_size = Vector2(100, 33)
+offset_left = 164.0
+offset_top = 37.0
+offset_right = 324.0
+offset_bottom = 70.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+item_count = 2
+selected = 1
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Enabled"
+popup/item_1/id = 1
+
+[node name="VsyncLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
+offset_top = 77.0
+offset_right = 160.0
+offset_bottom = 103.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Vsync:"
+
+[node name="VsyncOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
+minimum_size = Vector2(100, 33)
+offset_left = 164.0
+offset_top = 74.0
+offset_right = 324.0
+offset_bottom = 107.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+item_count = 3
+selected = 2
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Adaptive"
+popup/item_1/id = 1
+popup/item_2/text = "Enabled"
+popup/item_2/id = 2
+
+[node name="AALabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
+offset_top = 114.0
+offset_right = 160.0
+offset_bottom = 140.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Anti-Aliasing:"
+
+[node name="AAOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
+minimum_size = Vector2(100, 33)
+offset_left = 164.0
+offset_top = 111.0
+offset_right = 324.0
+offset_bottom = 144.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+item_count = 5
+selected = 0
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "FXAA"
+popup/item_1/id = 1
+popup/item_2/text = "2x"
+popup/item_2/id = 2
+popup/item_3/text = "4x"
+popup/item_3/id = 3
+popup/item_4/text = "8x"
+popup/item_4/id = 4
+
+[node name="FullscreenLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
+offset_top = 151.0
+offset_right = 160.0
+offset_bottom = 177.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Fullscreen:"
+
+[node name="FullscreenOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
+minimum_size = Vector2(100, 33)
+offset_left = 164.0
+offset_top = 148.0
+offset_right = 324.0
+offset_bottom = 181.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+item_count = 2
+selected = 0
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Enabled"
+popup/item_1/id = 1
+
+[node name="EnvironmentSection" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer"]
+offset_top = 306.0
+offset_right = 324.0
+offset_bottom = 332.0
+text = "Environment Section"
+horizontal_alignment = 1
+
+[node name="GridContainer3" type="GridContainer" parent="SettingsMenu/ScrollContainer/VBoxContainer"]
+offset_top = 342.0
+offset_right = 324.0
+offset_bottom = 613.0
+columns = 2
+
+[node name="SSReflectionsLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3"]
+offset_top = 3.0
+offset_right = 160.0
+offset_bottom = 29.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "SS Reflections:"
+
+[node name="SSReflectionsOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3"]
+minimum_size = Vector2(100, 33)
+offset_left = 164.0
+offset_right = 324.0
+offset_bottom = 33.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+item_count = 4
+selected = 0
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Low"
+popup/item_1/id = 1
+popup/item_2/text = "Medium"
+popup/item_2/id = 2
+popup/item_3/text = "High"
+popup/item_3/id = 3
+
+[node name="SSAOLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3"]
+offset_top = 40.0
+offset_right = 160.0
+offset_bottom = 66.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "SSAO:"
+
+[node name="SSAOOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3"]
+minimum_size = Vector2(100, 33)
+offset_left = 164.0
+offset_top = 37.0
+offset_right = 324.0
+offset_bottom = 70.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+item_count = 2
+selected = 0
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Enabled"
+popup/item_1/id = 1
+
+[node name="SSILLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3"]
+offset_top = 77.0
+offset_right = 160.0
+offset_bottom = 103.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "SSIL:"
+
+[node name="SSILOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3"]
+minimum_size = Vector2(100, 33)
+offset_left = 164.0
+offset_top = 74.0
+offset_right = 324.0
+offset_bottom = 107.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+item_count = 2
+selected = 0
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Enabled"
+popup/item_1/id = 1
+
+[node name="SDFGILabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3"]
+offset_top = 114.0
+offset_right = 160.0
+offset_bottom = 140.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "SDFGI:"
+
+[node name="SDFGIOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3"]
+minimum_size = Vector2(100, 33)
+offset_left = 164.0
+offset_top = 111.0
+offset_right = 324.0
+offset_bottom = 144.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+item_count = 2
+selected = 0
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Enabled"
+popup/item_1/id = 1
+
+[node name="GlowLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3"]
+offset_top = 151.0
+offset_right = 160.0
+offset_bottom = 177.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Glow:"
+
+[node name="GlowOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3"]
+minimum_size = Vector2(100, 33)
+offset_left = 164.0
+offset_top = 148.0
+offset_right = 324.0
+offset_bottom = 181.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+item_count = 2
+selected = 0
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Enabled"
+popup/item_1/id = 1
+
+[node name="BrightnessLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3"]
+offset_top = 185.0
+offset_right = 160.0
+offset_bottom = 211.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Brightness:"
+
+[node name="BrightnessSlider" type="HSlider" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3"]
+offset_left = 164.0
+offset_top = 185.0
+offset_right = 324.0
+offset_bottom = 211.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.5
+max_value = 4.0
+step = 0.2
+value = 1.0
+
+[node name="ContrastLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3"]
+offset_top = 215.0
+offset_right = 160.0
+offset_bottom = 241.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Contrast:"
+
+[node name="ContrastSlider" type="HSlider" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3"]
+offset_left = 164.0
+offset_top = 215.0
+offset_right = 324.0
+offset_bottom = 241.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.5
+max_value = 4.0
+step = 0.2
+value = 1.0
+
+[node name="SaturationLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3"]
+offset_top = 245.0
+offset_right = 160.0
+offset_bottom = 271.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Saturation:"
+
+[node name="SaturationSlider" type="HSlider" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3"]
+offset_left = 164.0
+offset_top = 245.0
+offset_right = 324.0
+offset_bottom = 271.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.5
+max_value = 10.0
+step = 0.2
+value = 1.0
+
+[node name="HideShowButton" type="CheckButton" parent="."]
+offset_right = 149.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 16
+button_pressed = true
+text = "Hide settings"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -65.0
+offset_top = -65.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource( "3_xpykm" )
+
+[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer/UIScaleOptionButton" to="." method="_on_ui_scale_option_button_item_selected"]
+[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/QualityOptionButton" to="." method="_on_quality_option_button_item_selected"]
+[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/FilterOptionButton" to="." method="_on_filter_option_button_item_selected"]
+[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/VsyncOptionButton" to="." method="_on_vsync_option_button_item_selected"]
+[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/AAOptionButton" to="." method="_on_aa_option_button_item_selected"]
+[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/FullscreenOptionButton" to="." method="_on_fullscreen_option_button_item_selected"]
+[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3/SSReflectionsOptionButton" to="." method="_on_ss_reflections_option_button_item_selected"]
+[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3/SSAOOptionButton" to="." method="_on_ssao_option_button_item_selected"]
+[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3/SSILOptionButton" to="." method="_on_ssil_button_item_selected"]
+[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3/SDFGIOptionButton" to="." method="_on_sdfgi_option_button_item_selected"]
+[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3/GlowOptionButton" to="." method="_on_glow_option_button_item_selected"]
+[connection signal="value_changed" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3/BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]
+[connection signal="value_changed" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3/ContrastSlider" to="." method="_on_contrast_slider_value_changed"]
+[connection signal="value_changed" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer3/SaturationSlider" to="." method="_on_saturation_slider_value_changed"]
+[connection signal="toggled" from="HideShowButton" to="." method="_on_HideShowButton_toggled"]
