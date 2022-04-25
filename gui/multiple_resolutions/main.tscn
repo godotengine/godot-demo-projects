@@ -1,0 +1,276 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://main.gd" type="Script" id=1]
+[ext_resource path="res://noto_sans_ui_regular.tres" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=3]
+size = 14
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.501961, 1, 0.25098, 0.501961 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+draw_center = false
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0.25098, 0.376471, 1, 0.501961 )
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 4 )
+script = ExtResource( 1 )
+
+[node name="OuterSideLabel" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0.627451 )
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 11.0
+margin_top = -47.0
+margin_right = 140.0
+margin_bottom = -16.0
+text = "Outer Side Label
+(ignores all margins)"
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="InnerSideLabel" type="Label" parent="Panel"]
+modulate = Color( 0.666667, 1, 0.501961, 1 )
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 11.0
+margin_top = 16.5
+margin_right = 209.0
+margin_bottom = 47.5
+text = "Inner Side Label
+(ignores GUI Max Aspect Ratio)"
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="Panel" parent="Panel/AspectRatioContainer"]
+margin_right = 648.0
+margin_bottom = 648.0
+custom_styles/panel = SubResource( 2 )
+
+[node name="TopLeft" type="ColorRect" parent="Panel/AspectRatioContainer/ColorRect"]
+margin_right = 64.0
+margin_bottom = 64.0
+color = Color( 1, 1, 1, 0.25098 )
+
+[node name="TopRight" type="ColorRect" parent="Panel/AspectRatioContainer/ColorRect"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -64.0
+margin_bottom = 64.0
+color = Color( 1, 1, 1, 0.25098 )
+
+[node name="BottomLeft" type="ColorRect" parent="Panel/AspectRatioContainer/ColorRect"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -64.0
+margin_right = 64.0
+color = Color( 1, 1, 1, 0.25098 )
+
+[node name="BottomRight" type="ColorRect" parent="Panel/AspectRatioContainer/ColorRect"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -64.0
+margin_top = -64.0
+color = Color( 1, 1, 1, 0.25098 )
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel/AspectRatioContainer/ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Options" type="VBoxContainer" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer"]
+margin_left = 167.0
+margin_top = 187.0
+margin_right = 481.0
+margin_bottom = 460.0
+rect_min_size = Vector2( 300, 0 )
+custom_constants/separation = 15
+
+[node name="Title" type="Label" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options"]
+margin_right = 314.0
+margin_bottom = 20.0
+custom_colors/font_color = Color( 1, 0.866667, 0.615686, 1 )
+text = "Options"
+align = 1
+
+[node name="WindowBaseSize" type="HBoxContainer" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options"]
+margin_top = 35.0
+margin_right = 314.0
+margin_bottom = 61.0
+custom_constants/separation = 15
+
+[node name="Label" type="Label" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/WindowBaseSize"]
+margin_top = 3.0
+margin_right = 150.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 150, 0 )
+text = "Window Base Size"
+
+[node name="OptionButton" type="OptionButton" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/WindowBaseSize"]
+margin_left = 165.0
+margin_right = 314.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "648×648 (1:1)"
+items = [ "648×648 (1:1)", null, false, 0, null, "640×480 (4:3)", null, false, 1, null, "720×480 (3:2)", null, false, 2, null, "800×600 (4:3)", null, false, 3, null, "1152×648 (16:9)", null, false, 5, null, "1280×720 (16:9)", null, false, 6, null, "1280×800 (16:10)", null, false, 7, null, "1680×720 (21:9)", null, false, 8, null ]
+selected = 0
+
+[node name="WindowStretchMode" type="HBoxContainer" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options"]
+margin_top = 76.0
+margin_right = 314.0
+margin_bottom = 102.0
+custom_constants/separation = 15
+
+[node name="Label" type="Label" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/WindowStretchMode"]
+margin_top = 3.0
+margin_right = 150.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 150, 0 )
+text = "Window Stretch Mode"
+
+[node name="OptionButton" type="OptionButton" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/WindowStretchMode"]
+margin_left = 165.0
+margin_right = 314.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "2D (Canvas Items)"
+items = [ "Disabled", null, false, 0, null, "2D (Canvas Items)", null, false, 1, null, "Viewport", null, false, 2, null ]
+selected = 1
+
+[node name="WindowStretchAspect" type="HBoxContainer" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options"]
+margin_top = 117.0
+margin_right = 314.0
+margin_bottom = 143.0
+custom_constants/separation = 15
+
+[node name="Label" type="Label" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/WindowStretchAspect"]
+margin_top = 3.0
+margin_right = 155.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 150, 0 )
+text = "Window Stretch Aspect"
+
+[node name="OptionButton" type="OptionButton" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/WindowStretchAspect"]
+margin_left = 170.0
+margin_right = 314.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Expand"
+items = [ "Ignore (Distort)", null, false, 0, null, "Keep (Black Bars)", null, false, 1, null, "Keep Width", null, false, 2, null, "Keep Height", null, false, 3, null, "Expand", null, false, 4, null ]
+selected = 4
+
+[node name="WindowScaleFactor" type="HBoxContainer" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options"]
+margin_top = 158.0
+margin_right = 314.0
+margin_bottom = 178.0
+custom_constants/separation = 15
+
+[node name="Label" type="Label" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/WindowScaleFactor"]
+margin_right = 150.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 150, 0 )
+text = "Window Scale Factor"
+
+[node name="HSlider" type="HSlider" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/WindowScaleFactor"]
+margin_left = 165.0
+margin_right = 263.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 100.0
+min_value = 0.75
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="Value" type="Label" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/WindowScaleFactor"]
+margin_left = 278.0
+margin_right = 314.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "100%"
+
+[node name="HSeparator" type="HSeparator" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options"]
+margin_top = 193.0
+margin_right = 314.0
+margin_bottom = 197.0
+
+[node name="GUIMaxAspectRatio" type="HBoxContainer" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options"]
+margin_top = 212.0
+margin_right = 314.0
+margin_bottom = 238.0
+custom_constants/separation = 15
+
+[node name="Label" type="Label" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/GUIMaxAspectRatio"]
+margin_top = 3.0
+margin_right = 150.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 150, 0 )
+text = "GUI Max Aspect Ratio"
+
+[node name="OptionButton" type="OptionButton" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/GUIMaxAspectRatio"]
+margin_left = 165.0
+margin_right = 314.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Fit to Window"
+items = [ "Fit to Window", null, false, 0, null, "5:4", null, false, 1, null, "4:3", null, false, 2, null, "3:2", null, false, 3, null, "16:10", null, false, 4, null, "16:9", null, false, 5, null, "21:9", null, false, 6, null ]
+selected = 0
+
+[node name="GUIMargin" type="HBoxContainer" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options"]
+margin_top = 253.0
+margin_right = 314.0
+margin_bottom = 273.0
+custom_constants/separation = 15
+
+[node name="Label" type="Label" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/GUIMargin"]
+margin_right = 150.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 150, 0 )
+text = "GUI Margin"
+
+[node name="HSlider" type="HSlider" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/GUIMargin"]
+margin_left = 165.0
+margin_right = 291.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 100.0
+max_value = 50.0
+
+[node name="Value" type="Label" parent="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/GUIMargin"]
+margin_left = 306.0
+margin_right = 314.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "0"
+
+[connection signal="item_selected" from="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/WindowBaseSize/OptionButton" to="." method="_on_window_base_size_item_selected"]
+[connection signal="item_selected" from="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/WindowStretchMode/OptionButton" to="." method="_on_window_stretch_mode_item_selected"]
+[connection signal="item_selected" from="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/WindowStretchAspect/OptionButton" to="." method="_on_window_stretch_aspect_item_selected"]
+[connection signal="drag_ended" from="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/WindowScaleFactor/HSlider" to="." method="_on_window_scale_factor_drag_ended"]
+[connection signal="item_selected" from="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/GUIMaxAspectRatio/OptionButton" to="." method="_on_gui_aspect_ratio_item_selected"]
+[connection signal="drag_ended" from="Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/GUIMargin/HSlider" to="." method="_on_gui_margin_drag_ended"]
