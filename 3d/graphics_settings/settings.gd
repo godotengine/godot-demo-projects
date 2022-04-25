@@ -1,23 +1,39 @@
 extends Control
-# Window project settings:
-#  - Viewport size is set to 1920x1080
-#  - Stretch mode is set to "canvas_items" (in godot 3.x known as 2d)
-#  - Stretch aspect is set to "expand"
-@onready var sub_viewport := $SubViewportContainer/SubViewport
-@onready var sub_viewport_container := $SubViewportContainer
-@onready var world_environment := $WorldEnvironment
 
-var current_quality := 2 # This is needed for when screen size changes
-var viewport_start_size := Vector2.ZERO
+# Window project settings:
+#  - Stretch mode is set to `canvas_items` (`2d` in Godot 3.x)
+#  - Stretch aspect is set to `expand`
+@onready var world_environment := $WorldEnvironment
+@onready var camera := $Node3D/Camera3D
+@onready var fps_label := $FPSLabel
+@onready var resolution_label := $ResolutionLabel
+
+# When the screen changes size, we need to update the 3D
+# viewport quality setting. If we don't do this, the viewport will take
+# the size from the main viewport.
+var viewport_start_size := Vector2(
+	ProjectSettings.get_setting(&"display/window/size/viewport_width"),
+	ProjectSettings.get_setting(&"display/window/size/viewport_height")
+)
 
 
 func _ready() -> void:
-	# When the screen changes size, we need to update the 3D
-	# viewport quality setting. If we don't do this, the viewport will take
-	# the size from the main viewport.
-	viewport_start_size.x = ProjectSettings.get_setting(&"display/window/size/viewport_width")
-	viewport_start_size.y = ProjectSettings.get_setting(&"display/window/size/viewport_height")
-	sub_viewport.connect(&"size_changed", self._on_quality_option_button_item_selected)
+	get_viewport().connect(&"size_changed", update_resolution_label)
+	update_resolution_label()
+
+	# Disable V-Sync to uncap framerate on supported platforms. This makes performance comparison
+	# easier on high-end machines that easily reach the monitor's refresh rate.
+	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+
+
+func _process(delta: float) -> void:
+	fps_label.text = "%d FPS (%.2f mspf)" % [Engine.get_frames_per_second(), 1000.0 / Engine.get_frames_per_second()]
+
+
+func update_resolution_label() -> void:
+	var viewport_render_size = get_viewport().size * get_viewport().scaling_3d_scale
+	resolution_label.text = "3D viewport resolution: %d × %d (%d%%)" \
+			% [viewport_render_size.x, viewport_render_size.y, round(get_viewport().scaling_3d_scale * 100)]
 
 
 func _on_HideShowButton_toggled(show_settings: bool) -> void:
@@ -34,50 +50,40 @@ func _on_HideShowButton_toggled(show_settings: bool) -> void:
 func _on_ui_scale_option_button_item_selected(index: int) -> void:
 	# For changing the UI, we take the viewport size, which we set in the project settings.
 	var new_size := viewport_start_size
-	if index == 0: # Extra small
-		new_size *= 1.50
-	elif index == 1: # Small
+	if index == 0: # Smaller (66%)
+		new_size *= 1.5
+	elif index == 1: # Small (80%)
 		new_size *= 1.25
-	elif index == 2: # Normal
+	elif index == 2: # Medium (100%)
 		new_size *= 1.0
-	elif index == 3: # Big
+	elif index == 3: # Large (133%)
 		new_size *= 0.75
-	elif index == 4: # Extra big
-		new_size *= 0.50
+	elif index == 4: # Larger (200%)
+		new_size *= 0.5
 	get_tree().root.set_content_scale_size(new_size)
 
 
-func _on_quality_option_button_item_selected(index: int = current_quality) -> void:
-	# Setting the overal screen quality can be done by changing
-	# the sub viewport size. When the screen size changed, this function
-	# will get called with the current_quality variable.
-	var new_size : Vector2
-	current_quality = index
-	if index == 0: # Extra low
-		new_size = get_viewport().size * 0.50
-	elif index == 1: # Low
-		new_size = get_viewport().size * 0.75
-	elif index == 2: # Medium
-		new_size = get_viewport().size
-	elif index == 3: # High
-		new_size = get_viewport().size * 1.25
-	elif index == 4: # Extra high
-		new_size = get_viewport().size * 1.50
-	sub_viewport.set_size(new_size)
+func _on_quality_slider_value_changed(value: float) -> void:
+	get_viewport().scaling_3d_scale = value
+	update_resolution_label()
 
 
 func _on_filter_option_button_item_selected(index: int) -> void:
-	# Texture filter setting. This can smooth out hard edges, but can also make
-	# the scene appear more blurry when quality is set to low.
-	if index == 0: # Disabled
-		sub_viewport_container.set_texture_filter(CanvasItem.TEXTURE_FILTER_NEAREST)
-	elif index == 1: # Enabled
-		sub_viewport_container.set_texture_filter(CanvasItem.TEXTURE_FILTER_LINEAR)
+	# Viewport scale mode setting.
+	if index == 0: # Bilinear (Fastest)
+		get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR
+	elif index == 1: # FSR 1.0 (Fast)
+		push_warning("FSR is currently not working. The shader is run, but no visual difference appears on screen.")
+		get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR
 
 
 func _on_vsync_option_button_item_selected(index: int) -> void:
 	# Vsync is enabled by default.
-	# Vertical synchronization locks framerate and makes screen tearing not visible.
+	# Vertical synchronization locks framerate and makes screen tearing not visible at the cost of
+	# higher input latency and stuttering when the framerate target is not met.
+	# Adaptive V-Sync automatically disables V-Sync when the framerate target is not met, and enables
+	# V-Sync otherwise. This prevents suttering and reduces input latency when the framerate target
+	# is not met, at the cost of visible tearing.
 	if index == 0: # Disabled
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	elif index == 1: # Adaptive
@@ -87,25 +93,22 @@ func _on_vsync_option_button_item_selected(index: int) -> void:
 
 
 func _on_aa_option_button_item_selected(index: int) -> void:
-	# Because this option is only for the 3D objects, we need to
-	# change this setting on the sub viewport.
-	# MSAA = Better quality at a higher performance cost.
-	# FXAA = Low performance cost but can appear blurry.
+	# Multi-sample anti-aliasing. High quality, but slow. It also does not smooth out the edges of
+	# transparent (alpha scissor) textures.
 	if index == 0: # Disabled
-		sub_viewport.set_msaa(Viewport.MSAA_DISABLED)
-		sub_viewport.set_screen_space_aa(Viewport.SCREEN_SPACE_AA_DISABLED)
-	elif index == 1: # FXAA
-		sub_viewport.set_msaa(Viewport.MSAA_DISABLED)
-		sub_viewport.set_screen_space_aa(Viewport.SCREEN_SPACE_AA_FXAA)
-	elif index == 2: # 2x
-		sub_viewport.set_msaa(Viewport.MSAA_2X)
-		sub_viewport.set_screen_space_aa(Viewport.SCREEN_SPACE_AA_DISABLED)
-	elif index == 3: # 4x
-		sub_viewport.set_msaa(Viewport.MSAA_4X)
-		sub_viewport.set_screen_space_aa(Viewport.SCREEN_SPACE_AA_DISABLED)
-	elif index == 4: # 8x
-		sub_viewport.set_msaa(Viewport.MSAA_8X)
-		sub_viewport.set_screen_space_aa(Viewport.SCREEN_SPACE_AA_DISABLED)
+		get_viewport().msaa = Viewport.MSAA_DISABLED
+	elif index == 1: # 2×
+		get_viewport().msaa = Viewport.MSAA_2X
+	elif index == 2: # 4×
+		get_viewport().msaa = Viewport.MSAA_4X
+	elif index == 3: # 8×
+		get_viewport().msaa = Viewport.MSAA_8X
+
+
+func _on_fxaa_option_button_item_selected(index: int) -> void:
+	# Fast approximate anti-aliasing. Much faster than FXAA (and works on alpha scissor edges),
+	# but blurs the whole scene rendering slightly.
+	get_viewport().screen_space_aa = index == 1
 
 
 func _on_fullscreen_option_button_item_selected(index: int) -> void:
@@ -116,6 +119,10 @@ func _on_fullscreen_option_button_item_selected(index: int) -> void:
 		get_tree().root.set_mode(Window.MODE_WINDOWED)
 	elif index == 1:
 		get_tree().root.set_mode(Window.MODE_FULLSCREEN)
+
+
+func _on_fov_slider_value_changed(value: float) -> void:
+	camera.fov = value
 
 
 func _on_ss_reflections_option_button_item_selected(index: int) -> void:
@@ -132,19 +139,27 @@ func _on_ss_reflections_option_button_item_selected(index: int) -> void:
 		world_environment.environment.set_ssr_max_steps(32)
 	elif index == 3: # High
 		world_environment.environment.set_ssr_enabled(true)
-		world_environment.environment.set_ssr_max_steps(64)
-	# We set the fade in higher (default is 0.15) so it looks
-	# a better and cleaner.
-	world_environment.environment.set_ssr_fade_in(0.7)
+		world_environment.environment.set_ssr_max_steps(56)
+
 
 func _on_ssao_option_button_item_selected(index: int) -> void:
 	# This is a setting that is attached to the environment.
 	# If your game requires you to change the environment,
 	# then be sure to run this function again to set the settings correct.
 	if index == 0: # Disabled
-		world_environment.environment.set_ssao_enabled(false)
-	elif index == 1: # Enabled
-		world_environment.environment.set_ssao_enabled(true)
+		world_environment.environment.ssao_enabled = false
+	if index == 1: # Very Low
+		world_environment.environment.ssao_enabled = true
+		RenderingServer.environment_set_ssao_quality(RenderingServer.ENV_SSAO_QUALITY_VERY_LOW, true, 0.5, 2, 50, 300)
+	if index == 2: # Low
+		world_environment.environment.ssao_enabled = true
+		RenderingServer.environment_set_ssao_quality(RenderingServer.ENV_SSAO_QUALITY_VERY_LOW, true, 0.5, 2, 50, 300)
+	if index == 3: # Medium
+		world_environment.environment.ssao_enabled = true
+		RenderingServer.environment_set_ssao_quality(RenderingServer.ENV_SSAO_QUALITY_MEDIUM, true, 0.5, 2, 50, 300)
+	if index == 4: # High
+		world_environment.environment.ssao_enabled = true
+		RenderingServer.environment_set_ssao_quality(RenderingServer.ENV_SSAO_QUALITY_HIGH, true, 0.5, 2, 50, 300)
 
 
 func _on_ssil_option_button_item_selected(index: int) -> void:
@@ -152,9 +167,19 @@ func _on_ssil_option_button_item_selected(index: int) -> void:
 	# If your game requires you to change the environment,
 	# then be sure to run this function again to set the settings correct.
 	if index == 0: # Disabled
-		world_environment.environment.set_ssil_enabled(false)
-	elif index == 1: # Enabled
-		world_environment.environment.set_ssil_enabled(true)
+		world_environment.environment.ssil_enabled = false
+	if index == 1: # Very Low
+		world_environment.environment.ssil_enabled = true
+		RenderingServer.environment_set_ssil_quality(RenderingServer.ENV_SSIL_QUALITY_VERY_LOW, true, 0.5, 4, 50, 300)
+	if index == 2: # Low
+		world_environment.environment.ssil_enabled = true
+		RenderingServer.environment_set_ssil_quality(RenderingServer.ENV_SSIL_QUALITY_LOW, true, 0.5, 4, 50, 300)
+	if index == 3: # Medium
+		world_environment.environment.ssil_enabled = true
+		RenderingServer.environment_set_ssil_quality(RenderingServer.ENV_SSIL_QUALITY_MEDIUM, true, 0.5, 4, 50, 300)
+	if index == 4: # High
+		world_environment.environment.ssil_enabled = true
+		RenderingServer.environment_set_ssil_quality(RenderingServer.ENV_SSIL_QUALITY_HIGH, true, 0.5, 4, 50, 300)
 
 
 func _on_sdfgi_option_button_item_selected(index: int) -> void:
@@ -162,9 +187,13 @@ func _on_sdfgi_option_button_item_selected(index: int) -> void:
 	# If your game requires you to change the environment,
 	# then be sure to run this function again to set the settings correct.
 	if index == 0: # Disabled
-		world_environment.environment.set_sdfgi_enabled(false)
-	elif index == 1: # Enabled
-		world_environment.environment.set_sdfgi_enabled(true)
+		world_environment.environment.sdfgi_enabled = false
+	if index == 1: # Low
+		world_environment.environment.sdfgi_enabled = true
+		RenderingServer.gi_set_use_half_resolution(true)
+	if index == 2: # High
+		world_environment.environment.sdfgi_enabled = true
+		RenderingServer.gi_set_use_half_resolution(false)
 
 
 func _on_glow_option_button_item_selected(index: int) -> void:
@@ -172,9 +201,24 @@ func _on_glow_option_button_item_selected(index: int) -> void:
 	# If your game requires you to change the environment,
 	# then be sure to run this function again to set the settings correct.
 	if index == 0: # Disabled
-		world_environment.environment.set_glow_enabled(false)
-	elif index == 1: # Enabled
-		world_environment.environment.set_glow_enabled(true)
+		world_environment.environment.glow_enabled = false
+	if index == 1: # Low
+		world_environment.environment.glow_enabled = true
+		RenderingServer.environment_glow_set_use_high_quality(false)
+	if index == 2: # High
+		world_environment.environment.glow_enabled = true
+		RenderingServer.environment_glow_set_use_high_quality(true)
+
+
+func _on_volumetric_fog_option_button_item_selected(index: int) -> void:
+	if index == 0: # Disabled
+		world_environment.environment.volumetric_fog_enabled = false
+	if index == 1: # Low
+		world_environment.environment.volumetric_fog_enabled = true
+		RenderingServer.environment_set_volumetric_fog_filter_active(false)
+	if index == 2: # High
+		world_environment.environment.volumetric_fog_enabled = true
+		RenderingServer.environment_set_volumetric_fog_filter_active(true)
 
 
 func _on_brightness_slider_value_changed(value: float) -> void:
