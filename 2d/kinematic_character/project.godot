@@ -6,7 +6,7 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
@@ -16,14 +16,16 @@ CharacterBody2D. The character moves around, is affected by moving
 platforms, can jump through one-way collision platforms, etc."
 run/main_scene="res://world.tscn"
 config/icon="res://icon.png"
+config/features=PackedStringArray("4.0")
 
 [display]
 
+window/size/viewport_width=530
+window/size/viewport_height=495
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 window/size/width=530
 window/size/height=495
-window/dpi/allow_hidpi=true
-window/stretch/mode="2d"
-window/stretch/aspect="expand"
 stretch/aspect="keep"
 stretch/mode="2d"
 
@@ -70,7 +72,8 @@ multithread/thread_rid_pool_prealloc=60
 
 [rendering]
 
+environment/defaults/default_clear_color=Color(0.156863, 0.133333, 0.25098, 1)
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-environment/default_clear_color=Color(0.156, 0.1325, 0.25, 1)
+environment/default_clear_color=Color(0.156863, 0.133333, 0.25098, 1)
