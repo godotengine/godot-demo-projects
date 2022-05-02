@@ -25,8 +25,12 @@ func _unhandled_key_input(event):
 
 
 func remap_action_to(event):
+	# We first change the event in this game instance.
 	InputMap.action_erase_events(action)
 	InputMap.action_add_event(action, event)
+	# And then save it to the keymaps file
+	KeyPersistence.keymaps[action] = event
+	KeyPersistence.save_keymap()
 	text = "%s Key" % event.as_text()
 
 
