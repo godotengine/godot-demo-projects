@@ -39,7 +39,7 @@ func _ready():
 
 func _physics_process(_delta):
 	# Update the status label with the newest brush element count.
-	label_stats.text = "Brush objects: " + String(paint_control.brush_data_list.size())
+	label_stats.text = "Brush objects: " + str(paint_control.brush_data_list.size())
 
 
 func button_pressed(button_name):
@@ -104,7 +104,7 @@ func background_color_changed(color):
 func brush_size_changed(value):
 	# Change the size of the brush, and update the label to reflect the new value.
 	paint_control.brush_size = ceil(value)
-	label_brush_size.text = "Brush size: " + String(ceil(value)) + "px"
+	label_brush_size.text = "Brush size: " + str(ceil(value)) + "px"
 
 
 func save_file_selected(path):
