@@ -1,12 +1,12 @@
 extends Node2D
 
 func _ready():
-	$HBoxContainer/Pseudolocalization_options/accents.pressed = ProjectSettings.get("internationalization/pseudolocalization/replace_with_accents")
-	$HBoxContainer/Pseudolocalization_options/toggle.pressed = TranslationServer.pseudolocalization_enabled
-	$HBoxContainer/Pseudolocalization_options/fakebidi.pressed = ProjectSettings.get("internationalization/pseudolocalization/fake_bidi")
-	$HBoxContainer/Pseudolocalization_options/doublevowels.pressed = ProjectSettings.get("internationalization/pseudolocalization/double_vowels")
-	$HBoxContainer/Pseudolocalization_options/override.pressed = ProjectSettings.get("internationalization/pseudolocalization/override")
-	$HBoxContainer/Pseudolocalization_options/skipplaceholders.pressed = ProjectSettings.get("internationalization/pseudolocalization/skip_placeholders")
+	$HBoxContainer/Pseudolocalization_options/accents.button_pressed = ProjectSettings.get("internationalization/pseudolocalization/replace_with_accents")
+	$HBoxContainer/Pseudolocalization_options/toggle.button_pressed = TranslationServer.pseudolocalization_enabled
+	$HBoxContainer/Pseudolocalization_options/fakebidi.button_pressed = ProjectSettings.get("internationalization/pseudolocalization/fake_bidi")
+	$HBoxContainer/Pseudolocalization_options/doublevowels.button_pressed = ProjectSettings.get("internationalization/pseudolocalization/double_vowels")
+	$HBoxContainer/Pseudolocalization_options/override.button_pressed = ProjectSettings.get("internationalization/pseudolocalization/override")
+	$HBoxContainer/Pseudolocalization_options/skipplaceholders.button_pressed = ProjectSettings.get("internationalization/pseudolocalization/skip_placeholders")
 	$HBoxContainer/Pseudolocalization_options/prefix/TextEdit.text = ProjectSettings.get("internationalization/pseudolocalization/prefix")
 	$HBoxContainer/Pseudolocalization_options/suffix/TextEdit.text = ProjectSettings.get("internationalization/pseudolocalization/suffix")
 	$HBoxContainer/Pseudolocalization_options/exp_ratio/TextEdit.text = str(ProjectSettings.get("internationalization/pseudolocalization/expansion_ratio"))
