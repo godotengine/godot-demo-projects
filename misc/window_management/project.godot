@@ -6,7 +6,7 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
@@ -14,13 +14,13 @@ config/name="Window Management"
 config/description="A demo showing the various window management features available through OS."
 run/main_scene="res://window_management.tscn"
 config/icon="res://icon.png"
+config/features=PackedStringArray("4.0")
 
 [display]
 
-window/size/width=800
-window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
+window/size/width=800
 window/fullscreen=false
 window/resizable=true
 
@@ -72,6 +72,7 @@ move_right={
 
 [rendering]
 
+vulkan/rendering/back_end=1
 quality/driver/driver_name="GLES2"
 quality/intended_usage/framebuffer_allocation=3
 vram_compression/import_etc=true
