@@ -10,7 +10,7 @@ consider following the tutorial in the documentation.
 
 Language: GDScript
 
-Renderer: GLES 3 (particles are not available in GLES 2)
+Renderer: Vulkan Mobile
 
 Note: There is a C# version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/dodge_the_creeps).
 
