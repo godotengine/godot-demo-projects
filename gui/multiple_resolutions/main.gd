@@ -8,15 +8,15 @@ var base_window_size = Vector2(ProjectSettings.get_setting("display/window/size/
 
 # These defaults match this demo's project settings. Adjust as needed if adapting this
 # in your own project.
-var stretch_mode = SceneTree.STRETCH_MODE_2D
-var stretch_aspect = SceneTree.STRETCH_ASPECT_EXPAND
+var stretch_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
+var stretch_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND
 
 var scale_factor = 1.0
 var gui_aspect_ratio = -1.0
 var gui_margin = 0.0
 
-onready var panel = $Panel
-onready var arc = $Panel/AspectRatioContainer
+@onready var panel = $Panel
+@onready var arc = $Panel/AspectRatioContainer
 
 
 func _ready():
@@ -24,36 +24,36 @@ func _ready():
 	# is resized whenever the window size changes. This is because the root Control node
 	# uses a Full Rect anchor, so its size will always be equal to the window size.
 	# warning-ignore:return_value_discarded
-	connect("resized", self, "_on_resized")
+	connect("resized", self._on_resized)
 	update_container()
 
 
 func update_container():
 	# The code within this function needs to be run twice to work around an issue with containers
 	# having a 1-frame delay with updates.
-	# Otherwise, `panel.rect_size` returns a value of the previous frame, which results in incorrect
+	# Otherwise, `panel.size` returns a value of the previous frame, which results in incorrect
 	# sizing of the inner AspectRatioContainer when using the Fit to Window setting.
 	for _i in 2:
 		if is_equal_approx(gui_aspect_ratio, -1.0):
 			# Fit to Window. Tell the AspectRatioContainer to use the same aspect ratio as the window,
 			# making the AspectRatioContainer not have any visible effect.
-			arc.ratio = panel.rect_size.aspect()
-			# Apply GUI margin on the AspectRatioContainer's parent (Panel).
-			# This also makes the GUI margin apply on controls located outside the AspectRatioContainer
+			arc.ratio = panel.size.aspect()
+			# Apply GUI offset on the AspectRatioContainer's parent (Panel).
+			# This also makes the GUI offset apply on controls located outside the AspectRatioContainer
 			# (such as the inner side label in this demo).
-			panel.margin_top = gui_margin
-			panel.margin_bottom = -gui_margin
+			panel.offset_top = gui_margin
+			panel.offset_bottom = -gui_margin
 		else:
 			# Constrained aspect ratio.
-			arc.ratio = min(panel.rect_size.aspect(), gui_aspect_ratio)
-			# Adjust top and bottom margins relative to the aspect ratio when it's constrained.
-			# This ensures that GUI margin settings behave exactly as if the window had the
+			arc.ratio = min(panel.size.aspect(), gui_aspect_ratio)
+			# Adjust top and bottom offsets relative to the aspect ratio when it's constrained.
+			# This ensures that GUI offset settings behave exactly as if the window had the
 			# original aspect ratio size.
-			panel.margin_top = gui_margin / gui_aspect_ratio
-			panel.margin_bottom = -gui_margin / gui_aspect_ratio
+			panel.offset_top = gui_margin / gui_aspect_ratio
+			panel.offset_bottom = -gui_margin / gui_aspect_ratio
 
-		panel.margin_left = gui_margin
-		panel.margin_right = -gui_margin
+		panel.offset_left = gui_margin
+		panel.offset_right = -gui_margin
 
 
 func _on_gui_aspect_ratio_item_selected(index):
@@ -81,8 +81,8 @@ func _on_resized():
 
 
 func _on_gui_margin_drag_ended(_value_changed):
-	gui_margin = $"Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/GUIMargin/HSlider".value
-	$"Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/GUIMargin/Value".text = str(gui_margin)
+	gui_margin = $"Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMargin/HSlider".value
+	$"Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMargin/Value".text = str(gui_margin)
 	update_container()
 
 
@@ -105,25 +105,25 @@ func _on_window_base_size_item_selected(index):
 		7:  # 1680×720 (21:9)
 			base_window_size = Vector2(1680, 720)
 
-	get_tree().set_screen_stretch(stretch_mode, stretch_aspect, base_window_size, scale_factor)
+	get_viewport().content_scale_size = base_window_size
 	update_container()
 
 
 func _on_window_stretch_mode_item_selected(index):
 	stretch_mode = index
-	get_tree().set_screen_stretch(stretch_mode, stretch_aspect, base_window_size, scale_factor)
+	get_viewport().content_scale_mode = stretch_mode
 
 	# Disable irrelevant options when the stretch mode is Disabled.
-	$"Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/WindowBaseSize/OptionButton".disabled = stretch_mode == SceneTree.STRETCH_MODE_DISABLED
-	$"Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/WindowStretchAspect/OptionButton".disabled = stretch_mode == SceneTree.STRETCH_MODE_DISABLED
+	$"Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowBaseSize/OptionButton".disabled = stretch_mode == Window.CONTENT_SCALE_MODE_DISABLED
+	$"Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowStretchAspect/OptionButton".disabled = stretch_mode == Window.CONTENT_SCALE_MODE_DISABLED
 
 
 func _on_window_stretch_aspect_item_selected(index):
 	stretch_aspect = index
-	get_tree().set_screen_stretch(stretch_mode, stretch_aspect, base_window_size, scale_factor)
+	get_viewport().content_scale_aspect = stretch_aspect
 
 
 func _on_window_scale_factor_drag_ended(_value_changed):
-	scale_factor = $"Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/WindowScaleFactor/HSlider".value
-	$"Panel/AspectRatioContainer/ColorRect/CenterContainer/Options/WindowScaleFactor/Value".text = "%d%%" % (scale_factor * 100)
-	get_tree().set_screen_stretch(stretch_mode, stretch_aspect, base_window_size, scale_factor)
+	scale_factor = $"Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowScaleFactor/HSlider".value
+	$"Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowScaleFactor/Value".text = "%d%%" % (scale_factor * 100)
+	get_viewport().content_scale_factor = scale_factor

@@ -31,21 +31,25 @@ overscan area to prevent GUI elements from being cut off. This can also improve
 the gameplay experience on large monitors by bringing HUD elements closer to the
 center of the screen.
 
-A DynamicFont is also used to ensure font rendering remains crisp at high
-resolutions, thanks to Godot's built-in support for font oversampling. In other
-words, the engine will automatically re-rasterize fonts at different resolutions
-than the base window size when the window is resized (or when the window scale
-factor is changed).
+A DynamicFont with multichannel signed distance field (MSDF) rendering is also used.
+This allows for crisp font rendering at any resolution, without having to re-rasterize
+the font when the font size changes. This makes changing the various settings in this
+demo faster, especially when large font sizes are used as a result of the GUI scale factor
+setting being increased.
+
+Note that by default, Godot uses font oversampling for traditional rasterized
+DynamicFonts. This means MSDF fonts are *not* required to have crisp fonts at
+higher-than-default screen resolutions.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Vulkan Mobile
 
 ## Technical notes
 
 The demo works with the following project settings:
 
-- `2d` stretch mode (recommended for most non-pixel art games).
+- `canvas_items` stretch mode (formerly `2d`). Recommended for most non-pixel art games.
 - `expand` stretch aspect (allows support for multiple aspect ratios without
   distortion or black bars).
 - Using a base window size with a 1:1 aspect ratio (`648×648` in this demo).
