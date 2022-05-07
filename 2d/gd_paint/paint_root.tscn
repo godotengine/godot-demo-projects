@@ -1,114 +1,128 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://bhjmyer4wlwy2"]
 
-[ext_resource path="res://paint_control.gd" type="Script" id=1]
-[ext_resource path="res://tools_panel.gd" type="Script" id=2]
-[ext_resource path="res://paint_tools.png" type="Texture2D" id=3]
+[ext_resource type="Script" path="res://paint_control.gd" id="1"]
+[ext_resource type="Script" path="res://tools_panel.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://cdqq0m3rrlbva" path="res://paint_tools.png" id="3"]
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ksjc"]
 bg_color = Color(1, 1, 1, 1)
 
 [node name="PaintRoot" type="Control"]
-offset_right = 40.0
-offset_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="DrawingAreaBG" type="Panel" parent="."]
 offset_left = 350.0
-offset_right = 1280.0
-offset_bottom = 720.0
-custom_styles/panel = SubResource( 1 )
+offset_right = 1024.0
+offset_bottom = 600.0
+theme_override_styles/panel = SubResource( "StyleBoxFlat_4ksjc" )
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="PaintControl" type="Control" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource( "1" )
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
 
 [node name="TLPos" type="Position2D" parent="PaintControl"]
 position = Vector2(350, 0)
 
 [node name="ToolsPanel" type="Panel" parent="."]
 offset_right = 350.0
-offset_bottom = 720.0
-script = ExtResource( 2 )
+offset_bottom = 600.0
+script = ExtResource( "2" )
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="LabelTools" type="Label" parent="ToolsPanel"]
 offset_left = 20.0
-offset_top = 10.0
+offset_top = 6.0
 offset_right = 330.0
-offset_bottom = 24.0
+offset_bottom = 32.0
 text = "Selected tool: Pencil"
-align = 1
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="ButtonToolPencil" type="Button" parent="ToolsPanel"]
 offset_left = 40.0
-offset_top = 40.0
-offset_right = 100.0
-offset_bottom = 100.0
+offset_top = 30.0
+offset_right = 95.0
+offset_bottom = 85.0
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="Sprite2D" type="Sprite2D" parent="ToolsPanel/ButtonToolPencil"]
-position = Vector2(30, 30)
+position = Vector2(27, 26)
 scale = Vector2(2.5, 2.5)
-texture = ExtResource( 3 )
+texture = ExtResource( "3" )
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
 [node name="ButtonToolEraser" type="Button" parent="ToolsPanel"]
 offset_left = 110.0
-offset_top = 40.0
-offset_right = 170.0
-offset_bottom = 100.0
+offset_top = 30.0
+offset_right = 165.0
+offset_bottom = 85.0
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="Sprite2D" type="Sprite2D" parent="ToolsPanel/ButtonToolEraser"]
-position = Vector2(30, 30)
+position = Vector2(29, 26)
 scale = Vector2(2.5, 2.5)
-texture = ExtResource( 3 )
+texture = ExtResource( "3" )
 region_enabled = true
 region_rect = Rect2(16, 0, 16, 16)
 
 [node name="ButtonToolRectangle" type="Button" parent="ToolsPanel"]
 offset_left = 180.0
-offset_top = 40.0
-offset_right = 240.0
-offset_bottom = 100.0
+offset_top = 30.0
+offset_right = 235.0
+offset_bottom = 85.0
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="Sprite2D" type="Sprite2D" parent="ToolsPanel/ButtonToolRectangle"]
-position = Vector2(30, 30)
+position = Vector2(28, 26)
 scale = Vector2(2.5, 2.5)
-texture = ExtResource( 3 )
+texture = ExtResource( "3" )
 region_enabled = true
 region_rect = Rect2(0, 16, 16, 16)
 
 [node name="ButtonToolCircle" type="Button" parent="ToolsPanel"]
 offset_left = 250.0
-offset_top = 40.0
-offset_right = 310.0
-offset_bottom = 100.0
+offset_top = 30.0
+offset_right = 305.0
+offset_bottom = 85.0
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="Sprite2D" type="Sprite2D" parent="ToolsPanel/ButtonToolCircle"]
-position = Vector2(30, 30)
+position = Vector2(28, 26)
 scale = Vector2(2.5, 2.5)
-texture = ExtResource( 3 )
+texture = ExtResource( "3" )
 region_enabled = true
 region_rect = Rect2(16, 16, 16, 16)
 
 [node name="LabelBrushColor" type="Label" parent="ToolsPanel"]
 offset_left = 20.0
-offset_top = 120.0
+offset_top = 91.0
 offset_right = 330.0
-offset_bottom = 134.0
+offset_bottom = 117.0
 text = "Current color"
-align = 1
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="ColorPickerBrush" type="ColorPickerButton" parent="ToolsPanel"]
 offset_left = 20.0
-offset_top = 140.0
+offset_top = 115.0
 offset_right = 330.0
-offset_bottom = 190.0
+offset_bottom = 155.0
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="BrushSettings" type="Control" parent="ToolsPanel"]
 offset_top = 200.0
@@ -117,106 +131,120 @@ offset_bottom = 375.0
 
 [node name="LabelBrushSize" type="Label" parent="ToolsPanel/BrushSettings"]
 offset_left = 20.0
-offset_top = 10.0
+offset_top = -37.0
 offset_right = 330.0
-offset_bottom = 24.0
+offset_bottom = -11.0
 text = "Brush size: 32px"
-align = 1
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="HScrollBarBrushSize" type="HScrollBar" parent="ToolsPanel/BrushSettings"]
 offset_left = 20.0
-offset_top = 30.0
+offset_top = -8.0
 offset_right = 330.0
-offset_bottom = 60.0
+offset_bottom = 17.0
 min_value = 2.0
 step = 1.0
 value = 32.0
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="LabelBrushShape" type="Label" parent="ToolsPanel/BrushSettings"]
 offset_left = 20.0
-offset_top = 80.0
+offset_top = 29.0
 offset_right = 330.0
-offset_bottom = 94.0
+offset_bottom = 55.0
 text = "Brush shape: Circle"
-align = 1
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="ButtonShapeBox" type="Button" parent="ToolsPanel/BrushSettings"]
 offset_left = 100.0
-offset_top = 100.0
-offset_right = 160.0
-offset_bottom = 160.0
+offset_top = 59.0
+offset_right = 155.0
+offset_bottom = 114.0
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="Sprite2D" type="Sprite2D" parent="ToolsPanel/BrushSettings/ButtonShapeBox"]
-position = Vector2(30, 30)
+position = Vector2(27, 27)
 scale = Vector2(2.5, 2.5)
-texture = ExtResource( 3 )
+texture = ExtResource( "3" )
 region_enabled = true
 region_rect = Rect2(0, 16, 16, 16)
 
 [node name="ButtonShapeCircle" type="Button" parent="ToolsPanel/BrushSettings"]
 offset_left = 190.0
-offset_top = 100.0
-offset_right = 250.0
-offset_bottom = 160.0
+offset_top = 59.0
+offset_right = 245.0
+offset_bottom = 114.0
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="Sprite2D" type="Sprite2D" parent="ToolsPanel/BrushSettings/ButtonShapeCircle"]
-position = Vector2(30, 30)
+position = Vector2(28, 27)
 scale = Vector2(2.5, 2.5)
-texture = ExtResource( 3 )
+texture = ExtResource( "3" )
 region_enabled = true
 region_rect = Rect2(16, 16, 16, 16)
 
 [node name="LabelBackgroundColor" type="Label" parent="ToolsPanel"]
 offset_left = 20.0
-offset_top = 400.0
+offset_top = 323.0
 offset_right = 330.0
-offset_bottom = 414.0
+offset_bottom = 349.0
 text = "Background color"
-align = 1
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="ColorPickerBackground" type="ColorPickerButton" parent="ToolsPanel"]
 offset_left = 20.0
-offset_top = 420.0
+offset_top = 351.0
 offset_right = 330.0
-offset_bottom = 470.0
+offset_bottom = 391.0
 color = Color(1, 1, 1, 1)
 edit_alpha = false
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="LabelStats" type="Label" parent="ToolsPanel"]
 modulate = Color(0.414062, 0.414062, 0.414062, 1)
 offset_left = 20.0
-offset_top = 590.0
+offset_top = 463.0
 offset_right = 330.0
-offset_bottom = 604.0
+offset_bottom = 489.0
 text = "Brush objects: 00000"
-align = 1
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="ButtonUndo" type="Button" parent="ToolsPanel"]
 offset_left = 10.0
-offset_top = 520.0
+offset_top = 415.0
 offset_right = 340.0
-offset_bottom = 560.0
+offset_bottom = 450.0
 text = "Undo last stroke"
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="ButtonSave" type="Button" parent="ToolsPanel"]
 offset_left = 10.0
-offset_top = 620.0
+offset_top = 506.0
 offset_right = 340.0
-offset_bottom = 660.0
+offset_bottom = 541.0
 text = "Save picture"
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="ButtonClear" type="Button" parent="ToolsPanel"]
 offset_left = 10.0
-offset_top = 670.0
+offset_top = 550.0
 offset_right = 340.0
-offset_bottom = 710.0
+offset_bottom = 585.0
 text = "Clear picture"
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
 
 [node name="SaveFileDialog" type="FileDialog" parent="."]
-offset_right = 600.0
-offset_bottom = 400.0
-resizable = true
 access = 2
 filters = PackedStringArray("*.png")
-current_dir = "/home/aaronfranke/workspace/godot-demo-projects/2d/gd_paint"
-current_path = "/home/aaronfranke/workspace/godot-demo-projects/2d/gd_paint/"
+show_hidden_files = true
