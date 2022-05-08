@@ -4,8 +4,6 @@ extends Control
 const UNDO_MODE_SHAPE = -2
 # A constant for whether or not we can undo.
 const UNDO_NONE = -1
-# How large is the image (it's actually the size of DrawingAreaBG, because that's our background canvas).
-const IMAGE_SIZE = Vector2(674, 600)
 
 # Enums for the various modes and brush shapes that can be applied.
 enum BrushModes {
@@ -19,9 +17,6 @@ enum BrushShapes {
 	RECTANGLE,
 	CIRCLE,
 }
-
-# The top-left position of the canvas.
-var TL_node
 
 # A list to hold all of the dictionaries that make up each brush.
 var brush_data_list = []
@@ -48,20 +43,15 @@ var brush_shape = BrushShapes.CIRCLE;
 # in the _draw function for more details).
 var bg_color = Color.WHITE
 
-func _ready():
-	# Get the top left position node. We need this to find out whether or not the mouse is inside the canvas.
-	TL_node = get_node(^"TLPos")
-	set_process(true)
+@onready var drawing_area = $"../DrawingAreaBG"
 
 
 func _process(_delta):
 	var mouse_pos = get_viewport().get_mouse_position()
 
 	# Check if the mouse is currently inside the canvas/drawing-area.
-	is_mouse_in_drawing_area = false
-	if mouse_pos.x > TL_node.global_position.x:
-		if mouse_pos.y > TL_node.global_position.y:
-			is_mouse_in_drawing_area = true
+	var drawing_area_rect := Rect2(drawing_area.position, drawing_area.size)
+	is_mouse_in_drawing_area = drawing_area_rect.has_point(mouse_pos)
 
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		# If we do not have a position for when the mouse was first clicked, then this must
@@ -110,11 +100,10 @@ func check_if_mouse_is_inside_canvas():
 		# Make sure the mouse click starting position is inside the canvas.
 		# This is so if we start out click outside the canvas (say chosing a color from the color picker)
 		# and then move our mouse back into the canvas, it won't start painting.
-		if mouse_click_start_pos.x > TL_node.global_position.x:
-			if mouse_click_start_pos.y > TL_node.global_position.y:
-				# Make sure the current mouse position is inside the canvas.
-				if is_mouse_in_drawing_area:
-					return true
+		if Rect2(drawing_area.position, drawing_area.size).has_point(mouse_click_start_pos):
+			# Make sure the current mouse position is inside the canvas.
+			if is_mouse_in_drawing_area:
+				return true
 	return false
 
 
@@ -244,7 +233,7 @@ func save_picture(path):
 	# Get the viewport image.
 	var img = get_viewport().get_texture().get_image()
 	# Crop the image so we only have canvas area.
-	var cropped_image = img.get_rect(Rect2(TL_node.global_position, IMAGE_SIZE))
+	var cropped_image = img.get_rect(Rect2(drawing_area.position, drawing_area.size))
 
 	# Save the image with the passed in path we got from the save dialog.
 	cropped_image.save_png(path)

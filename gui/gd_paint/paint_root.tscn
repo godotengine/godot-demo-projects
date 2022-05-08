@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhjmyer4wlwy2"]
+[gd_scene load_steps=10 format=3 uid="uid://bhjmyer4wlwy2"]
 
 [ext_resource type="Script" path="res://paint_control.gd" id="1"]
 [ext_resource type="Script" path="res://tools_panel.gd" id="2"]
@@ -9,6 +9,22 @@ bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_npkcn"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0gbg"]
+atlas = ExtResource( "3" )
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7akv"]
+atlas = ExtResource( "3" )
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63q87"]
+atlas = ExtResource( "3" )
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t52fe"]
+atlas = ExtResource( "3" )
+region = Rect2(16, 16, 16, 16)
 
 [node name="PaintRoot" type="Control"]
 anchor_right = 1.0
@@ -32,9 +48,6 @@ grow_vertical = 2
 script = ExtResource( "1" )
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
-
-[node name="TLPos" type="Position2D" parent="PaintControl"]
-position = Vector2(350, 0)
 
 [node name="ToolsPanel" type="Panel" parent="."]
 offset_right = 350.0
@@ -61,12 +74,18 @@ offset_bottom = 85.0
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Sprite2D" type="Sprite2D" parent="ToolsPanel/ButtonToolPencil"]
-position = Vector2(27, 26)
-scale = Vector2(2.5, 2.5)
-texture = ExtResource( "3" )
-region_enabled = true
-region_rect = Rect2(0, 0, 16, 16)
+[node name="TextureRect" type="TextureRect" parent="ToolsPanel/ButtonToolPencil"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource( "AtlasTexture_v0gbg" )
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
 
 [node name="ButtonToolEraser" type="Button" parent="ToolsPanel"]
 offset_left = 110.0
@@ -76,12 +95,18 @@ offset_bottom = 85.0
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Sprite2D" type="Sprite2D" parent="ToolsPanel/ButtonToolEraser"]
-position = Vector2(29, 26)
-scale = Vector2(2.5, 2.5)
-texture = ExtResource( "3" )
-region_enabled = true
-region_rect = Rect2(16, 0, 16, 16)
+[node name="TextureRect2" type="TextureRect" parent="ToolsPanel/ButtonToolEraser"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource( "AtlasTexture_j7akv" )
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
 
 [node name="ButtonToolRectangle" type="Button" parent="ToolsPanel"]
 offset_left = 180.0
@@ -91,12 +116,18 @@ offset_bottom = 85.0
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Sprite2D" type="Sprite2D" parent="ToolsPanel/ButtonToolRectangle"]
-position = Vector2(28, 26)
-scale = Vector2(2.5, 2.5)
-texture = ExtResource( "3" )
-region_enabled = true
-region_rect = Rect2(0, 16, 16, 16)
+[node name="TextureRect" type="TextureRect" parent="ToolsPanel/ButtonToolRectangle"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource( "AtlasTexture_63q87" )
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
 
 [node name="ButtonToolCircle" type="Button" parent="ToolsPanel"]
 offset_left = 250.0
@@ -106,12 +137,18 @@ offset_bottom = 85.0
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Sprite2D" type="Sprite2D" parent="ToolsPanel/ButtonToolCircle"]
-position = Vector2(28, 26)
-scale = Vector2(2.5, 2.5)
-texture = ExtResource( "3" )
-region_enabled = true
-region_rect = Rect2(16, 16, 16, 16)
+[node name="TextureRect" type="TextureRect" parent="ToolsPanel/ButtonToolCircle"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource( "AtlasTexture_t52fe" )
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
 
 [node name="LabelBrushColor" type="Label" parent="ToolsPanel"]
 offset_left = 20.0
@@ -172,12 +209,18 @@ offset_bottom = 114.0
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Sprite2D" type="Sprite2D" parent="ToolsPanel/BrushSettings/ButtonShapeBox"]
-position = Vector2(27, 27)
-scale = Vector2(2.5, 2.5)
-texture = ExtResource( "3" )
-region_enabled = true
-region_rect = Rect2(0, 16, 16, 16)
+[node name="TextureRect" type="TextureRect" parent="ToolsPanel/BrushSettings/ButtonShapeBox"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource( "AtlasTexture_63q87" )
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
 
 [node name="ButtonShapeCircle" type="Button" parent="ToolsPanel/BrushSettings"]
 offset_left = 190.0
@@ -187,12 +230,18 @@ offset_bottom = 114.0
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Sprite2D" type="Sprite2D" parent="ToolsPanel/BrushSettings/ButtonShapeCircle"]
-position = Vector2(28, 27)
-scale = Vector2(2.5, 2.5)
-texture = ExtResource( "3" )
-region_enabled = true
-region_rect = Rect2(16, 16, 16, 16)
+[node name="TextureRect" type="TextureRect" parent="ToolsPanel/BrushSettings/ButtonShapeCircle"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource( "AtlasTexture_t52fe" )
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
 
 [node name="LabelBackgroundColor" type="Label" parent="ToolsPanel"]
 offset_left = 20.0
@@ -251,6 +300,8 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="SaveFileDialog" type="FileDialog" parent="."]
+size = Vector2i(800, 300)
+min_size = Vector2i(800, 300)
 access = 2
 filters = PackedStringArray("*.png")
 show_hidden_files = true
