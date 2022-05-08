@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bhjmyer4wlwy2"]
+[gd_scene load_steps=6 format=3 uid="uid://bhjmyer4wlwy2"]
 
 [ext_resource type="Script" path="res://paint_control.gd" id="1"]
 [ext_resource type="Script" path="res://tools_panel.gd" id="2"]
@@ -7,17 +7,22 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ksjc"]
 bg_color = Color(1, 1, 1, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_npkcn"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+
 [node name="PaintRoot" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="DrawingAreaBG" type="Panel" parent="."]
-offset_left = 350.0
-offset_right = 1024.0
-offset_bottom = 600.0
+anchor_left = 0.342
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.208008
+grow_horizontal = 2
 theme_override_styles/panel = SubResource( "StyleBoxFlat_4ksjc" )
-metadata/_edit_layout_mode = 0
-metadata/_edit_use_custom_anchors = false
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = true
 
 [node name="PaintControl" type="Control" parent="."]
 anchor_right = 1.0
@@ -34,9 +39,10 @@ position = Vector2(350, 0)
 [node name="ToolsPanel" type="Panel" parent="."]
 offset_right = 350.0
 offset_bottom = 600.0
+theme_override_styles/panel = SubResource( "StyleBoxFlat_npkcn" )
 script = ExtResource( "2" )
-metadata/_edit_layout_mode = 0
-metadata/_edit_use_custom_anchors = false
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = true
 
 [node name="LabelTools" type="Label" parent="ToolsPanel"]
 offset_left = 20.0
