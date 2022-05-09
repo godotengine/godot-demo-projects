@@ -11,7 +11,7 @@ func _ready():
 
 
 func _physics_process(_delta):
-	var modetext = "Mode:\n"
+	var modetext = "Mode: "
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 		modetext += "Fullscreen\n"
 	else:
@@ -24,43 +24,43 @@ func _physics_process(_delta):
 		modetext += "Maximized\n"
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		modetext += "MouseGrab\n"
-		$Label_MouseModeCaptured_KeyInfo.show()
+		$Buttons/Label_MouseModeCaptured_KeyInfo.show()
 	else:
-		$Label_MouseModeCaptured_KeyInfo.hide()
+		$Buttons/Label_MouseModeCaptured_KeyInfo.hide()
 
-	$Label_Mode.text = modetext
-	$Label_Position.text = str("Position:\n", DisplayServer.window_get_position())
-	$Label_Size.text = str("Size:\n", DisplayServer.window_get_size())
-	$Label_MousePosition.text = str("Mouse Position:\n", mousepos)
-	$Label_Screen_Count.text = str("Screen_Count:\n", DisplayServer.get_screen_count())
-	$Label_Screen_Current.text = str("Screen:\n", DisplayServer.window_get_current_screen())
-	$Label_Screen0_Resolution.text = str("Screen0 Resolution:\n", DisplayServer.screen_get_size())
-	$Label_Screen0_Position.text = str("Screen0 Position:\n", DisplayServer.screen_get_position())
-	$Label_Screen0_DPI.text = str("Screen0 DPI:\n", DisplayServer.screen_get_dpi())
+	$Labels/Label_Mode.text = modetext
+	$Labels/Label_Position.text = str("Position: ", DisplayServer.window_get_position())
+	$Labels/Label_Size.text = str("Size: ", DisplayServer.window_get_size())
+	$Labels/Label_MousePosition.text = str("Mouse Position: ", mousepos)
+	$Labels/Label_Screen_Count.text = str("Screen_Count: ", DisplayServer.get_screen_count())
+	$Labels/Label_Screen_Current.text = str("Screen: ", DisplayServer.window_get_current_screen())
+	$Labels/Label_Screen0_Resolution.text = str("Screen0 Resolution:\n", DisplayServer.screen_get_size())
+	$Labels/Label_Screen0_Position.text = str("Screen0 Position:\n", DisplayServer.screen_get_position())
+	$Labels/Label_Screen0_DPI.text = str("Screen0 DPI: ", DisplayServer.screen_get_dpi())
 
 	if DisplayServer.get_screen_count() > 1:
-		$Button_Screen0.show()
-		$Button_Screen1.show()
-		$Label_Screen1_Resolution.show()
-		$Label_Screen1_Position.show()
-		$Label_Screen1_DPI.show()
-		$Label_Screen1_Resolution.text = str("Screen1 Resolution:\n", DisplayServer.window_get_size(1))
-		$Label_Screen1_Position.text = str("Screen1 Position:\n", DisplayServer.screen_get_position(1))
-		$Label_Screen1_DPI.text = str("Screen1 DPI:\n", DisplayServer.screen_get_dpi(1))
+		$Buttons/Button_Screen0.show()
+		$Buttons/Button_Screen1.show()
+		$Labels/Label_Screen1_Resolution.show()
+		$Labels/Label_Screen1_Position.show()
+		$Labels/Label_Screen1_DPI.show()
+		$Labels/Label_Screen1_Resolution.text = str("Screen1 Resolution:\n", DisplayServer.window_get_size(1))
+		$Labels/Label_Screen1_Position.text = str("Screen1 Position:\n", DisplayServer.screen_get_position(1))
+		$Labels/Label_Screen1_DPI.text = str("Screen1 DPI: ", DisplayServer.screen_get_dpi(1))
 	else:
-		$Button_Screen0.hide()
-		$Button_Screen1.hide()
-		$Label_Screen1_Resolution.hide()
-		$Label_Screen1_Position.hide()
-		$Label_Screen1_DPI.hide()
+		$Buttons/Button_Screen0.hide()
+		$Buttons/Button_Screen1.hide()
+		$Labels/Label_Screen1_Resolution.hide()
+		$Labels/Label_Screen1_Position.hide()
+		$Labels/Label_Screen1_DPI.hide()
 
-	$Button_Fullscreen.set_pressed(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)
-	$Button_FixedSize.set_pressed(DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_RESIZE_DISABLED))
-	$Button_Minimized.set_pressed(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_MINIMIZED)
-	$Button_Maximized.set_pressed(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_MAXIMIZED)
-	$Button_MouseModeVisible.set_pressed(Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE)
-	$Button_MouseModeHidden.set_pressed(Input.get_mouse_mode() == Input.MOUSE_MODE_HIDDEN)
-	$Button_MouseModeCaptured.set_pressed(Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED)
+	$Buttons/Button_Fullscreen.set_pressed(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)
+	$Buttons/Button_FixedSize.set_pressed(DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_RESIZE_DISABLED))
+	$Buttons/Button_Minimized.set_pressed(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_MINIMIZED)
+	$Buttons/Button_Maximized.set_pressed(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_MAXIMIZED)
+	$Buttons/Button_MouseModeVisible.set_pressed(Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE)
+	$Buttons/Button_MouseModeHidden.set_pressed(Input.get_mouse_mode() == Input.MOUSE_MODE_HIDDEN)
+	$Buttons/Button_MouseModeCaptured.set_pressed(Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED)
 
 
 func _unhandled_input(event):
@@ -82,40 +82,41 @@ func _unhandled_input(event):
 
 func check_wm_api():
 	var s = ""
-	if not OS.has_method("get_screen_count"):
+	if not DisplayServer.has_method("get_screen_count"):
 		s += " - get_screen_count()\n"
-	if not OS.has_method("get_current_screen"):
-		s += " - get_current_screen()\n"
-	if not OS.has_method("set_current_screen"):
-		s += " - set_current_screen()\n"
-	if not OS.has_method("get_screen_position"):
-		s += " - get_screen_position()\n"
-	if not OS.has_method("get_screen_size"):
-		s += " - get_screen_size()\n"
-	if not OS.has_method("get_window_position"):
-		s += " - get_window_position()\n"
-	if not OS.has_method("set_window_position"):
-		s += " - set_window_position()\n"
-	if not OS.has_method("get_window_size"):
+	if not DisplayServer.has_method("window_get_current_screen"):
+		s += " - window_get_current_screen()\n"
+	if not DisplayServer.has_method("window_set_current_screen"):
+		s += " - window_set_current_screen()\n"
+	if not DisplayServer.has_method("screen_get_position"):
+		s += " - screen_get_position()\n"
+	if not DisplayServer.has_method("window_get_size"):
+		s += " - window_get_size()\n"
+	if not DisplayServer.has_method("window_get_position"):
+		s += " - window_get_position()\n"
+	if not DisplayServer.has_method("window_set_position"):
+		s += " - window_set_position()\n"
+	if not DisplayServer.has_method("window_get_size"):
 		s += " - get_window_size()\n"
-	if not OS.has_method("set_window_size"):
-		s += " - set_window_size()\n"
-	if not OS.has_method("set_window_fullscreen"):
-		s += " - set_window_fullscreen()\n"
-	if not OS.has_method("is_window_fullscreen"):
-		s += " - is_window_fullscreen()\n"
-	if not OS.has_method("set_window_resizable"):
-		s += " - set_window_resizable()\n"
-	if not OS.has_method("is_window_resizable"):
-		s += " - is_window_resizable()\n"
-	if not OS.has_method("set_window_minimized"):
-		s += " - set_window_minimized()\n"
-	if not OS.has_method("is_window_minimized"):
-		s += " - is_window_minimized()\n"
-	if not OS.has_method("set_window_maximized"):
-		s += " - set_window_maximized()\n"
-	if not OS.has_method("is_window_maximized"):
-		s += " - is_window_maximized()\n"
+	if not DisplayServer.has_method("window_set_size"):
+		s += " - window_set_size()\n"
+# These function are no longer and this is set through flags!
+#	if not DisplayServer.has_method("set_window_fullscreen"):
+#		s += " - set_window_fullscreen()\n"
+#	if not DisplayServer.window_get_flag() OS.has_method("is_window_fullscreen"):
+#		s += " - is_window_fullscreen()\n"
+#	if not OS.has_method("set_window_resizable"):
+#		s += " - set_window_resizable()\n"
+#	if not OS.has_method("is_window_resizable"):
+#		s += " - is_window_resizable()\n"
+#	if not OS.has_method("set_window_minimized"):
+#		s += " - set_window_minimized()\n"
+#	if not OS.has_method("is_window_minimized"):
+#		s += " - is_window_minimized()\n"
+#	if not OS.has_method("set_window_maximized"):
+#		s += " - set_window_maximized()\n"
+#	if not OS.has_method("is_window_maximized"):
+#		s += " - is_window_maximized()\n"
 
 	if s.length() == 0:
 		return true

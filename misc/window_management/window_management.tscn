@@ -25,11 +25,19 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( "2" )
 
-[node name="Button_Fullscreen" type="Button" parent="Control"]
-offset_left = 23.0
-offset_top = 12.0
-offset_right = 123.0
-offset_bottom = 43.0
+[node name="Buttons" type="VBoxContainer" parent="Control"]
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 335.0
+offset_bottom = -2.0
+theme_override_constants/separation = 5
+metadata/_edit_layout_mode = 0
+metadata/_edit_use_custom_anchors = false
+
+[node name="Button_Fullscreen" type="Button" parent="Control/Buttons"]
+offset_right = 87.0
+offset_bottom = 31.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
@@ -37,11 +45,10 @@ text = "Fullscreen"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_FixedSize" type="Button" parent="Control"]
-offset_left = 23.0
-offset_top = 52.0
-offset_right = 123.0
-offset_bottom = 83.0
+[node name="Button_FixedSize" type="Button" parent="Control/Buttons"]
+offset_top = 36.0
+offset_right = 80.0
+offset_bottom = 67.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
@@ -49,11 +56,10 @@ text = "FixedSize"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_Minimized" type="Button" parent="Control"]
-offset_left = 23.0
-offset_top = 92.0
-offset_right = 123.0
-offset_bottom = 123.0
+[node name="Button_Minimized" type="Button" parent="Control/Buttons"]
+offset_top = 72.0
+offset_right = 89.0
+offset_bottom = 103.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
@@ -61,11 +67,10 @@ text = "Minimized"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_Maximized" type="Button" parent="Control"]
-offset_left = 23.0
-offset_top = 132.0
-offset_right = 123.0
-offset_bottom = 163.0
+[node name="Button_Maximized" type="Button" parent="Control/Buttons"]
+offset_top = 108.0
+offset_right = 92.0
+offset_bottom = 139.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
@@ -73,57 +78,50 @@ text = "Maximized"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_MoveTo" type="Button" parent="Control"]
-offset_left = 23.0
-offset_top = 170.0
-offset_right = 123.0
-offset_bottom = 201.0
+[node name="Button_MoveTo" type="Button" parent="Control/Buttons"]
+offset_top = 144.0
+offset_right = 70.0
+offset_bottom = 175.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "MoveTo"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_Resize" type="Button" parent="Control"]
-offset_left = 23.0
-offset_top = 210.0
-offset_right = 123.0
-offset_bottom = 241.0
+[node name="Button_Resize" type="Button" parent="Control/Buttons"]
+offset_top = 180.0
+offset_right = 57.0
+offset_bottom = 211.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Resize"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_Screen0" type="Button" parent="Control"]
-offset_left = 23.0
-offset_top = 250.0
-offset_right = 123.0
-offset_bottom = 281.0
+[node name="Button_Screen0" type="Button" parent="Control/Buttons"]
+offset_top = 216.0
+offset_right = 70.0
+offset_bottom = 247.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Screen0"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_Screen1" type="Button" parent="Control"]
-offset_left = 23.0
-offset_top = 290.0
-offset_right = 123.0
-offset_bottom = 321.0
+[node name="Button_Screen1" type="Button" parent="Control/Buttons"]
+offset_top = 252.0
+offset_right = 70.0
+offset_bottom = 283.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Screen1"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_MouseModeVisible" type="Button" parent="Control"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 18.0
-offset_top = -217.0
-offset_right = 234.0
-offset_bottom = -186.0
+[node name="Button_MouseModeVisible" type="Button" parent="Control/Buttons"]
+offset_top = 288.0
+offset_right = 216.0
+offset_bottom = 319.0
 grow_vertical = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -132,13 +130,10 @@ text = "[F1] MOUSE_MODE_VISIBLE"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_MouseModeHidden" type="Button" parent="Control"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 18.0
-offset_top = -182.0
-offset_right = 240.0
-offset_bottom = -151.0
+[node name="Button_MouseModeHidden" type="Button" parent="Control/Buttons"]
+offset_top = 324.0
+offset_right = 222.0
+offset_bottom = 355.0
 grow_vertical = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -147,13 +142,10 @@ text = "[F2] MOUSE_MODE_HIDDEN"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_MouseModeCaptured" type="Button" parent="Control"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 18.0
-offset_top = -147.0
-offset_right = 260.0
-offset_bottom = -116.0
+[node name="Button_MouseModeCaptured" type="Button" parent="Control/Buttons"]
+offset_top = 360.0
+offset_right = 242.0
+offset_bottom = 391.0
 grow_vertical = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -162,193 +154,10 @@ text = "[F3] MOUSE_MODE_CAPTURED"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_Mode" type="Label" parent="Control"]
-minimum_size = Vector2(190, 0)
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -205.0
-offset_top = 156.0
-offset_right = -15.0
-offset_bottom = 182.0
-grow_horizontal = 0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-text = "Mode:"
-metadata/_edit_layout_mode = 1
-metadata/_edit_use_custom_anchors = false
-
-[node name="Label_Position" type="Label" parent="Control"]
-minimum_size = Vector2(190, 0)
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -205.0
-offset_top = 76.0
-offset_right = -15.0
-offset_bottom = 102.0
-grow_horizontal = 0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-text = "Position:"
-metadata/_edit_layout_mode = 1
-metadata/_edit_use_custom_anchors = false
-
-[node name="Label_Size" type="Label" parent="Control"]
-minimum_size = Vector2(190, 0)
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -205.0
-offset_top = 116.0
-offset_right = -15.0
-offset_bottom = 142.0
-grow_horizontal = 0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-text = "Size:"
-metadata/_edit_layout_mode = 1
-metadata/_edit_use_custom_anchors = false
-
-[node name="Label_MousePosition" type="Label" parent="Control"]
-minimum_size = Vector2(190, 0)
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -205.0
-offset_top = 236.0
-offset_right = -15.0
-offset_bottom = 262.0
-grow_horizontal = 0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-text = "Mouse Position:"
-metadata/_edit_layout_mode = 1
-metadata/_edit_use_custom_anchors = false
-
-[node name="Label_Screen_Count" type="Label" parent="Control"]
-minimum_size = Vector2(190, 0)
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -205.0
-offset_top = 316.0
-offset_right = -15.0
-offset_bottom = 342.0
-grow_horizontal = 0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-text = "Screen_Count:"
-metadata/_edit_layout_mode = 1
-metadata/_edit_use_custom_anchors = false
-
-[node name="Label_Screen_Current" type="Label" parent="Control"]
-minimum_size = Vector2(190, 0)
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -205.0
-offset_top = 36.0
-offset_right = -15.0
-offset_bottom = 62.0
-grow_horizontal = 0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-text = "Screen:"
-metadata/_edit_layout_mode = 1
-metadata/_edit_use_custom_anchors = false
-
-[node name="Label_Screen0_Resolution" type="Label" parent="Control"]
-minimum_size = Vector2(190, 0)
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -205.0
-offset_top = 356.0
-offset_right = -15.0
-offset_bottom = 382.0
-grow_horizontal = 0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-text = "Screen0 Resolution: "
-metadata/_edit_layout_mode = 1
-metadata/_edit_use_custom_anchors = false
-
-[node name="Label_Screen0_Position" type="Label" parent="Control"]
-minimum_size = Vector2(190, 0)
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -205.0
+[node name="Label_KeyInfo" type="Label" parent="Control/Buttons"]
 offset_top = 396.0
-offset_right = -15.0
-offset_bottom = 422.0
-grow_horizontal = 0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-text = "Screen0 Position: "
-metadata/_edit_layout_mode = 1
-metadata/_edit_use_custom_anchors = false
-
-[node name="Label_Screen0_DPI" type="Label" parent="Control"]
-minimum_size = Vector2(190, 0)
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -205.0
-offset_top = 432.0
-offset_right = -15.0
-offset_bottom = 458.0
-grow_horizontal = 0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-text = "Screen0 DPI:"
-metadata/_edit_layout_mode = 1
-metadata/_edit_use_custom_anchors = false
-
-[node name="Label_Screen1_Resolution" type="Label" parent="Control"]
-minimum_size = Vector2(190, 0)
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -205.0
-offset_top = 467.0
-offset_right = -15.0
-offset_bottom = 493.0
-grow_horizontal = 0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-text = "Screen1 Resolution: "
-metadata/_edit_layout_mode = 1
-metadata/_edit_use_custom_anchors = false
-
-[node name="Label_Screen1_Position" type="Label" parent="Control"]
-minimum_size = Vector2(190, 0)
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -205.0
-offset_top = 505.0
-offset_right = -15.0
-offset_bottom = 531.0
-grow_horizontal = 0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-text = "Screen1 Position: "
-metadata/_edit_layout_mode = 1
-metadata/_edit_use_custom_anchors = false
-
-[node name="Label_Screen1_DPI" type="Label" parent="Control"]
-minimum_size = Vector2(190, 0)
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -205.0
-offset_top = 540.0
-offset_right = -15.0
-offset_bottom = 566.0
-grow_horizontal = 0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-text = "Screen1 DPI:"
-metadata/_edit_layout_mode = 1
-metadata/_edit_use_custom_anchors = false
-
-[node name="Label_KeyInfo" type="Label" parent="Control"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 14.0
-offset_top = -87.0
-offset_right = 309.0
-offset_bottom = -9.0
+offset_right = 295.0
+offset_bottom = 474.0
 grow_vertical = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -358,13 +167,10 @@ F3: Activate MOUSE_MODE_CAPTURED"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_MouseModeCaptured_KeyInfo" type="Label" parent="Control"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 328.0
-offset_top = -86.0
-offset_right = 653.0
-offset_bottom = -8.0
+[node name="Label_MouseModeCaptured_KeyInfo" type="Label" parent="Control/Buttons"]
+offset_top = 479.0
+offset_right = 325.0
+offset_bottom = 557.0
 grow_vertical = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -374,17 +180,171 @@ A, D: Strafe left, right"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_MouseModes" type="Label" parent="Control"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 18.0
-offset_top = -244.0
-offset_right = 284.0
-offset_bottom = -218.0
+[node name="Label_MouseModes" type="Label" parent="Control/Buttons"]
+offset_top = 562.0
+offset_right = 108.0
+offset_bottom = 588.0
 grow_vertical = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "MouseModes:"
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
+[node name="Labels" type="VBoxContainer" parent="Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -241.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 10
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
+[node name="Label_Mode" type="Label" parent="Control/Labels"]
+minimum_size = Vector2(190, 0)
+offset_right = 190.0
+offset_bottom = 26.0
+grow_horizontal = 0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Mode:"
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
+[node name="Label_Position" type="Label" parent="Control/Labels"]
+minimum_size = Vector2(190, 0)
+offset_top = 36.0
+offset_right = 190.0
+offset_bottom = 62.0
+grow_horizontal = 0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Position:"
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
+[node name="Label_Size" type="Label" parent="Control/Labels"]
+minimum_size = Vector2(190, 0)
+offset_top = 72.0
+offset_right = 190.0
+offset_bottom = 98.0
+grow_horizontal = 0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Size:"
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
+[node name="Label_MousePosition" type="Label" parent="Control/Labels"]
+minimum_size = Vector2(190, 0)
+offset_top = 108.0
+offset_right = 190.0
+offset_bottom = 134.0
+grow_horizontal = 0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Mouse Position:"
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
+[node name="Label_Screen_Count" type="Label" parent="Control/Labels"]
+minimum_size = Vector2(190, 0)
+offset_top = 144.0
+offset_right = 190.0
+offset_bottom = 170.0
+grow_horizontal = 0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Screen_Count:"
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
+[node name="Label_Screen_Current" type="Label" parent="Control/Labels"]
+minimum_size = Vector2(190, 0)
+offset_top = 180.0
+offset_right = 190.0
+offset_bottom = 206.0
+grow_horizontal = 0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Screen:"
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
+[node name="Label_Screen0_Resolution" type="Label" parent="Control/Labels"]
+minimum_size = Vector2(190, 0)
+offset_top = 216.0
+offset_right = 190.0
+offset_bottom = 242.0
+grow_horizontal = 0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Screen0 Resolution: "
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
+[node name="Label_Screen0_Position" type="Label" parent="Control/Labels"]
+minimum_size = Vector2(190, 0)
+offset_top = 252.0
+offset_right = 190.0
+offset_bottom = 278.0
+grow_horizontal = 0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Screen0 Position: "
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
+[node name="Label_Screen0_DPI" type="Label" parent="Control/Labels"]
+minimum_size = Vector2(190, 0)
+offset_top = 288.0
+offset_right = 190.0
+offset_bottom = 314.0
+grow_horizontal = 0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Screen0 DPI:"
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
+[node name="Label_Screen1_Resolution" type="Label" parent="Control/Labels"]
+minimum_size = Vector2(190, 0)
+offset_top = 324.0
+offset_right = 190.0
+offset_bottom = 350.0
+grow_horizontal = 0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Screen1 Resolution: "
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
+[node name="Label_Screen1_Position" type="Label" parent="Control/Labels"]
+minimum_size = Vector2(190, 0)
+offset_top = 360.0
+offset_right = 190.0
+offset_bottom = 386.0
+grow_horizontal = 0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Screen1 Position: "
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
+[node name="Label_Screen1_DPI" type="Label" parent="Control/Labels"]
+minimum_size = Vector2(190, 0)
+offset_top = 396.0
+offset_right = 190.0
+offset_bottom = 422.0
+grow_horizontal = 0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Screen1 DPI:"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
@@ -405,14 +365,14 @@ across platforms.
 Your platform lacks at the moment the following methods:
 "
 
-[connection signal="pressed" from="Control/Button_Fullscreen" to="Control" method="_on_Button_Fullscreen_pressed"]
-[connection signal="pressed" from="Control/Button_FixedSize" to="Control" method="_on_Button_FixedSize_pressed"]
-[connection signal="pressed" from="Control/Button_Minimized" to="Control" method="_on_Button_Minimized_pressed"]
-[connection signal="pressed" from="Control/Button_Maximized" to="Control" method="_on_Button_Maximized_pressed"]
-[connection signal="pressed" from="Control/Button_MoveTo" to="Control" method="_on_Button_MoveTo_pressed"]
-[connection signal="pressed" from="Control/Button_Resize" to="Control" method="_on_Button_Resize_pressed"]
-[connection signal="pressed" from="Control/Button_Screen0" to="Control" method="_on_Button_Screen0_pressed"]
-[connection signal="pressed" from="Control/Button_Screen1" to="Control" method="_on_Button_Screen1_pressed"]
-[connection signal="pressed" from="Control/Button_MouseModeVisible" to="Control" method="_on_Button_MouseModeVisible_pressed"]
-[connection signal="pressed" from="Control/Button_MouseModeHidden" to="Control" method="_on_Button_MouseModeHidden_pressed"]
-[connection signal="pressed" from="Control/Button_MouseModeCaptured" to="Control" method="_on_Button_MouseModeCaptured_pressed"]
+[connection signal="pressed" from="Control/Buttons/Button_Fullscreen" to="Control" method="_on_Button_Fullscreen_pressed"]
+[connection signal="pressed" from="Control/Buttons/Button_FixedSize" to="Control" method="_on_Button_FixedSize_pressed"]
+[connection signal="pressed" from="Control/Buttons/Button_Minimized" to="Control" method="_on_Button_Minimized_pressed"]
+[connection signal="pressed" from="Control/Buttons/Button_Maximized" to="Control" method="_on_Button_Maximized_pressed"]
+[connection signal="pressed" from="Control/Buttons/Button_MoveTo" to="Control" method="_on_Button_MoveTo_pressed"]
+[connection signal="pressed" from="Control/Buttons/Button_Resize" to="Control" method="_on_Button_Resize_pressed"]
+[connection signal="pressed" from="Control/Buttons/Button_Screen0" to="Control" method="_on_Button_Screen0_pressed"]
+[connection signal="pressed" from="Control/Buttons/Button_Screen1" to="Control" method="_on_Button_Screen1_pressed"]
+[connection signal="pressed" from="Control/Buttons/Button_MouseModeVisible" to="Control" method="_on_Button_MouseModeVisible_pressed"]
+[connection signal="pressed" from="Control/Buttons/Button_MouseModeHidden" to="Control" method="_on_Button_MouseModeHidden_pressed"]
+[connection signal="pressed" from="Control/Buttons/Button_MouseModeCaptured" to="Control" method="_on_Button_MouseModeCaptured_pressed"]
