@@ -1,0 +1,857 @@
+[gd_scene load_steps=48 format=3 uid="uid://clyxqp0e6qemi"]
+
+[ext_resource type="Texture2D" uid="uid://ccgkupemr6e1q" path="res://textures/paint.png" id="3_2nulf"]
+[ext_resource type="PackedScene" uid="uid://daokc0jvx7nkw" path="res://thin_lines.tscn" id="3_5ehjl"]
+[ext_resource type="PackedScene" uid="uid://sxx5ow26t0c3" path="res://polyhaven/dutch_ship_medium_1k.gltf" id="3_fa2bl"]
+[ext_resource type="Texture2D" uid="uid://bm6eht0bqttpo" path="res://textures/paint_normal.png" id="4_fdfpv"]
+[ext_resource type="Texture2D" uid="uid://chjqieyps5n5r" path="res://textures/checker.png" id="14"]
+[ext_resource type="Script" path="res://anti_aliasing.gd" id="18"]
+
+[sub_resource type="ProceduralSkyMaterial" id="9"]
+
+[sub_resource type="Sky" id="10"]
+sky_material = SubResource("9")
+
+[sub_resource type="Environment" id="11"]
+background_mode = 2
+sky = SubResource("10")
+
+[sub_resource type="Animation" id="Animation_qdnt6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Testers/MovingObject/MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Testers/RotatingObject/MeshInstance3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Testers/ScalingObject/MeshInstance3D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Testers/MovingCPUParticles/CPUParticles3D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.5, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Testers/MovingDecal/Decal:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Testers/MovingDecal/Decal:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.18405, -2.33886, 0.187249)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Testers/ScrollingUVAnimation/MeshInstance3D:surface_material_override/0:uv1_offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Testers/MovingGPUParticles/GPUParticles3D:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.2, 0)]
+}
+
+[sub_resource type="Animation" id="12"]
+resource_name = "move"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Testers/MovingObject/MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(0, 0.5, 0), Vector3(0, 2.5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Testers/RotatingObject/MeshInstance3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 18.8496, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Testers/ScalingObject/MeshInstance3D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1, 1, 3)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Testers/MovingCPUParticles/CPUParticles3D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(0, 0.2, 0), Vector3(0, 2.2, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Testers/MovingDecal/Decal:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(-1, 1, -1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Testers/MovingDecal/Decal:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.18405, -2.33886, 0.187249)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Testers/ScrollingUVAnimation/MeshInstance3D:surface_material_override/0:uv1_offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(3, 0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Testers/MovingGPUParticles/GPUParticles3D:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(0, 1.2, 0), Vector3(0, 4.2, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ecfcr"]
+_data = {
+"RESET": SubResource("Animation_qdnt6"),
+"move": SubResource("12")
+}
+
+[sub_resource type="StandardMaterial3D" id="13"]
+diffuse_mode = 1
+albedo_texture = ExtResource("14")
+uv1_scale = Vector3(32, 32, 1)
+texture_filter = 5
+
+[sub_resource type="PlaneMesh" id="14"]
+material = SubResource("13")
+size = Vector2(128, 128)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gwe28"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fiqc5"]
+fractal_octaves = 9
+fractal_gain = 1.0
+
+[sub_resource type="NoiseTexture" id="NoiseTexture_bgiac"]
+seamless = true
+noise = SubResource("FastNoiseLite_fiqc5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x42ya"]
+albedo_color = Color(1.2, 1, 0.7, 1)
+albedo_texture = SubResource("NoiseTexture_bgiac")
+uv1_scale = Vector3(3, 2, 1)
+texture_filter = 5
+
+[sub_resource type="NoiseTexture" id="NoiseTexture_7yxqs"]
+width = 32
+height = 32
+seamless = true
+noise = SubResource("FastNoiseLite_fiqc5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6yfdy"]
+albedo_texture = SubResource("NoiseTexture_7yxqs")
+uv1_scale = Vector3(3, 2, 1)
+texture_filter = 4
+
+[sub_resource type="Gradient" id="Gradient_ekf3m"]
+offsets = PackedFloat32Array(0, 0.298851, 0.609195, 0.781609, 0.873563, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 0.133693, 0.238417, 0.655738, 1, 0.4, 0.47451, 0, 1, 0.364109, 0.476658, 1, 1, 1, 1, 0)
+
+[sub_resource type="NoiseTexture" id="NoiseTexture_uv2tn"]
+seamless = true
+color_ramp = SubResource("Gradient_ekf3m")
+noise = SubResource("FastNoiseLite_fiqc5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qcf1j"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(1.2, 1, 0.7, 1)
+albedo_texture = SubResource("NoiseTexture_uv2tn")
+uv1_scale = Vector3(3, 2, 1)
+texture_filter = 5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xbqpl"]
+transparency = 2
+alpha_scissor_threshold = 0.72
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_color = Color(1.2, 1, 0.7, 1)
+albedo_texture = SubResource("NoiseTexture_uv2tn")
+uv1_scale = Vector3(3, 2, 1)
+texture_filter = 5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjkwh"]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_color = Color(1.2, 1, 0.7, 1)
+albedo_texture = SubResource("NoiseTexture_uv2tn")
+uv1_scale = Vector3(3, 2, 1)
+texture_filter = 5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f4l4p"]
+transparency = 4
+cull_mode = 2
+albedo_color = Color(1.2, 1, 0.7, 1)
+albedo_texture = SubResource("NoiseTexture_uv2tn")
+uv1_scale = Vector3(3, 2, 1)
+texture_filter = 5
+
+[sub_resource type="SphereMesh" id="SphereMesh_kfkna"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rfedc"]
+transparency = 2
+alpha_scissor_threshold = 0.05
+alpha_antialiasing_mode = 0
+use_point_size = true
+point_size = 3.2
+
+[sub_resource type="Gradient" id="Gradient_3dg7h"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.94964)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_42opb"]
+gradient = SubResource("Gradient_3dg7h")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.49, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_layy4"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("GradientTexture2D_42opb")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_imrxg"]
+material = SubResource("StandardMaterial3D_layy4")
+
+[sub_resource type="Curve" id="Curve_v0n7y"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_e7gyf"]
+offsets = PackedFloat32Array(0, 0.0946746, 0.5, 0.804734)
+colors = PackedColorArray(0, 0.14902, 1, 0, 0.0627836, 0.243372, 0.995875, 1, 0.568541, 1, 0.962647, 1, 1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r4xcu"]
+albedo_color = Color(0.521569, 1, 0.776471, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_88317"]
+material = SubResource("StandardMaterial3D_r4xcu")
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="Curve" id="Curve_sutnd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_ft0gs"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 0.25
+emission_ring_inner_radius = 0.25
+radial_accel_min = 2.0
+radial_accel_max = 2.0
+collision_enabled = true
+collision_friction = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1dgwn"]
+albedo_color = Color(0.545098, 0.545098, 0.545098, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_v4x6x"]
+material = SubResource("StandardMaterial3D_1dgwn")
+radius = 1.0
+height = 2.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5qy8k"]
+height = 1.0
+radial_segments = 6
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_53dqy"]
+albedo_color = Color(0.946182, 1.18208, 1.2, 1)
+albedo_texture = SubResource("NoiseTexture_bgiac")
+uv1_scale = Vector3(2, 2, 1)
+texture_filter = 5
+
+[sub_resource type="Shader" id="Shader_rejcs"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.0.alpha's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color,filter_linear_mipmap_anisotropic,repeat_enable;
+uniform float point_size : hint_range(0,128);
+uniform float roughness : hint_range(0,1);
+uniform sampler2D texture_metallic : hint_default_white,filter_linear_mipmap_anisotropic,repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r,filter_linear_mipmap_anisotropic,repeat_enable;
+uniform float specular;
+uniform float metallic;
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+void vertex() {
+	// Scroll the texture over time.
+	UV = UV*uv1_scale.xy+uv1_offset.xy + vec2(mod(TIME, 1.0), 0.0);
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+	vec4 albedo_tex = texture(texture_albedo,base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	float metallic_tex = dot(texture(texture_metallic,base_uv),metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	vec4 roughness_texture_channel = vec4(1.0,0.0,0.0,0.0);
+	float roughness_tex = dot(texture(texture_roughness,base_uv),roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+	SPECULAR = specular;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ltvd2"]
+render_priority = 0
+shader = SubResource("Shader_rejcs")
+shader_param/albedo = Color(1.2, 0.915333, 0.997134, 1)
+shader_param/metallic = 0.0
+shader_param/metallic_texture_channel = Plane(1, 0, 0, 0)
+shader_param/point_size = 1.0
+shader_param/roughness = 1.0
+shader_param/specular = 0.5
+shader_param/texture_albedo = SubResource("NoiseTexture_bgiac")
+shader_param/uv1_offset = Vector3(0, 0, 0)
+shader_param/uv1_scale = Vector3(2, 2, 1)
+shader_param/uv2_offset = Vector3(0, 0, 0)
+shader_param/uv2_scale = Vector3(1, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_oopii"]
+height = 1.0
+radial_segments = 18
+rings = 1
+
+[sub_resource type="Shader" id="Shader_ovufm"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.0.alpha's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color,filter_linear_mipmap_anisotropic,repeat_enable;
+uniform float point_size : hint_range(0,128);
+uniform float roughness : hint_range(0,1);
+uniform sampler2D texture_metallic : hint_default_white,filter_linear_mipmap_anisotropic,repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r,filter_linear_mipmap_anisotropic,repeat_enable;
+uniform float specular;
+uniform float metallic;
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+float rand(vec2 co){
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+void vertex() {
+	// Move vertices randomly over time.
+	VERTEX.y += 0.25 + sin(TIME * 2.0) * rand(vec2(VERTEX.xz)) * 0.5;
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+	vec4 albedo_tex = texture(texture_albedo,base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	float metallic_tex = dot(texture(texture_metallic,base_uv),metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	vec4 roughness_texture_channel = vec4(1.0,0.0,0.0,0.0);
+	float roughness_tex = dot(texture(texture_roughness,base_uv),roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+	SPECULAR = specular;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fbaw5"]
+render_priority = 0
+shader = SubResource("Shader_ovufm")
+shader_param/albedo = Color(1.2, 1.16365, 0.85123, 1)
+shader_param/metallic = 0.0
+shader_param/metallic_texture_channel = Plane(1, 0, 0, 0)
+shader_param/point_size = 1.0
+shader_param/roughness = 1.0
+shader_param/specular = 0.5
+shader_param/texture_albedo = SubResource("NoiseTexture_bgiac")
+shader_param/uv1_offset = Vector3(0, 0, 0)
+shader_param/uv1_scale = Vector3(2, 2, 1)
+shader_param/uv2_offset = Vector3(0, 0, 0)
+shader_param/uv2_scale = Vector3(1, 1, 1)
+
+[node name="AntiAliasingTestScene" type="WorldEnvironment"]
+environment = SubResource("11")
+script = ExtResource("18")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "move"
+libraries = {
+"": SubResource("AnimationLibrary_ecfcr")
+}
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34)
+layers = 2
+mesh = SubResource("14")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.909487, -0.23874, 0.340349, 0, 0.818672, 0.574262, -0.415733, -0.522284, 0.744571, 3.9506, 3.39961, 3.54442)
+shadow_enabled = true
+shadow_normal_bias = 1.5
+shadow_blur = 1.5
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 25.0
+
+[node name="CameraHolder" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.125, 0)
+
+[node name="RotationX" type="Node3D" parent="CameraHolder"]
+
+[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX"]
+fov = 70.0
+
+[node name="Testers" type="Node3D" parent="."]
+
+[node name="StaticObject" type="Node3D" parent="Testers"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/StaticObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_gwe28")
+surface_material_override/0 = SubResource("StandardMaterial3D_x42ya")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/StaticObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 0)
+mesh = SubResource("BoxMesh_gwe28")
+surface_material_override/0 = SubResource("StandardMaterial3D_6yfdy")
+
+[node name="ThinLines" parent="Testers" instance=ExtResource("3_5ehjl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="TransparencyAlphaBlend" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Testers/TransparencyAlphaBlend"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.501, 0)
+mesh = SubResource("BoxMesh_gwe28")
+surface_material_override/0 = SubResource("StandardMaterial3D_qcf1j")
+
+[node name="TransparencyAlphaScissor" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Testers/TransparencyAlphaScissor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.501, 0)
+mesh = SubResource("BoxMesh_gwe28")
+surface_material_override/0 = SubResource("StandardMaterial3D_xbqpl")
+
+[node name="TransparencyAlphaHash" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Testers/TransparencyAlphaHash"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.501, 0)
+mesh = SubResource("BoxMesh_gwe28")
+surface_material_override/0 = SubResource("StandardMaterial3D_mjkwh")
+
+[node name="TransparencyDepthPrepass" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Testers/TransparencyDepthPrepass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.501, 0)
+mesh = SubResource("BoxMesh_gwe28")
+surface_material_override/0 = SubResource("StandardMaterial3D_f4l4p")
+
+[node name="ComplexObject" parent="Testers" instance=ExtResource("3_fa2bl")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.35, -24)
+
+[node name="PointRendering" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -28)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/PointRendering"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("SphereMesh_kfkna")
+surface_material_override/0 = SubResource("StandardMaterial3D_rfedc")
+
+[node name="MovingObject" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/MovingObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_gwe28")
+surface_material_override/0 = SubResource("StandardMaterial3D_x42ya")
+
+[node name="RotatingObject" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -36)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/RotatingObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_gwe28")
+surface_material_override/0 = SubResource("StandardMaterial3D_x42ya")
+
+[node name="ScalingObject" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ScalingObject"]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_gwe28")
+surface_material_override/0 = SubResource("StandardMaterial3D_x42ya")
+
+[node name="StaticCPUParticles" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -44)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Testers/StaticCPUParticles"]
+amount = 100
+draw_order = 1
+mesh = SubResource("QuadMesh_imrxg")
+direction = Vector3(0, 1, 0)
+spread = 10.0
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+scale_amount_min = 0.25
+scale_amount_max = 0.25
+scale_amount_curve = SubResource("Curve_v0n7y")
+color_ramp = SubResource("Gradient_e7gyf")
+
+[node name="CPUParticles3D2" type="CPUParticles3D" parent="Testers/StaticCPUParticles/CPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.2, 0)
+amount = 20
+mesh = SubResource("BoxMesh_88317")
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 2.5
+initial_velocity_max = 2.5
+radial_accel_min = -5.0
+radial_accel_max = -5.0
+scale_amount_min = 0.25
+scale_amount_max = 2.5
+scale_amount_curve = SubResource("Curve_sutnd")
+
+[node name="MovingCPUParticles" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -48)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Testers/MovingCPUParticles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+amount = 100
+lifetime = 0.5
+local_coords = false
+draw_order = 1
+mesh = SubResource("QuadMesh_imrxg")
+direction = Vector3(0, 1, 0)
+spread = 10.0
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
+tangential_accel_min = 6.0
+tangential_accel_max = 40.0
+scale_amount_min = 0.25
+scale_amount_max = 0.25
+scale_amount_curve = SubResource("Curve_v0n7y")
+color = Color(6, 2, 6, 1)
+color_ramp = SubResource("Gradient_e7gyf")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Testers/MovingCPUParticles/CPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+amount = 20
+local_coords = false
+mesh = SubResource("BoxMesh_88317")
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 2.5
+initial_velocity_max = 2.5
+scale_amount_curve = SubResource("Curve_sutnd")
+
+[node name="StaticGPUParticles" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -52)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/StaticGPUParticles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+amount = 50
+lifetime = 2.0
+fixed_fps = 0
+collision_base_size = 0.05
+visibility_aabb = AABB(-1.63511, -1.25001, -1.31512, 3.0892, 2.15487, 2.91765)
+process_material = SubResource("ParticlesMaterial_ft0gs")
+draw_pass_1 = SubResource("BoxMesh_88317")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Testers/StaticGPUParticles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+extents = Vector3(2, 1, 2)
+
+[node name="MovingGPUParticles" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -56)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/MovingGPUParticles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+extra_cull_margin = 3.0
+amount = 50
+lifetime = 2.0
+fixed_fps = 0
+collision_base_size = 0.05
+visibility_aabb = AABB(-1.50087, -1.25001, -1.4745, 3.19423, 2.13905, 3.02308)
+local_coords = false
+process_material = SubResource("ParticlesMaterial_ft0gs")
+draw_pass_1 = SubResource("BoxMesh_88317")
+
+[node name="GPUParticlesCollisionBox3D2" type="GPUParticlesCollisionBox3D" parent="Testers/MovingGPUParticles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+extents = Vector3(2, 1, 2)
+
+[node name="MovingDecal" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -60)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/MovingDecal"]
+mesh = SubResource("SphereMesh_v4x6x")
+
+[node name="Decal" type="Decal" parent="Testers/MovingDecal"]
+transform = Transform3D(-0.707104, -1.01328e-06, -0.707109, 0.183013, 0.965926, -0.183013, 0.683015, -0.258819, -0.68301, 1, 1, 1)
+texture_albedo = ExtResource("3_2nulf")
+texture_normal = ExtResource("4_fdfpv")
+
+[node name="ScrollingUVAnimation" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -64)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ScrollingUVAnimation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_5qy8k")
+surface_material_override/0 = SubResource("StandardMaterial3D_53dqy")
+
+[node name="ScrollingUVCustomShader" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -68)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ScrollingUVCustomShader"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_5qy8k")
+surface_material_override/0 = SubResource("ShaderMaterial_ltvd2")
+
+[node name="CustomShaderVertexMovement" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -72)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/CustomShaderVertexMovement"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_oopii")
+surface_material_override/0 = SubResource("ShaderMaterial_fbaw5")
+
+[node name="TestName" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -58.0
+offset_right = 192.0
+offset_bottom = -24.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="Previous" type="Button" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -55.0
+offset_right = 135.0
+offset_bottom = -24.0
+text = "«  Previous"
+
+[node name="Next" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -55.0
+offset_right = -24.0
+offset_bottom = -24.0
+text = "Next  »"
+
+[node name="Antialiasing" type="VBoxContainer" parent="."]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 210.0
+offset_bottom = 55.0
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Antialiasing"]
+offset_right = 265.0
+offset_bottom = 26.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "Antialiasing Options:"
+
+[node name="FXAA" type="CheckButton" parent="Antialiasing"]
+offset_top = 36.0
+offset_right = 265.0
+offset_bottom = 67.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "FXAA (Fast)"
+
+[node name="TemporalAntialiasing" type="CheckButton" parent="Antialiasing"]
+offset_top = 77.0
+offset_right = 265.0
+offset_bottom = 108.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "Temporal antialiasing (Fast)"
+
+[node name="MSAA" type="OptionButton" parent="Antialiasing"]
+offset_top = 118.0
+offset_right = 265.0
+offset_bottom = 149.0
+item_count = 4
+selected = 0
+popup/item_0/text = "No MSAA (Fastest)"
+popup/item_0/id = 0
+popup/item_1/text = "2× MSAA (Average)"
+popup/item_1/id = 1
+popup/item_2/text = "4× MSAA (Slow)"
+popup/item_2/id = 2
+popup/item_3/text = "8× MSAA (Slowest)"
+popup/item_3/id = 3
+
+[node name="RenderScale" type="OptionButton" parent="Antialiasing"]
+offset_top = 159.0
+offset_right = 265.0
+offset_bottom = 190.0
+item_count = 7
+selected = 2
+popup/item_0/text = "50% Render Scale (Fastest)"
+popup/item_0/id = 0
+popup/item_1/text = "75% Render Scale (Fast)"
+popup/item_1/id = 1
+popup/item_2/text = "100% Render Scale (Average)"
+popup/item_2/id = 2
+popup/item_3/text = "125% Render Scale (1.56× SSAA, Slow)"
+popup/item_3/id = 3
+popup/item_4/text = "150% Render Scale (2.25× SSAA, Slower)"
+popup/item_4/id = 4
+popup/item_5/text = "175% Render Scale (3.06× SSAA, Very Slow)"
+popup/item_5/id = 5
+popup/item_6/text = "200% Render Scale (4× SSAA, Slowest)"
+popup/item_6/id = 6
+
+[connection signal="pressed" from="Previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
+[connection signal="toggled" from="Antialiasing/FXAA" to="." method="_on_fxaa_toggled"]
+[connection signal="toggled" from="Antialiasing/TemporalAntialiasing" to="." method="_on_temporal_antialiasing_toggled"]
+[connection signal="item_selected" from="Antialiasing/MSAA" to="." method="_on_msaa_item_selected"]
+[connection signal="item_selected" from="Antialiasing/RenderScale" to="." method="_on_render_scale_item_selected"]
