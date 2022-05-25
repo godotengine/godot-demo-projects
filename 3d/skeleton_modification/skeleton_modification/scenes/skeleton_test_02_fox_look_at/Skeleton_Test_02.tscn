@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://b4w8ht6g2d41p"]
+
+[ext_resource type="PackedScene" uid="uid://cyr6t4wt054ge" path="res://skeleton_modification/art/3d_Fox/Fox.glb" id="1"]
+
+[sub_resource type="PhysicalSkyMaterial" id="1"]
+
+[sub_resource type="Sky" id="2"]
+sky_material = SubResource( "1" )
+
+[sub_resource type="Environment" id="3"]
+background_mode = 2
+background_energy = 2.0
+sky = SubResource( "2" )
+ambient_light_source = 3
+
+[sub_resource type="PlaneMesh" id="4"]
+size = Vector2(20, 20)
+
+[sub_resource type="SkeletonModification3DLookAt" id="SkeletonModification3DLookAt_sv0co"]
+bone_name = "b_Head_05"
+bone_index = 6
+target_nodepath = NodePath("../../../LookAtTarget")
+
+[sub_resource type="SkeletonModificationStack3D" id="SkeletonModificationStack3D_bo1e4"]
+modification_count = 1
+modifications/0 = SubResource( "SkeletonModification3DLookAt_sv0co" )
+
+[sub_resource type="SphereMesh" id="7"]
+
+[node name="Skeleton_Test_02" type="Node3D"]
+script = null
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.386655, 0.682488, 0.620248, -0.427356, -0.463389, 0.776298, 0.81723, -0.565226, 0.112493, 0, 7.59687, 0)
+shadow_enabled = true
+script = null
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( "3" )
+script = null
+
+[node name="FloorMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource( "4" )
+surface_material_override/0 = null
+script = null
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.864696, -0.320176, 0.387026, 0, 0.770513, 0.637424, -0.502296, -0.551178, 0.666259, 3.49703, 9.11224, 5.24953)
+script = null
+
+[node name="Fox" parent="." instance=ExtResource( "1" )]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Fox/root" index="0"]
+modification_stack = SubResource( "SkeletonModificationStack3D_bo1e4" )
+
+[node name="AnimationPlayer" parent="Fox" index="1"]
+blend_times = []
+
+[node name="LookAtTarget" type="Position3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.58329, 1.18309, 3.93611)
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LookAtTarget"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource( "7" )
+surface_material_override/0 = null
+script = null
+
+[editable path="Fox"]

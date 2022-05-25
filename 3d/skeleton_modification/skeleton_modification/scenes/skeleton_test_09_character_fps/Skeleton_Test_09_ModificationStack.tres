@@ -1,0 +1,33 @@
+[gd_resource type="SkeletonModificationStack3D" load_steps=3 format=2]
+
+[sub_resource type="SkeletonModification3DTwoBoneIK" id=1]
+target_nodepath = NodePath("../../../../../../../../../GunAssembly/Gun/Arm_Left_Target")
+use_tip_node = true
+tip_node = NodePath("../../../../../../../../../Hand_Left/END")
+auto_calculate_joint_length = true
+use_pole_node = true
+pole_node = NodePath("../../../../../../../../../Arm_Left_Pole")
+joint_one/bone_name = "joint_0"
+joint_one/bone_idx = 1
+joint_two/bone_name = "joint_2_1"
+joint_two/bone_idx = 2
+
+[sub_resource type="SkeletonModification3DTwoBoneIK" id=2]
+target_nodepath = NodePath("../../../../../../../../../GunAssembly/Gun/Arm_Right_Target")
+use_tip_node = true
+tip_node = NodePath("../../../../../../../../../LowerArm_Right/TwoBoneIK_End")
+auto_calculate_joint_length = true
+use_pole_node = true
+pole_node = NodePath("../../../../../../../../../Arm_Right_Pole")
+joint_one/bone_name = "joint_24_23"
+joint_one/bone_idx = 24
+joint_one/roll = 96.0
+joint_two/bone_name = "joint_25_25"
+joint_two/bone_idx = 25
+joint_two/roll = 100.0
+
+[resource]
+enabled = true
+modification_count = 2
+modifications/0 = SubResource( 1 )
+modifications/1 = SubResource( 2 )

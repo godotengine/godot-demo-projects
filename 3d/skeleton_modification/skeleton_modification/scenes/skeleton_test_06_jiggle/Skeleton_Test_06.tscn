@@ -1,0 +1,143 @@
+[gd_scene load_steps=12 format=3 uid="uid://b6qn4h8xhsios"]
+
+[ext_resource type="PackedScene" uid="uid://d3bhydm3b6s7t" path="res://skeleton_modification/art/Simple_Test_Rig/Godot_Simple_Test_Rig.glb" id="2"]
+
+[sub_resource type="PhysicalSkyMaterial" id="1"]
+
+[sub_resource type="Sky" id="2"]
+sky_material = SubResource( "1" )
+
+[sub_resource type="Environment" id="3"]
+background_mode = 2
+background_energy = 2.0
+sky = SubResource( "2" )
+ambient_light_source = 3
+
+[sub_resource type="PlaneMesh" id="4"]
+size = Vector2(20, 20)
+
+[sub_resource type="SphereMesh" id="5"]
+
+[sub_resource type="SkeletonModification3DJiggle" id="SkeletonModification3DJiggle_ileu1"]
+target_nodepath = NodePath("../../../Jiggle_Target")
+jiggle_data_chain_length = 5
+use_colliders = true
+collision_mask = 1
+joint_data/0/bone_name = "Bone_01"
+joint_data/0/bone_index = 0
+joint_data/0/roll = 0.0
+joint_data/0/override_defaults = false
+joint_data/1/bone_name = "Bone_02"
+joint_data/1/bone_index = 1
+joint_data/1/roll = 0.0
+joint_data/1/override_defaults = false
+joint_data/2/bone_name = "Bone_03"
+joint_data/2/bone_index = 2
+joint_data/2/roll = 0.0
+joint_data/2/override_defaults = false
+joint_data/3/bone_name = "Bone_04"
+joint_data/3/bone_index = 3
+joint_data/3/roll = 0.0
+joint_data/3/override_defaults = false
+joint_data/4/bone_name = "Bone_05"
+joint_data/4/bone_index = 4
+joint_data/4/roll = 0.0
+joint_data/4/override_defaults = false
+
+[sub_resource type="SkeletonModificationStack3D" id="SkeletonModificationStack3D_qlcgv"]
+modification_count = 1
+modifications/0 = SubResource( "SkeletonModification3DJiggle_ileu1" )
+
+[sub_resource type="SphereMesh" id="9"]
+
+[sub_resource type="SphereShape3D" id="10"]
+
+[sub_resource type="Animation" id="11"]
+resource_name = "TEST"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Jiggle_Target:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.4, 2.6, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.233226, 8.15166, -0.0101409), Vector3(5.14817, 7.24881, -0.0101409), Vector3(5.53101, 4.92305, -0.0101409), Vector3(-7.83972, 7.91668, -0.0101409), Vector3(-0.233226, 8.15166, -0.0101409)]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Godot_Simple_Test_Rig/Simple_Test_Rig_Armature/Skeleton:modification_stack:enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[node name="Skeleton_Test_06" type="Node3D"]
+script = null
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.637841, 0.642996, -0.423929, 0, 0.550437, 0.834877, 0.770168, -0.532518, 0.351091, 0, 7.59687, 0)
+shadow_enabled = true
+script = null
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( "3" )
+script = null
+
+[node name="FloorMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource( "4" )
+surface_material_override/0 = null
+script = null
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.864696, -0.320176, 0.387026, 0, 0.770513, 0.637424, -0.502296, -0.551178, 0.666259, 3.49703, 9.11224, 5.24953)
+script = null
+
+[node name="Jiggle_Target" type="Position3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.723396, 8.24656, 0.0404124)
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="DEBUG_LookAt" type="MeshInstance3D" parent="Jiggle_Target"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource( "5" )
+surface_material_override/0 = null
+script = null
+
+[node name="Godot_Simple_Test_Rig" parent="." instance=ExtResource( "2" )]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.285361, 0, 0)
+
+[node name="Skeleton3D" parent="Godot_Simple_Test_Rig/Simple_Test_Rig_Armature" index="0"]
+modification_stack = SubResource( "SkeletonModificationStack3D_qlcgv" )
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.61834, 3.91309, 0)
+script = null
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource( "9" )
+surface_material_override/0 = null
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource( "10" )
+script = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "TEST"
+anims/TEST = SubResource( "11" )
+blend_times = []
+script = null
+
+[editable path="Godot_Simple_Test_Rig"]

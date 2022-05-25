@@ -1,0 +1,295 @@
+[gd_scene load_steps=16 format=3 uid="uid://b8cx27oumb321"]
+
+[ext_resource type="PackedScene" uid="uid://ceccgkwb72a5w" path="res://skeleton_modification/art/Alicia_Solid/AliciaSolid_vrm-0.51.glb" id="1"]
+
+[sub_resource type="PhysicalSkyMaterial" id="1"]
+
+[sub_resource type="Sky" id="2"]
+sky_material = SubResource( "1" )
+
+[sub_resource type="Environment" id="3"]
+background_mode = 2
+background_energy = 2.0
+sky = SubResource( "2" )
+ambient_light_source = 3
+
+[sub_resource type="PlaneMesh" id="4"]
+size = Vector2(20, 20)
+
+[sub_resource type="SphereMesh" id="5"]
+
+[sub_resource type="SkeletonModification3DLookAt" id="SkeletonModification3DLookAt_naphw"]
+bone_name = "Head"
+bone_index = 62
+target_nodepath = NodePath("../../../Head_Target")
+additional_rotation = Vector3(90, 0, 0)
+
+[sub_resource type="SkeletonModification3DLookAt" id="SkeletonModification3DLookAt_ajdki"]
+bone_name = "eye_L"
+bone_index = 63
+target_nodepath = NodePath("../../../Head_Target/Eye_Left")
+additional_rotation = Vector3(90, 0, 0)
+
+[sub_resource type="SkeletonModification3DLookAt" id="SkeletonModification3DLookAt_2yjjl"]
+bone_name = "eye_R"
+bone_index = 66
+target_nodepath = NodePath("../../../Head_Target/Eye_Right")
+additional_rotation = Vector3(90, 0, 0)
+
+[sub_resource type="SkeletonModification3DFABRIK" id="SkeletonModification3DFABRIK_mvjry"]
+target_nodepath = NodePath("../../../Spine_Target")
+fabrik_data_chain_length = 3
+joint_data/0/bone_name = "Spine"
+joint_data/0/bone_index = 31
+joint_data/0/roll = 0.0
+joint_data/0/auto_calculate_length = true
+joint_data/0/use_tip_node = false
+joint_data/1/bone_name = "Spine1"
+joint_data/1/bone_index = 32
+joint_data/1/roll = 0.0
+joint_data/1/auto_calculate_length = true
+joint_data/1/use_tip_node = false
+joint_data/1/magnet_position = Vector3(0, 0, 0)
+joint_data/2/bone_name = "Spine2"
+joint_data/2/bone_index = 33
+joint_data/2/roll = 0.0
+joint_data/2/auto_calculate_length = false
+joint_data/2/length = 0.2
+joint_data/2/magnet_position = Vector3(0, 0, 0)
+joint_data/2/use_target_basis = false
+
+[sub_resource type="SkeletonModification3DFABRIK" id="SkeletonModification3DFABRIK_r4l0t"]
+target_nodepath = NodePath("../../../Left_Arm_Target")
+fabrik_data_chain_length = 3
+joint_data/0/bone_name = "LeftArm"
+joint_data/0/bone_index = 36
+joint_data/0/roll = 0.0
+joint_data/0/auto_calculate_length = true
+joint_data/0/use_tip_node = false
+joint_data/1/bone_name = "LeftForeArm"
+joint_data/1/bone_index = 37
+joint_data/1/roll = 0.0
+joint_data/1/auto_calculate_length = true
+joint_data/1/use_tip_node = false
+joint_data/1/magnet_position = Vector3(0, 1, 0.4)
+joint_data/2/bone_name = "LeftHand"
+joint_data/2/bone_index = 38
+joint_data/2/roll = 0.0
+joint_data/2/auto_calculate_length = true
+joint_data/2/use_tip_node = true
+joint_data/2/tip_node = NodePath("BoneAttachment3D/FABRIK_Left_Hand_Tip")
+joint_data/2/magnet_position = Vector3(0, 0, 0)
+joint_data/2/use_target_basis = true
+
+[sub_resource type="SkeletonModification3DFABRIK" id="SkeletonModification3DFABRIK_v63w7"]
+target_nodepath = NodePath("../../../Right_Arm_Target")
+fabrik_data_chain_length = 3
+joint_data/0/bone_name = "RightArm"
+joint_data/0/bone_index = 102
+joint_data/0/roll = 0.0
+joint_data/0/auto_calculate_length = true
+joint_data/0/use_tip_node = false
+joint_data/1/bone_name = "RightForeArm"
+joint_data/1/bone_index = 103
+joint_data/1/roll = 0.0
+joint_data/1/auto_calculate_length = true
+joint_data/1/use_tip_node = false
+joint_data/1/magnet_position = Vector3(0, 1, 0.3)
+joint_data/2/bone_name = "RightHand"
+joint_data/2/bone_index = 104
+joint_data/2/roll = 0.0
+joint_data/2/auto_calculate_length = true
+joint_data/2/use_tip_node = true
+joint_data/2/tip_node = NodePath("BoneAttachment3D2/FABRIK_Right_Hand_Tip")
+joint_data/2/magnet_position = Vector3(0, 0, 0)
+joint_data/2/use_target_basis = true
+
+[sub_resource type="SkeletonModification3DFABRIK" id="SkeletonModification3DFABRIK_kvvg7"]
+target_nodepath = NodePath("../../../Left_Leg_Target")
+fabrik_data_chain_length = 3
+joint_data/0/bone_name = "LeftUpLeg"
+joint_data/0/bone_index = 1
+joint_data/0/roll = 0.0
+joint_data/0/auto_calculate_length = true
+joint_data/0/use_tip_node = false
+joint_data/1/bone_name = "LeftLeg"
+joint_data/1/bone_index = 2
+joint_data/1/roll = 0.0
+joint_data/1/auto_calculate_length = true
+joint_data/1/use_tip_node = false
+joint_data/1/magnet_position = Vector3(-0.037, -1, 0)
+joint_data/2/bone_name = "LeftFoot"
+joint_data/2/bone_index = 3
+joint_data/2/roll = 0.0
+joint_data/2/auto_calculate_length = false
+joint_data/2/length = 0.02
+joint_data/2/magnet_position = Vector3(0, 0, 0)
+joint_data/2/use_target_basis = true
+
+[sub_resource type="SkeletonModification3DFABRIK" id="SkeletonModification3DFABRIK_ohl8m"]
+target_nodepath = NodePath("../../../Right_Leg_Target")
+fabrik_data_chain_length = 3
+joint_data/0/bone_name = "RightUpLeg"
+joint_data/0/bone_index = 6
+joint_data/0/roll = 0.0
+joint_data/0/auto_calculate_length = true
+joint_data/0/use_tip_node = false
+joint_data/1/bone_name = "RightLeg"
+joint_data/1/bone_index = 7
+joint_data/1/roll = 0.0
+joint_data/1/auto_calculate_length = true
+joint_data/1/use_tip_node = false
+joint_data/1/magnet_position = Vector3(0, -1, 0)
+joint_data/2/bone_name = "RightFoot"
+joint_data/2/bone_index = 8
+joint_data/2/roll = 0.0
+joint_data/2/auto_calculate_length = false
+joint_data/2/length = 0.02
+joint_data/2/magnet_position = Vector3(0, 0, 0)
+joint_data/2/use_target_basis = true
+
+[sub_resource type="SkeletonModificationStack3D" id="SkeletonModificationStack3D_sfto3"]
+modification_count = 8
+modifications/0 = SubResource( "SkeletonModification3DLookAt_naphw" )
+modifications/1 = SubResource( "SkeletonModification3DLookAt_ajdki" )
+modifications/2 = SubResource( "SkeletonModification3DLookAt_2yjjl" )
+modifications/3 = SubResource( "SkeletonModification3DFABRIK_mvjry" )
+modifications/4 = SubResource( "SkeletonModification3DFABRIK_r4l0t" )
+modifications/5 = SubResource( "SkeletonModification3DFABRIK_v63w7" )
+modifications/6 = SubResource( "SkeletonModification3DFABRIK_kvvg7" )
+modifications/7 = SubResource( "SkeletonModification3DFABRIK_ohl8m" )
+
+[node name="Skeleton_Test_04" type="Node3D"]
+script = null
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.637841, 0.642996, -0.423929, 0, 0.550437, 0.834877, 0.770168, -0.532518, 0.351091, 0, 7.59687, 0)
+shadow_enabled = true
+script = null
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( "3" )
+script = null
+
+[node name="FloorMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource( "4" )
+surface_material_override/0 = null
+script = null
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.864696, -0.320176, 0.387026, 0, 0.770513, 0.637424, -0.502296, -0.551178, 0.666259, 3.49703, 9.11224, 5.24953)
+script = null
+
+[node name="Head_Target" type="Position3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.950145, 5.54053, 2.13226)
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="DEBUG_LookAt" type="MeshInstance3D" parent="Head_Target"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource( "5" )
+surface_material_override/0 = null
+script = null
+
+[node name="Eye_Right" type="Position3D" parent="Head_Target"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.416488, 0.0959697, 0.226356)
+script = null
+
+[node name="Eye_Left" type="Position3D" parent="Head_Target"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.117931, 0.0959697, 0.226356)
+script = null
+
+[node name="Left_Arm_Target" type="Position3D" parent="."]
+transform = Transform3D(0.627888, 0.745769, 0.222678, 0.120736, 0.189312, -0.974465, -0.768882, 0.63874, 0.0288261, 0.414623, 3.9666, 0.384857)
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="DEBUG_LookAt" type="MeshInstance3D" parent="Left_Arm_Target"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource( "5" )
+surface_material_override/0 = null
+script = null
+
+[node name="Right_Arm_Target" type="Position3D" parent="."]
+transform = Transform3D(0.446838, -0.862441, -0.237763, -0.0888427, 0.221679, -0.971064, 0.890193, 0.455032, 0.0224331, -0.461789, 3.97247, 0.331985)
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="DEBUG_LookAt" type="MeshInstance3D" parent="Right_Arm_Target"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource( "5" )
+surface_material_override/0 = null
+script = null
+
+[node name="Right_Leg_Target" type="Position3D" parent="."]
+transform = Transform3D(-0.899504, 0, 0.436912, 0, 1, 0, -0.436912, 0, -0.899504, -0.323537, 0.107812, 0.703775)
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="DEBUG_LookAt" type="MeshInstance3D" parent="Right_Leg_Target"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource( "5" )
+surface_material_override/0 = null
+script = null
+
+[node name="Left_Leg_Target" type="Position3D" parent="."]
+transform = Transform3D(-0.972982, 0.190127, -0.130984, 0.0923934, 0.840562, 0.533779, 0.211586, 0.507255, -0.835418, 0.31466, 0.920159, -0.297024)
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="DEBUG_LookAt" type="MeshInstance3D" parent="Left_Leg_Target"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource( "5" )
+surface_material_override/0 = null
+script = null
+
+[node name="Spine_Target" type="Position3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0.166389)
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="DEBUG_LookAt" type="MeshInstance3D" parent="Spine_Target"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource( "5" )
+surface_material_override/0 = null
+script = null
+
+[node name="AliciaSolid_vrm-051" parent="." instance=ExtResource( "1" )]
+transform = Transform3D(-4, 0, -1.30337e-06, 0, 4, 0, 1.30337e-06, 0, -4, 0, 0, 0)
+
+[node name="Skeleton3D" parent="AliciaSolid_vrm-051/Root" index="0"]
+modification_stack = SubResource( "SkeletonModificationStack3D_sfto3" )
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="AliciaSolid_vrm-051/Root/Skeleton3D" index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.49742, 1.26387, 0.00751136)
+bone_name = "LeftHand"
+bone_idx = 38
+script = null
+
+[node name="FABRIK_Left_Hand_Tip" type="Position3D" parent="AliciaSolid_vrm-051/Root/Skeleton3D/BoneAttachment3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.116549, 0, -3.81842e-08)
+script = null
+
+[node name="BoneAttachment3D2" type="BoneAttachment3D" parent="AliciaSolid_vrm-051/Root/Skeleton3D" index="13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.497403, 1.26257, 0.00711707)
+bone_name = "RightHand"
+bone_idx = 104
+script = null
+
+[node name="FABRIK_Right_Hand_Tip" type="Position3D" parent="AliciaSolid_vrm-051/Root/Skeleton3D/BoneAttachment3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.116549, 0, -3.81842e-08)
+script = null
+
+[editable path="AliciaSolid_vrm-051"]

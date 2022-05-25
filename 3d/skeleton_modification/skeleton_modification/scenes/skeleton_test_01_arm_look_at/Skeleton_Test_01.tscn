@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=3 uid="uid://dc0el2rb2wo32"]
+
+[ext_resource type="PackedScene" uid="uid://dkupbcsssngjs" path="res://skeleton_modification/art/3d_Robotic_Arm/Godot_CCDIK_Arm.glb" id="1"]
+
+[sub_resource type="PhysicalSkyMaterial" id="1"]
+
+[sub_resource type="Sky" id="2"]
+sky_material = SubResource( "1" )
+
+[sub_resource type="Environment" id="3"]
+background_mode = 2
+background_energy = 1.5
+sky = SubResource( "2" )
+ambient_light_source = 3
+
+[sub_resource type="PlaneMesh" id="4"]
+size = Vector2(20, 20)
+
+[sub_resource type="SkeletonModification3DLookAt" id="SkeletonModification3DLookAt_vn7ll"]
+bone_name = "Joint_01"
+bone_index = 2
+target_nodepath = NodePath("../../../LookAt_Target")
+
+[sub_resource type="SkeletonModification3DLookAt" id="SkeletonModification3DLookAt_jdwde"]
+bone_name = "Joint_02"
+bone_index = 3
+target_nodepath = NodePath("../../../LookAt_Target2")
+
+[sub_resource type="SkeletonModificationStack3D" id="SkeletonModificationStack3D_p631x"]
+modification_count = 2
+modifications/0 = SubResource( "SkeletonModification3DLookAt_vn7ll" )
+modifications/1 = SubResource( "SkeletonModification3DLookAt_jdwde" )
+
+[sub_resource type="SphereMesh" id="9"]
+
+[node name="Skeleton_Test_01" type="Node3D"]
+script = null
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.637841, 0.642996, -0.423929, 0, 0.550437, 0.834877, 0.770168, -0.532518, 0.351091, 0, 7.59687, 0)
+shadow_enabled = true
+script = null
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( "3" )
+script = null
+
+[node name="FloorMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource( "4" )
+surface_material_override/0 = null
+script = null
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.864696, -0.320176, 0.387026, 0, 0.770513, 0.637424, -0.502296, -0.551178, 0.666259, 3.49703, 9.11224, 5.24953)
+script = null
+
+[node name="Godot_CCDIK_Arm" parent="." instance=ExtResource( "1" )]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55982, 0, 0)
+
+[node name="Skeleton3D" parent="Godot_CCDIK_Arm/Robotic_Arm_Armature" index="0"]
+modification_stack = SubResource( "SkeletonModificationStack3D_p631x" )
+
+[node name="LookAt_Target" type="Position3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85471, 5.21677, -1.69458)
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="DEBUG_LookAt" type="MeshInstance3D" parent="LookAt_Target"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource( "9" )
+surface_material_override/0 = null
+script = null
+
+[node name="LookAt_Target2" type="Position3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82419, 4.22509, 1.9033)
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="DEBUG_LookAt" type="MeshInstance3D" parent="LookAt_Target2"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource( "9" )
+surface_material_override/0 = null
+script = null
+
+[editable path="Godot_CCDIK_Arm"]

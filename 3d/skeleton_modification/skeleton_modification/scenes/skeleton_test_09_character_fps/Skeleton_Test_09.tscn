@@ -1,0 +1,628 @@
+[gd_scene load_steps=18 format=3 uid="uid://d3c5e6i1cucth"]
+
+[ext_resource type="Script" path="res://skeleton_modification/scenes/skeleton_test_09_character_fps/Scene_09_SimplePlayer.gd" id="1_wobfe"]
+[ext_resource type="PackedScene" uid="uid://ct12fkyi12s5m" path="res://skeleton_modification/art/FPS_Gloves_and_Gun/FPS_Gloves/scene.gltf" id="2_jebpi"]
+[ext_resource type="PackedScene" uid="uid://idmsg80cn3qg" path="res://skeleton_modification/art/FPS_Gloves_and_Gun/FPS_Gun/scene.gltf" id="3_dkx54"]
+
+[sub_resource type="PhysicalSkyMaterial" id="1"]
+
+[sub_resource type="Sky" id="2"]
+sky_material = SubResource( "1" )
+
+[sub_resource type="Environment" id="3"]
+background_mode = 2
+background_energy = 2.0
+sky = SubResource( "2" )
+ambient_light_source = 3
+
+[sub_resource type="BoxMesh" id="4"]
+size = Vector3(40, 1, 40)
+
+[sub_resource type="ConcavePolygonShape3D" id="8"]
+data = PackedVector3Array(-20, 0.5, 20, 20, 0.5, 20, -20, -0.5, 20, 20, 0.5, 20, 20, -0.5, 20, -20, -0.5, 20, 20, 0.5, -20, -20, 0.5, -20, 20, -0.5, -20, -20, 0.5, -20, -20, -0.5, -20, 20, -0.5, -20, 20, 0.5, 20, 20, 0.5, -20, 20, -0.5, 20, 20, 0.5, -20, 20, -0.5, -20, 20, -0.5, 20, -20, 0.5, -20, -20, 0.5, 20, -20, -0.5, -20, -20, 0.5, 20, -20, -0.5, 20, -20, -0.5, -20, 20, 0.5, 20, -20, 0.5, 20, 20, 0.5, -20, -20, 0.5, 20, -20, 0.5, -20, 20, 0.5, -20, -20, -0.5, 20, 20, -0.5, 20, -20, -0.5, -20, 20, -0.5, 20, 20, -0.5, -20, -20, -0.5, -20)
+
+[sub_resource type="SkeletonModification3DTwoBoneIK" id="SkeletonModification3DTwoBoneIK_sejfv"]
+target_nodepath = NodePath("../../../../../../../../../GunAssembly/Gun/Arm_Left_Target")
+use_tip_node = true
+tip_node = NodePath("../../../../../../../../../Hand_Left/END")
+auto_calculate_joint_length = true
+use_pole_node = true
+pole_node = NodePath("../../../../../../../../../Arm_Left_Pole")
+joint_one/bone_name = "joint_00"
+joint_one/bone_idx = 1
+joint_one/roll = 90.0
+joint_two/bone_name = "joint2_01"
+joint_two/bone_idx = 2
+joint_two/roll = 24.0
+
+[sub_resource type="SkeletonModification3DTwoBoneIK" id="SkeletonModification3DTwoBoneIK_y7teo"]
+target_nodepath = NodePath("../../../../../../../../../GunAssembly/Gun/Arm_Right_Target")
+use_tip_node = true
+tip_node = NodePath("../../../../../../../../../LowerArm_Right/TwoBoneIK_End")
+auto_calculate_joint_length = true
+use_pole_node = true
+pole_node = NodePath("../../../../../../../../../Arm_Right_Pole")
+joint_one/bone_name = "joint24_023"
+joint_one/bone_idx = 24
+joint_one/roll = 90.0
+joint_two/bone_name = "joint25_025"
+joint_two/bone_idx = 25
+joint_two/roll = 90.0
+
+[sub_resource type="SkeletonModificationStack3D" id="SkeletonModificationStack3D_eu7sx"]
+enabled = true
+modification_count = 2
+modifications/0 = SubResource( "SkeletonModification3DTwoBoneIK_sejfv" )
+modifications/1 = SubResource( "SkeletonModification3DTwoBoneIK_y7teo" )
+
+[sub_resource type="Animation" id="9"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("GunAssembly:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.349951, -0.399951, 1.38587), Vector3(-0.349951, -0.399951, 1.38587)]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GunAssembly/Gun/Gun_END:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 6, 49.665), Vector3(0, 6, 49.665)]
+}
+
+[sub_resource type="Animation" id="10"]
+resource_name = "Idle_To_Scope"
+tracks/0/type = "value"
+tracks/0/path = NodePath("GunAssembly:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.349951, -0.399951, 1.38587), Vector3(0, -0.27, 0.7)]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GunAssembly/Gun/Gun_END:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 6, 49.665), Vector3(0, 14.4054, 49.6654)]
+}
+
+[sub_resource type="Animation" id="11"]
+resource_name = "Scope_To_Idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("GunAssembly:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.27, 0.7), Vector3(-0.35, -0.4, 1.386)]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GunAssembly/Gun/Gun_END:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 14.4054, 49.6654), Vector3(0, 6, 49.665)]
+}
+
+[sub_resource type="BoxMesh" id="12"]
+
+[sub_resource type="BoxShape3D" id="14"]
+size = Vector3(10, 4, 4)
+
+[sub_resource type="BoxShape3D" id="16"]
+
+[node name="Skeleton_Test_09" type="Node3D"]
+script = null
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.637841, 0.642996, -0.423929, 0, 0.550437, 0.834877, 0.770168, -0.532518, 0.351091, 0, 7.59687, 0)
+shadow_enabled = true
+script = null
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( "3" )
+script = null
+
+[node name="FloorMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource( "4" )
+surface_material_override/0 = null
+script = null
+
+[node name="StaticBody3D" type="StaticBody3D" parent="FloorMesh"]
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorMesh/StaticBody3D"]
+shape = SubResource( "8" )
+script = null
+
+[node name="SimplePlayer" type="Node3D" parent="."]
+script = ExtResource( "1_wobfe" )
+
+[node name="Body" type="Node3D" parent="SimplePlayer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+script = null
+
+[node name="Head" type="Node3D" parent="SimplePlayer/Body"]
+script = null
+
+[node name="Arms" parent="SimplePlayer/Body/Head" instance=ExtResource( "2_jebpi" )]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, -1.12758, 0)
+
+[node name="Skeleton3D" parent="SimplePlayer/Body/Head/Arms/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/ba5392146a244cf78a36609b9238129dfbx/RootNode/Hands/group_joints/Node2" index="0"]
+modification_stack = SubResource( "SkeletonModificationStack3D_eu7sx" )
+
+[node name="GunAssembly" type="Node3D" parent="SimplePlayer/Body/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.349951, -0.399951, 1.38587)
+script = null
+
+[node name="Gun" parent="SimplePlayer/Body/Head/GunAssembly" instance=ExtResource( "3_dkx54" )]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+
+[node name="Arm_Left_Target" type="Position3D" parent="SimplePlayer/Body/Head/GunAssembly/Gun"]
+transform = Transform3D(19.6962, 0, 3.47296, 0, 20, 0, -3.47296, 0, 19.6962, 0.210829, -6.82805, -15.7937)
+script = null
+
+[node name="Arm_Right_Target" type="Position3D" parent="SimplePlayer/Body/Head/GunAssembly/Gun"]
+transform = Transform3D(-13.9453, 0.576195, -14.3248, -0.0265212, -19.9848, -0.778049, -14.3363, -0.523503, 13.9355, -2.31711, -3.28159, 17.9863)
+script = null
+
+[node name="Gun_END" type="Position3D" parent="SimplePlayer/Body/Head/GunAssembly/Gun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 49.665)
+script = null
+
+[node name="Camera3D" type="Camera3D" parent="SimplePlayer/Body/Head"]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0.489, -0.32)
+script = null
+
+[node name="Hand_Left" type="BoneAttachment3D" parent="SimplePlayer/Body/Head"]
+transform = Transform3D(-0.0432856, 0.0147192, -0.020241, 0.0124889, 0.0477473, 0.00801406, 0.0216883, 0.00188213, -0.045012, 0.0882707, -0.850667, 0.406372)
+bone_name = "joint_3_3"
+bone_idx = 3
+use_external_skeleton = true
+external_skeleton = NodePath("../Arms/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/ba5392146a244cf78a36609b9238129dfbx/RootNode/Hands/group_joints/Node2/Skeleton3D")
+script = null
+
+[node name="END" type="Node3D" parent="SimplePlayer/Body/Head/Hand_Left"]
+transform = Transform3D(1, 3.72529e-09, 1.78195e-15, 0, 1, 7.58081e-17, -3.88578e-16, 3.55271e-15, 1, 9.61621, 0, 0)
+script = null
+
+[node name="Arm_Left_Pole" type="Position3D" parent="SimplePlayer/Body/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.46966, -0.60921, -0.609686)
+script = null
+
+[node name="Arm_Right_Pole" type="Position3D" parent="SimplePlayer/Body/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.07649, -0.60921, -0.609686)
+script = null
+
+[node name="Hand_Right" type="BoneAttachment3D" parent="SimplePlayer/Body/Head"]
+transform = Transform3D(-0.0314377, -0.000830705, -0.0388714, -0.00370254, -0.0496974, 0.00405654, -0.0387035, 0.00542901, 0.0311859, -0.857154, -0.588297, 1.84979)
+bone_name = "joint_26_24"
+bone_idx = 26
+use_external_skeleton = true
+external_skeleton = NodePath("../Arms/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/ba5392146a244cf78a36609b9238129dfbx/RootNode/Hands/group_joints/Node2/Skeleton3D")
+script = null
+
+[node name="Pointer_Upper" type="BoneAttachment3D" parent="SimplePlayer/Body/Head/Hand_Right"]
+transform = Transform3D(0.866398, -0.0132243, -0.499178, -0.00241605, 0.999527, -0.030673, 0.499348, 0.027781, 0.865956, -11.9381, -3.59747, -6.67572e-06)
+bone_name = "joint_28_27"
+bone_idx = 28
+override_pose = true
+override_mode = 1
+use_external_skeleton = true
+external_skeleton = NodePath("../../Arms/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/ba5392146a244cf78a36609b9238129dfbx/RootNode/Hands/group_joints/Node2/Skeleton3D")
+script = null
+
+[node name="Pointer_Lower" type="BoneAttachment3D" parent="SimplePlayer/Body/Head/Hand_Right/Pointer_Upper"]
+transform = Transform3D(0.306829, 0.232332, -0.922972, -0.136085, 0.970494, 0.199055, 0.941985, 0.0645269, 0.329393, -4.02983, 0.252449, -1.29469)
+bone_name = "joint_29_28"
+bone_idx = 29
+override_pose = true
+override_mode = 1
+use_external_skeleton = true
+external_skeleton = NodePath("../../../Arms/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/ba5392146a244cf78a36609b9238129dfbx/RootNode/Hands/group_joints/Node2/Skeleton3D")
+script = null
+
+[node name="Middle_Upper" type="BoneAttachment3D" parent="SimplePlayer/Body/Head/Hand_Right"]
+transform = Transform3D(0.616697, 0.0669644, -0.784347, -0.0894832, 0.99588, 0.0146676, 0.782098, 0.0611405, 0.620149, -12.3605, -1.00819, 9.53674e-07)
+bone_name = "joint_32_31"
+bone_idx = 32
+override_pose = true
+override_mode = 1
+use_external_skeleton = true
+external_skeleton = NodePath("../../Arms/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/ba5392146a244cf78a36609b9238129dfbx/RootNode/Hands/group_joints/Node2/Skeleton3D")
+script = null
+
+[node name="Middle_Lower" type="BoneAttachment3D" parent="SimplePlayer/Body/Head/Hand_Right/Middle_Upper"]
+transform = Transform3D(0.644073, -0.0141393, -0.764834, 0.00910763, 0.9999, -0.0108153, 0.76491, 2.23517e-08, 0.644137, -3.93145, 0, -0.0836945)
+bone_name = "joint_33_32"
+bone_idx = 33
+override_pose = true
+override_mode = 1
+use_external_skeleton = true
+external_skeleton = NodePath("../../../Arms/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/ba5392146a244cf78a36609b9238129dfbx/RootNode/Hands/group_joints/Node2/Skeleton3D")
+script = null
+
+[node name="Ring_Upper" type="BoneAttachment3D" parent="SimplePlayer/Body/Head/Hand_Right"]
+transform = Transform3D(0.714432, -0.073823, 0.6958, 0.026464, -0.990856, -0.132301, 0.699204, 0.112933, -0.705946, -12.0818, 1.51608, -9.53674e-07)
+bone_name = "joint_36_35"
+bone_idx = 36
+override_pose = true
+override_mode = 1
+use_external_skeleton = true
+external_skeleton = NodePath("../../Arms/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/ba5392146a244cf78a36609b9238129dfbx/RootNode/Hands/group_joints/Node2/Skeleton3D")
+script = null
+
+[node name="Ring_Lower" type="BoneAttachment3D" parent="SimplePlayer/Body/Head/Hand_Right/Ring_Upper"]
+transform = Transform3D(0.368152, -0.0355718, 0.929085, 0.203985, 0.978012, -0.0433845, -0.907113, 0.205492, 0.367313, -3.80467, -1.52588e-05, -7.62939e-06)
+bone_name = "joint_37_36"
+bone_idx = 37
+override_pose = true
+override_mode = 1
+use_external_skeleton = true
+external_skeleton = NodePath("../../../Arms/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/ba5392146a244cf78a36609b9238129dfbx/RootNode/Hands/group_joints/Node2/Skeleton3D")
+script = null
+
+[node name="Pinky_Upper" type="BoneAttachment3D" parent="SimplePlayer/Body/Head/Hand_Right"]
+transform = Transform3D(0.751564, -0.09996, 0.652043, 0.0314507, -0.981898, -0.186779, 0.65891, 0.160883, -0.734816, -11.5908, 4.02955, 9.53674e-07)
+bone_name = "joint_40_39"
+bone_idx = 40
+override_pose = true
+override_mode = 1
+use_external_skeleton = true
+external_skeleton = NodePath("../../Arms/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/ba5392146a244cf78a36609b9238129dfbx/RootNode/Hands/group_joints/Node2/Skeleton3D")
+script = null
+
+[node name="Pinky_Lower" type="BoneAttachment3D" parent="SimplePlayer/Body/Head/Hand_Right/Pinky_Upper"]
+transform = Transform3D(0.670151, -0.10551, 0.734687, 0.144393, 0.989466, 0.0103896, -0.728044, 0.0991213, 0.678326, -3.29476, -1.52588e-05, 0)
+bone_name = "joint_41_40"
+bone_idx = 41
+override_pose = true
+override_mode = 1
+use_external_skeleton = true
+external_skeleton = NodePath("../../../Arms/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/ba5392146a244cf78a36609b9238129dfbx/RootNode/Hands/group_joints/Node2/Skeleton3D")
+script = null
+
+[node name="Thumb_Upper" type="BoneAttachment3D" parent="SimplePlayer/Body/Head/Hand_Right"]
+transform = Transform3D(0.761394, -0.597699, 0.251069, 0.447836, 0.204902, -0.87032, 0.468745, 0.775095, 0.423682, -7.09937, -4.56732, -3.1654)
+bone_name = "joint_44_43"
+bone_idx = 44
+override_pose = true
+override_mode = 1
+use_external_skeleton = true
+external_skeleton = NodePath("../../Arms/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/ba5392146a244cf78a36609b9238129dfbx/RootNode/Hands/group_joints/Node2/Skeleton3D")
+script = null
+
+[node name="LowerArm_Right" type="BoneAttachment3D" parent="SimplePlayer/Body/Head"]
+transform = Transform3D(-0.0329721, -0.0375461, 0.00177124, -0.00204463, 0.0041442, 0.049786, -0.0375322, 0.0327585, -0.00426822, -1.694, -0.640191, 0.897202)
+bone_name = "joint_25_25"
+bone_idx = 25
+use_external_skeleton = true
+external_skeleton = NodePath("../Arms/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/ba5392146a244cf78a36609b9238129dfbx/RootNode/Hands/group_joints/Node2/Skeleton3D")
+script = null
+
+[node name="TwoBoneIK_End" type="Node3D" parent="SimplePlayer/Body/Head/LowerArm_Right"]
+transform = Transform3D(0.952561, 0.155654, 0.261527, 0.0490294, 0.769608, -0.636632, -0.300367, 0.619254, 0.725469, -37.0536, -1.15116, -0.591949)
+script = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SimplePlayer/Body/Head"]
+autoplay = "Idle"
+playback_speed = 3.0
+anims/Idle = SubResource( "9" )
+anims/Idle_To_Scope = SubResource( "10" )
+anims/Scope_To_Idle = SubResource( "11" )
+blend_times = []
+script = null
+
+[node name="RigidBodies" type="Node3D" parent="."]
+script = null
+
+[node name="Rigid_Big_Cube" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.62157, 2.75779, 12.9947)
+mass = 6.0
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/Rigid_Big_Cube"]
+transform = Transform3D(5, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource( "12" )
+surface_material_override/0 = null
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/Rigid_Big_Cube"]
+shape = SubResource( "14" )
+script = null
+
+[node name="Rigid_Cube" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.23885, 6.19372, 12.9947)
+mass = 4.0
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/Rigid_Cube"]
+mesh = SubResource( "12" )
+surface_material_override/0 = null
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/Rigid_Cube"]
+shape = SubResource( "16" )
+script = null
+
+[node name="Rigid_Cube2" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.73732, 6.19372, 12.9947)
+mass = 4.0
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/Rigid_Cube2"]
+mesh = SubResource( "12" )
+surface_material_override/0 = null
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/Rigid_Cube2"]
+shape = SubResource( "16" )
+script = null
+
+[node name="Rigid_Cube3" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0133643, 6.19372, 12.9947)
+mass = 4.0
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/Rigid_Cube3"]
+mesh = SubResource( "12" )
+surface_material_override/0 = null
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/Rigid_Cube3"]
+shape = SubResource( "16" )
+script = null
+
+[node name="Rigid_Big_Cube2" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.07602, 2.75779, 12.9947)
+mass = 6.0
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/Rigid_Big_Cube2"]
+transform = Transform3D(5, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource( "12" )
+surface_material_override/0 = null
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/Rigid_Big_Cube2"]
+shape = SubResource( "14" )
+script = null
+
+[node name="Rigid_Cube4" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5234, 6.19372, 12.9947)
+mass = 4.0
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/Rigid_Cube4"]
+mesh = SubResource( "12" )
+surface_material_override/0 = null
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/Rigid_Cube4"]
+shape = SubResource( "16" )
+script = null
+
+[node name="Rigid_Cube5" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0079, 6.19372, 12.9947)
+mass = 4.0
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/Rigid_Cube5"]
+mesh = SubResource( "12" )
+surface_material_override/0 = null
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/Rigid_Cube5"]
+shape = SubResource( "16" )
+script = null
+
+[node name="Rigid_Cube6" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6086, 6.19372, 12.9947)
+mass = 4.0
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/Rigid_Cube6"]
+mesh = SubResource( "12" )
+surface_material_override/0 = null
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/Rigid_Cube6"]
+shape = SubResource( "16" )
+script = null
+
+[node name="Rigid_Big_Cube3" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15.066, 2.75779, 4.70424)
+mass = 6.0
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/Rigid_Big_Cube3"]
+transform = Transform3D(5, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource( "12" )
+surface_material_override/0 = null
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/Rigid_Big_Cube3"]
+shape = SubResource( "14" )
+script = null
+
+[node name="Rigid_Cube7" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15.066, 6.19372, 8.25686)
+mass = 4.0
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/Rigid_Cube7"]
+mesh = SubResource( "12" )
+surface_material_override/0 = null
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/Rigid_Cube7"]
+shape = SubResource( "16" )
+script = null
+
+[node name="Rigid_Cube8" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15.066, 6.19372, 4.77235)
+mass = 4.0
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/Rigid_Cube8"]
+mesh = SubResource( "12" )
+surface_material_override/0 = null
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/Rigid_Cube8"]
+shape = SubResource( "16" )
+script = null
+
+[node name="Rigid_Cube9" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15.066, 6.19372, 1.17166)
+mass = 4.0
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/Rigid_Cube9"]
+mesh = SubResource( "12" )
+surface_material_override/0 = null
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/Rigid_Cube9"]
+shape = SubResource( "16" )
+script = null
+
+[node name="Rigid_Big_Cube4" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15.066, 2.75779, -7.29576)
+mass = 6.0
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/Rigid_Big_Cube4"]
+transform = Transform3D(5, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource( "12" )
+surface_material_override/0 = null
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/Rigid_Big_Cube4"]
+shape = SubResource( "14" )
+script = null
+
+[node name="Rigid_Cube10" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15.066, 6.19372, -3.74314)
+mass = 4.0
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/Rigid_Cube10"]
+mesh = SubResource( "12" )
+surface_material_override/0 = null
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/Rigid_Cube10"]
+shape = SubResource( "16" )
+script = null
+
+[node name="Rigid_Cube11" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15.066, 6.19372, -7.22765)
+mass = 4.0
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/Rigid_Cube11"]
+mesh = SubResource( "12" )
+surface_material_override/0 = null
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/Rigid_Cube11"]
+shape = SubResource( "16" )
+script = null
+
+[node name="Rigid_Cube12" type="RigidBody3D" parent="RigidBodies"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15.066, 6.19372, -10.8283)
+mass = 4.0
+script = null
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBodies/Rigid_Cube12"]
+mesh = SubResource( "12" )
+surface_material_override/0 = null
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBodies/Rigid_Cube12"]
+shape = SubResource( "16" )
+script = null
+
+[editable path="SimplePlayer/Body/Head/Arms"]

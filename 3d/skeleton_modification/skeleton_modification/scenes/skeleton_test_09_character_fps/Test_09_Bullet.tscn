@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://di584kke4562f"]
+
+[ext_resource type="Script" path="res://skeleton_modification/scenes/skeleton_test_09_character_fps/Test_09_Bullet.gd" id="1_knqvu"]
+
+[sub_resource type="SphereMesh" id="1"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="3"]
+radius = 0.25
+
+[node name="Bullet" type="RigidBody3D"]
+gravity_scale = 0.5
+script = ExtResource( "1_knqvu" )
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource( "1" )
+surface_material_override/0 = null
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource( "3" )
+script = null
