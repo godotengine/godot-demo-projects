@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://dkhg8e00d02f2"]
+
+[ext_resource type="Script" path="res://navmesh.gd" id="1"]
+[ext_resource type="NavigationMesh" uid="uid://xl4o2ckjxava" path="res://navmesh.res" id="2_lcfvj"]
+[ext_resource type="Environment" uid="uid://c115tt1j1r0g0" path="res://default_env.tres" id="3"]
+[ext_resource type="ArrayMesh" uid="uid://gmytdjp2bcsq" path="res://level_mesh.res" id="3_1cas0"]
+[ext_resource type="ArrayMesh" uid="uid://prwe6io8p1iv" path="res://robot.res" id="5_ple0n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_noou6"]
+shading_mode = 0
+use_point_size = true
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_dvj5w"]
+
+[node name="Node3D" type="Node3D"]
+_import_path = NodePath(".")
+script = ExtResource("1")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navmesh = ExtResource("2_lcfvj")
+
+[node name="LevelMesh" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.0452547, 0)
+mesh = ExtResource("3_1cas0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.623013, -0.733525, 0.271654, 0.321394, 0.55667, 0.766044, -0.713134, -0.389948, 0.582563, 10.0773, 5.02381, 0)
+light_energy = 5.0
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3")
+
+[node name="DrawPath" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_noou6")
+mesh = SubResource("ImmediateMesh_dvj5w")
+
+[node name="CameraBase" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07475, 0, 1.96678)
+
+[node name="Camera3D" type="Camera3D" parent="CameraBase"]
+transform = Transform3D(-0.560554, -0.429252, 0.708182, 0.106298, 0.8108, 0.575591, -0.821267, 0.397928, -0.408869, 18.091, 14.744, -7.017)
+fov = 50.0
+near = 0.1
+
+[node name="RobotBase" type="Position3D" parent="."]
+
+[node name="Robot" type="MeshInstance3D" parent="RobotBase"]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 1, 0, 7.54979e-08, 0, -0.5, 0, 1, 0)
+gi_mode = 2
+mesh = ExtResource("5_ple0n")
