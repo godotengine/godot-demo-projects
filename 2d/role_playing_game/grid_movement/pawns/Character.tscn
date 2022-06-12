@@ -1,0 +1,83 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://grid_movement/pawns/Walker.gd" type="Script" id=1]
+[ext_resource path="res://grid_movement/pawns/character.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "bump"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -1.5, -9 ), Vector2( 6.5, 2.5 ), Vector2( -11.5, 8.5 ), Vector2( 4, -5 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "walk"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.9375, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.15, 0.25 ),
+"transitions": PoolRealArray( 1, 0.303143, 2.61003, 1 ),
+"update": 0,
+"values": [ Vector2( 1.43051e-06, -1.90735e-06 ), Vector2( 1.43051e-06, -1.90735e-06 ), Vector2( 0, -20 ), Vector2( 1.43051e-06, -1.90735e-06 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Pivot/Sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.25 ),
+"transitions": PoolRealArray( 1, 0.354553, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.20007, 0.917384 ), Vector2( 0.916712, 1.13495 ), Vector2( 1, 1 ) ]
+}
+
+[node name="Character" type="Node2D"]
+position = Vector2( 32, 32 )
+z_index = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/bump = SubResource( 1 )
+anims/walk = SubResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Pivot" type="Position2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Pivot"]
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( -32, -32 )

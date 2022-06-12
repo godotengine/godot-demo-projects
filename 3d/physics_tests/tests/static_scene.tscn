@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/robot_head/godot3_robot_head_collision.tres" type="Shape" id=1]
+[ext_resource path="res://assets/robot_head/godot3_robot_head.mesh" type="ArrayMesh" id=2]
+[ext_resource path="res://tests/static_scene_plane.tscn" type="PackedScene" id=3]
+
+[node name="StaticScene" type="Spatial"]
+
+[node name="StaticBodyPlane" parent="." instance=ExtResource( 3 )]
+
+[node name="StaticBodyHead" type="StaticBody" parent="."]
+transform = Transform( 10, 0, 0, 0, 8.66025, 5, 0, -5, 8.66025, 0, -11.1389, 2.29332 )
+
+[node name="RobotHead" type="MeshInstance" parent="StaticBodyHead"]
+mesh = ExtResource( 2 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBodyHead"]
+shape = ExtResource( 1 )

@@ -1,0 +1,125 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://tests/functional/test_character_tilemap.gd" type="Script" id=1]
+[ext_resource path="res://tests/test_options.tscn" type="PackedScene" id=3]
+[ext_resource path="res://tests/static_scene_flat.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/tileset/tileset.tres" type="TileSet" id=5]
+[ext_resource path="res://utils/rigidbody_controller.gd" type="Script" id=6]
+[ext_resource path="res://utils/kinematicbody_controller.gd" type="Script" id=7]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 31.9 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 16, 24 )
+
+[sub_resource type="RayShape2D" id=4]
+length = 24.0
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 16.0
+
+[node name="Test" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="LabelTestType" type="Label" parent="."]
+margin_left = 14.0
+margin_top = 79.0
+margin_right = 145.0
+margin_bottom = 93.0
+text = "Testing: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" parent="." instance=ExtResource( 3 )]
+
+[node name="LabelFloor" type="Label" parent="."]
+margin_left = 14.0
+margin_top = 237.929
+margin_right = 145.0
+margin_bottom = 251.929
+text = "ON FLOOR"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelControls" type="Label" parent="."]
+margin_left = 14.0
+margin_top = 263.291
+margin_right = 145.0
+margin_bottom = 277.291
+text = "LEFT/RIGHT - MOVE
+UP - JUMP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2( 250, 460 )
+collision_mask = 2147483649
+mode = 2
+physics_material_override = SubResource( 1 )
+contacts_reported = 4
+contact_monitor = true
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource( 2 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+position = Vector2( 250, 460 )
+collision_mask = 2147483649
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+shape = SubResource( 2 )
+
+[node name="KinematicBodyRay2D" type="KinematicBody2D" parent="."]
+position = Vector2( 250, 460 )
+collision_mask = 2147483649
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBodyRay2D"]
+position = Vector2( 0, -8 )
+shape = SubResource( 3 )
+
+[node name="CollisionShapeRay2D" type="CollisionShape2D" parent="KinematicBodyRay2D"]
+position = Vector2( 0, 8 )
+shape = SubResource( 4 )
+
+[node name="CollisionShapeRay2DLeft" type="CollisionShape2D" parent="KinematicBodyRay2D"]
+position = Vector2( -16, 8 )
+shape = SubResource( 4 )
+
+[node name="CollisionShapeRay2DRight" type="CollisionShape2D" parent="KinematicBodyRay2D"]
+position = Vector2( 16, 8 )
+shape = SubResource( 4 )
+
+[node name="JumpTargetArea2D" type="Area2D" parent="."]
+visible = false
+position = Vector2( 810, 390 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpTargetArea2D"]
+shape = SubResource( 5 )
+disabled = true
+
+[node name="FallTargetArea2D" type="Area2D" parent="."]
+visible = false
+position = Vector2( 250, 480 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallTargetArea2D"]
+shape = SubResource( 5 )
+disabled = true
+
+[node name="StaticSceneFlat" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 12 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 458764, 5, 0, 458765, 5, 0, 458766, 5, 0, 458767, 5, 0, 458768, 5, 0, 458769, 5, 0, 458770, 5, 0, 458771, 5, 0, 524300, 5, 0, 524301, 5, 0, 524302, 5, 0, 524303, 5, 0, 524304, 5, 0, 524305, 5, 0, 524306, 5, 0, 524307, 5, 0, 589836, 5, 0, 589837, 5, 0, 589838, 5, 0, 589839, 5, 0, 589840, 5, 0, 589841, 5, 0, 589842, 5, 0, 589843, 5, 0, 655372, 5, 0, 655373, 5, 0, 655374, 5, 0, 655375, 5, 0, 655376, 5, 0, 655377, 5, 0, 655378, 5, 0, 655379, 5, 0, 720908, 5, 0, 720909, 5, 0, 720910, 5, 0, 720911, 5, 0, 720912, 5, 0, 720913, 5, 0, 720914, 5, 0, 720915, 5, 0, 720922, 0, 0, 720923, 0, 0, 720924, 0, 0, 720925, 0, 0, 786438, 5, 0, 786439, 5, 0, 786440, 5, 0, 786441, 5, 0, 786444, 5, 0, 786445, 5, 0, 786446, 5, 0, 786447, 5, 0, 786448, 5, 0, 786449, 5, 0, 786450, 5, 0, 786451, 5, 0, 851980, 5, 0, 851981, 5, 0, 851982, 5, 0, 851983, 5, 0, 851984, 5, 0, 851985, 5, 0, 851986, 5, 0, 851987, 5, 0, 851992, 0, 0, 851993, 0, 0, 851994, 0, 0, 851995, 0, 0, 917516, 5, 0, 917517, 5, 0, 917518, 5, 0, 917519, 5, 0, 917520, 5, 0, 917521, 5, 0, 917522, 5, 0, 917523, 5, 0, 983052, 5, 0, 983053, 5, 0, 983054, 5, 0, 983055, 5, 0, 983056, 5, 0, 983057, 5, 0, 983058, 5, 0, 983059, 5, 0 )

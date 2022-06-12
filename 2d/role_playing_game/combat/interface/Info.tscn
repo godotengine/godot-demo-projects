@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://theme/fonts/montserrat_extra_bold_48.tres" type="DynamicFont" id=1]
+
+[node name="Info" type="PanelContainer"]
+margin_right = 409.0
+margin_bottom = 239.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 402.0
+margin_bottom = 232.0
+
+[node name="Name" type="Label" parent="VBoxContainer"]
+margin_right = 395.0
+margin_bottom = 110.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 1, 0.596078, 0, 1 )
+custom_constants/shadow_offset_y = 5
+custom_fonts/font = ExtResource( 1 )
+text = "{name}"
+align = 1
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health" type="ProgressBar" parent="VBoxContainer"]
+margin_top = 168.0
+margin_right = 395.0
+margin_bottom = 170.0
+size_flags_vertical = 6
+max_value = 10.0
+step = 1.0
+value = 5.0
+rounded = true
+percent_visible = false

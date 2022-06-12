@@ -1,0 +1,35 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+[application]
+
+config/name="Plugin Demos"
+config/description="This contains multiple plugin demos, all placed in a project for convenience.
+Due to bug 36713 you need to open the project to import the assets once, then close, then open.
+
+This project contains 4 plugins:
+
+* The custom node plugin shows how to create a custom node type using `add_custom_type`.
+* The material import plugin shows how to make a plugin handle importing a custom file type (mtxt).
+* The material creator plugin shows how to add a custom dock with some simple functionality.
+* The main screen plugin is a minimal example of how to create a plugin with a main screen."
+run/main_scene="res://test_scene.tscn"
+config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "custom_node", "main_screen", "material_creator", "material_import_plugin" )
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+environment/default_environment="res://default_env.tres"

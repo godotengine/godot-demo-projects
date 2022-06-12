@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/art/player/bullet/bullet.png" type="Texture" id=1]
+[ext_resource path="res://src/Objects/Bullet.gd" type="Script" id=2]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=3]
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 4.5
+
+[sub_resource type="Animation" id=5]
+resource_name = "destroy"
+length = 0.3
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Particles2D:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="Bullet" type="RigidBody2D"]
+material = SubResource( 1 )
+collision_layer = 0
+collision_mask = 26
+continuous_cd = 2
+contacts_reported = 1
+contact_monitor = true
+script = ExtResource( 2 )
+
+[node name="Particles2D" type="CPUParticles2D" parent="."]
+material = SubResource( 2 )
+emitting = false
+lifetime = 0.3
+speed_scale = 3.0
+local_coords = false
+texture = ExtResource( 1 )
+spread = 0.0
+gravity = Vector2( 0, 0 )
+scale_amount = 0.8
+color = Color( 1, 1, 1, 0.705882 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 3 )
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 4 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/destroy = SubResource( 5 )
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="destroy"]

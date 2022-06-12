@@ -1,0 +1,215 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://os_test.gd" type="Script" id=1]
+[ext_resource path="res://noto_sans_ui_bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://noto_sans_ui_regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://actions.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 14
+font_data = ExtResource( 3 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 14
+font_data = ExtResource( 2 )
+
+[node name="OSTest" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Features" type="RichTextLabel" parent="HBoxContainer"]
+margin_right = 482.0
+margin_bottom = 560.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/line_separation = 4
+custom_fonts/bold_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Actions" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 502.0
+margin_right = 984.0
+margin_bottom = 560.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 20
+script = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="HBoxContainer/Actions"]
+margin_right = 482.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 3 )
+text = "Actions"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/Actions"]
+margin_top = 40.0
+margin_right = 482.0
+margin_bottom = 560.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OpenShellWeb" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+margin_right = 239.0
+margin_bottom = 70.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Open Shell (web)"
+
+[node name="OpenShellFolder" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+margin_left = 243.0
+margin_right = 482.0
+margin_bottom = 70.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Open Shell (folder)"
+
+[node name="ChangeWindowTitle" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+margin_top = 74.0
+margin_right = 239.0
+margin_bottom = 144.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Change Window Title"
+
+[node name="ChangeWindowIcon" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+margin_left = 243.0
+margin_top = 74.0
+margin_right = 482.0
+margin_bottom = 144.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Change Window Icon"
+
+[node name="MoveWindowToForeground" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+margin_top = 148.0
+margin_right = 239.0
+margin_bottom = 218.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Move Window to Foreground"
+
+[node name="RequestAttention" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+margin_left = 243.0
+margin_top = 148.0
+margin_right = 482.0
+margin_bottom = 218.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Request Attention"
+
+[node name="VibrateDeviceShort" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+margin_top = 222.0
+margin_right = 239.0
+margin_bottom = 292.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Vibrate Device (200 ms)"
+
+[node name="VibrateDeviceLong" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+margin_left = 243.0
+margin_top = 222.0
+margin_right = 482.0
+margin_bottom = 292.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Vibrate Device (1000 ms)"
+
+[node name="AddGlobalMenuItems" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+margin_top = 296.0
+margin_right = 239.0
+margin_bottom = 366.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Add Global Menu Items"
+
+[node name="RemoveGlobalMenuItem" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+margin_left = 243.0
+margin_top = 296.0
+margin_right = 482.0
+margin_bottom = 366.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Remove Global Menu Item"
+
+[node name="GetClipboard" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+margin_top = 370.0
+margin_right = 239.0
+margin_bottom = 440.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Get Clipboard Contents"
+
+[node name="SetClipboard" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+margin_left = 243.0
+margin_top = 370.0
+margin_right = 482.0
+margin_bottom = 440.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Set Clipboard Contents"
+
+[node name="DisplayAlert" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+margin_top = 444.0
+margin_right = 239.0
+margin_bottom = 514.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Display Alert"
+
+[node name="KillCurrentProcess" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+margin_left = 243.0
+margin_top = 444.0
+margin_right = 482.0
+margin_bottom = 514.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Kill Current Process"
+
+[node name="MonoTest" type="Node" parent="."]
+
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/OpenShellWeb" to="HBoxContainer/Actions" method="_on_OpenShellWeb_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/OpenShellFolder" to="HBoxContainer/Actions" method="_on_OpenShellFolder_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/ChangeWindowTitle" to="HBoxContainer/Actions" method="_on_ChangeWindowTitle_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/ChangeWindowIcon" to="HBoxContainer/Actions" method="_on_ChangeWindowIcon_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/MoveWindowToForeground" to="HBoxContainer/Actions" method="_on_MoveWindowToForeground_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/RequestAttention" to="HBoxContainer/Actions" method="_on_RequestAttention_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/VibrateDeviceShort" to="HBoxContainer/Actions" method="_on_VibrateDeviceShort_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/VibrateDeviceLong" to="HBoxContainer/Actions" method="_on_VibrateDeviceLong_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/AddGlobalMenuItems" to="HBoxContainer/Actions" method="_on_AddGlobalMenuItems_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/RemoveGlobalMenuItem" to="HBoxContainer/Actions" method="_on_RemoveGlobalMenuItem_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/GetClipboard" to="HBoxContainer/Actions" method="_on_GetClipboard_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/SetClipboard" to="HBoxContainer/Actions" method="_on_SetClipboard_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/DisplayAlert" to="HBoxContainer/Actions" method="_on_DisplayAlert_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/KillCurrentProcess" to="HBoxContainer/Actions" method="_on_KillCurrentProcess_pressed"]

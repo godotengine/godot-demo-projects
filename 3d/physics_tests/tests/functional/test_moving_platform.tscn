@@ -1,0 +1,154 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://utils/camera_orbit.gd" type="Script" id=1]
+[ext_resource path="res://tests/functional/test_moving_platform.gd" type="Script" id=2]
+[ext_resource path="res://tests/test_options.tscn" type="PackedScene" id=3]
+[ext_resource path="res://utils/kinematicbody_physics.gd" type="Script" id=4]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.3
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.3, 0.8, 0.3 )
+
+[sub_resource type="CylinderShape" id=3]
+radius = 0.3
+height = 1.60005
+
+[sub_resource type="SphereShape" id=4]
+radius = 0.79945
+
+[sub_resource type="ConvexPolygonShape" id=5]
+points = PoolVector3Array( -0.7, 0, -0.7, -0.3, 0, 0.8, 0.8, 0, -0.3, 0, -0.8, 0 )
+
+[sub_resource type="RayShape" id=6]
+length = 0.8
+
+[sub_resource type="PhysicsMaterial" id=7]
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 2, 0.2, 1 )
+
+[sub_resource type="Animation" id=9]
+length = 9.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:translation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -7, -0.25, 0, 0.25, 0, -7, -0.25, 0, 0.25, 0, 6, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 3, 6.5 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:translation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -4.23538, -0.25, 0, 0.25, 0, -4.23538, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, -4.23538, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 3, 6.5, 9 )
+}
+
+[node name="Test" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="LabelBodyType" type="Label" parent="."]
+margin_left = 14.0
+margin_top = 78.0
+margin_right = 171.0
+margin_bottom = 92.0
+text = "Body Type: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" parent="." instance=ExtResource( 3 )]
+margin_top = 120.0
+margin_bottom = 140.0
+
+[node name="Bodies" type="Spatial" parent="."]
+
+[node name="KinematicBody" type="KinematicBody" parent="Bodies"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -4.18538, 0 )
+collision_layer = 2
+script = ExtResource( 4 )
+_stop_on_slopes = true
+_use_snap = true
+
+[node name="Capsule" type="CollisionShape" parent="Bodies/KinematicBody"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, 0 )
+shape = SubResource( 1 )
+
+[node name="Box" type="CollisionShape" parent="Bodies/KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0 )
+shape = SubResource( 2 )
+
+[node name="Cylinder" type="CollisionShape" parent="Bodies/KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0 )
+shape = SubResource( 3 )
+
+[node name="Sphere" type="CollisionShape" parent="Bodies/KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0 )
+shape = SubResource( 4 )
+
+[node name="Convex" type="CollisionShape" parent="Bodies/KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0 )
+shape = SubResource( 5 )
+
+[node name="Ray" type="CollisionShape" parent="Bodies/KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.8, 0 )
+shape = SubResource( 6 )
+
+[node name="RigidBody" type="RigidBody" parent="Bodies"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -4.18538, 0 )
+collision_layer = 4
+physics_material_override = SubResource( 7 )
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="Capsule" type="CollisionShape" parent="Bodies/RigidBody"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, 0 )
+shape = SubResource( 1 )
+
+[node name="Box" type="CollisionShape" parent="Bodies/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0 )
+shape = SubResource( 2 )
+
+[node name="Cylinder" type="CollisionShape" parent="Bodies/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0 )
+shape = SubResource( 3 )
+
+[node name="Sphere" type="CollisionShape" parent="Bodies/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0 )
+shape = SubResource( 4 )
+
+[node name="Convex" type="CollisionShape" parent="Bodies/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0 )
+shape = SubResource( 5 )
+
+[node name="Ray" type="CollisionShape" parent="Bodies/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.8, 0 )
+shape = SubResource( 6 )
+
+[node name="Platforms" type="Spatial" parent="."]
+
+[node name="KinematicPlatform" type="KinematicBody" parent="Platforms"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -4.25, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Platforms/KinematicPlatform"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0 )
+shape = SubResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/KinematicPlatform"]
+anims/Move = SubResource( 9 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
+script = ExtResource( 1 )
+
+[node name="OmniLight" type="OmniLight" parent="Camera"]
+omni_range = 50.0

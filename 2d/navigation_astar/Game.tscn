@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://tileset/tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://pathfind_astar.gd" type="Script" id=2]
+[ext_resource path="res://character.gd" type="Script" id=3]
+[ext_resource path="res://sprites/character.png" type="Texture" id=4]
+
+[node name="Game" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+format = 1
+tile_data = PoolIntArray( 65537, 0, 0, 65541, 0, 0, 65545, 0, 0, 65550, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 327683, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 458761, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0 )
+script = ExtResource( 2 )
+
+[node name="Character" type="Position2D" parent="."]
+position = Vector2( 32, 32 )
+script = ExtResource( 3 )
+
+[node name="Sprite2D" type="Sprite" parent="Character"]
+position = Vector2( 7, 0 )
+texture = ExtResource( 4 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 512, 300 )
+current = true

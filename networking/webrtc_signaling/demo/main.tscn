@@ -1,0 +1,100 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://demo/main.gd" type="Script" id=1]
+[ext_resource path="res://demo/client_ui.tscn" type="PackedScene" id=2]
+[ext_resource path="res://server/ws_webrtc_server.gd" type="Script" id=3]
+
+[node name="Control" type="Control"]
+anchor_left = 0.0136719
+anchor_top = 0.0166667
+anchor_right = 0.986328
+anchor_bottom = 0.983333
+margin_top = 4.32134e-07
+margin_bottom = -9.53674e-06
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 50
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Signaling" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 995.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="VBoxContainer/Signaling"]
+margin_top = 5.0
+margin_right = 104.0
+margin_bottom = 19.0
+text = "Signaling server:"
+
+[node name="Port" type="SpinBox" parent="VBoxContainer/Signaling"]
+margin_left = 108.0
+margin_right = 182.0
+margin_bottom = 24.0
+min_value = 1025.0
+max_value = 65535.0
+value = 9080.0
+
+[node name="ListenButton" type="Button" parent="VBoxContainer/Signaling"]
+margin_left = 186.0
+margin_right = 237.0
+margin_bottom = 24.0
+toggle_mode = true
+text = "Listen"
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/Signaling"]
+margin_left = 241.0
+margin_right = 995.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LinkButton" type="LinkButton" parent="VBoxContainer/Signaling/CenterContainer"]
+margin_left = 104.0
+margin_top = 5.0
+margin_right = 650.0
+margin_bottom = 19.0
+text = "Make sure to download the GDNative WebRTC Plugin and place it in the project folder"
+
+[node name="Clients" type="GridContainer" parent="VBoxContainer"]
+margin_top = 74.0
+margin_right = 995.0
+margin_bottom = 579.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/vseparation = 15
+custom_constants/hseparation = 15
+columns = 2
+
+[node name="ClientUI" parent="VBoxContainer/Clients" instance=ExtResource( 2 )]
+margin_right = 490.0
+margin_bottom = 245.0
+
+[node name="ClientUI2" parent="VBoxContainer/Clients" instance=ExtResource( 2 )]
+margin_left = 505.0
+margin_right = 995.0
+margin_bottom = 245.0
+
+[node name="ClientUI3" parent="VBoxContainer/Clients" instance=ExtResource( 2 )]
+margin_top = 260.0
+margin_right = 490.0
+margin_bottom = 505.0
+
+[node name="ClientUI4" parent="VBoxContainer/Clients" instance=ExtResource( 2 )]
+margin_left = 505.0
+margin_top = 260.0
+margin_right = 995.0
+margin_bottom = 505.0
+
+[node name="Server" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[connection signal="toggled" from="VBoxContainer/Signaling/ListenButton" to="." method="_on_listen_toggled"]
+[connection signal="pressed" from="VBoxContainer/Signaling/CenterContainer/LinkButton" to="." method="_on_LinkButton_pressed"]

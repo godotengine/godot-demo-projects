@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://car_select.gd" type="Script" id=1]
+[ext_resource path="res://Images/choose_van.png" type="Texture" id=2]
+[ext_resource path="res://Images/choose_trailer.png" type="Texture" id=3]
+[ext_resource path="res://Images/choose_tow.png" type="Texture" id=4]
+
+[node name="CarSelect" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource( 1 )
+__meta__ = {
+"__editor_plugin_screen__": "2D",
+"_edit_use_anchors_": false
+}
+
+[node name="MiniVan" type="Button" parent="."]
+margin_left = 4.0
+margin_top = 160.0
+margin_right = 340.0
+margin_bottom = 400.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+icon = ExtResource( 2 )
+
+[node name="TrailerTruck" type="Button" parent="."]
+margin_left = 344.0
+margin_top = 160.0
+margin_right = 680.0
+margin_bottom = 401.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+icon = ExtResource( 3 )
+
+[node name="TowTruck" type="Button" parent="."]
+margin_left = 684.0
+margin_top = 160.0
+margin_right = 1020.0
+margin_bottom = 400.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+icon = ExtResource( 4 )
+
+[connection signal="pressed" from="MiniVan" to="." method="_on_MiniVan_pressed"]
+[connection signal="pressed" from="TrailerTruck" to="." method="_on_TrailerTruck_pressed"]
+[connection signal="pressed" from="TowTruck" to="." method="_on_TowTruck_pressed"]

@@ -1,0 +1,124 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://shaders/outline.shader" type="Shader" id=1]
+[ext_resource path="res://godotea.png" type="Texture" id=2]
+[ext_resource path="res://shaders/aura.shader" type="Shader" id=3]
+[ext_resource path="res://shaders/blur.shader" type="Shader" id=4]
+[ext_resource path="res://shaders/fatty.shader" type="Shader" id=5]
+[ext_resource path="res://shaders/dropshadow.shader" type="Shader" id=6]
+[ext_resource path="res://shaders/offsetshadow.shader" type="Shader" id=7]
+[ext_resource path="res://shaders/silouette.shader" type="Shader" id=8]
+[ext_resource path="res://shaders/glow.shader" type="Shader" id=9]
+[ext_resource path="res://shaders/dissintegrate.shader" type="Shader" id=10]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/outline_width = 2.0
+shader_param/outline_color = Color( 0, 1, 0.109375, 1 )
+
+[sub_resource type="ShaderMaterial" id=2]
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 1 )
+shader_param/outline_width = 4.0
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 3 )
+shader_param/aura_width = 6.0
+shader_param/aura_color = Color( 0.143326, 0.33235, 0.677765, 0.442 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 4 )
+shader_param/radius = 4.0
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 5 )
+shader_param/fattyness = 3.0
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 6 )
+shader_param/radius = 8.0
+shader_param/modulate = Color( 0, 0, 0, 0.501961 )
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 7 )
+shader_param/offset = Vector2( 20, 20 )
+shader_param/modulate = Color( 0.90625, 0.269043, 0.746948, 1 )
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 8 )
+shader_param/modulate = Color( 1, 0.0234375, 0.481201, 0.596706 )
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 9 )
+shader_param/radius = 5.0
+shader_param/amount = 0.25
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = ExtResource( 10 )
+shader_param/amount = 4.0
+
+[node name="SpriteShaders" type="Node2D"]
+material = SubResource( 1 )
+position = Vector2( 263.737, 179.444 )
+scale = Vector2( 0.3, 0.3 )
+
+[node name="Normal" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( -2.16144, 0 )
+texture = ExtResource( 2 )
+
+[node name="Outline" type="Sprite" parent="."]
+material = SubResource( 3 )
+position = Vector2( 400, 0 )
+texture = ExtResource( 2 )
+
+[node name="Aura" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( 800, 0 )
+texture = ExtResource( 2 )
+
+[node name="Blur" type="Sprite" parent="."]
+material = SubResource( 5 )
+position = Vector2( 1200, 0 )
+texture = ExtResource( 2 )
+
+[node name="Fatty" type="Sprite" parent="."]
+material = SubResource( 6 )
+position = Vector2( 1600, 0 )
+texture = ExtResource( 2 )
+
+[node name="DropShadow" type="Sprite" parent="."]
+material = SubResource( 7 )
+position = Vector2( 0, 800 )
+texture = ExtResource( 2 )
+
+[node name="OffsetShadow" type="Sprite" parent="."]
+material = SubResource( 8 )
+position = Vector2( 400, 800 )
+texture = ExtResource( 2 )
+
+[node name="Silouette" type="Sprite" parent="."]
+material = SubResource( 9 )
+position = Vector2( 800, 800 )
+texture = ExtResource( 2 )
+
+[node name="Glow" type="Sprite" parent="."]
+material = SubResource( 10 )
+position = Vector2( 1200, 800 )
+texture = ExtResource( 2 )
+
+[node name="Disintegrate" type="Sprite" parent="."]
+material = SubResource( 11 )
+position = Vector2( 1600, 800 )
+texture = ExtResource( 2 )
+region_rect = Rect2( 141, 115, 39, 6 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 248, 120 )
+current = true
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0

@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://brickfloor.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 24, 24 )
+
+[node name="TileScene" type="Node2D"]
+
+[node name="Wall" type="Sprite" parent="."]
+position = Vector2( 24, 24 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 48, 48 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="Floor" type="Sprite" parent="."]
+position = Vector2( 72, 24 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 48, 0, 48, 48 )

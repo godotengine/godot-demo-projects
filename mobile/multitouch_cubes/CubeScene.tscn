@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://default_env.tres" type="Environment" id=1]
+
+[sub_resource type="SpatialMaterial" id=1]
+params_diffuse_mode = 1
+albedo_color = Color( 0.149414, 0.796875, 0.569252, 1 )
+roughness = 0.0
+
+[sub_resource type="CubeMesh" id=2]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.707107, 0, -0.707107, -0.353553, 0.866025, -0.353553, 0.612372, 0.5, 0.612372, 0, 0, 0 )
+material_override = SubResource( 1 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.926535, 0.11439, -0.358396, 0.199614, 0.658013, 0.726067, 0.318884, -0.744267, 0.586839, 0, 0, 0 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
+fov = 60.0
+near = 0.1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 1 )

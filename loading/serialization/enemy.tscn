@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://enemy.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 38, 38 )
+
+[node name="Enemy" type="KinematicBody2D" groups=["enemy"]]
+position = Vector2( 64, 160 )
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 2, 0.6, 0.5, 1 )
+texture = ExtResource( 2 )
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_AttackArea_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_AttackArea_body_exited"]

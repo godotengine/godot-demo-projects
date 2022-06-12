@@ -1,0 +1,114 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://player/bullet/bullet.gd" type="Script" id=1]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+params_blend_mode = 1
+albedo_color = Color( 0.822, 0.795804, 0.513098, 1 )
+
+[sub_resource type="ArrayMesh" id=2]
+resource_name = "Sphere.001"
+surfaces/0 = {
+"aabb": AABB( -0.951057, -1, -0.951057, 1.90211, 2, 1.90211 ),
+"array_data": PoolByteArray( 155, 187, 241, 52, 0, 0, 0, 60, 135, 36, 0, 0, 179, 184, 120, 58, 0, 0, 0, 60, 176, 98, 0, 0, 166, 182, 120, 58, 166, 182, 0, 60, 200, 98, 200, 0, 97, 185, 241, 52, 97, 185, 0, 60, 171, 36, 171, 0, 155, 187, 241, 180, 0, 0, 0, 60, 135, 220, 0, 0, 97, 185, 241, 180, 97, 185, 0, 60, 171, 220, 171, 0, 179, 184, 120, 186, 0, 0, 0, 60, 176, 158, 0, 0, 166, 182, 120, 186, 166, 182, 0, 60, 200, 158, 200, 0, 0, 0, 241, 52, 155, 187, 0, 60, 0, 36, 135, 0, 0, 0, 241, 180, 155, 187, 0, 60, 0, 220, 135, 0, 0, 0, 120, 186, 179, 184, 0, 60, 0, 158, 176, 0, 0, 0, 120, 58, 179, 184, 0, 60, 0, 98, 176, 0, 97, 57, 241, 52, 97, 185, 0, 60, 85, 36, 171, 0, 97, 57, 241, 180, 97, 185, 0, 60, 85, 220, 171, 0, 166, 54, 120, 186, 166, 182, 0, 60, 56, 158, 200, 0, 166, 54, 120, 58, 166, 182, 0, 60, 56, 98, 200, 0, 155, 59, 241, 52, 0, 0, 0, 60, 121, 36, 0, 0, 155, 59, 241, 180, 0, 0, 0, 60, 121, 220, 0, 0, 179, 56, 120, 186, 0, 0, 0, 60, 80, 158, 0, 0, 179, 56, 120, 58, 0, 0, 0, 60, 80, 98, 0, 0, 97, 57, 241, 52, 97, 57, 0, 60, 85, 36, 85, 0, 97, 57, 241, 180, 97, 57, 0, 60, 85, 220, 85, 0, 166, 54, 120, 186, 166, 54, 0, 60, 56, 158, 56, 0, 166, 54, 120, 58, 166, 54, 0, 60, 56, 98, 56, 0, 0, 0, 241, 52, 155, 59, 0, 60, 0, 36, 121, 0, 0, 0, 241, 180, 155, 59, 0, 60, 0, 220, 121, 0, 0, 0, 120, 186, 179, 56, 0, 60, 0, 158, 80, 0, 0, 0, 120, 58, 179, 56, 0, 60, 0, 98, 80, 0, 97, 185, 241, 52, 97, 57, 0, 60, 171, 36, 85, 0, 97, 185, 241, 180, 97, 57, 0, 60, 171, 220, 85, 0, 166, 182, 120, 186, 166, 54, 0, 60, 200, 158, 56, 0, 166, 182, 120, 58, 166, 54, 0, 60, 200, 98, 56, 0, 0, 0, 0, 60, 0, 0, 0, 60, 0, 127, 0, 0, 0, 0, 0, 188, 0, 0, 0, 60, 0, 130, 0, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 0, 0, 3, 0, 2, 0, 4, 0, 3, 0, 0, 0, 4, 0, 5, 0, 3, 0, 6, 0, 5, 0, 4, 0, 6, 0, 7, 0, 5, 0, 5, 0, 8, 0, 3, 0, 5, 0, 9, 0, 8, 0, 7, 0, 9, 0, 5, 0, 7, 0, 10, 0, 9, 0, 3, 0, 11, 0, 2, 0, 3, 0, 8, 0, 11, 0, 9, 0, 12, 0, 8, 0, 9, 0, 13, 0, 12, 0, 10, 0, 13, 0, 9, 0, 10, 0, 14, 0, 13, 0, 8, 0, 15, 0, 11, 0, 8, 0, 12, 0, 15, 0, 13, 0, 16, 0, 12, 0, 13, 0, 17, 0, 16, 0, 14, 0, 17, 0, 13, 0, 14, 0, 18, 0, 17, 0, 12, 0, 19, 0, 15, 0, 12, 0, 16, 0, 19, 0, 17, 0, 20, 0, 16, 0, 17, 0, 21, 0, 20, 0, 18, 0, 21, 0, 17, 0, 18, 0, 22, 0, 21, 0, 16, 0, 23, 0, 19, 0, 16, 0, 20, 0, 23, 0, 21, 0, 24, 0, 20, 0, 21, 0, 25, 0, 24, 0, 22, 0, 25, 0, 21, 0, 22, 0, 26, 0, 25, 0, 20, 0, 27, 0, 23, 0, 20, 0, 24, 0, 27, 0, 25, 0, 28, 0, 24, 0, 25, 0, 29, 0, 28, 0, 26, 0, 29, 0, 25, 0, 26, 0, 30, 0, 29, 0, 24, 0, 31, 0, 27, 0, 24, 0, 28, 0, 31, 0, 1, 0, 2, 0, 32, 0, 33, 0, 7, 0, 6, 0, 2, 0, 11, 0, 32, 0, 33, 0, 10, 0, 7, 0, 11, 0, 15, 0, 32, 0, 33, 0, 14, 0, 10, 0, 15, 0, 19, 0, 32, 0, 33, 0, 18, 0, 14, 0, 19, 0, 23, 0, 32, 0, 33, 0, 22, 0, 18, 0, 23, 0, 27, 0, 32, 0, 33, 0, 26, 0, 22, 0, 27, 0, 31, 0, 32, 0, 33, 0, 30, 0, 26, 0, 29, 0, 0, 0, 28, 0, 29, 0, 4, 0, 0, 0, 30, 0, 4, 0, 29, 0, 30, 0, 6, 0, 4, 0, 32, 0, 31, 0, 1, 0, 33, 0, 6, 0, 30, 0, 1, 0, 28, 0, 0, 0, 1, 0, 31, 0, 28, 0 ),
+"blend_shape_data": [  ],
+"format": 98051,
+"index_count": 192,
+"material": SubResource( 1 ),
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 34
+}
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.7, 0.7, 0.7, 1 )
+metallic = 0.1
+roughness = 0.0
+emission_enabled = true
+emission = Color( 1, 0.884824, 0.513098, 1 )
+emission_energy = 3.71
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="Animation" id=4]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sphere:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="SphereShape" id=6]
+radius = 0.27
+
+[node name="Bullet" type="RigidBody"]
+mass = 0.4
+script = ExtResource( 1 )
+__meta__ = {
+"__editor_plugin_screen__": "3D"
+}
+
+[node name="Sphere" type="MeshInstance" parent="."]
+transform = Transform( 0.24972, 0, 0, 0, 0.24972, 0, 0, 0, 0.24972, 0.00159812, 0.0110106, 0.0045104 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "life"
+anims/life = SubResource( 4 )
+
+[node name="Particles" type="CPUParticles" parent="."]
+amount = 16
+lifetime = 0.4
+fixed_fps = 60
+fract_delta = false
+local_coords = false
+mesh = SubResource( 2 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+scale_amount = 0.3
+color_ramp = SubResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 6 )

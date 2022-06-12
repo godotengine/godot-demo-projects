@@ -1,0 +1,354 @@
+[gd_scene load_steps=35 format=2]
+
+[ext_resource path="res://utils/rigidbody_ground_check.gd" type="Script" id=1]
+[ext_resource path="res://tests/test_options.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tests/functional/test_rigidbody_ground_check.gd" type="Script" id=3]
+[ext_resource path="res://utils/camera_orbit.gd" type="Script" id=4]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
+
+[sub_resource type="BoxShape" id=2]
+
+[sub_resource type="CubeMesh" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+
+[sub_resource type="PhysicsMaterial" id=5]
+friction = 0.0
+
+[sub_resource type="CapsuleShape" id=6]
+
+[sub_resource type="CapsuleMesh" id=7]
+
+[sub_resource type="SpatialMaterial" id=8]
+
+[sub_resource type="PhysicsMaterial" id=9]
+friction = 0.0
+
+[sub_resource type="CylinderShape" id=10]
+
+[sub_resource type="CylinderMesh" id=11]
+
+[sub_resource type="SpatialMaterial" id=12]
+
+[sub_resource type="PhysicsMaterial" id=13]
+friction = 0.0
+
+[sub_resource type="ConvexPolygonShape" id=14]
+points = PoolVector3Array( -0.7, 0, -0.7, -0.3, 0, 0.8, 0.8, 0, -0.3, 0, -1, 0 )
+
+[sub_resource type="ArrayMesh" id=15]
+surfaces/0 = {
+"aabb": AABB( -0.7, -1, -0.7, 1.5, 1.00001, 1.5 ),
+"array_data": PoolByteArray( 51, 51, 51, 191, 0, 0, 0, 0, 51, 51, 51, 191, 167, 0, 167, 0, 154, 153, 153, 190, 0, 0, 0, 0, 205, 204, 76, 63, 212, 0, 118, 0, 205, 204, 76, 63, 0, 0, 0, 0, 154, 153, 153, 190, 118, 0, 212, 0, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 0, 0, 0, 129, 0, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 3, 0, 1, 0, 2, 0, 3, 0, 2, 0, 0, 0, 3, 0, 2, 0, 1, 0, 0, 0 ),
+"blend_shape_data": [  ],
+"format": 97539,
+"index_count": 12,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 4
+}
+
+[sub_resource type="SpatialMaterial" id=16]
+
+[sub_resource type="PhysicsMaterial" id=17]
+friction = 0.0
+
+[sub_resource type="SphereShape" id=18]
+
+[sub_resource type="SphereMesh" id=19]
+
+[sub_resource type="SpatialMaterial" id=20]
+
+[sub_resource type="RayShape" id=21]
+length = 1.5
+
+[sub_resource type="SphereMesh" id=22]
+radius = 0.5
+height = 1.0
+
+[sub_resource type="PlaneMesh" id=23]
+size = Vector2( 50, 20 )
+
+[sub_resource type="ConvexPolygonShape" id=24]
+points = PoolVector3Array( 25, 0, 10, -25, 0, 10, 25, 0, -10, -25, 0, -10 )
+
+[sub_resource type="ConvexPolygonShape" id=25]
+points = PoolVector3Array( 25, 0, 10, -25, 0, 10, 25, 0, -10, -25, 0, -10 )
+
+[sub_resource type="ConvexPolygonShape" id=26]
+points = PoolVector3Array( 50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, -50 )
+
+[sub_resource type="ConcavePolygonShape" id=27]
+data = PoolVector3Array( -1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1 )
+
+[sub_resource type="ConcavePolygonShape" id=28]
+data = PoolVector3Array( 50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50 )
+
+[sub_resource type="BoxShape" id=29]
+extents = Vector3( 50, 1, 20 )
+
+[sub_resource type="BoxShape" id=30]
+extents = Vector3( 100, 1, 100 )
+
+[node name="Test" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="LabelBodyType" type="Label" parent="."]
+margin_left = 14.0
+margin_top = 78.0
+margin_right = 171.0
+margin_bottom = 92.0
+text = "Floor Type: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" parent="." instance=ExtResource( 2 )]
+margin_top = 120.0
+margin_bottom = 140.0
+focus_mode = 2
+
+[node name="DynamicShapes" type="Spatial" parent="."]
+
+[node name="Bodies" type="Spatial" parent="DynamicShapes"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.2912, 0 )
+
+[node name="RigidBodyBox" type="RigidBody" parent="DynamicShapes/Bodies"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0 )
+physics_material_override = SubResource( 1 )
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="DynamicShapes/Bodies/RigidBodyBox"]
+transform = Transform( 0.6, 0, 0, 0, 1, 0, 0, 0, 0.6, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="DynamicShapes/Bodies/RigidBodyBox/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="RigidBodyCapsule" type="RigidBody" parent="DynamicShapes/Bodies"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0 )
+physics_material_override = SubResource( 5 )
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="DynamicShapes/Bodies/RigidBodyCapsule"]
+transform = Transform( 0.8, 0, 0, 0, -3.49691e-08, -0.8, 0, 0.8, -3.49691e-08, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="DynamicShapes/Bodies/RigidBodyCapsule/CollisionShape"]
+mesh = SubResource( 7 )
+material/0 = SubResource( 8 )
+
+[node name="RigidBodyCylinder" type="RigidBody" parent="DynamicShapes/Bodies"]
+physics_material_override = SubResource( 9 )
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="DynamicShapes/Bodies/RigidBodyCylinder"]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, 0, 0 )
+shape = SubResource( 10 )
+
+[node name="MeshInstance" type="MeshInstance" parent="DynamicShapes/Bodies/RigidBodyCylinder/CollisionShape"]
+mesh = SubResource( 11 )
+material/0 = SubResource( 12 )
+
+[node name="RigidBodyConvex" type="RigidBody" parent="DynamicShapes/Bodies"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.974548, 0 )
+physics_material_override = SubResource( 13 )
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="DynamicShapes/Bodies/RigidBodyConvex"]
+transform = Transform( 1.5, 0, 0, 0, 2, 0, 0, 0, 1.5, 0, 0, 0 )
+shape = SubResource( 14 )
+
+[node name="MeshInstance" type="MeshInstance" parent="DynamicShapes/Bodies/RigidBodyConvex/CollisionShape"]
+mesh = SubResource( 15 )
+material/0 = SubResource( 16 )
+
+[node name="RigidBodySphere" type="RigidBody" parent="DynamicShapes/Bodies"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0 )
+physics_material_override = SubResource( 17 )
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="DynamicShapes/Bodies/RigidBodySphere"]
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0 )
+shape = SubResource( 18 )
+
+[node name="MeshInstance" type="MeshInstance" parent="DynamicShapes/Bodies/RigidBodySphere/CollisionShape"]
+mesh = SubResource( 19 )
+material/0 = SubResource( 20 )
+
+[node name="RigidBodyRay" type="RigidBody" parent="DynamicShapes/Bodies"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.42391, 0, 0 )
+physics_material_override = SubResource( 17 )
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="DynamicShapes/Bodies/RigidBodyRay"]
+transform = Transform( 0.8, 0, 0, 0, 0, -0.8, 0, 0.8, 0, 0, 0, 0 )
+shape = SubResource( 21 )
+
+[node name="MeshInstance" type="MeshInstance" parent="DynamicShapes/Bodies/RigidBodyRay/CollisionShape"]
+mesh = SubResource( 22 )
+material/0 = SubResource( 20 )
+
+[node name="Floors" type="Spatial" parent="."]
+
+[node name="ConvexSmall" type="Spatial" parent="Floors"]
+
+[node name="ConvexFloor" type="StaticBody" parent="Floors/ConvexSmall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
+collision_layer = 2
+collision_mask = 3
+
+[node name="MeshInstance" type="MeshInstance" parent="Floors/ConvexSmall/ConvexFloor"]
+visible = false
+mesh = SubResource( 23 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Floors/ConvexSmall/ConvexFloor"]
+shape = SubResource( 24 )
+
+[node name="ConvexFloor2" type="StaticBody" parent="Floors/ConvexSmall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
+collision_layer = 2
+collision_mask = 3
+
+[node name="MeshInstance" type="MeshInstance" parent="Floors/ConvexSmall/ConvexFloor2"]
+visible = false
+mesh = SubResource( 23 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Floors/ConvexSmall/ConvexFloor2"]
+shape = SubResource( 25 )
+
+[node name="ConvexBig" type="Spatial" parent="Floors"]
+
+[node name="ConvexFloor" type="StaticBody" parent="Floors/ConvexBig"]
+collision_layer = 2
+collision_mask = 3
+
+[node name="MeshInstance" type="MeshInstance" parent="Floors/ConvexBig/ConvexFloor"]
+visible = false
+mesh = SubResource( 23 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Floors/ConvexBig/ConvexFloor"]
+shape = SubResource( 26 )
+
+[node name="ConcaveSmall" type="Spatial" parent="Floors"]
+
+[node name="ConcaveFloor" type="StaticBody" parent="Floors/ConcaveSmall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
+collision_layer = 2
+collision_mask = 3
+
+[node name="MeshInstance" type="MeshInstance" parent="Floors/ConcaveSmall/ConcaveFloor"]
+visible = false
+mesh = SubResource( 23 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Floors/ConcaveSmall/ConcaveFloor"]
+transform = Transform( 25, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0 )
+shape = SubResource( 27 )
+
+[node name="ConcaveFloor2" type="StaticBody" parent="Floors/ConcaveSmall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
+collision_layer = 2
+collision_mask = 3
+
+[node name="MeshInstance" type="MeshInstance" parent="Floors/ConcaveSmall/ConcaveFloor2"]
+visible = false
+mesh = SubResource( 23 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Floors/ConcaveSmall/ConcaveFloor2"]
+transform = Transform( 25, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0 )
+shape = SubResource( 27 )
+
+[node name="ConcaveBig" type="Spatial" parent="Floors"]
+
+[node name="ConcaveFloor" type="StaticBody" parent="Floors/ConcaveBig"]
+collision_layer = 2
+collision_mask = 3
+
+[node name="MeshInstance" type="MeshInstance" parent="Floors/ConcaveBig/ConcaveFloor"]
+visible = false
+mesh = SubResource( 23 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Floors/ConcaveBig/ConcaveFloor"]
+shape = SubResource( 28 )
+
+[node name="BoxSmall" type="Spatial" parent="Floors"]
+
+[node name="BoxFloor" type="StaticBody" parent="Floors/BoxSmall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
+collision_layer = 2
+collision_mask = 3
+
+[node name="MeshInstance" type="MeshInstance" parent="Floors/BoxSmall/BoxFloor"]
+visible = false
+mesh = SubResource( 23 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Floors/BoxSmall/BoxFloor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 29 )
+
+[node name="BoxFloor2" type="StaticBody" parent="Floors/BoxSmall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
+collision_layer = 2
+collision_mask = 3
+
+[node name="MeshInstance" type="MeshInstance" parent="Floors/BoxSmall/BoxFloor2"]
+visible = false
+mesh = SubResource( 23 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Floors/BoxSmall/BoxFloor2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 29 )
+
+[node name="BoxBig" type="Spatial" parent="Floors"]
+
+[node name="BoxFloor" type="StaticBody" parent="Floors/BoxBig"]
+collision_layer = 2
+collision_mask = 3
+
+[node name="MeshInstance" type="MeshInstance" parent="Floors/BoxBig/BoxFloor"]
+visible = false
+mesh = SubResource( 23 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Floors/BoxBig/BoxFloor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 30 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.604, 22.124 )
+far = 1000.0
+script = ExtResource( 4 )
+
+[node name="OmniLight" type="OmniLight" parent="Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.6965, -5.95932 )
+omni_range = 50.0

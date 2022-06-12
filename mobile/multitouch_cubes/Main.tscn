@@ -1,0 +1,163 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://GestureArea.gd" type="Script" id=1]
+[ext_resource path="res://CubeScene.tscn" type="PackedScene" id=2]
+
+[node name="VBoxContainer" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 298.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ViewportContainer" type="ViewportContainer" parent="HBoxContainer"]
+margin_right = 510.0
+margin_bottom = 298.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+script = ExtResource( 1 )
+target = NodePath("Viewport/Spatial/MeshInstance")
+one_finger_rot_y = false
+two_fingers_rot_z = false
+two_fingers_zoom = false
+
+[node name="Viewport" type="Viewport" parent="HBoxContainer/ViewportContainer"]
+size = Vector2( 510, 298 )
+own_world = true
+transparent_bg = true
+handle_input_locally = false
+msaa = 2
+hdr = false
+usage = 3
+render_target_update_mode = 3
+
+[node name="Spatial" parent="HBoxContainer/ViewportContainer/Viewport" instance=ExtResource( 2 )]
+
+[node name="Camera" parent="HBoxContainer/ViewportContainer/Viewport/Spatial" index="2"]
+current = true
+
+[node name="Label" type="Label" parent="HBoxContainer/ViewportContainer"]
+margin_left = 7.0
+margin_top = 11.0
+margin_right = 157.0
+margin_bottom = 25.0
+text = "One-finger rot around X"
+
+[node name="ViewportContainer2" type="ViewportContainer" parent="HBoxContainer"]
+margin_left = 514.0
+margin_right = 1024.0
+margin_bottom = 298.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+script = ExtResource( 1 )
+target = NodePath("Viewport/Spatial/MeshInstance")
+two_fingers_rot_z = false
+two_fingers_zoom = false
+
+[node name="Viewport" type="Viewport" parent="HBoxContainer/ViewportContainer2"]
+size = Vector2( 510, 298 )
+own_world = true
+transparent_bg = true
+handle_input_locally = false
+msaa = 2
+hdr = false
+usage = 3
+render_target_update_mode = 3
+
+[node name="Spatial" parent="HBoxContainer/ViewportContainer2/Viewport" instance=ExtResource( 2 )]
+
+[node name="Camera" parent="HBoxContainer/ViewportContainer2/Viewport/Spatial" index="2"]
+current = true
+
+[node name="Label2" type="Label" parent="HBoxContainer/ViewportContainer2"]
+margin_left = 8.0
+margin_top = 11.0
+margin_right = 196.0
+margin_bottom = 25.0
+text = "One-finger rot around X and Y"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+margin_top = 302.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ViewportContainer" type="ViewportContainer" parent="HBoxContainer2"]
+margin_right = 510.0
+margin_bottom = 298.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+script = ExtResource( 1 )
+target = NodePath("Viewport/Spatial/MeshInstance")
+two_fingers_zoom = false
+
+[node name="Viewport" type="Viewport" parent="HBoxContainer2/ViewportContainer"]
+size = Vector2( 510, 298 )
+own_world = true
+transparent_bg = true
+handle_input_locally = false
+msaa = 2
+hdr = false
+usage = 3
+render_target_update_mode = 3
+
+[node name="Spatial" parent="HBoxContainer2/ViewportContainer/Viewport" instance=ExtResource( 2 )]
+
+[node name="Camera" parent="HBoxContainer2/ViewportContainer/Viewport/Spatial" index="2"]
+current = true
+
+[node name="Label3" type="Label" parent="HBoxContainer2/ViewportContainer"]
+margin_left = 8.0
+margin_top = 9.0
+margin_right = 236.0
+margin_bottom = 23.0
+text = "One-finger X/Y rot + two-finger Z rot"
+
+[node name="ViewportContainer2" type="ViewportContainer" parent="HBoxContainer2"]
+margin_left = 514.0
+margin_right = 1024.0
+margin_bottom = 298.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+script = ExtResource( 1 )
+target = NodePath("Viewport/Spatial/MeshInstance")
+
+[node name="Viewport" type="Viewport" parent="HBoxContainer2/ViewportContainer2"]
+size = Vector2( 510, 298 )
+own_world = true
+transparent_bg = true
+handle_input_locally = false
+msaa = 2
+hdr = false
+usage = 3
+render_target_update_mode = 3
+
+[node name="Spatial" parent="HBoxContainer2/ViewportContainer2/Viewport" instance=ExtResource( 2 )]
+
+[node name="Camera" parent="HBoxContainer2/ViewportContainer2/Viewport/Spatial" index="2"]
+current = true
+
+[node name="Label2" type="Label" parent="HBoxContainer2/ViewportContainer2"]
+margin_left = 12.0
+margin_top = 9.0
+margin_right = 279.0
+margin_bottom = 23.0
+text = "One-finger X/Y, two-finger Z + pinch"
+
+[editable path="HBoxContainer/ViewportContainer/Viewport/Spatial"]
+[editable path="HBoxContainer/ViewportContainer2/Viewport/Spatial"]
+[editable path="HBoxContainer2/ViewportContainer/Viewport/Spatial"]
+[editable path="HBoxContainer2/ViewportContainer2/Viewport/Spatial"]

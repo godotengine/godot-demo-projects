@@ -1,0 +1,198 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://utils/label_fps.gd" type="Script" id=1]
+[ext_resource path="res://utils/label_version.gd" type="Script" id=2]
+[ext_resource path="res://utils/label_engine.gd" type="Script" id=3]
+[ext_resource path="res://tests_menu.gd" type="Script" id=4]
+[ext_resource path="res://utils/label_test.gd" type="Script" id=5]
+[ext_resource path="res://utils/label_pause.gd" type="Script" id=6]
+[ext_resource path="res://utils/container_log.gd" type="Script" id=10]
+[ext_resource path="res://utils/scroll_log.gd" type="Script" id=11]
+[ext_resource path="res://tests.gd" type="Script" id=12]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.176471 )
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TestsMenu" type="MenuButton" parent="."]
+pause_mode = 2
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 125.0
+margin_bottom = 30.0
+text = "TESTS"
+flat = false
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelControls" type="Label" parent="."]
+pause_mode = 2
+margin_left = 157.0
+margin_top = 13.0
+margin_right = 646.0
+margin_bottom = 27.0
+text = "P - TOGGLE PAUSE / R - RESTART / C - TOGGLE COLLISION / F - TOGGLE FULL SCREEN / ESC - QUIT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelFPS" type="Label" parent="."]
+pause_mode = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -19.0
+margin_right = 50.0
+margin_bottom = -5.0
+text = "FPS: 0"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelEngine" type="Label" parent="."]
+pause_mode = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -39.0
+margin_right = 50.0
+margin_bottom = -25.0
+text = "Physics engine:"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelVersion" type="Label" parent="."]
+pause_mode = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -59.0
+margin_right = 50.0
+margin_bottom = -45.0
+text = "Godot Version:"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelTest" type="Label" parent="."]
+pause_mode = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -79.0
+margin_right = 50.0
+margin_bottom = -65.0
+text = "Test:"
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelPause" type="Label" parent="."]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -40.9695
+margin_right = 31.0
+margin_bottom = -26.9695
+text = "PAUSED"
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelLog" type="Panel" parent="."]
+pause_mode = 2
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -428.0
+margin_top = -125.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonClear" type="Button" parent="PanelLog"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -48.0
+margin_top = -25.0
+margin_right = -5.0
+margin_bottom = -5.0
+focus_mode = 0
+text = "clear"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBoxScroll" type="CheckBox" parent="PanelLog"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -150.0
+margin_top = -27.0
+margin_right = -54.0
+margin_bottom = -3.0
+focus_mode = 0
+pressed = true
+text = "auto-scroll"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollLog" type="ScrollContainer" parent="PanelLog"]
+margin_left = 10.0
+margin_top = 5.0
+margin_right = 418.0
+margin_bottom = 94.0
+scroll_horizontal_enabled = false
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+auto_scroll = true
+
+[node name="VBoxLog" type="VBoxContainer" parent="PanelLog/ScrollLog"]
+margin_right = 408.0
+margin_bottom = 89.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+script = ExtResource( 10 )
+
+[node name="LabelLog" type="Label" parent="PanelLog/ScrollLog/VBoxLog"]
+margin_top = 75.0
+margin_right = 408.0
+margin_bottom = 89.0
+text = "Log start"
+valign = 2
+autowrap = true
+max_lines_visible = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="PanelLog/ButtonClear" to="PanelLog/ScrollLog/VBoxLog" method="clear"]
+[connection signal="toggled" from="PanelLog/CheckBoxScroll" to="PanelLog/ScrollLog" method="set_auto_scroll"]

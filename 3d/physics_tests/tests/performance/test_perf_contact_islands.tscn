@@ -1,0 +1,142 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://tests/performance/test_perf_contacts.gd" type="Script" id=1]
+[ext_resource path="res://utils/camera_orbit.gd" type="Script" id=3]
+[ext_resource path="res://tests/test_options.tscn" type="PackedScene" id=4]
+[ext_resource path="res://tests/static_scene.tscn" type="PackedScene" id=5]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 0.5
+height = 0.5
+
+[sub_resource type="CylinderShape" id=3]
+radius = 0.5
+height = 1.0
+
+[sub_resource type="ConvexPolygonShape" id=4]
+points = PoolVector3Array( -0.7, 0, -0.7, -0.3, 0, 0.8, 0.8, 0, -0.3, 0, -1, 0 )
+
+[sub_resource type="SphereShape" id=5]
+radius = 0.5
+
+[sub_resource type="PlaneShape" id=6]
+
+[node name="Test" type="Spatial"]
+script = ExtResource( 1 )
+_enable_debug_collision = false
+spawns = [ "SpawnTarget1", "SpawnTarget2", "SpawnTarget3", "SpawnTarget4", "SpawnTarget5", "SpawnTarget6", "SpawnTarget7", "SpawnTarget8", "SpawnTarget9", "SpawnTarget10", "SpawnTarget11", "SpawnTarget12", "SpawnTarget13", "SpawnTarget14", "SpawnTarget15", "SpawnTarget16" ]
+spawn_count = 200
+spawn_randomize = Vector3( 0.2, 0.2, 0.2 )
+
+[node name="Options" parent="." instance=ExtResource( 4 )]
+
+[node name="SpawnTarget1" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 7, -37.715 )
+
+[node name="SpawnTarget2" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 7, -19.7248 )
+
+[node name="SpawnTarget3" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.4903, 7, -37.715 )
+
+[node name="SpawnTarget4" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.4903, 7, -19.7248 )
+
+[node name="SpawnTarget5" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 7, 10.7172 )
+
+[node name="SpawnTarget6" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 7, 28.7073 )
+
+[node name="SpawnTarget7" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.4903, 7, 10.7172 )
+
+[node name="SpawnTarget8" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.4903, 7, 28.7073 )
+
+[node name="SpawnTarget9" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.8583, 7, 10.7172 )
+
+[node name="SpawnTarget10" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.8583, 7, 28.7073 )
+
+[node name="SpawnTarget11" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -38.368, 7, 10.7172 )
+
+[node name="SpawnTarget12" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -38.368, 7, 28.7073 )
+
+[node name="SpawnTarget13" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.8583, 7, -38.798 )
+
+[node name="SpawnTarget14" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.8583, 7, -20.8078 )
+
+[node name="SpawnTarget15" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -38.368, 7, -38.798 )
+
+[node name="SpawnTarget16" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -38.368, 7, -20.8078 )
+
+[node name="DynamicShapes" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26.3192, 1.2359, 38.0117 )
+
+[node name="RigidBodyBox" type="RigidBody" parent="DynamicShapes"]
+
+[node name="CollisionShape" type="CollisionShape" parent="DynamicShapes/RigidBodyBox"]
+shape = SubResource( 1 )
+
+[node name="RigidBodyCapsule" type="RigidBody" parent="DynamicShapes"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="DynamicShapes/RigidBodyCapsule"]
+shape = SubResource( 2 )
+
+[node name="RigidBodyCylinder" type="RigidBody" parent="DynamicShapes"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="DynamicShapes/RigidBodyCylinder"]
+shape = SubResource( 3 )
+
+[node name="RigidBodyConvex" type="RigidBody" parent="DynamicShapes"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="DynamicShapes/RigidBodyConvex"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="RigidBodySphere" type="RigidBody" parent="DynamicShapes"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="DynamicShapes/RigidBodySphere"]
+shape = SubResource( 5 )
+
+[node name="StaticScene" parent="." instance=ExtResource( 5 )]
+
+[node name="StaticBodyWalls" type="StaticBody" parent="."]
+
+[node name="CollisionShape1" type="CollisionShape" parent="StaticBodyWalls"]
+transform = Transform( -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0, 1, -50, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="StaticBodyWalls"]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 50, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="StaticBodyWalls"]
+transform = Transform( 2.6543e-14, 1.62921e-07, 1, 1, -1.62921e-07, 1.56125e-19, 1.62921e-07, 1, -1.62921e-07, 0, 0, -50 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="StaticBodyWalls"]
+transform = Transform( 2.6543e-14, 1.62921e-07, -1, 1, -1.62921e-07, -1.56125e-19, -1.62921e-07, -1, -1.62921e-07, 0, 0, 50 )
+shape = SubResource( 6 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.881757, 0.471705, 0, -0.471705, 0.881757, 0, 20.4125, 41.0426 )
+script = ExtResource( 3 )
+
+[node name="OmniLight" type="OmniLight" parent="Camera"]
+omni_range = 80.0

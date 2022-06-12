@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/theme/user_interface.tres" type="Theme" id=1]
+[ext_resource path="res://src/UserInterface/PauseMenu.gd" type="Script" id=2]
+[ext_resource path="res://assets/theme/fonts/kenney_mini_square.tres" type="DynamicFontData" id=3]
+[ext_resource path="res://src/UserInterface/CoinsCounter.tscn" type="PackedScene" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 44
+font_data = ExtResource( 3 )
+
+[node name="PauseMenu" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.294118 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer"]
+margin_left = 250.0
+margin_top = 140.0
+margin_right = 550.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 300, 200 )
+custom_constants/separation = 6
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ColorRect/CenterContainer/VBoxContainer"]
+margin_top = 7.0
+margin_right = 300.0
+margin_bottom = 62.0
+custom_fonts/font = SubResource( 1 )
+text = "Game Paused"
+align = 1
+valign = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/CenterContainer/VBoxContainer"]
+margin_top = 68.0
+margin_right = 300.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="ResumeButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer"]
+margin_left = 60.0
+margin_top = 94.0
+margin_right = 240.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 180, 40 )
+size_flags_horizontal = 4
+text = "Resume"
+
+[node name="QuitButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer"]
+margin_left = 60.0
+margin_top = 146.0
+margin_right = 240.0
+margin_bottom = 192.0
+rect_min_size = Vector2( 180, 40 )
+size_flags_horizontal = 4
+text = "Quit"
+
+[node name="CoinsCounter" parent="ColorRect" instance=ExtResource( 4 )]
+margin_right = 105.0
+margin_bottom = 50.0
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_all_completed"]

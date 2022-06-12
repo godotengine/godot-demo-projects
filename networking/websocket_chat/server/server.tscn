@@ -1,0 +1,88 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://server/server_ui.gd" type="Script" id=1]
+[ext_resource path="res://server/server.gd" type="Script" id=2]
+
+[node name="ServerControl" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Server" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 24.0
+
+[node name="Port" type="SpinBox" parent="Panel/VBoxContainer/HBoxContainer"]
+margin_right = 74.0
+margin_bottom = 24.0
+min_value = 1.0
+max_value = 65535.0
+value = 8000.0
+
+[node name="Listen" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+margin_left = 78.0
+margin_right = 129.0
+margin_bottom = 24.0
+toggle_mode = true
+text = "Listen"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+margin_top = 28.0
+margin_right = 1024.0
+margin_bottom = 52.0
+
+[node name="WriteMode" type="OptionButton" parent="Panel/VBoxContainer/HBoxContainer2"]
+margin_right = 29.0
+margin_bottom = 24.0
+
+[node name="MPAPI" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer2"]
+margin_left = 33.0
+margin_right = 159.0
+margin_bottom = 24.0
+pressed = true
+text = "Multiplayer API"
+
+[node name="Destination" type="OptionButton" parent="Panel/VBoxContainer/HBoxContainer2"]
+margin_left = 163.0
+margin_right = 192.0
+margin_bottom = 24.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/VBoxContainer"]
+margin_top = 56.0
+margin_right = 1024.0
+margin_bottom = 80.0
+
+[node name="LineEdit" type="LineEdit" parent="Panel/VBoxContainer/HBoxContainer3"]
+margin_right = 977.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="Send" type="Button" parent="Panel/VBoxContainer/HBoxContainer3"]
+margin_left = 981.0
+margin_right = 1024.0
+margin_bottom = 24.0
+text = "Send"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/VBoxContainer"]
+margin_top = 84.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_vertical = 3
+
+[connection signal="toggled" from="Panel/VBoxContainer/HBoxContainer/Listen" to="." method="_on_Listen_toggled"]
+[connection signal="item_selected" from="Panel/VBoxContainer/HBoxContainer2/WriteMode" to="." method="_on_WriteMode_item_selected"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer3/Send" to="." method="_on_Send_pressed"]

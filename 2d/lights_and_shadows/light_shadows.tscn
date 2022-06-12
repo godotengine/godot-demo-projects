@@ -1,0 +1,323 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://background.png" type="Texture" id=1]
+[ext_resource path="res://caster.png" type="Texture" id=2]
+[ext_resource path="res://light.png" type="Texture" id=3]
+[ext_resource path="res://spot.png" type="Texture" id=4]
+[ext_resource path="res://godot.png" type="Texture" id=5]
+[ext_resource path="res://godot_normal.png" type="Texture" id=6]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+polygon = PoolVector2Array( -15.913, -15.9738, 15.9079, -16.0785, 15.6986, 15.847, -16.1223, 15.9517 )
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="Animation" id=3]
+length = 16.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4, 8, 12 ),
+"transitions": PoolRealArray( -2, -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 159.289, 452.441 ), Vector2( 132.279, 80.4366 ), Vector2( 700.722, 241.27 ), Vector2( 429.392, 571.532 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 16.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4.1, 8.1, 11.8 ),
+"transitions": PoolRealArray( -2, -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 753.756, 314.336 ), Vector2( 69.7562, 234.336 ), Vector2( 256.756, 575.336 ), Vector2( 516.756, 530.336 ) ]
+}
+
+[sub_resource type="CanvasItemMaterial" id=5]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=6]
+blend_mode = 1
+
+[sub_resource type="Animation" id=7]
+length = 16.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4.1, 7.9, 12.1 ),
+"transitions": PoolRealArray( -2, -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 692.078, 29.8849 ), Vector2( 309.606, 31.5551 ), Vector2( 40.7064, 238.658 ), Vector2( 685.397, 282.082 ) ]
+}
+
+[node name="LightShadows" type="Node2D"]
+
+[node name="Ambient" type="CanvasModulate" parent="."]
+color = Color( 0.27451, 0.27451, 0.27451, 1 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 401.251, 302.906 )
+scale = Vector2( 128, 128 )
+texture = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 295.886, 216.938 )
+texture = ExtResource( 5 )
+normal_map = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="Sprite"]
+margin_left = -22.5563
+margin_top = 64.6982
+margin_right = 24.4437
+margin_bottom = 78.6982
+text = "Normal"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpriteFlipX" type="Sprite" parent="."]
+position = Vector2( 543.341, 220.255 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 5 )
+normal_map = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="SpriteFlipX"]
+margin_left = 22.5564
+margin_top = 66.0347
+margin_right = 69.5564
+margin_bottom = 80.0347
+rect_scale = Vector2( -1, 1 )
+text = "Flip X"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpriteFlipY" type="Sprite" parent="."]
+position = Vector2( 291.308, 423.369 )
+scale = Vector2( 1, -1 )
+texture = ExtResource( 5 )
+normal_map = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="SpriteFlipY"]
+margin_left = -23.3056
+margin_top = -67.2446
+margin_right = 23.6944
+margin_bottom = -53.2446
+rect_scale = Vector2( 1, -1 )
+text = "Flip Y"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpriteFlipXY" type="Sprite" parent="."]
+position = Vector2( 542.081, 424.696 )
+scale = Vector2( -1, -1 )
+texture = ExtResource( 5 )
+normal_map = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="SpriteFlipXY"]
+margin_left = 23.9495
+margin_top = -67.5714
+margin_right = 81.9495
+margin_bottom = -53.5714
+rect_scale = Vector2( -1, -1 )
+text = "Flip X + Y"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Casters" type="Node2D" parent="."]
+
+[node name="ShadowCaster" type="Sprite" parent="Casters"]
+position = Vector2( 95.2909, 85.3186 )
+texture = ExtResource( 2 )
+
+[node name="Occluder" type="LightOccluder2D" parent="Casters/ShadowCaster"]
+occluder = SubResource( 1 )
+
+[node name="ShadowCaster1" type="Sprite" parent="Casters"]
+position = Vector2( 200.291, 313.319 )
+texture = ExtResource( 2 )
+
+[node name="Occluder" type="LightOccluder2D" parent="Casters/ShadowCaster1"]
+occluder = SubResource( 1 )
+
+[node name="ShadowCaster2" type="Sprite" parent="Casters"]
+position = Vector2( 76.2909, 405.319 )
+texture = ExtResource( 2 )
+
+[node name="Occluder" type="LightOccluder2D" parent="Casters/ShadowCaster2"]
+occluder = SubResource( 1 )
+
+[node name="ShadowCaster3" type="Sprite" parent="Casters"]
+position = Vector2( 408.291, 226.319 )
+texture = ExtResource( 2 )
+
+[node name="Occluder" type="LightOccluder2D" parent="Casters/ShadowCaster3"]
+occluder = SubResource( 1 )
+
+[node name="ShadowCaster4" type="Sprite" parent="Casters"]
+position = Vector2( 239.291, 48.3186 )
+texture = ExtResource( 2 )
+
+[node name="Occluder" type="LightOccluder2D" parent="Casters/ShadowCaster4"]
+occluder = SubResource( 1 )
+
+[node name="ShadowCaster5" type="Sprite" parent="Casters"]
+position = Vector2( 140.291, 561.319 )
+texture = ExtResource( 2 )
+
+[node name="Occluder" type="LightOccluder2D" parent="Casters/ShadowCaster5"]
+occluder = SubResource( 1 )
+
+[node name="ShadowCaster6" type="Sprite" parent="Casters"]
+position = Vector2( 392.291, 499.319 )
+texture = ExtResource( 2 )
+
+[node name="Occluder" type="LightOccluder2D" parent="Casters/ShadowCaster6"]
+occluder = SubResource( 1 )
+
+[node name="ShadowCaster7" type="Sprite" parent="Casters"]
+position = Vector2( 735.291, 552.319 )
+texture = ExtResource( 2 )
+
+[node name="Occluder" type="LightOccluder2D" parent="Casters/ShadowCaster7"]
+occluder = SubResource( 1 )
+
+[node name="ShadowCaster8" type="Sprite" parent="Casters"]
+position = Vector2( 661.291, 371.319 )
+texture = ExtResource( 2 )
+
+[node name="Occluder" type="LightOccluder2D" parent="Casters/ShadowCaster8"]
+occluder = SubResource( 1 )
+
+[node name="ShadowCaster9" type="Sprite" parent="Casters"]
+position = Vector2( 567.291, 574.319 )
+texture = ExtResource( 2 )
+
+[node name="occluder" type="LightOccluder2D" parent="Casters/ShadowCaster9"]
+occluder = SubResource( 1 )
+
+[node name="ShadowCaster10" type="Sprite" parent="Casters"]
+position = Vector2( 420.291, 350.319 )
+texture = ExtResource( 2 )
+
+[node name="Occluder" type="LightOccluder2D" parent="Casters/ShadowCaster10"]
+occluder = SubResource( 1 )
+
+[node name="ShadowCaster11" type="Sprite" parent="Casters"]
+position = Vector2( 463.291, 106.319 )
+texture = ExtResource( 2 )
+
+[node name="Occluder" type="LightOccluder2D" parent="Casters/ShadowCaster11"]
+occluder = SubResource( 1 )
+
+[node name="ShadowCaster12" type="Sprite" parent="Casters"]
+position = Vector2( 621.291, 78.3186 )
+texture = ExtResource( 2 )
+
+[node name="Occluder" type="LightOccluder2D" parent="Casters/ShadowCaster12"]
+occluder = SubResource( 1 )
+
+[node name="ShadowCaster13" type="Sprite" parent="Casters"]
+position = Vector2( 761.291, 240.319 )
+texture = ExtResource( 2 )
+
+[node name="Occluder" type="LightOccluder2D" parent="Casters/ShadowCaster13"]
+occluder = SubResource( 1 )
+
+[node name="ShadowCaster14" type="Sprite" parent="Casters"]
+position = Vector2( 771.291, 29.3186 )
+texture = ExtResource( 2 )
+
+[node name="Occluder" type="LightOccluder2D" parent="Casters/ShadowCaster14"]
+occluder = SubResource( 1 )
+
+[node name="RedLight" type="Light2D" parent="."]
+position = Vector2( 159.289, 452.441 )
+texture = ExtResource( 3 )
+color = Color( 1, 0.446392, 0.0576646, 1 )
+shadow_enabled = true
+shadow_gradient_length = 1.3
+shadow_filter = 3
+shadow_filter_smooth = 11.1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Blob" type="Sprite" parent="RedLight"]
+material = SubResource( 2 )
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RedLight"]
+autoplay = "motion"
+anims/motion = SubResource( 3 )
+anims/motion2 = SubResource( 4 )
+
+[node name="GreenLight" type="Light2D" parent="."]
+position = Vector2( 753.756, 314.336 )
+texture = ExtResource( 3 )
+color = Color( 0.49247, 0.878537, 0.409146, 1 )
+shadow_enabled = true
+shadow_gradient_length = 1.2
+shadow_filter = 3
+shadow_filter_smooth = 7.1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="blob" type="Sprite" parent="GreenLight"]
+material = SubResource( 5 )
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GreenLight"]
+autoplay = "m2"
+anims/m2 = SubResource( 4 )
+anims/motion = SubResource( 3 )
+
+[node name="BlueLight" type="Light2D" parent="."]
+position = Vector2( 692.078, 31.1773 )
+texture = ExtResource( 3 )
+color = Color( 0.396752, 0.446392, 0.929792, 1 )
+shadow_enabled = true
+shadow_gradient_length = 1.4
+shadow_filter = 3
+shadow_filter_smooth = 5.3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="blob" type="Sprite" parent="BlueLight"]
+material = SubResource( 6 )
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BlueLight"]
+autoplay = "motion3"
+anims/motion = SubResource( 3 )
+anims/motion2 = SubResource( 4 )
+anims/motion3 = SubResource( 7 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 400, 300 )
+current = true

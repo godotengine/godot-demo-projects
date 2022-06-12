@@ -1,0 +1,36 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+[application]
+
+config/name="GUI in 3D"
+config/description="A demo showing a GUI instanced within a 3D scene using viewports,
+as well as forwarding mouse and keyboard input to the GUI."
+run/main_scene="res://gui_in_3d.tscn"
+config/icon="res://icon.png"
+
+[gdnative]
+
+singletons=[  ]
+
+[layer_names]
+
+3d_physics/layer_2="Control"
+
+[rendering]
+
+quality/driver/fallback_to_gles2=true
+quality/intended_usage/framebuffer_allocation=3
+vram_compression/import_etc=true
+quality/shadow_atlas/size=2048
+quality/shadow_atlas/size.mobile=1024
+quality/shadows/filter_mode=2
+quality/filters/msaa=2
+environment/default_environment="res://default_env.tres"

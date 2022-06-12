@@ -1,0 +1,267 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://screen_shaders.gd" type="Script" id=1]
+[ext_resource path="res://art/burano.jpg" type="Texture" id=2]
+[ext_resource path="res://art/platformer.jpg" type="Texture" id=3]
+[ext_resource path="res://art/mountains.jpg" type="Texture" id=4]
+[ext_resource path="res://art/forest.jpg" type="Texture" id=5]
+[ext_resource path="res://shaders/vignette.shader" type="Shader" id=6]
+[ext_resource path="res://art/vignette.png" type="Texture" id=7]
+[ext_resource path="res://art/white.png" type="Texture" id=8]
+[ext_resource path="res://shaders/blur.shader" type="Shader" id=9]
+[ext_resource path="res://shaders/pixelize.shader" type="Shader" id=10]
+[ext_resource path="res://shaders/whirl.shader" type="Shader" id=11]
+[ext_resource path="res://shaders/sepia.shader" type="Shader" id=12]
+[ext_resource path="res://shaders/negative.shader" type="Shader" id=13]
+[ext_resource path="res://shaders/contrasted.shader" type="Shader" id=14]
+[ext_resource path="res://shaders/normalized.shader" type="Shader" id=15]
+[ext_resource path="res://shaders/BCS.shader" type="Shader" id=16]
+[ext_resource path="res://shaders/mirage.shader" type="Shader" id=17]
+[ext_resource path="res://shaders/old_film.shader" type="Shader" id=18]
+[ext_resource path="res://art/filmgrain.png" type="Texture" id=19]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 6 )
+shader_param/vignette = ExtResource( 7 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 9 )
+shader_param/amount = 4.0
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 10 )
+shader_param/size_x = 0.008
+shader_param/size_y = 0.008
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 11 )
+shader_param/rotation = 3.0
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 12 )
+shader_param/base = Color( 0.54451, 0.408353, 0.403137, 1 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 13 )
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 14 )
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 15 )
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 16 )
+shader_param/brightness = 0.8
+shader_param/contrast = 1.5
+shader_param/saturation = 1.8
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 17 )
+shader_param/frequency = 60.0
+shader_param/depth = 0.005
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = ExtResource( 18 )
+shader_param/base = Color( 0.450274, 0.361255, 0.335059, 1 )
+shader_param/grain_strength = 0.3
+shader_param/fps = 12
+shader_param/stretch = 0.5
+shader_param/flashing = 0.01
+shader_param/grain = ExtResource( 19 )
+shader_param/vignette = ExtResource( 7 )
+
+[node name="ScreenShaders" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource( 1 )
+
+[node name="Pictures" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Burano" type="TextureRect" parent="Pictures"]
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 2 )
+
+[node name="Roby" type="TextureRect" parent="Pictures"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 3 )
+
+[node name="Mountains" type="TextureRect" parent="Pictures"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 4 )
+
+[node name="Forest" type="TextureRect" parent="Pictures"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 5 )
+
+[node name="Effects" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="Disabled" type="Control" parent="Effects"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="Vignette" type="TextureRect" parent="Effects"]
+visible = false
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Blur" type="TextureRect" parent="Effects"]
+visible = false
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Pixelize" type="TextureRect" parent="Effects"]
+visible = false
+material = SubResource( 3 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Whirl" type="TextureRect" parent="Effects"]
+visible = false
+material = SubResource( 4 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Sepia" type="TextureRect" parent="Effects"]
+visible = false
+material = SubResource( 5 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 14.0
+margin_bottom = -2.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Negative" type="TextureRect" parent="Effects"]
+visible = false
+material = SubResource( 6 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Contrasted" type="TextureRect" parent="Effects"]
+visible = false
+material = SubResource( 7 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Normalized" type="TextureRect" parent="Effects"]
+visible = false
+material = SubResource( 8 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 8 )
+expand = true
+
+[node name="BCS" type="TextureRect" parent="Effects"]
+visible = false
+material = SubResource( 9 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 3.0
+margin_bottom = -3.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Mirage" type="TextureRect" parent="Effects"]
+visible = false
+material = SubResource( 10 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 8 )
+expand = true
+
+[node name="OldFilm" type="TextureRect" parent="Effects"]
+visible = false
+material = SubResource( 11 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -3.0
+margin_right = 3.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Picture" type="OptionButton" parent="."]
+margin_left = 8.0
+margin_top = 7.0
+margin_right = 131.0
+margin_bottom = 28.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="Effect" type="OptionButton" parent="."]
+margin_left = 137.0
+margin_top = 7.0
+margin_right = 260.0
+margin_bottom = 28.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[connection signal="item_selected" from="Picture" to="." method="_on_picture_item_selected"]
+[connection signal="item_selected" from="Effect" to="." method="_on_effect_item_selected"]

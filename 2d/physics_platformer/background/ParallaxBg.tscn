@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://background/scroll_bg_sky.png" type="Texture" id=1]
+[ext_resource path="res://background/scroll_bg_cloud_1.png" type="Texture" id=2]
+[ext_resource path="res://background/scroll_bg_cloud_2.png" type="Texture" id=3]
+[ext_resource path="res://background/scroll_bg_cloud_3.png" type="Texture" id=4]
+[ext_resource path="res://background/scroll_bg_fg_2.png" type="Texture" id=5]
+[ext_resource path="res://background/scroll_bg_fg_1.png" type="Texture" id=6]
+
+[node name="ParallaxBg" type="ParallaxBackground"]
+scroll_base_scale = Vector2( 0.7, 0 )
+
+[node name="Sky" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 400, 0 )
+
+[node name="Sprite" type="Sprite" parent="Sky"]
+scale = Vector2( 1000, 0.94 )
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( -15, 0 )
+
+[node name="Clouds" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.1, 1 )
+motion_mirroring = Vector2( 400, 0 )
+
+[node name="Sprite1" type="Sprite" parent="Clouds"]
+position = Vector2( 14, 64 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Sprite2" type="Sprite" parent="Clouds"]
+position = Vector2( 202, 12 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Sprite3" type="Sprite" parent="Clouds"]
+position = Vector2( 77, 23 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Sprite4" type="Sprite" parent="Clouds"]
+position = Vector2( 272, 65 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Sprite5" type="Sprite" parent="Clouds"]
+position = Vector2( 127, 79 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Sprite6" type="Sprite" parent="Clouds"]
+position = Vector2( 337, 35 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Mount2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.2, 1 )
+motion_mirroring = Vector2( 400, 0 )
+
+[node name="Sprite" type="Sprite" parent="Mount2"]
+position = Vector2( 0, 113 )
+texture = ExtResource( 5 )
+centered = false
+region_rect = Rect2( 0, 0, 400, 128 )
+
+[node name="Mount1" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.4, 1 )
+motion_mirroring = Vector2( 400, 0 )
+
+[node name="Sprite" type="Sprite" parent="Mount1"]
+position = Vector2( 0, 113 )
+texture = ExtResource( 6 )
+centered = false
+region_rect = Rect2( 0, 0, 400, 128 )

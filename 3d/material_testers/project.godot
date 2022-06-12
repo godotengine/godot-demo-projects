@@ -1,0 +1,47 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+[application]
+
+config/name="Material Testers"
+config/description="This demo includes many sphere-like objects with complex materials,
+for the purpose of showcasing Godot's rendering capabilities.
+
+This demo was featured at the beginning of the Godot 3.0 trailer."
+run/main_scene="res://material_tester.tscn"
+config/icon="res://icon.png"
+
+[display]
+
+window/dpi/allow_hidpi=true
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
+
+[gdnative]
+
+singletons=[  ]
+
+[memory]
+
+multithread/thread_rid_pool_prealloc=60
+
+[rendering]
+
+quality/driver/fallback_to_gles2=true
+quality/intended_usage/framebuffer_allocation=3
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+quality/shadow_atlas/size=1024
+quality/shadow_atlas/size.mobile=512
+quality/shadows/filter_mode=2
+quality/filters/anisotropic_filter_level=16
+quality/filters/msaa=2
+quality/filters/msaa.mobile=0
+quality/filters/anisotropic_filter_level.mobile=4

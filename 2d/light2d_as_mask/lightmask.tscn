@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://burano.png" type="Texture" id=1]
+[ext_resource path="res://splat.png" type="Texture" id=2]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+light_mode = 2
+
+[sub_resource type="Animation" id=2]
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3 ),
+"transitions": PoolRealArray( -2, -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 601.028, 242.639 ), Vector2( 318.649, 327.353 ), Vector2( 381.263, 130.915 ), Vector2( 462.294, 389.968 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2, 3 ),
+"transitions": PoolRealArray( -2, -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 196.528, 185.139 ), Vector2( 135.142, 454.013 ), Vector2( 638.105, 334.923 ), Vector2( 331.375, 101.653 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Light3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 2, 3 ),
+"transitions": PoolRealArray( -2, -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 442.528, 411.139 ), Vector2( 635.283, 236.8 ), Vector2( 216.215, 396.815 ), Vector2( 682.96, 294.708 ) ]
+}
+
+[node name="Lightmask" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Burano" type="TextureRect" parent="."]
+material = SubResource( 1 )
+margin_right = 800.0
+margin_bottom = 600.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource( 1 )
+
+[node name="Light1" type="Light2D" parent="."]
+position = Vector2( 601.028, 242.639 )
+texture = ExtResource( 2 )
+mode = 2
+
+[node name="Light2" type="Light2D" parent="."]
+position = Vector2( 196.528, 185.139 )
+texture = ExtResource( 2 )
+mode = 2
+
+[node name="Light3" type="Light2D" parent="."]
+position = Vector2( 442.528, 411.139 )
+texture = ExtResource( 2 )
+mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "maskmotion"
+anims/maskmotion = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 512, 300 )
+current = true

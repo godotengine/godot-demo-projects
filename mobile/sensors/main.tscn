@@ -1,0 +1,132 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://main.gd" type="Script" id=1]
+[ext_resource path="res://cube_6.png" type="Texture" id=2]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+ambient_light_color = Color( 0.648438, 0.64578, 0.64578, 1 )
+
+[sub_resource type="CylinderMesh" id=2]
+top_radius = 0.2
+bottom_radius = 0.1
+height = 4.0
+radial_segments = 16
+
+[sub_resource type="SpatialMaterial" id=3]
+params_diffuse_mode = 1
+albedo_color = Color( 0.356557, 1, 0.366611, 1 )
+roughness = 0.0
+
+[sub_resource type="CylinderMesh" id=4]
+top_radius = 0.1
+radial_segments = 16
+
+[sub_resource type="SpatialMaterial" id=5]
+params_diffuse_mode = 1
+albedo_color = Color( 0.0266393, 0.292793, 1, 1 )
+roughness = 0.0
+
+[sub_resource type="SpatialMaterial" id=6]
+params_diffuse_mode = 1
+albedo_color = Color( 0.957031, 0.801627, 0.0921731, 1 )
+roughness = 0.0
+
+[sub_resource type="CubeMesh" id=7]
+size = Vector3( 4, 4, 4 )
+
+[sub_resource type="SpatialMaterial" id=8]
+params_diffuse_mode = 1
+albedo_texture = ExtResource( 2 )
+roughness = 0.0
+
+[node name="Main" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 1025.0
+margin_bottom = 602.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Accelerometer" type="Label" parent="Control"]
+margin_right = 340.0
+margin_bottom = 14.0
+rect_scale = Vector2( 2, 2 )
+text = "Accelerometer"
+
+[node name="Magnetometer" type="Label" parent="Control"]
+margin_top = 30.0
+margin_right = 340.0
+margin_bottom = 44.0
+rect_scale = Vector2( 2, 2 )
+text = "Magnetometer"
+
+[node name="Gyroscope" type="Label" parent="Control"]
+margin_top = 60.0
+margin_right = 340.0
+margin_bottom = 74.0
+rect_scale = Vector2( 2, 2 )
+text = "Gyroscope"
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.285209, 0, 11.9833 )
+environment = SubResource( 1 )
+fov = 74.0
+near = 0.1
+
+[node name="Arrows" type="Spatial" parent="."]
+
+[node name="AccelerometerArrow" type="Spatial" parent="Arrows"]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0 )
+
+[node name="Bottom" type="MeshInstance" parent="Arrows/AccelerometerArrow"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="Top" type="MeshInstance" parent="Arrows/AccelerometerArrow"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 3 )
+
+[node name="MagnetoArrow" type="Spatial" parent="Arrows"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="Bottom" type="MeshInstance" parent="Arrows/MagnetoArrow"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 5 )
+
+[node name="Top" type="MeshInstance" parent="Arrows/MagnetoArrow"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="NorthArrow" type="Spatial" parent="Arrows"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+
+[node name="Bottom" type="MeshInstance" parent="Arrows/NorthArrow"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 6 )
+
+[node name="Top" type="MeshInstance" parent="Arrows/NorthArrow"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 6 )
+
+[node name="Boxes" type="Spatial" parent="."]
+
+[node name="MagAndGrav" type="MeshInstance" parent="Boxes"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -4, 0 )
+mesh = SubResource( 7 )
+material/0 = SubResource( 8 )
+
+[node name="GyroAndGrav" type="MeshInstance" parent="Boxes"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -4, 0 )
+mesh = SubResource( 7 )
+material/0 = SubResource( 8 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.884838, -0.329433, 0.329449, 0, 0.707124, 0.707089, -0.4659, -0.625659, 0.62569, 0, 4.69444, 0 )

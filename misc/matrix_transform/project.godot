@@ -1,0 +1,43 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "AxisMarker2D",
+"language": "GDScript",
+"path": "res://marker/AxisMarker2D.gd"
+}, {
+"base": "Spatial",
+"class": "AxisMarker3D",
+"language": "GDScript",
+"path": "res://marker/AxisMarker3D.gd"
+} ]
+_global_script_class_icons={
+"AxisMarker2D": "res://marker/AxisMarker2D.svg",
+"AxisMarker3D": "res://marker/AxisMarker3D.svg"
+}
+
+[application]
+
+config/name="Matrix Transform"
+config/description="This demo project is a playground where you can visualize how transforms work.
+
+Do not 'run' this project. You are only meant to use it within the Godot editor.
+
+For more information, see the Matrices and Transforms article."
+run/main_scene="res://3D.tscn"
+config/icon="res://icon.png"
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+environment/default_environment="res://default_env.tres"

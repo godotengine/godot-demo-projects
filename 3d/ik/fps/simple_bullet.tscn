@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fps/simple_bullet.gd" type="Script" id=1]
+
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 0.5
+
+[sub_resource type="SphereMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.769531, 0.486969, 0, 1 )
+emission_enabled = true
+emission = Color( 1, 0.445313, 0, 1 )
+emission_energy = 1.8
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SphereShape" id=4]
+radius = 0.4
+
+[node name="SimpleBullet" type="RigidBody"]
+mass = 2.0
+physics_material_override = SubResource( 1 )
+gravity_scale = 3.0
+continuous_cd = true
+can_sleep = false
+linear_damp = 0.4
+script = ExtResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0 )
+cast_shadow = 0
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 4 )

@@ -1,0 +1,222 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://paint_control.gd" type="Script" id=1]
+[ext_resource path="res://tools_panel.gd" type="Script" id=2]
+[ext_resource path="res://paint_tools.png" type="Texture" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 1 )
+
+[node name="PaintRoot" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DrawingAreaBG" type="Panel" parent="."]
+margin_left = 350.0
+margin_right = 1280.0
+margin_bottom = 720.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="PaintControl" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TLPos" type="Position2D" parent="PaintControl"]
+position = Vector2( 350, 0 )
+
+[node name="ToolsPanel" type="Panel" parent="."]
+margin_right = 350.0
+margin_bottom = 720.0
+script = ExtResource( 2 )
+
+[node name="LabelTools" type="Label" parent="ToolsPanel"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 330.0
+margin_bottom = 24.0
+text = "Selected tool: Pencil"
+align = 1
+
+[node name="ButtonToolPencil" type="Button" parent="ToolsPanel"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="Sprite" type="Sprite" parent="ToolsPanel/ButtonToolPencil"]
+position = Vector2( 30, 30 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="ButtonToolEraser" type="Button" parent="ToolsPanel"]
+margin_left = 110.0
+margin_top = 40.0
+margin_right = 170.0
+margin_bottom = 100.0
+
+[node name="Sprite" type="Sprite" parent="ToolsPanel/ButtonToolEraser"]
+position = Vector2( 30, 30 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 16, 0, 16, 16 )
+
+[node name="ButtonToolRectangle" type="Button" parent="ToolsPanel"]
+margin_left = 180.0
+margin_top = 40.0
+margin_right = 240.0
+margin_bottom = 100.0
+
+[node name="Sprite" type="Sprite" parent="ToolsPanel/ButtonToolRectangle"]
+position = Vector2( 30, 30 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 16, 16, 16 )
+
+[node name="ButtonToolCircle" type="Button" parent="ToolsPanel"]
+margin_left = 250.0
+margin_top = 40.0
+margin_right = 310.0
+margin_bottom = 100.0
+
+[node name="Sprite" type="Sprite" parent="ToolsPanel/ButtonToolCircle"]
+position = Vector2( 30, 30 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 16, 16, 16, 16 )
+
+[node name="LabelBrushColor" type="Label" parent="ToolsPanel"]
+margin_left = 20.0
+margin_top = 120.0
+margin_right = 330.0
+margin_bottom = 134.0
+text = "Current color"
+align = 1
+
+[node name="ColorPickerBrush" type="ColorPickerButton" parent="ToolsPanel"]
+margin_left = 20.0
+margin_top = 140.0
+margin_right = 330.0
+margin_bottom = 190.0
+
+[node name="BrushSettings" type="Control" parent="ToolsPanel"]
+margin_top = 200.0
+margin_right = 350.0
+margin_bottom = 375.0
+
+[node name="LabelBrushSize" type="Label" parent="ToolsPanel/BrushSettings"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 330.0
+margin_bottom = 24.0
+text = "Brush size: 32px"
+align = 1
+
+[node name="HScrollBarBrushSize" type="HScrollBar" parent="ToolsPanel/BrushSettings"]
+margin_left = 20.0
+margin_top = 30.0
+margin_right = 330.0
+margin_bottom = 60.0
+min_value = 2.0
+step = 1.0
+value = 32.0
+
+[node name="LabelBrushShape" type="Label" parent="ToolsPanel/BrushSettings"]
+margin_left = 20.0
+margin_top = 80.0
+margin_right = 330.0
+margin_bottom = 94.0
+text = "Brush shape: Circle"
+align = 1
+
+[node name="ButtonShapeBox" type="Button" parent="ToolsPanel/BrushSettings"]
+margin_left = 100.0
+margin_top = 100.0
+margin_right = 160.0
+margin_bottom = 160.0
+
+[node name="Sprite" type="Sprite" parent="ToolsPanel/BrushSettings/ButtonShapeBox"]
+position = Vector2( 30, 30 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 16, 16, 16 )
+
+[node name="ButtonShapeCircle" type="Button" parent="ToolsPanel/BrushSettings"]
+margin_left = 190.0
+margin_top = 100.0
+margin_right = 250.0
+margin_bottom = 160.0
+
+[node name="Sprite" type="Sprite" parent="ToolsPanel/BrushSettings/ButtonShapeCircle"]
+position = Vector2( 30, 30 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 16, 16, 16, 16 )
+
+[node name="LabelBackgroundColor" type="Label" parent="ToolsPanel"]
+margin_left = 20.0
+margin_top = 400.0
+margin_right = 330.0
+margin_bottom = 414.0
+text = "Background color"
+align = 1
+
+[node name="ColorPickerBackground" type="ColorPickerButton" parent="ToolsPanel"]
+margin_left = 20.0
+margin_top = 420.0
+margin_right = 330.0
+margin_bottom = 470.0
+color = Color( 1, 1, 1, 1 )
+edit_alpha = false
+
+[node name="LabelStats" type="Label" parent="ToolsPanel"]
+modulate = Color( 0.414062, 0.414062, 0.414062, 1 )
+margin_left = 20.0
+margin_top = 590.0
+margin_right = 330.0
+margin_bottom = 604.0
+text = "Brush objects: 00000"
+align = 1
+
+[node name="ButtonUndo" type="Button" parent="ToolsPanel"]
+margin_left = 10.0
+margin_top = 520.0
+margin_right = 340.0
+margin_bottom = 560.0
+text = "Undo last stroke"
+
+[node name="ButtonSave" type="Button" parent="ToolsPanel"]
+margin_left = 10.0
+margin_top = 620.0
+margin_right = 340.0
+margin_bottom = 660.0
+text = "Save picture"
+
+[node name="ButtonClear" type="Button" parent="ToolsPanel"]
+margin_left = 10.0
+margin_top = 670.0
+margin_right = 340.0
+margin_bottom = 710.0
+text = "Clear picture"
+
+[node name="SaveFileDialog" type="FileDialog" parent="."]
+margin_right = 600.0
+margin_bottom = 400.0
+resizable = true
+access = 2
+filters = PoolStringArray( "*.png" )
+current_dir = "/home/aaronfranke/workspace/godot-demo-projects/2d/gd_paint"
+current_path = "/home/aaronfranke/workspace/godot-demo-projects/2d/gd_paint/"

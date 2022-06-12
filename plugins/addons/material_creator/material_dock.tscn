@@ -1,0 +1,139 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/material_creator/material_creator.gd" type="Script" id=1]
+
+[node name="Material Creator Plugin" type="Panel"]
+margin_right = 220.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 210, 410 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -100.0
+margin_right = 100.0
+rect_min_size = Vector2( 0, 400 )
+
+[node name="DockName" type="Label" parent="VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 200, 30 )
+custom_constants/shadow_as_outline = 1
+text = "Material creator"
+align = 1
+valign = 2
+
+[node name="AlbedoLabel" type="Label" parent="VBoxContainer"]
+margin_top = 34.0
+margin_right = 200.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 200, 30 )
+text = "Albedo color"
+align = 1
+valign = 2
+
+[node name="AlbedoColorPicker" type="ColorPickerButton" parent="VBoxContainer"]
+margin_top = 68.0
+margin_right = 200.0
+margin_bottom = 98.0
+rect_min_size = Vector2( 200, 30 )
+color = Color( 1, 1, 1, 1 )
+
+[node name="MetallicLabel" type="Label" parent="VBoxContainer"]
+margin_top = 102.0
+margin_right = 200.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 200, 30 )
+text = "Metallic strength"
+align = 1
+valign = 2
+
+[node name="MetallicSlider" type="HSlider" parent="VBoxContainer"]
+margin_top = 136.0
+margin_right = 200.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 200, 30 )
+max_value = 1.0
+step = 0.05
+
+[node name="RoughnessLabel" type="Label" parent="VBoxContainer"]
+margin_top = 170.0
+margin_right = 200.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 30 )
+text = "Roughness strength"
+align = 1
+valign = 2
+
+[node name="RoughnessSlider" type="HSlider" parent="VBoxContainer"]
+margin_top = 204.0
+margin_right = 200.0
+margin_bottom = 234.0
+rect_min_size = Vector2( 200, 30 )
+max_value = 1.0
+step = 0.05
+ticks_on_borders = true
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 238.0
+margin_right = 200.0
+margin_bottom = 258.0
+rect_min_size = Vector2( 200, 20 )
+
+[node name="ApplyButton" type="Button" parent="VBoxContainer"]
+margin_top = 262.0
+margin_right = 200.0
+margin_bottom = 312.0
+rect_min_size = Vector2( 200, 50 )
+text = "Apply material"
+
+[node name="SaveButton" type="Button" parent="VBoxContainer"]
+margin_top = 316.0
+margin_right = 200.0
+margin_bottom = 366.0
+rect_min_size = Vector2( 200, 50 )
+text = "Save material"
+
+[node name="LoadButton" type="Button" parent="VBoxContainer"]
+margin_top = 370.0
+margin_right = 200.0
+margin_bottom = 420.0
+rect_min_size = Vector2( 200, 50 )
+text = "Load material"
+clip_text = true
+
+[node name="Label" type="Label" parent="VBoxContainer/LoadButton"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -10.0
+rect_min_size = Vector2( 0, 50 )
+text = "Load silly material and
+apply to selected node(s)"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="SaveMaterialDialog" type="FileDialog" parent="."]
+margin_left = 150.0
+margin_top = 20.0
+margin_right = 600.0
+margin_bottom = 360.0
+resizable = true
+filters = PoolStringArray( "*.silly_mat" )
+
+[node name="LoadMaterialDialog" type="FileDialog" parent="."]
+margin_left = 150.0
+margin_top = 20.0
+margin_right = 600.0
+margin_bottom = 360.0
+rect_min_size = Vector2( 200, 100 )
+window_title = "Open a File"
+resizable = true
+mode = 0
+filters = PoolStringArray( "*.silly_mat" )

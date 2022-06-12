@@ -1,0 +1,71 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://art/playerGrey_walk1.png" type="Texture" id=2]
+[ext_resource path="res://art/playerGrey_walk2.png" type="Texture" id=3]
+[ext_resource path="res://art/playerGrey_up1.png" type="Texture" id=4]
+[ext_resource path="res://art/playerGrey_up2.png" type="Texture" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "up",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 26.1701
+height = 14.822
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 1, 1, 1, 0.501961, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0.00501098, 0.5 ), 0.0, 0.0, 0, 0, Vector2( 0.994989, 0.324 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.75
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
+
+[node name="Player" type="Area2D"]
+z_index = 10
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 1 )
+animation = "right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Trail" type="Particles2D" parent="."]
+z_index = -1
+amount = 10
+speed_scale = 2.0
+local_coords = false
+process_material = SubResource( 7 )
+texture = ExtResource( 2 )
+
+[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]

@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://addons/node25d/node_25d.gd" type="Script" id=1]
+[ext_resource path="res://addons/node25d/icons/node_25d_icon.png" type="Texture" id=2]
+[ext_resource path="res://addons/node25d/shadow_math_25d.gd" type="Script" id=3]
+[ext_resource path="res://addons/node25d/icons/shadow_math_25d_icon.png" type="Texture" id=4]
+[ext_resource path="res://assets/shadow/textures/forty_five.png" type="Texture" id=5]
+[ext_resource path="res://assets/shadow/shadow_sprite.gd" type="Script" id=6]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.5, 0.001, 0.5 )
+
+[node name="Shadow25D" type="Node2D"]
+visible = false
+position = Vector2( 0, 22401.1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_icon": ExtResource( 2 )
+}
+spatial_position = Vector3( 0, -990, 0 )
+
+[node name="ShadowMath25D" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -990, 0 )
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_icon": ExtResource( 4 )
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="ShadowMath25D"]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ShadowSprite" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+script = ExtResource( 6 )

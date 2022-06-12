@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/main_screen/print_hello.gd" type="Script" id=1]
+
+[node name="MainPanel" type="CenterContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PrintHello" type="Button" parent="."]
+margin_left = 472.0
+margin_top = 290.0
+margin_right = 552.0
+margin_bottom = 310.0
+text = "Print Hello"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="PrintHello" to="PrintHello" method="_on_PrintHello_pressed"]

@@ -1,0 +1,102 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://tests/functional/test_character.gd" type="Script" id=1]
+[ext_resource path="res://tests/test_options.tscn" type="PackedScene" id=3]
+[ext_resource path="res://tests/static_scene_flat.tscn" type="PackedScene" id=4]
+[ext_resource path="res://utils/rigidbody_controller.gd" type="Script" id=6]
+[ext_resource path="res://utils/kinematicbody_controller.gd" type="Script" id=7]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 32.0
+height = 32.0
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 32.0
+height = 32.0
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 32.0
+
+[sub_resource type="RayShape2D" id=5]
+length = 64.0
+
+[node name="Test" type="Node2D"]
+script = ExtResource( 1 )
+_snap_distance = 32.0
+
+[node name="LabelTestType" type="Label" parent="."]
+margin_left = 14.0
+margin_top = 79.0
+margin_right = 145.0
+margin_bottom = 93.0
+text = "Testing: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" parent="." instance=ExtResource( 3 )]
+
+[node name="LabelFloor" type="Label" parent="."]
+margin_left = 14.0
+margin_top = 237.929
+margin_right = 145.0
+margin_bottom = 251.929
+text = "ON FLOOR"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelControls" type="Label" parent="."]
+margin_left = 14.0
+margin_top = 263.291
+margin_right = 145.0
+margin_bottom = 294.291
+text = "LEFT/RIGHT - MOVE
+UP - JUMP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2( 100, 450 )
+collision_mask = 2147483649
+mode = 2
+physics_material_override = SubResource( 1 )
+contacts_reported = 4
+contact_monitor = true
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource( 2 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+position = Vector2( 100, 450 )
+collision_mask = 2147483649
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+shape = SubResource( 3 )
+
+[node name="KinematicBodyRay2D" type="KinematicBody2D" parent="."]
+position = Vector2( 100, 450 )
+collision_mask = 2147483649
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBodyRay2D"]
+position = Vector2( 0, -16 )
+shape = SubResource( 4 )
+
+[node name="CollisionShapeRay2D" type="CollisionShape2D" parent="KinematicBodyRay2D"]
+position = Vector2( 0, -16 )
+shape = SubResource( 5 )
+
+[node name="StaticSceneFlat" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 12 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( 171.04, 529.248, 379.275, 294.316, 506.084, 429.135, 648.26, 322.058, 868.746, 322.058, 985.282, 36.6919, 1242.91, 531.917 )

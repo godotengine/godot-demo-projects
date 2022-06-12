@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://regex.gd" type="Script" id=1]
+
+[node name="Regex" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 14.0
+margin_top = 20.0
+margin_right = -14.0
+margin_bottom = -20.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Expression" type="LineEdit" parent="."]
+margin_right = 996.0
+margin_bottom = 24.0
+text = "\"((?:\\\\.|[^\"])*)\""
+
+[node name="Text" type="TextEdit" parent="."]
+margin_top = 28.0
+margin_right = 996.0
+margin_bottom = 328.0
+rect_min_size = Vector2( 0, 300 )
+
+[node name="List" type="VBoxContainer" parent="."]
+margin_top = 332.0
+margin_right = 996.0
+margin_bottom = 332.0
+
+[connection signal="text_changed" from="Expression" to="." method="update_expression"]
+[connection signal="text_changed" from="Text" to="." method="update_text"]

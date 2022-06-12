@@ -1,0 +1,40 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+[application]
+
+config/name="HDR for 2D"
+config/description="Simple demo how to use High Dynamic Range (HDR) in a 2D game,
+via the WorldEnvironment node.
+
+Just slide the cave image left and right to observe the HDR effect at work."
+run/main_scene="res://beach_cave.tscn"
+config/icon="res://icon.png"
+run/name=""
+
+[display]
+
+window/size/width=1080
+window/size/height=720
+window/dpi/allow_hidpi=true
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
+
+[gdnative]
+
+singletons=[  ]
+
+[rasterizer]
+
+blur_buffer_size=128
+
+[rendering]
+
+environment/default_clear_color=Color( 0.05, 0.0453, 0.0265, 1 )

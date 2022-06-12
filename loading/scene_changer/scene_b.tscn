@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scene_b.gd" type="Script" id=1]
+
+[node name="SceneB" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 64.0
+margin_top = 48.0
+margin_right = 164.0
+margin_bottom = 62.0
+size_flags_vertical = 0
+text = "This is scene B."
+
+[node name="GoToScene" type="Button" parent="."]
+margin_left = 64.0
+margin_top = 128.0
+margin_right = 192.0
+margin_bottom = 160.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Go to Scene A"
+
+[connection signal="pressed" from="GoToScene" to="." method="_on_goto_scene_pressed"]

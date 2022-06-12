@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://combat/combatants/sprites/shadow.png" type="Texture" id=1]
+[ext_resource path="res://combat/combatants/sprites/blue.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "take_damage"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 3, 0.253906, 0.253906, 1 ), Color( 1, 1, 1, 1 ), Color( 3, 0.253906, 0.253906, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Sprite" type="Node2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/take_damage = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Pivot" type="Position2D" parent="."]
+
+[node name="Shadow" type="Sprite" parent="Pivot"]
+position = Vector2( 0, -15 )
+texture = ExtResource( 1 )
+
+[node name="Body" type="Sprite" parent="Pivot"]
+position = Vector2( 0, -76 )
+texture = ExtResource( 2 )

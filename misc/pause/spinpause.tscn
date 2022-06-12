@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://pause_button.gd" type="Script" id=1]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="Animation" id=2]
+length = 10.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Cube:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 10 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -360, 0 ) ]
+}
+
+[node name="PauseScene" type="Spatial"]
+
+[node name="Cube" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.571594, 0.275303, -0.772974, 0, 0.942035, 0.335515, 0.820537, -0.191779, 0.538461, -5.59754, 2.75935, 4.01344 )
+fov = 74.0
+near = 0.1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "spin"
+anims/spin = SubResource( 2 )
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 0.792992, 0.251051, -0.555101, 0, 0.911149, 0.412078, 0.609232, -0.326775, 0.722534, -3.05357, 1.80053, 3.64099 )
+spot_range = 6.0
+
+[node name="PauseButton" type="Button" parent="."]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = 150.0
+margin_right = 125.0
+margin_bottom = 200.0
+rect_pivot_offset = Vector2( 123, 25 )
+toggle_mode = true
+text = "Pause"
+script = ExtResource( 1 )

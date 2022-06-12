@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://isotiles.png" type="Texture" id=1]
+
+[node name="TilesetEdit" type="Node2D"]
+
+[node name="Base" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 28, 75, 135, 105 )
+
+[node name="Base2" type="Sprite" parent="."]
+position = Vector2( 200, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 221, 75, 135, 105 )
+
+[node name="Wall" type="Sprite" parent="."]
+position = Vector2( 400, 0 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -32 )
+region_enabled = true
+region_rect = Rect2( 28, 220, 140, 140 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall/StaticBody2D"]
+polygon = PoolVector2Array( -64, 0, 0, 32, 64, 0, 0, -32 )
+
+[node name="Column" type="Sprite" parent="."]
+position = Vector2( 600, 0 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -32 )
+region_enabled = true
+region_rect = Rect2( 259, 241, 55, 95 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Column"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Column/StaticBody2D"]
+position = Vector2( 2, 0 )
+polygon = PoolVector2Array( -24, 2, -10, 12, 10, 12, 24, 2, 24, -12, 10, -22, -10, -22, -24, -12 )
+
+[node name="Door1" type="Sprite" parent="."]
+position = Vector2( 800, 0 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -25 )
+region_enabled = true
+region_rect = Rect2( 54, 426, 85, 110 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Door1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Door1/StaticBody2D"]
+polygon = PoolVector2Array( -24, 24, 40, -8, 24, -16, -40, 16 )

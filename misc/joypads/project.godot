@@ -1,0 +1,48 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "JoyMapping",
+"language": "GDScript",
+"path": "res://remap/joy_mapping.gd"
+} ]
+_global_script_class_icons={
+"JoyMapping": ""
+}
+
+[application]
+
+config/name="Joypads"
+config/description="A tool for testing joypad input."
+run/main_scene="res://joypads.tscn"
+config/icon="res://icon.png"
+
+[debug]
+
+gdscript/warnings/return_value_discarded=false
+
+[display]
+
+window/size/width=600
+window/size/height=540
+window/dpi/allow_hidpi=true
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
+
+[gdnative]
+
+singletons=[  ]
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false

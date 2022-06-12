@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://rich_text_bbcode.gd" type="Script" id=1]
+[ext_resource path="res://Titillium-BoldItalic.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://Titillium-RegularItalic.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://Titillium-Bold.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://Titillium-Regular.otf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+font_data = ExtResource( 5 )
+
+[node name="RichTextBBCode" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource( 1 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 49.0
+margin_top = 55.0
+margin_right = -48.0
+margin_bottom = -62.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+custom_fonts/bold_italics_font = SubResource( 1 )
+custom_fonts/italics_font = SubResource( 2 )
+custom_fonts/bold_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[b][u]Rich Text Test[/u][/b]
+
+RichTextLabel is a flexible way of adding text to your game, with support for [i]italics[/i], [b]bold[/b] and [i][b]both[/b][/i].
+ [u]Underline[/u] works too, including with [u][i]italics[/i][/u], [u][b]bold[/b][/u] and [u][i][b]both[/b][/i][/u].
+It is also possible to include [img]res://unicorn_icon.png[/img] custom images, as well as [color=aqua][url=https://godotengine.org]custom URLs[/url][/color].
+
+Left alignment is default,[center]but center alignment is supported,[/center][right]as well as right alignment.[/right]
+
+[fill]Fill alignment is also supported, and allows writing very long text that will end up fitting the horizontal space entirely with words of joy.[/fill]
+
+For full reference, [color=aqua][url=https://docs.godotengine.org/en/latest/tutorials/gui/bbcode_in_richtextlabel.html]check the documentation.[/url][/color]
+"
+text = "Rich Text Test
+
+RichTextLabel is a flexible way of adding text to your game, with support for italics, bold and both.
+ Underline works too, including with italics, bold and both.
+It is also possible to include  custom images, as well as custom URLs.
+
+Left alignment is default,but center alignment is supported,as well as right alignment.
+
+Fill alignment is also supported, and allows writing very long text that will end up fitting the horizontal space entirely with words of joy.
+
+For full reference, check the documentation.
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="meta_clicked" from="RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]

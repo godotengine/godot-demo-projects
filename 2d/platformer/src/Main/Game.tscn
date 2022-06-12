@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/UserInterface/PauseMenu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Main/Game.gd" type="Script" id=2]
+[ext_resource path="res://src/Level/Level.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Actors/Player.tscn" type="PackedScene" id=4]
+
+[node name="Game" type="Node"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="Level" parent="." instance=ExtResource( 3 )]
+
+[node name="Player" parent="Level" instance=ExtResource( 4 )]
+position = Vector2( 90, 546 )
+
+[node name="InterfaceLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="PauseMenu" parent="InterfaceLayer" instance=ExtResource( 1 )]
