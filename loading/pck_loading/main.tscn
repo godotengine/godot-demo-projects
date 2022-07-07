@@ -1,0 +1,200 @@
+[gd_scene load_steps=2 format=3 uid="uid://biqc8303kctlu"]
+
+[ext_resource type="Script" path="res://Root.gd" id="1_dd1mq"]
+
+[node name="Root" type="Control"]
+script = ExtResource( "1_dd1mq" )
+pck_1 = "res://sub_projects/1.pck"
+pck_2 = "res://sub_projects/2.pck"
+pck_3 = "res://sub_projects/3.pck"
+
+[node name="LineEdit" type="Label" parent="."]
+offset_left = 67.0
+offset_top = 75.0
+offset_right = 463.0
+offset_bottom = 375.0
+autowrap_mode = 1
+clip_text = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 552.0
+offset_top = 81.0
+offset_right = 932.0
+offset_bottom = 379.0
+theme_override_constants/separation = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+offset_right = 380.0
+offset_bottom = 86.0
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="Load" type="Button" parent="VBoxContainer/HBoxContainer"]
+offset_right = 125.0
+offset_bottom = 86.0
+size_flags_horizontal = 3
+text = "Load 1.pck"
+
+[node name="Unload" type="Button" parent="VBoxContainer/HBoxContainer"]
+offset_left = 145.0
+offset_right = 271.0
+offset_bottom = 86.0
+size_flags_horizontal = 3
+text = "Unload 1.pck"
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
+offset_left = 291.0
+offset_right = 380.0
+offset_bottom = 86.0
+text = "Replace
+files?"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+offset_top = 106.0
+offset_right = 380.0
+offset_bottom = 192.0
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="Load" type="Button" parent="VBoxContainer/HBoxContainer2"]
+offset_right = 125.0
+offset_bottom = 86.0
+size_flags_horizontal = 3
+text = "Load 2.pck"
+
+[node name="Unload" type="Button" parent="VBoxContainer/HBoxContainer2"]
+offset_left = 145.0
+offset_right = 271.0
+offset_bottom = 86.0
+size_flags_horizontal = 3
+text = "Unload 2.pck"
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer2"]
+offset_left = 291.0
+offset_right = 380.0
+offset_bottom = 86.0
+text = "Replace
+files?"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+offset_top = 212.0
+offset_right = 380.0
+offset_bottom = 298.0
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="Load" type="Button" parent="VBoxContainer/HBoxContainer3"]
+offset_right = 125.0
+offset_bottom = 86.0
+size_flags_horizontal = 3
+text = "Load 3.pck"
+
+[node name="Unload" type="Button" parent="VBoxContainer/HBoxContainer3"]
+offset_left = 145.0
+offset_right = 271.0
+offset_bottom = 86.0
+size_flags_horizontal = 3
+text = "Unload 3.pck"
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer3"]
+offset_left = 291.0
+offset_right = 380.0
+offset_bottom = 86.0
+text = "Replace
+files?"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 44.0
+offset_top = 415.0
+offset_right = 934.0
+offset_bottom = 569.0
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+offset_right = 294.0
+offset_bottom = 158.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+offset_right = 294.0
+offset_bottom = 26.0
+text = "orig.tscn"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/VBoxContainer"]
+minimum_size = Vector2(256, 0)
+offset_top = 30.0
+offset_right = 294.0
+offset_bottom = 158.0
+size_flags_vertical = 3
+
+[node name="ViewOrig" type="SubViewport" parent="HBoxContainer/VBoxContainer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(256, 128)
+render_target_update_mode = 4
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+offset_left = 298.0
+offset_right = 592.0
+offset_bottom = 158.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2"]
+offset_right = 294.0
+offset_bottom = 26.0
+text = "a.tscn"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/VBoxContainer2"]
+minimum_size = Vector2(256, 0)
+offset_top = 30.0
+offset_right = 294.0
+offset_bottom = 158.0
+size_flags_vertical = 3
+
+[node name="ViewA" type="SubViewport" parent="HBoxContainer/VBoxContainer2/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(256, 128)
+render_target_update_mode = 4
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer"]
+offset_left = 596.0
+offset_right = 890.0
+offset_bottom = 158.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer3"]
+offset_right = 294.0
+offset_bottom = 26.0
+text = "b.tscn"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/VBoxContainer3"]
+minimum_size = Vector2(256, 0)
+offset_top = 30.0
+offset_right = 294.0
+offset_bottom = 158.0
+size_flags_vertical = 3
+
+[node name="ViewB" type="SubViewport" parent="HBoxContainer/VBoxContainer3/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(256, 128)
+render_target_update_mode = 4
+
+[node name="NoNodeLbl" type="Label" parent="."]
+offset_left = -184.0
+offset_top = -133.0
+offset_right = -144.0
+offset_bottom = -110.0
+text = "Missing scene file!"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 65.0
+offset_top = 49.0
+offset_right = 128.0
+offset_bottom = 75.0
+text = "File List:"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Load" to="." method="_on_load1_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Unload" to="." method="_on_unload1_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Load" to="." method="_on_load2_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Unload" to="." method="_on_unload2_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer3/Load" to="." method="_on_load3_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer3/Unload" to="." method="_on_unload3_pressed"]
