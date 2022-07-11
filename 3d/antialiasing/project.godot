@@ -1,0 +1,32 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+_global_script_classes=[]
+_global_script_class_icons={}
+
+[application]
+
+config/name="3D Anti-Aliasing"
+config/description="This project showcases the various 3D antialiasing techniques supported by Godot."
+run/main_scene="res://anti_aliasing.tscn"
+config/features=PackedStringArray("4.0")
+config/icon="res://icon.png"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[rendering]
+
+textures/default_filters/anisotropic_filtering_level=4
+textures/decals/filter=4
+quality/screen_filters/msaa=3
+environment/default_environment="res://default_env.tres"
