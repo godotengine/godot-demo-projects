@@ -1,34 +1,30 @@
 extends Node3D
 
-const SPEED = 10.0
+const SPEED := 10.0
 
-var camrot = 0.0
-var m = StandardMaterial3D.new()
+@export var show_path := true
 
-var path = []
-var show_path = true
+var cam_rotation := 0.0
+var path: PackedVector3Array
 
-@onready var robot  = get_node(^"RobotBase")
-@onready var camera = get_node(^"CameraBase/Camera3D")
+@onready var robot: Position3D = $RobotBase
+@onready var camera: Camera3D = $CameraBase/Camera3D
 
 func _ready():
 	set_process_input(true)
-	m.flags_unshaded = true
-	m.flags_use_point_size = true
-	m.albedo_color = Color.WHITE
 
 
-func _physics_process(delta):
-	var direction = Vector3()
+func _physics_process(delta: float):
+	var direction := Vector3()
 
 	# We need to scale the movement speed by how much delta has passed,
 	# otherwise the motion won't be smooth.
-	var step_size = delta * SPEED
+	var step_size := delta * SPEED
 
-	if path.size() > 0:
+	if not path.is_empty():
 		# Direction is the difference between where we are now
 		# and where we want to go.
-		var destination = path[0]
+		var destination := path[0]
 		direction = destination - robot.position
 
 		# If the next node is closer than we intend to 'step', then
@@ -37,7 +33,7 @@ func _physics_process(delta):
 		if step_size > direction.length():
 			step_size = direction.length()
 			# We should also remove this node since we're about to reach it.
-			path.remove(0)
+			path.remove_at(0)
 
 		# Move the robot towards the path node, by how far we want to travel.
 		# TODO: This information should be set to the CharacterBody properties instead of arguments.
@@ -51,39 +47,38 @@ func _physics_process(delta):
 		if direction:
 			# Direction is relative, so apply it to the robot's location to
 			# get a point we can actually look at.
-			var look_at_point = robot.position + direction.normalized()
+			var look_at_point := robot.position + direction.normalized()
 			# Make the robot look at the point.
 			robot.look_at(look_at_point, Vector3.UP)
 
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		var from = camera.project_ray_origin(event.position)
-		var to = from + camera.project_ray_normal(event.position) * 1000
-		var target_point = get_closest_point_to_segment(from, to)
+		var map := get_world_3d().navigation_map
+		var from := camera.project_ray_origin(event.position)
+		var to := from + camera.project_ray_normal(event.position) * 1000
+		var target_point := NavigationServer3D.map_get_closest_point_to_segment(map, from, to)
 
-		# Set the path between the robots current location and our target.
-		path = get_simple_path(robot.position, target_point, true)
+		# Set the path between the robot's current location and our target.
+		path = NavigationServer3D.map_get_path(map, robot.position, target_point, true)
 
 		if show_path:
 			draw_path(path)
 
-	if event is InputEventMouseMotion:
+	elif event is InputEventMouseMotion:
 		if event.button_mask & (MOUSE_BUTTON_MASK_MIDDLE + MOUSE_BUTTON_MASK_RIGHT):
-			camrot += event.relative.x * 0.005
-			get_node(^"CameraBase").set_rotation(Vector3(0, camrot, 0))
-			print("Camera3D Rotation: ", camrot)
+			cam_rotation += event.relative.x * 0.005
+			$CameraBase.set_rotation(Vector3(0, cam_rotation, 0))
 
 
-func draw_path(path_array):
-	var im = get_node(^"Draw")
-	im.set_material_override(m)
-	im.clear()
-	im.begin(Mesh.PRIMITIVE_POINTS, null)
-	im.add_vertex(path_array[0])
-	im.add_vertex(path_array[path_array.size() - 1])
-	im.end()
-	im.begin(Mesh.PRIMITIVE_LINE_STRIP, null)
-	for x in path:
-		im.add_vertex(x)
-	im.end()
+func draw_path(path_array: PackedVector3Array) -> void:
+	var im: ImmediateMesh = $DrawPath.mesh
+	im.clear_surfaces()
+	im.surface_begin(Mesh.PRIMITIVE_POINTS, null)
+	im.surface_add_vertex(path_array[0])
+	im.surface_add_vertex(path_array[path_array.size() - 1])
+	im.surface_end()
+	im.surface_begin(Mesh.PRIMITIVE_LINE_STRIP, null)
+	for current_vector in path:
+		im.surface_add_vertex(current_vector)
+	im.surface_end()
