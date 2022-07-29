@@ -6,7 +6,7 @@ enum SpeedUnit {
 	MILES_PER_HOUR = 2,
 }
 
-@export var speed_unit: SpeedUnit = SpeedUnit.METERS_PER_SECOND
+@export var speed_unit: SpeedUnit = SpeedUnit.KILOMETERS_PER_HOUR
 
 func _process(_delta):
 	var speed = get_parent().get_parent().get_child(1).get_child(0).linear_velocity.length()

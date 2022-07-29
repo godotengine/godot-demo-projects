@@ -11,14 +11,15 @@ func _ready():
 	# Find collision exceptions for ray.
 	var node = self
 	while(node):
+		#if (node is RigidBody):
 		if (node is RigidDynamicBody3D):
 			collision_exception.append(node.get_rid())
 			break
 		else:
 			node = node.get_parent()
-
+	
 	# This detaches the camera transform from the parent spatial node.
-	set_as_top_level(true)
+	# set_as_toplevel(true)
 
 
 func _physics_process(_delta):

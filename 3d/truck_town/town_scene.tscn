@@ -1,29 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://cowqwuqos6m0q"]
+[gd_scene load_steps=5 format=3 uid="uid://cukvsg526yltx"]
 
-[ext_resource type="PackedScene" uid="uid://dom2qigc1hn32" path="res://town_mesh.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://town_mesh.tscn" id="1"]
 [ext_resource type="Script" path="res://spedometer.gd" id="2"]
 
 [sub_resource type="StyleBoxEmpty" id="1"]
 
 [sub_resource type="Theme" id="2"]
-Button/styles/focus = SubResource( "1" )
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2k12y"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_1gf0c"]
-sky_material = SubResource( "ProceduralSkyMaterial_2k12y" )
-
-[sub_resource type="Environment" id="Environment_f4cvs"]
-background_mode = 2
-sky = SubResource( "Sky_1gf0c" )
-tonemap_mode = 2
-glow_enabled = true
+Button/styles/focus = SubResource("1")
 
 [node name="TownScene" type="Node3D"]
 
-[node name="TownMesh" parent="." instance=ExtResource( "1" )]
+[node name="TownMesh" parent="." instance=ExtResource("1")]
 
 [node name="InstancePos" type="Position3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2039, 6.67095, -37.6042)
@@ -31,34 +18,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2039, 6.67095, -37.6042)
 [node name="Panel" type="Panel" parent="InstancePos"]
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -130.0
-offset_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Spedometer" type="Button" parent="InstancePos/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = SubResource( "2" )
+offset_left = -126.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("2")
 text = "Speed: ???"
 flat = true
-script = ExtResource( "2" )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("2")
+metadata/_edit_layout_mode = 1
 
 [node name="Back" type="Button" parent="."]
-offset_left = 17.0
-offset_top = 9.0
-offset_right = 85.0
-offset_bottom = 41.0
 text = "<- Back!"
 
-[node name="Environment" type="WorldEnvironment" parent="."]
-environment = SubResource( "Environment_f4cvs" )
-
-[node name="Sun" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.629475, 0.777021, 0, -0.777021, -0.629475, 0, 24.4076, 0)
 shadow_enabled = true
 
