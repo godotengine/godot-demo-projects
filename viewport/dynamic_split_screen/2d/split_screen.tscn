@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://2d/camera_controller.gd" type="Script" id=1]
+[ext_resource path="res://split_screen.shader" type="Shader" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://exit_to_menu.gd" type="Script" id=4]
+[ext_resource path="res://2d/level.tscn" type="PackedScene" id=5]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/viewport_size = null
+shader_param/split_active = null
+shader_param/player1_position = null
+shader_param/player2_position = null
+shader_param/split_line_thickness = null
+shader_param/split_line_color = null
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="View" type="TextureRect" parent="."]
+material = SubResource( 1 )
+margin_right = 1024.0
+margin_bottom = 600.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Cameras" type="Node" parent="."]
+script = ExtResource( 1 )
+max_separation = 100.0
+
+[node name="Viewport1" type="Viewport" parent="Cameras"]
+size = Vector2( 100, 100 )
+disable_3d = true
+usage = 0
+render_target_v_flip = true
+render_target_update_mode = 3
+
+[node name="Camera" type="Camera2D" parent="Cameras/Viewport1"]
+current = true
+zoom = Vector2( 0.2, 0.2 )
+
+[node name="Viewport2" type="Viewport" parent="Cameras"]
+size = Vector2( 100, 100 )
+usage = 0
+render_target_v_flip = true
+render_target_update_mode = 3
+
+[node name="Camera" type="Camera2D" parent="Cameras/Viewport2"]
+current = true
+zoom = Vector2( 0.2, 0.2 )
+
+[node name="Game" type="Viewport" parent="."]
+size = Vector2( 1024, 600 )
+disable_3d = true
+usage = 0
+
+[node name="Level" parent="Game" instance=ExtResource( 5 )]
