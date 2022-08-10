@@ -85,14 +85,29 @@ func setup_navserver():
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
-		var from = camera.project_ray_origin(event.position)
-		var to = from + camera.project_ray_normal(event.position) * 1000
-		var target_point = NavigationServer.map_get_closest_point_to_segment(map, from, to)
-		var optimize_path = true
+		# get closest point on navmesh for the current mouse cursor position
+		var mouse_cursor_position = event.position
+		var camera_ray_length = 1000.0
+		var camera_ray_start = camera.project_ray_origin(mouse_cursor_position)
+		var camera_ray_end = camera_ray_start + camera.project_ray_normal(mouse_cursor_position) * camera_ray_length
+		var navigation_map = get_world().get_navigation_map()
 
-		# Set the path between the robots current location and our target.
-		path = NavigationServer.map_get_path(map,robot.translation, target_point, optimize_path)
+		var closest_point_on_navmesh = NavigationServer.map_get_closest_point_to_segment(
+			navigation_map,
+			camera_ray_start,
+			camera_ray_end
+			)
 
+		# get a full navigation path with the NavigationServer API
+		var start_position = robot.global_transform.origin
+		var target_position = closest_point_on_navmesh
+		var optimize = true
+		path = NavigationServer.map_get_path(
+			navigation_map,
+			start_position,
+			target_position,
+			optimize
+			)
 		if show_path:
 			draw_path(path)
 
