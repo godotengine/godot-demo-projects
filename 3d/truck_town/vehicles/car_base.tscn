@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://yuu24upxaw38"]
+[gd_scene load_steps=7 format=3 uid="uid://c1uai3rvx8hul"]
 
-[ext_resource type="Script" path="res://vehicle.gd" id="1"]
-[ext_resource type="ArrayMesh" uid="uid://oj2qgrhsq5e5" path="res://meshes/wheel.res" id="2_mlrjy"]
-[ext_resource type="ArrayMesh" uid="uid://cgxof0gvxjbag" path="res://meshes/minivan.res" id="4_wo1v3"]
-[ext_resource type="Script" path="res://follow_camera.gd" id="5"]
+[ext_resource type="Script" path="res://vehicles/vehicle.gd" id="1_r806m"]
+[ext_resource type="ArrayMesh" uid="uid://s3nm456cy46b" path="res://vehicles/meshes/wheel.res" id="2_0cso8"]
+[ext_resource type="ArrayMesh" uid="uid://d3ogs0rwex0kc" path="res://vehicles/meshes/minivan.res" id="3_tkg08"]
+[ext_resource type="Script" path="res://vehicles/follow_camera.gd" id="4_6igu8"]
 
 [sub_resource type="PhysicsMaterial" id="1"]
 friction = 0.5
@@ -17,7 +17,7 @@ size = Vector3(0.954078, 1, 2.32662)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00169557, 0.222867, -0.0955184)
 center_of_mass_mode = 1
 physics_material_override = SubResource("1")
-script = ExtResource("1")
+script = ExtResource("1_r806m")
 
 [node name="Wheel1" type="VehicleWheel3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.573678, 0.115169, 1.10416)
@@ -32,7 +32,7 @@ damping_compression = 0.88
 
 [node name="Wheel1" type="MeshInstance3D" parent="Body/Wheel1"]
 gi_mode = 2
-mesh = ExtResource("2_mlrjy")
+mesh = ExtResource("2_0cso8")
 
 [node name="Wheel2" type="VehicleWheel3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.573678, 0.115169, -0.783403)
@@ -46,7 +46,7 @@ damping_compression = 0.88
 
 [node name="Wheel2" type="MeshInstance3D" parent="Body/Wheel2"]
 gi_mode = 2
-mesh = ExtResource("2_mlrjy")
+mesh = ExtResource("2_0cso8")
 
 [node name="Wheel3" type="VehicleWheel3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.573678, 0.115169, 1.10416)
@@ -61,7 +61,7 @@ damping_compression = 0.88
 
 [node name="Wheel3" type="MeshInstance3D" parent="Body/Wheel3"]
 gi_mode = 2
-mesh = ExtResource("2_mlrjy")
+mesh = ExtResource("2_0cso8")
 
 [node name="Wheel4" type="VehicleWheel3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.573678, 0.115169, -0.783403)
@@ -75,11 +75,11 @@ damping_compression = 0.88
 
 [node name="Wheel4" type="MeshInstance3D" parent="Body/Wheel4"]
 gi_mode = 2
-mesh = ExtResource("2_mlrjy")
+mesh = ExtResource("2_0cso8")
 
 [node name="Body" type="MeshInstance3D" parent="Body"]
 gi_mode = 2
-mesh = ExtResource("4_wo1v3")
+mesh = ExtResource("3_tkg08")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.588269, 0.0774262)
@@ -93,6 +93,6 @@ transform = Transform3D(-0.709652, -0.170177, 0.683691, -2.11161e-08, 0.970391, 
 current = true
 fov = 74.0
 near = 0.1
-script = ExtResource("5")
+script = ExtResource("4_6igu8")
 min_distance = 3.0
 height = 1.25

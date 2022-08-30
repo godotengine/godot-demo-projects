@@ -10,6 +10,7 @@ enum SpeedUnit {
 
 var car_body: VehicleBody3D
 
+
 func _process(_delta):
 	var speed := car_body.linear_velocity.length()
 	if speed_unit == SpeedUnit.METERS_PER_SECOND:
