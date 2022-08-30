@@ -1,15 +1,17 @@
 extends Button
 
 enum SpeedUnit {
-	METERS_PER_SECOND = 0,
-	KILOMETERS_PER_HOUR = 1,
-	MILES_PER_HOUR = 2,
+	METERS_PER_SECOND,
+	KILOMETERS_PER_HOUR,
+	MILES_PER_HOUR,
 }
 
 @export var speed_unit: SpeedUnit = SpeedUnit.METERS_PER_SECOND
 
+var car_body: VehicleBody3D
+
 func _process(_delta):
-	var speed = get_parent().get_parent().get_child(1).get_child(0).linear_velocity.length()
+	var speed := car_body.linear_velocity.length()
 	if speed_unit == SpeedUnit.METERS_PER_SECOND:
 		text = "Speed: " + ("%.1f" % speed) + " m/s"
 	elif speed_unit == SpeedUnit.KILOMETERS_PER_HOUR:
@@ -20,5 +22,5 @@ func _process(_delta):
 		text = "Speed: " + ("%.0f" % speed) + " mph"
 
 
-func _on_Spedometer_pressed():
-	speed_unit = (speed_unit + 1) % 3
+func _on_spedometer_pressed():
+	speed_unit = ((speed_unit + 1) % SpeedUnit.size()) as SpeedUnit

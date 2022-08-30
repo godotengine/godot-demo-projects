@@ -1,23 +1,25 @@
 extends Control
 
-var town = null
+var town: Node3D = null
 
-func _process(_delta):
+func _process(_delta: float):
 	if Input.is_action_just_pressed(&"back"):
-		_on_Back_pressed()
+		_on_back_pressed()
 
 
-func _load_scene(car):
-	var tt = load(car).instantiate()
-	tt.name = &"car"
+func _load_scene(car_path: String):
+	var car: Node3D = load(car_path).instantiate()
+	car.name = &"car"
 	town = load("res://town_scene.tscn").instantiate()
-	town.get_node(^"InstancePos").add_child(tt)
-	town.get_node(^"Back").connect(&"pressed", self._on_Back_pressed)
+	town.get_node(^"InstancePos").add_child(car)
+	town.get_node(^"InstancePos/Panel/Spedometer").car_body = car.get_child(0)
+	town.get_node(^"Back").pressed.connect(_on_back_pressed)
+
 	get_parent().add_child(town)
 	hide()
 
 
-func _on_Back_pressed():
+func _on_back_pressed():
 	if is_instance_valid(town):
 		# Currently in the town, go back to main menu.
 		town.queue_free()
@@ -27,13 +29,13 @@ func _on_Back_pressed():
 		get_tree().quit()
 
 
-func _on_MiniVan_pressed():
+func _on_mini_van_pressed():
 	_load_scene("res://car_base.tscn")
 
 
-func _on_TrailerTruck_pressed():
+func _on_trailer_truck_pressed():
 	_load_scene("res://trailer_truck.tscn")
 
 
-func _on_TowTruck_pressed():
+func _on_tow_truck_pressed():
 	_load_scene("res://tow_truck.tscn")
