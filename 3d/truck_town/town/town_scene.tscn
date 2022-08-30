@@ -1,39 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0036qgpepmwc"]
+[gd_scene load_steps=4 format=3 uid="uid://d0ygmqpylq0wy"]
 
-[ext_resource type="PackedScene" uid="uid://2lbu3a1dk0a5" path="res://truck_town.glb" id="1_x0dmm"]
+[ext_resource type="PackedScene" uid="uid://dfdgytsvtqxwv" path="res://town/truck_town.glb" id="1_x0dmm"]
 [ext_resource type="Script" path="res://spedometer.gd" id="2"]
 [ext_resource type="Environment" uid="uid://cuvs67826w51u" path="res://default_env.tres" id="3_t0mbp"]
-
-[sub_resource type="StyleBoxEmpty" id="1"]
-
-[sub_resource type="Theme" id="2"]
-Button/styles/focus = SubResource("1")
 
 [node name="TownScene" type="Node3D"]
 
 [node name="TruckTown" parent="." instance=ExtResource("1_x0dmm")]
 
 [node name="InstancePos" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2039, 6.67095, -37.6042)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 6, -40)
 
-[node name="Panel" type="Panel" parent="InstancePos"]
+[node name="Spedometer" type="Button" parent="."]
+custom_minimum_size = Vector2(150, 40)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -130.0
+offset_left = -150.0
 offset_bottom = 40.0
 grow_horizontal = 0
-
-[node name="Spedometer" type="Button" parent="InstancePos/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("2")
 text = "Speed: ???"
-flat = true
 script = ExtResource("2")
 
 [node name="Back" type="Button" parent="."]
@@ -50,4 +36,4 @@ environment = ExtResource("3_t0mbp")
 transform = Transform3D(0.939693, -0.280167, -0.196175, -5.01437e-08, -0.573577, 0.819152, -0.34202, -0.769751, -0.538986, 0, 24.4076, 0)
 shadow_enabled = true
 
-[connection signal="pressed" from="InstancePos/Panel/Spedometer" to="InstancePos/Panel/Spedometer" method="_on_spedometer_pressed"]
+[connection signal="pressed" from="Spedometer" to="Spedometer" method="_on_spedometer_pressed"]
