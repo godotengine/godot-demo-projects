@@ -1,4 +1,4 @@
-extends RigidDynamicBody3D
+class_name Bullet extends RigidBody3D
 
-#warning-ignore:unused_class_variable
+
 var enabled = true

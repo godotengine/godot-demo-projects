@@ -1,13 +1,22 @@
-[gd_resource type="Environment" load_steps=3 format=2]
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://odyhne6bhlsu"]
 
-[ext_resource path="res://stage/panorama.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://qdur4kpvvtdg" path="res://stage/panorama.png" id="1"]
 
-[sub_resource type="PanoramaSkyMaterial" id=1]
-radiance_size = 1
-panorama = ExtResource( 1 )
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_3qare"]
+panorama = ExtResource("1")
+
+[sub_resource type="Sky" id="Sky_qdkmq"]
+sky_material = SubResource("PanoramaSkyMaterial_3qare")
 
 [resource]
 background_mode = 2
-background_sky = SubResource( 1 )
+sky = SubResource("Sky_qdkmq")
+ambient_light_source = 2
+ambient_light_color = Color(0.6, 0.6, 0.6, 1)
+ambient_light_sky_contribution = 0.0
 tonemap_mode = 2
-tonemap_white = 6.0
+ssao_enabled = true
+glow_enabled = true
+glow_intensity = 0.5
+glow_strength = 1.2
+glow_blend_mode = 1
