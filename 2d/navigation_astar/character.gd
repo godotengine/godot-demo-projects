@@ -33,7 +33,7 @@ func _process(_delta):
 func _unhandled_input(event):
 	if event.is_action_pressed("click"):
 		var global_mouse_pos = get_global_mouse_position()
-		if Input.is_key_pressed(KEY_SHIFT):
+		if Input.is_key_pressed(KEY_SHIFT) and get_parent().get_node("TileMap").check_start_position(global_mouse_pos):
 			global_position = global_mouse_pos
 		else:
 			_target_position = global_mouse_pos
