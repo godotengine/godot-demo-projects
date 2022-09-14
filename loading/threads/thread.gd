@@ -1,6 +1,8 @@
-extends Node2D
+extends Control
+
 
 var thread: Thread
+
 
 func _on_load_pressed():
 	if is_instance_valid(thread) and thread.is_started():
@@ -26,9 +28,9 @@ func _bg_load_done():
 	# Wait for the thread to complete, and get the returned value.
 	var tex = thread.wait_to_finish()
 	print("THREAD FINISHED!")
-	$Sprite2D.set_texture(tex)
+	$TextureRect.texture = tex
 	# We're done with the thread now, so we can free it.
-	thread = null # Threads are reference counted, so this is how we free it.
+	thread = null # Threads are reference counted, so this is how we free them.
 
 
 func _exit_tree():
