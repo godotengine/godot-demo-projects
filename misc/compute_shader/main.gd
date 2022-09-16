@@ -38,7 +38,7 @@ func _ready() -> void:
 	# Round dimension to nearest power of 2
 	print(dimension)
 	po2_dimensions = nearest_po2(dimension)
-	
+
 	noise.frequency = 0.003 / (float(po2_dimensions) / float(512))
 
 
@@ -54,14 +54,14 @@ func prepare_image() -> Image:
 	noise.seed = seed_input.text.to_int()
 	# Create image from noise
 	var heightmap := noise.get_image(po2_dimensions, po2_dimensions, false, false)
-	
+
 	# Create ImageTexture to display original on screen
 	var clone = Image.new()
 	clone.copy_from(heightmap)
 	clone.resize(512, 512, Image.INTERPOLATE_NEAREST)
 	var clone_tex := ImageTexture.create_from_image(clone)
 	heightmap_rect.texture = clone_tex
-	
+
 	return heightmap
 
 
@@ -70,12 +70,12 @@ func compute_island_gpu(heightmap: Image) -> void:
 	var rd := RenderingServer.create_local_rendering_device()
 	# Prepare the shader
 	var shader_rid := load_shader(rd, shader_file)
-	
+
 	# Create format for heightmap
 	var heightmap_format := RDTextureFormat.new()
 	# There are a lot of different formats, it might take some studying to be able to be able to
 	# choose the right ones. In this case, we tell it to interpret the data as a single byte for red.
-	# Even though the noise image only has a luminance channel, we can just interpret this as if it 
+	# Even though the noise image only has a luminance channel, we can just interpret this as if it
 	# was the red channel. The byte latout is the same!
 	heightmap_format.format = RenderingDevice.DATA_FORMAT_R8_UNORM
 	heightmap_format.width = po2_dimensions
@@ -86,16 +86,16 @@ func compute_island_gpu(heightmap: Image) -> void:
 		RenderingDevice.TEXTURE_USAGE_STORAGE_BIT + \
 		RenderingDevice.TEXTURE_USAGE_CAN_UPDATE_BIT + \
 		RenderingDevice.TEXTURE_USAGE_CAN_COPY_FROM_BIT
-	
+
 	# Store heightmap as texture
 	var heightmap_rid := rd.texture_create(heightmap_format, RDTextureView.new(), [heightmap.get_data()])
-	
+
 	# Create uniform for heightmap
 	var heightmap_uniform := RDUniform.new()
 	heightmap_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_IMAGE
 	heightmap_uniform.binding = 0 # This matches the binding in the shader
 	heightmap_uniform.add_id(heightmap_rid)
-	
+
 	# Create format for the gradient
 	var gradient_format := RDTextureFormat.new()
 	# The gradient could have been converted to a single channel like we did with the heightmap,
@@ -107,18 +107,18 @@ func compute_island_gpu(heightmap: Image) -> void:
 	gradient_format.usage_bits = \
 		RenderingDevice.TEXTURE_USAGE_STORAGE_BIT + \
 		RenderingDevice.TEXTURE_USAGE_CAN_UPDATE_BIT
-	
+
 	# Storage gradient as texture
 	var gradient_rid := rd.texture_create(gradient_format, RDTextureView.new(), [gradient_tex.get_image().get_data()])
-	
+
 	# Create uniform for gradient
 	var gradient_uniform := RDUniform.new()
 	gradient_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_IMAGE
 	gradient_uniform.binding = 1 # This matches the binding in the shader
 	gradient_uniform.add_id(gradient_rid)
-	
+
 	var uniform_set := rd.uniform_set_create([heightmap_uniform, gradient_uniform], shader_rid, 0)
-	
+
 	var pipeline := rd.compute_pipeline_create(shader_rid)
 	var compute_list := rd.compute_list_begin()
 	rd.compute_list_bind_compute_pipeline(compute_list, pipeline)
@@ -127,18 +127,18 @@ func compute_island_gpu(heightmap: Image) -> void:
 	# one for each pixel here. This ratio is highly tunable, and performance may vary
 	rd.compute_list_dispatch(compute_list, po2_dimensions, po2_dimensions, 1)
 	rd.compute_list_end()
-	
+
 	rd.submit()
 	# Wait for the GPU to finish
 	rd.sync()
-	
+
 	# Retrieve processed data
 	var output_bytes := rd.texture_get_data(heightmap_rid, 0)
 	var island_img := Image.new()
 	# Even though the GPU was working on the image as if each byte represented the red channel, we
 	# will interpret the data as if it was the luminance channel.
 	island_img.create_from_data(po2_dimensions, po2_dimensions, false, Image.FORMAT_L8, output_bytes)
-	
+
 	display_island(island_img)
 
 
@@ -175,7 +175,7 @@ func display_island(island: Image) -> void:
 	# Create ImageTexture to display original on screen
 	var island_tex := ImageTexture.create_from_image(island)
 	island_rect.texture = island_tex
-	
+
 	# Calculate and display elapsed time
 	var stop_time := Time.get_ticks_usec()
 	var elapsed := stop_time - start_time
