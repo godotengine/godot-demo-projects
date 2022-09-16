@@ -1,0 +1,202 @@
+[gd_scene load_steps=4 format=3 uid="uid://dm8doenormt4l"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_r4h6n"]
+
+[sub_resource type="Gradient" id="Gradient_l3ffd"]
+colors = PackedColorArray(0, 0.686275, 0.658824, 1, 0.542081, 0.741499, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uwj8q"]
+gradient = SubResource("Gradient_l3ffd")
+fill_to = Vector2(1, 1)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r4h6n")
+shader_file = "res://compute_shader.glsl"
+dimension = 2048.0
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_uwj8q")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+offset_left = 443.0
+offset_top = 195.0
+offset_right = 1477.0
+offset_bottom = 885.0
+theme_override_constants/separation = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2i(250, 0)
+layout_mode = 2
+offset_right = 1034.0
+offset_bottom = 108.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+offset_right = 1034.0
+offset_bottom = 108.0
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+offset_right = 1034.0
+offset_bottom = 26.0
+text = "Create island"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 30.0
+offset_right = 1034.0
+offset_bottom = 34.0
+
+[node name="GridContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 38.0
+offset_right = 1034.0
+offset_bottom = 73.0
+
+[node name="SeedLabel" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+offset_right = 342.0
+offset_bottom = 35.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Seed"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SeedInput" type="TextEdit" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2i(0, 35)
+layout_mode = 2
+offset_left = 346.0
+offset_right = 688.0
+offset_bottom = 35.0
+size_flags_horizontal = 3
+text = "23476234"
+
+[node name="RandomButton" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+offset_left = 692.0
+offset_right = 1034.0
+offset_bottom = 35.0
+size_flags_horizontal = 3
+text = "Random"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 77.0
+offset_right = 1034.0
+offset_bottom = 108.0
+alignment = 1
+
+[node name="CreateButton" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+offset_right = 515.0
+offset_bottom = 31.0
+size_flags_horizontal = 3
+text = "Create (GPU)"
+
+[node name="CreateButtonCPU" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+offset_left = 519.0
+offset_right = 1034.0
+offset_bottom = 31.0
+size_flags_horizontal = 3
+text = "Create (CPU)"
+
+[node name="PanelContainer2" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2i(1034, 512)
+layout_mode = 2
+offset_top = 118.0
+offset_right = 1034.0
+offset_bottom = 690.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+offset_right = 1034.0
+offset_bottom = 572.0
+
+[node name="HBoxContainer" type="GridContainer" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+offset_right = 1034.0
+offset_bottom = 542.0
+columns = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+offset_right = 515.0
+offset_bottom = 26.0
+text = "Raw heightmap"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+offset_left = 519.0
+offset_right = 1034.0
+offset_bottom = 26.0
+text = "Computed Island"
+horizontal_alignment = 1
+
+[node name="RawHeightmap" type="TextureRect" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2i(512, 512)
+layout_mode = 2
+offset_top = 30.0
+offset_right = 515.0
+offset_bottom = 542.0
+size_flags_horizontal = 3
+
+[node name="ComputedHeightmap" type="TextureRect" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2i(512, 512)
+layout_mode = 2
+offset_left = 519.0
+offset_top = 30.0
+offset_right = 1034.0
+offset_bottom = 542.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+offset_top = 546.0
+offset_right = 1034.0
+offset_bottom = 572.0
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+offset_right = 512.0
+offset_bottom = 26.0
+size_flags_horizontal = 3
+text = "Time elapsed: "
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+offset_left = 522.0
+offset_right = 1034.0
+offset_bottom = 26.0
+size_flags_horizontal = 3
+text = "?????"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer/RandomButton" to="." method="_on_random_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/CreateButton" to="." method="_on_create_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/CreateButtonCPU" to="." method="_on_create_button_cpu_pressed"]
