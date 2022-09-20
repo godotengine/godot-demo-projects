@@ -14,7 +14,6 @@ var base_height = ProjectSettings.get_setting("display/window/size/viewport_heig
 @onready var camera_holder = $CameraHolder # Has a position and rotates on Y.
 @onready var rotation_x = $CameraHolder/RotationX
 @onready var camera = $CameraHolder/RotationX/Camera3D
-@onready var place_decal_raycast = $CameraHolder/RotationX/Camera3D/PlaceDecalRayCast
 
 func _ready():
 	camera_holder.transform.basis = Basis.from_euler(Vector3(0, rot_y, 0))
@@ -29,26 +28,31 @@ func _unhandled_input(event):
 		_on_next_pressed()
 
 	if event.is_action_pressed("place_decal"):
-		place_decal_raycast.target_position = camera.project_position(get_viewport().get_mouse_position(), 100)
-		place_decal_raycast.force_raycast_update()
+		var origin = camera.global_position
+		var target = camera.project_position(get_viewport().get_mouse_position(), 100)
 
-		var decal = preload("res://decal.tscn").instantiate()
-		add_child(decal)
-		decal.position = place_decal_raycast.get_collision_point()
+		var query = PhysicsRayQueryParameters3D.create(origin, target)
+		var result = camera.get_world_3d().direct_space_state.intersect_ray(query)
+
+		if not result.is_empty():
+			var decal = preload("res://decal.tscn").instantiate()
+			add_child(decal)
+			decal.position = result["position"]
+			decal.transform.basis = camera.global_transform.basis
 
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			zoom -= ZOOM_SPEED
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			zoom += ZOOM_SPEED
-		zoom = clamp(zoom, 1.5, 4)
+		zoom = clampf(zoom, 1.5, 4)
 
 	if event is InputEventMouseMotion and event.button_mask & MAIN_BUTTONS:
 		# Compensate motion speed to be resolution-independent (based on the window height).
 		var relative_motion = event.relative * DisplayServer.window_get_size().y / base_height
 		rot_y -= relative_motion.x * ROT_SPEED
 		rot_x -= relative_motion.y * ROT_SPEED
-		rot_x = clamp(rot_x, deg_to_rad(-90), 0)
+		rot_x = clampf(rot_x, deg_to_rad(-90), 0)
 		camera_holder.transform.basis = Basis.from_euler(Vector3(0, rot_y, 0))
 		rotation_x.transform.basis = Basis.from_euler(Vector3(rot_x, 0, 0))
 
@@ -58,8 +62,8 @@ func _process(delta):
 	# This code assumes CameraHolder's X and Y coordinates are already correct.
 	var current_position = camera_holder.global_transform.origin.z
 	var target_position = current_tester.global_transform.origin.z
-	camera_holder.global_transform.origin.z = lerp(current_position, target_position, 3 * delta)
-	camera.position.z = lerp(camera.position.z, zoom, 10 * delta)
+	camera_holder.global_transform.origin.z = lerpf(current_position, target_position, 3 * delta)
+	camera.position.z = lerpf(camera.position.z, zoom, 10 * delta)
 
 
 func _on_previous_pressed():
