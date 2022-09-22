@@ -6,6 +6,7 @@ layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
 // Prepare memory for the image, which will be both read and written to
 // 'restrict' is used to tell the compiler that the memory will only be accessed by the 'heightmap' variable
 layout(r8, binding = 0) restrict uniform image2D heightmap;
+// `readonly` is used to tell the compiler that we will not write to this memory. This allows the compiler to make some optimizations it couldn't otherwise
 layout(rgba8, binding = 1) restrict readonly uniform image2D gradient;
 
 void main() {
@@ -41,5 +42,6 @@ void main() {
   pixel.r = step(0.2, pixel.r) * pixel.r;
 
   // Store the pixel back into the image
+  // WARNING: make sure you are writing to the same coordinate that you read from. If you don't, you may end up writing to a pixel, before that pixel is read by a different invocation and cause errors
   imageStore(heightmap, coords, pixel);
 }

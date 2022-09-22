@@ -123,13 +123,14 @@ func compute_island_gpu(heightmap: Image) -> void:
 	var compute_list := rd.compute_list_begin()
 	rd.compute_list_bind_compute_pipeline(compute_list, pipeline)
 	rd.compute_list_bind_uniform_set(compute_list, uniform_set, 0)
-	# This is where the magic happens! As our shader has a work group size of 1x1x1, we dispatch
-	# one for each pixel here. This ratio is highly tunable, and performance may vary
-	rd.compute_list_dispatch(compute_list, po2_dimensions, po2_dimensions, 1)
+	# This is where the magic happens! As our shader has a work group size of 8x8x1, we dispatch
+	# one for every 8x8 block of pixels here. This ratio is highly tunable, and performance may vary
+	rd.compute_list_dispatch(compute_list, po2_dimensions / 8, po2_dimensions / 8, 1)
 	rd.compute_list_end()
 
 	rd.submit()
 	# Wait for the GPU to finish
+	# Normally you would do this after a few frames have passed so the compute shader can run in the background
 	rd.sync()
 
 	# Retrieve processed data
