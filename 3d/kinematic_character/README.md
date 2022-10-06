@@ -18,6 +18,4 @@ for the level. Each has colliders, the player moves itself via
 
 ## Screenshots
 
-![Screenshot](screenshots/ingame.png)
-
-![Screenshot](screenshots/editor.png)
+![Screenshot](screenshots/kinematic_character.webp)

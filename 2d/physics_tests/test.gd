@@ -73,7 +73,7 @@ func create_rigidbody(shape, pickable = false, shape_transform = Transform2D.IDE
 	collision.shape = shape
 	collision.transform = shape_transform
 
-	var body = RigidDynamicBody2D.new()
+	var body = RigidBody2D.new()
 	body.add_child(collision)
 
 	if pickable:
@@ -100,7 +100,7 @@ func create_rigidbody_box(size, pickable = false, use_icon = false, shape_transf
 
 
 func find_node(node_name):
-	var nodes = find_nodes(node_name)
+	var nodes = find_children(node_name)
 	if nodes.size() > 0:
 		return nodes[0]
 	return null
@@ -111,7 +111,7 @@ func start_timer(timeout):
 		_timer = Timer.new()
 		_timer.one_shot = true
 		add_child(_timer)
-		_timer.connect("timeout", Callable(self, "_on_timer_done"))
+		_timer.timeout.connect(self._on_timer_done)
 	else:
 		cancel_timer()
 

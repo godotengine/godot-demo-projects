@@ -1,6 +1,8 @@
 @tool
-class_name AxisMarker3D, "res://marker/AxisMarker3D.svg"
 extends Node3D
+class_name AxisMarker3D
+@icon("res://marker/AxisMarker3D.svg")
+
 
 func _process(_delta):
 	var holder: Node3D = get_child(0).get_child(0)

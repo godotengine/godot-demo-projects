@@ -1,5 +1,5 @@
 class_name Enemy
-extends RigidDynamicBody2D
+extends RigidBody2D
 
 const WALK_SPEED = 50
 
@@ -74,12 +74,12 @@ func _pre_explode():
 	$Shape3.queue_free()
 
 	# Stay there
-	mode = MODE_STATIC
+	#mode = MODE_STATIC
 	($SoundExplode as AudioStreamPlayer2D).play()
 
 
 func _bullet_collider(cc, s, dp):
-	mode = MODE_RIGID
+	#mode = MODE_RIGID
 	state = State.DYING
 
 	s.set_angular_velocity(sign(dp.x) * 33.0)

@@ -51,7 +51,7 @@ func _physics_process(_delta):
 	floor_stop_on_slope = _stop_on_slope
 	floor_block_on_wall = _move_on_floor_only
 	floor_constant_speed = _constant_speed
-	floor_max_angle = deg2rad(_floor_max_angle)
+	floor_max_angle = deg_to_rad(_floor_max_angle)
 	velocity = _velocity
 	move_and_slide()
 	_velocity = velocity

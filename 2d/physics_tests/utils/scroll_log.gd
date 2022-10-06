@@ -6,7 +6,7 @@ extends ScrollContainer
 
 func _ready():
 	var scrollbar = get_v_scroll_bar()
-	scrollbar.connect(&"scrolling", Callable(self, "_on_scrolling"))
+	scrollbar.scrolling.connect(self._on_scrolling)
 
 
 func _process(_delta):
@@ -17,4 +17,8 @@ func _process(_delta):
 
 func _on_scrolling():
 	auto_scroll = false
-	$"../CheckBoxScroll".pressed = false
+	$"../CheckBoxScroll".button_pressed = false
+
+
+func _on_check_box_scroll_toggled(button_pressed):
+	auto_scroll = button_pressed

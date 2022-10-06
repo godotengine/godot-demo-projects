@@ -2,7 +2,7 @@ shader_type canvas_item;
 render_mode blend_mix;
 
 uniform vec2 offset = vec2(8.0, 8.0);
-uniform vec4 modulate : hint_color;
+uniform vec4 modulate : source_color;
 
 void fragment() {
 	vec2 ps = TEXTURE_PIXEL_SIZE;

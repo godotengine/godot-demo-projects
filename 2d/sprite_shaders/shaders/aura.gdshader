@@ -3,7 +3,7 @@ render_mode blend_premul_alpha;
 
 // This shader only works properly with premultiplied alpha blend mode.
 uniform float aura_width = 2.0;
-uniform vec4 aura_color: hint_color;
+uniform vec4 aura_color : source_color;
 
 void fragment() {
 	vec4 col = texture(TEXTURE, UV);

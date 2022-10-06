@@ -6,6 +6,8 @@ const STATE_GRAB = 1
 var r_pos = Vector2()
 var state = STATE_MENU
 
+var initial_viewport_height = ProjectSettings.get_setting("display/window/size/viewport_height")
+
 @onready var camera = $Camera3D
 
 func _process(delta):
@@ -26,10 +28,12 @@ func _process(delta):
 
 func _input(event):
 	if event is InputEventMouseMotion:
-		r_pos = -event.relative
+		# Scale mouse sensitivity according to resolution, so that effective mouse sensitivity
+		# doesn't change depending on the viewport size.
+		r_pos = -event.relative * (get_viewport().size.y / initial_viewport_height)
 
 	if event.is_action("ui_cancel") and event.is_pressed() and not event.is_echo():
-		if (state == STATE_GRAB):
+		if state == STATE_GRAB:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			state = STATE_MENU
 		else:
@@ -40,3 +44,8 @@ func _input(event):
 func direction(vector):
 	var v = camera.get_global_transform().basis * vector
 	return v.normalized()
+
+
+func _on_transparent_check_button_toggled(button_pressed):
+	get_viewport().transparent_bg = button_pressed
+	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_TRANSPARENT, button_pressed)

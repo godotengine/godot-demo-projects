@@ -9,14 +9,13 @@ const PLAYER_LOSE = "res://dialogue/dialogue_data/player_lose.json"
 func _ready():
 	exploration_screen = get_node(exploration_screen)
 	combat_screen = get_node(combat_screen)
-	combat_screen.connect(&"combat_finished", self._on_combat_finished)
+	combat_screen.combat_finished.connect(self._on_combat_finished)
 	for n in $Exploration/Grid.get_children():
 		if not n.type == n.CellType.ACTOR:
 			continue
 		if not n.has_node("DialoguePlayer"):
 			continue
-		n.get_node(^"DialoguePlayer").connect("dialogue_finished", self,
-			"_on_opponent_dialogue_finished", [n])
+		n.get_node(^"DialoguePlayer").dialogue_finished.connect(self._on_opponent_dialogue_finished.bind(n))
 	remove_child(combat_screen)
 
 

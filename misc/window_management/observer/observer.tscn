@@ -1,14 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://dn8gun8srd127"]
 
-[ext_resource path="res://observer/observer.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://observer/observer.gd" id="1"]
 
-[sub_resource type="BoxShape3D" id=1]
+[sub_resource type="BoxShape3D" id="1"]
 
 [node name="Observer" type="CharacterBody3D"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 fov = 74.0
@@ -16,5 +16,4 @@ near = 0.1
 far = 1000.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-omni_range = 8.0
-omni_attenuation = 2.0
+omni_range = 100.0

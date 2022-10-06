@@ -50,8 +50,8 @@ func _process(delta):
 	# This code assumes CameraHolder's X and Y coordinates are already correct.
 	var current_position = camera_holder.global_transform.origin.z
 	var target_position = current_tester.global_transform.origin.z
-	camera_holder.global_transform.origin.z = lerp(current_position, target_position, 3 * delta)
-	camera.position.z = lerp(camera.position.z, camera_distance, 10 * delta)
+	camera_holder.global_transform.origin.z = lerpf(current_position, target_position, 3 * delta)
+	camera.position.z = lerpf(camera.position.z, camera_distance, 10 * delta)
 
 
 func _on_previous_pressed():
@@ -79,7 +79,7 @@ func _on_temporal_antialiasing_toggled(button_pressed):
 
 
 func _on_msaa_item_selected(index):
-	get_viewport().msaa = index
+	get_viewport().msaa_3d = index
 
 
 func _on_render_scale_item_selected(index):

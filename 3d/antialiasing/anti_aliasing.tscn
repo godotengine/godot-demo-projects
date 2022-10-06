@@ -238,7 +238,7 @@ size = Vector2(128, 128)
 fractal_octaves = 9
 fractal_gain = 1.0
 
-[sub_resource type="NoiseTexture" id="NoiseTexture_bgiac"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture_bgiac"]
 seamless = true
 noise = SubResource("FastNoiseLite_fiqc5")
 
@@ -248,7 +248,7 @@ albedo_texture = SubResource("NoiseTexture_bgiac")
 uv1_scale = Vector3(3, 2, 1)
 texture_filter = 5
 
-[sub_resource type="NoiseTexture" id="NoiseTexture_7yxqs"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture_7yxqs"]
 width = 32
 height = 32
 seamless = true
@@ -263,7 +263,7 @@ texture_filter = 4
 offsets = PackedFloat32Array(0, 0.298851, 0.609195, 0.781609, 0.873563, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 0.133693, 0.238417, 0.655738, 1, 0.4, 0.47451, 0, 1, 0.364109, 0.476658, 1, 1, 1, 1, 0)
 
-[sub_resource type="NoiseTexture" id="NoiseTexture_uv2tn"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture_uv2tn"]
 seamless = true
 color_ramp = SubResource("Gradient_ekf3m")
 noise = SubResource("FastNoiseLite_fiqc5")
@@ -356,7 +356,7 @@ size = Vector3(0.1, 0.1, 0.1)
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_ft0gs"]
+[sub_resource type="ParticleProcessMaterial" id="ParticlesMaterial_ft0gs"]
 emission_shape = 6
 emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 0.0
@@ -364,8 +364,6 @@ emission_ring_radius = 0.25
 emission_ring_inner_radius = 0.25
 radial_accel_min = 2.0
 radial_accel_max = 2.0
-collision_enabled = true
-collision_friction = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1dgwn"]
 albedo_color = Color(0.545098, 0.545098, 0.545098, 1)
@@ -426,17 +424,17 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ltvd2"]
 render_priority = 0
 shader = SubResource("Shader_rejcs")
-shader_param/albedo = Color(1.2, 0.915333, 0.997134, 1)
-shader_param/metallic = 0.0
-shader_param/metallic_texture_channel = Plane(1, 0, 0, 0)
-shader_param/point_size = 1.0
-shader_param/roughness = 1.0
-shader_param/specular = 0.5
-shader_param/texture_albedo = SubResource("NoiseTexture_bgiac")
-shader_param/uv1_offset = Vector3(0, 0, 0)
-shader_param/uv1_scale = Vector3(2, 2, 1)
-shader_param/uv2_offset = Vector3(0, 0, 0)
-shader_param/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/albedo = Color(1.2, 0.915333, 0.997134, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/metallic_texture_channel = Plane(1, 0, 0, 0)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/specular = 0.5
+shader_parameter/texture_albedo = SubResource("NoiseTexture_bgiac")
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv1_scale = Vector3(2, 2, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_oopii"]
 height = 1.0
@@ -487,17 +485,17 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fbaw5"]
 render_priority = 0
 shader = SubResource("Shader_ovufm")
-shader_param/albedo = Color(1.2, 1.16365, 0.85123, 1)
-shader_param/metallic = 0.0
-shader_param/metallic_texture_channel = Plane(1, 0, 0, 0)
-shader_param/point_size = 1.0
-shader_param/roughness = 1.0
-shader_param/specular = 0.5
-shader_param/texture_albedo = SubResource("NoiseTexture_bgiac")
-shader_param/uv1_offset = Vector3(0, 0, 0)
-shader_param/uv1_scale = Vector3(2, 2, 1)
-shader_param/uv2_offset = Vector3(0, 0, 0)
-shader_param/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/albedo = Color(1.2, 1.16365, 0.85123, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/metallic_texture_channel = Plane(1, 0, 0, 0)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/specular = 0.5
+shader_parameter/texture_albedo = SubResource("NoiseTexture_bgiac")
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv1_scale = Vector3(2, 2, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
 
 [node name="AntiAliasingTestScene" type="WorldEnvironment"]
 environment = SubResource("11")
@@ -652,7 +650,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -48)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 amount = 100
 lifetime = 0.5
-local_coords = false
 draw_order = 1
 mesh = SubResource("QuadMesh_imrxg")
 direction = Vector3(0, 1, 0)
@@ -670,7 +667,6 @@ color_ramp = SubResource("Gradient_e7gyf")
 [node name="CPUParticles3D" type="CPUParticles3D" parent="Testers/MovingCPUParticles/CPUParticles3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 amount = 20
-local_coords = false
 mesh = SubResource("BoxMesh_88317")
 spread = 180.0
 gravity = Vector3(0, 0, 0)
@@ -706,7 +702,6 @@ lifetime = 2.0
 fixed_fps = 0
 collision_base_size = 0.05
 visibility_aabb = AABB(-1.50087, -1.25001, -1.4745, 3.19423, 2.13905, 3.02308)
-local_coords = false
 process_material = SubResource("ParticlesMaterial_ft0gs")
 draw_pass_1 = SubResource("BoxMesh_88317")
 
@@ -750,6 +745,7 @@ mesh = SubResource("CylinderMesh_oopii")
 surface_material_override/0 = SubResource("ShaderMaterial_fbaw5")
 
 [node name="TestName" type="Label" parent="."]
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -764,6 +760,7 @@ theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 
 [node name="Previous" type="Button" parent="."]
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 24.0
@@ -773,6 +770,7 @@ offset_bottom = -24.0
 text = "«  Previous"
 
 [node name="Next" type="Button" parent="."]
+anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -791,31 +789,35 @@ offset_bottom = 55.0
 theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="Antialiasing"]
-offset_right = 265.0
+layout_mode = 2
+offset_right = 370.0
 offset_bottom = 26.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 text = "Antialiasing Options:"
 
 [node name="FXAA" type="CheckButton" parent="Antialiasing"]
+layout_mode = 2
 offset_top = 36.0
-offset_right = 265.0
+offset_right = 370.0
 offset_bottom = 67.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 text = "FXAA (Fast)"
 
 [node name="TemporalAntialiasing" type="CheckButton" parent="Antialiasing"]
+layout_mode = 2
 offset_top = 77.0
-offset_right = 265.0
+offset_right = 370.0
 offset_bottom = 108.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 text = "Temporal antialiasing (Fast)"
 
 [node name="MSAA" type="OptionButton" parent="Antialiasing"]
+layout_mode = 2
 offset_top = 118.0
-offset_right = 265.0
+offset_right = 370.0
 offset_bottom = 149.0
 item_count = 4
 selected = 0
@@ -829,8 +831,9 @@ popup/item_3/text = "8× MSAA (Slowest)"
 popup/item_3/id = 3
 
 [node name="RenderScale" type="OptionButton" parent="Antialiasing"]
+layout_mode = 2
 offset_top = 159.0
-offset_right = 265.0
+offset_right = 370.0
 offset_bottom = 190.0
 item_count = 7
 selected = 2

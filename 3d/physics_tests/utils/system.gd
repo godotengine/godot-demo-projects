@@ -2,7 +2,6 @@ extends Node
 
 
 enum PhysicsEngine {
-	BULLET,
 	GODOT_PHYSICS,
 	OTHER,
 }
@@ -18,9 +17,7 @@ func _enter_tree():
 	var engine_string = ProjectSettings.get_setting("physics/3d/physics_engine")
 	match engine_string:
 		"DEFAULT":
-			_engine = PhysicsEngine.BULLET
-		"Bullet":
-			_engine = PhysicsEngine.BULLET
+			_engine = PhysicsEngine.GODOT_PHYSICS
 		"GodotPhysics3D":
 			_engine = PhysicsEngine.GODOT_PHYSICS
 		_:

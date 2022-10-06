@@ -35,7 +35,7 @@ func _ready():
 	$Options.add_menu_item(OPTION_TYPE_CAPSULE)
 	$Options.add_menu_item(OPTION_TYPE_CYLINDER)
 	$Options.add_menu_item(OPTION_TYPE_CONVEX)
-	$Options.connect(&"option_selected", Callable(self, "_on_option_selected"))
+	$Options.option_selected.connect(self._on_option_selected)
 
 	await _start_all_types()
 
@@ -182,7 +182,7 @@ func _activate_objects():
 		var spawn_parent = get_node(spawn)
 
 		for node_index in range(spawn_parent.get_child_count()):
-			var node = spawn_parent.get_child(node_index) as RigidDynamicBody3D
+			var node = spawn_parent.get_child(node_index) as RigidBody3D
 			node.set_sleeping(false)
 
 

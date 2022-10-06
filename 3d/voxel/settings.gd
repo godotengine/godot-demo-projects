@@ -18,9 +18,8 @@ func _enter_tree():
 	else:
 		Settings._loaded = true
 
-	var file = File.new()
-	if file.file_exists(_save_path):
-		file.open(_save_path, File.READ)
+	if FileAccess.file_exists(_save_path):
+		var file = FileAccess.open(_save_path, FileAccess.READ)
 		while file.get_position() < file.get_length():
 			# Get the saved dictionary from the next line in the save file
 			var json = JSON.new()
@@ -28,17 +27,14 @@ func _enter_tree():
 			var data = json.get_data()
 			render_distance = data["render_distance"]
 			fog_enabled = data["fog_enabled"]
-		file.close()
 	else:
 		save_settings()
 
 
 func save_settings():
-	var file = File.new()
-	file.open(_save_path, File.WRITE)
+	var file = FileAccess.open(_save_path, FileAccess.WRITE)
 	var data = {
 		"render_distance": render_distance,
 		"fog_enabled": fog_enabled,
 	}
 	file.store_line(JSON.new().stringify(data))
-	file.close()

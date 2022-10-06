@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://0iek6ri88gkb"]
+[gd_scene load_steps=10 format=3 uid="uid://0iek6ri88gkb"]
 
 [ext_resource type="PackedScene" uid="uid://dvl383ispakmn" path="res://gui_panel_3d.tscn" id="1"]
 
@@ -7,16 +7,17 @@ sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
 [sub_resource type="Sky" id="Sky_pq42j"]
-sky_material = SubResource( "ProceduralSkyMaterial_1lgdv" )
+sky_material = SubResource("ProceduralSkyMaterial_1lgdv")
 
 [sub_resource type="Environment" id="Environment_niyks"]
 background_mode = 2
-sky = SubResource( "Sky_pq42j" )
+sky = SubResource("Sky_pq42j")
 tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="Animation" id="1"]
 length = 6.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -25,9 +26,14 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 2, 4, 6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
 "update": 0,
 "values": [Transform3D(0.994592, 0, 0.103856, 0, 1, 0, -0.103856, 0, 0.994592, 0.465682, 0, 1.78523), Transform3D(0.962984, 0, -0.269557, 0, 1, 0, 0.269557, 0, 0.962984, -0.462237, 0, 2.41934), Transform3D(0.806599, 0, -0.591098, 0, 1, 0, 0.591098, 0, 0.806599, -1.59502, 0, 2.05358), Transform3D(0.994592, 0, 0.103856, 0, 1, 0, -0.103856, 0, 0.994592, 0.465682, 0, 1.78523)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uw4n0"]
+_data = {
+"Move_camera": SubResource("1")
 }
 
 [sub_resource type="PlaneMesh" id="2"]
@@ -41,9 +47,9 @@ roughness = 0.0
 [node name="GUIin3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( "Environment_niyks" )
+environment = SubResource("Environment_niyks")
 
-[node name="GUIPanel3D" parent="." instance=ExtResource( "1" )]
+[node name="GUIPanel3D" parent="." instance=ExtResource("1")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 3)
@@ -53,41 +59,44 @@ near = 0.1
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38866, 1.2413, 2.72141)
 shadow_enabled = true
+shadow_blur = 3.0
 omni_range = 10.0
 
 [node name="Camera_Move" type="AnimationPlayer" parent="."]
 autoplay = "Move_camera"
 playback_speed = 0.25
-anims/Move_camera = SubResource( "1" )
+libraries = {
+"": SubResource("AnimationLibrary_uw4n0")
+}
 
 [node name="Background" type="Node3D" parent="."]
 
 [node name="Wall" type="MeshInstance3D" parent="Background"]
 transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, -2.60819, 0.589247, -2.08943)
-mesh = SubResource( "2" )
+mesh = SubResource("2")
 
 [node name="Wall2" type="MeshInstance3D" parent="Background"]
 transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, 5.08055, 0.589247, -2.08943)
-mesh = SubResource( "2" )
+mesh = SubResource("2")
 
 [node name="Wall3" type="MeshInstance3D" parent="Background"]
 transform = Transform3D(-1.74846e-07, -4, 0, -1.74846e-07, 7.64274e-15, -4, 4, -1.74846e-07, -1.74846e-07, 9.04446, 0.589247, 1.62058)
-mesh = SubResource( "2" )
+mesh = SubResource("2")
 
 [node name="Floor" type="MeshInstance3D" parent="Background"]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -2.60819, -2.68765, 1.46502)
-mesh = SubResource( "2" )
+mesh = SubResource("2")
 
 [node name="Floor2" type="MeshInstance3D" parent="Background"]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 5.08055, -2.68765, 1.46502)
-mesh = SubResource( "2" )
+mesh = SubResource("2")
 
 [node name="Cube" type="MeshInstance3D" parent="Background"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25901, -0.598608, 0.374871)
-mesh = SubResource( "3" )
-surface_material_override/0 = SubResource( "4" )
+mesh = SubResource("3")
+surface_material_override/0 = SubResource("4")
 
 [node name="Cube2" type="MeshInstance3D" parent="Background"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.88761, 2.01326, 0.374871)
-mesh = SubResource( "3" )
-surface_material_override/0 = SubResource( "4" )
+mesh = SubResource("3")
+surface_material_override/0 = SubResource("4")

@@ -7,7 +7,7 @@ func initialize(combat_combatants):
 		combatant = combatant.instantiate()
 		if combatant is Combatant:
 			$Combatants.add_combatant(combatant)
-			combatant.get_node(^"Health").connect(&"dead", self._on_combatant_death, [combatant])
+			combatant.get_node(^"Health").dead.connect(self._on_combatant_death.bind(combatant))
 		else:
 			combatant.queue_free()
 	$UI.initialize()

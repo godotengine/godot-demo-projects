@@ -23,8 +23,7 @@ func _ready():
 	# The `resized` signal will be emitted when the window size changes, as the root Control node
 	# is resized whenever the window size changes. This is because the root Control node
 	# uses a Full Rect anchor, so its size will always be equal to the window size.
-	# warning-ignore:return_value_discarded
-	connect("resized", self._on_resized)
+	resized.connect(self._on_resized)
 	update_container()
 
 

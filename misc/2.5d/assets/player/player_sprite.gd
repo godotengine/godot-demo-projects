@@ -71,7 +71,7 @@ func set_view_mode(view_mode_index):
 
 # Change the 2D basis of the sprite to try and make it "fit" multiple view modes.
 func _sprite_basis():
-	if not Engine.editor_hint:
+	if not Engine.is_editor_hint():
 		if Input.is_action_pressed(&"forty_five_mode"):
 			set_view_mode(0)
 		elif Input.is_action_pressed(&"isometric_mode"):

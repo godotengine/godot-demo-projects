@@ -1,43 +1,70 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwvmsqurkf8aa"]
+[gd_scene load_steps=9 format=3 uid="uid://cwvmsqurkf8aa"]
 
-[ext_resource type="PackedScene" path="res://observer/observer.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dn8gun8srd127" path="res://observer/observer.tscn" id="1"]
 [ext_resource type="Script" path="res://control.gd" id="2"]
 
+[sub_resource type="Gradient" id="Gradient_oauk4"]
+colors = PackedColorArray(0.862745, 0.862745, 0.862745, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bkayj"]
+noise_type = 0
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t6ofl"]
+seamless = true
+color_ramp = SubResource("Gradient_oauk4")
+noise = SubResource("FastNoiseLite_bkayj")
+
 [sub_resource type="StandardMaterial3D" id="1"]
-albedo_color = Color(0.835294, 0.133333, 0.133333, 1)
+transparency = 1
+albedo_color = Color(0.301961, 0.623529, 0.862745, 0.752941)
+albedo_texture = SubResource("NoiseTexture2D_t6ofl")
+uv1_scale = Vector3(3, 2, 1)
+texture_filter = 5
 
 [sub_resource type="BoxMesh" id="2"]
-material = SubResource( "1" )
+material = SubResource("1")
 size = Vector3(5, 5, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3qo5i"]
 
 [node name="WindowManagement" type="Node3D"]
 
-[node name="Observer" parent="." instance=ExtResource( "1" )]
+[node name="Observer" parent="." instance=ExtResource("1")]
 transform = Transform3D(0.910685, 0, -0.4131, 0, 1, 0, 0.4131, 0, 0.910685, -4.81287, -0.152566, 9.90641)
 
 [node name="TestCube" type="MeshInstance3D" parent="."]
-mesh = SubResource( "2" )
+mesh = SubResource("2")
+
+[node name="TestCube2" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_3qo5i")
 
 [node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
-script = ExtResource( "2" )
+script = ExtResource("2")
 
 [node name="Buttons" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 9
 anchor_bottom = 1.0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 335.0
 offset_bottom = -2.0
+grow_vertical = 2
 theme_override_constants/separation = 5
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="Button_Fullscreen" type="Button" parent="Control/Buttons"]
-offset_right = 87.0
-offset_bottom = 31.0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
@@ -46,20 +73,16 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="Button_FixedSize" type="Button" parent="Control/Buttons"]
-offset_top = 36.0
-offset_right = 80.0
-offset_bottom = 67.0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
-text = "FixedSize"
+text = "Fixed Size"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="Button_Minimized" type="Button" parent="Control/Buttons"]
-offset_top = 72.0
-offset_right = 89.0
-offset_bottom = 103.0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
@@ -68,9 +91,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="Button_Maximized" type="Button" parent="Control/Buttons"]
-offset_top = 108.0
-offset_right = 92.0
-offset_bottom = 139.0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
@@ -79,19 +100,15 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="Button_MoveTo" type="Button" parent="Control/Buttons"]
-offset_top = 144.0
-offset_right = 70.0
-offset_bottom = 175.0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
-text = "MoveTo"
+text = "Move To"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="Button_Resize" type="Button" parent="Control/Buttons"]
-offset_top = 180.0
-offset_right = 57.0
-offset_bottom = 211.0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Resize"
@@ -99,9 +116,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="Button_Screen0" type="Button" parent="Control/Buttons"]
-offset_top = 216.0
-offset_right = 70.0
-offset_bottom = 247.0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Screen0"
@@ -109,9 +124,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="Button_Screen1" type="Button" parent="Control/Buttons"]
-offset_top = 252.0
-offset_right = 70.0
-offset_bottom = 283.0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Screen1"
@@ -119,10 +132,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="Button_MouseModeVisible" type="Button" parent="Control/Buttons"]
-offset_top = 288.0
-offset_right = 216.0
-offset_bottom = 319.0
-grow_vertical = 0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
@@ -131,10 +141,7 @@ metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="Button_MouseModeHidden" type="Button" parent="Control/Buttons"]
-offset_top = 324.0
-offset_right = 222.0
-offset_bottom = 355.0
-grow_vertical = 0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
@@ -143,10 +150,7 @@ metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="Button_MouseModeCaptured" type="Button" parent="Control/Buttons"]
-offset_top = 360.0
-offset_right = 242.0
-offset_bottom = 391.0
-grow_vertical = 0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 toggle_mode = true
@@ -154,24 +158,26 @@ text = "[F3] MOUSE_MODE_CAPTURED"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_KeyInfo" type="Label" parent="Control/Buttons"]
-offset_top = 396.0
-offset_right = 295.0
-offset_bottom = 474.0
-grow_vertical = 0
+[node name="Button_MouseModeConfined" type="Button" parent="Control/Buttons"]
+layout_mode = 2
 size_flags_horizontal = 2
-size_flags_vertical = 0
-text = "F1: Activate MOUSE_MODE_VISIBLE
-F2: Activate MOUSE_MODE_HIDDEN
-F3: Activate MOUSE_MODE_CAPTURED"
+size_flags_vertical = 2
+toggle_mode = true
+text = "[F4] MOUSE_MODE_CONFINED"
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
+[node name="Button_MouseModeConfinedHidden" type="Button" parent="Control/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+toggle_mode = true
+text = "[F5] MOUSE_MODE_CONFINED_HIDDEN"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="Label_MouseModeCaptured_KeyInfo" type="Label" parent="Control/Buttons"]
-offset_top = 479.0
-offset_right = 325.0
-offset_bottom = 557.0
-grow_vertical = 0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "ESC: Deactivate MOUSE_MODE_CAPTURED
@@ -181,10 +187,7 @@ metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="Label_MouseModes" type="Label" parent="Control/Buttons"]
-offset_top = 562.0
-offset_right = 108.0
-offset_bottom = 588.0
-grow_vertical = 0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "MouseModes:"
@@ -192,6 +195,8 @@ metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="Labels" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -206,10 +211,7 @@ metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="Label_Mode" type="Label" parent="Control/Labels"]
-minimum_size = Vector2(190, 0)
-offset_right = 190.0
-offset_bottom = 26.0
-grow_horizontal = 0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Mode:"
@@ -217,11 +219,7 @@ metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="Label_Position" type="Label" parent="Control/Labels"]
-minimum_size = Vector2(190, 0)
-offset_top = 36.0
-offset_right = 190.0
-offset_bottom = 62.0
-grow_horizontal = 0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Position:"
@@ -229,11 +227,7 @@ metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="Label_Size" type="Label" parent="Control/Labels"]
-minimum_size = Vector2(190, 0)
-offset_top = 72.0
-offset_right = 190.0
-offset_bottom = 98.0
-grow_horizontal = 0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Size:"
@@ -241,11 +235,7 @@ metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="Label_MousePosition" type="Label" parent="Control/Labels"]
-minimum_size = Vector2(190, 0)
-offset_top = 108.0
-offset_right = 190.0
-offset_bottom = 134.0
-grow_horizontal = 0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Mouse Position:"
@@ -253,11 +243,7 @@ metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="Label_Screen_Count" type="Label" parent="Control/Labels"]
-minimum_size = Vector2(190, 0)
-offset_top = 144.0
-offset_right = 190.0
-offset_bottom = 170.0
-grow_horizontal = 0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Screen_Count:"
@@ -265,11 +251,7 @@ metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="Label_Screen_Current" type="Label" parent="Control/Labels"]
-minimum_size = Vector2(190, 0)
-offset_top = 180.0
-offset_right = 190.0
-offset_bottom = 206.0
-grow_horizontal = 0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Screen:"
@@ -277,11 +259,7 @@ metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="Label_Screen0_Resolution" type="Label" parent="Control/Labels"]
-minimum_size = Vector2(190, 0)
-offset_top = 216.0
-offset_right = 190.0
-offset_bottom = 242.0
-grow_horizontal = 0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Screen0 Resolution: "
@@ -289,11 +267,7 @@ metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="Label_Screen0_Position" type="Label" parent="Control/Labels"]
-minimum_size = Vector2(190, 0)
-offset_top = 252.0
-offset_right = 190.0
-offset_bottom = 278.0
-grow_horizontal = 0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Screen0 Position: "
@@ -301,23 +275,23 @@ metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="Label_Screen0_DPI" type="Label" parent="Control/Labels"]
-minimum_size = Vector2(190, 0)
-offset_top = 288.0
-offset_right = 190.0
-offset_bottom = 314.0
-grow_horizontal = 0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Screen0 DPI:"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
+[node name="Label_Screen0_RefreshRate" type="Label" parent="Control/Labels"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Screen0 Refresh Rate:"
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
 [node name="Label_Screen1_Resolution" type="Label" parent="Control/Labels"]
-minimum_size = Vector2(190, 0)
-offset_top = 324.0
-offset_right = 190.0
-offset_bottom = 350.0
-grow_horizontal = 0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Screen1 Resolution: "
@@ -325,11 +299,7 @@ metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="Label_Screen1_Position" type="Label" parent="Control/Labels"]
-minimum_size = Vector2(190, 0)
-offset_top = 360.0
-offset_right = 190.0
-offset_bottom = 386.0
-grow_horizontal = 0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Screen1 Position: "
@@ -337,24 +307,29 @@ metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="Label_Screen1_DPI" type="Label" parent="Control/Labels"]
-minimum_size = Vector2(190, 0)
-offset_top = 396.0
-offset_right = 190.0
-offset_bottom = 422.0
-grow_horizontal = 0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Screen1 DPI:"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
+[node name="Label_Screen1_RefreshRate" type="Label" parent="Control/Labels"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Screen1 Refresh Rate:"
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
 [node name="ImplementationDialog" type="AcceptDialog" parent="Control"]
+size = Vector2i(470, 213)
 
 [node name="Text" type="Label" parent="Control/ImplementationDialog"]
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 392.0
-offset_bottom = 314.0
+offset_right = 462.0
+offset_bottom = 164.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "This is an Implementation-Test-Demo
@@ -364,6 +339,21 @@ across platforms.
 
 Your platform lacks at the moment the following methods:
 "
+
+[node name="CheckButton" type="CheckButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -47.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Transparent"
 
 [connection signal="pressed" from="Control/Buttons/Button_Fullscreen" to="Control" method="_on_Button_Fullscreen_pressed"]
 [connection signal="pressed" from="Control/Buttons/Button_FixedSize" to="Control" method="_on_Button_FixedSize_pressed"]
@@ -376,3 +366,6 @@ Your platform lacks at the moment the following methods:
 [connection signal="pressed" from="Control/Buttons/Button_MouseModeVisible" to="Control" method="_on_Button_MouseModeVisible_pressed"]
 [connection signal="pressed" from="Control/Buttons/Button_MouseModeHidden" to="Control" method="_on_Button_MouseModeHidden_pressed"]
 [connection signal="pressed" from="Control/Buttons/Button_MouseModeCaptured" to="Control" method="_on_Button_MouseModeCaptured_pressed"]
+[connection signal="pressed" from="Control/Buttons/Button_MouseModeConfined" to="Control" method="_on_Button_MouseModeConfined_pressed"]
+[connection signal="pressed" from="Control/Buttons/Button_MouseModeConfinedHidden" to="Control" method="_on_Button_MouseModeConfinedHidden_pressed"]
+[connection signal="toggled" from="Control/CheckButton" to="Observer" method="_on_transparent_check_button_toggled"]

@@ -23,7 +23,7 @@ func _process(_delta):
 		return
 	var _arrived_to_next_point = _move_to(_target_point_world)
 	if _arrived_to_next_point:
-		_path.remove(0)
+		_path.remove_at(0)
 		if len(_path) == 0:
 			_change_state(States.IDLE)
 			return
@@ -52,7 +52,7 @@ func _move_to(world_position):
 func _change_state(new_state):
 	if new_state == States.FOLLOW:
 		_path = get_parent().get_node(^"TileMap").get_astar_path(position, _target_position)
-		if not _path or len(_path) == 1:
+		if _path.is_empty() or len(_path) == 1:
 			_change_state(States.IDLE)
 			return
 		# The index 0 is the starting cell.

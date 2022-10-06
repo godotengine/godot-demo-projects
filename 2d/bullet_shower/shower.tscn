@@ -7,7 +7,7 @@
 
 [sub_resource type="SpriteFrames" id="1"]
 animations = [{
-"frames": [ExtResource( "3" ), ExtResource( "4" )],
+"frames": [ExtResource("3"), ExtResource("4")],
 "loop": true,
 "name": &"default",
 "speed": 5.0
@@ -19,16 +19,16 @@ radius = 27.0
 [node name="Shower" type="Node2D"]
 
 [node name="Bullets" type="Node2D" parent="."]
-script = ExtResource( "2" )
+script = ExtResource("2")
 
 [node name="Player" type="Area2D" parent="."]
-script = ExtResource( "5" )
+script = ExtResource("5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
-frames = SubResource( "1" )
+frames = SubResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource( "2" )
+shape = SubResource("2")
 
 [connection signal="body_shape_entered" from="Player" to="Player" method="_on_body_shape_entered"]
 [connection signal="body_shape_exited" from="Player" to="Player" method="_on_body_shape_exited"]

@@ -1,5 +1,5 @@
 class_name Bullet
-extends RigidDynamicBody2D
+extends RigidBody2D
 
 var disabled = false
 

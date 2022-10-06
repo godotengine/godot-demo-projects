@@ -1,10 +1,52 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://b2dl5qw1jss2w"]
 
-[ext_resource path="res://joypads.gd" type="Script" id=1]
-[ext_resource path="res://joypad_diagram.tscn" type="PackedScene" id=2]
-[ext_resource path="res://remap/remap_wizard.tscn" type="PackedScene" id=3]
+[ext_resource type="Script" path="res://joypads.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://bsrktfrmtkqvo" path="res://joypad_diagram.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://na4hexkywup6" path="res://remap/remap_wizard.tscn" id="3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3l3j"]
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_do8y5"]
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 0.4)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehk82"]
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ujhcf"]
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 0.4)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 3
 
 [node name="joypads" type="Control"]
+layout_mode = 3
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -13,1153 +55,812 @@ offset_left = -270.0
 offset_top = -240.0
 offset_right = 270.0
 offset_bottom = 240.0
-script = ExtResource( 1 )
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
 
-[node name="JoypadDiagram" parent="." instance=ExtResource( 2 )]
+[node name="JoypadDiagram" parent="." instance=ExtResource("2")]
 position = Vector2(415, 170)
 scale = Vector2(0.5, 0.5)
 
 [node name="DeviceInfo" type="HBoxContainer" parent="."]
+anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 30.0
-rect_min_size = Vector2(500, 30)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+grow_horizontal = 2
 
 [node name="Label" type="Label" parent="DeviceInfo"]
-offset_right = 50.0
-offset_bottom = 30.0
-rect_min_size = Vector2(50, 0)
+offset_right = 52.0
+offset_bottom = 31.0
 size_flags_vertical = 1
 text = "Device"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="JoyNumber" type="SpinBox" parent="DeviceInfo"]
-offset_left = 54.0
-offset_right = 134.0
-offset_bottom = 30.0
-rect_min_size = Vector2(80, 0)
-size_flags_vertical = 3
+offset_left = 56.0
+offset_right = 139.0
+offset_bottom = 31.0
+size_flags_vertical = 0
 max_value = 16.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VSeparator" type="VSeparator" parent="DeviceInfo"]
 modulate = Color(1, 1, 1, 0)
-offset_left = 138.0
-offset_right = 148.0
-offset_bottom = 30.0
-rect_min_size = Vector2(10, 0)
+offset_left = 143.0
+offset_right = 147.0
+offset_bottom = 31.0
 
 [node name="JoyName" type="Label" parent="DeviceInfo"]
-offset_left = 152.0
+offset_left = 151.0
 offset_right = 540.0
-offset_bottom = 30.0
+offset_bottom = 31.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(0.229156, 1, 0.239205, 1)
 text = "Controller Name Here"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Axes" type="VBoxContainer" parent="."]
 offset_top = 50.0
 offset_right = 255.0
 offset_bottom = 310.0
+theme_override_constants/separation = -2
 
 [node name="Axis0" type="HBoxContainer" parent="Axes"]
-offset_right = 260.0
-offset_bottom = 20.0
-rect_min_size = Vector2(260, 20)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_right = 255.0
+offset_bottom = 26.0
 
 [node name="Label" type="Label" parent="Axes/Axis0"]
-offset_right = 50.0
-offset_bottom = 20.0
-rect_min_size = Vector2(50, 0)
-size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
-text = "Axis 0"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis0"]
-offset_left = 54.0
-offset_right = 260.0
-offset_bottom = 20.0
+offset_right = 57.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
+size_flags_stretch_ratio = 0.3
+text = "Axis 0"
+
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis0"]
+offset_left = 61.0
+offset_top = 3.0
+offset_right = 255.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_g3l3j")
+theme_override_styles/fill = SubResource("StyleBoxFlat_do8y5")
 min_value = -100.0
 step = 0.0001
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
+show_percentage = false
 
 [node name="Value" type="Label" parent="Axes/Axis0/ProgressBar"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 1
 text = "0"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
 
 [node name="Axis1" type="HBoxContainer" parent="Axes"]
 offset_top = 24.0
-offset_right = 260.0
-offset_bottom = 44.0
-rect_min_size = Vector2(260, 20)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_right = 255.0
+offset_bottom = 50.0
 
 [node name="Label" type="Label" parent="Axes/Axis1"]
-offset_right = 50.0
-offset_bottom = 20.0
-rect_min_size = Vector2(50, 0)
-size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
-text = "Axis 1"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis1"]
-offset_left = 54.0
-offset_right = 260.0
-offset_bottom = 20.0
+offset_right = 57.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
+size_flags_stretch_ratio = 0.3
+text = "Axis 1"
+
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis1"]
+offset_left = 61.0
+offset_top = 3.0
+offset_right = 255.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_ehk82")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ujhcf")
 min_value = -100.0
 step = 0.0001
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
+show_percentage = false
 
 [node name="Value" type="Label" parent="Axes/Axis1/ProgressBar"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 1
 text = "0"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
 
 [node name="Axis2" type="HBoxContainer" parent="Axes"]
 offset_top = 48.0
-offset_right = 260.0
-offset_bottom = 68.0
-rect_min_size = Vector2(260, 20)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_right = 255.0
+offset_bottom = 74.0
 
 [node name="Label" type="Label" parent="Axes/Axis2"]
-offset_right = 50.0
-offset_bottom = 20.0
-rect_min_size = Vector2(50, 0)
-size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
-text = "Axis 2"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis2"]
-offset_left = 54.0
-offset_right = 260.0
-offset_bottom = 20.0
+offset_right = 57.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
+size_flags_stretch_ratio = 0.3
+text = "Axis 2"
+
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis2"]
+offset_left = 61.0
+offset_top = 3.0
+offset_right = 255.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_ehk82")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ujhcf")
 min_value = -100.0
 step = 0.0001
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
+show_percentage = false
 
 [node name="Value" type="Label" parent="Axes/Axis2/ProgressBar"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 1
 text = "0"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
 
 [node name="Axis3" type="HBoxContainer" parent="Axes"]
 offset_top = 72.0
-offset_right = 260.0
-offset_bottom = 92.0
-rect_min_size = Vector2(260, 20)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_right = 255.0
+offset_bottom = 98.0
 
 [node name="Label" type="Label" parent="Axes/Axis3"]
-offset_right = 50.0
-offset_bottom = 20.0
-rect_min_size = Vector2(50, 0)
-size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
-text = "Axis 3"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis3"]
-offset_left = 54.0
-offset_right = 260.0
-offset_bottom = 20.0
+offset_right = 57.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
+size_flags_stretch_ratio = 0.3
+text = "Axis 3"
+
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis3"]
+offset_left = 61.0
+offset_top = 3.0
+offset_right = 255.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_ehk82")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ujhcf")
 min_value = -100.0
 step = 0.0001
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
+show_percentage = false
 
 [node name="Value" type="Label" parent="Axes/Axis3/ProgressBar"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 1
 text = "0"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
 
 [node name="Axis4" type="HBoxContainer" parent="Axes"]
 offset_top = 96.0
-offset_right = 260.0
-offset_bottom = 116.0
-rect_min_size = Vector2(260, 20)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_right = 255.0
+offset_bottom = 122.0
 
 [node name="Label" type="Label" parent="Axes/Axis4"]
-offset_right = 50.0
-offset_bottom = 20.0
-rect_min_size = Vector2(50, 0)
-size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
-text = "Axis 4"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis4"]
-offset_left = 54.0
-offset_right = 260.0
-offset_bottom = 20.0
+offset_right = 57.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
+size_flags_stretch_ratio = 0.3
+text = "Axis 4"
+
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis4"]
+offset_left = 61.0
+offset_top = 3.0
+offset_right = 255.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_ehk82")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ujhcf")
 min_value = -100.0
 step = 0.0001
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
+show_percentage = false
 
 [node name="Value" type="Label" parent="Axes/Axis4/ProgressBar"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 1
 text = "0"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
 
 [node name="Axis5" type="HBoxContainer" parent="Axes"]
 offset_top = 120.0
-offset_right = 260.0
-offset_bottom = 140.0
-rect_min_size = Vector2(260, 20)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_right = 255.0
+offset_bottom = 146.0
 
 [node name="Label" type="Label" parent="Axes/Axis5"]
-offset_right = 50.0
-offset_bottom = 20.0
-rect_min_size = Vector2(50, 0)
-size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
-text = "Axis 5"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis5"]
-offset_left = 54.0
-offset_right = 260.0
-offset_bottom = 20.0
+offset_right = 57.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
+size_flags_stretch_ratio = 0.3
+text = "Axis 5"
+
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis5"]
+offset_left = 61.0
+offset_top = 3.0
+offset_right = 255.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_ehk82")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ujhcf")
 min_value = -100.0
 step = 0.0001
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
+show_percentage = false
 
 [node name="Value" type="Label" parent="Axes/Axis5/ProgressBar"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 1
 text = "0"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
 
 [node name="Axis6" type="HBoxContainer" parent="Axes"]
 offset_top = 144.0
-offset_right = 260.0
-offset_bottom = 164.0
-rect_min_size = Vector2(260, 20)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_right = 255.0
+offset_bottom = 170.0
 
 [node name="Label" type="Label" parent="Axes/Axis6"]
-offset_right = 50.0
-offset_bottom = 20.0
-rect_min_size = Vector2(50, 0)
-size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
-text = "Axis 6"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis6"]
-offset_left = 54.0
-offset_right = 260.0
-offset_bottom = 20.0
+offset_right = 57.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
+size_flags_stretch_ratio = 0.3
+text = "Axis 6"
+
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis6"]
+offset_left = 61.0
+offset_top = 3.0
+offset_right = 255.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_ehk82")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ujhcf")
 min_value = -100.0
 step = 0.0001
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
+show_percentage = false
 
 [node name="Value" type="Label" parent="Axes/Axis6/ProgressBar"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 1
 text = "0"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
 
 [node name="Axis7" type="HBoxContainer" parent="Axes"]
 offset_top = 168.0
-offset_right = 260.0
-offset_bottom = 188.0
-rect_min_size = Vector2(260, 20)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_right = 255.0
+offset_bottom = 194.0
 
 [node name="Label" type="Label" parent="Axes/Axis7"]
-offset_right = 50.0
-offset_bottom = 20.0
-rect_min_size = Vector2(50, 0)
-size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
-text = "Axis 7"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis7"]
-offset_left = 54.0
-offset_right = 260.0
-offset_bottom = 20.0
+offset_right = 57.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
+size_flags_stretch_ratio = 0.3
+text = "Axis 7"
+
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis7"]
+offset_left = 61.0
+offset_top = 3.0
+offset_right = 255.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_ehk82")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ujhcf")
 min_value = -100.0
 step = 0.0001
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
+show_percentage = false
 
 [node name="Value" type="Label" parent="Axes/Axis7/ProgressBar"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 1
 text = "0"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
 
 [node name="Axis8" type="HBoxContainer" parent="Axes"]
 offset_top = 192.0
-offset_right = 260.0
-offset_bottom = 212.0
-rect_min_size = Vector2(260, 20)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_right = 255.0
+offset_bottom = 218.0
 
 [node name="Label" type="Label" parent="Axes/Axis8"]
-offset_right = 50.0
-offset_bottom = 20.0
-rect_min_size = Vector2(50, 0)
-size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
-text = "Axis 8"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis8"]
-offset_left = 54.0
-offset_right = 260.0
-offset_bottom = 20.0
+offset_right = 57.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
+size_flags_stretch_ratio = 0.3
+text = "Axis 8"
+
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis8"]
+offset_left = 61.0
+offset_top = 3.0
+offset_right = 255.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_ehk82")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ujhcf")
 min_value = -100.0
 step = 0.0001
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
+show_percentage = false
 
 [node name="Value" type="Label" parent="Axes/Axis8/ProgressBar"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 1
 text = "0"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
 
 [node name="Axis9" type="HBoxContainer" parent="Axes"]
 offset_top = 216.0
-offset_right = 260.0
-offset_bottom = 236.0
-rect_min_size = Vector2(260, 20)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_right = 255.0
+offset_bottom = 242.0
 
 [node name="Label" type="Label" parent="Axes/Axis9"]
-offset_right = 50.0
-offset_bottom = 20.0
-rect_min_size = Vector2(50, 0)
-size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
-text = "Axis 9"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis9"]
-offset_left = 54.0
-offset_right = 260.0
-offset_bottom = 20.0
+offset_right = 57.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
+size_flags_stretch_ratio = 0.3
+text = "Axis 9"
+
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis9"]
+offset_left = 61.0
+offset_top = 3.0
+offset_right = 255.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_ehk82")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ujhcf")
 min_value = -100.0
 step = 0.0001
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
+show_percentage = false
 
 [node name="Value" type="Label" parent="Axes/Axis9/ProgressBar"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 1
 text = "0"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
 
 [node name="Axis10" type="HBoxContainer" parent="Axes"]
 offset_top = 240.0
-offset_right = 260.0
-offset_bottom = 260.0
-rect_min_size = Vector2(260, 20)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_right = 255.0
+offset_bottom = 266.0
 
 [node name="Label" type="Label" parent="Axes/Axis10"]
-offset_right = 50.0
-offset_bottom = 20.0
-rect_min_size = Vector2(50, 0)
-size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
-text = "Axis 10"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis10"]
-offset_left = 54.0
-offset_right = 260.0
-offset_bottom = 20.0
+offset_right = 57.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
+size_flags_stretch_ratio = 0.3
+text = "Axis 10"
+
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis10"]
+offset_left = 61.0
+offset_top = 3.0
+offset_right = 255.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_ehk82")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ujhcf")
 min_value = -100.0
 step = 0.0001
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
+show_percentage = false
 
 [node name="Value" type="Label" parent="Axes/Axis10/ProgressBar"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 1
 text = "0"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
 
 [node name="Buttons" type="VBoxContainer" parent="."]
+anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -250.0
 offset_top = -150.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_bottom = -34.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="Label" type="Label" parent="Buttons"]
-offset_right = 54.0
-offset_bottom = 20.0
-rect_min_size = Vector2(0, 20)
+offset_right = 66.0
+offset_bottom = 26.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Buttons:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ButtonGrid" type="GridContainer" parent="Buttons"]
-offset_top = 24.0
+offset_top = 30.0
 offset_right = 250.0
-offset_bottom = 92.0
-rect_min_size = Vector2(200, 0)
+offset_bottom = 116.0
 columns = 8
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="0" type="Label" parent="Buttons/ButtonGrid"]
-offset_right = 27.0
-offset_bottom = 20.0
-rect_min_size = Vector2(0, 20)
+offset_right = 28.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "0"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="1" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 31.0
-offset_right = 58.0
-offset_bottom = 20.0
-rect_min_size = Vector2(0, 20)
+offset_left = 32.0
+offset_right = 60.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "1"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="2" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 62.0
-offset_right = 89.0
-offset_bottom = 20.0
-rect_min_size = Vector2(0, 20)
+offset_left = 64.0
+offset_right = 92.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "2"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="3" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 93.0
-offset_right = 120.0
-offset_bottom = 20.0
-rect_min_size = Vector2(0, 20)
+offset_left = 96.0
+offset_right = 124.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "3"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="4" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 124.0
-offset_right = 151.0
-offset_bottom = 20.0
-rect_min_size = Vector2(0, 20)
+offset_left = 128.0
+offset_right = 156.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "4"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="5" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 155.0
-offset_right = 182.0
-offset_bottom = 20.0
-rect_min_size = Vector2(0, 20)
+offset_left = 160.0
+offset_right = 188.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "5"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="6" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 186.0
-offset_right = 213.0
-offset_bottom = 20.0
-rect_min_size = Vector2(0, 20)
+offset_left = 192.0
+offset_right = 219.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "6"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="7" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 217.0
-offset_right = 244.0
-offset_bottom = 20.0
-rect_min_size = Vector2(0, 20)
+offset_left = 223.0
+offset_right = 250.0
+offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "7"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="8" type="Label" parent="Buttons/ButtonGrid"]
-offset_top = 24.0
-offset_right = 27.0
-offset_bottom = 44.0
-rect_min_size = Vector2(0, 20)
+offset_top = 30.0
+offset_right = 28.0
+offset_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "8"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="9" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 31.0
-offset_top = 24.0
-offset_right = 58.0
-offset_bottom = 44.0
-rect_min_size = Vector2(0, 20)
+offset_left = 32.0
+offset_top = 30.0
+offset_right = 60.0
+offset_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "9"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="10" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 62.0
-offset_top = 24.0
-offset_right = 89.0
-offset_bottom = 44.0
-rect_min_size = Vector2(0, 20)
+offset_left = 64.0
+offset_top = 30.0
+offset_right = 92.0
+offset_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "10"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="11" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 93.0
-offset_top = 24.0
-offset_right = 120.0
-offset_bottom = 44.0
-rect_min_size = Vector2(0, 20)
+offset_left = 96.0
+offset_top = 30.0
+offset_right = 124.0
+offset_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "11"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="12" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 124.0
-offset_top = 24.0
-offset_right = 151.0
-offset_bottom = 44.0
-rect_min_size = Vector2(0, 20)
+offset_left = 128.0
+offset_top = 30.0
+offset_right = 156.0
+offset_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "12"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="13" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 155.0
-offset_top = 24.0
-offset_right = 182.0
-offset_bottom = 44.0
-rect_min_size = Vector2(0, 20)
+offset_left = 160.0
+offset_top = 30.0
+offset_right = 188.0
+offset_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "13"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="14" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 186.0
-offset_top = 24.0
-offset_right = 213.0
-offset_bottom = 44.0
-rect_min_size = Vector2(0, 20)
+offset_left = 192.0
+offset_top = 30.0
+offset_right = 219.0
+offset_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "14"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="15" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 217.0
-offset_top = 24.0
-offset_right = 244.0
-offset_bottom = 44.0
-rect_min_size = Vector2(0, 20)
+offset_left = 223.0
+offset_top = 30.0
+offset_right = 250.0
+offset_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "15"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="16" type="Label" parent="Buttons/ButtonGrid"]
-offset_top = 48.0
-offset_right = 27.0
-offset_bottom = 68.0
-rect_min_size = Vector2(0, 20)
+offset_top = 60.0
+offset_right = 28.0
+offset_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "16"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="17" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 31.0
-offset_top = 48.0
-offset_right = 58.0
-offset_bottom = 68.0
-rect_min_size = Vector2(0, 20)
+offset_left = 32.0
+offset_top = 60.0
+offset_right = 60.0
+offset_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "17"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="18" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 62.0
-offset_top = 48.0
-offset_right = 89.0
-offset_bottom = 68.0
-rect_min_size = Vector2(0, 20)
+offset_left = 64.0
+offset_top = 60.0
+offset_right = 92.0
+offset_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "18"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="19" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 93.0
-offset_top = 48.0
-offset_right = 120.0
-offset_bottom = 68.0
-rect_min_size = Vector2(0, 20)
+offset_left = 96.0
+offset_top = 60.0
+offset_right = 124.0
+offset_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "19"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="20" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 124.0
-offset_top = 48.0
-offset_right = 151.0
-offset_bottom = 68.0
-rect_min_size = Vector2(0, 20)
+offset_left = 128.0
+offset_top = 60.0
+offset_right = 156.0
+offset_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "20"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="21" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 155.0
-offset_top = 48.0
-offset_right = 182.0
-offset_bottom = 68.0
-rect_min_size = Vector2(0, 20)
+offset_left = 160.0
+offset_top = 60.0
+offset_right = 188.0
+offset_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "21"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="22" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 186.0
-offset_top = 48.0
-offset_right = 213.0
-offset_bottom = 68.0
-rect_min_size = Vector2(0, 20)
+offset_left = 192.0
+offset_top = 60.0
+offset_right = 219.0
+offset_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "22"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="23" type="Label" parent="Buttons/ButtonGrid"]
-offset_left = 217.0
-offset_top = 48.0
-offset_right = 244.0
-offset_bottom = 68.0
-rect_min_size = Vector2(0, 20)
+offset_left = 223.0
+offset_top = 60.0
+offset_right = 250.0
+offset_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_colors/font_color = Color(1, 1, 1, 0.501961)
 text = "23"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Vibration" type="VBoxContainer" parent="."]
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -140.0
 offset_right = 260.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+grow_vertical = 0
 
 [node name="Weak" type="HBoxContainer" parent="Vibration"]
-offset_right = 260.0
-offset_bottom = 24.0
-rect_min_size = Vector2(260, 0)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_right = 270.0
+offset_bottom = 31.0
 
 [node name="Label" type="Label" parent="Vibration/Weak"]
-offset_right = 182.0
-offset_bottom = 24.0
+offset_right = 183.0
+offset_bottom = 31.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Vibration Weak Motor:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Value" type="SpinBox" parent="Vibration/Weak"]
-offset_left = 186.0
-offset_right = 260.0
-offset_bottom = 24.0
+offset_left = 187.0
+offset_right = 270.0
+offset_bottom = 31.0
 size_flags_vertical = 3
 max_value = 1.0
 step = 0.05
 value = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Strong" type="HBoxContainer" parent="Vibration"]
-offset_top = 28.0
-offset_right = 260.0
-offset_bottom = 52.0
-rect_min_size = Vector2(260, 0)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_top = 35.0
+offset_right = 270.0
+offset_bottom = 66.0
 
 [node name="Label" type="Label" parent="Vibration/Strong"]
-offset_right = 182.0
-offset_bottom = 24.0
+offset_right = 183.0
+offset_bottom = 31.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Vibration Strong Motor:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Value" type="SpinBox" parent="Vibration/Strong"]
-offset_left = 186.0
-offset_right = 260.0
-offset_bottom = 24.0
+offset_left = 187.0
+offset_right = 270.0
+offset_bottom = 31.0
 size_flags_vertical = 3
 max_value = 1.0
 step = 0.05
 value = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Duration" type="HBoxContainer" parent="Vibration"]
-offset_top = 56.0
-offset_right = 260.0
-offset_bottom = 80.0
-rect_min_size = Vector2(260, 0)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_top = 70.0
+offset_right = 270.0
+offset_bottom = 101.0
 
 [node name="Label" type="Label" parent="Vibration/Duration"]
-offset_right = 182.0
-offset_bottom = 24.0
+offset_right = 183.0
+offset_bottom = 31.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Vibration Duration:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Value" type="SpinBox" parent="Vibration/Duration"]
-offset_left = 186.0
-offset_right = 260.0
-offset_bottom = 24.0
+offset_left = 187.0
+offset_right = 270.0
+offset_bottom = 31.0
 size_flags_vertical = 3
 max_value = 10.0
 step = 0.1
 value = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HSeparator" type="HSeparator" parent="Vibration"]
 modulate = Color(1, 1, 1, 0)
-offset_top = 84.0
-offset_right = 260.0
-offset_bottom = 94.0
-rect_min_size = Vector2(0, 10)
+offset_top = 105.0
+offset_right = 270.0
+offset_bottom = 109.0
 
 [node name="Buttons" type="HBoxContainer" parent="Vibration"]
-offset_top = 98.0
-offset_right = 260.0
-offset_bottom = 128.0
-rect_min_size = Vector2(260, 30)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_top = 113.0
+offset_right = 270.0
+offset_bottom = 144.0
 
 [node name="Start" type="Button" parent="Vibration/Buttons"]
-offset_right = 116.0
-offset_bottom = 30.0
-focus_mode = 0
+offset_right = 129.0
+offset_bottom = 31.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+focus_mode = 0
 text = "Start Vibration"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VSeparator" type="VSeparator" parent="Vibration/Buttons"]
 modulate = Color(1, 1, 1, 0)
-offset_left = 120.0
-offset_right = 140.0
-offset_bottom = 30.0
-rect_min_size = Vector2(20, 0)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_left = 133.0
+offset_right = 137.0
+offset_bottom = 31.0
 
 [node name="Stop" type="Button" parent="Vibration/Buttons"]
-offset_left = 144.0
-offset_right = 260.0
-offset_bottom = 30.0
+offset_left = 141.0
+offset_right = 270.0
+offset_bottom = 31.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Stop Vibration"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -250.0
-offset_top = -42.0
-offset_bottom = -12.0
+offset_left = -261.0
+offset_top = -30.0
+offset_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
 alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Clear" type="Button" parent="VBoxContainer"]
-offset_left = 11.0
-offset_right = 130.0
-offset_bottom = 30.0
+offset_right = 141.0
+offset_bottom = 31.0
 text = "Set Raw Mapping"
 
 [node name="Remap" type="Button" parent="VBoxContainer"]
-offset_left = 134.0
-offset_right = 190.0
-offset_bottom = 30.0
+offset_left = 145.0
+offset_right = 207.0
+offset_bottom = 31.0
 text = "Remap"
 
 [node name="Show" type="Button" parent="VBoxContainer"]
-offset_left = 194.0
-offset_right = 239.0
-offset_bottom = 30.0
+offset_left = 211.0
+offset_right = 261.0
+offset_bottom = 31.0
 text = "Show"
 
-[node name="RemapWizard" parent="." instance=ExtResource( 3 )]
+[node name="RemapWizard" parent="." instance=ExtResource("3")]
 
 [connection signal="pressed" from="Vibration/Buttons/Start" to="." method="_on_start_vibration_pressed"]
 [connection signal="pressed" from="Vibration/Buttons/Stop" to="." method="_on_stop_vibration_pressed"]

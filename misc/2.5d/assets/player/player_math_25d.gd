@@ -11,8 +11,7 @@ func _process(delta):
 		get_tree().quit()
 
 	if Input.is_action_just_pressed(&"view_cube_demo"):
-		#warning-ignore:return_value_discarded
-		get_tree().change_scene("res://assets/cube/cube.tscn")
+		get_tree().change_scene_to_file("res://assets/cube/cube.tscn")
 		return
 
 	if Input.is_action_just_pressed(&"toggle_isometric_controls"):
@@ -38,12 +37,11 @@ func _horizontal_movement(delta):
 	var movement_vec2 = Input.get_vector(&"move_left", &"move_right", &"move_forward", &"move_back")
 	var move_dir = localX * movement_vec2.x + localZ * movement_vec2.y
 
-	move_dir = move_dir * delta * 600
+	velocity = move_dir * delta * 600
 	if Input.is_action_pressed(&"movement_modifier"):
-		move_dir /= 2
+		velocity /= 2
 
-	#warning-ignore:return_value_discarded
-	move_and_slide(move_dir)
+	move_and_slide()
 
 
 # Checks Jump and applies gravity and vertical speed via move_and_collide.

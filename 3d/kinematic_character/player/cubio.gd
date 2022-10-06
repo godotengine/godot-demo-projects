@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
-const MAX_SPEED = 3
-const JUMP_SPEED = 5
-const ACCELERATION = 2
+const MAX_SPEED = 3.5
+const JUMP_SPEED = 6.5
+const ACCELERATION = 4
 const DECELERATION = 4
 
 @onready var camera = $Target/Camera3D
@@ -12,8 +12,10 @@ const DECELERATION = 4
 func _physics_process(delta):
 	if Input.is_action_just_pressed(&"exit"):
 		get_tree().quit()
-	if Input.is_action_just_pressed(&"reset_position"):
+	if Input.is_action_just_pressed(&"reset_position") or global_position.y < - 6:
+		# Pressed the reset key or fell off the ground.
 		position = start_position
+		velocity = Vector3.ZERO
 
 	var dir = Vector3()
 	dir.x = Input.get_axis(&"move_left", &"move_right")

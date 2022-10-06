@@ -22,4 +22,4 @@ nodes which are pinned together using
 
 ## Screenshots
 
-![Screenshot](screenshots/tow.png)
+![Screenshot](screenshots/truck_town.webp)

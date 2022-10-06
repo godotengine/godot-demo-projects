@@ -7,7 +7,7 @@ const SPEED := 10.0
 var cam_rotation := 0.0
 var path: PackedVector3Array
 
-@onready var robot: Position3D = $RobotBase
+@onready var robot: Marker3D = $RobotBase
 @onready var camera: Camera3D = $CameraBase/Camera3D
 
 func _ready():

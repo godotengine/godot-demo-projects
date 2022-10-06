@@ -6,16 +6,16 @@ extends Control
 @onready var mesh = $VBoxContainer/Connect/Mesh
 
 func _ready():
-	client.lobby_joined.connect(_lobby_joined)
-	client.lobby_sealed.connect(_lobby_sealed)
-	client.connected.connect(_connected)
-	client.disconnected.connect(_disconnected)
+	client.lobby_joined.connect(self._lobby_joined)
+	client.lobby_sealed.connect(self._lobby_sealed)
+	client.connected.connect(self._connected)
+	client.disconnected.connect(self._disconnected)
 
-	multiplayer.connected_to_server.connect(_mp_server_connected)
-	multiplayer.connection_failed.connect(_mp_server_disconnect)
-	multiplayer.server_disconnected.connect(_mp_server_disconnect)
-	multiplayer.peer_connected.connect(_mp_peer_connected)
-	multiplayer.peer_disconnected.connect(_mp_peer_disconnected)
+	multiplayer.connected_to_server.connect(self._mp_server_connected)
+	multiplayer.connection_failed.connect(self._mp_server_disconnect)
+	multiplayer.server_disconnected.connect(self._mp_server_disconnect)
+	multiplayer.peer_connected.connect(self._mp_peer_connected)
+	multiplayer.peer_disconnected.connect(self._mp_peer_disconnected)
 
 
 @rpc(any_peer, call_local)

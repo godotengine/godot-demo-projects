@@ -1,6 +1,6 @@
 extends Control
 
-var mousepos
+var mouse_position = Vector2()
 
 @onready var observer = $"../Observer"
 
@@ -17,13 +17,13 @@ func _physics_process(_delta):
 	else:
 		modetext += "Windowed\n"
 	if DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_RESIZE_DISABLED):
-		modetext += "FixedSize\n"
+		modetext += "Fixed Size\n"
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_MINIMIZED:
 		modetext += "Minimized\n"
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_MAXIMIZED:
 		modetext += "Maximized\n"
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		modetext += "MouseGrab\n"
+		modetext += "Mouse Captured\n"
 		$Buttons/Label_MouseModeCaptured_KeyInfo.show()
 	else:
 		$Buttons/Label_MouseModeCaptured_KeyInfo.hide()
@@ -31,12 +31,13 @@ func _physics_process(_delta):
 	$Labels/Label_Mode.text = modetext
 	$Labels/Label_Position.text = str("Position: ", DisplayServer.window_get_position())
 	$Labels/Label_Size.text = str("Size: ", DisplayServer.window_get_size())
-	$Labels/Label_MousePosition.text = str("Mouse Position: ", mousepos)
+	$Labels/Label_MousePosition.text = str("Mouse Position: ", mouse_position)
 	$Labels/Label_Screen_Count.text = str("Screen_Count: ", DisplayServer.get_screen_count())
 	$Labels/Label_Screen_Current.text = str("Screen: ", DisplayServer.window_get_current_screen())
 	$Labels/Label_Screen0_Resolution.text = str("Screen0 Resolution:\n", DisplayServer.screen_get_size())
 	$Labels/Label_Screen0_Position.text = str("Screen0 Position:\n", DisplayServer.screen_get_position())
 	$Labels/Label_Screen0_DPI.text = str("Screen0 DPI: ", DisplayServer.screen_get_dpi())
+	$Labels/Label_Screen0_RefreshRate.text = "Screen0 Refresh Rate: %.2f Hz" % DisplayServer.screen_get_refresh_rate()
 
 	if DisplayServer.get_screen_count() > 1:
 		$Buttons/Button_Screen0.show()
@@ -47,12 +48,14 @@ func _physics_process(_delta):
 		$Labels/Label_Screen1_Resolution.text = str("Screen1 Resolution:\n", DisplayServer.window_get_size(1))
 		$Labels/Label_Screen1_Position.text = str("Screen1 Position:\n", DisplayServer.screen_get_position(1))
 		$Labels/Label_Screen1_DPI.text = str("Screen1 DPI: ", DisplayServer.screen_get_dpi(1))
+		$Labels/Label_Screen1_RefreshRate.text = "Screen1 Refresh Rate: %.2f Hz" % DisplayServer.screen_get_refresh_rate(1)
 	else:
 		$Buttons/Button_Screen0.hide()
 		$Buttons/Button_Screen1.hide()
 		$Labels/Label_Screen1_Resolution.hide()
 		$Labels/Label_Screen1_Position.hide()
 		$Labels/Label_Screen1_DPI.hide()
+		$Labels/Label_Screen1_RefreshRate.hide()
 
 	$Buttons/Button_Fullscreen.set_pressed(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)
 	$Buttons/Button_FixedSize.set_pressed(DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_RESIZE_DISABLED))
@@ -63,9 +66,9 @@ func _physics_process(_delta):
 	$Buttons/Button_MouseModeCaptured.set_pressed(Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED)
 
 
-func _unhandled_input(event):
+func _input(event):
 	if event is InputEventMouseMotion:
-		mousepos = event.position
+		mouse_position = event.position
 
 	if event is InputEventKey:
 		if Input.is_action_pressed(&"mouse_mode_visible"):
@@ -78,6 +81,14 @@ func _unhandled_input(event):
 
 		if Input.is_action_pressed(&"mouse_mode_captured"):
 			_on_Button_MouseModeCaptured_pressed()
+
+		if Input.is_action_pressed(&"mouse_mode_confined"):
+			observer.state = observer.STATE_MENU
+			_on_Button_MouseModeConfined_pressed()
+
+		if Input.is_action_pressed(&"mouse_mode_confined_hidden"):
+			observer.state = observer.STATE_MENU
+			_on_Button_MouseModeConfinedHidden_pressed()
 
 
 func check_wm_api():
@@ -131,7 +142,7 @@ func _on_Button_MoveTo_pressed():
 
 
 func _on_Button_Resize_pressed():
-	DisplayServer.window_set_size(Vector2(1024, 768))
+	DisplayServer.window_set_size(Vector2(1280, 720))
 
 
 func _on_Button_Screen0_pressed():
@@ -181,3 +192,10 @@ func _on_Button_MouseModeHidden_pressed():
 func _on_Button_MouseModeCaptured_pressed():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	observer.state = observer.STATE_GRAB
+
+func _on_Button_MouseModeConfined_pressed():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+
+
+func _on_Button_MouseModeConfinedHidden_pressed():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)

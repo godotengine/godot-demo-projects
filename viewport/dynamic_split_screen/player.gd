@@ -3,14 +3,20 @@ extends CharacterBody3D
 # Moves the player
 
 @export_range(1, 2) var player_id: int = 1
-@export var walk_speed: float = 20.0
+@export var walk_speed: float = 2.5
 
 
 func _physics_process(_delta):
-	#var velocity = Vector3.ZERO
-	velocity.x = Input.get_action_strength("move_right_player" + str(player_id))
-	velocity.x -= Input.get_action_strength("move_left_player" + str(player_id))
-	velocity.z = Input.get_action_strength("move_down_player" + str(player_id))
-	velocity.z -= Input.get_action_strength("move_up_player" + str(player_id))
-	velocity = velocity.normalized() * walk_speed
+	var move_direction = Input.get_vector(
+			"move_left_player" + str(player_id),
+			"move_right_player" + str(player_id),
+			"move_up_player" + str(player_id),
+			"move_down_player" + str(player_id),
+	)
+	velocity.x += move_direction.x * walk_speed
+	velocity.z += move_direction.y * walk_speed
+
+	# Apply friction.
+	velocity *= 0.9
+
 	move_and_slide()

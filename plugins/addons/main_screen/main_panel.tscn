@@ -1,24 +1,23 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://b8623u0gk1acu"]
 
-[ext_resource path="res://addons/main_screen/print_hello.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://addons/main_screen/print_hello.gd" id="1"]
 
 [node name="MainPanel" type="CenterContainer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PrintHello" type="Button" parent="."]
-offset_left = 472.0
-offset_top = 290.0
-offset_right = 552.0
-offset_bottom = 310.0
-text = "Print Hello"
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
+offset_left = 460.0
+offset_top = 297.0
+offset_right = 691.0
+offset_bottom = 351.0
+text = "Print Hello
+(check Output bottom panel)"
+script = ExtResource("1")
 
 [connection signal="pressed" from="PrintHello" to="PrintHello" method="_on_PrintHello_pressed"]

@@ -8,8 +8,8 @@ var channel = peer.create_data_channel("chat", {"negotiated": true, "id": 1})
 
 func _ready():
 	# Connect all functions.
-	peer.ice_candidate_created.connect(_on_ice_candidate)
-	peer.session_description_created.connect(_on_session)
+	peer.ice_candidate_created.connect(self._on_ice_candidate)
+	peer.session_description_created.connect(self._on_session)
 
 	# Register to the local signaling server (see below for the implementation).
 	Signaling.register(String(get_path()))

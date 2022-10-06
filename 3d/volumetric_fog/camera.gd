@@ -49,10 +49,10 @@ func _input(event):
 		get_world_3d().environment.volumetric_fog_temporal_reprojection_enabled = not get_world_3d().environment.volumetric_fog_temporal_reprojection_enabled
 		update_label()
 	elif event.is_action_pressed("increase_temporal_reprojection"):
-		get_world_3d().environment.volumetric_fog_temporal_reprojection_amount = clamp(get_world_3d().environment.volumetric_fog_temporal_reprojection_amount + 0.01, 0.0, 0.99)
+		get_world_3d().environment.volumetric_fog_temporal_reprojection_amount = clamp(get_world_3d().environment.volumetric_fog_temporal_reprojection_amount + 0.01, 0.5, 0.99)
 		update_label()
 	elif event.is_action_pressed("decrease_temporal_reprojection"):
-		get_world_3d().environment.volumetric_fog_temporal_reprojection_amount = clamp(get_world_3d().environment.volumetric_fog_temporal_reprojection_amount - 0.01, 0.0, 0.99)
+		get_world_3d().environment.volumetric_fog_temporal_reprojection_amount = clamp(get_world_3d().environment.volumetric_fog_temporal_reprojection_amount - 0.01, 0.5, 0.99)
 		update_label()
 	elif event.is_action_pressed("increase_fog_density"):
 		get_world_3d().environment.volumetric_fog_density = clamp(get_world_3d().environment.volumetric_fog_density + 0.01, 0.0, 1.0)
@@ -64,6 +64,6 @@ func _input(event):
 
 func update_label():
 	if get_world_3d().environment.volumetric_fog_temporal_reprojection_enabled:
-		label.text = "Fog density: %.2f\nTemporal reprojection: Enabled\nTemporal reprojection strength: %.3f" % [get_world_3d().environment.volumetric_fog_density, get_world_3d().environment.volumetric_fog_temporal_reprojection_amount]
+		label.text = "Fog density: %.2f\nTemporal reprojection: Enabled\nTemporal reprojection strength: %.2f" % [get_world_3d().environment.volumetric_fog_density, get_world_3d().environment.volumetric_fog_temporal_reprojection_amount]
 	else:
 		label.text = "Fog density: %.2f\nTemporal reprojection: Disabled" % get_world_3d().environment.volumetric_fog_density

@@ -1,25 +1,22 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://bftavngs5kq7e"]
 
-[ext_resource path="res://models/white_wood.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://5wiey7d4yffc" path="res://models/white_wood.png" id="1"]
+[ext_resource type="ArrayMesh" uid="uid://h65pkfq5sgmy" path="res://models/cube.mesh" id="1_nx6dl"]
 
-[sub_resource type="BoxShape3D" id=1]
-extents = Vector3(0.5, 0.5, 0.5)
+[sub_resource type="BoxShape3D" id="BoxShape3D_gh4dm"]
 
-[sub_resource type="StandardMaterial3D" id=3]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y4xt8"]
 resource_name = "Material"
-albedo_color = Color(0.917647, 0.384314, 0.0823529, 1)
-albedo_texture = ExtResource( 1 )
+albedo_color = Color(0.92, 0.80822, 0.1748, 1)
+albedo_texture = ExtResource("1")
 roughness = 0.75
+texture_filter = 5
 
-[sub_resource type="BoxMesh" id=2]
-material = SubResource( 3 )
-size = Vector3(1, 1, 1)
-
-[node name="cube_rigidbody" type="RigidDynamicBody3D"]
+[node name="cube_rigidbody" type="RigidBody3D"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource("BoxShape3D_gh4dm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource( 2 )
-surface_material_override/0 = null
+mesh = ExtResource("1_nx6dl")
+surface_material_override/0 = SubResource("StandardMaterial3D_y4xt8")

@@ -7,38 +7,38 @@
 albedo_color = Color(0.25098, 0.470588, 0.996078, 1)
 
 [sub_resource type="BoxMesh" id="6"]
-material = SubResource( "5" )
+material = SubResource("5")
 
 [sub_resource type="StandardMaterial3D" id="7"]
 albedo_color = Color(0.435294, 0.917647, 0.380392, 1)
 
 [sub_resource type="BoxMesh" id="8"]
-material = SubResource( "7" )
+material = SubResource("7")
 
 [sub_resource type="StandardMaterial3D" id="9"]
 albedo_color = Color(0.862745, 0.764706, 0.12549, 1)
 
 [sub_resource type="BoxMesh" id="10"]
-material = SubResource( "9" )
+material = SubResource("9")
 
 [sub_resource type="StandardMaterial3D" id="11"]
 albedo_color = Color(0.996078, 0.266667, 0.25098, 1)
 
 [sub_resource type="BoxMesh" id="12"]
-material = SubResource( "11" )
+material = SubResource("11")
 
 [sub_resource type="StandardMaterial3D" id="1"]
 albedo_color = Color(0.6, 0.564706, 0.423529, 1)
 
 [sub_resource type="BoxMesh" id="2"]
-material = SubResource( "1" )
+material = SubResource("1")
 size = Vector3(16, 2, 16)
 
 [sub_resource type="StandardMaterial3D" id="3"]
 albedo_color = Color(0.788235, 0.788235, 0.788235, 1)
 
 [sub_resource type="BoxMesh" id="4"]
-material = SubResource( "3" )
+material = SubResource("3")
 size = Vector3(4, 1.5, 4)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1hqbf"]
@@ -46,83 +46,88 @@ sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
 [sub_resource type="Sky" id="Sky_47fsp"]
-sky_material = SubResource( "ProceduralSkyMaterial_1hqbf" )
+sky_material = SubResource("ProceduralSkyMaterial_1hqbf")
 
 [sub_resource type="Environment" id="Environment_ob0ys"]
 background_mode = 2
-sky = SubResource( "Sky_47fsp" )
-tonemap_mode = 2
-glow_enabled = true
+sky = SubResource("Sky_47fsp")
+tonemap_mode = 3
+tonemap_white = 6.0
 
 [node name="Main" type="Node3D"]
 
 [node name="BlueCube" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
-mesh = SubResource( "6" )
+mesh = SubResource("6")
 
-[node name="WaypointAnchor" type="Position3D" parent="BlueCube"]
+[node name="WaypointAnchor" type="Marker3D" parent="BlueCube"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Waypoint" parent="BlueCube/WaypointAnchor" instance=ExtResource( "2" )]
+[node name="Waypoint" parent="BlueCube/WaypointAnchor" instance=ExtResource("2")]
 modulate = Color(0.501961, 0.764706, 1, 1)
 text = "Blue Waypoint"
 
 [node name="GreenCube" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
-mesh = SubResource( "8" )
+mesh = SubResource("8")
 
-[node name="WaypointAnchor" type="Position3D" parent="GreenCube"]
+[node name="WaypointAnchor" type="Marker3D" parent="GreenCube"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Waypoint" parent="GreenCube/WaypointAnchor" instance=ExtResource( "2" )]
+[node name="Waypoint" parent="GreenCube/WaypointAnchor" instance=ExtResource("2")]
 modulate = Color(0.419608, 1, 0.427451, 1)
 text = "Green Waypoint"
 
 [node name="YellowCube" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
-mesh = SubResource( "10" )
+mesh = SubResource("10")
 
-[node name="WaypointAnchor" type="Position3D" parent="YellowCube"]
+[node name="WaypointAnchor" type="Marker3D" parent="YellowCube"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Waypoint" parent="YellowCube/WaypointAnchor" instance=ExtResource( "2" )]
+[node name="Waypoint" parent="YellowCube/WaypointAnchor" instance=ExtResource("2")]
 modulate = Color(1, 0.992157, 0.419608, 1)
 text = "Yellow Waypoint (non-sticky)"
 sticky = false
 
 [node name="RedCube" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
-mesh = SubResource( "12" )
+mesh = SubResource("12")
 
-[node name="WaypointAnchor" type="Position3D" parent="RedCube"]
+[node name="WaypointAnchor" type="Marker3D" parent="RedCube"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Waypoint" parent="RedCube/WaypointAnchor" instance=ExtResource( "2" )]
+[node name="Waypoint" parent="RedCube/WaypointAnchor" instance=ExtResource("2")]
 modulate = Color(1, 0.466667, 0.427451, 1)
 text = "Red Waypoint"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 8)
-script = ExtResource( "1" )
+script = ExtResource("1")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 325.0
 offset_bottom = 36.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 18
 text = "Press Esc or F10 to toggle mouse capture"
 
 [node name="Ground" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
-mesh = SubResource( "2" )
+mesh = SubResource("2")
 
 [node name="WhiteCube" type="MeshInstance3D" parent="."]
-mesh = SubResource( "4" )
+mesh = SubResource("4")
 
 [node name="Environment" type="WorldEnvironment" parent="."]
-environment = SubResource( "Environment_ob0ys" )
+environment = SubResource("Environment_ob0ys")
 
 [node name="Sun" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866026, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
-directional_shadow_max_distance = 250.0
+shadow_bias = 0.04
+shadow_blur = 1.5
+directional_shadow_max_distance = 40.0
