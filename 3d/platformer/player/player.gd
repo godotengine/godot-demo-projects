@@ -28,7 +28,7 @@ var shoot_blend = 0
 
 
 func _ready():
-	get_node(^"AnimationTree").set_active(true)
+	get_node("AnimationTree").set_active(true)
 
 
 func _physics_process(delta):
@@ -43,17 +43,17 @@ func _physics_process(delta):
 	var hspeed = hv.length() # Horizontal speed.
 
 	# Player input.
-	var cam_basis = get_node(^"Target/Camera3D").get_global_transform().basis
+	var cam_basis = get_node("Target/Camera3D").get_global_transform().basis
 	var movement_vec2 = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var dir = cam_basis * Vector3(movement_vec2.x, 0, movement_vec2.y)
 	dir.y = 0
 	dir = dir.normalized()
 
-	var jump_attempt = Input.is_action_pressed(&"jump")
-	var shoot_attempt = Input.is_action_pressed(&"shoot")
+	var jump_attempt = Input.is_action_pressed("jump")
+	var shoot_attempt = Input.is_action_pressed("shoot")
 
 	if is_on_floor():
-		var sharp_turn = hspeed > 0.1 and rad2deg(acos(dir.dot(hdir))) > SHARP_TURN_THRESHOLD
+		var sharp_turn = hspeed > 0.1 and rad_to_deg(acos(dir.dot(hdir))) > SHARP_TURN_THRESHOLD
 
 		if dir.length() > 0.1 and not sharp_turn:
 			if hspeed > 0.001:
@@ -70,7 +70,7 @@ func _physics_process(delta):
 
 		hv = hdir * hspeed
 
-		var mesh_xform = get_node(^"Armature").get_transform()
+		var mesh_xform = get_node("Armature").get_transform()
 		var facing_mesh = -mesh_xform.basis[0].normalized()
 		facing_mesh = (facing_mesh - Vector3.UP * facing_mesh.dot(Vector3.UP)).normalized()
 
@@ -78,12 +78,12 @@ func _physics_process(delta):
 			facing_mesh = adjust_facing(facing_mesh, dir, delta, 1.0 / hspeed * TURN_SPEED, Vector3.UP)
 		var m3 = Basis(-facing_mesh, Vector3.UP, -facing_mesh.cross(Vector3.UP).normalized()).scaled(CHAR_SCALE)
 
-		get_node(^"Armature").set_transform(Transform3D(m3, mesh_xform.origin))
+		get_node("Armature").set_transform(Transform3D(m3, mesh_xform.origin))
 
 		if not jumping and jump_attempt:
 			vv = JUMP_VELOCITY
 			jumping = true
-			get_node(^"SoundJump").play()
+			get_node("SoundJump").play()
 	else:
 		anim = Anim.AIR
 
@@ -105,8 +105,10 @@ func _physics_process(delta):
 	if is_on_floor():
 		movement_dir = linear_velocity
 
-	# TODO: This information should be set to the CharacterBody properties instead of arguments: , -gravity.normalized(
+	set_velocity(linear_velocity)
+	set_up_direction(-gravity.normalized())
 	move_and_slide()
+	linear_velocity = velocity
 
 	if shoot_blend > 0:
 		shoot_blend -= delta * SHOOT_SCALE
@@ -116,11 +118,11 @@ func _physics_process(delta):
 	if shoot_attempt and not prev_shoot:
 		shoot_blend = SHOOT_TIME
 		var bullet = preload("res://player/bullet/bullet.tscn").instantiate()
-		bullet.set_transform(get_node(^"Armature/Bullet").get_global_transform().orthonormalized())
+		bullet.set_transform(get_node("Armature/Bullet").get_global_transform().orthonormalized())
 		get_parent().add_child(bullet)
-		bullet.set_linear_velocity(get_node(^"Armature/Bullet").get_global_transform().basis[2].normalized() * BULLET_SPEED)
+		bullet.set_linear_velocity(get_node("Armature/Bullet").get_global_transform().basis[2].normalized() * BULLET_SPEED)
 		bullet.add_collision_exception_with(self) # Add it to bullet.
-		get_node(^"SoundShoot").play()
+		get_node("SoundShoot").play()
 
 	prev_shoot = shoot_attempt
 

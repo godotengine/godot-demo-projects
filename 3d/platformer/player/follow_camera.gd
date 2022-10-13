@@ -15,7 +15,7 @@ func _ready():
 	# Find collision exceptions for ray.
 	var node = self
 	while node:
-		if node is RigidDynamicBody3D:
+		if node is RigidBody3D:
 			collision_exception.append(node.get_rid())
 			break
 		else:
@@ -45,19 +45,19 @@ func _physics_process(dt):
 	# Check autoturn.
 	var ds = PhysicsServer3D.space_get_direct_state(get_world_3d().get_space())
 
-	var col_left = ds.intersect_ray(target, target + Basis(Vector3.UP, deg2rad(autoturn_ray_aperture)) * (delta), collision_exception)
+	var col_left = ds.intersect_ray(target, target + Basis(Vector3.UP, deg_to_rad(autoturn_ray_aperture)) * delta, collision_exception)
 	var col = ds.intersect_ray(target, target + delta, collision_exception)
-	var col_right = ds.intersect_ray(target, target + Basis(Vector3.UP, deg2rad(-autoturn_ray_aperture)) * (delta), collision_exception)
+	var col_right = ds.intersect_ray(target, target + Basis(Vector3.UP, deg_to_rad(-autoturn_ray_aperture)) * delta, collision_exception)
 
 	if not col.is_empty():
 		# If main ray was occluded, get camera closer, this is the worst case scenario.
 		delta = col.position - target
 	elif not col_left.is_empty() and col_right.is_empty():
 		# If only left ray is occluded, turn the camera around to the right.
-		delta = Basis(Vector3.UP, deg2rad(-dt * (autoturn_speed)) * delta)
+		delta = Basis(Vector3.UP, deg_to_rad(-dt * autoturn_speed)) * delta
 	elif col_left.is_empty() and not col_right.is_empty():
 		# If only right ray is occluded, turn the camera around to the left.
-		delta = Basis(Vector3.UP, deg2rad(dt  *autoturn_speed)) * (delta)
+		delta = Basis(Vector3.UP, deg_to_rad(dt  *autoturn_speed)) * delta
 	# Do nothing otherwise, left and right are occluded but center is not, so do not autoturn.
 
 	# Apply lookat.
@@ -70,5 +70,5 @@ func _physics_process(dt):
 
 	# Turn a little up or down.
 	var t = get_transform()
-	t.basis = Basis(t.basis[0], deg2rad(angle_v_adjust)) * t.basis
+	t.basis = Basis(t.basis[0], deg_to_rad(angle_v_adjust)) * t.basis
 	set_transform(t)

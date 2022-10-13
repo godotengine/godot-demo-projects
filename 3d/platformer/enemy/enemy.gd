@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 extends RigidDynamicBody3D
+=======
+extends RigidBody3D
+>>>>>>> Stashed changes
 
 const ACCEL = 5.0
 const DEACCEL = 20.0
@@ -58,8 +62,13 @@ func _integrate_forces(state):
 		if prev_advance:
 			rot_dir = 1
 
+<<<<<<< Updated upstream
 		dir = Basis(up, rot_dir * ROT_SPEED * (delta) * dir)
 		get_node(^"Armature").set_transform(Transform3D().looking_at(-dir, up))
+=======
+		dir = Basis(up, rot_dir * ROT_SPEED * delta) * dir
+		get_node("Armature").set_transform(Transform3D().looking_at(-dir, up))
+>>>>>>> Stashed changes
 
 	var dspeed = deaccel_dir.dot(lv)
 	dspeed -= DEACCEL * delta
