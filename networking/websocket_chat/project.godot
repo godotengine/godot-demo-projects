@@ -6,18 +6,31 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
+
+_global_script_classes=[{
+"base": "Node",
+"class": &"WebSocketClient",
+"language": &"GDScript",
+"path": "res://websocket/WebSocketClient.gd"
+}, {
+"base": "Node",
+"class": &"WebSocketServer",
+"language": &"GDScript",
+"path": "res://websocket/WebSocketServer.gd"
+}]
+_global_script_class_icons={
+"WebSocketClient": "",
+"WebSocketServer": ""
+}
 
 [application]
 
 config/name="WebSocket Chat Demo"
 config/description="This is a demo of a simple chat implemented using WebSockets, showing both how to host a websocket server from Godot and how to connect to it."
-run/main_scene="res://combo/combo.tscn"
+run/main_scene="res://combo.tscn"
+config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
-
-[autoload]
-
-Utils="*res://utils.gd"
 
 [gdnative]
 

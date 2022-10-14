@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://ph5ghsflqegf"]
+
+[ext_resource type="PackedScene" uid="uid://cyvrywci15kev" path="res://chat.tscn" id="1_cfcun"]
+[ext_resource type="Script" path="res://websocket/WebSocketClient.gd" id="2_m4g4y"]
+[ext_resource type="Script" path="res://client.gd" id="2_opbid"]
+
+[node name="Client" instance=ExtResource("1_cfcun")]
+script = ExtResource("2_opbid")
+
+[node name="WebSocketClient" type="Node" parent="." index="0"]
+script = ExtResource("2_m4g4y")
+supported_protocols = PackedStringArray("demo-chat")
+
+[node name="Panel" parent="." index="1"]
+layout_mode = 1
+
+[node name="VBoxContainer" parent="Panel" index="0"]
+layout_mode = 1
+
+[node name="Listen" parent="Panel/VBoxContainer" index="0"]
+layout_mode = 2
+
+[node name="Connect" parent="Panel/VBoxContainer" index="1"]
+layout_mode = 2
+
+[node name="Host" parent="Panel/VBoxContainer/Connect" index="0"]
+layout_mode = 2
+offset_right = 1076.0
+
+[node name="Connect" parent="Panel/VBoxContainer/Connect" index="1"]
+layout_mode = 2
+offset_left = 1080.0
+offset_right = 1152.0
+
+[node name="Port" parent="Panel/VBoxContainer/Connect" index="2"]
+visible = false
+layout_mode = 2
+
+[node name="Listen" parent="Panel/VBoxContainer/Connect" index="3"]
+visible = false
+layout_mode = 2
+
+[node name="Send" parent="Panel/VBoxContainer" index="2"]
+layout_mode = 2
+
+[node name="LineEdit" parent="Panel/VBoxContainer/Send" index="0"]
+layout_mode = 2
+
+[node name="Send" parent="Panel/VBoxContainer/Send" index="1"]
+layout_mode = 2
+
+[node name="RichTextLabel" parent="Panel/VBoxContainer" index="3"]
+layout_mode = 2
+
+[connection signal="connected_to_server" from="WebSocketClient" to="." method="_on_web_socket_client_connected_to_server"]
+[connection signal="connection_closed" from="WebSocketClient" to="." method="_on_web_socket_client_connection_closed"]
+[connection signal="message_received" from="WebSocketClient" to="." method="_on_web_socket_client_message_received"]
+[connection signal="toggled" from="Panel/VBoxContainer/Connect/Connect" to="." method="_on_connect_toggled"]
+[connection signal="pressed" from="Panel/VBoxContainer/Send/Send" to="." method="_on_send_pressed"]

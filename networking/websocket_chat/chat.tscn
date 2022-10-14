@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://cyvrywci15kev"]
+
+[node name="Chat" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Listen" type="HBoxContainer" parent="Panel/VBoxContainer"]
+offset_right = 1152.0
+
+[node name="Connect" type="HBoxContainer" parent="Panel/VBoxContainer"]
+offset_top = 4.0
+offset_right = 1152.0
+offset_bottom = 35.0
+
+[node name="Host" type="LineEdit" parent="Panel/VBoxContainer/Connect"]
+offset_right = 930.0
+offset_bottom = 31.0
+size_flags_horizontal = 3
+text = "ws://localhost:8000/test/"
+placeholder_text = "ws://my.server/path/"
+
+[node name="Connect" type="Button" parent="Panel/VBoxContainer/Connect"]
+offset_left = 934.0
+offset_right = 1006.0
+offset_bottom = 31.0
+toggle_mode = true
+text = "Connect"
+
+[node name="Port" type="SpinBox" parent="Panel/VBoxContainer/Connect"]
+offset_left = 1010.0
+offset_right = 1093.0
+offset_bottom = 31.0
+min_value = 1.0
+max_value = 65535.0
+value = 8000.0
+
+[node name="Listen" type="Button" parent="Panel/VBoxContainer/Connect"]
+offset_left = 1097.0
+offset_right = 1152.0
+offset_bottom = 31.0
+toggle_mode = true
+text = "Listen"
+
+[node name="Send" type="HBoxContainer" parent="Panel/VBoxContainer"]
+offset_top = 39.0
+offset_right = 1152.0
+offset_bottom = 70.0
+
+[node name="LineEdit" type="LineEdit" parent="Panel/VBoxContainer/Send"]
+offset_right = 1101.0
+offset_bottom = 31.0
+size_flags_horizontal = 3
+placeholder_text = "Enter some text to send..."
+
+[node name="Send" type="Button" parent="Panel/VBoxContainer/Send"]
+offset_left = 1105.0
+offset_right = 1152.0
+offset_bottom = 31.0
+text = "Send"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/VBoxContainer"]
+offset_top = 74.0
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_vertical = 3
