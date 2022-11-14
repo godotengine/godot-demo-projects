@@ -1,0 +1,670 @@
+[gd_scene load_steps=26 format=3 uid="uid://bo5sv4e5gv8rc"]
+
+[ext_resource type="Script" path="res://day_night_cycle.gd" id="3_qt5yq"]
+[ext_resource type="Script" path="res://spin.gd" id="3_umwj4"]
+[ext_resource type="Texture2D" uid="uid://dxd67gur3av1s" path="res://logo_projector.png" id="5_ink5e"]
+[ext_resource type="Texture2D" uid="uid://chjqieyps5n5r" path="res://checker.png" id="14"]
+[ext_resource type="Script" path="res://tester.gd" id="18"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_7hpiw"]
+
+[sub_resource type="Sky" id="10"]
+sky_material = SubResource("PhysicalSkyMaterial_7hpiw")
+process_mode = 3
+
+[sub_resource type="Environment" id="11"]
+background_mode = 2
+sky = SubResource("10")
+tonemap_mode = 3
+tonemap_white = 6.0
+sdfgi_min_cell_size = 0.05
+sdfgi_cascade0_distance = 3.2
+sdfgi_max_distance = 51.2
+fog_aerial_perspective = 1.0
+
+[sub_resource type="StandardMaterial3D" id="13"]
+diffuse_mode = 1
+albedo_texture = ExtResource("14")
+uv1_scale = Vector3(32, 32, 1)
+texture_filter = 5
+
+[sub_resource type="PlaneMesh" id="14"]
+material = SubResource("13")
+size = Vector2(128, 128)
+
+[sub_resource type="TorusMesh" id="TorusMesh_txea0"]
+inner_radius = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4cnn8"]
+metallic = 1.0
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7pdx"]
+metallic = 1.0
+roughness = 0.13
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j0me5"]
+metallic = 1.0
+roughness = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0g651"]
+metallic = 1.0
+roughness = 0.38
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vuf50"]
+metallic = 1.0
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_41q1b"]
+metallic = 1.0
+roughness = 0.63
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qfhtl"]
+metallic = 1.0
+roughness = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pqd2q"]
+metallic = 1.0
+roughness = 0.88
+
+[sub_resource type="TorusMesh" id="TorusMesh_1m8cl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_u7sma"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_c5g5m"]
+top_radius = 0.0
+
+[sub_resource type="Gradient" id="Gradient_dfnk8"]
+colors = PackedColorArray(0.470076, 0.470076, 0.470076, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ekg3u"]
+noise_type = 2
+fractal_lacunarity = 4.203
+cellular_return_type = 6
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4cuji"]
+width = 128
+height = 128
+seamless = true
+color_ramp = SubResource("Gradient_dfnk8")
+noise = SubResource("FastNoiseLite_ekg3u")
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("11")
+script = ExtResource("18")
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+layers = 2
+cast_shadow = 2
+mesh = SubResource("14")
+
+[node name="Torus" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 3, 0.7, 26)
+mesh = SubResource("TorusMesh_txea0")
+surface_material_override/0 = SubResource("StandardMaterial3D_4cnn8")
+
+[node name="Torus2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 3, 0.7, 22)
+mesh = SubResource("TorusMesh_txea0")
+surface_material_override/0 = SubResource("StandardMaterial3D_t7pdx")
+
+[node name="Torus3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 3, 0.7, 18)
+mesh = SubResource("TorusMesh_txea0")
+surface_material_override/0 = SubResource("StandardMaterial3D_j0me5")
+
+[node name="Torus4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 3, 0.7, 14)
+mesh = SubResource("TorusMesh_txea0")
+surface_material_override/0 = SubResource("StandardMaterial3D_0g651")
+
+[node name="Torus5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 3, 0.7, 10)
+mesh = SubResource("TorusMesh_txea0")
+surface_material_override/0 = SubResource("StandardMaterial3D_vuf50")
+
+[node name="Torus6" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 3, 0.7, 6)
+mesh = SubResource("TorusMesh_txea0")
+surface_material_override/0 = SubResource("StandardMaterial3D_41q1b")
+
+[node name="Torus7" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 3, 0.7, 2)
+mesh = SubResource("TorusMesh_txea0")
+surface_material_override/0 = SubResource("StandardMaterial3D_qfhtl")
+
+[node name="Torus8" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 3, 0.7, -2)
+mesh = SubResource("TorusMesh_txea0")
+surface_material_override/0 = SubResource("StandardMaterial3D_pqd2q")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." groups=["animatable"]]
+transform = Transform3D(0.965224, 0.021904, 0.260505, 0.0170597, -0.999637, 0.0208427, 0.260867, -0.0156738, -0.965248, 3.9506, 3.39961, 3.54442)
+visible = false
+shadow_enabled = true
+shadow_bias = 0.05
+shadow_blur = 2.0
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 30.0
+script = ExtResource("3_qt5yq")
+
+[node name="CameraHolder" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.125, 26)
+
+[node name="RotationX" type="Node3D" parent="CameraHolder"]
+
+[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX"]
+fov = 70.0
+
+[node name="Testers" type="Node3D" parent="."]
+
+[node name="OmniLightNoShadows" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 26)
+mesh = SubResource("TorusMesh_1m8cl")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Testers/OmniLightNoShadows" groups=["animatable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+light_color = Color(1, 0.454902, 0.211765, 1)
+light_energy = 1.5
+script = ExtResource("3_umwj4")
+
+[node name="Box" type="MeshInstance3D" parent="Testers/OmniLightNoShadows"]
+mesh = SubResource("BoxMesh_u7sma")
+
+[node name="SmallBox" type="MeshInstance3D" parent="Testers/OmniLightNoShadows"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.3, 0)
+mesh = SubResource("BoxMesh_u7sma")
+
+[node name="Cone" type="MeshInstance3D" parent="Testers/OmniLightNoShadows"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.8, 0)
+mesh = SubResource("CylinderMesh_c5g5m")
+
+[node name="OmniLightWithShadows" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 22)
+mesh = SubResource("TorusMesh_1m8cl")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Testers/OmniLightWithShadows" groups=["animatable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+light_color = Color(1, 0.454902, 0.211765, 1)
+light_energy = 1.5
+shadow_enabled = true
+shadow_bias = 0.03
+shadow_normal_bias = 4.0
+shadow_blur = 6.0
+script = ExtResource("3_umwj4")
+
+[node name="Box" type="MeshInstance3D" parent="Testers/OmniLightWithShadows"]
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="SmallBox" type="MeshInstance3D" parent="Testers/OmniLightWithShadows"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.3, 0)
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="Cone" type="MeshInstance3D" parent="Testers/OmniLightWithShadows"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.8, 0)
+mesh = SubResource("CylinderMesh_c5g5m")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="OmniLightWithPCSSShadows" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 18)
+mesh = SubResource("TorusMesh_1m8cl")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Testers/OmniLightWithPCSSShadows" groups=["animatable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+light_color = Color(1, 0.454902, 0.211765, 1)
+light_energy = 1.5
+light_size = 0.5
+shadow_enabled = true
+shadow_bias = 0.02
+shadow_normal_bias = 4.0
+shadow_blur = 0.2
+script = ExtResource("3_umwj4")
+
+[node name="Box" type="MeshInstance3D" parent="Testers/OmniLightWithPCSSShadows"]
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="SmallBox" type="MeshInstance3D" parent="Testers/OmniLightWithPCSSShadows"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.3, 0)
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="Cone" type="MeshInstance3D" parent="Testers/OmniLightWithPCSSShadows"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.8, 0)
+mesh = SubResource("CylinderMesh_c5g5m")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="OmniLightWithProjector" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 14)
+mesh = SubResource("TorusMesh_1m8cl")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Testers/OmniLightWithProjector" groups=["animatable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+light_color = Color(1, 0.454902, 0.211765, 1)
+light_energy = 3.0
+light_projector = SubResource("NoiseTexture2D_4cuji")
+shadow_enabled = true
+shadow_bias = 0.03
+shadow_normal_bias = 4.0
+shadow_blur = 6.0
+script = ExtResource("3_umwj4")
+
+[node name="Box" type="MeshInstance3D" parent="Testers/OmniLightWithProjector"]
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="SmallBox" type="MeshInstance3D" parent="Testers/OmniLightWithProjector"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.3, 0)
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="Cone" type="MeshInstance3D" parent="Testers/OmniLightWithProjector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.8, 0)
+mesh = SubResource("CylinderMesh_c5g5m")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="OmniLightAttenuation" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 10)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Testers/OmniLightAttenuation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.1, -0.5)
+light_color = Color(1, 0.454902, 0.211765, 1)
+light_energy = 3.0
+shadow_blur = 3.0
+omni_range = 0.55
+omni_attenuation = 2.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Testers/OmniLightAttenuation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -0.5)
+light_color = Color(1, 0.454902, 0.211765, 1)
+light_energy = 3.0
+shadow_blur = 3.0
+omni_range = 0.55
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Testers/OmniLightAttenuation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.1, -0.5)
+light_color = Color(1, 0.454902, 0.211765, 1)
+light_energy = 3.0
+shadow_blur = 3.0
+omni_range = 0.55
+omni_attenuation = 0.5
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Testers/OmniLightAttenuation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.1, 0.5)
+light_color = Color(1, 0.454902, 0.211765, 1)
+light_energy = 3.0
+shadow_blur = 3.0
+omni_range = 0.55
+omni_attenuation = 0.0
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="Testers/OmniLightAttenuation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.5)
+light_color = Color(1, 0.454902, 0.211765, 1)
+light_energy = 3.0
+shadow_blur = 3.0
+omni_range = 0.55
+omni_attenuation = -2.0
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="Testers/OmniLightAttenuation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.1, 0.5)
+light_color = Color(1, 0.454902, 0.211765, 1)
+light_energy = 3.0
+shadow_blur = 3.0
+omni_range = 0.55
+omni_attenuation = -0.5
+
+[node name="SpotLightNoShadows" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 6)
+mesh = SubResource("TorusMesh_1m8cl")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Testers/SpotLightNoShadows" groups=["animatable"]]
+transform = Transform3D(0.866025, -2.18557e-08, 0.5, -0.5, -3.78552e-08, 0.866025, 0, -1, -4.37114e-08, 0, 1.4, 0)
+light_color = Color(0.686275, 0.568627, 0.909804, 1)
+light_energy = 1.5
+spot_range = 10.0
+spot_angle = 60.0
+script = ExtResource("3_umwj4")
+
+[node name="Box" type="MeshInstance3D" parent="Testers/SpotLightNoShadows"]
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="SmallBox" type="MeshInstance3D" parent="Testers/SpotLightNoShadows"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.3, 0)
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="Cone" type="MeshInstance3D" parent="Testers/SpotLightNoShadows"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.8, 0)
+mesh = SubResource("CylinderMesh_c5g5m")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="SpotLightWithShadows" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 2)
+mesh = SubResource("TorusMesh_1m8cl")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Testers/SpotLightWithShadows" groups=["animatable"]]
+transform = Transform3D(0.866025, -2.18557e-08, 0.5, -0.5, -3.78552e-08, 0.866025, 0, -1, -4.37114e-08, 0, 1.4, 0)
+light_color = Color(0.686275, 0.568627, 0.909804, 1)
+light_energy = 1.5
+shadow_enabled = true
+shadow_bias = 0.001
+shadow_normal_bias = 4.0
+shadow_blur = 3.0
+spot_range = 10.0
+spot_angle = 60.0
+script = ExtResource("3_umwj4")
+
+[node name="Box" type="MeshInstance3D" parent="Testers/SpotLightWithShadows"]
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="SmallBox" type="MeshInstance3D" parent="Testers/SpotLightWithShadows"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.3, 0)
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="Cone" type="MeshInstance3D" parent="Testers/SpotLightWithShadows"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.8, 0)
+mesh = SubResource("CylinderMesh_c5g5m")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="SpotLightWithPCSSShadows" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -2)
+mesh = SubResource("TorusMesh_1m8cl")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Testers/SpotLightWithPCSSShadows" groups=["animatable"]]
+transform = Transform3D(0.866025, -2.18557e-08, 0.5, -0.5, -3.78552e-08, 0.866025, 0, -1, -4.37114e-08, 0, 1.4, 0)
+light_color = Color(0.686275, 0.568627, 0.909804, 1)
+light_energy = 1.5
+light_size = 1.0
+shadow_enabled = true
+shadow_bias = 0.01
+shadow_normal_bias = 4.0
+spot_range = 10.0
+spot_angle = 60.0
+script = ExtResource("3_umwj4")
+
+[node name="Box" type="MeshInstance3D" parent="Testers/SpotLightWithPCSSShadows"]
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="SmallBox" type="MeshInstance3D" parent="Testers/SpotLightWithPCSSShadows"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.3, 0)
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="Cone" type="MeshInstance3D" parent="Testers/SpotLightWithPCSSShadows"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.8, 0)
+mesh = SubResource("CylinderMesh_c5g5m")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="SpotLightWithProjector" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -6)
+mesh = SubResource("TorusMesh_1m8cl")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Testers/SpotLightWithProjector" groups=["animatable"]]
+transform = Transform3D(0.866025, -2.18557e-08, 0.5, -0.5, -3.78552e-08, 0.866025, 0, -1, -4.37114e-08, 0, 1.4, 0)
+light_color = Color(0.686275, 0.568627, 0.909804, 1)
+light_energy = 4.0
+light_projector = ExtResource("5_ink5e")
+shadow_enabled = true
+shadow_bias = 0.001
+shadow_normal_bias = 4.0
+shadow_blur = 3.0
+spot_range = 10.0
+spot_angle_attenuation = 0.032352
+script = ExtResource("3_umwj4")
+
+[node name="Box" type="MeshInstance3D" parent="Testers/SpotLightWithProjector"]
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="SmallBox" type="MeshInstance3D" parent="Testers/SpotLightWithProjector"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.3, 0)
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="Cone" type="MeshInstance3D" parent="Testers/SpotLightWithProjector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.8, 0)
+mesh = SubResource("CylinderMesh_c5g5m")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="SpotLightAngleAttenuation" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -10)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Testers/SpotLightAngleAttenuation"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1, 0.4, 0)
+light_color = Color(0.686275, 0.568627, 0.909804, 1)
+light_energy = 3.0
+shadow_blur = 3.0
+spot_range = 2.0
+spot_attenuation = -2.0
+spot_angle = 40.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Testers/SpotLightAngleAttenuation"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.4, 0)
+light_color = Color(0.686275, 0.568627, 0.909804, 1)
+light_energy = 3.0
+shadow_blur = 3.0
+spot_range = 2.0
+spot_attenuation = -2.0
+spot_angle = 40.0
+spot_angle_attenuation = 2.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Testers/SpotLightAngleAttenuation"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1, 0.4, 0)
+light_color = Color(0.686275, 0.568627, 0.909804, 1)
+light_energy = 3.0
+shadow_blur = 3.0
+spot_range = 2.0
+spot_attenuation = -2.0
+spot_angle = 40.0
+spot_angle_attenuation = 0.5
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Testers/SpotLightAngleAttenuation"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1, 0.4, 1)
+light_color = Color(0.686275, 0.568627, 0.909804, 1)
+light_energy = 3.0
+shadow_blur = 3.0
+spot_range = 2.0
+spot_attenuation = -2.0
+spot_angle = 40.0
+spot_angle_attenuation = 0.305739
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Testers/SpotLightAngleAttenuation"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.4, 1)
+light_color = Color(0.686275, 0.568627, 0.909804, 1)
+light_energy = 3.0
+shadow_blur = 3.0
+spot_range = 2.0
+spot_attenuation = -2.0
+spot_angle = 40.0
+spot_angle_attenuation = 3.4822
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="Testers/SpotLightAngleAttenuation"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1, 0.4, 1)
+light_color = Color(0.686275, 0.568627, 0.909804, 1)
+light_energy = 3.0
+shadow_blur = 3.0
+spot_range = 2.0
+spot_attenuation = -2.0
+spot_angle = 40.0
+spot_angle_attenuation = 21.1121
+
+[node name="TestName" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -58.0
+offset_right = 192.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="Previous" type="Button" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -55.0
+offset_right = 135.0
+offset_bottom = -24.0
+grow_vertical = 0
+text = "«  Previous"
+
+[node name="Next" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -55.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Next  »"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 527.0
+offset_bottom = 187.0
+
+[node name="EnableSun" type="CheckButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(218, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 10
+theme_override_constants/outline_size = 4
+text = "Enable Sun"
+alignment = 2
+
+[node name="AnimateLights" type="CheckButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(218, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/h_separation = 10
+theme_override_constants/outline_size = 4
+button_pressed = true
+text = "Animate Lights"
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Shadow Resolution"
+horizontal_alignment = 2
+
+[node name="ShadowResolution" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.95
+focus_mode = 0
+item_count = 5
+selected = 2
+popup/item_0/text = "1024×1024 (Faster)"
+popup/item_0/id = 2
+popup/item_1/text = "2048×2048 (Fast)"
+popup/item_1/id = 3
+popup/item_2/text = "4096×4096 (Average)"
+popup/item_2/id = 4
+popup/item_3/text = "8192×8192 (Slow)"
+popup/item_3/id = 5
+popup/item_4/text = "16384×16384 (Slowest)"
+popup/item_4/id = 6
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Shadow Filter Quality"
+horizontal_alignment = 2
+
+[node name="ShadowFilterQuality" type="OptionButton" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.95
+focus_mode = 0
+item_count = 6
+selected = 3
+popup/item_0/text = "Hard (Fastest)"
+popup/item_0/id = 0
+popup/item_1/text = "Soft Very Low (Faster)"
+popup/item_1/id = 1
+popup/item_2/text = "Soft Low (Fast)"
+popup/item_2/id = 2
+popup/item_3/text = "Soft Medium (Average)"
+popup/item_3/id = 3
+popup/item_4/text = "Soft High (Slow)"
+popup/item_4/id = 5
+popup/item_5/text = "Soft Ultra (Slowest)"
+popup/item_5/id = 6
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Projector Filter Mode"
+horizontal_alignment = 2
+
+[node name="ProjectorFilterMode" type="OptionButton" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.95
+focus_mode = 0
+item_count = 6
+selected = 5
+popup/item_0/text = "Nearest"
+popup/item_0/id = 0
+popup/item_1/text = "Linear"
+popup/item_1/id = 1
+popup/item_2/text = "Nearest + Mipmaps"
+popup/item_2/id = 2
+popup/item_3/text = "Linear + Mipmaps"
+popup/item_3/id = 3
+popup/item_4/text = "Nearest + Mipmaps + 16× Anisotropic"
+popup/item_4/id = 4
+popup/item_5/text = "Linear + Mipmaps + 16× Anisotropic"
+popup/item_5/id = 5
+
+[connection signal="pressed" from="Previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
+[connection signal="toggled" from="VBoxContainer/EnableSun" to="." method="_on_enable_sun_toggled"]
+[connection signal="toggled" from="VBoxContainer/AnimateLights" to="." method="_on_animate_lights_toggled"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/ShadowResolution" to="." method="_on_shadow_resolution_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer2/ShadowFilterQuality" to="." method="_on_shadow_filter_quality_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer3/ProjectorFilterMode" to="." method="_on_projector_filter_mode_item_selected"]
