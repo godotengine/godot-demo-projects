@@ -1,34 +1,40 @@
 [gd_scene load_steps=4 format=3 uid="uid://ccqoreueuxdb7"]
 
 [ext_resource type="Script" path="res://HUD.gd" id="1"]
-[ext_resource type="Font" uid="uid://dyjc58f6sdms0" path="res://fonts/Xolonium-Regular.tres" id="2_3dmm8"]
+[ext_resource type="FontFile" uid="uid://xu8p4c3c1y4w" path="res://fonts/Xolonium-Regular.ttf" id="2_vqlyv"]
 
 [sub_resource type="Shortcut" id="4"]
 
 [node name="HUD" type="CanvasLayer"]
-script = ExtResource( "1" )
+script = ExtResource("1")
 
 [node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 78.0
-theme_override_fonts/font = ExtResource( "2_3dmm8" )
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_vqlyv")
 theme_override_font_sizes/font_size = 60
 text = "0"
 horizontal_alignment = 1
 
 [node name="MessageLabel" type="Label" parent="."]
+anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_top = -79.5
 offset_bottom = 79.5
-theme_override_fonts/font = ExtResource( "2_3dmm8" )
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_vqlyv")
 theme_override_font_sizes/font_size = 60
 text = "Dodge the
 Creeps"
 horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="."]
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -37,9 +43,11 @@ offset_left = -90.0
 offset_top = -200.0
 offset_right = 90.0
 offset_bottom = -100.0
-theme_override_fonts/font = ExtResource( "2_3dmm8" )
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_vqlyv")
 theme_override_font_sizes/font_size = 60
-shortcut = SubResource( "4" )
+shortcut = SubResource("4")
 text = "Start"
 
 [node name="MessageTimer" type="Timer" parent="."]
