@@ -135,10 +135,9 @@ func compute_island_gpu(heightmap: Image) -> void:
 
 	# Retrieve processed data
 	var output_bytes := rd.texture_get_data(heightmap_rid, 0)
-	var island_img := Image.new()
 	# Even though the GPU was working on the image as if each byte represented the red channel, we
 	# will interpret the data as if it was the luminance channel.
-	island_img.create_from_data(po2_dimensions, po2_dimensions, false, Image.FORMAT_L8, output_bytes)
+	var island_img := Image.create_from_data(po2_dimensions, po2_dimensions, false, Image.FORMAT_L8, output_bytes)
 
 	display_island(island_img)
 
