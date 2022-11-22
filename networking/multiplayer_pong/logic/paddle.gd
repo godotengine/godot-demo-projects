@@ -11,7 +11,7 @@ var _you_hidden = false
 
 func _process(delta):
 	# Is the master of the paddle.
-	if is_network_master():
+	if is_multiplayer_authority():
 		_motion = Input.get_axis(&"move_up", &"move_down")
 
 		if not _you_hidden and _motion != 0:
@@ -21,7 +21,7 @@ func _process(delta):
 
 		# Using unreliable to make sure position is updated as fast
 		# as possible, even if one of the calls is dropped.
-		rpc_unreliable("set_pos_and_motion", position, _motion)
+		set_pos_and_motion.rpc(position, _motion)
 	else:
 		if not _you_hidden:
 			_hide_you_label()
@@ -33,7 +33,7 @@ func _process(delta):
 
 
 # Synchronize position and speed to the other peers.
-puppet func set_pos_and_motion(pos, motion):
+@rpc(unreliable) func set_pos_and_motion(pos, motion):
 	position = pos
 	_motion = motion
 
@@ -44,6 +44,6 @@ func _hide_you_label():
 
 
 func _on_paddle_area_enter(area):
-	if is_network_master():
-		# Random for new direction generated on each peer.
-		area.rpc("bounce", left, randf())
+	if is_multiplayer_authority():
+		# Random for new direction generated checked each peer.
+		area.bounce.rpc(left, randf())
