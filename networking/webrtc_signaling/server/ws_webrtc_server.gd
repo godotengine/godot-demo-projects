@@ -1,84 +1,101 @@
 extends Node
 
+enum Message {JOIN, ID, PEER_CONNECT, PEER_DISCONNECT, OFFER, ANSWER, CANDIDATE, SEAL}
+
 const TIMEOUT = 1000 # Unresponsive clients times out after 1 sec
 const SEAL_TIME = 10000 # A sealed room will be closed after this time
 const ALFNUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
-var _alfnum = ALFNUM.to_ascii()
+var _alfnum = ALFNUM.to_ascii_buffer()
 
 var rand: RandomNumberGenerator = RandomNumberGenerator.new()
 var lobbies: Dictionary = {}
-var server: WebSocketServer = WebSocketServer.new()
+var tcp_server := TCPServer.new()
 var peers: Dictionary = {}
 
 class Peer extends RefCounted:
 	var id = -1
 	var lobby = ""
-	var time = OS.get_ticks_msec()
+	var time = Time.get_ticks_msec()
+	var ws = WebSocketPeer.new()
 
-	func _init(peer_id):
+
+	func _init(peer_id, tcp):
 		id = peer_id
+		ws.accept_stream(tcp)
 
+
+	func is_ws_open() -> bool:
+		return ws.get_ready_state() == WebSocketPeer.STATE_OPEN
+
+
+	func send(type: int, id: int, data:=""):
+		return ws.send_text(JSON.stringify({
+			"type": type,
+			"id": id,
+			"data": data,
+		}))
 
 
 class Lobby extends RefCounted:
-	var peers: Array = []
+	var peers: = {}
 	var host: int = -1
 	var sealed: bool = false
 	var time = 0
+	var mesh := true
 
-	func _init(host_id: int):
+	func _init(host_id: int, use_mesh: bool):
 		host = host_id
+		mesh = use_mesh
 
-	func join(peer_id, server) -> bool:
+	func join(peer: Peer) -> bool:
 		if sealed: return false
-		if not server.has_peer(peer_id): return false
-		var new_peer: WebSocketPeer = server.get_peer(peer_id)
-		new_peer.put_packet(("I: %d\n" % (1 if peer_id == host else peer_id)).to_utf8())
-		for p in peers:
-			if not server.has_peer(p):
+		if not peer.is_ws_open(): return false
+		peer.send(Message.ID, (1 if peer.id == host else peer.id), "true" if mesh else "")
+		for p in peers.values():
+			if not p.is_ws_open():
 				continue
-			server.get_peer(p).put_packet(("N: %d\n" % peer_id).to_utf8())
-			new_peer.put_packet(("N: %d\n" % (1 if p == host else p)).to_utf8())
-		peers.push_back(peer_id)
+			if not mesh and p.id != host:
+				# Only host is visible when using client-server
+				continue
+			p.send(Message.PEER_CONNECT, peer.id)
+			peer.send(Message.PEER_CONNECT, (1 if p.id == host else p.id))
+		peers[peer.id] = peer
 		return true
 
 
-	func leave(peer_id, server) -> bool:
-		if not peers.has(peer_id): return false
-		peers.erase(peer_id)
+	func leave(peer: Peer) -> bool:
+		if not peers.has(peer.id): return false
+		peers.erase(peer.id)
 		var close = false
-		if peer_id == host:
+		if peer.id == host:
 			# The room host disconnected, will disconnect all peers.
 			close = true
 		if sealed: return close
 		# Notify other peers.
-		for p in peers:
-			if not server.has_peer(p): return close
+		for p in peers.values():
+			if not p.is_ws_open():
+				continue
 			if close:
 				# Disconnect peers.
-				server.disconnect_peer(p)
+				p.ws.close()
 			else:
 				# Notify disconnection.
-				server.get_peer(p).put_packet(("D: %d\n" % peer_id).to_utf8())
+				p.send(Message.PEER_DISCONNECT, peer.id)
 		return close
 
 
-	func seal(peer_id, server) -> bool:
+	func seal(peer_id: int) -> bool:
 		# Only host can seal the room.
 		if host != peer_id: return false
 		sealed = true
-		for p in peers:
-			server.get_peer(p).put_packet("S: \n".to_utf8())
-		time = OS.get_ticks_msec()
+		for p in peers.values():
+			if not p.is_ws_open():
+				continue
+			p.send(Message.SEAL, 0)
+		time = Time.get_ticks_msec()
+		peers.clear()
 		return true
-
-
-
-func _init():
-	server.connect(&"data_received", self._on_data)
-	server.connect(&"client_connected", self._peer_connected)
-	server.connect(&"client_disconnected", self._peer_disconnected)
 
 
 func _process(delta):
@@ -87,124 +104,118 @@ func _process(delta):
 
 func listen(port):
 	stop()
-	rand.seed = OS.get_unix_time()
-	server.listen(port)
+	rand.seed = Time.get_unix_time_from_system()
+	tcp_server.listen(port)
 
 
 func stop():
-	server.stop()
+	tcp_server.stop()
 	peers.clear()
 
 
 func poll():
-	if not server.is_listening():
+	if not tcp_server.is_listening():
 		return
 
-	server.poll()
+	if tcp_server.is_connection_available():
+		var id = randi() % (1 << 31)
+		peers[id] = Peer.new(id, tcp_server.take_connection())
 
-	# Peers timeout.
+	# Poll peers.
+	var to_remove := []
 	for p in peers.values():
-		if p.lobby == "" and OS.get_ticks_msec() - p.time > TIMEOUT:
-			server.disconnect_peer(p.id)
+		# Peers timeout.
+		if p.lobby == "" and Time.get_ticks_msec() - p.time > TIMEOUT:
+			p.ws.close()
+		p.ws.poll()
+		while p.is_ws_open() and p.ws.get_available_packet_count():
+			if not _parse_msg(p):
+				print("Parse message failed from peer %d" % p.id)
+				to_remove.push_back(p.id)
+				p.ws.close()
+				break
+		var state = p.ws.get_ready_state()
+		if state == WebSocketPeer.STATE_CLOSED:
+			print("Peer %d disconnected from lobby: '%s'" % [p.id, p.lobby])
+			# Remove from lobby (and lobby itself if host).
+			if lobbies.has(p.lobby) and lobbies[p.lobby].leave(p):
+				print("Deleted lobby %s" % p.lobby)
+				lobbies.erase(p.lobby)
+			# Remove from peers
+			to_remove.push_back(p.id)
+
 	# Lobby seal.
 	for k in lobbies:
 		if not lobbies[k].sealed:
 			continue
-		if lobbies[k].time + SEAL_TIME < OS.get_ticks_msec():
+		if lobbies[k].time + SEAL_TIME < Time.get_ticks_msec():
 			# Close lobby.
 			for p in lobbies[k].peers:
-				server.disconnect_peer(p)
+				p.ws.close()
+				to_remove.push_back(p.id)
+
+	# Remove stale peers
+	for id in to_remove:
+		peers.erase(id)
 
 
-func _peer_connected(id, protocol = ""):
-	peers[id] = Peer.new(id)
-
-
-func _peer_disconnected(id, was_clean = false):
-	var lobby = peers[id].lobby
-	print("Peer %d disconnected from lobby: '%s'" % [id, lobby])
-	if lobby and lobbies.has(lobby):
-		peers[id].lobby = ""
-		if lobbies[lobby].leave(id, server):
-			# If true, lobby host has disconnected, so delete it.
-			print("Deleted lobby %s" % lobby)
-			lobbies.erase(lobby)
-	peers.erase(id)
-
-
-func _join_lobby(peer, lobby) -> bool:
+func _join_lobby(peer: Peer, lobby: String, mesh: bool) -> bool:
 	if lobby == "":
 		for _i in range(0, 32):
 			lobby += char(_alfnum[rand.randi_range(0, ALFNUM.length()-1)])
-		lobbies[lobby] = Lobby.new(peer.id)
+		lobbies[lobby] = Lobby.new(peer.id, mesh)
 	elif not lobbies.has(lobby):
 		return false
-	lobbies[lobby].join(peer.id, server)
+	lobbies[lobby].join(peer)
 	peer.lobby = lobby
 	# Notify peer of its lobby
-	server.get_peer(peer.id).put_packet(("J: %s\n" % lobby).to_utf8())
+	peer.send(Message.JOIN, 0, lobby)
 	print("Peer %d joined lobby: '%s'" % [peer.id, lobby])
 	return true
 
 
-func _on_data(id):
-	if not _parse_msg(id):
-		print("Parse message failed from peer %d" % id)
-		server.disconnect_peer(id)
-
-
-func _parse_msg(id) -> bool:
-	var pkt_str: String = server.get_peer(id).get_packet().get_string_from_utf8()
-
-	var req = pkt_str.split("\n", true, 1)
-	if req.size() != 2: # Invalid request size
+func _parse_msg(peer: Peer) -> bool:
+	var pkt_str: String = peer.ws.get_packet().get_string_from_utf8()
+	var parsed = JSON.parse_string(pkt_str)
+	if typeof(parsed) != TYPE_DICTIONARY or not parsed.has("type") or not parsed.has("id") or \
+		typeof(parsed.get("data")) != TYPE_STRING:
+		return false
+	if not str(parsed.type).is_valid_int() or not str(parsed.id).is_valid_int():
 		return false
 
-	var type = req[0]
-	if type.length() < 3: # Invalid type size
-		return false
+	var msg := {
+		"type": str(parsed.type).to_int(),
+		"id": str(parsed.id).to_int(),
+		"data": parsed.data
+	}
 
-	if type.begins_with("J: "):
-		if peers[id].lobby: # Peer must not have joined a lobby already!
+	if msg.type == Message.JOIN:
+		if peer.lobby: # Peer must not have joined a lobby already!
 			return false
-		return _join_lobby(peers[id], type.substr(3, type.length() - 3))
+		return _join_lobby(peer, msg.data, msg.id == 0)
 
-	if not peers[id].lobby: # Messages across peers are only allowed in same lobby
+	if not lobbies.has(peer.lobby): # Lobby not found?
 		return false
 
-	if not lobbies.has(peers[id].lobby): # Lobby not found?
-		return false
+	var lobby = lobbies[peer.lobby]
 
-	var lobby = lobbies[peers[id].lobby]
-
-	if type.begins_with("S: "):
+	if msg.type == Message.SEAL:
 		# Client is sealing the room
-		return lobby.seal(id, server)
+		return lobby.seal(peer.id)
 
-	var dest_str: String = type.substr(3, type.length() - 3)
-	if not dest_str.is_valid_int(): # Destination id is not an integer
-		return false
-
-	var dest_id: int = int(dest_str)
-	if dest_id == NetworkedMultiplayerPeer.TARGET_PEER_SERVER:
+	var dest_id: int = msg.id
+	if dest_id == MultiplayerPeer.TARGET_PEER_SERVER:
 		dest_id = lobby.host
 
 	if not peers.has(dest_id): # Destination ID not connected
 		return false
 
-	if peers[dest_id].lobby != peers[id].lobby: # Trying to contact someone not in same lobby
+	if peers[dest_id].lobby != peer.lobby: # Trying to contact someone not in same lobby
 		return false
 
-	if id == lobby.host:
-		id = NetworkedMultiplayerPeer.TARGET_PEER_SERVER
+	if msg.type in [Message.OFFER, Message.ANSWER, Message.CANDIDATE]:
+		var source = MultiplayerPeer.TARGET_PEER_SERVER if peer.id == lobby.host else peer.id
+		peers[dest_id].send(msg.type, source, msg.data)
+		return true
 
-	if type.begins_with("O: "):
-		# Client is making an offer
-		server.get_peer(dest_id).put_packet(("O: %d\n%s" % [id, req[1]]).to_utf8())
-	elif type.begins_with("A: "):
-		# Client is making an answer
-		server.get_peer(dest_id).put_packet(("A: %d\n%s" % [id, req[1]]).to_utf8())
-	elif type.begins_with("C: "):
-		# Client is making an answer
-		server.get_peer(dest_id).put_packet(("C: %d\n%s" % [id, req[1]]).to_utf8())
-	return true
+	return false # Unknown message

@@ -1,54 +1,58 @@
 extends Control
 
 @onready var client = $Client
+@onready var host = $VBoxContainer/Connect/Host
+@onready var room = $VBoxContainer/Connect/RoomSecret
+@onready var mesh = $VBoxContainer/Connect/Mesh
 
 func _ready():
-	client.connect(&"lobby_joined", self._lobby_joined)
-	client.connect(&"lobby_sealed", self._lobby_sealed)
-	client.connect(&"connected", self._connected)
-	client.connect(&"disconnected", self._disconnected)
-	client.rtc_mp.connect(&"peer_connected", self._mp_peer_connected)
-	client.rtc_mp.connect(&"peer_disconnected", self._mp_peer_disconnected)
-	client.rtc_mp.connect(&"server_disconnected", self._mp_server_disconnect)
-	client.rtc_mp.connect(&"connection_succeeded", self._mp_connected)
+	client.lobby_joined.connect(_lobby_joined)
+	client.lobby_sealed.connect(_lobby_sealed)
+	client.connected.connect(_connected)
+	client.disconnected.connect(_disconnected)
+
+	multiplayer.connected_to_server.connect(_mp_server_connected)
+	multiplayer.connection_failed.connect(_mp_server_disconnect)
+	multiplayer.server_disconnected.connect(_mp_server_disconnect)
+	multiplayer.peer_connected.connect(_mp_peer_connected)
+	multiplayer.peer_disconnected.connect(_mp_peer_disconnected)
 
 
-func _process(delta):
-	client.rtc_mp.poll()
-	while client.rtc_mp.get_available_packet_count() > 0:
-		_log(client.rtc_mp.get_packet().get_string_from_utf8())
+@rpc(any_peer, call_local)
+func ping(argument):
+	_log("[Multiplayer] Ping from peer %d: arg: %s" % [multiplayer.get_remote_sender_id(), argument])
 
 
-func _connected(id):
-	_log("Signaling server connected with ID: %d" % id)
-
-
-func _disconnected():
-	_log("Signaling server disconnected: %d - %s" % [client.code, client.reason])
-
-
-func _lobby_joined(lobby):
-	_log("Joined lobby %s" % lobby)
-
-
-func _lobby_sealed():
-	_log("Lobby has been sealed")
-
-
-func _mp_connected():
-	_log("Multiplayer is connected (I am %d)" % client.rtc_mp.get_unique_id())
+func _mp_server_connected():
+	_log("[Multiplayer] Server connected (I am %d)" % client.rtc_mp.get_unique_id())
 
 
 func _mp_server_disconnect():
-	_log("Multiplayer is disconnected (I am %d)" % client.rtc_mp.get_unique_id())
+	_log("[Multiplayer] Server disconnected (I am %d)" % client.rtc_mp.get_unique_id())
 
 
 func _mp_peer_connected(id: int):
-	_log("Multiplayer peer %d connected" % id)
+	_log("[Multiplayer] Peer %d connected" % id)
 
 
 func _mp_peer_disconnected(id: int):
-	_log("Multiplayer peer %d disconnected" % id)
+	_log("[Multiplayer] Peer %d disconnected" % id)
+
+
+func _connected(id):
+	_log("[Signaling] Server connected with ID: %d" % id)
+
+
+func _disconnected():
+	_log("[Signaling] Server disconnected: %d - %s" % [client.code, client.reason])
+
+
+func _lobby_joined(lobby):
+	_log("[Signaling] Joined lobby %s" % lobby)
+
+
+func _lobby_sealed():
+	_log("[Signaling] Lobby has been sealed")
 
 
 func _log(msg):
@@ -56,24 +60,22 @@ func _log(msg):
 	$VBoxContainer/TextEdit.text += str(msg) + "\n"
 
 
-func ping():
-	_log(client.rtc_mp.put_packet("ping".to_utf8()))
+func _on_peers_pressed():
+	_log(multiplayer.get_peers())
 
 
-func _on_Peers_pressed():
-	var d = client.rtc_mp.get_peers()
-	_log(d)
-	for k in d:
-		_log(client.rtc_mp.get_peer(k))
+func _on_ping_pressed():
+	randomize()
+	ping.rpc(randf())
 
 
-func start():
-	client.start($VBoxContainer/Connect/Host.text, $VBoxContainer/Connect/RoomSecret.text)
-
-
-func _on_Seal_pressed():
+func _on_seal_pressed():
 	client.seal_lobby()
 
 
-func stop():
+func _on_start_pressed():
+	client.start(host.text, room.text, mesh.button_pressed)
+
+
+func _on_stop_pressed():
 	client.stop()
