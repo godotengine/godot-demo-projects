@@ -14,6 +14,13 @@ var gradient_tex: GradientTexture1D
 var po2_dimensions: int
 var start_time: int
 
+var rd: RenderingDevice
+var shader_rid: RID
+var heightmap_rid: RID
+var gradient_rid: RID
+var uniform_set: RID
+var pipeline: RID
+
 func _init() -> void:
 	randomize()
 	# Create a noise function as the basis for our heightmap
@@ -42,6 +49,12 @@ func _ready() -> void:
 	noise.frequency = 0.003 / (float(po2_dimensions) / float(512))
 
 
+func _notification(what):
+	# Object destructor, triggered before the engine deletes this Node
+	if what == NOTIFICATION_PREDELETE:
+		cleanup_gpu()
+
+
 # Generate a random integer, convert it to a string and set it as text for the TextEdit field
 func randomize_seed() -> void:
 	seed_input.text = str(randi())
@@ -65,11 +78,17 @@ func prepare_image() -> Image:
 	return heightmap
 
 
-func compute_island_gpu(heightmap: Image) -> void:
+func init_gpu() -> void:
+	# These resources are expensive to make, so create them once and cache for subsequent runs
+
 	# Create rendering device
-	var rd := RenderingServer.create_local_rendering_device()
+	rd = RenderingServer.create_local_rendering_device()
+
+	if rd == null:
+		return
+
 	# Prepare the shader
-	var shader_rid := load_shader(rd, shader_file)
+	shader_rid = load_shader(rd, shader_file)
 
 	# Create format for heightmap
 	var heightmap_format := RDTextureFormat.new()
@@ -87,8 +106,9 @@ func compute_island_gpu(heightmap: Image) -> void:
 		RenderingDevice.TEXTURE_USAGE_CAN_UPDATE_BIT + \
 		RenderingDevice.TEXTURE_USAGE_CAN_COPY_FROM_BIT
 
-	# Store heightmap as texture
-	var heightmap_rid := rd.texture_create(heightmap_format, RDTextureView.new(), [heightmap.get_data()])
+	# Prepare heightmap texture
+	# We will set the data later
+	heightmap_rid = rd.texture_create(heightmap_format, RDTextureView.new())
 
 	# Create uniform for heightmap
 	var heightmap_uniform := RDUniform.new()
@@ -109,7 +129,7 @@ func compute_island_gpu(heightmap: Image) -> void:
 		RenderingDevice.TEXTURE_USAGE_CAN_UPDATE_BIT
 
 	# Storage gradient as texture
-	var gradient_rid := rd.texture_create(gradient_format, RDTextureView.new(), [gradient_tex.get_image().get_data()])
+	gradient_rid = rd.texture_create(gradient_format, RDTextureView.new(), [gradient_tex.get_image().get_data()])
 
 	# Create uniform for gradient
 	var gradient_uniform := RDUniform.new()
@@ -117,9 +137,23 @@ func compute_island_gpu(heightmap: Image) -> void:
 	gradient_uniform.binding = 1 # This matches the binding in the shader
 	gradient_uniform.add_id(gradient_rid)
 
-	var uniform_set := rd.uniform_set_create([heightmap_uniform, gradient_uniform], shader_rid, 0)
+	uniform_set = rd.uniform_set_create([heightmap_uniform, gradient_uniform], shader_rid, 0)
 
-	var pipeline := rd.compute_pipeline_create(shader_rid)
+	pipeline = rd.compute_pipeline_create(shader_rid)
+
+
+func compute_island_gpu(heightmap: Image) -> void:
+	if rd == null:
+		init_gpu()
+
+	if rd == null:
+		$CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/Label2.text = \
+			"RenderingDevice is not available on the current rendering driver"
+		return
+
+	# Store heightmap as texture
+	rd.texture_update(heightmap_rid, 0, heightmap.get_data())
+
 	var compute_list := rd.compute_list_begin()
 	rd.compute_list_bind_compute_pipeline(compute_list, pipeline)
 	rd.compute_list_bind_uniform_set(compute_list, uniform_set, 0)
@@ -135,17 +169,41 @@ func compute_island_gpu(heightmap: Image) -> void:
 
 	# Retrieve processed data
 	var output_bytes := rd.texture_get_data(heightmap_rid, 0)
-	var island_img := Image.new()
 	# Even though the GPU was working on the image as if each byte represented the red channel, we
 	# will interpret the data as if it was the luminance channel.
-	island_img.create_from_data(po2_dimensions, po2_dimensions, false, Image.FORMAT_L8, output_bytes)
+	var island_img := Image.create_from_data(po2_dimensions, po2_dimensions, false, Image.FORMAT_L8, output_bytes)
 
 	display_island(island_img)
 
 
+func cleanup_gpu() -> void:
+	if rd == null:
+		return
+
+	# All resources must be freed after use to avoid memory leaks
+
+	rd.free_rid(pipeline)
+	pipeline = RID()
+
+	rd.free_rid(uniform_set)
+	uniform_set = RID()
+
+	rd.free_rid(gradient_rid)
+	gradient_rid = RID()
+
+	rd.free_rid(heightmap_rid)
+	heightmap_rid = RID()
+
+	rd.free_rid(shader_rid)
+	shader_rid = RID()
+
+	rd.free()
+	rd = null
+
+
 # Import, compile and load shader, return reference
 func load_shader(rd: RenderingDevice, path: String) -> RID:
-	var shader_file_data := load(path)
+	var shader_file_data: RDShaderFile = load(path)
 	var shader_spirv: RDShaderSPIRV = shader_file_data.get_spirv()
 	return rd.shader_create_from_spirv(shader_spirv)
 
@@ -180,7 +238,7 @@ func display_island(island: Image) -> void:
 	# Calculate and display elapsed time
 	var stop_time := Time.get_ticks_usec()
 	var elapsed := stop_time - start_time
-	$CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/Label2.text = str(elapsed) + " μs"
+	$CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/Label2.text = "%s μs" % elapsed
 
 
 # Called when RandomButton is pressed
