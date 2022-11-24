@@ -64,7 +64,7 @@ func do_action(action):
 	var pos = _players.find(id)
 	if pos == -1:
 		return
-	_players.erase(pos)
+	_players.remove_at(pos)
 	_list.remove_item(pos)
 	if _turn > pos:
 		_turn -= 1
