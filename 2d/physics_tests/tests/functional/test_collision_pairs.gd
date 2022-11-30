@@ -202,7 +202,7 @@ func _on_option_changed(option, checked):
 
 
 func _find_shape_node(type_name):
-	var node = $Shapes.find_node("RigidBody%s" % type_name)
+	var node = $Shapes.get_node("RigidBody%s" % type_name)
 
 	if not node:
 		Log.print_error("Invalid shape type: " + type_name)

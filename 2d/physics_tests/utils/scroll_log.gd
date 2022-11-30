@@ -17,4 +17,4 @@ func _process(_delta):
 
 func _on_scrolling():
 	auto_scroll = false
-	$"../CheckBoxScroll".pressed = false
+	$"../CheckBoxScroll".button_pressed = false

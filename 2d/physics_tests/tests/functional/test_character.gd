@@ -47,28 +47,28 @@ func _ready():
 	options.connect(&"option_selected", Callable(self, "_on_option_selected"))
 	options.connect(&"option_changed", Callable(self, "_on_option_changed"))
 
-	_character_body_template = find_node("CharacterBody2D")
+	_character_body_template = find_child("CharacterBody2D")
 	if _character_body_template:
 		_body_parent = _character_body_template.get_parent()
 		_body_parent.remove_child(_character_body_template)
 		var enabled = _body_type == E_BodyType.CHARACTER_BODY
 		options.add_menu_item(OPTION_OBJECT_TYPE_CHARACTER, true, enabled, true)
 
-	_character_body_ray_template = find_node("CharacterBodyRay2D")
+	_character_body_ray_template = find_child("CharacterBodyRay2D")
 	if _character_body_ray_template:
 		_body_parent = _character_body_ray_template.get_parent()
 		_body_parent.remove_child(_character_body_ray_template)
 		var enabled = _body_type == E_BodyType.CHARACTER_BODY_RAY
 		options.add_menu_item(OPTION_OBJECT_TYPE_CHARACTER_RAY, true, enabled, true)
 
-	_rigid_body_template = find_node("RigidDynamicBody2D")
+	_rigid_body_template = find_child("RigidBody2D")
 	if _rigid_body_template:
 		_body_parent = _rigid_body_template.get_parent()
 		_body_parent.remove_child(_rigid_body_template)
 		var enabled = _body_type == E_BodyType.RIGID_BODY
 		options.add_menu_item(OPTION_OBJECT_TYPE_RIGID_BODY, true, enabled, true)
 
-	_rigid_body_ray_template = find_node("RigidBodyRay2D")
+	_rigid_body_ray_template = find_child("RigidBodyRay2D")
 	if _rigid_body_ray_template:
 		_body_parent = _rigid_body_ray_template.get_parent()
 		_body_parent.remove_child(_rigid_body_ray_template)
@@ -80,7 +80,7 @@ func _ready():
 	options.add_menu_item(OPTION_MOVE_CHARACTER_FLOOR_ONLY, true, _use_floor_only)
 	options.add_menu_item(OPTION_MOVE_CHARACTER_CONSTANT_SPEED, true, _use_constant_speed)
 
-	var floor_slider = find_node("FloorMaxAngle")
+	var floor_slider = find_child("FloorMaxAngle")
 	if floor_slider:
 		floor_slider.get_node("HSlider").value = _floor_max_angle
 

@@ -32,7 +32,7 @@ radius = 32.0
 length = 64.0
 
 [node name="Test" type="Node2D"]
-script = ExtResource( "1" )
+script = ExtResource("1")
 _snap_distance = 32.0
 _floor_max_angle = 60.0
 
@@ -42,11 +42,8 @@ offset_top = 79.0
 offset_right = 145.0
 offset_bottom = 93.0
 text = "Testing: "
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Options" parent="." instance=ExtResource( "3" )]
+[node name="Options" parent="." instance=ExtResource("3")]
 
 [node name="LabelFloor" type="Label" parent="."]
 offset_left = 14.0
@@ -54,9 +51,6 @@ offset_top = 237.929
 offset_right = 145.0
 offset_bottom = 251.929
 text = "ON FLOOR"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelControls" type="Label" parent="."]
 offset_left = 14.0
@@ -65,9 +59,6 @@ offset_right = 145.0
 offset_bottom = 294.291
 text = "LEFT/RIGHT - MOVE
 UP - JUMP"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="FloorMaxAngle" type="HBoxContainer" parent="."]
 offset_left = 14.0
@@ -76,83 +67,78 @@ offset_right = 476.0
 offset_bottom = 186.0
 theme_override_constants/separation = 20
 alignment = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="FloorMaxAngle"]
-offset_right = 122.0
+offset_left = 176.0
+offset_right = 299.0
 offset_bottom = 26.0
 text = "Floor Max angle"
 
 [node name="HSlider" type="HSlider" parent="FloorMaxAngle"]
-offset_left = 142.0
-offset_right = 342.0
+custom_minimum_size = Vector2(100, 0)
+offset_left = 319.0
+offset_right = 419.0
 offset_bottom = 16.0
-rect_min_size = Vector2(200, 0)
 max_value = 180.0
-script = ExtResource( "3_cd5g0" )
+script = ExtResource("3_cd5g0")
 snap_step = 5.0
 
 [node name="LabelValue" type="Label" parent="FloorMaxAngle"]
-offset_left = 362.0
+offset_left = 439.0
 offset_right = 462.0
 offset_bottom = 26.0
-rect_min_size = Vector2(100, 0)
 text = "0.0"
-script = ExtResource( "4_eoplu" )
+script = ExtResource("4_eoplu")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 position = Vector2(100, 450)
 collision_mask = 2147483649
-script = ExtResource( "7" )
+script = ExtResource("7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource( "3" )
+shape = SubResource("3")
 
 [node name="CharacterBodyRay2D" type="CharacterBody2D" parent="."]
 position = Vector2(100, 450)
 collision_mask = 2147483649
-script = ExtResource( "7" )
+script = ExtResource("7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBodyRay2D"]
 position = Vector2(0, -16)
-shape = SubResource( "CircleShape2D_llvur" )
+shape = SubResource("CircleShape2D_llvur")
 
 [node name="CollisionShapeRay2D" type="CollisionShape2D" parent="CharacterBodyRay2D"]
 position = Vector2(0, -16)
-shape = SubResource( "RayShape2D_3lv1w" )
+shape = SubResource("RayShape2D_3lv1w")
 
-[node name="RigidDynamicBody2D" type="RigidDynamicBody2D" parent="."]
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2(100, 450)
 collision_mask = 2147483649
-physics_material_override = SubResource( "1" )
-contacts_reported = 4
+physics_material_override = SubResource("1")
 contact_monitor = true
 lock_rotation = true
-script = ExtResource( "6" )
+script = ExtResource("6")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidDynamicBody2D"]
-shape = SubResource( "2" )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("2")
 
-[node name="RigidBodyRay2D" type="RigidDynamicBody2D" parent="."]
+[node name="RigidBodyRay2D" type="RigidBody2D" parent="."]
 position = Vector2(100, 450)
 collision_mask = 2147483649
-physics_material_override = SubResource( "1" )
-contacts_reported = 4
+physics_material_override = SubResource("1")
 contact_monitor = true
 lock_rotation = true
-script = ExtResource( "6" )
+script = ExtResource("6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBodyRay2D"]
 position = Vector2(-7.62939e-06, -16)
-shape = SubResource( "CircleShape2D_dr08f" )
+shape = SubResource("CircleShape2D_dr08f")
 
 [node name="CollisionShapeRay2D" type="CollisionShape2D" parent="RigidBodyRay2D"]
 position = Vector2(-7.62939e-06, -16)
-shape = SubResource( "RayShape2D_w83f0" )
+shape = SubResource("RayShape2D_w83f0")
 
-[node name="StaticSceneFlat" parent="." instance=ExtResource( "4" )]
+[node name="StaticSceneFlat" parent="." instance=ExtResource("4")]
 position = Vector2(0, 12)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

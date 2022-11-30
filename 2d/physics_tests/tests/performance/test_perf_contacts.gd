@@ -186,7 +186,7 @@ func _activate_objects():
 		var spawn_parent = get_node(spawn)
 
 		for node_index in range(spawn_parent.get_child_count()):
-			var node = spawn_parent.get_child(node_index) as RigidDynamicBody2D
+			var node = spawn_parent.get_child(node_index) as RigidBody2D
 			node.set_sleeping(false)
 
 
