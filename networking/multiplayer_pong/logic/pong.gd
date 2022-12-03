@@ -16,18 +16,18 @@ var score_right = 0
 func _ready():
 	# By default, all nodes in server inherit from master,
 	# while all nodes in clients inherit from puppet.
-	# set_network_master is tree-recursive by default.
-	if get_tree().is_network_server():
+	# set_multiplayer_authority is tree-recursive by default.
+	if multiplayer.is_server():
 		# For the server, give control of player 2 to the other peer.
-		player2.set_network_master(get_tree().get_network_connected_peers()[0])
+		player2.set_multiplayer_authority(multiplayer.get_peers()[0])
 	else:
 		# For the client, give control of player 2 to itself.
-		player2.set_network_master(get_tree().get_network_unique_id())
+		player2.set_multiplayer_authority(multiplayer.get_unique_id())
 
-	print("Unique id: ", get_tree().get_network_unique_id())
+	print("Unique id: ", multiplayer.get_unique_id())
 
 
-remotesync func update_score(add_to_left):
+@rpc(any_peer, call_local) func update_score(add_to_left):
 	if add_to_left:
 		score_left += 1
 		score_left_node.set_text(str(score_left))
@@ -45,7 +45,7 @@ remotesync func update_score(add_to_left):
 
 	if game_ended:
 		$ExitGame.show()
-		$Ball.rpc("stop")
+		$Ball.stop.rpc()
 
 
 func _on_exit_game_pressed():
