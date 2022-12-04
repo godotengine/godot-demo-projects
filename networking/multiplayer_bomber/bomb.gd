@@ -11,7 +11,7 @@ func explode():
 	for p in in_area:
 		if p.has_method("exploded"):
 			# Exploded can only be called by the authority, but will also be called locally.
-			p.rpc(&"exploded", from_player)
+			p.exploded.rpc(from_player)
 
 
 func done():

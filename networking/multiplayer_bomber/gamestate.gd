@@ -27,7 +27,7 @@ signal game_error(what)
 # Callback from SceneTree.
 func _player_connected(id):
 	# Registration of a client beings here, tell the connected player that we are here.
-	rpc_id(id, StringName("register_player"), player_name)
+	register_player.rpc_id(id, player_name)
 
 
 # Callback from SceneTree.
