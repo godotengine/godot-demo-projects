@@ -4,7 +4,7 @@ An example using a thread to load an image.
 
 Language: GDScript
 
-Renderer: Vulkan Mobile
+Renderer: Mobile
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/144
 

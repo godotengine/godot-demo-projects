@@ -13,7 +13,7 @@ https://docs.godotengine.org/en/latest/tutorials/io/saving_games.html
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Mobile
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/891
 

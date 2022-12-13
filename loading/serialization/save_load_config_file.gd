@@ -1,24 +1,28 @@
 extends Button
 # This script shows how to save data using Godot's custom ConfigFile format.
-# ConfigFile can store any Godot type natively.
+# ConfigFile can store any Variant type except Signal or Callable.
+# It can even store Objects, but be extra careful where you deserialize them
+# from, because they can include (potentially malicious) scripts.
 
-# The root game node (so we can get and instance enemies).
-@export var game_node: NodePath
-# The player node (so we can set/get its health and position).
-@export var player_node: NodePath
 
 const SAVE_PATH = "user://save_config_file.ini"
 
+## The root game node (so we can get and instance enemies).
+@export var game_node: NodePath
+## The player node (so we can set/get its health and position).
+@export var player_node: NodePath
+
 
 func save_game():
-	var config = ConfigFile.new()
+	var config := ConfigFile.new()
 
-	var player = get_node(player_node)
+	var player := get_node(player_node) as Player
 	config.set_value("player", "position", player.position)
 	config.set_value("player", "health", player.health)
+	config.set_value("player", "rotation", player.sprite.rotation)
 
-	var enemies = []
-	for enemy in get_tree().get_nodes_in_group("enemy"):
+	var enemies := []
+	for enemy in get_tree().get_nodes_in_group(&"enemy"):
 		enemies.push_back({
 			position = enemy.position,
 		})
@@ -26,27 +30,25 @@ func save_game():
 
 	config.save(SAVE_PATH)
 
-	get_node(^"../LoadConfigFile").disabled = false
+	(get_node(^"../LoadConfigFile") as Button).disabled = false
 
 
-# `load()` is reserved.
 func load_game():
-	var config = ConfigFile.new()
+	var config := ConfigFile.new()
 	config.load(SAVE_PATH)
 
-	var player = get_node(player_node)
+	var player := get_node(player_node) as Player
 	player.position = config.get_value("player", "position")
 	player.health = config.get_value("player", "health")
+	player.sprite.rotation = config.get_value("player", "rotation")
 
-	# Remove existing enemies and add new ones.
-	for enemy in get_tree().get_nodes_in_group("enemy"):
-		enemy.queue_free()
+	# Remove existing enemies before adding new ones.
+	get_tree().call_group("enemy", "queue_free")
 
 	var enemies = config.get_value("enemies", "enemies")
-	# Ensure the node structure is the same when loading.
 	var game = get_node(game_node)
 
 	for enemy_config in enemies:
-		var enemy = preload("res://enemy.tscn").instantiate()
+		var enemy := preload("res://enemy.tscn").instantiate() as Enemy
 		enemy.position = enemy_config.position
 		game.add_child(enemy)

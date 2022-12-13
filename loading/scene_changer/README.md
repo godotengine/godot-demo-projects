@@ -1,10 +1,10 @@
 # Scene Changer
 
-This uses functions in SceneTree to switch between two scenes.
+This uses two functions in SceneTree to switch between two scenes.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Mobile
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/531
 
