@@ -1,154 +1,184 @@
-extends Control
+extends Node
 
-const trans_list = ["Linear", "Sine", "Quint", "Quart", "Quad", "Expo", "Elastic", "Cubic", "Circ", "Bounce", "Back"]
-const eases_list = ["In", "Out", "InOut", "OutIn"]
-const modes_list = ["Move", "Color", "Scale", "Rotate", "Callback", "Follow", "Repeat", "Pause"]
+@onready var icon: Sprite2D = %Icon
+@onready var icon_start_position = icon.position
 
-var current_trans = Tween.TRANS_LINEAR
-var current_ease = Tween.EASE_IN
+@onready var countdown_label = %CountdownLabel
+@onready var path: Path2D = $Path2D
+@onready var progress = %Progress
 
-@onready var tween = $Tween
-@onready var trans_vbox = $Controls/Transitions
-@onready var eases_vbox = $Controls/Eases
-@onready var modes_vbox = $Controls/Modes
-@onready var timeline = $Top/Timeline
-@onready var color_from_picker = $Controls/ColorFrom/ColorPicker
-@onready var color_to_picker = $Controls/ColorTo/ColorPicker
-@onready var area_label = $Top/Area3D/RichTextLabel
-@onready var sprite = $Top/Area3D/Sprite2D
-@onready var follow = $Top/Area3D/Follow
-@onready var follow_2 = $Top/Area3D/Follow2
-@onready var size = $Top/Area3D.get_size()
+var tween: Tween
+var sub_tween: Tween
 
-@onready var move_mode = modes_vbox.get_node(^"Move")
-@onready var color_mode = modes_vbox.get_node(^"Color")
-@onready var scale_mode = modes_vbox.get_node(^"Scale")
-@onready var rotate_mode = modes_vbox.get_node(^"Rotate")
-@onready var callback_mode = modes_vbox.get_node(^"Callback")
-@onready var follow_mode = modes_vbox.get_node(^"Follow")
-@onready var repeat_mode = modes_vbox.get_node(^"Repeat")
-@onready var paused_mode = modes_vbox.get_node(^"Pause")
+func start_animation():
+	# Reset the icon to original state.
+	reset()
+	# Create the Tween. Also sets the initial animation speed.
+	# All methods that modify Tween will return the Tween, so you can chain them.
+	tween = create_tween().set_speed_scale(%SpeedSlider.value)
 
-func _ready():
-	for index in range(trans_list.size()):
-		trans_vbox.get_node(trans_list[index]).connect(&"pressed", self.on_trans_changed, [index])
+	# Sets the amount of loops. 1 loop = 1 animation cycle, so e.g. 2 loops will play animation twice.
+	if %Infinite.button_pressed:
+		tween.set_loops() # Called without arguments, the Tween will loop infinitely.
+	else:
+		tween.set_loops(%Loops.value)
 
-	for index in range(eases_list.size()):
-		eases_vbox.get_node(eases_list[index]).connect(&"pressed", self.on_eases_changed, [index])
+	# Step 1
 
-	for index in range(modes_list.size()):
-		modes_vbox.get_node(modes_list[index]).connect(&"pressed", self.on_modes_changed, [index])
+	if is_step_enabled("MoveTo", 1.0):
+		# tween_*() methods return a Tweener object. Its methods can also be chained, but
+		# it's stored in a variable here for readability (chained lines tend to be long).
+		# Note the usage of ^"NodePath". A regular "String" is accepted too, but it's very slightly slower.
+		var tweener = tween.tween_property(icon, ^"position", Vector2(400, 250), 1.0)
+		tweener.set_ease(%Ease1.selected)
+		tweener.set_trans(%Trans1.selected)
 
-	color_from_picker.set_pick_color(Color.RED)
-	color_to_picker.set_pick_color(Color.CYAN)
+	# Step 2
 
-	for node in [trans_vbox, eases_vbox, modes_vbox]:
-		node.get_child(1).set_pressed(true)
-	modes_vbox.get_node(^"Repeat").set_pressed(true)
+	if is_step_enabled("ColorRed", 1.0):
+		tween.tween_property(icon, ^"self_modulate", Color.RED, 1.0)
 
-	reset_tween()
+	# Step 3
 
+	if is_step_enabled("MoveRight", 1.0):
+		# as_relative() makes the value relative, so in this case it moves the icon
+		# 200 pixels from the previous position.
+		var tweener = tween.tween_property(icon, ^"position:x", 200.0, 1.0).as_relative()
+		tweener.set_ease(%Ease3.selected)
+		tweener.set_trans(%Trans3.selected)
+	if is_step_enabled("Roll", 0.0):
+		# parallel() makes the Tweener run in parallel to the previous one.
+		var tweener = tween.parallel().tween_property(icon, ^"rotation", TAU, 1.0)
+		tweener.set_ease(%Ease3.selected)
+		tweener.set_trans(%Trans3.selected)
 
-func on_trans_changed(index):
-	for i in range(trans_list.size()):
-		var btn = trans_vbox.get_node(trans_list[i])
-		btn.set_pressed(i == index)
+	# Step 4
 
-	current_trans = index
-	reset_tween()
+	if is_step_enabled("MoveLeft", 1.0):
+		tween.tween_property(icon, ^"position", Vector2.LEFT * 200, 1.0).as_relative()
+	if is_step_enabled("Jump", 0.0):
+		# Jump has 2 substeps, so to make it properly parallel, it can be done in a sub-Tween.
+		# Here we are calling a lambda method that creates a sub-Tween.
+		# Any number of Tweens can animate a single object in the same time.
+		tween.parallel().tween_callback(func():
+			# Note that transition is set on Tween, but ease is set on Tweener.
+			# Values set on Tween will affect all Tweeners (as defaults) and values
+			# on Tweeners can override them.
+			sub_tween = create_tween().set_speed_scale(%SpeedSlider.value).set_trans(Tween.TRANS_SINE)
+			sub_tween.tween_property(icon, ^"position:y", -150.0, 0.5).as_relative().set_ease(Tween.EASE_OUT)
+			sub_tween.tween_property(icon, ^"position:y", 150.0, 0.5).as_relative().set_ease(Tween.EASE_IN)
+		)
 
+	# Step 5
 
-func on_eases_changed(index):
-	for i in range(eases_list.size()):
-		var btn = eases_vbox.get_node(eases_list[i])
-		btn.set_pressed(i == index)
+	if is_step_enabled("Blink", 2.0):
+		# Loops are handy when creating some animations.
+		for i in 10:
+			tween.tween_callback(icon.hide).set_delay(0.1)
+			tween.tween_callback(icon.show).set_delay(0.1)
 
-	current_ease = index
-	reset_tween()
+	# Step 6
 
+	if is_step_enabled("Teleport", 0.5):
+		# Tweening a value with 0 duration makes it change instantly.
+		tween.tween_property(icon, ^"position", Vector2(325, 325), 0)
+		tween.tween_interval(0.5)
+		# Binds can be used for advanced callbacks.
+		tween.tween_callback(icon.set_position.bind(Vector2(680, 215)))
 
-func on_modes_changed(index):
-	if modes_list[index] == "Pause":
-		if paused_mode.is_pressed():
-			tween.stop_all()
+	# Step 7
+
+	if is_step_enabled("Curve", 3.5):
+		# Method tweening is useful for animating values that can't be directly interpolated.
+		# It can be used for remapping and some very advanced animations.
+		# Here it's used for moving sprite along a path, using inline lambda function.
+		var tweener = tween.tween_method(func(v): icon.position = path.position + path.curve.sample_baked(v),
+			0.0, path.curve.get_baked_length(), 3.0).set_delay(0.5)
+		tweener.set_ease(%Ease7.selected)
+		tweener.set_trans(%Trans7.selected)
+
+	# Step 8
+
+	if is_step_enabled("Wait", 2.0):
+		# ...
+		tween.tween_interval(2)
+
+	# Step 9
+
+	if is_step_enabled("Countdown", 3.0):
+		tween.tween_callback(countdown_label.show)
+		tween.tween_method(do_countdown, 4, 1, 3)
+		tween.tween_callback(countdown_label.hide)
+
+	# Step 10
+
+	if is_step_enabled("Enlarge", 0.0):
+		tween.tween_property(icon, ^"scale", Vector2.ONE * 5, 0.5).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	if is_step_enabled("Vanish", 1.0):
+		tween.parallel().tween_property(icon, ^"self_modulate:a", 0.0, 1.0)
+
+	if %Loops.value > 1 or %Infinite.button_pressed:
+		tween.tween_callback(icon.show)
+		tween.tween_callback(icon.set_self_modulate.bind(Color.WHITE))
+
+func do_countdown(v):
+	countdown_label.text = str(v)
+
+func reset():
+	icon.position = icon_start_position
+	icon.self_modulate = Color.WHITE
+	icon.rotation = 0
+	icon.scale = Vector2.ONE
+	icon.show()
+	countdown_label.hide()
+
+	if tween:
+		tween.kill()
+		tween = null
+
+	if sub_tween:
+		sub_tween.kill()
+		sub_tween = null
+
+	progress.max_value = 0
+
+func is_step_enabled(step, expected_time):
+	var enabled = get_node("%" + step).button_pressed
+	if enabled:
+		progress.max_value += expected_time
+	return enabled
+
+func pause_resume() -> void:
+	if tween and tween.is_valid():
+		if tween.is_running():
+			tween.pause()
 		else:
-			tween.resume_all()
-	else:
-		reset_tween()
+			tween.play()
 
+	if sub_tween and sub_tween.is_valid():
+		if sub_tween.is_running():
+			sub_tween.pause()
+		else:
+			sub_tween.play()
 
-func _on_ColorPicker_color_changed(_color):
-	reset_tween()
+func kill_tween() -> void:
+	if tween:
+		tween.kill()
+	if sub_tween:
+		sub_tween.kill()
 
+func speed_changed(value: float) -> void:
+	if tween:
+		tween.set_speed_scale(value)
+	if sub_tween:
+		sub_tween.set_speed_scale(value)
+	%SpeedLabel.text = str("x", value)
 
-func reset_tween():
-	var pos = tween.tell()
-	tween.reset_all()
-	tween.remove_all()
+func inifnite_toggled(button_pressed: bool) -> void:
+	%Loops.editable = not button_pressed
 
-	if move_mode.is_pressed():
-		# The first line moves from the top left to the bottom right, while
-		# the second line moves backwards afterwards (there is a delay of 2).
-		# These are different (_method vs _property) only for the sake of
-		# showcasing interpolation of both methods and properties.
-		# The syntax is (object, method/property name, from value, to value,
-		# duration, transition type, ease type, delay), last 3 optional.
-		tween.interpolate_method(sprite, "set_position", Vector2.ZERO, size, 2, current_trans, current_ease)
-		tween.interpolate_property(sprite, "position", size, Vector2.ZERO, 2, current_trans, current_ease, 2)
-
-	if color_mode.is_pressed():
-		tween.interpolate_method(sprite, "set_modulate", color_from_picker.get_pick_color(), color_to_picker.get_pick_color(), 2, current_trans, current_ease)
-		tween.interpolate_property(sprite, "modulate", color_to_picker.get_pick_color(), color_from_picker.get_pick_color(), 2, current_trans, current_ease, 2)
-	else:
-		sprite.set_modulate(Color.WHITE)
-
-	if scale_mode.is_pressed():
-		tween.interpolate_method(sprite, "set_scale", Vector2(0.5, 0.5), Vector2(1.5, 1.5), 2, current_trans, current_ease)
-		tween.interpolate_property(sprite, "scale", Vector2(1.5, 1.5), Vector2(0.5, 0.5), 2, current_trans, current_ease, 2)
-	else:
-		sprite.set_scale(Vector2.ONE)
-
-	if rotate_mode.is_pressed():
-		tween.interpolate_method(sprite, "set_rotation_degrees", 0, 360, 2, current_trans, current_ease)
-		tween.interpolate_property(sprite, "rotation_degrees", 360, 0, 2, current_trans, current_ease, 2)
-
-	if callback_mode.is_pressed():
-		tween.interpolate_callback(self, 0.5, "on_callback", "0.5 seconds after")
-		tween.interpolate_callback(self, 0.2, "on_callback", "1.2 seconds after")
-
-	if follow_mode.is_pressed():
-		follow.show()
-		follow_2.show()
-
-		tween.follow_method(follow, "set_position", Vector2(0, size.y), sprite, "get_position", 2, current_trans, current_ease)
-		tween.targeting_method(follow, "set_position", sprite, "get_position", Vector2(0, size.y), 2, current_trans, current_ease, 2)
-
-		tween.targeting_property(follow_2, "position", sprite, "position", Vector2(size.x, 0), 2, current_trans, current_ease)
-		tween.follow_property(follow_2, "position", Vector2(size.x, 0), sprite, "position", 2, current_trans, current_ease, 2)
-	else:
-		follow.hide()
-		follow_2.hide()
-
-	tween.set_repeat(repeat_mode.is_pressed())
-	tween.start()
-	tween.seek(pos)
-
-	if paused_mode.is_pressed():
-		tween.stop_all()
-
-
-func _on_Tween_tween_step(_object, _key, elapsed, _value):
-	var runtime = tween.get_runtime()
-	var ratio = 100 * (elapsed / runtime)
-	timeline.set_value(ratio)
-
-
-func _on_Timeline_value_changed(value):
-	if not paused_mode.is_pressed():
+func _process(delta: float) -> void:
+	if not tween or not tween.is_running():
 		return
-	var runtime = tween.get_runtime()
-	tween.seek(runtime * value / 100)
 
-
-func on_callback(arg):
-	area_label.add_text("on_callback -> " + arg + "\n")
+	progress.value = tween.get_total_elapsed_time()
