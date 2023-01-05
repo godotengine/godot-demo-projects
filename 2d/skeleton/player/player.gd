@@ -11,7 +11,6 @@ enum States {
 }
 
 var speed = Vector2(120.0, 360.0)
-var velocity = Vector2.ZERO
 var falling_slow = false
 var falling_fast = false
 var no_move_horizontal_time = 0.0
@@ -35,7 +34,6 @@ func _physics_process(delta):
 		velocity.x = (Input.get_axis(&"move_left", &"move_right")) * speed.x
 		if Input.is_action_pressed(&"walk"):
 			velocity.x *= 0.2
-	#warning-ignore:return_value_discarded
 	# TODO: This information should be set to the CharacterBody properties instead of arguments: , Vector2.UP
 	# TODO: Rename velocity to linear_velocity in the rest of the script.
 	move_and_slide()

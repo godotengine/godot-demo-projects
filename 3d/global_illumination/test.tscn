@@ -13,11 +13,11 @@ ground_bottom_color = Color(0.121569, 0.121569, 0.129412, 1)
 ground_horizon_color = Color(0.672549, 0.704902, 0.734314, 1)
 
 [sub_resource type="Sky" id="Sky_4q314"]
-sky_material = SubResource( "ProceduralSkyMaterial_30v8t" )
+sky_material = SubResource("ProceduralSkyMaterial_30v8t")
 
 [sub_resource type="Environment" id="Environment_bau0c"]
 background_mode = 2
-sky = SubResource( "Sky_4q314" )
+sky = SubResource("Sky_4q314")
 tonemap_mode = 3
 tonemap_white = 6.0
 sdfgi_cascades = 3
@@ -29,7 +29,7 @@ sdfgi_y_scale = 0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1n5k1"]
 emission_enabled = true
 emission = Color(1, 1, 0, 1)
-emission_energy = 2.0
+emission_energy_multiplier = 2.0
 
 [sub_resource type="BoxMesh" id="8"]
 
@@ -41,18 +41,18 @@ metallic = 1.0
 roughness = 0.0
 
 [node name="Test" type="Node3D"]
-script = ExtResource( "5" )
+script = ExtResource("5")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( "Environment_bau0c" )
+environment = SubResource("Environment_bau0c")
 
-[node name="Zdm2" parent="." instance=ExtResource( "1" )]
+[node name="Zdm2" parent="." instance=ExtResource("1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
 [node name="VoxelGI" type="VoxelGI" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 6, 2.5)
 extents = Vector3(39, 18.5, 30)
-data = ExtResource( "3_1netx" )
+data = ExtResource("3_1netx")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.889832, -0.251497, 0.380722, 0, 0.834387, 0.551179, -0.456289, -0.490456, 0.742464, 4.47302, 6.47568, 8.72305)
@@ -88,25 +88,25 @@ spot_range = 15.0
 spot_attenuation = 2.0
 spot_angle_attenuation = 0.5
 
-[node name="GlowingBox" parent="." instance=ExtResource( "3" )]
+[node name="GlowingBox" parent="." instance=ExtResource("3")]
 transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 0.25, -0.681709, -0.108265, 25.4051)
 
 [node name="Cube" parent="GlowingBox" index="0"]
-surface_material_override/0 = SubResource( "StandardMaterial3D_1n5k1" )
+surface_material_override/0 = SubResource("StandardMaterial3D_1n5k1")
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(-0.997523, -0.00719588, 0.0699685, -8.94368e-09, 0.994753, 0.102305, -0.0703375, 0.102052, -0.992289, 11.7976, 1.49898, 9.54247)
-script = ExtResource( "6" )
+script = ExtResource("6")
 
 [node name="Box" type="MeshInstance3D" parent="Camera"]
 transform = Transform3D(0.999999, -5.12227e-09, 9.68575e-08, 2.79397e-09, 0.999999, 8.9407e-08, 7.45058e-09, -1.11759e-07, 0.999999, -1.4, -0.999998, -3.99998)
-mesh = SubResource( "8" )
+mesh = SubResource("8")
 
 [node name="ReflectiveSphere" type="MeshInstance3D" parent="Camera"]
 transform = Transform3D(-0.997523, -8.41886e-09, -0.0703376, -0.00719589, 0.994753, 0.102052, 0.0699685, 0.102305, -0.992289, 0.16733, -1.22931, -3.81225)
 layers = 2
-mesh = SubResource( "2" )
-surface_material_override/0 = SubResource( "StandardMaterial3D_7doxp" )
+mesh = SubResource("2")
+surface_material_override/0 = SubResource("StandardMaterial3D_7doxp")
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="Camera/ReflectiveSphere"]
 transform = Transform3D(1, -8.38189e-09, -8.9407e-08, 5.58791e-09, 1, -5.21541e-07, 4.47035e-08, 1.11759e-07, 1, 0, 0, 0)
@@ -146,6 +146,7 @@ theme_override_constants/shadow_offset_y = 1
 text = "Screen-space lighting effects: Disabled (Fast)"
 
 [node name="Label" type="Label" parent="."]
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0

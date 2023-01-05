@@ -15,10 +15,10 @@ func show_dialogue(player, dialogue):
 			dialogue_node.start_dialogue()
 			break
 			return
-	dialogue_node.connect(&"dialogue_started", player.set_active, [false])
-	dialogue_node.connect(&"dialogue_finished", player.set_active, [true])
-	dialogue_node.connect(&"dialogue_finished", self.hide)
-	dialogue_node.connect(&"dialogue_finished", self._on_dialogue_finished, [player])
+	dialogue_node.dialogue_started.connect(player.set_active.bind(false))
+	dialogue_node.dialogue_finished.connect(player.set_active.bind(true))
+	dialogue_node.dialogue_finished.connect(self.hide)
+	dialogue_node.dialogue_finished.connect(self._on_dialogue_finished.bind(player))
 	dialogue_node.start_dialogue()
 	$Name.text = dialogue_node.dialogue_name
 	$Text.text = dialogue_node.dialogue_text
@@ -31,7 +31,7 @@ func _on_Button_button_up():
 
 
 func _on_dialogue_finished(player):
-	dialogue_node.disconnect(&"dialogue_started", player.set_active)
-	dialogue_node.disconnect(&"dialogue_finished", player.set_active)
-	dialogue_node.disconnect(&"dialogue_finished", self.hide)
-	dialogue_node.disconnect(&"dialogue_finished", self._on_dialogue_finished)
+	dialogue_node.dialogue_started.disconnect(player.set_active)
+	dialogue_node.dialogue_finished.disconnect(player.set_active)
+	dialogue_node.dialogue_finished.disconnect(self.hide)
+	dialogue_node.dialogue_finished.disconnect(self._on_dialogue_finished)

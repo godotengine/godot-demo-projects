@@ -1,37 +1,26 @@
-[gd_resource type="TileSet" load_steps=4 format=2]
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://y111l4w24pml"]
 
-[ext_resource path="res://sprites/obstacle.png" type="Texture2D" id=1]
-[ext_resource path="res://sprites/path_start.png" type="Texture2D" id=2]
-[ext_resource path="res://sprites/path_end.png" type="Texture2D" id=3]
+[ext_resource type="Texture2D" uid="uid://bo5d4p1el52ir" path="res://sprites/obstacle.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://c57g2ow4p5dl3" path="res://sprites/path_start.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://cy1dwnkhyigme" path="res://sprites/path_end.png" id="3"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tol7a"]
+texture = ExtResource("1")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gx51g"]
+texture = ExtResource("2")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2sont"]
+texture = ExtResource("3")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
 
 [resource]
-
-0/name = "Obstacle"
-0/texture = ExtResource( 1 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 64, 64 )
-0/is_autotile = false
-0/occluder_offset = Vector2( 32, 32 )
-0/navigation_offset = Vector2( 32, 32 )
-0/shapes = [  ]
-1/name = "PathStart"
-1/texture = ExtResource( 2 )
-1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 0, 0, 64, 64 )
-1/is_autotile = false
-1/occluder_offset = Vector2( 32, 32 )
-1/navigation_offset = Vector2( 32, 32 )
-1/shapes = [  ]
-2/name = "PathEnd"
-2/texture = ExtResource( 3 )
-2/tex_offset = Vector2( 0, 0 )
-2/modulate = Color( 1, 1, 1, 1 )
-2/region = Rect2( 0, 0, 64, 64 )
-2/is_autotile = false
-2/occluder_offset = Vector2( 32, 32 )
-2/navigation_offset = Vector2( 32, 32 )
-2/shapes = [  ]
-_sections_unfolded = [ "2" ]
-
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_tol7a")
+sources/1 = SubResource("TileSetAtlasSource_gx51g")
+sources/2 = SubResource("TileSetAtlasSource_2sont")

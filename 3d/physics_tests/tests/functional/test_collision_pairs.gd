@@ -40,8 +40,8 @@ func _ready():
 	$Options.add_menu_item(OPTION_SHAPE_CONVEX_POLYGON, true, true)
 	$Options.add_menu_item(OPTION_SHAPE_CONCAVE_POLYGON, true, true)
 
-	$Options.connect(&"option_selected", Callable(self, "_on_option_selected"))
-	$Options.connect(&"option_changed", Callable(self, "_on_option_changed"))
+	$Options.option_selected.connect(self._on_option_selected)
+	$Options.option_changed.connect(self._on_option_changed)
 
 	await start_timer(0.5).timeout
 	if is_timer_canceled():

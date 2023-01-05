@@ -28,8 +28,7 @@ func _process(delta):
 		get_tree().quit()
 
 	if Input.is_action_just_pressed(&"view_cube_demo"):
-		# warning-ignore:return_value_discarded
-		get_tree().change_scene("res://assets/demo_scene.tscn")
+		get_tree().change_scene_to_file("res://assets/demo_scene.tscn")
 		return
 
 	if _is_parent_ready:

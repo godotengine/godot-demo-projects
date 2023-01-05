@@ -1,5 +1,5 @@
 class_name Gun
-extends Position2D
+extends Marker2D
 # Represents a weapon that spawns and shoots bullets.
 # The Cooldown timer controls the cooldown duration between shots.
 

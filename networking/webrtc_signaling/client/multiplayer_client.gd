@@ -4,17 +4,17 @@ var rtc_mp: WebRTCMultiplayerPeer = WebRTCMultiplayerPeer.new()
 var sealed := false
 
 func _init():
-	connected.connect(_connected)
-	disconnected.connect(_disconnected)
+	connected.connect(self._connected)
+	disconnected.connect(self._disconnected)
 
-	offer_received.connect(_offer_received)
-	answer_received.connect(_answer_received)
-	candidate_received.connect(_candidate_received)
+	offer_received.connect(self._offer_received)
+	answer_received.connect(self._answer_received)
+	candidate_received.connect(self._candidate_received)
 
-	lobby_joined.connect(_lobby_joined)
-	lobby_sealed.connect(_lobby_sealed)
-	peer_connected.connect(_peer_connected)
-	peer_disconnected.connect(_peer_disconnected)
+	lobby_joined.connect(self._lobby_joined)
+	lobby_sealed.connect(self._lobby_sealed)
+	peer_connected.connect(self._peer_connected)
+	peer_disconnected.connect(self._peer_disconnected)
 
 
 func start(url, lobby = "", mesh:=true):
@@ -36,8 +36,8 @@ func _create_peer(id):
 	peer.initialize({
 		"iceServers": [ { "urls": ["stun:stun.l.google.com:19302"] } ]
 	})
-	peer.session_description_created.connect(_offer_created.bind(id))
-	peer.ice_candidate_created.connect(_new_ice_candidate.bind(id))
+	peer.session_description_created.connect(self._offer_created.bind(id))
+	peer.ice_candidate_created.connect(self._new_ice_candidate.bind(id))
 	rtc_mp.add_peer(peer, id)
 	if id < rtc_mp.get_unique_id(): # So lobby creator never creates offers.
 		peer.create_offer()

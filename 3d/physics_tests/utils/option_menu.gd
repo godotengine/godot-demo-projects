@@ -44,7 +44,7 @@ func _add_popup(parent_popup, path, label):
 	parent_popup.add_child(popup_menu)
 	parent_popup.add_submenu_item(label, label)
 
-	popup_menu.connect(&"index_pressed", Callable(self, "_on_item_pressed"), [popup_menu, path])
+	popup_menu.index_pressed.connect(_on_item_pressed.bind(popup_menu, path))
 
 	return popup_menu
 

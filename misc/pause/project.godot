@@ -13,23 +13,17 @@ config_version=5
 config/name="Pause"
 config/description="A demo showing how a game made in Godot can be paused."
 run/main_scene="res://spinpause.tscn"
-config/icon="res://icon.png"
 config/features=PackedStringArray("4.0")
+config/icon="res://icon.png"
 
 [display]
 
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
-[gdnative]
-
-singletons=[]
-
 [rendering]
 
-vulkan/rendering/back_end=1
 environment/defaults/default_clear_color=Color(0.133333, 0.133333, 0.133333, 1)
-quality/intended_usage/framebuffer_allocation=3
-vram_compression/import_etc=true
-vram_compression/import_etc2=false
-quality/filters/msaa=2
+anti_aliasing/quality/msaa_3d=2
+anti_aliasing/quality/use_debanding=true
+vulkan/rendering/back_end=1

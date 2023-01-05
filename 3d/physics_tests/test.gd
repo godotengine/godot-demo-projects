@@ -73,7 +73,7 @@ func create_rigidbody(shape, pickable = false, transform = Transform3D.IDENTITY)
 	collision.shape = shape
 	collision.transform = transform
 
-	var body = RigidDynamicBody3D.new()
+	var body = RigidBody3D.new()
 	body.add_child(collision)
 
 	if pickable:

@@ -14,29 +14,29 @@ func _ready():
 
 		payment = Engine.get_singleton("GodotGooglePlayBilling")
 		# No params.
-		payment.connect(&"connected", self._on_connected)
+		payment.connected.connect(self._on_connected)
 		# No params.
-		payment.connect(&"disconnected", self._on_disconnected)
+		payment.disconnected.connect(self._on_disconnected)
 		# Response ID (int), Debug message (string).
-		payment.connect(&"connect_error", self._on_connect_error)
+		payment.connect_error.connect(self._on_connect_error)
 		# Purchases (Dictionary[]).
-		payment.connect(&"purchases_updated", self._on_purchases_updated)
+		payment.purchases_updated.connect(self._on_purchases_updated)
 		# Response ID (int), Debug message (string).
-		payment.connect(&"purchase_error", self._on_purchase_error)
+		payment.purchase_error.connect(self._on_purchase_error)
 		# SKUs (Dictionary[]).
-		payment.connect(&"sku_details_query_completed", self._on_sku_details_query_completed)
+		payment.sku_details_query_completed.connect(self._on_sku_details_query_completed)
 		# Response ID (int), Debug message (string), Queried SKUs (string[]).
-		payment.connect(&"sku_details_query_error", self._on_sku_details_query_error)
+		payment.sku_details_query_error.connect(self._on_sku_details_query_error)
 		# Purchase token (string).
-		payment.connect(&"purchase_acknowledged", self._on_purchase_acknowledged)
+		payment.purchase_acknowledged.connect(self._on_purchase_acknowledged)
 		# Response ID (int), Debug message (string), Purchase token (string).
-		payment.connect(&"purchase_acknowledgement_error", self._on_purchase_acknowledgement_error)
+		payment.purchase_acknowledgement_error.connect(self._on_purchase_acknowledgement_error)
 		# Purchase token (string).
-		payment.connect(&"purchase_consumed", self._on_purchase_consumed)
+		payment.purchase_consumed.connect(self._on_purchase_consumed)
 		# Response ID (int), Debug message (string), Purchase token (string).
-		payment.connect(&"purchase_consumption_error", self._on_purchase_consumption_error)
+		payment.purchase_consumption_error.connect(self._on_purchase_consumption_error)
 		# Purchases (Dictionary[])
-		payment.connect(&"query_purchases_response", self._on_query_purchases_response)
+		payment.query_purchases_response.connect(self._on_query_purchases_response)
 		payment.startConnection()
 	else:
 		show_alert("Android IAP support is not enabled. Make sure you have enabled 'Custom Build' and installed and enabled the GodotGooglePlayBilling plugin in your Android export settings! This application will not work.")

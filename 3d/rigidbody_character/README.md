@@ -18,8 +18,11 @@ for the player, and [`StaticBody`](https://docs.godotengine.org/en/latest/classe
 for the level. Each has colliders, the player moves itself via
 `apply_central_impulse()` in `_physics_process()`, and collides with the level.
 
+The [`ShapeCast3D`](https://docs.godotengine.org/en/latest/classes/class_shapecast3d.html) node is used to detect whether the player is able to jump
+(i.e. touching the floor). Compared to a [`RayCast3D`](https://docs.godotengine.org/en/latest/classes/class_raycast3d.html) which is infinitely thin,
+this allows for more reliable checking if the player is standing over an edge or
+corner.
+
 ## Screenshots
 
-![Screenshot](screenshots/ingame.png)
-
-![Screenshot](screenshots/editor.png)
+![Screenshot](screenshots/rigidbody_character.webp)

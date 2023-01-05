@@ -1,4 +1,4 @@
-extends RigidDynamicBody3D
+extends RigidBody3D
 
 
 const MOUSE_DELTA_COEFFICIENT = 0.01

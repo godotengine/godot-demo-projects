@@ -49,7 +49,7 @@ func _on_ResumeButton_pressed():
 
 
 func _on_QuitButton_pressed():
-	scene_root.notification(NOTIFICATION_WM_QUIT_REQUEST)
+	scene_root.notification(NOTIFICATION_WM_CLOSE_REQUEST)
 	get_tree().quit()
 
 

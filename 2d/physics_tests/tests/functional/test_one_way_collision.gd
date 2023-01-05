@@ -81,17 +81,17 @@ func _ready():
 		options.add_menu_item(OPTION_TEST_CASE_MOVING_PLATFORM_RIGID)
 		options.add_menu_item(OPTION_TEST_CASE_MOVING_PLATFORM_CHARACTER)
 
-		options.connect(&"option_selected", Callable(self, "_on_option_selected"))
+		options.option_selected.connect(self._on_option_selected)
 
 		$Controls/PlatformSize/HSlider.value = _platform_size
 		$Controls/PlatformAngle/HSlider.value = _platform_angle
 		$Controls/BodyAngle/HSlider.value = _body_angle
 
 		remove_child(_target_area)
-		_target_area.connect(&"body_entered", Callable(self, "_on_target_entered"))
-		$Timer.connect(&"timeout", Callable(self, "_on_timeout"))
+		_target_area.body_entered.connect(self._on_target_entered)
+		$Timer.timeout.connect(self._on_timeout)
 
-		_rigid_body_template = $RigidDynamicBody2D
+		_rigid_body_template = $RigidBody2D
 		remove_child(_rigid_body_template)
 
 		_character_body_template = $CharacterBody2D
@@ -173,11 +173,11 @@ func _update_platform_angle(value, reset = true):
 	_platform_angle = value
 	if is_inside_tree():
 		if Engine.is_editor_hint():
-			$OneWayStaticBody2D.rotation = deg2rad(value)
+			$OneWayStaticBody2D.rotation = deg_to_rad(value)
 		else:
 			if _platform_body:
-				_platform_body.rotation = deg2rad(value)
-			_platform_template.rotation = deg2rad(value)
+				_platform_body.rotation = deg_to_rad(value)
+			_platform_template.rotation = deg_to_rad(value)
 			if reset:
 				await _reset_test()
 
@@ -190,13 +190,13 @@ func _update_rigidbody_angle(value, reset = true):
 	_body_angle = value
 	if is_inside_tree():
 		if Engine.is_editor_hint():
-			$RigidDynamicBody2D.rotation = deg2rad(value)
-			$CharacterBody2D.rotation = deg2rad(value)
+			$RigidBody2D.rotation = deg_to_rad(value)
+			$CharacterBody2D.rotation = deg_to_rad(value)
 		else:
 			if _moving_body:
-				_moving_body.rotation = deg2rad(value)
-			_rigid_body_template.rotation = deg2rad(value)
-			_character_body_template.rotation = deg2rad(value)
+				_moving_body.rotation = deg_to_rad(value)
+			_rigid_body_template.rotation = deg_to_rad(value)
+			_character_body_template.rotation = deg_to_rad(value)
 			if reset:
 				await _reset_test()
 
@@ -373,7 +373,7 @@ func _start_test():
 		test_label += String(_rigid_body_template.name)
 		_moving_body = _rigid_body_template.duplicate()
 		_moving_body.linear_velocity = _body_velocity
-		_moving_body.connect(&"body_entered", Callable(self, "_on_contact_detected"))
+		_moving_body.body_entered.connect(self._on_contact_detected)
 	add_child(_moving_body)
 
 	if _platform_speed != 0.0:
@@ -414,7 +414,7 @@ func _reset_test(cancel_test = true):
 			emit_signal("all_tests_done")
 		else:
 			Log.print_log("*** Start around the clock tests")
-		_platform_body.rotation = deg2rad(_platform_angle)
+		_platform_body.rotation = deg_to_rad(_platform_angle)
 		_lock_controls = true
 		$Controls/PlatformAngle/HSlider.value = _platform_angle
 		_lock_controls = false
@@ -429,9 +429,9 @@ func _next_test(force_start = false):
 		_moving_body = null
 
 	if _test_all_angles:
-		var angle = rad2deg(_platform_body.rotation)
+		var angle = rad_to_deg(_platform_body.rotation)
 		if angle >= _platform_angle + TEST_ALL_ANGLES_MAX:
-			_platform_body.rotation = deg2rad(_platform_angle)
+			_platform_body.rotation = deg_to_rad(_platform_angle)
 			_lock_controls = true
 			$Controls/PlatformAngle/HSlider.value = _platform_angle
 			_lock_controls = false
@@ -439,7 +439,7 @@ func _next_test(force_start = false):
 			Log.print_log("*** Done all angles")
 		else:
 			angle = _platform_angle + _test_step * TEST_ALL_ANGLES_STEP
-			_platform_body.rotation = deg2rad(angle)
+			_platform_body.rotation = deg_to_rad(angle)
 			_lock_controls = true
 			$Controls/PlatformAngle/HSlider.value = angle
 			_lock_controls = false
@@ -472,7 +472,7 @@ func _on_target_entered(_body):
 
 
 func _should_collide():
-	var platform_rotation = round(rad2deg(_platform_body.rotation))
+	var platform_rotation = round(rad_to_deg(_platform_body.rotation))
 
 	var angle = fposmod(platform_rotation, 360)
 	return angle > 180
@@ -522,7 +522,7 @@ func _set_result():
 
 	$LabelResult.text = result
 
-	var platform_angle = rad2deg(_platform_body.rotation)
+	var platform_angle = rad_to_deg(_platform_body.rotation)
 
 	result += ": size=%.1f, angle=%.1f, body angle=%.1f" % [_platform_size, platform_angle, _body_angle]
 	Log.print_log("Test %s" % result)

@@ -18,7 +18,7 @@ var _state = State.WALKING
 # This function is called when the scene enters the scene tree.
 # We can initialize variables here.
 func _ready():
-	_velocity.x = speed.x
+	velocity.x = speed.x
 
 # Physics process is a built-in loop in Godot.
 # If you define _physics_process on a node, Godot will call it every frame.
@@ -38,19 +38,19 @@ func _ready():
 func _physics_process(_delta):
 	# If the enemy encounters a wall or an edge, the horizontal velocity is flipped.
 	if not floor_detector_left.is_colliding():
-		_velocity.x = speed.x
+		velocity.x = speed.x
 	elif not floor_detector_right.is_colliding():
-		_velocity.x = -speed.x
+		velocity.x = -speed.x
 
 	if is_on_wall():
-		_velocity.x *= -1
+		velocity.x *= -1
 
 	# We only update the y value of _velocity as we want to handle the horizontal movement ourselves.
 	# TODO: This information should be set to the CharacterBody properties instead of arguments.
-	move_and_slide(_velocity, FLOOR_NORMAL).y
+	move_and_slide()
 
 	# We flip the Sprite2D depending on which way the enemy is moving.
-	if _velocity.x > 0:
+	if velocity.x > 0:
 		sprite.scale.x = 1
 	else:
 		sprite.scale.x = -1
@@ -62,13 +62,13 @@ func _physics_process(_delta):
 
 func destroy():
 	_state = State.DEAD
-	_velocity = Vector2.ZERO
+	velocity = Vector2.ZERO
 
 
 func get_new_animation():
 	var animation_new = ""
 	if _state == State.WALKING:
-		if _velocity.x == 0:
+		if velocity.x == 0:
 			animation_new = "idle"
 		else:
 			animation_new = "walk"

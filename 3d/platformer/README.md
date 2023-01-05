@@ -12,6 +12,4 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
 
 ## Screenshots
 
-![Screenshot](screenshots/face.png)
-
-![Screenshot](screenshots/shoot.png)
+![Screenshot](screenshots/platformer.webp)

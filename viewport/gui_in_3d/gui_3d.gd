@@ -16,7 +16,7 @@ var last_mouse_pos2D = null
 @onready var node_area = $Quad/Area3D
 
 func _ready():
-	node_area.connect(&"mouse_entered", self._mouse_entered_area)
+	node_area.mouse_entered.connect(self._mouse_entered_area)
 
 	# If the material is NOT set to use billboard settings, then avoid running billboard specific code
 	if node_quad.get_surface_override_material(0).billboard_mode == BaseMaterial3D.BillboardMode.BILLBOARD_DISABLED:

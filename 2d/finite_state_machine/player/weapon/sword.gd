@@ -31,10 +31,8 @@ var combo = [{
 var hit_objects = []
 
 func _ready():
-	# warning-ignore:return_value_discarded
-	$AnimationPlayer.connect(&"animation_finished", self._on_animation_finished)
-	# warning-ignore:return_value_discarded
-	self.connect(&"body_entered", self._on_body_entered)
+	$AnimationPlayer.animation_finished.connect(self._on_animation_finished)
+	body_entered.connect(self._on_body_entered)
 	_change_state(States.IDLE)
 
 

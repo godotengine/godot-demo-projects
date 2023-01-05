@@ -17,14 +17,14 @@ var states_stack = []
 var current_state = null
 var _active = false:
 	set(value):
-		# TODO: Manually copy the code from this method.
+		_active = value
 		set_active(value)
 
 func _ready():
-	if not start_state:
+	if start_state.is_empty():
 		start_state = get_child(0).get_path()
 	for child in get_children():
-		var err = child.connect(&"finished", self._change_state)
+		var err = child.finished.connect(self._change_state)
 		if err:
 			printerr(err)
 	initialize(start_state)
@@ -38,7 +38,6 @@ func initialize(initial_state):
 
 
 func set_active(value):
-	_active = value
 	set_physics_process(value)
 	set_process_input(value)
 	if not _active:

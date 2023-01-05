@@ -142,8 +142,8 @@ func end_game():
 
 
 func _ready():
-	multiplayer.peer_connected.connect(_player_connected)
-	multiplayer.peer_disconnected.connect(_player_disconnected)
-	multiplayer.connected_to_server.connect(_connected_ok)
-	multiplayer.connection_failed.connect(_connected_fail)
-	multiplayer.server_disconnected.connect(_server_disconnected)
+	multiplayer.peer_connected.connect(self._player_connected)
+	multiplayer.peer_disconnected.connect(self._player_disconnected)
+	multiplayer.connected_to_server.connect(self._connected_ok)
+	multiplayer.connection_failed.connect(self._connected_fail)
+	multiplayer.server_disconnected.connect(self._server_disconnected)

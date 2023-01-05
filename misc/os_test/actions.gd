@@ -15,30 +15,29 @@ func _on_OpenShellFolder_pressed():
 
 
 func _on_ChangeWindowTitle_pressed():
-	OS.set_window_title("Modified window title. Unicode characters for testing: é € × Ù ¨")
+	DisplayServer.window_set_title("Modified window title. Unicode characters for testing: é € × Ù ¨")
 
 
 func _on_ChangeWindowIcon_pressed():
-	var image = preload("res://icon.png").get_data()
-	# Use an operation that will cause the icon to change in a visible manner.
-	image.bumpmap_to_normalmap()
-	OS.set_icon(image)
+	var image = Image.create(128, 128, false, Image.FORMAT_RGB8)
+	image.fill(Color(1, 0.6, 0.3))
+	DisplayServer.set_icon(image)
 
 
 func _on_MoveWindowToForeground_pressed():
-	OS.set_window_title("Will move window to foreground in 5 seconds, try unfocusing the window...")
+	DisplayServer.window_set_title("Will move window to foreground in 5 seconds, try unfocusing the window...")
 	await get_tree().create_timer(5).timeout
-	OS.move_window_to_foreground()
+	DisplayServer.window_move_to_foreground()
 	# Restore the previous window title.
-	OS.set_window_title(ProjectSettings.get_setting("application/config/name"))
+	DisplayServer.window_set_title(ProjectSettings.get_setting("application/config/name"))
 
 
 func _on_RequestAttention_pressed():
-	OS.set_window_title("Will request attention in 5 seconds, try unfocusing the window...")
+	DisplayServer.window_set_title("Will request attention in 5 seconds, try unfocusing the window...")
 	await get_tree().create_timer(5).timeout
-	OS.request_attention()
+	DisplayServer.window_request_attention()
 	# Restore the previous window title.
-	OS.set_window_title(ProjectSettings.get_setting("application/config/name"))
+	DisplayServer.window_set_title(ProjectSettings.get_setting("application/config/name"))
 
 
 func _on_VibrateDeviceShort_pressed():
@@ -50,21 +49,21 @@ func _on_VibrateDeviceLong_pressed():
 
 
 func _on_AddGlobalMenuItems_pressed():
-	OS.global_menu_add_item("Hello", "World3D", 0, null)
-	OS.global_menu_add_separator("Hello")
-	OS.global_menu_add_item("Hello2", "World2", 0, null)
+	DisplayServer.global_menu_add_item("Hello", "World", func(): print("Clicked"), func(): print("Clicked Key"))
+	DisplayServer.global_menu_add_separator("Example Separator")
+	DisplayServer.global_menu_add_item("Hello2", "World2", func(): print("Clicked 2"), func(): print("Clicked Key 2"))
 
 
 func _on_RemoveGlobalMenuItem_pressed():
-	OS.global_menu_remove_item("Hello", 0)
+	DisplayServer.global_menu_remove_item("Hello", 0)
 
 
 func _on_GetClipboard_pressed():
-	OS.alert("Clipboard contents:\n\n%s" % OS.clipboard)
+	OS.alert("Clipboard contents:\n\n%s" % DisplayServer.clipboard_get())
 
 
 func _on_SetClipboard_pressed():
-	OS.clipboard = "Modified clipboard contents. Unicode characters for testing: é € × Ù ¨"
+	DisplayServer.clipboard_set("Modified clipboard contents. Unicode characters for testing: é € × Ù ¨")
 
 
 func _on_DisplayAlert_pressed():

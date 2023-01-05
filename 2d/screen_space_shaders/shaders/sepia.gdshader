@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform vec4 base : hint_color;
+uniform vec4 base : source_color;
 
 void fragment() {
 	vec3 c = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0).rgb;

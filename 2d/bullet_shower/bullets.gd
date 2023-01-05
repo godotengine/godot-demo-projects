@@ -56,7 +56,7 @@ func _ready():
 
 func _process(_delta):
 	# Order the CanvasItem to update every frame.
-	update()
+	queue_redraw()
 
 
 func _physics_process(delta):

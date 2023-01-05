@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform vec4 base: hint_color;
+uniform vec4 base: source_color;
 uniform sampler2D grain;
 uniform float grain_strength = 0.3;
 uniform sampler2D vignette;

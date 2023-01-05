@@ -1,4 +1,4 @@
-extends RigidDynamicBody2D
+extends RigidBody2D
 
 
 var _initial_velocity = Vector2.ZERO
@@ -62,11 +62,11 @@ func _integrate_forces(state):
 		var normal = state.get_contact_local_normal(i)
 
 		# Detect floor.
-		if acos(normal.dot(Vector2.UP)) <= deg2rad(_floor_max_angle) + 0.01:
+		if acos(normal.dot(Vector2.UP)) <= deg_to_rad(_floor_max_angle) + 0.01:
 			_on_floor = true
 
 		# Detect ceiling.
-		if acos(normal.dot(-Vector2.UP)) <= deg2rad(_floor_max_angle) + 0.01:
+		if acos(normal.dot(-Vector2.UP)) <= deg_to_rad(_floor_max_angle) + 0.01:
 			_jumping = false
 			_velocity.y = 0.0
 

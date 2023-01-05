@@ -1,90 +1,81 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://0oqbyhiw1abi"]
 
-[ext_resource path="res://assets/theme/user_interface.tres" type="Theme" id=1]
-[ext_resource path="res://src/UserInterface/PauseMenu.gd" type="Script" id=2]
-[ext_resource path="res://assets/theme/fonts/kenney_mini_square.tres" type="FontData" id=3]
-[ext_resource path="res://src/UserInterface/CoinsCounter.tscn" type="PackedScene" id=4]
-
-[sub_resource type="Font" id=1]
-size = 44
-font_data = ExtResource( 3 )
+[ext_resource type="Theme" uid="uid://chubprkmexsng" path="res://assets/theme/user_interface.tres" id="1"]
+[ext_resource type="Script" path="res://src/UserInterface/PauseMenu.gd" id="2"]
+[ext_resource type="PackedScene" path="res://src/UserInterface/CoinsCounter.tscn" id="4"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme = ExtResource("1")
+script = ExtResource("2")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0, 0, 0, 0.294118)
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CenterContainer" type="CenterContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer"]
-offset_left = 250.0
-offset_top = 140.0
-offset_right = 550.0
-offset_bottom = 340.0
-rect_min_size = Vector2(300, 200)
-custom_constants/separation = 6
+layout_mode = 2
+offset_left = 347.0
+offset_top = 194.0
+offset_right = 453.0
+offset_bottom = 285.0
 alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="ColorRect/CenterContainer/VBoxContainer"]
-offset_top = 7.0
-offset_right = 300.0
-offset_bottom = 62.0
-custom_fonts/font = SubResource( 1 )
+layout_mode = 2
+offset_right = 106.0
+offset_bottom = 23.0
 text = "Game Paused"
-align = 1
-valign = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect/CenterContainer/VBoxContainer"]
-offset_top = 68.0
-offset_right = 300.0
-offset_bottom = 88.0
-rect_min_size = Vector2(0, 20)
+layout_mode = 2
+offset_top = 27.0
+offset_right = 106.0
+offset_bottom = 27.0
 
 [node name="ResumeButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer"]
-offset_left = 60.0
-offset_top = 94.0
-offset_right = 240.0
-offset_bottom = 140.0
-rect_min_size = Vector2(180, 40)
+layout_mode = 2
+offset_left = 16.0
+offset_top = 31.0
+offset_right = 90.0
+offset_bottom = 59.0
 size_flags_horizontal = 4
 text = "Resume"
 
 [node name="QuitButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer"]
-offset_left = 60.0
-offset_top = 146.0
-offset_right = 240.0
-offset_bottom = 192.0
-rect_min_size = Vector2(180, 40)
+layout_mode = 2
+offset_left = 31.0
+offset_top = 63.0
+offset_right = 75.0
+offset_bottom = 91.0
 size_flags_horizontal = 4
 text = "Quit"
 
-[node name="CoinsCounter" parent="ColorRect" instance=ExtResource( 4 )]
+[node name="CoinsCounter" parent="ColorRect" instance=ExtResource("4")]
+layout_mode = 0
 offset_right = 105.0
 offset_bottom = 50.0
 
 [node name="Tween" type="Tween" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+editor_description = ""
+script = null
 
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
-[connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_all_completed"]

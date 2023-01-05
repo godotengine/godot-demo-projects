@@ -1,37 +1,35 @@
-[gd_scene load_steps=5 format=3 uid="uid://e22n700qhxqr"]
+[gd_scene load_steps=8 format=3 uid="uid://e22n700qhxqr"]
 
 [ext_resource type="Script" path="res://menu/options/options.gd" id="1"]
-[ext_resource type="Theme" path="res://menu/theme/theme.tres" id="1_1y7gy"]
+[ext_resource type="Theme" uid="uid://ckax6htygmelo" path="res://menu/theme/theme.tres" id="1_1y7gy"]
 [ext_resource type="Script" path="res://menu/options/option_buttons.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://ej6lqf2fptv8" path="res://menu/button.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://blcjvv0p0a6v8" path="res://menu/button_pressed.png" id="5_g68rn"]
+[ext_resource type="Texture2D" uid="uid://cfh73c8wnvgol" path="res://menu/button_hover.png" id="6_idu7c"]
+[ext_resource type="Texture2D" uid="uid://h208mfx7dyy2" path="res://menu/button_focus.png" id="7_gmbws"]
 
 [node name="Options" type="HBoxContainer"]
 visible = false
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( "1_1y7gy" )
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1y7gy")
 alignment = 1
-script = ExtResource( "1" )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 87.0
-offset_right = 937.0
-offset_bottom = 600.0
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="OptionsBackground" type="TextureRect" parent="VBoxContainer"]
-minimum_size = Vector2(850, 150)
-offset_top = 183.0
-offset_right = 850.0
-offset_bottom = 333.0
-texture = ExtResource( "3" )
-stretch_mode = 1
+[node name="OptionsBackground" type="ColorRect" parent="VBoxContainer"]
+self_modulate = Color(0.45098, 0.45098, 0.45098, 1)
+custom_minimum_size = Vector2(1000, 250)
+color = Color(0.25098, 0.25098, 0.25098, 0.627451)
 
 [node name="OptionButtons" type="GridContainer" parent="VBoxContainer/OptionsBackground"]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -40,25 +38,19 @@ offset_left = -400.0
 offset_top = -66.0
 offset_right = 400.0
 offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 20
 columns = 2
-script = ExtResource( "2" )
+script = ExtResource("2")
 
 [node name="RenderDistanceLabel" type="Label" parent="VBoxContainer/OptionsBackground/OptionButtons"]
-minimum_size = Vector2(320, 0)
-offset_right = 320.0
-offset_bottom = 64.0
 size_flags_vertical = 5
 theme_override_font_sizes/font_size = 60
 text = "Render distance: 3"
 horizontal_alignment = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RenderDistanceSlider" type="HSlider" parent="VBoxContainer/OptionsBackground/OptionButtons"]
-offset_left = 324.0
-offset_right = 800.0
-offset_bottom = 64.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 min_value = 3.0
@@ -66,39 +58,32 @@ max_value = 10.0
 value = 7.0
 
 [node name="FogLabel" type="Label" parent="VBoxContainer/OptionsBackground/OptionButtons"]
-offset_top = 68.0
-offset_right = 320.0
-offset_bottom = 132.0
 size_flags_vertical = 5
 theme_override_font_sizes/font_size = 60
 text = "Fog Enabled"
 horizontal_alignment = 2
 
 [node name="FogCheckBox" type="CheckBox" parent="VBoxContainer/OptionsBackground/OptionButtons"]
-offset_left = 324.0
-offset_top = 68.0
-offset_right = 800.0
-offset_bottom = 132.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-offset_top = 353.0
-offset_right = 850.0
-offset_bottom = 417.0
 alignment = 1
 
 [node name="Back" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
-offset_left = 233.0
-offset_right = 617.0
-offset_bottom = 64.0
-texture_normal = ExtResource( "3" )
+texture_normal = ExtResource("3")
+texture_pressed = ExtResource("5_g68rn")
+texture_hover = ExtResource("6_idu7c")
+texture_focused = ExtResource("7_gmbws")
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Back"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -1.0
 offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 60
 text = "Back"
 horizontal_alignment = 1

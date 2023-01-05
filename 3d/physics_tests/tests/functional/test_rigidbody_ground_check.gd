@@ -36,7 +36,7 @@ func _ready():
 	options.add_menu_item(SHAPE_CONVEX)
 	options.add_menu_item(SHAPE_BOX)
 
-	options.connect(&"option_selected", Callable(self, "_on_option_selected"))
+	options.option_selected.connect(self._on_option_selected)
 	restart_scene()
 
 
@@ -78,4 +78,3 @@ func get_packed_scene(node):
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(node)
 	return packed_scene
-

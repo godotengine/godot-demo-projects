@@ -6,7 +6,7 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
@@ -14,27 +14,34 @@ config/name="2D Lights and Shadows"
 config/description="Simple demo of 2D lights and shadows,
 using PointLight2D and LightOccluder2D."
 run/main_scene="res://light_shadows.tscn"
+config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 
 [display]
 
-window/size/width=800
-window/dpi/allow_hidpi=true
-window/stretch/mode="2d"
+window/size/viewport_width=800
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-stretch/aspect="keep"
-stretch/mode="2d"
 
-[gdnative]
+[input]
 
-singletons=[]
-
-[rasterizer]
-
-shadow_filter=2
-
-[rendering]
-
-quality/driver/driver_name="GLES2"
-vram_compression/import_etc=true
-vram_compression/import_etc2=false
+toggle_directional_light={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":68,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
+}
+toggle_point_lights={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":80,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
+}
+cycle_directional_light_shadows_quality={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":83,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
+}
+cycle_point_light_shadows_quality={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":72,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
+}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dfxo2jwbj4aeh"]
+[gd_scene load_steps=15 format=3 uid="uid://dfxo2jwbj4aeh"]
 
 [ext_resource type="Script" path="res://coin/coin.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://b23l5nfatq2d2" path="res://coin/sound_coin.wav" id="2"]
@@ -85,7 +85,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("GPUParticles3D:emitting")
+tracks/1/path = NodePath("CPUParticles3D:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -115,7 +115,7 @@ _data = {
 }
 
 [sub_resource type="SphereShape3D" id="5"]
-radius = 0.312546
+radius = 0.375
 
 [sub_resource type="StandardMaterial3D" id="6"]
 transparency = 1
@@ -125,6 +125,7 @@ vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_color = Color(1, 1, 0.759137, 1)
 albedo_texture = ExtResource("3")
+texture_filter = 4
 billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
@@ -132,8 +133,12 @@ particles_anim_loop = false
 
 [sub_resource type="PlaneMesh" id="7"]
 material = SubResource("6")
-size = Vector2(0.5, 0.5)
+size = Vector2(0.25, 0.25)
 orientation = 2
+
+[sub_resource type="Curve" id="Curve_b7uxi"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.101562, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Gradient" id="8"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -161,11 +166,12 @@ shape = SubResource("5")
 [node name="Sound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2")
 
-[node name="GPUParticles3D" type="CPUParticles3D" parent="."]
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000732422, 0.542954, 0)
 emitting = false
+amount = 16
 one_shot = true
-explosiveness = 0.5
+explosiveness = 1.0
 lifetime_randomness = 0.2
 mesh = SubResource("7")
 emission_shape = 2
@@ -174,6 +180,7 @@ direction = Vector3(0, 1, 0)
 spread = 25.0
 initial_velocity_min = 1.0
 initial_velocity_max = 2.0
+scale_amount_curve = SubResource("Curve_b7uxi")
 color_ramp = SubResource("8")
 
 [connection signal="body_entered" from="." to="." method="_on_coin_body_enter"]

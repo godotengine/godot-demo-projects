@@ -2,8 +2,8 @@ shader_type canvas_item;
 render_mode unshaded;
 
 uniform vec2 viewport_size;         // size in pixels of the viewport. Cannot be access from the shader in GLES2
-uniform sampler2D viewport1 : hint_albedo;
-uniform sampler2D viewport2 : hint_albedo;
+uniform sampler2D viewport1 : source_color;
+uniform sampler2D viewport2 : source_color;
 uniform bool split_active;          // true: split screen, false: use view1
 uniform vec2 player1_position;      // position of player 1 un UV coordinates
 uniform vec2 player2_position;      // position of player 2 un UV coordinates

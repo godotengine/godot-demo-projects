@@ -1,36 +1,34 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5uc5vwuqvck5"]
+[gd_scene load_steps=4 format=3 uid="uid://c5uc5vwuqvck5"]
 
-[ext_resource type="FontData" uid="uid://dj5xxi41l3y1r" path="res://noto_sans_ui_regular.ttf" id="1"]
 [ext_resource type="PackedScene" uid="uid://bbnebk7xoaoto" path="res://cubes.tscn" id="2"]
 [ext_resource type="Script" path="res://hud.gd" id="3"]
 
-[sub_resource type="Font" id="1"]
-data/0 = ExtResource( "1" )
-
 [sub_resource type="Theme" id="2"]
-default_font = SubResource( "1" )
 
 [node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = SubResource( "2" )
-script = ExtResource( "3" )
+theme = SubResource("2")
+script = ExtResource("3")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 texture_filter = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-shadow_atlas_size = 4096
-size = Vector2i(1024, 600)
+size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="Cubes" parent="SubViewportContainer/SubViewport" instance=ExtResource( "2" )]
+[node name="Cubes" parent="SubViewportContainer/SubViewport" instance=ExtResource("2")]
 
 [node name="Help" type="Label" parent="."]
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
@@ -40,32 +38,20 @@ offset_bottom = -16.0
 text = "This text will always render at the native resolution.
 Press Space to adjust the 3D viewport's resolution scaling.
 Press Enter to toggle filtering."
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 124.0
 offset_bottom = 76.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Scale" type="Label" parent="VBoxContainer"]
-offset_right = 108.0
+offset_right = 111.0
 offset_bottom = 26.0
 text = "Scale: 100%"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Filter" type="Label" parent="VBoxContainer"]
 offset_top = 30.0
-offset_right = 108.0
+offset_right = 111.0
 offset_bottom = 56.0
 text = "Filter: Enabled"
-__meta__ = {
-"_edit_use_anchors_": false
-}

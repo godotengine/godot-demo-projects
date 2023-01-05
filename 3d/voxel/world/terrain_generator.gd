@@ -5,6 +5,8 @@ extends Resource
 # https://github.com/godotengine/godot/issues/21461
 const CHUNK_SIZE = 16
 
+const RANDOM_BLOCK_PROBABILITY = 0.015
+
 
 static func empty():
 	return {}
@@ -16,7 +18,7 @@ static func random_blocks():
 		for y in range(CHUNK_SIZE):
 			for z in range(CHUNK_SIZE):
 				var vec = Vector3i(x, y, z)
-				if randf() < 0.01:
+				if randf() < RANDOM_BLOCK_PROBABILITY:
 					random_data[vec] = randi() % 29 + 1
 	return random_data
 
