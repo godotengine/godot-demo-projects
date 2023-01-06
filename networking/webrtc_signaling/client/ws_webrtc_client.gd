@@ -81,7 +81,7 @@ func _parse_msg():
 		# Client connected
 		emit_signal("peer_connected", src_id)
 	elif type.begins_with("D: "):
-		# Client connected
+		# Client disconnected
 		emit_signal("peer_disconnected", src_id)
 	elif type.begins_with("O: "):
 		# Offer received
