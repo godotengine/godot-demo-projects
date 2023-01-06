@@ -5,8 +5,8 @@
 extends Control
 
 var base_window_size = Vector2(
-	ProjectSettings.get_setting("display/window/size/viewport_width"),
-	ProjectSettings.get_setting("display/window/size/viewport_height")
+		ProjectSettings.get_setting("display/window/size/viewport_width"),
+		ProjectSettings.get_setting("display/window/size/viewport_height")
 )
 
 # These defaults match this demo's project settings. Adjust as needed if adapting this
