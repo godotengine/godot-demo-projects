@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://dksa68cph6y4b"]
+[gd_scene load_steps=63 format=3 uid="uid://dksa68cph6y4b"]
 
 [ext_resource type="Script" path="res://camera_controller.gd" id="2"]
 [ext_resource type="Shader" path="res://split_screen.gdshader" id="3"]
@@ -15,21 +15,26 @@ sky_material = SubResource("ProceduralSkyMaterial_16la2")
 [sub_resource type="Environment" id="Environment_vdrvu"]
 background_mode = 2
 sky = SubResource("Sky_i64ko")
+ambient_light_source = 2
+ambient_light_color = Color(0.79, 0.8775, 1, 1)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.33
 tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="ShaderMaterial" id="1"]
 shader = ExtResource("3")
+shader_parameter/viewport_size = null
+shader_parameter/split_active = false
 shader_parameter/player1_position = null
 shader_parameter/player2_position = null
-shader_parameter/split_active = null
-shader_parameter/split_line_color = null
-shader_parameter/split_line_thickness = null
-shader_parameter/viewport_size = null
+shader_parameter/split_line_thickness = 10.0
+shader_parameter/split_line_color = Vector3(0, 1, 0)
 
 [sub_resource type="CapsuleMesh" id="2"]
 radius = 0.375
 height = 1.75
+rings = 4
 
 [sub_resource type="StandardMaterial3D" id="3"]
 albedo_color = Color(0.933333, 0.0784314, 0.0784314, 1)
@@ -38,8 +43,23 @@ albedo_color = Color(0.933333, 0.0784314, 0.0784314, 1)
 radius = 0.375
 height = 1.75
 
+[sub_resource type="TorusMesh" id="TorusMesh_abtrc"]
+inner_radius = 0.4
+outer_radius = 0.6
+ring_segments = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_63nwq"]
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+
 [sub_resource type="StandardMaterial3D" id="5"]
 albedo_color = Color(0.0784314, 0.411765, 0.933333, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wi7e2"]
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+emission_enabled = true
+emission = Color(0.12549, 0.501961, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="6"]
 
@@ -183,12 +203,15 @@ albedo_color = Color(0.791675, 0.946163, 0.317723, 1)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_energy = 0.75
 shadow_enabled = true
+shadow_bias = 0.03
+shadow_blur = 2.0
 directional_shadow_mode = 0
 directional_shadow_split_3 = 0.25
 directional_shadow_blend_splits = true
 directional_shadow_fade_start = 1.0
-directional_shadow_max_distance = 25.0
+directional_shadow_max_distance = 12.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vdrvu")
@@ -235,6 +258,14 @@ surface_material_override/0 = SubResource("3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player1"]
 shape = SubResource("4")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
+mesh = SubResource("TorusMesh_abtrc")
+surface_material_override/0 = SubResource("StandardMaterial3D_63nwq")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Player1"]
+light_color = Color(1, 0, 0, 1)
+
 [node name="Player2" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.184, 0.875, 3.019)
 script = ExtResource("5")
@@ -246,6 +277,15 @@ surface_material_override/0 = SubResource("5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player2"]
 shape = SubResource("4")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0)
+mesh = SubResource("TorusMesh_abtrc")
+skeleton = NodePath("../../Player1")
+surface_material_override/0 = SubResource("StandardMaterial3D_wi7e2")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Player2"]
+light_color = Color(0.12549, 0.501961, 1, 1)
 
 [node name="Ground" type="StaticBody3D" parent="."]
 

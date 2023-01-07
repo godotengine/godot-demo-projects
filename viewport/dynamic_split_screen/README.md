@@ -3,12 +3,9 @@
 This sample project showcases an implementation of dynamic
 split screen, also called Voronoi split screen.
 
-Language: [GDSL](https://docs.godotengine.org/en/latest/tutorials/shaders/shader_reference/shading_language.html) and GDScript
+Language: [Godot shader language](https://docs.godotengine.org/en/latest/tutorials/shaders/shader_reference/shading_language.html) and GDScript
 
-Renderer: GLES 2
-
-Note: An HTML5 export is testable
-[here](https://benjaminnavarro.github.io/godot_dynamic_split_screen/index.html).
+Renderer: Forward Mobile
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/541
 
@@ -38,14 +35,14 @@ distance otherwise.
 
 ## How to use it
 
-Open and launch the project inside the Godot engine and then
-you can use WASD keys to move the first player and IJKL keys
-to move the second one.
+Open and launch the project inside the Godot engine, then
+use WASD to move the first player (in red) and IJKL (or arrow keys)
+to move the second player (in blue).
 
-The `Cameras` node has parameters to tune the distance at
+The `camera_controller.gd` script sets parameters to tune the distance at
 which the screen splits and also the width and color of
 the splitting line.
 
 ## Screenshots
 
-![Screenshots](screenshots/splitscreen.png)
+![Screenshots](screenshots/dynamic_split_screen.webp)

@@ -3,7 +3,7 @@ extends CharacterBody3D
 # Moves the player
 
 @export_range(1, 2) var player_id: int = 1
-@export var walk_speed: float = 2.5
+@export var walk_speed: float = 2
 
 
 func _physics_process(_delta):
