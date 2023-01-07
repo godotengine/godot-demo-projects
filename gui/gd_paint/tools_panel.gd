@@ -74,7 +74,7 @@ func button_pressed(button_name):
 	# If a opperation button is pressed
 	elif button_name == "clear_picture":
 		paint_control.brush_data_list = []
-		paint_control.update()
+		paint_control.queue_redraw()
 	elif button_name == "save_picture":
 		save_dialog.popup_centered()
 	elif button_name == "undo_stroke":
@@ -97,7 +97,7 @@ func background_color_changed(color):
 	get_parent().get_node(^"DrawingAreaBG").modulate = color
 	paint_control.bg_color = color
 	# Because of how the eraser works we also need to redraw the paint control.
-	paint_control.update()
+	paint_control.queue_redraw()
 
 
 func brush_size_changed(value):
