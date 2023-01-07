@@ -115,7 +115,7 @@ func undo_stroke():
 	# If we are undoing a shape, then we can just remove the latest brush.
 	if undo_element_list_num == UNDO_MODE_SHAPE:
 		if brush_data_list.size() > 0:
-			brush_data_list.remove(brush_data_list.size() - 1)
+			brush_data_list.remove_at(brush_data_list.size() - 1)
 
 		# Now that we've undone a shape, we cannot undo again until another stoke is added.
 		undo_element_list_num = UNDO_NONE
@@ -135,7 +135,7 @@ func undo_stroke():
 		undo_element_list_num = UNDO_NONE
 
 	# Redraw the brushes
-	update()
+	queue_redraw()
 
 
 func add_brush(mouse_pos, type):
@@ -187,7 +187,7 @@ func add_brush(mouse_pos, type):
 
 	# Add the brush and update/draw all of the brushes.
 	brush_data_list.append(new_brush)
-	update()
+	queue_redraw()
 
 
 func _draw():
@@ -233,7 +233,7 @@ func save_picture(path):
 	# Get the viewport image.
 	var img = get_viewport().get_texture().get_image()
 	# Crop the image so we only have canvas area.
-	var cropped_image = img.get_rect(Rect2(drawing_area.position, drawing_area.size))
+	var cropped_image = img.get_region(Rect2(drawing_area.position, drawing_area.size))
 
 	# Save the image with the passed in path we got from the save dialog.
 	cropped_image.save_png(path)
