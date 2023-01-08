@@ -3,9 +3,19 @@
 This is a demo implementing different types of trucks of
 varying complexity using vehicle physics.
 
+Controls:
+
+- <kbd>Up Arrow</kbd>, <kbd>W</kbd>, <kbd>Gamepad Right Trigger</kbd>, <kbd>Gamepad A/Cross</kbd>: Accelerate
+- <kbd>Down Arrow</kbd>, <kbd>S</kbd>, <kbd>Gamepad Left Trigger</kbd>, <kbd>Gamepad B/Circle</kbd> : Brake
+- <kbd>Left Arrow</kbd>, <kbd>Gamepad Left Stick</kbd>: Steer left
+- <kbd>Right Arrow</kbd>, <kbd>Gamepad Left Stick</kbd>: Steer right
+- <kbd>U</kbd>, <kbd>Gamepad Select</kbd>, left-click speedometer: Change speedometer unit (m/s, km/h, mph)
+- <kbd>C</kbd>, <kbd>Gamepad Y/Triangle</kbd>: Change camera (exterior, interior, top-down)
+- <kbd>Escape</kbd>, <kbd>Gamepad D-Pad Up</kbd>: Go back to menu (press again to exit)
+
 Language: GDScript
 
-Renderer: Vulkan Clustered
+Renderer: Forward Plus
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/524
 
