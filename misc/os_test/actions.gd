@@ -11,6 +11,10 @@ func _on_OpenShellFolder_pressed():
 		# Windows-specific.
 		path = OS.get_environment("USERPROFILE")
 
+	if OS.get_name() == "macOS":
+		# MacOS-specific.
+		path = "file://" + path
+
 	OS.shell_open(path)
 
 
