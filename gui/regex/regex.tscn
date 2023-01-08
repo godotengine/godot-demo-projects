@@ -1,34 +1,45 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://c7a03oinbdath"]
 
-[ext_resource path="res://regex.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://regex.gd" id="1"]
 
 [node name="Regex" type="VBoxContainer"]
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 14.0
+offset_left = 20.0
 offset_top = 20.0
-offset_right = -14.0
+offset_right = -20.0
 offset_bottom = -20.0
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
 
 [node name="Expression" type="LineEdit" parent="."]
-offset_right = 996.0
-offset_bottom = 24.0
-text = "\"((?:\\\\.|[^\"])*)\""
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Expression"
 
-[node name="Text" type="TextEdit" parent="."]
-offset_top = 28.0
-offset_right = 996.0
-offset_bottom = 328.0
-rect_min_size = Vector2(0, 300)
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="List" type="VBoxContainer" parent="."]
-offset_top = 332.0
-offset_right = 996.0
-offset_bottom = 332.0
+[node name="Text" type="TextEdit" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Text to search"
+wrap_mode = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="List" type="VBoxContainer" parent="HBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 
 [connection signal="text_changed" from="Expression" to="." method="update_expression"]
-[connection signal="text_changed" from="Text" to="." method="update_text"]
+[connection signal="text_changed" from="HBoxContainer/Text" to="." method="update_text"]
