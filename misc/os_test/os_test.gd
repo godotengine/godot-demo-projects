@@ -114,7 +114,7 @@ func _ready():
 	add_line("Device unique ID", OS.get_unique_id())
 
 	add_header("Input")
-	add_line("Device has touch screen", DisplayServer.screen_is_touchscreen())
+	add_line("Device has touch screen", DisplayServer.is_touchscreen_available())
 	add_line("Device has virtual keyboard", DisplayServer.has_feature(DisplayServer.FEATURE_VIRTUAL_KEYBOARD))
 	add_line("Virtual keyboard height", DisplayServer.virtual_keyboard_get_height())
 
