@@ -1,28 +1,12 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://oeg5vj7lpjw0"]
 
-[ext_resource path="res://rich_text_bbcode.gd" type="Script" id=1]
-[ext_resource path="res://Titillium-BoldItalic.otf" type="FontData" id=2]
-[ext_resource path="res://Titillium-RegularItalic.otf" type="FontData" id=3]
-[ext_resource path="res://Titillium-Bold.otf" type="FontData" id=4]
-[ext_resource path="res://Titillium-Regular.otf" type="FontData" id=5]
+[ext_resource type="Script" path="res://rich_text_bbcode.gd" id="1"]
 
-[sub_resource type="Font" id=1]
-size = 20
-font_data = ExtResource( 2 )
-
-[sub_resource type="Font" id=2]
-size = 20
-font_data = ExtResource( 3 )
-
-[sub_resource type="Font" id=3]
-size = 20
-font_data = ExtResource( 4 )
-
-[sub_resource type="Font" id=4]
-size = 20
-font_data = ExtResource( 5 )
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q1hwu"]
 
 [node name="RichTextBBCode" type="Control"]
+layout_mode = 3
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -31,50 +15,78 @@ offset_left = -512.0
 offset_top = -300.0
 offset_right = 512.0
 offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 49.0
-offset_top = 55.0
-offset_right = -48.0
-offset_bottom = -62.0
+offset_top = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
-custom_fonts/bold_italics_font = SubResource( 1 )
-custom_fonts/italics_font = SubResource( 2 )
-custom_fonts/bold_font = SubResource( 3 )
-custom_fonts/normal_font = SubResource( 4 )
+focus_mode = 2
+theme_override_colors/selection_color = Color(1, 1, 1, 0.164706)
+theme_override_constants/line_separation = 1
+theme_override_constants/table_h_separation = 120
+theme_override_constants/table_v_separation = 10
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q1hwu")
 bbcode_enabled = true
-bbcode_text = "[b][u]Rich Text Test[/u][/b]
+text = "RichTextLabel is a flexible way of adding text to your project, with support for [i]italics[/i], [b]bold[/b] and [i][b]both[/b][/i].
+[u]Underline[/u] and [s]strikethrough[/s] work too, including with [u][i]italics[/i][/u], [u][b]bold[/b][/u] and [u][i][b]both[/b][/i][/u].
 
-RichTextLabel is a flexible way of adding text to your game, with support for [i]italics[/i], [b]bold[/b] and [i][b]both[/b][/i].
- [u]Underline[/u] works too, including with [u][i]italics[/i][/u], [u][b]bold[/b][/u] and [u][i][b]both[/b][/i][/u].
-It is also possible to include [img]res://unicorn_icon.png[/img] custom images, as well as [color=aqua][url=https://godotengine.org]custom URLs[/url][/color].
+Text [color=#4cf]color[/color], [fgcolor=#49c9]foreground [color=#4cf]color[/color][/fgcolor]  and  [bgcolor=#49c9]background [color=#4cf]color[/color][/bgcolor]  can be adjusted.
 
+It's also possible to include [img]res://unicorn_icon.png[/img] [font_size=24]custom images[/font_size], as well as [color=aqua][url=https://godotengine.org]custom URLs[/url][/color]. [hint=This displays a hint.]Hover this to display a tooltip![/hint]
 Left alignment is default,[center]but center alignment is supported,[/center][right]as well as right alignment.[/right]
 
-[fill]Fill alignment is also supported, and allows writing very long text that will end up fitting the horizontal space entirely with words of joy.[/fill]
+[fill][dropcap font_size=48 color=yellow margins=0,-10,0,-12]F[/dropcap]ill alignment is also supported, and allows writing very long text that will end up fitting the horizontal space entirely with words of joy. Drop caps are also supported. A drop cap is the where the first character of a paragraph is made larger, taking up several lines of text and optionally using a specific font or color.[/fill]
 
-For full reference, [color=aqua][url=https://docs.godotengine.org/en/latest/tutorials/gui/bbcode_in_richtextlabel.html]check the documentation.[/url][/color]
+Several effects are also available:    [wave]Wave[/wave]    [tornado]Tornado[/tornado]    [shake]Shake[/shake]    [fade start=67 length=7]Fade[/fade]    [rainbow]Rainbow[/rainbow]
+
+[table=2]
+[cell border=#fff3 bg=#fff1]
+[ul]
+Tables
+are supported.
+[/ul]
+[/cell]
+[cell border=#fc13 bg=#fc11]
+[ol]
+Ordered
+list example.
+[/ol]
+[/cell]
+
+[/table]
+
+You can also create custom tags/effects, or customize behavior of [lb]url[rb] tags on click. For full reference, [color=aqua][url=https://docs.godotengine.org/en/latest/tutorials/gui/bbcode_in_richtextlabel.html]check the documentation.[/url][/color]
+
 "
-text = "Rich Text Test
+context_menu_enabled = true
+selection_enabled = true
 
-RichTextLabel is a flexible way of adding text to your game, with support for italics, bold and both.
- Underline works too, including with italics, bold and both.
-It is also possible to include  custom images, as well as custom URLs.
-
-Left alignment is default,but center alignment is supported,as well as right alignment.
-
-Fill alignment is also supported, and allows writing very long text that will end up fitting the horizontal space entirely with words of joy.
-
-For full reference, check the documentation.
-"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Pause" type="Button" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -42.0
+offset_right = 96.0
+grow_vertical = 0
+toggle_mode = true
+shortcut_in_tooltip = false
+text = "Pause"
 
 [connection signal="meta_clicked" from="RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
+[connection signal="pressed" from="Pause" to="." method="_on_pause_pressed"]
+[connection signal="toggled" from="Pause" to="." method="_on_pause_toggled"]
