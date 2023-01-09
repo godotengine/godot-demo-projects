@@ -16,13 +16,17 @@ for the purpose of showcasing Godot's rendering capabilities.
 
 This demo was featured at the beginning of the Godot 3.0 trailer."
 run/main_scene="res://material_tester.tscn"
-config/icon="res://icon.png"
 config/features=PackedStringArray("4.0")
+config/icon="res://icon.png"
 
 [display]
 
-window/stretch/mode="2d"
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[filesystem]
+
+import/blender/enabled=false
 
 [gdnative]
 
@@ -34,6 +38,11 @@ multithread/thread_rid_pool_prealloc=60
 
 [rendering]
 
+textures/default_filters/anisotropic_filtering_level=4
+anti_aliasing/quality/msaa_3d=2
+anti_aliasing/quality/use_debanding=true
+lights_and_shadows/positional_shadow/atlas_size=2048
+lights_and_shadows/positional_shadow/atlas_size.mobile=1024
 quality/driver/fallback_to_gles2=true
 quality/intended_usage/framebuffer_allocation=3
 vram_compression/import_etc=true

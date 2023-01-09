@@ -3,16 +3,17 @@
 [ext_resource type="Texture2D" uid="uid://ddo4ecus0bal4" path="res://backgrounds/schelde.hdr" id="1"]
 
 [sub_resource type="PanoramaSkyMaterial" id="1"]
-panorama = ExtResource( "1" )
+panorama = ExtResource("1")
 
 [sub_resource type="Sky" id="2"]
-sky_material = SubResource( "1" )
+sky_material = SubResource("1")
+radiance_size = 4
 
 [resource]
 background_mode = 2
-sky = SubResource( "2" )
-tonemap_mode = 2
-tonemap_exposure = 1.2
+sky = SubResource("2")
+tonemap_mode = 3
 tonemap_white = 6.0
-ssao_enabled = true
-ssao_light_affect = 0.78
+fog_enabled = true
+fog_density = 0.002
+fog_sky_affect = 0.0

@@ -1,23 +1,26 @@
-[gd_resource type="SpatialMaterial" load_steps=5 format=2]
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://dfsu6vtygh0tc"]
 
-[ext_resource path="res://test_materials/texture_bricks_depth.jpg" type="Texture" id=1]
-[ext_resource path="res://test_materials/texture_bricks_normal.jpg" type="Texture" id=2]
-[ext_resource path="res://test_materials/texture_bricks.jpg" type="Texture" id=3]
-[ext_resource path="res://test_materials/texture_bricks_metal.jpg" type="Texture" id=4]
+[ext_resource type="Texture2D" uid="uid://dyyjfu431yi7r" path="res://test_materials/texture_bricks_depth.jpg" id="1"]
+[ext_resource type="Texture2D" uid="uid://cn6yat4b4mngn" path="res://test_materials/texture_bricks_normal.jpg" id="2"]
+[ext_resource type="Texture2D" uid="uid://cmin1t2jofd3o" path="res://test_materials/texture_bricks_ao.jpg" id="2_geolo"]
+[ext_resource type="Texture2D" uid="uid://d4l8oj2cmq330" path="res://test_materials/texture_bricks.jpg" id="3"]
+[ext_resource type="Texture2D" uid="uid://4t1ufkncfbs3" path="res://test_materials/texture_bricks_metal.jpg" id="4"]
 
 [resource]
-albedo_texture = ExtResource( 3 )
+albedo_texture = ExtResource("3")
 metallic = 1.0
-metallic_texture = ExtResource( 4 )
+metallic_texture = ExtResource("4")
 roughness = 0.56
 normal_enabled = true
-normal_scale = 1.0
-normal_texture = ExtResource( 2 )
-depth_enabled = true
-depth_scale = 0.03
-depth_deep_parallax = true
-depth_min_layers = 8
-depth_max_layers = 32
-depth_flip_tangent = false
-depth_flip_binormal = false
-depth_texture = ExtResource( 1 )
+normal_texture = ExtResource("2")
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource("2_geolo")
+heightmap_enabled = true
+heightmap_scale = 6.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 4
+heightmap_max_layers = 16
+heightmap_texture = ExtResource("1")
+heightmap_flip_texture = true
+texture_filter = 5

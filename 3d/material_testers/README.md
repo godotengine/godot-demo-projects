@@ -8,12 +8,10 @@ This demo was featured at the beginning of the
 
 Language: GDScript
 
-Renderer: GLES 3
+Renderer: Forward Plus
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/123
 
 ## Screenshots
 
-![Screenshot](screenshots/stones.png)
-
-![Screenshot](screenshots/mirror.png)
+![Screenshot](screenshots/material_testers.webp)
