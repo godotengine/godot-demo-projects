@@ -27,11 +27,11 @@ func _ready():
 	# is resized whenever the window size changes. This is because the root Control node
 	# uses a Full Rect anchor, so its size will always be equal to the window size.
 	resized.connect(self._on_resized)
-	update_container()
+	call_deferred("update_container")
 
 
 func update_container():
-	# The code within this function needs to be run twice to work around an issue with containers
+	# The code within this function needs to be run deferred to work around an issue with containers
 	# having a 1-frame delay with updates.
 	# Otherwise, `panel.size` returns a value of the previous frame, which results in incorrect
 	# sizing of the inner AspectRatioContainer when using the Fit to Window setting.
@@ -75,17 +75,17 @@ func _on_gui_aspect_ratio_item_selected(index):
 		6:  # 21:9
 			gui_aspect_ratio = 21.0 / 9.0
 
-	update_container()
+	call_deferred("update_container")
 
 
 func _on_resized():
-	update_container()
+	call_deferred("update_container")
 
 
 func _on_gui_margin_drag_ended(_value_changed):
 	gui_margin = $"Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMargin/HSlider".value
 	$"Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMargin/Value".text = str(gui_margin)
-	update_container()
+	call_deferred("update_container")
 
 
 func _on_window_base_size_item_selected(index):
@@ -108,7 +108,7 @@ func _on_window_base_size_item_selected(index):
 			base_window_size = Vector2(1680, 720)
 
 	get_viewport().content_scale_size = base_window_size
-	update_container()
+	call_deferred("update_container")
 
 
 func _on_window_stretch_mode_item_selected(index):
