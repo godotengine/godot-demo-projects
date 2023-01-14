@@ -115,8 +115,10 @@ func _ready():
 
 	add_header("Input")
 	add_line("Device has touch screen", DisplayServer.is_touchscreen_available())
-	add_line("Device has virtual keyboard", DisplayServer.has_feature(DisplayServer.FEATURE_VIRTUAL_KEYBOARD))
-	add_line("Virtual keyboard height", DisplayServer.virtual_keyboard_get_height())
+	var has_virtual_keyboard = DisplayServer.has_feature(DisplayServer.FEATURE_VIRTUAL_KEYBOARD)
+	add_line("Device has virtual keyboard", has_virtual_keyboard)
+	if has_virtual_keyboard:
+		add_line("Virtual keyboard height", DisplayServer.virtual_keyboard_get_height())
 
 	add_header("Localization")
 	add_line("Locale", OS.get_locale())
