@@ -53,13 +53,22 @@ func _on_VibrateDeviceLong_pressed():
 
 
 func _on_AddGlobalMenuItems_pressed():
-	DisplayServer.global_menu_add_item("Hello", "World", func(): print("Clicked"), func(): print("Clicked Key"))
-	DisplayServer.global_menu_add_separator("Example Separator")
-	DisplayServer.global_menu_add_item("Hello2", "World2", func(): print("Clicked 2"), func(): print("Clicked Key 2"))
+	# Add a menu to the main menu bar.
+	DisplayServer.global_menu_add_submenu_item("_main", "Hello", "_main/Hello")
+	DisplayServer.global_menu_add_item("_main/Hello", "World", func(): print("Clicked"))
+	DisplayServer.global_menu_add_separator("_main/Hello")
+	DisplayServer.global_menu_add_item("_main/Hello", "World2", func(): print("Clicked 2"))
+
+	# Add a menu to the Dock context menu.
+	DisplayServer.global_menu_add_submenu_item("_dock", "Hello", "_dock/Hello")
+	DisplayServer.global_menu_add_item("_dock/Hello", "World", func(): print("Clicked"))
+	DisplayServer.global_menu_add_separator("_dock/Hello")
+	DisplayServer.global_menu_add_item("_dock/Hello", "World2", func(): print("Clicked 2"))
 
 
 func _on_RemoveGlobalMenuItem_pressed():
-	DisplayServer.global_menu_remove_item("Hello", 0)
+	DisplayServer.global_menu_remove_item("_main", 0)
+	DisplayServer.global_menu_remove_item("_dock", 0)
 
 
 func _on_GetClipboard_pressed():
