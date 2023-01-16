@@ -55,15 +55,15 @@ func _on_VibrateDeviceLong_pressed():
 func _on_AddGlobalMenuItems_pressed():
 	# Add a menu to the main menu bar.
 	DisplayServer.global_menu_add_submenu_item("_main", "Hello", "_main/Hello")
-	DisplayServer.global_menu_add_item("_main/Hello", "World", func(): print("Clicked"))
+	DisplayServer.global_menu_add_item("_main/Hello", "World", func(tag): print("Clicked main 1 " + str(tag)))
 	DisplayServer.global_menu_add_separator("_main/Hello")
-	DisplayServer.global_menu_add_item("_main/Hello", "World2", func(): print("Clicked 2"))
+	DisplayServer.global_menu_add_item("_main/Hello", "World2", func(tag): print("Clicked main 2 " + str(tag)))
 
 	# Add a menu to the Dock context menu.
 	DisplayServer.global_menu_add_submenu_item("_dock", "Hello", "_dock/Hello")
-	DisplayServer.global_menu_add_item("_dock/Hello", "World", func(): print("Clicked"))
+	DisplayServer.global_menu_add_item("_dock/Hello", "World", func(tag): print("Clicked dock 1 " + str(tag)))
 	DisplayServer.global_menu_add_separator("_dock/Hello")
-	DisplayServer.global_menu_add_item("_dock/Hello", "World2", func(): print("Clicked 2"))
+	DisplayServer.global_menu_add_item("_dock/Hello", "World2", func(tag): print("Clicked dock 2 " + str(tag)))
 
 
 func _on_RemoveGlobalMenuItem_pressed():
