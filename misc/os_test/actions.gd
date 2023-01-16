@@ -67,7 +67,14 @@ func _on_AddGlobalMenuItems_pressed():
 
 
 func _on_RemoveGlobalMenuItem_pressed():
+	DisplayServer.global_menu_remove_item("_main/Hello", 2)
+	DisplayServer.global_menu_remove_item("_main/Hello", 1)
+	DisplayServer.global_menu_remove_item("_main/Hello", 0)
 	DisplayServer.global_menu_remove_item("_main", 0)
+
+	DisplayServer.global_menu_remove_item("_dock/Hello", 2)
+	DisplayServer.global_menu_remove_item("_dock/Hello", 1)
+	DisplayServer.global_menu_remove_item("_dock/Hello", 0)
 	DisplayServer.global_menu_remove_item("_dock", 0)
 
 
