@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://cfb66sviolbur"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_uks2k"]
+
+[sub_resource type="Gradient" id="Gradient_fomqa"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.779221, 1)
+colors = PackedColorArray(1, 0.780392, 0, 1, 0.752941, 0, 0, 0.12549, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8aikp"]
+gradient = SubResource("Gradient_fomqa")
+
+[sub_resource type="Curve" id="Curve_5giak"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qyrb6"]
+curve = SubResource("Curve_5giak")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wtijp"]
+emission_shape = 1
+emission_sphere_radius = 0.1
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 1.5
+initial_velocity_max = 1.5
+scale_min = 0.15
+scale_max = 0.15
+scale_curve = SubResource("CurveTexture_qyrb6")
+color_ramp = SubResource("GradientTexture1D_8aikp")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.5
+collision_use_scale = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tels0"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_4grn4"]
+material = SubResource("StandardMaterial3D_tels0")
+
+[node name="Bullet" type="RayCast3D"]
+target_position = Vector3(0, 0, -100)
+script = ExtResource("1_uks2k")
+
+[node name="HitLocation" type="Node3D" parent="."]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="HitLocation"]
+cast_shadow = 0
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 0
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_wtijp")
+draw_pass_1 = SubResource("QuadMesh_4grn4")

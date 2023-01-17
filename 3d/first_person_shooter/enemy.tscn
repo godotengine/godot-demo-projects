@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://cewhn5k3503lu"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_vwsoo"]
+[ext_resource type="Shader" path="res://enemy.gdshader" id="2_6q7ln"]
+[ext_resource type="Texture2D" uid="uid://nh83ps0jfomn" path="res://enemy/front.png" id="3_s8wtj"]
+[ext_resource type="PackedScene" uid="uid://b4g77r67peq11" path="res://blob_shadow.tscn" id="4_42qd4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cwcsd"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_he27t"]
+size = Vector2(1, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4tdqe"]
+render_priority = 0
+shader = ExtResource("2_6q7ln")
+shader_parameter/albedo_texture = ExtResource("3_s8wtj")
+
+[node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_vwsoo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_cwcsd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 4
+mesh = SubResource("QuadMesh_he27t")
+surface_material_override/0 = SubResource("ShaderMaterial_4tdqe")
+
+[node name="Decal" parent="." instance=ExtResource("4_42qd4")]
+cull_mask = 1048569

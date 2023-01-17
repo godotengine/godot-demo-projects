@@ -1,0 +1,131 @@
+[gd_scene load_steps=9 format=3 uid="uid://bcmepm05qldy5"]
+
+[ext_resource type="Texture2D" uid="uid://bc3n2sen32mqx" path="res://sky.png" id="1_0n6b1"]
+[ext_resource type="PackedScene" uid="uid://dfyswwfb8j6iv" path="res://player.tscn" id="2_cwuyg"]
+[ext_resource type="PackedScene" uid="uid://cosjr7whfc78d" path="res://lamp_post.tscn" id="3_rtj1w"]
+[ext_resource type="PackedScene" uid="uid://cewhn5k3503lu" path="res://enemy.tscn" id="4_errvf"]
+[ext_resource type="CompressedTexture3D" uid="uid://qgj3lwwrrgj" path="res://level.GPUParticlesCollisionSDF3D_data.exr" id="5_myd3n"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_33kw8"]
+panorama = ExtResource("1_0n6b1")
+filter = false
+
+[sub_resource type="Sky" id="Sky_xd4ok"]
+sky_material = SubResource("PanoramaSkyMaterial_33kw8")
+
+[sub_resource type="Environment" id="Environment_b1dvs"]
+background_mode = 2
+sky = SubResource("Sky_xd4ok")
+ambient_light_color = Color(0.25098, 0.501961, 1, 1)
+ambient_light_sky_contribution = 0.98
+tonemap_mode = 3
+tonemap_white = 6.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_b1dvs")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.236491, -0.970858, -0.0388079, 0.265457, 0.0261379, 0.963768, -0.934668, -0.238224, 0.263902, 2.61962, -0.479115, -1.60764)
+light_color = Color(0.308, 0.369333, 0.4, 1)
+light_cull_mask = 4294967291
+shadow_enabled = true
+shadow_bias = 0.04
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 50.0
+
+[node name="Player" parent="." instance=ExtResource("2_cwuyg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, -8.5, 43)
+
+[node name="Main" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
+use_collision = true
+size = Vector3(100, 10, 100)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Main"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+operation = 2
+use_collision = true
+size = Vector3(99, 9, 99)
+
+[node name="Building" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 36)
+use_collision = true
+size = Vector3(16, 25, 16)
+
+[node name="Building2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1, 19)
+use_collision = true
+size = Vector3(16, 25, 16)
+
+[node name="Building3" type="CSGBox3D" parent="."]
+transform = Transform3D(0.995645, 0, 0.0932221, 0, 1, 0, -0.0932221, 0, 0.995645, -36.2054, 3, 36.0096)
+use_collision = true
+size = Vector3(16, 25, 16)
+
+[node name="Building4" type="CSGBox3D" parent="."]
+transform = Transform3D(0.995645, 0, 0.0932221, 0, 1, 0, -0.0932221, 0, 0.995645, -36.7946, -7, 18.9904)
+use_collision = true
+size = Vector3(16, 25, 16)
+
+[node name="Slope" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.2222e-08, 1.13133e-08, 1, 0.258819, 0.965926, 0, -0.965926, 0.258819, -4.37114e-08, -15.8, -9.5, 17)
+use_collision = true
+size = Vector3(4, 1, 16)
+
+[node name="Staircase" type="CSGPolygon3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -17.5, -9.25, 11.75)
+use_collision = true
+polygon = PackedVector2Array(0.5, 0, 0.5, 0.25, 1, 0.25, 1, 0.5, 1.5, 0.5, 1.5, 0.75, 2, 0.75, 2, 1, 2.5, 1, 2.5, 1.25, 3, 1.25, 3, 1.5, 3.5, 1.5, 3.5, 1.75, 4, 1.75, 4, 2, 5, 2, 5, -0.25, 0, -0.25)
+depth = 4.0
+
+[node name="Staircase2" type="CSGPolygon3D" parent="."]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -22.825, -9.25, 11.6)
+use_collision = true
+polygon = PackedVector2Array(0.5, 0, 0.5, 0.25, 1, 0.25, 1, 0.5, 1.5, 0.5, 1.5, 0.75, 2, 0.75, 2, 1, 2.5, 1, 2.5, 1.25, 3, 1.25, 3, 1.5, 3.5, 1.5, 3.5, 1.75, 4, 1.75, 4, 2, 5, 2, 5, -0.25, 0, -0.25)
+
+[node name="LampPost" parent="." instance=ExtResource("3_rtj1w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -9.5, 24)
+
+[node name="LampPost2" parent="." instance=ExtResource("3_rtj1w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -9.5, 40)
+
+[node name="LampPost3" parent="." instance=ExtResource("3_rtj1w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, -9.5, 24)
+
+[node name="LampPost4" parent="." instance=ExtResource("3_rtj1w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, -9.5, 40)
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource("4_errvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, -8.5, 21)
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource("4_errvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, -8.5, 21)
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource("4_errvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5, -8.5, 21)
+
+[node name="Enemy4" parent="Enemies" instance=ExtResource("4_errvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5, -8.5, 21)
+
+[node name="Enemy5" parent="Enemies" instance=ExtResource("4_errvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.5, -8.5, -28)
+
+[node name="Enemy6" parent="Enemies" instance=ExtResource("4_errvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.5, -8.5, -28)
+
+[node name="Enemy7" parent="Enemies" instance=ExtResource("4_errvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, -8.5, -19)
+
+[node name="Enemy8" parent="Enemies" instance=ExtResource("4_errvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, -8.5, -19)
+
+[node name="GPUParticlesCollisionSDF3D" type="GPUParticlesCollisionSDF3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+extents = Vector3(51, 14.5, 51)
+resolution = 3
+texture = ExtResource("5_myd3n")

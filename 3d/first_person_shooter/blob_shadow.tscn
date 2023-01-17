@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4g77r67peq11"]
+
+[sub_resource type="Gradient" id="Gradient_voc73"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rpfu5"]
+gradient = SubResource("Gradient_voc73")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0.01)
+
+[node name="Decal" type="Decal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+extents = Vector3(0.6, 1.2, 0.6)
+texture_albedo = SubResource("GradientTexture2D_rpfu5")
+albedo_mix = 0.5
+upper_fade = 1.0
+lower_fade = 1.0
+cull_mask = 1048573
