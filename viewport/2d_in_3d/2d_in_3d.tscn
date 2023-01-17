@@ -1,6 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://c587vtbfwth3k"]
+[gd_scene load_steps=22 format=3 uid="uid://c587vtbfwth3k"]
 
-[ext_resource type="Script" path="res://2D_in_3D.gd" id="1"]
+[ext_resource type="Script" path="res://2d_in_3d.gd" id="1_b8rgl"]
 [ext_resource type="Script" path="res://pong.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://dbuw5tlmsx6ss" path="res://ball.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://gtbg1ogxcsl7" path="res://left_pallete.png" id="4"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://wiyhsl0rfkrs" path="res://separator.png" id="6"]
 
 [sub_resource type="StandardMaterial3D" id="6"]
+metallic_specular = 0.0
 
 [sub_resource type="PlaneMesh" id="1"]
 
@@ -17,12 +18,36 @@ roughness = 0.7
 [sub_resource type="BoxMesh" id="3"]
 size = Vector3(2, 2, 2)
 
-[sub_resource type="StandardMaterial3D" id="4"]
-albedo_color = Color(0.652344, 0.652344, 0.652344, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trcb6"]
+albedo_color = Color(0.501961, 0.752941, 0.752941, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bqwig"]
+albedo_color = Color(0.501961, 0.752941, 0.752941, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_elot5"]
+albedo_color = Color(0.501961, 0.752941, 0.752941, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_phrtn"]
+albedo_color = Color(0.752941, 0.501961, 0.752941, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_omrd7"]
+albedo_color = Color(0.752941, 0.501961, 0.752941, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dvcyb"]
+albedo_color = Color(0.752941, 0.501961, 0.752941, 1)
 roughness = 0.0
 
 [sub_resource type="BoxMesh" id="5"]
 size = Vector3(1.1, 0.8, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="4"]
+albedo_color = Color(0.4, 0.4, 0.4, 1)
+roughness = 0.0
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cvh5i"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -38,11 +63,11 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="2Din3D" type="Node3D"]
-script = ExtResource("1")
+script = ExtResource("1_b8rgl")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
-fov = 74.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0.6)
+fov = 62.0
 near = 0.1
 
 [node name="ViewportQuad" type="MeshInstance3D" parent="."]
@@ -91,17 +116,17 @@ transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -3, -0.2, -4)
 [node name="PillarBottom" type="MeshInstance3D" parent="Environment/Pillar1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("3")
-surface_material_override/0 = SubResource("4")
+surface_material_override/0 = SubResource("StandardMaterial3D_trcb6")
 
 [node name="PillarTop" type="MeshInstance3D" parent="Environment/Pillar1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
 mesh = SubResource("3")
-surface_material_override/0 = SubResource("4")
+surface_material_override/0 = SubResource("StandardMaterial3D_bqwig")
 
 [node name="PillarMiddle" type="MeshInstance3D" parent="Environment/Pillar1"]
 transform = Transform3D(0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, 0, 2.5, 0)
 mesh = SubResource("3")
-surface_material_override/0 = SubResource("4")
+surface_material_override/0 = SubResource("StandardMaterial3D_elot5")
 
 [node name="Pillar2" type="Node3D" parent="Environment"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 3, -0.2, -4)
@@ -109,17 +134,17 @@ transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 3, -0.2, -4)
 [node name="PillarBottom" type="MeshInstance3D" parent="Environment/Pillar2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("3")
-surface_material_override/0 = SubResource("4")
+surface_material_override/0 = SubResource("StandardMaterial3D_phrtn")
 
 [node name="PillarTop" type="MeshInstance3D" parent="Environment/Pillar2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
 mesh = SubResource("3")
-surface_material_override/0 = SubResource("4")
+surface_material_override/0 = SubResource("StandardMaterial3D_omrd7")
 
 [node name="PillarMiddle" type="MeshInstance3D" parent="Environment/Pillar2"]
 transform = Transform3D(0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, 0, 2.5, 0)
 mesh = SubResource("3")
-surface_material_override/0 = SubResource("4")
+surface_material_override/0 = SubResource("StandardMaterial3D_dvcyb")
 
 [node name="PillarBack" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 1.2, -4.5)
@@ -133,4 +158,9 @@ environment = SubResource("Environment_fvsgw")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(0.623013, -0.733525, 0.271653, 0.321394, 0.55667, 0.766045, -0.713134, -0.389948, 0.582563, 0, 10, 0)
 shadow_enabled = true
+shadow_bias = 0.03
+shadow_blur = 1.5
+directional_shadow_mode = 0
 directional_shadow_blend_splits = true
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 10.0
