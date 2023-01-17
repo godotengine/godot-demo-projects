@@ -16,9 +16,25 @@ const GI_MODE_TEXTS = [
 	"GIProbe (Slow)",
 ]
 
-var gi_mode = GIMode.NONE
-var use_reflection_probe = false
+enum ReflectionProbeMode {
+	NONE,
+	ONCE,
+	ALWAYS,
+	MAX,
+}
 
+# Keep this in sync with the ReflectionProbeMode enum (except for MAX).
+const REFLECTION_PROBE_MODE_TEXTS = [
+	"Disabled - Using environment, VoxelGI or SDFGI reflections (Fastest)",
+	"Enabled - \"Once\" Update Mode (Average)",
+	"Enabled - \"Always\" Update Mode (Slow)",
+]
+
+var gi_mode = GIMode.NONE
+var reflection_probe_mode = ReflectionProbeMode.NONE
+var use_ssao = false
+
+onready var environment = preload("res://default_env.tres")
 onready var gi_mode_label = $GIMode
 onready var reflection_probe_mode_label = $ReflectionProbeMode
 onready var reflection_probe = $Camera/ReflectiveSphere/ReflectionProbe
@@ -26,15 +42,19 @@ onready var reflection_probe = $Camera/ReflectiveSphere/ReflectionProbe
 
 func _ready():
 	set_gi_mode(GIMode.NONE)
-	set_use_reflection_probe(false)
+	set_reflection_probe_mode(ReflectionProbeMode.NONE)
+	set_use_ssao(use_ssao)
 
 
 func _input(event):
 	if event.is_action_pressed("cycle_gi_mode"):
 		set_gi_mode(wrapi(gi_mode + 1, 0, GIMode.MAX))
 
-	if event.is_action_pressed("toggle_reflection_probe"):
-		set_use_reflection_probe(not use_reflection_probe)
+	if event.is_action_pressed("cycle_reflection_probe_mode"):
+		set_reflection_probe_mode(wrapi(reflection_probe_mode + 1, 0, ReflectionProbeMode.MAX))
+
+	if event.is_action_pressed("toggle_ssao"):
+		set_use_ssao(not use_ssao)
 
 
 func set_gi_mode(p_gi_mode):
@@ -103,12 +123,24 @@ func set_gi_mode(p_gi_mode):
 			$CornerSpotLight.light_bake_mode = Light.BAKE_INDIRECT
 
 
-func set_use_reflection_probe(p_visible):
-	use_reflection_probe = p_visible
+func set_reflection_probe_mode(p_reflection_probe_mode):
+	reflection_probe_mode = p_reflection_probe_mode
+	reflection_probe_mode_label.text = "Reflection probe: %s " % REFLECTION_PROBE_MODE_TEXTS[reflection_probe_mode]
 
-	if p_visible:
-		reflection_probe_mode_label.text = "Current reflection probe mode: Enabled - Using reflection probe (Average)"
-	else:
-		reflection_probe_mode_label.text = "Current reflection probe mode: Disabled - Using environment or GIProbe reflections (Fast)"
+	match p_reflection_probe_mode:
+		ReflectionProbeMode.NONE:
+			reflection_probe.visible = false
+			reflection_probe.update_mode = ReflectionProbe.UPDATE_ONCE
+		ReflectionProbeMode.ONCE:
+			reflection_probe.visible = true
+			reflection_probe.update_mode = ReflectionProbe.UPDATE_ONCE
+		ReflectionProbeMode.ALWAYS:
+			reflection_probe.visible = true
+			reflection_probe.update_mode = ReflectionProbe.UPDATE_ALWAYS
 
-	reflection_probe.visible = p_visible
+
+func set_use_ssao(p_use_ssao):
+	use_ssao = p_use_ssao
+	reflection_probe_mode_label.text = "Screen-space ambient occlusion: %s" % "Enabled (Slow)" if use_ssao else "Disabled (Fastest)"
+
+	environment.ssao_enabled = use_ssao
