@@ -11,6 +11,10 @@ func _on_OpenShellFolder_pressed():
 		# Windows-specific.
 		path = OS.get_environment("USERPROFILE")
 
+	if OS.get_name() == "macOS":
+		# MacOS-specific.
+		path = "file://" + path
+
 	OS.shell_open(path)
 
 
@@ -49,13 +53,36 @@ func _on_VibrateDeviceLong_pressed():
 
 
 func _on_AddGlobalMenuItems_pressed():
-	DisplayServer.global_menu_add_item("Hello", "World", func(): print("Clicked"), func(): print("Clicked Key"))
-	DisplayServer.global_menu_add_separator("Example Separator")
-	DisplayServer.global_menu_add_item("Hello2", "World2", func(): print("Clicked 2"), func(): print("Clicked Key 2"))
+	# Add a menu to the main menu bar.
+	DisplayServer.global_menu_add_submenu_item("_main", "Hello", "_main/Hello")
+	DisplayServer.global_menu_add_item(
+			"_main/Hello",
+			"World",
+			func(tag): print("Clicked main 1 " + str(tag)),
+			func(tag): print("Key main 1 " + str(tag)),
+			null,
+			KEY_MASK_META + KEY_1
+	)
+	DisplayServer.global_menu_add_separator("_main/Hello")
+	DisplayServer.global_menu_add_item("_main/Hello", "World2", func(tag): print("Clicked main 2 " + str(tag)))
+
+	# Add a menu to the Dock context menu.
+	DisplayServer.global_menu_add_submenu_item("_dock", "Hello", "_dock/Hello")
+	DisplayServer.global_menu_add_item("_dock/Hello", "World", func(tag): print("Clicked dock 1 " + str(tag)))
+	DisplayServer.global_menu_add_separator("_dock/Hello")
+	DisplayServer.global_menu_add_item("_dock/Hello", "World2", func(tag): print("Clicked dock 2 " + str(tag)))
 
 
 func _on_RemoveGlobalMenuItem_pressed():
-	DisplayServer.global_menu_remove_item("Hello", 0)
+	DisplayServer.global_menu_remove_item("_main/Hello", 2)
+	DisplayServer.global_menu_remove_item("_main/Hello", 1)
+	DisplayServer.global_menu_remove_item("_main/Hello", 0)
+	DisplayServer.global_menu_remove_item("_main", 0)
+
+	DisplayServer.global_menu_remove_item("_dock/Hello", 2)
+	DisplayServer.global_menu_remove_item("_dock/Hello", 1)
+	DisplayServer.global_menu_remove_item("_dock/Hello", 0)
+	DisplayServer.global_menu_remove_item("_dock", 0)
 
 
 func _on_GetClipboard_pressed():

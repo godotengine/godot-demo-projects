@@ -114,9 +114,11 @@ func _ready():
 	add_line("Device unique ID", OS.get_unique_id())
 
 	add_header("Input")
-	add_line("Device has touch screen", DisplayServer.screen_is_touchscreen())
-	add_line("Device has virtual keyboard", DisplayServer.has_feature(DisplayServer.FEATURE_VIRTUAL_KEYBOARD))
-	add_line("Virtual keyboard height", DisplayServer.virtual_keyboard_get_height())
+	add_line("Device has touch screen", DisplayServer.is_touchscreen_available())
+	var has_virtual_keyboard = DisplayServer.has_feature(DisplayServer.FEATURE_VIRTUAL_KEYBOARD)
+	add_line("Device has virtual keyboard", has_virtual_keyboard)
+	if has_virtual_keyboard:
+		add_line("Virtual keyboard height", DisplayServer.virtual_keyboard_get_height())
 
 	add_header("Localization")
 	add_line("Locale", OS.get_locale())
@@ -160,5 +162,9 @@ func _ready():
 		"CPU",
 	][RenderingServer.get_video_adapter_type()])
 	add_line("Adapter graphics API version", RenderingServer.get_video_adapter_api_version())
-	add_line("Adapter driver name", OS.get_video_adapter_driver_info()[0])
-	add_line("Adapter driver version", OS.get_video_adapter_driver_info()[1])
+
+	var video_adapter_driver_info = OS.get_video_adapter_driver_info()
+	if video_adapter_driver_info.size() > 0:
+		add_line("Adapter driver name", video_adapter_driver_info[0])
+	if video_adapter_driver_info.size() > 1:
+		add_line("Adapter driver version", video_adapter_driver_info[1])
