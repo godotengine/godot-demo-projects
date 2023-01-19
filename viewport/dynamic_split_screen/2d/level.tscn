@@ -1,0 +1,531 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://2d/player.gd" type="Script" id=1]
+[ext_resource path="res://2d/wall_coloring.gd" type="Script" id=2]
+[ext_resource path="res://2d/square.png" type="Texture" id=3]
+[ext_resource path="res://2d/player.png" type="Texture" id=4]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 8.06226
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 8 )
+
+[node name="Level" type="Node2D"]
+
+[node name="Player1" type="KinematicBody2D" parent="."]
+position = Vector2( -36, -16 )
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
+shape = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="Player1"]
+modulate = Color( 1, 0, 0, 1 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 4 )
+
+[node name="Player2" type="KinematicBody2D" parent="."]
+position = Vector2( 25, 42 )
+script = ExtResource( 1 )
+player_id = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="Player2"]
+modulate = Color( 0, 0.588235, 1, 1 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 4 )
+
+[node name="Walls" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="Group1" type="Node2D" parent="Walls"]
+position = Vector2( 342, -1.00002 )
+rotation = 0.707648
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls/Group1"]
+position = Vector2( -68, -17 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group1/StaticBody2D"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group1/StaticBody2D" groups=["walls"]]
+modulate = Color( 0.607891, 0.046592, 0.00570985, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls/Group1"]
+position = Vector2( 52, 29 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group1/StaticBody2D4"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group1/StaticBody2D4" groups=["walls"]]
+modulate = Color( 0.404256, 0.898451, 0.937987, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls/Group1"]
+position = Vector2( -20, 48 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group1/StaticBody2D2"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group1/StaticBody2D2" groups=["walls"]]
+modulate = Color( 0.180765, 0.0852998, 0.0428303, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Walls/Group1"]
+position = Vector2( 35, -38 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group1/StaticBody2D3"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group1/StaticBody2D3" groups=["walls"]]
+modulate = Color( 0.0991764, 0.976524, 0.341112, 1 )
+texture = ExtResource( 3 )
+
+[node name="Group8" type="Node2D" parent="Walls"]
+position = Vector2( -119, -69 )
+rotation = 0.707648
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls/Group8"]
+position = Vector2( -68, -17 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group8/StaticBody2D"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group8/StaticBody2D" groups=["walls"]]
+modulate = Color( 0.607891, 0.046592, 0.00570985, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls/Group8"]
+position = Vector2( 52, 29 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group8/StaticBody2D4"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group8/StaticBody2D4" groups=["walls"]]
+modulate = Color( 0.404256, 0.898451, 0.937987, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls/Group8"]
+position = Vector2( -20, 48 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group8/StaticBody2D2"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group8/StaticBody2D2" groups=["walls"]]
+modulate = Color( 0.180765, 0.0852998, 0.0428303, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Walls/Group8"]
+position = Vector2( 35, -38 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group8/StaticBody2D3"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group8/StaticBody2D3" groups=["walls"]]
+modulate = Color( 0.0991764, 0.976524, 0.341112, 1 )
+texture = ExtResource( 3 )
+
+[node name="Group6" type="Node2D" parent="Walls"]
+position = Vector2( -12, -162 )
+rotation = -0.472087
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls/Group6"]
+position = Vector2( -68, -17 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group6/StaticBody2D"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group6/StaticBody2D" groups=["walls"]]
+modulate = Color( 0.830074, 0.71524, 0.115105, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls/Group6"]
+position = Vector2( 52, 29 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group6/StaticBody2D4"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group6/StaticBody2D4" groups=["walls"]]
+modulate = Color( 0.86402, 0.891686, 0.747119, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls/Group6"]
+position = Vector2( -20, 48 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group6/StaticBody2D2"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group6/StaticBody2D2" groups=["walls"]]
+modulate = Color( 0.176854, 0.187306, 0.991179, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Walls/Group6"]
+position = Vector2( 35, -38 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group6/StaticBody2D3"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group6/StaticBody2D3" groups=["walls"]]
+modulate = Color( 0.909202, 0.190021, 0.310404, 1 )
+texture = ExtResource( 3 )
+
+[node name="Group9" type="Node2D" parent="Walls"]
+position = Vector2( 7, 268 )
+rotation = 1.44794
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls/Group9"]
+position = Vector2( -68, -17 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group9/StaticBody2D"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group9/StaticBody2D" groups=["walls"]]
+modulate = Color( 0.830074, 0.71524, 0.115105, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls/Group9"]
+position = Vector2( 52, 29 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group9/StaticBody2D4"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group9/StaticBody2D4" groups=["walls"]]
+modulate = Color( 0.86402, 0.891686, 0.747119, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls/Group9"]
+position = Vector2( -20, 48 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group9/StaticBody2D2"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group9/StaticBody2D2" groups=["walls"]]
+modulate = Color( 0.176854, 0.187306, 0.991179, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Walls/Group9"]
+position = Vector2( 35, -38 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group9/StaticBody2D3"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group9/StaticBody2D3" groups=["walls"]]
+modulate = Color( 0.909202, 0.190021, 0.310404, 1 )
+texture = ExtResource( 3 )
+
+[node name="Group2" type="Node2D" parent="Walls"]
+position = Vector2( 166, 1 )
+rotation = -2.65517
+scale = Vector2( 0.5, 0.5 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls/Group2"]
+position = Vector2( -68, -17 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group2/StaticBody2D"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group2/StaticBody2D" groups=["walls"]]
+modulate = Color( 0.255383, 0.0261656, 0.866709, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls/Group2"]
+position = Vector2( 52, 29 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group2/StaticBody2D4"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group2/StaticBody2D4" groups=["walls"]]
+modulate = Color( 0.484218, 0.0260328, 0.657083, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls/Group2"]
+position = Vector2( -20, 48 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group2/StaticBody2D2"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group2/StaticBody2D2" groups=["walls"]]
+modulate = Color( 0.20515, 0.697483, 0.160248, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Walls/Group2"]
+position = Vector2( 35, -38 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group2/StaticBody2D3"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group2/StaticBody2D3" groups=["walls"]]
+modulate = Color( 0.641967, 0.583661, 0.16892, 1 )
+texture = ExtResource( 3 )
+
+[node name="Group5" type="Node2D" parent="Walls"]
+position = Vector2( -31, 77 )
+rotation = -1.82393
+scale = Vector2( 0.5, 0.5 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls/Group5"]
+position = Vector2( -68, -17 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group5/StaticBody2D"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group5/StaticBody2D" groups=["walls"]]
+modulate = Color( 0.394341, 0.0701354, 0.101846, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls/Group5"]
+position = Vector2( 52, 29 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group5/StaticBody2D4"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group5/StaticBody2D4" groups=["walls"]]
+modulate = Color( 0.94116, 0.566994, 0.606703, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls/Group5"]
+position = Vector2( -20, 48 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group5/StaticBody2D2"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group5/StaticBody2D2" groups=["walls"]]
+modulate = Color( 0.276915, 0.426239, 0.60367, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Walls/Group5"]
+position = Vector2( 35, -38 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group5/StaticBody2D3"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group5/StaticBody2D3" groups=["walls"]]
+modulate = Color( 0.673828, 0.857139, 0.0330471, 1 )
+texture = ExtResource( 3 )
+
+[node name="Group10" type="Node2D" parent="Walls"]
+position = Vector2( -215, 133 )
+rotation = -2.80987
+scale = Vector2( 0.5, 0.5 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls/Group10"]
+position = Vector2( -68, -17 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group10/StaticBody2D"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group10/StaticBody2D" groups=["walls"]]
+modulate = Color( 0.394341, 0.0701354, 0.101846, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls/Group10"]
+position = Vector2( 52, 29 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group10/StaticBody2D4"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group10/StaticBody2D4" groups=["walls"]]
+modulate = Color( 0.94116, 0.566994, 0.606703, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls/Group10"]
+position = Vector2( -20, 48 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group10/StaticBody2D2"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group10/StaticBody2D2" groups=["walls"]]
+modulate = Color( 0.276915, 0.426239, 0.60367, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Walls/Group10"]
+position = Vector2( 35, -38 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group10/StaticBody2D3"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group10/StaticBody2D3" groups=["walls"]]
+modulate = Color( 0.673828, 0.857139, 0.0330471, 1 )
+texture = ExtResource( 3 )
+
+[node name="Group4" type="Node2D" parent="Walls"]
+position = Vector2( 162, 197 )
+rotation = -0.800594
+scale = Vector2( 0.5, 0.5 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls/Group4"]
+position = Vector2( -68, -17 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group4/StaticBody2D"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group4/StaticBody2D" groups=["walls"]]
+modulate = Color( 0.334467, 0.798133, 0.45167, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls/Group4"]
+position = Vector2( 52, 29 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group4/StaticBody2D4"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group4/StaticBody2D4" groups=["walls"]]
+modulate = Color( 0.386136, 0.875769, 0.0833352, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls/Group4"]
+position = Vector2( -20, 48 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group4/StaticBody2D2"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group4/StaticBody2D2" groups=["walls"]]
+modulate = Color( 0.680544, 0.336621, 0.477674, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Walls/Group4"]
+position = Vector2( 35, -38 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group4/StaticBody2D3"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group4/StaticBody2D3" groups=["walls"]]
+modulate = Color( 0.810584, 0.863357, 0.582931, 1 )
+texture = ExtResource( 3 )
+
+[node name="Group3" type="Node2D" parent="Walls"]
+position = Vector2( 142, 27 )
+rotation = 1.61359
+scale = Vector2( 2, 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls/Group3"]
+position = Vector2( -68, -17 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group3/StaticBody2D"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group3/StaticBody2D" groups=["walls"]]
+modulate = Color( 0.0134517, 0.400895, 0.508833, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls/Group3"]
+position = Vector2( 52, 29 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group3/StaticBody2D4"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group3/StaticBody2D4" groups=["walls"]]
+modulate = Color( 0.280046, 0.408967, 0.911763, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls/Group3"]
+position = Vector2( -20, 48 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group3/StaticBody2D2"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group3/StaticBody2D2" groups=["walls"]]
+modulate = Color( 0.228981, 0.571434, 0.607728, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Walls/Group3"]
+position = Vector2( 35, -38 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group3/StaticBody2D3"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group3/StaticBody2D3" groups=["walls"]]
+modulate = Color( 0.398647, 0.433863, 0.423729, 1 )
+texture = ExtResource( 3 )
+
+[node name="Group7" type="Node2D" parent="Walls"]
+position = Vector2( -228, 127 )
+rotation = 3.15427
+scale = Vector2( 2, 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls/Group7"]
+position = Vector2( -68, -17 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group7/StaticBody2D"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group7/StaticBody2D" groups=["walls"]]
+modulate = Color( 0.0134517, 0.400895, 0.508833, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls/Group7"]
+position = Vector2( 52, 29 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group7/StaticBody2D4"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group7/StaticBody2D4" groups=["walls"]]
+modulate = Color( 0.280046, 0.408967, 0.911763, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls/Group7"]
+position = Vector2( -20, 48 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group7/StaticBody2D2"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group7/StaticBody2D2" groups=["walls"]]
+modulate = Color( 0.228981, 0.571434, 0.607728, 1 )
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Walls/Group7"]
+position = Vector2( 35, -38 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Group7/StaticBody2D3"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Group7/StaticBody2D3" groups=["walls"]]
+modulate = Color( 0.398647, 0.433863, 0.423729, 1 )
+texture = ExtResource( 3 )

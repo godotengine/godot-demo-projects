@@ -1,19 +1,7 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=54 format=2]
 
-[ext_resource path="res://default_env.tres" type="Environment" id=1]
-[ext_resource path="res://camera_controller.gd" type="Script" id=2]
-[ext_resource path="res://split_screen.shader" type="Shader" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
-[ext_resource path="res://player.gd" type="Script" id=5]
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 3 )
-shader_param/viewport_size = null
-shader_param/split_active = null
-shader_param/player1_position = null
-shader_param/player2_position = null
-shader_param/split_line_thickness = null
-shader_param/split_line_color = null
+[ext_resource path="res://3d/player.gd" type="Script" id=1]
+[ext_resource path="res://default_env.tres" type="Environment" id=2]
 
 [sub_resource type="CapsuleMesh" id=2]
 
@@ -164,54 +152,19 @@ albedo_color = Color( 0.770645, 0.287346, 0.739309, 1 )
 [sub_resource type="SpatialMaterial" id=52]
 albedo_color = Color( 0.791675, 0.946163, 0.317723, 1 )
 
-[node name="World" type="Spatial"]
+[node name="Level" type="Spatial"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource( 1 )
+environment = ExtResource( 2 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="WorldEnvironment"]
 transform = Transform( 1, 0, 0, 0, -0.818651, 0.574291, 0, -0.574291, -0.818651, 0, 70.567, -72.3668 )
 shadow_enabled = true
 shadow_color = Color( 0.6, 0.6, 0.6, 1 )
 
-[node name="Cameras" type="Spatial" parent="."]
-script = ExtResource( 2 )
-
-[node name="View" type="TextureRect" parent="Cameras"]
-material = SubResource( 1 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 4 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Viewport1" type="Viewport" parent="Cameras"]
-size = Vector2( 100, 100 )
-msaa = 2
-usage = 3
-render_target_v_flip = true
-render_target_update_mode = 3
-
-[node name="Camera1" type="Camera" parent="Cameras/Viewport1"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 20, 0 )
-current = true
-
-[node name="Viewport2" type="Viewport" parent="Cameras"]
-size = Vector2( 100, 100 )
-msaa = 2
-usage = 3
-render_target_v_flip = true
-render_target_update_mode = 3
-
-[node name="Camera2" type="Camera" parent="Cameras/Viewport2"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 20, 0 )
-current = true
-
 [node name="Player1" type="KinematicBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
-script = ExtResource( 5 )
+script = ExtResource( 1 )
 
 [node name="Mesh" type="MeshInstance" parent="Player1"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
@@ -224,7 +177,7 @@ shape = SubResource( 4 )
 
 [node name="Player2" type="KinematicBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.18358, 1.25, 3.01882 )
-script = ExtResource( 5 )
+script = ExtResource( 1 )
 player_id = 2
 
 [node name="Mesh" type="MeshInstance" parent="Player2"]
@@ -241,7 +194,6 @@ shape = SubResource( 4 )
 [node name="Mesh" type="MeshInstance" parent="Ground"]
 transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0 )
 mesh = SubResource( 7 )
-material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Ground"]
 transform = Transform( 200, 0, 0, 0, 1, 0, 0, 0, 200, 0, -1, 0 )
@@ -260,7 +212,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group1/Wall1" groups=["walls"]]
 material_override = SubResource( 10 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall2" type="StaticBody" parent="Walls/Group1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3812, 1, -2.68735 )
@@ -271,7 +222,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group1/Wall2" groups=["walls"]]
 material_override = SubResource( 12 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall3" type="StaticBody" parent="Walls/Group1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.99091, 1, -13.3028 )
@@ -282,7 +232,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group1/Wall3" groups=["walls"]]
 material_override = SubResource( 13 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall4" type="StaticBody" parent="Walls/Group1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10164, 1, 4.39061 )
@@ -293,7 +242,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group1/Wall4" groups=["walls"]]
 material_override = SubResource( 14 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall5" type="StaticBody" parent="Walls/Group1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12965, 1, -9.09735 )
@@ -304,7 +252,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group1/Wall5" groups=["walls"]]
 material_override = SubResource( 15 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall6" type="StaticBody" parent="Walls/Group1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99301, 1, 1.77014 )
@@ -315,7 +262,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group1/Wall6" groups=["walls"]]
 material_override = SubResource( 16 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Group2" type="Spatial" parent="Walls"]
 transform = Transform( 0.988065, 0, -0.154039, 0, 1, 0, 0.154039, 0, 0.988065, -22.59, 0, -3.1796 )
@@ -329,7 +275,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group2/Wall1" groups=["walls"]]
 material_override = SubResource( 17 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall2" type="StaticBody" parent="Walls/Group2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3812, 1, -2.68735 )
@@ -340,7 +285,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group2/Wall2" groups=["walls"]]
 material_override = SubResource( 18 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall3" type="StaticBody" parent="Walls/Group2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.99091, 1, -13.3028 )
@@ -351,7 +295,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group2/Wall3" groups=["walls"]]
 material_override = SubResource( 19 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall4" type="StaticBody" parent="Walls/Group2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10164, 1, 4.39061 )
@@ -362,7 +305,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group2/Wall4" groups=["walls"]]
 material_override = SubResource( 20 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall5" type="StaticBody" parent="Walls/Group2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12965, 1, -9.09735 )
@@ -373,7 +315,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group2/Wall5" groups=["walls"]]
 material_override = SubResource( 21 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall6" type="StaticBody" parent="Walls/Group2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99301, 1, 1.77014 )
@@ -384,7 +325,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group2/Wall6" groups=["walls"]]
 material_override = SubResource( 22 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Group3" type="Spatial" parent="Walls"]
 transform = Transform( 0.905096, 0, 0.425207, 0, 1, 0, -0.425207, 0, 0.905096, -12.7693, 0, 17.7449 )
@@ -398,7 +338,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group3/Wall1" groups=["walls"]]
 material_override = SubResource( 23 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall2" type="StaticBody" parent="Walls/Group3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3812, 1, -2.68735 )
@@ -409,7 +348,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group3/Wall2" groups=["walls"]]
 material_override = SubResource( 24 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall3" type="StaticBody" parent="Walls/Group3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.99091, 1, -13.3028 )
@@ -420,7 +358,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group3/Wall3" groups=["walls"]]
 material_override = SubResource( 25 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall4" type="StaticBody" parent="Walls/Group3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10164, 1, 4.39061 )
@@ -431,7 +368,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group3/Wall4" groups=["walls"]]
 material_override = SubResource( 26 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall5" type="StaticBody" parent="Walls/Group3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12965, 1, -9.09735 )
@@ -442,7 +378,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group3/Wall5" groups=["walls"]]
 material_override = SubResource( 27 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall6" type="StaticBody" parent="Walls/Group3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99301, 1, 1.77014 )
@@ -453,7 +388,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group3/Wall6" groups=["walls"]]
 material_override = SubResource( 28 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Group4" type="Spatial" parent="Walls"]
 transform = Transform( 0.155702, 0, -0.987804, 0, 1, 0, 0.987804, 0, 0.155702, 14.0374, 0, 12.1476 )
@@ -467,7 +401,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group4/Wall1" groups=["walls"]]
 material_override = SubResource( 29 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall2" type="StaticBody" parent="Walls/Group4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3812, 1, -2.68735 )
@@ -478,7 +411,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group4/Wall2" groups=["walls"]]
 material_override = SubResource( 30 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall3" type="StaticBody" parent="Walls/Group4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.99091, 1, -13.3028 )
@@ -489,7 +421,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group4/Wall3" groups=["walls"]]
 material_override = SubResource( 31 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall4" type="StaticBody" parent="Walls/Group4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10164, 1, 4.39061 )
@@ -500,7 +431,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group4/Wall4" groups=["walls"]]
 material_override = SubResource( 32 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall5" type="StaticBody" parent="Walls/Group4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12965, 1, -9.09735 )
@@ -511,7 +441,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group4/Wall5" groups=["walls"]]
 material_override = SubResource( 33 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall6" type="StaticBody" parent="Walls/Group4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99301, 1, 1.77014 )
@@ -522,7 +451,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group4/Wall6" groups=["walls"]]
 material_override = SubResource( 34 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Group5" type="Spatial" parent="Walls"]
 transform = Transform( 0.999549, 0, 0.0300306, 0, 1, 0, -0.0300306, 0, 0.999549, 0.500639, 0, 27.6888 )
@@ -536,7 +464,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group5/Wall1" groups=["walls"]]
 material_override = SubResource( 35 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall2" type="StaticBody" parent="Walls/Group5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3812, 1, -2.68735 )
@@ -547,7 +474,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group5/Wall2" groups=["walls"]]
 material_override = SubResource( 36 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall3" type="StaticBody" parent="Walls/Group5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.99091, 1, -13.3028 )
@@ -558,7 +484,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group5/Wall3" groups=["walls"]]
 material_override = SubResource( 37 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall4" type="StaticBody" parent="Walls/Group5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10164, 1, 4.39061 )
@@ -569,7 +494,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group5/Wall4" groups=["walls"]]
 material_override = SubResource( 38 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall5" type="StaticBody" parent="Walls/Group5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12965, 1, -9.09735 )
@@ -580,7 +504,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group5/Wall5" groups=["walls"]]
 material_override = SubResource( 39 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall6" type="StaticBody" parent="Walls/Group5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99301, 1, 1.77014 )
@@ -591,7 +514,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group5/Wall6" groups=["walls"]]
 material_override = SubResource( 40 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Group6" type="Spatial" parent="Walls"]
 transform = Transform( 0.613129, 0, -0.789983, 0, 1, 0, 0.789983, 0, 0.613129, 21.2586, 0, -14.244 )
@@ -605,7 +527,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group6/Wall1" groups=["walls"]]
 material_override = SubResource( 41 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall2" type="StaticBody" parent="Walls/Group6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3812, 1, -2.68735 )
@@ -616,7 +537,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group6/Wall2" groups=["walls"]]
 material_override = SubResource( 42 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall3" type="StaticBody" parent="Walls/Group6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.99091, 1, -13.3028 )
@@ -627,7 +547,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group6/Wall3" groups=["walls"]]
 material_override = SubResource( 43 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall4" type="StaticBody" parent="Walls/Group6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10164, 1, 4.39061 )
@@ -638,7 +557,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group6/Wall4" groups=["walls"]]
 material_override = SubResource( 44 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall5" type="StaticBody" parent="Walls/Group6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12965, 1, -9.09735 )
@@ -649,7 +567,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group6/Wall5" groups=["walls"]]
 material_override = SubResource( 45 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall6" type="StaticBody" parent="Walls/Group6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99301, 1, 1.77014 )
@@ -660,7 +577,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group6/Wall6" groups=["walls"]]
 material_override = SubResource( 46 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Group7" type="Spatial" parent="Walls"]
 transform = Transform( -0.999329, 0, -0.0366257, 0, 1, 0, 0.0366257, 0, -0.999329, -8.83615, 0, -32.7996 )
@@ -674,7 +590,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group7/Wall1" groups=["walls"]]
 material_override = SubResource( 47 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall2" type="StaticBody" parent="Walls/Group7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3812, 1, -2.68735 )
@@ -685,7 +600,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group7/Wall2" groups=["walls"]]
 material_override = SubResource( 48 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall3" type="StaticBody" parent="Walls/Group7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.99091, 1, -13.3028 )
@@ -696,7 +610,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group7/Wall3" groups=["walls"]]
 material_override = SubResource( 49 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall4" type="StaticBody" parent="Walls/Group7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10164, 1, 4.39061 )
@@ -707,7 +620,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group7/Wall4" groups=["walls"]]
 material_override = SubResource( 50 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall5" type="StaticBody" parent="Walls/Group7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12965, 1, -9.09735 )
@@ -718,7 +630,6 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group7/Wall5" groups=["walls"]]
 material_override = SubResource( 51 )
 mesh = SubResource( 11 )
-material/0 = null
 
 [node name="Wall6" type="StaticBody" parent="Walls/Group7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99301, 1, 1.77014 )
@@ -729,4 +640,3 @@ shape = SubResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="Walls/Group7/Wall6" groups=["walls"]]
 material_override = SubResource( 52 )
 mesh = SubResource( 11 )
-material/0 = null
