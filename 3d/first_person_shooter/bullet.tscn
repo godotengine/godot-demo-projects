@@ -1,23 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://cfb66sviolbur"]
+[gd_scene load_steps=14 format=3 uid="uid://cfb66sviolbur"]
 
-[ext_resource type="Script" path="res://bullet.gd" id="1_uks2k"]
+[ext_resource type="Script" path="res://bullet.gd" id="1_57nhm"]
 
-[sub_resource type="Gradient" id="Gradient_fomqa"]
+[sub_resource type="Gradient" id="Gradient_u7dyc"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.779221, 1)
 colors = PackedColorArray(1, 0.780392, 0, 1, 0.752941, 0, 0, 0.12549, 0, 0, 0, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_8aikp"]
-gradient = SubResource("Gradient_fomqa")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_m0dkd"]
+gradient = SubResource("Gradient_u7dyc")
 
-[sub_resource type="Curve" id="Curve_5giak"]
+[sub_resource type="Curve" id="Curve_hcmul"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_qyrb6"]
-curve = SubResource("Curve_5giak")
+[sub_resource type="CurveTexture" id="CurveTexture_ehuet"]
+curve = SubResource("Curve_hcmul")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wtijp"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4jwab"]
 emission_shape = 1
 emission_sphere_radius = 0.1
 direction = Vector3(0, 1, 0)
@@ -26,26 +26,104 @@ initial_velocity_min = 1.5
 initial_velocity_max = 1.5
 scale_min = 0.15
 scale_max = 0.15
-scale_curve = SubResource("CurveTexture_qyrb6")
-color_ramp = SubResource("GradientTexture1D_8aikp")
+scale_curve = SubResource("CurveTexture_ehuet")
+color_ramp = SubResource("GradientTexture1D_m0dkd")
 collision_mode = 1
 collision_friction = 0.0
 collision_bounce = 0.5
 collision_use_scale = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tels0"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hjiog"]
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
 billboard_mode = 1
 billboard_keep_scale = true
 
-[sub_resource type="QuadMesh" id="QuadMesh_4grn4"]
-material = SubResource("StandardMaterial3D_tels0")
+[sub_resource type="QuadMesh" id="QuadMesh_nfcm1"]
+material = SubResource("StandardMaterial3D_hjiog")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bq3q8"]
+top_radius = 0.04
+bottom_radius = 0.0
+height = 1.0
+radial_segments = 6
+rings = 1
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o4ouc"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0.94902, 0.85098, 0.0627451)
+proximity_fade_distance = 0.1
+distance_fade_mode = 1
+distance_fade_max_distance = 5.0
+
+[sub_resource type="Animation" id="Animation_uqf05"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tracer:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Tracer:sorting_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+
+[sub_resource type="Animation" id="Animation_mktry"]
+resource_name = "fade"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tracer:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Tracer:scale:z")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eq862"]
+_data = {
+"RESET": SubResource("Animation_uqf05"),
+"fade": SubResource("Animation_mktry")
+}
 
 [node name="Bullet" type="RayCast3D"]
 target_position = Vector3(0, 0, -100)
-script = ExtResource("1_uks2k")
+script = ExtResource("1_57nhm")
 
 [node name="HitLocation" type="Node3D" parent="."]
 
@@ -57,5 +135,23 @@ one_shot = true
 explosiveness = 1.0
 fixed_fps = 0
 interpolate = false
-process_material = SubResource("ParticleProcessMaterial_wtijp")
-draw_pass_1 = SubResource("QuadMesh_4grn4")
+process_material = SubResource("ParticleProcessMaterial_4jwab")
+draw_pass_1 = SubResource("QuadMesh_nfcm1")
+
+[node name="Tracer" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+sorting_offset = 2.0
+mesh = SubResource("CylinderMesh_bq3q8")
+surface_material_override/0 = SubResource("StandardMaterial3D_o4ouc")
+
+[node name="ExpireTimer" type="Timer" parent="."]
+wait_time = 1.2
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "fade"
+libraries = {
+"": SubResource("AnimationLibrary_eq862")
+}
+
+[connection signal="timeout" from="ExpireTimer" to="." method="_on_expire_timer_timeout"]

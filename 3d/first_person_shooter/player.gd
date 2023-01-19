@@ -132,7 +132,7 @@ func _physics_process(delta):
 	velocity.z *= friction
 
 
-func _process(delta):
+func _process(_delta):
 	# Shooting
 
 	if Input.is_action_pressed("attack") and is_zero_approx($ShootTimer.time_left):

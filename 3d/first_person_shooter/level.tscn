@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bcmepm05qldy5"]
+[gd_scene load_steps=15 format=3 uid="uid://bcmepm05qldy5"]
 
 [ext_resource type="Texture2D" uid="uid://bc3n2sen32mqx" path="res://sky.png" id="1_0n6b1"]
 [ext_resource type="PackedScene" uid="uid://dfyswwfb8j6iv" path="res://player.tscn" id="2_cwuyg"]
@@ -20,6 +20,44 @@ ambient_light_color = Color(0.25098, 0.501961, 1, 1)
 ambient_light_sky_contribution = 0.98
 tonemap_mode = 3
 tonemap_white = 6.0
+fog_enabled = true
+fog_light_color = Color(0.188235, 0.192157, 0.2, 1)
+fog_density = 0.004
+fog_sky_affect = 0.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vemq1"]
+fractal_type = 2
+fractal_lacunarity = 16.782
+fractal_gain = 1.4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nepn7"]
+seamless = true
+noise = SubResource("FastNoiseLite_vemq1")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w2v74"]
+seamless = true
+as_normal_map = true
+bump_strength = 0.1
+noise = SubResource("FastNoiseLite_vemq1")
+
+[sub_resource type="Gradient" id="Gradient_soa80"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rmhqn"]
+seamless = true
+color_ramp = SubResource("Gradient_soa80")
+noise = SubResource("FastNoiseLite_vemq1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sds3a"]
+albedo_texture = SubResource("NoiseTexture2D_nepn7")
+roughness = 0.5
+roughness_texture = SubResource("NoiseTexture2D_rmhqn")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_w2v74")
+uv1_scale = Vector3(0.063, 0.063, 0.063)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 15.455
+texture_filter = 4
 
 [node name="Node3D" type="Node3D"]
 
@@ -29,6 +67,7 @@ environment = SubResource("Environment_b1dvs")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.236491, -0.970858, -0.0388079, 0.265457, 0.0261379, 0.963768, -0.934668, -0.238224, 0.263902, 2.61962, -0.479115, -1.60764)
 light_color = Color(0.308, 0.369333, 0.4, 1)
+light_energy = 0.5
 light_cull_mask = 4294967291
 shadow_enabled = true
 shadow_bias = 0.04
@@ -43,48 +82,57 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, -8.5, 43)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
 use_collision = true
 size = Vector3(100, 10, 100)
+material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Main"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 operation = 2
 use_collision = true
 size = Vector3(99, 9, 99)
+material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Building" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 36)
 use_collision = true
 size = Vector3(16, 25, 16)
+material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Building2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1, 19)
 use_collision = true
 size = Vector3(16, 25, 16)
+material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Building3" type="CSGBox3D" parent="."]
 transform = Transform3D(0.995645, 0, 0.0932221, 0, 1, 0, -0.0932221, 0, 0.995645, -36.2054, 3, 36.0096)
 use_collision = true
 size = Vector3(16, 25, 16)
+material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Building4" type="CSGBox3D" parent="."]
 transform = Transform3D(0.995645, 0, 0.0932221, 0, 1, 0, -0.0932221, 0, 0.995645, -36.7946, -7, 18.9904)
 use_collision = true
 size = Vector3(16, 25, 16)
+material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Slope" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.2222e-08, 1.13133e-08, 1, 0.258819, 0.965926, 0, -0.965926, 0.258819, -4.37114e-08, -15.8, -9.5, 17)
 use_collision = true
 size = Vector3(4, 1, 16)
+material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Staircase" type="CSGPolygon3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -17.5, -9.25, 11.75)
 use_collision = true
 polygon = PackedVector2Array(0.5, 0, 0.5, 0.25, 1, 0.25, 1, 0.5, 1.5, 0.5, 1.5, 0.75, 2, 0.75, 2, 1, 2.5, 1, 2.5, 1.25, 3, 1.25, 3, 1.5, 3.5, 1.5, 3.5, 1.75, 4, 1.75, 4, 2, 5, 2, 5, -0.25, 0, -0.25)
 depth = 4.0
+material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Staircase2" type="CSGPolygon3D" parent="."]
 transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -22.825, -9.25, 11.6)
 use_collision = true
 polygon = PackedVector2Array(0.5, 0, 0.5, 0.25, 1, 0.25, 1, 0.5, 1.5, 0.5, 1.5, 0.75, 2, 0.75, 2, 1, 2.5, 1, 2.5, 1.25, 3, 1.25, 3, 1.5, 3.5, 1.5, 3.5, 1.75, 4, 1.75, 4, 2, 5, 2, 5, -0.25, 0, -0.25)
+material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="LampPost" parent="." instance=ExtResource("3_rtj1w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -9.5, 24)

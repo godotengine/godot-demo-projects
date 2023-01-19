@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dfyswwfb8j6iv"]
+[gd_scene load_steps=24 format=3 uid="uid://dfyswwfb8j6iv"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_3afs5"]
 [ext_resource type="PackedScene" uid="uid://b4g77r67peq11" path="res://blob_shadow.tscn" id="2_att33"]
@@ -14,6 +14,100 @@ size = Vector3(1, 1.5, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nlrfb"]
 size = Vector3(0.9, 1, 0.9)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lr0u3"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 50.0
+emission_ring_inner_radius = 0.0
+direction = Vector3(0, -1, 0)
+spread = 3.0
+initial_velocity_min = 60.0
+initial_velocity_max = 60.0
+sub_emitter_mode = 3
+sub_emitter_amount_at_collision = 1
+collision_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sfjl0"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.662745, 0.788235, 1, 0.12549)
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_f2lko"]
+material = SubResource("StandardMaterial3D_sfjl0")
+size = Vector2(0.025, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_iq4t4"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_aql0l"]
+gradient = SubResource("Gradient_iq4t4")
+
+[sub_resource type="Curve" id="Curve_3xpn1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fyu6e"]
+curve = SubResource("Curve_3xpn1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2q22j"]
+gravity = Vector3(0, -3, 0)
+scale_curve = SubResource("CurveTexture_fyu6e")
+color = Color(0.745098, 0.882353, 1, 0.25098)
+color_ramp = SubResource("GradientTexture1D_aql0l")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m681u"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_rmfmt"]
+material = SubResource("StandardMaterial3D_m681u")
+size = Vector2(0.05, 0.05)
+
+[sub_resource type="Animation" id="Animation_y888d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/WeaponSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D/WeaponLight:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D/WeaponLight:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_nrowk"]
 resource_name = "fire"
@@ -82,45 +176,6 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.535896, 0.844826, 1.02504)
 }
 
-[sub_resource type="Animation" id="Animation_y888d"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D/WeaponSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Camera3D/WeaponLight:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Camera3D/WeaponLight:light_energy")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_glvp6"]
 _data = {
 "RESET": SubResource("Animation_y888d"),
@@ -143,6 +198,26 @@ stream = ExtResource("6_tknt2")
 volume_db = -12.0
 max_polyphony = 4
 
+[node name="Rain" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30.5, 0)
+amount = 3000
+sub_emitter = NodePath("RainImpactSubemitter")
+lifetime = 2.0
+preprocess = 2.0
+fixed_fps = 0
+interpolate = false
+collision_base_size = 0.1
+visibility_aabb = AABB(-49.847, -490.159, -49.8395, 99.8953, 490.659, 99.2455)
+process_material = SubResource("ParticleProcessMaterial_lr0u3")
+draw_pass_1 = SubResource("QuadMesh_f2lko")
+
+[node name="RainImpactSubemitter" type="GPUParticles3D" parent="Rain"]
+emitting = false
+amount = 3000
+visibility_aabb = AABB(-49.847, -490.159, -49.8395, 99.8953, 490.659, 99.2455)
+process_material = SubResource("ParticleProcessMaterial_2q22j")
+draw_pass_1 = SubResource("QuadMesh_rmfmt")
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
@@ -150,11 +225,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.4, 0)
 visible = false
 light_color = Color(1, 0.973333, 0.92, 1)
-light_energy = 4.0
+light_energy = 5.0
 shadow_enabled = true
 shadow_bias = 0.01
 shadow_blur = 2.5
-spot_range = 15.0
+spot_range = 40.0
+spot_attenuation = 2.0
 spot_angle = 35.0
 spot_angle_attenuation = 2.0
 
