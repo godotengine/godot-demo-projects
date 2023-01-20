@@ -29,6 +29,7 @@ func _physics_process(_delta):
 
 	# We've hit or missed something, no need to keep checking.
 	# However, keep the bullet present in the scene for wall decals and particle effects.
+	enabled = false
 	set_physics_process(false)
 
 

@@ -1,10 +1,31 @@
 class_name Player
 extends CharacterBody3D
 
-
-const SPEED = 1.0
-const JUMP_VELOCITY = 9.5
 const MOUSE_SENSITIVITY = 0.0005
+
+## Base speed multiplier.
+const SPEED = 1.0
+
+## Jump speed (affects ow high you jump).
+const JUMP_VELOCITY = 10.0
+
+## How fast you accelerate while airborne. This influences maximum movement speed too.
+const AIR_ACCELERATION_FACTOR = 0.27
+
+## How fast you accelerate while in water. This influences maximum movement speed too.
+const WATER_ACCELERATION_FACTOR = 0.55
+
+## How strong gravity is underwater, compared to the default gravity (1.0 is full gravity).
+const WATER_GRAVITY_FACTOR = 0.1
+
+## Maximum upwards vertical speed allowed while in water.
+const WATER_DAMPING_FLOAT = 5.0
+
+## Maximum downwards vertical speed allowed while in water.
+const WATER_DAMPING_SINK = 2.5
+
+## How fast you swim upwards while pressing the Jump key underwater.
+const WATER_JUMP_SPEED = 25.0
 
 ## How fast the camera recovers from falling (bobbing effect). Higher values result in faster recovery.
 const BOB_FALL_RECOVER_SPEED = 9.0
@@ -22,12 +43,21 @@ var bob_fall_increment := 0.0
 # Velocity on the previous physics frame (used to calculate speed changes for landing effects).
 var previous_velocity := Vector3.ZERO
 
+# `true` if the player is currently in water, `false` otherwise.
+var in_water := false
+
+# The height of the water plane the player is currently in (in global Y coordinates).
+# This is used to check whether the camera is underwater to apply effects.
+# When not in water, this is set to negative infinity to ensure checks against it are always `false`.
+var water_plane_y := -INF
+
 var base_height := ProjectSettings.get_setting("display/window/size/viewport_height")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var initial_camera_position: Vector3 = $Camera3D.position
+@onready var initial_underwater_color: Color = $UnderwaterEffect.color
 
 
 func _ready():
@@ -39,6 +69,9 @@ func _ready():
 	for screen in DisplayServer.get_screen_count():
 		highest_refresh_rate = max(highest_refresh_rate, DisplayServer.screen_get_refresh_rate(screen))
 	Engine.max_fps = int(highest_refresh_rate) + 2
+
+	# Prevent underwater "out" transition from playing on scene load.
+	$UnderwaterEffect.color = Color.TRANSPARENT
 
 
 func _physics_process(delta):
@@ -54,7 +87,7 @@ func _physics_process(delta):
 	# This leads to a parabola-like appearance of the landing effect: the effect increases progressively,
 	# then decreases progressively.
 	bob_fall_counter += bob_fall_increment
-	bob_fall_increment = lerp(bob_fall_increment, 0.0, BOB_FALL_RECOVER_SPEED * delta)
+	bob_fall_increment = lerpf(bob_fall_increment, 0.0, BOB_FALL_RECOVER_SPEED * delta)
 
 	if $ShapeCast3D.is_colliding():
 		# Don't bob camera while airborne.
@@ -69,7 +102,7 @@ func _physics_process(delta):
 	$Camera3D/WeaponSprite.offset.y = -cos(sin(bob_cycle_counter * 10)) * 0.5 * Vector3(velocity.x, 0, velocity.z).length() - bob_fall_counter * 15
 
 	# Reduce fall bobbing offset over time.
-	bob_fall_counter = lerp(bob_fall_counter, 0.0, BOB_FALL_RECOVER_SPEED * delta)
+	bob_fall_counter = lerpf(bob_fall_counter, 0.0, BOB_FALL_RECOVER_SPEED * delta)
 
 	# Roll the camera based on sideways movement speed.
 	var roll := velocity.dot($Camera3D.transform.basis.x)
@@ -81,13 +114,25 @@ func _physics_process(delta):
 	# whether the player is on the floor. This is because we need to use the same check
 	# for stair climbing (to avoid discrepancies between both functions).
 
-	# Add the gravity.
+	# Add the gravity (and perform damping if in water).
 	if not $ShapeCast3D.is_colliding():
-		velocity.y -= gravity * delta
+		if in_water:
+			# Lower gravity while in water.
+			velocity.y -= WATER_GRAVITY_FACTOR * gravity * delta
+			# Perform damping for vertical speed while in water.
+			velocity.y = clampf(velocity.y, -WATER_DAMPING_SINK, WATER_DAMPING_FLOAT)
+		else:
+			velocity.y -= gravity * delta
+
 
 	# Handle Jump.
-	if Input.is_action_pressed("jump") and $ShapeCast3D.is_colliding():
-		velocity.y = JUMP_VELOCITY
+	if Input.is_action_pressed("jump") and (in_water or $ShapeCast3D.is_colliding()):
+		if in_water:
+			# Allow jumping while in water to swim upwards, but more slowly.
+			# Here, jumping is performed every frame if underwater, so multiply it by `delta`.
+			velocity.y += WATER_JUMP_SPEED * delta
+		else:
+			velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -98,9 +143,6 @@ func _physics_process(delta):
 	if direction:
 		motion.x = direction.x * SPEED
 		motion.z = direction.z * SPEED
-	else:
-		motion.x = move_toward(motion.x, 0, SPEED * 0.2)
-		motion.z = move_toward(motion.z, 0, SPEED * 0.2)
 
 	motion = motion.rotated(Vector3.UP, $Camera3D.rotation.y)
 
@@ -108,10 +150,13 @@ func _physics_process(delta):
 		# Slow down player movement.
 		motion *= 0.5
 
+	if in_water:
+		motion *= WATER_ACCELERATION_FACTOR
+
 	if not $ShapeCast3D.is_colliding():
 		# Slow down player movement (to take reduced friction into account,
 		# and give the impression of reduced air control).
-		motion *= 0.27
+		motion *= AIR_ACCELERATION_FACTOR
 
 	velocity += motion
 
@@ -131,10 +176,16 @@ func _physics_process(delta):
 	velocity.x *= friction
 	velocity.z *= friction
 
+	# Check if camera is underwater to apply effects.
+	if $Camera3D.global_position.y < water_plane_y:
+		# Smoothly transition underwater TextureRect overlay.
+		$UnderwaterEffect.color = lerp($UnderwaterEffect.color, initial_underwater_color, 12 * delta)
+	else:
+		$UnderwaterEffect.color = lerp($UnderwaterEffect.color, Color.TRANSPARENT, 12 * delta)
+
 
 func _process(_delta):
 	# Shooting
-
 	if Input.is_action_pressed("attack") and is_zero_approx($ShootTimer.time_left):
 		for i in SHOTGUN_BULLET_COUNT:
 			var bullet = preload("res://bullet.tscn").instantiate()
@@ -153,7 +204,7 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		# Compensate motion speed to be resolution-independent (based on the window height).
 		var relative_motion: Vector2 = event.relative * DisplayServer.window_get_size().y / base_height
-		$Camera3D.rotation.x = clamp($Camera3D.rotation.x - relative_motion.y * MOUSE_SENSITIVITY, -TAU * 0.25, TAU * 0.25)
+		$Camera3D.rotation.x = clampf($Camera3D.rotation.x - relative_motion.y * MOUSE_SENSITIVITY, -TAU * 0.25, TAU * 0.25)
 		$Camera3D.rotation.y -= relative_motion.x * MOUSE_SENSITIVITY
 
 	if event.is_action_pressed(&"quit"):

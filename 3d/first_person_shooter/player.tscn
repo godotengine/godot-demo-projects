@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dfyswwfb8j6iv"]
+[gd_scene load_steps=25 format=3 uid="uid://dfyswwfb8j6iv"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_3afs5"]
 [ext_resource type="PackedScene" uid="uid://b4g77r67peq11" path="res://blob_shadow.tscn" id="2_att33"]
@@ -70,6 +70,9 @@ billboard_keep_scale = true
 material = SubResource("StandardMaterial3D_m681u")
 size = Vector2(0.05, 0.05)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_t4cq8"]
+blend_mode = 3
+
 [sub_resource type="Animation" id="Animation_y888d"]
 length = 0.001
 tracks/0/type = "value"
@@ -120,10 +123,10 @@ tracks/0/path = NodePath("Camera3D/WeaponSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.1, 1.2),
-"transitions": PackedFloat32Array(1, 0, 1),
+"times": PackedFloat32Array(0, 0.25, 0.45, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 0, 1),
 "update": 0,
-"values": [0, 9, 0]
+"values": [0, 3, 3, 9, 0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -194,7 +197,7 @@ shape = SubResource("BoxShape3D_nlrfb")
 max_results = 1
 
 [node name="WeaponSounds" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_tknt2")
+stream = ExtResource("3_w6ksn")
 volume_db = -12.0
 max_polyphony = 4
 
@@ -214,6 +217,8 @@ draw_pass_1 = SubResource("QuadMesh_f2lko")
 [node name="RainImpactSubemitter" type="GPUParticles3D" parent="Rain"]
 emitting = false
 amount = 3000
+fixed_fps = 0
+interpolate = false
 visibility_aabb = AABB(-49.847, -490.159, -49.8395, 99.8953, 490.659, 99.2455)
 process_material = SubResource("ParticleProcessMaterial_2q22j")
 draw_pass_1 = SubResource("QuadMesh_rmfmt")
@@ -262,7 +267,16 @@ omni_range = 10.0
 wait_time = 1.2
 one_shot = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="UnderwaterEffect" type="ColorRect" parent="."]
+material = SubResource("CanvasItemMaterial_t4cq8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.549, 0.64845, 0.9, 0.501961)
+
+[node name="Crosshair" type="TextureRect" parent="."]
 texture_filter = 2
 anchors_preset = 8
 anchor_left = 0.5

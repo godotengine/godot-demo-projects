@@ -1,6 +1,7 @@
 class_name Enemy
 extends CharacterBody3D
 
+## Number of health points the enemy has.
 @export var health := 100
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
