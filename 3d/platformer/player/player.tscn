@@ -1656,7 +1656,7 @@ nodes/state/node = SubResource( 21 )
 nodes/state/position = Vector2( 440, 0 )
 nodes/walk/node = SubResource( 22 )
 nodes/walk/position = Vector2( -40, -240 )
-node_connections = [ "scale", 0, "walk", "state", 0, "scale", "state", 1, "air_dir", "output", 0, "gun", "air_dir", 0, "Animation 3", "air_dir", 1, "Animation 4", "gun", 0, "state", "gun", 1, "Animation 5", "walk", 0, "Animation", "walk", 1, "Animation 2" ]
+node_connections = [ "gun", 0, "state", "gun", 1, "Animation 5", "air_dir", 0, "Animation 3", "air_dir", 1, "Animation 4", "walk", 0, "Animation", "walk", 1, "Animation 2", "scale", 0, "walk", "state", 0, "scale", "state", 1, "air_dir", "output", 0, "gun" ]
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -1820,8 +1820,6 @@ bones/26/bound_children = [  ]
 
 [node name="Robot" type="MeshInstance" parent="Armature/Skeleton"]
 mesh = SubResource( 4 )
-material/0 = null
-material/1 = null
 
 [node name="Bullet" type="Position3D" parent="Armature"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.94071, 3.64079, 3.3802 )

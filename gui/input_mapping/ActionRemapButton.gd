@@ -1,6 +1,8 @@
 extends Button
 
+
 export(String) var action = "ui_up"
+
 
 func _ready():
 	assert(InputMap.has_action(action))

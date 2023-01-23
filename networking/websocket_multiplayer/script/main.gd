@@ -1,7 +1,10 @@
 extends Control
 
+
 const DEF_PORT = 8080
 const PROTO_NAME = "ludus"
+
+var peer = null
 
 onready var _host_btn = $Panel/VBoxContainer/HBoxContainer2/HBoxContainer/Host
 onready var _connect_btn = $Panel/VBoxContainer/HBoxContainer2/HBoxContainer/Connect
@@ -10,7 +13,6 @@ onready var _name_edit = $Panel/VBoxContainer/HBoxContainer/NameEdit
 onready var _host_edit = $Panel/VBoxContainer/HBoxContainer2/Hostname
 onready var _game = $Panel/VBoxContainer/Game
 
-var peer = null
 
 func _ready():
 	#warning-ignore-all:return_value_discarded

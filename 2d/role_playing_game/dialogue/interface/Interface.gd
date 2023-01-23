@@ -1,6 +1,8 @@
 extends Control
 
+
 var dialogue_node = null
+
 
 func _ready():
 	hide()

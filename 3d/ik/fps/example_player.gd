@@ -1,5 +1,6 @@
 extends KinematicBody
 
+
 # Walking variables.
 const norm_grav = -38.8
 const MAX_SPEED = 22

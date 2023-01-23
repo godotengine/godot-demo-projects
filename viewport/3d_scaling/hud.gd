@@ -1,5 +1,6 @@
 extends Control
 
+
 # The 3D viewport's scale factor. For instance, 1.0 is full resolution,
 # 0.5 is half resolution and 2.0 is double resolution. Higher values look
 # sharper but are slower to render. Values above 1 can be used for supersampling
@@ -9,6 +10,7 @@ var scale_factor = 1.0
 onready var viewport = $ViewportContainer/Viewport
 onready var scale_label = $VBoxContainer/Scale
 onready var filter_label = $VBoxContainer/Filter
+
 
 func _ready():
 	viewport.get_texture().flags = Texture.FLAG_FILTER

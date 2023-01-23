@@ -1,6 +1,7 @@
 extends Camera
 
-export(float) var MOVEMENT_SPEED = 12
+
+export(float) var MOVEMENT_SPEED = 12.0
 export(bool) var flip_axis = false
 
 onready var targets = $Targets

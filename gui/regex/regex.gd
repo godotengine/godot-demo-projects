@@ -1,6 +1,8 @@
 extends VBoxContainer
 
+
 var regex = RegEx.new()
+
 
 func _ready():
 	$Text.set_text("They asked me \"What's going on \\\"in the manor\\\"?\"")

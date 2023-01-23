@@ -1,5 +1,6 @@
 extends Control
 
+
 const trans_list = ["Linear", "Sine", "Quint", "Quart", "Quad", "Expo", "Elastic", "Cubic", "Circ", "Bounce", "Back"]
 const eases_list = ["In", "Out", "InOut", "OutIn"]
 const modes_list = ["Move", "Color", "Scale", "Rotate", "Callback", "Follow", "Repeat", "Pause"]
@@ -28,6 +29,7 @@ onready var callback_mode = modes_vbox.get_node(@"Callback")
 onready var follow_mode = modes_vbox.get_node(@"Follow")
 onready var repeat_mode = modes_vbox.get_node(@"Repeat")
 onready var paused_mode = modes_vbox.get_node(@"Pause")
+
 
 func _ready():
 	for index in range(trans_list.size()):

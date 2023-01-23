@@ -2,9 +2,11 @@
 extends KinematicBody
 class_name PlayerMath25D # No icon necessary
 
+
 var vertical_speed := 0.0
 var isometric_controls := true
 onready var _parent_node25d: Node25D = get_parent()
+
 
 func _process(delta):
 	if Input.is_action_pressed("exit"):

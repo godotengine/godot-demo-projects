@@ -1,5 +1,6 @@
 extends Spatial
 
+
 # Random spawn of Rigidbody cubes.
 func _on_SpawnTimer_timeout():
 	var new_rb = preload("res://cube_rigidbody.tscn").instance()

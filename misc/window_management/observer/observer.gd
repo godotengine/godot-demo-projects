@@ -1,5 +1,6 @@
 extends KinematicBody
 
+
 const STATE_MENU = 0
 const STATE_GRAB = 1
 
@@ -7,6 +8,7 @@ var r_pos = Vector2()
 var state = STATE_MENU
 
 onready var camera = $Camera
+
 
 func _process(delta):
 	if state != STATE_GRAB:

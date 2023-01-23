@@ -10,6 +10,7 @@ onready var _parent = get_parent()
 onready var save_dialog = _parent.get_node(@"SaveFileDialog")
 onready var paint_control = _parent.get_node(@"PaintControl")
 
+
 func _ready():
 	# warning-ignore-all:return_value_discarded
 	# Assign all of the needed signals for the oppersation buttons.

@@ -1,5 +1,6 @@
 extends Node
 
+
 const TIMEOUT = 1000 # Unresponsive clients times out after 1 sec
 const SEAL_TIME = 10000 # A sealed room will be closed after this time
 const ALFNUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
@@ -11,6 +12,7 @@ var lobbies: Dictionary = {}
 var server: WebSocketServer = WebSocketServer.new()
 var peers: Dictionary = {}
 
+
 class Peer extends Reference:
 	var id = -1
 	var lobby = ""
@@ -20,15 +22,16 @@ class Peer extends Reference:
 		id = peer_id
 
 
-
 class Lobby extends Reference:
 	var peers: Array = []
 	var host: int = -1
 	var sealed: bool = false
 	var time = 0
 
+
 	func _init(host_id: int):
 		host = host_id
+
 
 	func join(peer_id, server) -> bool:
 		if sealed: return false
@@ -72,7 +75,6 @@ class Lobby extends Reference:
 			server.get_peer(p).put_packet("S: \n".to_utf8())
 		time = OS.get_ticks_msec()
 		return true
-
 
 
 func _init():

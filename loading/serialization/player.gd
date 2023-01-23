@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+
 # The player's movement speed.
 const MOVE_SPEED = 240
 
@@ -19,6 +20,7 @@ func _process(delta):
 	# Prevent the player from going outside the window.
 	position.x = clamp(position.x, 32, 700)
 	position.y = clamp(position.y, 32, 536)
+
 
 func set_health(p_health):
 	health = p_health

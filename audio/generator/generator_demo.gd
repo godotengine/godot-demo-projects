@@ -1,10 +1,16 @@
 extends Node
 
+
 var sample_hz = 22050.0 # Keep the number of samples to mix low, GDScript is not super fast.
 var pulse_hz = 440.0
 var phase = 0.0
 
 var playback: AudioStreamPlayback = null # Actual playback stream, assigned in _ready().
+
+
+func _process(_delta):
+	_fill_buffer()
+
 
 func _fill_buffer():
 	var increment = pulse_hz / sample_hz
@@ -14,10 +20,6 @@ func _fill_buffer():
 		playback.push_frame(Vector2.ONE * sin(phase * TAU)) # Audio frames are stereo.
 		phase = fmod(phase + increment, 1.0)
 		to_fill -= 1
-
-
-func _process(_delta):
-	_fill_buffer()
 
 
 func _ready():

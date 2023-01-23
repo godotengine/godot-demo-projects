@@ -1,5 +1,6 @@
 extends KinematicBody
 
+
 # Moves the player
 
 export(int, 1, 2) var player_id = 1

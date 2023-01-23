@@ -1,11 +1,13 @@
 extends Camera
 
+
 export var min_distance = 2.0
 export var max_distance = 4.0
 export var angle_v_adjust = 0.0
 
-var collision_exception = []
 export var height = 1.5
+var collision_exception = []
+
 
 func _ready():
 	# Find collision exceptions for ray.

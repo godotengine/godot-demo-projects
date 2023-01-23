@@ -1,5 +1,6 @@
 extends Node
 
+
 var render_distance = 7
 var fog_enabled = true
 

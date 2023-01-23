@@ -477,6 +477,7 @@ skeleton_path = NodePath("../../../../GodotBattleBot/Armature/Skeleton")
 bone_name = "Chest"
 look_at_axis = 2
 additional_rotation = Vector3( -10, 0, 0 )
+additional_bone_length = 1
 
 [node name="Camera" type="Camera" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
@@ -509,6 +510,7 @@ skeleton_path = NodePath("../../../../../../../../GodotBattleBot/Armature/Skelet
 bone_name = "Left_Hand"
 use_negative_our_rot = true
 additional_rotation = Vector3( 0, 0, 90 )
+additional_bone_length = 1
 
 [node name="MiddleJoint" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/AimPos/IK_FABRIK"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.85263, -2.91316, -2.77555 )
@@ -530,7 +532,6 @@ __meta__ = {
 skeleton_path = NodePath("../../../../../../GodotBattleBot/Armature/Skeleton")
 bones_in_chain = PoolStringArray( "Right_UpperArm", "Right_LowerArm", "Right_Hand" )
 bones_in_chain_lengths = PoolRealArray( 1.97, 3, 0.1 )
-chain_iterations = 8
 limit_chain_iterations = false
 use_middle_joint_target = true
 
@@ -547,6 +548,7 @@ skeleton_path = NodePath("../../../../../../../../GodotBattleBot/Armature/Skelet
 bone_name = "Right_Hand"
 use_negative_our_rot = true
 additional_rotation = Vector3( 0, 0, 90 )
+additional_bone_length = 1
 
 [node name="MiddleJoint" type="Spatial" parent="KinematicBody/CameraHolder/LeanPath/PathFollow/IK_LookAt_Chest/AimPos/IK_FABRIK_RightArm"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.73318, -2.91316, -2.77555 )
@@ -570,6 +572,7 @@ __meta__ = {
 }
 skeleton_path = NodePath("../../../../GodotBattleBot/Armature/Skeleton")
 bone_name = "Head"
+additional_bone_length = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="KinematicBody/CameraHolder"]
 autoplay = "Start"

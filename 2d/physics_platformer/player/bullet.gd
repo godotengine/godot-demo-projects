@@ -3,6 +3,7 @@ extends RigidBody2D
 
 var disabled = false
 
+
 func _ready():
 	($Timer as Timer).start()
 

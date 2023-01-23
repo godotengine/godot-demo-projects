@@ -2,12 +2,13 @@ extends Button
 # This script shows how to save data using Godot's custom ConfigFile format.
 # ConfigFile can store any Godot type natively.
 
+
+const SAVE_PATH = "user://save_config_file.ini"
+
 # The root game node (so we can get and instance enemies).
 export(NodePath) var game_node
 # The player node (so we can set/get its health and position).
 export(NodePath) var player_node
-
-const SAVE_PATH = "user://save_config_file.ini"
 
 
 func save_game():

@@ -7,6 +7,7 @@ var time_max = 100 # Milliseconds.
 var queue = []
 var pending = {}
 
+
 func _lock(_caller):
 	mutex.lock()
 

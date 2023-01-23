@@ -1,5 +1,6 @@
 extends "res://state_machine/state.gd"
 
+
 # Initialize the state. E.g. change the animation.
 func enter():
 	owner.set_dead(true)

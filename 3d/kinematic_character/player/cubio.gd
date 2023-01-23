@@ -1,14 +1,16 @@
 extends KinematicBody
 
+
 const MAX_SPEED = 3
 const JUMP_SPEED = 5
 const ACCELERATION = 2
 const DECELERATION = 4
 
+var velocity: Vector3
 onready var camera = $Target/Camera
 onready var gravity = -ProjectSettings.get_setting("physics/3d/default_gravity")
 onready var start_position = translation
-var velocity: Vector3
+
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("exit"):

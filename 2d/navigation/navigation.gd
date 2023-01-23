@@ -1,9 +1,19 @@
-extends Navigation2D
+extends Node2D
+
 
 export(float) var character_speed = 400.0
 var path = []
 
+var map
+
 onready var character = $Character
+
+
+func _ready():
+	# use call deferred to make sure the entire SceneTree Nodes are setup
+	# else yield on 'physics_frame' in a _ready() might get stuck
+	call_deferred("setup_navserver")
+
 
 func _process(delta):
 	var walk_distance = character_speed * delta
@@ -16,6 +26,26 @@ func _unhandled_input(event):
 	if not event.is_action_pressed("click"):
 		return
 	_update_navigation_path(character.position, get_local_mouse_position())
+
+
+func setup_navserver():
+
+	# create a new navigation map
+	map = Navigation2DServer.map_create()
+	Navigation2DServer.map_set_active(map, true)
+
+	# create a new navigation region and add it to the map
+	var region = Navigation2DServer.region_create()
+	Navigation2DServer.region_set_transform(region, Transform())
+	Navigation2DServer.region_set_map(region, map)
+
+	# sets navigation mesh for the region
+	var navigation_poly = NavigationMesh.new()
+	navigation_poly = $Navmesh.navpoly
+	Navigation2DServer.region_set_navpoly(region, navigation_poly)
+
+	# wait for Navigation2DServer sync to adapt to made changes
+	yield(get_tree(), "physics_frame")
 
 
 func move_along_path(distance):
@@ -36,10 +66,10 @@ func move_along_path(distance):
 
 
 func _update_navigation_path(start_position, end_position):
-	# get_simple_path is part of the Navigation2D class.
+	# map_get_path is part of the avigation2DServer class.
 	# It returns a PoolVector2Array of points that lead you
 	# from the start_position to the end_position.
-	path = get_simple_path(start_position, end_position, true)
+	path = Navigation2DServer.map_get_path(map,start_position, end_position, true)
 	# The first point is always the start_position.
 	# We don't need it in this example as it corresponds to the character's position.
 	path.remove(0)

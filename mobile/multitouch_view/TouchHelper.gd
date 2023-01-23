@@ -5,7 +5,9 @@ extends Node
 # It also remaps the pointer indices coming from the OS to the lowest available to be friendlier.
 # It can be conveniently setup as a singleton.
 
+
 var state = {}
+
 
 func _unhandled_input(event):
 	if event is InputEventScreenTouch:

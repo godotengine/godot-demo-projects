@@ -4,6 +4,7 @@ extends Node
 # We will store the two peers here
 var peers = []
 
+
 func register(path):
 	assert(peers.size() < 2)
 	peers.append(path)

@@ -1,5 +1,6 @@
 extends Control
 
+
 func _ready():
 	# Called every time the node is added to the scene.
 	gamestate.connect("connection_failed", self, "_on_connection_failed")

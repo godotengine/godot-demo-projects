@@ -1,62 +1,8 @@
 extends Node
 
+
 onready var rtl = $HBoxContainer/Features
 onready var mono_test = $MonoTest
-
-
-# Returns a human-readable string from a date and time, date, or time dictionary.
-func datetime_to_string(date):
-	if (
-		date.has("year")
-		and date.has("month")
-		and date.has("day")
-		and date.has("hour")
-		and date.has("minute")
-		and date.has("second")
-	):
-		# Date and time.
-		return "{year}-{month}-{day} {hour}:{minute}:{second}".format({
-			year = str(date.year).pad_zeros(2),
-			month = str(date.month).pad_zeros(2),
-			day = str(date.day).pad_zeros(2),
-			hour = str(date.hour).pad_zeros(2),
-			minute = str(date.minute).pad_zeros(2),
-			second = str(date.second).pad_zeros(2),
-		})
-	elif date.has("year") and date.has("month") and date.has("day"):
-		# Date only.
-		return "{year}-{month}-{day}".format({
-			year = str(date.year).pad_zeros(2),
-			month = str(date.month).pad_zeros(2),
-			day = str(date.day).pad_zeros(2),
-		})
-	else:
-		# Time only.
-		return "{hour}:{minute}:{second}".format({
-			hour = str(date.hour).pad_zeros(2),
-			minute = str(date.minute).pad_zeros(2),
-			second = str(date.second).pad_zeros(2),
-		})
-
-
-func scan_midi_devices():
-	OS.open_midi_inputs()
-	var devices = OS.get_connected_midi_inputs().join(", ")
-	OS.close_midi_inputs()
-	return devices
-
-
-func add_header(header):
-	rtl.append_bbcode("\n[b][u][color=#6df]{header}[/color][/u][/b]\n".format({
-		header = header,
-	}))
-
-
-func add_line(key, value):
-	rtl.append_bbcode("[b]{key}:[/b] {value}\n".format({
-		key = key,
-		value = value if str(value) != "" else "[color=#8fff](empty)[/color]",
-	}))
 
 
 func _ready():
@@ -153,3 +99,58 @@ func _ready():
 		video_drivers.push_back(OS.get_video_driver_name(i))
 	add_line("Available drivers", video_drivers.join(", "))
 	add_line("Current driver", OS.get_video_driver_name(OS.get_current_video_driver()))
+
+
+# Returns a human-readable string from a date and time, date, or time dictionary.
+func datetime_to_string(date):
+	if (
+		date.has("year")
+		and date.has("month")
+		and date.has("day")
+		and date.has("hour")
+		and date.has("minute")
+		and date.has("second")
+	):
+		# Date and time.
+		return "{year}-{month}-{day} {hour}:{minute}:{second}".format({
+			year = str(date.year).pad_zeros(2),
+			month = str(date.month).pad_zeros(2),
+			day = str(date.day).pad_zeros(2),
+			hour = str(date.hour).pad_zeros(2),
+			minute = str(date.minute).pad_zeros(2),
+			second = str(date.second).pad_zeros(2),
+		})
+	elif date.has("year") and date.has("month") and date.has("day"):
+		# Date only.
+		return "{year}-{month}-{day}".format({
+			year = str(date.year).pad_zeros(2),
+			month = str(date.month).pad_zeros(2),
+			day = str(date.day).pad_zeros(2),
+		})
+	else:
+		# Time only.
+		return "{hour}:{minute}:{second}".format({
+			hour = str(date.hour).pad_zeros(2),
+			minute = str(date.minute).pad_zeros(2),
+			second = str(date.second).pad_zeros(2),
+		})
+
+
+func scan_midi_devices():
+	OS.open_midi_inputs()
+	var devices = OS.get_connected_midi_inputs().join(", ")
+	OS.close_midi_inputs()
+	return devices
+
+
+func add_header(header):
+	rtl.append_bbcode("\n[b][u][color=#6df]{header}[/color][/u][/b]\n".format({
+		header = header,
+	}))
+
+
+func add_line(key, value):
+	rtl.append_bbcode("[b]{key}:[/b] {value}\n".format({
+		key = key,
+		value = value if str(value) != "" else "[color=#8fff](empty)[/color]",
+	}))

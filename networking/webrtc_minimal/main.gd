@@ -1,6 +1,8 @@
 extends Node
 
+
 const Chat = preload("res://chat.gd")
+
 
 func _ready():
 	var p1 = Chat.new()

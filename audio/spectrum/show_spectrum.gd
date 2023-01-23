@@ -1,5 +1,6 @@
 extends Node2D
 
+
 const VU_COUNT = 16
 const FREQ_MAX = 11050.0
 
@@ -9,6 +10,15 @@ const HEIGHT = 100
 const MIN_DB = 60
 
 var spectrum
+
+
+func _ready():
+	spectrum = AudioServer.get_bus_effect_instance(0,0)
+
+
+func _process(_delta):
+	update()
+
 
 func _draw():
 	#warning-ignore:integer_division
@@ -21,11 +31,3 @@ func _draw():
 		var height = energy * HEIGHT
 		draw_rect(Rect2(w * i, HEIGHT - height, w, height), Color.white)
 		prev_hz = hz
-
-
-func _process(_delta):
-	update()
-
-
-func _ready():
-	spectrum = AudioServer.get_bus_effect_instance(0,0)

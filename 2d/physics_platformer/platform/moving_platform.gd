@@ -6,6 +6,7 @@ export var cycle = 1.0
 
 var accum = 0.0
 
+
 func _physics_process(delta):
 	accum += delta * (1.0 / cycle) * TAU
 	accum = fmod(accum, TAU)

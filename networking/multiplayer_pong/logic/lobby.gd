@@ -15,6 +15,7 @@ onready var find_public_ip_button = $FindPublicIP
 
 var peer = null
 
+
 func _ready():
 	# Connect all the callbacks related to networking.
 	get_tree().connect("network_peer_connected", self, "_player_connected")

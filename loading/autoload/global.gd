@@ -1,5 +1,6 @@
 extends Node
 
+
 # Changing scenes is most easily done using the functions `change_scene`
 # and `change_scene_to` of the SceneTree. This script demonstrates how to
 # change scenes without those helpers.

@@ -1,9 +1,11 @@
 tool
 extends EditorPlugin
 
+
 const MainPanel = preload("res://addons/main_screen/main_panel.tscn")
 
 var main_panel_instance
+
 
 func _enter_tree():
 	main_panel_instance = MainPanel.instance()

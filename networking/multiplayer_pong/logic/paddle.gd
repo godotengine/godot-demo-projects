@@ -9,6 +9,7 @@ var _you_hidden = false
 
 onready var _screen_size_y = get_viewport_rect().size.y
 
+
 func _process(delta):
 	# Is the master of the paddle.
 	if is_network_master():

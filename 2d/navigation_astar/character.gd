@@ -14,6 +14,7 @@ var _target_position = Vector2()
 
 var _velocity = Vector2()
 
+
 func _ready():
 	_change_state(States.IDLE)
 

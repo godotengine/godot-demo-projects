@@ -1,6 +1,7 @@
 tool
 extends Spatial
 
+
 export(NodePath) var skeleton_path setget _set_skeleton_path
 export(String) var bone_name = ""
 export(int, "_process", "_physics_process", "_notification", "none") var update_mode = 0 setget _set_update

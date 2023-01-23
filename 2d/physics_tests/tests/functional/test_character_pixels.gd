@@ -21,6 +21,7 @@ func _ready():
 	options.add_menu_item(OPTION_TEST_CASE_DETECT_FLOOR_NO_SNAP)
 	options.add_menu_item(OPTION_TEST_CASE_DETECT_FLOOR_MOTION_CHANGES)
 
+
 func _physics_process(_delta):
 	if _moving_body:
 		if _moving_body.is_on_floor():

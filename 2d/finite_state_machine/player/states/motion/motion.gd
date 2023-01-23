@@ -1,6 +1,7 @@
 extends "res://state_machine/state.gd"
 # Collection of important methods to handle direction and animation.
 
+
 func handle_input(event):
 	if event.is_action_pressed("simulate_damage"):
 		emit_signal("finished", "stagger")

@@ -1,11 +1,13 @@
 extends Spatial
 
-onready var _cube_point_scene: PackedScene = preload("res://assets/cube/cube_point.tscn")
 
-onready var _parent = get_parent()
 var _is_parent_ready := false
 var _cube_points_math = []
 var _cube_math_spatials = []
+onready var _cube_point_scene: PackedScene = preload("res://assets/cube/cube_point.tscn")
+
+onready var _parent = get_parent()
+
 
 func _ready():
 	_parent = get_parent()

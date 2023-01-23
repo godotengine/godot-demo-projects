@@ -1,12 +1,12 @@
 extends Node
 
 
+signal entry_logged(message, type)
+
 enum LogType {
 	LOG,
 	ERROR,
 }
-
-signal entry_logged(message, type)
 
 
 func print_log(message):

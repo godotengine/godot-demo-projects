@@ -2,8 +2,10 @@ tool
 extends Panel
 # In this file, the word "silly" is used to make it obvious that the name is arbitrary.
 
+
 var silly_material_resource = preload("res://addons/material_creator/material_resource.gd")
 var editor_interface
+
 
 func _ready():
 	# Connect all of the signals we'll need to save and load silly materials

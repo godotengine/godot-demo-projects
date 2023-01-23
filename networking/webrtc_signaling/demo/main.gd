@@ -1,5 +1,6 @@
 extends Control
 
+
 func _ready():
 	if OS.get_name() == "HTML5":
 		$VBoxContainer/Signaling.hide()

@@ -7,6 +7,7 @@ extends Control
 #
 # Licensed under the MIT license
 
+
 const DEADZONE = 0.2
 const FONT_COLOR_DEFAULT = Color(1.0, 1.0, 1.0, 0.5)
 const FONT_COLOR_ACTIVE = Color.white
@@ -21,6 +22,7 @@ onready var joypad_axes = $JoypadDiagram/Axes
 onready var joypad_buttons = $JoypadDiagram/Buttons
 onready var joypad_name = $DeviceInfo/JoyName
 onready var joypad_number = $DeviceInfo/JoyNumber
+
 
 func _ready():
 	set_physics_process(true)

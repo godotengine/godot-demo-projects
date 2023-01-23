@@ -1,5 +1,6 @@
 extends "on_ground.gd"
 
+
 func enter():
 	owner.get_node("AnimationPlayer").play("idle")
 

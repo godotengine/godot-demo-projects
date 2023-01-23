@@ -1,7 +1,9 @@
 extends Control
 
+
 var effect
 var recording
+
 
 func _ready():
 	var idx = AudioServer.get_bus_index("Record")

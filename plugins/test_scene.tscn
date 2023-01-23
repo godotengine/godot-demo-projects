@@ -1,9 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/main_screen/handled_by_main_screen.gd" type="Script" id=1]
 [ext_resource path="res://addons/custom_node/heart.gd" type="Script" id=2]
 
 [sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+roughness = 0.0
 
 [node name="TestScene" type="Node"]
 
@@ -13,7 +16,7 @@ script = ExtResource( 2 )
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
 skeleton = NodePath("")
-material/0 = null
+material/0 = SubResource( 2 )
 
 [node name="HandledByMainScreen" type="Node" parent="."]
 script = ExtResource( 1 )

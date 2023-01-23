@@ -1,5 +1,6 @@
 extends Area2D
 
+
 const MOVE_SPEED = 100
 
 var _ball_dir
@@ -7,6 +8,7 @@ var _up
 var _down
 
 onready var _screen_size_y = get_viewport_rect().size.y
+
 
 func _ready():
 	var n = String(name).to_lower()

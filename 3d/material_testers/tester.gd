@@ -1,5 +1,6 @@
 extends Spatial
 
+
 const INTERP_SPEED = 2
 const ROT_SPEED = 0.003
 const ZOOM_SPEED = 0.1
@@ -26,6 +27,7 @@ onready var material_name = $UI/MaterialName
 onready var camera_holder = $CameraHolder # Has a position and rotates on Y.
 onready var rotation_x = $CameraHolder/RotationX
 onready var camera = $CameraHolder/RotationX/Camera
+
 
 func _ready():
 	for background in backgrounds:

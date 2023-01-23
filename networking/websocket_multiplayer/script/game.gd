@@ -1,12 +1,14 @@
 extends Control
 
+
 const _crown = preload("res://img/crown.png")
+
+var _players = []
+var _turn = -1
 
 onready var _list = $HBoxContainer/VBoxContainer/ItemList
 onready var _action = $HBoxContainer/VBoxContainer/Action
 
-var _players = []
-var _turn = -1
 
 master func set_player_name(name):
 	var sender = get_tree().get_rpc_sender_id()

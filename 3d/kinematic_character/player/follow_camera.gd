@@ -1,11 +1,11 @@
-
 extends Camera
 
+
 # Member variables
-var collision_exception = []
 export var min_distance = 0.5
 export var max_distance = 3.0
 export var angle_v_adjust = 0.0
+var collision_exception = []
 var max_height = 2.0
 var min_height = 0
 onready var target_node: Spatial = get_parent()

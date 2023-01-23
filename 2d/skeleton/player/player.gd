@@ -1,6 +1,7 @@
 class_name Player
 extends KinematicBody2D
 
+
 # Keep this in sync with the AnimationTree's state names and numbers.
 enum States {
 	IDLE = 0,

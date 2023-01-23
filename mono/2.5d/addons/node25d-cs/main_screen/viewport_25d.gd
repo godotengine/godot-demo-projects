@@ -1,6 +1,7 @@
 tool
 extends Control
 
+
 var zoom_level := 0
 var is_panning = false
 var pan_center: Vector2
@@ -15,6 +16,7 @@ onready var viewport_overlay = $ViewportOverlay
 onready var view_mode_button_group: ButtonGroup = $"../TopBar/ViewModeButtons/45Degree".group
 onready var zoom_label: Label = $"../TopBar/Zoom/ZoomPercent"
 onready var gizmo_25d_scene = preload("res://addons/node25d-cs/main_screen/gizmo_25d.tscn")
+
 
 func _ready():
 	# Give Godot a chance to fully load the scene. Should take two frames.

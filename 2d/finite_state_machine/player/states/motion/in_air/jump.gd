@@ -17,6 +17,7 @@ var horizontal_velocity = Vector2()
 var vertical_speed = 0.0
 var height = 0.0
 
+
 func initialize(speed, velocity):
 	horizontal_speed = speed
 	if speed > 0.0:

@@ -1,5 +1,6 @@
 extends RigidBody
 
+
 const DESPAWN_TIME = 5
 
 var timer = 0

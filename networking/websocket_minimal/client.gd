@@ -1,10 +1,12 @@
 extends Node
 
+
 # The URL we will connect to.
 export var websocket_url = "ws://localhost:9080"
 
 # Our WebSocketClient instance.
 var _client = WebSocketClient.new()
+
 
 func _ready():
 	# Connect base signals to get notified of connection open, close, and errors.
@@ -21,6 +23,12 @@ func _ready():
 	if err != OK:
 		print("Unable to connect")
 		set_process(false)
+
+
+func _process(_delta):
+	# Call this in _process or _physics_process. Data transfer, and signals
+	# emission will only happen when calling this function.
+	_client.poll()
 
 
 func _closed(was_clean = false):
@@ -44,12 +52,6 @@ func _on_data():
 	# to receive data from server, and not get_packet directly when not
 	# using the MultiplayerAPI.
 	print("Got data from server: ", _client.get_peer(1).get_packet().get_string_from_utf8())
-
-
-func _process(_delta):
-	# Call this in _process or _physics_process. Data transfer, and signals
-	# emission will only happen when calling this function.
-	_client.poll()
 
 
 func _exit_tree():

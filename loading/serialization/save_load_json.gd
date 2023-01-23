@@ -4,12 +4,13 @@ extends Button
 # stored natively. For example, integers get converted into doubles,
 # and to store Vector2 and other non-JSON types you need `var2str()`.
 
+
+const SAVE_PATH = "user://save_json.json"
+
 # The root game node (so we can get and instance enemies).
 export(NodePath) var game_node
 # The player node (so we can set/get its health and position).
 export(NodePath) var player_node
-
-const SAVE_PATH = "user://save_json.json"
 
 
 func save_game():

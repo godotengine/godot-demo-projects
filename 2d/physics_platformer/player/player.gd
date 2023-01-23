@@ -54,6 +54,7 @@ onready var sprite_smoke = sprite.get_node(@"Smoke")
 onready var animation_player = $AnimationPlayer
 onready var bullet_shoot = $BulletShoot
 
+
 func _integrate_forces(s):
 	var lv = s.get_linear_velocity()
 	var step = s.get_step()

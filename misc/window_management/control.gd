@@ -1,8 +1,10 @@
 extends Control
 
+
 var mousepos
 
 onready var observer = $"../Observer"
+
 
 func _ready():
 	if not check_wm_api():

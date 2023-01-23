@@ -1,6 +1,8 @@
 extends Node
 
+
 onready var captured_image = $CapturedImage
+
 
 func _on_CaptureButton_pressed():
 	get_viewport().set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)

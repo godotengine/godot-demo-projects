@@ -1,7 +1,9 @@
 extends Control
 
+
 export(NodePath) var combatants_node
 export(PackedScene) var info_scene
+
 
 func _ready():
 	combatants_node = get_node(combatants_node)

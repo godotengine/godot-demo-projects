@@ -1,5 +1,6 @@
 extends Spatial
 
+
 # Handle the motion of both player cameras as well as communication with the
 # SplitScreen shader to achieve the dynamic split screen effet
 #

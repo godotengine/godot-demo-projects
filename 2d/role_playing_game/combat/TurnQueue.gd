@@ -1,10 +1,12 @@
 extends Node
 
+
+signal active_combatant_changed(active_combatant)
+
 export(NodePath) var combatants_list
 var queue = [] setget set_queue
 var active_combatant = null setget _set_active_combatant
 
-signal active_combatant_changed(active_combatant)
 
 func _ready():
 	combatants_list = get_node(combatants_list)

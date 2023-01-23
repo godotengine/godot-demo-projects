@@ -1,18 +1,19 @@
 extends Control
 
+
 # Some margin to keep the marker away from the screen's corners.
 const MARGIN = 8
-
-onready var camera = get_viewport().get_camera()
-onready var parent = get_parent()
-onready var label = $Label
-onready var marker = $Marker
 
 # The waypoint's text.
 export var text = "Waypoint" setget set_text
 
 # If `true`, the waypoint sticks to the viewport's edges when moving off-screen.
 export var sticky = true
+
+onready var camera = get_viewport().get_camera()
+onready var parent = get_parent()
+onready var label = $Label
+onready var marker = $Marker
 
 
 func _ready() -> void:
