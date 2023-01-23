@@ -37,7 +37,7 @@ func _process(_delta):
 		joypad_name.set_text(Input.get_joy_name(joy_num) + "\n" + Input.get_joy_guid(joy_num))
 
 	# Loop through the axes and show their current values.
-	for axis in range(int(min(JOY_AXIS_MAX, 11))):
+	for axis in range(int(min(JOY_AXIS_MAX, 10))):
 		axis_value = Input.get_joy_axis(joy_num, axis)
 		axes.get_node("Axis" + str(axis) + "/ProgressBar").set_value(100 * axis_value)
 		axes.get_node("Axis" + str(axis) + "/ProgressBar/Value").set_text(str(axis_value))
@@ -58,20 +58,13 @@ func _process(_delta):
 				joypad_axes.get_node(str(axis) + "-").show()
 				# Transparent white modulate, non-alpha color channels are not changed here.
 				joypad_axes.get_node(str(axis) + "-").self_modulate.a = scaled_alpha_value
-		elif axis == JOY_AXIS_TRIGGER_LEFT:
+		elif axis == JOY_AXIS_TRIGGER_LEFT || axis == JOY_AXIS_TRIGGER_RIGHT:
 			if axis_value <= DEADZONE:
-				joypad_buttons.get_child(JOY_AXIS_TRIGGER_LEFT).hide()
+				joypad_axes.get_node(str(axis)).hide()
 			else:
-				joypad_buttons.get_child(JOY_AXIS_TRIGGER_LEFT).show()
+				joypad_axes.get_node(str(axis)).show()
 				# Transparent white modulate, non-alpha color channels are not changed here.
-				joypad_buttons.get_child(JOY_AXIS_TRIGGER_LEFT).self_modulate.a = scaled_alpha_value
-		elif axis == JOY_AXIS_TRIGGER_RIGHT:
-			if axis_value <= DEADZONE:
-				joypad_buttons.get_child(JOY_AXIS_TRIGGER_RIGHT).hide()
-			else:
-				joypad_buttons.get_child(JOY_AXIS_TRIGGER_RIGHT).show()
-				# Transparent white modulate, non-alpha color channels are not changed here.
-				joypad_buttons.get_child(JOY_AXIS_TRIGGER_RIGHT).self_modulate.a = scaled_alpha_value
+				joypad_axes.get_node(str(axis)).self_modulate.a = scaled_alpha_value
 
 		# Highlight axis labels that are within the "active" value range. Simular to the button highlighting for loop below.
 		axes.get_node("Axis" + str(axis) + "/Label").add_theme_color_override("font_color", FONT_COLOR_DEFAULT)
@@ -79,14 +72,14 @@ func _process(_delta):
 			axes.get_node("Axis" + str(axis) + "/Label").add_theme_color_override("font_color", FONT_COLOR_ACTIVE)
 
 	# Loop through the buttons and highlight the ones that are pressed.
-	for button in range(int(min(JOY_BUTTON_MAX, 24))):
+	for button in range(int(min(JOY_BUTTON_SDL_MAX, 21))):
 		if Input.is_joy_button_pressed(joy_num, button):
 			button_grid.get_child(button).add_theme_color_override("font_color", FONT_COLOR_ACTIVE)
-			if button < 17 and button != JOY_AXIS_TRIGGER_LEFT and button != JOY_AXIS_TRIGGER_RIGHT:
+			if button <= JOY_BUTTON_MISC1:
 				joypad_buttons.get_child(button).show()
 		else:
 			button_grid.get_child(button).add_theme_color_override("font_color", FONT_COLOR_DEFAULT)
-			if button < 17 and button != JOY_AXIS_TRIGGER_LEFT and button != JOY_AXIS_TRIGGER_RIGHT:
+			if button <= JOY_BUTTON_MISC1:
 				joypad_buttons.get_child(button).hide()
 
 
