@@ -1,5 +1,6 @@
 extends Combatant
 
+
 func set_active(value):
 	.set_active(value)
 	if not active:

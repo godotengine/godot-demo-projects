@@ -1,5 +1,13 @@
 extends Node
 
+
+# Signals to let lobby GUI know what's going on.
+signal player_list_changed()
+signal connection_failed()
+signal connection_succeeded()
+signal game_ended()
+signal game_error(what)
+
 # Default game server port. Can be any number between 1024 and 49151.
 # Not on the list of registered or common ports as of November 2020:
 # https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers
@@ -17,12 +25,14 @@ var player_name = "The Warrior"
 var players = {}
 var players_ready = []
 
-# Signals to let lobby GUI know what's going on.
-signal player_list_changed()
-signal connection_failed()
-signal connection_succeeded()
-signal game_ended()
-signal game_error(what)
+
+func _ready():
+	get_tree().connect("network_peer_connected", self, "_player_connected")
+	get_tree().connect("network_peer_disconnected", self,"_player_disconnected")
+	get_tree().connect("connected_to_server", self, "_connected_ok")
+	get_tree().connect("connection_failed", self, "_connected_fail")
+	get_tree().connect("server_disconnected", self, "_server_disconnected")
+
 
 # Callback from SceneTree.
 func _player_connected(id):
@@ -173,11 +183,3 @@ func end_game():
 
 	emit_signal("game_ended")
 	players.clear()
-
-
-func _ready():
-	get_tree().connect("network_peer_connected", self, "_player_connected")
-	get_tree().connect("network_peer_disconnected", self,"_player_disconnected")
-	get_tree().connect("connected_to_server", self, "_connected_ok")
-	get_tree().connect("connection_failed", self, "_connected_fail")
-	get_tree().connect("server_disconnected", self, "_server_disconnected")

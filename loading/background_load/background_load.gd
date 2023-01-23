@@ -1,10 +1,12 @@
 extends Control
 
+
 const SIMULATED_DELAY_SEC = 0.1
 
 var thread = null
 
 onready var progress = $Progress
+
 
 func _thread_load(path):
 	var ril = ResourceLoader.load_interactive(path)
@@ -56,6 +58,7 @@ func _thread_done(resource):
 	get_tree().current_scene = new_scene
 
 	progress.visible = false
+
 
 func load_scene(path):
 	thread = Thread.new()

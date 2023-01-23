@@ -1,12 +1,14 @@
 extends Control
 
+
 const TEST_ITEM_SKU = "my_in_app_purchase_sku"
+
+var payment = null
+var test_item_purchase_token = null
 
 onready var alert_dialog = $AlertDialog
 onready var label = $Label
 
-var payment = null
-var test_item_purchase_token = null
 
 func _ready():
 	if Engine.has_singleton("GodotGooglePlayBilling"):

@@ -1,8 +1,10 @@
 extends RigidBody
 
+
 onready var raycast = $RayCast
 onready var camera = $Target/Camera
 onready var start_position = translation
+
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("exit"):

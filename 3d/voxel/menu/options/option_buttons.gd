@@ -1,5 +1,6 @@
 extends Control
 
+
 onready var render_distance_label = $RenderDistanceLabel
 onready var render_distance_slider = $RenderDistanceSlider
 onready var fog_checkbox = $FogCheckBox

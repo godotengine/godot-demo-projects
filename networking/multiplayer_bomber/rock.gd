@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+
 # Sent to everyone else
 puppet func do_explosion():
 	$"AnimationPlayer".play("explode")

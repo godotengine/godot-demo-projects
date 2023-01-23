@@ -1,7 +1,9 @@
 extends TileMap
 
+
 enum CellType { ACTOR, OBSTACLE, OBJECT }
 export(NodePath) var dialogue_ui
+
 
 func _ready():
 	for child in get_children():

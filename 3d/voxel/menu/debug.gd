@@ -1,6 +1,7 @@
 extends Label
 # Displays some useful debug information in a Label.
 
+
 onready var player = $"../Player"
 onready var voxel_world = $"../VoxelWorld"
 

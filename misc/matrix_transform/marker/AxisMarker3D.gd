@@ -2,6 +2,7 @@ tool
 class_name AxisMarker3D, "res://marker/AxisMarker3D.svg"
 extends Spatial
 
+
 func _process(_delta):
 	var holder: Spatial = get_child(0).get_child(0)
 	var cube: Spatial = holder.get_child(0)

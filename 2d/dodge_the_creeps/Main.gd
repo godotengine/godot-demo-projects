@@ -3,6 +3,7 @@ extends Node
 export(PackedScene) var mob_scene
 var score
 
+
 func _ready():
 	randomize()
 
@@ -49,6 +50,7 @@ func _on_MobTimer_timeout():
 
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
+
 
 func _on_ScoreTimer_timeout():
 	score += 1

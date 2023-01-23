@@ -1,5 +1,6 @@
 extends Node2D
 
+
 const PAD_SPEED = 150
 const INITIAL_BALL_SPEED = 80
 
@@ -13,6 +14,7 @@ var pad_size = Vector2(8, 32)
 onready var ball = $Ball
 onready var left_paddle = $LeftPaddle
 onready var right_paddle = $RightPaddle
+
 
 func _ready():
 	screen_size = get_viewport_rect().size # Get actual size.

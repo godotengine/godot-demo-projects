@@ -1,11 +1,19 @@
 extends Spatial
 
+
 enum GIMode {
 	NONE,
 	BAKED_LIGHTMAP_ALL,
 	BAKED_LIGHTMAP_INDIRECT,
 	GI_PROBE,
 	MAX,  # Maximum value of the enum, used internally.
+}
+
+enum ReflectionProbeMode {
+	NONE,
+	ONCE,
+	ALWAYS,
+	MAX,
 }
 
 # Keep this in sync with the GIMode enum (except for MAX).
@@ -15,13 +23,6 @@ const GI_MODE_TEXTS = [
 	"Baked Lightmap Indirect (Average)",
 	"GIProbe (Slow)",
 ]
-
-enum ReflectionProbeMode {
-	NONE,
-	ONCE,
-	ALWAYS,
-	MAX,
-}
 
 # Keep this in sync with the ReflectionProbeMode enum (except for MAX).
 const REFLECTION_PROBE_MODE_TEXTS = [
@@ -37,6 +38,7 @@ var use_ssao = false
 onready var environment = preload("res://default_env.tres")
 onready var gi_mode_label = $GIMode
 onready var reflection_probe_mode_label = $ReflectionProbeMode
+onready var ssao_label = $SSAO
 onready var reflection_probe = $Camera/ReflectiveSphere/ReflectionProbe
 
 
@@ -141,6 +143,6 @@ func set_reflection_probe_mode(p_reflection_probe_mode):
 
 func set_use_ssao(p_use_ssao):
 	use_ssao = p_use_ssao
-	reflection_probe_mode_label.text = "Screen-space ambient occlusion: %s" % "Enabled (Slow)" if use_ssao else "Disabled (Fastest)"
+	ssao_label.text = "Screen-space ambient occlusion: %s" % "Enabled (Slow)" if use_ssao else "Disabled (Fastest)"
 
 	environment.ssao_enabled = use_ssao

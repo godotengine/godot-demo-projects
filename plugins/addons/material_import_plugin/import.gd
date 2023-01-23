@@ -1,7 +1,9 @@
 tool
 extends EditorImportPlugin
 
+
 enum Presets { PRESET_DEFAULT }
+
 
 func get_importer_name():
 	return "demos.sillymaterial"

@@ -1,6 +1,7 @@
 tool
 extends Node2D
 
+
 # Not pixel perfect for all axes in all modes, but works well enough.
 # Rounding is not done until after the movement is finished.
 const ROUGHLY_ROUND_TO_PIXELS = true
@@ -21,6 +22,7 @@ var dominant_axis
 
 onready var lines_root = $Lines
 onready var lines = [$Lines/X, $Lines/Y, $Lines/Z]
+
 
 func _process(_delta):
 	if not lines:

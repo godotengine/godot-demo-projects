@@ -1,7 +1,9 @@
 tool
 extends EditorPlugin
 
+
 var import_plugin
+
 
 func _enter_tree():
 	import_plugin = preload("import.gd").new()

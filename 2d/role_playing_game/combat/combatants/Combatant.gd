@@ -1,11 +1,15 @@
 class_name Combatant
 extends Node
 
-export(int) var damage = 1
-export(int) var defense = 1
-var active = false setget set_active
 
 signal turn_finished
+
+export(int) var damage = 1
+export(int) var defense = 1
+
+var active = false setget set_active
+
+
 
 func set_active(value):
 	active = value

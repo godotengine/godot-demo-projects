@@ -1,9 +1,6 @@
 tool
 extends Sprite
 
-onready var _stand = preload("res://assets/player/textures/stand.png")
-onready var _jump = preload("res://assets/player/textures/jump.png")
-onready var _run = preload("res://assets/player/textures/run.png")
 
 const FRAMERATE = 15
 
@@ -11,6 +8,11 @@ var _direction := 0
 var _progress := 0.0
 var _parent_node25d: Node25D
 var _parent_math: PlayerMath25D
+
+onready var _stand = preload("res://assets/player/textures/stand.png")
+onready var _jump = preload("res://assets/player/textures/jump.png")
+onready var _run = preload("res://assets/player/textures/run.png")
+
 
 func _ready():
 	_parent_node25d = get_parent()

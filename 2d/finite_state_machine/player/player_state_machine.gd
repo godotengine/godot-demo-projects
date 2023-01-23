@@ -6,6 +6,7 @@ onready var jump = $Jump
 onready var stagger = $Stagger
 onready var attack = $Attack
 
+
 func _ready():
 	states_map = {
 		"idle": idle,

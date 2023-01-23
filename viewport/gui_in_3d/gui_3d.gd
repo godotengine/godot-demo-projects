@@ -1,5 +1,6 @@
 extends Spatial
 
+
 # The size of the quad mesh itself.
 var quad_mesh_size
 # Used for checking if the mouse is inside the Area
@@ -14,6 +15,7 @@ var last_mouse_pos2D = null
 onready var node_viewport = $Viewport
 onready var node_quad = $Quad
 onready var node_area = $Quad/Area
+
 
 func _ready():
 	node_area.connect("mouse_entered", self, "_mouse_entered_area")

@@ -1,7 +1,9 @@
 extends Pawn
 
-onready var Grid = get_parent()
+
 var lost = false
+onready var Grid = get_parent()
+
 
 func _ready():
 	update_look_direction(Vector2.RIGHT)

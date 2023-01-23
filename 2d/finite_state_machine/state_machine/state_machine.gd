@@ -17,6 +17,7 @@ var states_stack = []
 var current_state = null
 var _active = false setget set_active
 
+
 func _ready():
 	if not start_state:
 		start_state = get_child(0).get_path()

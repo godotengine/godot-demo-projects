@@ -1,5 +1,6 @@
 extends Camera
 
+
 const MAX_HEIGHT = 2.0
 const MIN_HEIGHT = 0
 
@@ -10,6 +11,7 @@ export var autoturn_ray_aperture = 25
 export var autoturn_speed = 50
 
 var collision_exception = []
+
 
 func _ready():
 	# Find collision exceptions for ray.

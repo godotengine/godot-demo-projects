@@ -1,6 +1,8 @@
 extends Control
 
+
 onready var client = $Client
+
 
 func _ready():
 	client.connect("lobby_joined", self, "_lobby_joined")

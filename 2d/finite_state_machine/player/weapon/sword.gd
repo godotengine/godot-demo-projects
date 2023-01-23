@@ -30,6 +30,7 @@ var combo = [{
 
 var hit_objects = []
 
+
 func _ready():
 	# warning-ignore:return_value_discarded
 	$AnimationPlayer.connect("animation_finished", self, "_on_animation_finished")

@@ -1,5 +1,6 @@
 extends Camera
 
+
 const MOUSE_SENSITIVITY = 0.002
 const MOVE_SPEED = 1.5
 

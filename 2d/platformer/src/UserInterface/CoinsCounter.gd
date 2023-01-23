@@ -1,5 +1,6 @@
 extends Panel
 
+
 var coins_collected = 0
 
 onready var coins_label = $Label

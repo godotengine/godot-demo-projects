@@ -1,6 +1,8 @@
 extends HBoxContainer
 
+
 var player_labels = {}
+
 
 func _process(_delta):
 	var rocks_left = $"../Rocks".get_child_count()

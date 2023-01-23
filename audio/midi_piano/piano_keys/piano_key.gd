@@ -1,6 +1,7 @@
 class_name PianoKey
 extends Control
 
+
 var pitch_scale: float
 
 onready var key: ColorRect = $Key

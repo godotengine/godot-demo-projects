@@ -15,10 +15,12 @@ onready var floor_detector_right = $FloorDetectorRight
 onready var sprite = $Sprite
 onready var animation_player = $AnimationPlayer
 
+
 # This function is called when the scene enters the scene tree.
 # We can initialize variables here.
 func _ready():
 	_velocity.x = speed.x
+
 
 # Physics process is a built-in loop in Godot.
 # If you define _physics_process on a node, Godot will call it every frame.

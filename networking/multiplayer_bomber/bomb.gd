@@ -3,6 +3,7 @@ extends Area2D
 var in_area = []
 var from_player
 
+
 # Called from the animation.
 func explode():
 	if not is_network_master():

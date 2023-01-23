@@ -20,6 +20,7 @@ onready var astar_node = AStar.new()
 onready var obstacles = get_used_cells_by_id(0)
 onready var _half_cell_size = cell_size / 2
 
+
 func _ready():
 	var walkable_cells_list = astar_add_walkable_cells(obstacles)
 	astar_connect_walkable_cells(walkable_cells_list)

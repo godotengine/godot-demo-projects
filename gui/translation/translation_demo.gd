@@ -1,5 +1,6 @@
 extends Control
 
+
 func _on_english_pressed():
 	TranslationServer.set_locale("en")
 

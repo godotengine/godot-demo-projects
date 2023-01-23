@@ -1,6 +1,7 @@
 class_name TerrainGenerator
 extends Resource
 
+
 # Can't be "Chunk.CHUNK_SIZE" due to cyclic dependency issues.
 # https://github.com/godotengine/godot/issues/21461
 const CHUNK_SIZE = 16

@@ -10,27 +10,35 @@
 
 class_name Basis25D
 
+
 var x: Vector2 = Vector2()
 var y: Vector2 = Vector2()
 var z: Vector2 = Vector2()
 
+
 static func top_down():
 	return init(1, 0, 0, 0, 0, 1)
+
 
 static func front_side():
 	return init(1, 0, 0, -1, 0, 0)
 
+
 static func forty_five():
 	return init(1, 0, 0, -0.70710678118, 0, 0.70710678118)
+
 
 static func isometric():
 	return init(0.86602540378, 0.5, 0, -1, -0.86602540378, 0.5)
 
+
 static func oblique_y():
 	return init(1, 0, -1, -1, 0, 1)
 
+
 static func oblique_z():
 	return init(1, 0, 0, -1, -1, 1)
+
 
 # Creates a Dimetric Basis25D from the angle between the Y axis and the others.
 # Dimetric(2.09439510239) is the same as Isometric.
@@ -40,11 +48,13 @@ static func dimetric(angle):
 	var cosine = cos(angle)
 	return init(sine, -cosine, 0, -1, -sine, -cosine)
 
+
 static func init(xx, xy, yx, yy, zx, zy):
 	var xv = Vector2(xx, xy)
 	var yv = Vector2(yx, yy)
 	var zv = Vector2(zx, zy)
 	return Basis25D.new(xv, yv, zv)
+
 
 func _init(xAxis: Vector2, yAxis: Vector2, zAxis: Vector2):
 	x = xAxis

@@ -1,6 +1,7 @@
 extends Node
 # This file manages the creation and deletion of Chunks.
 
+
 const CHUNK_MIDPOINT = Vector3(0.5, 0.5, 0.5) * Chunk.CHUNK_SIZE
 const CHUNK_END_SIZE = Chunk.CHUNK_SIZE - 1
 

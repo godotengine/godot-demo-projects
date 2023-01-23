@@ -48,6 +48,7 @@ var brush_shape = BrushShapes.CIRCLE;
 # in the _draw function for more details).
 var bg_color = Color.white
 
+
 func _ready():
 	# Get the top left position node. We need this to find out whether or not the mouse is inside the canvas.
 	TL_node = get_node("TLPos")

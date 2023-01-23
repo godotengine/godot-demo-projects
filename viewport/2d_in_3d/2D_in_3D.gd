@@ -1,5 +1,6 @@
 extends Spatial
 
+
 func _ready():
 	# Clear the viewport.
 	var viewport = $Viewport

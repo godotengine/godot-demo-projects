@@ -1,11 +1,13 @@
 extends Control
 
-# The OpenSimplexNoise object.
-onready var noise: OpenSimplexNoise = $SeamlessNoiseTexture.texture.noise
 
 # Various noise parameters.
 var min_noise = -1
 var max_noise = 1
+
+# The OpenSimplexNoise object.
+onready var noise: OpenSimplexNoise = $SeamlessNoiseTexture.texture.noise
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

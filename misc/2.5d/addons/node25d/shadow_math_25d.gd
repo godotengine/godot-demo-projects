@@ -5,6 +5,7 @@ tool
 extends KinematicBody
 class_name ShadowMath25D, "res://addons/node25d/icons/shadow_math_25d_icon.png"
 
+
 # The maximum distance below objects that shadows will appear (in 3D units).
 var shadow_length = 1000.0
 var _shadow_root: Node25D

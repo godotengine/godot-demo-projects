@@ -1,5 +1,6 @@
 extends KinematicBody
 
+
 enum Anim {
 	FLOOR,
 	AIR,

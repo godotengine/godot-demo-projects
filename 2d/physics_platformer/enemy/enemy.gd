@@ -18,6 +18,7 @@ var Bullet = preload("res://player/bullet.gd")
 onready var rc_left = $RaycastLeft
 onready var rc_right = $RaycastRight
 
+
 func _integrate_forces(s):
 	var lv = s.get_linear_velocity()
 	var new_anim = anim

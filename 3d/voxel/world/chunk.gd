@@ -4,6 +4,7 @@ extends StaticBody
 # After that, chunks finish setting themselves up in the _ready() function.
 # If a chunk is changed, its "regenerate" method is called.
 
+
 const CHUNK_SIZE = 16 # Keep in sync with TerrainGenerator.
 const TEXTURE_SHEET_WIDTH = 8
 

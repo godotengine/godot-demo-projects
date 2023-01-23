@@ -1,13 +1,15 @@
 extends Node
 
+
+signal dialogue_started
+signal dialogue_finished
+
 export(String, FILE, "*.json") var dialogue_file
 var dialogue_keys = []
 var dialogue_name = ""
 var current = 0
 var dialogue_text = ""
 
-signal dialogue_started
-signal dialogue_finished
 
 func start_dialogue():
 	emit_signal("dialogue_started")

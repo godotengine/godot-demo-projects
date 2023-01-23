@@ -5,6 +5,7 @@ export(float) var speed = 1000.0
 
 onready var root = get_tree().root
 
+
 func _ready():
 	set_as_toplevel(true)
 

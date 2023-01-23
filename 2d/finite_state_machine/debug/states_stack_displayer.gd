@@ -2,6 +2,7 @@ extends Panel
 
 onready var fsm_node = get_node("../../Player/StateMachine")
 
+
 func _process(_delta):
 	var states_names = ""
 	var numbers = ""

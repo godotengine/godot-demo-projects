@@ -44,99 +44,99 @@ public class Gizmo25D : Node2D
             return; // We're most likely viewing the Gizmo25D scene.
         }
         // While getting the mouse position works in any viewport, it doesn't do
-	    // anything significant unless the mouse is in the 2.5D viewport.
-	    Vector2 mousePosition = GetLocalMousePosition();
-    	if (!_moving)
+        // anything significant unless the mouse is in the 2.5D viewport.
+        Vector2 mousePosition = GetLocalMousePosition();
+        if (!_moving)
         {
-    		// If the mouse is farther than this many pixels, it won't grab anything.
-    		float closestDistance = 20.0f;
-    		dominantAxis = -1;
-    		for (int i = 0; i < 3; i++)
+            // If the mouse is farther than this many pixels, it won't grab anything.
+            float closestDistance = 20.0f;
+            dominantAxis = -1;
+            for (int i = 0; i < 3; i++)
             {
                 // Unrelated, but needs a loop too.
                 Color modulateLine = lines[i].Modulate;
-    			modulateLine.a = 0.8f;
+                modulateLine.a = 0.8f;
                 lines[i].Modulate = modulateLine;
 
-    			var distance = DistanceToSegmentAtIndex(i, mousePosition);
-    			if (distance < closestDistance)
+                var distance = DistanceToSegmentAtIndex(i, mousePosition);
+                if (distance < closestDistance)
                 {
-    				closestDistance = distance;
-    				dominantAxis = i;
+                    closestDistance = distance;
+                    dominantAxis = i;
                 }
             }
-    		if (dominantAxis == -1)
+            if (dominantAxis == -1)
             {
-    			// If we're not hovering over a line, ensure they are placed correctly.
-    			linesRoot.GlobalPosition = node25d.GlobalPosition;
-    			return;
+                // If we're not hovering over a line, ensure they are placed correctly.
+                linesRoot.GlobalPosition = node25d.GlobalPosition;
+                return;
             }
         }
 
         Color modulate = lines[dominantAxis].Modulate;
-    	modulate.a = 1;
+        modulate.a = 1;
         lines[dominantAxis].Modulate = modulate;
 
-    	if (!wantsToMove)
+        if (!wantsToMove)
         {
-    		_moving = false;
+            _moving = false;
         }
-    	else if (wantsToMove && !_moving)
+        else if (wantsToMove && !_moving)
         {
-    		_moving = true;
-    		_startPosition = mousePosition;
+            _moving = true;
+            _startPosition = mousePosition;
         }
 
-    	if (_moving)
+        if (_moving)
         {
-    		// Change modulate of unselected axes.
+            // Change modulate of unselected axes.
             modulate = lines[(dominantAxis + 1) % 3].Modulate;
-    		modulate.a = 0.5f;
+            modulate.a = 0.5f;
             lines[(dominantAxis + 1) % 3].Modulate = modulate;
             lines[(dominantAxis + 2) % 3].Modulate = modulate;
 
-    		// Calculate mouse movement and reset for next frame.
-    		var mouseDiff = mousePosition - _startPosition;
-    		_startPosition = mousePosition;
-    		// Calculate movement.
-    		var projectedDiff = mouseDiff.Project(lines[dominantAxis].Points[1]);
-    		var movement = projectedDiff.Length() / Node25D.SCALE;
-    		if (Mathf.IsEqualApprox(Mathf.Pi, projectedDiff.AngleTo(lines[dominantAxis].Points[1])))
+            // Calculate mouse movement and reset for next frame.
+            var mouseDiff = mousePosition - _startPosition;
+            _startPosition = mousePosition;
+            // Calculate movement.
+            var projectedDiff = mouseDiff.Project(lines[dominantAxis].Points[1]);
+            var movement = projectedDiff.Length() / Node25D.SCALE;
+            if (Mathf.IsEqualApprox(Mathf.Pi, projectedDiff.AngleTo(lines[dominantAxis].Points[1])))
             {
-    			movement *= -1;
+                movement *= -1;
             }
-    		// Apply movement.
+            // Apply movement.
             Transform t = spatialNode.Transform;
-    		t.origin += t.basis[dominantAxis] * movement;
+            t.origin += t.basis[dominantAxis] * movement;
             spatialNode.Transform = t;
         }
-    	else
+        else
         {
-    		// Make sure the gizmo is located at the object.
-    		GlobalPosition = node25d.GlobalPosition;
-    		if (RoughlyRoundToPixels)
+            // Make sure the gizmo is located at the object.
+            GlobalPosition = node25d.GlobalPosition;
+            if (RoughlyRoundToPixels)
             {
                 Transform t = spatialNode.Transform;
-    			t.origin = (t.origin * Node25D.SCALE).Round() / Node25D.SCALE;
+                t.origin = (t.origin * Node25D.SCALE).Round() / Node25D.SCALE;
                 spatialNode.Transform = t;
             }
         }
-    	// Move the gizmo lines appropriately.
-    	linesRoot.GlobalPosition = node25d.GlobalPosition;
-    	node25d.PropertyListChangedNotify();
+        // Move the gizmo lines appropriately.
+        linesRoot.GlobalPosition = node25d.GlobalPosition;
+        node25d.PropertyListChangedNotify();
     }
 
     // Initializes after _ready due to the onready vars, called manually in Viewport25D.gd.
     // Sets up the points based on the basis values of the Node25D.
     public void Initialize()
     {
-	    var basis = node25d.Basis25D;
-	    for (int i = 0; i < 3; i++)
+        var basis = node25d.Basis25D;
+        for (int i = 0; i < 3; i++)
         {
-		    lines[i].Points[1] = basis[i] * 3;
+            lines[i].Points[1] = basis[i] * 3;
         }
-	    GlobalPosition = node25d.GlobalPosition;
-	    spatialNode = node25d.GetChild<Spatial>(0);
+        GlobalPosition = node25d.GlobalPosition;
+        spatialNode = node25d.GetChild<Spatial>(0);
     }
 
 
@@ -145,24 +145,24 @@ public class Gizmo25D : Node2D
     // (0, 0) and it provides a deadzone around the origin.
     private float DistanceToSegmentAtIndex(int index, Vector2 point)
     {
-	    if (lines == null)
+        if (lines == null)
         {
-		    return Mathf.Inf;
+            return Mathf.Inf;
         }
-    	if (point.LengthSquared() < 400)
+        if (point.LengthSquared() < 400)
         {
-		    return Mathf.Inf;
-        }
-
-	    Vector2 segmentEnd = lines[index].Points[1];
-	    float lengthSquared = segmentEnd.LengthSquared();
-	    if (lengthSquared < 400)
-        {
-    		return Mathf.Inf;
+            return Mathf.Inf;
         }
 
-	    var t = Mathf.Clamp(point.Dot(segmentEnd) / lengthSquared, 0, 1);
-    	var projection = t * segmentEnd;
-	    return point.DistanceTo(projection);
+        Vector2 segmentEnd = lines[index].Points[1];
+        float lengthSquared = segmentEnd.LengthSquared();
+        if (lengthSquared < 400)
+        {
+            return Mathf.Inf;
+        }
+
+        var t = Mathf.Clamp(point.Dot(segmentEnd) / lengthSquared, 0, 1);
+        var projection = t * segmentEnd;
+        return point.DistanceTo(projection);
     }
 }

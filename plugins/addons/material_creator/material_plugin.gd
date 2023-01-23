@@ -11,7 +11,9 @@
 tool
 extends EditorPlugin
 
+
 var io_material_dialog
+
 
 func _enter_tree():
 	io_material_dialog = preload("res://addons/material_creator/material_dock.tscn").instance()

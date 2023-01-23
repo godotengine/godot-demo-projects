@@ -13,6 +13,7 @@ onready var score_right_node = $ScoreRight
 onready var winner_left = $WinnerLeft
 onready var winner_right = $WinnerRight
 
+
 func _ready():
 	# By default, all nodes in server inherit from master,
 	# while all nodes in clients inherit from puppet.

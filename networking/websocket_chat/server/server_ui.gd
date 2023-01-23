@@ -1,5 +1,6 @@
 extends Control
 
+
 onready var _server = $Server
 onready var _port = $Panel/VBoxContainer/HBoxContainer/Port
 onready var _line_edit = $Panel/VBoxContainer/HBoxContainer3/LineEdit
@@ -7,6 +8,7 @@ onready var _write_mode = $Panel/VBoxContainer/HBoxContainer2/WriteMode
 onready var _log_dest = $Panel/VBoxContainer/RichTextLabel
 onready var _multiplayer = $Panel/VBoxContainer/HBoxContainer2/MPAPI
 onready var _destination = $Panel/VBoxContainer/HBoxContainer2/Destination
+
 
 func _ready():
 	_write_mode.clear()

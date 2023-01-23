@@ -1,6 +1,7 @@
 tool
 extends Node
 
+
 # NOTE: in theory this would extend from resource, but until saving and loading resources
 # works in godot, we'll stick with extending from node
 # and using JSON files to save/load data
@@ -10,6 +11,7 @@ extends Node
 var albedo_color
 var metallic_strength
 var roughness_strength
+
 
 func init():
 	albedo_color = Color()

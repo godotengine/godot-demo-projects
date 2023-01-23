@@ -1,5 +1,6 @@
 extends Control
 
+
 onready var effect = $Effect
 onready var effects = $Effects
 onready var picture = $Picture

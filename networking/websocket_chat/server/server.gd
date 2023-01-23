@@ -1,12 +1,14 @@
 extends Node
 
-onready var _log_dest = get_parent().get_node("Panel/VBoxContainer/RichTextLabel")
 
 var _server = WebSocketServer.new()
 var _clients = {}
 var _write_mode = WebSocketPeer.WRITE_MODE_BINARY
 var _use_multiplayer = true
 var last_connected_client = 0
+
+onready var _log_dest = get_parent().get_node("Panel/VBoxContainer/RichTextLabel")
+
 
 func _init():
 	_server.connect("client_connected", self, "_client_connected")
@@ -19,14 +21,14 @@ func _init():
 	_server.connect("peer_disconnected", self, "_client_disconnected")
 
 
-func _exit_tree():
-	_clients.clear()
-	_server.stop()
-
-
 func _process(_delta):
 	if _server.is_listening():
 		_server.poll()
+
+
+func _exit_tree():
+	_clients.clear()
+	_server.stop()
 
 
 func _client_close_request(id, code, reason):

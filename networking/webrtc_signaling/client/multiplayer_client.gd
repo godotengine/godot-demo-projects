@@ -1,7 +1,9 @@
 extends "ws_webrtc_client.gd"
 
+
 var rtc_mp: WebRTCMultiplayer = WebRTCMultiplayer.new()
 var sealed = false
+
 
 func _init():
 	connect("connected", self, "connected")

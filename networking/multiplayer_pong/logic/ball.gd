@@ -8,6 +8,7 @@ var _speed = DEFAULT_SPEED
 
 onready var _screen_size = get_viewport_rect().size
 
+
 func _process(delta):
 	_speed += delta
 	# Ball will move normally for both players,

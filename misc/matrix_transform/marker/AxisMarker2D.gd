@@ -2,6 +2,7 @@ tool
 class_name AxisMarker2D, "res://marker/AxisMarker2D.svg"
 extends Node2D
 
+
 func _process(_delta):
 	var line: Line2D = get_child(0).get_child(0)
 	var marker_parent = get_parent()

@@ -1,5 +1,6 @@
 extends Node
 
+
 func encode_data(data, mode):
 	if mode == WebSocketPeer.WRITE_MODE_TEXT:
 		return data.to_utf8()

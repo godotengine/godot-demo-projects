@@ -1,6 +1,8 @@
 extends Node2D
 
+
 var thread = Thread.new()
+
 
 # This function runs in a thread!
 # Threads always take one userdata argument

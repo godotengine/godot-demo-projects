@@ -1,5 +1,6 @@
 extends Control
 
+
 export(NodePath) var target
 export var min_scale = 0.1
 export var max_scale = 3.0
@@ -15,6 +16,7 @@ var target_node
 
 # We keep here a copy of the state before the number of fingers changed to avoid accumulation errors.
 var base_xform
+
 
 func _ready():
 	base_state = {}

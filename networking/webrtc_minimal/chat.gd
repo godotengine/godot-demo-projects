@@ -1,10 +1,12 @@
 extends Node
 # An example p2p chat client.
 
+
 var peer = WebRTCPeerConnection.new()
 
 # Create negotiated data channel.
 var channel = peer.create_data_channel("chat", {"negotiated": true, "id": 1})
+
 
 func _ready():
 	# Connect all functions.
@@ -27,7 +29,7 @@ func _on_session(type, sdp):
 	peer.set_local_description(type, sdp)
 
 
-func _process(delta):
+func _process(_delta):
 	# Always poll the connection frequently.
 	peer.poll()
 	if channel.get_ready_state() == WebRTCDataChannel.STATE_OPEN:

@@ -2,6 +2,7 @@ extends Node2D
 
 export(PackedScene) var ball_scene = preload("res://ball.tscn")
 
+
 func _unhandled_input(event):
 	if event.is_echo():
 		return

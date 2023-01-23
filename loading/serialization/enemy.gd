@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+
 const MOVE_SPEED = 75
 const DAMAGE_PER_SECOND = 15
 

@@ -1,5 +1,6 @@
 extends Control
 
+
 onready var _client = $Client
 onready var _log_dest = $Panel/VBoxContainer/RichTextLabel
 onready var _line_edit = $Panel/VBoxContainer/Send/LineEdit
@@ -7,6 +8,7 @@ onready var _host = $Panel/VBoxContainer/Connect/Host
 onready var _multiplayer = $Panel/VBoxContainer/Settings/Multiplayer
 onready var _write_mode = $Panel/VBoxContainer/Settings/Mode
 onready var _destination = $Panel/VBoxContainer/Settings/Destination
+
 
 func _ready():
 	_write_mode.clear()

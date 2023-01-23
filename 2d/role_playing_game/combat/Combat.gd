@@ -1,6 +1,8 @@
 extends Node
 
+
 signal combat_finished(winner, loser)
+
 
 func initialize(combat_combatants):
 	for combatant in combat_combatants:
