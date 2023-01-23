@@ -1,11 +1,13 @@
-[gd_scene load_steps=28 format=3 uid="uid://bcmepm05qldy5"]
+[gd_scene load_steps=25 format=3 uid="uid://bcmepm05qldy5"]
 
 [ext_resource type="Texture2D" uid="uid://bc3n2sen32mqx" path="res://sky.png" id="1_0n6b1"]
 [ext_resource type="PackedScene" uid="uid://dfyswwfb8j6iv" path="res://player.tscn" id="2_cwuyg"]
 [ext_resource type="PackedScene" uid="uid://cosjr7whfc78d" path="res://lamp_post.tscn" id="3_rtj1w"]
 [ext_resource type="Script" path="res://water.gd" id="3_ww5ac"]
+[ext_resource type="Shader" path="res://water.gdshader" id="4_5b77o"]
 [ext_resource type="PackedScene" uid="uid://cewhn5k3503lu" path="res://enemy.tscn" id="4_errvf"]
 [ext_resource type="CompressedTexture3D" uid="uid://qgj3lwwrrgj" path="res://level.GPUParticlesCollisionSDF3D_data.exr" id="5_myd3n"]
+[ext_resource type="PackedScene" uid="uid://bly64h687ino4" path="res://box.tscn" id="5_o3uqf"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_33kw8"]
 panorama = ExtResource("1_0n6b1")
@@ -65,133 +67,24 @@ size = Vector2(15, 30)
 subdivide_width = 16
 subdivide_depth = 16
 
-[sub_resource type="Shader" id="Shader_7u7jo"]
-code = "// NOTE: Shader automatically converted from Godot Engine 4.0.beta's StandardMaterial3D.
-
-shader_type spatial;
-render_mode blend_mix,depth_draw_opaque,cull_disabled,diffuse_burley,specular_schlick_ggx;
-uniform vec4 albedo : source_color;
-uniform sampler2D texture_albedo : source_color,filter_nearest_mipmap_anisotropic,repeat_enable;
-uniform float proximity_fade_distance;
-uniform float distance_fade_min;
-uniform float distance_fade_max;
-uniform float point_size : hint_range(0,128);
-uniform float roughness : hint_range(0,1);
-uniform sampler2D texture_metallic : hint_default_white,filter_nearest_mipmap_anisotropic,repeat_enable;
-uniform vec4 metallic_texture_channel;
-uniform sampler2D texture_roughness : hint_roughness_r,filter_nearest_mipmap_anisotropic,repeat_enable;
-uniform float specular;
-uniform float metallic;
-uniform sampler2D texture_normal : hint_roughness_normal,filter_nearest_mipmap_anisotropic,repeat_enable;
-uniform float normal_scale : hint_range(-16,16);
-varying vec3 uv1_triplanar_pos;
-uniform float uv1_blend_sharpness;
-varying vec3 uv1_power_normal;
-uniform vec3 uv1_scale;
-uniform vec3 uv1_offset;
-uniform vec3 uv2_scale;
-uniform vec3 uv2_offset;
-
-const float WAVE_AMPLITUDE = 0.125;
-const float WAVE_SPEED = 1.3;
-
-
-void vertex() {
-	TANGENT = vec3(0.0,0.0,-1.0) * abs(NORMAL.x);
-	TANGENT+= vec3(1.0,0.0,0.0) * abs(NORMAL.y);
-	TANGENT+= vec3(1.0,0.0,0.0) * abs(NORMAL.z);
-	TANGENT = normalize(TANGENT);
-	BINORMAL = vec3(0.0,1.0,0.0) * abs(NORMAL.x);
-	BINORMAL+= vec3(0.0,0.0,-1.0) * abs(NORMAL.y);
-	BINORMAL+= vec3(0.0,1.0,0.0) * abs(NORMAL.z);
-	BINORMAL = normalize(BINORMAL);
-	uv1_power_normal=pow(abs(NORMAL),vec3(uv1_blend_sharpness));
-	uv1_triplanar_pos = VERTEX * uv1_scale + uv1_offset;
-	uv1_power_normal/=dot(uv1_power_normal,vec3(1.0));
-	uv1_triplanar_pos *= vec3(1.0,-1.0, 1.0);
-	
-	// Make the surface wave.
- 	VERTEX.y = -WAVE_AMPLITUDE + (sin(VERTEX.x + TIME * WAVE_SPEED) + sin(VERTEX.z * 2.0 + TIME * WAVE_SPEED)) * WAVE_AMPLITUDE;
-}
-
-
-vec4 triplanar_texture(sampler2D p_sampler,vec3 p_weights,vec3 p_triplanar_pos) {
-	vec4 samp=vec4(0.0);
-	samp+= texture(p_sampler,p_triplanar_pos.xy) * p_weights.z;
-	samp+= texture(p_sampler,p_triplanar_pos.xz) * p_weights.y;
-	samp+= texture(p_sampler,p_triplanar_pos.zy * vec2(-1.0,1.0)) * p_weights.x;
-	return samp;
-}
-
-
-void fragment() {
-	vec4 albedo_tex = triplanar_texture(texture_albedo,uv1_power_normal,uv1_triplanar_pos);
-	ALBEDO = albedo.rgb * albedo_tex.rgb;
-	float metallic_tex = dot(triplanar_texture(texture_metallic,uv1_power_normal,uv1_triplanar_pos),metallic_texture_channel);
-	METALLIC = metallic_tex * metallic;
-	vec4 roughness_texture_channel = vec4(1.0,0.0,0.0,0.0);
-	float roughness_tex = dot(triplanar_texture(texture_roughness,uv1_power_normal,uv1_triplanar_pos),roughness_texture_channel);
-	ROUGHNESS = roughness_tex * roughness;
-	SPECULAR = specular;
-	NORMAL_MAP = triplanar_texture(texture_normal,uv1_power_normal,uv1_triplanar_pos).rgb;
-	NORMAL_MAP_DEPTH = normal_scale;
-	ALPHA *= albedo.a * albedo_tex.a;
-	float depth_tex = textureLod(DEPTH_TEXTURE,SCREEN_UV,0.0).r;
-	vec4 world_pos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV*2.0-1.0,depth_tex,1.0);
-	world_pos.xyz/=world_pos.w;
-	ALPHA*=clamp(1.0-smoothstep(world_pos.z+proximity_fade_distance,world_pos.z,VERTEX.z),0.0,1.0);
-	ALPHA *= clamp(smoothstep(distance_fade_min, distance_fade_max, length(VERTEX)), 0.0, 1.0);
-}
-"
-
-[sub_resource type="Gradient" id="Gradient_vg3fo"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.987013)
-colors = PackedColorArray(0.555, 0.555, 0.74, 0.490196, 0.75, 1, 1, 0.823529)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_e2g8a"]
-noise_type = 2
-fractal_type = 0
-domain_warp_enabled = true
-domain_warp_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ftpiw"]
-width = 256
-height = 256
-seamless = true
-seamless_blend_skirt = 1.0
-color_ramp = SubResource("Gradient_vg3fo")
-noise = SubResource("FastNoiseLite_e2g8a")
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_prikk"]
-width = 256
-height = 256
-seamless = true
-seamless_blend_skirt = 1.0
-as_normal_map = true
-bump_strength = 0.2
-noise = SubResource("FastNoiseLite_e2g8a")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fsido"]
 render_priority = 0
-shader = SubResource("Shader_7u7jo")
-shader_parameter/albedo = Color(0.862745, 0.862745, 0.862745, 1)
-shader_parameter/proximity_fade_distance = 0.5
-shader_parameter/distance_fade_min = 0.0
-shader_parameter/distance_fade_max = 1.0
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 0.0
-shader_parameter/metallic_texture_channel = Plane(1, 0, 0, 0)
-shader_parameter/specular = 1.0
-shader_parameter/metallic = 0.0
-shader_parameter/normal_scale = 1.0
-shader_parameter/uv1_blend_sharpness = 1.0
-shader_parameter/uv1_scale = Vector3(0.125, 0.125, 0.125)
+shader = ExtResource("4_5b77o")
+shader_parameter/albedo = null
+shader_parameter/proximity_fade_distance = null
+shader_parameter/distance_fade_min = null
+shader_parameter/distance_fade_max = null
+shader_parameter/point_size = null
+shader_parameter/roughness = null
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = null
+shader_parameter/metallic = null
+shader_parameter/normal_scale = null
+shader_parameter/uv1_blend_sharpness = null
+shader_parameter/uv1_scale = null
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/uv2_scale = Vector3(1, 1, 1)
-shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/texture_albedo = SubResource("NoiseTexture2D_ftpiw")
-shader_parameter/texture_normal = SubResource("NoiseTexture2D_prikk")
+shader_parameter/uv2_scale = null
+shader_parameter/uv2_offset = null
 
 [sub_resource type="BoxMesh" id="BoxMesh_dflow"]
 lightmap_size_hint = Vector2i(229, 216)
@@ -199,6 +92,21 @@ size = Vector3(15, 6, 30)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_04k8c"]
 size = Vector3(15, 6, 30)
+
+[sub_resource type="Animation" id="Animation_2y52n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Surface:surface_material_override/0:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_as77u"]
 resource_name = "water_surface"
@@ -215,21 +123,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(-2, -2, -2),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(2, 1, 1), Vector3(3, 0, -1)]
-}
-
-[sub_resource type="Animation" id="Animation_2y52n"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Surface:surface_material_override/0:uv1_offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vu6de"]
@@ -277,15 +170,23 @@ polygon = PackedVector2Array(12, 2.75, 12, 1.75, -11.75, -5.25, -15.75, -5.25, -
 depth = 15.0
 material = SubResource("StandardMaterial3D_sds3a")
 
+[node name="PoolSteps" type="CSGBox3D" parent="Main"]
+transform = Transform3D(-4.2222e-08, -1.49012e-08, 1, -1.13133e-08, 1, -2.98023e-08, -1, -1.13133e-08, -4.2222e-08, 31.2204, 11.6439, 29.6394)
+operation = 2
+size = Vector3(24.5, 1, 16)
+material = SubResource("StandardMaterial3D_sds3a")
+
 [node name="Water" type="Area3D" parent="Main"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.25, 11, 27.25)
 gravity_space_override = 3
-gravity = 6.0
+gravity = -10.0
 linear_damp_space_override = 1
-linear_damp = 0.3
+linear_damp = 4.0
+audio_bus_override = true
 script = ExtResource("3_ww5ac")
 
 [node name="Surface" type="MeshInstance3D" parent="Main/Water"]
+visible = false
 layers = 8
 mesh = SubResource("PlaneMesh_olnn8")
 surface_material_override/0 = SubResource("ShaderMaterial_fsido")
@@ -426,6 +327,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, -9.5, 24)
 [node name="LampPost4" parent="." instance=ExtResource("3_rtj1w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, -9.5, 40)
 
+[node name="GPUParticlesCollisionSDF3D" type="GPUParticlesCollisionSDF3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+extents = Vector3(51, 17, 51)
+resolution = 3
+bake_mask = 4294967281
+texture = ExtResource("5_myd3n")
+
 [node name="Enemies" type="Node3D" parent="."]
 
 [node name="Enemy" parent="Enemies" instance=ExtResource("4_errvf")]
@@ -452,12 +360,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, -8.5, -19)
 [node name="Enemy8" parent="Enemies" instance=ExtResource("4_errvf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, -8.5, -19)
 
-[node name="GPUParticlesCollisionSDF3D" type="GPUParticlesCollisionSDF3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-extents = Vector3(51, 17, 51)
-resolution = 3
-bake_mask = 4294967281
-texture = ExtResource("5_myd3n")
+[node name="Boxes" type="Node3D" parent="."]
+
+[node name="Box" parent="Boxes" instance=ExtResource("5_o3uqf")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -6.75, -7.875, 34.75)
+
+[node name="Box2" parent="Boxes" instance=ExtResource("5_o3uqf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -8.875, 34.75)
+
+[node name="Box3" parent="Boxes" instance=ExtResource("5_o3uqf")]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866026, 0, 0.5, -7, -8.875, 37.75)
+
+[node name="Box4" parent="Boxes" instance=ExtResource("5_o3uqf")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -8.5, -8.875, 36.5)
+
+[node name="Box5" parent="Boxes" instance=ExtResource("5_o3uqf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, -10, 39.25)
+
+[node name="Box9" parent="Boxes" instance=ExtResource("5_o3uqf")]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 22.25, -8.875, 42.25)
+
+[node name="Box6" parent="Boxes" instance=ExtResource("5_o3uqf")]
+transform = Transform3D(0.906603, 0.421985, 0, -0.421985, 0.906603, 0, 0, 0, 1, 26.8351, -10.0595, 29.75)
+
+[node name="Box8" parent="Boxes" instance=ExtResource("5_o3uqf")]
+transform = Transform3D(-0.234646, -0.109218, -0.965926, -0.421985, 0.906603, 0, 0.875711, 0.407607, -0.258819, 34.3351, -10.0595, 38.5)
+
+[node name="Box7" parent="Boxes" instance=ExtResource("5_o3uqf")]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866026, 0, 0.5, -5.7476, -8.875, 34.6871)
 
 [connection signal="body_entered" from="Main/Water" to="Main/Water" method="_on_body_entered"]
 [connection signal="body_exited" from="Main/Water" to="Main/Water" method="_on_body_exited"]

@@ -12,6 +12,7 @@ var player: Player = null
 
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
+	$AnimationPlayer.play("walk")
 
 
 func _physics_process(delta):

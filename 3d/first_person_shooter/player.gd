@@ -180,9 +180,14 @@ func _physics_process(delta):
 	if $Camera3D.global_position.y < water_plane_y:
 		# Smoothly transition underwater TextureRect overlay.
 		$UnderwaterEffect.color = lerp($UnderwaterEffect.color, initial_underwater_color, 12 * delta)
+		# Enable low-pass effect on the Master bus.
+		# FIXME: Apply on a new SFX bus, so that music is not affected.
+		AudioServer.set_bus_effect_enabled(0, 0, true)
 	else:
 		$UnderwaterEffect.color = lerp($UnderwaterEffect.color, Color.TRANSPARENT, 12 * delta)
-
+		# Disable low-pass effect on the Master bus.
+		# FIXME: Apply on a new SFX bus, so that music is not affected.
+		AudioServer.set_bus_effect_enabled(0, 0, false)
 
 func _process(_delta):
 	# Shooting
@@ -211,4 +216,4 @@ func _input(event):
 		get_tree().quit()
 
 	if event.is_action_pressed(&"toggle_flashlight"):
-		$Camera3D/SpotLight3D.visible = not $Camera3D/SpotLight3D.visible
+		$Camera3D/Flashlight.visible = not $Camera3D/Flashlight.visible

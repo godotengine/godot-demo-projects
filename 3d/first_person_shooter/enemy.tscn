@@ -1,20 +1,96 @@
-[gd_scene load_steps=8 format=3 uid="uid://cewhn5k3503lu"]
+[gd_scene load_steps=13 format=3 uid="uid://cewhn5k3503lu"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_vwsoo"]
 [ext_resource type="Shader" path="res://enemy.gdshader" id="2_6q7ln"]
-[ext_resource type="Texture2D" uid="uid://nh83ps0jfomn" path="res://enemy/front.png" id="3_s8wtj"]
+[ext_resource type="Texture2D" uid="uid://bvhfqb51fdy8c" path="res://enemy/spritesheet.png" id="3_vf6so"]
 [ext_resource type="PackedScene" uid="uid://b4g77r67peq11" path="res://blob_shadow.tscn" id="4_42qd4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cwcsd"]
 size = Vector3(1, 2, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_he27t"]
-size = Vector2(1, 2)
+size = Vector2(1.638, 2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4tdqe"]
 render_priority = 0
 shader = ExtResource("2_6q7ln")
-shader_parameter/albedo_texture = ExtResource("3_s8wtj")
+shader_parameter/view_count = 5
+shader_parameter/frame_count = 7
+shader_parameter/frame = 0
+shader_parameter/views = ExtResource("3_vf6so")
+
+[sub_resource type="Animation" id="Animation_qjgq4"]
+resource_name = "pain"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:surface_material_override/0:shader_parameter/frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="Animation" id="Animation_1ms2s"]
+resource_name = "walk"
+length = 0.45
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:surface_material_override/0:shader_parameter/frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 0),
+"update": 0,
+"values": [0, 3]
+}
+
+[sub_resource type="Animation" id="Animation_royxd"]
+resource_name = "fire"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:surface_material_override/0:shader_parameter/frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 4]
+}
+
+[sub_resource type="Animation" id="Animation_ltck1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:surface_material_override/0:shader_parameter/frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1kihh"]
+_data = {
+"RESET": SubResource("Animation_ltck1"),
+"fire": SubResource("Animation_royxd"),
+"pain": SubResource("Animation_qjgq4"),
+"walk": SubResource("Animation_1ms2s")
+}
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_vwsoo")
@@ -22,10 +98,15 @@ script = ExtResource("1_vwsoo")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_cwcsd")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Sprite" type="MeshInstance3D" parent="."]
 layers = 4
 mesh = SubResource("QuadMesh_he27t")
 surface_material_override/0 = SubResource("ShaderMaterial_4tdqe")
 
 [node name="Decal" parent="." instance=ExtResource("4_42qd4")]
 cull_mask = 1048569
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1kihh")
+}

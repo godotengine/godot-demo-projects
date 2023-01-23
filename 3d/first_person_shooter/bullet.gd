@@ -16,6 +16,12 @@ func _physics_process(_delta):
 		if get_collider() is Enemy:
 			var enemy: Enemy = get_collider()
 			enemy.health -= DAMAGE
+		if get_collider() is Box:
+			var box: Box = get_collider()
+			# Push box away from the player's shot.
+			box.apply_central_impulse(-transform.basis.z)
+			# Apply small upwards motion to make the box slide more with horizontal shots.
+			box.apply_central_impulse(Vector3.UP * 0.5)
 
 		distance = global_position.distance_to($HitLocation.global_position)
 	else:

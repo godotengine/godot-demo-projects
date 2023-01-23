@@ -1,7 +1,16 @@
 shader_type spatial;
 render_mode specular_disabled, cull_disabled;
 
-uniform sampler2D albedo_texture : source_color, filter_nearest;
+// Texture spritesheet.
+uniform sampler2D views : filter_nearest, source_color;
+
+// Number of sides in the spritesheet (horizontal axis on the image).
+uniform int view_count : hint_range(1, 32) = 8;
+
+// Number of frames in the animation (vertical axis on the image).
+uniform int frame_count : hint_range(1, 1000) = 7;
+// Current frame in the animation.
+uniform int frame : hint_range(0, 999) = 0;
 
 void vertex() {
 	// Y-billboard.
@@ -10,7 +19,16 @@ void vertex() {
 }
 
 void fragment() {
-	vec4 tex = texture(albedo_texture, UV);
+	float d = dot(NORMAL.zx, vec2(-1.0, 0.0));
+	float angle = -acos(NORMAL.z) + TAU / 2.0;
+	float current_view = NORMAL.x > 0.0 ? angle / TAU : 1.0 - angle / TAU;
+	float x = round(current_view * float(view_count)) / float(view_count); // UV horizontal start for the view in the atlas.
+	float y = float(frame) / float(frame_count); // UV vertical start for the view in the atlas.
+
+	float view_width = 1.0 / float(view_count); // UV width of the view in the atlas.
+	float view_height = 1.0 / float(frame_count); // UV height of the animation in the atlas.
+	vec4 tex = texture(views, vec2(x + view_width * UV.x, y + view_height * UV.y));
+
 	// Ensure enemies in the darkness are always visible to an extent,
 	// but allow them to be lit by light sources.
 	EMISSION.rgb = tex.rgb * 0.25;
