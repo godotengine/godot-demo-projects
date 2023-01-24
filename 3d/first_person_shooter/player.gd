@@ -1,7 +1,18 @@
 class_name Player
 extends CharacterBody3D
 
+## Keyboard/gamepad look sensitivity.
+const LOOK_SENSITIVITY = 4.0
+
+## Mouse sensitivity.
 const MOUSE_SENSITIVITY = 0.0005
+
+## Minimum view pitch.
+const MIN_VIEW_PITCH = -TAU * 0.249
+
+## Maximum view pitch.
+const MAX_VIEW_PITCH = TAU * 0.249
+
 
 ## Base speed multiplier.
 const SPEED = 1.0
@@ -75,7 +86,7 @@ func _ready():
 
 
 func _physics_process(delta):
-	# Camera effects (view bobbing)
+	# Camera effects (view bobbing).
 
 	if abs(previous_velocity.y - velocity.y) >= 8.0:
 		# FIXME: This never occurs since the transition to ShapeCast3D for floor detection.
@@ -89,8 +100,8 @@ func _physics_process(delta):
 	bob_fall_counter += bob_fall_increment
 	bob_fall_increment = lerpf(bob_fall_increment, 0.0, BOB_FALL_RECOVER_SPEED * delta)
 
-	if $ShapeCast3D.is_colliding():
-		# Don't bob camera while airborne.
+	if $ShapeCast3D.is_colliding() or in_water:
+		# Don't bob camera and weapon sprite while airborne.
 		bob_cycle_counter += delta
 
 	# Perform view bobbing based on horizontal movement speed, and also apply the fall bobbing offset.
@@ -108,7 +119,7 @@ func _physics_process(delta):
 	var roll := velocity.dot($Camera3D.transform.basis.x)
 	$Camera3D.rotation.z = -roll * 0.003
 
-	# Physics
+	# Character controller.
 
 	# We don't use `is_on_floor()` and rely on the ShapeCast3D's results to determine
 	# whether the player is on the floor. This is because we need to use the same check
@@ -189,8 +200,13 @@ func _physics_process(delta):
 		# FIXME: Apply on a new SFX bus, so that music is not affected.
 		AudioServer.set_bus_effect_enabled(0, 0, false)
 
-func _process(_delta):
-	# Shooting
+func _process(delta):
+	# Looking around with keyboard/gamepad.
+	var look := Input.get_vector("look_down", "look_up", "look_left", "look_right")
+	$Camera3D.rotation.x = clampf($Camera3D.rotation.x + look.x * LOOK_SENSITIVITY * delta, MIN_VIEW_PITCH, MAX_VIEW_PITCH)
+	$Camera3D.rotation.y -= look.y * LOOK_SENSITIVITY * delta
+
+	# Shooting.
 	if Input.is_action_pressed("attack") and is_zero_approx($ShootTimer.time_left):
 		for i in SHOTGUN_BULLET_COUNT:
 			var bullet = preload("res://bullet.tscn").instantiate()
@@ -206,10 +222,12 @@ func _process(_delta):
 
 
 func _input(event):
+	# Looking around with mouse.
 	if event is InputEventMouseMotion:
 		# Compensate motion speed to be resolution-independent (based on the window height).
 		var relative_motion: Vector2 = event.relative * DisplayServer.window_get_size().y / base_height
-		$Camera3D.rotation.x = clampf($Camera3D.rotation.x - relative_motion.y * MOUSE_SENSITIVITY, -TAU * 0.25, TAU * 0.25)
+		# Don't allow looking *exactly* straight up/down to avoid issues with sprite rotation.
+		$Camera3D.rotation.x = clampf($Camera3D.rotation.x - relative_motion.y * MOUSE_SENSITIVITY, MIN_VIEW_PITCH, MAX_VIEW_PITCH)
 		$Camera3D.rotation.y -= relative_motion.x * MOUSE_SENSITIVITY
 
 	if event.is_action_pressed(&"quit"):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bcmepm05qldy5"]
+[gd_scene load_steps=19 format=3 uid="uid://bcmepm05qldy5"]
 
 [ext_resource type="Texture2D" uid="uid://bc3n2sen32mqx" path="res://sky.png" id="1_0n6b1"]
 [ext_resource type="PackedScene" uid="uid://dfyswwfb8j6iv" path="res://player.tscn" id="2_cwuyg"]
@@ -27,40 +27,6 @@ fog_enabled = true
 fog_light_color = Color(0.117647, 0.156863, 0.196078, 1)
 fog_density = 0.006
 fog_sky_affect = 0.0
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_vemq1"]
-fractal_type = 2
-fractal_lacunarity = 16.782
-fractal_gain = 1.4
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nepn7"]
-seamless = true
-noise = SubResource("FastNoiseLite_vemq1")
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w2v74"]
-seamless = true
-as_normal_map = true
-bump_strength = 0.1
-noise = SubResource("FastNoiseLite_vemq1")
-
-[sub_resource type="Gradient" id="Gradient_soa80"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rmhqn"]
-seamless = true
-color_ramp = SubResource("Gradient_soa80")
-noise = SubResource("FastNoiseLite_vemq1")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sds3a"]
-albedo_texture = SubResource("NoiseTexture2D_nepn7")
-roughness = 0.5
-roughness_texture = SubResource("NoiseTexture2D_rmhqn")
-normal_enabled = true
-normal_texture = SubResource("NoiseTexture2D_w2v74")
-uv1_scale = Vector3(0.063, 0.063, 0.063)
-uv1_triplanar = true
-uv1_triplanar_sharpness = 15.455
-texture_filter = 4
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_olnn8"]
 size = Vector2(15, 30)
@@ -98,7 +64,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Surface:surface_material_override/0:uv1_offset")
+tracks/0/path = NodePath("Surface:surface_material_override/0:shader_parameter/uv1_offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -115,7 +81,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Surface:surface_material_override/0:uv1_offset")
+tracks/0/path = NodePath("Surface:surface_material_override/0:shader_parameter/uv1_offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -154,27 +120,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, -8.5, 43)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -21, 0)
 use_collision = true
 size = Vector3(100, 40, 100)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Inner" type="CSGBox3D" parent="Main"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 0)
 operation = 2
 use_collision = true
 size = Vector3(99, 9, 99)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Pool" type="CSGPolygon3D" parent="Main"]
 transform = Transform3D(-4.2222e-08, -1.49012e-08, 1, -1.13133e-08, 1, -2.98023e-08, -1, -1.13133e-08, -4.2222e-08, 38.7204, 10.3939, 25.6394)
 operation = 2
 polygon = PackedVector2Array(12, 2.75, 12, 1.75, -11.75, -5.25, -15.75, -5.25, -15.75, 2.75)
 depth = 15.0
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="PoolSteps" type="CSGBox3D" parent="Main"]
 transform = Transform3D(-4.2222e-08, -1.49012e-08, 1, -1.13133e-08, 1, -2.98023e-08, -1, -1.13133e-08, -4.2222e-08, 31.2204, 11.6439, 29.6394)
 operation = 2
 size = Vector3(24.5, 1, 16)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Water" type="Area3D" parent="Main"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.25, 11, 27.25)
@@ -182,11 +144,12 @@ gravity_space_override = 3
 gravity = -10.0
 linear_damp_space_override = 1
 linear_damp = 4.0
+angular_damp_space_override = 1
+angular_damp = 1.0
 audio_bus_override = true
 script = ExtResource("3_ww5ac")
 
 [node name="Surface" type="MeshInstance3D" parent="Main/Water"]
-visible = false
 layers = 8
 mesh = SubResource("PlaneMesh_olnn8")
 surface_material_override/0 = SubResource("ShaderMaterial_fsido")
@@ -216,104 +179,87 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 36)
 use_collision = true
 size = Vector3(16, 25, 16)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Building2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1, 19)
 use_collision = true
 size = Vector3(16, 25, 16)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Building3" type="CSGBox3D" parent="."]
 transform = Transform3D(0.995645, 0, 0.0932221, 0, 1, 0, -0.0932221, 0, 0.995645, -36.2054, 3, 36.0096)
 use_collision = true
 size = Vector3(16, 25, 16)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Building4" type="CSGBox3D" parent="."]
 transform = Transform3D(0.995645, 0, 0.0932221, 0, 1, 0, -0.0932221, 0, 0.995645, -36.7946, -7, 18.9904)
 use_collision = true
 size = Vector3(16, 25, 16)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Slope" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.2222e-08, 1.13133e-08, 1, 0.258819, 0.965926, 0, -0.965926, 0.258819, -4.37114e-08, -15.8, -9.5, 17)
 use_collision = true
 size = Vector3(4, 1, 16)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Slope2" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.2222e-08, 1.13133e-08, 1, 0.258819, 0.965926, -8.88178e-16, -0.965926, 0.258819, -4.37114e-08, -15.8, -9, -13.25)
 use_collision = true
 size = Vector3(8, 1, 4)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Slope3" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.2222e-08, 1.13133e-08, 1, 0.5, 0.866026, 1.13133e-08, -0.866026, 0.5, -4.2222e-08, -11.55, -9, -13.25)
 use_collision = true
 size = Vector3(8, 1, 4)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Slope4" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.2222e-08, 1.13133e-08, 1, 0.707107, 0.707107, 2.18557e-08, -0.707107, 0.707107, -3.78552e-08, -7.3, -9, -13.25)
 use_collision = true
 size = Vector3(8, 1, 4)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Slope5" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.2222e-08, 1.13133e-08, 1, 0.866025, 0.5, 3.09086e-08, -0.5, 0.866025, -3.09086e-08, -3.05, -9, -13.25)
 use_collision = true
 size = Vector3(8, 1, 4)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Slope6" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.2222e-08, 1.13133e-08, 1, 0.965926, 0.258819, 3.78552e-08, -0.258819, 0.965926, -2.18557e-08, 1.2, -9, -13.25)
 use_collision = true
 size = Vector3(8, 1, 4)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Slope7" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.2222e-08, 1.13133e-08, 1, 0.965926, -0.258819, 4.37114e-08, 0.258819, 0.965926, 2.66454e-15, -37.05, -6.75, -13.25)
 use_collision = true
 size = Vector3(8, 1, 4)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Slope8" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.2222e-08, 1.13133e-08, 1, 0.866026, -0.5, 4.2222e-08, 0.5, 0.866026, 1.13133e-08, -32.8, -6.75, -13.25)
 use_collision = true
 size = Vector3(8, 1, 4)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Slope9" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.2222e-08, 1.13133e-08, 1, 0.707107, -0.707107, 3.78552e-08, 0.707107, 0.707107, 2.18557e-08, -28.55, -6.75, -13.25)
 use_collision = true
 size = Vector3(8, 1, 4)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Slope10" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.2222e-08, 1.13133e-08, 1, 0.5, -0.866025, 3.09086e-08, 0.866025, 0.5, 3.09086e-08, -24.3, -6.75, -13.25)
 use_collision = true
 size = Vector3(8, 1, 4)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Slope11" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.2222e-08, 1.13133e-08, 1, 0.258819, -0.965926, 2.18557e-08, 0.965926, 0.258819, 3.78552e-08, -20.05, -6.75, -13.25)
 use_collision = true
 size = Vector3(8, 1, 4)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Staircase" type="CSGPolygon3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -17.5, -9.25, 11.75)
 use_collision = true
 polygon = PackedVector2Array(0.5, 0, 0.5, 0.25, 1, 0.25, 1, 0.5, 1.5, 0.5, 1.5, 0.75, 2, 0.75, 2, 1, 2.5, 1, 2.5, 1.25, 3, 1.25, 3, 1.5, 3.5, 1.5, 3.5, 1.75, 4, 1.75, 4, 2, 5, 2, 5, -0.25, 0, -0.25)
 depth = 4.0
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="Staircase2" type="CSGPolygon3D" parent="."]
 transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -22.825, -9.25, 11.6)
 use_collision = true
 polygon = PackedVector2Array(0.5, 0, 0.5, 0.25, 1, 0.25, 1, 0.5, 1.5, 0.5, 1.5, 0.75, 2, 0.75, 2, 1, 2.5, 1, 2.5, 1.25, 3, 1.25, 3, 1.5, 3.5, 1.5, 3.5, 1.75, 4, 1.75, 4, 2, 5, 2, 5, -0.25, 0, -0.25)
-material = SubResource("StandardMaterial3D_sds3a")
 
 [node name="LampPost" parent="." instance=ExtResource("3_rtj1w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -9.5, 24)
