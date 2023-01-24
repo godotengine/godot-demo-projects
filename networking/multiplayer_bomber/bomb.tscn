@@ -1,29 +1,30 @@
-[gd_scene load_steps=10 format=3 uid="uid://enwoaqi0rnei"]
+[gd_scene load_steps=11 format=3 uid="uid://enwoaqi0rnei"]
 
 [ext_resource type="Script" path="res://bomb.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bdomqql6y50po" path="res://brickfloor.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://drfbkdqmj0gu2" path="res://explosion.png" id="3"]
 
-[sub_resource type="RectangleShape2D" id="1"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ice0s"]
 size = Vector2(16, 192)
 
-[sub_resource type="RectangleShape2D" id="2"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_53cqi"]
 size = Vector2(192, 16)
 
-[sub_resource type="Curve" id="3"]
+[sub_resource type="Curve" id="Curve_ut0ij"]
 max_value = 2.0
 _data = [Vector2(0.00150494, 0.398437), 0.0, 0.0, 0, 0, Vector2(0.0152287, 1.42969), 0.0, 0.0, 0, 0, Vector2(0.478607, 1.30078), 0.0, 0.0, 0, 0, Vector2(1, 0.291016), 0.0, 0.0, 0, 0]
+point_count = 4
 
-[sub_resource type="CurveTexture" id="4"]
-curve = SubResource( "3" )
+[sub_resource type="CurveTexture" id="CurveTexture_pr2n4"]
+curve = SubResource("Curve_ut0ij")
 
-[sub_resource type="ParticlesMaterial" id="5"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5nh0n"]
 emission_shape = 2
 emission_sphere_radius = 1.0
 gravity = Vector3(0, 0, 0)
-scale_curve = SubResource( "4" )
+scale_curve = SubResource("CurveTexture_pr2n4")
 
-[sub_resource type="Animation" id="6"]
+[sub_resource type="Animation" id="Animation_f7hik"]
 length = 4.0
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -79,41 +80,48 @@ tracks/3/keys = {
 "values": [false, true]
 }
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ph8u8"]
+_data = {
+"anim": SubResource("Animation_f7hik")
+}
+
 [node name="Bomb" type="Area2D"]
 monitorable = false
-script = ExtResource( "1" )
+script = ExtResource("1")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(-2.92606, -2.92606)
-texture = ExtResource( "2" )
+texture = ExtResource("2")
 region_enabled = true
 region_rect = Rect2(144, 0, 48, 48)
 
 [node name="Shape1" type="CollisionShape2D" parent="."]
-shape = SubResource( "1" )
+shape = SubResource("RectangleShape2D_ice0s")
 
 [node name="Shape2" type="CollisionShape2D" parent="."]
-shape = SubResource( "2" )
+shape = SubResource("RectangleShape2D_53cqi")
 
 [node name="Explosion1" type="GPUParticles2D" parent="."]
 emitting = false
+process_material = SubResource("ParticleProcessMaterial_5nh0n")
+texture = ExtResource("3")
 lifetime = 0.5
 one_shot = true
 explosiveness = 0.95
-process_material = SubResource( "5" )
-texture = ExtResource( "3" )
 
 [node name="Explosion2" type="GPUParticles2D" parent="."]
 rotation = 1.57162
 emitting = false
+process_material = SubResource("ParticleProcessMaterial_5nh0n")
+texture = ExtResource("3")
 one_shot = true
 explosiveness = 0.95
-process_material = SubResource( "5" )
-texture = ExtResource( "3" )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "anim"
-anims/anim = SubResource( "6" )
+libraries = {
+"": SubResource("AnimationLibrary_ph8u8")
+}
 
 [connection signal="body_entered" from="." to="." method="_on_bomb_body_enter"]
 [connection signal="body_exited" from="." to="." method="_on_bomb_body_exit"]

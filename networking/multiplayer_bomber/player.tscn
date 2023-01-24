@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dviwgv2ty8v6u"]
+[gd_scene load_steps=16 format=3 uid="uid://dviwgv2ty8v6u"]
 
 [ext_resource type="Script" path="res://player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bsqovikudjr0q" path="res://charwalk.png" id="2"]
@@ -142,6 +142,10 @@ _data = {
 "walk_up": SubResource("7")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_5huhx"]
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_sh64w"]
 properties/0/path = NodePath(".:synced_position")
 properties/0/spawn = true
@@ -159,6 +163,7 @@ properties/1/spawn = true
 properties/1/sync = true
 
 [node name="player" type="CharacterBody2D"]
+z_index = 10
 motion_mode = 1
 script = ExtResource("1")
 
@@ -188,6 +193,7 @@ size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("3")
 theme_override_font_sizes/font_size = 16
 text = "Player 1"
+label_settings = SubResource("LabelSettings_5huhx")
 horizontal_alignment = 1
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
