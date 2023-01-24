@@ -64,9 +64,11 @@ position = Vector2(415, 183)
 scale = Vector2(0.5, 0.5)
 
 [node name="DeviceInfo" type="HBoxContainer" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 30.0
+offset_top = -10.0
+offset_bottom = 40.0
 grow_horizontal = 2
 
 [node name="Label" type="Label" parent="DeviceInfo"]
@@ -83,11 +85,16 @@ max_value = 16.0
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="JoyName" type="Label" parent="DeviceInfo"]
+[node name="JoyName" type="RichTextLabel" parent="DeviceInfo"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 1
+focus_mode = 2
+bbcode_enabled = true
 text = "Controller Name Here"
+scroll_active = false
+context_menu_enabled = true
+selection_enabled = true
 
 [node name="Axes" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -116,15 +123,16 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="Label" parent="Axes/Axis0/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis0/ProgressBar"]
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 1
-text = "0"
-horizontal_alignment = 1
+bbcode_enabled = true
+text = "[center]0[/center]"
+scroll_active = false
 
 [node name="Axis1" type="HBoxContainer" parent="Axes"]
 layout_mode = 2
@@ -146,15 +154,16 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="Label" parent="Axes/Axis1/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis1/ProgressBar"]
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 1
-text = "0"
-horizontal_alignment = 1
+bbcode_enabled = true
+text = "[center]0[/center]"
+scroll_active = false
 
 [node name="Axis2" type="HBoxContainer" parent="Axes"]
 layout_mode = 2
@@ -176,15 +185,16 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="Label" parent="Axes/Axis2/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis2/ProgressBar"]
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 1
-text = "0"
-horizontal_alignment = 1
+bbcode_enabled = true
+text = "[center]0[/center]"
+scroll_active = false
 
 [node name="Axis3" type="HBoxContainer" parent="Axes"]
 layout_mode = 2
@@ -206,15 +216,16 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="Label" parent="Axes/Axis3/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis3/ProgressBar"]
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 1
-text = "0"
-horizontal_alignment = 1
+bbcode_enabled = true
+text = "[center]0[/center]"
+scroll_active = false
 
 [node name="Axis4" type="HBoxContainer" parent="Axes"]
 layout_mode = 2
@@ -236,15 +247,16 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="Label" parent="Axes/Axis4/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis4/ProgressBar"]
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 1
-text = "0"
-horizontal_alignment = 1
+bbcode_enabled = true
+text = "[center]0[/center]"
+scroll_active = false
 
 [node name="Axis5" type="HBoxContainer" parent="Axes"]
 layout_mode = 2
@@ -266,15 +278,16 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="Label" parent="Axes/Axis5/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis5/ProgressBar"]
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 1
-text = "0"
-horizontal_alignment = 1
+bbcode_enabled = true
+text = "[center]0[/center]"
+scroll_active = false
 
 [node name="Axis6" type="HBoxContainer" parent="Axes"]
 layout_mode = 2
@@ -296,15 +309,16 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="Label" parent="Axes/Axis6/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis6/ProgressBar"]
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 1
-text = "0"
-horizontal_alignment = 1
+bbcode_enabled = true
+text = "[center]0[/center]"
+scroll_active = false
 
 [node name="Axis7" type="HBoxContainer" parent="Axes"]
 layout_mode = 2
@@ -326,15 +340,16 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="Label" parent="Axes/Axis7/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis7/ProgressBar"]
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 1
-text = "0"
-horizontal_alignment = 1
+bbcode_enabled = true
+text = "[center]0[/center]"
+scroll_active = false
 
 [node name="Axis8" type="HBoxContainer" parent="Axes"]
 layout_mode = 2
@@ -356,15 +371,16 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="Label" parent="Axes/Axis8/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis8/ProgressBar"]
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 1
-text = "0"
-horizontal_alignment = 1
+bbcode_enabled = true
+text = "[center]0[/center]"
+scroll_active = false
 
 [node name="Axis9" type="HBoxContainer" parent="Axes"]
 layout_mode = 2
@@ -386,15 +402,16 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="Label" parent="Axes/Axis9/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis9/ProgressBar"]
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 1
-text = "0"
-horizontal_alignment = 1
+bbcode_enabled = true
+text = "[center]0[/center]"
+scroll_active = false
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -655,6 +672,7 @@ text = "Show"
 
 [node name="RemapWizard" parent="." instance=ExtResource("3")]
 
+[connection signal="meta_clicked" from="DeviceInfo/JoyName" to="." method="_on_joy_name_meta_clicked"]
 [connection signal="pressed" from="Vibration/Buttons/Start" to="." method="_on_start_vibration_pressed"]
 [connection signal="pressed" from="Vibration/Buttons/Stop" to="." method="_on_stop_vibration_pressed"]
 [connection signal="pressed" from="VBoxContainer/Clear" to="." method="_on_Clear_pressed"]
