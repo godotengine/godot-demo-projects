@@ -1,7 +1,7 @@
 extends Area2D
 
-var in_area = []
-var from_player
+var in_area: Array = []
+var from_player: int
 
 # Called from the animation.
 func explode():
@@ -10,8 +10,13 @@ func explode():
 		return
 	for p in in_area:
 		if p.has_method("exploded"):
-			# Exploded can only be called by the authority, but will also be called locally.
-			p.exploded.rpc(from_player)
+			# Checks if there is wall in between bomb and the object
+			var world_state: PhysicsDirectSpaceState2D = get_world_2d().direct_space_state
+			var query := PhysicsRayQueryParameters2D.create(position, p.position)
+			var result: Dictionary  = world_state.intersect_ray(query)
+			if not result.collider is TileMap:
+				# Exploded can only be called by the authority, but will also be called locally.
+				p.exploded.rpc(from_player)
 
 
 func done():
