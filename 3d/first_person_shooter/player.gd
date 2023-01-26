@@ -17,7 +17,7 @@ const MAX_VIEW_PITCH = TAU * 0.249
 ## Base speed multiplier.
 const SPEED = 1.0
 
-## Jump speed (affects ow high you jump).
+## Jump speed (affects how high you jump).
 const JUMP_VELOCITY = 10.0
 
 ## How fast you accelerate while airborne. This influences maximum movement speed too.
@@ -43,6 +43,12 @@ const BOB_FALL_RECOVER_SPEED = 9.0
 
 ## Number of bullets fired by the weapon.
 const SHOTGUN_BULLET_COUNT = 14
+
+## The number of health points the player currently has.
+var health: int = 100:
+	set(value):
+		health = value
+		$HUD/Health.text = "Health: %d" % health
 
 # Time counter for view bobbing (doesn't increment while airborne).
 var bob_cycle_counter := 0.0
@@ -213,6 +219,7 @@ func _process(delta):
 			# Bullets are not child of the player to prevent moving along the player.
 			get_parent().add_child(bullet)
 			bullet.global_transform = $Camera3D.global_transform
+			# Apply random spread (twice as much spread horizontally than vertically).
 			bullet.rotation.y += -0.1 + randf() * 0.2
 			bullet.rotation.x += -0.05 + randf() * 0.1
 

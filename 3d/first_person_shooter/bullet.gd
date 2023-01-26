@@ -13,9 +13,15 @@ func _physics_process(_delta):
 		# Bullet hit something (enemy or solid surface).
 		$HitLocation.global_position = get_collision_point()
 		$HitLocation/GPUParticles3D.emitting = true
+
 		if get_collider() is Enemy:
 			var enemy: Enemy = get_collider()
 			enemy.health -= DAMAGE
+
+		if get_collider() is Player:
+			var player: Player = get_collider()
+			player.health -= DAMAGE
+
 		if get_collider() is Box:
 			var box: Box = get_collider()
 			# Push box away from the player's shot.

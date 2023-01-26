@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dfyswwfb8j6iv"]
+[gd_scene load_steps=27 format=3 uid="uid://dfyswwfb8j6iv"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_3afs5"]
 [ext_resource type="PackedScene" uid="uid://b4g77r67peq11" path="res://blob_shadow.tscn" id="2_att33"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cy2lhrs5we1a7" path="res://player/shotgun/open.wav" id="6_tknt2"]
 [ext_resource type="AudioStream" uid="uid://dam35f8u5f2d5" path="res://player/shotgun/load.wav" id="7_dom6o"]
 [ext_resource type="AudioStream" uid="uid://cykqcvgf3tyv3" path="res://player/shotgun/close.wav" id="8_uckjf"]
+[ext_resource type="FontFile" uid="uid://blm3851cjtjji" path="res://fonts/vga-rom-font.png" id="9_yojfu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n7pit"]
 size = Vector3(1, 1.5, 1)
@@ -185,7 +186,12 @@ _data = {
 "fire": SubResource("Animation_nrowk")
 }
 
+[sub_resource type="Theme" id="Theme_6xrdg"]
+default_font = ExtResource("9_yojfu")
+
 [node name="Player" type="CharacterBody3D" groups=["player"]]
+collision_layer = 2
+collision_mask = 7
 script = ExtResource("1_3afs5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -296,3 +302,28 @@ expand_mode = 1
 libraries = {
 "": SubResource("AnimationLibrary_glvp6")
 }
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_6xrdg")
+
+[node name="Health" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = -75.0
+offset_right = 240.0
+offset_bottom = -40.0
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "Health: 100"
+vertical_alignment = 2

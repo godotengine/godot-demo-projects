@@ -1,9 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://cewhn5k3503lu"]
+[gd_scene load_steps=13 format=3 uid="uid://bbj30jyv46r1t"]
 
-[ext_resource type="Script" path="res://enemy.gd" id="1_vwsoo"]
-[ext_resource type="Shader" path="res://enemy.gdshader" id="2_6q7ln"]
-[ext_resource type="Texture2D" uid="uid://bvhfqb51fdy8c" path="res://enemy/spritesheet.png" id="3_vf6so"]
-[ext_resource type="PackedScene" uid="uid://b4g77r67peq11" path="res://blob_shadow.tscn" id="4_42qd4"]
+[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_t0d11"]
+[ext_resource type="Shader" path="res://enemy/enemy.gdshader" id="2_frlby"]
+[ext_resource type="Texture2D" uid="uid://bvhfqb51fdy8c" path="res://enemy/spritesheet.png" id="3_catq1"]
+[ext_resource type="PackedScene" uid="uid://b4g77r67peq11" path="res://blob_shadow.tscn" id="4_nscyu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cwcsd"]
 size = Vector3(1, 2, 1)
@@ -13,11 +13,11 @@ size = Vector2(1.638, 2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4tdqe"]
 render_priority = 0
-shader = ExtResource("2_6q7ln")
+shader = ExtResource("2_frlby")
 shader_parameter/view_count = 5
 shader_parameter/frame_count = 7
 shader_parameter/frame = 0
-shader_parameter/views = ExtResource("3_vf6so")
+shader_parameter/views = ExtResource("3_catq1")
 
 [sub_resource type="Animation" id="Animation_ltck1"]
 length = 0.001
@@ -93,7 +93,11 @@ _data = {
 }
 
 [node name="Enemy" type="CharacterBody3D"]
-script = ExtResource("1_vwsoo")
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_t0d11")
+
+[node name="LineOfSight" type="RayCast3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_cwcsd")
@@ -103,10 +107,21 @@ layers = 4
 mesh = SubResource("QuadMesh_he27t")
 surface_material_override/0 = SubResource("ShaderMaterial_4tdqe")
 
-[node name="Decal" parent="." instance=ExtResource("4_42qd4")]
+[node name="Decal" parent="." instance=ExtResource("4_nscyu")]
 cull_mask = 1048569
+
+[node name="LineOfSightTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_1kihh")
 }
+
+[connection signal="timeout" from="LineOfSightTimer" to="." method="_on_line_of_sight_timer_timeout"]
