@@ -44,7 +44,7 @@ void vertex() {
 	uv1_triplanar_pos *= vec3(1.0,-1.0, 1.0);
 
 	// Make the surface wave.
- 	VERTEX.y = -WAVE_AMPLITUDE + (sin(VERTEX.x + TIME * WAVE_SPEED) + sin(VERTEX.z * 2.0 + TIME * WAVE_SPEED)) * WAVE_AMPLITUDE;
+ 	VERTEX.y += -WAVE_AMPLITUDE + (sin(VERTEX.x + TIME * WAVE_SPEED) + sin(VERTEX.z * 2.0 + TIME * WAVE_SPEED)) * WAVE_AMPLITUDE;
 }
 
 
