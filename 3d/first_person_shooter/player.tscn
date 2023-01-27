@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dfyswwfb8j6iv"]
+[gd_scene load_steps=28 format=3 uid="uid://dfyswwfb8j6iv"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_3afs5"]
 [ext_resource type="PackedScene" uid="uid://b4g77r67peq11" path="res://blob_shadow.tscn" id="2_att33"]
@@ -15,6 +15,12 @@ size = Vector3(1, 1.5, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nlrfb"]
 size = Vector3(0.9, 1, 0.9)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vhi2c"]
+streams_count = 1
+random_pitch = 1.02
+stream_0/stream = ExtResource("7_dom6o")
+stream_0/weight = 1.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lr0u3"]
 emission_shape = 6
@@ -205,7 +211,12 @@ max_results = 1
 [node name="WeaponSounds" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_w6ksn")
 volume_db = -12.0
-max_polyphony = 4
+max_polyphony = 2
+
+[node name="FlashlightSounds" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_vhi2c")
+volume_db = -12.0
+max_polyphony = 2
 
 [node name="Rain" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30.5, 0)

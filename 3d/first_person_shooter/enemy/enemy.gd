@@ -19,7 +19,6 @@ var can_see_player := false
 
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
-	$AnimationPlayer.play("walk")
 
 	# Jitter line of sight timer to avoid stuttering due to performing lots of RayCasts in the same frame.
 	$LineOfSightTimer.wait_time *= randf()
@@ -32,9 +31,11 @@ func _physics_process(delta):
 
 	if can_see_player:
 		var distance := global_position.distance_to(player.global_position)
+		# Look towards the player (the mesh's rotation affects the currently shown 2.5D sprite).
+		$Sprite.global_transform = global_transform.looking_at(player.global_position)
 
-		# Don't move towards the player if very close already.
-		if distance > 2.0:
+		# Don't move towards the player if very close already, or if currently playing a firing or pain animation.
+		if distance > 2.0 and $AnimationPlayer.current_animation == &"walk":
 			var direction := global_position.direction_to(player.global_position)
 			velocity.x = direction.x * 4
 			velocity.z = direction.z * 4
@@ -54,6 +55,10 @@ func _physics_process(delta):
 			# Shot frequency is proportional to distance.
 			# The closer the enemy is to the player, the more frequently they will fire.
 			$ShootTimer.start(remap(distance, 0.0, 20.0, 0.2, 2.0))
+			# Note: For enemy animations to play independently of other enemies,
+			# the mesh's material must be set as Local To Scene in the inspector.
+			$AnimationPlayer.play("fire")
+			$AnimationPlayer.queue("walk")
 
 	if health <= 0:
 		queue_free()
@@ -74,3 +79,10 @@ func _on_line_of_sight_timer_timeout() -> void:
 
 	# Disable RayCast once it's not needed anymore (until the next timer timeout) to improve performance.
 	$LineOfSight.enabled = false
+
+
+## Called when receiving damage.
+func damage(damage: int) -> void:
+	health -= damage
+	$AnimationPlayer.play("pain")
+	$AnimationPlayer.queue("walk")

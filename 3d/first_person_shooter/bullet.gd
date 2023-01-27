@@ -1,7 +1,7 @@
 extends RayCast3D
 
 # Damage dealt per bullet hit.
-const DAMAGE = 10
+const DAMAGE = 9
 
 
 func _physics_process(_delta):
@@ -16,7 +16,7 @@ func _physics_process(_delta):
 
 		if get_collider() is Enemy:
 			var enemy: Enemy = get_collider()
-			enemy.health -= DAMAGE
+			enemy.damage(DAMAGE)
 
 		if get_collider() is Player:
 			var player: Player = get_collider()

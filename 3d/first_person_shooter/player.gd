@@ -42,13 +42,25 @@ const WATER_JUMP_SPEED = 25.0
 const BOB_FALL_RECOVER_SPEED = 9.0
 
 ## Number of bullets fired by the weapon.
-const SHOTGUN_BULLET_COUNT = 14
+const SHOTGUN_BULLET_COUNT = 16
+
+## How far away the player is moved when firing their weapon.
+const WEAPON_KICKBACK_FORCE = 5.0
+
+const GRADIENT := preload("res://player/crosshair_health_gradient.tres")
 
 ## The number of health points the player currently has.
 var health: int = 100:
 	set(value):
 		health = value
 		$HUD/Health.text = "Health: %d" % health
+		# Set crosshair color according to health, which is defined using a Gradient resource.
+		# This allows adjusting color along a predefined gradient without manually performing the math.
+		var crosshair_color := GRADIENT.sample(remap(health, 0, 100, 0.0, 1.0))
+		# Don't override alpha channel as this is done based on current weapon state in `_process()`.
+		$Crosshair.modulate.r = crosshair_color.r
+		$Crosshair.modulate.g = crosshair_color.g
+		$Crosshair.modulate.b = crosshair_color.b
 
 # Time counter for view bobbing (doesn't increment while airborne).
 var bob_cycle_counter := 0.0
@@ -198,12 +210,10 @@ func _physics_process(delta):
 		# Smoothly transition underwater TextureRect overlay.
 		$UnderwaterEffect.color = lerp($UnderwaterEffect.color, initial_underwater_color, 12 * delta)
 		# Enable low-pass effect on the Master bus.
-		# FIXME: Apply on a new SFX bus, so that music is not affected.
 		AudioServer.set_bus_effect_enabled(0, 0, true)
 	else:
 		$UnderwaterEffect.color = lerp($UnderwaterEffect.color, Color.TRANSPARENT, 12 * delta)
 		# Disable low-pass effect on the Master bus.
-		# FIXME: Apply on a new SFX bus, so that music is not affected.
 		AudioServer.set_bus_effect_enabled(0, 0, false)
 
 func _process(delta):
@@ -226,6 +236,14 @@ func _process(delta):
 		$ShootTimer.start()
 		$WeaponSounds.play()
 		$AnimationPlayer.play("fire")
+		# Apply weapon kickback (player is pushed away from their firing direction).
+		velocity += $Camera3D.transform.basis.z * WEAPON_KICKBACK_FORCE
+
+	if $AnimationPlayer.current_animation == &"fire":
+		# Fade out crosshair while the weapon is reloading.
+		$Crosshair.modulate.a = 0.5
+	else:
+		$Crosshair.modulate.a = 1.0
 
 
 func _input(event):
@@ -237,8 +255,11 @@ func _input(event):
 		$Camera3D.rotation.x = clampf($Camera3D.rotation.x - relative_motion.y * MOUSE_SENSITIVITY, MIN_VIEW_PITCH, MAX_VIEW_PITCH)
 		$Camera3D.rotation.y -= relative_motion.x * MOUSE_SENSITIVITY
 
-	if event.is_action_pressed(&"quit"):
-		get_tree().quit()
-
 	if event.is_action_pressed(&"toggle_flashlight"):
 		$Camera3D/Flashlight.visible = not $Camera3D/Flashlight.visible
+		# Use lower pitch when toggling off.
+		$FlashlightSounds.pitch_scale = 1.0 if $Camera3D/Flashlight.visible else 0.7
+		$FlashlightSounds.play()
+
+	if event.is_action_pressed(&"quit"):
+		get_tree().quit()
