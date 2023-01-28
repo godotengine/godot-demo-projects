@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bcmepm05qldy5"]
+[gd_scene load_steps=25 format=3 uid="uid://bcmepm05qldy5"]
 
 [ext_resource type="Texture2D" uid="uid://bc3n2sen32mqx" path="res://sky.png" id="1_0n6b1"]
 [ext_resource type="PackedScene" uid="uid://dfyswwfb8j6iv" path="res://player.tscn" id="2_cwuyg"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bhpmngp0r2y80" path="res://water_texture_albedo.tres" id="6_gifye"]
 [ext_resource type="Texture2D" uid="uid://bjo2g4bppx3gp" path="res://water_texture_normal.tres" id="7_ai040"]
 [ext_resource type="Shader" path="res://water_shadow.gdshader" id="8_xqyib"]
+[ext_resource type="FontFile" uid="uid://blm3851cjtjji" path="res://fonts/vga-rom-font.png" id="13_337k1"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_33kw8"]
 panorama = ExtResource("1_0n6b1")
@@ -368,6 +369,28 @@ transform = Transform3D(-0.234646, -0.109218, -0.965926, -0.421985, 0.906603, 0,
 
 [node name="Box7" parent="Boxes" instance=ExtResource("5_o3uqf")]
 transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866026, 0, 0.5, -5.7476, -8.875, 34.6871)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1.91069e-15, 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1, 0, -4.37114e-08, 4.7585, 11.5633, 19.1321)
+visibility_range_end = 16.0
+pixel_size = 0.0243
+double_sided = false
+alpha_cut = 1
+texture_filter = 2
+modulate = Color(1, 0.776471, 0.196078, 1)
+text = "You have found a secret area!"
+font = ExtResource("13_337k1")
+
+[node name="Label3DShadow" type="Label3D" parent="."]
+transform = Transform3D(1.91069e-15, 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1, 0, -4.37114e-08, 4.7585, 11.5133, 19.1321)
+visibility_range_end = 16.0
+pixel_size = 0.0243
+double_sided = false
+alpha_cut = 1
+texture_filter = 2
+modulate = Color(0, 0, 0, 1)
+text = "You have found a secret area!"
+font = ExtResource("13_337k1")
 
 [connection signal="body_entered" from="Main/Water" to="Main/Water" method="_on_body_entered"]
 [connection signal="body_exited" from="Main/Water" to="Main/Water" method="_on_body_exited"]

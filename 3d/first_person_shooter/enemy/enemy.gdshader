@@ -12,6 +12,9 @@ uniform int frame_count : hint_range(1, 1000) = 7;
 // Current frame in the animation.
 uniform int frame : hint_range(0, 999) = 0;
 
+const float MIN_BRIGHTNESS = 0.1;
+const float ALBEDO_ENERGY = 4.0;
+
 void vertex() {
 	// Y-billboard.
 	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(vec4(normalize(cross(vec3(0.0, 1.0, 0.0), INV_VIEW_MATRIX[2].xyz)), 0.0), vec4(0.0, 1.0, 0.0, 0.0), vec4(normalize(cross(INV_VIEW_MATRIX[0].xyz, vec3(0.0, 1.0, 0.0))), 0.0), MODEL_MATRIX[3]);
@@ -30,8 +33,8 @@ void fragment() {
 
 	// Ensure enemies in the darkness are always visible to an extent,
 	// but allow them to be lit by light sources.
-	EMISSION.rgb = tex.rgb * 0.25;
-	ALBEDO = tex.rgb;
+	EMISSION.rgb = tex.rgb * MIN_BRIGHTNESS;
+	ALBEDO = tex.rgb * ALBEDO_ENERGY;
 	ALPHA = tex.a;
 	ALPHA_SCISSOR_THRESHOLD = 0.5;
 }

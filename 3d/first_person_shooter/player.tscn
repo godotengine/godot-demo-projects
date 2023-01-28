@@ -1,10 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://dfyswwfb8j6iv"]
+[gd_scene load_steps=31 format=3 uid="uid://dfyswwfb8j6iv"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_3afs5"]
 [ext_resource type="PackedScene" uid="uid://b4g77r67peq11" path="res://blob_shadow.tscn" id="2_att33"]
 [ext_resource type="Texture2D" uid="uid://df46fn25wxblu" path="res://player/shotgun/spritesheet.png" id="2_ntkbj"]
 [ext_resource type="Texture2D" uid="uid://d0h6we75g3l0h" path="res://crosshair.png" id="2_xdhj0"]
 [ext_resource type="AudioStream" uid="uid://lqgi4erf48wg" path="res://player/shotgun/fire.wav" id="3_w6ksn"]
+[ext_resource type="Shader" path="res://player/weapon_sprite.gdshader" id="4_i5vum"]
 [ext_resource type="AudioStream" uid="uid://cy2lhrs5we1a7" path="res://player/shotgun/open.wav" id="6_tknt2"]
 [ext_resource type="AudioStream" uid="uid://dam35f8u5f2d5" path="res://player/shotgun/load.wav" id="7_dom6o"]
 [ext_resource type="AudioStream" uid="uid://cykqcvgf3tyv3" path="res://player/shotgun/close.wav" id="8_uckjf"]
@@ -77,6 +78,16 @@ billboard_keep_scale = true
 material = SubResource("StandardMaterial3D_m681u")
 size = Vector2(0.05, 0.05)
 
+[sub_resource type="QuadMesh" id="QuadMesh_m5j6l"]
+size = Vector2(1.655, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fb2wo"]
+render_priority = 0
+shader = ExtResource("4_i5vum")
+shader_parameter/frame_count = 10
+shader_parameter/frame = 0
+shader_parameter/views = ExtResource("2_ntkbj")
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_t4cq8"]
 blend_mode = 3
 
@@ -85,7 +96,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D/WeaponSprite:frame")
+tracks/0/path = NodePath("Camera3D/WeaponSprite:surface_material_override/0:shader_parameter/frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -126,7 +137,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D/WeaponSprite:frame")
+tracks/0/path = NodePath("Camera3D/WeaponSprite:surface_material_override/0:shader_parameter/frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -257,18 +268,13 @@ spot_attenuation = 2.0
 spot_angle = 35.0
 spot_angle_attenuation = 2.0
 
-[node name="WeaponSprite" type="Sprite3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.7, -1.5)
+[node name="WeaponSprite" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, -0.67, -1.5)
 layers = 2
 sorting_offset = 100.0
 cast_shadow = 0
-billboard = 1
-double_sided = false
-no_depth_test = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("2_ntkbj")
-vframes = 10
+mesh = SubResource("QuadMesh_m5j6l")
+surface_material_override/0 = SubResource("ShaderMaterial_fb2wo")
 
 [node name="WeaponLight" type="OmniLight3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)

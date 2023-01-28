@@ -86,6 +86,7 @@ var base_height := ProjectSettings.get_setting("display/window/size/viewport_hei
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var initial_camera_position: Vector3 = $Camera3D.position
+@onready var initial_weapon_sprite_position: Vector3 = $Camera3D/WeaponSprite.position
 @onready var initial_underwater_color: Color = $UnderwaterEffect.color
 
 
@@ -127,8 +128,8 @@ func _physics_process(delta):
 	$Camera3D.position.y = initial_camera_position.y + sin(bob_cycle_counter * 10) * 0.01 * Vector3(velocity.x, 0, velocity.z).length() - bob_fall_counter
 
 	# Perform weapon sprite bobbing (horizontal and vertical), and also apply the fall bobbing offset on the weapon sprite.
-	$Camera3D/WeaponSprite.offset.x = cos(bob_cycle_counter * 10) * 0.2 * Vector3(velocity.x, 0, velocity.z).length()
-	$Camera3D/WeaponSprite.offset.y = -cos(sin(bob_cycle_counter * 10)) * 0.5 * Vector3(velocity.x, 0, velocity.z).length() - bob_fall_counter * 15
+	$Camera3D/WeaponSprite.position.x = initial_weapon_sprite_position.x + cos(bob_cycle_counter * 10) * 0.002 * Vector3(velocity.x, 0, velocity.z).length()
+	$Camera3D/WeaponSprite.position.y = initial_weapon_sprite_position.y - cos(sin(bob_cycle_counter * 10)) * 0.005 * Vector3(velocity.x, 0, velocity.z).length() - bob_fall_counter * 15
 
 	# Reduce fall bobbing offset over time.
 	bob_fall_counter = lerpf(bob_fall_counter, 0.0, BOB_FALL_RECOVER_SPEED * delta)

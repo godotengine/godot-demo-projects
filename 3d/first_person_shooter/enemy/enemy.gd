@@ -82,7 +82,7 @@ func _on_line_of_sight_timer_timeout() -> void:
 
 
 ## Called when receiving damage.
-func damage(damage: int) -> void:
-	health -= damage
+func damage(p_damage: int) -> void:
+	health -= p_damage
 	$AnimationPlayer.play("pain")
 	$AnimationPlayer.queue("walk")
