@@ -4,7 +4,7 @@ extends RayCast3D
 const DAMAGE = 9
 
 
-func _physics_process(_delta):
+func _physics_process(_delta: float) -> void:
 	var distance := 0.0
 
 	# The collision check must be performed in `_physics_process()`, not `_ready()` or `_process()`.
@@ -15,15 +15,17 @@ func _physics_process(_delta):
 		$HitLocation/GPUParticles3D.emitting = true
 
 		if get_collider() is Enemy:
-			var enemy: Enemy = get_collider()
+			var enemy := get_collider() as Enemy
 			enemy.damage(DAMAGE)
 
 		if get_collider() is Player:
-			var player: Player = get_collider()
+			var player := get_collider() as Player
 			player.health -= DAMAGE
+			# Push player away from the bullet's direction.
+			player.velocity -= transform.basis.z * 1.5
 
 		if get_collider() is Box:
-			var box: Box = get_collider()
+			var box := get_collider() as Box
 			# Push box away from the player's shot.
 			box.apply_central_impulse(-transform.basis.z)
 			# Apply small upwards motion to make the box slide more with horizontal shots.
@@ -45,6 +47,6 @@ func _physics_process(_delta):
 	set_physics_process(false)
 
 
-func _on_expire_timer_timeout():
+func _on_expire_timer_timeout() -> void:
 	# Bullet is no longer needed as its sound and particles have fully played.
 	queue_free()

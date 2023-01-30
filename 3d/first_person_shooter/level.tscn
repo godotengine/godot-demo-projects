@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bcmepm05qldy5"]
+[gd_scene load_steps=28 format=3 uid="uid://bcmepm05qldy5"]
 
 [ext_resource type="Texture2D" uid="uid://bc3n2sen32mqx" path="res://sky.png" id="1_0n6b1"]
 [ext_resource type="PackedScene" uid="uid://dfyswwfb8j6iv" path="res://player.tscn" id="2_cwuyg"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bjo2g4bppx3gp" path="res://water_texture_normal.tres" id="7_ai040"]
 [ext_resource type="Shader" path="res://water_shadow.gdshader" id="8_xqyib"]
 [ext_resource type="FontFile" uid="uid://blm3851cjtjji" path="res://fonts/vga-rom-font.png" id="13_337k1"]
+[ext_resource type="PackedScene" uid="uid://c8n2cdrjonibs" path="res://platform.tscn" id="14_kch2b"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_33kw8"]
 panorama = ExtResource("1_0n6b1")
@@ -32,6 +33,16 @@ fog_enabled = true
 fog_light_color = Color(0.117647, 0.156863, 0.196078, 1)
 fog_density = 0.006
 fog_sky_affect = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_espwu"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f68v3"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.5
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_olnn8"]
 size = Vector2(15, 30)
@@ -126,7 +137,31 @@ directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 75.0
 
 [node name="Player" parent="." instance=ExtResource("2_cwuyg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, -8.5, 43)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, -8, 43)
+
+[node name="PlayerStart" type="CSGTorus3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, -9.45, 43)
+inner_radius = 0.667
+outer_radius = 0.8
+sides = 32
+ring_sides = 4
+material = SubResource("StandardMaterial3D_espwu")
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="PlayerStart"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+operation = 2
+outer_radius = 0.9
+sides = 16
+ring_sides = 16
+material = SubResource("StandardMaterial3D_f68v3")
+
+[node name="CSGTorus3D2" type="CSGTorus3D" parent="PlayerStart"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
+operation = 2
+outer_radius = 0.9
+sides = 16
+ring_sides = 16
+material = SubResource("StandardMaterial3D_f68v3")
 
 [node name="Main" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -21, 0)
@@ -199,11 +234,37 @@ use_collision = true
 size = Vector3(16, 25, 16)
 material = ExtResource("3_b18pi")
 
+[node name="Label3D" type="Label3D" parent="Building"]
+transform = Transform3D(-1, -4.37114e-08, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, -4.37114e-08, 1, 4.37114e-08, 0.00849533, 12.5633, 0.382095)
+visibility_range_end = 16.0
+pixel_size = 0.0125
+double_sided = false
+alpha_cut = 1
+texture_filter = 2
+modulate = Color(1, 0.776471, 0.196078, 1)
+text = "You have found a secret area!"
+font = ExtResource("13_337k1")
+
+[node name="Label3DShadow" type="Label3D" parent="Building"]
+transform = Transform3D(-1, -4.37114e-08, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, -4.37114e-08, 1, 4.37114e-08, 0.00849533, 12.5133, 0.382095)
+visibility_range_end = 16.0
+pixel_size = 0.0125
+double_sided = false
+alpha_cut = 1
+texture_filter = 2
+modulate = Color(0, 0, 0, 1)
+text = "You have found a secret area!"
+font = ExtResource("13_337k1")
+
 [node name="Building2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1, 19)
 use_collision = true
 size = Vector3(16, 25, 16)
 material = ExtResource("3_b18pi")
+
+[node name="Platform" parent="Building2" instance=ExtResource("14_kch2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -8.25, -10)
+distance = 20.5
 
 [node name="Building3" type="CSGBox3D" parent="."]
 transform = Transform3D(0.995645, 0, 0.0932221, 0, 1, 0, -0.0932221, 0, 0.995645, -36.2054, 3, 36.0096)
@@ -211,11 +272,50 @@ use_collision = true
 size = Vector3(16, 25, 16)
 material = ExtResource("3_b18pi")
 
+[node name="CSGBox3D" type="CSGBox3D" parent="Building3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 7)
+operation = 2
+size = Vector3(2, 25, 2)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Building3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
+radius = 2.0
+height = 25.0
+sides = 32
+material = ExtResource("3_b18pi")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Building3/CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+operation = 1
+size = Vector3(4, 25, 4)
+
 [node name="Building4" type="CSGBox3D" parent="."]
 transform = Transform3D(0.995645, 0, 0.0932221, 0, 1, 0, -0.0932221, 0, 0.995645, -36.7946, -7, 18.9904)
 use_collision = true
 size = Vector3(16, 25, 16)
 material = ExtResource("3_b18pi")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Building4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+operation = 2
+size = Vector3(19, 4, 12)
+material = ExtResource("3_b18pi")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Building4"]
+transform = Transform3D(0.998836, 0.012435, 0.0466111, 0.046611, -0.497823, -0.866025, 0.012435, 0.86719, -0.497823, -0.0475693, 10, -7.53726)
+operation = 2
+size = Vector3(19, 4, 12)
+material = ExtResource("3_b18pi")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Building4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.5, -0.5)
+operation = 2
+size = Vector3(5, 14, 7)
+material = ExtResource("3_b18pi")
+
+[node name="Platform2" parent="Building4" instance=ExtResource("14_kch2b")]
+transform = Transform3D(0.00609113, 0, 0.999982, 0, 1, 0, -0.999982, 0, 0.00609113, 0.0413475, -2, -0.381556)
+distance = 14.25
 
 [node name="Slope" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.2222e-08, 1.13133e-08, 1, 0.258819, 0.965926, 0, -0.965926, 0.258819, -4.37114e-08, -15.8, -9.5, 17)
@@ -308,6 +408,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, -9.5, 24)
 [node name="LampPost4" parent="." instance=ExtResource("3_rtj1w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, -9.5, 40)
 
+[node name="LampPost5" parent="." instance=ExtResource("3_rtj1w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.75, -9.5, -12)
+
+[node name="LampPost6" parent="." instance=ExtResource("3_rtj1w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -9.5, -32.75)
+
+[node name="LampPost7" parent="." instance=ExtResource("3_rtj1w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.25, -9.5, -32.75)
+
+[node name="LampPost8" parent="." instance=ExtResource("3_rtj1w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, -9.5, -38.5)
+
+[node name="LampPost9" parent="." instance=ExtResource("3_rtj1w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.5, -9.5, 43.25)
+
+[node name="LampPost10" parent="." instance=ExtResource("3_rtj1w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.25, -9.5, 16)
+
 [node name="GPUParticlesCollisionSDF3D" type="GPUParticlesCollisionSDF3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 extents = Vector3(51, 17, 51)
@@ -369,28 +487,6 @@ transform = Transform3D(-0.234646, -0.109218, -0.965926, -0.421985, 0.906603, 0,
 
 [node name="Box7" parent="Boxes" instance=ExtResource("5_o3uqf")]
 transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866026, 0, 0.5, -5.7476, -8.875, 34.6871)
-
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1.91069e-15, 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1, 0, -4.37114e-08, 4.7585, 11.5633, 19.1321)
-visibility_range_end = 16.0
-pixel_size = 0.0243
-double_sided = false
-alpha_cut = 1
-texture_filter = 2
-modulate = Color(1, 0.776471, 0.196078, 1)
-text = "You have found a secret area!"
-font = ExtResource("13_337k1")
-
-[node name="Label3DShadow" type="Label3D" parent="."]
-transform = Transform3D(1.91069e-15, 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1, 0, -4.37114e-08, 4.7585, 11.5133, 19.1321)
-visibility_range_end = 16.0
-pixel_size = 0.0243
-double_sided = false
-alpha_cut = 1
-texture_filter = 2
-modulate = Color(0, 0, 0, 1)
-text = "You have found a secret area!"
-font = ExtResource("13_337k1")
 
 [connection signal="body_entered" from="Main/Water" to="Main/Water" method="_on_body_entered"]
 [connection signal="body_exited" from="Main/Water" to="Main/Water" method="_on_body_exited"]

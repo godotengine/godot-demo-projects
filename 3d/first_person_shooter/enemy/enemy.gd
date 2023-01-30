@@ -13,9 +13,14 @@ var player: Player = null
 # If `true`, the enemy can currently see the player (and should act upon it).
 var can_see_player := false
 
+# Target position for the next bullet to fire (in global coordinates).
+@onready var bullet_target_position := Vector3.ZERO
+
 # Used for resetting the fixed wait time after the initial jitter.
 @onready var line_of_sight_timer_initial_wait_time: float = $LineOfSightTimer.wait_time
 
+## Maximum distance at which enemies will attempt to fire their weapon.
+const MAX_FIRING_DISTANCE = 25.0
 
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
@@ -41,22 +46,18 @@ func _physics_process(delta):
 			velocity.z = direction.z * 4
 			move_and_slide()
 
-		# TODO: Better enemy AI (strafe occasionally).
+		if is_zero_approx($ShootTimer.time_left) and distance < MAX_FIRING_DISTANCE:
+			# Set the target position for the bullet before the animation is played.
+			# This allows the final shot to be visibly delayed, allowing players to dodge bullets
+			# by strafing.
+			bullet_target_position = player.global_position
 
-		if is_zero_approx($ShootTimer.time_left) and distance < 20.0:
-			# Shoot a single bullet towards the player if close enough.
-			var bullet = preload("res://bullet.tscn").instantiate()
-			# Bullets are not child of the player to prevent moving along the player.
-			get_parent().add_child(bullet)
-			bullet.global_transform = global_transform.looking_at(player.global_position)
-			# Apply random spread (twice as much spread horizontally than vertically).
-			bullet.rotation.y += -0.1 + randf() * 0.2
-			bullet.rotation.x += -0.05 + randf() * 0.1
 			# Shot frequency is proportional to distance.
 			# The closer the enemy is to the player, the more frequently they will fire.
-			$ShootTimer.start(remap(distance, 0.0, 20.0, 0.2, 2.0))
+			$ShootTimer.start(remap(distance, 0.0, MAX_FIRING_DISTANCE, 0.6, 2.0))
 			# Note: For enemy animations to play independently of other enemies,
 			# the mesh's material must be set as Local To Scene in the inspector.
+			# The `fire` animation handles the actual bullet firing with a Call Method track.
 			$AnimationPlayer.play("fire")
 			$AnimationPlayer.queue("walk")
 
@@ -79,6 +80,17 @@ func _on_line_of_sight_timer_timeout() -> void:
 
 	# Disable RayCast once it's not needed anymore (until the next timer timeout) to improve performance.
 	$LineOfSight.enabled = false
+
+
+## Fires a bullet towards the position stored in `bullet_target_position` (method called by AnimationPlayer).
+func fire_bullet() -> void:
+	var bullet := preload("res://bullet.tscn").instantiate()
+	# Bullets are not child of the player to prevent moving along the player.
+	get_parent().add_child(bullet)
+	bullet.global_transform = global_transform.looking_at(bullet_target_position)
+	# Apply random spread (twice as much spread horizontally than vertically).
+	bullet.rotation.y += -0.1 + randf() * 0.2
+	bullet.rotation.x += -0.05 + randf() * 0.1
 
 
 ## Called when receiving damage.

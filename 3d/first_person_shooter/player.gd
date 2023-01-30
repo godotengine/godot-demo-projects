@@ -13,7 +13,6 @@ const MIN_VIEW_PITCH = -TAU * 0.249
 ## Maximum view pitch.
 const MAX_VIEW_PITCH = TAU * 0.249
 
-
 ## Base speed multiplier.
 const SPEED = 1.0
 
@@ -52,6 +51,12 @@ const GRADIENT := preload("res://player/crosshair_health_gradient.tres")
 ## The number of health points the player currently has.
 var health: int = 100:
 	set(value):
+		if value < health:
+			# Player was hurt.
+			# Increase opacity of damage overlay and tilt camera according to damage received.
+			$DamageEffect.modulate.a = clampf($DamageEffect.modulate.a + (health - value) * 0.05, 0.0, 1.0)
+			damage_roll += 0.005 * (health - value)
+
 		health = value
 		$HUD/Health.text = "Health: %d" % health
 		# Set crosshair color according to health, which is defined using a Gradient resource.
@@ -69,8 +74,11 @@ var bob_fall_counter := 0.0
 # Fall impact accumulator for camera landing effect.
 var bob_fall_increment := 0.0
 
-# Velocity on the previous physics frame (used to calculate speed changes for landing effects).
-var previous_velocity := Vector3.ZERO
+# Additional camera roll to apply (damage effect, reduced over time).
+var damage_roll := 0.0
+
+# `true` if the player is currently touching a ground (not a steep slope or wall), `false` otherwise.
+var touching_ground := false
 
 # `true` if the player is currently in water, `false` otherwise.
 var in_water := false
@@ -83,14 +91,14 @@ var water_plane_y := -INF
 var base_height := ProjectSettings.get_setting("display/window/size/viewport_height")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity := ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var initial_camera_position: Vector3 = $Camera3D.position
 @onready var initial_weapon_sprite_position: Vector3 = $Camera3D/WeaponSprite.position
 @onready var initial_underwater_color: Color = $UnderwaterEffect.color
 
 
-func _ready():
+func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 	# V-Sync is disabled to reduce input lag. To avoid excessive power consumption,
@@ -100,15 +108,18 @@ func _ready():
 		highest_refresh_rate = max(highest_refresh_rate, DisplayServer.screen_get_refresh_rate(screen))
 	Engine.max_fps = int(highest_refresh_rate) + 2
 
-	# Prevent underwater "out" transition from playing on scene load.
+	# Prevent underwater and damage effect "out" transitions from playing on scene load.
 	$UnderwaterEffect.color = Color.TRANSPARENT
+	$DamageEffect.modulate.a = 0.0
 
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
+	touching_ground = $ShapeCast3D.is_colliding() and $ShapeCast3D.get_collision_normal(0).dot(Vector3.UP) > 0.6
+
 	# Camera effects (view bobbing).
 
-	if abs(previous_velocity.y - velocity.y) >= 8.0:
-		# FIXME: This never occurs since the transition to ShapeCast3D for floor detection.
+	if false:
+		# FIXME: Find a way to detect vertical player speed.
 		# We've just landed, apply landing increase.
 		print("fall")
 		bob_fall_increment += 0.1
@@ -119,7 +130,7 @@ func _physics_process(delta):
 	bob_fall_counter += bob_fall_increment
 	bob_fall_increment = lerpf(bob_fall_increment, 0.0, BOB_FALL_RECOVER_SPEED * delta)
 
-	if $ShapeCast3D.is_colliding() or in_water:
+	if touching_ground or in_water:
 		# Don't bob camera and weapon sprite while airborne.
 		bob_cycle_counter += delta
 
@@ -136,7 +147,7 @@ func _physics_process(delta):
 
 	# Roll the camera based on sideways movement speed.
 	var roll := velocity.dot($Camera3D.transform.basis.x)
-	$Camera3D.rotation.z = -roll * 0.003
+	$Camera3D.rotation.z = -roll * 0.003 + damage_roll
 
 	# Character controller.
 
@@ -145,7 +156,7 @@ func _physics_process(delta):
 	# for stair climbing (to avoid discrepancies between both functions).
 
 	# Add the gravity (and perform damping if in water).
-	if not $ShapeCast3D.is_colliding():
+	if not touching_ground:
 		if in_water:
 			# Lower gravity while in water.
 			velocity.y -= WATER_GRAVITY_FACTOR * gravity * delta
@@ -155,8 +166,7 @@ func _physics_process(delta):
 			velocity.y -= gravity * delta
 
 
-	# Handle Jump.
-	if Input.is_action_pressed("jump") and (in_water or $ShapeCast3D.is_colliding()):
+	if Input.is_action_pressed("jump") and (in_water or touching_ground):
 		if in_water:
 			# Allow jumping while in water to swim upwards, but more slowly.
 			# Here, jumping is performed every frame if underwater, so multiply it by `delta`.
@@ -183,26 +193,25 @@ func _physics_process(delta):
 	if in_water:
 		motion *= WATER_ACCELERATION_FACTOR
 
-	if not $ShapeCast3D.is_colliding():
+	if not touching_ground:
 		# Slow down player movement (to take reduced friction into account,
 		# and give the impression of reduced air control).
 		motion *= AIR_ACCELERATION_FACTOR
 
 	velocity += motion
 
-	# `velocity` is reset after calling `move_and_slide()`, so this must be set before calling `move_and_slide()`.
-	previous_velocity = velocity
-
-	if not Input.is_action_pressed("jump") and $ShapeCast3D.is_colliding():
+	if not Input.is_action_pressed("jump") and touching_ground:
 		# Stair climbing.
 		# FIXME: Prevent camera from snapping downwards after landing from a jump.
 		# FIXME: Check collision normal to prevent stepping on steep slopes (> 46 degrees).
-		global_position.y = 1.0 + $ShapeCast3D.get_collision_point(0).y
+		global_position.y = 1.25 + $ShapeCast3D.get_collision_point(0).y
+		# Apply downwards velocity to stick to slopes and small steps.
+		velocity.y = -5.0
 
 	move_and_slide()
 
 	# Apply friction.
-	var friction := 0.94 if $ShapeCast3D.is_colliding() else 0.985
+	var friction := 0.94 if touching_ground else 0.985
 	velocity.x *= friction
 	velocity.z *= friction
 
@@ -217,7 +226,8 @@ func _physics_process(delta):
 		# Disable low-pass effect on the Master bus.
 		AudioServer.set_bus_effect_enabled(0, 0, false)
 
-func _process(delta):
+
+func _process(delta: float) -> void:
 	# Looking around with keyboard/gamepad.
 	var look := Input.get_vector("look_down", "look_up", "look_left", "look_right")
 	$Camera3D.rotation.x = clampf($Camera3D.rotation.x + look.x * LOOK_SENSITIVITY * delta, MIN_VIEW_PITCH, MAX_VIEW_PITCH)
@@ -246,8 +256,12 @@ func _process(delta):
 	else:
 		$Crosshair.modulate.a = 1.0
 
+	# Fade out damage effect over time.
+	$DamageEffect.modulate.a = lerpf($DamageEffect.modulate.a, 0.0, 3 * delta)
+	damage_roll = lerpf(damage_roll, 0.0, 4 * delta)
 
-func _input(event):
+
+func _input(event: InputEvent) -> void:
 	# Looking around with mouse.
 	if event is InputEventMouseMotion:
 		# Compensate motion speed to be resolution-independent (based on the window height).
@@ -258,7 +272,7 @@ func _input(event):
 
 	if event.is_action_pressed(&"toggle_flashlight"):
 		$Camera3D/Flashlight.visible = not $Camera3D/Flashlight.visible
-		# Use lower pitch when toggling off.
+		# Use lower audio pitch when toggling off.
 		$FlashlightSounds.pitch_scale = 1.0 if $Camera3D/Flashlight.visible else 0.7
 		$FlashlightSounds.play()
 

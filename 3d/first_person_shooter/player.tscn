@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dfyswwfb8j6iv"]
+[gd_scene load_steps=34 format=3 uid="uid://dfyswwfb8j6iv"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_3afs5"]
 [ext_resource type="PackedScene" uid="uid://b4g77r67peq11" path="res://blob_shadow.tscn" id="2_att33"]
@@ -15,7 +15,7 @@
 size = Vector3(1, 1.5, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nlrfb"]
-size = Vector3(0.9, 1, 0.9)
+size = Vector3(0.9, 0.75, 0.9)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vhi2c"]
 streams_count = 1
@@ -90,6 +90,18 @@ shader_parameter/views = ExtResource("2_ntkbj")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_t4cq8"]
 blend_mode = 3
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_502b5"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_xdggq"]
+offsets = PackedFloat32Array(0.00198807, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pusfi"]
+gradient = SubResource("Gradient_xdggq")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="Animation" id="Animation_y888d"]
 length = 0.001
@@ -216,6 +228,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("BoxShape3D_n7pit")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
 shape = SubResource("BoxShape3D_nlrfb")
 max_results = 1
 
@@ -253,6 +266,7 @@ draw_pass_1 = SubResource("QuadMesh_rmfmt")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+fov = 74.0
 
 [node name="Flashlight" type="SpotLight3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.4, 0)
@@ -299,7 +313,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.549, 0.64845, 0.9, 0.501961)
+color = Color(0.54902, 0.647059, 0.901961, 1)
+
+[node name="DamageEffect" type="TextureRect" parent="."]
+texture_filter = 2
+material = SubResource("CanvasItemMaterial_502b5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_pusfi")
 
 [node name="Crosshair" type="TextureRect" parent="."]
 texture_filter = 2

@@ -94,7 +94,7 @@ tracks/1/keys = {
 "start_offset": 0.0,
 "stream": SubResource("AudioStreamRandomizer_5sfw8")
 }],
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0.1)
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -103,7 +103,7 @@ tracks/2/path = NodePath("WeaponLight:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0.1, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -115,10 +115,24 @@ tracks/3/path = NodePath("WeaponLight:light_energy")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.3),
+"times": PackedFloat32Array(0.1, 0.2, 0.4),
 "transitions": PackedFloat32Array(-2, -2, -2),
 "update": 0,
 "values": [0.0, 2.0, 0.0]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fire_bullet"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_qjgq4"]
