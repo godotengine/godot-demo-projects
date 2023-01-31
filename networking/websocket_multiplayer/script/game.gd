@@ -10,24 +10,28 @@ const ACTIONS = ["roll", "pass"]
 var _players = []
 var _turn = -1
 
-@rpc func _log(what):
+@rpc
+func _log(what):
 	$HBoxContainer/RichTextLabel.add_text(what + "\n")
 
 
-@rpc(any_peer) func set_player_name(name):
+@rpc("any_peer")
+func set_player_name(name):
 	if not is_multiplayer_authority():
 		return
 	var sender = multiplayer.get_remote_sender_id()
 	update_player_name.rpc(sender, name)
 
 
-@rpc(call_local) func update_player_name(player, name):
+@rpc("call_local")
+func update_player_name(player, name):
 	var pos = _players.find(player)
 	if pos != -1:
 		_list.set_item_text(pos, name)
 
 
-@rpc(any_peer) func request_action(action):
+@rpc("any_peer")
+func request_action(action):
 	if not is_multiplayer_authority():
 		return
 	var sender = multiplayer.get_remote_sender_id()
@@ -48,7 +52,8 @@ func do_action(action):
 	_log.rpc("%s: %ss %d" % [player_name, action, val])
 
 
-@rpc(call_local) func set_turn(turn):
+@rpc("call_local")
+func set_turn(turn):
 	_turn = turn
 	if turn >= _players.size():
 		return
@@ -60,7 +65,8 @@ func do_action(action):
 	_action.disabled = _players[turn] != multiplayer.get_unique_id()
 
 
-@rpc(call_local) func del_player(id):
+@rpc("call_local")
+func del_player(id):
 	var pos = _players.find(id)
 	if pos == -1:
 		return
@@ -72,7 +78,8 @@ func do_action(action):
 		set_turn.rpc(_turn)
 
 
-@rpc(call_local) func add_player(id, pname=""):
+@rpc("call_local")
+func add_player(id, pname=""):
 	_players.append(id)
 	if pname == "":
 		_list.add_item("... connecting ...", null, false)

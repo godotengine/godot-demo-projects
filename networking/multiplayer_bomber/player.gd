@@ -67,7 +67,7 @@ func set_player_name(value):
 	get_node("label").text = value
 
 
-@rpc(call_local)
+@rpc("call_local")
 func exploded(_by_who):
 	if stunned:
 		return
