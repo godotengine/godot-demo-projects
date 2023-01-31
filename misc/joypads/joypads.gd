@@ -9,7 +9,7 @@ extends Control
 
 const DEADZONE = 0.2
 const FONT_COLOR_DEFAULT = Color(1.0, 1.0, 1.0, 0.5)
-const FONT_COLOR_ACTIVE = Color.WHITE
+const FONT_COLOR_ACTIVE = Color(0.2, 1.0, 0.2, 1.0)
 
 var joy_num
 var cur_joy = -1
@@ -23,24 +23,29 @@ var axis_value
 @onready var joypad_number = $DeviceInfo/JoyNumber
 
 func _ready():
-	set_physics_process(true)
 	Input.joy_connection_changed.connect(self._on_joy_connection_changed)
 
+	for joypad in Input.get_connected_joypads():
+		print_rich("Found joypad #%d: [b]%s[/b] - %s" % [joypad, Input.get_joy_name(joypad), Input.get_joy_guid(joypad)])
 
 func _process(_delta):
 	# Get the joypad device number from the spinbox.
-	joy_num = joypad_number.get_value()
+	joy_num = joypad_number.value
 
 	# Display the name of the joypad if we haven't already.
 	if joy_num != cur_joy:
 		cur_joy = joy_num
-		joypad_name.set_text(Input.get_joy_name(joy_num) + "\n" + Input.get_joy_guid(joy_num))
+		if Input.get_joy_name(joy_num) != "":
+			set_joypad_name(Input.get_joy_name(joy_num), Input.get_joy_guid(joy_num))
+		else:
+			clear_joypad_name()
+
 
 	# Loop through the axes and show their current values.
 	for axis in range(int(min(JOY_AXIS_MAX, 10))):
 		axis_value = Input.get_joy_axis(joy_num, axis)
 		axes.get_node("Axis" + str(axis) + "/ProgressBar").set_value(100 * axis_value)
-		axes.get_node("Axis" + str(axis) + "/ProgressBar/Value").set_text(str(axis_value))
+		axes.get_node("Axis" + str(axis) + "/ProgressBar/Value").set_text("[center][fade start=2 length=16]%s[/fade][/center]" % axis_value)
 		# Scaled value used for alpha channel using valid range rather than including unusable deadzone values.
 		var scaled_alpha_value = (abs(axis_value) - DEADZONE) / (1.0 - DEADZONE)
 		# Show joypad direction indicators
@@ -85,11 +90,17 @@ func _process(_delta):
 
 # Called whenever a joypad has been connected or disconnected.
 func _on_joy_connection_changed(device_id, connected):
+	if connected:
+		print_rich("[color=green]Found newly connected joypad #%d: [b]%s[/b] - %s[/color]" % [device_id, Input.get_joy_name(device_id), Input.get_joy_guid(device_id)])
+	else:
+		print_rich("[color=red]Disconnected joypad #%d.[/color]" % device_id)
+
 	if device_id == cur_joy:
+		# Update current joypad label.
 		if connected:
-			joypad_name.set_text(Input.get_joy_name(device_id) + "\n" + Input.get_joy_guid(device_id))
+			set_joypad_name(Input.get_joy_name(device_id), Input.get_joy_guid(device_id))
 		else:
-			joypad_name.set_text("")
+			clear_joypad_name()
 
 
 func _on_start_vibration_pressed():
@@ -117,3 +128,23 @@ func _on_Clear_pressed():
 
 func _on_Show_pressed():
 	$RemapWizard.show_map()
+
+
+func _on_joy_name_meta_clicked(meta):
+	OS.shell_open(meta)
+
+
+func set_joypad_name(joy_name, joy_guid):
+	# Make the GUID clickable (and point to Godot's game controller database for easier lookup).
+	joypad_name.set_text("%s\n[color=#fff9][url=https://github.com/godotengine/godot/blob/master/core/input/gamecontrollerdb.txt]%s[/url][/color]" % [joy_name, joy_guid])
+
+	# Make the rest of the UI appear as enabled.
+	for node in [$JoypadDiagram, $Axes, $Buttons, $Vibration, $VBoxContainer]:
+		node.modulate.a = 1.0
+
+func clear_joypad_name():
+	joypad_name.set_text("[i]No controller detected at ID %d.[/i]" % joypad_number.value)
+
+	# Make the rest of the UI appear as disabled.
+	for node in [$JoypadDiagram, $Axes, $Buttons, $Vibration, $VBoxContainer]:
+		node.modulate.a = 0.5
