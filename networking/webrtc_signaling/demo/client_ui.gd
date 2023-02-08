@@ -18,7 +18,7 @@ func _ready():
 	multiplayer.peer_disconnected.connect(self._mp_peer_disconnected)
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func ping(argument):
 	_log("[Multiplayer] Ping from peer %d: arg: %s" % [multiplayer.get_remote_sender_id(), argument])
 

@@ -60,7 +60,7 @@ func _connected_fail():
 
 
 # Lobby management functions.
-@rpc(any_peer)
+@rpc("any_peer")
 func register_player(new_player_name):
 	var id = multiplayer.get_remote_sender_id()
 	players[id] = new_player_name
@@ -72,7 +72,7 @@ func unregister_player(id):
 	player_list_changed.emit()
 
 
-@rpc(call_local)
+@rpc("call_local")
 func load_world():
 	# Change scene.
 	var world = load("res://world.tscn").instantiate()
