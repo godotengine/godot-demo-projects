@@ -11,10 +11,10 @@ space between panels to resize them.
 
 Language: GDScript
 
-Renderer: Vulkan Mobile
+Renderer: Compatibility
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/890
 
 ## Screenshots
 
-![Screenshot](screenshots/control_gallery.png)
+![Screenshot](screenshots/control_gallery.webp)
