@@ -42,7 +42,7 @@ func _process(_delta):
 	var beat = int(time * BPM / 60.0)
 	var seconds = int(time)
 	var seconds_total = int($Player.stream.get_length())
-	@warning_ignore(integer_division)
+	@warning_ignore('integer_division')
 	$Label.text = str("BEAT: ", beat % BARS + 1, "/", BARS, " TIME: ", seconds / 60, ":", strsec(seconds % 60), " / ", seconds_total / 60, ":", strsec(seconds_total % 60))
 
 
