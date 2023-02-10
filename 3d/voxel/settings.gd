@@ -7,7 +7,7 @@ var fog_distance = 32.0 # Not saved, only used during runtime.
 var world_type = 0 # Not saved, only used during runtime.
 
 var _save_path = "user://settings.json"
-@warning_ignore('unused_private_class_variable')
+@warning_ignore("unused_private_class_variable")
 var _loaded = false
 
 
