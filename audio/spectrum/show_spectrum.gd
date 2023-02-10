@@ -11,7 +11,7 @@ const MIN_DB = 60
 var spectrum
 
 func _draw():
-	@warning_ignore(integer_division)
+	@warning_ignore('integer_division')
 	var w = WIDTH / VU_COUNT
 	var prev_hz = 0
 	for i in range(1, VU_COUNT + 1):
