@@ -8,4 +8,4 @@ Renderer: Compatability
 
 **SCREENSHOTS**
 
-![ScreenShot](/screenshots/screenshot1.png)
+![ScreenShot](audio/audio_effects_demo/screenshots/screenshot1.png)
