@@ -1,4 +1,4 @@
-AUDIO EFFECTS DEMO
+Audio Effects demo
 ==================
 
 This is a simple demo that showcases the various Audio Effects that can be used in the Godot engine. One or more Audio Effects can be toggled and applied to the playable sound effects and background music.
@@ -6,6 +6,7 @@ This is a simple demo that showcases the various Audio Effects that can be used 
 Language: GDScript
 Renderer: Compatability
 
-**SCREENSHOTS**
+
+**Screenshots**
 
 ![ScreenShot](https://github.com/dkleitsas/godot-demo-projects/blob/master/audio/audio_effects_demo/screenshots/screenshot1.png)
