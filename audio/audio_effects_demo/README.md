@@ -11,4 +11,4 @@ Renderer: Compatability
 
 # Screenshots
 
-![ScreenShot](https://github.com/dkleitsas/godot-demo-projects/blob/master/audio/audio_effects_demo/screenshots/screenshot1.png)
+![ScreenShot](screenshots/screenshot1.png)
