@@ -45,7 +45,7 @@ func _physics_process(_delta):
 		$Labels/Label_Screen1_Resolution.show()
 		$Labels/Label_Screen1_Position.show()
 		$Labels/Label_Screen1_DPI.show()
-		$Labels/Label_Screen1_Resolution.text = str("Screen1 Resolution:\n", DisplayServer.window_get_size(1))
+		$Labels/Label_Screen1_Resolution.text = str("Screen1 Resolution:\n", DisplayServer.screen_get_size(1))
 		$Labels/Label_Screen1_Position.text = str("Screen1 Position:\n", DisplayServer.screen_get_position(1))
 		$Labels/Label_Screen1_DPI.text = str("Screen1 DPI: ", DisplayServer.screen_get_dpi(1))
 		$Labels/Label_Screen1_RefreshRate.text = "Screen1 Refresh Rate: %.2f Hz" % DisplayServer.screen_get_refresh_rate(1)
