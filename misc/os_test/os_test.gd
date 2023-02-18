@@ -63,8 +63,8 @@ func _ready():
 	add_header("Audio")
 	add_line("Mix rate", "%d Hz" % AudioServer.get_mix_rate())
 	add_line("Output latency", "%f ms" % (AudioServer.get_output_latency() * 1000))
-	add_line("Output device list", ", ".join(AudioServer.get_device_list()))
-	add_line("Capture device list", ", ".join(AudioServer.capture_get_device_list()))
+	add_line("Output device list", ", ".join(AudioServer.get_output_device_list()))
+	add_line("Capture device list", ", ".join(AudioServer.get_input_device_list()))
 
 	add_header("Date")
 	add_line("Date and time (local)", Time.get_datetime_string_from_system(false, true))
