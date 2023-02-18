@@ -20,7 +20,9 @@ void vertex() {
 void fragment() {
 	float y = float(frame) / float(frame_count); // UV vertical start for the view in the atlas.
 	float view_height = 1.0 / float(frame_count); // UV height of the animation in the atlas.
-	vec4 tex = texture(views, vec2(UV.x, y + view_height * UV.y));
+	
+	// Add a slight vertical offset to UV sampling to fix stray pixel edges appearing at the top of the sprite.
+	vec4 tex = texture(views, vec2(UV.x, y + view_height * UV.y + 0.001));
 
 	// Ensure the weapon sprite in the darkness is always visible to an extent,
 	// but allow it to be lit by light sources.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bcmepm05qldy5"]
+[gd_scene load_steps=29 format=3 uid="uid://bcmepm05qldy5"]
 
 [ext_resource type="Texture2D" uid="uid://bc3n2sen32mqx" path="res://sky.png" id="1_0n6b1"]
 [ext_resource type="PackedScene" uid="uid://dfyswwfb8j6iv" path="res://player.tscn" id="2_cwuyg"]
@@ -120,6 +120,8 @@ _data = {
 "water_surface": SubResource("Animation_as77u")
 }
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_vy5j4"]
+
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -167,6 +169,12 @@ material = SubResource("StandardMaterial3D_f68v3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -21, 0)
 use_collision = true
 size = Vector3(100, 40, 100)
+material = ExtResource("3_b18pi")
+
+[node name="Outside" type="CSGBox3D" parent="Main"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -21, 0)
+use_collision = true
+size = Vector3(10000, 40, 10000)
 material = ExtResource("3_b18pi")
 
 [node name="Inner" type="CSGBox3D" parent="Main"]
@@ -220,7 +228,7 @@ shape = SubResource("BoxShape3D_04k8c")
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Main/Water"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
 cull_mask = 4294967293
-extents = Vector3(7.5, 3, 15)
+size = Vector3(15, 6, 30)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Main/Water"]
 autoplay = "water_surface"
@@ -229,7 +237,7 @@ libraries = {
 }
 
 [node name="Building" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 36)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 36.5)
 use_collision = true
 size = Vector3(16, 25, 16)
 material = ExtResource("3_b18pi")
@@ -267,7 +275,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -8.25, -10)
 distance = 20.5
 
 [node name="Building3" type="CSGBox3D" parent="."]
-transform = Transform3D(0.995645, 0, 0.0932221, 0, 1, 0, -0.0932221, 0, 0.995645, -36.2054, 3, 36.0096)
+transform = Transform3D(0.995645, 0, 0.0932221, 0, 1, 0, -0.0932221, 0, 0.995645, -36.2054, 3, 36.5096)
 use_collision = true
 size = Vector3(16, 25, 16)
 material = ExtResource("3_b18pi")
@@ -428,7 +436,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.25, -9.5, 16)
 
 [node name="GPUParticlesCollisionSDF3D" type="GPUParticlesCollisionSDF3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-extents = Vector3(51, 17, 51)
+size = Vector3(102, 34, 102)
 resolution = 3
 bake_mask = 4294967281
 texture = ExtResource("5_myd3n")
@@ -473,20 +481,47 @@ transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866026, 0, 0.5, -7, -8.875
 [node name="Box4" parent="Boxes" instance=ExtResource("5_o3uqf")]
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -8.5, -8.875, 36.5)
 
-[node name="Box5" parent="Boxes" instance=ExtResource("5_o3uqf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, -10, 39.25)
-
 [node name="Box9" parent="Boxes" instance=ExtResource("5_o3uqf")]
 transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 22.25, -8.875, 42.25)
 
-[node name="Box6" parent="Boxes" instance=ExtResource("5_o3uqf")]
-transform = Transform3D(0.906603, 0.421985, 0, -0.421985, 0.906603, 0, 0, 0, 1, 26.8351, -10.0595, 29.75)
+[node name="Box10" parent="Boxes" instance=ExtResource("5_o3uqf")]
+transform = Transform3D(2.08616e-07, 0, -1, 0, 1, 0, 1, 0, 2.08616e-07, 20.75, -8.875, 40.75)
 
-[node name="Box8" parent="Boxes" instance=ExtResource("5_o3uqf")]
-transform = Transform3D(-0.234646, -0.109218, -0.965926, -0.421985, 0.906603, 0, 0.875711, 0.407607, -0.258819, 34.3351, -10.0595, 38.5)
+[node name="Box11" parent="Boxes" instance=ExtResource("5_o3uqf")]
+transform = Transform3D(-0.707106, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707106, 10.4697, 12.125, 14.1686)
+
+[node name="Box12" parent="Boxes" instance=ExtResource("5_o3uqf")]
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 11.5303, 12.125, 12.3314)
+
+[node name="Box13" parent="Boxes" instance=ExtResource("5_o3uqf")]
+transform = Transform3D(-0.707106, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707106, 8.46967, 16.125, 38.6686)
+
+[node name="Box14" parent="Boxes" instance=ExtResource("5_o3uqf")]
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 1.03033, 16.125, 31.8314)
+
+[node name="Box15" parent="Boxes" instance=ExtResource("5_o3uqf")]
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, -33.7197, 6.125, 25.3314)
 
 [node name="Box7" parent="Boxes" instance=ExtResource("5_o3uqf")]
 transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866026, 0, 0.5, -5.7476, -8.875, 34.6871)
+
+[node name="InvisibleWalls" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InvisibleWalls"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.16371e-06, -49.5)
+shape = SubResource("WorldBoundaryShape3D_vy5j4")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="InvisibleWalls"]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, -2.16371e-06, 49.5)
+shape = SubResource("WorldBoundaryShape3D_vy5j4")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="InvisibleWalls"]
+transform = Transform3D(-4.37114e-08, 1, 3.82137e-15, -4.37114e-08, 0, -1, -1, -4.37114e-08, 4.37114e-08, -49.5, -4.58969e-07, 10.5)
+shape = SubResource("WorldBoundaryShape3D_vy5j4")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="InvisibleWalls"]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 0, -1, 1, -4.37114e-08, -4.37114e-08, 49.5, -2.16371e-06, 13.75)
+shape = SubResource("WorldBoundaryShape3D_vy5j4")
 
 [connection signal="body_entered" from="Main/Water" to="Main/Water" method="_on_body_entered"]
 [connection signal="body_exited" from="Main/Water" to="Main/Water" method="_on_body_exited"]

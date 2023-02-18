@@ -76,7 +76,7 @@ func _on_line_of_sight_timer_timeout() -> void:
 	# Allow performing queries immediately after enabling the RayCast.
 	# Otherwise, we would have to wait one physics frame.
 	$LineOfSight.force_raycast_update()
-	can_see_player = not $LineOfSight.is_colliding()
+	can_see_player = player.health >= 1 and not $LineOfSight.is_colliding()
 
 	# Disable RayCast once it's not needed anymore (until the next timer timeout) to improve performance.
 	$LineOfSight.enabled = false

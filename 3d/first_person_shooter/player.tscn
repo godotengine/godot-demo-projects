@@ -1,11 +1,14 @@
-[gd_scene load_steps=34 format=3 uid="uid://dfyswwfb8j6iv"]
+[gd_scene load_steps=39 format=3 uid="uid://dfyswwfb8j6iv"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_3afs5"]
 [ext_resource type="PackedScene" uid="uid://b4g77r67peq11" path="res://blob_shadow.tscn" id="2_att33"]
 [ext_resource type="Texture2D" uid="uid://df46fn25wxblu" path="res://player/shotgun/spritesheet.png" id="2_ntkbj"]
 [ext_resource type="Texture2D" uid="uid://d0h6we75g3l0h" path="res://crosshair.png" id="2_xdhj0"]
+[ext_resource type="AudioStream" uid="uid://jfxdoxq7t3t2" path="res://player/water_splash_out.ogg" id="3_ovny0"]
 [ext_resource type="AudioStream" uid="uid://lqgi4erf48wg" path="res://player/shotgun/fire.wav" id="3_w6ksn"]
+[ext_resource type="AudioStream" uid="uid://c2n47qjisa0wl" path="res://player/water_splash_in.ogg" id="3_yf4c3"]
 [ext_resource type="Shader" path="res://player/weapon_sprite.gdshader" id="4_i5vum"]
+[ext_resource type="AudioStream" uid="uid://do4fwt667onp2" path="res://player/rain.ogg" id="6_cmbiq"]
 [ext_resource type="AudioStream" uid="uid://cy2lhrs5we1a7" path="res://player/shotgun/open.wav" id="6_tknt2"]
 [ext_resource type="AudioStream" uid="uid://dam35f8u5f2d5" path="res://player/shotgun/load.wav" id="7_dom6o"]
 [ext_resource type="AudioStream" uid="uid://cykqcvgf3tyv3" path="res://player/shotgun/close.wav" id="8_uckjf"]
@@ -17,10 +20,22 @@ size = Vector3(1, 1.5, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_nlrfb"]
 size = Vector3(0.9, 0.75, 0.9)
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vhi2c"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lu535"]
 streams_count = 1
 random_pitch = 1.02
 stream_0/stream = ExtResource("7_dom6o")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_46hgo"]
+streams_count = 1
+random_pitch = 1.02
+stream_0/stream = ExtResource("3_yf4c3")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vhi2c"]
+streams_count = 1
+random_pitch = 1.02
+stream_0/stream = ExtResource("3_ovny0")
 stream_0/weight = 1.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lr0u3"]
@@ -208,6 +223,7 @@ tracks/3/keys = {
 }],
 "times": PackedFloat32Array(0, 0.535896, 0.844826, 1.02504)
 }
+tracks/3/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_glvp6"]
 _data = {
@@ -238,8 +254,18 @@ volume_db = -12.0
 max_polyphony = 2
 
 [node name="FlashlightSounds" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_vhi2c")
+stream = SubResource("AudioStreamRandomizer_lu535")
 volume_db = -12.0
+max_polyphony = 2
+
+[node name="WaterInSound" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_46hgo")
+volume_db = -6.0
+max_polyphony = 2
+
+[node name="WaterOutSound" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_vhi2c")
+volume_db = -6.0
 max_polyphony = 2
 
 [node name="Rain" type="GPUParticles3D" parent="."]
@@ -263,6 +289,11 @@ interpolate = false
 visibility_aabb = AABB(-49.847, -490.159, -49.8395, 99.8953, 490.659, 99.2455)
 process_material = SubResource("ParticleProcessMaterial_2q22j")
 draw_pass_1 = SubResource("QuadMesh_rmfmt")
+
+[node name="RainSound" type="AudioStreamPlayer" parent="Rain"]
+stream = ExtResource("6_cmbiq")
+volume_db = -6.0
+autoplay = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -301,6 +332,7 @@ shadow_blur = 2.5
 omni_range = 10.0
 
 [node name="Decal" parent="." instance=ExtResource("2_att33")]
+size = Vector3(1.2, 2.4, 1.2)
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 1.2
