@@ -4,31 +4,34 @@
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -220.0
-offset_bottom = 170.0
+offset_left = -150.0
+offset_bottom = 150.0
+grow_horizontal = 0
 
-[node name="Keys" type="Label" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = -10.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.5
+offset_top = -65.0
+offset_right = 56.5
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Actions" type="Label" parent="HBoxContainer"]
+layout_mode = 2
 text = "Shoot:
 Attack:
 Stagger:
 Jump:
 Sprint:"
 
-[node name="Keys2" type="Label" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = -10.0
+[node name="Keys" type="Label" parent="HBoxContainer"]
+layout_mode = 2
 text = "R
 F
 X
