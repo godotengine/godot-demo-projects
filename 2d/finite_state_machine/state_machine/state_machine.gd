@@ -31,7 +31,7 @@ func _enter_tree():
 
 
 func initialize(initial_state):
-	set_active(true)
+	_active = true
 	states_stack.push_front(get_node(initial_state))
 	current_state = states_stack[0]
 	current_state.enter()

@@ -96,7 +96,7 @@ func _on_body_entered(body):
 
 
 func _on_animation_finished(_name):
-	if not attack_current:
+	if attack_current.is_empty():
 		return
 
 	if attack_input_state == AttackInputStates.REGISTERED and combo_count < MAX_COMBO_COUNT:
