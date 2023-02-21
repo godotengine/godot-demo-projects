@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://bsyqg6eh3wl5i"]
+
+[ext_resource type="Theme" uid="uid://da4noqsij73it" path="res://gui/theme.tres" id="1"]
+[ext_resource type="Texture2D" uid="uid://l42us5qso8v4" path="res://level/coin.webp" id="2"]
+[ext_resource type="Script" path="res://gui/coins_counter.gd" id="3"]
+
+[sub_resource type="AtlasTexture" id="2"]
+atlas = ExtResource("2")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="3"]
+atlas = ExtResource("2")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="4"]
+atlas = ExtResource("2")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="5"]
+atlas = ExtResource("2")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("2")
+}, {
+"duration": 1.0,
+"texture": SubResource("3")
+}, {
+"duration": 1.0,
+"texture": SubResource("4")
+}, {
+"duration": 1.0,
+"texture": SubResource("5")
+}, {
+"duration": 1.0,
+"texture": SubResource("4")
+}, {
+"duration": 1.0,
+"texture": SubResource("3")
+}],
+"loop": true,
+"name": &"coin_spinning",
+"speed": 6.5
+}]
+
+[node name="CoinsCounter" type="Panel"]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 100.0
+offset_bottom = 45.0
+theme = ExtResource("1")
+script = ExtResource("3")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -8.0
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(21.5, 22.5)
+scale = Vector2(4.375, 4.375)
+sprite_frames = SubResource("6")
+animation = &"coin_spinning"

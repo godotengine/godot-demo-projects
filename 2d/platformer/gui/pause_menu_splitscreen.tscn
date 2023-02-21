@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dggactv0aho4p"]
+
+[ext_resource type="PackedScene" uid="uid://dh71g61cm8k44" path="res://gui/pause_menu.tscn" id="1_x3hgi"]
+
+[node name="PauseMenu" instance=ExtResource("1_x3hgi")]
+
+[node name="SingleplayerButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer" index="3"]
+layout_mode = 2
+text = "Change to 1-player"
+
+[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/SingleplayerButton" to="." method="_on_singleplayer_button_pressed"]
