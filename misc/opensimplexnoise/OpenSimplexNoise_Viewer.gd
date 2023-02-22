@@ -33,7 +33,7 @@ func _refresh_shader_params():
 
 func _on_DocumentationButton_pressed():
 	#warning-ignore:return_value_discarded
-	OS.shell_open("https://docs.godotengine.org/en/latest/classes/class_opensimplexnoise.html")
+	OS.shell_open("https://docs.godotengine.org/en/3.6/classes/class_opensimplexnoise.html")
 
 
 func _on_RandomSeedButton_pressed():
