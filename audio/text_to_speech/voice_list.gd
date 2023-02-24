@@ -66,7 +66,7 @@ func _on_ButtonSpeak_pressed():
 		DisplayServer.tts_speak($Utterance.text, $Tree.get_selected().get_metadata(0), $HSliderVolume.value, $HSliderPitch.value, $HSliderRate.value, id, false)
 		id += 1
 	else:
-		OS.alert("Select voice.")
+		OS.alert("No voice selected.\nSelect a voice in the list, then try using Speak again.")
 
 func _on_ButtonIntSpeak_pressed():
 	if $Tree.get_selected():
@@ -75,7 +75,7 @@ func _on_ButtonIntSpeak_pressed():
 		DisplayServer.tts_speak($Utterance.text, $Tree.get_selected().get_metadata(0), $HSliderVolume.value, $HSliderPitch.value, $HSliderRate.value, id, true)
 		id += 1
 	else:
-		OS.alert("Select voice.")
+		OS.alert("No voice selected.\nSelect a voice in the list, then try using Interrupt again.")
 
 func _on_ButtonClearLog_pressed():
 	$Log.text = ""

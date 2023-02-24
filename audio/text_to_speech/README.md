@@ -4,7 +4,7 @@ This is a demo showing text-to-speech support.
 
 Language: GDScript
 
-Renderer: Vulkan
+Renderer: Compatibility
 
 ## How does it work?
 
@@ -13,4 +13,4 @@ to enumerate voice information, send utterances to the OS TTS API, and receive c
 
 ## Screenshots
 
-![Screenshot](screenshots/tts.png)
+![Screenshot](screenshots/text_to_speech.webp)
