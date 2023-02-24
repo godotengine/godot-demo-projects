@@ -19,7 +19,7 @@ const FLOOR_DETECT_DISTANCE = 20.0
 
 func _ready():
 	# Static types are necessary here to avoid warnings.
-	var camera: Camera2D = $Camera3D
+	var camera: Camera2D = $Camera2D
 	if action_suffix == "_p1":
 		camera.custom_viewport = $"../.."
 		await get_tree().process_frame
