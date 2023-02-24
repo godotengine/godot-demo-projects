@@ -1,7 +1,8 @@
 class_name Gun
 extends Marker2D
-# Represents a weapon that spawns and shoots bullets.
-# The Cooldown timer controls the cooldown duration between shots.
+
+## Represents a weapon that spawns and shoots bullets.
+## The Cooldown timer controls the cooldown duration between shots.
 
 
 const BULLET_VELOCITY = 500.0

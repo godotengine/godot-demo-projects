@@ -1,8 +1,11 @@
 class_name Coin
 extends Area2D
-# Collectible that disappears when the player touches it.
+
+## Collectible that disappears when the player touches it.
+
 
 @onready var animation_player = $AnimationPlayer
+
 
 # The Coins only detects collisions with the Player thanks to its collision mask.
 # This prevents other characters such as enemies from picking up coins.

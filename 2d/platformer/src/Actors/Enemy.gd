@@ -15,8 +15,9 @@ var _state = State.WALKING
 @onready var sprite = $Sprite2D
 @onready var animation_player = $AnimationPlayer
 
-# This function is called when the scene enters the scene tree.
-# We can initialize variables here.
+
+## This function is called when the scene enters the scene tree.
+## We can initialize variables here.
 func _ready():
 	velocity.x = speed.x
 

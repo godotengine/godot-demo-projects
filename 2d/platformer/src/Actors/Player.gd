@@ -100,8 +100,8 @@ func get_direction():
 	)
 
 
-# This function calculates a new velocity whenever you need it.
-# It allows you to interrupt jumps.
+## This function calculates a new velocity whenever you need it.
+## It allows you to interrupt jumps.
 func calculate_move_velocity(
 		linear_velocity,
 		direction,
