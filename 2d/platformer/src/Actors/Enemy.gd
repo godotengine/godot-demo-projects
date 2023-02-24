@@ -45,9 +45,10 @@ func _physics_process(_delta):
 	if is_on_wall():
 		velocity.x *= -1
 
-	# We only update the y value of _velocity as we want to handle the horizontal movement ourselves.
 	# TODO: This information should be set to the CharacterBody properties instead of arguments.
 	move_and_slide()
+
+	apply_gravity(_delta)
 
 	# We flip the Sprite2D depending on which way the enemy is moving.
 	if velocity.x > 0:

@@ -68,6 +68,8 @@ func _physics_process(_delta):
 	move_and_slide()
 	#velocity, snap_vector, FLOOR_NORMAL, not is_on_platform, 4, 0.9, false
 
+	apply_gravity(_delta)
+
 	# When the character’s direction changes, we want to to scale the Sprite2D accordingly to flip it.
 	# This will make Robi face left or right depending on the direction you move.
 	if direction.x != 0:

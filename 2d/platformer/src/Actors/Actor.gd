@@ -10,8 +10,8 @@ extends CharacterBody2D
 
 const FLOOR_NORMAL = Vector2.UP
 
-# _physics_process is called after the inherited _physics_process function.
-# This allows the Player and Enemy scenes to be affected by gravity.
-func _physics_process(delta):
+# Apply gravity to current velocity
+# This should be called in _physics_process of child classes (Player and Enemy)
+# so they are affected by gravity.
+func apply_gravity(delta):
 	velocity.y += gravity * delta
-	move_and_slide()
