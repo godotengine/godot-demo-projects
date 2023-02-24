@@ -9,6 +9,10 @@ func _ready():
 		set_physics_process(false)
 		set_process_input(false)
 
+	# See godotengine/godot#73563, fetching the refresh rate on every frame may be slow on some platforms.
+	$Labels/Label_Screen0_RefreshRate.text = "Screen0 Refresh Rate: %.2f Hz" % DisplayServer.screen_get_refresh_rate()
+	if DisplayServer.get_screen_count() > 1:
+		$Labels/Label_Screen1_RefreshRate.text = "Screen1 Refresh Rate: %.2f Hz" % DisplayServer.screen_get_refresh_rate(1)
 
 func _physics_process(_delta):
 	var modetext = "Mode: "
@@ -37,7 +41,6 @@ func _physics_process(_delta):
 	$Labels/Label_Screen0_Resolution.text = str("Screen0 Resolution:\n", DisplayServer.screen_get_size())
 	$Labels/Label_Screen0_Position.text = str("Screen0 Position:\n", DisplayServer.screen_get_position())
 	$Labels/Label_Screen0_DPI.text = str("Screen0 DPI: ", DisplayServer.screen_get_dpi())
-	$Labels/Label_Screen0_RefreshRate.text = "Screen0 Refresh Rate: %.2f Hz" % DisplayServer.screen_get_refresh_rate()
 
 	if DisplayServer.get_screen_count() > 1:
 		$Buttons/Button_Screen0.show()
@@ -45,10 +48,9 @@ func _physics_process(_delta):
 		$Labels/Label_Screen1_Resolution.show()
 		$Labels/Label_Screen1_Position.show()
 		$Labels/Label_Screen1_DPI.show()
-		$Labels/Label_Screen1_Resolution.text = str("Screen1 Resolution:\n", DisplayServer.window_get_size(1))
+		$Labels/Label_Screen1_Resolution.text = str("Screen1 Resolution:\n", DisplayServer.screen_get_size(1))
 		$Labels/Label_Screen1_Position.text = str("Screen1 Position:\n", DisplayServer.screen_get_position(1))
 		$Labels/Label_Screen1_DPI.text = str("Screen1 DPI: ", DisplayServer.screen_get_dpi(1))
-		$Labels/Label_Screen1_RefreshRate.text = "Screen1 Refresh Rate: %.2f Hz" % DisplayServer.screen_get_refresh_rate(1)
 	else:
 		$Buttons/Button_Screen0.hide()
 		$Buttons/Button_Screen1.hide()
