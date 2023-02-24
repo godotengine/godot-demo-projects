@@ -127,6 +127,14 @@ func is_outside_map_bounds(point):
 	return point.x < 0 or point.y < 0 or point.x >= map_size.x or point.y >= map_size.y
 
 
+func check_start_position(world_start):
+	var start_point = world_to_map(world_start)
+	if start_point in obstacles:
+		return false
+
+	return true
+
+
 func get_astar_path(world_start, world_end):
 	self.path_start_position = world_to_map(world_start)
 	self.path_end_position = world_to_map(world_end)
