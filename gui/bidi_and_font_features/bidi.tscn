@@ -1,86 +1,100 @@
-[gd_scene load_steps=5 format=3 uid="uid://doa7j7q1j4p4e"]
+[gd_scene load_steps=13 format=3 uid="uid://doa7j7q1j4p4e"]
 
-[ext_resource type="Font" path="res://noto_font.tres" id="1"]
 [ext_resource type="Script" path="res://bidi.gd" id="2"]
+[ext_resource type="FontFile" uid="uid://dcyy0x2u3jocr" path="res://fonts/NotoSansThaiUI_Regular.ttf" id="2_plk2w"]
 [ext_resource type="Script" path="res://custom_st_parser.gd" id="3"]
-[ext_resource type="Font" path="res://lib_font.tres" id="4"]
+[ext_resource type="FontFile" uid="uid://bdex0ccrwre5y" path="res://fonts/NotoNaskhArabicUI_Regular.ttf" id="3_cf43x"]
+[ext_resource type="FontVariation" uid="uid://bymgwaapysw4i" path="res://lib_font.tres" id="4"]
+[ext_resource type="FontFile" uid="uid://cwer1pi5ka4io" path="res://fonts/NotoSansHebrew_Regular.ttf" id="4_03wxc"]
+[ext_resource type="FontFile" uid="uid://bic5b75wmaxwj" path="res://fonts/LinLibertine_R.otf" id="5_dd4o7"]
+
+[sub_resource type="FontVariation" id="FontVariation_pn5rb"]
+base_font = ExtResource("5_dd4o7")
+opentype_features = {
+1818847073: 0
+}
+
+[sub_resource type="FontVariation" id="FontVariation_dej54"]
+base_font = ExtResource("5_dd4o7")
+opentype_features = {
+1936548720: 1
+}
+
+[sub_resource type="FontVariation" id="FontVariation_cfykr"]
+base_font = ExtResource("5_dd4o7")
+opentype_features = {
+2053468783: 1
+}
+
+[sub_resource type="FontVariation" id="FontVariation_tbiyt"]
+base_font = ExtResource("5_dd4o7")
+opentype_features = {
+1718772067: 1
+}
+
+[sub_resource type="FontVariation" id="FontVariation_7cco7"]
+base_font = ExtResource("5_dd4o7")
+opentype_features = {
+1869509997: 1,
+1935764596: 1
+}
 
 [node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( "2" )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2")
 
 [node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme_override_fonts/font = ExtResource( "1" )
 theme_override_font_sizes/font_size = 14
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Line breaking and justification" type="Panel" parent="TabContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 38.0
-offset_right = -4.0
-offset_bottom = -4.0
-script = null
+layout_mode = 2
 
 [node name="LabelBrkInfo" type="Label" parent="TabContainer/Line breaking and justification"]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 30.0
 offset_right = 830.0
 offset_bottom = 52.0
 theme_override_colors/font_color = Color(0.419608, 0.831373, 0.505882, 1)
-theme_override_fonts/font = ExtResource( "1" )
 theme_override_font_sizes/font_size = 14
 text = "1. Line breaking and space justification."
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelTHNoBreak" type="Label" parent="TabContainer/Line breaking and justification"]
+layout_mode = 1
+anchors_preset = -1
 anchor_top = 0.000891266
 anchor_bottom = 0.000891266
 offset_left = 30.0
-offset_top = 69.5027
-offset_right = 988.0
-offset_bottom = 92.5027
-theme_override_fonts/font = ExtResource( "1" )
+offset_top = 69.4474
+offset_right = 1046.0
+offset_bottom = 92.4474
+theme_override_fonts/font = ExtResource("2_plk2w")
 theme_override_font_sizes/font_size = 14
 text = "ภาษาไทย หรือ ภาษาไทยกลาง เป็นภาษาราชการและภาษาประจำชาติของประเทศไทย ภาษาไทยเป็นภาษาในกลุ่มภาษาไทซึ่งเป็นกลุ่มย่อยของตระกูลภาษาขร้า-ไท"
 autowrap_mode = 3
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelTHBreak" type="Label" parent="TabContainer/Line breaking and justification"]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 100.0
-offset_right = 333.0
+offset_right = 331.0
 offset_bottom = 200.0
-theme_override_fonts/font = ExtResource( "1" )
+theme_override_fonts/font = ExtResource("2_plk2w")
 theme_override_font_sizes/font_size = 14
 text = "ภาษาไทย หรือ ภาษาไทยกลาง เป็นภาษาราชการและภาษาประจำชาติของประเทศไทย ภาษาไทยเป็นภาษาในกลุ่มภาษาไทซึ่งเป็นกลุ่มย่อยของตระกูลภาษาขร้า-ไท"
-align = 3
+horizontal_alignment = 3
 autowrap_mode = 3
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelJstInfo" type="Label" parent="TabContainer/Line breaking and justification"]
+layout_mode = 0
 anchor_top = 0.000891266
 anchor_bottom = 0.000891266
 offset_left = 30.0
@@ -88,538 +102,360 @@ offset_top = 213.5
 offset_right = 830.0
 offset_bottom = 236.5
 theme_override_colors/font_color = Color(0.420413, 0.832031, 0.504023, 1)
-theme_override_fonts/font = ExtResource( "1" )
 theme_override_font_sizes/font_size = 14
 text = "2. Kashida justification."
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelARNoJst2" type="Label" parent="TabContainer/Line breaking and justification"]
+layout_mode = 1
+anchors_preset = -1
 anchor_top = 0.000891266
 anchor_bottom = 0.000891266
 offset_left = 30.0
-offset_top = 248.5
-offset_right = 830.0
-offset_bottom = 271.5
-theme_override_fonts/font = ExtResource( "1" )
+offset_top = 248.447
+offset_right = 258.0
+offset_bottom = 271.447
+theme_override_fonts/font = ExtResource("3_cf43x")
 theme_override_font_sizes/font_size = 14
 text = "آنچ اندر وهم ناید آن شوم"
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 3
 
 [node name="LabelARJst" type="Label" parent="TabContainer/Line breaking and justification"]
+layout_mode = 0
 anchor_top = 0.000891266
 anchor_bottom = 0.000891266
 offset_left = 30.0
 offset_top = 273.5
 offset_right = 255.0
 offset_bottom = 296.5
-theme_override_fonts/font = ExtResource( "1" )
+theme_override_fonts/font = ExtResource("3_cf43x")
 theme_override_font_sizes/font_size = 14
 text = "آنچ اندر وهم ناید آن شوم"
-align = 3
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Text direction" type="Panel" parent="TabContainer"]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 38.0
-offset_right = -4.0
-offset_bottom = -4.0
-script = null
+layout_mode = 2
 
 [node name="LabelDirInfo" type="Label" parent="TabContainer/Text direction"]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 30.0
 offset_right = 830.0
 offset_bottom = 50.0
 theme_override_colors/font_color = Color(0.419608, 0.831373, 0.505882, 1)
-theme_override_fonts/font = ExtResource( "1" )
 theme_override_font_sizes/font_size = 14
 text = "1. Base text direction. (Left-to-right, Auto, Right-to-left)"
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LineEditL1" type="LineEdit" parent="TabContainer/Text direction"]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 60.0
 offset_right = 260.0
 offset_bottom = 90.0
-theme_override_fonts/font = ExtResource( "1" )
+theme_override_fonts/font = ExtResource("3_cf43x")
 theme_override_font_sizes/font_size = 14
 text = "Najaf (ٱلنَّجَف‎), also known as Baniqia."
 editable = false
 context_menu_enabled = false
 text_direction = 1
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LineEditA1" type="LineEdit" parent="TabContainer/Text direction"]
+layout_mode = 0
 offset_left = 270.0
 offset_top = 60.0
 offset_right = 500.0
 offset_bottom = 90.0
-theme_override_fonts/font = ExtResource( "1" )
+theme_override_fonts/font = ExtResource("3_cf43x")
 theme_override_font_sizes/font_size = 14
 text = "Najaf (ٱلنَّجَف‎), also known as Baniqia."
 editable = false
 context_menu_enabled = false
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LineEditR1" type="LineEdit" parent="TabContainer/Text direction"]
 modulate = Color(0.847059, 0.54902, 0.54902, 1)
+layout_mode = 0
 offset_left = 510.0
 offset_top = 60.0
 offset_right = 740.0
 offset_bottom = 90.0
-theme_override_fonts/font = ExtResource( "1" )
+theme_override_fonts/font = ExtResource("3_cf43x")
 theme_override_font_sizes/font_size = 14
 text = "Najaf (ٱلنَّجَف‎), also known as Baniqia."
 editable = false
 context_menu_enabled = false
 text_direction = 2
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LineEditL2" type="LineEdit" parent="TabContainer/Text direction"]
 modulate = Color(0.847059, 0.54902, 0.54902, 1)
+layout_mode = 0
 offset_left = 30.0
 offset_top = 99.5
 offset_right = 260.0
 offset_bottom = 129.5
-theme_override_fonts/font = ExtResource( "1" )
+theme_override_fonts/font = ExtResource("3_cf43x")
 theme_override_font_sizes/font_size = 14
 text = "الإنجليزية أو الإنغليزية (بالإنجليزية: English)‏،"
 editable = false
 context_menu_enabled = false
 text_direction = 1
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LineEditA2" type="LineEdit" parent="TabContainer/Text direction"]
+layout_mode = 0
 offset_left = 270.0
 offset_top = 100.0
 offset_right = 500.0
 offset_bottom = 130.0
-theme_override_fonts/font = ExtResource( "1" )
+theme_override_fonts/font = ExtResource("3_cf43x")
 theme_override_font_sizes/font_size = 14
 text = "الإنجليزية أو الإنغليزية (بالإنجليزية: English)‏،"
 editable = false
 context_menu_enabled = false
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LineEditR2" type="LineEdit" parent="TabContainer/Text direction"]
+layout_mode = 0
 offset_left = 510.0
 offset_top = 100.0
 offset_right = 740.0
 offset_bottom = 130.0
-theme_override_fonts/font = ExtResource( "1" )
+theme_override_fonts/font = ExtResource("3_cf43x")
 theme_override_font_sizes/font_size = 14
 text = "الإنجليزية أو الإنغليزية (بالإنجليزية: English)‏،"
 editable = false
 context_menu_enabled = false
 text_direction = 2
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelSTInfo" type="Label" parent="TabContainer/Text direction"]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 150.0
 offset_right = 830.0
 offset_bottom = 170.0
 theme_override_colors/font_color = Color(0.419608, 0.831373, 0.505882, 1)
-theme_override_fonts/font = ExtResource( "1" )
 theme_override_font_sizes/font_size = 14
 text = "2. BiDi override for structured text (select item in the list to test)."
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Tree" type="Tree" parent="TabContainer/Text direction"]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 180.0
 offset_right = 430.0
 offset_bottom = 340.0
-theme_override_fonts/title_button_font = ExtResource( "1" )
-theme_override_fonts/font = ExtResource( "1" )
+theme_override_fonts/font = ExtResource("4_03wxc")
 theme_override_font_sizes/font_size = 14
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelNoST" type="Label" parent="TabContainer/Text direction"]
+layout_mode = 0
 offset_left = 460.0
 offset_top = 195.0
 offset_right = 560.0
 offset_bottom = 215.0
-theme_override_fonts/font = ExtResource( "1" )
 theme_override_font_sizes/font_size = 14
 text = "Default BiDi:"
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelST" type="Label" parent="TabContainer/Text direction"]
+layout_mode = 0
 offset_left = 460.0
 offset_top = 238.5
 offset_right = 560.0
 offset_bottom = 258.5
-theme_override_fonts/font = ExtResource( "1" )
 theme_override_font_sizes/font_size = 14
 text = "\"File\" override:"
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LineEditNoST" type="LineEdit" parent="TabContainer/Text direction"]
+layout_mode = 0
 offset_left = 582.0
 offset_top = 188.0
 offset_right = 882.0
 offset_bottom = 218.0
-theme_override_fonts/font = ExtResource( "1" )
+theme_override_fonts/font = ExtResource("4_03wxc")
 theme_override_font_sizes/font_size = 14
 editable = false
 context_menu_enabled = false
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LineEditST" type="LineEdit" parent="TabContainer/Text direction"]
+layout_mode = 0
 offset_left = 582.0
 offset_top = 236.0
 offset_right = 882.0
 offset_bottom = 266.0
-theme_override_fonts/font = ExtResource( "1" )
+theme_override_fonts/font = ExtResource("4_03wxc")
 theme_override_font_sizes/font_size = 14
 editable = false
 context_menu_enabled = false
 structured_text_bidi_override = 2
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelSTCustomInfo" type="Label" parent="TabContainer/Text direction"]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 358.0
 offset_right = 830.0
 offset_bottom = 381.0
 theme_override_colors/font_color = Color(0.419608, 0.831373, 0.505882, 1)
-theme_override_fonts/font = ExtResource( "1" )
 theme_override_font_sizes/font_size = 14
-text = "3. Custom BiDi override script (split by \":\" and reverse the order, see \"cutom_st_parser.gd\"):"
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
+text = "3. Custom BiDi override script (split by \":\" and reverse the order, see \"custom_st_parser.gd\"):"
 
 [node name="LineEditCustomSTSource" type="LineEdit" parent="TabContainer/Text direction"]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 396.0
 offset_right = 330.0
 offset_bottom = 426.0
-theme_override_fonts/font = ExtResource( "1" )
 theme_override_font_sizes/font_size = 14
 text = "first:second:third"
 context_menu_enabled = false
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LineEditCustomSTDst" type="LineEdit" parent="TabContainer/Text direction"]
+layout_mode = 0
 offset_left = 342.0
 offset_top = 396.0
 offset_right = 642.0
 offset_bottom = 426.0
-theme_override_fonts/font = ExtResource( "1" )
 theme_override_font_sizes/font_size = 14
 text = "first:second:third"
 context_menu_enabled = false
 structured_text_bidi_override = 6
-structured_text_bidi_override_options = []
-script = ExtResource( "3" )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("3")
 
 [node name="Font features" type="Panel" parent="TabContainer"]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 38.0
-offset_right = -4.0
-offset_bottom = -4.0
-script = null
+layout_mode = 2
 
 [node name="LabelDisplay1" type="Label" parent="TabContainer/Font features"]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 30.0
 offset_right = 330.0
 offset_bottom = 70.0
-theme_override_fonts/font = ExtResource( "4" )
+theme_override_fonts/font = ExtResource("4")
 theme_override_font_sizes/font_size = 24
 text = "Que fin after 019 1/2 1/3 &, h, β, θ,"
-valign = 1
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelInfo1" type="Label" parent="TabContainer/Font features"]
+layout_mode = 0
 offset_left = 446.0
 offset_top = 30.0
 offset_right = 746.0
 offset_bottom = 70.0
-theme_override_fonts/font = ExtResource( "4" )
-theme_override_font_sizes/font_size = 16
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 18
 text = "default, no features"
-valign = 1
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelDisplay2" type="Label" parent="TabContainer/Font features"]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 69.5
 offset_right = 330.0
 offset_bottom = 109.5
-theme_override_fonts/font = ExtResource( "4" )
+theme_override_fonts/font = SubResource("FontVariation_pn5rb")
 theme_override_font_sizes/font_size = 24
 text = "Que fin after 019 1/2 1/3 &, h, β, θ,"
-valign = 1
-structured_text_bidi_override_options = []
-opentype_features/standard_ligatures = null
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelInfo2" type="Label" parent="TabContainer/Font features"]
+layout_mode = 0
 offset_left = 446.0
 offset_top = 70.0
 offset_right = 746.0
 offset_bottom = 110.0
-theme_override_fonts/font = ExtResource( "4" )
-theme_override_font_sizes/font_size = 16
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 18
 text = "standard_ligatures=0 (disabled)"
-valign = 1
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelDisplay3" type="Label" parent="TabContainer/Font features"]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 109.5
 offset_right = 330.0
 offset_bottom = 149.5
-theme_override_fonts/font = ExtResource( "4" )
+theme_override_fonts/font = SubResource("FontVariation_dej54")
 theme_override_font_sizes/font_size = 24
 text = "Que fin after 019 1/2 1/3 &, h, β, θ,"
-valign = 1
-structured_text_bidi_override_options = []
-opentype_features/small_capitals = 1.0
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelInfo3" type="Label" parent="TabContainer/Font features"]
+layout_mode = 0
 offset_left = 446.0
 offset_top = 110.0
 offset_right = 746.0
 offset_bottom = 150.0
-theme_override_fonts/font = ExtResource( "4" )
-theme_override_font_sizes/font_size = 16
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 18
 text = "small_capitals=1"
-valign = 1
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelDisplay4" type="Label" parent="TabContainer/Font features"]
+layout_mode = 0
 offset_left = 31.0
 offset_top = 150.5
 offset_right = 331.0
 offset_bottom = 190.5
-theme_override_fonts/font = ExtResource( "4" )
+theme_override_fonts/font = SubResource("FontVariation_cfykr")
 theme_override_font_sizes/font_size = 24
 text = "Que fin after 019 1/2 1/3 &, h, β, θ,"
-valign = 1
-structured_text_bidi_override_options = []
-opentype_features/slashed_zero = 1.0
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelInfo4" type="Label" parent="TabContainer/Font features"]
+layout_mode = 0
 offset_left = 446.0
 offset_top = 150.0
 offset_right = 746.0
 offset_bottom = 190.0
-theme_override_fonts/font = ExtResource( "4" )
-theme_override_font_sizes/font_size = 16
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 18
 text = "slashed_zero=1"
-valign = 1
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelDisplay5" type="Label" parent="TabContainer/Font features"]
+layout_mode = 0
 offset_left = 31.0
 offset_top = 190.5
 offset_right = 331.0
 offset_bottom = 230.5
-theme_override_fonts/font = ExtResource( "4" )
+theme_override_fonts/font = SubResource("FontVariation_tbiyt")
 theme_override_font_sizes/font_size = 24
 text = "Que fin after 019 1/2 1/3 &, h, β, θ,"
-valign = 1
-structured_text_bidi_override_options = []
-opentype_features/fractions = 1.0
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelInfo5" type="Label" parent="TabContainer/Font features"]
+layout_mode = 0
 offset_left = 446.0
 offset_top = 190.0
 offset_right = 918.609
 offset_bottom = 230.0
-theme_override_fonts/font = ExtResource( "4" )
-theme_override_font_sizes/font_size = 16
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 18
 text = "fractions"
-valign = 1
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelDisplay6" type="Label" parent="TabContainer/Font features"]
+layout_mode = 0
 offset_left = 31.0
 offset_top = 230.5
 offset_right = 331.0
 offset_bottom = 270.5
-theme_override_fonts/font = ExtResource( "4" )
+theme_override_fonts/font = SubResource("FontVariation_7cco7")
 theme_override_font_sizes/font_size = 24
 text = "Que fin after 019 1/2 1/3 &, h, β, θ,"
-valign = 1
-structured_text_bidi_override_options = []
-opentype_features/oldstyle_figures = 1.0
-opentype_features/stylistic_alternates = 1.0
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelInfo6" type="Label" parent="TabContainer/Font features"]
+layout_mode = 0
 offset_left = 446.0
 offset_top = 230.0
 offset_right = 918.609
 offset_bottom = 270.0
-theme_override_fonts/font = ExtResource( "4" )
-theme_override_font_sizes/font_size = 16
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 18
 text = "oldstyle_figures=1, stylistic_alternates=1"
-valign = 1
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Font features"]
-offset_left = 33.0
-offset_top = 287.0
-offset_right = 965.0
-offset_bottom = 383.0
-theme_override_fonts/normal_font = ExtResource( "4" )
-text = "
-Que fin 1/3 0 Que fin 1/3 0 Que fin 1/3 0
-"
-bbcode_enabled = true
-custom_effects = []
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="TabContainer/Font features"]
+layout_mode = 1
+anchors_preset = -1
 anchor_left = -0.000334372
 anchor_right = -0.000334372
-offset_left = 33.3397
-offset_top = 407.0
-offset_right = 992.34
-offset_bottom = 490.0
-theme_override_fonts/normal_font = ExtResource( "4" )
-text = "[font_size=24]
-Que fin 1/3 0 [opentype_features=liga=0]Que fin 1/3 0[/opentype_features] [opentype_features=frac=1,zero]Que fin 1/3 0[/opentype_features]
-[/font_size]"
-custom_effects = []
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_left = 33.3852
+offset_top = 327.0
+offset_right = 992.385
+offset_bottom = 488.0
+theme_override_fonts/normal_font = ExtResource("4")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "RichTextLabel BBCode:
+[font_size=24]
+Que fin 1/3 0
+[opentype_features=liga=0]Que fin 1/3 0[/opentype_features] [color=#fffa](liga=0 - disables ligatures)[/color]
+[opentype_features=frac=1,zero]Que fin 1/3 0[/opentype_features] [color=#fffa](frac=1,zero - fractions and slashed zero)[/color][/font_size]"
 
 [connection signal="item_selected" from="TabContainer/Text direction/Tree" to="." method="_on_Tree_item_selected"]
 [connection signal="text_changed" from="TabContainer/Text direction/LineEditCustomSTSource" to="." method="_on_LineEditCustomSTSource_text_changed"]

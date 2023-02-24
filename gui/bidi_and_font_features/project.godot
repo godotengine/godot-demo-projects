@@ -6,10 +6,23 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
-config/name="BiDi and font features demo."
+config/name="BiDi and Font Features"
 run/main_scene="res://bidi.tscn"
+config/features=PackedStringArray("4.0")
+run/low_processor_mode=true
 config/icon="res://icon.png"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.2, 0.2, 0.2, 1)
