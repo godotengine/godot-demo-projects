@@ -20,7 +20,7 @@ var _active = false:
 		_active = value
 		set_active(value)
 
-func _ready():
+func _enter_tree():
 	if start_state.is_empty():
 		start_state = get_child(0).get_path()
 	for child in get_children():
@@ -31,7 +31,7 @@ func _ready():
 
 
 func initialize(initial_state):
-	set_active(true)
+	_active = true
 	states_stack.push_front(get_node(initial_state))
 	current_state = states_stack[0]
 	current_state.enter()
