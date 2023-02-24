@@ -1,63 +1,29 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://b3push1ggl30f"]
 
-[ext_resource path="res://assets/theme/user_interface.tres" type="Theme" id=1]
-[ext_resource path="res://assets/art/coin/coin.png" type="Texture2D" id=2]
-[ext_resource path="res://src/UserInterface/CoinsCounter.gd" type="Script" id=3]
+[ext_resource type="Theme" uid="uid://chubprkmexsng" path="res://assets/theme/user_interface.tres" id="1"]
+[ext_resource type="Script" path="res://src/UserInterface/CoinsCounter.gd" id="3"]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color(0, 0, 0, 0.5)
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2(0, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 2 )
-region = Rect2(8, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
-region = Rect2(16, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 2 )
-region = Rect2(24, 0, 8, 8)
-
-[sub_resource type="SpriteFrames" id=6]
-animations = [{
-"sprite_frames": [SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 4 ), SubResource( 3 )],
-"loop": true,
-"name": "coin_spinning",
-"speed": 6.5
-}]
+[sub_resource type="SpriteFrames" id="6"]
+animations = []
 
 [node name="CoinsCounter" type="Panel"]
+custom_minimum_size = Vector2(100, 45)
 offset_left = 5.0
 offset_top = 5.0
 offset_right = 100.0
 offset_bottom = 45.0
-custom_minimum_size = Vector2(100, 45)
-theme = ExtResource( 1 )
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme = ExtResource("1")
+script = ExtResource("3")
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -8.0
 text = "100"
-align = 2
-valign = 1
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(21.5, 22.5)
 scale = Vector2(4.375, 4.375)
-sprite_frames = SubResource( 6 )
-animation = "coin_spinning"
+sprite_frames = SubResource("6")
+animation = &"coin_spinning"
