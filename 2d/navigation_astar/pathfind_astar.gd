@@ -130,6 +130,7 @@ func check_start_position(world_start):
 	var start_point = world_to_map(world_start)
 	if start_point in obstacles:
 		return false
+
 	return true
 
 
