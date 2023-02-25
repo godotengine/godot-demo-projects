@@ -1,0 +1,190 @@
+[gd_scene load_steps=17 format=3 uid="uid://bshkqyd3jv7xc"]
+
+[ext_resource type="Script" path="res://camera.gd" id="1_yepcp"]
+[ext_resource type="Script" path="res://tree_clusters.gd" id="2_ydews"]
+[ext_resource type="Script" path="res://fps_label.gd" id="3_vep8a"]
+
+[sub_resource type="Gradient" id="Gradient_hp0a8"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6fgiw"]
+gradient = SubResource("Gradient_hp0a8")
+width = 128
+fill = 1
+fill_from = Vector2(0.5, 0.38)
+fill_to = Vector2(0.1, 0.4)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ymxen"]
+sky_top_color = Color(0.385, 0.4125, 0.55, 1)
+sky_horizon_color = Color(0.6432, 0.647667, 0.67, 1)
+sky_cover = SubResource("GradientTexture2D_6fgiw")
+sky_cover_modulate = Color(1, 0.776471, 0.129412, 1)
+ground_horizon_color = Color(0.643137, 0.647059, 0.670588, 1)
+sun_angle_max = 40.0
+sun_curve = 0.235375
+
+[sub_resource type="Sky" id="Sky_tq5wf"]
+sky_material = SubResource("ProceduralSkyMaterial_ymxen")
+
+[sub_resource type="Environment" id="Environment_w7n8k"]
+background_mode = 2
+sky = SubResource("Sky_tq5wf")
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.75
+tonemap_mode = 3
+tonemap_white = 6.0
+fog_enabled = true
+fog_light_color = Color(0.517647, 0.552941, 0.607843, 1)
+fog_density = 0.001
+fog_aerial_perspective = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_qxf28"]
+lightmap_size_hint = Vector2i(327684, 163856)
+add_uv2 = true
+size = Vector3(32768, 1, 32768)
+subdivide_width = 15
+subdivide_depth = 15
+
+[sub_resource type="Gradient" id="Gradient_urgs4"]
+offsets = PackedFloat32Array(0, 0.243902, 0.357724, 0.617886, 1)
+colors = PackedColorArray(0.164706, 0.101961, 0, 1, 0.123774, 0.283202, 0.173896, 1, 0.354642, 0.374758, 0.206693, 1, 0.490333, 0.5, 0.48, 1, 0.1961, 0.37, 0.271457, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_g0yjr"]
+fractal_octaves = 9
+fractal_lacunarity = 2.717
+fractal_gain = 0.6
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0q3y6"]
+width = 1024
+height = 1024
+seamless = true
+color_ramp = SubResource("Gradient_urgs4")
+noise = SubResource("FastNoiseLite_g0yjr")
+
+[sub_resource type="Gradient" id="Gradient_63ydg"]
+colors = PackedColorArray(0, 0.0431373, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dddeo"]
+noise_type = 0
+fractal_type = 3
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_j3exn"]
+seamless = true
+color_ramp = SubResource("Gradient_63ydg")
+noise = SubResource("FastNoiseLite_dddeo")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lf55d"]
+albedo_texture = SubResource("NoiseTexture2D_0q3y6")
+detail_enabled = true
+detail_uv_layer = 1
+detail_albedo = SubResource("NoiseTexture2D_j3exn")
+uv1_scale = Vector3(2048, 1536, 1)
+uv2_scale = Vector3(64, 32, 1)
+texture_filter = 5
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.292632, 0.955563, -0.0355886, -0.845857, -0.241319, 0.4757, 0.445973, 0.169308, 0.878887, 0, 11, 0)
+shadow_enabled = true
+shadow_bias = 0.05
+shadow_blur = 1.5
+directional_shadow_max_distance = 200.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w7n8k")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_qxf28")
+surface_material_override/0 = SubResource("StandardMaterial3D_lf55d")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 200)
+fov = 74.0
+script = ExtResource("1_yepcp")
+
+[node name="TreeClusters" type="Node3D" parent="."]
+script = ExtResource("2_ydews")
+
+[node name="Loading" type="Control" parent="TreeClusters"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="TreeClusters/Loading"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="Label" type="Label" parent="TreeClusters/Loading"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -170.5
+offset_top = -24.0
+offset_right = 170.5
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "Loading, please wait…"
+
+[node name="VisibilityRanges" type="Label" parent="TreeClusters"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 208.0
+offset_bottom = 42.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Visibility ranges: Enabled"
+
+[node name="FadeMode" type="Label" parent="TreeClusters"]
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 208.0
+offset_bottom = 74.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Fade mode: Enabled (Transparency)"
+
+[node name="FPSLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -214.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 39.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+horizontal_alignment = 2
+script = ExtResource("3_vep8a")
+
+[node name="Help" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -39.0
+offset_right = 56.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "L: Toggle visibility ranges
+F: Toggle fade mode"
