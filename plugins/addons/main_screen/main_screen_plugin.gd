@@ -29,7 +29,7 @@ func _make_visible(visible):
 
 # If your plugin doesn't handle any node types, you can remove this method.
 func _handles(object):
-	return object is preload("res://addons/main_screen/handled_by_main_screen.gd")
+	return is_instance_of(object, preload("res://addons/main_screen/handled_by_main_screen.gd"))
 
 
 func _get_plugin_name():
