@@ -65,7 +65,6 @@ func _on_peers_pressed():
 
 
 func _on_ping_pressed():
-	randomize()
 	ping.rpc(randf())
 
 

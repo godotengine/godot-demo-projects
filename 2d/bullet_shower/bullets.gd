@@ -24,8 +24,6 @@ class Bullet:
 
 
 func _ready():
-	randomize()
-
 	shape = PhysicsServer2D.circle_shape_create()
 	# Set the collision shape's radius for each bullet in pixels.
 	PhysicsServer2D.shape_set_data(shape, 8)
