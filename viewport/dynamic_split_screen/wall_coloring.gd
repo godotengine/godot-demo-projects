@@ -5,7 +5,6 @@ extends Node3D
 # To use, attach this script to the "Walls" node.
 
 func _ready():
-	randomize()
 	var walls = get_tree().get_nodes_in_group("walls")
 	for wall in walls:
 		var material = StandardMaterial3D.new()
