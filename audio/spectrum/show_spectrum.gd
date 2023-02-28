@@ -4,7 +4,7 @@ const VU_COUNT = 16
 const FREQ_MAX = 11050.0
 
 const WIDTH = 800
-const HEIGHT = 200
+const HEIGHT = 250
 
 const MIN_DB = 60
 
@@ -30,6 +30,20 @@ func _draw():
 				2.0,
 				true
 		)
+
+		# Draw a reflection of the bars with lower opacity.
+		draw_rect(
+				Rect2(w * i, HEIGHT, w - 2, height),
+				Color.from_hsv(float(VU_COUNT * 0.6 + i * 0.5) / VU_COUNT, 0.5, 0.6) * Color(1, 1, 1, 0.125)
+		)
+		draw_line(
+				Vector2(w * i, HEIGHT + height),
+				Vector2(w * i + w - 2, HEIGHT + height),
+				Color.from_hsv(float(VU_COUNT * 0.6 + i * 0.5) / VU_COUNT, 0.5, 1.0) * Color(1, 1, 1, 0.125),
+				2.0,
+				true
+		)
+
 		prev_hz = hz
 
 
