@@ -81,6 +81,10 @@ func _on_Host_pressed():
 
 
 func _on_Disconnect_pressed():
+	if peer is WebSocketServer:
+		peer.stop()
+	elif peer is WebSocketClient:
+		peer.disconnect_from_host()
 	_close_network()
 
 
