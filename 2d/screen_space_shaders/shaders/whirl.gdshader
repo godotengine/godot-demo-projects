@@ -1,5 +1,6 @@
 shader_type canvas_item;
 
+uniform sampler2D screen_texture : hint_screen_texture, filter_linear_mipmap;
 uniform float rotation = 3.0;
 
 void fragment() {
@@ -9,5 +10,5 @@ void fragment() {
 	mat2 rot = mat2(vec2(cos(angle), -sin(angle)), vec2(sin(angle), cos(angle)));
 	rel = rot * rel;
 	uv = clamp(rel + vec2(0.5,0.5), vec2(0.0, 0.0), vec2(1.0, 1.0));
-	COLOR.rgb = textureLod(SCREEN_TEXTURE, uv, 0.0).rgb;
+	COLOR.rgb = textureLod(screen_texture, uv, 0.0).rgb;
 }
