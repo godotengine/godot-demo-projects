@@ -6,9 +6,13 @@ be used with [Godot Engine](https://godotengine.org), the open source
 
 ## Godot versions
 
-- The [`master`](https://github.com/godotengine/godot-demo-projects) branch is compatible with the latest Godot version (currently 4.0 alpha).
-- If you are using an older version of Godot, use the appropriate branch for your Godot version:
-
+- The [`master`](https://github.com/godotengine/godot-demo-projects) branch is compatible with Godot's `master` development branch (next 4.x release).
+- The [`3.x`](https://github.com/godotengine/godot-demo-projects/tree/3.x) branch is compatible with Godot's `3.x` development branch (next 3.x release).
+- The other branches are compatible with the matching stable versions of Godot:
+  - [`4.0`](https://github.com/godotengine/godot-demo-projects/tree/4.0)
+    branch for Godot 4.0.x.
+  - [`3.5`](https://github.com/godotengine/godot-demo-projects/tree/3.5)
+    branch for Godot 3.5.x.
   - [`3.4`](https://github.com/godotengine/godot-demo-projects/tree/3.4)
     branch for Godot 3.4.x.
   - [`3.3`](https://github.com/godotengine/godot-demo-projects/tree/3.3)
