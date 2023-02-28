@@ -36,7 +36,7 @@ func _unhandled_input(event):
 	# Check if the event is a non-mouse/non-touch event
 	var is_mouse_event = false
 	for mouse_event in [InputEventMouseButton, InputEventMouseMotion, InputEventScreenDrag, InputEventScreenTouch]:
-		if event is mouse_event:
+		if is_instance_of(event, mouse_event):
 			is_mouse_event = true
 			break
 
