@@ -3,48 +3,28 @@ using Godot;
 public partial class Player : Area2D
 {
     [Signal]
-    public delegate void Hit();
+    public delegate void HitEventHandler();
 
     [Export]
-    public int speed = 400; // How fast the player will move (pixels/sec).
+    public int Speed = 400; // How fast the player will move (pixels/sec).
 
-    public Vector2 screenSize; // Size of the game window.
+    public Vector2 ScreenSize; // Size of the game window.
 
     public override void _Ready()
     {
-        screenSize = GetViewportRect().Size;
+        ScreenSize = GetViewportRect().Size;
         Hide();
     }
 
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
-        var velocity = Vector2.Zero; // The player's movement vector.
-
-        if (Input.IsActionPressed("move_right"))
-        {
-            velocity.x += 1;
-        }
-
-        if (Input.IsActionPressed("move_left"))
-        {
-            velocity.x -= 1;
-        }
-
-        if (Input.IsActionPressed("move_down"))
-        {
-            velocity.y += 1;
-        }
-
-        if (Input.IsActionPressed("move_up"))
-        {
-            velocity.y -= 1;
-        }
+        var velocity = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
         var animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
         if (velocity.Length() > 0)
         {
-            velocity = velocity.Normalized() * speed;
+            velocity = velocity.Normalized() * Speed;
             animatedSprite.Play();
         }
         else
@@ -52,23 +32,23 @@ public partial class Player : Area2D
             animatedSprite.Stop();
         }
 
-        Position += velocity * delta;
+        Position += velocity * (float)delta;
         Position = new Vector2(
-            x: Mathf.Clamp(Position.x, 0, screenSize.x),
-            y: Mathf.Clamp(Position.y, 0, screenSize.y)
+            x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
+            y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
         );
 
-        if (velocity.x != 0)
+        if (velocity.X != 0)
         {
             animatedSprite.Animation = "right";
             // See the note below about boolean assignment.
-            animatedSprite.FlipH = velocity.x < 0;
+            animatedSprite.FlipH = velocity.X < 0;
             animatedSprite.FlipV = false;
         }
-        else if (velocity.y != 0)
+        else if (velocity.Y != 0)
         {
             animatedSprite.Animation = "up";
-            animatedSprite.FlipV = velocity.y > 0;
+            animatedSprite.FlipV = velocity.Y > 0;
         }
     }
 
@@ -76,13 +56,14 @@ public partial class Player : Area2D
     {
         Position = pos;
         Show();
-        GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+        // Must be deferred as we can't change physics properties on a physics callback.
+        GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", false);
     }
 
     public void OnPlayerBodyEntered(PhysicsBody2D body)
     {
         Hide(); // Player disappears after being hit.
-        EmitSignal(nameof(Hit));
+        EmitSignal(SignalName.Hit);
         // Must be deferred as we can't change physics properties on a physics callback.
         GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
     }
