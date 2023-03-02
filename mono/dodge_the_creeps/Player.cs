@@ -32,7 +32,7 @@ public partial class Player : Area2D
         }
 
         Position += velocity * (float)delta;
-        Position = Position.Clamp(Position, ScreenSize);
+        Position = Position.Clamp(Vector2.Zero, ScreenSize);
 
         if (velocity.X != 0)
         {
