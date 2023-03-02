@@ -12,7 +12,9 @@ This project showcases the various 3D antialiasing techniques supported by Godot
   blurs the image (but less so than FXAA).
   - Antialiasing quality is worse on fast-moving objects than other methods,
 	especially at lower framerates since the TAA won't have enough time to
-	converge on those objects.
+	converge on those objects. You can use the FPS limit setting provided
+	when TAA is enabled to compare quality between different framerates
+	(provided your graphics card can keep up).
   - Can introduce ghosting artifacts on moving objects, especially if motion
 	vectors are not correctly generated from a given material shader.
 - **Supersampling (SSAA):** The highest-quality technique, but also the most
@@ -27,13 +29,22 @@ Godot allows using multiple antialiasing techniques at the same time. This can
 be useful to obtain the best possible quality, or to find a better performance
 tradeoff.
 
+A resolution scale slider is also provided. When set below 100%,
+AMD FidelityFX Super Resolution 1.0 upscaling can be enabled to improve visuals
+compared to traditional bilinear filtering.
+
+> **Note**
+>
+> AMD FidelityFX Super Resolution 1.0 is **not** an antialiasing technique.
+> It works best when used at the same time as another antialiasing method.
+
 Language: GDScript
 
-Renderer: Vulkan Clustered
+Renderer: Forward Plus
 
 ## Screenshots
 
-![Screenshot](screenshots/3d_anti_aliasing.png)
+![Screenshot](screenshots/antialiasing.webp)
 
 ## Licenses
 
