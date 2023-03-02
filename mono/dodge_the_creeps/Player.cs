@@ -5,8 +5,7 @@ public partial class Player : Area2D
     [Signal]
     public delegate void HitEventHandler();
 
-    [Export]
-    public int Speed { get; set; } = 400; // How fast the player will move (pixels/sec).
+    [Export] public int Speed { get; set; } = 400; // How fast the player will move (pixels/sec).
 
     public Vector2 ScreenSize; // Size of the game window.
 
@@ -33,10 +32,7 @@ public partial class Player : Area2D
         }
 
         Position += velocity * (float)delta;
-        Position = new Vector2(
-            x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
-            y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
-        );
+        Position = Position.Clamp(Position, ScreenSize);
 
         if (velocity.X != 0)
         {
