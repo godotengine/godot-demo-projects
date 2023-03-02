@@ -39,7 +39,6 @@ public partial class HUD : CanvasLayer
         EmitSignal(SignalName.StartGame);
     }
 
-
     public void OnMessageTimerTimeout()
     {
         GetNode<Label>("MessageLabel").Hide();
