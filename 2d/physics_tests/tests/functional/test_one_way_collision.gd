@@ -49,10 +49,10 @@ const TEST_ALL_ANGLES_MAX = 344.0
 
 var _rigid_body_template = null
 var _character_body_template = null
-var _moving_body : PhysicsBody2D = null
+var _moving_body: PhysicsBody2D = null
 
 var _platform_template = null
-var _platform_body : PhysicsBody2D = null
+var _platform_body: PhysicsBody2D = null
 var _platform_velocity = Vector2.ZERO
 
 @onready var _target_area = $TargetArea2D

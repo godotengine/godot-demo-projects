@@ -1,7 +1,7 @@
 extends Node
 
 @export
-var motion = Vector2() :
+var motion = Vector2():
 	set(value):
 		# This will be sent by players, make sure values are within limits.
 		motion = clamp(value, Vector2(-1, -1), Vector2(1, 1))

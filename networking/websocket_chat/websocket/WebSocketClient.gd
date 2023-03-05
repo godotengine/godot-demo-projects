@@ -1,9 +1,9 @@
 extends Node
 class_name WebSocketClient
 
-@export var handshake_headers : PackedStringArray
-@export var supported_protocols : PackedStringArray
-@export var tls_trusted_certificate : X509Certificate
+@export var handshake_headers: PackedStringArray
+@export var supported_protocols: PackedStringArray
+@export var tls_trusted_certificate: X509Certificate
 @export var tls_verify := true
 
 
