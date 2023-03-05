@@ -1,6 +1,6 @@
 extends ColorPickerButton
 
-func get_drag_data(_pos):
+func _get_drag_data(_pos):
 	# Use another colorpicker as drag preview.
 	var cpb = ColorPickerButton.new()
 	cpb.color = color
@@ -10,9 +10,9 @@ func get_drag_data(_pos):
 	return color
 
 
-func can_drop_data(_pos, data):
+func _can_drop_data(_pos, data):
 	return typeof(data) == TYPE_COLOR
 
 
-func drop_data(_pos, data):
+func _drop_data(_pos, data):
 	color = data
