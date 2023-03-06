@@ -26,7 +26,7 @@ const OPTION_MOVE_CHARACTER_CONSTANT_SPEED = "Move Options/Use constant speed (C
 @export var _jump_force = 1000.0
 @export var _snap_distance = 0.0
 @export var _floor_max_angle = 45.0
-@export var _body_type : E_BodyType = 0
+@export var _body_type: E_BodyType = 0
 
 @onready var options = $Options
 
@@ -35,12 +35,12 @@ var _use_stop_on_slope = true
 var _use_floor_only = true
 var _use_constant_speed = false
 
-var _body_parent : Node = null
+var _body_parent: Node = null
 var _character_body_template = null
 var _character_body_ray_template = null
 var _rigid_body_template = null
 var _rigid_body_ray_template = null
-var _moving_body : PhysicsBody2D = null
+var _moving_body: PhysicsBody2D = null
 
 
 func _ready():

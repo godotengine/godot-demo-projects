@@ -25,7 +25,7 @@ var _body_scene = {}
 var _key_list = []
 var _current_body_index = 0
 var _current_body_key = ""
-var _current_body : PhysicsBody3D = null
+var _current_body: PhysicsBody3D = null
 var _body_type = ["CharacterBody3D", "RigidBody"]
 
 var _shapes = {}

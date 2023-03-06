@@ -9,7 +9,7 @@ class TestData:
 var _test_list = []
 
 var _current_test = null
-var _current_test_scene : Node = null
+var _current_test_scene: Node = null
 
 
 func _ready():

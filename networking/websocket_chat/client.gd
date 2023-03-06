@@ -1,6 +1,6 @@
 extends Control
 
-@onready var _client : WebSocketClient = $WebSocketClient
+@onready var _client: WebSocketClient = $WebSocketClient
 @onready var _log_dest = $Panel/VBoxContainer/RichTextLabel
 @onready var _line_edit = $Panel/VBoxContainer/Send/LineEdit
 @onready var _host = $Panel/VBoxContainer/Connect/Host

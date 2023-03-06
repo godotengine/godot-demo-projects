@@ -67,4 +67,4 @@ func _import(source_file, save_path, options, r_platform_variants, r_gen_files):
 
 	material.albedo_color = color
 
-	return ResourceSaver.save(material ,"%s.%s" % [save_path, _get_save_extension()])
+	return ResourceSaver.save(material, "%s.%s" % [save_path, _get_save_extension()])

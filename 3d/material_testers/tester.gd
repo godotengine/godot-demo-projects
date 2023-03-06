@@ -88,7 +88,7 @@ func update_gui():
 
 
 func _on_bg_item_selected(index):
-	var sky_material : PanoramaSkyMaterial = $WorldEnvironment.environment.sky.sky_material
+	var sky_material: PanoramaSkyMaterial = $WorldEnvironment.environment.sky.sky_material
 
 	sky_material.panorama = load(backgrounds[index].path)
 
