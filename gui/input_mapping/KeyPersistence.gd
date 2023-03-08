@@ -16,11 +16,10 @@ func _ready() -> void:
 
 
 func load_keymap() -> void:
-	var file
 	if not FileAccess.file_exists(keymaps_path):
 		save_keymap() # There is no save file yet, so let's create one.
 		return
-	file = FileAccess.open(keymaps_path, FileAccess.READ)
+	var file = FileAccess.open(keymaps_path, FileAccess.READ)
 	var temp_keymap = file.get_var(true) as Dictionary
 	file.close()
 	# We don't just replace the keymaps dictionary, because if you
