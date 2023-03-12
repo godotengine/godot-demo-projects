@@ -3,9 +3,10 @@
 # because the execution order is different and otherwise
 # sorting is delayed by one frame.
 @tool
+@icon("res://addons/node25d/icons/y_sort_25d_icon.png")
 extends Node # Note: NOT Node2D, Node25D, or Node2D
 class_name YSort25D
-@icon("res://addons/node25d/icons/y_sort_25d_icon.png")
+
 
 # Whether or not to automatically call sort() in _process().
 @export var sort_enabled := true

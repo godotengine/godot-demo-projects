@@ -1,9 +1,10 @@
 # This node converts a 3D position to 2D using a 2.5D transformation matrix.
 # The transformation of its 2D form is controlled by its 3D child.
 @tool
+@icon("res://addons/node25d/icons/node_25d_icon.png")
 extends Node2D
 class_name Node25D
-@icon("res://addons/node25d/icons/node_25d_icon.png")
+
 
 # SCALE is the number of 2D units in one 3D unit. Ideally, but not necessarily, an integer.
 const SCALE = 32

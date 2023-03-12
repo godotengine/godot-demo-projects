@@ -2,9 +2,10 @@
 # Place this ShadowMath25D node as a child of a Shadow25D, which
 # is below the target object in the scene tree (not as a child).
 @tool
+@icon("res://addons/node25d/icons/shadow_math_25d_icon.png")
 extends CharacterBody3D
 class_name ShadowMath25D
-@icon("res://addons/node25d/icons/shadow_math_25d_icon.png")
+
 
 # The maximum distance below objects that shadows will appear (in 3D units).
 var shadow_length = 1000.0
