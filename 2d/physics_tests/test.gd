@@ -90,7 +90,7 @@ func create_rigidbody_box(size, pickable = false, use_icon = false, shape_transf
 	var body = create_rigidbody(shape, pickable, shape_transform)
 
 	if use_icon:
-		var texture = load("res://icon.png")
+		var texture = load("res://icon.webp")
 		var icon = Sprite2D.new()
 		icon.texture = texture
 		icon.scale = size / texture.get_size()
