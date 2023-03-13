@@ -10,11 +10,6 @@ public partial class Main : Node
 
     public int score;
 
-    public override void _Ready()
-    {
-        GD.Randomize();
-    }
-
     public void GameOver()
     {
         GetNode<Timer>("MobTimer").Stop();
@@ -34,7 +29,7 @@ public partial class Main : Node
         score = 0;
 
         var player = GetNode<Player>("Player");
-        var startPosition = GetNode<Position2D>("StartPosition");
+        var startPosition = GetNode<Marker2D>("StartPosition");
         player.Start(startPosition.Position);
 
         GetNode<Timer>("StartTimer").Start();
@@ -67,10 +62,10 @@ public partial class Main : Node
 
         // Choose a random location on Path2D.
         var mobSpawnLocation = GetNode<PathFollow2D>("MobPath/MobSpawnLocation");
-        mobSpawnLocation.Offset = GD.Randi();
+        mobSpawnLocation.Progress = GD.Randi();
 
         // Create a Mob instance and add it to the scene.
-        var mob = (Mob)mobScene.Instantiate();
+        var mob = mobScene.Instantiate<Mob>();
         AddChild(mob);
 
         // Set the mob's direction perpendicular to the path direction.
