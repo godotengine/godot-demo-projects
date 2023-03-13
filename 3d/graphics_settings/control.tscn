@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://ye05btta37gb"]
+[gd_scene load_steps=6 format=3 uid="uid://ye05btta37gb"]
 
 [ext_resource type="Script" path="res://settings.gd" id="1_gm54x"]
 [ext_resource type="PackedScene" uid="uid://cbdt8lmycl8pc" path="res://3d_scene.tscn" id="2_hsbu5"]
@@ -26,6 +26,10 @@ content_margin_top = 50.0
 content_margin_right = 20.0
 content_margin_bottom = 10.0
 bg_color = Color(0.231373, 0.231373, 0.231373, 0.768627)
+
+[sub_resource type="Gradient" id="Gradient_ehij4"]
+offsets = PackedFloat32Array(0, 0.333, 0.667, 1)
+colors = PackedColorArray(1, 0.17, 0.17, 1, 1, 0.816, 0.08, 1, 0.644, 1, 0.11, 1, 0.14, 0.885333, 1, 1)
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -273,6 +277,7 @@ theme_override_font_sizes/font_size = 16
 text = "Anti-Aliasing (FXAA):"
 
 [node name="FXAAOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
@@ -598,6 +603,7 @@ grow_horizontal = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 horizontal_alignment = 2
+metadata/gradient = SubResource("Gradient_ehij4")
 
 [node name="ResolutionLabel" type="Label" parent="."]
 layout_mode = 1
