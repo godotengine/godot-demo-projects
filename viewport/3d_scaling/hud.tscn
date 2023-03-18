@@ -10,48 +10,42 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = SubResource("2")
 script = ExtResource("3")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-texture_filter = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(1152, 648)
-render_target_update_mode = 4
-
-[node name="Cubes" parent="SubViewportContainer/SubViewport" instance=ExtResource("2")]
+[node name="Cubes" parent="." instance=ExtResource("2")]
 
 [node name="Help" type="Label" parent="."]
-anchors_preset = 2
+layout_mode = 0
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
 offset_top = -106.0
 offset_right = 554.0
 offset_bottom = -16.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 text = "This text will always render at the native resolution.
 Press Space to adjust the 3D viewport's resolution scaling.
-Press Enter to toggle filtering."
+Press Enter to cycle filtering modes."
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 124.0
 offset_bottom = 76.0
 
 [node name="Scale" type="Label" parent="VBoxContainer"]
-offset_right = 111.0
-offset_bottom = 26.0
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 text = "Scale: 100%"
 
 [node name="Filter" type="Label" parent="VBoxContainer"]
-offset_top = 30.0
-offset_right = 111.0
-offset_bottom = 56.0
-text = "Filter: Enabled"
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Scaling 3D Mode: Bilinear"
