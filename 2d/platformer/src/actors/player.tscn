@@ -1,0 +1,280 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://assets/art/ui/touch_button_left.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/ui/touch_button_right.png" type="Texture" id=2]
+[ext_resource path="res://src/actors/player.gd" type="Script" id=3]
+[ext_resource path="res://assets/art/ui/touch_button_fire.png" type="Texture" id=4]
+[ext_resource path="res://assets/audio/sfx/jump.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/audio/sfx/shoot.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/art/ui/touch_button_jump.png" type="Texture" id=7]
+[ext_resource path="res://src/actors/gun.gd" type="Script" id=8]
+[ext_resource path="res://assets/art/player/robot.png" type="Texture" id=9]
+
+[sub_resource type="Animation" id=1]
+resource_name = "crouch"
+length = 0.01
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 42 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "falling"
+length = 0.01
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 48 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "falling_weapon"
+length = 0.5
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 26 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 2.0
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 30, 31, 32, 33 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 2.0
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 34, 35, 36, 37 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.5
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 45 ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.5
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 46 ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 ]
+}
+
+[sub_resource type="Animation" id=10]
+length = 1.25
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.75, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 34, 35, 36, 37 ]
+}
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 21.25, 27.25 )
+
+[node name="Player" type="KinematicBody2D"]
+scale = Vector2( 0.8, 0.8 )
+collision_mask = 30
+script = ExtResource( 3 )
+speed = Vector2( 164, 350 )
+
+[node name="ShootAnimation" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.2
+one_shot = true
+
+[node name="PlatformDetector" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 6 )
+collision_mask = 8
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -14 )
+texture = ExtResource( 9 )
+hframes = 8
+vframes = 8
+frame = 14
+
+[node name="Gun" type="Position2D" parent="Sprite"]
+position = Vector2( 14, 1 )
+script = ExtResource( 8 )
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="Sprite/Gun"]
+position = Vector2( -30.6589, -6.13176 )
+stream = ExtResource( 6 )
+
+[node name="Cooldown" type="Timer" parent="Sprite/Gun"]
+process_mode = 0
+wait_time = 0.3
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 2.6
+anims/crouch = SubResource( 1 )
+anims/falling = SubResource( 2 )
+anims/falling_weapon = SubResource( 3 )
+anims/idle = SubResource( 4 )
+anims/idle_weapon = SubResource( 5 )
+anims/jumping = SubResource( 6 )
+anims/jumping_weapon = SubResource( 7 )
+anims/run = SubResource( 8 )
+anims/run_weapon = SubResource( 9 )
+anims/standing_weapon_ready = SubResource( 10 )
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2( 0, -28 )
+offset = Vector2( 0, 50 )
+current = true
+process_mode = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -14 )
+shape = SubResource( 11 )
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Left" type="TouchScreenButton" parent="UI"]
+position = Vector2( 157, 813 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 1 )
+passby_press = true
+action = "move_left"
+visibility_mode = 1
+
+[node name="Right" type="TouchScreenButton" parent="UI"]
+position = Vector2( 425, 813 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 2 )
+passby_press = true
+action = "move_right"
+visibility_mode = 1
+
+[node name="Jump" type="TouchScreenButton" parent="UI"]
+position = Vector2( 1871, 813 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 7 )
+action = "jump"
+visibility_mode = 1
+
+[node name="Fire" type="TouchScreenButton" parent="UI"]
+position = Vector2( 1870, 564 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 4 )
+action = "shoot"
+visibility_mode = 1
