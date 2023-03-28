@@ -57,8 +57,11 @@ tracks/2/keys = {
 
 [node name="Bullet" type="RigidBody2D"]
 material = SubResource( 1 )
+z_index = 5
 collision_layer = 0
 collision_mask = 26
+mass = 0.0283333
+gravity_scale = 0.1
 continuous_cd = 2
 contacts_reported = 1
 contact_monitor = true
@@ -67,7 +70,7 @@ script = ExtResource( 2 )
 [node name="Particles2D" type="CPUParticles2D" parent="."]
 material = SubResource( 2 )
 emitting = false
-lifetime = 0.3
+lifetime = 0.1
 speed_scale = 3.0
 local_coords = false
 texture = ExtResource( 1 )

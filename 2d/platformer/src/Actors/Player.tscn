@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/Actors/Player.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/player/robot_demo.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/player/Robot.png" type="Texture" id=2]
 [ext_resource path="res://assets/audio/sfx/jump.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/audio/sfx/shoot.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/art/ui/touch_button_left.png" type="Texture" id=5]
@@ -25,7 +25,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 22 ]
+"values": [ 42 ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -43,7 +43,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 21 ]
+"values": [ 48 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -65,7 +65,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-length = 7.0
+length = 2.0
 loop = true
 step = 0.25
 tracks/0/type = "value"
@@ -75,14 +75,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.25, 1.5, 2, 4.5, 4.75, 5, 5.25 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 16, 17, 18, 16, 19, 20, 19, 16 ]
+"values": [ 30, 31, 32, 33 ]
 }
 
 [sub_resource type="Animation" id=5]
-length = 0.5
+length = 2.0
 loop = true
 step = 0.25
 tracks/0/type = "value"
@@ -92,10 +92,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 25 ]
+"values": [ 34, 35, 36, 37 ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -109,10 +109,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 23, 24, 23 ]
+"values": [ 45 ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -129,13 +129,12 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 26 ]
+"values": [ 46 ]
 }
 
 [sub_resource type="Animation" id=8]
-length = 1.25
+length = 2.0
 loop = true
-step = 0.25
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -143,16 +142,15 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 0 ]
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 }
 
 [sub_resource type="Animation" id=9]
-length = 1.25
+length = 2.0
 loop = true
-step = 0.25
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -160,10 +158,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 5, 6, 7, 8, 9, 5 ]
+"values": [ 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -177,18 +175,20 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.25, 0.75, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 10, 11, 12, 13, 14, 5 ]
+"values": [ 34, 35, 36, 37 ]
 }
 
 [sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 10, 14 )
+extents = Vector2( 21.25, 27.25 )
 
 [node name="Player" type="KinematicBody2D"]
+scale = Vector2( 0.8, 0.8 )
 collision_mask = 30
 script = ExtResource( 1 )
+speed = Vector2( 164, 350 )
 
 [node name="ShootAnimation" type="Timer" parent="."]
 process_mode = 0
@@ -203,9 +203,9 @@ collision_mask = 8
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -14 )
 texture = ExtResource( 2 )
-hframes = 16
-vframes = 2
-frame = 16
+hframes = 8
+vframes = 8
+frame = 31
 
 [node name="Gun" type="Position2D" parent="Sprite"]
 position = Vector2( 14, 1 )
@@ -235,8 +235,9 @@ anims/standing_weapon_ready = SubResource( 10 )
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 0, -28 )
+offset = Vector2( 0, 50 )
 current = true
-zoom = Vector2( 0.5, 0.5 )
+zoom = Vector2( 0.6, 0.6 )
 process_mode = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -250,31 +251,31 @@ stream = ExtResource( 3 )
 layer = 0
 
 [node name="Left" type="TouchScreenButton" parent="UI"]
-position = Vector2( 27.7593, 360.87 )
-scale = Vector2( 1.49157, 1.46265 )
+position = Vector2( 157, 813 )
+scale = Vector2( 2, 2 )
 normal = ExtResource( 5 )
 passby_press = true
 action = "move_left"
 visibility_mode = 1
 
 [node name="Right" type="TouchScreenButton" parent="UI"]
-position = Vector2( 121.542, 361.415 )
-scale = Vector2( 1.49157, 1.46265 )
+position = Vector2( 425, 813 )
+scale = Vector2( 2, 2 )
 normal = ExtResource( 6 )
 passby_press = true
 action = "move_right"
 visibility_mode = 1
 
 [node name="Jump" type="TouchScreenButton" parent="UI"]
-position = Vector2( 666.224, 359.02 )
-scale = Vector2( 1.49157, 1.46265 )
+position = Vector2( 1871, 813 )
+scale = Vector2( 2, 2 )
 normal = ExtResource( 7 )
 action = "jump"
 visibility_mode = 1
 
 [node name="Fire" type="TouchScreenButton" parent="UI"]
-position = Vector2( 668.073, 262.788 )
-scale = Vector2( 1.49157, 1.46265 )
+position = Vector2( 1870, 564 )
+scale = Vector2( 2, 2 )
 normal = ExtResource( 8 )
 action = "shoot"
 visibility_mode = 1

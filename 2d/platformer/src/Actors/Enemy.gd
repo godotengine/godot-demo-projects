@@ -14,6 +14,7 @@ onready var floor_detector_left = $FloorDetectorLeft
 onready var floor_detector_right = $FloorDetectorRight
 onready var sprite = $Sprite
 onready var animation_player = $AnimationPlayer
+onready var orig_scale = sprite.scale
 
 
 # This function is called when the scene enters the scene tree.
@@ -52,9 +53,9 @@ func _physics_process(_delta):
 
 	# We flip the Sprite depending on which way the enemy is moving.
 	if _velocity.x > 0:
-		sprite.scale.x = 1
+		sprite.scale.x = orig_scale.x
 	else:
-		sprite.scale.x = -1
+		sprite.scale.x = -orig_scale.x
 
 	var animation = get_new_animation()
 	if animation != animation_player.current_animation:

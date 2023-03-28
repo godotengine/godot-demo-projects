@@ -15,6 +15,7 @@ onready var shoot_timer = $ShootAnimation
 onready var sprite = $Sprite
 onready var sound_jump = $Jump
 onready var gun = sprite.get_node(@"Gun")
+onready var orig_scale = sprite.scale
 
 
 func _ready():
@@ -72,9 +73,9 @@ func _physics_process(_delta):
 	# This will make Robi face left or right depending on the direction you move.
 	if direction.x != 0:
 		if direction.x > 0:
-			sprite.scale.x = 1
+			sprite.scale.x = orig_scale.x
 		else:
-			sprite.scale.x = -1
+			sprite.scale.x = -orig_scale.x
 
 	# We use the sprite's scale to store Robi’s look direction which allows us to shoot
 	# bullets forward.
