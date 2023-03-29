@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dvl383ispakmn"]
 
 [ext_resource type="Script" path="res://gui_3d.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://dn04dlkwccjff" path="res://icon.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://brwp8bimc75uu" path="res://icon.webp" id="2"]
 
 [sub_resource type="QuadMesh" id="1"]
 size = Vector2(3, 2)
@@ -13,14 +13,14 @@ viewport_path = NodePath("SubViewport")
 resource_local_to_scene = true
 transparency = 1
 shading_mode = 0
-albedo_texture = SubResource( "2" )
+albedo_texture = SubResource("2")
 
 [sub_resource type="BoxShape3D" id="4"]
 size = Vector3(3, 2, 0.1)
 
 [node name="GUIPanel3D" type="Node3D"]
 process_mode = 3
-script = ExtResource( "1" )
+script = ExtResource("1")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 gui_embed_subwindows = true
@@ -28,15 +28,19 @@ size = Vector2i(280, 180)
 render_target_update_mode = 4
 
 [node name="GUI" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 280.0
 offset_bottom = 180.0
 mouse_filter = 1
 
 [node name="Panel" type="Panel" parent="SubViewport/GUI"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/GUI/Panel"]
+layout_mode = 0
 anchor_bottom = 1.0
 offset_left = 10.0
 offset_top = 10.0
@@ -44,39 +48,25 @@ offset_right = 150.0
 offset_bottom = -10.0
 grow_vertical = 2
 theme_override_constants/separation = 13
-__meta__ = {
-"_edit_layout_mode": 1,
-"_edit_use_custom_anchors": false
-}
 
 [node name="Label" type="Label" parent="SubViewport/GUI/Panel/VBoxContainer"]
-offset_right = 140.0
-offset_bottom = 26.0
+layout_mode = 2
 text = "Hello world!"
 horizontal_alignment = 1
-__meta__ = {
-"_edit_layout_mode": 0,
-"_edit_use_custom_anchors": false
-}
 
 [node name="Button" type="Button" parent="SubViewport/GUI/Panel/VBoxContainer"]
-offset_top = 39.0
-offset_right = 140.0
-offset_bottom = 70.0
+layout_mode = 2
 text = "A button!"
 
 [node name="TextEdit" type="LineEdit" parent="SubViewport/GUI/Panel/VBoxContainer"]
-offset_top = 83.0
-offset_right = 140.0
-offset_bottom = 114.0
+layout_mode = 2
 
 [node name="HSlider" type="HSlider" parent="SubViewport/GUI/Panel/VBoxContainer"]
-offset_top = 127.0
-offset_right = 140.0
-offset_bottom = 143.0
+layout_mode = 2
 ticks_on_borders = true
 
 [node name="ColorRect" type="ColorRect" parent="SubViewport/GUI/Panel"]
+layout_mode = 0
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -110.0
@@ -84,27 +74,22 @@ offset_top = 16.0
 offset_right = -46.0
 offset_bottom = 80.0
 color = Color(1, 0, 0, 1)
-__meta__ = {
-"_edit_layout_mode": 1,
-"_edit_use_custom_anchors": true
-}
 
 [node name="TextureRect" type="TextureRect" parent="SubViewport/GUI/Panel"]
+layout_mode = 0
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -88.0
-offset_top = 38.0
-offset_right = -48.0
-offset_bottom = 78.0
+offset_left = -102.0
+offset_top = 24.0
+offset_right = -54.0
+offset_bottom = 72.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource( "2" )
-__meta__ = {
-"_edit_layout_mode": 1,
-"_edit_use_custom_anchors": true
-}
+texture = ExtResource("2")
+expand_mode = 1
 
 [node name="VSlider" type="VSlider" parent="SubViewport/GUI/Panel"]
+layout_mode = 0
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -114,12 +99,9 @@ offset_right = -5.0
 offset_bottom = -5.0
 grow_horizontal = 0
 grow_vertical = 2
-__meta__ = {
-"_edit_layout_mode": 1,
-"_edit_use_custom_anchors": false
-}
 
 [node name="OptionButton" type="OptionButton" parent="SubViewport/GUI/Panel"]
+layout_mode = 0
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -137,18 +119,14 @@ popup/item_1/text = "Item 1"
 popup/item_1/id = 1
 popup/item_2/text = "Item 2"
 popup/item_2/id = 2
-__meta__ = {
-"_edit_layout_mode": 1,
-"_edit_use_custom_anchors": false
-}
 
 [node name="Quad" type="MeshInstance3D" parent="."]
-mesh = SubResource( "1" )
-surface_material_override/0 = SubResource( "3" )
+mesh = SubResource("1")
+surface_material_override/0 = SubResource("3")
 
 [node name="Area3D" type="Area3D" parent="Quad"]
 collision_layer = 2
 input_capture_on_drag = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Quad/Area3D"]
-shape = SubResource( "4" )
+shape = SubResource("4")

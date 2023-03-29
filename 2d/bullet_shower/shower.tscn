@@ -7,7 +7,13 @@
 
 [sub_resource type="SpriteFrames" id="1"]
 animations = [{
-"frames": [ExtResource("3"), ExtResource("4")],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4")
+}],
 "loop": true,
 "name": &"default",
 "speed": 5.0
@@ -25,7 +31,7 @@ script = ExtResource("2")
 script = ExtResource("5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
-frames = SubResource("1")
+sprite_frames = SubResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("2")
