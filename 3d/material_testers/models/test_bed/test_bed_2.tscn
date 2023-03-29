@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5nlqjos161db"]
+
+[ext_resource type="PackedScene" uid="uid://c1qfemtam74fa" path="res://models/test_bed/test_bed.glb" id="1_4jxo6"]
+[ext_resource type="Material" uid="uid://bh3dtgmpl7gv0" path="res://models/test_bed/small_material.tres" id="2_ds4pc"]
+[ext_resource type="Material" uid="uid://1wd862s1kfdy" path="res://models/test_bed/large_material.tres" id="3_00ymf"]
+
+[node name="test_bed" instance=ExtResource("1_4jxo6")]
+
+[node name="SmallPart" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 12.5)
+material_override = ExtResource("2_ds4pc")
+
+[node name="LargePart" parent="." index="1"]
+material_override = ExtResource("3_00ymf")

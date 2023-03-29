@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c57duuo5p7mc0"]
+[gd_scene load_steps=44 format=3 uid="uid://c57duuo5p7mc0"]
 
 [ext_resource type="Script" path="res://tester.gd" id="1"]
 [ext_resource type="Environment" uid="uid://du5gp6ah0abgv" path="res://default_env.tres" id="2"]
@@ -20,6 +20,93 @@
 [ext_resource type="Material" uid="uid://dct7oit1go38a" path="res://test_materials/rock.tres" id="18"]
 [ext_resource type="Material" uid="uid://bv6dr534vwcr1" path="res://test_materials/ice.tres" id="19"]
 [ext_resource type="Material" uid="uid://y4yhjq6ftc3l" path="res://test_materials/toon.tres" id="20"]
+[ext_resource type="PackedScene" uid="uid://b5nlqjos161db" path="res://models/test_bed/test_bed_2.tscn" id="21_ogqa2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2iwwk"]
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fdova"]
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l4fpf"]
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_elp3m"]
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ohvy"]
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ls7ee"]
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_knh2k"]
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2sh68"]
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1dg0h"]
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_016ef"]
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blr4q"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wsvqx"]
+metallic = 1.0
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbpqp"]
+metallic = 1.0
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p8v1s"]
+metallic = 1.0
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fuk4t"]
+metallic = 1.0
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fs4q5"]
+metallic = 1.0
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_takas"]
+metallic = 1.0
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l4yqe"]
+metallic = 1.0
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x5sdn"]
+metallic = 1.0
+roughness = 0.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d5kd8"]
+metallic = 1.0
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_reand"]
+metallic = 1.0
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j54bc"]
+metallic = 1.0
 
 [node name="MaterialTester" type="Node3D"]
 script = ExtResource("1")
@@ -170,6 +257,248 @@ surface_material_override/0 = ExtResource("20")
 surface_material_override/1 = ExtResource("6")
 surface_material_override/2 = ExtResource("5")
 surface_material_override/3 = ExtResource("7")
+
+[node name="Roughness Test" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 25)
+
+[node name="Dielectrics" type="Node3D" parent="Roughness Test"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -3)
+
+[node name="GodotBall 00" type="MeshInstance3D" parent="Roughness Test/Dielectrics"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, -30, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_2iwwk")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 01" type="MeshInstance3D" parent="Roughness Test/Dielectrics"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, -25, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_fdova")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 02" type="MeshInstance3D" parent="Roughness Test/Dielectrics"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, -20, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_l4fpf")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 03" type="MeshInstance3D" parent="Roughness Test/Dielectrics"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, -15, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_elp3m")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 04" type="MeshInstance3D" parent="Roughness Test/Dielectrics"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, -10, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_6ohvy")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 05" type="MeshInstance3D" parent="Roughness Test/Dielectrics"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, -5, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_ls7ee")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 06" type="MeshInstance3D" parent="Roughness Test/Dielectrics"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 3.49691e-07, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_knh2k")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 07" type="MeshInstance3D" parent="Roughness Test/Dielectrics"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 5, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_2sh68")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 08" type="MeshInstance3D" parent="Roughness Test/Dielectrics"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 10, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_1dg0h")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 09" type="MeshInstance3D" parent="Roughness Test/Dielectrics"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 15, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_016ef")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 10" type="MeshInstance3D" parent="Roughness Test/Dielectrics"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 20, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_blr4q")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="Metals" type="Node3D" parent="Roughness Test"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 4)
+
+[node name="GodotBall 00" type="MeshInstance3D" parent="Roughness Test/Metals"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, -30, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_wsvqx")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 01" type="MeshInstance3D" parent="Roughness Test/Metals"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, -25, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_cbpqp")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 02" type="MeshInstance3D" parent="Roughness Test/Metals"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, -20, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_p8v1s")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 03" type="MeshInstance3D" parent="Roughness Test/Metals"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, -15, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_fuk4t")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 04" type="MeshInstance3D" parent="Roughness Test/Metals"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, -10, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_fs4q5")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 05" type="MeshInstance3D" parent="Roughness Test/Metals"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, -5, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_takas")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 06" type="MeshInstance3D" parent="Roughness Test/Metals"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 3.49691e-07, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_l4yqe")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 07" type="MeshInstance3D" parent="Roughness Test/Metals"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 5, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_x5sdn")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 08" type="MeshInstance3D" parent="Roughness Test/Metals"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 10, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_d5kd8")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 09" type="MeshInstance3D" parent="Roughness Test/Metals"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 15, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_reand")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="GodotBall 10" type="MeshInstance3D" parent="Roughness Test/Metals"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 20, 0.5, 0)
+mesh = ExtResource("4_7al4s")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_j54bc")
+surface_material_override/1 = ExtResource("6")
+surface_material_override/2 = ExtResource("5")
+surface_material_override/3 = ExtResource("7")
+
+[node name="Platforms" type="Node3D" parent="Roughness Test"]
+
+[node name="bed00" parent="Roughness Test/Platforms" instance=ExtResource("21_ogqa2")]
+transform = Transform3D(1, 0, 6.3573e-08, 0, 1, 0, -6.3573e-08, 0, 1, 30, 0, 0)
+
+[node name="bed01" parent="Roughness Test/Platforms" instance=ExtResource("21_ogqa2")]
+transform = Transform3D(1, 0, 6.3573e-08, 0, 1, 0, -6.3573e-08, 0, 1, 25, 0, 0)
+
+[node name="bed02" parent="Roughness Test/Platforms" instance=ExtResource("21_ogqa2")]
+transform = Transform3D(1, 0, 6.3573e-08, 0, 1, 0, -6.3573e-08, 0, 1, 20, 0, 0)
+
+[node name="bed03" parent="Roughness Test/Platforms" instance=ExtResource("21_ogqa2")]
+transform = Transform3D(1, 0, 6.3573e-08, 0, 1, 0, -6.3573e-08, 0, 1, 15, 0, 0)
+
+[node name="bed04" parent="Roughness Test/Platforms" instance=ExtResource("21_ogqa2")]
+transform = Transform3D(1, 0, 6.3573e-08, 0, 1, 0, -6.3573e-08, 0, 1, 10, 0, 0)
+
+[node name="bed05" parent="Roughness Test/Platforms" instance=ExtResource("21_ogqa2")]
+transform = Transform3D(1, 0, 6.3573e-08, 0, 1, 0, -6.3573e-08, 0, 1, 5, 0, 0)
+
+[node name="bed06" parent="Roughness Test/Platforms" instance=ExtResource("21_ogqa2")]
+transform = Transform3D(1, 0, 6.3573e-08, 0, 1, 0, -6.3573e-08, 0, 1, 0, 0, 0)
+
+[node name="bed07" parent="Roughness Test/Platforms" instance=ExtResource("21_ogqa2")]
+transform = Transform3D(1, 0, 6.3573e-08, 0, 1, 0, -6.3573e-08, 0, 1, -5, 0, 0)
+
+[node name="bed08" parent="Roughness Test/Platforms" instance=ExtResource("21_ogqa2")]
+transform = Transform3D(1, 0, 6.3573e-08, 0, 1, 0, -6.3573e-08, 0, 1, -10, 0, 0)
+
+[node name="bed09" parent="Roughness Test/Platforms" instance=ExtResource("21_ogqa2")]
+transform = Transform3D(1, 0, 6.3573e-08, 0, 1, 0, -6.3573e-08, 0, 1, -15, 0, 0)
+
+[node name="bed10" parent="Roughness Test/Platforms" instance=ExtResource("21_ogqa2")]
+transform = Transform3D(1, 0, 6.3573e-08, 0, 1, 0, -6.3573e-08, 0, 1, -20, 0, 0)
 
 [node name="CameraHolder" type="Node3D" parent="."]
 transform = Transform3D(0.877582, 0, -0.479427, 0, 1, 0, 0.479427, 0, 0.877582, -36, 2.8, -4)
