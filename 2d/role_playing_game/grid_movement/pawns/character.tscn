@@ -1,0 +1,225 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://grid_movement/pawns/walker.gd" type="Script" id=1]
+[ext_resource path="res://grid_movement/pawns/character.png" type="Texture" id=2]
+[ext_resource path="res://grid_movement/pawns/player_exploration.png" type="Texture" id=3]
+[ext_resource path="res://grid_movement/pawns/player_exploration_bump.png" type="Texture" id=4]
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+
+[sub_resource type="Animation" id=1]
+resource_name = "bump"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -0.6, -1 ), Vector2( 1, 0.6 ), Vector2( -1.2, 1 ), Vector2( 0.5, -0.5 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/Slime:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -3, -4 ), Vector2( 2, 1.5 ), Vector2( -2.6, 2 ), Vector2( 1.8, -1.9 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Pivot/Slime:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ), ExtResource( 4 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Slime:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 1.5 ),
+"transitions": PoolRealArray( 1, 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 5 ), Vector2( 0, -4.498 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/Slime:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 1.5 ),
+"transitions": PoolRealArray( 1, 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.125, 0.844 ), Vector2( 0.906, 1.141 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "walk"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.9375, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.15, 0.25 ),
+"transitions": PoolRealArray( 1, 0.303143, 2.61003, 1 ),
+"update": 0,
+"values": [ Vector2( 1.43051e-06, -1.90735e-06 ), Vector2( 1.43051e-06, -1.90735e-06 ), Vector2( 0, -20 ), Vector2( 1.43051e-06, -1.90735e-06 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Pivot/Sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.25 ),
+"transitions": PoolRealArray( 1, 0.354553, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.20007, 0.917384 ), Vector2( 0.916712, 1.13495 ), Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Pivot/Slime:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.15, 0.25 ),
+"transitions": PoolRealArray( 1, 0.378929, 2.63902, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -20 ), Vector2( 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pivot/Slime:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.25 ),
+"transitions": PoolRealArray( 1, 0.353553, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 0.917 ), Vector2( 0.917, 1.135 ), Vector2( 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Pivot/Slime:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ), ExtResource( 3 ) ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "bump"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=5]
+states/bump/node = SubResource( 9 )
+states/bump/position = Vector2( 139, 194 )
+states/idle/node = SubResource( 7 )
+states/idle/position = Vector2( 139, 36 )
+states/walk/node = SubResource( 10 )
+states/walk/position = Vector2( 310, 116 )
+transitions = [ "walk", "idle", SubResource( 11 ), "bump", "idle", SubResource( 12 ), "idle", "walk", SubResource( 13 ), "idle", "bump", SubResource( 14 ) ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=6]
+
+[node name="Character" type="Node2D"]
+position = Vector2( 32, 32 )
+z_index = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/bump = SubResource( 1 )
+anims/idle = SubResource( 4 )
+anims/walk = SubResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Pivot" type="Position2D" parent="."]
+
+[node name="Slime" type="Sprite" parent="Pivot"]
+texture = ExtResource( 3 )
+centered = false
+offset = Vector2( -32, -32 )
+
+[node name="Sprite" type="Sprite" parent="Pivot"]
+visible = false
+position = Vector2( 1.43051e-06, -1.90735e-06 )
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( -32, -32 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 5 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 6 )
