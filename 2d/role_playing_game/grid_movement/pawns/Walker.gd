@@ -42,7 +42,7 @@ func move_to(target_position):
 	$AnimationPlayer.play("walk")
 	var move_direction = (position - target_position).normalized()
 	$Tween.interpolate_property($Pivot, "position", move_direction * 32, Vector2(), $AnimationPlayer.current_animation_length, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	$Pivot/Sprite.position = position - target_position
+	$Pivot/Slime.position = position - target_position
 	position = target_position
 
 	yield($AnimationPlayer, "animation_finished")
