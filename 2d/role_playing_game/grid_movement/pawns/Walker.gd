@@ -12,6 +12,7 @@ func _ready():
 	update_look_direction(Vector2.RIGHT)
 
 
+
 func _process(_delta):
 	var input_direction = get_input_direction()
 	if not input_direction:
@@ -48,6 +49,8 @@ func move_to(target_position):
 	yield($AnimationPlayer, "animation_finished")
 
 	set_process(true)
+	
+
 
 
 func bump():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://grid_movement/pawns/Walker.gd" type="Script" id=1]
 [ext_resource path="res://grid_movement/pawns/character.png" type="Texture" id=2]
@@ -47,6 +47,34 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 4 ), ExtResource( 4 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Slime:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 0.5, 2, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 5 ), Vector2( 0, -4.498 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/Slime:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 0.5, 2, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.125, 0.844 ), Vector2( 0.906, 1.141 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -126,6 +154,40 @@ tracks/5/keys = {
 "values": [ ExtResource( 3 ), ExtResource( 3 ) ]
 }
 
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "bump"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=5]
+states/bump/node = SubResource( 9 )
+states/bump/position = Vector2( 139, 194 )
+states/idle/node = SubResource( 7 )
+states/idle/position = Vector2( 139, 36 )
+states/walk/node = SubResource( 10 )
+states/walk/position = Vector2( 310, 116 )
+transitions = [ "walk", "idle", SubResource( 11 ), "bump", "idle", SubResource( 12 ), "idle", "walk", SubResource( 13 ), "idle", "bump", SubResource( 14 ) ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=6]
+
 [node name="Character" type="Node2D"]
 position = Vector2( 32, 32 )
 z_index = 1
@@ -137,6 +199,7 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
 anims/bump = SubResource( 1 )
+anims/idle = SubResource( 4 )
 anims/walk = SubResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
@@ -154,3 +217,9 @@ position = Vector2( 1.43051e-06, -1.90735e-06 )
 texture = ExtResource( 2 )
 centered = false
 offset = Vector2( -32, -32 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 5 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 6 )
