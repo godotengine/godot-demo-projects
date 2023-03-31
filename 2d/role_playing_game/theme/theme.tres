@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=14 format=2]
+[gd_resource type="Theme" load_steps=16 format=2]
 
 [ext_resource path="res://theme/fonts/montserrat_extra_bold_32.tres" type="DynamicFont" id=1]
 [ext_resource path="res://theme/images/button_rect.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://theme/images/panel_rect.png" type="Texture" id=5]
 [ext_resource path="res://theme/images/background.png" type="Texture" id=6]
 [ext_resource path="res://theme/foreground_stylebox_red.tres" type="StyleBox" id=7]
+[ext_resource path="res://theme/images/title_panel.png" type="Texture" id=8]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 resource_name = "button_focus_style"
@@ -51,6 +52,14 @@ margin_right = 20.0
 margin_top = 20.0
 margin_bottom = 20.0
 
+[sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 128, 152 )
+margin_left = 90.0
+margin_right = 90.0
+margin_top = 25.0
+margin_bottom = 55.0
+
 [resource]
 default_font = ExtResource( 4 )
 Button/colors/font_color = Color( 0.74902, 0.407843, 0, 1 )
@@ -94,3 +103,5 @@ RichTextLabel/constants/table_hseparation = 3
 RichTextLabel/constants/table_vseparation = 3
 RichTextLabel/styles/focus = null
 RichTextLabel/styles/normal = null
+title_panel/base_type = "Panel"
+title_panel/styles/panel = SubResource( 7 )
