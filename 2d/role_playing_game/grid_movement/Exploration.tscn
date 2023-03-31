@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://grid_movement/grid/lines/grid_lines_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://grid_movement/grid/tiles/grid_tileset.tres" type="TileSet" id=2]
@@ -20,6 +20,10 @@
 [ext_resource path="res://decoration/grass_upperlevel.png" type="Texture" id=18]
 [ext_resource path="res://decoration/grass_variant_upperlevel.png" type="Texture" id=19]
 [ext_resource path="res://decoration/pebble_variant.png" type="Texture" id=20]
+[ext_resource path="res://decoration/flower.png" type="Texture" id=21]
+[ext_resource path="res://decoration/flower_variant.png" type="Texture" id=22]
+[ext_resource path="res://decoration/flower_variant_upperlevel.png" type="Texture" id=23]
+[ext_resource path="res://decoration/flower_upperlevel.png" type="Texture" id=24]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -324,17 +328,17 @@ tile_data = PoolIntArray( 11, 1, 0, 12, -1073741822, 0, 13, -1073741822, 0, 14, 
 
 [node name="Grass" type="Node2D" parent="Decoration"]
 
-[node name="grass1" type="Sprite" parent="Decoration/Grass"]
+[node name="flower4" type="Sprite" parent="Decoration/Grass"]
 material = ExtResource( 13 )
 position = Vector2( 105, 307 )
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 12 )
+texture = ExtResource( 21 )
 
-[node name="grass2" type="Sprite" parent="Decoration/Grass"]
+[node name="flower6" type="Sprite" parent="Decoration/Grass"]
 material = ExtResource( 13 )
 position = Vector2( 344, 138 )
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 12 )
+texture = ExtResource( 22 )
 
 [node name="grass3" type="Sprite" parent="Decoration/Grass"]
 material = ExtResource( 13 )
@@ -344,9 +348,15 @@ texture = ExtResource( 12 )
 
 [node name="grass4" type="Sprite" parent="Decoration/Grass"]
 material = ExtResource( 13 )
-position = Vector2( 863, 129 )
+position = Vector2( 300, 531 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 12 )
+
+[node name="flower1" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 863, 129 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 21 )
 
 [node name="grass5" type="Sprite" parent="Decoration/Grass"]
 material = ExtResource( 13 )
@@ -360,15 +370,21 @@ position = Vector2( 1032, 301 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 15 )
 
-[node name="grass31" type="Sprite" parent="Decoration/Grass"]
+[node name="flower3" type="Sprite" parent="Decoration/Grass"]
 material = ExtResource( 13 )
 position = Vector2( 930, 310 )
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 15 )
+texture = ExtResource( 21 )
 
 [node name="grass6" type="Sprite" parent="Decoration/Grass"]
 material = ExtResource( 13 )
 position = Vector2( 479, 537 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 15 )
+
+[node name="grass69" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 691, 571 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 15 )
 
@@ -378,9 +394,21 @@ position = Vector2( 402, 534 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 15 )
 
+[node name="grass70" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 583, 605 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 15 )
+
 [node name="grass8" type="Sprite" parent="Decoration/Grass"]
 material = ExtResource( 13 )
 position = Vector2( 289, 389 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 15 )
+
+[node name="grass31" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 174, 448 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 15 )
 
@@ -390,9 +418,27 @@ position = Vector2( 176, 392 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 12 )
 
+[node name="grass66" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 933, 435 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 15 )
+
+[node name="grass67" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 804, 389 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 12 )
+
 [node name="grass10" type="Sprite" parent="Decoration/Grass"]
 material = ExtResource( 13 )
 position = Vector2( 178, 118 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 15 )
+
+[node name="grass58" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 96, 178 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 15 )
 
@@ -438,6 +484,12 @@ position = Vector2( 902, 581 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 15 )
 
+[node name="grass72" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 528, 499 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 15 )
+
 [node name="grass19" type="Sprite" parent="Decoration/Grass"]
 material = ExtResource( 13 )
 position = Vector2( 929, 587 )
@@ -462,6 +514,12 @@ position = Vector2( 443, 557 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 12 )
 
+[node name="grass57" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 376, 575 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 21 )
+
 [node name="grass21" type="Sprite" parent="Decoration/Grass"]
 material = ExtResource( 13 )
 position = Vector2( 916, 603 )
@@ -474,15 +532,27 @@ position = Vector2( 945, 610 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 12 )
 
-[node name="grass42" type="Sprite" parent="Decoration/Grass"]
+[node name="flower2" type="Sprite" parent="Decoration/Grass"]
 material = ExtResource( 13 )
 position = Vector2( 889, 609 )
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 12 )
+texture = ExtResource( 21 )
+
+[node name="flower7" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 675, 617 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 21 )
 
 [node name="grass43" type="Sprite" parent="Decoration/Grass"]
 material = ExtResource( 13 )
 position = Vector2( 866, 635 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 15 )
+
+[node name="grass71" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 687, 632 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 15 )
 
@@ -516,6 +586,12 @@ position = Vector2( 886, 657 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 12 )
 
+[node name="grass73" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 611, 615 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 12 )
+
 [node name="grass49" type="Sprite" parent="Decoration/Grass"]
 material = ExtResource( 13 )
 position = Vector2( 1056, 619 )
@@ -528,11 +604,11 @@ position = Vector2( 988, 610 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 15 )
 
-[node name="grass51" type="Sprite" parent="Decoration/Grass"]
+[node name="flower5" type="Sprite" parent="Decoration/Grass"]
 material = ExtResource( 13 )
 position = Vector2( 1012, 637 )
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 15 )
+texture = ExtResource( 22 )
 
 [node name="grass52" type="Sprite" parent="Decoration/Grass"]
 material = ExtResource( 13 )
@@ -624,9 +700,63 @@ position = Vector2( 553, 110 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 15 )
 
+[node name="grass61" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 273, 109 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 15 )
+
+[node name="grass74" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 335, 324 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 15 )
+
+[node name="grass75" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 351, 280 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 15 )
+
 [node name="grass36" type="Sprite" parent="Decoration/Grass"]
 material = ExtResource( 13 )
 position = Vector2( 588.4, 123.4 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 12 )
+
+[node name="grass62" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 361, 157 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 12 )
+
+[node name="grass59" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 138, 132 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 12 )
+
+[node name="grass60" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 348, 188 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 12 )
+
+[node name="grass42" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 333.8, 537.4 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 15 )
+
+[node name="grass51" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 258.4, 539 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 15 )
+
+[node name="grass56" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 293.8, 552.4 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 12 )
 
@@ -650,7 +780,31 @@ texture = ExtResource( 15 )
 
 [node name="grass39" type="Sprite" parent="Decoration/Grass"]
 material = ExtResource( 13 )
-position = Vector2( 686.4, 142.4 )
+position = Vector2( 689, 144 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 12 )
+
+[node name="grass68" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 826, 220 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 12 )
+
+[node name="grass63" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 820.4, 302.4 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 15 )
+
+[node name="grass64" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 892, 304 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 12 )
+
+[node name="grass65" type="Sprite" parent="Decoration/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 854.4, 315.4 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 12 )
 
@@ -1006,7 +1160,7 @@ texture = ExtResource( 19 )
 material = ExtResource( 13 )
 position = Vector2( 1156, 337 )
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 19 )
+texture = ExtResource( 23 )
 
 [node name="grass40" type="Sprite" parent="Decoration upper level/Grass"]
 material = ExtResource( 13 )
@@ -1018,7 +1172,7 @@ texture = ExtResource( 19 )
 material = ExtResource( 13 )
 position = Vector2( 211, 611 )
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 19 )
+texture = ExtResource( 23 )
 
 [node name="grass3" type="Sprite" parent="Decoration upper level/Grass"]
 material = ExtResource( 13 )
@@ -1091,6 +1245,12 @@ material = ExtResource( 13 )
 position = Vector2( 106, 7 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 18 )
+
+[node name="grass197" type="Sprite" parent="Decoration upper level/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 226, 13 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 24 )
 
 [node name="grass134" type="Sprite" parent="Decoration upper level/Grass"]
 material = ExtResource( 13 )
@@ -1210,7 +1370,13 @@ texture = ExtResource( 19 )
 material = ExtResource( 13 )
 position = Vector2( 1164, 14.4 )
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 19 )
+texture = ExtResource( 23 )
+
+[node name="grass200" type="Sprite" parent="Decoration upper level/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 596, 16 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 23 )
 
 [node name="grass155" type="Sprite" parent="Decoration upper level/Grass"]
 material = ExtResource( 13 )
@@ -1323,6 +1489,18 @@ texture = ExtResource( 19 )
 [node name="grass153" type="Sprite" parent="Decoration upper level/Grass"]
 material = ExtResource( 13 )
 position = Vector2( 368, 10 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 19 )
+
+[node name="grass198" type="Sprite" parent="Decoration upper level/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 276.4, 8.4 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 19 )
+
+[node name="grass199" type="Sprite" parent="Decoration upper level/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 178.4, 15.3999 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 19 )
 
@@ -1450,7 +1628,7 @@ texture = ExtResource( 19 )
 material = ExtResource( 13 )
 position = Vector2( 106, 544 )
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 18 )
+texture = ExtResource( 24 )
 
 [node name="grass78" type="Sprite" parent="Decoration upper level/Grass"]
 material = ExtResource( 13 )
@@ -1474,7 +1652,7 @@ texture = ExtResource( 19 )
 material = ExtResource( 13 )
 position = Vector2( 21, 607 )
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 19 )
+texture = ExtResource( 24 )
 
 [node name="grass77" type="Sprite" parent="Decoration upper level/Grass"]
 material = ExtResource( 13 )
@@ -1570,7 +1748,7 @@ texture = ExtResource( 19 )
 material = ExtResource( 13 )
 position = Vector2( 1140.4, 670.4 )
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 19 )
+texture = ExtResource( 24 )
 
 [node name="grass84" type="Sprite" parent="Decoration upper level/Grass"]
 material = ExtResource( 13 )
@@ -1625,6 +1803,12 @@ material = ExtResource( 13 )
 position = Vector2( 760, 687 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 18 )
+
+[node name="grass196" type="Sprite" parent="Decoration upper level/Grass"]
+material = ExtResource( 13 )
+position = Vector2( 919, 693 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 24 )
 
 [node name="grass92" type="Sprite" parent="Decoration upper level/Grass"]
 material = ExtResource( 13 )
@@ -1684,7 +1868,7 @@ texture = ExtResource( 19 )
 material = ExtResource( 13 )
 position = Vector2( 567, 689 )
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 18 )
+texture = ExtResource( 23 )
 
 [node name="grass124" type="Sprite" parent="Decoration upper level/Grass"]
 material = ExtResource( 13 )
@@ -1750,7 +1934,7 @@ texture = ExtResource( 19 )
 material = ExtResource( 13 )
 position = Vector2( 453, 172 )
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 18 )
+texture = ExtResource( 24 )
 
 [node name="grass161" type="Sprite" parent="Decoration upper level/Grass"]
 material = ExtResource( 13 )
@@ -1798,7 +1982,7 @@ texture = ExtResource( 19 )
 material = ExtResource( 13 )
 position = Vector2( 578, 207 )
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 19 )
+texture = ExtResource( 23 )
 
 [node name="grass195" type="Sprite" parent="Decoration upper level/Grass"]
 material = ExtResource( 13 )
@@ -1852,7 +2036,7 @@ texture = ExtResource( 19 )
 material = ExtResource( 13 )
 position = Vector2( 457.4, 323.4 )
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 18 )
+texture = ExtResource( 24 )
 
 [node name="grass175" type="Sprite" parent="Decoration upper level/Grass"]
 material = ExtResource( 13 )
@@ -1888,7 +2072,7 @@ texture = ExtResource( 19 )
 material = ExtResource( 13 )
 position = Vector2( 440, 389 )
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 18 )
+texture = ExtResource( 23 )
 
 [node name="grass181" type="Sprite" parent="Decoration upper level/Grass"]
 material = ExtResource( 13 )
@@ -1918,7 +2102,7 @@ texture = ExtResource( 18 )
 material = ExtResource( 13 )
 position = Vector2( 592.4, 386.4 )
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 19 )
+texture = ExtResource( 24 )
 
 [node name="grass186" type="Sprite" parent="Decoration upper level/Grass"]
 material = ExtResource( 13 )

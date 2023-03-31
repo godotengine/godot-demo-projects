@@ -51,7 +51,5 @@ func move_to(target_position):
 	set_process(true)
 	
 
-
-
 func bump():
 	$AnimationPlayer.play("bump")

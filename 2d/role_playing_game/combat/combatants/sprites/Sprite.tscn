@@ -1,7 +1,36 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://combat/combatants/sprites/shadow.png" type="Texture" id=1]
 [ext_resource path="res://combat/combatants/sprites/player_battle.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -41 ), Vector2( 0, -35 ), Vector2( 0, -51 ), Vector2( 0, -41 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/Body:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.078, 0.906 ), Vector2( 0.938, 1.156 ), Vector2( 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "take_damage"
@@ -23,7 +52,10 @@ tracks/0/keys = {
 [node name="Sprite" type="Node2D"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/idle = SubResource( 2 )
 anims/take_damage = SubResource( 1 )
+next/take_damage = "idle"
 
 [node name="Tween" type="Tween" parent="."]
 
