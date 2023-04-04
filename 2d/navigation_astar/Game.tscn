@@ -1,21 +1,59 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://tileset/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://pathfind_astar.gd" type="Script" id=2]
 [ext_resource path="res://character.gd" type="Script" id=3]
 [ext_resource path="res://sprites/character.png" type="Texture" id=4]
+[ext_resource path="res://sprites/space.png" type="Texture" id=5]
+[ext_resource path="res://sprites/sparkle.png" type="Texture" id=6]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 1.15429, 0, 0, Vector2( 0.316832, 0.342045 ), 0.0399209, 0.0399209, 0, 0, Vector2( 1, 0.136364 ), -1.05591, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.692737, 1 )
+colors = PoolColorArray( 1, 0.893555, 0, 1, 0.265625, 1, 0.490903, 1, 0.0154343, 0.688679, 0.987793, 1 )
 
 [node name="Game" type="Node2D"]
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+offset = Vector2( 512, 300 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 format = 1
-tile_data = PoolIntArray( 65537, 0, 0, 65541, 0, 0, 65545, 0, 0, 65550, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 327683, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 458761, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0 )
+tile_data = PoolIntArray( 65537, 0, 0, 65541, -1073741824, 0, 65545, 1610612736, 0, 65550, 0, 0, 196614, 0, 0, 196615, 1610612736, 0, 196616, -1610612736, 0, 196617, 0, 0, 196618, 0, 0, 196619, -1610612736, 0, 262145, 0, 0, 262146, 1610612736, 0, 262147, 0, 0, 327683, 1610612736, 0, 393219, 0, 0, 393220, 1610612736, 0, 393221, 0, 0, 393222, 0, 0, 393226, 0, 0, 393227, -1610612736, 0, 393228, -1073741824, 0, 458761, 0, 0, 524290, -1073741824, 0, 524291, 1610612736, 0, 524292, 1610612736, 0, 524293, -1610612736, 0, 524294, 0, 0, 524295, 0, 0, 524296, -1610612736, 0, 524297, 0, 0 )
 script = ExtResource( 2 )
 
 [node name="Character" type="Position2D" parent="."]
 position = Vector2( 32, 32 )
 script = ExtResource( 3 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Character"]
+material = SubResource( 1 )
+position = Vector2( -20, 0 )
+rotation = 1.5708
+amount = 30
+texture = ExtResource( 6 )
+emission_shape = 1
+emission_sphere_radius = 8.0
+angular_velocity = 360.0
+angular_velocity_random = 1.0
+damping = 61.46
+damping_random = 1.0
+scale_amount_curve = SubResource( 2 )
+color_ramp = SubResource( 3 )
+hue_variation = 0.11
+hue_variation_random = 1.0
+anim_speed = 1.0
 
 [node name="Sprite2D" type="Sprite" parent="Character"]
 position = Vector2( 7, 0 )
