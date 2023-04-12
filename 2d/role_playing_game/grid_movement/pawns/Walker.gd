@@ -49,7 +49,6 @@ func move_to(target_position):
 	yield($AnimationPlayer, "animation_finished")
 
 	set_process(true)
-	
 
 func bump():
 	$AnimationPlayer.play("bump")
