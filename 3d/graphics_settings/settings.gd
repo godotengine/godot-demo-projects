@@ -27,7 +27,7 @@ func _ready() -> void:
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	fps_label.text = "%d FPS (%.2f mspf)" % [Engine.get_frames_per_second(), 1000.0 / Engine.get_frames_per_second()]
 
 
@@ -125,7 +125,10 @@ func _on_taa_option_button_item_selected(index: int) -> void:
 func _on_fxaa_option_button_item_selected(index: int) -> void:
 	# Fast approximate anti-aliasing. Much faster than MSAA (and works on alpha scissor edges),
 	# but blurs the whole scene rendering slightly.
-	get_viewport().screen_space_aa = index == 1
+	if index == 0:
+		get_viewport().screen_space_aa = Viewport.ScreenSpaceAA.SCREEN_SPACE_AA_DISABLED
+	elif index == 1:
+		get_viewport().screen_space_aa = Viewport.ScreenSpaceAA.SCREEN_SPACE_AA_FXAA
 
 
 func _on_fullscreen_option_button_item_selected(index: int) -> void:
@@ -292,10 +295,10 @@ func _on_glow_option_button_item_selected(index: int) -> void:
 		world_environment.environment.glow_enabled = false
 	if index == 1: # Low
 		world_environment.environment.glow_enabled = true
-		RenderingServer.environment_glow_set_use_high_quality(false)
+		RenderingServer.environment_glow_set_use_bicubic_upscale(false)
 	if index == 2: # High
 		world_environment.environment.glow_enabled = true
-		RenderingServer.environment_glow_set_use_high_quality(true)
+		RenderingServer.environment_glow_set_use_bicubic_upscale(true)
 
 
 func _on_volumetric_fog_option_button_item_selected(index: int) -> void:
