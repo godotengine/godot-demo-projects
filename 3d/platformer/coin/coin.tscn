@@ -1,9 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://dfxo2jwbj4aeh"]
+[gd_scene load_steps=19 format=3 uid="uid://dfxo2jwbj4aeh"]
 
 [ext_resource type="Script" path="res://coin/coin.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://b23l5nfatq2d2" path="res://coin/sound_coin.wav" id="2"]
 [ext_resource type="Material" uid="uid://dp0bangabfrg" path="res://coin/coin_material.tres" id="2_n0rbc"]
-[ext_resource type="Texture2D" uid="uid://y3opjgnv67r8" path="res://particle.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://y3opjgnv67r8" path="res://particle.webp" id="3"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_fpglg"]
 top_radius = 0.2
@@ -11,6 +11,29 @@ bottom_radius = 0.2
 height = 0.05
 radial_segments = 16
 rings = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_kqa4x"]
+
+[sub_resource type="Gradient" id="Gradient_cd1ha"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.642276, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.180392, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qhu5r"]
+gradient = SubResource("Gradient_cd1ha")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0.01)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7q0mq"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 0.858824, 0.572549, 0.25098)
+albedo_texture = SubResource("GradientTexture2D_qhu5r")
+billboard_mode = 1
+proximity_fade_enabled = true
+proximity_fade_distance = 0.15
 
 [sub_resource type="Animation" id="Animation_r4jod"]
 length = 0.001
@@ -33,6 +56,30 @@ tracks/1/path = NodePath("Circle:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GlowSprite:transparency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GlowSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -106,6 +153,30 @@ tracks/2/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GlowSprite:transparency")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GlowSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7v453"]
 _data = {
@@ -127,9 +198,12 @@ albedo_color = Color(1, 1, 0.759137, 1)
 albedo_texture = ExtResource("3")
 texture_filter = 4
 billboard_mode = 3
+billboard_keep_scale = true
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
+proximity_fade_enabled = true
+proximity_fade_distance = 0.5
 
 [sub_resource type="PlaneMesh" id="7"]
 material = SubResource("6")
@@ -152,6 +226,14 @@ transform = Transform3D(1, 0, 0, 0, -3.61999e-06, -1, 0, 1, -3.61999e-06, 0.0055
 layers = 2
 mesh = SubResource("CylinderMesh_fpglg")
 surface_material_override/0 = ExtResource("2_n0rbc")
+
+[node name="GlowSprite" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visibility_range_begin = 3.0
+visibility_range_begin_margin = 3.0
+visibility_range_fade_mode = 1
+mesh = SubResource("QuadMesh_kqa4x")
+surface_material_override/0 = SubResource("StandardMaterial3D_7q0mq")
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 autoplay = "spin"
