@@ -19,7 +19,11 @@ signal message_received(message: Variant)
 func connect_to_url(url) -> int:
 	socket.supported_protocols = supported_protocols
 	socket.handshake_headers = handshake_headers
-	var err = socket.connect_to_url(url, tls_verify, tls_trusted_certificate)
+	var err = null
+	if tls_verify:
+		err = socket.connect_to_url(url, TLSOptions.client(tls_trusted_certificate))
+	else:
+		err = socket.connect_to_url(url, TLSOptions.client_unsafe(tls_trusted_certificate))
 	if err != OK:
 		return err
 	last_state = socket.get_ready_state()
