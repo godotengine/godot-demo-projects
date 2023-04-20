@@ -1,6 +1,7 @@
-[gd_scene load_steps=260 format=2]
+[gd_scene load_steps=261 format=2]
 
 [ext_resource path="res://player/goblin.png" type="Texture" id=1]
+[ext_resource path="res://player/troll.gd" type="Script" id=2]
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
@@ -1370,11 +1371,14 @@ radius = 30.0
 height = 10.0
 
 [node name="Goblin" type="KinematicBody2D"]
+script = ExtResource( 2 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="Sprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -6 )
 frames = SubResource( 260 )
 animation = "45front_right_walk"
+frame = 4
+playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
