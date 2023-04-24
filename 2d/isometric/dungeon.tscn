@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://player/troll.tscn" type="PackedScene" id=2]
 [ext_resource path="res://player/goblin.tscn" type="PackedScene" id=3]
 [ext_resource path="res://decorations/candle.tscn" type="PackedScene" id=4]
+[ext_resource path="res://decorations/rug_1.png" type="Texture" id=5]
+[ext_resource path="res://decorations/banner.png" type="Texture" id=6]
+[ext_resource path="res://decorations/Vase_1.tscn" type="PackedScene" id=7]
+[ext_resource path="res://decorations/vase_2.tscn" type="PackedScene" id=8]
+[ext_resource path="res://decorations/coin_pile.tscn" type="PackedScene" id=9]
 
 [node name="Dungeon" type="Node2D"]
 
@@ -24,7 +29,80 @@ cell_tile_origin = 1
 cell_y_sort = true
 centered_textures = true
 format = 1
-tile_data = PoolIntArray( -917493, 2, -1200553578, -917492, 2, -1200553578, -917491, 2, -1200553578, -917490, 2, -1200553578, -917489, 2, -1200553578, -851957, 2, -1200553578, -851956, 3, -1200553578, -851954, 3, -1200553578, -851953, 2, -1200553578, -786421, 2, -1200553578, -786420, 3, -1200553578, -786418, 3, -1200553578, -786417, 2, -1200553578, -720885, 2, -1200553578, -720881, 2, -1200553578, -655349, 2, -1200553578, -655348, 2, -1200553578, -655346, 3, -1200553578, -655345, 2, -1200553578, -589813, 2, -1200553578, -589809, 2, -1200553578, -524277, 2, 0, -524273, 2, 0, -458747, 2, -1200553578, -458746, 2, -1200553578, -458745, 2, -1200553578, -458744, 536870916, -1200553578, -458743, 536870916, -1200553578, -458742, 2, 0, -458741, 2, 0, -458737, 2, 0, -393211, 2, -1200553578, -393209, 3, -1200553578, -393201, 2, 0, -393200, 536870914, 0, -393199, 536870914, 0, -327675, 4, -1200553578, -327665, 5, 0, -327663, 536870914, 0, -196609, 2, 0, -262144, 2, 0, -262143, 2, 0, -262142, 2, 0, -262141, 2, 0, -262139, 4, -1200553578, -262127, 536870914, 0, -131073, 2, 0, -196605, 2, 0, -196603, 2, 0, -196601, 3, 0, -196591, 536870914, 0, -65537, 2, 0, -131069, 2, 0, -131067, 2, 0, -131062, 2, 0, -131055, 536870914, 0, -1, 2, 0, -65533, 2, 0, -65532, 2, 0, -65531, 2, 0, -65530, 2, 0, -65527, 2, -1200553578, -65526, 2, 0, -65519, 536870914, 0, 65535, 2, 0, 5, 5, 0, 10, 2, 0, 17, 536870914, 0, 131071, 2, 0, 65546, 2, 0, 65553, 536870914, 0, 196607, 2, 0, 131072, 5, 0, 131081, 3, 0, 131082, 2, 0, 131089, 536870914, 0, 262143, 2, 0, 196618, 2, 0, 196625, 536870914, 0, 327679, 2, 0, 262144, 2, 0, 262145, 2, 0, 262146, 2, 0, 262147, 536870916, 0, 262148, 536870916, 0, 262149, 2, 0, 262150, 2, 0, 262151, 2, -1200553578, 262152, 2, 0, 262153, 2, 0, 262154, 2, 0, 262155, 536870914, 0, 262156, 536870914, 0, 262158, 536870913, 0, 262159, 536870914, 0, 262160, 536870914, 0, 262161, 536870914, 0, 327690, 536870914, 0, 327691, 536870914, 0, 327692, 536870914, 0, 327695, 536870914, 0, 327696, 536870914, 0, 327697, 536870914, 0, 327698, 536870914, 0, 393226, 536870914, 0, 393227, 5, 0, 393233, 536870913, 0, 393234, 536870914, 0, 458762, 536870914, 0, 458769, 536870913, 0, 458770, 536870914, 0, 524298, 536870914, 0, 524305, 536870913, 0, 524306, 536870914, 0, 589834, 536870914, 0, 589841, 536870913, 0, 589842, 536870914, 0, 655370, 536870914, 0, 655377, 536870913, 0, 655378, 536870914, 0, 720906, 536870914, 0, 720913, 536870913, 0, 720914, 536870914, 0, 786442, 536870914, 0, 786443, 536870914, 0, 786444, 536870914, 0, 786445, 536870914, 0, 786446, 536870914, 0, 786447, 536870914, 0, 786448, 536870914, 0, 786449, 536870914, 0, 786450, 536870914, 0 )
+tile_data = PoolIntArray( -917493, 2, -1200553578, -917492, 2, -1200553578, -917491, 2, -1200553578, -917490, 2, -1200553578, -917489, 2, -1200553578, -851957, 2, -1200553578, -851956, 3, -1200553578, -851954, 3, -1200553578, -851953, 2, -1200553578, -786421, 2, -1200553578, -786420, 3, -1200553578, -786418, 3, -1200553578, -786417, 2, -1200553578, -720885, 2, -1200553578, -720881, 2, -1200553578, -655349, 2, 0, -655348, 2, 0, -655346, 3, -1200553578, -655345, 2, -1200553578, -589813, 2, 0, -589809, 2, -1200553578, -524277, 2, 0, -524273, 2, 0, -458747, 2, -1200553578, -458746, 2, -1200553578, -458745, 2, -1200553578, -458744, 536870916, -1200553578, -458743, 536870916, 0, -458742, 2, 0, -458741, 2, 0, -458737, 2, 0, -393211, 2, -1200553578, -393209, 3, -1200553578, -393206, 3, 0, -393201, 2, 0, -393200, 536870914, 0, -393199, 536870914, 0, -327675, 4, -1200553578, -327663, 536870914, 0, -196609, 2, 0, -262144, 2, 0, -262143, 2, 0, -262142, 2, 0, -262141, 2, 0, -262139, 4, -1200553578, -262127, 536870914, 0, -131073, 2, 0, -196605, 2, 0, -196603, 2, 0, -196591, 536870914, 0, -65537, 2, 0, -131072, 3, 0, -131069, 2, 0, -131067, 2, 0, -131066, 3, 0, -131063, 3, 0, -131062, 2, 0, -131055, 536870914, 0, -1, 2, 0, -65533, 2, 0, -65532, 2, 0, -65531, 2, 0, -65530, 2, 0, -65527, 2, 0, -65526, 2, 0, -65520, 3, 0, -65519, 536870914, 0, 65535, 2, 0, 3, 3, 0, 6, 3, 0, 10, 2, 0, 16, 3, 0, 17, 536870914, 0, 131071, 2, 0, 65546, 2, 0, 65547, 3, 0, 65552, 3, 0, 65553, 536870914, 0, 196607, 2, 0, 131072, 3, 0, 131081, 3, 0, 131082, 2, 0, 131089, 536870914, 0, 262143, 2, 0, 196618, 2, 0, 196625, 536870914, 0, 327679, 2, 0, 262144, 2, 0, 262145, 2, 0, 262146, 2, 0, 262147, 536870916, 0, 262148, 536870916, 0, 262149, 2, 0, 262150, 2, 0, 262151, 2, -1200553578, 262152, 2, 0, 262153, 2, 0, 262154, 2, 0, 262155, 536870914, 0, 262156, 536870914, 0, 262158, 536870913, 0, 262159, 536870914, 0, 262160, 536870914, 0, 262161, 536870914, 0, 327690, 536870914, 0, 327691, 536870914, 0, 327692, 536870914, 0, 327695, 536870914, 0, 327696, 536870914, 0, 327697, 536870914, 0, 327698, 536870914, 0, 393226, 536870914, 0, 393232, 3, 0, 393233, 3, 0, 393234, 536870914, 0, 458762, 536870914, 0, 458769, 536870913, 0, 458770, 536870914, 0, 524298, 536870914, 0, 524305, 536870913, 0, 524306, 536870914, 0, 589834, 536870914, 0, 589841, 536870913, 0, 589842, 536870914, 0, 655370, 536870914, 0, 655371, 3, 0, 655375, 3, 0, 655376, 3, 0, 655377, 536870913, 0, 655378, 536870914, 0, 720906, 536870914, 0, 720912, 3, 0, 720913, 536870913, 0, 720914, 536870914, 0, 786442, 536870914, 0, 786443, 536870914, 0, 786444, 536870914, 0, 786445, 536870914, 0, 786446, 536870914, 0, 786447, 536870914, 0, 786448, 536870914, 0, 786449, 536870914, 0, 786450, 536870914, 0 )
+
+[node name="CollisionDecorations" type="Node2D" parent="Walls"]
+
+[node name="Vase1_2" parent="Walls/CollisionDecorations" instance=ExtResource( 7 )]
+position = Vector2( 741, 38 )
+
+[node name="Vase1_3" parent="Walls/CollisionDecorations" instance=ExtResource( 7 )]
+position = Vector2( 1264, 285 )
+
+[node name="Vase1_4" parent="Walls/CollisionDecorations" instance=ExtResource( 7 )]
+position = Vector2( 1500, 55 )
+
+[node name="Vase1_5" parent="Walls/CollisionDecorations" instance=ExtResource( 7 )]
+position = Vector2( 300, 602 )
+
+[node name="Vase1_6" parent="Walls/CollisionDecorations" instance=ExtResource( 7 )]
+position = Vector2( 251, 632 )
+
+[node name="vase2_1" parent="Walls/CollisionDecorations" instance=ExtResource( 8 )]
+
+[node name="vase2_3" parent="Walls/CollisionDecorations" instance=ExtResource( 8 )]
+position = Vector2( 787, 43 )
+
+[node name="vase2_4" parent="Walls/CollisionDecorations" instance=ExtResource( 8 )]
+position = Vector2( -34, 30 )
+
+[node name="vase2_5" parent="Walls/CollisionDecorations" instance=ExtResource( 8 )]
+position = Vector2( 1234, 313 )
+
+[node name="vase2_6" parent="Walls/CollisionDecorations" instance=ExtResource( 8 )]
+position = Vector2( 1118, 343 )
+
+[node name="vase2_7" parent="Walls/CollisionDecorations" instance=ExtResource( 8 )]
+position = Vector2( 296, 655 )
+
+[node name="coin_pile" parent="Walls/CollisionDecorations" instance=ExtResource( 9 )]
+position = Vector2( -58, 54 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="coin_pile2" parent="Walls/CollisionDecorations" instance=ExtResource( 9 )]
+position = Vector2( 1, 30 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="coin_pile6" parent="Walls/CollisionDecorations" instance=ExtResource( 9 )]
+position = Vector2( 199, 626 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="coin_pile3" parent="Walls/CollisionDecorations" instance=ExtResource( 9 )]
+position = Vector2( 236, 133 )
+scale = Vector2( -0.5, 0.5 )
+
+[node name="coin_pile4" parent="Walls/CollisionDecorations" instance=ExtResource( 9 )]
+position = Vector2( 763, 67 )
+scale = Vector2( -0.5, 0.5 )
+
+[node name="coin_pile5" parent="Walls/CollisionDecorations" instance=ExtResource( 9 )]
+position = Vector2( 792, 321 )
+scale = Vector2( -0.5, 0.5 )
+
+[node name="coin_pile7" parent="Walls/CollisionDecorations" instance=ExtResource( 9 )]
+position = Vector2( 332, 630 )
+scale = Vector2( -0.5, 0.5 )
+
+[node name="Rugs" type="Node2D" parent="Walls"]
+
+[node name="Rug1" type="Sprite" parent="Walls/Rugs"]
+position = Vector2( 1052, 221 )
+texture = ExtResource( 5 )
+
+[node name="Rug2" type="Sprite" parent="Walls/Rugs"]
+position = Vector2( 1027, 286 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 5 )
 
 [node name="Troll" parent="Walls" instance=ExtResource( 2 )]
 visible = false
@@ -51,29 +129,55 @@ centered_textures = true
 format = 1
 tile_data = PoolIntArray( -1048567, 2, 0, -1048566, 2, 0, -1048565, 2, 0, -1048564, 2, 0, -983031, 2, 0, -917495, 2, 0, -851959, 2, 0, -786423, 2, 0, -720887, 2, 0, -655351, 2, 0, -589821, 2, 0, -589820, 2, 0, -327683, 2, 0, -327682, 2, 0, -327681, 2, 0, -393216, 2, 0, -262147, 2, 0, -196611, 2, 0, -131075, 2, 0, -65539, 2, 0, -3, 2, 0, 65533, 2, 0, 131069, 2, 0, 524296, 2, 0, 589832, 2, 0, 655368, 2, 0 )
 
-[node name="Candles" type="Node2D" parent="."]
+[node name="Decorations" type="Node2D" parent="."]
 
-[node name="c1" parent="Candles" instance=ExtResource( 4 )]
+[node name="Candles" type="Node2D" parent="Decorations"]
+
+[node name="c1" parent="Decorations/Candles" instance=ExtResource( 4 )]
 position = Vector2( 220, -147 )
 
-[node name="c2" parent="Candles" instance=ExtResource( 4 )]
+[node name="c2" parent="Decorations/Candles" instance=ExtResource( 4 )]
 position = Vector2( 1691, -48 )
 
-[node name="c3" parent="Candles" instance=ExtResource( 4 )]
+[node name="c3" parent="Decorations/Candles" instance=ExtResource( 4 )]
 position = Vector2( 343, -91 )
 
-[node name="c4" parent="Candles" instance=ExtResource( 4 )]
+[node name="c4" parent="Decorations/Candles" instance=ExtResource( 4 )]
 position = Vector2( -96, -25 )
 scale = Vector2( -1, 1 )
 
-[node name="c5" parent="Candles" instance=ExtResource( 4 )]
+[node name="c5" parent="Decorations/Candles" instance=ExtResource( 4 )]
 position = Vector2( 1248, 81 )
 scale = Vector2( -1, 1 )
 
-[node name="c6" parent="Candles" instance=ExtResource( 4 )]
+[node name="c6" parent="Decorations/Candles" instance=ExtResource( 4 )]
 position = Vector2( 128, 584 )
 scale = Vector2( -1, 1 )
 
-[node name="c7" parent="Candles" instance=ExtResource( 4 )]
+[node name="c7" parent="Decorations/Candles" instance=ExtResource( 4 )]
 position = Vector2( 1464, -22 )
 scale = Vector2( -1, 1 )
+
+[node name="banners" type="Node2D" parent="Decorations"]
+
+[node name="Banner" type="Sprite" parent="Decorations/banners"]
+position = Vector2( 797, -104 )
+texture = ExtResource( 6 )
+
+[node name="Banner2" type="Sprite" parent="Decorations/banners"]
+position = Vector2( 40, -117 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+texture = ExtResource( 6 )
+
+[node name="Banner3" type="Sprite" parent="Decorations/banners"]
+position = Vector2( 1367, -38 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+texture = ExtResource( 6 )
+
+[node name="Banner4" type="Sprite" parent="Decorations/banners"]
+position = Vector2( 9, 597 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+texture = ExtResource( 6 )
