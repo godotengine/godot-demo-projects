@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://decorations/sparkle.png" type="Texture" id=1]
+[ext_resource path="res://decorations/candle.png" type="Texture" id=2]
+[ext_resource path="res://decorations/fire_spritesheet.png" type="Texture" id=3]
+[ext_resource path="res://decorations/glow.png" type="Texture" id=4]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+particles_animation = true
+particles_anim_h_frames = 11
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.625698, 1 )
+colors = PoolColorArray( 1, 0.584314, 0, 1, 1, 0.84063, 0.226563, 1, 1, 0.584314, 0, 1 )
+
+[sub_resource type="CanvasItemMaterial" id=3]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id=4]
+max_value = 0.3
+_data = [ Vector2( 0, 0 ), 0.0, 1.36377, 0, 0, Vector2( 0.262376, 0.188182 ), 0.41974, 0.41974, 0, 0, Vector2( 1, 0.0295454 ), -1.06101, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.435754, 1 )
+colors = PoolColorArray( 1, 0.351563, 0, 1, 0.895996, 0.745333, 0.230999, 1, 1, 0.426842, 0.0234375, 1 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="glow" type="CPUParticles2D" parent="Sprite"]
+modulate = Color( 1, 0.360784, 0.113725, 1 )
+position = Vector2( -13, -33.244 )
+scale = Vector2( 0.3, 0.5 )
+amount = 1
+lifetime = 0.8
+texture = ExtResource( 4 )
+gravity = Vector2( 0, 0 )
+
+[node name="Fire" type="CPUParticles2D" parent="Sprite"]
+material = SubResource( 1 )
+position = Vector2( -13, -35 )
+scale = Vector2( 0.6, 0.6 )
+amount = 1
+lifetime = 0.8
+texture = ExtResource( 3 )
+gravity = Vector2( 0, 0 )
+color_ramp = SubResource( 2 )
+anim_speed = 1.0
+
+[node name="Sparkle" type="CPUParticles2D" parent="Sprite"]
+material = SubResource( 3 )
+position = Vector2( -13, -35 )
+scale = Vector2( 0.6, 0.6 )
+amount = 3
+texture = ExtResource( 1 )
+emission_shape = 1
+emission_sphere_radius = 8.0
+gravity = Vector2( 0, -80 )
+angular_velocity = 1.0
+tangential_accel = 49.54
+scale_amount_curve = SubResource( 4 )
+color_ramp = SubResource( 5 )
+anim_speed = 1.0
+
+[node name="flow front" type="CPUParticles2D" parent="Sprite"]
+modulate = Color( 0.94902, 1, 0, 1 )
+position = Vector2( -13, -28.689 )
+scale = Vector2( 0.25, 0.25 )
+amount = 1
+lifetime = 0.8
+texture = ExtResource( 4 )
+gravity = Vector2( 0, 0 )
