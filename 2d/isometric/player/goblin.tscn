@@ -1367,25 +1367,25 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 20.571
-height = 18.8581
+radius = 18.0
+height = 18.0001
 
 [sub_resource type="OccluderPolygon2D" id=661]
-polygon = PoolVector2Array( 20, 25, 20, 33.75, 15, 38.75, 6.25, 42.5, -5, 42.5, -12.5, 41.25, -16.25, 37.5, -18.75, 27.5 )
+polygon = PoolVector2Array( 16.25, 18.75, 18.75, 36.25, 15, 38.75, 6.25, 42.5, -5, 42.5, -13.75, 41.25, -18.75, 37.5, -15, 20 )
 
 [node name="Goblin" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -11 )
+position = Vector2( 0, -35 )
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 260 )
 animation = "front_idle"
-frame = 15
+frame = 12
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 12.802 )
+position = Vector2( 0, -18 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
@@ -1393,6 +1393,6 @@ shape = SubResource( 1 )
 current = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-position = Vector2( 0, -11 )
+position = Vector2( 0, -31 )
 scale = Vector2( 0.8, 0.8 )
 occluder = SubResource( 661 )

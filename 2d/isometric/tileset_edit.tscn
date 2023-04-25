@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://isotiles.png" type="Texture" id=1]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+polygon = PoolVector2Array( -13, -19, -21, -12, -21, 0, -17, 5, -8, 9, 6, 12, 20, 8, 25, 2, 26, -8, 24, -15, 18, -19, 18, -27, -13, -26 )
 
 [node name="TilesetEdit" type="Node2D"]
 
@@ -38,7 +41,10 @@ region_rect = Rect2( 259, 241, 55, 95 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Column/StaticBody2D"]
 position = Vector2( 2, 0 )
-polygon = PoolVector2Array( -24, 2, -10, 12, 10, 12, 24, 2, 24, -12, 10, -22, -10, -22, -24, -12 )
+polygon = PoolVector2Array( -27, 7, -14, 20, 16, 20, 28, 4, 24, -12, 10, -22, -10, -22, -24, -12 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Column"]
+occluder = SubResource( 1 )
 
 [node name="Door1" type="Sprite" parent="."]
 position = Vector2( 800, 0 )
