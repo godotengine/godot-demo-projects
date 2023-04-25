@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://player/troll.tscn" type="PackedScene" id=2]
+[ext_resource path="res://decorations/wall_skull.png" type="Texture" id=2]
 [ext_resource path="res://player/goblin.tscn" type="PackedScene" id=3]
 [ext_resource path="res://decorations/candle.tscn" type="PackedScene" id=4]
 [ext_resource path="res://decorations/rug_1.png" type="Texture" id=5]
@@ -122,17 +122,19 @@ position = Vector2( 140, 675 )
 [node name="Rugs" type="Node2D" parent="Walls"]
 
 [node name="Rug1" type="Sprite" parent="Walls/Rugs"]
-position = Vector2( 1052, 221 )
+position = Vector2( 55, 119 )
+scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 5 )
 
 [node name="Rug2" type="Sprite" parent="Walls/Rugs"]
-position = Vector2( 1027, 286 )
-scale = Vector2( -1, 1 )
+position = Vector2( 449, 707 )
+scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 5 )
 
-[node name="Troll" parent="Walls" instance=ExtResource( 2 )]
-visible = false
-position = Vector2( 368.142, 347.007 )
+[node name="Rug3" type="Sprite" parent="Walls/Rugs"]
+position = Vector2( 976, 290 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 5 )
 
 [node name="Goblin" parent="Walls" instance=ExtResource( 3 )]
 position = Vector2( 423, 271 )
@@ -166,10 +168,14 @@ position = Vector2( 220, -147 )
 position = Vector2( 1691, -48 )
 
 [node name="c3" parent="Decorations/Candles" instance=ExtResource( 4 )]
-position = Vector2( 343, -91 )
+position = Vector2( 355, -86 )
 
 [node name="c4" parent="Decorations/Candles" instance=ExtResource( 4 )]
 position = Vector2( -96, -25 )
+scale = Vector2( -1, 1 )
+
+[node name="c8" parent="Decorations/Candles" instance=ExtResource( 4 )]
+position = Vector2( -221, 36 )
 scale = Vector2( -1, 1 )
 
 [node name="c5" parent="Decorations/Candles" instance=ExtResource( 4 )]
@@ -207,3 +213,22 @@ position = Vector2( 9, 597 )
 rotation = 3.14159
 scale = Vector2( 1, -1 )
 texture = ExtResource( 6 )
+
+[node name="wall_skulls" type="Node2D" parent="Decorations"]
+
+[node name="WallSkull" type="Sprite" parent="Decorations/wall_skulls"]
+position = Vector2( 287, -169 )
+texture = ExtResource( 2 )
+
+[node name="WallSkull2" type="Sprite" parent="Decorations/wall_skulls"]
+position = Vector2( 1552, -123 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 2 )
+
+[node name="WallSkull3" type="Sprite" parent="Decorations/wall_skulls"]
+position = Vector2( 1552, -123 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 2 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.94902, 0.85098, 1, 1 )
