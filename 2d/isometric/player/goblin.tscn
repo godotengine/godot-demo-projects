@@ -1,7 +1,16 @@
-[gd_scene load_steps=262 format=2]
+[gd_scene load_steps=264 format=2]
 
 [ext_resource path="res://player/goblin.png" type="Texture" id=1]
 [ext_resource path="res://player/goblin.gd" type="Script" id=2]
+
+[sub_resource type="Gradient" id=662]
+offsets = PoolRealArray( 0.00558659, 0.441341, 0.659218 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture2D" id=663]
+gradient = SubResource( 662 )
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
 
 [sub_resource type="AtlasTexture" id=261]
 flags = 5
@@ -1376,12 +1385,18 @@ polygon = PoolVector2Array( 16.25, 18.75, 18.75, 36.25, 15, 38.75, 6.25, 42.5, -
 [node name="Goblin" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
+[node name="shadow" type="Sprite" parent="."]
+modulate = Color( 0.129412, 0.0745098, 0.192157, 0.647059 )
+position = Vector2( 0, -0.406251 )
+scale = Vector2( 0.78125, 0.362305 )
+texture = SubResource( 663 )
+
 [node name="Sprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -35 )
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 260 )
 animation = "front_idle"
-frame = 4
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
