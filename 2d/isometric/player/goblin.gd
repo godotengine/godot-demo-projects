@@ -16,7 +16,7 @@ var anim_directions = {
 		["back_idle", false],
 		["45back_right_idle", false],
 	],
-	
+
 	"walk": [
 		["side_right_walk", false],
 		["45front_right_walk", false],
@@ -27,7 +27,7 @@ var anim_directions = {
 		["back_walk", false],
 		["45back_right_walk", false],
 	],
-	
+
 }
 
 
@@ -48,7 +48,7 @@ func _physics_process(_delta):
 
 
 func update_animation(anim_set):
-	
+
 	var angle = rad2deg(last_direction.angle()) + 22.5
 	var slice_dir = floor(angle / 45)
 
