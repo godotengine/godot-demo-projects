@@ -330,6 +330,7 @@ shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_texture = SubResource("GradientTexture2D_42opb")
 billboard_mode = 3
+billboard_keep_scale = true
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
@@ -425,16 +426,16 @@ void fragment() {
 render_priority = 0
 shader = SubResource("Shader_rejcs")
 shader_parameter/albedo = Color(1.2, 0.915333, 0.997134, 1)
-shader_parameter/metallic = 0.0
-shader_parameter/metallic_texture_channel = Plane(1, 0, 0, 0)
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Plane(1, 0, 0, 0)
 shader_parameter/specular = 0.5
-shader_parameter/texture_albedo = SubResource("NoiseTexture_bgiac")
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/metallic = 0.0
 shader_parameter/uv1_scale = Vector3(2, 2, 1)
-shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_albedo = SubResource("NoiseTexture_bgiac")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_oopii"]
 height = 1.0
@@ -486,16 +487,16 @@ void fragment() {
 render_priority = 0
 shader = SubResource("Shader_ovufm")
 shader_parameter/albedo = Color(1.2, 1.16365, 0.85123, 1)
-shader_parameter/metallic = 0.0
-shader_parameter/metallic_texture_channel = Plane(1, 0, 0, 0)
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Plane(1, 0, 0, 0)
 shader_parameter/specular = 0.5
-shader_parameter/texture_albedo = SubResource("NoiseTexture_bgiac")
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/metallic = 0.0
 shader_parameter/uv1_scale = Vector3(2, 2, 1)
-shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_albedo = SubResource("NoiseTexture_bgiac")
 
 [node name="AntiAliasingTestScene" type="WorldEnvironment"]
 environment = SubResource("11")
@@ -515,6 +516,7 @@ mesh = SubResource("14")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.909487, -0.23874, 0.340349, 0, 0.818672, 0.574262, -0.415733, -0.522284, 0.744571, 3.9506, 3.39961, 3.54442)
 shadow_enabled = true
+shadow_bias = 0.03
 shadow_normal_bias = 1.5
 shadow_blur = 1.5
 directional_shadow_mode = 0
@@ -689,7 +691,7 @@ draw_pass_1 = SubResource("BoxMesh_88317")
 
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Testers/StaticGPUParticles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-extents = Vector3(2, 1, 2)
+size = Vector3(4, 2, 4)
 
 [node name="MovingGPUParticles" type="Node3D" parent="Testers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -56)
@@ -707,7 +709,7 @@ draw_pass_1 = SubResource("BoxMesh_88317")
 
 [node name="GPUParticlesCollisionBox3D2" type="GPUParticlesCollisionBox3D" parent="Testers/MovingGPUParticles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-extents = Vector3(2, 1, 2)
+size = Vector3(4, 2, 4)
 
 [node name="MovingDecal" type="Node3D" parent="Testers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -60)
@@ -781,44 +783,42 @@ offset_right = -24.0
 offset_bottom = -24.0
 text = "Next  »"
 
+[node name="FPSLimit" type="OptionButton" parent="."]
+visible = false
+offset_left = 404.0
+offset_top = 64.0
+offset_right = 609.0
+offset_bottom = 95.0
+item_count = 3
+selected = 2
+popup/item_0/text = "30 FPS Limit"
+popup/item_0/id = 0
+popup/item_1/text = "60 FPS Limit"
+popup/item_1/id = 1
+popup/item_2/text = "No FPS Limit (V-Sync)"
+popup/item_2/id = 3
+
 [node name="Antialiasing" type="VBoxContainer" parent="."]
 offset_left = 24.0
 offset_top = 24.0
-offset_right = 210.0
-offset_bottom = 55.0
+offset_right = 394.0
+offset_bottom = 260.0
 theme_override_constants/separation = 10
-
-[node name="Label" type="Label" parent="Antialiasing"]
-layout_mode = 2
-offset_right = 370.0
-offset_bottom = 26.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-text = "Antialiasing Options:"
 
 [node name="FXAA" type="CheckButton" parent="Antialiasing"]
 layout_mode = 2
-offset_top = 36.0
-offset_right = 370.0
-offset_bottom = 67.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
+theme_override_constants/outline_size = 4
 text = "FXAA (Fast)"
 
 [node name="TemporalAntialiasing" type="CheckButton" parent="Antialiasing"]
 layout_mode = 2
-offset_top = 77.0
-offset_right = 370.0
-offset_bottom = 108.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
+theme_override_constants/outline_size = 4
 text = "Temporal antialiasing (Fast)"
 
 [node name="MSAA" type="OptionButton" parent="Antialiasing"]
 layout_mode = 2
-offset_top = 118.0
-offset_right = 370.0
-offset_bottom = 149.0
 item_count = 4
 selected = 0
 popup/item_0/text = "No MSAA (Fastest)"
@@ -830,31 +830,79 @@ popup/item_2/id = 2
 popup/item_3/text = "8× MSAA (Slowest)"
 popup/item_3/id = 3
 
-[node name="RenderScale" type="OptionButton" parent="Antialiasing"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Antialiasing"]
 layout_mode = 2
-offset_top = 159.0
-offset_right = 370.0
-offset_bottom = 190.0
-item_count = 7
-selected = 2
-popup/item_0/text = "50% Render Scale (Fastest)"
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Antialiasing/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Render Scale"
+vertical_alignment = 1
+
+[node name="RenderScale" type="HSlider" parent="Antialiasing/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 3.0
+min_value = 0.25
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="Value" type="Label" parent="Antialiasing/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "100%"
+vertical_alignment = 1
+
+[node name="FidelityFXFSR" type="CheckButton" parent="Antialiasing"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "AMD FidelityFX Super Resolution 1.0"
+
+[node name="FSRSharpness" type="OptionButton" parent="Antialiasing"]
+visible = false
+layout_mode = 2
+item_count = 5
+selected = 3
+popup/item_0/text = "No FSR Sharpness"
 popup/item_0/id = 0
-popup/item_1/text = "75% Render Scale (Fast)"
+popup/item_1/text = "Low FSR Sharpness"
 popup/item_1/id = 1
-popup/item_2/text = "100% Render Scale (Average)"
+popup/item_2/text = "Medium FSR Sharpness"
 popup/item_2/id = 2
-popup/item_3/text = "125% Render Scale (1.56× SSAA, Slow)"
+popup/item_3/text = "High FSR Sharpness"
 popup/item_3/id = 3
-popup/item_4/text = "150% Render Scale (2.25× SSAA, Slower)"
+popup/item_4/text = "Highest FSR Sharpness"
 popup/item_4/id = 4
-popup/item_5/text = "175% Render Scale (3.06× SSAA, Very Slow)"
-popup/item_5/id = 5
-popup/item_6/text = "200% Render Scale (4× SSAA, Slowest)"
-popup/item_6/id = 6
+
+[node name="ViewportResolution" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -344.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 55.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Viewport resolution: 1152×648"
+horizontal_alignment = 2
 
 [connection signal="pressed" from="Previous" to="." method="_on_previous_pressed"]
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
+[connection signal="item_selected" from="FPSLimit" to="." method="_on_fps_limit_item_selected"]
 [connection signal="toggled" from="Antialiasing/FXAA" to="." method="_on_fxaa_toggled"]
 [connection signal="toggled" from="Antialiasing/TemporalAntialiasing" to="." method="_on_temporal_antialiasing_toggled"]
 [connection signal="item_selected" from="Antialiasing/MSAA" to="." method="_on_msaa_item_selected"]
-[connection signal="item_selected" from="Antialiasing/RenderScale" to="." method="_on_render_scale_item_selected"]
+[connection signal="value_changed" from="Antialiasing/HBoxContainer/RenderScale" to="." method="_on_render_scale_value_changed"]
+[connection signal="toggled" from="Antialiasing/FidelityFXFSR" to="." method="_on_amd_fidelityfx_fsr1_toggled"]
+[connection signal="item_selected" from="Antialiasing/FSRSharpness" to="." method="_on_fsr_sharpness_item_selected"]
