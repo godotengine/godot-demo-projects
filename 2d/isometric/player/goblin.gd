@@ -5,7 +5,6 @@ const MOTION_SPEED = 160 # Pixels/second.
 var last_direction = Vector2(1, 0)
 
 var anim_directions = {
-
 	"idle": [ # list of [animation name, horizontal flip]
 		["side_right_idle", false],
 		["45front_right_idle", false],
@@ -27,7 +26,6 @@ var anim_directions = {
 		["back_walk", false],
 		["45back_right_walk", false],
 	],
-
 }
 
 
