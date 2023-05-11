@@ -1,18 +1,18 @@
 name: Export projects to HTML5 and deploy to GitHub Pages
 on:
   push:
-    branches:
-      - 3.x
+    # branches:
+    #   - 3.x
 
 env:
-  GODOT_VERSION: 3.3.3
+  GODOT_VERSION: 3.5.2
 
 jobs:
   export-html5:
     name: Export projects to HTML5 and deploy to GitHub Pages
     runs-on: ubuntu-20.04
     container:
-      image: barichello/godot-ci:3.3.3
+      image: barichello/godot-ci:3.5.2
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -76,7 +76,7 @@ jobs:
 
             # Append the demo to the list of demos for the website.
             PROJECT_NAME=$(cat project.godot | grep "config/name" | cut -d '"' -f 2 | tr -d "\n")
-            echo "<li><a href='$demo'><img width="64" height="64" src="$demo/favicon.png" alt=""><p>$PROJECT_NAME</p></a></li>" >> "$BASEDIR/.github/dist/demos.html"
+            echo "<li><a href='$demo'><img width="64" height="64" src="$demo/index.icon.png" alt=""><p>$PROJECT_NAME</p></a></li>" >> "$BASEDIR/.github/dist/demos.html"
           done
 
           cat "$BASEDIR/.github/dist/header.html" "$BASEDIR/.github/dist/demos.html" "$BASEDIR/.github/dist/footer.html" > "$BASEDIR/.github/dist/index.html"
