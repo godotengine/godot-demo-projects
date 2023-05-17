@@ -1,26 +1,1643 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2n73c4vcs6yd"]
+[gd_scene load_steps=83 format=3 uid="uid://cj3kyrrcqcaij"]
 
-[ext_resource type="TileSet" uid="uid://r7h8te85l3bx" path="res://tileset.tres" id="1"]
-[ext_resource type="PackedScene" uid="uid://cvs6nhy4ydg0u" path="res://troll.tscn" id="2"]
+[ext_resource type="TileSet" uid="uid://ceswxvl27cesm" path="res://tileset/tileset.tres" id="1"]
+[ext_resource type="Texture2D" uid="uid://cy8biel27i5i7" path="res://decorations/wall_skull.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://bqpkxht3mx8l8" path="res://player/goblin.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://decorations/candle.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://bqugyxfkeyt7x" path="res://decorations/rug_1.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://bycat883fu7q2" path="res://decorations/banner.png" id="6"]
+[ext_resource type="PackedScene" uid="uid://dxxtyefaa4rtn" path="res://decorations/vase_1.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://ccxtgas16pmio" path="res://decorations/vase_2.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://decorations/coin_pile.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://decorations/bone_pile_1.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://decorations/bone_pile_2.tscn" id="11"]
+[ext_resource type="Texture2D" uid="uid://cginrtmcplrec" path="res://decorations/glow.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://cmxo4k7h2nl7h" path="res://decorations/shadow_gradient.png" id="13"]
+[ext_resource type="PackedScene" path="res://decorations/internal_shadow.tscn" id="14"]
+[ext_resource type="Texture2D" uid="uid://dahfdmuvra5we" path="res://decorations/drape_1.png" id="15"]
+[ext_resource type="Texture2D" uid="uid://dmqbp4e43sm1t" path="res://decorations/paw_prints.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://d3j0qnogdctw4" path="res://decorations/crow_sleep.png" id="18"]
+[ext_resource type="Texture2D" uid="uid://dami7imxtk2iq" path="res://decorations/crow_looking.png" id="19"]
+
+[sub_resource type="CanvasItemMaterial" id="23"]
+blend_mode = 1
+
+[sub_resource type="OccluderPolygon2D" id="13"]
+polygon = PackedVector2Array(578, 218, 572, 292, 383, 387, 65, 225, 3, 252, 3, 318, 245, 440, 185, 474, 125, 444, 63, 472, 171, 488, 193, 484, 193, 538, 321, 478, 443, 542, 571, 478, 455, 410, 831, 222, 765, 184, 701, 218, 641, 190)
+
+[sub_resource type="OccluderPolygon2D" id="1"]
+polygon = PackedVector2Array(380, -64, 194, 30, 191, 56, 180, 61, 178, 110, 171, 114, 172, 126, 180, 137, 199, 139, 214, 137, 219, 128, 230, 114, 371, 184, 371, 207, 363, 212, 363, 223, 368, 229, 385, 237, 404, 232, 409, 225, 407, 211, 403, 203, 446, 223, 473, 174, 507, 127, 323, 29, 444, -34, 448, -99, 381, -130)
+
+[sub_resource type="OccluderPolygon2D" id="18"]
+polygon = PackedVector2Array(1278, 252, 1280, 321, 1343, 348, 1350, 350, 1171, 440, 1294, 404, 1544, 317, 1409, 253, 1564, 176, 1495, 146)
+
+[sub_resource type="Gradient" id="11"]
+offsets = PackedFloat32Array(0.0111732, 0.636872)
+colors = PackedColorArray(0.648926, 0.648926, 0.648926, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="12"]
+gradient = SubResource("11")
+width = 500
+height = 500
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="OccluderPolygon2D" id="14"]
+polygon = PackedVector2Array(1152, 69, 1151, 105, 1183, 49, 1222, 30, 1229, -31, 1270, 3, 1295, -4, 1341, 42, 1344, 95, 1403, 125, 1405, 63, 1343, 31, 1406, -2, 1409, -131, 1217, -38, 1217, 26, 1088, -34, 1027, -3)
+
+[sub_resource type="OccluderPolygon2D" id="15"]
+polygon = PackedVector2Array(704, 541, 583, 608, 580, 673, 627, 695, 704, 732, 895, 705, 834, 671, 932, 622, 878, 584, 832, 605)
+
+[sub_resource type="OccluderPolygon2D" id="16"]
+polygon = PackedVector2Array(-58, 673, 384, 900, 748, 721, 906, 698, 906, 834, 436, 1033, 220, 995, -130, 814, -201, 726, -137, 702)
+
+[sub_resource type="OccluderPolygon2D" id="17"]
+polygon = PackedVector2Array(786, 269, 829, 229, 459, 412, 512, 448, 623, 388, 623, 400, 618, 412, 623, 421, 646, 424, 659, 418, 664, 402, 660, 396, 661, 370)
+
+[sub_resource type="CanvasItemMaterial" id="21"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="22"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="41"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="43"]
+atlas = ExtResource("18")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="44"]
+atlas = ExtResource("18")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="45"]
+atlas = ExtResource("18")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="46"]
+atlas = ExtResource("18")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="47"]
+atlas = ExtResource("18")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="48"]
+atlas = ExtResource("18")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="49"]
+atlas = ExtResource("18")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="50"]
+atlas = ExtResource("18")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="51"]
+atlas = ExtResource("18")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="52"]
+atlas = ExtResource("18")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="53"]
+atlas = ExtResource("18")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="54"]
+atlas = ExtResource("18")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="55"]
+atlas = ExtResource("18")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="56"]
+atlas = ExtResource("18")
+region = Rect2(832, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="57"]
+atlas = ExtResource("18")
+region = Rect2(896, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="58"]
+atlas = ExtResource("18")
+region = Rect2(960, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="40"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("43")
+}, {
+"duration": 1.0,
+"texture": SubResource("44")
+}, {
+"duration": 1.0,
+"texture": SubResource("45")
+}, {
+"duration": 1.0,
+"texture": SubResource("46")
+}, {
+"duration": 1.0,
+"texture": SubResource("47")
+}, {
+"duration": 1.0,
+"texture": SubResource("48")
+}, {
+"duration": 1.0,
+"texture": SubResource("49")
+}, {
+"duration": 1.0,
+"texture": SubResource("50")
+}, {
+"duration": 1.0,
+"texture": SubResource("51")
+}, {
+"duration": 1.0,
+"texture": SubResource("52")
+}, {
+"duration": 1.0,
+"texture": SubResource("53")
+}, {
+"duration": 1.0,
+"texture": SubResource("54")
+}, {
+"duration": 1.0,
+"texture": SubResource("55")
+}, {
+"duration": 1.0,
+"texture": SubResource("56")
+}, {
+"duration": 1.0,
+"texture": SubResource("57")
+}, {
+"duration": 1.0,
+"texture": SubResource("58")
+}],
+"loop": true,
+"name": &"sleep",
+"speed": 16.0
+}]
+
+[sub_resource type="CanvasItemMaterial" id="42"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="92"]
+atlas = ExtResource("19")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="93"]
+atlas = ExtResource("19")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="94"]
+atlas = ExtResource("19")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="95"]
+atlas = ExtResource("19")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="96"]
+atlas = ExtResource("19")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="97"]
+atlas = ExtResource("19")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="98"]
+atlas = ExtResource("19")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="99"]
+atlas = ExtResource("19")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="100"]
+atlas = ExtResource("19")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="101"]
+atlas = ExtResource("19")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="102"]
+atlas = ExtResource("19")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="103"]
+atlas = ExtResource("19")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="104"]
+atlas = ExtResource("19")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="105"]
+atlas = ExtResource("19")
+region = Rect2(832, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="106"]
+atlas = ExtResource("19")
+region = Rect2(896, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="107"]
+atlas = ExtResource("19")
+region = Rect2(960, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="108"]
+atlas = ExtResource("19")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="109"]
+atlas = ExtResource("19")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="110"]
+atlas = ExtResource("19")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="111"]
+atlas = ExtResource("19")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="112"]
+atlas = ExtResource("19")
+region = Rect2(256, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="113"]
+atlas = ExtResource("19")
+region = Rect2(320, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="114"]
+atlas = ExtResource("19")
+region = Rect2(384, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="115"]
+atlas = ExtResource("19")
+region = Rect2(448, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="116"]
+atlas = ExtResource("19")
+region = Rect2(512, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="117"]
+atlas = ExtResource("19")
+region = Rect2(576, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="118"]
+atlas = ExtResource("19")
+region = Rect2(640, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="119"]
+atlas = ExtResource("19")
+region = Rect2(704, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="120"]
+atlas = ExtResource("19")
+region = Rect2(768, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="121"]
+atlas = ExtResource("19")
+region = Rect2(832, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="122"]
+atlas = ExtResource("19")
+region = Rect2(896, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="123"]
+atlas = ExtResource("19")
+region = Rect2(960, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="91"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("92")
+}, {
+"duration": 1.0,
+"texture": SubResource("93")
+}, {
+"duration": 1.0,
+"texture": SubResource("94")
+}, {
+"duration": 1.0,
+"texture": SubResource("95")
+}, {
+"duration": 1.0,
+"texture": SubResource("96")
+}, {
+"duration": 1.0,
+"texture": SubResource("97")
+}, {
+"duration": 1.0,
+"texture": SubResource("98")
+}, {
+"duration": 1.0,
+"texture": SubResource("99")
+}, {
+"duration": 1.0,
+"texture": SubResource("100")
+}, {
+"duration": 1.0,
+"texture": SubResource("101")
+}, {
+"duration": 1.0,
+"texture": SubResource("102")
+}, {
+"duration": 1.0,
+"texture": SubResource("103")
+}, {
+"duration": 1.0,
+"texture": SubResource("104")
+}, {
+"duration": 1.0,
+"texture": SubResource("105")
+}, {
+"duration": 1.0,
+"texture": SubResource("106")
+}, {
+"duration": 1.0,
+"texture": SubResource("107")
+}, {
+"duration": 1.0,
+"texture": SubResource("108")
+}, {
+"duration": 1.0,
+"texture": SubResource("109")
+}, {
+"duration": 1.0,
+"texture": SubResource("110")
+}, {
+"duration": 1.0,
+"texture": SubResource("111")
+}, {
+"duration": 1.0,
+"texture": SubResource("112")
+}, {
+"duration": 1.0,
+"texture": SubResource("113")
+}, {
+"duration": 1.0,
+"texture": SubResource("114")
+}, {
+"duration": 1.0,
+"texture": SubResource("115")
+}, {
+"duration": 1.0,
+"texture": SubResource("116")
+}, {
+"duration": 1.0,
+"texture": SubResource("117")
+}, {
+"duration": 1.0,
+"texture": SubResource("118")
+}, {
+"duration": 1.0,
+"texture": SubResource("119")
+}, {
+"duration": 1.0,
+"texture": SubResource("120")
+}, {
+"duration": 1.0,
+"texture": SubResource("121")
+}, {
+"duration": 1.0,
+"texture": SubResource("122")
+}, {
+"duration": 1.0,
+"texture": SubResource("123")
+}],
+"loop": true,
+"name": &"looking",
+"speed": 16.0
+}]
 
 [node name="Dungeon" type="Node2D"]
-y_sort_enabled = true
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="Floor" type="TileMap" parent="."]
 y_sort_enabled = true
+position = Vector2(-64, -32)
 tile_set = ExtResource("1")
 format = 2
-layer_0/name = "floor"
 layer_0/y_sort_enabled = true
-layer_0/y_sort_origin = -64
-layer_0/tile_data = PackedInt32Array(196613, 65541, 0, 196614, 5, 0, 196615, 5, 0, 196616, 5, 0, 196617, 5, 0, 131077, 5, 0, 65541, 65541, 0, 5, 5, 0, -65531, 65541, 0, -131067, 65541, 0, -196603, 65541, 0, -262139, 5, 0, -327675, 65541, 0, -393211, 65541, 0, -458747, 5, 0, 131081, 65541, 0, 65545, 65541, 0, 9, 65541, 0, -65527, 65541, 0, -131063, 65541, 0, -196599, 65541, 0, -196598, 65541, 0, -196597, 65541, 0, -196596, 5, 0, -196595, 65541, 0, -196594, 65541, 0, -262130, 65541, 0, -327666, 65541, 0, -393202, 65541, 0, -458738, 5, 0, -524274, 5, 0, -589810, 65541, 0, -655346, 65541, 0, -720882, 65541, 0, -786418, 5, 0, -851954, 5, 0, -917490, 65541, 0, -917491, 65541, 0, -917492, 65541, 0, -917493, 65541, 0, -851957, 5, 0, -786421, 5, 0, -720885, 5, 0, -655349, 65541, 0, -589813, 65541, 0, -524277, 65541, 0, -458741, 5, 0, -458742, 5, 0, -458743, 5, 0, -458744, 65541, 0, -458745, 65541, 0, -458746, 65541, 0, -327674, 65541, 0, -393210, 65541, 0, -393209, 5, 0, -327673, 5, 0, -262137, 65541, 0, -262138, 5, 0, -196602, 5, 0, -131066, 5, 0, -65530, 65541, 0, 6, 5, 0, 65542, 5, 0, 131078, 65541, 0, 131079, 5, 0, 65543, 65541, 0, 7, 65541, 0, -65529, 5, 0, -131065, 5, 0, -196601, 5, 0, -196600, 65541, 0, -262136, 5, 0, -327672, 65541, 0, -393208, 65541, 0, -393207, 65541, 0, -327671, 65541, 0, -262135, 5, 0, -262134, 65541, 0, -327670, 5, 0, -393206, 5, 0, -393205, 5, 0, -327669, 5, 0, -262133, 5, 0, -262132, 5, 0, -327668, 5, 0, -393204, 5, 0, -458740, 5, 0, -524276, 5, 0, -589812, 65541, 0, -655348, 5, 0, -720884, 65541, 0, -786420, 5, 0, -851956, 65541, 0, -851955, 5, 0, -786419, 5, 0, -720883, 5, 0, -655347, 65541, 0, -589811, 65541, 0, -524275, 65541, 0, -458739, 5, 0, -393203, 5, 0, -327667, 65541, 0, -262131, 5, 0, -131064, 5, 0, -65528, 65541, 0, 8, 5, 0, 65544, 5, 0, 131080, 5, 0)
-layer_1/name = "walls"
-layer_1/enabled = true
-layer_1/modulate = Color(1, 1, 1, 1)
-layer_1/y_sort_enabled = true
-layer_1/y_sort_origin = 32
-layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(-196603, 131077, 0, -131067, 131077, 0, -65531, 131077, 0, 5, 131077, 0, 65541, 131077, 0, 131077, 131077, 0, 196613, 131077, 0, 262149, 131077, 0, 262150, 131077, 0, 262151, 131077, 0, 262152, 131077, 0, 262153, 131077, 0, 262154, 131077, 0, 196618, 131077, 0, 131082, 131077, 0, 65546, 131077, 0, 10, 131077, 0, -65526, 131077, 0, -131062, 131077, 0, -131061, 131077, 0, -131060, 131077, 0, -131059, 131077, 0, -131058, 131077, 0, -131057, 131077, 0, -196593, 131077, 0, -262129, 131077, 0, -327665, 131077, 0, -393201, 131077, 0, -458737, 131077, 0, -524273, 131077, 0, -589809, 131077, 0, -655345, 131077, 0, -720881, 131077, 0, -786417, 131077, 0, -851953, 131077, 0, -917489, 131077, 0, -917490, 131077, 0, -917491, 131077, 0, -917492, 131077, 0, -917493, 131077, 0, -851957, 131077, 0, -786421, 131077, 0, -720885, 131077, 0, -655349, 131077, 0, -589813, 131077, 0, -524277, 131077, 0, -458741, 131077, 0, -458742, 131077, 0, -458745, 131077, 0, -458746, 131077, 0, -458747, 131077, 0, -393211, 131077, 0, -262139, 262149, 0, -327675, 262149, 0, -458744, 262149, 65536, -458743, 262149, 65536, -196601, 196613, 0, -393209, 196613, 0, 131081, 196613, 0, -655346, 196613, 0, -786420, 196613, 0, -851956, 196613, 0, -786418, 196613, 0, -851954, 196613, 0, -655348, 131077, 0, -458740, 131077, 0, -65527, 131077, 0, -65530, 131077, 0)
+layer_0/y_sort_origin = 32
+layer_0/tile_data = PackedInt32Array(-917493, 0, 0, -917492, 0, 0, -917491, 0, 0, -917490, 0, 0, -851957, 0, 0, -851956, 0, 0, -851955, 0, 0, -851954, 0, 0, -786421, 0, 0, -786420, 1, 0, -786419, 0, 0, -786418, 0, 0, -720885, 0, 0, -720884, 0, 0, -720883, 0, 0, -720882, 0, 0, -655349, 0, 0, -655348, 1, 0, -655347, 0, 0, -655346, 0, 0, -589813, 0, 0, -589812, 1, 0, -589811, 0, 0, -589810, 0, 0, -524277, 0, 0, -524276, 0, 0, -524275, 1, 0, -524274, 0, 0, -458747, 0, 0, -458746, 0, 0, -458745, 0, 0, -458744, 0, 0, -458743, 0, 0, -458742, 0, 0, -458741, 0, 0, -458740, 0, 0, -458739, 0, 0, -458738, 0, 0, -393211, 0, 0, -393210, 0, 0, -393209, 0, 0, -393208, 0, 0, -393207, 0, 0, -393206, 0, 0, -393205, 0, 0, -393204, 0, 0, -393203, 0, 0, -393202, 0, 0, -327675, 0, 0, -327674, 0, 0, -327673, 0, 0, -327672, 1, 0, -327671, 1, 0, -327670, 1, 0, -327669, 1, 0, -327668, 1, 0, -327667, 0, 0, -327666, 0, 0, -327665, 1, 65536, -327664, 1, 65536, -262139, 0, 0, -262138, 0, 0, -262137, 0, 0, -262136, 0, 0, -262135, 0, 0, -262134, 0, 0, -262133, 0, 0, -262132, 0, 0, -262131, 0, 0, -262130, 0, 0, -262129, 1, 65536, -262128, 1, 65536, -196608, 0, 0, -196607, 0, 0, -196606, 0, 0, -196603, 0, 0, -196602, 0, 0, -196601, 0, 0, -196600, 0, 0, -196599, 0, 0, -196598, 0, 0, -196597, 0, 0, -196596, 0, 0, -196595, 0, 0, -196594, 0, 0, -196593, 1, 65536, -196592, 1, 65536, -131072, 1, 0, -131071, 1, 0, -131070, 0, 0, -131067, 0, 0, -131066, 0, 0, -131065, 0, 0, -131064, 0, 0, -131063, 0, 0, -131061, 1, 65536, -131060, 1, 65536, -131059, 1, 0, -131058, 1, 0, -131057, 1, 65536, -131056, 1, 65536, -65536, 1, 0, -65535, 1, 0, -65534, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, -65525, 0, 0, -65524, 1, 65536, -65523, 1, 65536, -65522, 1, 0, -65521, 1, 65536, -65520, 1, 65536, 0, 0, 0, 1, 1, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 1, 0, 8, 0, 0, 9, 0, 0, 11, 1, 65536, 12, 1, 65536, 13, 1, 65536, 14, 1, 0, 15, 1, 65536, 16, 1, 65536, 65536, 0, 0, 65537, 0, 0, 65538, 1, 0, 65539, 0, 0, 65540, 0, 0, 65541, 1, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65547, 1, 65536, 65548, 0, 0, 65549, 0, 0, 65550, 0, 0, 65551, 1, 65536, 65552, 1, 65536, 131072, 0, 0, 131073, 1, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 131083, 0, 0, 131084, 0, 0, 131085, 1, 65536, 131086, 1, 65536, 131087, 1, 65536, 131088, 1, 65536, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196619, 1, 65536, 196620, 1, 65536, 196621, 1, 65536, 196622, 1, 65536, 196623, 1, 65536, 196624, 1, 65536, 262157, 1, 65536, 327693, 1, 65536, 393227, 0, 0, 393228, 1, 65536, 393229, 1, 65536, 393230, 1, 65536, 393231, 1, 65536, 393232, 0, 0, 393233, 1, 65536, 458763, 1, 65536, 458764, 0, 0, 458765, 1, 0, 458766, 0, 0, 458767, 1, 0, 458768, 1, 65536, 458769, 1, 65536, 524299, 0, 0, 524300, 1, 65536, 524301, 1, 65536, 524302, 1, 0, 524303, 1, 65536, 524304, 1, 65536, 524305, 1, 65536, 589835, 1, 65536, 589836, 0, 0, 589837, 1, 65536, 589838, 1, 65536, 589839, 0, 0, 589840, 1, 65536, 589841, 1, 65536, 655371, 1, 65536, 655372, 1, 65536, 655373, 0, 0, 655374, 1, 65536, 655375, 1, 65536, 655376, 1, 65536, 655377, 1, 65536, 720907, 1, 65536, 720908, 1, 65536, 720909, 1, 65536, 720910, 1, 65536, 720911, 1, 65536, 720912, 1, 65536, 720913, 1, 65536, 196617, 0, 0, 327694, 0, 0, 262158, 0, 0)
 
-[node name="Troll" parent="." instance=ExtResource("2")]
-position = Vector2(448.142, 339.007)
+[node name="Glow" type="Sprite2D" parent="Floor"]
+modulate = Color(0.164706, 0, 0.152941, 1)
+position = Vector2(773, 256)
+scale = Vector2(4.8125, 2.5)
+texture = ExtResource("12")
+
+[node name="Glow2" type="Sprite2D" parent="Floor"]
+modulate = Color(0.164706, 0, 0.152941, 1)
+position = Vector2(1535, 234)
+rotation = -0.436332
+scale = Vector2(10.9891, 2.5)
+texture = ExtResource("12")
+
+[node name="Glow3" type="Sprite2D" parent="Floor"]
+modulate = Color(0.164706, 0, 0.152941, 1)
+position = Vector2(1182, 523)
+rotation = -0.436332
+scale = Vector2(10.9891, 2.5)
+texture = ExtResource("12")
+
+[node name="Glow12" type="Sprite2D" parent="Floor"]
+modulate = Color(0.164706, 0, 0.152941, 1)
+position = Vector2(851, 626)
+rotation = 1.93033
+scale = Vector2(0.982245, 3.53429)
+texture = ExtResource("12")
+
+[node name="Glow13" type="Sprite2D" parent="Floor"]
+modulate = Color(0.164706, 0, 0.152941, 1)
+position = Vector2(590, 470)
+rotation = 1.0472
+scale = Vector2(1.3224, 3.25661)
+texture = ExtResource("12")
+
+[node name="Glow14" type="Sprite2D" parent="Floor"]
+modulate = Color(0.164706, 0, 0.152941, 1)
+position = Vector2(90, 725)
+rotation = 1.0472
+scale = Vector2(1.3224, 3.25661)
+texture = ExtResource("12")
+
+[node name="Glow8" type="Sprite2D" parent="Floor"]
+modulate = Color(0.164706, 0, 0.152941, 1)
+position = Vector2(356, 37)
+rotation = -0.436332
+scale = Vector2(5.56892, 1.51161)
+texture = ExtResource("12")
+
+[node name="Glow11" type="Sprite2D" parent="Floor"]
+modulate = Color(0.164706, 0, 0.152941, 1)
+position = Vector2(566, 164)
+rotation = -0.623083
+scale = Vector2(4.00932, 1.37909)
+texture = ExtResource("12")
+
+[node name="Glow9" type="Sprite2D" parent="Floor"]
+modulate = Color(0.164706, 0, 0.152941, 1)
+position = Vector2(-130, 139)
+rotation = 0.445059
+scale = Vector2(5.56892, 1.51161)
+texture = ExtResource("12")
+
+[node name="Glow10" type="Sprite2D" parent="Floor"]
+modulate = Color(0.164706, 0, 0.152941, 1)
+position = Vector2(392, 184)
+rotation = 0.445059
+scale = Vector2(5.56892, 1.51161)
+texture = ExtResource("12")
+
+[node name="Glow4" type="Sprite2D" parent="Floor"]
+modulate = Color(0.164706, 0, 0.152941, 1)
+position = Vector2(312, 387)
+rotation = 0.513127
+scale = Vector2(10.9891, 2.5)
+texture = ExtResource("12")
+
+[node name="Glow5" type="Sprite2D" parent="Floor"]
+modulate = Color(0.164706, 0, 0.152941, 1)
+position = Vector2(601, 375)
+rotation = -0.490438
+scale = Vector2(10.9891, 2.5)
+texture = ExtResource("12")
+
+[node name="Glow6" type="Sprite2D" parent="Floor"]
+modulate = Color(0.164706, 0, 0.152941, 1)
+position = Vector2(641, 856)
+rotation = -0.490438
+scale = Vector2(17.9912, 2.5)
+texture = ExtResource("12")
+
+[node name="Glow7" type="Sprite2D" parent="Floor"]
+modulate = Color(0.164706, 0, 0.152941, 1)
+position = Vector2(255, 861)
+rotation = 0.462512
+scale = Vector2(17.9912, 2.5)
+texture = ExtResource("12")
+
+[node name="Walls" type="TileMap" parent="."]
+y_sort_enabled = true
+position = Vector2(-64, -32)
+tile_set = ExtResource("1")
+format = 2
+layer_0/y_sort_enabled = true
+layer_0/y_sort_origin = 32
+layer_0/tile_data = PackedInt32Array(-917493, 2, 0, -917492, 2, 0, -917491, 2, 0, -917490, 2, 0, -917489, 2, 0, -851957, 2, 0, -851956, 3, 0, -851953, 2, 0, -786421, 2, 0, -786420, 3, 0, -786417, 2, 0, -720885, 2, 0, -720881, 2, 0, -655349, 2, 0, -655348, 2, 0, -655345, 2, 0, -589813, 2, 0, -589809, 2, 0, -524277, 2, 0, -524273, 2, 0, -458747, 2, 0, -458746, 2, 0, -458745, 2, 0, -458744, 4, 65536, -458743, 4, 65536, -458742, 2, 0, -458741, 2, 0, -458737, 2, 0, -393211, 2, 0, -393209, 3, 0, -393206, 3, 0, -393201, 2, 0, -393200, 2, 65536, -393199, 2, 65536, -327675, 4, 0, -327663, 2, 65536, -196609, 2, 0, -262144, 2, 0, -262143, 2, 0, -262142, 2, 0, -262141, 2, 0, -262139, 4, 0, -262127, 2, 65536, -131073, 2, 0, -196605, 2, 0, -196603, 2, 0, -196591, 2, 65536, -65537, 2, 0, -131072, 3, 0, -131069, 2, 0, -131067, 2, 0, -131066, 3, 0, -131063, 3, 0, -131062, 2, 0, -131055, 2, 65536, -1, 2, 0, -65533, 2, 0, -65532, 2, 0, -65531, 2, 0, -65530, 2, 0, -65527, 2, 0, -65526, 2, 0, -65525, 3, 0, -65522, 3, 0, -65520, 3, 0, -65519, 2, 65536, 65535, 2, 0, 3, 3, 0, 6, 3, 0, 10, 2, 0, 16, 3, 0, 17, 2, 65536, 131071, 2, 0, 65546, 2, 0, 65547, 3, 0, 65550, 3, 0, 65552, 3, 0, 65553, 2, 65536, 196607, 2, 0, 131072, 3, 0, 131081, 3, 0, 131082, 2, 0, 131089, 2, 65536, 262143, 2, 0, 196618, 2, 0, 196625, 2, 65536, 327679, 2, 0, 262144, 2, 0, 262145, 2, 0, 262146, 2, 0, 262147, 4, 65536, 262148, 4, 65536, 262149, 2, 0, 262150, 2, 0, 262151, 2, 0, 262152, 2, 0, 262153, 2, 0, 262154, 2, 0, 262155, 2, 65536, 262156, 2, 65536, 262159, 2, 65536, 262160, 2, 65536, 262161, 2, 65536, 327690, 2, 65536, 327691, 2, 65536, 327692, 2, 65536, 327695, 2, 65536, 327696, 2, 65536, 327697, 2, 65536, 327698, 2, 65536, 393226, 2, 65536, 393232, 3, 0, 393234, 2, 65536, 458762, 2, 65536, 458767, 3, 0, 458770, 2, 65536, 524298, 2, 65536, 524306, 2, 65536, 589834, 2, 65536, 589842, 2, 65536, 655370, 2, 65536, 655371, 3, 0, 655375, 3, 0, 655376, 3, 0, 655378, 2, 65536, 720906, 2, 65536, 720912, 3, 0, 720914, 2, 65536, 786442, 2, 65536, 786443, 2, 65536, 786444, 2, 65536, 786445, 2, 65536, 786446, 2, 65536, 786447, 2, 65536, 786448, 2, 65536, 786449, 2, 65536, 786450, 2, 65536, 393233, 3, 0)
+
+[node name="Shadows" type="Node2D" parent="Walls"]
+position = Vector2(64, 32)
+
+[node name="InternalShadow1" parent="Walls/Shadows" instance=ExtResource("14")]
+position = Vector2(328, 545)
+polygon = PackedVector2Array(-5, -66, -5, -23, 57, 11, 57, -34)
+
+[node name="InternalShadow2" parent="Walls/Shadows" instance=ExtResource("14")]
+position = Vector2(582, 291)
+polygon = PackedVector2Array(-5, -66, -6, -39, 56, -6, 57, -34)
+
+[node name="InternalShadow3" parent="Walls/Shadows" instance=ExtResource("14")]
+position = Vector2(579, 672)
+polygon = PackedVector2Array(-4, -69, -5, -19, 57, 11, 57, -34)
+
+[node name="InternalShadow4" parent="Walls/Shadows" instance=ExtResource("14")]
+position = Vector2(648, 708)
+polygon = PackedVector2Array(-4, -69, -5, -19, 57, 11, 57, -34)
+
+[node name="InternalShadow12" parent="Walls/Shadows" instance=ExtResource("14")]
+position = Vector2(1346, 99)
+polygon = PackedVector2Array(-5, -5, 59, 27, 59, -4, -4, -69)
+
+[node name="InternalShadow13" parent="Walls/Shadows" instance=ExtResource("14")]
+position = Vector2(1416, 55)
+polygon = PackedVector2Array(-6, 7, 103, -46, 53, -122, -10, -58)
+
+[node name="InternalShadow14" parent="Walls/Shadows" instance=ExtResource("14")]
+position = Vector2(0, 705)
+polygon = PackedVector2Array(-50, 21, 62, -32, 60, -117, -70, -28)
+
+[node name="InternalShadow15" parent="Walls/Shadows" instance=ExtResource("14")]
+position = Vector2(-196, 96)
+polygon = PackedVector2Array(-50, 21, 62, -32, -2, -88, -70, -28)
+
+[node name="InternalShadow5" parent="Walls/Shadows" instance=ExtResource("14")]
+position = Vector2(709, 739)
+polygon = PackedVector2Array(-4, -69, -5, -19, 57, 11, 57, -34)
+
+[node name="InternalShadow6" parent="Walls/Shadows" instance=ExtResource("14")]
+position = Vector2(1464, 99)
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(-6, -70, -6, -23, 58, 14, 58, -35)
+
+[node name="InternalShadow7" parent="Walls/Shadows" instance=ExtResource("14")]
+position = Vector2(569, 99)
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(-6, -70, -6, -23, 58, 14, 58, -35)
+
+[node name="InternalShadow8" parent="Walls/Shadows" instance=ExtResource("14")]
+position = Vector2(504, 131)
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(-6, -70, -6, -23, 58, 14, 58, -35)
+
+[node name="InternalShadow9" parent="Walls/Shadows" instance=ExtResource("14")]
+position = Vector2(390, 576)
+polygon = PackedVector2Array(-5, -65, -4, -24, 61, 10, 59, -33)
+
+[node name="InternalShadow10" parent="Walls/Shadows" instance=ExtResource("14")]
+position = Vector2(1285, 323)
+polygon = PackedVector2Array(-5, -65, -4, -24, 61, 10, 59, -33)
+
+[node name="InternalShadow11" parent="Walls/Shadows" instance=ExtResource("14")]
+position = Vector2(1350, 353)
+polygon = PackedVector2Array(-5, -65, -4, -24, 61, 10, 59, -33)
+
+[node name="CollisionDecorations" type="Node2D" parent="Walls"]
+position = Vector2(64, 32)
+
+[node name="Vase1_2" parent="Walls/CollisionDecorations" instance=ExtResource("7")]
+position = Vector2(741, 38)
+
+[node name="Vase1_3" parent="Walls/CollisionDecorations" instance=ExtResource("7")]
+position = Vector2(1264, 285)
+
+[node name="Vase1_4" parent="Walls/CollisionDecorations" instance=ExtResource("7")]
+position = Vector2(1492, 79)
+
+[node name="Vase1_5" parent="Walls/CollisionDecorations" instance=ExtResource("7")]
+position = Vector2(324, 610)
+
+[node name="Vase1_6" parent="Walls/CollisionDecorations" instance=ExtResource("7")]
+position = Vector2(248, 655)
+
+[node name="vase2_1" parent="Walls/CollisionDecorations" instance=ExtResource("8")]
+position = Vector2(16, 20)
+
+[node name="vase2_3" parent="Walls/CollisionDecorations" instance=ExtResource("8")]
+position = Vector2(787, 43)
+
+[node name="vase2_4" parent="Walls/CollisionDecorations" instance=ExtResource("8")]
+position = Vector2(-28, 46)
+
+[node name="vase2_5" parent="Walls/CollisionDecorations" instance=ExtResource("8")]
+position = Vector2(1242, 313)
+
+[node name="vase2_6" parent="Walls/CollisionDecorations" instance=ExtResource("8")]
+position = Vector2(1118, 343)
+
+[node name="vase2_8" parent="Walls/CollisionDecorations" instance=ExtResource("8")]
+position = Vector2(838, 257)
+
+[node name="vase2_7" parent="Walls/CollisionDecorations" instance=ExtResource("8")]
+position = Vector2(296, 655)
+
+[node name="coin_pile" parent="Walls/CollisionDecorations" instance=ExtResource("9")]
+position = Vector2(117, 251)
+scale = Vector2(0.5, 0.5)
+
+[node name="coin_pile2" parent="Walls/CollisionDecorations" instance=ExtResource("9")]
+position = Vector2(10, 43)
+scale = Vector2(0.5, 0.5)
+
+[node name="coin_pile8" parent="Walls/CollisionDecorations" instance=ExtResource("9")]
+position = Vector2(245, 158)
+scale = Vector2(0.5, 0.5)
+
+[node name="coin_pile9" parent="Walls/CollisionDecorations" instance=ExtResource("9")]
+position = Vector2(225, 165)
+scale = Vector2(-0.5, 0.5)
+
+[node name="coin_pile10" parent="Walls/CollisionDecorations" instance=ExtResource("9")]
+position = Vector2(-66, 47)
+scale = Vector2(0.5, 0.5)
+
+[node name="coin_pile6" parent="Walls/CollisionDecorations" instance=ExtResource("9")]
+position = Vector2(197, 644)
+scale = Vector2(0.5, 0.5)
+
+[node name="coin_pile3" parent="Walls/CollisionDecorations" instance=ExtResource("9")]
+position = Vector2(232, 148)
+rotation = -3.14159
+scale = Vector2(0.5, -0.5)
+
+[node name="coin_pile4" parent="Walls/CollisionDecorations" instance=ExtResource("9")]
+position = Vector2(763, 67)
+rotation = -3.14159
+scale = Vector2(0.5, -0.5)
+
+[node name="coin_pile5" parent="Walls/CollisionDecorations" instance=ExtResource("9")]
+position = Vector2(1242, 343)
+rotation = -3.14159
+scale = Vector2(0.5, -0.5)
+
+[node name="coin_pile7" parent="Walls/CollisionDecorations" instance=ExtResource("9")]
+position = Vector2(338, 639)
+rotation = -3.14159
+scale = Vector2(0.5, -0.5)
+
+[node name="bone_pile" parent="Walls/CollisionDecorations" instance=ExtResource("10")]
+position = Vector2(609, 114)
+
+[node name="bone_pile2" parent="Walls/CollisionDecorations" instance=ExtResource("10")]
+position = Vector2(1342, 145)
+
+[node name="bone_pile3" parent="Walls/CollisionDecorations" instance=ExtResource("10")]
+position = Vector2(611, 460)
+
+[node name="bone_pile4" parent="Walls/CollisionDecorations" instance=ExtResource("11")]
+position = Vector2(-73, 135)
+scale = Vector2(-1, 1)
+
+[node name="bone_pile5" parent="Walls/CollisionDecorations" instance=ExtResource("11")]
+position = Vector2(569, 152)
+
+[node name="bone_pile9" parent="Walls/CollisionDecorations" instance=ExtResource("11")]
+position = Vector2(1653, 50)
+
+[node name="bone_pile6" parent="Walls/CollisionDecorations" instance=ExtResource("11")]
+position = Vector2(1242, 388)
+
+[node name="bone_pile10" parent="Walls/CollisionDecorations" instance=ExtResource("11")]
+position = Vector2(1046, 204)
+scale = Vector2(-1, 1)
+
+[node name="bone_pile7" parent="Walls/CollisionDecorations" instance=ExtResource("11")]
+position = Vector2(704, 409)
+
+[node name="bone_pile8" parent="Walls/CollisionDecorations" instance=ExtResource("11")]
+position = Vector2(146, 686)
+
+[node name="FloorObjects" type="Node2D" parent="Walls"]
+position = Vector2(64, 32)
+
+[node name="Rug1" type="Sprite2D" parent="Walls/FloorObjects"]
+position = Vector2(55, 119)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("5")
+
+[node name="Rug2" type="Sprite2D" parent="Walls/FloorObjects"]
+position = Vector2(388, 720)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("5")
+
+[node name="Rug3" type="Sprite2D" parent="Walls/FloorObjects"]
+position = Vector2(976, 290)
+scale = Vector2(-1, 1)
+texture = ExtResource("5")
+
+[node name="PawPrints" type="Polygon2D" parent="Walls/FloorObjects"]
+position = Vector2(786, 334)
+color = Color(0.0901961, 0.0705882, 0.215686, 1)
+texture = ExtResource("16")
+polygon = PackedVector2Array(46, 20, -36, 54, 60, 105, 136, 63)
+uv = PackedVector2Array(1, 0, 0, 120, 129, 120, 129, 0)
+
+[node name="PawPrints7" type="Polygon2D" parent="Walls/FloorObjects"]
+position = Vector2(115, 670)
+color = Color(0.0901961, 0.0705882, 0.215686, 1)
+texture = ExtResource("16")
+polygon = PackedVector2Array(46, 20, -36, 54, 60, 105, 136, 63)
+uv = PackedVector2Array(1, 0, 0, 120, 129, 120, 129, 0)
+
+[node name="PawPrints4" type="Polygon2D" parent="Walls/FloorObjects"]
+position = Vector2(168, 123)
+color = Color(0.0901961, 0.0705882, 0.215686, 1)
+texture = ExtResource("16")
+polygon = PackedVector2Array(-4, 65, -8, 122, 116, 107, 101, 54)
+uv = PackedVector2Array(1, 0, 0, 120, 129, 120, 129, 0)
+
+[node name="PawPrints5" type="Polygon2D" parent="Walls/FloorObjects"]
+position = Vector2(506, 602)
+color = Color(0.0901961, 0.0705882, 0.215686, 1)
+texture = ExtResource("16")
+polygon = PackedVector2Array(-4, 65, -8, 122, 116, 107, 101, 54)
+uv = PackedVector2Array(1, 0, 0, 120, 129, 120, 129, 0)
+
+[node name="PawPrints2" type="Polygon2D" parent="Walls/FloorObjects"]
+material = SubResource("23")
+position = Vector2(1234, 114)
+color = Color(0.156863, 0.462745, 0.501961, 0.505882)
+texture = ExtResource("16")
+polygon = PackedVector2Array(46, 20, -36, 54, 60, 105, 136, 63)
+uv = PackedVector2Array(1, 0, 0, 120, 129, 120, 129, 0)
+
+[node name="PawPrints6" type="Polygon2D" parent="Walls/FloorObjects"]
+material = SubResource("23")
+position = Vector2(-50, 169)
+color = Color(0.156863, 0.462745, 0.501961, 0.505882)
+texture = ExtResource("16")
+polygon = PackedVector2Array(46, 20, -36, 54, 60, 105, 136, 63)
+uv = PackedVector2Array(1, 0, 0, 120, 129, 120, 129, 0)
+
+[node name="PawPrints3" type="Polygon2D" parent="Walls/FloorObjects"]
+material = SubResource("23")
+position = Vector2(616, 10)
+color = Color(0.156863, 0.462745, 0.501961, 0.505882)
+texture = ExtResource("16")
+polygon = PackedVector2Array(28, 31, 24, 84, 124, 83, 125, 39)
+uv = PackedVector2Array(1, 0, 0, 120, 129, 120, 129, 0)
+
+[node name="Goblin" parent="Walls" instance=ExtResource("3")]
+position = Vector2(273, -2)
+
+[node name="Node2D" type="Node2D" parent="Walls"]
+
+[node name="HighWalls" type="TileMap" parent="."]
+y_sort_enabled = true
+position = Vector2(-64, -32)
+tile_set = ExtResource("1")
+format = 2
+layer_0/y_sort_enabled = true
+layer_0/tile_data = PackedInt32Array(-983030, 2, 0, -983029, 2, 0, -983028, 2, 0, -983027, 2, 0, -983026, 2, 0, -917494, 2, 0, -851958, 2, 0, -786422, 2, 0, -720886, 2, 0, -655350, 2, 0, -589814, 2, 0, -524284, 2, 0, -524283, 2, 0, -524282, 2, 0, -524279, 2, 0, -524278, 2, 0, -458748, 2, 0, -262146, 2, 0, -262145, 2, 0, -327680, 2, 0, -327679, 2, 0, -327678, 2, 0, -196610, 2, 0, -131074, 2, 0, -65538, 2, 0, -2, 2, 0, 65534, 2, 0, 131070, 2, 0, 196606, 2, 0, 262142, 2, 0, 458761, 2, 0, 524297, 2, 0, 589833, 2, 0, 655369, 2, 0, 720905, 2, 0)
+
+[node name="HighWalls2" type="TileMap" parent="."]
+y_sort_enabled = true
+position = Vector2(-64, -32)
+tile_set = ExtResource("1")
+format = 2
+layer_0/y_sort_enabled = true
+layer_0/tile_data = PackedInt32Array(-1048567, 2, 0, -1048566, 2, 0, -1048565, 2, 0, -1048564, 2, 0, -983031, 2, 0, -917495, 2, 0, -851959, 2, 0, -786423, 2, 0, -720887, 2, 0, -655351, 2, 0, -589821, 2, 0, -589820, 2, 0, -327683, 2, 0, -327682, 2, 0, -327681, 2, 0, -393216, 2, 0, -262147, 2, 0, -196611, 2, 0, -131075, 2, 0, -65539, 2, 0, -3, 2, 0, 65533, 2, 0, 131069, 2, 0, 524296, 2, 0, 589832, 2, 0, 655368, 2, 0)
+
+[node name="Decorations" type="Node2D" parent="."]
+
+[node name="Candles" type="Node2D" parent="Decorations"]
+
+[node name="c1" parent="Decorations/Candles" instance=ExtResource("4")]
+position = Vector2(223, -147)
+
+[node name="c2" parent="Decorations/Candles" instance=ExtResource("4")]
+position = Vector2(1691, -48)
+
+[node name="c11" parent="Decorations/Candles" instance=ExtResource("4")]
+position = Vector2(859, -17)
+
+[node name="c3" parent="Decorations/Candles" instance=ExtResource("4")]
+position = Vector2(355, -86)
+
+[node name="c4" parent="Decorations/Candles" instance=ExtResource("4")]
+position = Vector2(-96, -25)
+scale = Vector2(-1, 1)
+
+[node name="c8" parent="Decorations/Candles" instance=ExtResource("4")]
+position = Vector2(-205, 30)
+scale = Vector2(-1, 1)
+
+[node name="c5" parent="Decorations/Candles" instance=ExtResource("4")]
+position = Vector2(1248, 81)
+scale = Vector2(-1, 1)
+
+[node name="c9" parent="Decorations/Candles" instance=ExtResource("4")]
+position = Vector2(734, -41)
+scale = Vector2(-1, 1)
+
+[node name="c6" parent="Decorations/Candles" instance=ExtResource("4")]
+position = Vector2(161, 560)
+scale = Vector2(-1, 1)
+
+[node name="c10" parent="Decorations/Candles" instance=ExtResource("4")]
+position = Vector2(17, 632)
+scale = Vector2(-1, 1)
+
+[node name="c7" parent="Decorations/Candles" instance=ExtResource("4")]
+position = Vector2(1464, -22)
+scale = Vector2(-1, 1)
+
+[node name="banners" type="Node2D" parent="Decorations"]
+
+[node name="Drape1" type="Sprite2D" parent="Decorations/banners"]
+position = Vector2(-107, -100)
+rotation = 3.14159
+scale = Vector2(0.960001, -1)
+texture = ExtResource("15")
+
+[node name="Drape3" type="Sprite2D" parent="Decorations/banners"]
+position = Vector2(-67, 583)
+rotation = 3.14159
+scale = Vector2(0.960001, -1)
+texture = ExtResource("15")
+
+[node name="Drape4" type="Sprite2D" parent="Decorations/banners"]
+position = Vector2(12, 543)
+rotation = 3.14159
+scale = Vector2(0.960001, -1)
+texture = ExtResource("15")
+
+[node name="Drape6" type="Sprite2D" parent="Decorations/banners"]
+position = Vector2(1733, -122)
+texture = ExtResource("15")
+
+[node name="Drape8" type="Sprite2D" parent="Decorations/banners"]
+position = Vector2(1650, -161)
+texture = ExtResource("15")
+
+[node name="Drape9" type="Sprite2D" parent="Decorations/banners"]
+position = Vector2(1278, -29)
+scale = Vector2(-1, 1)
+texture = ExtResource("15")
+
+[node name="Drape10" type="Sprite2D" parent="Decorations/banners"]
+position = Vector2(1449, -110)
+scale = Vector2(-1, 1)
+texture = ExtResource("15")
+
+[node name="Banner" type="Sprite2D" parent="Decorations/banners"]
+position = Vector2(796, -122)
+texture = ExtResource("6")
+
+[node name="Banner2" type="Sprite2D" parent="Decorations/banners"]
+position = Vector2(-12, -115)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("6")
+
+[node name="Drape2" type="Sprite2D" parent="Decorations/banners"]
+position = Vector2(-189, -61)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("15")
+
+[node name="Drape5" type="Sprite2D" parent="Decorations/banners"]
+position = Vector2(147, -231)
+rotation = 3.14159
+scale = Vector2(0.960001, -1)
+texture = ExtResource("15")
+
+[node name="Drape7" type="Sprite2D" parent="Decorations/banners"]
+position = Vector2(67, -191)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("15")
+
+[node name="Banner3" type="Sprite2D" parent="Decorations/banners"]
+position = Vector2(1367, -38)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("6")
+
+[node name="Banner4" type="Sprite2D" parent="Decorations/banners"]
+position = Vector2(104, 579)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("6")
+
+[node name="wall_skulls" type="Node2D" parent="Decorations"]
+
+[node name="WallSkull" type="Sprite2D" parent="Decorations/wall_skulls"]
+position = Vector2(286, -174)
+texture = ExtResource("2")
+
+[node name="WallSkull2" type="Sprite2D" parent="Decorations/wall_skulls"]
+position = Vector2(1552, -123)
+scale = Vector2(-1, 1)
+texture = ExtResource("2")
+
+[node name="WallSkull3" type="Sprite2D" parent="Decorations/wall_skulls"]
+position = Vector2(1552, -123)
+scale = Vector2(-1, 1)
+texture = ExtResource("2")
+
+[node name="Ambient" type="Node2D" parent="."]
+
+[node name="Node2D" type="Node2D" parent="Ambient"]
+
+[node name="InternalShadow10" parent="Ambient/Node2D" instance=ExtResource("14")]
+position = Vector2(193, -89)
+scale = Vector2(-1, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.54902)
+polygon = PackedVector2Array(1, -60, 28, -45, 19, -194, 1, -201)
+
+[node name="InternalShadow13" parent="Ambient/Node2D" instance=ExtResource("14")]
+position = Vector2(1602, -26)
+scale = Vector2(-1, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.54902)
+polygon = PackedVector2Array(1, -60, 28, -45, 19, -194, 1, -201)
+
+[node name="InternalShadow14" parent="Ambient/Node2D" instance=ExtResource("14")]
+position = Vector2(770, 68)
+scale = Vector2(-1, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.54902)
+polygon = PackedVector2Array(1, -60, 28, -45, 19, -194, 1, -201)
+
+[node name="InternalShadow11" parent="Ambient/Node2D" instance=ExtResource("14")]
+position = Vector2(1150, 261)
+scale = Vector2(-1, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.54902)
+polygon = PackedVector2Array(-2, -185, 91, -148, 113, -256, 0, -195)
+
+[node name="InternalShadow12" parent="Ambient/Node2D" instance=ExtResource("14")]
+position = Vector2(892, 132)
+scale = Vector2(-1, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.54902)
+polygon = PackedVector2Array(-2, -185, 91, -148, 113, -256, 0, -195)
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="Ambient"]
+show_behind_parent = true
+occluder = SubResource("13")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Ambient"]
+show_behind_parent = true
+occluder = SubResource("1")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Ambient/LightOccluder2D"]
+occluder = SubResource("18")
+
+[node name="PointLight2D" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(175, 99)
+scale = Vector2(0.908, 0.84)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D9" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(700, 490)
+scale = Vector2(0.908, 0.84)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+energy = 2.0
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D3" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(1134, 188)
+scale = Vector2(0.908, 0.84)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+energy = 1.8
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D4" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(529, 176)
+scale = Vector2(0.908, 0.84)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+energy = 1.8
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D2" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(384, 352)
+scale = Vector2(1.056, 0.84)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+energy = 2.0
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D10" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(29, 223)
+scale = Vector2(1.056, 0.84)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+energy = 2.0
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D11" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(208, 356)
+rotation = 0.460767
+scale = Vector2(0.749244, 0.204)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D16" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(324, 90)
+rotation = 0.460767
+scale = Vector2(0.462875, 0.114816)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D20" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(682, 658)
+rotation = 0.460767
+scale = Vector2(0.462875, 0.114816)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D21" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(-35, 532)
+rotation = -0.410152
+scale = Vector2(0.462875, 0.114816)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D22" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(1008, 538)
+rotation = -0.410152
+scale = Vector2(0.462875, 0.114816)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D23" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(767, 576)
+rotation = 0.410152
+scale = Vector2(0.462875, 0.114816)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D17" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(1374, 298)
+rotation = 0.460767
+scale = Vector2(0.462875, 0.114816)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D18" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(623, 251)
+rotation = 0.460767
+scale = Vector2(0.248158, 0.0972839)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D19" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(798, 224)
+rotation = -0.523598
+scale = Vector2(-0.567691, -0.238339)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D12" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(648, 833)
+rotation = -0.445059
+scale = Vector2(0.749244, 0.204)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D14" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(1135, 528)
+rotation = -0.445059
+scale = Vector2(0.979784, 0.204)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D15" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(641, 313)
+rotation = -0.445059
+scale = Vector2(0.815021, 0.090317)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D13" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(117, 837)
+rotation = 0.462512
+scale = Vector2(0.749244, 0.204)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D5" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(576, 648)
+scale = Vector2(1.056, 0.84)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+energy = 2.0
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D7" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(832, 281)
+scale = Vector2(1.056, 0.84)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+energy = 2.0
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D6" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(385, 865)
+scale = Vector2(1.718, 0.84)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+energy = 2.0
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="Light2D8" type="PointLight2D" parent="Ambient"]
+light_mask = 2
+position = Vector2(1279, 319)
+scale = Vector2(0.42775, 0.348)
+color = Color(0.709804, 0.388235, 0.313726, 1)
+energy = 2.0
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = SubResource("12")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="Ambient"]
+occluder = SubResource("14")
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="Ambient"]
+occluder = SubResource("15")
+
+[node name="LightOccluder2D5" type="LightOccluder2D" parent="Ambient"]
+occluder = SubResource("16")
+
+[node name="LightOccluder2D6" type="LightOccluder2D" parent="Ambient"]
+occluder = SubResource("17")
+
+[node name="ExternalShadow1" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("21")
+position = Vector2(-356, 114)
+scale = Vector2(0.296875, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.85098)
+texture = ExtResource("13")
+polygon = PackedVector2Array(-134.737, -130, 138.105, -87, 141.474, 81, -141.474, 46)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="ExternalShadow2" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("21")
+position = Vector2(-164, 658)
+scale = Vector2(0.296875, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.85098)
+texture = ExtResource("13")
+polygon = PackedVector2Array(-134.737, -130, 138.105, -87, 141.474, 81, -141.474, 46)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="ExternalShadow3" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("21")
+position = Vector2(-91, 826)
+scale = Vector2(0.296875, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.85098)
+texture = ExtResource("13")
+polygon = PackedVector2Array(-468.211, -178, 1788.63, 151, 1792, 221, -471.579, -97.0001)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="ExternalShadow4" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("21")
+position = Vector2(-91, 826)
+scale = Vector2(0.296875, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.85098)
+texture = ExtResource("13")
+polygon = PackedVector2Array(1125.05, 197, 3546.95, -164, 3550.32, -89.0001, 1101.47, 275)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="ExternalShadow5" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("21")
+position = Vector2(537, 452)
+scale = Vector2(0.296875, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.85098)
+texture = ExtResource("13")
+polygon = PackedVector2Array(1125.05, 197, 3546.95, -164, 3550.32, -89.0001, 1101.47, 275)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="ExternalShadow6" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("21")
+position = Vector2(601, 594)
+scale = Vector2(0.296875, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.85098)
+texture = ExtResource("13")
+polygon = PackedVector2Array(1007.16, 114, 751.158, 74, 1293.47, 1, 1283.37, 74)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="ExternalShadow7" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("21")
+position = Vector2(1172, 179)
+scale = Vector2(0.296875, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.85098)
+texture = ExtResource("13")
+polygon = PackedVector2Array(1007.16, 114, 751.158, 74, 1293.47, 1, 1283.37, 74)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="ExternalShadow8" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("21")
+position = Vector2(-297, 20)
+scale = Vector2(0.296875, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.85098)
+texture = ExtResource("13")
+polygon = PackedVector2Array(-124.631, -130, 138.105, -87, 141.474, -5.00001, -134.737, -51)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="ExternalShadow9" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("21")
+position = Vector2(1180, 57)
+scale = Vector2(0.296875, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.85098)
+texture = ExtResource("13")
+polygon = PackedVector2Array(-124.631, -130, 138.105, -87, 141.474, -5.00001, -134.737, -51)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="ExternalShadow10" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("21")
+position = Vector2(1828, -40)
+scale = Vector2(-0.297, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.85098)
+texture = ExtResource("13")
+polygon = PackedVector2Array(-124.631, -130, 138.105, -87, 141.474, -5.00001, -134.737, -51)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="ExternalShadow11" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("21")
+position = Vector2(864, -73)
+scale = Vector2(-0.297, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.85098)
+texture = ExtResource("13")
+polygon = PackedVector2Array(-124.631, -130, 138.105, -87, 141.474, -5.00001, -134.737, -51)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="ExternalShadow12" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("21")
+position = Vector2(-291, 209)
+scale = Vector2(0.296875, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.85098)
+texture = ExtResource("13")
+polygon = PackedVector2Array(-229.053, -135, 582.737, -16, 592.842, 57, -192, -65)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="ExternalShadow13" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("21")
+position = Vector2(1887, 52)
+scale = Vector2(-0.297, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.85098)
+texture = ExtResource("13")
+polygon = PackedVector2Array(-134.737, -130, 138.105, -87, 141.474, 81, -141.474, 46)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="ExternalShadow14" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("21")
+position = Vector2(927, 20)
+scale = Vector2(-0.297, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.85098)
+texture = ExtResource("13")
+polygon = PackedVector2Array(-134.737, -130, 138.105, -87, 131.313, 0, -144.782, -25)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="ExternalShadow15" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("21")
+position = Vector2(1820, 152)
+scale = Vector2(-0.297, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.85098)
+texture = ExtResource("13")
+polygon = PackedVector2Array(-360.27, -159, 1164.98, 67, 1151.51, 140, -360.27, -65)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="ExternalShadow16" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("21")
+position = Vector2(482, -17)
+scale = Vector2(-0.297, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.85098)
+texture = ExtResource("13")
+polygon = PackedVector2Array(-134.737, -130, 138.105, -87, 141.474, 81, -141.474, 46)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="ExternalShadow17" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("21")
+position = Vector2(415, 83)
+scale = Vector2(-0.297, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.85098)
+texture = ExtResource("13")
+polygon = PackedVector2Array(-168.351, -130, 353.535, -51, 114.478, -22, -191.92, -62)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="ExternalShadow18" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("21")
+position = Vector2(36, 371)
+scale = Vector2(0.296875, 1)
+color = Color(0.0705882, 0.0705882, 0.266667, 0.85098)
+texture = ExtResource("13")
+polygon = PackedVector2Array(-313.263, -149, 1020.63, 52, 700.632, 77, -299.789, -81)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="TopLight1" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("22")
+position = Vector2(-255, -132)
+scale = Vector2(0.296875, 1)
+color = Color(1, 0.584314, 0, 0.341176)
+texture = ExtResource("13")
+polygon = PackedVector2Array(1734.74, -189, -141.474, 94, -427.789, 32, 1232.84, -201)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="TopLight10" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("22")
+position = Vector2(1213, -100)
+scale = Vector2(0.296875, 1)
+color = Color(1, 0.584314, 0, 0.341176)
+texture = ExtResource("13")
+polygon = PackedVector2Array(1593.26, -166, -141.474, 94, -282.947, 27, 1266.53, -203)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="TopLight3" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("22")
+position = Vector2(-740, 171)
+scale = Vector2(0.296875, 1)
+color = Color(1, 0.584314, 0, 0.341176)
+texture = ExtResource("13")
+polygon = PackedVector2Array(1667.37, -173, 1397.89, -137, 1162.11, -177, 1397.89, -208)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="TopLight5" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("22")
+position = Vector2(-550, 331)
+scale = Vector2(0.296875, 1)
+color = Color(1, 0.584314, 0, 0.341176)
+texture = ExtResource("13")
+polygon = PackedVector2Array(1677.47, -178, 1414.74, -136, 1162.11, -177, 1397.89, -213)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="TopLight16" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("22")
+position = Vector2(-495, 904)
+scale = Vector2(0.296875, 1)
+color = Color(1, 0.584314, 0, 0.341176)
+texture = ExtResource("13")
+polygon = PackedVector2Array(1370.95, -251, 2506.11, -78, 1980.63, -99, 1313.68, -229)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="TopLight8" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("22")
+position = Vector2(281, 43)
+scale = Vector2(0.296875, 1)
+color = Color(1, 0.584314, 0, 0.341176)
+texture = ExtResource("13")
+polygon = PackedVector2Array(1677.47, -178, 1414.74, -136, 1162.11, -177, 1397.89, -213)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="TopLight15" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("22")
+position = Vector2(77, 202)
+scale = Vector2(0.296875, 1)
+color = Color(1, 0.584314, 0, 0.341176)
+texture = ExtResource("13")
+polygon = PackedVector2Array(1438.32, -212, 1714.53, -172, 1448.42, -139, 1219.37, -181)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="TopLight4" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("22")
+position = Vector2(26, 43)
+scale = Vector2(0.296875, 1)
+color = Color(1, 0.584314, 0, 0.341176)
+texture = ExtResource("13")
+polygon = PackedVector2Array(1445.05, -134, 1182.32, -172, 1434.95, -213, 1697.68, -177)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="TopLight7" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("22")
+position = Vector2(468, 75)
+scale = Vector2(0.296875, 1)
+color = Color(1, 0.584314, 0, 0.341176)
+texture = ExtResource("13")
+polygon = PackedVector2Array(1445.05, -134, 1182.32, -172, 1434.95, -213, 1697.68, -177)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="TopLight11" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("22")
+position = Vector2(1432, 107)
+scale = Vector2(0.296875, 1)
+color = Color(1, 0.584314, 0, 0.341176)
+texture = ExtResource("13")
+polygon = PackedVector2Array(1445.05, -134, 1182.32, -172, 1434.95, -213, 1697.68, -177)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="TopLight2" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("22")
+position = Vector2(209, -354)
+scale = Vector2(0.296875, 1)
+color = Color(1, 0.584314, 0, 0.341176)
+texture = ExtResource("13")
+polygon = PackedVector2Array(673.684, 178, -148.211, 59, -60.6316, -12, 1034.11, 114)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="TopLight9" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("22")
+position = Vector2(1621, -289)
+scale = Vector2(0.296875, 1)
+color = Color(1, 0.584314, 0, 0.341176)
+texture = ExtResource("13")
+polygon = PackedVector2Array(673.684, 178, -148.211, 59, -60.6316, -12, 1034.11, 114)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="TopLight6" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("22")
+position = Vector2(721, -288)
+scale = Vector2(0.296875, 1)
+color = Color(1, 0.584314, 0, 0.341176)
+texture = ExtResource("13")
+polygon = PackedVector2Array(414.316, 138, -124.632, 59, 154.947, 16, 683.79, 92)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="TopLight13" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("22")
+position = Vector2(-115, 448)
+scale = Vector2(0.296875, 1)
+color = Color(1, 0.584314, 0, 0.341176)
+texture = ExtResource("13")
+polygon = PackedVector2Array(730.947, 18, -80.8421, 136, -444.632, 92, 410.947, -29)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="TopLight14" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("22")
+position = Vector2(77, 419)
+scale = Vector2(0.296875, 1)
+color = Color(1, 0.584314, 0, 0.341176)
+texture = ExtResource("13")
+polygon = PackedVector2Array(468.211, 51, -67.3684, 133, -60.6316, 57, 188.632, 0.999969)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="TopLight12" type="Polygon2D" parent="Ambient"]
+light_mask = 512
+material = SubResource("22")
+position = Vector2(1042, -63)
+scale = Vector2(0.296875, 1)
+color = Color(1, 0.584314, 0, 0.341176)
+texture = ExtResource("13")
+polygon = PackedVector2Array(414.316, 138, -124.632, 59, 154.947, 16, 683.79, 92)
+uv = PackedVector2Array(-30.3157, -2, 272.842, -2, 273, 299, -37.0526, 297)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+show_behind_parent = true
+light_mask = 0
+color = Color(0.466667, 0.635294, 0.92549, 1)
+
+[node name="Crows" type="Node2D" parent="."]
+
+[node name="CrowSleep" type="AnimatedSprite2D" parent="Crows"]
+material = SubResource("41")
+position = Vector2(445, -129)
+sprite_frames = SubResource("40")
+animation = &"sleep"
+autoplay = "sleep"
+frame = 1
+
+[node name="CrowSleep2" type="AnimatedSprite2D" parent="Crows"]
+material = SubResource("42")
+position = Vector2(108, 481)
+sprite_frames = SubResource("40")
+animation = &"sleep"
+autoplay = "sleep"
+frame = 1
+flip_h = true
+
+[node name="CrowLook" type="AnimatedSprite2D" parent="Crows"]
+position = Vector2(-168, -145)
+sprite_frames = SubResource("91")
+animation = &"looking"
+autoplay = "looking"
+frame = 7
+flip_h = true
+
+[node name="CrowLook2" type="AnimatedSprite2D" parent="Crows"]
+position = Vector2(1782, 35)
+sprite_frames = SubResource("91")
+animation = &"looking"
+autoplay = "looking"
+frame = 7
+flip_h = true
+
+[node name="CrowLook3" type="AnimatedSprite2D" parent="Crows"]
+position = Vector2(1024, 78)
+sprite_frames = SubResource("91")
+animation = &"looking"
+autoplay = "looking"
+frame = 7

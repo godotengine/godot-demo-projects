@@ -6,7 +6,7 @@ enum State {
 	DEAD,
 }
 
-const WALK_SPEED = 100.0
+const WALK_SPEED = 22.0
 
 var _state := State.WALKING
 
@@ -33,9 +33,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	if velocity.x > 0.0:
-		sprite.scale.x = 1.0
+		sprite.scale.x = 0.8
 	elif velocity.x < 0.0:
-		sprite.scale.x = -1.0
+		sprite.scale.x = -0.8
 
 	var animation := get_new_animation()
 	if animation != animation_player.current_animation:

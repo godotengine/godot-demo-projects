@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://nb2wowyl2vi0"]
+
+[ext_resource type="Theme" uid="uid://dtao6d0ebglcf" path="res://theme/theme.tres" id="1"]
+[ext_resource type="Script" path="res://dialogue/interface/interface.gd" id="2"]
+
+[node name="Dialogue" type="Panel"]
+offset_top = 544.0
+offset_right = 1280.0
+offset_bottom = 544.0
+theme = ExtResource("1")
+script = ExtResource("2")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = -60.0
+offset_right = 312.698
+offset_bottom = 82.95
+theme = ExtResource("1")
+theme_type_variation = &"title_panel"
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_right = 1260.0
+offset_bottom = 176.0
+
+[node name="Name" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 51.0
+offset_top = -47.0
+offset_right = 275.0
+offset_bottom = -7.0
+theme_override_colors/default_color = Color(0.0745098, 0.27451, 0.368627, 1)
+theme_override_colors/font_shadow_color = Color(0.184314, 0.419608, 0.533333, 0.356863)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+bbcode_enabled = true
+text = "NAME"
+scroll_active = false
+
+[node name="Text" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 60.0
+offset_right = 1020.0
+offset_bottom = 120.0
+text = "Dialogue Text"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1080.0
+offset_top = 17.0
+offset_right = 1240.0
+offset_bottom = 139.0
+text = "Next"
+
+[connection signal="button_up" from="Button" to="." method="_on_Button_button_up"]
