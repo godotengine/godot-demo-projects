@@ -1,25 +1,20 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://bfrbj2aq7xqe4"]
 
-[ext_resource path="res://drag_drop_script.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://drag_drop_script.gd" id="1"]
 
 [node name="DragAndDrop" type="Control"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -512.0
-offset_top = -300.0
-offset_right = 512.0
-offset_bottom = 300.0
-rect_pivot_offset = Vector2(512, 300)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(512, 300)
 size_flags_horizontal = 2
 size_flags_vertical = 2
-__meta__ = {
-"__editor_plugin_screen__": "2D",
-"_edit_use_anchors_": false
-}
 
 [node name="Information" type="Label" parent="."]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -31,12 +26,9 @@ offset_bottom = -150.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Drag colors from button to button, or change button colors and drag them again."
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -46,108 +38,75 @@ offset_top = -150.0
 offset_right = 250.0
 offset_bottom = 200.0
 columns = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorPickerButton0" type="ColorPickerButton" parent="GridContainer"]
-offset_left = 34.0
-offset_top = 25.0
-offset_right = 130.0
-offset_bottom = 89.0
-rect_min_size = Vector2(96, 64)
+custom_minimum_size = Vector2(96, 64)
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-color = Color(0.671032, 0.605183, 0, 1)
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+color = Color(0.937255, 0.266667, 0.266667, 1)
+script = ExtResource("1")
 
 [node name="ColorPickerButton1" type="ColorPickerButton" parent="GridContainer"]
-offset_left = 202.0
-offset_top = 25.0
-offset_right = 298.0
-offset_bottom = 89.0
-rect_min_size = Vector2(96, 64)
+custom_minimum_size = Vector2(96, 64)
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-color = Color(0, 0.797347, 0.741037, 1)
-script = ExtResource( 1 )
+color = Color(0.960784, 0.619608, 0.0431373, 1)
+script = ExtResource("1")
 
 [node name="ColorPickerButton2" type="ColorPickerButton" parent="GridContainer"]
-offset_left = 370.0
-offset_top = 25.0
-offset_right = 466.0
-offset_bottom = 89.0
-rect_min_size = Vector2(96, 64)
+custom_minimum_size = Vector2(96, 64)
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-color = Color(0.443924, 0, 0.632923, 1)
-script = ExtResource( 1 )
+color = Color(0.517647, 0.8, 0.0862745, 1)
+script = ExtResource("1")
 
 [node name="ColorPickerButton3" type="ColorPickerButton" parent="GridContainer"]
-offset_left = 34.0
-offset_top = 143.0
-offset_right = 130.0
-offset_bottom = 207.0
-rect_min_size = Vector2(96, 64)
+custom_minimum_size = Vector2(96, 64)
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-color = Color(1, 1, 1, 1)
-script = ExtResource( 1 )
+color = Color(0.0627451, 0.72549, 0.505882, 1)
+script = ExtResource("1")
 
 [node name="ColorPickerButton4" type="ColorPickerButton" parent="GridContainer"]
-offset_left = 202.0
-offset_top = 143.0
-offset_right = 298.0
-offset_bottom = 207.0
-rect_min_size = Vector2(96, 64)
+custom_minimum_size = Vector2(96, 64)
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-color = Color(1, 0.933842, 0, 1)
-script = ExtResource( 1 )
+color = Color(0.0235294, 0.713726, 0.831373, 1)
+script = ExtResource("1")
 
 [node name="ColorPickerButton5" type="ColorPickerButton" parent="GridContainer"]
-offset_left = 370.0
-offset_top = 143.0
-offset_right = 466.0
-offset_bottom = 207.0
-rect_min_size = Vector2(96, 64)
+custom_minimum_size = Vector2(96, 64)
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-color = Color(0.287293, 0.886362, 0.122933, 1)
-script = ExtResource( 1 )
+color = Color(0.231373, 0.509804, 0.964706, 1)
+script = ExtResource("1")
 
 [node name="ColorPickerButton6" type="ColorPickerButton" parent="GridContainer"]
-offset_left = 34.0
-offset_top = 261.0
-offset_right = 130.0
-offset_bottom = 325.0
-rect_min_size = Vector2(96, 64)
+custom_minimum_size = Vector2(96, 64)
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-color = Color(0.908461, 0, 0.88789, 1)
-script = ExtResource( 1 )
+color = Color(0.545098, 0.360784, 0.964706, 1)
+script = ExtResource("1")
 
 [node name="ColorPickerButton7" type="ColorPickerButton" parent="GridContainer"]
-offset_left = 202.0
-offset_top = 261.0
-offset_right = 298.0
-offset_bottom = 325.0
-rect_min_size = Vector2(96, 64)
+custom_minimum_size = Vector2(96, 64)
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-color = Color(0, 0.283703, 0, 1)
-script = ExtResource( 1 )
+color = Color(0.85098, 0.27451, 0.937255, 1)
+script = ExtResource("1")
 
 [node name="ColorPickerButton8" type="ColorPickerButton" parent="GridContainer"]
-offset_left = 370.0
-offset_top = 261.0
-offset_right = 466.0
-offset_bottom = 325.0
-rect_min_size = Vector2(96, 64)
+custom_minimum_size = Vector2(96, 64)
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-color = Color(0, 0, 0.178211, 1)
-script = ExtResource( 1 )
+color = Color(0.470588, 0.443137, 0.423529, 1)
+script = ExtResource("1")
