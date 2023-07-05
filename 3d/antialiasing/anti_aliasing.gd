@@ -15,11 +15,11 @@ var base_height = ProjectSettings.get_setting("display/window/size/viewport_heig
 @onready var rotation_x = $CameraHolder/RotationX
 @onready var camera = $CameraHolder/RotationX/Camera3D
 
-
 func _ready():
 	camera_holder.transform.basis = Basis.from_euler(Vector3(0, rot_y, 0))
 	rotation_x.transform.basis = Basis.from_euler(Vector3(rot_x, 0, 0))
 	update_gui()
+	get_viewport().size_changed.connect(_on_viewport_size_changed)
 
 
 func _unhandled_input(event):
@@ -76,25 +76,56 @@ func _on_fxaa_toggled(button_pressed):
 
 func _on_temporal_antialiasing_toggled(button_pressed):
 	get_viewport().use_taa = button_pressed
+	$FPSLimit.visible = button_pressed
+
+func _on_fps_limit_item_selected(index):
+	# The rendering FPS affects the appearance of TAA, as higher framerates allow it to converge faster.
+	# On high refresh rate monitors, TAA ghosting issues may appear less noticeable as a result
+	# (if the GPU can keep up).
+	match index:
+		0:
+			Engine.max_fps = 30
+		1:
+			Engine.max_fps = 60
+		2:
+			# No limit, other than what's enforced by V-Sync.
+			Engine.max_fps = 0
 
 
 func _on_msaa_item_selected(index):
 	get_viewport().msaa_3d = index
 
 
-func _on_render_scale_item_selected(index):
+func _on_render_scale_value_changed(value):
+	get_viewport().scaling_3d_scale = value
+	$Antialiasing/HBoxContainer/Value.text = "%d%%" % (value * 100)
+	# Update viewport resolution text.
+	_on_viewport_size_changed()
+	# FSR 1.0 is only effective if render scale is below 100%, so hide the setting if at native resolution or higher.
+	$Antialiasing/FidelityFXFSR.visible = value < 1.0
+	$Antialiasing/FSRSharpness.visible = get_viewport().scaling_3d_mode == Viewport.SCALING_3D_MODE_FSR and value < 1.0
+
+
+func _on_amd_fidelityfx_fsr1_toggled(button_pressed):
+	get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR if button_pressed else Viewport.SCALING_3D_MODE_BILINEAR
+	# FSR 1.0 is only effective if render scale is below 100%, so hide the setting if at native resolution or higher.
+	$Antialiasing/FSRSharpness.visible = button_pressed
+
+
+func _on_fsr_sharpness_item_selected(index):
+	# *Lower* values of FSR sharpness are sharper.
 	match index:
 		0:
-			get_viewport().scaling_3d_scale = 0.5
+			get_viewport().fsr_sharpness = 2.0
 		1:
-			get_viewport().scaling_3d_scale = 0.75
+			get_viewport().fsr_sharpness = 0.8
 		2:
-			get_viewport().scaling_3d_scale = 1.0
+			get_viewport().fsr_sharpness = 0.4
 		3:
-			get_viewport().scaling_3d_scale = 1.25
+			get_viewport().fsr_sharpness = 0.2
 		4:
-			get_viewport().scaling_3d_scale = 1.5
-		5:
-			get_viewport().scaling_3d_scale = 1.75
-		6:
-			get_viewport().scaling_3d_scale = 2.0
+			get_viewport().fsr_sharpness = 0.0
+
+
+func _on_viewport_size_changed():
+	$ViewportResolution.text = "Viewport resolution: %d×%d" % [get_viewport().size.x * get_viewport().scaling_3d_scale, get_viewport().size.y * get_viewport().scaling_3d_scale]

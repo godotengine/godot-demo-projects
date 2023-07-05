@@ -9,11 +9,11 @@ class_name PauseMenu extends Control
 @onready var coins_counter := $ColorRect/CoinsCounter as CoinsCounter
 
 
-func _ready():
+func _ready() -> void:
 	hide()
 
 
-func close():
+func close() -> void:
 	var tween := create_tween()
 	get_tree().paused = false
 	tween.tween_property(
@@ -31,7 +31,7 @@ func close():
 	tween.tween_callback(hide)
 
 
-func open():
+func open() -> void:
 	show()
 	resume_button.grab_focus()
 
@@ -56,7 +56,7 @@ func _on_coin_collected() -> void:
 	coins_counter.collect_coin()
 
 
-func _on_resume_button_pressed():
+func _on_resume_button_pressed() -> void:
 	close()
 
 
@@ -72,6 +72,6 @@ func _on_splitscreen_button_pressed() -> void:
 		get_tree().change_scene_to_file("res://game_splitscreen.tscn")
 
 
-func _on_quit_button_pressed():
+func _on_quit_button_pressed() -> void:
 	if visible:
 		get_tree().quit()

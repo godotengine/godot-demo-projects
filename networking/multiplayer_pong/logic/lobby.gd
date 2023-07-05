@@ -30,7 +30,7 @@ func _player_connected(_id):
 	# Someone connected, start the game!
 	var pong = load("res://pong.tscn").instantiate()
 	# Connect deferred so we can safely erase it from the callback.
-	pong.game_finished.connect(self._end_game.bind, CONNECT_DEFERRED)
+	pong.game_finished.connect(self._end_game, CONNECT_DEFERRED)
 
 	get_tree().get_root().add_child(pong)
 	hide()

@@ -145,7 +145,7 @@ func _connect_pending(p: PendingPeer) -> bool:
 		if p.connection == p.tcp:
 			assert(tls_key != null and tls_cert != null)
 			var tls = StreamPeerTLS.new()
-			tls.accept_stream(p.tcp, tls_key, tls_cert)
+			tls.accept_stream(p.tcp, TLSOptions.server(tls_key, tls_cert))
 			p.connection = tls
 		p.connection.poll()
 		var status = p.connection.get_status()

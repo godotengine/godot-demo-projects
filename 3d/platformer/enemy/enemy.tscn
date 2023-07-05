@@ -428,8 +428,8 @@ orientation = 2
 
 [sub_resource type="Curve" id="17"]
 max_value = 3.0
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.0349232, 2.1123), 0.0, 0.0, 0, 0, Vector2(0.151192, 0.823242), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 0.6), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [node name="Enemy" type="RigidBody3D"]
 axis_lock_angular_x = true
@@ -510,13 +510,15 @@ doppler_tracking = 1
 
 [node name="Explosion" type="CPUParticles3D" parent="."]
 emitting = false
-lifetime = 0.5
+amount = 16
 one_shot = true
 explosiveness = 1.0
 mesh = SubResource("16")
 emission_shape = 1
 emission_sphere_radius = 1.0
-gravity = Vector3(0, 0, 0)
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
 scale_amount_curve = SubResource("17")
 
 [editable path="Enemy"]
