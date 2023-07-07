@@ -39,7 +39,7 @@ margin_left = 77.0
 margin_right = 921.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
-text = "ws://localhost:9080"
+text = "ws://127.0.0.1:9080"
 
 [node name="Room" type="Label" parent="VBoxContainer/Connect"]
 margin_left = 925.0
@@ -93,6 +93,20 @@ margin_right = 280.0
 margin_bottom = 20.0
 text = "Print peers"
 
+[node name="RPC" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 290.0
+margin_right = 385.0
+margin_bottom = 20.0
+text = "Change Color"
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_left = 395.0
+margin_top = 3.0
+margin_right = 1024.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+text = "Random Color"
+
 [node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
 margin_top = 60.0
 margin_right = 1024.0
@@ -105,3 +119,4 @@ readonly = true
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Seal" to="." method="_on_Seal_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Ping" to="." method="ping"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Peers" to="." method="_on_Peers_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/RPC" to="." method="_on_RPC_pressed"]
