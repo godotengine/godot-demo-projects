@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://doa7j7q1j4p4e"]
+[gd_scene load_steps=21 format=3 uid="uid://doa7j7q1j4p4e"]
 
 [ext_resource type="Script" path="res://bidi.gd" id="2"]
 [ext_resource type="FontFile" uid="uid://dcyy0x2u3jocr" path="res://fonts/NotoSansThaiUI_Regular.ttf" id="2_plk2w"]
 [ext_resource type="Script" path="res://custom_st_parser.gd" id="3"]
-[ext_resource type="FontFile" uid="uid://bdex0ccrwre5y" path="res://fonts/NotoNaskhArabicUI_Regular.ttf" id="3_cf43x"]
+[ext_resource type="FontFile" uid="uid://bk3udiiuy60g4" path="res://fonts/NotoNaskhArabicUI_Regular.ttf" id="3_cf43x"]
 [ext_resource type="FontVariation" uid="uid://bymgwaapysw4i" path="res://lib_font.tres" id="4"]
 [ext_resource type="FontFile" uid="uid://cwer1pi5ka4io" path="res://fonts/NotoSansHebrew_Regular.ttf" id="4_03wxc"]
 [ext_resource type="FontFile" uid="uid://bic5b75wmaxwj" path="res://fonts/LinLibertine_R.otf" id="5_dd4o7"]
+[ext_resource type="FontFile" uid="uid://cctsp10uhaei8" path="res://fonts/Recursive_VF_subset-GF_latin_basic.woff2" id="8_8y1fh"]
 
 [sub_resource type="FontVariation" id="FontVariation_pn5rb"]
 base_font = ExtResource("5_dd4o7")
@@ -39,6 +40,33 @@ opentype_features = {
 1935764596: 1
 }
 
+[sub_resource type="FontVariation" id="FontVariation_vb6m6"]
+base_font = ExtResource("8_8y1fh")
+variation_opentype = {
+1128354636: null,
+1129468758: null,
+1297043023: null,
+2003265652: 400
+}
+
+[sub_resource type="SystemFont" id="SystemFont_2w5b3"]
+font_names = PackedStringArray("sans-serif")
+
+[sub_resource type="SystemFont" id="SystemFont_h8xpn"]
+font_names = PackedStringArray("serif")
+
+[sub_resource type="SystemFont" id="SystemFont_4rcq4"]
+font_names = PackedStringArray("monospace")
+
+[sub_resource type="SystemFont" id="SystemFont_gnv0g"]
+font_names = PackedStringArray("cursive")
+
+[sub_resource type="SystemFont" id="SystemFont_f282f"]
+font_names = PackedStringArray("fantasy")
+
+[sub_resource type="SystemFont" id="SystemFont_oua6b"]
+font_names = PackedStringArray("")
+
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -49,9 +77,12 @@ grow_vertical = 2
 script = ExtResource("2")
 
 [node name="TabContainer" type="TabContainer" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 14
 
 [node name="Line breaking and justification" type="Panel" parent="TabContainer"]
@@ -457,7 +488,327 @@ Que fin 1/3 0
 [opentype_features=liga=0]Que fin 1/3 0[/opentype_features] [color=#fffa](liga=0 - disables ligatures)[/color]
 [opentype_features=frac=1,zero]Que fin 1/3 0[/opentype_features] [color=#fffa](frac=1,zero - fractions and slashed zero)[/color][/font_size]"
 
+[node name="Variable fonts" type="Panel" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="LabelVarInfo" type="Label" parent="TabContainer/Variable fonts"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 830.0
+offset_bottom = 53.0
+theme_override_colors/font_color = Color(0.419608, 0.831373, 0.505882, 1)
+theme_override_font_sizes/font_size = 14
+text = "Variable font example."
+
+[node name="Variables" type="VBoxContainer" parent="TabContainer/Variable fonts"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 88.0
+offset_right = 351.0
+offset_bottom = 174.0
+
+[node name="Size" type="HBoxContainer" parent="TabContainer/Variable fonts/Variables"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="TabContainer/Variable fonts/Variables/Size"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+text = "Size"
+
+[node name="HSlider" type="HSlider" parent="TabContainer/Variable fonts/Variables/Size"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 8.0
+max_value = 128.0
+value = 64.0
+
+[node name="Value" type="Label" parent="TabContainer/Variable fonts/Variables/Size"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+text = "64"
+
+[node name="Weight" type="HBoxContainer" parent="TabContainer/Variable fonts/Variables"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="TabContainer/Variable fonts/Variables/Weight"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+text = "Weight"
+
+[node name="HSlider" type="HSlider" parent="TabContainer/Variable fonts/Variables/Weight"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 300.0
+max_value = 1000.0
+step = 50.0
+value = 400.0
+
+[node name="Value" type="Label" parent="TabContainer/Variable fonts/Variables/Weight"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+text = "400"
+
+[node name="Slant" type="HBoxContainer" parent="TabContainer/Variable fonts/Variables"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="TabContainer/Variable fonts/Variables/Slant"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+text = "Slant"
+
+[node name="HSlider" type="HSlider" parent="TabContainer/Variable fonts/Variables/Slant"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = -15.0
+max_value = 0.0
+
+[node name="Value" type="Label" parent="TabContainer/Variable fonts/Variables/Slant"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+text = "0"
+
+[node name="Cursive" type="CheckButton" parent="TabContainer/Variable fonts/Variables"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Cursive"
+
+[node name="Casual" type="CheckButton" parent="TabContainer/Variable fonts/Variables"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Casual"
+
+[node name="Monospace" type="CheckButton" parent="TabContainer/Variable fonts/Variables"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Monospace"
+
+[node name="VariableFontPreview" type="LineEdit" parent="TabContainer/Variable fonts"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 347.0
+offset_right = 1115.0
+offset_bottom = 525.0
+theme_override_fonts/font = SubResource("FontVariation_vb6m6")
+theme_override_font_sizes/font_size = 64
+text = "Example text – 1234567890"
+
+[node name="LinkButton" type="LinkButton" parent="TabContainer/Variable fonts/VariableFontPreview"]
+layout_mode = 0
+offset_left = 959.0
+offset_top = 193.0
+offset_right = 1077.0
+offset_bottom = 238.0
+text = "Font: Recursive"
+uri = "https://www.recursive.design/"
+
+[node name="System fonts" type="Panel" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="LabelVarInfo" type="Label" parent="TabContainer/System fonts"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 830.0
+offset_bottom = 53.0
+theme_override_colors/font_color = Color(0.419608, 0.831373, 0.505882, 1)
+theme_override_font_sizes/font_size = 14
+text = "Loading and displaying system fonts."
+
+[node name="ValueSetter" type="LineEdit" parent="TabContainer/System fonts"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 77.0
+offset_right = 695.0
+offset_bottom = 108.0
+text = "Example text – 1234567890"
+placeholder_text = "Enter text here"
+
+[node name="Italic" type="CheckButton" parent="TabContainer/System fonts"]
+layout_mode = 0
+offset_left = 406.0
+offset_top = 116.0
+offset_right = 492.0
+offset_bottom = 147.0
+text = "Italic"
+
+[node name="Weight" type="HBoxContainer" parent="TabContainer/System fonts"]
+offset_left = 40.0
+offset_top = 120.0
+offset_right = 383.0
+offset_bottom = 146.0
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="TabContainer/System fonts/Weight"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+text = "Weight"
+
+[node name="HSlider" type="HSlider" parent="TabContainer/System fonts/Weight"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 100.0
+max_value = 900.0
+step = 100.0
+value = 400.0
+
+[node name="Value" type="Label" parent="TabContainer/System fonts/Weight"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+text = "400"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/System fonts"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 176.0
+offset_right = 1126.0
+offset_bottom = 489.0
+
+[node name="SansSerif" type="HBoxContainer" parent="TabContainer/System fonts/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="FontName" type="Label" parent="TabContainer/System fonts/VBoxContainer/SansSerif"]
+custom_minimum_size = Vector2(330, 0)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_2w5b3")
+theme_override_font_sizes/font_size = 32
+text = "sans-serif"
+
+[node name="Value" type="Label" parent="TabContainer/System fonts/VBoxContainer/SansSerif"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("SystemFont_2w5b3")
+theme_override_font_sizes/font_size = 32
+text = "Example text – 1234567890"
+text_overrun_behavior = 3
+
+[node name="Serif" type="HBoxContainer" parent="TabContainer/System fonts/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="FontName" type="Label" parent="TabContainer/System fonts/VBoxContainer/Serif"]
+custom_minimum_size = Vector2(330, 0)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_h8xpn")
+theme_override_font_sizes/font_size = 32
+text = "serif"
+
+[node name="Value" type="Label" parent="TabContainer/System fonts/VBoxContainer/Serif"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("SystemFont_h8xpn")
+theme_override_font_sizes/font_size = 32
+text = "Example text – 1234567890"
+text_overrun_behavior = 3
+
+[node name="Monospace" type="HBoxContainer" parent="TabContainer/System fonts/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="FontName" type="Label" parent="TabContainer/System fonts/VBoxContainer/Monospace"]
+custom_minimum_size = Vector2(330, 0)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_4rcq4")
+theme_override_font_sizes/font_size = 32
+text = "monospace"
+
+[node name="Value" type="Label" parent="TabContainer/System fonts/VBoxContainer/Monospace"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("SystemFont_4rcq4")
+theme_override_font_sizes/font_size = 32
+text = "Example text – 1234567890"
+text_overrun_behavior = 3
+
+[node name="Cursive" type="HBoxContainer" parent="TabContainer/System fonts/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="FontName" type="Label" parent="TabContainer/System fonts/VBoxContainer/Cursive"]
+custom_minimum_size = Vector2(330, 0)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_gnv0g")
+theme_override_font_sizes/font_size = 32
+text = "cursive"
+
+[node name="Value" type="Label" parent="TabContainer/System fonts/VBoxContainer/Cursive"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("SystemFont_gnv0g")
+theme_override_font_sizes/font_size = 32
+text = "Example text – 1234567890"
+text_overrun_behavior = 3
+
+[node name="Fantasy" type="HBoxContainer" parent="TabContainer/System fonts/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="FontName" type="Label" parent="TabContainer/System fonts/VBoxContainer/Fantasy"]
+custom_minimum_size = Vector2(330, 0)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_f282f")
+theme_override_font_sizes/font_size = 32
+text = "fantasy"
+
+[node name="Value" type="Label" parent="TabContainer/System fonts/VBoxContainer/Fantasy"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("SystemFont_f282f")
+theme_override_font_sizes/font_size = 32
+text = "Example text – 1234567890"
+text_overrun_behavior = 3
+
+[node name="Custom" type="HBoxContainer" parent="TabContainer/System fonts/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="FontName" type="LineEdit" parent="TabContainer/System fonts/VBoxContainer/Custom"]
+custom_minimum_size = Vector2(330, 0)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_oua6b")
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Custom Font Name"
+
+[node name="Value" type="Label" parent="TabContainer/System fonts/VBoxContainer/Custom"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("SystemFont_oua6b")
+theme_override_font_sizes/font_size = 32
+text = "Example text – 1234567890"
+text_overrun_behavior = 3
+
 [connection signal="item_selected" from="TabContainer/Text direction/Tree" to="." method="_on_Tree_item_selected"]
 [connection signal="text_changed" from="TabContainer/Text direction/LineEditCustomSTSource" to="." method="_on_LineEditCustomSTSource_text_changed"]
 [connection signal="text_changed" from="TabContainer/Text direction/LineEditCustomSTDst" to="." method="_on_LineEditCustomSTDst_text_changed"]
 [connection signal="tree_entered" from="TabContainer/Text direction/LineEditCustomSTDst" to="." method="_on_LineEditCustomSTDst_tree_entered"]
+[connection signal="value_changed" from="TabContainer/Variable fonts/Variables/Size/HSlider" to="." method="_on_variable_size_value_changed"]
+[connection signal="value_changed" from="TabContainer/Variable fonts/Variables/Weight/HSlider" to="." method="_on_variable_weight_value_changed"]
+[connection signal="value_changed" from="TabContainer/Variable fonts/Variables/Slant/HSlider" to="." method="_on_variable_slant_value_changed"]
+[connection signal="toggled" from="TabContainer/Variable fonts/Variables/Cursive" to="." method="_on_variable_cursive_toggled"]
+[connection signal="toggled" from="TabContainer/Variable fonts/Variables/Casual" to="." method="_on_variable_casual_toggled"]
+[connection signal="toggled" from="TabContainer/Variable fonts/Variables/Monospace" to="." method="_on_variable_monospace_toggled"]
+[connection signal="text_changed" from="TabContainer/System fonts/ValueSetter" to="." method="_on_system_font_value_text_changed"]
+[connection signal="toggled" from="TabContainer/System fonts/Italic" to="." method="_on_system_font_italic_toggled"]
+[connection signal="value_changed" from="TabContainer/System fonts/Weight/HSlider" to="." method="_on_system_font_weight_value_changed"]
+[connection signal="text_changed" from="TabContainer/System fonts/VBoxContainer/Custom/FontName" to="." method="_on_system_font_name_text_changed"]
