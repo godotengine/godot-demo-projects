@@ -106,7 +106,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 max_value = 1410.0
-step = 30.0
+step = 15.0
 value = 840.0
 
 [node name="Value" type="Label" parent="Options/Light/TimeOfDay"]
@@ -280,6 +280,139 @@ offset_right = 516.0
 offset_bottom = -16.0
 grow_vertical = 0
 
+[node name="FocusDistance" type="HBoxContainer" parent="Options/Camera"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/Camera/FocusDistance"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Focus Distance"
+
+[node name="HSlider" type="HSlider" parent="Options/Camera/FocusDistance"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.5
+max_value = 20.0
+step = 0.1
+value = 10.0
+
+[node name="Value" type="Label" parent="Options/Camera/FocusDistance"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "10 m"
+
+[node name="FocalLength" type="HBoxContainer" parent="Options/Camera"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/Camera/FocalLength"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Focal Length"
+
+[node name="HSlider" type="HSlider" parent="Options/Camera/FocalLength"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 10.0
+value = 25.0
+
+[node name="Value" type="Label" parent="Options/Camera/FocalLength"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "25 mm"
+
+[node name="Aperture" type="HBoxContainer" parent="Options/Camera"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/Camera/Aperture"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Aperture"
+
+[node name="HSlider" type="HSlider" parent="Options/Camera/Aperture"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.5
+max_value = 64.0
+step = 0.5
+value = 16.0
+
+[node name="Value" type="Label" parent="Options/Camera/Aperture"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "16.0 f-stop"
+
+[node name="ShutterSpeed" type="HBoxContainer" parent="Options/Camera"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/Camera/ShutterSpeed"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Shutter Speed"
+
+[node name="HSlider" type="HSlider" parent="Options/Camera/ShutterSpeed"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 10.0
+max_value = 2000.0
+step = 10.0
+value = 100.0
+
+[node name="Value" type="Label" parent="Options/Camera/ShutterSpeed"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "1/100"
+
+[node name="Sensitivity" type="HBoxContainer" parent="Options/Camera"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/Camera/Sensitivity"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Sensitivity"
+
+[node name="HSlider" type="HSlider" parent="Options/Camera/Sensitivity"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 50.0
+max_value = 6400.0
+step = 50.0
+value = 100.0
+
+[node name="Value" type="Label" parent="Options/Camera/Sensitivity"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "100 ISO"
+
 [node name="AutoexposureSpeed" type="HBoxContainer" parent="Options/Camera"]
 layout_mode = 2
 theme_override_constants/separation = 15
@@ -295,7 +428,6 @@ text = "Auto Exposure Speed"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-min_value = 0.1
 max_value = 10.0
 step = 0.1
 value = 1.0
@@ -314,4 +446,9 @@ text = "1.0"
 [connection signal="value_changed" from="Options/Light/Lightbulb2Intensity/HSlider" to="Options" method="_on_lightbulb2_intensity_value_changed"]
 [connection signal="value_changed" from="Options/Light/Lightbulb2Temperature/HSlider" to="Options" method="_on_lightbulb2_temperature_value_changed"]
 [connection signal="toggled" from="Options/Light/SDFGI" to="Options" method="_on_sdfgi_button_toggled"]
+[connection signal="value_changed" from="Options/Camera/FocusDistance/HSlider" to="Options" method="_on_focus_distance_value_changed"]
+[connection signal="value_changed" from="Options/Camera/FocalLength/HSlider" to="Options" method="_on_focal_length_value_changed"]
+[connection signal="value_changed" from="Options/Camera/Aperture/HSlider" to="Options" method="_on_aperture_value_changed"]
+[connection signal="value_changed" from="Options/Camera/ShutterSpeed/HSlider" to="Options" method="_on_shutter_speed_value_changed"]
+[connection signal="value_changed" from="Options/Camera/Sensitivity/HSlider" to="Options" method="_on_sensitivity_value_changed"]
 [connection signal="value_changed" from="Options/Camera/AutoexposureSpeed/HSlider" to="Options" method="_on_autoexposure_speed_value_changed"]
