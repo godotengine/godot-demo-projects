@@ -43,7 +43,7 @@ Please follow these guidelines for submitting new demos or improving existing de
 
 If you are submitting a new demo:
 
-- Make sure it includes a `READE.md` file similar to the other demos.
+- Make sure it includes a `README.md` file similar to the other demos.
 
 - Make sure a short description (1-3 lines) is set in the Project Settings.
 
