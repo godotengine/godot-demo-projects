@@ -46,7 +46,6 @@ func get_color_from_temperature(p_temperature: float) -> Color:
 func _on_time_of_day_value_changed(value: float) -> void:
 	var offset := TAU * 0.25
 	sun.rotation.x = remap(value, 0, 1440, 0 + offset, TAU + offset)
-	print(rad_to_deg(sun.rotation.x))
 
 	# Improve and prevent light leaks by hiding the sun if it's below the horizon.
 	const EPSILON = 0.0001
@@ -67,7 +66,6 @@ func _on_lightbulb1_intensity_value_changed(value: float) -> void:
 
 func _on_lightbulb1_temperature_value_changed(value: float) -> void:
 	lightbulb_1.light_temperature = value
-	print(lightbulb_1.light_color)
 	$Light/Lightbulb1Temperature/Value.text = "%d K" % value
 	$Light/Lightbulb1Temperature/Value.add_theme_color_override("font_color", get_color_from_temperature(value))
 
@@ -81,6 +79,31 @@ func _on_lightbulb2_temperature_value_changed(value: float) -> void:
 	lightbulb_2.light_temperature = value
 	$Light/Lightbulb2Temperature/Value.text = "%d K" % value
 	$Light/Lightbulb2Temperature/Value.add_theme_color_override("font_color", get_color_from_temperature(value))
+
+
+func _on_focus_distance_value_changed(value: float) -> void:
+	get_viewport().get_camera_3d().attributes.frustum_focus_distance = value
+	$Camera/FocusDistance/Value.text = "%.1f m" % value
+
+
+func _on_focal_length_value_changed(value: float) -> void:
+	get_viewport().get_camera_3d().attributes.frustum_focal_length = value
+	$Camera/FocalLength/Value.text = "%d mm" % value
+
+
+func _on_aperture_value_changed(value: float) -> void:
+	get_viewport().get_camera_3d().attributes.exposure_aperture = value
+	$Camera/Aperture/Value.text = "%.1f f-stop" % value
+
+
+func _on_shutter_speed_value_changed(value: float) -> void:
+	get_viewport().get_camera_3d().attributes.exposure_shutter_speed = value
+	$Camera/ShutterSpeed/Value.text = "1/%d" % value
+
+
+func _on_sensitivity_value_changed(value: float) -> void:
+	get_viewport().get_camera_3d().attributes.exposure_sensitivity = value
+	$Camera/Sensitivity/Value.text = "%d ISO" % value
 
 
 func _on_autoexposure_speed_value_changed(value: float) -> void:
