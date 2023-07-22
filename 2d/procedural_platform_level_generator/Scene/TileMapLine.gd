@@ -39,23 +39,23 @@ func remove_cells():
 func _process(delta):
 	if player!=null:
 		playerPosition = player.position
-	
+
 	if next_tile_position.x < (playerPosition.x + screenWidth):
 		generate_tiles()
-	
+
 	if prev_tile_position.x < playerPosition.x - 160.0:
 		remove_cells()
-	
+
 	# Check for collision with tile1
 	playerCellPos = local_to_map(playerPosition)
 	Interacted_Tile_Index = get_cell_source_id(0, playerCellPos)
-	
+
 	if Interacted_Tile_Index == PlateTileIndex:
 		# Obstacle indexed 1 tile
 		$"../Hit_sound".play()
 		set_cell(0, playerCellPos, -1)
 		emit_signal("score")
-	
+
 	elif Interacted_Tile_Index == LineTileIndex:
 		# Line indexed 0 tile
 		if not game_over_signal:

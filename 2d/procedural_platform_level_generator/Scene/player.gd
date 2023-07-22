@@ -42,14 +42,14 @@ func _physics_process(delta):
 	if (player_state == State.IDLE):
 		rotation += rotationSpeed * delta
 		moveDistance=screenHeight/2
-		
+
 	if (player_state == State.MOVE):
 		position-=offset
 		moveDistance-=abs(offset.y)*1.15
-		
+
 	if((moveDistance)<=0):
 		player_state = State.IDLE
-		
+
 	move_and_slide()
 
 func _game_over():
