@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7nfvt1chslyh"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_yvrvl"]
+[ext_resource type="Texture2D" uid="uid://d051ugdf65it1" path="res://assets/polyhaven/industrial_sunset_puresky_2k.hdr" id="2_g2q6b"]
+[ext_resource type="PackedScene" uid="uid://b2a5bjsxw63wr" path="res://water_plane/water_plane.tscn" id="2_k1nfp"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_obhcg"]
+panorama = ExtResource("2_g2q6b")
+
+[sub_resource type="Sky" id="Sky_s1sgk"]
+sky_material = SubResource("PanoramaSkyMaterial_obhcg")
+
+[sub_resource type="Environment" id="Environment_5dv8s"]
+background_mode = 2
+sky = SubResource("Sky_s1sgk")
+tonemap_mode = 2
+tonemap_white = 4.56
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_yvrvl")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.5, -0.75, 0.433013, 2.78059e-08, 0.5, 0.866026, -0.866025, -0.433013, 0.25, 0, 1, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5dv8s")
+
+[node name="WaterPlane" parent="." instance=ExtResource("2_k1nfp")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.900266, -0.142464, 0.41137, -0.113954, 0.834877, 0.538512, -0.420162, -0.531681, 0.735377, 1.55343, 1.1434, 2.431)
+
+[node name="Container" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Rotate" type="CheckBox" parent="Container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Rotate"
+
+[node name="RainSize" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="Container/RainSize"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+step = 0.1
+value = 1.0
+
+[node name="Label" type="Label" parent="Container/RainSize"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Rain size"
+
+[node name="MouseSize" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="Container/MouseSize"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+step = 0.1
+value = 1.1
+
+[node name="Label" type="Label" parent="Container/MouseSize"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Mouse size"
+
+[connection signal="value_changed" from="Container/RainSize/HSlider" to="." method="_on_rain_size_changed"]
+[connection signal="value_changed" from="Container/MouseSize/HSlider" to="." method="_on_mouse_size_changed"]
