@@ -40,9 +40,16 @@ func save_game():
 
 
 func load_game():
-	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+	var file_text := FileAccess.get_file_as_string(SAVE_PATH)
+	# str_to_var can deserialize objects, which can contain custom scripts.
+	# Their _init methods are run immediately, so this check prevents executing
+	# malicious code.
+	# Players sometimes share save files online. If you're positive that files
+	# will only come from a trustworthy source, you can skip this check.
+	if file_text.contains("Object("):
+		return
 	var json := JSON.new()
-	json.parse(file.get_line())
+	json.parse(file_text)
 	var save_dict := json.get_data() as Dictionary
 
 	var player := get_node(player_node) as Player

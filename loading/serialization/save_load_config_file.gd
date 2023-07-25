@@ -1,8 +1,6 @@
 extends Button
 # This script shows how to save data using Godot's custom ConfigFile format.
 # ConfigFile can store any Variant type except Signal or Callable.
-# It can even store Objects, but be extra careful where you deserialize them
-# from, because they can include (potentially malicious) scripts.
 
 
 const SAVE_PATH = "user://save_config_file.ini"
@@ -34,8 +32,16 @@ func save_game():
 
 
 func load_game():
+	var file_text := FileAccess.get_file_as_string(SAVE_PATH)
+	# ConfigFile can deserialize objects, which can contain custom scripts.
+	# Their _init methods are run immediately, so this check prevents executing
+	# malicious code.
+	# Players sometimes share save files online. If you're positive that files
+	# will only come from a trustworthy source, you can skip this check.
+	if file_text.contains("Object("):
+		return
 	var config := ConfigFile.new()
-	config.load(SAVE_PATH)
+	config.parse(file_text)
 
 	var player := get_node(player_node) as Player
 	player.position = config.get_value("player", "position")
