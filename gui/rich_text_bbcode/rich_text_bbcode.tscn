@@ -1,8 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://oeg5vj7lpjw0"]
+[gd_scene load_steps=5 format=3 uid="uid://oeg5vj7lpjw0"]
 
 [ext_resource type="Script" path="res://rich_text_bbcode.gd" id="1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q1hwu"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_eu7pn"]
+action = &"toggle_pause"
+
+[sub_resource type="Shortcut" id="Shortcut_n2ck8"]
+events = [SubResource("InputEventAction_eu7pn")]
 
 [node name="RichTextBBCode" type="Control"]
 layout_mode = 3
@@ -48,7 +54,7 @@ Text [color=#4cf]color[/color], [fgcolor=#49c9]foreground [color=#4cf]color[/col
 It's also possible to include [img]res://unicorn_icon.png[/img] [font_size=24]custom images[/font_size], as well as [color=aqua][url=https://godotengine.org]custom URLs[/url][/color]. [hint=This displays a hint.]Hover this to display a tooltip![/hint]
 Left alignment is default,[center]but center alignment is supported,[/center][right]as well as right alignment.[/right]
 
-[fill][dropcap font_size=48 color=yellow margins=0,-10,0,-12]F[/dropcap]ill alignment is also supported, and allows writing very long text that will end up fitting the horizontal space entirely with words of joy. Drop caps are also supported. A drop cap is the where the first character of a paragraph is made larger, taking up several lines of text and optionally using a specific font or color.[/fill]
+[fill][dropcap font_size=48 color=yellow margins=0,-10,0,-12]F[/dropcap]ill alignment is also supported, and allows writing very long text that will end up fitting the horizontal space entirely with words of joy. Drop caps are also supported. When using a drop cap, the first character of a paragraph is made larger, taking up several lines of text and optionally using a specific font or color.[/fill]
 
 Several effects are also available:    [wave]Wave[/wave]    [tornado]Tornado[/tornado]    [shake]Shake[/shake]    [fade start=67 length=7]Fade[/fade]    [rainbow]Rainbow[/rainbow]
 
@@ -84,6 +90,7 @@ offset_top = -42.0
 offset_right = 96.0
 grow_vertical = 0
 toggle_mode = true
+shortcut = SubResource("Shortcut_n2ck8")
 shortcut_in_tooltip = false
 text = "Pause"
 
