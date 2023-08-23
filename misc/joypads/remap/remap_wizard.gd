@@ -18,6 +18,8 @@ var last_mapping = ""
 @onready var joy_mapping_axis_invert = $Mapping/Margin/VBox/Info/Extra/InvertAxis
 
 
+# Connected to Mapping.window_input, otherwise no gamepad events will be received when the subwindow is
+# focused
 func _input(event):
 	if cur_step == -1:
 		return
