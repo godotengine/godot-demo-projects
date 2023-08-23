@@ -3,6 +3,7 @@ extends Node
 
 const DEADZONE = 0.3
 
+var joy_index = -1
 var joy_guid = ""
 var joy_name = ""
 
@@ -22,6 +23,12 @@ var last_mapping = ""
 # focused
 func _input(event):
 	if cur_step == -1:
+		return
+	# Ignore events not related to gamepads
+	if not (event is InputEventJoypadButton or event is InputEventJoypadMotion):
+		return
+	# Ignore devices other than the one being remapped. Handles accidental input and analog drift
+	if event.device != joy_index:
 		return
 	if event is InputEventJoypadMotion:
 		get_viewport().set_input_as_handled()
@@ -60,6 +67,7 @@ func create_mapping_string(mapping):
 
 
 func start(idx):
+	joy_index = idx
 	joy_guid = Input.get_joy_guid(idx)
 	joy_name = Input.get_joy_name(idx)
 	if joy_guid.is_empty():
