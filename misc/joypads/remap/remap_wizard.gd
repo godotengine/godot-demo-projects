@@ -27,8 +27,8 @@ func _input(event):
 		if abs(motion.axis_value) > DEADZONE:
 			var idx = motion.axis
 			var map = JoyMapping.new(JoyMapping.TYPE.AXIS, idx)
-			map.inverted = joy_mapping_axis_invert.pressed
-			if joy_mapping_full_axis.pressed:
+			map.inverted = joy_mapping_axis_invert.button_pressed
+			if joy_mapping_full_axis.button_pressed:
 				map.axis = JoyMapping.AXIS.FULL
 			elif motion.axis_value > 0:
 				map.axis = JoyMapping.AXIS.HALF_PLUS
@@ -125,8 +125,8 @@ func _update_step():
 		var cur = cur_mapping[steps[cur_step]]
 		joy_mapping_text.text = cur.to_human_string()
 		if cur.type == JoyMapping.TYPE.AXIS:
-			joy_mapping_full_axis.pressed = cur.axis == JoyMapping.AXIS.FULL
-			joy_mapping_axis_invert.pressed = cur.inverted
+			joy_mapping_full_axis.button_pressed = cur.axis == JoyMapping.AXIS.FULL
+			joy_mapping_axis_invert.button_pressed = cur.inverted
 
 
 func _on_Wizard_pressed():
