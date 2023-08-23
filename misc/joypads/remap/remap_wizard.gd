@@ -116,6 +116,8 @@ func _update_step():
 	if key in ["leftx", "lefty", "rightx", "righty"]:
 		joy_axes.get_node(str(idx) + "+").show()
 		joy_axes.get_node(str(idx) + "-").show()
+	elif key in ["lefttrigger", "righttrigger"]:
+		joy_axes.get_node(str(idx)).show()
 	else:
 		joy_buttons.get_node(str(idx)).show()
 
