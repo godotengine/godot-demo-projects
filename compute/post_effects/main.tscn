@@ -1,0 +1,161 @@
+[gd_scene load_steps=23 format=3 uid="uid://hay7hbv1cp62"]
+
+[ext_resource type="Script" path="res://gray_scale/gray_scale.gd" id="1_di38g"]
+[ext_resource type="Script" path="res://main.gd" id="1_ekxfu"]
+[ext_resource type="Texture2D" uid="uid://bshdn70nudsun" path="res://pattern.png" id="2_d1qxb"]
+[ext_resource type="Script" path="res://simple_ssr/create_depth_mips.gd" id="2_lv16x"]
+[ext_resource type="Script" path="res://simple_ssr/apply_sssr.gd" id="3_ygheb"]
+[ext_resource type="Texture2D" uid="uid://d0e66wb8yplkw" path="res://uv.jpg" id="5_ybioc"]
+
+[sub_resource type="RenderingEffect" id="RenderingEffect_rprpc"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 0
+access_resolved_color = false
+access_resolved_depth = true
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("2_lv16x")
+
+[sub_resource type="RenderingEffect" id="RenderingEffect_sm2nk"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 2
+access_resolved_color = false
+access_resolved_depth = false
+needs_motion_vectors = false
+needs_normal_roughness = true
+needs_separate_specular = true
+script = ExtResource("3_ygheb")
+max_distance = 1.0
+max_steps = 32
+
+[sub_resource type="RenderingEffect" id="RenderingEffect_jcxua"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("1_di38g")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ptioq"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_gkygq"]
+sky_material = SubResource("ProceduralSkyMaterial_ptioq")
+
+[sub_resource type="Environment" id="Environment_kx13e"]
+background_mode = 2
+sky = SubResource("Sky_gkygq")
+tonemap_mode = 2
+ssr_depth_tolerance = 3.41
+glow_enabled = true
+rendering_effects = Array[RenderingEffect]([SubResource("RenderingEffect_rprpc"), SubResource("RenderingEffect_sm2nk"), SubResource("RenderingEffect_jcxua")])
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvupy"]
+albedo_texture = ExtResource("5_ybioc")
+metallic = 0.5
+roughness = 0.75
+uv1_scale = Vector3(5, 5, 5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fbrjs"]
+size = Vector2(20, 20)
+
+[sub_resource type="SphereMesh" id="SphereMesh_nqw7b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mwci7"]
+albedo_texture = ExtResource("2_d1qxb")
+metallic = 0.78
+roughness = 0.24
+
+[sub_resource type="SphereMesh" id="SphereMesh_lau6s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qdjdj"]
+albedo_color = Color(1, 0.298039, 0.247059, 1)
+albedo_texture = ExtResource("2_d1qxb")
+metallic = 0.26
+roughness = 0.59
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jepk0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xkdqw"]
+albedo_color = Color(0.580392, 0.658824, 1, 1)
+albedo_texture = ExtResource("2_d1qxb")
+metallic = 0.86
+roughness = 0.29
+
+[sub_resource type="BoxMesh" id="BoxMesh_syokj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chobt"]
+albedo_color = Color(0.588235, 0.282353, 0.443137, 1)
+albedo_texture = ExtResource("2_d1qxb")
+metallic = 0.52
+roughness = 0.42
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_ekxfu")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kx13e")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.959131, 0.245052, -0.141481, -0.0849703, 0.726354, 0.682048, 0.269902, -0.642152, 0.717491, 0, 1.94732, 0)
+shadow_enabled = true
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.553607, 0.779114, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_tvupy")
+mesh = SubResource("PlaneMesh_fbrjs")
+
+[node name="MetalSphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.721009, 0)
+mesh = SubResource("SphereMesh_nqw7b")
+surface_material_override/0 = SubResource("StandardMaterial3D_mwci7")
+
+[node name="RedSphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17882, 0.628256, -0.532507)
+mesh = SubResource("SphereMesh_lau6s")
+surface_material_override/0 = SubResource("StandardMaterial3D_qdjdj")
+
+[node name="Cylinder" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.29466, 0, 0.409778)
+mesh = SubResource("CylinderMesh_jepk0")
+surface_material_override/0 = SubResource("StandardMaterial3D_xkdqw")
+
+[node name="Box" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.682049, -0.297997, -0.667837, -1.49012e-08, 0.913212, -0.407486, 0.731306, 0.277925, 0.622855, 2.41454, 0.500351, 0.0996274)
+mesh = SubResource("BoxMesh_syokj")
+surface_material_override/0 = SubResource("StandardMaterial3D_chobt")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+
+[node name="SSSR" type="CheckBox" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "SSSR"
+
+[node name="GrayScaleBtn" type="CheckBox" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Gray scale"
+
+[connection signal="toggled" from="UI/MarginContainer/VBoxContainer/SSSR" to="." method="_on_simple_ssr_toggled"]
+[connection signal="toggled" from="UI/MarginContainer/VBoxContainer/GrayScaleBtn" to="." method="_on_gray_scale_btn_toggled"]
