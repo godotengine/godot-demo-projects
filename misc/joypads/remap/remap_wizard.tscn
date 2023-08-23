@@ -93,8 +93,8 @@ offset_bottom = 31.0
 text = "Wizard"
 
 [node name="Mapping" type="Window" parent="."]
-position = Vector2i(130, 200)
-size = Vector2i(340, 100)
+position = Vector2i(130, 100)
+size = Vector2i(340, 400)
 visible = false
 min_size = Vector2i(340, 100)
 
@@ -104,6 +104,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
 
 [node name="VBox" type="VBoxContainer" parent="Mapping/Margin"]
 layout_mode = 2
@@ -111,13 +115,14 @@ offset_right = 600.0
 offset_bottom = 540.0
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Mapping/Margin/VBox"]
+custom_minimum_size = Vector2(0, 260)
 layout_mode = 2
 offset_right = 600.0
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="Mapping/Margin/VBox/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(600, 0)
+size = Vector2i(600, 260)
 render_target_update_mode = 0
 
 [node name="JoypadDiagram" parent="Mapping/Margin/VBox/SubViewportContainer/SubViewport" instance=ExtResource("2")]
