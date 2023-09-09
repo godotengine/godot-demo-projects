@@ -26,7 +26,8 @@ func _physics_process(delta):
 	if direction != Vector3.ZERO:
 		# In the lines below, we turn the character when moving and make the animation play faster.
 		direction = direction.normalized()
-		$Pivot.look_at(position + direction, Vector3.UP)
+		# Setting the basis property will affect the rotation of the node.
+		$Pivot.basis = Basis.looking_at(direction)
 		$AnimationPlayer.speed_scale = 4
 	else:
 		$AnimationPlayer.speed_scale = 1
