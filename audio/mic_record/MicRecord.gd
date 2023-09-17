@@ -1,7 +1,7 @@
 extends Control
 
 var effect  # See AudioEffect in docs
-var recording  # See AudioStreamSample in docs
+var recording  # See AudioStreamWAV in docs
 
 var stereo := true
 var mix_rate := 44100  # This is the default mix rate on recordings
@@ -93,4 +93,8 @@ func _on_StereoCheckButton_toggled(button_pressed: bool) -> void:
 
 
 func _on_open_user_folder_button_pressed():
-	OS.shell_open(ProjectSettings.globalize_path("user://"))
+	match OS.get_name():
+		"macOS", "MacOS", "OSX":
+			OS.shell_open("file://" + ProjectSettings.globalize_path("user://"))
+		_:
+			OS.shell_open(ProjectSettings.globalize_path("user://"))
