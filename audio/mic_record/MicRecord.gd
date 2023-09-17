@@ -94,7 +94,7 @@ func _on_StereoCheckButton_toggled(button_pressed: bool) -> void:
 
 func _on_open_user_folder_button_pressed():
 	match OS.get_name():
-		"macOS", "MacOS", "OSX":
+		"macOS":
 			OS.shell_open("file://" + ProjectSettings.globalize_path("user://"))
 		_:
 			OS.shell_open(ProjectSettings.globalize_path("user://"))
