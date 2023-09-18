@@ -1,14 +1,13 @@
 # Navigation Polygon 2D
 
-Example of using 2D navigation using a
-[`NavigationPolygon`](https://docs.godotengine.org/en/latest/classes/class_navigationpolygon.html)
-in a [`NavigationPolygonInstance`](https://docs.godotengine.org/en/latest/classes/class_navigationpolygoninstance.html) node.
-It uses the 2D navigation API to request a path between two points,
-and then traverses the resulting path.
+Example of using 2D navigation using:
+- [`NavigationRegion2D`](https://docs.godotengine.org/en/latest/classes/class_navigationregion2d.html)
+- [`NavigationPolygon`](https://docs.godotengine.org/en/latest/classes/class_navigationpolygon.html)
+- [`NavigationAgent2D`](https://docs.godotengine.org/en/latest/classes/class_navigationagent2d.html)
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Forward+
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/117
 
