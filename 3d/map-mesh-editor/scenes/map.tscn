@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://blcvqlyonk58"]
+
+[ext_resource type="Script" path="res://scripts/map.gd" id="1_lk2eh"]
+[ext_resource type="Script" path="res://scripts/free_look_camera.gd" id="1_tdj2h"]
+[ext_resource type="PackedScene" uid="uid://cp83vv26judnt" path="res://objects/maps/hex/hex_grid.tscn" id="3_kn4ei"]
+[ext_resource type="PackedScene" uid="uid://er6ef5qvhm0p" path="res://objects/ui/cell_editor_control.tscn" id="4_3grm5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_45x1n"]
+sky_top_color = Color(0, 0.580392, 0.678431, 1)
+sky_horizon_color = Color(0.690196, 0.921569, 1, 1)
+sky_energy_multiplier = 2.0
+ground_bottom_color = Color(0, 0.580392, 0.678431, 1)
+ground_horizon_color = Color(0.690196, 0.921569, 1, 1)
+
+[sub_resource type="Sky" id="Sky_50ejl"]
+sky_material = SubResource("ProceduralSkyMaterial_45x1n")
+
+[sub_resource type="Environment" id="Environment_8lii5"]
+background_mode = 2
+sky = SubResource("Sky_50ejl")
+ambient_light_source = 2
+ambient_light_color = Color(0.431373, 0.431373, 0.431373, 1)
+ambient_light_energy = 4.0
+tonemap_mode = 3
+tonemap_exposure = 0.6
+ssao_enabled = true
+glow_enabled = true
+
+[node name="Map" type="Node3D"]
+script = ExtResource("1_lk2eh")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8lii5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_opacity = 0.8
+directional_shadow_blend_splits = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.62932, 0.777146, 0, -0.777146, 0.62932, 9.11, 12.2506, 12.3768)
+script = ExtResource("1_tdj2h")
+
+[node name="HexGrid" parent="." instance=ExtResource("3_kn4ei")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="CellEditorControl" parent="CanvasLayer" instance=ExtResource("4_3grm5")]

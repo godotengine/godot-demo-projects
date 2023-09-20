@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6n4166ckhfm"]
+
+[ext_resource type="Script" path="res://scripts/maps/grid/grid_chunk.gd" id="1_7mep2"]
+[ext_resource type="Material" path="res://assets/materials/hex/hex_textured_terrain.tres" id="2_8k7rl"]
+[ext_resource type="Script" path="res://scripts/mesh/generated_mesh.gd" id="3_j5mym"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jvaqp"]
+
+[node name="GridChunk" type="StaticBody3D"]
+script = ExtResource("1_7mep2")
+
+[node name="GeneratedMeshTerrain" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_8k7rl")
+script = ExtResource("3_j5mym")
+use_terrain_types = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_jvaqp")

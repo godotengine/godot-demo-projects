@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://bfb2kage6gvfj"]
+
+[ext_resource type="Script" path="res://scripts/maps/hex/hex_grid_chunk.gd" id="1_rorek"]
+[ext_resource type="Script" path="res://scripts/maps/hex/hex_feature_manager.gd" id="2_e7lfy"]
+[ext_resource type="Material" path="res://assets/materials/hex/hex_textured_terrain.tres" id="3_0rdae"]
+[ext_resource type="Script" path="res://scripts/mesh/generated_mesh.gd" id="4_1f35m"]
+[ext_resource type="Material" uid="uid://k8ycuyugtdke" path="res://assets/materials/hex/hex_nice_water.tres" id="5_akh1w"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pb27o"]
+
+[node name="HexGridChunk" type="StaticBody3D"]
+input_capture_on_drag = true
+script = ExtResource("1_rorek")
+
+[node name="HexFeatureManager" type="Node3D" parent="."]
+script = ExtResource("2_e7lfy")
+feature_prefab_path = "res://objects/props/hex_map/tree_pine.tscn"
+
+[node name="HexMeshTerrain" type="MeshInstance3D" parent="."]
+material_override = ExtResource("3_0rdae")
+script = ExtResource("4_1f35m")
+use_terrain_types = true
+
+[node name="HexMeshWater" type="MeshInstance3D" parent="."]
+material_override = ExtResource("5_akh1w")
+cast_shadow = 0
+script = ExtResource("4_1f35m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_pb27o")
