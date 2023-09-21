@@ -2,7 +2,7 @@ extends Node2D
 
 func _process(_delta):
 	# Keep redrawing on every frame.
-	update()
+	queue_redraw()
 
 
 func _draw():
