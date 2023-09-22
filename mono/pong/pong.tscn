@@ -1,24 +1,24 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=12 format=3 uid="uid://bufr8nynnqrj"]
 
-[ext_resource path="res://Logic/Paddle.cs" type="Script" id=1]
-[ext_resource path="res://paddle.png" type="Texture2D" id=2]
-[ext_resource path="res://Logic/Ball.cs" type="Script" id=4]
-[ext_resource path="res://ball.png" type="Texture2D" id=5]
-[ext_resource path="res://separator.png" type="Texture2D" id=6]
-[ext_resource path="res://Logic/Wall.cs" type="Script" id=7]
-[ext_resource path="res://Logic/CeilingFloor.cs" type="Script" id=8]
+[ext_resource type="Script" path="res://Logic/Paddle.cs" id="1"]
+[ext_resource type="Texture2D" uid="uid://cgbjbhglgxf0k" path="res://paddle.png" id="2"]
+[ext_resource type="Script" path="res://Logic/Ball.cs" id="4"]
+[ext_resource type="Texture2D" uid="uid://13ht46tyr4ae" path="res://ball.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://cim6es185kfto" path="res://separator.png" id="6"]
+[ext_resource type="Script" path="res://Logic/Wall.cs" id="7"]
+[ext_resource type="Script" path="res://Logic/CeilingFloor.cs" id="8"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2(4, 16)
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(4, 16)
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2(4, 4)
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(4, 4)
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2(10, 200)
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(10, 200)
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2(320, 10)
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(320, 10)
 
 [node name="Pong" type="Node2D"]
 
@@ -30,69 +30,69 @@ color = Color(0.141176, 0.152941, 0.164706, 1)
 [node name="Left" type="Area2D" parent="."]
 modulate = Color(0, 1, 1, 1)
 position = Vector2(67.6285, 192.594)
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="Left"]
-texture = ExtResource( 2 )
+texture = ExtResource("2")
 
 [node name="Collision" type="CollisionShape2D" parent="Left"]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="Right" type="Area2D" parent="."]
 modulate = Color(1, 0, 1, 1)
 position = Vector2(563.815, 188.919)
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="Right"]
-texture = ExtResource( 2 )
+texture = ExtResource("2")
 
 [node name="Collision" type="CollisionShape2D" parent="Right"]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="Ball" type="Area2D" parent="."]
 position = Vector2(320.5, 191.124)
-script = ExtResource( 4 )
+script = ExtResource("4")
 
 [node name="Sprite2D" type="Sprite2D" parent="Ball"]
-texture = ExtResource( 5 )
+texture = ExtResource("5")
 
 [node name="Collision" type="CollisionShape2D" parent="Ball"]
-shape = SubResource( 2 )
+shape = SubResource("2")
 
 [node name="Separator" type="Sprite2D" parent="."]
 position = Vector2(320, 200)
-texture = ExtResource( 6 )
+texture = ExtResource("6")
 
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="LeftWall" type="Area2D" parent="."]
 position = Vector2(-10, 200)
-script = ExtResource( 7 )
+script = ExtResource("7")
 
 [node name="Collision" type="CollisionShape2D" parent="LeftWall"]
-shape = SubResource( 3 )
+shape = SubResource("3")
 
 [node name="RightWall" type="Area2D" parent="."]
 position = Vector2(650, 200)
-script = ExtResource( 7 )
+script = ExtResource("7")
 
 [node name="Collision" type="CollisionShape2D" parent="RightWall"]
-shape = SubResource( 3 )
+shape = SubResource("3")
 
 [node name="Ceiling" type="Area2D" parent="."]
 position = Vector2(320, -10)
-script = ExtResource( 8 )
+script = ExtResource("8")
 
 [node name="Collision" type="CollisionShape2D" parent="Ceiling"]
-shape = SubResource( 4 )
+shape = SubResource("4")
 
 [node name="Floor" type="Area2D" parent="."]
 position = Vector2(320, 410)
-script = ExtResource( 8 )
+script = ExtResource("8")
 _bounceDirection = -1
 
 [node name="Collision" type="CollisionShape2D" parent="Floor"]
-shape = SubResource( 4 )
+shape = SubResource("4")
 
 [connection signal="area_entered" from="Left" to="Left" method="OnAreaEntered"]
 [connection signal="area_entered" from="Right" to="Right" method="OnAreaEntered"]
