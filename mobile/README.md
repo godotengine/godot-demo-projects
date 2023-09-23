@@ -1,6 +1,6 @@
 # Mobile Demos
 
-These demos depend on features only available in mobile phones or tablets.
+These demos depend on features only available on mobile phones or tablets.
 
 The Android IAP demo only runs on Android.
 
