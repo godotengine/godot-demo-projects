@@ -1,10 +1,15 @@
 extends Node
 
+
 @export var combatants_list: NodePath
+
+@onready var combatants_list_node = get_node(combatants_list)
+
 var queue = []:
 	set(value):
 		# TODO: Manually copy the code from this method.
 		set_queue(value)
+
 var active_combatant = null:
 	set(value):
 		# TODO: Manually copy the code from this method.
@@ -12,12 +17,9 @@ var active_combatant = null:
 
 signal active_combatant_changed(active_combatant)
 
-func _ready():
-	combatants_list = get_node(combatants_list)
-
 
 func initialize():
-	set_queue(combatants_list.get_children())
+	set_queue(combatants_list_node.get_children())
 	play_turn()
 
 

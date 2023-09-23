@@ -1,12 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://1a847rc1yude"]
 
-[ext_resource path="res://combat/Combat.gd" type="Script" id=1]
-[ext_resource path="res://combat/TurnQueue.gd" type="Script" id=2]
-[ext_resource path="res://theme/theme.tres" type="Theme" id=3]
-[ext_resource path="res://combat/interface/UI.gd" type="Script" id=4]
-[ext_resource path="res://combat/interface/Info.tscn" type="PackedScene" id=5]
+[ext_resource type="Script" path="res://combat/Combat.gd" id="1"]
+[ext_resource type="Script" path="res://combat/TurnQueue.gd" id="2"]
+[ext_resource type="Theme" uid="uid://dh2px4xx6k8ga" path="res://theme/theme.tres" id="3"]
+[ext_resource type="Script" path="res://combat/interface/UI.gd" id="4"]
+[ext_resource type="PackedScene" path="res://combat/interface/Info.tscn" id="5"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
 
 func add_combatant(new_combatant):
@@ -15,67 +15,58 @@ func add_combatant(new_combatant):
 "
 
 [node name="Combat" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="Combatants" type="Node2D" parent="."]
 position = Vector2(539, 275)
-script = SubResource( 1 )
+script = SubResource("1")
 
 [node name="TurnQueue" type="Node" parent="."]
-script = ExtResource( 2 )
+script = ExtResource("2")
 combatants_list = NodePath("../Combatants")
 
 [node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 1280.0
 offset_bottom = 720.0
-theme = ExtResource( 3 )
-script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-combatants_node = NodePath("../Combatants")
-info_scene = ExtResource( 5 )
+theme = ExtResource("3")
+script = ExtResource("4")
+info_scene = ExtResource("5")
 
 [node name="Combatants" type="HBoxContainer" parent="UI"]
+layout_mode = 0
 offset_top = 77.0
 offset_right = 1280.0
 offset_bottom = 328.0
-custom_constants/separation = 360
 
 [node name="Buttons" type="PanelContainer" parent="UI"]
+layout_mode = 0
 offset_left = 80.0
 offset_top = 376.0
 offset_right = 1200.0
 offset_bottom = 698.0
 
 [node name="GridContainer" type="GridContainer" parent="UI/Buttons"]
-offset_left = 90.0
-offset_top = 35.0
-offset_right = 1030.0
-offset_bottom = 277.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
 
 [node name="Attack" type="Button" parent="UI/Buttons/GridContainer"]
-offset_right = 468.0
-offset_bottom = 119.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Attack"
 
 [node name="Defend" type="Button" parent="UI/Buttons/GridContainer"]
-offset_left = 472.0
-offset_right = 940.0
-offset_bottom = 119.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Defend"
 
 [node name="Flee" type="Button" parent="UI/Buttons/GridContainer"]
-offset_top = 123.0
-offset_right = 468.0
-offset_bottom = 242.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Flee"

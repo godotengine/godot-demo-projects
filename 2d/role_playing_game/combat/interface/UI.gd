@@ -1,10 +1,10 @@
 extends Control
 
-@export var combatants_node: NodePath
+
+@export var combatants_node_path: NodePath
 @export var info_scene: PackedScene
 
-func _ready():
-	combatants_node = get_node(combatants_node)
+@onready var combatants_node = get_node(combatants_node_path)
 
 
 func initialize():
