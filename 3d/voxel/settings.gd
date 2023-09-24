@@ -37,4 +37,4 @@ func save_settings():
 		"render_distance": render_distance,
 		"fog_enabled": fog_enabled,
 	}
-	file.store_line(JSON.new().stringify(data))
+	file.store_line(JSON.stringify(data))
