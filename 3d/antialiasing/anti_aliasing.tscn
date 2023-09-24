@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://clyxqp0e6qemi"]
+[gd_scene load_steps=49 format=3 uid="uid://clyxqp0e6qemi"]
 
 [ext_resource type="Texture2D" uid="uid://ccgkupemr6e1q" path="res://textures/paint.png" id="3_2nulf"]
 [ext_resource type="PackedScene" uid="uid://daokc0jvx7nkw" path="res://thin_lines.tscn" id="3_5ehjl"]
@@ -428,7 +428,7 @@ shader = SubResource("Shader_rejcs")
 shader_parameter/albedo = Color(1.2, 0.915333, 0.997134, 1)
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 1.0
-shader_parameter/metallic_texture_channel = Plane(1, 0, 0, 0)
+shader_parameter/metallic_texture_channel = null
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.0
 shader_parameter/uv1_scale = Vector3(2, 2, 1)
@@ -489,7 +489,7 @@ shader = SubResource("Shader_ovufm")
 shader_parameter/albedo = Color(1.2, 1.16365, 0.85123, 1)
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 1.0
-shader_parameter/metallic_texture_channel = Plane(1, 0, 0, 0)
+shader_parameter/metallic_texture_channel = null
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.0
 shader_parameter/uv1_scale = Vector3(2, 2, 1)
@@ -497,6 +497,10 @@ shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/texture_albedo = SubResource("NoiseTexture_bgiac")
+
+[sub_resource type="Gradient" id="Gradient_ehij4"]
+offsets = PackedFloat32Array(0, 0.333, 0.667, 1)
+colors = PackedColorArray(1, 0.17, 0.17, 1, 1, 0.816, 0.08, 1, 0.644, 1, 0.11, 1, 0.14, 0.885333, 1, 1)
 
 [node name="AntiAliasingTestScene" type="WorldEnvironment"]
 environment = SubResource("11")
@@ -718,7 +722,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -60)
 mesh = SubResource("SphereMesh_v4x6x")
 
 [node name="Decal" type="Decal" parent="Testers/MovingDecal"]
-transform = Transform3D(-0.707104, -1.01328e-06, -0.707109, 0.183013, 0.965926, -0.183013, 0.683015, -0.258819, -0.68301, 1, 1, 1)
+transform = Transform3D(-0.707104, -1.00986e-06, -0.707109, 0.183013, 0.965926, -0.183013, 0.683015, -0.258819, -0.68301, 1, 1, 1)
 texture_albedo = ExtResource("3_2nulf")
 texture_normal = ExtResource("4_fdfpv")
 
@@ -783,58 +787,147 @@ offset_right = -24.0
 offset_bottom = -24.0
 text = "Next  »"
 
-[node name="FPSLimit" type="OptionButton" parent="."]
-visible = false
-offset_left = 404.0
-offset_top = 64.0
-offset_right = 609.0
-offset_bottom = 95.0
-item_count = 3
-selected = 2
-popup/item_0/text = "30 FPS Limit"
-popup/item_0/id = 0
-popup/item_1/text = "60 FPS Limit"
-popup/item_1/id = 1
-popup/item_2/text = "No FPS Limit (V-Sync)"
-popup/item_2/id = 3
-
 [node name="Antialiasing" type="VBoxContainer" parent="."]
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 394.0
-offset_bottom = 260.0
+offset_bottom = 340.0
 theme_override_constants/separation = 10
 
-[node name="FXAA" type="CheckButton" parent="Antialiasing"]
+[node name="MSAAContainer" type="HBoxContainer" parent="Antialiasing"]
 layout_mode = 2
+
+[node name="Label" type="Label" parent="Antialiasing/MSAAContainer"]
+custom_minimum_size = Vector2(120, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-text = "FXAA (Fast)"
+text = "MSAA
+"
+vertical_alignment = 1
 
-[node name="TemporalAntialiasing" type="CheckButton" parent="Antialiasing"]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-text = "Temporal antialiasing (Fast)"
-
-[node name="MSAA" type="OptionButton" parent="Antialiasing"]
+[node name="MSAA" type="OptionButton" parent="Antialiasing/MSAAContainer"]
+custom_minimum_size = Vector2(235, 2.08165e-12)
 layout_mode = 2
 item_count = 4
 selected = 0
-popup/item_0/text = "No MSAA (Fastest)"
+popup/item_0/text = "Disabled (Fastest)"
 popup/item_0/id = 0
-popup/item_1/text = "2× MSAA (Average)"
+popup/item_1/text = "2× (Average)"
 popup/item_1/id = 1
-popup/item_2/text = "4× MSAA (Slow)"
+popup/item_2/text = "4× (Slow)"
 popup/item_2/id = 2
-popup/item_3/text = "8× MSAA (Slowest)"
+popup/item_3/text = "8× (Slower)"
 popup/item_3/id = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Antialiasing"]
+[node name="FXAAContainer" type="HBoxContainer" parent="Antialiasing"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Antialiasing/FXAAContainer"]
+custom_minimum_size = Vector2(120, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "FXAA
+"
+vertical_alignment = 1
+
+[node name="FXAA" type="OptionButton" parent="Antialiasing/FXAAContainer"]
+custom_minimum_size = Vector2(235, 2.08165e-12)
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Disabled (Fastest)"
+popup/item_0/id = 0
+popup/item_1/text = "Enabled (Fast)"
+popup/item_1/id = 1
+
+[node name="TAAContainer" type="HBoxContainer" parent="Antialiasing"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Antialiasing/TAAContainer"]
+custom_minimum_size = Vector2(120, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "TAA
+"
+vertical_alignment = 1
+
+[node name="TAA" type="OptionButton" parent="Antialiasing/TAAContainer"]
+custom_minimum_size = Vector2(235, 2.08165e-12)
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Disabled (Fastest)"
+popup/item_0/id = 0
+popup/item_1/text = "Enabled (Average)"
+popup/item_1/id = 1
+
+[node name="VSyncContainer" type="HBoxContainer" parent="Antialiasing"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Antialiasing/VSyncContainer"]
+custom_minimum_size = Vector2(120, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "V-Sync"
+vertical_alignment = 1
+
+[node name="VSync" type="OptionButton" parent="Antialiasing/VSyncContainer"]
+custom_minimum_size = Vector2(235, 2.08165e-12)
+layout_mode = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Adaptive"
+popup/item_1/id = 1
+popup/item_2/text = "Enabled"
+popup/item_2/id = 2
+
+[node name="LimitFPSContainer" type="HBoxContainer" parent="Antialiasing"]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="Antialiasing/HBoxContainer"]
+[node name="Label" type="Label" parent="Antialiasing/LimitFPSContainer"]
+custom_minimum_size = Vector2(120, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Limit FPS"
+vertical_alignment = 1
+
+[node name="LimitFPSScale" type="HSlider" parent="Antialiasing/LimitFPSContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 3.0
+max_value = 300.0
+step = 10.0
+value = 1.0
+
+[node name="Value" type="Label" parent="Antialiasing/LimitFPSContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RenderScaleContainer" type="HBoxContainer" parent="Antialiasing"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Antialiasing/RenderScaleContainer"]
+custom_minimum_size = Vector2(120, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -842,7 +935,7 @@ theme_override_constants/outline_size = 4
 text = "Render Scale"
 vertical_alignment = 1
 
-[node name="RenderScale" type="HSlider" parent="Antialiasing/HBoxContainer"]
+[node name="RenderScale" type="HSlider" parent="Antialiasing/RenderScaleContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -852,12 +945,13 @@ max_value = 2.0
 step = 0.01
 value = 1.0
 
-[node name="Value" type="Label" parent="Antialiasing/HBoxContainer"]
+[node name="Value" type="Label" parent="Antialiasing/RenderScaleContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "100%"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="FidelityFXFSR" type="CheckButton" parent="Antialiasing"]
@@ -890,19 +984,35 @@ anchor_right = 1.0
 offset_left = -344.0
 offset_top = 16.0
 offset_right = -16.0
-offset_bottom = 55.0
+offset_bottom = 42.0
 grow_horizontal = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Viewport resolution: 1152×648"
 horizontal_alignment = 2
 
+[node name="FPSLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -344.0
+offset_top = 48.0
+offset_right = -16.0
+offset_bottom = 74.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "FPS: 0"
+horizontal_alignment = 2
+metadata/gradient = SubResource("Gradient_ehij4")
+
 [connection signal="pressed" from="Previous" to="." method="_on_previous_pressed"]
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
-[connection signal="item_selected" from="FPSLimit" to="." method="_on_fps_limit_item_selected"]
-[connection signal="toggled" from="Antialiasing/FXAA" to="." method="_on_fxaa_toggled"]
-[connection signal="toggled" from="Antialiasing/TemporalAntialiasing" to="." method="_on_temporal_antialiasing_toggled"]
-[connection signal="item_selected" from="Antialiasing/MSAA" to="." method="_on_msaa_item_selected"]
-[connection signal="value_changed" from="Antialiasing/HBoxContainer/RenderScale" to="." method="_on_render_scale_value_changed"]
+[connection signal="item_selected" from="Antialiasing/MSAAContainer/MSAA" to="." method="_on_msaa_item_selected"]
+[connection signal="item_selected" from="Antialiasing/FXAAContainer/FXAA" to="." method="_on_fxaa_item_selected"]
+[connection signal="item_selected" from="Antialiasing/TAAContainer/TAA" to="." method="_on_taa_item_selected"]
+[connection signal="item_selected" from="Antialiasing/VSyncContainer/VSync" to="." method="_on_v_sync_item_selected"]
+[connection signal="value_changed" from="Antialiasing/LimitFPSContainer/LimitFPSScale" to="." method="_on_limit_fps_scale_value_changed"]
+[connection signal="value_changed" from="Antialiasing/RenderScaleContainer/RenderScale" to="." method="_on_render_scale_value_changed"]
 [connection signal="toggled" from="Antialiasing/FidelityFXFSR" to="." method="_on_amd_fidelityfx_fsr1_toggled"]
 [connection signal="item_selected" from="Antialiasing/FSRSharpness" to="." method="_on_fsr_sharpness_item_selected"]
