@@ -1,4 +1,4 @@
-# GD Paint
+# GD Paint update for godot 4 from godot 3
 
 GD Paint is a simple image editor made using Godot and GDScript.
 It supports different types of "brushes": a basic pen/pencil
