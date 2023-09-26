@@ -1,5 +1,6 @@
 extends Control
 
+
 # Window project settings:
 #  - Stretch mode is set to `canvas_items` (`2d` in Godot 3.x)
 #  - Stretch aspect is set to `expand`
@@ -112,6 +113,12 @@ func _on_vsync_option_button_item_selected(index: int) -> void:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ADAPTIVE)
 	elif index == 2: # Enabled
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+
+
+func _on_limit_fps_slider_value_changed(value: float):
+	# The maximum number of frames per second that can be rendered.
+	# A value of 0 means "no limit".
+	Engine.max_fps = value
 
 
 func _on_msaa_option_button_item_selected(index: int) -> void:
