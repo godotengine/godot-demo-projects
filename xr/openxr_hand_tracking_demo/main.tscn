@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://br3bss6kac8pa"]
+
+[ext_resource type="PackedScene" uid="uid://bs5xn2f4c7i42" path="res://assets/valve_hand_models/left_hand.glb" id="1_f12fi"]
+[ext_resource type="Script" path="res://start_vr.gd" id="1_nqec6"]
+[ext_resource type="PackedScene" uid="uid://5ih48kkw31g4" path="res://world.tscn" id="2_amdck"]
+[ext_resource type="PackedScene" uid="uid://28kilruyuw6p" path="res://assets/valve_hand_models/right_hand.glb" id="2_oljq0"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_nqec6")
+
+[node name="World" parent="." instance=ExtResource("2_amdck")]
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="LeftHandTracker" type="OpenXRHand" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+hand_skeleton = NodePath("HandModel/Armature_001/Skeleton3D")
+
+[node name="HandModel" parent="XROrigin3D/LeftHandTracker" instance=ExtResource("1_f12fi")]
+
+[node name="RightHandTracker" type="OpenXRHand" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, 1, -0.5)
+hand = 1
+hand_skeleton = NodePath("HandModel/Armature/Skeleton3D")
+
+[node name="HandModel" parent="XROrigin3D/RightHandTracker" instance=ExtResource("2_oljq0")]
+
+[editable path="XROrigin3D/LeftHandTracker/HandModel"]
+[editable path="XROrigin3D/RightHandTracker/HandModel"]

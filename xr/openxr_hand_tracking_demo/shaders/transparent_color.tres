@@ -1,0 +1,43 @@
+[gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://b81c6jjul06ik"]
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_l740u"]
+parameter_name = "Color"
+default_value_enabled = true
+default_value = Color(1, 1, 1, 0.501961)
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_dxhcy"]
+default_input_values = [0, Quaternion(0, 0, 0, 0)]
+op_type = 2
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform vec4 Color : source_color = vec4(1.000000, 1.000000, 1.000000, 0.501961);
+
+
+
+void fragment() {
+// ColorParameter:2
+	vec4 n_out2p0 = Color;
+
+
+// VectorDecompose:3
+	float n_out3p0 = n_out2p0.x;
+	float n_out3p1 = n_out2p0.y;
+	float n_out3p2 = n_out2p0.z;
+	float n_out3p3 = n_out2p0.w;
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+	ALPHA = n_out3p3;
+
+}
+"
+nodes/fragment/0/position = Vector2(560, 100)
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_l740u")
+nodes/fragment/2/position = Vector2(20, 100)
+nodes/fragment/3/node = SubResource("VisualShaderNodeVectorDecompose_dxhcy")
+nodes/fragment/3/position = Vector2(340, 280)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 2, 0, 3, 0, 3, 3, 0, 1)
