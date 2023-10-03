@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://hanl00aqvu7u"]
+
+[ext_resource type="Texture2D" uid="uid://b1waowk6l76ap" path="res://assets/images/pattern.png" id="1_h5hgt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vtble"]
+size = Vector3(1, 0.1, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yh46n"]
+albedo_color = Color(0.704983, 0.442908, 0.226976, 1)
+albedo_texture = ExtResource("1_h5hgt")
+uv1_scale = Vector3(3, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ud4mc"]
+material = SubResource("StandardMaterial3D_yh46n")
+size = Vector3(1, 0.1, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dgs2r"]
+size = Vector3(0.1, 0.7, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gf8o1"]
+albedo_color = Color(0.754123, 0.902538, 0.996894, 1)
+albedo_texture = ExtResource("1_h5hgt")
+uv1_scale = Vector3(1, 3, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_l0vgn"]
+material = SubResource("StandardMaterial3D_gf8o1")
+size = Vector3(0.1, 0.7, 0.1)
+
+[node name="Table" type="StaticBody3D"]
+
+[node name="TableSurfaceShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_vtble")
+
+[node name="TableSurfaceMesh" type="MeshInstance3D" parent="TableSurfaceShape"]
+mesh = SubResource("BoxMesh_ud4mc")
+skeleton = NodePath("../..")
+
+[node name="TableLegShape01" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0.35, -0.2)
+shape = SubResource("BoxShape3D_dgs2r")
+
+[node name="TableLegMesh" type="MeshInstance3D" parent="TableLegShape01"]
+mesh = SubResource("BoxMesh_l0vgn")
+
+[node name="TableLegShape02" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0.35, -0.2)
+shape = SubResource("BoxShape3D_dgs2r")
+
+[node name="TableLegMesh" type="MeshInstance3D" parent="TableLegShape02"]
+mesh = SubResource("BoxMesh_l0vgn")
+
+[node name="TableLegShape03" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0.35, 0.2)
+shape = SubResource("BoxShape3D_dgs2r")
+
+[node name="TableLegMesh" type="MeshInstance3D" parent="TableLegShape03"]
+mesh = SubResource("BoxMesh_l0vgn")
+
+[node name="TableLegShape04" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0.35, 0.2)
+shape = SubResource("BoxShape3D_dgs2r")
+
+[node name="TableLegMesh" type="MeshInstance3D" parent="TableLegShape04"]
+mesh = SubResource("BoxMesh_l0vgn")

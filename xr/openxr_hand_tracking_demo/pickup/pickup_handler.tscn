@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://byif52d1xkl3u"]
+
+[ext_resource type="Script" path="res://pickup/pickup_handler.gd" id="1_5qec3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_i5on0"]
+resource_local_to_scene = true
+margin = 0.001
+radius = 0.3
+
+[node name="PickupHandler" type="Area3D"]
+script = ExtResource("1_5qec3")
+pickup_action = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_i5on0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
