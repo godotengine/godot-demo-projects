@@ -10,7 +10,12 @@ enum States {
 	FALL = 4,
 }
 
-var speed = Vector2(120.0, 360.0)
+const WALK_SPEED = 200.0
+const ACCELERATION_SPEED = WALK_SPEED * 6.0
+const JUMP_VELOCITY = -400.0
+## Maximum speed at which the player can fall.
+const TERMINAL_VELOCITY = 400
+
 var falling_slow = false
 var falling_fast = false
 var no_move_horizontal_time = 0.0
@@ -24,25 +29,34 @@ func _ready():
 	$AnimationTree.active = true
 
 
-func _physics_process(delta):
-	velocity.y += gravity * delta
+func _physics_process(delta: float) -> void:
+	var is_jumping = false
+	if Input.is_action_just_pressed("jump"):
+		is_jumping = try_jump()
+	elif Input.is_action_just_released("jump") and velocity.y < 0.0:
+		# The player let go of jump early, reduce vertical momentum.
+		velocity.y *= 0.6
+	# Fall.
+	velocity.y = minf(TERMINAL_VELOCITY, velocity.y + gravity * delta)
+
+	var direction := Input.get_axis("move_left", "move_right") * WALK_SPEED
+	velocity.x = move_toward(velocity.x, direction, ACCELERATION_SPEED * delta)
+
 	if no_move_horizontal_time > 0.0:
 		# After doing a hard fall, don't move for a short time.
 		velocity.x = 0.0
 		no_move_horizontal_time -= delta
-	else:
-		velocity.x = (Input.get_axis(&"move_left", &"move_right")) * speed.x
-		if Input.is_action_pressed(&"walk"):
-			velocity.x *= 0.2
-	# TODO: This information should be set to the CharacterBody properties instead of arguments: , Vector2.UP
-	# TODO: Rename velocity to linear_velocity in the rest of the script.
+
+	if not is_zero_approx(velocity.x):
+		if velocity.x > 0.0:
+			sprite.scale.x = 1.0 * sprite_scale
+		else:
+			sprite.scale.x = -1.0 * sprite_scale
+
 	move_and_slide()
-	# Calculate flipping and falling speed for animation purposes.
-	if velocity.x > 0:
-		sprite.transform.x = Vector2(sprite_scale, 0)
-	elif velocity.x < 0:
-		sprite.transform.x = Vector2(-sprite_scale, 0)
-	if velocity.y > 500:
+
+	# Calculate falling speed for animation purposes.
+	if velocity.y >= TERMINAL_VELOCITY:
 		falling_fast = true
 		falling_slow = false
 	elif velocity.y > 300:
@@ -56,9 +70,10 @@ func _physics_process(delta):
 		elif falling_slow:
 			$AnimationTree["parameters/land/active"] = true
 			falling_slow = false
+
 		if Input.is_action_just_pressed(&"jump"):
 			$AnimationTree["parameters/jump/active"] = true
-			velocity.y = -speed.y
+
 		if abs(velocity.x) > 50:
 			$AnimationTree["parameters/state/current"] = States.RUN
 			$AnimationTree["parameters/run_timescale/scale"] = abs(velocity.x) / 60
@@ -72,3 +87,10 @@ func _physics_process(delta):
 			$AnimationTree["parameters/state/current"] = States.FALL
 		else:
 			$AnimationTree["parameters/state/current"] = States.FLY
+
+
+func try_jump() -> bool:
+	if is_on_floor():
+		velocity.y = JUMP_VELOCITY
+		return true
+	return false
