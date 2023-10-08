@@ -1,13 +1,13 @@
 class_name Player
 extends CharacterBody2D
 
-# Keep this in sync with the AnimationTree's state names and numbers.
-enum States {
-	IDLE = 0,
-	WALK = 1,
-	RUN = 2,
-	FLY = 3,
-	FALL = 4,
+# Keep this in sync with the AnimationTree's state names.
+const States = {
+	IDLE = "idle",
+	WALK = "walk",
+	RUN = "run",
+	FLY = "fly",
+	FALL = "fall",
 }
 
 const WALK_SPEED = 200.0
@@ -55,38 +55,43 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+	# After applying our motion, update our animation to match.
+
 	# Calculate falling speed for animation purposes.
 	if velocity.y >= TERMINAL_VELOCITY:
 		falling_fast = true
 		falling_slow = false
 	elif velocity.y > 300:
 		falling_slow = true
-	# Check if on floor and do mostly animation stuff based on it.
-	if is_on_floor():
-		if falling_fast:
-			$AnimationTree["parameters/land_hard/active"] = true
-			no_move_horizontal_time = 0.4
-			falling_fast = false
-		elif falling_slow:
-			$AnimationTree["parameters/land/active"] = true
-			falling_slow = false
 
-		if Input.is_action_just_pressed(&"jump"):
-			$AnimationTree["parameters/jump/active"] = true
+	if is_jumping:
+		$AnimationTree["parameters/jump/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+
+	if is_on_floor():
+		# Most animations change when we run, land, or take off.
+		if falling_fast:
+			$AnimationTree["parameters/land_hard/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+			no_move_horizontal_time = 0.4
+		elif falling_slow:
+			$AnimationTree["parameters/land/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
 		if abs(velocity.x) > 50:
-			$AnimationTree["parameters/state/current"] = States.RUN
+			$AnimationTree["parameters/state/transition_request"] = States.RUN
 			$AnimationTree["parameters/run_timescale/scale"] = abs(velocity.x) / 60
 		elif velocity.x:
-			$AnimationTree["parameters/state/current"] = States.WALK
+			$AnimationTree["parameters/state/transition_request"] = States.WALK
 			$AnimationTree["parameters/walk_timescale/scale"] = abs(velocity.x) / 12
 		else:
-			$AnimationTree["parameters/state/current"] = States.IDLE
+			$AnimationTree["parameters/state/transition_request"] = States.IDLE
+
+		falling_fast = false
+		falling_slow = false
 	else:
 		if velocity.y > 0:
-			$AnimationTree["parameters/state/current"] = States.FALL
+			$AnimationTree["parameters/state/transition_request"] = States.FALL
 		else:
-			$AnimationTree["parameters/state/current"] = States.FLY
+			$AnimationTree["parameters/state/transition_request"] = States.FLY
+
 
 
 func try_jump() -> bool:
