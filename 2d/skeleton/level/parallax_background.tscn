@@ -8,18 +8,22 @@
 [ext_resource type="Texture2D" uid="uid://b4lffygwgc7vy" path="res://level/background/distant_platforms_1.png" id="6"]
 
 [node name="ParallaxBackground" type="ParallaxBackground"]
-scroll_base_scale = Vector2(0.4, 0)
+follow_viewport_enabled = true
+scroll_base_scale = Vector2(0.2, 0)
 
 [node name="Sky" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(1, 0)
+motion_offset = Vector2(0, -15)
 motion_mirroring = Vector2(400, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Sky"]
-scale = Vector2(64, 0.94)
+position = Vector2(0, -80)
+scale = Vector2(136.169, 2)
 texture = ExtResource("2")
 centered = false
 
 [node name="Clouds" type="ParallaxLayer" parent="."]
-motion_scale = Vector2(0.1, 1)
+motion_scale = Vector2(0.1, 0.3)
 motion_offset = Vector2(-550, 0)
 
 [node name="CloudGroup1" type="Node2D" parent="Clouds"]
@@ -154,21 +158,27 @@ texture = ExtResource("5")
 centered = false
 
 [node name="Mountains2" type="ParallaxLayer" parent="."]
-position = Vector2(0, 243)
-motion_scale = Vector2(0.2, 1)
+position = Vector2(0, 400)
+motion_scale = Vector2(0.1, 0)
+motion_mirroring = Vector2(400, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Mountains2"]
-position = Vector2(833, -64)
+position = Vector2(0, -64)
 texture = ExtResource("1")
+centered = false
+offset = Vector2(0, -64)
 region_enabled = true
 region_rect = Rect2(0, 0, 2048, 128)
 
 [node name="Mountains1" type="ParallaxLayer" parent="."]
-position = Vector2(0, 246)
-motion_scale = Vector2(0.4, 1)
+position = Vector2(0, 400)
+motion_scale = Vector2(0.3, 0)
+motion_mirroring = Vector2(400, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Mountains1"]
-position = Vector2(838, -64)
+position = Vector2(0, -64)
 texture = ExtResource("6")
+centered = false
+offset = Vector2(0, -64)
 region_enabled = true
 region_rect = Rect2(0, 0, 2048, 128)
