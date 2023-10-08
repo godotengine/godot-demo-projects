@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpj7vtj6gr3tv"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_d31c7"]
+[ext_resource type="PackedScene" uid="uid://bbvciliw3xnf6" path="res://objects/black_out.tscn" id="2_ecfc5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xe2ly"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sldd7"]
+size = Vector3(0.05, 0.05, 0.05)
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_d31c7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_xe2ly")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.1)
+far = 1000.0
+
+[node name="Neck" type="Node3D" parent="XROrigin3D/XRCamera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.1)
+
+[node name="BlackOut" parent="XROrigin3D/XRCamera3D" instance=ExtResource("2_ecfc5")]
+
+[node name="LeftHand" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+pose = &"aim"
+
+[node name="PlaceholderHand" type="MeshInstance3D" parent="XROrigin3D/LeftHand"]
+mesh = SubResource("BoxMesh_sldd7")
+
+[node name="RightHand" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"right_hand"
+pose = &"aim"
+
+[node name="PlaceholderHand" type="MeshInstance3D" parent="XROrigin3D/RightHand"]
+mesh = SubResource("BoxMesh_sldd7")
+skeleton = NodePath("../../LeftHand")
