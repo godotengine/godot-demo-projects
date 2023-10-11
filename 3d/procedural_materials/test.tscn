@@ -1,12 +1,12 @@
 [gd_scene load_steps=40 format=3 uid="uid://c4i1xdk0nc7s0"]
 
-[ext_resource type="Material" uid="uid://b2588u4jkfiog" path="res://materials/trypophobia.tres" id="3_322sv"]
 [ext_resource type="Material" uid="uid://chsncadr63hoc" path="res://materials/grass.tres" id="4_gplko"]
 [ext_resource type="Material" uid="uid://3odjrwml2nes" path="res://materials/sand.tres" id="5_12jug"]
 [ext_resource type="Material" uid="uid://cw85kxowmkj37" path="res://materials/wet_concrete.tres" id="6_q1c2f"]
 [ext_resource type="Material" uid="uid://c5wve1c3hypfo" path="res://materials/marble.tres" id="7_ebvqo"]
 [ext_resource type="Material" uid="uid://cbijbaq5qol7n" path="res://materials/ice.tres" id="7_k1q1v"]
 [ext_resource type="Material" uid="uid://b74tdcluvrao6" path="res://materials/lava.tres" id="8_jphcw"]
+[ext_resource type="Material" uid="uid://68rvwiamrckm" path="res://materials/glass.tres" id="9_vei4q"]
 [ext_resource type="Script" path="res://scripts/grid.gd" id="10_wwlcf"]
 [ext_resource type="Shader" path="res://shaders/plasma.gdshader" id="11_aoush"]
 [ext_resource type="Texture2D" uid="uid://chjqieyps5n5r" path="res://checker.png" id="14"]
@@ -337,19 +337,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("BoxMesh_opf1g")
 surface_material_override/0 = ExtResource("8_jphcw")
 
-[node name="NoiseTextureTrypophobia" type="Node3D" parent="Testers"]
+[node name="NoiseTextureGlass" type="Node3D" parent="Testers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, -6)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureTrypophobia"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureGlass"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00275182, -0.244153, -0.000101089)
 mesh = SubResource("SphereMesh_be5u0")
 skeleton = NodePath("../../..")
-surface_material_override/0 = ExtResource("3_322sv")
+surface_material_override/0 = ExtResource("9_vei4q")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureTrypophobia"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureGlass"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("BoxMesh_opf1g")
-surface_material_override/0 = ExtResource("3_322sv")
+surface_material_override/0 = ExtResource("9_vei4q")
 
 [node name="NoiseTexturePixelArt" type="Node3D" parent="Testers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, -10)
