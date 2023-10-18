@@ -115,7 +115,7 @@ func _physics_process(delta):
 	if not Engine.is_editor_hint():
 		if _moving_body and not _contact_detected:
 			if _use_character_body:
-				var collision = _moving_body.move_and_collide(_body_velocity, false)
+				var collision = _moving_body.move_and_collide(_body_velocity * delta, false)
 				if collision:
 					var colliding_body = collision.get_collider()
 					await _on_contact_detected(colliding_body)
