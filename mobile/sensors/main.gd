@@ -119,7 +119,7 @@ func _process(delta):
 	get_node(^"Arrows/AccelerometerArrow").transform.basis = get_basis_for_arrow(grav)
 
 	# Update our arrow showing our magnetometer
-	# Note that in absense of other strong magnetic forces this will point to magnetic north, which is not horizontal thanks to the earth being, uhm, round
+	# Note that in absence of other strong magnetic forces this will point to magnetic north, which is not horizontal thanks to the earth being, uhm, round
 	get_node(^"Arrows/MagnetoArrow").transform.basis = get_basis_for_arrow(mag)
 
 	# Calculate our north vector and show that
