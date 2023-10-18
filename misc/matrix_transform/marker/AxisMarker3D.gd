@@ -1,7 +1,7 @@
 @tool
-extends Node3D
-class_name AxisMarker3D
 @icon("res://marker/AxisMarker3D.svg")
+class_name AxisMarker3D
+extends Node3D
 
 
 func _process(_delta):
