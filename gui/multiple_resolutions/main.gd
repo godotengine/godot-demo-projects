@@ -129,3 +129,7 @@ func _on_window_scale_factor_drag_ended(_value_changed):
 	scale_factor = $"Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowScaleFactor/HSlider".value
 	$"Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowScaleFactor/Value".text = "%d%%" % (scale_factor * 100)
 	get_viewport().content_scale_factor = scale_factor
+
+
+func _on_window_stretch_scale_mode_item_selected(index: int) -> void:
+	get_viewport().content_scale_stretch = index
