@@ -36,12 +36,8 @@ func _process(delta):
 		$AnimatedSprite2D.flip_h = velocity.x < 0
 	elif velocity.y != 0:
 		$AnimatedSprite2D.animation = &"up"
-		if velocity.y > 0:
-			$AnimatedSprite2D.flip_v = true
-			$Trail.rotation = PI
-		else:
-			$AnimatedSprite2D.flip_v = false
-			$Trail.rotation = 0
+		$AnimatedSprite2D.flip_v = velocity.y > 0
+	$Trail.rotation = PI if $AnimatedSprite2D.flip_v else 0
 
 
 func start(pos):
