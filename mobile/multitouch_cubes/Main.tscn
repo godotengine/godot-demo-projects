@@ -1,160 +1,125 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://didpkugc6cvxv"]
 
-[ext_resource path="res://GestureArea.gd" type="Script" id=1]
-[ext_resource path="res://CubeScene.tscn" type="PackedScene" id=2]
+[ext_resource type="Script" path="res://GestureArea.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://csyb8ij530w1l" path="res://CubeScene.tscn" id="2"]
 
 [node name="VBoxContainer" type="VBoxContainer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_right = 1024.0
-offset_bottom = 298.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer"]
-offset_right = 510.0
-offset_bottom = 298.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
-script = ExtResource( 1 )
+script = ExtResource("1")
 target = NodePath("SubViewport/Node3D/MeshInstance3D")
 one_finger_rot_y = false
 two_fingers_rot_z = false
 two_fingers_zoom = false
 
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/SubViewportContainer"]
-size = Vector2(510, 298)
-own_world = true
+own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
-msaa = 2
-hdr = false
-usage = 3
-render_target_update_mode = 3
+size = Vector2i(574, 322)
+render_target_update_mode = 4
 
-[node name="Node3D" parent="HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource( 2 )]
+[node name="Node3D" parent="HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("2")]
 
 [node name="Camera3D" parent="HBoxContainer/SubViewportContainer/SubViewport/Node3D" index="2"]
 current = true
 
 [node name="Label" type="Label" parent="HBoxContainer/SubViewportContainer"]
-offset_left = 7.0
-offset_top = 11.0
-offset_right = 157.0
-offset_bottom = 25.0
+layout_mode = 2
 text = "One-finger rot around X"
 
 [node name="ViewportContainer2" type="SubViewportContainer" parent="HBoxContainer"]
-offset_left = 514.0
-offset_right = 1024.0
-offset_bottom = 298.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
-script = ExtResource( 1 )
+script = ExtResource("1")
 target = NodePath("SubViewport/Node3D/MeshInstance3D")
 two_fingers_rot_z = false
 two_fingers_zoom = false
 
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/ViewportContainer2"]
-size = Vector2(510, 298)
-own_world = true
+own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
-msaa = 2
-hdr = false
-usage = 3
-render_target_update_mode = 3
+size = Vector2i(574, 322)
+render_target_update_mode = 4
 
-[node name="Node3D" parent="HBoxContainer/ViewportContainer2/SubViewport" instance=ExtResource( 2 )]
+[node name="Node3D" parent="HBoxContainer/ViewportContainer2/SubViewport" instance=ExtResource("2")]
 
 [node name="Camera3D" parent="HBoxContainer/ViewportContainer2/SubViewport/Node3D" index="2"]
 current = true
 
 [node name="Label2" type="Label" parent="HBoxContainer/ViewportContainer2"]
-offset_left = 8.0
-offset_top = 11.0
-offset_right = 196.0
-offset_bottom = 25.0
+layout_mode = 2
 text = "One-finger rot around X and Y"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
-offset_top = 302.0
-offset_right = 1024.0
-offset_bottom = 600.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer2"]
-offset_right = 510.0
-offset_bottom = 298.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
-script = ExtResource( 1 )
+script = ExtResource("1")
 target = NodePath("SubViewport/Node3D/MeshInstance3D")
 two_fingers_zoom = false
 
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer2/SubViewportContainer"]
-size = Vector2(510, 298)
-own_world = true
+own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
-msaa = 2
-hdr = false
-usage = 3
-render_target_update_mode = 3
+size = Vector2i(574, 322)
+render_target_update_mode = 4
 
-[node name="Node3D" parent="HBoxContainer2/SubViewportContainer/SubViewport" instance=ExtResource( 2 )]
+[node name="Node3D" parent="HBoxContainer2/SubViewportContainer/SubViewport" instance=ExtResource("2")]
 
 [node name="Camera3D" parent="HBoxContainer2/SubViewportContainer/SubViewport/Node3D" index="2"]
 current = true
 
 [node name="Label3" type="Label" parent="HBoxContainer2/SubViewportContainer"]
-offset_left = 8.0
-offset_top = 9.0
-offset_right = 236.0
-offset_bottom = 23.0
+layout_mode = 2
 text = "One-finger X/Y rot + two-finger Z rot"
 
 [node name="ViewportContainer2" type="SubViewportContainer" parent="HBoxContainer2"]
-offset_left = 514.0
-offset_right = 1024.0
-offset_bottom = 298.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
-script = ExtResource( 1 )
+script = ExtResource("1")
 target = NodePath("SubViewport/Node3D/MeshInstance3D")
 
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer2/ViewportContainer2"]
-size = Vector2(510, 298)
-own_world = true
+own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
-msaa = 2
-hdr = false
-usage = 3
-render_target_update_mode = 3
+size = Vector2i(574, 322)
+render_target_update_mode = 4
 
-[node name="Node3D" parent="HBoxContainer2/ViewportContainer2/SubViewport" instance=ExtResource( 2 )]
+[node name="Node3D" parent="HBoxContainer2/ViewportContainer2/SubViewport" instance=ExtResource("2")]
 
 [node name="Camera3D" parent="HBoxContainer2/ViewportContainer2/SubViewport/Node3D" index="2"]
 current = true
 
 [node name="Label2" type="Label" parent="HBoxContainer2/ViewportContainer2"]
-offset_left = 12.0
-offset_top = 9.0
-offset_right = 279.0
-offset_bottom = 23.0
+layout_mode = 2
 text = "One-finger X/Y, two-finger Z + pinch"
 
 [editable path="HBoxContainer/SubViewportContainer/SubViewport/Node3D"]
