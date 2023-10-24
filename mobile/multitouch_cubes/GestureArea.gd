@@ -63,9 +63,9 @@ func _gui_input(event):
 				# Touching finger dragged.
 				var unit_drag = _px2unit(base_state[base_state.keys()[0]] - event.position)
 				if one_finger_rot_x:
-					target_node.global_rotate(Vector3.UP, deg2rad(180.0 * unit_drag.x))
+					target_node.global_rotate(Vector3.UP, deg_to_rad(180.0 * unit_drag.x))
 				if one_finger_rot_y:
-					target_node.global_rotate(Vector3.RIGHT, deg2rad(180.0 * unit_drag.y))
+					target_node.global_rotate(Vector3.RIGHT, deg_to_rad(180.0 * unit_drag.y))
 				# Since rotating around two axes, we have to reset the base constantly.
 				curr_state[event.index] = event.position
 				base_state[event.index] = event.position
