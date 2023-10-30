@@ -1,0 +1,195 @@
+[gd_scene load_steps=2 format=3 uid="uid://ca0d8q5aicxfr"]
+
+[ext_resource type="Script" path="res://runtime_save_load.gd" id="1_2gu2h"]
+
+[node name="RuntimeLoadSave" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2gu2h")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Help" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.752941)
+text = "This project showcases how to load and save various file types without going through Godot's resource importing system.
+This is useful to load/save images, sounds, 3D scenes and ZIP archives at run-time such as user-generated content,
+without requiring users to generate a PCK file through Godot."
+autowrap_mode = 2
+
+[node name="Instructions" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Select a file to load (look in the \"examples\" folder):"
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="FilePath" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Click \"Browse\" on the right or enter path to file"
+
+[node name="Browse" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Browse"
+
+[node name="FileDialog" type="FileDialog" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+title = "Open a File"
+size = Vector2i(392, 159)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+
+[node name="Result" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+
+[node name="PlainTextViewer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/Result"]
+visible = false
+custom_minimum_size = Vector2(1050, 400)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Result/PlainTextViewer"]
+custom_minimum_size = Vector2(1050, 400)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.941176, 0.627451, 1)
+autowrap_mode = 2
+
+[node name="TextureViewer" type="TextureRect" parent="MarginContainer/VBoxContainer/Result"]
+visible = false
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+expand_mode = 3
+
+[node name="AudioPlayer" type="Button" parent="MarginContainer/VBoxContainer/Result"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Play Audio"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/Result/AudioPlayer"]
+volume_db = -10.0
+
+[node name="SceneViewer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer/Result"]
+visible = false
+custom_minimum_size = Vector2(1050, 400)
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/VBoxContainer/Result/SceneViewer"]
+handle_input_locally = false
+msaa_3d = 2
+size = Vector2i(1050, 400)
+render_target_update_mode = 0
+
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/VBoxContainer/Result/SceneViewer/SubViewport"]
+transform = Transform3D(0.877582, -0.229849, 0.420736, 0, 0.877582, 0.479426, -0.479426, -0.420736, 0.770151, 26.1772, 30.2846, 47.917)
+projection = 1
+size = 1.2
+near = 0.001
+far = 100.0
+
+[node name="KeyLight" type="DirectionalLight3D" parent="MarginContainer/VBoxContainer/Result/SceneViewer/SubViewport"]
+transform = Transform3D(0.775472, 0.453626, -0.439166, 0, 0.695563, 0.718465, 0.631382, -0.557149, 0.53939, -2.78761, 4.56046, 3.42378)
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 20.0
+
+[node name="FillLight" type="DirectionalLight3D" parent="MarginContainer/VBoxContainer/Result/SceneViewer/SubViewport"]
+transform = Transform3D(-0.775472, -0.453626, 0.439166, 4.2942e-09, 0.695563, 0.718465, -0.631382, 0.557149, -0.53939, -2.78761, 2.56046, 3.42378)
+light_energy = 0.3
+shadow_bias = 0.04
+directional_shadow_mode = 0
+directional_shadow_max_distance = 30.0
+
+[node name="BackLight" type="DirectionalLight3D" parent="MarginContainer/VBoxContainer/Result/SceneViewer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2.78761, 0.56046, 3.42378)
+light_energy = 0.1
+shadow_bias = 0.04
+directional_shadow_mode = 0
+directional_shadow_max_distance = 30.0
+
+[node name="Zoom" type="HSlider" parent="MarginContainer/VBoxContainer/Result/SceneViewer"]
+custom_minimum_size = Vector2(1050, 0)
+layout_mode = 2
+min_value = -100.0
+max_value = -0.1
+step = 0.0
+value = -1.2
+
+[node name="FontViewer" type="Label" parent="MarginContainer/VBoxContainer/Result"]
+visible = false
+custom_minimum_size = Vector2(1050, 400)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "abcdefghijklmnopqrstuvwxyz
+ABCDEFGHIJKLM
+NOPQRSTUVWXYZ
+1234567890
+()[]{}<>  -+:!?$&#@  éàç  ×÷±≠ø  ↔"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZIPViewer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/Result"]
+visible = false
+custom_minimum_size = Vector2(1050, 400)
+layout_mode = 2
+split_offset = 525
+
+[node name="FileList" type="ItemList" parent="MarginContainer/VBoxContainer/Result/ZIPViewer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="FilePreview" type="Label" parent="MarginContainer/VBoxContainer/Result/ZIPViewer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.631373, 0.862745, 1, 1)
+autowrap_mode = 2
+text_overrun_behavior = 3
+
+[node name="ErrorLabel" type="Label" parent="MarginContainer/VBoxContainer/Result"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.501961, 0.501961, 1)
+theme_override_font_sizes/font_size = 24
+
+[node name="Export" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Export"
+
+[node name="FileDialog" type="FileDialog" parent="MarginContainer/VBoxContainer/Export"]
+title = "Export File"
+access = 2
+
+[connection signal="text_submitted" from="MarginContainer/VBoxContainer/HBoxContainer/FilePath" to="." method="_on_file_path_text_submitted"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Browse" to="." method="_on_browse_pressed"]
+[connection signal="file_selected" from="MarginContainer/VBoxContainer/HBoxContainer/FileDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Result/AudioPlayer" to="." method="_on_audio_player_pressed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/Result/SceneViewer/Zoom" to="." method="_on_scene_viewer_zoom_value_changed"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/Result/ZIPViewer/FileList" to="." method="_on_zip_viewer_item_selected"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Export" to="." method="_on_export_pressed"]
+[connection signal="file_selected" from="MarginContainer/VBoxContainer/Export/FileDialog" to="." method="_on_export_file_dialog_file_selected"]
