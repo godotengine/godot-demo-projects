@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d0ygmqpylq0wy"]
+[gd_scene load_steps=36 format=3 uid="uid://d0ygmqpylq0wy"]
 
 [ext_resource type="PackedScene" uid="uid://dfdgytsvtqxwv" path="res://town/truck_town.glb" id="1_x0dmm"]
 [ext_resource type="Script" path="res://spedometer.gd" id="2"]
@@ -11,6 +11,24 @@ action = &"cycle_speedometer_unit"
 
 [sub_resource type="Shortcut" id="Shortcut_msvqx"]
 events = [SubResource("InputEventAction_a4722")]
+
+[sub_resource type="Gradient" id="Gradient_jks6h"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 0.25098)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_m8ylb"]
+gradient = SubResource("Gradient_jks6h")
+width = 128
+height = 128
+
+[sub_resource type="Gradient" id="Gradient_1rnu2"]
+offsets = PackedFloat32Array(0.00645161)
+colors = PackedColorArray(1, 0, 0, 0.25098)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xu6xc"]
+gradient = SubResource("Gradient_1rnu2")
+width = 128
+height = 128
 
 [sub_resource type="BoxMesh" id="BoxMesh_x3c0g"]
 size = Vector3(4096, 1, 4096)
@@ -102,7 +120,7 @@ data = PackedVector3Array(-2, 1, 2, 2, -1, 2, -2, -1, 2, -2, 1, -2, -2, -1, -2, 
 [node name="TruckTown" parent="." instance=ExtResource("1_x0dmm")]
 
 [node name="InstancePos" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 6, -40)
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 8, 3.36405, -16)
 
 [node name="Spedometer" type="Button" parent="."]
 custom_minimum_size = Vector2(140, 40)
@@ -118,10 +136,10 @@ offset_bottom = -24.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
-shortcut_in_tooltip = false
 action_mode = 0
 shortcut = SubResource("Shortcut_msvqx")
 shortcut_feedback = false
+shortcut_in_tooltip = false
 text = "Speed: ???"
 script = ExtResource("2")
 
@@ -131,6 +149,63 @@ offset_top = 24.0
 offset_right = 92.0
 offset_bottom = 56.0
 text = "« Back"
+
+[node name="TouchTurnLeft" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+
+[node name="TurnLeft" type="TouchScreenButton" parent="TouchTurnLeft"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -256)
+scale = Vector2(2.5, 4)
+texture_normal = SubResource("GradientTexture2D_m8ylb")
+texture_pressed = SubResource("GradientTexture2D_xu6xc")
+passby_press = true
+action = "turn_left"
+visibility_mode = 1
+
+[node name="TouchReverse" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Reverse" type="TouchScreenButton" parent="TouchReverse"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-256, -256)
+scale = Vector2(4, 4)
+texture_normal = SubResource("GradientTexture2D_m8ylb")
+texture_pressed = SubResource("GradientTexture2D_xu6xc")
+passby_press = true
+action = "reverse"
+visibility_mode = 1
+
+[node name="TouchTurnRight" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="TurnRight" type="TouchScreenButton" parent="TouchTurnRight"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-320, -256)
+scale = Vector2(2.5, 4)
+texture_normal = SubResource("GradientTexture2D_m8ylb")
+texture_pressed = SubResource("GradientTexture2D_xu6xc")
+passby_press = true
+action = "turn_right"
+visibility_mode = 1
 
 [node name="Environment" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_t0mbp")
