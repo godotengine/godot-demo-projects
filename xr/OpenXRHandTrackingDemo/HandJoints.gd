@@ -102,6 +102,14 @@ func inputfloatchanged(name, value, hand):
 	else:
 		print("inputfloatchanged ", hand, " ", name, " ", value)
 
+func inputvector2changed(name, vector, hand):
+	var ifstick = FlatDisplay.get_node_or_null("Thumbstick%d" % hand)
+	if ifstick:
+		ifstick.get_node("Pos").position = (vector + Vector2(1,1))*(70/2)
+	else:
+		print("inputvector2changed ", hand, " ", name, " ", vector)
+	print("inputvector2changed ", name)
+
 # Get the trackers once the interface has been initialized
 func set_xr_interface(lxr_interface : OpenXRInterface):
 	xr_interface = lxr_interface
@@ -129,7 +137,8 @@ func set_xr_interface(lxr_interface : OpenXRInterface):
 		xr_tracker_hands[hand].button_pressed.connect(buttonsignal.bind(hand, true))
 		xr_tracker_hands[hand].button_released.connect(buttonsignal.bind(hand, false))
 		xr_tracker_hands[hand].input_float_changed.connect(inputfloatchanged.bind(hand))
-
+		xr_tracker_hands[hand].input_vector2_changed.connect(inputvector2changed.bind(hand))
+		
 	# reset the position of the 2D information panel 3 times in the first 15 seconds
 	for t in range(3):
 		await get_tree().create_timer(5).timeout
