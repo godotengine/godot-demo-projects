@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://n30tbvntebk7"]
+[gd_scene load_steps=19 format=3 uid="uid://n30tbvntebk7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ndwk"]
 albedo_color = Color(0, 0.529412, 1, 1)
@@ -66,6 +66,15 @@ height = 0.01
 radial_segments = 16
 rings = 1
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dqde6"]
+transparency = 1
+albedo_color = Color(0.529412, 0.639216, 0.890196, 0.372549)
+
+[sub_resource type="SphereMesh" id="SphereMesh_8wps8"]
+material = SubResource("StandardMaterial3D_dqde6")
+radius = 1.0
+height = 2.0
+
 [node name="Axes3D" type="Node3D"]
 
 [node name="ArrowX" type="Node3D" parent="."]
@@ -129,3 +138,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 
 visible = false
 mesh = SubResource("CylinderMesh_k17as")
 skeleton = NodePath("../ArrowY")
+
+[node name="Sphere" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("SphereMesh_8wps8")

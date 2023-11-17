@@ -11,40 +11,27 @@ var hjsticks = [ [ OpenXRInterface.HAND_JOINT_WRIST, OpenXRInterface.HAND_JOINT_
 			   ]
 
 var xr_interface : OpenXRInterface
-
 var xr_tracker_head : XRPositionalTracker
-var xr_tracker_lefthand : XRPositionalTracker
-var xr_tracker_righthand : XRPositionalTracker
+var xr_tracker_hands = [ ]
+var xr_play_area : PackedVector3Array
 
-@onready var FlatDisplay = $Joints2D/FlatDisplayMesh/SubViewport/FlatDisplay
+@onready var FlatDisplay = $FrontOfPlayer/FlatDisplayMesh/SubViewport/FlatDisplay
+@onready var joints3D = $Joints3D
+@onready var joints2D = $FrontOfPlayer/Joints2D
 
-func set_xr_interface(lxr_interface):
-	xr_interface = lxr_interface
-	var trackers1 = XRServer.get_trackers(1)
-	print("***************8\n\n\n\n*************")
-	print(trackers1)
-	xr_tracker_head = trackers1["head"]
-	var trackers2 = XRServer.get_trackers(2)
-	print(trackers2)
-	xr_tracker_lefthand = trackers2["left_hand"]
-	xr_tracker_righthand = trackers2["right_hand"]
+var buttonsignalnames = [ 
+	"select_button", "menu_button", 
+	"trigger_touch", "trigger_click", 
+	"grip_touch", "grip_click", 
+	"primary_touch", "primary_click", 
+	"ax_touch", "ax_button",
+	"by_touch", "by_button",
+]
 
-	print("GGGG", xr_interface.get_action_sets())
-	var xx = xr_interface.get_play_area()
-	print("Play area", xx)
-
-
-func sticktransform(j1, j2):
-	var b = rotationtoalign(Vector3(0,1,0), j2 - j1)
-	var d = (j2 - j1).length()
-	return Transform3D(b, (j1 + j2)*0.5).scaled_local(Vector3(0.01, d, 0.01))
-
-
+# Set up the displayed axes for each hand and each joint of the hand 
 func _ready():
 	var axes3dscene = load("res://axes3d.tscn")
 	var stickscene = load("res://stick.tscn")
-	var joints3D = $Joints3D
-	var joints2D = $Joints2D
 	
 	for hand in range(2):
 		var LRd = "L%d" if hand == 0 else "R%d"
@@ -54,13 +41,12 @@ func _ready():
 			rj.scale = Vector3(0.01, 0.01, 0.01)
 			rj.get_node("SkinPad").visible = true
 			rj.get_node("TipPad").visible = hjtips.has(j)
+			#rj.get_node("Sphere").visible = (j > 0)
 			joints3D.add_child(rj)
 
 			var rjf = axes3dscene.instantiate()
 			rjf.name = LRd % j
 			rjf.scale = Vector3(0.01, 0.01, 0.01)
-#			for arrow in rjf.get_children():
-#				arrow.scale = Vector3(0.01, 0.01, 0.015)
 			var p = flatlefthandjointsfromwrist[j]
 			rjf.transform.origin = Vector3(p.x - 0.12, -p.z, p.y) if hand == 0 else Vector3(-p.x + 0.12, -p.z, p.y)
 			joints2D.add_child(rjf)
@@ -80,6 +66,8 @@ func _ready():
 				joints2D.add_child(rstickf)
 				rstickf.transform = sticktransform(joints2D.get_node(LRd % j1).transform.origin, joints2D.get_node(LRd % j2).transform.origin)
 				
+				joints3D.get_node(LRd % hjstick[i+1]).get_node("Sphere").visible = (i > 0)
+				
 		var LRpose = "L%s" if hand == 0 else "R%s"
 		for posename in [ "grip", "aim"]:
 			var rpose = axes3dscene.instantiate()
@@ -87,10 +75,79 @@ func _ready():
 			rpose.scale = Vector3(0.05, 0.05, 0.05)
 			joints3D.add_child(rpose)
 			
+		var vboxsignals = FlatDisplay.get_node("VBoxTrackers%d" % hand)
+		var buttonsig = vboxsignals.get_child(0)
+		vboxsignals.remove_child(buttonsig)
+		for bn in buttonsignalnames:
+			var bs = buttonsig.duplicate()
+			bs.text = bn
+			bs.name = bn
+			vboxsignals.add_child(bs)
+
 	get_node("Joints3D/L0").transform.origin = Vector3(0,1.7,-0.2)
 
 
-static func rotationtoalign(a, b):
+
+func buttonsignal(name, hand, pressed):
+	var buttonsig = FlatDisplay.get_node_or_null("VBoxTrackers%d/%s" % [ hand, name ])
+	if buttonsig:
+		buttonsig.button_pressed = pressed
+	else:
+		print("buttonsignal ", hand, " ", name, " ", pressed)
+		
+func inputfloatchanged(name, value, hand):
+	var ifsig = FlatDisplay.get_node_or_null("VSlider%d%s" % [ hand, name ])
+	if ifsig:
+		ifsig.value = value*100
+	else:
+		print("inputfloatchanged ", hand, " ", name, " ", value)
+
+# Get the trackers once the interface has been initialized
+func set_xr_interface(lxr_interface : OpenXRInterface):
+	xr_interface = lxr_interface
+	var trackers1 = XRServer.get_trackers(1)
+	xr_tracker_head = trackers1["head"]
+	var trackers2 = XRServer.get_trackers(2)
+	xr_tracker_hands = [ trackers2["left_hand"], trackers2["right_hand"] ]
+	xr_play_area = xr_interface.get_play_area()
+	print("PlayAreaMode: ", xr_interface.xr_play_area_mode)
+	#XR_PLAY_AREA_UNKNOWN = 0
+	#XR_PLAY_AREA_3DOF = 1
+	#XR_PLAY_AREA_SITTING = 2
+	#XR_PLAY_AREA_ROOMSCALE = 3
+	#XR_PLAY_AREA_STAGE = 4
+	if xr_play_area:
+		print("Play area feature supported (NOT YET DRAWN)", xr_play_area)
+	else:
+		print("xr_interface.get_play_area() returns [ ]")
+	
+
+	print("action_sets: ", xr_interface.get_action_sets())
+
+	# wire up the signals from the hand trackers
+	for hand in range(2):
+		xr_tracker_hands[hand].button_pressed.connect(buttonsignal.bind(hand, true))
+		xr_tracker_hands[hand].button_released.connect(buttonsignal.bind(hand, false))
+		xr_tracker_hands[hand].input_float_changed.connect(inputfloatchanged.bind(hand))
+
+	# reset the position of the 2D information panel 3 times in the first 15 seconds
+	for t in range(3):
+		await get_tree().create_timer(5).timeout
+		var headtransform = get_node("../XRCamera3D").transform	
+		$FrontOfPlayer.transform = Transform3D(headtransform.basis, headtransform.origin - headtransform.basis.z*0.5 + Vector3(0,-0.2,0))
+
+
+# input_float_changed(name: String, value: float)Emitted when a trigger or similar input on this tracker changes value.
+# input_vector2_changed(name: String, vector: Vector2)Emitted when a thumbstick or thumbpad on this tracker moves.
+# pose_changed(pose: XRPose)Emitted when the state of a pose tracked by this tracker changes.
+# pose_lost_tracking(pose: XRPose)Emitted when a pose tracked by this tracker stops getting updated tracking data.
+# profile_changed(role: String)Emitted when the profile of our tracker changes.
+
+func fingertiptouchbutton():
+	print("PlayArea ", xr_interface.get_play_area())
+	print("PlayAreaMode: ", xr_interface.xr_play_area_mode)
+
+func rotationtoalign(a, b):
 	var axis = a.cross(b).normalized();
 	if (axis.length_squared() != 0):
 		var dot = a.dot(b)/(a.length()*b.length())
@@ -99,14 +156,16 @@ static func rotationtoalign(a, b):
 		return Basis(axis, angle_rads)
 	return Basis()
 
-static func basisfrom(a, b):
+func sticktransform(j1, j2):
+	var b = rotationtoalign(Vector3(0,1,0), j2 - j1)
+	var d = (j2 - j1).length()
+	return Transform3D(b, (j1 + j2)*0.5).scaled_local(Vector3(0.01, d, 0.01))
+
+func basisfrom(a, b):
 	var vx = (b - a).normalized()
 	var vy = vx.cross(-a.normalized())
 	var vz = vx.cross(vy)
 	return Basis(vx, vy, vz)
-
-
-const jointvelocitydisplayfactor = 0.6
 
 func arrowYbasis(v):
 	var axisy = v
@@ -116,8 +175,7 @@ func arrowYbasis(v):
 	var axisz = axisx.cross(axisy)/(vlen if vlen != 0 else vlen)
 	return Basis(axisx, axisy, axisz)
 	
-var Dt = 0
-var ntimes = 0
+
 func _process(delta):
 	if xr_interface != null:
 		for hand in range(2):
@@ -134,7 +192,7 @@ func _process(delta):
 				var handjointtransform = Transform3D(Basis(xr_interface.get_hand_joint_rotation(hand, j)), xr_interface.get_hand_joint_position(hand, j))
 				joint3d.transform = handjointtransform.scaled_local(Vector3(jointradius, jointradius, jointradius))
 
-				var joint2d = $Joints2D.get_node(LRd % j)
+				var joint2d = joints2D.get_node(LRd % j)
 				joint2d.get_node("InvalidMesh").visible = not (handjointflags & OpenXRInterface.HAND_JOINT_POSITION_VALID)
 				joint2d.get_node("UntrackedMesh").visible = not (handjointflags & OpenXRInterface.HAND_JOINT_POSITION_TRACKED)
 				joint2d.transform.basis = Basis(xr_interface.get_hand_joint_rotation(hand, j))*0.013
@@ -148,29 +206,21 @@ func _process(delta):
 					rstick.transform = sticktransform($Joints3D.get_node(LRd % j1).transform.origin, $Joints3D.get_node(LRd % j2).transform.origin)
 
 			var LRpose = "L%s" if hand == 0 else "R%s"
-			var xr_tracker_hand = xr_tracker_lefthand if hand == 0 else xr_tracker_righthand
 			for posename in [ "grip", "aim"]:
 				var rpose = $Joints3D.get_node(LRpose % posename)
-				var xrpose = xr_tracker_hand.get_pose(posename)
-				rpose.get_node("InvalidMesh").visible = not xrpose.has_tracking_data
-				rpose.get_node("UntrackedMesh").visible = (xrpose.tracking_confidence == 0)
-				rpose.transform = xrpose.transform.scaled_local(Vector3(0.05, 0.05, 0.05))
+				var xrpose = xr_tracker_hands[hand].get_pose(posename)
+				if xrpose != null:
+					rpose.get_node("InvalidMesh").visible = not xrpose.has_tracking_data
+					rpose.get_node("UntrackedMesh").visible = (xrpose.tracking_confidence == 0)
+					rpose.transform = xrpose.transform.scaled_local(Vector3(0.05, 0.05, 0.05))
 
-	
-	Dt += delta
-	if Dt > 5:
-		Dt = 0
-		ntimes += 1
-		if ntimes <= 3:
-			var headtransform = get_node("../XRCamera3D").transform	
-			$Joints2D.transform = Transform3D(headtransform.basis, headtransform.origin - headtransform.basis.z*0.5 + Vector3(0,-0.2,0))
-
-			if xr_interface:
-				print("GGGG", xr_interface.get_action_sets())
-				var xx = xr_interface.get_play_area()
-				print("play area", xx)
-				for i in range(5):
-					print(i, XRServer.get_trackers(i))
+	var fingertipnode = $Joints3D.get_node("R%d" % OpenXRInterface.HAND_JOINT_INDEX_TIP)
+	var fingerbuttonnode = $FrontOfPlayer/FingerButton
+	var d = (fingertipnode.global_transform.origin - fingerbuttonnode.global_transform.origin).length()
+	var touching = (d < 0.03)
+	if !($FrontOfPlayer/FingerButton/Touched.visible) and touching:
+		fingertiptouchbutton()
+	$FrontOfPlayer/FingerButton/Touched.visible = touching
 
 var flatlefthandjointsfromwrist = [
 	Vector3(0.000861533, -0.0012695, -0.0477441), Vector3(0, 0, 0), Vector3(0.0315846, -0.0131271, -0.0329833), Vector3(0.0545926, -0.0174885, -0.0554602), 

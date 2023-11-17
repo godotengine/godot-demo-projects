@@ -15,3 +15,10 @@ func _ready():
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
 		$XROrigin3D/HandJoints.set_xr_interface(xr_interface)
+
+
+
+func _on_xr_controller_3d_left_button_pressed(name):
+	print("_on_xr_controller_3d_left_button_pressed ", name)
+
+

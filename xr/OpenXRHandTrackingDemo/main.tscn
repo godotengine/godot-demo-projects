@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://br3bss6kac8pa"]
+[gd_scene load_steps=22 format=3 uid="uid://br3bss6kac8pa"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_cagca"]
 [ext_resource type="PackedScene" uid="uid://dd35twe7yvkqf" path="res://FlatDisplay.tscn" id="3_o8mx1"]
@@ -31,17 +31,30 @@ material = SubResource("StandardMaterial3D_p0287")
 size = Vector3(0.02, 0.02, 0.05)
 
 [sub_resource type="QuadMesh" id="QuadMesh_eslsg"]
-size = Vector2(0.8, 0.4)
+size = Vector2(0.8, 0.5)
 center_offset = Vector3(0, 0.05, 0)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_46vof"]
-viewport_path = NodePath("XROrigin3D/HandJoints/Joints2D/FlatDisplayMesh/SubViewport")
+viewport_path = NodePath("XROrigin3D/HandJoints/FrontOfPlayer/FlatDisplayMesh/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gabm"]
 resource_local_to_scene = true
 shading_mode = 0
 albedo_color = Color(0, 0.615686, 0.619608, 1)
 albedo_texture = SubResource("ViewportTexture_46vof")
+
+[sub_resource type="SphereMesh" id="SphereMesh_65vmt"]
+radius = 0.02
+height = 0.04
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brx0b"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yct16"]
+size = Vector3(0.01, 0.07, 0.01)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g60ck"]
+albedo_color = Color(0.992157, 0.0117647, 0.0666667, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_rm4v2"]
 
@@ -91,20 +104,34 @@ script = ExtResource("4_eaqi8")
 
 [node name="Joints3D" type="Node3D" parent="XROrigin3D/HandJoints"]
 
-[node name="Joints2D" type="Node3D" parent="XROrigin3D/HandJoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65802, -1.05963)
+[node name="FrontOfPlayer" type="Node3D" parent="XROrigin3D/HandJoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65802, -0.491668)
 
-[node name="FlatDisplayMesh" type="MeshInstance3D" parent="XROrigin3D/HandJoints/Joints2D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.205284)
+[node name="FlatDisplayMesh" type="MeshInstance3D" parent="XROrigin3D/HandJoints/FrontOfPlayer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.169554, -0.0442287)
 mesh = SubResource("QuadMesh_eslsg")
 skeleton = NodePath("../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_6gabm")
 
-[node name="SubViewport" type="SubViewport" parent="XROrigin3D/HandJoints/Joints2D/FlatDisplayMesh"]
-size = Vector2i(800, 400)
+[node name="SubViewport" type="SubViewport" parent="XROrigin3D/HandJoints/FrontOfPlayer/FlatDisplayMesh"]
+size = Vector2i(800, 500)
 
-[node name="FlatDisplay" parent="XROrigin3D/HandJoints/Joints2D/FlatDisplayMesh/SubViewport" instance=ExtResource("3_o8mx1")]
+[node name="FlatDisplay" parent="XROrigin3D/HandJoints/FrontOfPlayer/FlatDisplayMesh/SubViewport" instance=ExtResource("3_o8mx1")]
+
+[node name="Joints2D" type="Node3D" parent="XROrigin3D/HandJoints/FrontOfPlayer"]
+
+[node name="FingerButton" type="MeshInstance3D" parent="XROrigin3D/HandJoints/FrontOfPlayer"]
+mesh = SubResource("SphereMesh_65vmt")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_brx0b")
+
+[node name="Touched" type="MeshInstance3D" parent="XROrigin3D/HandJoints/FrontOfPlayer/FingerButton"]
+visible = false
+mesh = SubResource("BoxMesh_yct16")
+surface_material_override/0 = SubResource("StandardMaterial3D_g60ck")
 
 [node name="MeshInstance3DFloor" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_5clia")
 skeleton = NodePath("../XROrigin3D")
+
+[connection signal="button_pressed" from="XROrigin3D/XRController3DLeft" to="." method="_on_xr_controller_3d_left_button_pressed"]
