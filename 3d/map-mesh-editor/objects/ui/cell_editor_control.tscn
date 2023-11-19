@@ -1,0 +1,440 @@
+[gd_scene load_steps=4 format=3 uid="uid://er6ef5qvhm0p"]
+
+[ext_resource type="Script" path="res://scripts/ui/cell_editor_control.gd" id="1_xgrjv"]
+[ext_resource type="ButtonGroup" uid="uid://c2wd83qiwn37u" path="res://objects/ui/button_groups/editor_select_biome_btn_group.tres" id="2_2awyu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1bubb"]
+font_size = 24
+
+[node name="CellEditorControl" type="Control" node_paths=PackedStringArray("btn_enable_brush", "lbl_brush_size", "slider_brush_size", "btn_enable_elevation", "lbl_elevation", "slider_elevation", "btn_enable_terrain", "btn_terrain_mtn", "btn_terrain_snow", "btn_terrain_grass", "btn_terrain_dirt", "btn_terrain_sand", "btn_terrain_mud", "btn_enable_debug", "btn_show_labels", "btn_show_wireframe")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+script = ExtResource("1_xgrjv")
+btn_enable_brush = NodePath("PanelContainer/MarginContainer/VBoxContainer/BrushSettings/MarginContainer/VBoxContainer/EnableBrushOption/EnableBrushCheckBox")
+lbl_brush_size = NodePath("PanelContainer/MarginContainer/VBoxContainer/BrushSettings/MarginContainer/VBoxContainer/BrushSizeOption/ValueLabel")
+slider_brush_size = NodePath("PanelContainer/MarginContainer/VBoxContainer/BrushSettings/MarginContainer/VBoxContainer/BrushSizeOption/ValueSlider")
+btn_enable_elevation = NodePath("PanelContainer/MarginContainer/VBoxContainer/ElevationSettings/MarginContainer/VBoxContainer/EnableEditElevationOption/EnableEditElevationCheckBox")
+lbl_elevation = NodePath("PanelContainer/MarginContainer/VBoxContainer/ElevationSettings/MarginContainer/VBoxContainer/ElevationValueOption/ValueLabel")
+slider_elevation = NodePath("PanelContainer/MarginContainer/VBoxContainer/ElevationSettings/MarginContainer/VBoxContainer/ElevationValueOption/ValueSlider")
+btn_enable_terrain = NodePath("PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/EnableEditTerrainOption/EnableEditTerrainCheckBox")
+btn_terrain_mtn = NodePath("PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/MountainTerrainOption/MountainTerrainCheckBox")
+btn_terrain_snow = NodePath("PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/SnowTerrainOption/SnowTerrainCheckBox")
+btn_terrain_grass = NodePath("PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/GrassTerrainOption/GrassTerrainCheckBox")
+btn_terrain_dirt = NodePath("PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/DirtTerrainOption/DirtTerrainCheckBox")
+btn_terrain_sand = NodePath("PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/SandTerrainOption/SandTerrainCheckBox")
+btn_terrain_mud = NodePath("PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/MudTerrainOption/MudTerrainCheckBox")
+btn_enable_debug = NodePath("PanelContainer/MarginContainer/VBoxContainer/DebugSettings/MarginContainer/DebugOptions/EnableDebugOption/EnableDebugCheckBox")
+btn_show_labels = NodePath("PanelContainer/MarginContainer/VBoxContainer/DebugSettings/MarginContainer/DebugOptions/LabelsOption/ShowLabelsCheckBox")
+btn_show_wireframe = NodePath("PanelContainer/MarginContainer/VBoxContainer/DebugSettings/MarginContainer/DebugOptions/WireframeOption/ShowWireframeCheckBox")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+self_modulate = Color(0.203922, 0.392157, 0.54902, 0.572549)
+layout_mode = 2
+offset_left = 33.0
+offset_top = 28.0
+offset_right = 233.0
+offset_bottom = 600.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HeaderLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Cell Editor"
+label_settings = SubResource("LabelSettings_1bubb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BrushSettings" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/BrushSettings"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/BrushSettings/MarginContainer"]
+layout_mode = 2
+
+[node name="EnableBrushOption" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/BrushSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="EnableBrushCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/BrushSettings/MarginContainer/VBoxContainer/EnableBrushOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+button_pressed = true
+
+[node name="HeaderLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/BrushSettings/MarginContainer/VBoxContainer/EnableBrushOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Brush"
+label_settings = SubResource("LabelSettings_1bubb")
+vertical_alignment = 1
+
+[node name="BrushSizeOption" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/BrushSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ValueLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/BrushSettings/MarginContainer/VBoxContainer/BrushSizeOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="ValueSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/BrushSettings/MarginContainer/VBoxContainer/BrushSizeOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 6.0
+
+[node name="ElevationSettings" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ElevationSettings"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ElevationSettings/MarginContainer"]
+layout_mode = 2
+
+[node name="EnableEditElevationOption" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ElevationSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="EnableEditElevationCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/ElevationSettings/MarginContainer/VBoxContainer/EnableEditElevationOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+button_pressed = true
+
+[node name="HeaderLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ElevationSettings/MarginContainer/VBoxContainer/EnableEditElevationOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Elevation"
+label_settings = SubResource("LabelSettings_1bubb")
+vertical_alignment = 1
+
+[node name="ElevationValueOption" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ElevationSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ValueLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ElevationSettings/MarginContainer/VBoxContainer/ElevationValueOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+text = "0
+"
+horizontal_alignment = 1
+
+[node name="ValueSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/ElevationSettings/MarginContainer/VBoxContainer/ElevationValueOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 6.0
+
+[node name="WaterSettings" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/WaterSettings"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/WaterSettings/MarginContainer"]
+layout_mode = 2
+
+[node name="EnableEditWaterOption" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/WaterSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="EnableEditWaterCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/WaterSettings/MarginContainer/VBoxContainer/EnableEditWaterOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="HeaderLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/WaterSettings/MarginContainer/VBoxContainer/EnableEditWaterOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Water lvl"
+label_settings = SubResource("LabelSettings_1bubb")
+vertical_alignment = 1
+
+[node name="WaterValueOption" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/WaterSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ValueLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/WaterSettings/MarginContainer/VBoxContainer/WaterValueOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1
+
+[node name="ValueSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/WaterSettings/MarginContainer/VBoxContainer/WaterValueOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 6.0
+value = 2.0
+
+[node name="TerrainSettings" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer"]
+layout_mode = 2
+
+[node name="EnableEditTerrainOption" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="EnableEditTerrainCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/EnableEditTerrainOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+button_pressed = true
+
+[node name="HeaderLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/EnableEditTerrainOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Terrain"
+label_settings = SubResource("LabelSettings_1bubb")
+vertical_alignment = 1
+
+[node name="MountainTerrainOption" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MountainTerrainCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/MountainTerrainOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+button_group = ExtResource("2_2awyu")
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/MountainTerrainOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mountain"
+
+[node name="ElevationDefaultLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/MountainTerrainOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+text = "6"
+horizontal_alignment = 1
+
+[node name="SnowTerrainOption" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SnowTerrainCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/SnowTerrainOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+button_group = ExtResource("2_2awyu")
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/SnowTerrainOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Snow"
+
+[node name="ElevationDefaultLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/SnowTerrainOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+text = "4"
+horizontal_alignment = 1
+
+[node name="GrassTerrainOption" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GrassTerrainCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/GrassTerrainOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+button_group = ExtResource("2_2awyu")
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/GrassTerrainOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Grass"
+
+[node name="ElevationDefaultLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/GrassTerrainOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+text = "3"
+horizontal_alignment = 1
+
+[node name="DirtTerrainOption" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="DirtTerrainCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/DirtTerrainOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+button_pressed = true
+button_group = ExtResource("2_2awyu")
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/DirtTerrainOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Dirt"
+
+[node name="ElevationDefaultLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/DirtTerrainOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1
+
+[node name="SandTerrainOption" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SandTerrainCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/SandTerrainOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+button_group = ExtResource("2_2awyu")
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/SandTerrainOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Sand"
+
+[node name="ElevationDefaultLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/SandTerrainOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1
+
+[node name="MudTerrainOption" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MudTerrainCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/MudTerrainOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+button_group = ExtResource("2_2awyu")
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/MudTerrainOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mud"
+
+[node name="ElevationDefaultLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TerrainSettings/MarginContainer/VBoxContainer/MudTerrainOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="FeatureSettings" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/FeatureSettings"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/FeatureSettings/MarginContainer"]
+layout_mode = 2
+
+[node name="HeaderLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/FeatureSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Features"
+label_settings = SubResource("LabelSettings_1bubb")
+vertical_alignment = 1
+
+[node name="PlaceRoadOption" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/FeatureSettings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlaceRoadCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/FeatureSettings/MarginContainer/VBoxContainer/PlaceRoadOption"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/FeatureSettings/MarginContainer/VBoxContainer/PlaceRoadOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Road"
+vertical_alignment = 1
+
+[node name="PlaceRiverOption" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/FeatureSettings/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="PlaceRiverCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/FeatureSettings/MarginContainer/VBoxContainer/PlaceRiverOption"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+disabled = true
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/FeatureSettings/MarginContainer/VBoxContainer/PlaceRiverOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "River (WIP)"
+vertical_alignment = 1
+
+[node name="DebugSettings" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/DebugSettings"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="DebugOptions" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/DebugSettings/MarginContainer"]
+layout_mode = 2
+
+[node name="EnableDebugOption" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/DebugSettings/MarginContainer/DebugOptions"]
+layout_mode = 2
+
+[node name="EnableDebugCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/DebugSettings/MarginContainer/DebugOptions/EnableDebugOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+button_pressed = true
+
+[node name="HeaderLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/DebugSettings/MarginContainer/DebugOptions/EnableDebugOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Debug"
+label_settings = SubResource("LabelSettings_1bubb")
+vertical_alignment = 1
+
+[node name="LabelsOption" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/DebugSettings/MarginContainer/DebugOptions"]
+layout_mode = 2
+
+[node name="ShowLabelsCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/DebugSettings/MarginContainer/DebugOptions/LabelsOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/DebugSettings/MarginContainer/DebugOptions/LabelsOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Show Labels
+"
+
+[node name="WireframeOption" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/DebugSettings/MarginContainer/DebugOptions"]
+layout_mode = 2
+
+[node name="ShowWireframeCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/DebugSettings/MarginContainer/DebugOptions/WireframeOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/DebugSettings/MarginContainer/DebugOptions/WireframeOption"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mesh Wireframe"
