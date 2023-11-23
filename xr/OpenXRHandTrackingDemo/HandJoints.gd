@@ -35,15 +35,17 @@ func _ready():
 	
 	for hand in range(2):
 		var LRd = "L%d" if hand == 0 else "R%d"
+
+		# Make the axes for each hand joint
 		for j in range(OpenXRInterface.HAND_JOINT_MAX):
 			var rj = axes3dscene.instantiate()
 			rj.name = LRd % j
 			rj.scale = Vector3(0.01, 0.01, 0.01)
 			rj.get_node("SkinPad").visible = true
 			rj.get_node("TipPad").visible = hjtips.has(j)
-			#rj.get_node("Sphere").visible = (j > 0)
 			joints3D.add_child(rj)
 
+			# static copy of each joint arranged on 2D panel
 			var rjf = axes3dscene.instantiate()
 			rjf.name = LRd % j
 			rjf.scale = Vector3(0.01, 0.01, 0.01)
@@ -51,6 +53,7 @@ func _ready():
 			rjf.transform.origin = Vector3(p.x - 0.12, -p.z, p.y) if hand == 0 else Vector3(-p.x + 0.12, -p.z, p.y)
 			joints2D.add_child(rjf)
 
+		# Make the white sticks between connecting joints to see the skeleton 
 		var LRstick = "L%dt%d" if hand == 0 else "R%dt%d"
 		for hjstick in hjsticks:
 			for i in range(0, len(hjstick)-1):
@@ -68,6 +71,8 @@ func _ready():
 				
 				joints3D.get_node(LRd % hjstick[i+1]).get_node("Sphere").visible = (i > 0)
 				
+
+		# Make the main pose axes for grip,aim (valid for hand and controller) 
 		var LRpose = "L%s" if hand == 0 else "R%s"
 		for posename in [ "grip", "aim"]:
 			var rpose = axes3dscene.instantiate()
@@ -75,6 +80,7 @@ func _ready():
 			rpose.scale = Vector3(0.05, 0.05, 0.05)
 			joints3D.add_child(rpose)
 			
+		# Make the toggle buttons that show the activated button signals
 		var vboxsignals = FlatDisplay.get_node("VBoxTrackers%d" % hand)
 		var buttonsig = vboxsignals.get_child(0)
 		vboxsignals.remove_child(buttonsig)
@@ -84,8 +90,21 @@ func _ready():
 			bs.name = bn
 			vboxsignals.add_child(bs)
 
-	get_node("Joints3D/L0").transform.origin = Vector3(0,1.7,-0.2)
+		# Make the labels for the finger lengths
+		var flatdisplaymesh = FlatDisplay.get_parent().get_parent()
+		var subviewport = FlatDisplay.get_parent()
+		for j in hjtips:
+			var p = joints2D.get_node(LRd % j).transform.origin
+			var p1 = flatdisplaymesh.transform.inverse() * p
+			var p2 = Vector2((p1.x*1.1 + flatdisplaymesh.mesh.size.x*0.5)/flatdisplaymesh.mesh.size.x, (p1.y + flatdisplaymesh.mesh.size.y*0.5)/flatdisplaymesh.mesh.size.y)
+			var p3 = Vector2(p2.x * subviewport.size.x, (1-p2.y) * subviewport.size.y)
+			var fingerlenglab = Label.new()
+			fingerlenglab.text = LRd%j
+			fingerlenglab.name = "FL_"+(LRd%j)
+			fingerlenglab.position = p3
+			FlatDisplay.add_child(fingerlenglab)
 
+	get_node("Joints3D/L0").transform.origin = Vector3(0,1.7,-0.2)
 
 
 func buttonsignal(name, hand, pressed):
@@ -108,7 +127,7 @@ func inputvector2changed(name, vector, hand):
 		ifstick.get_node("Pos").position = (vector + Vector2(1,1))*(70/2)
 	else:
 		print("inputvector2changed ", hand, " ", name, " ", vector)
-	print("inputvector2changed ", name)
+	#print("inputvector2changed ", name)  # it's always primary
 
 # Get the trackers once the interface has been initialized
 func set_xr_interface(lxr_interface : OpenXRInterface):
@@ -117,18 +136,15 @@ func set_xr_interface(lxr_interface : OpenXRInterface):
 	xr_tracker_head = trackers1["head"]
 	var trackers2 = XRServer.get_trackers(2)
 	xr_tracker_hands = [ trackers2["left_hand"], trackers2["right_hand"] ]
+
+	# Play area code to be implemented in v4.3
 	xr_play_area = xr_interface.get_play_area()
 	print("PlayAreaMode: ", xr_interface.xr_play_area_mode)
-	#XR_PLAY_AREA_UNKNOWN = 0
-	#XR_PLAY_AREA_3DOF = 1
-	#XR_PLAY_AREA_SITTING = 2
-	#XR_PLAY_AREA_ROOMSCALE = 3
-	#XR_PLAY_AREA_STAGE = 4
+	# XR_PLAY_AREA_UNKNOWN = 0, XR_PLAY_AREA_3DOF = 1, XR_PLAY_AREA_SITTING = 2, XR_PLAY_AREA_ROOMSCALE = 3, XR_PLAY_AREA_STAGE = 4
 	if xr_play_area:
 		print("Play area feature supported (NOT YET DRAWN)", xr_play_area)
 	else:
 		print("xr_interface.get_play_area() returns [ ]")
-	
 
 	print("action_sets: ", xr_interface.get_action_sets())
 
@@ -146,12 +162,12 @@ func set_xr_interface(lxr_interface : OpenXRInterface):
 		$FrontOfPlayer.transform = Transform3D(headtransform.basis, headtransform.origin - headtransform.basis.z*0.5 + Vector3(0,-0.2,0))
 
 
-# input_float_changed(name: String, value: float)Emitted when a trigger or similar input on this tracker changes value.
-# input_vector2_changed(name: String, vector: Vector2)Emitted when a thumbstick or thumbpad on this tracker moves.
+# Other signals to be implemented
 # pose_changed(pose: XRPose)Emitted when the state of a pose tracked by this tracker changes.
 # pose_lost_tracking(pose: XRPose)Emitted when a pose tracked by this tracker stops getting updated tracking data.
 # profile_changed(role: String)Emitted when the profile of our tracker changes.
 
+# Called when finger touches the yellow sphere (to check if values have been updated long after startup)
 func fingertiptouchbutton():
 	print("PlayArea ", xr_interface.get_play_area())
 	print("PlayAreaMode: ", xr_interface.xr_play_area_mode)
@@ -188,6 +204,8 @@ func arrowYbasis(v):
 func _process(delta):
 	if xr_interface != null:
 		for hand in range(2):
+
+			# Update all the joint positions, rotations and validity flags
 			var wristtransform = Transform3D(Basis(xr_interface.get_hand_joint_rotation(hand, OpenXRInterface.HAND_JOINT_WRIST)), 
 												   xr_interface.get_hand_joint_position(hand, OpenXRInterface.HAND_JOINT_WRIST))
 			var LRd = "L%d" if hand == 0 else "R%d"
@@ -206,6 +224,7 @@ func _process(delta):
 				joint2d.get_node("UntrackedMesh").visible = not (handjointflags & OpenXRInterface.HAND_JOINT_POSITION_TRACKED)
 				joint2d.transform.basis = Basis(xr_interface.get_hand_joint_rotation(hand, j))*0.013
 
+			# reposition the joining sticks
 			var LRstick = "L%dt%d" if hand == 0 else "R%dt%d"
 			for hjstick in hjsticks:
 				for i in range(0, len(hjstick)-1):
@@ -214,6 +233,7 @@ func _process(delta):
 					var rstick = $Joints3D.get_node(LRstick % [j1, j2])
 					rstick.transform = sticktransform($Joints3D.get_node(LRd % j1).transform.origin, $Joints3D.get_node(LRd % j2).transform.origin)
 
+			# Update the grip,aim poses
 			var LRpose = "L%s" if hand == 0 else "R%s"
 			for posename in [ "grip", "aim"]:
 				var rpose = $Joints3D.get_node(LRpose % posename)
@@ -223,6 +243,18 @@ func _process(delta):
 					rpose.get_node("UntrackedMesh").visible = (xrpose.tracking_confidence == 0)
 					rpose.transform = xrpose.transform.scaled_local(Vector3(0.05, 0.05, 0.05))
 
+			# Measure the lengths of the fingers
+			var FLLRd = "FL_L%d" if hand == 0 else "FL_R%d"
+			for j in hjtips:
+				var fingerlenglab = FlatDisplay.get_node(FLLRd % j)
+				var fp = xr_interface.get_hand_joint_position(hand, j)
+				var fingleng = 0.0
+				for k in range(1, 4):
+					var fpn = xr_interface.get_hand_joint_position(hand, j-k)
+					fingleng += (fpn - fp).length()
+					fp = fpn
+				fingerlenglab.text = "%.0f" % (fingleng*1000)
+
 	var fingertipnode = $Joints3D.get_node("R%d" % OpenXRInterface.HAND_JOINT_INDEX_TIP)
 	var fingerbuttonnode = $FrontOfPlayer/FingerButton
 	var d = (fingertipnode.global_transform.origin - fingerbuttonnode.global_transform.origin).length()
@@ -230,6 +262,8 @@ func _process(delta):
 	if !($FrontOfPlayer/FingerButton/Touched.visible) and touching:
 		fingertiptouchbutton()
 	$FrontOfPlayer/FingerButton/Touched.visible = touching
+
+
 
 var flatlefthandjointsfromwrist = [
 	Vector3(0.000861533, -0.0012695, -0.0477441), Vector3(0, 0, 0), Vector3(0.0315846, -0.0131271, -0.0329833), Vector3(0.0545926, -0.0174885, -0.0554602), 
