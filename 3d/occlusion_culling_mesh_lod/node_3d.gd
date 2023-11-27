@@ -11,9 +11,14 @@ func _input(event):
 	if event.is_action_pressed("cycle_draw_mode"):
 		get_viewport().debug_draw = wrapi(get_viewport().debug_draw + 1, 0, 5)
 		update_labels()
+	if event.is_action_pressed("toggle_vsync"):
+		if DisplayServer.window_get_vsync_mode() == DisplayServer.VSYNC_DISABLED:
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+		else:
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
 
-func _process(delta):
+func _process(_delta):
 	$Performance.text = """%d FPS (%.2f mspf)
 
 Currently rendering:
