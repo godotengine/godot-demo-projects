@@ -3,11 +3,11 @@ using Godot;
 public partial class HUD : CanvasLayer
 {
     [Signal]
-    public delegate void StartGame();
+    public delegate void StartGameEventHandler();
 
     public void ShowMessage(string text)
     {
-        var messageLabel = GetNode<Label>("MessageLabel");
+        Label messageLabel = GetNode<Label>("MessageLabel");
         messageLabel.Text = text;
         messageLabel.Show();
 
@@ -18,12 +18,11 @@ public partial class HUD : CanvasLayer
     {
         ShowMessage("Game Over");
 
-        var messageTimer = GetNode<Timer>("MessageTimer");
-        await ToSignal(messageTimer, "timeout");
+        Timer messageTimer = GetNode<Timer>("MessageTimer");
+        await ToSignal(messageTimer, Timer.SignalName.Timeout);
 
-        var messageLabel = GetNode<Label>("MessageLabel");
-        messageLabel.Text = "Dodge the\nCreeps!";
-        messageLabel.Show();
+        ShowMessage("Dodge the Creeps!");
+        await ToSignal(GetTree().CreateTimer(1.0), SceneTreeTimer.SignalName.Timeout);
 
         GetNode<Button>("StartButton").Show();
     }
@@ -33,13 +32,13 @@ public partial class HUD : CanvasLayer
         GetNode<Label>("ScoreLabel").Text = score.ToString();
     }
 
-    public void OnStartButtonPressed()
+    private void OnStartButtonPressed()
     {
         GetNode<Button>("StartButton").Hide();
-        EmitSignal(nameof(StartGame));
+        EmitSignal(SignalName.StartGame);
     }
 
-    public void OnMessageTimerTimeout()
+    private void OnMessageTimerTimeout()
     {
         GetNode<Label>("MessageLabel").Hide();
     }
