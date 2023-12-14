@@ -1,10 +1,10 @@
 [gd_scene load_steps=15 format=3 uid="uid://bbwavbqpv0ge7"]
 
-[ext_resource type="Script" path="res://Main.cs" id="1_ider5"]
-[ext_resource type="PackedScene" uid="uid://bnorrme8hfbsx" path="res://player.tscn" id="1_yjfsy"]
-[ext_resource type="PackedScene" uid="uid://bdqntdek3u7aw" path="res://mob.tscn" id="2_saxca"]
-[ext_resource type="FontFile" uid="uid://755mnwjmjuro" path="res://fonts/Montserrat-Medium.ttf" id="4_5dgts"]
-[ext_resource type="Script" path="res://ScoreLabel.cs" id="5_xm5b6"]
+[ext_resource type="Script" path="res://Main.cs" id="1_ecxn0"]
+[ext_resource type="PackedScene" uid="uid://bdqntdek3u7aw" path="res://Mob.tscn" id="2_i3afp"]
+[ext_resource type="PackedScene" uid="uid://bnorrme8hfbsx" path="res://Player.tscn" id="3_g20lh"]
+[ext_resource type="FontFile" uid="uid://755mnwjmjuro" path="res://fonts/Montserrat-Medium.ttf" id="4_c7ism"]
+[ext_resource type="Script" path="res://ScoreLabel.cs" id="5_61u28"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fo0kv"]
 size = Vector3(60, 2, 60)
@@ -37,12 +37,12 @@ _data = {
 point_count = 5
 
 [sub_resource type="Theme" id="Theme_uubu5"]
-default_font = ExtResource("4_5dgts")
+default_font = ExtResource("4_c7ism")
 default_font_size = 22
 
 [node name="Main" type="Node"]
-script = ExtResource("1_ider5")
-MobScene = ExtResource("2_saxca")
+script = ExtResource("1_ecxn0")
+MobScene = ExtResource("2_i3afp")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -67,7 +67,7 @@ directional_shadow_max_distance = 40.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_t6dwr")
 
-[node name="Player" parent="." instance=ExtResource("1_yjfsy")]
+[node name="Player" parent="." instance=ExtResource("3_g20lh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.66792, 0)
 
 [node name="CameraPivot" type="Marker3D" parent="."]
@@ -125,7 +125,7 @@ offset_right = 144.0
 offset_bottom = 56.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Score: 0"
-script = ExtResource("5_xm5b6")
+script = ExtResource("5_61u28")
 
 [node name="Retry" type="ColorRect" parent="UserInterface"]
 layout_mode = 1
