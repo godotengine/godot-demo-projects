@@ -1,0 +1,39 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Bullet Shower"
+config/description="Demonstrates how to manage large amounts of objects efficiently using low-level Servers."
+config/tags=PackedStringArray("2d", "demo", "official", "performance")
+run/main_scene="res://shower.tscn"
+config/features=PackedStringArray("4.2", "C#")
+config/icon="res://icon.webp"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[dotnet]
+
+project/assembly_name="Bullet Shower"
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+
+[physics]
+
+2d/cell_size=64
+
+[rendering]
+
+renderer/rendering_method="mobile"

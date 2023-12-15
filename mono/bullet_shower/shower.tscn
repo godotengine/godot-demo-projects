@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://c78by7hc4fmwx"]
+
+[ext_resource type="Script" path="res://Bullets.cs" id="1_m08fn"]
+[ext_resource type="Script" path="res://Player.cs" id="2_vv0de"]
+[ext_resource type="Texture2D" uid="uid://d3u7k0742d5ug" path="res://face_happy.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://8j32onnr4qo3" path="res://face_sad.png" id="4"]
+
+[sub_resource type="SpriteFrames" id="1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="2"]
+radius = 27.0
+
+[node name="Shower" type="Node2D"]
+
+[node name="Bullets" type="Node2D" parent="."]
+script = ExtResource("1_m08fn")
+
+[node name="Player" type="Area2D" parent="."]
+script = ExtResource("2_vv0de")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+sprite_frames = SubResource("1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("2")
+
+[connection signal="body_shape_entered" from="Player" to="Player" method="OnBodyShapeEntered"]
+[connection signal="body_shape_exited" from="Player" to="Player" method="OnBodyShapeExited"]
