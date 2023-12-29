@@ -15,7 +15,7 @@ var xr_tracker_head : XRPositionalTracker
 var xr_tracker_hands = [ ]
 var xr_play_area : PackedVector3Array
 
-@onready var FlatDisplay = $FrontOfPlayer/FlatDisplayMesh/SubViewport/FlatDisplay
+@onready var flat_display = $FrontOfPlayer/FlatDisplayMesh/SubViewport/FlatDisplay
 @onready var joints3D = $Joints3D
 @onready var joints2D = $FrontOfPlayer/Joints2D
 
@@ -81,7 +81,7 @@ func _ready():
 			joints3D.add_child(rpose)
 			
 		# Make the toggle buttons that show the activated button signals
-		var vboxsignals = FlatDisplay.get_node("VBoxTrackers%d" % hand)
+		var vboxsignals = flat_display.get_node("VBoxTrackers%d" % hand)
 		var buttonsig = vboxsignals.get_child(0)
 		vboxsignals.remove_child(buttonsig)
 		for bn in buttonsignalnames:
@@ -91,8 +91,8 @@ func _ready():
 			vboxsignals.add_child(bs)
 
 		# Make the labels for the finger lengths
-		var flatdisplaymesh = FlatDisplay.get_parent().get_parent()
-		var subviewport = FlatDisplay.get_parent()
+		var flatdisplaymesh = flat_display.get_parent().get_parent()
+		var subviewport = flat_display.get_parent()
 		for j in hjtips:
 			var p = joints2D.get_node(LRd % j).transform.origin
 			var p1 = flatdisplaymesh.transform.inverse() * p
@@ -102,27 +102,27 @@ func _ready():
 			fingerlenglab.text = LRd%j
 			fingerlenglab.name = "FL_"+(LRd%j)
 			fingerlenglab.position = p3
-			FlatDisplay.add_child(fingerlenglab)
+			flat_display.add_child(fingerlenglab)
 
 	get_node("Joints3D/L0").transform.origin = Vector3(0,1.7,-0.2)
 
 
 func buttonsignal(name, hand, pressed):
-	var buttonsig = FlatDisplay.get_node_or_null("VBoxTrackers%d/%s" % [ hand, name ])
+	var buttonsig = flat_display.get_node_or_null("VBoxTrackers%d/%s" % [ hand, name ])
 	if buttonsig:
 		buttonsig.button_pressed = pressed
 	else:
 		print("buttonsignal ", hand, " ", name, " ", pressed)
 		
 func inputfloatchanged(name, value, hand):
-	var ifsig = FlatDisplay.get_node_or_null("VSlider%d%s" % [ hand, name ])
+	var ifsig = flat_display.get_node_or_null("VSlider%d%s" % [ hand, name ])
 	if ifsig:
 		ifsig.value = value*100
 	else:
 		print("inputfloatchanged ", hand, " ", name, " ", value)
 
 func inputvector2changed(name, vector, hand):
-	var ifstick = FlatDisplay.get_node_or_null("Thumbstick%d" % hand)
+	var ifstick = flat_display.get_node_or_null("Thumbstick%d" % hand)
 	if ifstick:
 		ifstick.get_node("Pos").position = (vector + Vector2(1,1))*(70/2)
 	else:
@@ -246,7 +246,7 @@ func _process(delta):
 			# Measure the lengths of the fingers
 			var FLLRd = "FL_L%d" if hand == 0 else "FL_R%d"
 			for j in hjtips:
-				var fingerlenglab = FlatDisplay.get_node(FLLRd % j)
+				var fingerlenglab = flat_display.get_node(FLLRd % j)
 				var fp = xr_interface.get_hand_joint_position(hand, j)
 				var fingleng = 0.0
 				for k in range(1, 4):
