@@ -5,10 +5,10 @@ These sensors are typically found on mobile devices, so don't expect this to wor
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Mobile
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/143
 
 ## Screenshots
 
-![Screenshot](screenshots/sensors.png)
+![Screenshot](screenshots/sensors.webp)

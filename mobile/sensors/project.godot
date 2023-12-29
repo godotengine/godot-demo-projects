@@ -6,21 +6,24 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[]
-_global_script_class_icons={
-}
+config_version=5
 
 [application]
 
 config/name="Mobile Sensors Demo"
 config/description="A demo showing the use of various sensors: an accelerometer, a gyroscope, and a magnetometer.
 These sensors are typically found on mobile devices, so don't expect this to work on a desktop."
-run/main_scene="res://main.tscn"
-config/icon="res://icon.webp"
 config/tags=PackedStringArray("demo", "mobile", "official")
+run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.1")
+config/icon="res://icon.webp"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_environment="res://default_env.tres"
