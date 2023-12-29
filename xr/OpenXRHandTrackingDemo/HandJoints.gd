@@ -107,21 +107,21 @@ func _ready():
 	get_node("Joints3D/L0").transform.origin = Vector3(0,1.7,-0.2)
 
 
-func buttonsignal(name, hand, pressed):
+func _button_signal(name, hand, pressed):
 	var buttonsig = flat_display.get_node_or_null("VBoxTrackers%d/%s" % [ hand, name ])
 	if buttonsig:
 		buttonsig.button_pressed = pressed
 	else:
 		print("buttonsignal ", hand, " ", name, " ", pressed)
 		
-func inputfloatchanged(name, value, hand):
+func _input_float_changed(name, value, hand):
 	var ifsig = flat_display.get_node_or_null("VSlider%d%s" % [ hand, name ])
 	if ifsig:
 		ifsig.value = value*100
 	else:
 		print("inputfloatchanged ", hand, " ", name, " ", value)
 
-func inputvector2changed(name, vector, hand):
+func _input_vector2_changed(name, vector, hand):
 	var ifstick = flat_display.get_node_or_null("Thumbstick%d" % hand)
 	if ifstick:
 		ifstick.get_node("Pos").position = (vector + Vector2(1,1))*(70/2)
@@ -150,10 +150,10 @@ func set_xr_interface(lxr_interface : OpenXRInterface):
 
 	# wire up the signals from the hand trackers
 	for hand in range(2):
-		xr_tracker_hands[hand].button_pressed.connect(buttonsignal.bind(hand, true))
-		xr_tracker_hands[hand].button_released.connect(buttonsignal.bind(hand, false))
-		xr_tracker_hands[hand].input_float_changed.connect(inputfloatchanged.bind(hand))
-		xr_tracker_hands[hand].input_vector2_changed.connect(inputvector2changed.bind(hand))
+		xr_tracker_hands[hand].button_pressed.connect(_button_signal.bind(hand, true))
+		xr_tracker_hands[hand].button_released.connect(_button_signal.bind(hand))
+		xr_tracker_hands[hand].input_float_changed.connect(_input_float_changed.bind(hand))
+		xr_tracker_hands[hand].input_vector2_changed.connect(_input_vector2_changed.bind(hand))
 		
 	# reset the position of the 2D information panel 3 times in the first 15 seconds
 	for t in range(3):
