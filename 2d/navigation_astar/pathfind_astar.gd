@@ -1,4 +1,5 @@
 extends TileMap
+class_name PathFindAStar
 
 enum Tile {
 	OBSTACLE,

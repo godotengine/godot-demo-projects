@@ -17,7 +17,7 @@ var _click_position := Vector2()
 var _path := PackedVector2Array()
 var _next_point := Vector2()
 
-@onready var _tile_map: TileMap = $"../TileMap"
+@onready var _tile_map: PathFindAStar = $"../TileMap"
 
 func _ready() -> void:
 	_change_state(State.IDLE)
@@ -34,6 +34,7 @@ func _process(_delta: float) -> void:
 			_change_state(State.IDLE)
 			return
 		_next_point = _path[0]
+
 
 
 func _unhandled_input(event: InputEvent) -> void:
