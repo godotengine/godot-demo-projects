@@ -1,6 +1,5 @@
 extends Node
 
-
 @export var combat_screen: NodePath
 @export var exploration_screen: NodePath
 
