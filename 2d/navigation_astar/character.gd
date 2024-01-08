@@ -1,9 +1,15 @@
 extends Node2D
 
+<<<<<<< HEAD
 enum State {
 	IDLE,
 	FOLLOW,
 }
+=======
+const PathFindAStar = preload("./pathfind_astar.gd")
+
+enum State { IDLE, FOLLOW }
+>>>>>>> A few more fixes
 
 const MASS = 10.0
 const ARRIVE_DISTANCE = 10.0
@@ -26,7 +32,6 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if _state != State.FOLLOW:
 		return
-
 	var arrived_to_next_point := _move_to(_next_point)
 	if arrived_to_next_point:
 		_path.remove_at(0)
@@ -34,7 +39,6 @@ func _process(_delta: float) -> void:
 			_change_state(State.IDLE)
 			return
 		_next_point = _path[0]
-
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -47,7 +51,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			_change_state(State.FOLLOW)
 
 
-func _move_to(local_position: Vector2) -> float:
+func _move_to(local_position: Vector2) -> bool:
 	var desired_velocity := (local_position - position).normalized() * speed
 	var steering := desired_velocity - _velocity
 	_velocity += steering / MASS
