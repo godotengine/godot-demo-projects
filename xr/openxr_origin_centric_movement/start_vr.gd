@@ -54,7 +54,7 @@ func _on_openxr_session_begun() -> void:
 		new_rate = available_rates[0]
 	else:
 		for rate in available_rates:
-			if rate > new_rate and rate < maximum_refresh_rate:
+			if rate > new_rate and rate <= maximum_refresh_rate:
 				new_rate = rate
 
 	# Did we find a better rate?
