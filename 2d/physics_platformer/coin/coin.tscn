@@ -41,7 +41,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("GPUParticles3D:emitting")
+tracks/1/path = NodePath("CPUParticles2D:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -111,10 +111,10 @@ texture = ExtResource("2")
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "spin"
 libraries = {
 "": SubResource("AnimationLibrary_4atuj")
 }
+autoplay = "spin"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("3")
@@ -122,7 +122,7 @@ shape = SubResource("3")
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3")
 
-[node name="GPUParticles3D" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 modulate = Color(0.596863, 0.638745, 1, 1)
 material = SubResource("4")
 emitting = false
