@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c1uai3rvx8hul"]
+[gd_scene load_steps=19 format=3 uid="uid://c1uai3rvx8hul"]
 
 [ext_resource type="Script" path="res://vehicles/vehicle.gd" id="1_r806m"]
 [ext_resource type="Texture2D" uid="uid://d4ostmqwgytk" path="res://vehicles/particle_smoke.png" id="2_1gkvk"]
@@ -34,9 +34,11 @@ stream_3/weight = 1.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fuuj3"]
 transparency = 1
 shading_mode = 0
+vertex_color_use_as_albedo = true
 albedo_color = Color(0.462745, 0.462745, 0.462745, 0.501961)
 albedo_texture = ExtResource("2_1gkvk")
 billboard_mode = 3
+billboard_keep_scale = true
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
@@ -47,8 +49,11 @@ proximity_fade_distance = 0.5
 material = SubResource("StandardMaterial3D_fuuj3")
 
 [sub_resource type="Curve" id="Curve_4j5vd"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_p5xtl"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="CarBase" type="Node3D"]
 
@@ -133,7 +138,7 @@ shape = SubResource("BoxShape3D_x74tc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.97449, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Body/CameraBase"]
-transform = Transform3D(-0.709652, -0.170177, 0.683691, -2.11161e-08, 0.970391, 0.241539, -0.704552, 0.171409, -0.68864, 3.44908, 2.03236, -4.39379)
+transform = Transform3D(-1, 2.11495e-08, -8.48259e-08, 0, 0.970296, 0.241922, 8.74228e-08, 0.241922, -0.970296, 0, 2.032, -4.394)
 fov = 74.0
 near = 0.1
 script = ExtResource("4_6igu8")
@@ -155,7 +160,8 @@ attenuation_filter_cutoff_hz = 20500.0
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.201696, -0.022867, -1.10448)
-amount = 100
+amount = 125
+lifetime = 1.25
 mesh = SubResource("QuadMesh_30wks")
 direction = Vector3(0, 1, -0.5)
 gravity = Vector3(0, 0, 0)
@@ -165,10 +171,11 @@ damping_min = 0.05
 damping_max = 0.05
 angle_max = 360.0
 scale_amount_curve = SubResource("Curve_4j5vd")
+color_ramp = SubResource("Gradient_p5xtl")
 
 [node name="BlobShadow" type="Decal" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
-extents = Vector3(0.8, 2, 1.5)
+size = Vector3(1.6, 4, 3)
 texture_albedo = ExtResource("11_3ryw5")
 upper_fade = 2.0
 lower_fade = 1.0
