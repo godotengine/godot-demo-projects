@@ -24,6 +24,11 @@ This project showcases the various 3D antialiasing techniques supported by Godot
 	the 3D framebuffer will be 3840×2160.
   - SSAA can be used together with FXAA or TAA to counter the blurring added by
 	those algorithms, while further improving antialiasing quality.
+- **Alpha antialiasing:** Applied on certain materials in the demo, available in
+  two modes (Alpha Edge Blend and Alpha Edge Clip). This is most effective when
+  MSAA is enabled, as Godot enables alpha-to-coverage rendering on the material
+  in this case. When MSAA is disabled, a fixed dithering pattern is applied on
+  the edge of transparent areas on the material.
 
 Godot allows using multiple antialiasing techniques at the same time. This can
 be useful to obtain the best possible quality, or to find a better performance
