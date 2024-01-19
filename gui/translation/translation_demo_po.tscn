@@ -1,0 +1,130 @@
+[gd_scene load_steps=6 format=3 uid="uid://u6cnwv1b1mhl"]
+
+[ext_resource type="Script" path="res://translation_po.gd" id="1_u1syg"]
+[ext_resource type="FontFile" uid="uid://b0887xnwnkgju" path="res://fonts/droid_sans.tres" id="3_0g48e"]
+[ext_resource type="Texture2D" uid="uid://bk44e7bkr4w4l" path="res://images/speaker.webp" id="3_x3031"]
+[ext_resource type="Texture2D" uid="uid://cy06u7558clgu" path="res://images/flag_uk.webp" id="4_2she1"]
+[ext_resource type="AudioStream" uid="uid://ciept8j0x21to" path="res://audio/hello_en.wav" id="6_v8u3c"]
+
+[node name="TranslationDemoPO" type="Panel"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -300.0
+offset_right = 512.0
+offset_bottom = 300.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource("1_u1syg")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 12.0
+offset_right = 602.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0.788235, 0.54902, 0.933333, 1)
+theme_override_font_sizes/font_size = 24
+text = "PO Example"
+
+[node name="English" type="Button" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 81.592
+offset_right = 192.0
+offset_bottom = 112.592
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Use English"
+
+[node name="Spanish" type="Button" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 129.592
+offset_right = 192.0
+offset_bottom = 160.592
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Use Spanish"
+
+[node name="Japanese" type="Button" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 177.592
+offset_right = 192.0
+offset_bottom = 208.592
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Use Japanese"
+
+[node name="Description" type="Label" parent="."]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 64.592
+offset_right = 929.0
+offset_bottom = 334.592
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "This second demo showcases localization using gettext (PO/POT) files.
+
+The resouce remapping process is the same with CSV. The in-game text translation
+process is also the same – use keys to fetch the appropriate translation.
+
+The main difference between PO files and CSV files is the way both of them store
+the translated data in their files.  Have a look at the \"translations/po\"
+and \"translations/csv\" folders to see the files involved."
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 354.0
+offset_right = 1001.0
+offset_bottom = 394.0
+
+[node name="HelloText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 405.0
+offset_right = 325.0
+offset_bottom = 429.0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_0g48e")
+text = "Hello!"
+
+[node name="PlayAudio" type="Button" parent="."]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 466.0
+offset_right = 475.0
+offset_bottom = 498.0
+theme_override_fonts/font = ExtResource("3_0g48e")
+text = "Push Me!"
+icon = ExtResource("3_x3031")
+
+[node name="Flag" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 406.0
+offset_right = 213.0
+offset_bottom = 491.0
+texture = ExtResource("4_2she1")
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_v8u3c")
+
+[node name="GoToCSVTranslationDemo" type="Button" parent="."]
+layout_mode = 0
+offset_left = 761.0
+offset_top = 545.0
+offset_right = 1000.0
+offset_bottom = 576.0
+text = "Go to CSV Translation Demo"
+
+[connection signal="pressed" from="English" to="." method="_on_english_pressed"]
+[connection signal="pressed" from="Spanish" to="." method="_on_spanish_pressed"]
+[connection signal="pressed" from="Japanese" to="." method="_on_japanese_pressed"]
+[connection signal="pressed" from="PlayAudio" to="." method="_on_play_audio_pressed"]
+[connection signal="pressed" from="GoToCSVTranslationDemo" to="." method="_on_go_to_csv_translation_demo_pressed"]
