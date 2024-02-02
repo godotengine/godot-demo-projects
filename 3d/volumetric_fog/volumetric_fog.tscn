@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d1d6jy84lcpg7"]
+[gd_scene load_steps=26 format=3 uid="uid://d1d6jy84lcpg7"]
 
 [ext_resource type="Script" path="res://camera.gd" id="1_mfjvp"]
 [ext_resource type="CompressedTexture3D" uid="uid://bpvy0e34otmhk" path="res://icon_outlined.png" id="2_8fjmj"]
@@ -18,6 +18,40 @@ sky = SubResource("Sky_5gwha")
 tonemap_mode = 2
 glow_enabled = true
 volumetric_fog_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_cqs75"]
+offsets = PackedFloat32Array(0, 0.313433, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.473976, 0.473976, 0.473976, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cjmew"]
+frequency = 0.005
+fractal_type = 2
+fractal_octaves = 4
+fractal_lacunarity = 3.0
+fractal_gain = 2.0
+fractal_weighted_strength = 0.4
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6pkhb"]
+seamless = true
+as_normal_map = true
+bump_strength = 0.5
+color_ramp = SubResource("Gradient_cqs75")
+noise = SubResource("FastNoiseLite_cjmew")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8w53i"]
+seamless = true
+color_ramp = SubResource("Gradient_cqs75")
+noise = SubResource("FastNoiseLite_cjmew")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qrpkj"]
+albedo_color = Color(0, 0, 0, 1)
+roughness_texture = SubResource("NoiseTexture2D_8w53i")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_6pkhb")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+texture_filter = 5
 
 [sub_resource type="FogMaterial" id="FogMaterial_sfd8y"]
 density = -1.6842
@@ -149,6 +183,79 @@ emission = Color(0, 0.501961, 1, 1)
 edge_fade = 0.0
 density_texture = ExtResource("2_8fjmj")
 
+[sub_resource type="Shader" id="Shader_1xpcs"]
+code = "shader_type fog;
+
+/* main fog shader */
+uniform float base_density: hint_range(0, 1) = 0.8;
+uniform vec3 base_color: source_color;
+uniform float fade_out_height = 2.0;
+uniform float fade_out_distance = 1.5;
+
+uniform vec3 noise_amounts = vec3(0.4, 0.35, 0.25); // should add up to 1
+uniform vec3 noise_scales = vec3(1.0, 2.0, 4.0);
+uniform vec3 noise_velocity1 = vec3(0.5, 0.0, 0.0);
+uniform vec3 noise_velocity2 = vec3(1, 0.0, -1);
+uniform vec3 noise_velocity3 = vec3(0.0, 0.6, 0.3);
+
+
+/* gradient_noise_3d.gdshaderinc */
+// The MIT License
+// Copyright © 2013 Inigo Quilez
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+// All noise functions here:
+//
+// https://www.shadertoy.com/playlist/fXlXzf&from=0&num=12
+
+vec3 hash(vec3 p) {
+	p = vec3(dot(p,vec3(127.1,311.7, 74.7)),
+			 dot(p,vec3(269.5,183.3,246.1)),
+			 dot(p,vec3(113.5,271.9,124.6)));
+
+	return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);
+}
+
+// 3D gradient noise function
+float noise(vec3 p) {
+	vec3 i = floor(p);
+	vec3 f = fract(p);
+
+	vec3 u = f*f*(3.0-2.0*f);
+
+    return mix( mix( mix( dot( hash( i + vec3(0.0,0.0,0.0) ), f - vec3(0.0,0.0,0.0) ),
+                          dot( hash( i + vec3(1.0,0.0,0.0) ), f - vec3(1.0,0.0,0.0) ), u.x),
+                     mix( dot( hash( i + vec3(0.0,1.0,0.0) ), f - vec3(0.0,1.0,0.0) ),
+                          dot( hash( i + vec3(1.0,1.0,0.0) ), f - vec3(1.0,1.0,0.0) ), u.x), u.y),
+                mix( mix( dot( hash( i + vec3(0.0,0.0,1.0) ), f - vec3(0.0,0.0,1.0) ),
+                          dot( hash( i + vec3(1.0,0.0,1.0) ), f - vec3(1.0,0.0,1.0) ), u.x),
+                     mix( dot( hash( i + vec3(0.0,1.0,1.0) ), f - vec3(0.0,1.0,1.0) ),
+                          dot( hash( i + vec3(1.0,1.0,1.0) ), f - vec3(1.0,1.0,1.0) ), u.x), u.y), u.z );
+}
+
+void fog() {
+	vec3 base_pos = WORLD_POSITION * vec3(0.1, 0.5, 0.1);
+	DENSITY = base_density;
+	float noise1 = noise(base_pos * noise_scales.x + TIME * noise_velocity1) * noise_amounts.x;
+	float noise2 = noise(base_pos * noise_scales.y + TIME * noise_velocity2) * noise_amounts.y;
+	float noise3 = noise(base_pos * noise_scales.z + TIME * noise_velocity3) * noise_amounts.z;
+	DENSITY *= smoothstep(-0.1, 0.0, noise1 + noise2 + noise3);
+	DENSITY *= 1.0 - smoothstep(fade_out_height, fade_out_height + fade_out_distance, WORLD_POSITION.y);
+	ALBEDO = base_color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_481nw"]
+shader = SubResource("Shader_1xpcs")
+shader_parameter/base_density = 1.0
+shader_parameter/base_color = Color(1, 0, 0, 1)
+shader_parameter/fade_out_height = 0.0
+shader_parameter/fade_out_distance = 8.0
+shader_parameter/noise_amounts = Vector3(0.4, 0.35, 0.25)
+shader_parameter/noise_scales = Vector3(1, 2, 4)
+shader_parameter/noise_velocity1 = Vector3(0.5, 0, 0)
+shader_parameter/noise_velocity2 = Vector3(1, 0, -1)
+shader_parameter/noise_velocity3 = Vector3(0, 0.6, 0.3)
+
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -173,7 +280,9 @@ offset_right = 812.0
 offset_bottom = 299.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-text = "Temporal reprojection: Disabled"
+text = "Fog density: 0.05
+Temporal reprojection: Disabled
+Volumetric fog quality: 64×64×64"
 
 [node name="HelpLabel" type="Label" parent="Camera3D"]
 anchors_preset = 2
@@ -189,29 +298,35 @@ theme_override_constants/outline_size = 4
 text = "W/A/S/D/Mouse: Move
 Left/Right arrows: Adjust global fog density
 Space: Toggle temporal reprojection
-Up/Down arrows or mouse wheel: Adjust temporal reprojection intensity"
+Up/Down arrows or mouse wheel: Adjust temporal reprojection intensity
+Page Up/Down: Adjust volumetric fog quality"
 
 [node name="Ground" type="CSGBox3D" parent="."]
 size = Vector3(1024, 1.99, 1024)
+material = SubResource("StandardMaterial3D_qrpkj")
 
 [node name="Ground2" type="CSGBox3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.282, 0, 5.62229)
 operation = 2
 size = Vector3(3, 2, 4)
+material = SubResource("StandardMaterial3D_qrpkj")
 
 [node name="Ground3" type="CSGBox3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.87312, 0, 2.69763)
 operation = 2
 size = Vector3(3, 2, 4)
+material = SubResource("StandardMaterial3D_qrpkj")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 size = Vector3(8, 8, 8)
+material = SubResource("StandardMaterial3D_qrpkj")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.4)
 operation = 2
 size = Vector3(7.5, 7.5, 7.5)
+material = SubResource("StandardMaterial3D_qrpkj")
 
 [node name="FogVolumeNegativeDensity" type="FogVolume" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
@@ -263,6 +378,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.67463, 1.836, -4.89264)
 light_color = Color(1, 0.337255, 0, 1)
 light_energy = 0.1
 light_volumetric_fog_energy = 500.0
+light_specular = 0.0
 omni_range = 3.0
 
 [node name="OmniLight3DShadow" type="OmniLight3D" parent="."]
@@ -273,9 +389,11 @@ shadow_enabled = true
 omni_range = 6.0
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(0.966384, -0.226046, -0.1225, 0, 0.476461, -0.879196, 0.257105, 0.84964, 0.460444, -7.19085, -3.7099, 10.7572)
+transform = Transform3D(0.966384, -0.226045, -0.1225, 0, 0.476461, -0.879196, 0.257105, 0.84964, 0.460444, -9.82684, -3.7099, 4.88511)
 light_color = Color(0, 0.439216, 1, 1)
 light_energy = 4.0
+light_volumetric_fog_energy = 25.0
+spot_angle = 35.0
 
 [node name="FogVolumeAlbedoTweak" type="FogVolume" parent="."]
 transform = Transform3D(-0.89393, -0.0897075, -0.439138, 0, 0.979766, -0.200148, 0.448207, -0.178918, -0.875842, -15.8913, -15.118, 8.26876)
@@ -283,10 +401,10 @@ size = Vector3(8, 8, 8)
 material = SubResource("FogMaterial_8xcc6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "move_fog_volume"
 libraries = {
 "": SubResource("AnimationLibrary_avffy")
 }
+autoplay = "move_fog_volume"
 
 [node name="MovingBox" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 10)
@@ -300,3 +418,8 @@ material = SubResource("FogMaterial_ktn3i")
 transform = Transform3D(-2.98023e-08, 4.82913e-08, -1, -4.2222e-08, -1, -4.82913e-08, -1, 4.2222e-08, -1.49012e-08, 17, 17, 12)
 size = Vector3(32, 32, 4)
 material = SubResource("FogMaterial_yomn8")
+
+[node name="FogVolumeShader" type="FogVolume" parent="."]
+transform = Transform3D(-2.98023e-08, 4.82913e-08, -1, -4.2222e-08, -1, -4.82913e-08, -1, 4.2222e-08, -1.49012e-08, -34.4124, 5, 12)
+size = Vector3(32, 8, 32)
+material = SubResource("ShaderMaterial_481nw")
