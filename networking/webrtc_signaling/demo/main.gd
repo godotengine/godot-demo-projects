@@ -9,7 +9,7 @@ func _enter_tree():
 		)
 
 func _ready():
-	if OS.get_name() == "HTML5":
+	if OS.get_name() == "Web":
 		$VBoxContainer/Signaling.hide()
 
 
