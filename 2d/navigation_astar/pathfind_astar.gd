@@ -2,9 +2,9 @@ extends TileMap
 
 enum Tile { OBSTACLE, START_POINT, END_POINT }
 
-const CELL_SIZE = Vector2(64, 64)
+const CELL_SIZE = Vector2i(64, 64)
 const BASE_LINE_WIDTH = 3.0
-const DRAW_COLOR = Color.WHITE
+const DRAW_COLOR = Color.WHITE * Color(1, 1, 1, 0.5)
 
 # The object for pathfinding on 2D grids.
 var _astar = AStarGrid2D.new()
@@ -14,7 +14,9 @@ var _end_point = Vector2i()
 var _path = PackedVector2Array()
 
 func _ready():
-	_astar.region = get_used_rect()
+	# Region should match the size of the playable area plus one (in tiles).
+	# In this demo, the playable area is 17×9 tiles, so the rect size is 18×10.
+	_astar.region = Rect2i(0, 0, 18, 10)
 	_astar.cell_size = CELL_SIZE
 	_astar.offset = CELL_SIZE * 0.5
 	_astar.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
@@ -69,8 +71,8 @@ func find_path(local_start_point, local_end_point):
 	_path = _astar.get_point_path(_start_point, _end_point)
 
 	if not _path.is_empty():
-		set_cell(0, _start_point, Tile.START_POINT, Vector2i())
-		set_cell(0, _end_point, Tile.END_POINT, Vector2i())
+		set_cell(0, _start_point, 0, Vector2i(Tile.START_POINT, 0))
+		set_cell(0, _end_point, 0, Vector2i(Tile.END_POINT, 0))
 
 	# Redraw the lines and circles from the start to the end point.
 	queue_redraw()

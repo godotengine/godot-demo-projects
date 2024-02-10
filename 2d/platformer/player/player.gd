@@ -3,11 +3,11 @@ class_name Player extends CharacterBody2D
 
 signal coin_collected()
 
-const WALK_SPEED = 200.0
+const WALK_SPEED = 300.0
 const ACCELERATION_SPEED = WALK_SPEED * 6.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -725.0
 ## Maximum speed at which the player can fall.
-const TERMINAL_VELOCITY = 400
+const TERMINAL_VELOCITY = 700
 
 ## The player listens for input actions appended with this suffix.[br]
 ## Used to separate controls for multiple players in splitscreen.

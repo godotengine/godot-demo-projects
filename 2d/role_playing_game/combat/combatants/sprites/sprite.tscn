@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://pxvb8ikxb0k"]
+
+[ext_resource type="Texture2D" uid="uid://bxrjk2lilj53q" path="res://combat/combatants/sprites/shadow.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://c82ex4vybwch5" path="res://combat/combatants/sprites/player_battle.png" id="2"]
+
+[sub_resource type="Animation" id="2"]
+resource_name = "idle"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8, 1.5),
+"transitions": PackedFloat32Array(1, 0.5, 2, 1),
+"update": 0,
+"values": [Vector2(0, -41), Vector2(0, -35), Vector2(0, -51), Vector2(0, -41)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Body:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8, 1.5),
+"transitions": PackedFloat32Array(1, 0.5, 2, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.078, 0.906), Vector2(0.938, 1.156), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="1"]
+resource_name = "take_damage"
+length = 0.2
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(3, 0.253906, 0.253906, 1), Color(1, 1, 1, 1), Color(3, 0.253906, 0.253906, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cqku5"]
+_data = {
+"idle": SubResource("2"),
+"take_damage": SubResource("1")
+}
+
+[node name="Sprite2D" type="Node2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_cqku5")
+}
+next/take_damage = &"idle"
+
+[node name="Pivot" type="Marker2D" parent="."]
+
+[node name="Shadow" type="Sprite2D" parent="Pivot"]
+modulate = Color(0.196078, 0.0235294, 0.329412, 0.301961)
+position = Vector2(0, -4.44299)
+texture = ExtResource("1")
+
+[node name="Body" type="Sprite2D" parent="Pivot"]
+position = Vector2(0, -41)
+texture = ExtResource("2")

@@ -1,0 +1,131 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://decorations/sparkle.png" type="Texture2D" id=1]
+[ext_resource path="res://decorations/candle.png" type="Texture2D" id=2]
+[ext_resource path="res://decorations/fire.png" type="Texture2D" id=3]
+[ext_resource path="res://decorations/glow.png" type="Texture2D" id=4]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+particles_animation = true
+particles_anim_h_frames = 11
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id=2]
+offsets = PackedFloat32Array( 0, 0.625698, 1 )
+colors = PackedColorArray( 1, 0.584314, 0, 1, 1, 0.84063, 0.226563, 1, 1, 0.584314, 0, 1 )
+
+[sub_resource type="CanvasItemMaterial" id=3]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id=4]
+max_value = 0.3
+_data = [ Vector2( 0, 0 ), 0.0, 1.36377, 0, 0, Vector2( 0.262376, 0.188182 ), 0.41974, 0.41974, 0, 0, Vector2( 1, 0.0295454 ), -1.06101, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=5]
+offsets = PackedFloat32Array( 0, 0.435754, 1 )
+colors = PackedColorArray( 1, 0.351563, 0, 1, 0.895996, 0.745333, 0.230999, 1, 1, 0.426842, 0.0234375, 1 )
+
+[sub_resource type="Gradient" id=12]
+offsets = PackedFloat32Array( 0, 0.100559, 0.234637, 0.480447, 0.603352, 1 )
+colors = PackedColorArray( 0.714844, 0.714844, 0.714844, 1, 0.382813, 0.382813, 0.382813, 1, 0.601563, 0.601563, 0.601563, 1, 0.229687, 0.229687, 0.229687, 1, 0.0197581, 0.0197581, 0.0197581, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture2D" id=9]
+gradient = SubResource( 12 )
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+fill_to = Vector2( 0, 0 )
+
+[sub_resource type="Gradient" id=13]
+offsets = PackedFloat32Array( 0.0111732, 0.843575 )
+colors = PackedColorArray( 0.648926, 0.648926, 0.648926, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture2D" id=10]
+gradient = SubResource( 13 )
+width = 800
+height = 500
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 128
+position = Vector2( 0, -11 )
+texture = ExtResource( 2 )
+
+[node name="glow" type="CPUParticles2D" parent="Sprite2D"]
+modulate = Color( 1, 0.360784, 0.113725, 1 )
+light_mask = 128
+position = Vector2( -13, -33.244 )
+scale = Vector2( 0.3, 0.5 )
+amount = 1
+lifetime = 0.8
+texture = ExtResource( 4 )
+gravity = Vector2( 0, 0 )
+
+[node name="Fire" type="CPUParticles2D" parent="Sprite2D"]
+light_mask = 128
+material = SubResource( 1 )
+position = Vector2( -13, -35 )
+scale = Vector2( 0.6, 0.6 )
+amount = 1
+lifetime = 0.8
+texture = ExtResource( 3 )
+gravity = Vector2( 0, 0 )
+color_ramp = SubResource( 2 )
+anim_speed = 1.0
+
+[node name="Sparkle" type="CPUParticles2D" parent="Sprite2D"]
+light_mask = 128
+material = SubResource( 3 )
+position = Vector2( -13, -35 )
+scale = Vector2( 0.6, 0.6 )
+amount = 3
+texture = ExtResource( 1 )
+emission_shape = 1
+emission_sphere_radius = 8.0
+gravity = Vector2( 0, -80 )
+angular_velocity = 1.0
+tangential_accel = 49.54
+scale_amount_curve = SubResource( 4 )
+color_ramp = SubResource( 5 )
+anim_speed = 1.0
+
+[node name="flow front" type="CPUParticles2D" parent="Sprite2D"]
+modulate = Color( 0.94902, 1, 0, 1 )
+light_mask = 128
+position = Vector2( -13, -28.689 )
+scale = Vector2( 0.25, 0.25 )
+amount = 1
+lifetime = 0.8
+texture = ExtResource( 4 )
+gravity = Vector2( 0, 0 )
+
+[node name="Light2D2" type="PointLight2D" parent="."]
+light_mask = 2
+position = Vector2( -15, -49 )
+texture = SubResource( 9 )
+color = Color( 1, 0.466667, 0.0352941, 1 )
+energy = 2.0
+range_height = 450.9
+range_item_cull_mask = 145
+shadow_buffer_size = 512
+shadow_gradient_length = 30.0
+shadow_item_cull_mask = 145
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+light_mask = 2
+texture = SubResource( 10 )
+color = Color( 0.709804, 0.388235, 0.313726, 1 )
+range_height = 901.9
+range_item_cull_mask = 17
+shadow_enabled = true
+shadow_gradient_length = 20.0
+shadow_item_cull_mask = 17
