@@ -8,6 +8,7 @@ size = Vector3(1.35822, 1.08835, 2.20058)
 
 [sub_resource type="Animation" id="2"]
 length = 1.2
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -58,9 +59,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.062134, 0.331645)
 aabb = AABB(-1.19986, 0.251327, -1.57098, 2.41047, 1.09305, 3.17223)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "float"
 libraries = {
 "": SubResource("AnimationLibrary_5n6vs")
 }
+autoplay = "float"
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_screen_exited"]

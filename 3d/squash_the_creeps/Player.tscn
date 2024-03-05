@@ -12,6 +12,7 @@ radius = 0.907607
 
 [sub_resource type="Animation" id="3"]
 length = 1.2
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -65,9 +66,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06491, 0)
 shape = SubResource("2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "float"
 libraries = {
 "": SubResource("AnimationLibrary_aq6tr")
 }
+autoplay = "float"
 
 [connection signal="body_entered" from="MobDetector" to="." method="_on_MobDetector_body_entered"]
