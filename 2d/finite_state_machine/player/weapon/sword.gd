@@ -31,8 +31,8 @@ var combo = [{
 var hit_objects = []
 
 func _ready():
-	$AnimationPlayer.animation_finished.connect(self._on_animation_finished)
-	body_entered.connect(self._on_body_entered)
+	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
+	body_entered.connect(_on_body_entered)
 	_change_state(States.IDLE)
 
 
@@ -103,7 +103,7 @@ func _on_animation_finished(_name):
 		attack()
 	else:
 		_change_state(States.IDLE)
-		emit_signal("attack_finished")
+		attack_finished.emit()
 
 
 func _on_StateMachine_state_changed(current_state):

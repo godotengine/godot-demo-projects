@@ -62,10 +62,10 @@ func _on_item_pressed(item_index, popup_menu, path):
 			for other_index in range(popup_menu.get_item_count()):
 				if other_index != item_index:
 					popup_menu.set_item_checked(other_index, false)
-			emit_signal("option_selected", item_path)
+			option_selected.emit(item_path)
 	elif popup_menu.is_item_checkable(item_index):
 		var checked = not popup_menu.is_item_checked(item_index)
 		popup_menu.set_item_checked(item_index, checked)
-		emit_signal("option_changed", item_path, checked)
+		option_changed.emit(item_path, checked)
 	else:
-		emit_signal("option_selected", item_path)
+		option_selected.emit(item_path)

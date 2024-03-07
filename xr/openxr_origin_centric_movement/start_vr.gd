@@ -24,11 +24,11 @@ func _ready():
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
 		# Connect the OpenXR events
-		xr_interface.connect("session_begun", _on_openxr_session_begun)
-		xr_interface.connect("session_visible", _on_openxr_visible_state)
-		xr_interface.connect("session_focussed", _on_openxr_focused_state)
-		xr_interface.connect("session_stopping", _on_openxr_stopping)
-		xr_interface.connect("pose_recentered", _on_openxr_pose_recentered)
+		xr_interface.session_begun.connect(_on_openxr_session_begun)
+		xr_interface.session_visible.connect(_on_openxr_visible_state)
+		xr_interface.session_focussed.connect(_on_openxr_focused_state)
+		xr_interface.session_stopping.connect(_on_openxr_stopping)
+		xr_interface.pose_recentered.connect(_on_openxr_pose_recentered)
 	else:
 		# We couldn't start OpenXR.
 		print("OpenXR not instantiated!")
@@ -79,7 +79,7 @@ func _on_openxr_visible_state() -> void:
 		# pause our game
 		process_mode = Node.PROCESS_MODE_DISABLED
 
-		emit_signal("focus_lost")
+		focus_lost.emit()
 
 
 # Handle OpenXR focused state
@@ -90,7 +90,7 @@ func _on_openxr_focused_state() -> void:
 	# unpause our game
 	process_mode = Node.PROCESS_MODE_INHERIT
 
-	emit_signal("focus_gained")
+	focus_gained.emit()
 
 # Handle OpenXR stopping state
 func _on_openxr_stopping() -> void:
@@ -101,4 +101,4 @@ func _on_openxr_stopping() -> void:
 func _on_openxr_pose_recentered() -> void:
 	# User recentered view, we have to react to this by recentering the view.
 	# This is game implementation dependent.
-	emit_signal("pose_recentered")
+	pose_recentered.emit()

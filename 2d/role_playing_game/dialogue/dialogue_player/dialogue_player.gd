@@ -12,7 +12,7 @@ var dialogue_text = ""
 
 
 func start_dialogue():
-	emit_signal("dialogue_started")
+	dialogue_started.emit()
 	current = 0
 	index_dialogue()
 	dialogue_text = dialogue_keys[current].text
@@ -22,7 +22,7 @@ func start_dialogue():
 func next_dialogue():
 	current += 1
 	if current == dialogue_keys.size():
-		emit_signal("dialogue_finished")
+		dialogue_finished.emit()
 		return
 	dialogue_text = dialogue_keys[current].text
 	dialogue_name = dialogue_keys[current].name

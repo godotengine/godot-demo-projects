@@ -23,7 +23,7 @@ var axis_value
 @onready var joypad_number = $DeviceInfo/JoyNumber
 
 func _ready():
-	Input.joy_connection_changed.connect(self._on_joy_connection_changed)
+	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 
 	for joypad in Input.get_connected_joypads():
 		print_rich("Found joypad #%d: [b]%s[/b] - %s" % [joypad, Input.get_joy_name(joypad), Input.get_joy_guid(joypad)])

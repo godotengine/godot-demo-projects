@@ -35,7 +35,7 @@ func _ready():
 	$Options.add_menu_item(OPTION_TYPE_CAPSULE)
 	$Options.add_menu_item(OPTION_TYPE_CYLINDER)
 	$Options.add_menu_item(OPTION_TYPE_CONVEX)
-	$Options.option_selected.connect(self._on_option_selected)
+	$Options.option_selected.connect(_on_option_selected)
 
 	await _start_all_types()
 

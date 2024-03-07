@@ -191,7 +191,7 @@ func _shot_bullet() -> void:
 	else:
 		speed_scale = 1.0
 
-	bullet.position = self.position + bullet_shoot.position * Vector2(speed_scale, 1.0)
+	bullet.position = position + bullet_shoot.position * Vector2(speed_scale, 1.0)
 	get_parent().add_child(bullet)
 
 	bullet.linear_velocity = Vector2(400.0 * speed_scale, -40)
@@ -204,5 +204,5 @@ func _shot_bullet() -> void:
 
 func _spawn_enemy_above() -> void:
 	var enemy := Enemy.instantiate() as RigidBody2D
-	enemy.position = self.position + 50 * Vector2.UP
+	enemy.position = position + 50 * Vector2.UP
 	get_parent().add_child(enemy)

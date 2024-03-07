@@ -18,11 +18,11 @@ func _init():
 
 
 func _ready():
-	multiplayer.peer_connected.connect(self._peer_connected)
-	multiplayer.peer_disconnected.connect(self._peer_disconnected)
-	multiplayer.server_disconnected.connect(self._close_network)
-	multiplayer.connection_failed.connect(self._close_network)
-	multiplayer.connected_to_server.connect(self._connected)
+	multiplayer.peer_connected.connect(_peer_connected)
+	multiplayer.peer_disconnected.connect(_peer_disconnected)
+	multiplayer.server_disconnected.connect(_close_network)
+	multiplayer.connection_failed.connect(_close_network)
+	multiplayer.connected_to_server.connect(_connected)
 
 	$AcceptDialog.get_label().horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	$AcceptDialog.get_label().vertical_alignment = VERTICAL_ALIGNMENT_CENTER

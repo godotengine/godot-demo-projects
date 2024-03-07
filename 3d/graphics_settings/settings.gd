@@ -22,7 +22,7 @@ var viewport_start_size := Vector2(
 
 
 func _ready() -> void:
-	get_viewport().size_changed.connect(self.update_resolution_label)
+	get_viewport().size_changed.connect(update_resolution_label)
 	update_resolution_label()
 
 	# Disable V-Sync to uncap framerate on supported platforms. This makes performance comparison

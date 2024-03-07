@@ -50,4 +50,4 @@ func update_score(add_to_left):
 
 
 func _on_exit_game_pressed():
-	emit_signal("game_finished")
+	game_finished.emit()
