@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://cj3hkqph5hlf4"]
+
+[ext_resource type="Script" path="res://objects/hand.gd" id="1_othw4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0f4wn"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_deu6v"]
+transparency = 1
+albedo_color = Color(0.521569, 0.729412, 1, 0.533333)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s1if8"]
+radius = 0.1
+
+[node name="Hand" type="XRController3D"]
+tracker = &"left_hand"
+pose = &"hand_pose"
+script = ExtResource("1_othw4")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_0f4wn")
+
+[node name="GhostMesh" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_deu6v")
+mesh = SubResource("BoxMesh_0f4wn")
+
+[node name="Body" type="AnimatableBody3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+sync_to_physics = false
+
+[node name="Collision" type="CollisionShape3D" parent="Body"]
+unique_name_in_owner = true
+shape = SubResource("SphereShape3D_s1if8")
