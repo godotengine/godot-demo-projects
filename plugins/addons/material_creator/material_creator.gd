@@ -7,11 +7,11 @@ var editor_interface
 
 func _ready():
 	# Connect all of the signals we'll need to save and load silly materials.
-	get_node(^"VBoxContainer/ApplyButton").pressed.connect(self.apply_pressed)
-	get_node(^"VBoxContainer/SaveButton").pressed.connect(self.save_pressed)
-	get_node(^"VBoxContainer/LoadButton").pressed.connect(self.load_pressed)
-	get_node(^"SaveMaterialDialog").file_selected.connect(self.save_file_selected)
-	get_node(^"LoadMaterialDialog").file_selected.connect(self.load_file_selected)
+	get_node(^"VBoxContainer/ApplyButton").pressed.connect(apply_pressed)
+	get_node(^"VBoxContainer/SaveButton").pressed.connect(save_pressed)
+	get_node(^"VBoxContainer/LoadButton").pressed.connect(load_pressed)
+	get_node(^"SaveMaterialDialog").file_selected.connect(save_file_selected)
+	get_node(^"LoadMaterialDialog").file_selected.connect(load_file_selected)
 	RenderingServer.canvas_item_set_clip(get_canvas_item(), true)
 
 

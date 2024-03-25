@@ -9,4 +9,4 @@ func enter():
 
 func _on_animation_finished(anim_name):
 	assert(anim_name == "stagger")
-	emit_signal("finished", "previous")
+	finished.emit("previous")

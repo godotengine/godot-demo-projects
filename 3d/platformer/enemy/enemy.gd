@@ -24,7 +24,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D):
 	var grav := state.get_total_gravity()
 	# get_total_gravity returns zero for the first few frames, leading to errors.
 	if grav.is_zero_approx():
-		grav = self.gravity
+		grav = gravity
 
 	lin_velocity += grav * delta # Apply gravity.
 	var up := -grav.normalized()

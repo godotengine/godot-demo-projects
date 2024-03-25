@@ -5,4 +5,4 @@ func enter():
 
 
 func _on_Sword_attack_finished():
-	emit_signal("finished", "previous")
+	finished.emit("previous")

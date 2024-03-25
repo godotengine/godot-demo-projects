@@ -8,7 +8,7 @@ var _rotation_pivot
 
 
 func _ready():
-	call_deferred("_initialize_pivot")
+	_initialize_pivot.call_deferred()
 
 
 func _unhandled_input(event):

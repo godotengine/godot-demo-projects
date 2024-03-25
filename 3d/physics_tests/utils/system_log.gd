@@ -11,10 +11,10 @@ signal entry_logged(message, type)
 
 func print_log(message):
 	print(message)
-	emit_signal("entry_logged", message, LogType.LOG)
+	entry_logged.emit(message, LogType.LOG)
 
 
 func print_error(message):
 	push_error(message)
 	printerr(message)
-	emit_signal("entry_logged", message, LogType.ERROR)
+	entry_logged.emit(message, LogType.ERROR)

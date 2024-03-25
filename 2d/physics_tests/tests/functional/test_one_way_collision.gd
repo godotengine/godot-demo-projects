@@ -81,15 +81,15 @@ func _ready():
 		options.add_menu_item(OPTION_TEST_CASE_MOVING_PLATFORM_RIGID)
 		options.add_menu_item(OPTION_TEST_CASE_MOVING_PLATFORM_CHARACTER)
 
-		options.option_selected.connect(self._on_option_selected)
+		options.option_selected.connect(_on_option_selected)
 
 		$Controls/PlatformSize/HSlider.value = _platform_size
 		$Controls/PlatformAngle/HSlider.value = _platform_angle
 		$Controls/BodyAngle/HSlider.value = _body_angle
 
 		remove_child(_target_area)
-		_target_area.body_entered.connect(self._on_target_entered)
-		$Timer.timeout.connect(self._on_timeout)
+		_target_area.body_entered.connect(_on_target_entered)
+		$Timer.timeout.connect(_on_timeout)
 
 		_rigid_body_template = $RigidBody2D
 		remove_child(_rigid_body_template)
@@ -236,13 +236,13 @@ func _start_test_case(option):
 
 	await _on_option_selected(option)
 
-	await self.all_tests_done
+	await all_tests_done
 
 
 func _wait_for_test():
 	await _reset_test()
 
-	await self.test_done
+	await test_done
 
 
 func _test_all_rigid_body():
@@ -331,7 +331,7 @@ func _test_moving_platform():
 		return
 
 	_platform_speed = 0.0
-	emit_signal("all_tests_done")
+	all_tests_done.emit()
 
 
 func _test_all():
@@ -373,7 +373,7 @@ func _start_test():
 		test_label += String(_rigid_body_template.name)
 		_moving_body = _rigid_body_template.duplicate()
 		_moving_body.linear_velocity = _body_velocity
-		_moving_body.body_entered.connect(self._on_contact_detected)
+		_moving_body.body_entered.connect(_on_contact_detected)
 	add_child(_moving_body)
 
 	if _platform_speed != 0.0:
@@ -411,7 +411,7 @@ func _reset_test(cancel_test = true):
 		if cancel_test:
 			Log.print_log("*** Stop around the clock tests")
 			_test_all_angles = false
-			emit_signal("all_tests_done")
+			all_tests_done.emit()
 		else:
 			Log.print_log("*** Start around the clock tests")
 		_platform_body.rotation = deg_to_rad(_platform_angle)
@@ -487,8 +487,8 @@ func _on_timeout():
 	$Timer.stop()
 
 	if _test_canceled:
-		emit_signal("test_done")
-		emit_signal("all_tests_done")
+		test_done.emit()
+		all_tests_done.emit()
 		return
 
 	if not _contact_detected and not _target_entered:
@@ -497,18 +497,18 @@ func _on_timeout():
 
 	await start_timer(0.5).timeout
 	if _test_canceled:
-		emit_signal("test_done")
-		emit_signal("all_tests_done")
+		test_done.emit()
+		all_tests_done.emit()
 		return
 
 	var was_all_angles = _test_all_angles
 
 	_next_test()
 
-	emit_signal("test_done")
+	test_done.emit()
 
 	if was_all_angles and not _test_all_angles:
-		emit_signal("all_tests_done")
+		all_tests_done.emit()
 
 
 func _set_result():

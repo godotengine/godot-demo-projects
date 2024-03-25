@@ -15,7 +15,7 @@ func _ready():
 
 	options.add_menu_item(OPTION_TEST_CASE_HIT_FROM_INSIDE, true, false)
 
-	options.option_changed.connect(self._on_option_changed)
+	options.option_changed.connect(_on_option_changed)
 
 	_material.flags_unshaded = true
 	_material.vertex_color_use_as_albedo = true

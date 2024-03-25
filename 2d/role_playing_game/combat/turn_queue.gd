@@ -23,7 +23,7 @@ func get_next_in_queue():
 	var current_combatant = queue.pop_front()
 	current_combatant.active = false
 	queue.append(current_combatant)
-	self.active_combatant = queue[0]
+	active_combatant = queue[0]
 	return active_combatant
 
 
@@ -33,7 +33,7 @@ func remove(combatant):
 		new_queue.append(n)
 	new_queue.remove(new_queue.find(combatant))
 	combatant.queue_free()
-	self.queue = new_queue
+	queue = new_queue
 
 
 func set_queue(new_queue):
@@ -44,10 +44,10 @@ func set_queue(new_queue):
 		queue.append(node)
 		node.active = false
 	if queue.size() > 0:
-		self.active_combatant = queue[0]
+		active_combatant = queue[0]
 
 
 func _set_active_combatant(new_combatant):
 	active_combatant = new_combatant
 	active_combatant.active = true
-	emit_signal("active_combatant_changed", active_combatant)
+	active_combatant_changed.emit(active_combatant)

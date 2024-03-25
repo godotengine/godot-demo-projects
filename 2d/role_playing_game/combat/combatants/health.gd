@@ -17,15 +17,15 @@ func _ready():
 func take_damage(damage):
 	life = life - damage + armor
 	if life <= 0:
-		emit_signal("dead")
+		dead.emit()
 	else:
-		emit_signal("health_changed", life)
+		health_changed.emit(life)
 
 
 func heal(amount):
 	life += amount
 	life = clamp(life, life, max_life)
-	emit_signal("health_changed", life)
+	health_changed.emit(life)
 
 
 func get_health_ratio():

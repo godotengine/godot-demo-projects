@@ -12,9 +12,9 @@ var last_event_time: float = -1.0
 @onready var node_area = $Quad/Area3D
 
 func _ready():
-	node_area.mouse_entered.connect(self._mouse_entered_area)
-	node_area.mouse_exited.connect(self._mouse_exited_area)
-	node_area.input_event.connect(self._mouse_input_event)
+	node_area.mouse_entered.connect(_mouse_entered_area)
+	node_area.mouse_exited.connect(_mouse_exited_area)
+	node_area.input_event.connect(_mouse_input_event)
 
 	# If the material is NOT set to use billboard settings, then avoid running billboard specific code
 	if node_quad.get_surface_override_material(0).billboard_mode == BaseMaterial3D.BillboardMode.BILLBOARD_DISABLED:

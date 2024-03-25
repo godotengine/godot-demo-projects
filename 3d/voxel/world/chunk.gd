@@ -30,7 +30,7 @@ func _ready():
 	_generate_chunk_collider()
 	# However, we can use a thread for mesh generation.
 	_thread = Thread.new()
-	_thread.start(self._generate_chunk_mesh)
+	_thread.start(_generate_chunk_mesh)
 
 
 func regenerate():
