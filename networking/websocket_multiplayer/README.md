@@ -4,7 +4,7 @@ This is a sample showing how the use WebSockets along with the Multiplayer API i
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/540
 

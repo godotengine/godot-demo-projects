@@ -20,7 +20,7 @@ func _ready():
 		_target_math = _shadow_root.get_parent().get_child(index - 1).get_child(0)
 
 
-func _process(_delta):
+func _physics_process(_delta):
 	if _target_math == null:
 		if _shadow_root != null:
 			_shadow_root.visible = false

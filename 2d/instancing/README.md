@@ -5,7 +5,7 @@ make many duplicates of the same object.
 
 Language: GDScript
 
-Renderer: Vulkan Mobile
+Renderer: Compatibility
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/148
 

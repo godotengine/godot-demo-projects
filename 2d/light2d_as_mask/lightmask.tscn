@@ -8,6 +8,7 @@ light_mode = 2
 
 [sub_resource type="Animation" id="2"]
 length = 4.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -55,6 +56,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
@@ -69,22 +72,24 @@ texture = ExtResource("1")
 
 [node name="Light1" type="PointLight2D" parent="."]
 position = Vector2(601.028, 242.639)
+blend_mode = 2
 texture = ExtResource("2")
 
 [node name="Light2" type="PointLight2D" parent="."]
 position = Vector2(196.528, 185.139)
+blend_mode = 2
 texture = ExtResource("2")
 
 [node name="Light3" type="PointLight2D" parent="."]
 position = Vector2(442.528, 411.139)
+blend_mode = 2
 texture = ExtResource("2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "maskmotion"
 libraries = {
 "": SubResource("AnimationLibrary_co4us")
 }
+autoplay = "maskmotion"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(576, 324)
-current = true

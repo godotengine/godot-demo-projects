@@ -20,7 +20,7 @@ for more information.
 
 Languages: GDScript
 
-Renderer: Forward Mobile
+Renderer: Mobile
 
 ## Screenshots
 

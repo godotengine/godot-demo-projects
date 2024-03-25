@@ -6,7 +6,7 @@ there is a simple character controller that controls the animations.
 
 Language: GDScript
 
-Renderer: GL Compatibility
+Renderer: Compatibility
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/1027
 

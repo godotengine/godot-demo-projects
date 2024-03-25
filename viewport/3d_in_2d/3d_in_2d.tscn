@@ -29,7 +29,22 @@ region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="7"]
 animations = [{
-"frames": [SubResource("2"), SubResource("3"), SubResource("4"), SubResource("5"), SubResource("6")],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("2")
+}, {
+"duration": 1.0,
+"texture": SubResource("3")
+}, {
+"duration": 1.0,
+"texture": SubResource("4")
+}, {
+"duration": 1.0,
+"texture": SubResource("5")
+}, {
+"duration": 1.0,
+"texture": SubResource("6")
+}],
 "loop": true,
 "name": &"default",
 "speed": 5.0
@@ -51,10 +66,10 @@ position = Vector2(650, 300)
 texture = SubResource("ViewportTexture_2squv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 position = Vector2(350, 300)
 scale = Vector2(3, 3)
-frames = SubResource("7")
+sprite_frames = SubResource("7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(512, 300)
-current = true

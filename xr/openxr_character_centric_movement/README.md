@@ -3,8 +3,8 @@
 This is a demo for an OpenXR project where player movement is handled with a CharacterBody3D as a base node.
 This is based on the [Character body centric solution as explained in the room scale manual page](https://docs.godotengine.org/en/stable/tutorials/xr/xr_room_scale.html#character-body-centric-solution).
 
-Godot version: 4.1.x
 Language: GDScript
+
 Renderer: compatibility
 
 ## How does it work?
@@ -51,4 +51,3 @@ Please follow [the instructions for deploying on Android in the manual](https://
 ## Screenshots
 
 ![Screenshot](screenshots/character_movement_demo.png)
-

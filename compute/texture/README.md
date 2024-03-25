@@ -7,7 +7,7 @@ When the mouse cursor is above the plane you can "draw" on the plane to drive th
 
 Language: GDScript
 
-Renderer: Forward Plus
+Renderer: Forward+
 
 > Note: this demo requires Godot 4.2 or later
 
