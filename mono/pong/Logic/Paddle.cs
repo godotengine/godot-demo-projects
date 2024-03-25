@@ -12,19 +12,19 @@ public partial class Paddle : Area2D
 
     public override void _Ready()
     {
-        string name = Name.ToLower();
+        string name = Name.ToString().ToLower();
         _up = name + "_move_up";
         _down = name + "_move_down";
         _ballDir = name == "left" ? 1 : -1;
     }
 
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         // Move up and down based on input.
         float input = Input.GetActionStrength(_down) - Input.GetActionStrength(_up);
         Vector2 position = Position; // Required so that we can modify position.y.
-        position += new Vector2(0, input * MoveSpeed * delta);
-        position.y = Mathf.Clamp(position.y, 16, GetViewportRect().Size.y - 16);
+        position += new Vector2(0, input * MoveSpeed * (float)delta);
+        position = new(position.X, Mathf.Clamp(position.Y, 16, GetViewportRect().Size.X - 16));
         Position = position;
     }
 
