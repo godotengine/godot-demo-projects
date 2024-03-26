@@ -29,6 +29,6 @@ heightmap.
 
 Languages: GDScript, GLSL
 
-Renderer: Forward Mobile
+Renderer: Mobile
 
 ![Compute Shader Heightmap](screenshots/compute_shader_heightmap.webp)

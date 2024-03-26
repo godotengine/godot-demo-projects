@@ -8,7 +8,7 @@ Performance metrics are also displayed to evaluate potential performance gains.
 
 Language: GDScript
 
-Renderer: Forward Plus
+Renderer: Forward+
 
 ## Screenshots
 

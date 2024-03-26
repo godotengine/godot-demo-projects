@@ -6,7 +6,7 @@ to disable collisions per layer.
 
 Language: GDScript
 
-Renderer: OpenGL
+Renderer: Compatibility
 
 ## Screenshots
 

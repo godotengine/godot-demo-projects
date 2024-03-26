@@ -6,7 +6,7 @@ and [`LightOccluder2D`](https://docs.godotengine.org/en/latest/classes/class_lig
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/116
 

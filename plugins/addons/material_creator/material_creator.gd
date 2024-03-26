@@ -16,27 +16,27 @@ func _ready():
 
 
 func save_pressed():
-	get_node(^"SaveMaterialDialog").popup_centered()
+	get_node(^"SaveMaterialDialog").popup_centered_ratio()
 
 
 func load_pressed():
-	get_node(^"LoadMaterialDialog").popup_centered()
+	get_node(^"LoadMaterialDialog").popup_centered_ratio()
 
 
 func apply_pressed():
 	# Using the passed in editor interface, get the selected nodes in the editor.
 	var editor_selection = editor_interface.get_selection()
 	var selected_nodes = editor_selection.get_selected_nodes()
-	if selected_nodes.size() == 0:
-		printerr("Material Creator: Can't apply the material, because there are no nodes selected!")
+	if selected_nodes.is_empty():
+		push_error("Material Creator: Can't apply the material, because there are no nodes selected!")
 
 	var material = _silly_resource_from_values().make_material()
-	# Go through the selected nodes and see if they have the "set_surface_material"
+	# Go through the selected nodes and see if they have the "set_surface_override_material"
 	# function (which only MeshInstance3D has by default). If they do, then set the material
 	# to the silly material.
 	for node in selected_nodes:
-		if node.has_method("set_surface_material"):
-			node.set_surface_material(0, material)
+		if node.has_method("set_surface_override_material"):
+			node.set_surface_override_material(0, material)
 
 
 func save_file_selected(path):

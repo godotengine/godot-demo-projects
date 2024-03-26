@@ -6,7 +6,7 @@ var vertical_speed := 0.0
 var isometric_controls := true
 @onready var _parent_node25d: Node25D = get_parent()
 
-func _process(delta):
+func _physics_process(delta):
 	if Input.is_action_pressed(&"exit"):
 		get_tree().quit()
 
@@ -16,8 +16,9 @@ func _process(delta):
 
 	if Input.is_action_just_pressed(&"toggle_isometric_controls"):
 		isometric_controls = not isometric_controls
-	if Input.is_action_just_pressed(&"reset_position"):
-		transform = Transform3D(Basis(), Vector3.UP * 10)
+	if Input.is_action_just_pressed(&"reset_position") or position.y <= -100:
+		# Reset player position if the player fell down into the void.
+		transform = Transform3D(Basis(), Vector3.UP * 0.5)
 		vertical_speed = 0
 	else:
 		_horizontal_movement(delta)
@@ -37,7 +38,7 @@ func _horizontal_movement(delta):
 	var movement_vec2 = Input.get_vector(&"move_left", &"move_right", &"move_forward", &"move_back")
 	var move_dir = localX * movement_vec2.x + localZ * movement_vec2.y
 
-	velocity = move_dir * delta * 600
+	velocity = move_dir * delta * 1200
 	if Input.is_action_pressed(&"movement_modifier"):
 		velocity /= 2
 
@@ -48,8 +49,8 @@ func _horizontal_movement(delta):
 func _vertical_movement(delta):
 	var localY = Vector3.UP
 	if Input.is_action_just_pressed(&"jump"):
-		vertical_speed = 1.25
-	vertical_speed -= delta * 5 # Gravity
+		vertical_speed = 0.55
+	vertical_speed -= delta * 2 # Gravity
 	var k = move_and_collide(localY * vertical_speed)
 	if k != null:
 		vertical_speed = 0

@@ -39,13 +39,15 @@ func _ready():
 		payment.query_purchases_response.connect(_on_query_purchases_response)
 		payment.startConnection()
 	else:
-		show_alert("Android IAP support is not enabled. Make sure you have enabled 'Custom Build' and installed and enabled the GodotGooglePlayBilling plugin in your Android export settings! This application will not work.")
+		show_alert('Android IAP support is not enabled.\n\nMake sure you have enabled "Custom Build" and installed and enabled the GodotGooglePlayBilling plugin in your Android export settings!\nThis application will not work otherwise.')
 
 
 func show_alert(text):
 	alert_dialog.dialog_text = text
-	alert_dialog.popup_centered()
-
+	alert_dialog.popup_centered_clamped(Vector2i(600, 0))
+	$QuerySkuDetailsButton.disabled = true
+	$PurchaseButton.disabled = true
+	$ConsumeButton.disabled = true
 
 func _on_connected():
 	print("PurchaseManager connected")
@@ -90,6 +92,10 @@ func _on_purchase_acknowledged(purchase_token):
 
 func _on_purchase_consumed(purchase_token):
 	show_alert("Purchase consumed successfully: %s" % purchase_token)
+
+
+func _on_connect_error(code, message):
+	show_alert("Connect error %d: %s" % [code, message])
 
 
 func _on_purchase_error(code, message):

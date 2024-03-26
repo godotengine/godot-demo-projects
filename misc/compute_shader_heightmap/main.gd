@@ -90,7 +90,7 @@ func init_gpu() -> void:
 	if rd == null:
 		OS.alert("""Couldn't create local RenderingDevice on GPU: %s
 
-Note: RenderingDevice is only available in the Forward Plus and Forward Mobile backends, not Compatibility.""" % RenderingServer.get_video_adapter_name())
+Note: RenderingDevice is only available in the Forward+ and Mobile rendering methods, not Compatibility.""" % RenderingServer.get_video_adapter_name())
 		return
 
 	# Prepare the shader.

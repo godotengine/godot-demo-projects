@@ -4,7 +4,7 @@ A demo showing how a 3D scene can be shown within a 2D one using viewports.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/128
 

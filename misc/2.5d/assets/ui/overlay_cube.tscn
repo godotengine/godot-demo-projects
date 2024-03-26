@@ -1,20 +1,19 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://c54vn5cyu7bwg"]
 
-[ext_resource path="res://assets/ui/control_hints.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://assets/ui/control_hints.gd" id="1"]
 
 [node name="Overlay" type="CanvasLayer"]
 
 [node name="ControlHints" type="CenterContainer" parent="."]
+anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 200.0
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="Label" type="Label" parent="ControlHints"]
-offset_left = 416.0
-offset_top = 25.0
-offset_right = 1183.0
-offset_bottom = 175.0
-rect_min_size = Vector2(500, 50)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 text = "
 Controls: WASDQE to rotate,  R to reset,  C to return to the world,  Tab to toggle hints.
 
@@ -24,5 +23,3 @@ O = Top Down,   K = Oblique Y,   L = Oblique Z
 Not every view mode is meant to be good, it's just to showcase what the system can do.
 In actual games, shadows, resizing, parallax, and other hints of depth could be added to make the world seem more 3D.
 "
-align = 1
-valign = 1

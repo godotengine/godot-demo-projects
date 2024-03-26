@@ -4,7 +4,7 @@ A demo showing how to use UI mirroring.
 
 Language: GDScript
 
-Renderer: Vulkan
+Renderer: Compatibility
 
 ## Screenshots
 
