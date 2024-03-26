@@ -60,3 +60,9 @@ desktop. For the best performance, consider downloading the demos.
 
 Those demos are distributed under the terms of the MIT license, as
 described in the [LICENSE.md](LICENSE.md) file.
+
+## Contributors
+
+[![Contributors image](https://contrib.rocks/image?repo=godotengine/godot-demo-projects&max=2000&columns=15)](https://github.com/godotengine/godot-demo-projects/graphs/contributors)
+
+Made with [contrib.rocks](https://contrib.rocks).
