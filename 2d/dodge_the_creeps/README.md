@@ -14,7 +14,7 @@ Renderer: Compatibility
 
 Note: There is a C# version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/dodge_the_creeps).
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/515
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2712
 
 ## Screenshots
 
