@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://u1nbrhmt1vqu"]
+[gd_scene load_steps=11 format=3 uid="uid://u1nbrhmt1vqu"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1"]
 [ext_resource type="Texture2D" uid="uid://bevol1mted15l" path="res://art/playerGrey_walk1.png" id="2"]
@@ -35,6 +35,18 @@ animations = [{
 radius = 24.0
 height = 62.0
 
+[sub_resource type="Curve" id="Curve_xn7wd"]
+_data = [Vector2(0, 0.508368), 0.0, 0.0, 0, 0, Vector2(1, 0.330544), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_bwdmc"]
+curve = SubResource("Curve_xn7wd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uytfv"]
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_curve = SubResource("CurveTexture_bwdmc")
+color = Color(1, 1, 1, 0.196078)
+
 [node name="Player" type="Area2D"]
 z_index = 10
 script = ExtResource("1")
@@ -46,5 +58,13 @@ animation = &"up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("2")
+
+[node name="Trail" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+z_index = -1
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_uytfv")
+texture = ExtResource("4")
+speed_scale = 2.0
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]
