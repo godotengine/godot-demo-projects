@@ -113,7 +113,7 @@ func _ready():
 			target = Node3D.new()
 			add_child(target)
 
-			if Engine.editor_hint:
+			if Engine.is_editor_hint():
 				if get_tree() != null:
 					if get_tree().edited_scene_root != null:
 						target.set_owner(get_tree().edited_scene_root)
@@ -123,7 +123,7 @@ func _ready():
 			target = $Target
 
 		# If we are in the editor, we want to make a sphere at this node
-		if Engine.editor_hint:
+		if Engine.is_editor_hint():
 			_make_editor_sphere_at_node(target, Color.MAGENTA)
 
 	if middle_joint_target == null:
@@ -131,7 +131,7 @@ func _ready():
 			middle_joint_target = Node3D.new()
 			add_child(middle_joint_target)
 
-			if Engine.editor_hint:
+			if Engine.is_editor_hint():
 				if get_tree() != null:
 					if get_tree().edited_scene_root != null:
 						middle_joint_target.set_owner(get_tree().edited_scene_root)
@@ -141,7 +141,7 @@ func _ready():
 			middle_joint_target = get_node(^"MiddleJoint")
 
 		# If we are in the editor, we want to make a sphere at this node
-		if Engine.editor_hint:
+		if Engine.is_editor_hint():
 			_make_editor_sphere_at_node(middle_joint_target, Color(1, 0.24, 1, 1))
 
 	# Make all of the bone nodes for each bone in the IK chain
@@ -446,7 +446,7 @@ func _make_bone_nodes():
 			bone_nodes[bone] = new_node
 			add_child(bone_nodes[bone])
 
-			if Engine.editor_hint:
+			if Engine.is_editor_hint():
 				if get_tree() != null:
 					if get_tree().edited_scene_root != null:
 						bone_nodes[bone].set_owner(get_tree().edited_scene_root)
@@ -457,5 +457,5 @@ func _make_bone_nodes():
 			bone_nodes[bone] = get_node(bone_name)
 
 		# If we are in the editor, we want to make a sphere at this node
-		if Engine.editor_hint:
+		if Engine.is_editor_hint():
 			_make_editor_sphere_at_node(bone_nodes[bone], Color(0.65, 0, 1, 1))
