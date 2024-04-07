@@ -5,7 +5,7 @@
 
 using Godot;
 
-namespace MultiResCS
+namespace MultipleResolutions
 {
     public partial class Main : Control
     {
