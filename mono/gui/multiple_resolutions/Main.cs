@@ -9,7 +9,7 @@ namespace MultiResCS
 {
     public partial class Main : Control
     {
-        Vector2 baseWindowSize = new Vector2(
+        Vector2 baseWindowSize = new(
             (float)ProjectSettings.GetSetting("display/window/size/viewport_width"),
             (float)ProjectSettings.GetSetting("display/window/size/viewport_height"));
 
