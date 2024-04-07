@@ -1,4 +1,4 @@
-# Multiple Resolutions and Aspect Ratios (dotnet)
+# Multiple Resolutions and Aspect Ratios with C#
 
 **Note:** This demo is intended to showcase what Godot can do in terms of
 supporting multiple resolutions and aspect ratios. As such, this demo very
@@ -8,6 +8,7 @@ If you're in a hurry and want to implement *decent* support for multiple
 resolutions and aspect ratios in your game, see [Multiple resolutions crash
 course](#multiple-resolutions-crash-course).
 
+**Note:** There is a GDScript version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/gui/multiple_resolutions)
 ___
 
 This project demonstrates how to set up a project to handle screens of multiple
