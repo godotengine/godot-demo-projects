@@ -29,7 +29,8 @@ func _ready():
 	if white_keys.get_child_count() != black_keys.get_child_count():
 		_add_placeholder_key(black_keys)
 	OS.open_midi_inputs()
-	print(OS.get_connected_midi_inputs())
+	if len(OS.get_connected_midi_inputs()) > 0:
+		print(OS.get_connected_midi_inputs())
 
 
 func _input(input_event):
