@@ -126,11 +126,12 @@ func _gui_input(event):
 
 
 func _recursive_change_view_mode(current_node):
-	if current_node:
-		if current_node.has_method("set_view_mode"):
-			current_node.set_view_mode(view_mode_index)
-		for child in current_node.get_children():
-			_recursive_change_view_mode(child)
+	if not current_node:
+		return
+	if current_node.has_method("set_view_mode"):
+		current_node.set_view_mode(view_mode_index)
+	for child in current_node.get_children():
+		_recursive_change_view_mode(child)
 
 
 func _get_zoom_amount():
