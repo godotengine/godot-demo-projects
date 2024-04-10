@@ -7,14 +7,15 @@ var pan_center: Vector2
 var viewport_center: Vector2
 var view_mode_index := 0
 
-var editor_interface: EditorInterface # Set in node25d_plugin.gd
+var editor_interface: EditorInterface  # Set in node25d_plugin.gd
 var moving = false
 
 @onready var viewport_2d = $Viewport2D
 @onready var viewport_overlay = $ViewportOverlay
-@onready var view_mode_button_group: ButtonGroup = $"../TopBar/ViewModeButtons/45Degree".group
+@onready var view_mode_button_group: ButtonGroup = $"../TopBar/ViewModeButtons/45Degree".button_group
 @onready var zoom_label: Label = $"../TopBar/Zoom/ZoomPercent"
 @onready var gizmo_25d_scene = preload("res://addons/node25d/main_screen/gizmo_25d.tscn")
+
 
 func _ready():
 	# Give Godot a chance to fully load the scene. Should take two frames.
@@ -29,17 +30,19 @@ func _ready():
 	# Alright, we're loaded up. Now check if we have a valid world and assign it.
 	var world_2d = edited_scene_root.get_viewport().world_2d
 	if world_2d == get_viewport().world_2d:
-		return # This is the MainScreen25D scene opened in the editor!
+		return  # This is the MainScreen25D scene opened in the editor!
 	viewport_2d.world_2d = world_2d
 
 
-func _process(delta):
-	if not editor_interface: # Something's not right... bail!
+func _process(_delta):
+	if not editor_interface:  # Something's not right... bail!
 		return
 
 	# View mode polling.
 	var view_mode_changed_this_frame = false
-	var new_view_mode = view_mode_button_group.get_pressed_button().get_index()
+	var new_view_mode = -1
+	if view_mode_button_group.get_pressed_button():
+		new_view_mode = view_mode_button_group.get_pressed_button().get_index()
 	if view_mode_index != new_view_mode:
 		view_mode_index = new_view_mode
 		view_mode_changed_this_frame = true
@@ -123,14 +126,15 @@ func _gui_input(event):
 
 
 func _recursive_change_view_mode(current_node):
-	if current_node.has_method("set_view_mode"):
-		current_node.set_view_mode(view_mode_index)
-	for child in current_node.get_children():
-		_recursive_change_view_mode(child)
+	if current_node:
+		if current_node.has_method("set_view_mode"):
+			current_node.set_view_mode(view_mode_index)
+		for child in current_node.get_children():
+			_recursive_change_view_mode(child)
 
 
 func _get_zoom_amount():
-	var zoom_amount = pow(1.05476607648, zoom_level) # 13th root of 2
+	var zoom_amount = pow(1.05476607648, zoom_level)  # 13th root of 2
 	zoom_label.text = str(round(zoom_amount * 1000) / 10) + "%"
 	return zoom_amount
 

@@ -22,11 +22,12 @@ var dominant_axis
 @onready var lines_root = $Lines
 @onready var lines = [$Lines/X, $Lines/Y, $Lines/Z]
 
+
 func _process(_delta):
 	if not lines:
-		return # Somehow this node hasn't been set up yet.
+		return  # Somehow this node hasn't been set up yet.
 	if not node_25d:
-		return # We're most likely viewing the Gizmo25D scene.
+		return  # We're most likely viewing the Gizmo25D scene.
 	# While getting the mouse position works in any viewport, it doesn't do
 	# anything significant unless the mouse is in the 2.5D viewport.
 	var mouse_position = get_local_mouse_position()
@@ -35,7 +36,7 @@ func _process(_delta):
 		var closest_distance = 20.0
 		dominant_axis = -1
 		for i in range(3):
-			lines[i].modulate.a = 0.8 # Unrelated, but needs a loop too.
+			lines[i].modulate.a = 0.8  # Unrelated, but needs a loop too.
 			var distance = _distance_to_segment_at_index(i, mouse_position)
 			if distance < closest_distance:
 				closest_distance = distance
@@ -70,7 +71,9 @@ func _process(_delta):
 		# Make sure the gizmo is located at the object.
 		global_position = node_25d.global_position
 		if ROUGHLY_ROUND_TO_PIXELS:
-			spatial_node.transform.origin = (spatial_node.transform.origin * Node25D.SCALE).round() / Node25D.SCALE
+			spatial_node.transform.origin = (
+				(spatial_node.transform.origin * Node25D.SCALE).round() / Node25D.SCALE
+			)
 	# Move the gizmo lines appropriately.
 	lines_root.global_position = node_25d.global_position
 	node_25d.property_list_changed_notify()
