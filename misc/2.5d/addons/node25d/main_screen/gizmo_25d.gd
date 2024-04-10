@@ -71,9 +71,7 @@ func _process(_delta):
 		# Make sure the gizmo is located at the object.
 		global_position = node_25d.global_position
 		if ROUGHLY_ROUND_TO_PIXELS:
-			spatial_node.transform.origin = (
-				(spatial_node.transform.origin * Node25D.SCALE).round() / Node25D.SCALE
-			)
+			spatial_node.transform.origin = (spatial_node.transform.origin * Node25D.SCALE).round() / Node25D.SCALE
 	# Move the gizmo lines appropriately.
 	lines_root.global_position = node_25d.global_position
 	node_25d.property_list_changed_notify()

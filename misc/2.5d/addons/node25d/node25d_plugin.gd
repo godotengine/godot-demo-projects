@@ -17,15 +17,8 @@ func _enter_tree():
 	_make_visible(false)
 	# When this plugin node enters tree, add the custom types.
 	add_custom_type("Node25D", "Node2D", preload("node_25d.gd"), preload("icons/node_25d_icon.png"))
-	add_custom_type(
-		"YSort25D", "Node", preload("y_sort_25d.gd"), preload("icons/y_sort_25d_icon.png")
-	)
-	add_custom_type(
-		"ShadowMath25D",
-		"CharacterBody3D",
-		preload("shadow_math_25d.gd"),
-		preload("icons/shadow_math_25d_icon.png")
-	)
+	add_custom_type("YSort25D", "Node", preload("y_sort_25d.gd"), preload("icons/y_sort_25d_icon.png"))
+	add_custom_type("ShadowMath25D", "CharacterBody3D", preload("shadow_math_25d.gd"), preload("icons/shadow_math_25d_icon.png"))
 
 
 func _exit_tree():
