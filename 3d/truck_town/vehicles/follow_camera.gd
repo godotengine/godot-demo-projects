@@ -24,7 +24,7 @@ var base_fov := fov
 var desired_fov := fov
 
 # Position on the last physics frame (used to measure speed).
-var previous_position: Vector3
+@onready var previous_position := global_position
 
 enum CameraType {
 	EXTERIOR,
@@ -34,7 +34,6 @@ enum CameraType {
 }
 
 func _ready():
-	previous_position = global_position
 	update_camera()
 
 
