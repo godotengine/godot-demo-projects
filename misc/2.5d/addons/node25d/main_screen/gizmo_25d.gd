@@ -74,7 +74,7 @@ func _process(_delta):
 			spatial_node.transform.origin = (spatial_node.transform.origin * Node25D.SCALE).round() / Node25D.SCALE
 	# Move the gizmo lines appropriately.
 	lines_root.global_position = node_25d.global_position
-	node_25d.property_list_changed_notify()
+	node_25d.notify_property_list_changed()
 
 
 # Initializes after _ready due to the onready vars, called manually in Viewport25D.gd.

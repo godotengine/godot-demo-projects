@@ -1,12 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bg27d8sfehmr4"]
+[gd_scene load_steps=6 format=4 uid="uid://bg27d8sfehmr4"]
 
 [ext_resource type="Script" path="res://addons/node25d/node_25d.gd" id="1"]
 [ext_resource type="Script" path="res://assets/player/player_math_25d.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://bfdfertqyhf1u" path="res://assets/player/textures/jump.png" id="4"]
 [ext_resource type="Script" path="res://assets/player/player_sprite.gd" id="5"]
 
-[sub_resource type="BoxShape3D" id="1"]
-size = Vector3(1, 2, 1)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b17hs"]
 
 [node name="Player25D" type="Node2D"]
 z_index = 100
@@ -19,7 +18,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerMath25D"]
-shape = SubResource("1")
+shape = SubResource("CapsuleShape3D_b17hs")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 z_index = 1
