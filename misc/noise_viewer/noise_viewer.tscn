@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://835hb2c3ckoi"]
 
 [ext_resource type="Script" path="res://noise_viewer.gd" id="1_a6h72"]
-[ext_resource type="Material" path="res://noise_viewer_material.tres" id="2_lywnk"]
+[ext_resource type="Material" uid="uid://dnxbb2gtigc6b" path="res://noise_viewer_material.tres" id="2_lywnk"]
 
 [sub_resource type="FastNoiseLite" id="1"]
 
@@ -48,17 +48,10 @@ grow_horizontal = 0
 
 [node name="DocumentationButton" type="Button" parent="ButtonsContainer"]
 layout_mode = 2
-offset_right = 159.0
-offset_bottom = 31.0
-grow_horizontal = 0
 text = "API Documentation"
 
 [node name="RandomSeedButton" type="Button" parent="ButtonsContainer"]
 layout_mode = 2
-offset_top = 35.0
-offset_right = 159.0
-offset_bottom = 66.0
-grow_horizontal = 0
 text = "Random Seed"
 
 [node name="ParameterContainer" type="VBoxContainer" parent="."]
@@ -68,8 +61,6 @@ offset_bottom = 136.0
 
 [node name="SeedSpinBox" type="SpinBox" parent="ParameterContainer"]
 layout_mode = 2
-offset_right = 280.0
-offset_bottom = 31.0
 min_value = -2.14748e+09
 max_value = 2.14748e+09
 allow_greater = true
@@ -78,9 +69,6 @@ prefix = "Seed:"
 
 [node name="FrequencySpinBox" type="SpinBox" parent="ParameterContainer"]
 layout_mode = 2
-offset_top = 35.0
-offset_right = 280.0
-offset_bottom = 66.0
 min_value = -100000.0
 max_value = 100000.0
 step = 0.005
@@ -90,9 +78,6 @@ prefix = "Frequency:"
 
 [node name="FractalOctavesSpinBox" type="SpinBox" parent="ParameterContainer"]
 layout_mode = 2
-offset_top = 70.0
-offset_right = 280.0
-offset_bottom = 101.0
 min_value = 1.0
 max_value = 9.0
 value = 1.0
@@ -100,9 +85,6 @@ prefix = "Fractal Octaves:"
 
 [node name="FractalGainSpinBox" type="SpinBox" parent="ParameterContainer"]
 layout_mode = 2
-offset_top = 105.0
-offset_right = 280.0
-offset_bottom = 136.0
 max_value = 1000.0
 step = 0.05
 allow_greater = true
@@ -110,9 +92,6 @@ prefix = "Fractal Gain:"
 
 [node name="FractalLacunaritySpinBox" type="SpinBox" parent="ParameterContainer"]
 layout_mode = 2
-offset_top = 140.0
-offset_right = 280.0
-offset_bottom = 171.0
 step = 0.05
 allow_greater = true
 prefix = "Fractal Lacunarity:"
@@ -128,8 +107,6 @@ grow_vertical = 0
 
 [node name="MinClipSpinBox" type="SpinBox" parent="ClipContainer"]
 layout_mode = 2
-offset_right = 280.0
-offset_bottom = 31.0
 min_value = -1.0
 max_value = 1.0
 step = 0.01
@@ -138,9 +115,6 @@ prefix = "Clip Min:"
 
 [node name="MaxClipSpinBox" type="SpinBox" parent="ClipContainer"]
 layout_mode = 2
-offset_top = 35.0
-offset_right = 280.0
-offset_bottom = 66.0
 min_value = -1.0
 max_value = 1.0
 step = 0.01

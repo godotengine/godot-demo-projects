@@ -30,7 +30,7 @@ func _process(delta):
 		if movement:
 			hframes = 6
 			texture = _run
-			if (Input.is_action_pressed(&"movement_modifier")):
+			if Input.is_action_pressed(&"movement_modifier"):
 				delta /= 2
 			_progress = fmod((_progress + FRAMERATE * delta), 6)
 			frame = _direction * 6 + int(_progress)

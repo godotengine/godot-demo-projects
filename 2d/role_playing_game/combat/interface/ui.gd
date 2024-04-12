@@ -13,7 +13,7 @@ func initialize():
 		health_info.value = health.life
 		health_info.max_value = health.max_life
 		info.get_node("VBoxContainer/NameContainer/Name").text = combatant.name
-		health.connect("health_changed", Callable(health_info, "set_value"))
+		health.health_changed.connect(health_info.set_value)
 		$Combatants.add_child(info)
 	$Buttons/GridContainer/Attack.grab_focus()
 

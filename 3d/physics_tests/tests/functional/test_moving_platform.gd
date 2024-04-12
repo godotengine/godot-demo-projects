@@ -55,8 +55,8 @@ func _ready():
 	options.add_menu_item(OPTION_ROUGH, true, false)
 	options.add_menu_item(OPTION_PROCESS_PHYSICS, true, false)
 
-	options.option_selected.connect(self._on_option_selected)
-	options.option_changed.connect(self._on_option_changed)
+	options.option_selected.connect(_on_option_selected)
+	options.option_changed.connect(_on_option_changed)
 
 	_shapes[SHAPE_CAPSULE] = "Capsule"
 	_shapes[SHAPE_BOX] = "Box"

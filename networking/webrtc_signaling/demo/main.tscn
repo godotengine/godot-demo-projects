@@ -13,78 +13,57 @@ anchor_bottom = 0.983333
 script = ExtResource("1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Signaling" type="HBoxContainer" parent="VBoxContainer"]
-offset_right = 1120.0
-offset_bottom = 31.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/Signaling"]
-offset_top = 2.0
-offset_right = 127.0
-offset_bottom = 28.0
+layout_mode = 2
 text = "Signaling server:"
 
 [node name="Port" type="SpinBox" parent="VBoxContainer/Signaling"]
-offset_left = 131.0
-offset_right = 214.0
-offset_bottom = 31.0
+layout_mode = 2
 min_value = 1025.0
 max_value = 65535.0
 value = 9080.0
 
 [node name="ListenButton" type="Button" parent="VBoxContainer/Signaling"]
-offset_left = 218.0
-offset_right = 273.0
-offset_bottom = 31.0
+layout_mode = 2
 toggle_mode = true
 text = "Listen"
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/Signaling"]
-offset_left = 277.0
-offset_right = 1120.0
-offset_bottom = 31.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="LinkButton" type="LinkButton" parent="VBoxContainer/Signaling/CenterContainer"]
-offset_left = 91.0
-offset_top = 4.0
-offset_right = 752.0
-offset_bottom = 27.0
-text = "Make sure to download the GDNative WebRTC Plugin and place it in the project folder"
+modulate = Color(1, 0.956863, 0.207843, 1)
+layout_mode = 2
+text = "Make sure to download the GDExtension WebRTC Plugin and place it in the project folder"
 
 [node name="Clients" type="GridContainer" parent="VBoxContainer"]
-offset_top = 35.0
-offset_right = 1120.0
-offset_bottom = 626.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
 
 [node name="ClientUI" parent="VBoxContainer/Clients" instance=ExtResource("2")]
-offset_right = 558.0
-offset_bottom = 294.0
+layout_mode = 2
 
 [node name="ClientUI2" parent="VBoxContainer/Clients" instance=ExtResource("2")]
-offset_left = 562.0
-offset_right = 1120.0
-offset_bottom = 294.0
+layout_mode = 2
 
 [node name="ClientUI3" parent="VBoxContainer/Clients" instance=ExtResource("2")]
-offset_top = 298.0
-offset_right = 558.0
-offset_bottom = 591.0
+layout_mode = 2
 
 [node name="ClientUI4" parent="VBoxContainer/Clients" instance=ExtResource("2")]
-offset_left = 562.0
-offset_top = 298.0
-offset_right = 1120.0
-offset_bottom = 591.0
+layout_mode = 2
 
 [node name="Server" type="Node" parent="."]
 script = ExtResource("3")

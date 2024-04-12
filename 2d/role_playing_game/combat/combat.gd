@@ -9,7 +9,7 @@ func initialize(combat_combatants):
 		combatant = combatant.instantiate()
 		if combatant is Combatant:
 			$Combatants.add_combatant(combatant)
-			combatant.get_node("Health").connect("dead", Callable(self, "_on_combatant_death").bind(combatant))
+			combatant.get_node("Health").dead.connect(_on_combatant_death.bind(combatant))
 		else:
 			combatant.queue_free()
 	$UI.initialize()
@@ -24,7 +24,7 @@ func clear_combat():
 
 
 func finish_combat(winner, loser):
-	emit_signal("combat_finished", winner, loser)
+	combat_finished.emit(winner, loser)
 
 
 func _on_combatant_death(combatant):

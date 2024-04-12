@@ -57,7 +57,7 @@ var simple_bullet = preload("res://fps/simple_bullet.tscn")
 
 
 func _ready():
-	anim_player.animation_finished.connect(self.animation_finished)
+	anim_player.animation_finished.connect(animation_finished)
 
 	set_physics_process(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

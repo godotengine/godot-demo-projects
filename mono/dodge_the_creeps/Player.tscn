@@ -1,72 +1,76 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=4 uid="uid://u1nbrhmt1vqu"]
 
-[ext_resource path="res://Player.cs" type="Script" id=1]
-[ext_resource path="res://art/playerGrey_walk1.png" type="Texture2D" id=2]
-[ext_resource path="res://art/playerGrey_walk2.png" type="Texture2D" id=3]
-[ext_resource path="res://art/playerGrey_up1.png" type="Texture2D" id=4]
-[ext_resource path="res://art/playerGrey_up2.png" type="Texture2D" id=5]
+[ext_resource type="Script" path="res://Player.cs" id="1"]
+[ext_resource type="Texture2D" uid="uid://bevol1mted15l" path="res://art/playerGrey_walk1.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://0sl7rvmm0hy8" path="res://art/playerGrey_walk2.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://ddykfjshfswbs" path="res://art/playerGrey_up1.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://03fwq5c2p4k3" path="res://art/playerGrey_up2.png" id="5"]
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id="1"]
 animations = [{
-"frames": [ExtResource( 2 ), ExtResource( 3 )],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3")
+}],
 "loop": true,
-"name": "right",
+"name": &"right",
 "speed": 5.0
 }, {
-"frames": [ExtResource( 4 ), ExtResource( 5 )],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5")
+}],
 "loop": true,
-"name": "up",
+"name": &"up",
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 27.3777
-height = 14.0303
+[sub_resource type="CapsuleShape2D" id="2"]
+radius = 27.0
+height = 68.0
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id="3"]
 colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture1D" id="4"]
+gradient = SubResource("3")
 
-[sub_resource type="Curve" id=5]
-_data = [Vector2(0.00451484, 0.5176), 0.0, 0.0, 0, 0, Vector2(0.98702, 0.3152), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="5"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0.333333), 0.0, 0.0, 0, 0]
+point_count = 2
 
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
+[sub_resource type="CurveTexture" id="6"]
+curve = SubResource("5")
 
-[sub_resource type="ParticlesMaterial" id=7]
-flag_disable_z = true
+[sub_resource type="ParticleProcessMaterial" id="7"]
 gravity = Vector3(0, 0, 0)
-initial_velocity = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 0.75
-scale_curve = SubResource( 6 )
-color_ramp = SubResource( 4 )
+scale_curve = SubResource("6")
+color_ramp = SubResource("4")
 
 [node name="Player" type="Area2D"]
 z_index = 10
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
+script = ExtResource("1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-frames = SubResource( 1 )
-animation = "right"
+sprite_frames = SubResource("1")
+animation = &"right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource("2")
 
 [node name="Trail" type="GPUParticles2D" parent="."]
 show_behind_parent = true
 z_index = -1
 amount = 10
+process_material = SubResource("7")
+texture = ExtResource("2")
 speed_scale = 2.0
-local_coords = false
-process_material = SubResource( 7 )
-texture = ExtResource( 2 )
 
-[connection signal="body_entered" from="." to="." method="OnPlayerBodyEntered"]
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

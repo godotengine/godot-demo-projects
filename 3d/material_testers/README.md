@@ -8,7 +8,7 @@ This demo was featured at the beginning of the
 
 Language: GDScript
 
-Renderer: Forward Plus
+Renderer: Forward+
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/123
 

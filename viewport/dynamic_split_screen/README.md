@@ -5,7 +5,7 @@ split screen, also called Voronoi split screen.
 
 Language: [Godot shader language](https://docs.godotengine.org/en/latest/tutorials/shaders/shader_reference/shading_language.html) and GDScript
 
-Renderer: Forward Mobile
+Renderer: Compatibility
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/541
 

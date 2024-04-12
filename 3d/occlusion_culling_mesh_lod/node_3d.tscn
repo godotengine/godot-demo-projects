@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dp872nvjdbsc2"]
+[gd_scene load_steps=13 format=3 uid="uid://dp872nvjdbsc2"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://cop123efet6j2" path="res://node_3d.occ" id="1_clbmh"]
 [ext_resource type="Script" path="res://node_3d.gd" id="1_x3hdm"]
 [ext_resource type="Script" path="res://camera.gd" id="2_6krsy"]
 [ext_resource type="PackedScene" uid="uid://ck4wa4vxhhk1v" path="res://room.glb" id="2_fu476"]
+[ext_resource type="PackedScene" uid="uid://b72b3llm3ks25" path="res://door.tscn" id="5_cprsk"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_gmnym"]
 energy_multiplier = 2.63
@@ -77,9 +78,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_4es5y")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4, 0)
 light_color = Color(1, 0.909804, 0.537255, 1)
 shadow_enabled = true
-shadow_bias = 0.1
+shadow_bias = 0.07
 shadow_blur = 3.0
-omni_range = 7.0
+omni_range = 8.0
 
 [node name="Room2" parent="Rooms" instance=ExtResource("2_fu476")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
@@ -3150,6 +3151,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110, 0, 190)
 [node name="Room1024" parent="Rooms" instance=ExtResource("2_fu476")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110, 0, 180)
 
+[node name="Doors" type="Node3D" parent="."]
+
+[node name="DoorNegX" parent="Doors" instance=ExtResource("5_cprsk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0)
+
+[node name="DoorPosX" parent="Doors" instance=ExtResource("5_cprsk")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 15, 0, 0)
+
+[node name="DoorNegZ" parent="Doors" instance=ExtResource("5_cprsk")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.55671e-07, 0, -15)
+
+[node name="DoorPosZ" parent="Doors" instance=ExtResource("5_cprsk")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.55671e-07, 0, 15)
+
 [node name="OcclusionCulling" type="Label" parent="."]
 offset_left = 16.0
 offset_top = 16.0
@@ -3190,6 +3205,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "O: Toggle occlusion culling
 L: Toggle mesh LOD
+F: Open/close doors
+V: Toggle V-Sync
 Space: Cycle between draw modes
 Escape or F10: Toggle mouse capture"
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmn8nkpogiwsf"]
+[gd_scene load_steps=9 format=3 uid="uid://dmn8nkpogiwsf"]
 
 [ext_resource type="PackedScene" uid="uid://bpdyvy2681m3i" path="res://player/Player.tscn" id="1"]
+[ext_resource type="FontFile" uid="uid://b5bspum6ffekd" path="res://fonts/SourceCodePro-Bold.ttf" id="2_r1c5f"]
 [ext_resource type="PackedScene" uid="uid://cvi13chv8g4hj" path="res://debug/StatesStackDiplayer.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://bq6rrfy53rfvo" path="res://debug/ControlsPanel.tscn" id="4"]
 
@@ -42,6 +43,9 @@ start_state = NodePath("Idle")
 libraries = {
 "": SubResource("AnimationLibrary_qbwwp")
 }
+
+[node name="StateNameDisplayer" parent="Player" index="5"]
+theme_override_fonts/font = ExtResource("2_r1c5f")
 
 [node name="Explanations" type="RichTextLabel" parent="."]
 anchors_preset = 15

@@ -24,21 +24,21 @@ func set_active(value):
 
 func attack(target):
 	target.take_damage(damage)
-	emit_signal("turn_finished")
+	turn_finished.emit()
 
 
 func consume(item):
 	item.use(self)
-	emit_signal("turn_finished")
+	turn_finished.emit()
 
 
 func defend():
 	$Health.armor += defense
-	emit_signal("turn_finished")
+	turn_finished.emit()
 
 
 func flee():
-	emit_signal("turn_finished")
+	turn_finished.emit()
 
 
 func take_damage(damage_to_take):

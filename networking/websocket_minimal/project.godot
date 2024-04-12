@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="WebSocket Minimal Demo"
-config/description="This is a minimal sample of connecting two peers to each other using websockets."
+config/description="This is a minimal sample of connecting two peers to each other using WebSockets."
 config/tags=PackedStringArray("demo", "network", "official")
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.2")
@@ -20,9 +20,10 @@ config/features=PackedStringArray("4.2")
 
 window/size/viewport_width=600
 window/size/viewport_height=300
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
-vram_compression/import_etc=true
-vram_compression/import_etc2=false
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

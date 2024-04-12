@@ -12,25 +12,25 @@ extends Panel
 
 func _ready():
 	# Assign all of the needed signals for the oppersation buttons.
-	$ButtonUndo.pressed.connect(self.button_pressed.bind("undo_stroke"))
-	$ButtonSave.pressed.connect(self.button_pressed.bind("save_picture"))
-	$ButtonClear.pressed.connect(self.button_pressed.bind("clear_picture"))
+	$ButtonUndo.pressed.connect(button_pressed.bind("undo_stroke"))
+	$ButtonSave.pressed.connect(button_pressed.bind("save_picture"))
+	$ButtonClear.pressed.connect(button_pressed.bind("clear_picture"))
 
 	# Assign all of the needed signals for the brush buttons.
-	$ButtonToolPencil.pressed.connect(self.button_pressed.bind("mode_pencil"))
-	$ButtonToolEraser.pressed.connect(self.button_pressed.bind("mode_eraser"))
-	$ButtonToolRectangle.pressed.connect(self.button_pressed.bind("mode_rectangle"))
-	$ButtonToolCircle.pressed.connect(self.button_pressed.bind("mode_circle"))
-	$BrushSettings/ButtonShapeBox.pressed.connect(self.button_pressed.bind("shape_rectangle"))
-	$BrushSettings/ButtonShapeCircle.pressed.connect(self.button_pressed.bind("shape_circle"))
+	$ButtonToolPencil.pressed.connect(button_pressed.bind("mode_pencil"))
+	$ButtonToolEraser.pressed.connect(button_pressed.bind("mode_eraser"))
+	$ButtonToolRectangle.pressed.connect(button_pressed.bind("mode_rectangle"))
+	$ButtonToolCircle.pressed.connect(button_pressed.bind("mode_circle"))
+	$BrushSettings/ButtonShapeBox.pressed.connect(button_pressed.bind("shape_rectangle"))
+	$BrushSettings/ButtonShapeCircle.pressed.connect(button_pressed.bind("shape_circle"))
 
 	# Assign all of the needed signals for the other brush settings (and ColorPickerBackground).
-	$ColorPickerBrush.color_changed.connect(self.brush_color_changed)
-	$ColorPickerBackground.color_changed.connect(self.background_color_changed)
-	$BrushSettings/HScrollBarBrushSize.value_changed.connect(self.brush_size_changed)
+	$ColorPickerBrush.color_changed.connect(brush_color_changed)
+	$ColorPickerBackground.color_changed.connect(background_color_changed)
+	$BrushSettings/HScrollBarBrushSize.value_changed.connect(brush_size_changed)
 
 	# Assign the "file_selected" signal in SaveFileDialog.
-	save_dialog.file_selected.connect(self.save_file_selected)
+	save_dialog.file_selected.connect(save_file_selected)
 
 	# Set physics process so we can update the status label.
 	set_physics_process(true)

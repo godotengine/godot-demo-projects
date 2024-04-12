@@ -1,7 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://c57duuo5p7mc0"]
+[gd_scene load_steps=24 format=3 uid="uid://c57duuo5p7mc0"]
 
 [ext_resource type="Script" path="res://tester.gd" id="1"]
-[ext_resource type="Environment" uid="uid://du5gp6ah0abgv" path="res://default_env.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://ddo4ecus0bal4" path="res://backgrounds/schelde.hdr" id="2_6cpkq"]
 [ext_resource type="PackedScene" uid="uid://cgqfdwd4g5e14" path="res://models/test_bed/test_bed.tscn" id="3"]
 [ext_resource type="ArrayMesh" uid="uid://btydvpp0agbfj" path="res://models/godot_ball.res" id="4_7al4s"]
 [ext_resource type="Material" uid="uid://bbfkhkmct7wu3" path="res://test_materials/blue.tres" id="5"]
@@ -21,11 +21,32 @@
 [ext_resource type="Material" uid="uid://bv6dr534vwcr1" path="res://test_materials/ice.tres" id="19"]
 [ext_resource type="Material" uid="uid://y4yhjq6ftc3l" path="res://test_materials/toon.tres" id="20"]
 
+[sub_resource type="PanoramaSkyMaterial" id="1"]
+panorama = ExtResource("2_6cpkq")
+
+[sub_resource type="Sky" id="2"]
+sky_material = SubResource("1")
+radiance_size = 4
+
+[sub_resource type="Environment" id="Environment_5crof"]
+background_mode = 2
+sky = SubResource("2")
+tonemap_mode = 3
+tonemap_white = 6.0
+fog_enabled = true
+fog_density = 0.002
+fog_sky_affect = 0.0
+
 [node name="MaterialTester" type="Node3D"]
 script = ExtResource("1")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+visible = false
+shadow_enabled = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("2")
+environment = SubResource("Environment_5crof")
 
 [node name="Testers" type="Node3D" parent="."]
 

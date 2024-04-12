@@ -1,13 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://ivolxaqaaddk"]
+[gd_scene load_steps=6 format=4 uid="uid://ivolxaqaaddk"]
 
 [ext_resource type="Script" path="res://addons/node25d/node_25d.gd" id="1"]
 [ext_resource type="Script" path="res://addons/node25d/shadow_math_25d.gd" id="3"]
-[ext_resource type="Texture2D" uid="uid://dunp4dxxpftxb" path="res://addons/node25d/icons/shadow_math_25d_icon.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://4fvxohv2aowy" path="res://assets/shadow/textures/forty_five.png" id="5"]
 [ext_resource type="Script" path="res://assets/shadow/shadow_sprite.gd" id="6"]
 
-[sub_resource type="BoxShape3D" id="1"]
-size = Vector3(1, 0.002, 1)
+[sub_resource type="SphereShape3D" id="SphereShape3D_v7tld"]
 
 [node name="Shadow25D" type="Node2D"]
 visible = false
@@ -15,17 +13,12 @@ position = Vector2(0, 22401.1)
 script = ExtResource("1")
 spatial_position = Vector3(0, -990, 0)
 
-[node name="ShadowMath25D" type="CharacterBody3D" parent="."]
+[node name="ShadowMath25D" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -990, 0)
-collision_layer = 16
+shape = SubResource("SphereShape3D_v7tld")
+target_position = Vector3(2.08165e-12, -100, 2.08165e-12)
 collision_mask = 16
 script = ExtResource("3")
-__meta__ = {
-"_editor_icon": ExtResource("4")
-}
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ShadowMath25D"]
-shape = SubResource("1")
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
 texture_filter = 2
