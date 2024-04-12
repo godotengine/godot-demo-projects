@@ -1,0 +1,132 @@
+[gd_scene load_steps=5 format=3 uid="uid://835hb2c3ckoi"]
+
+[ext_resource type="Script" path="res://noise_viewer.gd" id="1_a6h72"]
+[ext_resource type="Material" uid="uid://dnxbb2gtigc6b" path="res://noise_viewer_material.tres" id="2_lywnk"]
+
+[sub_resource type="FastNoiseLite" id="1"]
+
+[sub_resource type="NoiseTexture2D" id="2"]
+noise = SubResource("1")
+
+[node name="NoiseViewer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a6h72")
+
+[node name="SeamlessNoiseTexture" type="TextureRect" parent="."]
+material = ExtResource("2_lywnk")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = -256.0
+offset_right = 316.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("2")
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -137.0
+offset_bottom = 44.0
+grow_horizontal = 0
+
+[node name="DocumentationButton" type="Button" parent="ButtonsContainer"]
+layout_mode = 2
+text = "API Documentation"
+
+[node name="RandomSeedButton" type="Button" parent="ButtonsContainer"]
+layout_mode = 2
+text = "Random Seed"
+
+[node name="ParameterContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 280.0
+offset_bottom = 136.0
+
+[node name="SeedSpinBox" type="SpinBox" parent="ParameterContainer"]
+layout_mode = 2
+min_value = -2.14748e+09
+max_value = 2.14748e+09
+allow_greater = true
+allow_lesser = true
+prefix = "Seed:"
+
+[node name="FrequencySpinBox" type="SpinBox" parent="ParameterContainer"]
+layout_mode = 2
+min_value = -100000.0
+max_value = 100000.0
+step = 0.005
+value = 0.01
+allow_greater = true
+prefix = "Frequency:"
+
+[node name="FractalOctavesSpinBox" type="SpinBox" parent="ParameterContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 9.0
+value = 1.0
+prefix = "Fractal Octaves:"
+
+[node name="FractalGainSpinBox" type="SpinBox" parent="ParameterContainer"]
+layout_mode = 2
+max_value = 1000.0
+step = 0.05
+allow_greater = true
+prefix = "Fractal Gain:"
+
+[node name="FractalLacunaritySpinBox" type="SpinBox" parent="ParameterContainer"]
+layout_mode = 2
+step = 0.05
+allow_greater = true
+prefix = "Fractal Lacunarity:"
+
+[node name="ClipContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -52.0
+offset_right = 280.0
+grow_vertical = 0
+
+[node name="MinClipSpinBox" type="SpinBox" parent="ClipContainer"]
+layout_mode = 2
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+value = -1.0
+prefix = "Clip Min:"
+
+[node name="MaxClipSpinBox" type="SpinBox" parent="ClipContainer"]
+layout_mode = 2
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+prefix = "Clip Max:"
+
+[connection signal="pressed" from="ButtonsContainer/DocumentationButton" to="." method="_on_documentation_button_pressed"]
+[connection signal="pressed" from="ButtonsContainer/RandomSeedButton" to="." method="_on_random_seed_button_pressed"]
+[connection signal="value_changed" from="ParameterContainer/SeedSpinBox" to="." method="_on_seed_spin_box_value_changed"]
+[connection signal="value_changed" from="ParameterContainer/FrequencySpinBox" to="." method="_on_frequency_spin_box_value_changed"]
+[connection signal="value_changed" from="ParameterContainer/FractalOctavesSpinBox" to="." method="_on_fractal_octaves_spin_box_value_changed"]
+[connection signal="value_changed" from="ParameterContainer/FractalGainSpinBox" to="." method="_on_fractal_gain_spin_box_value_changed"]
+[connection signal="value_changed" from="ParameterContainer/FractalLacunaritySpinBox" to="." method="_on_fractal_lacunarity_spin_box_value_changed"]
+[connection signal="value_changed" from="ClipContainer/MinClipSpinBox" to="." method="_on_min_clip_spin_box_value_changed"]
+[connection signal="value_changed" from="ClipContainer/MaxClipSpinBox" to="." method="_on_max_clip_spin_box_value_changed"]

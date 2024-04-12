@@ -1,6 +1,7 @@
 shader_type canvas_item;
 
-uniform vec4 base: hint_color;
+uniform sampler2D screen_texture : hint_screen_texture, filter_linear_mipmap;
+uniform vec4 base: source_color;
 uniform sampler2D grain;
 uniform float grain_strength = 0.3;
 uniform sampler2D vignette;
@@ -14,7 +15,7 @@ float make_grain(float time, vec2 uv) {
 }
 
 void fragment() {
-	vec3 c = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0).rgb;
+	vec3 c = textureLod(screen_texture, SCREEN_UV, 0.0).rgb;
 
 	//float v = max(c.r, max(c.g, c.b));
 	float v = dot(c, vec3(0.33333, 0.33333, 0.33333));

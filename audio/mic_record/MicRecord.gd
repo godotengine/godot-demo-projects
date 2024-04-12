@@ -33,12 +33,12 @@ func _on_RecordButton_pressed():
 
 
 func _on_PlayButton_pressed():
-	print("Recording: %s" % recording)
-	print("Format: %s" % recording.format)
-	print("Mix rate: %s" % recording.mix_rate)
-	print("Stereo: %s" % recording.stereo)
+	print_rich("\n[b]Playing recording:[/b] %s" % recording)
+	print_rich("[b]Format:[/b] %s" % ("8-bit uncompressed" if recording.format == 0 else "16-bit uncompressed" if recording.format == 1 else "IMA ADPCM compressed"))
+	print_rich("[b]Mix rate:[/b] %s Hz" % recording.mix_rate)
+	print_rich("[b]Stereo:[/b] %s" % ("Yes" if recording.stereo else "No"))
 	var data = recording.get_data()
-	print("Size: %s" % data.size())
+	print_rich("[b]Size:[/b] %s bytes" % data.size())
 	$AudioStreamPlayer.stream = recording
 	$AudioStreamPlayer.play()
 
@@ -77,11 +77,11 @@ func _on_MixRateOptionButton_item_selected(index: int) -> void:
 
 func _on_FormatOptionButton_item_selected(index: int) -> void:
 	if index == 0:
-		format = AudioStreamSample.FORMAT_8_BITS
+		format = AudioStreamWAV.FORMAT_8_BITS
 	elif index == 1:
-		format = AudioStreamSample.FORMAT_16_BITS
+		format = AudioStreamWAV.FORMAT_16_BITS
 	elif index == 2:
-		format = AudioStreamSample.FORMAT_IMA_ADPCM
+		format = AudioStreamWAV.FORMAT_IMA_ADPCM
 	if recording != null:
 		recording.set_format(format)
 
@@ -90,3 +90,7 @@ func _on_StereoCheckButton_toggled(button_pressed: bool) -> void:
 	stereo = button_pressed
 	if recording != null:
 		recording.set_stereo(stereo)
+
+
+func _on_open_user_folder_button_pressed():
+	OS.shell_open(ProjectSettings.globalize_path("user://"))

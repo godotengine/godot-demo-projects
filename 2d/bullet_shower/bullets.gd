@@ -24,8 +24,6 @@ class Bullet:
 
 
 func _ready():
-	randomize()
-
 	shape = PhysicsServer2D.circle_shape_create()
 	# Set the collision shape's radius for each bullet in pixels.
 	PhysicsServer2D.shape_set_data(shape, 8)
@@ -56,7 +54,7 @@ func _ready():
 
 func _process(_delta):
 	# Order the CanvasItem to update every frame.
-	update()
+	queue_redraw()
 
 
 func _physics_process(delta):

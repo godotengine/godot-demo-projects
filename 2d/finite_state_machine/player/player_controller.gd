@@ -7,11 +7,11 @@ signal direction_changed(new_direction)
 
 var look_direction = Vector2.RIGHT:
 	set(value):
-		# TODO: Manually copy the code from this method.
+		look_direction = value
 		set_look_direction(value)
 
 func take_damage(attacker, amount, effect = null):
-	if is_a_parent_of(attacker):
+	if is_ancestor_of(attacker):
 		return
 	$States/Stagger.knockback_direction = (attacker.global_position - global_position).normalized()
 	$Health.take_damage(amount, effect)
@@ -24,5 +24,4 @@ func set_dead(value):
 
 
 func set_look_direction(value):
-	look_direction = value
-	emit_signal("direction_changed", value)
+	direction_changed.emit(value)

@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=3 uid="uid://bymbq2ruecbhn"]
+
+[ext_resource type="Texture2D" uid="uid://rek0t7kubpx4" path="res://assets/pattern.png" id="1_yguss"]
+[ext_resource type="PackedScene" uid="uid://dpn6187qjqo75" path="res://objects/wall.tscn" id="2_350v7"]
+[ext_resource type="PackedScene" uid="uid://c3wwlb4huytmt" path="res://objects/ramp.tscn" id="3_0sele"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4mshr"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_kwq44"]
+sky_material = SubResource("ProceduralSkyMaterial_4mshr")
+
+[sub_resource type="Environment" id="Environment_pcm4o"]
+background_mode = 2
+sky = SubResource("Sky_kwq44")
+tonemap_mode = 2
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xavpm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0i7rc"]
+albedo_color = Color(0.368627, 1, 0.4, 1)
+albedo_texture = ExtResource("1_yguss")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dxdgs"]
+material = SubResource("StandardMaterial3D_0i7rc")
+size = Vector2(100, 100)
+
+[node name="World" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 5, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pcm4o")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_xavpm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_dxdgs")
+
+[node name="Wall01" parent="." instance=ExtResource("2_350v7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -8)
+
+[node name="Wall02" parent="." instance=ExtResource("2_350v7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.5, -8)
+
+[node name="Wall03" parent="." instance=ExtResource("2_350v7")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -9.24219, 1.5, -6.24219)
+
+[node name="Wall04" parent="." instance=ExtResource("2_350v7")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -4, 1.5, 8)
+
+[node name="Wall05" parent="." instance=ExtResource("2_350v7")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 4, 1.5, 8)
+
+[node name="Wall06" parent="." instance=ExtResource("2_350v7")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 12, 1.5, 8)
+
+[node name="Wall07" parent="." instance=ExtResource("2_350v7")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 8, 1.5, -10)
+
+[node name="Wall08" parent="." instance=ExtResource("2_350v7")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 8, 1.5, -15)
+
+[node name="Wall10" parent="." instance=ExtResource("2_350v7")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -11, 1.5, -2)
+
+[node name="Wall09" parent="." instance=ExtResource("2_350v7")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 8, 1.5, -20)
+
+[node name="Ramp01" parent="." instance=ExtResource("3_0sele")]
+transform = Transform3D(-4.2222e-08, 1.13133e-08, 1, 0.258819, 0.965926, 0, -0.965926, 0.258819, -4.37114e-08, 5, 0, -9)
+
+[node name="Ramp02" parent="." instance=ExtResource("3_0sele")]
+transform = Transform3D(8.9407e-08, -3.72529e-08, -1, 0.258819, 0.965926, -1.10534e-08, 0.965926, -0.258819, 2.98023e-08, 5, 0, -18.5646)
+
+[node name="Ramp03" parent="." instance=ExtResource("3_0sele")]
+transform = Transform3D(8.9407e-08, -3.72529e-08, -1, 0, 1, -1.83902e-08, 1, -2.98023e-08, 2.5926e-08, 5, 0.633461, -13.786)

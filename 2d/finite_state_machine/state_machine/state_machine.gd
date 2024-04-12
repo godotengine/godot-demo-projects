@@ -17,28 +17,27 @@ var states_stack = []
 var current_state = null
 var _active = false:
 	set(value):
-		# TODO: Manually copy the code from this method.
+		_active = value
 		set_active(value)
 
-func _ready():
-	if not start_state:
+func _enter_tree():
+	if start_state.is_empty():
 		start_state = get_child(0).get_path()
 	for child in get_children():
-		var err = child.connect(&"finished", self._change_state)
+		var err = child.finished.connect(_change_state)
 		if err:
 			printerr(err)
 	initialize(start_state)
 
 
 func initialize(initial_state):
-	set_active(true)
+	_active = true
 	states_stack.push_front(get_node(initial_state))
 	current_state = states_stack[0]
 	current_state.enter()
 
 
 func set_active(value):
-	_active = value
 	set_physics_process(value)
 	set_process_input(value)
 	if not _active:
@@ -71,7 +70,7 @@ func _change_state(state_name):
 		states_stack[0] = states_map[state_name]
 
 	current_state = states_stack[0]
-	emit_signal("state_changed", current_state)
+	state_changed.emit(current_state)
 
 	if state_name != "previous":
 		current_state.enter()

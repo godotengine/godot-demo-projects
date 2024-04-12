@@ -27,7 +27,8 @@ func _ready():
 	print("Unique id: ", multiplayer.get_unique_id())
 
 
-@rpc(any_peer, call_local) func update_score(add_to_left):
+@rpc("any_peer", "call_local")
+func update_score(add_to_left):
 	if add_to_left:
 		score_left += 1
 		score_left_node.set_text(str(score_left))
@@ -49,4 +50,4 @@ func _ready():
 
 
 func _on_exit_game_pressed():
-	emit_signal("game_finished")
+	game_finished.emit()

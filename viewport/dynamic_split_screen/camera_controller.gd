@@ -32,15 +32,16 @@ extends Node3D
 @onready var camera1 = viewport1.get_node(^"Camera1")
 @onready var camera2 = viewport2.get_node(^"Camera2")
 
+var viewport_base_height = ProjectSettings.get_setting("display/window/size/viewport_height")
 
 func _ready():
 	_on_size_changed()
 	_update_splitscreen()
 
-	get_viewport().connect(&"size_changed", self._on_size_changed)
+	get_viewport().size_changed.connect(_on_size_changed)
 
-	view.material.set_shader_param("viewport1", viewport1.get_texture())
-	view.material.set_shader_param("viewport2", viewport2.get_texture())
+	view.material.set_shader_parameter("viewport1", viewport1.get_texture())
+	view.material.set_shader_parameter("viewport2", viewport2.get_texture())
 
 
 func _process(_delta):
@@ -71,16 +72,16 @@ func _update_splitscreen():
 	if adaptive_split_line_thickness:
 		var position_difference = _compute_position_difference_in_world()
 		var distance = _compute_horizontal_length(position_difference)
-		thickness = lerp(0, split_line_thickness, (distance - max_separation) / max_separation)
-		thickness = clamp(thickness, 0, split_line_thickness)
+		thickness = lerpf(0, split_line_thickness, (distance - max_separation) / max_separation)
+		thickness = clampf(thickness, 0, split_line_thickness)
 	else:
 		thickness = split_line_thickness
 
-	view.material.set_shader_param("split_active", _get_split_state())
-	view.material.set_shader_param("player1_position", player1_position)
-	view.material.set_shader_param("player2_position", player2_position)
-	view.material.set_shader_param("split_line_thickness", thickness)
-	view.material.set_shader_param("split_line_color", split_line_color)
+	view.material.set_shader_parameter("split_active", _get_split_state())
+	view.material.set_shader_parameter("player1_position", player1_position)
+	view.material.set_shader_parameter("player2_position", player2_position)
+	view.material.set_shader_parameter("split_line_thickness", thickness)
+	view.material.set_shader_parameter("split_line_color", split_line_color)
 
 
 # Split screen is active if players are too far apart from each other.
@@ -97,7 +98,7 @@ func _on_size_changed():
 	$Viewport1.size = screen_size
 	$Viewport2.size = screen_size
 
-	view.material.set_shader_param("viewport_size", screen_size)
+	view.material.set_shader_parameter("viewport_size", screen_size)
 
 
 func _compute_position_difference_in_world():

@@ -6,12 +6,10 @@ It uses similar code to the 2D platformer, but implemented in 3D.
 
 Language: GDScript
 
-Renderer: Forward Plus
+Renderer: Forward+
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/125
 
 ## Screenshots
 
-![Screenshot](screenshots/face.png)
-
-![Screenshot](screenshots/shoot.png)
+![Screenshot](screenshots/platformer.webp)

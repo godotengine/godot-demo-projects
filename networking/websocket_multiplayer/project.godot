@@ -12,12 +12,17 @@ config_version=5
 
 config/name="WebSocket Multiplayer Demo"
 config/description="This is a sample showing how the use WebSockets along with the Multiplayer API in Godot."
+config/tags=PackedStringArray("demo", "network", "official")
 run/main_scene="res://scene/combo.tscn"
-config/features=PackedStringArray("4.0")
-config/icon="res://icon.png"
+config/features=PackedStringArray("4.2")
+config/icon="res://icon.webp"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
-vram_compression/import_etc=true
-vram_compression/import_etc2=false
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

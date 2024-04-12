@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://2elur2m0il32"]
+
+[ext_resource type="Script" path="res://game_splitscreen.gd" id="1_60qgt"]
+[ext_resource type="PackedScene" uid="uid://dggactv0aho4p" path="res://gui/pause_menu_splitscreen.tscn" id="2_xkexm"]
+[ext_resource type="PackedScene" uid="uid://ctgumjaytuoch" path="res://level/level.tscn" id="3_e0nyr"]
+[ext_resource type="PackedScene" uid="uid://vh7pmputa7r3" path="res://player/player.tscn" id="4_8j0va"]
+[ext_resource type="PackedScene" uid="uid://cw6nldo3rjyyq" path="res://level/background/parallax_background.tscn" id="5_47vt4"]
+
+[sub_resource type="Gradient" id="Gradient_77njx"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5sxld"]
+gradient = SubResource("Gradient_77njx")
+width = 2
+
+[node name="GameSplitscreen" type="Node"]
+process_mode = 3
+script = ExtResource("1_60qgt")
+
+[node name="Black" type="ColorRect" parent="."]
+process_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 6.10352e-05
+offset_bottom = 3.05176e-05
+color = Color(0, 0, 0, 1)
+
+[node name="SplitContainer" type="HSplitContainer" parent="Black"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+theme_override_icons/grabber = SubResource("GradientTexture1D_5sxld")
+dragger_visibility = 1
+
+[node name="ViewportContainer1" type="SubViewportContainer" parent="Black/SplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="Viewport1" type="SubViewport" parent="Black/SplitContainer/ViewportContainer1"]
+unique_name_in_owner = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+audio_listener_enable_2d = true
+size = Vector2i(399, 480)
+render_target_update_mode = 4
+
+[node name="Level" parent="Black/SplitContainer/ViewportContainer1/Viewport1" instance=ExtResource("3_e0nyr")]
+
+[node name="Player1" parent="Black/SplitContainer/ViewportContainer1/Viewport1" instance=ExtResource("4_8j0va")]
+unique_name_in_owner = true
+modulate = Color(1, 1.5, 2.5, 1)
+position = Vector2(90, 546)
+action_suffix = "_p1"
+
+[node name="Player2" parent="Black/SplitContainer/ViewportContainer1/Viewport1" instance=ExtResource("4_8j0va")]
+unique_name_in_owner = true
+modulate = Color(3, 1, 1, 1)
+position = Vector2(120, 546)
+action_suffix = "_p2"
+
+[node name="ViewportContainer2" type="SubViewportContainer" parent="Black/SplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="Viewport2" type="SubViewport" parent="Black/SplitContainer/ViewportContainer2"]
+unique_name_in_owner = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+audio_listener_enable_2d = true
+size = Vector2i(399, 480)
+render_target_update_mode = 4
+
+[node name="ParallaxBackground" parent="Black/SplitContainer/ViewportContainer2/Viewport2" instance=ExtResource("5_47vt4")]
+
+[node name="InterfaceLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="PauseMenu" parent="InterfaceLayer" instance=ExtResource("2_xkexm")]
+
+[connection signal="coin_collected" from="Black/SplitContainer/ViewportContainer1/Viewport1/Player1" to="InterfaceLayer/PauseMenu" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Black/SplitContainer/ViewportContainer1/Viewport1/Player2" to="InterfaceLayer/PauseMenu" method="_on_coin_collected"]

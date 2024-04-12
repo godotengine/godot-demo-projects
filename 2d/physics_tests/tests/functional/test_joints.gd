@@ -43,8 +43,8 @@ func _ready():
 	options.add_menu_item(OPTION_TEST_CASE_DESTROY_BODY, true, false)
 	options.add_menu_item(OPTION_TEST_CASE_CHANGE_POSITIONS, true, false)
 
-	options.connect(&"option_selected", Callable(self, "_on_option_selected"))
-	options.connect(&"option_changed", Callable(self, "_on_option_changed"))
+	options.option_selected.connect(_on_option_selected)
+	options.option_changed.connect(_on_option_changed)
 
 	_selected_joint = _joint_types.values()[0]
 	_update_joint = true

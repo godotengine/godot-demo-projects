@@ -6,24 +6,31 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
 config/name="Rich Text Label with BBCode"
 config/description="A demo showcasing the support for rich text and BBCode via RichTextLabel."
+config/tags=PackedStringArray("demo", "gui", "official")
 run/main_scene="res://rich_text_bbcode.tscn"
-config/icon="res://icon.png"
+config/features=PackedStringArray("4.2")
+run/low_processor_mode=true
+config/icon="res://icon.webp"
 
 [display]
 
-window/dpi/allow_hidpi=true
-window/stretch/mode="2d"
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/vsync/vsync_mode=0
 
-[gdnative]
+[input]
 
-singletons=[]
+toggle_pause={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194313,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
 
 [memory]
 
@@ -31,7 +38,6 @@ multithread/thread_rid_pool_prealloc=60
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
-vram_compression/import_etc=true
-vram_compression/import_etc2=false
-environment/default_clear_color=Color(0.145098, 0.145098, 0.164706, 1)
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.145098, 0.145098, 0.164706, 1)

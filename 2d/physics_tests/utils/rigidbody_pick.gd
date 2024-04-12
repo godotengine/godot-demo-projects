@@ -1,4 +1,4 @@
-extends RigidDynamicBody2D
+extends RigidBody2D
 
 
 var _picked = false

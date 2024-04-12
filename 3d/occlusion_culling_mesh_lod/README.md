@@ -7,7 +7,7 @@ used as a basis for a baked OccluderInstance3D, which allows each room to be
 culled if it is hidden by another room's walls.
 
 Occlusion culling can provide a performance benefit in draw call-bound
-scenarios. However, since the Forward Plus backend uses a depth prepass, the
+scenarios. However, since the Forward+ backend uses a depth prepass, the
 shading cost is already reduced by the depth prepass. As a result, occlusion
 culling will not always result in a tangible performance increase, especially in
 outdoor scenes that have fewer occlusion culling opportunities. Indoor scenes
@@ -36,7 +36,7 @@ will vary depending on your CPU and GPU model.
 
 Language: GDScript
 
-Renderer: Forward Plus
+Renderer: Forward+
 
 ## Screenshot
 

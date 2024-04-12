@@ -31,10 +31,8 @@ var combo = [{
 var hit_objects = []
 
 func _ready():
-	# warning-ignore:return_value_discarded
-	$AnimationPlayer.connect(&"animation_finished", self._on_animation_finished)
-	# warning-ignore:return_value_discarded
-	self.connect(&"body_entered", self._on_body_entered)
+	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
+	body_entered.connect(_on_body_entered)
 	_change_state(States.IDLE)
 
 
@@ -98,14 +96,14 @@ func _on_body_entered(body):
 
 
 func _on_animation_finished(_name):
-	if not attack_current:
+	if attack_current.is_empty():
 		return
 
 	if attack_input_state == AttackInputStates.REGISTERED and combo_count < MAX_COMBO_COUNT:
 		attack()
 	else:
 		_change_state(States.IDLE)
-		emit_signal("attack_finished")
+		attack_finished.emit()
 
 
 func _on_StateMachine_state_changed(current_state):

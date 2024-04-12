@@ -30,7 +30,7 @@ func _process(delta):
 		if movement:
 			hframes = 6
 			texture = _run
-			if (Input.is_action_pressed(&"movement_modifier")):
+			if Input.is_action_pressed(&"movement_modifier"):
 				delta /= 2
 			_progress = fmod((_progress + FRAMERATE * delta), 6)
 			frame = _direction * 6 + int(_progress)
@@ -71,7 +71,7 @@ func set_view_mode(view_mode_index):
 
 # Change the 2D basis of the sprite to try and make it "fit" multiple view modes.
 func _sprite_basis():
-	if not Engine.editor_hint:
+	if not Engine.is_editor_hint():
 		if Input.is_action_pressed(&"forty_five_mode"):
 			set_view_mode(0)
 		elif Input.is_action_pressed(&"isometric_mode"):

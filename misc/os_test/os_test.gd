@@ -1,7 +1,7 @@
 extends Node
 
 @onready var rtl = $HBoxContainer/Features
-@onready var mono_test = $MonoTest
+@onready var csharp_test = $CSharpTest
 
 
 # Returns a human-readable string from a date and time, date, or time dictionary.
@@ -41,49 +41,50 @@ func datetime_to_string(date):
 
 func scan_midi_devices():
 	OS.open_midi_inputs()
-	var devices = OS.get_connected_midi_inputs().join(", ")
+	var devices = ", ".join(OS.get_connected_midi_inputs())
 	OS.close_midi_inputs()
 	return devices
 
 
 func add_header(header):
-	rtl.append_bbcode("\n[b][u][color=#6df]{header}[/color][/u][/b]\n".format({
+	rtl.append_text("\n[font_size=24][color=#6df]{header}[/color][/font_size]\n\n".format({
 		header = header,
 	}))
 
 
 func add_line(key, value):
-	rtl.append_bbcode("[b]{key}:[/b] {value}\n".format({
+	rtl.append_text("[color=#adf]{key}:[/color] {value}\n".format({
 		key = key,
-		value = value if str(value) != "" else "[color=#8fff](empty)[/color]",
+		value = value if str(value) != "" else "[color=#fff8](empty)[/color]",
 	}))
 
 
 func _ready():
 	add_header("Audio")
-	var audio_drivers = PackedStringArray()
-	for i in OS.get_audio_driver_count():
-		audio_drivers.push_back(OS.get_audio_driver_name(i))
-	add_line("Available drivers", audio_drivers.join(", "))
+	add_line("Mix rate", "%d Hz" % AudioServer.get_mix_rate())
+	add_line("Output latency", "%f ms" % (AudioServer.get_output_latency() * 1000))
+	add_line("Output device list", ", ".join(AudioServer.get_output_device_list()))
+	add_line("Capture device list", ", ".join(AudioServer.get_input_device_list()))
 
 	add_header("Date")
-	add_line("Date and time (local)", datetime_to_string(OS.get_datetime()))
-	add_line("Date and time (UTC)", datetime_to_string(OS.get_datetime(true)))
-	add_line("Date (local)", datetime_to_string(OS.get_date()))
-	add_line("Date (UTC)", datetime_to_string(OS.get_date(true)))
-	add_line("Time (local)", datetime_to_string(OS.get_time()))
-	add_line("Time (UTC)", datetime_to_string(OS.get_time(true)))
-	add_line("Timezone", OS.get_time_zone_info())
-	add_line("System time (milliseconds)", OS.get_system_time_msecs())
-	add_line("System time (seconds)", OS.get_system_time_secs())
-	add_line("UNIX time", OS.get_unix_time())
+	add_line("Date and time (local)", Time.get_datetime_string_from_system(false, true))
+	add_line("Date and time (UTC)", Time.get_datetime_string_from_system(true, true))
+	add_line("Date (local)", Time.get_date_string_from_system(false))
+	add_line("Date (UTC)", Time.get_date_string_from_system(true))
+	add_line("Time (local)", Time.get_time_string_from_system(false))
+	add_line("Time (UTC)", Time.get_time_string_from_system(true))
+	add_line("Timezone", Time.get_time_zone_from_system())
+	add_line("UNIX time", Time.get_unix_time_from_system())
 
 	add_header("Display")
-	add_line("Screen count", OS.get_screen_count())
-	add_line("DPI", OS.get_screen_dpi())
-	add_line("Startup screen position", OS.get_screen_position())
-	add_line("Startup screen size", OS.get_screen_size())
-	add_line("Safe area rectangle", OS.get_window_safe_area())
+	add_line("Screen count", DisplayServer.get_screen_count())
+	add_line("DPI", DisplayServer.screen_get_dpi())
+	add_line("Scale factor", DisplayServer.screen_get_scale())
+	add_line("Maximum scale factor", DisplayServer.screen_get_max_scale())
+	add_line("Startup screen position", DisplayServer.screen_get_position())
+	add_line("Startup screen size", DisplayServer.screen_get_size())
+	add_line("Startup screen refresh rate", ("%f Hz" % DisplayServer.screen_get_refresh_rate()) if DisplayServer.screen_get_refresh_rate() > 0.0 else "")
+	add_line("Usable (safe) area rectangle", DisplayServer.get_display_safe_area())
 	add_line("Screen orientation", [
 		"Landscape",
 		"Portrait",
@@ -92,7 +93,7 @@ func _ready():
 		"Landscape (defined by sensor)",
 		"Portrait (defined by sensor)",
 		"Defined by sensor",
-	][OS.screen_orientation])
+	][DisplayServer.screen_get_orientation()])
 
 	add_header("Engine")
 	add_line("Version", Engine.get_version_info()["string"])
@@ -108,16 +109,16 @@ func _ready():
 
 	add_header("Hardware")
 	add_line("Model name", OS.get_model_name())
+	add_line("Processor name", OS.get_processor_name())
 	add_line("Processor count", OS.get_processor_count())
 	add_line("Device unique ID", OS.get_unique_id())
-	add_line("Video adapter name", RenderingServer.get_video_adapter_name())
-	add_line("Video adapter vendor", RenderingServer.get_video_adapter_vendor())
 
 	add_header("Input")
-	add_line("Latin keyboard variant", OS.get_latin_keyboard_variant())
-	add_line("Device has touch screen", OS.has_touchscreen_ui_hint())
-	add_line("Device has virtual keyboard", OS.has_virtual_keyboard())
-	add_line("Virtual keyboard height", OS.get_virtual_keyboard_height())
+	add_line("Device has touch screen", DisplayServer.is_touchscreen_available())
+	var has_virtual_keyboard = DisplayServer.has_feature(DisplayServer.FEATURE_VIRTUAL_KEYBOARD)
+	add_line("Device has virtual keyboard", has_virtual_keyboard)
+	if has_virtual_keyboard:
+		add_line("Virtual keyboard height", DisplayServer.virtual_keyboard_get_height())
 
 	add_header("Localization")
 	add_line("Locale", OS.get_locale())
@@ -125,17 +126,20 @@ func _ready():
 	add_header("Mobile")
 	add_line("Granted permissions", OS.get_granted_permissions())
 
-	add_header("Mono (C#)")
-	var mono_enabled = ResourceLoader.exists("res://MonoTest.cs")
-	add_line("Mono module enabled", "Yes" if mono_enabled else "No")
-	if mono_enabled:
-		mono_test.set_script(load("res://MonoTest.cs"))
-		add_line("Operating System", mono_test.OperatingSystem())
-		add_line("Platform Type", mono_test.PlatformType())
+	add_header(".NET (C#)")
+	var csharp_enabled = ResourceLoader.exists("res://CSharpTest.cs")
+	add_line("Mono module enabled", "Yes" if csharp_enabled else "No")
+	if csharp_enabled:
+		csharp_test.set_script(load("res://CSharpTest.cs"))
+		add_line("Operating System", csharp_test.OperatingSystem())
+		add_line("Platform Type", csharp_test.PlatformType())
 
 	add_header("Software")
 	add_line("OS name", OS.get_name())
 	add_line("Process ID", OS.get_process_id())
+	add_line("System dark mode supported", DisplayServer.is_dark_mode_supported())
+	add_line("System dark mode enabled", DisplayServer.is_dark_mode())
+	add_line("System accent color", "#%s" % DisplayServer.get_accent_color().to_html())
 
 	add_header("System directories")
 	add_line("Desktop", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP))
@@ -148,8 +152,19 @@ func _ready():
 	add_line("Ringtones", OS.get_system_dir(OS.SYSTEM_DIR_RINGTONES))
 
 	add_header("Video")
-	var video_drivers = PackedStringArray()
-	for i in OS.get_video_driver_count():
-		video_drivers.push_back(OS.get_video_driver_name(i))
-	add_line("Available drivers", video_drivers.join(", "))
-	add_line("Current driver", OS.get_video_driver_name(OS.get_current_video_driver()))
+	add_line("Adapter name", RenderingServer.get_video_adapter_name())
+	add_line("Adapter vendor", RenderingServer.get_video_adapter_vendor())
+	add_line("Adapter type", [
+		"Other (Unknown)",
+		"Integrated",
+		"Discrete",
+		"Virtual",
+		"CPU",
+	][RenderingServer.get_video_adapter_type()])
+	add_line("Adapter graphics API version", RenderingServer.get_video_adapter_api_version())
+
+	var video_adapter_driver_info = OS.get_video_adapter_driver_info()
+	if video_adapter_driver_info.size() > 0:
+		add_line("Adapter driver name", video_adapter_driver_info[0])
+	if video_adapter_driver_info.size() > 1:
+		add_line("Adapter driver version", video_adapter_driver_info[1])

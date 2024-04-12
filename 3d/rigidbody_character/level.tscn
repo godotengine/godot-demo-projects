@@ -1,14 +1,44 @@
-[gd_scene load_steps=12 format=3 uid="uid://y0rsox5qdoci"]
+[gd_scene load_steps=19 format=3 uid="uid://y0rsox5qdoci"]
 
 [ext_resource type="MeshLibrary" uid="uid://dxc3y3vtd7ins" path="res://cubelib.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://cbvuesb1ptdh4" path="res://player/cubio.tscn" id="2"]
 [ext_resource type="ArrayMesh" uid="uid://h65pkfq5sgmy" path="res://models/cube.mesh" id="3"]
-[ext_resource type="Environment" uid="uid://bupmwdx23k178" path="res://default_env.tres" id="3_scanf"]
 [ext_resource type="PackedScene" uid="uid://bonauusmt0ss" path="res://models/mushroom.glb" id="5"]
 [ext_resource type="Script" path="res://level.gd" id="6"]
-[ext_resource type="PackedScene" path="res://cube_rigidbody.tscn" id="7"]
+[ext_resource type="Texture2D" uid="uid://5wiey7d4yffc" path="res://models/white_wood.png" id="6_slp5m"]
+[ext_resource type="PackedScene" uid="uid://bftavngs5kq7e" path="res://cube_rigidbody.tscn" id="7"]
 
-[sub_resource type="BoxShape3D" id="1"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fiix7"]
+sky_top_color = Color(0.36, 0.20772, 0.1908, 1)
+sky_horizon_color = Color(0.56, 0.16688, 0.1232, 1)
+ground_bottom_color = Color(0.0352941, 0.0352941, 0.0313726, 1)
+ground_horizon_color = Color(0.42, 0.042, 0, 1)
+ground_curve = 0.25
+
+[sub_resource type="Sky" id="1"]
+sky_material = SubResource("ProceduralSkyMaterial_fiix7")
+radiance_size = 0
+
+[sub_resource type="Environment" id="Environment_jpjfl"]
+background_mode = 2
+sky = SubResource("1")
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.5
+tonemap_mode = 3
+tonemap_white = 6.0
+glow_levels/7 = 1.0
+glow_strength = 0.79
+glow_bloom = 1.0
+glow_blend_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_84cgt"]
+resource_name = "Material"
+albedo_color = Color(0.32549, 0.701961, 0.819608, 1)
+albedo_texture = ExtResource("6_slp5m")
+roughness = 0.75
+texture_filter = 5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w6bmu"]
 margin = 0.001
 
 [sub_resource type="Animation" id="2"]
@@ -27,6 +57,18 @@ tracks/0/keys = {
 "values": [Vector3(0.5, 4.5, -2.5), Vector3(0.5, 4.5, -2.5), Vector3(0.5, 8.5, -2.5), Vector3(0.5, 8.5, -2.5), Vector3(0.5, 4.5, -2.5), Vector3(0.5, 4.5, -2.5)]
 }
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_64cvx"]
+_data = {
+"updown1": SubResource("2")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0eb0o"]
+resource_name = "Material"
+albedo_color = Color(0.32549, 0.701961, 0.819608, 1)
+albedo_texture = ExtResource("6_slp5m")
+roughness = 0.75
+texture_filter = 5
+
 [sub_resource type="Animation" id="3"]
 length = 10.0
 loop_mode = 1
@@ -43,86 +85,91 @@ tracks/0/keys = {
 "values": [Vector3(-3.5, 8.5, 4.5), Vector3(-3.5, 8.5, 4.5), Vector3(3.5, 8.5, 4.5), Vector3(3.5, 8.5, 4.5), Vector3(-3.5, 8.5, 4.5)]
 }
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4vwp8"]
+_data = {
+"side": SubResource("3"),
+"updown1": SubResource("2")
+}
+
 [sub_resource type="BoxShape3D" id="4"]
 
 [node name="World3D" type="Node3D"]
-script = ExtResource( "6" )
-__meta__ = {
-"__editor_plugin_screen__": "3D"
-}
+script = ExtResource("6")
 
 [node name="GridMap" type="GridMap" parent="."]
-mesh_library = ExtResource( "1" )
+mesh_library = ExtResource("1")
 cell_size = Vector3(1, 1, 1)
 data = {
 "cells": PackedInt32Array(0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 196603, 0, 0, 196604, 0, 0, 524292, 0, 0, 589820, 0, 0, 786432, 0, 0, 851967, 0, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 65530, 1, 0, 65531, 1, 0, 65532, 1, 0, 65533, 1, 0, 65534, 1, 0, 65535, 1, 0, 131075, 1, 0, 196603, 1, 0, 196604, 1, 0, 524292, 1, 0, 589820, 1, 0, 786432, 1, 0, 851967, 1, 0, 0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 65530, 2, 0, 65531, 2, 0, 65532, 2, 0, 65533, 2, 0, 65534, 2, 0, 65535, 2, 0, 131075, 2, 0, 196603, 2, 0, 196604, 2, 0, 524292, 2, 0, 589820, 2, 0, 786432, 2, 0, 786433, 2, 0, 851966, 2, 0, 851967, 2, 0, 0, 3, 0, 1, 3, 0, 2, 3, 0, 3, 3, 0, 4, 3, 0, 65530, 3, 0, 65531, 3, 0, 65532, 3, 0, 65533, 3, 0, 65534, 3, 0, 65535, 3, 0, 196603, 3, 0, 524291, 3, 0, 524292, 3, 0, 589820, 3, 0, 786432, 3, 0, 786433, 3, 0, 851966, 3, 0, 851967, 3, 0, 0, 4, 0, 1, 4, 0, 2, 4, 0, 3, 4, 0, 4, 4, 0, 65530, 4, 0, 65531, 4, 0, 65532, 4, 0, 65533, 4, 0, 65534, 4, 0, 65535, 4, 0, 196603, 4, 0, 0, 5, 0, 1, 5, 0, 2, 5, 0, 3, 5, 0, 4, 5, 0, 65530, 5, 0, 65531, 5, 0, 65532, 5, 0, 65533, 5, 0, 65534, 5, 0, 65535, 5, 0, 131075, 5, 0, 0, 6, 0, 1, 6, 0, 2, 6, 0, 3, 6, 0, 4, 6, 0, 65530, 6, 0, 65531, 6, 0, 65532, 6, 0, 65533, 6, 0, 65534, 6, 0, 65535, 6, 0, 131075, 6, 0, 196603, 6, 0, 0, 7, 0, 1, 7, 0, 2, 7, 0, 3, 7, 0, 4, 7, 0, 65530, 7, 0, 65531, 7, 0, 65532, 7, 0, 65533, 7, 0, 65534, 7, 0, 65535, 7, 0, 131075, 7, 0, 196603, 7, 0, 0, 8, 0, 1, 8, 0, 2, 8, 0, 3, 8, 0, 4, 8, 0, 65530, 8, 0, 65531, 8, 0, 65532, 8, 0, 65533, 8, 0, 65534, 8, 0, 65535, 8, 0, 131075, 8, 0, 196603, 8, 0, 196604, 8, 0, 0, 9, 0, 1, 9, 0, 2, 9, 0, 3, 9, 0, 4, 9, 0, 65530, 9, 0, 65531, 9, 0, 65532, 9, 0, 65533, 9, 0, 65534, 9, 0, 65535, 9, 0, 131073, 9, 0, 131074, 9, 0, 131075, 9, 0, 196603, 9, 0, 196604, 9, 0, 196605, 9, 0, 196608, 9, 0, 262142, 9, 0, 0, 10, 0, 1, 10, 0, 2, 10, 0, 3, 10, 0, 4, 10, 0, 65530, 10, 0, 65531, 10, 0, 65532, 10, 0, 65533, 10, 0, 65534, 10, 0, 65535, 10, 0, 0, 11, 0, 1, 11, 0, 2, 11, 0, 3, 11, 0, 4, 11, 0, 65530, 11, 0, 65531, 11, 0, 65532, 11, 0, 65533, 11, 0, 65534, 11, 0, 65535, 11, 0, 0, 65532, 0, 1, 65532, 0, 2, 65532, 0, 3, 65532, 0, 4, 65532, 0, 65530, 65532, 0, 65531, 65532, 0, 65532, 65532, 0, 65533, 65532, 0, 65534, 65532, 0, 65535, 65532, 0, 0, 65533, 0, 1, 65533, 0, 2, 65533, 0, 3, 65533, 0, 4, 65533, 0, 65530, 65533, 0, 65531, 65533, 0, 65532, 65533, 0, 65533, 65533, 0, 65534, 65533, 0, 65535, 65533, 0, 262145, 65533, 0, 262146, 65533, 0, 262147, 65533, 0, 589822, 65533, 0, 589823, 65533, 0, 655363, 65533, 0, 655364, 65533, 0, 720897, 65533, 0, 720898, 65533, 0, 786432, 65533, 0, 851967, 65533, 0, 0, 65534, 0, 1, 65534, 0, 2, 65534, 0, 3, 65534, 0, 4, 65534, 0, 65530, 65534, 0, 65531, 65534, 0, 65532, 65534, 0, 65533, 65534, 0, 65534, 65534, 0, 65535, 65534, 0, 65536, 65534, 0, 131071, 65534, 0, 196603, 65534, 0, 196604, 65534, 0, 196605, 65534, 0, 196606, 65534, 0, 196607, 65534, 0, 589822, 65534, 0, 589828, 65534, 0, 786432, 65534, 0, 851967, 65534, 0, 0, 65535, 0, 1, 65535, 0, 2, 65535, 0, 3, 65535, 0, 4, 65535, 0, 65530, 65535, 0, 65531, 65535, 0, 65532, 65535, 0, 65533, 65535, 0, 65534, 65535, 0, 65535, 65535, 0, 196603, 65535, 0, 196604, 65535, 0, 196611, 65535, 0, 589820, 65535, 0, 589821, 65535, 0, 589822, 65535, 0, 589828, 65535, 0, 786432, 65535, 0, 851967, 65535, 0)
 }
-__meta__ = {
-"_editor_clip_": 0,
-"_editor_floor_": Vector3(0, 12, 0)
-}
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource( "3_scanf" )
+environment = SubResource("Environment_jpjfl")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.173649, 0.806707, -0.564863, 0, 0.573576, 0.819152, 0.984808, 0.142244, -0.0996007, 0, 0, 0)
+transform = Transform3D(-0.766044, 0.45452, -0.454519, 0, 0.707107, 0.707107, 0.642788, 0.541675, -0.541675, 0, 5, 1)
 light_energy = 1.3
 shadow_enabled = true
-shadow_reverse_cull_face = true
+shadow_bias = 0.032
+directional_shadow_mode = 0
 directional_shadow_split_1 = 0.05
 directional_shadow_split_2 = 0.1
 directional_shadow_split_3 = 0.2
-directional_shadow_fade_start = 0.25
-directional_shadow_max_distance = 50.0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 24.0
 
-[node name="Cubio" parent="." instance=ExtResource( "2" )]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2, 4)
+[node name="Cubio" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2.3, 4)
 
 [node name="Elevator1" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.5, -2.5)
 input_capture_on_drag = true
 
 [node name="Mesh" type="MeshInstance3D" parent="Elevator1"]
-mesh = ExtResource( "3" )
+mesh = ExtResource("3")
+surface_material_override/0 = SubResource("StandardMaterial3D_84cgt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Elevator1"]
-shape = SubResource( "1" )
+shape = SubResource("BoxShape3D_w6bmu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Elevator1"]
+callback_mode_process = 0
+libraries = {
+"": SubResource("AnimationLibrary_64cvx")
+}
 autoplay = "updown1"
-playback_process_mode = 0
-anims/updown1 = SubResource( "2" )
 
 [node name="Elevator2" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 8.5, 4.5)
 
 [node name="Mesh" type="MeshInstance3D" parent="Elevator2"]
-mesh = ExtResource( "3" )
+mesh = ExtResource("3")
+surface_material_override/0 = SubResource("StandardMaterial3D_0eb0o")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Elevator2"]
-shape = SubResource( "1" )
+shape = SubResource("BoxShape3D_w6bmu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Elevator2"]
+callback_mode_process = 0
+libraries = {
+"": SubResource("AnimationLibrary_4vwp8")
+}
 autoplay = "side"
-playback_process_mode = 0
-anims/side = SubResource( "3" )
-anims/updown1 = SubResource( "2" )
 
 [node name="Princess" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.25, 3)
 
-[node name="Mushroom" parent="Princess" instance=ExtResource( "5" )]
+[node name="Mushroom" parent="Princess" instance=ExtResource("5")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Princess"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource( "4" )
+shape = SubResource("4")
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
 
-[node name="cube_rigidbody" parent="." instance=ExtResource( "7" )]
+[node name="cube_rigidbody" parent="." instance=ExtResource("7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.416964, 3.3565, 2.6332)
 
 [connection signal="body_entered" from="Princess" to="Cubio" method="_on_tcube_body_entered"]

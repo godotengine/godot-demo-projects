@@ -11,27 +11,26 @@ extends Panel
 @onready var paint_control = _parent.get_node(^"PaintControl")
 
 func _ready():
-	# warning-ignore-all:return_value_discarded
 	# Assign all of the needed signals for the oppersation buttons.
-	$ButtonUndo.connect(&"pressed", self.button_pressed, ["undo_stroke"])
-	$ButtonSave.connect(&"pressed", self.button_pressed, ["save_picture"])
-	$ButtonClear.connect(&"pressed", self.button_pressed, ["clear_picture"])
+	$ButtonUndo.pressed.connect(button_pressed.bind("undo_stroke"))
+	$ButtonSave.pressed.connect(button_pressed.bind("save_picture"))
+	$ButtonClear.pressed.connect(button_pressed.bind("clear_picture"))
 
 	# Assign all of the needed signals for the brush buttons.
-	$ButtonToolPencil.connect(&"pressed", self.button_pressed, ["mode_pencil"])
-	$ButtonToolEraser.connect(&"pressed", self.button_pressed, ["mode_eraser"])
-	$ButtonToolRectangle.connect(&"pressed", self.button_pressed, ["mode_rectangle"])
-	$ButtonToolCircle.connect(&"pressed", self.button_pressed, ["mode_circle"])
-	$BrushSettings/ButtonShapeBox.connect(&"pressed", self.button_pressed, ["shape_rectangle"])
-	$BrushSettings/ButtonShapeCircle.connect(&"pressed", self.button_pressed, ["shape_circle"])
+	$ButtonToolPencil.pressed.connect(button_pressed.bind("mode_pencil"))
+	$ButtonToolEraser.pressed.connect(button_pressed.bind("mode_eraser"))
+	$ButtonToolRectangle.pressed.connect(button_pressed.bind("mode_rectangle"))
+	$ButtonToolCircle.pressed.connect(button_pressed.bind("mode_circle"))
+	$BrushSettings/ButtonShapeBox.pressed.connect(button_pressed.bind("shape_rectangle"))
+	$BrushSettings/ButtonShapeCircle.pressed.connect(button_pressed.bind("shape_circle"))
 
 	# Assign all of the needed signals for the other brush settings (and ColorPickerBackground).
-	$ColorPickerBrush.connect(&"color_changed", self.brush_color_changed)
-	$ColorPickerBackground.connect(&"color_changed", self.background_color_changed)
-	$BrushSettings/HScrollBarBrushSize.connect(&"value_changed", self.brush_size_changed)
+	$ColorPickerBrush.color_changed.connect(brush_color_changed)
+	$ColorPickerBackground.color_changed.connect(background_color_changed)
+	$BrushSettings/HScrollBarBrushSize.value_changed.connect(brush_size_changed)
 
 	# Assign the "file_selected" signal in SaveFileDialog.
-	save_dialog.connect(&"file_selected", self.save_file_selected)
+	save_dialog.file_selected.connect(save_file_selected)
 
 	# Set physics process so we can update the status label.
 	set_physics_process(true)
@@ -75,7 +74,7 @@ func button_pressed(button_name):
 	# If a opperation button is pressed
 	elif button_name == "clear_picture":
 		paint_control.brush_data_list = []
-		paint_control.update()
+		paint_control.queue_redraw()
 	elif button_name == "save_picture":
 		save_dialog.popup_centered()
 	elif button_name == "undo_stroke":
@@ -98,7 +97,7 @@ func background_color_changed(color):
 	get_parent().get_node(^"DrawingAreaBG").modulate = color
 	paint_control.bg_color = color
 	# Because of how the eraser works we also need to redraw the paint control.
-	paint_control.update()
+	paint_control.queue_redraw()
 
 
 func brush_size_changed(value):

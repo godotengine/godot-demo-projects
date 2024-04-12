@@ -1,10 +1,9 @@
 extends Node
 class_name WebSocketClient
 
-@export var handshake_headers : PackedStringArray
-@export var supported_protocols : PackedStringArray
-@export var tls_trusted_certificate : X509Certificate
-@export var tls_verify := true
+@export var handshake_headers: PackedStringArray
+@export var supported_protocols: PackedStringArray
+var tls_options: TLSOptions = null
 
 
 var socket = WebSocketPeer.new()
@@ -19,7 +18,7 @@ signal message_received(message: Variant)
 func connect_to_url(url) -> int:
 	socket.supported_protocols = supported_protocols
 	socket.handshake_headers = handshake_headers
-	var err = socket.connect_to_url(url, tls_verify, tls_trusted_certificate)
+	var err = socket.connect_to_url(url, tls_options)
 	if err != OK:
 		return err
 	last_state = socket.get_ready_state()

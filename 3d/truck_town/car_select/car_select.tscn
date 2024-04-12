@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://ckvqraq6j1okh"]
 
 [ext_resource type="Script" path="res://car_select/car_select.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bh7b4n4lg1uqt" path="res://car_select/choose_van.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://hvkcmpdq1t0k" path="res://car_select/choose_trailer.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://de7itkxhl0u28" path="res://car_select/choose_tow.png" id="4"]
+
+[sub_resource type="FontVariation" id="FontVariation_hqcvw"]
+variation_embolden = 1.0
+variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
+spacing_glyph = -1
+spacing_space = 4
 
 [node name="CarSelect" type="Control"]
 layout_mode = 3
@@ -23,7 +29,7 @@ size_flags_vertical = 2
 script = ExtResource("1")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchors_preset = 14
+layout_mode = 0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -32,28 +38,42 @@ grow_vertical = 2
 alignment = 1
 
 [node name="MiniVan" type="Button" parent="HBoxContainer"]
-offset_left = 5.0
-offset_right = 333.0
-offset_bottom = 243.0
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 icon = ExtResource("2")
 
 [node name="TrailerTruck" type="Button" parent="HBoxContainer"]
-offset_left = 347.0
-offset_right = 675.0
-offset_bottom = 243.0
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 icon = ExtResource("3")
 
 [node name="TowTruck" type="Button" parent="HBoxContainer"]
-offset_left = 690.0
-offset_right = 1018.0
-offset_bottom = 243.0
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 icon = ExtResource("4")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.0
+offset_top = 32.0
+offset_right = 180.0
+offset_bottom = 123.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.494118, 0.858824, 0.960784, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.25098, 1, 0.12549)
+theme_override_colors/font_outline_color = Color(0.105882, 0.278431, 0.47451, 1)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 38
+theme_override_constants/shadow_outline_size = 38
+theme_override_fonts/font = SubResource("FontVariation_hqcvw")
+theme_override_font_sizes/font_size = 64
+text = "Truck Town"
 
 [connection signal="pressed" from="HBoxContainer/MiniVan" to="." method="_on_mini_van_pressed"]
 [connection signal="pressed" from="HBoxContainer/TrailerTruck" to="." method="_on_trailer_truck_pressed"]

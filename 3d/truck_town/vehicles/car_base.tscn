@@ -1,22 +1,66 @@
-[gd_scene load_steps=7 format=3 uid="uid://c1uai3rvx8hul"]
+[gd_scene load_steps=19 format=3 uid="uid://c1uai3rvx8hul"]
 
 [ext_resource type="Script" path="res://vehicles/vehicle.gd" id="1_r806m"]
-[ext_resource type="ArrayMesh" uid="uid://s3nm456cy46b" path="res://vehicles/meshes/wheel.res" id="2_0cso8"]
-[ext_resource type="ArrayMesh" uid="uid://d3ogs0rwex0kc" path="res://vehicles/meshes/minivan.res" id="3_tkg08"]
+[ext_resource type="Texture2D" uid="uid://d4ostmqwgytk" path="res://vehicles/particle_smoke.png" id="2_1gkvk"]
+[ext_resource type="ArrayMesh" uid="uid://bqrwin8ccgptt" path="res://vehicles/meshes/wheel.res" id="2_3cqaw"]
+[ext_resource type="ArrayMesh" uid="uid://b2xi556mwp7ue" path="res://vehicles/meshes/minivan.res" id="3_cqia8"]
 [ext_resource type="Script" path="res://vehicles/follow_camera.gd" id="4_6igu8"]
+[ext_resource type="AudioStream" uid="uid://cb7wvsd6vygd3" path="res://vehicles/engine.wav" id="5_m8g7o"]
+[ext_resource type="AudioStream" uid="uid://sy2li7u35867" path="res://vehicles/impact_1.wav" id="6_kq567"]
+[ext_resource type="AudioStream" uid="uid://bf0h7s81yr8nj" path="res://vehicles/impact_2.wav" id="7_e8n8v"]
+[ext_resource type="AudioStream" uid="uid://sun2n8a4xapl" path="res://vehicles/impact_3.wav" id="8_mh5uv"]
+[ext_resource type="AudioStream" uid="uid://dpbayeeufya21" path="res://vehicles/impact_4.wav" id="9_bomp1"]
+[ext_resource type="Texture2D" uid="uid://bju75l2w3r7vq" path="res://vehicles/blob_shadow.png" id="11_3ryw5"]
 
-[sub_resource type="PhysicsMaterial" id="1"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l7i2k"]
 friction = 0.5
 
-[sub_resource type="BoxShape3D" id="7"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_x74tc"]
 size = Vector3(0.954078, 1, 2.32662)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bpr2q"]
+random_pitch = 1.05
+random_volume_offset_db = 2.0
+streams_count = 4
+stream_0/stream = ExtResource("6_kq567")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("7_e8n8v")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("8_mh5uv")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("9_bomp1")
+stream_3/weight = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fuuj3"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.462745, 0.462745, 0.462745, 0.501961)
+albedo_texture = ExtResource("2_1gkvk")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+proximity_fade_enabled = true
+proximity_fade_distance = 0.5
+
+[sub_resource type="QuadMesh" id="QuadMesh_30wks"]
+material = SubResource("StandardMaterial3D_fuuj3")
+
+[sub_resource type="Curve" id="Curve_4j5vd"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_p5xtl"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="CarBase" type="Node3D"]
 
 [node name="Body" type="VehicleBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00169557, 0.222867, -0.0955184)
 center_of_mass_mode = 1
-physics_material_override = SubResource("1")
+physics_material_override = SubResource("PhysicsMaterial_l7i2k")
 script = ExtResource("1_r806m")
 
 [node name="Wheel1" type="VehicleWheel3D" parent="Body"]
@@ -31,8 +75,9 @@ suspension_stiffness = 40.0
 damping_compression = 0.88
 
 [node name="Wheel1" type="MeshInstance3D" parent="Body/Wheel1"]
+layers = 2
 gi_mode = 2
-mesh = ExtResource("2_0cso8")
+mesh = ExtResource("2_3cqaw")
 
 [node name="Wheel2" type="VehicleWheel3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.573678, 0.115169, -0.783403)
@@ -45,8 +90,9 @@ suspension_stiffness = 40.0
 damping_compression = 0.88
 
 [node name="Wheel2" type="MeshInstance3D" parent="Body/Wheel2"]
+layers = 2
 gi_mode = 2
-mesh = ExtResource("2_0cso8")
+mesh = ExtResource("2_3cqaw")
 
 [node name="Wheel3" type="VehicleWheel3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.573678, 0.115169, 1.10416)
@@ -60,8 +106,9 @@ suspension_stiffness = 40.0
 damping_compression = 0.88
 
 [node name="Wheel3" type="MeshInstance3D" parent="Body/Wheel3"]
+layers = 2
 gi_mode = 2
-mesh = ExtResource("2_0cso8")
+mesh = ExtResource("2_3cqaw")
 
 [node name="Wheel4" type="VehicleWheel3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.573678, 0.115169, -0.783403)
@@ -74,25 +121,71 @@ suspension_stiffness = 40.0
 damping_compression = 0.88
 
 [node name="Wheel4" type="MeshInstance3D" parent="Body/Wheel4"]
+layers = 2
 gi_mode = 2
-mesh = ExtResource("2_0cso8")
+mesh = ExtResource("2_3cqaw")
 
 [node name="Body" type="MeshInstance3D" parent="Body"]
+layers = 2
 gi_mode = 2
-mesh = ExtResource("3_tkg08")
+mesh = ExtResource("3_cqia8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.588269, 0.0774262)
-shape = SubResource("7")
+shape = SubResource("BoxShape3D_x74tc")
 
 [node name="CameraBase" type="Node3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.97449, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Body/CameraBase"]
-transform = Transform3D(-0.709652, -0.170177, 0.683691, -2.11161e-08, 0.970391, 0.241539, -0.704552, 0.171409, -0.68864, 3.44908, 2.03236, -4.39379)
-current = true
+transform = Transform3D(-1, 2.11495e-08, -8.48259e-08, 0, 0.970296, 0.241922, 8.74228e-08, 0.241922, -0.970296, 0, 2.032, -4.394)
 fov = 74.0
 near = 0.1
 script = ExtResource("4_6igu8")
-min_distance = 3.0
+min_distance = 4.0
+max_distance = 5.0
 height = 1.25
+
+[node name="EngineSound" type="AudioStreamPlayer3D" parent="Body"]
+stream = ExtResource("5_m8g7o")
+pitch_scale = 0.05
+autoplay = true
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="ImpactSound" type="AudioStreamPlayer3D" parent="Body"]
+stream = SubResource("AudioStreamRandomizer_bpr2q")
+volume_db = -9.0
+max_polyphony = 3
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.201696, -0.022867, -1.10448)
+amount = 125
+lifetime = 1.25
+mesh = SubResource("QuadMesh_30wks")
+direction = Vector3(0, 1, -0.5)
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+damping_min = 0.05
+damping_max = 0.05
+angle_max = 360.0
+scale_amount_curve = SubResource("Curve_4j5vd")
+color_ramp = SubResource("Gradient_p5xtl")
+
+[node name="BlobShadow" type="Decal" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
+size = Vector3(1.6, 4, 3)
+texture_albedo = ExtResource("11_3ryw5")
+upper_fade = 2.0
+lower_fade = 1.0
+cull_mask = 1048573
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Body"]
+current = true
+
+[node name="InteriorCameraPosition" type="Marker3D" parent="Body"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.9, 0.3)
+
+[node name="TopDownCameraPosition" type="Marker3D" parent="Body"]
+transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, 1, 8.74228e-08, 1, -4.37114e-08, 0.00169557, 15.7771, 0.0955178)

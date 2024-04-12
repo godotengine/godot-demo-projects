@@ -1,0 +1,692 @@
+[gd_scene load_steps=37 format=3 uid="uid://crd3is1f8w55h"]
+
+[ext_resource type="FontFile" uid="uid://cw4codbiaecjh" path="res://fonts/Xolonium-Regular.ttf" id="3_ds7iv"]
+[ext_resource type="FontFile" uid="uid://rv6to2i5stmy" path="res://fonts/Xolonium-Regular-MSDF.ttf" id="4_omdth"]
+[ext_resource type="FontFile" uid="uid://ueofyxhwry0c" path="res://fonts/Xolonium-Regular-MSDF-Mipmaps.ttf" id="5_syv27"]
+[ext_resource type="FontFile" uid="uid://ceawygbjffpls" path="res://fonts/Xolonium-Regular-Mipmaps.ttf" id="6_ewmy5"]
+[ext_resource type="Texture2D" uid="uid://bpgdsvb3lfg6l" path="res://textures/textmesh_texture.png" id="7_w00di"]
+[ext_resource type="FontFile" uid="uid://cb35jtyk02goi" path="res://fonts/fontello-godot.woff2" id="7_wvpht"]
+[ext_resource type="Shader" path="res://curvature.gdshader" id="8_2gwag"]
+[ext_resource type="Script" path="res://label_3d_layout.gd" id="8_rvw0p"]
+[ext_resource type="Texture2D" uid="uid://chjqieyps5n5r" path="res://textures/checker.png" id="14"]
+[ext_resource type="Script" path="res://3d_labels_and_texts.gd" id="18"]
+
+[sub_resource type="ProceduralSkyMaterial" id="9"]
+
+[sub_resource type="Sky" id="10"]
+sky_material = SubResource("9")
+
+[sub_resource type="Environment" id="11"]
+background_mode = 2
+sky = SubResource("10")
+
+[sub_resource type="Animation" id="Animation_qdnt6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Testers/Label3DFontTypes/AnimationOrigin:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="12"]
+resource_name = "move"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Testers/Label3DFontTypes/AnimationOrigin:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(2, 0, 0), Vector3(-13, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ecfcr"]
+_data = {
+"RESET": SubResource("Animation_qdnt6"),
+"move": SubResource("12")
+}
+
+[sub_resource type="StandardMaterial3D" id="13"]
+diffuse_mode = 1
+albedo_texture = ExtResource("14")
+uv1_scale = Vector3(32, 32, 1)
+texture_filter = 5
+
+[sub_resource type="PlaneMesh" id="14"]
+material = SubResource("13")
+size = Vector2(128, 128)
+
+[sub_resource type="BoxMesh" id="BoxMesh_770hc"]
+size = Vector3(0.125, 1.5, 2.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_juuw1"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wsjfy"]
+
+[sub_resource type="FontVariation" id="FontVariation_hue2h"]
+spacing_glyph = -8
+
+[sub_resource type="TextMesh" id="TextMesh_xlu0q"]
+text = ""
+font = ExtResource("7_wvpht")
+font_size = 64
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ri5nw"]
+albedo_color = Color(0.356863, 0.301961, 1, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_u3elb"]
+text = ""
+font = ExtResource("7_wvpht")
+font_size = 64
+
+[sub_resource type="TextMesh" id="TextMesh_u00sq"]
+text = "TextMesh (depth = 0.0)"
+font_size = 32
+depth = 0.0
+
+[sub_resource type="TextMesh" id="TextMesh_cf5wd"]
+text = "TextMesh"
+font_size = 32
+
+[sub_resource type="TextMesh" id="TextMesh_0mhsg"]
+text = "TextMesh (low detail)"
+font_size = 32
+curve_step = 10.0
+
+[sub_resource type="TextMesh" id="TextMesh_ddkjo"]
+text = "Additive Blending"
+font_size = 32
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iyglb"]
+blend_mode = 1
+albedo_color = Color(0.776471, 1, 0.45098, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_idsby"]
+text = "Metallic"
+font_size = 32
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mdg0l"]
+albedo_color = Color(1, 0.345098, 0.760784, 1)
+metallic = 1.0
+roughness = 0.0
+
+[sub_resource type="TextMesh" id="TextMesh_0sjgn"]
+text = "Curvature Shader"
+font_size = 32
+depth = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iuh2c"]
+render_priority = 0
+shader = ExtResource("8_2gwag")
+
+[sub_resource type="TextMesh" id="TextMesh_fqc7s"]
+text = "Textured TextMesh"
+font_size = 32
+depth = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3bnm"]
+shading_mode = 0
+albedo_texture = ExtResource("7_w00di")
+texture_filter = 0
+
+[node name="AntiAliasingTestScene" type="WorldEnvironment"]
+environment = SubResource("11")
+script = ExtResource("18")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "move"
+libraries = {
+"": SubResource("AnimationLibrary_ecfcr")
+}
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22)
+layers = 2
+mesh = SubResource("14")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.909487, -0.23874, 0.340349, 0, 0.818672, 0.574262, -0.415733, -0.522284, 0.744571, 3.9506, 3.39961, 3.54442)
+shadow_enabled = true
+shadow_bias = 0.04
+shadow_blur = 1.5
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 24.0
+
+[node name="CameraHolder" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.125, 0)
+
+[node name="RotationX" type="Node3D" parent="CameraHolder"]
+
+[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX"]
+fov = 70.0
+
+[node name="Testers" type="Node3D" parent="."]
+
+[node name="BasicLabel3D" type="Node3D" parent="Testers"]
+
+[node name="Label3D" type="Label3D" parent="Testers/BasicLabel3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.6, 0)
+texture_filter = 5
+outline_modulate = Color(0.270588, 0.270588, 0.270588, 1)
+text = "Hello from Label3D!
+
+Line breaks and/or autowrap can be used to write multiline text."
+outline_size = 3
+autowrap_mode = 2
+width = 460.0
+
+[node name="Wall" type="MeshInstance3D" parent="Testers/BasicLabel3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0654575, 0.5, 0)
+mesh = SubResource("BoxMesh_770hc")
+
+[node name="TwoSidedLabel3D" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="Front" type="Label3D" parent="Testers/TwoSidedLabel3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.7, 0)
+double_sided = false
+texture_filter = 5
+modulate = Color(0.686275, 0.92549, 1, 1)
+text = "Rotate to the other side…"
+font_size = 48
+outline_size = 3
+vertical_alignment = 0
+
+[node name="Back" type="Label3D" parent="Testers/TwoSidedLabel3D"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0.7, 0)
+double_sided = false
+texture_filter = 5
+modulate = Color(1, 0.929412, 0.607843, 1)
+text = "Rotate to the other side…
+(second Label3D node)"
+font_size = 48
+outline_size = 3
+vertical_alignment = 0
+
+[node name="ShadedLabel3D" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+
+[node name="AlphaCutDisabled" type="Label3D" parent="Testers/ShadedLabel3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.3, 0)
+shaded = true
+texture_filter = 5
+modulate = Color(0.607843, 1, 1, 1)
+outline_modulate = Color(0, 0, 0, 0.501961)
+text = "Alpha Cut = Disabled
+I receive shadows"
+font_size = 48
+outline_size = 3
+line_spacing = -6.0
+
+[node name="AlphaCutDiscard" type="Label3D" parent="Testers/ShadedLabel3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.1, 0)
+cast_shadow = 1
+shaded = true
+alpha_cut = 1
+texture_filter = 5
+modulate = Color(0.843137, 0.623529, 1, 1)
+outline_modulate = Color(0, 0, 0, 0.501961)
+text = "Alpha Cut = Discard
+I cast and receive shadows
+(but can't have partial transparency)"
+font_size = 44
+outline_size = 3
+line_spacing = -6.0
+
+[node name="AlphaCutOpaquePrepass" type="Label3D" parent="Testers/ShadedLabel3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.9, 0)
+cast_shadow = 1
+shaded = true
+alpha_cut = 2
+texture_filter = 5
+modulate = Color(0.678431, 1, 0.713726, 1)
+outline_modulate = Color(0, 0, 0, 0.501961)
+text = "Alpha Cut = Opaque Prepass
+I cast and receive shadows"
+font_size = 48
+outline_size = 3
+line_spacing = -6.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ShadedLabel3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.71175, 1.61301)
+transparency = 0.33
+mesh = SubResource("BoxMesh_juuw1")
+
+[node name="Label3DFontTypes" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[node name="AnimationOrigin" type="Node3D" parent="Testers/Label3DFontTypes"]
+
+[node name="Raster" type="Label3D" parent="Testers/Label3DFontTypes/AnimationOrigin"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.4, 1)
+texture_filter = 5
+text = "Label3D
+(raster)"
+font = ExtResource("3_ds7iv")
+font_size = 40
+outline_size = 9
+
+[node name="MSDF" type="Label3D" parent="Testers/Label3DFontTypes/AnimationOrigin"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.4, -1)
+texture_filter = 5
+text = "Label3D
+(MSDF)"
+font = ExtResource("4_omdth")
+font_size = 40
+outline_size = 9
+
+[node name="RasterMipmaps" type="Label3D" parent="Testers/Label3DFontTypes/AnimationOrigin"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.8, 1)
+texture_filter = 5
+text = "Label3D
+(raster +
+mipmaps)"
+font = ExtResource("6_ewmy5")
+font_size = 40
+outline_size = 9
+
+[node name="MSDFMipmaps" type="Label3D" parent="Testers/Label3DFontTypes/AnimationOrigin"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.8, -1)
+texture_filter = 5
+text = "Label3D
+(MSDF +
+mipmaps)"
+font = ExtResource("5_syv27")
+font_size = 40
+outline_size = 9
+
+[node name="Label3DBillboardModes" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+
+[node name="Disabled" type="Label3D" parent="Testers/Label3DBillboardModes"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.2, 1)
+texture_filter = 5
+modulate = Color(0.996078, 1, 0.333333, 1)
+text = "Disabled"
+font_size = 48
+outline_size = 3
+
+[node name="Enabled" type="Label3D" parent="Testers/Label3DBillboardModes"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.2, -1)
+billboard = 1
+texture_filter = 5
+modulate = Color(0.0784314, 0, 0.588235, 1)
+outline_modulate = Color(1, 1, 1, 0.301961)
+text = "Enabled"
+font_size = 48
+outline_size = 3
+
+[node name="YBillboard" type="Label3D" parent="Testers/Label3DBillboardModes"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.7, 0)
+billboard = 2
+texture_filter = 5
+modulate = Color(1, 0.313726, 0.454902, 1)
+outline_modulate = Color(0.384314, 0.188235, 0.188235, 1)
+text = "Y-Billboard"
+font_size = 48
+outline_size = 3
+
+[node name="Label3DDistanceFade" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+
+[node name="NoDistanceFade" type="Label3D" parent="Testers/Label3DDistanceFade"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.3, 1)
+texture_filter = 5
+modulate = Color(1, 0.741176, 0.831373, 1)
+text = "No
+Distance Fade"
+font_size = 40
+outline_size = 4
+
+[node name="DistanceFade" type="Label3D" parent="Testers/Label3DDistanceFade"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.3, -1)
+visibility_range_end = 5.0
+visibility_range_end_margin = 2.5
+visibility_range_fade_mode = 1
+texture_filter = 5
+modulate = Color(0.32549, 1, 0.858824, 1)
+text = "With
+Distance Fade"
+font_size = 40
+outline_size = 4
+
+[node name="NoDistanceFadeBillboard" type="Label3D" parent="Testers/Label3DDistanceFade"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.1, 1)
+billboard = 1
+texture_filter = 5
+modulate = Color(1, 0.741176, 0.831373, 1)
+text = "No
+Distance Fade
+(Billboard)"
+font_size = 40
+outline_size = 4
+
+[node name="DistanceFadeBillboard" type="Label3D" parent="Testers/Label3DDistanceFade"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.1, -1)
+visibility_range_end = 5.0
+visibility_range_end_margin = 2.5
+visibility_range_fade_mode = 1
+billboard = 1
+texture_filter = 5
+modulate = Color(0.32549, 1, 0.858824, 1)
+text = "With
+Distance Fade
+(Billboard)"
+font_size = 40
+outline_size = 4
+
+[node name="DistanceFadeFixedSize" type="Label3D" parent="Testers/Label3DDistanceFade"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.000778437, 0.50287, -1.90735e-05)
+visibility_range_end = 5.0
+visibility_range_end_margin = 2.5
+visibility_range_fade_mode = 1
+pixel_size = 0.001
+billboard = 1
+fixed_size = true
+texture_filter = 5
+modulate = Color(0.760784, 0.690196, 1, 1)
+text = "With
+Distance Fade
+(Billboard + Fixed Size)"
+font_size = 40
+outline_size = 4
+
+[node name="Label3DDepthTest" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
+
+[node name="WithDepthTest" type="Label3D" parent="Testers/Label3DDepthTest"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, 1)
+texture_filter = 5
+modulate = Color(0.623529, 0.784314, 1, 1)
+text = "With Depth Test"
+font_size = 40
+outline_size = 4
+
+[node name="NoDepthTest" type="Label3D" parent="Testers/Label3DDepthTest"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, -1)
+no_depth_test = true
+texture_filter = 5
+modulate = Color(1, 0.607843, 0.290196, 1)
+text = "No Depth Test"
+font_size = 40
+outline_size = 4
+
+[node name="NoDepthTestXray" type="Label3D" parent="Testers/Label3DDepthTest"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, -1)
+no_depth_test = true
+texture_filter = 5
+modulate = Color(1, 0.607843, 0.290196, 0.25098)
+outline_modulate = Color(0, 0, 0, 0.25098)
+text = "No Depth Test
+(X-Ray with second Label3D)"
+outline_size = 4
+
+[node name="DepthTestXray" type="Label3D" parent="Testers/Label3DDepthTest"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, -1)
+texture_filter = 5
+modulate = Color(1, 0.607843, 0.290196, 1)
+text = "No Depth Test
+(X-Ray with second Label3D)"
+outline_size = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/Label3DDepthTest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0.5, 0)
+mesh = SubResource("SphereMesh_wsjfy")
+
+[node name="Label3DIcons" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -28)
+
+[node name="Monochrome" type="Label3D" parent="Testers/Label3DIcons"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0.4, 1)
+cast_shadow = 1
+billboard = 1
+alpha_cut = 1
+texture_filter = 5
+outline_render_priority = 1
+text = ""
+font = ExtResource("7_wvpht")
+font_size = 128
+outline_size = 6
+
+[node name="Monochrome2" type="Label3D" parent="Testers/Label3DIcons"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0.4, 0)
+cast_shadow = 1
+billboard = 1
+alpha_cut = 1
+texture_filter = 5
+outline_render_priority = 1
+text = ""
+font = ExtResource("7_wvpht")
+font_size = 128
+outline_size = 6
+
+[node name="Monochrome3" type="Label3D" parent="Testers/Label3DIcons"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0.4, -1)
+cast_shadow = 1
+billboard = 1
+alpha_cut = 1
+texture_filter = 5
+outline_render_priority = 1
+text = ""
+font = ExtResource("7_wvpht")
+font_size = 128
+outline_size = 6
+
+[node name="ColorBlue" type="Label3D" parent="Testers/Label3DIcons"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1.3, 0)
+cast_shadow = 1
+double_sided = false
+alpha_cut = 1
+texture_filter = 5
+modulate = Color(0.278431, 0.54902, 0.74902, 1)
+text = ""
+font = ExtResource("7_wvpht")
+font_size = 96
+
+[node name="ColorWhite" type="Label3D" parent="Testers/Label3DIcons"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.001, 1.3, 0)
+cast_shadow = 1
+double_sided = false
+alpha_cut = 1
+texture_filter = 5
+text = ""
+font = ExtResource("7_wvpht")
+font_size = 96
+
+[node name="ColorGray" type="Label3D" parent="Testers/Label3DIcons"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.002, 1.3, 0)
+cast_shadow = 1
+double_sided = false
+alpha_cut = 1
+texture_filter = 5
+modulate = Color(0.027451, 0.027451, 0.027451, 1)
+text = ""
+font = ExtResource("7_wvpht")
+font_size = 96
+
+[node name="Label3DHealthBar" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32)
+script = ExtResource("8_rvw0p")
+
+[node name="Name" type="Label3D" parent="Testers/Label3DHealthBar"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.4, 0)
+extra_cull_margin = 1.0
+offset = Vector2(-160, 0)
+billboard = 1
+texture_filter = 5
+text = "Example"
+font = ExtResource("5_syv27")
+outline_size = 4
+horizontal_alignment = 0
+width = 230.0
+
+[node name="Health" type="Label3D" parent="Testers/Label3DHealthBar"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.4, 0)
+extra_cull_margin = 1.0
+offset = Vector2(120, 0)
+billboard = 1
+texture_filter = 5
+modulate = Color(0.8, 1, 0.4, 1)
+outline_modulate = Color(0.15, 0.2, 0.15, 1)
+text = "89%"
+font = ExtResource("5_syv27")
+outline_size = 4
+
+[node name="HealthBarForeground" type="Label3D" parent="Testers/Label3DHealthBar"]
+transform = Transform3D(-1.74846e-07, 0, 1, 0, 1, 0, -4, 0, -4.37114e-08, 0, 0.4, 0)
+extra_cull_margin = 1.0
+offset = Vector2(-45, -35)
+billboard = 1
+texture_filter = 5
+modulate = Color(0.8, 1, 0.4, 1)
+outline_modulate = Color(0.15, 0.2, 0.15, 1)
+text = "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+font = SubResource("FontVariation_hue2h")
+font_size = 16
+outline_size = 0
+horizontal_alignment = 0
+
+[node name="HealthBarBackground" type="Label3D" parent="Testers/Label3DHealthBar"]
+transform = Transform3D(-1.69382e-07, 0, 1, 0, 1, 0, -3.875, 0, -4.37114e-08, 0, 0.4, 0)
+extra_cull_margin = 1.0
+offset = Vector2(0, -35)
+billboard = 1
+texture_filter = 5
+render_priority = -1
+outline_render_priority = -2
+modulate = Color(0.15, 0.2, 0.15, 1)
+outline_modulate = Color(0.15, 0.2, 0.15, 1)
+text = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+font = SubResource("FontVariation_hue2h")
+font_size = 16
+outline_size = 6
+
+[node name="Name2" type="Label" parent="Testers/Label3DHealthBar"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 193.0
+offset_bottom = 47.0
+text = "Name"
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="Testers/Label3DHealthBar"]
+offset_left = 88.0
+offset_top = 16.0
+offset_right = 236.0
+offset_bottom = 47.0
+text = "Example"
+caret_blink = true
+
+[node name="TextMesh" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -36)
+
+[node name="IconAudio" type="MeshInstance3D" parent="Testers/TextMesh"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.4, 0.5)
+mesh = SubResource("TextMesh_xlu0q")
+surface_material_override/0 = SubResource("StandardMaterial3D_ri5nw")
+
+[node name="IconSuccess" type="MeshInstance3D" parent="Testers/TextMesh"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.4, -0.5)
+mesh = SubResource("TextMesh_u3elb")
+surface_material_override/0 = SubResource("StandardMaterial3D_ri5nw")
+
+[node name="NoDepth" type="MeshInstance3D" parent="Testers/TextMesh"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.9, 0)
+mesh = SubResource("TextMesh_u00sq")
+surface_material_override/0 = SubResource("StandardMaterial3D_ri5nw")
+
+[node name="Text" type="MeshInstance3D" parent="Testers/TextMesh"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, 0)
+mesh = SubResource("TextMesh_cf5wd")
+surface_material_override/0 = SubResource("StandardMaterial3D_ri5nw")
+
+[node name="LowDetail" type="MeshInstance3D" parent="Testers/TextMesh"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.1, 0)
+mesh = SubResource("TextMesh_0mhsg")
+surface_material_override/0 = SubResource("StandardMaterial3D_ri5nw")
+
+[node name="TextMeshEffects" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -40)
+
+[node name="AdditiveBlending" type="MeshInstance3D" parent="Testers/TextMeshEffects"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.1, 0)
+mesh = SubResource("TextMesh_ddkjo")
+surface_material_override/0 = SubResource("StandardMaterial3D_iyglb")
+
+[node name="Metallic" type="MeshInstance3D" parent="Testers/TextMeshEffects"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, 0)
+mesh = SubResource("TextMesh_idsby")
+surface_material_override/0 = SubResource("StandardMaterial3D_mdg0l")
+
+[node name="CurvatureShader" type="MeshInstance3D" parent="Testers/TextMeshEffects"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.9, 0)
+mesh = SubResource("TextMesh_0sjgn")
+surface_material_override/0 = SubResource("ShaderMaterial_iuh2c")
+
+[node name="TextMeshTexture" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -44)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/TextMeshTexture"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.1, 0)
+mesh = SubResource("TextMesh_fqc7s")
+surface_material_override/0 = SubResource("StandardMaterial3D_i3bnm")
+
+[node name="TestName" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -58.0
+offset_right = 192.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="Previous" type="Button" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -55.0
+offset_right = 135.0
+offset_bottom = -24.0
+grow_vertical = 0
+text = "«  Previous"
+
+[node name="Next" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -55.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Next  »"
+
+[connection signal="text_changed" from="Testers/Label3DHealthBar/LineEdit" to="Testers/Label3DHealthBar" method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="Testers/Label3DHealthBar/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="Previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]

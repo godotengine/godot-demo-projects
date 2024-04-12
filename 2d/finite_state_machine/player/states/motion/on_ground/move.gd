@@ -18,11 +18,11 @@ func handle_input(event):
 
 func update(_delta):
 	var input_direction = get_input_direction()
-	if not input_direction:
-		emit_signal("finished", "idle")
+	if input_direction.is_zero_approx():
+		finished.emit("idle")
 	update_look_direction(input_direction)
 
-	if Input.is_action_pressed(&"run"):
+	if Input.is_action_pressed("run"):
 		speed = max_run_speed
 	else:
 		speed = max_walk_speed
@@ -35,9 +35,8 @@ func update(_delta):
 
 
 func move(speed, direction):
-	velocity = direction.normalized() * speed
-	# TODO: This information should be set to the CharacterBody properties instead of arguments.
-	owner.move_and_slide(velocity, Vector2(), 5, 2)
-	if owner.get_slide_count() == 0:
+	owner.velocity = direction.normalized() * speed
+	owner.move_and_slide()
+	if owner.get_slide_collision_count() == 0:
 		return
 	return owner.get_slide_collision(0)

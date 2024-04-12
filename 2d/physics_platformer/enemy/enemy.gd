@@ -1,5 +1,6 @@
 class_name Enemy
-extends RigidDynamicBody2D
+extends RigidBody2D
+
 
 const WALK_SPEED = 50
 
@@ -8,40 +9,37 @@ enum State {
 	DYING,
 }
 
-var state = State.WALKING
+var _state := State.WALKING
 
-var direction = -1
-var anim = ""
+var direction := -1
+var anim := ""
 
-var Bullet = preload("res://player/bullet.gd")
+@onready var rc_left := $RaycastLeft as RayCast2D
+@onready var rc_right := $RaycastRight as RayCast2D
 
-@onready var rc_left = $RaycastLeft
-@onready var rc_right = $RaycastRight
 
-func _integrate_forces(s):
-	var lv = s.get_linear_velocity()
-	var new_anim = anim
+func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+	var velocity := state.get_linear_velocity()
+	var new_anim := anim
 
-	if state == State.DYING:
+	if _state == State.DYING:
 		new_anim = "explode"
-	elif state == State.WALKING:
+	elif _state == State.WALKING:
 		new_anim = "walk"
 
-		var wall_side = 0.0
+		var wall_side := 0.0
 
-		for i in range(s.get_contact_count()):
-			var cc = s.get_contact_collider_object(i)
-			var dp = s.get_contact_local_normal(i)
+		for collider_index in state.get_contact_count():
+			var collider := state.get_contact_collider_object(collider_index)
+			var collision_normal := state.get_contact_local_normal(collider_index)
 
-			if cc:
-				if cc is Bullet and not cc.disabled:
-					# enqueue call
-					call_deferred("_bullet_collider", cc, s, dp)
-					break
+			if collider is Bullet and not (collider as Bullet).disabled:
+				_bullet_collider.call_deferred(collider, state, collision_normal)
+				break
 
-			if dp.x > 0.9:
+			if collision_normal.x > 0.9:
 				wall_side = 1.0
-			elif dp.x < -0.9:
+			elif collision_normal.x < -0.9:
 				wall_side = -1.0
 
 		if wall_side != 0 and wall_side != direction:
@@ -54,35 +52,36 @@ func _integrate_forces(s):
 			direction = -direction
 			($Sprite2D as Sprite2D).scale.x = -direction
 
-		lv.x = direction * WALK_SPEED
+		velocity.x = direction * WALK_SPEED
 
 	if anim != new_anim:
 		anim = new_anim
 		($AnimationPlayer as AnimationPlayer).play(anim)
 
-	s.set_linear_velocity(lv)
+	state.set_linear_velocity(velocity)
 
 
-func _die():
+func _die() -> void:
 	queue_free()
 
 
-func _pre_explode():
+func _pre_explode() -> void:
 	#make sure nothing collides against this
 	$Shape1.queue_free()
 	$Shape2.queue_free()
 	$Shape3.queue_free()
 
-	# Stay there
-	mode = MODE_STATIC
 	($SoundExplode as AudioStreamPlayer2D).play()
 
 
-func _bullet_collider(cc, s, dp):
-	mode = MODE_RIGID
-	state = State.DYING
+func _bullet_collider(
+	collider: Bullet,
+	state: PhysicsDirectBodyState2D,
+	collision_normal: Vector2
+) -> void:
+	_state = State.DYING
 
-	s.set_angular_velocity(sign(dp.x) * 33.0)
+	state.set_angular_velocity(signf(collision_normal.x) * 33.0)
 	physics_material_override.friction = 1
-	cc.disable()
+	collider.disable()
 	($SoundHit as AudioStreamPlayer2D).play()

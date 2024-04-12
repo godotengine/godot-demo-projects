@@ -42,8 +42,8 @@ func _ready():
 	options.add_menu_item(OPTION_SHAPE_CONCAVE_POLYGON, true, true)
 	options.add_menu_item(OPTION_SHAPE_CONCAVE_SEGMENTS, true, true)
 
-	options.connect(&"option_selected", Callable(self, "_on_option_selected"))
-	options.connect(&"option_changed", Callable(self, "_on_option_changed"))
+	options.option_selected.connect(_on_option_selected)
+	options.option_changed.connect(_on_option_changed)
 
 	await start_timer(0.5).timeout
 	if is_timer_canceled():
@@ -202,7 +202,7 @@ func _on_option_changed(option, checked):
 
 
 func _find_shape_node(type_name):
-	var node = $Shapes.find_node("RigidBody%s" % type_name)
+	var node = $Shapes.find_child("RigidBody%s" % type_name)
 
 	if not node:
 		Log.print_error("Invalid shape type: " + type_name)

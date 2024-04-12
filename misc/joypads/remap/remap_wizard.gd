@@ -22,7 +22,7 @@ func _input(event):
 	if cur_step == -1:
 		return
 	if event is InputEventJoypadMotion:
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 		var motion = event as InputEventJoypadMotion
 		if abs(motion.axis_value) > DEADZONE:
 			var idx = motion.axis
@@ -37,7 +37,7 @@ func _input(event):
 			joy_mapping_text.text = map.to_human_string()
 			cur_mapping[steps[cur_step]] = map
 	elif event is InputEventJoypadButton and event.pressed:
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 		var btn = event as InputEventJoypadButton
 		var map = JoyMapping.new(JoyMapping.TYPE.BTN, btn.button_index)
 		joy_mapping_text.text = map.to_human_string()
@@ -89,7 +89,7 @@ func reset():
 
 
 func step_next():
-	$Mapping.window_title = "Step: %d/%d" % [cur_step + 1, steps.size()]
+	$Mapping.title = "Step: %d/%d" % [cur_step + 1, steps.size()]
 	joy_mapping_text.text = ""
 	if cur_step >= steps.size():
 		remap_and_close(cur_mapping)
@@ -98,8 +98,8 @@ func step_next():
 
 
 func show_map():
-	if OS.get_name() == "HTML5":
-		JavaScript.eval("window.prompt('This is the resulting remap string', '" + last_mapping + "')")
+	if OS.get_name() == "Web":
+		JavaScriptBridge.eval("window.prompt('This is the resulting remap string', '%s')" % last_mapping)
 	else:
 		$MapWindow/Margin/VBoxContainer/TextEdit.text = last_mapping
 		$MapWindow.popup_centered()
@@ -119,8 +119,8 @@ func _update_step():
 	else:
 		joy_buttons.get_node(str(idx)).show()
 
-	joy_mapping_full_axis.pressed = key in ["leftx", "lefty", "rightx", "righty", "righttrigger", "lefttrigger"]
-	joy_mapping_axis_invert.pressed = false
+	joy_mapping_full_axis.button_pressed = key in ["leftx", "lefty", "rightx", "righty", "righttrigger", "lefttrigger"]
+	joy_mapping_axis_invert.button_pressed = false
 	if cur_mapping.has(key):
 		var cur = cur_mapping[steps[cur_step]]
 		joy_mapping_text.text = cur.to_human_string()
@@ -188,3 +188,15 @@ func _on_InvertAxis_toggled(button_pressed):
 	if cur_mapping.has(key) and cur_mapping[key].type == JoyMapping.TYPE.AXIS:
 		cur_mapping[key].inverted = button_pressed
 		joy_mapping_text.text = cur_mapping[key].to_human_string()
+
+
+func _on_start_close_requested():
+	$Start.hide()
+
+
+func _on_mapping_close_requested():
+	$Mapping.hide()
+
+
+func _on_map_window_close_requested():
+	$MapWindow.hide()

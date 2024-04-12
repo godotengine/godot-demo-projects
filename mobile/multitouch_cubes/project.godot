@@ -6,18 +6,21 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
 config/name="Multitouch Cubes Demo "
 config/description="Demo of multitouch input and different gestures using the touch API. This demo is meant to be used with a touch-enabled device such as a phone or tablet."
+config/tags=PackedStringArray("demo", "input", "mobile", "official")
 run/main_scene="res://Main.tscn"
-config/icon="res://icon.png"
+config/features=PackedStringArray("4.2")
+config/icon="res://icon.webp"
 
-[gdnative]
+[display]
 
-singletons=[]
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [input_devices]
 
@@ -25,10 +28,7 @@ pointing/emulate_touch_from_mouse=true
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
-quality/intended_usage/framebuffer_allocation=0
-quality/intended_usage/framebuffer_allocation.mobile=0
-vram_compression/import_etc=true
-vram_compression/import_etc2=false
-environment/default_clear_color=Color(0.113725, 0.133333, 0.196078, 1)
-environment/default_environment="res://default_env.tres"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_clear_color=Color(0.113725, 0.133333, 0.196078, 1)

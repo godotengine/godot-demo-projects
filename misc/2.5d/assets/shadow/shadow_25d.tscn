@@ -1,40 +1,27 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=4 uid="uid://ivolxaqaaddk"]
 
-[ext_resource path="res://addons/node25d/node_25d.gd" type="Script" id=1]
-[ext_resource path="res://addons/node25d/icons/node_25d_icon.png" type="Texture2D" id=2]
-[ext_resource path="res://addons/node25d/shadow_math_25d.gd" type="Script" id=3]
-[ext_resource path="res://addons/node25d/icons/shadow_math_25d_icon.png" type="Texture2D" id=4]
-[ext_resource path="res://assets/shadow/textures/forty_five.png" type="Texture2D" id=5]
-[ext_resource path="res://assets/shadow/shadow_sprite.gd" type="Script" id=6]
+[ext_resource type="Script" path="res://addons/node25d/node_25d.gd" id="1"]
+[ext_resource type="Script" path="res://addons/node25d/shadow_math_25d.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://4fvxohv2aowy" path="res://assets/shadow/textures/forty_five.png" id="5"]
+[ext_resource type="Script" path="res://assets/shadow/shadow_sprite.gd" id="6"]
 
-[sub_resource type="BoxShape3D" id=1]
-extents = Vector3(0.5, 0.001, 0.5)
+[sub_resource type="SphereShape3D" id="SphereShape3D_v7tld"]
 
 [node name="Shadow25D" type="Node2D"]
 visible = false
 position = Vector2(0, 22401.1)
-script = ExtResource( 1 )
-__meta__ = {
-"_editor_icon": ExtResource( 2 )
-}
+script = ExtResource("1")
 spatial_position = Vector3(0, -990, 0)
 
-[node name="ShadowMath25D" type="CharacterBody3D" parent="."]
+[node name="ShadowMath25D" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -990, 0)
-collision_layer = 16
+shape = SubResource("SphereShape3D_v7tld")
+target_position = Vector3(2.08165e-12, -100, 2.08165e-12)
 collision_mask = 16
-script = ExtResource( 3 )
-__meta__ = {
-"_editor_icon": ExtResource( 4 )
-}
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ShadowMath25D"]
-shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
+script = ExtResource("3")
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
+texture_filter = 2
 scale = Vector2(0.5, 0.5)
-texture = ExtResource( 5 )
-script = ExtResource( 6 )
+texture = ExtResource("5")
+script = ExtResource("6")

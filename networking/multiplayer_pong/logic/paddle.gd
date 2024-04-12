@@ -33,7 +33,8 @@ func _process(delta):
 
 
 # Synchronize position and speed to the other peers.
-@rpc(unreliable) func set_pos_and_motion(pos, motion):
+@rpc("unreliable")
+func set_pos_and_motion(pos, motion):
 	position = pos
 	_motion = motion
 

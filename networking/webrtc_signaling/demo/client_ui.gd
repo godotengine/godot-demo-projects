@@ -18,7 +18,7 @@ func _ready():
 	multiplayer.peer_disconnected.connect(_mp_peer_disconnected)
 
 
-@rpc(any_peer, call_local)
+@rpc("any_peer", "call_local")
 func ping(argument):
 	_log("[Multiplayer] Ping from peer %d: arg: %s" % [multiplayer.get_remote_sender_id(), argument])
 
@@ -39,8 +39,8 @@ func _mp_peer_disconnected(id: int):
 	_log("[Multiplayer] Peer %d disconnected" % id)
 
 
-func _connected(id):
-	_log("[Signaling] Server connected with ID: %d" % id)
+func _connected(id, use_mesh):
+	_log("[Signaling] Server connected with ID: %d. Mesh: %s" % [id, use_mesh])
 
 
 func _disconnected():
@@ -65,7 +65,6 @@ func _on_peers_pressed():
 
 
 func _on_ping_pressed():
-	randomize()
 	ping.rpc(randf())
 
 

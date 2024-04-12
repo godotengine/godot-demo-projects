@@ -1,0 +1,158 @@
+[gd_scene load_steps=4 format=3 uid="uid://dm8doenormt4l"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_r4h6n"]
+
+[sub_resource type="Gradient" id="Gradient_l3ffd"]
+colors = PackedColorArray(0, 0.686275, 0.658824, 1, 0.542081, 0.741499, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uwj8q"]
+gradient = SubResource("Gradient_l3ffd")
+fill_to = Vector2(1, 1)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r4h6n")
+shader_file = "res://compute_shader.glsl"
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_uwj8q")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Create Island"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SeedLabel" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Seed"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SeedInput" type="SpinBox" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(140, 35)
+layout_mode = 2
+max_value = 1e+12
+
+[node name="RandomButton" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Random"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CreateButtonGPU" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Create (GPU)"
+
+[node name="CreateButtonCPU" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Create (CPU)"
+
+[node name="PanelContainer2" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1034, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Raw Heightmap"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Computed Island"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="RawHeightmap" type="TextureRect" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(384, 384)
+layout_mode = 2
+size_flags_horizontal = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ComputedHeightmap" type="TextureRect" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(384, 384)
+layout_mode = 2
+size_flags_horizontal = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Time elapsed: "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.941176, 0.47451, 1)
+theme_override_font_sizes/font_size = 24
+text = "... ms"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer/RandomButton" to="." method="_on_random_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/CreateButtonGPU" to="." method="_on_create_button_gpu_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/CreateButtonCPU" to="." method="_on_create_button_cpu_pressed"]

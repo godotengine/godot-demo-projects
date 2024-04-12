@@ -10,5 +10,5 @@ func _process(_delta):
 		states_names += String(state.get_name()) + "\n"
 		numbers += str(index) + "\n"
 		index += 1
-	$States.text = states_names
-	$Numbers.text = numbers
+	%States.text = states_names
+	%Numbers.text = numbers

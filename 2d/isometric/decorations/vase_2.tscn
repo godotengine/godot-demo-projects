@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccxtgas16pmio"]
+
+[ext_resource type="Texture2D" uid="uid://cfl2km5k5pbgd" path="res://decorations/vase_2.png" id="1"]
+
+[sub_resource type="CapsuleShape2D" id="1"]
+radius = 9.0
+height = 18.0
+
+[node name="vase2" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Area2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+position = Vector2(0, -20)
+texture = ExtResource("1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -8)
+rotation = 1.5708
+shape = SubResource("1")

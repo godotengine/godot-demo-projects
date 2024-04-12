@@ -43,13 +43,14 @@ higher-than-default screen resolutions.
 
 Language: GDScript
 
-Renderer: Vulkan Mobile
+Renderer: Compatibility
 
 ## Technical notes
 
 The demo works with the following project settings:
 
-- `canvas_items` stretch mode (formerly `2d`). Recommended for most non-pixel art games.
+- `canvas_items` stretch mode (this was called `2d` in Godot 3.x).
+  Recommended for most non-pixel art games.
 - `expand` stretch aspect (allows support for multiple aspect ratios without
   distortion or black bars).
 - Using a base window size with a 1:1 aspect ratio (`648×648` in this demo).
@@ -65,7 +66,7 @@ The demo works with the following project settings:
     feature 16:10 displays, so it's recommended to use a 16:10 resolution or
     narrower as a base window size to ensure a good gameplay experience out of
     the box on those devices.
-- Using a test window size with a 16:9 aspect ratio (`1152×648` in this demo).
+- Using a window size override with a 16:9 aspect ratio (`1152×648` in this demo).
   This way, the project starts in a 16:9 window even if the base window size has
   a 1:1 aspect ratio.
   - The test window height matches the width and height of the base window size,

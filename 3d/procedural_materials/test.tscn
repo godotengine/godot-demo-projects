@@ -1,0 +1,448 @@
+[gd_scene load_steps=40 format=3 uid="uid://c4i1xdk0nc7s0"]
+
+[ext_resource type="Material" uid="uid://chsncadr63hoc" path="res://materials/grass.tres" id="4_gplko"]
+[ext_resource type="Material" uid="uid://3odjrwml2nes" path="res://materials/sand.tres" id="5_12jug"]
+[ext_resource type="Material" uid="uid://cw85kxowmkj37" path="res://materials/wet_concrete.tres" id="6_q1c2f"]
+[ext_resource type="Material" uid="uid://c5wve1c3hypfo" path="res://materials/marble.tres" id="7_ebvqo"]
+[ext_resource type="Material" uid="uid://cbijbaq5qol7n" path="res://materials/ice.tres" id="7_k1q1v"]
+[ext_resource type="Material" uid="uid://b74tdcluvrao6" path="res://materials/lava.tres" id="8_jphcw"]
+[ext_resource type="Material" uid="uid://68rvwiamrckm" path="res://materials/glass.tres" id="9_vei4q"]
+[ext_resource type="Script" path="res://scripts/grid.gd" id="10_wwlcf"]
+[ext_resource type="Shader" path="res://shaders/plasma.gdshader" id="11_aoush"]
+[ext_resource type="Texture2D" uid="uid://chjqieyps5n5r" path="res://checker.png" id="14"]
+[ext_resource type="Script" path="res://tester.gd" id="18"]
+
+[sub_resource type="ProceduralSkyMaterial" id="9"]
+
+[sub_resource type="Sky" id="10"]
+sky_material = SubResource("9")
+
+[sub_resource type="Environment" id="11"]
+background_mode = 2
+sky = SubResource("10")
+tonemap_mode = 3
+tonemap_white = 6.0
+
+[sub_resource type="StandardMaterial3D" id="13"]
+diffuse_mode = 1
+albedo_texture = ExtResource("14")
+uv1_scale = Vector3(32, 32, 1)
+texture_filter = 5
+
+[sub_resource type="PlaneMesh" id="14"]
+material = SubResource("13")
+size = Vector2(128, 128)
+
+[sub_resource type="Animation" id="Animation_2qwoj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Testers/NoiseTextureLava/MeshInstance3D:surface_material_override/0:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nbv0n"]
+resource_name = "animate_textures"
+length = 300.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Testers/NoiseTextureLava/MeshInstance3D:surface_material_override/0:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 300),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(4, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sin37"]
+_data = {
+"RESET": SubResource("Animation_2qwoj"),
+"animate_textures": SubResource("Animation_nbv0n")
+}
+
+[sub_resource type="SphereMesh" id="SphereMesh_be5u0"]
+radius = 0.75
+height = 1.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_opf1g"]
+size = Vector3(3, 1, 4)
+
+[sub_resource type="Gradient" id="Gradient_iy4y2"]
+offsets = PackedFloat32Array(0, 0.0211082, 0.0435356, 0.0633245, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.733005, 0.733005, 0.733005, 1, 0.0461741, 0.0461741, 0.0461741, 1, 0.72, 0.69192, 0.6264, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mc7b4"]
+noise_type = 2
+frequency = 0.042
+fractal_type = 0
+fractal_octaves = 3
+fractal_gain = 1.596
+fractal_weighted_strength = 0.44
+cellular_jitter = 0.03
+cellular_return_type = 4
+domain_warp_enabled = true
+domain_warp_type = 2
+domain_warp_amplitude = 2.0
+domain_warp_fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e1o5w"]
+width = 1024
+height = 1024
+seamless = true
+seamless_blend_skirt = 0.0
+color_ramp = SubResource("Gradient_iy4y2")
+noise = SubResource("FastNoiseLite_mc7b4")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_71qgk"]
+width = 1024
+height = 1024
+seamless = true
+seamless_blend_skirt = 0.065
+as_normal_map = true
+bump_strength = 2.0
+color_ramp = SubResource("Gradient_iy4y2")
+noise = SubResource("FastNoiseLite_mc7b4")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aq2a1"]
+albedo_texture = SubResource("NoiseTexture2D_e1o5w")
+roughness = 0.5
+roughness_texture = SubResource("NoiseTexture2D_e1o5w")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_71qgk")
+texture_filter = 5
+
+[sub_resource type="Gradient" id="Gradient_5l3re"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.135884, 0.329815, 0.341689, 0.544855, 0.581794, 0.770449, 0.943272)
+colors = PackedColorArray(0, 0, 0, 1, 0.111922, 0.139008, 0.140144, 1, 0.398808, 0.12884, 0.147843, 1, 0.421438, 0.289437, 0.227878, 1, 0.65045, 0.360142, 0.181692, 1, 0.739192, 0.503788, 0.301212, 1, 1, 0.672262, 0.366251, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_10olv"]
+frequency = 0.05
+fractal_weighted_strength = 1.0
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e0bku"]
+width = 64
+height = 64
+seamless = true
+color_ramp = SubResource("Gradient_5l3re")
+noise = SubResource("FastNoiseLite_10olv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7qv4"]
+albedo_texture = SubResource("NoiseTexture2D_e0bku")
+texture_filter = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_msbte"]
+roughness = 0.75
+normal_enabled = true
+texture_filter = 5
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ykq6a"]
+viewport_path = NodePath("Testers/ShaderPlasma/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ovjj"]
+resource_local_to_scene = true
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_ykq6a")
+heightmap_enabled = true
+heightmap_scale = 9.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = SubResource("ViewportTexture_ykq6a")
+heightmap_flip_texture = true
+texture_filter = 5
+
+[sub_resource type="Gradient" id="Gradient_hsp0x"]
+offsets = PackedFloat32Array(0, 0.385224, 0.655673, 0.886544, 1)
+colors = PackedColorArray(1.95531e-08, 0.0213273, 0.0973903, 1, 0.294665, 0.332091, 0.73046, 1, 0.22273, 0.723553, 0.777314, 1, 0.877091, 0.64938, 0.963435, 1, 0.932381, 0.719091, 0.921475, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r8ncc"]
+frequency = 0.002
+fractal_type = 2
+fractal_octaves = 4
+fractal_lacunarity = 2.901
+fractal_gain = 0.353
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n04ac"]
+width = 1024
+height = 1024
+seamless = true
+color_ramp = SubResource("Gradient_hsp0x")
+noise = SubResource("FastNoiseLite_r8ncc")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_25kcu"]
+seed = 60607
+fractal_gain = 0.695
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pn44s"]
+width = 1024
+height = 1024
+seamless = true
+noise = SubResource("FastNoiseLite_25kcu")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2p45w"]
+shader = ExtResource("11_aoush")
+shader_parameter/noise1 = SubResource("NoiseTexture2D_n04ac")
+shader_parameter/noise2 = SubResource("NoiseTexture2D_pn44s")
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("11")
+script = ExtResource("18")
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+layers = 2
+mesh = SubResource("14")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.909487, -0.23874, 0.340349, 0, 0.818672, 0.574262, -0.415733, -0.522284, 0.744571, 3.9506, 3.39961, 3.54442)
+shadow_enabled = true
+shadow_bias = 0.04
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 24.0
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 8)
+max_distance = 100.0
+size = Vector3(100, 100, 100)
+box_projection = true
+enable_shadows = true
+ambient_mode = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "animate_textures"
+libraries = {
+"": SubResource("AnimationLibrary_sin37")
+}
+
+[node name="CameraHolder" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.125, 26)
+
+[node name="RotationX" type="Node3D" parent="CameraHolder"]
+
+[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX"]
+fov = 70.0
+
+[node name="Testers" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="NoiseTextureGrass" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, 22)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureGrass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("SphereMesh_be5u0")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("4_gplko")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureGrass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("BoxMesh_opf1g")
+surface_material_override/0 = ExtResource("4_gplko")
+
+[node name="NoiseTextureSand" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, 18)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureSand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("SphereMesh_be5u0")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("5_12jug")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureSand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("BoxMesh_opf1g")
+surface_material_override/0 = ExtResource("5_12jug")
+
+[node name="NoiseTextureWetConcrete" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, 14)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureWetConcrete"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("SphereMesh_be5u0")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("6_q1c2f")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureWetConcrete"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("BoxMesh_opf1g")
+surface_material_override/0 = ExtResource("6_q1c2f")
+
+[node name="NoiseTextureBathroomFloorTile" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, 10)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureBathroomFloorTile"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("SphereMesh_be5u0")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_aq2a1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureBathroomFloorTile"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("BoxMesh_opf1g")
+surface_material_override/0 = SubResource("StandardMaterial3D_aq2a1")
+
+[node name="NoiseTextureIce" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, 6)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureIce"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("SphereMesh_be5u0")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("7_k1q1v")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureIce"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("BoxMesh_opf1g")
+surface_material_override/0 = ExtResource("7_k1q1v")
+
+[node name="NoiseTextureMarble" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, 2)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureMarble"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("SphereMesh_be5u0")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("7_ebvqo")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureMarble"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("BoxMesh_opf1g")
+surface_material_override/0 = ExtResource("7_ebvqo")
+
+[node name="NoiseTextureLava" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, -2)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureLava"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("SphereMesh_be5u0")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("8_jphcw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureLava"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("BoxMesh_opf1g")
+surface_material_override/0 = ExtResource("8_jphcw")
+
+[node name="NoiseTextureGlass" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, -6)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureGlass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00275182, -0.244153, -0.000101089)
+mesh = SubResource("SphereMesh_be5u0")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("9_vei4q")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureGlass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("BoxMesh_opf1g")
+surface_material_override/0 = ExtResource("9_vei4q")
+
+[node name="NoiseTexturePixelArt" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, -10)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTexturePixelArt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00275182, -0.244153, -0.000101089)
+mesh = SubResource("SphereMesh_be5u0")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_k7qv4")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTexturePixelArt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("BoxMesh_opf1g")
+surface_material_override/0 = SubResource("StandardMaterial3D_k7qv4")
+
+[node name="ScriptGrid" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, -14)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ScriptGrid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00275182, -0.244153, -0.000101089)
+mesh = SubResource("SphereMesh_be5u0")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_msbte")
+script = ExtResource("10_wwlcf")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/ScriptGrid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("BoxMesh_opf1g")
+surface_material_override/0 = SubResource("StandardMaterial3D_msbte")
+
+[node name="ShaderPlasma" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, -18)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ShaderPlasma"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00275182, -0.244153, -0.000101089)
+mesh = SubResource("SphereMesh_be5u0")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4ovjj")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/ShaderPlasma"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("BoxMesh_opf1g")
+surface_material_override/0 = SubResource("StandardMaterial3D_4ovjj")
+
+[node name="SubViewport" type="SubViewport" parent="Testers/ShaderPlasma"]
+size = Vector2i(1024, 1024)
+
+[node name="ColorRect" type="ColorRect" parent="Testers/ShaderPlasma/SubViewport"]
+material = SubResource("ShaderMaterial_2p45w")
+offset_right = 1024.0
+offset_bottom = 1024.0
+
+[node name="TestName" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -58.0
+offset_right = 192.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="Previous" type="Button" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -55.0
+offset_right = 135.0
+offset_bottom = -24.0
+grow_vertical = 0
+text = "«  Previous"
+
+[node name="Next" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -55.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Next  »"
+
+[connection signal="pressed" from="Previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]

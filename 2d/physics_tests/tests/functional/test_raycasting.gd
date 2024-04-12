@@ -12,7 +12,7 @@ func _ready():
 
 	options.add_menu_item(OPTION_TEST_CASE_HIT_FROM_INSIDE, true, false)
 
-	options.connect(&"option_changed", Callable(self, "_on_option_changed"))
+	options.option_changed.connect(_on_option_changed)
 
 	await start_timer(0.5).timeout
 	if is_timer_canceled():

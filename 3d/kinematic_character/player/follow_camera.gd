@@ -43,5 +43,5 @@ func _physics_process(_delta):
 
 	# Turn a little up or down
 	var t = transform
-	t.basis = Basis(t.basis[0], deg2rad(angle_v_adjust)) * t.basis
+	t.basis = Basis(t.basis[0], deg_to_rad(angle_v_adjust)) * t.basis
 	transform = t

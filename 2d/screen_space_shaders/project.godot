@@ -13,12 +13,18 @@ config_version=5
 config/name="Screen Space Shaders"
 config/description="Several examples of full screen 2D shader processing.
 Many common full-res effects are implemented here for reference."
+config/tags=PackedStringArray("2d", "demo", "official", "rendering", "shaders")
 run/main_scene="res://screen_shaders.tscn"
-config/icon="res://icon.png"
-config/features=PackedStringArray("4.0")
+config/features=PackedStringArray("4.2")
+config/icon="res://icon.webp"
 
 [display]
 
 window/size/viewport_width=800
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

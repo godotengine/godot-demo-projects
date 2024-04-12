@@ -6,7 +6,7 @@ It plays a simple 440 Hz sine wave at 22050 Hz.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/526
 

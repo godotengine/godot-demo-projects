@@ -13,9 +13,11 @@ config_version=5
 config/name="Audio Mic Record Demo"
 config/description="This is an example showing how one can record audio from
 the microphone and later play it back or save it to a file."
+config/tags=PackedStringArray("audio", "demo", "official")
 run/main_scene="res://MicRecord.tscn"
-config/icon="res://icon.png"
-config/features=PackedStringArray("4.0")
+config/features=PackedStringArray("4.2")
+run/low_processor_mode=true
+config/icon="res://icon.webp"
 
 [audio]
 
@@ -28,7 +30,9 @@ window/size/viewport_width=640
 window/size/viewport_height=480
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/vsync/vsync_mode=0
 
 [rendering]
 
-vulkan/rendering/back_end=1
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

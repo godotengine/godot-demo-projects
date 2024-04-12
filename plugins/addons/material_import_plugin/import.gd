@@ -3,37 +3,37 @@ extends EditorImportPlugin
 
 enum Presets { PRESET_DEFAULT }
 
-func get_importer_name():
+func _get_importer_name():
 	return "demos.sillymaterial"
 
 
-func get_visible_name():
+func _get_visible_name():
 	return "Silly Material"
 
 
-func get_recognized_extensions():
+func _get_recognized_extensions():
 	return ["mtxt"]
 
 
-func get_save_extension():
+func _get_save_extension():
 	return "res"
 
 
-func get_resource_type():
+func _get_resource_type():
 	return "Material"
 
 
-func get_preset_count():
+func _get_preset_count():
 	return Presets.size()
 
 
-func get_preset_name(preset):
+func _get_preset_name(preset):
 	match preset:
 		Presets.PRESET_DEFAULT: return "Default"
 		_: return "Unknown"
 
 
-func get_import_options(preset):
+func _get_import_options(_path, preset):
 	match preset:
 		Presets.PRESET_DEFAULT:
 			return [{
@@ -43,19 +43,17 @@ func get_import_options(preset):
 		_: return []
 
 
-func get_option_visibility(option, options):
+func _get_import_order():
+	return ResourceImporter.IMPORT_ORDER_DEFAULT
+
+
+func _get_option_visibility(path, option, options):
 	return true
 
 
-func import(source_file, save_path, options, r_platform_variants, r_gen_files):
-	var file = File.new()
-	var err = file.open(source_file, File.READ)
-	if err != OK:
-		return err
-
+func _import(source_file, save_path, options, r_platform_variants, r_gen_files):
+	var file = FileAccess.open(source_file, FileAccess.READ)
 	var line = file.get_line()
-
-	file.close()
 
 	var channels = line.split(",")
 	if channels.size() != 3:
@@ -69,4 +67,4 @@ func import(source_file, save_path, options, r_platform_variants, r_gen_files):
 
 	material.albedo_color = color
 
-	return ResourceSaver.save("%s.%s" % [save_path, get_save_extension()], material)
+	return ResourceSaver.save(material, "%s.%s" % [save_path, _get_save_extension()])

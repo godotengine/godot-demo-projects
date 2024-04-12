@@ -17,11 +17,11 @@ func _init():
 	peer_disconnected.connect(_peer_disconnected)
 
 
-func start(url, lobby = "", mesh:=true):
+func start(url, _lobby = "", _mesh := true):
 	stop()
 	sealed = false
-	self.mesh = mesh
-	self.lobby = lobby
+	mesh = _mesh
+	lobby = _lobby
 	connect_to_url(url)
 
 
@@ -68,8 +68,8 @@ func _connected(id, use_mesh):
 	multiplayer.multiplayer_peer = rtc_mp
 
 
-func _lobby_joined(lobby):
-	self.lobby = lobby
+func _lobby_joined(_lobby):
+	lobby = _lobby
 
 
 func _lobby_sealed():

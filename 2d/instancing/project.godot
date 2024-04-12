@@ -13,13 +13,13 @@ config_version=5
 config/name="Scene Instancing Demo"
 config/description="A demo showing how to use scene instancing to
 make many duplicates of the same object."
+config/tags=PackedStringArray("2d", "demo", "official")
 run/main_scene="res://scene_instancing.tscn"
-config/icon="res://icon.png"
-config/features=PackedStringArray("4.0")
+config/features=PackedStringArray("4.2")
+config/icon="res://icon.webp"
 
 [display]
 
-window/size/viewport_width=800
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
@@ -29,4 +29,6 @@ window/stretch/aspect="expand"
 
 [rendering]
 
-vulkan/rendering/back_end=1
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.239216, 0.0823529, 0.156863, 1)

@@ -1,0 +1,19 @@
+[gd_resource type="NoiseTexture2D" load_steps=3 format=3 uid="uid://caf47v17px0e"]
+
+[sub_resource type="Gradient" id="Gradient_pheaa"]
+offsets = PackedFloat32Array(0.0243902, 1)
+colors = PackedColorArray(1, 0.743333, 0.45, 1, 1, 0.874, 0.73, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nwsqr"]
+noise_type = 3
+fractal_octaves = 8
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_fractal_gain = 1.0
+
+[resource]
+width = 1024
+height = 1024
+seamless = true
+color_ramp = SubResource("Gradient_pheaa")
+noise = SubResource("FastNoiseLite_nwsqr")

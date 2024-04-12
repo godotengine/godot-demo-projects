@@ -6,32 +6,38 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
-config/name="Grid-based Pathfinding with Astar"
-config/description="This is an example of using AStar for navigation in 2D,
+config/name="Grid-based Pathfinding with AStarGrid2D"
+config/description="This is an example of using AStarGrid2D for navigation in 2D,
 complete with Steering Behaviors in order to smooth the movement out."
-run/main_scene="res://Game.tscn"
-config/icon="res://icon.png"
+config/tags=PackedStringArray("2d", "ai", "demo", "official", "tilemap")
+run/main_scene="res://game.tscn"
+config/features=PackedStringArray("4.2")
+config/icon="res://icon.webp"
 
 [display]
 
-window/dpi/allow_hidpi=true
-window/stretch/mode="2d"
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
 [input]
 
-click={
-"deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"pressed":false,"double_click":false,"script":null)
+teleport_to={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
+move_to={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
-vram_compression/import_etc=true
-vram_compression/import_etc2=false
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0, 0.0627451, 0.247059, 1)

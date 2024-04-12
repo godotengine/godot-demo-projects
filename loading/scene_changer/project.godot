@@ -12,19 +12,19 @@ config_version=5
 
 config/name="Scene Changer"
 config/description="This uses functions in SceneTree to switch between two scenes."
+config/tags=PackedStringArray("demo", "official")
 run/main_scene="res://scene_a.tscn"
-config/features=PackedStringArray("4.0")
+config/features=PackedStringArray("4.2")
 run/low_processor_mode=true
 config/icon="res://icon.svg"
 
-[debug]
-
-gdscript/warnings/return_value_discarded=false
-
 [display]
 
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 window/vsync/vsync_mode=0
 
 [rendering]
 
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

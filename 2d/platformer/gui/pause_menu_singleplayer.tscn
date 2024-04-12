@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7ai4bigaryci"]
+
+[ext_resource type="PackedScene" uid="uid://dh71g61cm8k44" path="res://gui/pause_menu.tscn" id="1_pwe1t"]
+
+[node name="PauseMenu" instance=ExtResource("1_pwe1t")]
+
+[node name="SplitscreenButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer" index="3"]
+layout_mode = 2
+text = "Change to 2-Player"
+
+[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/SplitscreenButton" to="." method="_on_splitscreen_button_pressed"]

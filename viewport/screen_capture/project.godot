@@ -12,24 +12,16 @@ config_version=5
 
 config/name="Screen Capture"
 config/description="An example showing how to take screenshots of the screen."
+config/tags=PackedStringArray("demo", "official", "rendering")
 run/main_scene="res://screen_capture.tscn"
-config/icon="res://icon.png"
-config/features=PackedStringArray("4.0")
-
-[debug]
-
-gdscript/warnings/return_value_discarded=false
+config/features=PackedStringArray("4.2")
+config/icon="res://icon.webp"
 
 [display]
 
-window/stretch/mode="2d"
-
-[gdnative]
-
-singletons=[]
+window/stretch/mode="canvas_items"
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
-vram_compression/import_etc=true
-vram_compression/import_etc2=false
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

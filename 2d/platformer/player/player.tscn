@@ -1,0 +1,269 @@
+[gd_scene load_steps=18 format=3 uid="uid://vh7pmputa7r3"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="3"]
+[ext_resource type="AudioStream" uid="uid://sjod173axgwf" path="res://player/jump.wav" id="5"]
+[ext_resource type="AudioStream" uid="uid://b01brytl75mwa" path="res://player/shoot.wav" id="6"]
+[ext_resource type="Script" path="res://player/gun.gd" id="8"]
+[ext_resource type="Texture2D" uid="uid://cc7o7t0ramd6y" path="res://player/robot.webp" id="9"]
+
+[sub_resource type="Animation" id="1"]
+resource_name = "crouch"
+length = 0.01
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [42]
+}
+
+[sub_resource type="Animation" id="2"]
+resource_name = "falling"
+length = 0.01
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [48]
+}
+
+[sub_resource type="Animation" id="3"]
+resource_name = "falling_weapon"
+length = 0.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [26]
+}
+
+[sub_resource type="Animation" id="4"]
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [30, 31, 32, 33]
+}
+
+[sub_resource type="Animation" id="5"]
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [34, 35, 36, 37]
+}
+
+[sub_resource type="Animation" id="6"]
+length = 0.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [45]
+}
+
+[sub_resource type="Animation" id="7"]
+length = 0.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [46]
+}
+
+[sub_resource type="Animation" id="8"]
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06003, 0.12006, 0.18009, 0.24012, 0.30015, 0.36018, 0.42021, 0.48024, 0.54027),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="9"]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.12, 0.18, 0.24, 0.3, 0.36, 0.42, 0.48, 0.54),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+}
+
+[sub_resource type="Animation" id="10"]
+length = 1.25
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [34, 35, 36, 37]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jnr5f"]
+_data = {
+"crouch": SubResource("1"),
+"falling": SubResource("2"),
+"falling_weapon": SubResource("3"),
+"idle": SubResource("4"),
+"idle_weapon": SubResource("5"),
+"jumping": SubResource("6"),
+"jumping_weapon": SubResource("7"),
+"run": SubResource("8"),
+"run_weapon": SubResource("9"),
+"standing_weapon_ready": SubResource("10")
+}
+
+[sub_resource type="RectangleShape2D" id="11"]
+size = Vector2(42.5, 54.5)
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.8, 0.8)
+collision_mask = 30
+floor_constant_speed = true
+platform_on_leave = 2
+script = ExtResource("3")
+
+[node name="ShootAnimation" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="PlatformDetector" type="RayCast2D" parent="."]
+target_position = Vector2(0, 6)
+collision_mask = 8
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -14)
+texture = ExtResource("9")
+hframes = 8
+vframes = 8
+
+[node name="Gun" type="Marker2D" parent="Sprite2D"]
+position = Vector2(14, 1)
+script = ExtResource("8")
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="Sprite2D/Gun"]
+position = Vector2(-30.6589, -6.13176)
+stream = ExtResource("6")
+
+[node name="Cooldown" type="Timer" parent="Sprite2D/Gun"]
+wait_time = 0.3
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jnr5f")
+}
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(0, -28)
+offset = Vector2(0, 50)
+limit_left = -715
+limit_top = -250
+limit_right = 1425
+limit_bottom = 690
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+shape = SubResource("11")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5")
+volume_db = -3.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Left" type="TouchScreenButton" parent="UI"]
+position = Vector2(157, 813)
+scale = Vector2(2, 2)
+passby_press = true
+action = "move_left"
+visibility_mode = 1
+
+[node name="Right" type="TouchScreenButton" parent="UI"]
+position = Vector2(425, 813)
+scale = Vector2(2, 2)
+passby_press = true
+action = "move_right"
+visibility_mode = 1
+
+[node name="Jump" type="TouchScreenButton" parent="UI"]
+position = Vector2(1871, 813)
+scale = Vector2(2, 2)
+action = "jump"
+visibility_mode = 1
+
+[node name="Fire" type="TouchScreenButton" parent="UI"]
+position = Vector2(1870, 564)
+scale = Vector2(2, 2)
+action = "shoot"
+visibility_mode = 1

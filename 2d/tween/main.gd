@@ -121,16 +121,25 @@ func start_animation():
 		tween.tween_callback(icon.show)
 		tween.tween_callback(icon.set_self_modulate.bind(Color.WHITE))
 
+	# RESET step
+
+	if %Reset.button_pressed:
+		tween.tween_callback(reset.bind(true))
+
 func do_countdown(v):
 	countdown_label.text = str(v)
 
-func reset():
+func reset(soft := false):
 	icon.position = icon_start_position
 	icon.self_modulate = Color.WHITE
 	icon.rotation = 0
 	icon.scale = Vector2.ONE
 	icon.show()
 	countdown_label.hide()
+
+	if soft:
+		# Only reset properties.
+		return
 
 	if tween:
 		tween.kill()

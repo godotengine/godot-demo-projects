@@ -1,15 +1,110 @@
-[gd_scene load_steps=2 format=3 uid="uid://bbnebk7xoaoto"]
+[gd_scene load_steps=14 format=3 uid="uid://bbnebk7xoaoto"]
+
+[sub_resource type="Gradient" id="Gradient_20ov5"]
+offsets = PackedFloat32Array(0, 0.269231, 0.538462, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.211332, 0.268774, 0.382711, 1, 0.248048, 0.560964, 0.645926, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ja65t"]
+fractal_type = 2
+fractal_gain = 0.333
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gdmpo"]
+height = 256
+seamless = true
+color_ramp = SubResource("Gradient_20ov5")
+noise = SubResource("FastNoiseLite_ja65t")
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_me6gu"]
+panorama = SubResource("NoiseTexture2D_gdmpo")
+
+[sub_resource type="Sky" id="Sky_5j6vf"]
+sky_material = SubResource("PanoramaSkyMaterial_me6gu")
+
+[sub_resource type="Environment" id="Environment_0v44j"]
+background_mode = 2
+sky = SubResource("Sky_5j6vf")
+tonemap_mode = 2
+tonemap_white = 6.0
+
+[sub_resource type="Gradient" id="Gradient_1dao0"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y7cc2"]
+frequency = 0.001
+fractal_type = 2
+fractal_lacunarity = 3.0
+fractal_gain = 1.4
+fractal_weighted_strength = 0.25
+domain_warp_enabled = true
+domain_warp_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_42rpi"]
+seamless = true
+color_ramp = SubResource("Gradient_1dao0")
+noise = SubResource("FastNoiseLite_y7cc2")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rxfm5"]
+frequency = 0.001
+fractal_type = 2
+fractal_octaves = 2
+fractal_lacunarity = 3.0
+fractal_gain = 1.4
+fractal_weighted_strength = 0.25
+domain_warp_enabled = true
+domain_warp_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gwux6"]
+seamless = true
+as_normal_map = true
+bump_strength = 10.0
+color_ramp = SubResource("Gradient_1dao0")
+noise = SubResource("FastNoiseLite_rxfm5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sany7"]
+albedo_texture = SubResource("NoiseTexture2D_42rpi")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_gwux6")
+uv1_scale = Vector3(6, 4, 1)
+texture_filter = 5
 
 [sub_resource type="BoxMesh" id="1"]
+material = SubResource("StandardMaterial3D_sany7")
+size = Vector3(2, 2, 2)
 
 [node name="Cubes" type="Node3D"]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0v44j")
+
 [node name="MeshInstance1" type="MeshInstance3D" parent="."]
-mesh = SubResource( "1" )
+mesh = SubResource("1")
 
 [node name="MeshInstance2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -1)
-mesh = SubResource( "1" )
+mesh = SubResource("1")
+
+[node name="MeshInstance3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+mesh = SubResource("1")
+
+[node name="MeshInstance4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -1)
+mesh = SubResource("1")
+
+[node name="MeshInstance5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+mesh = SubResource("1")
+
+[node name="MeshInstance6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, -1)
+mesh = SubResource("1")
+
+[node name="MeshInstance7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+mesh = SubResource("1")
+
+[node name="MeshInstance8" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -1)
+mesh = SubResource("1")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.877582, 0.229849, -0.420736, 0, 0.877582, 0.479426, 0.479426, -0.420736, 0.770151, -1.68294, 2.25571, 3.0806)
@@ -17,5 +112,6 @@ fov = 74.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 2, 1)
+light_energy = 3.0
 shadow_enabled = true
-shadow_bias = 0.08
+shadow_bias = 0.02

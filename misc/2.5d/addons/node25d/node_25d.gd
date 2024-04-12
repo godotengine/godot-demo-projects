@@ -1,8 +1,10 @@
 # This node converts a 3D position to 2D using a 2.5D transformation matrix.
 # The transformation of its 2D form is controlled by its 3D child.
 @tool
+@icon("res://addons/node25d/icons/node_25d_icon.png")
+class_name Node25D
 extends Node2D
-class_name Node25D, "res://addons/node25d/icons/node_25d_icon.png"
+
 
 # SCALE is the number of 2D units in one 3D unit. Ideally, but not necessarily, an integer.
 const SCALE = 32
@@ -112,7 +114,7 @@ func set_view_mode(view_mode_index):
 # Check if anyone presses the view mode buttons and change the basis accordingly.
 # This can be changed or removed in actual games where you only need one view mode.
 func _check_view_mode():
-	if not Engine.editor_hint:
+	if not Engine.is_editor_hint():
 		if Input.is_action_just_pressed(&"forty_five_mode"):
 			set_view_mode(0)
 		elif Input.is_action_just_pressed(&"isometric_mode"):

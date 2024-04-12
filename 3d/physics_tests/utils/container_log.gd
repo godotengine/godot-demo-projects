@@ -7,7 +7,7 @@ var _entry_template
 
 
 func _enter_tree():
-	Log.connect(&"entry_logged", Callable(self, "_on_log_entry"))
+	Log.entry_logged.connect(_on_log_entry)
 
 	_entry_template = get_child(0) as Label
 	remove_child(_entry_template)

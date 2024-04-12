@@ -34,7 +34,7 @@ func save_game():
 			position = var_to_str(enemy.position),
 		})
 
-	file.store_line(JSON.new().stringify(save_dict))
+	file.store_line(JSON.stringify(save_dict))
 
 	get_node(^"../LoadJSON").disabled = false
 

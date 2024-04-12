@@ -41,7 +41,7 @@ func _process(_delta):
 
 	# Fade the waypoint when the camera gets close.
 	var distance = camera_position.distance_to(parent_position)
-	modulate.a = clamp(range_lerp(distance, 0, 2, 0, 1), 0, 1 )
+	modulate.a = clamp(remap(distance, 0, 2, 0, 1), 0, 1 )
 
 	var unprojected_position = camera.unproject_position(parent_position)
 	# `get_size_override()` will return a valid size only if the stretch mode is `2d`.
@@ -77,7 +77,7 @@ func _process(_delta):
 			unprojected_position.x > viewport_base_size.x - MARGIN:
 		var look = camera_transform.looking_at(parent_position, Vector3.UP)
 		var diff = angle_diff(look.basis.get_euler().x, camera_transform.basis.get_euler().x)
-		unprojected_position.y = viewport_base_size.y * (0.5 + (diff / deg2rad(camera.fov)))
+		unprojected_position.y = viewport_base_size.y * (0.5 + (diff / deg_to_rad(camera.fov)))
 
 	position = Vector2(
 			clamp(unprojected_position.x, MARGIN, viewport_base_size.x - MARGIN),

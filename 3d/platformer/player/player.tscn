@@ -1,13 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://cc4idhykjp5f5"]
+[gd_scene load_steps=28 format=3 uid="uid://cc4idhykjp5f5"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1"]
 [ext_resource type="Script" path="res://player/follow_camera.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://b5ljbav3jdp61" path="res://player/player.glb" id="3_uccbe"]
-[ext_resource type="Texture2D" uid="uid://kujhqacj3v72" path="res://player/controls/osb_up.png" id="4_lmv6w"]
-[ext_resource type="Texture2D" uid="uid://68sox6egj4j7" path="res://player/controls/osb_down.png" id="5_4oxdy"]
-[ext_resource type="Texture2D" uid="uid://r6qxvqi0unib" path="res://player/controls/osb_left.png" id="6_k2dm4"]
+[ext_resource type="PackedScene" uid="uid://yd1e7ai2k5cr" path="res://player/player.glb" id="3_uccbe"]
+[ext_resource type="Texture2D" uid="uid://kujhqacj3v72" path="res://player/controls/osb_up.webp" id="4_lmv6w"]
+[ext_resource type="Texture2D" uid="uid://68sox6egj4j7" path="res://player/controls/osb_down.webp" id="5_4oxdy"]
+[ext_resource type="Texture2D" uid="uid://r6qxvqi0unib" path="res://player/controls/osb_left.webp" id="6_k2dm4"]
 [ext_resource type="AudioStream" uid="uid://cdx3i7hr2acow" path="res://player/sound_shoot.wav" id="7"]
-[ext_resource type="Texture2D" uid="uid://bw76q621n8fie" path="res://player/controls/osb_right.png" id="7_yth2f"]
+[ext_resource type="Texture2D" uid="uid://bw76q621n8fie" path="res://player/controls/osb_right.webp" id="7_yth2f"]
 [ext_resource type="AudioStream" uid="uid://bplqk77bffdxr" path="res://player/sound_jump.wav" id="8"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
@@ -15,7 +15,7 @@ radius = 0.4
 height = 2.1
 
 [sub_resource type="AnimationNodeAnimation" id="13"]
-animation = &"walk"
+animation = &"run"
 
 [sub_resource type="AnimationNodeAnimation" id="14"]
 animation = &"jump"
@@ -26,6 +26,9 @@ animation = &"falling"
 [sub_resource type="AnimationNodeAnimation" id="16"]
 animation = &"shooting_standing"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jij26"]
+animation = &"walk"
+
 [sub_resource type="AnimationNodeAnimation" id="17"]
 animation = &"idle"
 
@@ -35,21 +38,18 @@ animation = &"idle"
 filter_enabled = true
 filters = ["Skeleton/Skeleton3D:MASTER", "Skeleton/Skeleton3D:chest", "Skeleton/Skeleton3D:head", "Skeleton/Skeleton3D:headtracker", "Skeleton/Skeleton3D:hip", "Skeleton/Skeleton3D:l-arm", "Skeleton/Skeleton3D:l-forearm", "Skeleton/Skeleton3D:r-arm", "Skeleton/Skeleton3D:r-forearm", "Skeleton/Skeleton3D:vent", "Skeleton/Skeleton3D:waist"]
 
-[sub_resource type="AnimationNodeTimeScale" id="20"]
-
-[sub_resource type="AnimationNodeTransition" id="21"]
-enabled_inputs = 2
-input_0/name = "on floor"
-input_0/auto_advance = false
-input_1/name = "in air"
-input_1/auto_advance = false
-
 [sub_resource type="AnimationNodeBlend2" id="22"]
 
+[sub_resource type="AnimationNodeTimeScale" id="20"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_lxtyk"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_bivc5"]
+
 [sub_resource type="AnimationNodeBlendTree" id="23"]
-graph_offset = Vector2(-188.795, -39.1622)
+graph_offset = Vector2(-221.364, -194.029)
 nodes/Animation/node = SubResource("17")
-nodes/Animation/position = Vector2(-260, -280)
+nodes/Animation/position = Vector2(-260, -400)
 "nodes/Animation 2/node" = SubResource("13")
 "nodes/Animation 2/position" = Vector2(-260, -160)
 "nodes/Animation 3/node" = SubResource("14")
@@ -58,18 +58,45 @@ nodes/Animation/position = Vector2(-260, -280)
 "nodes/Animation 4/position" = Vector2(-260, 80)
 "nodes/Animation 5/node" = SubResource("16")
 "nodes/Animation 5/position" = Vector2(-260, 200)
+"nodes/Animation 6/node" = SubResource("AnimationNodeAnimation_jij26")
+"nodes/Animation 6/position" = Vector2(-260, -280)
 nodes/air_dir/node = SubResource("18")
 nodes/air_dir/position = Vector2(110, 20)
 nodes/gun/node = SubResource("19")
 nodes/gun/position = Vector2(680, 140)
 nodes/output/position = Vector2(880, 140)
+nodes/run/node = SubResource("22")
+nodes/run/position = Vector2(80, -260)
 nodes/scale/node = SubResource("20")
-nodes/scale/position = Vector2(180, -120)
-nodes/state/node = SubResource("21")
-nodes/state/position = Vector2(440, 0)
-nodes/walk/node = SubResource("22")
-nodes/walk/position = Vector2(-40, -240)
-node_connections = [&"output", 0, &"gun", &"air_dir", 0, &"Animation 3", &"air_dir", 1, &"Animation 4", &"gun", 0, &"state", &"gun", 1, &"Animation 5", &"scale", 0, &"walk", &"state", 0, &"scale", &"state", 1, &"air_dir", &"walk", 0, &"Animation", &"walk", 1, &"Animation 2"]
+nodes/scale/position = Vector2(260, -120)
+nodes/speed/node = SubResource("AnimationNodeBlend2_lxtyk")
+nodes/speed/position = Vector2(-80, -200)
+nodes/state/node = SubResource("AnimationNodeBlend2_bivc5")
+nodes/state/position = Vector2(460, 10)
+node_connections = [&"air_dir", 0, &"Animation 3", &"air_dir", 1, &"Animation 4", &"gun", 0, &"state", &"gun", 1, &"Animation 5", &"output", 0, &"gun", &"run", 0, &"Animation", &"run", 1, &"speed", &"scale", 0, &"run", &"speed", 0, &"Animation 6", &"speed", 1, &"Animation 2", &"state", 0, &"scale", &"state", 1, &"air_dir"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_basvh"]
+random_pitch = 1.03
+streams_count = 1
+stream_0/stream = ExtResource("7")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_axa7i"]
+random_pitch = 1.03
+streams_count = 1
+stream_0/stream = ExtResource("8")
+stream_0/weight = 1.0
+
+[sub_resource type="Gradient" id="Gradient_p2tu5"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.2, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kvc1x"]
+gradient = SubResource("Gradient_p2tu5")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0.01)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1")
@@ -93,8 +120,52 @@ script = ExtResource("2")
 [node name="Skeleton3D" parent="Player/Skeleton" index="0"]
 bones/13/rotation = Quaternion(-0.000357303, 0.998602, 0.0504822, -0.0156872)
 
+[node name="Robot" parent="Player/Skeleton/Skeleton3D" index="0"]
+layers = 2
+
 [node name="Bullet" type="Marker3D" parent="Player/Skeleton" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.94071, 3.6408, 3.3802)
+
+[node name="CoinCount" type="Label3D" parent="Player/Skeleton" index="2"]
+unique_name_in_owner = true
+transform = Transform3D(-3.33333, 0, -2.91409e-07, 0, 3.33333, 0, 2.91409e-07, 0, -3.33333, 0, 7.51037, 0.531589)
+double_sided = false
+no_depth_test = true
+modulate = Color(1, 0.8, 0.4, 1)
+text = "123"
+font_size = 48
+
+[node name="Parallax" type="Label3D" parent="Player/Skeleton/CoinCount"]
+transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0, 0, -0.01)
+double_sided = false
+no_depth_test = true
+modulate = Color(0.8, 0.64, 0.32, 1)
+text = "123"
+font_size = 48
+
+[node name="Parallax2" type="Label3D" parent="Player/Skeleton/CoinCount"]
+transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0, 0, -0.02)
+double_sided = false
+no_depth_test = true
+modulate = Color(0.6, 0.48, 0.24, 1)
+text = "123"
+font_size = 48
+
+[node name="Parallax3" type="Label3D" parent="Player/Skeleton/CoinCount"]
+transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0, 0, -0.03)
+double_sided = false
+no_depth_test = true
+modulate = Color(0.4, 0.318667, 0.156, 1)
+text = "123"
+font_size = 48
+
+[node name="Parallax4" type="Label3D" parent="Player/Skeleton/CoinCount"]
+transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0, 0, -0.04)
+double_sided = false
+no_depth_test = true
+modulate = Color(0.2, 0.159333, 0.078, 1)
+text = "123"
+font_size = 48
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("23")
@@ -102,9 +173,10 @@ anim_player = NodePath("../Player/AnimationPlayer")
 active = true
 parameters/air_dir/blend_amount = 0.0
 parameters/gun/blend_amount = 0.0
+parameters/run/blend_amount = 0.0
 parameters/scale/scale = 1.5
-parameters/state/current = 0
-parameters/walk/blend_amount = 0.0
+parameters/speed/blend_amount = 0
+parameters/state/blend_amount = 0.0
 
 [node name="Forward" type="TouchScreenButton" parent="."]
 visible = false
@@ -142,10 +214,19 @@ passby_press = true
 action = "move_right"
 visibility_mode = 1
 
-[node name="SoundShoot" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("7")
+[node name="SoundShoot" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_basvh")
 
-[node name="SoundJump" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("8")
+[node name="SoundJump" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_axa7i")
+volume_db = -6.0
+
+[node name="BlobShadow" type="Decal" parent="."]
+size = Vector3(1.6, 12, 1.6)
+texture_albedo = SubResource("GradientTexture2D_kvc1x")
+albedo_mix = 0.8
+upper_fade = 3.99999
+lower_fade = 1.0
+cull_mask = 1048573
 
 [editable path="Player"]

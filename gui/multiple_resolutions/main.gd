@@ -4,7 +4,10 @@
 # (with their rect spread across the whole viewport, and Anchor set to Full Rect).
 extends Control
 
-var base_window_size = Vector2(ProjectSettings.get_setting("display/window/size/width"), ProjectSettings.get_setting("display/window/size/height"))
+var base_window_size = Vector2(
+		ProjectSettings.get_setting("display/window/size/viewport_width"),
+		ProjectSettings.get_setting("display/window/size/viewport_height")
+)
 
 # These defaults match this demo's project settings. Adjust as needed if adapting this
 # in your own project.
@@ -23,13 +26,12 @@ func _ready():
 	# The `resized` signal will be emitted when the window size changes, as the root Control node
 	# is resized whenever the window size changes. This is because the root Control node
 	# uses a Full Rect anchor, so its size will always be equal to the window size.
-	# warning-ignore:return_value_discarded
-	connect("resized", self._on_resized)
-	update_container()
+	resized.connect(_on_resized)
+	update_container.call_deferred()
 
 
 func update_container():
-	# The code within this function needs to be run twice to work around an issue with containers
+	# The code within this function needs to be run deferred to work around an issue with containers
 	# having a 1-frame delay with updates.
 	# Otherwise, `panel.size` returns a value of the previous frame, which results in incorrect
 	# sizing of the inner AspectRatioContainer when using the Fit to Window setting.
@@ -73,17 +75,17 @@ func _on_gui_aspect_ratio_item_selected(index):
 		6:  # 21:9
 			gui_aspect_ratio = 21.0 / 9.0
 
-	update_container()
+	update_container.call_deferred()
 
 
 func _on_resized():
-	update_container()
+	update_container.call_deferred()
 
 
 func _on_gui_margin_drag_ended(_value_changed):
 	gui_margin = $"Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMargin/HSlider".value
 	$"Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMargin/Value".text = str(gui_margin)
-	update_container()
+	update_container.call_deferred()
 
 
 func _on_window_base_size_item_selected(index):
@@ -106,7 +108,7 @@ func _on_window_base_size_item_selected(index):
 			base_window_size = Vector2(1680, 720)
 
 	get_viewport().content_scale_size = base_window_size
-	update_container()
+	update_container.call_deferred()
 
 
 func _on_window_stretch_mode_item_selected(index):
@@ -127,3 +129,7 @@ func _on_window_scale_factor_drag_ended(_value_changed):
 	scale_factor = $"Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowScaleFactor/HSlider".value
 	$"Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowScaleFactor/Value".text = "%d%%" % (scale_factor * 100)
 	get_viewport().content_scale_factor = scale_factor
+
+
+func _on_window_stretch_scale_mode_item_selected(index: int) -> void:
+	get_viewport().content_scale_stretch = index

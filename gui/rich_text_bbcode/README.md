@@ -5,10 +5,10 @@ A demo showcasing the support for rich text and BBCode via
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/132
 
 ## Screenshots
 
-![Screenshot](screenshots/rich_text.png)
+![Screenshot](screenshots/rich_text_bbcode.webp)

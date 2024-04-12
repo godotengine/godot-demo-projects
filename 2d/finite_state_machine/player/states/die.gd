@@ -7,4 +7,4 @@ func enter():
 
 
 func _on_animation_finished(_anim_name):
-	emit_signal("finished", "dead")
+	finished.emit("dead")

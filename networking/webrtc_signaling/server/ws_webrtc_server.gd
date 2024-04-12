@@ -103,6 +103,9 @@ func _process(delta):
 
 
 func listen(port):
+	if OS.get_name() == "Web":
+		OS.alert("Cannot create WebSocket servers in Web exports due to browsers' limitations.")
+		return
 	stop()
 	rand.seed = Time.get_unix_time_from_system()
 	tcp_server.listen(port)

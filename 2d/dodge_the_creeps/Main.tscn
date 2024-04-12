@@ -11,17 +11,21 @@
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 720, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 0)
 }
+point_count = 5
 
 [node name="Main" type="Node"]
-script = ExtResource( "1" )
-mob_scene = ExtResource( "2" )
+script = ExtResource("1")
+mob_scene = ExtResource("2")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.219608, 0.372549, 0.380392, 1)
 
-[node name="Player" parent="." instance=ExtResource( "3" )]
+[node name="Player" parent="." instance=ExtResource("3")]
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -32,21 +36,21 @@ wait_time = 0.5
 wait_time = 2.0
 one_shot = true
 
-[node name="StartPosition" type="Position2D" parent="."]
+[node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(240, 450)
 
 [node name="MobPath" type="Path2D" parent="."]
-curve = SubResource( "1" )
+curve = SubResource("1")
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 
-[node name="HUD" parent="." instance=ExtResource( "4" )]
+[node name="HUD" parent="." instance=ExtResource("4")]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( "5" )
+stream = ExtResource("5")
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( "6" )
+stream = ExtResource("6")
 
 [connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]

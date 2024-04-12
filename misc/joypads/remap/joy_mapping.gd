@@ -25,28 +25,28 @@ const PLATFORMS = {
 
 const BASE = {
 	# Buttons
-	"a": JOY_XBOX_A,
-	"b": JOY_XBOX_B,
-	"y": JOY_XBOX_Y,
-	"x": JOY_XBOX_X,
-	"start": JOY_START,
-	"back": JOY_SELECT,
-	"leftstick": JOY_BUTTON_8,
-	"rightstick": JOY_BUTTON_9,
-	"leftshoulder": JOY_L,
-	"rightshoulder": JOY_R,
-	"dpup": JOY_DPAD_UP,
-	"dpleft": JOY_DPAD_LEFT,
-	"dpdown": JOY_DPAD_DOWN,
-	"dpright": JOY_DPAD_RIGHT,
+	"a": JOY_BUTTON_A,
+	"b": JOY_BUTTON_B,
+	"y": JOY_BUTTON_Y,
+	"x": JOY_BUTTON_X,
+	"start": JOY_BUTTON_START,
+	"back": JOY_BUTTON_BACK,
+	"leftstick": JOY_BUTTON_LEFT_STICK,
+	"rightstick": JOY_BUTTON_RIGHT_STICK,
+	"leftshoulder": JOY_BUTTON_LEFT_SHOULDER,
+	"rightshoulder": JOY_BUTTON_RIGHT_SHOULDER,
+	"dpup": JOY_BUTTON_DPAD_UP,
+	"dpleft": JOY_BUTTON_DPAD_LEFT,
+	"dpdown": JOY_BUTTON_DPAD_DOWN,
+	"dpright": JOY_BUTTON_DPAD_RIGHT,
 
 	# Axis
-	"leftx": JOY_AXIS_0,
-	"lefty": JOY_AXIS_1,
-	"rightx": JOY_AXIS_2,
-	"righty": JOY_AXIS_3,
-	"lefttrigger": JOY_ANALOG_L2,
-	"righttrigger": JOY_ANALOG_R2,
+	"leftx": JOY_AXIS_LEFT_X,
+	"lefty": JOY_AXIS_LEFT_Y,
+	"rightx": JOY_AXIS_RIGHT_X,
+	"righty": JOY_AXIS_RIGHT_Y,
+	"lefttrigger": JOY_AXIS_TRIGGER_LEFT,
+	"righttrigger": JOY_AXIS_TRIGGER_RIGHT,
 }
 
 const XBOX = {

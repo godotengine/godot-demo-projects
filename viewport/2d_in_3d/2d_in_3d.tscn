@@ -1,0 +1,167 @@
+[gd_scene load_steps=22 format=3 uid="uid://c587vtbfwth3k"]
+
+[ext_resource type="Script" path="res://2d_in_3d.gd" id="1_b8rgl"]
+[ext_resource type="Script" path="res://pong.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://dbuw5tlmsx6ss" path="res://ball.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://gtbg1ogxcsl7" path="res://left_pallete.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bc2vi0nh1j1hs" path="res://right_pallete.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://wiyhsl0rfkrs" path="res://separator.png" id="6"]
+
+[sub_resource type="StandardMaterial3D" id="6"]
+metallic_specular = 0.0
+
+[sub_resource type="PlaneMesh" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="2"]
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="3"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trcb6"]
+albedo_color = Color(0.501961, 0.752941, 0.752941, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bqwig"]
+albedo_color = Color(0.501961, 0.752941, 0.752941, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_elot5"]
+albedo_color = Color(0.501961, 0.752941, 0.752941, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_phrtn"]
+albedo_color = Color(0.752941, 0.501961, 0.752941, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_omrd7"]
+albedo_color = Color(0.752941, 0.501961, 0.752941, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dvcyb"]
+albedo_color = Color(0.752941, 0.501961, 0.752941, 1)
+roughness = 0.0
+
+[sub_resource type="BoxMesh" id="5"]
+size = Vector3(1.1, 0.8, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="4"]
+albedo_color = Color(0.4, 0.4, 0.4, 1)
+roughness = 0.0
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cvh5i"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_7gemw"]
+sky_material = SubResource("ProceduralSkyMaterial_cvh5i")
+
+[sub_resource type="Environment" id="Environment_fvsgw"]
+background_mode = 2
+sky = SubResource("Sky_7gemw")
+tonemap_mode = 2
+tonemap_white = 2.0
+
+[node name="2Din3D" type="Node3D"]
+script = ExtResource("1_b8rgl")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0.6)
+fov = 62.0
+near = 0.1
+
+[node name="ViewportQuad" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 0, -1.333, 0, 1, 0, 0, 1.2, -4.25)
+material_override = SubResource("6")
+mesh = SubResource("1")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(600, 400)
+render_target_update_mode = 4
+
+[node name="Pong" type="Node2D" parent="SubViewport"]
+script = ExtResource("2")
+
+[node name="Background" type="Panel" parent="SubViewport/Pong"]
+offset_right = 600.0
+offset_bottom = 400.0
+
+[node name="Ball" type="Sprite2D" parent="SubViewport/Pong"]
+position = Vector2(300, 200)
+texture = ExtResource("3")
+
+[node name="LeftPaddle" type="Sprite2D" parent="SubViewport/Pong"]
+position = Vector2(20, 200)
+texture = ExtResource("4")
+
+[node name="RightPaddle" type="Sprite2D" parent="SubViewport/Pong"]
+position = Vector2(580, 200)
+texture = ExtResource("5")
+
+[node name="Separator" type="Sprite2D" parent="SubViewport/Pong"]
+position = Vector2(298, 200)
+texture = ExtResource("6")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -1, -2)
+mesh = SubResource("1")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("2")
+
+[node name="Pillar1" type="Node3D" parent="Environment"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -3, -0.2, -4)
+
+[node name="PillarBottom" type="MeshInstance3D" parent="Environment/Pillar1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("3")
+surface_material_override/0 = SubResource("StandardMaterial3D_trcb6")
+
+[node name="PillarTop" type="MeshInstance3D" parent="Environment/Pillar1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+mesh = SubResource("3")
+surface_material_override/0 = SubResource("StandardMaterial3D_bqwig")
+
+[node name="PillarMiddle" type="MeshInstance3D" parent="Environment/Pillar1"]
+transform = Transform3D(0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, 0, 2.5, 0)
+mesh = SubResource("3")
+surface_material_override/0 = SubResource("StandardMaterial3D_elot5")
+
+[node name="Pillar2" type="Node3D" parent="Environment"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 3, -0.2, -4)
+
+[node name="PillarBottom" type="MeshInstance3D" parent="Environment/Pillar2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("3")
+surface_material_override/0 = SubResource("StandardMaterial3D_phrtn")
+
+[node name="PillarTop" type="MeshInstance3D" parent="Environment/Pillar2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+mesh = SubResource("3")
+surface_material_override/0 = SubResource("StandardMaterial3D_omrd7")
+
+[node name="PillarMiddle" type="MeshInstance3D" parent="Environment/Pillar2"]
+transform = Transform3D(0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, 0, 2.5, 0)
+mesh = SubResource("3")
+surface_material_override/0 = SubResource("StandardMaterial3D_dvcyb")
+
+[node name="PillarBack" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 1.2, -4.5)
+mesh = SubResource("5")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("4")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_fvsgw")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(0.623013, -0.733525, 0.271653, 0.321394, 0.55667, 0.766045, -0.713134, -0.389948, 0.582563, 0, 10, 0)
+light_energy = 0.15
+shadow_enabled = true
+shadow_bias = 0.03
+shadow_blur = 1.5
+directional_shadow_mode = 0
+directional_shadow_blend_splits = true
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 10.0

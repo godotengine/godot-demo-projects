@@ -12,24 +12,29 @@ config_version=5
 
 config/name="Pause"
 config/description="A demo showing how a game made in Godot can be paused."
+config/tags=PackedStringArray("demo", "official")
 run/main_scene="res://spinpause.tscn"
-config/icon="res://icon.png"
-config/features=PackedStringArray("4.0")
+config/features=PackedStringArray("4.2")
+config/icon="res://icon.webp"
 
 [display]
 
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
-[gdnative]
+[input]
 
-singletons=[]
+toggle_pause={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":80,"physical_keycode":0,"key_label":0,"unicode":112,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194313,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
 
 [rendering]
 
-vulkan/rendering/back_end=1
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.133333, 0.133333, 0.133333, 1)
-quality/intended_usage/framebuffer_allocation=3
-vram_compression/import_etc=true
-vram_compression/import_etc2=false
-quality/filters/msaa=2
+anti_aliasing/quality/msaa_3d=2
+anti_aliasing/quality/use_debanding=true

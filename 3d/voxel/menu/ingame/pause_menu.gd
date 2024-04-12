@@ -33,7 +33,7 @@ func _on_Options_pressed():
 
 func _on_MainMenu_pressed():
 	voxel_world.clean_up()
-	tree.change_scene("res://menu/main/main_menu.tscn")
+	tree.change_scene_to_packed(load("res://menu/main/main_menu.tscn"))
 
 
 func _on_Exit_pressed():

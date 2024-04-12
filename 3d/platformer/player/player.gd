@@ -9,14 +9,14 @@ enum _Anim {
 const SHOOT_TIME = 1.5
 const SHOOT_SCALE = 2.0
 const CHAR_SCALE = Vector3(0.3, 0.3, 0.3)
-const MAX_SPEED = 4.5
+const MAX_SPEED = 6.0
 const TURN_SPEED = 40.0
-const JUMP_VELOCITY = 8.5
+const JUMP_VELOCITY = 12.5
 const BULLET_SPEED = 20.0
 const AIR_IDLE_DEACCEL = false
 const ACCEL = 14.0
 const DEACCEL = 14.0
-const AIR_ACCEL_FACTOR = 0.4
+const AIR_ACCEL_FACTOR = 0.5
 const SHARP_TURN_THRESHOLD = deg_to_rad(140.0)
 
 var movement_dir := Vector3()
@@ -24,7 +24,11 @@ var jumping := false
 var prev_shoot := false
 var shoot_blend := 0.0
 
-@onready var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * \
+# Number of coins collected.
+var coins := 0
+
+@onready var initial_position := position
+@onready var gravity: Vector3 = ProjectSettings.get_setting("physics/3d/default_gravity") * \
 		ProjectSettings.get_setting("physics/3d/default_gravity_vector")
 
 @onready var _camera := $Target/Camera3D as Camera3D
@@ -32,6 +36,19 @@ var shoot_blend := 0.0
 
 
 func _physics_process(delta):
+	if Input.is_action_pressed("reset_position") or global_position.y < -12:
+		# Player hit the reset button or fell off the map.
+		position = initial_position
+		velocity = Vector3.ZERO
+
+	# Update coin count and its "parallax" copies.
+	# This gives text a pseudo-3D appearance while still using Label3D instead of the more limited TextMesh.
+	%CoinCount.text = str(coins)
+	%CoinCount.get_node("Parallax").text = str(coins)
+	%CoinCount.get_node("Parallax2").text = str(coins)
+	%CoinCount.get_node("Parallax3").text = str(coins)
+	%CoinCount.get_node("Parallax4").text = str(coins)
+
 	velocity += gravity * delta
 
 	var anim := _Anim.FLOOR
@@ -101,6 +118,7 @@ func _physics_process(delta):
 			vertical_velocity = JUMP_VELOCITY
 			jumping = true
 			$SoundJump.play()
+
 	else:
 		anim = _Anim.AIR
 
@@ -114,6 +132,10 @@ func _physics_process(delta):
 				horizontal_speed = 0
 			horizontal_velocity = horizontal_direction * horizontal_speed
 
+		if Input.is_action_just_released("jump") and velocity.y > 0.0:
+			# Reduce jump height if releasing the jump key before reaching the apex.
+			vertical_velocity *= 0.7
+
 	if jumping and vertical_velocity < 0:
 		jumping = false
 
@@ -125,7 +147,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 	if shoot_blend > 0:
-		shoot_blend -= delta * SHOOT_SCALE
+		shoot_blend *= 0.97
 		if (shoot_blend < 0):
 			shoot_blend = 0
 
@@ -143,11 +165,15 @@ func _physics_process(delta):
 	prev_shoot = shoot_attempt
 
 	if is_on_floor():
-		_animation_tree[&"parameters/walk/blend_amount"] = horizontal_speed / MAX_SPEED
+		# How much the player should be blending between the "idle" and "walk/run" animations.
+		_animation_tree[&"parameters/run/blend_amount"] = horizontal_speed / MAX_SPEED
 
-	_animation_tree[&"parameters/state/current"] = anim
-	_animation_tree[&"parameters/air_dir/blend_amount"] = clamp(-velocity.y / 4 + 0.5, 0, 1)
-	_animation_tree[&"parameters/gun/blend_amount"] = min(shoot_blend, 1.0)
+		# How much the player should be running (as opposed to walking). 0.0 = fully walking, 1.0 = fully running.
+		_animation_tree[&"parameters/speed/blend_amount"] = minf(1.0, horizontal_speed / (MAX_SPEED * 0.5))
+
+	_animation_tree[&"parameters/state/blend_amount"] = anim
+	_animation_tree[&"parameters/air_dir/blend_amount"] = clampf(-velocity.y / 4 + 0.5, 0, 1)
+	_animation_tree[&"parameters/gun/blend_amount"] = minf(shoot_blend, 1.0)
 
 
 func adjust_facing(facing: Vector3, target: Vector3, step: float, adjust_rate: float, \
@@ -160,7 +186,7 @@ func adjust_facing(facing: Vector3, target: Vector3, step: float, adjust_rate: f
 
 	var ang := atan2(y,x)
 
-	if abs(ang) < 0.001:
+	if absf(ang) < 0.001:
 		return facing
 
 	var s := signf(ang)

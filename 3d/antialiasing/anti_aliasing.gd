@@ -1,5 +1,6 @@
 extends Node
 
+
 const ROT_SPEED = 0.003
 const ZOOM_SPEED = 0.125
 const MAIN_BUTTONS = MOUSE_BUTTON_MASK_LEFT | MOUSE_BUTTON_MASK_RIGHT | MOUSE_BUTTON_MASK_MIDDLE
@@ -14,12 +15,17 @@ var base_height = ProjectSettings.get_setting("display/window/size/viewport_heig
 @onready var camera_holder = $CameraHolder # Has a position and rotates on Y.
 @onready var rotation_x = $CameraHolder/RotationX
 @onready var camera = $CameraHolder/RotationX/Camera3D
+@onready var fps_label = $FPSLabel
 
 
 func _ready():
+	# Disable V-Sync to uncap framerate on supported platforms. This makes performance comparison
+	# easier on high-end machines that easily reach the monitor's refresh rate.
+	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	camera_holder.transform.basis = Basis.from_euler(Vector3(0, rot_y, 0))
 	rotation_x.transform.basis = Basis.from_euler(Vector3(rot_x, 0, 0))
 	update_gui()
+	get_viewport().size_changed.connect(_on_viewport_size_changed)
 
 
 func _unhandled_input(event):
@@ -50,8 +56,14 @@ func _process(delta):
 	# This code assumes CameraHolder's X and Y coordinates are already correct.
 	var current_position = camera_holder.global_transform.origin.z
 	var target_position = current_tester.global_transform.origin.z
-	camera_holder.global_transform.origin.z = lerp(current_position, target_position, 3 * delta)
-	camera.position.z = lerp(camera.position.z, camera_distance, 10 * delta)
+	camera_holder.global_transform.origin.z = lerpf(current_position, target_position, 3 * delta)
+	camera.position.z = lerpf(camera.position.z, camera_distance, 10 * delta)
+	fps_label.text = "%d FPS (%.2f mspf)" % [Engine.get_frames_per_second(), 1000.0 / Engine.get_frames_per_second()]
+	# Color FPS counter depending on framerate.
+	# The Gradient resource is stored as metadata within the FPSLabel node (accessible in the inspector).
+	fps_label.modulate = fps_label.get_meta("gradient").sample(remap(Engine.get_frames_per_second(), 0, 180, 0.0, 1.0))
+
+
 
 
 func _on_previous_pressed():
@@ -70,31 +82,77 @@ func update_gui():
 	$Next.disabled = tester_index == testers.get_child_count() - 1
 
 
-func _on_fxaa_toggled(button_pressed):
-	get_viewport().screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA if button_pressed else Viewport.SCREEN_SPACE_AA_DISABLED
-
-
-func _on_temporal_antialiasing_toggled(button_pressed):
-	get_viewport().use_taa = button_pressed
-
-
 func _on_msaa_item_selected(index):
-	get_viewport().msaa = index
+	# Multi-sample anti-aliasing. High quality, but slow. It also does not smooth out the edges of
+	# transparent (alpha scissor) textures.
+	get_viewport().msaa_3d = index
 
 
-func _on_render_scale_item_selected(index):
+func _on_limit_fps_scale_value_changed(value):
+	# The rendering FPS affects the appearance of TAA, as higher framerates allow it to converge faster.
+	# On high refresh rate monitors, TAA ghosting issues may appear less noticeable as a result
+	# (if the GPU can keep up).
+	$Antialiasing/LimitFPSContainer/Value.text = str(value)
+	Engine.max_fps = value
+
+
+func _on_render_scale_value_changed(value):
+	get_viewport().scaling_3d_scale = value
+	$Antialiasing/RenderScaleContainer/Value.text = "%d%%" % (value * 100)
+	# Update viewport resolution text.
+	_on_viewport_size_changed()
+	# FSR 1.0 is only effective if render scale is below 100%, so hide the setting if at native resolution or higher.
+	$Antialiasing/FidelityFXFSR.visible = value < 1.0
+	$Antialiasing/FSRSharpness.visible = get_viewport().scaling_3d_mode == Viewport.SCALING_3D_MODE_FSR and value < 1.0
+
+
+func _on_amd_fidelityfx_fsr1_toggled(button_pressed):
+	get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR if button_pressed else Viewport.SCALING_3D_MODE_BILINEAR
+	# FSR 1.0 is only effective if render scale is below 100%, so hide the setting if at native resolution or higher.
+	$Antialiasing/FSRSharpness.visible = button_pressed
+
+
+func _on_fsr_sharpness_item_selected(index):
+	# *Lower* values of FSR sharpness are sharper.
 	match index:
 		0:
-			get_viewport().scaling_3d_scale = 0.5
+			get_viewport().fsr_sharpness = 2.0
 		1:
-			get_viewport().scaling_3d_scale = 0.75
+			get_viewport().fsr_sharpness = 0.8
 		2:
-			get_viewport().scaling_3d_scale = 1.0
+			get_viewport().fsr_sharpness = 0.4
 		3:
-			get_viewport().scaling_3d_scale = 1.25
+			get_viewport().fsr_sharpness = 0.2
 		4:
-			get_viewport().scaling_3d_scale = 1.5
-		5:
-			get_viewport().scaling_3d_scale = 1.75
-		6:
-			get_viewport().scaling_3d_scale = 2.0
+			get_viewport().fsr_sharpness = 0.0
+
+
+func _on_viewport_size_changed():
+	$ViewportResolution.text = "Viewport resolution: %d×%d" % [get_viewport().size.x * get_viewport().scaling_3d_scale, get_viewport().size.y * get_viewport().scaling_3d_scale]
+
+
+func _on_v_sync_item_selected(index):
+	# Vsync is enabled by default.
+	# Vertical synchronization locks framerate and makes screen tearing not visible at the cost of
+	# higher input latency and stuttering when the framerate target is not met.
+	# Adaptive V-Sync automatically disables V-Sync when the framerate target is not met, and enables
+	# V-Sync otherwise. This prevents suttering and reduces input latency when the framerate target
+	# is not met, at the cost of visible tearing.
+	if index == 0: # Disabled (default)
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+	elif index == 1: # Adaptive
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ADAPTIVE)
+	elif index == 2: # Enabled
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+
+
+func _on_taa_item_selected(index):
+	# Temporal antialiasing. Smooths out everything including specular aliasing, but can introduce
+	# ghosting artifacts and blurring in motion. Moderate performance cost.
+	get_viewport().use_taa = index == 1
+
+
+func _on_fxaa_item_selected(index):
+	# Fast approximate anti-aliasing. Much faster than MSAA (and works on alpha scissor edges),
+	# but blurs the whole scene rendering slightly.
+	get_viewport().screen_space_aa = int(index == 1) as Viewport.ScreenSpaceAA

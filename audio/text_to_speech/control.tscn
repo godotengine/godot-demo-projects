@@ -1,0 +1,244 @@
+[gd_scene load_steps=2 format=3 uid="uid://u5emvyeyodyh"]
+
+[ext_resource type="Script" path="res://voice_list.gd" id="1_0bwjs"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -312.0
+offset_right = -576.0
+offset_bottom = -312.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_0bwjs")
+
+[node name="LineEditFilterLang" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 304.0
+offset_right = 704.0
+offset_bottom = 337.0
+theme_override_font_sizes/font_size = 16
+placeholder_text = "Language"
+
+[node name="LineEditFilterName" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 304.0
+offset_right = 408.0
+offset_bottom = 337.0
+theme_override_font_sizes/font_size = 16
+placeholder_text = "Name"
+
+[node name="Label" type="Label" parent="LineEditFilterName"]
+layout_mode = 0
+offset_left = -76.0
+offset_top = 3.0
+offset_right = -20.0
+offset_bottom = 35.0
+text = "Filter:"
+
+[node name="Tree" type="Tree" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 56.0
+offset_right = 704.0
+offset_bottom = 296.0
+columns = 2
+
+[node name="Utterance" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 472.0
+offset_right = 704.0
+offset_bottom = 584.0
+theme_override_font_sizes/font_size = 16
+text = "Beware the Jabberwock, my son! The jaws that bite, the claws that catch!"
+wrap_mode = 1
+draw_spaces = true
+
+[node name="ButtonSpeak" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 472.0
+offset_right = 128.0
+offset_bottom = 504.0
+text = "Speak"
+
+[node name="ButtonIntSpeak" type="Button" parent="."]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 472.0
+offset_right = 256.0
+offset_bottom = 504.0
+text = "Interrupt"
+
+[node name="ButtonStop" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 512.0
+offset_right = 128.0
+offset_bottom = 544.0
+text = "Stop"
+
+[node name="ButtonPause" type="Button" parent="."]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 512.0
+offset_right = 256.0
+offset_bottom = 544.0
+toggle_mode = true
+text = "Pause"
+
+[node name="HSliderRate" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 352.0
+offset_right = 440.0
+offset_bottom = 368.0
+min_value = 0.1
+max_value = 10.0
+step = 0.05
+value = 1.0
+exp_edit = true
+
+[node name="Label" type="Label" parent="HSliderRate"]
+layout_mode = 0
+offset_left = -76.0
+offset_top = -5.0
+offset_right = -20.0
+offset_bottom = 27.0
+text = "Rate:"
+
+[node name="Value" type="Label" parent="HSliderRate"]
+layout_mode = 0
+offset_left = 352.0
+offset_top = -8.0
+offset_right = 416.0
+offset_bottom = 24.0
+text = "1.00x"
+
+[node name="HSliderPitch" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 392.0
+offset_right = 440.0
+offset_bottom = 408.0
+max_value = 2.0
+step = 0.05
+value = 1.0
+
+[node name="Label" type="Label" parent="HSliderPitch"]
+layout_mode = 0
+offset_left = -76.0
+offset_top = -5.0
+offset_right = -28.0
+offset_bottom = 27.0
+text = "Pitch:"
+
+[node name="Value" type="Label" parent="HSliderPitch"]
+layout_mode = 0
+offset_left = 352.0
+offset_top = -8.0
+offset_right = 416.0
+offset_bottom = 24.0
+text = "1.00x"
+
+[node name="HSliderVolume" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 432.0
+offset_right = 440.0
+offset_bottom = 448.0
+min_value = 1.0
+value = 50.0
+
+[node name="Label" type="Label" parent="HSliderVolume"]
+layout_mode = 0
+offset_left = -76.0
+offset_top = -5.0
+offset_right = -12.0
+offset_bottom = 27.0
+text = "Volume:"
+
+[node name="Value" type="Label" parent="HSliderVolume"]
+layout_mode = 0
+offset_left = 352.0
+offset_top = -8.0
+offset_right = 416.0
+offset_bottom = 24.0
+text = "50%"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 144.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 32.0
+theme_override_font_sizes/font_size = 16
+text = "Speaking..."
+
+[node name="Log" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 712.0
+offset_top = 56.0
+offset_right = 1138.0
+offset_bottom = 584.0
+editable = false
+context_menu_enabled = false
+shortcut_keys_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+
+[node name="ButtonClearLog" type="Button" parent="Log"]
+layout_mode = 0
+offset_left = 346.0
+offset_top = 8.0
+offset_right = 418.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 16
+text = "Clear"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 16.0
+offset_right = 1008.0
+offset_bottom = 40.0
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+scroll_active = false
+
+[node name="ButtonDemo" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 552.0
+offset_right = 256.0
+offset_bottom = 581.0
+theme_override_font_sizes/font_size = 16
+text = "Demo"
+
+[connection signal="text_changed" from="LineEditFilterLang" to="." method="_on_LineEditFilterName_text_changed"]
+[connection signal="text_changed" from="LineEditFilterName" to="." method="_on_LineEditFilterName_text_changed"]
+[connection signal="item_activated" from="Tree" to="." method="_on_ItemList_item_activated"]
+[connection signal="pressed" from="ButtonSpeak" to="." method="_on_ButtonSpeak_pressed"]
+[connection signal="pressed" from="ButtonIntSpeak" to="." method="_on_ButtonIntSpeak_pressed"]
+[connection signal="pressed" from="ButtonStop" to="." method="_on_ButtonStop_pressed"]
+[connection signal="pressed" from="ButtonPause" to="." method="_on_ButtonPause_pressed"]
+[connection signal="value_changed" from="HSliderRate" to="." method="_on_HSliderRate_value_changed"]
+[connection signal="value_changed" from="HSliderPitch" to="." method="_on_HSliderPitch_value_changed"]
+[connection signal="value_changed" from="HSliderVolume" to="." method="_on_HSliderVolume_value_changed"]
+[connection signal="pressed" from="Log/ButtonClearLog" to="." method="_on_ButtonClearLog_pressed"]
+[connection signal="pressed" from="ButtonDemo" to="." method="_on_Button_pressed"]

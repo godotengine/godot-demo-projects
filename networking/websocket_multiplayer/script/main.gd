@@ -30,7 +30,7 @@ func _ready():
 	if OS.has_environment("USERNAME"):
 		_name_edit.text = OS.get_environment("USERNAME")
 	else:
-		var desktop_path = OS.get_system_dir(0).replace("\\", "/").split("/")
+		var desktop_path = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP).replace("\\", "/").split("/")
 		_name_edit.text = desktop_path[desktop_path.size() - 2]
 
 
