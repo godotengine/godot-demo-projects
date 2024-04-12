@@ -2,8 +2,8 @@
 # The transformation of its 2D form is controlled by its 3D child.
 @tool
 @icon("res://addons/node25d/icons/node_25d_icon.png")
-extends Node2D
 class_name Node25D
+extends Node2D
 
 
 # SCALE is the number of 2D units in one 3D unit. Ideally, but not necessarily, an integer.

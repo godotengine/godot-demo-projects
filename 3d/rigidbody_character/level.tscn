@@ -1,13 +1,35 @@
-[gd_scene load_steps=17 format=3 uid="uid://y0rsox5qdoci"]
+[gd_scene load_steps=19 format=3 uid="uid://y0rsox5qdoci"]
 
 [ext_resource type="MeshLibrary" uid="uid://dxc3y3vtd7ins" path="res://cubelib.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://cbvuesb1ptdh4" path="res://player/cubio.tscn" id="2"]
 [ext_resource type="ArrayMesh" uid="uid://h65pkfq5sgmy" path="res://models/cube.mesh" id="3"]
-[ext_resource type="Environment" uid="uid://bupmwdx23k178" path="res://default_env.tres" id="3_scanf"]
 [ext_resource type="PackedScene" uid="uid://bonauusmt0ss" path="res://models/mushroom.glb" id="5"]
 [ext_resource type="Script" path="res://level.gd" id="6"]
 [ext_resource type="Texture2D" uid="uid://5wiey7d4yffc" path="res://models/white_wood.png" id="6_slp5m"]
 [ext_resource type="PackedScene" uid="uid://bftavngs5kq7e" path="res://cube_rigidbody.tscn" id="7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fiix7"]
+sky_top_color = Color(0.36, 0.20772, 0.1908, 1)
+sky_horizon_color = Color(0.56, 0.16688, 0.1232, 1)
+ground_bottom_color = Color(0.0352941, 0.0352941, 0.0313726, 1)
+ground_horizon_color = Color(0.42, 0.042, 0, 1)
+ground_curve = 0.25
+
+[sub_resource type="Sky" id="1"]
+sky_material = SubResource("ProceduralSkyMaterial_fiix7")
+radiance_size = 0
+
+[sub_resource type="Environment" id="Environment_jpjfl"]
+background_mode = 2
+sky = SubResource("1")
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.5
+tonemap_mode = 3
+tonemap_white = 6.0
+glow_levels/7 = 1.0
+glow_strength = 0.79
+glow_bloom = 1.0
+glow_blend_mode = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_84cgt"]
 resource_name = "Material"
@@ -16,7 +38,7 @@ albedo_texture = ExtResource("6_slp5m")
 roughness = 0.75
 texture_filter = 5
 
-[sub_resource type="BoxShape3D" id="1"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_w6bmu"]
 margin = 0.001
 
 [sub_resource type="Animation" id="2"]
@@ -82,7 +104,7 @@ data = {
 }
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("3_scanf")
+environment = SubResource("Environment_jpjfl")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.766044, 0.45452, -0.454519, 0, 0.707107, 0.707107, 0.642788, 0.541675, -0.541675, 0, 5, 1)
@@ -108,14 +130,14 @@ mesh = ExtResource("3")
 surface_material_override/0 = SubResource("StandardMaterial3D_84cgt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Elevator1"]
-shape = SubResource("1")
+shape = SubResource("BoxShape3D_w6bmu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Elevator1"]
-autoplay = "updown1"
-playback_process_mode = 0
+callback_mode_process = 0
 libraries = {
 "": SubResource("AnimationLibrary_64cvx")
 }
+autoplay = "updown1"
 
 [node name="Elevator2" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 8.5, 4.5)
@@ -125,14 +147,14 @@ mesh = ExtResource("3")
 surface_material_override/0 = SubResource("StandardMaterial3D_0eb0o")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Elevator2"]
-shape = SubResource("1")
+shape = SubResource("BoxShape3D_w6bmu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Elevator2"]
-autoplay = "side"
-playback_process_mode = 0
+callback_mode_process = 0
 libraries = {
 "": SubResource("AnimationLibrary_4vwp8")
 }
+autoplay = "side"
 
 [node name="Princess" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.25, 3)

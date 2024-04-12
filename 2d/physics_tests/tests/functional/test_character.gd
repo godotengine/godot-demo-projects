@@ -44,8 +44,8 @@ var _moving_body: PhysicsBody2D = null
 
 
 func _ready():
-	options.option_selected.connect(self._on_option_selected)
-	options.option_changed.connect(self._on_option_changed)
+	options.option_selected.connect(_on_option_selected)
+	options.option_changed.connect(_on_option_changed)
 
 	_character_body_template = find_child("CharacterBody2D")
 	if _character_body_template:

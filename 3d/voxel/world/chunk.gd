@@ -30,7 +30,7 @@ func _ready():
 	_generate_chunk_collider()
 	# However, we can use a thread for mesh generation.
 	_thread = Thread.new()
-	_thread.start(self._generate_chunk_mesh)
+	_thread.start(_generate_chunk_mesh)
 
 
 func regenerate():
@@ -81,7 +81,7 @@ func _generate_chunk_mesh():
 	var mi = MeshInstance3D.new()
 	mi.mesh = array_mesh
 	mi.material_override = preload("res://world/textures/material.tres")
-	add_child(mi)
+	add_child.call_deferred(mi)
 
 
 func _draw_block_mesh(surface_tool, block_sub_position, block_id):

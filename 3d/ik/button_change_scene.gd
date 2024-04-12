@@ -4,7 +4,7 @@ extends Button
 
 
 func _ready():
-	pressed.connect(self.change_scene)
+	pressed.connect(change_scene)
 
 
 func change_scene():

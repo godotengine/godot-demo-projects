@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://bypumcqt7j0iv"]
+
+[ext_resource type="FontFile" uid="uid://b2r8e5d6rc4pg" path="res://theme/fonts/montserrat_extra_bold.otf" id="1"]
+
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("1")])
+face_index = null
+embolden = null
+transform = null
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dsedd"]
+bg_color = Color(0.541176, 0.72549, 0.819608, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.4488, 0.602933, 0.68, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s3yjq"]
+bg_color = Color(0.945098, 0.235294, 0.376471, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="Theme" id="Theme_vywfd"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_dsedd")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_s3yjq")
+
+[node name="Info" type="PanelContainer"]
+offset_right = 400.0
+offset_bottom = 239.0
+scale = Vector2(0.907481, 1)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+alignment = 1
+
+[node name="NameContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Name" type="Label" parent="VBoxContainer/NameContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+theme_override_colors/font_color = Color(0.0745098, 0.27451, 0.368627, 1)
+theme_override_colors/font_shadow_color = Color(0.184314, 0.419608, 0.533333, 0.356863)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = SubResource("1")
+text = "{NAME}"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HealthContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Health" type="ProgressBar" parent="VBoxContainer/HealthContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme = SubResource("Theme_vywfd")
+max_value = 10.0
+step = 1.0
+value = 5.0
+rounded = true
+show_percentage = false

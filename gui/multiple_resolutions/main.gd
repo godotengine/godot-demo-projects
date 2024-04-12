@@ -26,8 +26,8 @@ func _ready():
 	# The `resized` signal will be emitted when the window size changes, as the root Control node
 	# is resized whenever the window size changes. This is because the root Control node
 	# uses a Full Rect anchor, so its size will always be equal to the window size.
-	resized.connect(self._on_resized)
-	call_deferred("update_container")
+	resized.connect(_on_resized)
+	update_container.call_deferred()
 
 
 func update_container():
@@ -75,17 +75,17 @@ func _on_gui_aspect_ratio_item_selected(index):
 		6:  # 21:9
 			gui_aspect_ratio = 21.0 / 9.0
 
-	call_deferred("update_container")
+	update_container.call_deferred()
 
 
 func _on_resized():
-	call_deferred("update_container")
+	update_container.call_deferred()
 
 
 func _on_gui_margin_drag_ended(_value_changed):
 	gui_margin = $"Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMargin/HSlider".value
 	$"Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMargin/Value".text = str(gui_margin)
-	call_deferred("update_container")
+	update_container.call_deferred()
 
 
 func _on_window_base_size_item_selected(index):
@@ -108,7 +108,7 @@ func _on_window_base_size_item_selected(index):
 			base_window_size = Vector2(1680, 720)
 
 	get_viewport().content_scale_size = base_window_size
-	call_deferred("update_container")
+	update_container.call_deferred()
 
 
 func _on_window_stretch_mode_item_selected(index):
@@ -129,3 +129,7 @@ func _on_window_scale_factor_drag_ended(_value_changed):
 	scale_factor = $"Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowScaleFactor/HSlider".value
 	$"Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowScaleFactor/Value".text = "%d%%" % (scale_factor * 100)
 	get_viewport().content_scale_factor = scale_factor
+
+
+func _on_window_stretch_scale_mode_item_selected(index: int) -> void:
+	get_viewport().content_scale_stretch = index

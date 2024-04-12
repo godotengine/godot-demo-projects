@@ -17,11 +17,11 @@ var peer = null
 
 func _ready():
 	# Connect all the callbacks related to networking.
-	multiplayer.peer_connected.connect(self._player_connected)
-	multiplayer.peer_disconnected.connect(self._player_disconnected)
-	multiplayer.connected_to_server.connect(self._connected_ok)
-	multiplayer.connection_failed.connect(self._connected_fail)
-	multiplayer.server_disconnected.connect(self._server_disconnected)
+	multiplayer.peer_connected.connect(_player_connected)
+	multiplayer.peer_disconnected.connect(_player_disconnected)
+	multiplayer.connected_to_server.connect(_connected_ok)
+	multiplayer.connection_failed.connect(_connected_fail)
+	multiplayer.server_disconnected.connect(_server_disconnected)
 
 #### Network callbacks from SceneTree ####
 
@@ -30,7 +30,7 @@ func _player_connected(_id):
 	# Someone connected, start the game!
 	var pong = load("res://pong.tscn").instantiate()
 	# Connect deferred so we can safely erase it from the callback.
-	pong.game_finished.connect(self._end_game, CONNECT_DEFERRED)
+	pong.game_finished.connect(_end_game, CONNECT_DEFERRED)
 
 	get_tree().get_root().add_child(pong)
 	hide()

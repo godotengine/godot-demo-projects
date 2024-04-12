@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3wwlb4huytmt"]
+
+[ext_resource type="Texture2D" uid="uid://rek0t7kubpx4" path="res://assets/pattern.png" id="1_qv1d7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v7wcs"]
+size = Vector3(5, 1, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n2enf"]
+albedo_color = Color(1, 0.658824, 0.321569, 1)
+albedo_texture = ExtResource("1_qv1d7")
+
+[sub_resource type="BoxMesh" id="BoxMesh_m8cmi"]
+size = Vector3(5, 1, 3)
+
+[node name="Ramp" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_v7wcs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_n2enf")
+mesh = SubResource("BoxMesh_m8cmi")

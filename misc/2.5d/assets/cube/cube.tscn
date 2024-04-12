@@ -1,22 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://b6oxx8ppj53nt"]
 
-[ext_resource path="res://addons/node25d/icons/y_sort_25d_icon.png" type="Texture2D" id=1]
-[ext_resource path="res://assets/ui/overlay_cube.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/cube/cube_math.gd" type="Script" id=3]
-[ext_resource path="res://addons/node25d/y_sort_25d.gd" type="Script" id=4]
+[ext_resource type="PackedScene" uid="uid://c54vn5cyu7bwg" path="res://assets/ui/overlay_cube.tscn" id="2"]
+[ext_resource type="Script" path="res://assets/cube/cube_math.gd" id="3"]
+[ext_resource type="Script" path="res://addons/node25d/y_sort_25d.gd" id="4"]
 
 [node name="Cube" type="Node2D"]
 
-[node name="Overlay" parent="." instance=ExtResource( 2 )]
+[node name="Overlay" parent="." instance=ExtResource("2")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-current = true
 
 [node name="CubeMath" type="Node3D" parent="."]
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="YSort25D" type="Node" parent="."]
-script = ExtResource( 4 )
-__meta__ = {
-"_editor_icon": ExtResource( 1 )
-}
+script = ExtResource("4")

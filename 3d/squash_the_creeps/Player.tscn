@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dp478jyugrn7o"]
+[gd_scene load_steps=8 format=3 uid="uid://dp478jyugrn7o"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://d0ypm0v45pwdv" path="res://art/player.glb" id="2"]
@@ -10,8 +10,13 @@ radius = 0.792278
 height = 0.1438
 radius = 0.907607
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_76fa1"]
+height = 0.144
+radius = 0.2
+
 [sub_resource type="Animation" id="3"]
 length = 1.2
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -49,7 +54,7 @@ script = ExtResource("1")
 [node name="Pivot" type="Node3D" parent="."]
 
 [node name="Character" parent="Pivot" instance=ExtResource("2")]
-transform = Transform3D(1, 0, 0, 0, 0.996145, 0.0877225, 0, -0.0877225, 0.996145, 0, 0.329753, 0)
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0.349734, 0)
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.771765, 0)
@@ -64,10 +69,26 @@ monitorable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06491, 0)
 shape = SubResource("2")
 
+[node name="CollisionShape2" type="CollisionShape3D" parent="MobDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.455268, 0.95, 1.1423)
+shape = SubResource("CylinderShape3D_76fa1")
+
+[node name="CollisionShape3" type="CollisionShape3D" parent="MobDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.716365, 0.95, 1.71889)
+shape = SubResource("CylinderShape3D_76fa1")
+
+[node name="CollisionShape4" type="CollisionShape3D" parent="MobDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.730546, 0.95, 1.69713)
+shape = SubResource("CylinderShape3D_76fa1")
+
+[node name="CollisionShape5" type="CollisionShape3D" parent="MobDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45857, 0.95, 1.15318)
+shape = SubResource("CylinderShape3D_76fa1")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "float"
 libraries = {
 "": SubResource("AnimationLibrary_aq6tr")
 }
+autoplay = "float"
 
 [connection signal="body_entered" from="MobDetector" to="." method="_on_MobDetector_body_entered"]

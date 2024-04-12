@@ -6,9 +6,9 @@ in Godot by mixing 2D and 3D nodes. It also adds a
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
-Note: There is a Mono C# version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/2.5d).
+Note: There is a C# version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/2.5d).
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/583
 

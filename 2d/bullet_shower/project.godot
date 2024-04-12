@@ -12,10 +12,10 @@ config_version=5
 
 config/name="Bullet Shower"
 config/description="Demonstrates how to manage large amounts of objects efficiently using low-level Servers."
-run/main_scene="res://shower.tscn"
-config/features=PackedStringArray("4.0")
-config/icon="res://icon.webp"
 config/tags=PackedStringArray("2d", "demo", "official", "performance")
+run/main_scene="res://shower.tscn"
+config/features=PackedStringArray("4.2")
+config/icon="res://icon.webp"
 
 [display]
 
@@ -26,10 +26,7 @@ window/stretch/aspect="expand"
 
 2d_physics/layer_1="Player"
 
-[physics]
-
-2d/cell_size=64
-
 [rendering]
 
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

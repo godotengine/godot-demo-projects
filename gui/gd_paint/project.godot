@@ -14,10 +14,10 @@ config/name="GD Paint"
 config/description="GD Paint is a simple image editor made using Godot and GDScript.
 It supports different types of 'brushes': a basic pen/pencil
 and eraser, as well as a rectangle and a circle brush."
-run/main_scene="res://paint_root.tscn"
-config/icon="res://icon.webp"
-config/features=PackedStringArray("4.0")
 config/tags=PackedStringArray("demo", "gui", "official")
+run/main_scene="res://paint_root.tscn"
+config/features=PackedStringArray("4.2")
+config/icon="res://icon.webp"
 
 [debug]
 
@@ -27,7 +27,9 @@ gdscript/warnings/redundant_await=false
 
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
+window/stretch/scale_mode="integer"
 
 [rendering]
 
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

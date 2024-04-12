@@ -13,7 +13,7 @@ sky_material = SubResource("ProceduralSkyMaterial_1lgdv")
 background_mode = 2
 sky = SubResource("Sky_pq42j")
 tonemap_mode = 2
-glow_enabled = true
+tonemap_white = 2.0
 
 [sub_resource type="Animation" id="1"]
 length = 6.0
@@ -46,6 +46,11 @@ roughness = 0.0
 
 [node name="GUIin3D" type="Node3D"]
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+visible = false
+shadow_enabled = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_niyks")
 
@@ -63,10 +68,10 @@ shadow_blur = 3.0
 omni_range = 10.0
 
 [node name="Camera_Move" type="AnimationPlayer" parent="."]
-autoplay = "Move_camera"
 libraries = {
 "": SubResource("AnimationLibrary_uw4n0")
 }
+autoplay = "Move_camera"
 
 [node name="Background" type="Node3D" parent="."]
 

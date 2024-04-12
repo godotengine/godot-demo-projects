@@ -6,7 +6,7 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [android]
 
@@ -18,11 +18,17 @@ config/name="Android In-App Purchases"
 config/description="This demo shows how to make in-app payments in Android.
 
 Note: Running the demo requires exporting and uploading the game to Google Play."
-run/main_scene="res://main.tscn"
-config/icon="res://icon.webp"
 config/tags=PackedStringArray("demo", "mobile", "official", "porting")
+run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.2")
+config/icon="res://icon.webp"
 
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

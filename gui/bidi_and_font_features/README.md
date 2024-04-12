@@ -13,3 +13,7 @@ Renderer: Compatibility
 ![Screenshot](screenshots/line_break_and_fill.png)
 
 ![Screenshot](screenshots/font_features.png)
+
+![Screenshot](screenshots/variable_fonts.webp)
+
+![Screenshot](screenshots/system_fonts.webp)

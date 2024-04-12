@@ -20,10 +20,10 @@ This project contains 4 plugins:
 * The material import plugin shows how to make a plugin handle importing a custom file type (mtxt).
 * The material creator plugin shows how to add a custom dock with some simple functionality.
 * The main screen plugin is a minimal example of how to create a plugin with a main screen."
-run/main_scene="res://test_scene.tscn"
-config/features=PackedStringArray("4.0")
-config/icon="res://icon.webp"
 config/tags=PackedStringArray("demo", "editor", "official")
+run/main_scene="res://test_scene.tscn"
+config/features=PackedStringArray("4.2")
+config/icon="res://icon.webp"
 
 [editor_plugins]
 
@@ -31,7 +31,5 @@ enabled=PackedStringArray("res://addons/main_screen/plugin.cfg", "res://addons/m
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
-vram_compression/import_etc=true
-vram_compression/import_etc2=false
-environment/default_environment="res://default_env.tres"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

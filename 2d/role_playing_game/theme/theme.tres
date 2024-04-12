@@ -1,53 +1,88 @@
-[gd_resource type="Theme" load_steps=12 format=3 uid="uid://dh2px4xx6k8ga"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://dtao6d0ebglcf"]
 
-[ext_resource type="Texture2D" uid="uid://ckr4y26la355n" path="res://theme/images/button_rect.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://lqmfou7byece" path="res://theme/images/button_rect_pressed.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://drt7tw7y6wa31" path="res://theme/images/panel_rect.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://4spycrcmn8ek" path="res://theme/images/background.png" id="6"]
-[ext_resource type="StyleBox" path="res://theme/foreground_stylebox_red.tres" id="7"]
+[ext_resource type="FontFile" path="res://theme/fonts/montserrat_extra_bold_32.tres" id="1"]
+[ext_resource type="Texture2D" uid="uid://db8sojp3swx6t" path="res://theme/images/button_rect.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bkd2ibsnsmkpe" path="res://theme/images/button_rect_pressed.png" id="3"]
+[ext_resource type="FontFile" path="res://theme/fonts/montserrat_extra_bold_24.tres" id="4"]
+[ext_resource type="Texture2D" uid="uid://dvj8k4lroi7lg" path="res://theme/images/panel_rect.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://cbnee4tev5auf" path="res://theme/images/background.png" id="6"]
+[ext_resource type="StyleBox" uid="uid://bcjgdnb1p5meo" path="res://theme/foreground_stylebox_red.tres" id="7"]
+[ext_resource type="Texture2D" uid="uid://dy3t2f8dn14om" path="res://theme/images/title_panel.png" id="8"]
 
 [sub_resource type="StyleBoxEmpty" id="1"]
 resource_name = "button_focus_style"
 
 [sub_resource type="StyleBoxTexture" id="2"]
 texture = ExtResource("2")
-region_rect = Rect2(0, 0, 128, 142)
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 56.0
+region_rect = Rect2(0, 0, 128, 152)
 
 [sub_resource type="StyleBoxTexture" id="3"]
 texture = ExtResource("2")
-region_rect = Rect2(0, 0, 128, 142)
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 56.0
+region_rect = Rect2(0, 0, 128, 152)
 
 [sub_resource type="StyleBoxTexture" id="4"]
 texture = ExtResource("3")
-region_rect = Rect2(0, 0, 128, 142)
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 56.0
+region_rect = Rect2(0, 0, 128, 152)
 
 [sub_resource type="StyleBoxTexture" id="5"]
 texture = ExtResource("5")
-region_rect = Rect2(0, 0, 128, 141)
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 56.0
+region_rect = Rect2(0, 0, 128, 152)
 
 [sub_resource type="StyleBoxTexture" id="6"]
 texture = ExtResource("6")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
 region_rect = Rect2(0, 0, 64, 64)
 
+[sub_resource type="StyleBoxTexture" id="7"]
+texture = ExtResource("8")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 32.0
+texture_margin_bottom = 56.0
+region_rect = Rect2(0, 0, 128, 152)
+
 [resource]
-Button/colors/font_color = Color(0.686275, 0.741176, 0.768627, 1)
-Button/colors/font_color_disabled = Color(0.686275, 0.741176, 0.768627, 1)
-Button/colors/font_color_hover = Color(1, 1, 1, 1)
-Button/colors/font_color_pressed = Color(1, 1, 1, 1)
+default_font = ExtResource("4")
+default_font_size = 32
+Button/colors/font_color = Color(0.74902, 0.407843, 0, 1)
+Button/colors/font_disabled_color = Color(0.290196, 0.266667, 0.239216, 1)
+Button/colors/font_focus_color = Color(0.564706, 0.231373, 0.0705882, 1)
+Button/colors/font_hover_color = Color(0.984314, 0.490196, 0.25098, 1)
+Button/colors/font_hover_pressed_color = Color(0.984314, 0.490196, 0.25098, 1)
+Button/colors/font_pressed_color = Color(0.984314, 0.490196, 0.25098, 1)
 Button/constants/hseparation = 2
-Button/fonts/font = null
+Button/fonts/font = ExtResource("1")
 Button/styles/disabled = null
 Button/styles/focus = SubResource("1")
 Button/styles/hover = SubResource("2")
 Button/styles/normal = SubResource("3")
 Button/styles/pressed = SubResource("4")
-Label/colors/font_color = Color(0.690196, 0.745098, 0.772549, 1)
+Label/colors/font_color = Color(0.184314, 0.419608, 0.533333, 1)
 Label/colors/font_color_shadow = Color(1, 0.596078, 0, 0)
 Label/constants/line_spacing = 3
 Label/constants/shadow_as_outline = 0
 Label/constants/shadow_offset_x = 0
 Label/constants/shadow_offset_y = 4
-Label/fonts/font = null
+Label/fonts/font = ExtResource("4")
 Label/styles/normal = null
 Panel/styles/panel = SubResource("5")
 Panel/styles/panelf = null
@@ -55,6 +90,20 @@ Panel/styles/panelnc = null
 PanelContainer/styles/panel = SubResource("5")
 ProgressBar/colors/font_color = Color(0.941176, 0.941176, 0.941176, 1)
 ProgressBar/colors/font_color_shadow = Color(0, 0, 0, 1)
-ProgressBar/fonts/font = null
+ProgressBar/fonts/font = ExtResource("4")
 ProgressBar/styles/bg = SubResource("6")
 ProgressBar/styles/fg = ExtResource("7")
+RichTextLabel/colors/default_color = Color(0.184314, 0.419608, 0.533333, 1)
+RichTextLabel/colors/font_color_selected = Color(0.49, 0.49, 0.49, 1)
+RichTextLabel/colors/font_color_shadow = Color(0, 0, 0, 0)
+RichTextLabel/colors/selection_color = Color(0.1, 0.1, 1, 0.8)
+RichTextLabel/constants/line_separation = 1
+RichTextLabel/constants/shadow_as_outline = 0
+RichTextLabel/constants/shadow_offset_x = 1
+RichTextLabel/constants/shadow_offset_y = 1
+RichTextLabel/constants/table_hseparation = 3
+RichTextLabel/constants/table_vseparation = 3
+RichTextLabel/styles/focus = null
+RichTextLabel/styles/normal = null
+title_panel/base_type = &"Panel"
+title_panel/styles/panel = SubResource("7")

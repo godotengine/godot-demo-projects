@@ -4,7 +4,7 @@ This demo showcases how 2D particle systems work in Godot.
 
 Language: GDScript
 
-Renderer: Forward Mobile
+Renderer: Mobile
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/118
 

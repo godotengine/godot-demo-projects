@@ -24,7 +24,7 @@ func _enter_tree():
 	if start_state.is_empty():
 		start_state = get_child(0).get_path()
 	for child in get_children():
-		var err = child.finished.connect(self._change_state)
+		var err = child.finished.connect(_change_state)
 		if err:
 			printerr(err)
 	initialize(start_state)
@@ -70,7 +70,7 @@ func _change_state(state_name):
 		states_stack[0] = states_map[state_name]
 
 	current_state = states_stack[0]
-	emit_signal("state_changed", current_state)
+	state_changed.emit(current_state)
 
 	if state_name != "previous":
 		current_state.enter()

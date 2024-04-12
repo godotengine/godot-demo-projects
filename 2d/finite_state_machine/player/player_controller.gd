@@ -24,4 +24,4 @@ func set_dead(value):
 
 
 func set_look_direction(value):
-	emit_signal("direction_changed", value)
+	direction_changed.emit(value)

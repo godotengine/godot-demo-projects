@@ -13,8 +13,8 @@ func _unhandled_input(event):
 			state[event.index] = event.position
 		else: # Up.
 			state.erase(event.index)
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 
 	elif event is InputEventScreenDrag: # Movement.
 		state[event.index] = event.position
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()

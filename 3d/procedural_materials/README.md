@@ -30,7 +30,7 @@ This demo includes procedurally generated materials with 3 different techniques:
 
 Language: GDScript
 
-Renderer: Forward Plus
+Renderer: Forward+
 
 ## Screenshots
 

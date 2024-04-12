@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://1cywl1qtanq3"]
+[gd_scene load_steps=7 format=3 uid="uid://1cywl1qtanq3"]
 
 [ext_resource type="Script" path="res://main.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dnhldrc8cymrs" path="res://pixel_art_example.webp" id="2_mfq7n"]
+[ext_resource type="Texture2D" uid="uid://cok02ms2cxmut" path="res://pixel_art_text_example.webp" id="3_0qxym"]
+[ext_resource type="Texture2D" uid="uid://c43k4wledw7py" path="res://pixel_art_checkerboard_example.webp" id="3_unurd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvbdh"]
 draw_center = false
@@ -107,6 +110,61 @@ grow_horizontal = 0
 grow_vertical = 0
 color = Color(1, 1, 1, 0.25098)
 
+[node name="PixelArtExample" type="TextureRect" parent="Panel/AspectRatioContainer/Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -88.0
+offset_top = 16.0
+offset_right = -56.0
+offset_bottom = 48.0
+grow_horizontal = 0
+texture = ExtResource("2_mfq7n")
+
+[node name="PixelArtExample2" type="TextureRect" parent="Panel/AspectRatioContainer/Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -48.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 48.0
+grow_horizontal = 0
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+texture = ExtResource("2_mfq7n")
+
+[node name="PixelArtCheckerboardExample" type="TextureRect" parent="Panel/AspectRatioContainer/Panel"]
+modulate = Color(1, 1, 1, 0.752941)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -136.0
+offset_top = 16.0
+offset_right = -104.0
+offset_bottom = 48.0
+grow_horizontal = 0
+texture = ExtResource("3_unurd")
+
+[node name="PixelArtTextExample" type="TextureRect" parent="Panel/AspectRatioContainer/Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -215.0
+offset_top = 56.0
+offset_right = -16.0
+offset_bottom = 75.0
+grow_horizontal = 0
+texture = ExtResource("3_0qxym")
+
 [node name="CenterContainer" type="CenterContainer" parent="Panel/AspectRatioContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
@@ -130,6 +188,7 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowBaseSize"]
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 text = "Window Base Size"
 
@@ -159,6 +218,7 @@ popup/item_7/id = 7
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowStretchMode"]
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 text = "Window Stretch Mode"
 
@@ -178,6 +238,7 @@ popup/item_2/id = 2
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowStretchAspect"]
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 text = "Window Stretch Aspect"
 
@@ -201,6 +262,7 @@ popup/item_4/id = 4
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowScaleFactor"]
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 text = "Window Scale Factor"
 
@@ -218,6 +280,24 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "100%"
 
+[node name="WindowStretchScaleMode" type="HBoxContainer" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowStretchScaleMode"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "Window Stretch Scale Mode"
+
+[node name="OptionButton" type="OptionButton" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowStretchScaleMode"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 2
+selected = 0
+popup/item_0/text = "Fractional"
+popup/item_0/id = 0
+popup/item_1/text = "Integer"
+popup/item_1/id = 1
+
 [node name="HSeparator" type="HSeparator" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options"]
 layout_mode = 2
 
@@ -225,6 +305,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMaxAspectRatio"]
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 text = "GUI Max Aspect Ratio"
 
@@ -252,6 +333,7 @@ popup/item_6/id = 6
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMargin"]
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 text = "GUI Margin"
 
@@ -270,5 +352,6 @@ text = "0"
 [connection signal="item_selected" from="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowStretchMode/OptionButton" to="." method="_on_window_stretch_mode_item_selected"]
 [connection signal="item_selected" from="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowStretchAspect/OptionButton" to="." method="_on_window_stretch_aspect_item_selected"]
 [connection signal="drag_ended" from="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowScaleFactor/HSlider" to="." method="_on_window_scale_factor_drag_ended"]
+[connection signal="item_selected" from="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowStretchScaleMode/OptionButton" to="." method="_on_window_stretch_scale_mode_item_selected"]
 [connection signal="item_selected" from="Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMaxAspectRatio/OptionButton" to="." method="_on_gui_aspect_ratio_item_selected"]
 [connection signal="drag_ended" from="Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMargin/HSlider" to="." method="_on_gui_margin_drag_ended"]

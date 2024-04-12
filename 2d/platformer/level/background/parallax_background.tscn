@@ -1,0 +1,156 @@
+[gd_scene load_steps=7 format=3 uid="uid://cw6nldo3rjyyq"]
+
+[ext_resource type="Texture2D" uid="uid://cvknem5bj24sc" path="res://level/background/distant_platforms_2.webp" id="1"]
+[ext_resource type="Texture2D" uid="uid://osu4k0jdk3wa" path="res://level/background/sky.webp" id="2"]
+[ext_resource type="Texture2D" uid="uid://twy8cs78gqbv" path="res://level/background/cloud_3.webp" id="3"]
+[ext_resource type="Texture2D" uid="uid://dud80ds6rq6vr" path="res://level/background/cloud_2.webp" id="5"]
+[ext_resource type="Texture2D" uid="uid://eeitd2vus25o" path="res://level/background/distant_platforms_1.webp" id="6"]
+[ext_resource type="Texture2D" uid="uid://t8otskslwopy" path="res://level/background/cloud_1.webp" id="7"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+scroll_base_scale = Vector2(0.1, 0)
+
+[node name="Sky" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.2, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sky"]
+position = Vector2(-809, 58)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2")
+centered = false
+
+[node name="Sprite2" type="Sprite2D" parent="Sky"]
+position = Vector2(-809, 0)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2")
+centered = false
+
+[node name="Clouds" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.1, 1)
+motion_offset = Vector2(-550, 0)
+
+[node name="CloudGroup1" type="Node2D" parent="Clouds"]
+position = Vector2(-780, 0)
+
+[node name="Sprite2" type="Sprite2D" parent="Clouds/CloudGroup1"]
+position = Vector2(470, 4)
+texture = ExtResource("5")
+centered = false
+
+[node name="Sprite3" type="Sprite2D" parent="Clouds/CloudGroup1"]
+position = Vector2(726, 91)
+texture = ExtResource("3")
+centered = false
+
+[node name="Sprite4" type="Sprite2D" parent="Clouds/CloudGroup1"]
+position = Vector2(1133, 113)
+texture = ExtResource("3")
+centered = false
+
+[node name="Sprite5" type="Sprite2D" parent="Clouds/CloudGroup1"]
+position = Vector2(1513, 165)
+texture = ExtResource("3")
+centered = false
+
+[node name="Sprite6" type="Sprite2D" parent="Clouds/CloudGroup1"]
+position = Vector2(396, 109)
+texture = ExtResource("7")
+centered = false
+
+[node name="CloudGroup2" type="Node2D" parent="Clouds"]
+
+[node name="Sprite1" type="Sprite2D" parent="Clouds/CloudGroup2"]
+position = Vector2(-135, 213)
+texture = ExtResource("5")
+centered = false
+
+[node name="Sprite5" type="Sprite2D" parent="Clouds/CloudGroup2"]
+position = Vector2(19, 77)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7")
+centered = false
+
+[node name="Sprite7" type="Sprite2D" parent="Clouds/CloudGroup2"]
+position = Vector2(140, 261)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3")
+centered = false
+
+[node name="CloudGroup3" type="Node2D" parent="Clouds"]
+position = Vector2(390, 0)
+
+[node name="Sprite1" type="Sprite2D" parent="Clouds/CloudGroup3"]
+position = Vector2(1034, -60)
+texture = ExtResource("5")
+centered = false
+
+[node name="Sprite7" type="Sprite2D" parent="Clouds/CloudGroup3"]
+position = Vector2(491, 251)
+texture = ExtResource("5")
+centered = false
+
+[node name="Sprite2" type="Sprite2D" parent="Clouds/CloudGroup3"]
+position = Vector2(545, 108)
+texture = ExtResource("5")
+centered = false
+
+[node name="Sprite3" type="Sprite2D" parent="Clouds/CloudGroup3"]
+position = Vector2(-164, 212)
+texture = ExtResource("7")
+centered = false
+
+[node name="Sprite8" type="Sprite2D" parent="Clouds/CloudGroup3"]
+position = Vector2(287, 220)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7")
+centered = false
+
+[node name="CloudGroup4" type="Node2D" parent="Clouds"]
+position = Vector2(780, 0)
+
+[node name="Sprite1" type="Sprite2D" parent="Clouds/CloudGroup4"]
+position = Vector2(-293, 64)
+texture = ExtResource("5")
+centered = false
+
+[node name="Sprite2" type="Sprite2D" parent="Clouds/CloudGroup4"]
+position = Vector2(-229, 199)
+texture = ExtResource("5")
+centered = false
+
+[node name="Sprite5" type="Sprite2D" parent="Clouds/CloudGroup4"]
+position = Vector2(83, 115)
+texture = ExtResource("7")
+centered = false
+
+[node name="Sprite7" type="Sprite2D" parent="Clouds/CloudGroup4"]
+position = Vector2(7, 177)
+texture = ExtResource("7")
+centered = false
+
+[node name="Sprite6" type="Sprite2D" parent="Clouds/CloudGroup4"]
+position = Vector2(226, 14)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7")
+centered = false
+
+[node name="Mountains2" type="ParallaxLayer" parent="."]
+position = Vector2(0, 243)
+motion_scale = Vector2(0.2, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Mountains2"]
+position = Vector2(567, 301.2)
+texture = ExtResource("1")
+region_enabled = true
+region_rect = Rect2(0, 0, 2048, 251.104)
+
+[node name="Mountains1" type="ParallaxLayer" parent="."]
+position = Vector2(0, 246)
+motion_scale = Vector2(0.4, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Mountains1"]
+position = Vector2(437, 278.2)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("6")
+region_enabled = true
+region_rect = Rect2(0, 0, 2048, 251.104)

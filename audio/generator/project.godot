@@ -14,11 +14,11 @@ config/name="Audio Generator Demo"
 config/description="This is a demo showing how one can generate and
 play audio samples from GDScript.
 It plays a simple 440 Hz sine wave at 22050 Hz."
+config/tags=PackedStringArray("audio", "demo", "official")
 run/main_scene="res://generator.tscn"
-config/features=PackedStringArray("4.0")
+config/features=PackedStringArray("4.2")
 run/low_processor_mode=true
 config/icon="res://icon.webp"
-config/tags=PackedStringArray("audio", "demo", "official")
 
 [display]
 
@@ -27,7 +27,6 @@ window/stretch/aspect="expand"
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.12549, 0.12549, 0.12549, 1)
-quality/driver/driver_name="GLES2"
-vram_compression/import_etc=true
-vram_compression/import_etc2=false

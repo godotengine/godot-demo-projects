@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmn8nkpogiwsf"]
+[gd_scene load_steps=9 format=3 uid="uid://dmn8nkpogiwsf"]
 
 [ext_resource type="PackedScene" uid="uid://bpdyvy2681m3i" path="res://player/Player.tscn" id="1"]
+[ext_resource type="FontFile" uid="uid://b5bspum6ffekd" path="res://fonts/SourceCodePro-Bold.ttf" id="2_r1c5f"]
 [ext_resource type="PackedScene" uid="uid://cvi13chv8g4hj" path="res://debug/StatesStackDiplayer.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://bq6rrfy53rfvo" path="res://debug/ControlsPanel.tscn" id="4"]
 
@@ -43,6 +44,9 @@ libraries = {
 "": SubResource("AnimationLibrary_qbwwp")
 }
 
+[node name="StateNameDisplayer" parent="Player" index="5"]
+theme_override_fonts/font = ExtResource("2_r1c5f")
+
 [node name="Explanations" type="RichTextLabel" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -60,8 +64,8 @@ text = "This example shows how to apply the State programming pattern in GDScrip
 
 States are common in games. You can use the pattern to:
 
-1. Separate each behavior and transitions between behaviors, thus make scripts shorter and easier to manage
-2. Respect the Single Responsibility Principle. Each State object represents one action
+1. Separate each behavior and transitions between behaviors, thus make scripts shorter and easier to manage.
+2. Respect the Single Responsibility Principle. Each State object represents one action.
 3. Improve your code's structure. Look at the scene tree and FileSystem tab: without looking at the code, you'll know what the Player can or cannot do.
 
 You can read more about States in the excellent Game Programming Patterns ebook."

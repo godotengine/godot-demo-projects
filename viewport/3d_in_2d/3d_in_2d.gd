@@ -7,7 +7,7 @@ var viewport_initial_size = Vector2()
 
 func _ready():
 	$AnimatedSprite2D.play()
-	get_viewport().size_changed.connect(self._root_viewport_size_changed)
+	get_viewport().size_changed.connect(_root_viewport_size_changed)
 	viewport_initial_size = viewport.size
 
 

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://decorations/bone_pile_2.png" type="Texture2D" id=1]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 13.0
+height = 26.0001
+
+[node name="bone_pile" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2( 0, -13 )
+texture = ExtResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 0, -13 )
+rotation = 1.5708
+shape = SubResource( 1 )
