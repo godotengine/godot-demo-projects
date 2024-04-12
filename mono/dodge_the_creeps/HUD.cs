@@ -7,7 +7,7 @@ public partial class HUD : CanvasLayer
 
     public void ShowMessage(string text)
     {
-        Label messageLabel = GetNode<Label>("MessageLabel");
+        var messageLabel = GetNode<Label>("MessageLabel");
         messageLabel.Text = text;
         messageLabel.Show();
 
@@ -18,10 +18,10 @@ public partial class HUD : CanvasLayer
     {
         ShowMessage("Game Over");
 
-        Timer messageTimer = GetNode<Timer>("MessageTimer");
+        var messageTimer = GetNode<Timer>("MessageTimer");
         await ToSignal(messageTimer, Timer.SignalName.Timeout);
 
-        ShowMessage("Dodge the Creeps!");
+        ShowMessage("Dodge the\nCreeps!");
         await ToSignal(GetTree().CreateTimer(1.0), SceneTreeTimer.SignalName.Timeout);
 
         GetNode<Button>("StartButton").Show();
@@ -32,13 +32,13 @@ public partial class HUD : CanvasLayer
         GetNode<Label>("ScoreLabel").Text = score.ToString();
     }
 
-    private void OnStartButtonPressed()
+    public void OnStartButtonPressed()
     {
         GetNode<Button>("StartButton").Hide();
         EmitSignal(SignalName.StartGame);
     }
 
-    private void OnMessageTimerTimeout()
+    public void OnMessageTimerTimeout()
     {
         GetNode<Label>("MessageLabel").Hide();
     }

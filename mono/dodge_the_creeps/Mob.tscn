@@ -45,8 +45,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="2"]
-radius = 30.0
-height = 90.0
+radius = 37.0
+height = 100.0
 
 [node name="Mob" type="RigidBody2D" groups=["mobs"]]
 collision_mask = 0
@@ -62,7 +62,6 @@ animation = &"walk"
 rotation = 1.5708
 shape = SubResource("2")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." groups=["mobs"]]
-position = Vector2(2.08165e-12, 2.08165e-12)
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibilityScreenExited"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]
