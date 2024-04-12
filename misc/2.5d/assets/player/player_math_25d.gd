@@ -1,6 +1,6 @@
 # Handles Player-specific behavior like moving. We calculate such things with CharacterBody3D.
-extends CharacterBody3D
 class_name PlayerMath25D # No icon necessary
+extends CharacterBody3D
 
 var vertical_speed := 0.0
 var isometric_controls := true
@@ -38,7 +38,7 @@ func _horizontal_movement(delta):
 	var movement_vec2 = Input.get_vector(&"move_left", &"move_right", &"move_forward", &"move_back")
 	var move_dir = localX * movement_vec2.x + localZ * movement_vec2.y
 
-	velocity = move_dir * delta * 1200
+	velocity = move_dir * 10
 	if Input.is_action_pressed(&"movement_modifier"):
 		velocity /= 2
 
@@ -47,10 +47,9 @@ func _horizontal_movement(delta):
 
 # Checks Jump and applies gravity and vertical speed via move_and_collide.
 func _vertical_movement(delta):
-	var localY = Vector3.UP
 	if Input.is_action_just_pressed(&"jump"):
-		vertical_speed = 0.55
-	vertical_speed -= delta * 2 # Gravity
-	var k = move_and_collide(localY * vertical_speed)
+		vertical_speed = 60
+	vertical_speed -= delta * 240 # Gravity
+	var k = move_and_collide(Vector3.UP * vertical_speed * delta)
 	if k != null:
 		vertical_speed = 0

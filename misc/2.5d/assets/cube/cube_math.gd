@@ -11,9 +11,9 @@ func _ready():
 	_parent = get_parent()
 
 	for i in range(27):
-		# warning-ignore:integer_division
+		@warning_ignore("integer_division")
 		var a: int = (i / 9) - 1
-		# warning-ignore:integer_division
+		@warning_ignore("integer_division")
 		var b: int = (i / 3) % 3 - 1
 		var c: int = (i % 3) - 1
 		var spatial_position: Vector3 = 5 * (a * Vector3.RIGHT + b * Vector3.UP + c * Vector3.BACK)
