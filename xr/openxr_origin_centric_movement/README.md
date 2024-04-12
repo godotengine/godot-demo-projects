@@ -5,7 +5,7 @@ This is based on the [Origin centric solution as explained in the room scale man
 
 Language: GDScript
 
-Renderer: compatibility
+Renderer: Compatibility
 
 ## How does it work?
 

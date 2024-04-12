@@ -5,7 +5,7 @@ This is based on the [Character body centric solution as explained in the room s
 
 Language: GDScript
 
-Renderer: compatibility
+Renderer: Compatibility
 
 ## How does it work?
 
