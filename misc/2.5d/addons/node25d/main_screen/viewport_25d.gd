@@ -56,8 +56,9 @@ func _process(_delta):
 	var zoom = _get_zoom_amount()
 
 	# SubViewport size.
-	var size = get_global_rect().size
-	viewport_2d.size = size
+	var vp_size = get_global_rect().size
+	viewport_2d.size = vp_size
+	viewport_overlay.size = vp_size
 
 	# SubViewport transform.
 	var viewport_trans = Transform2D.IDENTITY
@@ -69,27 +70,31 @@ func _process(_delta):
 
 	# Delete unused gizmos.
 	var selection = editor_interface.get_selection().get_selected_nodes()
-	var overlay_children = viewport_overlay.get_children()
-	for overlay_child in overlay_children:
+	var gizmos = viewport_overlay.get_children()
+	for gizmo in gizmos:
 		var contains = false
 		for selected in selection:
-			if selected == overlay_child.node_25d and not view_mode_changed_this_frame:
+			if selected == gizmo.node_25d and not view_mode_changed_this_frame:
 				contains = true
 		if not contains:
-			overlay_child.queue_free()
-
+			gizmo.queue_free()
 	# Add new gizmos.
 	for selected in selection:
 		if selected is Node25D:
-			var new = true
-			for overlay_child in overlay_children:
-				if selected == overlay_child.node_25d:
-					new = false
-			if new:
-				var gizmo = gizmo_25d_scene.instantiate()
-				viewport_overlay.add_child(gizmo)
-				gizmo.node_25d = selected
-				gizmo.initialize()
+			_ensure_node25d_has_gizmo(selected, gizmos)
+	# Update gizmo zoom.
+	for gizmo in gizmos:
+		gizmo.set_zoom(zoom)
+
+
+func _ensure_node25d_has_gizmo(node: Node25D, gizmos: Array[Node]) -> void:
+	var new = true
+	for gizmo in gizmos:
+		if node == gizmo.node_25d:
+			return
+	var gizmo = gizmo_25d_scene.instantiate()
+	viewport_overlay.add_child(gizmo)
+	gizmo.setup(node)
 
 
 # This only accepts input when the mouse is inside of the 2.5D viewport.
@@ -104,7 +109,7 @@ func _gui_input(event):
 				accept_event()
 			elif event.button_index == MOUSE_BUTTON_MIDDLE:
 				is_panning = true
-				pan_center = viewport_center - event.position
+				pan_center = viewport_center - event.position / _get_zoom_amount()
 				accept_event()
 			elif event.button_index == MOUSE_BUTTON_LEFT:
 				var overlay_children = viewport_overlay.get_children()
@@ -121,7 +126,7 @@ func _gui_input(event):
 			accept_event()
 	elif event is InputEventMouseMotion:
 		if is_panning:
-			viewport_center = pan_center + event.position
+			viewport_center = pan_center + event.position / _get_zoom_amount()
 			accept_event()
 
 

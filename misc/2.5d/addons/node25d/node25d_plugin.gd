@@ -48,3 +48,7 @@ func _get_plugin_name():
 
 func _get_plugin_icon():
 	return preload("res://addons/node25d/icons/viewport_25d.svg")
+
+
+func _handles(obj: Object) -> bool:
+	return obj is Node25D
