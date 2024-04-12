@@ -14,7 +14,7 @@ config/name="Translation Demo"
 config/description="A demo showing how Godot seamlessly enables
 the use of localized resources and texts."
 config/tags=PackedStringArray("demo", "internationalization", "official")
-run/main_scene="res://translation_demo.tscn"
+run/main_scene="res://translation_demo_csv.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://icon.webp"
 
@@ -26,21 +26,22 @@ window/stretch/aspect="expand"
 [internationalization]
 
 locale/translation_remaps={
-"res://flag_uk.png": PackedStringArray("res://flag_spain.png:es", "res://flag_japan.png:ja"),
-"res://hello_en.wav": PackedStringArray("res://hello_es.wav:es", "res://hello_jp.wav:ja")
+"res://audio/hello_en.wav": PackedStringArray("res://audio/hello_es.wav:es", "res://audio/hello_jp.wav:ja", "res://audio/hello_ru.wav:ru"),
+"res://images/flag_uk.webp": PackedStringArray("res://images/flag_japan.webp:ja", "res://images/flag_russia.webp:ru", "res://images/flag_spain.webp:es")
 }
-locale/translations=PackedStringArray("res://text.en.translation", "res://text.es.translation", "res://text.ja.translation")
+locale/translations=PackedStringArray("res://translations/csv/text.en.translation", "res://translations/csv/text.es.translation", "res://translations/csv/text.ja.translation", "res://translations/csv/text.ru.translation", "res://translations/po/translation_demo_es.po", "res://translations/po/translation_demo_ja.po")
+locale/translations_pot_files=PackedStringArray("res://translation_demo_po.tscn")
 locale/locale_filter_mode=0
 
 [locale]
 
+translations=PackedStringArray("res://TranslationFiles/CSV/text.en.translation", "res://TranslationFiles/CSV/text.es.translation", "res://TranslationFiles/CSV/text.ja.translation", "res://TranslationFiles/CSV/text.ru.translation", "res://TranslationFiles/PO/translation_demo_es.po", "res://TranslationFiles/PO/translation_demo_ja.po")
 translation_remaps={
-"res://flag_uk.png": ["res://flag_spain.png:es", "res://flag_japan.png:ja"],
-"res://hello_en.wav": PackedStringArray("res://hello_es.wav:es", "res://hello_jp.wav:ja")
+"res://Audio/hello_en.wav": PackedStringArray("res://Audio/hello_es.wav:es", "res://Audio/hello_jp.wav:ja", "res://Audio/hello_ru.wav:ru"),
+"res://Images/flag_uk.png": PackedStringArray("res://Images/flag_spain.png:es", "res://Images/flag_japan.png:ja", "res://Images/flag_russia.png:ru")
 }
-translations=PackedStringArray("res://text.en.translation", "res://text.es.translation", "res://text.ja.translation")
+translations_pot_files=PackedStringArray("res://translation_po.gd", "res://translation_demo_po.tscn")
 
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"

@@ -24,7 +24,7 @@ var base_fov := fov
 var desired_fov := fov
 
 # Position on the last physics frame (used to measure speed).
-var previous_position := global_position
+@onready var previous_position := global_position
 
 enum CameraType {
 	EXTERIOR,
