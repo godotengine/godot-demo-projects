@@ -7,14 +7,15 @@ var pan_center: Vector2
 var viewport_center: Vector2
 var view_mode_index := 0
 
-var editor_interface: EditorInterface # Set in node25d_plugin.gd
+var editor_interface: EditorInterface  # Set in node25d_plugin.gd
 var moving = false
 
 @onready var viewport_2d = $Viewport2D
 @onready var viewport_overlay = $ViewportOverlay
-@onready var view_mode_button_group: ButtonGroup = $"../TopBar/ViewModeButtons/45Degree".group
+@onready var view_mode_button_group: ButtonGroup = $"../TopBar/ViewModeButtons/45Degree".button_group
 @onready var zoom_label: Label = $"../TopBar/Zoom/ZoomPercent"
 @onready var gizmo_25d_scene = preload("res://addons/node25d/main_screen/gizmo_25d.tscn")
+
 
 func _ready():
 	# Give Godot a chance to fully load the scene. Should take two frames.
@@ -29,17 +30,19 @@ func _ready():
 	# Alright, we're loaded up. Now check if we have a valid world and assign it.
 	var world_2d = edited_scene_root.get_viewport().world_2d
 	if world_2d == get_viewport().world_2d:
-		return # This is the MainScreen25D scene opened in the editor!
+		return  # This is the MainScreen25D scene opened in the editor!
 	viewport_2d.world_2d = world_2d
 
 
-func _process(delta):
-	if not editor_interface: # Something's not right... bail!
+func _process(_delta):
+	if not editor_interface:  # Something's not right... bail!
 		return
 
 	# View mode polling.
 	var view_mode_changed_this_frame = false
-	var new_view_mode = view_mode_button_group.get_pressed_button().get_index()
+	var new_view_mode = -1
+	if view_mode_button_group.get_pressed_button():
+		new_view_mode = view_mode_button_group.get_pressed_button().get_index()
 	if view_mode_index != new_view_mode:
 		view_mode_index = new_view_mode
 		view_mode_changed_this_frame = true
@@ -53,8 +56,9 @@ func _process(delta):
 	var zoom = _get_zoom_amount()
 
 	# SubViewport size.
-	var size = get_global_rect().size
-	viewport_2d.size = size
+	var vp_size = get_global_rect().size
+	viewport_2d.size = vp_size
+	viewport_overlay.size = vp_size
 
 	# SubViewport transform.
 	var viewport_trans = Transform2D.IDENTITY
@@ -66,27 +70,31 @@ func _process(delta):
 
 	# Delete unused gizmos.
 	var selection = editor_interface.get_selection().get_selected_nodes()
-	var overlay_children = viewport_overlay.get_children()
-	for overlay_child in overlay_children:
+	var gizmos = viewport_overlay.get_children()
+	for gizmo in gizmos:
 		var contains = false
 		for selected in selection:
-			if selected == overlay_child.node_25d and not view_mode_changed_this_frame:
+			if selected == gizmo.node_25d and not view_mode_changed_this_frame:
 				contains = true
 		if not contains:
-			overlay_child.queue_free()
-
+			gizmo.queue_free()
 	# Add new gizmos.
 	for selected in selection:
 		if selected is Node25D:
-			var new = true
-			for overlay_child in overlay_children:
-				if selected == overlay_child.node_25d:
-					new = false
-			if new:
-				var gizmo = gizmo_25d_scene.instantiate()
-				viewport_overlay.add_child(gizmo)
-				gizmo.node_25d = selected
-				gizmo.initialize()
+			_ensure_node25d_has_gizmo(selected, gizmos)
+	# Update gizmo zoom.
+	for gizmo in gizmos:
+		gizmo.set_zoom(zoom)
+
+
+func _ensure_node25d_has_gizmo(node: Node25D, gizmos: Array[Node]) -> void:
+	var new = true
+	for gizmo in gizmos:
+		if node == gizmo.node_25d:
+			return
+	var gizmo = gizmo_25d_scene.instantiate()
+	viewport_overlay.add_child(gizmo)
+	gizmo.setup(node)
 
 
 # This only accepts input when the mouse is inside of the 2.5D viewport.
@@ -101,7 +109,7 @@ func _gui_input(event):
 				accept_event()
 			elif event.button_index == MOUSE_BUTTON_MIDDLE:
 				is_panning = true
-				pan_center = viewport_center - event.position
+				pan_center = viewport_center - event.position / _get_zoom_amount()
 				accept_event()
 			elif event.button_index == MOUSE_BUTTON_LEFT:
 				var overlay_children = viewport_overlay.get_children()
@@ -118,11 +126,13 @@ func _gui_input(event):
 			accept_event()
 	elif event is InputEventMouseMotion:
 		if is_panning:
-			viewport_center = pan_center + event.position
+			viewport_center = pan_center + event.position / _get_zoom_amount()
 			accept_event()
 
 
 func _recursive_change_view_mode(current_node):
+	if not current_node:
+		return
 	if current_node.has_method("set_view_mode"):
 		current_node.set_view_mode(view_mode_index)
 	for child in current_node.get_children():
@@ -130,7 +140,7 @@ func _recursive_change_view_mode(current_node):
 
 
 func _get_zoom_amount():
-	var zoom_amount = pow(1.05476607648, zoom_level) # 13th root of 2
+	var zoom_amount = pow(1.05476607648, zoom_level)  # 13th root of 2
 	zoom_label.text = str(round(zoom_amount * 1000) / 10) + "%"
 	return zoom_amount
 

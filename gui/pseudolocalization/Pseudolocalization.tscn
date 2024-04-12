@@ -1,14 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://bcnmymjri4tt2"]
 
-[ext_resource type="Texture2D" uid="uid://ddpix5j1t4swg" path="res://icon.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://brwp8bimc75uu" path="res://icon.webp" id="1"]
 [ext_resource type="Script" path="res://Pseudolocalization.gd" id="2"]
 
 [node name="Pseudolocalization" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( "2" )
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2")
 
 [node name="Title" type="HBoxContainer" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 offset_left = 20.0
 offset_top = 30.0
@@ -19,24 +24,21 @@ metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="TextureRect" type="TextureRect" parent="Title"]
-minimum_size = Vector2(110, 0)
-offset_right = 110.0
-offset_bottom = 100.0
-texture = ExtResource( "1" )
-ignore_texture_size = true
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+texture = ExtResource("1")
+expand_mode = 1
 stretch_mode = 4
 
 [node name="Label" type="Label" parent="Title"]
-offset_left = 114.0
-offset_top = 27.0
-offset_right = 984.0
-offset_bottom = 72.0
+layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 30
 text = "Pseudolocalization Demo"
 vertical_alignment = 1
 
 [node name="Main" type="HBoxContainer" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
@@ -51,94 +53,74 @@ metadata/_edit_use_custom_anchors = false
 
 [node name="Pseudolocalization_options" type="VBoxContainer" parent="Main"]
 layout_direction = 2
-offset_right = 472.0
-offset_bottom = 450.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="toggle" type="CheckButton" parent="Main/Pseudolocalization_options"]
-offset_right = 472.0
-offset_bottom = 31.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Toggle Pseudolocalization"
 
 [node name="accents" type="CheckButton" parent="Main/Pseudolocalization_options"]
-offset_top = 35.0
-offset_right = 472.0
-offset_bottom = 66.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Toggle Accents"
 
 [node name="doublevowels" type="CheckButton" parent="Main/Pseudolocalization_options"]
-offset_top = 70.0
-offset_right = 472.0
-offset_bottom = 101.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Toggle Double Vowels"
 
 [node name="fakebidi" type="CheckButton" parent="Main/Pseudolocalization_options"]
-offset_top = 105.0
-offset_right = 472.0
-offset_bottom = 136.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Toggle Fake Bidi"
 
 [node name="override" type="CheckButton" parent="Main/Pseudolocalization_options"]
-offset_top = 140.0
-offset_right = 472.0
-offset_bottom = 171.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Toggle Override"
 
 [node name="skipplaceholders" type="CheckButton" parent="Main/Pseudolocalization_options"]
-offset_top = 175.0
-offset_right = 472.0
-offset_bottom = 206.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Skip Placeholders"
 
 [node name="exp_ratio" type="HBoxContainer" parent="Main/Pseudolocalization_options"]
-offset_top = 210.0
-offset_right = 472.0
-offset_bottom = 241.0
+layout_mode = 2
 size_flags_vertical = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="Main/Pseudolocalization_options/exp_ratio"]
-offset_bottom = 31.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="Main/Pseudolocalization_options/exp_ratio"]
-offset_left = 4.0
-offset_right = 141.0
-offset_bottom = 31.0
+layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 1
 size_flags_stretch_ratio = 4.0
 text = "Expansion Ratio : "
 
 [node name="TextEdit" type="LineEdit" parent="Main/Pseudolocalization_options/exp_ratio"]
-offset_left = 379.0
-offset_right = 472.0
-offset_bottom = 31.0
+layout_mode = 2
 size_flags_horizontal = 3
 caret_blink = true
-caret_blink_speed = 0.5
 
 [node name="prefix" type="Control" parent="Main/Pseudolocalization_options"]
-offset_top = 245.0
-offset_right = 472.0
-offset_bottom = 245.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="TextEdit" type="LineEdit" parent="Main/Pseudolocalization_options/prefix"]
+layout_mode = 0
 offset_left = 5.0
 offset_top = 32.8613
 offset_right = 385.0
 offset_bottom = 62.8613
 size_flags_horizontal = 3
 caret_blink = true
-caret_blink_speed = 0.5
 
 [node name="Label" type="Label" parent="Main/Pseudolocalization_options/prefix"]
+layout_mode = 0
 offset_left = 6.0
 offset_top = 2.86133
 offset_right = 297.0
@@ -146,21 +128,20 @@ offset_bottom = 28.8613
 text = "Pseudolocalization Prefix :"
 
 [node name="suffix" type="Control" parent="Main/Pseudolocalization_options"]
-offset_top = 249.0
-offset_right = 472.0
-offset_bottom = 249.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="TextEdit" type="LineEdit" parent="Main/Pseudolocalization_options/suffix"]
+layout_mode = 0
 offset_left = 3.811
 offset_top = 106.592
 offset_right = 383.811
 offset_bottom = 136.592
 size_flags_horizontal = 3
 caret_blink = true
-caret_blink_speed = 0.5
 
 [node name="Label" type="Label" parent="Main/Pseudolocalization_options/suffix"]
+layout_mode = 0
 offset_left = 6.0
 offset_top = 76.5923
 offset_right = 297.0
@@ -168,73 +149,54 @@ offset_bottom = 102.592
 text = "Pseudolocalization Suffix :"
 
 [node name="Pseudolocalizer" type="VBoxContainer" parent="Main"]
-offset_left = 492.0
-offset_right = 964.0
-offset_bottom = 450.0
-grow_horizontal = 0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Main/Pseudolocalizer"]
-offset_right = 472.0
-offset_bottom = 26.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 text = "Pseudolocalization key :"
 
 [node name="Key" type="TextEdit" parent="Main/Pseudolocalizer"]
-offset_top = 30.0
-offset_right = 472.0
-offset_bottom = 143.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "The quick brown fox jumped over the lazy dog."
 
 [node name="margin" type="MarginContainer" parent="Main/Pseudolocalizer"]
-offset_top = 147.0
-offset_bottom = 147.0
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Pseudolocalize" type="Button" parent="Main/Pseudolocalizer"]
-offset_left = 174.0
-offset_top = 151.0
-offset_right = 297.0
-offset_bottom = 182.0
+layout_mode = 2
 size_flags_horizontal = 6
 text = "Pseudolocalize"
 
 [node name="margin2" type="MarginContainer" parent="Main/Pseudolocalizer"]
-offset_top = 186.0
-offset_bottom = 186.0
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Label2" type="Label" parent="Main/Pseudolocalizer"]
-offset_top = 190.0
-offset_right = 472.0
-offset_bottom = 216.0
+layout_mode = 2
 text = "Pseudolocalization result :"
 
 [node name="Result" type="TextEdit" parent="Main/Pseudolocalizer"]
-offset_top = 220.0
-offset_right = 472.0
-offset_bottom = 333.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="A2Z" type="Label" parent="Main/Pseudolocalizer"]
-offset_top = 337.0
-offset_right = 472.0
-offset_bottom = 450.0
+layout_mode = 2
 size_flags_vertical = 7
 text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ
 abcdefghijklmnopqrstuvwxyz"
 
 [node name="MarginContainer" type="MarginContainer" parent="Main"]
-offset_left = 984.0
-offset_right = 984.0
-offset_bottom = 450.0
+layout_mode = 2
 
 [connection signal="toggled" from="Main/Pseudolocalization_options/toggle" to="." method="_on_toggle_toggled"]
 [connection signal="toggled" from="Main/Pseudolocalization_options/accents" to="." method="_on_accents_toggled"]

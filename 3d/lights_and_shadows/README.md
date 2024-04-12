@@ -10,7 +10,7 @@ real-time with the environment sky's process mode set accordingly.
 
 Language: GDScript
 
-Renderer: Forward Plus
+Renderer: Forward+
 
 ## Screenshots
 

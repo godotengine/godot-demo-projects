@@ -19,7 +19,7 @@ func handle_input(event):
 func update(_delta):
 	var input_direction = get_input_direction()
 	if input_direction.is_zero_approx():
-		emit_signal("finished", "idle")
+		finished.emit("idle")
 	update_look_direction(input_direction)
 
 	if Input.is_action_pressed("run"):

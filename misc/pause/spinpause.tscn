@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwa8rglnrg4yb"]
+[gd_scene load_steps=8 format=3 uid="uid://cwa8rglnrg4yb"]
 
 [ext_resource type="Script" path="res://pause_button.gd" id="1"]
 [ext_resource type="Script" path="res://process_mode.gd" id="2_0dpmq"]
@@ -27,6 +27,12 @@ _data = {
 "spin": SubResource("2")
 }
 
+[sub_resource type="InputEventAction" id="InputEventAction_6y126"]
+action = &"toggle_pause"
+
+[sub_resource type="Shortcut" id="Shortcut_mmc83"]
+events = [SubResource("InputEventAction_6y126")]
+
 [node name="PauseScene" type="Node3D"]
 
 [node name="Cube" type="MeshInstance3D" parent="."]
@@ -38,10 +44,10 @@ fov = 74.0
 near = 0.1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "spin"
 libraries = {
 "": SubResource("AnimationLibrary_5vmwp")
 }
+autoplay = "spin"
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(0.707107, -0.353554, 0.612373, 0, 0.866026, 0.5, -0.707107, -0.353554, 0.612373, 2, 2, 2)
@@ -61,6 +67,7 @@ offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 toggle_mode = true
+shortcut = SubResource("Shortcut_mmc83")
 text = "Pause"
 script = ExtResource("1")
 
@@ -80,16 +87,11 @@ theme_override_constants/separation = 12
 
 [node name="Label" type="Label" parent="ProcessMode"]
 layout_mode = 2
-offset_top = 7.0
-offset_right = 151.0
-offset_bottom = 33.0
 text = "Cube Process Mode"
 
 [node name="OptionButton" type="OptionButton" parent="ProcessMode"]
+process_mode = 3
 layout_mode = 2
-offset_left = 163.0
-offset_right = 334.0
-offset_bottom = 40.0
 item_count = 5
 selected = 0
 popup/item_0/text = "Inherit"

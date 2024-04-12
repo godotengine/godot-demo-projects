@@ -12,10 +12,11 @@ config_version=5
 
 config/name="Threaded Loading"
 config/description="This demo demonstrates how to use ResourceLoader for background loading."
+config/tags=PackedStringArray("best_practices", "demo", "official", "performance")
 run/main_scene="res://load_threaded.tscn"
-config/features=PackedStringArray("4.0")
+config/features=PackedStringArray("4.2")
 run/low_processor_mode=true
-config/icon="res://icon.png"
+config/icon="res://icon.webp"
 
 [display]
 
@@ -23,4 +24,5 @@ window/vsync/vsync_mode=0
 
 [rendering]
 
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

@@ -107,6 +107,21 @@ _data = {
 "motion3": SubResource("7")
 }
 
+[sub_resource type="Animation" id="Animation_emv7u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_rgbru"]
 resource_name = "rotate_directional_light"
 length = 20.0
@@ -122,21 +137,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 6.28319]
-}
-
-[sub_resource type="Animation" id="Animation_emv7u"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DirectionalLight2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6bket"]
@@ -326,10 +326,10 @@ material = SubResource("2")
 texture = ExtResource("4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="RedLight"]
-autoplay = "motion"
 libraries = {
 "": SubResource("AnimationLibrary_wawvy")
 }
+autoplay = "motion"
 
 [node name="GreenLight" type="PointLight2D" parent="." groups=["point_light"]]
 position = Vector2(753.756, 314.336)
@@ -344,10 +344,10 @@ material = SubResource("5")
 texture = ExtResource("4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GreenLight"]
-autoplay = "m2"
 libraries = {
 "": SubResource("AnimationLibrary_fig6v")
 }
+autoplay = "m2"
 
 [node name="BlueLight" type="PointLight2D" parent="." groups=["point_light"]]
 position = Vector2(692.078, 29.8849)
@@ -362,14 +362,13 @@ material = SubResource("6")
 texture = ExtResource("4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BlueLight"]
-autoplay = "motion3"
 libraries = {
 "": SubResource("AnimationLibrary_kfxj1")
 }
+autoplay = "motion3"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(400, 300)
-current = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -396,7 +395,7 @@ shadow_filter = 1
 shadow_filter_smooth = 1.2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "rotate_directional_light"
 libraries = {
 "": SubResource("AnimationLibrary_6bket")
 }
+autoplay = "rotate_directional_light"

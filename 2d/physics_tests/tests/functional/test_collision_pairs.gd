@@ -42,8 +42,8 @@ func _ready():
 	options.add_menu_item(OPTION_SHAPE_CONCAVE_POLYGON, true, true)
 	options.add_menu_item(OPTION_SHAPE_CONCAVE_SEGMENTS, true, true)
 
-	options.option_selected.connect(self._on_option_selected)
-	options.option_changed.connect(self._on_option_changed)
+	options.option_selected.connect(_on_option_selected)
+	options.option_changed.connect(_on_option_changed)
 
 	await start_timer(0.5).timeout
 	if is_timer_canceled():

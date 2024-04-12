@@ -1,8 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://dohp772jyjxb7"]
+[gd_scene load_steps=7 format=3 uid="uid://dohp772jyjxb7"]
 
 [ext_resource type="PackedScene" uid="uid://dmlvwah3ypol0" path="res://stage/grid_map.scn" id="1_t0f53"]
+[ext_resource type="Texture2D" uid="uid://qdur4kpvvtdg" path="res://stage/panorama.webp" id="2_36a8a"]
 [ext_resource type="ArrayMesh" uid="uid://ba7lhk44sk366" path="res://stage/meshes/floor.res" id="2_vkxfl"]
-[ext_resource type="Environment" uid="uid://odyhne6bhlsu" path="res://default_env.tres" id="3_64uhs"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_3qare"]
+panorama = ExtResource("2_36a8a")
+
+[sub_resource type="Sky" id="Sky_qdkmq"]
+sky_material = SubResource("PanoramaSkyMaterial_3qare")
+
+[sub_resource type="Environment" id="Environment_vpofs"]
+background_mode = 2
+sky = SubResource("Sky_qdkmq")
+ambient_light_source = 2
+ambient_light_color = Color(0.6, 0.6, 0.6, 1)
+ambient_light_sky_contribution = 0.0
+tonemap_mode = 2
+tonemap_white = 6.0
+fog_enabled = true
+fog_density = 0.0015
+fog_sky_affect = 0.0
 
 [node name="Stage" type="Node3D"]
 
@@ -13,7 +31,7 @@ data = {
 metadata/_editor_floor_ = Vector3(4, 4, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("3_64uhs")
+environment = SubResource("Environment_vpofs")
 
 [node name="DirectionalLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.965926, -0.166366, 0.198267, 1.42109e-14, 0.766044, 0.642788, -0.258819, 0.620886, -0.739941, 0, 0, 0)
@@ -28,7 +46,7 @@ directional_shadow_max_distance = 55.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.28208, 1, -1)
 intensity = 0.5
 max_distance = 60.0
-extents = Vector3(17.9758, 10, 26.2909)
+size = Vector3(35.9516, 20, 52.5818)
 origin_offset = Vector3(0, -1.5, 0)
 box_projection = true
 cull_mask = 1048573
@@ -36,7 +54,7 @@ cull_mask = 1048573
 [node name="Reflection2" type="ReflectionProbe" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
 intensity = 0.5
-extents = Vector3(8, 2.5, 3)
+size = Vector3(16, 5, 6)
 origin_offset = Vector3(0, -0.22168, 0)
 box_projection = true
 cull_mask = 1048573
@@ -45,7 +63,7 @@ cull_mask = 1048573
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 4)
 intensity = 0.5
 max_distance = 18.7
-extents = Vector3(3, 3, 6)
+size = Vector3(6, 6, 12)
 origin_offset = Vector3(0, -0.22168, 0)
 box_projection = true
 cull_mask = 1048573
@@ -54,7 +72,7 @@ cull_mask = 1048573
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0391, 6.19519, 1.14534)
 intensity = 0.5
 max_distance = 18.7
-extents = Vector3(4, 3, 7)
+size = Vector3(8, 6, 14)
 origin_offset = Vector3(0, -0.22168, 0)
 box_projection = true
 cull_mask = 1048573
@@ -63,7 +81,7 @@ cull_mask = 1048573
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 1, 15)
 intensity = 0.5
 max_distance = 60.0
-extents = Vector3(12, 10, 8)
+size = Vector3(24, 20, 16)
 origin_offset = Vector3(-4.6, -1.4, 0)
 box_projection = true
 cull_mask = 1048573
@@ -72,7 +90,7 @@ cull_mask = 1048573
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.5486, 1, 8)
 intensity = 0.5
 max_distance = 60.0
-extents = Vector3(18.4972, 10, 22.393)
+size = Vector3(36.9944, 20, 44.786)
 origin_offset = Vector3(0, -6.5, 0)
 cull_mask = 1048573
 
@@ -80,7 +98,7 @@ cull_mask = 1048573
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.0962, 0.999998, -15.4268)
 intensity = 0.5
 max_distance = 60.0
-extents = Vector3(12, 10, 12)
+size = Vector3(24, 20, 24)
 origin_offset = Vector3(0, -6.5, 0)
 cull_mask = 1048573
 

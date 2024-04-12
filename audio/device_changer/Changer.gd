@@ -4,10 +4,10 @@ extends Control
 
 
 func _ready():
-	for item in AudioServer.get_device_list():
+	for item in AudioServer.get_output_device_list():
 		item_list.add_item(item)
 
-	var device = AudioServer.get_device()
+	var device = AudioServer.get_output_device()
 	for i in range(item_list.get_item_count()):
 		if device == item_list.get_item_text(i):
 			item_list.select(i)
@@ -25,14 +25,14 @@ func _process(_delta):
 	elif speaker_mode == AudioServer.SPEAKER_SURROUND_71:
 		speaker_mode_text = "Surround 7.1"
 
-	$DeviceInfo.text = "Current Device: " + AudioServer.get_device() + "\n"
+	$DeviceInfo.text = "Current Device: " + AudioServer.get_output_device() + "\n"
 	$DeviceInfo.text += "Speaker Mode: " + speaker_mode_text
 
 
 func _on_Button_button_down():
 	for item in item_list.get_selected_items():
 		var device = item_list.get_item_text(item)
-		AudioServer.set_device(device)
+		AudioServer.set_output_device(device)
 
 
 func _on_Play_Audio_button_down():

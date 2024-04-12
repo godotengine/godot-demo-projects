@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbvciliw3xnf6"]
+
+[ext_resource type="Script" path="res://objects/black_out.gd" id="1_1r6dl"]
+[ext_resource type="Shader" path="res://objects/black_out.gdshader" id="2_xc5vy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ve0hd"]
+resource_local_to_scene = true
+render_priority = -99
+shader = ExtResource("2_xc5vy")
+shader_parameter/albedo = Color(1, 1, 1, 0.1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_iv1ir"]
+
+[node name="BlackOut" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+script = ExtResource("1_1r6dl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+material_override = SubResource("ShaderMaterial_ve0hd")
+mesh = SubResource("QuadMesh_iv1ir")

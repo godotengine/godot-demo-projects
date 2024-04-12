@@ -1,0 +1,38 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Physical Light and Camera Units"
+config/description="This demo showcases a physical light and camera units setup.
+This allows you to use real world units for lights (lumen, lux, Kelvin)
+and cameras (shutter speed, aperture, ISO sensitivity)."
+run/main_scene="res://test.tscn"
+config/features=PackedStringArray("4.2")
+config/icon="res://icon.webp"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[filesystem]
+
+import/blender/enabled=false
+
+[rendering]
+
+lights_and_shadows/use_physical_light_units=true
+lights_and_shadows/directional_shadow/size=8192
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=3
+global_illumination/sdfgi/probe_ray_count=5
+anti_aliasing/quality/msaa_3d=2
+anti_aliasing/quality/use_debanding=true

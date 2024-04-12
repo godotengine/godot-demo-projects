@@ -1,5 +1,6 @@
 extends Control
 
+
 # Window project settings:
 #  - Stretch mode is set to `canvas_items` (`2d` in Godot 3.x)
 #  - Stretch aspect is set to `expand`
@@ -8,6 +9,8 @@ extends Control
 @onready var camera := $Node3D/Camera3D
 @onready var fps_label := $FPSLabel
 @onready var resolution_label := $ResolutionLabel
+
+var counter := 0.0
 
 # When the screen changes size, we need to update the 3D
 # viewport quality setting. If we don't do this, the viewport will take
@@ -19,7 +22,7 @@ var viewport_start_size := Vector2(
 
 
 func _ready() -> void:
-	get_viewport().size_changed.connect(self.update_resolution_label)
+	get_viewport().size_changed.connect(update_resolution_label)
 	update_resolution_label()
 
 	# Disable V-Sync to uncap framerate on supported platforms. This makes performance comparison
@@ -28,7 +31,13 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	counter += delta
+	# Hide FPS label until it's initially updated by the engine (this can take up to 1 second).
+	fps_label.visible = counter >= 1.0
 	fps_label.text = "%d FPS (%.2f mspf)" % [Engine.get_frames_per_second(), 1000.0 / Engine.get_frames_per_second()]
+	# Color FPS counter depending on framerate.
+	# The Gradient resource is stored as metadata within the FPSLabel node (accessible in the inspector).
+	fps_label.modulate = fps_label.get_meta("gradient").sample(remap(Engine.get_frames_per_second(), 0, 180, 0.0, 1.0))
 
 
 func update_resolution_label() -> void:
@@ -84,8 +93,11 @@ func _on_filter_option_button_item_selected(index: int) -> void:
 		%FSRSharpnessSlider.visible = true
 
 
-func _on_fsr_sharpness_slider_value_changed(value):
-	get_viewport().fsr_sharpness = value
+func _on_fsr_sharpness_slider_value_changed(value: float) -> void:
+	# Lower FSR sharpness values result in a sharper image.
+	# Invert the slider so that higher values result in a sharper image,
+	# which is generally expected from users.
+	get_viewport().fsr_sharpness = 2.0 - value
 
 
 func _on_vsync_option_button_item_selected(index: int) -> void:
@@ -101,6 +113,12 @@ func _on_vsync_option_button_item_selected(index: int) -> void:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ADAPTIVE)
 	elif index == 2: # Enabled
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+
+
+func _on_limit_fps_slider_value_changed(value: float):
+	# The maximum number of frames per second that can be rendered.
+	# A value of 0 means "no limit".
+	Engine.max_fps = value
 
 
 func _on_msaa_option_button_item_selected(index: int) -> void:
@@ -125,7 +143,7 @@ func _on_taa_option_button_item_selected(index: int) -> void:
 func _on_fxaa_option_button_item_selected(index: int) -> void:
 	# Fast approximate anti-aliasing. Much faster than MSAA (and works on alpha scissor edges),
 	# but blurs the whole scene rendering slightly.
-	get_viewport().screen_space_aa = index == 1
+	get_viewport().screen_space_aa = int(index == 1) as Viewport.ScreenSpaceAA
 
 
 func _on_fullscreen_option_button_item_selected(index: int) -> void:
@@ -292,10 +310,8 @@ func _on_glow_option_button_item_selected(index: int) -> void:
 		world_environment.environment.glow_enabled = false
 	if index == 1: # Low
 		world_environment.environment.glow_enabled = true
-		RenderingServer.environment_glow_set_use_high_quality(false)
 	if index == 2: # High
 		world_environment.environment.glow_enabled = true
-		RenderingServer.environment_glow_set_use_high_quality(true)
 
 
 func _on_volumetric_fog_option_button_item_selected(index: int) -> void:
@@ -338,6 +354,7 @@ func _on_saturation_slider_value_changed(value: float) -> void:
 func _on_very_low_preset_pressed() -> void:
 	%TAAOptionButton.selected = 0
 	%MSAAOptionButton.selected = 0
+	%FXAAOptionButton.selected = 0
 	%ShadowSizeOptionButton.selected = 0
 	%ShadowFilterOptionButton.selected = 0
 	%MeshLODOptionButton.selected = 0
@@ -351,7 +368,8 @@ func _on_very_low_preset_pressed() -> void:
 
 func _on_low_preset_pressed() -> void:
 	%TAAOptionButton.selected = 0
-	%MSAAOptionButton.selected = 1
+	%MSAAOptionButton.selected = 0
+	%FXAAOptionButton.selected = 1
 	%ShadowSizeOptionButton.selected = 1
 	%ShadowFilterOptionButton.selected = 1
 	%MeshLODOptionButton.selected = 1
@@ -367,6 +385,7 @@ func _on_low_preset_pressed() -> void:
 func _on_medium_preset_pressed() -> void:
 	%TAAOptionButton.selected = 1
 	%MSAAOptionButton.selected = 0
+	%FXAAOptionButton.selected = 0
 	%ShadowSizeOptionButton.selected = 2
 	%ShadowFilterOptionButton.selected = 2
 	%MeshLODOptionButton.selected = 1
@@ -382,6 +401,7 @@ func _on_medium_preset_pressed() -> void:
 func _on_high_preset_pressed() -> void:
 	%TAAOptionButton.selected = 1
 	%MSAAOptionButton.selected = 0
+	%FXAAOptionButton.selected = 0
 	%ShadowSizeOptionButton.selected = 3
 	%ShadowFilterOptionButton.selected = 3
 	%MeshLODOptionButton.selected = 2
@@ -397,6 +417,7 @@ func _on_high_preset_pressed() -> void:
 func _on_ultra_preset_pressed() -> void:
 	%TAAOptionButton.selected = 1
 	%MSAAOptionButton.selected = 1
+	%FXAAOptionButton.selected = 0
 	%ShadowSizeOptionButton.selected = 4
 	%ShadowFilterOptionButton.selected = 4
 	%MeshLODOptionButton.selected = 3
@@ -411,14 +432,15 @@ func _on_ultra_preset_pressed() -> void:
 
 func update_preset() -> void:
 	# Simulate options being manually selected to run their respective update code.
-	%TAAOptionButton.emit_signal("item_selected", %TAAOptionButton.selected)
-	%MSAAOptionButton.emit_signal("item_selected", %MSAAOptionButton.selected)
-	%ShadowSizeOptionButton.emit_signal("item_selected", %ShadowSizeOptionButton.selected)
-	%ShadowFilterOptionButton.emit_signal("item_selected", %ShadowFilterOptionButton.selected)
-	%MeshLODOptionButton.emit_signal("item_selected", %MeshLODOptionButton.selected)
-	%SDFGIOptionButton.emit_signal("item_selected", %SDFGIOptionButton.selected)
-	%GlowOptionButton.emit_signal("item_selected", %GlowOptionButton.selected)
-	%SSAOOptionButton.emit_signal("item_selected", %SSAOOptionButton.selected)
-	%SSReflectionsOptionButton.emit_signal("item_selected", %SSReflectionsOptionButton.selected)
-	%SSILOptionButton.emit_signal("item_selected", %SSILOptionButton.selected)
-	%VolumetricFogOptionButton.emit_signal("item_selected", %VolumetricFogOptionButton.selected)
+	%TAAOptionButton.item_selected.emit(%TAAOptionButton.selected)
+	%MSAAOptionButton.item_selected.emit(%MSAAOptionButton.selected)
+	%FXAAOptionButton.item_selected.emit(%FXAAOptionButton.selected)
+	%ShadowSizeOptionButton.item_selected.emit(%ShadowSizeOptionButton.selected)
+	%ShadowFilterOptionButton.item_selected.emit(%ShadowFilterOptionButton.selected)
+	%MeshLODOptionButton.item_selected.emit(%MeshLODOptionButton.selected)
+	%SDFGIOptionButton.item_selected.emit(%SDFGIOptionButton.selected)
+	%GlowOptionButton.item_selected.emit(%GlowOptionButton.selected)
+	%SSAOOptionButton.item_selected.emit(%SSAOOptionButton.selected)
+	%SSReflectionsOptionButton.item_selected.emit(%SSReflectionsOptionButton.selected)
+	%SSILOptionButton.item_selected.emit(%SSILOptionButton.selected)
+	%VolumetricFogOptionButton.item_selected.emit(%VolumetricFogOptionButton.selected)

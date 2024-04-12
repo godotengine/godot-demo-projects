@@ -16,18 +16,18 @@ func _log(what):
 
 
 @rpc("any_peer")
-func set_player_name(name):
+func set_player_name(p_name):
 	if not is_multiplayer_authority():
 		return
 	var sender = multiplayer.get_remote_sender_id()
-	update_player_name.rpc(sender, name)
+	update_player_name.rpc(sender, p_name)
 
 
 @rpc("call_local")
-func update_player_name(player, name):
+func update_player_name(player, p_name):
 	var pos = _players.find(player)
 	if pos != -1:
-		_list.set_item_text(pos, name)
+		_list.set_item_text(pos, p_name)
 
 
 @rpc("any_peer")

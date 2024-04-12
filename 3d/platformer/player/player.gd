@@ -28,7 +28,7 @@ var shoot_blend := 0.0
 var coins := 0
 
 @onready var initial_position := position
-@onready var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * \
+@onready var gravity: Vector3 = ProjectSettings.get_setting("physics/3d/default_gravity") * \
 		ProjectSettings.get_setting("physics/3d/default_gravity_vector")
 
 @onready var _camera := $Target/Camera3D as Camera3D
@@ -171,9 +171,9 @@ func _physics_process(delta):
 		# How much the player should be running (as opposed to walking). 0.0 = fully walking, 1.0 = fully running.
 		_animation_tree[&"parameters/speed/blend_amount"] = minf(1.0, horizontal_speed / (MAX_SPEED * 0.5))
 
-	_animation_tree[&"parameters/state/current"] = anim
-	_animation_tree[&"parameters/air_dir/blend_amount"] = clamp(-velocity.y / 4 + 0.5, 0, 1)
-	_animation_tree[&"parameters/gun/blend_amount"] = min(shoot_blend, 1.0)
+	_animation_tree[&"parameters/state/blend_amount"] = anim
+	_animation_tree[&"parameters/air_dir/blend_amount"] = clampf(-velocity.y / 4 + 0.5, 0, 1)
+	_animation_tree[&"parameters/gun/blend_amount"] = minf(shoot_blend, 1.0)
 
 
 func adjust_facing(facing: Vector3, target: Vector3, step: float, adjust_rate: float, \
@@ -186,7 +186,7 @@ func adjust_facing(facing: Vector3, target: Vector3, step: float, adjust_rate: f
 
 	var ang := atan2(y,x)
 
-	if abs(ang) < 0.001:
+	if absf(ang) < 0.001:
 		return facing
 
 	var s := signf(ang)

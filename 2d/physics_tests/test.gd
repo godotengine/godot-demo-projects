@@ -32,7 +32,7 @@ func _physics_process(_delta):
 	if _wait_physics_ticks_counter > 0:
 		_wait_physics_ticks_counter -= 1
 		if _wait_physics_ticks_counter == 0:
-			emit_signal("wait_done")
+			wait_done.emit()
 
 
 func add_line(pos_start, pos_end, color):
@@ -90,7 +90,7 @@ func create_rigidbody_box(size, pickable = false, use_icon = false, shape_transf
 	var body = create_rigidbody(shape, pickable, shape_transform)
 
 	if use_icon:
-		var texture = load("res://icon.png")
+		var texture = load("res://icon.webp")
 		var icon = Sprite2D.new()
 		icon.texture = texture
 		icon.scale = size / texture.get_size()
@@ -111,7 +111,7 @@ func start_timer(timeout):
 		_timer = Timer.new()
 		_timer.one_shot = true
 		add_child(_timer)
-		_timer.timeout.connect(self._on_timer_done)
+		_timer.timeout.connect(_on_timer_done)
 	else:
 		cancel_timer()
 
@@ -124,7 +124,7 @@ func start_timer(timeout):
 func cancel_timer():
 	if _timer_started:
 		_timer.paused = true
-		_timer.emit_signal("timeout")
+		_timer.timeout.emit()
 		_timer.paused = false
 
 

@@ -61,7 +61,7 @@ func _on_AddGlobalMenuItems_pressed():
 			func(tag): print("Clicked main 1 " + str(tag)),
 			func(tag): print("Key main 1 " + str(tag)),
 			null,
-			KEY_MASK_META + KEY_1
+			(KEY_MASK_META | KEY_1) as Key
 	)
 	DisplayServer.global_menu_add_separator("_main/Hello")
 	DisplayServer.global_menu_add_item("_main/Hello", "World2", func(tag): print("Clicked main 2 " + str(tag)))

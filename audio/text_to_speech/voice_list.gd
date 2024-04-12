@@ -27,28 +27,28 @@ func _ready():
 	DisplayServer.tts_set_utterance_callback(DisplayServer.TTS_UTTERANCE_BOUNDARY, Callable(self, "_on_utterance_boundary"))
 	set_process(true)
 
-func _process(delta):
+func _process(_delta):
 	$ButtonPause.button_pressed = DisplayServer.tts_is_paused()
 	if DisplayServer.tts_is_speaking():
 		$ColorRect.color = Color(1, 0, 0)
 	else:
 		$ColorRect.color = Color(1, 1, 1)
 
-func _on_utterance_boundary(pos, id):
-	$RichTextLabel.text = "[bgcolor=yellow][color=black]" + ut_map[id].substr(0, pos) + "[/color][/bgcolor]" + ut_map[id].substr(pos, -1)
+func _on_utterance_boundary(pos, ut_id):
+	$RichTextLabel.text = "[bgcolor=yellow][color=black]" + ut_map[ut_id].substr(0, pos) + "[/color][/bgcolor]" + ut_map[ut_id].substr(pos, -1)
 
-func _on_utterance_start(id):
-	$Log.text += "utterance %d started\n" % [id]
+func _on_utterance_start(ut_id):
+	$Log.text += "utterance %d started\n" % [ut_id]
 
-func _on_utterance_end(id):
-	$RichTextLabel.text = "[bgcolor=yellow][color=black]" + ut_map[id] + "[/color][/bgcolor]"
-	$Log.text += "utterance %d ended\n" % [id]
-	ut_map.erase(id)
+func _on_utterance_end(ut_id):
+	$RichTextLabel.text = "[bgcolor=yellow][color=black]" + ut_map[ut_id] + "[/color][/bgcolor]"
+	$Log.text += "utterance %d ended\n" % [ut_id]
+	ut_map.erase(ut_id)
 
-func _on_utterance_error(id):
+func _on_utterance_error(ut_id):
 	$RichTextLabel.text = ""
-	$Log.text += "utterance %d canceled/failed\n" % [id]
-	ut_map.erase(id)
+	$Log.text += "utterance %d canceled/failed\n" % [ut_id]
+	ut_map.erase(ut_id)
 
 func _on_ButtonStop_pressed():
 	DisplayServer.tts_stop()
@@ -116,7 +116,7 @@ func _on_Button_pressed():
 		DisplayServer.tts_speak("Он так свирлеп и дик!", vc[0], 50, 1, 1, id + 1)
 		id += 2
 
-func _on_LineEditFilterName_text_changed(new_text):
+func _on_LineEditFilterName_text_changed(_new_text):
 	$Tree.clear()
 	var root = $Tree.create_item()
 	for v in vs:

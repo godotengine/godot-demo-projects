@@ -64,6 +64,11 @@ public partial class Main : Node
         var mobSpawnLocation = GetNode<PathFollow2D>("MobPath/MobSpawnLocation");
         mobSpawnLocation.Progress = GD.Randi();
 
+        if (mobScene is null)
+        {
+            GD.PrintErr("Mob scene is not set. You need to set it in the inspector.");
+            return;
+        }
         // Create a Mob instance and add it to the scene.
         var mob = mobScene.Instantiate<Mob>();
         AddChild(mob);

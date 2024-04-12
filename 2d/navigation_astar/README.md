@@ -11,4 +11,4 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
 
 ## Screenshots
 
-![Screenshot](screenshots/nav_astar.png)
+![Screenshot](screenshots/navigation_astar.webp)

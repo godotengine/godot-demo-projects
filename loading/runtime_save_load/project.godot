@@ -1,0 +1,37 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Run-time File Saving and Loading"
+config/description="This project showcases how to load and save various file types without going
+through Godot's resource importing system.
+
+This is useful to load/save images, sounds, 3D scenes and ZIP archives at
+run-time such as user-generated content, without requiring users to generate a
+PCK file through Godot."
+config/tags=PackedStringArray("demo", "filesystem", "official")
+run/main_scene="res://runtime_save_load.tscn"
+config/features=PackedStringArray("4.2")
+run/low_processor_mode=true
+config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/vsync/vsync_mode=0
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+lights_and_shadows/directional_shadow/size=8192
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=5

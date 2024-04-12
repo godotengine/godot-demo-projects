@@ -13,9 +13,10 @@ config_version=5
 config/name="2D Shaders for Sprites"
 config/description="This is a sample consisting of different shaders applied to some sprites.
 Effects include outlines, blurs, distorts, shadows, glows, and more."
+config/tags=PackedStringArray("2d", "demo", "official", "rendering", "shaders")
 run/main_scene="res://sprite_shaders.tscn"
-config/features=PackedStringArray("4.0")
-config/icon="res://icon.png"
+config/features=PackedStringArray("4.2")
+config/icon="res://icon.webp"
 
 [display]
 
@@ -24,6 +25,5 @@ window/stretch/aspect="expand"
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
-vram_compression/import_etc=true
-vram_compression/import_etc2=false
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

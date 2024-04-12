@@ -1,6 +1,6 @@
 extends Control
 
-@onready var _server : WebSocketServer = $WebSocketServer
+@onready var _server: WebSocketServer = $WebSocketServer
 @onready var _log_dest = $Panel/VBoxContainer/RichTextLabel
 @onready var _line_edit = $Panel/VBoxContainer/Send/LineEdit
 @onready var _listen_port = $Panel/VBoxContainer/Connect/Port
@@ -12,13 +12,13 @@ func info(msg):
 
 # Server signals
 func _on_web_socket_server_client_connected(peer_id):
-	var peer : WebSocketPeer = _server.peers[peer_id]
+	var peer: WebSocketPeer = _server.peers[peer_id]
 	info("Remote client connected: %d. Protocol: %s" % [peer_id, peer.get_selected_protocol()])
 	_server.send(-peer_id, "[%d] connected" % peer_id)
 
 
 func _on_web_socket_server_client_disconnected(peer_id):
-	var peer : WebSocketPeer = _server.peers[peer_id]
+	var peer: WebSocketPeer = _server.peers[peer_id]
 	info("Remote client disconnected: %d. Code: %d, Reason: %s" % [peer_id, peer.get_close_code(), peer.get_close_reason()])
 	_server.send(-peer_id, "[%d] disconnected" % peer_id)
 

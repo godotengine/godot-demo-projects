@@ -11,7 +11,7 @@ func _ready():
 func _toggled(is_button_pressed):
 	set_process_unhandled_key_input(is_button_pressed)
 	if is_button_pressed:
-		text = "... Key"
+		text = "<press a key>"
 		release_focus()
 	else:
 		display_current_key()
@@ -31,9 +31,9 @@ func remap_action_to(event):
 	# And then save it to the keymaps file
 	KeyPersistence.keymaps[action] = event
 	KeyPersistence.save_keymap()
-	text = "%s Key" % event.as_text()
+	text = event.as_text()
 
 
 func display_current_key():
 	var current_key = InputMap.action_get_events(action)[0].as_text()
-	text = "%s Key" % current_key
+	text = current_key

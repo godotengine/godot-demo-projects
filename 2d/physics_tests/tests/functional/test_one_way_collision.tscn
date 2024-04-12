@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://c85275leeliuq"]
 
 [ext_resource type="Script" path="res://tests/functional/test_one_way_collision.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://cpps5r8o4dfwo" path="res://icon.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://brwp8bimc75uu" path="res://icon.webp" id="2"]
 [ext_resource type="PackedScene" uid="uid://blh3twy74kbkv" path="res://tests/test_options.tscn" id="3"]
 [ext_resource type="Script" path="res://utils/label_slider_value.gd" id="4"]
 [ext_resource type="Script" path="res://utils/slider.gd" id="5"]
@@ -16,7 +16,7 @@ size = Vector2(128, 64)
 size = Vector2(64, 64)
 
 [node name="Test" type="Node2D"]
-script = ExtResource( "1" )
+script = ExtResource("1")
 
 [node name="LabelTestType" type="Label" parent="."]
 offset_left = 14.0
@@ -24,123 +24,94 @@ offset_top = 79.0
 offset_right = 145.0
 offset_bottom = 93.0
 text = "Testing: "
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Options" parent="." instance=ExtResource( "3" )]
+[node name="Options" parent="." instance=ExtResource("3")]
 
 [node name="Controls" type="VBoxContainer" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 25.3619
-offset_top = 416.765
-offset_right = 265.362
-offset_bottom = 484.765
+offset_left = 25.0
+offset_top = 402.0
+offset_right = 425.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 10
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PlatformSize" type="HBoxContainer" parent="Controls"]
-offset_right = 452.0
-offset_bottom = 26.0
+layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="Controls/PlatformSize"]
-offset_left = 12.0
-offset_right = 112.0
-offset_bottom = 26.0
+custom_minimum_size = Vector2(120, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 0
 text = "Platform size"
 
 [node name="HSlider" type="HSlider" parent="Controls/PlatformSize"]
-offset_left = 132.0
-offset_right = 332.0
-offset_bottom = 16.0
-rect_min_size = Vector2(200, 0)
+custom_minimum_size = Vector2(200, 2.08165e-12)
+layout_mode = 2
 min_value = 64.0
 max_value = 256.0
 value = 64.0
-script = ExtResource( "5" )
+script = ExtResource("5")
 
 [node name="LabelValue" type="Label" parent="Controls/PlatformSize"]
-offset_left = 352.0
-offset_right = 452.0
-offset_bottom = 26.0
-rect_min_size = Vector2(100, 0)
+custom_minimum_size = Vector2(60, 2.08165e-12)
+layout_mode = 2
 text = "64.0"
-script = ExtResource( "4" )
+script = ExtResource("4")
 
 [node name="PlatformAngle" type="HBoxContainer" parent="Controls"]
-offset_top = 36.0
-offset_right = 452.0
-offset_bottom = 62.0
+layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="Controls/PlatformAngle"]
-offset_right = 112.0
-offset_bottom = 26.0
+custom_minimum_size = Vector2(120, 2.08165e-12)
+layout_mode = 2
 text = "Platform angle"
 
 [node name="HSlider" type="HSlider" parent="Controls/PlatformAngle"]
-offset_left = 132.0
-offset_right = 332.0
-offset_bottom = 16.0
-rect_min_size = Vector2(200, 0)
+custom_minimum_size = Vector2(200, 2.08165e-12)
+layout_mode = 2
 max_value = 360.0
-script = ExtResource( "5" )
+script = ExtResource("5")
 snap_step = 5.0
 
 [node name="LabelValue" type="Label" parent="Controls/PlatformAngle"]
-offset_left = 352.0
-offset_right = 452.0
-offset_bottom = 26.0
-rect_min_size = Vector2(100, 0)
+custom_minimum_size = Vector2(60, 2.08165e-12)
+layout_mode = 2
 text = "0.0"
-script = ExtResource( "4" )
+script = ExtResource("4")
 
 [node name="BodyAngle" type="HBoxContainer" parent="Controls"]
-offset_top = 72.0
-offset_right = 452.0
-offset_bottom = 98.0
+layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="Controls/BodyAngle"]
-offset_left = 27.0
-offset_right = 112.0
-offset_bottom = 26.0
+custom_minimum_size = Vector2(120, 2.08165e-12)
+layout_mode = 2
 text = "Body angle"
 
 [node name="HSlider" type="HSlider" parent="Controls/BodyAngle"]
-offset_left = 132.0
-offset_right = 332.0
-offset_bottom = 16.0
-rect_min_size = Vector2(200, 0)
+custom_minimum_size = Vector2(200, 2.08165e-12)
+layout_mode = 2
 max_value = 360.0
-script = ExtResource( "5" )
+script = ExtResource("5")
 snap_step = 5.0
 
 [node name="LabelValue" type="Label" parent="Controls/BodyAngle"]
-offset_left = 352.0
-offset_right = 452.0
-offset_bottom = 26.0
-rect_min_size = Vector2(100, 0)
+custom_minimum_size = Vector2(60, 2.08165e-12)
+layout_mode = 2
 text = "0.0"
-script = ExtResource( "4" )
+script = ExtResource("4")
 
 [node name="LabelResultTitle" type="Label" parent="."]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -150,13 +121,9 @@ offset_top = 251.131
 offset_right = 88.1273
 offset_bottom = 265.131
 text = "RESULT: "
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelResult" type="Label" parent="."]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -166,13 +133,9 @@ offset_top = 266.131
 offset_right = 88.1273
 offset_bottom = 280.131
 text = "..."
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelRestart" type="Label" parent="."]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -182,11 +145,6 @@ offset_top = 304.841
 offset_right = 139.127
 offset_bottom = 318.841
 text = "SPACE - RESTART"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
@@ -196,29 +154,28 @@ one_shot = true
 position = Vector2(512, 300)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetArea2D"]
-shape = SubResource( "CircleShape2D_e5nt1" )
+shape = SubResource("CircleShape2D_e5nt1")
 
 [node name="OneWayStaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(512, 300)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OneWayStaticBody2D"]
-shape = SubResource( "2" )
+shape = SubResource("2")
 one_way_collision = true
 
-[node name="RigidDynamicBody2D" type="RigidDynamicBody2D" parent="."]
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2(300, 300)
 collision_mask = 2147483649
 gravity_scale = 0.0
-contacts_reported = 1
 contact_monitor = true
 
-[node name="Sprite" type="Sprite2D" parent="RigidDynamicBody2D"]
+[node name="Sprite" type="Sprite2D" parent="RigidBody2D"]
 self_modulate = Color(1, 1, 1, 0.501961)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource( "2" )
+texture = ExtResource("2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidDynamicBody2D"]
-shape = SubResource( "3" )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("3")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 position = Vector2(300, 300)
@@ -227,10 +184,10 @@ collision_mask = 2147483649
 [node name="Sprite" type="Sprite2D" parent="CharacterBody2D"]
 self_modulate = Color(1, 1, 1, 0.501961)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource( "2" )
+texture = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource( "3" )
+shape = SubResource("3")
 
 [connection signal="value_changed" from="Controls/PlatformSize/HSlider" to="." method="_update_platform_size"]
 [connection signal="value_changed" from="Controls/PlatformAngle/HSlider" to="." method="_update_platform_angle"]

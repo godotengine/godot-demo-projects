@@ -16,5 +16,5 @@ A custom node type:
 The way it works in this plugin is using the `add_custom_type` and `remove_custom_type` in the plugin script file.
 Using this method you can specify any name, base type, script, and icon for your custom node.
 
-There is also another way to add custom node types, which is using the `class_name` keyword in a script. However,
-the `class_name` system is newer, may change in the future, and it is not available for C# or VisualScript.
+There is also another way to add custom node types, which is using the `class_name` keyword in a script,
+or [using the `[GlobalClass]` attribute above a class declaration in C#](https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_global_classes.html).

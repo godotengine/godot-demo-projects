@@ -90,7 +90,7 @@ func init_gpu() -> void:
 	if rd == null:
 		OS.alert("""Couldn't create local RenderingDevice on GPU: %s
 
-Note: RenderingDevice is only available in the Forward Plus and Forward Mobile backends, not Compatibility.""" % RenderingServer.get_video_adapter_name())
+Note: RenderingDevice is only available in the Forward+ and Mobile rendering methods, not Compatibility.""" % RenderingServer.get_video_adapter_name())
 		return
 
 	# Prepare the shader.
@@ -252,9 +252,9 @@ func _on_random_button_pressed() -> void:
 
 func _on_create_button_gpu_pressed() -> void:
 	var heightmap = prepare_image()
-	call_deferred("compute_island_gpu", heightmap)
+	compute_island_gpu.call_deferred(heightmap)
 
 
 func _on_create_button_cpu_pressed() -> void:
 	var heightmap = prepare_image()
-	call_deferred("compute_island_cpu", heightmap)
+	compute_island_cpu.call_deferred(heightmap)

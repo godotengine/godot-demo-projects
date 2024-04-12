@@ -6,7 +6,7 @@ extends ScrollContainer
 
 func _ready():
 	var scrollbar = get_v_scroll_bar()
-	scrollbar.scrolling.connect(self._on_scrolling)
+	scrollbar.scrolling.connect(_on_scrolling)
 
 
 func _process(_delta):

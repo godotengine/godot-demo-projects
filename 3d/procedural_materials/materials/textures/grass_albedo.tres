@@ -1,0 +1,20 @@
+[gd_resource type="NoiseTexture2D" load_steps=3 format=3 uid="uid://1adlmerrq6tb"]
+
+[sub_resource type="Gradient" id="Gradient_8sl6j"]
+colors = PackedColorArray(0, 0.21, 0, 1, 0.5418, 0.72, 0.324, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ryabi"]
+noise_type = 4
+frequency = 0.005
+fractal_type = 3
+fractal_octaves = 9
+fractal_lacunarity = 10.896
+fractal_gain = 1.0
+fractal_ping_pong_strength = 2.1
+
+[resource]
+width = 1024
+height = 1024
+seamless = true
+color_ramp = SubResource("Gradient_8sl6j")
+noise = SubResource("FastNoiseLite_ryabi")

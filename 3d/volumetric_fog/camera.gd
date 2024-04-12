@@ -3,6 +3,9 @@ extends Camera3D
 const MOUSE_SENSITIVITY = 0.002
 const MOVE_SPEED = 0.6
 
+var volumetric_fog_volume_size = ProjectSettings.get_setting("rendering/environment/volumetric_fog/volume_size")
+var volumetric_fog_volume_depth = ProjectSettings.get_setting("rendering/environment/volumetric_fog/volume_depth")
+
 var rot = Vector3()
 var velocity = Vector3()
 
@@ -60,10 +63,31 @@ func _input(event):
 	elif event.is_action_pressed("decrease_fog_density"):
 		get_world_3d().environment.volumetric_fog_density = clamp(get_world_3d().environment.volumetric_fog_density - 0.01, 0.0, 1.0)
 		update_label()
+	elif event.is_action_pressed("increase_volumetric_fog_quality"):
+		volumetric_fog_volume_size = clamp(volumetric_fog_volume_size + 16, 16, 384)
+		volumetric_fog_volume_depth = clamp(volumetric_fog_volume_depth + 16, 16, 384)
+		RenderingServer.environment_set_volumetric_fog_volume_size(volumetric_fog_volume_size, volumetric_fog_volume_depth)
+		update_label()
+	elif event.is_action_pressed("decrease_volumetric_fog_quality"):
+		volumetric_fog_volume_size = clamp(volumetric_fog_volume_size - 16, 16, 384)
+		volumetric_fog_volume_depth = clamp(volumetric_fog_volume_depth - 16, 16, 384)
+		RenderingServer.environment_set_volumetric_fog_volume_size(volumetric_fog_volume_size, volumetric_fog_volume_depth)
+		update_label()
 
 
 func update_label():
 	if get_world_3d().environment.volumetric_fog_temporal_reprojection_enabled:
-		label.text = "Fog density: %.2f\nTemporal reprojection: Enabled\nTemporal reprojection strength: %.2f" % [get_world_3d().environment.volumetric_fog_density, get_world_3d().environment.volumetric_fog_temporal_reprojection_amount]
+		label.text = "Fog density: %.2f\nTemporal reprojection: Enabled\nTemporal reprojection strength: %.2f\nVolumetric fog quality: %d×%d×%d" % [
+			get_world_3d().environment.volumetric_fog_density,
+			get_world_3d().environment.volumetric_fog_temporal_reprojection_amount,
+			volumetric_fog_volume_size,
+			volumetric_fog_volume_size,
+			volumetric_fog_volume_depth,
+		]
 	else:
-		label.text = "Fog density: %.2f\nTemporal reprojection: Disabled" % get_world_3d().environment.volumetric_fog_density
+		label.text = "Fog density: %.2f\nTemporal reprojection: Disabled\nVolumetric fog quality: %d×%d×%d" % [
+			get_world_3d().environment.volumetric_fog_density,
+			volumetric_fog_volume_size,
+			volumetric_fog_volume_size,
+			volumetric_fog_volume_depth,
+		]

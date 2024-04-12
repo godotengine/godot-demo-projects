@@ -1,6 +1,8 @@
 @tool
-class_name AxisMarker2D, "res://marker/AxisMarker2D.svg"
+@icon("res://marker/AxisMarker2D.svg")
+class_name AxisMarker2D
 extends Node2D
+
 
 func _process(_delta):
 	var line: Line2D = get_child(0).get_child(0)

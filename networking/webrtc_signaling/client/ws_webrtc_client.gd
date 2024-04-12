@@ -9,6 +9,7 @@ enum Message {JOIN, ID, PEER_CONNECT, PEER_DISCONNECT, OFFER, ANSWER, CANDIDATE,
 var ws: WebSocketPeer = WebSocketPeer.new()
 var code = 1000
 var reason = "Unknown"
+var old_state = WebSocketPeer.STATE_CLOSED
 
 signal lobby_joined(lobby)
 signal connected(id, use_mesh)
@@ -33,9 +34,6 @@ func close():
 
 
 func _process(delta):
-	var old_state: int = ws.get_ready_state()
-	if old_state == WebSocketPeer.STATE_CLOSED:
-		return
 	ws.poll()
 	var state = ws.get_ready_state()
 	if state != old_state and state == WebSocketPeer.STATE_OPEN and autojoin:
@@ -43,10 +41,11 @@ func _process(delta):
 	while state == WebSocketPeer.STATE_OPEN and ws.get_available_packet_count():
 		if not _parse_msg():
 			print("Error parsing message from server.")
-	if state == WebSocketPeer.STATE_CLOSED:
+	if state != old_state and state == WebSocketPeer.STATE_CLOSED:
 		code = ws.get_close_code()
 		reason = ws.get_close_reason()
 		disconnected.emit()
+	old_state = state
 
 
 func _parse_msg():

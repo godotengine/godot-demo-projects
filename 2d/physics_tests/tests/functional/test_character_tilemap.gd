@@ -12,7 +12,7 @@ var _test_jump_one_way = false
 var _test_jump_one_way_corner = false
 var _test_fall_one_way = false
 
-var _extra_body : PhysicsBody2D = null
+var _extra_body: PhysicsBody2D = null
 
 var _failed_reason = ""
 

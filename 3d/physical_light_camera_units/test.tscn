@@ -1,0 +1,454 @@
+[gd_scene load_steps=8 format=3 uid="uid://c2wwh47i8o462"]
+
+[ext_resource type="PackedScene" uid="uid://doh0vqn8wpfky" path="res://living_room.glb" id="1_oncn7"]
+[ext_resource type="Script" path="res://options.gd" id="2_hjhvo"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_6cd1w"]
+use_debanding = false
+
+[sub_resource type="Sky" id="Sky_i7d6m"]
+sky_material = SubResource("PhysicalSkyMaterial_6cd1w")
+
+[sub_resource type="Environment" id="Environment_3p42x"]
+background_mode = 2
+sky = SubResource("Sky_i7d6m")
+tonemap_mode = 3
+tonemap_white = 6.0
+sdfgi_use_occlusion = true
+sdfgi_cascades = 2
+sdfgi_min_cell_size = 0.15
+sdfgi_cascade0_distance = 9.6
+sdfgi_max_distance = 38.4
+sdfgi_y_scale = 0
+glow_enabled = true
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_n2bnf"]
+auto_exposure_enabled = true
+auto_exposure_speed = 1.0
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_drxnu"]
+auto_exposure_enabled = true
+auto_exposure_speed = 1.0
+frustum_focal_length = 25.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3p42x")
+camera_attributes = SubResource("CameraAttributesPhysical_n2bnf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.887673, -0.456539, 0.0600684, 0.273782, -0.418382, 0.866025, -0.370243, 0.785193, 0.496379, 0, 0, 0)
+light_angular_distance = 0.5
+light_bake_mode = 1
+shadow_enabled = true
+shadow_blur = 1.8
+directional_shadow_mode = 0
+directional_shadow_blend_splits = true
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 15.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.824458, 0.0252143, -0.565361, 0, 0.999007, 0.0445544, 0.565923, 0.0367332, -0.82364, -2.93199, 2.20651, -1.8947)
+attributes = SubResource("CameraAttributesPhysical_drxnu")
+current = true
+
+[node name="LivingRoom" parent="." instance=ExtResource("1_oncn7")]
+
+[node name="Lightbulb1" type="OmniLight3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 2, 3.19673, 0)
+light_intensity_lumens = 800.0
+light_temperature = 5000.0
+light_size = 0.1
+shadow_enabled = true
+
+[node name="Lightbulb2" type="OmniLight3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -2, 3.197, 0)
+light_intensity_lumens = 800.0
+light_temperature = 5000.0
+light_size = 0.1
+shadow_enabled = true
+
+[node name="Options" type="Control" parent="." node_paths=PackedStringArray("sun", "lightbulb_1", "lightbulb_2", "world_environment")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_hjhvo")
+sun = NodePath("../DirectionalLight3D")
+lightbulb_1 = NodePath("../Lightbulb1")
+lightbulb_2 = NodePath("../Lightbulb2")
+world_environment = NodePath("../WorldEnvironment")
+
+[node name="Light" type="VBoxContainer" parent="Options"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 516.0
+offset_bottom = 69.0
+
+[node name="TimeOfDay" type="HBoxContainer" parent="Options/Light"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/Light/TimeOfDay"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Time of Day"
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Options/Light/TimeOfDay"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1410.0
+step = 15.0
+value = 840.0
+
+[node name="Value" type="Label" parent="Options/Light/TimeOfDay"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "14:00"
+vertical_alignment = 1
+
+[node name="SunIntensity" type="HBoxContainer" parent="Options/Light"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/Light/SunIntensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Sun Intensity"
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Options/Light/SunIntensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 200000.0
+step = 2000.0
+value = 100000.0
+
+[node name="Value" type="Label" parent="Options/Light/SunIntensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "100000 lux"
+vertical_alignment = 1
+
+[node name="Lightbulb1Intensity" type="HBoxContainer" parent="Options/Light"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/Light/Lightbulb1Intensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Lightbulb 1 Intensity"
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Options/Light/Lightbulb1Intensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 3000.0
+step = 50.0
+value = 800.0
+
+[node name="Value" type="Label" parent="Options/Light/Lightbulb1Intensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "800 lm"
+vertical_alignment = 1
+
+[node name="Lightbulb1Temperature" type="HBoxContainer" parent="Options/Light"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/Light/Lightbulb1Temperature"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 14
+text = "Lightbulb 1 Temperature"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Options/Light/Lightbulb1Temperature"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 1000.0
+max_value = 15000.0
+step = 100.0
+value = 5000.0
+
+[node name="Value" type="Label" parent="Options/Light/Lightbulb1Temperature"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "5000 K"
+vertical_alignment = 1
+
+[node name="Lightbulb2Intensity" type="HBoxContainer" parent="Options/Light"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/Light/Lightbulb2Intensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Lightbulb 2 Intensity"
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Options/Light/Lightbulb2Intensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 3000.0
+step = 50.0
+value = 800.0
+
+[node name="Value" type="Label" parent="Options/Light/Lightbulb2Intensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "800 lm"
+vertical_alignment = 1
+
+[node name="Lightbulb2Temperature" type="HBoxContainer" parent="Options/Light"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/Light/Lightbulb2Temperature"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 14
+text = "Lightbulb 2 Temperature"
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Options/Light/Lightbulb2Temperature"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 1000.0
+max_value = 15000.0
+step = 100.0
+value = 5000.0
+
+[node name="Value" type="Label" parent="Options/Light/Lightbulb2Temperature"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "5000 K"
+vertical_alignment = 1
+
+[node name="SDFGI" type="CheckButton" parent="Options/Light"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "SDF Global Illumination"
+
+[node name="Camera" type="VBoxContainer" parent="Options"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -42.0
+offset_right = 516.0
+offset_bottom = -16.0
+grow_vertical = 0
+
+[node name="FocusDistance" type="HBoxContainer" parent="Options/Camera"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/Camera/FocusDistance"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Focus Distance"
+
+[node name="HSlider" type="HSlider" parent="Options/Camera/FocusDistance"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.5
+max_value = 20.0
+step = 0.1
+value = 10.0
+
+[node name="Value" type="Label" parent="Options/Camera/FocusDistance"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "10 m"
+
+[node name="FocalLength" type="HBoxContainer" parent="Options/Camera"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/Camera/FocalLength"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Focal Length"
+
+[node name="HSlider" type="HSlider" parent="Options/Camera/FocalLength"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 10.0
+value = 25.0
+
+[node name="Value" type="Label" parent="Options/Camera/FocalLength"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "25 mm"
+
+[node name="Aperture" type="HBoxContainer" parent="Options/Camera"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/Camera/Aperture"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Aperture"
+
+[node name="HSlider" type="HSlider" parent="Options/Camera/Aperture"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.5
+max_value = 64.0
+step = 0.5
+value = 16.0
+
+[node name="Value" type="Label" parent="Options/Camera/Aperture"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "16.0 f-stop"
+
+[node name="ShutterSpeed" type="HBoxContainer" parent="Options/Camera"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/Camera/ShutterSpeed"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Shutter Speed"
+
+[node name="HSlider" type="HSlider" parent="Options/Camera/ShutterSpeed"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 10.0
+max_value = 2000.0
+step = 10.0
+value = 100.0
+
+[node name="Value" type="Label" parent="Options/Camera/ShutterSpeed"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "1/100"
+
+[node name="Sensitivity" type="HBoxContainer" parent="Options/Camera"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/Camera/Sensitivity"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Sensitivity"
+
+[node name="HSlider" type="HSlider" parent="Options/Camera/Sensitivity"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 50.0
+max_value = 6400.0
+step = 50.0
+value = 100.0
+
+[node name="Value" type="Label" parent="Options/Camera/Sensitivity"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "100 ISO"
+
+[node name="AutoexposureSpeed" type="HBoxContainer" parent="Options/Camera"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/Camera/AutoexposureSpeed"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Auto Exposure Speed"
+
+[node name="HSlider" type="HSlider" parent="Options/Camera/AutoexposureSpeed"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 10.0
+step = 0.1
+value = 1.0
+
+[node name="Value" type="Label" parent="Options/Camera/AutoexposureSpeed"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "1.0"
+
+[connection signal="value_changed" from="Options/Light/TimeOfDay/HSlider" to="Options" method="_on_time_of_day_value_changed"]
+[connection signal="value_changed" from="Options/Light/SunIntensity/HSlider" to="Options" method="_on_sun_intensity_value_changed"]
+[connection signal="value_changed" from="Options/Light/Lightbulb1Intensity/HSlider" to="Options" method="_on_lightbulb1_intensity_value_changed"]
+[connection signal="value_changed" from="Options/Light/Lightbulb1Temperature/HSlider" to="Options" method="_on_lightbulb1_temperature_value_changed"]
+[connection signal="value_changed" from="Options/Light/Lightbulb2Intensity/HSlider" to="Options" method="_on_lightbulb2_intensity_value_changed"]
+[connection signal="value_changed" from="Options/Light/Lightbulb2Temperature/HSlider" to="Options" method="_on_lightbulb2_temperature_value_changed"]
+[connection signal="toggled" from="Options/Light/SDFGI" to="Options" method="_on_sdfgi_button_toggled"]
+[connection signal="value_changed" from="Options/Camera/FocusDistance/HSlider" to="Options" method="_on_focus_distance_value_changed"]
+[connection signal="value_changed" from="Options/Camera/FocalLength/HSlider" to="Options" method="_on_focal_length_value_changed"]
+[connection signal="value_changed" from="Options/Camera/Aperture/HSlider" to="Options" method="_on_aperture_value_changed"]
+[connection signal="value_changed" from="Options/Camera/ShutterSpeed/HSlider" to="Options" method="_on_shutter_speed_value_changed"]
+[connection signal="value_changed" from="Options/Camera/Sensitivity/HSlider" to="Options" method="_on_sensitivity_value_changed"]
+[connection signal="value_changed" from="Options/Camera/AutoexposureSpeed/HSlider" to="Options" method="_on_autoexposure_speed_value_changed"]

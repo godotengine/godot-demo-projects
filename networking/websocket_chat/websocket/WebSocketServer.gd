@@ -1,27 +1,27 @@
 extends Node
 class_name WebSocketServer
 
-signal message_received(peer_id : int, message)
-signal client_connected(peer_id : int)
-signal client_disconnected(peer_id : int)
+signal message_received(peer_id: int, message)
+signal client_connected(peer_id: int)
+signal client_disconnected(peer_id: int)
 
 @export var handshake_headers := PackedStringArray()
-@export var supported_protocols : PackedStringArray
+@export var supported_protocols: PackedStringArray
 @export var handshake_timout := 3000
 @export var use_tls := false
-@export var tls_cert : X509Certificate
-@export var tls_key : CryptoKey
-@export var refuse_new_connections := false :
+@export var tls_cert: X509Certificate
+@export var tls_key: CryptoKey
+@export var refuse_new_connections := false:
 	set(refuse):
 		if refuse:
 			pending_peers.clear()
 
 
 class PendingPeer:
-	var connect_time : int
-	var tcp : StreamPeerTCP
-	var connection : StreamPeer
-	var ws : WebSocketPeer
+	var connect_time: int
+	var tcp: StreamPeerTCP
+	var connection: StreamPeer
+	var ws: WebSocketPeer
 
 	func _init(p_tcp: StreamPeerTCP):
 		tcp = p_tcp
@@ -30,11 +30,11 @@ class PendingPeer:
 
 
 var tcp_server := TCPServer.new()
-var pending_peers : Array[PendingPeer] = []
-var peers : Dictionary
+var pending_peers: Array[PendingPeer] = []
+var peers: Dictionary
 
 
-func listen(port : int) -> int:
+func listen(port: int) -> int:
 	assert(not tcp_server.is_listening())
 	return tcp_server.listen(port)
 
@@ -107,7 +107,7 @@ func poll() -> void:
 		pending_peers.erase(r)
 	to_remove.clear()
 	for id in peers:
-		var p : WebSocketPeer = peers[id]
+		var p: WebSocketPeer = peers[id]
 		var packets = p.get_available_packet_count()
 		p.poll()
 		if p.get_ready_state() != WebSocketPeer.STATE_OPEN:
@@ -145,7 +145,7 @@ func _connect_pending(p: PendingPeer) -> bool:
 		if p.connection == p.tcp:
 			assert(tls_key != null and tls_cert != null)
 			var tls = StreamPeerTLS.new()
-			tls.accept_stream(p.tcp, tls_key, tls_cert)
+			tls.accept_stream(p.tcp, TLSOptions.server(tls_key, tls_cert))
 			p.connection = tls
 		p.connection.poll()
 		var status = p.connection.get_status()

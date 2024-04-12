@@ -38,7 +38,7 @@ func _ready():
 	_on_size_changed()
 	_update_splitscreen()
 
-	get_viewport().size_changed.connect(self._on_size_changed)
+	get_viewport().size_changed.connect(_on_size_changed)
 
 	view.material.set_shader_parameter("viewport1", viewport1.get_texture())
 	view.material.set_shader_parameter("viewport2", viewport2.get_texture())

@@ -1,8 +1,8 @@
 extends LineEdit
 
-func _structured_text_parser(args, text):
+func _structured_text_parser(args, p_text):
 	var output = []
-	var tags = text.split(":")
+	var tags = p_text.split(":")
 	var prev = 0
 	var count = int(tags.size())
 	output.clear()

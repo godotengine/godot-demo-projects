@@ -11,53 +11,61 @@ bg_color = Color(1, 1, 1, 1)
 bg_color = Color(0.2, 0.2, 0.2, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v0gbg"]
-atlas = ExtResource( "3" )
+atlas = ExtResource("3")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j7akv"]
-atlas = ExtResource( "3" )
+atlas = ExtResource("3")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_63q87"]
-atlas = ExtResource( "3" )
+atlas = ExtResource("3")
 region = Rect2(0, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t52fe"]
-atlas = ExtResource( "3" )
+atlas = ExtResource("3")
 region = Rect2(16, 16, 16, 16)
 
 [node name="PaintRoot" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="DrawingAreaBG" type="Panel" parent="."]
+layout_mode = 0
 anchor_left = 0.342
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -0.208008
 grow_horizontal = 2
-theme_override_styles/panel = SubResource( "StyleBoxFlat_4ksjc" )
+theme_override_styles/panel = SubResource("StyleBoxFlat_4ksjc")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = true
 
 [node name="PaintControl" type="Control" parent="."]
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource( "1" )
+script = ExtResource("1")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="ToolsPanel" type="Panel" parent="."]
+layout_mode = 0
 offset_right = 350.0
 offset_bottom = 600.0
-theme_override_styles/panel = SubResource( "StyleBoxFlat_npkcn" )
-script = ExtResource( "2" )
+theme_override_styles/panel = SubResource("StyleBoxFlat_npkcn")
+script = ExtResource("2")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = true
 
 [node name="LabelTools" type="Label" parent="ToolsPanel"]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 6.0
 offset_right = 330.0
@@ -67,6 +75,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="ButtonToolPencil" type="Button" parent="ToolsPanel"]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 30.0
 offset_right = 95.0
@@ -75,6 +84,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="TextureRect" type="TextureRect" parent="ToolsPanel/ButtonToolPencil"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 5.0
@@ -83,11 +93,12 @@ offset_right = -5.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource( "AtlasTexture_v0gbg" )
+texture = SubResource("AtlasTexture_v0gbg")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="ButtonToolEraser" type="Button" parent="ToolsPanel"]
+layout_mode = 0
 offset_left = 110.0
 offset_top = 30.0
 offset_right = 165.0
@@ -96,6 +107,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="TextureRect2" type="TextureRect" parent="ToolsPanel/ButtonToolEraser"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 5.0
@@ -104,11 +116,12 @@ offset_right = -5.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource( "AtlasTexture_j7akv" )
+texture = SubResource("AtlasTexture_j7akv")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="ButtonToolRectangle" type="Button" parent="ToolsPanel"]
+layout_mode = 0
 offset_left = 180.0
 offset_top = 30.0
 offset_right = 235.0
@@ -117,6 +130,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="TextureRect" type="TextureRect" parent="ToolsPanel/ButtonToolRectangle"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 5.0
@@ -125,11 +139,12 @@ offset_right = -5.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource( "AtlasTexture_63q87" )
+texture = SubResource("AtlasTexture_63q87")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="ButtonToolCircle" type="Button" parent="ToolsPanel"]
+layout_mode = 0
 offset_left = 250.0
 offset_top = 30.0
 offset_right = 305.0
@@ -138,6 +153,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="TextureRect" type="TextureRect" parent="ToolsPanel/ButtonToolCircle"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 5.0
@@ -146,11 +162,12 @@ offset_right = -5.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource( "AtlasTexture_t52fe" )
+texture = SubResource("AtlasTexture_t52fe")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="LabelBrushColor" type="Label" parent="ToolsPanel"]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 91.0
 offset_right = 330.0
@@ -160,6 +177,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="ColorPickerBrush" type="ColorPickerButton" parent="ToolsPanel"]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 115.0
 offset_right = 330.0
@@ -168,11 +186,13 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="BrushSettings" type="Control" parent="ToolsPanel"]
+anchors_preset = 0
 offset_top = 200.0
 offset_right = 350.0
 offset_bottom = 375.0
 
 [node name="LabelBrushSize" type="Label" parent="ToolsPanel/BrushSettings"]
+layout_mode = 0
 offset_left = 20.0
 offset_top = -37.0
 offset_right = 330.0
@@ -182,6 +202,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="HScrollBarBrushSize" type="HScrollBar" parent="ToolsPanel/BrushSettings"]
+layout_mode = 0
 offset_left = 20.0
 offset_top = -8.0
 offset_right = 330.0
@@ -193,6 +214,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="LabelBrushShape" type="Label" parent="ToolsPanel/BrushSettings"]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 29.0
 offset_right = 330.0
@@ -202,6 +224,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="ButtonShapeBox" type="Button" parent="ToolsPanel/BrushSettings"]
+layout_mode = 0
 offset_left = 100.0
 offset_top = 59.0
 offset_right = 155.0
@@ -210,6 +233,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="TextureRect" type="TextureRect" parent="ToolsPanel/BrushSettings/ButtonShapeBox"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 5.0
@@ -218,11 +242,12 @@ offset_right = -5.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource( "AtlasTexture_63q87" )
+texture = SubResource("AtlasTexture_63q87")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="ButtonShapeCircle" type="Button" parent="ToolsPanel/BrushSettings"]
+layout_mode = 0
 offset_left = 190.0
 offset_top = 59.0
 offset_right = 245.0
@@ -231,6 +256,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="TextureRect" type="TextureRect" parent="ToolsPanel/BrushSettings/ButtonShapeCircle"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 5.0
@@ -239,11 +265,12 @@ offset_right = -5.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource( "AtlasTexture_t52fe" )
+texture = SubResource("AtlasTexture_t52fe")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
 [node name="LabelBackgroundColor" type="Label" parent="ToolsPanel"]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 323.0
 offset_right = 330.0
@@ -253,6 +280,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="ColorPickerBackground" type="ColorPickerButton" parent="ToolsPanel"]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 351.0
 offset_right = 330.0
@@ -264,6 +292,7 @@ metadata/_edit_use_custom_anchors = false
 
 [node name="LabelStats" type="Label" parent="ToolsPanel"]
 modulate = Color(0.414062, 0.414062, 0.414062, 1)
+layout_mode = 0
 offset_left = 20.0
 offset_top = 463.0
 offset_right = 330.0
@@ -273,6 +302,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="ButtonUndo" type="Button" parent="ToolsPanel"]
+layout_mode = 0
 offset_left = 10.0
 offset_top = 415.0
 offset_right = 340.0
@@ -282,6 +312,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="ButtonSave" type="Button" parent="ToolsPanel"]
+layout_mode = 0
 offset_left = 10.0
 offset_top = 506.0
 offset_right = 340.0
@@ -291,6 +322,7 @@ metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
 [node name="ButtonClear" type="Button" parent="ToolsPanel"]
+layout_mode = 0
 offset_left = 10.0
 offset_top = 550.0
 offset_right = 340.0

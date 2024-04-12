@@ -39,7 +39,7 @@ func _ready():
 	options.add_menu_item(OPTION_TYPE_CAPSULE)
 	options.add_menu_item(OPTION_TYPE_CONVEX_POLYGON)
 	options.add_menu_item(OPTION_TYPE_CONCAVE_POLYGON)
-	options.option_selected.connect(self._on_option_selected)
+	options.option_selected.connect(_on_option_selected)
 
 	await _start_all_types()
 

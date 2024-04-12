@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://gvmfk4owutdm"]
+
+[ext_resource type="Script" path="res://start_vr.gd" id="1_mbbqq"]
+[ext_resource type="PackedScene" uid="uid://cpj7vtj6gr3tv" path="res://player.tscn" id="2_igeja"]
+[ext_resource type="PackedScene" uid="uid://bymbq2ruecbhn" path="res://world.tscn" id="2_m075s"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_mbbqq")
+
+[node name="World" parent="." instance=ExtResource("2_m075s")]
+
+[node name="XROrigin3D" parent="." instance=ExtResource("2_igeja")]
+
+[connection signal="pose_recentered" from="." to="XROrigin3D" method="recenter"]
