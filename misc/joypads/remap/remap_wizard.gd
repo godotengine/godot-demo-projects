@@ -3,13 +3,14 @@ extends Node
 
 const DEADZONE = 0.3
 
-var joy_guid = ""
-var joy_name = ""
+var joy_index: int = -1
+var joy_guid: String = ""
+var joy_name: String = ""
 
-var steps = JoyMapping.BASE.keys()
-var cur_step = -1
-var cur_mapping = {}
-var last_mapping = ""
+var steps: Array = JoyMapping.BASE.keys()
+var cur_step: int = -1
+var cur_mapping: Dictionary = {}
+var last_mapping: String = ""
 
 @onready var joy_buttons = $Mapping/Margin/VBox/SubViewportContainer/SubViewport/JoypadDiagram/Buttons
 @onready var joy_axes = $Mapping/Margin/VBox/SubViewportContainer/SubViewport/JoypadDiagram/Axes
@@ -18,8 +19,16 @@ var last_mapping = ""
 @onready var joy_mapping_axis_invert = $Mapping/Margin/VBox/Info/Extra/InvertAxis
 
 
+# Connected to Mapping.window_input, otherwise no gamepad events
+# will be received when the subwindow is focused.
 func _input(event):
 	if cur_step == -1:
+		return
+	# Ignore events not related to gamepads.
+	if not (event is InputEventJoypadButton or event is InputEventJoypadMotion):
+		return
+	# Ignore devices other than the one being remapped. Handles accidental input and analog drift.
+	if event.device != joy_index:
 		return
 	if event is InputEventJoypadMotion:
 		get_viewport().set_input_as_handled()
@@ -27,8 +36,8 @@ func _input(event):
 		if abs(motion.axis_value) > DEADZONE:
 			var idx = motion.axis
 			var map = JoyMapping.new(JoyMapping.TYPE.AXIS, idx)
-			map.inverted = joy_mapping_axis_invert.pressed
-			if joy_mapping_full_axis.pressed:
+			map.inverted = joy_mapping_axis_invert.button_pressed
+			if joy_mapping_full_axis.button_pressed:
 				map.axis = JoyMapping.AXIS.FULL
 			elif motion.axis_value > 0:
 				map.axis = JoyMapping.AXIS.HALF_PLUS
@@ -44,7 +53,7 @@ func _input(event):
 		cur_mapping[steps[cur_step]] = map
 
 
-func create_mapping_string(mapping):
+func create_mapping_string(mapping: Dictionary) -> String:
 	var string = "%s,%s," % [joy_guid, joy_name]
 	for k in mapping:
 		var m = mapping[k]
@@ -57,7 +66,8 @@ func create_mapping_string(mapping):
 	return string + "platform:" + platform
 
 
-func start(idx):
+func start(idx: int):
+	joy_index = idx
 	joy_guid = Input.get_joy_guid(idx)
 	joy_name = Input.get_joy_name(idx)
 	if joy_guid.is_empty():
@@ -72,7 +82,7 @@ func start(idx):
 		_on_Wizard_pressed()
 
 
-func remap_and_close(mapping):
+func remap_and_close(mapping: Dictionary) -> void:
 	last_mapping = create_mapping_string(mapping)
 	Input.add_joy_mapping(last_mapping, true)
 	reset()
@@ -116,6 +126,8 @@ func _update_step():
 	if key in ["leftx", "lefty", "rightx", "righty"]:
 		joy_axes.get_node(str(idx) + "+").show()
 		joy_axes.get_node(str(idx) + "-").show()
+	elif key in ["lefttrigger", "righttrigger"]:
+		joy_axes.get_node(str(idx)).show()
 	else:
 		joy_buttons.get_node(str(idx)).show()
 
@@ -125,8 +137,8 @@ func _update_step():
 		var cur = cur_mapping[steps[cur_step]]
 		joy_mapping_text.text = cur.to_human_string()
 		if cur.type == JoyMapping.TYPE.AXIS:
-			joy_mapping_full_axis.pressed = cur.axis == JoyMapping.AXIS.FULL
-			joy_mapping_axis_invert.pressed = cur.inverted
+			joy_mapping_full_axis.button_pressed = cur.axis == JoyMapping.AXIS.FULL
+			joy_mapping_axis_invert.button_pressed = cur.inverted
 
 
 func _on_Wizard_pressed():
