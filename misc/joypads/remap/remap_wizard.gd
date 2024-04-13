@@ -3,14 +3,14 @@ extends Node
 
 const DEADZONE = 0.3
 
-var joy_index = -1
-var joy_guid = ""
-var joy_name = ""
+var joy_index: int = -1
+var joy_guid: String = ""
+var joy_name: String = ""
 
-var steps = JoyMapping.BASE.keys()
-var cur_step = -1
-var cur_mapping = {}
-var last_mapping = ""
+var steps: Array = JoyMapping.BASE.keys()
+var cur_step: int = -1
+var cur_mapping: Dictionary = {}
+var last_mapping: String = ""
 
 @onready var joy_buttons = $Mapping/Margin/VBox/SubViewportContainer/SubViewport/JoypadDiagram/Buttons
 @onready var joy_axes = $Mapping/Margin/VBox/SubViewportContainer/SubViewport/JoypadDiagram/Axes
@@ -19,15 +19,15 @@ var last_mapping = ""
 @onready var joy_mapping_axis_invert = $Mapping/Margin/VBox/Info/Extra/InvertAxis
 
 
-# Connected to Mapping.window_input, otherwise no gamepad events will be received when the subwindow is
-# focused
+# Connected to Mapping.window_input, otherwise no gamepad events
+# will be received when the subwindow is focused.
 func _input(event):
 	if cur_step == -1:
 		return
-	# Ignore events not related to gamepads
+	# Ignore events not related to gamepads.
 	if not (event is InputEventJoypadButton or event is InputEventJoypadMotion):
 		return
-	# Ignore devices other than the one being remapped. Handles accidental input and analog drift
+	# Ignore devices other than the one being remapped. Handles accidental input and analog drift.
 	if event.device != joy_index:
 		return
 	if event is InputEventJoypadMotion:
@@ -53,7 +53,7 @@ func _input(event):
 		cur_mapping[steps[cur_step]] = map
 
 
-func create_mapping_string(mapping):
+func create_mapping_string(mapping: Dictionary) -> String:
 	var string = "%s,%s," % [joy_guid, joy_name]
 	for k in mapping:
 		var m = mapping[k]
@@ -66,7 +66,7 @@ func create_mapping_string(mapping):
 	return string + "platform:" + platform
 
 
-func start(idx):
+func start(idx: int):
 	joy_index = idx
 	joy_guid = Input.get_joy_guid(idx)
 	joy_name = Input.get_joy_name(idx)
@@ -82,7 +82,7 @@ func start(idx):
 		_on_Wizard_pressed()
 
 
-func remap_and_close(mapping):
+func remap_and_close(mapping: Dictionary) -> void:
 	last_mapping = create_mapping_string(mapping)
 	Input.add_joy_mapping(last_mapping, true)
 	reset()
