@@ -25,18 +25,11 @@ public partial class Lobby : Control
 
 		// Connect all callbacks related to networking.
 		// Note: Use snake_case when talking to engine API.
-        // GetTree().GetMultiplayer().PeerConnected += nameof(PlayerConnected());
         GetTree().GetMultiplayer().Connect("peer_connected", new Callable(this, nameof(PlayerConnected)));
         GetTree().GetMultiplayer().Connect("peer_disconnected", new Callable(this, nameof(PlayerDisconnected)));
         GetTree().GetMultiplayer().Connect("connected_to_server", new Callable(this, nameof(ConnectedOk)));
         GetTree().GetMultiplayer().Connect("connection_failed", new Callable(this, nameof(ConnectedFail)));
         GetTree().GetMultiplayer().Connect("server_disconnected", new Callable(this, nameof(ServerDisconnected)));
-
-		// GetTree().Connect("network_peer_connected", this, nameof(PlayerConnected));
-		// GetTree().Connect("network_peer_disconnected", this, nameof(PlayerDisconnected));
-		// GetTree().Connect("connected_to_server", this, nameof(ConnectedOk));
-		// GetTree().Connect("connection_failed", this, nameof(ConnectedFail));
-		// GetTree().Connect("server_disconnected", this, nameof(ServerDisconnected));
 	}
 
 	// Network callbacks from SceneTree
@@ -49,7 +42,6 @@ public partial class Lobby : Control
 
 		// Connect deferred so we can safely erase it from the callback.
         pong.Connect("GameFinished", new Callable(this, nameof(EndGame)), (int) ConnectFlags.Deferred);
-        // pong.Connect("GameFinished", this, nameof(EndGame), new Godot.Collections.Array(), (int) ConnectFlags.Deferred);
         
 		GetTree().Root.AddChild(pong);
 		Hide();
@@ -58,8 +50,6 @@ public partial class Lobby : Control
 	private void PlayerDisconnected(int id)
 	{
         EndGame(GetTree().GetMultiplayer().IsServer() ? "Client disconnected" : "Server disconnected");
-        
-		// EndGame(GetTree().IsNetworkServer() ? "Client disconnected" : "Server disconnected");
 	}
 
 	// Callback from SceneTree, only for clients (not server).
