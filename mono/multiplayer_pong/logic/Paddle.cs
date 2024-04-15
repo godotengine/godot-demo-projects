@@ -22,7 +22,6 @@ public partial class Paddle : Area2D
         if (IsMultiplayerAuthority())
         {
             _motion = Input.GetActionStrength("move_down") - Input.GetActionStrength("move_up");
-            
             if (!_youHidden && _motion != 0)
             {
                 HideYouLabel();
