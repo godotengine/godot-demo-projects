@@ -110,7 +110,7 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 
 
 func rotate_area_to_billboard():
-	var billboard_mode = node_quad.get_surface_override_material(0).params_billboard_mode
+	var billboard_mode = node_quad.get_surface_override_material(0).billboard_mode
 
 	# Try to match the area with the material's billboard setting, if enabled.
 	if billboard_mode > 0:
