@@ -60,21 +60,30 @@ func _on_SaveButton_pressed():
 
 func _on_MixRateOptionButton_item_selected(index: int) -> void:
 	match index:
-		0: mix_rate = 11025
-		1: mix_rate = 16000
-		2: mix_rate = 22050
-		3: mix_rate = 32000
-		4: mix_rate = 44100
-		5: mix_rate = 48000
+		0:
+			mix_rate = 11025
+		1:
+			mix_rate = 16000
+		2:
+			mix_rate = 22050
+		3:
+			mix_rate = 32000
+		4:
+			mix_rate = 44100
+		5:
+			mix_rate = 48000
 	if recording != null:
 		recording.set_mix_rate(mix_rate)
 
 
 func _on_FormatOptionButton_item_selected(index: int) -> void:
 	match index:
-		0: format = AudioStreamWAV.FORMAT_8_BITS
-		1: format = AudioStreamWAV.FORMAT_16_BITS
-		2: format = AudioStreamWAV.FORMAT_IMA_ADPCM
+		0:
+			format = AudioStreamWAV.FORMAT_8_BITS
+		1:
+			format = AudioStreamWAV.FORMAT_16_BITS
+		2:
+			format = AudioStreamWAV.FORMAT_IMA_ADPCM
 	if recording != null:
 		recording.set_format(format)
 
