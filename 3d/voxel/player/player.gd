@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+const MOUSE_SENSITIVITY = 2.0
+
 const EYE_HEIGHT_STAND = 1.6
 const EYE_HEIGHT_CROUCH = 1.4
 
@@ -103,7 +105,7 @@ func _physics_process(delta):
 func _input(event):
 	if event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			_mouse_motion += event.relative
+			_mouse_motion += event.screen_relative * MOUSE_SENSITIVITY
 
 
 func chunk_pos():

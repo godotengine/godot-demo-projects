@@ -2,11 +2,10 @@ extends CharacterBody3D
 
 const STATE_MENU = 0
 const STATE_GRAB = 1
+const MOUSE_SENSITIVITY = 2.0
 
 var r_pos = Vector2()
 var state = STATE_MENU
-
-var initial_viewport_height = ProjectSettings.get_setting("display/window/size/viewport_height")
 
 @onready var camera = $Camera3D
 
@@ -28,9 +27,7 @@ func _process(delta):
 
 func _input(event):
 	if event is InputEventMouseMotion:
-		# Scale mouse sensitivity according to resolution, so that effective mouse sensitivity
-		# doesn't change depending on the viewport size.
-		r_pos = -event.relative * (get_viewport().size.y / initial_viewport_height)
+		r_pos = -event.screen_relative * MOUSE_SENSITIVITY
 
 	if event.is_action("ui_cancel") and event.is_pressed() and not event.is_echo():
 		if state == STATE_GRAB:

@@ -32,8 +32,6 @@ extends Node3D
 @onready var camera1 = viewport1.get_node(^"Camera1")
 @onready var camera2 = viewport2.get_node(^"Camera2")
 
-var viewport_base_height = ProjectSettings.get_setting("display/window/size/viewport_height")
-
 func _ready():
 	_on_size_changed()
 	_update_splitscreen()

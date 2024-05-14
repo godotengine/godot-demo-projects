@@ -23,7 +23,7 @@ func _unhandled_input(event):
 
 	var mouse_motion_event = event as InputEventMouseMotion
 	if mouse_motion_event:
-		var rotation_delta = mouse_motion_event.relative.x
+		var rotation_delta = mouse_motion_event.screen_relative.x
 		_rotation_pivot.rotate(Vector3.UP, -rotation_delta * ROTATION_COEFF)
 
 

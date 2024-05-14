@@ -37,9 +37,9 @@ func _input(event):
 	# Mouse look (only if the mouse is captured).
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		# Horizontal mouse look.
-		rot.y -= event.relative.x * MOUSE_SENSITIVITY
+		rot.y -= event.screen_relative.x * MOUSE_SENSITIVITY
 		# Vertical mouse look.
-		rot.x = clamp(rot.x - event.relative.y * MOUSE_SENSITIVITY, -1.57, 1.57)
+		rot.x = clamp(rot.x - event.screen_relative.y * MOUSE_SENSITIVITY, -1.57, 1.57)
 		transform.basis = Basis.from_euler(rot)
 
 	if event.is_action_pressed("toggle_mouse_capture"):

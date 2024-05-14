@@ -213,8 +213,8 @@ func _input(event):
 
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 
-		rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY * -1))
-		camera_holder.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
+		rotate_y(deg2rad(event.screen_relative.x * MOUSE_SENSITIVITY * -1))
+		camera_holder.rotate_x(deg2rad(event.screen_relative.y * MOUSE_SENSITIVITY))
 
 		# We need to clamp the camera's rotation so we cannot rotate ourselves upside down
 		var camera_rot = camera_holder.rotation_degrees

@@ -8,7 +8,6 @@ var tester_index = 0
 var rot_x = deg_to_rad(-22.5)  # This must be kept in sync with RotationX.
 var rot_y = deg_to_rad(90)  # This must be kept in sync with CameraHolder.
 var zoom = 2.5
-var base_height = ProjectSettings.get_setting("display/window/size/viewport_height")
 
 @onready var testers = $Testers
 @onready var camera_holder = $CameraHolder # Has a position and rotates on Y.
@@ -37,7 +36,7 @@ func _unhandled_input(event):
 
 	if event is InputEventMouseMotion and event.button_mask & MAIN_BUTTONS:
 		# Compensate motion speed to be resolution-independent (based on the window height).
-		var relative_motion = event.relative * DisplayServer.window_get_size().y / base_height
+		var relative_motion = event.screen_relative
 		rot_y -= relative_motion.x * ROT_SPEED
 		rot_x -= relative_motion.y * ROT_SPEED
 		rot_x = clamp(rot_x, deg_to_rad(-90), 0)

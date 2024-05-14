@@ -11,8 +11,6 @@ const MAIN_BUTTONS = MOUSE_BUTTON_MASK_LEFT | MOUSE_BUTTON_MASK_MIDDLE | MOUSE_B
 @export var rigid_body: RigidBody3D
 
 @onready var zoom := camera.position.z
-var base_height: int = ProjectSettings.get_setting("display/window/size/viewport_height")
-
 @onready var rot_x := rotation_x.rotation.x
 @onready var rot_y := camera_holder.rotation.y
 
@@ -42,7 +40,7 @@ func _input(event: InputEvent) -> void:
 
 	if event is InputEventMouseMotion and event.button_mask & MAIN_BUTTONS:
 		# Compensate motion speed to be resolution-independent (based on the window height).
-		var relative_motion: Vector2 = event.relative * DisplayServer.window_get_size().y / base_height
+		var relative_motion: Vector2 = event.screen_relative
 		rot_y -= relative_motion.x * ROT_SPEED
 		rot_x -= relative_motion.y * ROT_SPEED
 		rot_x = clampf(rot_x, -1.4, 0.16)

@@ -26,5 +26,5 @@ func _unhandled_input(event: InputEvent):
 
 	elif event is InputEventMouseMotion:
 		if event.button_mask & (MOUSE_BUTTON_MASK_MIDDLE + MOUSE_BUTTON_MASK_RIGHT):
-			_cam_rotation += event.relative.x * 0.005
+			_cam_rotation += event.screen_relative.x * 0.005
 			$CameraBase.set_rotation(Vector3.UP * _cam_rotation)
