@@ -11,7 +11,7 @@ public partial class Ball : Area2D
 
     public override void _Ready()
     {
-        _initialPos = Position;
+        _initialPos =  new Vector2(Position.X, Position.Y);
     }
 
     public override void _Process(double delta)
