@@ -12,9 +12,17 @@ config_version=5
 
 config/name="TestRenderingEffects"
 run/main_scene="res://main.tscn"
-config/features=PackedStringArray("4.2", "Forward Plus")
+config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [rendering]
 
+textures/default_filters/anisotropic_filtering_level=4
 anti_aliasing/quality/msaa_3d=2
+textures/stretch/aspect="expand"
+textures/stretch/mode="canvas_items"

@@ -52,7 +52,7 @@ void main() {
 
 		float d = min(min(d1, d2), min(d3, d4));
 		min_buffer[grp_uv.x][grp_uv.y] = d;
-	
+
 		imageStore(depth_mip1, dest_uv, vec4(d, d, d, d));
 	}
 
@@ -72,7 +72,7 @@ void main() {
 
 		float d = min(min(d1, d2), min(d3, d4));
 		min_buffer[grp_uv.x][grp_uv.y] = d;
-	
+
 		imageStore(depth_mip2, dest_uv, vec4(d, d, d, d));
 	}
 
@@ -92,7 +92,7 @@ void main() {
 
 		float d = min(min(d1, d2), min(d3, d4));
 		min_buffer[grp_uv.x][grp_uv.y] = d;
-	
+
 		imageStore(depth_mip3, dest_uv, vec4(d, d, d, d));
 	}
 
@@ -112,7 +112,7 @@ void main() {
 
 		float d = min(min(d1, d2), min(d3, d4));
 		min_buffer[grp_uv.x][grp_uv.y] = d;
-	
+
 		imageStore(depth_mip4, dest_uv, vec4(d, d, d, d));
 	}
 }

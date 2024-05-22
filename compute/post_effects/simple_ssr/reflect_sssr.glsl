@@ -112,7 +112,7 @@ void main() {
 		if (max_steps == 0) {
 			imageStore(reflect_image, dest_uv, vec4(0.0));
 			return;
-		} 
+		}
 	}
 
 	// Determine reflection
