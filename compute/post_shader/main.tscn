@@ -1,0 +1,79 @@
+[gd_scene load_steps=14 format=3 uid="uid://bpfg1l8j4i08u"]
+
+[ext_resource type="Texture2D" uid="uid://br4k6sn2rvgj" path="res://pattern.png" id="1_r22bv"]
+[ext_resource type="Script" path="res://post_process_shader.gd" id="1_rkpno"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lnmx8"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_guc0r"]
+sky_material = SubResource("ProceduralSkyMaterial_lnmx8")
+
+[sub_resource type="Environment" id="Environment_fjaix"]
+background_mode = 2
+sky = SubResource("Sky_guc0r")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_ek4c3"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("1_rkpno")
+shader_code = "    float gray = color.r * 0.2125 + color.g * 0.7154 + color.b * 0.0721;
+    color.rgb = vec3(gray);
+"
+
+[sub_resource type="Compositor" id="Compositor_xxhi4"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_ek4c3")])
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xlpoj"]
+albedo_color = Color(0, 0.684707, 0.148281, 1)
+albedo_texture = ExtResource("1_r22bv")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_82vj7"]
+material = SubResource("StandardMaterial3D_xlpoj")
+size = Vector2(10, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqyxc"]
+albedo_color = Color(0.946837, 0.315651, 0.66999, 1)
+albedo_texture = ExtResource("1_r22bv")
+
+[sub_resource type="SphereMesh" id="SphereMesh_iuyuf"]
+material = SubResource("StandardMaterial3D_aqyxc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_188mc"]
+albedo_color = Color(0.436357, 0.305476, 0.999959, 1)
+albedo_texture = ExtResource("1_r22bv")
+
+[sub_resource type="BoxMesh" id="BoxMesh_h605a"]
+material = SubResource("StandardMaterial3D_188mc")
+
+[node name="Main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fjaix")
+compositor = SubResource("Compositor_xxhi4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.965926, -0.0669873, 0.25, 0, 0.965926, 0.258819, -0.258819, -0.25, 0.933013, 1, 1, 2)
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.01202)
+mesh = SubResource("PlaneMesh_82vj7")
+
+[node name="Sphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.719715, -0.795881)
+mesh = SubResource("SphereMesh_iuyuf")
+
+[node name="Box" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33302, 0.651601, -0.391638)
+mesh = SubResource("BoxMesh_h605a")
