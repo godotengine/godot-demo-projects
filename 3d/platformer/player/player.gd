@@ -1,5 +1,5 @@
-class_name Player extends CharacterBody3D
-
+class_name Player
+extends CharacterBody3D
 
 enum _Anim {
 	FLOOR,
@@ -35,7 +35,7 @@ var coins := 0
 @onready var _animation_tree := $AnimationTree as AnimationTree
 
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("reset_position") or global_position.y < -12:
 		# Player hit the reset button or fell off the map.
 		position = initial_position

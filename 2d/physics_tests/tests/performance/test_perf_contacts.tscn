@@ -15,41 +15,41 @@ radius = 15.0
 height = 35.0
 
 [node name="Test" type="Node2D"]
-script = ExtResource( "2" )
-_enable_debug_collision = false
-spawns = [NodePath("SpawnTarget1")]
+script = ExtResource("2")
+spawns = Array[NodePath]([NodePath("SpawnTarget1")])
 spawn_count = 500
 spawn_randomize = Vector2(10, 10)
+_enable_debug_collision = false
 
-[node name="Options" parent="." instance=ExtResource( "4" )]
+[node name="Options" parent="." instance=ExtResource("4")]
 
 [node name="SpawnTarget1" type="Node2D" parent="."]
 position = Vector2(512, 400)
 
-[node name="StaticScene" parent="." instance=ExtResource( "1" )]
+[node name="StaticScene" parent="." instance=ExtResource("1")]
 position = Vector2(0, 125.017)
 
 [node name="DynamicShapes" type="Node2D" parent="."]
 
-[node name="RigidBodyRectangle" type="RigidDynamicBody2D" parent="DynamicShapes"]
+[node name="RigidBodyRectangle" type="RigidBody2D" parent="DynamicShapes"]
 position = Vector2(0, 1024)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DynamicShapes/RigidBodyRectangle"]
-shape = SubResource( "1" )
+shape = SubResource("1")
 
-[node name="RigidBodySphere" type="RigidDynamicBody2D" parent="DynamicShapes"]
+[node name="RigidBodySphere" type="RigidBody2D" parent="DynamicShapes"]
 position = Vector2(100, 1024)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DynamicShapes/RigidBodySphere"]
-shape = SubResource( "2" )
+shape = SubResource("2")
 
-[node name="RigidBodyCapsule" type="RigidDynamicBody2D" parent="DynamicShapes"]
+[node name="RigidBodyCapsule" type="RigidBody2D" parent="DynamicShapes"]
 position = Vector2(200, 1024)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DynamicShapes/RigidBodyCapsule"]
-shape = SubResource( "3" )
+shape = SubResource("3")
 
-[node name="RigidBodyConvexPolygon" type="RigidDynamicBody2D" parent="DynamicShapes"]
+[node name="RigidBodyConvexPolygon" type="RigidBody2D" parent="DynamicShapes"]
 position = Vector2(300, 1024)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DynamicShapes/RigidBodyConvexPolygon"]
@@ -59,9 +59,9 @@ polygon = PackedVector2Array(10.7, -54.5, 28.3596, -49.4067, 47.6282, -34.3806, 
 [node name="GodotIcon" type="Sprite2D" parent="DynamicShapes/RigidBodyConvexPolygon"]
 self_modulate = Color(1, 1, 1, 0.392157)
 scale = Vector2(0.25, 0.25)
-texture = ExtResource( "3" )
+texture = ExtResource("3")
 
-[node name="RigidBodyConcavePolygon" type="RigidDynamicBody2D" parent="DynamicShapes"]
+[node name="RigidBodyConcavePolygon" type="RigidBody2D" parent="DynamicShapes"]
 position = Vector2(400, 1024)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DynamicShapes/RigidBodyConcavePolygon"]
@@ -71,4 +71,4 @@ polygon = PackedVector2Array(-5.93512, -43.2195, 6.44476, -42.9695, 11.127, -54.
 [node name="GodotIcon" type="Sprite2D" parent="DynamicShapes/RigidBodyConcavePolygon"]
 self_modulate = Color(1, 1, 1, 0.392157)
 scale = Vector2(0.25, 0.25)
-texture = ExtResource( "3" )
+texture = ExtResource("3")

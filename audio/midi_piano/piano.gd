@@ -9,37 +9,38 @@ extends Control
 const START_KEY = 21
 const END_KEY = 108
 
-const WhiteKeyScene = preload("res://piano_keys/white_piano_key.tscn")
-const BlackKeyScene = preload("res://piano_keys/black_piano_key.tscn")
+const WhiteKeyScene := preload("res://piano_keys/white_piano_key.tscn")
+const BlackKeyScene := preload("res://piano_keys/black_piano_key.tscn")
 
 var piano_key_dict := Dictionary()
 
-@onready var white_keys = $WhiteKeys
-@onready var black_keys = $BlackKeys
+@onready var white_keys: HBoxContainer = $WhiteKeys
+@onready var black_keys: HBoxContainer = $BlackKeys
 
-func _ready():
-	# Sanity checks.
-	if _is_note_index_sharp(_pitch_index_to_note_index(START_KEY)):
-		printerr("The start key can't be a sharp note (limitation of this piano-generating algorithm). Try 21.")
-		return
+func _ready() -> void:
+	assert(not _is_note_index_sharp(_pitch_index_to_note_index(START_KEY)), "The start key can't be a sharp note (limitation of this piano-generating algorithm). Try 21.")
 
 	for i in range(START_KEY, END_KEY + 1):
 		piano_key_dict[i] = _create_piano_key(i)
 
 	if white_keys.get_child_count() != black_keys.get_child_count():
 		_add_placeholder_key(black_keys)
+
 	OS.open_midi_inputs()
-	if len(OS.get_connected_midi_inputs()) > 0:
+
+	if not OS.get_connected_midi_inputs().is_empty():
 		print(OS.get_connected_midi_inputs())
 
 
-func _input(input_event):
-	if not (input_event is InputEventMIDI):
+func _input(input_event: InputEvent) -> void:
+	if not input_event is InputEventMIDI:
 		return
+
 	var midi_event: InputEventMIDI = input_event
 	if midi_event.pitch < START_KEY or midi_event.pitch > END_KEY:
 		# The given pitch isn't on the on-screen keyboard, so return.
 		return
+
 	_print_midi_info(midi_event)
 	var key: PianoKey = piano_key_dict[midi_event.pitch]
 	if midi_event.message == MIDI_MESSAGE_NOTE_ON:
@@ -48,16 +49,16 @@ func _input(input_event):
 		key.deactivate()
 
 
-func _add_placeholder_key(container):
-	var placeholder = Control.new()
+func _add_placeholder_key(container: HBoxContainer) -> void:
+	var placeholder := Control.new()
 	placeholder.size_flags_horizontal = SIZE_EXPAND_FILL
 	placeholder.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	placeholder.name = &"Placeholder"
 	container.add_child(placeholder)
 
 
-func _create_piano_key(pitch_index):
-	var note_index = _pitch_index_to_note_index(pitch_index)
+func _create_piano_key(pitch_index: int) -> PianoKey:
+	var note_index := _pitch_index_to_note_index(pitch_index)
 	var piano_key: PianoKey
 	if _is_note_index_sharp(note_index):
 		piano_key = BlackKeyScene.instantiate()
@@ -71,22 +72,22 @@ func _create_piano_key(pitch_index):
 	return piano_key
 
 
-func _is_note_index_lacking_sharp(note_index: int):
+func _is_note_index_lacking_sharp(note_index: int) -> bool:
 	# B and E, because no B# or E#
 	return note_index in [2, 7]
 
 
-func _is_note_index_sharp(note_index: int):
+func _is_note_index_sharp(note_index: int) -> bool:
 	# A#, C#, D#, F#, and G#
 	return note_index in [1, 4, 6, 9, 11]
 
 
-func _pitch_index_to_note_index(pitch: int):
+func _pitch_index_to_note_index(pitch: int) -> int:
 	pitch += 3
 	return pitch % 12
 
 
-func _print_midi_info(midi_event: InputEventMIDI):
+func _print_midi_info(midi_event: InputEventMIDI) -> void:
 	print(midi_event)
 	print("Channel: " + str(midi_event.channel))
 	print("Message: " + str(midi_event.message))

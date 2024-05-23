@@ -1,6 +1,5 @@
 extends Pawn
 
-
 var lost = false
 @onready var Grid = get_parent()
 

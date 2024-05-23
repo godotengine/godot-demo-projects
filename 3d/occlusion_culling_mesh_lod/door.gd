@@ -1,10 +1,8 @@
 extends Node3D
 
-
 var open := false
 
-
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_doors"):
 		if open:
 			# Close the door.
@@ -23,7 +21,7 @@ func _input(event: InputEvent):
 			$OccluderInstance3D.visible = false
 
 
-func _on_animation_player_animation_finished(_anim_name):
+func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 	if not open:
 		# Re-enable the occluder when the door is done closing.
 		# To prevent overocclusion, the door must be fully closed before the occluder can be re-enabled.

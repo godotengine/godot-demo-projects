@@ -17,10 +17,11 @@ var moving = false
 @onready var gizmo_25d_scene = preload("res://addons/node25d/main_screen/gizmo_25d.tscn")
 
 
-func _ready():
+func _ready() -> void:
 	# Give Godot a chance to fully load the scene. Should take two frames.
-	await get_tree().process_frame
-	await get_tree().process_frame
+	for i in 2:
+		await get_tree().process_frame
+
 	var edited_scene_root = get_tree().edited_scene_root
 	if not edited_scene_root:
 		# Godot hasn't finished loading yet, so try loading the plugin again.
@@ -34,13 +35,13 @@ func _ready():
 	viewport_2d.world_2d = world_2d
 
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	if not editor_interface:  # Something's not right... bail!
 		return
 
 	# View mode polling.
-	var view_mode_changed_this_frame = false
-	var new_view_mode = -1
+	var view_mode_changed_this_frame := false
+	var new_view_mode := -1
 	if view_mode_button_group.get_pressed_button():
 		new_view_mode = view_mode_button_group.get_pressed_button().get_index()
 	if view_mode_index != new_view_mode:
@@ -53,15 +54,15 @@ func _process(_delta):
 		zoom_level += 1
 	elif Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_DOWN):
 		zoom_level -= 1
-	var zoom = _get_zoom_amount()
+	var zoom := _get_zoom_amount()
 
 	# SubViewport size.
-	var vp_size = get_global_rect().size
+	var vp_size := get_global_rect().size
 	viewport_2d.size = vp_size
 	viewport_overlay.size = vp_size
 
 	# SubViewport transform.
-	var viewport_trans = Transform2D.IDENTITY
+	var viewport_trans := Transform2D.IDENTITY
 	viewport_trans.x *= zoom
 	viewport_trans.y *= zoom
 	viewport_trans.origin = viewport_trans.basis_xform(viewport_center) + size / 2
@@ -69,10 +70,10 @@ func _process(_delta):
 	viewport_overlay.canvas_transform = viewport_trans
 
 	# Delete unused gizmos.
-	var selection = editor_interface.get_selection().get_selected_nodes()
-	var gizmos = viewport_overlay.get_children()
+	var selection := editor_interface.get_selection().get_selected_nodes()
+	var gizmos := viewport_overlay.get_children()
 	for gizmo in gizmos:
-		var contains = false
+		var contains := false
 		for selected in selection:
 			if selected == gizmo.node_25d and not view_mode_changed_this_frame:
 				contains = true
@@ -98,7 +99,7 @@ func _ensure_node25d_has_gizmo(node: Node25D, gizmos: Array[Node]) -> void:
 
 
 # This only accepts input when the mouse is inside of the 2.5D viewport.
-func _gui_input(event):
+func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
@@ -112,7 +113,7 @@ func _gui_input(event):
 				pan_center = viewport_center - event.position / _get_zoom_amount()
 				accept_event()
 			elif event.button_index == MOUSE_BUTTON_LEFT:
-				var overlay_children = viewport_overlay.get_children()
+				var overlay_children := viewport_overlay.get_children()
 				for overlay_child in overlay_children:
 					overlay_child.wants_to_move = true
 				accept_event()
@@ -120,7 +121,7 @@ func _gui_input(event):
 			is_panning = false
 			accept_event()
 		elif event.button_index == MOUSE_BUTTON_LEFT:
-			var overlay_children = viewport_overlay.get_children()
+			var overlay_children := viewport_overlay.get_children()
 			for overlay_child in overlay_children:
 				overlay_child.wants_to_move = false
 			accept_event()
@@ -130,28 +131,31 @@ func _gui_input(event):
 			accept_event()
 
 
-func _recursive_change_view_mode(current_node):
+func _recursive_change_view_mode(current_node: Node) -> void:
 	if not current_node:
 		return
+
 	if current_node.has_method("set_view_mode"):
 		current_node.set_view_mode(view_mode_index)
+
 	for child in current_node.get_children():
 		_recursive_change_view_mode(child)
 
 
-func _get_zoom_amount():
-	var zoom_amount = pow(1.05476607648, zoom_level)  # 13th root of 2
+func _get_zoom_amount() -> float:
+	const THIRTEENTH_ROOT_OF_2 = 1.05476607648
+	var zoom_amount = pow(THIRTEENTH_ROOT_OF_2, zoom_level)
 	zoom_label.text = str(round(zoom_amount * 1000) / 10) + "%"
 	return zoom_amount
 
 
-func _on_ZoomOut_pressed():
+func _on_ZoomOut_pressed() -> void:
 	zoom_level -= 1
 
 
-func _on_ZoomIn_pressed():
+func _on_ZoomIn_pressed() -> void:
 	zoom_level += 1
 
 
-func _on_ZoomReset_pressed():
+func _on_ZoomReset_pressed() -> void:
 	zoom_level = 0

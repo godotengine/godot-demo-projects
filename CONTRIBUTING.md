@@ -11,10 +11,10 @@ Please follow these guidelines for submitting new demos or improving existing de
 - The demo must follow all of the Godot style guides:
   - [Project organization](https://docs.godotengine.org/en/stable/tutorials/best_practices/project_organization.html)
   - [GDScript style guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html)
-    - In GDScript, type hints should be used to improve runtime performance
-    and ease code maintenance. Do not use type inference syntax
-    (`var some_integer := 123`) if the resulting type is not obvious from
-    reading the righthand side of the assignment.
+    - In GDScript, type hints should be used whenever possible to improve runtime performance
+    and ease code maintenance. The **Debug > GDScript > Warnings > Untyped Declaration**
+    project setting is set to **Warn** on most existing demos to enforce this.
+    This setting should also be configured to **Warn** on new demos.
   - [C# style guide](https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_style_guide.html)
   - [Shaders style guide](https://docs.godotengine.org/en/stable/tutorials/shaders/shaders_style_guide.html)
 

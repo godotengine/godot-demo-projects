@@ -11,13 +11,14 @@
 @tool
 extends EditorPlugin
 
-var io_material_dialog
+var io_material_dialog: Panel
 
-func _enter_tree():
+
+func _enter_tree() -> void:
 	io_material_dialog = preload("res://addons/material_creator/material_dock.tscn").instantiate()
 	io_material_dialog.editor_interface = get_editor_interface()
 	add_control_to_dock(DOCK_SLOT_LEFT_UL, io_material_dialog)
 
 
-func _exit_tree():
+func _exit_tree() -> void:
 	remove_control_from_docks(io_material_dialog)

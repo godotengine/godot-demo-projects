@@ -1,17 +1,16 @@
 @tool
 extends Node2D
 
-
 # If the mouse is farther than this many pixels, it won't grab anything.
-const DEADZONE_RADIUS: float = 20
-const DEADZONE_RADIUS_SQ: float = DEADZONE_RADIUS * DEADZONE_RADIUS
+const DEADZONE_RADIUS = 20.0
+const DEADZONE_RADIUS_SQ = DEADZONE_RADIUS * DEADZONE_RADIUS
 # Not pixel perfect for all axes in all modes, but works well enough.
 # Rounding is not done until after the movement is finished.
 const ROUGHLY_ROUND_TO_PIXELS = true
 
 # Set when the node is created.
 var node_25d: Node25D
-var _spatial_node
+var _spatial_node: Node3D
 
 # Input from Viewport25D, represents if the mouse is clicked.
 var wants_to_move = false

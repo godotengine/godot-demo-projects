@@ -1,4 +1,4 @@
-# Compute texture
+# Compute Texture
 
 This demo shows how to use compute shaders to populate a texture that is used as an input for a material shader.
 

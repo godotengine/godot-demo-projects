@@ -1,10 +1,10 @@
 extends Control
 
-var mouse_position = Vector2()
+var mouse_position := Vector2()
 
-@onready var observer = $"../Observer"
+@onready var observer: CharacterBody3D = $"../Observer"
 
-func _ready():
+func _ready() -> void:
 	if not check_wm_api():
 		set_physics_process(false)
 		set_process_input(false)
@@ -14,8 +14,8 @@ func _ready():
 	if DisplayServer.get_screen_count() > 1:
 		$Labels/Label_Screen1_RefreshRate.text = "Screen1 Refresh Rate: %.2f Hz" % DisplayServer.screen_get_refresh_rate(1)
 
-func _physics_process(_delta):
-	var modetext = "Mode: "
+func _physics_process(_delta: float) -> void:
+	var modetext := "Mode: "
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 		modetext += "Fullscreen\n"
 	else:
@@ -68,33 +68,33 @@ func _physics_process(_delta):
 	$Buttons/Button_MouseModeCaptured.set_pressed(Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED)
 
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		mouse_position = event.position
 
 	if event is InputEventKey:
 		if Input.is_action_pressed(&"mouse_mode_visible"):
-			observer.state = observer.STATE_MENU
-			_on_Button_MouseModeVisible_pressed()
+			observer.state = observer.State.MENU
+			_on_button_mouse_mode_visible_pressed()
 
 		if Input.is_action_pressed(&"mouse_mode_hidden"):
-			observer.state = observer.STATE_MENU
-			_on_Button_MouseModeHidden_pressed()
+			observer.state = observer.State.MENU
+			_on_button_mouse_mode_hidden_pressed()
 
 		if Input.is_action_pressed(&"mouse_mode_captured"):
-			_on_Button_MouseModeCaptured_pressed()
+			_on_button_mouse_mode_captured_pressed()
 
 		if Input.is_action_pressed(&"mouse_mode_confined"):
-			observer.state = observer.STATE_MENU
-			_on_Button_MouseModeConfined_pressed()
+			observer.state = observer.State.MENU
+			_on_button_mouse_mode_confined_pressed()
 
 		if Input.is_action_pressed(&"mouse_mode_confined_hidden"):
-			observer.state = observer.STATE_MENU
-			_on_Button_MouseModeConfinedHidden_pressed()
+			observer.state = observer.State.MENU
+			_on_button_mouse_mode_confined_hidden_pressed()
 
 
-func check_wm_api():
-	var s = ""
+func check_wm_api() -> bool:
+	var s := ""
 	if not DisplayServer.has_method("get_screen_count"):
 		s += " - get_screen_count()\n"
 	if not DisplayServer.has_method("window_get_current_screen"):
@@ -139,65 +139,65 @@ func check_wm_api():
 		return false
 
 
-func _on_Button_MoveTo_pressed():
+func _on_button_move_to_pressed() -> void:
 	DisplayServer.window_set_position(Vector2(100, 100))
 
 
-func _on_Button_Resize_pressed():
+func _on_button_resize_pressed() -> void:
 	DisplayServer.window_set_size(Vector2(1280, 720))
 
 
-func _on_Button_Screen0_pressed():
+func _on_button_screen_0_pressed() -> void:
 	DisplayServer.window_set_current_screen(0)
 
 
-func _on_Button_Screen1_pressed():
+func _on_button_screen_1_pressed() -> void:
 	DisplayServer.window_set_current_screen(1)
 
 
-func _on_Button_Fullscreen_pressed():
+func _on_button_fullscreen_pressed() -> void:
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 
-func _on_Button_FixedSize_pressed():
+func _on_button_fixed_size_pressed() -> void:
 	if DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_RESIZE_DISABLED):
 		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_RESIZE_DISABLED, false)
 	else:
 		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_RESIZE_DISABLED, true)
 
 
-func _on_Button_Minimized_pressed():
+func _on_button_minimized_pressed() -> void:
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_MINIMIZED:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
 
 
-func _on_Button_Maximized_pressed():
+func _on_button_maximized_pressed() -> void:
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_MAXIMIZED:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
 
 
-func _on_Button_MouseModeVisible_pressed():
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+func _on_button_mouse_mode_visible_pressed() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
-func _on_Button_MouseModeHidden_pressed():
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+func _on_button_mouse_mode_hidden_pressed() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 
-func _on_Button_MouseModeCaptured_pressed():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	observer.state = observer.STATE_GRAB
+func _on_button_mouse_mode_captured_pressed() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	observer.state = observer.State.GRAB
 
-func _on_Button_MouseModeConfined_pressed():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+func _on_button_mouse_mode_confined_pressed() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 
 
-func _on_Button_MouseModeConfinedHidden_pressed():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
+func _on_button_mouse_mode_confined_hidden_pressed() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN

@@ -7,6 +7,7 @@ extends Panel
 func _ready() -> void:
 	_print_intro()
 
+
 func _on_english_pressed() -> void:
 	TranslationServer.set_locale("en")
 	_print_intro()

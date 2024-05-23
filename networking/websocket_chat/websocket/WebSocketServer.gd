@@ -1,12 +1,12 @@
-extends Node
-class_name WebSocketServer
+class_name Node
+extends WebSocketServer
 
-signal message_received(peer_id: int, message)
+signal message_received(peer_id: int, message: String)
 signal client_connected(peer_id: int)
 signal client_disconnected(peer_id: int)
 
 @export var handshake_headers := PackedStringArray()
-@export var supported_protocols: PackedStringArray
+@export var supported_protocols := PackedStringArray()
 @export var handshake_timout := 3000
 @export var use_tls := false
 @export var tls_cert: X509Certificate
@@ -23,7 +23,7 @@ class PendingPeer:
 	var connection: StreamPeer
 	var ws: WebSocketPeer
 
-	func _init(p_tcp: StreamPeerTCP):
+	func _init(p_tcp: StreamPeerTCP) -> void:
 		tcp = p_tcp
 		connection = p_tcp
 		connect_time = Time.get_ticks_msec()
@@ -39,17 +39,17 @@ func listen(port: int) -> int:
 	return tcp_server.listen(port)
 
 
-func stop():
+func stop() -> void:
 	tcp_server.stop()
 	pending_peers.clear()
 	peers.clear()
 
 
-func send(peer_id, message) -> int:
-	var type = typeof(message)
+func send(peer_id: int, message: String) -> int:
+	var type := typeof(message)
 	if peer_id <= 0:
-		# Send to multiple peers, (zero = brodcast, negative = exclude one)
-		for id in peers:
+		# Send to multiple peers, (zero = broadcast, negative = exclude one).
+		for id: int in peers:
 			if id == -peer_id:
 				continue
 			if type == TYPE_STRING:
@@ -59,30 +59,30 @@ func send(peer_id, message) -> int:
 		return OK
 
 	assert(peers.has(peer_id))
-	var socket = peers[peer_id]
+	var socket: WebSocketPeer = peers[peer_id]
 	if type == TYPE_STRING:
 		return socket.send_text(message)
 	return socket.send(var_to_bytes(message))
 
 
-func get_message(peer_id) -> Variant:
+func get_message(peer_id: int) -> Variant:
 	assert(peers.has(peer_id))
-	var socket = peers[peer_id]
+	var socket: WebSocketPeer = peers[peer_id]
 	if socket.get_available_packet_count() < 1:
 		return null
-	var pkt = socket.get_packet()
+	var pkt: PackedByteArray = socket.get_packet()
 	if socket.was_string_packet():
 		return pkt.get_string_from_utf8()
 	return bytes_to_var(pkt)
 
 
-func has_message(peer_id) -> bool:
+func has_message(peer_id: int) -> bool:
 	assert(peers.has(peer_id))
 	return peers[peer_id].get_available_packet_count() > 0
 
 
 func _create_peer() -> WebSocketPeer:
-	var ws = WebSocketPeer.new()
+	var ws := WebSocketPeer.new()
 	ws.supported_protocols = supported_protocols
 	ws.handshake_headers = handshake_headers
 	return ws
@@ -91,72 +91,83 @@ func _create_peer() -> WebSocketPeer:
 func poll() -> void:
 	if not tcp_server.is_listening():
 		return
+
 	while not refuse_new_connections and tcp_server.is_connection_available():
-		var conn = tcp_server.take_connection()
+		var conn: StreamPeerTCP = tcp_server.take_connection()
 		assert(conn != null)
 		pending_peers.append(PendingPeer.new(conn))
+
 	var to_remove := []
+
 	for p in pending_peers:
 		if not _connect_pending(p):
 			if p.connect_time + handshake_timout < Time.get_ticks_msec():
-				# Timeout
+				# Timeout.
 				to_remove.append(p)
-			continue # Still pending
+			continue  # Still pending.
+
 		to_remove.append(p)
-	for r in to_remove:
+
+	for r: RefCounted in to_remove:
 		pending_peers.erase(r)
+
 	to_remove.clear()
-	for id in peers:
+
+	for id: int in peers:
 		var p: WebSocketPeer = peers[id]
-		var packets = p.get_available_packet_count()
 		p.poll()
+
 		if p.get_ready_state() != WebSocketPeer.STATE_OPEN:
 			client_disconnected.emit(id)
 			to_remove.append(id)
 			continue
+
 		while p.get_available_packet_count():
 			message_received.emit(id, get_message(id))
-	for r in to_remove:
+
+	for r: int in to_remove:
 		peers.erase(r)
 	to_remove.clear()
 
 
 func _connect_pending(p: PendingPeer) -> bool:
 	if p.ws != null:
-		# Poll websocket client if doing handshake
+		# Poll websocket client if doing handshake.
 		p.ws.poll()
-		var state = p.ws.get_ready_state()
+		var state := p.ws.get_ready_state()
 		if state == WebSocketPeer.STATE_OPEN:
-			var id = randi_range(2, 1 << 30)
+			var id := randi_range(2, 1 << 30)
 			peers[id] = p.ws
 			client_connected.emit(id)
-			return true # Success.
+			return true  # Success.
 		elif state != WebSocketPeer.STATE_CONNECTING:
-			return true # Failure.
-		return false # Still connecting.
+			return true  # Failure.
+		return false  # Still connecting.
 	elif p.tcp.get_status() != StreamPeerTCP.STATUS_CONNECTED:
-		return true # TCP disconnected.
+		return true  # TCP disconnected.
 	elif not use_tls:
-		# TCP is ready, create WS peer
+		# TCP is ready, create WS peer.
 		p.ws = _create_peer()
 		p.ws.accept_stream(p.tcp)
-		return false # WebSocketPeer connection is pending.
+		return false  # WebSocketPeer connection is pending.
+
 	else:
 		if p.connection == p.tcp:
 			assert(tls_key != null and tls_cert != null)
-			var tls = StreamPeerTLS.new()
+			var tls := StreamPeerTLS.new()
 			tls.accept_stream(p.tcp, TLSOptions.server(tls_key, tls_cert))
 			p.connection = tls
 		p.connection.poll()
-		var status = p.connection.get_status()
+		var status: StreamPeerTLS.Status = p.connection.get_status()
 		if status == StreamPeerTLS.STATUS_CONNECTED:
 			p.ws = _create_peer()
 			p.ws.accept_stream(p.connection)
-			return false # WebSocketPeer connection is pending.
+			return false  # WebSocketPeer connection is pending.
 		if status != StreamPeerTLS.STATUS_HANDSHAKING:
-			return true # Failure.
+			return true  # Failure.
+
 		return false
 
 
-func _process(delta):
+func _process(_delta: float) -> void:
 	poll()

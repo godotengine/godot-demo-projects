@@ -1,4 +1,5 @@
-class_name Coin extends Area2D
+class_name Coin
+extends Area2D
 ## Collectible that disappears when the player touches it.
 
 

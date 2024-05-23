@@ -5,16 +5,19 @@ extends Node
 # It also remaps the pointer indices coming from the OS to the lowest available to be friendlier.
 # It can be conveniently setup as a singleton.
 
-var state = {}
+var state := {}
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch:
-		if event.pressed: # Down.
+		if event.pressed:
+			# Down.
 			state[event.index] = event.position
-		else: # Up.
+		else:
+			# Up.
 			state.erase(event.index)
 		get_viewport().set_input_as_handled()
 
-	elif event is InputEventScreenDrag: # Movement.
+	elif event is InputEventScreenDrag:
+		# Movement.
 		state[event.index] = event.position
 		get_viewport().set_input_as_handled()

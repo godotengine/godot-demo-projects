@@ -4,13 +4,14 @@ var in_area: Array = []
 var from_player: int
 
 # Called from the animation.
-func explode():
+func explode() -> void:
 	if not is_multiplayer_authority():
 		# Explode only on authority.
 		return
-	for p in in_area:
+
+	for p: Object in in_area:
 		if p.has_method("exploded"):
-			# Checks if there is wall in between bomb and the object
+			# Checks if there is wall in between bomb and the object.
 			var world_state: PhysicsDirectSpaceState2D = get_world_2d().direct_space_state
 			var query := PhysicsRayQueryParameters2D.create(position, p.position)
 			query.hit_from_inside = true
@@ -20,15 +21,15 @@ func explode():
 				p.exploded.rpc(from_player)
 
 
-func done():
+func done() -> void:
 	if is_multiplayer_authority():
 		queue_free()
 
 
-func _on_bomb_body_enter(body):
+func _on_bomb_body_enter(body: Node2D) -> void:
 	if not body in in_area:
 		in_area.append(body)
 
 
-func _on_bomb_body_exit(body):
+func _on_bomb_body_exit(body: Node2D) -> void:
 	in_area.erase(body)

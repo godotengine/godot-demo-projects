@@ -20,7 +20,7 @@ theme = ExtResource("2")
 script = ExtResource("4")
 
 [node name="Crosshair" type="CenterContainer" parent="."]
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -28,44 +28,36 @@ grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="Crosshair"]
 modulate = Color(1, 1, 1, 0.501961)
-offset_left = 784.0
-offset_top = 434.0
-offset_right = 816.0
-offset_bottom = 466.0
+layout_mode = 2
 texture = ExtResource("1")
 
 [node name="Pause" type="VBoxContainer" parent="."]
 visible = false
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ButtonHolder" type="HBoxContainer" parent="Pause"]
-offset_right = 1024.0
-offset_bottom = 600.0
+layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
 [node name="MainButtons" type="VBoxContainer" parent="Pause/ButtonHolder"]
-offset_left = 320.0
-offset_right = 704.0
-offset_bottom = 600.0
+layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
 [node name="Resume" type="TextureButton" parent="Pause/ButtonHolder/MainButtons"]
-offset_top = 142.0
-offset_right = 384.0
-offset_bottom = 206.0
+layout_mode = 2
 texture_normal = ExtResource("5")
 texture_pressed = ExtResource("5_sc8eq")
 texture_hover = ExtResource("6_xrlxa")
 texture_focused = ExtResource("7_elacb")
 
 [node name="Label" type="Label" parent="Pause/ButtonHolder/MainButtons/Resume"]
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -1.0
@@ -78,16 +70,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Options" type="TextureButton" parent="Pause/ButtonHolder/MainButtons"]
-offset_top = 226.0
-offset_right = 384.0
-offset_bottom = 290.0
+layout_mode = 2
 texture_normal = ExtResource("5")
 texture_pressed = ExtResource("5_sc8eq")
 texture_hover = ExtResource("6_xrlxa")
 texture_focused = ExtResource("7_elacb")
 
 [node name="Label" type="Label" parent="Pause/ButtonHolder/MainButtons/Options"]
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -1.0
@@ -100,16 +90,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MainMenu" type="TextureButton" parent="Pause/ButtonHolder/MainButtons"]
-offset_top = 310.0
-offset_right = 384.0
-offset_bottom = 374.0
+layout_mode = 2
 texture_normal = ExtResource("5")
 texture_pressed = ExtResource("5_sc8eq")
 texture_hover = ExtResource("6_xrlxa")
 texture_focused = ExtResource("7_elacb")
 
 [node name="Label" type="Label" parent="Pause/ButtonHolder/MainButtons/MainMenu"]
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -1.0
@@ -122,16 +110,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Exit" type="TextureButton" parent="Pause/ButtonHolder/MainButtons"]
-offset_top = 394.0
-offset_right = 384.0
-offset_bottom = 458.0
+layout_mode = 2
 texture_normal = ExtResource("5")
 texture_pressed = ExtResource("5_sc8eq")
 texture_hover = ExtResource("6_xrlxa")
 texture_focused = ExtResource("7_elacb")
 
 [node name="Label" type="Label" parent="Pause/ButtonHolder/MainButtons/Exit"]
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -1.0
@@ -144,6 +130,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Options" parent="." instance=ExtResource("3")]
+layout_mode = 0
+anchors_preset = 0
 
 [connection signal="pressed" from="Pause/ButtonHolder/MainButtons/Resume" to="." method="_on_Resume_pressed"]
 [connection signal="pressed" from="Pause/ButtonHolder/MainButtons/Options" to="." method="_on_Options_pressed"]

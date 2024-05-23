@@ -1,4 +1,5 @@
-class_name Bullet extends RigidBody2D
+class_name Bullet
+extends RigidBody2D
 
 
 @onready var animation_player := $AnimationPlayer as AnimationPlayer

@@ -5,39 +5,39 @@ extends Node
 # and changing the current/active state.
 # See the PlayerV2 scene for an example on how to use it.
 
-signal state_changed(current_state)
+signal state_changed(current_state: Node)
 
 # You should set a starting node from the inspector or on the node that inherits
 # from this state machine interface. If you don't, the game will default to
 # the first state in the state machine's children.
 @export var start_state: NodePath
-var states_map = {}
+var states_map := {}
 
-var states_stack = []
-var current_state = null
-var _active = false:
+var states_stack := []
+var current_state: Node = null
+var _active := false:
 	set(value):
 		_active = value
 		set_active(value)
 
-func _enter_tree():
+func _enter_tree() -> void:
 	if start_state.is_empty():
 		start_state = get_child(0).get_path()
 	for child in get_children():
-		var err = child.finished.connect(_change_state)
+		var err: bool = child.finished.connect(_change_state)
 		if err:
 			printerr(err)
 	initialize(start_state)
 
 
-func initialize(initial_state):
+func initialize(initial_state: NodePath) -> void:
 	_active = true
 	states_stack.push_front(get_node(initial_state))
 	current_state = states_stack[0]
 	current_state.enter()
 
 
-func set_active(value):
+func set_active(value: bool) -> void:
 	set_physics_process(value)
 	set_process_input(value)
 	if not _active:
@@ -45,21 +45,22 @@ func set_active(value):
 		current_state = null
 
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	current_state.handle_input(event)
 
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	current_state.update(delta)
 
 
-func _on_animation_finished(anim_name):
+func _on_animation_finished(anim_name: String) -> void:
 	if not _active:
 		return
+
 	current_state._on_animation_finished(anim_name)
 
 
-func _change_state(state_name):
+func _change_state(state_name: String) -> void:
 	if not _active:
 		return
 	current_state.exit()

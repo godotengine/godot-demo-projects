@@ -50,7 +50,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if spawn:
 		_spawn_enemy_above.call_deferred()
 
-	# Deapply prev floor velocity.
+	# Deapply previous floor velocity.
 	velocity.x -= floor_h_velocity
 	floor_h_velocity = 0.0
 
@@ -59,7 +59,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var floor_index := -1
 
 	for contact_index in state.get_contact_count():
-		var collision_normal = state.get_contact_local_normal(contact_index)
+		var collision_normal := state.get_contact_local_normal(contact_index)
 
 		if collision_normal.dot(Vector2(0, -1)) > 0.6:
 			found_floor = true

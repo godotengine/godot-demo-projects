@@ -35,12 +35,13 @@ points = PackedVector3Array(-0.7, 0, -0.7, -0.3, 0, 0.8, 0.8, 0, -0.3, 0, -1, 0)
 [sub_resource type="ArrayMesh" id="15"]
 _surfaces = [{
 "aabb": AABB(-0.7, -1, -0.7, 1.5, 1.00001, 1.5),
-"format": 4099,
+"format": 34359742467,
 "index_count": 12,
 "index_data": PackedByteArray(0, 0, 1, 0, 3, 0, 1, 0, 2, 0, 3, 0, 2, 0, 0, 0, 3, 0, 2, 0, 1, 0, 0, 0),
 "primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 4,
-"vertex_data": PackedByteArray(51, 51, 51, 191, 0, 0, 0, 0, 51, 51, 51, 191, 0, 0, 0, 0, 154, 153, 153, 190, 0, 0, 0, 0, 205, 204, 76, 63, 0, 0, 96, 59, 205, 204, 76, 63, 0, 0, 0, 0, 154, 153, 153, 190, 182, 3, 0, 0, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 0, 0)
+"vertex_data": PackedByteArray(51, 51, 51, 191, 0, 0, 0, 0, 51, 51, 51, 191, 154, 153, 153, 190, 0, 0, 0, 0, 205, 204, 76, 63, 205, 204, 76, 63, 0, 0, 0, 0, 154, 153, 153, 190, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 96, 59, 182, 3, 0, 0, 0, 0, 0, 0)
 }]
 
 [sub_resource type="PhysicsMaterial" id="17"]
@@ -75,19 +76,16 @@ size = Vector3(100, 2, 40)
 size = Vector3(200, 2, 200)
 
 [node name="Test" type="Node3D"]
-script = ExtResource( "3" )
+script = ExtResource("3")
 
 [node name="LabelBodyType" type="Label" parent="."]
 offset_left = 14.0
-offset_top = 78.0
+offset_top = 62.0
 offset_right = 171.0
-offset_bottom = 92.0
+offset_bottom = 85.0
 text = "Floor Type: "
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Options" parent="." instance=ExtResource( "2" )]
+[node name="Options" parent="." instance=ExtResource("2")]
 offset_top = 120.0
 offset_bottom = 140.0
 focus_mode = 2
@@ -97,79 +95,79 @@ focus_mode = 2
 [node name="Bodies" type="Node3D" parent="DynamicShapes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.2912, 0)
 
-[node name="RigidBodyBox" type="RigidDynamicBody3D" parent="DynamicShapes/Bodies"]
+[node name="RigidBodyBox" type="RigidBody3D" parent="DynamicShapes/Bodies"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
-physics_material_override = SubResource( "1" )
-script = ExtResource( "1" )
+physics_material_override = SubResource("1")
+script = ExtResource("1")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/Bodies/RigidBodyBox"]
 transform = Transform3D(0.6, 0, 0, 0, 1, 0, 0, 0, 0.6, 0, 0, 0)
-shape = SubResource( "2" )
+shape = SubResource("2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DynamicShapes/Bodies/RigidBodyBox/CollisionShape"]
-mesh = SubResource( "3" )
+mesh = SubResource("3")
 
-[node name="RigidBodyCapsule" type="RigidDynamicBody3D" parent="DynamicShapes/Bodies"]
+[node name="RigidBodyCapsule" type="RigidBody3D" parent="DynamicShapes/Bodies"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
-physics_material_override = SubResource( "5" )
-script = ExtResource( "1" )
+physics_material_override = SubResource("5")
+script = ExtResource("1")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/Bodies/RigidBodyCapsule"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
-shape = SubResource( "6" )
+shape = SubResource("6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DynamicShapes/Bodies/RigidBodyCapsule/CollisionShape"]
-mesh = SubResource( "7" )
+mesh = SubResource("7")
 
-[node name="RigidBodyCylinder" type="RigidDynamicBody3D" parent="DynamicShapes/Bodies"]
+[node name="RigidBodyCylinder" type="RigidBody3D" parent="DynamicShapes/Bodies"]
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
-physics_material_override = SubResource( "9" )
-script = ExtResource( "1" )
+physics_material_override = SubResource("9")
+script = ExtResource("1")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/Bodies/RigidBodyCylinder"]
 transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, 0, 0)
-shape = SubResource( "10" )
+shape = SubResource("10")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DynamicShapes/Bodies/RigidBodyCylinder/CollisionShape"]
-mesh = SubResource( "11" )
+mesh = SubResource("11")
 
-[node name="RigidBodyConvex" type="RigidDynamicBody3D" parent="DynamicShapes/Bodies"]
+[node name="RigidBodyConvex" type="RigidBody3D" parent="DynamicShapes/Bodies"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.974548, 0)
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
-physics_material_override = SubResource( "13" )
-script = ExtResource( "1" )
+physics_material_override = SubResource("13")
+script = ExtResource("1")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/Bodies/RigidBodyConvex"]
 transform = Transform3D(1.5, 0, 0, 0, 2, 0, 0, 0, 1.5, 0, 0, 0)
-shape = SubResource( "14" )
+shape = SubResource("14")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DynamicShapes/Bodies/RigidBodyConvex/CollisionShape"]
-mesh = SubResource( "15" )
+mesh = SubResource("15")
 
-[node name="RigidBodySphere" type="RigidDynamicBody3D" parent="DynamicShapes/Bodies"]
+[node name="RigidBodySphere" type="RigidBody3D" parent="DynamicShapes/Bodies"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
-physics_material_override = SubResource( "17" )
-script = ExtResource( "1" )
+physics_material_override = SubResource("17")
+script = ExtResource("1")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/Bodies/RigidBodySphere"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
-shape = SubResource( "18" )
+shape = SubResource("18")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DynamicShapes/Bodies/RigidBodySphere/CollisionShape"]
-mesh = SubResource( "19" )
+mesh = SubResource("19")
 
 [node name="Floors" type="Node3D" parent="."]
 
@@ -180,20 +178,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floors/ConvexSmall/ConvexFloor"]
 visible = false
-mesh = SubResource( "23" )
+mesh = SubResource("23")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="Floors/ConvexSmall/ConvexFloor"]
-shape = SubResource( "24" )
+shape = SubResource("24")
 
 [node name="ConvexFloor2" type="StaticBody3D" parent="Floors/ConvexSmall"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floors/ConvexSmall/ConvexFloor2"]
 visible = false
-mesh = SubResource( "23" )
+mesh = SubResource("23")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="Floors/ConvexSmall/ConvexFloor2"]
-shape = SubResource( "25" )
+shape = SubResource("25")
 
 [node name="ConvexBig" type="Node3D" parent="Floors"]
 
@@ -201,10 +199,10 @@ shape = SubResource( "25" )
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floors/ConvexBig/ConvexFloor"]
 visible = false
-mesh = SubResource( "23" )
+mesh = SubResource("23")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="Floors/ConvexBig/ConvexFloor"]
-shape = SubResource( "26" )
+shape = SubResource("26")
 
 [node name="ConcaveSmall" type="Node3D" parent="Floors"]
 
@@ -213,22 +211,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floors/ConcaveSmall/ConcaveFloor"]
 visible = false
-mesh = SubResource( "23" )
+mesh = SubResource("23")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="Floors/ConcaveSmall/ConcaveFloor"]
 transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
-shape = SubResource( "27" )
+shape = SubResource("27")
 
 [node name="ConcaveFloor2" type="StaticBody3D" parent="Floors/ConcaveSmall"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floors/ConcaveSmall/ConcaveFloor2"]
 visible = false
-mesh = SubResource( "23" )
+mesh = SubResource("23")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="Floors/ConcaveSmall/ConcaveFloor2"]
 transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
-shape = SubResource( "27" )
+shape = SubResource("27")
 
 [node name="ConcaveBig" type="Node3D" parent="Floors"]
 
@@ -236,10 +234,10 @@ shape = SubResource( "27" )
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floors/ConcaveBig/ConcaveFloor"]
 visible = false
-mesh = SubResource( "23" )
+mesh = SubResource("23")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="Floors/ConcaveBig/ConcaveFloor"]
-shape = SubResource( "28" )
+shape = SubResource("28")
 
 [node name="BoxSmall" type="Node3D" parent="Floors"]
 
@@ -248,22 +246,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floors/BoxSmall/BoxFloor"]
 visible = false
-mesh = SubResource( "23" )
+mesh = SubResource("23")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="Floors/BoxSmall/BoxFloor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-shape = SubResource( "29" )
+shape = SubResource("29")
 
 [node name="BoxFloor2" type="StaticBody3D" parent="Floors/BoxSmall"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floors/BoxSmall/BoxFloor2"]
 visible = false
-mesh = SubResource( "23" )
+mesh = SubResource("23")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="Floors/BoxSmall/BoxFloor2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-shape = SubResource( "29" )
+shape = SubResource("29")
 
 [node name="BoxBig" type="Node3D" parent="Floors"]
 
@@ -271,16 +269,16 @@ shape = SubResource( "29" )
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floors/BoxBig/BoxFloor"]
 visible = false
-mesh = SubResource( "23" )
+mesh = SubResource("23")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="Floors/BoxBig/BoxFloor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-shape = SubResource( "30" )
+shape = SubResource("30")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.604, 22.124)
 far = 1000.0
-script = ExtResource( "4" )
+script = ExtResource("4")
 
 [node name="OmniLight" type="OmniLight3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.6965, -5.95932)

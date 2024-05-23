@@ -4,8 +4,8 @@
 # sorting is delayed by one frame.
 @tool
 @icon("res://addons/node25d/icons/y_sort_25d_icon.png")
-extends Node # Note: NOT Node2D, Node25D, or Node2D
-class_name YSort25D
+class_name Node # Note: NOT Node2D, Node25D, or Node2D
+extends YSort25D
 
 
 # Whether or not to automatically call sort() in _process().

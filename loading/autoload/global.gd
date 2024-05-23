@@ -1,10 +1,10 @@
 extends Node
-# Changing scenes is most easily done using the functions change_scene_to_file
-# and change_scene_to_packed of the SceneTree. This script demonstrates how to
-# change scenes without those helpers.
+# Changing scenes is most easily done using the `change_scene_to_file()` and
+# `change_scene_to_packed()` methods of SceneTree. This script demonstrates
+# how to change scenes without those helpers.
 
 
-func goto_scene(path: String):
+func goto_scene(path: String) -> void:
 	# This function will usually be called from a signal callback,
 	# or some other function from the running scene.
 	# Deleting the current scene at this point might be
@@ -16,12 +16,12 @@ func goto_scene(path: String):
 	_deferred_goto_scene.call_deferred(path)
 
 
-func _deferred_goto_scene(path: String):
+func _deferred_goto_scene(path: String) -> void:
 	# Immediately free the current scene. There is no risk here because the
 	# call to this method is already deferred.
 	get_tree().current_scene.free()
 
-	var packed_scene := ResourceLoader.load(path) as PackedScene
+	var packed_scene: PackedScene = ResourceLoader.load(path)
 
 	var instanced_scene := packed_scene.instantiate()
 

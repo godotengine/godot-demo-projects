@@ -52,6 +52,7 @@ offset_top = 56.0
 offset_right = 704.0
 offset_bottom = 296.0
 columns = 2
+select_mode = 1
 
 [node name="Utterance" type="TextEdit" parent="."]
 layout_mode = 0
@@ -187,7 +188,6 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 128.0
 offset_bottom = 32.0
-theme_override_font_sizes/font_size = 16
 text = "Speaking..."
 
 [node name="Log" type="TextEdit" parent="."]
@@ -232,13 +232,12 @@ text = "Demo"
 
 [connection signal="text_changed" from="LineEditFilterLang" to="." method="_on_LineEditFilterName_text_changed"]
 [connection signal="text_changed" from="LineEditFilterName" to="." method="_on_LineEditFilterName_text_changed"]
-[connection signal="item_activated" from="Tree" to="." method="_on_ItemList_item_activated"]
-[connection signal="pressed" from="ButtonSpeak" to="." method="_on_ButtonSpeak_pressed"]
-[connection signal="pressed" from="ButtonIntSpeak" to="." method="_on_ButtonIntSpeak_pressed"]
-[connection signal="pressed" from="ButtonStop" to="." method="_on_ButtonStop_pressed"]
-[connection signal="pressed" from="ButtonPause" to="." method="_on_ButtonPause_pressed"]
+[connection signal="pressed" from="ButtonSpeak" to="." method="_on_button_speak_pressed"]
+[connection signal="pressed" from="ButtonIntSpeak" to="." method="_on_button_int_speak_pressed"]
+[connection signal="pressed" from="ButtonStop" to="." method="_on_button_stop_pressed"]
+[connection signal="pressed" from="ButtonPause" to="." method="_on_button_pause_pressed"]
 [connection signal="value_changed" from="HSliderRate" to="." method="_on_HSliderRate_value_changed"]
 [connection signal="value_changed" from="HSliderPitch" to="." method="_on_HSliderPitch_value_changed"]
 [connection signal="value_changed" from="HSliderVolume" to="." method="_on_HSliderVolume_value_changed"]
-[connection signal="pressed" from="Log/ButtonClearLog" to="." method="_on_ButtonClearLog_pressed"]
+[connection signal="pressed" from="Log/ButtonClearLog" to="." method="_on_button_clear_log_pressed"]
 [connection signal="pressed" from="ButtonDemo" to="." method="_on_Button_pressed"]

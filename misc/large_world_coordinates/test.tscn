@@ -76,11 +76,11 @@ albedo_color = Color(0.0666667, 0.313726, 0.768627, 1)
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r08do"]
 emission_shape = 3
 emission_box_extents = Vector3(8, 0, 8)
-sub_emitter_mode = 3
-sub_emitter_amount_at_collision = 1
 collision_mode = 1
 collision_friction = 0.0
 collision_bounce = 0.2
+sub_emitter_mode = 3
+sub_emitter_amount_at_collision = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jmbue"]
 shading_mode = 0
@@ -89,8 +89,8 @@ shading_mode = 0
 material = SubResource("StandardMaterial3D_jmbue")
 radius = 0.05
 height = 0.1
-radial_segments = 4
-rings = 1
+radial_segments = 8
+rings = 4
 
 [sub_resource type="Animation" id="Animation_c3rry"]
 length = 0.001
@@ -249,7 +249,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_r08do")
 draw_pass_1 = SubResource("SphereMesh_f1qcl")
 
-[node name="Controls" type="VBoxContainer" parent="." node_paths=PackedStringArray("camera", "camera_holder", "rotation_x", "node_to_move", "rigid_body")]
+[node name="Controls" type="VBoxContainer" parent="." node_paths=PackedStringArray("camera", "camera_holder", "rotation_x", "node_to_move")]
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 350.0
@@ -260,7 +260,6 @@ camera = NodePath("../Move/CameraHolder/RotationX/Camera3D")
 camera_holder = NodePath("../Move/CameraHolder")
 rotation_x = NodePath("../Move/CameraHolder/RotationX")
 node_to_move = NodePath("../Move")
-rigid_body = NodePath("")
 
 [node name="HelpLabel" type="Label" parent="Controls"]
 unique_name_in_owner = true
@@ -362,10 +361,10 @@ layout_mode = 2
 text = "10,000,000,000,000"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "move_text_around"
 libraries = {
 "": SubResource("AnimationLibrary_2gye4")
 }
+autoplay = "move_text_around"
 
 [connection signal="pressed" from="Controls/Button" to="Controls" method="_on_open_documentation_pressed"]
 [connection signal="pressed" from="Controls/HFlowContainer/Button" to="Controls" method="_on_go_to_button_pressed" binds= [0]]

@@ -25,92 +25,55 @@ grow_vertical = 2
 
 [node name="Connect" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-offset_right = 1024.0
-offset_bottom = 31.0
 
 [node name="Label" type="Label" parent="VBoxContainer/Connect"]
 layout_mode = 2
-offset_top = 2.0
-offset_right = 89.0
-offset_bottom = 28.0
 text = "Connect to:"
 
 [node name="Host" type="LineEdit" parent="VBoxContainer/Connect"]
 layout_mode = 2
-offset_left = 93.0
-offset_right = 829.0
-offset_bottom = 31.0
 size_flags_horizontal = 3
 text = "ws://localhost:9080"
 
 [node name="Room" type="Label" parent="VBoxContainer/Connect"]
 layout_mode = 2
-offset_left = 833.0
-offset_right = 879.0
-offset_bottom = 31.0
 size_flags_vertical = 5
 text = "Room"
 
 [node name="RoomSecret" type="LineEdit" parent="VBoxContainer/Connect"]
 layout_mode = 2
-offset_left = 883.0
-offset_right = 950.0
-offset_bottom = 31.0
 placeholder_text = "secret"
 
 [node name="Mesh" type="CheckBox" parent="VBoxContainer/Connect"]
 layout_mode = 2
-offset_left = 954.0
-offset_right = 1024.0
-offset_bottom = 31.0
 button_pressed = true
 text = "Mesh"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-offset_top = 35.0
-offset_right = 1024.0
-offset_bottom = 66.0
 
 [node name="Start" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
-offset_right = 46.0
-offset_bottom = 31.0
 text = "Start"
 
 [node name="Stop" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
-offset_left = 50.0
-offset_right = 93.0
-offset_bottom = 31.0
 text = "Stop"
 
 [node name="Seal" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
-offset_left = 97.0
-offset_right = 137.0
-offset_bottom = 31.0
 text = "Seal"
 
 [node name="Ping" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
-offset_left = 141.0
-offset_right = 183.0
-offset_bottom = 31.0
 text = "Ping"
 
 [node name="Peers" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
-offset_left = 187.0
-offset_right = 280.0
-offset_bottom = 31.0
 text = "Print peers"
 
 [node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
 layout_mode = 2
-offset_top = 70.0
-offset_right = 1024.0
-offset_bottom = 600.0
 size_flags_vertical = 3
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Start" to="." method="_on_start_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://byr2ixl00dqdl"]
+[gd_scene load_steps=16 format=3 uid="uid://byr2ixl00dqdl"]
 
 [ext_resource type="Script" path="res://vrs.gd" id="1_5k5b8"]
 [ext_resource type="Texture2D" uid="uid://dsdx5gplyr6or" path="res://vrs_texture.png" id="2_44sk1"]
@@ -18,6 +18,9 @@ sky = SubResource("Sky_ndq4s")
 tonemap_mode = 3
 tonemap_white = 6.0
 glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_t8cmv"]
+size = Vector3(1024, 1, 1024)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ocds8"]
 
@@ -71,6 +74,10 @@ fov = 50.0
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
 transform = Transform3D(0.92086, -0.232944, 0.312657, 0, 0.801902, 0.597456, -0.389894, -0.550173, 0.738439, 1.02558, 2.09094, 2.36376)
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.65, 0)
+mesh = SubResource("BoxMesh_t8cmv")
 
 [node name="Boxes" type="Node3D" parent="."]
 
@@ -908,6 +915,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
 light_color = Color(1, 0.952941, 0.392157, 1)
 shadow_enabled = true
 shadow_bias = 0.03
+omni_range = 20.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
