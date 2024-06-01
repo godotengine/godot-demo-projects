@@ -8,28 +8,28 @@ const BULLET_COUNT = 500
 const SPEED_MIN = 20
 const SPEED_MAX = 80
 
-const bullet_image = preload("res://bullet.png")
+const bullet_image := preload("res://bullet.png")
 
 var bullets := []
-var shape
+var shape := RID()
 
 
 class Bullet:
-	var position = Vector2()
-	var speed = 1.0
+	var position := Vector2()
+	var speed := 1.0
 	# The body is stored as a RID, which is an "opaque" way to access resources.
 	# With large amounts of objects (thousands or more), it can be significantly
 	# faster to use RIDs compared to a high-level approach.
-	var body = RID()
+	var body := RID()
 
 
-func _ready():
+func _ready() -> void:
 	shape = PhysicsServer2D.circle_shape_create()
 	# Set the collision shape's radius for each bullet in pixels.
 	PhysicsServer2D.shape_set_data(shape, 8)
 
 	for _i in BULLET_COUNT:
-		var bullet = Bullet.new()
+		var bullet := Bullet.new()
 		# Give each bullet its own random speed.
 		bullet.speed = randf_range(SPEED_MIN, SPEED_MAX)
 		bullet.body = PhysicsServer2D.body_create()
@@ -45,22 +45,22 @@ func _ready():
 			randf_range(0, get_viewport_rect().size.x) + get_viewport_rect().size.x,
 			randf_range(0, get_viewport_rect().size.y)
 		)
-		var transform2d = Transform2D()
+		var transform2d := Transform2D()
 		transform2d.origin = bullet.position
 		PhysicsServer2D.body_set_state(bullet.body, PhysicsServer2D.BODY_STATE_TRANSFORM, transform2d)
 
 		bullets.push_back(bullet)
 
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	# Order the CanvasItem to update every frame.
 	queue_redraw()
 
 
-func _physics_process(delta):
-	var transform2d = Transform2D()
-	var offset = get_viewport_rect().size.x + 16
-	for bullet in bullets:
+func _physics_process(delta: float) -> void:
+	var transform2d := Transform2D()
+	var offset := get_viewport_rect().size.x + 16
+	for bullet: Bullet in bullets:
 		bullet.position.x -= bullet.speed * delta
 
 		if bullet.position.x < -16:
@@ -73,15 +73,15 @@ func _physics_process(delta):
 
 # Instead of drawing each bullet individually in a script attached to each bullet,
 # we are drawing *all* the bullets at once here.
-func _draw():
-	var offset = -bullet_image.get_size() * 0.5
-	for bullet in bullets:
+func _draw() -> void:
+	var offset := -bullet_image.get_size() * 0.5
+	for bullet: Bullet in bullets:
 		draw_texture(bullet_image, bullet.position + offset)
 
 
 # Perform cleanup operations (required to exit without error messages in the console).
-func _exit_tree():
-	for bullet in bullets:
+func _exit_tree() -> void:
+	for bullet: Bullet in bullets:
 		PhysicsServer2D.free_rid(bullet.body)
 
 	PhysicsServer2D.free_rid(shape)

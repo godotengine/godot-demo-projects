@@ -1,29 +1,28 @@
 extends TestCharacter
 
-
 const OPTION_TEST_CASE_ALL = "Test Cases/TEST ALL (0)"
 const OPTION_TEST_CASE_DETECT_FLOOR_NO_SNAP = "Test Cases/Floor detection (Character Body)"
 const OPTION_TEST_CASE_DETECT_FLOOR_MOTION_CHANGES = "Test Cases/Floor detection with motion changes (Character Body)"
 
 const MOTION_CHANGES_DIR = Vector2(1.0, 1.0)
-const MOTION_CHANGES_SPEEDS = [0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 50.0]
+const MOTION_CHANGES_SPEEDS: Array[float] = [0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 50.0]
 
-var _test_floor_detection = false
-var _test_motion_changes = false
-var _floor_detected = false
-var _floor_lost = false
+var _test_floor_detection := false
+var _test_motion_changes := false
+var _floor_detected := false
+var _floor_lost := false
 
-var _failed_reason = ""
+var _failed_reason := ""
 
-
-func _ready():
+func _ready() -> void:
 	super._ready()
 
 	options.add_menu_item(OPTION_TEST_CASE_ALL)
 	options.add_menu_item(OPTION_TEST_CASE_DETECT_FLOOR_NO_SNAP)
 	options.add_menu_item(OPTION_TEST_CASE_DETECT_FLOOR_MOTION_CHANGES)
 
-func _physics_process(delta):
+
+func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 
 	if _moving_body:
@@ -35,24 +34,23 @@ func _physics_process(delta):
 				Log.print_log("Floor lost.")
 
 		if _test_motion_changes:
-			var speed_count = MOTION_CHANGES_SPEEDS.size()
-			var speed_index = randi() % speed_count
-			var speed = MOTION_CHANGES_SPEEDS[speed_index]
-			var velocity = speed * MOTION_CHANGES_DIR
+			var speed_count := MOTION_CHANGES_SPEEDS.size()
+			var speed_index := randi() % speed_count
+			var speed := MOTION_CHANGES_SPEEDS[speed_index]
+			var velocity := speed * MOTION_CHANGES_DIR
 			_moving_body._constant_velocity = velocity
 			#Log.print_log("Velocity: %s" % velocity)
 
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	super._input(event)
 
-	var key_event = event as InputEventKey
-	if key_event and not key_event.pressed:
-		if key_event.keycode == KEY_0:
+	if event is InputEventKey and not event.pressed:
+		if event.keycode == KEY_0:
 			await _on_option_selected(OPTION_TEST_CASE_ALL)
 
 
-func _on_option_selected(option):
+func _on_option_selected(option: String) -> void:
 	match option:
 		OPTION_TEST_CASE_ALL:
 			await _test_all()
@@ -66,7 +64,7 @@ func _on_option_selected(option):
 	super._on_option_selected(option)
 
 
-func _start_test_case(option):
+func _start_test_case(option: String) -> void:
 	Log.print_log("* Starting " + option)
 
 	match option:
@@ -74,7 +72,7 @@ func _start_test_case(option):
 			_test_floor_detection = true
 			_test_motion_changes = false
 			_use_snap = false
-			_body_type = E_BodyType.CHARACTER_BODY
+			_body_type = BodyType.CHARACTER_BODY
 			_start_test()
 
 			await start_timer(1.0).timeout
@@ -86,7 +84,7 @@ func _start_test_case(option):
 			_test_floor_detection = true
 			_test_motion_changes = true
 			_use_snap = false
-			_body_type = E_BodyType.CHARACTER_BODY
+			_body_type = BodyType.CHARACTER_BODY
 			_start_test()
 
 			await start_timer(4.0).timeout
@@ -102,7 +100,7 @@ func _start_test_case(option):
 			Log.print_error("Invalid test case.")
 
 
-func _test_all():
+func _test_all() -> void:
 	Log.print_log("* TESTING ALL...")
 
 	# Test floor detection with no snapping.
@@ -119,8 +117,8 @@ func _test_all():
 	Log.print_log("* Done.")
 
 
-func _set_result(test_passed):
-	var result = ""
+func _set_result(test_passed: bool) -> void:
+	var result := ""
 	if test_passed:
 		result = "PASSED"
 	else:
@@ -134,7 +132,7 @@ func _set_result(test_passed):
 	Log.print_log("Test %s" % result)
 
 
-func _start_test():
+func _start_test() -> void:
 	super._start_test()
 
 	_failed_reason = ""

@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://player_controls.gd" id="4_k1vfr"]
 
 [sub_resource type="CircleShape2D" id="1"]
-radius = 20.0
+radius = 16.0
 
 [sub_resource type="Animation" id="2"]
 resource_name = "standing"
@@ -149,22 +149,18 @@ outline_color = Color(0, 0, 0, 1)
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_sh64w"]
 properties/0/path = NodePath(".:synced_position")
 properties/0/spawn = true
-properties/0/sync = true
-properties/0/watch = false
+properties/0/replication_mode = 1
 properties/1/path = NodePath("label:text")
 properties/1/spawn = true
-properties/1/sync = false
-properties/1/watch = false
+properties/1/replication_mode = 0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_w53uu"]
 properties/0/path = NodePath(".:motion")
 properties/0/spawn = true
-properties/0/sync = true
-properties/0/watch = false
+properties/0/replication_mode = 1
 properties/1/path = NodePath(".:bombing")
 properties/1/spawn = true
-properties/1/sync = true
-properties/1/watch = false
+properties/1/replication_mode = 1
 
 [node name="player" type="CharacterBody2D"]
 z_index = 10

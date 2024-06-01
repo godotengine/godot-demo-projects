@@ -3,15 +3,14 @@ extends Camera3D
 const MOUSE_SENSITIVITY = 0.002
 const MOVE_SPEED = 1.5
 
-var rot = Vector3()
-var velocity = Vector3()
+var rot := Vector3()
+var velocity := Vector3()
 
-
-func _ready():
+func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Mouse look (only if the mouse is captured).
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		# Horizontal mouse look.
@@ -27,8 +26,8 @@ func _input(event):
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
-func _process(delta):
-	var motion = Vector3(
+func _process(delta: float) -> void:
+	var motion := Vector3(
 			Input.get_axis(&"move_left", &"move_right"),
 			0,
 			Input.get_axis(&"move_forward", &"move_back")

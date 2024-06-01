@@ -21,6 +21,7 @@ func _ready() -> void:
 		%HelpLabel.text = "Double precision is enabled in this engine build.\nNo shaking should occur at high coordinate levels\n(±65,536 or more on any axis)."
 		%HelpLabel.add_theme_color_override("font_color", Color(0.667, 1, 0.667))
 
+
 func _process(delta: float) -> void:
 	%Coordinates.text = "X: [color=#fb9]%f[/color]\nY: [color=#bfa]%f[/color]\nZ: [color=#9cf]%f[/color]" % [node_to_move.position.x, node_to_move.position.y, node_to_move.position.z]
 	if %IncrementX.button_pressed:

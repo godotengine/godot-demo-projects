@@ -1,13 +1,13 @@
 extends HBoxContainer
 
-var player_labels = {}
+var player_labels := {}
 
-func _process(_delta):
-	var rocks_left = $"../Rocks".get_child_count()
+func _process(_delta: float) -> void:
+	var rocks_left := $"../Rocks".get_child_count()
 	if rocks_left == 0:
-		var winner_name = ""
-		var winner_score = 0
-		for p in player_labels:
+		var winner_name := ""
+		var winner_score := 0
+		for p: int in player_labels:
 			if player_labels[p].score > winner_score:
 				winner_score = player_labels[p].score
 				winner_name = player_labels[p].name
@@ -16,30 +16,36 @@ func _process(_delta):
 		$"../Winner".show()
 
 
-func increase_score(for_who):
+func increase_score(for_who: int) -> void:
 	assert(for_who in player_labels)
-	var pl = player_labels[for_who]
+
+	var pl: Dictionary = player_labels[for_who]
 	pl.score += 1
 	pl.label.set_text(pl.name + "\n" + str(pl.score))
 
 
-func add_player(id, new_player_name):
-	var l = Label.new()
-	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	l.set_text(new_player_name + "\n" + "0")
-	l.set_h_size_flags(SIZE_EXPAND_FILL)
-	var font = preload("res://montserrat.otf")
-	l.set("custom_fonts/font", font)
-	l.set("custom_font_size/font_size", 18)
-	add_child(l)
+func add_player(id: int, new_player_name: String) -> void:
+	var label := Label.new()
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.text = new_player_name + "\n" + "0"
+	label.modulate = gamestate.get_player_color(new_player_name)
+	label.size_flags_horizontal = SIZE_EXPAND_FILL
+	label.add_theme_font_override("font", preload("res://montserrat.otf"))
+	label.add_theme_color_override("font_outline_color", Color.BLACK)
+	label.add_theme_constant_override("outline_size", 9)
+	label.add_theme_font_size_override("font_size", 18)
+	add_child(label)
 
-	player_labels[id] = { name = new_player_name, label = l, score = 0 }
+	player_labels[id] = {
+		name = new_player_name,
+		label = label,
+		score = 0,
+	}
 
 
-func _ready():
+func _ready() -> void:
 	$"../Winner".hide()
-	set_process(true)
 
 
-func _on_exit_game_pressed():
+func _on_exit_game_pressed() -> void:
 	gamestate.end_game()

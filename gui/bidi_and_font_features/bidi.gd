@@ -45,7 +45,7 @@ func _on_variable_size_value_changed(value: float) -> void:
 func _on_variable_weight_value_changed(value: float) -> void:
 	$"TabContainer/Variable fonts/Variables/Weight/Value".text = str(value)
 	# Workaround to make the variable font axis value effective. This requires duplicating the dictionary.
-	var dict = variable_font_variation.variation_opentype.duplicate()
+	var dict := variable_font_variation.variation_opentype.duplicate()
 	dict["weight"] = value
 	variable_font_variation.variation_opentype = dict
 
@@ -53,7 +53,7 @@ func _on_variable_weight_value_changed(value: float) -> void:
 func _on_variable_slant_value_changed(value: float) -> void:
 	$"TabContainer/Variable fonts/Variables/Slant/Value".text = str(value)
 	# Workaround to make the variable font axis value effective. This requires duplicating the dictionary.
-	var dict = variable_font_variation.variation_opentype.duplicate()
+	var dict := variable_font_variation.variation_opentype.duplicate()
 	dict["slant"] = value
 	variable_font_variation.variation_opentype = dict
 
@@ -61,7 +61,7 @@ func _on_variable_slant_value_changed(value: float) -> void:
 func _on_variable_cursive_toggled(button_pressed: bool) -> void:
 	$"TabContainer/Variable fonts/Variables/Cursive".button_pressed = button_pressed
 	# Workaround to make the variable font axis value effective. This requires duplicating the dictionary.
-	var dict = variable_font_variation.variation_opentype.duplicate()
+	var dict := variable_font_variation.variation_opentype.duplicate()
 	dict["custom_CRSV"] = int(button_pressed)
 	variable_font_variation.variation_opentype = dict
 
@@ -69,7 +69,7 @@ func _on_variable_cursive_toggled(button_pressed: bool) -> void:
 func _on_variable_casual_toggled(button_pressed: bool) -> void:
 	$"TabContainer/Variable fonts/Variables/Casual".button_pressed = button_pressed
 	# Workaround to make the variable font axis value effective. This requires duplicating the dictionary.
-	var dict = variable_font_variation.variation_opentype.duplicate()
+	var dict := variable_font_variation.variation_opentype.duplicate()
 	dict["custom_CASL"] = int(button_pressed)
 	variable_font_variation.variation_opentype = dict
 
@@ -77,13 +77,13 @@ func _on_variable_casual_toggled(button_pressed: bool) -> void:
 func _on_variable_monospace_toggled(button_pressed: bool) -> void:
 	$"TabContainer/Variable fonts/Variables/Monospace".button_pressed = button_pressed
 	# Workaround to make the variable font axis value effective. This requires duplicating the dictionary.
-	var dict = variable_font_variation.variation_opentype.duplicate()
+	var dict := variable_font_variation.variation_opentype.duplicate()
 	dict["custom_MONO"] = int(button_pressed)
 	variable_font_variation.variation_opentype = dict
 
 
 func _on_system_font_value_text_changed(new_text: String) -> void:
-	for label in [
+	for label: Label in [
 		$"TabContainer/System fonts/VBoxContainer/SansSerif/Value",
 		$"TabContainer/System fonts/VBoxContainer/Serif/Value",
 		$"TabContainer/System fonts/VBoxContainer/Monospace/Value",
@@ -96,7 +96,7 @@ func _on_system_font_value_text_changed(new_text: String) -> void:
 
 func _on_system_font_weight_value_changed(value: float) -> void:
 	$"TabContainer/System fonts/Weight/Value".text = str(value)
-	for label in [
+	for label: Label in [
 		$"TabContainer/System fonts/VBoxContainer/SansSerif/Value",
 		$"TabContainer/System fonts/VBoxContainer/Serif/Value",
 		$"TabContainer/System fonts/VBoxContainer/Monospace/Value",
@@ -105,10 +105,10 @@ func _on_system_font_weight_value_changed(value: float) -> void:
 		$"TabContainer/System fonts/VBoxContainer/Custom/Value"
 	]:
 		var system_font: SystemFont = label.get_theme_font("font")
-		system_font.font_weight = value
+		system_font.font_weight = int(value)
 
 func _on_system_font_italic_toggled(button_pressed: bool) -> void:
-	for label in [
+	for label: Label in [
 		$"TabContainer/System fonts/VBoxContainer/SansSerif/Value",
 		$"TabContainer/System fonts/VBoxContainer/Serif/Value",
 		$"TabContainer/System fonts/VBoxContainer/Monospace/Value",

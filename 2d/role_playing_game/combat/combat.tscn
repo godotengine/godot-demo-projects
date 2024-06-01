@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://combat/turn_queue.gd" id="2"]
 [ext_resource type="Theme" uid="uid://dtao6d0ebglcf" path="res://theme/theme.tres" id="3"]
 [ext_resource type="Script" path="res://combat/interface/ui.gd" id="4"]
-[ext_resource type="PackedScene" path="res://combat/interface/info.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://bypumcqt7j0iv" path="res://combat/interface/info.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://dh804n3h2bl5h" path="res://combat/background/combat_background.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://mi3mmtft0snh" path="res://decoration/grass.png" id="7"]
 [ext_resource type="Material" uid="uid://blst65bnoqyam" path="res://decoration/wind_sway.tres" id="8"]
@@ -19,7 +19,7 @@
 [sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
 
-func add_combatant(new_combatant):
+func add_combatant(new_combatant: Node2D) -> void:
 	new_combatant.position.x += 200 * get_child_count()
 	add_child(new_combatant)
 "

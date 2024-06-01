@@ -1,7 +1,7 @@
 extends Node2D
 
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_directional_light"):
 		$DirectionalLight2D.visible = not $DirectionalLight2D.visible
 

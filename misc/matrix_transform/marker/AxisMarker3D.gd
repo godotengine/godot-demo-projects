@@ -4,7 +4,7 @@ class_name AxisMarker3D
 extends Node3D
 
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	var holder: Node3D = get_child(0).get_child(0)
 	var cube: Node3D = holder.get_child(0)
 	# "Hide" the origin vector if the AxisMarker is at (0, 0, 0)

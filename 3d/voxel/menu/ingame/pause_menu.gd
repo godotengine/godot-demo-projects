@@ -1,14 +1,11 @@
 extends Control
 
-@onready var tree = get_tree()
+@onready var crosshair: CenterContainer = $Crosshair
+@onready var pause: VBoxContainer = $Pause
+@onready var options: HBoxContainer = $Options
+@onready var voxel_world: Node = $"../VoxelWorld"
 
-@onready var crosshair = $Crosshair
-@onready var pause = $Pause
-@onready var options = $Options
-@onready var voxel_world = $"../VoxelWorld"
-
-
-func _process(_delta):
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(&"pause"):
 		pause.visible = crosshair.visible
 		crosshair.visible = not crosshair.visible
@@ -19,23 +16,23 @@ func _process(_delta):
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
-func _on_Resume_pressed():
+func _on_Resume_pressed() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	crosshair.visible = true
 	pause.visible = false
 
 
-func _on_Options_pressed():
+func _on_Options_pressed() -> void:
 	options.prev_menu = pause
 	options.visible = true
 	pause.visible = false
 
 
-func _on_MainMenu_pressed():
+func _on_MainMenu_pressed() -> void:
 	voxel_world.clean_up()
-	tree.change_scene_to_packed(load("res://menu/main/main_menu.tscn"))
+	get_tree().change_scene_to_packed(load("res://menu/main/main_menu.tscn"))
 
 
-func _on_Exit_pressed():
+func _on_Exit_pressed() -> void:
 	voxel_world.clean_up()
-	tree.quit()
+	get_tree().quit()

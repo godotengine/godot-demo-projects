@@ -1,11 +1,10 @@
 extends Node
 
-@onready var rtl = $HBoxContainer/Features
-@onready var csharp_test = $CSharpTest
-
+@onready var rtl: RichTextLabel = $HBoxContainer/Features
+@onready var csharp_test: Node = $CSharpTest
 
 # Returns a human-readable string from a date and time, date, or time dictionary.
-func datetime_to_string(date):
+func datetime_to_string(date: Dictionary) -> void:
 	if (
 		date.has("year")
 		and date.has("month")
@@ -39,27 +38,34 @@ func datetime_to_string(date):
 		})
 
 
-func scan_midi_devices():
+func scan_midi_devices() -> String:
 	OS.open_midi_inputs()
-	var devices = ", ".join(OS.get_connected_midi_inputs())
+	var devices := ", ".join(OS.get_connected_midi_inputs())
 	OS.close_midi_inputs()
 	return devices
 
 
-func add_header(header):
+func add_header(header: String) -> void:
 	rtl.append_text("\n[font_size=24][color=#6df]{header}[/color][/font_size]\n\n".format({
 		header = header,
 	}))
 
 
-func add_line(key, value):
+func add_line(key: String, value: Variant) -> void:
+	if typeof(value) == TYPE_BOOL:
+		# Colorize boolean values.
+		value = "[color=8f8]true[/color]" if value else "[color=#f88]false[/color]"
+
 	rtl.append_text("[color=#adf]{key}:[/color] {value}\n".format({
 		key = key,
 		value = value if str(value) != "" else "[color=#fff8](empty)[/color]",
 	}))
 
 
-func _ready():
+func _ready() -> void:
+	# Grab focus so that the list can be scrolled (for keyboard/controller-friendly navigation).
+	rtl.grab_focus()
+
 	add_header("Audio")
 	add_line("Mix rate", "%d Hz" % AudioServer.get_mix_rate())
 	add_line("Output latency", "%f ms" % (AudioServer.get_output_latency() * 1000))
@@ -115,7 +121,7 @@ func _ready():
 
 	add_header("Input")
 	add_line("Device has touch screen", DisplayServer.is_touchscreen_available())
-	var has_virtual_keyboard = DisplayServer.has_feature(DisplayServer.FEATURE_VIRTUAL_KEYBOARD)
+	var has_virtual_keyboard := DisplayServer.has_feature(DisplayServer.FEATURE_VIRTUAL_KEYBOARD)
 	add_line("Device has virtual keyboard", has_virtual_keyboard)
 	if has_virtual_keyboard:
 		add_line("Virtual keyboard height", DisplayServer.virtual_keyboard_get_height())
@@ -127,7 +133,7 @@ func _ready():
 	add_line("Granted permissions", OS.get_granted_permissions())
 
 	add_header(".NET (C#)")
-	var csharp_enabled = ResourceLoader.exists("res://CSharpTest.cs")
+	var csharp_enabled := ResourceLoader.exists("res://CSharpTest.cs")
 	add_line("Mono module enabled", "Yes" if csharp_enabled else "No")
 	if csharp_enabled:
 		csharp_test.set_script(load("res://CSharpTest.cs"))
@@ -163,7 +169,7 @@ func _ready():
 	][RenderingServer.get_video_adapter_type()])
 	add_line("Adapter graphics API version", RenderingServer.get_video_adapter_api_version())
 
-	var video_adapter_driver_info = OS.get_video_adapter_driver_info()
+	var video_adapter_driver_info := OS.get_video_adapter_driver_info()
 	if video_adapter_driver_info.size() > 0:
 		add_line("Adapter driver name", video_adapter_driver_info[0])
 	if video_adapter_driver_info.size() > 1:

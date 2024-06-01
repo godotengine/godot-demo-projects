@@ -118,7 +118,15 @@ script = ExtResource("2")
 [node name="Player" parent="." instance=ExtResource("3_uccbe")]
 
 [node name="Skeleton3D" parent="Player/Skeleton" index="0"]
+bones/5/rotation = Quaternion(0.501129, -0.498869, -0.501128, 0.498869)
+bones/9/rotation = Quaternion(-0.264667, 0.951702, -0.15503, -0.013433)
+bones/10/rotation = Quaternion(0.744208, -0.433567, 0.504614, 0.0594899)
+bones/11/rotation = Quaternion(0.264667, 0.951702, -0.15503, 0.013433)
 bones/13/rotation = Quaternion(-0.000357303, 0.998602, 0.0504822, -0.0156872)
+bones/14/rotation = Quaternion(0.720784, -0.0117194, -0.041935, 0.691791)
+bones/15/rotation = Quaternion(0.998503, -0.0419896, 0.0282027, 0.0208377)
+bones/16/rotation = Quaternion(0.000357169, 0.998602, 0.050483, 0.0156871)
+bones/17/rotation = Quaternion(0.720784, 0.0117189, 0.0419352, 0.691791)
 
 [node name="Robot" parent="Player/Skeleton/Skeleton3D" index="0"]
 layers = 2
@@ -168,9 +176,9 @@ text = "123"
 font_size = 48
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Player")
 tree_root = SubResource("23")
 anim_player = NodePath("../Player/AnimationPlayer")
-active = true
 parameters/air_dir/blend_amount = 0.0
 parameters/gun/blend_amount = 0.0
 parameters/run/blend_amount = 0.0

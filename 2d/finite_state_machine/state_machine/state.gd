@@ -4,25 +4,25 @@ extends Node
 # and makes sure every State object had all of these methods.
 
 # warning-ignore:unused_signal
-signal finished(next_state_name)
+signal finished(next_state_name: String)
 
 # Initialize the state. E.g. change the animation.
-func enter():
+func enter() -> void:
 	pass
 
 
 # Clean up the state. Reinitialize values like a timer.
-func exit():
+func exit() -> void:
 	pass
 
 
-func handle_input(_event):
+func handle_input(_event: InputEvent) -> void:
 	pass
 
 
-func update(_delta):
+func update(_delta: float) -> void:
 	pass
 
 
-func _on_animation_finished(_anim_name):
+func _on_animation_finished(_anim_name: String) -> void:
 	pass

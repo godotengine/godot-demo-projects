@@ -1,22 +1,21 @@
 extends CharacterBody2D
 
+var _initial_velocity := Vector2.ZERO
+var _constant_velocity := Vector2.ZERO
+var _motion_speed := 400.0
+var _gravity_force := 50.0
+var _jump_force := 1000.0
+var _velocity := Vector2.ZERO
+var _snap := 0.0
+var _floor_max_angle := 45.0
+var _stop_on_slope := false
+var _move_on_floor_only := false
+var _constant_speed := false
+var _jumping := false
+var _keep_velocity := false
 
-var _initial_velocity = Vector2.ZERO
-var _constant_velocity = Vector2.ZERO
-var _motion_speed = 400.0
-var _gravity_force = 50.0
-var _jump_force = 1000.0
-var _velocity = Vector2.ZERO
-var _snap = 0.0
-var _floor_max_angle = 45.0
-var _stop_on_slope = false
-var _move_on_floor_only = false
-var _constant_speed = false
-var _jumping = false
-var _keep_velocity = false
 
-
-func _physics_process(_delta):
+func _physics_process(_delta: float) -> void:
 	if _initial_velocity != Vector2.ZERO:
 		_velocity = _initial_velocity
 		_initial_velocity = Vector2.ZERO

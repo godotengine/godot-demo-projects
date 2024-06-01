@@ -1,22 +1,21 @@
 extends RigidBody2D
 
+var _initial_velocity := Vector2.ZERO
+var _constant_velocity := Vector2.ZERO
+var _motion_speed := 400.0
+var _gravity_force := 50.0
+var _jump_force := 1000.0
+var _velocity := Vector2.ZERO
+var _floor_max_angle := 45.0
+var _on_floor := false
+var _jumping := false
+var _keep_velocity := false
 
-var _initial_velocity = Vector2.ZERO
-var _constant_velocity = Vector2.ZERO
-var _motion_speed = 400.0
-var _gravity_force = 50.0
-var _jump_force = 1000.0
-var _velocity = Vector2.ZERO
-var _floor_max_angle = 45.0
-var _on_floor = false
-var _jumping = false
-var _keep_velocity = false
-
-
-func _ready():
+func _ready() -> void:
 	gravity_scale = 0.0
 
-func _physics_process(_delta):
+
+func _physics_process(_delta: float) -> void:
 	if _initial_velocity != Vector2.ZERO:
 		_velocity = _initial_velocity
 		_initial_velocity = Vector2.ZERO
@@ -54,12 +53,12 @@ func _physics_process(_delta):
 	linear_velocity = _velocity
 
 
-func _integrate_forces(state):
+func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	_on_floor = false
 
-	var contacts = state.get_contact_count()
+	var contacts := state.get_contact_count()
 	for i in contacts:
-		var normal = state.get_contact_local_normal(i)
+		var normal := state.get_contact_local_normal(i)
 
 		# Detect floor.
 		if acos(normal.dot(Vector2.UP)) <= deg_to_rad(_floor_max_angle) + 0.01:
@@ -70,5 +69,5 @@ func _integrate_forces(state):
 			_jumping = false
 			_velocity.y = 0.0
 
-func is_on_floor():
+func is_on_floor() -> bool:
 	return _on_floor

@@ -3,10 +3,10 @@ extends EditorPlugin
 
 const MainPanel = preload("res://addons/node25d/main_screen/main_screen_25d.tscn")
 
-var main_panel_instance
+var main_panel_instance: Panel
 
 
-func _enter_tree():
+func _enter_tree() -> void:
 	main_panel_instance = MainPanel.instantiate()
 	main_panel_instance.get_child(1).editor_interface = get_editor_interface()
 
@@ -21,7 +21,7 @@ func _enter_tree():
 	add_custom_type("ShadowMath25D", "CharacterBody3D", preload("shadow_math_25d.gd"), preload("icons/shadow_math_25d_icon.png"))
 
 
-func _exit_tree():
+func _exit_tree() -> void:
 	if main_panel_instance:
 		main_panel_instance.queue_free()
 	# When the plugin node exits the tree, remove the custom types.
@@ -30,11 +30,11 @@ func _exit_tree():
 	remove_custom_type("Node25D")
 
 
-func _has_main_screen():
+func _has_main_screen() -> bool:
 	return true
 
 
-func _make_visible(visible):
+func _make_visible(visible: bool) -> void:
 	if main_panel_instance:
 		if visible:
 			main_panel_instance.show()
@@ -42,11 +42,11 @@ func _make_visible(visible):
 			main_panel_instance.hide()
 
 
-func _get_plugin_name():
+func _get_plugin_name() -> String:
 	return "2.5D"
 
 
-func _get_plugin_icon():
+func _get_plugin_icon() -> Texture2D:
 	return preload("res://addons/node25d/icons/viewport_25d.svg")
 
 

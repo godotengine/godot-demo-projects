@@ -1,6 +1,6 @@
 extends Control
 
-@export_file("*.glsl") var shader_file
+@export_file("*.glsl") var shader_file: String
 @export_range(128, 4096, 1, "exp") var dimension: int = 512
 
 @onready var seed_input: SpinBox = $CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer/SeedInput
@@ -53,7 +53,7 @@ func _ready() -> void:
 	$CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/CreateButtonCPU.text += "\n" + OS.get_processor_name()
 
 
-func _notification(what):
+func _notification(what: int) -> void:
 	# Object destructor, triggered before the engine deletes this Node.
 	if what == NOTIFICATION_PREDELETE:
 		cleanup_gpu()
@@ -66,13 +66,12 @@ func randomize_seed() -> void:
 
 func prepare_image() -> Image:
 	start_time = Time.get_ticks_usec()
-	# Use the to_int() method on the String to convert to a valid seed.
-	noise.seed = seed_input.value
+	noise.seed = int(seed_input.value)
 	# Create image from noise.
 	var heightmap := noise.get_image(po2_dimensions, po2_dimensions, false, false)
 
 	# Create ImageTexture to display original on screen.
-	var clone = Image.new()
+	var clone := Image.new()
 	clone.copy_from(heightmap)
 	clone.resize(512, 512, Image.INTERPOLATE_NEAREST)
 	var clone_tex := ImageTexture.create_from_image(clone)
@@ -164,6 +163,7 @@ func compute_island_gpu(heightmap: Image) -> void:
 	rd.compute_list_bind_uniform_set(compute_list, uniform_set, 0)
 	# This is where the magic happens! As our shader has a work group size of 8x8x1, we dispatch
 	# one for every 8x8 block of pixels here. This ratio is highly tunable, and performance may vary.
+	@warning_ignore("integer_division")
 	rd.compute_list_dispatch(compute_list, po2_dimensions / 8, po2_dimensions / 8, 1)
 	rd.compute_list_end()
 
@@ -207,10 +207,10 @@ func cleanup_gpu() -> void:
 
 
 # Import, compile and load shader, return reference.
-func load_shader(rd: RenderingDevice, path: String) -> RID:
+func load_shader(p_rd: RenderingDevice, path: String) -> RID:
 	var shader_file_data: RDShaderFile = load(path)
 	var shader_spirv: RDShaderSPIRV = shader_file_data.get_spirv()
-	return rd.shader_create_from_spirv(shader_spirv)
+	return p_rd.shader_create_from_spirv(shader_spirv)
 
 
 func compute_island_cpu(heightmap: Image) -> void:
@@ -251,10 +251,10 @@ func _on_random_button_pressed() -> void:
 
 
 func _on_create_button_gpu_pressed() -> void:
-	var heightmap = prepare_image()
+	var heightmap := prepare_image()
 	compute_island_gpu.call_deferred(heightmap)
 
 
 func _on_create_button_cpu_pressed() -> void:
-	var heightmap = prepare_image()
+	var heightmap := prepare_image()
 	compute_island_cpu.call_deferred(heightmap)

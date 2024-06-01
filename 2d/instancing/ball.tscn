@@ -1,18 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://cgx884jv27maj"]
 
-[ext_resource path="res://bowling_ball.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://cyqshsjd3qwo0" path="res://bowling_ball.png" id="1"]
 
-[sub_resource type="PhysicsMaterial" id=1]
+[sub_resource type="PhysicsMaterial" id="1"]
 bounce = 0.4
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id="2"]
 radius = 30.0
 
-[node name="Ball" type="RigidDynamicBody2D"]
-physics_material_override = SubResource( 1 )
+[node name="Ball" type="RigidBody2D"]
+physics_material_override = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource( 1 )
+texture = ExtResource("1")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource("2")

@@ -1,10 +1,10 @@
 extends RigidBody3D
 
-@onready var shape_cast = $ShapeCast3D
-@onready var camera = $Target/Camera3D
-@onready var start_position = position
+@onready var shape_cast: ShapeCast3D = $ShapeCast3D
+@onready var camera: Camera3D = $Target/Camera3D
+@onready var start_position := position
 
-func _physics_process(_delta):
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed(&"exit"):
 		get_tree().quit()
 	if Input.is_action_just_pressed(&"reset_position") or global_position.y < - 6:
@@ -12,13 +12,13 @@ func _physics_process(_delta):
 		position = start_position
 		linear_velocity = Vector3.ZERO
 
-	var dir = Vector3()
+	var dir := Vector3()
 	dir.x = Input.get_axis(&"move_left", &"move_right")
 	dir.z = Input.get_axis(&"move_forward", &"move_back")
 
 	# Get the camera's transform basis, but remove the X rotation such
 	# that the Y axis is up and Z is horizontal.
-	var cam_basis = camera.global_transform.basis
+	var cam_basis := camera.global_transform.basis
 	cam_basis = cam_basis.rotated(cam_basis.x, -cam_basis.get_euler().x)
 	dir = cam_basis * dir
 
@@ -38,11 +38,10 @@ func _physics_process(_delta):
 
 
 # Test if there is a body below the player.
-func on_ground():
-	if shape_cast.is_colliding():
-		return true
+func on_ground() -> bool:
+	return shape_cast.is_colliding()
 
 
-func _on_tcube_body_entered(body):
+func _on_tcube_body_entered(body: Node) -> void:
 	if body == self:
-		get_node(^"WinText").show()
+		$WinText.visible = true

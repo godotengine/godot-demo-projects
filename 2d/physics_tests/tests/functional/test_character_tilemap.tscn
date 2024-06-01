@@ -23,7 +23,7 @@ friction = 0.0
 radius = 16.0
 
 [node name="Test" type="Node2D"]
-script = ExtResource( "1" )
+script = ExtResource("1")
 
 [node name="LabelTestType" type="Label" parent="."]
 offset_left = 14.0
@@ -31,11 +31,8 @@ offset_top = 79.0
 offset_right = 145.0
 offset_bottom = 93.0
 text = "Testing: "
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Options" parent="." instance=ExtResource( "3" )]
+[node name="Options" parent="." instance=ExtResource("3")]
 
 [node name="LabelFloor" type="Label" parent="."]
 offset_left = 14.0
@@ -43,9 +40,6 @@ offset_top = 237.929
 offset_right = 145.0
 offset_bottom = 251.929
 text = "ON FLOOR"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelControls" type="Label" parent="."]
 offset_left = 14.0
@@ -54,82 +48,77 @@ offset_right = 145.0
 offset_bottom = 277.291
 text = "LEFT/RIGHT - MOVE
 UP - JUMP"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 position = Vector2(250, 460)
 collision_mask = 2147483649
-script = ExtResource( "7" )
+script = ExtResource("7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource( "2" )
+shape = SubResource("2")
 
 [node name="CharacterBodyRay2D" type="CharacterBody2D" parent="."]
 position = Vector2(250, 460)
 collision_mask = 2147483649
-script = ExtResource( "7" )
+script = ExtResource("7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBodyRay2D"]
 position = Vector2(0, -8)
-shape = SubResource( "RectangleShape2D_jx2e1" )
+shape = SubResource("RectangleShape2D_jx2e1")
 
 [node name="CollisionShapeRay2D" type="CollisionShape2D" parent="CharacterBodyRay2D"]
 position = Vector2(0, 8)
-shape = SubResource( "RayShape2D_206f5" )
+shape = SubResource("RayShape2D_206f5")
 
 [node name="CollisionShapeRay2DLeft" type="CollisionShape2D" parent="CharacterBodyRay2D"]
 position = Vector2(-12, 8)
-shape = SubResource( "RayShape2D_206f5" )
+shape = SubResource("RayShape2D_206f5")
 
 [node name="CollisionShapeRay2DRight" type="CollisionShape2D" parent="CharacterBodyRay2D"]
 position = Vector2(12, 8)
-shape = SubResource( "RayShape2D_206f5" )
+shape = SubResource("RayShape2D_206f5")
 
-[node name="RigidDynamicBody2D" type="RigidDynamicBody2D" parent="."]
+[node name="RigidDynamicBody2D" type="RigidBody2D" parent="."]
 position = Vector2(250, 460)
 collision_mask = 2147483649
-physics_material_override = SubResource( "1" )
-contacts_reported = 4
-contact_monitor = true
+physics_material_override = SubResource("1")
 lock_rotation = true
-script = ExtResource( "6" )
+contact_monitor = true
+script = ExtResource("6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidDynamicBody2D"]
-shape = SubResource( "2" )
+shape = SubResource("2")
 
-[node name="RigidBodyRay2D" type="RigidDynamicBody2D" parent="."]
+[node name="RigidBodyRay2D" type="RigidBody2D" parent="."]
 position = Vector2(250, 460)
 collision_mask = 2147483649
-physics_material_override = SubResource( "1" )
-contacts_reported = 4
-contact_monitor = true
+physics_material_override = SubResource("1")
 lock_rotation = true
-script = ExtResource( "6" )
+contact_monitor = true
+script = ExtResource("6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBodyRay2D"]
 position = Vector2(0, -8)
-shape = SubResource( "RectangleShape2D_jx2e1" )
+shape = SubResource("RectangleShape2D_jx2e1")
 
 [node name="CollisionShapeRay2D" type="CollisionShape2D" parent="RigidBodyRay2D"]
 position = Vector2(0, 8)
-shape = SubResource( "RayShape2D_206f5" )
+shape = SubResource("RayShape2D_206f5")
 
 [node name="CollisionShapeRay2DLeft" type="CollisionShape2D" parent="RigidBodyRay2D"]
 position = Vector2(-12, 8)
-shape = SubResource( "RayShape2D_206f5" )
+shape = SubResource("RayShape2D_206f5")
 
 [node name="CollisionShapeRay2DRight" type="CollisionShape2D" parent="RigidBodyRay2D"]
 position = Vector2(12, 8)
-shape = SubResource( "RayShape2D_206f5" )
+shape = SubResource("RayShape2D_206f5")
 
 [node name="JumpTargetArea2D" type="Area2D" parent="."]
 visible = false
 position = Vector2(810, 390)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpTargetArea2D"]
-shape = SubResource( "5" )
+shape = SubResource("5")
 disabled = true
 
 [node name="FallTargetArea2D" type="Area2D" parent="."]
@@ -137,15 +126,16 @@ visible = false
 position = Vector2(250, 480)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallTargetArea2D"]
-shape = SubResource( "5" )
+shape = SubResource("5")
 disabled = true
 
-[node name="StaticSceneFlat" parent="." instance=ExtResource( "4" )]
+[node name="StaticSceneFlat" parent="." instance=ExtResource("4")]
 position = Vector2(0, 12)
 
 [node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
 scale = Vector2(2, 2)
-tile_set = ExtResource( "5" )
+tile_set = ExtResource("5")
 collision_visibility_mode = 1
 format = 2
 layer_0/tile_data = PackedInt32Array(786438, 65536, 0, 786439, 65536, 0, 786440, 65536, 0, 786441, 65536, 0, 458764, 65536, 0, 524300, 65536, 0, 589836, 65536, 0, 655372, 65536, 0, 720908, 65536, 0, 786444, 65536, 0, 851980, 65536, 0, 917516, 65536, 0, 983052, 65536, 0, 458765, 65536, 0, 524301, 65536, 0, 589837, 65536, 0, 655373, 65536, 0, 720909, 65536, 0, 786445, 65536, 0, 851981, 65536, 0, 917517, 65536, 0, 983053, 65536, 0, 458766, 65536, 0, 524302, 65536, 0, 589838, 65536, 0, 655374, 65536, 0, 720910, 65536, 0, 786446, 65536, 0, 851982, 65536, 0, 917518, 65536, 0, 983054, 65536, 0, 458767, 65536, 0, 524303, 65536, 0, 589839, 65536, 0, 655375, 65536, 0, 720911, 65536, 0, 786447, 65536, 0, 851983, 65536, 0, 917519, 65536, 0, 983055, 65536, 0, 458768, 65536, 0, 524304, 65536, 0, 589840, 65536, 0, 655376, 65536, 0, 720912, 65536, 0, 786448, 65536, 0, 851984, 65536, 0, 917520, 65536, 0, 983056, 65536, 0, 458769, 65536, 0, 524305, 65536, 0, 589841, 65536, 0, 655377, 65536, 0, 720913, 65536, 0, 786449, 65536, 0, 851985, 65536, 0, 917521, 65536, 0, 983057, 65536, 0, 458770, 65536, 0, 524306, 65536, 0, 589842, 65536, 0, 655378, 65536, 0, 720914, 65536, 0, 786450, 65536, 0, 851986, 65536, 0, 917522, 65536, 0, 983058, 65536, 0, 458771, 65536, 0, 524307, 65536, 0, 589843, 65536, 0, 655379, 65536, 0, 720915, 65536, 0, 786451, 65536, 0, 851987, 65536, 0, 917523, 65536, 0, 983059, 65536, 0, 851992, 0, 0, 851993, 0, 0, 720922, 0, 0, 851994, 0, 0, 720923, 0, 0, 851995, 0, 0, 720924, 0, 0, 720925, 0, 0)

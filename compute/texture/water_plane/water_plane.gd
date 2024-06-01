@@ -8,38 +8,38 @@ extends Area3D
 # in Godot and making use of the new Custom Texture RD API added to
 # the RenderingServer.
 #
-# If thread model is set to Multi-Threaded the code related to compute will
+# If thread model is set to Multi-Threaded, the code related to compute will
 # run on the render thread. This is needed as we want to add our logic to
 # the normal rendering pipeline for this thread.
 #
 # The effect itself is an implementation of the classic ripple effect
-# that has been around since the 90ies but in a compute shader.
+# that has been around since the 90s, but in a compute shader.
 # If someone knows if the original author ever published a paper I could
 # quote, please let me know :)
 
-@export var rain_size : float = 3.0
-@export var mouse_size : float = 5.0
-@export var texture_size : Vector2i = Vector2i(512, 512)
-@export_range(1.0, 10.0, 0.1) var damp : float = 1.0
+@export var rain_size: float = 3.0
+@export var mouse_size: float = 5.0
+@export var texture_size: Vector2i = Vector2i(512, 512)
+@export_range(1.0, 10.0, 0.1) var damp: float = 1.0
 
-var t = 0.0
-var max_t = 0.1
+var t := 0.0
+var max_t := 0.1
 
-var texture : Texture2DRD
-var next_texture : int = 0
+var texture: Texture2DRD
+var next_texture: int = 0
 
-var add_wave_point : Vector4
-var mouse_pos : Vector2
-var mouse_pressed : bool = false
+var add_wave_point: Vector4
+var mouse_pos: Vector2
+var mouse_pressed: bool = false
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	# In case we're running stuff on the rendering thread
 	# we need to do our initialisation on that thread.
 	RenderingServer.call_on_render_thread(_initialize_compute_code.bind(texture_size))
 
 	# Get our texture from our material so we set our RID.
-	var material : ShaderMaterial = $MeshInstance3D.material_override
+	var material: ShaderMaterial = $MeshInstance3D.material_override
 	if material:
 		material.set_shader_parameter("effect_texture_size", texture_size)
 
@@ -47,7 +47,7 @@ func _ready():
 		texture = material.get_shader_parameter("effect_texture")
 
 
-func _exit_tree():
+func _exit_tree() -> void:
 	# Make sure we clean up!
 	if texture:
 		texture.texture_rd_rid = RID()
@@ -55,7 +55,7 @@ func _exit_tree():
 	RenderingServer.call_on_render_thread(_free_compute_resources)
 
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	# If tool enabled, we don't want to handle our input in the editor.
 	if Engine.is_editor_hint():
 		return
@@ -67,32 +67,32 @@ func _unhandled_input(event):
 		mouse_pressed = event.pressed
 
 
-func _check_mouse_pos():
+func _check_mouse_pos() -> void:
 	# This is a mouse event, do a raycast.
-	var camera = get_viewport().get_camera_3d()
+	var camera := get_viewport().get_camera_3d()
 
-	var parameters = PhysicsRayQueryParameters3D.new()
+	var parameters := PhysicsRayQueryParameters3D.new()
 	parameters.from = camera.project_ray_origin(mouse_pos)
 	parameters.to = parameters.from + camera.project_ray_normal(mouse_pos) * 100.0
 	parameters.collision_mask = 1
 	parameters.collide_with_bodies = false
 	parameters.collide_with_areas = true
 
-	var result = get_world_3d().direct_space_state.intersect_ray(parameters)
-	if result.size() > 0:
+	var result := get_world_3d().direct_space_state.intersect_ray(parameters)
+	if not result.is_empty():
 		# Transform our intersection point.
-		var pos = global_transform.affine_inverse() * result.position
+		var pos: Vector3 = global_transform.affine_inverse() * result.position
 		add_wave_point.x = clamp(pos.x / 5.0, -0.5, 0.5) * texture_size.x + 0.5 * texture_size.x
 		add_wave_point.y = clamp(pos.z / 5.0, -0.5, 0.5) * texture_size.y + 0.5 * texture_size.y
-		add_wave_point.w = 1.0 # We have w left over so we use it to indicate mouse is over our water plane.
+		# We have w left over so we use it to indicate mouse is over our water plane.
+		add_wave_point.w = 1.0
 	else:
 		add_wave_point.x = 0.0
 		add_wave_point.y = 0.0
 		add_wave_point.w = 0.0
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	# If tool is enabled, ignore mouse input.
 	if Engine.is_editor_hint():
 		add_wave_point.w = 0.0
@@ -131,19 +131,19 @@ func _process(delta):
 ###############################################################################
 # Everything after this point is designed to run on our rendering thread.
 
-var rd : RenderingDevice
+var rd: RenderingDevice
 
-var shader : RID
-var pipeline : RID
+var shader: RID
+var pipeline: RID
 
 # We use 3 textures:
 # - One to render into
 # - One that contains the last frame rendered
 # - One for the frame before that
-var texture_rds : Array = [ RID(), RID(), RID() ]
-var texture_sets : Array = [ RID(), RID(), RID() ]
+var texture_rds: Array[RID] = [RID(), RID(), RID()]
+var texture_sets: Array[RID] = [RID(), RID(), RID()]
 
-func _create_uniform_set(texture_rd : RID) -> RID:
+func _create_uniform_set(texture_rd: RID) -> RID:
 	var uniform := RDUniform.new()
 	uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_IMAGE
 	uniform.binding = 0
@@ -152,19 +152,19 @@ func _create_uniform_set(texture_rd : RID) -> RID:
 	return rd.uniform_set_create([uniform], shader, 0)
 
 
-func _initialize_compute_code(init_with_texture_size):
+func _initialize_compute_code(init_with_texture_size: Vector2i) -> void:
 	# As this becomes part of our normal frame rendering,
 	# we use our main rendering device here.
 	rd = RenderingServer.get_rendering_device()
 
 	# Create our shader.
-	var shader_file = load("res://water_plane/water_compute.glsl")
+	var shader_file := load("res://water_plane/water_compute.glsl")
 	var shader_spirv: RDShaderSPIRV = shader_file.get_spirv()
 	shader = rd.shader_create_from_spirv(shader_spirv)
 	pipeline = rd.compute_pipeline_create(shader)
 
 	# Create our textures to manage our wave.
-	var tf : RDTextureFormat = RDTextureFormat.new()
+	var tf: RDTextureFormat = RDTextureFormat.new()
 	tf.format = RenderingDevice.DATA_FORMAT_R32_SFLOAT
 	tf.texture_type = RenderingDevice.TEXTURE_TYPE_2D
 	tf.width = init_with_texture_size.x
@@ -172,9 +172,15 @@ func _initialize_compute_code(init_with_texture_size):
 	tf.depth = 1
 	tf.array_layers = 1
 	tf.mipmaps = 1
-	tf.usage_bits = RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT + RenderingDevice.TEXTURE_USAGE_COLOR_ATTACHMENT_BIT + RenderingDevice.TEXTURE_USAGE_STORAGE_BIT + RenderingDevice.TEXTURE_USAGE_CAN_UPDATE_BIT + RenderingDevice.TEXTURE_USAGE_CAN_COPY_TO_BIT
+	tf.usage_bits = (
+			RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT |
+			RenderingDevice.TEXTURE_USAGE_COLOR_ATTACHMENT_BIT |
+			RenderingDevice.TEXTURE_USAGE_STORAGE_BIT |
+			RenderingDevice.TEXTURE_USAGE_CAN_UPDATE_BIT |
+			RenderingDevice.TEXTURE_USAGE_CAN_COPY_TO_BIT
+	)
 
-	for i in range(3):
+	for i in 3:
 		# Create our texture.
 		texture_rds[i] = rd.texture_create(tf, RDTextureView.new(), [])
 
@@ -185,10 +191,10 @@ func _initialize_compute_code(init_with_texture_size):
 		texture_sets[i] = _create_uniform_set(texture_rds[i])
 
 
-func _render_process(with_next_texture, wave_point, tex_size, damp):
+func _render_process(with_next_texture: int, wave_point: Vector4, tex_size: Vector2i, p_damp: float) -> void:
 	# We don't have structures (yet) so we need to build our push constant
 	# "the hard way"...
-	var push_constant : PackedFloat32Array = PackedFloat32Array()
+	var push_constant := PackedFloat32Array()
 	push_constant.push_back(wave_point.x)
 	push_constant.push_back(wave_point.y)
 	push_constant.push_back(wave_point.z)
@@ -196,7 +202,7 @@ func _render_process(with_next_texture, wave_point, tex_size, damp):
 
 	push_constant.push_back(tex_size.x)
 	push_constant.push_back(tex_size.y)
-	push_constant.push_back(damp)
+	push_constant.push_back(p_damp)
 	push_constant.push_back(0.0)
 
 	# Calculate our dispatch group size.
@@ -204,12 +210,14 @@ func _render_process(with_next_texture, wave_point, tex_size, damp):
 	# divisible by 8.
 	# In combination with a discard check in the shader this ensures
 	# we cover the entire texture.
-	var x_groups = (tex_size.x - 1) / 8 + 1
-	var y_groups = (tex_size.y - 1) / 8 + 1
+	@warning_ignore("integer_division")
+	var x_groups := (tex_size.x - 1) / 8 + 1
+	@warning_ignore("integer_division")
+	var y_groups := (tex_size.y - 1) / 8 + 1
 
-	var next_set = texture_sets[with_next_texture]
-	var current_set = texture_sets[(with_next_texture - 1) % 3]
-	var previous_set = texture_sets[(with_next_texture - 2) % 3]
+	var next_set := texture_sets[with_next_texture]
+	var current_set := texture_sets[(with_next_texture - 1) % 3]
+	var previous_set := texture_sets[(with_next_texture - 2) % 3]
 
 	# Run our compute shader.
 	var compute_list := rd.compute_list_begin()
@@ -227,9 +235,9 @@ func _render_process(with_next_texture, wave_point, tex_size, damp):
 	#rd.barrier(RenderingDevice.BARRIER_MASK_COMPUTE)
 
 
-func _free_compute_resources():
+func _free_compute_resources() -> void:
 	# Note that our sets and pipeline are cleaned up automatically as they are dependencies :P
-	for i in range(3):
+	for i in 3:
 		if texture_rds[i]:
 			rd.free_rid(texture_rds[i])
 

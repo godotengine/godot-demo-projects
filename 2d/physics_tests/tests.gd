@@ -1,7 +1,6 @@
 extends Node
 
-
-var _tests = [
+var _tests := [
 	{
 		"id": "Functional Tests/Shapes",
 		"path": "res://tests/functional/test_shapes.tscn",
@@ -57,7 +56,7 @@ var _tests = [
 ]
 
 
-func _ready():
-	var test_menu = $TestsMenu
-	for test in _tests:
+func _ready() -> void:
+	var test_menu: OptionMenu = $TestsMenu
+	for test: Variant in _tests:
 		test_menu.add_test(test.id, test.path)

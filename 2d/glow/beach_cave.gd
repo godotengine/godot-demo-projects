@@ -2,11 +2,11 @@ extends Node2D
 
 const CAVE_LIMIT = 1000
 
-var glow_map = preload("res://glow_map.webp")
+var glow_map := preload("res://glow_map.webp")
 
-@onready var cave = $Cave
+@onready var cave: Node2D = $Cave
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and event.button_mask > 0:
 		cave.position.x = clampf(cave.position.x + event.relative.x, -CAVE_LIMIT, 0)
 

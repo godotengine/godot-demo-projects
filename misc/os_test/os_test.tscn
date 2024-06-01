@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ds1y65r8ld026"]
+[gd_scene load_steps=4 format=3 uid="uid://ds1y65r8ld026"]
 
 [ext_resource type="Script" path="res://os_test.gd" id="1"]
 [ext_resource type="Script" path="res://actions.gd" id="4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dl4cr"]
 
 [node name="OSTest" type="Panel"]
 anchors_preset = 15
@@ -28,6 +30,8 @@ theme_override_constants/separation = 10
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+focus_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dl4cr")
 bbcode_enabled = true
 
 [node name="Actions" type="VBoxContainer" parent="HBoxContainer"]
@@ -134,17 +138,17 @@ text = "Kill Current Process"
 
 [node name="CSharpTest" type="Node" parent="."]
 
-[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/OpenShellWeb" to="HBoxContainer/Actions" method="_on_OpenShellWeb_pressed"]
-[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/OpenShellFolder" to="HBoxContainer/Actions" method="_on_OpenShellFolder_pressed"]
-[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/ChangeWindowTitle" to="HBoxContainer/Actions" method="_on_ChangeWindowTitle_pressed"]
-[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/ChangeWindowIcon" to="HBoxContainer/Actions" method="_on_ChangeWindowIcon_pressed"]
-[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/MoveWindowToForeground" to="HBoxContainer/Actions" method="_on_MoveWindowToForeground_pressed"]
-[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/RequestAttention" to="HBoxContainer/Actions" method="_on_RequestAttention_pressed"]
-[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/VibrateDeviceShort" to="HBoxContainer/Actions" method="_on_VibrateDeviceShort_pressed"]
-[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/VibrateDeviceLong" to="HBoxContainer/Actions" method="_on_VibrateDeviceLong_pressed"]
-[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/AddGlobalMenuItems" to="HBoxContainer/Actions" method="_on_AddGlobalMenuItems_pressed"]
-[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/RemoveGlobalMenuItem" to="HBoxContainer/Actions" method="_on_RemoveGlobalMenuItem_pressed"]
-[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/GetClipboard" to="HBoxContainer/Actions" method="_on_GetClipboard_pressed"]
-[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/SetClipboard" to="HBoxContainer/Actions" method="_on_SetClipboard_pressed"]
-[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/DisplayAlert" to="HBoxContainer/Actions" method="_on_DisplayAlert_pressed"]
-[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/KillCurrentProcess" to="HBoxContainer/Actions" method="_on_KillCurrentProcess_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/OpenShellWeb" to="HBoxContainer/Actions" method="_on_open_shell_web_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/OpenShellFolder" to="HBoxContainer/Actions" method="_on_open_shell_folder_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/ChangeWindowTitle" to="HBoxContainer/Actions" method="_on_change_window_title_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/ChangeWindowIcon" to="HBoxContainer/Actions" method="_on_change_window_icon_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/MoveWindowToForeground" to="HBoxContainer/Actions" method="_on_move_window_to_foreground_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/RequestAttention" to="HBoxContainer/Actions" method="_on_request_attention_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/VibrateDeviceShort" to="HBoxContainer/Actions" method="_on_vibrate_device_short_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/VibrateDeviceLong" to="HBoxContainer/Actions" method="_on_vibrate_device_long_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/AddGlobalMenuItems" to="HBoxContainer/Actions" method="_on_add_global_menu_items_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/RemoveGlobalMenuItem" to="HBoxContainer/Actions" method="_on_remove_global_menu_item_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/GetClipboard" to="HBoxContainer/Actions" method="_on_get_clipboard_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/SetClipboard" to="HBoxContainer/Actions" method="_on_set_clipboard_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/DisplayAlert" to="HBoxContainer/Actions" method="_on_display_alert_pressed"]
+[connection signal="pressed" from="HBoxContainer/Actions/GridContainer/KillCurrentProcess" to="HBoxContainer/Actions" method="_on_kill_current_process_pressed"]

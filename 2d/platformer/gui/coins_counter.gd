@@ -1,5 +1,5 @@
-class_name CoinsCounter extends Panel
-
+class_name CoinsCounter
+extends Panel
 
 var _coins_collected: int = 0
 
