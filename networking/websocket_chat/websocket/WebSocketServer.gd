@@ -1,5 +1,5 @@
-class_name Node
-extends WebSocketServer
+class_name NWebSocketServer
+extends Node
 
 signal message_received(peer_id: int, message: String)
 signal client_connected(peer_id: int)

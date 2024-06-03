@@ -1,5 +1,5 @@
-class_name Node
-extends WebSocketClient
+class_name WebSocketClient
+extends Node
 
 @export var handshake_headers: PackedStringArray
 @export var supported_protocols: PackedStringArray

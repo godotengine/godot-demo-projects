@@ -1,5 +1,5 @@
-class_name RefCounted
-extends JoyMapping
+class_name JoyMapping
+extends RefCounted
 
 enum Type {
 	NONE,

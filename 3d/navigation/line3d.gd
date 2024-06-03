@@ -1,5 +1,6 @@
-class_name MeshInstance3D
-extends Line3D
+class_name Line3D
+extends MeshInstance3D
+
 
 func _ready() -> void:
 	mesh = ImmediateMesh.new()

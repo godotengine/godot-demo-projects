@@ -1,5 +1,5 @@
 # Handles Player-specific behavior like moving. We calculate such things with CharacterBody3D.
-class_name PlayerMath25D # No icon necessary
+class_name PlayerMath25D  # No icon necessary
 extends CharacterBody3D
 
 var vertical_speed := 0.0
