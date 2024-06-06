@@ -14,6 +14,6 @@ func fire():
 
 	$CooldownTimer.start()
 	var new_bullet = bullet.instance()
-	add_child(new_bullet)
 	new_bullet.position = global_position
 	new_bullet.direction = owner.look_direction
+	add_child(new_bullet)

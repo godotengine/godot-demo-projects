@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://level/obstacle.png" type="Texture" id=2]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=3]
@@ -36,6 +36,21 @@ extents = Vector2( 8, 8 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 8, 8 )
 
+[sub_resource type="Animation" id=13]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 184, 152 ) ]
+}
+
 [sub_resource type="Animation" id=4]
 length = 10.0
 loop = true
@@ -52,10 +67,8 @@ tracks/0/keys = {
 "values": [ Vector2( 184, 152 ), Vector2( 184, 152 ), Vector2( 328.086, 152 ), Vector2( 328.086, 152 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "leftright"
-length = 10.0
-loop = true
+[sub_resource type="Animation" id=14]
+resource_name = "RESET"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
@@ -63,10 +76,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 5, 6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 184, 152 ), Vector2( 184, 152 ), Vector2( 328.086, 152 ), Vector2( 328.086, 152 ) ]
+"values": [ Vector2( 88.3493, 296 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -128,7 +141,7 @@ tile_data = PoolIntArray( -720908, 0, 0, -720907, 0, 0, -720906, 0, 0, -720905, 
 position = Vector2( 233.06, 223.436 )
 
 [node name="MovingPlatform1" type="KinematicBody2D" parent="."]
-position = Vector2( 274.142, 152 )
+position = Vector2( 184, 152 )
 
 [node name="Collision" type="CollisionShape2D" parent="MovingPlatform1"]
 shape = SubResource( 3 )
@@ -139,10 +152,11 @@ texture = ExtResource( 2 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform1"]
 autoplay = "leftright"
 playback_process_mode = 0
+anims/RESET = SubResource( 13 )
 anims/leftright = SubResource( 4 )
 
 [node name="MovingPlatform2" type="KinematicBody2D" parent="."]
-position = Vector2( 88.3493, 284.689 )
+position = Vector2( 88.3493, 296 )
 
 [node name="Collision" type="CollisionShape2D" parent="MovingPlatform2"]
 shape = SubResource( 3 )
@@ -153,7 +167,7 @@ texture = ExtResource( 2 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform2"]
 autoplay = "updown"
 playback_process_mode = 0
-anims/leftright = SubResource( 5 )
+anims/RESET = SubResource( 14 )
 anims/updown = SubResource( 6 )
 
 [node name="Princess" type="Area2D" parent="."]
@@ -266,5 +280,6 @@ shape = SubResource( 12 )
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 265, 247 )
 current = true
+process_mode = 0
 
 [connection signal="body_entered" from="Princess" to="Princess" method="_on_body_entered"]

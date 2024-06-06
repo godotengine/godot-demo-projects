@@ -17,6 +17,7 @@ func _physics_process(delta):
 		get_tree().quit()
 	if Input.is_action_just_pressed("reset_position"):
 		translation = start_position
+		reset_physics_interpolation()
 
 	var dir = Vector3()
 	dir.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
