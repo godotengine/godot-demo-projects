@@ -1,0 +1,121 @@
+[gd_scene load_steps=17 format=3 uid="uid://bpfg1l8j4i08u"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_o0pyp"]
+[ext_resource type="Texture2D" uid="uid://br4k6sn2rvgj" path="res://pattern.png" id="1_r22bv"]
+[ext_resource type="Script" path="res://post_process_shader.gd" id="1_rkpno"]
+[ext_resource type="Script" path="res://post_process_grayscale.gd" id="2_pwabc"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lnmx8"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_guc0r"]
+sky_material = SubResource("ProceduralSkyMaterial_lnmx8")
+
+[sub_resource type="Environment" id="Environment_fjaix"]
+background_mode = 2
+sky = SubResource("Sky_guc0r")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_d6jju"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("2_pwabc")
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_ek4c3"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = false
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("1_rkpno")
+shader_code = "	// Invert color.
+	color.rgb = vec3(1.0 - color.r, 1.0 - color.g, 1.0 - color.b);
+"
+
+[sub_resource type="Compositor" id="Compositor_xxhi4"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_d6jju"), SubResource("CompositorEffect_ek4c3")])
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xlpoj"]
+albedo_color = Color(0, 0.684707, 0.148281, 1)
+albedo_texture = ExtResource("1_r22bv")
+texture_filter = 5
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_82vj7"]
+material = SubResource("StandardMaterial3D_xlpoj")
+size = Vector2(10, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqyxc"]
+albedo_color = Color(0.946837, 0.315651, 0.66999, 1)
+albedo_texture = ExtResource("1_r22bv")
+texture_filter = 5
+
+[sub_resource type="SphereMesh" id="SphereMesh_iuyuf"]
+material = SubResource("StandardMaterial3D_aqyxc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_188mc"]
+albedo_color = Color(0.436357, 0.305476, 0.999959, 1)
+albedo_texture = ExtResource("1_r22bv")
+texture_filter = 5
+
+[sub_resource type="BoxMesh" id="BoxMesh_h605a"]
+material = SubResource("StandardMaterial3D_188mc")
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_o0pyp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+shadow_bias = 0.04
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 15.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fjaix")
+compositor = SubResource("Compositor_xxhi4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.129409, 0.482963, -1.54268e-08, 0.965926, 0.258819, -0.5, -0.224144, 0.836516, 1, 1.2, 2)
+fov = 60.0
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.01202)
+mesh = SubResource("PlaneMesh_82vj7")
+
+[node name="Sphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.796)
+mesh = SubResource("SphereMesh_iuyuf")
+
+[node name="Box" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.333, 0.5, -0.392)
+mesh = SubResource("BoxMesh_h605a")
+
+[node name="Info" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 64.0
+offset_bottom = 47.0
+theme_override_constants/outline_size = 4
+text = "Grayscale effect: Enabled
+Shader effect: Disabled"
+
+[node name="Help" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -47.0
+offset_right = 175.0
+offset_bottom = -24.0
+grow_vertical = 0
+theme_override_constants/outline_size = 4
+text = "G: Toggle grayscale effect
+S: Toggle shader effect"
