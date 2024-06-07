@@ -1,4 +1,4 @@
-# Compositor effect post process
+# Compositor Effects (Post-Processing)
 
 This demo shows how to use compositor effects to create a post process.
 This functionality only works in render device based renderers such as the Forward+ renderer.
