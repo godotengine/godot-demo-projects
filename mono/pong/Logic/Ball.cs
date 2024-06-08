@@ -19,7 +19,7 @@ public partial class Ball : Area2D
 
     public override void _Process(double delta)
     {
-        _speed += delta * 5;
+        _speed += delta * 4;
         Position += (float)(_speed * delta) * direction;
     }
 
