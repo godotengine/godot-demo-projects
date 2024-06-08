@@ -9,16 +9,16 @@
 [ext_resource type="Script" path="res://Logic/CeilingFloor.cs" id="8"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(4, 16)
+size = Vector2(8, 32)
 
-[sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(4, 4)
+[sub_resource type="CircleShape2D" id="CircleShape2D_syhn3"]
+radius = 4.0
 
 [sub_resource type="RectangleShape2D" id="3"]
-size = Vector2(10, 200)
+size = Vector2(10, 400)
 
 [sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(320, 10)
+size = Vector2(640, 9)
 
 [node name="Pong" type="Node2D"]
 
@@ -57,7 +57,7 @@ script = ExtResource("4")
 texture = ExtResource("5")
 
 [node name="Collision" type="CollisionShape2D" parent="Ball"]
-shape = SubResource("2")
+shape = SubResource("CircleShape2D_syhn3")
 
 [node name="Separator" type="Sprite2D" parent="."]
 position = Vector2(320, 200)
@@ -70,6 +70,7 @@ position = Vector2(-10, 200)
 script = ExtResource("7")
 
 [node name="Collision" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(5, 0)
 shape = SubResource("3")
 
 [node name="RightWall" type="Area2D" parent="."]
@@ -77,6 +78,7 @@ position = Vector2(650, 200)
 script = ExtResource("7")
 
 [node name="Collision" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(-5, 0)
 shape = SubResource("3")
 
 [node name="Ceiling" type="Area2D" parent="."]
@@ -84,14 +86,15 @@ position = Vector2(320, -10)
 script = ExtResource("8")
 
 [node name="Collision" type="CollisionShape2D" parent="Ceiling"]
+position = Vector2(0, 5)
 shape = SubResource("4")
 
 [node name="Floor" type="Area2D" parent="."]
 position = Vector2(320, 410)
 script = ExtResource("8")
-_bounceDirection = -1
 
 [node name="Collision" type="CollisionShape2D" parent="Floor"]
+position = Vector2(0, -6)
 shape = SubResource("4")
 
 [connection signal="area_entered" from="Left" to="Left" method="OnAreaEntered"]
