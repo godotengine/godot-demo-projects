@@ -6,7 +6,7 @@ public partial class CeilingFloor : Area2D
 	{
 		if (area is Ball ball)
 		{
-			ball.direction = new Vector2(ball.direction.X, -ball.direction.Y);
+			ball.Direction = new Vector2(ball.Direction.X, -ball.Direction.Y);
 		}
 	}
 }
