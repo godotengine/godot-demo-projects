@@ -1,6 +1,6 @@
 extends Area2D
 
-const MOVE_SPEED = 100
+const MOVE_SPEED = 100.0
 
 var _ball_dir: int
 var _up: String
