@@ -1,0 +1,436 @@
+[gd_scene load_steps=26 format=3 uid="uid://c364yor2q0j1a"]
+
+[ext_resource type="Script" path="res://options.gd" id="1_20y27"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y6uuk"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.1984, 0.242987, 0.32, 1)
+ground_bottom_color = Color(0.156863, 0.160784, 0.2, 1)
+ground_horizon_color = Color(0.156863, 0.160784, 0.2, 1)
+sun_angle_max = 6.0
+sun_curve = 3.51379
+
+[sub_resource type="Sky" id="Sky_lexvt"]
+sky_material = SubResource("ProceduralSkyMaterial_y6uuk")
+
+[sub_resource type="Environment" id="Environment_lqw28"]
+background_mode = 2
+sky = SubResource("Sky_lexvt")
+tonemap_mode = 2
+tonemap_white = 6.0
+glow_enabled = true
+glow_intensity = 0.09
+glow_blend_mode = 1
+fog_enabled = true
+fog_density = 0.025
+fog_aerial_perspective = 1.0
+adjustment_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_ff240"]
+size = Vector3(512, 1, 512)
+
+[sub_resource type="Gradient" id="Gradient_sho7j"]
+offsets = PackedFloat32Array(0.260163, 0.398374, 0.536585, 0.699187, 0.829268, 1)
+colors = PackedColorArray(0.336608, 0.336608, 0.336608, 1, 0.589096, 0.589095, 0.589096, 1, 0.521141, 0.52114, 0.521141, 1, 0.762404, 0.762404, 0.762403, 1, 0.48179, 0.48179, 0.481789, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dm8vr"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hbgko"]
+width = 1024
+height = 1024
+seamless = true
+color_ramp = SubResource("Gradient_sho7j")
+noise = SubResource("FastNoiseLite_dm8vr")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mq5hl"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tdt10"]
+width = 1024
+height = 1024
+seamless = true
+as_normal_map = true
+bump_strength = 10.0
+noise = SubResource("FastNoiseLite_mq5hl")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ldfp"]
+albedo_texture = SubResource("NoiseTexture2D_hbgko")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_tdt10")
+uv1_scale = Vector3(512, 256, 1)
+texture_filter = 5
+
+[sub_resource type="BoxMesh" id="BoxMesh_6wvpc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l4mxj"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(2, 1.5, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_qnmea"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kssqo"]
+metallic = 1.0
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4geml"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3eq2w"]
+metallic = 1.0
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uqci1"]
+albedo_color = Color(0.501961, 0.501961, 0.501961, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8sl4i"]
+albedo_color = Color(0.501961, 0.501961, 0.501961, 1)
+metallic = 1.0
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pauuc"]
+albedo_color = Color(1, 0.25098, 0.25098, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8w4e2"]
+albedo_color = Color(1, 0.25098, 0.25098, 1)
+metallic = 1.0
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cb5og"]
+albedo_color = Color(0.25098, 1, 0.25098, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ah8ww"]
+albedo_color = Color(0.25098, 1, 0.25098, 1)
+metallic = 1.0
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ako3b"]
+albedo_color = Color(0.25098, 0.25098, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_suuj5"]
+albedo_color = Color(0.25098, 0.25098, 1, 1)
+metallic = 1.0
+roughness = 0.5
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866126, 0.13782, -0.480448, 0.0352591, 0.941991, 0.333781, 0.49858, -0.306037, 0.811024, -2.58974, 2.10013, -4.66397)
+light_color = Color(0.776471, 0.917647, 1, 1)
+light_energy = 0.4
+shadow_enabled = true
+shadow_bias = 0.04
+shadow_blur = 2.0
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 12.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lqw28")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.4, 1)
+mesh = SubResource("BoxMesh_ff240")
+surface_material_override/0 = SubResource("StandardMaterial3D_4ldfp")
+
+[node name="Testers" type="Node3D" parent="."]
+
+[node name="GlowingBox" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, 0)
+mesh = SubResource("BoxMesh_6wvpc")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_l4mxj")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Testers/GlowingBox"]
+light_energy = 2.0
+shadow_blur = 2.0
+
+[node name="GlowingSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, 0)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_l4mxj")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Testers/GlowingSphere"]
+light_energy = 2.0
+shadow_blur = 2.0
+
+[node name="MirrorSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.5, -1)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kssqo")
+
+[node name="WhiteBox" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, 0)
+mesh = SubResource("BoxMesh_6wvpc")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4geml")
+
+[node name="WhiteSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.5, 0)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4geml")
+
+[node name="WhiteMetallicSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.5, -1)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_3eq2w")
+
+[node name="GrayBox" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 0)
+mesh = SubResource("BoxMesh_6wvpc")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_uqci1")
+
+[node name="GraySphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, 0)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_uqci1")
+
+[node name="GrayMetallicSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -1)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_8sl4i")
+
+[node name="RedBox" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 0)
+mesh = SubResource("BoxMesh_6wvpc")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_pauuc")
+
+[node name="RedSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.5, 0)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_pauuc")
+
+[node name="RedMetallicSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.5, -1)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_8w4e2")
+
+[node name="GreenBox" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_6wvpc")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_cb5og")
+
+[node name="GreenSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_cb5og")
+
+[node name="GreenMetallicSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -1)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ah8ww")
+
+[node name="BlueBox" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, 0)
+mesh = SubResource("BoxMesh_6wvpc")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ako3b")
+
+[node name="BlueSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.5, 0)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ako3b")
+
+[node name="BlueMetallicSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.5, -1)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_suuj5")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.942327, -0.0710023, 0.327076, 6.57846e-09, 0.977239, 0.212141, -0.334694, -0.199906, 0.920879, 0.669204, 2.35, 4.04922)
+fov = 50.0
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2, 0)
+size = Vector3(512, 512, 512)
+enable_shadows = true
+
+[node name="Options" type="VBoxContainer" parent="." node_paths=PackedStringArray("world_environment")]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 576.0
+offset_bottom = 82.0
+script = ExtResource("1_20y27")
+world_environment = NodePath("../WorldEnvironment")
+
+[node name="TonemapMode" type="HBoxContainer" parent="Options"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/TonemapMode"]
+layout_mode = 2
+text = "Tonemap Mode"
+
+[node name="OptionButton" type="OptionButton" parent="Options/TonemapMode"]
+layout_mode = 2
+item_count = 4
+selected = 2
+popup/item_0/text = "Linear"
+popup/item_0/id = 0
+popup/item_1/text = "Reinhard"
+popup/item_1/id = 1
+popup/item_2/text = "Filmic"
+popup/item_2/id = 2
+popup/item_3/text = "ACES"
+popup/item_3/id = 3
+
+[node name="Exposure" type="HBoxContainer" parent="Options/TonemapMode"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Options/TonemapMode/Exposure"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Exposure"
+horizontal_alignment = 2
+
+[node name="HSlider" type="HSlider" parent="Options/TonemapMode/Exposure"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 1.0
+
+[node name="Value" type="Label" parent="Options/TonemapMode/Exposure"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+text = "1.0"
+
+[node name="Whitepoint" type="HBoxContainer" parent="Options/TonemapMode"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Options/TonemapMode/Whitepoint"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Whitepoint"
+horizontal_alignment = 2
+
+[node name="HSlider" type="HSlider" parent="Options/TonemapMode/Whitepoint"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.1
+max_value = 16.0
+step = 0.1
+value = 1.0
+
+[node name="Value" type="Label" parent="Options/TonemapMode/Whitepoint"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+text = "6.0"
+
+[node name="ColorCorrection" type="HBoxContainer" parent="Options"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/ColorCorrection"]
+layout_mode = 2
+text = "Color Correction"
+
+[node name="OptionButton" type="OptionButton" parent="Options/ColorCorrection"]
+layout_mode = 2
+item_count = 20
+selected = 0
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "Detect White Clipping (1D)"
+popup/item_1/id = 1
+popup/item_2/text = "Frozen (1D)"
+popup/item_2/id = 2
+popup/item_3/text = "Heat (1D)"
+popup/item_3/id = 3
+popup/item_4/text = "Incandescent (1D)"
+popup/item_4/id = 4
+popup/item_5/text = "Posterized (1D)"
+popup/item_5/id = 5
+popup/item_6/text = "Posterized Outline (1D)"
+popup/item_6/id = 6
+popup/item_7/text = "Rainbow (1D)"
+popup/item_7/id = 7
+popup/item_8/text = "Toxic (1D)"
+popup/item_8/id = 8
+popup/item_9/text = "Brighten Shadows (3D)"
+popup/item_9/id = 9
+popup/item_10/text = "Burned Blue (3D)"
+popup/item_10/id = 10
+popup/item_11/text = "Cold Color (3D)"
+popup/item_11/id = 11
+popup/item_12/text = "Detect White Clipping (3D)"
+popup/item_12/id = 12
+popup/item_13/text = "Dithered (3D)"
+popup/item_13/id = 13
+popup/item_14/text = "Hue Shift (3D)"
+popup/item_14/id = 14
+popup/item_15/text = "Posterized (3D)"
+popup/item_15/id = 15
+popup/item_16/text = "Sepia (3D)"
+popup/item_16/id = 16
+popup/item_17/text = "Stressed (3D)"
+popup/item_17/id = 17
+popup/item_18/text = "Warm Color (3D)"
+popup/item_18/id = 18
+popup/item_19/text = "Yellowed (3D)"
+popup/item_19/id = 19
+
+[node name="Saturation" type="HBoxContainer" parent="Options/ColorCorrection"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Options/ColorCorrection/Saturation"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Saturation"
+horizontal_alignment = 2
+
+[node name="HSlider" type="HSlider" parent="Options/ColorCorrection/Saturation"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = -2.0
+max_value = 2.0
+step = 0.1
+value = 1.0
+tick_count = 3
+
+[node name="Value" type="Label" parent="Options/ColorCorrection/Saturation"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+text = "1.0"
+
+[node name="Debanding" type="CheckButton" parent="Options"]
+layout_mode = 2
+size_flags_horizontal = 0
+button_pressed = true
+text = "Debanding"
+
+[connection signal="item_selected" from="Options/TonemapMode/OptionButton" to="Options" method="_on_tonemap_mode_item_selected"]
+[connection signal="value_changed" from="Options/TonemapMode/Exposure/HSlider" to="Options" method="_on_exposure_value_changed"]
+[connection signal="value_changed" from="Options/TonemapMode/Whitepoint/HSlider" to="Options" method="_on_whitepoint_value_changed"]
+[connection signal="item_selected" from="Options/ColorCorrection/OptionButton" to="Options" method="_on_color_correction_item_selected"]
+[connection signal="value_changed" from="Options/ColorCorrection/Saturation/HSlider" to="Options" method="_on_saturation_value_changed"]
+[connection signal="toggled" from="Options/Debanding" to="Options" method="_on_debanding_toggled"]
