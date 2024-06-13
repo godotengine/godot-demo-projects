@@ -9,6 +9,7 @@ const DECELERATION = 4
 @onready var gravity := float(-ProjectSettings.get_setting("physics/3d/default_gravity"))
 @onready var start_position := position
 
+
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed(&"exit"):
 		get_tree().quit()
@@ -16,6 +17,10 @@ func _physics_process(delta: float) -> void:
 		# Pressed the reset key or fell off the ground.
 		position = start_position
 		velocity = Vector3.ZERO
+		# We teleported the player on the lines above. Reset interpolation
+		# to prevent it from interpolating from the old player position
+		# to the new position.
+		reset_physics_interpolation()
 
 	var dir := Vector3()
 	dir.x = Input.get_axis(&"move_left", &"move_right")
