@@ -1,6 +1,6 @@
 extends Button
 
-@export_file var scene_to_change_to: String = null
+@export_file var scene_to_change_to: String = ""
 
 
 func _ready():
@@ -8,5 +8,5 @@ func _ready():
 
 
 func change_scene():
-	if scene_to_change_to != null:
-		get_tree().change_scene(scene_to_change_to)
+	if scene_to_change_to != "":
+		get_tree().change_scene_to_file(scene_to_change_to)
