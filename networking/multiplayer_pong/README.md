@@ -10,7 +10,7 @@ Renderer: Compatibility
 
 Note: The non-multiplayer version is available [here](https://github.com/godotengine/godot-demo-projects/tree/master/2d/pong).
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/138
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2798
 
 ## Screenshots
 

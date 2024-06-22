@@ -8,7 +8,9 @@ or arrow keys to move.
 
 Language: GDScript
 
-Renderer: Vulkan
+Renderer: Forward+
+
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2737
 
 ## How does it work?
 

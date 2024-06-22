@@ -12,6 +12,8 @@ Language: GDScript
 
 Renderer: Forward+
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2733
+
 ## Screenshots
 
 ![Screenshot](screenshots/3d_lights_and_shadows.webp)

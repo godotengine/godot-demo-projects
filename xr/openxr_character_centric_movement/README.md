@@ -7,6 +7,8 @@ Language: GDScript
 
 Renderer: Compatibility
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2809
+
 ## How does it work?
 
 With modern VR equipment the user is able to move around a large playspace.

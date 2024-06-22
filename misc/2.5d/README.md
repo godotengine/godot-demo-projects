@@ -10,7 +10,7 @@ Renderer: Compatibility
 
 Note: There is a C# version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/2.5d).
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/583
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2783
 
 ## How does it work?
 

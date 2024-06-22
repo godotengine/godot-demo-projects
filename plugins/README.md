@@ -12,7 +12,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/585
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2802
 
 # How does it work?
 

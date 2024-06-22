@@ -9,6 +9,8 @@ Language: GDScript
 
 Renderer: Forward+
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2764
+
 > Note: this demo requires Godot 4.2 or later
 
 ## Screenshots

@@ -11,4 +11,4 @@ Renderer: Compatibility
 Note: There is a C# version available
 [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/android_iap).
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/532
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2792

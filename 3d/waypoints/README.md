@@ -12,9 +12,9 @@ No Viewport or Sprite3D nodes are used in this demo.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/889
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2756
 
 ## Screenshots
 
