@@ -6,7 +6,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/128
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2804
 
 ## How does it work?
 

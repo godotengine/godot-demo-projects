@@ -14,8 +14,6 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/537
-
 ## Protocol
 
 The protocol is JSON based, and uses messages in the form:

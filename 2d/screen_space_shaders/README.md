@@ -7,7 +7,7 @@ Language: [Godot shader language](https://docs.godotengine.org/en/latest/tutoria
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/122
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2730
 
 ## Screenshots
 

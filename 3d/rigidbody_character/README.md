@@ -7,9 +7,9 @@ impossible with a KinematicBody.
 
 Language: GDScript
 
-Renderer: GLES 3
+Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/1291
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2750
 
 ## How does it work?
 

@@ -6,6 +6,8 @@ Language: GDScript
 
 Renderer: Compatibility
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2763
+
 ## How does it work?
 
 It uses `tts_*()` methods of the [`DisplayServer`](https://docs.godotengine.org/en/latest/classes/class_displayserver.html) singleton

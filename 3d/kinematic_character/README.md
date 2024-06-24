@@ -5,9 +5,9 @@ This is similar to the 3D platformer demo.
 
 Language: GDScript
 
-Renderer: GLES 3
+Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/126
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2739
 
 ## How does it work?
 

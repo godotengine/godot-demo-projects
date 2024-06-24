@@ -10,7 +10,7 @@ Renderer: Compatibility
 
 Note: There is a C# version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/pong).
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/121
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2728
 
 ## How does it work?
 

@@ -7,9 +7,9 @@ Code is provided for polyline following in 3D.
 
 Language: GDScript
 
-Renderer: Vulkan Clustered
+Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/124
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2743
 
 ## Screenshots
 

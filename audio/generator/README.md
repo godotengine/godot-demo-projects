@@ -8,7 +8,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/526
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2759
 
 ## How does it work?
 

@@ -6,7 +6,7 @@ in Godot by mixing 2D and 3D nodes. It also adds a
 
 Language: [C#](https://docs.godotengine.org/en/latest/tutorials/scripting/c_sharp/index.html) and a little bit of GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
 Note: There is a GDScript version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/misc/2.5d).
 

@@ -7,4 +7,4 @@ Languages: All have GDScript, OpenSimplexNoise has
 OS test has some
 [C#](https://docs.godotengine.org/en/latest/tutorials/scripting/c_sharp/index.html)
 
-Renderers: All are Compatibility
+Renderers: Large World Coordinates uses Mobile, the rest use Compatibility

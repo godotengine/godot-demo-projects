@@ -26,7 +26,9 @@ Included settings are:
 
 Language: GDScript
 
-Renderer: Vulkan Clustered
+Renderer: Forward+
+
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2738
 
 ## Screenshots
 

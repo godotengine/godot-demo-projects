@@ -5,9 +5,9 @@ inspired by others such as Minecraft.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/676
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2755
 
 ## How does it work?
 

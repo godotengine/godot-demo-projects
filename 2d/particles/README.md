@@ -6,7 +6,7 @@ Language: GDScript
 
 Renderer: Mobile
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/118
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2724
 
 ## How does it work?
 

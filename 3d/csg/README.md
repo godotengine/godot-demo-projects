@@ -6,7 +6,9 @@ CSG can be used to [prototype level designs within the 3D editor](https://docs.g
 
 Language: GDScript
 
-Renderer: Vulkan Clustered
+Renderer: Forward+
+
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2735
 
 ## Screenshots
 

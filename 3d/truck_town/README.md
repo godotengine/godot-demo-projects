@@ -19,9 +19,9 @@ brake/reverse (this also temporarily stops acceleration).
 
 Language: GDScript
 
-Renderer: Forward+ on desktop, Mobile on mobile
+Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/524
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2752
 
 ## How does it work?
 

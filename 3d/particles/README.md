@@ -5,7 +5,9 @@ This includes particle collision, attractors, trails and subemitters.
 
 Language: GDScript
 
-Renderer: Vulkan Clustered
+Renderer: Forward+
+
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2745
 
 ## Screenshots
 

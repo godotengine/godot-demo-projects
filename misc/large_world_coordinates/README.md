@@ -22,6 +22,8 @@ Languages: GDScript
 
 Renderer: Mobile
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2786
+
 ## Screenshots
 
 ![Large World Coordinates without double-precision engine build](screenshots/large_world_coordinates_single_precision_build.webp)
