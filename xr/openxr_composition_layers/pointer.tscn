@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl6m21y2uldtf"]
+
+[ext_resource type="Shader" path="res://pointer.gdshader" id="1_u1f3u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pwb3i"]
+render_priority = 0
+shader = ExtResource("1_u1f3u")
+shader_parameter/color = Color(1, 0, 0, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1je57"]
+size = Vector3(0.01, 0.01, 1)
+
+[node name="Pointer" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+material_override = SubResource("ShaderMaterial_pwb3i")
+mesh = SubResource("BoxMesh_1je57")

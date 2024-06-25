@@ -1,0 +1,120 @@
+[gd_scene load_steps=16 format=3 uid="uid://gybusi3kmss"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_oboy8"]
+[ext_resource type="Script" path="res://start_vr.gd" id="1_xxyg6"]
+[ext_resource type="PackedScene" uid="uid://cenb0bfok13vx" path="res://ui.tscn" id="2_ee2ui"]
+[ext_resource type="Texture2D" uid="uid://rek0t7kubpx4" path="res://assets/pattern.png" id="3_l16dp"]
+[ext_resource type="Script" path="res://handle_pointers.gd" id="4_211j6"]
+[ext_resource type="PackedScene" uid="uid://cl6m21y2uldtf" path="res://pointer.tscn" id="4_qvtse"]
+[ext_resource type="Shader" path="res://pointer.gdshader" id="5_gtvna"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_401xc"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_v0f0v"]
+sky_material = SubResource("ProceduralSkyMaterial_401xc")
+
+[sub_resource type="Environment" id="Environment_niqal"]
+background_mode = 2
+sky = SubResource("Sky_v0f0v")
+tonemap_mode = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_078nk"]
+radius = 0.02
+height = 0.04
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j0iib"]
+resource_local_to_scene = true
+resource_name = "Left hand pointer material"
+render_priority = 0
+shader = ExtResource("5_gtvna")
+shader_parameter/color = Color(1, 0, 0, 0.5)
+shader_parameter/energy = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yobup"]
+resource_local_to_scene = true
+resource_name = "Right hand pointer material"
+render_priority = 0
+shader = ExtResource("5_gtvna")
+shader_parameter/color = Color(1, 0, 0, 0.5)
+shader_parameter/energy = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2jnxs"]
+albedo_color = Color(0.012593, 0.294147, 0, 1)
+albedo_texture = ExtResource("3_l16dp")
+uv1_scale = Vector3(100, 100, 100)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_leufb"]
+material = SubResource("StandardMaterial3D_2jnxs")
+size = Vector2(1000, 1000)
+subdivide_width = 15
+subdivide_depth = 15
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_oboy8")
+
+[node name="StartVR" type="Node3D" parent="."]
+script = ExtResource("1_xxyg6")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_niqal")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+
+[node name="UIViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(1024, 512)
+render_target_update_mode = 4
+
+[node name="UI" parent="UIViewport" instance=ExtResource("2_ee2ui")]
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+current = true
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+current = true
+
+[node name="LeftHand" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+pose = &"aim"
+show_when_tracked = true
+
+[node name="HandMesh" type="MeshInstance3D" parent="XROrigin3D/LeftHand"]
+mesh = SubResource("SphereMesh_078nk")
+
+[node name="Pointer" parent="XROrigin3D/LeftHand" instance=ExtResource("4_qvtse")]
+visible = false
+material_override = SubResource("ShaderMaterial_j0iib")
+
+[node name="RightHand" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"right_hand"
+pose = &"aim"
+show_when_tracked = true
+
+[node name="HandMesh" type="MeshInstance3D" parent="XROrigin3D/RightHand"]
+mesh = SubResource("SphereMesh_078nk")
+
+[node name="Pointer" parent="XROrigin3D/RightHand" instance=ExtResource("4_qvtse")]
+material_override = SubResource("ShaderMaterial_yobup")
+
+[node name="OpenXRCompositionLayerEquirect" type="OpenXRCompositionLayerEquirect" parent="XROrigin3D" node_paths=PackedStringArray("layer_viewport", "controller")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+layer_viewport = NodePath("../../UIViewport")
+alpha_blend = true
+radius = 2.0
+upper_vertical_angle = 0.436332
+lower_vertical_angle = 0.436332
+script = ExtResource("4_211j6")
+controller = NodePath("../RightHand")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_leufb")
+
+[connection signal="button_pressed" from="XROrigin3D/LeftHand" to="." method="_on_left_hand_button_pressed"]
+[connection signal="button_pressed" from="XROrigin3D/RightHand" to="." method="_on_right_hand_button_pressed"]
