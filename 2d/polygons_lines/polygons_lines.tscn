@@ -1,0 +1,160 @@
+[gd_scene load_steps=12 format=3 uid="uid://sso1dr5jdq5r"]
+
+[ext_resource type="Texture2D" uid="uid://vc1ox5j7i4ht" path="res://line_10px.png" id="1"]
+[ext_resource type="Script" path="res://polygons_lines.gd" id="1_jv8u4"]
+[ext_resource type="Texture2D" uid="uid://cxdixutgi5uhq" path="res://line_30px.png" id="2"]
+
+[sub_resource type="FastNoiseLite" id="5"]
+frequency = 0.25
+fractal_octaves = 9
+
+[sub_resource type="NoiseTexture2D" id="6"]
+seamless = true
+noise = SubResource("5")
+
+[sub_resource type="Gradient" id="7"]
+
+[sub_resource type="GradientTexture2D" id="8"]
+gradient = SubResource("7")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.5375, 0.491667)
+fill_to = Vector2(0.6375, 0.425)
+repeat = 1
+
+[sub_resource type="Curve" id="1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.604396, 0.127273), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="2"]
+offsets = PackedFloat32Array(0, 0.527607, 1)
+colors = PackedColorArray(0.345098, 0.729412, 0.917647, 1, 1, 1, 1, 1, 0.345098, 0.729412, 0.917647, 1)
+
+[sub_resource type="FastNoiseLite" id="3"]
+frequency = 0.4
+
+[sub_resource type="NoiseTexture2D" id="4"]
+width = 8
+height = 8
+seamless = true
+noise = SubResource("3")
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_jv8u4")
+
+[node name="Polygon2DInvertedTextured" type="Polygon2D" parent="."]
+texture_repeat = 2
+position = Vector2(349, -416)
+color = Color(1, 0.490196, 0.356863, 1)
+antialiased = true
+texture = SubResource("6")
+invert_enabled = true
+invert_border = 20.0
+polygon = PackedVector2Array(65.3057, 508.435, 117.632, 527.527, 155.815, 517.627, 155.108, 478.029)
+
+[node name="Polygon2DInverted" type="Polygon2D" parent="."]
+position = Vector2(480, -416)
+color = Color(0.717647, 0.686275, 0.231373, 1)
+antialiased = true
+invert_enabled = true
+invert_border = 20.0
+polygon = PackedVector2Array(65.3057, 508.435, 117.632, 527.527, 155.815, 517.627, 155.108, 478.029)
+
+[node name="Polygon2DTextured" type="Polygon2D" parent="."]
+position = Vector2(-40, 72)
+color = Color(0.619608, 0.329412, 1, 0.501961)
+texture = SubResource("8")
+texture_offset = Vector2(1.139, -21.764)
+polygon = PackedVector2Array(381.383, 65.7861, 398.658, 47.2211, 417.75, 34.4932, 442.499, 28.8363, 461.286, 28.3094, 478.561, 30.2505, 503.31, 35.9074, 524.523, 45.0998, 539.775, 58.715, 559.172, 78.3338, 572.301, 101.849, 592.1, 152.76, 587.151, 190.944, 566.645, 234.785, 541.896, 263.069, 521.695, 267.838, 500.177, 267.312, 457.348, 254.403, 429.466, 236.199, 409.972, 211.27, 404.01, 188.116, 426.637, 162.66, 445.327, 153.287, 465.528, 151.346, 443.913, 168.843, 435.428, 187.228, 447.449, 202.785, 470.783, 212.684, 497.653, 216.22, 523.109, 209.856, 535.837, 198.542, 546.444, 172.379, 544.724, 142.861, 531.289, 116.698, 510.076, 101.141, 476.135, 99.0201, 446.742, 103.083, 416.031, 120.233, 392.294, 134.902, 374.311, 137.204, 360.474, 114.396, 359.767, 99.547, 369.667, 83.2836)
+uv = PackedVector2Array(53.6552, 88.9748, 88.5473, 51.4766, 127.11, 25.7686, 177.099, 14.3427, 215.044, 13.2785, 249.937, 17.1992, 299.925, 28.6249, 342.771, 47.192, 373.578, 74.6918, 412.756, 114.318, 439.274, 161.815, 479.264, 264.645, 469.268, 341.77, 427.85, 430.32, 377.861, 487.448, 337.06, 497.082, 293.597, 496.019, 207.09, 469.945, 150.774, 433.177, 111.399, 382.824, 99.3577, 336.058, 145.06, 284.642, 182.811, 265.71, 223.613, 261.789, 179.954, 297.13, 162.816, 334.265, 187.096, 365.687, 234.227, 385.681, 288.499, 392.823, 339.915, 379.969, 365.624, 357.117, 387.048, 304.272, 383.573, 244.651, 356.437, 191.806, 313.591, 160.385, 245.037, 156.1, 185.668, 164.307, 123.638, 198.947, 75.6935, 228.576, 39.3713, 233.225, 11.4232, 187.158, 9.99516, 157.165, 29.9914, 124.316)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(112, 72)
+color = Color(1, 0.329412, 0.611765, 0.501961)
+antialiased = true
+texture_offset = Vector2(1.139, -21.764)
+polygon = PackedVector2Array(381.383, 65.7861, 398.658, 47.2211, 417.75, 34.4932, 442.499, 28.8363, 461.286, 28.3094, 478.561, 30.2505, 503.31, 35.9074, 524.523, 45.0998, 539.775, 58.715, 559.172, 78.3338, 572.301, 101.849, 592.1, 152.76, 587.151, 190.944, 566.645, 234.785, 541.896, 263.069, 521.695, 267.838, 500.177, 267.312, 457.348, 254.403, 429.466, 236.199, 409.972, 211.27, 404.01, 188.116, 426.637, 162.66, 445.327, 153.287, 465.528, 151.346, 443.913, 168.843, 435.428, 187.228, 447.449, 202.785, 470.783, 212.684, 497.653, 216.22, 523.109, 209.856, 535.837, 198.542, 546.444, 172.379, 544.724, 142.861, 531.289, 116.698, 510.076, 101.141, 476.135, 99.0201, 446.742, 103.083, 416.031, 120.233, 392.294, 134.902, 374.311, 137.204, 360.474, 114.396, 359.767, 99.547, 369.667, 83.2836)
+uv = PackedVector2Array(381.383, 65.7861, 461.286, 28.3094, 539.775, 58.715, 572.301, 101.849, 592.1, 152.76, 587.151, 190.944, 566.645, 234.785, 541.896, 263.069, 500.177, 267.312, 429.466, 236.199, 404.01, 188.116, 426.637, 162.66, 465.528, 151.346, 507.248, 154.174, 522.097, 168.317, 547.553, 162.66, 544.724, 142.861, 531.289, 116.698, 510.076, 101.141, 476.135, 99.0201, 416.031, 120.233, 374.311, 137.204, 357.341, 97.6059)
+
+[node name="Line2DVariableWidthColor" type="Line2D" parent="."]
+position = Vector2(736, 72)
+points = PackedVector2Array(69.9547, 69.8821, 75.0088, 79.6931, 145.805, 83.9676, 136.815, 122.924, 89.8739, 136.18, 105.351, 203.832, 144.987, 294.001, 242.568, 264.303, 270.914, 153.639, 308.371, 78.7235, 295.637, 45.7308, 181.436, 41.6508, 179.654, 16.2602, 154.215, 58.8123, 141.134, 52.4483, 135.123, 30.1745, 115.289, 33.079, 98.7455, 47.4191, 106.849, 65.9879, 57.1707, 25.2869, 45.5759, 28.2599, 41.4137, 42.2331, 61.3329, 53.8279, 69.9547, 69.8821)
+width_curve = SubResource("1")
+gradient = SubResource("2")
+texture = ExtResource("1")
+texture_mode = 2
+joint_mode = 1
+
+[node name="Line2DTexturedVariableWidthColor" type="Line2D" parent="."]
+texture_repeat = 2
+position = Vector2(768, 104)
+points = PackedVector2Array(145, 69, 140, 73, 145.805, 83.9676, 136.815, 122.924, 89.8739, 136.18, 105.351, 203.832, 159, 226, 170, 215, 181, 157, 224, 99, 224, 56, 207, 42, 189, 33, 174, 27, 140, 34, 142, 49, 159, 57, 145, 69)
+width = 12.0
+width_curve = SubResource("1")
+gradient = SubResource("2")
+texture = SubResource("4")
+texture_mode = 1
+joint_mode = 1
+
+[node name="Line2DSharpNone" type="Line2D" parent="."]
+position = Vector2(8, 40)
+points = PackedVector2Array(411.081, 529.648, 500.884, 379.034, 568.766, 526.113)
+width = 30.0
+default_color = Color(1, 1, 1, 0.752941)
+texture = ExtResource("2")
+texture_mode = 1
+sharp_limit = 4.0
+
+[node name="Line2DBevelBox" type="Line2D" parent="."]
+position = Vector2(249, 40)
+points = PackedVector2Array(411.081, 529.648, 500.884, 379.034, 568.766, 526.113)
+width = 30.0
+default_color = Color(1, 1, 1, 0.752941)
+texture = ExtResource("2")
+texture_mode = 1
+joint_mode = 1
+begin_cap_mode = 1
+end_cap_mode = 1
+round_precision = 12
+
+[node name="Line2DRoundRound" type="Line2D" parent="."]
+position = Vector2(465, 40)
+points = PackedVector2Array(411.081, 529.648, 500.884, 379.034, 568.766, 526.113)
+width = 30.0
+default_color = Color(1, 1, 1, 0.752941)
+texture = ExtResource("2")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 12
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(576, 324)
+
+[node name="MSAA" type="HBoxContainer" parent="."]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 296.0
+offset_bottom = 55.0
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MSAA"]
+layout_mode = 2
+text = "MSAA 2D"
+
+[node name="OptionButton" type="OptionButton" parent="MSAA"]
+layout_mode = 2
+item_count = 4
+selected = 0
+popup/item_0/text = "Disabled (Fastest)"
+popup/item_0/id = 0
+popup/item_1/text = "2× (Average)"
+popup/item_1/id = 1
+popup/item_2/text = "4× (Slow)"
+popup/item_2/id = 2
+popup/item_3/text = "8× (Slowest)"
+popup/item_3/id = 3
+
+[connection signal="item_selected" from="MSAA/OptionButton" to="." method="_on_msaa_option_button_item_selected"]
