@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://cerkxyasq8t8b"]
+
+[ext_resource type="Script" path="res://pickup/pickup_able_body.gd" id="1_mxwa3"]
+[ext_resource type="Texture2D" uid="uid://b1waowk6l76ap" path="res://assets/images/pattern.png" id="1_t4uiq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jjy5v"]
+margin = 0.001
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ecfgs"]
+albedo_texture = ExtResource("1_t4uiq")
+
+[sub_resource type="BoxMesh" id="BoxMesh_ajubj"]
+material = SubResource("StandardMaterial3D_ecfgs")
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="Box" type="RigidBody3D"]
+script = ExtResource("1_mxwa3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_jjy5v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ajubj")
+skeleton = NodePath("../CollisionShape3D")

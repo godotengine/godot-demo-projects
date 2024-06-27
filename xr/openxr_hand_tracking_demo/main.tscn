@@ -1,0 +1,128 @@
+[gd_scene load_steps=14 format=3 uid="uid://br3bss6kac8pa"]
+
+[ext_resource type="PackedScene" uid="uid://d22k0sp2hinew" path="res://assets/gltf/LeftHandHumanoid.gltf" id="2_3hxem"]
+[ext_resource type="Script" path="res://start_vr.gd" id="2_5rtkn"]
+[ext_resource type="PackedScene" uid="uid://dlswhmq6s52gu" path="res://assets/gltf/RightHandHumanoid.gltf" id="3_oifi1"]
+[ext_resource type="PackedScene" uid="uid://byif52d1xkl3u" path="res://pickup/pickup_handler.tscn" id="3_sg1io"]
+[ext_resource type="Texture2D" uid="uid://b1waowk6l76ap" path="res://assets/images/pattern.png" id="4_3x0ea"]
+[ext_resource type="PackedScene" uid="uid://dtabh705qyufu" path="res://hand_info.tscn" id="5_wlhtu"]
+[ext_resource type="PackedScene" uid="uid://hanl00aqvu7u" path="res://objects/table.tscn" id="6_rfmma"]
+[ext_resource type="PackedScene" uid="uid://cerkxyasq8t8b" path="res://objects/box.tscn" id="7_6sqt7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_eyx45"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_tsis2"]
+sky_material = SubResource("ProceduralSkyMaterial_eyx45")
+
+[sub_resource type="Environment" id="Environment_0xu52"]
+background_mode = 2
+sky = SubResource("Sky_tsis2")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dxr1t"]
+albedo_color = Color(0.187808, 0.607643, 0.279312, 1)
+albedo_texture = ExtResource("4_3x0ea")
+uv1_scale = Vector3(100, 100, 100)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6hhse"]
+material = SubResource("StandardMaterial3D_dxr1t")
+size = Vector2(1000, 1000)
+subdivide_width = 10
+subdivide_depth = 10
+
+[node name="Main" type="Node3D"]
+
+[node name="StartVR" type="Node3D" parent="."]
+script = ExtResource("2_5rtkn")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0xu52")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.397904, -0.794516, 0.458712, 0, 0.499998, 0.866026, -0.917427, -0.344595, 0.198951, 0, 5, 0)
+directional_shadow_max_distance = 10.0
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_6hhse")
+
+[node name="RecenterInfo" type="Label3D" parent="Floor"]
+transform = Transform3D(0.59873, 0, 0.800951, 0, 1, 0, -0.800951, 0, 0.59873, -1.76283, 1.50033, -0.380399)
+pixel_size = 0.003
+text = "If you are not facing the table,
+recenter your headset.
+
+On Quest, hold the Meta button
+on your right controller
+for several seconds
+
+In SteamVR, open the menu and
+select recenter and follow
+instructions"
+
+[node name="Table" parent="." instance=ExtResource("6_rfmma")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+
+[node name="Box01" parent="Table" instance=ExtResource("7_6sqt7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.941084, 0)
+
+[node name="Box02" parent="Table" instance=ExtResource("7_6sqt7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13752, 0.941084, 0)
+
+[node name="Box03" parent="Table" instance=ExtResource("7_6sqt7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0746718, 1.06282, 0)
+
+[node name="LeftHandInfo" parent="Table" instance=ExtResource("5_wlhtu")]
+transform = Transform3D(0.939693, -0.085635, 0.331126, 0, 0.968147, 0.25038, -0.34202, -0.23528, 0.909761, -0.713026, 0.8718, -0.309953)
+
+[node name="RightHandInfo" parent="Table" instance=ExtResource("5_wlhtu")]
+transform = Transform3D(0.939693, 0.085635, -0.331126, 0, 0.968147, 0.25038, 0.34202, -0.23528, 0.909761, 0.278022, 0.8718, -0.381943)
+hand = 1
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="LeftHandController" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+pose = &"pose"
+show_when_tracked = true
+
+[node name="PickupHandler" parent="XROrigin3D/LeftHandController" instance=ExtResource("3_sg1io")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0, 0)
+pickup_action = "pickup"
+
+[node name="RightHandController" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"right_hand"
+pose = &"pose"
+show_when_tracked = true
+
+[node name="PickupHandler" parent="XROrigin3D/RightHandController" instance=ExtResource("3_sg1io")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0, 0)
+pickup_action = "pickup"
+
+[node name="LeftHandMesh" type="XRNode3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"/user/hand_tracker/left"
+show_when_tracked = true
+
+[node name="LeftHandHumanoid2" parent="XROrigin3D/LeftHandMesh" instance=ExtResource("2_3hxem")]
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/LeftHandMesh/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D" index="1"]
+
+[node name="RightHandMesh" type="XRNode3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"/user/hand_tracker/right"
+show_when_tracked = true
+
+[node name="RightHandHumanoid2" parent="XROrigin3D/RightHandMesh" instance=ExtResource("3_oifi1")]
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/RightHandMesh/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="1"]
+hand_tracker = &"/user/hand_tracker/right"
+
+[editable path="XROrigin3D/LeftHandMesh/LeftHandHumanoid2"]
+[editable path="XROrigin3D/RightHandMesh/RightHandHumanoid2"]
