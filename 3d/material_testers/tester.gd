@@ -52,6 +52,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		# Compensate motion speed to be resolution-independent (based on the window height).
 		var relative_motion: Vector2 = event.relative * DisplayServer.window_get_size().y / base_height
 		rot_y -= relative_motion.x * ROT_SPEED
+		rot_y = clamp(rot_y, -1.95, 1.95)
 		rot_x -= relative_motion.y * ROT_SPEED
 		rot_x = clamp(rot_x, -1.4, 0.45)
 		camera_holder.transform.basis = Basis.from_euler(Vector3(0, rot_y, 0))
@@ -91,6 +92,27 @@ func _on_bg_item_selected(index: int) -> void:
 	var sky_material: PanoramaSkyMaterial = $WorldEnvironment.environment.sky.sky_material
 
 	sky_material.panorama = load(backgrounds[index].path)
+
+	# Force reflection probes to update by moving them slightly.
+	for reflection_probe: ReflectionProbe in get_tree().get_nodes_in_group(&"reflection_probe"):
+		reflection_probe.position.y += randf_range(-0.0001, 0.0001)
+
+
+func _on_reflection_probes_item_selected(index: int) -> void:
+	match index:
+		0:  # No Reflection Probes
+			for reflection_probe: ReflectionProbe in get_tree().get_nodes_in_group(&"reflection_probe"):
+				reflection_probe.visible = false
+
+		1:  # Reflection Probes (Reflection only)
+			for reflection_probe: ReflectionProbe in get_tree().get_nodes_in_group(&"reflection_probe"):
+				reflection_probe.visible = true
+				reflection_probe.ambient_mode = ReflectionProbe.AMBIENT_DISABLED
+
+		2:  # Reflection Probes (Reflection + Ambient)
+			for reflection_probe: ReflectionProbe in get_tree().get_nodes_in_group(&"reflection_probe"):
+				reflection_probe.visible = true
+				reflection_probe.ambient_mode = ReflectionProbe.AMBIENT_ENVIRONMENT
 
 
 func _on_quit_pressed() -> void:
