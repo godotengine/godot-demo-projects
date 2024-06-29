@@ -1702,18 +1702,23 @@ animation = &"run"
 xfade_time = 0.1
 input_0/name = "idle"
 input_0/auto_advance = false
+input_0/break_loop_at_end = false
 input_0/reset = true
 input_1/name = "walk"
 input_1/auto_advance = false
+input_1/break_loop_at_end = false
 input_1/reset = true
 input_2/name = "run"
 input_2/auto_advance = false
+input_2/break_loop_at_end = false
 input_2/reset = true
 input_3/name = "fly"
 input_3/auto_advance = false
+input_3/break_loop_at_end = false
 input_3/reset = true
 input_4/name = "fall"
 input_4/auto_advance = false
+input_4/break_loop_at_end = false
 input_4/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="21"]
@@ -1757,6 +1762,7 @@ node_connections = [&"jump", 0, &"state", &"jump", 1, &"jump_animation", &"land"
 size = Vector2(22, 32.8716)
 
 [node name="SkeletalPlayer" type="CharacterBody2D"]
+physics_interpolation_mode = 1
 collision_mask = 28
 floor_max_angle = 0.907571
 floor_snap_length = 20.0
@@ -1772,19 +1778,67 @@ libraries = {
 active = false
 tree_root = SubResource("23")
 anim_player = NodePath("../AnimationPlayer")
+parameters/current_length = null
+parameters/current_position = null
+parameters/current_delta = null
+parameters/fall_animation/current_length = null
+parameters/fall_animation/current_position = null
+parameters/fall_animation/current_delta = null
+parameters/fly_animation/current_length = null
+parameters/fly_animation/current_position = null
+parameters/fly_animation/current_delta = null
+parameters/idle_animation/current_length = null
+parameters/idle_animation/current_position = null
+parameters/idle_animation/current_delta = null
+parameters/jump/current_length = 0.0
+parameters/jump/current_position = 0.0
+parameters/jump/current_delta = 0.0
 parameters/jump/active = false
 parameters/jump/internal_active = false
 parameters/jump/request = 0
+parameters/jump_animation/current_length = null
+parameters/jump_animation/current_position = null
+parameters/jump_animation/current_delta = null
+parameters/land/current_length = 0.0
+parameters/land/current_position = 0.0
+parameters/land/current_delta = 0.0
 parameters/land/active = false
 parameters/land/internal_active = false
 parameters/land/request = 0
+parameters/land_animation/current_length = null
+parameters/land_animation/current_position = null
+parameters/land_animation/current_delta = null
+parameters/land_hard/current_length = 0.0
+parameters/land_hard/current_position = 0.0
+parameters/land_hard/current_delta = 0.0
 parameters/land_hard/active = false
 parameters/land_hard/internal_active = false
 parameters/land_hard/request = 0
+parameters/land_hard_animation/current_length = null
+parameters/land_hard_animation/current_position = null
+parameters/land_hard_animation/current_delta = null
+parameters/output/current_length = null
+parameters/output/current_position = null
+parameters/output/current_delta = null
+parameters/run_animation/current_length = null
+parameters/run_animation/current_position = null
+parameters/run_animation/current_delta = null
+parameters/run_timescale/current_length = 1.0
+parameters/run_timescale/current_position = 1.0
+parameters/run_timescale/current_delta = 1.0
 parameters/run_timescale/scale = 1.0
+parameters/state/current_length = ""
+parameters/state/current_position = ""
+parameters/state/current_delta = ""
 parameters/state/current_state = "idle"
 parameters/state/transition_request = ""
 parameters/state/current_index = 0
+parameters/walk_animation/current_length = null
+parameters/walk_animation/current_position = null
+parameters/walk_animation/current_delta = null
+parameters/walk_timescale/current_length = 1.0
+parameters/walk_timescale/current_position = 1.0
+parameters/walk_timescale/current_delta = 1.0
 parameters/walk_timescale/scale = 0.1
 
 [node name="Sprite2D" type="Node2D" parent="."]
@@ -1799,17 +1853,17 @@ rest = Transform2D(1, 0, 0, 1, -3, -11)
 
 [node name="Chest" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip"]
 position = Vector2(0, -32)
-rotation = -0.00707523
+rotation = -0.0855327
 rest = Transform2D(1, 0, 0, 1, 0, -32)
 
 [node name="Head" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/Chest"]
 position = Vector2(0, -160)
-rotation = 0.0539257
+rotation = 0.287974
 rest = Transform2D(1, 0, 0, 1, 0, -160)
 
 [node name="Chin" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/Chest/Head"]
 position = Vector2(0, -49)
-rotation = 0.00169551
+rotation = -0.0435718
 rest = Transform2D(0.999999, 0.00169551, -0.00169551, 0.999999, 0, -49)
 auto_calculate_length_and_angle = false
 length = 16.0
@@ -1817,15 +1871,18 @@ bone_angle = -2.49648
 
 [node name="RightArm" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/Chest"]
 position = Vector2(80, -100)
+rotation = -0.524992
 rest = Transform2D(1, 0, 0, 1, 80, -100)
 
 [node name="RightForearm" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/Chest/RightArm"]
 position = Vector2(-11, 97)
+rotation = -0.0536324
 rest = Transform2D(1, 0, 0, 1, -11, 97)
 
 [node name="RightHand" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/Chest/RightArm/RightForearm"]
 position = Vector2(13, 94)
 rotation = 1.22745
+scale = Vector2(1, 1)
 rest = Transform2D(0.336639, 0.941634, -0.941634, 0.336639, 13, 94)
 auto_calculate_length_and_angle = false
 length = 16.0
@@ -1833,10 +1890,12 @@ bone_angle = 70.3277
 
 [node name="LeftArm" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/Chest"]
 position = Vector2(-100, -100)
+rotation = 0.744076
 rest = Transform2D(1, 0, 0, 1, -100, -100)
 
 [node name="LeftForearm" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/Chest/LeftArm"]
 position = Vector2(-2, 95)
+rotation = -0.821385
 rest = Transform2D(1, 0, 0, 1, -2, 95)
 
 [node name="LeftHand" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/Chest/LeftArm/LeftForearm"]
@@ -1849,10 +1908,12 @@ bone_angle = 70.4641
 
 [node name="LeftLeg" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip"]
 position = Vector2(-72, 26)
+rotation = 0.103217
 rest = Transform2D(1, 0, 0, 1, -72, 26)
 
 [node name="LeftLowerLeg" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/LeftLeg"]
 position = Vector2(-13, 91)
+rotation = 0.613454
 rest = Transform2D(1, 0, 0, 1, -13, 91)
 
 [node name="LeftFoot" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/LeftLeg/LeftLowerLeg"]
@@ -1864,10 +1925,12 @@ bone_angle = 0.0
 
 [node name="RightLeg" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip"]
 position = Vector2(46, 11)
+rotation = -0.755354
 rest = Transform2D(1, 0, 0, 1, 46, 11)
 
 [node name="RightLowerLeg" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/RightLeg"]
 position = Vector2(-26, 94)
+rotation = 0.622049
 rest = Transform2D(1, 0, 0, 1, -26, 94)
 
 [node name="RightFoot" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/RightLeg/RightLowerLeg"]
@@ -1957,3 +2020,8 @@ shape = SubResource("24")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -32)
 zoom = Vector2(4, 4)
+process_callback = 0
+limit_left = -600
+limit_top = -598
+limit_right = 596
+limit_bottom = 423
