@@ -1,0 +1,44 @@
+[gd_resource type="OpenXRActionMap" load_steps=9 format=3 uid="uid://cv3fftnsowiud"]
+
+[sub_resource type="OpenXRAction" id="OpenXRAction_75o1n"]
+resource_name = "aim_pose"
+localized_name = "Aim pose"
+action_type = 3
+toplevel_paths = PackedStringArray("/user/hand/left", "/user/hand/right")
+
+[sub_resource type="OpenXRAction" id="OpenXRAction_8d7jj"]
+resource_name = "select"
+localized_name = "Select"
+action_type = 0
+toplevel_paths = PackedStringArray("/user/hand/left", "/user/hand/right")
+
+[sub_resource type="OpenXRAction" id="OpenXRAction_t2cd0"]
+resource_name = "haptic"
+localized_name = "Haptic"
+action_type = 4
+toplevel_paths = PackedStringArray("/user/hand/left", "/user/hand/right")
+
+[sub_resource type="OpenXRActionSet" id="OpenXRActionSet_ke8tl"]
+resource_name = "godot"
+localized_name = "Godot Action Set"
+actions = [SubResource("OpenXRAction_75o1n"), SubResource("OpenXRAction_8d7jj"), SubResource("OpenXRAction_t2cd0")]
+
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_wqxq3"]
+action = SubResource("OpenXRAction_75o1n")
+paths = PackedStringArray("/user/hand/left/input/aim/pose", "/user/hand/right/input/aim/pose")
+
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_cdhbm"]
+action = SubResource("OpenXRAction_8d7jj")
+paths = PackedStringArray("/user/hand/left/input/select/click", "/user/hand/right/input/select/click")
+
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_em1q7"]
+action = SubResource("OpenXRAction_t2cd0")
+paths = PackedStringArray("/user/hand/left/output/haptic", "/user/hand/right/output/haptic")
+
+[sub_resource type="OpenXRInteractionProfile" id="OpenXRInteractionProfile_cvu6o"]
+interaction_profile_path = "/interaction_profiles/khr/simple_controller"
+bindings = [SubResource("OpenXRIPBinding_wqxq3"), SubResource("OpenXRIPBinding_cdhbm"), SubResource("OpenXRIPBinding_em1q7")]
+
+[resource]
+action_sets = [SubResource("OpenXRActionSet_ke8tl")]
+interaction_profiles = [SubResource("OpenXRInteractionProfile_cvu6o")]
