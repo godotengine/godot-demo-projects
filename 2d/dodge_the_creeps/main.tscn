@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://cyfwty2q3rdse"]
 
-[ext_resource type="Script" path="res://Main.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://rkdnhqgf2hpj" path="res://Mob.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://4vwrqjegqwpj" path="res://Player.tscn" id="3"]
-[ext_resource type="PackedScene" uid="uid://ccqoreueuxdb7" path="res://HUD.tscn" id="4"]
-[ext_resource type="AudioStream" uid="uid://q2pf4fr8d0ks" path="res://art/House In a Forest Loop.ogg" id="5"]
-[ext_resource type="AudioStream" uid="uid://dw26fpygeag8o" path="res://art/gameover.wav" id="6"]
+[ext_resource type="Script" path="res://main.gd" id="1_0r6n5"]
+[ext_resource type="PackedScene" uid="uid://rkdnhqgf2hpj" path="res://mob.tscn" id="2_50pww"]
+[ext_resource type="PackedScene" uid="uid://4vwrqjegqwpj" path="res://player.tscn" id="3_veqnc"]
+[ext_resource type="PackedScene" uid="uid://ccqoreueuxdb7" path="res://hud.tscn" id="4_0qnje"]
+[ext_resource type="AudioStream" uid="uid://q2pf4fr8d0ks" path="res://art/House In a Forest Loop.ogg" id="5_55d8h"]
+[ext_resource type="AudioStream" uid="uid://dw26fpygeag8o" path="res://art/gameover.wav" id="6_hp1r0"]
 
 [sub_resource type="Curve2D" id="1"]
 _data = {
@@ -14,8 +14,8 @@ _data = {
 point_count = 5
 
 [node name="Main" type="Node"]
-script = ExtResource("1")
-mob_scene = ExtResource("2")
+script = ExtResource("1_0r6n5")
+mob_scene = ExtResource("2_50pww")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -25,7 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.219608, 0.372549, 0.380392, 1)
 
-[node name="Player" parent="." instance=ExtResource("3")]
+[node name="Player" parent="." instance=ExtResource("3_veqnc")]
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -44,13 +44,13 @@ curve = SubResource("1")
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 
-[node name="HUD" parent="." instance=ExtResource("4")]
+[node name="HUD" parent="." instance=ExtResource("4_0qnje")]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5")
+stream = ExtResource("5_55d8h")
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6")
+stream = ExtResource("6_hp1r0")
 
 [connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
