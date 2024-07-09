@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0qjuoqdfotei"]
+
+[ext_resource type="TileSet" uid="uid://sf8jvf8i1m31" path="res://tiles/tile_set.tres" id="1_44xps"]
+[ext_resource type="Script" path="res://map.gd" id="2_bpqum"]
+[ext_resource type="PackedScene" uid="uid://do0vop2jrn06u" path="res://player.tscn" id="2_mgwiw"]
+[ext_resource type="Script" path="res://debug/debug_astar.gd" id="4_vuylu"]
+
+[node name="Map" type="Node2D"]
+
+[node name="DebugAStar" type="Node2D" parent="." node_paths=PackedStringArray("map")]
+z_index = 1
+script = ExtResource("4_vuylu")
+map = NodePath("../TileMap")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(506, 379)
+limit_left = 0
+limit_top = 0
+limit_right = 2000
+limit_bottom = 2000
+editor_draw_limits = true
+
+[node name="Player" parent="." node_paths=PackedStringArray("map") instance=ExtResource("2_mgwiw")]
+position = Vector2(639, 339)
+map = NodePath("../TileMap")
+
+[node name="TileMap" type="TileMap" parent="."]
+z_index = -1
+tile_set = ExtResource("1_44xps")
+format = 2
+layer_0/tile_data = PackedInt32Array(65536, 65539, 2, 131072, 196611, 2, 196608, 196611, 2, 1, 196611, 2, 65537, 196611, 2, 131073, 131075, 2, 196609, 131075, 2, 2, 3, 2, 65538, 3, 2, 131074, 3, 2, 196610, 262147, 2, 262144, 196611, 2, 327680, 65539, 2, 393216, 196611, 2, 262145, 131075, 2, 327681, 196611, 2, 262146, 131075, 2, 327682, 3, 2, 3, 3, 2, 65539, 458755, 2, 131075, 131075, 2, 196611, 131075, 2, 262147, 65539, 2, 327683, 458755, 2, 4, 458755, 2, 65540, 131075, 2, 131076, 131075, 2, 196612, 131075, 2, 262148, 65539, 2, 327684, 458755, 2, 5, 458755, 2, 65541, 458755, 2, 131077, 458755, 2, 196613, 131075, 2, 262149, 458755, 2, 327685, 3, 2, 6, 3, 2, 65542, 3, 2, 131078, 458755, 2, 196614, 458755, 2, 262150, 458755, 2, 327686, 3, 2, 131079, 3, 2, 262151, 3, 2, 393219, 65539, 2, 393218, 65539, 2, 393217, 65539, 2, 0, 65539, 2, 7, 65539, 2, 65543, 65539, 2, 131080, 65539, 2, 196616, 65539, 2, 262152, 65539, 2, 327687, 3, 2, 393223, 458755, 2, 393222, 458755, 2, 393221, 458755, 2, 393220, 458755, 2, 393224, 3, 2, 196615, 3, 2, 458759, 131075, 2, 458760, 131075, 2, 393225, 131075, 2, 327688, 131075, 2, 131071, 131075, 2, 196607, 131075, 2, 262143, 131075, 2, 327679, 131075, 2, 393215, 131075, 2)
+script = ExtResource("2_bpqum")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/PanelContainer"]
+layout_mode = 2
+
+[node name="DPath" type="CheckBox" parent="CanvasLayer/Control/PanelContainer/HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Debug Path"
+
+[node name="DCosts" type="CheckBox" parent="CanvasLayer/Control/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Debug Costs"
+
+[node name="DWeights" type="CheckBox" parent="CanvasLayer/Control/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Debug Weigths"
+
+[node name="DPositions" type="CheckBox" parent="CanvasLayer/Control/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Debug Positions"
+
+[node name="DConnections" type="CheckBox" parent="CanvasLayer/Control/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Debug Connections"
+
+[connection signal="toggled" from="CanvasLayer/Control/PanelContainer/HBoxContainer/DPath" to="DebugAStar" method="_on_d_path_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/PanelContainer/HBoxContainer/DCosts" to="DebugAStar" method="_on_d_costs_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/PanelContainer/HBoxContainer/DWeights" to="DebugAStar" method="_on_d_weights_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/PanelContainer/HBoxContainer/DPositions" to="DebugAStar" method="_on_d_positions_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/PanelContainer/HBoxContainer/DConnections" to="DebugAStar" method="_on_d_connections_toggled"]
