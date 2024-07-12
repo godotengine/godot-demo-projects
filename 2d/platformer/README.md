@@ -23,7 +23,7 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
 
 ## Features
 
-- Side-scrolling player controller using [`KinematicBody2D`](https://docs.godotengine.org/en/latest/classes/class_kinematicbody2d.html).
+- Side-scrolling player controller using [`CharacterBody2D`](https://docs.godotengine.org/en/stable/classes/class_characterbody2d.html).
     - Can walk on and snap to slopes.
     - Can shoot, including while jumping.
 - Enemies that crawl on the floor and change direction when they encounter an obstacle.
