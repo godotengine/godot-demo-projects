@@ -12,7 +12,7 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
 ## How does it work?
 
 Each chunk is a
-[`StaticBody`](https://docs.godotengine.org/en/latest/classes/class_staticbody.html)
+[`StaticBody3D`](https://docs.godotengine.org/en/latest/classes/class_staticbody3d.html)
 with each block having its own
 [`CollisionShape`](https://docs.godotengine.org/en/latest/classes/class_collisionshape.html)
 for collisions. The meshes are created using
