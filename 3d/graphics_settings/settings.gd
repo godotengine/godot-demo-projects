@@ -319,8 +319,12 @@ func _on_glow_option_button_item_selected(index: int) -> void:
 	# then be sure to run this function again to make the setting effective.
 	if index == 0: # Disabled (default)
 		world_environment.environment.glow_enabled = false
-	if index == 1: # Enabled
+	if index == 1: # Low
 		world_environment.environment.glow_enabled = true
+		RenderingServer.environment_glow_set_use_bicubic_upscale(false)
+	if index == 2: # High
+		world_environment.environment.glow_enabled = true
+		RenderingServer.environment_glow_set_use_bicubic_upscale(true)
 
 
 func _on_volumetric_fog_option_button_item_selected(index: int) -> void:
@@ -415,7 +419,7 @@ func _on_high_preset_pressed() -> void:
 	%ShadowFilterOptionButton.selected = 3
 	%MeshLODOptionButton.selected = 2
 	%SDFGIOptionButton.selected = 1
-	%GlowOptionButton.selected = 1
+	%GlowOptionButton.selected = 2
 	%SSAOOptionButton.selected = 2
 	%SSReflectionsOptionButton.selected = 2
 	%SSILOptionButton.selected = 2
@@ -431,7 +435,7 @@ func _on_ultra_preset_pressed() -> void:
 	%ShadowFilterOptionButton.selected = 4
 	%MeshLODOptionButton.selected = 3
 	%SDFGIOptionButton.selected = 2
-	%GlowOptionButton.selected = 1
+	%GlowOptionButton.selected = 2
 	%SSAOOptionButton.selected = 3
 	%SSReflectionsOptionButton.selected = 3
 	%SSILOptionButton.selected = 3
