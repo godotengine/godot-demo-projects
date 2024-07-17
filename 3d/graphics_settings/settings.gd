@@ -415,7 +415,7 @@ func _on_high_preset_pressed() -> void:
 	%ShadowFilterOptionButton.selected = 3
 	%MeshLODOptionButton.selected = 2
 	%SDFGIOptionButton.selected = 1
-	%GlowOptionButton.selected = 2
+	%GlowOptionButton.selected = 1
 	%SSAOOptionButton.selected = 2
 	%SSReflectionsOptionButton.selected = 2
 	%SSILOptionButton.selected = 2
@@ -431,7 +431,7 @@ func _on_ultra_preset_pressed() -> void:
 	%ShadowFilterOptionButton.selected = 4
 	%MeshLODOptionButton.selected = 3
 	%SDFGIOptionButton.selected = 2
-	%GlowOptionButton.selected = 2
+	%GlowOptionButton.selected = 1
 	%SSAOOptionButton.selected = 3
 	%SSReflectionsOptionButton.selected = 3
 	%SSILOptionButton.selected = 3
