@@ -313,9 +313,7 @@ func _on_glow_option_button_item_selected(index: int) -> void:
 	# then be sure to run this function again to make the setting effective.
 	if index == 0: # Disabled (default)
 		world_environment.environment.glow_enabled = false
-	if index == 1: # Low
-		world_environment.environment.glow_enabled = true
-	if index == 2: # High
+	if index == 1: # Enabled
 		world_environment.environment.glow_enabled = true
 
 
