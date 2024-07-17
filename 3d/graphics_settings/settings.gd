@@ -83,12 +83,17 @@ func _on_filter_option_button_item_selected(index: int) -> void:
 	# Viewport scale mode setting.
 	if index == 0: # Bilinear (Fastest)
 		get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR
-		# FSR Sharpness is only effective when the scaling mode is FSR 1.0.
+		# FSR Sharpness is only effective when the scaling mode is FSR 1.0 or 2.2.
 		%FSRSharpnessLabel.visible = false
 		%FSRSharpnessSlider.visible = false
 	elif index == 1: # FSR 1.0 (Fast)
 		get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR
-		# FSR Sharpness is only effective when the scaling mode is FSR 1.0.
+		# FSR Sharpness is only effective when the scaling mode is FSR 1.0 or 2.2.
+		%FSRSharpnessLabel.visible = true
+		%FSRSharpnessSlider.visible = true
+	elif index == 2: # FSR 2.2 (Fast)
+		get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR2
+		# FSR Sharpness is only effective when the scaling mode is FSR 1.0 or 2.2.
 		%FSRSharpnessLabel.visible = true
 		%FSRSharpnessSlider.visible = true
 
