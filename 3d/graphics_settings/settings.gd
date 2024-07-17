@@ -271,6 +271,9 @@ func _on_ssao_option_button_item_selected(index: int) -> void:
 	if index == 4: # High
 		world_environment.environment.ssao_enabled = true
 		RenderingServer.environment_set_ssao_quality(RenderingServer.ENV_SSAO_QUALITY_HIGH, true, 0.5, 2, 50, 300)
+	if index == 5: # Ultra
+		world_environment.environment.ssao_enabled = true
+		RenderingServer.environment_set_ssao_quality(RenderingServer.ENV_SSAO_QUALITY_ULTRA, true, 0.5, 2, 50, 300)
 
 
 func _on_ssil_option_button_item_selected(index: int) -> void:
@@ -291,6 +294,9 @@ func _on_ssil_option_button_item_selected(index: int) -> void:
 	if index == 4: # High
 		world_environment.environment.ssil_enabled = true
 		RenderingServer.environment_set_ssil_quality(RenderingServer.ENV_SSIL_QUALITY_HIGH, true, 0.5, 4, 50, 300)
+	if index == 5: # Ultra
+		world_environment.environment.ssil_enabled = true
+		RenderingServer.environment_set_ssil_quality(RenderingServer.ENV_SSIL_QUALITY_ULTRA, true, 0.5, 4, 50, 300)
 
 
 func _on_sdfgi_option_button_item_selected(index: int) -> void:
