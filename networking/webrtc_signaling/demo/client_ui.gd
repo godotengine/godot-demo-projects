@@ -19,8 +19,8 @@ func _ready() -> void:
 
 
 @rpc("any_peer", "call_local")
-func ping(argument: String) -> void:
-	_log("[Multiplayer] Ping from peer %d: arg: %s" % [multiplayer.get_remote_sender_id(), argument])
+func ping(argument: float) -> void:
+	_log("[Multiplayer] Ping from peer %d: arg: %f" % [multiplayer.get_remote_sender_id(), argument])
 
 
 func _mp_server_connected() -> void:

@@ -225,7 +225,7 @@ func _parse_msg(peer: Peer) -> bool:
 	if not lobbies.has(peer.lobby):  # Lobby not found?
 		return false
 
-	var lobby: Peer = lobbies[peer.lobby]
+	var lobby: Lobby = lobbies[peer.lobby]
 
 	if msg.type == Message.SEAL:
 		# Client is sealing the room.

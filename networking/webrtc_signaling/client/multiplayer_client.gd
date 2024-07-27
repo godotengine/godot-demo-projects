@@ -97,13 +97,13 @@ func _peer_disconnected(id: int) -> void:
 		rtc_mp.remove_peer(id)
 
 
-func _offer_received(id: int, offer: int) -> void:
+func _offer_received(id: int, offer: String) -> void:
 	print("Got offer: %d" % id)
 	if rtc_mp.has_peer(id):
 		rtc_mp.get_peer(id).connection.set_remote_description("offer", offer)
 
 
-func _answer_received(id: int, answer: int) -> void:
+func _answer_received(id: int, answer: String) -> void:
 	print("Got answer: %d" % id)
 	if rtc_mp.has_peer(id):
 		rtc_mp.get_peer(id).connection.set_remote_description("answer", answer)
