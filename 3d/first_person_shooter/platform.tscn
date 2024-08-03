@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://c8n2cdrjonibs"]
+
+[ext_resource type="Script" path="res://platform.gd" id="1_g3ryg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6hjjg"]
+size = Vector3(6, 0.5, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tg3xl"]
+size = Vector3(6, 0.5, 4)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vemq1"]
+fractal_type = 2
+fractal_lacunarity = 16.782
+fractal_gain = 1.4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nepn7"]
+seamless = true
+noise = SubResource("FastNoiseLite_vemq1")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w2v74"]
+seamless = true
+as_normal_map = true
+bump_strength = 0.1
+noise = SubResource("FastNoiseLite_vemq1")
+
+[sub_resource type="Gradient" id="Gradient_soa80"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rmhqn"]
+seamless = true
+color_ramp = SubResource("Gradient_soa80")
+noise = SubResource("FastNoiseLite_vemq1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y10mx"]
+albedo_color = Color(0.65, 1, 0.743333, 1)
+albedo_texture = SubResource("NoiseTexture2D_nepn7")
+roughness = 0.5
+roughness_texture = SubResource("NoiseTexture2D_rmhqn")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_w2v74")
+uv1_scale = Vector3(1.125, 0.5, 1)
+uv1_triplanar_sharpness = 15.455
+texture_filter = 4
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ekrg2"]
+size = Vector3(4, 2, 2)
+
+[node name="Platform" type="StaticBody3D"]
+script = ExtResource("1_g3ryg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_6hjjg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 2
+mesh = SubResource("BoxMesh_tg3xl")
+surface_material_override/0 = SubResource("StandardMaterial3D_y10mx")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+size = Vector3(6, 0.5, 4)
+
+[node name="MoveTrigger" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MoveTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+shape = SubResource("BoxShape3D_ekrg2")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
+[connection signal="body_entered" from="MoveTrigger" to="." method="_on_move_trigger_body_entered"]
+[connection signal="body_exited" from="MoveTrigger" to="." method="_on_move_trigger_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
