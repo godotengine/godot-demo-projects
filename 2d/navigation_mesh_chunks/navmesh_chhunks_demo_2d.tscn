@@ -1,0 +1,99 @@
+[gd_scene load_steps=2 format=3 uid="uid://svfku2i5n033"]
+
+[ext_resource type="Script" path="res://navmesh_chhunks_demo_2d.gd" id="1_d68tl"]
+
+[node name="NavMeshChunksDemo2D" type="Node2D"]
+script = ExtResource("1_d68tl")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+zoom = Vector2(0.8, 0.8)
+
+[node name="ParseRootNode" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ParseRootNode"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ParseRootNode/StaticBody2D"]
+polygon = PackedVector2Array(244, 147, 636, 155, 376, 391, 460, 655, 804, 795, 756, 971, 484, 839, 308, 963, 132, 811, 128, 559)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="ParseRootNode/StaticBody2D"]
+polygon = PackedVector2Array(1312, 207, 1596, 91, 1832, 175, 1739, 926, 1562, 796, 1508, 935, 1184, 811, 1324, 533, 1499, 599, 1684, 511, 1596, 322)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="ParseRootNode/StaticBody2D"]
+polygon = PackedVector2Array(661, 339, 943, 397, 1112, 178, 1172, 443, 960, 639, 700, 579)
+
+[node name="DebugPaths" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="PathDebugCorridorFunnel" type="NavigationAgent2D" parent="DebugPaths"]
+unique_name_in_owner = true
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0, 1, 1)
+debug_path_custom_point_size = 10.0
+debug_path_custom_line_width = 4.0
+
+[node name="PathDebugEdgeCentered" type="NavigationAgent2D" parent="DebugPaths"]
+unique_name_in_owner = true
+path_postprocessing = 1
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 1, 0, 1)
+debug_path_custom_point_size = 10.0
+debug_path_custom_line_width = 4.0
+
+[node name="ChunksContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Use cursor button to set path start position"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 8)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(1, 0, 1, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Path  corridor-funnel"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(128, 8)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(1, 1, 0, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Path edge-centered"
+horizontal_alignment = 1
+vertical_alignment = 1

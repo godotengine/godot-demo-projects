@@ -1,0 +1,152 @@
+[gd_scene load_steps=11 format=3 uid="uid://cir4dtbp7i1ky"]
+
+[ext_resource type="Script" path="res://navmesh_chhunks_demo_3d.gd" id="1_027f2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p73ky"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_k64yg"]
+sky_material = SubResource("ProceduralSkyMaterial_p73ky")
+
+[sub_resource type="Environment" id="Environment_ccmns"]
+background_mode = 2
+sky = SubResource("Sky_k64yg")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8p3iq"]
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yn2x6"]
+size = Vector3(15, 1, 15)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7rw3x"]
+points = PackedVector3Array(-7.5, -0.5, -7.5, -7.5, 0.5, -7.5, 7.5, -0.5, -7.5, -7.5, -0.5, 7.5, -7.5, 0.5, 7.5, 7.5, 0.5, -7.5, 7.5, -0.5, 7.5, 7.5, 0.5, 7.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3kxje"]
+albedo_color = Color(0.5, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hdqb8"]
+size = Vector3(5, 4, 5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ydj0h"]
+points = PackedVector3Array(-2.5, -2, -2.5, -2.5, 2, -2.5, 2.5, -2, -2.5, -2.5, -2, 2.5, -2.5, 2, 2.5, 2.5, 2, -2.5, 2.5, -2, 2.5, 2.5, 2, 2.5)
+
+[node name="NavMeshChunksDemo3D" type="Node3D"]
+script = ExtResource("1_027f2")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 15, 18, 15)
+current = true
+fov = 40.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ccmns")
+
+[node name="ParseRootNode" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Ground" type="MeshInstance3D" parent="ParseRootNode"]
+material_override = SubResource("StandardMaterial3D_8p3iq")
+mesh = SubResource("BoxMesh_yn2x6")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ParseRootNode/Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ParseRootNode/Ground/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_7rw3x")
+
+[node name="CenterBlock" type="MeshInstance3D" parent="ParseRootNode"]
+material_override = SubResource("StandardMaterial3D_3kxje")
+mesh = SubResource("BoxMesh_hdqb8")
+
+[node name="NavmeshDiscard" type="NavigationObstacle3D" parent="ParseRootNode/CenterBlock"]
+height = 3.0
+vertices = PackedVector3Array(-2.5, 0, -2.5, 2.5, 0, -2.5, 2.5, 0, 2.5, -2.5, 0, 2.5)
+affect_navigation_mesh = true
+avoidance_enabled = false
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ParseRootNode/CenterBlock"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ParseRootNode/CenterBlock/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ydj0h")
+
+[node name="DebugPaths" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="PathDebugCorridorFunnel" type="NavigationAgent3D" parent="DebugPaths"]
+unique_name_in_owner = true
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0, 1, 1)
+debug_path_custom_point_size = 10.0
+
+[node name="PathDebugEdgeCentered" type="NavigationAgent3D" parent="DebugPaths"]
+unique_name_in_owner = true
+path_postprocessing = 1
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 1, 0, 1)
+debug_path_custom_point_size = 10.0
+
+[node name="DebugMousePos" type="Node3D" parent="DebugPaths"]
+unique_name_in_owner = true
+
+[node name="ChunksContainer" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Use cursor button to set path start position"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 8)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(1, 0, 1, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Path  corridor-funnel"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(128, 8)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(1, 1, 0, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Path edge-centered"
+horizontal_alignment = 1
+vertical_alignment = 1
