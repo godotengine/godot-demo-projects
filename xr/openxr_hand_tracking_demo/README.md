@@ -8,7 +8,7 @@ Renderer: Compatibility
 
 > [!NOTE]
 >
-> This demo requires Godot 4.3 or later
+> This demo requires Godot 4.4 or later
 
 ## Screenshots
 
