@@ -11,6 +11,10 @@ func _physics_process(_delta: float) -> void:
 		# Pressed the reset key or fell off the ground.
 		position = start_position
 		linear_velocity = Vector3.ZERO
+		# We teleported the player on the lines above. Reset interpolation
+		# to prevent it from interpolating from the old player position
+		# to the new position.
+		reset_physics_interpolation()
 
 	var dir := Vector3()
 	dir.x = Input.get_axis(&"move_left", &"move_right")

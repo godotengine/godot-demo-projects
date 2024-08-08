@@ -71,7 +71,7 @@ func _physics_process(_delta: float) -> void:
 	desired_fov = clamp(base_fov + (abs(global_position.length() - previous_position.length()) - FOV_CHANGE_MIN_SPEED) * FOV_SPEED_FACTOR, base_fov, 100)
 	fov = lerpf(fov, desired_fov, FOV_SMOOTH_FACTOR)
 
-	# Turn a little up or down
+	# Turn a little up or down.
 	transform.basis = Basis(transform.basis[0], deg_to_rad(angle_v_adjust)) * transform.basis
 
 	previous_position = global_position
@@ -89,3 +89,7 @@ func update_camera() -> void:
 	# This detaches the camera transform from the parent spatial node, but only
 	# for exterior and top-down cameras.
 	set_as_top_level(camera_type != CameraType.INTERIOR)
+
+	# The camera transition is meant to be instant, so make sure physics interpolation
+	# doesn't change its appearance.
+	reset_physics_interpolation()
