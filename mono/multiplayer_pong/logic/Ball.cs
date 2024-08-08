@@ -7,7 +7,7 @@ public partial class Ball : Area2D
 
     private Vector2 _direction = Vector2.Left;
     private bool _stopped = false;
-    private float _speed = DefaultSpeed;
+    private double _speed = DefaultSpeed;
     private Vector2 _screenSize;
 
     // Called when the node enters the scene tree for the first time.
@@ -17,7 +17,7 @@ public partial class Ball : Area2D
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         _speed += delta;
         // Ball will move normally for both players,
@@ -25,36 +25,36 @@ public partial class Ball : Area2D
         // so each player sees the motion as smooth and not jerky.
         if (!_stopped)
         {
-            Translate(_speed * delta * _direction);
+            Translate((float)(_speed * delta) * _direction);
         }
 
         // Check screen bounds to make ball bounce.
         var ballPosition = Position;
-        if ((ballPosition.y < 0 && _direction.y < 0) || (ballPosition.y > _screenSize.y && _direction.y > 0))
+        if ((ballPosition.Y < 0 && _direction.Y < 0) || (ballPosition.Y > _screenSize.Y && _direction.Y > 0))
         {
-            _direction.y = -_direction.y;
+            _direction.Y = -_direction.Y;
         }
 
-        if (IsNetworkMaster())
+        if (IsMultiplayerAuthority())
         {
-            // Only the master will decide when the ball is out in
-            // the left side (it's own side). This makes the game
-            // playable even if latency is high and ball is going
-            // fast. Otherwise ball might be out in the other
+            // Only the server (Multiplayer Authority) will decide
+            // when the ball is out in the left side (it's own side).
+            // This makes the game playable even if latency is high and
+            // ball is going fast. Otherwise ball might be out in the other
             // player's screen but not this one.
-            if (ballPosition.x < 0)
+            if (ballPosition.X < 0)
             {
                 GetParent().Rpc("UpdateScore", false);
                 Rpc("ResetBall", false);
             }
             else
             {
-                // Only the puppet will decide when the ball is out in
+                // Only the peer will decide when the ball is out in
                 // the right side, which is it's own side. This makes
                 // the game playable even if latency is high and ball
                 // is going fast. Otherwise ball might be out in the
                 // other player's screen but not this one.
-                if (ballPosition.x > _screenSize.x)
+                if (ballPosition.X > _screenSize.X)
                 {
                     GetParent().Rpc("UpdateScore", true);
                     Rpc("ResetBall", true);
@@ -63,31 +63,31 @@ public partial class Ball : Area2D
         }
     }
 
-    [Sync]
+    [Rpc(mode: MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
     private void Bounce(bool left, float random)
     {
         // Using sync because both players can make it bounce.
         if (left)
         {
-            _direction.x = Mathf.Abs(_direction.x);
+            _direction.X = Mathf.Abs(_direction.X);
         }
         else
         {
-            _direction.x = -Mathf.Abs(_direction.x);
+            _direction.X = -Mathf.Abs(_direction.X);
         }
 
         _speed *= 1.1f;
-        _direction.y = random * 2.0f - 1;
+        _direction.Y = random * 2.0f - 1;
         _direction = _direction.Normalized();
     }
 
-    [Sync]
+    [Rpc(mode: MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
     private void Stop()
     {
         _stopped = true;
     }
 
-    [Sync]
+    [Rpc(mode: MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
     private void ResetBall(bool forLeft)
     {
         Position = _screenSize / 2;
