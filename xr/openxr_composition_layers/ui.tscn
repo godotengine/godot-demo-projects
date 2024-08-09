@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://cenb0bfok13vx"]
+
+[ext_resource type="Script" path="res://ui.gd" id="1_wnf2v"]
+[ext_resource type="Shader" path="res://cursor.gdshader" id="2_hngl5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cnxo1"]
+font_size = 64
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_84eui"]
+shader = ExtResource("2_hngl5")
+shader_parameter/color = Color(1, 1, 1, 1)
+
+[node name="UI" type="Control"]
+custom_minimum_size = Vector2(1024, 512)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_wnf2v")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.638554, 0.499437, 0.164002, 0.384314)
+
+[node name="TopLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 17.0
+offset_right = 125.0
+offset_bottom = 40.0
+text = "This is a test!"
+label_settings = SubResource("LabelSettings_cnxo1")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -249.0
+offset_top = -48.0
+offset_right = 249.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Press this button"
+
+[node name="CountLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 316.0
+offset_right = 965.0
+offset_bottom = 495.0
+text = "The button has not been pressed."
+label_settings = SubResource("LabelSettings_cnxo1")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Cursor" type="ColorRect" parent="."]
+process_mode = 4
+material = SubResource("ShaderMaterial_84eui")
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+mouse_filter = 2
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
