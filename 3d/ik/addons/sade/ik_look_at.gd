@@ -3,8 +3,33 @@ extends Node3D
 
 @export var skeleton_path: NodePath:
 	set(value):
-		# TODO: Manually copy the code from this method.
-		_set_skeleton_path(value)
+		skeleton_path = value
+
+		# Because get_node doesn't work in the first call, we just want to assign instead.
+		# This is to get around a issue with NodePaths exposed to the editor.
+		if first_call:
+			return
+
+		if skeleton_path == null:
+			if debug_messages:
+				print(name, " - IK_LookAt: No Nodepath selected for skeleton_path!")
+			return
+
+		# Get the node at that location, if there is one.
+		var temp = get_node(skeleton_path)
+		if temp != null:
+			if temp is Skeleton3D:
+				skeleton_to_use = temp
+				if debug_messages:
+					print(name, " - IK_LookAt: attached to (new) skeleton")
+			else:
+				skeleton_to_use = null
+				if debug_messages:
+					print(name, " - IK_LookAt: skeleton_path does not point to a skeleton!")
+		else:
+			if debug_messages:
+				print(name, " - IK_LookAt: No Nodepath selected for skeleton_path!")
+
 @export var bone_name: String = ""
 @export_enum("_process", "_physics_process", "_notification", "none") var update_mode: int = 0:
 	set(value):
@@ -31,7 +56,6 @@ extends Node3D
 		else:
 			if debug_messages:
 				print(name, " - IK_LookAt: NOT updating skeleton due to unknown update method...")
-
 
 @export_enum("X-up", "Y-up", "Z-up") var look_at_axis: int = 1
 @export_range(0.0, 1.0, 0.001) var interpolation: float = 1.0
@@ -65,7 +89,7 @@ func _ready():
 		if debug_messages:
 			print(name, " - IK_LookAt: Unknown update mode. NOT updating skeleton")
 
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		_setup_for_editor()
 
 
@@ -89,7 +113,6 @@ func update_skeleton():
 		first_call = false
 		if skeleton_to_use == null:
 			_set_skeleton_path(skeleton_path)
-
 
 	# If we do not have a skeleton and/or we're not supposed to update, then return.
 	if skeleton_to_use == null:
@@ -141,20 +164,26 @@ func update_skeleton():
 		rest_euler.z = self_euler.z
 
 	# Make a new basis with the, potentially, changed euler angles.
-	rest.basis = Basis(rest_euler)
+	# TODO: Is the order correct?
+	# Godot 3: "Create a rotation matrix (in the YXZ convention: first Z, then X, and Y last) from the specified Euler angles, given in the vector format as (X-angle, Y-angle, Z-angle)."
+	# Godot 4: "Constructs a pure rotation Basis matrix from Euler angles in the specified Euler rotation order. By default, use YXZ order (most common). See the EulerOrder enum for possible values."
+	rest.basis = Basis.from_euler(rest_euler)
 
 	# Apply additional rotation stored in additional_rotation to the bone.
 	if additional_rotation != Vector3.ZERO:
-		rest.basis = rest.basis.rotated(rest.basis.x, deg2rad(additional_rotation.x))
-		rest.basis = rest.basis.rotated(rest.basis.y, deg2rad(additional_rotation.y))
-		rest.basis = rest.basis.rotated(rest.basis.z, deg2rad(additional_rotation.z))
+		rest.basis = rest.basis.rotated(rest.basis.x, deg_to_rad(additional_rotation.x))
+		rest.basis = rest.basis.rotated(rest.basis.y, deg_to_rad(additional_rotation.y))
+		rest.basis = rest.basis.rotated(rest.basis.z, deg_to_rad(additional_rotation.z))
 
 	# If the position is set using an additional bone, then set the origin
 	# based on that bone and its length.
 	if position_using_additional_bone:
 		var additional_bone_id = skeleton_to_use.find_bone(additional_bone_name)
 		var additional_bone_pos = skeleton_to_use.get_bone_global_pose(additional_bone_id)
-		rest.origin = additional_bone_pos.origin - additional_bone_pos.basis.z.normalized() * additional_bone_length
+		rest.origin = (
+			additional_bone_pos.origin
+			- additional_bone_pos.basis.z.normalized() * additional_bone_length
+		)
 
 	# Finally, apply the new rotation to the bone in the skeleton.
 	skeleton_to_use.set_bone_global_pose_override(bone, rest, interpolation, true)
@@ -187,14 +216,12 @@ func _setup_for_editor():
 
 
 func _set_skeleton_path(new_value):
+	skeleton_path = new_value
+
 	# Because get_node doesn't work in the first call, we just want to assign instead.
 	# This is to get around a issue with NodePaths exposed to the editor.
 	if first_call:
-		skeleton_path = new_value
 		return
-
-	# Assign skeleton_path to whatever value is passed.
-	skeleton_path = new_value
 
 	if skeleton_path == null:
 		if debug_messages:

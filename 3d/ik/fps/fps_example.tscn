@@ -1,64 +1,61 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=23 format=3 uid="uid://b04yqi3oajoyp"]
 
-[ext_resource path="res://addons/sade/editor_gizmo_texture.png" type="Texture2D" id=1]
-[ext_resource path="res://button_change_scene.gd" type="Script" id=2]
-[ext_resource path="res://fps/example_player.gd" type="Script" id=3]
-[ext_resource path="res://addons/sade/ik_look_at.gd" type="Script" id=4]
-[ext_resource path="res://addons/sade/ik_look_at.png" type="Texture2D" id=5]
-[ext_resource path="res://addons/sade/ik_fabrik.gd" type="Script" id=6]
-[ext_resource path="res://addons/sade/ik_fabrik.png" type="Texture2D" id=7]
-[ext_resource path="res://fps/weapon_pistol.dae" type="PackedScene" id=8]
-[ext_resource path="res://fps/gun_color.tres" type="Material" id=9]
-[ext_resource path="res://fps/gun_emission.tres" type="Material" id=10]
-[ext_resource path="res://model/godot_battle_bot.dae" type="PackedScene" id=11]
-[ext_resource path="res://model/battle_bot_color.tres" type="Material" id=12]
-[ext_resource path="res://model/battle_bot_emission.tres" type="Material" id=13]
+[ext_resource type="Texture2D" uid="uid://bw3q8aq6gfuof" path="res://addons/sade/editor_gizmo_texture.png" id="1"]
+[ext_resource type="Script" path="res://button_change_scene.gd" id="2"]
+[ext_resource type="Script" path="res://fps/example_player.gd" id="3"]
+[ext_resource type="Script" path="res://addons/sade/ik_look_at.gd" id="4"]
+[ext_resource type="Script" path="res://addons/sade/ik_fabrik.gd" id="6"]
+[ext_resource type="PackedScene" uid="uid://xwg4osrspnrn" path="res://fps/weapon_pistol.dae" id="8"]
+[ext_resource type="Material" path="res://fps/gun_color.tres" id="9"]
+[ext_resource type="PackedScene" uid="uid://ctssefekxjogg" path="res://model/godot_battle_bot.dae" id="11"]
+[ext_resource type="Material" path="res://model/battle_bot_color.tres" id="12"]
 
-[sub_resource type="PlaneMesh" id=1]
+[sub_resource type="PlaneMesh" id="1"]
 size = Vector2(40, 40)
 
-[sub_resource type="StandardMaterial3D" id=2]
-albedo_texture = ExtResource( 1 )
+[sub_resource type="StandardMaterial3D" id="2"]
+albedo_texture = ExtResource("1")
 roughness = 0.2
 uv1_scale = Vector3(0.25, 0.25, 0.25)
 uv1_triplanar = true
 
-[sub_resource type="BoxShape3D" id=3]
-extents = Vector3(20, 1, 20)
+[sub_resource type="BoxShape3D" id="3"]
+size = Vector3(40, 2, 40)
 
-[sub_resource type="BoxMesh" id=4]
+[sub_resource type="BoxMesh" id="4"]
 size = Vector3(4, 4, 4)
 
-[sub_resource type="StandardMaterial3D" id=5]
+[sub_resource type="StandardMaterial3D" id="5"]
 albedo_color = Color(0.148438, 1, 0, 1)
-albedo_texture = ExtResource( 1 )
+albedo_texture = ExtResource("1")
 uv1_triplanar = true
 
-[sub_resource type="BoxShape3D" id=6]
-extents = Vector3(2, 2, 2)
+[sub_resource type="BoxShape3D" id="6"]
+size = Vector3(4, 4, 4)
 
-[sub_resource type="StandardMaterial3D" id=7]
+[sub_resource type="StandardMaterial3D" id="7"]
 albedo_color = Color(0, 0.882813, 1, 1)
-albedo_texture = ExtResource( 1 )
+albedo_texture = ExtResource("1")
 uv1_triplanar = true
 
-[sub_resource type="CapsuleShape3D" id=8]
-radius = 4.0
+[sub_resource type="CapsuleShape3D" id="8"]
+radius = 3.0
 height = 6.0
 
-[sub_resource type="Curve3D" id=9]
+[sub_resource type="Curve3D" id="9"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, -2.43129, -0.955339, 0, 0, 0, 0, 0, 0, 0, -0.670561, 0.183959, 0, 0, 0, 0, 0, 0, 0, 0.64629, 0.228347, 0, 0, 0, 0, 0, 0, 0, 2.31825, -0.925747, 0),
 "tilts": PackedFloat32Array(0, 0, 0, 0)
 }
+point_count = 4
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id="10"]
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
@@ -66,11 +63,11 @@ tracks/0/keys = {
 "values": [Vector3(0.570504, -2.2654, 2.93826), Vector3(0, -1.36445, 3.78817)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
@@ -78,11 +75,11 @@ tracks/1/keys = {
 "values": [Vector3(0, -2, 0), Vector3(0, 0, 0)]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("LeanPath/PathFollow3D/IK_LookAt_Chest/Camera3D:fov")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
@@ -90,13 +87,13 @@ tracks/2/keys = {
 "values": [80.0, 60.0]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id="11"]
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("LeanPath/PathFollow3D/IK_LookAt_Chest/Camera3D:fov")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
@@ -104,11 +101,11 @@ tracks/0/keys = {
 "values": [60.0, 80.0]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
@@ -116,11 +113,11 @@ tracks/1/keys = {
 "values": [Vector3(0, -1.36445, 3.78817), Vector3(0.570504, -2.2654, 2.93826)]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
@@ -128,13 +125,13 @@ tracks/2/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, -2, 0)]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id="12"]
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
@@ -142,11 +139,11 @@ tracks/0/keys = {
 "values": [Vector3(0.570504, -2.2654, 2.93826)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
@@ -154,16 +151,23 @@ tracks/1/keys = {
 "values": [Vector3(0, -2, 0)]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("LeanPath/PathFollow3D/IK_LookAt_Chest/Camera3D:fov")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [80.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_grvc3"]
+_data = {
+"Aiming": SubResource("10"),
+"Idle": SubResource("11"),
+"Start": SubResource("12")
 }
 
 [node name="FPSExample" type="Node3D"]
@@ -172,206 +176,206 @@ tracks/2/keys = {
 
 [node name="Floor" type="MeshInstance3D" parent="Level"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-mesh = SubResource( 1 )
-surface_material_override/0 = SubResource( 2 )
+mesh = SubResource("1")
+surface_material_override/0 = SubResource("2")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Floor"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Floor/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.956119, 0)
-shape = SubResource( 3 )
+shape = SubResource("3")
 
 [node name="Walls" type="Node3D" parent="Level"]
 
 [node name="LargeWall" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(1, 0, 0, 0, 10, 0, 0, 0, 10, -39.9997, 20.0003, 20.0002)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 5 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("5")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/LargeWall"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/LargeWall/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="LargeWall2" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(1, 0, 0, 0, 10, 0, 0, 0, 10, -39.9997, 20.0003, -19.9998)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 5 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("5")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/LargeWall2"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/LargeWall2/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="LargeWall3" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(-4.37114e-08, 0, -10, 0, 10, 0, 1, 0, -4.37114e-07, -18.9997, 20.0003, -40.9998)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 5 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("5")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/LargeWall3"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/LargeWall3/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="LargeWall4" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(-4.37114e-08, 0, -10, 0, 10, 0, 1, 0, -4.37114e-07, 21.0003, 20.0003, -40.9998)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 5 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("5")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/LargeWall4"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/LargeWall4/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="LargeWall5" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(-1, 0, 8.74228e-07, 0, 10, 0, -8.74228e-08, 0, -10, 41.0003, 20.0003, -19.9998)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 5 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("5")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/LargeWall5"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/LargeWall5/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="LargeWall6" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(-1, 0, 8.74228e-07, 0, 10, 0, -8.74228e-08, 0, -10, 41.0003, 20.0003, 20.0002)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 5 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("5")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/LargeWall6"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/LargeWall6/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="LargeWall7" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(1.31134e-07, 0, 10, 0, 10, 0, -1, 0, 1.31134e-06, 21.0003, 20.0003, 40.0002)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 5 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("5")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/LargeWall7"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/LargeWall7/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="LargeWall8" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(1.31134e-07, 0, 10, 0, 10, 0, -1, 0, 1.31134e-06, -18.9997, 20.0003, 40.0002)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 5 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("5")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/LargeWall8"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/LargeWall8/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="Wall" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(7.54979e-08, 0, 4, 0, 4, 0, -1, 0, 3.01992e-07, -9.9997, 8.00032, 22.0005)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 7 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/Wall"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/Wall/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="Wall2" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(1, 0, -4.76837e-07, 0, 4, 0, 1.19209e-07, 0, 4, -19.9997, 8.00032, 16.0005)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 7 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/Wall2"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/Wall2/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="Wall3" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(1, 0, -3.57627e-07, 0, 4, 0, 1.19209e-07, 0, 3, -19.9997, 8.00032, 2.00049)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 7 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/Wall3"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/Wall3/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="Wall4" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(1, 0, -4.76837e-07, 0, 4, 0, 1.19209e-07, 0, 4, -19.9997, 8.00032, -21.9995)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 7 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/Wall4"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/Wall4/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="Wall5" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(-1.62921e-07, 0, -4, 0, 4, 0, 1, 0, -6.51683e-07, -9.9997, 8.00032, -27.9995)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 7 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/Wall5"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/Wall5/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="Wall6" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(-1, 0, 8.26528e-07, 0, 4, 0, -2.06632e-07, 0, -4, 0.000319004, 8.00032, -21.9995)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 7 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/Wall6"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/Wall6/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="Wall7" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(-1.62921e-07, 0, -4, 0, 4, 0, 1, 0, -6.51683e-07, 10.0003, 8.00032, -15.9995)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 7 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/Wall7"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/Wall7/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="Wall9" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(1, 0, -4.76837e-07, 0, 4, 0, 1.19209e-07, 0, 4, 25.0003, 8.00032, -25.9995)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 7 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/Wall9"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/Wall9/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="Wall10" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(0.573577, 0, 3.27661, 0, 4, 0, -0.819152, 0, 2.29431, 23.0003, 8.00032, 3.00049)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 7 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/Wall10"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/Wall10/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="Wall11" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(-0.819152, 0, 2.29431, 0, 4, 0, -0.573577, 0, -3.27661, 22.2126, 8.00032, 14.7123)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 7 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/Wall11"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/Wall11/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="Wall12" type="MeshInstance3D" parent="Level/Walls"]
 transform = Transform3D(-0.627507, 2.10616, 2.29431, 0.642788, 3.06418, 0, -0.439385, 1.47475, -3.27661, 14.8402, 8.00032, 9.55015)
-mesh = SubResource( 4 )
-surface_material_override/0 = SubResource( 7 )
+mesh = SubResource("4")
+surface_material_override/0 = SubResource("7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Walls/Wall12"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Walls/Wall12/StaticBody3D"]
-shape = SubResource( 6 )
+shape = SubResource("6")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.388878, -0.754027, 0.529355, 0, 0.574581, 0.818448, -0.921289, -0.318277, 0.223442, -9.77531, 11.5204, 11.766)
@@ -380,32 +384,38 @@ shadow_enabled = true
 directional_shadow_mode = 0
 
 [node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Panel" type="Panel" parent="Control"]
 modulate = Color(1, 1, 1, 0.784314)
+layout_mode = 1
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -2.0
-offset_top = -70.0
+offset_top = -94.0
 offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="Label" type="Label" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 10.0
-offset_right = -18.0
-offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "F.A.B.R.I.K IK Example use case: Dynamic FPS Animations
 Controls: WASD/Arrows to move, left click to fire, right click to look down sights, Q/E to lean left/right
 Escape to free/lock mouse cursor"
-align = 1
-valign = 1
+horizontal_alignment = 1
 
 [node name="ButtonPrev" type="Button" parent="Control"]
+layout_mode = 0
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
@@ -413,14 +423,12 @@ offset_top = -60.0
 offset_right = 129.0
 offset_bottom = -10.0
 text = "Previous scene"
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("2")
 scene_to_change_to = "res://skeleton_ik.tscn"
 
 [node name="Crosshair" type="Control" parent="Control"]
 modulate = Color(1, 1, 1, 0.784314)
+anchors_preset = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -429,19 +437,15 @@ offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="Control/Crosshair"]
+layout_mode = 0
 offset_left = 19.0
 offset_right = 21.0
 offset_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect2" type="ColorRect" parent="Control/Crosshair"]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 18.0
 offset_right = 42.0
@@ -449,30 +453,26 @@ offset_bottom = 58.0
 rotation = 90.0
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 7, 0)
-shape = SubResource( 8 )
+shape = SubResource("8")
 
 [node name="CameraHolder" type="Node3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 0)
 
 [node name="LeanPath" type="Path3D" parent="CharacterBody3D/CameraHolder"]
-curve = SubResource( 9 )
+curve = SubResource("9")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="CharacterBody3D/CameraHolder/LeanPath"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0412404, 0.205172, 0)
-offset = 2.71865
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.43129, -0.955339, 0)
 rotation_mode = 0
 loop = false
 
 [node name="IK_LookAt_Chest" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.451559, 0)
-script = ExtResource( 4 )
-__meta__ = {
-"_editor_icon": ExtResource( 5 )
-}
+script = ExtResource("4")
 skeleton_path = NodePath("../../../../GodotBattleBot/Armature/Skeleton3D")
 bone_name = "Chest"
 look_at_axis = 2
@@ -486,10 +486,7 @@ fov = 74.0
 transform = Transform3D(0.999391, 0, -0.0348995, 0, 1, 0, 0.0348995, 0, 0.999391, 0.570504, -2.2654, 2.93826)
 
 [node name="IK_FABRIK" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos"]
-script = ExtResource( 6 )
-__meta__ = {
-"_editor_icon": ExtResource( 7 )
-}
+script = ExtResource("6")
 skeleton_path = NodePath("../../../../../../GodotBattleBot/Armature/Skeleton3D")
 bones_in_chain = PackedStringArray("Left_UpperArm", "Left_LowerArm", "Left_Hand")
 bones_in_chain_lengths = PackedFloat32Array(1.97, 3, 0.1)
@@ -501,10 +498,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.54883, -0.0335302, -0.93414
 
 [node name="IK_LookAt" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos/IK_FABRIK/Target"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300601, 0, 0.714191)
-script = ExtResource( 4 )
-__meta__ = {
-"_editor_icon": ExtResource( 5 )
-}
+script = ExtResource("4")
 skeleton_path = NodePath("../../../../../../../../GodotBattleBot/Armature/Skeleton3D")
 bone_name = "Left_Hand"
 use_negative_our_rot = true
@@ -523,10 +517,7 @@ transform = Transform3D(-0.980952, 0.0992109, 0.167001, 0.116307, 0.988573, 0.09
 transform = Transform3D(-0.962426, 0.0909643, 0.255854, 0.128209, 0.982809, 0.132853, -0.23937, 0.160664, -0.957543, 0.737802, -2.14957, -1.27378)
 
 [node name="IK_FABRIK_RightArm" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos"]
-script = ExtResource( 6 )
-__meta__ = {
-"_editor_icon": ExtResource( 7 )
-}
+script = ExtResource("6")
 skeleton_path = NodePath("../../../../../../GodotBattleBot/Armature/Skeleton3D")
 bones_in_chain = PackedStringArray("Right_UpperArm", "Right_LowerArm", "Right_Hand")
 bones_in_chain_lengths = PackedFloat32Array(1.97, 3, 0.1)
@@ -539,10 +530,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.285662, -0.0335302, -1.052
 
 [node name="IK_LookAt" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos/IK_FABRIK_RightArm/Target"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00396007, 0, 0.834561)
-script = ExtResource( 4 )
-__meta__ = {
-"_editor_icon": ExtResource( 5 )
-}
+script = ExtResource("4")
 skeleton_path = NodePath("../../../../../../../../GodotBattleBot/Armature/Skeleton3D")
 bone_name = "Right_Hand"
 use_negative_our_rot = true
@@ -564,38 +552,32 @@ remote_path = NodePath("../../../../../Weapon/Pistol")
 
 [node name="IK_LookAt_Head" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.14041, -2.57003)
-script = ExtResource( 4 )
-__meta__ = {
-"_editor_icon": ExtResource( 5 )
-}
+script = ExtResource("4")
 skeleton_path = NodePath("../../../../GodotBattleBot/Armature/Skeleton3D")
 bone_name = "Head"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D/CameraHolder"]
+libraries = {
+"": SubResource("AnimationLibrary_grvc3")
+}
 autoplay = "Start"
-playback_speed = 4.0
-anims/Aiming = SubResource( 10 )
-anims/Idle = SubResource( 11 )
-anims/Start = SubResource( 12 )
 
 [node name="Weapon" type="Node3D" parent="CharacterBody3D/CameraHolder"]
 
-[node name="Pistol" parent="CharacterBody3D/CameraHolder/Weapon" instance=ExtResource( 8 )]
-transform = Transform3D(0.999391, 0, -0.0348995, 0, 1, 0, 0.0348995, 0, 0.999391, 0.519895, -1.10362, 3.20654)
+[node name="Pistol" parent="CharacterBody3D/CameraHolder/Weapon" instance=ExtResource("8")]
+transform = Transform3D(0.999391, 0, -0.0348995, 0, 1, 0, 0.0348995, 0, 0.999391, -1.87015, -2.26413, 3.20654)
 
 [node name="Pistol_textured" parent="CharacterBody3D/CameraHolder/Weapon/Pistol" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-surface_material_override/0 = ExtResource( 9 )
-material/1 = ExtResource( 10 )
+surface_material_override/0 = ExtResource("9")
 
 [node name="PistolEnd" type="Node3D" parent="CharacterBody3D/CameraHolder/Weapon/Pistol"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0161836, 0.315914, 1.41329)
 
-[node name="GodotBattleBot" parent="CharacterBody3D" instance=ExtResource( 11 )]
+[node name="GodotBattleBot" parent="CharacterBody3D" instance=ExtResource("11")]
 
 [node name="godot_battle_bot" parent="CharacterBody3D/GodotBattleBot/Armature/Skeleton3D" index="0"]
-surface_material_override/0 = ExtResource( 12 )
-material/1 = ExtResource( 13 )
+surface_material_override/0 = ExtResource("12")
 
 [editable path="CharacterBody3D/CameraHolder/Weapon/Pistol"]
 [editable path="CharacterBody3D/GodotBattleBot"]
