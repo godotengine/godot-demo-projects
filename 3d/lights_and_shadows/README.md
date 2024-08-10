@@ -12,7 +12,7 @@ Language: GDScript
 
 Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2733
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2741
 
 ## Screenshots
 
