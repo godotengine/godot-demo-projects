@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://blbehgenpldb"]
+
+[ext_resource type="Script" path="res://scenes/window/url_opener.gd" id="1_cqmq3"]
+[ext_resource type="Script" path="res://scenes/window/window.gd" id="1_yx1y1"]
+
+[node name="Window" type="Window"]
+initial_position = 2
+size = Vector2i(500, 150)
+script = ExtResource("1_yx1y1")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[url=https://docs.godotengine.org/en/stable/classes/class_window.html]Window, Godot Docs[/url]:
+
+At runtime, [b]Windows[/b] will not close automatically when requested. You need to handle it manually using the [url=https://docs.godotengine.org/en/stable/classes/class_window.html#class-window-signal-close-requested]close_requested[/url] signal (this applies both to pressing the close button and clicking outside of a popup)."
+script = ExtResource("1_cqmq3")
