@@ -35,31 +35,31 @@ namespace AndroidInAppPurchasesWithCSharp
                     Callable.From(OnDisconnected));
                 // Response ID (int), Debug message (string).
                 _payment.Connect(GooglePlayBilling.SignalName.ConnectError, 
-                    Callable.From((int code, string message) => OnConnectError(code, message)));
+                    Callable.From<int,string>(OnConnectError));
                 // Purchases (Dictionary[]).
                 _payment.Connect(GooglePlayBilling.SignalName.PurchasesUpdated, 
-                    Callable.From((Array arrPurchases) => OnPurchasesUpdated(arrPurchases)));
+                    Callable.From<Array>(OnPurchasesUpdated));
                 // Response ID (int), Debug message (string).
                 _payment.Connect(GooglePlayBilling.SignalName.PurchaseError, 
-                    Callable.From((int code, string message) => OnPurchaseError(code, message)));
+                    Callable.From<int,string>(OnPurchaseError));
                 // SKUs (Dictionary[]).
                 _payment.Connect(GooglePlayBilling.SignalName.SkuDetailsQueryCompleted, 
-                    Callable.From((Array arrSkuDetails) => OnSkuDetailsQueryCompleted(arrSkuDetails)));
+                    Callable.From<Array>(OnSkuDetailsQueryCompleted));
                 // Response ID (int), Debug message (string), Queried SKUs (string[]).
                 _payment.Connect(GooglePlayBilling.SignalName.SkuDetailsQueryError, 
-                    Callable.From((int code, string message, string[] skuDetails) => OnSkuDetailsQueryError(code, message, skuDetails)));
+                    Callable.From<int,string, string[]>(OnSkuDetailsQueryError));
                 // Purchase token (string).
                 _payment.Connect(GooglePlayBilling.SignalName.PurchaseAcknowledged, 
-                    Callable.From((string purchaseToken) => OnPurchaseAcknowledged(purchaseToken)));
+                    Callable.From<string>(OnPurchaseAcknowledged));
                 // Response ID (int), Debug message (string).
                 _payment.Connect(GooglePlayBilling.SignalName.PurchaseAcknowledgementError, 
-                    Callable.From((int code, string message) => OnPurchaseAcknowledgementError(code, message)));
+                    Callable.From<int,string>(OnPurchaseAcknowledgementError));
                 // Purchase token (string).
                 _payment.Connect(GooglePlayBilling.SignalName.PurchaseConsumed, 
-                    Callable.From((string purchaseToken) => OnPurchaseConsumed(purchaseToken)));
+                    Callable.From<string>(OnPurchaseConsumed));
                 // Response ID (int), Debug message (string), Purchase token (string).
                 _payment.Connect(GooglePlayBilling.SignalName.PurchaseConsumptionError, 
-                    Callable.From((int code, string message, string purchaseToken) => OnPurchaseConsumptionError(code, message, purchaseToken)));
+                    Callable.From<int,string,string>(OnPurchaseConsumptionError));
                 _payment.StartConnection();
             }
             else

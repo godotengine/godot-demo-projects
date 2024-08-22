@@ -40,20 +40,15 @@ namespace AndroidInAppPurchasesWithCSharp.GodotGooglePlayBilling
                 // You can drop some of these based on your needs
                 _payment.Connect(SignalName.Connected, Callable.From(OnGodotGooglePlayBilling_connected)); // No params
                 _payment.Connect(SignalName.Disconnected, Callable.From(OnGodotGooglePlayBilling_disconnected)); // No params
-                _payment.Connect(SignalName.ConnectError, Callable.From((int code, string message) => OnGodotGooglePlayBilling_connect_error(code, message))); // Response ID (int), Debug message (string)
-                _payment.Connect(SignalName.SkuDetailsQueryCompleted, Callable.From((Array skuDetails) =>
-                    OnGodotGooglePlayBilling_sku_details_query_completed(skuDetails))); // SKUs (Array of Dictionary)
-                _payment.Connect(SignalName.SkuDetailsQueryError, Callable.From((int code, string message, string[] querySkuDetails) =>
-                    OnGodotGooglePlayBilling_sku_details_query_error(code, message, querySkuDetails))); // Response ID (int), Debug message (string), Queried SKUs (string[])
-                _payment.Connect(SignalName.PurchasesUpdated, Callable.From((Array purchases) => OnGodotGooglePlayBilling_purchases_updated(purchases))); // Purchases (Array of Dictionary)
-                _payment.Connect(SignalName.PurchaseError, Callable.From((int code, string message) => OnGodotGooglePlayBilling_purchase_error(code, message))); // Response ID (int), Debug message (string)
-                _payment.Connect(SignalName.PurchaseAcknowledged, Callable.From((string purchaseToken) =>
-                    OnGodotGooglePlayBilling_purchase_acknowledged(purchaseToken))); // Purchase token (string)
-                _payment.Connect(SignalName.PurchaseAcknowledgementError, Callable.From((int code, string message) =>
-                    OnGodotGooglePlayBilling_purchase_acknowledgement_error(code, message))); // Response ID (int), Debug message (string), Purchase token (string)
-                _payment.Connect(SignalName.PurchaseConsumed, Callable.From((string purchaseToken) => OnGodotGooglePlayBilling_purchase_consumed(purchaseToken))); // Purchase token (string)
-                _payment.Connect(SignalName.PurchaseConsumptionError, Callable.From((int code, string message, string purchaseToken) =>
-                    OnGodotGooglePlayBilling_purchase_consumption_error(code, message, purchaseToken))); // Response ID (int), Debug message (string), Purchase token (string)
+                _payment.Connect(SignalName.ConnectError, Callable.From<int, string>(OnGodotGooglePlayBilling_connect_error)); // Response ID (int), Debug message (string)
+                _payment.Connect(SignalName.SkuDetailsQueryCompleted, Callable.From<Array>(OnGodotGooglePlayBilling_sku_details_query_completed)); // SKUs (Array of Dictionary)
+                _payment.Connect(SignalName.SkuDetailsQueryError, Callable.From<int,string,string[]>(OnGodotGooglePlayBilling_sku_details_query_error)); // Response ID (int), Debug message (string), Queried SKUs (string[])
+                _payment.Connect(SignalName.PurchasesUpdated, Callable.From<Array>(OnGodotGooglePlayBilling_purchases_updated)); // Purchases (Array of Dictionary)
+                _payment.Connect(SignalName.PurchaseError, Callable.From<int,string>(OnGodotGooglePlayBilling_purchase_error)); // Response ID (int), Debug message (string)
+                _payment.Connect(SignalName.PurchaseAcknowledged, Callable.From<string>(OnGodotGooglePlayBilling_purchase_acknowledged)); // Purchase token (string)
+                _payment.Connect(SignalName.PurchaseAcknowledgementError, Callable.From<int,string>(OnGodotGooglePlayBilling_purchase_acknowledgement_error)); // Response ID (int), Debug message (string), Purchase token (string)
+                _payment.Connect(SignalName.PurchaseConsumed, Callable.From<string>(OnGodotGooglePlayBilling_purchase_consumed)); // Purchase token (string)
+                _payment.Connect(SignalName.PurchaseConsumptionError, Callable.From<int,string,string>(OnGodotGooglePlayBilling_purchase_consumption_error)); // Response ID (int), Debug message (string), Purchase token (string)
             }
             else
             {
