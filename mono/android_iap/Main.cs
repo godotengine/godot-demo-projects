@@ -28,37 +28,37 @@ namespace AndroidInAppPurchasesWithCSharp
                 _label.Text += $"\n\n\nTest item SKU: {TestItemSku}";
 
                 // No params.
-                _payment.Connect(GooglePlayBilling.SignalName.Connected, 
+                _payment.Connect(GooglePlayBilling.SignalName.Connected,
                     Callable.From(OnConnected));
                 // No params.
-                _payment.Connect(GooglePlayBilling.SignalName.Disconnected, 
+                _payment.Connect(GooglePlayBilling.SignalName.Disconnected,
                     Callable.From(OnDisconnected));
                 // Response ID (int), Debug message (string).
-                _payment.Connect(GooglePlayBilling.SignalName.ConnectError, 
+                _payment.Connect(GooglePlayBilling.SignalName.ConnectError,
                     Callable.From<int,string>(OnConnectError));
                 // Purchases (Dictionary[]).
-                _payment.Connect(GooglePlayBilling.SignalName.PurchasesUpdated, 
+                _payment.Connect(GooglePlayBilling.SignalName.PurchasesUpdated,
                     Callable.From<Array>(OnPurchasesUpdated));
                 // Response ID (int), Debug message (string).
-                _payment.Connect(GooglePlayBilling.SignalName.PurchaseError, 
+                _payment.Connect(GooglePlayBilling.SignalName.PurchaseError,
                     Callable.From<int,string>(OnPurchaseError));
                 // SKUs (Dictionary[]).
-                _payment.Connect(GooglePlayBilling.SignalName.SkuDetailsQueryCompleted, 
+                _payment.Connect(GooglePlayBilling.SignalName.SkuDetailsQueryCompleted,
                     Callable.From<Array>(OnSkuDetailsQueryCompleted));
                 // Response ID (int), Debug message (string), Queried SKUs (string[]).
-                _payment.Connect(GooglePlayBilling.SignalName.SkuDetailsQueryError, 
+                _payment.Connect(GooglePlayBilling.SignalName.SkuDetailsQueryError,
                     Callable.From<int,string, string[]>(OnSkuDetailsQueryError));
                 // Purchase token (string).
-                _payment.Connect(GooglePlayBilling.SignalName.PurchaseAcknowledged, 
+                _payment.Connect(GooglePlayBilling.SignalName.PurchaseAcknowledged,
                     Callable.From<string>(OnPurchaseAcknowledged));
                 // Response ID (int), Debug message (string).
-                _payment.Connect(GooglePlayBilling.SignalName.PurchaseAcknowledgementError, 
+                _payment.Connect(GooglePlayBilling.SignalName.PurchaseAcknowledgementError,
                     Callable.From<int,string>(OnPurchaseAcknowledgementError));
                 // Purchase token (string).
-                _payment.Connect(GooglePlayBilling.SignalName.PurchaseConsumed, 
+                _payment.Connect(GooglePlayBilling.SignalName.PurchaseConsumed,
                     Callable.From<string>(OnPurchaseConsumed));
                 // Response ID (int), Debug message (string), Purchase token (string).
-                _payment.Connect(GooglePlayBilling.SignalName.PurchaseConsumptionError, 
+                _payment.Connect(GooglePlayBilling.SignalName.PurchaseConsumptionError,
                     Callable.From<int,string,string>(OnPurchaseConsumptionError));
                 _payment.StartConnection();
             }
