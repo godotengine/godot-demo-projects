@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dkhg8e00d02f2"]
+[gd_scene load_steps=10 format=3 uid="uid://dkhg8e00d02f2"]
 
 [ext_resource type="Script" path="res://navmesh.gd" id="1"]
 [ext_resource type="NavigationMesh" uid="uid://ii7ckx3dvrs2" path="res://navmesh.res" id="2_lcfvj"]
-[ext_resource type="ArrayMesh" uid="uid://gmytdjp2bcsq" path="res://level_mesh.res" id="3_1cas0"]
+[ext_resource type="ArrayMesh" uid="uid://c2d3qxdexm53n" path="res://models/level_mesh/level_mesh.obj" id="3_bu7c5"]
 [ext_resource type="Script" path="res://character.gd" id="4_u7d3d"]
-[ext_resource type="ArrayMesh" uid="uid://prwe6io8p1iv" path="res://robot.res" id="5_ple0n"]
+[ext_resource type="ArrayMesh" uid="uid://wuj3rp35gym1" path="res://models/robot/robot.obj" id="5_17f0w"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ps07l"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -18,6 +18,11 @@ background_mode = 2
 sky = SubResource("Sky_baxfs")
 tonemap_mode = 3
 tonemap_white = 6.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2y26t"]
+albedo_color = Color(1.01075e-06, 0, 0.451248, 1)
+metallic = 0.3
+roughness = 0.1
 
 [node name="Node3D" type="Node3D"]
 _import_path = NodePath(".")
@@ -38,7 +43,8 @@ navigation_mesh = ExtResource("2_lcfvj")
 
 [node name="LevelMesh" type="MeshInstance3D" parent="NavigationRegion3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.0452547, 0)
-mesh = ExtResource("3_1cas0")
+mesh = ExtResource("3_bu7c5")
+surface_material_override/0 = SubResource("StandardMaterial3D_2y26t")
 
 [node name="CameraBase" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07475, 0, 1.96678)
@@ -52,9 +58,9 @@ near = 0.1
 script = ExtResource("4_u7d3d")
 
 [node name="Robot" type="MeshInstance3D" parent="RobotBase"]
-transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 1, 0, 7.54979e-08, 0, -0.5, 0, 1, 0)
+transform = Transform3D(-0.6, 0, -9.05975e-08, 0, 0.6, 0, 9.05975e-08, 0, -0.6, 0, 1, 0)
 gi_mode = 2
-mesh = ExtResource("5_ple0n")
+mesh = ExtResource("5_17f0w")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="RobotBase"]
 path_desired_distance = 0.1
