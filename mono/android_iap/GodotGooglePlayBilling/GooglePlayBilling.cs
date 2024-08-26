@@ -55,61 +55,61 @@ namespace AndroidInAppPurchasesWithCSharp.GodotGooglePlayBilling
                 IsAvailable = false;
             }
         }
-        
+
         #region GooglePlayBilling Methods
-        
+
         public void StartConnection() => _payment?.Call("startConnection");
-        
+
         public void EndConnection() => _payment?.Call("endConnection");
-        
+
         public void QuerySkuDetails(string[] querySkuDetails, PurchaseType type) => _payment?.Call("querySkuDetails", querySkuDetails, $"{type}".ToLower());
-        
+
         public bool IsReady() => _payment?.Call("isReady").AsBool() ?? false;
-        
+
         public void AcknowledgePurchase(string purchaseToken) => _payment?.Call("acknowledgePurchase", purchaseToken);
-        
+
         public void ConsumePurchase(string purchaseToken) => _payment?.Call("consumePurchase", purchaseToken);
-        
+
         public BillingResult Purchase(string sku)
         {
             if (_payment == null) return null;
             var result = (Dictionary)_payment.Call("purchase", sku);
             return new BillingResult(result);
         }
-        
+
         public PurchasesResult QueryPurchases(PurchaseType purchaseType)
         {
             if (_payment == null) return null;
             var result = (Dictionary)_payment.Call("queryPurchases", $"{purchaseType}".ToLower());
             return new PurchasesResult(result);
         }
-        
+
         #endregion
-        
+
         #region GodotGooglePlayBilling Signals
-        
+
         private void OnGodotGooglePlayBilling_connected() => EmitSignal(SignalName.Connected);
-        
+
         private void OnGodotGooglePlayBilling_disconnected() => EmitSignal(SignalName.Disconnected);
-        
+
         private void OnGodotGooglePlayBilling_connect_error(int code, string message) => EmitSignal(SignalName.ConnectError, code, message);
-        
+
         private void OnGodotGooglePlayBilling_sku_details_query_completed(Array skuDetails) => EmitSignal(SignalName.SkuDetailsQueryCompleted, skuDetails);
-        
+
         private void OnGodotGooglePlayBilling_sku_details_query_error(int code, string message, string[] querySkuDetails) => EmitSignal(SignalName.SkuDetailsQueryError, code, message, querySkuDetails);
-        
+
         private void OnGodotGooglePlayBilling_purchases_updated(Array purchases) => EmitSignal(SignalName.PurchasesUpdated, purchases);
-        
+
         private void OnGodotGooglePlayBilling_purchase_error(int code, string message) => EmitSignal(SignalName.PurchaseError, code, message);
-        
+
         private void OnGodotGooglePlayBilling_purchase_acknowledged(string purchaseToken) => EmitSignal(SignalName.PurchaseAcknowledged, purchaseToken);
-        
+
         private void OnGodotGooglePlayBilling_purchase_acknowledgement_error(int code, string message) => EmitSignal(SignalName.PurchaseAcknowledgementError, code, message);
-        
+
         private void OnGodotGooglePlayBilling_purchase_consumed(string purchaseToken) => EmitSignal(SignalName.Connected, purchaseToken);
-        
+
         private void OnGodotGooglePlayBilling_purchase_consumption_error(int code, string message, string purchaseToken) => EmitSignal(SignalName.PurchaseConsumptionError, code, message, purchaseToken);
-        
+
         #endregion
     }
 }
