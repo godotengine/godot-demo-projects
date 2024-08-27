@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://drinprblemj5u"]
+[gd_scene load_steps=27 format=3 uid="uid://drinprblemj5u"]
 
 [ext_resource type="Script" path="res://vehicles/vehicle.gd" id="1_wetfm"]
 [ext_resource type="ArrayMesh" uid="uid://bqrwin8ccgptt" path="res://vehicles/meshes/wheel.res" id="2_q28iu"]
@@ -14,7 +14,13 @@
 [ext_resource type="Material" uid="uid://dyg750wqca86r" path="res://vehicles/truck_trailer.tres" id="12_hbs2y"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_itmot"]
-size = Vector3(1.3392, 1.04159, 2.3947)
+size = Vector3(1.30832, 1.05289, 0.757141)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_isu5t"]
+size = Vector3(1.30832, 0.594339, 0.99649)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tbnf0"]
+size = Vector3(1.30832, 0.314981, 0.924881)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xu0em"]
 random_pitch = 1.05
@@ -143,7 +149,10 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_8a087")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dpscj"]
-size = Vector3(1.49783, 1.38835, 3.94168)
+size = Vector3(1.24025, 1.12246, 4.19928)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rm6ts"]
+size = Vector3(1.24025, 0.429309, 1.85267)
 
 [node name="TrailerTruck" type="Node3D"]
 
@@ -215,15 +224,23 @@ layers = 2
 gi_mode = 2
 mesh = ExtResource("3_t1je7")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.571059, 0.132248)
+[node name="Shape1" type="CollisionShape3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000307977, 0.526519, 0.060351)
 shape = SubResource("BoxShape3D_itmot")
+
+[node name="Shape2" type="CollisionShape3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000307977, 0.297243, 0.937075)
+shape = SubResource("BoxShape3D_isu5t")
+
+[node name="Shape3" type="CollisionShape3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000307977, 0.157564, -0.780767)
+shape = SubResource("BoxShape3D_tbnf0")
 
 [node name="CameraBase" type="Node3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.97449, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Body/CameraBase"]
-transform = Transform3D(-1, 2.11495e-08, -8.48259e-08, 0, 0.970296, 0.241922, 8.74227e-08, 0.241922, -0.970295, 0, 2.032, -4.394)
+transform = Transform3D(0.560672, -0.476692, 0.67706, 0, 0.817669, 0.575689, -0.828038, -0.322773, 0.458444, 3.17413, 0.914613, 1.8828)
 current = true
 fov = 74.0
 near = 0.1
@@ -347,9 +364,13 @@ upper_fade = 2.0
 lower_fade = 1.0
 cull_mask = 1048573
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Trailer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.383046, -0.0335202)
+[node name="Shape1" type="CollisionShape3D" parent="Trailer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00484031, 0.553366, 0.0936975)
 shape = SubResource("BoxShape3D_dpscj")
+
+[node name="Shape2" type="CollisionShape3D" parent="Trailer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00484031, -0.222499, -1.05542)
+shape = SubResource("BoxShape3D_rm6ts")
 
 [node name="BlobShadow" type="Decal" parent="Trailer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.003, -0.661, -1.05)
@@ -359,9 +380,11 @@ upper_fade = 2.0
 lower_fade = 1.0
 cull_mask = 1048573
 
-[node name="PinJoint3D" type="ConeTwistJoint3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.704587, -0.960112)
+[node name="TrailerJoint" type="Generic6DOFJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.704587, -0.960112)
 node_a = NodePath("../Trailer")
 node_b = NodePath("../Body")
-swing_span = 30.0
-twist_span = 45.0
+angular_limit_x/upper_angle = 0.785398
+angular_limit_x/lower_angle = -0.785398
+angular_limit_y/upper_angle = 1.22173
+angular_limit_y/lower_angle = -1.22173
