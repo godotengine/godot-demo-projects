@@ -1,20 +1,18 @@
-[gd_scene load_steps=14 format=3 uid="uid://lm753aby2tb6"]
+[gd_scene load_steps=12 format=3 uid="uid://lm753aby2tb6"]
 
 [ext_resource type="Texture2D" uid="uid://bw3q8aq6gfuof" path="res://addons/sade/editor_gizmo_texture.png" id="1"]
 [ext_resource type="PackedScene" uid="uid://ctssefekxjogg" path="res://model/godot_battle_bot.dae" id="2"]
 [ext_resource type="Material" path="res://model/battle_bot_color.tres" id="3"]
 [ext_resource type="Script" path="res://target_from_mousepos.gd" id="5"]
 [ext_resource type="Script" path="res://addons/sade/ik_look_at.gd" id="6"]
-[ext_resource type="Texture2D" uid="uid://dhgpf3w8mh4ed" path="res://addons/sade/ik_look_at.png" id="7"]
 [ext_resource type="Script" path="res://addons/sade/ik_fabrik.gd" id="8"]
-[ext_resource type="Texture2D" uid="uid://dfojvg0ykx146" path="res://addons/sade/ik_fabrik.png" id="9"]
 [ext_resource type="Script" path="res://button_change_scene.gd" id="10"]
 
 [sub_resource type="PlaneMesh" id="1"]
 size = Vector2(40, 40)
 
 [sub_resource type="StandardMaterial3D" id="2"]
-albedo_texture = ExtResource( "1" )
+albedo_texture = ExtResource("1")
 roughness = 0.2
 uv1_scale = Vector3(0.25, 0.25, 0.25)
 uv1_triplanar = true
@@ -28,21 +26,21 @@ roughness = 0.0
 [node name="FABRIK_IK" type="Node3D"]
 
 [node name="Floor" type="MeshInstance3D" parent="."]
-mesh = SubResource( "1" )
-surface_material_override/0 = SubResource( "2" )
+mesh = SubResource("1")
+surface_material_override/0 = SubResource("2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.56827, 0.673454, -0.472789, 0, 0.574581, 0.818448, 0.822842, -0.465099, 0.326517, -9.77531, 11.5204, 11.766)
 
-[node name="GodotBattleBot" parent="." instance=ExtResource( "2" )]
+[node name="GodotBattleBot" parent="." instance=ExtResource("2")]
 
 [node name="godot_battle_bot" parent="GodotBattleBot/Armature/Skeleton3D" index="0"]
-surface_material_override/0 = ExtResource( "3" )
+surface_material_override/0 = ExtResource("3")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5, 11)
 fov = 74.0
-script = ExtResource( "5" )
+script = ExtResource("5")
 MOVEMENT_SPEED = -8.0
 flip_axis = true
 
@@ -50,19 +48,13 @@ flip_axis = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 
 [node name="IK_LookAt_Head" type="Node3D" parent="Camera3D/Targets"]
-script = ExtResource( "6" )
-__meta__ = {
-"_editor_icon": ExtResource( "7" )
-}
+script = ExtResource("6")
 skeleton_path = NodePath("../../../GodotBattleBot/Armature/Skeleton3D")
 bone_name = "Head"
 additional_rotation = Vector3(90, 0, 0)
 
 [node name="IK_FABRIK_Left_Arm" type="Node3D" parent="Camera3D/Targets"]
-script = ExtResource( "8" )
-__meta__ = {
-"_editor_icon": ExtResource( "9" )
-}
+script = ExtResource("8")
 skeleton_path = NodePath("../../../GodotBattleBot/Armature/Skeleton3D")
 bones_in_chain = PackedStringArray("Left_UpperArm", "Left_LowerArm")
 bones_in_chain_lengths = PackedFloat32Array(1.97, 3)
@@ -75,10 +67,7 @@ transform = Transform3D(0.518503, 0, -0.855076, 0, 1, 0, 0.855076, 0, 0.518503, 
 
 [node name="IK_LookAt_LH" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Left_Arm/Target"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.343393, -0.133381, 0.836605)
-script = ExtResource( "6" )
-__meta__ = {
-"_editor_icon": ExtResource( "7" )
-}
+script = ExtResource("6")
 skeleton_path = NodePath("../../../../../GodotBattleBot/Armature/Skeleton3D")
 bone_name = "Left_Hand"
 additional_rotation = Vector3(0, 0, 90)
@@ -96,10 +85,7 @@ transform = Transform3D(-0.120249, 0.882081, -0.455493, -0.0511926, 0.452703, 0.
 transform = Transform3D(-0.773624, -0.0228999, 0.633231, 2.98023e-08, 0.999347, 0.03614, -0.633645, 0.0279588, -0.773119, 2.94998, 0.10378, -2.37569)
 
 [node name="IK_FABRIK_Right_Arm" type="Node3D" parent="Camera3D/Targets"]
-script = ExtResource( "8" )
-__meta__ = {
-"_editor_icon": ExtResource( "9" )
-}
+script = ExtResource("8")
 skeleton_path = NodePath("../../../GodotBattleBot/Armature/Skeleton3D")
 bones_in_chain = PackedStringArray("Right_UpperArm", "Right_LowerArm", "Right_Hand")
 bones_in_chain_lengths = PackedFloat32Array(1.97, 3, 1.2)
@@ -112,10 +98,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.229958, 0, 0.929313)
 
 [node name="IK_LookAt_RH" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Right_Arm/Target"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0544824, -0.133381, 0.332403)
-script = ExtResource( "6" )
-__meta__ = {
-"_editor_icon": ExtResource( "7" )
-}
+script = ExtResource("6")
 skeleton_path = NodePath("../../../../../GodotBattleBot/Armature/Skeleton3D")
 bone_name = "Right_Hand"
 additional_rotation = Vector3(0, 0, 90)
@@ -133,67 +116,72 @@ transform = Transform3D(-0.792023, 0.0165711, -0.610266, -1.49012e-08, 0.999631,
 transform = Transform3D(-0.678336, 0.00698721, -0.734719, -2.32831e-09, 0.999955, 0.00950961, 0.734752, 0.00645071, -0.678305, -1.07914, 0.020072, 0.03791)
 
 [node name="1MeterCube" type="MeshInstance3D" parent="Camera3D/Targets"]
-mesh = SubResource( "3" )
-surface_material_override/0 = SubResource( "4" )
+mesh = SubResource("3")
+surface_material_override/0 = SubResource("4")
 
 [node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="LabelExtra" type="Label" parent="Control"]
+layout_mode = 1
+offset_right = 623.0
+offset_bottom = 98.0
+text = "NOTE: You will get a few errors when saving with FABRIK IK nodes in your scene
+This is a known bug. Please ignore the errors for now, as they do not do anything
+(They're just annoying. If you find a fix, please add it to the demo repository!)"
 
 [node name="Panel" type="Panel" parent="Control"]
 modulate = Color(1, 1, 1, 0.784314)
+layout_mode = 1
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -2.0
-offset_top = -70.0
+offset_top = -79.0
 offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="Label" type="Label" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 10.0
-offset_right = -18.0
-offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "F.A.B.R.I.K IK
 Move mouse to move IK targets
 (Using 3 bones in the right hand, only 2 in the left. 3+ recommended)"
-
-[node name="LabelExtra" type="Label" parent="Control/Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 80.0
-offset_right = -18.0
-offset_bottom = 58.0
-text = "NOTE: You will get a few errors when saving with FABRIK IK nodes in your scene
-This is a known bug. Please ignore the errors for now, as they do not do anything
-(They're just annoying. If you find a fix, please add it to the demo repository!)"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
 
 [node name="LabelLeft" type="Label" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -248.0
+offset_left = -268.0
 offset_top = 4.0
-offset_right = -135.0
-offset_bottom = 18.0
+offset_right = -155.0
+offset_bottom = 27.0
+grow_horizontal = 0
 text = "Left Hand"
+horizontal_alignment = 1
 
 [node name="LabelRight" type="Label" parent="Control/Panel"]
-offset_left = 136.0
-offset_top = 5.0
-offset_right = 249.0
-offset_bottom = 19.0
+layout_mode = 0
+offset_left = 184.0
+offset_top = 2.0
+offset_right = 297.0
+offset_bottom = 25.0
 text = "Right Hand"
+horizontal_alignment = 1
 
 [node name="ButtonNext" type="Button" parent="Control"]
+layout_mode = 0
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -203,10 +191,11 @@ offset_top = -60.0
 offset_right = -5.0
 offset_bottom = -10.0
 text = "Next scene"
-script = ExtResource( "10" )
+script = ExtResource("10")
 scene_to_change_to = "res://skeleton_ik.tscn"
 
 [node name="ButtonPrev" type="Button" parent="Control"]
+layout_mode = 0
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
@@ -214,10 +203,7 @@ offset_top = -60.0
 offset_right = 129.0
 offset_bottom = -10.0
 text = "Previous scene"
-script = ExtResource( "10" )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("10")
 scene_to_change_to = "res://look_at_ik.tscn"
 
 [editable path="GodotBattleBot"]
