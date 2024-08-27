@@ -2,7 +2,7 @@ extends Control
 
 @onready var crosshair: CenterContainer = $Crosshair
 @onready var pause: VBoxContainer = $Pause
-@onready var options: HBoxContainer = $Options
+@onready var options: Control = $Options
 @onready var voxel_world: Node = $"../VoxelWorld"
 
 func _process(_delta: float) -> void:

@@ -2,7 +2,7 @@ extends Control
 
 @onready var title: VBoxContainer = $TitleScreen
 @onready var start: HBoxContainer = $StartGame
-@onready var options: HBoxContainer = $Options
+@onready var options: Control = $Options
 
 
 func _on_Start_pressed() -> void:
