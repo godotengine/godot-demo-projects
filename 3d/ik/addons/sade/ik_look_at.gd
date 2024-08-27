@@ -3,33 +3,13 @@ extends Node3D
 
 @export var skeleton_path: NodePath:
 	set(value):
+		# Assign skeleton_path to whatever value is passed.
 		skeleton_path = value
-
 		# Because get_node doesn't work in the first call, we just want to assign instead.
 		# This is to get around a issue with NodePaths exposed to the editor.
 		if first_call:
 			return
-
-		if skeleton_path == null:
-			if debug_messages:
-				print(name, " - IK_LookAt: No Nodepath selected for skeleton_path!")
-			return
-
-		# Get the node at that location, if there is one.
-		var temp = get_node(skeleton_path)
-		if temp != null:
-			if temp is Skeleton3D:
-				skeleton_to_use = temp
-				if debug_messages:
-					print(name, " - IK_LookAt: attached to (new) skeleton")
-			else:
-				skeleton_to_use = null
-				if debug_messages:
-					print(name, " - IK_LookAt: skeleton_path does not point to a skeleton!")
-		else:
-			if debug_messages:
-				print(name, " - IK_LookAt: No Nodepath selected for skeleton_path!")
-
+		_setup_skeleton_path()
 @export var bone_name: String = ""
 @export_enum("_process", "_physics_process", "_notification", "none") var update_mode: int = 0:
 	set(value):
@@ -112,7 +92,7 @@ func update_skeleton():
 	if first_call:
 		first_call = false
 		if skeleton_to_use == null:
-			_set_skeleton_path(skeleton_path)
+			_setup_skeleton_path()
 
 	# If we do not have a skeleton and/or we're not supposed to update, then return.
 	if skeleton_to_use == null:
@@ -164,9 +144,6 @@ func update_skeleton():
 		rest_euler.z = self_euler.z
 
 	# Make a new basis with the, potentially, changed euler angles.
-	# TODO: Is the order correct?
-	# Godot 3: "Create a rotation matrix (in the YXZ convention: first Z, then X, and Y last) from the specified Euler angles, given in the vector format as (X-angle, Y-angle, Z-angle)."
-	# Godot 4: "Constructs a pure rotation Basis matrix from Euler angles in the specified Euler rotation order. By default, use YXZ order (most common). See the EulerOrder enum for possible values."
 	rest.basis = Basis.from_euler(rest_euler)
 
 	# Apply additional rotation stored in additional_rotation to the bone.
@@ -215,14 +192,7 @@ func _setup_for_editor():
 	_editor_indicator.mesh = indicator_mesh
 
 
-func _set_skeleton_path(new_value):
-	skeleton_path = new_value
-
-	# Because get_node doesn't work in the first call, we just want to assign instead.
-	# This is to get around a issue with NodePaths exposed to the editor.
-	if first_call:
-		return
-
+func _setup_skeleton_path():
 	if skeleton_path == null:
 		if debug_messages:
 			print(name, " - IK_LookAt: No Nodepath selected for skeleton_path!")

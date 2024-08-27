@@ -8,28 +8,46 @@
 [ext_resource type="Texture2D" uid="uid://cfh73c8wnvgol" path="res://menu/button_hover.png" id="6_idu7c"]
 [ext_resource type="Texture2D" uid="uid://h208mfx7dyy2" path="res://menu/button_focus.png" id="7_gmbws"]
 
-[node name="Options" type="HBoxContainer"]
+[node name="Options" type="Control"]
 visible = false
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_1y7gy")
-alignment = 1
 script = ExtResource("1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-theme_override_constants/separation = 20
-alignment = 1
+[node name="CenterAnchor" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="OptionsBackground" type="ColorRect" parent="VBoxContainer"]
+[node name="OptionsBackground" type="ColorRect" parent="CenterAnchor"]
 self_modulate = Color(0.45098, 0.45098, 0.45098, 1)
 custom_minimum_size = Vector2(1000, 250)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -170.0
+offset_right = 500.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.25098, 0.25098, 0.25098, 0.627451)
 
-[node name="OptionButtons" type="GridContainer" parent="VBoxContainer/OptionsBackground"]
-anchors_preset = 8
+[node name="OptionButtons" type="GridContainer" parent="CenterAnchor/OptionsBackground"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -44,40 +62,57 @@ theme_override_constants/h_separation = 20
 columns = 2
 script = ExtResource("2")
 
-[node name="RenderDistanceLabel" type="Label" parent="VBoxContainer/OptionsBackground/OptionButtons"]
+[node name="RenderDistanceLabel" type="Label" parent="CenterAnchor/OptionsBackground/OptionButtons"]
+layout_mode = 2
 size_flags_vertical = 5
 theme_override_font_sizes/font_size = 60
 text = "Render distance: 3"
 horizontal_alignment = 2
 
-[node name="RenderDistanceSlider" type="HSlider" parent="VBoxContainer/OptionsBackground/OptionButtons"]
+[node name="RenderDistanceSlider" type="HSlider" parent="CenterAnchor/OptionsBackground/OptionButtons"]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 min_value = 3.0
 max_value = 10.0
 value = 7.0
 
-[node name="FogLabel" type="Label" parent="VBoxContainer/OptionsBackground/OptionButtons"]
+[node name="FogLabel" type="Label" parent="CenterAnchor/OptionsBackground/OptionButtons"]
+layout_mode = 2
 size_flags_vertical = 5
 theme_override_font_sizes/font_size = 60
 text = "Fog Enabled"
 horizontal_alignment = 2
 
-[node name="FogCheckBox" type="CheckBox" parent="VBoxContainer/OptionsBackground/OptionButtons"]
+[node name="FogCheckBox" type="CheckBox" parent="CenterAnchor/OptionsBackground/OptionButtons"]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterAnchor"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = 110.0
+offset_right = 500.0
+offset_bottom = 174.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
-[node name="Back" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+[node name="Back" type="TextureButton" parent="CenterAnchor/HBoxContainer"]
+layout_mode = 2
 texture_normal = ExtResource("3")
 texture_pressed = ExtResource("5_g68rn")
 texture_hover = ExtResource("6_idu7c")
 texture_focused = ExtResource("7_gmbws")
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Back"]
-anchors_preset = 15
+[node name="Label" type="Label" parent="CenterAnchor/HBoxContainer/Back"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -1.0
@@ -89,6 +124,6 @@ text = "Back"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="value_changed" from="VBoxContainer/OptionsBackground/OptionButtons/RenderDistanceSlider" to="VBoxContainer/OptionsBackground/OptionButtons" method="_on_RenderDistanceSlider_value_changed"]
-[connection signal="pressed" from="VBoxContainer/OptionsBackground/OptionButtons/FogCheckBox" to="VBoxContainer/OptionsBackground/OptionButtons" method="_on_FogCheckBox_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Back" to="." method="_on_Back_pressed"]
+[connection signal="value_changed" from="CenterAnchor/OptionsBackground/OptionButtons/RenderDistanceSlider" to="CenterAnchor/OptionsBackground/OptionButtons" method="_on_RenderDistanceSlider_value_changed"]
+[connection signal="pressed" from="CenterAnchor/OptionsBackground/OptionButtons/FogCheckBox" to="CenterAnchor/OptionsBackground/OptionButtons" method="_on_FogCheckBox_pressed"]
+[connection signal="pressed" from="CenterAnchor/HBoxContainer/Back" to="." method="_on_Back_pressed"]
