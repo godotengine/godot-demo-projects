@@ -19,4 +19,4 @@ which is then assigned to the sprite's texture.
 
 ## Screenshots
 
-![Screenshot](screenshots/3d_in_2d.png)
+![Screenshot](screenshots/3d_in_2d.webp)

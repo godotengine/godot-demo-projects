@@ -7,10 +7,10 @@ Code is provided for polyline following in 3D.
 
 Language: GDScript
 
-Renderer: Forward+
+Renderer: Compatibility
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2743
 
 ## Screenshots
 
-![Screenshot](screenshots/nav.png)
+![Screenshot](screenshots/navigation.webp)
