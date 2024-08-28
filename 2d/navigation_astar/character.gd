@@ -32,7 +32,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if _state != State.FOLLOW:
 		return
-	var arrived_to_next_point := _move_to(_next_point)
+	var arrived_to_next_point: bool = _move_to(_next_point)
 	if arrived_to_next_point:
 		_path.remove_at(0)
 		if _path.is_empty():
@@ -52,8 +52,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _move_to(local_position: Vector2) -> bool:
-	var desired_velocity := (local_position - position).normalized() * speed
-	var steering := desired_velocity - _velocity
+	var desired_velocity: Vector2 = (local_position - position).normalized() * speed
+	var steering: Vector2 = desired_velocity - _velocity
 	_velocity += steering / MASS
 	position += _velocity * get_process_delta_time()
 	rotation = _velocity.angle()
