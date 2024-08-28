@@ -1,15 +1,11 @@
 extends Node2D
 
-<<<<<<< HEAD
+const PathFindAStar = preload("./pathfind_astar.gd")
+
 enum State {
 	IDLE,
 	FOLLOW,
 }
-=======
-const PathFindAStar = preload("./pathfind_astar.gd")
-
-enum State { IDLE, FOLLOW }
->>>>>>> A few more fixes
 
 const MASS = 10.0
 const ARRIVE_DISTANCE = 10.0
