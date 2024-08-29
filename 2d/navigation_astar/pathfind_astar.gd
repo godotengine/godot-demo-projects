@@ -7,7 +7,7 @@ enum Tile {
 }
 
 const CELL_SIZE = Vector2i(64, 64)
-const BASE_LINE_WIDTH = 3.0
+const BASE_LINE_WIDTH: float = 3.0
 const DRAW_COLOR = Color.WHITE * Color(1, 1, 1, 0.5)
 
 # The object for pathfinding on 2D grids.
@@ -51,8 +51,8 @@ func round_local_position(local_position: Vector2i) -> Vector2i:
 	return map_to_local(local_to_map(local_position))
 
 
-func is_point_walkable(local_position: Vector2i) -> bool:
-	var map_position: Vector2 = local_to_map(local_position)
+func is_point_walkable(local_position: Vector2) -> bool:
+	var map_position: Vector2i = local_to_map(local_position)
 	if _astar.is_in_boundsv(map_position):
 		return not _astar.is_point_solid(map_position)
 	return false

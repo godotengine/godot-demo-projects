@@ -7,10 +7,10 @@ enum State {
 	FOLLOW,
 }
 
-const MASS = 10.0
-const ARRIVE_DISTANCE = 10.0
+const MASS: float = 10.0
+const ARRIVE_DISTANCE: float = 10.0
 
-@export_range(10, 500, 0.1, "or_greater") var speed := 200.0
+@export_range(10, 500, 0.1, "or_greater") var speed: float = 200.0
 
 var _state := State.IDLE
 var _velocity := Vector2()
@@ -28,6 +28,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if _state != State.FOLLOW:
 		return
+
 	var arrived_to_next_point: bool = _move_to(_next_point)
 	if arrived_to_next_point:
 		_path.remove_at(0)
