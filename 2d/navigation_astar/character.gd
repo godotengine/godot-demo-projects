@@ -1,14 +1,16 @@
 extends Node2D
 
+const PathFindAStar = preload("./pathfind_astar.gd")
+
 enum State {
 	IDLE,
 	FOLLOW,
 }
 
-const MASS = 10.0
-const ARRIVE_DISTANCE = 10.0
+const MASS: float = 10.0
+const ARRIVE_DISTANCE: float = 10.0
 
-@export_range(10, 500, 0.1, "or_greater") var speed := 200.0
+@export_range(10, 500, 0.1, "or_greater") var speed: float = 200.0
 
 var _state := State.IDLE
 var _velocity := Vector2()
@@ -17,7 +19,7 @@ var _click_position := Vector2()
 var _path := PackedVector2Array()
 var _next_point := Vector2()
 
-@onready var _tile_map: TileMap = $"../TileMap"
+@onready var _tile_map: PathFindAStar = $"../TileMap"
 
 func _ready() -> void:
 	_change_state(State.IDLE)
@@ -27,7 +29,7 @@ func _process(_delta: float) -> void:
 	if _state != State.FOLLOW:
 		return
 
-	var arrived_to_next_point := _move_to(_next_point)
+	var arrived_to_next_point: bool = _move_to(_next_point)
 	if arrived_to_next_point:
 		_path.remove_at(0)
 		if _path.is_empty():
@@ -46,9 +48,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			_change_state(State.FOLLOW)
 
 
-func _move_to(local_position: Vector2) -> float:
-	var desired_velocity := (local_position - position).normalized() * speed
-	var steering := desired_velocity - _velocity
+func _move_to(local_position: Vector2) -> bool:
+	var desired_velocity: Vector2 = (local_position - position).normalized() * speed
+	var steering: Vector2 = desired_velocity - _velocity
 	_velocity += steering / MASS
 	position += _velocity * get_process_delta_time()
 	rotation = _velocity.angle()
