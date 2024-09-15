@@ -66,7 +66,8 @@ https://creativecommons.org/publicdomain/zero/1.0/
 
 Font is "TinyUnicode" by DuffsDevice. Copyright &copy; DuffsDevice, CC-BY (Attribution) http://www.pentacom.jp/pentacom/bitfontmaker2/gallery/?id=468
 
-### Copyright info for textures reused from Minetest Game
+### Copyright information for textures reused from Minetest Game
+
 While most textures are under CC BY-SA 3.0, some are under CC0 1.0
 
 Cisoun's texture pack (CC BY-SA 3.0):
