@@ -58,7 +58,7 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_PREDELETE:
 		if shader.is_valid():
 			# Freeing our shader will also free any dependents such as the pipeline!
-			RenderingServer.free_rid(shader)
+			rd.free_rid(shader)
 
 
 #region Code in this region runs on the rendering thread.
