@@ -1,0 +1,283 @@
+[gd_scene load_steps=17 format=3 uid="uid://dugaivbj1o66n"]
+
+[ext_resource type="Script" path="res://level/scripts/level.gd" id="1_e1sh7"]
+[ext_resource type="PackedScene" uid="uid://cffjduipbb3s5" path="res://level/scenes/player.tscn" id="1_uvcbi"]
+[ext_resource type="FontFile" uid="uid://diapabmalpcrj" path="res://assets/fonts/Kurland.ttf" id="3_icc4p"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_r5xs5"]
+size = Vector2(90, 90)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o02aj"]
+albedo_color = Color(0, 0.321569, 0.172549, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x3h1o"]
+size = Vector3(90, 0.05, 90)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lc35d"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8pl0k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f43m5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_womqi"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_taagp"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_q5fs2"]
+size = Vector3(25, 1, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fs7ud"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_epsao"]
+size = Vector3(25, 1, 1.5)
+
+[sub_resource type="Environment" id="Environment_qb4jd"]
+fog_enabled = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_npnbc"]
+color = Color(0, 0, 0, 0)
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_e1sh7")
+player_scene = ExtResource("1_uvcbi")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Environment"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Floor"]
+mesh = SubResource("PlaneMesh_r5xs5")
+surface_material_override/0 = SubResource("StandardMaterial3D_o02aj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor"]
+shape = SubResource("BoxShape3D_x3h1o")
+
+[node name="Box_1" type="StaticBody3D" parent="Environment"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Box_1"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 2.91206, 0.456, 6.91607)
+material_override = SubResource("StandardMaterial3D_lc35d")
+mesh = SubResource("BoxMesh_8pl0k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Box_1"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 2.91167, 0.456274, 6.91607)
+shape = SubResource("BoxShape3D_f43m5")
+
+[node name="Box_2" type="StaticBody3D" parent="Environment"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Box_2"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 2.91206, 2.456, 9.916)
+mesh = SubResource("BoxMesh_8pl0k")
+surface_material_override/0 = SubResource("StandardMaterial3D_womqi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Box_2"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 2.91167, 2.456, 9.916)
+shape = SubResource("BoxShape3D_f43m5")
+
+[node name="Box_3" type="StaticBody3D" parent="Environment"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Box_3"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 2.91206, 4.456, 12.916)
+mesh = SubResource("BoxMesh_8pl0k")
+surface_material_override/0 = SubResource("StandardMaterial3D_taagp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Box_3"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 2.91167, 4.456, 12.916)
+shape = SubResource("BoxShape3D_f43m5")
+
+[node name="Box_4" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Box_4"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -3.52997, 5.947, 17.398)
+layers = 2
+mesh = SubResource("BoxMesh_q5fs2")
+surface_material_override/0 = SubResource("StandardMaterial3D_fs7ud")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Box_4"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -3.52997, 5.947, 17.398)
+shape = SubResource("BoxShape3D_epsao")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_qb4jd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, -0.5, 0.866025, 0, -0.866025, -0.5, 0, 4, 0)
+shadow_enabled = true
+shadow_blur = 0.5
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+
+[node name="MainContainer" type="VBoxContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -257.0
+offset_bottom = 257.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Label" type="Label" parent="Menu/MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_icc4p")
+theme_override_font_sizes/font_size = 70
+text = "Multiplayer Template"
+
+[node name="MainMenu" type="VBoxContainer" parent="Menu/MainContainer"]
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="HSeparator1" type="HSeparator" parent="Menu/MainContainer/MainMenu"]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxLine_npnbc")
+
+[node name="Option1" type="HBoxContainer" parent="Menu/MainContainer/MainMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="Menu/MainContainer/MainMenu/Option1"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_icc4p")
+theme_override_font_sizes/font_size = 35
+text = "Nickname : "
+
+[node name="NickInput" type="LineEdit" parent="Menu/MainContainer/MainMenu/Option1"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_icc4p")
+theme_override_font_sizes/font_size = 35
+placeholder_text = "YourNick"
+max_length = 20
+expand_to_text_length = true
+
+[node name="Option2" type="HBoxContainer" parent="Menu/MainContainer/MainMenu"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="Menu/MainContainer/MainMenu/Option2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_icc4p")
+theme_override_font_sizes/font_size = 35
+text = "Player Skin : "
+
+[node name="SkinInput" type="LineEdit" parent="Menu/MainContainer/MainMenu/Option2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_icc4p")
+theme_override_font_sizes/font_size = 35
+placeholder_text = "blue"
+alignment = 1
+expand_to_text_length = true
+
+[node name="Option3" type="HBoxContainer" parent="Menu/MainContainer/MainMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="Menu/MainContainer/MainMenu/Option3"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_icc4p")
+theme_override_font_sizes/font_size = 35
+text = "IP Address : "
+
+[node name="AddressInput" type="LineEdit" parent="Menu/MainContainer/MainMenu/Option3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_icc4p")
+theme_override_font_sizes/font_size = 35
+placeholder_text = "127.0.0.1"
+alignment = 1
+expand_to_text_length = true
+
+[node name="HSeparator2" type="HSeparator" parent="Menu/MainContainer/MainMenu"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxLine_npnbc")
+
+[node name="Buttons" type="HBoxContainer" parent="Menu/MainContainer/MainMenu"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Host" type="Button" parent="Menu/MainContainer/MainMenu/Buttons"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0.52549, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.52549, 0, 1)
+theme_override_fonts/font = ExtResource("3_icc4p")
+theme_override_font_sizes/font_size = 35
+text = "HOST"
+flat = true
+
+[node name="Join" type="Button" parent="Menu/MainContainer/MainMenu/Buttons"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0.525257, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.52549, 0, 1)
+theme_override_fonts/font = ExtResource("3_icc4p")
+theme_override_font_sizes/font_size = 35
+text = "JOIN"
+flat = true
+
+[node name="Option4" type="HBoxContainer" parent="Menu/MainContainer/MainMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Quit" type="Button" parent="Menu/MainContainer/MainMenu/Option4"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.858807, 4.71681e-06, 1.15514e-06, 0.862745)
+theme_override_colors/font_pressed_color = Color(0.858824, 0, 0, 0.862745)
+theme_override_fonts/font = ExtResource("3_icc4p")
+theme_override_font_sizes/font_size = 35
+text = "QUIT"
+flat = true
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://level/scenes/player.tscn")
+spawn_path = NodePath("../PlayersContainer")
+
+[node name="PlayersContainer" type="Node3D" parent="."]
+
+[connection signal="pressed" from="Menu/MainContainer/MainMenu/Buttons/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Menu/MainContainer/MainMenu/Buttons/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Menu/MainContainer/MainMenu/Option4/Quit" to="." method="_on_quit_pressed"]
