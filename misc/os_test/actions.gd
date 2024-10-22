@@ -14,7 +14,7 @@ func _on_open_shell_folder_pressed() -> void:
 		# MacOS-specific.
 		path = "file://" + path
 
-	OS.shell_open(path)
+	OS.shell_show_in_file_manager(path)
 
 
 func _on_change_window_title_pressed() -> void:
