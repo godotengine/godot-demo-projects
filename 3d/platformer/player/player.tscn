@@ -1,13 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://cc4idhykjp5f5"]
+[gd_scene load_steps=24 format=3 uid="uid://cc4idhykjp5f5"]
 
 [ext_resource type="Script" uid="uid://juqqcu31phas" path="res://player/player.gd" id="1"]
 [ext_resource type="Script" uid="uid://c34yhkkhix7m7" path="res://player/follow_camera.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://yd1e7ai2k5cr" path="res://player/player.glb" id="3_uccbe"]
-[ext_resource type="Texture2D" uid="uid://kujhqacj3v72" path="res://player/controls/osb_up.webp" id="4_lmv6w"]
-[ext_resource type="Texture2D" uid="uid://68sox6egj4j7" path="res://player/controls/osb_down.webp" id="5_4oxdy"]
-[ext_resource type="Texture2D" uid="uid://r6qxvqi0unib" path="res://player/controls/osb_left.webp" id="6_k2dm4"]
 [ext_resource type="AudioStream" uid="uid://cdx3i7hr2acow" path="res://player/sound_shoot.wav" id="7"]
-[ext_resource type="Texture2D" uid="uid://bw76q621n8fie" path="res://player/controls/osb_right.webp" id="7_yth2f"]
 [ext_resource type="AudioStream" uid="uid://bplqk77bffdxr" path="res://player/sound_jump.wav" id="8"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
@@ -246,42 +242,6 @@ parameters/state/current_position = 0.395526
 parameters/state/current_delta = 0.030673
 parameters/state/blend_amount = 0.0
 
-[node name="Forward" type="TouchScreenButton" parent="."]
-visible = false
-position = Vector2(72, 301)
-texture_normal = ExtResource("4_lmv6w")
-texture_pressed = ExtResource("4_lmv6w")
-passby_press = true
-action = "move_forward"
-visibility_mode = 1
-
-[node name="Backward" type="TouchScreenButton" parent="."]
-visible = false
-position = Vector2(72, 365)
-texture_normal = ExtResource("5_4oxdy")
-texture_pressed = ExtResource("5_4oxdy")
-passby_press = true
-action = "move_backwards"
-visibility_mode = 1
-
-[node name="Left" type="TouchScreenButton" parent="."]
-visible = false
-position = Vector2(29, 332)
-texture_normal = ExtResource("6_k2dm4")
-texture_pressed = ExtResource("6_k2dm4")
-passby_press = true
-action = "move_left"
-visibility_mode = 1
-
-[node name="Right" type="TouchScreenButton" parent="."]
-visible = false
-position = Vector2(114, 332)
-texture_normal = ExtResource("7_yth2f")
-texture_pressed = ExtResource("7_yth2f")
-passby_press = true
-action = "move_right"
-visibility_mode = 1
-
 [node name="SoundShoot" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_basvh")
 
@@ -289,7 +249,7 @@ stream = SubResource("AudioStreamRandomizer_basvh")
 stream = SubResource("AudioStreamRandomizer_axa7i")
 volume_db = -6.0
 
-[node name="BlobShadow" type="Decal" parent="."]
+[node name="BlobShadow" type="Decal" parent="." groups=["bad_performer"]]
 size = Vector3(1.6, 12, 1.6)
 texture_albedo = SubResource("GradientTexture2D_kvc1x")
 albedo_mix = 0.8
