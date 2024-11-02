@@ -42,7 +42,7 @@ func _on_left_hand_button_pressed(action_name):
 		_do_tween_energy()
 
 		# And make us feel it.
-		# Note: frequence == 0.0 => XR runtime chooses optimal frequency for a given controller.
+		# NOTE: `frequence == 0.0` => XR runtime chooses optimal frequency for a given controller.
 		active_hand.trigger_haptic_pulse("haptic", 0.0, 1.0, 0.5, 0.0)
 
 
@@ -60,5 +60,5 @@ func _on_right_hand_button_pressed(action_name):
 		_do_tween_energy()
 
 		# And make us feel it.
-		# Note: frequence == 0.0 => XR runtime chooses optimal frequency for a given controller.
+		# NOTE: `frequence == 0.0` => XR runtime chooses optimal frequency for a given controller.
 		active_hand.trigger_haptic_pulse("haptic", 0.0, 1.0, 0.5, 0.0)

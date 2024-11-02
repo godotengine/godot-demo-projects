@@ -33,7 +33,7 @@ func _ready() -> void:
 
 
 func _input(input_event: InputEvent) -> void:
-	if not input_event is InputEventMIDI:
+	if input_event is not InputEventMIDI:
 		return
 
 	var midi_event: InputEventMIDI = input_event

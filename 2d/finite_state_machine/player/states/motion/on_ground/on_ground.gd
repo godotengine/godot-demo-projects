@@ -1,6 +1,5 @@
 extends "../motion.gd"
 
-# warning-ignore-all:unused_class_variable
 var speed := 0.0
 var velocity := Vector2()
 

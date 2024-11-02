@@ -88,7 +88,8 @@ func _sprite_basis() -> void:
 
 # This method returns a bool but if true it also outputs to the direction variable.
 func _check_movement() -> bool:
-	# Gather player input and store movement to these int variables. Note: These indeed have to be integers.
+	# Gather player input and store movement to these int variables.
+	# NOTE: These indeed have to be integers.
 	var x := 0
 	var z := 0
 

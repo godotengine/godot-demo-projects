@@ -42,7 +42,7 @@ func _tile_data_runtime_update(_layer: int, _coords: Vector2i, tile_data: TileDa
 
 
 func _on_secret_detector_body_entered(body: Node2D) -> void:
-	if not body is CharacterBody2D:
+	if body is not CharacterBody2D:
 		# Detect the player only.
 		return
 
@@ -51,7 +51,7 @@ func _on_secret_detector_body_entered(body: Node2D) -> void:
 
 
 func _on_secret_detector_body_exited(body: Node2D) -> void:
-	if not body is CharacterBody2D:
+	if body is not CharacterBody2D:
 		return
 
 	player_in_secret = false

@@ -24,7 +24,7 @@ func _input(event: InputEvent) -> void:
 		return
 
 	# Ignore events not related to gamepads.
-	if not (event is InputEventJoypadButton or event is InputEventJoypadMotion):
+	if event is not InputEventJoypadButton and event is not InputEventJoypadMotion:
 		return
 
 	# Ignore devices other than the one being remapped. Handles accidental input and analog drift.
