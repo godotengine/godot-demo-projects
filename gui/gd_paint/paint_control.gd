@@ -126,8 +126,7 @@ func undo_stroke() -> void:
 		# Figure out how many elements/brushes we've added in the last stroke.
 		var elements_to_remove := brush_data_list.size() - undo_element_list_num
 		# Remove all of the elements we've added this in the last stroke.
-		#warning-ignore:unused_variable
-		for elment_num in elements_to_remove:
+		for _elment_num in elements_to_remove:
 			brush_data_list.pop_back()
 
 		# Now that we've undone a stoke, we cannot undo again until another stoke is added.

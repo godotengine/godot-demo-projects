@@ -38,7 +38,7 @@ func remove(combatant: Combatant) -> void:
 func set_queue(new_queue: Array[Node]) -> void:
 	queue.clear()
 	for node in new_queue:
-		if not node is Combatant:
+		if node is not Combatant:
 			continue
 		queue.append(node)
 		node.active = false

@@ -16,7 +16,7 @@ func explode() -> void:
 			var query := PhysicsRayQueryParameters2D.create(position, p.position)
 			query.hit_from_inside = true
 			var result: Dictionary  = world_state.intersect_ray(query)
-			if not result.collider is TileMap:
+			if result.collider is not TileMap:
 				# Exploded can only be called by the authority, but will also be called locally.
 				p.exploded.rpc(from_player)
 

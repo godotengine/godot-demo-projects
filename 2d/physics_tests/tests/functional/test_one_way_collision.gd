@@ -154,7 +154,7 @@ func _update_platform_size(value: float, reset: bool = true) -> void:
 			var platform_collision := _platform_template.get_child(0)
 			platform_collision.shape.size.x = value
 			if _platform_body:
-				# Bug: need to re-add when changing shape.
+				# BUG: Need to re-add when changing shape.
 				var child_index := _platform_body.get_index()
 				remove_child(_platform_body)
 				add_child(_platform_body)

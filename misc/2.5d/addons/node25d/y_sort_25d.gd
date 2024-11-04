@@ -5,7 +5,7 @@
 @tool
 @icon("res://addons/node25d/icons/y_sort_25d_icon.png")
 class_name YSort25D
-extends Node  # NOTE: NOT Node2D, Node25D, or Node2D
+extends Node  # NOTE: NOT Node2D or Node25D.
 
 
 # Whether or not to automatically call sort() in _process().
