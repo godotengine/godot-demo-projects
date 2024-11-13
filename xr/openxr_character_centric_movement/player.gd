@@ -16,29 +16,42 @@ var gravity := float(ProjectSettings.get_setting("physics/3d/default_gravity"))
 
 ## Called when the user has requested their view to be recentered.
 func recenter() -> void:
-	# The code here assumes the player has walked into an area they shouldn't be
-	# and we return the player back to the character body.
-	# But other strategies can be applied here as well such as returning the player
-	# to a starting position or a checkpoint.
+	var xr_interface : OpenXRInterface = XRServer.find_interface("OpenXR")
+	if not xr_interface:
+		push_error("Couldn't access OpenXR interface!")
+		return
 
-	# Calculate where our camera should be, we start with our global transform.
-	var new_camera_transform : Transform3D = global_transform
+	var play_area_mode : XRInterface.PlayAreaMode = xr_interface.get_play_area_mode()
+	if play_area_mode == XRInterface.XR_PLAY_AREA_SITTING:
+		push_warning("Sitting play space is not suitable for this setup.")
+	elif play_area_mode == XRInterface.XR_PLAY_AREA_ROOMSCALE:
+		# This is already handled by the headset.
+		pass
+	else:
+		# Use Godot's own logic.
+		XRServer.center_on_hmd(XRServer.RESET_BUT_KEEP_TILT, true)
 
-	# Set to the height of our neck joint.
-	new_camera_transform.origin.y = neck_position_node.global_position.y
+	# XRCamera3D node won't be updated yet, so go straight to the source!
+	var head_tracker : XRPositionalTracker = XRServer.get_tracker("head")
+	if not head_tracker:
+		push_error("Couldn't locate head tracker!")
+		return
 
-	# Apply transform our our next position to get our desired camera transform.
-	new_camera_transform = new_camera_transform * neck_position_node.transform.inverse()
+	var pose : XRPose = head_tracker.get_pose("default")
+	var head_transform : Transform3D = pose.get_adjusted_transform()
 
-	# Remove tilt from camera transform.
-	var camera_transform : Transform3D = camera_node.transform
-	var forward_dir : Vector3 = camera_transform.basis.z
-	forward_dir.y = 0.0
-	camera_transform = camera_transform.looking_at(camera_transform.origin + forward_dir.normalized(), Vector3.UP, true)
+	# Get neck transform in XROrigin3D space
+	var neck_transform = neck_position_node.transform * head_transform
 
-	# Update our XR location.
-	origin_node.global_transform = new_camera_transform * camera_transform.inverse()
+	# Reset our XROrigin transform and apply the inverse of the neck position.
+	var new_origin_transform : Transform3D = Transform3D()
+	new_origin_transform.origin.x = -neck_transform.origin.x
+	new_origin_transform.origin.y = 0.0
+	new_origin_transform.origin.z = -neck_transform.origin.z
+	origin_node.transform = new_origin_transform
 
+	# Finally reset character orientation
+	transform.basis = Basis()
 
 # Returns our move input by querying the move action on each controller.
 func _get_movement_input() -> Vector2:
