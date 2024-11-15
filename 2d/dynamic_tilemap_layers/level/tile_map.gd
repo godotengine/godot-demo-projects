@@ -24,8 +24,10 @@ func _process(delta: float) -> void:
 		else:
 			set_process(false)
 
+
 func _use_tile_data_runtime_update(_coords: Vector2i) -> bool:
 	return true
+
 
 func _tile_data_runtime_update(_coords: Vector2i, tile_data: TileData) -> void:
 	# Remove collision for secret layer.
