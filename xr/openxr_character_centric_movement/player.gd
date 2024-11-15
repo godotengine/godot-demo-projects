@@ -37,14 +37,14 @@ func recenter() -> void:
 		push_error("Couldn't locate head tracker!")
 		return
 
-	var pose : XRPose = head_tracker.get_pose("default")
-	var head_transform : Transform3D = pose.get_adjusted_transform()
+	var pose: XRPose = head_tracker.get_pose("default")
+	var head_transform: Transform3D = pose.get_adjusted_transform()
 
 	# Get neck transform in XROrigin3D space
-	var neck_transform = neck_position_node.transform * head_transform
+	var neck_transform: Transform3D = neck_position_node.transform * head_transform
 
 	# Reset our XROrigin transform and apply the inverse of the neck position.
-	var new_origin_transform : Transform3D = Transform3D()
+	var new_origin_transform: Transform3D = Transform3D()
 	new_origin_transform.origin.x = -neck_transform.origin.x
 	new_origin_transform.origin.y = 0.0
 	new_origin_transform.origin.z = -neck_transform.origin.z
