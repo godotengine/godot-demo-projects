@@ -33,6 +33,7 @@ func _tile_data_runtime_update(_coords: Vector2i, tile_data: TileData) -> void:
 	# Remove collision for secret layer.
 	tile_data.set_collision_polygons_count(0, 0)
 
+
 func _on_secret_detector_body_entered(body: Node2D) -> void:
 	if body is not CharacterBody2D:
 		# Detect the player only.
