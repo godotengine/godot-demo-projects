@@ -21,7 +21,7 @@ func recenter() -> void:
 		push_error("Couldn't access OpenXR interface!")
 		return
 
-	var play_area_mode : XRInterface.PlayAreaMode = xr_interface.get_play_area_mode()
+	var play_area_mode: XRInterface.PlayAreaMode = xr_interface.get_play_area_mode()
 	if play_area_mode == XRInterface.XR_PLAY_AREA_SITTING:
 		push_warning("Sitting play space is not suitable for this setup.")
 	elif play_area_mode == XRInterface.XR_PLAY_AREA_ROOMSCALE:
