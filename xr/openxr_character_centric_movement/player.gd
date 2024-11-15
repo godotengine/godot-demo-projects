@@ -32,7 +32,7 @@ func recenter() -> void:
 		XRServer.center_on_hmd(XRServer.RESET_BUT_KEEP_TILT, true)
 
 	# XRCamera3D node won't be updated yet, so go straight to the source!
-	var head_tracker : XRPositionalTracker = XRServer.get_tracker("head")
+	var head_tracker: XRPositionalTracker = XRServer.get_tracker("head")
 	if not head_tracker:
 		push_error("Couldn't locate head tracker!")
 		return
