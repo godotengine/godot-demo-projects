@@ -16,7 +16,7 @@ var gravity := float(ProjectSettings.get_setting("physics/3d/default_gravity"))
 
 ## Called when the user has requested their view to be recentered.
 func recenter() -> void:
-	var xr_interface : OpenXRInterface = XRServer.find_interface("OpenXR")
+	var xr_interface: OpenXRInterface = XRServer.find_interface("OpenXR")
 	if not xr_interface:
 		push_error("Couldn't access OpenXR interface!")
 		return
