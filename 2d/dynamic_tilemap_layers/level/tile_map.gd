@@ -13,13 +13,13 @@ func _process(delta: float) -> void:
 		if layer_alpha > 0.3:
 			# Animate the layer transparency.
 			layer_alpha = move_toward(layer_alpha, 0.3, delta)
-			set_self_modulate(Color(1, 1, 1, layer_alpha))
+			self_modulate = Color(1, 1, 1, layer_alpha)
 		else:
 			set_process(false)
 	else:
 		if layer_alpha < 1.0:
 			layer_alpha = move_toward(layer_alpha, 1.0, delta)
-			set_self_modulate(Color(1, 1, 1, layer_alpha))
+			self_modulate = Color(1, 1, 1, layer_alpha)
 		else:
 			set_process(false)
 
