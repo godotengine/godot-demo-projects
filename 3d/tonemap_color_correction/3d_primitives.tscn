@@ -1,0 +1,261 @@
+[gd_scene load_steps=26 format=3 uid="uid://bfbqknlrqre0c"]
+
+[ext_resource type="Script" path="res://test_scene.gd" id="1_vpdan"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y6uuk"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.1984, 0.242987, 0.32, 1)
+ground_bottom_color = Color(0.156863, 0.160784, 0.2, 1)
+ground_horizon_color = Color(0.156863, 0.160784, 0.2, 1)
+sun_angle_max = 6.0
+sun_curve = 3.51379
+
+[sub_resource type="Sky" id="Sky_lexvt"]
+sky_material = SubResource("ProceduralSkyMaterial_y6uuk")
+
+[sub_resource type="Environment" id="Environment_lqw28"]
+background_mode = 2
+sky = SubResource("Sky_lexvt")
+tonemap_mode = 2
+tonemap_white = 6.0
+glow_enabled = true
+glow_intensity = 0.09
+glow_blend_mode = 1
+fog_enabled = true
+fog_density = 0.025
+fog_aerial_perspective = 1.0
+adjustment_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_ff240"]
+size = Vector3(512, 1, 512)
+
+[sub_resource type="Gradient" id="Gradient_sho7j"]
+offsets = PackedFloat32Array(0.260163, 0.398374, 0.536585, 0.699187, 0.829268, 1)
+colors = PackedColorArray(0.336608, 0.336608, 0.336608, 1, 0.589096, 0.589095, 0.589096, 1, 0.521141, 0.52114, 0.521141, 1, 0.762404, 0.762404, 0.762403, 1, 0.48179, 0.48179, 0.481789, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dm8vr"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hbgko"]
+width = 1024
+height = 1024
+seamless = true
+color_ramp = SubResource("Gradient_sho7j")
+noise = SubResource("FastNoiseLite_dm8vr")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mq5hl"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tdt10"]
+width = 1024
+height = 1024
+seamless = true
+as_normal_map = true
+bump_strength = 10.0
+noise = SubResource("FastNoiseLite_mq5hl")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ldfp"]
+albedo_texture = SubResource("NoiseTexture2D_hbgko")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_tdt10")
+uv1_scale = Vector3(512, 256, 1)
+texture_filter = 5
+
+[sub_resource type="BoxMesh" id="BoxMesh_6wvpc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l4mxj"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(2, 1.5, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_qnmea"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kssqo"]
+metallic = 1.0
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4geml"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3eq2w"]
+metallic = 1.0
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uqci1"]
+albedo_color = Color(0.501961, 0.501961, 0.501961, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8sl4i"]
+albedo_color = Color(0.501961, 0.501961, 0.501961, 1)
+metallic = 1.0
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pauuc"]
+albedo_color = Color(1, 0.25098, 0.25098, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8w4e2"]
+albedo_color = Color(1, 0.25098, 0.25098, 1)
+metallic = 1.0
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cb5og"]
+albedo_color = Color(0.25098, 1, 0.25098, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ah8ww"]
+albedo_color = Color(0.25098, 1, 0.25098, 1)
+metallic = 1.0
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ako3b"]
+albedo_color = Color(0.25098, 0.25098, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_suuj5"]
+albedo_color = Color(0.25098, 0.25098, 1, 1)
+metallic = 1.0
+roughness = 0.5
+
+[node name="3DPrimitives" type="Node3D" node_paths=PackedStringArray("world_environment")]
+script = ExtResource("1_vpdan")
+world_environment = NodePath("WorldEnvironment")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866126, 0.13782, -0.480448, 0.0352591, 0.941991, 0.333781, 0.49858, -0.306037, 0.811024, -2.58974, 2.10013, -4.66397)
+light_color = Color(0.776471, 0.917647, 1, 1)
+light_energy = 0.4
+shadow_enabled = true
+shadow_bias = 0.04
+shadow_blur = 2.0
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 12.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lqw28")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.4, 1)
+mesh = SubResource("BoxMesh_ff240")
+surface_material_override/0 = SubResource("StandardMaterial3D_4ldfp")
+
+[node name="Testers" type="Node3D" parent="."]
+
+[node name="GlowingBox" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, 0)
+mesh = SubResource("BoxMesh_6wvpc")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_l4mxj")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Testers/GlowingBox"]
+light_energy = 2.0
+shadow_blur = 2.0
+
+[node name="GlowingSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, 0)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_l4mxj")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Testers/GlowingSphere"]
+light_energy = 2.0
+shadow_blur = 2.0
+
+[node name="MirrorSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.5, -1)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kssqo")
+
+[node name="WhiteBox" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, 0)
+mesh = SubResource("BoxMesh_6wvpc")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4geml")
+
+[node name="WhiteSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.5, 0)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4geml")
+
+[node name="WhiteMetallicSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.5, -1)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_3eq2w")
+
+[node name="GrayBox" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 0)
+mesh = SubResource("BoxMesh_6wvpc")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_uqci1")
+
+[node name="GraySphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, 0)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_uqci1")
+
+[node name="GrayMetallicSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -1)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_8sl4i")
+
+[node name="RedBox" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 0)
+mesh = SubResource("BoxMesh_6wvpc")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_pauuc")
+
+[node name="RedSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.5, 0)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_pauuc")
+
+[node name="RedMetallicSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.5, -1)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_8w4e2")
+
+[node name="GreenBox" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_6wvpc")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_cb5og")
+
+[node name="GreenSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_cb5og")
+
+[node name="GreenMetallicSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -1)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ah8ww")
+
+[node name="BlueBox" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, 0)
+mesh = SubResource("BoxMesh_6wvpc")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ako3b")
+
+[node name="BlueSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.5, 0)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ako3b")
+
+[node name="BlueMetallicSphere" type="MeshInstance3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.5, -1)
+mesh = SubResource("SphereMesh_qnmea")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_suuj5")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.942327, -0.0710023, 0.327076, 6.57846e-09, 0.977239, 0.212141, -0.334694, -0.199906, 0.920879, 0.669204, 2.35, 4.04922)
+fov = 50.0
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2, 0)
+size = Vector3(512, 512, 512)
+enable_shadows = true
