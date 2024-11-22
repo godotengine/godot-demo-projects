@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckvqraq6j1okh"]
+[gd_scene load_steps=7 format=3 uid="uid://ckvqraq6j1okh"]
 
 [ext_resource type="Script" path="res://car_select/car_select.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bh7b4n4lg1uqt" path="res://car_select/choose_van.png" id="2"]
@@ -10,6 +10,8 @@ variation_embolden = 1.0
 variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
 spacing_glyph = -1
 spacing_space = 4
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_lcrm3"]
 
 [node name="CarSelect" type="Control"]
 layout_mode = 3
@@ -74,6 +76,60 @@ theme_override_constants/shadow_outline_size = 38
 theme_override_fonts/font = SubResource("FontVariation_hqcvw")
 theme_override_font_sizes/font_size = 64
 text = "Truck Town"
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -325.0
+offset_top = 164.0
+offset_right = 325.0
+offset_bottom = 205.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+text = "Mood"
+
+[node name="Sunrise" type="CheckBox" parent="PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_group = SubResource("ButtonGroup_lcrm3")
+text = "Sunrise"
+
+[node name="Day" type="CheckBox" parent="PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+button_group = SubResource("ButtonGroup_lcrm3")
+text = "Day"
+
+[node name="Sunset" type="CheckBox" parent="PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_group = SubResource("ButtonGroup_lcrm3")
+text = "Sunset"
+
+[node name="Night" type="CheckBox" parent="PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_group = SubResource("ButtonGroup_lcrm3")
+text = "Night"
 
 [connection signal="pressed" from="HBoxContainer/MiniVan" to="." method="_on_mini_van_pressed"]
 [connection signal="pressed" from="HBoxContainer/TrailerTruck" to="." method="_on_trailer_truck_pressed"]

@@ -11,6 +11,7 @@ Controls:
 - <kbd>Right Arrow</kbd>, <kbd>Gamepad Left Stick</kbd>, <kbd>Gamepad D-Pad Right</kbd>: Steer right
 - <kbd>U</kbd>, <kbd>Gamepad Select</kbd>, left-click speedometer: Change speedometer unit (m/s, km/h, mph)
 - <kbd>C</kbd>, <kbd>Gamepad Y/Triangle</kbd>: Change camera (exterior, interior, top-down)
+- <kbd>M</kbd>, <kbd>Gamepad D-Pad Down</kbd>: Change mood (sunrise, day, sunset, night)
 - <kbd>Escape</kbd>, <kbd>Gamepad D-Pad Up</kbd>: Go back to menu (press again to exit)
 
 On mobile platforms, the vehicle automatically accelerates. Touch the left and
