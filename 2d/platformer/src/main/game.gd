@@ -52,7 +52,7 @@ func _unhandled_input(event):
 			$Black/SplitContainer/ViewportContainer1.free()
 			$Black.queue_free()
 			# warning-ignore:return_value_discarded
-			get_tree().change_scene("res://src/Main/Game.tscn")
+			get_tree().change_scene("res://src/main/game.tscn")
 		else:
 			# warning-ignore:return_value_discarded
-			get_tree().change_scene("res://src/Main/Splitscreen.tscn")
+			get_tree().change_scene("res://src/main/split_screen.tscn")

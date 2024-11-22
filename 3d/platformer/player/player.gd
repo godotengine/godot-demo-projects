@@ -117,9 +117,9 @@ func _physics_process(delta):
 		shoot_blend = SHOOT_TIME
 		var bullet = preload("res://player/bullet/bullet.tscn").instance()
 		bullet.set_transform(get_node("Armature/Bullet").get_global_transform().orthonormalized())
-		get_parent().add_child(bullet)
 		bullet.set_linear_velocity(get_node("Armature/Bullet").get_global_transform().basis[2].normalized() * BULLET_SPEED)
 		bullet.add_collision_exception_with(self) # Add it to bullet.
+		get_parent().add_child(bullet)
 		get_node("SoundShoot").play()
 
 	prev_shoot = shoot_attempt

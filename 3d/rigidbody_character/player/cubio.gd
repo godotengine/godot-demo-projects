@@ -11,6 +11,7 @@ func _physics_process(_delta):
 		get_tree().quit()
 	if Input.is_action_just_pressed("reset_position"):
 		translation = start_position
+		reset_physics_interpolation()
 		return
 
 	var dir = Vector3()

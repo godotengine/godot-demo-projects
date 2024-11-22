@@ -104,6 +104,7 @@ position = Vector2( 110, 0 )
 polygon = PoolVector2Array( -20, 0, -20, -20, 20, -20, 20, 0 )
 
 [node name="StateNameDisplayer" type="Label" parent="."]
+physics_interpolation_mode = 2
 margin_left = -109.0
 margin_top = -172.0
 margin_right = 110.0
@@ -114,9 +115,6 @@ align = 1
 valign = 1
 uppercase = true
 script = ExtResource( 15 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="state_changed" from="StateMachine" to="BodyPivot/WeaponPivot/Offset/Sword" method="_on_StateMachine_state_changed"]
 [connection signal="state_changed" from="StateMachine" to="StateNameDisplayer" method="_on_StateMachine_state_changed"]
