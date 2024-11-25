@@ -4,9 +4,9 @@ using System;
 public partial class Pong : Node2D
 {
     [Signal]
-    private delegate void GameFinished(string withError);
+    public delegate void GameFinishedEventHandler(string withError);
 
-    private const int ScoreToWin = 10;
+    private const int ScoreToWin = 3;
 
     private int _scoreLeft = 0;
     private int _scoreRight = 0;
@@ -28,19 +28,19 @@ public partial class Pong : Node2D
         // By default, all nodes in server inherit from master,
         // while all nodes in clients inherit from puppet.
         // SetNetworkMaster is tree-recursive by default.
-        if (GetTree().IsNetworkServer())
+        if (GetTree().GetMultiplayer().IsServer())
         {
-            _playerTwo.SetNetworkMaster(GetTree().GetNetworkConnectedPeers()[0]);
+            _playerTwo.SetMultiplayerAuthority(GetTree().GetMultiplayer().GetPeers()[0]);
         }
         else
         {
-            _playerTwo.SetNetworkMaster(GetTree().GetNetworkUniqueId());
+            _playerTwo.SetMultiplayerAuthority(GetTree().GetMultiplayer().GetUniqueId());
         }
 
-        GD.Print("Unique id: ", GetTree().GetNetworkUniqueId());
+        GD.Print("Unique id: ", GetTree().GetMultiplayer().GetUniqueId());
     }
 
-    [Sync]
+    [Rpc(CallLocal = true)]
     private void UpdateScore(bool addToLeft)
     {
         if (addToLeft)
