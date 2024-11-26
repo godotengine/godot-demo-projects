@@ -1,0 +1,364 @@
+[gd_scene load_steps=13 format=3 uid="uid://8nmbmlqd6df6"]
+
+[ext_resource type="Script" path="res://scenes/main_scene.gd" id="1_nwc20"]
+[ext_resource type="PackedScene" uid="uid://blbehgenpldb" path="res://scenes/window/window.tscn" id="2_ldw47"]
+[ext_resource type="Script" path="res://scenes/disable_other.gd" id="2_psh0l"]
+[ext_resource type="Script" path="res://scenes/text_field.gd" id="3_bgndp"]
+[ext_resource type="PackedScene" uid="uid://ek1fmwy87san" path="res://scenes/draggable_window/draggable_window.tscn" id="4_diw6b"]
+[ext_resource type="PackedScene" uid="uid://dx84v67isxyjv" path="res://scenes/file_dialogue/file_dialog.tscn" id="5_f4o8g"]
+[ext_resource type="PackedScene" uid="uid://cudrukovmha7p" path="res://scenes/accept_dialogue/accept_dialog.tscn" id="6_st8be"]
+[ext_resource type="PackedScene" uid="uid://1nswovajdv3n" path="res://scenes/confimation_dialogue/confirmation_dialog.tscn" id="7_wii4q"]
+[ext_resource type="PackedScene" uid="uid://p7lgllpnc8h8" path="res://scenes/popup/popup.tscn" id="8_vohc5"]
+[ext_resource type="PackedScene" uid="uid://j7j6fe7plvmt" path="res://scenes/popup_menu/popup_menu.tscn" id="9_b1y32"]
+[ext_resource type="PackedScene" uid="uid://dj15to28g17lb" path="res://scenes/popup_panel/popup_panel.tscn" id="10_rn47v"]
+[ext_resource type="PackedScene" uid="uid://bfsfek8h27vha" path="res://scenes/status_indicator/status_indicator.tscn" id="12_cb4u3"]
+
+[node name="MainScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nwc20")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="EmbedSubwindows" type="CheckButton" parent="HBoxContainer/VBoxContainer" node_paths=PackedStringArray("others")]
+layout_mode = 2
+button_pressed = true
+text = "Embed Subwindows"
+script = ExtResource("2_psh0l")
+others = [NodePath("../TransparentWindow"), NodePath("../PassthroughPolygon")]
+behavior = 1
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="WindowLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Window"
+horizontal_alignment = 1
+
+[node name="WindowButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Show window"
+
+[node name="WindowTitleEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Window's Title"
+
+[node name="TransientWindow" type="CheckButton" parent="HBoxContainer/VBoxContainer" node_paths=PackedStringArray("others")]
+layout_mode = 2
+text = "Transient"
+script = ExtResource("2_psh0l")
+others = [NodePath("../ExclusiveWindow")]
+
+[node name="ExclusiveWindow" type="CheckButton" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Needs transient enabled to work."
+disabled = true
+text = "Exclusive
+"
+
+[node name="UnresizableWindow" type="CheckButton" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Unresizable
+"
+
+[node name="BorderlessWindow" type="CheckButton" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Borderless"
+
+[node name="AlwaysOnTopWindow" type="CheckButton" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Always on Top"
+
+[node name="TransparentWindow" type="CheckButton" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Needs embed_subwindows disabled to work."
+text = "Transparent
+"
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="WindowArea2D" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Window with Area2D"
+horizontal_alignment = 1
+
+[node name="HBoxContainerDW" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="DraggableWindowButton" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainerDW"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Draggable window"
+
+[node name="Close" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainerDW"]
+layout_mode = 2
+text = "X"
+
+[node name="DraggableWindowExplanation" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+text = "This window uses Area2D to detect if user clicked inside of it.
+Since it's Area2D, you can change it's CollisionShape2D.
+But since Area2D is a Physics Object, \"Physics Object Picking\" inside of Window's properties hard to be enabled.
+"
+fit_content = true
+
+[node name="BGDraggableWindow" type="CheckButton" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Needs embed_subwindows disabled to work."
+text = "Add Background"
+
+[node name="PassthroughLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Passthrough Polygon:"
+
+[node name="PassthroughPolygon" type="OptionButton" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Needs embed_subwindows disabled to work."
+selected = 0
+item_count = 3
+popup/item_0/text = "Empty"
+popup/item_1/text = "Calculate via BitMap"
+popup/item_1/id = 1
+popup/item_2/text = "Rectangle"
+popup/item_2/id = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="FileDialogLabel" type="Label" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "File Dialog"
+horizontal_alignment = 1
+
+[node name="FileDialogButton" type="Button" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Show File Dialog"
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+selected = 4
+item_count = 5
+popup/item_0/text = "Open File"
+popup/item_1/text = "Open Files"
+popup/item_1/id = 1
+popup/item_2/text = "Open Folder"
+popup/item_2/id = 2
+popup/item_3/text = "Open Any"
+popup/item_3/id = 3
+popup/item_4/text = "Save"
+popup/item_4/id = 4
+
+[node name="NativeDialog" type="CheckButton" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Use Native
+Dialog"
+
+[node name="FileDialogOutput" type="TextEdit" parent="HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 2
+placeholder_text = "Chosen path will show up here."
+editable = false
+wrap_mode = 1
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="AcceptLabel" type="Label" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Accept Dialog"
+horizontal_alignment = 1
+
+[node name="AcceptButton" type="Button" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Show Accept Dialog"
+
+[node name="NewButtonField" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer2/NewButtonField" node_paths=PackedStringArray("submit_button")]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "New button field"
+script = ExtResource("3_bgndp")
+submit_button = NodePath("../Submit")
+
+[node name="Submit" type="Button" parent="HBoxContainer/VBoxContainer2/NewButtonField"]
+layout_mode = 2
+text = "Enter"
+
+[node name="AcceptOutput" type="TextEdit" parent="HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 70)
+layout_mode = 2
+placeholder_text = "Dialogue result will show up here."
+editable = false
+wrap_mode = 1
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="ConfirmationLabel" type="Label" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Confirmation Dialog"
+horizontal_alignment = 1
+
+[node name="ConfirmationButton" type="Button" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Show Dialogue"
+
+[node name="ConfirmationOutput" type="TextEdit" parent="HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 2
+placeholder_text = "Confirmation Result"
+editable = false
+wrap_mode = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="PopupLabel" type="Label" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Popup"
+horizontal_alignment = 1
+
+[node name="PopupButton" type="Button" parent="HBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(150, 85)
+layout_mode = 2
+text = "Show Popup"
+
+[node name="PopupDescription" type="RichTextLabel" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/mono_font_size = 12
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "Popup hiding on mouse exit is handled by via [code]mouse_exited[/code] signal"
+fit_content = true
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="PopupMenuLabel" type="Label" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Popup"
+horizontal_alignment = 1
+
+[node name="PopupMenuButton" type="Button" parent="HBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(150, 85)
+layout_mode = 2
+text = "Show Popup"
+
+[node name="PopupMenuOutput" type="TextEdit" parent="HBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+placeholder_text = "Pressed option will show up here."
+editable = false
+wrap_mode = 1
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="PopupPanelLabel" type="Label" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Popup"
+horizontal_alignment = 1
+
+[node name="PopupPanelButton" type="Button" parent="HBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(150, 85)
+layout_mode = 2
+text = "Show Popup"
+
+[node name="HSeparator3" type="HSeparator" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="StatusIndicatorLabel" type="Label" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Status Indicator"
+horizontal_alignment = 1
+
+[node name="StatusIndicatorVisible" type="CheckButton" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+button_pressed = true
+text = "Visible Tray Icon"
+
+[node name="OSLimitation" type="RichTextLabel" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+text = "Only works on Windows and macOS"
+fit_content = true
+
+[node name="Window" parent="." instance=ExtResource("2_ldw47")]
+visible = false
+
+[node name="DraggableWindow" parent="." instance=ExtResource("4_diw6b")]
+visible = false
+
+[node name="FileDialog" parent="." instance=ExtResource("5_f4o8g")]
+visible = false
+access = 2
+
+[node name="AcceptDialog" parent="." instance=ExtResource("6_st8be")]
+visible = false
+
+[node name="ConfirmationDialog" parent="." instance=ExtResource("7_wii4q")]
+visible = false
+
+[node name="Popup" parent="." instance=ExtResource("8_vohc5")]
+visible = false
+
+[node name="PopupMenu" parent="." instance=ExtResource("9_b1y32")]
+visible = false
+unfocusable = false
+
+[node name="PopupPanel" parent="." instance=ExtResource("10_rn47v")]
+visible = false
+
+[node name="StatusIndicator" parent="." instance=ExtResource("12_cb4u3")]
+tooltip = "Multiple Windows Demo"
+
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/EmbedSubwindows" to="." method="_on_embed_subwindows_toggled"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/WindowButton" to="." method="_on_window_button_pressed"]
+[connection signal="text_changed" from="HBoxContainer/VBoxContainer/WindowTitleEdit" to="." method="_on_window_title_edit_text_changed"]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/TransientWindow" to="." method="_on_transient_window_toggled"]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ExclusiveWindow" to="." method="_on_exclusive_window_toggled"]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/UnresizableWindow" to="." method="_on_unresizable_window_toggled"]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/BorderlessWindow" to="." method="_on_borderless_window_toggled"]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/AlwaysOnTopWindow" to="." method="_on_always_on_top_window_toggled"]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/TransparentWindow" to="." method="_on_transparent_window_toggled"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/HBoxContainerDW/DraggableWindowButton" to="." method="_on_draggable_window_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/HBoxContainerDW/Close" to="." method="_on_draggable_window_close_pressed"]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/BGDraggableWindow" to="." method="_on_bg_draggable_window_toggled"]
+[connection signal="item_selected" from="HBoxContainer/VBoxContainer/PassthroughPolygon" to="." method="_on_passthrough_polygon_item_selected"]
+[connection signal="item_selected" from="HBoxContainer/VBoxContainer2/OptionButton" to="." method="_on_file_dialogue_item_selected"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/AcceptButton" to="." method="_on_accept_button_pressed"]
+[connection signal="text_submitted" from="HBoxContainer/VBoxContainer2/NewButtonField/LineEdit" to="." method="_on_accept_button_text_submitted"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/ConfirmationButton" to="." method="_on_confirmation_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer3/PopupButton" to="." method="_on_popup_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer3/PopupMenuButton" to="." method="_on_popup_menu_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer3/PopupPanelButton" to="." method="_on_popup_panel_button_pressed"]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer3/StatusIndicatorVisible" to="." method="_on_status_indicator_visible_toggled"]
+[connection signal="dir_selected" from="FileDialog" to="." method="_on_file_dialog_dir_selected"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="files_selected" from="FileDialog" to="." method="_on_file_dialog_files_selected"]
+[connection signal="canceled" from="AcceptDialog" to="." method="_on_accept_dialog_canceled"]
+[connection signal="confirmed" from="AcceptDialog" to="." method="_on_accept_dialog_confirmed"]
+[connection signal="custom_action" from="AcceptDialog" to="." method="_on_accept_dialog_custom_action"]
+[connection signal="canceled" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_canceled"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]
+[connection signal="option_pressed" from="PopupMenu" to="." method="_on_popup_menu_option_pressed"]
