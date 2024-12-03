@@ -5,5 +5,5 @@ var velocity := Vector2()
 
 func handle_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
-		finished.emit("jump")
+		finished.emit(player_state.jump)
 	return super.handle_input(event)

@@ -36,7 +36,7 @@ func enter() -> void:
 		horizontal_velocity = Vector2()
 	vertical_speed = 600.0
 
-	owner.get_node(^"AnimationPlayer").play("idle")
+	owner.get_node(^"AnimationPlayer").play(player_state.idle)
 
 
 func update(delta: float) -> void:
@@ -46,7 +46,7 @@ func update(delta: float) -> void:
 	move_horizontally(delta, input_direction)
 	animate_jump_height(delta)
 	if height <= 0.0:
-		finished.emit("previous")
+		finished.emit(player_state.previous)
 
 
 func move_horizontally(delta: float, direction: Vector2) -> void:
