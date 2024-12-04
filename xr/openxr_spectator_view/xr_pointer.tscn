@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhqkd635yjwnq"]
+
+[ext_resource type="Script" uid="uid://ctrh43p0rocla" path="res://xr_pointer.gd" id="1_tws8t"]
+[ext_resource type="Shader" uid="uid://cyiyvwewggiet" path="res://shaders/color_unshaded.gdshader" id="2_yr1v6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c2ywk"]
+render_priority = 0
+shader = ExtResource("2_yr1v6")
+shader_parameter/albedo_color = Color(1, 0, 0, 0.6392157)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tws8t"]
+material = SubResource("ShaderMaterial_c2ywk")
+top_radius = 0.0
+bottom_radius = 0.02
+height = 5.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_yr1v6"]
+material = SubResource("ShaderMaterial_c2ywk")
+radius = 0.05
+height = 0.1
+radial_segments = 16
+rings = 8
+
+[node name="XRPointer" type="RayCast3D"]
+target_position = Vector3(0, 0, -5.1)
+collide_with_areas = true
+script = ExtResource("1_tws8t")
+metadata/_custom_type_script = "uid://ctrh43p0rocla"
+
+[node name="Laser" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -2.9)
+mesh = SubResource("CylinderMesh_tws8t")
+
+[node name="Target" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+mesh = SubResource("SphereMesh_yr1v6")
