@@ -23,6 +23,7 @@ process_mode = 3
 script = ExtResource("1")
 
 [node name="SubViewport" type="SubViewport" parent="."]
+editor_description = "SubViewport contents can be displayed using a ViewportTexture."
 gui_embed_subwindows = true
 size = Vector2i(560, 360)
 render_target_update_mode = 4
@@ -51,9 +52,11 @@ grow_vertical = 2
 theme_override_constants/separation = 13
 
 [node name="Label" type="Label" parent="SubViewport/GUI/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "Hello world!"
+text = "SubViewport is rendered on Quad"
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="Button" type="Button" parent="SubViewport/GUI/Panel/VBoxContainer"]
 layout_mode = 2
@@ -129,6 +132,12 @@ popup/item_2/text = "Item 2"
 popup/item_2/id = 2
 
 [node name="Quad" type="MeshInstance3D" parent="."]
+editor_description = "To setup this MeshInstance3D:
+* Set Surface Material Override to a new StandardMaterial3D.
+* At the bottom of the StandardMaterial3D's properties, set \"Local to Scene\" to true.
+* Set the Albedo Texture of StandardMaterial3D to new ViewportTexture and set the Viewport Path.
+* Transparency to Alpha.
+* Shading to Unshaded."
 mesh = SubResource("1")
 surface_material_override/0 = SubResource("3")
 
