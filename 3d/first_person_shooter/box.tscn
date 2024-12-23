@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://bly64h687ino4"]
+
+[ext_resource type="Script" path="res://box.gd" id="1_iqw5t"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ey7wh"]
+size = Vector3(1.25, 1.25, 1.25)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vemq1"]
+fractal_type = 2
+fractal_lacunarity = 16.782
+fractal_gain = 1.4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nepn7"]
+seamless = true
+noise = SubResource("FastNoiseLite_vemq1")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w2v74"]
+seamless = true
+as_normal_map = true
+bump_strength = 0.1
+noise = SubResource("FastNoiseLite_vemq1")
+
+[sub_resource type="Gradient" id="Gradient_soa80"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rmhqn"]
+seamless = true
+color_ramp = SubResource("Gradient_soa80")
+noise = SubResource("FastNoiseLite_vemq1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ka0y5"]
+albedo_color = Color(1.2, 0.85, 0.5, 1)
+albedo_texture = SubResource("NoiseTexture2D_nepn7")
+roughness = 0.5
+roughness_texture = SubResource("NoiseTexture2D_rmhqn")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_w2v74")
+uv1_scale = Vector3(0.2, 0.133, 1)
+uv1_triplanar_sharpness = 15.455
+texture_filter = 4
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_abq30"]
+size = Vector3(1.25, 1.25, 1.25)
+
+[node name="Box" type="RigidBody3D"]
+script = ExtResource("1_iqw5t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ey7wh")
+surface_material_override/0 = SubResource("StandardMaterial3D_ka0y5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_abq30")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+size = Vector3(1.26, 1.26, 1.26)
