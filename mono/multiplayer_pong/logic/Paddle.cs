@@ -13,16 +13,15 @@ public partial class Paddle : Area2D
 
     public override void _Ready()
     {
-        _screenSizeY = GetViewportRect().Size.y;
+        _screenSizeY = GetViewportRect().Size.Y;
     }
 
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         // Is the master of the paddle.
-        if (IsNetworkMaster())
+        if (IsMultiplayerAuthority())
         {
             _motion = Input.GetActionStrength("move_down") - Input.GetActionStrength("move_up");
-
             if (!_youHidden && _motion != 0)
             {
                 HideYouLabel();
@@ -32,7 +31,7 @@ public partial class Paddle : Area2D
 
             // Using unreliable to make sure position is updated as fast as possible,
             // even if one of the calls is dropped
-            RpcUnreliable(nameof(SetPosAndMotion), Position, _motion);
+            Rpc(nameof(SetPosAndMotion), Position, _motion);
         }
         else
         {
@@ -41,13 +40,13 @@ public partial class Paddle : Area2D
                 HideYouLabel();
             }
         }
-        Translate(new Vector2(0, _motion * delta));
+        Translate(new Vector2(0, _motion * (float)delta));
 
         // Set screen limits. Can't modify structs directly, so we create a new one.
-        Position = new Vector2(Position.x, Mathf.Clamp(Position.y, 16, _screenSizeY - 16));
+        Position = new Vector2(Position.X, Mathf.Clamp(Position.Y, 16, _screenSizeY - 16));
     }
 
-    [Puppet]
+    [Rpc(TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
     private void SetPosAndMotion(Vector2 pos, float motion)
     {
         Position = pos;
@@ -62,7 +61,7 @@ public partial class Paddle : Area2D
 
     private void OnPaddleAreaEnter(Area2D area)
     {
-        if (IsNetworkMaster())
+        if (IsMultiplayerAuthority())
         {
             area.Rpc("Bounce", _left, GD.Randf());
         }
