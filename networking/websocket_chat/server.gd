@@ -1,6 +1,6 @@
 extends Control
 
-@onready var _server: WebSocketServer = $WebSocketServer
+@onready var _server: NWebSocketServer = $WebSocketServer
 @onready var _log_dest: RichTextLabel = $Panel/VBoxContainer/RichTextLabel
 @onready var _line_edit: LineEdit = $Panel/VBoxContainer/Send/LineEdit
 @onready var _listen_port: SpinBox = $Panel/VBoxContainer/Connect/Port
