@@ -1,23 +1,23 @@
 [gd_scene load_steps=31 format=3 uid="uid://dyk2fhwqwi2u0"]
 
-[ext_resource type="Script" path="res://screen_shaders.gd" id="1"]
+[ext_resource type="Script" uid="uid://bknidpt4xwb2k" path="res://screen_shaders.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bxfl16c7nqg0t" path="res://art/burano.jpg" id="2"]
 [ext_resource type="Texture2D" uid="uid://cjycbveqawf6o" path="res://art/platformer.jpg" id="3"]
 [ext_resource type="Texture2D" uid="uid://bj5ysvx4sbbw0" path="res://art/mountains.jpg" id="4"]
 [ext_resource type="Texture2D" uid="uid://dmposqqlg6e2m" path="res://art/forest.jpg" id="5"]
-[ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="6"]
+[ext_resource type="Shader" uid="uid://ch0xjgqu23fiu" path="res://shaders/vignette.gdshader" id="6"]
 [ext_resource type="Texture2D" uid="uid://c7uiamx2smpx5" path="res://art/vignette.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://dxb6wr1r452am" path="res://art/white.png" id="8"]
-[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="9"]
-[ext_resource type="Shader" path="res://shaders/pixelize.gdshader" id="10"]
-[ext_resource type="Shader" path="res://shaders/whirl.gdshader" id="11"]
-[ext_resource type="Shader" path="res://shaders/sepia.gdshader" id="12"]
-[ext_resource type="Shader" path="res://shaders/negative.gdshader" id="13"]
-[ext_resource type="Shader" path="res://shaders/contrasted.gdshader" id="14"]
-[ext_resource type="Shader" path="res://shaders/normalized.gdshader" id="15"]
-[ext_resource type="Shader" path="res://shaders/BCS.gdshader" id="16"]
-[ext_resource type="Shader" path="res://shaders/mirage.gdshader" id="17"]
-[ext_resource type="Shader" path="res://shaders/old_film.gdshader" id="18"]
+[ext_resource type="Shader" uid="uid://dgts6gsu4bfjm" path="res://shaders/blur.gdshader" id="9"]
+[ext_resource type="Shader" uid="uid://citjk4vnekq72" path="res://shaders/pixelize.gdshader" id="10"]
+[ext_resource type="Shader" uid="uid://pnideychiwpr" path="res://shaders/whirl.gdshader" id="11"]
+[ext_resource type="Shader" uid="uid://gckypfickw2n" path="res://shaders/sepia.gdshader" id="12"]
+[ext_resource type="Shader" uid="uid://dsw173xob2fug" path="res://shaders/negative.gdshader" id="13"]
+[ext_resource type="Shader" uid="uid://cn2w21vb1u7ih" path="res://shaders/contrasted.gdshader" id="14"]
+[ext_resource type="Shader" uid="uid://c0c1ikkm1kude" path="res://shaders/normalized.gdshader" id="15"]
+[ext_resource type="Shader" uid="uid://bcg68gbeyyamn" path="res://shaders/BCS.gdshader" id="16"]
+[ext_resource type="Shader" uid="uid://7o6pgfrjk66v" path="res://shaders/mirage.gdshader" id="17"]
+[ext_resource type="Shader" uid="uid://dqd5h8qhkb4y8" path="res://shaders/old_film.gdshader" id="18"]
 [ext_resource type="Texture2D" uid="uid://c5jxxypesp0k5" path="res://art/filmgrain.png" id="19_mg7oc"]
 
 [sub_resource type="ShaderMaterial" id="1"]
@@ -64,12 +64,12 @@ shader_parameter/depth = 0.005
 [sub_resource type="ShaderMaterial" id="11"]
 shader = ExtResource("18")
 shader_parameter/base = Color(0.941176, 0.647059, 0.356863, 1)
+shader_parameter/grain = ExtResource("19_mg7oc")
 shader_parameter/grain_strength = 0.5
+shader_parameter/vignette = ExtResource("7")
 shader_parameter/fps = 15.0
 shader_parameter/stretch = 0.5
 shader_parameter/flashing = 0.1
-shader_parameter/grain = ExtResource("19_mg7oc")
-shader_parameter/vignette = ExtResource("7")
 
 [node name="ScreenShaders" type="Control"]
 layout_mode = 3

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://vb6u0374prwg"]
 
 [ext_resource type="PackedScene" uid="uid://dv7rxhg55y3t6" path="res://tests/static_scene.tscn" id="1"]
-[ext_resource type="Script" path="res://tests/performance/test_perf_contacts.gd" id="2"]
+[ext_resource type="Script" uid="uid://drhbdv8rabmf0" path="res://tests/performance/test_perf_contacts.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://c5duuyhbmd0m4" path="res://assets/texture/godot-head.png" id="3"]
 [ext_resource type="PackedScene" uid="uid://blh3twy74kbkv" path="res://tests/test_options.tscn" id="4"]
 
@@ -16,13 +16,13 @@ radius = 5.0
 height = 17.0
 
 [node name="Test" type="Node2D"]
-script = ExtResource( "2" )
+script = ExtResource("2")
 _enable_debug_collision = false
 spawns = [NodePath("SpawnTarget1"), NodePath("SpawnTarget2"), NodePath("SpawnTarget3"), NodePath("SpawnTarget4"), NodePath("SpawnTarget5"), NodePath("SpawnTarget6"), NodePath("SpawnTarget7"), NodePath("SpawnTarget8"), NodePath("SpawnTarget9")]
 spawn_count = 300
 spawn_randomize = Vector2(10, 10)
 
-[node name="Options" parent="." instance=ExtResource( "4" )]
+[node name="Options" parent="." instance=ExtResource("4")]
 
 [node name="SpawnTarget1" type="Node2D" parent="."]
 position = Vector2(145.646, 109.462)
@@ -51,7 +51,7 @@ position = Vector2(528.14, 507.113)
 [node name="SpawnTarget9" type="Node2D" parent="."]
 position = Vector2(893.995, 508.042)
 
-[node name="StaticScene" parent="." instance=ExtResource( "1" )]
+[node name="StaticScene" parent="." instance=ExtResource("1")]
 visible = false
 position = Vector2(0, 125.017)
 
@@ -62,21 +62,21 @@ position = Vector2(0, 1024)
 gravity_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DynamicShapes/RigidBodyRectangle"]
-shape = SubResource( "1" )
+shape = SubResource("1")
 
 [node name="RigidBodySphere" type="RigidDynamicBody2D" parent="DynamicShapes"]
 position = Vector2(100, 1024)
 gravity_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DynamicShapes/RigidBodySphere"]
-shape = SubResource( "2" )
+shape = SubResource("2")
 
 [node name="RigidBodyCapsule" type="RigidDynamicBody2D" parent="DynamicShapes"]
 position = Vector2(200, 1024)
 gravity_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DynamicShapes/RigidBodyCapsule"]
-shape = SubResource( "3" )
+shape = SubResource("3")
 
 [node name="RigidBodyConvexPolygon" type="RigidDynamicBody2D" parent="DynamicShapes"]
 position = Vector2(300, 1024)
@@ -89,7 +89,7 @@ polygon = PackedVector2Array(10.7, -54.5, 28.3596, -49.4067, 47.6282, -34.3806, 
 [node name="GodotIcon" type="Sprite2D" parent="DynamicShapes/RigidBodyConvexPolygon"]
 self_modulate = Color(1, 1, 1, 0.392157)
 scale = Vector2(0.1, 0.1)
-texture = ExtResource( "3" )
+texture = ExtResource("3")
 
 [node name="RigidBodyConcavePolygon" type="RigidDynamicBody2D" parent="DynamicShapes"]
 position = Vector2(400, 1024)
@@ -102,4 +102,4 @@ polygon = PackedVector2Array(-5.93512, -43.2195, 6.44476, -42.9695, 11.127, -54.
 [node name="GodotIcon" type="Sprite2D" parent="DynamicShapes/RigidBodyConcavePolygon"]
 self_modulate = Color(1, 1, 1, 0.392157)
 scale = Vector2(0.1, 0.1)
-texture = ExtResource( "3" )
+texture = ExtResource("3")

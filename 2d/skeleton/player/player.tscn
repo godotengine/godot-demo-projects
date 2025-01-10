@@ -1,6 +1,6 @@
 [gd_scene load_steps=28 format=3 uid="uid://c657hgr7fcptm"]
 
-[ext_resource type="Script" path="res://player/player.gd" id="1"]
+[ext_resource type="Script" uid="uid://bpwsjp2ufno2s" path="res://player/player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cgnjku7sa0qyt" path="res://player/gBot.png" id="2"]
 
 [sub_resource type="Animation" id="1"]
@@ -1654,14 +1654,14 @@ tracks/16/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sx6h1"]
 _data = {
-"fall": SubResource("1"),
-"fly": SubResource("2"),
-"idle": SubResource("3"),
-"jump": SubResource("4"),
-"land": SubResource("5"),
-"land_hard": SubResource("6"),
-"run": SubResource("7"),
-"walk": SubResource("8")
+&"fall": SubResource("1"),
+&"fly": SubResource("2"),
+&"idle": SubResource("3"),
+&"jump": SubResource("4"),
+&"land": SubResource("5"),
+&"land_hard": SubResource("6"),
+&"run": SubResource("7"),
+&"walk": SubResource("8")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="9"]
@@ -1702,18 +1702,23 @@ animation = &"run"
 xfade_time = 0.1
 input_0/name = "idle"
 input_0/auto_advance = false
+input_0/break_loop_at_end = false
 input_0/reset = true
 input_1/name = "walk"
 input_1/auto_advance = false
+input_1/break_loop_at_end = false
 input_1/reset = true
 input_2/name = "run"
 input_2/auto_advance = false
+input_2/break_loop_at_end = false
 input_2/reset = true
 input_3/name = "fly"
 input_3/auto_advance = false
+input_3/break_loop_at_end = false
 input_3/reset = true
 input_4/name = "fall"
 input_4/auto_advance = false
+input_4/break_loop_at_end = false
 input_4/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="21"]

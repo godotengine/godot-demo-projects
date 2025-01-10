@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://bxx2ftwccdlft"]
 
-[ext_resource type="Script" path="res://tests/functional/test_character_pixels.gd" id="1"]
-[ext_resource type="Script" path="res://utils/rigidbody_controller.gd" id="2"]
+[ext_resource type="Script" uid="uid://bc7qj5246usj0" path="res://tests/functional/test_character_pixels.gd" id="1"]
+[ext_resource type="Script" uid="uid://3kutyof2jcdh" path="res://utils/rigidbody_controller.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://blh3twy74kbkv" path="res://tests/test_options.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://cx2q80okt25o1" path="res://tests/static_scene_flat.tscn" id="4"]
-[ext_resource type="Script" path="res://utils/characterbody_controller.gd" id="7"]
+[ext_resource type="Script" uid="uid://gajv1ool1il5" path="res://utils/characterbody_controller.gd" id="7"]
 
 [sub_resource type="RectangleShape2D" id="3"]
 size = Vector2(6, 9.8)
@@ -25,7 +25,7 @@ size = Vector2(6, 10)
 size = Vector2(20, 4)
 
 [node name="Test" type="Node2D"]
-script = ExtResource( "1" )
+script = ExtResource("1")
 _motion_speed = 30.0
 _gravity_force = 2.0
 _jump_force = 50.0
@@ -50,85 +50,85 @@ size_2d_override = Vector2i(128, 75)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
-[node name="StaticSceneFlat" parent="ViewportContainer/Viewport" instance=ExtResource( "4" )]
+[node name="StaticSceneFlat" parent="ViewportContainer/Viewport" instance=ExtResource("4")]
 position = Vector2(0, -450)
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2(30, 40)
 collision_mask = 2147483649
-script = ExtResource( "7" )
+script = ExtResource("7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/CharacterBody2D"]
-shape = SubResource( "3" )
+shape = SubResource("3")
 
 [node name="CharacterBodyRay2D" type="CharacterBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2(30, 40)
 collision_mask = 2147483649
-script = ExtResource( "7" )
+script = ExtResource("7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/CharacterBodyRay2D"]
 position = Vector2(0, -2.5)
-shape = SubResource( "RectangleShape2D_scs3g" )
+shape = SubResource("RectangleShape2D_scs3g")
 
 [node name="CollisionShapeRay2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/CharacterBodyRay2D"]
 position = Vector2(0, -2)
-shape = SubResource( "SeparationRayShape2D_vby12" )
+shape = SubResource("SeparationRayShape2D_vby12")
 
 [node name="RigidDynamicBody2D" type="RigidDynamicBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2(30, 40)
 collision_mask = 2147483649
-physics_material_override = SubResource( "1" )
+physics_material_override = SubResource("1")
 contacts_reported = 4
 contact_monitor = true
 lock_rotation = true
-script = ExtResource( "2" )
+script = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/RigidDynamicBody2D"]
-shape = SubResource( "2" )
+shape = SubResource("2")
 
 [node name="RigidBodyRay2D" type="RigidDynamicBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2(30, 40)
 collision_mask = 2147483649
-physics_material_override = SubResource( "1" )
+physics_material_override = SubResource("1")
 contacts_reported = 4
 contact_monitor = true
 lock_rotation = true
-script = ExtResource( "2" )
+script = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/RigidBodyRay2D"]
 position = Vector2(0, -2.5)
-shape = SubResource( "RectangleShape2D_scs3g" )
+shape = SubResource("RectangleShape2D_scs3g")
 
 [node name="CollisionShapeRay2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/RigidBodyRay2D"]
 position = Vector2(0, -2)
-shape = SubResource( "SeparationRayShape2D_vby12" )
+shape = SubResource("SeparationRayShape2D_vby12")
 
 [node name="Wall1" type="StaticBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2(20, 40)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/Wall1"]
 rotation = 1.5708
-shape = SubResource( "6" )
+shape = SubResource("6")
 
 [node name="Wall2" type="StaticBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2(122, 40)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/Wall2"]
 rotation = 1.5708
-shape = SubResource( "6" )
+shape = SubResource("6")
 
 [node name="Platform1" type="StaticBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2(50, 44)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/Platform1"]
-shape = SubResource( "6" )
+shape = SubResource("6")
 one_way_collision = true
 
 [node name="Platform2" type="StaticBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2(80, 38)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/Platform2"]
-shape = SubResource( "6" )
+shape = SubResource("6")
 
 [node name="Slope" type="StaticBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2(85, 36)
@@ -146,7 +146,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Options" parent="." instance=ExtResource( "3" )]
+[node name="Options" parent="." instance=ExtResource("3")]
 
 [node name="LabelFloor" type="Label" parent="."]
 offset_left = 14.0
