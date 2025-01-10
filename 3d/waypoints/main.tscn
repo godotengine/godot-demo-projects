@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://rj7yrj3c672g"]
+[gd_scene load_steps=19 format=3 uid="uid://rj7yrj3c672g"]
 
 [ext_resource type="Script" path="res://camera.gd" id="1"]
+[ext_resource type="Script" path="res://main.gd" id="1_nvv4i"]
 [ext_resource type="PackedScene" uid="uid://deqpan4silm2n" path="res://waypoint.tscn" id="2"]
 
 [sub_resource type="StandardMaterial3D" id="5"]
@@ -55,6 +56,7 @@ tonemap_mode = 3
 tonemap_white = 6.0
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_nvv4i")
 
 [node name="BlueCube" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
@@ -125,8 +127,8 @@ mesh = SubResource("4")
 [node name="Environment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ob0ys")
 
-[node name="Sun" type="DirectionalLight3D" parent="Environment"]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866026, -0.5, 0.75, -0.433013, 0, 0, 0)
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 shadow_bias = 0.04
 shadow_blur = 1.5

@@ -1,5 +1,21 @@
 extends Node
 
+func _ready() -> void:
+	if OS.has_feature("web"):
+		for button: Button in [
+			$GridContainer/OpenShellFolder,
+			$GridContainer/MoveWindowToForeground,
+			$GridContainer/RequestAttention,
+			$GridContainer/VibrateDeviceShort,
+			$GridContainer/VibrateDeviceLong,
+			$GridContainer/AddGlobalMenuItems,
+			$GridContainer/RemoveGlobalMenuItem,
+			$GridContainer/KillCurrentProcess,
+		]:
+			button.disabled = true
+			button.text += "\n(not supported on Web)"
+
+
 func _on_open_shell_web_pressed() -> void:
 	OS.shell_open("https://example.com")
 

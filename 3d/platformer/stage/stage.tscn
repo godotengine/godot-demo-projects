@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dohp772jyjxb7"]
+[gd_scene load_steps=8 format=3 uid="uid://dohp772jyjxb7"]
 
+[ext_resource type="Script" path="res://stage/stage.gd" id="1_re4bd"]
 [ext_resource type="PackedScene" uid="uid://dmlvwah3ypol0" path="res://stage/grid_map.scn" id="1_t0f53"]
 [ext_resource type="Texture2D" uid="uid://qdur4kpvvtdg" path="res://stage/panorama.webp" id="2_36a8a"]
 [ext_resource type="ArrayMesh" uid="uid://ba7lhk44sk366" path="res://stage/meshes/floor.res" id="2_vkxfl"]
@@ -23,6 +24,7 @@ fog_density = 0.0015
 fog_sky_affect = 0.0
 
 [node name="Stage" type="Node3D"]
+script = ExtResource("1_re4bd")
 
 [node name="GridMap" parent="." instance=ExtResource("1_t0f53")]
 data = {
@@ -33,7 +35,7 @@ metadata/_editor_floor_ = Vector3(4, 4, 0)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vpofs")
 
-[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.965926, -0.166366, 0.198267, 1.42109e-14, 0.766044, 0.642788, -0.258819, 0.620886, -0.739941, 0, 0, 0)
 shadow_enabled = true
 shadow_bias = 0.02

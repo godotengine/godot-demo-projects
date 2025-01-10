@@ -12,6 +12,7 @@ var initial_viewport_height := int(ProjectSettings.get_setting("display/window/s
 
 @onready var camera: Camera3D = $Camera3D
 
+
 func _process(delta: float) -> void:
 	if state != State.GRAB:
 		return

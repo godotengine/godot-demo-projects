@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://djbrxyh5s8j2o" path="res://zdm2.glb" id="1"]
 [ext_resource type="PackedScene" uid="uid://c2lbhsefub1o5" path="res://cube.glb" id="3"]
 [ext_resource type="VoxelGIData" uid="uid://duykbpl6evu0r" path="res://test_VoxelGIData.res" id="3_1netx"]
-[ext_resource type="LightmapGIData" uid="uid://bqpu20db0gmry" path="res://zdm2_all.lmbake" id="4_7vqwx"]
+[ext_resource type="LightmapGIData" uid="uid://c7ltminhf5o56" path="res://zdm2_all.lmbake" id="4_7vqwx"]
 [ext_resource type="Script" path="res://test.gd" id="5"]
-[ext_resource type="LightmapGIData" uid="uid://brs3ywo1ouol0" path="res://zdm2_indirect.lmbake" id="5_14bmd"]
+[ext_resource type="LightmapGIData" uid="uid://xmpb2se1j30h" path="res://zdm2_indirect.lmbake" id="5_14bmd"]
 [ext_resource type="Script" path="res://camera.gd" id="6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_30v8t"]
@@ -60,30 +60,28 @@ script = ExtResource("5")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bau0c")
 
-[node name="Zdm2NoLightmap" parent="." instance=ExtResource("1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
-
 [node name="Zdm2LightmapAll" parent="." instance=ExtResource("1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 visible = false
 
 [node name="Zdm2LightmapIndirect" parent="." instance=ExtResource("1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
-visible = false
 
 [node name="VoxelGI" type="VoxelGI" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 6, 2.5)
+visible = false
 size = Vector3(78, 37, 60)
 data = ExtResource("3_1netx")
 
 [node name="LightmapGIAll" type="LightmapGI" parent="."]
 visible = false
 quality = 3
+generate_probes_subdiv = 3
 light_data = ExtResource("4_7vqwx")
 
 [node name="LightmapGIIndirect" type="LightmapGI" parent="."]
-visible = false
 quality = 3
+generate_probes_subdiv = 3
 light_data = ExtResource("5_14bmd")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
@@ -135,6 +133,7 @@ script = ExtResource("6")
 [node name="Box" type="MeshInstance3D" parent="Camera"]
 transform = Transform3D(0.999999, -5.12227e-09, 9.68575e-08, 2.79397e-09, 0.999999, 8.9407e-08, 7.45058e-09, -1.11759e-07, 0.999999, -1.4, -0.999998, -3.99998)
 layers = 2
+gi_mode = 0
 mesh = SubResource("8")
 
 [node name="BlobShadow" type="Decal" parent="Camera/Box"]
@@ -149,6 +148,7 @@ cull_mask = 1048573
 [node name="ReflectiveSphere" type="MeshInstance3D" parent="Camera"]
 transform = Transform3D(-0.997523, -8.41886e-09, -0.0703376, -0.00719589, 0.994753, 0.102052, 0.0699685, 0.102305, -0.992289, 0.16733, -1.22931, -3.81225)
 layers = 2
+gi_mode = 0
 mesh = SubResource("2")
 surface_material_override/0 = SubResource("StandardMaterial3D_7doxp")
 
@@ -196,14 +196,15 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Screen-space lighting effects: Disabled (Fast)"
 
-[node name="Label" type="Label" parent="."]
+[node name="Help" type="Label" parent="."]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
-offset_top = -120.0
+offset_top = -117.0
 offset_right = 537.0
 offset_bottom = -16.0
+grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Space: Cycle between GI modes
