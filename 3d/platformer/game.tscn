@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0lrpf3mmjdsx"]
+[gd_scene load_steps=12 format=3 uid="uid://d0lrpf3mmjdsx"]
 
 [ext_resource type="PackedScene" uid="uid://dohp772jyjxb7" path="res://stage/stage.tscn" id="1_ybvw5"]
 [ext_resource type="PackedScene" uid="uid://dfxo2jwbj4aeh" path="res://coin/coin.tscn" id="2_chew2"]
 [ext_resource type="PackedScene" uid="uid://o5q0hy6cg6nt" path="res://enemy/enemy.tscn" id="3_nhwvs"]
 [ext_resource type="PackedScene" uid="uid://cc4idhykjp5f5" path="res://player/player.tscn" id="4_ray4s"]
+[ext_resource type="Script" path="res://touch_screen_ui.gd" id="5_7os5d"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://virtual_joystick/virtual_joystick_scene.tscn" id="5_smd4r"]
 
 [sub_resource type="PhysicsMaterial" id="1"]
 friction = 0.0
@@ -16,6 +18,8 @@ friction = 0.0
 
 [sub_resource type="PhysicsMaterial" id="4"]
 friction = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_7o5bd"]
 
 [node name="Game" type="Node3D"]
 
@@ -264,3 +268,83 @@ physics_material_override = SubResource("4")
 
 [node name="Player" parent="." instance=ExtResource("4_ray4s")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9.49833, -3.84189, 3.9334)
+
+[node name="touchScreenUi" type="CanvasLayer" parent="."]
+script = ExtResource("5_7os5d")
+
+[node name="Virtual Joystick" parent="touchScreenUi" instance=ExtResource("5_smd4r")]
+deadzone_size = 0.0
+clampzone_size = 100.0
+
+[node name="performance" type="CheckButton" parent="touchScreenUi"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -197.0
+offset_bottom = 31.0
+grow_horizontal = 0
+focus_mode = 0
+text = "PERFORMANCE MODE"
+alignment = 1
+icon_alignment = 1
+expand_icon = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="touchScreenUi"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -64.0
+offset_bottom = 64.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="jump" type="Control" parent="touchScreenUi/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="touchScreenUi/HBoxContainer/jump"]
+z_index = 5
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "jump"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="jumpbtn" type="TouchScreenButton" parent="touchScreenUi/HBoxContainer/jump"]
+self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(124, 124)
+texture_normal = SubResource("CanvasTexture_7o5bd")
+action = "jump"
+
+[node name="shoot" type="Control" parent="touchScreenUi/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="shoot" type="Label" parent="touchScreenUi/HBoxContainer/shoot"]
+z_index = 5
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "shoot"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="shoot2" type="TouchScreenButton" parent="touchScreenUi/HBoxContainer/shoot"]
+self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(124, 124)
+texture_normal = SubResource("CanvasTexture_7o5bd")
+action = "shoot"
+
+[connection signal="toggled" from="touchScreenUi/performance" to="touchScreenUi" method="_on_performance_toggled"]

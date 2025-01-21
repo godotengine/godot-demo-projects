@@ -24,6 +24,8 @@ var jumping := false
 var prev_shoot := false
 var shoot_blend := 0.0
 
+static var performance_mode := false
+
 # Number of coins collected.
 var coins := 0
 
@@ -67,7 +69,6 @@ func _physics_process(delta: float) -> void:
 	movement_direction = movement_direction.normalized()
 
 	var jump_attempt := Input.is_action_pressed(&"jump")
-	var shoot_attempt := Input.is_action_pressed(&"shoot")
 
 	if is_on_floor():
 		var sharp_turn := horizontal_speed > 0.1 and \
@@ -150,10 +151,12 @@ func _physics_process(delta: float) -> void:
 		shoot_blend *= 0.97
 		if (shoot_blend < 0):
 			shoot_blend = 0
-
+	var shoot_attempt := Input.is_action_pressed(&"shoot")
 	if shoot_attempt and not prev_shoot:
 		shoot_blend = SHOOT_TIME
 		var bullet := preload("res://player/bullet/bullet.tscn").instantiate() as Bullet
+		if performance_mode:
+			bullet.hide_omniLight()
 		bullet.set_transform($Player/Skeleton/Bullet.get_global_transform().orthonormalized())
 		get_parent().add_child(bullet)
 		bullet.set_linear_velocity(
@@ -174,7 +177,6 @@ func _physics_process(delta: float) -> void:
 	_animation_tree[&"parameters/state/blend_amount"] = anim
 	_animation_tree[&"parameters/air_dir/blend_amount"] = clampf(-velocity.y / 4 + 0.5, 0, 1)
 	_animation_tree[&"parameters/gun/blend_amount"] = minf(shoot_blend, 1.0)
-
 
 func adjust_facing(facing: Vector3, target: Vector3, step: float, adjust_rate: float, \
 		current_gn: Vector3) -> Vector3:
