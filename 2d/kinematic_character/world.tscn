@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://de7qapkqfycxl"]
+[gd_scene load_steps=24 format=3 uid="uid://de7qapkqfycxl"]
 
 [ext_resource type="Texture2D" uid="uid://cs8h2qyuakmko" path="res://level/obstacle.png" id="2"]
 [ext_resource type="PackedScene" path="res://player/player.tscn" id="3"]
@@ -12,8 +12,6 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vnjib"]
 texture = ExtResource("2")
 0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_xqlka"]
@@ -40,15 +38,8 @@ tracks/0/keys = {
 "values": [Vector2(184, 152), Vector2(184, 152), Vector2(328.086, 152), Vector2(328.086, 152)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2v3oa"]
-_data = {
-"leftright": SubResource("4")
-}
-
-[sub_resource type="Animation" id="5"]
-resource_name = "leftright"
-length = 10.0
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_ve8pj"]
+resource_name = "RESET"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -56,10 +47,16 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 5, 6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(184, 152), Vector2(184, 152), Vector2(328.086, 152), Vector2(328.086, 152)]
+"values": [Vector2(184, 152)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2v3oa"]
+_data = {
+"RESET": SubResource("Animation_ve8pj"),
+"leftright": SubResource("4")
 }
 
 [sub_resource type="Animation" id="6"]
@@ -78,9 +75,24 @@ tracks/0/keys = {
 "values": [Vector2(88.3493, 296), Vector2(88.3493, 296), Vector2(88.3493, 152), Vector2(88.3493, 152)]
 }
 
+[sub_resource type="Animation" id="Animation_kfdss"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(88.3493, 296)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j555p"]
 _data = {
-"leftright": SubResource("5"),
+"RESET": SubResource("Animation_kfdss"),
 "updown": SubResource("6")
 }
 
@@ -128,7 +140,7 @@ format = 2
 layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608, 0, 0, 262144, 0, 0, 327680, 0, 0, 393216, 0, 0, 458752, 0, 0, 524288, 0, 0, 589824, 0, 0, 655360, 0, 0, 720896, 0, 0, 786432, 0, 0, 851968, 0, 0, 917504, 0, 0, 983040, 0, 0, 1048576, 0, 0, 1114112, 0, 0, 1179648, 0, 0, 1245184, 0, 0, 1310720, 0, 0, 1376256, 0, 0, 1441792, 0, 0, 1507328, 0, 0, 1572864, 0, 0, 1638400, 0, 0, 1703936, 0, 0, 1769472, 0, 0, 1835008, 0, 0, 1900544, 0, 0, 1966080, 0, 0, 1, 0, 0, 65537, 0, 0, 131073, 0, 0, 196609, 0, 0, 262145, 0, 0, 327681, 0, 0, 393217, 0, 0, 458753, 0, 0, 524289, 0, 0, 589825, 0, 0, 655361, 0, 0, 720897, 0, 0, 786433, 0, 0, 851969, 0, 0, 917505, 0, 0, 983041, 0, 0, 1048577, 0, 0, 1114113, 0, 0, 1179649, 0, 0, 1245185, 0, 0, 1310721, 0, 0, 1376257, 0, 0, 1441793, 0, 0, 1507329, 0, 0, 1572865, 0, 0, 1638401, 0, 0, 1703937, 0, 0, 1769473, 0, 0, 1835009, 0, 0, 1900545, 0, 0, 1966081, 0, 0, 2, 0, 0, 65538, 0, 0, 1900546, 0, 0, 1966082, 0, 0, 3, 0, 0, 65539, 0, 0, 1900547, 0, 0, 1966083, 0, 0, 4, 0, 0, 65540, 0, 0, 1835012, 0, 0, 1900548, 0, 0, 1966084, 0, 0, 5, 0, 0, 65541, 0, 0, 327685, 0, 0, 1900549, 0, 0, 1966085, 0, 0, 6, 0, 0, 65542, 0, 0, 327686, 0, 0, 589830, 0, 0, 1179654, 0, 0, 1900550, 0, 0, 1966086, 0, 0, 7, 0, 0, 65543, 0, 0, 327687, 0, 0, 589831, 0, 0, 1179655, 0, 0, 1900551, 0, 0, 1966087, 0, 0, 8, 0, 0, 65544, 0, 0, 327688, 0, 0, 589832, 0, 0, 1179656, 0, 0, 1900552, 0, 0, 1966088, 0, 0, 9, 0, 0, 65545, 0, 0, 327689, 0, 0, 589833, 0, 0, 1900553, 0, 0, 1966089, 0, 0, 10, 0, 0, 65546, 0, 0, 327690, 0, 0, 589834, 0, 0, 1769482, 0, 0, 1835018, 0, 0, 1900554, 0, 0, 1966090, 0, 0, 11, 0, 0, 65547, 0, 0, 327691, 0, 0, 1769483, 0, 0, 1835019, 0, 0, 1900555, 0, 0, 1966091, 0, 0, 12, 0, 0, 65548, 0, 0, 327692, 0, 0, 1703948, 0, 0, 1900556, 0, 0, 1966092, 0, 0, 13, 0, 0, 65549, 0, 0, 327693, 0, 0, 1638413, 0, 0, 1900557, 0, 0, 1966093, 0, 0, 14, 0, 0, 65550, 0, 0, 1900558, 0, 0, 1966094, 0, 0, 15, 0, 0, 65551, 0, 0, 1900559, 0, 0, 1966095, 0, 0, 16, 0, 0, 65552, 0, 0, 1900560, 0, 0, 1966096, 0, 0, 17, 0, 0, 65553, 0, 0, 327697, 0, 0, 1900561, 0, 0, 1966097, 0, 0, 18, 0, 0, 65554, 0, 0, 1900562, 0, 0, 1966098, 0, 0, 19, 0, 0, 65555, 0, 0, 1900563, 0, 0, 1966099, 0, 0, 20, 0, 0, 65556, 0, 0, 1245204, 0, 0, 1900564, 0, 0, 1966100, 0, 0, 21, 0, 0, 65557, 0, 0, 393237, 0, 0, 589845, 0, 0, 1245205, 0, 0, 1900565, 0, 0, 1966101, 0, 0, 22, 0, 0, 65558, 0, 0, 393238, 0, 0, 589846, 0, 0, 1245206, 0, 0, 1900566, 0, 0, 1966102, 0, 0, 23, 0, 0, 65559, 0, 0, 589847, 0, 0, 1245207, 0, 0, 1900567, 0, 0, 1966103, 0, 0, 24, 0, 0, 65560, 0, 0, 1900568, 0, 0, 1966104, 0, 0, 25, 0, 0, 65561, 0, 0, 524313, 0, 0, 1638425, 0, 0, 1900569, 0, 0, 1966105, 0, 0, 26, 0, 0, 65562, 0, 0, 524314, 0, 0, 1638426, 0, 0, 1835034, 0, 0, 1900570, 0, 0, 1966106, 0, 0, 27, 0, 0, 65563, 0, 0, 1507355, 0, 0, 1835035, 0, 0, 1900571, 0, 0, 1966107, 0, 0, 28, 0, 0, 65564, 0, 0, 1507356, 0, 0, 1769500, 0, 0, 1900572, 0, 0, 1966108, 0, 0, 29, 0, 0, 65565, 0, 0, 1376285, 0, 0, 1703965, 0, 0, 1769501, 0, 0, 1900573, 0, 0, 1966109, 0, 0, 30, 0, 0, 65566, 0, 0, 1376286, 0, 0, 1703966, 0, 0, 1900574, 0, 0, 1966110, 0, 0, 31, 0, 0, 65567, 0, 0, 131103, 0, 0, 196639, 0, 0, 262175, 0, 0, 327711, 0, 0, 393247, 0, 0, 458783, 0, 0, 524319, 0, 0, 589855, 0, 0, 655391, 0, 0, 720927, 0, 0, 786463, 0, 0, 851999, 0, 0, 917535, 0, 0, 983071, 0, 0, 1048607, 0, 0, 1114143, 0, 0, 1179679, 0, 0, 1245215, 0, 0, 1310751, 0, 0, 1376287, 0, 0, 1441823, 0, 0, 1507359, 0, 0, 1572895, 0, 0, 1638431, 0, 0, 1703967, 0, 0, 1769503, 0, 0, 1835039, 0, 0, 1900575, 0, 0, 1966111, 0, 0, 32, 0, 0, 65568, 0, 0, 131104, 0, 0, 196640, 0, 0, 262176, 0, 0, 327712, 0, 0, 393248, 0, 0, 458784, 0, 0, 524320, 0, 0, 589856, 0, 0, 655392, 0, 0, 720928, 0, 0, 786464, 0, 0, 852000, 0, 0, 917536, 0, 0, 983072, 0, 0, 1048608, 0, 0, 1114144, 0, 0, 1179680, 0, 0, 1245216, 0, 0, 1310752, 0, 0, 1376288, 0, 0, 1441824, 0, 0, 1507360, 0, 0, 1572896, 0, 0, 1638432, 0, 0, 1703968, 0, 0, 1769504, 0, 0, 1835040, 0, 0, 1900576, 0, 0, 1966112, 0, 0)
 
 [node name="MovingPlatform1" type="CharacterBody2D" parent="."]
-position = Vector2(268.651, 152)
+position = Vector2(184, 152)
 
 [node name="Collision" type="CollisionShape2D" parent="MovingPlatform1"]
 shape = SubResource("3")
@@ -145,7 +157,7 @@ libraries = {
 autoplay = "leftright"
 
 [node name="MovingPlatform2" type="CharacterBody2D" parent="."]
-position = Vector2(88.3493, 152)
+position = Vector2(88.3493, 296)
 
 [node name="Collision" type="CollisionShape2D" parent="MovingPlatform2"]
 shape = SubResource("3")
@@ -276,6 +288,7 @@ shape = SubResource("12")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(265, 247)
+process_callback = 0
 
 [node name="Player" parent="." instance=ExtResource("3")]
 position = Vector2(233.06, 223.436)
