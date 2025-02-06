@@ -1,13 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://cc4idhykjp5f5"]
+[gd_scene load_steps=24 format=3 uid="uid://cc4idhykjp5f5"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1"]
 [ext_resource type="Script" path="res://player/follow_camera.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://yd1e7ai2k5cr" path="res://player/player.glb" id="3_uccbe"]
-[ext_resource type="Texture2D" uid="uid://kujhqacj3v72" path="res://player/controls/osb_up.webp" id="4_lmv6w"]
-[ext_resource type="Texture2D" uid="uid://68sox6egj4j7" path="res://player/controls/osb_down.webp" id="5_4oxdy"]
-[ext_resource type="Texture2D" uid="uid://r6qxvqi0unib" path="res://player/controls/osb_left.webp" id="6_k2dm4"]
 [ext_resource type="AudioStream" uid="uid://cdx3i7hr2acow" path="res://player/sound_shoot.wav" id="7"]
-[ext_resource type="Texture2D" uid="uid://bw76q621n8fie" path="res://player/controls/osb_right.webp" id="7_yth2f"]
 [ext_resource type="AudioStream" uid="uid://bplqk77bffdxr" path="res://player/sound_jump.wav" id="8"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
@@ -79,13 +75,11 @@ node_connections = [&"air_dir", 0, &"Animation 3", &"air_dir", 1, &"Animation 4"
 random_pitch = 1.03
 streams_count = 1
 stream_0/stream = ExtResource("7")
-stream_0/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_axa7i"]
 random_pitch = 1.03
 streams_count = 1
 stream_0/stream = ExtResource("8")
-stream_0/weight = 1.0
 
 [sub_resource type="Gradient" id="Gradient_p2tu5"]
 interpolation_mode = 2
@@ -118,15 +112,35 @@ script = ExtResource("2")
 [node name="Player" parent="." instance=ExtResource("3_uccbe")]
 
 [node name="Skeleton3D" parent="Player/Skeleton" index="0"]
-bones/5/rotation = Quaternion(0.501129, -0.498869, -0.501128, 0.498869)
-bones/9/rotation = Quaternion(-0.264667, 0.951702, -0.15503, -0.013433)
-bones/10/rotation = Quaternion(0.744208, -0.433567, 0.504614, 0.0594899)
-bones/11/rotation = Quaternion(0.264667, 0.951702, -0.15503, 0.013433)
-bones/13/rotation = Quaternion(-0.000357303, 0.998602, 0.0504822, -0.0156872)
-bones/14/rotation = Quaternion(0.720784, -0.0117194, -0.041935, 0.691791)
-bones/15/rotation = Quaternion(0.998503, -0.0419896, 0.0282027, 0.0208377)
-bones/16/rotation = Quaternion(0.000357169, 0.998602, 0.050483, 0.0156871)
-bones/17/rotation = Quaternion(0.720784, 0.0117189, 0.0419352, 0.691791)
+bones/1/position = Vector3(1.09056e-20, 2.10612, -6.88338e-14)
+bones/1/rotation = Quaternion(1.42109e-13, -2.84217e-14, -7.28307e-22, 1)
+bones/2/rotation = Quaternion(-1.42109e-13, -1.80682e-21, 4.58668e-21, 1)
+bones/3/rotation = Quaternion(-0.020416, 1.27213e-08, -1.7937e-09, 0.999792)
+bones/4/rotation = Quaternion(3.37177e-09, 0.996325, -0.08565, -9.39008e-07)
+bones/5/rotation = Quaternion(0.501129, -0.498869, -0.501129, 0.498869)
+bones/6/position = Vector3(-6.01139e-07, 0.0040059, -2.27374e-13)
+bones/7/position = Vector3(3.05648e-08, 1.2429, 0.270992)
+bones/8/rotation = Quaternion(0.744208, 0.433567, -0.504614, 0.0594899)
+bones/9/rotation = Quaternion(-0.264667, 0.951702, -0.155029, -0.0134332)
+bones/10/rotation = Quaternion(0.744208, -0.433567, 0.504614, 0.0594898)
+bones/11/rotation = Quaternion(0.264667, 0.951702, -0.155029, 0.0134332)
+bones/11/scale = Vector3(1, 1, 1)
+bones/12/rotation = Quaternion(0.998503, 0.0419892, -0.0282026, 0.0208368)
+bones/13/position = Vector3(4.87277e-08, 0.644635, -6.03109e-10)
+bones/13/rotation = Quaternion(-0.000357039, 0.998602, 0.0504818, -0.0156871)
+bones/14/rotation = Quaternion(0.720784, -0.0117192, -0.0419344, 0.691791)
+bones/15/rotation = Quaternion(0.998503, -0.0419892, 0.0282027, 0.0208378)
+bones/16/position = Vector3(-6.38546e-08, 0.644636, -8.27896e-10)
+bones/16/rotation = Quaternion(0.000356988, 0.998602, 0.0504828, 0.015687)
+bones/17/rotation = Quaternion(0.720784, 0.0117191, 0.0419345, 0.691791)
+bones/18/position = Vector3(-4.35527e-07, 6.35228, 5.79659)
+bones/18/rotation = Quaternion(1, -1.01905e-13, 7.54979e-08, -4.23517e-21)
+bones/19/position = Vector3(0.518863, 0.204768, 3.89848e-08)
+bones/20/position = Vector3(-0.518863, 0.204768, -3.89848e-08)
+bones/21/position = Vector3(0.411677, 1.62881, 0.663951)
+bones/22/position = Vector3(-0.411677, 1.62881, 0.66395)
+bones/23/position = Vector3(2.62535, 2.59016, 0.186879)
+bones/25/position = Vector3(1.57185, 3.44768, -0.510255)
 
 [node name="Robot" parent="Player/Skeleton/Skeleton3D" index="0"]
 layers = 2
@@ -186,42 +200,6 @@ parameters/scale/scale = 1.5
 parameters/speed/blend_amount = 0
 parameters/state/blend_amount = 0.0
 
-[node name="Forward" type="TouchScreenButton" parent="."]
-visible = false
-position = Vector2(72, 301)
-texture_normal = ExtResource("4_lmv6w")
-texture_pressed = ExtResource("4_lmv6w")
-passby_press = true
-action = "move_forward"
-visibility_mode = 1
-
-[node name="Backward" type="TouchScreenButton" parent="."]
-visible = false
-position = Vector2(72, 365)
-texture_normal = ExtResource("5_4oxdy")
-texture_pressed = ExtResource("5_4oxdy")
-passby_press = true
-action = "move_backwards"
-visibility_mode = 1
-
-[node name="Left" type="TouchScreenButton" parent="."]
-visible = false
-position = Vector2(29, 332)
-texture_normal = ExtResource("6_k2dm4")
-texture_pressed = ExtResource("6_k2dm4")
-passby_press = true
-action = "move_left"
-visibility_mode = 1
-
-[node name="Right" type="TouchScreenButton" parent="."]
-visible = false
-position = Vector2(114, 332)
-texture_normal = ExtResource("7_yth2f")
-texture_pressed = ExtResource("7_yth2f")
-passby_press = true
-action = "move_right"
-visibility_mode = 1
-
 [node name="SoundShoot" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_basvh")
 
@@ -229,7 +207,7 @@ stream = SubResource("AudioStreamRandomizer_basvh")
 stream = SubResource("AudioStreamRandomizer_axa7i")
 volume_db = -6.0
 
-[node name="BlobShadow" type="Decal" parent="."]
+[node name="BlobShadow" type="Decal" parent="." groups=["bad_performer"]]
 size = Vector3(1.6, 12, 1.6)
 texture_albedo = SubResource("GradientTexture2D_kvc1x")
 albedo_mix = 0.8
