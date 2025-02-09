@@ -4,6 +4,7 @@ extends Node
 var score
 
 func game_over():
+	get_tree().call_group(&"mobs", &"queue_free")
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
@@ -12,7 +13,6 @@ func game_over():
 
 
 func new_game():
-	get_tree().call_group(&"mobs", &"queue_free")
 	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
