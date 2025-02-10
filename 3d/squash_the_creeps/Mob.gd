@@ -14,7 +14,13 @@ func _physics_process(_delta):
 
 
 func initialize(start_position, player_position):
-	look_at_from_position(start_position, player_position, Vector3.UP)
+	# Ignore the player's height, so that the mob's orientation is not slightly
+	# shifted if the mob spawns while the player is jumping.
+	var target = Vector3(player_position.x, start_position.y, player_position.z)
+	look_at_from_position(start_position, target, Vector3.UP)
+
+	# Rotate this mob randomly within range of -45 and +45 degrees,
+	# so that it doesn't move directly towards the player.
 	rotate_y(randf_range(-PI / 4, PI / 4))
 
 	var random_speed = randf_range(min_speed, max_speed)
