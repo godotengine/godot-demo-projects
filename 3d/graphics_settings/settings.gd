@@ -20,8 +20,30 @@ var viewport_start_size := Vector2(
 	ProjectSettings.get_setting(&"display/window/size/viewport_height")
 )
 
+var is_compatibility := false
+
 
 func _ready() -> void:
+	if ProjectSettings.get_setting_with_override("rendering/renderer/rendering_method") == "gl_compatibility":
+		is_compatibility = true
+		%UnsupportedLabel.visible = true
+		mark_as_unsupported(%FilterOptionButton)
+		mark_as_unsupported(%TAAOptionButton)
+		mark_as_unsupported(%FXAAOptionButton)
+		mark_as_unsupported(%SDFGIOptionButton)
+		mark_as_unsupported(%SSAOOptionButton)
+		mark_as_unsupported(%SSReflectionsOptionButton)
+		mark_as_unsupported(%SSILOptionButton)
+		mark_as_unsupported(%VolumetricFogOptionButton)
+		# Darken lights's energy to compensate for sRGB blending (without affecting sky rendering).
+		$Node3D/OmniLight3D.light_energy = 0.5
+		$Node3D/SpotLight3D.light_energy = 0.5
+		$Node3D/DirectionalLight3D.sky_mode = DirectionalLight3D.SKY_MODE_SKY_ONLY
+		var new_light: DirectionalLight3D = $Node3D/DirectionalLight3D.duplicate()
+		new_light.light_energy = 0.35
+		new_light.sky_mode = DirectionalLight3D.SKY_MODE_LIGHT_ONLY
+		$Node3D.add_child(new_light)
+
 	get_viewport().size_changed.connect(update_resolution_label)
 	update_resolution_label()
 
@@ -175,9 +197,15 @@ func _on_shadow_size_option_button_item_selected(index):
 		# Higher resultions can use a lower bias without suffering from shadow acne.
 		directional_light.shadow_bias = 0.06
 
-		# Disable positional (omni/spot) light shadows entirely to further improve performance.
-		# These often don't contribute as much to a scene compared to directional light shadows.
-		get_viewport().positional_shadow_atlas_size = 0
+
+		if is_compatibility:
+			# Work around bug in Compatibility where setting the positional shadow atlas size to 0 breaks rendering.
+			get_viewport().positional_shadow_atlas_size = 512
+		else:
+			# Disable positional (omni/spot) light shadows entirely to further improve performance.
+			# These often don't contribute as much to a scene compared to directional light shadows.
+			get_viewport().positional_shadow_atlas_size = 0
+
 	if index == 1: # Very Low
 		RenderingServer.directional_shadow_atlas_set_size(1024, true)
 		directional_light.shadow_bias = 0.04
@@ -457,3 +485,9 @@ func update_preset() -> void:
 	%SSReflectionsOptionButton.item_selected.emit(%SSReflectionsOptionButton.selected)
 	%SSILOptionButton.item_selected.emit(%SSILOptionButton.selected)
 	%VolumetricFogOptionButton.item_selected.emit(%VolumetricFogOptionButton.selected)
+
+
+func mark_as_unsupported(button: OptionButton) -> void:
+	button.disabled = true
+	button.add_item("Unsupported")
+	button.select(button.item_count - 1)

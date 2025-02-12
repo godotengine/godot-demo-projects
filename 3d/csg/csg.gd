@@ -15,7 +15,16 @@ var base_height := int(ProjectSettings.get_setting("display/window/size/viewport
 @onready var rotation_x: Node3D = $CameraHolder/RotationX
 @onready var camera: Camera3D = $CameraHolder/RotationX/Camera3D
 
+
 func _ready() -> void:
+	if ProjectSettings.get_setting_with_override("rendering/renderer/rendering_method") == "gl_compatibility":
+		# Darken the light's energy to compensate for sRGB blending (without affecting sky rendering).
+		$DirectionalLight3D.sky_mode = DirectionalLight3D.SKY_MODE_SKY_ONLY
+		var new_light: DirectionalLight3D = $DirectionalLight3D.duplicate()
+		new_light.light_energy = 0.3
+		new_light.sky_mode = DirectionalLight3D.SKY_MODE_LIGHT_ONLY
+		add_child(new_light)
+
 	camera_holder.transform.basis = Basis.from_euler(Vector3(0, rot_y, 0))
 	rotation_x.transform.basis = Basis.from_euler(Vector3(rot_x, 0, 0))
 	update_gui()

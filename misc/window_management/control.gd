@@ -4,7 +4,22 @@ var mouse_position := Vector2()
 
 @onready var observer: CharacterBody3D = $"../Observer"
 
+
 func _ready() -> void:
+	if OS.has_feature("web"):
+		for button: BaseButton in [
+			$Buttons/Button_FixedSize,
+			$Buttons/Button_Minimized,
+			$Buttons/Button_Maximized,
+			$Buttons/Button_MoveTo,
+			$Buttons/Button_Resize,
+			$Buttons/Button_MouseModeConfined,
+			$Buttons/Button_MouseModeConfinedHidden,
+			$CheckButton,
+		]:
+			button.disabled = true
+			button.text += " (not supported on Web)"
+
 	if not check_wm_api():
 		set_physics_process(false)
 		set_process_input(false)
@@ -35,7 +50,8 @@ func _physics_process(_delta: float) -> void:
 	$Labels/Label_Mode.text = modetext
 	$Labels/Label_Position.text = str("Position: ", DisplayServer.window_get_position())
 	$Labels/Label_Size.text = str("Size: ", DisplayServer.window_get_size())
-	$Labels/Label_MousePosition.text = str("Mouse Position: ", mouse_position)
+	# Pad decimals when showing mouse position, as some platforms report floating-point mouse positions.
+	$Labels/Label_MousePosition.text = str("Mouse Position: %.4v" % mouse_position)
 	$Labels/Label_Screen_Count.text = str("Screen_Count: ", DisplayServer.get_screen_count())
 	$Labels/Label_Screen_Current.text = str("Screen: ", DisplayServer.window_get_current_screen())
 	$Labels/Label_Screen0_Resolution.text = str("Screen0 Resolution:\n", DisplayServer.screen_get_size())

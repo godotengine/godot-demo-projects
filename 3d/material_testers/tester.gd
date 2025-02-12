@@ -28,6 +28,11 @@ var backgrounds: Array[Dictionary] = [
 @onready var camera: Camera3D = $CameraHolder/RotationX/Camera
 
 func _ready() -> void:
+	if ProjectSettings.get_setting_with_override("rendering/renderer/rendering_method") == "gl_compatibility":
+		# Tweak scene brightness to better match Forward+/Mobile.
+		$WorldEnvironment.environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+		$WorldEnvironment.environment.background_energy_multiplier = 2.0
+
 	for background in backgrounds:
 		get_node(^"UI/Background").add_item(background.name)
 

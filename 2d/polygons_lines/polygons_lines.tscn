@@ -146,15 +146,24 @@ text = "MSAA 2D"
 
 [node name="OptionButton" type="OptionButton" parent="MSAA"]
 layout_mode = 2
-item_count = 4
 selected = 0
+item_count = 4
 popup/item_0/text = "Disabled (Fastest)"
-popup/item_0/id = 0
 popup/item_1/text = "2× (Average)"
 popup/item_1/id = 1
 popup/item_2/text = "4× (Slow)"
 popup/item_2/id = 2
 popup/item_3/text = "8× (Slowest)"
 popup/item_3/id = 3
+
+[node name="UnsupportedLabel" type="Label" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0.6)
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 282.0
+offset_bottom = 47.0
+text = "MSAA 2D is not supported
+in the Compatibility rendering method."
 
 [connection signal="item_selected" from="MSAA/OptionButton" to="." method="_on_msaa_option_button_item_selected"]

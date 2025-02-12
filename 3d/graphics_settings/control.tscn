@@ -139,6 +139,14 @@ theme_override_colors/font_color = Color(0.683425, 0.916893, 1, 1)
 text = "Video Settings"
 horizontal_alignment = 1
 
+[node name="UnsupportedLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(1, 1, 1, 0.6)
+layout_mode = 2
+text = "Some settings are not supported
+on the Compatibility rendering method."
+
 [node name="GridContainer2" type="GridContainer" parent="SettingsMenu/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 columns = 2
@@ -165,6 +173,7 @@ theme_override_font_sizes/font_size = 16
 text = "Display Filter:"
 
 [node name="FilterOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
@@ -207,9 +216,9 @@ theme_override_font_sizes/font_size = 16
 selected = 0
 item_count = 3
 popup/item_0/text = "Disabled"
-popup/item_1/text = "Enabled"
+popup/item_1/text = "Enabled (Borderless)"
 popup/item_1/id = 1
-popup/item_2/text = "Exclusive"
+popup/item_2/text = "Enabled (Exclusive)"
 popup/item_2/id = 2
 
 [node name="VsyncLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]

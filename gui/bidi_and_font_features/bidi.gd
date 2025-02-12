@@ -2,7 +2,15 @@ extends Control
 
 @onready var variable_font_variation: FontVariation = $"TabContainer/Variable fonts/VariableFontPreview".get_theme_font("font")
 
+
 func _ready() -> void:
+	if OS.has_feature("web"):
+		$"TabContainer/System fonts/LabelVarInfo".text = "Loading system fonts is not supported on the Web platform."
+		$"TabContainer/System fonts/ValueSetter".visible = false
+		$"TabContainer/System fonts/Italic".visible = false
+		$"TabContainer/System fonts/Weight".visible = false
+		$"TabContainer/System fonts/VBoxContainer".visible = false
+
 	var tree: Tree = $"TabContainer/Text direction/Tree"
 	var root := tree.create_item()
 	tree.set_hide_root(true)
@@ -15,6 +23,7 @@ func _ready() -> void:
 	var fourth := tree.create_item(third)
 	fourth.set_text(0, "fourth")
 
+
 func _on_Tree_item_selected() -> void:
 	var tree: Tree = $"TabContainer/Text direction/Tree"
 	var path := ""
@@ -25,11 +34,14 @@ func _on_Tree_item_selected() -> void:
 	$"TabContainer/Text direction/LineEditST".text = path
 	$"TabContainer/Text direction/LineEditNoST".text = path
 
+
 func _on_LineEditCustomSTDst_text_changed(new_text: String) -> void:
 	$"TabContainer/Text direction/LineEditCustomSTSource".text = new_text
 
+
 func _on_LineEditCustomSTSource_text_changed(new_text: String) -> void:
 	$"TabContainer/Text direction/LineEditCustomSTDst".text = new_text
+
 
 func _on_LineEditCustomSTDst_tree_entered() -> void:
 	# Refresh text to apply custom script once it's loaded.
@@ -123,7 +135,3 @@ func _on_system_font_italic_toggled(button_pressed: bool) -> void:
 func _on_system_font_name_text_changed(new_text: String) -> void:
 	var system_font: SystemFont = $"TabContainer/System fonts/VBoxContainer/Custom/FontName".get_theme_font("font")
 	system_font.font_names[0] = new_text
-
-
-
-

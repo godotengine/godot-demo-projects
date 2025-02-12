@@ -16,7 +16,23 @@ var base_height := int(ProjectSettings.get_setting("display/window/size/viewport
 @onready var camera: Camera3D = $CameraHolder/RotationX/Camera3D
 @onready var fps_label: Label = $FPSLabel
 
+var is_compatibility := false
+
+
 func _ready() -> void:
+	if ProjectSettings.get_setting_with_override("rendering/renderer/rendering_method") == "gl_compatibility":
+		is_compatibility = true
+		# Hide unsupported features.
+		$Antialiasing/FXAAContainer.visible = false
+		$Antialiasing/TAAContainer.visible = false
+
+		# Darken the light's energy to compensate for sRGB blending (without affecting sky rendering).
+		$DirectionalLight3D.sky_mode = DirectionalLight3D.SKY_MODE_SKY_ONLY
+		var new_light: DirectionalLight3D = $DirectionalLight3D.duplicate()
+		new_light.light_energy = 0.3
+		new_light.sky_mode = DirectionalLight3D.SKY_MODE_LIGHT_ONLY
+		add_child(new_light)
+
 	# Disable V-Sync to uncap framerate on supported platforms. This makes performance comparison
 	# easier on high-end machines that easily reach the monitor's refresh rate.
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
@@ -99,9 +115,11 @@ func _on_render_scale_value_changed(value: float) -> void:
 	$Antialiasing/RenderScaleContainer/Value.text = "%d%%" % (value * 100)
 	# Update viewport resolution text.
 	_on_viewport_size_changed()
-	# FSR 1.0 is only effective if render scale is below 100%, so hide the setting if at native resolution or higher.
-	$Antialiasing/FidelityFXFSR.visible = value < 1.0
-	$Antialiasing/FSRSharpness.visible = get_viewport().scaling_3d_mode == Viewport.SCALING_3D_MODE_FSR and value < 1.0
+	if not is_compatibility:
+		# Only show the feature if supported.
+		# FSR 1.0 is only effective if render scale is below 100%, so hide the setting if at native resolution or higher.
+		$Antialiasing/FidelityFXFSR.visible = value < 1.0
+		$Antialiasing/FSRSharpness.visible = get_viewport().scaling_3d_mode == Viewport.SCALING_3D_MODE_FSR and value < 1.0
 
 
 func _on_amd_fidelityfx_fsr1_toggled(button_pressed: bool) -> void:
