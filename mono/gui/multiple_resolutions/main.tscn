@@ -1,0 +1,357 @@
+[gd_scene load_steps=7 format=3 uid="uid://1cywl1qtanq3"]
+
+[ext_resource type="Script" path="res://Main.cs" id="1"]
+[ext_resource type="Texture2D" uid="uid://dnhldrc8cymrs" path="res://pixel_art_example.webp" id="2_mfq7n"]
+[ext_resource type="Texture2D" uid="uid://cok02ms2cxmut" path="res://pixel_art_text_example.webp" id="3_0qxym"]
+[ext_resource type="Texture2D" uid="uid://c43k4wledw7py" path="res://pixel_art_checkerboard_example.webp" id="3_unurd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvbdh"]
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.501961, 1, 0.25098, 0.501961)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dyby4"]
+draw_center = false
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.25, 0.38, 0.8, 0.5)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="OuterSideLabel" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.627451)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 165.0
+offset_bottom = 60.0
+text = "Outer Side Label
+(ignores all margins)"
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vvbdh")
+
+[node name="InnerSideLabel" type="Label" parent="Panel"]
+modulate = Color(0.666667, 1, 0.501961, 1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -60.0
+offset_right = 246.0
+offset_bottom = -8.0
+grow_vertical = 0
+text = "Inner Side Label
+(ignores GUI Max Aspect Ratio)"
+metadata/_edit_layout_mode = 1
+metadata/_edit_use_custom_anchors = false
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Panel/AspectRatioContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dyby4")
+
+[node name="TopLeft" type="ColorRect" parent="Panel/AspectRatioContainer/Panel"]
+layout_mode = 0
+color = Color(1, 1, 1, 0.25098)
+
+[node name="TopRight" type="ColorRect" parent="Panel/AspectRatioContainer/Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+color = Color(1, 1, 1, 0.25098)
+
+[node name="BottomLeft" type="ColorRect" parent="Panel/AspectRatioContainer/Panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+color = Color(1, 1, 1, 0.25098)
+
+[node name="BottomRight" type="ColorRect" parent="Panel/AspectRatioContainer/Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+color = Color(1, 1, 1, 0.25098)
+
+[node name="PixelArtExample" type="TextureRect" parent="Panel/AspectRatioContainer/Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -88.0
+offset_top = 16.0
+offset_right = -56.0
+offset_bottom = 48.0
+grow_horizontal = 0
+texture = ExtResource("2_mfq7n")
+
+[node name="PixelArtExample2" type="TextureRect" parent="Panel/AspectRatioContainer/Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -48.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 48.0
+grow_horizontal = 0
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+texture = ExtResource("2_mfq7n")
+
+[node name="PixelArtCheckerboardExample" type="TextureRect" parent="Panel/AspectRatioContainer/Panel"]
+modulate = Color(1, 1, 1, 0.752941)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -136.0
+offset_top = 16.0
+offset_right = -104.0
+offset_bottom = 48.0
+grow_horizontal = 0
+texture = ExtResource("3_unurd")
+
+[node name="PixelArtTextExample" type="TextureRect" parent="Panel/AspectRatioContainer/Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -215.0
+offset_top = 56.0
+offset_right = -16.0
+offset_bottom = 75.0
+grow_horizontal = 0
+texture = ExtResource("3_0qxym")
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel/AspectRatioContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Options" type="VBoxContainer" parent="Panel/AspectRatioContainer/Panel/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.87, 0.62, 1)
+theme_override_font_sizes/font_size = 24
+text = "Options"
+horizontal_alignment = 1
+
+[node name="WindowBaseSize" type="HBoxContainer" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowBaseSize"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "Window Base Size"
+
+[node name="OptionButton" type="OptionButton" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowBaseSize"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 8
+selected = 0
+popup/item_0/text = "648×648 (1:1)"
+popup/item_0/id = 0
+popup/item_1/text = "640×480 (4:3)"
+popup/item_1/id = 1
+popup/item_2/text = "720×480 (3:2)"
+popup/item_2/id = 2
+popup/item_3/text = "800×600 (4:3)"
+popup/item_3/id = 3
+popup/item_4/text = "1152×648 (16:9)"
+popup/item_4/id = 4
+popup/item_5/text = "1280×720 (16:9)"
+popup/item_5/id = 5
+popup/item_6/text = "1280×800 (16:10)"
+popup/item_6/id = 6
+popup/item_7/text = "1680×720 (21:9)"
+popup/item_7/id = 7
+
+[node name="WindowStretchMode" type="HBoxContainer" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowStretchMode"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "Window Stretch Mode"
+
+[node name="OptionButton" type="OptionButton" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowStretchMode"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+selected = 1
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Canvas Items (2D)"
+popup/item_1/id = 1
+popup/item_2/text = "Viewport"
+popup/item_2/id = 2
+
+[node name="WindowStretchAspect" type="HBoxContainer" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowStretchAspect"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "Window Stretch Aspect"
+
+[node name="OptionButton" type="OptionButton" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowStretchAspect"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 5
+selected = 4
+popup/item_0/text = "Ignore"
+popup/item_0/id = 0
+popup/item_1/text = "Keep"
+popup/item_1/id = 1
+popup/item_2/text = "Keep Width"
+popup/item_2/id = 2
+popup/item_3/text = "Keep Height"
+popup/item_3/id = 3
+popup/item_4/text = "Expand"
+popup/item_4/id = 4
+
+[node name="WindowScaleFactor" type="HBoxContainer" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowScaleFactor"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "Window Scale Factor"
+
+[node name="HSlider" type="HSlider" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowScaleFactor"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 100.0
+min_value = 0.75
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="Value" type="Label" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowScaleFactor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "100%"
+
+[node name="WindowStretchScaleMode" type="HBoxContainer" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowStretchScaleMode"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "Window Stretch Scale Mode"
+
+[node name="OptionButton" type="OptionButton" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowStretchScaleMode"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 2
+selected = 0
+popup/item_0/text = "Fractional"
+popup/item_0/id = 0
+popup/item_1/text = "Integer"
+popup/item_1/id = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options"]
+layout_mode = 2
+
+[node name="GUIMaxAspectRatio" type="HBoxContainer" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMaxAspectRatio"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "GUI Max Aspect Ratio"
+
+[node name="OptionButton" type="OptionButton" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMaxAspectRatio"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 7
+selected = 0
+popup/item_0/text = "Fit to Window"
+popup/item_0/id = 0
+popup/item_1/text = "5:4"
+popup/item_1/id = 1
+popup/item_2/text = "4:3"
+popup/item_2/id = 2
+popup/item_3/text = "3:2"
+popup/item_3/id = 3
+popup/item_4/text = "16:10"
+popup/item_4/id = 4
+popup/item_5/text = "16:9"
+popup/item_5/id = 5
+popup/item_6/text = "21:9"
+popup/item_6/id = 6
+
+[node name="GUIMargin" type="HBoxContainer" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMargin"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "GUI Margin"
+
+[node name="HSlider" type="HSlider" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 100.0
+max_value = 50.0
+
+[node name="Value" type="Label" parent="Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[connection signal="item_selected" from="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowBaseSize/OptionButton" to="." method="OnWindowBaseSizeItemSelected"]
+[connection signal="item_selected" from="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowStretchMode/OptionButton" to="." method="OnWindowStretchModeItemSelected"]
+[connection signal="item_selected" from="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowStretchAspect/OptionButton" to="." method="OnWindowStretchAspectItemSelected"]
+[connection signal="drag_ended" from="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowScaleFactor/HSlider" to="." method="OnWindowScaleFactorDragEnded"]
+[connection signal="item_selected" from="Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowStretchScaleMode/OptionButton" to="." method="OnWindowStretchScaleModeItemSelected"]
+[connection signal="item_selected" from="Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMaxAspectRatio/OptionButton" to="." method="OnGuiAspectRatioItemSelected"]
+[connection signal="drag_ended" from="Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMargin/HSlider" to="." method="OnGuiMarginDragEnded"]
