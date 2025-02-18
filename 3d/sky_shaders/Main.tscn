@@ -1,0 +1,570 @@
+[gd_scene load_steps=14 format=3 uid="uid://w330ipq14vp4"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_t20f6"]
+[ext_resource type="Shader" path="res://sky_volumetric_clouds.gdshader" id="2_7kao2"]
+[ext_resource type="Texture2D" uid="uid://dcf4fxk846cq4" path="res://weather.webp" id="2_wytgt"]
+[ext_resource type="CompressedTexture3D" uid="uid://48aujjq3b6pj" path="res://perlworlnoise.png" id="3_k3m6m"]
+[ext_resource type="CompressedTexture3D" uid="uid://bflk6wdrcm8kq" path="res://worlnoise.webp" id="4_ix4p0"]
+[ext_resource type="Script" path="res://spheres.gd" id="5_00idb"]
+[ext_resource type="Texture2D" uid="uid://bvpkajbs1yfug" path="res://space.webp" id="5_ua1c5"]
+
+[sub_resource type="Animation" id="Animation_qen42"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("YawLight/DirectionalLight3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.125085, 3.03703, 2.76639)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/space_emit_strength")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/mie_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.921569, 0.54902, 0.568627, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/mie")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.166]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/mie_eccentricity")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.701]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/rayleigh")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.467]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/rayleigh_color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.26, 0.41, 0.58, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/turbidity")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.797]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/exposure")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.1]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("YawLight/DirectionalLight3D:light_energy")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("YawLight/DirectionalLight3D:light_color")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fgbjk"]
+resource_name = "day_night_cycle"
+length = 30.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("YawLight/DirectionalLight3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 14.9, 15, 30),
+"transitions": PackedFloat32Array(1, 0, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-3.14159, 0, 0), Vector3(0, 0, 0), Vector3(-3.14159, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/space_emit_strength")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 15, 16.5, 28.5, 30),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0, 1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/mie")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 15),
+"transitions": PackedFloat32Array(0, 0),
+"update": 0,
+"values": [0.166, 0.021]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/mie_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 15),
+"transitions": PackedFloat32Array(0, 0),
+"update": 0,
+"values": [Color(0.921569, 0.54902, 0.568627, 1), Color(0.435294, 0.756863, 0.937255, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/mie_eccentricity")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 15),
+"transitions": PackedFloat32Array(0, 0),
+"update": 0,
+"values": [0.701, 0.919]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/rayleigh")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 15),
+"transitions": PackedFloat32Array(0, 0),
+"update": 0,
+"values": [1.467, 3.676]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/rayleigh_color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 15),
+"transitions": PackedFloat32Array(0, 0),
+"update": 0,
+"values": [Color(0.26, 0.41, 0.58, 1), Color(0.109804, 0.184314, 0.266667, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/turbidity")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 15),
+"transitions": PackedFloat32Array(0, 0),
+"update": 0,
+"values": [0.797, 75.758]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/exposure")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 15),
+"transitions": PackedFloat32Array(0, 0),
+"update": 0,
+"values": [0.1, 0.015]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("YawLight/DirectionalLight3D:light_energy")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1, 14, 14.9, 15, 16, 29),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0, 4.33488e-07, 0.5, 0.5]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("YawLight/DirectionalLight3D:light_color")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(14.9, 15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.686275, 0.811765, 0.835294, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mqv34"]
+_data = {
+"RESET": SubResource("Animation_qen42"),
+"day_night_cycle": SubResource("Animation_fgbjk")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jcxn0"]
+shader = ExtResource("2_7kao2")
+shader_parameter/cloud_density = 0.05
+shader_parameter/cloud_coverage = 0.2
+shader_parameter/cloud_time_scale = 5.0
+shader_parameter/cloud_time_offset = 0.0
+shader_parameter/cloud_direction = Vector2(0.9, 1)
+shader_parameter/cloud_steps_range = Vector2(128, 72)
+shader_parameter/clouds_screen_lod = 1.0
+shader_parameter/cloud_modulate = Color(1, 1, 1, 1)
+shader_parameter/cloud_camera_position_mult = Vector2(0.1, 0.2)
+shader_parameter/cloud_camera_height = null
+shader_parameter/rayleigh = 1.467
+shader_parameter/rayleigh_color = Color(0.26, 0.41, 0.58, 1)
+shader_parameter/mie = 0.166
+shader_parameter/mie_eccentricity = 0.701
+shader_parameter/mie_color = Color(0.921569, 0.54902, 0.568627, 1)
+shader_parameter/turbidity = 0.797
+shader_parameter/sun_disk_scale = 1.823
+shader_parameter/ground_color = Color(1, 1, 1, 1)
+shader_parameter/exposure = 0.1
+shader_parameter/space_emit_color = Color(0.662745, 0.854902, 1, 1)
+shader_parameter/space_emit_angle = null
+shader_parameter/space_emit_strength = 3.0
+shader_parameter/worlnoise = ExtResource("4_ix4p0")
+shader_parameter/perlworlnoise = ExtResource("3_k3m6m")
+shader_parameter/cloud_map = ExtResource("2_wytgt")
+shader_parameter/space_emit = ExtResource("5_ua1c5")
+
+[sub_resource type="Sky" id="Sky_m81e2"]
+sky_material = SubResource("ShaderMaterial_jcxn0")
+process_mode = 2
+radiance_size = 0
+
+[sub_resource type="Environment" id="3"]
+background_mode = 2
+sky = SubResource("Sky_m81e2")
+tonemap_mode = 3
+tonemap_white = 6.0
+fog_density = 0.25
+fog_aerial_perspective = 1.0
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(1, 0.0003427, -0.00016891, -0.000342464, 0.999999, 0.00143352, 0.000169389, -0.00143346, 0.999999, 0, 0, 0)
+script = ExtResource("1_t20f6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "day_night_cycle"
+speed_scale = 0.1
+libraries = {
+"": SubResource("AnimationLibrary_mqv34")
+}
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 493.0
+offset_bottom = 186.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TimeOfDay" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay"]
+layout_mode = 2
+text = "Time of Day"
+
+[node name="HSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 30.0
+step = 0.01
+
+[node name="Value" type="Label" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+text = "12:00"
+
+[node name="HSeparator" type="VSeparator" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay"]
+layout_mode = 2
+
+[node name="SpeedMinus" type="Button" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay"]
+layout_mode = 2
+text = "  -  "
+
+[node name="CurrentSpeed" type="Label" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay"]
+layout_mode = 2
+text = "1.00×"
+
+[node name="SpeedPlus" type="Button" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay"]
+layout_mode = 2
+text = "  +  "
+
+[node name="Clouds" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CoverageLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Clouds"]
+layout_mode = 2
+text = "Cloud Coverage"
+
+[node name="CoverageSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/Clouds"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 0.99
+step = 0.01
+value = 0.2
+
+[node name="CoverageValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/Clouds"]
+custom_minimum_size = Vector2(33, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+text = "20%"
+
+[node name="HSeparator" type="VSeparator" parent="Panel/MarginContainer/VBoxContainer/Clouds"]
+layout_mode = 2
+
+[node name="DensityLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Clouds"]
+layout_mode = 2
+text = "Density"
+
+[node name="DensitySlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/Clouds"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.01
+max_value = 0.99
+step = 0.01
+value = 0.05
+
+[node name="DensityValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/Clouds"]
+custom_minimum_size = Vector2(33, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+text = "5%"
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ProcessMode" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/ProcessMode"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.32
+text = "Process Mode"
+
+[node name="OptionButton" type="OptionButton" parent="Panel/MarginContainer/VBoxContainer/ProcessMode"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+selected = 1
+popup/item_0/text = "High-Quality"
+popup/item_0/id = 0
+popup/item_1/text = "High-Quality Incremental"
+popup/item_1/id = 1
+popup/item_2/text = "Real-Time"
+popup/item_2/id = 2
+
+[node name="RadianceSize" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/RadianceSize"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.32
+text = "Radiance Size"
+
+[node name="OptionButton" type="OptionButton" parent="Panel/MarginContainer/VBoxContainer/RadianceSize"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 5
+selected = 0
+popup/item_0/text = "32 (Faster)"
+popup/item_0/id = 0
+popup/item_1/text = "64 (Fast)"
+popup/item_1/id = 1
+popup/item_2/text = "128 (Average)"
+popup/item_2/id = 2
+popup/item_3/text = "256 (Slow)"
+popup/item_3/id = 3
+popup/item_4/text = "512 (Slowest)"
+popup/item_4/id = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("3")
+
+[node name="YawLight" type="Node3D" parent="."]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="YawLight"]
+transform = Transform3D(0.92058, 0.376575, 0.103557, 0.363598, -0.923164, 0.124759, 0.142581, -0.0771977, -0.986768, -0.000684916, 2, 0.00286704)
+light_energy = 0.0
+
+[node name="Spheres" type="Node3D" parent="."]
+script = ExtResource("5_00idb")
+
+[node name="RoughnessLabel" type="Label3D" parent="Spheres"]
+transform = Transform3D(1, 0.00017379, -0.000511611, 0.00051161, 7.57864e-08, 1, 0.00017379, -1, -1.36206e-08, 0.000828605, 0.500142, 5.70057)
+shaded = true
+double_sided = false
+text = "-  Roughness  +"
+font_size = 64
+outline_size = 24
+
+[node name="RoughnessLabel2" type="Label3D" parent="Spheres"]
+transform = Transform3D(-1, -0.000172721, -0.000173317, -0.000172821, -0.00286709, 0.999997, -0.000173217, 0.999997, 0.00286705, -0.00110257, 0.516483, -5.69942)
+shaded = true
+double_sided = false
+text = "+  Roughness  -"
+font_size = 64
+outline_size = 24
+
+[node name="MetallicLabel" type="Label3D" parent="Spheres"]
+transform = Transform3D(-0.000173158, 1, 0.00109107, -0.00126419, -0.00109129, 0.999999, 1, 0.000171779, 0.00126438, -5.70014, 0.500033, 0.00153612)
+shaded = true
+double_sided = false
+text = "-  Metallic  +"
+font_size = 64
+outline_size = 24
+
+[node name="MetallicLabel2" type="Label3D" parent="Spheres"]
+transform = Transform3D(0.000172955, -0.999999, -0.001776, 0.00160297, -0.00177572, 0.999998, -1, -0.000175801, 0.00160266, 5.69987, 0.50394, -0.000389313)
+shaded = true
+double_sided = false
+text = "+  Metallic  -"
+font_size = 64
+outline_size = 24
+
+[node name="YawCamera" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="YawCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+fov = 65.0
+
+[node name="Help" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -39.0
+offset_right = 56.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "F1: Hide/show GUI
+F2: Hide/show spheres
+Escape or F10: Toggle mouse capture
+Mouse wheel or Up/down: Adjust camera FOV"
+
+[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/TimeOfDay/HSlider" to="." method="_on_time_of_day_value_changed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/TimeOfDay/SpeedMinus" to="." method="_on_speed_minus_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/TimeOfDay/SpeedPlus" to="." method="_on_speed_plus_pressed"]
+[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/Clouds/CoverageSlider" to="." method="_on_cloud_coverage_value_changed"]
+[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/Clouds/DensitySlider" to="." method="_on_cloud_density_value_changed"]
+[connection signal="item_selected" from="Panel/MarginContainer/VBoxContainer/ProcessMode/OptionButton" to="." method="_on_process_mode_item_selected"]
+[connection signal="item_selected" from="Panel/MarginContainer/VBoxContainer/RadianceSize/OptionButton" to="." method="_on_radiance_size_item_selected"]
