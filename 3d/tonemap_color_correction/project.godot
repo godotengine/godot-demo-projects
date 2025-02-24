@@ -1,0 +1,30 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Tonemapping and Color Correction"
+config/description="This showcases various tonemapping operators and their interaction
+with several color correction textures (1D and 3D).
+
+A script generating neutral 3D LUT textures is also included."
+run/main_scene="res://test.tscn"
+config/features=PackedStringArray("4.4")
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[rendering]
+
+textures/default_filters/anisotropic_filtering_level=4
+anti_aliasing/quality/msaa_3d=2
+anti_aliasing/quality/use_debanding=true
