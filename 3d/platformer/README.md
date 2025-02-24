@@ -10,6 +10,9 @@ Renderer: Forward+
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2748
 
+This project uses Virtual joystick add-on by [`Marco F`](https://github.com/MarcoFazioRandom) for touch screen input.
+check it out: https://godotengine.org/asset-library/asset/1787
+
 ## Screenshots
 
 ![Screenshot](screenshots/platformer.webp)

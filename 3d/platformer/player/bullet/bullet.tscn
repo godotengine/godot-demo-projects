@@ -154,17 +154,18 @@ libraries = {
 }
 autoplay = "life"
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+[node name="CPUParticles3D" type="CPUParticles3D" parent="." groups=["bad_performer"]]
 cast_shadow = 0
 amount = 16
 lifetime = 0.4
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 8)
 mesh = SubResource("SphereMesh_hnt4a")
 spread = 0.0
 gravity = Vector3(0, 0, 0)
 scale_amount_curve = SubResource("Curve_4e8sm")
 color_ramp = SubResource("Gradient_ic2ol")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." groups=["bad_performer"]]
 shape = SubResource("SphereShape3D_vq2ey")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
