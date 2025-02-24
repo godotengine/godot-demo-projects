@@ -1,0 +1,133 @@
+[gd_scene load_steps=8 format=3 uid="uid://bqjwf4fg6gvu5"]
+
+[ext_resource type="PackedScene" uid="uid://bv4peo31bj672" path="res://tree.tscn" id="1_xp6ld"]
+[ext_resource type="Material" uid="uid://bo08s5dqyqpon" path="res://tree_material.tres" id="2_dw421"]
+[ext_resource type="Material" uid="uid://cqmgkacgqkl5c" path="res://trunk_material.tres" id="3_dl0c6"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6uoay"]
+top_radius = 0.0
+bottom_radius = 1.75
+height = 4.0
+radial_segments = 32
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qqg4e"]
+bottom_radius = 0.6
+radial_segments = 20
+rings = 1
+cap_bottom = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_74uyc"]
+top_radius = 0.0
+bottom_radius = 1.75
+height = 4.0
+radial_segments = 8
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_43jmr"]
+bottom_radius = 0.6
+radial_segments = 4
+rings = 1
+cap_bottom = false
+
+[node name="TreeCluster" type="Node3D"]
+
+[node name="Tree" parent="." instance=ExtResource("1_xp6ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.23853, -0.604848, 2.36929)
+
+[node name="Tree2" parent="." instance=ExtResource("1_xp6ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.17988, 9.53674e-07, 11.1474)
+
+[node name="Tree3" parent="." instance=ExtResource("1_xp6ld")]
+transform = Transform3D(1, 0, 0, 0, 0.994625, 0.103539, 0, -0.103539, 0.994625, -9.7838, 0, 15.4517)
+
+[node name="Tree4" parent="." instance=ExtResource("1_xp6ld")]
+transform = Transform3D(1, 0, 0, 0, 0.999611, -0.0278867, 0, 0.0278867, 0.999611, -6.71813, 0, 6.46976)
+
+[node name="Tree5" parent="." instance=ExtResource("1_xp6ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6214, -0.095274, 3.48558)
+
+[node name="Tree6" parent="." instance=ExtResource("1_xp6ld")]
+transform = Transform3D(1, 0, 0, 0, 0.990373, 0.13843, 0, -0.13843, 0.990373, 7.85683, -1.13758, -8.35561)
+
+[node name="Tree7" parent="." instance=ExtResource("1_xp6ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4899, -0.270895, -12.7505)
+
+[node name="Tree8" parent="." instance=ExtResource("1_xp6ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.88321, -0.0901899, 15.154)
+
+[node name="Tree9" parent="." instance=ExtResource("1_xp6ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8513, 0, 1.831)
+
+[node name="Tree10" parent="." instance=ExtResource("1_xp6ld")]
+transform = Transform3D(0.999923, 0.0124439, 0, -0.0124439, 0.999923, 0, 0, 0, 1, -12.9166, -0.497135, -3.58321)
+
+[node name="Tree11" parent="." instance=ExtResource("1_xp6ld")]
+transform = Transform3D(1, 0, 0, 0, 0.999997, 0.00230383, 0, -0.00230383, 0.999997, -12.6297, 0, 8.99774)
+
+[node name="Tree12" parent="." instance=ExtResource("1_xp6ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9091, -0.833557, 9.89316)
+
+[node name="Tree13" parent="." instance=ExtResource("1_xp6ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5096, -0.271834, -8.60772)
+
+[node name="Tree14" parent="." instance=ExtResource("1_xp6ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9704, 0, 16.1838)
+
+[node name="Tree15" parent="." instance=ExtResource("1_xp6ld")]
+transform = Transform3D(0.999292, 0.0376204, 0, -0.0376204, 0.999292, 0, 0, 0, 1, -12.6976, 0, -14.5755)
+
+[node name="Tree16" parent="." instance=ExtResource("1_xp6ld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76961, -0.509378, 20.9842)
+
+[node name="Cluster" type="Node3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="HighDetail" type="Node3D" parent="Cluster"]
+
+[node name="Top" type="MeshInstance3D" parent="Cluster/HighDetail" groups=["tree_cluster_high_detail"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+cast_shadow = 0
+visibility_range_begin = 200.0
+visibility_range_begin_margin = 50.0
+visibility_range_end = 500.0
+visibility_range_end_margin = 50.0
+visibility_range_fade_mode = 1
+mesh = SubResource("CylinderMesh_6uoay")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_dw421")
+
+[node name="Trunk" type="MeshInstance3D" parent="Cluster/HighDetail" groups=["tree_cluster_high_detail"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+cast_shadow = 0
+visibility_range_begin = 200.0
+visibility_range_begin_margin = 50.0
+visibility_range_end = 500.0
+visibility_range_end_margin = 50.0
+visibility_range_fade_mode = 1
+mesh = SubResource("CylinderMesh_qqg4e")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("3_dl0c6")
+
+[node name="LowDetail" type="Node3D" parent="Cluster"]
+
+[node name="Top" type="MeshInstance3D" parent="Cluster/LowDetail" groups=["tree_cluster_low_detail"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+cast_shadow = 0
+visibility_range_begin = 450.0
+visibility_range_end = 2000.0
+visibility_range_end_margin = 100.0
+visibility_range_fade_mode = 1
+mesh = SubResource("CylinderMesh_74uyc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_dw421")
+
+[node name="Trunk" type="MeshInstance3D" parent="Cluster/LowDetail" groups=["tree_cluster_low_detail"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+cast_shadow = 0
+visibility_range_begin = 450.0
+visibility_range_end = 2000.0
+visibility_range_end_margin = 100.0
+visibility_range_fade_mode = 1
+mesh = SubResource("CylinderMesh_43jmr")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("3_dl0c6")

@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://bv4peo31bj672"]
+
+[ext_resource type="Material" uid="uid://bo08s5dqyqpon" path="res://tree_material.tres" id="1_784bs"]
+[ext_resource type="Material" uid="uid://cqmgkacgqkl5c" path="res://trunk_material.tres" id="2_ap7c2"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6uoay"]
+top_radius = 0.0
+bottom_radius = 1.75
+height = 4.0
+radial_segments = 32
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qqg4e"]
+bottom_radius = 0.6
+radial_segments = 20
+rings = 1
+cap_bottom = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_74uyc"]
+top_radius = 0.0
+bottom_radius = 1.75
+height = 4.0
+radial_segments = 8
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_43jmr"]
+bottom_radius = 0.6
+radial_segments = 4
+rings = 1
+cap_bottom = false
+
+[node name="Tree" type="Node3D"]
+
+[node name="HighDetail" type="Node3D" parent="."]
+
+[node name="Top" type="MeshInstance3D" parent="HighDetail" groups=["tree_high_detail"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+visibility_range_end = 20.0
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
+mesh = SubResource("CylinderMesh_6uoay")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_784bs")
+
+[node name="Trunk" type="MeshInstance3D" parent="HighDetail" groups=["tree_high_detail"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visibility_range_end = 20.0
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
+mesh = SubResource("CylinderMesh_qqg4e")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_ap7c2")
+
+[node name="LowDetail" type="Node3D" parent="."]
+
+[node name="Top" type="MeshInstance3D" parent="LowDetail" groups=["tree_low_detail"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+visibility_range_begin = 15.0
+visibility_range_end = 200.0
+visibility_range_end_margin = 50.0
+visibility_range_fade_mode = 1
+mesh = SubResource("CylinderMesh_74uyc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_784bs")
+
+[node name="Trunk" type="MeshInstance3D" parent="LowDetail" groups=["tree_low_detail"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visibility_range_begin = 15.0
+visibility_range_end = 200.0
+visibility_range_end_margin = 50.0
+visibility_range_fade_mode = 1
+mesh = SubResource("CylinderMesh_43jmr")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_ap7c2")
