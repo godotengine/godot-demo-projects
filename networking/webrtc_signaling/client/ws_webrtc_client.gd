@@ -124,7 +124,7 @@ func send_answer(id: int, answer: String) -> Error:
 
 func _send_msg(type: int, id: int, data: String = "") -> Error:
 	return ws.send_text(JSON.stringify({
-		"type": type,
-		"id": id,
+		"type": str(type),
+		"id": str(id),
 		"data": data,
 	}))
