@@ -1,0 +1,171 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvjlkpjvjxn0h"]
+
+[ext_resource type="Script" uid="uid://dbbfvbf6ronrp" path="res://MicRecord.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://c2re52petqrvx" path="res://Intro.ogg" id="2"]
+[ext_resource type="Shader" uid="uid://cl4x5tyii4r6q" path="res://MicRecord.gdshader" id="3_vkk4n"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_tfvr1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m4htd"]
+shader = ExtResource("3_vkk4n")
+
+[node name="MicRecord" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -240.0
+offset_right = 254.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="AudioWav" type="AudioStreamPlayer" parent="."]
+autoplay = true
+
+[node name="AudioMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2")
+volume_db = -6.0
+
+[node name="AudioGenerator" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamGenerator_tfvr1")
+bus = &"Generate"
+
+[node name="Status" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "Status: "
+horizontal_alignment = 1
+
+[node name="MicrophoneOn" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 50.0
+offset_right = 154.0
+offset_bottom = 81.0
+tooltip_text = "Nothing works until you
+turn the microphone on."
+text = "Microphone On
+"
+
+[node name="MicToGenerator" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 50.0
+offset_right = 315.0
+offset_bottom = 81.0
+tooltip_text = "Warning: this will cause feedback
+unless you use headphones"
+text = "Mic to Output
+"
+
+[node name="InputMixRate" type="Label" parent="."]
+layout_mode = 0
+offset_left = 323.0
+offset_top = 56.0
+offset_right = 392.0
+offset_bottom = 79.0
+text = "Mix rate:"
+
+[node name="SampleCount" type="Label" parent="."]
+layout_mode = 0
+offset_left = 460.0
+offset_top = 56.0
+offset_right = 542.0
+offset_bottom = 79.0
+text = "N-samples"
+
+[node name="RecordButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 105.0
+offset_right = 150.0
+offset_bottom = 145.0
+toggle_mode = true
+text = "Record"
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 167.0
+offset_top = 105.0
+offset_right = 297.0
+offset_bottom = 145.0
+disabled = true
+text = "Play"
+
+[node name="PlayMusic" type="Button" parent="."]
+layout_mode = 0
+offset_left = 323.0
+offset_top = 105.0
+offset_right = 453.0
+offset_bottom = 145.0
+toggle_mode = true
+text = "Play Music"
+
+[node name="MicTexture" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_m4htd")
+layout_mode = 0
+offset_left = 20.0
+offset_top = 161.0
+offset_right = 548.0
+offset_bottom = 250.0
+
+[node name="SaveButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 295.0
+offset_right = 156.0
+offset_bottom = 335.0
+disabled = true
+text = "Save WAV To:"
+
+[node name="Filename" type="LineEdit" parent="SaveButton"]
+layout_mode = 0
+offset_left = 150.0
+offset_right = 477.0
+offset_bottom = 40.0
+text = "user://record.wav"
+caret_blink = true
+
+[node name="OpenUserFolderButton" type="Button" parent="."]
+layout_mode = 1
+offset_left = 28.0
+offset_top = 349.0
+offset_right = 191.0
+offset_bottom = 389.0
+text = "Open User Folder"
+
+[node name="OptionTone" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 474.0
+offset_top = 109.0
+offset_right = 568.0
+offset_bottom = 140.0
+selected = 0
+item_count = 5
+popup/item_0/text = "No tone"
+popup/item_0/id = 0
+popup/item_1/text = "200Hz"
+popup/item_1/id = 1
+popup/item_2/text = "400Hz"
+popup/item_2/id = 2
+popup/item_3/text = "1000Hz"
+popup/item_3/id = 3
+popup/item_4/text = "2000Hz"
+popup/item_4/id = 4
+
+[connection signal="toggled" from="MicrophoneOn" to="." method="_on_microphone_on_toggled"]
+[connection signal="toggled" from="MicToGenerator" to="." method="_on_mic_to_generator_toggled"]
+[connection signal="toggled" from="RecordButton" to="." method="_on_record_button_toggled"]
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="toggled" from="PlayMusic" to="." method="_on_play_music_toggled"]
+[connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="OpenUserFolderButton" to="." method="_on_open_user_folder_button_pressed"]
+[connection signal="item_selected" from="OptionTone" to="." method="_on_option_tone_item_selected"]
