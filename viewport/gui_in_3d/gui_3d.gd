@@ -31,12 +31,12 @@ func _process(_delta: float) -> void:
 func _mouse_entered_area() -> void:
 	is_mouse_inside = true
 	# Notify the viewport that the mouse is now hovering it.
-	node_viewport.notification(NOTIFICATION_VP_MOUSE_ENTER)
+	node_viewport.notify_mouse_entered()
 
 
 func _mouse_exited_area() -> void:
 	# Notify the viewport that the mouse is no longer hovering it.
-	node_viewport.notification(NOTIFICATION_VP_MOUSE_EXIT)
+	node_viewport.notify_mouse_exited()
 	is_mouse_inside = false
 
 
