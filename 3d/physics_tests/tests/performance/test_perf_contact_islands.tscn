@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://ctni5eafiy2bu"]
 
-[ext_resource type="Script" path="res://tests/performance/test_perf_contacts.gd" id="1"]
-[ext_resource type="Script" path="res://utils/camera_orbit.gd" id="3"]
+[ext_resource type="Script" uid="uid://4kcl3sbrycms" path="res://tests/performance/test_perf_contacts.gd" id="1"]
+[ext_resource type="Script" uid="uid://cx8vo58lobtgu" path="res://utils/camera_orbit.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://b1ihqm3x8jru" path="res://tests/test_options.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://cl2vpuxqgnylc" path="res://tests/static_scene.tscn" id="5"]
 
@@ -15,18 +15,17 @@
 points = PackedVector3Array(-0.7, 0, -0.7, -0.3, 0, 0.8, 0.8, 0, -0.3, 0, -1, 0)
 
 [sub_resource type="SphereShape3D" id="5"]
-radius = 0.5
 
 [sub_resource type="WorldBoundaryShape3D" id="6"]
 
 [node name="Test" type="Node3D"]
-script = ExtResource( "1" )
+script = ExtResource("1")
 _enable_debug_collision = false
 spawns = ["SpawnTarget1", "SpawnTarget2", "SpawnTarget3", "SpawnTarget4", "SpawnTarget5", "SpawnTarget6", "SpawnTarget7", "SpawnTarget8", "SpawnTarget9", "SpawnTarget10", "SpawnTarget11", "SpawnTarget12", "SpawnTarget13", "SpawnTarget14", "SpawnTarget15", "SpawnTarget16"]
 spawn_count = 200
 spawn_randomize = Vector3(0.2, 0.2, 0.2)
 
-[node name="Options" parent="." instance=ExtResource( "4" )]
+[node name="Options" parent="." instance=ExtResource("4")]
 
 [node name="SpawnTarget1" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 7, -37.715)
@@ -82,56 +81,56 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.3192, 1.2359, 38.0117)
 [node name="RigidBodyBox" type="RigidDynamicBody3D" parent="DynamicShapes"]
 
 [node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyBox"]
-shape = SubResource( "1" )
+shape = SubResource("1")
 
 [node name="RigidBodyCapsule" type="RigidDynamicBody3D" parent="DynamicShapes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyCapsule"]
-shape = SubResource( "2" )
+shape = SubResource("2")
 
 [node name="RigidBodyCylinder" type="RigidDynamicBody3D" parent="DynamicShapes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
 [node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyCylinder"]
-shape = SubResource( "3" )
+shape = SubResource("3")
 
 [node name="RigidBodyConvex" type="RigidDynamicBody3D" parent="DynamicShapes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 
 [node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyConvex"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-shape = SubResource( "4" )
+shape = SubResource("4")
 
 [node name="RigidBodySphere" type="RigidDynamicBody3D" parent="DynamicShapes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 
 [node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodySphere"]
-shape = SubResource( "5" )
+shape = SubResource("5")
 
-[node name="StaticScene" parent="." instance=ExtResource( "5" )]
+[node name="StaticScene" parent="." instance=ExtResource("5")]
 
 [node name="StaticBodyWalls" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape1" type="CollisionShape3D" parent="StaticBodyWalls"]
 transform = Transform3D(-1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0, 1, -50, 0, 0)
-shape = SubResource( "6" )
+shape = SubResource("6")
 
 [node name="CollisionShape2" type="CollisionShape3D" parent="StaticBodyWalls"]
 transform = Transform3D(-1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 50, 0, 0)
-shape = SubResource( "6" )
+shape = SubResource("6")
 
 [node name="CollisionShape3" type="CollisionShape3D" parent="StaticBodyWalls"]
 transform = Transform3D(2.6543e-14, 1.62921e-07, 1, 1, -1.62921e-07, 1.56125e-19, 1.62921e-07, 1, -1.62921e-07, 0, 0, -50)
-shape = SubResource( "6" )
+shape = SubResource("6")
 
 [node name="CollisionShape4" type="CollisionShape3D" parent="StaticBodyWalls"]
 transform = Transform3D(2.6543e-14, 1.62921e-07, -1, 1, -1.62921e-07, -1.56125e-19, -1.62921e-07, -1, -1.62921e-07, 0, 0, 50)
-shape = SubResource( "6" )
+shape = SubResource("6")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.881757, 0.471705, 0, -0.471705, 0.881757, 0, 20.4125, 41.0426)
-script = ExtResource( "3" )
+script = ExtResource("3")
 
 [node name="OmniLight" type="OmniLight3D" parent="Camera3D"]
 omni_range = 80.0

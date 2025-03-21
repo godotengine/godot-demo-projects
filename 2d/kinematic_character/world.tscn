@@ -1,19 +1,17 @@
 [gd_scene load_steps=23 format=3 uid="uid://de7qapkqfycxl"]
 
 [ext_resource type="Texture2D" uid="uid://cs8h2qyuakmko" path="res://level/obstacle.png" id="2"]
-[ext_resource type="PackedScene" path="res://player/player.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://1mg1vqqw4sf8" path="res://player/player.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://cxl5cvsgyxcoe" path="res://level/princess.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://1ign8s1w414r" path="res://level/circle.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://hp84e6iwjqjy" path="res://level/long_obstacle.png" id="6"]
-[ext_resource type="Script" path="res://level/princess.gd" id="7"]
+[ext_resource type="Script" uid="uid://bj33aputmer8v" path="res://level/princess.gd" id="7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_on5ov"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vnjib"]
 texture = ExtResource("2")
 0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_xqlka"]
@@ -42,7 +40,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2v3oa"]
 _data = {
-"leftright": SubResource("4")
+&"leftright": SubResource("4")
 }
 
 [sub_resource type="Animation" id="5"]
@@ -80,8 +78,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j555p"]
 _data = {
-"leftright": SubResource("5"),
-"updown": SubResource("6")
+&"leftright": SubResource("5"),
+&"updown": SubResource("6")
 }
 
 [sub_resource type="RectangleShape2D" id="7"]
@@ -111,7 +109,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gijtf"]
 _data = {
-"turn": SubResource("10")
+&"turn": SubResource("10")
 }
 
 [sub_resource type="RectangleShape2D" id="11"]
