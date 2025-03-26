@@ -7,13 +7,13 @@ extends Control
 
 func _ready() -> void:
 	render_distance_slider.value = Settings.render_distance
-	render_distance_label.text = "Render distance: " + str(Settings.render_distance)
+	render_distance_label.text = "Render distance: " + String.num_int64(Settings.render_distance)
 	fog_checkbox.button_pressed = Settings.fog_enabled
 
 
 func _on_RenderDistanceSlider_value_changed(value: float) -> void:
 	Settings.render_distance = int(value)
-	render_distance_label.text = "Render distance: " + str(value)
+	render_distance_label.text = "Render distance: " + String.num_int64(Settings.render_distance)
 	Settings.save_settings()
 
 

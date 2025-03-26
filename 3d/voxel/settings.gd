@@ -1,12 +1,12 @@
 extends Node
 
-var render_distance := 7
-var fog_enabled := true
+var render_distance: int = 7
+var fog_enabled: bool = true
 
-var fog_distance := 32.0  # Not saved, only used during runtime.
-var world_type := 0  # Not saved, only used during runtime.
+var fog_distance: float = 32.0  # Not saved, only used during runtime.
+var world_type: int = 0  # Not saved, only used during runtime.
 
-var _save_path := "user://settings.json"
+var _save_path: String = "user://settings.json"
 
 func _enter_tree() -> void:
 	if FileAccess.file_exists(_save_path):
