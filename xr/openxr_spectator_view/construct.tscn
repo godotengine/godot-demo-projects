@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://qb615fcqh8x0"]
+
+[ext_resource type="Script" path="res://construct.gd" id="1_ktigi"]
+[ext_resource type="PackedScene" uid="uid://cn6s3kxlkt6ml" path="res://main.tscn" id="2_1qy5m"]
+[ext_resource type="Shader" path="res://shaders/eye_output.gdshader" id="2_ygl07"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wue56"]
+shader = ExtResource("2_ygl07")
+shader_parameter/layer = null
+
+[node name="Construct" type="Node2D"]
+script = ExtResource("1_ktigi")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+custom_minimum_size = Vector2(512, 512)
+offset_right = 512.0
+offset_bottom = 512.0
+stretch = true
+
+[node name="DesktopSubViewport" type="SubViewport" parent="SubViewportContainer"]
+unique_name_in_owner = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="HMDView" type="ColorRect" parent="SubViewportContainer/DesktopSubViewport"]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_wue56")
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UI" type="VBoxContainer" parent="SubViewportContainer/DesktopSubViewport"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 194.0
+offset_bottom = 76.0
+
+[node name="SpectatorView" type="OptionButton" parent="SubViewportContainer/DesktopSubViewport/UI"]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "Spectator Camera"
+popup/item_0/id = 0
+popup/item_1/text = "Left eye"
+popup/item_1/id = 1
+popup/item_2/text = "Right eye"
+popup/item_2/id = 2
+
+[node name="TrackCamera" type="CheckBox" parent="SubViewportContainer/DesktopSubViewport/UI"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Track Camera"
+
+[node name="TrackedCamera" type="Node3D" parent="SubViewportContainer/DesktopSubViewport"]
+unique_name_in_owner = true
+transform = Transform3D(0.428162, 0, -0.903702, 0, 1, 0, 0.903702, 0, 0.428162, -4.12546, 1.30569, 1.60112)
+
+[node name="SpectatorCamera" type="Camera3D" parent="SubViewportContainer/DesktopSubViewport/TrackedCamera"]
+unique_name_in_owner = true
+cull_mask = 1048573
+
+[node name="VRSubViewport" type="SubViewport" parent="."]
+
+[node name="Main" parent="VRSubViewport" instance=ExtResource("2_1qy5m")]
+unique_name_in_owner = true
+
+[connection signal="item_selected" from="SubViewportContainer/DesktopSubViewport/UI/SpectatorView" to="." method="_on_spectator_view_item_selected"]
+[connection signal="toggled" from="SubViewportContainer/DesktopSubViewport/UI/TrackCamera" to="." method="_on_track_camera_toggled"]
+[connection signal="focus_gained" from="VRSubViewport/Main" to="." method="_on_main_focus_gained"]

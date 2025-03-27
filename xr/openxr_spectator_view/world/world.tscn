@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckuw0ps7vjw7e"]
+
+[ext_resource type="PackedScene" uid="uid://c18kajc4sbkqv" path="res://world/floor.tscn" id="1_ghfsf"]
+[ext_resource type="PackedScene" uid="uid://dr051k6vi2hg6" path="res://world/wall.tscn" id="2_a3wlv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qamop"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_qs8p5"]
+sky_material = SubResource("ProceduralSkyMaterial_qamop")
+
+[sub_resource type="Environment" id="Environment_duone"]
+background_mode = 2
+sky = SubResource("Sky_qs8p5")
+tonemap_mode = 2
+
+[node name="World" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_duone")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_max_distance = 10.0
+
+[node name="Floor" parent="." instance=ExtResource("1_ghfsf")]
+
+[node name="Wall01" parent="." instance=ExtResource("2_a3wlv")]
+transform = Transform3D(0.812592, 0, -0.582832, 0, 1, 0, 0.582832, 0, 0.812592, 0, 0, -2.64147)
+
+[node name="Wall08" parent="." instance=ExtResource("2_a3wlv")]
+transform = Transform3D(0.872956, 0, 0.487799, 0, 1, 0, -0.487799, 0, 0.872956, 1.62242, 0, -2.55675)
+
+[node name="Wall02" parent="." instance=ExtResource("2_a3wlv")]
+transform = Transform3D(0.882078, 0, 0.471104, 0, 1, 0, -0.471104, 0, 0.882078, -3.87147, 0, -0.457518)
+
+[node name="Wall05" parent="." instance=ExtResource("2_a3wlv")]
+transform = Transform3D(0.295525, 0, 0.955335, 0, 1, 0, -0.955335, 0, 0.295525, -2.72498, 0, -1.88187)
+
+[node name="Wall06" parent="." instance=ExtResource("2_a3wlv")]
+transform = Transform3D(0.625502, 0, 0.780223, 0, 1, 0, -0.780223, 0, 0.625502, -1.812, 0, -3.62771)
+
+[node name="Wall03" parent="." instance=ExtResource("2_a3wlv")]
+transform = Transform3D(-0.390571, 0, -0.920573, 0, 1, 0, 0.920573, 0, -0.390571, -0.74192, 0, 3.08859)
+
+[node name="Wall07" parent="." instance=ExtResource("2_a3wlv")]
+transform = Transform3D(0.911001, 0, -0.412405, 0, 1, 0, 0.412405, 0, 0.911001, -0.190205, 0, 4.36401)
+
+[node name="Wall04" parent="." instance=ExtResource("2_a3wlv")]
+transform = Transform3D(0.138931, 0, -0.990302, 0, 1, 0, 0.990302, 0, 0.138931, 2.32413, 0, 0.0712545)
