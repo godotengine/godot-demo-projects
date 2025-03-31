@@ -17,7 +17,14 @@ func _process(delta):
 		var profile = controller_tracker.profile.replace("/interaction_profiles/", "").replace("/", " ")
 		text += "\nProfile: " + profile + "\n"
 
-		var pose : XRPose = controller_tracker.get_pose("pose")
+		var pose : XRPose = controller_tracker.get_pose("palm_pose")
+		if pose and pose.tracking_confidence != XRPose.XR_TRACKING_CONFIDENCE_NONE:
+			text +=" - Using palm pose\n"
+		else:
+			pose = controller_tracker.get_pose("grip")
+			if pose:
+				text +=" - Using grip pose\n"
+
 		if pose:
 			if pose.tracking_confidence == XRPose.XR_TRACKING_CONFIDENCE_NONE:
 				text += "- No tracking data\n"
