@@ -106,13 +106,13 @@ func _on_window_base_size_item_selected(index: int) -> void:
 		7:  # 1680×720 (21:9)
 			base_window_size = Vector2(1680, 720)
 
-	get_viewport().content_scale_size = base_window_size
+	get_window().content_scale_size = base_window_size
 	update_container.call_deferred()
 
 
 func _on_window_stretch_mode_item_selected(index: int) -> void:
 	stretch_mode = index as Window.ContentScaleMode
-	get_viewport().content_scale_mode = stretch_mode
+	get_window().content_scale_mode = stretch_mode
 
 	# Disable irrelevant options when the stretch mode is Disabled.
 	$"Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowBaseSize/OptionButton".disabled = stretch_mode == Window.CONTENT_SCALE_MODE_DISABLED
@@ -121,14 +121,14 @@ func _on_window_stretch_mode_item_selected(index: int) -> void:
 
 func _on_window_stretch_aspect_item_selected(index: int) -> void:
 	stretch_aspect = index as Window.ContentScaleAspect
-	get_viewport().content_scale_aspect = stretch_aspect
+	get_window().content_scale_aspect = stretch_aspect
 
 
 func _on_window_scale_factor_drag_ended(_value_changed: bool) -> void:
 	scale_factor = $"Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowScaleFactor/HSlider".value
 	$"Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowScaleFactor/Value".text = "%d%%" % (scale_factor * 100)
-	get_viewport().content_scale_factor = scale_factor
+	get_window().content_scale_factor = scale_factor
 
 
 func _on_window_stretch_scale_mode_item_selected(index: int) -> void:
-	get_viewport().content_scale_stretch = index
+	get_window().content_scale_stretch = index
