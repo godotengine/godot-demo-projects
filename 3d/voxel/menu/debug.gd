@@ -12,7 +12,7 @@ func _process(_delta: float) -> void:
 	text += "\nEffective render distance: " + str(voxel_world.effective_render_distance)
 	text += "\nLooking: " + _cardinal_string_from_radians(player.transform.basis.get_euler().y)
 	text += "\nMemory: " + "%3.0f" % (OS.get_static_memory_usage() / 1048576.0) + " MiB"
-	text += "\nFPS: " + str(Engine.get_frames_per_second())
+	text += "\nFPS: " + String.num_uint64(Engine.get_frames_per_second())
 
 
 # Avoids the problem of showing more digits than needed or available.
