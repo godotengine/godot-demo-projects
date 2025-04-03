@@ -113,6 +113,7 @@ func _create_joint() -> void:
 			parent_body.gravity_scale = 0.0
 			child_body.gravity_scale = 0.0
 		else:
+			parent_body.freeze_mode = RigidBody2D.FREEZE_MODE_KINEMATIC
 			parent_body.freeze = true
 		if _change_positions:
 			root.add_child(parent_body)
