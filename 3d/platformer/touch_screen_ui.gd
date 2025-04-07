@@ -4,7 +4,7 @@ var player_script:= preload("res://player/player.gd")
 
 func _ready() -> void:
 	hide()
-	if DisplayServer.is_touchscreen_available():
+	if !DisplayServer.has_hardware_keyboard():
 		show()
 
 func _on_performance_toggled(toggled_on: bool) -> void:
