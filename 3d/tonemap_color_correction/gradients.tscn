@@ -1,0 +1,421 @@
+[gd_scene load_steps=32 format=3 uid="uid://drmdg7kgtgadn"]
+
+[ext_resource type="Script" path="res://test_scene.gd" id="1_t2d15"]
+[ext_resource type="PackedScene" uid="uid://bavd54phmfgyh" path="res://gradients/gradient_bars.tscn" id="2_p2qnr"]
+[ext_resource type="Shader" path="res://gradients/gradient_steps.gdshader" id="3_28j7b"]
+[ext_resource type="Script" path="res://gradients/gradients_controls.gd" id="4_fust6"]
+
+[sub_resource type="Environment" id="Environment_lqw28"]
+background_mode = 1
+background_energy_multiplier = 0.0
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_white = 6.0
+glow_intensity = 0.09
+glow_blend_mode = 1
+fog_density = 0.025
+adjustment_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bstc8"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(1, 0, 0, 1)
+shader_parameter/steps = 10
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eljuh"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(1, 0, 0, 1)
+shader_parameter/steps = 1
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_81w4g"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(1, 0.0392157, 0.0392157, 1)
+shader_parameter/steps = 10
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ots2d"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(1, 0.0392157, 0.0392157, 1)
+shader_parameter/steps = 1
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_41i5d"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(1, 0.501961, 0.0392157, 1)
+shader_parameter/steps = 10
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j0kf1"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(1, 0.501961, 0.0392157, 1)
+shader_parameter/steps = 1
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_smq08"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(1, 0.0392157, 0.501961, 1)
+shader_parameter/steps = 10
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w135p"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(1, 0.0392157, 0.501961, 1)
+shader_parameter/steps = 1
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2wh7i"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(0, 1, 0, 1)
+shader_parameter/steps = 10
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xj3wk"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(0, 1, 0, 1)
+shader_parameter/steps = 1
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ttmyv"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(0.0392157, 1, 0.0392157, 1)
+shader_parameter/steps = 10
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g72v6"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(0.0392157, 1, 0.0392157, 1)
+shader_parameter/steps = 1
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wjnjt"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(0.501961, 1, 0.0392157, 1)
+shader_parameter/steps = 10
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wm7wm"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(0.501961, 1, 0.0392157, 1)
+shader_parameter/steps = 1
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7d5gp"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(0.0392157, 1, 0.501961, 1)
+shader_parameter/steps = 10
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_115u5"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(0.0392157, 1, 0.501961, 1)
+shader_parameter/steps = 1
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g82jm"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(0, 0, 1, 1)
+shader_parameter/steps = 10
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ceq2s"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(0, 0, 1, 1)
+shader_parameter/steps = 1
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tg3s4"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(0.0392157, 0.0392157, 1, 1)
+shader_parameter/steps = 10
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xss0p"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(0.0392157, 0.0392157, 1, 1)
+shader_parameter/steps = 1
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w3opq"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(0.501961, 0.0392157, 1, 1)
+shader_parameter/steps = 10
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qwbip"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(0.501961, 0.0392157, 1, 1)
+shader_parameter/steps = 1
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x3aop"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(0.0392157, 0.501961, 1, 1)
+shader_parameter/steps = 10
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j2m03"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(0.0392157, 0.501961, 1, 1)
+shader_parameter/steps = 1
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2llro"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(0.501961, 0.501961, 0.501961, 1)
+shader_parameter/steps = 10
+shader_parameter/exponential_view = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_es2ea"]
+render_priority = 0
+shader = ExtResource("3_28j7b")
+shader_parameter/my_color = Color(0.501961, 0.501961, 0.501961, 1)
+shader_parameter/steps = 1
+shader_parameter/exponential_view = true
+
+[node name="Gradients" type="Node3D" node_paths=PackedStringArray("world_environment")]
+script = ExtResource("1_t2d15")
+world_environment = NodePath("WorldEnvironment")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lqw28")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+projection = 1
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -0.795469, 0.279246, 0)
+text = "0.0"
+horizontal_alignment = 0
+vertical_alignment = 2
+
+[node name="Label3D2" type="Label3D" parent="."]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0.0286667, 0.279246, 0)
+text = "1.0"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Label3D3" type="Label3D" parent="."]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0.0461101, 0.279246, 0)
+text = "0.0"
+horizontal_alignment = 0
+vertical_alignment = 2
+
+[node name="Label3D4" type="Label3D" parent="."]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0.867011, 0.279246, 0)
+text = "6.0"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Gradients_White" parent="." instance=ExtResource("2_p2qnr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+
+[node name="Gradients_Red" parent="." instance=ExtResource("2_p2qnr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="0-to-HDR" parent="Gradients_Red" index="0"]
+material_override = SubResource("ShaderMaterial_bstc8")
+
+[node name="0-to-1" parent="Gradients_Red" index="1"]
+material_override = SubResource("ShaderMaterial_eljuh")
+
+[node name="Gradients_Red2" parent="." instance=ExtResource("2_p2qnr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+
+[node name="0-to-HDR" parent="Gradients_Red2" index="0"]
+material_override = SubResource("ShaderMaterial_81w4g")
+
+[node name="0-to-1" parent="Gradients_Red2" index="1"]
+material_override = SubResource("ShaderMaterial_ots2d")
+
+[node name="Gradients_Red3" parent="." instance=ExtResource("2_p2qnr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="0-to-HDR" parent="Gradients_Red3" index="0"]
+material_override = SubResource("ShaderMaterial_41i5d")
+
+[node name="0-to-1" parent="Gradients_Red3" index="1"]
+material_override = SubResource("ShaderMaterial_j0kf1")
+
+[node name="Gradients_Red4" parent="." instance=ExtResource("2_p2qnr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+
+[node name="0-to-HDR" parent="Gradients_Red4" index="0"]
+material_override = SubResource("ShaderMaterial_smq08")
+
+[node name="0-to-1" parent="Gradients_Red4" index="1"]
+material_override = SubResource("ShaderMaterial_w135p")
+
+[node name="Gradients_Green" parent="." instance=ExtResource("2_p2qnr")]
+
+[node name="0-to-HDR" parent="Gradients_Green" index="0"]
+material_override = SubResource("ShaderMaterial_2wh7i")
+
+[node name="0-to-1" parent="Gradients_Green" index="1"]
+material_override = SubResource("ShaderMaterial_xj3wk")
+
+[node name="Gradients_Green2" parent="." instance=ExtResource("2_p2qnr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+
+[node name="0-to-HDR" parent="Gradients_Green2" index="0"]
+material_override = SubResource("ShaderMaterial_ttmyv")
+
+[node name="0-to-1" parent="Gradients_Green2" index="1"]
+material_override = SubResource("ShaderMaterial_g72v6")
+
+[node name="Gradients_Green3" parent="." instance=ExtResource("2_p2qnr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+
+[node name="0-to-HDR" parent="Gradients_Green3" index="0"]
+material_override = SubResource("ShaderMaterial_wjnjt")
+
+[node name="0-to-1" parent="Gradients_Green3" index="1"]
+material_override = SubResource("ShaderMaterial_wm7wm")
+
+[node name="Gradients_Green4" parent="." instance=ExtResource("2_p2qnr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
+
+[node name="0-to-HDR" parent="Gradients_Green4" index="0"]
+material_override = SubResource("ShaderMaterial_7d5gp")
+
+[node name="0-to-1" parent="Gradients_Green4" index="1"]
+material_override = SubResource("ShaderMaterial_115u5")
+
+[node name="Gradients_Blue" parent="." instance=ExtResource("2_p2qnr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="0-to-HDR" parent="Gradients_Blue" index="0"]
+material_override = SubResource("ShaderMaterial_g82jm")
+
+[node name="0-to-1" parent="Gradients_Blue" index="1"]
+material_override = SubResource("ShaderMaterial_ceq2s")
+
+[node name="Gradients_Blue2" parent="." instance=ExtResource("2_p2qnr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+
+[node name="0-to-HDR" parent="Gradients_Blue2" index="0"]
+material_override = SubResource("ShaderMaterial_tg3s4")
+
+[node name="0-to-1" parent="Gradients_Blue2" index="1"]
+material_override = SubResource("ShaderMaterial_xss0p")
+
+[node name="Gradients_Blue3" parent="." instance=ExtResource("2_p2qnr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+
+[node name="0-to-HDR" parent="Gradients_Blue3" index="0"]
+material_override = SubResource("ShaderMaterial_w3opq")
+
+[node name="0-to-1" parent="Gradients_Blue3" index="1"]
+material_override = SubResource("ShaderMaterial_qwbip")
+
+[node name="Gradients_Blue4" parent="." instance=ExtResource("2_p2qnr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0)
+
+[node name="0-to-HDR" parent="Gradients_Blue4" index="0"]
+material_override = SubResource("ShaderMaterial_x3aop")
+
+[node name="0-to-1" parent="Gradients_Blue4" index="1"]
+material_override = SubResource("ShaderMaterial_j2m03")
+
+[node name="Gradients_Custom" parent="." instance=ExtResource("2_p2qnr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+
+[node name="0-to-HDR" parent="Gradients_Custom" index="0"]
+material_override = SubResource("ShaderMaterial_2llro")
+
+[node name="0-to-1" parent="Gradients_Custom" index="1"]
+material_override = SubResource("ShaderMaterial_es2ea")
+
+[node name="Label3D" parent="Gradients_Custom" index="2"]
+text = "#808080"
+
+[node name="Controls" type="Node" parent="." node_paths=PackedStringArray("max_value_label", "custom_bar")]
+script = ExtResource("4_fust6")
+bars = Array[NodePath]([NodePath("../Gradients_White"), NodePath("../Gradients_Red"), NodePath("../Gradients_Red2"), NodePath("../Gradients_Red3"), NodePath("../Gradients_Red4"), NodePath("../Gradients_Green"), NodePath("../Gradients_Green2"), NodePath("../Gradients_Green3"), NodePath("../Gradients_Green4"), NodePath("../Gradients_Blue"), NodePath("../Gradients_Blue2"), NodePath("../Gradients_Blue3"), NodePath("../Gradients_Blue4"), NodePath("../Gradients_Custom")])
+max_value_label = NodePath("../Label3D4")
+colors = Array[Color]([Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 0.0392157, 0.0392157, 1), Color(1, 0.501961, 0.0392157, 1), Color(1, 0.0392157, 0.501961, 1), Color(0, 1, 0, 1), Color(0.0392157, 1, 0.0392157, 1), Color(0.501961, 1, 0.0392157, 1), Color(0.0392157, 1, 0.501961, 1), Color(0, 0, 1, 1), Color(0.0392157, 0.0392157, 1, 1), Color(0.501961, 0.0392157, 1, 1), Color(0.0392157, 0.501961, 1, 1)])
+custom_bar = NodePath("../Gradients_Custom")
+
+[node name="StepsControls" type="HBoxContainer" parent="Controls"]
+offset_left = 937.0
+offset_top = 85.0
+offset_right = 1137.0
+offset_bottom = 125.0
+
+[node name="Label" type="Label" parent="Controls/StepsControls"]
+layout_mode = 2
+text = "Max Value"
+
+[node name="Steps" type="HSlider" parent="Controls/StepsControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 1.0
+max_value = 20.0
+value = 6.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls"]
+offset_left = 14.0
+offset_top = 604.0
+offset_right = 420.0
+offset_bottom = 644.0
+theme_override_constants/separation = 10
+
+[node name="Exponential" type="CheckButton" parent="Controls/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Uses a power 2 exponential function. This allows for easier viewing of the darker range of values."
+text = "Exponential Scale"
+
+[node name="Label" type="Label" parent="Controls/HBoxContainer"]
+layout_mode = 2
+text = "Custom Color"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Controls/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+color = Color(0.501961, 0.501961, 0.501961, 1)
+
+[connection signal="value_changed" from="Controls/StepsControls/Steps" to="Controls" method="_on_steps_value_changed"]
+[connection signal="toggled" from="Controls/HBoxContainer/Exponential" to="Controls" method="_on_exponential_toggled"]
+[connection signal="color_changed" from="Controls/HBoxContainer/ColorPickerButton" to="Controls" method="_on_color_picker_button_color_changed"]
+
+[editable path="Gradients_White"]
+[editable path="Gradients_Red"]
+[editable path="Gradients_Red2"]
+[editable path="Gradients_Red3"]
+[editable path="Gradients_Red4"]
+[editable path="Gradients_Green"]
+[editable path="Gradients_Green2"]
+[editable path="Gradients_Green3"]
+[editable path="Gradients_Green4"]
+[editable path="Gradients_Blue"]
+[editable path="Gradients_Blue2"]
+[editable path="Gradients_Blue3"]
+[editable path="Gradients_Blue4"]
+[editable path="Gradients_Custom"]
