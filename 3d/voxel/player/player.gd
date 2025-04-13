@@ -37,8 +37,10 @@ func _process(_delta: float) -> void:
 	var ray_normal := raycast.get_collision_normal()
 	if Input.is_action_just_pressed(&"pick_block"):
 		# Block picking.
-		var block_global_position := Vector3i((ray_position - ray_normal / 2).floor())
-		_selected_block = voxel_world.get_block_global_position(block_global_position)
+		var block_global_position: Vector3 = (ray_position - ray_normal / 2).floor()
+		var block_sub_position: Vector3 = block_global_position.posmod(16)
+		var chunk_position: Vector3 = (block_global_position - block_sub_position) / 16
+		_selected_block = voxel_world.get_block_in_chunk(chunk_position, block_sub_position)
 	else:
 		# Block prev/next keys.
 		if Input.is_action_just_pressed(&"prev_block"):
