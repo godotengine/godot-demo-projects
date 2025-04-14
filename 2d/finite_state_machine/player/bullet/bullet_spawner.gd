@@ -13,6 +13,6 @@ func fire() -> void:
 
 	$CooldownTimer.start()
 	var new_bullet := bullet.instantiate()
-	add_child(new_bullet)
 	new_bullet.position = global_position
 	new_bullet.direction = owner.look_direction
+	add_child(new_bullet)
