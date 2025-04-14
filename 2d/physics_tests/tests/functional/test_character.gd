@@ -1,5 +1,5 @@
-class_name Test
-extends TestCharacter
+class_name TestCharacter
+extends Test
 
 enum BodyType {
 	CHARACTER_BODY,
