@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cbvuesb1ptdh4" path="res://player/cubio.tscn" id="2"]
 [ext_resource type="ArrayMesh" uid="uid://h65pkfq5sgmy" path="res://models/cube.mesh" id="3"]
 [ext_resource type="PackedScene" uid="uid://bonauusmt0ss" path="res://models/mushroom.glb" id="5"]
-[ext_resource type="Script" path="res://level.gd" id="6"]
+[ext_resource type="Script" uid="uid://cwpf43cjk6o52" path="res://level.gd" id="6"]
 [ext_resource type="Texture2D" uid="uid://5wiey7d4yffc" path="res://models/white_wood.png" id="6_slp5m"]
 [ext_resource type="PackedScene" uid="uid://bftavngs5kq7e" path="res://cube_rigidbody.tscn" id="7"]
 
@@ -58,7 +58,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_64cvx"]
 _data = {
-"updown1": SubResource("2")
+&"updown1": SubResource("2")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0eb0o"]
@@ -86,8 +86,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4vwp8"]
 _data = {
-"side": SubResource("3"),
-"updown1": SubResource("2")
+&"side": SubResource("3"),
+&"updown1": SubResource("2")
 }
 
 [sub_resource type="BoxShape3D" id="4"]
@@ -134,7 +134,7 @@ shape = SubResource("BoxShape3D_w6bmu")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Elevator1"]
 callback_mode_process = 0
 libraries = {
-"": SubResource("AnimationLibrary_64cvx")
+&"": SubResource("AnimationLibrary_64cvx")
 }
 autoplay = "updown1"
 
@@ -151,7 +151,7 @@ shape = SubResource("BoxShape3D_w6bmu")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Elevator2"]
 callback_mode_process = 0
 libraries = {
-"": SubResource("AnimationLibrary_4vwp8")
+&"": SubResource("AnimationLibrary_4vwp8")
 }
 autoplay = "side"
 

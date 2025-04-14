@@ -12,7 +12,7 @@ const DECELERATION = 4
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed(&"exit"):
 		get_tree().quit()
-	if Input.is_action_just_pressed(&"reset_position") or global_position.y < - 6:
+	if Input.is_action_just_pressed(&"reset_position") or global_position.y < -6.0:
 		# Pressed the reset key or fell off the ground.
 		position = start_position
 		velocity = Vector3.ZERO
