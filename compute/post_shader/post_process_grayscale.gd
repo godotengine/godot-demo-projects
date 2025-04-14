@@ -1,6 +1,6 @@
 @tool
-extends CompositorEffect
 class_name PostProcessGrayScale
+extends CompositorEffect
 
 var rd: RenderingDevice
 var shader: RID

@@ -1,6 +1,5 @@
-extends RigidBody3D
 class_name PickupAbleBody3D
-
+extends RigidBody3D
 
 var highlight_material : Material = preload("res://shaders/highlight_material.tres")
 var picked_up_by : Area3D
@@ -8,6 +7,7 @@ var closest_areas : Array
 
 var original_parent : Node3D
 var tween : Tween
+
 
 # Called when this object becomes the closest body in an area
 func add_is_closest(area : Area3D) -> void:

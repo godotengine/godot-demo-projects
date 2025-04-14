@@ -1,6 +1,6 @@
 @tool
-extends CompositorEffect
 class_name PostProcessShader
+extends CompositorEffect
 
 const template_shader := """#version 450
 
