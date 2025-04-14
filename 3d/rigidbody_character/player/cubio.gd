@@ -4,10 +4,10 @@ extends RigidBody3D
 @onready var camera: Camera3D = $Target/Camera3D
 @onready var start_position := position
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed(&"exit"):
 		get_tree().quit()
-	if Input.is_action_just_pressed(&"reset_position") or global_position.y < - 6:
+	if Input.is_action_just_pressed(&"reset_position") or global_position.y < -6.0:
 		# Pressed the reset key or fell off the ground.
 		position = start_position
 		linear_velocity = Vector3.ZERO
@@ -23,11 +23,11 @@ func _physics_process(_delta: float) -> void:
 	dir = cam_basis * dir
 
 	# Air movement.
-	apply_central_impulse(dir.normalized() * 0.04)
+	apply_central_impulse(dir.normalized() * 5.0 * delta)
 
 	if on_ground():
 		# Ground movement (higher acceleration).
-		apply_central_impulse(dir.normalized() * 0.08)
+		apply_central_impulse(dir.normalized() * 10.0 * delta)
 
 		# Jumping code.
 		# It's acceptable to set `linear_velocity` here as it's only set once, rather than continuously.
