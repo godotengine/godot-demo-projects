@@ -1,0 +1,43 @@
+[gd_resource type="VisualShader" load_steps=4 format=3 uid="uid://cjwd3qsvlhwfm"]
+
+[ext_resource type="Texture2D" uid="uid://cj6jj2qp2y3j0" path="res://textures/icon.svg" id="1_h30dd"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_2248x"]
+expanded_output_ports = [0]
+texture = ExtResource("1_h30dd")
+
+[sub_resource type="VisualShaderNodeVectorFunc" id="VisualShaderNodeVectorFunc_h30dd"]
+default_input_values = [0, Quaternion(0, 0, 0, 0)]
+op_type = 2
+function = 32
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D tex_frg_2;
+
+
+
+void fragment() {
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, UV);
+	float n_out2p4 = n_out2p0.a;
+
+
+// VectorFunc:7
+	vec4 n_out7p0 = vec4(1.0) - n_out2p0;
+
+
+// Output:0
+	ALBEDO = vec3(n_out7p0.xyz);
+	ALPHA = n_out2p4;
+
+
+}
+"
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_2248x")
+nodes/fragment/2/position = Vector2(-240, 380)
+nodes/fragment/7/node = SubResource("VisualShaderNodeVectorFunc_h30dd")
+nodes/fragment/7/position = Vector2(80, 280)
+nodes/fragment/connections = PackedInt32Array(2, 0, 7, 0, 7, 0, 0, 0, 2, 4, 0, 1)

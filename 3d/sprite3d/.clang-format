@@ -1,0 +1,48 @@
+# Base style to inherit from. LLVM is minimal and less opinionated.
+BasedOnStyle: LLVM
+
+# Use tabs for indentation (Godot Shader Style requires tabs)
+UseTab: Always
+IndentWidth: 4        # Indentation level (used for nested blocks)
+TabWidth: 4           # Visual tab width (how wide a tab appears)
+
+# Always break before opening braces, even for functions and control blocks
+# BreakBeforeBraces: Allman
+
+# Do not force breaking after return type
+AlwaysBreakAfterDefinitionReturnType: None
+
+# Always break template declarations for clarity (in case shaders embed types in comments)
+AlwaysBreakTemplateDeclarations: true
+
+# Function parameters and arguments should not be packed into one line
+BinPackParameters: false
+BinPackArguments: false
+
+# Reduce visual noise — keep a maximum of one empty line
+MaxEmptyLinesToKeep: 1
+
+# Space before parentheses in control statements only (e.g., if, while)
+SpaceBeforeParens: ControlStatements
+
+# No spaces in empty parentheses (e.g., `func()`, not `func( )`)
+SpaceInEmptyParentheses: false
+
+# Add a space before `=`, `+=`, etc.
+SpaceBeforeAssignmentOperators: true
+
+# Maximum line length before wrapping — Godot recommends readable lines
+# ColumnLimit: 100
+
+# Do not align operands like `+` or `&&` — avoid forced column alignment
+AlignOperands: false
+
+# Do not align trailing comments
+AlignTrailingComments: false
+
+# Do not align consecutive assignments (e.g., don't force `=` columns to align)
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+
+# Align escaped newlines (e.g., backslash `\` at the end of lines) to the left
+AlignEscapedNewlinesLeft: true

@@ -1,0 +1,738 @@
+[gd_scene load_steps=36 format=3 uid="uid://s0shmndlqhe2"]
+
+[ext_resource type="Script" uid="uid://v0e1avxpe8n7" path="res://3d_labels_and_texts.gd" id="1_omy0v"]
+[ext_resource type="Texture2D" uid="uid://chjqieyps5n5r" path="res://textures/checker.png" id="2_013ql"]
+[ext_resource type="Texture2D" uid="uid://cj6jj2qp2y3j0" path="res://textures/icon.svg" id="3_lk0vd"]
+[ext_resource type="Script" uid="uid://bmij60kwbx48u" path="res://Scripts/Sprite_Rotate.gd" id="4_osfvf"]
+[ext_resource type="Shader" uid="uid://cjwd3qsvlhwfm" path="res://shaders/negative.tres" id="5_013ql"]
+[ext_resource type="Texture2D" uid="uid://5l83u7a51pqb" path="res://textures/Small-8-Direction-Characters_by_AxulArt.png" id="6_8ak7l"]
+[ext_resource type="PackedScene" uid="uid://b2inrhxoc37g7" path="res://Player/player.tscn" id="7_unyd2"]
+[ext_resource type="FontFile" uid="uid://cb35jtyk02goi" path="res://fonts/fontello-godot.woff2" id="9_73vxk"]
+[ext_resource type="Shader" uid="uid://bdi1lue6e88s" path="res://curvature.gdshader" id="11_dwxxi"]
+
+[sub_resource type="ProceduralSkyMaterial" id="9"]
+
+[sub_resource type="Sky" id="10"]
+sky_material = SubResource("9")
+
+[sub_resource type="Environment" id="11"]
+background_mode = 2
+sky = SubResource("10")
+tonemap_mode = 4
+
+[sub_resource type="Animation" id="Animation_qdnt6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Testers/TextureModesInSprite3D/AnimationOrigin:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="12"]
+resource_name = "move"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Testers/TextureModesInSprite3D/AnimationOrigin:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(2, 0, 0), Vector3(-13, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ecfcr"]
+_data = {
+&"RESET": SubResource("Animation_qdnt6"),
+&"move": SubResource("12")
+}
+
+[sub_resource type="StandardMaterial3D" id="13"]
+diffuse_mode = 1
+albedo_texture = ExtResource("2_013ql")
+uv1_scale = Vector3(32, 32, 1)
+texture_filter = 5
+
+[sub_resource type="PlaneMesh" id="14"]
+material = SubResource("13")
+size = Vector2(128, 128)
+
+[sub_resource type="BoxMesh" id="BoxMesh_770hc"]
+size = Vector3(0.125, 1.5, 2.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xpdls"]
+albedo_color = Color(0.52549, 1, 1, 1)
+metallic = 1.0
+metallic_specular = 1.0
+roughness = 0.29
+
+[sub_resource type="GDScript" id="GDScript_ddk2o"]
+script/source = "extends Node3D
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lk0vd"]
+render_priority = 0
+shader = ExtResource("5_013ql")
+
+[sub_resource type="BoxMesh" id="BoxMesh_juuw1"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wsjfy"]
+
+[sub_resource type="TextMesh" id="TextMesh_xlu0q"]
+text = ""
+font = ExtResource("9_73vxk")
+font_size = 64
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ri5nw"]
+albedo_color = Color(0.356863, 0.301961, 1, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_u3elb"]
+text = ""
+font = ExtResource("9_73vxk")
+font_size = 64
+
+[sub_resource type="TextMesh" id="TextMesh_u00sq"]
+text = "TextMesh (depth = 0.0)"
+font_size = 32
+depth = 0.0
+
+[sub_resource type="TextMesh" id="TextMesh_cf5wd"]
+text = "TextMesh"
+font_size = 32
+
+[sub_resource type="TextMesh" id="TextMesh_0mhsg"]
+text = "TextMesh (low detail)"
+font_size = 32
+curve_step = 10.0
+
+[sub_resource type="TextMesh" id="TextMesh_ddkjo"]
+text = "Additive Blending"
+font_size = 32
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iyglb"]
+blend_mode = 1
+albedo_color = Color(0.776471, 1, 0.45098, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_idsby"]
+text = "Metallic"
+font_size = 32
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mdg0l"]
+albedo_color = Color(1, 0.345098, 0.760784, 1)
+metallic = 1.0
+roughness = 0.0
+
+[sub_resource type="TextMesh" id="TextMesh_0sjgn"]
+text = "Curvature Shader"
+font_size = 32
+depth = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iuh2c"]
+render_priority = 0
+shader = ExtResource("11_dwxxi")
+
+[node name="Sprite_3D" type="WorldEnvironment"]
+environment = SubResource("11")
+script = ExtResource("1_omy0v")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ecfcr")
+}
+autoplay = "move"
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00027895, -0.00270161, -22)
+layers = 2
+mesh = SubResource("14")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.677773, -0.484673, 0.552915, -0.0842485, 0.695844, 0.713235, -0.730428, -0.529994, 0.430791, 4.57578, 4.43873, 3.54442)
+shadow_enabled = true
+shadow_bias = 0.04
+shadow_blur = 1.5
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 24.0
+
+[node name="CameraHolder" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.6, 0.9, 0)
+
+[node name="RotationX" type="Node3D" parent="CameraHolder"]
+
+[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX"]
+fov = 70.0
+
+[node name="Testers" type="Node3D" parent="."]
+
+[node name="Instruction" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10018, 5.50285)
+
+[node name="Description" type="Label3D" parent="Testers/Instruction"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.670537, 1.10356)
+texture_filter = 5
+modulate = Color(0.77023, 0.694904, 1, 1)
+text = "Hola!
+
+This is a demo shows different  usage of Sprite 3D. Enjoy!"
+font_size = 30
+outline_size = 6
+horizontal_alignment = 0
+autowrap_mode = 2
+width = 460.0
+
+[node name="Wall" type="MeshInstance3D" parent="Testers/Instruction"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0654575, 0.5, 0)
+mesh = SubResource("BoxMesh_770hc")
+surface_material_override/0 = SubResource("StandardMaterial3D_xpdls")
+
+[node name="BasicSprite3D" type="Node3D" parent="Testers"]
+transform = Transform3D(1.00002, 0, 0, 0, 1.00002, 0, 0, 0, 1.00002, 0, 0, 1.67059)
+script = SubResource("GDScript_ddk2o")
+
+[node name="Description" type="Label3D" parent="Testers/BasicSprite3D"]
+transform = Transform3D(-5.80924e-08, 0, 1.329, 0, 1.329, 0, -1.329, 0, -5.80924e-08, 1.208, 0.282, 0)
+cast_shadow = 1
+billboard = 1
+shaded = true
+alpha_cut = 1
+texture_filter = 5
+modulate = Color(0.843137, 0.623529, 1, 1)
+outline_modulate = Color(0, 0, 0, 0.501961)
+text = "Sprite 3D"
+font_size = 44
+outline_size = 5
+line_spacing = -6.0
+
+[node name="Sprite3D_basic" type="Sprite3D" parent="Testers/BasicSprite3D"]
+transform = Transform3D(-4.37263e-08, 0, 1.00034, 0, 1.00034, 0, -1.00034, 0, -4.37263e-08, 0, 0.746, 0)
+shaded = true
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("3_lk0vd")
+script = ExtResource("4_osfvf")
+
+[node name="TwoSidedSprite3D" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.02559)
+
+[node name="Description" type="Label3D" parent="Testers/TwoSidedSprite3D"]
+transform = Transform3D(-5.80924e-08, 0, 1.329, 0, 1.329, 0, -1.329, 0, -5.80924e-08, 1.208, 0.282, 0)
+cast_shadow = 1
+billboard = 1
+shaded = true
+alpha_cut = 1
+texture_filter = 5
+modulate = Color(0.843137, 0.623529, 1, 1)
+outline_modulate = Color(0, 0, 0, 0.501961)
+text = "2-sided Sprite 3D"
+font_size = 44
+outline_size = 5
+line_spacing = -6.0
+
+[node name="Sprite3D_back" type="Sprite3D" parent="Testers/TwoSidedSprite3D"]
+transform = Transform3D(1.1933e-08, 0, -1.00068, 0, 1.00068, 0, 1.00068, 0, 1.1933e-08, 0, 0.746, 0)
+material_override = SubResource("ShaderMaterial_lk0vd")
+double_sided = false
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("3_lk0vd")
+script = ExtResource("4_osfvf")
+
+[node name="Sprite3D_front" type="Sprite3D" parent="Testers/TwoSidedSprite3D"]
+transform = Transform3D(-4.37263e-08, 0, 1.00034, 0, 1.00034, 0, -1.00034, 0, -4.37263e-08, -0.0109167, 0.746, 0)
+double_sided = false
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("3_lk0vd")
+script = ExtResource("4_osfvf")
+
+[node name="AlphaCutInSprite3D" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.45726)
+
+[node name="Description" type="Label3D" parent="Testers/AlphaCutInSprite3D"]
+transform = Transform3D(-5.80924e-08, 0, 1.329, 0, 1.329, 0, -1.329, 0, -5.80924e-08, 1.208, 0.282, 0)
+cast_shadow = 1
+billboard = 1
+shaded = true
+alpha_cut = 1
+texture_filter = 5
+modulate = Color(0.843137, 0.623529, 1, 1)
+outline_modulate = Color(0, 0, 0, 0.501961)
+text = "Different Alpha Cuts
+"
+font_size = 44
+outline_size = 5
+line_spacing = -6.0
+
+[node name="Enable" type="Label3D" parent="Testers/AlphaCutInSprite3D"]
+transform = Transform3D(-4.49386e-08, 0, 1.02807, 0, 1.02807, 0, -1.02807, 0, -4.49386e-08, 0.004, 3.76124, -0.882)
+cast_shadow = 1
+shaded = true
+alpha_cut = 1
+texture_filter = 5
+modulate = Color(0.952826, 0.599734, 0.809965, 1)
+outline_modulate = Color(0, 0, 0, 0.501961)
+text = "Opaque Pre-pass: 
+cast & receive 
+shadows
+"
+font_size = 50
+outline_size = 5
+horizontal_alignment = 0
+line_spacing = -6.0
+
+[node name="Sprite3D_a_enable" type="Sprite3D" parent="Testers/AlphaCutInSprite3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 3.60818, 0.234)
+transparency = 0.32
+shaded = true
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("3_lk0vd")
+script = ExtResource("4_osfvf")
+
+[node name="Discard" type="Label3D" parent="Testers/AlphaCutInSprite3D"]
+transform = Transform3D(-4.49386e-08, 0, 1.02807, 0, 1.02807, 0, -1.02807, 0, -4.49386e-08, 0.004, 2.3416, -0.882)
+cast_shadow = 1
+shaded = true
+alpha_cut = 1
+texture_filter = 5
+modulate = Color(0.687978, 0.702505, 0.975803, 1)
+outline_modulate = Color(0, 0, 0, 0.501961)
+text = "Discard: 
+above feature & 
+no partial transparency
+"
+font_size = 50
+outline_size = 5
+horizontal_alignment = 0
+line_spacing = -6.0
+
+[node name="Sprite3D_a_discard" type="Sprite3D" parent="Testers/AlphaCutInSprite3D"]
+transform = Transform3D(-4.37068e-08, 0, 0.999894, 0, 0.999894, 0, -0.999894, 0, -4.37068e-08, 0, 2.17861, 0.234)
+transparency = 0.32
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("3_lk0vd")
+script = ExtResource("4_osfvf")
+
+[node name="Disable" type="Label3D" parent="Testers/AlphaCutInSprite3D"]
+transform = Transform3D(-4.49386e-08, 0, 1.02807, 0, 1.02807, 0, -1.02807, 0, -4.49386e-08, 0.004, 1.05187, -0.882)
+cast_shadow = 1
+shaded = true
+alpha_cut = 1
+texture_filter = 5
+modulate = Color(0.447207, 0.777666, 0.940344, 1)
+outline_modulate = Color(0, 0, 0, 0.501961)
+text = "Disable: 
+only receive shadows
+"
+font_size = 50
+outline_size = 5
+horizontal_alignment = 0
+line_spacing = -6.0
+
+[node name="Sprite3D_a_disable" type="Sprite3D" parent="Testers/AlphaCutInSprite3D"]
+transform = Transform3D(-4.37068e-08, 0, 0.999894, 0, 0.999894, 0, -0.999894, 0, -4.37068e-08, 0, 0.75163, 0.234)
+shaded = true
+texture_filter = 0
+texture = ExtResource("3_lk0vd")
+script = ExtResource("4_osfvf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/AlphaCutInSprite3D"]
+transform = Transform3D(1, 0, 0, 0, 2.78523, 0, 0, 0, 1.24119, 1, 3.52522, 2.0058)
+transparency = 0.58
+mesh = SubResource("BoxMesh_juuw1")
+
+[node name="TextureModesInSprite3D" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.3468)
+
+[node name="Description" type="Label3D" parent="Testers/TextureModesInSprite3D"]
+transform = Transform3D(-5.80924e-08, 0, 1.329, 0, 1.329, 0, -1.329, 0, -5.80924e-08, 1.208, 0.282, 0)
+cast_shadow = 1
+billboard = 1
+shaded = true
+alpha_cut = 1
+texture_filter = 5
+modulate = Color(0.843137, 0.623529, 1, 1)
+outline_modulate = Color(0, 0, 0, 0.501961)
+text = "Different Texture Mode
+"
+font_size = 44
+outline_size = 5
+line_spacing = -6.0
+
+[node name="nearest" type="Label3D" parent="Testers/TextureModesInSprite3D"]
+transform = Transform3D(-4.49386e-08, 0, 1.02807, 0, 1.02807, 0, -1.02807, 0, -4.49386e-08, 0.004, 4.20693, 1.67099)
+cast_shadow = 1
+shaded = true
+alpha_cut = 1
+texture_filter = 5
+modulate = Color(0.952826, 0.599734, 0.809965, 1)
+outline_modulate = Color(0, 0, 0, 0.501961)
+text = "Nearest
+"
+font_size = 50
+outline_size = 5
+horizontal_alignment = 0
+line_spacing = -6.0
+
+[node name="Sprite3D_nearest" type="Sprite3D" parent="Testers/TextureModesInSprite3D"]
+transform = Transform3D(-3.03794e-07, 0, 6.95, 0, 6.95, 0, -6.95, 0, -3.03794e-07, 0, 3.37898, 1.07946)
+shaded = true
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("6_8ak7l")
+
+[node name="nearestMipmap" type="Label3D" parent="Testers/TextureModesInSprite3D"]
+transform = Transform3D(-4.49386e-08, 0, 1.02807, 0, 1.02807, 0, -1.02807, 0, -4.49386e-08, 0.004, 2.04682, 2.09971)
+cast_shadow = 1
+shaded = true
+alpha_cut = 1
+texture_filter = 5
+modulate = Color(0.952826, 0.599734, 0.809965, 1)
+outline_modulate = Color(0, 0, 0, 0.501961)
+text = "Nearest Mipmap
+
+"
+font_size = 50
+outline_size = 5
+horizontal_alignment = 0
+line_spacing = -6.0
+
+[node name="Sprite3D_nearestMipmap" type="Sprite3D" parent="Testers/TextureModesInSprite3D"]
+transform = Transform3D(-3.03794e-07, 0, 6.95, 0, 6.95, 0, -6.95, 0, -3.03794e-07, 2.13163e-14, 1.31534, 1.07946)
+shaded = true
+alpha_cut = 2
+texture_filter = 2
+texture = ExtResource("6_8ak7l")
+
+[node name="linear" type="Label3D" parent="Testers/TextureModesInSprite3D"]
+transform = Transform3D(-4.49386e-08, 0, 1.02807, 0, 1.02807, 0, -1.02807, 0, -4.49386e-08, 0.004, 4.20068, -0.669133)
+cast_shadow = 1
+shaded = true
+alpha_cut = 1
+texture_filter = 5
+modulate = Color(0.952826, 0.599734, 0.809965, 1)
+outline_modulate = Color(0, 0, 0, 0.501961)
+text = "Linear
+"
+font_size = 50
+outline_size = 5
+horizontal_alignment = 0
+line_spacing = -6.0
+
+[node name="Sprite3D_linear" type="Sprite3D" parent="Testers/TextureModesInSprite3D"]
+transform = Transform3D(-3.03794e-07, 0, 6.95, 0, 6.95, 0, -6.95, 0, -3.03794e-07, 0, 3.37898, -1.13312)
+shaded = true
+alpha_cut = 2
+texture_filter = 1
+texture = ExtResource("6_8ak7l")
+
+[node name="linearMipmap" type="Label3D" parent="Testers/TextureModesInSprite3D"]
+transform = Transform3D(-4.49386e-08, 0, 1.02807, 0, 1.02807, 0, -1.02807, 0, -4.49386e-08, 0.004, 2.1937, -0.200834)
+cast_shadow = 1
+shaded = true
+alpha_cut = 1
+texture_filter = 5
+modulate = Color(0.952826, 0.599734, 0.809965, 1)
+outline_modulate = Color(0, 0, 0, 0.501961)
+text = "Linear Mipmap
+"
+font_size = 50
+outline_size = 5
+horizontal_alignment = 0
+line_spacing = -6.0
+
+[node name="Sprite3D_linearMipmap" type="Sprite3D" parent="Testers/TextureModesInSprite3D"]
+transform = Transform3D(-3.03794e-07, 0, 6.95, 0, 6.95, 0, -6.95, 0, -3.03794e-07, 0, 1.31534, -1.13312)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("6_8ak7l")
+
+[node name="AnimationOrigin" type="Node3D" parent="Testers/TextureModesInSprite3D"]
+
+[node name="Sprite3DBillboardModes" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20.5569)
+
+[node name="Description" type="Label3D" parent="Testers/Sprite3DBillboardModes"]
+transform = Transform3D(-5.80924e-08, 0, 1.329, 0, 1.329, 0, -1.329, 0, -5.80924e-08, 1.208, 0.282, 0)
+cast_shadow = 1
+billboard = 1
+shaded = true
+alpha_cut = 1
+texture_filter = 5
+modulate = Color(0.843137, 0.623529, 1, 1)
+outline_modulate = Color(0, 0, 0, 0.501961)
+text = "Different Billboard Modes
+"
+font_size = 44
+outline_size = 5
+line_spacing = -6.0
+
+[node name="Disabled" type="Label3D" parent="Testers/Sprite3DBillboardModes"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.673022, 1.15512)
+texture_filter = 5
+modulate = Color(0.996078, 1, 0.333333, 1)
+text = "Disabled"
+font_size = 50
+outline_size = 3
+
+[node name="Sprite3D_Bill_Disable" type="Sprite3D" parent="Testers/Sprite3DBillboardModes"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.6874, 1.15132)
+shaded = true
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("3_lk0vd")
+script = ExtResource("4_osfvf")
+
+[node name="Enabled" type="Label3D" parent="Testers/Sprite3DBillboardModes"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.642643, -1.08877)
+billboard = 1
+texture_filter = 5
+modulate = Color(0.150089, 1.54018e-06, 0.933678, 1)
+text = "Enabled"
+font_size = 50
+outline_size = 3
+
+[node name="Sprite3D_Bill_Enable" type="Sprite3D" parent="Testers/Sprite3DBillboardModes"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.67836, -1.07819)
+billboard = 1
+shaded = true
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("3_lk0vd")
+script = ExtResource("4_osfvf")
+
+[node name="YBillboard" type="Label3D" parent="Testers/Sprite3DBillboardModes"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2.88263, -0.00695992)
+billboard = 2
+texture_filter = 5
+modulate = Color(1, 0.313726, 0.454902, 1)
+text = "Y-Billboard"
+font_size = 50
+outline_size = 3
+
+[node name="Sprite3D_Bill_YBillboard" type="Sprite3D" parent="Testers/Sprite3DBillboardModes"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 3.87303, -0.0113411)
+billboard = 2
+shaded = true
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("3_lk0vd")
+script = ExtResource("4_osfvf")
+
+[node name="Label3DDistanceFade" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24.5569)
+
+[node name="NoDistanceFade" type="Label3D" parent="Testers/Label3DDistanceFade"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.3, 1)
+texture_filter = 5
+modulate = Color(1, 0.741176, 0.831373, 1)
+text = "No
+Distance Fade"
+font_size = 40
+outline_size = 4
+
+[node name="DistanceFade" type="Label3D" parent="Testers/Label3DDistanceFade"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.3, -1)
+visibility_range_end = 5.0
+visibility_range_end_margin = 2.5
+visibility_range_fade_mode = 1
+texture_filter = 5
+modulate = Color(0.32549, 1, 0.858824, 1)
+text = "With
+Distance Fade"
+font_size = 40
+outline_size = 4
+
+[node name="NoDistanceFadeBillboard" type="Label3D" parent="Testers/Label3DDistanceFade"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.1, 1)
+billboard = 1
+texture_filter = 5
+modulate = Color(1, 0.741176, 0.831373, 1)
+text = "No
+Distance Fade
+(Billboard)"
+font_size = 40
+outline_size = 4
+
+[node name="DistanceFadeBillboard" type="Label3D" parent="Testers/Label3DDistanceFade"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.1, -1)
+visibility_range_end = 5.0
+visibility_range_end_margin = 2.5
+visibility_range_fade_mode = 1
+billboard = 1
+texture_filter = 5
+modulate = Color(0.32549, 1, 0.858824, 1)
+text = "With
+Distance Fade
+(Billboard)"
+font_size = 40
+outline_size = 4
+
+[node name="DistanceFadeFixedSize" type="Label3D" parent="Testers/Label3DDistanceFade"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.000778437, 0.50287, -1.90735e-05)
+visibility_range_end = 5.0
+visibility_range_end_margin = 2.5
+visibility_range_fade_mode = 1
+pixel_size = 0.001
+billboard = 1
+fixed_size = true
+texture_filter = 5
+modulate = Color(0.760784, 0.690196, 1, 1)
+text = "With
+Distance Fade
+(Billboard + Fixed Size)"
+font_size = 40
+outline_size = 4
+
+[node name="Label3DDepthTest" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -28.5569)
+
+[node name="WithDepthTest" type="Label3D" parent="Testers/Label3DDepthTest"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, 1)
+texture_filter = 5
+modulate = Color(0.623529, 0.784314, 1, 1)
+text = "With Depth Test"
+font_size = 40
+outline_size = 4
+
+[node name="NoDepthTest" type="Label3D" parent="Testers/Label3DDepthTest"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, -1)
+no_depth_test = true
+texture_filter = 5
+modulate = Color(1, 0.607843, 0.290196, 1)
+text = "No Depth Test"
+font_size = 40
+outline_size = 4
+
+[node name="NoDepthTestXray" type="Label3D" parent="Testers/Label3DDepthTest"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, -1)
+no_depth_test = true
+texture_filter = 5
+modulate = Color(1, 0.607843, 0.290196, 0.25098)
+outline_modulate = Color(0, 0, 0, 0.25098)
+text = "No Depth Test
+(X-Ray with second Label3D)"
+outline_size = 4
+
+[node name="DepthTestXray" type="Label3D" parent="Testers/Label3DDepthTest"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, -1)
+texture_filter = 5
+modulate = Color(1, 0.607843, 0.290196, 1)
+text = "No Depth Test
+(X-Ray with second Label3D)"
+outline_size = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/Label3DDepthTest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0.5, 0)
+mesh = SubResource("SphereMesh_wsjfy")
+
+[node name="Label3DIcons" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32.5569)
+
+[node name="AnimatedSprite3D" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -40.5569)
+
+[node name="Player" parent="Testers/AnimatedSprite3D" instance=ExtResource("7_unyd2")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 3.75411, 0)
+
+[node name="IconAudio" type="MeshInstance3D" parent="Testers/AnimatedSprite3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.4, 0.5)
+mesh = SubResource("TextMesh_xlu0q")
+surface_material_override/0 = SubResource("StandardMaterial3D_ri5nw")
+
+[node name="IconSuccess" type="MeshInstance3D" parent="Testers/AnimatedSprite3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.4, -0.5)
+mesh = SubResource("TextMesh_u3elb")
+surface_material_override/0 = SubResource("StandardMaterial3D_ri5nw")
+
+[node name="NoDepth" type="MeshInstance3D" parent="Testers/AnimatedSprite3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.9, 0)
+mesh = SubResource("TextMesh_u00sq")
+surface_material_override/0 = SubResource("StandardMaterial3D_ri5nw")
+
+[node name="Text" type="MeshInstance3D" parent="Testers/AnimatedSprite3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, 0)
+mesh = SubResource("TextMesh_cf5wd")
+surface_material_override/0 = SubResource("StandardMaterial3D_ri5nw")
+
+[node name="LowDetail" type="MeshInstance3D" parent="Testers/AnimatedSprite3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.1, 0)
+mesh = SubResource("TextMesh_0mhsg")
+surface_material_override/0 = SubResource("StandardMaterial3D_ri5nw")
+
+[node name="Sprite3DEffects" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -44.5569)
+
+[node name="AdditiveBlending" type="MeshInstance3D" parent="Testers/Sprite3DEffects"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.1, 0)
+mesh = SubResource("TextMesh_ddkjo")
+surface_material_override/0 = SubResource("StandardMaterial3D_iyglb")
+
+[node name="Metallic" type="MeshInstance3D" parent="Testers/Sprite3DEffects"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, 0)
+mesh = SubResource("TextMesh_idsby")
+surface_material_override/0 = SubResource("StandardMaterial3D_mdg0l")
+
+[node name="CurvatureShader" type="MeshInstance3D" parent="Testers/Sprite3DEffects"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.9, 0)
+mesh = SubResource("TextMesh_0sjgn")
+surface_material_override/0 = SubResource("ShaderMaterial_iuh2c")
+
+[node name="TestName" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -58.0
+offset_right = 192.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="Previous" type="Button" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -55.0
+offset_right = 135.0
+offset_bottom = -24.0
+grow_vertical = 0
+text = "«  Previous"
+
+[node name="Next" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -55.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Next  »"
+
+[connection signal="pressed" from="Previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
