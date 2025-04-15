@@ -20,6 +20,7 @@ var _selected_block := 6
 @onready var selected_block_texture: TextureRect = $SelectedBlock
 @onready var voxel_world: Node = $"../VoxelWorld"
 @onready var crosshair: CenterContainer = $"../PauseMenu/Crosshair"
+@onready var aim_preview: MeshInstance3D = $AimPreview
 
 
 func _ready() -> void:
@@ -54,6 +55,9 @@ func _process(_delta: float) -> void:
 
 	# Block breaking/placing.
 	if crosshair.visible and raycast.is_colliding():
+		aim_preview.visible = true
+		var ray_current_block_position := Vector3i((ray_position - ray_normal / 2).floor())
+		aim_preview.global_position = Vector3(ray_current_block_position) + Vector3(0.5, 0.5, 0.5)
 		var breaking := Input.is_action_just_pressed(&"break")
 		var placing := Input.is_action_just_pressed(&"place")
 		# Either both buttons were pressed or neither are, so stop.
@@ -61,11 +65,14 @@ func _process(_delta: float) -> void:
 			return
 
 		if breaking:
-			var block_global_position := Vector3i((ray_position - ray_normal / 2).floor())
+			var block_global_position := ray_current_block_position
 			voxel_world.set_block_global_position(block_global_position, 0)
 		elif placing:
+			# Calculate the position of the block to be placed.
 			var block_global_position := Vector3i((ray_position + ray_normal / 2).floor())
 			voxel_world.set_block_global_position(block_global_position, _selected_block)
+	else:
+		aim_preview.visible = false
 
 
 func _physics_process(delta: float) -> void:
