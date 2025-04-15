@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvjlkpjvjxn0h"]
+[gd_scene load_steps=6 format=3 uid="uid://dvjlkpjvjxn0h"]
 
 [ext_resource type="Script" uid="uid://dbbfvbf6ronrp" path="res://MicRecord.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://c2re52petqrvx" path="res://Intro.ogg" id="2"]
 [ext_resource type="Shader" uid="uid://cl4x5tyii4r6q" path="res://MicRecord.gdshader" id="3_vkk4n"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_tfvr1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m4htd"]
 shader = ExtResource("3_vkk4n")
@@ -14,21 +16,24 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -278.0
-offset_top = -224.0
-offset_right = 296.0
-offset_bottom = 226.0
+offset_left = -320.0
+offset_top = -240.0
+offset_right = 254.0
+offset_bottom = 210.0
 grow_horizontal = 2
 grow_vertical = 2
-rotation = 0.00166517
 script = ExtResource("1")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioWav" type="AudioStreamPlayer" parent="."]
 autoplay = true
 
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+[node name="AudioMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2")
 volume_db = -6.0
+
+[node name="AudioGenerator" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamGenerator_tfvr1")
+bus = &"Generate"
 
 [node name="Status" type="Label" parent="."]
 layout_mode = 1
@@ -39,148 +44,107 @@ grow_horizontal = 2
 text = "Status: "
 horizontal_alignment = 1
 
+[node name="MicrophoneOn" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 22.0
+offset_right = 153.0
+offset_bottom = 53.0
+text = "Microphone On
+"
+
+[node name="MicToGenerator" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 155.0
+offset_top = 23.0
+offset_right = 314.0
+offset_bottom = 54.0003
+tooltip_text = "Warning: this will cause feedback
+unless you use headphones"
+text = "Mic to Output
+"
+
+[node name="InputMixRate" type="Label" parent="."]
+layout_mode = 0
+offset_left = 326.0
+offset_top = 28.0
+offset_right = 395.0
+offset_bottom = 51.0
+text = "Mix rate:"
+
+[node name="SampleCount" type="Label" parent="."]
+layout_mode = 0
+offset_left = 464.0
+offset_top = 30.0
+offset_right = 546.0
+offset_bottom = 53.0
+text = "N-samples"
+
 [node name="RecordButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 31.0566
-offset_top = 33.9483
-offset_right = 161.057
-offset_bottom = 73.9483
+offset_left = 21.0
+offset_top = 88.0
+offset_right = 151.0
+offset_bottom = 128.0
+toggle_mode = true
 text = "Record"
 
 [node name="PlayButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 209.06
-offset_top = 35.6519
-offset_right = 339.06
-offset_bottom = 75.6519
+offset_left = 169.0
+offset_top = 86.0
+offset_right = 299.0
+offset_bottom = 126.0
 disabled = true
 text = "Play"
 
 [node name="PlayMusic" type="Button" parent="."]
 layout_mode = 0
-offset_left = 30.0
-offset_top = 395.0
-offset_right = 160.0
-offset_bottom = 435.0
+offset_left = 319.0
+offset_top = 85.0
+offset_right = 449.0
+offset_bottom = 125.0
+toggle_mode = true
 text = "Play Music"
 
-[node name="FormatLabel" type="Label" parent="."]
+[node name="MicTexture" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_m4htd")
 layout_mode = 0
-offset_left = 41.3546
-offset_top = 212.931
-offset_right = 110.355
-offset_bottom = 238.931
-text = "Format:"
-
-[node name="FormatOptionButton" type="OptionButton" parent="."]
-layout_mode = 0
-offset_left = 153.348
-offset_top = 208.745
-offset_right = 382.348
-offset_bottom = 239.745
-selected = 1
-item_count = 3
-popup/item_0/text = "8-bit Uncompressed"
-popup/item_0/id = 0
-popup/item_1/text = "16-bit Uncompressed"
-popup/item_1/id = 1
-popup/item_2/text = "IMA ADPCM Compression"
-popup/item_2/id = 2
-
-[node name="MixRateLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 42.4112
-offset_top = 246.93
-offset_right = 111.411
-offset_bottom = 272.93
-text = "Mix rate:"
-
-[node name="MixRateOptionButton" type="OptionButton" parent="."]
-layout_mode = 0
-offset_left = 142.408
-offset_top = 244.763
-offset_right = 244.408
-offset_bottom = 275.763
-selected = 4
-item_count = 6
-popup/item_0/text = "11025 Hz"
-popup/item_0/id = 0
-popup/item_1/text = "16000 Hz"
-popup/item_1/id = 1
-popup/item_2/text = "22050 Hz"
-popup/item_2/id = 2
-popup/item_3/text = "32000 Hz"
-popup/item_3/id = 3
-popup/item_4/text = "44100 Hz"
-popup/item_4/id = 4
-popup/item_5/text = "48000 Hz"
-popup/item_5/id = 5
-
-[node name="StereoLabel" type="Label" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 39.4662
-offset_top = 279.935
-offset_right = 108.466
-offset_bottom = 305.935
-text = "Stereo:"
-
-[node name="StereoCheckButton" type="CheckButton" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 132.464
-offset_top = 278.78
-offset_right = 176.464
-offset_bottom = 309.78
-button_pressed = true
+offset_left = 20.0
+offset_top = 161.0
+offset_right = 548.0
+offset_bottom = 250.0
 
 [node name="SaveButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 29.5478
-offset_top = 328.951
-offset_right = 159.548
-offset_bottom = 368.951
+offset_left = 26.0
+offset_top = 295.0
+offset_right = 156.0
+offset_bottom = 335.0
 disabled = true
 text = "Save WAV To:"
 
 [node name="Filename" type="LineEdit" parent="SaveButton"]
 layout_mode = 0
-offset_left = 184.0
-offset_top = -0.306404
-offset_right = 511.0
-offset_bottom = 39.6936
+offset_left = 150.0
+offset_top = -3.00001
+offset_right = 477.0
+offset_bottom = 37.0
 text = "user://record.wav"
 caret_blink = true
 
 [node name="OpenUserFolderButton" type="Button" parent="."]
 layout_mode = 1
-offset_left = 208.634
-offset_top = 380.653
-offset_right = 371.634
-offset_bottom = 420.653
+offset_left = 28.0
+offset_top = 349.0
+offset_right = 191.0
+offset_bottom = 389.0
 text = "Open User Folder"
 
-[node name="MicTexture" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_m4htd")
-layout_mode = 0
-offset_left = 30.0
-offset_top = 90.0
-offset_right = 558.0
-offset_bottom = 179.0
-
-[node name="SampleCount" type="Label" parent="."]
-layout_mode = 0
-offset_left = 392.073
-offset_top = 43.3472
-offset_right = 474.073
-offset_bottom = 66.3472
-text = "N-samples"
-
-[connection signal="pressed" from="RecordButton" to="." method="_on_record_button_pressed"]
+[connection signal="toggled" from="MicrophoneOn" to="." method="_on_microphone_on_toggled"]
+[connection signal="toggled" from="MicToGenerator" to="." method="_on_mic_to_generator_toggled"]
+[connection signal="toggled" from="RecordButton" to="." method="_on_record_button_toggled"]
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="PlayMusic" to="." method="_on_play_music_pressed"]
-[connection signal="item_selected" from="FormatOptionButton" to="." method="_on_format_option_button_item_selected"]
-[connection signal="item_selected" from="MixRateOptionButton" to="." method="_on_mix_rate_option_button_item_selected"]
-[connection signal="toggled" from="StereoCheckButton" to="." method="_on_stereo_check_button_toggled"]
+[connection signal="toggled" from="PlayMusic" to="." method="_on_play_music_toggled"]
 [connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="OpenUserFolderButton" to="." method="_on_open_user_folder_button_pressed"]

@@ -1,19 +1,14 @@
-[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://tuxl6tvrr2dv"]
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://tuxl6tvrr2dv"]
 
-[sub_resource type="AudioEffectRecord" id="AudioEffectRecord_fo272"]
-resource_name = "Record"
-
-[sub_resource type="AudioEffectCapture" id="AudioEffectCapture_xywfp"]
-resource_name = "Capture"
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_j3pel"]
+resource_name = "Reverb"
 
 [resource]
-bus/1/name = &"Record"
+bus/1/name = &"Generate"
 bus/1/solo = false
-bus/1/mute = true
+bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = 0.0
 bus/1/send = &"Master"
-bus/1/effect/0/effect = SubResource("AudioEffectRecord_fo272")
-bus/1/effect/0/enabled = true
-bus/1/effect/1/effect = SubResource("AudioEffectCapture_xywfp")
-bus/1/effect/1/enabled = true
+bus/1/effect/0/effect = SubResource("AudioEffectReverb_j3pel")
+bus/1/effect/0/enabled = false
