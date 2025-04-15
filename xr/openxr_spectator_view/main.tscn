@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://cn6s3kxlkt6ml"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_2eojn"]
+[ext_resource type="PackedScene" uid="uid://ckuw0ps7vjw7e" path="res://world/world.tscn" id="2_j3t0x"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_b2416"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_go2t1"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_2eojn")
+maximum_refresh_rate = 120
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+cull_mask = 1048571
+
+[node name="PlaceholderHead" type="MeshInstance3D" parent="XROrigin3D/XRCamera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0335748, 0.0557129)
+layers = 4
+mesh = SubResource("SphereMesh_b2416")
+
+[node name="LeftHand" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+pose = &"hand_pose"
+
+[node name="PlaceholderHand" type="MeshInstance3D" parent="XROrigin3D/LeftHand"]
+mesh = SubResource("BoxMesh_go2t1")
+
+[node name="RightHand" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"right_hand"
+pose = &"hand_pose"
+
+[node name="PlaceholderHand" type="MeshInstance3D" parent="XROrigin3D/RightHand"]
+mesh = SubResource("BoxMesh_go2t1")
+skeleton = NodePath("../../LeftHand")
+
+[node name="CameraTracker" type="XRController3D" parent="XROrigin3D"]
+tracker = &"/user/vive_tracker_htcx/role/camera"
+pose = &"camera_pose"
+
+[node name="CameraRemoteTransform3D" type="RemoteTransform3D" parent="XROrigin3D/CameraTracker"]
+unique_name_in_owner = true
+
+[node name="World" parent="." instance=ExtResource("2_j3t0x")]
