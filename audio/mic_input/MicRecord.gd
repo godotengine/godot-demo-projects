@@ -59,7 +59,6 @@ func _on_record_button_toggled(toggled_on : bool) -> void:
 		recording_buffer = [ ]
 		$RecordButton.text = "Stop"
 		$Status.text = "Status: Recording..."
-		$AudioGenerator.get_stream_playback().clear_buffer()
 		
 	else:
 		$PlayButton.disabled = false
