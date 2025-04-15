@@ -59,7 +59,7 @@ func _on_record_button_toggled(toggled_on : bool) -> void:
 		recording_buffer = [ ]
 		$RecordButton.text = "Stop"
 		$Status.text = "Status: Recording..."
-		
+
 	else:
 		$PlayButton.disabled = false
 		$SaveButton.disabled = false
@@ -81,7 +81,7 @@ func _on_record_button_toggled(toggled_on : bool) -> void:
 		recording_data.encode_u32(40, data_size)
 		for i in range(len(recording_buffer)):
 			for j in range(audio_sample_size):
-				var k : int = 44 + 4*(i*audio_sample_size + j) 
+				var k : int = 44 + 4*(i*audio_sample_size + j)
 				recording_data.encode_s16(k, clampi(recording_buffer[i][j].x*32768, -32768, 32767))
 				recording_data.encode_s16(k+2, clampi(recording_buffer[i][j].y*32768, -32768, 32767))
 		wav_recording = AudioStreamWAV.load_from_buffer(recording_data)
@@ -110,4 +110,3 @@ func _on_save_button_pressed() -> void:
 
 func _on_open_user_folder_button_pressed() -> void:
 	OS.shell_open(ProjectSettings.globalize_path("user://"))
-	
