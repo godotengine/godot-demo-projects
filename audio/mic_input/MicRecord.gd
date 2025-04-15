@@ -16,6 +16,9 @@ func _ready() -> void:
 	if not Input.has_method("start_microphone"):
 		$Status.text = "Error: requires PR#105244 to work"
 	input_mix_rate = int(AudioServer.get_input_mix_rate())
+	print("Input mix rate: ", input_mix_rate)
+	print("Output mix rate: ", AudioServer.get_mix_rate())
+	print("Project mix rate: ", ProjectSettings.get("audio/driver/mix_rate"))
 	$InputMixRate.text = "Mix rate: %d" % input_mix_rate
 	audio_sample_size = int(audio_chunk_size_ms*input_mix_rate/1000.0)
 	var blank_image : PackedVector2Array = PackedVector2Array()
@@ -33,22 +36,23 @@ func _on_microphone_on_toggled(toggled_on : bool) -> void:
 		Input.stop_microphone()
 
 func _on_mic_to_generator_toggled(toggled_on : bool) -> void:
+	if toggled_on:
+		$AudioGenerator.stream.mix_rate = input_mix_rate
 	$AudioGenerator.playing = toggled_on
 
 func _process(delta : float) -> void:
 	sample_duration += delta
-	while true:
+	while Input.get_microphone_frames_available() >= audio_sample_size:
 		var audio_samples : PackedVector2Array = Input.get_microphone_buffer(audio_sample_size)
-		if not audio_samples:
-			break
-		audio_sample_image.set_data(audio_sample_size, 1, false, Image.FORMAT_RGF, audio_samples.to_byte_array())
-		audio_sample_texture.update(audio_sample_image)
-		total_samples += 1
-		$SampleCount.text = "%.0f samples/sec" % (total_samples*audio_sample_size/sample_duration)
-		if recording_buffer != null:
-			recording_buffer.append(audio_samples)
-		if $MicToGenerator.button_pressed:
-			$AudioGenerator.get_stream_playback().push_buffer(audio_samples)
+		if audio_samples:
+			audio_sample_image.set_data(audio_sample_size, 1, false, Image.FORMAT_RGF, audio_samples.to_byte_array())
+			audio_sample_texture.update(audio_sample_image)
+			total_samples += 1
+			$SampleCount.text = "%.0f samples/sec" % (total_samples*audio_sample_size/sample_duration)
+			if recording_buffer != null:
+				recording_buffer.append(audio_samples)
+			if $MicToGenerator.button_pressed:
+				$AudioGenerator.get_stream_playback().push_buffer(audio_samples)
 
 func _on_record_button_toggled(toggled_on : bool) -> void:
 	total_samples = 0
