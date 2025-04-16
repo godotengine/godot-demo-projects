@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://br3bss6kac8pa"]
+[gd_scene load_steps=15 format=3 uid="uid://br3bss6kac8pa"]
 
 [ext_resource type="PackedScene" uid="uid://d22k0sp2hinew" path="res://assets/gltf/LeftHandHumanoid.gltf" id="2_3hxem"]
 [ext_resource type="Script" uid="uid://dpqdbsepdkd4h" path="res://start_vr.gd" id="2_5rtkn"]
@@ -31,6 +31,10 @@ material = SubResource("StandardMaterial3D_dxr1t")
 size = Vector2(1000, 1000)
 subdivide_width = 10
 subdivide_depth = 10
+
+[sub_resource type="SphereMesh" id="SphereMesh_d5x0p"]
+radius = 0.01
+height = 0.02
 
 [node name="Main" type="Node3D"]
 
@@ -73,12 +77,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13752, 0.941084, 0)
 [node name="Box03" parent="Table" instance=ExtResource("7_6sqt7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0746718, 1.06282, 0)
 
-[node name="LeftHandInfo" parent="Table" instance=ExtResource("5_wlhtu")]
+[node name="LeftHandInfo" parent="Table" node_paths=PackedStringArray("fallback_mesh") instance=ExtResource("5_wlhtu")]
 transform = Transform3D(0.939693, -0.085635, 0.331126, 0, 0.968147, 0.25038, -0.34202, -0.23528, 0.909761, -0.713026, 0.8718, -0.309953)
+fallback_mesh = NodePath("../../XROrigin3D/LeftHandController/FallbackMesh")
 
-[node name="RightHandInfo" parent="Table" instance=ExtResource("5_wlhtu")]
+[node name="RightHandInfo" parent="Table" node_paths=PackedStringArray("fallback_mesh") instance=ExtResource("5_wlhtu")]
 transform = Transform3D(0.939693, 0.085635, -0.331126, 0, 0.968147, 0.25038, 0.34202, -0.23528, 0.909761, 0.278022, 0.8718, -0.381943)
 hand = 1
+fallback_mesh = NodePath("../../XROrigin3D/RightHandController/FallbackMesh")
 
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
 
@@ -91,6 +97,9 @@ tracker = &"left_hand"
 pose = &"pose"
 show_when_tracked = true
 
+[node name="FallbackMesh" type="MeshInstance3D" parent="XROrigin3D/LeftHandController"]
+mesh = SubResource("SphereMesh_d5x0p")
+
 [node name="PickupHandler" parent="XROrigin3D/LeftHandController" instance=ExtResource("3_sg1io")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0, 0)
 pickup_action = "pickup"
@@ -100,6 +109,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
 tracker = &"right_hand"
 pose = &"pose"
 show_when_tracked = true
+
+[node name="FallbackMesh" type="MeshInstance3D" parent="XROrigin3D/RightHandController"]
+mesh = SubResource("SphereMesh_d5x0p")
+skeleton = NodePath("../../LeftHandController")
 
 [node name="PickupHandler" parent="XROrigin3D/RightHandController" instance=ExtResource("3_sg1io")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0, 0)
