@@ -126,7 +126,7 @@ func _on_open_user_folder_button_pressed() -> void:
 
 # 400Hz frequency can be used (from another device) to probe a stereo microphone
 # response due to where there should be 8 wavelengths in the space of 20ms (2.5ms per wave).
-# The wavelength is then 343/400=0.8575m long. 
+# The wavelength is then 343/400=0.8575m long.
 func _on_option_tone_item_selected(index : int) -> void:
 	if index != 0:
 		$AudioGenerator.playing = true
