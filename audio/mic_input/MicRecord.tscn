@@ -142,6 +142,25 @@ offset_right = 191.0
 offset_bottom = 389.0
 text = "Open User Folder"
 
+[node name="OptionTone" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 474.0
+offset_top = 109.0
+offset_right = 568.0
+offset_bottom = 140.0
+selected = 0
+item_count = 5
+popup/item_0/text = "No tone"
+popup/item_0/id = 0
+popup/item_1/text = "200Hz"
+popup/item_1/id = 1
+popup/item_2/text = "400Hz"
+popup/item_2/id = 2
+popup/item_3/text = "1000Hz"
+popup/item_3/id = 3
+popup/item_4/text = "2000Hz"
+popup/item_4/id = 4
+
 [connection signal="toggled" from="MicrophoneOn" to="." method="_on_microphone_on_toggled"]
 [connection signal="toggled" from="MicToGenerator" to="." method="_on_mic_to_generator_toggled"]
 [connection signal="toggled" from="RecordButton" to="." method="_on_record_button_toggled"]
@@ -149,3 +168,4 @@ text = "Open User Folder"
 [connection signal="toggled" from="PlayMusic" to="." method="_on_play_music_toggled"]
 [connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="OpenUserFolderButton" to="." method="_on_open_user_folder_button_pressed"]
+[connection signal="item_selected" from="OptionTone" to="." method="_on_option_tone_item_selected"]

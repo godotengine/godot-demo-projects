@@ -11,6 +11,8 @@ var recording_buffer : Variant = null
 
 var audio_sample_image : Image
 var audio_sample_texture : ImageTexture
+var generator_timestamp : float = 0.0
+var generator_freq : float = 0.0
 
 func _ready() -> void:
 	if not Input.has_method("start_microphone"):
@@ -53,6 +55,13 @@ func _process(delta : float) -> void:
 				recording_buffer.append(audio_samples)
 			if $MicToGenerator.button_pressed:
 				$AudioGenerator.get_stream_playback().push_buffer(audio_samples)
+	if generator_freq != 0.0:
+		var gplayback = $AudioGenerator.get_stream_playback()
+		var gdt = 1.0/$AudioGenerator.stream.mix_rate
+		for i in range(gplayback.get_frames_available()):
+			var a = 0.5*sin(generator_timestamp*generator_freq*TAU)
+			gplayback.push_frame(Vector2(a, a))
+			generator_timestamp += gdt
 
 func _on_record_button_toggled(toggled_on : bool) -> void:
 	total_samples = 0
@@ -114,3 +123,16 @@ func _on_save_button_pressed() -> void:
 
 func _on_open_user_folder_button_pressed() -> void:
 	OS.shell_open(ProjectSettings.globalize_path("user://"))
+
+# 400Hz frequency can be used (from another device) to probe a stereo microphone
+# response due to where there should be 8 wavelengths in the space of 20ms (2.5ms per wave).
+# The wavelength is then 343/400=0.8575m long.  Therefore a 75mm distance between
+# inputs of a stereo microphone will create at most a 75/857.5=0.087 shift in 
+# wavelength.  An observed shift on the screen of 2/65 is 
+func _on_option_tone_item_selected(index : int) -> void:
+	if index != 0:
+		$AudioGenerator.playing = true
+		if not $MicToGenerator.button_pressed and not $PlayMusic.button_pressed:
+			generator_freq = int($OptionTone.get_item_text(index))
+	else:
+		generator_freq = 0.0
