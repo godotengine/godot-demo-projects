@@ -1,49 +1,24 @@
 extends Control
 
-var recordeffect: AudioEffectRecord
-var captureeffect: AudioEffectCapture
+var effect: AudioEffect
 var recording: AudioStreamWAV
 
 var stereo := true
 var mix_rate := 44100  # This is the default mix rate on recordings.
 var format := AudioStreamWAV.FORMAT_16_BITS  # This is the default format on recordings.
 
-var audiosamplesize : int = 882
-var audiosampleframetextureimage : Image
-var audiosampleframetexture : ImageTexture
-var totalsamples = 0
-var sampleduration = 0.0
 
 func _ready() -> void:
 	var idx := AudioServer.get_bus_index("Record")
-	recordeffect = AudioServer.get_bus_effect(idx, 0)
-	captureeffect = AudioServer.get_bus_effect(idx, 1)
+	effect = AudioServer.get_bus_effect(idx, 0)
 
-	var audiosampleframedata_blank = PackedVector2Array()
-	audiosampleframedata_blank.resize(audiosamplesize)
-	for j in range(audiosamplesize):
-		audiosampleframedata_blank.set(j, Vector2(-0.5,0.9) if (j%10)<5 else Vector2(0.6,0.1))
-	audiosampleframetextureimage = Image.create_from_data(audiosamplesize, 1, false, Image.FORMAT_RGF, audiosampleframedata_blank.to_byte_array())
-	audiosampleframetexture = ImageTexture.create_from_image(audiosampleframetextureimage)
-	$MicTexture.material.set_shader_parameter("audiosample", audiosampleframetexture)
-
-func _process(delta):
-	sampleduration += delta
-	var audiosamples : PackedVector2Array = captureeffect.get_buffer(audiosamplesize)
-	if audiosamples:
-		audiosampleframetextureimage.set_data(audiosamplesize, 1, false, Image.FORMAT_RGF, audiosamples.to_byte_array())
-		audiosampleframetexture.update(audiosampleframetextureimage)
-		totalsamples += len(audiosamples)
-		$SampleCount.text = "%.0f samples/sec" % (totalsamples/sampleduration)
 
 func _on_record_button_pressed() -> void:
-	totalsamples = 0
-	sampleduration = 0.0
-	if recordeffect.is_recording_active():
-		recording = recordeffect.get_recording()
+	if effect.is_recording_active():
+		recording = effect.get_recording()
 		$PlayButton.disabled = false
 		$SaveButton.disabled = false
-		recordeffect.set_recording_active(false)
+		effect.set_recording_active(false)
 		recording.set_mix_rate(mix_rate)
 		recording.set_format(format)
 		recording.set_stereo(stereo)
@@ -52,7 +27,7 @@ func _on_record_button_pressed() -> void:
 	else:
 		$PlayButton.disabled = true
 		$SaveButton.disabled = true
-		recordeffect.set_recording_active(true)
+		effect.set_recording_active(true)
 		$RecordButton.text = "Stop"
 		$Status.text = "Status: Recording..."
 
@@ -121,3 +96,4 @@ func _on_stereo_check_button_toggled(button_pressed: bool) -> void:
 
 func _on_open_user_folder_button_pressed() -> void:
 	OS.shell_open(ProjectSettings.globalize_path("user://"))
+
