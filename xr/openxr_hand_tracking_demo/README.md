@@ -26,7 +26,7 @@ and depending on the XR runtime in use there may be gaps in functionality.
 
 ### Hand tracking is only for optical tracking
 
-The first school of thought treats hand tracking as a separate system that purely focusses on optical hand tracking.
+The first school of thought treats hand tracking as a separate system that purely focuses on optical hand tracking.
 The hand tracking API in OpenXR, even if reported as supported, will only provide data if optical hand tracking is used.
 
 This means that when controllers are used, no data is available and you as a developer have to come up with your own
@@ -45,13 +45,13 @@ and treats them as two versions of the same.
 Especially with controllers like the Valve Index, or with various data gloves that are treated as controllers,
 there is no discernible difference here.
 
-The hand tracking API is mostly used for visualising the players hand with bone positions either being inferred
+The hand tracking API is mostly used for visualizing the players hand with bone positions either being inferred
 from controller input or matching the optical tracking.
 For advanced gesture recognition you would still use this data however it is now accessible regardless of
 the physical means in which this data is obtained.
 
 At the same time, in this school of thought the action map system is seen as the primary means to gain input
-and is no longer restricted to input from controllers. The XR runtime is now responsible for recognising base
+and is no longer restricted to input from controllers. The XR runtime is now responsible for recognizing base
 gestures such as pinching and pointing resulting in inputs that can be bound in the action map.
 
 OpenXR is moving towards this approach and this demo has been build in accordance with this however not all runtimes have been updated yet.
@@ -78,7 +78,7 @@ This demo project shows what that future looks like.
 
 ## Hand tracking API
 
-As mentioned, the hand tracking API is at the center of visualising the users hand.
+As mentioned, the hand tracking API is at the center of visualizing the users hand.
 In Godot 4.3 we overhauled the system so the XR Interface needs to convert hand tracking data to the Godot humanoid skeleton hand bone layout.
 This also means that this logic works both in WebXR, OpenXR and any other XR Interface that adds support for this feature.
 
@@ -185,4 +185,3 @@ Note that Godot currently can't run using the WMR OpenXR runtime. Install SteamV
 
 You must install the Android build templates and OpenXR loader plugin and configure an export template for your device.
 Please follow [the instructions for deploying on Android in the manual](https://docs.godotengine.org/en/stable/tutorials/xr/deploying_to_android.html).
-

@@ -9,11 +9,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Install dependencies
+      # This needs to happen before Python and npm execution; it must happen before any extra files are written.
+      - name: .gitignore checks (gitignore_check.sh)
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -qq dos2unix recode
+          bash ./.github/scripts/gitignore_check.sh
 
-      - name: File formatting checks (file_format.sh)
+      - name: Get changed files
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          bash ./file_format.sh
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            files=$(git diff-tree --no-commit-id --name-only -r HEAD^1..HEAD 2> /dev/null || true)
+          elif [ "${{ github.event_name }}" == "push" -a "${{ github.event.forced }}" == "false" -a "${{ github.event.created }}" == "false" ]; then
+            files=$(git diff-tree --no-commit-id --name-only -r ${{ github.event.before }}..${{ github.event.after }} 2> /dev/null || true)
+          fi
+          files=$(echo "$files" | xargs -I {} sh -c 'echo "\"./{}\""' | tr '\n' ' ')
+          echo "CHANGED_FILES=$files" >> $GITHUB_ENV
+
+      - name: Style checks via pre-commit
+        uses: pre-commit/action@v3.0.1
+        with:
+          extra_args: --files ${{ env.CHANGED_FILES }}

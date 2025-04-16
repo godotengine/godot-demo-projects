@@ -35,7 +35,7 @@ var mouse_pressed: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# In case we're running stuff on the rendering thread
-	# we need to do our initialisation on that thread.
+	# we need to do our initialization on that thread.
 	RenderingServer.call_on_render_thread(_initialize_compute_code.bind(texture_size))
 
 	# Get our texture from our material so we set our RID.

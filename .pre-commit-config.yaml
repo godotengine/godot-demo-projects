@@ -1,0 +1,40 @@
+default_language_version:
+  python: python3
+
+repos:
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.1
+    hooks:
+      - id: codespell
+        additional_dependencies: [tomli]
+
+  - repo: local
+    hooks:
+      - id: file-format
+        name: file-format
+        language: python
+        entry: python file_format.py
+        types_or: [text]
+        exclude: |
+          (?x)^(
+            .*\.test\.txt|
+            .*\.svg|
+          )$
+
+      - id: dotnet-format
+        name: dotnet-format
+        language: python
+        entry: python dotnet_format.py
+        types_or: [c#]
+#
+# End of upstream Godot pre-commit hooks.
+#
+# Keep this separation to let downstream forks add their own hooks to this file,
+# without running into merge conflicts when rebasing on latest upstream.
+#
+# Start of downstream pre-commit hooks.
+#
+# This is still the "repo: local" scope, so new local hooks can be defined directly at this indentation:
+#     - id: new-local-hook
+# To add external repo hooks, bring the indentation back to:
+# - repo: my-remote-hook
