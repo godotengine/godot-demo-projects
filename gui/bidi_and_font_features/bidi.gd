@@ -123,7 +123,3 @@ func _on_system_font_italic_toggled(button_pressed: bool) -> void:
 func _on_system_font_name_text_changed(new_text: String) -> void:
 	var system_font: SystemFont = $"TabContainer/System fonts/VBoxContainer/Custom/FontName".get_theme_font("font")
 	system_font.font_names[0] = new_text
-
-
-
-

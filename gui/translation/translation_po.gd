@@ -36,7 +36,7 @@ func _print_intro() -> void:
 
 	# PO plural translation example.
 	# The difference with CSV is that you must add the "plural_message" argument, because PO files
-	# expect the data (else undefine behaviour might occur).
+	# expect the data (else undefine behavior might occur).
 	var days_passed := randi_range(1, 3)
 	print(tr_n("One day ago.", "{days} days ago.", days_passed).format({ days = days_passed }))
 

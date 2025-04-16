@@ -60,7 +60,7 @@ func _on_connected() -> void:
 func _on_query_purchases_response(query_result: Dictionary) -> void:
 	if query_result.status == OK:
 		for purchase: Dictionary in query_result.purchases:
-			# We must acknowledge all puchases.
+			# We must acknowledge all purchases.
 			# See https://developer.android.com/google/play/billing/integrate#process for more information
 			if not purchase.is_acknowledged:
 				print("Purchase " + str(purchase.sku) + " has not been acknowledged. Acknowledging...")
@@ -106,7 +106,7 @@ func _on_purchase_error(code: int, message: String) -> void:
 
 
 func _on_purchase_acknowledgement_error(code: int, message: String) -> void:
-	show_alert("Purchase acknowledgement error %d: %s" % [code, message])
+	show_alert("Purchase acknowledgment error %d: %s" % [code, message])
 
 
 func _on_purchase_consumption_error(code: int, message: String, purchase_token: String) -> void:

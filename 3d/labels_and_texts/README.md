@@ -15,7 +15,7 @@ PrimitiveMesh resource you use within a MeshsInstance3D node. Therefore, you
 won't see TextMesh in the Create New Node dialog.
 
 Icons can also be displayed in Label3D and TextMesh using icon fonts, which can
-be generated from SVG files using serivces like
+be generated from SVG files using services like
 [Fontello](https://fontello.com/). Note that while Label3D supports colored
 rasterized fonts (such as emoji), only monochrome fonts can be generated from
 Fontello. TextMesh and Label3D with MSDF fonts are limited to monochrome fonts

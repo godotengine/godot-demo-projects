@@ -24,7 +24,7 @@ void main() {
 
 	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
 
-	// Just in case the texture size is not divisable by 8.
+	// Just in case the texture size is not divisible by 8.
 	if ((uv.x > size.x) || (uv.y > size.y)) {
 		return;
 	}

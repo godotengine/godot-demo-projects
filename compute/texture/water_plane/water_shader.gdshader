@@ -2,7 +2,7 @@ shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
 
 uniform vec3 albedo : source_color;
-uniform float metalic : hint_range(0.0, 1.0, 0.1) = 0.8;
+uniform float metallic : hint_range(0.0, 1.0, 0.1) = 0.8;
 uniform float roughness : hint_range(0.0, 1.0, 0.1) = 0.2;
 uniform sampler2D effect_texture;
 uniform vec2 effect_texture_size;
@@ -27,7 +27,7 @@ void fragment() {
 	NORMAL_MAP = normalize(cross(binormal, tangent)) * 0.5 + 0.5;
 
 	ALBEDO = albedo.rgb;
-	METALLIC = metalic;
+	METALLIC = metallic;
 	ROUGHNESS = roughness;
 	SPECULAR = 0.5;
 }

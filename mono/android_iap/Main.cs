@@ -78,7 +78,7 @@ namespace AndroidInAppPurchasesWithCSharp
         {
             GD.Print("PurchaseManager connected");
 
-            // We must acknowledge all puchases.
+            // We must acknowledge all purchases.
             // See https://developer.android.com/google/play/billing/integrate#process for more information
             var purchasesResult = _payment.QueryPurchases(PurchaseType.InApp);
             if (purchasesResult.Status == (int)Error.Ok)
@@ -160,7 +160,7 @@ namespace AndroidInAppPurchasesWithCSharp
 
         private void OnPurchaseAcknowledgementError(int code, string message)
         {
-            ShowAlert($"Purchase acknowledgement error {code}: {message}");
+            ShowAlert($"Purchase acknowledgment error {code}: {message}");
         }
 
         private void OnPurchaseConsumed(string purchaseToken)
@@ -170,7 +170,7 @@ namespace AndroidInAppPurchasesWithCSharp
 
         private void OnPurchaseConsumptionError(int code, string message, string purchaseToken)
         {
-            ShowAlert($"Purchase acknowledgement error {code}: {message}");
+            ShowAlert($"Purchase acknowledgment error {code}: {message}");
         }
 
         // GUI
