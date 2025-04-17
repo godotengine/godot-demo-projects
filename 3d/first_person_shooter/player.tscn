@@ -1,0 +1,404 @@
+[gd_scene load_steps=39 format=3 uid="uid://dfyswwfb8j6iv"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_3afs5"]
+[ext_resource type="PackedScene" uid="uid://b4g77r67peq11" path="res://blob_shadow.tscn" id="2_att33"]
+[ext_resource type="Texture2D" uid="uid://df46fn25wxblu" path="res://player/shotgun/spritesheet.png" id="2_ntkbj"]
+[ext_resource type="Texture2D" uid="uid://d0h6we75g3l0h" path="res://crosshair.png" id="2_xdhj0"]
+[ext_resource type="AudioStream" uid="uid://jfxdoxq7t3t2" path="res://player/water_splash_out.ogg" id="3_ovny0"]
+[ext_resource type="AudioStream" uid="uid://lqgi4erf48wg" path="res://player/shotgun/fire.wav" id="3_w6ksn"]
+[ext_resource type="AudioStream" uid="uid://c2n47qjisa0wl" path="res://player/water_splash_in.ogg" id="3_yf4c3"]
+[ext_resource type="Shader" path="res://player/weapon_sprite.gdshader" id="4_i5vum"]
+[ext_resource type="AudioStream" uid="uid://do4fwt667onp2" path="res://player/rain.ogg" id="6_cmbiq"]
+[ext_resource type="AudioStream" uid="uid://cy2lhrs5we1a7" path="res://player/shotgun/open.wav" id="6_tknt2"]
+[ext_resource type="AudioStream" uid="uid://dam35f8u5f2d5" path="res://player/shotgun/load.wav" id="7_dom6o"]
+[ext_resource type="AudioStream" uid="uid://cykqcvgf3tyv3" path="res://player/shotgun/close.wav" id="8_uckjf"]
+[ext_resource type="FontFile" uid="uid://blm3851cjtjji" path="res://fonts/vga-rom-font.png" id="9_yojfu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n7pit"]
+size = Vector3(1, 1.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nlrfb"]
+size = Vector3(0.9, 0.75, 0.9)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lu535"]
+streams_count = 1
+random_pitch = 1.02
+stream_0/stream = ExtResource("7_dom6o")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_46hgo"]
+streams_count = 1
+random_pitch = 1.02
+stream_0/stream = ExtResource("3_yf4c3")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vhi2c"]
+streams_count = 1
+random_pitch = 1.02
+stream_0/stream = ExtResource("3_ovny0")
+stream_0/weight = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lr0u3"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 50.0
+emission_ring_inner_radius = 0.0
+direction = Vector3(0, -1, 0)
+spread = 3.0
+initial_velocity_min = 60.0
+initial_velocity_max = 60.0
+sub_emitter_mode = 3
+sub_emitter_amount_at_collision = 1
+collision_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sfjl0"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.662745, 0.788235, 1, 0.12549)
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_f2lko"]
+material = SubResource("StandardMaterial3D_sfjl0")
+size = Vector2(0.025, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_iq4t4"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_aql0l"]
+gradient = SubResource("Gradient_iq4t4")
+
+[sub_resource type="Curve" id="Curve_3xpn1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fyu6e"]
+curve = SubResource("Curve_3xpn1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2q22j"]
+gravity = Vector3(0, -3, 0)
+scale_curve = SubResource("CurveTexture_fyu6e")
+color = Color(0.745098, 0.882353, 1, 0.25098)
+color_ramp = SubResource("GradientTexture1D_aql0l")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m681u"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_rmfmt"]
+material = SubResource("StandardMaterial3D_m681u")
+size = Vector2(0.05, 0.05)
+
+[sub_resource type="QuadMesh" id="QuadMesh_m5j6l"]
+size = Vector2(1.655, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fb2wo"]
+render_priority = 0
+shader = ExtResource("4_i5vum")
+shader_parameter/frame_count = 10
+shader_parameter/frame = 0
+shader_parameter/views = ExtResource("2_ntkbj")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_t4cq8"]
+blend_mode = 3
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_502b5"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_xdggq"]
+offsets = PackedFloat32Array(0.00198807, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pusfi"]
+gradient = SubResource("Gradient_xdggq")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_y888d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/WeaponSprite:surface_material_override/0:shader_parameter/frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D/WeaponLight:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D/WeaponLight:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_nrowk"]
+resource_name = "fire"
+length = 1.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/WeaponSprite:surface_material_override/0:shader_parameter/frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.45, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 0, 1),
+"update": 0,
+"values": [0, 3, 3, 9, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D/WeaponLight:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D/WeaponLight:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.3),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [0.0, 2.0, 0.0]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponSounds")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.00360187,
+"start_offset": 0.0,
+"stream": ExtResource("3_w6ksn")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0276511,
+"stream": ExtResource("6_tknt2")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_dom6o")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("8_uckjf")
+}],
+"times": PackedFloat32Array(0, 0.535896, 0.844826, 1.02504)
+}
+tracks/3/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_glvp6"]
+_data = {
+"RESET": SubResource("Animation_y888d"),
+"fire": SubResource("Animation_nrowk")
+}
+
+[sub_resource type="Theme" id="Theme_6xrdg"]
+default_font = ExtResource("9_yojfu")
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_3afs5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("BoxShape3D_n7pit")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("BoxShape3D_nlrfb")
+max_results = 1
+
+[node name="WeaponSounds" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_w6ksn")
+volume_db = -12.0
+max_polyphony = 2
+
+[node name="FlashlightSounds" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_lu535")
+volume_db = -12.0
+max_polyphony = 2
+
+[node name="WaterInSound" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_46hgo")
+volume_db = -6.0
+max_polyphony = 2
+
+[node name="WaterOutSound" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_vhi2c")
+volume_db = -6.0
+max_polyphony = 2
+
+[node name="Rain" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30.5, 0)
+amount = 3000
+sub_emitter = NodePath("RainImpactSubemitter")
+lifetime = 2.0
+preprocess = 2.0
+fixed_fps = 0
+interpolate = false
+collision_base_size = 0.1
+visibility_aabb = AABB(-49.847, -490.159, -49.8395, 99.8953, 490.659, 99.2455)
+process_material = SubResource("ParticleProcessMaterial_lr0u3")
+draw_pass_1 = SubResource("QuadMesh_f2lko")
+
+[node name="RainImpactSubemitter" type="GPUParticles3D" parent="Rain"]
+emitting = false
+amount = 3000
+fixed_fps = 0
+interpolate = false
+visibility_aabb = AABB(-49.847, -490.159, -49.8395, 99.8953, 490.659, 99.2455)
+process_material = SubResource("ParticleProcessMaterial_2q22j")
+draw_pass_1 = SubResource("QuadMesh_rmfmt")
+
+[node name="RainSound" type="AudioStreamPlayer" parent="Rain"]
+stream = ExtResource("6_cmbiq")
+volume_db = -6.0
+autoplay = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+fov = 74.0
+
+[node name="Flashlight" type="SpotLight3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.4, 0)
+visible = false
+light_color = Color(1, 0.973333, 0.92, 1)
+light_energy = 5.0
+light_specular = 0.25
+shadow_enabled = true
+shadow_bias = 0.01
+shadow_blur = 2.5
+spot_range = 50.0
+spot_attenuation = 2.0
+spot_angle = 35.0
+spot_angle_attenuation = 2.0
+
+[node name="WeaponSprite" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, -0.67, -1.5)
+layers = 2
+sorting_offset = 100.0
+cast_shadow = 0
+mesh = SubResource("QuadMesh_m5j6l")
+surface_material_override/0 = SubResource("ShaderMaterial_fb2wo")
+
+[node name="WeaponLight" type="OmniLight3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+light_color = Color(1, 0.764706, 0.235294, 1)
+light_energy = 0.0
+light_specular = 0.1
+shadow_enabled = true
+shadow_bias = 0.12
+shadow_blur = 2.5
+omni_range = 10.0
+
+[node name="Decal" parent="." instance=ExtResource("2_att33")]
+size = Vector3(1.2, 2.4, 1.2)
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 1.2
+one_shot = true
+
+[node name="UnderwaterEffect" type="ColorRect" parent="."]
+material = SubResource("CanvasItemMaterial_t4cq8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.54902, 0.647059, 0.901961, 1)
+
+[node name="DamageEffect" type="TextureRect" parent="."]
+texture_filter = 2
+material = SubResource("CanvasItemMaterial_502b5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_pusfi")
+
+[node name="Crosshair" type="TextureRect" parent="."]
+texture_filter = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_xdhj0")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_glvp6")
+}
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_6xrdg")
+
+[node name="Health" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = -75.0
+offset_right = 240.0
+offset_bottom = -40.0
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "Health: 100"
+vertical_alignment = 2
