@@ -20,23 +20,25 @@ script = ExtResource("2")
 
 [node name="DynamicShapes" type="Node2D" parent="."]
 
-[node name="RigidBodyRectangle" type="RigidDynamicBody2D" parent="DynamicShapes"]
+[node name="RigidBodyRectangle" type="RigidBody2D" parent="DynamicShapes"]
 position = Vector2(96, 127)
 script = ExtResource("3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DynamicShapes/RigidBodyRectangle"]
 rotation = 0.675442
 shape = SubResource("1")
+debug_color = Color(1, 1, 0, 0.0980392)
 
-[node name="RigidBodyCapsule" type="RigidDynamicBody2D" parent="DynamicShapes"]
+[node name="RigidBodyCapsule" type="RigidBody2D" parent="DynamicShapes"]
 position = Vector2(270.165, 139.444)
 script = ExtResource("3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DynamicShapes/RigidBodyCapsule"]
 rotation = -0.202458
 shape = SubResource("2")
+debug_color = Color(1, 1, 0, 0.0980392)
 
-[node name="RigidBodyConcavePolygon" type="RigidDynamicBody2D" parent="DynamicShapes"]
+[node name="RigidBodyConcavePolygon" type="RigidBody2D" parent="DynamicShapes"]
 position = Vector2(683.614, 132.749)
 script = ExtResource("3")
 
@@ -49,7 +51,7 @@ self_modulate = Color(1, 1, 1, 0.392157)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1")
 
-[node name="RigidBodyConvexPolygon" type="RigidDynamicBody2D" parent="DynamicShapes"]
+[node name="RigidBodyConvexPolygon" type="RigidBody2D" parent="DynamicShapes"]
 position = Vector2(473.536, 134.336)
 script = ExtResource("3")
 
@@ -62,11 +64,12 @@ self_modulate = Color(1, 1, 1, 0.392157)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1")
 
-[node name="RigidBodySphere" type="RigidDynamicBody2D" parent="DynamicShapes"]
+[node name="RigidBodySphere" type="RigidBody2D" parent="DynamicShapes"]
 position = Vector2(919.968, 115.129)
 script = ExtResource("3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DynamicShapes/RigidBodySphere"]
 shape = SubResource("3")
+debug_color = Color(1, 1, 0, 0.0980392)
 
 [node name="StaticScene" parent="." instance=ExtResource("6")]

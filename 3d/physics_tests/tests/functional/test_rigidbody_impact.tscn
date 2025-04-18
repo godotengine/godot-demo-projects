@@ -22,7 +22,7 @@ script = ExtResource("2")
 [node name="DynamicShapes" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.35591, 0)
 
-[node name="RigidBodyBox" type="RigidDynamicBody3D" parent="DynamicShapes"]
+[node name="RigidBodyBox" type="RigidBody3D" parent="DynamicShapes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 0)
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -32,8 +32,9 @@ script = ExtResource("1")
 [node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyBox"]
 transform = Transform3D(0.6, 0, 0, 0, 1, 0, 0, 0, 0.6, 0, 0, 0)
 shape = SubResource("1")
+debug_color = Color(1, 1, 0, 1)
 
-[node name="RigidBodyCapsule" type="RigidDynamicBody3D" parent="DynamicShapes"]
+[node name="RigidBodyCapsule" type="RigidBody3D" parent="DynamicShapes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.0034, 0)
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -43,8 +44,9 @@ script = ExtResource("1")
 [node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyCapsule"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 shape = SubResource("2")
+debug_color = Color(1, 1, 0, 1)
 
-[node name="RigidBodyCylinder" type="RigidDynamicBody3D" parent="DynamicShapes"]
+[node name="RigidBodyCylinder" type="RigidBody3D" parent="DynamicShapes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0034, 0)
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -54,8 +56,9 @@ script = ExtResource("1")
 [node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyCylinder"]
 transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, 0, 0)
 shape = SubResource("3")
+debug_color = Color(1, 1, 0, 1)
 
-[node name="RigidBodyConvex" type="RigidDynamicBody3D" parent="DynamicShapes"]
+[node name="RigidBodyConvex" type="RigidBody3D" parent="DynamicShapes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.97795, 0)
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -65,8 +68,9 @@ script = ExtResource("1")
 [node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyConvex"]
 transform = Transform3D(1.5, 0, 0, 0, 2, 0, 0, 0, 1.5, 0, 0, 0)
 shape = SubResource("4")
+debug_color = Color(1, 1, 0, 1)
 
-[node name="RigidBodySphere" type="RigidDynamicBody3D" parent="DynamicShapes"]
+[node name="RigidBodySphere" type="RigidBody3D" parent="DynamicShapes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 0)
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -76,6 +80,7 @@ script = ExtResource("1")
 [node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodySphere"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 shape = SubResource("5")
+debug_color = Color(1, 1, 0, 1)
 
 [node name="StaticBodyPlane" parent="." instance=ExtResource("3")]
 
@@ -83,6 +88,3 @@ shape = SubResource("5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.604, 22.124)
 fov = 35.0
 script = ExtResource("4")
-
-[node name="OmniLight" type="OmniLight3D" parent="Camera3D"]
-omni_range = 50.0

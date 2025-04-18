@@ -12,10 +12,10 @@ They can be used for different purpose:
 
 Language: GDScript
 
-Renderer: Compatibility
+Renderer: Mobile
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2726
 
 ## Screenshots
 
-![Screenshot](screenshots/screenshot.png)
+![Screenshot](screenshots/physics_tests.webp)

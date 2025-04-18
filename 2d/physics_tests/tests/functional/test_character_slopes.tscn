@@ -70,15 +70,10 @@ alignment = 2
 
 [node name="Label" type="Label" parent="FloorMaxAngle"]
 layout_mode = 2
-offset_right = 123.0
-offset_bottom = 26.0
 text = "Floor Max angle"
 
 [node name="HSlider" type="HSlider" parent="FloorMaxAngle"]
 layout_mode = 2
-offset_left = 143.0
-offset_right = 419.0
-offset_bottom = 16.0
 size_flags_horizontal = 3
 max_value = 180.0
 script = ExtResource("3_cd5g0")
@@ -86,9 +81,6 @@ snap_step = 5.0
 
 [node name="LabelValue" type="Label" parent="FloorMaxAngle"]
 layout_mode = 2
-offset_left = 439.0
-offset_right = 462.0
-offset_bottom = 26.0
 text = "0.0"
 script = ExtResource("4_eoplu")
 
@@ -99,6 +91,7 @@ script = ExtResource("7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("3")
+debug_color = Color(0, 1, 0, 0.0980392)
 
 [node name="CharacterBodyRay2D" type="CharacterBody2D" parent="."]
 position = Vector2(100, 450)
@@ -108,37 +101,42 @@ script = ExtResource("7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBodyRay2D"]
 position = Vector2(0, -16)
 shape = SubResource("CircleShape2D_llvur")
+debug_color = Color(0, 1, 0, 0.0980392)
 
 [node name="CollisionShapeRay2D" type="CollisionShape2D" parent="CharacterBodyRay2D"]
 position = Vector2(0, -16)
 shape = SubResource("RayShape2D_3lv1w")
+debug_color = Color(0, 1, 0, 0.0980392)
 
 [node name="RigidDynamicBody2D" type="RigidBody2D" parent="."]
 position = Vector2(100, 450)
 collision_mask = 2147483649
 physics_material_override = SubResource("1")
-contact_monitor = true
 lock_rotation = true
+contact_monitor = true
 script = ExtResource("6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidDynamicBody2D"]
 shape = SubResource("2")
+debug_color = Color(1, 1, 0, 0.0980392)
 
 [node name="RigidBodyRay2D" type="RigidBody2D" parent="."]
 position = Vector2(100, 450)
 collision_mask = 2147483649
 physics_material_override = SubResource("1")
-contact_monitor = true
 lock_rotation = true
+contact_monitor = true
 script = ExtResource("6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBodyRay2D"]
 position = Vector2(-7.62939e-06, -16)
 shape = SubResource("CircleShape2D_dr08f")
+debug_color = Color(1, 1, 0, 0.0980392)
 
 [node name="CollisionShapeRay2D" type="CollisionShape2D" parent="RigidBodyRay2D"]
 position = Vector2(-7.62939e-06, -16)
 shape = SubResource("RayShape2D_w83f0")
+debug_color = Color(1, 1, 0, 0.0980392)
 
 [node name="StaticSceneFlat" parent="." instance=ExtResource("4")]
 position = Vector2(0, 12)

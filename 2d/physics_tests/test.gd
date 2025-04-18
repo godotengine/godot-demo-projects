@@ -55,7 +55,7 @@ func add_shape(shape: Shape2D, shape_transform: Transform2D, color: Color) -> vo
 	var collision := CollisionShape2D.new()
 	collision.shape = shape
 	collision.transform = shape_transform
-	collision.modulate = color
+	collision.debug_color = color * Color(1, 1, 1, 0.1)
 	_drawn_nodes.push_back(collision)
 	add_child(collision)
 
@@ -70,6 +70,7 @@ func create_rigidbody(shape: Shape2D, pickable: bool = false, shape_transform: T
 	var collision := CollisionShape2D.new()
 	collision.shape = shape
 	collision.transform = shape_transform
+	collision.debug_color = Color.YELLOW * Color(1, 1, 1, 0.1)
 
 	var body := RigidBody2D.new()
 	body.add_child(collision)

@@ -155,6 +155,7 @@ position = Vector2(512, 300)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetArea2D"]
 shape = SubResource("CircleShape2D_e5nt1")
+debug_color = Color(1, 0, 1, 0.0980392)
 
 [node name="OneWayStaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(512, 300)
@@ -162,6 +163,7 @@ position = Vector2(512, 300)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OneWayStaticBody2D"]
 shape = SubResource("2")
 one_way_collision = true
+debug_color = Color(0, 0.533333, 1, 0.0980392)
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2(300, 300)
@@ -176,6 +178,7 @@ texture = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("3")
+debug_color = Color(1, 1, 0, 0.0980392)
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 position = Vector2(300, 300)
@@ -188,6 +191,7 @@ texture = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("3")
+debug_color = Color(0, 1, 0, 0.0980392)
 
 [connection signal="value_changed" from="Controls/PlatformSize/HSlider" to="." method="_update_platform_size"]
 [connection signal="value_changed" from="Controls/PlatformAngle/HSlider" to="." method="_update_platform_angle"]

@@ -17,10 +17,10 @@ height = 17.0
 
 [node name="Test" type="Node2D"]
 script = ExtResource("2")
-_enable_debug_collision = false
-spawns = [NodePath("SpawnTarget1"), NodePath("SpawnTarget2"), NodePath("SpawnTarget3"), NodePath("SpawnTarget4"), NodePath("SpawnTarget5"), NodePath("SpawnTarget6"), NodePath("SpawnTarget7"), NodePath("SpawnTarget8"), NodePath("SpawnTarget9")]
+spawns = Array[NodePath]([NodePath("SpawnTarget1"), NodePath("SpawnTarget2"), NodePath("SpawnTarget3"), NodePath("SpawnTarget4"), NodePath("SpawnTarget5"), NodePath("SpawnTarget6"), NodePath("SpawnTarget7"), NodePath("SpawnTarget8"), NodePath("SpawnTarget9")])
 spawn_count = 300
 spawn_randomize = Vector2(10, 10)
+_enable_debug_collision = false
 
 [node name="Options" parent="." instance=ExtResource("4")]
 
@@ -57,28 +57,31 @@ position = Vector2(0, 125.017)
 
 [node name="DynamicShapes" type="Node2D" parent="."]
 
-[node name="RigidBodyRectangle" type="RigidDynamicBody2D" parent="DynamicShapes"]
+[node name="RigidBodyRectangle" type="RigidBody2D" parent="DynamicShapes"]
 position = Vector2(0, 1024)
 gravity_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DynamicShapes/RigidBodyRectangle"]
 shape = SubResource("1")
+debug_color = Color(1, 1, 0, 0.0980392)
 
-[node name="RigidBodySphere" type="RigidDynamicBody2D" parent="DynamicShapes"]
+[node name="RigidBodySphere" type="RigidBody2D" parent="DynamicShapes"]
 position = Vector2(100, 1024)
 gravity_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DynamicShapes/RigidBodySphere"]
 shape = SubResource("2")
+debug_color = Color(1, 1, 0, 0.0980392)
 
-[node name="RigidBodyCapsule" type="RigidDynamicBody2D" parent="DynamicShapes"]
+[node name="RigidBodyCapsule" type="RigidBody2D" parent="DynamicShapes"]
 position = Vector2(200, 1024)
 gravity_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DynamicShapes/RigidBodyCapsule"]
 shape = SubResource("3")
+debug_color = Color(1, 1, 0, 0.0980392)
 
-[node name="RigidBodyConvexPolygon" type="RigidDynamicBody2D" parent="DynamicShapes"]
+[node name="RigidBodyConvexPolygon" type="RigidBody2D" parent="DynamicShapes"]
 position = Vector2(300, 1024)
 gravity_scale = 0.0
 
@@ -91,7 +94,7 @@ self_modulate = Color(1, 1, 1, 0.392157)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("3")
 
-[node name="RigidBodyConcavePolygon" type="RigidDynamicBody2D" parent="DynamicShapes"]
+[node name="RigidBodyConcavePolygon" type="RigidBody2D" parent="DynamicShapes"]
 position = Vector2(400, 1024)
 gravity_scale = 0.0
 

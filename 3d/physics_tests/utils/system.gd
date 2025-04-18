@@ -2,6 +2,7 @@ extends Node
 
 enum PhysicsEngine {
 	GODOT_PHYSICS,
+	JOLT_PHYSICS,
 	OTHER,
 }
 
@@ -20,6 +21,8 @@ func _enter_tree() -> void:
 			_engine = PhysicsEngine.GODOT_PHYSICS
 		"GodotPhysics3D":
 			_engine = PhysicsEngine.GODOT_PHYSICS
+		"Jolt Physics":
+			_engine = PhysicsEngine.JOLT_PHYSICS
 		_:
 			_engine = PhysicsEngine.OTHER
 
