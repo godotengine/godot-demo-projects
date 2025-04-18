@@ -133,7 +133,7 @@ func _add_collision(space_state: PhysicsDirectSpaceState2D, pos: Vector2, shape:
 
 	var color := Color.GREEN
 	if results.is_empty():
-		color = Color.WHITE.darkened(0.5)
+		color = Color.BLACK
 
 	# Draw collision query shape.
 	add_shape(shape, shape_query.transform, color)
