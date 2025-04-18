@@ -163,6 +163,7 @@ func update(force: bool = false) -> void:
 		_reset_vertex()
 		mesh_dirty = false
 
+	_reset_uniform() # Work around bug in Godot 4.4, we have to reset uniform before drawing (Fixed in 4.5)
 	_draw_list()
 	emit_changed()
 	_update_queued = false
