@@ -1,0 +1,152 @@
+[gd_scene load_steps=8 format=3 uid="uid://b3scmm5r6a23q"]
+
+[ext_resource type="Script" uid="uid://mwio0eujos2s" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bwqpovn6r5q7q" path="res://metronome.gd" id="2_0xm2m"]
+[ext_resource type="AudioStream" uid="uid://c2b3dcgll0ae4" path="res://track.ogg" id="2_1bvp3"]
+[ext_resource type="AudioStream" uid="uid://j8yec16ugbbv" path="res://Perc_MetronomeQuartz_hi.wav" id="3_lquwl"]
+[ext_resource type="AudioStream" uid="uid://c7o5cyk88bq0a" path="res://track_loopless.ogg" id="5_7mycd"]
+[ext_resource type="Script" uid="uid://f4crwo4mmo3t" path="res://metronome_scheduled.gd" id="5_lquwl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mycd"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("max_fps_slider", "max_fps_spinbox", "game_time_label", "audio_time_label")]
+script = ExtResource("1_ig7tw")
+max_fps_slider = NodePath("Control/VBoxContainer/HBoxContainer/VBoxContainer/MaxFps/CenterContainer/HSlider")
+max_fps_spinbox = NodePath("Control/VBoxContainer/HBoxContainer/VBoxContainer/MaxFps/SpinBox")
+game_time_label = NodePath("Control/VBoxContainer/HBoxContainer/TimeLabels/GameTimeLabel")
+audio_time_label = NodePath("Control/VBoxContainer/HBoxContainer/TimeLabels/AudioTimeLabel")
+
+[node name="Song" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_1bvp3")
+volume_db = -18.0
+
+[node name="Metronome" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_lquwl")
+script = ExtResource("2_0xm2m")
+
+[node name="SongScheduled" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_7mycd")
+volume_db = -18.0
+max_polyphony = 2
+
+[node name="MetronomeScheduled" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_lquwl")
+max_polyphony = 2
+script = ExtResource("5_lquwl")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 30
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7mycd")
+
+[node name="DescriptionLabel" type="Label" parent="Control/VBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+text = "This demo showcases the difference between play() and play_scheduled() by playing a looping song with a metronome.
+
+With play():
+- Metronome ticks can only happen on drawn frames, so low FPS can cause ticks to play very out of sync.
+- Looping songs can eventually drift out of sync as song files may not be cut on the exact audio frame (as is the case here).
+
+With play_scheduled():
+- Metronome ticks can play consistently regardless of the FPS.
+- Song loops can be manually scheduled, thus avoiding the audio frame cut issue described above.
+- It's recommended to use a `max_polyphony` of at least 2 to avoid cutting off currently playing audio when scheduling the next play. This demo uses a `max_polyphony` of 2 on the scheduled players.
+
+Try lowering the \"Max FPS\" and toggling the \"Use play_scheduled()\" button!"
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 119
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="UsePlayScheduled" type="HBoxContainer" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CheckButton" type="CheckButton" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer/UsePlayScheduled"]
+layout_mode = 2
+text = "Use play_scheduled()"
+
+[node name="MaxFps" type="HBoxContainer" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer/MaxFps"]
+layout_mode = 2
+text = "Max FPS"
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer/MaxFps"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer/MaxFps/CenterContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+min_value = 10.0
+max_value = 1000.0
+value = 10.0
+exp_edit = true
+
+[node name="SpinBox" type="SpinBox" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer/MaxFps"]
+layout_mode = 2
+min_value = 10.0
+max_value = 1000.0
+value = 10.0
+
+[node name="Volume" type="HBoxContainer" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer/Volume"]
+layout_mode = 2
+text = "Volume"
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer/Volume"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer/Volume/CenterContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+max_value = 2.0
+step = 0.1
+value = 1.0
+
+[node name="TimeLabels" type="VBoxContainer" parent="Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="GameTimeLabel" type="Label" parent="Control/VBoxContainer/HBoxContainer/TimeLabels"]
+layout_mode = 2
+text = "Game Time: 0"
+
+[node name="AudioTimeLabel" type="Label" parent="Control/VBoxContainer/HBoxContainer/TimeLabels"]
+layout_mode = 2
+text = "Audio Time: 0"
+
+[connection signal="toggled" from="Control/VBoxContainer/HBoxContainer/VBoxContainer/UsePlayScheduled/CheckButton" to="." method="_on_use_play_scheduled_check_button_toggled"]
+[connection signal="value_changed" from="Control/VBoxContainer/HBoxContainer/VBoxContainer/MaxFps/CenterContainer/HSlider" to="." method="_on_max_fps_h_slider_value_changed"]
+[connection signal="value_changed" from="Control/VBoxContainer/HBoxContainer/VBoxContainer/MaxFps/SpinBox" to="." method="_on_max_fps_spin_box_value_changed"]
+[connection signal="value_changed" from="Control/VBoxContainer/HBoxContainer/VBoxContainer/Volume/CenterContainer/HSlider" to="." method="_on_volume_h_slider_value_changed"]
