@@ -32,6 +32,7 @@ _jump_force = 50.0
 _snap_distance = 1.0
 
 [node name="ViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 1024.0
@@ -39,9 +40,6 @@ offset_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Viewport" type="SubViewport" parent="ViewportContainer"]
 handle_input_locally = false
@@ -60,6 +58,7 @@ script = ExtResource("7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/CharacterBody2D"]
 shape = SubResource("3")
+debug_color = Color(0, 1, 0, 0.0980392)
 
 [node name="CharacterBodyRay2D" type="CharacterBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2(30, 40)
@@ -69,53 +68,48 @@ script = ExtResource("7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/CharacterBodyRay2D"]
 position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_scs3g")
+debug_color = Color(0, 1, 0, 0.0980392)
 
 [node name="CollisionShapeRay2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/CharacterBodyRay2D"]
 position = Vector2(0, -2)
 shape = SubResource("SeparationRayShape2D_vby12")
+debug_color = Color(0, 1, 0, 0.0980392)
 
-[node name="RigidDynamicBody2D" type="RigidDynamicBody2D" parent="ViewportContainer/Viewport"]
+[node name="RigidDynamicBody2D" type="RigidBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2(30, 40)
 collision_mask = 2147483649
 physics_material_override = SubResource("1")
-contacts_reported = 4
-contact_monitor = true
 lock_rotation = true
+contact_monitor = true
 script = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/RigidDynamicBody2D"]
 shape = SubResource("2")
+debug_color = Color(1, 1, 0, 0.0980392)
 
-[node name="RigidBodyRay2D" type="RigidDynamicBody2D" parent="ViewportContainer/Viewport"]
+[node name="RigidBodyRay2D" type="RigidBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2(30, 40)
 collision_mask = 2147483649
 physics_material_override = SubResource("1")
-contacts_reported = 4
-contact_monitor = true
 lock_rotation = true
+contact_monitor = true
 script = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/RigidBodyRay2D"]
 position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_scs3g")
+debug_color = Color(1, 1, 0, 0.0980392)
 
 [node name="CollisionShapeRay2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/RigidBodyRay2D"]
 position = Vector2(0, -2)
 shape = SubResource("SeparationRayShape2D_vby12")
+debug_color = Color(1, 1, 0, 0.0980392)
 
 [node name="Wall1" type="StaticBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2(20, 40)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/Wall1"]
-rotation = 1.5708
-shape = SubResource("6")
-
 [node name="Wall2" type="StaticBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2(122, 40)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/Wall2"]
-rotation = 1.5708
-shape = SubResource("6")
 
 [node name="Platform1" type="StaticBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2(50, 44)
@@ -123,12 +117,14 @@ position = Vector2(50, 44)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/Platform1"]
 shape = SubResource("6")
 one_way_collision = true
+debug_color = Color(0, 0.533333, 1, 0.0980392)
 
 [node name="Platform2" type="StaticBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2(80, 38)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/Platform2"]
 shape = SubResource("6")
+debug_color = Color(0, 0.533333, 1, 0.0980392)
 
 [node name="Slope" type="StaticBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2(85, 36)
@@ -136,15 +132,22 @@ position = Vector2(85, 36)
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="ViewportContainer/Viewport/Slope"]
 polygon = PackedVector2Array(0, 0, 6, 0, 22, 16, 16, 16)
 
+[node name="SubViewportContainer_SubViewport_Wall1#CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("6")
+debug_color = Color(0, 0.6, 0.7, 0.42)
+
+[node name="SubViewportContainer_SubViewport_Wall2#CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("6")
+debug_color = Color(0, 0.6, 0.7, 0.42)
+
 [node name="LabelTestType" type="Label" parent="."]
 offset_left = 14.0
 offset_top = 79.0
 offset_right = 145.0
 offset_bottom = 93.0
 text = "Testing: "
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Options" parent="." instance=ExtResource("3")]
 
@@ -154,9 +157,6 @@ offset_top = 237.929
 offset_right = 145.0
 offset_bottom = 251.929
 text = "ON FLOOR"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelControls" type="Label" parent="."]
 offset_left = 14.0
@@ -165,6 +165,3 @@ offset_right = 145.0
 offset_bottom = 294.291
 text = "LEFT/RIGHT - MOVE
 UP - JUMP"
-__meta__ = {
-"_edit_use_anchors_": false
-}
