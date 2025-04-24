@@ -21,7 +21,7 @@ void fragment() {
 	outline += step(threshold, texture(texture_albedo, uv - vec2(0.0, outline_thickness)).a);
 
 	vec3 normal_tex = texture(normal_map, UV).rgb;
-	normal_tex = -(normal_tex * 2.0 - 1.0);
+	normal_tex = normal_tex * 2.0 - 1.0;
 	NORMAL = normalize(TANGENT * normal_tex.x + BINORMAL * normal_tex.y + NORMAL * normal_tex.z);
 
 	if (center.a < threshold && outline > 0.0) {
