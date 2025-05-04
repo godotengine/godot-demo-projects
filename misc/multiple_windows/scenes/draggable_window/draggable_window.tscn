@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://ek1fmwy87san"]
+
+[ext_resource type="Texture2D" uid="uid://pgdemhy0xqog" path="res://scenes/draggable_window/hand.svg" id="1_y4nm8"]
+[ext_resource type="Script" path="res://scenes/draggable_window/draggable_region.gd" id="2_pflw3"]
+[ext_resource type="Script" path="res://scenes/draggable_window/sprite_polygon_passthrough.gd" id="3_20753"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ghj85"]
+size = Vector2(256, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvhp1"]
+size = Vector2(128, 128)
+
+[node name="DraggableWindow" type="Window"]
+transparent_bg = true
+physics_object_picking = true
+size = Vector2i(128, 128)
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
+
+[node name="BG" type="Sprite2D" parent="."]
+visible = false
+texture = SubResource("PlaceholderTexture2D_ghj85")
+centered = false
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(64, 64)
+texture = ExtResource("1_y4nm8")
+
+[node name="Area2D" type="Area2D" parent="Icon"]
+script = ExtResource("2_pflw3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/Area2D"]
+shape = SubResource("RectangleShape2D_cvhp1")
+
+[node name="PassthroughGenerator" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("3_20753")
+sprite = NodePath("../Icon")
