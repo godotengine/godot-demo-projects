@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bo08s5dqyqpon"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uhsu1"]
+fractal_octaves = 9
+fractal_lacunarity = 7.0
+fractal_gain = 1.0
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xslbn"]
+seamless = true
+noise = SubResource("FastNoiseLite_uhsu1")
+
+[resource]
+albedo_color = Color(0.1705, 0.55, 0.297, 1)
+albedo_texture = SubResource("NoiseTexture2D_xslbn")
+uv1_scale = Vector3(1, 8, 1)
+uv1_triplanar_sharpness = 3.73213
