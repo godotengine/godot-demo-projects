@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://c18kajc4sbkqv"]
+
+[ext_resource type="Shader" path="res://shaders/textures.gdshader" id="1_slppi"]
+[ext_resource type="Texture2D" uid="uid://rek0t7kubpx4" path="res://assets/pattern.png" id="2_0scsl"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_h7spe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v1io3"]
+render_priority = 0
+shader = ExtResource("1_slppi")
+shader_parameter/albedo = Color(0.241423, 0.629472, 0.447088, 1)
+shader_parameter/roughness = 1.0
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(100, 100, 100)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/texture_albedo = ExtResource("2_0scsl")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2x6s1"]
+material = SubResource("ShaderMaterial_v1io3")
+size = Vector2(1000, 1000)
+
+[node name="Floor" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("WorldBoundaryShape3D_h7spe")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_2x6s1")
