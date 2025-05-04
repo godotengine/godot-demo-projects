@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqailbm8vcpf5"]
+
+[ext_resource type="Script" path="res://split_screen.gd" id="1_4fp0b"]
+[ext_resource type="Script" path="res://sub_viewport_container.gd" id="2_v8t84"]
+[ext_resource type="Texture2D" uid="uid://ci5b7o7h2bmj0" path="res://icon.svg" id="4_787wn"]
+[ext_resource type="Script" path="res://player.gd" id="5_1qhfw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m48mh"]
+size = Vector2(128, 128)
+
+[node name="Split" type="VBoxContainer"]
+auto_translate_mode = 1
+offset_right = 350.0
+offset_bottom = 374.0
+script = ExtResource("1_4fp0b")
+
+[node name="OptionButton" type="OptionButton" parent="."]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+auto_translate_mode = 1
+layout_mode = 2
+script = ExtResource("2_v8t84")
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(350, 350)
+render_target_update_mode = 4
+
+[node name="Player" type="CharacterBody2D" parent="SubViewportContainer/SubViewport"]
+script = ExtResource("5_1qhfw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/Player"]
+shape = SubResource("RectangleShape2D_m48mh")
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/Player"]
+texture = ExtResource("4_787wn")
+
+[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport/Player"]
+
+[connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]
