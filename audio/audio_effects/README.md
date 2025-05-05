@@ -30,3 +30,6 @@ All sound effects are from [Freesound](https://freesound.org/) and licensed unde
 - [Negative Beeps](https://freesound.org/people/themusicalnomad/sounds/253886/) by themusicalnomad
 - [Sad Trombone](https://freesound.org/people/kirbydx/sounds/175409/) by kirbydx
 - [Static](https://freesound.org/people/dotY21/sounds/335203/) by dotY21
+
+### Icon
+- [Equalizer](https://iconduck.com/icons/249702/equalizer) and licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
