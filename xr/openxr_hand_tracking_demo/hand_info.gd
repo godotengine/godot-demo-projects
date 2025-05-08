@@ -2,6 +2,7 @@ extends Node3D
 
 @export_enum("Left", "Right") var hand : int = 0
 
+@export var fallback_mesh : Node3D
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -36,17 +37,23 @@ func _process(delta):
 	if hand_tracker:
 		text += "\nHand tracker found\n"
 
-		if hand_tracker.has_tracking_data:
-			if hand_tracker.hand_tracking_source == XRHandTracker.HAND_TRACKING_SOURCE_UNKNOWN:
-				text += "- Source: unknown\n"
-			elif hand_tracker.hand_tracking_source == XRHandTracker.HAND_TRACKING_SOURCE_UNOBSTRUCTED:
-				text += "- Source: optical hand tracking\n"
-			elif hand_tracker.hand_tracking_source == XRHandTracker.HAND_TRACKING_SOURCE_CONTROLLER:
-				text += "- Source: inferred from controller\n"
-			else:
-				text += "- Source: %d\n" % [ hand_tracker.hand_tracking_source ]
+		# Report data source specified
+		if hand_tracker.hand_tracking_source == XRHandTracker.HAND_TRACKING_SOURCE_UNKNOWN:
+			text += "- Source: unknown\n"
+		elif hand_tracker.hand_tracking_source == XRHandTracker.HAND_TRACKING_SOURCE_UNOBSTRUCTED:
+			text += "- Source: optical hand tracking\n"
+		elif hand_tracker.hand_tracking_source == XRHandTracker.HAND_TRACKING_SOURCE_CONTROLLER:
+			text += "- Source: inferred from controller\n"
+		elif hand_tracker.hand_tracking_source == XRHandTracker.HAND_TRACKING_SOURCE_NOT_TRACKED:
+			text += "- Source: no source\n"
 		else:
-			text += "- No tracking data\n"
+			text += "- Source: %d\n" % [ hand_tracker.hand_tracking_source ]
+
+		# If we're not tracking, show our fallback mesh on our controller tracking.
+		# If we're also not controller tracking, we can't show anything.
+		# Note: this is only a sphere in this example.
+		if fallback_mesh:
+			fallback_mesh.visible = not hand_tracker.has_tracking_data
 	else:
 		text += "\nNo hand tracker found!\n"
 
