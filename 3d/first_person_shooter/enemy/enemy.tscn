@@ -1,0 +1,243 @@
+[gd_scene load_steps=15 format=3 uid="uid://bbj30jyv46r1t"]
+
+[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_t0d11"]
+[ext_resource type="Shader" path="res://enemy/enemy.gdshader" id="2_frlby"]
+[ext_resource type="Texture2D" uid="uid://bvhfqb51fdy8c" path="res://enemy/spritesheet.png" id="3_catq1"]
+[ext_resource type="PackedScene" uid="uid://b4g77r67peq11" path="res://blob_shadow.tscn" id="4_nscyu"]
+[ext_resource type="AudioStream" uid="uid://lqgi4erf48wg" path="res://player/shotgun/fire.wav" id="5_sh4av"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cwcsd"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_he27t"]
+size = Vector2(1.638, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4tdqe"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_frlby")
+shader_parameter/view_count = 8
+shader_parameter/frame_count = 7
+shader_parameter/frame = 0
+shader_parameter/views = ExtResource("3_catq1")
+
+[sub_resource type="Animation" id="Animation_ltck1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:surface_material_override/0:shader_parameter/frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponLight:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponLight:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5sfw8"]
+streams_count = 1
+random_volume_offset_db = 0.0
+stream_0/stream = ExtResource("5_sh4av")
+stream_0/weight = 1.0
+
+[sub_resource type="Animation" id="Animation_royxd"]
+resource_name = "fire"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:surface_material_override/0:shader_parameter/frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 4]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponSound")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": SubResource("AudioStreamRandomizer_5sfw8")
+}],
+"times": PackedFloat32Array(0.1)
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponLight:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponLight:light_energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.4),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [0.0, 2.0, 0.0]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fire_bullet"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_qjgq4"]
+resource_name = "pain"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:surface_material_override/0:shader_parameter/frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponLight:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_1ms2s"]
+resource_name = "walk"
+length = 0.45
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:surface_material_override/0:shader_parameter/frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 0),
+"update": 0,
+"values": [0, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1kihh"]
+_data = {
+"RESET": SubResource("Animation_ltck1"),
+"fire": SubResource("Animation_royxd"),
+"pain": SubResource("Animation_qjgq4"),
+"walk": SubResource("Animation_1ms2s")
+}
+
+[node name="Enemy" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_t0d11")
+
+[node name="LineOfSight" type="RayCast3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_cwcsd")
+
+[node name="Sprite" type="MeshInstance3D" parent="."]
+layers = 4
+mesh = SubResource("QuadMesh_he27t")
+surface_material_override/0 = SubResource("ShaderMaterial_4tdqe")
+
+[node name="Decal" parent="." instance=ExtResource("4_nscyu")]
+size = Vector3(1.2, 2.4, 1.2)
+cull_mask = 1048569
+
+[node name="WeaponSound" type="AudioStreamPlayer3D" parent="."]
+volume_db = -12.0
+unit_size = 20.0
+max_db = -12.0
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="WeaponLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
+light_color = Color(1, 0.764706, 0.235294, 1)
+light_energy = 2.0
+light_specular = 0.01
+shadow_enabled = true
+shadow_bias = 0.12
+shadow_blur = 2.5
+
+[node name="LineOfSightTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "walk"
+libraries = {
+"": SubResource("AnimationLibrary_1kihh")
+}
+
+[connection signal="timeout" from="LineOfSightTimer" to="." method="_on_line_of_sight_timer_timeout"]
