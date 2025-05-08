@@ -68,7 +68,7 @@ func button_pressed(button_name: String) -> void:
 		paint_control.brush_shape = paint_control.BrushShape.CIRCLE
 		shape_name = "Circle"
 
-	# If a opperation button is pressed
+	# If a operation button is pressed
 	elif button_name == "clear_picture":
 		paint_control.brush_data_list.clear()
 		paint_control.queue_redraw()
@@ -104,5 +104,5 @@ func brush_size_changed(value: float) -> void:
 
 
 func save_file_selected(path: String) -> void:
-	# Call save_picture in paint_control, passing in the path we recieved from SaveFileDialog.
+	# Call save_picture in paint_control, passing in the path we received from SaveFileDialog.
 	paint_control.save_picture(path)

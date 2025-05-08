@@ -19,7 +19,7 @@ The subsequent quality loss often renders text unreadable or at the least ugly l
 
 It turns out however that when 2D interfaces are presented on a virtual screen in front of the user,
 often as a rectangle or slightly curved screen,
-that rendering this content ontop of the lens distorted 3D rendering,
+that rendering this content on top of the lens distorted 3D rendering,
 and simply curving this 2D plane,
 results in a high quality render.
 

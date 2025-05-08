@@ -11,7 +11,7 @@ var _speed := DEFAULT_SPEED
 func _process(delta: float) -> void:
 	_speed += delta
 	# Ball will move normally for both players,
-	# even if it's sightly out of sync between them,
+	# even if it's slightly out of sync between them,
 	# so each player sees the motion as smooth and not jerky.
 	if not stopped:
 		translate(_speed * delta * direction)

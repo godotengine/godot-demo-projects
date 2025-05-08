@@ -32,7 +32,7 @@ func _init() -> void:
 	gradient = Gradient.new()
 	gradient.add_point(0.6, Color(0.9, 0.9, 0.9, 1.0))
 	gradient.add_point(0.8, Color(1.0, 1.0, 1.0, 1.0))
-	# The gradient will start black, transition to grey in the first 70%, then to white in the last 30%.
+	# The gradient will start black, transition to gray in the first 70%, then to white in the last 30%.
 	gradient.reverse()
 
 	# Create a 1D texture (single row of pixels) from gradient.
