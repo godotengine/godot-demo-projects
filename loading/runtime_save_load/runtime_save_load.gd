@@ -6,6 +6,7 @@ extends Control
 @onready var plain_text_viewer_label := $MarginContainer/VBoxContainer/Result/PlainTextViewer/Label as Label
 @onready var texture_viewer := $MarginContainer/VBoxContainer/Result/TextureViewer as TextureRect
 @onready var audio_player := $MarginContainer/VBoxContainer/Result/AudioPlayer as Button
+@onready var audio_player_information := $MarginContainer/VBoxContainer/Result/AudioPlayer/Information as Label
 @onready var audio_stream_player := $MarginContainer/VBoxContainer/Result/AudioPlayer/AudioStreamPlayer as AudioStreamPlayer
 @onready var scene_viewer := $MarginContainer/VBoxContainer/Result/SceneViewer as SubViewportContainer
 @onready var scene_viewer_camera := $MarginContainer/VBoxContainer/Result/SceneViewer/SubViewport/Camera3D as Camera3D
@@ -23,19 +24,6 @@ var zip_reader := ZIPReader.new()
 # Keeps reference to the root node imported in the 3D scene viewer,
 # so that it can be exported later.
 var scene_viewer_root_node: Node
-
-func _on_browse_pressed() -> void:
-	file_dialog.popup_centered_ratio()
-
-
-func _on_file_path_text_submitted(new_text: String) -> void:
-	open_file(new_text)
-	# Put the caret at the end of the submitted text.
-	file_path_edit.caret_column = file_path_edit.text.length()
-
-
-func _on_file_dialog_file_selected(path: String) -> void:
-	open_file(path)
 
 
 func reset_visibility() -> void:
@@ -56,6 +44,20 @@ func reset_visibility() -> void:
 
 	error_label.visible = false
 	export_button.disabled = false
+
+
+func _on_browse_pressed() -> void:
+	file_dialog.popup_centered_ratio()
+
+
+func _on_file_path_text_submitted(new_text: String) -> void:
+	open_file(new_text)
+	# Put the caret at the end of the submitted text.
+	file_path_edit.caret_column = file_path_edit.text.length()
+
+
+func _on_file_dialog_file_selected(path: String) -> void:
+	open_file(path)
 
 
 func _on_audio_player_pressed() -> void:
@@ -98,8 +100,8 @@ func _on_export_file_dialog_file_selected(path: String) -> void:
 			image.save_webp(path)
 
 	elif audio_player.visible:
-		# Ogg Vorbis audio can't be exported at runtime to a standard format
-		# (only WAV files can be using `AudioStreamWAV.save_to_wav()`).
+		# Ogg Vorbis and MP3 audio can't be exported at runtime to a standard format
+		# (only WAV files can be saved from WAV sources using `AudioStreamWAV.save_to_wav()`).
 		pass
 
 	elif scene_viewer.visible:
@@ -166,31 +168,53 @@ func open_file(path: String) -> void:
 		texture_viewer.texture = ImageTexture.create_from_image(image)
 
 	# Audio.
-	# Run-time MP3 and WAV loading aren't supported by the engine yet.
-	elif path_lower.ends_with(".ogg"):
+	elif path_lower.ends_with(".ogg") or path_lower.ends_with(".mp3") or path_lower.ends_with(".wav"):
 		# `AudioStreamOggVorbis.load_from_buffer()` can alternatively be used
 		# if you have Ogg Vorbis data in a PackedByteArray instead of a file.
-		audio_stream_player.stream = AudioStreamOggVorbis.load_from_file(path)
+		if path_lower.ends_with(".ogg"):
+			audio_stream_player.stream = AudioStreamOggVorbis.load_from_file(path)
+		elif path_lower.ends_with(".mp3"):
+			audio_stream_player.stream = AudioStreamMP3.load_from_file(path)
+		elif path_lower.ends_with(".wav"):
+			audio_stream_player.stream = AudioStreamWAV.load_from_file(path)
 		reset_visibility()
 		export_button.disabled = true
 		audio_player.visible = true
+		var duration := roundi(audio_stream_player.stream.get_length())
+		@warning_ignore("integer_division")
+		audio_player_information.text = "Duration: %02d:%02d" % [duration / 60, duration % 60]
 
 	# 3D scenes.
-	elif path_lower.ends_with(".gltf") or path_lower.ends_with(".glb"):
+	elif path_lower.ends_with(".gltf") or path_lower.ends_with(".glb") or path_lower.ends_with(".fbx"):
 		# GLTFState is used by GLTFDocument to store the loaded scene's state.
 		# GLTFDocument is the class that handles actually loading glTF data into a Godot node tree,
 		# which means it supports glTF features such as lights and cameras.
-		var gltf_document := GLTFDocument.new()
-		var gltf_state := GLTFState.new()
-		var error := gltf_document.append_from_file(path, gltf_state)
-		if error == OK:
-			scene_viewer_root_node = gltf_document.generate_scene(gltf_state)
-			reset_visibility()
-			scene_viewer.add_child(scene_viewer_root_node)
-			export_file_dialog.filters = ["*.gltf ; glTF Text Scene", "*.glb ; glTF Binary Scene"]
-			scene_viewer.visible = true
-		else:
-			show_error('Couldn\'t load "%s" as a glTF scene (error code: %s).' % [path.get_file(), error_string(error)])
+		#
+		# The same applies to FBX, except FBXState and FBXDocument are used instead.
+		if path_lower.ends_with(".gltf") or path_lower.ends_with(".glb"):
+			var gltf_document := GLTFDocument.new()
+			var gltf_state := GLTFState.new()
+			var error := gltf_document.append_from_file(path, gltf_state)
+			if error == OK:
+				scene_viewer_root_node = gltf_document.generate_scene(gltf_state)
+				reset_visibility()
+				scene_viewer.add_child(scene_viewer_root_node)
+				export_file_dialog.filters = ["*.gltf ; glTF Text Scene", "*.glb ; glTF Binary Scene"]
+				scene_viewer.visible = true
+			else:
+				show_error('Couldn\'t load "%s" as a glTF scene (error code: %s).' % [path.get_file(), error_string(error)])
+		elif path_lower.ends_with(".fbx"):
+			var fbx_document := FBXDocument.new()
+			var fbx_state := FBXState.new()
+			var error := fbx_document.append_from_file(path, fbx_state)
+			if error == OK:
+				scene_viewer_root_node = fbx_document.generate_scene(fbx_state)
+				reset_visibility()
+				scene_viewer.add_child(scene_viewer_root_node)
+				export_file_dialog.filters = ["*.fbx ; FBX Scene"]
+				scene_viewer.visible = true
+			else:
+				show_error('Couldn\'t load "%s" as a FBX scene (error code: %s).' % [path.get_file(), error_string(error)])
 
 	# Fonts.
 	elif (
