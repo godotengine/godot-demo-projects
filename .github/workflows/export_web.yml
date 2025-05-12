@@ -60,7 +60,10 @@ jobs:
             mono/ \
             networking/ \
             plugins/ \
-            xr/
+            xr/openxr_character_centric_movement \
+            xr/openxr_composition_layers \
+            xr/openxr_hand_tracking_demo \
+            xr/openxr_origin_centric_movement
 
           for panorama in 3d/material_testers/backgrounds/*.hdr; do
             # Decrease the resolution to get below the 100 MB PCK size limit.
@@ -87,6 +90,11 @@ jobs:
             cp "$BASEDIR/.github/dist/export_presets.cfg" .
             # Enable ETC2 texture importing, which is disabled by default (but required for web exports to work on mobile platforms).
             echo "[rendering]\n\ntextures/vram_compression/import_etc2_astc=true" >> project.godot
+
+            # Enable WebXR Polyfill and WebXR Layers Polyfill for the WebXR demo.
+            if [ "$demo" == "xr/webxr/" ]; then
+              sed -i 's~^html/head_include=""$~html/head_include="<script src=\\"https://cdn.jsdelivr.net/npm/webxr-polyfill@latest/build/webxr-polyfill.min.js\\"></script>\n<script>\nvar polyfill = new WebXRPolyfill();\n</script>\n<script src=\\"https://cdn.jsdelivr.net/npm/webxr-layers-polyfill@latest/build/webxr-layers-polyfill.min.js\\"></script>\n<script>\nvar layersPolyfill = new WebXRLayersPolyfill();\n</script>"~g' export_presets.cfg
+            fi
 
             godot --verbose --headless --export-release "Web" "$BASEDIR/.github/dist/$demo/index.html"
 
