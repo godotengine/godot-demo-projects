@@ -1,10 +1,10 @@
 # Audio Mic Input
 
-This example shows how to read microphone audio input data  
+This example shows how to read microphone audio input data
 using the `PackedVector2Array Input.get_microphone_buffer(frames: int)`
 function.
 
-The data can be copied to an `AudioStreamGenerator`, saved to a WAV file, or 
+The data can be copied to an `AudioStreamGenerator`, saved to a WAV file, or
 used as a `FORMAT_RGF` image by a GPU shader.
 
 A sine wave tone generator is included that can be deployed on a second device
