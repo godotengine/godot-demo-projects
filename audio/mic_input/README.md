@@ -1,17 +1,19 @@
-# Audio Mic Record
+# Audio Mic Input
 
-This is an example showing how one can record audio from
-the microphone and later play it back or save it to a file.
+This example shows how to read microphone audio input data  
+using the `PackedVector2Array Input.get_microphone_buffer(frames: int)`
+function.
 
-With an addition on how to change the format, mix rate and
-stereo settings of the recording.
+The data can be copied to an `AudioStreamGenerator`, saved to a WAV file, or 
+used as a `FORMAT_RGF` image by a GPU shader.
+
+A sine wave tone generator is included that can be deployed on a second device
+and used to probe the positional effects on a stereo microphone.
 
 Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2760
-
 ## Screenshots
 
-![Screenshot](screenshots/mic_record.png)
+![image](https://github.com/user-attachments/assets/d85360dd-a0aa-4694-aad0-d570fd2a6a15)
