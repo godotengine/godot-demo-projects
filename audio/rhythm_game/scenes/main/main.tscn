@@ -1,0 +1,282 @@
+[gd_scene load_steps=9 format=3 uid="uid://cv53erwosrk7o"]
+
+[ext_resource type="Script" uid="uid://bw05ipplwsl4v" path="res://scenes/main/main.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://dxdm5hivq6xkf" path="res://game_state/conductor.gd" id="2_1bvp3"]
+[ext_resource type="Script" uid="uid://c7jdh7pv088ja" path="res://scenes/main/pause_handler.gd" id="2_7mycd"]
+[ext_resource type="AudioStream" uid="uid://cdrr8wk42fkfg" path="res://music/the_comeback2.ogg" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://d0qi52a8nkb6o" path="res://game_state/note_manager.gd" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://rrnv37orejuv" path="res://objects/guide/guide.tscn" id="6_ow5a4"]
+[ext_resource type="Script" uid="uid://gd4p06mb2biq" path="res://game_state/metronome.gd" id="7_hujxm"]
+[ext_resource type="AudioStream" uid="uid://dbs7gpp3wnsrd" path="res://music/Perc_MetronomeQuartz_hi.wav" id="8_yyfjg"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_0xm2m")
+
+[node name="PauseHandler" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("2_7mycd")
+
+[node name="Conductor" type="Node" parent="." node_paths=PackedStringArray("player")]
+process_mode = 3
+script = ExtResource("2_1bvp3")
+player = NodePath("../Player")
+bpm = 116.052
+first_beat_offset_ms = 8283
+
+[node name="Player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_h2yge")
+volume_db = -12.0
+
+[node name="Notes" type="Node2D" parent="." node_paths=PackedStringArray("conductor")]
+position = Vector2(640, 594)
+script = ExtResource("4_lquwl")
+conductor = NodePath("../Conductor")
+
+[node name="Guide" parent="." instance=ExtResource("6_ow5a4")]
+position = Vector2(640, 594)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="TutorialLabel" type="Label" parent="Control"]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 365.0
+offset_bottom = 91.0
+text = "Space to hit notes
+Esc or P to pause
+R to restart"
+
+[node name="SettingsVBox" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 157.0
+offset_right = 367.0
+offset_bottom = 398.0
+
+[node name="UseFilteredCheckBox" type="CheckBox" parent="Control/SettingsVBox"]
+layout_mode = 2
+focus_mode = 0
+button_pressed = true
+text = "Enable smoothing filter on playback position"
+
+[node name="Control" type="Control" parent="Control/SettingsVBox"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+
+[node name="MetronomeCheckBox" type="CheckBox" parent="Control/SettingsVBox"]
+layout_mode = 2
+focus_mode = 0
+text = "Enable metronome"
+
+[node name="InputLatencyHBox" type="HBoxContainer" parent="Control/SettingsVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Control/SettingsVBox/InputLatencyHBox"]
+layout_mode = 2
+text = "Input Latency (ms):"
+
+[node name="SpinBox" type="SpinBox" parent="Control/SettingsVBox/InputLatencyHBox"]
+layout_mode = 2
+min_value = -100.0
+max_value = 1000.0
+value = 20.0
+rounded = true
+
+[node name="LatencyInstructionsLabel" type="Label" parent="Control/SettingsVBox"]
+layout_mode = 2
+text = "(Increase this if you are hitting notes too late)"
+
+[node name="Control2" type="Control" parent="Control/SettingsVBox"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+
+[node name="ScrollSpeedInstructionsLabel" type="Label" parent="Control/SettingsVBox"]
+layout_mode = 2
+text = "Scroll Speed:"
+
+[node name="ScrollSpeedHBox" type="HBoxContainer" parent="Control/SettingsVBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/SettingsVBox/ScrollSpeedHBox"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="Control/SettingsVBox/ScrollSpeedHBox/CenterContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+focus_mode = 0
+min_value = 200.0
+max_value = 1000.0
+step = 50.0
+value = 400.0
+tick_count = 17
+ticks_on_borders = true
+
+[node name="Label" type="Label" parent="Control/SettingsVBox/ScrollSpeedHBox"]
+layout_mode = 2
+text = "400"
+
+[node name="ShowOffsetCheckBox" type="CheckBox" parent="Control/SettingsVBox"]
+layout_mode = 2
+focus_mode = 0
+text = "Show offset on judgment"
+
+[node name="StatsVBox" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 900.0
+offset_top = 361.0
+offset_right = 1066.0
+offset_bottom = 465.0
+
+[node name="PerfectLabel" type="Label" parent="Control/StatsVBox"]
+layout_mode = 2
+text = "Perfect: 0"
+
+[node name="GoodLabel" type="Label" parent="Control/StatsVBox"]
+layout_mode = 2
+text = "Good: 0"
+
+[node name="MissLabel" type="Label" parent="Control/StatsVBox"]
+layout_mode = 2
+text = "Miss: 0"
+
+[node name="HitErrorLabel" type="Label" parent="Control/StatsVBox"]
+layout_mode = 2
+text = "Avg Hit Offset: 0.0 ms"
+
+[node name="ChartVBox" type="VBoxContainer" parent="Control"]
+layout_mode = 2
+offset_left = 900.0
+offset_top = 60.0
+offset_right = 1066.0
+offset_bottom = 118.0
+
+[node name="Label" type="Label" parent="Control/ChartVBox"]
+layout_mode = 2
+text = "Chart:"
+
+[node name="OptionButton" type="OptionButton" parent="Control/ChartVBox"]
+layout_mode = 2
+focus_mode = 0
+selected = 0
+allow_reselect = true
+item_count = 2
+popup/item_0/text = "The Comeback"
+popup/item_0/id = 1
+popup/item_1/text = "Sync Test"
+popup/item_1/id = 0
+
+[node name="SongCompleteLabel" type="Label" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.5
+offset_top = -37.5
+offset_right = 79.5
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Song Complete!
+
+Press R to play again"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseLabel" type="Label" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.5
+offset_top = -37.5
+offset_right = 79.5
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="JudgmentHBox" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -184.0
+offset_right = 20.0
+offset_bottom = -144.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 200
+
+[node name="LJudgmentLabel" type="Label" parent="Control/JudgmentHBox"]
+layout_mode = 2
+text = "Perfect!!"
+horizontal_alignment = 1
+
+[node name="RJudgmentLabel" type="Label" parent="Control/JudgmentHBox"]
+layout_mode = 2
+text = "Perfect!!"
+horizontal_alignment = 1
+
+[node name="ErrorGraphVBox" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+offset_left = 900.0
+offset_top = 518.0
+offset_right = 1250.0
+offset_bottom = 665.0
+
+[node name="Label" type="Label" parent="Control/ErrorGraphVBox"]
+layout_mode = 2
+text = "Error Graph:"
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/ErrorGraphVBox"]
+layout_mode = 2
+
+[node name="GraphBackground" type="Panel" parent="Control/ErrorGraphVBox/CenterContainer"]
+custom_minimum_size = Vector2(350, 120)
+layout_mode = 2
+
+[node name="TimeGraph" type="Control" parent="Control/ErrorGraphVBox/CenterContainer"]
+custom_minimum_size = Vector2(350, 120)
+layout_mode = 2
+
+[node name="JudgmentsGraph" type="Control" parent="Control/ErrorGraphVBox/CenterContainer"]
+custom_minimum_size = Vector2(350, 120)
+layout_mode = 2
+
+[node name="Metronome" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("conductor")]
+stream = ExtResource("8_yyfjg")
+volume_db = 2.0
+script = ExtResource("7_hujxm")
+conductor = NodePath("../Conductor")
+
+[connection signal="note_hit" from="Notes" to="." method="_on_note_hit"]
+[connection signal="play_stats_updated" from="Notes" to="." method="_on_play_stats_updated"]
+[connection signal="song_finished" from="Notes" to="." method="_on_song_finished"]
+[connection signal="toggled" from="Control/SettingsVBox/UseFilteredCheckBox" to="." method="_on_use_filtered_check_box_toggled"]
+[connection signal="toggled" from="Control/SettingsVBox/MetronomeCheckBox" to="." method="_on_metronome_check_box_toggled"]
+[connection signal="value_changed" from="Control/SettingsVBox/InputLatencyHBox/SpinBox" to="." method="_on_input_latency_spin_box_value_changed"]
+[connection signal="value_changed" from="Control/SettingsVBox/ScrollSpeedHBox/CenterContainer/HSlider" to="." method="_on_scroll_speed_h_slider_value_changed"]
+[connection signal="toggled" from="Control/SettingsVBox/ShowOffsetCheckBox" to="." method="_on_show_offset_check_box_toggled"]
+[connection signal="item_selected" from="Control/ChartVBox/OptionButton" to="." method="_on_chart_option_button_item_selected"]
+[connection signal="draw" from="Control/ErrorGraphVBox/CenterContainer/TimeGraph" to="." method="_on_time_graph_draw"]
+[connection signal="draw" from="Control/ErrorGraphVBox/CenterContainer/JudgmentsGraph" to="." method="_on_judgments_graph_draw"]
