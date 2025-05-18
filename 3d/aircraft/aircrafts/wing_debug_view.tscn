@@ -1,0 +1,18 @@
+[gd_scene load_steps=6 format=3 uid="uid://1qg3ppeqbu8s"]
+
+[ext_resource type="Script" uid="uid://ep1ok4t4lxt0" path="res://aircrafts/wing_debug_view.gd" id="1_nsos3"]
+[ext_resource type="Material" uid="uid://dnhctca1dgph2" path="res://aircrafts/materials/wing_material.tres" id="2_dw13b"]
+[ext_resource type="Material" uid="uid://d0bv8ru7m7vay" path="res://aircrafts/materials/control_surface_material.tres" id="3_4vipd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xp3a8"]
+albedo_color = Color(0.804128, 0.395362, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0b4ue"]
+albedo_color = Color(0.923933, 0.0229387, 3.85046e-07, 1)
+
+[node name="WingDebugView" type="Node3D"]
+script = ExtResource("1_nsos3")
+wing_material = ExtResource("2_dw13b")
+control_surface_material = ExtResource("3_4vipd")
+warning_material = SubResource("StandardMaterial3D_xp3a8")
+stall_material = SubResource("StandardMaterial3D_0b4ue")

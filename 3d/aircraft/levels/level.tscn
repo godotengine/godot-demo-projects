@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://boonkhcx0sdwp"]
+
+[ext_resource type="Script" uid="uid://csp8ors3tvmcv" path="res://levels/level.gd" id="1_5mrsh"]
+[ext_resource type="PackedScene" uid="uid://cymcchdpmb3iy" path="res://aircrafts/cessna-172.tscn" id="3_5mrsh"]
+[ext_resource type="PackedScene" uid="uid://pt5e5ymsx528" path="res://aircrafts/yak-52.tscn" id="4_gjl0y"]
+[ext_resource type="PackedScene" uid="uid://bb33phflegolh" path="res://levels/info_panel.tscn" id="4_safpt"]
+[ext_resource type="PackedScene" uid="uid://b1o38th6yrrkr" path="res://levels/ground.tscn" id="6_gjl0y"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_safpt"]
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_5mrsh")
+aircrafts = Array[PackedScene]([ExtResource("4_gjl0y"), ExtResource("3_5mrsh")])
+
+[node name="InfoPanel" parent="." instance=ExtResource("4_safpt")]
+
+[node name="Help" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.994
+anchor_right = 0.994
+offset_left = -204.088
+offset_top = 6.0
+offset_right = -0.0880127
+offset_bottom = 29.0
+text = "Help:
+Ailerons: A/D, Left stick
+Elevator: W/S, Left stick
+Rudder: Q/E, RT/LT
+Flaps: Down/Up
+Throttle: +/-, A/B
+Next aircraft: F1, RT"
+
+[node name="AircraftName" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.032
+offset_top = 24.0
+offset_right = 19.968
+offset_bottom = 47.0
+grow_horizontal = 2
+text = "cessna 172"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.97282, 7.45058e-09, 0.231561, -0.188047, 0.583541, 0.790011, -0.135125, -0.812084, 0.567681, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Ground" parent="." instance=ExtResource("6_gjl0y")]
+mesh = SubResource("ImmediateMesh_safpt")

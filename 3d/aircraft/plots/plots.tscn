@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs15w4fjixsu1"]
+
+[ext_resource type="Script" uid="uid://cfcue8y0x5t6l" path="res://plots/plots.gd" id="1_ta4xi"]
+
+[node name="Plots" type="Node2D"]
+script = ExtResource("1_ta4xi")
+
+[node name="Wing" type="VehicleWing3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999657, -0.0261769, 0, 0.0261769, 0.999657, 0, 0, 0)
+span = 11.0
+chord = 1.494
+dihedral = 0.0302466
+zero_lift_angle = -0.0436332
+stall_angle_max = 0.261799
+stall_angle_min = -0.261799
+stall_stall_width = 0.0349066
+restore_stall_angle = 0.0543496
+alternative_drag = true
+flap_start = 0.0
+flap_end = 1.0
+aileron_start = 0.0
+aileron_end = 0.0
+aileron_angle_max = 0.0
+aileron_angle_min = 0.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 474.0
+offset_bottom = 51.0
+
+[node name="Flap" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+min_value = -1.0
+max_value = 1.0
+step = 0.1
+
+[node name="Forward" type="CheckBox" parent="VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Forward"
+
+[node name="Backward" type="CheckBox" parent="VBoxContainer"]
+layout_mode = 2
+text = "Backward"
