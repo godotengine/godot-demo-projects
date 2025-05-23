@@ -14,7 +14,7 @@ var event_tilt: Vector2
 var line_color := Color.BLACK
 var line_width: float = 3.0
 
-# If `true`, modulate line width accordding to pen pressure.
+# If `true`, modulate line width according to pen pressure.
 # This is done using a width curve that is continuously recreated to match the line's actual profile
 # as the line is being drawn by the user.
 var pressure_sensitive: bool = true

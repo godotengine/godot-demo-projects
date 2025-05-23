@@ -22,7 +22,7 @@ func _input(event):
 	layer_viewport.push_input(event)
 
 
-# Convert the intersect point reurned by intersects_ray to local coords in the viewport.
+# Convert the intersect point returned by intersects_ray to local coords in the viewport.
 func _intersect_to_viewport_pos(intersect : Vector2) -> Vector2i:
 	if layer_viewport and intersect != NO_INTERSECTION:
 		var pos : Vector2 = intersect * Vector2(layer_viewport.size)
