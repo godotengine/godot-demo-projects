@@ -23,7 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.219608, 0.372549, 0.380392, 1)
+color = Color(0.296785, 0.218362, 0.770115, 1)
 
 [node name="Player" parent="." instance=ExtResource("3_veqnc")]
 
@@ -52,6 +52,7 @@ stream = ExtResource("5_55d8h")
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_hp1r0")
 
+[connection signal="collect" from="Player" to="." method="collect"]
 [connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]

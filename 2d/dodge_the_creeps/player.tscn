@@ -60,7 +60,7 @@ script = ExtResource("1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("1")
-animation = &"right"
+animation = &"up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("2")
@@ -68,8 +68,8 @@ shape = SubResource("2")
 [node name="Trail" type="GPUParticles2D" parent="."]
 z_index = -1
 amount = 10
-process_material = SubResource("7")
 texture = ExtResource("2")
 speed_scale = 2.0
+process_material = SubResource("7")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

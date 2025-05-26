@@ -1,6 +1,7 @@
 extends Area2D
 
 signal hit
+signal collect
 
 @export var speed = 400 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
@@ -48,7 +49,8 @@ func start(pos):
 
 
 func _on_body_entered(_body):
-	hide() # Player disappears after being hit.
-	hit.emit()
+	#hide() # Player disappears after being hit.
+	collect.emit()
+	_body.queue_free()
 	# Must be deferred as we can't change physics properties on a physics callback.
-	$CollisionShape2D.set_deferred(&"disabled", true)
+	#$CollisionShape2D.set_deferred(&"disabled", true)

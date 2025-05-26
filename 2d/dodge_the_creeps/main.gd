@@ -10,6 +10,10 @@ func game_over():
 	$Music.stop()
 	$DeathSound.play()
 
+func collect():
+	score += 1
+	$HUD.update_score(score)
+	$DeathSound.play()
 
 func new_game():
 	get_tree().call_group(&"mobs", &"queue_free")
@@ -46,10 +50,9 @@ func _on_MobTimer_timeout():
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
 
-func _on_ScoreTimer_timeout():
-	score += 1
-	$HUD.update_score(score)
-
+#func _on_ScoreTimer_timeout():
+	#score += 1
+	#$HUD.update_score(score)
 
 func _on_StartTimer_timeout():
 	$MobTimer.start()
