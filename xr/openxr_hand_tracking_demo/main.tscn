@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://br3bss6kac8pa"]
+[gd_scene load_steps=17 format=3 uid="uid://br3bss6kac8pa"]
 
 [ext_resource type="PackedScene" uid="uid://d22k0sp2hinew" path="res://assets/gltf/LeftHandHumanoid.gltf" id="2_3hxem"]
 [ext_resource type="Script" uid="uid://dpqdbsepdkd4h" path="res://start_vr.gd" id="2_5rtkn"]
@@ -6,8 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://byif52d1xkl3u" path="res://pickup/pickup_handler.tscn" id="3_sg1io"]
 [ext_resource type="Texture2D" uid="uid://b1waowk6l76ap" path="res://assets/images/pattern.png" id="4_3x0ea"]
 [ext_resource type="PackedScene" uid="uid://dtabh705qyufu" path="res://hand_info.tscn" id="5_wlhtu"]
+[ext_resource type="Script" path="res://hand_controller.gd" id="6_e5cto"]
 [ext_resource type="PackedScene" uid="uid://hanl00aqvu7u" path="res://objects/table.tscn" id="6_rfmma"]
 [ext_resource type="PackedScene" uid="uid://cerkxyasq8t8b" path="res://objects/box.tscn" id="7_6sqt7"]
+[ext_resource type="Script" path="res://hand_mesh.gd" id="7_yj2fr"]
+[ext_resource type="Script" path="res://xr_hand_fallback_modifier_3d.gd" id="8_gdsnk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_eyx45"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -88,8 +91,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 [node name="LeftHandController" type="XRController3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"left_hand"
-pose = &"pose"
+pose = &"palm_pose"
 show_when_tracked = true
+script = ExtResource("6_e5cto")
 
 [node name="PickupHandler" parent="XROrigin3D/LeftHandController" instance=ExtResource("3_sg1io")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0, 0)
@@ -98,8 +102,9 @@ pickup_action = "pickup"
 [node name="RightHandController" type="XRController3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
 tracker = &"right_hand"
-pose = &"pose"
+pose = &"palm_pose"
 show_when_tracked = true
+script = ExtResource("6_e5cto")
 
 [node name="PickupHandler" parent="XROrigin3D/RightHandController" instance=ExtResource("3_sg1io")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0, 0)
@@ -108,21 +113,64 @@ pickup_action = "pickup"
 [node name="LeftHandMesh" type="XRNode3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"/user/hand_tracker/left"
-show_when_tracked = true
+script = ExtResource("7_yj2fr")
 
 [node name="LeftHandHumanoid2" parent="XROrigin3D/LeftHandMesh" instance=ExtResource("2_3hxem")]
 
 [node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/LeftHandMesh/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D" index="1"]
 
+[node name="XRHandFallbackModifier3D" type="SkeletonModifier3D" parent="XROrigin3D/LeftHandMesh/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D" index="2"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+active = true
+influence = 1.0
+script = ExtResource("8_gdsnk")
+grip_action = "pickup"
+
 [node name="RightHandMesh" type="XRNode3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
 tracker = &"/user/hand_tracker/right"
-show_when_tracked = true
+script = ExtResource("7_yj2fr")
+hand = 1
 
 [node name="RightHandHumanoid2" parent="XROrigin3D/RightHandMesh" instance=ExtResource("3_oifi1")]
 
 [node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/RightHandMesh/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="1"]
 hand_tracker = &"/user/hand_tracker/right"
+
+[node name="XRHandFallbackModifier3D" type="SkeletonModifier3D" parent="XROrigin3D/RightHandMesh/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="2"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+active = true
+influence = 1.0
+script = ExtResource("8_gdsnk")
+grip_action = "pickup"
 
 [editable path="XROrigin3D/LeftHandMesh/LeftHandHumanoid2"]
 [editable path="XROrigin3D/RightHandMesh/RightHandHumanoid2"]
