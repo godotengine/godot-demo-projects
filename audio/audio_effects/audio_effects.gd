@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 func _on_toggle_music_toggled(button_pressed: bool) -> void:
 	if button_pressed:
