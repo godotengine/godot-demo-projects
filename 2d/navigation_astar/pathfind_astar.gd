@@ -28,11 +28,17 @@ func _ready() -> void:
 	_astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	_astar.update()
 
-	for i in range(_astar.region.position.x, _astar.region.end.x):
-		for j in range(_astar.region.position.y, _astar.region.end.y):
-			var pos := Vector2i(i, j)
-			if get_cell_source_id(pos) == Tile.OBSTACLE:
-				_astar.set_point_solid(pos)
+	# Iterate over all cells on the tile map layer and mark them as
+	# non-passable.
+	for pos in get_used_cells():
+		_astar.set_point_solid(pos)
+		# To skip cells with certain atlas coordinates you can use:
+		# if get_cell_atlas_coords(pos) == Vector2i(42, 23):
+		#     ...
+		# You can also add a "Custom Data Layer" to the tile set to group
+		# tiles and check it here; in the following example using a string:
+		# if get_cell_tile_data(pos).get_custom_data("type") == "obstacle":
+		#     ...
 
 
 func _draw() -> void:
