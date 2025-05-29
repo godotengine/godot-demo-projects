@@ -1,10 +1,8 @@
 extends TileMapLayer
 
-enum Tile {
-	OBSTACLE,
-	START_POINT,
-	END_POINT,
-}
+# Atlas coordinates in tile set for start/end tiles.
+const TILE_START_POINT = Vector2i(1, 0)
+const TILE_END_POINT = Vector2i(2, 0)
 
 const CELL_SIZE = Vector2i(64, 64)
 const BASE_LINE_WIDTH: float = 3.0
@@ -81,8 +79,8 @@ func find_path(local_start_point: Vector2i, local_end_point: Vector2i) -> Packed
 	_path = _astar.get_point_path(_start_point, _end_point)
 
 	if not _path.is_empty():
-		set_cell(_start_point, 0, Vector2i(Tile.START_POINT, 0))
-		set_cell(_end_point, 0, Vector2i(Tile.END_POINT, 0))
+		set_cell(_start_point, 0, TILE_START_POINT)
+		set_cell(_end_point, 0, TILE_END_POINT)
 
 	# Redraw the lines and circles from the start to the end point.
 	queue_redraw()
