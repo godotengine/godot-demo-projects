@@ -3,7 +3,9 @@
 This is a simple demo that showcases the various Audio Effects that can be used in Godot.
 One or more Audio Effects can be toggled and applied to the playable sound effects and background music.
 
-See [Audio buses](https://docs.godotengine.org/en/stable/tutorials/audio/audio_buses.html) and [Audio effects](https://docs.godotengine.org/en/stable/tutorials/audio/audio_effects.html) in the manual for more information.
+See [Audio buses](https://docs.godotengine.org/en/stable/tutorials/audio/audio_buses.html)
+and [Audio effects](https://docs.godotengine.org/en/stable/tutorials/audio/audio_effects.html)
+in the manual for more information.
 
 Language: GDScript
 
@@ -11,7 +13,7 @@ Renderer: Compatibility
 
 ## Screenshots
 
-![ScreenShot](screenshots/screenshot1.webp)
+![Screenshot](screenshots/audio_effects.webp)
 
 ## Licenses
 
