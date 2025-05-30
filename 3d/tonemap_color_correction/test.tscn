@@ -1,0 +1,203 @@
+[gd_scene load_steps=5 format=3 uid="uid://bulw0pypka0bv"]
+
+[ext_resource type="Script" uid="uid://dv01ma5mjl4l5" path="res://options.gd" id="1_20y27"]
+[ext_resource type="PackedScene" uid="uid://bfbqknlrqre0c" path="res://3d_primitives.tscn" id="2_leeh8"]
+[ext_resource type="PackedScene" uid="uid://drmdg7kgtgadn" path="res://gradients.tscn" id="3_py7p5"]
+[ext_resource type="PackedScene" uid="uid://c52ta7ygsn7wv" path="res://hues.tscn" id="4_pbomq"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Options" type="VBoxContainer" parent="."]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 576.0
+offset_bottom = 82.0
+script = ExtResource("1_20y27")
+scenes = Array[PackedScene]([ExtResource("2_leeh8"), ExtResource("3_py7p5"), ExtResource("4_pbomq")])
+
+[node name="TonemapMode" type="HBoxContainer" parent="Options"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="SceneLabel" type="Label" parent="Options/TonemapMode"]
+layout_mode = 2
+text = "Scene"
+
+[node name="SceneOptionButton" type="OptionButton" parent="Options/TonemapMode"]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "3D Primitives"
+popup/item_0/id = 0
+popup/item_1/text = "Gradients"
+popup/item_1/id = 1
+popup/item_2/text = "Hues"
+popup/item_2/id = 2
+
+[node name="Label" type="Label" parent="Options/TonemapMode"]
+layout_mode = 2
+text = "Tonemap Mode"
+
+[node name="OptionButton" type="OptionButton" parent="Options/TonemapMode"]
+layout_mode = 2
+selected = 2
+item_count = 5
+popup/item_0/text = "Linear"
+popup/item_0/id = 0
+popup/item_1/text = "Reinhard"
+popup/item_1/id = 1
+popup/item_2/text = "Filmic"
+popup/item_2/id = 2
+popup/item_3/text = "ACES"
+popup/item_3/id = 3
+popup/item_4/text = "AgX"
+popup/item_4/id = 4
+
+[node name="Exposure" type="HBoxContainer" parent="Options/TonemapMode"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Options/TonemapMode/Exposure"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Exposure"
+horizontal_alignment = 2
+
+[node name="HSlider" type="HSlider" parent="Options/TonemapMode/Exposure"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 1.0
+
+[node name="Value" type="Label" parent="Options/TonemapMode/Exposure"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+text = "1.0"
+
+[node name="Whitepoint" type="HBoxContainer" parent="Options/TonemapMode"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Options/TonemapMode/Whitepoint"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Whitepoint"
+horizontal_alignment = 2
+
+[node name="HSlider" type="HSlider" parent="Options/TonemapMode/Whitepoint"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.1
+max_value = 16.0
+step = 0.1
+value = 1.0
+
+[node name="Value" type="Label" parent="Options/TonemapMode/Whitepoint"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+text = "6.0"
+
+[node name="ColorCorrection" type="HBoxContainer" parent="Options"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Options/ColorCorrection"]
+layout_mode = 2
+text = "Color Correction"
+
+[node name="OptionButton" type="OptionButton" parent="Options/ColorCorrection"]
+layout_mode = 2
+selected = 0
+item_count = 20
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "Detect White Clipping (1D)"
+popup/item_1/id = 1
+popup/item_2/text = "Frozen (1D)"
+popup/item_2/id = 2
+popup/item_3/text = "Heat (1D)"
+popup/item_3/id = 3
+popup/item_4/text = "Incandescent (1D)"
+popup/item_4/id = 4
+popup/item_5/text = "Posterized (1D)"
+popup/item_5/id = 5
+popup/item_6/text = "Posterized Outline (1D)"
+popup/item_6/id = 6
+popup/item_7/text = "Rainbow (1D)"
+popup/item_7/id = 7
+popup/item_8/text = "Toxic (1D)"
+popup/item_8/id = 8
+popup/item_9/text = "Brighten Shadows (3D)"
+popup/item_9/id = 9
+popup/item_10/text = "Burned Blue (3D)"
+popup/item_10/id = 10
+popup/item_11/text = "Cold Color (3D)"
+popup/item_11/id = 11
+popup/item_12/text = "Detect White Clipping (3D)"
+popup/item_12/id = 12
+popup/item_13/text = "Dithered (3D)"
+popup/item_13/id = 13
+popup/item_14/text = "Hue Shift (3D)"
+popup/item_14/id = 14
+popup/item_15/text = "Posterized (3D)"
+popup/item_15/id = 15
+popup/item_16/text = "Sepia (3D)"
+popup/item_16/id = 16
+popup/item_17/text = "Stressed (3D)"
+popup/item_17/id = 17
+popup/item_18/text = "Warm Color (3D)"
+popup/item_18/id = 18
+popup/item_19/text = "Yellowed (3D)"
+popup/item_19/id = 19
+
+[node name="Saturation" type="HBoxContainer" parent="Options/ColorCorrection"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Options/ColorCorrection/Saturation"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Saturation"
+horizontal_alignment = 2
+
+[node name="HSlider" type="HSlider" parent="Options/ColorCorrection/Saturation"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = -2.0
+max_value = 2.0
+step = 0.1
+value = 1.0
+tick_count = 3
+
+[node name="Value" type="Label" parent="Options/ColorCorrection/Saturation"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+text = "1.0"
+
+[node name="Debanding" type="CheckButton" parent="Options"]
+layout_mode = 2
+size_flags_horizontal = 0
+button_pressed = true
+text = "Debanding"
+
+[connection signal="item_selected" from="Options/TonemapMode/SceneOptionButton" to="Options" method="_on_scene_option_button_item_selected"]
+[connection signal="item_selected" from="Options/TonemapMode/OptionButton" to="Options" method="_on_tonemap_mode_item_selected"]
+[connection signal="value_changed" from="Options/TonemapMode/Exposure/HSlider" to="Options" method="_on_exposure_value_changed"]
+[connection signal="value_changed" from="Options/TonemapMode/Whitepoint/HSlider" to="Options" method="_on_whitepoint_value_changed"]
+[connection signal="item_selected" from="Options/ColorCorrection/OptionButton" to="Options" method="_on_color_correction_item_selected"]
+[connection signal="value_changed" from="Options/ColorCorrection/Saturation/HSlider" to="Options" method="_on_saturation_value_changed"]
+[connection signal="toggled" from="Options/Debanding" to="Options" method="_on_debanding_toggled"]
