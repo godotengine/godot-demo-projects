@@ -33,7 +33,7 @@ This approach is not able to make efficient use of shader caching and may not be
 platforms, such as certain consoles, that require precompiling of shaders.
 
 `post_process_grayscale.gd` show an example where the shader code is stored in a file,
-namely `post_process_grayscale.glsl` and is compiled on initialisation.
+namely `post_process_grayscale.glsl` and is compiled on initialization.
 For editing a project this means that the shader is compiled once when the effect is loaded.
 Making changes to the `glsl` file will require reloading the scene.
 The advantage of this approach is that Godot can precompile the `glsl` file.

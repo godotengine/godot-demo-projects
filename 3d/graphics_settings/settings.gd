@@ -172,7 +172,7 @@ func _on_shadow_size_option_button_item_selected(index):
 	if index == 0: # Minimum
 		RenderingServer.directional_shadow_atlas_set_size(512, true)
 		# Adjust shadow bias according to shadow resolution.
-		# Higher resultions can use a lower bias without suffering from shadow acne.
+		# Higher resolutions can use a lower bias without suffering from shadow acne.
 		directional_light.shadow_bias = 0.06
 
 		# Disable positional (omni/spot) light shadows entirely to further improve performance.

@@ -8,7 +8,7 @@ extends Node3D
 # the first one is used for the entire screen thus allowing the players to play
 # on a unsplit screen.
 # In the second case, the screen is split in two with a line perpendicular to the
-# segement joining the two players.
+# segment joining the two players.
 #
 # The points of customization are:
 #   max_separation: the distance between players at which the view starts to split
