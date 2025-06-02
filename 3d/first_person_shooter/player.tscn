@@ -1,13 +1,13 @@
 [gd_scene load_steps=39 format=3 uid="uid://dfyswwfb8j6iv"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_3afs5"]
+[ext_resource type="Script" uid="uid://bnmrtcv7egtlj" path="res://player.gd" id="1_3afs5"]
 [ext_resource type="PackedScene" uid="uid://b4g77r67peq11" path="res://blob_shadow.tscn" id="2_att33"]
 [ext_resource type="Texture2D" uid="uid://df46fn25wxblu" path="res://player/shotgun/spritesheet.png" id="2_ntkbj"]
 [ext_resource type="Texture2D" uid="uid://d0h6we75g3l0h" path="res://crosshair.png" id="2_xdhj0"]
 [ext_resource type="AudioStream" uid="uid://jfxdoxq7t3t2" path="res://player/water_splash_out.ogg" id="3_ovny0"]
 [ext_resource type="AudioStream" uid="uid://lqgi4erf48wg" path="res://player/shotgun/fire.wav" id="3_w6ksn"]
 [ext_resource type="AudioStream" uid="uid://c2n47qjisa0wl" path="res://player/water_splash_in.ogg" id="3_yf4c3"]
-[ext_resource type="Shader" path="res://player/weapon_sprite.gdshader" id="4_i5vum"]
+[ext_resource type="Shader" uid="uid://c50kid6qcbeog" path="res://player/weapon_sprite.gdshader" id="4_i5vum"]
 [ext_resource type="AudioStream" uid="uid://do4fwt667onp2" path="res://player/rain.ogg" id="6_cmbiq"]
 [ext_resource type="AudioStream" uid="uid://cy2lhrs5we1a7" path="res://player/shotgun/open.wav" id="6_tknt2"]
 [ext_resource type="AudioStream" uid="uid://dam35f8u5f2d5" path="res://player/shotgun/load.wav" id="7_dom6o"]
@@ -21,22 +21,19 @@ size = Vector3(1, 1.5, 1)
 size = Vector3(0.9, 0.75, 0.9)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lu535"]
-streams_count = 1
 random_pitch = 1.02
+streams_count = 1
 stream_0/stream = ExtResource("7_dom6o")
-stream_0/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_46hgo"]
-streams_count = 1
 random_pitch = 1.02
+streams_count = 1
 stream_0/stream = ExtResource("3_yf4c3")
-stream_0/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vhi2c"]
-streams_count = 1
 random_pitch = 1.02
+streams_count = 1
 stream_0/stream = ExtResource("3_ovny0")
-stream_0/weight = 1.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lr0u3"]
 emission_shape = 6
@@ -44,13 +41,14 @@ emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 0.0
 emission_ring_radius = 50.0
 emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
 direction = Vector3(0, -1, 0)
 spread = 3.0
 initial_velocity_min = 60.0
 initial_velocity_max = 60.0
+collision_mode = 2
 sub_emitter_mode = 3
 sub_emitter_amount_at_collision = 1
-collision_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sfjl0"]
 transparency = 1
@@ -99,9 +97,9 @@ size = Vector2(1.655, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fb2wo"]
 render_priority = 0
 shader = ExtResource("4_i5vum")
+shader_parameter/views = ExtResource("2_ntkbj")
 shader_parameter/frame_count = 10
 shader_parameter/frame = 0
-shader_parameter/views = ExtResource("2_ntkbj")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_t4cq8"]
 blend_mode = 3
@@ -159,7 +157,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_nrowk"]
 resource_name = "fire"
-length = 1.2
+length = 1.15
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -168,7 +166,7 @@ tracks/0/path = NodePath("Camera3D/WeaponSprite:surface_material_override/0:shad
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.45, 1.1, 1.2),
+"times": PackedFloat32Array(0, 0.25, 0.45, 1.05, 1.15),
 "transitions": PackedFloat32Array(1, 1, 1, 0, 1),
 "update": 0,
 "values": [0, 3, 3, 9, 0]
@@ -221,14 +219,14 @@ tracks/3/keys = {
 "start_offset": 0.0,
 "stream": ExtResource("8_uckjf")
 }],
-"times": PackedFloat32Array(0, 0.535896, 0.844826, 1.02504)
+"times": PackedFloat32Array(0, 0.535896, 0.844826, 1)
 }
 tracks/3/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_glvp6"]
 _data = {
-"RESET": SubResource("Animation_y888d"),
-"fire": SubResource("Animation_nrowk")
+&"RESET": SubResource("Animation_y888d"),
+&"fire": SubResource("Animation_nrowk")
 }
 
 [sub_resource type="Theme" id="Theme_6xrdg"]
@@ -249,7 +247,6 @@ shape = SubResource("BoxShape3D_nlrfb")
 max_results = 1
 
 [node name="WeaponSounds" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_w6ksn")
 volume_db = -12.0
 max_polyphony = 2
 
@@ -270,13 +267,13 @@ max_polyphony = 2
 
 [node name="Rain" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30.5, 0)
-amount = 3000
+amount = 4000
 sub_emitter = NodePath("RainImpactSubemitter")
 lifetime = 2.0
 preprocess = 2.0
 fixed_fps = 0
 interpolate = false
-collision_base_size = 0.1
+collision_base_size = 0.25
 visibility_aabb = AABB(-49.847, -490.159, -49.8395, 99.8953, 490.659, 99.2455)
 process_material = SubResource("ParticleProcessMaterial_lr0u3")
 draw_pass_1 = SubResource("QuadMesh_f2lko")
@@ -332,7 +329,6 @@ shadow_blur = 2.5
 omni_range = 10.0
 
 [node name="Decal" parent="." instance=ExtResource("2_att33")]
-size = Vector3(1.2, 2.4, 1.2)
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 1.2
@@ -375,7 +371,7 @@ expand_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_glvp6")
+&"": SubResource("AnimationLibrary_glvp6")
 }
 
 [node name="HUD" type="Control" parent="."]

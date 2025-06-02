@@ -4,14 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://dfyswwfb8j6iv" path="res://player.tscn" id="2_cwuyg"]
 [ext_resource type="Material" uid="uid://80yp8cdmypl6" path="res://level_material.tres" id="3_b18pi"]
 [ext_resource type="PackedScene" uid="uid://cosjr7whfc78d" path="res://lamp_post.tscn" id="3_rtj1w"]
-[ext_resource type="Script" path="res://water.gd" id="3_ww5ac"]
-[ext_resource type="Shader" path="res://water.gdshader" id="4_5b77o"]
+[ext_resource type="Script" uid="uid://cw8nvplg7xn01" path="res://water.gd" id="3_ww5ac"]
+[ext_resource type="Shader" uid="uid://ccjch2p4r8kbh" path="res://water.gdshader" id="4_5b77o"]
 [ext_resource type="PackedScene" uid="uid://bbj30jyv46r1t" path="res://enemy/enemy.tscn" id="4_errvf"]
 [ext_resource type="CompressedTexture3D" uid="uid://qgj3lwwrrgj" path="res://level.GPUParticlesCollisionSDF3D_data.exr" id="5_myd3n"]
 [ext_resource type="PackedScene" uid="uid://bly64h687ino4" path="res://box.tscn" id="5_o3uqf"]
 [ext_resource type="Texture2D" uid="uid://bhpmngp0r2y80" path="res://water_texture_albedo.tres" id="6_gifye"]
 [ext_resource type="Texture2D" uid="uid://bjo2g4bppx3gp" path="res://water_texture_normal.tres" id="7_ai040"]
-[ext_resource type="Shader" path="res://water_shadow.gdshader" id="8_xqyib"]
+[ext_resource type="Shader" uid="uid://mvfjq0ami7dx" path="res://water_shadow.gdshader" id="8_xqyib"]
 [ext_resource type="FontFile" uid="uid://blm3851cjtjji" path="res://fonts/vga-rom-font.png" id="13_337k1"]
 [ext_resource type="PackedScene" uid="uid://c8n2cdrjonibs" path="res://platform.tscn" id="14_kch2b"]
 
@@ -53,22 +53,22 @@ subdivide_depth = 16
 render_priority = 0
 shader = ExtResource("4_5b77o")
 shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("6_gifye")
 shader_parameter/proximity_fade_distance = 0.5
 shader_parameter/distance_fade_min = 0.0
 shader_parameter/distance_fade_max = 10.0
-shader_parameter/point_size = null
-shader_parameter/roughness = null
-shader_parameter/metallic_texture_channel = null
+shader_parameter/point_size = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
 shader_parameter/specular = 1.0
-shader_parameter/metallic = null
+shader_parameter/metallic = 0.0
+shader_parameter/texture_normal = ExtResource("7_ai040")
 shader_parameter/normal_scale = 1.0
 shader_parameter/uv1_blend_sharpness = 1.0
 shader_parameter/uv1_scale = Vector3(0.125, 0.125, 0.125)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
-shader_parameter/uv2_offset = null
-shader_parameter/texture_albedo = ExtResource("6_gifye")
-shader_parameter/texture_normal = ExtResource("7_ai040")
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1yxun"]
 size = Vector2(15, 30)
@@ -116,8 +116,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vu6de"]
 _data = {
-"RESET": SubResource("Animation_2y52n"),
-"water_surface": SubResource("Animation_as77u")
+&"RESET": SubResource("Animation_2y52n"),
+&"water_surface": SubResource("Animation_as77u")
 }
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_vy5j4"]
@@ -231,10 +231,10 @@ cull_mask = 4294967293
 size = Vector3(15, 6, 30)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Main/Water"]
-autoplay = "water_surface"
 libraries = {
-"": SubResource("AnimationLibrary_vu6de")
+&"": SubResource("AnimationLibrary_vu6de")
 }
+autoplay = "water_surface"
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="Main/Water"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2)

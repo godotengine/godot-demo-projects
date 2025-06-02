@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://cfb66sviolbur"]
 
-[ext_resource type="Script" path="res://bullet.gd" id="1_2qff5"]
+[ext_resource type="Script" uid="uid://cmm0d3i3dmejy" path="res://bullet.gd" id="1_2qff5"]
 
 [sub_resource type="Gradient" id="Gradient_ebjhe"]
 interpolation_mode = 2
@@ -117,8 +117,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0tdae"]
 _data = {
-"RESET": SubResource("Animation_kkxjh"),
-"fade": SubResource("Animation_q06vx")
+&"RESET": SubResource("Animation_kkxjh"),
+&"fade": SubResource("Animation_q06vx")
 }
 
 [node name="Bullet" type="RayCast3D"]
@@ -141,7 +141,7 @@ process_material = SubResource("ParticleProcessMaterial_n2t5r")
 draw_pass_1 = SubResource("QuadMesh_af28p")
 
 [node name="Tracer" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 sorting_offset = 2.0
 mesh = SubResource("CylinderMesh_a6ysu")
 surface_material_override/0 = SubResource("StandardMaterial3D_0twnr")
@@ -151,9 +151,9 @@ wait_time = 1.2
 autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "fade"
 libraries = {
-"": SubResource("AnimationLibrary_0tdae")
+&"": SubResource("AnimationLibrary_0tdae")
 }
+autoplay = "fade"
 
 [connection signal="timeout" from="ExpireTimer" to="." method="_on_expire_timer_timeout"]
