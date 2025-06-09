@@ -10,6 +10,11 @@ Renderer: Compatibility
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2713
 
+## Note
+
+The new TileMapLayer introduced in Godot 4.3 allows disabling collisions for a layer dynamically using a checkbox in the inspector.
+For earlier Godot versions use the procedure described here.
+
 ## Screenshots
 
 ![Screenshot](screenshots/fake_wall.png)
