@@ -20,7 +20,7 @@ The dimensions of the image can be set on the exported **Dimensions** property
 on the main scene. By default, it's set to 2048, which creates a 2048×2048
 heightmap.
 
-> **Note**
+> [!NOTE]
 >
 > The shader code has been structured to be followed step-by-step by the user,
 > and may not necessarily represent best practices. The CPU code is also less
@@ -31,4 +31,4 @@ Languages: GDScript, GLSL
 
 Renderer: Mobile
 
-![Compute Shader Heightmap](screenshots/compute_shader_heightmap.webp)
+![Compute Shader Heightmap](screenshots/heightmap.webp)
