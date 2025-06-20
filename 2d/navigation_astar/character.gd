@@ -19,7 +19,7 @@ var _click_position := Vector2()
 var _path := PackedVector2Array()
 var _next_point := Vector2()
 
-@onready var _tile_map: PathFindAStar = $"../TileMapLayer"
+@onready var _tile_map_layer: PathFindAStar = $"../TileMapLayer"
 
 func _ready() -> void:
 	_change_state(State.IDLE)
@@ -40,10 +40,10 @@ func _process(_delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	_click_position = get_global_mouse_position()
-	if _tile_map.is_point_walkable(_click_position):
+	if _tile_map_layer.is_point_walkable(_click_position):
 		if event.is_action_pressed(&"teleport_to", false, true):
 			_change_state(State.IDLE)
-			global_position = _tile_map.round_local_position(_click_position)
+			global_position = _tile_map_layer.round_local_position(_click_position)
 		elif event.is_action_pressed(&"move_to"):
 			_change_state(State.FOLLOW)
 
@@ -59,9 +59,9 @@ func _move_to(local_position: Vector2) -> bool:
 
 func _change_state(new_state: State) -> void:
 	if new_state == State.IDLE:
-		_tile_map.clear_path()
+		_tile_map_layer.clear_path()
 	elif new_state == State.FOLLOW:
-		_path = _tile_map.find_path(position, _click_position)
+		_path = _tile_map_layer.find_path(position, _click_position)
 		if _path.size() < 2:
 			_change_state(State.IDLE)
 			return
