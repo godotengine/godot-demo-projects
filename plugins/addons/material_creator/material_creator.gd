@@ -41,56 +41,33 @@ func apply_pressed() -> void:
 
 
 func save_file_selected(path: String) -> bool:
-	var silly_resource: Variant = _silly_resource_from_values()
-	# Make a file, store the silly material as a JSON string.
-	var file := FileAccess.open(path, FileAccess.WRITE)
-	file.store_string(silly_resource.make_json())
-
-	return true
+	var silly_resource: Resource = _silly_resource_from_values()
+	# Save the resource as a .tres file using Godot's ResourceSaver
+	var err = ResourceSaver.save(silly_resource, path)
+	return err == OK
 
 
 func load_file_selected(path: String) -> bool:
-	var SpatialMaterial_Silly: StandardMaterial3D = null
+	# Load the resource using Godot's ResourceLoader
+	var silly_resource: Resource = ResourceLoader.load(path)
+	if silly_resource == null:
+		return false
 
-	# Make a new silly resource (which in this case actually is a node)
-	# and initialize it.
-	var silly_resource: Variant = silly_material_resource.new()
-	#silly_resource.init()
-
-	# If the file exists, then open it.
-	if FileAccess.file_exists(path):
-		var file := FileAccess.open(path, FileAccess.READ)
-
-		# Get the JSON string and convert it into a silly material.
-		var json_dict_as_string := file.get_line()
-		if json_dict_as_string != null:
-			silly_resource.from_json(json_dict_as_string)
-		else:
-			return false
-
-		$VBoxContainer/AlbedoColorPicker.color = silly_resource.albedo_color
-		$VBoxContainer/MetallicSlider.value = silly_resource.metallic_strength
-		$VBoxContainer/RoughnessSlider.value = silly_resource.roughness_strength
-
-		# Return `true` to indicate success.
-		return true
-
-	# If the file does not exist, then return `false` to indicate failure.
-	return false
+	$VBoxContainer/AlbedoColorPicker.color = silly_resource.albedo_color
+	$VBoxContainer/MetallicSlider.value = silly_resource.metallic_strength
+	$VBoxContainer/RoughnessSlider.value = silly_resource.roughness_strength
+	return true
 
 
-func _silly_resource_from_values() -> Variant:
+func _silly_resource_from_values() -> Resource:
 	# Get the values from the sliders and color picker.
 	var color: Color = $VBoxContainer/AlbedoColorPicker.color
 	var metallic: float = $VBoxContainer/MetallicSlider.value
 	var roughness: float = $VBoxContainer/RoughnessSlider.value
-	# Make a new silly resource (which in this case actually is a node) and initialize it.
-	var silly_resource: Variant = silly_material_resource.new()
-	#silly_resource.init()
-
+	# Make a new silly resource (now a Resource, not a Node)
+	var silly_resource: Resource = silly_material_resource.new()
 	# Assign the values.
 	silly_resource.albedo_color = color
 	silly_resource.metallic_strength = metallic
 	silly_resource.roughness_strength = roughness
-
 	return silly_resource
