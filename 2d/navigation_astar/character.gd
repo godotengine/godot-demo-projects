@@ -19,7 +19,7 @@ var _click_position := Vector2()
 var _path := PackedVector2Array()
 var _next_point := Vector2()
 
-@onready var _tile_map: PathFindAStar = $"../TileMap"
+@onready var _tile_map: PathFindAStar = $"../TileMapLayer"
 
 func _ready() -> void:
 	_change_state(State.IDLE)
