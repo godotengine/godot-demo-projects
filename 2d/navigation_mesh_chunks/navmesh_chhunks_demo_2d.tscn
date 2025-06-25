@@ -43,6 +43,15 @@ debug_path_custom_color = Color(1, 1, 0, 1)
 debug_path_custom_point_size = 10.0
 debug_path_custom_line_width = 4.0
 
+[node name="PathDebugNoPostProcessing" type="NavigationAgent2D" parent="DebugPaths"]
+unique_name_in_owner = true
+path_postprocessing = 2
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+debug_path_custom_point_size = 10.0
+debug_path_custom_line_width = 4.0
+
 [node name="ChunksContainer" type="Node2D" parent="."]
 unique_name_in_owner = true
 
@@ -95,5 +104,21 @@ color = Color(1, 1, 0, 1)
 [node name="Label" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "Path edge-centered"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(128, 8)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(1, 0, 0, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Path no post-processing"
 horizontal_alignment = 1
 vertical_alignment = 1
