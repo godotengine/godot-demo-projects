@@ -1,0 +1,117 @@
+[gd_scene load_steps=13 format=3 uid="uid://bj5w87j8wwnsl"]
+
+[ext_resource type="Script" uid="uid://cusp3a7wm67ss" path="res://player.gd" id="1_pq8q7"]
+[ext_resource type="PackedScene" uid="uid://cvgxw8nq67xxm" path="res://box.tscn" id="2_pyidc"]
+[ext_resource type="PackedScene" uid="uid://dtuq8cdwg46ti" path="res://wall.tscn" id="3_vvh5c"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pq8q7"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pyidc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pq8q7"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_pq8q7"]
+size = Vector3(1, 1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pyidc"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vho56"]
+size = Vector3(10, 0.2, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vvh5c"]
+albedo_color = Color(0.1161361, 0.09039474, 0.006463346, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vho56"]
+points = PackedVector3Array(-5, -0.1, -5, -5, 0.1, -5, 5, -0.1, -5, -5, -0.1, 5, -5, 0.1, 5, 5, 0.1, -5, 5, -0.1, 5, 5, 0.1, 5)
+
+[sub_resource type="Environment" id="Environment_vvh5c"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.53, 0.53, 0.53, 1)
+
+[node name="Root" type="Node3D"]
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2477778, 0)
+script = ExtResource("1_pq8q7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_pq8q7")
+
+[node name="Rig" type="Node3D" parent="Player"]
+physics_interpolation_mode = 2
+
+[node name="Mesh_Body" type="MeshInstance3D" parent="Player/Rig"]
+mesh = SubResource("CapsuleMesh_pyidc")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_pq8q7")
+
+[node name="Camera_TPS" type="Camera3D" parent="Player/Rig"]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 1.72429, 2.148845)
+
+[node name="Head" type="Node3D" parent="Player/Rig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1241218, 0)
+
+[node name="Camera_FPS" type="Camera3D" parent="Player/Rig/Head"]
+current = true
+
+[node name="Mesh_Head" type="MeshInstance3D" parent="Player/Rig/Head"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -0.5)
+mesh = SubResource("PrismMesh_pq8q7")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_pyidc")
+
+[node name="Fire_Origin" type="Node3D" parent="Player/Rig/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.6072578)
+
+[node name="Camera_Fixed" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.78816116, 0.6154689, 0, -0.6154689, 0.78816116, 0, 4.948369, 5.752595)
+
+[node name="Background" type="Node3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="Background"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("BoxMesh_vho56")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vvh5c")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Background/Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Background/Floor/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_vho56")
+
+[node name="Box" parent="Background" instance=ExtResource("2_pyidc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5965309, 2.1958148)
+
+[node name="Wall" parent="Background" instance=ExtResource("3_vvh5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="Wall2" parent="Background" instance=ExtResource("3_vvh5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="Wall3" parent="Background" instance=ExtResource("3_vvh5c")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5, 0, 0)
+
+[node name="Wall4" parent="Background" instance=ExtResource("3_vvh5c")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Background"]
+environment = SubResource("Environment_vvh5c")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Background"]
+transform = Transform3D(1, 0, 0, 0, 0.34777036, 0.93757975, 0, -0.93757975, 0.34777036, 0, 6.2496495, 0)
+light_energy = 2.649
+shadow_enabled = true
+directional_shadow_max_distance = 10.0
+sky_mode = 1
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "WASD - Move
+Space - Jump
+Left Mouse - Fire
+Tab - Toggle Camera
+Return - Origin"
