@@ -207,7 +207,9 @@ func _parse_msg(peer: Peer) -> bool:
 	if typeof(parsed) != TYPE_DICTIONARY or not parsed.has("type") or not parsed.has("id") or \
 		typeof(parsed.get("data")) != TYPE_STRING:
 		return false
-	if not str(parsed.type).is_valid_int() or not str(parsed.id).is_valid_int():
+	if not typeof(parsed.type) == TYPE_FLOAT and int(parsed.type) == parsed.type:
+		return false
+	if not typeof(parsed.id == TYPE_FLOAT) and int(parsed.id) == parsed.id:
 		return false
 
 	var msg := {
