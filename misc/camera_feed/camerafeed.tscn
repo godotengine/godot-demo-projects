@@ -1,0 +1,161 @@
+[gd_scene load_steps=10 format=3 uid="uid://oiv4p8ii3am4"]
+
+[ext_resource type="Script" uid="uid://dxaoavn781kxe" path="res://camerafeed.gd" id="1_fuswq"]
+[ext_resource type="Shader" uid="uid://dhjh7s6i7jnlp" path="res://ycbcr_to_rgb.gdshader" id="2_0uyi5"]
+
+[sub_resource type="CameraTexture" id="CameraTexture_7c2aw"]
+
+[sub_resource type="CameraTexture" id="CameraTexture_nyeft"]
+
+[sub_resource type="CameraTexture" id="CameraTexture_xep8u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lgiw1"]
+shader = ExtResource("2_0uyi5")
+shader_parameter/rgb_texture = SubResource("CameraTexture_nyeft")
+shader_parameter/y_texture = SubResource("CameraTexture_xep8u")
+shader_parameter/cbcr_texture = SubResource("CameraTexture_7c2aw")
+shader_parameter/mode = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
+bg_color = Color(0.15, 0.15, 0.15, 0.95)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+shadow_color = Color(0, 0, 0, 0.3)
+shadow_size = 5
+shadow_offset = Vector2(0, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3"]
+bg_color = Color(0.3, 0.3, 0.3, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="CameraApp" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fuswq")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CameraDisplay" type="AspectRatioContainer" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 700.0
+offset_bottom = 1260.0
+stretch_mode = 1
+
+[node name="CameraPreview" type="TextureRect" parent="CameraDisplay"]
+material = SubResource("ShaderMaterial_lgiw1")
+layout_mode = 2
+stretch_mode = 5
+
+[node name="DrawerContainer" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 160.0
+offset_bottom = 160.0
+grow_horizontal = 2
+
+[node name="Drawer" type="PanelContainer" parent="DrawerContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1")
+
+[node name="DrawerContent" type="MarginContainer" parent="DrawerContainer/Drawer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DrawerContainer/Drawer/DrawerContent"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="HandleBar" type="Control" parent="DrawerContainer/Drawer/DrawerContent/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Bar" type="ColorRect" parent="DrawerContainer/Drawer/DrawerContent/VBoxContainer/HandleBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -2.0
+offset_right = 30.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="ButtonContainer" type="HBoxContainer" parent="DrawerContainer/Drawer/DrawerContent/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="StartOrStopButton" type="Button" parent="DrawerContainer/Drawer/DrawerContent/VBoxContainer/ButtonContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3")
+text = "Stop"
+
+[node name="ReloadButton" type="Button" parent="DrawerContainer/Drawer/DrawerContent/VBoxContainer/ButtonContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3")
+text = "Reload"
+
+[node name="CameraLabel" type="Label" parent="DrawerContainer/Drawer/DrawerContent/VBoxContainer"]
+layout_mode = 2
+text = "Camera"
+
+[node name="CameraList" type="OptionButton" parent="DrawerContainer/Drawer/DrawerContent/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="FormatLabel" type="Label" parent="DrawerContainer/Drawer/DrawerContent/VBoxContainer"]
+layout_mode = 2
+text = "Format"
+
+[node name="FormatList" type="OptionButton" parent="DrawerContainer/Drawer/DrawerContent/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[connection signal="pressed" from="DrawerContainer/Drawer/DrawerContent/VBoxContainer/ButtonContainer/StartOrStopButton" to="." method="_on_start_or_stop_button_pressed"]
+[connection signal="pressed" from="DrawerContainer/Drawer/DrawerContent/VBoxContainer/ButtonContainer/ReloadButton" to="." method="_on_reload_button_pressed"]
+[connection signal="item_selected" from="DrawerContainer/Drawer/DrawerContent/VBoxContainer/CameraList" to="." method="_on_camera_list_item_selected"]
+[connection signal="item_selected" from="DrawerContainer/Drawer/DrawerContent/VBoxContainer/FormatList" to="." method="_on_format_list_item_selected"]
