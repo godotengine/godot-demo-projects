@@ -36,17 +36,14 @@ func _reload_camera_list() -> void:
 				print("CAMERA permission not granted")
 				return
 
+	if not CameraServer.camera_feeds_updated.is_connected(_on_camera_feeds_updated):
+		CameraServer.camera_feeds_updated.connect(_on_camera_feeds_updated)
 	if CameraServer.monitoring_feeds:
 		CameraServer.monitoring_feeds = false
 		await get_tree().process_frame
 	CameraServer.monitoring_feeds = true
-	await get_tree().process_frame
-	# Wait for monitoring to be ready on web platform
-	if os_name == "Web":
-		while not CameraServer.monitoring_feeds:
-			await get_tree().process_frame
 
-func _on_feeds_update() -> void:
+func _on_camera_feeds_updated() -> void:
 	# Get available camera feeds
 	var feeds = CameraServer.feeds()
 	if feeds.is_empty():
