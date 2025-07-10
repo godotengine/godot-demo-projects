@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=3 uid="uid://c6ec3t6mbd08d"]
+
+[ext_resource type="PackedScene" uid="uid://c6h2mtlrvrp5v" path="res://controller_state.tscn" id="1_h2yge"]
+[ext_resource type="Script" uid="uid://dytx8naceu3j6" path="res://start_vr.gd" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://rek0t7kubpx4" path="res://assets/pattern.png" id="2_1bvp3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+tonemap_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lquwl"]
+albedo_color = Color(0.47788, 0.47788, 0.47788, 1)
+albedo_texture = ExtResource("2_1bvp3")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1bvp3"]
+material = SubResource("StandardMaterial3D_lquwl")
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h2yge")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="LeftHand" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+pose = &"grip"
+show_when_tracked = true
+
+[node name="Test" type="MeshInstance3D" parent="XROrigin3D/LeftHand"]
+mesh = SubResource("BoxMesh_ig7tw")
+
+[node name="SubViewport" type="SubViewport" parent="XROrigin3D/LeftHand"]
+disable_3d = true
+render_target_update_mode = 4
+
+[node name="ControllerState" parent="XROrigin3D/LeftHand/SubViewport" node_paths=PackedStringArray("controller") instance=ExtResource("1_h2yge")]
+controller = NodePath("../..")
+
+[node name="RightHand" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"right_hand"
+pose = &"grip"
+show_when_tracked = true
+
+[node name="Test" type="MeshInstance3D" parent="XROrigin3D/RightHand"]
+mesh = SubResource("BoxMesh_ig7tw")
+
+[node name="SubViewport" type="SubViewport" parent="XROrigin3D/RightHand"]
+disable_3d = true
+render_target_update_mode = 4
+
+[node name="ControllerState" parent="XROrigin3D/RightHand/SubViewport" node_paths=PackedStringArray("controller") instance=ExtResource("1_h2yge")]
+controller = NodePath("../..")
+
+[node name="LeftControllerState" type="OpenXRCompositionLayerQuad" parent="XROrigin3D" node_paths=PackedStringArray("layer_viewport")]
+transform = Transform3D(0.766044, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766044, -0.5, 1, -1)
+layer_viewport = NodePath("../LeftHand/SubViewport")
+quad_size = Vector2(0.4, 0.4)
+
+[node name="RightControllerState" type="OpenXRCompositionLayerQuad" parent="XROrigin3D" node_paths=PackedStringArray("layer_viewport")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 0.5, 1, -1)
+layer_viewport = NodePath("../RightHand/SubViewport")
+quad_size = Vector2(0.4, 0.4)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_1bvp3")
+
+[node name="StartVR" type="Node3D" parent="."]
+script = ExtResource("1_ig7tw")
