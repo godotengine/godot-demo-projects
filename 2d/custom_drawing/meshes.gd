@@ -2,38 +2,47 @@
 @tool
 extends Panel
 
-var use_antialiasing := false
+# You must hold a reference to the Resources either as member variables or within an Array or Dictionary.
+# Otherwise they get freed automatically and the renderer won't be able to draw them.
+var text_mesh := TextMesh.new()
+var noise_texture := NoiseTexture2D.new()
+var gradient_texture := GradientTexture2D.new()
+var sphere_mesh := SphereMesh.new()
+var multi_mesh := MultiMesh.new()
 
-
-func _draw() -> void:
-	var margin := Vector2(300, 70)
-
-	var offset := Vector2()
-	var text_mesh := TextMesh.new()
+func _ready() -> void:
 	text_mesh.text = "TextMesh"
 	# In 2D, 1 unit equals 1 pixel, so the default size at which PrimitiveMeshes are displayed is tiny.
 	# Use much larger mesh size to compensate, or use `draw_set_transform()` before using `draw_mesh()`
 	# to scale the draw command.
 	text_mesh.pixel_size = 2.5
 
-	var noise_texture := NoiseTexture2D.new()
 	noise_texture.seamless = true
 	noise_texture.as_normal_map = true
 	noise_texture.noise = FastNoiseLite.new()
 
-	# FIXME: The mesh needs to be added to a MeshInstance2D (even out-of-tree)
-	# for it to be usable in `draw_mesh()` (otherwise, nothing appears and an error is printed).
-	# Same goes for the texture. I don't know why.
-	var mi2d := MeshInstance2D.new()
-	mi2d.mesh = text_mesh
-	mi2d.texture = noise_texture
+	gradient_texture.gradient = Gradient.new()
 
-	var mi2d2 := MeshInstance2D.new()
-	var sphere_mesh := SphereMesh.new()
 	sphere_mesh.height = 80.0
 	sphere_mesh.radius = 40.0
-	mi2d2.mesh = sphere_mesh
-	mi2d2.texture = noise_texture
+
+	multi_mesh.use_colors = true
+	multi_mesh.instance_count = 5
+	multi_mesh.set_instance_transform_2d(0, Transform2D(0.0, Vector2(0, 0)))
+	multi_mesh.set_instance_color(0, Color(1, 0.7, 0.7))
+	multi_mesh.set_instance_transform_2d(1, Transform2D(0.0, Vector2(0, 100)))
+	multi_mesh.set_instance_color(1, Color(0.7, 1, 0.7))
+	multi_mesh.set_instance_transform_2d(2, Transform2D(0.0, Vector2(100, 100)))
+	multi_mesh.set_instance_color(2, Color(0.7, 0.7, 1))
+	multi_mesh.set_instance_transform_2d(3, Transform2D(0.0, Vector2(100, 0)))
+	multi_mesh.set_instance_color(3, Color(1, 1, 0.7))
+	multi_mesh.set_instance_transform_2d(4, Transform2D(0.0, Vector2(50, 50)))
+	multi_mesh.set_instance_color(4, Color(0.7, 1, 1))
+	multi_mesh.mesh = sphere_mesh
+
+func _draw() -> void:
+	const margin := Vector2(300, 70)
+	var offset := Vector2()
 
 	# `draw_set_transform()` is a stateful command: it affects *all* `draw_` methods within this
 	# `_draw()` function after it. This can be used to translate, rotate or scale `draw_` methods
@@ -48,29 +57,6 @@ func _draw() -> void:
 	draw_set_transform(margin + offset)
 	draw_mesh(sphere_mesh, noise_texture)
 
-	var gradient_texture := GradientTexture2D.new()
-	gradient_texture.gradient = Gradient.new()
-	var multi_mesh := MultiMesh.new()
-	multi_mesh.use_colors = true
-	multi_mesh.instance_count = 5
-	multi_mesh.set_instance_transform_2d(0, Transform2D(0.0, Vector2(0, 0)))
-	multi_mesh.set_instance_color(0, Color(1, 0.7, 0.7))
-	multi_mesh.set_instance_transform_2d(1, Transform2D(0.0, Vector2(0, 100)))
-	multi_mesh.set_instance_color(1, Color(0.7, 1, 0.7))
-	multi_mesh.set_instance_transform_2d(2, Transform2D(0.0, Vector2(100, 100)))
-	multi_mesh.set_instance_color(2, Color(0.7, 0.7, 1))
-	multi_mesh.set_instance_transform_2d(3, Transform2D(0.0, Vector2(100, 0)))
-	multi_mesh.set_instance_color(3, Color(1, 1, 0.7))
-	multi_mesh.set_instance_transform_2d(4, Transform2D(0.0, Vector2(50, 50)))
-	multi_mesh.set_instance_color(4, Color(0.7, 1, 1))
-	multi_mesh.mesh = sphere_mesh
-	var mmi2d := MultiMeshInstance2D.new()
-	mmi2d.multimesh = multi_mesh
-	mmi2d.texture = gradient_texture
-
-	# FIXME: The multimesh needs to be added to a MultiMeshInstance2D (even out-of-tree)
-	# for it to be usable in `draw_multimesh()` (otherwise, it crashes).
-	# Same goes for the texture. I don't know why.
 	offset = Vector2(0, 120)
 	draw_set_transform(margin + offset)
 	draw_multimesh(multi_mesh, gradient_texture)
