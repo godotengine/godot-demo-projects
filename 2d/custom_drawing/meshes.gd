@@ -3,7 +3,7 @@
 extends Panel
 
 # You must hold a reference to the Resources either as member variables or within an Array or Dictionary.
-# Otherwise they get freed automatically and the renderer won't be able to draw them.
+# Otherwise, they get freed automatically and the renderer won't be able to draw them.
 var text_mesh := TextMesh.new()
 var noise_texture := NoiseTexture2D.new()
 var gradient_texture := GradientTexture2D.new()
