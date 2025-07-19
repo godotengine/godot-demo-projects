@@ -14,13 +14,23 @@ var audio_sample_texture : ImageTexture
 var generator_timestamp : float = 0.0
 var generator_freq : float = 0.0
 
+var microphonefeed = null
+
 func _ready() -> void:
-	if not Input.has_method("start_microphone"):
-		$Status.text = "Error: requires PR#105244 to work"
 	input_mix_rate = int(AudioServer.get_input_mix_rate())
 	print("Input mix rate: ", input_mix_rate)
 	print("Output mix rate: ", AudioServer.get_mix_rate())
 	print("Project mix rate: ", ProjectSettings.get("audio/driver/mix_rate"))
+
+	if ClassDB.class_exists("MicrophoneServer"):
+		#microphonefeed = ClassDB.class_call_static("MicrophoneServer", "get_feed", [0])
+		microphonefeed = MicrophoneServer.get_feed(0)
+	if not microphonefeed:
+		$Status.text = "**** Error: requires PR#105244 to work"
+		print($Status.text)
+		set_process(false)
+		$MicrophoneOn.disabled = true
+
 	$InputMixRate.text = "Mix rate: %d" % input_mix_rate
 	audio_sample_size = int(audio_chunk_size_ms*input_mix_rate/1000.0)
 	var blank_image : PackedVector2Array = PackedVector2Array()
@@ -31,11 +41,13 @@ func _ready() -> void:
 
 func _on_microphone_on_toggled(toggled_on : bool) -> void:
 	if toggled_on:
-		Input.start_microphone()
+		microphonefeed.set_active(true)
 		total_samples = 0
 		sample_duration = 0.0
+		print("Input buffer length frames: ", microphonefeed.get_buffer_length_frames())
+		print("Input buffer length seconds: ", microphonefeed.get_buffer_length_frames()*1.0/input_mix_rate)
 	else:
-		Input.stop_microphone()
+		microphonefeed.set_active(false)
 
 func _on_mic_to_generator_toggled(toggled_on : bool) -> void:
 	if toggled_on:
@@ -44,8 +56,8 @@ func _on_mic_to_generator_toggled(toggled_on : bool) -> void:
 
 func _process(delta : float) -> void:
 	sample_duration += delta
-	while Input.get_microphone_frames_available() >= audio_sample_size:
-		var audio_samples : PackedVector2Array = Input.get_microphone_buffer(audio_sample_size)
+	while microphonefeed.get_frames_available() >= audio_sample_size:
+		var audio_samples : PackedVector2Array = microphonefeed.get_frames(audio_sample_size)
 		if audio_samples:
 			audio_sample_image.set_data(audio_sample_size, 1, false, Image.FORMAT_RGF, audio_samples.to_byte_array())
 			audio_sample_texture.update(audio_sample_image)
