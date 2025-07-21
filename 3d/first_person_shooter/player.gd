@@ -162,7 +162,7 @@ func _physics_process(delta: float) -> void:
 	bob_fall_counter = lerpf(bob_fall_counter, 0.0, BOB_FALL_RECOVER_SPEED * delta)
 
 	# Roll the camera based on sideways movement speed.
-	var roll := velocity.dot($Camera3D.transform.basis.x)
+	var roll := velocity.dot($Camera3D.global_transform.basis.x)
 	if health >= 1:
 		$Camera3D.rotation.z = -roll * 0.003 + damage_roll
 	else:
@@ -276,7 +276,7 @@ func _process(delta: float) -> void:
 		$WeaponSounds.play()
 		$AnimationPlayer.play("fire")
 		# Apply weapon kickback (player is pushed away from their firing direction).
-		velocity += $Camera3D.transform.basis.z * WEAPON_KICKBACK_FORCE
+		velocity += $Camera3D.global_transform.basis.z * WEAPON_KICKBACK_FORCE
 
 	if $AnimationPlayer.current_animation == &"fire":
 		# Fade out crosshair while the weapon is reloading.
