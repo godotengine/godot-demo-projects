@@ -112,7 +112,7 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			_mouse_motion += event.relative
+			_mouse_motion += event.screen_relative
 
 
 func chunk_pos() -> Vector3i:
