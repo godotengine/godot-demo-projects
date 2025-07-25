@@ -83,45 +83,45 @@ text = "N-samples"
 
 [node name="RecordButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 105.0
-offset_right = 150.0
-offset_bottom = 145.0
+offset_left = 25.0
+offset_top = 167.0
+offset_right = 155.0
+offset_bottom = 207.0
 toggle_mode = true
 text = "Record"
 
 [node name="PlayButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 167.0
-offset_top = 105.0
-offset_right = 297.0
-offset_bottom = 145.0
+offset_left = 172.0
+offset_top = 167.0
+offset_right = 302.0
+offset_bottom = 207.0
 disabled = true
 text = "Play"
 
 [node name="PlayMusic" type="Button" parent="."]
 layout_mode = 0
-offset_left = 323.0
-offset_top = 105.0
-offset_right = 453.0
-offset_bottom = 145.0
+offset_left = 328.0
+offset_top = 167.0
+offset_right = 458.0
+offset_bottom = 207.0
 toggle_mode = true
 text = "Play Music"
 
 [node name="MicTexture" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_m4htd")
 layout_mode = 0
-offset_left = 20.0
-offset_top = 161.0
-offset_right = 548.0
-offset_bottom = 250.0
+offset_left = 25.0
+offset_top = 223.0
+offset_right = 553.0
+offset_bottom = 312.0
 
 [node name="SaveButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 26.0
-offset_top = 295.0
-offset_right = 156.0
-offset_bottom = 335.0
+offset_left = 31.0
+offset_top = 357.0
+offset_right = 161.0
+offset_bottom = 397.0
 disabled = true
 text = "Save WAV To:"
 
@@ -136,18 +136,18 @@ caret_blink = true
 [node name="OpenUserFolderButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 28.0
-offset_top = 349.0
-offset_right = 191.0
-offset_bottom = 389.0
+offset_left = 33.0
+offset_top = 411.0
+offset_right = 196.0
+offset_bottom = 451.0
 text = "Open User Folder"
 
 [node name="OptionTone" type="OptionButton" parent="."]
 layout_mode = 0
-offset_left = 474.0
-offset_top = 109.0
-offset_right = 568.0
-offset_bottom = 140.0
+offset_left = 479.0
+offset_top = 171.0
+offset_right = 573.0
+offset_bottom = 202.0
 selected = 0
 item_count = 5
 popup/item_0/text = "No tone"
@@ -161,6 +161,23 @@ popup/item_3/id = 3
 popup/item_4/text = "2000Hz"
 popup/item_4/id = 4
 
+[node name="LabelInputDevice" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.5
+offset_left = 9.608124
+offset_top = 111.71399
+offset_right = 129.0
+offset_bottom = -86.0
+text = "Input device:"
+
+[node name="OptionInput" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 116.0
+offset_right = 155.0
+offset_bottom = 136.0
+
 [connection signal="toggled" from="MicrophoneOn" to="." method="_on_microphone_on_toggled"]
 [connection signal="toggled" from="MicToGenerator" to="." method="_on_mic_to_generator_toggled"]
 [connection signal="toggled" from="RecordButton" to="." method="_on_record_button_toggled"]
@@ -169,3 +186,4 @@ popup/item_4/id = 4
 [connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="OpenUserFolderButton" to="." method="_on_open_user_folder_button_pressed"]
 [connection signal="item_selected" from="OptionTone" to="." method="_on_option_tone_item_selected"]
+[connection signal="item_selected" from="OptionInput" to="." method="_on_option_input_item_selected"]

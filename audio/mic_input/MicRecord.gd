@@ -17,6 +17,10 @@ var generator_freq : float = 0.0
 var microphonefeed = null
 
 func _ready() -> void:
+	for d in AudioServer.get_input_device_list():
+		$OptionInput.add_item(d)
+	assert ($OptionInput.get_item_text($OptionInput.selected) == "Default")
+	
 	input_mix_rate = int(AudioServer.get_input_mix_rate())
 	print("Input mix rate: ", input_mix_rate)
 	print("Output mix rate: ", AudioServer.get_mix_rate())
@@ -38,6 +42,10 @@ func _ready() -> void:
 	audio_sample_image = Image.create_from_data(audio_sample_size, 1, false, Image.FORMAT_RGF, blank_image.to_byte_array())
 	audio_sample_texture = ImageTexture.create_from_image(audio_sample_image)
 	$MicTexture.material.set_shader_parameter("audiosample", audio_sample_texture)
+
+func _on_option_input_item_selected(index):
+	var inputdevice = $OptionInput.get_item_text(index)
+	AudioServer.set_input_device(inputdevice)
 
 func _on_microphone_on_toggled(toggled_on : bool) -> void:
 	if toggled_on:
