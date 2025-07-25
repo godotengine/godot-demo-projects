@@ -1,0 +1,90 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6h2mtlrvrp5v"]
+
+[ext_resource type="Script" uid="uid://b7rteq0k83idy" path="res://controller_state.gd" id="1_dwfbl"]
+
+[node name="ControllerState" type="Control"]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_dwfbl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.5
+offset_top = -20.0
+offset_right = 58.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ThresholdHeader" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/ThresholdHeader"]
+layout_mode = 2
+text = "Threshold Info:"
+
+[node name="TriggerInput" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TriggerInput"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Trigger:"
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/TriggerInput"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/TriggerInput"]
+layout_mode = 2
+
+[node name="Thresholds" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="OnThreshold" type="Label" parent="VBoxContainer/Thresholds"]
+layout_mode = 2
+text = "On: 0.0"
+
+[node name="OffThreshold" type="Label" parent="VBoxContainer/Thresholds"]
+layout_mode = 2
+text = "Off: 0.0"
+
+[node name="DPadHeader" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/DPadHeader"]
+layout_mode = 2
+text = "D-pad Info:"
+
+[node name="DPadState" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Up" type="CheckBox" parent="VBoxContainer/DPadState"]
+layout_mode = 2
+text = "Up"
+
+[node name="Down" type="CheckBox" parent="VBoxContainer/DPadState"]
+layout_mode = 2
+text = "Down"
+
+[node name="Left" type="CheckBox" parent="VBoxContainer/DPadState"]
+layout_mode = 2
+text = "Left"
+
+[node name="Right" type="CheckBox" parent="VBoxContainer/DPadState"]
+layout_mode = 2
+text = "Right"
