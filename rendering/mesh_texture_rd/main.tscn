@@ -1,0 +1,109 @@
+[gd_scene load_steps=18 format=3 uid="uid://cnk1inmvelj4x"]
+
+[ext_resource type="Texture2D" uid="uid://crm65s53yy1n6" path="res://godot_icon.svg" id="1_7mycd"]
+[ext_resource type="RDShaderFile" uid="uid://bsbaafha2qt2x" path="res://base_texture.glsl" id="2_272bh"]
+[ext_resource type="Script" uid="uid://cdfq6x7v36k1e" path="res://mesh_texture_rd.gd" id="3_5vw27"]
+[ext_resource type="ArrayMesh" uid="uid://j7duroqwmiuw" path="res://2d_array_mesh.tres" id="4_1bvp3"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_kek77"]
+
+[sub_resource type="Texture2D" id="Texture2D_4c57u"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("3_5vw27")
+size = Vector2i(256, 256)
+clear_color = Color(0.412266, 0.447241, 0.735728, 1)
+mesh = SubResource("PrismMesh_kek77")
+base_texture = ExtResource("1_7mycd")
+projection = Projection(-0.605, -1.285, 0, 0, 1.09, -1.67, 0.11, 0, 0.755, 0.035, 1.2, 0, 0.025, -0.26, 0, 1.355)
+glsl_file = ExtResource("2_272bh")
+metadata/_custom_type_script = "uid://delyovxoqvijt"
+
+[sub_resource type="TorusMesh" id="TorusMesh_lquwl"]
+
+[sub_resource type="Texture2D" id="Texture2D_7mycd"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("3_5vw27")
+size = Vector2i(256, 256)
+clear_color = Color(0.271125, 0.510188, 0.620698, 1)
+mesh = SubResource("TorusMesh_lquwl")
+base_texture = ExtResource("1_7mycd")
+projection = Projection(-0.71, -0.91, 0.5, 0.01, 0.25, 1.53, 0.315, 0, 1.43, -0.135, 0.48, 0.14, 0.085, 0.02, 0.75, 1.845)
+glsl_file = ExtResource("2_272bh")
+metadata/_custom_type_script = "uid://delyovxoqvijt"
+
+[sub_resource type="QuadMesh" id="QuadMesh_1bvp3"]
+
+[sub_resource type="Texture2D" id="Texture2D_lquwl"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("3_5vw27")
+size = Vector2i(256, 256)
+clear_color = Color(0.572798, 0.384286, 0.683792, 0.337255)
+mesh = SubResource("QuadMesh_1bvp3")
+base_texture = ExtResource("1_7mycd")
+projection = Projection(-1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+glsl_file = ExtResource("2_272bh")
+metadata/_custom_type_script = "uid://delyovxoqvijt"
+
+[sub_resource type="Gradient" id="Gradient_1bvp3"]
+interpolation_color_space = 2
+colors = PackedColorArray(0.692862, 0.522376, 0.466238, 1, 0.634748, 0.521037, 0.665456, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lquwl"]
+gradient = SubResource("Gradient_1bvp3")
+
+[sub_resource type="TextMesh" id="TextMesh_7mycd"]
+text = "Rasterize Mesh Texture"
+
+[sub_resource type="Texture2D" id="Texture2D_272bh"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("3_5vw27")
+size = Vector2i(552, 131)
+clear_color = Color(1, 1, 1, 0)
+mesh = SubResource("TextMesh_7mycd")
+base_texture = SubResource("GradientTexture2D_lquwl")
+projection = Projection(1.095, 0, 0, 0, 0, -5.53, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1)
+glsl_file = ExtResource("2_272bh")
+metadata/_custom_type_script = "uid://cdfq6x7v36k1e"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1bvp3"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lquwl"]
+noise = SubResource("FastNoiseLite_1bvp3")
+
+[sub_resource type="Texture2D" id="Texture2D_1bvp3"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("3_5vw27")
+size = Vector2i(256, 256)
+clear_color = Color(1, 1, 1, 0)
+mesh = ExtResource("4_1bvp3")
+base_texture = SubResource("NoiseTexture2D_lquwl")
+projection = Projection(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+glsl_file = ExtResource("2_272bh")
+metadata/_custom_type_script = "uid://cdfq6x7v36k1e"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Prism" type="Sprite2D" parent="."]
+position = Vector2(573, 321)
+texture = SubResource("Texture2D_4c57u")
+
+[node name="Torus" type="Sprite2D" parent="."]
+position = Vector2(898, 319)
+texture = SubResource("Texture2D_7mycd")
+
+[node name="Quad" type="Sprite2D" parent="."]
+position = Vector2(252, 321)
+texture = SubResource("Texture2D_lquwl")
+
+[node name="Text" type="Sprite2D" parent="."]
+position = Vector2(293, 89)
+texture = SubResource("Texture2D_272bh")
+
+[node name="2DMesh" type="Sprite2D" parent="."]
+position = Vector2(244, 543)
+texture = SubResource("Texture2D_1bvp3")
