@@ -1,5 +1,5 @@
 @tool
-extends Texture2D
+extends Texture2DRD
 class_name MeshTextureRD
 
 var rd := RenderingServer.get_rendering_device()
@@ -15,7 +15,6 @@ var uniform_set_rid := RID()
 var index_buffer_rid := RID()
 var vertex_buffer_pos_rid := RID()
 var vertex_buffer_uv_rid := RID()
-var texture_rd := RenderingServer.texture_2d_placeholder_create()
 
 var uniform_tex: RDUniform = RDUniform.new()
 var vertex_attrs: Array[RDVertexAttribute]
@@ -118,7 +117,6 @@ func _notification(what: int) -> void:
 			rd.free_rid(vertex_buffer_pos_rid)
 		if vertex_buffer_uv_rid.is_valid():
 			rd.free_rid(vertex_buffer_uv_rid)
-		RenderingServer.free_rid(texture_rd)
 
 
 func update(force: bool = false) -> void:
@@ -238,17 +236,18 @@ func _reset_pipeline() -> void:
 	tex_format.width = size.x
 	tex_format.height = size.y
 	tex_format.format = RenderingDevice.DATA_FORMAT_R8G8B8A8_SRGB
-	tex_format.usage_bits = RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT | RenderingDevice.TEXTURE_USAGE_COLOR_ATTACHMENT_BIT
+	tex_format.usage_bits = RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT | RenderingDevice.TEXTURE_USAGE_COLOR_ATTACHMENT_BIT | RenderingDevice.TEXTURE_USAGE_CAN_COPY_FROM_BIT
 	
 	tex_format.add_shareable_format(RenderingDevice.DATA_FORMAT_R8G8B8A8_UNORM)
 	tex_format.add_shareable_format(RenderingDevice.DATA_FORMAT_R8G8B8A8_SRGB)
 
-	var tex_rid := rd.texture_create(tex_format, tex_view)
-	RenderingServer.texture_replace(texture_rd, RenderingServer.texture_rd_create(tex_rid) if tex_rid.is_valid() else RenderingServer.texture_2d_placeholder_create())
+	var new_rd_tex := rd.texture_create(tex_format, tex_view)
+	texture_rd_rid = new_rd_tex
+
 	if framebuffer_texture_rid.is_valid():
 		rd.free_rid(framebuffer_texture_rid)
 
-	framebuffer_texture_rid = tex_rid
+	framebuffer_texture_rid = new_rd_tex
 
 	var blend := RDPipelineColorBlendState.new()
 	blend.attachments.append(RDPipelineColorBlendStateAttachment.new())
@@ -316,15 +315,3 @@ func _draw_list() -> void:
 	rd.draw_list_set_push_constant(draw_list, xform_bytes, len(xform_bytes))
 	rd.draw_list_draw(draw_list, index_array_rid.is_valid(), 1)
 	rd.draw_list_end()
-
-
-func _get_rid() -> RID:
-	return texture_rd
-
-
-func _get_width() -> int:
-	return size.x
-
-
-func _get_height() -> int:
-	return size.y
