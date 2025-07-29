@@ -40,6 +40,7 @@ var is_2d_mesh := false
 		clear_color = value
 		_queue_update()
 
+
 @export var mesh: Mesh:
 	get: return mesh
 	set(value):
@@ -49,6 +50,7 @@ var is_2d_mesh := false
 		_queue_update_mesh()
 		if mesh != null:
 			mesh.changed.connect(_queue_update_mesh)
+
 
 @export var base_texture: Texture2D:
 	get: return base_texture
@@ -66,6 +68,7 @@ var is_2d_mesh := false
 	set(value):
 		projection = value
 		_queue_update()
+
 
 @export var glsl_file: RDShaderFile = preload("res://base_texture.glsl"):
 	get: return glsl_file
@@ -117,6 +120,7 @@ func _notification(what: int) -> void:
 			rd.free_rid(vertex_buffer_uv_rid)
 		RenderingServer.free_rid(texture_rd)
 
+
 func update(force: bool = false) -> void:
 	if force:
 		shader_dirty = true
@@ -143,15 +147,18 @@ func update(force: bool = false) -> void:
 	emit_changed()
 	_update_queued = false
 
+
 func _queue_update() -> void:
 	if _update_queued:
 		return
 	_update_queued = true
 	update.call_deferred()
 
+
 func _queue_update_shader() -> void:
 	shader_dirty = true
 	_queue_update()
+
 
 func _queue_update_pipeline() -> void:
 	pipeline_dirty = true
@@ -210,6 +217,7 @@ func _reset_vertex() -> void:
 
 	vertex_array_rid = rd.vertex_array_create(int(float(points_bytes.size()) / 4 / 3), vertex_format, vertex_buffers)
 
+
 func _reset_shader() -> void:
 	var shader_spirv := glsl_file.get_spirv()
 	if shader_rid.is_valid():
@@ -218,6 +226,7 @@ func _reset_shader() -> void:
 		uniform_set_rid = RID()
 
 	shader_rid = rd.shader_create_from_spirv(shader_spirv)
+
 
 func _reset_pipeline() -> void:
 	if glsl_file == null:
@@ -261,6 +270,7 @@ func _reset_pipeline() -> void:
 			blend
 		)
 
+
 func _reset_uniform() -> void:
 	if not sampler_rid.is_valid() or base_texture == null or not base_texture.get_rid().is_valid() or not shader_rid.is_valid():
 		return
@@ -272,6 +282,7 @@ func _reset_uniform() -> void:
 	uniform_tex.add_id(RenderingServer.texture_get_rd_texture(base_texture.get_rid(), true))
 
 	uniform_set_rid = UniformSetCacheRD.get_cache(shader_rid, 0, [uniform_tex])
+
 
 func _draw_list() -> void:
 	if not rd.render_pipeline_is_valid(pipeline_rid):
@@ -306,11 +317,14 @@ func _draw_list() -> void:
 	rd.draw_list_draw(draw_list, index_array_rid.is_valid(), 1)
 	rd.draw_list_end()
 
+
 func _get_rid() -> RID:
 	return texture_rd
 
+
 func _get_width() -> int:
 	return size.x
+
 
 func _get_height() -> int:
 	return size.y
