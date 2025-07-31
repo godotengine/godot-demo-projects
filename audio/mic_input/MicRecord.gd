@@ -20,15 +20,14 @@ func _ready() -> void:
 	for d in AudioServer.get_input_device_list():
 		$OptionInput.add_item(d)
 	assert ($OptionInput.get_item_text($OptionInput.selected) == "Default")
-	
+
 	input_mix_rate = int(AudioServer.get_input_mix_rate())
 	print("Input mix rate: ", input_mix_rate)
 	print("Output mix rate: ", AudioServer.get_mix_rate())
 	print("Project mix rate: ", ProjectSettings.get("audio/driver/mix_rate"))
 
-	if ClassDB.class_exists("MicrophoneServer"):
-		#microphonefeed = ClassDB.class_call_static("MicrophoneServer", "get_feed", [0])
-		microphonefeed = MicrophoneServer.get_feed(0)
+	if Engine.has_singleton("MicrophoneServer"):
+		microphonefeed = Engine.get_singleton("MicrophoneServer").get_feed(0)
 	if not microphonefeed:
 		$Status.text = "**** Error: requires PR#105244 to work"
 		print($Status.text)
@@ -45,6 +44,7 @@ func _ready() -> void:
 
 func _on_option_input_item_selected(index : int) -> void:
 	var inputdevice : String = $OptionInput.get_item_text(index)
+	print("Set input device: ", inputdevice)
 	AudioServer.set_input_device(inputdevice)
 
 func _on_microphone_on_toggled(toggled_on : bool) -> void:
