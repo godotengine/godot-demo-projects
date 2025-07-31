@@ -43,12 +43,22 @@ func _ready() -> void:
 	audio_sample_texture = ImageTexture.create_from_image(audio_sample_image)
 	$MicTexture.material.set_shader_parameter("audiosample", audio_sample_texture)
 
-func _on_option_input_item_selected(index):
-	var inputdevice = $OptionInput.get_item_text(index)
+func _on_option_input_item_selected(index : int) -> void:
+	var inputdevice : String = $OptionInput.get_item_text(index)
 	AudioServer.set_input_device(inputdevice)
 
 func _on_microphone_on_toggled(toggled_on : bool) -> void:
 	if toggled_on:
+		if OS.get_name() == "Android" and not OS.request_permission("android.permission.RECORD_AUDIO"):
+			print("Waiting for user response after requesting audio permissions")
+			# yuou also need to enabled Record Audio in the android export settings
+			@warning_ignore("untyped_declaration")
+			var x = await get_tree().on_request_permissions_result
+			var permission : String = x[0]
+			var granted : bool = x[1]
+			assert (permission == "android.permission.RECORD_AUDIO")
+			print("Audio permission granted ", granted)
+
 		microphonefeed.set_active(true)
 		total_samples = 0
 		sample_duration = 0.0
