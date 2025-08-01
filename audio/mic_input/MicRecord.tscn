@@ -165,18 +165,33 @@ popup/item_4/id = 4
 layout_mode = 1
 anchors_preset = -1
 anchor_bottom = 0.5
-offset_left = 9.608124
-offset_top = 111.71399
-offset_right = 129.0
-offset_bottom = -86.0
+offset_left = 16.0
+offset_top = 85.0
+offset_right = 135.39188
+offset_bottom = -112.71399
 text = "Input device:"
 
 [node name="OptionInput" type="OptionButton" parent="."]
 layout_mode = 0
-offset_left = 123.0
-offset_top = 116.0
-offset_right = 155.0
-offset_bottom = 136.0
+offset_left = 137.0
+offset_top = 88.0
+offset_right = 169.0
+offset_bottom = 108.0
+
+[node name="LabelOutputDevice" type="Label" parent="."]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 120.0
+offset_right = 57.0
+offset_bottom = 143.0
+text = "Output device:"
+
+[node name="OptionOutput" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 122.0
+offset_right = 176.0
+offset_bottom = 142.0
 
 [connection signal="toggled" from="MicrophoneOn" to="." method="_on_microphone_on_toggled"]
 [connection signal="toggled" from="MicToGenerator" to="." method="_on_mic_to_generator_toggled"]
@@ -187,3 +202,4 @@ offset_bottom = 136.0
 [connection signal="pressed" from="OpenUserFolderButton" to="." method="_on_open_user_folder_button_pressed"]
 [connection signal="item_selected" from="OptionTone" to="." method="_on_option_tone_item_selected"]
 [connection signal="item_selected" from="OptionInput" to="." method="_on_option_input_item_selected"]
+[connection signal="item_selected" from="OptionOutput" to="." method="_on_option_output_item_selected"]

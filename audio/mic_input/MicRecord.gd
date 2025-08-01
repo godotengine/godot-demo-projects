@@ -21,6 +21,10 @@ func _ready() -> void:
 		$OptionInput.add_item(d)
 	assert ($OptionInput.get_item_text($OptionInput.selected) == "Default")
 
+	for d in AudioServer.get_output_device_list():
+		$OptionOutput.add_item(d)
+	assert ($OptionOutput.get_item_text($OptionOutput.selected) == "Default")
+
 	input_mix_rate = int(AudioServer.get_input_mix_rate())
 	print("Input mix rate: ", input_mix_rate)
 	print("Output mix rate: ", AudioServer.get_mix_rate())
@@ -46,6 +50,11 @@ func _on_option_input_item_selected(index : int) -> void:
 	var inputdevice : String = $OptionInput.get_item_text(index)
 	print("Set input device: ", inputdevice)
 	AudioServer.set_input_device(inputdevice)
+
+func _on_option_output_item_selected(index : int) -> void:
+	var outputdevice : String = $OptionOutput.get_item_text(index)
+	print("Set output device: ", outputdevice)
+	AudioServer.set_output_device(outputdevice)
 
 func _on_microphone_on_toggled(toggled_on : bool) -> void:
 	if toggled_on:
