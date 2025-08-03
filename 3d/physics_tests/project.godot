@@ -95,7 +95,15 @@ character_jump={
 
 [physics]
 
-jolt_physics_3d/limits/max_bodies=20480
-jolt_physics_3d/limits/max_body_pairs=131072
-jolt_physics_3d/limits/max_contact_constraints=40960
+3d/physics_engine="Jolt Physics"
+jolt_physics_3d/limits/temporary_memory_buffer_size=128
+jolt_physics_3d/limits/max_bodies=262144
+jolt_physics_3d/limits/max_body_pairs=262144
+jolt_physics_3d/limits/max_contact_constraints=262144
 common/physics_interpolation=true
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_3d=2
