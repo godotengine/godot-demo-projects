@@ -68,7 +68,7 @@ func button_pressed(button_name: String) -> void:
 		paint_control.brush_shape = paint_control.BrushShape.CIRCLE
 		shape_name = "Circle"
 
-	# If an operation button is pressed
+	# If an operation button is pressed.
 	elif button_name == "clear_picture":
 		paint_control.brush_data_list.clear()
 		paint_control.queue_redraw()

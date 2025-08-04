@@ -5,7 +5,7 @@ extends Node3D
 
 # The delta/tolerance for the bone chain (how do the bones need to be before it is considered satisfactory)
 const CHAIN_TOLERANCE = 0.01
-# The amount of iterations the bone chain will go through in an attempt to get to the target position
+# The number of iterations the bone chain will go through in an attempt to get to the target position
 const CHAIN_MAX_ITER = 10
 
 @export var skeleton_path: NodePath:
@@ -87,7 +87,7 @@ var chain_origin = Vector3()
 # The combined length of every bone in the bone chain
 var total_length = INF
 # The amount of iterations we've been through, and whether or not we want to limit our solver to CHAIN_MAX_ITER
-# amounts of iterations.
+# iterations.
 @export var chain_iterations: int = 0
 @export var limit_chain_iterations: bool = true
 # Should we reset chain_iterations on movement during our update method?
