@@ -110,7 +110,7 @@ func _on_vsync_option_button_item_selected(index: int) -> void:
 	# Vertical synchronization locks framerate and makes screen tearing not visible at the cost of
 	# higher input latency and stuttering when the framerate target is not met.
 	# Adaptive V-Sync automatically disables V-Sync when the framerate target is not met, and enables
-	# V-Sync otherwise. This prevents suttering and reduces input latency when the framerate target
+	# V-Sync otherwise. This prevents stuttering and reduces input latency when the framerate target
 	# is not met, at the cost of visible tearing.
 	if index == 0: # Disabled (default)
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
@@ -152,7 +152,7 @@ func _on_fxaa_option_button_item_selected(index: int) -> void:
 
 
 func _on_fullscreen_option_button_item_selected(index: int) -> void:
-	# To change between winow, fullscreen and other window modes,
+	# To change between window, fullscreen and other window modes,
 	# set the root mode to one of the options of Window.MODE_*.
 	# Other modes are maximized and minimized.
 	if index == 0: # Disabled (default)
@@ -172,7 +172,7 @@ func _on_shadow_size_option_button_item_selected(index):
 	if index == 0: # Minimum
 		RenderingServer.directional_shadow_atlas_set_size(512, true)
 		# Adjust shadow bias according to shadow resolution.
-		# Higher resultions can use a lower bias without suffering from shadow acne.
+		# Higher resolutions can use a lower bias without suffering from shadow acne.
 		directional_light.shadow_bias = 0.06
 
 		# Disable positional (omni/spot) light shadows entirely to further improve performance.

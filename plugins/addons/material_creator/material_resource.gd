@@ -10,7 +10,7 @@ var metallic_strength := 0.0
 var roughness_strength := 0.0
 
 
-# Convert our data into an dictonary so we can convert it
+# Convert our data into an dictionary so we can convert it
 # into the JSON format.
 func make_json() -> String:
 	var json_dict := {}
@@ -26,7 +26,7 @@ func make_json() -> String:
 	return JSON.stringify(json_dict)
 
 
-# Convert the passed in string to a JSON dictonary, and then
+# Convert the passed in string to a JSON dictionary, and then
 # fill in our data.
 func from_json(json_dict_as_string: String) -> void:
 	var json_dict: Dictionary = JSON.parse_string(json_dict_as_string)

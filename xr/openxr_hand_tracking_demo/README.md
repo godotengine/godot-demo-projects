@@ -51,7 +51,7 @@ For advanced gesture recognition you would still use this data however it is now
 the physical means in which this data is obtained.
 
 At the same time, in this school of thought the action map system is seen as the primary means to gain input
-and is no longer restriced to input from controllers. The XR runtime is now responsible for recognising base
+and is no longer restricted to input from controllers. The XR runtime is now responsible for recognising base
 gestures such as pinching and pointing resulting in inputs that can be bound in the action map.
 
 OpenXR is moving towards this approach and this demo has been build in accordance with this however not all runtimes have been updated yet.
@@ -67,7 +67,7 @@ For other runtimes like Picos, HTC, Varjos, Magic Leaps, etc. may or may not yet
 
 ### Conclusion
 
-Due to the wildgrowth in capabilities in XR runtimes,
+Due to the wild growth in capabilities in XR runtimes,
 and there being no solid way to detect the full limitations of the platform you are currently on,
 Godot XR Tools does not have support for the hand tracking API and purely relies on its own inferred hand positioning approach.
 
@@ -105,7 +105,7 @@ This split is applied because:
 
 ## (Half) body Tracking API
 
-Just an honerable mention of this, this is not part of this demo but Godot now also has support
+Just an honorable mention of this, this is not part of this demo but Godot now also has support
 for half and full body tracking that includes hand tracking. This functionality however is only
 available on a limited number of XR runtimes.
 
