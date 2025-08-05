@@ -1,6 +1,6 @@
 # A WebSocket signaling server/client for WebRTC.
 
-This demo is devided in 4 parts:
+This demo is divided in 4 parts:
 
 - The `server` folder contains the signaling server implementation written in GDScript (so it can be run by a game server running Godot)
 - The `server_node` folder contains the signaling server implementation written in Node.js (if you don't plan to run a game server but only match-making).

@@ -13,7 +13,7 @@ A demo showing the various window management features available through
 
 Language: GDScript
 
-Renderer: Compatbility
+Renderer: Compatibility
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2791
 
