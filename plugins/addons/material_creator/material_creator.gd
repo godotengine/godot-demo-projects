@@ -70,4 +70,5 @@ func _silly_resource_from_values() -> Resource:
 	silly_resource.albedo_color = color
 	silly_resource.metallic_strength = metallic
 	silly_resource.roughness_strength = roughness
+
 	return silly_resource
