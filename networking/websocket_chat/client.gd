@@ -13,7 +13,7 @@ func info(msg: String) -> void:
 #region Client signals
 func _on_web_socket_client_connection_closed() -> void:
 	var ws := _client.get_socket()
-	info("Client just disconnected with code: %s, reson: %s" % [ws.get_close_code(), ws.get_close_reason()])
+	info("Client just disconnected with code: %s, reason: %s" % [ws.get_close_code(), ws.get_close_reason()])
 
 
 func _on_web_socket_client_connected_to_server() -> void:

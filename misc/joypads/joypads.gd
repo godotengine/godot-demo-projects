@@ -71,7 +71,7 @@ func _process(_delta: float) -> void:
 				# Transparent white modulate, non-alpha color channels are not changed here.
 				joypad_axes.get_node(str(axis)).self_modulate.a = scaled_alpha_value
 
-		# Highlight axis labels that are within the "active" value range. Simular to the button highlighting for loop below.
+		# Highlight axis labels that are within the "active" value range. Similar to the button highlighting for loop below.
 		axes.get_node("Axis" + str(axis) + "/Label").add_theme_color_override("font_color", FONT_COLOR_DEFAULT)
 		if abs(axis_value) >= DEADZONE:
 			axes.get_node("Axis" + str(axis) + "/Label").add_theme_color_override("font_color", FONT_COLOR_ACTIVE)

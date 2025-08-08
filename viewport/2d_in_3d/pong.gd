@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 	var left_rect := Rect2(left_paddle.get_position() - pad_size * 0.5, pad_size)
 	var right_rect := Rect2(right_paddle.get_position() - pad_size * 0.5, pad_size)
 
-	# Integrate new ball postion.
+	# Integrate new ball position.
 	ball_pos += direction * ball_speed * delta
 
 	# Flip when touching roof or floor.
