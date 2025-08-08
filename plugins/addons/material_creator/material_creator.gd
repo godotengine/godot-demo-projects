@@ -43,8 +43,7 @@ func apply_pressed() -> void:
 func save_file_selected(path: String) -> bool:
 	var silly_resource: Resource = _silly_resource_from_values()
 	# Save the resource as a .tres file using Godot's ResourceSaver.
-	var err = ResourceSaver.save(silly_resource, path)
-	return err == OK
+	return ResourceSaver.save(silly_resource, path) == OK
 
 
 func load_file_selected(path: String) -> bool:
