@@ -64,7 +64,7 @@ func _silly_resource_from_values() -> Resource:
 	var color: Color = $VBoxContainer/AlbedoColorPicker.color
 	var metallic: float = $VBoxContainer/MetallicSlider.value
 	var roughness: float = $VBoxContainer/RoughnessSlider.value
-	# Make a new silly resource (now a Resource, not a Node)
+	# Make a new silly resource (now a Resource, not a Node).
 	var silly_resource: Resource = silly_material_resource.new()
 	# Assign the values.
 	silly_resource.albedo_color = color
