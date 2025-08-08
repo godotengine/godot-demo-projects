@@ -48,7 +48,7 @@ func save_file_selected(path: String) -> bool:
 
 
 func load_file_selected(path: String) -> bool:
-	# Load the resource using Godot's ResourceLoader
+	# Load the resource using Godot's ResourceLoader.
 	var silly_resource: Resource = ResourceLoader.load(path)
 	if silly_resource == null:
 		return false
