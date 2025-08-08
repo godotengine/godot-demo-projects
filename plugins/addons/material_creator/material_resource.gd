@@ -8,7 +8,6 @@ extends Resource
 
 
 # Create a StandardMaterial3D from the resource's properties.
-=======
 # Convert our data into an dictionary so we can convert it
 # into the JSON format.
 func make_json() -> String:
