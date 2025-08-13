@@ -8,7 +8,6 @@ var tester_index := 0
 var rot_x := -TAU / 16  # This must be kept in sync with RotationX.
 var rot_y := TAU / 8  # This must be kept in sync with CameraHolder.
 var camera_distance := 4.0
-var base_height := int(ProjectSettings.get_setting("display/window/size/viewport_height"))
 
 @onready var testers: Node3D = $Testers
 @onready var camera_holder: Node3D = $CameraHolder  # Has a position and rotates on Y.
@@ -35,8 +34,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_distance = clamp(camera_distance, 1.5, 6)
 
 	if event is InputEventMouseMotion and event.button_mask & MAIN_BUTTONS:
-		# Compensate motion speed to be resolution-independent (based on the window height).
-		var relative_motion: Vector2 = event.relative * DisplayServer.window_get_size().y / base_height
+		# Use `screen_relative` to make mouse sensitivity independent of viewport resolution.
+		var relative_motion: Vector2 = event.screen_relative
 		rot_y -= relative_motion.x * ROT_SPEED
 		rot_x -= relative_motion.y * ROT_SPEED
 		rot_x = clamp(rot_x, -1.57, 0)

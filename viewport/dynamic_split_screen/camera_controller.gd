@@ -31,7 +31,6 @@ extends Node3D
 @onready var camera1: Camera3D = viewport1.get_node(^"Camera1")
 @onready var camera2: Camera3D = viewport2.get_node(^"Camera2")
 
-var viewport_base_height := int(ProjectSettings.get_setting("display/window/size/viewport_height"))
 
 func _ready() -> void:
 	_on_size_changed()

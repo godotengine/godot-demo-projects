@@ -5,10 +5,10 @@ enum State {
 	GRAB,
 }
 
+const MOUSE_SENSITIVITY = 3.0
+
 var r_pos := Vector2()
 var state := State.MENU
-
-var initial_viewport_height := int(ProjectSettings.get_setting("display/window/size/viewport_height"))
 
 @onready var camera: Camera3D = $Camera3D
 
@@ -32,9 +32,8 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		# Scale mouse sensitivity according to resolution, so that effective mouse sensitivity
-		# doesn't change depending on the viewport size.
-		r_pos = -event.relative * (get_viewport().size.y / initial_viewport_height)
+		# Use `screen_relative` to make sensitivity independent of the viewport resolution.
+		r_pos = -event.screen_relative * MOUSE_SENSITIVITY
 
 	if event.is_action("ui_cancel") and event.is_pressed() and not event.is_echo():
 		if state == State.GRAB:
