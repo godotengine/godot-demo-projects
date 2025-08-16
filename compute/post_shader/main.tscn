@@ -35,8 +35,13 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("1_rkpno")
-shader_code = "	// Invert color.
-	color.rgb = vec3(1.0 - color.r, 1.0 - color.g, 1.0 - color.b);
+shader_code = "// Unproject
+vec4 unproj = vec4(uv_norm * 2.0 - 1.0, depth, 1.0);
+mat4 inv_projection_matrix = scene_data_block.data.inv_projection_matrix_view[view];
+vec4 vertex = inv_projection_matrix * unproj;
+vertex.xyz = vertex.xyz / vertex.w;
+
+color.rgb = clamp(vec3(vertex.x/20.0, vertex.y/20.0, -vertex.z/20.0), 0.0, 1.0);
 "
 
 [sub_resource type="Compositor" id="Compositor_xxhi4"]
