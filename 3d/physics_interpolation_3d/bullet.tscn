@@ -1,0 +1,57 @@
+[gd_scene load_steps=12 format=3 uid="uid://2r5wc1n0ybju"]
+
+[ext_resource type="Script" uid="uid://dohdjr8ilotkr" path="res://bullet.gd" id="1_v7oki"]
+[ext_resource type="Texture2D" uid="uid://b70s43gn8c3kx" path="res://spark_particle2.png" id="2_v8qja"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v8qja"]
+bounce = 0.61
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rtl8c"]
+radius = 0.2
+
+[sub_resource type="Gradient" id="Gradient_v8qja"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_t4vbm"]
+gradient = SubResource("Gradient_v8qja")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v7oki"]
+direction = Vector3(0, 1, 0)
+initial_velocity_max = 1.0
+gravity = Vector3(0, 1, 0)
+scale_min = 0.19999999
+color_ramp = SubResource("GradientTexture1D_t4vbm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t4vbm"]
+transparency = 1
+albedo_texture = ExtResource("2_v8qja")
+
+[sub_resource type="QuadMesh" id="QuadMesh_rtl8c"]
+material = SubResource("StandardMaterial3D_t4vbm")
+size = Vector2(0.2, 0.2)
+
+[sub_resource type="SphereMesh" id="SphereMesh_v7oki"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7oki"]
+albedo_color = Color(0.43164876, 0.5731902, 0.5013925, 1)
+metallic = 1.0
+
+[node name="Bullet" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_v8qja")
+script = ExtResource("1_v7oki")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_rtl8c")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_v7oki")
+draw_pass_1 = SubResource("QuadMesh_rtl8c")
+
+[node name="Scaler" type="Node3D" parent="."]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scaler"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+mesh = SubResource("SphereMesh_v7oki")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_v7oki")
