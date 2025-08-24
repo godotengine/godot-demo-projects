@@ -4,6 +4,11 @@ const MOTION_SPEED = 30
 const FRICTION_FACTOR = 0.89
 const TAN30DEG = tan(deg_to_rad(30))
 
+
+func become_active_troll() -> void:
+	pass
+
+
 func _physics_process(_delta: float) -> void:
 	var motion := Vector2()
 	motion.x = Input.get_axis(&"move_left", &"move_right")
