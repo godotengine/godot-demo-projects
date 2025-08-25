@@ -131,9 +131,11 @@ func _on_frame_changed() -> void:
 	var rgb_texture: CameraTexture = mat.get_shader_parameter("rgb_texture")
 	var y_texture: CameraTexture = mat.get_shader_parameter("y_texture")
 	var cbcr_texture: CameraTexture = mat.get_shader_parameter("cbcr_texture")
+	var ycbcr_texture: CameraTexture = mat.get_shader_parameter("ycbcr_texture")
 	rgb_texture.which_feed = CameraServer.FeedImage.FEED_RGBA_IMAGE
 	y_texture.which_feed = CameraServer.FeedImage.FEED_Y_IMAGE
 	cbcr_texture.which_feed = CameraServer.FeedImage.FEED_CBCR_IMAGE
+	ycbcr_texture.which_feed = CameraServer.FEED_YCBCR_IMAGE
 	match datatype:
 		CameraFeed.FeedDataType.FEED_RGB:
 			rgb_texture.camera_feed_id = camera_feed.get_id()
@@ -147,6 +149,11 @@ func _on_frame_changed() -> void:
 			mat.set_shader_parameter("cbcr_texture", cbcr_texture)
 			mat.set_shader_parameter("mode", 1)
 			preview_size = y_texture.get_size()
+		CameraFeed.FeedDataType.FEED_YCBCR:
+			ycbcr_texture.camera_feed_id = camera_feed.get_id()
+			mat.set_shader_parameter("ycbcr_texture", ycbcr_texture)
+			mat.set_shader_parameter("mode", 2)
+			preview_size = ycbcr_texture.get_size()
 		_:
 			print("YCbCr format not fully implemented yet")
 			return

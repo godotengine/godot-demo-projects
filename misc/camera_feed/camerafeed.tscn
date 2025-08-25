@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://oiv4p8ii3am4"]
+[gd_scene load_steps=11 format=3 uid="uid://oiv4p8ii3am4"]
 
 [ext_resource type="Script" uid="uid://dxaoavn781kxe" path="res://camerafeed.gd" id="1_fuswq"]
 [ext_resource type="Shader" uid="uid://dhjh7s6i7jnlp" path="res://ycbcr_to_rgb.gdshader" id="2_0uyi5"]
@@ -9,11 +9,14 @@
 
 [sub_resource type="CameraTexture" id="CameraTexture_xep8u"]
 
+[sub_resource type="CameraTexture" id="CameraTexture_fuswq"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lgiw1"]
 shader = ExtResource("2_0uyi5")
 shader_parameter/rgb_texture = SubResource("CameraTexture_nyeft")
 shader_parameter/y_texture = SubResource("CameraTexture_xep8u")
 shader_parameter/cbcr_texture = SubResource("CameraTexture_7c2aw")
+shader_parameter/ycbcr_texture = SubResource("CameraTexture_fuswq")
 shader_parameter/mode = 0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
