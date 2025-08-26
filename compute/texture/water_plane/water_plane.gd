@@ -141,15 +141,15 @@ var pipeline: RID
 # - One that contains the last frame rendered
 # - One for the frame before that
 var texture_rds: Array[RID] = [RID(), RID(), RID()]
-var texture_sets: Array[RID] = [RID(), RID(), RID()]
+var texture_sets: Array[RID] = [RID(), RID(), RID(), RID(), RID(), RID()]
 
-func _create_uniform_set(texture_rd: RID) -> RID:
+func _create_uniform_set(texture_rd: RID, writable: bool) -> RID:
 	var uniform := RDUniform.new()
 	uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_IMAGE
 	uniform.binding = 0
 	uniform.add_id(texture_rd)
-	# Even though we're using 3 sets, they are identical, so we're kinda cheating.
-	return rd.uniform_set_create([uniform], shader, 0)
+	# Even though we're using 3 sets, set 0 and set 1 are identical, set 2 is writable, so we're kinda cheating.
+	return rd.uniform_set_create([uniform], shader, 2 if writable else 0)
 
 
 func _initialize_compute_code(init_with_texture_size: Vector2i) -> void:
@@ -188,7 +188,9 @@ func _initialize_compute_code(init_with_texture_size: Vector2i) -> void:
 		rd.texture_clear(texture_rds[i], Color(0, 0, 0, 0), 0, 1, 0, 1)
 
 		# Now create our uniform set so we can use these textures in our shader.
-		texture_sets[i] = _create_uniform_set(texture_rds[i])
+		texture_sets[i] = _create_uniform_set(texture_rds[i], false)
+		# Create writable uniform set.
+		texture_sets[i + 3] = _create_uniform_set(texture_rds[i], true)
 
 
 func _render_process(with_next_texture: int, wave_point: Vector4, tex_size: Vector2i, p_damp: float) -> void:
@@ -215,9 +217,9 @@ func _render_process(with_next_texture: int, wave_point: Vector4, tex_size: Vect
 	@warning_ignore("integer_division")
 	var y_groups := (tex_size.y - 1) / 8 + 1
 
-	var next_set := texture_sets[with_next_texture]
-	var current_set := texture_sets[(with_next_texture - 1) % 3]
-	var previous_set := texture_sets[(with_next_texture - 2) % 3]
+	var next_set := texture_sets[(with_next_texture + 2) % 3 + 3] # Writable.
+	var current_set := texture_sets[(with_next_texture + 1) % 3]
+	var previous_set := texture_sets[with_next_texture]
 
 	# Run our compute shader.
 	var compute_list := rd.compute_list_begin()
