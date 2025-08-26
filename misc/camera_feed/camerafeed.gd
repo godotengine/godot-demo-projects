@@ -129,7 +129,7 @@ func _start_camera_feed() -> void:
 		return
 
 	if not camera_feed.frame_changed.is_connected(_on_frame_changed):
-		camera_feed.frame_changed.connect(_on_frame_changed, ConnectFlags.CONNECT_ONE_SHOT | ConnectFlags.CONNECT_DEFERRED)
+		camera_feed.frame_changed.connect(_on_frame_changed, ConnectFlags.CONNECT_ONE_SHOT)
 	# Start the feed.
 	camera_feed.feed_is_active = true
 
