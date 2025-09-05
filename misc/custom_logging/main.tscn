@@ -1,0 +1,120 @@
+[gd_scene load_steps=4 format=3 uid="uid://bukh5v13yl2og"]
+
+[ext_resource type="Script" uid="uid://715k1racyrfh" path="res://main.gd" id="1_ig7tw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ig7tw"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.12591082, 0.12591085, 0.12591076, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 3
+
+[sub_resource type="Theme" id="Theme_0xm2m"]
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_ig7tw")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_0xm2m")
+script = ExtResource("1_ig7tw")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -103.0
+offset_right = 413.0
+offset_bottom = -80.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
+text = "This project has an autoload with a custom logger that displays messages above.
+The custom logger replicates the output seen in the terminal, which may differ
+from the one displayed in the editor Output panel.
+Try running Godot from a terminal to see the difference."
+
+[node name="FlushStdoutOnPrint" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 784.0
+offset_top = -103.0
+offset_right = 981.0
+offset_bottom = -80.0
+grow_vertical = 0
+tooltip_text = "Flushing standard output on print allows prints to be visible immediately
+in log files, even if the engine crashes or is killed by the user.
+This has a performance impact when printing frequently.
+
+This can be configured in the Project Settings (Application > Run > Flush stdout on Print).
+By default, this is enabled in debug builds (+ editor) and disabled in release builds."
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
+text = "Flush stdout on print: Yes (?)"
+
+[node name="Actions" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -63.0
+offset_right = 1014.0
+offset_bottom = -28.0
+grow_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="PrintMessage" type="Button" parent="Actions"]
+layout_mode = 2
+text = "Print Message"
+
+[node name="PrintMessageRaw" type="Button" parent="Actions"]
+layout_mode = 2
+text = "Print Message (raw)"
+
+[node name="PrintMessageStderr" type="Button" parent="Actions"]
+layout_mode = 2
+text = "Print Message (stderr)"
+
+[node name="PrintWarning" type="Button" parent="Actions"]
+layout_mode = 2
+text = "Print Warning"
+
+[node name="PrintError" type="Button" parent="Actions"]
+layout_mode = 2
+text = "Print Error"
+
+[node name="VSeparator" type="VSeparator" parent="Actions"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="OpenLogsFolder" type="Button" parent="Actions"]
+layout_mode = 2
+text = "Open Logs Folder"
+
+[node name="CrashEngine" type="Button" parent="Actions"]
+layout_mode = 2
+tooltip_text = "Crashing the engine produces a stack trace written in the log file,
+as well as terminal output. The crash backtrace is not available from scripting
+in the current session, but when the next session starts, you could read existing
+log files in the logs folder and check for the presence of crash backtraces there."
+text = "Crash Engine"
+
+[connection signal="pressed" from="Actions/PrintMessage" to="." method="_on_print_message_pressed"]
+[connection signal="pressed" from="Actions/PrintMessageRaw" to="." method="_on_print_message_raw_pressed"]
+[connection signal="pressed" from="Actions/PrintMessageStderr" to="." method="_on_print_message_stderr_pressed"]
+[connection signal="pressed" from="Actions/PrintWarning" to="." method="_on_print_warning_pressed"]
+[connection signal="pressed" from="Actions/PrintError" to="." method="_on_print_error_pressed"]
+[connection signal="pressed" from="Actions/OpenLogsFolder" to="." method="_on_open_logs_folder_pressed"]
+[connection signal="pressed" from="Actions/CrashEngine" to="." method="_on_crash_engine_pressed"]
