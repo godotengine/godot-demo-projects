@@ -8,6 +8,7 @@ extends Control
 @onready var reload_button := $DrawerContainer/Drawer/DrawerContent/VBoxContainer/ButtonContainer/ReloadButton
 
 var camera_feed: CameraFeed
+var _initialized: bool = false
 
 const defaultWebResolution: Dictionary = {
 	"width": 640,
@@ -17,6 +18,7 @@ const defaultWebResolution: Dictionary = {
 func _ready() -> void:
 	_adjust_ui()
 	_reload_camera_list()
+	_initialized = true
 
 
 func _adjust_ui() -> void:
@@ -38,8 +40,9 @@ func _reload_camera_list() -> void:
 				print("CAMERA permission not granted")
 				return
 
-	if not CameraServer.camera_feeds_updated.is_connected(_on_camera_feeds_updated):
-		CameraServer.camera_feeds_updated.connect(_on_camera_feeds_updated)
+	if CameraServer.camera_feeds_updated.is_connected(_on_camera_feeds_updated):
+		CameraServer.camera_feeds_updated.disconnect(_on_camera_feeds_updated)
+	CameraServer.camera_feeds_updated.connect(_on_camera_feeds_updated, ConnectFlags.CONNECT_ONE_SHOT)
 
 	if CameraServer.monitoring_feeds:
 		CameraServer.monitoring_feeds = false
@@ -60,7 +63,7 @@ func _on_camera_feeds_updated() -> void:
 		return
 
 	camera_list.disabled = false
-	for i in feeds.size():
+	for i in range(feeds.size()):
 		var feed: CameraFeed = feeds[i]
 		camera_list.add_item(feed.get_name())
 
@@ -99,11 +102,12 @@ func _update_format_list() -> void:
 		return
 
 	format_list.disabled = false
+	start_or_stop_button.disabled = false
 	for format in formats:
 		var resolution := str(format["width"]) + "x" + str(format["height"])
 		var item := "%s - %s" % [format["format"], resolution]
 		if OS.get_name() == "Windows":
-			item += " : %s / %s" % [format["frame_denominator"], format["frame_numerator"]]
+			item += " : %s / %s" % [format["frame_numerator"], format["frame_denominator"]]
 		format_list.add_item(item)
 
 	# Auto-select first format.
@@ -180,7 +184,7 @@ func _on_frame_changed() -> void:
 	camera_preview.rotation = rot
 	camera_preview.custom_minimum_size.y = camera_display.size.y
 
-	if degree % 180 == 0:
+	if absi(degree) % 180 == 0:
 		camera_display.ratio = preview_size.x / preview_size.y
 	else:
 		camera_display.ratio = preview_size.y / preview_size.x
@@ -204,3 +208,13 @@ func _on_start_or_stop_button_pressed(change_label: bool = true) -> void:
 func _on_reload_button_pressed() -> void:
 	_on_start_or_stop_button_pressed(false)
 	_reload_camera_list()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_RESIZED and _initialized:
+		_adjust_ui()
+
+
+func _exit_tree() -> void:
+	if camera_feed and camera_feed.feed_is_active:
+		camera_feed.feed_is_active = false
