@@ -21,9 +21,9 @@ func _ready() -> void:
 
 
 func start_combat(combat_actors: Array[PackedScene]) -> void:
-	remove_child($Exploration)
 	$AnimationPlayer.play("fade_to_black")
 	await $AnimationPlayer.animation_finished
+	remove_child($Exploration)
 	add_child(combat_screen)
 	combat_screen.show()
 	combat_screen.initialize(combat_actors)
