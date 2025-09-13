@@ -17,6 +17,9 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	var input_direction := get_input_direction()
+	# We only move in integer increments.
+	input_direction = input_direction.round()
+
 	if input_direction.is_zero_approx():
 		return
 
@@ -30,10 +33,7 @@ func _process(_delta: float) -> void:
 
 
 func get_input_direction() -> Vector2:
-	return Vector2(
-			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-			Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-	)
+	return Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
 
 func update_look_direction(direction: Vector2) -> void:
