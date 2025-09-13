@@ -210,10 +210,15 @@ func _render_process(with_next_texture: int, wave_point: Vector4, tex_size: Vect
 	@warning_ignore("integer_division")
 	var y_groups := (tex_size.y - 1) / 8 + 1
 
+	# Figure out which texture to assign to which set.
+	var current_texture_rd := texture_rds[(with_next_texture - 1) % 3]
+	var previous_texture_rd := texture_rds[(with_next_texture - 2) % 3]
+	var next_texture_rd := texture_rds[with_next_texture]
+
 	# Create our uniform sets so we can use these textures in our shader.
-	var current_set := _create_uniform_set(texture_rds[(with_next_texture - 1) % 3], 0)
-	var previous_set := _create_uniform_set(texture_rds[(with_next_texture - 2) % 3], 1)
-	var next_set := _create_uniform_set(texture_rds[with_next_texture], 2)
+	var current_set := _create_uniform_set(current_texture_rd, 0)
+	var previous_set := _create_uniform_set(previous_texture_rd, 1)
+	var next_set := _create_uniform_set(next_texture_rd, 2)
 
 	# Run our compute shader.
 	var compute_list := rd.compute_list_begin()
