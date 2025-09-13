@@ -21,7 +21,7 @@ func _ready() -> void:
 
 
 func update_look_direction(direction: Vector2) -> void:
-	$Pivot/Sprite2D.rotation = direction.angle()
+	$Pivot/FacingDirection.rotation = direction.angle()
 
 
 func move_to(target_position: Vector2) -> void:
