@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ckgv4m67a5kfj"]
+[gd_scene load_steps=29 format=3 uid="uid://ckgv4m67a5kfj"]
 
 [ext_resource type="TileSet" path="res://grid_movement/grid/lines/grid_lines_tileset.tres" id="1"]
 [ext_resource type="TileSet" path="res://grid_movement/grid/tiles/grid_tileset.tres" id="2"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://mi3mmtft0snh" path="res://decoration/grass.png" id="12"]
 [ext_resource type="Material" uid="uid://blst65bnoqyam" path="res://decoration/wind_sway.tres" id="13"]
 [ext_resource type="Texture2D" uid="uid://bb6xgdlxov660" path="res://grid_movement/pawns/opponent_exploration.png" id="14"]
+[ext_resource type="Script" uid="uid://jktwsmihasw3" path="res://grid_movement/pawns/player.gd" id="14_dg62l"]
 [ext_resource type="Texture2D" uid="uid://dcs722r26k774" path="res://decoration/grass_variant.png" id="15"]
 [ext_resource type="SpriteFrames" uid="uid://gucxux3cqds3" path="res://grid_movement/pawns/anim_player.tres" id="15_qps0g"]
 [ext_resource type="TileSet" path="res://grid_movement/grid/tiles/pathways.tres" id="16"]
@@ -641,6 +642,7 @@ dialogue_ui = NodePath("../DialogueUI")
 [node name="Player" parent="Grid" instance=ExtResource("4")]
 z_index = 0
 position = Vector2(224, 288)
+script = ExtResource("14_dg62l")
 combat_actor = ExtResource("5")
 pose_anims = ExtResource("15_qps0g")
 

@@ -1,12 +1,5 @@
-extends Pawn
-
-@export var combat_actor: PackedScene
-@export var pose_anims: SpriteFrames
-
-var lost := false
-
-@onready var pose := $Pivot/Slime
+extends Walker
 
 func _ready() -> void:
-	pose.sprite_frames = pose_anims
+	super._ready()
 	set_process(false)
