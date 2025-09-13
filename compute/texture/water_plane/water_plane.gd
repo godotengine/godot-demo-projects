@@ -143,13 +143,13 @@ var pipeline: RID
 var texture_rds: Array[RID] = [RID(), RID(), RID()]
 var texture_sets: Array[RID] = [RID(), RID(), RID()]
 
-func _create_uniform_set(texture_rd: RID) -> RID:
+func _create_uniform_set(texture_rd: RID, uniform_set: int) -> RID:
 	var uniform := RDUniform.new()
 	uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_IMAGE
 	uniform.binding = 0
 	uniform.add_id(texture_rd)
 	# Even though we're using 3 sets, they are identical, so we're kinda cheating.
-	return rd.uniform_set_create([uniform], shader, 0)
+	return rd.uniform_set_create([uniform], shader, uniform_set)
 
 
 func _initialize_compute_code(init_with_texture_size: Vector2i) -> void:
@@ -173,11 +173,9 @@ func _initialize_compute_code(init_with_texture_size: Vector2i) -> void:
 	tf.array_layers = 1
 	tf.mipmaps = 1
 	tf.usage_bits = (
-			RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT |
-			RenderingDevice.TEXTURE_USAGE_COLOR_ATTACHMENT_BIT |
-			RenderingDevice.TEXTURE_USAGE_STORAGE_BIT |
-			RenderingDevice.TEXTURE_USAGE_CAN_UPDATE_BIT |
-			RenderingDevice.TEXTURE_USAGE_CAN_COPY_TO_BIT
+		RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT |
+		RenderingDevice.TEXTURE_USAGE_STORAGE_BIT |
+		RenderingDevice.TEXTURE_USAGE_CAN_COPY_TO_BIT
 	)
 
 	for i in 3:
@@ -186,9 +184,6 @@ func _initialize_compute_code(init_with_texture_size: Vector2i) -> void:
 
 		# Make sure our textures are cleared.
 		rd.texture_clear(texture_rds[i], Color(0, 0, 0, 0), 0, 1, 0, 1)
-
-		# Now create our uniform set so we can use these textures in our shader.
-		texture_sets[i] = _create_uniform_set(texture_rds[i])
 
 
 func _render_process(with_next_texture: int, wave_point: Vector4, tex_size: Vector2i, p_damp: float) -> void:
@@ -215,9 +210,10 @@ func _render_process(with_next_texture: int, wave_point: Vector4, tex_size: Vect
 	@warning_ignore("integer_division")
 	var y_groups := (tex_size.y - 1) / 8 + 1
 
-	var next_set := texture_sets[with_next_texture]
-	var current_set := texture_sets[(with_next_texture - 1) % 3]
-	var previous_set := texture_sets[(with_next_texture - 2) % 3]
+	# Create our uniform sets so we can use these textures in our shader.
+	var current_set := _create_uniform_set(texture_rds[(with_next_texture - 1) % 3], 0)
+	var previous_set := _create_uniform_set(texture_rds[(with_next_texture - 2) % 3], 1)
+	var next_set := _create_uniform_set(texture_rds[with_next_texture], 2)
 
 	# Run our compute shader.
 	var compute_list := rd.compute_list_begin()
