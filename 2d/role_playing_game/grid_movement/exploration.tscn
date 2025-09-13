@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ckgv4m67a5kfj"]
+[gd_scene load_steps=28 format=3 uid="uid://ckgv4m67a5kfj"]
 
 [ext_resource type="TileSet" path="res://grid_movement/grid/lines/grid_lines_tileset.tres" id="1"]
 [ext_resource type="TileSet" path="res://grid_movement/grid/tiles/grid_tileset.tres" id="2"]
@@ -15,9 +15,11 @@
 [ext_resource type="Material" uid="uid://blst65bnoqyam" path="res://decoration/wind_sway.tres" id="13"]
 [ext_resource type="Texture2D" uid="uid://bb6xgdlxov660" path="res://grid_movement/pawns/opponent_exploration.png" id="14"]
 [ext_resource type="Texture2D" uid="uid://dcs722r26k774" path="res://decoration/grass_variant.png" id="15"]
+[ext_resource type="SpriteFrames" uid="uid://gucxux3cqds3" path="res://grid_movement/pawns/anim_player.tres" id="15_qps0g"]
 [ext_resource type="TileSet" path="res://grid_movement/grid/tiles/pathways.tres" id="16"]
 [ext_resource type="Texture2D" uid="uid://m6yf6xcjcsw5" path="res://decoration/pebble.png" id="17"]
 [ext_resource type="Texture2D" uid="uid://bvd0moi55jury" path="res://decoration/grass_upperlevel.png" id="18"]
+[ext_resource type="SpriteFrames" uid="uid://bgwcs0i1rmrn8" path="res://grid_movement/pawns/anim_opponent.tres" id="18_dg62l"]
 [ext_resource type="Texture2D" uid="uid://c7qvcysn4b426" path="res://decoration/grass_variant_upperlevel.png" id="19"]
 [ext_resource type="Texture2D" uid="uid://cynl0x6vk4sf6" path="res://decoration/pebble_variant.png" id="20"]
 [ext_resource type="Texture2D" uid="uid://cr0xmj8c7wbyr" path="res://decoration/flower.png" id="21"]
@@ -640,15 +642,13 @@ dialogue_ui = NodePath("../DialogueUI")
 z_index = 0
 position = Vector2(224, 288)
 combat_actor = ExtResource("5")
+pose_anims = ExtResource("15_qps0g")
 
 [node name="Opponent" parent="Grid" instance=ExtResource("4")]
 position = Vector2(800, 480)
 script = ExtResource("6")
 combat_actor = ExtResource("7")
-
-[node name="Slime" parent="Grid/Opponent/Pivot" index="0"]
-position = Vector2(0, -3.04729)
-scale = Vector2(0.936317, 1.09552)
+pose_anims = ExtResource("18_dg62l")
 
 [node name="DialoguePlayer" parent="Grid/Opponent" instance=ExtResource("8")]
 dialogue_file = "res://dialogue/dialogue_data/npc.json"
@@ -1893,5 +1893,3 @@ texture = ExtResource("19")
 
 [node name="DialogueUI" parent="." instance=ExtResource("10")]
 visible = false
-
-[editable path="Grid/Opponent"]
