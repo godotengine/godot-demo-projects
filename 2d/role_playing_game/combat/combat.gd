@@ -36,8 +36,6 @@ func clear_combat() -> void:
 
 
 func finish_combat(winner: Combatant, loser: Combatant) -> void:
-	# FIXME: Error calling from signal 'combat_finished' to callable:
-	# 'Node(game.gd)::_on_combat_finished': Cannot convert argument 1 from Object to Object.
 	combat_finished.emit(winner, loser)
 
 
