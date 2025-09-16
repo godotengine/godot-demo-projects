@@ -51,7 +51,7 @@ func _on_combat_finished(winner: Combatant, _loser: Combatant) -> void:
 
 	await $AnimationPlayer.animation_finished
 	var player: Pawn = $Exploration/Grid/Player
-	exploration_screen.get_node("DialogueUI").show_dialogue(player, dialogue)
+	exploration_screen.get_node("DialogueCanvas/DialogueUI").show_dialogue(player, dialogue)
 	combat_screen.clear_combat()
 	await dialogue.dialogue_finished
 	dialogue.queue_free()
