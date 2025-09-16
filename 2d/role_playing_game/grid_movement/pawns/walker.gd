@@ -8,7 +8,7 @@ extends Pawn
 var lost := false
 var grid_size: float
 
-@onready var parent := get_parent()
+@onready var grid : Grid = get_parent()
 @onready var animation_playback: AnimationNodeStateMachinePlayback = $AnimationTree.get("parameters/playback")
 @onready var walk_animation_time: float = $AnimationPlayer.get_animation("walk").length
 @onready var pose := $Pivot/Slime
@@ -17,7 +17,7 @@ var grid_size: float
 func _ready() -> void:
 	pose.sprite_frames = pose_anims
 	update_look_direction(Vector2.RIGHT)
-	grid_size = parent.tile_set.tile_size.x
+	grid_size = grid.tile_set.tile_size.x
 
 
 func update_look_direction(direction: Vector2) -> void:

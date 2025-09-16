@@ -10,7 +10,7 @@ func _process(_delta: float) -> void:
 
 	update_look_direction(input_direction)
 
-	var target_position: Vector2 = parent.request_move(self, input_direction)
+	var target_position: Vector2 = grid.request_move(self, input_direction)
 	if target_position:
 		move_to(target_position)
 	elif active:
