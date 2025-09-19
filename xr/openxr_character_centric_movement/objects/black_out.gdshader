@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode blend_mix,depth_draw_opaque,cull_disabled,unshaded,depth_test_disabled;
+render_mode blend_mix, depth_draw_opaque, cull_disabled, unshaded, depth_test_disabled;
 uniform vec4 albedo : source_color;
 
 void vertex() {

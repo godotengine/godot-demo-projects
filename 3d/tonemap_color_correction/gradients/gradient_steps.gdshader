@@ -9,35 +9,28 @@ void fragment() {
 	// Draw base color
 	ALBEDO = my_color;
 
-	if (UV.y > 0.25)
-	{
+	if (UV.y > 0.25) {
 		// Draw gradient
 		float scale = UV.x * float(steps);
 
-		if (exponential_view)
-		{
+		if (exponential_view) {
 			scale = (scale * scale) / float(steps);
 		}
 
 		ALBEDO *= scale;
-	}
-	else
-	{
+	} else {
 		// Draw step separation bars
-		for (int i = 1; i < steps; i++)
-		{
+		for (int i = 1; i < steps; i++) {
 			float threshold = 0.002; // Bar size
 			float target = float(i);
 
-			if (exponential_view)
-			{
+			if (exponential_view) {
 				target = sqrt(float(i) * float(steps));
 			}
 
 			target = target / float(steps);
 
-			if (UV.x < target + threshold && UV.x > target - threshold)
-			{
+			if (UV.x < target + threshold && UV.x > target - threshold) {
 				ALBEDO = vec3(0); // Bars are colored black
 			}
 		}
