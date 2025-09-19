@@ -25,8 +25,7 @@ void fragment() {
 		vec3 rainbow = vec3(
 				0.5 + 0.5 * sin(t),
 				0.5 + 0.5 * sin(t + 2.0),
-				0.5 + 0.5 * sin(t + 4.0)
-		);
+				0.5 + 0.5 * sin(t + 4.0));
 		ALBEDO = rainbow;
 		ALPHA = 1.0;
 	} else {
