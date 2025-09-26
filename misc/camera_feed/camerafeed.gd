@@ -127,6 +127,7 @@ func _on_format_list_item_selected(index: int) -> void:
 		return
 	var os_name := OS.get_name()
 	var parameters: Dictionary = defaultWebResolution if os_name == "Web" else {}
+	camera_feed.feed_is_active = false
 	camera_feed.set_format(index, parameters)
 	_start_camera_feed()
 
