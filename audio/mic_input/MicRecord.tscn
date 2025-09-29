@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvjlkpjvjxn0h"]
+[gd_scene load_steps=7 format=3 uid="uid://dvjlkpjvjxn0h"]
 
 [ext_resource type="Script" uid="uid://dbbfvbf6ronrp" path="res://MicRecord.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://c2re52petqrvx" path="res://Intro.ogg" id="2"]
 [ext_resource type="Shader" uid="uid://cl4x5tyii4r6q" path="res://MicRecord.gdshader" id="3_vkk4n"]
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_tfvr1"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_tfvr1"]
 
@@ -23,6 +25,10 @@ offset_bottom = 210.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamMicrophone_tfvr1")
+bus = &"Microphone"
 
 [node name="AudioWav" type="AudioStreamPlayer" parent="."]
 autoplay = true

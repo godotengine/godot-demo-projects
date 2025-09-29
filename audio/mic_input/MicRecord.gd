@@ -68,7 +68,8 @@ func _on_microphone_on_toggled(toggled_on : bool) -> void:
 			assert (permission == "android.permission.RECORD_AUDIO")
 			print("Audio permission granted ", granted)
 
-		microphonefeed.set_active(true)
+		if not microphonefeed.is_active():
+			microphonefeed.set_active(true)
 		total_samples = 0
 		sample_duration = 0.0
 		print("Input buffer length frames: ", microphonefeed.get_buffer_length_frames())
