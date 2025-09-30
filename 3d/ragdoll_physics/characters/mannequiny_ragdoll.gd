@@ -6,15 +6,14 @@ const IMPACT_SOUND_SPEED_BIG = 1.0
 ## The velocity to apply on the first physics frame.
 @export var initial_velocity: Vector3
 
-var has_applied_initial_velocity := false
-
+var has_applied_initial_velocity: bool = false
 # Used to play an impact sound on sudden velocity changes.
 # We use the pelvis bone as it's close to the center of mass of the character model.
 # For more detailed impact sounds, you could place multiple AudioStreamPlayer nodes as a child
 # of each limb.
-var previous_pelvis_speed := 0.0
+var previous_pelvis_speed: float = 0.0
 
-@onready var pelvis := $"root/root_001/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone pelvis"
+@onready var pelvis: PhysicalBone3D = $"root/root_001/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone pelvis"
 
 
 func _ready() -> void:
