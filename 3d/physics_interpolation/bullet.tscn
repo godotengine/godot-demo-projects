@@ -1,0 +1,86 @@
+[gd_scene load_steps=15 format=3 uid="uid://2r5wc1n0ybju"]
+
+[ext_resource type="Script" uid="uid://dohdjr8ilotkr" path="res://bullet.gd" id="1_v7oki"]
+[ext_resource type="Texture2D" uid="uid://b70s43gn8c3kx" path="res://spark_particle.png" id="2_v8qja"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v8qja"]
+bounce = 0.61
+
+[sub_resource type="Curve" id="Curve_t4vbm"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.02, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rtl8c"]
+radius = 0.2
+
+[sub_resource type="Gradient" id="Gradient_v8qja"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_t4vbm"]
+gradient = SubResource("Gradient_v8qja")
+
+[sub_resource type="Curve" id="Curve_v8qja"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_t4vbm"]
+curve = SubResource("Curve_v8qja")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v7oki"]
+direction = Vector3(0, 1, 0)
+initial_velocity_max = 1.0
+gravity = Vector3(0, 1, 0)
+scale_min = 0.2
+scale_curve = SubResource("CurveTexture_t4vbm")
+color_ramp = SubResource("GradientTexture1D_t4vbm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t4vbm"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(2.33575, 3.29442, 3.29442, 1)
+albedo_texture = ExtResource("2_v8qja")
+texture_filter = 5
+
+[sub_resource type="QuadMesh" id="QuadMesh_rtl8c"]
+material = SubResource("StandardMaterial3D_t4vbm")
+size = Vector2(0.2, 0.2)
+
+[sub_resource type="SphereMesh" id="SphereMesh_v7oki"]
+radial_segments = 24
+rings = 12
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7oki"]
+albedo_color = Color(0.431649, 0.57319, 0.501392, 1)
+metallic = 1.0
+
+[node name="Bullet" type="RigidBody3D"]
+collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_v8qja")
+script = ExtResource("1_v7oki")
+scale_curve = SubResource("Curve_t4vbm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_rtl8c")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 64
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_v7oki")
+draw_pass_1 = SubResource("QuadMesh_rtl8c")
+
+[node name="Scaler" type="Node3D" parent="."]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scaler"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+mesh = SubResource("SphereMesh_v7oki")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_v7oki")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
