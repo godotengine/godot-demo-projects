@@ -1,33 +1,33 @@
 extends WorldEnvironment
 
-const ROT_SPEED = 0.003
-const ZOOM_SPEED = 0.125
-const MAIN_BUTTONS = MOUSE_BUTTON_MASK_LEFT | MOUSE_BUTTON_MASK_RIGHT | MOUSE_BUTTON_MASK_MIDDLE
+const ROT_SPEED: float = 0.003
+const ZOOM_SPEED: float = 0.125
+const MAIN_BUTTONS: int = MOUSE_BUTTON_MASK_LEFT | MOUSE_BUTTON_MASK_RIGHT | MOUSE_BUTTON_MASK_MIDDLE
 
 ## The maximum number of additional cloths and boxes that can be spawned at a given time
 ## (for performance reasons).
-const MAX_ADDITIONAL_ITEMS = 10
+const MAX_ADDITIONAL_ITEMS: int = 10
 
-const Cloth = preload("res://cloth.tscn")
-const RigidBoxLight = preload("res://rigid_box_light.tscn")
-const RigidBoxHeavy = preload("res://rigid_box_heavy.tscn")
-const Box = preload("res://box.tscn")
-const Sphere = preload("res://sphere.tscn")
+const Cloth: PackedScene = preload("res://cloth.tscn")
+const RigidBoxLight: PackedScene = preload("res://rigid_box_light.tscn")
+const RigidBoxHeavy: PackedScene = preload("res://rigid_box_heavy.tscn")
+const Box: PackedScene = preload("res://box.tscn")
+const Sphere: PackedScene = preload("res://sphere.tscn")
 
-var tester_index := 0
-var rot_x := deg_to_rad(-22.5)  # This must be kept in sync with RotationX.
-var rot_y := deg_to_rad(90)  # This must be kept in sync with CameraHolder.
-var zoom := 1.5
-var base_height: = int(ProjectSettings.get_setting("display/window/size/viewport_height"))
+var tester_index: int = 0
+var rot_x: float = deg_to_rad(-22.5)  # This must be kept in sync with RotationX.
+var rot_y: float = deg_to_rad(90.0)  # This must be kept in sync with CameraHolder.
+var zoom: float = 1.5
+var base_height := int(ProjectSettings.get_setting("display/window/size/viewport_height"))
 
-var additional_items: Array[Node3D]
+var additional_items: Array[Node3D] = []
 
 @onready var testers: Node3D = $Testers
 @onready var camera_holder: Node3D = $CameraHolder  # Has a position and rotates on Y.
 @onready var rotation_x: Node3D = $CameraHolder/RotationX
 @onready var camera: Camera3D = $CameraHolder/RotationX/Camera3D
 
-@onready var nodes_to_reset := [
+@onready var nodes_to_reset: Array[SoftBody3D] = [
 	$Testers/ClothPhysics/Cloth,
 	$Testers/SoftBoxes/Box,
 	$Testers/SoftBoxes/Box2,
@@ -39,7 +39,7 @@ var additional_items: Array[Node3D]
 	$Testers/PinnedPoints/PinnedCloth,
 ]
 
-@onready var nodes_to_reset_types := [
+@onready var nodes_to_reset_types: Array[PackedScene] = [
 	Cloth,
 	Box,
 	Box,
@@ -98,8 +98,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	):
 		# Place a new item and track it in an additional items array, so we can limit
 		# the number of player-spawned items present in the scene at a given time.
-		var origin := camera.global_position
-		var target := camera.project_position(get_viewport().get_mouse_position(), 100)
+		var origin: Vector3 = camera.global_position
+		var target: Vector3 = camera.project_position(get_viewport().get_mouse_position(), 100)
 
 		var query := PhysicsRayQueryParameters3D.create(origin, target)
 		# Ignore layer 2 which contains invisible walls.
@@ -144,16 +144,16 @@ func _unhandled_input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	var current_tester: Node3D = testers.get_child(tester_index)
 	# This code assumes CameraHolder's X and Y coordinates are already correct.
-	var current_position := camera_holder.global_transform.origin.z
-	var target_position := current_tester.global_transform.origin.z
-	camera_holder.global_transform.origin.z = lerpf(current_position, target_position, 3 * delta)
+	var current_position_z: float = camera_holder.global_transform.origin.z
+	var target_position_z: float = current_tester.global_transform.origin.z
+	camera_holder.global_transform.origin.z = lerpf(current_position_z, target_position_z, 3 * delta)
 	camera.position.z = lerpf(camera.position.z, zoom, 10 * delta)
 
 
 func _physics_process(delta: float) -> void:
 	# Strong sideways wind force, which pushes the cloth while airborne and
 	# makes it wave around once it has landed.
-	const WIND_FORCE = 2_450_000.0
+	const WIND_FORCE: float = 2_450_000.0
 	for node in $Testers/CentralForceWind.get_children():
 		if node is SoftBody3D:
 			node.apply_central_force(Vector3(1.0, 0.0, 0.0) * WIND_FORCE * delta)
@@ -193,7 +193,7 @@ func _on_central_impulse_timer_timeout() -> void:
 	# When using `apply_central_impulse()` instead of `apply_impulse()`,
 	# we have to use a much larger value to get significant movement as the impulse is distributed
 	# across all points.
-	const INTENSITY = 8000.0
+	const INTENSITY: float = 8000.0
 
 	for node in $Testers/CentralImpulseTimer.get_children():
 		if node is SoftBody3D:
@@ -202,7 +202,7 @@ func _on_central_impulse_timer_timeout() -> void:
 
 
 func _on_per_point_impulse_timer_timeout() -> void:
-	const INTENSITY = 600.0
+	const INTENSITY: float = 600.0
 
 	for node in $Testers/PerPointImpulseTimer.get_children():
 		if node is SoftBody3D:
