@@ -23,7 +23,7 @@ var base_height := int(ProjectSettings.get_setting("display/window/size/viewport
 var additional_items: Array[Node3D] = []
 
 @onready var testers: Node3D = $Testers
-@onready var camera_holder: Node3D = $CameraHolder  # Has a position and rotates on Y.
+@onready var camera_holder: Node3D = $CameraHolder  # Has a position and rotates around Y.
 @onready var rotation_x: Node3D = $CameraHolder/RotationX
 @onready var camera: Camera3D = $CameraHolder/RotationX/Camera3D
 

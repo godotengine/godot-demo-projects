@@ -1,17 +1,17 @@
 # 3D Soft Body Physics
 
 An example of [soft body physics](https://docs.godotengine.org/en/latest/tutorials/physics/soft_body.html)
-(deformable objects) such as cloth, boxes and spheres.
+(deformable objects) such as cloth, boxes, and spheres.
 
 Soft bodies support pinning points as well as applying impulses/forces to specific points,
 which can be useful for effects such as wind.
 
-Soft bodies can interact with static, rigid and character bodies (and will be aware of rigid bodies'
+Soft bodies can interact with static, rigid, and character bodies (and will be aware of rigid bodies'
 weight when doing so). However, soft bodies currently do **not** interact with other soft bodies,
 which means they will pass through each other.
 
 The per-point impulse timer example also showcases how to attach nodes to specific points of a SoftBody3D.
-This can be used to make particles, meshes or even rigid bodies follow specific points.
+This can be used to make particles, meshes, or even rigid bodies follow specific points.
 
 The cloth soft bodies in this demo use a BaseMaterial3D with the **Grow** property enabled to prevent
 visible clipping into surfaces.
