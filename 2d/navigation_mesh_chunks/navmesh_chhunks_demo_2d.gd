@@ -45,7 +45,7 @@ func _ready() -> void:
 static func create_region_chunks(chunks_root_node: Node, p_source_geometry: NavigationMeshSourceGeometryData2D, p_chunk_size: float, p_agent_radius: float) -> void:
 	# We need to know how many chunks are required for the input geometry.
 	# So first get an axis aligned bounding box that covers all vertices.
-	var input_geometry_bounds: Rect2 = calculate_source_geometry_bounds(p_source_geometry)
+	var input_geometry_bounds: Rect2 = p_source_geometry.get_bounds()
 
 	# Rasterize bounding box into chunk grid to know range of required chunks.
 	var start_chunk: Vector2 = floor(
@@ -94,43 +94,6 @@ static func create_region_chunks(chunks_root_node: Node, p_source_geometry: Navi
 			chunk_id_to_region[chunk_id] = chunk_region
 
 
-static func calculate_source_geometry_bounds(p_source_geometry: NavigationMeshSourceGeometryData2D) -> Rect2:
-	if p_source_geometry.has_method("get_bounds"):
-		# Godot 4.3 Patch added get_bounds() function that does the same but faster.
-		return p_source_geometry.call("get_bounds")
-
-	var bounds: Rect2 = Rect2()
-	var first_vertex: bool = true
-
-	for traversable_outline: PackedVector2Array in p_source_geometry.get_traversable_outlines():
-		for traversable_point: Vector2 in traversable_outline:
-			if first_vertex:
-				first_vertex = false
-				bounds.position = traversable_point
-			else:
-				bounds = bounds.expand(traversable_point)
-
-	for obstruction_outline: PackedVector2Array in p_source_geometry.get_obstruction_outlines():
-		for obstruction_point: Vector2 in obstruction_outline:
-			if first_vertex:
-				first_vertex = false
-				bounds.position = obstruction_point
-			else:
-				bounds = bounds.expand(obstruction_point)
-
-	for projected_obstruction: Dictionary in p_source_geometry.get_projected_obstructions():
-		var projected_obstruction_vertices: PackedFloat32Array = projected_obstruction["vertices"]
-		for i in projected_obstruction_vertices.size() / 2:
-			var vertex: Vector2 = Vector2(projected_obstruction_vertices[i * 2], projected_obstruction_vertices[i * 2 + 1])
-			if first_vertex:
-				first_vertex = false
-				bounds.position = vertex
-			else:
-				bounds = bounds.expand(vertex)
-
-	return bounds
-
-
 func _process(_delta: float) -> void:
 	var mouse_cursor_position: Vector2 = get_global_mouse_position()
 
@@ -151,6 +114,8 @@ func _process(_delta: float) -> void:
 
 	%PathDebugCorridorFunnel.target_position = closest_point_on_navmesh
 	%PathDebugEdgeCentered.target_position = closest_point_on_navmesh
+	%PathDebugNoPostProcessing.target_position = closest_point_on_navmesh
 
 	%PathDebugCorridorFunnel.get_next_path_position()
 	%PathDebugEdgeCentered.get_next_path_position()
+	%PathDebugNoPostProcessing.get_next_path_position()

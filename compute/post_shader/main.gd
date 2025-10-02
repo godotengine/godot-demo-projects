@@ -20,4 +20,3 @@ Shader effect: %s
 	"Enabled" if compositor.compositor_effects[0].enabled else "Disabled",
 	"Enabled" if compositor.compositor_effects[1].enabled else "Disabled",
 ]
-

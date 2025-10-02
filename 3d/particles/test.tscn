@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ddp8ek6rswwmc" path="res://kenney/smoke_05.png" id="3_pmhp8"]
 [ext_resource type="CompressedTexture3D" uid="uid://dgnb433rl8hr1" path="res://test.GPUParticlesCollisionSDF3D_data.exr" id="4_wcrow"]
 [ext_resource type="Texture2D" uid="uid://chjqieyps5n5r" path="res://checker.png" id="14"]
-[ext_resource type="Script" path="res://tester.gd" id="18"]
+[ext_resource type="Script" uid="uid://bfxtcmm7r6i6p" path="res://tester.gd" id="18"]
 
 [sub_resource type="ProceduralSkyMaterial" id="9"]
 
@@ -13,6 +13,7 @@ sky_material = SubResource("9")
 [sub_resource type="Environment" id="11"]
 background_mode = 2
 sky = SubResource("10")
+tonemap_mode = 4
 
 [sub_resource type="Animation" id="Animation_qdnt6"]
 length = 0.001
@@ -168,8 +169,8 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ecfcr"]
 _data = {
-"RESET": SubResource("Animation_qdnt6"),
-"move": SubResource("12")
+&"RESET": SubResource("Animation_qdnt6"),
+&"move": SubResource("12")
 }
 
 [sub_resource type="StandardMaterial3D" id="13"]
@@ -413,6 +414,7 @@ emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 0.0
 emission_ring_radius = 0.25
 emission_ring_inner_radius = 0.25
+emission_ring_cone_angle = 90.0
 radial_accel_min = 2.0
 radial_accel_max = 2.0
 collision_mode = 1
@@ -444,6 +446,7 @@ emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 0.0
 emission_ring_radius = 1.6
 emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
 gravity = Vector3(0, 1, 0)
 color = Color(1, 1, 1, 0.25098)
 color_ramp = SubResource("GradientTexture1D_bewgf")
@@ -646,7 +649,7 @@ script = ExtResource("18")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ecfcr")
+&"": SubResource("AnimationLibrary_ecfcr")
 }
 autoplay = "move"
 

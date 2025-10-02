@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://wy4qr8euxk27"]
 
 [ext_resource type="Shape3D" path="res://assets/robot_head/godot3_robot_head_collision.tres" id="1"]
-[ext_resource type="Script" path="res://tests/functional/test_collision_pairs.gd" id="2"]
-[ext_resource type="Script" path="res://utils/camera_orbit.gd" id="4"]
+[ext_resource type="Script" uid="uid://bo8r6pye3q4ki" path="res://tests/functional/test_collision_pairs.gd" id="2"]
+[ext_resource type="Script" uid="uid://cx8vo58lobtgu" path="res://utils/camera_orbit.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://b1ihqm3x8jru" path="res://tests/test_options.tscn" id="5"]
 
 [sub_resource type="BoxShape3D" id="1"]
@@ -89,6 +89,7 @@ freeze = true
 [node name="CollisionShape" type="CollisionShape3D" parent="Shapes/RigidBodyBox"]
 transform = Transform3D(0.579556, 0.0885213, 0.145926, 0, 0.939693, -0.205212, -0.155291, 0.330366, 0.544604, 0, 0, 0)
 shape = SubResource("1")
+debug_color = Color(1, 1, 0, 1)
 
 [node name="RigidBodySphere" type="RigidBody3D" parent="Shapes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
@@ -97,6 +98,7 @@ freeze = true
 [node name="CollisionShape" type="CollisionShape3D" parent="Shapes/RigidBodySphere"]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 shape = SubResource("2")
+debug_color = Color(1, 1, 0, 1)
 
 [node name="RigidBodyCapsule" type="RigidBody3D" parent="Shapes"]
 freeze = true
@@ -104,6 +106,7 @@ freeze = true
 [node name="CollisionShape" type="CollisionShape3D" parent="Shapes/RigidBodyCapsule"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 shape = SubResource("3")
+debug_color = Color(1, 1, 0, 1)
 
 [node name="RigidBodyCylinder" type="RigidBody3D" parent="Shapes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
@@ -112,6 +115,7 @@ freeze = true
 [node name="CollisionShape" type="CollisionShape3D" parent="Shapes/RigidBodyCylinder"]
 transform = Transform3D(0.772741, -0.258819, 2.59821e-08, 0.2, 0.933013, -0.207055, 0.0535898, 0.25, 0.772741, 0, 0, 0)
 shape = SubResource("4")
+debug_color = Color(1, 1, 0, 1)
 
 [node name="RigidBodyConvexPolygon" type="RigidBody3D" parent="Shapes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.211, 0)
@@ -120,6 +124,7 @@ freeze = true
 [node name="CollisionShape" type="CollisionShape3D" parent="Shapes/RigidBodyConvexPolygon"]
 transform = Transform3D(2, 0, 0, 0, 2.95442, 0.347296, 0, -0.520945, 1.96962, 0, 0.35, 0)
 shape = SubResource("5")
+debug_color = Color(1, 1, 0, 1)
 
 [node name="RigidBodyConcavePolygon" type="StaticBody3D" parent="Shapes"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -6, 3.934)
@@ -127,6 +132,7 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -6, 3.934)
 [node name="CollisionShape" type="CollisionShape3D" parent="Shapes/RigidBodyConcavePolygon"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 shape = ExtResource("1")
+debug_color = Color(0, 0.533333, 1, 1)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.38087, 11.8164)

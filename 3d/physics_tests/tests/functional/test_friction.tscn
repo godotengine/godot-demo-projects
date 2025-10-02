@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://d1j6kxs3plvry"]
 
-[ext_resource type="Script" path="res://test.gd" id="1"]
-[ext_resource type="Script" path="res://utils/control3d.gd" id="2"]
+[ext_resource type="Script" uid="uid://cu0nmknf22ua2" path="res://test.gd" id="1"]
+[ext_resource type="Script" uid="uid://k4cta5vagong" path="res://utils/control3d.gd" id="2"]
 
 [sub_resource type="PhysicsMaterial" id="1"]
 friction = 0.0
@@ -22,139 +22,127 @@ friction = 0.5
 [sub_resource type="PhysicsMaterial" id="7"]
 
 [node name="Test" type="Node3D"]
-script = ExtResource( "1" )
+script = ExtResource("1")
 
 [node name="StaticBodyFriction0" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, -6, 8.581, 0)
-physics_material_override = SubResource( "1" )
+physics_material_override = SubResource("1")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="StaticBodyFriction0"]
 transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
-shape = SubResource( "2" )
+shape = SubResource("2")
+debug_color = Color(0, 0.533333, 1, 1)
 
 [node name="RigidBodies" type="Node3D" parent="StaticBodyFriction0"]
 transform = Transform3D(1, 0, 0, 0, 0.866026, 0.5, 0, -0.5, 0.866026, -3, -7.431, 4.291)
 
-[node name="RigidBodyFriction0" type="RigidDynamicBody3D" parent="StaticBodyFriction0/RigidBodies"]
+[node name="RigidBodyFriction0" type="RigidBody3D" parent="StaticBodyFriction0/RigidBodies"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 10, 0)
-physics_material_override = SubResource( "3" )
+physics_material_override = SubResource("3")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="StaticBodyFriction0/RigidBodies/RigidBodyFriction0"]
-shape = SubResource( "4" )
+shape = SubResource("4")
+debug_color = Color(1, 1, 0, 1)
 
 [node name="LabelFriction" type="Label" parent="StaticBodyFriction0/RigidBodies/RigidBodyFriction0"]
 offset_right = 40.0
 offset_bottom = 14.0
 text = "0"
-script = ExtResource( "2" )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("2")
 world_offset = Vector3(0, 1.5, 0)
 
-[node name="RigidBodyFriction05" type="RigidDynamicBody3D" parent="StaticBodyFriction0/RigidBodies"]
+[node name="RigidBodyFriction05" type="RigidBody3D" parent="StaticBodyFriction0/RigidBodies"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 3, 10, 0)
-physics_material_override = SubResource( "5" )
+physics_material_override = SubResource("5")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="StaticBodyFriction0/RigidBodies/RigidBodyFriction05"]
-shape = SubResource( "4" )
+shape = SubResource("4")
+debug_color = Color(1, 1, 0, 1)
 
 [node name="LabelFriction" type="Label" parent="StaticBodyFriction0/RigidBodies/RigidBodyFriction05"]
 offset_right = 40.0
 offset_bottom = 14.0
 text = "0.5"
-script = ExtResource( "2" )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("2")
 world_offset = Vector3(0, 1.5, 0)
 
-[node name="RigidBodyFriction1" type="RigidDynamicBody3D" parent="StaticBodyFriction0/RigidBodies"]
+[node name="RigidBodyFriction1" type="RigidBody3D" parent="StaticBodyFriction0/RigidBodies"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 6, 10, 0)
-physics_material_override = SubResource( "6" )
+physics_material_override = SubResource("6")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="StaticBodyFriction0/RigidBodies/RigidBodyFriction1"]
-shape = SubResource( "4" )
+shape = SubResource("4")
+debug_color = Color(1, 1, 0, 1)
 
 [node name="LabelFriction" type="Label" parent="StaticBodyFriction0/RigidBodies/RigidBodyFriction1"]
 offset_right = 40.0
 offset_bottom = 14.0
 text = "1"
-script = ExtResource( "2" )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("2")
 world_offset = Vector3(0, 1.5, 0)
 
 [node name="StaticBodyFriction1" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 6, 8.581, 0)
-physics_material_override = SubResource( "7" )
+physics_material_override = SubResource("7")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="StaticBodyFriction1"]
 transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
-shape = SubResource( "2" )
+shape = SubResource("2")
+debug_color = Color(0, 0.533333, 1, 1)
 
 [node name="RigidBodies" type="Node3D" parent="StaticBodyFriction1"]
 transform = Transform3D(1, 0, 0, 0, 0.866026, 0.5, 0, -0.5, 0.866026, -3, -7.431, 4.291)
 
-[node name="RigidBodyFriction0" type="RigidDynamicBody3D" parent="StaticBodyFriction1/RigidBodies"]
+[node name="RigidBodyFriction0" type="RigidBody3D" parent="StaticBodyFriction1/RigidBodies"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 10, 0)
-physics_material_override = SubResource( "3" )
+physics_material_override = SubResource("3")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="StaticBodyFriction1/RigidBodies/RigidBodyFriction0"]
-shape = SubResource( "4" )
+shape = SubResource("4")
+debug_color = Color(1, 1, 0, 1)
 
 [node name="LabelFriction" type="Label" parent="StaticBodyFriction1/RigidBodies/RigidBodyFriction0"]
 offset_right = 40.0
 offset_bottom = 14.0
 text = "0"
-script = ExtResource( "2" )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("2")
 world_offset = Vector3(0, 1.5, 0)
 
-[node name="RigidBodyFriction05" type="RigidDynamicBody3D" parent="StaticBodyFriction1/RigidBodies"]
+[node name="RigidBodyFriction05" type="RigidBody3D" parent="StaticBodyFriction1/RigidBodies"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 3, 10, 0)
-physics_material_override = SubResource( "5" )
+physics_material_override = SubResource("5")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="StaticBodyFriction1/RigidBodies/RigidBodyFriction05"]
-shape = SubResource( "4" )
+shape = SubResource("4")
+debug_color = Color(1, 1, 0, 1)
 
 [node name="LabelFriction" type="Label" parent="StaticBodyFriction1/RigidBodies/RigidBodyFriction05"]
 offset_right = 40.0
 offset_bottom = 14.0
 text = "0.5"
-script = ExtResource( "2" )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("2")
 world_offset = Vector3(0, 1.5, 0)
 
-[node name="RigidBodyFriction1" type="RigidDynamicBody3D" parent="StaticBodyFriction1/RigidBodies"]
+[node name="RigidBodyFriction1" type="RigidBody3D" parent="StaticBodyFriction1/RigidBodies"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 6, 10, 0)
-physics_material_override = SubResource( "6" )
+physics_material_override = SubResource("6")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="StaticBodyFriction1/RigidBodies/RigidBodyFriction1"]
-shape = SubResource( "4" )
+shape = SubResource("4")
+debug_color = Color(1, 1, 0, 1)
 
 [node name="LabelFriction" type="Label" parent="StaticBodyFriction1/RigidBodies/RigidBodyFriction1"]
 offset_right = 40.0
 offset_bottom = 14.0
 text = "1"
-script = ExtResource( "2" )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("2")
 world_offset = Vector3(0, 1.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.53602, 22.1236)
 
-[node name="OmniLight" type="OmniLight3D" parent="Camera3D"]
-omni_range = 50.0
-
 [node name="LabelGround0" type="Label" parent="."]
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -164.0
@@ -162,11 +150,9 @@ offset_top = 80.0
 offset_right = -28.0
 offset_bottom = 94.0
 text = "GROUND FRICTION 0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelGround1" type="Label" parent="."]
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 31.0
@@ -174,6 +160,3 @@ offset_top = 80.0
 offset_right = 167.0
 offset_bottom = 94.0
 text = "GROUND FRICTION 1"
-__meta__ = {
-"_edit_use_anchors_": false
-}

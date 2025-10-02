@@ -57,7 +57,7 @@ func _server_disconnected() -> void:
 
 # Callback from SceneTree, only for clients (not server).
 func _connected_fail() -> void:
-	multiplayer.set_network_peer(null) # Remove peer
+	multiplayer.set_multiplayer_peer(null) # Remove peer
 	connection_failed.emit()
 
 

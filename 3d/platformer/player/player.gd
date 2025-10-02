@@ -40,6 +40,10 @@ func _physics_process(delta: float) -> void:
 		# Player hit the reset button or fell off the map.
 		position = initial_position
 		velocity = Vector3.ZERO
+		# We teleported the player on the lines above. Reset interpolation
+		# to prevent it from interpolating from the old player position
+		# to the new position.
+		reset_physics_interpolation()
 
 	# Update coin count and its "parallax" copies.
 	# This gives text a pseudo-3D appearance while still using Label3D instead of the more limited TextMesh.

@@ -66,12 +66,12 @@ func _change_state(new_state: States) -> void:
 	state = new_state
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(input_event: InputEvent) -> void:
 	if not state == States.ATTACK:
 		return
 	if attack_input_state != AttackInputStates.LISTENING:
 		return
-	if event.is_action_pressed("attack"):
+	if input_event.is_action_pressed("attack"):
 		attack_input_state = AttackInputStates.REGISTERED
 
 

@@ -1,0 +1,228 @@
+[gd_scene load_steps=13 format=3 uid="uid://dxpettbof8pr8"]
+
+[ext_resource type="Script" uid="uid://c8j1v1pxecy0q" path="res://graphics_tablet_input.gd" id="1_fhuxi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0pp2f"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.223529, 0.223529, 0.223529, 1)
+
+[sub_resource type="InputEventAction" id="InputEventAction_spbge"]
+action = &"undo_last_line"
+
+[sub_resource type="Shortcut" id="Shortcut_3mcds"]
+events = [SubResource("InputEventAction_spbge")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_7n722"]
+action = &"clear_all_lines"
+
+[sub_resource type="Shortcut" id="Shortcut_5wv4g"]
+events = [SubResource("InputEventAction_7n722")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_y8lr1"]
+action = &"change_line_color"
+
+[sub_resource type="Shortcut" id="Shortcut_1nmmy"]
+events = [SubResource("InputEventAction_y8lr1")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_0l3by"]
+action = &"toggle_pressure_sensitive"
+
+[sub_resource type="Shortcut" id="Shortcut_mnr5q"]
+events = [SubResource("InputEventAction_0l3by")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_4p65y"]
+action = &"toggle_tilt_vector"
+
+[sub_resource type="Shortcut" id="Shortcut_231fk"]
+events = [SubResource("InputEventAction_4p65y")]
+
+[node name="ColorRect" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 3
+script = ExtResource("1_fhuxi")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+offset_right = 264.0
+offset_bottom = 648.0
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0pp2f")
+
+[node name="Options" type="VBoxContainer" parent="CanvasLayer/PanelContainer"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 10
+
+[node name="UndoLastLine" type="Button" parent="CanvasLayer/PanelContainer/Options"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+shortcut = SubResource("Shortcut_3mcds")
+text = "Undo Last Line"
+
+[node name="ClearAllLines" type="Button" parent="CanvasLayer/PanelContainer/Options"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+shortcut = SubResource("Shortcut_5wv4g")
+text = "Clear All Lines"
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/PanelContainer/Options"]
+layout_mode = 2
+
+[node name="LineColor" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Options"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/Options/LineColor"]
+layout_mode = 2
+text = "Line Color"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/PanelContainer/Options/LineColor"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+shortcut = SubResource("Shortcut_1nmmy")
+
+[node name="LineWidth" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Options"]
+layout_mode = 2
+tooltip_text = "(-: Decrease, +: Increase)"
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/Options/LineWidth"]
+layout_mode = 2
+text = "Line Width"
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/PanelContainer/Options/LineWidth"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.5
+max_value = 20.0
+step = 0.5
+value = 3.0
+
+[node name="Value" type="Label" parent="CanvasLayer/PanelContainer/Options/LineWidth"]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+text = "3.0"
+horizontal_alignment = 1
+
+[node name="PressureSensitive" type="CheckButton" parent="CanvasLayer/PanelContainer/Options"]
+layout_mode = 2
+tooltip_text = "If enabled, modulates line width according to pen pressure.
+This has no effect if drawing with a mouse or a tablet
+without pen pressure support."
+button_pressed = true
+shortcut = SubResource("Shortcut_mnr5q")
+text = "Pressure-Sensitive"
+
+[node name="ShowTiltVector" type="CheckButton" parent="CanvasLayer/PanelContainer/Options"]
+layout_mode = 2
+tooltip_text = "If enabled, shows a visual representation of the tilt vector
+reported by the graphics tablet. Tilt is not supported by all
+graphics tablets."
+button_pressed = true
+shortcut = SubResource("Shortcut_231fk")
+text = "Show Tilt Vector"
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/PanelContainer/Options"]
+layout_mode = 2
+
+[node name="MSAA" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Options"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/Options/MSAA"]
+layout_mode = 2
+text = "MSAA 2D"
+
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/PanelContainer/Options/MSAA"]
+layout_mode = 2
+selected = 3
+item_count = 4
+popup/item_0/text = "Disabled"
+popup/item_1/text = "2×"
+popup/item_1/id = 1
+popup/item_2/text = "4×"
+popup/item_2/id = 2
+popup/item_3/text = "8×"
+popup/item_3/id = 3
+
+[node name="MaxFPS" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Options"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/Options/MaxFPS"]
+layout_mode = 2
+text = "Max FPS"
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/PanelContainer/Options/MaxFPS"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 10.0
+max_value = 240.0
+step = 5.0
+value = 145.0
+
+[node name="Value" type="Label" parent="CanvasLayer/PanelContainer/Options/MaxFPS"]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+text = "145"
+horizontal_alignment = 1
+
+[node name="VSync" type="CheckButton" parent="CanvasLayer/PanelContainer/Options"]
+layout_mode = 2
+tooltip_text = "Disable V-Sync to achieve lower input latency.
+
+Note that Android, iOS and Web platforms enforce
+V-Sync at a system level with no reliable way to disable it."
+text = "V-Sync"
+
+[node name="InputAccumulation" type="CheckButton" parent="CanvasLayer/PanelContainer/Options"]
+layout_mode = 2
+tooltip_text = "If enabled, inputs are collected and merged into a single input event on every rendered frame.
+By default, this is enabled in Godot, but this project disables it by default.
+
+This should be left disabled for drawing apps that expect precise input,
+as lines can become visibly jagged otherwise."
+text = "Input Accumulation"
+
+[node name="Spacer" type="Control" parent="CanvasLayer/PanelContainer/Options"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TabletInfo" type="Label" parent="CanvasLayer/PanelContainer/Options"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.67451)
+layout_mode = 2
+text = "Pressure: 0.000
+Tilt: (0.000, 0.000)
+Inverted pen: No"
+
+[node name="TabletDriver" type="Label" parent="CanvasLayer/PanelContainer/Options"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 2
+text = "Tablet driver: <driver>"
+
+[connection signal="pressed" from="CanvasLayer/PanelContainer/Options/UndoLastLine" to="." method="_on_undo_last_line_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/Options/ClearAllLines" to="." method="_on_clear_all_lines_pressed"]
+[connection signal="color_changed" from="CanvasLayer/PanelContainer/Options/LineColor/ColorPickerButton" to="." method="_on_line_color_changed"]
+[connection signal="value_changed" from="CanvasLayer/PanelContainer/Options/LineWidth/HSlider" to="." method="_on_line_width_value_changed"]
+[connection signal="toggled" from="CanvasLayer/PanelContainer/Options/PressureSensitive" to="." method="_on_pressure_sensitive_toggled"]
+[connection signal="toggled" from="CanvasLayer/PanelContainer/Options/ShowTiltVector" to="." method="_on_show_tilt_vector_toggled"]
+[connection signal="item_selected" from="CanvasLayer/PanelContainer/Options/MSAA/OptionButton" to="." method="_on_msaa_item_selected"]
+[connection signal="value_changed" from="CanvasLayer/PanelContainer/Options/MaxFPS/HSlider" to="." method="_on_max_fps_value_changed"]
+[connection signal="toggled" from="CanvasLayer/PanelContainer/Options/VSync" to="." method="_on_v_sync_toggled"]
+[connection signal="toggled" from="CanvasLayer/PanelContainer/Options/InputAccumulation" to="." method="_on_input_accumulation_toggled"]

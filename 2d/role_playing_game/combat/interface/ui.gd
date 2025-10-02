@@ -1,5 +1,7 @@
 extends Control
 
+signal flee(winner: Combatant, loser: Combatant)
+
 
 @export var combatants_node: Node
 @export var info_scene: PackedScene
@@ -38,6 +40,7 @@ func _on_Flee_button_up() -> void:
 		return
 
 	combatants_node.get_node("Player").flee()
+
 	var loser: Combatant = combatants_node.get_node("Player")
 	var winner: Combatant = combatants_node.get_node("Opponent")
-	get_parent().finish_combat(winner, loser)
+	flee.emit(winner, loser)
