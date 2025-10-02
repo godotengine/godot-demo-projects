@@ -1,0 +1,36 @@
+name: 🌐 Check URLs
+on:
+  push:
+  pull_request:
+  schedule:
+    # Every day at 18:00 UTC.
+    # URLs can decay over time. Setting up a schedule makes it possible to be warned
+    # about dead links as soon as possible.
+    - cron: "0 18 * * *"
+
+jobs:
+  check-urls:
+    runs-on: ubuntu-24.04
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Restore lychee cache
+        uses: actions/cache@v4
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+
+      - name: Run lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >
+            --base .
+            --no-progress
+            --cache
+            --max-cache-age 1d
+            "**/*.md" "**/*.gd" "**/*.cs" "**/*.tscn" "**/*.tres" "**/*.html"
+
+      - name: Fail if there were link errors
+        run: exit ${{ steps.lc.outputs.exit_code }}
