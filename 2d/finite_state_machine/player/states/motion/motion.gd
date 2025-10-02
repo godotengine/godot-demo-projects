@@ -1,9 +1,9 @@
 extends "res://player/player_state.gd"
 # Collection of important methods to handle direction and animation.
 
-func handle_input(event: InputEvent) -> void:
-	if event.is_action_pressed("simulate_damage"):
-		finished.emit(player_state.stagger)
+func handle_input(input_event: InputEvent) -> void:
+	if input_event.is_action_pressed("simulate_damage"):
+		finished.emit(PLAYER_STATE.stagger)
 
 
 func get_input_direction() -> Vector2:

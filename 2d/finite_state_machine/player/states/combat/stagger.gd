@@ -4,9 +4,9 @@ extends "res://player/player_state.gd"
 # could stack with other animations if we had two AnimationPlayer nodes.
 
 func enter() -> void:
-	owner.get_node(^"AnimationPlayer").play(player_state.stagger)
+	owner.get_node(^"AnimationPlayer").play(PLAYER_STATE.stagger)
 
 
 func _on_animation_finished(anim_name: String) -> void:
-	assert(anim_name == player_state.stagger)
-	finished.emit(player_state.previous)
+	assert(anim_name == PLAYER_STATE.stagger)
+	finished.emit(PLAYER_STATE.previous)

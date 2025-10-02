@@ -9,17 +9,17 @@ func enter() -> void:
 
 	var input_direction := get_input_direction()
 	update_look_direction(input_direction)
-	owner.get_node(^"AnimationPlayer").play(player_state.walk)
+	owner.get_node(^"AnimationPlayer").play(PLAYER_STATE.walk)
 
 
-func handle_input(event: InputEvent) -> void:
-	return super.handle_input(event)
+func handle_input(input_event: InputEvent) -> void:
+	return super.handle_input(input_event)
 
 
 func update(_delta: float) -> void:
 	var input_direction := get_input_direction()
 	if input_direction.is_zero_approx():
-		finished.emit(player_state.idle)
+		finished.emit(PLAYER_STATE.idle)
 	update_look_direction(input_direction)
 
 	if Input.is_action_pressed("run"):
