@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ca0d8q5aicxfr"]
 
-[ext_resource type="Script" path="res://runtime_save_load.gd" id="1_2gu2h"]
+[ext_resource type="Script" uid="uid://dsuhasj84j4ri" path="res://runtime_save_load.gd" id="1_2gu2h"]
 
 [node name="RuntimeLoadSave" type="Control"]
 layout_mode = 3
@@ -55,7 +55,7 @@ text = "Browse"
 
 [node name="FileDialog" type="FileDialog" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 title = "Open a File"
-size = Vector2i(392, 159)
+size = Vector2i(392, 175)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
@@ -83,13 +83,18 @@ layout_mode = 2
 expand_mode = 3
 
 [node name="AudioPlayer" type="Button" parent="MarginContainer/VBoxContainer/Result"]
-visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Play Audio"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/Result/AudioPlayer"]
 volume_db = -10.0
+
+[node name="Information" type="Label" parent="MarginContainer/VBoxContainer/Result/AudioPlayer"]
+layout_mode = 0
+offset_top = 48.0
+offset_right = 40.0
+offset_bottom = 71.0
 
 [node name="SceneViewer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer/Result"]
 visible = false
@@ -100,6 +105,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="MarginContainer/VBoxContainer/Result/SceneViewer"]
 handle_input_locally = false
 msaa_3d = 2
+scaling_3d_scale = 2.0
 size = Vector2i(1050, 400)
 render_target_update_mode = 0
 

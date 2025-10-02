@@ -9,13 +9,14 @@ env:
 
 jobs:
   export-html5:
+    if: github.repository == 'godotengine/godot-demo-projects'
     name: Export projects to Web and deploy to GitHub Pages
     runs-on: ubuntu-24.04
     container:
       image: barichello/godot-ci:4.3
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup
         run: |

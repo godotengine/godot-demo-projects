@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://5wewxgmcpq2t" path="res://textures/scifi_2_normal.png" id="14_yj8ff"]
 [ext_resource type="Texture2D" uid="uid://cyh57iw40y5pc" path="res://textures/scifi_3_albedo.png" id="15_ct5bp"]
 [ext_resource type="Texture2D" uid="uid://cwg21hcwtkqiw" path="res://textures/scifi_3_normal.png" id="16_0mhgx"]
-[ext_resource type="Script" path="res://tester.gd" id="18"]
+[ext_resource type="Script" uid="uid://bi2o4fooys1dc" path="res://tester.gd" id="18"]
 
 [sub_resource type="ProceduralSkyMaterial" id="9"]
 
@@ -29,6 +29,7 @@ sky_material = SubResource("9")
 [sub_resource type="Environment" id="11"]
 background_mode = 2
 sky = SubResource("10")
+tonemap_mode = 4
 
 [sub_resource type="Animation" id="12"]
 resource_name = "move"
@@ -121,7 +122,7 @@ tracks/6/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ecfcr"]
 _data = {
-"move": SubResource("12")
+&"move": SubResource("12")
 }
 
 [sub_resource type="StandardMaterial3D" id="13"]
@@ -194,7 +195,7 @@ script = ExtResource("18")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ecfcr")
+&"": SubResource("AnimationLibrary_ecfcr")
 }
 autoplay = "move"
 
@@ -755,6 +756,7 @@ layout_mode = 2
 selected = 4
 item_count = 6
 popup/item_0/text = "Nearest"
+popup/item_0/id = 0
 popup/item_1/text = "Linear"
 popup/item_1/id = 1
 popup/item_2/text = "Nearest + Mipmaps"

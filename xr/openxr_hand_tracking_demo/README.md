@@ -6,7 +6,9 @@ Language: GDScript
 
 Renderer: Compatibility
 
-> Note: this demo requires Godot 4.3 or later
+> [!NOTE]
+>
+> This demo requires Godot 4.4 or later
 
 ## Screenshots
 
@@ -49,7 +51,7 @@ For advanced gesture recognition you would still use this data however it is now
 the physical means in which this data is obtained.
 
 At the same time, in this school of thought the action map system is seen as the primary means to gain input
-and is no longer restriced to input from controllers. The XR runtime is now responsible for recognising base
+and is no longer restricted to input from controllers. The XR runtime is now responsible for recognising base
 gestures such as pinching and pointing resulting in inputs that can be bound in the action map.
 
 OpenXR is moving towards this approach and this demo has been build in accordance with this however not all runtimes have been updated yet.
@@ -65,7 +67,7 @@ For other runtimes like Picos, HTC, Varjos, Magic Leaps, etc. may or may not yet
 
 ### Conclusion
 
-Due to the wildgrowth in capabilities in XR runtimes,
+Due to the wild growth in capabilities in XR runtimes,
 and there being no solid way to detect the full limitations of the platform you are currently on,
 Godot XR Tools does not have support for the hand tracking API and purely relies on its own inferred hand positioning approach.
 
@@ -88,19 +90,43 @@ This split is applied because:
 * positioning is always within the local space of the XROrigin3D node
 * there are many use cases where the positioning may be ignored or modified
 
-> Note that the trackers used for the hand tracking API are `/user/hand_tracker/left` and `/user/hand_tracker/right`.
+> [!NOTE]
+>
+> The trackers used for the hand tracking API are `/user/hand_tracker/left`
+> and `/user/hand_tracker/right`.
+
+> [!NOTE]
+>
+> There are new project settings in Godot 4.4.
+> If you upgrade this project to Godot 4.4 or later,
+> you need to open the Project Settings window,
+> go to the OpenXR settings
+> and enable the hand tracking source extensions.
 
 ## (Half) body Tracking API
 
-Just an honerable mention of this, this is not part of this demo but Godot now also has support
+Just an honorable mention of this, this is not part of this demo but Godot now also has support
 for half and full body tracking that includes hand tracking. This functionality however is only
 available on a limited number of XR runtimes.
+
+## Fallback skeleton modifier
+
+If the XR runtime doesn't support hand tracking, or doesn't support the controller data source,
+this demo implements a fallback modifier that animates the fingers based on trigger
+and grip input from the action map.
+The hand is now also positioned based on poses accessed through the action map.
+
+By default we use the palm pose, which is properly defined in the OpenXR action map.
+
+As support for the palm pose is optional, we fallback on the grip pose if needed.
+While positioning matches closely with the palm pose, orientation of the grip pose
+differs between XR runtimes and can cause misalignment of the hand mesh.
 
 ## Action map
 
 As mentioned, we're using the action map here for input however when optical hand tracking is used
-we rely on OpenXRs hand interaction profile extension. Without support for this extension this demo
-will not fully function.
+we rely on OpenXRs hand interaction profile extension.
+Without support for this extension this demo will not fully function.
 
 This can be solved by checking that no interaction profile has been bound to our XRController3D node,
 and performing our own gesture detection.
@@ -114,9 +140,12 @@ will soon see wide adoption, this is left out of the demo.
 
 We are not using the default action map and instead have created an action map specific to this use case.
 
-There are only two actions needed for this example:
-- `pose` is used to position the XRController3D nodes and mapped to the grip pose in most cases
+There are a number of actions needed for this example:
+- `palm_pose` is used to position the XRController3D nodes and our hand fallback by default.
+- `grip_pose` is used when the palm pose is not supported.
 - `pickup` is used as the input for picking up an object, and mapped accordingly.
+- `trigger` is used purely for animating our index finger.
+- `haptic` is currently not used in the demo but defined for future use.
 
 The pickup logic itself is split into two components:
 

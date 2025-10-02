@@ -1,48 +1,33 @@
+## A pawn that can animate and walk around the grid.
+class_name Walker
 extends Pawn
 
 @export var combat_actor: PackedScene
+@export var pose_anims: SpriteFrames
 
 var lost := false
 var grid_size: float
 
-@onready var parent := get_parent()
+@onready var grid : Grid = get_parent()
 @onready var animation_playback: AnimationNodeStateMachinePlayback = $AnimationTree.get("parameters/playback")
 @onready var walk_animation_time: float = $AnimationPlayer.get_animation("walk").length
+@onready var pose := $Pivot/Slime
 
 
 func _ready() -> void:
+	pose.sprite_frames = pose_anims
 	update_look_direction(Vector2.RIGHT)
-	grid_size = parent.tile_set.tile_size.x
-
-
-func _process(_delta: float) -> void:
-	var input_direction := get_input_direction()
-	if input_direction.is_zero_approx():
-		return
-
-	update_look_direction(input_direction)
-
-	var target_position: Vector2 = parent.request_move(self, input_direction)
-	if target_position:
-		move_to(target_position)
-	elif active:
-		bump()
-
-
-func get_input_direction() -> Vector2:
-	return Vector2(
-			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-			Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-	)
+	grid_size = grid.tile_set.tile_size.x
 
 
 func update_look_direction(direction: Vector2) -> void:
-	$Pivot/Sprite2D.rotation = direction.angle()
+	$Pivot/FacingDirection.rotation = direction.angle()
 
 
 func move_to(target_position: Vector2) -> void:
 	set_process(false)
 	var move_direction := (target_position - position).normalized()
+	pose.play("idle")
 	animation_playback.start("walk")
 
 	var tween := create_tween()
@@ -54,13 +39,16 @@ func move_to(target_position: Vector2) -> void:
 	$Pivot.position = Vector2.ZERO
 	position = target_position
 	animation_playback.start("idle")
+	pose.play("idle")
 
 	set_process(true)
 
 
 func bump() -> void:
 	set_process(false)
+	pose.play("bump")
 	animation_playback.start("bump")
 	await $AnimationTree.animation_finished
 	animation_playback.start("idle")
+	pose.play("idle")
 	set_process(true)

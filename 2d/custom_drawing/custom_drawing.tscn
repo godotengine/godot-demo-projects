@@ -1,0 +1,272 @@
+[gd_scene load_steps=10 format=3 uid="uid://btxwm0qudsn3t"]
+
+[ext_resource type="Script" uid="uid://cinaeqsrawkbw" path="res://custom_drawing.gd" id="1_rtndo"]
+[ext_resource type="Script" uid="uid://3gt2v4l0gy1" path="res://lines.gd" id="2_exx0l"]
+[ext_resource type="Script" uid="uid://cquneapbjf3e0" path="res://rectangles.gd" id="3_yrx86"]
+[ext_resource type="Script" uid="uid://clsf8dubgyrig" path="res://polygons.gd" id="4_obj11"]
+[ext_resource type="Script" uid="uid://dtxyrnurokare" path="res://textures.gd" id="5_84cac"]
+[ext_resource type="Script" uid="uid://dy8ofskb8bg4a" path="res://meshes.gd" id="5_exx0l"]
+[ext_resource type="Script" uid="uid://0kv1wvfyg058" path="res://text.gd" id="6_4w081"]
+[ext_resource type="Script" uid="uid://b8d4d0s3gujbp" path="res://animation.gd" id="8_yrx86"]
+[ext_resource type="Script" uid="uid://wksdrvv65620" path="res://animation_slice.gd" id="9_obj11"]
+
+[node name="CustomDrawing" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rtndo")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="Lines" type="Panel" parent="TabContainer"]
+layout_mode = 2
+script = ExtResource("2_exx0l")
+metadata/_tab_index = 0
+
+[node name="DrawLine" type="Label" parent="TabContainer/Lines"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 48.0
+offset_right = 172.0
+offset_bottom = 97.0
+theme_override_colors/font_color = Color(0.501961, 1, 0.501961, 1)
+text = "draw_line()
+draw_dashed_line()"
+
+[node name="DrawCircle" type="Label" parent="TabContainer/Lines"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 154.0
+offset_right = 122.0
+offset_bottom = 177.0
+theme_override_colors/font_color = Color(0.501961, 1, 0.501961, 1)
+text = "draw_circle()"
+
+[node name="DrawArc" type="Label" parent="TabContainer/Lines"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 264.0
+offset_right = 109.0
+offset_bottom = 287.0
+theme_override_colors/font_color = Color(0.501961, 1, 0.501961, 1)
+text = "draw_arc()"
+
+[node name="Rectangles" type="Panel" parent="TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("3_yrx86")
+metadata/_tab_index = 1
+
+[node name="DrawRect" type="Label" parent="TabContainer/Rectangles"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 48.0
+offset_right = 109.0
+offset_bottom = 71.0
+theme_override_colors/font_color = Color(0.501961, 1, 0.501961, 1)
+text = "draw_rect()"
+
+[node name="DrawStyleBox" type="Label" parent="TabContainer/Rectangles"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 296.0
+offset_right = 153.0
+offset_bottom = 319.0
+text = "draw_style_box()"
+
+[node name="Polygons" type="Panel" parent="TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("4_obj11")
+metadata/_tab_index = 2
+
+[node name="DrawPrimitive" type="Label" parent="TabContainer/Polygons"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 48.0
+offset_right = 207.0
+offset_bottom = 97.0
+text = "draw_primitive()"
+
+[node name="DrawPolygon" type="Label" parent="TabContainer/Polygons"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 168.0
+offset_right = 207.0
+offset_bottom = 217.0
+text = "draw_polygon()
+draw_colored_polygon()"
+
+[node name="DrawPolyline" type="Label" parent="TabContainer/Polygons"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 264.0
+offset_right = 195.0
+offset_bottom = 313.0
+theme_override_colors/font_color = Color(0.501961, 1, 0.501961, 1)
+text = "draw_polyline()
+draw_polyline_colors()"
+
+[node name="DrawMultiline" type="Label" parent="TabContainer/Polygons"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 392.0
+offset_right = 203.0
+offset_bottom = 441.0
+theme_override_colors/font_color = Color(0.501961, 1, 0.501961, 1)
+text = "draw_multiline()
+draw_multiline_colors()"
+
+[node name="Meshes" type="Panel" parent="TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("5_exx0l")
+metadata/_tab_index = 3
+
+[node name="DrawMesh" type="Label" parent="TabContainer/Meshes"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 48.0
+offset_right = 207.0
+offset_bottom = 97.0
+text = "draw_mesh()"
+
+[node name="DrawMultiMesh" type="Label" parent="TabContainer/Meshes"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 208.0
+offset_right = 207.0
+offset_bottom = 257.0
+text = "draw_multimesh()"
+
+[node name="Textures" type="Panel" parent="TabContainer"]
+visible = false
+texture_repeat = 2
+layout_mode = 2
+script = ExtResource("5_84cac")
+metadata/_tab_index = 4
+
+[node name="DrawTexture" type="Label" parent="TabContainer/Textures"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 48.0
+offset_right = 175.0
+offset_bottom = 97.0
+text = "draw_texture()
+draw_texture_rect()"
+
+[node name="DrawTextureRectRegion" type="Label" parent="TabContainer/Textures"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 392.0
+offset_right = 231.0
+offset_bottom = 415.0
+text = "draw_texture_rect_region()"
+
+[node name="Text" type="Panel" parent="TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("6_4w081")
+metadata/_tab_index = 5
+
+[node name="DrawChar" type="Label" parent="TabContainer/Text"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 48.0
+offset_right = 125.0
+offset_bottom = 97.0
+text = "draw_char()
+draw_string()"
+
+[node name="Animation" type="Panel" parent="TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("8_yrx86")
+metadata/_tab_index = 6
+
+[node name="DrawArcTime" type="Label" parent="TabContainer/Animation"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 48.0
+offset_right = 125.0
+offset_bottom = 97.0
+theme_override_colors/font_color = Color(0.501961, 1, 0.501961, 1)
+text = "draw_arc()
++ time variable"
+
+[node name="DrawAnimationSlice" type="Label" parent="TabContainer/Animation"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 216.0
+offset_right = 201.0
+offset_bottom = 265.0
+text = "draw_animation_slice()"
+
+[node name="AnimationSlice" type="Control" parent="TabContainer/Animation"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_obj11")
+
+[node name="Options" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -64.0
+offset_right = 441.0
+offset_bottom = -24.0
+grow_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="MSAA2DLabel" type="Label" parent="Options"]
+layout_mode = 2
+text = "MSAA 2D"
+
+[node name="MSAA2DOptionButton" type="OptionButton" parent="Options"]
+layout_mode = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "2×"
+popup/item_1/id = 1
+popup/item_2/text = "4×"
+popup/item_2/id = 2
+popup/item_3/text = "8×"
+popup/item_3/id = 3
+
+[node name="VSeparator" type="VSeparator" parent="Options"]
+layout_mode = 2
+
+[node name="DrawAntialiasing" type="CheckButton" parent="Options"]
+layout_mode = 2
+tooltip_text = "Performs antialiasing by adding a feathered outline
+to lines that are drawn in 2D. This is generally faster to render
+than 2D MSAA, but not all draw commands support it.
+
+Commands that support draw antialiasing are
+highlighted in green."
+theme_override_colors/font_color = Color(0.501961, 1, 0.501961, 1)
+theme_override_colors/font_focus_color = Color(0.501961, 1, 0.501961, 1)
+theme_override_colors/font_pressed_color = Color(0.501961, 1, 0.501961, 1)
+text = "Draw Antialiasing"
+
+[connection signal="item_selected" from="Options/MSAA2DOptionButton" to="." method="_on_msaa_2d_item_selected"]
+[connection signal="toggled" from="Options/DrawAntialiasing" to="." method="_on_draw_antialiasing_toggled"]

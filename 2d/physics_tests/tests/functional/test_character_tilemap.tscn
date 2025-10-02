@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://b7fcmfv5sqxfo"]
 
-[ext_resource type="Script" path="res://tests/functional/test_character_tilemap.gd" id="1"]
+[ext_resource type="Script" uid="uid://bhwuwhopw4t8" path="res://tests/functional/test_character_tilemap.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://blh3twy74kbkv" path="res://tests/test_options.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://cx2q80okt25o1" path="res://tests/static_scene_flat.tscn" id="4"]
 [ext_resource type="TileSet" uid="uid://rgfdpxlejxl3" path="res://assets/tileset/tileset.tres" id="5"]
-[ext_resource type="Script" path="res://utils/rigidbody_controller.gd" id="6"]
-[ext_resource type="Script" path="res://utils/characterbody_controller.gd" id="7"]
+[ext_resource type="Script" uid="uid://3kutyof2jcdh" path="res://utils/rigidbody_controller.gd" id="6"]
+[ext_resource type="Script" uid="uid://gajv1ool1il5" path="res://utils/characterbody_controller.gd" id="7"]
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(32, 63.9)
@@ -56,6 +56,7 @@ script = ExtResource("7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("2")
+debug_color = Color(0, 1, 0, 0.0980392)
 
 [node name="CharacterBodyRay2D" type="CharacterBody2D" parent="."]
 position = Vector2(250, 460)
@@ -65,18 +66,22 @@ script = ExtResource("7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBodyRay2D"]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_jx2e1")
+debug_color = Color(0, 1, 0, 0.0980392)
 
 [node name="CollisionShapeRay2D" type="CollisionShape2D" parent="CharacterBodyRay2D"]
 position = Vector2(0, 8)
 shape = SubResource("RayShape2D_206f5")
+debug_color = Color(0, 1, 0, 0.0980392)
 
 [node name="CollisionShapeRay2DLeft" type="CollisionShape2D" parent="CharacterBodyRay2D"]
 position = Vector2(-12, 8)
 shape = SubResource("RayShape2D_206f5")
+debug_color = Color(0, 1, 0, 0.0980392)
 
 [node name="CollisionShapeRay2DRight" type="CollisionShape2D" parent="CharacterBodyRay2D"]
 position = Vector2(12, 8)
 shape = SubResource("RayShape2D_206f5")
+debug_color = Color(0, 1, 0, 0.0980392)
 
 [node name="RigidDynamicBody2D" type="RigidBody2D" parent="."]
 position = Vector2(250, 460)
@@ -88,6 +93,7 @@ script = ExtResource("6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidDynamicBody2D"]
 shape = SubResource("2")
+debug_color = Color(1, 1, 0, 0.0980392)
 
 [node name="RigidBodyRay2D" type="RigidBody2D" parent="."]
 position = Vector2(250, 460)
@@ -100,18 +106,22 @@ script = ExtResource("6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBodyRay2D"]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_jx2e1")
+debug_color = Color(1, 1, 0, 0.0980392)
 
 [node name="CollisionShapeRay2D" type="CollisionShape2D" parent="RigidBodyRay2D"]
 position = Vector2(0, 8)
 shape = SubResource("RayShape2D_206f5")
+debug_color = Color(1, 1, 0, 0.0980392)
 
 [node name="CollisionShapeRay2DLeft" type="CollisionShape2D" parent="RigidBodyRay2D"]
 position = Vector2(-12, 8)
 shape = SubResource("RayShape2D_206f5")
+debug_color = Color(1, 1, 0, 0.0980392)
 
 [node name="CollisionShapeRay2DRight" type="CollisionShape2D" parent="RigidBodyRay2D"]
 position = Vector2(12, 8)
 shape = SubResource("RayShape2D_206f5")
+debug_color = Color(1, 1, 0, 0.0980392)
 
 [node name="JumpTargetArea2D" type="Area2D" parent="."]
 visible = false
@@ -120,6 +130,7 @@ position = Vector2(810, 390)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpTargetArea2D"]
 shape = SubResource("5")
 disabled = true
+debug_color = Color(1, 0, 1, 0.0980392)
 
 [node name="FallTargetArea2D" type="Area2D" parent="."]
 visible = false
@@ -128,6 +139,7 @@ position = Vector2(250, 480)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallTargetArea2D"]
 shape = SubResource("5")
 disabled = true
+debug_color = Color(1, 0, 1, 0.0980392)
 
 [node name="StaticSceneFlat" parent="." instance=ExtResource("4")]
 position = Vector2(0, 12)

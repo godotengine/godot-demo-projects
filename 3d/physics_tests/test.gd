@@ -71,6 +71,7 @@ func create_rigidbody(shape: Shape3D, pickable: bool = false, transform: Transfo
 	var collision := CollisionShape3D.new()
 	collision.shape = shape
 	collision.transform = transform
+	collision.debug_color = Color.YELLOW
 
 	var body := RigidBody3D.new()
 	body.add_child(collision)

@@ -12,7 +12,7 @@ public partial class Lobby : Control
     private Button _joinButton;
     private Label _statusOk;
     private Label _statusFail;
-    private NetworkedMultiplayerENet _peer;
+    private ENetMultiplayerPeer _peer;
 
     public override void _Ready()
     {
@@ -25,11 +25,11 @@ public partial class Lobby : Control
 
         // Connect all callbacks related to networking.
         // Note: Use snake_case when talking to engine API.
-        GetTree().Connect("network_peer_connected", this, nameof(PlayerConnected));
-        GetTree().Connect("network_peer_disconnected", this, nameof(PlayerDisconnected));
-        GetTree().Connect("connected_to_server", this, nameof(ConnectedOk));
-        GetTree().Connect("connection_failed", this, nameof(ConnectedFail));
-        GetTree().Connect("server_disconnected", this, nameof(ServerDisconnected));
+        GetTree().GetMultiplayer().Connect("peer_connected", new Callable(this, nameof(PlayerConnected)));
+        GetTree().GetMultiplayer().Connect("peer_disconnected", new Callable(this, nameof(PlayerDisconnected)));
+        GetTree().GetMultiplayer().Connect("connected_to_server", new Callable(this, nameof(ConnectedOk)));
+        GetTree().GetMultiplayer().Connect("connection_failed", new Callable(this, nameof(ConnectedFail)));
+        GetTree().GetMultiplayer().Connect("server_disconnected", new Callable(this, nameof(ServerDisconnected)));
     }
 
     // Network callbacks from SceneTree
@@ -41,7 +41,7 @@ public partial class Lobby : Control
         var pong = ResourceLoader.Load<PackedScene>("res://pong.tscn").Instantiate();
 
         // Connect deferred so we can safely erase it from the callback.
-        pong.Connect("GameFinished", this, nameof(EndGame), new Godot.Collections.Array(), (int) ConnectFlags.Deferred);
+        pong.Connect("GameFinished", new Callable(this, nameof(EndGame)), (int) ConnectFlags.Deferred);
 
         GetTree().Root.AddChild(pong);
         Hide();
@@ -49,7 +49,7 @@ public partial class Lobby : Control
 
     private void PlayerDisconnected(int id)
     {
-        EndGame(GetTree().IsNetworkServer() ? "Client disconnected" : "Server disconnected");
+        EndGame(GetTree().GetMultiplayer().IsServer() ? "Client disconnected" : "Server disconnected");
     }
 
     // Callback from SceneTree, only for clients (not server).
@@ -63,7 +63,7 @@ public partial class Lobby : Control
     {
         SetStatus("Couldn't connect", false);
 
-        GetTree().NetworkPeer = null; // Remove peer.
+        GetTree().GetMultiplayer().MultiplayerPeer = null; // Remove peer.
         _hostButton.Disabled = false;
         _joinButton.Disabled = false;
     }
@@ -85,7 +85,7 @@ public partial class Lobby : Control
             Show();
         }
 
-        GetTree().NetworkPeer = null; // Remove peer.
+        GetTree().GetMultiplayer().MultiplayerPeer = null; // Remove peer.
         _hostButton.Disabled = false;
         _joinButton.Disabled = false;
 
@@ -109,8 +109,7 @@ public partial class Lobby : Control
 
     private void OnHostPressed()
     {
-        _peer = new NetworkedMultiplayerENet();
-        _peer.CompressionMode = NetworkedMultiplayerENet.CompressionModeEnum.RangeCoder;
+        _peer = new ENetMultiplayerPeer();
         Error err = _peer.CreateServer(DefaultPort, MaxNumberOfPeers);
         if (err != Error.Ok)
         {
@@ -119,7 +118,9 @@ public partial class Lobby : Control
             return;
         }
 
-        GetTree().NetworkPeer = _peer;
+        _peer.Host.Compress(ENetConnection.CompressionMode.RangeCoder);
+
+        GetTree().GetMultiplayer().MultiplayerPeer = _peer;
         _hostButton.Disabled = true;
         _joinButton.Disabled = true;
         SetStatus("Waiting for player...", true);
@@ -134,10 +135,11 @@ public partial class Lobby : Control
             return;
         }
 
-        _peer = new NetworkedMultiplayerENet();
-        _peer.CompressionMode = NetworkedMultiplayerENet.CompressionModeEnum.RangeCoder;
+        _peer = new ENetMultiplayerPeer();
         _peer.CreateClient(ip, DefaultPort);
-        GetTree().NetworkPeer = _peer;
+        _peer.Host.Compress(ENetConnection.CompressionMode.RangeCoder);
+
+        GetTree().GetMultiplayer().MultiplayerPeer = _peer;
         SetStatus("Connecting...", true);
     }
 }

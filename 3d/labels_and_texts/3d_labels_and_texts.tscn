@@ -6,10 +6,10 @@
 [ext_resource type="FontFile" uid="uid://ceawygbjffpls" path="res://fonts/Xolonium-Regular-Mipmaps.ttf" id="6_ewmy5"]
 [ext_resource type="Texture2D" uid="uid://bpgdsvb3lfg6l" path="res://textures/textmesh_texture.png" id="7_w00di"]
 [ext_resource type="FontFile" uid="uid://cb35jtyk02goi" path="res://fonts/fontello-godot.woff2" id="7_wvpht"]
-[ext_resource type="Shader" path="res://curvature.gdshader" id="8_2gwag"]
-[ext_resource type="Script" path="res://label_3d_layout.gd" id="8_rvw0p"]
+[ext_resource type="Shader" uid="uid://bdi1lue6e88s" path="res://curvature.gdshader" id="8_2gwag"]
+[ext_resource type="Script" uid="uid://pi7aybdqwmdk" path="res://label_3d_layout.gd" id="8_rvw0p"]
 [ext_resource type="Texture2D" uid="uid://chjqieyps5n5r" path="res://textures/checker.png" id="14"]
-[ext_resource type="Script" path="res://3d_labels_and_texts.gd" id="18"]
+[ext_resource type="Script" uid="uid://v0e1avxpe8n7" path="res://3d_labels_and_texts.gd" id="18"]
 
 [sub_resource type="ProceduralSkyMaterial" id="9"]
 
@@ -19,6 +19,7 @@ sky_material = SubResource("9")
 [sub_resource type="Environment" id="11"]
 background_mode = 2
 sky = SubResource("10")
+tonemap_mode = 4
 
 [sub_resource type="Animation" id="Animation_qdnt6"]
 length = 0.001
@@ -54,8 +55,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ecfcr"]
 _data = {
-"RESET": SubResource("Animation_qdnt6"),
-"move": SubResource("12")
+&"RESET": SubResource("Animation_qdnt6"),
+&"move": SubResource("12")
 }
 
 [sub_resource type="StandardMaterial3D" id="13"]
@@ -141,13 +142,13 @@ shading_mode = 0
 albedo_texture = ExtResource("7_w00di")
 texture_filter = 0
 
-[node name="AntiAliasingTestScene" type="WorldEnvironment"]
+[node name="LabelsAndTexts" type="WorldEnvironment"]
 environment = SubResource("11")
 script = ExtResource("18")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ecfcr")
+&"": SubResource("AnimationLibrary_ecfcr")
 }
 autoplay = "move"
 
