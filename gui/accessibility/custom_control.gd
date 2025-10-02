@@ -1,10 +1,10 @@
 extends Control
 
-var item_aes : Array[RID] = [RID(), RID(), RID()]
-var item_names : Array[String] = ["Item 1", "Item 2", "Item 3"]
-var item_values : Array[int] = [0, 0, 0]
-var item_rects : Array[Rect2] = [Rect2(0, 0, 40, 40), Rect2(40, 0, 40, 40), Rect2(80, 0, 40, 40)]
-var selected : int = 0
+var item_aes: Array[RID] = [RID(), RID(), RID()]
+var item_names: Array[String] = ["Item 1", "Item 2", "Item 3"]
+var item_values: Array[int] = [0, 0, 0]
+var item_rects: Array[Rect2] = [Rect2(0, 0, 40, 40), Rect2(40, 0, 40, 40), Rect2(80, 0, 40, 40)]
+var selected: int = 0
 
 # Input:
 
@@ -22,13 +22,13 @@ func _gui_input(event: InputEvent) -> void:
 		accept_event()
 
 	if event.is_action_pressed(&"ui_up"):
-		item_values[selected] = clamp(item_values[selected] - 1, -100, 100)
+		item_values[selected] = clampi(item_values[selected] - 1, -100, 100)
 		queue_redraw()
 		queue_accessibility_update()
 		accept_event()
 
 	if event.is_action_pressed(&"ui_down"):
-		item_values[selected] = clamp(item_values[selected] + 1, -100, 100)
+		item_values[selected] = clampi(item_values[selected] + 1, -100, 100)
 		queue_redraw()
 		queue_accessibility_update()
 		accept_event()
@@ -37,21 +37,21 @@ func _gui_input(event: InputEvent) -> void:
 
 func _accessibility_action_dec(_data: Variant, item: int) -> void:
 	# Numeric value decrement, "data" is not used for this action.
-	item_values[item] = clamp(item_values[item] - 1, -100, 100)
+	item_values[item] = clampi(item_values[item] - 1, -100, 100)
 	queue_redraw()
 	queue_accessibility_update()
 
 
 func _accessibility_action_inc(_data: Variant, item: int) -> void:
 	# Numeric value increment, "data" is not used for this action.
-	item_values[item] = clamp(item_values[item] + 1, -100, 100)
+	item_values[item] = clampi(item_values[item] + 1, -100, 100)
 	queue_redraw()
 	queue_accessibility_update()
 
 
 func _accessibility_action_set_num_value(data: Variant, item: int) -> void:
 	# Numeric value set, "data" is a new value.
-	item_values[item] = clamp(data, -100, 100)
+	item_values[item] = clampi(data, -100, 100)
 	queue_redraw()
 	queue_accessibility_update()
 
@@ -72,13 +72,12 @@ func _notification(what: int) -> void:
 		for i in range(item_aes.size()):
 			item_aes[i] = RID()
 
-
 	if what == NOTIFICATION_ACCESSIBILITY_UPDATE:
 		# Accessibility update handler:
 		#
 		# This function acts as an alternative "draw" for the screen reader, and provides information about this node.
 
-		var ae : RID = get_accessibility_element() # Get handle to the accessibilty element, accessibilty element is created and destroyed automatically.
+		var ae: RID = get_accessibility_element() # Get handle to the accessibilty element, accessibilty element is created and destroyed automatically.
 
 		# Set role of the element.
 		DisplayServer.accessibility_update_set_role(ae, DisplayServer.ROLE_LIST_BOX)
@@ -100,8 +99,8 @@ func _notification(what: int) -> void:
 
 			# Numeric value info for the actions.
 			DisplayServer.accessibility_update_set_num_value(item_aes[i], item_values[i]);
-			DisplayServer.accessibility_update_set_num_range(item_aes[i], -100, 100);
-			DisplayServer.accessibility_update_set_num_step(item_aes[i], 1)
+			DisplayServer.accessibility_update_set_num_range(item_aes[i], -100.0, 100.0);
+			DisplayServer.accessibility_update_set_num_step(item_aes[i], 1.0)
 
 			# Sub-element bounding box, relative to the parent element.
 			DisplayServer.accessibility_update_set_bounds(item_aes[i], item_rects[i])
@@ -119,9 +118,9 @@ func _notification(what: int) -> void:
 func _draw() -> void:
 	# Draw, provided for convenience and NOT required for screen-reader support.
 	for i in range(item_aes.size()):
-		draw_rect(item_rects[selected], Color(0.8, 0.8, 0.8, 0.5), false, 1)
-		draw_string(get_theme_font("font"), item_rects[i].position + Vector2(0, 30), str(item_values[i]), HORIZONTAL_ALIGNMENT_CENTER, 40)
+		draw_rect(item_rects[selected], Color(0.8, 0.8, 0.8, 0.5), false, 1.0)
+		draw_string(get_theme_font("font"), item_rects[i].position + Vector2(0, 30), str(item_values[i]), HORIZONTAL_ALIGNMENT_CENTER, 40.0)
 
 	if has_focus():
-		draw_rect(Rect2(Vector2(), get_size()), Color(0, 0, 1, 0.5), false, 3)
-		draw_rect(item_rects[selected], Color(0, 1, 0, 0.5), false, 2)
+		draw_rect(Rect2(Vector2(), get_size()), Color(0, 0, 1, 0.5), false, 3.0)
+		draw_rect(item_rects[selected], Color(0, 1, 0, 0.5), false, 2.0)
