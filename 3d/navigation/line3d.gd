@@ -1,15 +1,15 @@
+class_name Line3D
 extends MeshInstance3D
 
 
-func _ready():
-	set_mesh(ImmediateMesh.new())
+func _ready() -> void:
+	mesh = ImmediateMesh.new()
 	var material := StandardMaterial3D.new()
-	material.flags_unshaded = true
-	material.albedo_color = Color.WHITE
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	set_material_override(material)
 
 
-func draw_path(path):
+func draw_path(path: PackedVector3Array) -> void:
 	var im: ImmediateMesh = mesh
 	im.clear_surfaces()
 	im.surface_begin(Mesh.PRIMITIVE_POINTS, null)

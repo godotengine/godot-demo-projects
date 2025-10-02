@@ -1,8 +1,7 @@
-extends Test
 class_name TestCharacter
+extends Test
 
-
-enum E_BodyType {
+enum BodyType {
 	CHARACTER_BODY,
 	CHARACTER_BODY_RAY,
 	RIGID_BODY,
@@ -19,31 +18,31 @@ const OPTION_MOVE_CHARACTER_STOP_ON_SLOPE = "Move Options/Use stop on slope (Cha
 const OPTION_MOVE_CHARACTER_FLOOR_ONLY = "Move Options/Move on floor only (Character only)"
 const OPTION_MOVE_CHARACTER_CONSTANT_SPEED = "Move Options/Use constant speed (Character only)"
 
-@export var _initial_velocity = Vector2.ZERO
-@export var _constant_velocity = Vector2.ZERO
-@export var _motion_speed = 400.0
-@export var _gravity_force = 50.0
-@export var _jump_force = 1000.0
-@export var _snap_distance = 0.0
-@export var _floor_max_angle = 45.0
-@export var _body_type: E_BodyType = 0
+@export var _initial_velocity := Vector2.ZERO
+@export var _constant_velocity := Vector2.ZERO
+@export var _motion_speed := 400.0
+@export var _gravity_force := 50.0
+@export var _jump_force := 1000.0
+@export var _snap_distance := 0.0
+@export var _floor_max_angle := 45.0
+@export var _body_type := BodyType.CHARACTER_BODY
 
-@onready var options = $Options
+@onready var options: OptionMenu = $Options
 
-var _use_snap = true
-var _use_stop_on_slope = true
-var _use_floor_only = true
-var _use_constant_speed = false
+var _use_snap := true
+var _use_stop_on_slope := true
+var _use_floor_only := true
+var _use_constant_speed := false
 
 var _body_parent: Node = null
-var _character_body_template = null
-var _character_body_ray_template = null
-var _rigid_body_template = null
-var _rigid_body_ray_template = null
+var _character_body_template: CharacterBody2D = null
+var _character_body_ray_template: CharacterBody2D = null
+var _rigid_body_template: RigidBody2D = null
+var _rigid_body_ray_template: RigidBody2D = null
 var _moving_body: PhysicsBody2D = null
 
 
-func _ready():
+func _ready() -> void:
 	options.option_selected.connect(_on_option_selected)
 	options.option_changed.connect(_on_option_changed)
 
@@ -51,28 +50,28 @@ func _ready():
 	if _character_body_template:
 		_body_parent = _character_body_template.get_parent()
 		_body_parent.remove_child(_character_body_template)
-		var enabled = _body_type == E_BodyType.CHARACTER_BODY
+		var enabled := _body_type == BodyType.CHARACTER_BODY
 		options.add_menu_item(OPTION_OBJECT_TYPE_CHARACTER, true, enabled, true)
 
 	_character_body_ray_template = find_child("CharacterBodyRay2D")
 	if _character_body_ray_template:
 		_body_parent = _character_body_ray_template.get_parent()
 		_body_parent.remove_child(_character_body_ray_template)
-		var enabled = _body_type == E_BodyType.CHARACTER_BODY_RAY
+		var enabled := _body_type == BodyType.CHARACTER_BODY_RAY
 		options.add_menu_item(OPTION_OBJECT_TYPE_CHARACTER_RAY, true, enabled, true)
 
 	_rigid_body_template = find_child("RigidBody2D")
 	if _rigid_body_template:
 		_body_parent = _rigid_body_template.get_parent()
 		_body_parent.remove_child(_rigid_body_template)
-		var enabled = _body_type == E_BodyType.RIGID_BODY
+		var enabled := _body_type == BodyType.RIGID_BODY
 		options.add_menu_item(OPTION_OBJECT_TYPE_RIGID_BODY, true, enabled, true)
 
 	_rigid_body_ray_template = find_child("RigidBodyRay2D")
 	if _rigid_body_ray_template:
 		_body_parent = _rigid_body_ray_template.get_parent()
 		_body_parent.remove_child(_rigid_body_ray_template)
-		var enabled = _body_type == E_BodyType.RIGID_BODY_RAY
+		var enabled := _body_type == BodyType.RIGID_BODY_RAY
 		options.add_menu_item(OPTION_OBJECT_TYPE_RIGID_BODY_RAY, true, enabled, true)
 
 	options.add_menu_item(OPTION_MOVE_CHARACTER_SNAP, true, _use_snap)
@@ -80,15 +79,15 @@ func _ready():
 	options.add_menu_item(OPTION_MOVE_CHARACTER_FLOOR_ONLY, true, _use_floor_only)
 	options.add_menu_item(OPTION_MOVE_CHARACTER_CONSTANT_SPEED, true, _use_constant_speed)
 
-	var floor_slider = find_child("FloorMaxAngle")
+	var floor_slider: Control = find_child("FloorMaxAngle")
 	if floor_slider:
 		floor_slider.get_node("HSlider").value = _floor_max_angle
 
 	_start_test()
 
 
-func _process(_delta):
-	var label_floor = $LabelFloor
+func _process(_delta: float) -> void:
+	var label_floor: Label = $LabelFloor
 	if _moving_body:
 		if _moving_body.is_on_floor():
 			label_floor.text = "ON FLOOR"
@@ -100,8 +99,8 @@ func _process(_delta):
 		label_floor.visible = false
 
 
-func _input(event):
-	var key_event = event as InputEventKey
+func _input(event: InputEvent) -> void:
+	var key_event := event as InputEventKey
 	if key_event and not key_event.pressed:
 		if key_event.keycode == KEY_1:
 			if _character_body_template:
@@ -117,7 +116,7 @@ func _input(event):
 				_on_option_selected(OPTION_OBJECT_TYPE_RIGID_BODY_RAY)
 
 
-func _exit_tree():
+func _exit_tree() -> void:
 	if _character_body_template:
 		_character_body_template.free()
 	if _character_body_ray_template:
@@ -128,23 +127,23 @@ func _exit_tree():
 		_rigid_body_ray_template.free()
 
 
-func _on_option_selected(option):
+func _on_option_selected(option: String) -> void:
 	match option:
 		OPTION_OBJECT_TYPE_CHARACTER:
-			_body_type = E_BodyType.CHARACTER_BODY
+			_body_type = BodyType.CHARACTER_BODY
 			_start_test()
 		OPTION_OBJECT_TYPE_CHARACTER_RAY:
-			_body_type = E_BodyType.CHARACTER_BODY_RAY
+			_body_type = BodyType.CHARACTER_BODY_RAY
 			_start_test()
 		OPTION_OBJECT_TYPE_RIGID_BODY:
-			_body_type = E_BodyType.RIGID_BODY
+			_body_type = BodyType.RIGID_BODY
 			_start_test()
 		OPTION_OBJECT_TYPE_RIGID_BODY_RAY:
-			_body_type = E_BodyType.RIGID_BODY_RAY
+			_body_type = BodyType.RIGID_BODY_RAY
 			_start_test()
 
 
-func _on_option_changed(option, checked):
+func _on_option_changed(option: String, checked: bool) -> void:
 	match option:
 		OPTION_MOVE_CHARACTER_SNAP:
 			_use_snap = checked
@@ -164,8 +163,8 @@ func _on_option_changed(option, checked):
 				_moving_body._constant_speed = _use_constant_speed
 
 
-func _update_floor_max_angle(value):
-	if (value == _floor_max_angle):
+func _update_floor_max_angle(value: float) -> void:
+	if value == _floor_max_angle:
 		return
 
 	_floor_max_angle = value
@@ -173,7 +172,7 @@ func _update_floor_max_angle(value):
 		_moving_body._floor_max_angle = _floor_max_angle
 
 
-func _start_test():
+func _start_test() -> void:
 	cancel_timer()
 
 	if _moving_body:
@@ -181,20 +180,19 @@ func _start_test():
 		_moving_body.queue_free()
 		_moving_body = null
 
-	var test_label = "Testing: "
+	var test_label := "Testing: "
 
-	var template = null
+	var template: PhysicsBody2D = null
 	match _body_type:
-		E_BodyType.CHARACTER_BODY:
+		BodyType.CHARACTER_BODY:
 			template = _character_body_template
-		E_BodyType.CHARACTER_BODY_RAY:
+		BodyType.CHARACTER_BODY_RAY:
 			template = _character_body_ray_template
-		E_BodyType.RIGID_BODY:
+		BodyType.RIGID_BODY:
 			template = _rigid_body_template
-		E_BodyType.RIGID_BODY_RAY:
+		BodyType.RIGID_BODY_RAY:
 			template = _rigid_body_ray_template
 
-	test_label += String(template.name)
 	_moving_body = template.duplicate()
 	_body_parent.add_child(_moving_body)
 

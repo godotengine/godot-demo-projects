@@ -6,9 +6,7 @@ different ways they can be used.
 
 Language: GDScript
 
-Renderer: GLES 3
-
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/523
+Renderer: Forward+
 
 ## How does it work?
 

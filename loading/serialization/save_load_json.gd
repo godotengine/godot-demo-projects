@@ -5,7 +5,6 @@ extends Button
 # and to store Vector2 and other non-JSON types you need to convert
 # them, such as to a String using var_to_str.
 
-
 ## The root game node (so we can get and instance enemies).
 @export var game_node: NodePath
 ## The player node (so we can set/get its health and position).
@@ -13,20 +12,19 @@ extends Button
 
 const SAVE_PATH = "user://save_json.json"
 
-
-func save_game():
+func save_game() -> void:
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 
-	var player = get_node(player_node)
+	var player := get_node(player_node)
 	# JSON doesn't support many of Godot's types such as Vector2.
 	# var_to_str can be used to convert any Variant to a String.
-	var save_dict = {
+	var save_dict := {
 		player = {
 			position = var_to_str(player.position),
 			health = var_to_str(player.health),
-			rotation = var_to_str(player.sprite.rotation)
+			rotation = var_to_str(player.sprite.rotation),
 		},
-		enemies = []
+		enemies = [],
 	}
 
 	for enemy in get_tree().get_nodes_in_group(&"enemy"):
@@ -39,7 +37,7 @@ func save_game():
 	get_node(^"../LoadJSON").disabled = false
 
 
-func load_game():
+func load_game() -> void:
 	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
 	var json := JSON.new()
 	json.parse(file.get_line())
@@ -58,7 +56,7 @@ func load_game():
 	# Ensure the node structure is the same when loading.
 	var game := get_node(game_node)
 
-	for enemy_config in save_dict.enemies:
-		var enemy = preload("res://enemy.tscn").instantiate()
+	for enemy_config: Dictionary in save_dict.enemies:
+		var enemy: Enemy = preload("res://enemy.tscn").instantiate()
 		enemy.position = str_to_var(enemy_config.position)
 		game.add_child(enemy)

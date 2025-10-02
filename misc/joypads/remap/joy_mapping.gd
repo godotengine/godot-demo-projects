@@ -1,9 +1,17 @@
-extends RefCounted
 class_name JoyMapping
+extends RefCounted
 
+enum Type {
+	NONE,
+	BTN,
+	AXIS,
+}
 
-enum TYPE {NONE, BTN, AXIS}
-enum AXIS {FULL, HALF_PLUS, HALF_MINUS}
+enum Axis {
+	FULL,
+	HALF_PLUS,
+	HALF_MINUS,
+}
 
 const PLATFORMS = {
 	# From gamecontrollerdb
@@ -96,42 +104,46 @@ const XBOX_OSX = {
 	"righttrigger":"a5",
 }
 
-var type = TYPE.NONE
-var idx = -1
-var axis = AXIS.FULL
-var inverted = false
+var type := Type.NONE
+var idx := -1
+var axis := Axis.FULL
+var inverted := false
 
-
-func _init(p_type = TYPE.NONE, p_idx = -1, p_axis = AXIS.FULL):
+func _init(p_type: Type = Type.NONE, p_idx: int = -1, p_axis: Axis = Axis.FULL) -> void:
 	type = p_type
 	idx = p_idx
 	axis = p_axis
 
 
-func _to_string():
-	if type == TYPE.NONE:
+func _to_string() -> String:
+	if type == Type.NONE:
 		return ""
-	var ts = "b" if type == TYPE.BTN else "a"
-	var prefix = ""
-	var suffix = "~" if inverted else ""
+
+	var ts := "b" if type == Type.BTN else "a"
+	var prefix := ""
+	var suffix := "~" if inverted else ""
+
 	match axis:
-		AXIS.HALF_PLUS:
+		Axis.HALF_PLUS:
 			prefix = "+"
-		AXIS.HALF_MINUS:
+		Axis.HALF_MINUS:
 			prefix = "-"
+
 	return "%s%s%d%s" % [prefix, ts, idx, suffix]
 
 
-func to_human_string():
-	if type == TYPE.BTN:
+func to_human_string() -> String:
+	if type == Type.BTN:
 		return "Button %d" % idx
-	if type == TYPE.AXIS:
-		var prefix = ""
+
+	if type == Type.AXIS:
+		var prefix := ""
 		match axis:
-			AXIS.HALF_PLUS:
+			Axis.HALF_PLUS:
 				prefix = "(+) "
-			AXIS.HALF_MINUS:
+			Axis.HALF_MINUS:
 				prefix = "(-) "
-		var suffix = " (inverted)" if inverted else ""
+		var suffix := " (inverted)" if inverted else ""
 		return "Axis %s%d%s" % [prefix, idx, suffix]
+
 	return ""

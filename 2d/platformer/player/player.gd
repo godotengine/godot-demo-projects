@@ -1,6 +1,7 @@
-class_name Player extends CharacterBody2D
+class_name Player
+extends CharacterBody2D
 
-
+@warning_ignore("unused_signal")
 signal coin_collected()
 
 const WALK_SPEED = 300.0
@@ -19,7 +20,7 @@ var gravity: int = ProjectSettings.get("physics/2d/default_gravity")
 @onready var shoot_timer := $ShootAnimation as Timer
 @onready var sprite := $Sprite2D as Sprite2D
 @onready var jump_sound := $Jump as AudioStreamPlayer2D
-@onready var gun = sprite.get_node(^"Gun") as Gun
+@onready var gun: Gun = sprite.get_node(^"Gun")
 @onready var camera := $Camera as Camera2D
 var _double_jump_charged := false
 

@@ -1,7 +1,6 @@
 class_name Enemy
 extends RigidBody2D
 
-
 const WALK_SPEED = 50
 
 enum State {

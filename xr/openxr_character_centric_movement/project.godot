@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="OpenXR Character Centric Movement"
+config/tags=PackedStringArray("demo", "official", "xr")
 run/main_scene="res://main.tscn"
-config/features=PackedStringArray("4.2", "GL Compatibility")
+config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
 
 [rendering]
 
@@ -24,4 +29,6 @@ textures/vram_compression/import_etc2_astc=true
 [xr]
 
 openxr/enabled=true
+openxr/foveation_level=3
+openxr/foveation_dynamic=true
 shaders/enabled=true

@@ -2,6 +2,6 @@
 extends Label
 
 
-func _process(_delta):
-	var slider = get_node(^"../HSlider")
+func _process(_delta: float) -> void:
+	var slider: HSlider = get_node(^"../HSlider")
 	text = "%.1f" % slider.value

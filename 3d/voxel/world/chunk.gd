@@ -9,16 +9,18 @@ const TEXTURE_SHEET_WIDTH = 8
 
 const CHUNK_LAST_INDEX = CHUNK_SIZE - 1
 const TEXTURE_TILE_SIZE = 1.0 / TEXTURE_SHEET_WIDTH
+const DIRECTIONS: Array[Vector3i] = [Vector3i.LEFT, Vector3i.RIGHT, Vector3i.DOWN, Vector3i.UP, Vector3i.FORWARD, Vector3i.BACK]
 
-var data = {}
-var chunk_position = Vector3i()
+var data := {}
+var chunk_position := Vector3i()
+var is_initial_mesh_generated: bool = false
 
-var _thread
+var _thread: Thread
 
-@onready var voxel_world = get_parent()
+@onready var voxel_world := get_parent()
 
 
-func _ready():
+func _ready() -> void:
 	transform.origin = Vector3(chunk_position * CHUNK_SIZE)
 	name = str(chunk_position)
 	if Settings.world_type == 0:
@@ -28,12 +30,19 @@ func _ready():
 
 	# We can only add colliders in the main thread due to physics limitations.
 	_generate_chunk_collider()
-	# However, we can use a thread for mesh generation.
+
+
+func try_initial_generate_mesh(all_chunks: Dictionary[Vector3i, Chunk]) -> void:
+	# We can use a thread for mesh generation.
+	for dir in DIRECTIONS:
+		if not all_chunks.has(chunk_position + dir):
+			return
+	is_initial_mesh_generated = true
 	_thread = Thread.new()
 	_thread.start(_generate_chunk_mesh)
 
 
-func regenerate():
+func regenerate() -> void:
 	# Clear out all old nodes first.
 	for c in get_children():
 		remove_child(c)
@@ -44,7 +53,7 @@ func regenerate():
 	_generate_chunk_mesh()
 
 
-func _generate_chunk_collider():
+func _generate_chunk_collider() -> void:
 	if data.is_empty():
 		# Avoid errors caused by StaticBody3D not having colliders.
 		_create_block_collider(Vector3.ZERO)
@@ -55,120 +64,133 @@ func _generate_chunk_collider():
 	# For each block, generate a collider. Ensure collision layers are enabled.
 	collision_layer = 0xFFFFF
 	collision_mask = 0xFFFFF
-	for block_position in data.keys():
-		var block_id = data[block_position]
+	for block_position: Vector3i in data.keys():
+		var block_id: int = data[block_position]
 		if block_id != 27 and block_id != 28:
 			_create_block_collider(block_position)
 
 
-func _generate_chunk_mesh():
+func _generate_chunk_mesh() -> void:
 	if data.is_empty():
 		return
 
-	var surface_tool = SurfaceTool.new()
+	var surface_tool := SurfaceTool.new()
 	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
 
 	# For each block, add data to the SurfaceTool and generate a collider.
-	for block_position in data.keys():
-		var block_id = data[block_position]
+	for block_position: Vector3i in data.keys():
+		var block_id: int = data[block_position]
 		_draw_block_mesh(surface_tool, block_position, block_id)
 
 	# Create the chunk's mesh from the SurfaceTool data.
-	surface_tool.generate_normals()
 	surface_tool.generate_tangents()
 	surface_tool.index()
-	var array_mesh = surface_tool.commit()
-	var mi = MeshInstance3D.new()
+	var array_mesh := surface_tool.commit()
+	var mi := MeshInstance3D.new()
 	mi.mesh = array_mesh
 	mi.material_override = preload("res://world/textures/material.tres")
 	add_child.call_deferred(mi)
 
 
-func _draw_block_mesh(surface_tool, block_sub_position, block_id):
-	var verts = calculate_block_verts(block_sub_position)
-	var uvs = calculate_block_uvs(block_id)
-	var top_uvs = uvs
-	var bottom_uvs = uvs
+func _draw_block_mesh(surface_tool: SurfaceTool, block_sub_position: Vector3i, block_id: int) -> void:
+	var verts := Chunk.calculate_block_verts(block_sub_position)
+	var uvs := Chunk.calculate_block_uvs(block_id)
+	var top_uvs := uvs
+	var bottom_uvs := uvs
 
 	# Bush blocks get drawn in their own special way.
 	if block_id == 27 or block_id == 28:
-		_draw_block_face(surface_tool, [verts[2], verts[0], verts[7], verts[5]], uvs)
-		_draw_block_face(surface_tool, [verts[7], verts[5], verts[2], verts[0]], uvs)
-		_draw_block_face(surface_tool, [verts[3], verts[1], verts[6], verts[4]], uvs)
-		_draw_block_face(surface_tool, [verts[6], verts[4], verts[3], verts[1]], uvs)
+		_draw_block_face(surface_tool, [verts[2], verts[0], verts[7], verts[5]], uvs, Vector3(-1, 0, 1).normalized())
+		_draw_block_face(surface_tool, [verts[7], verts[5], verts[2], verts[0]], uvs, Vector3(1, 0, -1).normalized())
+		_draw_block_face(surface_tool, [verts[3], verts[1], verts[6], verts[4]], uvs, Vector3(1, 0, 1).normalized())
+		_draw_block_face(surface_tool, [verts[6], verts[4], verts[3], verts[1]], uvs, Vector3(-1, 0, -1).normalized())
 		return
 
 	# Allow some blocks to have different top/bottom textures.
 	if block_id == 3: # Grass.
-		top_uvs = calculate_block_uvs(0)
-		bottom_uvs = calculate_block_uvs(2)
+		top_uvs = Chunk.calculate_block_uvs(0)
+		bottom_uvs = Chunk.calculate_block_uvs(2)
 	elif block_id == 5: # Furnace.
-		top_uvs = calculate_block_uvs(31)
+		top_uvs = Chunk.calculate_block_uvs(31)
 		bottom_uvs = top_uvs
 	elif block_id == 12: # Log.
-		top_uvs = calculate_block_uvs(30)
+		top_uvs = Chunk.calculate_block_uvs(30)
 		bottom_uvs = top_uvs
 	elif block_id == 19: # Bookshelf.
-		top_uvs = calculate_block_uvs(4)
+		top_uvs = Chunk.calculate_block_uvs(4)
 		bottom_uvs = top_uvs
 
 	# Main rendering code for normal blocks.
-	var other_block_position = block_sub_position + Vector3i.LEFT
-	var other_block_id = 0
-	if other_block_position.x == -1:
-		other_block_id = voxel_world.get_block_global_position(other_block_position + chunk_position * CHUNK_SIZE)
-	elif data.has(other_block_position):
-		other_block_id = data[other_block_position]
-	if block_id != other_block_id and is_block_transparent(other_block_id):
-		_draw_block_face(surface_tool, [verts[2], verts[0], verts[3], verts[1]], uvs)
+	#var other_block_position := block_sub_position
+	var other_block_id := 0
+	if block_sub_position.x == 0:
+		var other_sub_pos: Vector3i = Vector3i(15, block_sub_position.y, block_sub_position.z)
+		other_block_id = voxel_world.get_block_in_chunk(chunk_position + Vector3i.LEFT, other_sub_pos)
+	else:
+		var other_block_sub_pos: Vector3i = block_sub_position + Vector3i.LEFT
+		if data.has(other_block_sub_pos):
+			other_block_id = data[other_block_sub_pos]
+	if block_id != other_block_id and Chunk.is_block_transparent(other_block_id):
+		_draw_block_face(surface_tool, [verts[2], verts[0], verts[3], verts[1]], uvs, Vector3.LEFT)
 
-	other_block_position = block_sub_position + Vector3i.RIGHT
 	other_block_id = 0
-	if other_block_position.x == CHUNK_SIZE:
-		other_block_id = voxel_world.get_block_global_position(other_block_position + chunk_position * CHUNK_SIZE)
-	elif data.has(other_block_position):
-		other_block_id = data[other_block_position]
-	if block_id != other_block_id and is_block_transparent(other_block_id):
-		_draw_block_face(surface_tool, [verts[7], verts[5], verts[6], verts[4]], uvs)
+	if block_sub_position.x == CHUNK_SIZE - 1:
+		var other_sub_pos: Vector3i = Vector3i(0, block_sub_position.y, block_sub_position.z)
+		other_block_id = voxel_world.get_block_in_chunk(chunk_position + Vector3i.RIGHT, other_sub_pos)
+	else:
+		var other_block_sub_pos: Vector3i = block_sub_position + Vector3i.RIGHT
+		if data.has(other_block_sub_pos):
+			other_block_id = data[other_block_sub_pos]
+	if block_id != other_block_id and Chunk.is_block_transparent(other_block_id):
+		_draw_block_face(surface_tool, [verts[7], verts[5], verts[6], verts[4]], uvs, Vector3.RIGHT)
 
-	other_block_position = block_sub_position + Vector3i.FORWARD
 	other_block_id = 0
-	if other_block_position.z == -1:
-		other_block_id = voxel_world.get_block_global_position(other_block_position + chunk_position * CHUNK_SIZE)
-	elif data.has(other_block_position):
-		other_block_id = data[other_block_position]
-	if block_id != other_block_id and is_block_transparent(other_block_id):
-		_draw_block_face(surface_tool, [verts[6], verts[4], verts[2], verts[0]], uvs)
+	if block_sub_position.z == 0:
+		var other_sub_pos: Vector3i = Vector3i(block_sub_position.x, block_sub_position.y, CHUNK_SIZE - 1)
+		other_block_id = voxel_world.get_block_in_chunk(chunk_position + Vector3i.FORWARD, other_sub_pos)
+	else:
+		var other_block_sub_pos: Vector3i = block_sub_position + Vector3i.FORWARD
+		if data.has(other_block_sub_pos):
+			other_block_id = data[other_block_sub_pos]
+	if block_id != other_block_id and Chunk.is_block_transparent(other_block_id):
+		_draw_block_face(surface_tool, [verts[6], verts[4], verts[2], verts[0]], uvs, Vector3.FORWARD)
 
-	other_block_position = block_sub_position + Vector3i.BACK
 	other_block_id = 0
-	if other_block_position.z == CHUNK_SIZE:
-		other_block_id = voxel_world.get_block_global_position(other_block_position + chunk_position * CHUNK_SIZE)
-	elif data.has(other_block_position):
-		other_block_id = data[other_block_position]
-	if block_id != other_block_id and is_block_transparent(other_block_id):
-		_draw_block_face(surface_tool, [verts[3], verts[1], verts[7], verts[5]], uvs)
+	if block_sub_position.z == CHUNK_SIZE - 1:
+		var other_sub_pos: Vector3i = Vector3i(block_sub_position.x, block_sub_position.y, 0)
+		other_block_id = voxel_world.get_block_in_chunk(chunk_position + Vector3i.BACK, other_sub_pos)
+	else:
+		var other_block_sub_pos: Vector3i = block_sub_position + Vector3i.BACK
+		if data.has(other_block_sub_pos):
+			other_block_id = data[other_block_sub_pos]
+	if block_id != other_block_id and Chunk.is_block_transparent(other_block_id):
+		_draw_block_face(surface_tool, [verts[3], verts[1], verts[7], verts[5]], uvs, Vector3.BACK)
 
-	other_block_position = block_sub_position + Vector3i.DOWN
 	other_block_id = 0
-	if other_block_position.y == -1:
-		other_block_id = voxel_world.get_block_global_position(other_block_position + chunk_position * CHUNK_SIZE)
-	elif data.has(other_block_position):
-		other_block_id = data[other_block_position]
-	if block_id != other_block_id and is_block_transparent(other_block_id):
-		_draw_block_face(surface_tool, [verts[4], verts[5], verts[0], verts[1]], bottom_uvs)
+	if block_sub_position.y == 0:
+		var other_sub_pos: Vector3i = Vector3i(block_sub_position.x, CHUNK_SIZE - 1, block_sub_position.z)
+		other_block_id = voxel_world.get_block_in_chunk(chunk_position + Vector3i.DOWN, other_sub_pos)
+	else:
+		var other_block_sub_pos: Vector3i = block_sub_position + Vector3i.DOWN
+		if data.has(other_block_sub_pos):
+			other_block_id = data[other_block_sub_pos]
+	if block_id != other_block_id and Chunk.is_block_transparent(other_block_id):
+		_draw_block_face(surface_tool, [verts[4], verts[5], verts[0], verts[1]], bottom_uvs, Vector3.DOWN)
 
-	other_block_position = block_sub_position + Vector3i.UP
 	other_block_id = 0
-	if other_block_position.y == CHUNK_SIZE:
-		other_block_id = voxel_world.get_block_global_position(other_block_position + chunk_position * CHUNK_SIZE)
-	elif data.has(other_block_position):
-		other_block_id = data[other_block_position]
-	if block_id != other_block_id and is_block_transparent(other_block_id):
-		_draw_block_face(surface_tool, [verts[2], verts[3], verts[6], verts[7]], top_uvs)
+	if block_sub_position.y == CHUNK_SIZE - 1:
+		var other_sub_pos: Vector3i = Vector3i(block_sub_position.x, 0, block_sub_position.z)
+		other_block_id = voxel_world.get_block_in_chunk(chunk_position + Vector3i.UP, other_sub_pos)
+	else:
+		var other_block_sub_pos: Vector3i = block_sub_position + Vector3i.UP
+		if data.has(other_block_sub_pos):
+			other_block_id = data[other_block_sub_pos]
+	if block_id != other_block_id and Chunk.is_block_transparent(other_block_id):
+		_draw_block_face(surface_tool, [verts[2], verts[3], verts[6], verts[7]], top_uvs, Vector3.UP)
 
 
-func _draw_block_face(surface_tool: SurfaceTool, verts, uvs):
+func _draw_block_face(surface_tool: SurfaceTool, verts: Array[Vector3], uvs: Array[Vector2], normal: Vector3) -> void:
+	surface_tool.set_normal(normal)
 	surface_tool.set_uv(uvs[1]); surface_tool.add_vertex(verts[1])
 	surface_tool.set_uv(uvs[2]); surface_tool.add_vertex(verts[2])
 	surface_tool.set_uv(uvs[3]); surface_tool.add_vertex(verts[3])
@@ -178,18 +200,19 @@ func _draw_block_face(surface_tool: SurfaceTool, verts, uvs):
 	surface_tool.set_uv(uvs[0]); surface_tool.add_vertex(verts[0])
 
 
-func _create_block_collider(block_sub_position):
-	var collider = CollisionShape3D.new()
+func _create_block_collider(block_sub_position: Vector3) -> void:
+	var collider := CollisionShape3D.new()
 	collider.shape = BoxShape3D.new()
 	collider.shape.extents = Vector3.ONE / 2
 	collider.transform.origin = Vector3(block_sub_position) + Vector3.ONE / 2
 	add_child(collider)
 
 
-static func calculate_block_uvs(block_id):
+static func calculate_block_uvs(block_id: int) -> Array[Vector2]:
 	# This method only supports square texture sheets.
-	var row = block_id / TEXTURE_SHEET_WIDTH
-	var col = block_id % TEXTURE_SHEET_WIDTH
+	@warning_ignore("integer_division")
+	var row := block_id / TEXTURE_SHEET_WIDTH
+	var col := block_id % TEXTURE_SHEET_WIDTH
 
 	return [
 		# Godot 4 has a weird bug where there are seams at the edge
@@ -201,7 +224,7 @@ static func calculate_block_uvs(block_id):
 	]
 
 
-static func calculate_block_verts(block_position):
+static func calculate_block_verts(block_position: Vector3) -> Array[Vector3]:
 	return [
 		Vector3(block_position.x, block_position.y, block_position.z),
 		Vector3(block_position.x, block_position.y, block_position.z + 1),
@@ -214,5 +237,5 @@ static func calculate_block_verts(block_position):
 	]
 
 
-static func is_block_transparent(block_id):
+static func is_block_transparent(block_id: int) -> int:
 	return block_id == 0 or (block_id > 25 and block_id < 30)

@@ -9,7 +9,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/117
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2722
 
 ## Screenshots
 

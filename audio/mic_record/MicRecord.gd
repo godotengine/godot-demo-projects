@@ -1,19 +1,19 @@
 extends Control
 
-var effect  # See AudioEffect in docs
-var recording  # See AudioStreamSample in docs
+var effect: AudioEffect
+var recording: AudioStreamWAV
 
 var stereo := true
-var mix_rate := 44100  # This is the default mix rate on recordings
-var format := 1  # This equals to the default format: 16 bits
+var mix_rate := 44100  # This is the default mix rate on recordings.
+var format := AudioStreamWAV.FORMAT_16_BITS  # This is the default format on recordings.
 
 
-func _ready():
-	var idx = AudioServer.get_bus_index("Record")
+func _ready() -> void:
+	var idx := AudioServer.get_bus_index("Record")
 	effect = AudioServer.get_bus_effect(idx, 0)
 
 
-func _on_RecordButton_pressed():
+func _on_record_button_pressed() -> void:
 	if effect.is_recording_active():
 		recording = effect.get_recording()
 		$PlayButton.disabled = false
@@ -32,18 +32,18 @@ func _on_RecordButton_pressed():
 		$Status.text = "Status: Recording..."
 
 
-func _on_PlayButton_pressed():
+func _on_play_button_pressed() -> void:
 	print_rich("\n[b]Playing recording:[/b] %s" % recording)
 	print_rich("[b]Format:[/b] %s" % ("8-bit uncompressed" if recording.format == 0 else "16-bit uncompressed" if recording.format == 1 else "IMA ADPCM compressed"))
 	print_rich("[b]Mix rate:[/b] %s Hz" % recording.mix_rate)
 	print_rich("[b]Stereo:[/b] %s" % ("Yes" if recording.stereo else "No"))
-	var data = recording.get_data()
+	var data := recording.get_data()
 	print_rich("[b]Size:[/b] %s bytes" % data.size())
 	$AudioStreamPlayer.stream = recording
 	$AudioStreamPlayer.play()
 
 
-func _on_Play_Music_pressed():
+func _on_play_music_pressed() -> void:
 	if $AudioStreamPlayer2.playing:
 		$AudioStreamPlayer2.stop()
 		$PlayMusic.text = "Play Music"
@@ -52,45 +52,48 @@ func _on_Play_Music_pressed():
 		$PlayMusic.text = "Stop Music"
 
 
-func _on_SaveButton_pressed():
-	var save_path = $SaveButton/Filename.text
+func _on_save_button_pressed() -> void:
+	var save_path: String = $SaveButton/Filename.text
 	recording.save_to_wav(save_path)
 	$Status.text = "Status: Saved WAV file to: %s\n(%s)" % [save_path, ProjectSettings.globalize_path(save_path)]
 
 
-func _on_MixRateOptionButton_item_selected(index: int) -> void:
-	if index == 0:
-		mix_rate = 11025
-	elif index == 1:
-		mix_rate = 16000
-	elif index == 2:
-		mix_rate = 22050
-	elif index == 3:
-		mix_rate = 32000
-	elif index == 4:
-		mix_rate = 44100
-	elif index == 5:
-		mix_rate = 48000
+func _on_mix_rate_option_button_item_selected(index: int) -> void:
+	match index:
+		0:
+			mix_rate = 11025
+		1:
+			mix_rate = 16000
+		2:
+			mix_rate = 22050
+		3:
+			mix_rate = 32000
+		4:
+			mix_rate = 44100
+		5:
+			mix_rate = 48000
 	if recording != null:
 		recording.set_mix_rate(mix_rate)
 
 
-func _on_FormatOptionButton_item_selected(index: int) -> void:
-	if index == 0:
-		format = AudioStreamWAV.FORMAT_8_BITS
-	elif index == 1:
-		format = AudioStreamWAV.FORMAT_16_BITS
-	elif index == 2:
-		format = AudioStreamWAV.FORMAT_IMA_ADPCM
+func _on_format_option_button_item_selected(index: int) -> void:
+	match index:
+		0:
+			format = AudioStreamWAV.FORMAT_8_BITS
+		1:
+			format = AudioStreamWAV.FORMAT_16_BITS
+		2:
+			format = AudioStreamWAV.FORMAT_IMA_ADPCM
 	if recording != null:
 		recording.set_format(format)
 
 
-func _on_StereoCheckButton_toggled(button_pressed: bool) -> void:
+func _on_stereo_check_button_toggled(button_pressed: bool) -> void:
 	stereo = button_pressed
 	if recording != null:
 		recording.set_stereo(stereo)
 
 
-func _on_open_user_folder_button_pressed():
+func _on_open_user_folder_button_pressed() -> void:
 	OS.shell_open(ProjectSettings.globalize_path("user://"))
+

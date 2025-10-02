@@ -45,6 +45,8 @@ Language: GDScript
 
 Renderer: Compatibility
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2771
+
 ## Technical notes
 
 The demo works with the following project settings:

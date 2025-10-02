@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpdcq55mdqx5o"]
+
+[ext_resource type="FontFile" uid="uid://jrduhl6723o1" path="res://jetbrains_mono_regular.woff2" id="1_c73ru"]
+[ext_resource type="FontFile" uid="uid://g800tr1mba1m" path="res://jetbrains_mono_bold.woff2" id="2_nsaj1"]
+[ext_resource type="Script" uid="uid://cgdbfnmbujg61" path="res://custom_logger_ui.gd" id="3_5eal2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c73ru"]
+content_margin_left = 20.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 10.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 1024
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -194.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c73ru")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_c73ru")
+theme_override_fonts/bold_font = ExtResource("2_nsaj1")
+theme_override_fonts/mono_font = ExtResource("1_c73ru")
+bbcode_enabled = true
+scroll_following = true
+script = ExtResource("3_5eal2")

@@ -6,13 +6,12 @@ enum SpeedUnit {
 	MILES_PER_HOUR,
 }
 
-@export var speed_unit: SpeedUnit = SpeedUnit.METERS_PER_SECOND
-
 var gradient := Gradient.new()
 var car_body: VehicleBody3D
 
+@export var speed_unit: SpeedUnit = SpeedUnit.METERS_PER_SECOND
 
-func _ready():
+func _ready() -> void:
 	# The start and end points (offset 0.0 and 1.0) are already defined in a Gradient
 	# resource on creation. Override their colors and only create one new point.
 	gradient.set_color(0, Color(0.7, 0.9, 1.0))
@@ -20,7 +19,7 @@ func _ready():
 	gradient.add_point(0.2, Color(1.0, 1.0, 1.0))
 
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	var speed := car_body.linear_velocity.length()
 	if speed_unit == SpeedUnit.METERS_PER_SECOND:
 		text = "Speed: " + ("%.1f" % speed) + " m/s"
@@ -35,5 +34,5 @@ func _process(_delta):
 	add_theme_color_override("font_color", gradient.sample(remap(car_body.linear_velocity.length(), 0.0, 30.0, 0.0, 1.0)))
 
 
-func _on_spedometer_pressed():
+func _on_spedometer_pressed() -> void:
 	speed_unit = ((speed_unit + 1) % SpeedUnit.size()) as SpeedUnit

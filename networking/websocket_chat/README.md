@@ -6,7 +6,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/538
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2799
 
 ## Screenshots
 

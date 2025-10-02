@@ -1,12 +1,12 @@
 [gd_scene load_steps=16 format=3 uid="uid://dviwgv2ty8v6u"]
 
-[ext_resource type="Script" path="res://player.gd" id="1"]
+[ext_resource type="Script" uid="uid://cuf0ipqplpy1q" path="res://player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bsqovikudjr0q" path="res://charwalk.png" id="2"]
 [ext_resource type="FontFile" uid="uid://knb8u535cfkw" path="res://montserrat.otf" id="3"]
-[ext_resource type="Script" path="res://player_controls.gd" id="4_k1vfr"]
+[ext_resource type="Script" uid="uid://cgb4kyp43ripi" path="res://player_controls.gd" id="4_k1vfr"]
 
 [sub_resource type="CircleShape2D" id="1"]
-radius = 20.0
+radius = 16.0
 
 [sub_resource type="Animation" id="2"]
 resource_name = "standing"
@@ -134,12 +134,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yb83i"]
 _data = {
-"standing": SubResource("2"),
-"stunned": SubResource("3"),
-"walk_down": SubResource("4"),
-"walk_left": SubResource("5"),
-"walk_right": SubResource("6"),
-"walk_up": SubResource("7")
+&"standing": SubResource("2"),
+&"stunned": SubResource("3"),
+&"walk_down": SubResource("4"),
+&"walk_left": SubResource("5"),
+&"walk_right": SubResource("6"),
+&"walk_up": SubResource("7")
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_5huhx"]
@@ -149,22 +149,18 @@ outline_color = Color(0, 0, 0, 1)
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_sh64w"]
 properties/0/path = NodePath(".:synced_position")
 properties/0/spawn = true
-properties/0/sync = true
-properties/0/watch = false
+properties/0/replication_mode = 1
 properties/1/path = NodePath("label:text")
 properties/1/spawn = true
-properties/1/sync = false
-properties/1/watch = false
+properties/1/replication_mode = 0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_w53uu"]
 properties/0/path = NodePath(".:motion")
 properties/0/spawn = true
-properties/0/sync = true
-properties/0/watch = false
+properties/0/replication_mode = 1
 properties/1/path = NodePath(".:bombing")
 properties/1/spawn = true
-properties/1/sync = true
-properties/1/watch = false
+properties/1/replication_mode = 1
 
 [node name="player" type="CharacterBody2D"]
 z_index = 10

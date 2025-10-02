@@ -5,12 +5,14 @@ This is based on the [Origin centric solution as explained in the room scale man
 
 Language: GDScript
 
-Renderer: compatibility
+Renderer: Compatibility
+
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2810
 
 ## How does it work?
 
 With modern VR equipment the user is able to move around a large playspace.
-This is often refered to as roomscale VR.
+This is often referred to as roomscale VR.
 The position of the headset and controllers are tracked in reference to a fixed point within this playspace.
 This is often a point on the ground at the center of the playspace mapped out by the user when setting up their guardian.
 

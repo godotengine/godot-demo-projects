@@ -22,8 +22,7 @@ background_mode = 2
 sky = SubResource("1")
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_sky_contribution = 0.5
-tonemap_mode = 3
-tonemap_white = 6.0
+tonemap_mode = 4
 glow_levels/7 = 1.0
 glow_strength = 0.79
 glow_bloom = 1.0
@@ -57,7 +56,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uxnju"]
 _data = {
-"updown1": SubResource("2")
+&"updown1": SubResource("2")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6xp3u"]
@@ -85,8 +84,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o6d7g"]
 _data = {
-"side": SubResource("3"),
-"updown1": SubResource("2")
+&"side": SubResource("3"),
+&"updown1": SubResource("2")
 }
 
 [sub_resource type="BoxShape3D" id="4"]
@@ -104,7 +103,7 @@ data = {
 environment = SubResource("Environment_qep2e")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.766045, 0.45452, -0.45452, 0, 0.707107, 0.707107, 0.642788, 0.541676, -0.541675, 0, 5, 0)
+transform = Transform3D(-0.436154, 0.776648, -0.454519, 0.353553, 0.612372, 0.707107, 0.827508, 0.147711, -0.541675, 0, 5, 0)
 light_energy = 1.3
 shadow_enabled = true
 shadow_bias = 0.032
@@ -132,7 +131,7 @@ shape = SubResource("BoxShape3D_s7fhl")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Elevator1"]
 callback_mode_process = 0
 libraries = {
-"": SubResource("AnimationLibrary_uxnju")
+&"": SubResource("AnimationLibrary_uxnju")
 }
 autoplay = "updown1"
 
@@ -149,7 +148,7 @@ shape = SubResource("BoxShape3D_s7fhl")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Elevator2"]
 callback_mode_process = 0
 libraries = {
-"": SubResource("AnimationLibrary_o6d7g")
+&"": SubResource("AnimationLibrary_o6d7g")
 }
 autoplay = "side"
 

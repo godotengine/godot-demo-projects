@@ -1,5 +1,5 @@
-class_name Player extends CharacterBody2D
-
+class_name Player
+extends CharacterBody2D
 
 ## Movement speed in pixels per second.
 const MOVEMENT_SPEED = 240.0
@@ -18,8 +18,7 @@ var motion := Vector2()
 @onready var progress_bar := $ProgressBar as ProgressBar
 @onready var sprite := $Sprite2D as Sprite2D
 
-
-func _process(_delta: float):
+func _process(_delta: float) -> void:
 	velocity = Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
 	if velocity.length_squared() > 1.0:
 		velocity = velocity.normalized()
@@ -27,7 +26,7 @@ func _process(_delta: float):
 	move_and_slide()
 
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"move_left"):
 		sprite.rotation = PI / 2
 	elif event.is_action_pressed(&"move_right"):

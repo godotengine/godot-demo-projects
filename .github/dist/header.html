@@ -4,13 +4,15 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Godot demos exported to HTML5</title>
+	<title>Official Godot demos exported to Web</title>
 	<style>
 		:root {
 			--background-color: #fff;
 			--text-color: #222;
 			--link-color: hsl(220, 100%, 45%);
+			--link-visited-color: hsl(270, 100%, 55%);
 			--link-underline-color: hsla(220, 100%, 45%, 0.3);
+			--link-underline-visited-color: hsla(270, 100%, 45%, 0.3);
 		}
 
 		@media (prefers-color-scheme: dark) {
@@ -18,7 +20,9 @@
 				--background-color: #222;
 				--text-color: #eee;
 				--link-color: hsl(200, 100%, 70%);
+				--link-visited-color: hsl(250, 100%, 80%);
 				--link-underline-color: hsla(200, 100%, 70%, 0.3);
+				--link-underline-visited-color: hsla(250, 100%, 70%, 0.3);
 			}
 		}
 
@@ -50,6 +54,11 @@
 			color: var(--link-color);
 			text-decoration-color: var(--link-underline-color);
 			text-decoration-thickness: 0.125rem;
+		}
+
+		a:visited {
+			color: var(--link-visited-color);
+			text-decoration-color: var(--link-visited-color);
 		}
 
 		a:hover {
@@ -88,6 +97,9 @@
 			margin: 20px 10px;
 		}
 
+		.unsupported-demos li {
+			margin-bottom: 1.5rem;
+		}
 	</style>
 </head>
 
@@ -96,12 +108,12 @@
 	<p>
 		This page lists
 		<a href="https://github.com/godotengine/godot-demo-projects">official Godot demo projects</a>
-		exported to HTML5 for testing purposes. These projects are deployed automatically
+		exported to the web for testing purposes. These projects are deployed automatically
 		on every commit on the <code>master</code> branch of the repository.
 	</p>
 	<p>
-		The HTML5 exports on this page are provided for demonstration purposes only.
-		Some of these demos may not function or render correctly on HTML5,
+		The web exports on this page are provided for demonstration purposes only.
+		Some of these demos may not function or render correctly on the web platform,
 		especially on mobile devices.
 		For best performance, it's recommended to
 		<a href="https://godotengine.org/download">download</a> a native editor
@@ -110,7 +122,7 @@
 	<p>
 		See the
 		<a href="https://docs.godotengine.org/en/stable/getting_started/workflow/export/exporting_for_web.html">Exporting for the Web</a>
-		documentation for information on exporting your own projects to HTML5.
+		documentation for information on exporting your own projects to the web.
 	</p>
 
 	<h2>List of demos</h2>

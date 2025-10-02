@@ -1,12 +1,12 @@
 [gd_scene load_steps=15 format=3 uid="uid://bqmku5ewlo6j5"]
 
-[ext_resource type="Script" path="res://tests/functional/test_character.gd" id="1"]
+[ext_resource type="Script" uid="uid://bunx01rkxycln" path="res://tests/functional/test_character.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://blh3twy74kbkv" path="res://tests/test_options.tscn" id="3"]
-[ext_resource type="Script" path="res://utils/slider.gd" id="3_cd5g0"]
+[ext_resource type="Script" uid="uid://bbj7imitin8ud" path="res://utils/slider.gd" id="3_cd5g0"]
 [ext_resource type="PackedScene" uid="uid://cx2q80okt25o1" path="res://tests/static_scene_flat.tscn" id="4"]
-[ext_resource type="Script" path="res://utils/label_slider_value.gd" id="4_eoplu"]
-[ext_resource type="Script" path="res://utils/rigidbody_controller.gd" id="6"]
-[ext_resource type="Script" path="res://utils/characterbody_controller.gd" id="7"]
+[ext_resource type="Script" uid="uid://de1e0s7nie4wc" path="res://utils/label_slider_value.gd" id="4_eoplu"]
+[ext_resource type="Script" uid="uid://3kutyof2jcdh" path="res://utils/rigidbody_controller.gd" id="6"]
+[ext_resource type="Script" uid="uid://gajv1ool1il5" path="res://utils/characterbody_controller.gd" id="7"]
 
 [sub_resource type="CapsuleShape2D" id="3"]
 radius = 15.0
@@ -70,15 +70,10 @@ alignment = 2
 
 [node name="Label" type="Label" parent="FloorMaxAngle"]
 layout_mode = 2
-offset_right = 123.0
-offset_bottom = 26.0
 text = "Floor Max angle"
 
 [node name="HSlider" type="HSlider" parent="FloorMaxAngle"]
 layout_mode = 2
-offset_left = 143.0
-offset_right = 419.0
-offset_bottom = 16.0
 size_flags_horizontal = 3
 max_value = 180.0
 script = ExtResource("3_cd5g0")
@@ -86,9 +81,6 @@ snap_step = 5.0
 
 [node name="LabelValue" type="Label" parent="FloorMaxAngle"]
 layout_mode = 2
-offset_left = 439.0
-offset_right = 462.0
-offset_bottom = 26.0
 text = "0.0"
 script = ExtResource("4_eoplu")
 
@@ -99,6 +91,7 @@ script = ExtResource("7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("3")
+debug_color = Color(0, 1, 0, 0.0980392)
 
 [node name="CharacterBodyRay2D" type="CharacterBody2D" parent="."]
 position = Vector2(100, 450)
@@ -108,37 +101,42 @@ script = ExtResource("7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBodyRay2D"]
 position = Vector2(0, -16)
 shape = SubResource("CircleShape2D_llvur")
+debug_color = Color(0, 1, 0, 0.0980392)
 
 [node name="CollisionShapeRay2D" type="CollisionShape2D" parent="CharacterBodyRay2D"]
 position = Vector2(0, -16)
 shape = SubResource("RayShape2D_3lv1w")
+debug_color = Color(0, 1, 0, 0.0980392)
 
 [node name="RigidDynamicBody2D" type="RigidBody2D" parent="."]
 position = Vector2(100, 450)
 collision_mask = 2147483649
 physics_material_override = SubResource("1")
-contact_monitor = true
 lock_rotation = true
+contact_monitor = true
 script = ExtResource("6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidDynamicBody2D"]
 shape = SubResource("2")
+debug_color = Color(1, 1, 0, 0.0980392)
 
 [node name="RigidBodyRay2D" type="RigidBody2D" parent="."]
 position = Vector2(100, 450)
 collision_mask = 2147483649
 physics_material_override = SubResource("1")
-contact_monitor = true
 lock_rotation = true
+contact_monitor = true
 script = ExtResource("6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBodyRay2D"]
 position = Vector2(-7.62939e-06, -16)
 shape = SubResource("CircleShape2D_dr08f")
+debug_color = Color(1, 1, 0, 0.0980392)
 
 [node name="CollisionShapeRay2D" type="CollisionShape2D" parent="RigidBodyRay2D"]
 position = Vector2(-7.62939e-06, -16)
 shape = SubResource("RayShape2D_w83f0")
+debug_color = Color(1, 1, 0, 0.0980392)
 
 [node name="StaticSceneFlat" parent="." instance=ExtResource("4")]
 position = Vector2(0, 12)

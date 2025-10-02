@@ -8,6 +8,8 @@ Language: GDScript
 
 Renderer: Compatibility
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2713
+
 ## Screenshots
 
 ![Screenshot](screenshots/fake_wall.png)

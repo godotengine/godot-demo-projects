@@ -11,7 +11,7 @@ Language: This demo contains no code.
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/521
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2770
 
 ## Screenshots
 

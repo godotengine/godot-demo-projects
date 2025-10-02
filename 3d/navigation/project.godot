@@ -17,13 +17,22 @@ The navigation path is drawn using a line.
 Code is provided for polyline following in 3D."
 config/tags=PackedStringArray("3d", "ai", "demo", "official")
 run/main_scene="res://navmesh.tscn"
-config/features=PackedStringArray("4.2")
+config/features=PackedStringArray("4.4")
 config/icon="res://icon.webp"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
 
 [physics]
 
 common/physics_ticks_per_second=120
+3d/physics_engine="Jolt Physics"
+common/physics_interpolation=true
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
 anti_aliasing/quality/msaa_3d=2

@@ -1,8 +1,9 @@
 extends Camera3D
 
-
 const MAX_HEIGHT = 2.0
 const MIN_HEIGHT = 0.0
+
+var collision_exception: Array[RID] = []
 
 @export var min_distance := 0.5
 @export var max_distance := 3.5
@@ -10,24 +11,23 @@ const MIN_HEIGHT = 0.0
 @export var autoturn_ray_aperture := 25.0
 @export var autoturn_speed := 50.0
 
-var collision_exception: Array[RID] = []
-
-
-func _ready():
+func _ready() -> void:
 	# Find collision exceptions for ray.
+	# This is done to prevent the player and enemies from colliding
+	# with the camera.
 	var node: Node = self
 	while is_instance_valid(node):
-		if node is RigidBody3D:
+		if node is RigidBody3D or node is CharacterBody3D:
 			collision_exception.append(node.get_rid())
 			break
 		else:
 			node = node.get_parent()
-	set_physics_process(true)
+
 	# This detaches the camera transform from the parent spatial node.
 	set_as_top_level(true)
 
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	var target := (get_parent() as Node3D).get_global_transform().origin
 	var pos := get_global_transform().origin
 
@@ -47,22 +47,22 @@ func _physics_process(delta: float):
 	# Check autoturn.
 	var ds := PhysicsServer3D.space_get_direct_state(get_world_3d().get_space())
 
-	var col_left = ds.intersect_ray(PhysicsRayQueryParameters3D.create(
+	var col_left := ds.intersect_ray(PhysicsRayQueryParameters3D.create(
 			target,
 			target + Basis(Vector3.UP, deg_to_rad(autoturn_ray_aperture)) * (difference),
-			0xFFFFFFFF,
+			0xffffffff,
 			collision_exception
 	))
-	var col = ds.intersect_ray(PhysicsRayQueryParameters3D.create(
+	var col := ds.intersect_ray(PhysicsRayQueryParameters3D.create(
 			target,
 			target + difference,
-			0xFFFFFFFF,
+			0xffffffff,
 			collision_exception
 	))
-	var col_right = ds.intersect_ray(PhysicsRayQueryParameters3D.create(
+	var col_right := ds.intersect_ray(PhysicsRayQueryParameters3D.create(
 			target,
 			target + Basis(Vector3.UP, deg_to_rad(-autoturn_ray_aperture)) * (difference),
-			0xFFFFFFFF,
+			0xffffffff,
 			collision_exception
 	))
 

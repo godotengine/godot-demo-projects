@@ -4,7 +4,6 @@ extends Button
 # It can even store Objects, but be extra careful where you deserialize them
 # from, because they can include (potentially malicious) scripts.
 
-
 const SAVE_PATH = "user://save_config_file.ini"
 
 ## The root game node (so we can get and instance enemies).
@@ -13,7 +12,7 @@ const SAVE_PATH = "user://save_config_file.ini"
 @export var player_node: NodePath
 
 
-func save_game():
+func save_game() -> void:
 	var config := ConfigFile.new()
 
 	var player := get_node(player_node) as Player
@@ -30,10 +29,10 @@ func save_game():
 
 	config.save(SAVE_PATH)
 
-	(get_node(^"../LoadConfigFile") as Button).disabled = false
+	($"../LoadConfigFile" as Button).disabled = false
 
 
-func load_game():
+func load_game() -> void:
 	var config := ConfigFile.new()
 	config.load(SAVE_PATH)
 
@@ -45,10 +44,10 @@ func load_game():
 	# Remove existing enemies before adding new ones.
 	get_tree().call_group("enemy", "queue_free")
 
-	var enemies = config.get_value("enemies", "enemies")
-	var game = get_node(game_node)
+	var enemies: Array = config.get_value("enemies", "enemies")
+	var game := get_node(game_node)
 
-	for enemy_config in enemies:
+	for enemy_config: Dictionary in enemies:
 		var enemy := preload("res://enemy.tscn").instantiate() as Enemy
 		enemy.position = enemy_config.position
 		game.add_child(enemy)

@@ -6,11 +6,11 @@ for game development in Godot, including
 
 Language: [C#](https://docs.godotengine.org/en/latest/tutorials/scripting/c_sharp/index.html)
 
-Renderer: GLES 2
+Renderer: Compatibility
 
 Note: There is a GDScript version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/2d/pong).
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/535
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2796
 
 ## How does it work?
 

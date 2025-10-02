@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bjgad00c2xiuc"]
 
+[ext_resource type="NavigationPolygon" uid="uid://prlt4stfk6uh" path="res://navigation_polygon.res" id="2_lph0a"]
 [ext_resource type="Texture2D" uid="uid://bk26gi6qsuh18" path="res://map.png" id="2_nxfkp"]
-[ext_resource type="NavigationPolygon" uid="uid://bk5r48dcijlqt" path="res://navigation_polygon.res" id="3_6c0vu"]
 [ext_resource type="PackedScene" uid="uid://ct7veakwiei3h" path="res://character.tscn" id="4_n6iop"]
 
 [node name="Navigation" type="Node2D"]
@@ -12,7 +12,11 @@ position = Vector2(400, 302)
 texture = ExtResource("2_nxfkp")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = ExtResource("3_6c0vu")
+navigation_polygon = ExtResource("2_lph0a")
 
 [node name="Character" parent="." instance=ExtResource("4_n6iop")]
 position = Vector2(211, 141)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(400, 324)
+process_callback = 0

@@ -1,11 +1,5 @@
-extends Pawn
+extends Walker
 
-
-#warning-ignore:unused_class_variable
-@export var combat_actor: PackedScene
-#warning-ignore:unused_class_variable
-var lost = false
-
-
-func _ready():
+func _ready() -> void:
+	super._ready()
 	set_process(false)

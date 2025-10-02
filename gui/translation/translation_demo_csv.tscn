@@ -1,0 +1,144 @@
+[gd_scene load_steps=6 format=3 uid="uid://du3apufm66p3x"]
+
+[ext_resource type="Script" uid="uid://csakmnh104ac3" path="res://translation_csv.gd" id="1_o1a7r"]
+[ext_resource type="Texture2D" uid="uid://bk44e7bkr4w4l" path="res://images/speaker.webp" id="3_usrmd"]
+[ext_resource type="FontFile" uid="uid://b0887xnwnkgju" path="res://fonts/droid_sans.tres" id="3_wf1ar"]
+[ext_resource type="Texture2D" uid="uid://cy06u7558clgu" path="res://images/flag_uk.webp" id="4_j5852"]
+[ext_resource type="AudioStream" uid="uid://ciept8j0x21to" path="res://audio/hello_en.wav" id="5_6qqpb"]
+
+[node name="TranslationDemoCSV" type="Panel"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -300.0
+offset_right = 512.0
+offset_bottom = 300.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource("1_o1a7r")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 12.0
+offset_right = 602.0
+offset_bottom = 49.0
+theme_override_colors/font_color = Color(0.682353, 1, 0.65098, 1)
+theme_override_font_sizes/font_size = 24
+text = "CSV Example"
+
+[node name="English" type="Button" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 81.9594
+offset_right = 192.0
+offset_bottom = 105.959
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Use English"
+
+[node name="Spanish" type="Button" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 129.959
+offset_right = 192.0
+offset_bottom = 153.959
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Use Spanish"
+
+[node name="Japanese" type="Button" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 177.959
+offset_right = 192.0
+offset_bottom = 201.959
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Use Japanese"
+
+[node name="Russian" type="Button" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 225.959
+offset_right = 192.0
+offset_bottom = 249.959
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Use Russian"
+
+[node name="Description" type="Label" parent="."]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 59.9594
+offset_right = 804.0
+offset_bottom = 329.959
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "This is a demo of how a project can be internationalized.
+Translations are created in a CSV file and then imported into Godot.
+
+For correct display, the font used must contain the glyphs required by the target language.
+See the \"fonts\" folder for some fonts that you can use in your project.
+Godot can load system fonts as a fallback, but this is not supported on all platforms
+and the different visual design of system fonts can create inconsistencies.
+
+Godot allows internationalized text to change automatically when the locale is
+modified. Resources can also be set to internationalized alternatives and replaced
+automatically on locale change. This process is known as remapping."
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 354.0
+offset_right = 1001.0
+offset_bottom = 394.0
+
+[node name="HelloText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 405.0
+offset_right = 326.0
+offset_bottom = 429.0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_wf1ar")
+text = "KEY_HELLO"
+
+[node name="PlayAudio" type="Button" parent="."]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 466.0
+offset_right = 475.0
+offset_bottom = 498.0
+theme_override_fonts/font = ExtResource("3_wf1ar")
+text = "KEY_PUSH"
+icon = ExtResource("3_usrmd")
+
+[node name="Flag" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 406.0
+offset_right = 213.0
+offset_bottom = 491.0
+texture = ExtResource("4_j5852")
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_6qqpb")
+
+[node name="GoToPOTranslationDemo" type="Button" parent="."]
+layout_mode = 0
+offset_left = 761.0
+offset_top = 545.0
+offset_right = 1000.0
+offset_bottom = 576.0
+text = "Go to PO Translation Demo"
+
+[connection signal="pressed" from="English" to="." method="_on_english_pressed"]
+[connection signal="pressed" from="Spanish" to="." method="_on_spanish_pressed"]
+[connection signal="pressed" from="Japanese" to="." method="_on_japanese_pressed"]
+[connection signal="pressed" from="Russian" to="." method="_on_russian_pressed"]
+[connection signal="pressed" from="PlayAudio" to="." method="_on_play_audio_pressed"]
+[connection signal="pressed" from="GoToPOTranslationDemo" to="." method="_on_go_to_po_translation_demo_pressed"]

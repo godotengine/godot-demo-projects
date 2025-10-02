@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://df7ddsoclivwe"]
 
 [ext_resource type="Texture2D" uid="uid://coj0d33vyyqx1" path="res://player/bullet.webp" id="1"]
-[ext_resource type="Script" path="res://player/bullet.gd" id="2"]
+[ext_resource type="Script" uid="uid://xb35rakv4vtt" path="res://player/bullet.gd" id="2"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]
 
@@ -85,8 +85,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iv8gr"]
 _data = {
-"RESET": SubResource("Animation_v7668"),
-"destroy": SubResource("5")
+&"RESET": SubResource("Animation_v7668"),
+&"destroy": SubResource("5")
 }
 
 [node name="Bullet" type="RigidBody2D"]
@@ -97,8 +97,8 @@ collision_mask = 26
 mass = 0.0283333
 gravity_scale = 0.1
 continuous_cd = 2
-max_contacts_reported = 1
 contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("2")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]

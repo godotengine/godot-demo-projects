@@ -11,9 +11,7 @@ var _steer_target := 0.0
 
 @onready var desired_engine_pitch: float = $EngineSound.pitch_scale
 
-func _physics_process(delta: float):
-	var fwd_mps := (linear_velocity * transform.basis).x
-
+func _physics_process(delta: float) -> void:
 	_steer_target = Input.get_axis(&"turn_right", &"turn_left")
 	_steer_target *= STEER_LIMIT
 
@@ -22,7 +20,7 @@ func _physics_process(delta: float):
 	# Change pitch smoothly to avoid abrupt change on collision.
 	$EngineSound.pitch_scale = lerpf($EngineSound.pitch_scale, desired_engine_pitch, 0.2)
 
-	if abs(linear_velocity.length() - previous_speed) > 1.0:
+	if absf(linear_velocity.length() - previous_speed) > 1.0:
 		# Sudden velocity change, likely due to a collision. Play an impact sound to give audible feedback,
 		# and vibrate for haptic feedback.
 		$ImpactSound.play()
