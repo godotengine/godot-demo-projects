@@ -1,41 +1,72 @@
 [gd_scene load_steps=3 format=3 uid="uid://ccutmhshaoqih"]
 
-[ext_resource type="Script" path="res://root.gd" id="1_2itit"]
+[ext_resource type="Script" uid="uid://bdikev0kwlu1g" path="res://root.gd" id="1_2itit"]
 [ext_resource type="PackedScene" uid="uid://dqailbm8vcpf5" path="res://split_screen.tscn" id="1_mcbdt"]
 
 [node name="Node" type="Node"]
 script = ExtResource("1_2itit")
 
 [node name="Panel" type="Panel" parent="."]
-offset_right = 900.0
-offset_bottom = 900.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
 [node name="SplitScreen1" parent="." instance=ExtResource("1_mcbdt")]
-offset_left = 25.0
-offset_top = 25.0
-offset_right = 375.0
-offset_bottom = 399.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -375.0
+offset_top = -387.0
+offset_right = -25.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="SplitScreen2" parent="." instance=ExtResource("1_mcbdt")]
-offset_left = 425.0
-offset_top = 25.0
-offset_right = 775.0
-offset_bottom = 399.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 25.0
+offset_top = -387.0
+offset_right = 375.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
 init_position = Vector2(132, 0)
 
 [node name="SplitScreen3" parent="." instance=ExtResource("1_mcbdt")]
-offset_left = 25.0
-offset_top = 425.0
-offset_right = 375.0
-offset_bottom = 799.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -375.0
+offset_top = 13.0
+offset_right = -25.0
+offset_bottom = 387.0
+grow_horizontal = 2
+grow_vertical = 2
 init_position = Vector2(0, 132)
 
 [node name="SplitScreen4" parent="." instance=ExtResource("1_mcbdt")]
-offset_left = 425.0
-offset_top = 425.0
-offset_right = 775.0
-offset_bottom = 799.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 25.0
+offset_top = 13.0
+offset_right = 375.0
+offset_bottom = 387.0
+grow_horizontal = 2
+grow_vertical = 2
 init_position = Vector2(132, 132)
 
 [node name="PlayArea" type="SubViewport" parent="."]
