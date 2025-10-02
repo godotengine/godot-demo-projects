@@ -9,7 +9,7 @@ func _ready():
 	var parallax_copy = get_node("top/viewport/stage/parallax_bg").duplicate()
 	parallax_copy.set_custom_viewport( get_node("bottom/viewport") )
 	get_node("top/viewport/stage").add_child(parallax_copy)
-	
+
 	#simple and alternatively, copy them to the other viewport, but they must be erased when level is unloaded
 	#get_node("bottom/viewport").add_child( get_node("top/viewport/stage/parallax_bg").duplicate() )
 	pass

@@ -1,4 +1,3 @@
-
 extends VehicleBody
 
 # Member variables
@@ -18,17 +17,17 @@ func _fixed_process(delta):
 		steer_target = STEER_LIMIT
 	else:
 		steer_target = 0
-	
+
 	if (Input.is_action_pressed("ui_up")):
 		set_engine_force(engine_force)
 	else:
 		set_engine_force(0)
-	
+
 	if (Input.is_action_pressed("ui_down")):
 		set_brake(1)
 	else:
 		set_brake(0.0)
-	
+
 	if (steer_target < steer_angle):
 		steer_angle -= STEER_SPEED*delta
 		if (steer_target > steer_angle):
@@ -37,7 +36,7 @@ func _fixed_process(delta):
 		steer_angle += STEER_SPEED*delta
 		if (steer_target < steer_angle):
 			steer_angle = steer_target
-	
+
 	set_steering(steer_angle)
 
 

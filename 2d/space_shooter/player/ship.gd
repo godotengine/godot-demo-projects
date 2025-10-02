@@ -29,29 +29,29 @@ func _fixed_process(delta):
 	if Input.is_action_pressed("move_right"):
 		motion += Vector2(1, 0)
 	var shooting = Input.is_action_pressed("shoot")
-	
+
 	var pos = get_pos()
-	
+
 	# normally you would normalize the motion vector using motion.normalized(), so diagonal movement isn't faster
 	# in this case, the base speed would make dodging the tilemap impossible in some places
 	# additionally, it could be explained as the ship using both horizontal and vertical thrusters at once
 	# the better solution in the long run would be to playtest the level and make sure that every passage is playable
 	# pos += motion.normalized() * delta * SPEED
 	pos += motion * delta * SPEED
-	
+
 	# limit the resulting position to the screen's dimensions, so the player can't fly off screen
 	pos.x = clamp(pos.x, 0, screen_size.x)
 	pos.y = clamp(pos.y, 0, screen_size.y)
-	
+
 	set_pos(pos)
-	
+
 	# tick down the shot cooldown
 	if shot_timer > 0.0:
 		shot_timer -= delta
-	
+
 	# the player can shoot if the timer is back to zero
 	can_shoot = shot_timer <= 0.0
-	
+
 	# if the player is alive, allowed to shoot and pressing space to shoot..
 	if (can_shoot and shooting and not killed):
 		# instance a shot
@@ -82,7 +82,7 @@ func _hit_something():
 	get_node("sfx").play("sound_explode")
 	# notify listeners that the player died
 	emit_signal("player_died")
-	# disable processing 
+	# disable processing
 	set_fixed_process(false)
 
 # the block tiles in a level have StaticBody2D colliders, touching them kills the player ship
@@ -102,4 +102,3 @@ func set_projectile_container(container):
 # other objects (enemy projectiles) use this to tell the player ship that it was hit
 func take_damage():
 	_hit_something()
-	

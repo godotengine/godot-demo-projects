@@ -1,4 +1,3 @@
-
 extends BackBufferCopy
 
 # Member variables
@@ -10,17 +9,17 @@ var dir
 
 func _process(delta):
 	var pos = get_pos() + dir*delta*MOTION_SPEED
-	
+
 	if (pos.x < 0):
 		dir.x = abs(dir.x)
 	elif (pos.x > vsize.x):
 		dir.x = -abs(dir.x)
-	
+
 	if (pos.y < 0):
 		dir.y = abs(dir.y)
 	elif (pos.y > vsize.y):
 		dir.y = -abs(dir.y)
-	
+
 	set_pos(pos)
 
 

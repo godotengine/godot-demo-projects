@@ -1,9 +1,9 @@
 # Space Shooter
 
 ## Introduction
-In this on-rails shoot-em-up demo, the player gets to control a Space ship flying through a 2D version of Space, while firing their lasers by hitting the Space bar.  
-Various enemies will enter the screen from the right and try their hardest to destroy the player's ship.  
-Shooting these enemies will award points and the highest score achieved is kept in a one-entry leaderboard.  
+In this on-rails shoot-em-up demo, the player gets to control a Space ship flying through a 2D version of Space, while firing their lasers by hitting the Space bar.
+Various enemies will enter the screen from the right and try their hardest to destroy the player's ship.
+Shooting these enemies will award points and the highest score achieved is kept in a one-entry leaderboard.
 Avoiding the blocky obstacles and the enemies is key to survival and high scores, so good luck and have fun!
 
 ## Controls

@@ -1,4 +1,3 @@
-
 extends Area
 
 # Member variables
@@ -14,4 +13,3 @@ func _on_coin_body_enter(body):
 func _on_anim_finished():
 	if get_node("anim").get_current_animation() == "take":
 		queue_free()
-		

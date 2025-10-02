@@ -1,4 +1,3 @@
-
 extends KinematicBody2D
 
 # Member variables

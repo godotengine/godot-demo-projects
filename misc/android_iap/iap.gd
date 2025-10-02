@@ -1,4 +1,3 @@
-
 extends Node
 
 signal purchase_success(item_name)

@@ -1,4 +1,3 @@
-
 extends Node2D
 
 # Member variables
@@ -12,7 +11,7 @@ func _fixed_process(delta):
 	accum = fmod(accum, PI*2.0)
 	var d = sin(accum)
 	var xf = Matrix32()
-	xf[2]= motion*d 
+	xf[2]= motion*d
 	get_node("platform").set_transform(xf)
 
 

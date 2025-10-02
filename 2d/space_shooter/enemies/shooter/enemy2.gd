@@ -35,14 +35,14 @@ func _ready():
 func _fixed_process(delta):
 	# the enemy constantly moves
 	translate(motion * delta)
-	
+
 	# count down the time until the next shot
 	if shoot_timeout > 0.0:
 		shoot_timeout -= delta
-	
+
 	if (shoot_timeout <= 0):
 		shoot_timeout = SHOOT_INTERVAL
-		
+
 		if projectile_container != null:
 			# Instance a shot
 			var shot = Shot.instance()
@@ -59,7 +59,7 @@ func destroy():
 	if (destroyed):
 		return
 	destroyed = true
-	
+
 	# stop processing
 	set_fixed_process(false)
 	# play on-death effects

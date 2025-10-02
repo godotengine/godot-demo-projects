@@ -18,7 +18,7 @@ func destroy():
 	# skip if already destroyed
 	if (destroyed):
 		return
-	
+
 	# set the state to destroyed
 	destroyed = true
 	# play on-death effects
@@ -38,4 +38,3 @@ func _on_visibility_enter_screen():
 	get_node("anim").seek(randf()*2.0)
 	# as mentioned in _ready, show the node after seeking to the random start point in the animation
 	show()
-	

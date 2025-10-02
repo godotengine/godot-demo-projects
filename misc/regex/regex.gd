@@ -1,4 +1,3 @@
-
 extends VBoxContainer
 
 # Member variables

@@ -1,4 +1,3 @@
-
 extends Panel
 
 # Member variables here, example:

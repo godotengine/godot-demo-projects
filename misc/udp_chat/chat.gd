@@ -1,4 +1,3 @@
-
 extends Panel
 
 # Really simple UDP chat client, not intended as a comprehensive chat implementation.
@@ -12,7 +11,7 @@ var udp = PacketPeerUDP.new()
 func _process(delta):
 	if (not udp.is_listening()):
 		return
-	
+
 	while(udp.get_available_packet_count() > 0):
 		var packet = udp.get_var()
 		if (typeof(packet) == TYPE_STRING):
@@ -62,5 +61,5 @@ func _on_entry_button_pressed():
 	if (msg == ""):
 		return
 	send_message(get_node("user_name").get_text() + "> " + msg)
-	
+
 	get_node("entry_line").set_text("")

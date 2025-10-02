@@ -14,12 +14,12 @@ func _ready():
 func _process(delta):
 	if Input.is_action_pressed("ui_cancel"):
 		_on_return_to_menu()
-		
+
 func update_score(score):
 	score_label.set_text(str(score))
-	
+
 func _on_return_to_menu():
 	emit_signal("return_to_menu")
-	
+
 func game_over():
 	game_over_label.show()

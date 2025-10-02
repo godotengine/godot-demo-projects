@@ -1,4 +1,3 @@
-
 extends RigidBody2D
 
 # Member variables

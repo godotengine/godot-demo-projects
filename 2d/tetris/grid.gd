@@ -1,4 +1,3 @@
-
 extends Control
 
 # Simple Tetris-like demo, (c) 2012 Juan Linietsky
@@ -56,13 +55,13 @@ func piece_cell_xform(p, er = 0):
 func _draw():
 	var sb = get_stylebox("bg", "Tree") # Use line edit bg
 	draw_style_box(sb, Rect2(Vector2(), get_size()).grow(3))
-	
+
 	var bs = block.get_size()
 	for y in range(height):
 		for x in range(width):
 			if (Vector2(x, y) in cells):
 				draw_texture_rect(block, Rect2(Vector2(x, y)*bs, bs), false, block_colors[cells[Vector2(x, y)]])
-	
+
 	if (piece_active):
 		for c in block_shapes[piece_shape]:
 			draw_texture_rect(block, Rect2(piece_cell_xform(c)*bs, bs), false, block_colors[piece_shape])
@@ -81,7 +80,7 @@ func piece_check_fit(ofs, er = 0):
 			return false
 		if (pos in cells):
 			return false
-	
+
 	return true
 
 
@@ -92,11 +91,11 @@ func new_piece():
 	piece_rot = 0
 	if (piece_shape == 0):
 		piece_pos.y += 1
-	
+
 	if (not piece_check_fit(Vector2())):
 		# Game over
 		game_over()
-	
+
 	update()
 
 
@@ -113,10 +112,10 @@ func test_collapse_rows():
 				collapse = false
 				if (accum_down):
 					cells.erase(Vector2(x, y + accum_down))
-		
+
 		if (collapse):
 			accum_down += 1
-	
+
 	score += accum_down*100
 	score_label.set_text(str(score))
 
@@ -190,5 +189,5 @@ func setup(w, h):
 func _ready():
 	setup(10, 20)
 	score_label = get_node("../score")
-	
+
 	set_process_input(true)

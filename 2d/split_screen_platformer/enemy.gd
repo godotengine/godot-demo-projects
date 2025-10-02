@@ -1,4 +1,3 @@
-
 extends RigidBody2D
 
 # Member variables
@@ -36,13 +35,13 @@ func _integrate_forces(s):
 		new_anim = "explode"
 	elif (state == STATE_WALKING):
 		new_anim = "walk"
-		
+
 		var wall_side = 0.0
-		
+
 		for i in range(s.get_contact_count()):
 			var cc = s.get_contact_collider_object(i)
 			var dp = s.get_contact_local_normal(i)
-			
+
 			if (cc):
 				if (cc extends bullet_class and not cc.disabled):
 					set_mode(MODE_RIGID)
@@ -53,12 +52,12 @@ func _integrate_forces(s):
 					cc.disable()
 					get_node("sound").play("hit")
 					break
-			
+
 			if (dp.x > 0.9):
 				wall_side = 1.0
 			elif (dp.x < -0.9):
 				wall_side = -1.0
-		
+
 		if (wall_side != 0 and wall_side != direction):
 			direction = -direction
 			get_node("sprite").set_scale(Vector2(-direction, 1))
@@ -68,13 +67,13 @@ func _integrate_forces(s):
 		elif (direction > 0 and not rc_right.is_colliding() and rc_left.is_colliding()):
 			direction = -direction
 			get_node("sprite").set_scale(Vector2(-direction, 1))
-		
+
 		lv.x = direction*WALK_SPEED
-	
+
 	if(anim != new_anim):
 		anim = new_anim
 		get_node("anim").play(anim)
-	
+
 	s.set_linear_velocity(lv)
 
 

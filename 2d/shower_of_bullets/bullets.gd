@@ -1,4 +1,3 @@
-
 extends Node2D
 
 # This demo is an example of controling a high number of 2D objects with logic and collision without using scene nodes.
@@ -35,37 +34,37 @@ func _process(delta):
 		if (b.pos.x < -30):
 			b.pos.x += width
 		mat.o = b.pos
-		
+
 		Physics2DServer.body_set_state(b.body, Physics2DServer.BODY_STATE_TRANSFORM, mat)
-	
+
 	update()
 
 
 func _ready():
 	shape = Physics2DServer.shape_create(Physics2DServer.SHAPE_CIRCLE)
 	Physics2DServer.shape_set_data(shape, 8) # Radius
-	
+
 	for i in range(BULLET_COUNT):
 		var b = Bullet.new()
 		b.speed = rand_range(SPEED_MIN, SPEED_MAX)
 		b.body = Physics2DServer.body_create(Physics2DServer.BODY_MODE_KINEMATIC)
 		Physics2DServer.body_set_space(b.body, get_world_2d().get_space())
 		Physics2DServer.body_add_shape(b.body, shape)
-		
+
 		b.pos = Vector2(get_viewport_rect().size * Vector2(randf()*2.0, randf())) # Twice as long
 		b.pos.x += get_viewport_rect().size.x # Start outside
 		var mat = Matrix32()
 		mat.o = b.pos
 		Physics2DServer.body_set_state(b.body, Physics2DServer.BODY_STATE_TRANSFORM, mat)
-		
+
 		bullets.append(b)
-	
+
 	set_process(true)
 
 
 func _exit_tree():
 	for b in bullets:
 		Physics2DServer.free_rid(b.body)
-	
+
 	Physics2DServer.free_rid(shape)
 	bullets.clear()

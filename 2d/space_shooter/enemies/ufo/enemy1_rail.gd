@@ -21,7 +21,7 @@ func _ready():
 	# once the ship leaves the screen, remove the entire node
 	visibility.connect("exit_screen", self, "queue_free")
 	motion = Vector2(SPEED, 0)
-	
+
 func _fixed_process(delta):
 	# constant movement
 	translate(motion * delta)

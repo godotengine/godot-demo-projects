@@ -1,4 +1,3 @@
-
 extends RigidBody
 
 # Member variables
@@ -12,7 +11,7 @@ func _input_event(camera, event, pos, normal, shape):
 			get_node("mesh").set_material_override(gray_mat)
 		else:
 			get_node("mesh").set_material_override(null)
-		
+
 		selected = not selected
 
 

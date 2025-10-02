@@ -1,4 +1,3 @@
-
 extends Navigation2D
 
 # Member variables
@@ -22,10 +21,10 @@ func _process(delta):
 			else:
 				path[path.size() - 1] = pfrom.linear_interpolate(pto, to_walk/d)
 				to_walk = 0
-		
+
 		var atpos = path[path.size() - 1]
 		get_node("agent").set_pos(atpos)
-		
+
 		if (path.size() < 2):
 			path = []
 			set_process(false)
@@ -37,7 +36,7 @@ func _update_path():
 	var p = get_simple_path(begin, end, true)
 	path = Array(p) # Vector2array too complex to use, convert to regular array
 	path.invert()
-	
+
 	set_process(true)
 
 

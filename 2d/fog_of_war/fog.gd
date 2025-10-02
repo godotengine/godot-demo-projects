@@ -1,4 +1,3 @@
-
 extends TileMap
 
 # Member variables
@@ -30,7 +29,7 @@ var l = range(2, 5)
 # Process that runs in realtime
 func _fixed_process(delta):
 	position = get_node("../troll").get_pos()
-	
+
 	# Calculate the corresponding tile
 	# from the players position
 	x = int(position.x/get_cell_size().x)
@@ -38,11 +37,11 @@ func _fixed_process(delta):
 	# causes problems because of rounding problems
 	if position.x < 0:
 		x -= 1 # Correct negative values
-	
+
 	y = int(position.y/get_cell_size().y)
 	if (position.y < 0):
 		y -= 1
-	
+
 	# Check if the player moved one tile further
 	if ((x_old != x) or (y_old != y)):
 		# Create the transparent part (visited area)
@@ -55,7 +54,7 @@ func _fixed_process(delta):
 						set_cell(m, n, 1, 0, 0)
 			end -= 1
 			start += 1
-		
+
 		# Create the actual and active visible part
 		var end = l.size() - 1
 		var start = 0
@@ -65,7 +64,7 @@ func _fixed_process(delta):
 					set_cell(m, n, -1)
 			end -= 1
 			start += 1
-	
+
 	x_old = x
 	y_old = y
 

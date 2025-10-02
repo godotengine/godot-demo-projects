@@ -28,6 +28,6 @@ func on_player_died():
 func on_enemy_died(score):
 	game_state.points += score
 	hud.update_score(game_state.points)
-	
+
 func on_return_to_menu():
 	game_state.abort_game()

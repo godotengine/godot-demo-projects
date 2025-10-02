@@ -1,4 +1,3 @@
-
 extends KinematicBody2D
 
 # Member variables
@@ -37,14 +36,14 @@ func _fixed_process(delta):
 		dir += Vector2(-1, 0)
 	if (Input.is_action_pressed("right")):
 		dir += Vector2(1, 0)
-	
+
 	if (dir != Vector2()):
 		dir = dir.normalized()
 	speed = speed.linear_interpolate(dir*MAX_SPEED, delta*ACCEL)
 	var motion = speed*delta
 	motion.y *= VSCALE
 	motion = move(motion)
-	
+
 	if (is_colliding()):
 		var n = get_collision_normal()
 		motion = n.slide(motion)
@@ -52,13 +51,13 @@ func _fixed_process(delta):
 
 	var next_anim = ""
 	var next_mirror = false
-	
+
 	if (dir == Vector2() and speed.length() < IDLE_SPEED):
 		next_anim = "idle"
 		next_mirror = false
 	elif (speed.length() > IDLE_SPEED*0.1):
 		var angle = atan2(abs(speed.x), speed.y)
-		
+
 		next_mirror = speed.x > 0
 		if (angle < PI/8):
 			next_anim = "bottom"
@@ -72,7 +71,7 @@ func _fixed_process(delta):
 		else:
 			next_anim = "top"
 			next_mirror = false
-	
+
 	if (next_anim != current_anim or next_mirror != current_mirror):
 		get_node("frames").set_flip_h(next_mirror)
 		get_node("anim").play(next_anim)

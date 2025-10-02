@@ -34,7 +34,7 @@ func destroy():
 	# skip if already destroyed
 	if (destroyed):
 		return
-	
+
 	# set the state to destroyed
 	destroyed = true
 	# stop processing

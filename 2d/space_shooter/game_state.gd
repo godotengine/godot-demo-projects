@@ -35,7 +35,7 @@ func start_game():
 
 func abort_game():
 	_reset_game()
-	
+
 	menu = main_menu_scene.instance()
 	get_tree().get_root().add_child(menu)
 
@@ -50,7 +50,7 @@ func _reset_game():
 		game.hide()
 		game.queue_free()
 		game = null
-		
+
 	if menu != null:
 		menu.hide()
 		menu.queue_free()
@@ -69,7 +69,7 @@ func _load_high_score():
 			max_points = f.get_var()
 	# always close the file handle
 	f.close()
-	
+
 func _save_high_score():
 	var f = File.new()
 	# try to open the highscore file in WRITE mode, which creates a new file if it doesn't exist

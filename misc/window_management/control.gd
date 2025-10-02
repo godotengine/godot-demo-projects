@@ -7,45 +7,45 @@ onready var observer = get_node("../Observer")
 
 func _fixed_process(delta):
 	var modetext = "Mode:\n"
-	
+
 	if(OS.is_window_fullscreen()):
 		modetext += "Fullscreen\n"
 	else:
 		modetext += "Windowed\n"
-	
+
 	if(!OS.is_window_resizable()):
 		modetext += "FixedSize\n"
-	
+
 	if(OS.is_window_minimized()):
 		modetext += "Minimized\n"
-	
+
 	if(OS.is_window_maximized()):
 		modetext += "Maximized\n"
-	
+
 	if(Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED):
 		modetext += "MouseGrab\n"
 		get_node("Label_MouseModeCaptured_KeyInfo").show()
 	else:
 		get_node("Label_MouseModeCaptured_KeyInfo").hide()
-	
+
 	get_node("Label_Mode").set_text(modetext)
-	
+
 	get_node("Label_Position").set_text(str("Position:\n", OS.get_window_position()))
-	
+
 	get_node("Label_Size").set_text(str("Size:\n", OS.get_window_size()))
-	
+
 	get_node("Label_MousePosition").set_text(str("Mouse Position:\n", mousepos))
-	
+
 	get_node("Label_Screen_Count").set_text(str("Screen_Count:\n", OS.get_screen_count()))
-	
+
 	get_node("Label_Screen_Current").set_text(str("Screen:\n", OS.get_current_screen()))
-	
+
 	get_node("Label_Screen0_Resolution").set_text(str("Screen0 Resolution:\n", OS.get_screen_size()))
-	
+
 	get_node("Label_Screen0_Position").set_text(str("Screen0 Position:\n", OS.get_screen_position()))
 
 	get_node("Label_Screen0_DPI").set_text(str("Screen0 DPI:\n", OS.get_screen_dpi()))
-	
+
 	if(OS.get_screen_count() > 1):
 		get_node("Button_Screen0").show()
 		get_node("Button_Screen1").show()
@@ -61,7 +61,7 @@ func _fixed_process(delta):
 		get_node("Label_Screen1_Resolution").hide()
 		get_node("Label_Screen1_Position").hide()
 		get_node("Label_Screen1_DPI").hide()
-	
+
 	get_node("Button_Fullscreen").set_pressed(OS.is_window_fullscreen())
 	get_node("Button_FixedSize").set_pressed(!OS.is_window_resizable())
 	get_node("Button_Minimized").set_pressed(OS.is_window_minimized())
@@ -75,55 +75,55 @@ func check_wm_api():
 	var s = ""
 	if(!OS.has_method("get_screen_count")):
 		s += " - get_screen_count()\n"
-	
+
 	if(!OS.has_method("get_current_screen")):
 		s += " - get_current_screen()\n"
-	
+
 	if(!OS.has_method("set_current_screen")):
 		s += " - set_current_screen()\n"
-	
+
 	if(!OS.has_method("get_screen_position")):
 		s += " - get_screen_position()\n"
-	
+
 	if(!OS.has_method("get_screen_size")):
 		s += " - get_screen_size()\n"
-	
+
 	if(!OS.has_method("get_window_position")):
 		s += " - get_window_position()\n"
-	
+
 	if(!OS.has_method("set_window_position")):
 		s += " - set_window_position()\n"
-	
+
 	if(!OS.has_method("get_window_size")):
 		s += " - get_window_size()\n"
-	
+
 	if(!OS.has_method("set_window_size")):
 		s += " - set_window_size()\n"
-	
+
 	if(!OS.has_method("set_window_fullscreen")):
 		s += " - set_window_fullscreen()\n"
-	
+
 	if(!OS.has_method("is_window_fullscreen")):
 		s += " - is_window_fullscreen()\n"
-	
+
 	if(!OS.has_method("set_window_resizable")):
 		s += " - set_window_resizable()\n"
-	
+
 	if(!OS.has_method("is_window_resizable")):
 		s += " - is_window_resizable()\n"
-	
+
 	if(!OS.has_method("set_window_minimized")):
 		s += " - set_window_minimized()\n"
-	
+
 	if(!OS.has_method("is_window_minimized")):
 		s += " - is_window_minimized()\n"
-	
+
 	if(!OS.has_method("set_window_maximized")):
 		s += " - set_window_maximized()\n"
-	
+
 	if(!OS.has_method("is_window_maximized")):
 		s += " - is_window_maximized()\n"
-	
+
 	if(s.length() == 0):
 		return true
 	else:
@@ -142,16 +142,16 @@ func _ready():
 func _input(event):
 	if (event.type == InputEvent.MOUSE_MOTION):
 		mousepos = event.pos
-	
+
 	if (event.type == InputEvent.KEY):
 		if Input.is_action_pressed("mouse_mode_visible"):
 			observer.state = observer.STATE_MENU
 			_on_Button_MouseModeVisible_pressed()
-		
+
 		if Input.is_action_pressed("mouse_mode_hidden"):
 			observer.state = observer.STATE_MENU
 			_on_Button_MouseModeHidden_pressed()
-		
+
 		if Input.is_action_pressed("mouse_mode_captured"):
 			_on_Button_MouseModeCaptured_pressed()
 
