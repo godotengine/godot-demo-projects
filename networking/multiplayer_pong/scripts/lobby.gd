@@ -24,7 +24,7 @@ func _player_connected(_id):
 	var pong = load("res://pong.tscn").instance()
 	# Connect deferred so we can safely erase it from the callback.
 	pong.connect("game_finished", self, "_end_game", [], CONNECT_DEFERRED)
-	
+
 	get_tree().get_root().add_child(pong)
 	hide()
 
@@ -44,9 +44,9 @@ func _connected_ok():
 # Callback from SceneTree, only for clients (not server).
 func _connected_fail():
 	_set_status("Couldn't connect", false)
-	
+
 	get_tree().set_network_peer(null) # Remove peer.
-	
+
 	host_button.set_disabled(false)
 	join_button.set_disabled(false)
 
@@ -61,11 +61,11 @@ func _end_game(with_error = ""):
 		# Erase immediately, otherwise network might show errors (this is why we connected deferred above).
 		get_node("/root/Pong").free()
 		show()
-	
+
 	get_tree().set_network_peer(null) # Remove peer.
 	host_button.set_disabled(false)
 	join_button.set_disabled(false)
-	
+
 	_set_status(with_error, false)
 
 
@@ -87,7 +87,7 @@ func _on_host_pressed():
 		# Is another server running?
 		_set_status("Can't host, address in use.",false)
 		return
-	
+
 	get_tree().set_network_peer(host)
 	host_button.set_disabled(true)
 	join_button.set_disabled(true)
@@ -99,10 +99,10 @@ func _on_join_pressed():
 	if not ip.is_valid_ip_address():
 		_set_status("IP address is invalid", false)
 		return
-	
+
 	var host = NetworkedMultiplayerENet.new()
 	host.set_compression_mode(NetworkedMultiplayerENet.COMPRESS_RANGE_CODER)
 	host.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(host)
-	
+
 	_set_status("Connecting...", true)

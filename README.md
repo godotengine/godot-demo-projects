@@ -8,23 +8,10 @@ be used with [Godot Engine](https://godotengine.org), the open source
 
 - The [`master`](https://github.com/godotengine/godot-demo-projects) branch is compatible with Godot's `master` development branch (next 4.x release).
 - The [`3.x`](https://github.com/godotengine/godot-demo-projects/tree/3.x) branch is compatible with Godot's `3.x` development branch (next 3.x release).
-- The other branches are compatible with the matching stable versions of Godot:
-  - [`4.0`](https://github.com/godotengine/godot-demo-projects/tree/4.0)
-    branch for Godot 4.0.x.
-  - [`3.5`](https://github.com/godotengine/godot-demo-projects/tree/3.5)
-    branch for Godot 3.5.x.
-  - [`3.4`](https://github.com/godotengine/godot-demo-projects/tree/3.4)
-    branch for Godot 3.4.x.
-  - [`3.3`](https://github.com/godotengine/godot-demo-projects/tree/3.3)
-    branch for Godot 3.3.x.
-  - [`3.2`](https://github.com/godotengine/godot-demo-projects/tree/3.2)
-    branch for Godot 3.2.x.
-  - [***`3.1`***](https://github.com/godotengine/godot-demo-projects/tree/3.1)
-    branch for Godot 3.1.x.
-  - [`3.0`](https://github.com/godotengine/godot-demo-projects/tree/3.0)
-    branch for Godot 3.0.x.
-  - [`2.1`](https://github.com/godotengine/godot-demo-projects/tree/2.1)
-    branch for Godot 2.1.x.
+- The other branches are compatible with the matching stable versions of Godot.
+  - [Click here](https://github.com/godotengine/godot-demo-projects/branches) to see all branches.
+  - For example, the [`2.1`](https://github.com/godotengine/godot-demo-projects/tree/2.1)
+    branch is for demos compatible with Godot 2.1.x.
 
 ## Importing all demos
 

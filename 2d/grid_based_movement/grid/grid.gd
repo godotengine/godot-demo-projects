@@ -16,7 +16,7 @@ func get_cell_pawn(coordinates):
 func request_move(pawn, direction):
 	var cell_start = world_to_map(pawn.position)
 	var cell_target = cell_start + direction
-	
+
 	var cell_target_type = get_cellv(cell_target)
 	match cell_target_type:
 		CellType.EMPTY:

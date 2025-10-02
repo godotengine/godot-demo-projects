@@ -10,6 +10,6 @@ func _ready():
 func disable():
 	if disabled:
 		return
-	
+
 	($AnimationPlayer as AnimationPlayer).play("shutdown")
 	disabled = true

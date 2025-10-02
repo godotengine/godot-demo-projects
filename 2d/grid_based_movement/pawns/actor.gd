@@ -44,7 +44,7 @@ func move_to(target_position):
 
 	# Stop the function execution until the animation finished
 	yield($AnimationPlayer, "animation_finished")
-	
+
 	set_process(true)
 
 

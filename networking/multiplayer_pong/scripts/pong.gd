@@ -18,7 +18,7 @@ func _ready():
 	# while all nodes in clients inherit from puppet.
 	# set_network_master is tree-recursive by default.
 	if get_tree().is_network_server():
-		# For the server, give control of player 2 to the other peer. 
+		# For the server, give control of player 2 to the other peer.
 		player2.set_network_master(get_tree().get_network_connected_peers()[0])
 	else:
 		# For the client, give control of player 2 to itself.
@@ -33,7 +33,7 @@ sync func update_score(add_to_left):
 	else:
 		score_right += 1
 		score_right_node.set_text(str(score_right))
-	
+
 	var game_ended = false
 	if score_left == SCORE_TO_WIN:
 		winner_left.show()
@@ -41,7 +41,7 @@ sync func update_score(add_to_left):
 	elif score_right == SCORE_TO_WIN:
 		winner_right.show()
 		game_ended = true
-	
+
 	if game_ended:
 		$ExitGame.show()
 		$Ball.rpc("stop")

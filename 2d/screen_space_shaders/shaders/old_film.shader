@@ -15,17 +15,17 @@ float make_grain(float time, vec2 uv) {
 
 void fragment() {
 	vec3 c = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0).rgb;
-	
+
 	//float v = max(c.r, max(c.g, c.b));
 	float v = dot(c, vec3(0.33333, 0.33333, 0.33333));
 	v = sqrt(v);
 	//v *= v;
-	
+
 	float f = 1.0 / fps;
 	float g = make_grain(TIME - mod(TIME, f), UV);
 	g = max(g, make_grain(TIME - mod(TIME, f) + f, UV) * 0.5);
 	g = max(g, make_grain(TIME - mod(TIME, f) + f * 2.0, UV) * 0.25);
-	
+
 	COLOR.rgb = base.rgb * v - vec3(g) * grain_strength;
 	COLOR.rgb *= texture(vignette, UV).r;
 	float ft = TIME * 0.002;

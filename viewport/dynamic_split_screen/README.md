@@ -13,7 +13,7 @@ Two cameras are placed inside two separate viewports and their texture, as well 
 
 The `SplitScreen` shader, with the help of the `CameraController` script, chooses wich texture to display on each pixel to achieve the effect.
 
-The cameras are placed on the segment joining the two players, either in the middle if they're close enough or at a fixed distance otherwise. 
+The cameras are placed on the segment joining the two players, either in the middle if they're close enough or at a fixed distance otherwise.
 
 # How to use it
 Open and launch the project inside the Godot engine and then you can use WASD keys to move the first player and IJKL keys to move the second one.

@@ -26,7 +26,7 @@ func _physics_process(delta):
 
 	if (velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED) or (velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED):
 		force.x += WALK_FORCE * walk
-	
+
 	if abs(walk) < 0.5:
 		var vsign = sign(velocity.x)
 		var vlen = abs(velocity.x)

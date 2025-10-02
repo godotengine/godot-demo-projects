@@ -40,7 +40,7 @@ func _unhandled_input(ev):
 			zoom += ZOOM_SPEED
 		zoom = clamp(zoom, 2, 8)
 		camera.translation.z = zoom
-	
+
 	if ev is InputEventMouseMotion and ev.button_mask & MAIN_BUTTONS:
 		# Compensate motion speed to be resolution-independent (based on the window height).
 		var relative_motion = ev.relative * get_viewport().size.y / base_height

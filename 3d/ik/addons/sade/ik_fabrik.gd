@@ -52,61 +52,61 @@ func _ready():
 		if has_node("target") == false:
 			target = Spatial.new()
 			add_child(target)
-			
-			if Engine.editor_hint == true:
+
+			if Engine.editor_hint:
 				if get_tree() != null:
 					if get_tree().edited_scene_root != null:
 						target.set_owner(get_tree().edited_scene_root)
-			
+
 			target.name = "target"
 		else:
 			target = get_node("target")
-		
+
 		# If we are in the editor, we want to make a sphere at this node
-		if Engine.editor_hint == true:
+		if Engine.editor_hint:
 			_make_editor_sphere_at_node(target, Color(1, 0, 1, 1))
-	
+
 	if middle_joint_target == null:
 		if has_node("middle_joint_target") == false:
 			middle_joint_target = Spatial.new()
 			add_child(middle_joint_target)
-			
-			if Engine.editor_hint == true:
+
+			if Engine.editor_hint:
 				if get_tree() != null:
 					if get_tree().edited_scene_root != null:
 						middle_joint_target.set_owner(get_tree().edited_scene_root)
-			
+
 			middle_joint_target.name = "middle_joint_target"
 		else:
 			middle_joint_target = get_node("middle_joint_target")
-	
+
 		# If we are in the editor, we want to make a sphere at this node
-		if Engine.editor_hint == true:
+		if Engine.editor_hint:
 			_make_editor_sphere_at_node(middle_joint_target, Color(1, 0.24, 1, 1))
-	
+
 	# Make all of the bone nodes for each bone in the IK chain
 	_make_bone_nodes()
-	
+
 	# Make sure we're using the right update mode
 	_set_update_mode(update_mode)
 
 
 # Various upate methods
 func _process(_delta):
-	if reset_iterations_on_update == true:
+	if reset_iterations_on_update:
 		chain_iterations = 0
 	update_skeleton()
 
 
 func _physics_process(_delta):
-	if reset_iterations_on_update == true:
+	if reset_iterations_on_update:
 		chain_iterations = 0
 	update_skeleton()
 
 
 func _notification(what):
 	if what == NOTIFICATION_TRANSFORM_CHANGED:
-		if reset_iterations_on_update == true:
+		if reset_iterations_on_update:
 			chain_iterations = 0
 		update_skeleton()
 
@@ -115,51 +115,51 @@ func _notification(what):
 
 func update_skeleton():
 	#### ERROR CHECKING conditions
-	if first_call == true:
+	if first_call:
 		_set_skeleton_path(skeleton_path)
 		first_call = false
-		
+
 		if skeleton == null:
 			_set_skeleton_path(skeleton_path)
-			
+
 		return
-	
+
 	if bones_in_chain == null:
-		if debug_messages == true:
+		if debug_messages:
 			printerr(name, " - IK_FABRIK: No Bones in IK chain defined!")
 		return
 	if bones_in_chain_lengths == null:
-		if debug_messages == true:
+		if debug_messages:
 			printerr(name, " - IK_FABRIK: No Bone lengths in IK chain defined!")
 		return
-	
+
 	if bones_in_chain.size() != bones_in_chain_lengths.size():
-		if debug_messages == true:
+		if debug_messages:
 			printerr(name, " - IK_FABRIK: bones_in_chain and bones_in_chain_lengths!")
 		return
-	
+
 	################################
-	
+
 	# Set all of the bone IDs in bone_IDs, if they are not already made
 	var i = 0
 	if bone_IDs.size() <= 0:
 		for bone_name in bones_in_chain:
 			bone_IDs[bone_name] = skeleton.find_bone(bone_name)
-			
+
 			# Set the bone node to the currect bone position
 			bone_nodes[i].global_transform = get_bone_transform(i)
 			# If this is not the last bone in the bone chain, make it look at the next bone in the bone chain
 			if i < bone_IDs.size()-1:
 				bone_nodes[i].look_at(get_bone_transform(i+1).origin + skeleton.global_transform.origin, Vector3.UP)
-			
+
 			i += 1
-	
+
 	# Set the total length of the bone chain, if it is not already set
 	if total_length == INF:
 		total_length = 0
 		for bone_length in bones_in_chain_lengths:
 			total_length += bone_length
-	
+
 	# Solve the bone chain
 	solve_chain()
 
@@ -167,14 +167,14 @@ func update_skeleton():
 func solve_chain():
 	# If we have reached our max chain iteration, and we are limiting ourselves, then return.
 	# Otherwise set chain_iterations to zero (so we constantly update)
-	if chain_iterations >= CHAIN_MAX_ITER and limit_chain_iterations == true:
+	if chain_iterations >= CHAIN_MAX_ITER and limit_chain_iterations:
 		return
 	else:
 		chain_iterations = 0
-	
+
 	# Update the origin with the current bone's origin
 	chain_origin = get_bone_transform(0).origin
-	
+
 	# Get the direction of the final bone by using the next to last bone if there is more than 2 bones.
 	# If there are only 2 bones, we use the target's forward Z vector instead (not ideal, but it works fairly well)
 	var dir
@@ -182,19 +182,19 @@ func solve_chain():
 		dir = bone_nodes[bone_nodes.size()-2].global_transform.basis.z.normalized()
 	else:
 		dir = -target.global_transform.basis.z.normalized()
-	
+
 	# Get the target position (accounting for the final bone and it's length)
 	var target_pos = target.global_transform.origin + (dir * bones_in_chain_lengths[bone_nodes.size()-1])
-	
+
 	# If we are using middle joint target (and have more than 2 bones), move our middle joint towards it!
-	if use_middle_joint_target == true:
+	if use_middle_joint_target:
 		if bone_nodes.size() > 2:
 			var middle_point_pos = middle_joint_target.global_transform
 			bone_nodes[bone_nodes.size()/2].global_transform.origin = middle_point_pos.origin
-	
+
 	# Get the distance from the origin to the target
 	var distance = (chain_origin - target_pos).length()
-	
+
 	# If the distance is farther than our total reach, the target cannot be reached.
 	# Make the bone chain a straight line pointing towards the target
 	if distance > total_length:
@@ -203,37 +203,37 @@ func solve_chain():
 			var curr_origin = bone_nodes[i].global_transform.origin
 			var r =(target_pos - curr_origin).length()
 			var l = bones_in_chain_lengths[i] / r
-			
+
 			# Find new join position
 			var new_pos = curr_origin.linear_interpolate(target_pos, l)
-			
+
 			# Apply it to the bone node
 			bone_nodes[i].look_at(new_pos, Vector3.UP)
 			bone_nodes[i].global_transform.origin = new_pos
-		
+
 		# Apply the rotation to the first node in the bone chain, making it look at the next bone in the bone chain
 		bone_nodes[0].look_at(bone_nodes[1].global_transform.origin, Vector3.UP)
-	
+
 	# If the distance is NOT farther than our total reach, the target can be reached.
 	else:
 		# Get the difference between our end effector (the final bone in the chain) and the target
 		var dif = (bone_nodes[bone_nodes.size()-1].global_transform.origin - target_pos).length()
-		
+
 		# Check to see if the distance from the end effector to the target is within our error margin (CHAIN_TOLERANCE).
 		# If it not, move the chain towards the target (going forwards, backwards, and then applying rotation)
 		while dif > CHAIN_TOLERANCE:
 			chain_backward()
 			chain_forward()
 			chain_apply_rotation()
-			
+
 			# Update the difference between our end effector (the final bone in the chain) and the target
 			dif = (bone_nodes[bone_nodes.size()-1].global_transform.origin - target_pos).length()
-			
+
 			# Add one to chain_iterations. If we have reached our max iterations, then break
 			chain_iterations = chain_iterations + 1
 			if chain_iterations >= CHAIN_MAX_ITER:
 				break
-	
+
 	# Reset the bone node transforms to the skeleton bone transforms
 	#if constrained == false: # Resetting seems to break bone constraints...
 	for i in range(0, bone_nodes.size()):
@@ -250,17 +250,17 @@ func chain_backward():
 		dir = bone_nodes[bone_nodes.size() - 2].global_transform.basis.z.normalized()
 	else:
 		dir = -target.global_transform.basis.z.normalized()
-	
+
 	# Set the position of the end effector (the final bone in the chain) to the target position
 	bone_nodes[bone_nodes.size()-1].global_transform.origin = target.global_transform.origin + (dir * bones_in_chain_lengths[bone_nodes.size()-1])
-	
+
 	# For all of the other bones, move them towards the target
 	var i = bones_in_chain.size() - 1
 	while i >= 1:
 		var prev_origin = bone_nodes[i].global_transform.origin
 		i -= 1
 		var curr_origin = bone_nodes[i].global_transform.origin
-		
+
 		var r = prev_origin - curr_origin
 		var l = bones_in_chain_lengths[i] / r.length()
 		# Apply the new joint position
@@ -271,12 +271,12 @@ func chain_backward():
 func chain_forward():
 	# Set root at initial position
 	bone_nodes[0].global_transform.origin = chain_origin
-	
+
 	# Go through every bone in the bone chain
 	for i in range(bones_in_chain.size() - 1):
 		var curr_origin = bone_nodes[i].global_transform.origin
 		var next_origin = bone_nodes[i + 1].global_transform.origin
-		
+
 		var r = next_origin - curr_origin
 		var l = bones_in_chain_lengths[i] / r.length()
 		# Apply the new joint position, (potentially with constraints), to the bone node
@@ -297,38 +297,38 @@ func chain_apply_rotation():
 				# Get the bone node for this bone, and the previous bone
 				var b_target = bone_nodes[i].global_transform
 				var b_target_two = bone_nodes[i-1].global_transform
-				
+
 				# Convert the bone nodes positions from world space to bone/skeleton space
 				b_target.origin = skeleton.global_transform.xform_inv(b_target.origin)
 				b_target_two.origin = skeleton.global_transform.xform_inv(b_target_two.origin)
-				
+
 				# Get the direction that the previous bone is pointing towards
 				var dir = (target.global_transform.origin - b_target_two.origin).normalized()
-				
+
 				# Make this bone look in the same the direction as the last bone
 				bone_trans = bone_trans.looking_at(b_target.origin + dir, Vector3.UP)
 			else:
 				var b_target = target.global_transform
 				b_target.origin = skeleton.global_transform.xform_inv(b_target.origin)
 				bone_trans = bone_trans.looking_at(b_target.origin, Vector3.UP)
-		
+
 		# If this is NOT the last bone in the bone chain, rotate the bone to look at the next
 		# bone in the bone chain.
 		else:
 			# Get the bone node for this bone, and the next bone
 			var b_target = bone_nodes[i].global_transform
 			var b_target_two = bone_nodes[i+1].global_transform
-			
+
 			# Convert the bone nodes positions from world space to bone/skeleton space
 			b_target.origin = skeleton.global_transform.xform_inv(b_target.origin)
 			b_target_two.origin = skeleton.global_transform.xform_inv(b_target_two.origin)
-			
+
 			# Get the direction towards the next bone
 			var dir = (b_target_two.origin - b_target.origin).normalized()
-			
+
 			# Make this bone look towards the direction of the next bone
 			bone_trans = bone_trans.looking_at(b_target.origin + dir, Vector3.UP)
-		
+
 		# The the bone's (updated) transform
 		set_bone_transform(i, bone_trans)
 
@@ -336,12 +336,12 @@ func chain_apply_rotation():
 func get_bone_transform(bone, convert_to_world_space = true):
 	# Get the global transform of the bone
 	var ret: Transform = skeleton.get_bone_global_pose(bone_IDs[bones_in_chain[bone]])
-	
+
 	# If we need to convert the bone position from bone/skeleton space to world space, we
 	# use the Xform of the skeleton (because bone/skeleton space is relative to the position of the skeleton node).
-	if convert_to_world_space == true:
+	if convert_to_world_space:
 		ret.origin = skeleton.global_transform.xform(ret.origin)
-	
+
 	return ret
 
 
@@ -381,11 +381,11 @@ func _make_editor_sphere_at_node(node, color):
 
 func _set_update_mode(new_value):
 	update_mode = new_value
-	
+
 	set_process(false)
 	set_physics_process(false)
 	set_notify_transform(false)
-	
+
 	if update_mode == 0:
 		set_process(true)
 	elif update_mode == 1:
@@ -393,43 +393,43 @@ func _set_update_mode(new_value):
 	elif update_mode == 2:
 		set_notify_transform(true)
 	else:
-		if debug_messages == true:
+		if debug_messages:
 			printerr(name, " - IK_FABRIK: Unknown update mode. NOT updating skeleton")
 		return
 
 
 func _set_skeleton_path(new_value):
 	# Because get_node doesn't work in the first call, we just want to assign instead
-	if first_call == true:
+	if first_call:
 		skeleton_path = new_value
 		return
-	
+
 	skeleton_path = new_value
-	
+
 	if skeleton_path == null:
-		if debug_messages == true:
+		if debug_messages:
 			printerr(name, " - IK_FABRIK: No Nodepath selected for skeleton_path!")
 		return
-	
+
 	var temp = get_node(skeleton_path)
 	if temp != null:
 		# If it has the method "get_bone_global_pose" it is likely a Skeleton
-		if temp.has_method("get_bone_global_pose") == true:
+		if temp.has_method("get_bone_global_pose"):
 			skeleton = temp
 			bone_IDs = {}
-			
+
 			# (Delete all of the old bone nodes and) Make all of the bone nodes for each bone in the IK chain
 			_make_bone_nodes()
-			
-			if debug_messages == true:
+
+			if debug_messages:
 				printerr(name, " - IK_FABRIK: Attached to a new skeleton")
 		# If not, then it's (likely) not a Skeleton node
 		else:
 			skeleton = null
-			if debug_messages == true:
+			if debug_messages:
 				printerr(name, " - IK_FABRIK: skeleton_path does not point to a skeleton!")
 	else:
-		if debug_messages == true:
+		if debug_messages:
 			printerr(name, " - IK_FABRIK: No Nodepath selected for skeleton_path!")
 
 
@@ -438,33 +438,33 @@ func _set_skeleton_path(new_value):
 func _make_bone_nodes():
 	# Remove all of the old bone nodes
 	# TODO: (not a huge concern, as these can be removed in the editor)
-	
+
 	for bone in range(0, bones_in_chain.size()):
-		
+
 		var bone_name = bones_in_chain[bone]
 		if has_node(bone_name) == false:
 			var new_node = Spatial.new()
 			bone_nodes[bone] = new_node
 			add_child(bone_nodes[bone])
-			
-			if Engine.editor_hint == true:
+
+			if Engine.editor_hint:
 				if get_tree() != null:
 					if get_tree().edited_scene_root != null:
 						bone_nodes[bone].set_owner(get_tree().edited_scene_root)
-			
+
 			bone_nodes[bone].name = bone_name
-			
+
 		else:
 			bone_nodes[bone] = get_node(bone_name)
-		
+
 		# If we are in the editor, we want to make a sphere at this node
-		if Engine.editor_hint == true:
+		if Engine.editor_hint:
 			_make_editor_sphere_at_node(bone_nodes[bone], Color(0.65, 0, 1, 1))
 
 
 func _set_bone_chain_bones(new_value):
 	bones_in_chain = new_value
-	
+
 	_make_bone_nodes()
 
 
