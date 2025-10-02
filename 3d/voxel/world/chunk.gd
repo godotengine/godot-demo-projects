@@ -4,23 +4,25 @@ extends StaticBody3D
 # After that, chunks finish setting themselves up in the _ready() function.
 # If a chunk is changed, its "regenerate" method is called.
 
-const CHUNK_SIZE = 16 # Keep in sync with TerrainGenerator.
-const TEXTURE_SHEET_WIDTH = 8
-
-const CHUNK_LAST_INDEX = CHUNK_SIZE - 1
-const TEXTURE_TILE_SIZE = 1.0 / TEXTURE_SHEET_WIDTH
+const CHUNK_SIZE := 16 # Keep in sync with TerrainGenerator.
+const TEXTURE_SHEET_WIDTH := 8
+const CHUNK_LAST_INDEX := CHUNK_SIZE - 1
+const TEXTURE_TILE_SIZE := 1.0 / TEXTURE_SHEET_WIDTH
+const CHUNK_EXTENTS := Vector3.ONE / 2.0
 const DIRECTIONS: Array[Vector3i] = [Vector3i.LEFT, Vector3i.RIGHT, Vector3i.DOWN, Vector3i.UP, Vector3i.FORWARD, Vector3i.BACK]
 
-var data := {}
+var data: Dictionary[Vector3i, int] = {}
 var chunk_position := Vector3i()
-var is_initial_mesh_generated: bool = false
+var is_initial_mesh_generated := false
+var mesh_task_id := 0
 
-var _thread: Thread
+static var box_shape: BoxShape3D = null
 
-@onready var voxel_world := get_parent()
+@onready var voxel_world := get_parent() as VoxelWorld
 
 
-func _ready() -> void:
+func _init(pos: Vector3i) -> void:
+	chunk_position = pos
 	transform.origin = Vector3(chunk_position * CHUNK_SIZE)
 	name = str(chunk_position)
 	if Settings.world_type == 0:
@@ -32,17 +34,27 @@ func _ready() -> void:
 	_generate_chunk_collider()
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE:
+		if mesh_task_id >= 1:
+			WorkerThreadPool.wait_for_task_completion(mesh_task_id)
+			mesh_task_id = 0
+
+
 func try_initial_generate_mesh(all_chunks: Dictionary[Vector3i, Chunk]) -> void:
 	# We can use a thread for mesh generation.
 	for dir in DIRECTIONS:
 		if not all_chunks.has(chunk_position + dir):
 			return
 	is_initial_mesh_generated = true
-	_thread = Thread.new()
-	_thread.start(_generate_chunk_mesh)
+	mesh_task_id = WorkerThreadPool.add_task(_generate_chunk_mesh, true)
 
 
 func regenerate() -> void:
+	# Making shape changes to bodies with many/complex shapes, while the body is in the scene tree,
+	# can be expensive when using Jolt Physics, so we temporarily remove it from the scene tree.
+	voxel_world.remove_child(self)
+
 	# Clear out all old nodes first.
 	for c in get_children():
 		remove_child(c)
@@ -52,18 +64,14 @@ func regenerate() -> void:
 	_generate_chunk_collider()
 	_generate_chunk_mesh()
 
+	voxel_world.add_child(self)
+
 
 func _generate_chunk_collider() -> void:
 	if data.is_empty():
-		# Avoid errors caused by StaticBody3D not having colliders.
-		_create_block_collider(Vector3.ZERO)
-		collision_layer = 0
-		collision_mask = 0
 		return
 
-	# For each block, generate a collider. Ensure collision layers are enabled.
-	collision_layer = 0xFFFFF
-	collision_mask = 0xFFFFF
+	# For each block, generate a collider.
 	for block_position: Vector3i in data.keys():
 		var block_id: int = data[block_position]
 		if block_id != 27 and block_id != 28:
@@ -201,10 +209,13 @@ func _draw_block_face(surface_tool: SurfaceTool, verts: Array[Vector3], uvs: Arr
 
 
 func _create_block_collider(block_sub_position: Vector3) -> void:
+	if not box_shape:
+		box_shape = BoxShape3D.new()
+		box_shape.extents = CHUNK_EXTENTS
+
 	var collider := CollisionShape3D.new()
-	collider.shape = BoxShape3D.new()
-	collider.shape.extents = Vector3.ONE / 2
-	collider.transform.origin = Vector3(block_sub_position) + Vector3.ONE / 2
+	collider.shape = box_shape
+	collider.transform.origin = block_sub_position + CHUNK_EXTENTS
 	add_child(collider)
 
 
