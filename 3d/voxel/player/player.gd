@@ -6,22 +6,23 @@ const EYE_HEIGHT_CROUCH = 1.4
 const MOVEMENT_SPEED_GROUND = 70.0
 const MOVEMENT_SPEED_AIR = 13.0
 const MOVEMENT_SPEED_CROUCH_MODIFIER = 0.5
+const MOVEMENT_SPEED_SPRINT_MODIFIER = 1.375
 const MOVEMENT_FRICTION_GROUND = 12.5
 const MOVEMENT_FRICTION_AIR = 2.25
-const MOVEMENT_JUMP_VELOCITY = 7.25
+const MOVEMENT_JUMP_VELOCITY = 9.0
 
 var _mouse_motion := Vector2()
 var _selected_block := 6
 
-@onready var gravity := float(ProjectSettings.get_setting("physics/3d/default_gravity"))
-
 @onready var head: Node3D = $Head
+@onready var camera: Camera3D = $Head/Camera3D
 @onready var raycast: RayCast3D = $Head/RayCast3D
 @onready var camera_attributes: CameraAttributes = $Head/Camera3D.attributes
 @onready var selected_block_texture: TextureRect = $SelectedBlock
 @onready var voxel_world: Node = $"../VoxelWorld"
 @onready var crosshair: CenterContainer = $"../PauseMenu/Crosshair"
 @onready var aim_preview: MeshInstance3D = $AimPreview
+@onready var neutral_fov: float = camera.fov
 
 
 func _ready() -> void:
@@ -81,12 +82,13 @@ func _physics_process(delta: float) -> void:
 	camera_attributes.dof_blur_far_distance = Settings.fog_distance * 1.5
 	camera_attributes.dof_blur_far_transition = Settings.fog_distance * 0.125
 	# Crouching.
-	var crouching := Input.is_action_pressed(&"crouch")
+	var crouching: bool = Input.is_action_pressed(&"crouch")
+	var sprinting: bool = Input.is_action_pressed(&"move_sprint")
 	head.transform.origin.y = lerpf(head.transform.origin.y, EYE_HEIGHT_CROUCH if crouching else EYE_HEIGHT_STAND, 1.0 - exp(-delta * 16.0))
 
 	# Keyboard movement.
-	var movement_vec2 := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-	var movement := transform.basis * (Vector3(movement_vec2.x, 0, movement_vec2.y))
+	var movement_vec2: Vector2 = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	var movement: Vector3 = transform.basis * (Vector3(movement_vec2.x, 0, movement_vec2.y))
 
 	if is_on_floor():
 		movement *= MOVEMENT_SPEED_GROUND
@@ -95,10 +97,17 @@ func _physics_process(delta: float) -> void:
 
 	if crouching:
 		movement *= MOVEMENT_SPEED_CROUCH_MODIFIER
+		sprinting = false
+	var target_fov: float = neutral_fov
+	if sprinting:
+		movement *= MOVEMENT_SPEED_SPRINT_MODIFIER
+		target_fov = neutral_fov * 1.25
+	camera.fov = lerpf(camera.fov, target_fov, 1.0 - exp(-delta * 10.0))
 
 	# Gravity.
 	if not is_on_floor():
-		velocity.y -= gravity * delta
+		var factor: float = 3.0 - clampf(velocity.y / -MOVEMENT_JUMP_VELOCITY, 0.0, 2.0)
+		velocity += get_gravity() * (delta * factor)
 
 	velocity += Vector3(movement.x, 0, movement.z) * delta
 	# Apply horizontal friction.
