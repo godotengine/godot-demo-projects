@@ -2,7 +2,7 @@
 class_name PostProcessShader
 extends CompositorEffect
 
-const template_shader := """#version 450
+const TEMPLATE_SHADER: String = """#version 450
 
 #define MAX_VIEWS 2
 
@@ -58,10 +58,10 @@ void main() {
 var rd: RenderingDevice
 var shader: RID
 var pipeline: RID
-var nearest_sampler : RID
+var nearest_sampler: RID
 
 var mutex := Mutex.new()
-var shader_is_dirty := true
+var shader_is_dirty: bool = true
 
 
 func _init() -> void:
@@ -86,7 +86,7 @@ func _check_shader() -> bool:
 	if not rd:
 		return false
 
-	var new_shader_code := ""
+	var new_shader_code: String = ""
 
 	# Check if our shader is dirty.
 	mutex.lock()
@@ -100,7 +100,7 @@ func _check_shader() -> bool:
 		return pipeline.is_valid()
 
 	# Apply template.
-	new_shader_code = template_shader.replace("#COMPUTE_CODE", new_shader_code);
+	new_shader_code = TEMPLATE_SHADER.replace("#COMPUTE_CODE", new_shader_code);
 
 	# Out with the old.
 	if shader.is_valid():
@@ -112,7 +112,7 @@ func _check_shader() -> bool:
 	var shader_source := RDShaderSource.new()
 	shader_source.language = RenderingDevice.SHADER_LANGUAGE_GLSL
 	shader_source.source_compute = new_shader_code
-	var shader_spirv : RDShaderSPIRV = rd.shader_compile_spirv_from_source(shader_source)
+	var shader_spirv: RDShaderSPIRV = rd.shader_compile_spirv_from_source(shader_source)
 
 	if shader_spirv.compile_error_compute != "":
 		push_error(shader_spirv.compile_error_compute)
@@ -133,8 +133,8 @@ func _render_callback(p_effect_callback_type: EffectCallbackType, p_render_data:
 	if rd and p_effect_callback_type == EFFECT_CALLBACK_TYPE_POST_TRANSPARENT and _check_shader():
 		# Get our render scene buffers object, this gives us access to our render buffers.
 		# Note that implementation differs per renderer hence the need for the cast.
-		var render_scene_buffers := p_render_data.get_render_scene_buffers()
-		var scene_data := p_render_data.get_render_scene_data()
+		var render_scene_buffers: RenderSceneBuffers = p_render_data.get_render_scene_buffers()
+		var scene_data: RenderSceneData = p_render_data.get_render_scene_data()
 		if render_scene_buffers and scene_data:
 			# Get our render size, this is the 3D render resolution!
 			var size: Vector2i = render_scene_buffers.get_internal_size()
@@ -143,10 +143,10 @@ func _render_callback(p_effect_callback_type: EffectCallbackType, p_render_data:
 
 			# We can use a compute shader here.
 			@warning_ignore("integer_division")
-			var x_groups := (size.x - 1) / 8 + 1
+			var x_groups: int = (size.x - 1) / 8 + 1
 			@warning_ignore("integer_division")
-			var y_groups := (size.y - 1) / 8 + 1
-			var z_groups := 1
+			var y_groups: int = (size.y - 1) / 8 + 1
+			var z_groups: int = 1
 
 			# Create push constant.
 			# Must be aligned to 16 bytes and be in the same order as defined in the shader.
@@ -159,7 +159,7 @@ func _render_callback(p_effect_callback_type: EffectCallbackType, p_render_data:
 
 			# Make sure we have a sampler.
 			if not nearest_sampler.is_valid():
-				var sampler_state : RDSamplerState = RDSamplerState.new()
+				var sampler_state: RDSamplerState = RDSamplerState.new()
 				sampler_state.min_filter = RenderingDevice.SAMPLER_FILTER_NEAREST
 				sampler_state.mag_filter = RenderingDevice.SAMPLER_FILTER_NEAREST
 				nearest_sampler = rd.sampler_create(sampler_state)
@@ -190,15 +190,15 @@ func _render_callback(p_effect_callback_type: EffectCallbackType, p_render_data:
 				depth_uniform.binding = 2
 				depth_uniform.add_id(nearest_sampler)
 				depth_uniform.add_id(depth_image)
-				var uniform_set := UniformSetCacheRD.get_cache(shader, 0, [scene_data_uniform, color_uniform, depth_uniform])
+				var uniform_set_rid: RID = UniformSetCacheRD.get_cache(shader, 0, [scene_data_uniform, color_uniform, depth_uniform])
 
 				# Set our view.
 				push_constant[2] = view
 
 				# Run our compute shader.
-				var compute_list := rd.compute_list_begin()
+				var compute_list: int = rd.compute_list_begin()
 				rd.compute_list_bind_compute_pipeline(compute_list, pipeline)
-				rd.compute_list_bind_uniform_set(compute_list, uniform_set, 0)
+				rd.compute_list_bind_uniform_set(compute_list, uniform_set_rid, 0)
 				rd.compute_list_set_push_constant(compute_list, push_constant.to_byte_array(), push_constant.size() * 4)
 				rd.compute_list_dispatch(compute_list, x_groups, y_groups, z_groups)
 				rd.compute_list_end()
