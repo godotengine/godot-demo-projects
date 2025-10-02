@@ -15,16 +15,16 @@ float a;
 float maxa=col.a;
 float mina=col.a;
 a=texture(TEXTURE,UV+vec2(0,-outline_width)*ps).a;
-maxa=max(a,maxa); 
+maxa=max(a,maxa);
 mina=min(a,mina);
 a=texture(TEXTURE,UV+vec2(0,outline_width)*ps).a;
-maxa=max(a,maxa); 
+maxa=max(a,maxa);
 mina=min(a,mina);
 a=texture(TEXTURE,UV+vec2(-outline_width,0)*ps).a;
-maxa=max(a,maxa); 
+maxa=max(a,maxa);
 mina=min(a,mina);
 a=texture(TEXTURE,UV+vec2(outline_width,0)*ps).a;
-maxa=max(a,maxa); 
+maxa=max(a,maxa);
 mina=min(a,mina);
 
 COLOR=mix(col,outline_color,maxa-mina);
@@ -56,21 +56,21 @@ void fragment(){
 	float mina = col.a;
 
 	a = texture(TEXTURE, UV + vec2(0, -outline_width)*ps).a;
-	maxa = max(a, maxa); 
+	maxa = max(a, maxa);
 	mina = min(a, mina);
-	
+
 	a = texture(TEXTURE, UV + vec2(0, outline_width)*ps).a;
-	maxa = max(a, maxa); 
+	maxa = max(a, maxa);
 	mina = min(a, mina);
-	
+
 	a = texture(TEXTURE, UV + vec2(-outline_width,0)*ps).a;
-	maxa = max(a, maxa); 
+	maxa = max(a, maxa);
 	mina = min(a, mina);
-	
+
 	a = texture(TEXTURE, UV + vec2(outline_width, 0)*ps).a;
-	maxa = max(a, maxa); 
+	maxa = max(a, maxa);
 	mina = min(a, mina);
-	
+
 	COLOR = mix(col, outline_color, maxa-mina);
 	}"
 
@@ -89,7 +89,7 @@ render_mode blend_premul_alpha;
 
 //this shader only works properly with premultiplied alpha blend mode
 uniform float aura_width = 2.0;
-uniform vec4 aura_color:hint_color; 
+uniform vec4 aura_color:hint_color;
 
 void fragment(){
 	vec4 col = texture(TEXTURE, UV);
@@ -97,30 +97,30 @@ void fragment(){
 	float a;
 	float maxa = col.a;
 	float mina = col.a;
-	
+
 	a = texture(TEXTURE, UV + vec2(0, -aura_width)*ps).a;
-	maxa = max(a, maxa); 
+	maxa = max(a, maxa);
 	mina = min(a, mina);
-	
+
 	a = texture(TEXTURE, UV + vec2(0, aura_width)*ps).a;
-	maxa = max(a, maxa); 
+	maxa = max(a, maxa);
 	mina = min(a, mina);
-	
+
 	a = texture(TEXTURE, UV + vec2(-aura_width, 0)*ps).a;
-	maxa = max(a, maxa); 
+	maxa = max(a, maxa);
 	mina = min(a, mina);
-	
+
 	a = texture(TEXTURE, UV + vec2(aura_width, 0)*ps).a;
-	maxa = max(a, maxa); 
+	maxa = max(a, maxa);
 	mina = min(a, mina);
-	
+
 	col.rgb *= col.a;
-	
+
 	COLOR = col;
 	float auraa = (maxa-mina);
-	
+
 	COLOR.rgb += aura_color.rgb*(auraa);
-	
+
 	}"
 
 [sub_resource type="ShaderMaterial" id=7]
@@ -141,13 +141,13 @@ uniform float radius = 4.0;
 void fragment(){
 	vec4 col = texture(TEXTURE, UV);
 	vec2 ps = TEXTURE_PIXEL_SIZE;
-	
+
 	col += texture(TEXTURE, UV + vec2(0, -radius)*ps);
 	col += texture(TEXTURE, UV + vec2(0, radius)*ps);
 	col += texture(TEXTURE, UV + vec2(-radius, 0)*ps);
 	col += texture(TEXTURE, UV + vec2(radius, 0)*ps);
 	col /= 5.0;
-	
+
 	COLOR = col;
 	}"
 
@@ -168,13 +168,13 @@ uniform float fattyness = 2.0;
 void fragment(){
 	vec2 ruv = UV - vec2(0.5,0.5);
 	vec2 dir = normalize(ruv);
-	float len = length(ruv);	
-	
+	float len = length(ruv);
+
 	len = pow(len*2.0, fattyness)*0.5;
 	ruv = len*dir;
-	
+
 	vec4 col = texture(TEXTURE, ruv + vec2(0.5, 0.5));
-	
+
 	COLOR = col;
 }"
 
@@ -195,9 +195,9 @@ uniform vec4  modulate:hint_color;
 
 void fragment(){
 	vec2 ps = TEXTURE_PIXEL_SIZE;
-	
+
 	vec4 shadow = texture(TEXTURE, UV + vec2(-radius, -radius)*ps);
-	
+
 	shadow += texture(TEXTURE, UV + vec2(-radius, 0)*ps);
 	shadow += texture(TEXTURE, UV + vec2(-radius, radius)*ps);
 	shadow += texture(TEXTURE, UV + vec2(0, -radius)*ps);
@@ -207,7 +207,7 @@ void fragment(){
 	shadow += texture(TEXTURE, UV + vec2(radius, radius)*ps);
 	shadow /= 8.0;
 	shadow *= modulate;
-	
+
 	vec4 col = texture(TEXTURE, UV);
 	COLOR = mix(shadow, col, col.a);
 	}"
@@ -230,10 +230,10 @@ uniform vec4 modulate:hint_color;
 
 void fragment(){
 	vec2 ps = TEXTURE_PIXEL_SIZE;
-	
+
 	vec4 shadow = vec4(modulate.rgb, texture(TEXTURE, UV - offset*ps).a*modulate.a);
 	vec4 col = texture(TEXTURE, UV);
-	
+
 	COLOR = mix(shadow, col, col.a);
 	}"
 
@@ -253,9 +253,8 @@ render_mode blend_mix;
 uniform vec4 modulate:hint_color;
 
 void fragment(){
-	
 	COLOR = vec4(modulate.rgb, texture(TEXTURE, UV).a*modulate.a);
-	
+
 	}"
 
 [sub_resource type="ShaderMaterial" id=17]
@@ -278,7 +277,7 @@ void fragment(){
 	vec2 ps = TEXTURE_PIXEL_SIZE;
 	vec4 col = texture(TEXTURE, UV);
 	vec4 glow = col;
-	
+
 	glow += texture(TEXTURE, UV + vec2(-r, -r)*ps);
 	glow += texture(TEXTURE, UV + vec2(-r, 0)*ps);
 	glow += texture(TEXTURE, UV + vec2(-r, r)*ps);
@@ -287,7 +286,7 @@ void fragment(){
 	glow += texture(TEXTURE, UV + vec2(r, -r)*ps);
 	glow += texture(TEXTURE, UV + vec2(r, 0)*ps);
 	glow += texture(TEXTURE, UV + vec2(r, r)*ps);
-	
+
 	r *= 2.0;
 	glow += texture(TEXTURE, UV + vec2(-r, -r)*ps);
 	glow += texture(TEXTURE, UV + vec2(-r, 0)*ps);
@@ -297,13 +296,13 @@ void fragment(){
 	glow += texture(TEXTURE, UV + vec2(r, -r)*ps);
 	glow += texture(TEXTURE, UV + vec2(r, 0)*ps);
 	glow += texture(TEXTURE, UV + vec2(r, r)*ps);
-	
+
 	glow /= 17.0;
 	glow *= amount;
 	col.rgb *= col.a;
-	
+
 	COLOR = glow + col;
-	
+
 	}"
 
 [sub_resource type="ShaderMaterial" id=19]
@@ -322,13 +321,12 @@ render_mode blend_mix;
 uniform float amount = 20.0;
 
 void fragment(){
-	
 	vec2 uv = UV*0.05;
 	float a = fract(sin(dot(UV, vec2(12.9898, 78.233)))*438.5453);
 	vec4 col = texture(TEXTURE, UV);
-	
+
 	col.a *= pow(a, amount);
-	
+
 	COLOR = col;
 	}"
 

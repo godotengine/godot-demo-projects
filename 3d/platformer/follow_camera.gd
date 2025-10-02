@@ -1,4 +1,3 @@
-
 extends Camera
 
 # Member variables

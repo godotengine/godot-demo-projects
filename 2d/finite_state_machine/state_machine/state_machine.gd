@@ -12,7 +12,7 @@ signal state_changed(current_state)
 """
 You must set a starting node from the inspector or on
 the node that inherits from this state machine interface
-If you don't the game will crash (on purpose, so you won't 
+If you don't the game will crash (on purpose, so you won't
 forget to initialize the state machine)
 """
 export(NodePath) var START_STATE
@@ -58,14 +58,14 @@ func _change_state(state_name):
 	if not _active:
 		return
 	current_state.exit()
-	
+
 	if state_name == "previous":
 		states_stack.pop_front()
 	else:
 		states_stack[0] = states_map[state_name]
-	
+
 	current_state = states_stack[0]
 	emit_signal("state_changed", current_state)
-	
+
 	if state_name != "previous":
 		current_state.enter()

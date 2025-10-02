@@ -11,10 +11,10 @@ func _ready():
 
 func _process(delta):
 	var mouse_to_world = project_local_ray_normal(get_viewport().get_mouse_position()) * MOVEMENT_SPEED
-	
+
 	if flip_axis == false:
 		mouse_to_world.z *= -1
 	else:
 		mouse_to_world = -mouse_to_world
-	
+
 	targets.transform.origin = mouse_to_world

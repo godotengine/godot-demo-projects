@@ -10,12 +10,12 @@ func set_active(value):
 	active = value
 	set_process(value)
 	set_process_input(value)
-	
+
 	if not active:
 		return
 	if $Health.armor >= $Health.base_armor + defense:
 		$Health.armor = $Health.base_armor
-	
+
 func attack(target):
 	target.take_damage(damage)
 	emit_signal("turn_finished")
@@ -27,10 +27,10 @@ func defend():
 func consume(item):
 	item.use(self)
 	emit_signal("turn_finished")
-	
+
 func flee():
 	emit_signal("turn_finished")
-	
+
 func take_damage(damage):
 	$Health.take_damage(damage)
 	$Sprite/AnimationPlayer.play("take_damage")

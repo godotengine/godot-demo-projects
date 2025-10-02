@@ -1,4 +1,3 @@
-
 extends Area
 
 # Member variables

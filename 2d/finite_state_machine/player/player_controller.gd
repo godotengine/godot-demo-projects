@@ -1,5 +1,5 @@
 """
-The Player is a KinematicBody2D, in other words a physics-driven object. 
+The Player is a KinematicBody2D, in other words a physics-driven object.
 It can move, collide with the world...
 It HAS a state machine, but the body and the state machine are separate.
 """

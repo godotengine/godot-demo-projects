@@ -36,7 +36,6 @@ code = "shader_type canvas_item;
 uniform float amount : hint_range(0,5);
 
 void fragment() {
-
 	COLOR.rgb = textureLod(SCREEN_TEXTURE,SCREEN_UV,amount).rgb;
 }"
 
@@ -57,7 +56,7 @@ uniform float size_y=0.008;
 void fragment() {
 	vec2 uv = SCREEN_UV;
 	uv-=mod(uv,vec2(size_x,size_y));
-	
+
 	COLOR.rgb= textureLod(SCREEN_TEXTURE,uv,0.0).rgb;
 }
 "
@@ -102,13 +101,12 @@ uniform vec4 base : hint_color;
 
 void fragment() {
 	vec3 c = textureLod(SCREEN_TEXTURE,SCREEN_UV,0.0).rgb;
-	
+
 	//float v = max(c.r,max(c.g,c.b));
 	float v = dot(c,vec3(0.33333,0.33333,0.33333));
 	v=sqrt(v);
 	//v*=v;
 	COLOR.rgb= base.rgb*v;
-
 }"
 
 [sub_resource type="ShaderMaterial" id=10]
@@ -123,7 +121,6 @@ _sections_unfolded = [ "shader", "shader_param" ]
 code = "shader_type canvas_item;
 
 void fragment() {
-
 	vec3 c = textureLod(SCREEN_TEXTURE,SCREEN_UV,0.0).rgb;
 	c=vec3(1.0)-c;
 	COLOR.rgb=c;
@@ -141,7 +138,6 @@ _sections_unfolded = [ "shader" ]
 code = "shader_type canvas_item;
 
 void fragment() {
-
 	vec3 c = textureLod(SCREEN_TEXTURE,SCREEN_UV,0.0).rgb;
 	c=mod(c+vec3(0.5),vec3(1.0));
 	COLOR.rgb=c;
@@ -179,13 +175,12 @@ uniform float contrast=1.5;
 uniform float saturation=1.8;
 
 void fragment() {
-
 	vec3 c = textureLod(SCREEN_TEXTURE,SCREEN_UV,0.0).rgb;
-	
+
 	c.rgb = mix(vec3(0.0),c.rgb,brightness);
 	c.rgb = mix(vec3(0.5),c.rgb,contrast);
 	c.rgb = mix(vec3(dot(vec3(1.0),c.rgb)*0.33333),c.rgb,saturation);
-	
+
 	COLOR.rgb=c;
 }
 "
@@ -207,13 +202,12 @@ uniform float frequency=60;
 uniform float depth = 0.005;
 
 void fragment() {
-	
 	vec2 uv = SCREEN_UV;
 	uv.x += sin(uv.y*frequency+TIME)*depth;
 	uv.x = clamp(uv.x,0,1);
 	vec3 c = textureLod(SCREEN_TEXTURE,uv,0.0).rgb;
-	
-	
+
+
 	COLOR.rgb=c;
 }
 "
@@ -239,25 +233,24 @@ uniform float stretch = 0.5;
 uniform float flashing=0.01;
 
 float make_grain(float time,vec2 uv) {
-
 	vec2 ofs = vec2(sin(41.0*time*sin(time*123.0)),sin(27.0*time*sin(time*312.0)));
 	return texture(grain,(uv+mod(ofs,vec2(1,1)))*stretch).r;
 }
 
 void fragment() {
 	vec3 c = textureLod(SCREEN_TEXTURE,SCREEN_UV,0.0).rgb;
-	
+
 	//float v = max(c.r,max(c.g,c.b));
 	float v = dot(c,vec3(0.33333,0.33333,0.33333));
 	v=sqrt(v);
 	//v*=v;
-	
+
 	float f = 1.0/fps;
 	float g = make_grain(TIME-mod(TIME,f),UV);
 	g=max(g,make_grain(TIME-mod(TIME,f)+f,UV)*0.5);
 	g=max(g,make_grain(TIME-mod(TIME,f)+f*2.0,UV)*0.25);
-	
-	
+
+
 	COLOR.rgb= base.rgb*v-vec3(g)*grain_strength;
 	COLOR.rgb*=texture(vignette,UV).r;
 	float ft = TIME * 0.002;

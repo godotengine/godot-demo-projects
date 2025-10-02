@@ -1,4 +1,3 @@
-
 extends Panel
 
 func _on_english_pressed():

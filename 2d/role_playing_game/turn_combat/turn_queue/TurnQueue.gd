@@ -26,7 +26,7 @@ func get_next_in_queue():
 	queue.append(current_combatant)
 	self.active_combatant = queue[0]
 	return active_combatant
-	
+
 func remove(combatant):
 	var new_queue = []
 	for n in queue:

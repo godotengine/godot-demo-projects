@@ -13,4 +13,4 @@ func reset():
 
 func _process(delta):
 	position += direction * speed * delta
-	
+

@@ -1,4 +1,3 @@
-
 extends KinematicBody
 
 # Member variables

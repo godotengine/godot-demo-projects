@@ -24,5 +24,4 @@ public class Mob : RigidBody2D
     {
         QueueFree();
     }
-
 }

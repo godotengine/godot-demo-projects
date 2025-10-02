@@ -1,0 +1,19 @@
+name: Static Checks
+on: [push, pull_request]
+
+jobs:
+  format:
+    name: File formatting (file_format.sh)
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -qq dos2unix recode
+
+      - name: File formatting checks (file_format.sh)
+        run: |
+          bash ./file_format.sh

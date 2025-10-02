@@ -19,7 +19,7 @@ func get_cell_pawn(cell, type = ACTOR):
 func request_move(pawn, direction):
 	var cell_start = world_to_map(pawn.position)
 	var cell_target = cell_start + direction
-	
+
 	var cell_tile_id = get_cellv(cell_target)
 	match cell_tile_id:
 		-1:
@@ -29,8 +29,8 @@ func request_move(pawn, direction):
 		OBJECT, ACTOR:
 			var target_pawn = get_cell_pawn(cell_target, cell_tile_id)
 			print("Cell %s contains %s" % [cell_target, target_pawn.name])
-			
+
 			if not target_pawn.has_node("DialoguePlayer"):
 				return
 			get_node(dialogue_ui).show_dialogue(pawn, target_pawn.get_node("DialoguePlayer"))
-			
+

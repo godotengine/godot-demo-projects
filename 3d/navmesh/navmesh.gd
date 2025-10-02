@@ -1,4 +1,3 @@
-
 extends Navigation
 
 # Member variables
@@ -29,16 +28,16 @@ func _process(delta):
 			else:
 				path[path.size() - 1] = pfrom.linear_interpolate(pto, to_walk/d)
 				to_walk = 0
-		
+
 		var atpos = path[path.size() - 1]
 		var atdir = to_watch
 		atdir.y = 0
-		
+
 		var t = Transform()
 		t.origin = atpos
 		t = t.looking_at(atpos + atdir, Vector3(0, 1, 0))
 		get_node("robot_base").set_transform(t)
-		
+
 		if path.size() < 2:
 			path = []
 			set_process(false)
@@ -72,12 +71,12 @@ func _input(event):
 		var from = get_node("cambase/Camera").project_ray_origin(event.position)
 		var to = from + get_node("cambase/Camera").project_ray_normal(event.position)*100
 		var p = get_closest_point_to_segment(from, to)
-		
+
 		begin = get_closest_point(get_node("robot_base").get_translation())
 		end = p
 
 		_update_path()
-	
+
 	if event is InputEventMouseMotion:
 		if event.button_mask&(BUTTON_MASK_MIDDLE+BUTTON_MASK_RIGHT):
 			camrot += event.relative.x * 0.005

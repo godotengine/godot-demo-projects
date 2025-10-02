@@ -15,7 +15,7 @@ func _ready():
 			continue
 		if not n.has_node("DialoguePlayer"):
 			continue
-		n.get_node("DialoguePlayer").connect("dialogue_finished", self, 
+		n.get_node("DialoguePlayer").connect("dialogue_finished", self,
 			"_on_opponent_dialogue_finished", [n])
 	remove_child(combat_screen)
 
@@ -25,7 +25,7 @@ func _on_opponent_dialogue_finished(opponent):
 	var player = $Exploration/Grid/Player
 	var combatents = [player.combat_actor, opponent.combat_actor]
 	start_combat(combatents)
-	
+
 func start_combat(combat_actors):
 	remove_child($Exploration)
 	$AnimationPlayer.play("fade")
@@ -34,7 +34,7 @@ func start_combat(combat_actors):
 	combat_screen.show()
 	combat_screen.initialize(combat_actors)
 	$AnimationPlayer.play_backwards("fade")
-	
+
 func _on_combat_finished(winner, loser):
 	remove_child(combat_screen)
 	$AnimationPlayer.play_backwards("fade")

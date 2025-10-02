@@ -4,7 +4,7 @@ func set_active(value):
 	.set_active(value)
 	if not active:
 		return
-	
+
 	$Timer.start()
 	yield($Timer, "timeout")
 	var target

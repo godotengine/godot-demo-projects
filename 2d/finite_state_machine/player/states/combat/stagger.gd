@@ -1,6 +1,6 @@
 """
 The stagger state end with the stagger animation from the AnimationPlayer
-The animation only affects the Body Sprite"s modulate property so 
+The animation only affects the Body Sprite"s modulate property so
 it could stack with other animations if we had two AnimationPlayer nodes
 """
 extends "res://state_machine/state.gd"

@@ -11,5 +11,5 @@ func _physics_process(delta):
 	accum = fmod(accum, PI * 2.0)
 	var d = sin(accum)
 	var xf = Transform2D()
-	xf[2]= motion * d 
+	xf[2]= motion * d
 	$platform.transform = xf

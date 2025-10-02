@@ -5,7 +5,7 @@ export (PackedScene) var info_scene
 
 func _ready():
 	combatants_node = get_node(combatants_node)
-	
+
 func initialize():
 	for combatant in combatants_node.get_children():
 		var health = combatant.get_node("Health")

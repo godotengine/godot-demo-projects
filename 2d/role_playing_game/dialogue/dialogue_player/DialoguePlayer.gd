@@ -15,7 +15,7 @@ func start_dialogue():
 	index_dialogue()
 	dialogue_text = dialogue_keys[current].text
 	dialogue_name = dialogue_keys[current].name
-	
+
 func next_dialogue():
 	current += 1
 	if current == dialogue_keys.size():
@@ -23,13 +23,13 @@ func next_dialogue():
 		return
 	dialogue_text = dialogue_keys[current].text
 	dialogue_name = dialogue_keys[current].name
-		
+
 func index_dialogue():
 	var dialogue = load_dialogue(dialogue_file)
 	dialogue_keys.clear()
 	for key in dialogue:
 		dialogue_keys.append(dialogue[key])
-		
+
 func load_dialogue(file_path):
 	var file = File.new()
 	if file.file_exists(file_path):
