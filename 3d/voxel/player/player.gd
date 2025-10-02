@@ -3,11 +3,12 @@ extends CharacterBody3D
 const EYE_HEIGHT_STAND = 1.6
 const EYE_HEIGHT_CROUCH = 1.4
 
-const MOVEMENT_SPEED_GROUND = 0.6
-const MOVEMENT_SPEED_AIR = 0.11
+const MOVEMENT_SPEED_GROUND = 70.0
+const MOVEMENT_SPEED_AIR = 13.0
 const MOVEMENT_SPEED_CROUCH_MODIFIER = 0.5
-const MOVEMENT_FRICTION_GROUND = 0.9
-const MOVEMENT_FRICTION_AIR = 0.98
+const MOVEMENT_FRICTION_GROUND = 12.5
+const MOVEMENT_FRICTION_AIR = 2.25
+const MOVEMENT_JUMP_VELOCITY = 7.25
 
 var _mouse_motion := Vector2()
 var _selected_block := 6
@@ -81,7 +82,7 @@ func _physics_process(delta: float) -> void:
 	camera_attributes.dof_blur_far_transition = Settings.fog_distance * 0.125
 	# Crouching.
 	var crouching := Input.is_action_pressed(&"crouch")
-	head.transform.origin.y = lerpf(head.transform.origin.y, EYE_HEIGHT_CROUCH if crouching else EYE_HEIGHT_STAND, 16 * delta)
+	head.transform.origin.y = lerpf(head.transform.origin.y, EYE_HEIGHT_CROUCH if crouching else EYE_HEIGHT_STAND, 1.0 - exp(-delta * 16.0))
 
 	# Keyboard movement.
 	var movement_vec2 := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -96,17 +97,18 @@ func _physics_process(delta: float) -> void:
 		movement *= MOVEMENT_SPEED_CROUCH_MODIFIER
 
 	# Gravity.
-	velocity.y -= gravity * delta
+	if not is_on_floor():
+		velocity.y -= gravity * delta
 
-	velocity += Vector3(movement.x, 0, movement.z)
+	velocity += Vector3(movement.x, 0, movement.z) * delta
 	# Apply horizontal friction.
-	velocity.x *= MOVEMENT_FRICTION_GROUND if is_on_floor() else MOVEMENT_FRICTION_AIR
-	velocity.z *= MOVEMENT_FRICTION_GROUND if is_on_floor() else MOVEMENT_FRICTION_AIR
+	var friction_delta := exp(-(MOVEMENT_FRICTION_GROUND if is_on_floor() else MOVEMENT_FRICTION_AIR) * delta)
+	velocity = Vector3(velocity.x * friction_delta, velocity.y, velocity.z * friction_delta)
 	move_and_slide()
 
 	# Jumping, applied next frame.
 	if is_on_floor() and Input.is_action_pressed(&"jump"):
-		velocity.y = 7.5
+		velocity.y = MOVEMENT_JUMP_VELOCITY
 
 
 func _input(event: InputEvent) -> void:
