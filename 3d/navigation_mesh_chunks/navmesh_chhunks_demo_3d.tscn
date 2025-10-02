@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://cir4dtbp7i1ky"]
 
-[ext_resource type="Script" path="res://navmesh_chhunks_demo_3d.gd" id="1_027f2"]
+[ext_resource type="Script" uid="uid://ctnbg0gjol208" path="res://navmesh_chhunks_demo_3d.gd" id="1_027f2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p73ky"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -12,7 +12,7 @@ sky_material = SubResource("ProceduralSkyMaterial_p73ky")
 [sub_resource type="Environment" id="Environment_ccmns"]
 background_mode = 2
 sky = SubResource("Sky_k64yg")
-tonemap_mode = 2
+tonemap_mode = 4
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8p3iq"]
@@ -93,6 +93,14 @@ debug_use_custom = true
 debug_path_custom_color = Color(1, 1, 0, 1)
 debug_path_custom_point_size = 10.0
 
+[node name="PathDebugNoPostProcessing" type="NavigationAgent3D" parent="DebugPaths"]
+unique_name_in_owner = true
+path_postprocessing = 2
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+debug_path_custom_point_size = 10.0
+
 [node name="DebugMousePos" type="Node3D" parent="DebugPaths"]
 unique_name_in_owner = true
 
@@ -148,5 +156,21 @@ color = Color(1, 1, 0, 1)
 [node name="Label" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "Path edge-centered"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(128, 8)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(1, 0, 0, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Path no post-processing"
 horizontal_alignment = 1
 vertical_alignment = 1

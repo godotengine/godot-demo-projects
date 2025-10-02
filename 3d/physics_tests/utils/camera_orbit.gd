@@ -20,7 +20,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event is InputEventMouseMotion:
-		var rotation_delta: float = event.relative.x
+		var rotation_delta: float = event.screen_relative.x
 		_rotation_pivot.rotate(Vector3.UP, -rotation_delta * ROTATION_COEFF)
 
 

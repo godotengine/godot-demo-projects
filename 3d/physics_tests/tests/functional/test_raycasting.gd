@@ -88,7 +88,7 @@ func _add_raycast(space_state: PhysicsDirectSpaceState3D, pos_start: Vector3, po
 	if result:
 		_raycast_visuals.surface_set_color(Color.GREEN)
 	else:
-		_raycast_visuals.surface_set_color(Color.RED.darkened(0.5))
+		_raycast_visuals.surface_set_color(Color.BLACK)
 
 	# Draw raycast line.
 	_raycast_visuals.surface_add_vertex(pos_start)

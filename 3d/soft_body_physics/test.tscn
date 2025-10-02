@@ -1,0 +1,492 @@
+[gd_scene load_steps=21 format=3 uid="uid://bks13fos3trrs"]
+
+[ext_resource type="PackedScene" uid="uid://ditdn410656" path="res://cloth.tscn" id="3_6uqi0"]
+[ext_resource type="PackedScene" uid="uid://nn4wqmqujm26" path="res://sphere.tscn" id="4_ppyta"]
+[ext_resource type="PackedScene" uid="uid://hlyf6l5pbqgu" path="res://rigid_box_heavy.tscn" id="5_ykrsh"]
+[ext_resource type="PackedScene" uid="uid://b6uelvj3b82bf" path="res://rigid_box_light.tscn" id="6_g14j6"]
+[ext_resource type="PackedScene" uid="uid://inwnbl1ufttq" path="res://box.tscn" id="6_vbegm"]
+[ext_resource type="PackedScene" uid="uid://da7gfvk1e0p6i" path="res://pin.tscn" id="8_ehkex"]
+[ext_resource type="Texture2D" uid="uid://chjqieyps5n5r" path="res://textures/checker.png" id="14"]
+[ext_resource type="Script" uid="uid://bi2o4fooys1dc" path="res://tester.gd" id="18"]
+
+[sub_resource type="ProceduralSkyMaterial" id="9"]
+
+[sub_resource type="Sky" id="10"]
+sky_material = SubResource("9")
+
+[sub_resource type="Environment" id="11"]
+background_mode = 2
+sky = SubResource("10")
+tonemap_mode = 4
+tonemap_exposure = 1.3
+
+[sub_resource type="Animation" id="12"]
+resource_name = "move"
+length = 6.0
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ecfcr"]
+_data = {
+&"move": SubResource("12")
+}
+
+[sub_resource type="StandardMaterial3D" id="13"]
+diffuse_mode = 1
+albedo_texture = ExtResource("14")
+uv1_scale = Vector3(32, 32, 1)
+texture_filter = 5
+
+[sub_resource type="PlaneMesh" id="14"]
+material = SubResource("13")
+size = Vector2(64, 64)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_g14j6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6uqi0"]
+albedo_color = Color(0.396078, 0.52549, 1, 1)
+albedo_texture = ExtResource("14")
+uv1_scale = Vector3(3, 2, 1)
+texture_filter = 5
+
+[sub_resource type="BoxMesh" id="BoxMesh_ppyta"]
+material = SubResource("StandardMaterial3D_6uqi0")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ykrsh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g14j6"]
+size = Vector3(3, 3, 0.5)
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("11")
+script = ExtResource("18")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ecfcr")
+}
+autoplay = "move"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="Plane" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+layers = 2
+mesh = SubResource("14")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+shape = SubResource("WorldBoundaryShape3D_g14j6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.770897, 0.365782, -0.52146, -7.63748e-10, 0.818671, 0.574263, 0.63696, 0.442697, -0.631111, 3.9506, 3.39961, 3.54442)
+shadow_enabled = true
+shadow_bias = 0.04
+shadow_blur = 1.5
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 20.0
+
+[node name="CameraHolder" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.125, 12)
+
+[node name="RotationX" type="Node3D" parent="CameraHolder"]
+
+[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX"]
+fov = 70.0
+
+[node name="Testers" type="Node3D" parent="."]
+
+[node name="ClothPhysics" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
+
+[node name="Cloth" parent="Testers/ClothPhysics" instance=ExtResource("3_6uqi0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Testers/ClothPhysics"]
+transform = Transform3D(0.851651, 0.309976, 0.422618, -0.34202, 0.939693, 0, -0.397131, -0.144544, 0.906308, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ClothPhysics/StaticBody3D"]
+mesh = SubResource("BoxMesh_ppyta")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/ClothPhysics/StaticBody3D"]
+shape = SubResource("BoxShape3D_ykrsh")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Testers/ClothPhysics"]
+transform = Transform3D(0.212913, 0.0774939, 0.105655, -0.085505, 0.234923, -3.0889e-10, -0.0992828, -0.036136, 0.226577, 0.193735, 0.587308, -0.09034)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ClothPhysics/StaticBody3D2"]
+mesh = SubResource("BoxMesh_ppyta")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/ClothPhysics/StaticBody3D2"]
+shape = SubResource("BoxShape3D_ykrsh")
+
+[node name="SoftBoxes" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="Box" parent="Testers/SoftBoxes" instance=ExtResource("6_vbegm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
+
+[node name="Box2" parent="Testers/SoftBoxes" instance=ExtResource("6_vbegm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.90000004, 1, 0)
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Testers/SoftBoxes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.6, -2.62268e-08)
+use_collision = true
+polygon = PackedVector2Array(0.458662, -0.458186, 0.222452, -0.352707, 0.261384, -0.169098, 0.403376, -0.143968, 0.627135, -0.181435, 0.737105, -0.303279, 0.648884, -0.455454)
+
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="Testers/SoftBoxes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.726544, 0.6, -0.572491)
+use_collision = true
+polygon = PackedVector2Array(0.458662, -0.458186, 0.222452, -0.352707, 0.261384, -0.169098, 0.403376, -0.143968, 0.627135, -0.181435, 0.737105, -0.303279, 0.648884, -0.455454)
+
+[node name="CSGPolygon3D3" type="CSGPolygon3D" parent="Testers/SoftBoxes"]
+transform = Transform3D(1, 0, 0, 0, -0.992629, 0.121194, 0, -0.121194, -0.992629, -0.726544, 0.6, -0.572491)
+use_collision = true
+polygon = PackedVector2Array(0.458662, -0.458186, 0.222452, -0.352707, 0.261384, -0.169098, 0.403376, -0.143968, 0.627135, -0.181435, 0.737105, -0.303279, 0.648884, -0.455454)
+
+[node name="CSGPolygon3D4" type="CSGPolygon3D" parent="Testers/SoftBoxes"]
+transform = Transform3D(1, 0, 0, 0, -0.992629, 0.121194, 0, -0.121194, -0.992629, -0.216217, -0.0966039, -0.68374)
+use_collision = true
+polygon = PackedVector2Array(0.458662, -0.458186, 0.222452, -0.352707, 0.261384, -0.169098, 0.403376, -0.143968, 0.627135, -0.181435, 0.737105, -0.303279, 0.648884, -0.455454)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Testers/SoftBoxes"]
+use_collision = true
+size = Vector3(2.5, 1, 2.5)
+material = SubResource("StandardMaterial3D_6uqi0")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Testers/SoftBoxes/CSGBox3D"]
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0.9, 0)
+operation = 2
+radius = 0.9
+radial_segments = 96
+rings = 32
+material = SubResource("StandardMaterial3D_6uqi0")
+
+[node name="RigidBoxHeavy" parent="Testers/SoftBoxes" instance=ExtResource("5_ykrsh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0.4)
+
+[node name="RigidBoxHeavy2" parent="Testers/SoftBoxes" instance=ExtResource("5_ykrsh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 2, -0.1)
+
+[node name="RigidBoxLight" parent="Testers/SoftBoxes" instance=ExtResource("6_g14j6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 1.5, -0.0999997)
+
+[node name="RigidBoxLight2" parent="Testers/SoftBoxes" instance=ExtResource("6_g14j6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 1.5, 0.2)
+
+[node name="RigidBoxLight3" parent="Testers/SoftBoxes" instance=ExtResource("6_g14j6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 2.6, -0.6)
+
+[node name="InvisibleWalls" type="StaticBody3D" parent="Testers/SoftBoxes"]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/SoftBoxes/InvisibleWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 1.5, 1.5)
+shape = SubResource("BoxShape3D_g14j6")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Testers/SoftBoxes/InvisibleWalls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.5, 1.5, -0.25)
+shape = SubResource("BoxShape3D_g14j6")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Testers/SoftBoxes/InvisibleWalls"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.25, 1.5, -1.5)
+shape = SubResource("BoxShape3D_g14j6")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Testers/SoftBoxes/InvisibleWalls"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 1.5, 1.5, 0.25)
+shape = SubResource("BoxShape3D_g14j6")
+
+[node name="SoftSpheres" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Sphere" parent="Testers/SoftSpheres" instance=ExtResource("4_ppyta")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Sphere2" parent="Testers/SoftSpheres" instance=ExtResource("4_ppyta")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.6, 0)
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Testers/SoftSpheres"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.6, -2.62268e-08)
+use_collision = true
+polygon = PackedVector2Array(0.458662, -0.458186, 0.222452, -0.352707, 0.261384, -0.169098, 0.403376, -0.143968, 0.627135, -0.181435, 0.737105, -0.303279, 0.648884, -0.455454)
+
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="Testers/SoftSpheres"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.726544, 0.6, -0.572491)
+use_collision = true
+polygon = PackedVector2Array(0.458662, -0.458186, 0.222452, -0.352707, 0.261384, -0.169098, 0.403376, -0.143968, 0.627135, -0.181435, 0.737105, -0.303279, 0.648884, -0.455454)
+
+[node name="CSGPolygon3D3" type="CSGPolygon3D" parent="Testers/SoftSpheres"]
+transform = Transform3D(1, 0, 0, 0, -0.992629, 0.121194, 0, -0.121194, -0.992629, -0.726544, 0.6, -0.572491)
+use_collision = true
+polygon = PackedVector2Array(0.458662, -0.458186, 0.222452, -0.352707, 0.261384, -0.169098, 0.403376, -0.143968, 0.627135, -0.181435, 0.737105, -0.303279, 0.648884, -0.455454)
+
+[node name="CSGPolygon3D4" type="CSGPolygon3D" parent="Testers/SoftSpheres"]
+transform = Transform3D(1, 0, 0, 0, -0.992629, 0.121194, 0, -0.121194, -0.992629, -0.216217, -0.0966039, -0.68374)
+use_collision = true
+polygon = PackedVector2Array(0.458662, -0.458186, 0.222452, -0.352707, 0.261384, -0.169098, 0.403376, -0.143968, 0.627135, -0.181435, 0.737105, -0.303279, 0.648884, -0.455454)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Testers/SoftSpheres"]
+use_collision = true
+size = Vector3(2.5, 1, 2.5)
+material = SubResource("StandardMaterial3D_6uqi0")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Testers/SoftSpheres/CSGBox3D"]
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0.9, 0)
+operation = 2
+radius = 0.9
+radial_segments = 96
+rings = 32
+material = SubResource("StandardMaterial3D_6uqi0")
+
+[node name="RigidBoxHeavy" parent="Testers/SoftSpheres" instance=ExtResource("5_ykrsh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0.4)
+
+[node name="RigidBoxHeavy2" parent="Testers/SoftSpheres" instance=ExtResource("5_ykrsh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 2, -0.1)
+
+[node name="RigidBoxLight" parent="Testers/SoftSpheres" instance=ExtResource("6_g14j6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 1.5, -0.0999997)
+
+[node name="RigidBoxLight2" parent="Testers/SoftSpheres" instance=ExtResource("6_g14j6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 1.5, 0.2)
+
+[node name="RigidBoxLight3" parent="Testers/SoftSpheres" instance=ExtResource("6_g14j6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 2.6, -0.6)
+
+[node name="InvisibleWalls" type="StaticBody3D" parent="Testers/SoftSpheres"]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/SoftSpheres/InvisibleWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 1.5, 1.5)
+shape = SubResource("BoxShape3D_g14j6")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Testers/SoftSpheres/InvisibleWalls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.5, 1.5, -0.25)
+shape = SubResource("BoxShape3D_g14j6")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Testers/SoftSpheres/InvisibleWalls"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.25, 1.5, -1.5)
+shape = SubResource("BoxShape3D_g14j6")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Testers/SoftSpheres/InvisibleWalls"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 1.5, 1.5, 0.25)
+shape = SubResource("BoxShape3D_g14j6")
+
+[node name="CentralImpulseTimer" type="Node3D" parent="Testers"]
+
+[node name="Cloth" parent="Testers/CentralImpulseTimer" instance=ExtResource("3_6uqi0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Testers/CentralImpulseTimer"]
+transform = Transform3D(0.851651, 0.309976, 0.422618, -0.34202, 0.939693, 0, -0.397131, -0.144544, 0.906308, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/CentralImpulseTimer/StaticBody3D"]
+mesh = SubResource("BoxMesh_ppyta")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/CentralImpulseTimer/StaticBody3D"]
+shape = SubResource("BoxShape3D_ykrsh")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Testers/CentralImpulseTimer"]
+transform = Transform3D(0.212913, 0.0774939, 0.105655, -0.085505, 0.234923, -3.0889e-10, -0.0992828, -0.036136, 0.226577, 0.193735, 0.587308, -0.09034)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/CentralImpulseTimer/StaticBody3D2"]
+mesh = SubResource("BoxMesh_ppyta")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/CentralImpulseTimer/StaticBody3D2"]
+shape = SubResource("BoxShape3D_ykrsh")
+
+[node name="Timer" type="Timer" parent="Testers/CentralImpulseTimer"]
+wait_time = 1.5
+autostart = true
+
+[node name="RigidBoxHeavy" parent="Testers/CentralImpulseTimer" instance=ExtResource("5_ykrsh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.3, -0.6)
+
+[node name="RigidBoxHeavy2" parent="Testers/CentralImpulseTimer" instance=ExtResource("5_ykrsh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 1.3, 0.6)
+
+[node name="RigidBoxLight" parent="Testers/CentralImpulseTimer" instance=ExtResource("6_g14j6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, 0.1)
+
+[node name="CentralForceWind" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="Cloth" parent="Testers/CentralForceWind" instance=ExtResource("3_6uqi0")]
+transform = Transform3D(0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, -0.38637, 0.896472, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Testers/CentralForceWind"]
+transform = Transform3D(0.851651, 0.309976, 0.422618, -0.34202, 0.939693, 0, -0.397131, -0.144544, 0.906308, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/CentralForceWind/StaticBody3D"]
+mesh = SubResource("BoxMesh_ppyta")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/CentralForceWind/StaticBody3D"]
+shape = SubResource("BoxShape3D_ykrsh")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Testers/CentralForceWind"]
+transform = Transform3D(0.212913, 0.0774939, 0.105655, -0.085505, 0.234923, -3.0889e-10, -0.0992828, -0.036136, 0.226577, 0.193735, 0.587308, -0.09034)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/CentralForceWind/StaticBody3D2"]
+mesh = SubResource("BoxMesh_ppyta")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/CentralForceWind/StaticBody3D2"]
+shape = SubResource("BoxShape3D_ykrsh")
+
+[node name="PerPointImpulseTimer" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+
+[node name="PointTrackers" type="Node3D" parent="Testers/PerPointImpulseTimer"]
+
+[node name="PointTracker" parent="Testers/PerPointImpulseTimer/PointTrackers" instance=ExtResource("8_ehkex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 1.02, 0.79999995)
+skeleton = NodePath("../..")
+metadata/point = 0
+
+[node name="PointTracker2" parent="Testers/PerPointImpulseTimer/PointTrackers" instance=ExtResource("8_ehkex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 1.02, 0.79999995)
+skeleton = NodePath("../..")
+metadata/point = 64
+
+[node name="PointTracker3" parent="Testers/PerPointImpulseTimer/PointTrackers" instance=ExtResource("8_ehkex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 1.02, -0.8000002)
+skeleton = NodePath("../..")
+metadata/point = 4160
+
+[node name="PointTracker4" parent="Testers/PerPointImpulseTimer/PointTrackers" instance=ExtResource("8_ehkex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 1.02, -0.8000002)
+skeleton = NodePath("../..")
+metadata/point = 4224
+
+[node name="Cloth" parent="Testers/PerPointImpulseTimer" instance=ExtResource("3_6uqi0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Testers/PerPointImpulseTimer"]
+transform = Transform3D(0.851651, 0.309976, 0.422618, -0.34202, 0.939693, 0, -0.397131, -0.144544, 0.906308, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/PerPointImpulseTimer/StaticBody3D"]
+mesh = SubResource("BoxMesh_ppyta")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/PerPointImpulseTimer/StaticBody3D"]
+shape = SubResource("BoxShape3D_ykrsh")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Testers/PerPointImpulseTimer"]
+transform = Transform3D(0.212913, 0.0774939, 0.105655, -0.085505, 0.234923, -3.0889e-10, -0.0992828, -0.036136, 0.226577, 0.193735, 0.587308, -0.09034)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/PerPointImpulseTimer/StaticBody3D2"]
+mesh = SubResource("BoxMesh_ppyta")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/PerPointImpulseTimer/StaticBody3D2"]
+shape = SubResource("BoxShape3D_ykrsh")
+
+[node name="Timer" type="Timer" parent="Testers/PerPointImpulseTimer"]
+wait_time = 1.5
+autostart = true
+
+[node name="PinnedPoints" type="Node3D" parent="Testers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[node name="Pin" parent="Testers/PinnedPoints" instance=ExtResource("8_ehkex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 1.02, 0.8)
+
+[node name="Pin2" parent="Testers/PinnedPoints" instance=ExtResource("8_ehkex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8000001, 1.02, 0.8000002)
+
+[node name="Pin3" parent="Testers/PinnedPoints" instance=ExtResource("8_ehkex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 1.02, -0.8000002)
+
+[node name="Pin4" parent="Testers/PinnedPoints" instance=ExtResource("8_ehkex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8000001, 1.02, -0.8000002)
+
+[node name="PinnedCloth" parent="Testers/PinnedPoints" instance=ExtResource("3_6uqi0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+pinned_points = [0, 4160, 64, 4224]
+attachments/0/point_index = 0
+attachments/0/spatial_attachment_path = NodePath("")
+attachments/0/offset = Vector3(0, 0, 0)
+attachments/1/point_index = 4160
+attachments/1/spatial_attachment_path = NodePath("")
+attachments/1/offset = Vector3(0, 0, 0)
+attachments/2/point_index = 64
+attachments/2/spatial_attachment_path = NodePath("")
+attachments/2/offset = Vector3(0, 0, 0)
+attachments/3/point_index = 4224
+attachments/3/spatial_attachment_path = NodePath("")
+attachments/3/offset = Vector3(0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Testers/PinnedPoints"]
+transform = Transform3D(0.851651, 0.309976, 0.422618, -0.34202, 0.939693, 0, -0.397131, -0.144544, 0.906308, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/PinnedPoints/StaticBody3D"]
+mesh = SubResource("BoxMesh_ppyta")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/PinnedPoints/StaticBody3D"]
+shape = SubResource("BoxShape3D_ykrsh")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Testers/PinnedPoints"]
+transform = Transform3D(0.212913, 0.0774939, 0.105655, -0.085505, 0.234923, -3.0889e-10, -0.0992828, -0.036136, 0.226577, 0.193735, 0.587308, -0.09034)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/PinnedPoints/StaticBody3D2"]
+mesh = SubResource("BoxMesh_ppyta")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/PinnedPoints/StaticBody3D2"]
+shape = SubResource("BoxShape3D_ykrsh")
+
+[node name="TestName" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -58.0
+offset_right = 192.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="Previous" type="Button" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -55.0
+offset_right = 135.0
+offset_bottom = -24.0
+grow_vertical = 0
+text = "«  Previous"
+
+[node name="Next" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -55.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Next  »"
+
+[node name="Help" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 312.0
+offset_bottom = 125.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "R: Reset Soft Body Physics Simulation
+C: Place Cloth at Cursor Position
+V: Place Light Box at Cursor Position
+B: Place Heavy Box at Cursor Position"
+
+[connection signal="timeout" from="Testers/CentralImpulseTimer/Timer" to="." method="_on_central_impulse_timer_timeout"]
+[connection signal="timeout" from="Testers/PerPointImpulseTimer/Timer" to="." method="_on_per_point_impulse_timer_timeout"]
+[connection signal="pressed" from="Previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]

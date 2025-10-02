@@ -64,11 +64,9 @@ func _parse_msg() -> bool:
 		return false
 
 	var msg := parsed as Dictionary
-	if not str(msg.type).is_valid_int() or not str(msg.id).is_valid_int():
-		return false
 
-	var type := str(msg.type).to_int()
-	var src_id := str(msg.id).to_int()
+	var type := int(msg.type)
+	var src_id := int(msg.id)
 
 	if type == Message.ID:
 		connected.emit(src_id, msg.data == "true")

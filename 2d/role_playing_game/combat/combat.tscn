@@ -1,9 +1,9 @@
 [gd_scene load_steps=17 format=3 uid="uid://b4aouv6fsdecc"]
 
-[ext_resource type="Script" path="res://combat/combat.gd" id="1"]
-[ext_resource type="Script" path="res://combat/turn_queue.gd" id="2"]
+[ext_resource type="Script" uid="uid://bh7qaqa6inb8n" path="res://combat/combat.gd" id="1"]
+[ext_resource type="Script" uid="uid://bokfxv77maemj" path="res://combat/turn_queue.gd" id="2"]
 [ext_resource type="Theme" uid="uid://dtao6d0ebglcf" path="res://theme/theme.tres" id="3"]
-[ext_resource type="Script" path="res://combat/interface/ui.gd" id="4"]
+[ext_resource type="Script" uid="uid://cp8eg0avq1egt" path="res://combat/interface/ui.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://bypumcqt7j0iv" path="res://combat/interface/info.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://dh804n3h2bl5h" path="res://combat/background/combat_background.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://mi3mmtft0snh" path="res://decoration/grass.png" id="7"]
@@ -876,17 +876,19 @@ script = SubResource("1")
 script = ExtResource("2")
 combatants_list = NodePath("../Combatants")
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("combatants_node")]
+[node name="CombatCanvas" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="CombatCanvas" node_paths=PackedStringArray("combatants_node")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 theme = ExtResource("3")
 script = ExtResource("4")
-combatants_node = NodePath("../Combatants")
+combatants_node = NodePath("../../Combatants")
 info_scene = ExtResource("5")
 
-[node name="Combatants" type="HBoxContainer" parent="UI"]
+[node name="Combatants" type="HBoxContainer" parent="CombatCanvas/UI"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 77.0
@@ -894,37 +896,37 @@ offset_right = 1260.0
 offset_bottom = 328.0
 theme_override_constants/separation = 360
 
-[node name="Buttons" type="PanelContainer" parent="UI"]
+[node name="Buttons" type="PanelContainer" parent="CombatCanvas/UI"]
 layout_mode = 0
 offset_left = 80.0
 offset_top = 376.0
 offset_right = 1200.0
 offset_bottom = 698.0
 
-[node name="GridContainer" type="GridContainer" parent="UI/Buttons"]
+[node name="GridContainer" type="GridContainer" parent="CombatCanvas/UI/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
 
-[node name="Attack" type="Button" parent="UI/Buttons/GridContainer"]
+[node name="Attack" type="Button" parent="CombatCanvas/UI/Buttons/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Attack"
 
-[node name="Defend" type="Button" parent="UI/Buttons/GridContainer"]
+[node name="Defend" type="Button" parent="CombatCanvas/UI/Buttons/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Defend"
 
-[node name="Flee" type="Button" parent="UI/Buttons/GridContainer"]
+[node name="Flee" type="Button" parent="CombatCanvas/UI/Buttons/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Flee"
 
-[connection signal="button_up" from="UI/Buttons/GridContainer/Attack" to="UI" method="_on_Attack_button_up"]
-[connection signal="button_up" from="UI/Buttons/GridContainer/Defend" to="UI" method="_on_Defend_button_up"]
-[connection signal="button_up" from="UI/Buttons/GridContainer/Flee" to="UI" method="_on_Flee_button_up"]
+[connection signal="button_up" from="CombatCanvas/UI/Buttons/GridContainer/Attack" to="CombatCanvas/UI" method="_on_Attack_button_up"]
+[connection signal="button_up" from="CombatCanvas/UI/Buttons/GridContainer/Defend" to="CombatCanvas/UI" method="_on_Defend_button_up"]
+[connection signal="button_up" from="CombatCanvas/UI/Buttons/GridContainer/Flee" to="CombatCanvas/UI" method="_on_Flee_button_up"]

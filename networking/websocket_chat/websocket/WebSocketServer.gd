@@ -1,4 +1,4 @@
-class_name NWebSocketServer
+class_name WebSocketServer
 extends Node
 
 signal message_received(peer_id: int, message: String)

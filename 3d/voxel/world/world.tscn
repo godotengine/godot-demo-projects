@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://3wtpjm677uyk"]
 
 [ext_resource type="PackedScene" uid="uid://1s4asqpay67m" path="res://player/player.tscn" id="1"]
-[ext_resource type="Script" path="res://world/voxel_world.gd" id="2"]
-[ext_resource type="Script" path="res://world/environment.gd" id="4"]
+[ext_resource type="Script" uid="uid://dkrm4ehfinjtk" path="res://world/voxel_world.gd" id="2"]
+[ext_resource type="Script" uid="uid://c83le0f8bxh5q" path="res://world/environment.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://dk8arl1if3lyr" path="res://menu/ingame/pause_menu.tscn" id="5"]
-[ext_resource type="Script" path="res://menu/debug.gd" id="6"]
+[ext_resource type="Script" uid="uid://b05s2e1kn311h" path="res://menu/debug.gd" id="6"]
 [ext_resource type="Theme" uid="uid://ckax6htygmelo" path="res://menu/theme/theme.tres" id="7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_culy1"]
@@ -17,7 +17,7 @@ sky_material = SubResource("ProceduralSkyMaterial_culy1")
 [sub_resource type="Environment" id="Environment_lwytn"]
 background_mode = 2
 sky = SubResource("Sky_heg3k")
-tonemap_mode = 2
+tonemap_mode = 4
 fog_enabled = true
 fog_sun_scatter = 0.3
 fog_sky_affect = 0.5
@@ -37,6 +37,9 @@ offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 48
 script = ExtResource("6")
 

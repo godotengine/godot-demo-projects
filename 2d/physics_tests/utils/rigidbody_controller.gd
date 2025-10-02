@@ -15,7 +15,7 @@ func _ready() -> void:
 	gravity_scale = 0.0
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if _initial_velocity != Vector2.ZERO:
 		_velocity = _initial_velocity
 		_initial_velocity = Vector2.ZERO
@@ -47,7 +47,7 @@ func _physics_process(_delta: float) -> void:
 			# Reset gravity.
 			_velocity.y = 0.0
 	else:
-		_velocity.y += _gravity_force
+		_velocity.y += _gravity_force * delta * 60.0
 		_jumping = false
 
 	linear_velocity = _velocity

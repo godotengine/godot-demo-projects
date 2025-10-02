@@ -1,0 +1,259 @@
+[gd_scene load_steps=11 format=3 uid="uid://bj1boiwkh01mt"]
+
+[ext_resource type="Script" uid="uid://bg21it16hc00n" path="res://audio_effects.gd" id="1_axtfn"]
+[ext_resource type="AudioStream" uid="uid://be3q4qowdpn2i" path="res://sfx/music_monkeys_spinning_monkeys.ogg" id="2_j5kgy"]
+[ext_resource type="AudioStream" uid="uid://cm2mgrcndle8l" path="res://sfx/ding.wav" id="3_uy531"]
+[ext_resource type="AudioStream" uid="uid://cc8k4nqoujqe8" path="res://sfx/glass_breaking.wav" id="4_ec4qa"]
+[ext_resource type="AudioStream" uid="uid://3nfilwigqg8n" path="res://sfx/meow.wav" id="5_y5hbb"]
+[ext_resource type="AudioStream" uid="uid://gcbljknwc5do" path="res://sfx/negative_beeps.wav" id="6_7l1yr"]
+[ext_resource type="AudioStream" uid="uid://ij7a6y1bjbnv" path="res://sfx/sad_trombone.wav" id="7_7ug2d"]
+[ext_resource type="AudioStream" uid="uid://btpvyxliv8ldr" path="res://sfx/static.wav" id="8_ifh36"]
+[ext_resource type="AudioStream" uid="uid://biphmlacmhj1y" path="res://sfx/whistle.wav" id="9_xhiv2"]
+
+[sub_resource type="FontVariation" id="FontVariation_kjess"]
+variation_embolden = 1.0
+spacing_glyph = 1
+
+[node name="AudioEffects" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_axtfn")
+metadata/_edit_lock_ = true
+
+[node name="SoundEffects" type="Node" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource("2_j5kgy")
+volume_db = -18.0
+bus = &"Music"
+
+[node name="Ding" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource("3_uy531")
+volume_db = -18.0
+
+[node name="Glass" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource("4_ec4qa")
+volume_db = -18.0
+
+[node name="Meow" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource("5_y5hbb")
+volume_db = -18.0
+
+[node name="Beeps" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource("6_7l1yr")
+volume_db = -18.0
+
+[node name="Trombone" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource("7_7ug2d")
+volume_db = -18.0
+
+[node name="Static" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource("8_ifh36")
+volume_db = -18.0
+
+[node name="Whistle" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource("9_xhiv2")
+volume_db = -18.0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
+[node name="SoundEffectButtons" type="Control" parent="Control"]
+anchors_preset = 0
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -576.0
+offset_bottom = -324.0
+
+[node name="ToggleMusic" type="CheckButton" parent="Control/SoundEffectButtons"]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 56.0
+offset_right = 619.0
+offset_bottom = 87.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Music"
+
+[node name="DingButton" type="Button" parent="Control/SoundEffectButtons"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 176.0
+offset_right = 168.0
+offset_bottom = 240.0
+theme_override_fonts/font = SubResource("FontVariation_kjess")
+text = "DING
+"
+
+[node name="GlassButton" type="Button" parent="Control/SoundEffectButtons"]
+layout_mode = 0
+offset_left = 282.0
+offset_top = 176.0
+offset_right = 398.0
+offset_bottom = 240.0
+theme_override_fonts/font = SubResource("FontVariation_kjess")
+text = "GLASS
+SHATTER"
+
+[node name="MeowButton" type="Button" parent="Control/SoundEffectButtons"]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 176.0
+offset_right = 624.0
+offset_bottom = 240.0
+theme_override_fonts/font = SubResource("FontVariation_kjess")
+text = "MEOW"
+
+[node name="BeepsButton" type="Button" parent="Control/SoundEffectButtons"]
+layout_mode = 0
+offset_left = 744.0
+offset_top = 176.0
+offset_right = 864.0
+offset_bottom = 240.0
+theme_override_fonts/font = SubResource("FontVariation_kjess")
+text = "NEGATIVE
+BEEPS
+"
+
+[node name="TromboneButton" type="Button" parent="Control/SoundEffectButtons"]
+layout_mode = 0
+offset_left = 971.0
+offset_top = 176.0
+offset_right = 1106.0
+offset_bottom = 238.0
+theme_override_fonts/font = SubResource("FontVariation_kjess")
+text = "SAD
+TROMBONE"
+
+[node name="StaticButton" type="Button" parent="Control/SoundEffectButtons"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 312.0
+offset_right = 504.0
+offset_bottom = 376.0
+theme_override_fonts/font = SubResource("FontVariation_kjess")
+text = "RADIO
+STATIC"
+
+[node name="WhistleButton" type="Button" parent="Control/SoundEffectButtons"]
+layout_mode = 0
+offset_left = 636.0
+offset_top = 312.0
+offset_right = 748.0
+offset_bottom = 376.0
+theme_override_fonts/font = SubResource("FontVariation_kjess")
+text = "WHISTLE
+"
+
+[node name="AudioEffectButtons" type="GridContainer" parent="Control"]
+layout_mode = 0
+offset_left = -449.0
+offset_top = 194.0
+offset_right = 460.0
+offset_bottom = 295.0
+columns = 6
+
+[node name="ToggleAmplify" type="CheckButton" parent="Control/AudioEffectButtons"]
+layout_mode = 2
+text = "Amplify"
+
+[node name="ToggleBandLimiter" type="CheckButton" parent="Control/AudioEffectButtons"]
+layout_mode = 2
+text = "BandLimiter
+"
+
+[node name="ToggleBandPassFilter" type="CheckButton" parent="Control/AudioEffectButtons"]
+layout_mode = 2
+text = "BandPassFilter"
+
+[node name="ToggleChorus" type="CheckButton" parent="Control/AudioEffectButtons"]
+layout_mode = 2
+text = "Chorus
+"
+
+[node name="ToggleCompressor" type="CheckButton" parent="Control/AudioEffectButtons"]
+layout_mode = 2
+text = "Compressor"
+
+[node name="ToggleDelay" type="CheckButton" parent="Control/AudioEffectButtons"]
+layout_mode = 2
+text = "Delay"
+
+[node name="ToggleDistortion" type="CheckButton" parent="Control/AudioEffectButtons"]
+layout_mode = 2
+text = "Distortion"
+
+[node name="ToggleEQ6" type="CheckButton" parent="Control/AudioEffectButtons"]
+layout_mode = 2
+text = "EQ6 "
+
+[node name="ToggleEQ10" type="CheckButton" parent="Control/AudioEffectButtons"]
+layout_mode = 2
+text = "EQ10"
+
+[node name="ToggleEQ21" type="CheckButton" parent="Control/AudioEffectButtons"]
+layout_mode = 2
+text = "EQ21"
+
+[node name="ToggleHighPassFilter" type="CheckButton" parent="Control/AudioEffectButtons"]
+layout_mode = 2
+text = "HighPassFilter"
+
+[node name="ToggleLowShelfFilter" type="CheckButton" parent="Control/AudioEffectButtons"]
+layout_mode = 2
+text = "LowShelfFilter"
+
+[node name="ToggleNotchFilter" type="CheckButton" parent="Control/AudioEffectButtons"]
+layout_mode = 2
+text = "NotchFilter"
+
+[node name="TogglePanner" type="CheckButton" parent="Control/AudioEffectButtons"]
+layout_mode = 2
+text = "Panner"
+
+[node name="TogglePhaser" type="CheckButton" parent="Control/AudioEffectButtons"]
+layout_mode = 2
+text = "Phaser"
+
+[node name="TogglePitchShift" type="CheckButton" parent="Control/AudioEffectButtons"]
+layout_mode = 2
+text = "PitchShift"
+
+[node name="ToggleReverb" type="CheckButton" parent="Control/AudioEffectButtons"]
+layout_mode = 2
+text = "Reverb"
+
+[node name="ToggleStereoEnhance" type="CheckButton" parent="Control/AudioEffectButtons"]
+layout_mode = 2
+text = "StereoEnhance"
+
+[connection signal="toggled" from="Control/SoundEffectButtons/ToggleMusic" to="." method="_on_toggle_music_toggled"]
+[connection signal="pressed" from="Control/SoundEffectButtons/DingButton" to="." method="_on_ding_button_pressed"]
+[connection signal="pressed" from="Control/SoundEffectButtons/GlassButton" to="." method="_on_glass_button_pressed"]
+[connection signal="pressed" from="Control/SoundEffectButtons/MeowButton" to="." method="_on_meow_button_pressed"]
+[connection signal="pressed" from="Control/SoundEffectButtons/BeepsButton" to="." method="_on_beeps_button_pressed"]
+[connection signal="pressed" from="Control/SoundEffectButtons/TromboneButton" to="." method="_on_trombone_button_pressed"]
+[connection signal="pressed" from="Control/SoundEffectButtons/StaticButton" to="." method="_on_static_button_pressed"]
+[connection signal="pressed" from="Control/SoundEffectButtons/WhistleButton" to="." method="_on_whistle_button_pressed"]
+[connection signal="toggled" from="Control/AudioEffectButtons/ToggleAmplify" to="." method="_on_toggle_amplify_toggled"]
+[connection signal="toggled" from="Control/AudioEffectButtons/ToggleBandLimiter" to="." method="_on_toggle_band_limiter_toggled"]
+[connection signal="toggled" from="Control/AudioEffectButtons/ToggleBandPassFilter" to="." method="_on_toggle_band_pass_filter_toggled"]
+[connection signal="toggled" from="Control/AudioEffectButtons/ToggleChorus" to="." method="_on_toggle_chorus_toggled"]
+[connection signal="toggled" from="Control/AudioEffectButtons/ToggleCompressor" to="." method="_on_toggle_compressor_toggled"]
+[connection signal="toggled" from="Control/AudioEffectButtons/ToggleDelay" to="." method="_on_toggle_delay_toggled"]
+[connection signal="toggled" from="Control/AudioEffectButtons/ToggleDistortion" to="." method="_on_toggle_distortion_toggled"]
+[connection signal="toggled" from="Control/AudioEffectButtons/ToggleEQ6" to="." method="_on_toggle_eq_6_toggled"]
+[connection signal="toggled" from="Control/AudioEffectButtons/ToggleEQ10" to="." method="_on_toggle_eq_10_toggled"]
+[connection signal="toggled" from="Control/AudioEffectButtons/ToggleEQ21" to="." method="_on_toggle_eq_21_toggled"]
+[connection signal="toggled" from="Control/AudioEffectButtons/ToggleHighPassFilter" to="." method="_on_toggle_high_pass_filter_toggled"]
+[connection signal="toggled" from="Control/AudioEffectButtons/ToggleLowShelfFilter" to="." method="_on_toggle_low_shelf_filter_toggled"]
+[connection signal="toggled" from="Control/AudioEffectButtons/ToggleNotchFilter" to="." method="_on_toggle_notch_filter_toggled"]
+[connection signal="toggled" from="Control/AudioEffectButtons/TogglePanner" to="." method="_on_toggle_panner_toggled"]
+[connection signal="toggled" from="Control/AudioEffectButtons/TogglePhaser" to="." method="_on_toggle_phaser_toggled"]
+[connection signal="toggled" from="Control/AudioEffectButtons/TogglePitchShift" to="." method="_on_toggle_pitch_shift_toggled"]
+[connection signal="toggled" from="Control/AudioEffectButtons/ToggleReverb" to="." method="_on_toggle_reverb_toggled"]
+[connection signal="toggled" from="Control/AudioEffectButtons/ToggleStereoEnhance" to="." method="_on_toggle_stereo_enhance_toggled"]

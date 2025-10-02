@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://bvdovvya3m7sx"]
+
+[ext_resource type="Script" uid="uid://c1jgdguonfwbw" path="res://main.gd" id="1_1u602"]
+[ext_resource type="Texture2D" uid="uid://br4k6sn2rvgj" path="res://pattern.png" id="2_imhd6"]
+[ext_resource type="PackedScene" uid="uid://8m50ra15rpq1" path="res://wall.tscn" id="4_fdaxx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_beswd"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_uvncs"]
+sky_material = SubResource("ProceduralSkyMaterial_beswd")
+
+[sub_resource type="Environment" id="Environment_rgp66"]
+background_mode = 2
+sky = SubResource("Sky_uvncs")
+glow_enabled = true
+glow_intensity = 1.22
+volumetric_fog_density = 0.001
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wgu4"]
+albedo_color = Color(3.3691526e-07, 0.7481091, 0.1272395, 1)
+albedo_texture = ExtResource("2_imhd6")
+uv1_scale = Vector3(5, 5, 5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_y2phs"]
+material = SubResource("StandardMaterial3D_0wgu4")
+size = Vector2(25, 25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a1cqg"]
+albedo_color = Color(0.713726, 0.545098, 0.780392, 1)
+albedo_texture = ExtResource("2_imhd6")
+uv1_scale = Vector3(8, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1vrbc"]
+material = SubResource("StandardMaterial3D_a1cqg")
+size = Vector3(4, 3, 1)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_1u602")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.86602384, -0.43301564, 0.2500005, 0, 0.49999815, 0.8660265, -0.50000286, 0.7499995, -0.4330103, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rgp66")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_y2phs")
+
+[node name="Wall01" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.968213, -0.250127, 0, 0.250127, 0.968213, 0, 0, 0, 1, 0, 0.82946, -6.87257)
+mesh = SubResource("BoxMesh_1vrbc")
+
+[node name="Wall02" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.674941, 0.180131, 0.715546, -0.257858, 0.966183, 0, -0.691348, -0.184509, 0.698565, -3.04544, 0.82946, -5.53616)
+mesh = SubResource("BoxMesh_1vrbc")
+
+[node name="Wall03" parent="." instance=ExtResource("4_fdaxx")]
+transform = Transform3D(0.90396, 0.0774667, -0.154893, 0.403151, -0.275157, 0.248304, -0.142568, -0.286902, -0.279961, -3.26749, 3.93987, -7.24752)
+
+[node name="Wall04" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.491527, 0, -0.870862, 0, 2.43615, 0, 0.870862, 0, 0.491527, 2.68331, 2.52217, -4.7792)
+mesh = SubResource("BoxMesh_1vrbc")
+
+[node name="Wall05" parent="." instance=ExtResource("4_fdaxx")]
+transform = Transform3D(0.941075, 0.0774667, 0.112959, -0.0781437, -0.275157, 0.295486, 0.329045, -0.286902, -0.25289, 2.33372, 3.46393, -10.7686)

@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://ditdn410656"]
+
+[ext_resource type="Texture2D" uid="uid://csp3kbg6r4rwd" path="res://textures/polyhaven/fabric_pattern_07_col_1_1k.jpg" id="1_pir5u"]
+[ext_resource type="Texture2D" uid="uid://hh6i17naw1qx" path="res://textures/polyhaven/fabric_pattern_07_nor_gl_1k.jpg" id="2_q5utd"]
+[ext_resource type="Texture2D" uid="uid://clyte8pu0nwom" path="res://textures/polyhaven/fabric_pattern_07_arm_1k.jpg" id="3_eo47f"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_g14j6"]
+cull_mode = 2
+albedo_texture = ExtResource("1_pir5u")
+orm_texture = ExtResource("3_eo47f")
+normal_enabled = true
+normal_texture = ExtResource("2_q5utd")
+uv1_scale = Vector3(4, 4, 4)
+texture_filter = 5
+grow = true
+grow_amount = 0.02
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6uqi0"]
+material = SubResource("ORMMaterial3D_g14j6")
+size = Vector2(1.6, 1.6)
+subdivide_width = 63
+subdivide_depth = 63
+
+[node name="Cloth" type="SoftBody3D"]
+mesh = SubResource("PlaneMesh_6uqi0")
+skeleton = NodePath("../..")

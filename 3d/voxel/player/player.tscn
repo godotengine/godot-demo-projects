@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://1s4asqpay67m"]
+[gd_scene load_steps=10 format=3 uid="uid://1s4asqpay67m"]
 
-[ext_resource type="Script" path="res://player/player.gd" id="1"]
+[ext_resource type="Script" uid="uid://rm45k07vw817" path="res://player/player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://d3f34krqfgdjd" path="res://world/textures/texture_sheet.png" id="2"]
 
 [sub_resource type="CylinderShape3D" id="1"]
@@ -12,6 +12,27 @@ radius = 0.375
 [sub_resource type="AtlasTexture" id="2"]
 atlas = ExtResource("2")
 region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Gradient" id="Gradient_rkbax"]
+offsets = PackedFloat32Array(0.952381, 1)
+colors = PackedColorArray(0, 0, 0, 0.0941176, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g1dw6"]
+gradient = SubResource("Gradient_rkbax")
+width = 256
+height = 256
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yw30f"]
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("GradientTexture2D_g1dw6")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qjkh3"]
+material = SubResource("StandardMaterial3D_yw30f")
+size = Vector3(1.001, 1.001, 1.001)
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 0
@@ -31,7 +52,7 @@ near = 0.02
 far = 1000.0
 
 [node name="RayCast3D" type="RayCast3D" parent="Head"]
-target_position = Vector3(0, 0, -4)
+target_position = Vector3(0, 0, -5)
 
 [node name="SelectedBlock" type="TextureRect" parent="."]
 texture_filter = 1
@@ -48,3 +69,8 @@ grow_horizontal = 0
 grow_vertical = 0
 texture = SubResource("2")
 expand_mode = 1
+
+[node name="AimPreview" type="MeshInstance3D" parent="."]
+top_level = true
+visible = false
+mesh = SubResource("BoxMesh_qjkh3")
