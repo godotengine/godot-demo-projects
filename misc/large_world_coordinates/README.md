@@ -20,7 +20,9 @@ for more information.
 
 Languages: GDScript
 
-Renderer: Forward Mobile
+Renderer: Mobile
+
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2786
 
 ## Screenshots
 

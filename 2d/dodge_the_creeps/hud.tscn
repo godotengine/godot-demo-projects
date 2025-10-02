@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccqoreueuxdb7"]
+
+[ext_resource type="Script" uid="uid://ole4kvtbp4r1" path="res://hud.gd" id="1"]
+[ext_resource type="FontFile" uid="uid://cit6gwe5px1q8" path="res://fonts/Xolonium-Regular.ttf" id="2_2jm3i"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_fopy7"]
+action = &"start_game"
+
+[sub_resource type="Shortcut" id="4"]
+events = [SubResource("InputEventAction_fopy7")]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1")
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 78.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_2jm3i")
+theme_override_font_sizes/font_size = 60
+text = "0"
+horizontal_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -79.5
+offset_bottom = 79.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_2jm3i")
+theme_override_font_sizes/font_size = 60
+text = "Dodge the
+Creeps"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -200.0
+offset_right = 90.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_2jm3i")
+theme_override_font_sizes/font_size = 60
+shortcut = SubResource("4")
+text = "Start"
+
+[node name="MessageTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]

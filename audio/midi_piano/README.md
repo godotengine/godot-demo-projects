@@ -12,9 +12,9 @@ Note that MIDI output is not yet supported in Godot, only input works.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/1292
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2761
 
 ## Screenshots
 

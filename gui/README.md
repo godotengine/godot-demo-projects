@@ -5,4 +5,4 @@ These demos showcase GUI features and text features via
 
 Languages: All are GDScript, except SDF has no code
 
-Renderers: All are GLES 2
+Renderers: All are Compatibility

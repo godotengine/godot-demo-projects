@@ -4,9 +4,9 @@ A demo showing how a 2D scene can be shown within a 3D scene using viewports.
 
 Language: GDScript
 
-Renderer: Forward Mobile
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/129
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2803
 
 ## How does it work?
 

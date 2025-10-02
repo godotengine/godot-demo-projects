@@ -3,7 +3,7 @@
 # https://github.com/godotengine/godot-proposals/issues/279
 
 # Basis25D structure for performing 2.5D transform math.
-# Note: All code assumes that Y is UP in 3D, and DOWN in 2D.
+# NOTE: All code assumes that Y is UP in 3D, and DOWN in 2D.
 # Meaning, a top-down view has a Y axis component of (0, 0), with a Z axis component of (0, 1).
 # For a front side view, Y is (0, -1) and Z is (0, 0).
 # Remember that Godot's 2D mode has the Y axis pointing DOWN on the screen.

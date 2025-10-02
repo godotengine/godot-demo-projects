@@ -8,9 +8,9 @@ A demo showing how to build an input key remapping screen.
 
 Language: GDScript
 
-Renderer: Vulkan Mobile
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/131
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2769
 
 ## Screenshots
 

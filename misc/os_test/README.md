@@ -8,11 +8,11 @@ In a nutshell, this demo shows how you can get information from the
 operating system, or interact with the operating system.
 
 Language: GDScript and some [C#](https://docs.godotengine.org/en/latest/tutorials/scripting/c_sharp/index.html)
-(Mono is NOT required to run this demo)
+(a .NET build is **not** required to run this demo)
 
-Renderer: GLES 2
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/677
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2789
 
 ## How does it work?
 

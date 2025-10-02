@@ -14,8 +14,12 @@ config/name="3D Particles"
 config/description="This project showcases various 3D particle features supported by Godot, for both GPU-based and CPU-based particles."
 config/tags=PackedStringArray("3d", "demo", "official", "rendering")
 run/main_scene="res://test.tscn"
-config/features=PackedStringArray("4.2")
+config/features=PackedStringArray("4.4")
 config/icon="res://icon.webp"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
 
 [display]
 
@@ -24,6 +28,5 @@ window/stretch/aspect="expand"
 
 [rendering]
 
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
 textures/default_filters/anisotropic_filtering_level=4
-quality/screen_filters/msaa=3
-environment/default_environment="res://default_env.tres"

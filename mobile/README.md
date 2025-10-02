@@ -6,4 +6,4 @@ The Android IAP demo only runs on Android.
 
 Languages: All are GDScript
 
-Renderers: All are GLES 2
+Renderers: Mobile Sensors uses Mobile, the rest use Compatibility

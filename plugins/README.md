@@ -2,16 +2,17 @@
 
 This contains multiple plugin demos, all placed in a project for convenience.
 
-Due to bug 36713 you need to open the project to import the assets once, then close, then open.
+Due to [issue #36713](https://github.com/godotengine/godot/issues/36713),
+you need to open the project to import the assets once, then close, then open.
 
-Please see the documentation for editor plugins:
-https://docs.godotengine.org/en/latest/tutorials/plugins/editor/index.html
+See the [documentation on editor plugins](https://docs.godotengine.org/en/latest/tutorials/plugins/editor/index.html)
+for more information.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/585
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2802
 
 # How does it work?
 
@@ -36,7 +37,7 @@ enable them in the project settings menu.
 For example, the path would look like: `addons/custom_node`
 
 Plugins can be distributed and installed from the UI.
-If you make a zip that contains the folder, Godot will recognize
+If you make a ZIP archive that contains the folder, Godot will recognize
 it as a plugin and will allow you to install it.
 
 This can be done via the terminal: `zip -r custom_node.zip custom_node/*`

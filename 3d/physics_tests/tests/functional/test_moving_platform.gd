@@ -1,6 +1,5 @@
 extends Test
 
-
 const OPTION_BODY_TYPE = "Body Type/%s (%d)"
 
 const OPTION_SLOPE = "Physics options/Stop on slope (Character only)"
@@ -15,29 +14,28 @@ const SHAPE_CYLINDER = "Collision shapes/Cylinder"
 const SHAPE_SPHERE = "Collision shapes/Sphere"
 const SHAPE_CONVEX = "Collision shapes/Convex"
 
-var _slope = false
-var _snap = false
-var _friction = false
-var _rough = false
-var _animation_physics = false
+var _slope := false
+var _snap := false
+var _friction := false
+var _rough := false
+var _animation_physics := false
 
-var _body_scene = {}
-var _key_list = []
-var _current_body_index = 0
-var _current_body_key = ""
+var _body_scene := {}
+var _key_list := []
+var _current_body_index := 0
+var _current_body_key := ""
 var _current_body: PhysicsBody3D = null
-var _body_type = ["CharacterBody3D", "RigidBody"]
+var _body_type := ["CharacterBody3D", "RigidBody"]
 
-var _shapes = {}
-var _current_shape = ""
+var _shapes := {}
+var _current_shape := ""
 
-
-func _ready():
-	var options = $Options
-	var bodies = $Bodies.get_children()
+func _ready() -> void:
+	var options: OptionMenu = $Options
+	var bodies := $Bodies.get_children()
 	for i in bodies.size():
-		var body = bodies[i]
-		var option_name = OPTION_BODY_TYPE % [body.name, i + 1]
+		var body := bodies[i]
+		var option_name := OPTION_BODY_TYPE % [body.name, i + 1]
 		options.add_menu_item(option_name)
 		_key_list.append(option_name)
 		_body_scene[option_name] = get_packed_scene(body)
@@ -55,8 +53,8 @@ func _ready():
 	options.add_menu_item(OPTION_ROUGH, true, false)
 	options.add_menu_item(OPTION_PROCESS_PHYSICS, true, false)
 
-	options.option_selected.connect(self._on_option_selected)
-	options.option_changed.connect(self._on_option_changed)
+	options.option_selected.connect(_on_option_selected)
+	options.option_changed.connect(_on_option_changed)
 
 	_shapes[SHAPE_CAPSULE] = "Capsule"
 	_shapes[SHAPE_BOX] = "Box"
@@ -68,15 +66,14 @@ func _ready():
 	spawn_body_index(_current_body_index)
 
 
-func _input(event):
-	var key_event = event as InputEventKey
-	if key_event and not key_event.pressed:
-		var _index = key_event.keycode - KEY_1
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and not event.pressed:
+		var _index: int = event.keycode - KEY_1
 		if _index >= 0 and _index < _key_list.size():
 			spawn_body_index(_index)
 
 
-func _on_option_selected(option):
+func _on_option_selected(option: String) -> void:
 	if _body_scene.has(option):
 		spawn_body_key(option)
 	else:
@@ -98,7 +95,7 @@ func _on_option_selected(option):
 				spawn_body_index(_current_body_index)
 
 
-func _on_option_changed(option, checked):
+func _on_option_changed(option: String, checked: bool) -> void:
 	match option:
 		OPTION_SLOPE:
 			_slope = checked
@@ -117,33 +114,33 @@ func _on_option_changed(option, checked):
 			spawn_body_index(_current_body_index)
 
 
-func spawn_body_index(body_index):
+func spawn_body_index(body_index: int) -> void:
 	if _current_body:
 		_current_body.queue_free()
 	_current_body_index = body_index
 	_current_body_key = _key_list[body_index]
-	var body_parent = $Bodies
-	var body = _body_scene[_key_list[body_index]].instantiate()
+	var body_parent := $Bodies
+	var body: PhysicsBody3D = _body_scene[_key_list[body_index]].instantiate()
 	_current_body = body
 	init_body()
 	body_parent.add_child(body)
 	start_test()
 
 
-func spawn_body_key(body_key):
+func spawn_body_key(body_key: String) -> void:
 	if _current_body:
 		_current_body.queue_free()
 	_current_body_key = body_key
 	_current_body_index = _key_list.find(body_key)
-	var body_parent = $Bodies
-	var body = _body_scene[body_key].instantiate()
+	var body_parent := $Bodies
+	var body: PhysicsBody3D = _body_scene[body_key].instantiate()
 	_current_body = body
 	init_body()
 	body_parent.add_child(body)
 	start_test()
 
 
-func init_body():
+func init_body() -> void:
 	if _current_body is CharacterBody3D:
 		_current_body._stop_on_slopes = _slope
 		_current_body.use_snap = _snap
@@ -156,8 +153,8 @@ func init_body():
 				shape.queue_free()
 
 
-func start_test():
-	var animation_player = $Platforms/MovingPlatform/AnimationPlayer
+func start_test() -> void:
+	var animation_player: AnimationPlayer = $Platforms/MovingPlatform/AnimationPlayer
 	animation_player.stop()
 	if _animation_physics:
 		animation_player.playback_process_mode = AnimationPlayer.ANIMATION_PROCESS_PHYSICS
@@ -168,9 +165,10 @@ func start_test():
 	$LabelBodyType.text = "Body Type: " + _body_type[_current_body_index] + " \nCollision Shape: " + _current_shape
 
 
-func get_packed_scene(node):
+func get_packed_scene(node: Node) -> PackedScene:
 	for child in node.get_children():
 		child.owner = node
-	var packed_scene = PackedScene.new()
+
+	var packed_scene := PackedScene.new()
 	packed_scene.pack(node)
 	return packed_scene

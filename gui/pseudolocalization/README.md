@@ -4,7 +4,9 @@ A demo showcasing the Pseudolocalization feature in Godot
 
 Language: GDScript
 
-Renderer: Vulkan Mobile
+Renderer: Compatibility
+
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2772
 
 ## Screenshots
 

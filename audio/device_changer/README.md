@@ -4,9 +4,9 @@ This is a demo showing how the audio output device can be changed from Godot.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/525
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2758
 
 ## How does it work?
 

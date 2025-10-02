@@ -4,9 +4,9 @@ A demo of how to sync the audio playback with the time for a consistent BPM.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/581
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2757
 
 ## How does it work?
 

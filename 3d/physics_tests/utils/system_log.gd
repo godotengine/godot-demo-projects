@@ -1,20 +1,18 @@
 extends Node
 
-
 enum LogType {
 	LOG,
 	ERROR,
 }
 
-signal entry_logged(message, type)
+signal entry_logged(message: String, type: LogType)
 
-
-func print_log(message):
+func print_log(message: String) -> void:
 	print(message)
-	emit_signal("entry_logged", message, LogType.LOG)
+	entry_logged.emit(message, LogType.LOG)
 
 
-func print_error(message):
+func print_error(message: String) -> void:
 	push_error(message)
 	printerr(message)
-	emit_signal("entry_logged", message, LogType.ERROR)
+	entry_logged.emit(message, LogType.ERROR)

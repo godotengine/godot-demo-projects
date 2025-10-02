@@ -1,5 +1,5 @@
-class_name Enemy extends Node2D
-
+class_name Enemy
+extends Node2D
 
 ## Movement speed in pixels per second.
 const MOVEMENT_SPEED = 75.0
@@ -9,8 +9,7 @@ const DAMAGE_PER_SECOND = 15.0
 ## If [code]null[/code], nobody is in range to attack.
 var attacking: Player = null
 
-
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if is_instance_valid(attacking):
 		attacking.health -= delta * DAMAGE_PER_SECOND
 
@@ -21,10 +20,10 @@ func _process(delta: float):
 		position.x = -32
 
 
-func _on_attack_area_body_entered(body: PhysicsBody2D):
+func _on_attack_area_body_entered(body: PhysicsBody2D) -> void:
 	if body is Player:
 		attacking = body
 
 
-func _on_attack_area_body_exited(_body: PhysicsBody2D):
+func _on_attack_area_body_exited(_body: PhysicsBody2D) -> void:
 	attacking = null

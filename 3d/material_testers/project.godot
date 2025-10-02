@@ -17,8 +17,12 @@ for the purpose of showcasing Godot's rendering capabilities.
 This demo was featured at the beginning of the Godot 3.0 trailer."
 config/tags=PackedStringArray("3d", "demo", "official", "rendering")
 run/main_scene="res://material_tester.tscn"
-config/features=PackedStringArray("4.2")
+config/features=PackedStringArray("4.4")
 config/icon="res://icon.webp"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
 
 [display]
 
@@ -29,9 +33,22 @@ window/stretch/aspect="expand"
 
 import/blender/enabled=false
 
-[gdnative]
+[layer_names]
 
-singletons=[]
+3d_render/layer_1="World"
+3d_render/layer_2="Tester 1"
+3d_render/layer_3="Tester 2"
+3d_render/layer_4="Tester 3"
+3d_render/layer_5="Tester 4"
+3d_render/layer_6="Tester 5"
+3d_render/layer_7="Tester 6"
+3d_render/layer_8="Tester 7"
+3d_render/layer_9="Tester 8"
+3d_render/layer_10="Tester 9"
+3d_render/layer_11="Tester 10"
+3d_render/layer_12="Tester 11"
+3d_render/layer_13="Tester 12"
+3d_render/layer_14="Tester 13"
 
 [memory]
 
@@ -39,19 +56,10 @@ multithread/thread_rid_pool_prealloc=60
 
 [rendering]
 
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=3
+reflections/reflection_atlas/reflection_count=16
 textures/default_filters/anisotropic_filtering_level=4
 anti_aliasing/quality/msaa_3d=2
 anti_aliasing/quality/use_debanding=true
 lights_and_shadows/positional_shadow/atlas_size=2048
 lights_and_shadows/positional_shadow/atlas_size.mobile=1024
-quality/driver/fallback_to_gles2=true
-quality/intended_usage/framebuffer_allocation=3
-vram_compression/import_etc=true
-vram_compression/import_etc2=false
-quality/shadow_atlas/size=1024
-quality/shadow_atlas/size.mobile=512
-quality/shadows/filter_mode=2
-quality/filters/anisotropic_filter_level=16
-quality/filters/msaa=2
-quality/filters/msaa.mobile=0
-quality/filters/anisotropic_filter_level.mobile=4

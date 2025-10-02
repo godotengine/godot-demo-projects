@@ -9,9 +9,9 @@ manual modification of the RigidDynamicBody velocity.
 
 Language: GDScript
 
-Renderer: Forward Plus
+Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/119
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2725
 
 ## How does it work?
 

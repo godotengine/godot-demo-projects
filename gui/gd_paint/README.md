@@ -6,9 +6,9 @@ and eraser, as well as a rectangle and a circle brush.
 
 Language: GDScript
 
-Renderer: Vulkan Mobile
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/517
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2768
 
 ## Screenshots
 

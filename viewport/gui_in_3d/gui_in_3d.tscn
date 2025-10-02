@@ -12,8 +12,7 @@ sky_material = SubResource("ProceduralSkyMaterial_1lgdv")
 [sub_resource type="Environment" id="Environment_niyks"]
 background_mode = 2
 sky = SubResource("Sky_pq42j")
-tonemap_mode = 2
-glow_enabled = true
+tonemap_mode = 4
 
 [sub_resource type="Animation" id="1"]
 length = 6.0
@@ -33,7 +32,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uw4n0"]
 _data = {
-"Move_camera": SubResource("1")
+&"Move_camera": SubResource("1")
 }
 
 [sub_resource type="PlaneMesh" id="2"]
@@ -45,6 +44,11 @@ albedo_color = Color(0.722656, 0.791992, 1, 1)
 roughness = 0.0
 
 [node name="GUIin3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+visible = false
+shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_niyks")

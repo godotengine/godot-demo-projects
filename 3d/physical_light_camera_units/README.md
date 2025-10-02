@@ -20,6 +20,8 @@ Language: GDScript
 
 Renderer: Forward+
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2746
+
 ## Screenshots
 
 ![Screenshot](screenshots/physical_light_camera_units.webp)

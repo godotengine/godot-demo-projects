@@ -1,14 +1,14 @@
 # Multiplayer Bomber
 
-A multiplayer implementation of the classical bomberman game.
-One of the players should press "host", while the other
-should type in his address and press "play".
+A multiplayer implementation of the classic bomberman game.
+One of the players should press **Host**, while other player(s)
+should type in the host's IP address and press **Join**.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/139
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2797
 
 ## Screenshots
 

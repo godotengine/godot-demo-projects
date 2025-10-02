@@ -3,16 +3,24 @@
 [ext_resource type="PackedScene" uid="uid://cy6kmby6mupvv" path="res://ActionRemapButton.tscn" id="1"]
 
 [node name="InputRemapMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Instructions" type="Label" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 offset_top = 24.0
 offset_bottom = 55.0
 text = "Click on a button to reassign its action key."
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="RemapButtonGroup" type="Button" parent="."]
+[node name="RemapButtonGroup" type="Control" parent="."]
+anchors_preset = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -21,10 +29,9 @@ offset_left = -160.0
 offset_top = -144.0
 offset_right = 160.0
 offset_bottom = 144.0
-disabled = true
-flat = true
 
 [node name="ActionsList" type="VBoxContainer" parent="RemapButtonGroup"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -35,110 +42,96 @@ offset_right = 160.0
 offset_bottom = 140.0
 
 [node name="ActionRemapRow" type="HBoxContainer" parent="RemapButtonGroup/ActionsList"]
-offset_right = 320.0
-offset_bottom = 52.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ActionName" type="Label" parent="RemapButtonGroup/ActionsList/ActionRemapRow"]
-offset_right = 158.0
-offset_bottom = 52.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Move Left"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="RemapButton" parent="RemapButtonGroup/ActionsList/ActionRemapRow" instance=ExtResource( "1" )]
-offset_left = 162.0
-offset_right = 320.0
-offset_bottom = 52.0
+[node name="RemapButton" parent="RemapButtonGroup/ActionsList/ActionRemapRow" instance=ExtResource("1")]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action = "move_left"
 
 [node name="ActionRemapRow2" type="HBoxContainer" parent="RemapButtonGroup/ActionsList"]
-offset_top = 56.0
-offset_right = 320.0
-offset_bottom = 109.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ActionName" type="Label" parent="RemapButtonGroup/ActionsList/ActionRemapRow2"]
-offset_right = 158.0
-offset_bottom = 53.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Move Right"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="RemapButton" parent="RemapButtonGroup/ActionsList/ActionRemapRow2" instance=ExtResource( "1" )]
-offset_left = 162.0
-offset_right = 320.0
-offset_bottom = 53.0
+[node name="RemapButton" parent="RemapButtonGroup/ActionsList/ActionRemapRow2" instance=ExtResource("1")]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action = "move_right"
 
 [node name="ActionRemapRow3" type="HBoxContainer" parent="RemapButtonGroup/ActionsList"]
-offset_top = 113.0
-offset_right = 320.0
-offset_bottom = 166.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ActionName" type="Label" parent="RemapButtonGroup/ActionsList/ActionRemapRow3"]
-offset_right = 158.0
-offset_bottom = 53.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Look Up"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="RemapButton" parent="RemapButtonGroup/ActionsList/ActionRemapRow3" instance=ExtResource( "1" )]
-offset_left = 162.0
-offset_right = 320.0
-offset_bottom = 53.0
+[node name="RemapButton" parent="RemapButtonGroup/ActionsList/ActionRemapRow3" instance=ExtResource("1")]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action = "look_up"
 
 [node name="ActionRemapRow4" type="HBoxContainer" parent="RemapButtonGroup/ActionsList"]
-offset_top = 170.0
-offset_right = 320.0
-offset_bottom = 223.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ActionName" type="Label" parent="RemapButtonGroup/ActionsList/ActionRemapRow4"]
-offset_right = 158.0
-offset_bottom = 53.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Crouch"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="RemapButton" parent="RemapButtonGroup/ActionsList/ActionRemapRow4" instance=ExtResource( "1" )]
-offset_left = 162.0
-offset_right = 320.0
-offset_bottom = 53.0
+[node name="RemapButton" parent="RemapButtonGroup/ActionsList/ActionRemapRow4" instance=ExtResource("1")]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action = "crouch"
 
 [node name="ActionRemapRow5" type="HBoxContainer" parent="RemapButtonGroup/ActionsList"]
-offset_top = 227.0
-offset_right = 320.0
-offset_bottom = 280.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ActionName" type="Label" parent="RemapButtonGroup/ActionsList/ActionRemapRow5"]
-offset_right = 158.0
-offset_bottom = 53.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Dash"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="RemapButton" parent="RemapButtonGroup/ActionsList/ActionRemapRow5" instance=ExtResource( "1" )]
-offset_left = 162.0
-offset_right = 320.0
-offset_bottom = 53.0
+[node name="RemapButton" parent="RemapButtonGroup/ActionsList/ActionRemapRow5" instance=ExtResource("1")]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action = "dash"

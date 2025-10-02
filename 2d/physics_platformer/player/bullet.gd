@@ -1,13 +1,13 @@
 class_name Bullet
 extends RigidBody2D
 
-var disabled = false
+var disabled := false
 
-func _ready():
+func _ready() -> void:
 	($Timer as Timer).start()
 
 
-func disable():
+func disable() -> void:
 	if disabled:
 		return
 

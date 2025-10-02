@@ -29,6 +29,8 @@ Language: GDScript
 
 Renderer: Forward+
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2751
+
 ## Screenshots
 
 ![Screenshot](screenshots/squash_the_creeps.webp)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=28 format=3 uid="uid://c657hgr7fcptm"]
 
-[ext_resource type="Script" path="res://player/player.gd" id="1"]
+[ext_resource type="Script" uid="uid://bpwsjp2ufno2s" path="res://player/player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cgnjku7sa0qyt" path="res://player/gBot.png" id="2"]
 
 [sub_resource type="Animation" id="1"]
@@ -1654,14 +1654,14 @@ tracks/16/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sx6h1"]
 _data = {
-"fall": SubResource("1"),
-"fly": SubResource("2"),
-"idle": SubResource("3"),
-"jump": SubResource("4"),
-"land": SubResource("5"),
-"land_hard": SubResource("6"),
-"run": SubResource("7"),
-"walk": SubResource("8")
+&"fall": SubResource("1"),
+&"fly": SubResource("2"),
+&"idle": SubResource("3"),
+&"jump": SubResource("4"),
+&"land": SubResource("5"),
+&"land_hard": SubResource("6"),
+&"run": SubResource("7"),
+&"walk": SubResource("8")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="9"]
@@ -1702,18 +1702,23 @@ animation = &"run"
 xfade_time = 0.1
 input_0/name = "idle"
 input_0/auto_advance = false
+input_0/break_loop_at_end = false
 input_0/reset = true
 input_1/name = "walk"
 input_1/auto_advance = false
+input_1/break_loop_at_end = false
 input_1/reset = true
 input_2/name = "run"
 input_2/auto_advance = false
+input_2/break_loop_at_end = false
 input_2/reset = true
 input_3/name = "fly"
 input_3/auto_advance = false
+input_3/break_loop_at_end = false
 input_3/reset = true
 input_4/name = "fall"
 input_4/auto_advance = false
+input_4/break_loop_at_end = false
 input_4/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="21"]
@@ -1722,7 +1727,6 @@ animation = &"walk"
 [sub_resource type="AnimationNodeTimeScale" id="22"]
 
 [sub_resource type="AnimationNodeBlendTree" id="23"]
-graph_offset = Vector2(380.667, 382)
 nodes/fall_animation/node = SubResource("9")
 nodes/fall_animation/position = Vector2(533.333, 973.333)
 nodes/fly_animation/node = SubResource("10")
@@ -1752,12 +1756,13 @@ nodes/walk_animation/node = SubResource("21")
 nodes/walk_animation/position = Vector2(533.333, 626.667)
 nodes/walk_timescale/node = SubResource("22")
 nodes/walk_timescale/position = Vector2(720, 626.667)
-node_connections = [&"output", 0, &"land_hard", &"jump", 0, &"state", &"jump", 1, &"jump_animation", &"land", 0, &"jump", &"land", 1, &"land_animation", &"land_hard", 0, &"land", &"land_hard", 1, &"land_hard_animation", &"run_timescale", 0, &"run_animation", &"state", 0, &"idle_animation", &"state", 1, &"walk_timescale", &"state", 2, &"run_timescale", &"state", 3, &"fly_animation", &"state", 4, &"fall_animation", &"walk_timescale", 0, &"walk_animation"]
+node_connections = [&"jump", 0, &"state", &"jump", 1, &"jump_animation", &"land", 0, &"jump", &"land", 1, &"land_animation", &"land_hard", 0, &"land", &"land_hard", 1, &"land_hard_animation", &"output", 0, &"land_hard", &"run_timescale", 0, &"run_animation", &"state", 0, &"idle_animation", &"state", 1, &"walk_timescale", &"state", 2, &"run_timescale", &"state", 3, &"fly_animation", &"state", 4, &"fall_animation", &"walk_timescale", 0, &"walk_animation"]
 
 [sub_resource type="RectangleShape2D" id="24"]
 size = Vector2(22, 32.8716)
 
 [node name="SkeletalPlayer" type="CharacterBody2D"]
+physics_interpolation_mode = 1
 collision_mask = 28
 floor_max_angle = 0.907571
 floor_snap_length = 20.0
@@ -1770,21 +1775,70 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
 tree_root = SubResource("23")
 anim_player = NodePath("../AnimationPlayer")
+parameters/current_length = null
+parameters/current_position = null
+parameters/current_delta = null
+parameters/fall_animation/current_length = null
+parameters/fall_animation/current_position = null
+parameters/fall_animation/current_delta = null
+parameters/fly_animation/current_length = null
+parameters/fly_animation/current_position = null
+parameters/fly_animation/current_delta = null
+parameters/idle_animation/current_length = null
+parameters/idle_animation/current_position = null
+parameters/idle_animation/current_delta = null
+parameters/jump/current_length = 0.0
+parameters/jump/current_position = 0.0
+parameters/jump/current_delta = 0.0
 parameters/jump/active = false
 parameters/jump/internal_active = false
 parameters/jump/request = 0
+parameters/jump_animation/current_length = null
+parameters/jump_animation/current_position = null
+parameters/jump_animation/current_delta = null
+parameters/land/current_length = 0.0
+parameters/land/current_position = 0.0
+parameters/land/current_delta = 0.0
 parameters/land/active = false
 parameters/land/internal_active = false
 parameters/land/request = 0
+parameters/land_animation/current_length = null
+parameters/land_animation/current_position = null
+parameters/land_animation/current_delta = null
+parameters/land_hard/current_length = 0.0
+parameters/land_hard/current_position = 0.0
+parameters/land_hard/current_delta = 0.0
 parameters/land_hard/active = false
 parameters/land_hard/internal_active = false
 parameters/land_hard/request = 0
+parameters/land_hard_animation/current_length = null
+parameters/land_hard_animation/current_position = null
+parameters/land_hard_animation/current_delta = null
+parameters/output/current_length = null
+parameters/output/current_position = null
+parameters/output/current_delta = null
+parameters/run_animation/current_length = null
+parameters/run_animation/current_position = null
+parameters/run_animation/current_delta = null
+parameters/run_timescale/current_length = 1.0
+parameters/run_timescale/current_position = 1.0
+parameters/run_timescale/current_delta = 1.0
 parameters/run_timescale/scale = 1.0
-parameters/state/current_state = ""
+parameters/state/current_length = ""
+parameters/state/current_position = ""
+parameters/state/current_delta = ""
+parameters/state/current_state = "idle"
 parameters/state/transition_request = ""
-parameters/state/current_index = -1
+parameters/state/current_index = 0
+parameters/walk_animation/current_length = null
+parameters/walk_animation/current_position = null
+parameters/walk_animation/current_delta = null
+parameters/walk_timescale/current_length = 1.0
+parameters/walk_timescale/current_position = 1.0
+parameters/walk_timescale/current_delta = 1.0
 parameters/walk_timescale/scale = 0.1
 
 [node name="Sprite2D" type="Node2D" parent="."]
@@ -1828,6 +1882,7 @@ rest = Transform2D(1, 0, 0, 1, -11, 97)
 [node name="RightHand" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/Chest/RightArm/RightForearm"]
 position = Vector2(13, 94)
 rotation = 1.22745
+scale = Vector2(1, 1)
 rest = Transform2D(0.336639, 0.941634, -0.941634, 0.336639, 13, 94)
 auto_calculate_length_and_angle = false
 length = 16.0
@@ -1853,7 +1908,7 @@ bone_angle = 70.4641
 
 [node name="LeftLeg" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip"]
 position = Vector2(-72, 26)
-rotation = 0.103216
+rotation = 0.103217
 rest = Transform2D(1, 0, 0, 1, -72, 26)
 
 [node name="LeftLowerLeg" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/LeftLeg"]
@@ -1871,7 +1926,6 @@ bone_angle = 0.0
 [node name="RightLeg" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip"]
 position = Vector2(46, 11)
 rotation = -0.755354
-scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 46, 11)
 
 [node name="RightLowerLeg" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/RightLeg"]
@@ -1965,4 +2019,9 @@ shape = SubResource("24")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -32)
-zoom = Vector2(2, 2)
+zoom = Vector2(4, 4)
+process_callback = 0
+limit_left = -600
+limit_top = -598
+limit_right = 596
+limit_bottom = 423

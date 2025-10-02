@@ -16,8 +16,12 @@ config/description="This project showcases how to use variable rate shading (VRS
 Performance metrics are also displayed to evaluate potential performance gains."
 config/tags=PackedStringArray("3d", "demo", "official", "performance", "rendering")
 run/main_scene="res://vrs.tscn"
-config/features=PackedStringArray("4.2")
+config/features=PackedStringArray("4.4")
 config/icon="res://icon.webp"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
 
 [display]
 
@@ -27,6 +31,7 @@ window/vsync/vsync_mode=0
 
 [rendering]
 
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=3
 textures/default_filters/anisotropic_filtering_level=4
 vrs/mode=1
 vrs/texture="res://vrs_texture.png"

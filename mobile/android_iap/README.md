@@ -6,9 +6,9 @@ Note: Running the demo requires exporting and uploading the game to Google Play.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
 Note: There is a C# version available
 [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/android_iap).
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/532
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2792

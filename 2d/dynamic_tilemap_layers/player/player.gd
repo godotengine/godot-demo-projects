@@ -5,11 +5,11 @@ const WALK_MAX_SPEED = 200
 const STOP_FORCE = 1300
 const JUMP_SPEED = 200
 
-@onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+@onready var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	# Horizontal movement code. First, get the player's input.
-	var walk = WALK_FORCE * (Input.get_axis(&"move_left", &"move_right"))
+	var walk := WALK_FORCE * (Input.get_axis(&"move_left", &"move_right"))
 	# Slow down the player if they're not trying to move.
 	if abs(walk) < WALK_FORCE * 0.2:
 		# The velocity, slowed down a bit, and then reassigned.

@@ -12,16 +12,17 @@ config_version=5
 
 config/name="WebRTC Signaling Example"
 config/description="A WebSocket signaling server/client for WebRTC.
-This demo is devided in 4 parts.
+This demo is divided in 4 parts.
 The protocol is text based, and composed by a command and possibly
 multiple payload arguments, each separated by a new line."
 config/tags=PackedStringArray("demo", "network", "official")
 run/main_scene="res://demo/main.tscn"
-config/features=PackedStringArray("4.2")
+config/features=PackedStringArray("4.4")
 
 [debug]
 
 gdscript/warnings/shadowed_variable=false
+gdscript/warnings/untyped_declaration=1
 gdscript/warnings/unused_argument=false
 
 [display]
@@ -29,6 +30,7 @@ gdscript/warnings/unused_argument=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
-[network]
+[rendering]
 
-modules/webrtc_gdnative_script="res://demo/webrtc/webrtc.gdns"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

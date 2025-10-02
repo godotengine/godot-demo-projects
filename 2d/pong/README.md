@@ -6,15 +6,11 @@ for game development in Godot, including
 
 Language: GDScript
 
-Renderer: Vulkan Mobile
+Renderer: Compatibility
 
 Note: There is a C# version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/pong).
 
-Note: There is a VisualScript version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/visual_script/pong).
-
-Note: There is a GDNative C++ version available [here](https://github.com/godotengine/gdnative-demos/tree/master/cpp/pong).
-
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/121
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2728
 
 ## How does it work?
 

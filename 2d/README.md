@@ -3,6 +3,6 @@
 These demos are all 2D, but otherwise do not have a common theme.
 
 Languages: Most have GDScript, some have
-[GDSL](https://docs.godotengine.org/en/latest/tutorials/shaders/shader_reference/shading_language.html)
+[Godot shader language](https://docs.godotengine.org/en/latest/tutorials/shaders/shader_reference/shading_language.html)
 
-Renderers: 4 of them are GLES 3, but most are GLES 2
+Renderers: Glow for 2D and Physics Platformer use Forward+, 2D Particles uses Mobile, and the rest use Compatibility

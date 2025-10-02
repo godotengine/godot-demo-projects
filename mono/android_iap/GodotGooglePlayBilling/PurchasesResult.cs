@@ -11,7 +11,7 @@ namespace AndroidInAppPurchasesWithCSharp.GodotGooglePlayBilling
         {
             try
             {
-                Purchases = (purchasesResult.Contains("purchases") ? GooglePlayBillingUtils.ConvertPurchaseDictionaryArray((Array)purchasesResult["purchases"]) : null);
+                Purchases = (purchasesResult.ContainsKey("purchases") ? GooglePlayBillingUtils.ConvertPurchaseDictionaryArray(purchasesResult["purchases"].AsGodotArray()) : null);
             }
             catch (System.Exception ex)
             {

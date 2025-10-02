@@ -16,7 +16,9 @@ The decal filter mode can be adjusted in the top-left corner:
 
 Language: GDScript
 
-Renderer: Vulkan Clustered
+Renderer: Forward+
+
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2736
 
 ## Screenshots
 

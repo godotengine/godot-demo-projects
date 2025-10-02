@@ -5,14 +5,14 @@ inspired by others such as Minecraft.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/676
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2755
 
 ## How does it work?
 
 Each chunk is a
-[`StaticBody`](https://docs.godotengine.org/en/latest/classes/class_staticbody.html)
+[`StaticBody3D`](https://docs.godotengine.org/en/latest/classes/class_staticbody3d.html)
 with each block having its own
 [`CollisionShape`](https://docs.godotengine.org/en/latest/classes/class_collisionshape.html)
 for collisions. The meshes are created using
@@ -54,7 +54,103 @@ use Zylann's voxel module instead: https://github.com/Zylann/godot_voxel
 
 ## Licenses
 
-Textures are from [Minetest](https://www.minetest.net/). Copyright &copy; 2010-2018 Minetest contributors, CC BY-SA 3.0 Unported (Attribution-ShareAlike)
+Textures are from [Minetest Game](https://github.com/minetest/minetest_game).
+
+Some textures Copyright &copy; 2010-2018 Minetest contributors,
+ CC BY-SA 3.0 Unported (Attribution-ShareAlike)
 http://creativecommons.org/licenses/by-sa/3.0/
 
+Some textures Copyright &copy; 2010-2018 Minetest contributors,
+ CC0 1.0 "No rights reserved"
+https://creativecommons.org/publicdomain/zero/1.0/
+
 Font is "TinyUnicode" by DuffsDevice. Copyright &copy; DuffsDevice, CC-BY (Attribution) http://www.pentacom.jp/pentacom/bitfontmaker2/gallery/?id=468
+
+### Copyright information for textures reused from Minetest Game
+
+While most textures are under CC BY-SA 3.0, some are under CC0 1.0
+
+Cisoun's texture pack (CC BY-SA 3.0):
+
+  * default\_stone.png
+  * default\_leaves.png
+  * default\_leaves\_simple.png
+  * default\_tree.png
+  * default\_tree\_top.png
+
+celeron55, Perttu Ahola <celeron55@gmail.com> (CC BY-SA 3.0)
+
+  * default\_mineral\_iron.png
+  * default\_mineral\_coal.png
+  * default\_bookshelf.png
+
+VanessaE (CC BY-SA 3.0):
+
+  * default\_sand.png
+
+Calinou (CC BY-SA 3.0):
+
+  * default\_brick.png
+
+PilzAdam (CC BY-SA 3.0):
+
+  * default\_mineral\_gold.png
+
+jojoa1997 (CC BY-SA 3.0):
+
+  * default\_obsidian.png
+
+InfinityProject (CC BY-SA 3.0):
+
+  * default\_mineral\_diamond.png
+
+Zeg9 (CC BY-SA 3.0):
+
+  * default\_coal\_block.png
+
+paramat (CC BY-SA 3.0):
+
+  * default\_bush\_stem.png
+  * default\_grass\_side.png -- Derived from a texture by TumeniNodes (CC-BY-SA 3.0)
+  * default\_mese\_block.png
+
+TumeniNodes (CC BY-SA 3.0):
+
+  * default\_grass.png
+
+Blockmen (CC BY-SA 3.0):
+
+  * default\_wood.png
+
+sofar (CC0 1.0):
+
+  * default\_gravel.png -- Derived from Gambit's PixelBOX texture pack light gravel
+
+Neuromancer (CC BY-SA 3.0):
+
+  * default\_furnace\_bottom.png
+  * default\_furnace\_side.png
+  * default\_cobble.png, based on texture by Brane praefect
+  * default\_mossycobble.png, based on texture by Brane praefect
+
+Gambit (CC BY-SA 3.0):
+
+  * default\_diamond\_block.png
+
+kilbith (CC BY-SA 3.0):
+
+  * default\_steel\_block.png
+  * default\_gold\_block.png
+  * default\_mineral\_tin.png
+
+Mossmanikin (CC BY-SA 3.0):
+
+  * default\_fern\_3.png
+
+random-geek (CC BY-SA 3.0):
+
+  * default\_dirt.png -- Derived from a texture by Neuromancer (CC BY-SA 3.0)
+
+Krock (CC0 1.0):
+
+  * default\_glass.png

@@ -4,8 +4,8 @@
 # must be adjusted instead of adjusting the `position` property.
 extends Node3D
 
-var health = 0
-var counter = 0.0
+var health := 0: set = set_health
+var counter := 0.0
 
 # The margin to apply between the name and health percentage (in pixels).
 const HEALTH_MARGIN = 25
@@ -15,18 +15,26 @@ const HEALTH_MARGIN = 25
 # (since more characters may need to be rendered at once).
 const BAR_WIDTH = 100
 
-
-func _ready():
+func _ready() -> void:
 	$LineEdit.text = $Name.text
 
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Animate the health percentage.
 	counter += delta
-	set_health(50 + sin(counter * 0.5) * 50)
+	health = roundi(50 + sin(counter * 0.5) * 50)
 
 
-func set_health(p_health):
+func _on_line_edit_text_changed(new_text: String) -> void:
+	$Name.text = new_text
+
+	# Adjust name's font size to fit within the allowed width.
+	$Name.font_size = 32
+	while $Name.font.get_string_size($Name.text, $Name.horizontal_alignment, -1, $Name.font_size).x > $Name.width:
+		$Name.font_size -= 1
+
+
+func set_health(p_health: int) -> void:
 	health = p_health
 
 	$Health.text = "%d%%" % round(health)
@@ -48,21 +56,12 @@ func set_health(p_health):
 
 	# Construct an health bar with `|` symbols brought very close to each other using
 	# a custom FontVariation on the HealthBarForeground and HealthBarBackground nodes.
-	var bar_text = ""
-	var bar_text_bg = ""
-	for i in round((health / 100.0) * BAR_WIDTH):
+	var bar_text := ""
+	var bar_text_bg := ""
+	for i in roundi((health / 100.0) * BAR_WIDTH):
 		bar_text += "|"
 	for i in BAR_WIDTH:
 		bar_text_bg += "|"
 
 	$HealthBarForeground.text = str(bar_text)
 	$HealthBarBackground.text = str(bar_text_bg)
-
-
-func _on_line_edit_text_changed(new_text):
-	$Name.text = new_text
-
-	# Adjust name's font size to fit within the allowed width.
-	$Name.font_size = 32
-	while $Name.font.get_string_size($Name.text, $Name.horizontal_alignment, -1, $Name.font_size).x > $Name.width:
-		$Name.font_size -= 1

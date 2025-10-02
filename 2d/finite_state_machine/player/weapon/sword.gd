@@ -2,41 +2,50 @@ extends Area2D
 
 signal attack_finished
 
-enum States { IDLE, ATTACK }
-var state = null
+enum States {
+	IDLE,
+	ATTACK,
+}
 
-enum AttackInputStates { IDLE, LISTENING, REGISTERED }
-var attack_input_state = AttackInputStates.IDLE
-var ready_for_next_attack = false
+enum AttackInputStates {
+	IDLE,
+	LISTENING,
+	REGISTERED,
+}
+
+var state: States = States.IDLE
+var attack_input_state := AttackInputStates.IDLE
+var ready_for_next_attack := false
 const MAX_COMBO_COUNT = 3
-var combo_count = 0
+var combo_count := 0
 
-var attack_current = {}
-var combo = [{
+var attack_current := {}
+var combo := [{
 		"damage": 1,
 		"animation": "attack_fast",
-		"effect": null
+		"effect": null,
 	},
 	{
 		"damage": 1,
 		"animation": "attack_fast",
-		"effect": null
+		"effect": null,
 	},
 	{
 		"damage": 3,
 		"animation": "attack_medium",
-		"effect": null
-	}]
+		"effect": null,
+	}
+]
 
-var hit_objects = []
+var hit_objects := []
 
-func _ready():
-	$AnimationPlayer.animation_finished.connect(self._on_animation_finished)
-	body_entered.connect(self._on_body_entered)
+func _ready() -> void:
+	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
+	body_entered.connect(_on_body_entered)
 	_change_state(States.IDLE)
 
 
-func _change_state(new_state):
+func _change_state(new_state: States) -> void:
 	match state:
 		States.ATTACK:
 			hit_objects = []
@@ -57,45 +66,46 @@ func _change_state(new_state):
 	state = new_state
 
 
-func _unhandled_input(event):
+func _unhandled_input(input_event: InputEvent) -> void:
 	if not state == States.ATTACK:
 		return
 	if attack_input_state != AttackInputStates.LISTENING:
 		return
-	if event.is_action_pressed("attack"):
+	if input_event.is_action_pressed("attack"):
 		attack_input_state = AttackInputStates.REGISTERED
 
 
-func _physics_process(_delta):
+func _physics_process(_delta: float) -> void:
 	if attack_input_state == AttackInputStates.REGISTERED and ready_for_next_attack:
 		attack()
 
 
-func attack():
+func attack() -> void:
 	combo_count += 1
 	_change_state(States.ATTACK)
 
 
 # Use with AnimationPlayer func track.
-func set_attack_input_listening():
+func set_attack_input_listening() -> void:
 	attack_input_state = AttackInputStates.LISTENING
 
 
 # Use with AnimationPlayer func track.
-func set_ready_for_next_attack():
+func set_ready_for_next_attack() -> void:
 	ready_for_next_attack = true
 
 
-func _on_body_entered(body):
+func _on_body_entered(body: Node2D) -> void:
 	if not body.has_node("Health"):
 		return
 	if body.get_rid().get_id() in hit_objects:
 		return
+
 	hit_objects.append(body.get_rid().get_id())
 	body.take_damage(self, attack_current["damage"], attack_current["effect"])
 
 
-func _on_animation_finished(_name):
+func _on_animation_finished(_name: String) -> void:
 	if attack_current.is_empty():
 		return
 
@@ -103,9 +113,9 @@ func _on_animation_finished(_name):
 		attack()
 	else:
 		_change_state(States.IDLE)
-		emit_signal("attack_finished")
+		attack_finished.emit()
 
 
-func _on_StateMachine_state_changed(current_state):
+func _on_StateMachine_state_changed(current_state: Node) -> void:
 	if current_state.name == "Attack":
 		attack()

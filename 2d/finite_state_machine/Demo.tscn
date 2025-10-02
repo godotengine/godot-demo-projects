@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmn8nkpogiwsf"]
+[gd_scene load_steps=9 format=3 uid="uid://dmn8nkpogiwsf"]
 
 [ext_resource type="PackedScene" uid="uid://bpdyvy2681m3i" path="res://player/Player.tscn" id="1"]
+[ext_resource type="FontFile" uid="uid://b5bspum6ffekd" path="res://fonts/SourceCodePro-Bold.ttf" id="2_r1c5f"]
 [ext_resource type="PackedScene" uid="uid://cvi13chv8g4hj" path="res://debug/StatesStackDiplayer.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://bq6rrfy53rfvo" path="res://debug/ControlsPanel.tscn" id="4"]
 
@@ -25,9 +26,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qbwwp"]
 _data = {
-"idle": SubResource("1"),
-"stagger": SubResource("2"),
-"walk": SubResource("3")
+&"idle": SubResource("1"),
+&"stagger": SubResource("2"),
+&"walk": SubResource("3")
 }
 
 [node name="Demo" type="Node"]
@@ -40,8 +41,12 @@ start_state = NodePath("Idle")
 
 [node name="AnimationPlayer" parent="Player" index="1"]
 libraries = {
-"": SubResource("AnimationLibrary_qbwwp")
+&"": SubResource("AnimationLibrary_qbwwp")
 }
+
+[node name="StateNameDisplayer" parent="Player" index="5"]
+physics_interpolation_mode = 1
+theme_override_fonts/font = ExtResource("2_r1c5f")
 
 [node name="Explanations" type="RichTextLabel" parent="."]
 anchors_preset = 15

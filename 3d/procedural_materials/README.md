@@ -30,7 +30,9 @@ This demo includes procedurally generated materials with 3 different techniques:
 
 Language: GDScript
 
-Renderer: Forward Plus
+Renderer: Forward+
+
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2749
 
 ## Screenshots
 

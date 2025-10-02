@@ -48,29 +48,29 @@ const SSIL_MODE_TEXTS = [
 	"SSAO + SSIL (Slow)",
 ]
 
-var gi_mode = GIMode.NONE
-var reflection_probe_mode = ReflectionProbeMode.NONE
-var ssil_mode = SSILMode.NONE
+var gi_mode := GIMode.NONE
+var reflection_probe_mode := ReflectionProbeMode.NONE
+var ssil_mode := SSILMode.NONE
 
-@onready var environment = $WorldEnvironment.environment
-@onready var gi_mode_label = $GIMode
-@onready var reflection_probe_mode_label = $ReflectionProbeMode
-@onready var reflection_probe = $Camera/ReflectiveSphere/ReflectionProbe
-@onready var ssil_mode_label = $SSILMode
+@onready var environment: Environment = $WorldEnvironment.environment
+@onready var gi_mode_label: Label = $GIMode
+@onready var reflection_probe_mode_label: Label = $ReflectionProbeMode
+@onready var reflection_probe: ReflectionProbe = $Camera/ReflectiveSphere/ReflectionProbe
+@onready var ssil_mode_label: Label = $SSILMode
 
 # Several copies of the level mesh are required to cycle between different GI modes.
-@onready var zdm2_no_lightmap = $Zdm2NoLightmap
-@onready var zdm2_lightmap_all = $Zdm2LightmapAll
-@onready var zdm2_lightmap_indirect = $Zdm2LightmapIndirect
+@onready var zdm2_no_lightmap: Node3D = $Zdm2NoLightmap
+@onready var zdm2_lightmap_all: Node3D = $Zdm2LightmapAll
+@onready var zdm2_lightmap_indirect: Node3D = $Zdm2LightmapIndirect
 
 
-func _ready():
+func _ready() -> void:
 	set_gi_mode(gi_mode)
 	set_reflection_probe_mode(reflection_probe_mode)
 	set_ssil_mode(ssil_mode)
 
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("cycle_gi_mode"):
 		set_gi_mode(wrapi(gi_mode + 1, 0, GIMode.MAX))
 
@@ -81,7 +81,7 @@ func _input(event):
 		set_ssil_mode(wrapi(ssil_mode + 1, 0, SSILMode.MAX))
 
 
-func set_gi_mode(p_gi_mode):
+func set_gi_mode(p_gi_mode: GIMode) -> void:
 	gi_mode = p_gi_mode
 	gi_mode_label.text = "Global illumination: %s " % GI_MODE_TEXTS[gi_mode]
 
@@ -179,7 +179,7 @@ func set_gi_mode(p_gi_mode):
 			$CornerSpotLight.light_bake_mode = Light3D.BAKE_DYNAMIC
 
 
-func set_reflection_probe_mode(p_reflection_probe_mode):
+func set_reflection_probe_mode(p_reflection_probe_mode: ReflectionProbeMode) -> void:
 	reflection_probe_mode = p_reflection_probe_mode
 	reflection_probe_mode_label.text = "Reflection probe: %s " % REFLECTION_PROBE_MODE_TEXTS[reflection_probe_mode]
 
@@ -195,7 +195,7 @@ func set_reflection_probe_mode(p_reflection_probe_mode):
 			reflection_probe.update_mode = ReflectionProbe.UPDATE_ALWAYS
 
 
-func set_ssil_mode(p_ssil_mode):
+func set_ssil_mode(p_ssil_mode: SSILMode) -> void:
 	ssil_mode = p_ssil_mode
 	ssil_mode_label.text = "Screen-space lighting effects: %s " % SSIL_MODE_TEXTS[ssil_mode]
 

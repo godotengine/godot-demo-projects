@@ -1,5 +1,5 @@
-class_name Enemy extends RigidBody2D
-
+class_name Enemy
+extends RigidBody2D
 
 const WALK_SPEED = 50
 
@@ -12,8 +12,6 @@ var _state := State.WALKING
 
 var direction := -1
 var anim := ""
-
-var Bullet := preload("res://player/bullet.gd")
 
 @onready var rc_left := $RaycastLeft as RayCast2D
 @onready var rc_right := $RaycastRight as RayCast2D

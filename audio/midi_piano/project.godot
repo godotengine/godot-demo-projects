@@ -13,24 +13,19 @@ config_version=5
 config/name="MIDI Piano Demo"
 config/tags=PackedStringArray("audio", "demo", "official")
 run/main_scene="res://piano.tscn"
-config/features=PackedStringArray("4.2")
+config/features=PackedStringArray("4.4")
 config/icon="res://icon.webp"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=200
 
-[network]
-
-limits/debugger_stdout/max_chars_per_second=2048000
-
-[physics]
-
-common/enable_pause_aware_picking=true
-
 [rendering]
 
-quality/driver/driver_name="GLES2"
-vram_compression/import_etc=true
-vram_compression/import_etc2=false
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

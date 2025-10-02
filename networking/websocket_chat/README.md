@@ -4,9 +4,9 @@ This is a demo of a simple chat implemented using WebSockets, showing both how t
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/538
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2799
 
 ## Screenshots
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://na4hexkywup6"]
 
-[ext_resource type="Script" path="res://remap/remap_wizard.gd" id="1"]
+[ext_resource type="Script" uid="uid://b2g3tdhenaajo" path="res://remap/remap_wizard.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bsrktfrmtkqvo" path="res://joypad_diagram.tscn" id="2"]
 
 [node name="RemapWizard" type="Node"]
@@ -21,80 +21,49 @@ grow_vertical = 2
 
 [node name="Layout" type="VBoxContainer" parent="Start/Margin"]
 layout_mode = 2
-offset_right = 600.0
-offset_bottom = 540.0
 alignment = 1
 
 [node name="HTML5" type="VBoxContainer" parent="Start/Margin/Layout"]
 layout_mode = 2
-offset_top = 207.0
-offset_right = 600.0
-offset_bottom = 268.0
 
 [node name="Label" type="Label" parent="Start/Margin/Layout/HTML5"]
 layout_mode = 2
-offset_right = 600.0
-offset_bottom = 26.0
 text = "Try a common mapping:"
 
 [node name="known" type="HBoxContainer" parent="Start/Margin/Layout/HTML5"]
 layout_mode = 2
-offset_top = 30.0
-offset_right = 600.0
-offset_bottom = 61.0
 alignment = 1
 
 [node name="Xbox" type="Button" parent="Start/Margin/Layout/HTML5/known"]
 layout_mode = 2
-offset_left = 228.0
-offset_right = 275.0
-offset_bottom = 31.0
 text = "Xbox"
 
 [node name="XboxOSX" type="Button" parent="Start/Margin/Layout/HTML5/known"]
 layout_mode = 2
-offset_left = 279.0
-offset_right = 372.0
-offset_bottom = 31.0
 text = "Xbox (OSX)"
 
 [node name="Label" type="Label" parent="Start/Margin/Layout"]
 layout_mode = 2
-offset_top = 272.0
-offset_right = 600.0
-offset_bottom = 298.0
 text = "Or start the wizard"
 
 [node name="Buttons" type="HBoxContainer" parent="Start/Margin/Layout"]
 layout_mode = 2
-offset_top = 302.0
-offset_right = 600.0
-offset_bottom = 333.0
 
 [node name="Cancel" type="Button" parent="Start/Margin/Layout/Buttons"]
 layout_mode = 2
-offset_right = 60.0
-offset_bottom = 31.0
 text = "Cancel"
 
 [node name="Control" type="Control" parent="Start/Margin/Layout/Buttons"]
 layout_mode = 2
-anchors_preset = 0
-offset_left = 64.0
-offset_right = 534.0
-offset_bottom = 31.0
 size_flags_horizontal = 3
 
 [node name="Wizard" type="Button" parent="Start/Margin/Layout/Buttons"]
 layout_mode = 2
-offset_left = 538.0
-offset_right = 600.0
-offset_bottom = 31.0
 text = "Wizard"
 
 [node name="Mapping" type="Window" parent="."]
-position = Vector2i(130, 200)
-size = Vector2i(340, 100)
+position = Vector2i(130, 100)
+size = Vector2i(340, 400)
 visible = false
 min_size = Vector2i(340, 100)
 
@@ -104,111 +73,74 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
 
 [node name="VBox" type="VBoxContainer" parent="Mapping/Margin"]
 layout_mode = 2
-offset_right = 600.0
-offset_bottom = 540.0
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Mapping/Margin/VBox"]
+custom_minimum_size = Vector2(0, 260)
 layout_mode = 2
-offset_right = 600.0
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="Mapping/Margin/VBox/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(600, 0)
+size = Vector2i(600, 260)
 render_target_update_mode = 0
 
 [node name="JoypadDiagram" parent="Mapping/Margin/VBox/SubViewportContainer/SubViewport" instance=ExtResource("2")]
 position = Vector2(0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="Mapping/Margin/VBox/SubViewportContainer/SubViewport"]
-current = true
 
 [node name="Info" type="VBoxContainer" parent="Mapping/Margin/VBox"]
 layout_mode = 2
-offset_top = 4.0
-offset_right = 600.0
-offset_bottom = 100.0
 
 [node name="Text" type="HBoxContainer" parent="Mapping/Margin/VBox/Info"]
 layout_mode = 2
-offset_right = 600.0
-offset_bottom = 26.0
 
 [node name="Text" type="Label" parent="Mapping/Margin/VBox/Info/Text"]
 layout_mode = 2
-offset_right = 150.0
-offset_bottom = 26.0
 text = "Currently selected: "
 
 [node name="Value" type="Label" parent="Mapping/Margin/VBox/Info/Text"]
 layout_mode = 2
-offset_left = 154.0
-offset_top = 1.0
-offset_right = 155.0
-offset_bottom = 24.0
 
 [node name="Extra" type="HBoxContainer" parent="Mapping/Margin/VBox/Info"]
 layout_mode = 2
-offset_top = 30.0
-offset_right = 600.0
-offset_bottom = 61.0
 
 [node name="FullAxis" type="CheckBox" parent="Mapping/Margin/VBox/Info/Extra"]
 layout_mode = 2
-offset_right = 91.0
-offset_bottom = 31.0
 text = "Full axis"
 
 [node name="InvertAxis" type="CheckBox" parent="Mapping/Margin/VBox/Info/Extra"]
 layout_mode = 2
-offset_left = 95.0
-offset_right = 205.0
-offset_bottom = 31.0
 text = "Invert Axis"
 
 [node name="Buttons" type="HBoxContainer" parent="Mapping/Margin/VBox/Info"]
 layout_mode = 2
-offset_top = 65.0
-offset_right = 600.0
-offset_bottom = 96.0
 
 [node name="Prev" type="Button" parent="Mapping/Margin/VBox/Info/Buttons"]
 layout_mode = 2
-offset_right = 75.0
-offset_bottom = 31.0
 text = "Previous"
 
 [node name="Control" type="Control" parent="Mapping/Margin/VBox/Info/Buttons"]
 layout_mode = 2
-anchors_preset = 0
-offset_left = 79.0
-offset_right = 290.0
-offset_bottom = 31.0
 size_flags_horizontal = 3
 
 [node name="Skip" type="Button" parent="Mapping/Margin/VBox/Info/Buttons"]
 layout_mode = 2
-offset_left = 294.0
-offset_right = 335.0
-offset_bottom = 31.0
 text = "Skip"
 
 [node name="Control2" type="Control" parent="Mapping/Margin/VBox/Info/Buttons"]
 layout_mode = 2
-anchors_preset = 0
-offset_left = 339.0
-offset_right = 551.0
-offset_bottom = 31.0
 size_flags_horizontal = 3
 
 [node name="Next" type="Button" parent="Mapping/Margin/VBox/Info/Buttons"]
 layout_mode = 2
-offset_left = 555.0
-offset_right = 600.0
-offset_bottom = 31.0
 text = "Next"
 
 [node name="MapWindow" type="Window" parent="."]
@@ -226,20 +158,13 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MapWindow/Margin"]
 layout_mode = 2
-offset_right = 600.0
-offset_bottom = 540.0
 
 [node name="Label" type="Label" parent="MapWindow/Margin/VBoxContainer"]
 layout_mode = 2
-offset_right = 600.0
-offset_bottom = 26.0
 text = "This is the resulting remap string:"
 
 [node name="TextEdit" type="TextEdit" parent="MapWindow/Margin/VBoxContainer"]
 layout_mode = 2
-offset_top = 30.0
-offset_right = 600.0
-offset_bottom = 540.0
 size_flags_vertical = 3
 
 [connection signal="close_requested" from="Start" to="." method="_on_start_close_requested"]
@@ -248,6 +173,7 @@ size_flags_vertical = 3
 [connection signal="pressed" from="Start/Margin/Layout/Buttons/Cancel" to="." method="_on_Cancel_pressed"]
 [connection signal="pressed" from="Start/Margin/Layout/Buttons/Wizard" to="." method="_on_Wizard_pressed"]
 [connection signal="close_requested" from="Mapping" to="." method="_on_mapping_close_requested"]
+[connection signal="window_input" from="Mapping" to="." method="_input"]
 [connection signal="toggled" from="Mapping/Margin/VBox/Info/Extra/FullAxis" to="." method="_on_FullAxis_toggled"]
 [connection signal="toggled" from="Mapping/Margin/VBox/Info/Extra/InvertAxis" to="." method="_on_InvertAxis_toggled"]
 [connection signal="pressed" from="Mapping/Margin/VBox/Info/Buttons/Prev" to="." method="_on_Prev_pressed"]

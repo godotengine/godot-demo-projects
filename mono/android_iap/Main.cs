@@ -2,6 +2,7 @@ using AndroidInAppPurchasesWithCSharp.GodotGooglePlayBilling;
 using Godot;
 using System.Linq;
 using System;
+using Array = Godot.Collections.Array;
 
 namespace AndroidInAppPurchasesWithCSharp
 {
@@ -27,27 +28,38 @@ namespace AndroidInAppPurchasesWithCSharp
                 _label.Text += $"\n\n\nTest item SKU: {TestItemSku}";
 
                 // No params.
-                _payment.Connect(nameof(GooglePlayBilling.Connected), this, nameof(OnConnected));
+                _payment.Connect(GooglePlayBilling.SignalName.Connected,
+                    Callable.From(OnConnected));
                 // No params.
-                _payment.Connect(nameof(GooglePlayBilling.Disconnected), this, nameof(OnDisconnected));
+                _payment.Connect(GooglePlayBilling.SignalName.Disconnected,
+                    Callable.From(OnDisconnected));
                 // Response ID (int), Debug message (string).
-                _payment.Connect(nameof(GooglePlayBilling.ConnectError), this, nameof(OnConnectError));
+                _payment.Connect(GooglePlayBilling.SignalName.ConnectError,
+                    Callable.From<int,string>(OnConnectError));
                 // Purchases (Dictionary[]).
-                _payment.Connect(nameof(GooglePlayBilling.PurchasesUpdated), this, nameof(OnPurchasesUpdated));
+                _payment.Connect(GooglePlayBilling.SignalName.PurchasesUpdated,
+                    Callable.From<Array>(OnPurchasesUpdated));
                 // Response ID (int), Debug message (string).
-                _payment.Connect(nameof(GooglePlayBilling.PurchaseError), this, nameof(OnPurchaseError));
+                _payment.Connect(GooglePlayBilling.SignalName.PurchaseError,
+                    Callable.From<int,string>(OnPurchaseError));
                 // SKUs (Dictionary[]).
-                _payment.Connect(nameof(GooglePlayBilling.SkuDetailsQueryCompleted), this, nameof(OnSkuDetailsQueryCompleted));
+                _payment.Connect(GooglePlayBilling.SignalName.SkuDetailsQueryCompleted,
+                    Callable.From<Array>(OnSkuDetailsQueryCompleted));
                 // Response ID (int), Debug message (string), Queried SKUs (string[]).
-                _payment.Connect(nameof(GooglePlayBilling.SkuDetailsQueryError), this, nameof(OnSkuDetailsQueryError));
+                _payment.Connect(GooglePlayBilling.SignalName.SkuDetailsQueryError,
+                    Callable.From<int,string, string[]>(OnSkuDetailsQueryError));
                 // Purchase token (string).
-                _payment.Connect(nameof(GooglePlayBilling.PurchaseAcknowledged), this, nameof(OnPurchaseAcknowledged));
-                // Response ID (int), Debug message (string), Purchase token (string).
-                _payment.Connect(nameof(GooglePlayBilling.PurchaseAcknowledgementError), this, nameof(OnPurchaseAcknowledgementError));
+                _payment.Connect(GooglePlayBilling.SignalName.PurchaseAcknowledged,
+                    Callable.From<string>(OnPurchaseAcknowledged));
+                // Response ID (int), Debug message (string).
+                _payment.Connect(GooglePlayBilling.SignalName.PurchaseAcknowledgementError,
+                    Callable.From<int,string>(OnPurchaseAcknowledgementError));
                 // Purchase token (string).
-                _payment.Connect(nameof(GooglePlayBilling.PurchaseConsumed), this, nameof(OnPurchaseConsumed));
+                _payment.Connect(GooglePlayBilling.SignalName.PurchaseConsumed,
+                    Callable.From<string>(OnPurchaseConsumed));
                 // Response ID (int), Debug message (string), Purchase token (string).
-                _payment.Connect(nameof(GooglePlayBilling.PurchaseConsumptionError), this, nameof(OnPurchaseConsumptionError));
+                _payment.Connect(GooglePlayBilling.SignalName.PurchaseConsumptionError,
+                    Callable.From<int,string,string>(OnPurchaseConsumptionError));
                 _payment.StartConnection();
             }
             else
@@ -100,7 +112,7 @@ namespace AndroidInAppPurchasesWithCSharp
 
         private void OnPurchasesUpdated(Godot.Collections.Array arrPurchases)
         {
-            GD.Print($"Purchases updated: {JSON.Print(arrPurchases)}");
+            GD.Print($"Purchases updated: {Json.Stringify(arrPurchases)}");
 
             // See OnConnected
             var purchases = GooglePlayBillingUtils.ConvertPurchaseDictionaryArray(arrPurchases);
@@ -127,7 +139,7 @@ namespace AndroidInAppPurchasesWithCSharp
 
         private void OnSkuDetailsQueryCompleted(Godot.Collections.Array arrSkuDetails)
         {
-            ShowAlert(JSON.Print(arrSkuDetails));
+            ShowAlert(Json.Stringify(arrSkuDetails));
 
             var skuDetails = GooglePlayBillingUtils.ConvertSkuDetailsDictionaryArray(arrSkuDetails);
             foreach (var skuDetail in skuDetails)

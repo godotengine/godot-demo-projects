@@ -4,9 +4,9 @@ This uses two functions in SceneTree to switch between two scenes.
 
 Language: GDScript
 
-Renderer: Mobile
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/531
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2780
 
 ## Screenshots
 

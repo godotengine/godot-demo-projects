@@ -1,19 +1,24 @@
-[gd_scene load_steps=11 format=3 uid="uid://pfb5u7r1hl8t"]
+[gd_scene load_steps=15 format=3 uid="uid://pfb5u7r1hl8t"]
 
-[ext_resource type="Script" path="res://utils/label_fps.gd" id="1"]
-[ext_resource type="Script" path="res://utils/label_version.gd" id="2"]
-[ext_resource type="Script" path="res://utils/label_engine.gd" id="3"]
-[ext_resource type="Script" path="res://tests_menu.gd" id="4"]
-[ext_resource type="Script" path="res://utils/label_test.gd" id="5"]
-[ext_resource type="Script" path="res://utils/label_pause.gd" id="6"]
-[ext_resource type="Script" path="res://utils/container_log.gd" id="10"]
-[ext_resource type="Script" path="res://utils/scroll_log.gd" id="11"]
-[ext_resource type="Script" path="res://tests.gd" id="12"]
+[ext_resource type="Script" uid="uid://34ftr8y77xc0" path="res://utils/label_fps.gd" id="1"]
+[ext_resource type="Script" uid="uid://bai0htaaejvop" path="res://utils/label_version.gd" id="2"]
+[ext_resource type="Script" uid="uid://do0udxc585k84" path="res://utils/label_engine.gd" id="3"]
+[ext_resource type="Script" uid="uid://dd0fbi0qttuuw" path="res://tests_menu.gd" id="4"]
+[ext_resource type="Script" uid="uid://bkvmvpx2kl536" path="res://utils/label_test.gd" id="5"]
+[ext_resource type="Script" uid="uid://bsrr8ude7isvn" path="res://utils/label_pause.gd" id="6"]
+[ext_resource type="Script" uid="uid://7kql0xtuc7ny" path="res://utils/ticks_per_second.gd" id="8_dg77c"]
+[ext_resource type="Script" uid="uid://beqnv31yip0bl" path="res://utils/time_scale.gd" id="9_ycdy4"]
+[ext_resource type="Script" uid="uid://eleg6e366qxd" path="res://utils/container_log.gd" id="10"]
+[ext_resource type="Script" uid="uid://cvoeuonqmsye1" path="res://utils/max_steps_per_frame.gd" id="10_w48qg"]
+[ext_resource type="Script" uid="uid://pagh264d7unt" path="res://utils/scroll_log.gd" id="11"]
+[ext_resource type="Script" uid="uid://ijebwwx4t8et" path="res://utils/physics_interpolation.gd" id="11_ycdy4"]
+[ext_resource type="Script" uid="uid://sjyvya2tmvni" path="res://tests.gd" id="12"]
 
 [sub_resource type="StyleBoxFlat" id="1"]
 bg_color = Color(0, 0, 0, 0.176471)
 
 [node name="Main" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,7 +34,7 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 125.0
 offset_bottom = 30.0
-text = "TESTS"
+text = "Tests"
 flat = false
 script = ExtResource("4")
 
@@ -39,7 +44,8 @@ offset_left = 157.0
 offset_top = 13.0
 offset_right = 375.0
 offset_bottom = 27.0
-text = "P - TOGGLE PAUSE / R - RESTART / C - TOGGLE COLLISION / F - TOGGLE FULL SCREEN / ESC - QUIT"
+theme_override_constants/outline_size = 4
+text = "P: Toggle Pause  |  R: Restart  |  C: Toggle Collision  |  F: Toggle Fullscreen  |  ESC: Quit"
 
 [node name="LabelFPS" type="Label" parent="."]
 layout_mode = 1
@@ -47,37 +53,45 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
-offset_top = -19.0
-offset_right = 50.0
-offset_bottom = -5.0
+offset_top = -36.0
+offset_right = 55.0
+offset_bottom = -13.0
 grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 text = "FPS: 0"
 script = ExtResource("1")
 
 [node name="LabelEngine" type="Label" parent="."]
+self_modulate = Color(1, 1, 1, 0.752941)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
-offset_top = -39.0
-offset_right = 50.0
-offset_bottom = -25.0
+offset_top = -64.0
+offset_right = 128.0
+offset_bottom = -41.0
 grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 text = "Physics engine:"
 script = ExtResource("3")
 
 [node name="LabelVersion" type="Label" parent="."]
+self_modulate = Color(1, 1, 1, 0.752941)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
-offset_top = -59.0
-offset_right = 50.0
-offset_bottom = -45.0
+offset_top = -92.0
+offset_right = 125.0
+offset_bottom = -69.0
 grow_vertical = 0
-text = "Godot Version:"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Godot version:"
 script = ExtResource("2")
 
 [node name="LabelTest" type="Label" parent="."]
@@ -86,10 +100,12 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
-offset_top = -79.0
+offset_top = -120.0
 offset_right = 50.0
-offset_bottom = -65.0
+offset_bottom = -97.0
 grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 text = "Test:"
 script = ExtResource("5")
 
@@ -107,9 +123,121 @@ offset_bottom = -547.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 24
-text = "PAUSED"
+text = "Paused"
 script = ExtResource("6")
+
+[node name="Options" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -392.0
+offset_top = 56.0
+offset_right = -16.0
+offset_bottom = 174.0
+grow_horizontal = 0
+theme_override_constants/separation = 6
+
+[node name="TicksPerSecond" type="HBoxContainer" parent="Options"]
+layout_mode = 2
+tooltip_text = "Higher values make physics more precise at the cost of higher CPU utilization.
+Low values may result in objects phasing through each other (tunneling).
+Physics ticks per second are automatically multiplied by Time Scale in this project."
+theme_override_constants/separation = 10
+script = ExtResource("8_dg77c")
+
+[node name="Label" type="Label" parent="Options/TicksPerSecond"]
+custom_minimum_size = Vector2(164, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Ticks per Second"
+
+[node name="HSlider" type="HSlider" parent="Options/TicksPerSecond"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 10.0
+max_value = 240.0
+step = 10.0
+value = 60.0
+
+[node name="Value" type="Label" parent="Options/TicksPerSecond"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "60"
+
+[node name="TimeScale" type="HBoxContainer" parent="Options"]
+layout_mode = 2
+tooltip_text = "Game speed multiplier. Physics ticks per second are
+automatically multiplied by Time Scale in this project
+to ensure accurate simulation regardless of time scale."
+theme_override_constants/separation = 10
+script = ExtResource("9_ycdy4")
+
+[node name="Label" type="Label" parent="Options/TimeScale"]
+custom_minimum_size = Vector2(164, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Time Scale"
+
+[node name="HSlider" type="HSlider" parent="Options/TimeScale"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 5.0
+step = 0.5
+value = 0.5
+
+[node name="Value" type="Label" parent="Options/TimeScale"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "1.0×"
+
+[node name="MaxStepsPerFrame" type="HBoxContainer" parent="Options"]
+layout_mode = 2
+tooltip_text = "Physics will slow down if more physics steps
+than this value need to be simulated in a
+single rendered frame."
+theme_override_constants/separation = 10
+script = ExtResource("10_w48qg")
+
+[node name="Label" type="Label" parent="Options/MaxStepsPerFrame"]
+custom_minimum_size = Vector2(164, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Max Steps per Frame"
+
+[node name="HSlider" type="HSlider" parent="Options/MaxStepsPerFrame"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 1.0
+max_value = 20.0
+value = 8.0
+
+[node name="Value" type="Label" parent="Options/MaxStepsPerFrame"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "8"
+
+[node name="PhysicsInterpolation" type="CheckButton" parent="Options"]
+custom_minimum_size = Vector2(217, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Smooths out rendering regardless of the physics tick rate.
+This is a purely visual effect and has no impact on the physics simulation."
+theme_override_constants/outline_size = 4
+button_pressed = true
+text = "Physics Interpolation"
+script = ExtResource("11_ycdy4")
 
 [node name="PanelLog" type="Panel" parent="."]
 layout_mode = 1
@@ -118,10 +246,11 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -482.0
-offset_top = -237.0
+offset_left = -629.0
+offset_top = -252.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 1
 theme_override_styles/panel = SubResource("1")
 
 [node name="ButtonClear" type="Button" parent="PanelLog"]
@@ -131,8 +260,8 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -48.0
-offset_top = -25.0
+offset_left = -64.0
+offset_top = -36.0
 offset_right = -5.0
 offset_bottom = -5.0
 grow_horizontal = 0
@@ -147,20 +276,21 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -189.0
+offset_left = -269.0
 offset_top = -35.0
-offset_right = -57.0
+offset_right = -70.0
 offset_bottom = -4.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
-text = "Auto Scroll"
+button_pressed = true
+text = "Automatic Scrolling"
 
 [node name="ScrollLog" type="ScrollContainer" parent="PanelLog"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 5.0
-offset_right = 472.0
+offset_right = 616.0
 offset_bottom = 194.0
 script = ExtResource("11")
 auto_scroll = true
@@ -177,5 +307,9 @@ layout_mode = 2
 text = "Log start"
 max_lines_visible = 5
 
+[connection signal="value_changed" from="Options/TicksPerSecond/HSlider" to="Options/TicksPerSecond" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="Options/TimeScale/HSlider" to="Options/TimeScale" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="Options/MaxStepsPerFrame/HSlider" to="Options/MaxStepsPerFrame" method="_on_h_slider_value_changed"]
+[connection signal="toggled" from="Options/PhysicsInterpolation" to="Options/PhysicsInterpolation" method="_on_check_button_toggled"]
 [connection signal="pressed" from="PanelLog/ButtonClear" to="PanelLog/ScrollLog/VBoxLog" method="clear"]
 [connection signal="toggled" from="PanelLog/CheckBoxScroll" to="PanelLog/ScrollLog" method="_on_check_box_scroll_toggled"]

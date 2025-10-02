@@ -22,7 +22,7 @@ var viewport_start_size := Vector2(
 
 
 func _ready() -> void:
-	get_viewport().size_changed.connect(self.update_resolution_label)
+	get_viewport().size_changed.connect(update_resolution_label)
 	update_resolution_label()
 
 	# Disable V-Sync to uncap framerate on supported platforms. This makes performance comparison
@@ -83,12 +83,17 @@ func _on_filter_option_button_item_selected(index: int) -> void:
 	# Viewport scale mode setting.
 	if index == 0: # Bilinear (Fastest)
 		get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR
-		# FSR Sharpness is only effective when the scaling mode is FSR 1.0.
+		# FSR Sharpness is only effective when the scaling mode is FSR 1.0 or 2.2.
 		%FSRSharpnessLabel.visible = false
 		%FSRSharpnessSlider.visible = false
 	elif index == 1: # FSR 1.0 (Fast)
 		get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR
-		# FSR Sharpness is only effective when the scaling mode is FSR 1.0.
+		# FSR Sharpness is only effective when the scaling mode is FSR 1.0 or 2.2.
+		%FSRSharpnessLabel.visible = true
+		%FSRSharpnessSlider.visible = true
+	elif index == 2: # FSR 2.2 (Fast)
+		get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR2
+		# FSR Sharpness is only effective when the scaling mode is FSR 1.0 or 2.2.
 		%FSRSharpnessLabel.visible = true
 		%FSRSharpnessSlider.visible = true
 
@@ -105,7 +110,7 @@ func _on_vsync_option_button_item_selected(index: int) -> void:
 	# Vertical synchronization locks framerate and makes screen tearing not visible at the cost of
 	# higher input latency and stuttering when the framerate target is not met.
 	# Adaptive V-Sync automatically disables V-Sync when the framerate target is not met, and enables
-	# V-Sync otherwise. This prevents suttering and reduces input latency when the framerate target
+	# V-Sync otherwise. This prevents stuttering and reduces input latency when the framerate target
 	# is not met, at the cost of visible tearing.
 	if index == 0: # Disabled (default)
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
@@ -147,7 +152,7 @@ func _on_fxaa_option_button_item_selected(index: int) -> void:
 
 
 func _on_fullscreen_option_button_item_selected(index: int) -> void:
-	# To change between winow, fullscreen and other window modes,
+	# To change between window, fullscreen and other window modes,
 	# set the root mode to one of the options of Window.MODE_*.
 	# Other modes are maximized and minimized.
 	if index == 0: # Disabled (default)
@@ -167,7 +172,7 @@ func _on_shadow_size_option_button_item_selected(index):
 	if index == 0: # Minimum
 		RenderingServer.directional_shadow_atlas_set_size(512, true)
 		# Adjust shadow bias according to shadow resolution.
-		# Higher resultions can use a lower bias without suffering from shadow acne.
+		# Higher resolutions can use a lower bias without suffering from shadow acne.
 		directional_light.shadow_bias = 0.06
 
 		# Disable positional (omni/spot) light shadows entirely to further improve performance.
@@ -259,13 +264,16 @@ func _on_ssao_option_button_item_selected(index: int) -> void:
 		RenderingServer.environment_set_ssao_quality(RenderingServer.ENV_SSAO_QUALITY_VERY_LOW, true, 0.5, 2, 50, 300)
 	if index == 2: # Low
 		world_environment.environment.ssao_enabled = true
-		RenderingServer.environment_set_ssao_quality(RenderingServer.ENV_SSAO_QUALITY_VERY_LOW, true, 0.5, 2, 50, 300)
+		RenderingServer.environment_set_ssao_quality(RenderingServer.ENV_SSAO_QUALITY_LOW, true, 0.5, 2, 50, 300)
 	if index == 3: # Medium
 		world_environment.environment.ssao_enabled = true
 		RenderingServer.environment_set_ssao_quality(RenderingServer.ENV_SSAO_QUALITY_MEDIUM, true, 0.5, 2, 50, 300)
 	if index == 4: # High
 		world_environment.environment.ssao_enabled = true
 		RenderingServer.environment_set_ssao_quality(RenderingServer.ENV_SSAO_QUALITY_HIGH, true, 0.5, 2, 50, 300)
+	if index == 5: # Ultra
+		world_environment.environment.ssao_enabled = true
+		RenderingServer.environment_set_ssao_quality(RenderingServer.ENV_SSAO_QUALITY_ULTRA, true, 0.5, 2, 50, 300)
 
 
 func _on_ssil_option_button_item_selected(index: int) -> void:
@@ -286,6 +294,9 @@ func _on_ssil_option_button_item_selected(index: int) -> void:
 	if index == 4: # High
 		world_environment.environment.ssil_enabled = true
 		RenderingServer.environment_set_ssil_quality(RenderingServer.ENV_SSIL_QUALITY_HIGH, true, 0.5, 4, 50, 300)
+	if index == 5: # Ultra
+		world_environment.environment.ssil_enabled = true
+		RenderingServer.environment_set_ssil_quality(RenderingServer.ENV_SSIL_QUALITY_ULTRA, true, 0.5, 4, 50, 300)
 
 
 func _on_sdfgi_option_button_item_selected(index: int) -> void:
@@ -310,8 +321,10 @@ func _on_glow_option_button_item_selected(index: int) -> void:
 		world_environment.environment.glow_enabled = false
 	if index == 1: # Low
 		world_environment.environment.glow_enabled = true
+		RenderingServer.environment_glow_set_use_bicubic_upscale(false)
 	if index == 2: # High
 		world_environment.environment.glow_enabled = true
+		RenderingServer.environment_glow_set_use_bicubic_upscale(true)
 
 
 func _on_volumetric_fog_option_button_item_selected(index: int) -> void:

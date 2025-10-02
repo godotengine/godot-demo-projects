@@ -2,6 +2,6 @@
 
 These demos showcase networking and/or multiplayer features.
 
-Languages: All have GDScript, WebRTC uses some GDNative
+Languages: All have GDScript, WebRTC uses some GDExtension
 
-Renderer: All are GLES 2
+Renderer: All are Compatibility

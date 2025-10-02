@@ -1,0 +1,122 @@
+[gd_scene load_steps=13 format=3 uid="uid://btli1dajen53o"]
+
+[ext_resource type="Script" uid="uid://bqa4r4n7b6d7s" path="res://start_vr.gd" id="1_1bvp3"]
+[ext_resource type="Script" uid="uid://c5bnmb8grcumh" path="res://collision_hands.gd" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://btobyv4xjhltq" path="res://assets/pattern.png" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://cfgfwisj8m2mg" path="res://box.tscn" id="3_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://c7ohc2o1shtu7" path="res://wall.tscn" id="5_lquwl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_ig7tw"]
+sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+background_mode = 2
+sky = SubResource("Sky_ig7tw")
+tonemap_mode = 2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0xm2m"]
+radius = 0.02
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_lquwl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mycd"]
+albedo_color = Color(0.3241276, 0.50004333, 0.2159737, 1)
+albedo_texture = ExtResource("2_h2yge")
+uv1_scale = Vector3(100, 100, 100)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_272bh"]
+material = SubResource("StandardMaterial3D_7mycd")
+size = Vector2(1000, 1000)
+
+[node name="Main" type="Node3D"]
+
+[node name="StartVR" type="Node3D" parent="."]
+script = ExtResource("1_1bvp3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+shadow_bias = 0.01
+directional_shadow_max_distance = 50.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0xm2m")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="OpenXRRenderManager" type="OpenXRRenderModelManager" parent="XROrigin3D"]
+tracker = 1
+
+[node name="LeftHand" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+pose = &"grip"
+
+[node name="CollisionHands3D" type="AnimatableBody3D" parent="XROrigin3D/LeftHand"]
+script = ExtResource("1_ig7tw")
+metadata/_custom_type_script = "uid://c5bnmb8grcumh"
+
+[node name="OpenXRRenderManager" type="OpenXRRenderModelManager" parent="XROrigin3D/LeftHand/CollisionHands3D"]
+tracker = 2
+make_local_to_pose = "grip"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="XROrigin3D/LeftHand/CollisionHands3D"]
+shape = SubResource("SphereShape3D_0xm2m")
+
+[node name="RightHand" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"right_hand"
+pose = &"grip"
+
+[node name="CollisionHands3D" type="AnimatableBody3D" parent="XROrigin3D/RightHand"]
+script = ExtResource("1_ig7tw")
+metadata/_custom_type_script = "uid://c5bnmb8grcumh"
+
+[node name="OpenXRRenderManager" type="OpenXRRenderModelManager" parent="XROrigin3D/RightHand/CollisionHands3D"]
+tracker = 3
+make_local_to_pose = "grip"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="XROrigin3D/RightHand/CollisionHands3D"]
+shape = SubResource("SphereShape3D_0xm2m")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_lquwl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_272bh")
+
+[node name="Box" parent="." instance=ExtResource("3_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0.5, -0.75)
+
+[node name="Wall01" parent="." instance=ExtResource("5_lquwl")]
+transform = Transform3D(0.5077975, 0.073525466, 0.8583331, -0.14741239, 0.989072, 0.0024858303, -0.8487705, -0.12779121, 0.5130869, -1.3576927, -0.4236443, 0)
+
+[node name="Wall02" parent="." instance=ExtResource("5_lquwl")]
+transform = Transform3D(-0.4400646, -0.09660582, 0.89275444, 0, 0.9941961, 0.10758293, -0.89796615, 0.047343437, -0.43751052, 2.5047212, -0.106753826, 0.0325222)
+
+[node name="Wall03" parent="." instance=ExtResource("5_lquwl")]
+transform = Transform3D(0.584169, -0.048437964, 0.8101854, -0.1719119, 0.9681845, 0.181838, -0.7932168, -0.24550463, 0.5572562, 2.4887834, -0.7894809, 2.6100364)
+
+[node name="Wall04" parent="." instance=ExtResource("5_lquwl")]
+transform = Transform3D(-0.63450754, -0.2243154, 0.7396504, -0.12261418, 0.9740546, 0.19021934, -0.763129, 0.030003972, -0.64554924, -1.2827711, -0.22003722, 2.6100364)
+
+[node name="Wall05" parent="." instance=ExtResource("5_lquwl")]
+transform = Transform3D(-0.9373456, 0.2908417, 0.1918185, 0.3214552, 0.93427694, 0.1542501, -0.13434927, 0.20624672, -0.9692331, 0.36298275, -0.48010635, -3.1081657)
+
+[node name="Wall06" parent="." instance=ExtResource("5_lquwl")]
+transform = Transform3D(-0.990934, 0, 0.13434926, 0, 1, 0, -0.13434926, 0, -0.990934, 0.75976896, -0.70440745, 4.5405197)
+
+[node name="Wall07" parent="." instance=ExtResource("5_lquwl")]
+transform = Transform3D(0.02368374, 0.13314083, -0.99081427, -0.16938388, 0.97729725, 0.12727568, 0.9852657, 0.16481358, 0.045697965, 3.8073082, -0.5026467, 0.84226894)
+
+[node name="Wall08" parent="." instance=ExtResource("5_lquwl")]
+transform = Transform3D(0.023540916, 0.2297096, -0.9729746, -0.2009241, 0.95447266, 0.22048022, 0.97932404, 0.19030367, 0.06862336, -3.4319887, -0.45930338, 0.84226894)

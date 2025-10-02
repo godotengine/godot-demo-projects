@@ -9,9 +9,9 @@ at small font sizes compared to single-channel signed distance field fonts.
 
 Language: This demo contains no code.
 
-Renderer: Forward Mobile
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/521
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2770
 
 ## Screenshots
 

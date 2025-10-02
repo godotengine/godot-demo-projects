@@ -1,20 +1,38 @@
         <!-- The list of demos will be inserted above by the CI process. -->
     </ul>
     <h2>Unavailable demos</h2>
-    <ul>
-        <li><code>2d/hdr/</code>: Not supported on HTML5 yet.</li>
-        <li><code>3d/global_illumination/</code>: Not supported on HTML5 yet (freezes the browser).</li>
-        <li><code>3d/voxel/</code>: Not supported on HTML5 yet.</li>
-        <li><code>audio/device_changer/</code>: Not supported on HTML5 due to browser limitations.</li>
-        <li><code>loading/background_load/</code>: Not supported on HTML5 yet.</li>
-        <li><code>loading/multiple_threads_loading/</code>: Not supported on HTML5 yet.</li>
-        <li><code>loading/threads/</code>: Not supported on HTML5 yet.</li>
-        <li><code>misc/matrix_transform/</code>: Results are only visible in the editor.</li>
-        <li><code>mobile/android_iap/</code>: Only relevant on native Android.</li>
-        <li><code>mobile/sensors/</code>: Not supported on HTML5 yet.</li>
-        <li><code>mono/*/</code>: Not available yet (requires Mono-enabled HTML5 build).</li>
-        <li><code>networking/*/</code>: Doesn't make sense to be hosted on a static host, as the server must be hosted on the same origin due to the browser's same-origin policy.</li>
-        <li><code>plugins/*/</code>: Only effective within the editor.</li>
+    <ul class="unsupported-demos">
+        <li><code>2d/glow</code>: Not supported on the Compatibility rendering method (which the web platform always uses).</li>
+        <li><code>2d/navigation_mesh_chunks</code>: Relies on debug-only drawing functionality which is not available in projects exported in release mode.</li>
+        <li><code>2d/physics_tests</code>: Relies on debug-only drawing functionality which is not available in projects exported in release mode.</li>
+        <li><code>3d/labels_and_texts</code>: Does not export in headless mode due to an engine bug (font importing infinite loop).</li>
+        <li><code>3d/decals</code>: Not supported on the Compatibility rendering method (which the web platform always uses).</li>
+        <li><code>3d/ik</code>: Demo is not fully ported to Godot 4 yet (even though the feature works on the web).</li>
+        <li><code>3d/navigation_mesh_chunks</code>: Relies on debug-only drawing functionality which is not available in projects exported in release mode.</li>
+        <li><code>3d/occlusion_culling_mesh_lod</code>: Occlusion culling is disabled by default in web builds to decrease binary size.</li>
+        <li><code>3d/particles</code>: Demo mostly showcases features that are not available in Compatibility (which the web platform always uses).</li>
+        <li><code>3d/physical_light_camera_units</code>: Demo is not tuned for the Compatibility rendering method (which the web platform always uses).</li>
+        <li><code>3d/physics_tests</code>: Relies on debug-only drawing functionality which is not available in projects exported in release mode.</li>
+        <li><code>3d/variable_rate_shading</code>: Not supported on the Compatibility rendering method (which the web platform always uses)</li>
+        <li><code>3d/volumetric_fog</code>: Not supported on the Compatibility rendering method (which the web platform always uses)</li>
+        <li><code>3d/voxel</code>: Freezes after a few seconds of gameplay due to web platform-specific threading issues.</li>
+        <li><code>audio/bpm_sync</code>: Not functional on the web platform due to differences in the audio playback implementation.</li>
+        <li><code>audio/device_changer</code>: Not relevant for the web platform, as the web browser always chooses the audio output device.</li>
+        <li><code>audio/midi_piano</code>: Not functional on the web platform due to differences in the audio playback implementation.</li>
+        <li><code>audio/spectrum</code>: Not functional on the web platform due to differences in the audio playback implementation.</li>
+        <li><code>compute/*</code>: Not supported on the Compatibility rendering method (which the web platform always uses).</li>
+        <li><code>gui/msdf_font</code>: Does not export in headless mode due to an engine bug (font importing crashes).</li>
+        <li><code>gui/translation</code>: Does not export in headless mode due to an engine bug (font importing crashes).</li>
+        <li><code>loading/runtime_save_load</code>: Native filesystem access is not available on the web platform.</li>
+        <li><code>misc/compute_shader_heightmap</code>: Not supported on the Compatibility rendering method (which the web platform always uses).</li>
+        <li><code>misc/large_world_coordinates</code>: Not supported on the Compatibility rendering method (which the web platform always uses).</li>
+        <li><code>misc/matrix_transform</code>: Results are only visible in the editor.</li>
+        <li><code>mobile/android_iap</code>: Only relevant on native Android.</li>
+        <li><code>mobile/sensors</code>: Not supported on the web platform.</li>
+        <li><code>mono/*</code>: Not available yet (requires Mono-enabled HTML5 build).</li>
+        <li><code>networking/*</code>: Doesn't make sense to be hosted on a static host, as the server must be hosted on the same origin due to the browser's same-origin policy.</li>
+        <li><code>plugins/*</code>: Only effective within the editor.</li>
+        <li><code>xr/*</code>: Not functional on the web platform, as these demos are not designed for WebXR.</li>
     </ul>
 </body>
 </html>

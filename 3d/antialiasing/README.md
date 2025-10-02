@@ -45,7 +45,7 @@ compared to traditional bilinear filtering.
 
 Language: GDScript
 
-Renderer: Forward Plus
+Renderer: Forward+
 
 ## Screenshots
 

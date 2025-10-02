@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://rj7yrj3c672g"]
 
-[ext_resource type="Script" path="res://camera.gd" id="1"]
+[ext_resource type="Script" uid="uid://cx0dkr482ui5p" path="res://camera.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://deqpan4silm2n" path="res://waypoint.tscn" id="2"]
 
 [sub_resource type="StandardMaterial3D" id="5"]
@@ -51,8 +51,7 @@ sky_material = SubResource("ProceduralSkyMaterial_1hqbf")
 [sub_resource type="Environment" id="Environment_ob0ys"]
 background_mode = 2
 sky = SubResource("Sky_47fsp")
-tonemap_mode = 3
-tonemap_white = 6.0
+tonemap_mode = 4
 
 [node name="Main" type="Node3D"]
 
@@ -111,7 +110,7 @@ offset_top = 10.0
 offset_right = 325.0
 offset_bottom = 36.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 18
 text = "Press Esc or F10 to toggle mouse capture"
 
@@ -130,4 +129,6 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866026, -0.5, 0.75
 shadow_enabled = true
 shadow_bias = 0.04
 shadow_blur = 1.5
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 40.0

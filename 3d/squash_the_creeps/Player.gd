@@ -66,7 +66,7 @@ func _physics_process(delta):
 
 
 func die():
-	emit_signal("hit")
+	hit.emit()
 	queue_free()
 
 

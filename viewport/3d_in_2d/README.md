@@ -4,9 +4,9 @@ A demo showing how a 3D scene can be shown within a 2D one using viewports.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/128
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2804
 
 ## How does it work?
 
@@ -19,4 +19,4 @@ which is then assigned to the sprite's texture.
 
 ## Screenshots
 
-![Screenshot](screenshots/3d_in_2d.png)
+![Screenshot](screenshots/3d_in_2d.webp)

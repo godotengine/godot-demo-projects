@@ -8,7 +8,9 @@ Performance metrics are also displayed to evaluate potential performance gains.
 
 Language: GDScript
 
-Renderer: Forward Plus
+Renderer: Forward+
+
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2753
 
 ## Screenshots
 

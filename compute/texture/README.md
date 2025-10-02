@@ -1,4 +1,4 @@
-# Compute texture
+# Compute Texture
 
 This demo shows how to use compute shaders to populate a texture that is used as an input for a material shader.
 
@@ -7,7 +7,9 @@ When the mouse cursor is above the plane you can "draw" on the plane to drive th
 
 Language: GDScript
 
-Renderer: Forward Plus
+Renderer: Forward+
+
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2764
 
 > Note: this demo requires Godot 4.2 or later
 

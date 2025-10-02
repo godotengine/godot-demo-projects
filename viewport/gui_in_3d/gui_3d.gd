@@ -1,40 +1,46 @@
 extends Node3D
 
-# Used for checking if the mouse is inside the Area3D.
-var is_mouse_inside = false
-# The last processed input touch/mouse event. To calculate relative movement.
-var last_event_pos2D = null
-# The time of the last event in seconds since engine start.
-var last_event_time: float = -1.0
+## Used for checking if the mouse is inside the Area3D.
+var is_mouse_inside := false
 
-@onready var node_viewport = $SubViewport
-@onready var node_quad = $Quad
-@onready var node_area = $Quad/Area3D
+## The last processed input touch/mouse event. Used to calculate relative movement.
+var last_event_pos2D := Vector2()
 
-func _ready():
-	node_area.mouse_entered.connect(self._mouse_entered_area)
-	node_area.mouse_exited.connect(self._mouse_exited_area)
-	node_area.input_event.connect(self._mouse_input_event)
+## The time of the last event in seconds since engine start.
+var last_event_time := -1.0
+
+@onready var node_viewport: SubViewport = $SubViewport
+@onready var node_quad: MeshInstance3D = $Quad
+@onready var node_area: Area3D = $Quad/Area3D
+
+func _ready() -> void:
+	node_area.mouse_entered.connect(_mouse_entered_area)
+	node_area.mouse_exited.connect(_mouse_exited_area)
+	node_area.input_event.connect(_mouse_input_event)
 
 	# If the material is NOT set to use billboard settings, then avoid running billboard specific code
 	if node_quad.get_surface_override_material(0).billboard_mode == BaseMaterial3D.BillboardMode.BILLBOARD_DISABLED:
 		set_process(false)
 
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	# NOTE: Remove this function if you don't plan on using billboard settings.
 	rotate_area_to_billboard()
 
 
-func _mouse_entered_area():
+func _mouse_entered_area() -> void:
 	is_mouse_inside = true
+	# Notify the viewport that the mouse is now hovering it.
+	node_viewport.notification(NOTIFICATION_VP_MOUSE_ENTER)
 
 
-func _mouse_exited_area():
+func _mouse_exited_area() -> void:
+	# Notify the viewport that the mouse is no longer hovering it.
+	node_viewport.notification(NOTIFICATION_VP_MOUSE_EXIT)
 	is_mouse_inside = false
 
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	# Check if the event is a non-mouse/non-touch event
 	for mouse_event in [InputEventMouseButton, InputEventMouseMotion, InputEventScreenDrag, InputEventScreenTouch]:
 		if is_instance_of(event, mouse_event):
@@ -44,23 +50,23 @@ func _unhandled_input(event):
 	node_viewport.push_input(event)
 
 
-func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int):
-	# Get mesh size to detect edges and make conversions. This code only support PlaneMesh and QuadMesh.
-	var quad_mesh_size = node_quad.mesh.size
+func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
+	# Get mesh size to detect edges and make conversions. This code only supports PlaneMesh and QuadMesh.
+	var quad_mesh_size: Vector2 = node_quad.mesh.size
 
 	# Event position in Area3D in world coordinate space.
-	var event_pos3D = event_position
+	var event_pos3D := event_position
 
 	# Current time in seconds since engine start.
-	var now: float = Time.get_ticks_msec() / 1000.0
+	var now := Time.get_ticks_msec() / 1000.0
 
 	# Convert position to a coordinate space relative to the Area3D node.
-	# NOTE: affine_inverse accounts for the Area3D node's scale, rotation, and position in the scene!
+	# NOTE: `affine_inverse()` accounts for the Area3D node's scale, rotation, and position in the scene!
 	event_pos3D = node_quad.global_transform.affine_inverse() * event_pos3D
 
 	# TODO: Adapt to bilboard mode or avoid completely.
 
-	var event_pos2D: Vector2 = Vector2()
+	var event_pos2D := Vector2()
 
 	if is_mouse_inside:
 		# Convert the relative event position from 3D to 2D.
@@ -109,15 +115,15 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 	node_viewport.push_input(event)
 
 
-func rotate_area_to_billboard():
-	var billboard_mode = node_quad.get_surface_override_material(0).params_billboard_mode
+func rotate_area_to_billboard() -> void:
+	var billboard_mode: BaseMaterial3D.BillboardMode = node_quad.get_surface_override_material(0).billboard_mode
 
 	# Try to match the area with the material's billboard setting, if enabled.
 	if billboard_mode > 0:
 		# Get the camera.
-		var camera = get_viewport().get_camera_3d()
+		var camera := get_viewport().get_camera_3d()
 		# Look in the same direction as the camera.
-		var look = camera.to_global(Vector3(0, 0, -100)) - camera.global_transform.origin
+		var look := camera.to_global(Vector3(0, 0, -100)) - camera.global_transform.origin
 		look = node_area.position + look
 
 		# Y-Billboard: Lock Y rotation, but gives bad results if the camera is tilted.

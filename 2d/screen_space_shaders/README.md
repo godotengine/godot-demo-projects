@@ -3,11 +3,11 @@
 Several examples of full screen 2D shader processing.
 Many common full-res effects are implemented here for reference.
 
-Language: [GDSL](https://docs.godotengine.org/en/latest/tutorials/shaders/shader_reference/shading_language.html) and GDScript
+Language: [Godot shader language](https://docs.godotengine.org/en/latest/tutorials/shaders/shader_reference/shading_language.html) and GDScript
 
-Renderer: Vulkan Clustered
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/122
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2730
 
 ## Screenshots
 

@@ -4,9 +4,9 @@ An example showing how to take screenshots of the screen.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/130
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2808
 
 ## Screenshots
 

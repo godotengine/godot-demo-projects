@@ -16,21 +16,21 @@ const JUMP_VELOCITY = -400.0
 ## Maximum speed at which the player can fall.
 const TERMINAL_VELOCITY = 400
 
-var falling_slow = false
-var falling_fast = false
-var no_move_horizontal_time = 0.0
+var falling_slow := false
+var falling_fast := false
+var no_move_horizontal_time := 0.0
 
-@onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-@onready var sprite = $Sprite2D
-@onready var sprite_scale = sprite.scale.x
+@onready var gravity := float(ProjectSettings.get_setting("physics/2d/default_gravity"))
+@onready var sprite: Node2D = $Sprite2D
+@onready var sprite_scale := sprite.scale.x
 
 
-func _ready():
+func _ready() -> void:
 	$AnimationTree.active = true
 
 
 func _physics_process(delta: float) -> void:
-	var is_jumping = false
+	var is_jumping := false
 	if Input.is_action_just_pressed("jump"):
 		is_jumping = try_jump()
 	elif Input.is_action_just_released("jump") and velocity.y < 0.0:
@@ -98,4 +98,5 @@ func try_jump() -> bool:
 	if is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		return true
+
 	return false

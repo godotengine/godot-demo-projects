@@ -1,18 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cl2vpuxqgnylc"]
+[gd_scene load_steps=3 format=3 uid="uid://cl2vpuxqgnylc"]
 
 [ext_resource type="Shape3D" path="res://assets/robot_head/godot3_robot_head_collision.tres" id="1"]
-[ext_resource type="ArrayMesh" path="res://assets/robot_head/godot3_robot_head.mesh" id="2"]
 [ext_resource type="PackedScene" uid="uid://3gkujifjokqw" path="res://tests/static_scene_plane.tscn" id="3"]
 
 [node name="StaticScene" type="Node3D"]
 
-[node name="StaticBodyPlane" parent="." instance=ExtResource( "3" )]
+[node name="StaticBodyPlane" parent="." instance=ExtResource("3")]
 
 [node name="StaticBodyHead" type="StaticBody3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 8.66025, 5, 0, -5, 8.66025, 0, -11.1389, 2.29332)
 
-[node name="RobotHead" type="MeshInstance3D" parent="StaticBodyHead"]
-mesh = ExtResource( "2" )
-
 [node name="CollisionShape" type="CollisionShape3D" parent="StaticBodyHead"]
-shape = ExtResource( "1" )
+shape = ExtResource("1")
+debug_color = Color(0, 0.533333, 1, 1)

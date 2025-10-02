@@ -4,12 +4,12 @@ extends CharacterBody3D
 const norm_grav = -38.8
 const MAX_SPEED = 22
 const JUMP_SPEED = 26
-const ACCEL= 8.5
-# Sprinting variables. Similar to the varibles above, just allowing for quicker movement
+const ACCEL = 8.5
+# Sprinting variables. Similar to the variables above, just allowing for quicker movement
 const MAX_SPRINT_SPEED = 34
 const SPRINT_ACCEL = 18
 # How fast we slow down, and the steepest angle we can climb.
-const DEACCEL= 28
+const DEACCEL = 28
 const MAX_SLOPE_ANGLE = 40
 # How fast the bullets launch
 const LEFT_MOUSE_FIRE_TIME = 0.15
@@ -20,7 +20,6 @@ var vel = Vector3()
 var dir = Vector3()
 # A boolean to track whether or not we are sprinting
 var is_sprinting = false
-
 
 # You may need to adjust depending on the sensitivity of your mouse
 var MOUSE_SENSITIVITY = 0.08
@@ -44,7 +43,6 @@ var current_anim = "Starter"
 # The simple bullet rigidbody
 var simple_bullet = preload("res://fps/simple_bullet.tscn")
 
-
 # We need the camera for getting directional vectors. We rotate ourselves on the Y-axis using
 # the camera_holder to avoid rotating on more than one axis at a time.
 @onready var camera_holder = $CameraHolder
@@ -57,7 +55,7 @@ var simple_bullet = preload("res://fps/simple_bullet.tscn")
 
 
 func _ready():
-	anim_player.animation_finished.connect(self.animation_finished)
+	anim_player.animation_finished.connect(animation_finished)
 
 	set_physics_process(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -70,7 +68,6 @@ func _physics_process(delta):
 
 
 func process_input(delta):
-
 	# Reset dir, so our previous movement does not effect us
 	dir = Vector3()
 	# Get the camera's global transform so we can use its directional vectors
@@ -122,7 +119,6 @@ func process_input(delta):
 		left_mouse_timer -= delta
 	# ----------------------------------
 
-
 	# ----------------------------------
 	# Sprinting
 	if Input.is_key_pressed(KEY_SHIFT):
@@ -142,9 +138,8 @@ func process_input(delta):
 		jump_button_down = false
 	# ----------------------------------
 
-
 	# ----------------------------------
-	# Leaninng
+	# Leaning
 	if Input.is_key_pressed(KEY_Q):
 		lean_value += 1.2 * delta
 	elif Input.is_key_pressed(KEY_E):
@@ -160,7 +155,7 @@ func process_input(delta):
 				lean_value = 0.5
 
 	lean_value = clamp(lean_value, 0, 1)
-	path_follow_node.unit_offset = lean_value
+	path_follow_node.h_offset = lean_value
 	if lean_value < 0.5:
 		var lerp_value = lean_value * 2
 		path_follow_node.rotation_degrees.z = (20 * (1 - lerp_value))
@@ -171,13 +166,12 @@ func process_input(delta):
 
 
 func process_movement(delta):
-
 	var grav = norm_grav
 
 	dir.y = 0
 	dir = dir.normalized()
 
-	vel.y += delta*grav
+	vel.y += delta * grav
 
 	var hvel = vel
 	hvel.y = 0
@@ -188,7 +182,6 @@ func process_movement(delta):
 	else:
 		target *= MAX_SPEED
 
-
 	var accel
 	if dir.dot(hvel) > 0:
 		if not is_sprinting:
@@ -198,7 +191,7 @@ func process_movement(delta):
 	else:
 		accel = DEACCEL
 
-	hvel = hvel.lerp(target, accel*delta)
+	hvel = hvel.lerp(target, accel * delta)
 
 	vel.x = hvel.x
 	vel.z = hvel.z
@@ -210,11 +203,9 @@ func process_movement(delta):
 
 # Mouse based camera movement
 func _input(event):
-
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-
-		rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY * -1))
-		camera_holder.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
+		rotate_y(deg_to_rad(event.screen_relative.x * MOUSE_SENSITIVITY * -1))
+		camera_holder.rotate_x(deg_to_rad(event.screen_relative.y * MOUSE_SENSITIVITY))
 
 		# We need to clamp the camera's rotation so we cannot rotate ourselves upside down
 		var camera_rot = camera_holder.rotation_degrees

@@ -7,9 +7,9 @@ Example of using 2D navigation using:
 
 Language: GDScript
 
-Renderer: Forward+
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/117
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2722
 
 ## Screenshots
 

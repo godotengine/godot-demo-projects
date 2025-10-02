@@ -5,19 +5,19 @@ split screen, also called Voronoi split screen.
 
 Language: [Godot shader language](https://docs.godotengine.org/en/latest/tutorials/shaders/shader_reference/shading_language.html) and GDScript
 
-Renderer: Forward Mobile
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/541
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2806
 
 ## Details
 
 A dynamic split screen system displays a single screen when
-the two players are close but a splitted view when they move apart.
+the two players are close but a split view when they move apart.
 
 The splitting line can take any angle depending on the players'
 position, so it won't be either vertical or horizontal.
 
-This system was popularized by the Lego videogames.
+This system was popularized by the Lego video games.
 
 ## How it works
 
@@ -26,7 +26,7 @@ texture, as well as some other parameters, are passed to a
 shader attached to a TextureRect filling the whole screen.
 
 The `SplitScreen` shader, with the help of the `CameraController`
-script, chooses wich texture to display on each pixel to
+script, chooses which texture to display on each pixel to
 achieve the effect.
 
 The cameras are placed on the segment joining the two players,

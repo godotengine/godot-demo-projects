@@ -1,7 +1,8 @@
 extends Node
+## A simple script that rotates the model.
 
-# A simple script to rotate the model.
-@onready var model = $Model
+@onready var model: Node3D = $Model
 
-func _process(delta):
-	model.rotate_y(delta * 0.7)
+
+func _process(delta: float) -> void:
+	model.rotation.y += delta * 0.7

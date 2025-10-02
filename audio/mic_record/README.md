@@ -8,9 +8,9 @@ stereo settings of the recording.
 
 Language: GDScript
 
-Renderer: Vulkan Mobile
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/527
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2760
 
 ## Screenshots
 

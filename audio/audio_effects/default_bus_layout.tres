@@ -1,0 +1,112 @@
+[gd_resource type="AudioBusLayout" load_steps=19 format=3 uid="uid://cfsko8byy7hwg"]
+
+[sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_b00sk"]
+resource_name = "Amplify"
+volume_db = 5.0
+
+[sub_resource type="AudioEffectBandLimitFilter" id="AudioEffectBandLimitFilter_grmel"]
+resource_name = "BandLimitFilter"
+cutoff_hz = 12020.0
+gain = 0.25
+
+[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_xkjlb"]
+resource_name = "HighPassFilter"
+
+[sub_resource type="AudioEffectLowShelfFilter" id="AudioEffectLowShelfFilter_08ofu"]
+resource_name = "LowShelfFilter"
+gain = 0.25
+
+[sub_resource type="AudioEffectNotchFilter" id="AudioEffectNotchFilter_gwbjt"]
+resource_name = "NotchFilter"
+
+[sub_resource type="AudioEffectPanner" id="AudioEffectPanner_n8qnn"]
+resource_name = "Panner"
+pan = -1.0
+
+[sub_resource type="AudioEffectPhaser" id="AudioEffectPhaser_i1syh"]
+resource_name = "Phaser"
+
+[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_twey2"]
+resource_name = "PitchShift"
+pitch_scale = 0.75
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_mr8j7"]
+resource_name = "Reverb"
+
+[sub_resource type="AudioEffectStereoEnhance" id="AudioEffectStereoEnhance_43qmx"]
+resource_name = "StereoEnhance"
+pan_pullout = 2.0
+time_pullout_ms = 20.0
+surround = 0.2
+
+[sub_resource type="AudioEffectBandPassFilter" id="AudioEffectBandPassFilter_0qygx"]
+resource_name = "BandPassFilter"
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_lb74p"]
+resource_name = "Chorus"
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_4gq7g"]
+resource_name = "Compressor"
+threshold = -24.0
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_hf7s3"]
+resource_name = "Delay"
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_kbjaj"]
+resource_name = "Distortion"
+pre_gain = -26.0
+drive = 0.5
+
+[sub_resource type="AudioEffectEQ6" id="AudioEffectEQ6_neyrx"]
+resource_name = "EQ6"
+
+[sub_resource type="AudioEffectEQ10" id="AudioEffectEQ10_6j3b2"]
+resource_name = "EQ10"
+
+[sub_resource type="AudioEffectEQ21" id="AudioEffectEQ21_cvy2u"]
+resource_name = "EQ21"
+
+[resource]
+bus/0/volume_db = 0.007267
+bus/0/effect/0/effect = SubResource("AudioEffectAmplify_b00sk")
+bus/0/effect/0/enabled = false
+bus/0/effect/1/effect = SubResource("AudioEffectBandLimitFilter_grmel")
+bus/0/effect/1/enabled = false
+bus/0/effect/2/effect = SubResource("AudioEffectBandPassFilter_0qygx")
+bus/0/effect/2/enabled = false
+bus/0/effect/3/effect = SubResource("AudioEffectChorus_lb74p")
+bus/0/effect/3/enabled = false
+bus/0/effect/4/effect = SubResource("AudioEffectCompressor_4gq7g")
+bus/0/effect/4/enabled = false
+bus/0/effect/5/effect = SubResource("AudioEffectDelay_hf7s3")
+bus/0/effect/5/enabled = false
+bus/0/effect/6/effect = SubResource("AudioEffectDistortion_kbjaj")
+bus/0/effect/6/enabled = false
+bus/0/effect/7/effect = SubResource("AudioEffectEQ6_neyrx")
+bus/0/effect/7/enabled = false
+bus/0/effect/8/effect = SubResource("AudioEffectEQ10_6j3b2")
+bus/0/effect/8/enabled = false
+bus/0/effect/9/effect = SubResource("AudioEffectEQ21_cvy2u")
+bus/0/effect/9/enabled = false
+bus/0/effect/10/effect = SubResource("AudioEffectHighPassFilter_xkjlb")
+bus/0/effect/10/enabled = false
+bus/0/effect/11/effect = SubResource("AudioEffectLowShelfFilter_08ofu")
+bus/0/effect/11/enabled = false
+bus/0/effect/12/effect = SubResource("AudioEffectNotchFilter_gwbjt")
+bus/0/effect/12/enabled = false
+bus/0/effect/13/effect = SubResource("AudioEffectPanner_n8qnn")
+bus/0/effect/13/enabled = false
+bus/0/effect/14/effect = SubResource("AudioEffectPhaser_i1syh")
+bus/0/effect/14/enabled = false
+bus/0/effect/15/effect = SubResource("AudioEffectPitchShift_twey2")
+bus/0/effect/15/enabled = false
+bus/0/effect/16/effect = SubResource("AudioEffectReverb_mr8j7")
+bus/0/effect/16/enabled = false
+bus/0/effect/17/effect = SubResource("AudioEffectStereoEnhance_43qmx")
+bus/0/effect/17/enabled = false
+bus/1/name = &"Music"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"

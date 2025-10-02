@@ -1,34 +1,28 @@
 extends Control
 
 @export var target: NodePath
-@export var min_scale = 0.1
-@export var max_scale = 3.0
-@export var one_finger_rot_x = true
-@export var one_finger_rot_y = true
-@export var two_fingers_rot_z = true
-@export var two_fingers_zoom = true
+@export var min_scale := 0.1
+@export var max_scale := 3.0
+@export var one_finger_rot_x := true
+@export var one_finger_rot_y := true
+@export var two_fingers_rot_z := true
+@export var two_fingers_zoom := true
 
-var base_state
-var curr_state
-
-var target_node
+var base_state := {}
+var curr_state := {}
 
 # We keep here a copy of the state before the number of fingers changed to avoid accumulation errors.
-var base_xform
+var base_xform: Transform3D
 
-func _ready():
-	base_state = {}
-	curr_state = {}
-	target_node = get_node(target)
+@onready var target_node: Node = get_node(target)
 
-
-func _gui_input(event):
+func _gui_input(event: InputEvent) -> void:
 	# We must start touching inside, but we can drag or unpress outside.
 #	if not (event is InputEventScreenDrag or
 #		(event is InputEventScreenTouch and (not event.pressed or get_global_rect().has_point(event.position)))):
 #		return
 
-	var finger_count = base_state.size()
+	var finger_count := base_state.size()
 
 	if finger_count == 0:
 		# No fingers => Accept press.
@@ -61,7 +55,7 @@ func _gui_input(event):
 		elif event is InputEventScreenDrag:
 			if curr_state.has(event.index):
 				# Touching finger dragged.
-				var unit_drag = _px2unit(base_state[base_state.keys()[0]] - event.position)
+				var unit_drag := _px2unit(base_state[base_state.keys()[0]] - event.position)
 				if one_finger_rot_x:
 					target_node.global_rotate(Vector3.UP, deg_to_rad(180.0 * unit_drag.x))
 				if one_finger_rot_y:
@@ -87,29 +81,29 @@ func _gui_input(event):
 				curr_state[event.index] = event.position
 
 				# Compute base and current inter-finger vectors.
-				var base_segment = base_state[base_state.keys()[0]] - base_state[base_state.keys()[1]]
-				var new_segment = curr_state[curr_state.keys()[0]] - curr_state[curr_state.keys()[1]]
+				var base_segment: Vector3 = base_state[base_state.keys()[0]] - base_state[base_state.keys()[1]]
+				var new_segment: Vector3 = curr_state[curr_state.keys()[0]] - curr_state[curr_state.keys()[1]]
 
 				# Get the base scale from the base matrix.
-				var base_scale = Vector3(base_xform.basis.x.x, base_xform.basis.y.y, base_xform.basis.z.z).length()
+				var base_scale := Vector3(base_xform.basis.x.x, base_xform.basis.y.y, base_xform.basis.z.z).length()
 
 				if two_fingers_zoom:
 					# Compute the new scale limiting it and taking into account the base scale.
-					var new_scale = clamp(base_scale * (new_segment.length() / base_segment.length()), min_scale, max_scale) / base_scale
+					var new_scale := clampf(base_scale * (new_segment.length() / base_segment.length()), min_scale, max_scale) / base_scale
 					target_node.set_transform(base_xform.scaled(new_scale * Vector3.ONE))
 				else:
 					target_node.set_transform(base_xform)
 
 				if two_fingers_rot_z:
 					# Apply rotation between base inter-finger vector and the current one.
-					var rot = new_segment.angle_to(base_segment)
+					var rot := new_segment.angle_to(base_segment)
 					target_node.global_rotate(Vector3.BACK, rot)
 
 	# Finger count changed?
 	if base_state.size() != finger_count:
 		# Copy new base state to the current state.
 		curr_state = {}
-		for idx in base_state.keys():
+		for idx: int in base_state.keys():
 			curr_state[idx] = base_state[idx]
 		# Remember the base transform.
 		base_xform = target_node.get_transform()
@@ -117,6 +111,6 @@ func _gui_input(event):
 
 # Converts a vector in pixels to a unitary magnitude,
 # considering the number of pixels of the shorter axis is the unit.
-func _px2unit(v):
-	var shortest = min(get_size().x, get_size().y)
+func _px2unit(v: Vector2) -> Vector2:
+	var shortest := minf(get_size().x, get_size().y)
 	return v * (1.0 / shortest)

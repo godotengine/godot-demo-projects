@@ -5,9 +5,9 @@ as well as forwarding mouse and keyboard input to the GUI.
 
 Language: GDScript
 
-Renderer: GLES 3
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/127
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2807
 
 ## Screenshots
 

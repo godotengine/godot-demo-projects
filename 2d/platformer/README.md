@@ -17,13 +17,13 @@ they contain a lot of comments that explain how each class works.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/120
 
 ## Features
 
-- Side-scrolling player controller using [`KinematicBody2D`](https://docs.godotengine.org/en/latest/classes/class_kinematicbody2d.html).
+- Side-scrolling player controller using [`CharacterBody2D`](https://docs.godotengine.org/en/latest/classes/class_characterbody2d.html).
     - Can walk on and snap to slopes.
     - Can shoot, including while jumping.
 - Enemies that crawl on the floor and change direction when they encounter an obstacle.

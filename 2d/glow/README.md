@@ -6,9 +6,9 @@ Slide the cave image left and right to observe the glow effect at work.
 
 Language: GDScript
 
-Renderer: Forward Plus
+Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/110
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2715
 
 ## Screenshots
 

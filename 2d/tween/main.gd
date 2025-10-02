@@ -1,16 +1,23 @@
 extends Node
 
-@onready var icon: Sprite2D = %Icon
-@onready var icon_start_position = icon.position
-
-@onready var countdown_label = %CountdownLabel
-@onready var path: Path2D = $Path2D
-@onready var progress = %Progress
-
 var tween: Tween
 var sub_tween: Tween
 
-func start_animation():
+@onready var icon: Sprite2D = %Icon
+@onready var icon_start_position := icon.position
+
+@onready var countdown_label: Label = %CountdownLabel
+@onready var path: Path2D = $Path2D
+@onready var progress: TextureProgressBar = %Progress
+
+func _process(_delta: float) -> void:
+	if not tween or not tween.is_running():
+		return
+
+	progress.value = tween.get_total_elapsed_time()
+
+
+func start_animation() -> void:
 	# Reset the icon to original state.
 	reset()
 	# Create the Tween. Also sets the initial animation speed.
@@ -29,7 +36,7 @@ func start_animation():
 		# tween_*() methods return a Tweener object. Its methods can also be chained, but
 		# it's stored in a variable here for readability (chained lines tend to be long).
 		# Note the usage of ^"NodePath". A regular "String" is accepted too, but it's very slightly slower.
-		var tweener = tween.tween_property(icon, ^"position", Vector2(400, 250), 1.0)
+		var tweener := tween.tween_property(icon, ^"position", Vector2(400, 250), 1.0)
 		tweener.set_ease(%Ease1.selected)
 		tweener.set_trans(%Trans1.selected)
 
@@ -43,12 +50,12 @@ func start_animation():
 	if is_step_enabled("MoveRight", 1.0):
 		# as_relative() makes the value relative, so in this case it moves the icon
 		# 200 pixels from the previous position.
-		var tweener = tween.tween_property(icon, ^"position:x", 200.0, 1.0).as_relative()
+		var tweener := tween.tween_property(icon, ^"position:x", 200.0, 1.0).as_relative()
 		tweener.set_ease(%Ease3.selected)
 		tweener.set_trans(%Trans3.selected)
 	if is_step_enabled("Roll", 0.0):
 		# parallel() makes the Tweener run in parallel to the previous one.
-		var tweener = tween.parallel().tween_property(icon, ^"rotation", TAU, 1.0)
+		var tweener := tween.parallel().tween_property(icon, ^"rotation", TAU, 1.0)
 		tweener.set_ease(%Ease3.selected)
 		tweener.set_trans(%Trans3.selected)
 
@@ -92,8 +99,10 @@ func start_animation():
 		# Method tweening is useful for animating values that can't be directly interpolated.
 		# It can be used for remapping and some very advanced animations.
 		# Here it's used for moving sprite along a path, using inline lambda function.
-		var tweener = tween.tween_method(func(v): icon.position = path.position + path.curve.sample_baked(v),
-			0.0, path.curve.get_baked_length(), 3.0).set_delay(0.5)
+		var tweener := tween.tween_method(
+				func(v: float) -> void:
+					icon.position = path.position + path.curve.sample_baked(v), 0.0, path.curve.get_baked_length(), 3.0
+		).set_delay(0.5)
 		tweener.set_ease(%Ease7.selected)
 		tweener.set_trans(%Trans7.selected)
 
@@ -126,10 +135,12 @@ func start_animation():
 	if %Reset.button_pressed:
 		tween.tween_callback(reset.bind(true))
 
-func do_countdown(v):
-	countdown_label.text = str(v)
 
-func reset(soft := false):
+func do_countdown(number: int) -> void:
+	countdown_label.text = str(number)
+
+
+func reset(soft: bool = false) -> void:
 	icon.position = icon_start_position
 	icon.self_modulate = Color.WHITE
 	icon.rotation = 0
@@ -151,11 +162,14 @@ func reset(soft := false):
 
 	progress.max_value = 0
 
-func is_step_enabled(step, expected_time):
-	var enabled = get_node("%" + step).button_pressed
+
+func is_step_enabled(step: String, expected_time: float) -> bool:
+	var enabled: bool = get_node("%" + step).button_pressed
 	if enabled:
 		progress.max_value += expected_time
+
 	return enabled
+
 
 func pause_resume() -> void:
 	if tween and tween.is_valid():
@@ -170,24 +184,22 @@ func pause_resume() -> void:
 		else:
 			sub_tween.play()
 
+
 func kill_tween() -> void:
 	if tween:
 		tween.kill()
 	if sub_tween:
 		sub_tween.kill()
 
+
 func speed_changed(value: float) -> void:
 	if tween:
 		tween.set_speed_scale(value)
 	if sub_tween:
 		sub_tween.set_speed_scale(value)
+
 	%SpeedLabel.text = str("x", value)
 
-func inifnite_toggled(button_pressed: bool) -> void:
+
+func infinite_toggled(button_pressed: bool) -> void:
 	%Loops.editable = not button_pressed
-
-func _process(delta: float) -> void:
-	if not tween or not tween.is_running():
-		return
-
-	progress.value = tween.get_total_elapsed_time()

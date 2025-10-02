@@ -2,8 +2,8 @@
 # The transformation of its 2D form is controlled by its 3D child.
 @tool
 @icon("res://addons/node25d/icons/node_25d_icon.png")
-extends Node2D
 class_name Node25D
+extends Node2D
 
 
 # SCALE is the number of 2D units in one 3D unit. Ideally, but not necessarily, an integer.
@@ -85,27 +85,27 @@ func set_spatial_position(value):
 # This can be changed or removed in actual games where you only need one view mode.
 func set_view_mode(view_mode_index):
 	match view_mode_index:
-		0: # 45 Degrees
+		0:  # 45 Degrees
 			_basisX = SCALE * Vector2(1, 0)
 			_basisY = SCALE * Vector2(0, -0.70710678118)
 			_basisZ = SCALE * Vector2(0, 0.70710678118)
-		1: # Isometric
+		1:  # Isometric
 			_basisX = SCALE * Vector2(0.86602540378, 0.5)
 			_basisY = SCALE * Vector2(0, -1)
 			_basisZ = SCALE * Vector2(-0.86602540378, 0.5)
-		2: # Top Down
+		2:  # Top Down
 			_basisX = SCALE * Vector2(1, 0)
 			_basisY = SCALE * Vector2(0, 0)
 			_basisZ = SCALE * Vector2(0, 1)
-		3: # Front Side
+		3:  # Front Side
 			_basisX = SCALE * Vector2(1, 0)
 			_basisY = SCALE * Vector2(0, -1)
 			_basisZ = SCALE * Vector2(0, 0)
-		4: # Oblique Y
+		4:  # Oblique Y
 			_basisX = SCALE * Vector2(1, 0)
 			_basisY = SCALE * Vector2(-0.70710678118, -0.70710678118)
 			_basisZ = SCALE * Vector2(0, 1)
-		5: # Oblique Z
+		5:  # Oblique Z
 			_basisX = SCALE * Vector2(1, 0)
 			_basisY = SCALE * Vector2(0, -1)
 			_basisZ = SCALE * Vector2(-0.70710678118, 0.70710678118)

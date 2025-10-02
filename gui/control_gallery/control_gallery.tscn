@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dy11txudwdmgy"]
+[gd_scene load_steps=6 format=3 uid="uid://dy11txudwdmgy"]
 
-[ext_resource type="Texture2D" uid="uid://bc22e06hdx8c" path="res://icon.webp" id="1_8tycj"]
-[ext_resource type="Script" path="res://tree.gd" id="2_68sc3"]
+[ext_resource type="Texture2D" uid="uid://brwp8bimc75uu" path="res://icon.webp" id="1_8tycj"]
+[ext_resource type="Script" uid="uid://bh4pfy7ykbtl2" path="res://tree.gd" id="2_68sc3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bl4wp"]
 content_margin_left = 10.0
@@ -15,6 +15,9 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_t0nh8"]
+
+[sub_resource type="FoldableGroup" id="FoldableGroup_wdd8d"]
+allow_folding_all = true
 
 [node name="ControlGallery" type="Control"]
 layout_mode = 3
@@ -114,9 +117,11 @@ text = "Label"
 [node name="TabContainer" type="TabContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer"]
 custom_minimum_size = Vector2(0, 236)
 layout_mode = 2
+current_tab = 0
 
 [node name="Tab 1" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer"]
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 1"]
 layout_mode = 1
@@ -141,6 +146,7 @@ selection_enabled = true
 [node name="Tab 2" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 2"]
 layout_mode = 1
@@ -165,6 +171,7 @@ selection_enabled = true
 [node name="Tab 3" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 3"]
 layout_mode = 1
@@ -189,6 +196,7 @@ selection_enabled = true
 [node name="Tab 4" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 4"]
 layout_mode = 1
@@ -213,6 +221,7 @@ selection_enabled = true
 [node name="Tab 5" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 5"]
 layout_mode = 1
@@ -237,6 +246,7 @@ selection_enabled = true
 [node name="Tab 6" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 5
 
 [node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 6"]
 layout_mode = 1
@@ -261,6 +271,7 @@ selection_enabled = true
 [node name="Tab 7" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 6
 
 [node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 7"]
 layout_mode = 1
@@ -401,8 +412,8 @@ size_flags_horizontal = 3
 [node name="OptionButton" type="OptionButton" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-item_count = 5
 selected = 0
+item_count = 5
 popup/item_0/text = "OptionButton"
 popup/item_0/id = 4
 popup/item_1/text = "Item 1"
@@ -492,3 +503,42 @@ layout_mode = 2
 size_flags_vertical = 3
 select_mode = 2
 script = ExtResource("2_68sc3")
+
+[node name="FoldableContainer" type="FoldableContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+title = "FoldableContainer with FoldableGroup"
+foldable_group = SubResource("FoldableGroup_wdd8d")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2/FoldableContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2/FoldableContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7529412, 0.7529412, 0.7529412, 1)
+text = "FoldableGroup only allows one of the
+FoldableContainers to be open at a time"
+
+[node name="FoldableContainer2" type="FoldableContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+folded = true
+title = "FoldableContainer with FoldableGroup"
+title_position = 1
+foldable_group = SubResource("FoldableGroup_wdd8d")
+
+[node name="MarginContainer2" type="MarginContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2/FoldableContainer2"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2/FoldableContainer2/MarginContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7529412, 0.7529412, 0.7529412, 1)
+text = "Second foldable container
+expanding from the bottom"

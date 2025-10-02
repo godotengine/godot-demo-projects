@@ -3,22 +3,21 @@ extends Camera3D
 const MOUSE_SENSITIVITY = 0.002
 const MOVE_SPEED = 0.6
 
-var volumetric_fog_volume_size = ProjectSettings.get_setting("rendering/environment/volumetric_fog/volume_size")
-var volumetric_fog_volume_depth = ProjectSettings.get_setting("rendering/environment/volumetric_fog/volume_depth")
+var volumetric_fog_volume_size := int(ProjectSettings.get_setting("rendering/environment/volumetric_fog/volume_size"))
+var volumetric_fog_volume_depth := int(ProjectSettings.get_setting("rendering/environment/volumetric_fog/volume_depth"))
 
-var rot = Vector3()
-var velocity = Vector3()
+var rot := Vector3()
+var velocity := Vector3()
 
-@onready var label = $Label
+@onready var label: Label = $Label
 
-
-func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	update_label()
 
 
-func _process(delta):
-	var motion = Vector3(
+func _process(delta: float) -> void:
+	var motion := Vector3(
 			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 			0,
 			Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
@@ -33,13 +32,13 @@ func _process(delta):
 	position += velocity
 
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Mouse look (only if the mouse is captured).
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		# Horizontal mouse look.
-		rot.y -= event.relative.x * MOUSE_SENSITIVITY
+		rot.y -= event.screen_relative.x * MOUSE_SENSITIVITY
 		# Vertical mouse look.
-		rot.x = clamp(rot.x - event.relative.y * MOUSE_SENSITIVITY, -1.57, 1.57)
+		rot.x = clamp(rot.x - event.screen_relative.y * MOUSE_SENSITIVITY, -1.57, 1.57)
 		transform.basis = Basis.from_euler(rot)
 
 	if event.is_action_pressed("toggle_mouse_capture"):
@@ -75,7 +74,7 @@ func _input(event):
 		update_label()
 
 
-func update_label():
+func update_label() -> void:
 	if get_world_3d().environment.volumetric_fog_temporal_reprojection_enabled:
 		label.text = "Fog density: %.2f\nTemporal reprojection: Enabled\nTemporal reprojection strength: %.2f\nVolumetric fog quality: %d×%d×%d" % [
 			get_world_3d().environment.volumetric_fog_density,

@@ -1,10 +1,8 @@
 extends Area3D
 
+var taken := false
 
-var taken = false
-
-
-func _on_coin_body_enter(body):
+func _on_coin_body_enter(body: Node) -> void:
 	if not taken and body is Player:
 		$Animation.play(&"take")
 		taken = true

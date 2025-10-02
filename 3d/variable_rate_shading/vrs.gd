@@ -10,7 +10,7 @@ extends Node3D
 var xr_interface: MobileVRInterface
 
 func _set_xr_mode() -> void:
-	var vrs_mode = get_viewport().vrs_mode
+	var vrs_mode := get_viewport().vrs_mode
 	if vrs_mode == Viewport.VRS_XR:
 		xr_interface = XRServer.find_interface("Native mobile")
 		if xr_interface and xr_interface.initialize():
@@ -34,7 +34,7 @@ func _set_xr_mode() -> void:
 
 
 func _update_texture() -> void:
-	var vrs_mode = get_viewport().vrs_mode
+	var vrs_mode := get_viewport().vrs_mode
 	if vrs_mode == Viewport.VRS_DISABLED:
 		texture_rect.visible = false
 	elif vrs_mode == Viewport.VRS_TEXTURE:
@@ -52,7 +52,7 @@ func _update_texture() -> void:
 
 
 func _ready() -> void:
-	var vrs_mode = get_viewport().vrs_mode
+	var vrs_mode := get_viewport().vrs_mode
 	option_button.selected = vrs_mode
 	_update_texture()
 

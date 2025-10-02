@@ -12,10 +12,10 @@ They can be used for different purposes:
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/675
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2747
 
 ## Screenshots
 
-![Screenshot](screenshots/screenshot.png)
+![Screenshot](screenshots/physics_tests.webp)

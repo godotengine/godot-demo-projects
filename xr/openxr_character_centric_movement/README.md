@@ -3,14 +3,16 @@
 This is a demo for an OpenXR project where player movement is handled with a CharacterBody3D as a base node.
 This is based on the [Character body centric solution as explained in the room scale manual page](https://docs.godotengine.org/en/stable/tutorials/xr/xr_room_scale.html#character-body-centric-solution).
 
-Godot version: 4.1.x
 Language: GDScript
-Renderer: compatibility
+
+Renderer: Compatibility
+
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2809
 
 ## How does it work?
 
 With modern VR equipment the user is able to move around a large playspace.
-This is often refered to as roomscale VR.
+This is often referred to as roomscale VR.
 The position of the headset and controllers are tracked in reference to a fixed point within this playspace.
 This is often a point on the ground at the center of the playspace mapped out by the user when setting up their guardian.
 
@@ -51,4 +53,3 @@ Please follow [the instructions for deploying on Android in the manual](https://
 ## Screenshots
 
 ![Screenshot](screenshots/character_movement_demo.png)
-

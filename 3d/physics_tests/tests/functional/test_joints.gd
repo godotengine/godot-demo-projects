@@ -1,6 +1,5 @@
 extends Test
 
-
 const OPTION_JOINT_TYPE = "Joint Type/%s Joint (%d)"
 
 const OPTION_TEST_CASE_BODIES_COLLIDE = "Test case/Attached bodies collide"
@@ -11,28 +10,27 @@ const OPTION_TEST_CASE_CHANGE_POSITIONS = "Test case/Set body positions after ad
 
 const BOX_SIZE = Vector3(1.0, 1.0, 1.0)
 
-var _update_joint = false
-var _selected_joint = null
+var _update_joint := false
+var _selected_joint: Joint3D
 
-var _bodies_collide = false
-var _world_attachement = false
-var _dynamic_attachement = false
-var _destroy_body = false
-var _change_positions = false
+var _bodies_collide := false
+var _world_attachement := false
+var _dynamic_attachement := false
+var _destroy_body := false
+var _change_positions := false
 
-var _joint_types = {}
+var _joint_types := {}
 
+func _ready() -> void:
+	var options: OptionMenu = $Options
 
-func _ready():
-	var options = $Options
-
-	var joints = $Joints
+	var joints: Node3D = $Joints
 	for joint_index in joints.get_child_count():
-		var joint_node = joints.get_child(joint_index)
+		var joint_node := joints.get_child(joint_index)
 		joint_node.visible = false
-		var joint_name = String(joint_node.name)
-		var joint_short = joint_name.substr(0, joint_name.length() - 5)
-		var option_name = OPTION_JOINT_TYPE % [joint_short, joint_index + 1]
+		var joint_name := String(joint_node.name)
+		var joint_short := joint_name.substr(0, joint_name.length() - 5)
+		var option_name := OPTION_JOINT_TYPE % [joint_short, joint_index + 1]
 		options.add_menu_item(option_name)
 		_joint_types[option_name] = joint_node
 
@@ -42,36 +40,35 @@ func _ready():
 	options.add_menu_item(OPTION_TEST_CASE_DESTROY_BODY, true, false)
 	options.add_menu_item(OPTION_TEST_CASE_CHANGE_POSITIONS, true, false)
 
-	options.connect(&"option_selected", Callable(self, "_on_option_selected"))
-	options.connect(&"option_changed", Callable(self, "_on_option_changed"))
+	options.option_selected.connect(_on_option_selected)
+	options.option_changed.connect(_on_option_changed)
 
 	_selected_joint = _joint_types.values()[0]
 	_update_joint = true
 
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	if _update_joint:
 		_update_joint = false
 		await _create_joint()
 		$LabelJointType.text = "Joint Type: " + String(_selected_joint.name)
 
 
-func _input(event):
-	var key_event = event as InputEventKey
-	if key_event and not key_event.pressed:
-		var joint_index = key_event.keycode - KEY_1
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed:
+		var joint_index: int = event.keycode - KEY_1
 		if joint_index >= 0 and joint_index < _joint_types.size():
 			_selected_joint = _joint_types.values()[joint_index]
 			_update_joint = true
 
 
-func _on_option_selected(option):
+func _on_option_selected(option: String) -> void:
 	if _joint_types.has(option):
 		_selected_joint = _joint_types[option]
 		_update_joint = true
 
 
-func _on_option_changed(option, checked):
+func _on_option_changed(option: String, checked: bool) -> void:
 	match option:
 		OPTION_TEST_CASE_BODIES_COLLIDE:
 			_bodies_collide = checked
@@ -90,18 +87,18 @@ func _on_option_changed(option, checked):
 			_update_joint = true
 
 
-func _create_joint():
+func _create_joint() -> void:
 	cancel_timer()
 
-	var root = $Objects
+	var root: Node3D = $Objects
 
 	while root.get_child_count():
-		var last_child_index = root.get_child_count() - 1
-		var last_child = root.get_child(last_child_index)
+		var last_child_index := root.get_child_count() - 1
+		var last_child := root.get_child(last_child_index)
 		root.remove_child(last_child)
 		last_child.queue_free()
 
-	var child_body = create_rigidbody_box(BOX_SIZE, true)
+	var child_body := create_rigidbody_box(BOX_SIZE, true)
 	if _change_positions:
 		root.add_child(child_body)
 		child_body.transform.origin = Vector3(0.0, -1.5, 0.0)
@@ -109,13 +106,14 @@ func _create_joint():
 		child_body.transform.origin = Vector3(0.0, -1.5, 0.0)
 		root.add_child(child_body)
 
-	var parent_body = null
+	var parent_body: RigidBody3D
 	if not _world_attachement:
 		parent_body = create_rigidbody_box(BOX_SIZE, true)
 		if _dynamic_attachement:
 			parent_body.gravity_scale = 0.0
 			child_body.gravity_scale = 0.0
 		else:
+			parent_body.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
 			parent_body.freeze = true
 		if _change_positions:
 			root.add_child(parent_body)
@@ -124,7 +122,7 @@ func _create_joint():
 			parent_body.transform.origin = Vector3(0.0, 1.5, 0.0)
 			root.add_child(parent_body)
 
-	var joint = _selected_joint.duplicate()
+	var joint := _selected_joint.duplicate()
 	joint.visible = true
 	joint.set_exclude_nodes_from_collision(not _bodies_collide)
 	root.add_child(joint)

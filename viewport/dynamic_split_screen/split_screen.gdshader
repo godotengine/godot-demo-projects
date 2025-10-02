@@ -1,14 +1,14 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-uniform vec2 viewport_size;          // size in pixels of the viewport
+uniform vec2 viewport_size; // size in pixels of the viewport
 uniform sampler2D viewport1 : source_color;
 uniform sampler2D viewport2 : source_color;
-uniform bool split_active;           // true: split screen, false: use view1
-uniform vec2 player1_position;       // position of player 1 un UV coordinates
-uniform vec2 player2_position;       // position of player 2 un UV coordinates
-uniform float split_line_thickness : hint_range(0, 10, 0.1);  // width of the split boder
-uniform vec3 split_line_color : source_color;       // color of the split border
+uniform bool split_active; // true: split screen, false: use view1
+uniform vec2 player1_position; // position of player 1 un UV coordinates
+uniform vec2 player2_position; // position of player 2 un UV coordinates
+uniform float split_line_thickness : hint_range(0, 10, 0.1); // width of the split boder
+uniform vec3 split_line_color : source_color; // color of the split border
 
 // from https://stackoverflow.com/questions/15276454/is-it-possible-to-draw-line-thickness-in-a-fragment-shader
 float distance_to_line(vec2 p1, vec2 p2, vec2 point) {

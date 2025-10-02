@@ -1,12 +1,12 @@
 [gd_scene load_steps=14 format=3 uid="uid://daqqtote00syu"]
 
-[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_hjwkx"]
+[ext_resource type="Script" uid="uid://dhnjultys4i0n" path="res://enemy/enemy.gd" id="1_hjwkx"]
 [ext_resource type="Texture2D" uid="uid://crrmmbu8k46tl" path="res://enemy/enemy.png" id="2_org2d"]
 [ext_resource type="Texture2D" uid="uid://7sv64orewgmb" path="res://player/bullet.png" id="3_7unrb"]
 [ext_resource type="AudioStream" uid="uid://cfssio7r2t7wq" path="res://audio/sound_hit.wav" id="4_5rkwm"]
 [ext_resource type="AudioStream" uid="uid://bulmr2lpb7y4h" path="res://audio/sound_explode.wav" id="5_t2e2f"]
 
-[sub_resource type="PhysicsMaterial" id="1"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_eyxlk"]
 
 [sub_resource type="Animation" id="Animation_a7qal"]
 resource_name = "RESET"
@@ -48,7 +48,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [4]
 }
 tracks/1/type = "value"
@@ -111,7 +111,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="4"]
-length = 1.25
+length = 0.5
 loop_mode = 1
 step = 0.25
 tracks/0/type = "value"
@@ -121,7 +121,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 0]
@@ -129,10 +129,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ay0tp"]
 _data = {
-"RESET": SubResource("Animation_a7qal"),
-"explode": SubResource("2"),
-"idle": SubResource("3"),
-"walk": SubResource("4")
+&"RESET": SubResource("Animation_a7qal"),
+&"explode": SubResource("2"),
+&"idle": SubResource("3"),
+&"walk": SubResource("4")
 }
 
 [sub_resource type="CircleShape2D" id="5"]
@@ -143,10 +143,10 @@ offsets = PackedFloat32Array(0.5, 1)
 colors = PackedColorArray(1, 1, 1, 0.501961, 0, 0, 0, 0)
 
 [node name="Enemy" type="RigidBody2D"]
-physics_material_override = SubResource("1")
+physics_material_override = SubResource("PhysicsMaterial_eyxlk")
+lock_rotation = true
 max_contacts_reported = 4
 contact_monitor = true
-lock_rotation = true
 script = ExtResource("1_hjwkx")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

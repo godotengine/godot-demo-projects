@@ -5,9 +5,9 @@ a FastNoiseLite texture.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/533
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2788
 
 ## Screenshots
 

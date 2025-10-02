@@ -1,15 +1,16 @@
 # Pong Multiplayer
 
-A multiplayer demo of Pong. One player presses "host".
-The other presses "join". This only works locally.
+A multiplayer implementation of the classic pong game.
+One of the players should press **Host**, while the other
+should type in the host's IP address and press **Join**.
 
 Language: GDScript
 
-Renderer: GLES 2
+Renderer: Compatibility
 
 Note: The non-multiplayer version is available [here](https://github.com/godotengine/godot-demo-projects/tree/master/2d/pong).
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/138
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2798
 
 ## Screenshots
 

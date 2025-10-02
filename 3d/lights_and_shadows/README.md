@@ -10,7 +10,9 @@ real-time with the environment sky's process mode set accordingly.
 
 Language: GDScript
 
-Renderer: Forward Plus
+Renderer: Forward+
+
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2741
 
 ## Screenshots
 

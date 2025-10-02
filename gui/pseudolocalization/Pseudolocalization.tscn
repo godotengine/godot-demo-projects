@@ -8,6 +8,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("2")
 
 [node name="Title" type="HBoxContainer" parent="."]
@@ -99,10 +101,11 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 4.0
 text = "Expansion Ratio : "
 
-[node name="TextEdit" type="LineEdit" parent="Main/Pseudolocalization_options/exp_ratio"]
+[node name="SpinBox" type="SpinBox" parent="Main/Pseudolocalization_options/exp_ratio"]
 layout_mode = 2
 size_flags_horizontal = 3
-caret_blink = true
+max_value = 1.0
+step = 0.05
 
 [node name="prefix" type="Control" parent="Main/Pseudolocalization_options"]
 layout_mode = 2
@@ -198,11 +201,11 @@ layout_mode = 2
 
 [connection signal="toggled" from="Main/Pseudolocalization_options/toggle" to="." method="_on_toggle_toggled"]
 [connection signal="toggled" from="Main/Pseudolocalization_options/accents" to="." method="_on_accents_toggled"]
-[connection signal="toggled" from="Main/Pseudolocalization_options/doublevowels" to="." method="_on_doublevowels_toggled"]
-[connection signal="toggled" from="Main/Pseudolocalization_options/fakebidi" to="." method="_on_fakebidi_toggled"]
+[connection signal="toggled" from="Main/Pseudolocalization_options/doublevowels" to="." method="_on_double_vowels_toggled"]
+[connection signal="toggled" from="Main/Pseudolocalization_options/fakebidi" to="." method="_on_fake_bidi_toggled"]
 [connection signal="toggled" from="Main/Pseudolocalization_options/override" to="." method="_on_override_toggled"]
-[connection signal="toggled" from="Main/Pseudolocalization_options/skipplaceholders" to="." method="_on_skipplaceholders_toggled"]
-[connection signal="text_changed" from="Main/Pseudolocalization_options/exp_ratio/TextEdit" to="." method="_on_expansion_ratio_text_changed"]
+[connection signal="toggled" from="Main/Pseudolocalization_options/skipplaceholders" to="." method="_on_skip_placeholders_toggled"]
+[connection signal="value_changed" from="Main/Pseudolocalization_options/exp_ratio/SpinBox" to="." method="_on_expansion_ratio_value_changed"]
 [connection signal="text_changed" from="Main/Pseudolocalization_options/prefix/TextEdit" to="." method="_on_prefix_changed"]
 [connection signal="text_changed" from="Main/Pseudolocalization_options/suffix/TextEdit" to="." method="_on_suffix_changed"]
-[connection signal="pressed" from="Main/Pseudolocalizer/Pseudolocalize" to="." method="_on_Pseudolocalize_pressed"]
+[connection signal="pressed" from="Main/Pseudolocalizer/Pseudolocalize" to="." method="_on_pseudolocalize_pressed"]

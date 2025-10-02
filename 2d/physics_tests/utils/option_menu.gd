@@ -1,24 +1,23 @@
 class_name OptionMenu
 extends MenuButton
 
+signal option_selected(item_path: String)
+signal option_changed(item_path: String, checked: bool)
 
-signal option_selected(item_path)
-signal option_changed(item_path, checked)
 
-
-func add_menu_item(item_path, checkbox = false, checked = false, radio = false):
-	var path_elements = item_path.split("/", false)
-	var path_element_count = path_elements.size()
+func add_menu_item(item_path: String, checkbox: bool = false, checked: bool = false, radio: bool = false) -> void:
+	var path_elements := item_path.split("/", false)
+	var path_element_count := path_elements.size()
 	assert(path_element_count > 0)
 
-	var path = ""
-	var popup = get_popup()
+	var path := ""
+	var popup := get_popup()
 	for element_index in range(path_element_count - 1):
-		var popup_label = path_elements[element_index]
+		var popup_label := path_elements[element_index]
 		path += popup_label + "/"
 		popup = _add_popup(popup, path, popup_label)
 
-	var label = path_elements[path_element_count - 1]
+	var label := path_elements[path_element_count - 1]
 	if radio:
 		popup.add_radio_check_item(label)
 		popup.set_item_checked(popup.get_item_count() - 1, checked)
@@ -29,18 +28,18 @@ func add_menu_item(item_path, checkbox = false, checked = false, radio = false):
 		popup.add_item(label)
 
 
-func _add_item(parent_popup, label):
+func _add_item(parent_popup: PopupMenu, label: String) -> void:
 	parent_popup.add_item(label)
 
 
-func _add_popup(parent_popup, path, label):
+func _add_popup(parent_popup: PopupMenu, path: String, label: String) -> PopupMenu:
 	if parent_popup.has_node(label):
-		var popup_node = parent_popup.get_node(label)
-		var popup_menu = popup_node as PopupMenu
-		assert(popup_menu)
-		return popup_menu
+		var popup_node := parent_popup.get_node(label)
+		var new_popup_menu: PopupMenu = popup_node
+		assert(new_popup_menu)
+		return new_popup_menu
 
-	var popup_menu = PopupMenu.new()
+	var popup_menu := PopupMenu.new()
 	popup_menu.name = label
 	popup_menu.hide_on_checkable_item_selection = false
 
@@ -52,20 +51,20 @@ func _add_popup(parent_popup, path, label):
 	return popup_menu
 
 
-func _on_item_pressed(item_index, popup_menu, path):
-	var item_path = path + popup_menu.get_item_text(item_index)
+func _on_item_pressed(item_index: int, popup_menu: PopupMenu, path: String) -> void:
+	var item_path := path + popup_menu.get_item_text(item_index)
 
 	if popup_menu.is_item_radio_checkable(item_index):
-		var checked = popup_menu.is_item_checked(item_index)
+		var checked := popup_menu.is_item_checked(item_index)
 		if not checked:
 			popup_menu.set_item_checked(item_index, true)
 			for other_index in range(popup_menu.get_item_count()):
 				if other_index != item_index:
 					popup_menu.set_item_checked(other_index, false)
-			emit_signal("option_selected", item_path)
+			option_selected.emit(item_path)
 	elif popup_menu.is_item_checkable(item_index):
-		var checked = not popup_menu.is_item_checked(item_index)
+		var checked := not popup_menu.is_item_checked(item_index)
 		popup_menu.set_item_checked(item_index, checked)
-		emit_signal("option_changed", item_path, checked)
+		option_changed.emit(item_path, checked)
 	else:
-		emit_signal("option_selected", item_path)
+		option_selected.emit(item_path)

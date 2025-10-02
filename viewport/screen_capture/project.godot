@@ -14,9 +14,18 @@ config/name="Screen Capture"
 config/description="An example showing how to take screenshots of the screen."
 config/tags=PackedStringArray("demo", "official", "rendering")
 run/main_scene="res://screen_capture.tscn"
-config/features=PackedStringArray("4.2")
+config/features=PackedStringArray("4.4")
 config/icon="res://icon.webp"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
 
 [display]
 
 window/stretch/mode="canvas_items"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

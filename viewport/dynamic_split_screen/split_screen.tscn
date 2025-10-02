@@ -1,9 +1,9 @@
-[gd_scene load_steps=63 format=3 uid="uid://dksa68cph6y4b"]
+[gd_scene load_steps=67 format=3 uid="uid://dksa68cph6y4b"]
 
-[ext_resource type="Script" path="res://camera_controller.gd" id="2"]
-[ext_resource type="Shader" path="res://split_screen.gdshader" id="3"]
+[ext_resource type="Script" uid="uid://dg0vbquh0gvvw" path="res://camera_controller.gd" id="2"]
+[ext_resource type="Shader" uid="uid://dixoly6np1kea" path="res://split_screen.gdshader" id="3"]
 [ext_resource type="Texture2D" uid="uid://brwp8bimc75uu" path="res://icon.webp" id="4"]
-[ext_resource type="Script" path="res://player.gd" id="5"]
+[ext_resource type="Script" uid="uid://cgfyrvp46cfna" path="res://player.gd" id="5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_16la2"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -13,23 +13,21 @@ ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 sky_material = SubResource("ProceduralSkyMaterial_16la2")
 
 [sub_resource type="Environment" id="Environment_vdrvu"]
-background_mode = 2
 sky = SubResource("Sky_i64ko")
-ambient_light_source = 2
+ambient_light_source = 3
 ambient_light_color = Color(0.79, 0.8775, 1, 1)
-ambient_light_sky_contribution = 0.0
 ambient_light_energy = 0.33
-tonemap_mode = 2
-glow_enabled = true
+reflected_light_source = 2
+tonemap_mode = 4
 
 [sub_resource type="ShaderMaterial" id="1"]
 shader = ExtResource("3")
-shader_parameter/viewport_size = null
+shader_parameter/viewport_size = Vector2(0, 0)
 shader_parameter/split_active = false
-shader_parameter/player1_position = null
-shader_parameter/player2_position = null
+shader_parameter/player1_position = Vector2(0, 0)
+shader_parameter/player2_position = Vector2(0, 0)
 shader_parameter/split_line_thickness = 10.0
-shader_parameter/split_line_color = Vector3(0, 1, 0)
+shader_parameter/split_line_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="2"]
 radius = 0.375
@@ -66,6 +64,24 @@ emission = Color(0.12549, 0.501961, 1, 1)
 [sub_resource type="PlaneMesh" id="7"]
 material = SubResource("6")
 size = Vector2(200, 200)
+
+[sub_resource type="Gradient" id="Gradient_3phjx"]
+offsets = PackedFloat32Array(0.139344, 0.196721, 0.237705, 0.377049, 0.598361, 0.795082, 1)
+colors = PackedColorArray(0.08, 0.432667, 1, 1, 0.945098, 1, 0.929412, 1, 0.574026, 0.479268, 0.220411, 1, 1, 0.7525, 0.45, 1, 0.0322, 0.23, 0.0322, 1, 0.181569, 0.353991, 0.245845, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2bwlb"]
+noise_type = 4
+domain_warp_enabled = true
+domain_warp_frequency = 0.002
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ha3y6"]
+seamless = true
+color_ramp = SubResource("Gradient_3phjx")
+noise = SubResource("FastNoiseLite_2bwlb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i0wmt"]
+albedo_texture = SubResource("NoiseTexture2D_ha3y6")
+uv1_scale = Vector3(64, 64, 64)
 
 [sub_resource type="BoxShape3D" id="8"]
 
@@ -203,7 +219,7 @@ albedo_color = Color(0.791675, 0.946163, 0.317723, 1)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
-light_energy = 0.75
+light_energy = 0.05
 shadow_enabled = true
 shadow_bias = 0.03
 shadow_blur = 2.0
@@ -265,6 +281,17 @@ surface_material_override/0 = SubResource("StandardMaterial3D_63nwq")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Player1"]
 light_color = Color(1, 0, 0, 1)
+light_energy = 2.5
+omni_range = 10.0
+
+[node name="Label3D" type="Label3D" parent="Player1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+pixel_size = 0.01
+offset = Vector2(0, 50)
+billboard = 1
+double_sided = false
+modulate = Color(1, 0.323333, 0.3, 1)
+text = "P1"
 
 [node name="Player2" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.184, 0.875, 3.019)
@@ -286,12 +313,24 @@ surface_material_override/0 = SubResource("StandardMaterial3D_wi7e2")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Player2"]
 light_color = Color(0.12549, 0.501961, 1, 1)
+light_energy = 2.5
+omni_range = 10.0
+
+[node name="Label3D" type="Label3D" parent="Player2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+pixel_size = 0.01
+offset = Vector2(0, 50)
+billboard = 1
+double_sided = false
+modulate = Color(0.3, 0.65, 1, 1)
+text = "P2"
 
 [node name="Ground" type="StaticBody3D" parent="."]
 
 [node name="Mesh" type="MeshInstance3D" parent="Ground"]
 transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0)
 mesh = SubResource("7")
+surface_material_override/0 = SubResource("StandardMaterial3D_i0wmt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 transform = Transform3D(200, 0, 0, 0, 1, 0, 0, 0, 200, 0, -1, 0)

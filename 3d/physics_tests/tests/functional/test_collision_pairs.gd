@@ -1,6 +1,5 @@
 extends Test
 
-
 const OPTION_TYPE_BOX = "Collision type/Box (1)"
 const OPTION_TYPE_SPHERE = "Collision type/Sphere (2)"
 const OPTION_TYPE_CAPSULE = "Collision type/Capsule (3)"
@@ -16,15 +15,13 @@ const OPTION_SHAPE_CONCAVE_POLYGON = "Shape type/Concave Polygon"
 
 const OFFSET_RANGE = 3.0
 
-@export var offset = Vector3.ZERO
+@export var offset := Vector3.ZERO
 
-var _update_collision = false
-var _collision_test_index = 0
-var _current_offset = Vector3.ZERO
-var _collision_shapes = []
+var _update_collision := false
+var _collision_test_index := 0
+var _collision_shapes: Array[Shape3D] = []
 
-
-func _ready():
+func _ready() -> void:
 	_initialize_collision_shapes()
 
 	$Options.add_menu_item(OPTION_TYPE_BOX)
@@ -40,8 +37,8 @@ func _ready():
 	$Options.add_menu_item(OPTION_SHAPE_CONVEX_POLYGON, true, true)
 	$Options.add_menu_item(OPTION_SHAPE_CONCAVE_POLYGON, true, true)
 
-	$Options.option_selected.connect(self._on_option_selected)
-	$Options.option_changed.connect(self._on_option_changed)
+	$Options.option_selected.connect(_on_option_selected)
+	$Options.option_changed.connect(_on_option_changed)
 
 	await start_timer(0.5).timeout
 	if is_timer_canceled():
@@ -50,22 +47,21 @@ func _ready():
 	_update_collision = true
 
 
-func _input(event):
-	var key_event = event as InputEventKey
-	if key_event and not key_event.pressed:
-		if key_event.keycode == KEY_1:
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_1:
 			_on_option_selected(OPTION_TYPE_BOX)
-		elif key_event.keycode == KEY_2:
+		elif event.keycode == KEY_2:
 			_on_option_selected(OPTION_TYPE_SPHERE)
-		elif key_event.keycode == KEY_3:
+		elif event.keycode == KEY_3:
 			_on_option_selected(OPTION_TYPE_CAPSULE)
-		elif key_event.keycode == KEY_4:
+		elif event.keycode == KEY_4:
 			_on_option_selected(OPTION_TYPE_CYLINDER)
-		elif key_event.keycode == KEY_5:
+		elif event.keycode == KEY_5:
 			_on_option_selected(OPTION_TYPE_CONVEX_POLYGON)
 
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 
 	if not _update_collision:
@@ -76,71 +72,69 @@ func _physics_process(delta):
 	_do_collision_test()
 
 
-func set_x_offset(value):
+func set_x_offset(value: float) -> void:
 	offset.x = value * OFFSET_RANGE
 	_update_collision = true
 
 
-func set_y_offset(value):
+func set_y_offset(value: float) -> void:
 	offset.y = value * OFFSET_RANGE
 	_update_collision = true
 
 
-func set_z_offset(value):
+func set_z_offset(value: float) -> void:
 	offset.z = value * OFFSET_RANGE
 	_update_collision = true
 
 
-func _initialize_collision_shapes():
+func _initialize_collision_shapes() -> void:
 	_collision_shapes.clear()
 
 	for node in $Shapes.get_children():
-		var body = node as PhysicsBody3D
-		var shape = body.shape_owner_get_shape(0, 0)
+		var body: PhysicsBody3D = node
+		var shape: Shape3D = body.shape_owner_get_shape(0, 0)
 		shape.resource_name = String(node.name).substr("RigidBody".length())
 
 		_collision_shapes.push_back(shape)
 
 
-func _do_collision_test():
+func _do_collision_test() -> void:
 	clear_drawn_nodes()
 
-	var shape = _collision_shapes[_collision_test_index]
+	var shape: Shape3D = _collision_shapes[_collision_test_index]
 
 	Log.print_log("* Start %s collision tests..." % shape.resource_name)
 
-	var shape_query = PhysicsShapeQueryParameters3D.new()
+	var shape_query := PhysicsShapeQueryParameters3D.new()
 	shape_query.set_shape(shape)
-	var shape_scale = Vector3(0.5, 0.5, 0.5)
+	var shape_scale := Vector3(0.5, 0.5, 0.5)
 	shape_query.transform = Transform3D.IDENTITY.scaled(shape_scale)
 
 	for node in $Shapes.get_children():
 		if not node.visible:
 			continue
 
-		var body = node as PhysicsBody3D
-		var space_state = body.get_world_3d().direct_space_state
+		var body: PhysicsBody3D = node
+		var space_state := body.get_world_3d().direct_space_state
 
 		Log.print_log("* Testing: %s" % body.name)
 
-		var center = body.global_transform.origin
+		var center := body.global_transform.origin
 
 		# Collision at the center inside.
-		var res = _add_collision(space_state, center, shape, shape_query)
+		var res := _add_collision(space_state, center, shape, shape_query)
 		Log.print_log("Collision center inside: %s" % ("NO HIT" if res.is_empty() else "HIT"))
 
 	Log.print_log("* Done.")
 
 
-func _add_collision(space_state, pos, shape, shape_query):
+func _add_collision(space_state: PhysicsDirectSpaceState3D, pos: Vector3, shape: Shape3D, shape_query: PhysicsShapeQueryParameters3D) -> Array[Vector3]:
 	shape_query.transform.origin = pos + offset
-	var results = space_state.collide_shape(shape_query)
+	var results := space_state.collide_shape(shape_query)
 
-	var color
+	var color := Color.GREEN
 	if results.is_empty():
 		color = Color.WHITE.darkened(0.5)
-	else:
-		color = Color.GREEN
 
 	# Draw collision query shape.
 	add_shape(shape, shape_query.transform, color)
@@ -152,7 +146,7 @@ func _add_collision(space_state, pos, shape, shape_query):
 	return results
 
 
-func _on_option_selected(option):
+func _on_option_selected(option: String) -> void:
 	match option:
 		OPTION_TYPE_BOX:
 			_collision_test_index = _find_type_index("Box")
@@ -171,9 +165,9 @@ func _on_option_selected(option):
 			_update_collision = true
 
 
-func _find_type_index(type_name):
-	for type_index in range(_collision_shapes.size()):
-		var type_shape = _collision_shapes[type_index]
+func _find_type_index(type_name: String) -> int:
+	for type_index in _collision_shapes.size():
+		var type_shape := _collision_shapes[type_index]
 		if type_shape.resource_name.find(type_name) > -1:
 			return type_index
 
@@ -181,8 +175,8 @@ func _find_type_index(type_name):
 	return -1
 
 
-func _on_option_changed(option, checked):
-	var node
+func _on_option_changed(option: String, checked: bool) -> void:
+	var node: RigidBody3D
 
 	match option:
 		OPTION_SHAPE_BOX:
@@ -204,8 +198,8 @@ func _on_option_changed(option, checked):
 		_update_collision = true
 
 
-func _find_shape_node(type_name):
-	var node = $Shapes.find_node("RigidBody%s" % type_name)
+func _find_shape_node(type_name: String) -> RigidBody3D:
+	var node: RigidBody3D = $Shapes.find_child("RigidBody%s" % type_name)
 
 	if not node:
 		Log.print_error("Invalid shape type: " + type_name)

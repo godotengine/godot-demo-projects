@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bvmm5mgb38ysa"]
 
 [ext_resource type="PackedScene" path="res://minimal.tscn" id="1"]
-[ext_resource type="Script" path="res://main.gd" id="2"]
-[ext_resource type="Script" path="res://link_button.gd" id="3"]
+[ext_resource type="Script" uid="uid://3guq7t330y8m" path="res://main.gd" id="2"]
+[ext_resource type="Script" uid="uid://dhj3tnogccu3u" path="res://link_button.gd" id="3"]
 
 [node name="Main" type="Node"]
 script = ExtResource("2")
@@ -17,12 +17,9 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LinkButton" type="LinkButton" parent="CenterContainer"]
+modulate = Color(1, 0.921569, 0.152941, 1)
 layout_mode = 2
-offset_left = 245.0
-offset_top = 312.0
-offset_right = 906.0
-offset_bottom = 335.0
-text = "Make sure to download the GDNative WebRTC Plugin and place it in the project folder"
+text = "Make sure to download the GDExtension WebRTC Plugin and place it in the project folder"
 script = ExtResource("3")
 
 [connection signal="pressed" from="CenterContainer/LinkButton" to="CenterContainer/LinkButton" method="_on_LinkButton_pressed"]

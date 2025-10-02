@@ -4,8 +4,8 @@ const MOTION_SPEED = 30
 const FRICTION_FACTOR = 0.89
 const TAN30DEG = tan(deg_to_rad(30))
 
-func _physics_process(_delta):
-	var motion = Vector2()
+func _physics_process(_delta: float) -> void:
+	var motion := Vector2()
 	motion.x = Input.get_axis(&"move_left", &"move_right")
 	motion.y = Input.get_axis(&"move_up", &"move_down")
 	# Make diagonal movement fit for hexagonal tiles.

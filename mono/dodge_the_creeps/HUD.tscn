@@ -1,61 +1,62 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://b0ljm4vbkww0f"]
 
-[ext_resource path="res://HUD.cs" type="Script" id=1]
-[ext_resource path="res://fonts/Xolonium-Regular.ttf" type="FontData" id=2]
+[ext_resource type="Script" path="res://HUD.cs" id="1"]
+[ext_resource type="FontFile" uid="uid://cu4g4pt1v4fyv" path="res://fonts/Xolonium-Regular.ttf" id="2"]
 
-[sub_resource type="Font" id=1]
-size = 64
-use_mipmaps = true
-font_data = ExtResource( 2 )
+[sub_resource type="InputEventAction" id="InputEventAction_vmrao"]
+action = &"start_game"
 
-[sub_resource type="Font" id=2]
-size = 64
-use_mipmaps = true
-font_data = ExtResource( 2 )
-
-[sub_resource type="Font" id=3]
-size = 64
-use_mipmaps = true
-font_data = ExtResource( 2 )
+[sub_resource type="Shortcut" id="Shortcut_b2h4v"]
+events = [SubResource("InputEventAction_vmrao")]
 
 [node name="HUD" type="CanvasLayer"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -25.0
 offset_right = 25.0
 offset_bottom = 100.0
-custom_fonts/font = SubResource( 1 )
-text = "0
-"
-align = 1
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
 
 [node name="MessageLabel" type="Label" parent="."]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -150.0
-offset_right = 200.0
-custom_fonts/font = SubResource( 2 )
+offset_left = -240.0
+offset_top = -79.5
+offset_right = 240.0
+offset_bottom = 79.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 64
 text = "Dodge the
-Creeps!"
-align = 1
-valign = 1
+Creeps"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="StartButton" type="Button" parent="."]
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -100.0
-offset_top = -200.0
+offset_top = -140.0
 offset_right = 100.0
-offset_bottom = -100.0
-custom_fonts/font = SubResource( 3 )
+offset_bottom = -40.0
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 65
+shortcut = SubResource("Shortcut_b2h4v")
 text = "Start"
 
 [node name="MessageTimer" type="Timer" parent="."]

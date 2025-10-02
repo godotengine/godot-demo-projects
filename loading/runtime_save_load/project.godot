@@ -19,9 +19,13 @@ run-time such as user-generated content, without requiring users to generate a
 PCK file through Godot."
 config/tags=PackedStringArray("demo", "filesystem", "official")
 run/main_scene="res://runtime_save_load.tscn"
-config/features=PackedStringArray("4.2")
+config/features=PackedStringArray("4.4")
 run/low_processor_mode=true
 config/icon="res://icon.svg"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
 
 [display]
 
@@ -32,5 +36,6 @@ window/vsync/vsync_mode=0
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 lights_and_shadows/directional_shadow/size=8192
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=5

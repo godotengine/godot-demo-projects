@@ -14,12 +14,21 @@ config/name="Multitouch View"
 config/description="Simple debugger for multitouch input. Shows red dots everywhere you press."
 config/tags=PackedStringArray("demo", "input", "mobile", "official")
 run/main_scene="res://Main.tscn"
-config/features=PackedStringArray("4.2")
+config/features=PackedStringArray("4.4")
 config/icon="res://icon.webp"
 
 [autoload]
 
 TouchHelper="*res://TouchHelper.gd"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [input_devices]
 
@@ -27,4 +36,6 @@ pointing/emulate_touch_from_mouse=true
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.113725, 0.133333, 0.196078, 1)

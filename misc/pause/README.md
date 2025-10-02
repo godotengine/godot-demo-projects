@@ -4,9 +4,9 @@ A demo showing how a game made in Godot can be paused.
 
 Language: GDScript
 
-Renderer: Vulkan Mobile
+Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/147
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2790
 
 ## Screenshots
 

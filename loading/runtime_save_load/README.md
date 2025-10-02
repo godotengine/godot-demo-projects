@@ -17,7 +17,8 @@ Can be loaded and saved at run-time:
 Can be loaded at run-time:
 
 - Images (TGA, BMP, SVG[^2])
-- Audio (Ogg Vorbis)
+- 3D scenes (FBX[^3])
+- Audio (Ogg Vorbis, MP3, WAV)
 - Fonts (TTF, OTF, WOFF, WOFF2, PFB, PFM, BMFont)
 
 [^1]: Manipulating custom binary formats is possible using the FileAccess and
@@ -27,6 +28,9 @@ PackedByteArray classes, but this is not shown in this demo.
 with `.svg` extension using the FileAccess class, but this is not shown in
 this demo.
 
+[^3]: There are known issues with runtime FBX loading, as mentioned in issue
+[#96043](https://github.com/godotengine/godot/issues/96043).
+
 See the [Saving and Loading (Serialization)](/loading/serialization/) demo for
 an example of saving/loading game progress.
 
@@ -34,13 +38,15 @@ Language: GDScript
 
 Renderer: Compatibility
 
+Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2779
+
 ## Screenshots
 
 ![Screenshot](screenshots/runtime_save_load.webp)
 
 ## Licenses
 
-- Files in `examples/3d_scenes/plastic_monobloc_chair_01_1k/` are copyright
+- Files in `examples/3d_scenes/gltf/` are copyright
   [Poly Haven](https://polyhaven.com/a/plastic_monobloc_chair_01)
   and are licensed under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).
 - Files in `examples/audio/` are copyright [Red Eclipse](https://redeclipse.net)

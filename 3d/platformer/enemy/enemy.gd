@@ -1,6 +1,5 @@
 extends RigidBody3D
 
-
 const ACCEL = 5.0
 const DEACCEL = 20.0
 const MAX_SPEED = 2.0
@@ -8,23 +7,23 @@ const ROT_SPEED = 1.0
 
 var prev_advance := false
 var dying := false
-var rot_dir = 4
+var rot_dir := 4
 
-@onready var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") \
-		* ProjectSettings.get_setting("physics/3d/default_gravity_vector")
+@onready var gravity := Vector3(
+		ProjectSettings.get_setting("physics/3d/default_gravity") * ProjectSettings.get_setting("physics/3d/default_gravity_vector")
+)
 
 @onready var _animation_player := $Enemy/AnimationPlayer as AnimationPlayer
 @onready var _ray_floor := $Enemy/Skeleton/RayFloor as RayCast3D
 @onready var _ray_wall := $Enemy/Skeleton/RayWall as RayCast3D
 
-
-func _integrate_forces(state: PhysicsDirectBodyState3D):
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	var delta := state.get_step()
 	var lin_velocity := state.get_linear_velocity()
 	var grav := state.get_total_gravity()
 	# get_total_gravity returns zero for the first few frames, leading to errors.
 	if grav.is_zero_approx():
-		grav = self.gravity
+		grav = gravity
 
 	lin_velocity += grav * delta # Apply gravity.
 	var up := -grav.normalized()
@@ -80,5 +79,5 @@ func _integrate_forces(state: PhysicsDirectBodyState3D):
 	prev_advance = advance
 
 
-func _die():
+func _die() -> void:
 	queue_free()
