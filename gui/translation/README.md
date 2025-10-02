@@ -16,7 +16,7 @@ automatically on locale change. This process is known as *remapping*.
 Both CSV and gettext (PO/POT) approaches are showcased. Use the button in the
 bottom-right corner to switch between the two approaches.
 
-The resouce remapping process with PO is the same with CSV. The in-game text translation
+The resource remapping process with PO is the same with CSV. The in-game text translation
 process is also the same – use keys to fetch the appropriate translation.
 
 The main difference between PO files and CSV files is the way both of them store

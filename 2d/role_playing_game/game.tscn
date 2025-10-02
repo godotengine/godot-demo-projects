@@ -21,7 +21,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_53g8u"]
 _data = {
-&"fade": SubResource("1")
+&"fade_to_black": SubResource("1")
 }
 
 [node name="Game" type="Node" node_paths=PackedStringArray("combat_screen", "exploration_screen")]
@@ -31,13 +31,12 @@ exploration_screen = NodePath("Exploration")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_53g8u")
+&"": SubResource("AnimationLibrary_53g8u")
 }
 
 [node name="Transition" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="Transition"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

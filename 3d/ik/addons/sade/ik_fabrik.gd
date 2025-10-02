@@ -5,7 +5,7 @@ extends Node3D
 
 # The delta/tolerance for the bone chain (how do the bones need to be before it is considered satisfactory)
 const CHAIN_TOLERANCE = 0.01
-# The amount of interations the bone chain will go through in an attempt to get to the target position
+# The number of iterations the bone chain will go through in an attempt to get to the target position
 const CHAIN_MAX_ITER = 10
 
 @export var skeleton_path: NodePath:
@@ -87,7 +87,7 @@ var chain_origin = Vector3()
 # The combined length of every bone in the bone chain
 var total_length = INF
 # The amount of iterations we've been through, and whether or not we want to limit our solver to CHAIN_MAX_ITER
-# amounts of interations.
+# iterations.
 @export var chain_iterations: int = 0
 @export var limit_chain_iterations: bool = true
 # Should we reset chain_iterations on movement during our update method?
@@ -151,7 +151,7 @@ func _ready():
 	update_mode = update_mode
 
 
-# Various upate methods
+# Various update methods
 func _process(_delta):
 	if reset_iterations_on_update:
 		chain_iterations = 0
@@ -206,7 +206,7 @@ func update_skeleton():
 		for bone_name in bones_in_chain:
 			bone_IDs[bone_name] = skeleton.find_bone(bone_name)
 
-			# Set the bone node to the currect bone position
+			# Set the bone node to the current bone position
 			bone_nodes[i].global_transform = get_bone_transform(i)
 			# If this is not the last bone in the bone chain, make it look at the next bone in the bone chain
 			if i < bone_IDs.size()-1:
@@ -423,7 +423,7 @@ func _make_editor_sphere_at_node(node, color):
 	indicator_mesh.radial_segments = 8
 	indicator_mesh.rings = 4
 
-	# The mesh needs a material (unless we want to use the defualt one).
+	# The mesh needs a material (unless we want to use the default one).
 	# Let's create a material and use the EditorGizmoTexture to texture it.
 	var indicator_material = StandardMaterial3D.new()
 	indicator_material.flags_unshaded = true

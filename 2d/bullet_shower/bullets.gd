@@ -1,5 +1,5 @@
 extends Node2D
-# This demo is an example of controling a high number of 2D objects with logic
+# This demo is an example of controlling a high number of 2D objects with logic
 # and collision without using nodes in the scene. This technique is a lot more
 # efficient than using instancing and nodes, but requires more programming and
 # is less visual. Bullets are managed together in the `bullets.gd` script.
