@@ -12,6 +12,7 @@ var state := State.MENU
 
 @onready var camera: Camera3D = $Camera3D
 
+
 func _process(delta: float) -> void:
 	if state != State.GRAB:
 		return

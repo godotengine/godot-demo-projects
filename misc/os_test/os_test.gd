@@ -211,7 +211,7 @@ func _ready() -> void:
 	add_header("Video")
 	add_line("Adapter name", RenderingServer.get_video_adapter_name())
 	add_line("Adapter vendor", RenderingServer.get_video_adapter_vendor())
-	if ProjectSettings.get_setting_with_override("rendering/renderer/rendering_method") != "gl_compatibility":
+	if RenderingServer.get_current_rendering_method() != "gl_compatibility":
 		# Querying the adapter type isn't supported in Compatibility.
 		add_line("Adapter type", [
 			"Other (Unknown)",
