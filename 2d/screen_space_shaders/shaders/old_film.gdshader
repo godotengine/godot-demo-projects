@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 uniform sampler2D screen_texture : hint_screen_texture, filter_linear_mipmap;
-uniform vec4 base: source_color;
+uniform vec4 base : source_color;
 uniform sampler2D grain;
 uniform float grain_strength = 0.3;
 uniform sampler2D vignette;
