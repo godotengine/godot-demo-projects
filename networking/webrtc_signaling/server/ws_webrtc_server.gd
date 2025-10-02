@@ -209,7 +209,7 @@ func _parse_msg(peer: Peer) -> bool:
 		return false
 	if not typeof(parsed.type) == TYPE_FLOAT and int(parsed.type) == parsed.type:
 		return false
-	if not typeof(parsed.id == TYPE_FLOAT) and int(parsed.id) == parsed.id:
+	if not typeof(parsed.id) == TYPE_FLOAT and int(parsed.id) == parsed.id:
 		return false
 
 	var msg := {
