@@ -1,5 +1,6 @@
 extends Label
 
 
-func _process(_delta):
-	text = "%d FPS (%.2f mspf)" % [Engine.get_frames_per_second(), 1000.0 / Engine.get_frames_per_second()]
+func _process(_delta: float) -> void:
+	var fps: float = Engine.get_frames_per_second()
+	text = "%d FPS (%.2f mspf)" % [fps, 1000.0 / fps]
