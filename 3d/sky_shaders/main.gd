@@ -36,7 +36,7 @@ func _input(event: InputEvent) -> void:
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and event is InputEventMouseMotion:
 		# Mouselook.
 		var relative_motion: Vector2 = event.screen_relative
-		$YawCamera.rotation.x = clampf($YawCamera.rotation.x + relative_motion.y * MOUSE_SENSITIVITY, -TAU * 0.25, TAU * 0.25)
+		$YawCamera.rotation.x = clampf($YawCamera.rotation.x - relative_motion.y * MOUSE_SENSITIVITY, -TAU * 0.25, TAU * 0.25)
 		$YawCamera.rotation.y -= relative_motion.x * MOUSE_SENSITIVITY
 
 	# Mouse wheel currently doesn't work in input actions. Hardcode mouse wheel as a workaround.
