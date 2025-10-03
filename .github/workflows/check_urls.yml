@@ -1,12 +1,5 @@
 name: 🌐 Check URLs
-on:
-  push:
-  pull_request:
-  schedule:
-    # Every day at 18:00 UTC.
-    # URLs can decay over time. Setting up a schedule makes it possible to be warned
-    # about dead links as soon as possible.
-    - cron: "0 18 * * *"
+on: [push, pull_request]
 
 jobs:
   check-urls:
