@@ -1,4 +1,4 @@
-[gd_resource type="OpenXRActionMap" load_steps=9 format=3 uid="uid://cv3fftnsowiud"]
+[gd_resource type="OpenXRActionMap" load_steps=12 format=3 uid="uid://c5np6k3xq56h5"]
 
 [sub_resource type="OpenXRAction" id="OpenXRAction_75o1n"]
 resource_name = "aim_pose"
@@ -23,21 +23,33 @@ resource_name = "godot"
 localized_name = "Godot Action Set"
 actions = [SubResource("OpenXRAction_75o1n"), SubResource("OpenXRAction_8d7jj"), SubResource("OpenXRAction_t2cd0")]
 
-[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_wqxq3"]
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_6ivru"]
 action = SubResource("OpenXRAction_75o1n")
-paths = PackedStringArray("/user/hand/left/input/aim/pose", "/user/hand/right/input/aim/pose")
+binding_path = "/user/hand/left/input/aim/pose"
 
-[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_cdhbm"]
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_vfhwq"]
+action = SubResource("OpenXRAction_75o1n")
+binding_path = "/user/hand/right/input/aim/pose"
+
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_5w03k"]
 action = SubResource("OpenXRAction_8d7jj")
-paths = PackedStringArray("/user/hand/left/input/select/click", "/user/hand/right/input/select/click")
+binding_path = "/user/hand/left/input/select/click"
 
-[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_em1q7"]
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_typ1r"]
+action = SubResource("OpenXRAction_8d7jj")
+binding_path = "/user/hand/right/input/select/click"
+
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_clvbf"]
 action = SubResource("OpenXRAction_t2cd0")
-paths = PackedStringArray("/user/hand/left/output/haptic", "/user/hand/right/output/haptic")
+binding_path = "/user/hand/left/output/haptic"
+
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_5bppb"]
+action = SubResource("OpenXRAction_t2cd0")
+binding_path = "/user/hand/right/output/haptic"
 
 [sub_resource type="OpenXRInteractionProfile" id="OpenXRInteractionProfile_cvu6o"]
 interaction_profile_path = "/interaction_profiles/khr/simple_controller"
-bindings = [SubResource("OpenXRIPBinding_wqxq3"), SubResource("OpenXRIPBinding_cdhbm"), SubResource("OpenXRIPBinding_em1q7")]
+bindings = [SubResource("OpenXRIPBinding_6ivru"), SubResource("OpenXRIPBinding_vfhwq"), SubResource("OpenXRIPBinding_5w03k"), SubResource("OpenXRIPBinding_typ1r"), SubResource("OpenXRIPBinding_clvbf"), SubResource("OpenXRIPBinding_5bppb")]
 
 [resource]
 action_sets = [SubResource("OpenXRActionSet_ke8tl")]

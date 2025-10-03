@@ -1,11 +1,11 @@
-[gd_scene load_steps=55 format=3 uid="uid://clyxqp0e6qemi"]
+[gd_scene load_steps=55 format=3 uid="uid://djtl7wpimep6k"]
 
-[ext_resource type="Texture2D" uid="uid://ccgkupemr6e1q" path="res://textures/paint.png" id="3_2nulf"]
-[ext_resource type="PackedScene" uid="uid://daokc0jvx7nkw" path="res://thin_lines.tscn" id="3_5ehjl"]
-[ext_resource type="PackedScene" uid="uid://sxx5ow26t0c3" path="res://polyhaven/dutch_ship_medium_1k.gltf" id="3_fa2bl"]
-[ext_resource type="Texture2D" uid="uid://bm6eht0bqttpo" path="res://textures/paint_normal.png" id="4_fdfpv"]
-[ext_resource type="Texture2D" uid="uid://chjqieyps5n5r" path="res://textures/checker.png" id="14"]
-[ext_resource type="Script" uid="uid://c2cf5n6btjt3k" path="res://anti_aliasing.gd" id="18"]
+[ext_resource type="Texture2D" uid="uid://bfgsucq0jx2cb" path="res://textures/paint.png" id="3_2nulf"]
+[ext_resource type="PackedScene" uid="uid://chlh878qnorc7" path="res://thin_lines.tscn" id="3_5ehjl"]
+[ext_resource type="PackedScene" uid="uid://ctqc7ve1t0ajx" path="res://polyhaven/dutch_ship_medium_1k.gltf" id="3_fa2bl"]
+[ext_resource type="Texture2D" uid="uid://bxjrisgsfwb3x" path="res://textures/paint_normal.png" id="4_fdfpv"]
+[ext_resource type="Texture2D" uid="uid://b5ro6ovp010" path="res://textures/checker.png" id="14"]
+[ext_resource type="Script" uid="uid://p5c10p406acq" path="res://anti_aliasing.gd" id="18"]
 
 [sub_resource type="ProceduralSkyMaterial" id="9"]
 
@@ -246,9 +246,9 @@ fractal_gain = 0.9
 fractal_ping_pong_strength = -1.2
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture_bgiac"]
-seamless = true
-color_ramp = SubResource("Gradient_jyuoy")
 noise = SubResource("FastNoiseLite_kv21n")
+color_ramp = SubResource("Gradient_jyuoy")
+seamless = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x42ya"]
 albedo_color = Color(1.2, 1, 0.7, 1)
@@ -463,7 +463,7 @@ shader_parameter/albedo = Color(1.2, 0.915333, 0.997134, 1)
 shader_parameter/texture_albedo = SubResource("NoiseTexture_bgiac")
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 1.0
-shader_parameter/metallic_texture_channel = null
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.0
 shader_parameter/uv1_scale = Vector3(2, 2, 1)
@@ -524,7 +524,7 @@ shader_parameter/albedo = Color(1.2, 1.16365, 0.85123, 1)
 shader_parameter/texture_albedo = SubResource("NoiseTexture_bgiac")
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 1.0
-shader_parameter/metallic_texture_channel = null
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.0
 shader_parameter/uv1_scale = Vector3(2, 2, 1)
@@ -813,7 +813,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -68)
 mesh = SubResource("SphereMesh_v4x6x")
 
 [node name="Decal" type="Decal" parent="Testers/MovingDecal"]
-transform = Transform3D(-0.707104, -1.01328e-06, -0.707109, 0.183013, 0.965926, -0.183013, 0.683015, -0.258819, -0.68301, 1, 1, 1)
+transform = Transform3D(-0.70710397, -1.0132787e-06, -0.7071092, 0.18301255, 0.96592563, -0.1830126, 0.68301517, -0.25881886, -0.68300986, 1, 1, 1)
 texture_albedo = ExtResource("3_2nulf")
 texture_normal = ExtResource("4_fdfpv")
 
@@ -905,6 +905,7 @@ layout_mode = 2
 selected = 0
 item_count = 4
 popup/item_0/text = "Disabled (Fastest)"
+popup/item_0/id = 0
 popup/item_1/text = "2× (Average)"
 popup/item_1/id = 1
 popup/item_2/text = "4× (Slow)"
@@ -931,6 +932,7 @@ layout_mode = 2
 selected = 0
 item_count = 2
 popup/item_0/text = "Disabled (Fastest)"
+popup/item_0/id = 0
 popup/item_1/text = "Enabled (Fast)"
 popup/item_1/id = 1
 
@@ -953,6 +955,7 @@ layout_mode = 2
 selected = 0
 item_count = 2
 popup/item_0/text = "Disabled (Fastest)"
+popup/item_0/id = 0
 popup/item_1/text = "Enabled (Average)"
 popup/item_1/id = 1
 
@@ -974,6 +977,7 @@ layout_mode = 2
 selected = 0
 item_count = 3
 popup/item_0/text = "Disabled"
+popup/item_0/id = 0
 popup/item_1/text = "Adaptive"
 popup/item_1/id = 1
 popup/item_2/text = "Enabled"
@@ -1054,6 +1058,7 @@ layout_mode = 2
 selected = 3
 item_count = 5
 popup/item_0/text = "No FSR Sharpness"
+popup/item_0/id = 0
 popup/item_1/text = "Low FSR Sharpness"
 popup/item_1/id = 1
 popup/item_2/text = "Medium FSR Sharpness"

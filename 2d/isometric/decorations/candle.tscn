@@ -1,9 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://b4ol62k507nn7"]
+[gd_scene load_steps=14 format=3 uid="uid://dcnxwmpd2mvee"]
 
-[ext_resource type="Texture2D" uid="uid://bs6uc40vmpmhd" path="res://decorations/sparkle.png" id="1"]
-[ext_resource type="Texture2D" uid="uid://bkae3n748i0ow" path="res://decorations/candle.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://bfa7cvk3m65n3" path="res://decorations/fire.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://cginrtmcplrec" path="res://decorations/glow.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://hbxfkav62m0v" path="res://decorations/sparkle.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://cx7qbaoplh14p" path="res://decorations/candle.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://cisfhyujk0d7r" path="res://decorations/fire.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://xc2p0l2sfs1x" path="res://decorations/glow.png" id="4"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]
 particles_animation = true
@@ -67,8 +67,8 @@ light_mask = 128
 position = Vector2(-13, -33.244)
 scale = Vector2(0.3, 0.5)
 amount = 1
-lifetime = 0.8
 texture = ExtResource("4")
+lifetime = 0.8
 gravity = Vector2(0, 0)
 
 [node name="Fire" type="CPUParticles2D" parent="Sprite2D"]
@@ -77,11 +77,10 @@ material = SubResource("1")
 position = Vector2(-13, -35)
 scale = Vector2(0.6, 0.6)
 amount = 1
-lifetime = 0.8
 texture = ExtResource("3")
+lifetime = 0.8
 gravity = Vector2(0, 0)
 color_ramp = SubResource("2")
-anim_speed = 1.0
 
 [node name="Sparkle" type="CPUParticles2D" parent="Sprite2D"]
 light_mask = 128
@@ -93,11 +92,8 @@ texture = ExtResource("1")
 emission_shape = 1
 emission_sphere_radius = 8.0
 gravity = Vector2(0, -80)
-angular_velocity = 1.0
-tangential_accel = 49.54
 scale_amount_curve = SubResource("4")
 color_ramp = SubResource("5")
-anim_speed = 1.0
 
 [node name="flow front" type="CPUParticles2D" parent="Sprite2D"]
 modulate = Color(0.94902, 1, 0, 1)
@@ -105,28 +101,23 @@ light_mask = 128
 position = Vector2(-13, -28.689)
 scale = Vector2(0.25, 0.25)
 amount = 1
-lifetime = 0.8
 texture = ExtResource("4")
+lifetime = 0.8
 gravity = Vector2(0, 0)
 
 [node name="Light2D2" type="PointLight2D" parent="."]
 light_mask = 2
 position = Vector2(-15, -49)
-texture = SubResource("9")
 color = Color(1, 0.466667, 0.0352941, 1)
 energy = 2.0
-range_height = 450.9
 range_item_cull_mask = 145
-shadow_buffer_size = 512
-shadow_gradient_length = 30.0
 shadow_item_cull_mask = 145
+texture = SubResource("9")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 light_mask = 2
-texture = SubResource("10")
 color = Color(0.709804, 0.388235, 0.313726, 1)
-range_height = 901.9
 range_item_cull_mask = 17
 shadow_enabled = true
-shadow_gradient_length = 20.0
 shadow_item_cull_mask = 17
+texture = SubResource("10")

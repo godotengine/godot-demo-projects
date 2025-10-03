@@ -1,11 +1,11 @@
-[gd_scene load_steps=72 format=3 uid="uid://dfb4jow1qnl4m"]
+[gd_scene load_steps=72 format=3 uid="uid://ogcwmabk7x24"]
 
-[ext_resource type="Texture2D" uid="uid://bap1cyd4dv37i" path="res://fire_particle.png" id="1"]
-[ext_resource type="Texture2D" uid="uid://bii6kglnqm6r2" path="res://smoke_particle.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://b0nirvelkp3x2" path="res://spark_particle2.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dkl7yvfg3ivr3" path="res://fire_particle.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://u86xc5c6mawi" path="res://smoke_particle.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://c3vnwwbjuacvc" path="res://spark_particle2.png" id="3"]
 [ext_resource type="Texture2D" path="res://point_texture_image_outline.tres" id="5"]
-[ext_resource type="Script" uid="uid://dwtnqprkhkpob" path="res://pause.gd" id="6_5a71v"]
-[ext_resource type="Texture2D" uid="uid://734kppvbe7ba" path="res://flipbook.png" id="7"]
+[ext_resource type="Script" uid="uid://wugtj7h57c4g" path="res://pause.gd" id="6_5a71v"]
+[ext_resource type="Texture2D" uid="uid://33aw0o1jasjn" path="res://flipbook.png" id="7"]
 
 [sub_resource type="Environment" id="Environment_y7usk"]
 background_mode = 3
@@ -466,41 +466,41 @@ texture_filter = 4
 material = SubResource("1")
 position = Vector2(122, 486)
 amount = 32
-process_material = SubResource("6")
 texture = ExtResource("1")
 preprocess = 1.0
+process_material = SubResource("6")
 
 [node name="Flipbook" type="GPUParticles2D" parent="."]
 texture_filter = 4
 material = SubResource("7")
 position = Vector2(392, 215)
 amount = 20
-process_material = SubResource("8")
 texture = ExtResource("7")
 lifetime = 3.0
 preprocess = 3.0
 fixed_fps = 0
 interpolate = false
+process_material = SubResource("8")
 
 [node name="Smoke" type="GPUParticles2D" parent="."]
 texture_filter = 4
 position = Vector2(362, 478)
 amount = 32
-process_material = SubResource("11")
 texture = ExtResource("2")
 lifetime = 2.0
 preprocess = 2.0
+process_material = SubResource("11")
 
 [node name="Magic" type="GPUParticles2D" parent="." groups=["trailable_particles"]]
 texture_filter = 4
 material = SubResource("12")
 position = Vector2(554, 494)
 amount = 150
-process_material = SubResource("19")
 texture = ExtResource("3")
 lifetime = 2.0
 preprocess = 2.0
 randomness = 1.0
+process_material = SubResource("19")
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(0, 88)
@@ -508,16 +508,16 @@ curve = SubResource("Curve2D_oi78q")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2(558, 265)
-rotation = 0.730907
+rotation = 0.79609853
 
 [node name="MagicGlobalCoordinates" type="GPUParticles2D" parent="Path2D/PathFollow2D" groups=["trailable_particles"]]
 texture_filter = 4
 material = SubResource("12")
 amount = 200
-process_material = SubResource("ParticleProcessMaterial_fcq72")
 texture = ExtResource("3")
 lifetime = 2.0
 randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_fcq72")
 
 [node name="Explosion" type="GPUParticles2D" parent="." groups=["trailable_particles"]]
 texture_filter = 4
@@ -525,50 +525,50 @@ material = SubResource("20")
 position = Vector2(613.467, 182.62)
 rotation = 3.13794
 amount = 16
-process_material = SubResource("27")
 texture = ExtResource("2")
 lifetime = 2.0
 preprocess = 2.0
 explosiveness = 1.0
+process_material = SubResource("27")
 
 [node name="EmitMask" type="GPUParticles2D" parent="."]
 texture_filter = 4
 position = Vector2(41, -68)
 amount = 180
-process_material = SubResource("28")
 texture = ExtResource("3")
 lifetime = 0.2
 preprocess = 0.2
 visibility_rect = Rect2(26.0055, 90.0015, 199.176, 95.0445)
+process_material = SubResource("28")
 
 [node name="OutlineMask" type="GPUParticles2D" parent="."]
 texture_filter = 4
 position = Vector2(42, 52)
 amount = 180
-process_material = SubResource("29")
 texture = ExtResource("3")
 lifetime = 0.2
 preprocess = 0.2
 visibility_rect = Rect2(26.0055, 90.0015, 199.176, 95.0445)
+process_material = SubResource("29")
 
 [node name="DirectionMask" type="GPUParticles2D" parent="."]
 texture_filter = 4
 position = Vector2(40, 180)
 amount = 180
-process_material = SubResource("30")
 texture = ExtResource("3")
 lifetime = 0.2
 preprocess = 0.2
 visibility_rect = Rect2(26.0055, 90.0015, 199.176, 95.0445)
+process_material = SubResource("30")
 
 [node name="ParticlesWithSubemitter" type="GPUParticles2D" parent="." groups=["trailable_particles"]]
 texture_filter = 4
 position = Vector2(864, 272)
 amount = 15
 sub_emitter = NodePath("SubemitterEndSparks")
-process_material = SubResource("ParticleProcessMaterial_jod5w")
 texture = ExtResource("3")
 preprocess = 1.0
+process_material = SubResource("ParticleProcessMaterial_jod5w")
 
 [node name="SubemitterEndSparks" type="GPUParticles2D" parent="ParticlesWithSubemitter" groups=["trailable_particles"]]
 texture_filter = 4
@@ -576,35 +576,34 @@ position = Vector2(-808, -248)
 emitting = false
 amount = 15
 sub_emitter = NodePath("SubemitterEndSmoke")
-process_material = SubResource("ParticleProcessMaterial_m4hvx")
 texture = ExtResource("3")
 preprocess = 1.0
+process_material = SubResource("ParticleProcessMaterial_m4hvx")
 
 [node name="SubemitterEndSmoke" type="GPUParticles2D" parent="ParticlesWithSubemitter/SubemitterEndSparks" groups=["trailable_particles"]]
 texture_filter = 4
 emitting = false
 amount = 15
-process_material = SubResource("ParticleProcessMaterial_mcjyg")
 texture = ExtResource("2")
 preprocess = 1.0
 fixed_fps = 0
 interpolate = false
+process_material = SubResource("ParticleProcessMaterial_mcjyg")
 
 [node name="Turbulence" type="GPUParticles2D" parent="."]
 position = Vector2(768, 328)
 amount = 50
-process_material = SubResource("ParticleProcessMaterial_vbd24")
 texture = ExtResource("2")
 lifetime = 4.0
 preprocess = 4.0
 fixed_fps = 0
 interpolate = false
+process_material = SubResource("ParticleProcessMaterial_vbd24")
 
 [node name="CollisionRigid" type="GPUParticles2D" parent="." groups=["trailable_particles"]]
 texture_filter = 4
 position = Vector2(978, 331)
 amount = 150
-process_material = SubResource("ParticleProcessMaterial_mg3j6")
 texture = ExtResource("3")
 lifetime = 5.0
 preprocess = 5.0
@@ -612,43 +611,44 @@ fixed_fps = 0
 interpolate = false
 collision_base_size = 0.5
 trail_sections = 16
+process_material = SubResource("ParticleProcessMaterial_mg3j6")
 
 [node name="CollisionHideOnContact" type="GPUParticles2D" parent="." groups=["trailable_particles"]]
 texture_filter = 4
 position = Vector2(1083, -6)
 amount = 150
-process_material = SubResource("ParticleProcessMaterial_jtilh")
 texture = ExtResource("3")
 lifetime = 2.0
 preprocess = 2.0
 fixed_fps = 0
 interpolate = false
 collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_jtilh")
 
 [node name="CollisionHideOnContactSpawnSubemitter" type="GPUParticles2D" parent="." groups=["trailable_particles"]]
 texture_filter = 4
 position = Vector2(1072, 650)
 amount = 100
 sub_emitter = NodePath("CollisionSubemitter")
-process_material = SubResource("ParticleProcessMaterial_wbw05")
 texture = ExtResource("3")
 lifetime = 2.0
 preprocess = 2.0
 fixed_fps = 0
 interpolate = false
 collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_wbw05")
 
 [node name="CollisionSubemitter" type="GPUParticles2D" parent="CollisionHideOnContactSpawnSubemitter" groups=["trailable_particles"]]
 texture_filter = 4
 emitting = false
 amount = 50
-process_material = SubResource("ParticleProcessMaterial_oib53")
 texture = ExtResource("3")
 lifetime = 0.5
 preprocess = 0.5
 fixed_fps = 0
 interpolate = false
 collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_oib53")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 position = Vector2(136, -56)
@@ -700,7 +700,7 @@ polygon = PackedVector2Array(770, 451, 777, 410, 828, 404, 853, 447, 853, 494, 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_j1xdo")
+&"": SubResource("AnimationLibrary_j1xdo")
 }
 autoplay = "move_particles"
 

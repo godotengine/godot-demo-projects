@@ -1,27 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://dyhjvb7q0b3j"]
+[gd_scene load_steps=8 format=3 uid="uid://bhejmmtouwmb7"]
 
-[ext_resource type="Texture2D" uid="uid://bw3q8aq6gfuof" path="res://addons/sade/editor_gizmo_texture.png" id="1"]
-[ext_resource type="PackedScene" uid="uid://ctssefekxjogg" path="res://model/godot_battle_bot.dae" id="2"]
+[ext_resource type="Material" uid="uid://uslxtfi8ihx7" path="res://checker_floor.mat.tres" id="1_hknxn"]
+[ext_resource type="PackedScene" uid="uid://41fxuoounr3" path="res://model/godot_battle_bot.dae" id="2"]
 [ext_resource type="Material" path="res://model/battle_bot_color.tres" id="3"]
-[ext_resource type="Script" uid="uid://cwmnshpgflv3w" path="res://target_from_mousepos.gd" id="5"]
-[ext_resource type="Script" uid="uid://tmd4ubxbhvue" path="res://addons/sade/ik_look_at.gd" id="6"]
-[ext_resource type="Script" uid="uid://dpsdir1qgcjff" path="res://button_change_scene.gd" id="8"]
+[ext_resource type="Script" uid="uid://2hdiu4tx5w1k" path="res://target_from_mousepos.gd" id="5"]
+[ext_resource type="Script" uid="uid://dkmb1w54c1aqw" path="res://addons/sade/ik_look_at.gd" id="6"]
+[ext_resource type="Script" uid="uid://c4hjxjfb7uuyw" path="res://button_change_scene.gd" id="8"]
 
 [sub_resource type="PlaneMesh" id="1"]
 size = Vector2(40, 40)
-
-[sub_resource type="StandardMaterial3D" id="2"]
-albedo_texture = ExtResource("1")
-roughness = 0.2
-uv1_scale = Vector3(0.25, 0.25, 0.25)
-uv1_triplanar = true
-texture_filter = 0
 
 [node name="LookAtIK" type="Node3D"]
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("1")
-surface_material_override/0 = SubResource("2")
+surface_material_override/0 = ExtResource("1_hknxn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.56827, 0.673454, -0.472789, 0, 0.574581, 0.818448, 0.822842, -0.465099, 0.326517, -9.77531, 11.5204, 11.766)

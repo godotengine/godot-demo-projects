@@ -1,21 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://5x7yswntc63m"]
+[gd_scene load_steps=11 format=3 uid="uid://di7sdmf1v6ycu"]
 
-[ext_resource type="Script" uid="uid://fwpk0277wskk" path="res://skeleton_ik_runner.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://bw3q8aq6gfuof" path="res://addons/sade/editor_gizmo_texture.png" id="3"]
-[ext_resource type="PackedScene" uid="uid://ctssefekxjogg" path="res://model/godot_battle_bot.dae" id="4"]
-[ext_resource type="Script" uid="uid://cwmnshpgflv3w" path="res://target_from_mousepos.gd" id="5"]
+[ext_resource type="Script" uid="uid://bexg0uejjl5b6" path="res://skeleton_ik_runner.gd" id="1"]
+[ext_resource type="Material" uid="uid://uslxtfi8ihx7" path="res://checker_floor.mat.tres" id="1_f0bh8"]
+[ext_resource type="PackedScene" uid="uid://41fxuoounr3" path="res://model/godot_battle_bot.dae" id="4"]
+[ext_resource type="Script" uid="uid://2hdiu4tx5w1k" path="res://target_from_mousepos.gd" id="5"]
 [ext_resource type="Material" path="res://model/battle_bot_color.tres" id="6"]
-[ext_resource type="Script" uid="uid://dpsdir1qgcjff" path="res://button_change_scene.gd" id="8"]
-[ext_resource type="Script" uid="uid://tmd4ubxbhvue" path="res://addons/sade/ik_look_at.gd" id="9"]
+[ext_resource type="Script" uid="uid://c4hjxjfb7uuyw" path="res://button_change_scene.gd" id="8"]
+[ext_resource type="Script" uid="uid://dkmb1w54c1aqw" path="res://addons/sade/ik_look_at.gd" id="9"]
 
 [sub_resource type="PlaneMesh" id="1"]
 size = Vector2(40, 40)
-
-[sub_resource type="StandardMaterial3D" id="2"]
-albedo_texture = ExtResource("3")
-roughness = 0.2
-uv1_scale = Vector3(0.25, 0.25, 0.25)
-uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="3"]
 
@@ -27,7 +21,7 @@ roughness = 0.0
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("1")
-surface_material_override/0 = SubResource("2")
+surface_material_override/0 = ExtResource("1_f0bh8")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.56827, 0.673454, -0.472789, 0, 0.574581, 0.818448, 0.822842, -0.465099, 0.326517, -9.77531, 11.5204, 11.766)
@@ -86,6 +80,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="Control"]
 modulate = Color(1, 1, 1, 0.784314)
@@ -97,6 +93,8 @@ anchor_bottom = 1.0
 offset_left = -2.0
 offset_top = -70.0
 offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="Label" type="Label" parent="Control/Panel"]
 layout_mode = 1

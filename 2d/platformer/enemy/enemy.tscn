@@ -1,10 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://6mtip3ruyn"]
+[gd_scene load_steps=15 format=3 uid="uid://bc4a8j7okb15h"]
 
-[ext_resource type="Texture2D" uid="uid://coj0d33vyyqx1" path="res://player/bullet.webp" id="1"]
-[ext_resource type="AudioStream" uid="uid://duwm7i44o75o2" path="res://enemy/explode.wav" id="2"]
-[ext_resource type="AudioStream" uid="uid://dm7wsawmylc7b" path="res://enemy/hit.wav" id="3"]
-[ext_resource type="Texture2D" uid="uid://bjjywmvba0sve" path="res://enemy/enemy.webp" id="4"]
-[ext_resource type="Script" uid="uid://cic7bqxvgc40e" path="res://enemy/enemy.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://dh5f4544n38df" path="res://player/bullet.webp" id="1"]
+[ext_resource type="AudioStream" uid="uid://cwqx3s5fy0q7t" path="res://enemy/explode.wav" id="2"]
+[ext_resource type="AudioStream" uid="uid://v1ehqldgci2l" path="res://enemy/hit.wav" id="3"]
+[ext_resource type="Texture2D" uid="uid://g31nf3mg4rpj" path="res://enemy/enemy.webp" id="4"]
+[ext_resource type="Script" uid="uid://uc4vp46ttpdt" path="res://enemy/enemy.gd" id="5"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]
 
@@ -278,7 +278,7 @@ vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_0kjfc")
+&"": SubResource("AnimationLibrary_0kjfc")
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -290,12 +290,12 @@ self_modulate = Color(1, 1, 1, 0.12)
 material = SubResource("6")
 emitting = false
 amount = 32
+texture = ExtResource("1")
 lifetime = 0.5
 one_shot = true
 speed_scale = 1.2
 explosiveness = 0.7
 draw_order = 215832976
-texture = ExtResource("1")
 emission_shape = 1
 emission_sphere_radius = 16.0
 spread = 180.0

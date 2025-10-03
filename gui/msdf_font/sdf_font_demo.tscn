@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c50snxy83byec"]
+[gd_scene load_steps=7 format=3 uid="uid://dbknjwlpbdyit"]
 
-[ext_resource type="Script" path="res://sdf_font_demo.gd" id="1_05k3u"]
-[ext_resource type="FontFile" uid="uid://j0vum3eyhewy" path="res://montserrat_semibold_msdf.ttf" id="1_eart1"]
+[ext_resource type="Script" uid="uid://drffb8ty178f0" path="res://sdf_font_demo.gd" id="1_05k3u"]
+[ext_resource type="FontFile" uid="uid://b4ngef7pot3yp" path="res://montserrat_semibold_msdf.ttf" id="1_eart1"]
 
 [sub_resource type="Animation" id="1"]
 length = 15.0
@@ -37,13 +37,13 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_88vp7"]
 _data = {
-"rotate": SubResource("1"),
-"zoomin_zoomout": SubResource("2")
+&"rotate": SubResource("1"),
+&"zoomin_zoomout": SubResource("2")
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j5dlp"]
 _data = {
-"zoomin_zoomout": SubResource("2")
+&"zoomin_zoomout": SubResource("2")
 }
 
 [node name="SDFFontDemo" type="Control"]
@@ -121,13 +121,13 @@ layout_mode = 2
 
 [node name="Rotate" type="AnimationPlayer" parent="CenterContainer/Base"]
 libraries = {
-"": SubResource("AnimationLibrary_88vp7")
+&"": SubResource("AnimationLibrary_88vp7")
 }
 autoplay = "rotate"
 
 [node name="Zoom" type="AnimationPlayer" parent="CenterContainer/Base"]
 libraries = {
-"": SubResource("AnimationLibrary_j5dlp")
+&"": SubResource("AnimationLibrary_j5dlp")
 }
 autoplay = "zoomin_zoomout"
 

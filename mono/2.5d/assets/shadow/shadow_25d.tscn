@@ -1,20 +1,20 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://bvo6brwl4jo7b"]
 
-[ext_resource path="res://addons/node25d-cs/Node25D.cs" type="Script" id=1]
-[ext_resource path="res://addons/node25d-cs/icons/node_25d_icon.png" type="Texture2D" id=2]
-[ext_resource path="res://addons/node25d-cs/ShadowMath25D.cs" type="Script" id=3]
-[ext_resource path="res://addons/node25d-cs/icons/shadow_math_25d_icon.png" type="Texture2D" id=4]
-[ext_resource path="res://assets/shadow/textures/forty_five.png" type="Texture2D" id=5]
-[ext_resource path="res://assets/shadow/shadow_sprite.gd" type="Script" id=6]
+[ext_resource type="Script" uid="uid://cjenry74w02wp" path="res://addons/node25d-cs/Node25D.cs" id="1"]
+[ext_resource type="Texture2D" uid="uid://cxml28nm8b651" path="res://addons/node25d-cs/icons/node_25d_icon.png" id="2"]
+[ext_resource type="Script" uid="uid://cw45abql1jnnk" path="res://addons/node25d-cs/ShadowMath25D.cs" id="3"]
+[ext_resource type="Texture2D" uid="uid://chpjbkm1n08hj" path="res://addons/node25d-cs/icons/shadow_math_25d_icon.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://ces5j0a83agci" path="res://assets/shadow/textures/forty_five.png" id="5"]
+[ext_resource type="Script" uid="uid://ctoemwnsvlm0p" path="res://assets/shadow/shadow_sprite.gd" id="6"]
 
-[sub_resource type="BoxShape3D" id=1]
-extents = Vector3(0.5, 0.001, 0.5)
+[sub_resource type="BoxShape3D" id="1"]
+size = Vector3(1, 0.002, 1)
 
 [node name="Shadow25D" type="Node2D"]
 visible = false
-script = ExtResource( 1 )
+script = ExtResource("1")
 __meta__ = {
-"_editor_icon": ExtResource( 2 )
+"_editor_icon": ExtResource("2")
 }
 spatialPosition = Vector3(0, 10, 0)
 
@@ -22,18 +22,15 @@ spatialPosition = Vector3(0, 10, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 collision_layer = 16
 collision_mask = 16
-script = ExtResource( 3 )
+script = ExtResource("3")
 __meta__ = {
-"_editor_icon": ExtResource( 4 )
+"_editor_icon": ExtResource("4")
 }
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ShadowMath25D"]
-shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
+shape = SubResource("1")
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource( 5 )
-script = ExtResource( 6 )
+texture = ExtResource("5")
+script = ExtResource("6")
