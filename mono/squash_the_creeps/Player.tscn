@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bnorrme8hfbsx"]
 
 [ext_resource type="PackedScene" uid="uid://dql7oordfphqf" path="res://art/player.glb" id="1_feavy"]
-[ext_resource type="Script" path="res://Player.cs" id="1_q8lbo"]
+[ext_resource type="Script" uid="uid://conoco5fix3jd" path="res://Player.cs" id="1_q8lbo"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_s8xr1"]
 radius = 0.792
@@ -68,8 +68,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x6efk"]
 _data = {
-"RESET": SubResource("Animation_7xhch"),
-"float": SubResource("Animation_03s6x")
+&"RESET": SubResource("Animation_7xhch"),
+&"float": SubResource("Animation_03s6x")
 }
 
 [node name="Player" type="CharacterBody3D"]
@@ -96,7 +96,7 @@ shape = SubResource("CylinderShape3D_6327m")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_x6efk")
+&"": SubResource("AnimationLibrary_x6efk")
 }
 autoplay = "float"
 

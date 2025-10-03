@@ -5,6 +5,7 @@ public partial class Player : CharacterBody3D
     // Emitted when the player was hit by a mob.
     [Signal]
     public delegate void HitEventHandler();
+
     // How fast the player moves in meters per second.
     [Export]
     public int Speed { get; set; } = 14;
@@ -45,10 +46,12 @@ public partial class Player : CharacterBody3D
             direction.Z -= 1.0f;
         }
 
+        // Prevent diagonal movement being very fast.
         if (direction != Vector3.Zero)
         {
             direction = direction.Normalized();
-            GetNode<Node3D>("Pivot").LookAt(Position + direction, Vector3.Up);
+            // Setting the basis property will affect the rotation of the node.
+            GetNode<Node3D>("Pivot").Basis = Basis.LookingAt(direction);
             GetNode<AnimationPlayer>("AnimationPlayer").SpeedScale = 4;
         }
         else
@@ -61,7 +64,7 @@ public partial class Player : CharacterBody3D
         _targetVelocity.Z = direction.Z * Speed;
 
         // Vertical velocity
-        if (!IsOnFloor()) // If in the air, fall towards the floor. Literally gravity
+        if (!IsOnFloor())
         {
             _targetVelocity.Y -= FallAcceleration * (float)delta;
         }

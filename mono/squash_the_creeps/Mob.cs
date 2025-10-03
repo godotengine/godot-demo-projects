@@ -5,6 +5,7 @@ public partial class Mob : CharacterBody3D
     // Emitted when the player jumped on the mob.
     [Signal]
     public delegate void SquashedEventHandler();
+
     // Minimum speed of the mob in meters per second
     [Export]
     public int MinSpeed { get; set; } = 10;
@@ -38,15 +39,15 @@ public partial class Mob : CharacterBody3D
         GetNode<AnimationPlayer>("AnimationPlayer").SpeedScale = randomSpeed / MinSpeed;
     }
 
-    // We also specified this function name in PascalCase in the editor's connection window
-    private void OnVisibleOnScreenNotifierScreenExited()
-    {
-        QueueFree();
-    }
-
     public void Squash()
     {
         EmitSignal(SignalName.Squashed);
+        QueueFree(); // Destroy this node.
+    }
+
+    // We also specified this function name in PascalCase in the editor's connection window
+    private void OnVisibleOnScreenNotifierScreenExited()
+    {
         QueueFree();
     }
 }
