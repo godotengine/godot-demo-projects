@@ -18,4 +18,4 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
 
 ## Screenshots
 
-![Screenshot](screenshots/screenshot.png)
+![Screenshot](screenshots/physics_tests.webp)

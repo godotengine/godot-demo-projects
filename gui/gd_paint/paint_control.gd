@@ -29,7 +29,7 @@ var mouse_click_start_pos := Vector2.INF
 
 # A boolean to tell whether we've set undo_elements_list_num, which holds the size of draw_elements_list
 # before a new stroke is added (unless the current brush mode is 'rectangle shape' or 'circle shape', in
-# which case we do things a litte differently. See the undo_stroke function for more details).
+# which case we do things a little differently. See the undo_stroke function for more details).
 var undo_set := false
 var undo_element_list_num := -1
 
@@ -73,7 +73,7 @@ func _process(_delta: float) -> void:
 					add_brush(mouse_pos, brush_mode)
 
 	else:
-		# We've finished our stroke, so we can set a new undo (if a new storke is made).
+		# We've finished our stroke, so we can set a new undo (if a new stroke is made).
 		undo_set = false
 
 		# If the mouse is inside the canvas.
@@ -97,7 +97,7 @@ func check_if_mouse_is_inside_canvas() -> bool:
 	# Make sure we have a mouse click starting position.
 	if mouse_click_start_pos != null:
 		# Make sure the mouse click starting position is inside the canvas.
-		# This is so if we start out click outside the canvas (say chosing a color from the color picker)
+		# This is so if we start out click outside the canvas (say choosing a color from the color picker)
 		# and then move our mouse back into the canvas, it won't start painting.
 		if Rect2(drawing_area.position, drawing_area.size).has_point(mouse_click_start_pos):
 			# Make sure the current mouse position is inside the canvas.
@@ -141,14 +141,14 @@ func add_brush(mouse_pos: Vector2, type: BrushMode) -> void:
 	var new_brush := {}
 
 	# Populate the dictionary with values based on the global brush variables.
-	# We will override these as needed if the brush is a rectange or circle.
+	# We will override these as needed if the brush is a rectangle or circle.
 	new_brush.brush_type = type
 	new_brush.brush_pos = mouse_pos
 	new_brush.brush_shape = brush_shape
 	new_brush.brush_size = brush_size
 	new_brush.brush_color = brush_color
 
-	# If the new bursh is a rectangle shape, we need to calculate the top left corner of the rectangle and the
+	# If the new brush is a rectangle shape, we need to calculate the top left corner of the rectangle and the
 	# bottom right corner of the rectangle.
 	if type == BrushMode.RECTANGLE_SHAPE:
 		var TL_pos := Vector2()
@@ -176,10 +176,10 @@ func add_brush(mouse_pos: Vector2, type: BrushMode) -> void:
 
 	# If the brush isa circle shape, then we need to calculate the radius of the circle.
 	if type == BrushMode.CIRCLE_SHAPE:
-		# Get the center point inbetween the mouse position and the position of the mouse when we clicked.
+		# Get the center point in between the mouse position and the position of the mouse when we clicked.
 		var center_pos := Vector2((mouse_pos.x + mouse_click_start_pos.x) / 2, (mouse_pos.y + mouse_click_start_pos.y) / 2)
 		# Assign the brush position to the center point, and calculate the radius of the circle using the distance from
-		# the center to the top/bottom positon of the mouse.
+		# the center to the top/bottom position of the mouse.
 		new_brush.brush_pos = center_pos
 		new_brush.brush_shape_circle_radius = center_pos.distance_to(Vector2(center_pos.x, mouse_pos.y))
 
@@ -193,7 +193,7 @@ func _draw() -> void:
 		match brush.brush_type:
 			BrushMode.PENCIL:
 				# If the brush shape is a rectangle, then we need to make a Rect2 so we can use draw_rect.
-				# Draw_rect draws a rectagle at the top left corner, using the scale for the size.
+				# Draw_rect draws a rectangle at the top left corner, using the scale for the size.
 				# So we offset the position by half of the brush size so the rectangle's center is at mouse position.
 				if brush.brush_shape == BrushShape.RECTANGLE:
 					var rect := Rect2(brush.brush_pos - Vector2(brush.brush_size / 2, brush.brush_size / 2), Vector2(brush.brush_size, brush.brush_size))
@@ -214,7 +214,7 @@ func _draw() -> void:
 				elif brush.brush_shape == BrushShape.CIRCLE:
 					draw_circle(brush.brush_pos, brush.brush_size / 2, bg_color)
 			BrushMode.RECTANGLE_SHAPE:
-				# We make a Rect2 with the postion at the top left. To get the size we take the bottom right position
+				# We make a Rect2 with the position at the top left. To get the size we take the bottom right position
 				# and subtract the top left corner's position.
 				var rect := Rect2(brush.brush_pos, brush.brush_shape_rect_pos_BR - brush.brush_pos)
 				draw_rect(rect, brush.brush_color)

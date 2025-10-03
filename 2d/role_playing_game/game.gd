@@ -21,13 +21,13 @@ func _ready() -> void:
 
 
 func start_combat(combat_actors: Array[PackedScene]) -> void:
-	remove_child($Exploration)
-	$AnimationPlayer.play("fade")
+	$AnimationPlayer.play("fade_to_black")
 	await $AnimationPlayer.animation_finished
+	remove_child($Exploration)
 	add_child(combat_screen)
 	combat_screen.show()
 	combat_screen.initialize(combat_actors)
-	$AnimationPlayer.play_backwards("fade")
+	$AnimationPlayer.play_backwards("fade_to_black")
 
 
 func _on_opponent_dialogue_finished(opponent: Pawn) -> void:
@@ -40,7 +40,7 @@ func _on_opponent_dialogue_finished(opponent: Pawn) -> void:
 
 func _on_combat_finished(winner: Combatant, _loser: Combatant) -> void:
 	remove_child(combat_screen)
-	$AnimationPlayer.play_backwards("fade")
+	$AnimationPlayer.play_backwards("fade_to_black")
 	add_child(exploration_screen)
 	var dialogue: Node = load("res://dialogue/dialogue_player/dialogue_player.tscn").instantiate()
 
@@ -51,7 +51,7 @@ func _on_combat_finished(winner: Combatant, _loser: Combatant) -> void:
 
 	await $AnimationPlayer.animation_finished
 	var player: Pawn = $Exploration/Grid/Player
-	exploration_screen.get_node("DialogueUI").show_dialogue(player, dialogue)
+	exploration_screen.get_node("DialogueCanvas/DialogueUI").show_dialogue(player, dialogue)
 	combat_screen.clear_combat()
 	await dialogue.dialogue_finished
 	dialogue.queue_free()

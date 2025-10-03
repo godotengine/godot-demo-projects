@@ -8,7 +8,6 @@ var tester_index := 0
 var rot_x := -TAU / 16  # This must be kept in sync with RotationX.
 var rot_y := TAU / 8  # This must be kept in sync with CameraHolder.
 var camera_distance := 2.0
-var base_height := int(ProjectSettings.get_setting("display/window/size/viewport_height"))
 
 @onready var testers: Node3D = $Testers
 @onready var camera_holder: Node3D = $CameraHolder  # Has a position and rotates on Y.
@@ -16,7 +15,23 @@ var base_height := int(ProjectSettings.get_setting("display/window/size/viewport
 @onready var camera: Camera3D = $CameraHolder/RotationX/Camera3D
 @onready var fps_label: Label = $FPSLabel
 
+var is_compatibility := false
+
+
 func _ready() -> void:
+	if RenderingServer.get_current_rendering_method() == "gl_compatibility":
+		is_compatibility = true
+		# Hide unsupported features.
+		$Antialiasing/FXAAContainer.visible = false
+		$Antialiasing/TAAContainer.visible = false
+
+		# Darken the light's energy to compensate for sRGB blending (without affecting sky rendering).
+		$DirectionalLight3D.sky_mode = DirectionalLight3D.SKY_MODE_SKY_ONLY
+		var new_light: DirectionalLight3D = $DirectionalLight3D.duplicate()
+		new_light.light_energy = 0.3
+		new_light.sky_mode = DirectionalLight3D.SKY_MODE_LIGHT_ONLY
+		add_child(new_light)
+
 	# Disable V-Sync to uncap framerate on supported platforms. This makes performance comparison
 	# easier on high-end machines that easily reach the monitor's refresh rate.
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
@@ -40,8 +55,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_distance = clamp(camera_distance, 1.5, 6)
 
 	if event is InputEventMouseMotion and event.button_mask & MAIN_BUTTONS:
-		# Compensate motion speed to be resolution-independent (based on the window height).
-		var relative_motion: Vector2 = event.relative * DisplayServer.window_get_size().y / base_height
+		# Use `screen_relative` to make mouse sensitivity independent of viewport resolution.
+		var relative_motion: Vector2 = event.screen_relative
 		rot_y -= relative_motion.x * ROT_SPEED
 		rot_x -= relative_motion.y * ROT_SPEED
 		rot_x = clamp(rot_x, -1.57, 0)
@@ -99,9 +114,11 @@ func _on_render_scale_value_changed(value: float) -> void:
 	$Antialiasing/RenderScaleContainer/Value.text = "%d%%" % (value * 100)
 	# Update viewport resolution text.
 	_on_viewport_size_changed()
-	# FSR 1.0 is only effective if render scale is below 100%, so hide the setting if at native resolution or higher.
-	$Antialiasing/FidelityFXFSR.visible = value < 1.0
-	$Antialiasing/FSRSharpness.visible = get_viewport().scaling_3d_mode == Viewport.SCALING_3D_MODE_FSR and value < 1.0
+	if not is_compatibility:
+		# Only show the feature if supported.
+		# FSR 1.0 is only effective if render scale is below 100%, so hide the setting if at native resolution or higher.
+		$Antialiasing/FidelityFXFSR.visible = value < 1.0
+		$Antialiasing/FSRSharpness.visible = get_viewport().scaling_3d_mode == Viewport.SCALING_3D_MODE_FSR and value < 1.0
 
 
 func _on_amd_fidelityfx_fsr1_toggled(button_pressed: bool) -> void:

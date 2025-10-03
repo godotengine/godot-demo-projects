@@ -1,9 +1,9 @@
 [gd_scene load_steps=18 format=3 uid="uid://vh7pmputa7r3"]
 
-[ext_resource type="Script" path="res://player/player.gd" id="3"]
+[ext_resource type="Script" uid="uid://3kovi8hshvar" path="res://player/player.gd" id="3"]
 [ext_resource type="AudioStream" uid="uid://sjod173axgwf" path="res://player/jump.wav" id="5"]
 [ext_resource type="AudioStream" uid="uid://b01brytl75mwa" path="res://player/shoot.wav" id="6"]
-[ext_resource type="Script" path="res://player/gun.gd" id="8"]
+[ext_resource type="Script" uid="uid://c3cm5mpl2xelv" path="res://player/gun.gd" id="8"]
 [ext_resource type="Texture2D" uid="uid://cc7o7t0ramd6y" path="res://player/robot.webp" id="9"]
 
 [sub_resource type="Animation" id="1"]
@@ -170,16 +170,16 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jnr5f"]
 _data = {
-"crouch": SubResource("1"),
-"falling": SubResource("2"),
-"falling_weapon": SubResource("3"),
-"idle": SubResource("4"),
-"idle_weapon": SubResource("5"),
-"jumping": SubResource("6"),
-"jumping_weapon": SubResource("7"),
-"run": SubResource("8"),
-"run_weapon": SubResource("9"),
-"standing_weapon_ready": SubResource("10")
+&"crouch": SubResource("1"),
+&"falling": SubResource("2"),
+&"falling_weapon": SubResource("3"),
+&"idle": SubResource("4"),
+&"idle_weapon": SubResource("5"),
+&"jumping": SubResource("6"),
+&"jumping_weapon": SubResource("7"),
+&"run": SubResource("8"),
+&"run_weapon": SubResource("9"),
+&"standing_weapon_ready": SubResource("10")
 }
 
 [sub_resource type="RectangleShape2D" id="11"]
@@ -205,6 +205,7 @@ position = Vector2(0, -14)
 texture = ExtResource("9")
 hframes = 8
 vframes = 8
+frame = 42
 
 [node name="Gun" type="Marker2D" parent="Sprite2D"]
 position = Vector2(14, 1)
@@ -226,6 +227,7 @@ libraries = {
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(0, -28)
 offset = Vector2(0, 50)
+process_callback = 0
 limit_left = -715
 limit_top = -250
 limit_right = 1425

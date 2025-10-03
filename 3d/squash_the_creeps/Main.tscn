@@ -1,10 +1,10 @@
 [gd_scene load_steps=15 format=3 uid="uid://2y3ar4s86yra"]
 
-[ext_resource type="Script" path="res://Main.gd" id="1"]
+[ext_resource type="Script" uid="uid://dn0kiywu3mkq7" path="res://Main.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dp478jyugrn7o" path="res://Player.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://ha0ar5s2c3m4" path="res://Mob.tscn" id="3"]
 [ext_resource type="Theme" uid="uid://cqquurjk1i7yw" path="res://ui_theme.tres" id="4_gnyca"]
-[ext_resource type="Script" path="res://ScoreLabel.gd" id="6"]
+[ext_resource type="Script" uid="uid://ofhvwth8plpb" path="res://ScoreLabel.gd" id="6"]
 
 [sub_resource type="BoxShape3D" id="1"]
 size = Vector3(60, 2, 60)
@@ -24,7 +24,7 @@ sky_material = SubResource("ProceduralSkyMaterial_m3njk")
 [sub_resource type="Environment" id="Environment_0tcge"]
 background_mode = 2
 sky = SubResource("Sky_yutuu")
-tonemap_mode = 2
+tonemap_mode = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cr5ed"]
 albedo_color = Color(0.635294, 0.211765, 0.0235294, 1)
@@ -81,7 +81,7 @@ shape = SubResource("WorldBoundaryShape3D_i5n5q")
 transform = Transform3D(1, 5.96046e-08, -1.42109e-14, 3.82137e-15, -2.18557e-07, -1, -5.96046e-08, 1, -2.18557e-07, 9.53674e-07, 10, -20)
 shape = SubResource("WorldBoundaryShape3D_i5n5q")
 
-[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.5, -0.777049, 0.382355, 0, 0.441506, 0.897258, -0.866025, -0.448629, 0.220753, 0, 12.5592, 14.7757)
 shadow_enabled = true
 shadow_bias = 0.04
@@ -129,7 +129,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 curve = SubResource("5")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
-transform = Transform3D(-4.37113e-08, 0, 0.999999, 0, 1, 0, -0.999999, 0, -4.37113e-08, 14, 0, -15)
+transform = Transform3D(-4.3711346e-08, 0, 0.999999, 0, 1, 0, -0.999999, 0, -4.3711346e-08, 14, 0, -15)
 rotation_mode = 1
 cubic_interp = false
 loop = false

@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://o5q0hy6cg6nt"]
 
-[ext_resource type="Script" path="res://enemy/enemy.gd" id="1"]
+[ext_resource type="Script" uid="uid://ekd2gwe75mcy" path="res://enemy/enemy.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://bqpmm2b3otsvp" path="res://enemy/robot_walk.wav" id="2"]
 [ext_resource type="PackedScene" uid="uid://51yuwlr5tgi0" path="res://enemy/enemy.glb" id="2_qf8n3"]
 [ext_resource type="AudioStream" uid="uid://bb3j3700yjir8" path="res://enemy/sound_hit.wav" id="3"]
@@ -350,10 +350,10 @@ tracks/10/keys = PackedFloat32Array(0, 1, -3.87449e-08, 0.475726, -0.0617121)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f4l5d"]
 _data = {
-"RESET": SubResource("Animation_7y2o5"),
-"idle": SubResource("Animation_icvte"),
-"impact": SubResource("Animation_ggs1k"),
-"walk": SubResource("Animation_ce6v8")
+&"RESET": SubResource("Animation_7y2o5"),
+&"idle": SubResource("Animation_icvte"),
+&"impact": SubResource("Animation_ggs1k"),
+&"walk": SubResource("Animation_ce6v8")
 }
 
 [sub_resource type="Animation" id="Animation_6dp7f"]
@@ -410,7 +410,7 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q27i1"]
 _data = {
-"explode": SubResource("Animation_6dp7f")
+&"explode": SubResource("Animation_6dp7f")
 }
 
 [sub_resource type="SphereShape3D" id="11"]
@@ -427,7 +427,7 @@ material = ExtResource("6_47uim")
 orientation = 2
 
 [sub_resource type="Curve" id="17"]
-max_value = 3.0
+_limits = [0.0, 3.0, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 0.6), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
@@ -437,8 +437,8 @@ axis_lock_angular_y = true
 axis_lock_angular_z = true
 physics_material_override = SubResource("1")
 custom_integrator = true
-max_contacts_reported = 5
 contact_monitor = true
+max_contacts_reported = 5
 script = ExtResource("1")
 
 [node name="Enemy" parent="." instance=ExtResource("2_qf8n3")]
@@ -448,13 +448,13 @@ bones/1/position = Vector3(-5.04871e-28, 0.661877, 0)
 bones/1/rotation = Quaternion(0.707107, -2.48537e-07, -1.95408e-07, 0.707107)
 bones/2/position = Vector3(-3.87449e-08, 0.475726, -0.0617121)
 bones/3/position = Vector3(0.913587, 0.661877, 0.631826)
-bones/3/rotation = Quaternion(1, 0, 7.54979e-08, -1.05879e-22)
+bones/3/rotation = Quaternion(1, -2.49197e-38, 7.54979e-08, -1.05879e-22)
 bones/5/position = Vector3(-0.913587, 0.661877, 0.631826)
-bones/5/rotation = Quaternion(1, 0, 7.54979e-08, -1.05879e-22)
+bones/5/rotation = Quaternion(1, -2.49197e-38, 7.54979e-08, -1.05879e-22)
 bones/7/position = Vector3(1.05436, 0.661877, -0.654576)
-bones/7/rotation = Quaternion(1, 0, 7.54979e-08, -1.05879e-22)
+bones/7/rotation = Quaternion(1, -2.49197e-38, 7.54979e-08, -1.05879e-22)
 bones/9/position = Vector3(-1.05436, 0.661877, -0.654576)
-bones/9/rotation = Quaternion(1, 0, 7.54979e-08, -1.05879e-22)
+bones/9/rotation = Quaternion(1, -2.49197e-38, 7.54979e-08, -1.05879e-22)
 
 [node name="RayFloor" type="RayCast3D" parent="Enemy/Skeleton" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.643772, 0.803052)
@@ -465,11 +465,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.643772, 0.310413)
 target_position = Vector3(0, 0, 1.5)
 
 [node name="AnimationPlayer" parent="Enemy" index="1"]
-autoplay = "walk"
 libraries = {
 "": SubResource("AnimationLibrary_f4l5d"),
 "extra": SubResource("AnimationLibrary_q27i1")
 }
+autoplay = "walk"
 
 [node name="Sphere1" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74185, 0.267137)

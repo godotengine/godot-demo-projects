@@ -14,7 +14,7 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
 Each chunk is a
 [`StaticBody3D`](https://docs.godotengine.org/en/latest/classes/class_staticbody3d.html)
 with each block having its own
-[`CollisionShape`](https://docs.godotengine.org/en/latest/classes/class_collisionshape.html)
+[`CollisionShape3D`](https://docs.godotengine.org/en/latest/classes/class_collisionshape3d.html)
 for collisions. The meshes are created using
 [`SurfaceTool`](https://docs.godotengine.org/en/latest/classes/class_surfacetool.html)
 which allows specifying vertices, triangles, and UV coordinates
@@ -30,7 +30,7 @@ are two terrain types, random blocks and flat grass. A more
 complex terrain generator is out-of-scope for this demo project.
 
 The player can place and break blocks using the
-[`RayCast`](https://docs.godotengine.org/en/latest/classes/class_raycast.html)
+[`RayCast3D`](https://docs.godotengine.org/en/latest/classes/class_raycast3d.html)
 node attached to the camera. It uses the collision information to
 figure out the block position and change the block data. You can
 switch the active block using the brackets or with the middle mouse button.
@@ -40,7 +40,7 @@ Settings are stored inside of an
 [AutoLoad singleton](https://docs.godotengine.org/en/latest/getting_started/step_by_step/singletons_autoload.html)
 called "Settings". This class will automatically save
 settings, and load them when the game opens, by using the
-[`File`](https://docs.godotengine.org/en/latest/classes/class_file.html) class.
+[`FileAccess`](https://docs.godotengine.org/en/latest/classes/class_fileaccess.html) class.
 
 Sticking to GDScript and the built-in Godot tools, as this demo does, is
 quite limiting. If you are making your own voxel game, you should probably

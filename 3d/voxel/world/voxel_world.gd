@@ -1,8 +1,10 @@
+class_name VoxelWorld
 extends Node
 # This file manages the creation and deletion of Chunks.
 
 const CHUNK_MIDPOINT = Vector3(0.5, 0.5, 0.5) * Chunk.CHUNK_SIZE
 const CHUNK_END_SIZE = Chunk.CHUNK_SIZE - 1
+const DIRECTIONS: Array[Vector3i] = [Vector3i.LEFT, Vector3i.RIGHT, Vector3i.DOWN, Vector3i.UP, Vector3i.FORWARD, Vector3i.BACK]
 
 var render_distance: int:
 	set(value):
@@ -16,7 +18,7 @@ var _old_player_chunk := Vector3i()
 var _generating := true
 var _deleting := false
 
-var _chunks := {}
+var _chunks: Dictionary[Vector3i, Chunk] = {}
 
 @onready var player: CharacterBody3D = $"../Player"
 
@@ -46,10 +48,16 @@ func _process(_delta: float) -> void:
 				if _chunks.has(chunk_position):
 					continue
 
-				var chunk := Chunk.new()
-				chunk.chunk_position = chunk_position
+				var chunk := Chunk.new(chunk_position)
 				_chunks[chunk_position] = chunk
 				add_child(chunk)
+				chunk.try_initial_generate_mesh(_chunks)
+				for dir in DIRECTIONS:
+					var neighbor: Chunk = _chunks.get(chunk_position + dir)
+					if neighbor != null and not neighbor.is_initial_mesh_generated:
+						neighbor.try_initial_generate_mesh(_chunks)
+				# Generate at most one chunk per frame in terms of data/colliders.
+				# Mesh generation is threaded so it's ok that the above may generate multiple meshes.
 				return
 
 	# If we didn't generate any chunks (and therefore didn't return), what next?
@@ -61,14 +69,11 @@ func _process(_delta: float) -> void:
 		_generating = false
 
 
-func get_block_global_position(block_global_position: Vector3i) -> int:
-	var chunk_position := Vector3i((block_global_position / Chunk.CHUNK_SIZE))
+func get_block_in_chunk(chunk_position: Vector3i, block_sub_position: Vector3i) -> int:
 	if _chunks.has(chunk_position):
 		var chunk: Chunk = _chunks[chunk_position]
-		var sub_position := Vector3i(Vector3(block_global_position).posmod(Chunk.CHUNK_SIZE))
-		if chunk.data.has(sub_position):
-			return chunk.data[sub_position]
-
+		if chunk.data.has(block_sub_position):
+			return chunk.data[block_sub_position]
 	return 0
 
 
@@ -99,11 +104,6 @@ func set_block_global_position(block_global_position: Vector3i, block_id: int) -
 
 
 func clean_up() -> void:
-	for chunk_position_key: Vector3i in _chunks.keys():
-		var thread: Thread = _chunks[chunk_position_key]._thread
-		if thread:
-			thread.wait_to_finish()
-
 	_chunks = {}
 	set_process(false)
 
@@ -124,9 +124,6 @@ func _delete_far_away_chunks(player_chunk: Vector3i) -> void:
 	# Also take the opportunity to delete far away chunks.
 	for chunk_position_key: Vector3i in _chunks.keys():
 		if Vector3(player_chunk).distance_to(Vector3(chunk_position_key)) > _delete_distance:
-			var thread: Thread = _chunks[chunk_position_key]._thread
-			if thread:
-				thread.wait_to_finish()
 			_chunks[chunk_position_key].queue_free()
 			_chunks.erase(chunk_position_key)
 			deleted_this_frame += 1

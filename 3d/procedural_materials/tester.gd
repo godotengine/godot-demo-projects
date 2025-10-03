@@ -8,7 +8,7 @@ var tester_index := 0
 var rot_x := deg_to_rad(-22.5)  # This must be kept in sync with RotationX.
 var rot_y := deg_to_rad(90)  # This must be kept in sync with CameraHolder.
 var zoom := 2.5
-var base_height := int(ProjectSettings.get_setting("display/window/size/viewport_height"))
+var is_compatibility := false
 
 @onready var testers: Node3D = $Testers
 @onready var camera_holder: Node3D = $CameraHolder  # Has a position and rotates on Y.
@@ -16,6 +16,17 @@ var base_height := int(ProjectSettings.get_setting("display/window/size/viewport
 @onready var camera: Camera3D = $CameraHolder/RotationX/Camera3D
 
 func _ready() -> void:
+	if RenderingServer.get_current_rendering_method() == "gl_compatibility":
+		# Use PCF13 shadow filtering to improve quality (Medium maps to PCF5 instead).
+		RenderingServer.directional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_HIGH)
+
+		# Darken the light's energy to compensate for sRGB blending (without affecting sky rendering).
+		$DirectionalLight3D.sky_mode = DirectionalLight3D.SKY_MODE_SKY_ONLY
+		var new_light: DirectionalLight3D = $DirectionalLight3D.duplicate()
+		new_light.light_energy = 0.25
+		new_light.sky_mode = DirectionalLight3D.SKY_MODE_LIGHT_ONLY
+		add_child(new_light)
+
 	camera_holder.transform.basis = Basis.from_euler(Vector3(0, rot_y, 0))
 	rotation_x.transform.basis = Basis.from_euler(Vector3(rot_x, 0, 0))
 	update_gui()
@@ -35,8 +46,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		zoom = clampf(zoom, 1.5, 4)
 
 	if event is InputEventMouseMotion and event.button_mask & MAIN_BUTTONS:
-		# Compensate motion speed to be resolution-independent (based on the window height).
-		var relative_motion: Vector2 = event.relative * DisplayServer.window_get_size().y / base_height
+		# Use `screen_relative` to make mouse sensitivity independent of viewport resolution.
+		var relative_motion: Vector2 = event.screen_relative
 		rot_y -= relative_motion.x * ROT_SPEED
 		rot_x -= relative_motion.y * ROT_SPEED
 		rot_x = clampf(rot_x, deg_to_rad(-90), 0)

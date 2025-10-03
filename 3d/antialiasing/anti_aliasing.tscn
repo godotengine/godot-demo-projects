@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://sxx5ow26t0c3" path="res://polyhaven/dutch_ship_medium_1k.gltf" id="3_fa2bl"]
 [ext_resource type="Texture2D" uid="uid://bm6eht0bqttpo" path="res://textures/paint_normal.png" id="4_fdfpv"]
 [ext_resource type="Texture2D" uid="uid://chjqieyps5n5r" path="res://textures/checker.png" id="14"]
-[ext_resource type="Script" path="res://anti_aliasing.gd" id="18"]
+[ext_resource type="Script" uid="uid://c2cf5n6btjt3k" path="res://anti_aliasing.gd" id="18"]
 
 [sub_resource type="ProceduralSkyMaterial" id="9"]
 
@@ -15,6 +15,7 @@ sky_material = SubResource("9")
 [sub_resource type="Environment" id="11"]
 background_mode = 2
 sky = SubResource("10")
+tonemap_mode = 4
 
 [sub_resource type="Animation" id="Animation_qdnt6"]
 length = 0.001
@@ -218,8 +219,8 @@ tracks/7/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ecfcr"]
 _data = {
-"RESET": SubResource("Animation_qdnt6"),
-"move": SubResource("12")
+&"RESET": SubResource("Animation_qdnt6"),
+&"move": SubResource("12")
 }
 
 [sub_resource type="StandardMaterial3D" id="13"]
@@ -395,6 +396,7 @@ emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 0.0
 emission_ring_radius = 0.25
 emission_ring_inner_radius = 0.25
+emission_ring_cone_angle = 90.0
 radial_accel_min = 2.0
 radial_accel_max = 2.0
 
@@ -458,6 +460,7 @@ void fragment() {
 render_priority = 0
 shader = SubResource("Shader_rejcs")
 shader_parameter/albedo = Color(1.2, 0.915333, 0.997134, 1)
+shader_parameter/texture_albedo = SubResource("NoiseTexture_bgiac")
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 1.0
 shader_parameter/metallic_texture_channel = null
@@ -467,7 +470,6 @@ shader_parameter/uv1_scale = Vector3(2, 2, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/texture_albedo = SubResource("NoiseTexture_bgiac")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_oopii"]
 height = 1.0
@@ -519,6 +521,7 @@ void fragment() {
 render_priority = 0
 shader = SubResource("Shader_ovufm")
 shader_parameter/albedo = Color(1.2, 1.16365, 0.85123, 1)
+shader_parameter/texture_albedo = SubResource("NoiseTexture_bgiac")
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 1.0
 shader_parameter/metallic_texture_channel = null
@@ -528,7 +531,6 @@ shader_parameter/uv1_scale = Vector3(2, 2, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/texture_albedo = SubResource("NoiseTexture_bgiac")
 
 [sub_resource type="Gradient" id="Gradient_ehij4"]
 offsets = PackedFloat32Array(0, 0.333, 0.667, 1)
@@ -540,7 +542,7 @@ script = ExtResource("18")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ecfcr")
+&"": SubResource("AnimationLibrary_ecfcr")
 }
 autoplay = "move"
 
@@ -900,10 +902,9 @@ vertical_alignment = 1
 [node name="MSAA" type="OptionButton" parent="Antialiasing/MSAAContainer"]
 custom_minimum_size = Vector2(235, 2.08165e-12)
 layout_mode = 2
-item_count = 4
 selected = 0
+item_count = 4
 popup/item_0/text = "Disabled (Fastest)"
-popup/item_0/id = 0
 popup/item_1/text = "2× (Average)"
 popup/item_1/id = 1
 popup/item_2/text = "4× (Slow)"
@@ -927,10 +928,9 @@ vertical_alignment = 1
 [node name="FXAA" type="OptionButton" parent="Antialiasing/FXAAContainer"]
 custom_minimum_size = Vector2(235, 2.08165e-12)
 layout_mode = 2
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "Disabled (Fastest)"
-popup/item_0/id = 0
 popup/item_1/text = "Enabled (Fast)"
 popup/item_1/id = 1
 
@@ -950,10 +950,9 @@ vertical_alignment = 1
 [node name="TAA" type="OptionButton" parent="Antialiasing/TAAContainer"]
 custom_minimum_size = Vector2(235, 2.08165e-12)
 layout_mode = 2
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "Disabled (Fastest)"
-popup/item_0/id = 0
 popup/item_1/text = "Enabled (Average)"
 popup/item_1/id = 1
 
@@ -972,10 +971,9 @@ vertical_alignment = 1
 [node name="VSync" type="OptionButton" parent="Antialiasing/VSyncContainer"]
 custom_minimum_size = Vector2(235, 2.08165e-12)
 layout_mode = 2
-item_count = 3
 selected = 0
+item_count = 3
 popup/item_0/text = "Disabled"
-popup/item_0/id = 0
 popup/item_1/text = "Adaptive"
 popup/item_1/id = 1
 popup/item_2/text = "Enabled"
@@ -1053,10 +1051,9 @@ text = "AMD FidelityFX Super Resolution 1.0"
 [node name="FSRSharpness" type="OptionButton" parent="Antialiasing"]
 visible = false
 layout_mode = 2
-item_count = 5
 selected = 3
+item_count = 5
 popup/item_0/text = "No FSR Sharpness"
-popup/item_0/id = 0
 popup/item_1/text = "Low FSR Sharpness"
 popup/item_1/id = 1
 popup/item_2/text = "Medium FSR Sharpness"
