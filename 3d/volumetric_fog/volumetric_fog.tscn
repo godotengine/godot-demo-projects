@@ -1,7 +1,7 @@
-[gd_scene load_steps=26 format=3 uid="uid://d1d6jy84lcpg7"]
+[gd_scene load_steps=26 format=3 uid="uid://dl0jypwqeiolm"]
 
-[ext_resource type="Script" uid="uid://dsqgladgv427l" path="res://camera.gd" id="1_mfjvp"]
-[ext_resource type="CompressedTexture3D" uid="uid://bpvy0e34otmhk" path="res://icon_outlined.png" id="2_8fjmj"]
+[ext_resource type="Script" uid="uid://ds2opc5ovcywl" path="res://camera.gd" id="1_mfjvp"]
+[ext_resource type="CompressedTexture3D" uid="uid://qej8u76pgpec" path="res://icon_outlined.png" id="2_8fjmj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fefkn"]
 sky_top_color = Color(0.568627, 0.698039, 0.807843, 1)
@@ -33,16 +33,16 @@ fractal_weighted_strength = 0.4
 domain_warp_enabled = true
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6pkhb"]
+noise = SubResource("FastNoiseLite_cjmew")
+color_ramp = SubResource("Gradient_cqs75")
 seamless = true
 as_normal_map = true
 bump_strength = 0.5
-color_ramp = SubResource("Gradient_cqs75")
-noise = SubResource("FastNoiseLite_cjmew")
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8w53i"]
-seamless = true
-color_ramp = SubResource("Gradient_cqs75")
 noise = SubResource("FastNoiseLite_cjmew")
+color_ramp = SubResource("Gradient_cqs75")
+seamless = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qrpkj"]
 albedo_color = Color(0, 0, 0, 1)
@@ -69,7 +69,7 @@ edge_fade = 2.2779e-05
 [sub_resource type="FogMaterial" id="FogMaterial_blauf"]
 density = 0.2
 emission = Color(0, 1, 0.501961, 1)
-height_falloff = 1e+06
+height_falloff = 1000000.0
 edge_fade = 2.2779e-05
 
 [sub_resource type="FogMaterial" id="FogMaterial_yvnd5"]
@@ -79,7 +79,7 @@ emission = Color(1, 0.290196, 0.419608, 1)
 [sub_resource type="FogMaterial" id="FogMaterial_gcgmm"]
 density = 0.3
 emission = Color(1, 0.290196, 0.419608, 1)
-height_falloff = 1e+06
+height_falloff = 1000000.0
 
 [sub_resource type="FogMaterial" id="FogMaterial_8xcc6"]
 density = 0.1
@@ -402,7 +402,7 @@ material = SubResource("FogMaterial_8xcc6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_avffy")
+&"": SubResource("AnimationLibrary_avffy")
 }
 autoplay = "move_fog_volume"
 

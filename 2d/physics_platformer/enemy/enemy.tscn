@@ -1,10 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://daqqtote00syu"]
+[gd_scene load_steps=14 format=3 uid="uid://dt13mo16pfgrv"]
 
-[ext_resource type="Script" uid="uid://dhnjultys4i0n" path="res://enemy/enemy.gd" id="1_hjwkx"]
-[ext_resource type="Texture2D" uid="uid://crrmmbu8k46tl" path="res://enemy/enemy.png" id="2_org2d"]
-[ext_resource type="Texture2D" uid="uid://7sv64orewgmb" path="res://player/bullet.png" id="3_7unrb"]
-[ext_resource type="AudioStream" uid="uid://cfssio7r2t7wq" path="res://audio/sound_hit.wav" id="4_5rkwm"]
-[ext_resource type="AudioStream" uid="uid://bulmr2lpb7y4h" path="res://audio/sound_explode.wav" id="5_t2e2f"]
+[ext_resource type="Script" uid="uid://n4cogbf8t5kb" path="res://enemy/enemy.gd" id="1_hjwkx"]
+[ext_resource type="Texture2D" uid="uid://dotinr3h2y7e8" path="res://enemy/enemy.png" id="2_org2d"]
+[ext_resource type="Texture2D" uid="uid://n28mue73qnk0" path="res://player/bullet.png" id="3_7unrb"]
+[ext_resource type="AudioStream" uid="uid://bndn55fcq8tml" path="res://audio/sound_hit.wav" id="4_5rkwm"]
+[ext_resource type="AudioStream" uid="uid://b8n4uv4k8trw5" path="res://audio/sound_explode.wav" id="5_t2e2f"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_eyxlk"]
 
@@ -145,13 +145,13 @@ colors = PackedColorArray(1, 1, 1, 0.501961, 0, 0, 0, 0)
 [node name="Enemy" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_eyxlk")
 lock_rotation = true
-max_contacts_reported = 4
 contact_monitor = true
+max_contacts_reported = 4
 script = ExtResource("1_hjwkx")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ay0tp")
+&"": SubResource("AnimationLibrary_ay0tp")
 }
 
 [node name="SoundExplode" type="AudioStreamPlayer2D" parent="."]
@@ -190,11 +190,11 @@ position = Vector2(11, -4.672)
 modulate = Color(1, 1, 1, 0.685843)
 emitting = false
 amount = 32
+texture = ExtResource("3_7unrb")
 lifetime = 0.5
 one_shot = true
 speed_scale = 1.2
 explosiveness = 0.76
-texture = ExtResource("3_7unrb")
 emission_shape = 1
 emission_sphere_radius = 8.0
 spread = 180.0

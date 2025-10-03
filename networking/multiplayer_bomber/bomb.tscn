@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://enwoaqi0rnei"]
+[gd_scene load_steps=9 format=3 uid="uid://3uxvvsya0q1t"]
 
-[ext_resource type="Script" uid="uid://cxr4batapdr8d" path="res://bomb.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://bdomqql6y50po" path="res://brickfloor.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://drfbkdqmj0gu2" path="res://explosion.png" id="3"]
+[ext_resource type="Script" uid="uid://btdrowbhvfuqk" path="res://bomb.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://uptqordg8d6j" path="res://brickfloor.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://d3orgoo60q80e" path="res://explosion.png" id="3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1ih13"]
 size = Vector2(16, 192)
@@ -95,10 +95,10 @@ shape = SubResource("RectangleShape2D_whso6")
 
 [node name="Explosion1" type="CPUParticles2D" parent="."]
 emitting = false
+texture = ExtResource("3")
 lifetime = 0.5
 one_shot = true
 explosiveness = 0.95
-texture = ExtResource("3")
 emission_shape = 3
 emission_rect_extents = Vector2(80, 1)
 gravity = Vector2(0, 0)
@@ -111,10 +111,10 @@ scale_amount_curve = SubResource("Curve_4yges")
 [node name="Explosion2" type="CPUParticles2D" parent="."]
 rotation = 1.57162
 emitting = false
+texture = ExtResource("3")
 lifetime = 0.5
 one_shot = true
 explosiveness = 0.95
-texture = ExtResource("3")
 emission_shape = 3
 emission_rect_extents = Vector2(80, 1)
 gravity = Vector2(0, 0)
@@ -126,7 +126,7 @@ scale_amount_curve = SubResource("Curve_4yges")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_h2w7m")
+&"": SubResource("AnimationLibrary_h2w7m")
 }
 autoplay = "anim"
 

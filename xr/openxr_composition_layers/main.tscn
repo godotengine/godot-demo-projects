@@ -1,12 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://gybusi3kmss"]
+[gd_scene load_steps=16 format=3 uid="uid://cad101esb8m7f"]
 
-[ext_resource type="Script" uid="uid://tgpixkxsqlyj" path="res://main.gd" id="1_oboy8"]
-[ext_resource type="Script" uid="uid://2rgwbv5yd5ul" path="res://start_vr.gd" id="1_xxyg6"]
-[ext_resource type="PackedScene" uid="uid://cenb0bfok13vx" path="res://ui.tscn" id="2_ee2ui"]
-[ext_resource type="Texture2D" uid="uid://rek0t7kubpx4" path="res://assets/pattern.png" id="3_l16dp"]
-[ext_resource type="Script" uid="uid://bbcqp0r7v08vm" path="res://handle_pointers.gd" id="4_211j6"]
-[ext_resource type="PackedScene" uid="uid://cl6m21y2uldtf" path="res://pointer.tscn" id="4_qvtse"]
-[ext_resource type="Shader" uid="uid://dd8oq5s11wm4g" path="res://pointer.gdshader" id="5_gtvna"]
+[ext_resource type="Script" uid="uid://jcm4ubt4a6a6" path="res://main.gd" id="1_oboy8"]
+[ext_resource type="Script" uid="uid://dhuent4huy53h" path="res://start_vr.gd" id="1_xxyg6"]
+[ext_resource type="PackedScene" uid="uid://cok4iesy3xy4p" path="res://ui.tscn" id="2_ee2ui"]
+[ext_resource type="Texture2D" uid="uid://b6hwsgvrng7mj" path="res://assets/pattern.png" id="3_l16dp"]
+[ext_resource type="Script" uid="uid://dw4n7ann56ytg" path="res://handle_pointers.gd" id="4_211j6"]
+[ext_resource type="PackedScene" uid="uid://bqyfgogehwd0u" path="res://pointer.tscn" id="4_qvtse"]
+[ext_resource type="Shader" uid="uid://d4cw344pkfeb2" path="res://pointer.gdshader" id="5_gtvna"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_401xc"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -24,7 +24,7 @@ tonemap_mode = 4
 radius = 0.02
 height = 0.04
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j0iib"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
 resource_local_to_scene = true
 resource_name = "Left hand pointer material"
 render_priority = 0
@@ -32,7 +32,7 @@ shader = ExtResource("5_gtvna")
 shader_parameter/color = Color(1, 0, 0, 0.5)
 shader_parameter/energy = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yobup"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vw27"]
 resource_local_to_scene = true
 resource_name = "Right hand pointer material"
 render_priority = 0
@@ -89,7 +89,7 @@ mesh = SubResource("SphereMesh_078nk")
 
 [node name="Pointer" parent="XROrigin3D/LeftHand" instance=ExtResource("4_qvtse")]
 visible = false
-material_override = SubResource("ShaderMaterial_j0iib")
+material_override = SubResource("ShaderMaterial_272bh")
 
 [node name="RightHand" type="XRController3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
@@ -101,7 +101,7 @@ show_when_tracked = true
 mesh = SubResource("SphereMesh_078nk")
 
 [node name="Pointer" parent="XROrigin3D/RightHand" instance=ExtResource("4_qvtse")]
-material_override = SubResource("ShaderMaterial_yobup")
+material_override = SubResource("ShaderMaterial_5vw27")
 
 [node name="OpenXRCompositionLayerEquirect" type="OpenXRCompositionLayerEquirect" parent="XROrigin3D" node_paths=PackedStringArray("layer_viewport", "controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)

@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://df7ddsoclivwe"]
+[gd_scene load_steps=13 format=3 uid="uid://d2pdvyuf6adk2"]
 
-[ext_resource type="Texture2D" uid="uid://coj0d33vyyqx1" path="res://player/bullet.webp" id="1"]
-[ext_resource type="Script" uid="uid://xb35rakv4vtt" path="res://player/bullet.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://dh5f4544n38df" path="res://player/bullet.webp" id="1"]
+[ext_resource type="Script" uid="uid://jqrff54gx4kd" path="res://player/bullet.gd" id="2"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]
 
@@ -105,9 +105,9 @@ script = ExtResource("2")
 self_modulate = Color(1, 1, 1, 0)
 material = SubResource("2")
 emitting = false
+texture = ExtResource("1")
 lifetime = 0.1
 speed_scale = 3.0
-texture = ExtResource("1")
 spread = 0.0
 gravity = Vector2(0, 0)
 color = Color(1, 1, 1, 0.705882)
@@ -131,7 +131,7 @@ autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_iv8gr")
+&"": SubResource("AnimationLibrary_iv8gr")
 }
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

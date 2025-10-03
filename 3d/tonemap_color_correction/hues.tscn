@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c52ta7ygsn7wv"]
+[gd_scene load_steps=7 format=3 uid="uid://1mex317rxrtr"]
 
-[ext_resource type="Script" uid="uid://cljtufy2vjbmv" path="res://test_scene.gd" id="1_oue8n"]
-[ext_resource type="Shader" uid="uid://bj23rrwhjw2qf" path="res://gradients/hues.gdshader" id="2_dw6v8"]
-[ext_resource type="Script" uid="uid://bd2eaaib4wnpa" path="res://gradients/gradients_controls.gd" id="4_jldl5"]
+[ext_resource type="Script" uid="uid://du6se81t8j1fe" path="res://test_scene.gd" id="1_oue8n"]
+[ext_resource type="Shader" uid="uid://buysxqtcxhhgb" path="res://gradients/hues.gdshader" id="2_dw6v8"]
+[ext_resource type="Script" uid="uid://cwvr3njje0kub" path="res://gradients/gradients_controls.gd" id="4_jldl5"]
 
 [sub_resource type="Environment" id="Environment_lqw28"]
 background_mode = 1
@@ -51,10 +51,9 @@ transform = Transform3D(1.7376, 0, 0, 0, 0.707668, 0, 0, 0, 1, 0, -0.0814103, 0)
 material_override = SubResource("ShaderMaterial_2qf08")
 mesh = SubResource("QuadMesh_06xbs")
 
-[node name="Controls" type="Node" parent="." node_paths=PackedStringArray("max_value_label", "custom_bar", "hues")]
+[node name="Controls" type="Node" parent="." node_paths=PackedStringArray("max_value_label", "hues")]
 script = ExtResource("4_jldl5")
 max_value_label = NodePath("../Label3D4")
-custom_bar = NodePath("")
 hues = NodePath("../MeshInstance3D")
 
 [node name="StepsControls" type="HBoxContainer" parent="Controls"]

@@ -1,20 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://caca4dwn1vn0x"]
+[gd_scene load_steps=2 format=3 uid="uid://htgaosirn7xo"]
 
-[ext_resource type="Script" uid="uid://dnnq2no2yndps" path="res://assets/ui/control_hints.gd" id="1"]
+[ext_resource type="Script" uid="uid://dxipulp7iqxv" path="res://assets/ui/control_hints.gd" id="1"]
 
 [node name="Overlay" type="CanvasLayer"]
 
 [node name="ControlHints" type="CenterContainer" parent="."]
+anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 200.0
 script = ExtResource("1")
 
 [node name="Label" type="Label" parent="ControlHints"]
-offset_left = 348.0
-offset_top = 25.0
-offset_right = 1251.0
-offset_bottom = 175.0
-rect_min_size = Vector2(500, 50)
+layout_mode = 2
 text = "
 Controls: WASD to move,  Space to jump,  R to reset,  Shift to walk,  T to toggle isometric controls,  C to view cube demo,  Tab to toggle hints.
 
@@ -24,5 +21,5 @@ O = Top Down,   J = Front Side,   K = Oblique Y,   L = Oblique Z
 Not every view mode is meant to be good, it's just to showcase what the system can do.
 In actual games, shadows, resizing, parallax, and other hints of depth could be added to make the world seem more 3D.
 "
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1

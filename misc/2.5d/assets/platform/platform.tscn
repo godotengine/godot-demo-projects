@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dlxl8hoiq0150"]
+[gd_scene load_steps=5 format=3 uid="uid://cb6hd4nh3m8tq"]
 
-[ext_resource type="Script" uid="uid://c05x6jnllnlcy" path="res://addons/node25d/node_25d.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://t7isjmhdc8sk" path="res://addons/node25d/icons/node_25d_icon.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://cocwocceljq4g" path="res://assets/platform/textures/forty_five.png" id="3"]
-[ext_resource type="Script" uid="uid://8mwkshvh4a54" path="res://assets/platform/platform_sprite.gd" id="4"]
+[ext_resource type="Script" uid="uid://bs0hb3m2215pl" path="res://addons/node25d/node_25d.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://nm51mxkx6iwc" path="res://assets/platform/textures/forty_five.png" id="3"]
+[ext_resource type="Script" uid="uid://126aar3nknsq" path="res://assets/platform/platform_sprite.gd" id="4"]
 
 [sub_resource type="BoxShape3D" id="1"]
 size = Vector3(10, 1, 10)
@@ -11,9 +10,6 @@ size = Vector3(10, 1, 10)
 [node name="Platform" type="Node2D"]
 z_index = -3996
 script = ExtResource("1")
-__meta__ = {
-"_editor_icon": ExtResource("2")
-}
 
 [node name="PlatformMath" type="StaticBody3D" parent="."]
 collision_layer = 1048575
@@ -21,9 +17,6 @@ collision_mask = 1048575
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlatformMath"]
 shape = SubResource("1")
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="PlatformSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

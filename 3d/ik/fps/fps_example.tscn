@@ -1,23 +1,18 @@
-[gd_scene load_steps=23 format=3 uid="uid://b04yqi3oajoyp"]
+[gd_scene load_steps=23 format=3 uid="uid://bsvnpps68mbyu"]
 
-[ext_resource type="Texture2D" uid="uid://bw3q8aq6gfuof" path="res://addons/sade/editor_gizmo_texture.png" id="1"]
-[ext_resource type="Script" uid="uid://dpsdir1qgcjff" path="res://button_change_scene.gd" id="2"]
-[ext_resource type="Script" uid="uid://bpf0c1q1kq4xf" path="res://fps/example_player.gd" id="3"]
-[ext_resource type="Script" uid="uid://tmd4ubxbhvue" path="res://addons/sade/ik_look_at.gd" id="4"]
-[ext_resource type="Script" uid="uid://cibapncyeomml" path="res://addons/sade/ik_fabrik.gd" id="6"]
-[ext_resource type="PackedScene" uid="uid://xwg4osrspnrn" path="res://fps/weapon_pistol.dae" id="8"]
+[ext_resource type="Texture2D" uid="uid://bmmjyo2eqn4vi" path="res://addons/sade/editor_gizmo_texture.png" id="1"]
+[ext_resource type="Material" uid="uid://uslxtfi8ihx7" path="res://checker_floor.mat.tres" id="1_ax0y5"]
+[ext_resource type="Script" uid="uid://c4hjxjfb7uuyw" path="res://button_change_scene.gd" id="2"]
+[ext_resource type="Script" uid="uid://bt6yld8ya1245" path="res://fps/example_player.gd" id="3"]
+[ext_resource type="Script" uid="uid://dkmb1w54c1aqw" path="res://addons/sade/ik_look_at.gd" id="4"]
+[ext_resource type="Script" uid="uid://dv4tcux2ud0t2" path="res://addons/sade/ik_fabrik.gd" id="6"]
+[ext_resource type="PackedScene" uid="uid://8ninbtmqlqyc" path="res://fps/weapon_pistol.dae" id="8"]
 [ext_resource type="Material" path="res://fps/gun_color.tres" id="9"]
-[ext_resource type="PackedScene" uid="uid://ctssefekxjogg" path="res://model/godot_battle_bot.dae" id="11"]
+[ext_resource type="PackedScene" uid="uid://41fxuoounr3" path="res://model/godot_battle_bot.dae" id="11"]
 [ext_resource type="Material" path="res://model/battle_bot_color.tres" id="12"]
 
 [sub_resource type="PlaneMesh" id="1"]
 size = Vector2(40, 40)
-
-[sub_resource type="StandardMaterial3D" id="2"]
-albedo_texture = ExtResource("1")
-roughness = 0.2
-uv1_scale = Vector3(0.25, 0.25, 0.25)
-uv1_triplanar = true
 
 [sub_resource type="BoxShape3D" id="3"]
 size = Vector3(40, 2, 40)
@@ -177,7 +172,7 @@ _data = {
 [node name="Floor" type="MeshInstance3D" parent="Level"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("1")
-surface_material_override/0 = SubResource("2")
+surface_material_override/0 = ExtResource("1_ax0y5")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Floor"]
 
@@ -388,6 +383,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="Control"]
 modulate = Color(1, 1, 1, 0.784314)
@@ -507,13 +504,13 @@ additional_rotation = Vector3(0, 0, 90)
 [node name="MiddleJoint" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos/IK_FABRIK"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.85263, -2.91316, -2.77555)
 
-[node name="Left_UpperArm" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos/IK_FABRIK"]
+[node name="Left_UpperArm2" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos/IK_FABRIK"]
 transform = Transform3D(-0.985848, -0.0154234, 0.16693, -0.0140715, 0.999858, 0.00927825, -0.167049, 0.00679813, -0.985925, 1.5529, -1.84646, -6.07288)
 
-[node name="Left_LowerArm" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos/IK_FABRIK"]
+[node name="Left_LowerArm2" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos/IK_FABRIK"]
 transform = Transform3D(-0.980952, 0.0992109, 0.167001, 0.116307, 0.988573, 0.0958931, -0.155579, 0.11349, -0.981282, 1.2349, -1.86413, -4.19466)
 
-[node name="Left_Hand" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos/IK_FABRIK"]
+[node name="Left_Hand2" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos/IK_FABRIK"]
 transform = Transform3D(-0.962426, 0.0909643, 0.255854, 0.128209, 0.982809, 0.132853, -0.23937, 0.160664, -0.957543, 0.737802, -2.14957, -1.27378)
 
 [node name="IK_FABRIK_RightArm" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos"]
@@ -521,7 +518,6 @@ script = ExtResource("6")
 skeleton_path = NodePath("../../../../../../GodotBattleBot/Armature/Skeleton3D")
 bones_in_chain = PackedStringArray("Right_UpperArm", "Right_LowerArm", "Right_Hand")
 bones_in_chain_lengths = PackedFloat32Array(1.97, 3, 0.1)
-chain_iterations = 8
 limit_chain_iterations = false
 use_middle_joint_target = true
 
@@ -539,12 +535,12 @@ additional_rotation = Vector3(0, 0, 90)
 [node name="MiddleJoint" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos/IK_FABRIK_RightArm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.73318, -2.91316, -2.77555)
 
-[node name="Right_UpperArm" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos/IK_FABRIK_RightArm"]
+[node name="Right_UpperArm2" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos/IK_FABRIK_RightArm"]
 
-[node name="Right_LowerArm" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos/IK_FABRIK_RightArm"]
+[node name="Right_LowerArm2" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos/IK_FABRIK_RightArm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.85263, -2.91316, -2.77555)
 
-[node name="Right_Hand" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos/IK_FABRIK_RightArm"]
+[node name="Right_Hand2" type="Node3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos/IK_FABRIK_RightArm"]
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="CharacterBody3D/CameraHolder/LeanPath/PathFollow3D/IK_LookAt_Chest/AimPos"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.505047, 0.268441)
@@ -558,14 +554,14 @@ bone_name = "Head"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D/CameraHolder"]
 libraries = {
-"": SubResource("AnimationLibrary_grvc3")
+&"": SubResource("AnimationLibrary_grvc3")
 }
 autoplay = "Start"
 
 [node name="Weapon" type="Node3D" parent="CharacterBody3D/CameraHolder"]
 
 [node name="Pistol" parent="CharacterBody3D/CameraHolder/Weapon" instance=ExtResource("8")]
-transform = Transform3D(0.999391, 0, -0.0348995, 0, 1, 0, 0.0348995, 0, 0.999391, -1.87015, -2.26413, 3.20654)
+transform = Transform3D(0.999391, 0, -0.0348995, 0, 1, 0, 0.0348995, 0, 0.999391, -1.8701544, -2.2641335, 3.2065377)
 
 [node name="Pistol_textured" parent="CharacterBody3D/CameraHolder/Weapon/Pistol" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

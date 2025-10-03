@@ -1,7 +1,7 @@
-[gd_scene load_steps=28 format=3 uid="uid://c657hgr7fcptm"]
+[gd_scene load_steps=28 format=3 uid="uid://c8av6e2xj4of2"]
 
-[ext_resource type="Script" uid="uid://bpwsjp2ufno2s" path="res://player/player.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://cgnjku7sa0qyt" path="res://player/gBot.png" id="2"]
+[ext_resource type="Script" uid="uid://duid74ahrjbv4" path="res://player/player.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dou15es2tcd8t" path="res://player/gBot.png" id="2"]
 
 [sub_resource type="Animation" id="1"]
 loop_mode = 1
@@ -1727,6 +1727,7 @@ animation = &"walk"
 [sub_resource type="AnimationNodeTimeScale" id="22"]
 
 [sub_resource type="AnimationNodeBlendTree" id="23"]
+nodes/output/position = Vector2(1866.67, 666.667)
 nodes/fall_animation/node = SubResource("9")
 nodes/fall_animation/position = Vector2(533.333, 973.333)
 nodes/fly_animation/node = SubResource("10")
@@ -1745,7 +1746,6 @@ nodes/land_hard/node = SubResource("16")
 nodes/land_hard/position = Vector2(1680, 666.667)
 nodes/land_hard_animation/node = SubResource("17")
 nodes/land_hard_animation/position = Vector2(1453.33, 506.667)
-nodes/output/position = Vector2(1866.67, 666.667)
 nodes/run_animation/node = SubResource("18")
 nodes/run_animation/position = Vector2(533.333, 746.667)
 nodes/run_timescale/node = SubResource("19")
@@ -1756,7 +1756,7 @@ nodes/walk_animation/node = SubResource("21")
 nodes/walk_animation/position = Vector2(533.333, 626.667)
 nodes/walk_timescale/node = SubResource("22")
 nodes/walk_timescale/position = Vector2(720, 626.667)
-node_connections = [&"jump", 0, &"state", &"jump", 1, &"jump_animation", &"land", 0, &"jump", &"land", 1, &"land_animation", &"land_hard", 0, &"land", &"land_hard", 1, &"land_hard_animation", &"output", 0, &"land_hard", &"run_timescale", 0, &"run_animation", &"state", 0, &"idle_animation", &"state", 1, &"walk_timescale", &"state", 2, &"run_timescale", &"state", 3, &"fly_animation", &"state", 4, &"fall_animation", &"walk_timescale", 0, &"walk_animation"]
+node_connections = [&"output", 0, &"land_hard", &"jump", 0, &"state", &"jump", 1, &"jump_animation", &"land", 0, &"jump", &"land", 1, &"land_animation", &"land_hard", 0, &"land", &"land_hard", 1, &"land_hard_animation", &"run_timescale", 0, &"run_animation", &"state", 0, &"idle_animation", &"state", 1, &"walk_timescale", &"state", 2, &"run_timescale", &"state", 3, &"fly_animation", &"state", 4, &"fall_animation", &"walk_timescale", 0, &"walk_animation"]
 
 [sub_resource type="RectangleShape2D" id="24"]
 size = Vector2(22, 32.8716)
@@ -1771,74 +1771,26 @@ script = ExtResource("1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_sx6h1")
+&"": SubResource("AnimationLibrary_sx6h1")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 active = false
 tree_root = SubResource("23")
 anim_player = NodePath("../AnimationPlayer")
-parameters/current_length = null
-parameters/current_position = null
-parameters/current_delta = null
-parameters/fall_animation/current_length = null
-parameters/fall_animation/current_position = null
-parameters/fall_animation/current_delta = null
-parameters/fly_animation/current_length = null
-parameters/fly_animation/current_position = null
-parameters/fly_animation/current_delta = null
-parameters/idle_animation/current_length = null
-parameters/idle_animation/current_position = null
-parameters/idle_animation/current_delta = null
-parameters/jump/current_length = 0.0
-parameters/jump/current_position = 0.0
-parameters/jump/current_delta = 0.0
 parameters/jump/active = false
 parameters/jump/internal_active = false
 parameters/jump/request = 0
-parameters/jump_animation/current_length = null
-parameters/jump_animation/current_position = null
-parameters/jump_animation/current_delta = null
-parameters/land/current_length = 0.0
-parameters/land/current_position = 0.0
-parameters/land/current_delta = 0.0
 parameters/land/active = false
 parameters/land/internal_active = false
 parameters/land/request = 0
-parameters/land_animation/current_length = null
-parameters/land_animation/current_position = null
-parameters/land_animation/current_delta = null
-parameters/land_hard/current_length = 0.0
-parameters/land_hard/current_position = 0.0
-parameters/land_hard/current_delta = 0.0
 parameters/land_hard/active = false
 parameters/land_hard/internal_active = false
 parameters/land_hard/request = 0
-parameters/land_hard_animation/current_length = null
-parameters/land_hard_animation/current_position = null
-parameters/land_hard_animation/current_delta = null
-parameters/output/current_length = null
-parameters/output/current_position = null
-parameters/output/current_delta = null
-parameters/run_animation/current_length = null
-parameters/run_animation/current_position = null
-parameters/run_animation/current_delta = null
-parameters/run_timescale/current_length = 1.0
-parameters/run_timescale/current_position = 1.0
-parameters/run_timescale/current_delta = 1.0
 parameters/run_timescale/scale = 1.0
-parameters/state/current_length = ""
-parameters/state/current_position = ""
-parameters/state/current_delta = ""
 parameters/state/current_state = "idle"
 parameters/state/transition_request = ""
 parameters/state/current_index = 0
-parameters/walk_animation/current_length = null
-parameters/walk_animation/current_position = null
-parameters/walk_animation/current_delta = null
-parameters/walk_timescale/current_length = 1.0
-parameters/walk_timescale/current_position = 1.0
-parameters/walk_timescale/current_delta = 1.0
 parameters/walk_timescale/scale = 0.1
 
 [node name="Sprite2D" type="Node2D" parent="."]
@@ -1853,7 +1805,7 @@ rest = Transform2D(1, 0, 0, 1, -3, -11)
 
 [node name="Chest" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip"]
 position = Vector2(0, -32)
-rotation = -0.0855327
+rotation = -0.08553268
 rest = Transform2D(1, 0, 0, 1, 0, -32)
 
 [node name="Head" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/Chest"]
@@ -1863,7 +1815,7 @@ rest = Transform2D(1, 0, 0, 1, 0, -160)
 
 [node name="Chin" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/Chest/Head"]
 position = Vector2(0, -49)
-rotation = -0.0435718
+rotation = -0.04357179
 rest = Transform2D(0.999999, 0.00169551, -0.00169551, 0.999999, 0, -49)
 auto_calculate_length_and_angle = false
 length = 16.0
@@ -1882,7 +1834,6 @@ rest = Transform2D(1, 0, 0, 1, -11, 97)
 [node name="RightHand" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/Chest/RightArm/RightForearm"]
 position = Vector2(13, 94)
 rotation = 1.22745
-scale = Vector2(1, 1)
 rest = Transform2D(0.336639, 0.941634, -0.941634, 0.336639, 13, 94)
 auto_calculate_length_and_angle = false
 length = 16.0
@@ -1909,6 +1860,7 @@ bone_angle = 70.4641
 [node name="LeftLeg" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip"]
 position = Vector2(-72, 26)
 rotation = 0.103217
+scale = Vector2(0.9999998, 0.9999998)
 rest = Transform2D(1, 0, 0, 1, -72, 26)
 
 [node name="LeftLowerLeg" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/LeftLeg"]
@@ -1926,6 +1878,7 @@ bone_angle = 0.0
 [node name="RightLeg" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip"]
 position = Vector2(46, 11)
 rotation = -0.755354
+scale = Vector2(0.9999999, 0.9999999)
 rest = Transform2D(1, 0, 0, 1, 46, 11)
 
 [node name="RightLowerLeg" type="Bone2D" parent="Sprite2D/Skeleton2D/Hip/RightLeg"]
