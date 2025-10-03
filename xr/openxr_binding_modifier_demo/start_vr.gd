@@ -7,7 +7,7 @@ signal pose_recentered
 @export var maximum_refresh_rate: int = 90
 
 var xr_interface: OpenXRInterface
-var xr_is_focused := false
+var xr_is_focused: bool = false
 
 
 func _ready() -> void:
@@ -43,14 +43,14 @@ func _ready() -> void:
 # Handle OpenXR session ready.
 func _on_openxr_session_begun() -> void:
 	# Get the reported refresh rate.
-	var current_refresh_rate := xr_interface.get_display_refresh_rate()
+	var current_refresh_rate: float = xr_interface.get_display_refresh_rate()
 	if current_refresh_rate > 0:
 		print("OpenXR: Refresh rate reported as ", str(current_refresh_rate))
 	else:
 		print("OpenXR: No refresh rate given by XR runtime")
 
 	# See if we have a better refresh rate available.
-	var new_rate := current_refresh_rate
+	var new_rate: float = current_refresh_rate
 	var available_rates: Array = xr_interface.get_available_display_refresh_rates()
 	if available_rates.is_empty():
 		print("OpenXR: Target does not support refresh rate extension")
@@ -98,10 +98,12 @@ func _on_openxr_focused_state() -> void:
 
 	focus_gained.emit()
 
+
 # Handle OpenXR stopping state.
 func _on_openxr_stopping() -> void:
 	# Our session is being stopped.
 	print("OpenXR is stopping")
+
 
 # Handle OpenXR pose recentered signal.
 func _on_openxr_pose_recentered() -> void:
