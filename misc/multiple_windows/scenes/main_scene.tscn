@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://8nmbmlqd6df6"]
 
-[ext_resource type="Script" path="res://scenes/main_scene.gd" id="1_nwc20"]
+[ext_resource type="Script" uid="uid://brqixlpt4am24" path="res://scenes/main_scene.gd" id="1_nwc20"]
 [ext_resource type="PackedScene" uid="uid://blbehgenpldb" path="res://scenes/window/window.tscn" id="2_ldw47"]
-[ext_resource type="Script" path="res://scenes/disable_other.gd" id="2_psh0l"]
-[ext_resource type="Script" path="res://scenes/text_field.gd" id="3_bgndp"]
+[ext_resource type="Script" uid="uid://b4ngyw7e2c75u" path="res://scenes/disable_other.gd" id="2_psh0l"]
+[ext_resource type="Script" uid="uid://evvrji8vwf5l" path="res://scenes/text_field.gd" id="3_bgndp"]
 [ext_resource type="PackedScene" uid="uid://ek1fmwy87san" path="res://scenes/draggable_window/draggable_window.tscn" id="4_diw6b"]
 [ext_resource type="PackedScene" uid="uid://dx84v67isxyjv" path="res://scenes/file_dialogue/file_dialog.tscn" id="5_f4o8g"]
 [ext_resource type="PackedScene" uid="uid://cudrukovmha7p" path="res://scenes/accept_dialogue/accept_dialog.tscn" id="6_st8be"]
@@ -135,6 +135,7 @@ tooltip_text = "Needs embed_subwindows disabled to work."
 selected = 0
 item_count = 3
 popup/item_0/text = "Empty"
+popup/item_0/id = 0
 popup/item_1/text = "Calculate via BitMap"
 popup/item_1/id = 1
 popup/item_2/text = "Rectangle"
@@ -157,6 +158,7 @@ layout_mode = 2
 selected = 4
 item_count = 5
 popup/item_0/text = "Open File"
+popup/item_0/id = 0
 popup/item_1/text = "Open Files"
 popup/item_1/id = 1
 popup/item_2/text = "Open Folder"
@@ -245,8 +247,8 @@ text = "Show Popup"
 
 [node name="PopupDescription" type="RichTextLabel" parent="HBoxContainer/VBoxContainer3"]
 layout_mode = 2
-theme_override_font_sizes/mono_font_size = 12
 theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
 bbcode_enabled = true
 text = "Popup hiding on mouse exit is handled by via [code]mouse_exited[/code] signal"
 fit_content = true

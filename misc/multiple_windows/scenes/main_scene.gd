@@ -1,17 +1,18 @@
 extends Control
 
-@onready var window : Window = $Window
-@onready var draggable_window : Window = $DraggableWindow
-@onready var file_dialog : FileDialog = $FileDialog
-@onready var file_dialog_output : TextEdit = $HBoxContainer/VBoxContainer2/FileDialogOutput
-@onready var accept_dialog : AcceptDialog = $AcceptDialog
-@onready var accept_dialog_output : TextEdit = $HBoxContainer/VBoxContainer2/AcceptOutput
-@onready var confirmation_dialog : ConfirmationDialog = $ConfirmationDialog
-@onready var confirmation_dialog_output : TextEdit = $HBoxContainer/VBoxContainer2/ConfirmationOutput
-@onready var popup : Popup = $Popup
-@onready var popup_menu : PopupMenu = $PopupMenu
-@onready var popup_menu_output : TextEdit = $HBoxContainer/VBoxContainer3/PopupMenuOutput
-@onready var popup_panel : PopupPanel = $PopupPanel
+
+@onready var window: Window = $Window
+@onready var draggable_window: Window = $DraggableWindow
+@onready var file_dialog: FileDialog = $FileDialog
+@onready var file_dialog_output: TextEdit = $HBoxContainer/VBoxContainer2/FileDialogOutput
+@onready var accept_dialog: AcceptDialog = $AcceptDialog
+@onready var accept_dialog_output: TextEdit = $HBoxContainer/VBoxContainer2/AcceptOutput
+@onready var confirmation_dialog: ConfirmationDialog = $ConfirmationDialog
+@onready var confirmation_dialog_output: TextEdit = $HBoxContainer/VBoxContainer2/ConfirmationOutput
+@onready var popup: Popup = $Popup
+@onready var popup_menu: PopupMenu = $PopupMenu
+@onready var popup_menu_output: TextEdit = $HBoxContainer/VBoxContainer3/PopupMenuOutput
+@onready var popup_panel: PopupPanel = $PopupPanel
 @onready var status_indicator: StatusIndicator = $StatusIndicator
 
 

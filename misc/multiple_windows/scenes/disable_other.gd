@@ -1,6 +1,5 @@
 extends BaseButton
 
-@export var others: Array[BaseButton] = []
 
 enum Behavior {
 	ENABLE_OTHERS_WHEN_ENABLED,
@@ -8,6 +7,8 @@ enum Behavior {
 }
 
 @export var behavior: Behavior = Behavior.ENABLE_OTHERS_WHEN_ENABLED
+@export var others: Array[BaseButton] = []
+
 
 func _ready() -> void:
 	var others_disabled: bool

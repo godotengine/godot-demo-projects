@@ -1,6 +1,8 @@
 extends StatusIndicator
 
+
 @onready var popup_menu: PopupMenu = get_node(menu)
+
 
 func _ready() -> void:
 	popup_menu.prefer_native_menu = true
