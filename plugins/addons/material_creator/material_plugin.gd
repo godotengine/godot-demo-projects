@@ -12,9 +12,16 @@
 extends EditorPlugin
 
 var io_material_dialog: Panel
+var _loader: SillyMatFormatLoader
+var _saver: SillyMatFormatSaver
 
 
 func _enter_tree() -> void:
+	_loader = SillyMatFormatLoader.new()
+	_saver = SillyMatFormatSaver.new()
+	ResourceLoader.add_resource_format_loader(_loader)
+	ResourceSaver.add_resource_format_saver(_saver)
+	
 	io_material_dialog = preload("res://addons/material_creator/material_dock.tscn").instantiate()
 	io_material_dialog.editor_interface = get_editor_interface()
 	add_control_to_dock(DOCK_SLOT_LEFT_UL, io_material_dialog)
@@ -22,3 +29,10 @@ func _enter_tree() -> void:
 
 func _exit_tree() -> void:
 	remove_control_from_docks(io_material_dialog)
+	
+	if _loader:
+		ResourceLoader.remove_resource_format_loader(_loader)
+		_loader = null
+	if _saver:
+		ResourceSaver.remove_resource_format_saver(_saver)
+		_saver = null

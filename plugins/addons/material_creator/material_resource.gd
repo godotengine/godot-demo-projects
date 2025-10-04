@@ -1,5 +1,6 @@
 @tool
 extends Resource
+class_name SillyMaterialResource
 
 # Use export to make properties visible and serializable in the inspector and for resource saving/loading.
 @export var albedo_color: Color = Color.BLACK
