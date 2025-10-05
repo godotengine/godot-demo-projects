@@ -2,13 +2,6 @@ extends Node
 
 @export var sprite: Sprite2D
 
-# Call function when updating the sprite
-#func _ready():
-	#sprite.texture_changed.connect(generate_polygon)
-	#sprite.frame_changed.connect(generate_polygon)
-	#_on_sprite_texture_changed()
-
-
 func generate_polygon():
 	# Make a bitmap out of a sprite.
 	var bitmap := BitMap.new()
