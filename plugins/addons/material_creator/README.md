@@ -14,7 +14,7 @@ https://docs.godotengine.org/en/latest/tutorials/plugins/editor/making_plugins.h
 - Save and load materials in two ways:
 	- `.silly_mat`: Custom Godot Resource type, handled by custom saver/loader
 	included in the plygin.
-	- `.mtxt`: Plain-text format. Useful for external editing or as an 
+	- `.mtxt`: Plain-text format. Useful for external editing or as an
 	interchange format.
 	- `.tres`: Standard Godot resource format (works without the custom
 	loader).
