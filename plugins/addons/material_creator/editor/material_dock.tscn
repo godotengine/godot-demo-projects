@@ -1,0 +1,151 @@
+[gd_scene load_steps=2 format=3 uid="uid://bo31028pgti5e"]
+
+[ext_resource type="Script" uid="uid://dy86u5ti4fb3m" path="res://addons/material_creator/editor/material_creator.gd" id="1"]
+
+[node name="Material Creator" type="Panel"]
+custom_minimum_size = Vector2(220, 530)
+offset_right = 220.0
+offset_bottom = 491.0
+script = ExtResource("1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 510)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AlbedoLabel" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+text = "Albedo Color:"
+
+[node name="AlbedoColorPicker" type="ColorPickerButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+color = Color(1, 1, 1, 1)
+
+[node name="MetallicLabel" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+text = "Metallic Strength:"
+
+[node name="MetallicSlider" type="HSlider" parent="VBoxContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+
+[node name="RoughnessLabel" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+text = "Roughness Strength:"
+
+[node name="RoughnessSlider" type="HSlider" parent="VBoxContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+ticks_on_borders = true
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+
+[node name="ApplyButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+tooltip_text = "Applies this material to all selected MeshInstance3D nodes."
+text = "Apply Material"
+
+[node name="SaveButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+tooltip_text = "Save a `.silly_mat_loadable` file using a custom ResourceFormatSaver or save a `.tres` using Godot's built-in ResourceFormatSaverText."
+text = "Save Material
+(ResourceFormatSaver)"
+
+[node name="ExportButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+tooltip_text = "Export a `.silly_mat_*` file using the functions on SillyMaterialResource. This works for files outside of the `res://` folder, and can be done at runtime."
+text = "Export Material
+(directly at runtime)"
+
+[node name="LoadButtonLoader" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+tooltip_text = "Load a `.silly_mat_loadable` using a custom ResourceFormatLoader or load a `.tres` using Godot's built-in ResourceFormatLoaderText."
+text = "Load Material
+(ResourceFormatLoader)"
+clip_text = true
+
+[node name="LoadButtonImporter" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+tooltip_text = "Load a `.silly_mat_importable` that was imported by an EditorImportPlugin. The loaded data actually comes from the corresponding imported file saved as `res://.godot/imported/something.silly_mat_importable-hash.res`."
+text = "Load Imported Material
+(EditorImportPlugin)"
+clip_text = true
+
+[node name="ImportButtonDirectly" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+tooltip_text = "Import a `.silly_mat_*` directly from the source file, performing an import on request instead of loading data the editor imported earlier. This ignores any editor import settings, works for files outside of the `res://` folder, and can be done at runtime."
+text = "Import Material
+(directly at runtime)"
+clip_text = true
+
+[node name="SaveMaterialDialog" type="FileDialog" parent="."]
+size = Vector2i(1000, 500)
+min_size = Vector2i(1000, 500)
+filters = PackedStringArray("*.silly_mat_loadable ; Loadable Silly Material (editable)", "*.tres ; Godot Resource (resource)")
+
+[node name="ExportMaterialDialog" type="FileDialog" parent="."]
+size = Vector2i(1000, 500)
+min_size = Vector2i(1000, 500)
+access = 2
+filters = PackedStringArray("*.silly_mat_importable ; Importable Silly Material (customizable)", "*.silly_mat_loadable ; Loadable Silly Material (editable)")
+
+[node name="LoadMaterialLoaderDialog" type="FileDialog" parent="."]
+title = "Open a File"
+size = Vector2i(1000, 500)
+min_size = Vector2i(1000, 500)
+ok_button_text = "Open"
+file_mode = 0
+filters = PackedStringArray("*.silly_mat_loadable ; Loadable Silly Material (editable)", "*.tres ; Godot Resource (resource)")
+
+[node name="LoadMaterialImporterDialog" type="FileDialog" parent="."]
+title = "Open a File"
+size = Vector2i(1000, 500)
+min_size = Vector2i(1000, 500)
+ok_button_text = "Open"
+file_mode = 0
+filters = PackedStringArray("*.silly_mat_importable ; Importable Silly Material (customizable)")
+
+[node name="ImportMaterialDirectlyDialog" type="FileDialog" parent="."]
+title = "Open a File"
+size = Vector2i(1000, 500)
+min_size = Vector2i(1000, 500)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.silly_mat_importable ; Importable Silly Material (customizable)", "*.silly_mat_loadable ; Loadable Silly Material (editable)")
+
+[connection signal="pressed" from="VBoxContainer/ApplyButton" to="." method="_on_apply_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExportButton" to="." method="_on_export_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/LoadButtonLoader" to="." method="_on_load_button_loader_pressed"]
+[connection signal="pressed" from="VBoxContainer/LoadButtonImporter" to="." method="_on_load_button_importer_pressed"]
+[connection signal="pressed" from="VBoxContainer/ImportButtonDirectly" to="." method="_on_import_button_directly_pressed"]
+[connection signal="file_selected" from="SaveMaterialDialog" to="." method="_save_or_export_file"]
+[connection signal="file_selected" from="ExportMaterialDialog" to="." method="_save_or_export_file"]
+[connection signal="file_selected" from="LoadMaterialLoaderDialog" to="." method="load_file_resource_loader"]
+[connection signal="file_selected" from="LoadMaterialImporterDialog" to="." method="load_file_resource_loader"]
+[connection signal="file_selected" from="ImportMaterialDirectlyDialog" to="." method="load_file_directly"]

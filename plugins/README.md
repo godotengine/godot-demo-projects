@@ -21,14 +21,16 @@ This project contains 4 plugins:
 * The custom node plugin shows how to create a custom node type
   using `add_custom_type`. [More info](addons/custom_node).
 
-* The material import plugin shows how to make a plugin handle importing
-  a custom file type (mtxt). [More info](addons/material_import_plugin).
-
-* The material creator plugin shows how to add a custom dock with some
-  simple functionality. [More info](addons/material_creator).
-
 * The main screen plugin is a minimal example of how to create a plugin
   with a main screen. [More info](addons/main_screen).
+
+* The material creator plugin shows how to add a custom dock with some
+  simple functionality, and shows how to create a custom Resource type
+  with custom loading, saving, importing, and exporting logic,
+  including editor integrations. [More info](addons/material_creator).
+
+* The simple import plugin shows how to make a simple plugin handle importing
+  a custom file type (mtxt). [More info](addons/simple_import_plugin).
 
 To use these plugins in another project, copy any of these
 folders to the `addons/` folder in a Godot project, and then
@@ -44,12 +46,10 @@ This can be done via the terminal: `zip -r custom_node.zip custom_node/*`
 
 ## Screenshots
 
-![Heart Plugin](screenshots/heart_plugin.png)
+![Heart Custom Node](screenshots/heart_custom_node.webp)
 
-![Main Screen Plugin](screenshots/main_screen_plugin.png)
+![Main Screen Plugin](screenshots/main_screen_plugin.webp)
 
-![Material Import Plugin](screenshots/material_import_plugin.png)
+![Material Creator Plugin](screenshots/material_creator_plugin_applied.webp)
 
-![Material Creator Plugin 1](screenshots/material_creator_plugin_1.png)
-
-![Material Creator Plugin 2](screenshots/material_creator_plugin_2.png)
+![Simple Import Plugin](screenshots/simple_import_plugin.webp)
