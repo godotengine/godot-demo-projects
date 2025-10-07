@@ -1,7 +1,10 @@
 extends Node3D
 
-var webxr_interface: XRInterface
+
+var webxr_interface: WebXRInterface
 var vr_supported: bool = false
+
+@onready var left_controller = $XROrigin3D/LeftController
 
 
 func _ready() -> void:
@@ -34,7 +37,7 @@ func _ready() -> void:
 
 
 func _webxr_session_supported(session_mode: String, supported: bool) -> void:
-	if session_mode == 'immersive-vr':
+	if session_mode == "immersive-vr":
 		vr_supported = supported
 
 
@@ -43,20 +46,20 @@ func _on_enter_vr_button_pressed() -> void:
 		OS.alert("Your browser doesn't support VR")
 		return
 
-	# We want an immersive VR session, as opposed to AR ('immersive-ar') or a
-	# simple 3DoF viewer ('viewer').
-	webxr_interface.session_mode = 'immersive-vr'
-	# 'bounded-floor' is room scale, 'local-floor' is a standing or sitting
+	# We want an immersive VR session, as opposed to AR ("immersive-ar") or a
+	# simple 3DoF viewer ("viewer").
+	webxr_interface.session_mode = "immersive-vr"
+	# "bounded-floor" is room scale, "local-floor" is a standing or sitting
 	# experience (it puts you 1.6m above the ground if you have 3DoF headset),
-	# whereas as 'local' puts you down at the XROrigin3D.
-	# This list means it'll first try to request 'bounded-floor', then
-	# fallback on 'local-floor' and ultimately 'local', if nothing else is
+	# whereas as "local" puts you down at the XROrigin3D.
+	# This list means it"ll first try to request "bounded-floor", then
+	# fallback on "local-floor" and ultimately "local", if nothing else is
 	# supported.
-	webxr_interface.requested_reference_space_types = 'bounded-floor, local-floor, local'
-	# In order to use 'local-floor' or 'bounded-floor' we must also
+	webxr_interface.requested_reference_space_types = "bounded-floor, local-floor, local"
+	# In order to use "local-floor" or "bounded-floor" we must also
 	# mark the features as required or optional.
-	webxr_interface.required_features = 'local-floor'
-	webxr_interface.optional_features = 'bounded-floor'
+	webxr_interface.required_features = "local-floor"
+	webxr_interface.optional_features = "bounded-floor"
 
 	# This will return false if we're unable to even request the session,
 	# however, it can still fail asynchronously later in the process, so we
@@ -73,7 +76,7 @@ func _webxr_session_started() -> void:
 	get_viewport().use_xr = true
 	# This will be the reference space type you ultimately got, out of the
 	# types that you requested above. This is useful if you want the game to
-	# work a little differently in 'bounded-floor' versus 'local-floor'.
+	# work a little differently in "bounded-floor" versus "local-floor".
 	print("Reference space type: " + webxr_interface.reference_space_type)
 	# This will be the list of features that were successfully enabled
 	# (except on browsers that don't support this property).
@@ -100,7 +103,7 @@ func _on_left_controller_button_released(button: String) -> void:
 
 
 func _process(_delta: float) -> void:
-	var thumbstick_vector: Vector2 = $XROrigin3D/LeftController.get_vector2("thumbstick")
+	var thumbstick_vector: Vector2 = left_controller.get_vector2(&"thumbstick")
 	if thumbstick_vector != Vector2.ZERO:
 		print("Left thumbstick position: " + str(thumbstick_vector))
 
@@ -108,8 +111,8 @@ func _process(_delta: float) -> void:
 func _webxr_on_select(input_source_id: int) -> void:
 	print("Select: " + str(input_source_id))
 
-	var tracker: XRPositionalTracker = webxr_interface.get_input_source_tracker(input_source_id)
-	var xform = tracker.get_pose('default').transform
+	var tracker: XRControllerTracker = webxr_interface.get_input_source_tracker(input_source_id)
+	var xform: Transform3D = tracker.get_pose(&"default").transform
 	print(xform.origin)
 
 
