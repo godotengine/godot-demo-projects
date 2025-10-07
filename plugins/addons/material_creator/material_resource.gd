@@ -1,15 +1,14 @@
 @tool
-extends Node
-# NOTE: In theory, this would extend from Resource, but until saving and loading resources
-# works in Godot, we'll stick with extending from Node and using JSON files to save/load data.
-#
-# See `material_import.gd` for more information.
+extends Resource
+class_name SillyMaterialResource
 
-var albedo_color := Color.BLACK
-var metallic_strength := 0.0
-var roughness_strength := 0.0
+# Use export to make properties visible and serializable in the inspector and for resource saving/loading.
+@export var albedo_color: Color = Color.BLACK
+@export var metallic_strength: float = 0.0
+@export var roughness_strength: float = 0.0
 
 
+# Create a StandardMaterial3D from the resource's properties.
 # Convert our data into an dictionary so we can convert it
 # into the JSON format.
 func make_json() -> String:
@@ -41,10 +40,8 @@ func from_json(json_dict_as_string: String) -> void:
 
 # Make a StandardMaterial3D using our variables.
 func make_material() -> StandardMaterial3D:
-	var material := StandardMaterial3D.new()
-
-	material.albedo_color = albedo_color
-	material.metallic = metallic_strength
-	material.roughness = roughness_strength
-
-	return material
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = albedo_color
+	mat.metallic = metallic_strength
+	mat.roughness = roughness_strength
+	return mat
