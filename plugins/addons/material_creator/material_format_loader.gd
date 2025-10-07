@@ -27,11 +27,11 @@ func _load(path: String, original_path: String, use_sub_threads, cache_mode):
 	var mat_file = FileAccess.open(path, FileAccess.READ)
 	if mat_file == null:
 		return ERR_CANT_OPEN
-	
+
 	# Check header line to validate file format version.
 	if mat_file.get_line() != "SILLY_MAT v1":
 		return ERR_PARSE_ERROR
-	
+
 	# Create and Fill SillyMaterialResource
 	var mat_res: SillyMaterialResource = SillyMaterialResource.new()
 	mat_res.albedo_color = Color(mat_file.get_line())
