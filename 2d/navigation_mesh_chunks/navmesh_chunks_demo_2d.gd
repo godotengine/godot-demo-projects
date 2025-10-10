@@ -32,11 +32,11 @@ func _ready() -> void:
 
 	# Add an outline to define the traversable surface that the parsed collision shapes can "cut" into.
 	var traversable_outline: PackedVector2Array = PackedVector2Array([
-		Vector2(0.0, 0.0),
-		Vector2(1920.0, 0.0),
-		Vector2(1920.0, 1080.0),
-		Vector2(0.0, 1080.0),
-	])
+			Vector2(0.0, 0.0),
+			Vector2(1920.0, 0.0),
+			Vector2(1920.0, 1080.0),
+			Vector2(0.0, 1080.0),
+		])
 	source_geometry.add_traversable_outline(traversable_outline)
 
 	create_region_chunks(%ChunksContainer, source_geometry, chunk_size * cell_size, agent_radius)
@@ -49,21 +49,21 @@ static func create_region_chunks(chunks_root_node: Node, p_source_geometry: Navi
 
 	# Rasterize bounding box into chunk grid to know range of required chunks.
 	var start_chunk: Vector2 = floor(
-		input_geometry_bounds.position / p_chunk_size
-	)
+			input_geometry_bounds.position / p_chunk_size
+		)
 	var end_chunk: Vector2 = floor(
-		(input_geometry_bounds.position + input_geometry_bounds.size)
-		/ p_chunk_size
-	)
+			(input_geometry_bounds.position + input_geometry_bounds.size)
+			/ p_chunk_size
+		)
 
 	for chunk_y in range(start_chunk.y, end_chunk.y + 1):
 		for chunk_x in range(start_chunk.x, end_chunk.x + 1):
 			var chunk_id: Vector2i = Vector2i(chunk_x, chunk_y)
 
 			var chunk_bounding_box: Rect2 = Rect2(
-				Vector2(chunk_x, chunk_y) * p_chunk_size,
-				Vector2(p_chunk_size, p_chunk_size),
-			)
+					Vector2(chunk_x, chunk_y) * p_chunk_size,
+					Vector2(p_chunk_size, p_chunk_size),
+				)
 			# We grow the chunk bounding box to include geometry
 			# from all the neighbor chunks so edges can align.
 			# The border size is the same value as our grow amount so
@@ -103,9 +103,9 @@ func _process(_delta: float) -> void:
 		return
 
 	var closest_point_on_navmesh: Vector2 = NavigationServer2D.map_get_closest_point(
-		map,
-		mouse_cursor_position
-	)
+			map,
+			mouse_cursor_position
+		)
 
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		path_start_position = closest_point_on_navmesh

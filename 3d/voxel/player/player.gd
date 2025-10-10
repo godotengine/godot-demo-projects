@@ -62,7 +62,7 @@ func _process(_delta: float) -> void:
 		aim_preview.global_position = Vector3(ray_current_block_position) + Vector3(0.5, 0.5, 0.5)
 		var breaking := Input.is_action_just_pressed(&"break")
 		var placing := Input.is_action_just_pressed(&"place")
-		# Either both buttons were pressed or neither are, so stop.
+		# Either both buttons were pressed or neither is, so stop.
 		if breaking == placing:
 			return
 
@@ -87,7 +87,7 @@ func _physics_process(delta: float) -> void:
 	head.transform.origin.y = lerpf(head.transform.origin.y, EYE_HEIGHT_CROUCH if crouching else EYE_HEIGHT_STAND, 1.0 - exp(-delta * 16.0))
 
 	# Keyboard movement.
-	var movement_vec2: Vector2 = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	var movement_vec2: Vector2 = Input.get_vector(&"move_left", &"move_right", &"move_forward", &"move_back")
 	var movement: Vector3 = transform.basis * (Vector3(movement_vec2.x, 0, movement_vec2.y))
 
 	if is_on_floor():

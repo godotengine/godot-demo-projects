@@ -69,5 +69,6 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			_jumping = false
 			_velocity.y = 0.0
 
+
 func is_on_floor() -> bool:
 	return _on_floor

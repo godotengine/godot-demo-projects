@@ -41,10 +41,10 @@ func _ready() -> void:
 	# Get our texture from our material so we set our RID.
 	var material: ShaderMaterial = $MeshInstance3D.material_override
 	if material:
-		material.set_shader_parameter("effect_texture_size", texture_size)
+		material.set_shader_parameter(&"effect_texture_size", texture_size)
 
 		# Get our texture object.
-		texture = material.get_shader_parameter("effect_texture")
+		texture = material.get_shader_parameter(&"effect_texture")
 
 
 func _exit_tree() -> void:
@@ -173,10 +173,10 @@ func _initialize_compute_code(init_with_texture_size: Vector2i) -> void:
 	tf.array_layers = 1
 	tf.mipmaps = 1
 	tf.usage_bits = (
-		RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT |
-		RenderingDevice.TEXTURE_USAGE_STORAGE_BIT |
-		RenderingDevice.TEXTURE_USAGE_CAN_COPY_TO_BIT
-	)
+			RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT |
+			RenderingDevice.TEXTURE_USAGE_STORAGE_BIT |
+			RenderingDevice.TEXTURE_USAGE_CAN_COPY_TO_BIT
+		)
 
 	for i in 3:
 		# Create our texture.

@@ -40,5 +40,5 @@ func set_target_position(target_position: Vector3) -> void:
 				start_position,
 				target_position,
 				optimize
-		)
+			)
 		_nav_path_line.draw_path(path)

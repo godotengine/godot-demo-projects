@@ -54,7 +54,7 @@ func set_health(p_health: int) -> void:
 		$HealthBarBackground.outline_modulate = Color(0.15, 0.2, 0.15)
 		$HealthBarBackground.modulate = Color(0.15, 0.2, 0.15)
 
-	# Construct an health bar with `|` symbols brought very close to each other using
+	# Construct a health bar with `|` symbols brought very close to each other using
 	# a custom FontVariation on the HealthBarForeground and HealthBarBackground nodes.
 	var bar_text := ""
 	var bar_text_bg := ""

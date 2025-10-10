@@ -36,7 +36,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if not result.is_empty():
 			var decal := preload("res://decal.tscn").instantiate()
 			add_child(decal)
-			decal.get_node("Decal").modulate = Color(1.0,0.0,0)
+			decal.get_node(^"Decal").modulate = Color(1.0,0.0,0)
 			decal.position = result["position"]
 			decal.transform.basis = camera.global_transform.basis
 

@@ -9,7 +9,7 @@ For more information, see this documentation article:
 https://docs.godotengine.org/en/latest/tutorials/plugins/editor/making_plugins.html#a-custom-dock
 
 ## Features
-- Adjust albedo color, metallic and rouphness values interactively.
+- Adjust albedo color, metallic, and rouphness values interactively.
 - Apply the generated material to selected 3D nodes in the editor.
 - Save and load materials in two ways:
 	- `.silly_mat`: Custom Godot Resource type, handled by custom saver/loader

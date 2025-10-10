@@ -14,7 +14,7 @@ const TERMINAL_VELOCITY = 700
 ## Used to separate controls for multiple players in splitscreen.
 @export var action_suffix := ""
 
-var gravity: int = ProjectSettings.get("physics/2d/default_gravity")
+var gravity: int = ProjectSettings.get(&"physics/2d/default_gravity")
 @onready var platform_detector := $PlatformDetector as RayCast2D
 @onready var animation_player := $AnimationPlayer as AnimationPlayer
 @onready var shoot_timer := $ShootAnimation as Timer

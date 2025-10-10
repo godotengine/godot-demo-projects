@@ -21,16 +21,16 @@ func _draw() -> void:
 		# Get the glyph index of the character we've just drawn, so we can retrieve the glyph advance.
 		# This determines the spacing between glyphs so the next character is positioned correctly.
 		var glyph_idx := TextServerManager.get_primary_interface().font_get_glyph_index(
-					get_theme_default_font().get_rids()[0],
-					FONT_SIZE,
-					character.unicode_at(0),
-					0
-		)
+				get_theme_default_font().get_rids()[0],
+				FONT_SIZE,
+				character.unicode_at(0),
+				0
+			)
 		advance.x += TextServerManager.get_primary_interface().font_get_glyph_advance(
 				get_theme_default_font().get_rids()[0],
 				FONT_SIZE,
 				glyph_idx
-		).x
+			).x
 
 	offset += Vector2(0, 32)
 	# When drawing a font outline, it must be drawn *before* the main text.
@@ -44,7 +44,7 @@ func _draw() -> void:
 			FONT_SIZE,
 			12,
 			Color.ORANGE.darkened(0.6)
-	)
+		)
 	# NOTE: Use `draw_multiline_string()` to draw strings that contain line breaks (`\n`) or with
 	# automatic line wrapping based on the specified width.
 	# A width of `-1` is used here, which means "no limit". If width is limited, the end of the string
@@ -57,4 +57,4 @@ func _draw() -> void:
 			-1,
 			FONT_SIZE,
 			Color.YELLOW
-	)
+		)

@@ -9,7 +9,7 @@ var logger := CustomLogger.new()
 # called successfully otherwise.
 class CustomLogger extends Logger:
 	func _log_message(message: String, _error: bool) -> void:
-		CustomLoggerUI.get_node("Panel/RichTextLabel").call_deferred(&"append_text", message)
+		CustomLoggerUI.get_node(^"Panel/RichTextLabel").call_deferred(&"append_text", message)
 
 
 	func _log_error(
@@ -46,16 +46,16 @@ class CustomLogger extends Logger:
 		for backtrace in script_backtraces:
 			script_backtraces_text += backtrace.format(trace_indent - 3) + "\n"
 
-		CustomLoggerUI.get_node("Panel/RichTextLabel").call_deferred(
+		CustomLoggerUI.get_node(^"Panel/RichTextLabel").call_deferred(
 				&"append_text",
 				"%s %s %s[/color]\n[color=#999]%s[/color]\n[color=#999]%s[/color]" % [
-					prefix,
-					code,
-					rationale,
-					trace,
-					script_backtraces_text,
-				]
-		)
+						prefix,
+						code,
+						rationale,
+						trace,
+						script_backtraces_text,
+					]
+			)
 
 
 # Use `_init()` to register the logger as early as possible, which ensures that messages

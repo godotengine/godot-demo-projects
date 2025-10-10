@@ -13,21 +13,21 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Make the slider follow the day/night cycle.
 	$Panel/MarginContainer/VBoxContainer/TimeOfDay/HSlider.value = $AnimationPlayer.current_animation_position
-	$WorldEnvironment.environment.sky.sky_material.set_shader_parameter("cloud_time_offset", $AnimationPlayer.current_animation_position)
+	$WorldEnvironment.environment.sky.sky_material.set_shader_parameter(&"cloud_time_offset", $AnimationPlayer.current_animation_position)
 
 	$YawCamera/Camera3D.fov = lerpf($YawCamera/Camera3D.fov, desired_fov, 1.0 - exp(-delta * 10.0))
 
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("toggle_gui"):
+	if event.is_action_pressed(&"toggle_gui"):
 		$Panel.visible = not $Panel.visible
 		$Help.visible = not $Help.visible
 
-	if event.is_action_pressed("toggle_spheres"):
+	if event.is_action_pressed(&"toggle_spheres"):
 		$Spheres.visible = not $Spheres.visible
 
-	if event.is_action_pressed("toggle_mouse_capture"):
+	if event.is_action_pressed(&"toggle_mouse_capture"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
@@ -40,9 +40,9 @@ func _input(event: InputEvent) -> void:
 		$YawCamera.rotation.y -= relative_motion.x * MOUSE_SENSITIVITY
 
 	# Mouse wheel currently doesn't work in input actions. Hardcode mouse wheel as a workaround.
-	if event.is_action_pressed("increase_camera_fov") or Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_DOWN):
+	if event.is_action_pressed(&"increase_camera_fov") or Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_DOWN):
 		desired_fov = clampf(desired_fov + 5.0, 20.0, 120.0)
-	if event.is_action_pressed("decrease_camera_fov") or Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_UP):
+	if event.is_action_pressed(&"decrease_camera_fov") or Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_UP):
 		desired_fov = clampf(desired_fov - 5.0, 20.0, 120.0)
 
 
@@ -81,12 +81,12 @@ func update_speed_label() -> void:
 
 
 func _on_cloud_coverage_value_changed(value: float) -> void:
-	$WorldEnvironment.environment.sky.sky_material.set_shader_parameter("cloud_coverage", value)
+	$WorldEnvironment.environment.sky.sky_material.set_shader_parameter(&"cloud_coverage", value)
 	$Panel/MarginContainer/VBoxContainer/Clouds/CoverageValue.text = "%d%%" % (value * 100)
 
 
 func _on_cloud_density_value_changed(value: float) -> void:
-	$WorldEnvironment.environment.sky.sky_material.set_shader_parameter("cloud_density", value)
+	$WorldEnvironment.environment.sky.sky_material.set_shader_parameter(&"cloud_density", value)
 	$Panel/MarginContainer/VBoxContainer/Clouds/DensityValue.text = "%d%%" % (value * 100)
 
 

@@ -17,7 +17,7 @@ const MAIN_BUTTONS = MOUSE_BUTTON_MASK_LEFT | MOUSE_BUTTON_MASK_MIDDLE | MOUSE_B
 func _ready() -> void:
 	if OS.has_feature("double"):
 		%HelpLabel.text = "Double precision is enabled in this engine build.\nNo shaking should occur at high coordinate levels\n(±65,536 or more on any axis)."
-		%HelpLabel.add_theme_color_override("font_color", Color(0.667, 1, 0.667))
+		%HelpLabel.add_theme_color_override(&"font_color", Color(0.667, 1, 0.667))
 
 
 func _process(delta: float) -> void:

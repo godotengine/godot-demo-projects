@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 	if (ball_pos.y < 0 and direction.y < 0) or (ball_pos.y > screen_size.y and direction.y > 0):
 		direction.y = -direction.y
 
-	# Flip, change direction and increase speed when touching pads.
+	# Flip, change direction, and increase speed when touching pads.
 	if (left_rect.has_point(ball_pos) and direction.x < 0) or (right_rect.has_point(ball_pos) and direction.x > 0):
 		direction.x = -direction.x
 		ball_speed *= 1.1

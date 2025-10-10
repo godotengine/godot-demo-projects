@@ -19,7 +19,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				get_world_3d().navigation_map,
 				camera_ray_start,
 				camera_ray_end
-		)
+			)
 		_robot.set_target_position(closest_point_on_navmesh)
 
 	elif event is InputEventMouseMotion:

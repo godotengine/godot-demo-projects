@@ -6,7 +6,7 @@ func _enter_tree() -> void:
 		get_tree().set_multiplayer(
 				MultiplayerAPI.create_default_interface(),
 				NodePath("%s/VBoxContainer/Clients/%s" % [get_path(), c.name])
-		)
+			)
 
 
 func _ready() -> void:

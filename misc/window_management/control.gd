@@ -29,6 +29,7 @@ func _ready() -> void:
 	if DisplayServer.get_screen_count() > 1:
 		$Labels/Label_Screen1_RefreshRate.text = "Screen1 Refresh Rate: %.2f Hz" % DisplayServer.screen_get_refresh_rate(1)
 
+
 func _physics_process(_delta: float) -> void:
 	var modetext := "Mode: "
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
@@ -111,40 +112,40 @@ func _input(event: InputEvent) -> void:
 
 func check_wm_api() -> bool:
 	var s := ""
-	if not DisplayServer.has_method("get_screen_count"):
+	if not DisplayServer.has_method(&"get_screen_count"):
 		s += " - get_screen_count()\n"
-	if not DisplayServer.has_method("window_get_current_screen"):
+	if not DisplayServer.has_method(&"window_get_current_screen"):
 		s += " - window_get_current_screen()\n"
-	if not DisplayServer.has_method("window_set_current_screen"):
+	if not DisplayServer.has_method(&"window_set_current_screen"):
 		s += " - window_set_current_screen()\n"
-	if not DisplayServer.has_method("screen_get_position"):
+	if not DisplayServer.has_method(&"screen_get_position"):
 		s += " - screen_get_position()\n"
-	if not DisplayServer.has_method("window_get_size"):
+	if not DisplayServer.has_method(&"window_get_size"):
 		s += " - window_get_size()\n"
-	if not DisplayServer.has_method("window_get_position"):
+	if not DisplayServer.has_method(&"window_get_position"):
 		s += " - window_get_position()\n"
-	if not DisplayServer.has_method("window_set_position"):
+	if not DisplayServer.has_method(&"window_set_position"):
 		s += " - window_set_position()\n"
-	if not DisplayServer.has_method("window_get_size"):
+	if not DisplayServer.has_method(&"window_get_size"):
 		s += " - get_window_size()\n"
-	if not DisplayServer.has_method("window_set_size"):
+	if not DisplayServer.has_method(&"window_set_size"):
 		s += " - window_set_size()\n"
 # These function are no longer and this is set through flags!
-#	if not DisplayServer.has_method("set_window_fullscreen"):
+#	if not DisplayServer.has_method(&"set_window_fullscreen"):
 #		s += " - set_window_fullscreen()\n"
-#	if not DisplayServer.window_get_flag() OS.has_method("is_window_fullscreen"):
+#	if not DisplayServer.window_get_flag() OS.has_method(&"is_window_fullscreen"):
 #		s += " - is_window_fullscreen()\n"
-#	if not OS.has_method("set_window_resizable"):
+#	if not OS.has_method(&"set_window_resizable"):
 #		s += " - set_window_resizable()\n"
-#	if not OS.has_method("is_window_resizable"):
+#	if not OS.has_method(&"is_window_resizable"):
 #		s += " - is_window_resizable()\n"
-#	if not OS.has_method("set_window_minimized"):
+#	if not OS.has_method(&"set_window_minimized"):
 #		s += " - set_window_minimized()\n"
-#	if not OS.has_method("is_window_minimized"):
+#	if not OS.has_method(&"is_window_minimized"):
 #		s += " - is_window_minimized()\n"
-#	if not OS.has_method("set_window_maximized"):
+#	if not OS.has_method(&"set_window_maximized"):
 #		s += " - set_window_maximized()\n"
-#	if not OS.has_method("is_window_maximized"):
+#	if not OS.has_method(&"is_window_maximized"):
 #		s += " - is_window_maximized()\n"
 
 	if s.length() == 0:
@@ -210,6 +211,7 @@ func _on_button_mouse_mode_hidden_pressed() -> void:
 func _on_button_mouse_mode_captured_pressed() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	observer.state = observer.State.GRAB
+
 
 func _on_button_mouse_mode_confined_pressed() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED

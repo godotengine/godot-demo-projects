@@ -226,26 +226,26 @@ static func calculate_block_uvs(block_id: int) -> Array[Vector2]:
 	var col := block_id % TEXTURE_SHEET_WIDTH
 
 	return [
-		# Godot 4 has a weird bug where there are seams at the edge
-		# of the textures. Adding a margin of 0.01 "fixes" it.
-		TEXTURE_TILE_SIZE * Vector2(col + 0.01, row + 0.01),
-		TEXTURE_TILE_SIZE * Vector2(col + 0.01, row + 0.99),
-		TEXTURE_TILE_SIZE * Vector2(col + 0.99, row + 0.01),
-		TEXTURE_TILE_SIZE * Vector2(col + 0.99, row + 0.99),
-	]
+			# Godot 4 has a weird bug where there are seams at the edge
+			# of the textures. Adding a margin of 0.01 "fixes" it.
+			TEXTURE_TILE_SIZE * Vector2(col + 0.01, row + 0.01),
+			TEXTURE_TILE_SIZE * Vector2(col + 0.01, row + 0.99),
+			TEXTURE_TILE_SIZE * Vector2(col + 0.99, row + 0.01),
+			TEXTURE_TILE_SIZE * Vector2(col + 0.99, row + 0.99),
+		]
 
 
 static func calculate_block_verts(block_position: Vector3) -> Array[Vector3]:
 	return [
-		Vector3(block_position.x, block_position.y, block_position.z),
-		Vector3(block_position.x, block_position.y, block_position.z + 1),
-		Vector3(block_position.x, block_position.y + 1, block_position.z),
-		Vector3(block_position.x, block_position.y + 1, block_position.z + 1),
-		Vector3(block_position.x + 1, block_position.y, block_position.z),
-		Vector3(block_position.x + 1, block_position.y, block_position.z + 1),
-		Vector3(block_position.x + 1, block_position.y + 1, block_position.z),
-		Vector3(block_position.x + 1, block_position.y + 1, block_position.z + 1),
-	]
+			Vector3(block_position.x, block_position.y, block_position.z),
+			Vector3(block_position.x, block_position.y, block_position.z + 1),
+			Vector3(block_position.x, block_position.y + 1, block_position.z),
+			Vector3(block_position.x, block_position.y + 1, block_position.z + 1),
+			Vector3(block_position.x + 1, block_position.y, block_position.z),
+			Vector3(block_position.x + 1, block_position.y, block_position.z + 1),
+			Vector3(block_position.x + 1, block_position.y + 1, block_position.z),
+			Vector3(block_position.x + 1, block_position.y + 1, block_position.z + 1),
+		]
 
 
 static func is_block_transparent(block_id: int) -> int:

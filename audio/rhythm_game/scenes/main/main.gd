@@ -41,7 +41,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("restart"):
+	if Input.is_action_just_pressed(&"restart"):
 		get_tree().reload_current_scene()
 	$Control/ErrorGraphVBox/CenterContainer/TimeGraph.queue_redraw()
 
@@ -112,8 +112,8 @@ func _on_note_hit(beat: float, hit_type: Enums.HitType, hit_error: float) -> voi
 		_judgment_tween.kill()
 	_judgment_tween = create_tween()
 	_judgment_tween.tween_interval(0.2)
-	_judgment_tween.tween_property($Control/JudgmentHBox/LJudgmentLabel, "modulate:a", 0, 0.5)
-	_judgment_tween.parallel().tween_property($Control/JudgmentHBox/RJudgmentLabel, "modulate:a", 0, 0.5)
+	_judgment_tween.tween_property($Control/JudgmentHBox/LJudgmentLabel, ^"modulate:a", 0, 0.5)
+	_judgment_tween.parallel().tween_property($Control/JudgmentHBox/RJudgmentLabel, ^"modulate:a", 0, 0.5)
 
 	_hit_data.append(NoteHitData.new(beat, hit_type, hit_error))
 	$Control/ErrorGraphVBox/CenterContainer/JudgmentsGraph.queue_redraw()

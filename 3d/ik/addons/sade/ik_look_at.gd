@@ -6,7 +6,7 @@ extends Node3D
 		# Assign skeleton_path to whatever value is passed.
 		skeleton_path = value
 		# Because get_node doesn't work in the first call, we just want to assign instead.
-		# This is to get around a issue with NodePaths exposed to the editor.
+		# This is to get around an issue with NodePaths exposed to the editor.
 		if first_call:
 			return
 		_setup_skeleton_path()
@@ -158,9 +158,9 @@ func update_skeleton():
 		var additional_bone_id = skeleton_to_use.find_bone(additional_bone_name)
 		var additional_bone_pos = skeleton_to_use.get_bone_global_pose(additional_bone_id)
 		rest.origin = (
-			additional_bone_pos.origin
-			- additional_bone_pos.basis.z.normalized() * additional_bone_length
-		)
+				additional_bone_pos.origin
+				- additional_bone_pos.basis.z.normalized() * additional_bone_length
+			)
 
 	# Finally, apply the new rotation to the bone in the skeleton.
 	skeleton_to_use.set_bone_global_pose_override(bone, rest, interpolation, true)

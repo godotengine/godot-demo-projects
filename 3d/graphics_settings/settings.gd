@@ -35,7 +35,7 @@ func _ready() -> void:
 		mark_as_unsupported(%SSReflectionsOptionButton)
 		mark_as_unsupported(%SSILOptionButton)
 		mark_as_unsupported(%VolumetricFogOptionButton)
-		# Darken lights's energy to compensate for sRGB blending (without affecting sky rendering).
+		# Darken lights' energy to compensate for sRGB blending (without affecting sky rendering).
 		$Node3D/OmniLight3D.light_energy = 0.5
 		$Node3D/SpotLight3D.light_energy = 0.5
 		$Node3D/DirectionalLight3D.sky_mode = DirectionalLight3D.SKY_MODE_SKY_ONLY
@@ -59,7 +59,7 @@ func _process(delta: float) -> void:
 	fps_label.text = "%d FPS (%.2f mspf)" % [Engine.get_frames_per_second(), 1000.0 / Engine.get_frames_per_second()]
 	# Color FPS counter depending on framerate.
 	# The Gradient resource is stored as metadata within the FPSLabel node (accessible in the inspector).
-	fps_label.modulate = fps_label.get_meta("gradient").sample(remap(Engine.get_frames_per_second(), 0, 180, 0.0, 1.0))
+	fps_label.modulate = fps_label.get_meta(&"gradient").sample(remap(Engine.get_frames_per_second(), 0, 180, 0.0, 1.0))
 
 
 func update_resolution_label() -> void:
@@ -174,7 +174,7 @@ func _on_fxaa_option_button_item_selected(index: int) -> void:
 
 
 func _on_fullscreen_option_button_item_selected(index: int) -> void:
-	# To change between window, fullscreen and other window modes,
+	# To change between window, fullscreen, and other window modes,
 	# set the root mode to one of the options of Window.MODE_*.
 	# Other modes are maximized and minimized.
 	if index == 0: # Disabled (default)

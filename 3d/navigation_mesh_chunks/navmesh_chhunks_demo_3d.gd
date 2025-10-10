@@ -40,12 +40,12 @@ static func create_region_chunks(chunks_root_node: Node, p_source_geometry: Navi
 
 	# Rasterize bounding box into chunk grid to know range of required chunks.
 	var start_chunk: Vector3 = floor(
-		input_geometry_bounds.position / p_chunk_size
-	)
+			input_geometry_bounds.position / p_chunk_size
+		)
 	var end_chunk: Vector3 = floor(
-		(input_geometry_bounds.position + input_geometry_bounds.size)
-		/ p_chunk_size
-	)
+			(input_geometry_bounds.position + input_geometry_bounds.size)
+			/ p_chunk_size
+		)
 
 	# NavigationMesh.border_size is limited to the xz-axis.
 	# So we can only bake one chunk for the y-axis and also
@@ -61,9 +61,9 @@ static func create_region_chunks(chunks_root_node: Node, p_source_geometry: Navi
 			var chunk_id: Vector3i = Vector3i(chunk_x, chunk_y, chunk_z)
 
 			var chunk_bounding_box: AABB = AABB(
-				Vector3(chunk_x, bounds_min_height, chunk_z) * p_chunk_size,
-				Vector3(p_chunk_size, bounds_max_height, p_chunk_size),
-			)
+					Vector3(chunk_x, bounds_min_height, chunk_z) * p_chunk_size,
+					Vector3(p_chunk_size, bounds_max_height, p_chunk_size),
+				)
 			# We grow the chunk bounding box to include geometry
 			# from all the neighbor chunks so edges can align.
 			# The border size is the same value as our grow amount so
@@ -109,10 +109,10 @@ func _process(_delta: float) -> void:
 	var camera_ray_start: Vector3 = camera.project_ray_origin(mouse_cursor_position)
 	var camera_ray_end: Vector3 = camera_ray_start + camera.project_ray_normal(mouse_cursor_position) * camera_ray_length
 	var closest_point_on_navmesh: Vector3 = NavigationServer3D.map_get_closest_point_to_segment(
-		map,
-		camera_ray_start,
-		camera_ray_end
-	)
+			map,
+			camera_ray_start,
+			camera_ray_end
+		)
 
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		path_start_position = closest_point_on_navmesh

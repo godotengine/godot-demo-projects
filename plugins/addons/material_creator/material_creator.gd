@@ -17,18 +17,18 @@ func _ready() -> void:
 	$SaveMaterialDialog.current_dir = "res://materials"
 	$SaveMaterialDialog.current_file = "new_material.silly_mat"
 	$SaveMaterialDialog.filters = PackedStringArray([
-		"*.silly_mat ; Silly Material (resource)",
-		"*.tres ; Godot Resource (resource)",
-		"*.mtxt ; Silly Material (source)"
-	])
+			"*.silly_mat ; Silly Material (resource)",
+			"*.tres ; Godot Resource (resource)",
+			"*.mtxt ; Silly Material (source)",
+		])
 	$SaveMaterialDialog.confirmed.connect(_on_save_confirmed)
 
 	$LoadMaterialDialog.access = FileDialog.ACCESS_RESOURCES
 	$LoadMaterialDialog.filters = PackedStringArray([
-		"*.silly_mat ; Silly Material (resource)",
-		"*.tres ; Godot Resource (resource)",
-		"*.mtxt ; Silly Material (source)"
-	])
+			"*.silly_mat ; Silly Material (resource)",
+			"*.tres ; Godot Resource (resource)",
+			"*.mtxt ; Silly Material (source)",
+		])
 	$LoadMaterialDialog.file_selected.connect(load_file_selected)
 
 	RenderingServer.canvas_item_set_clip(get_canvas_item(), true)
@@ -59,7 +59,7 @@ func _on_save_confirmed() -> void:
 	if path.begins_with("res://") and not DirAccess.dir_exists_absolute(dir):
 		var mk := DirAccess.make_dir_recursive_absolute(dir)
 		if mk != OK:
-			push_error("Material Creator: Can't create folder: %s (%s)" % [dir, error_string(mk)])
+			push_error("Material Creator: Can't create folder: \"%s\" (%s)." % [dir, error_string(mk)])
 			return
 
 	var res: Resource = _silly_resource_from_values()
@@ -69,7 +69,7 @@ func _on_save_confirmed() -> void:
 			# Write SOURCE file (no ResourceSaver, works anywhere).
 			var ok := _write_source_silly(path, res)
 			if not ok:
-				push_error("Material Creator: Failed to write source .mtxt at %s" % path)
+				push_error("Material Creator: Failed to write source .mtxt at \"%s\"." % path)
 			else:
 				print("Material Creator: Wrote source to ", path)
 		"silly_mat", "tres":
@@ -77,7 +77,7 @@ func _on_save_confirmed() -> void:
 			res.resource_path = path
 			var err := ResourceSaver.save(res, path)
 			if err != OK:
-				push_error("Material Creator: Failed to save resource: %s (%s)" % [path, error_string(err)])
+				push_error("Material Creator: Failed to save resource: \"%s\" (%s)." % [path, error_string(err)])
 			else:
 				print("Material Creator: Saved resource to ", path)
 		_:
@@ -97,7 +97,7 @@ func apply_pressed() -> void:
 	# function (which only MeshInstance3D has by default). If they do, then set the material
 	# to the silly material.
 	for node in selected_nodes:
-		if node.has_method("set_surface_override_material"):
+		if node.has_method(&"set_surface_override_material"):
 			node.set_surface_override_material(0, new_material)
 
 
@@ -108,7 +108,7 @@ func load_file_selected(path: String) -> bool:
 		# Load SOURCE by manual parse (works inside/outside res://)
 		var loaded := _read_source_silly(path)
 		if loaded == null:
-			push_error("Material Creator: Failed to parse source at %s" % path)
+			push_error("Material Creator: Failed to parse source at \"%s\"." % path)
 			return false
 		$VBoxContainer/AlbedoColorPicker.color = loaded.albedo_color
 		$VBoxContainer/MetallicSlider.value = loaded.metallic_strength
@@ -118,7 +118,7 @@ func load_file_selected(path: String) -> bool:
 		# Load RESOURCE via ResourceLoader (silly_mat via your loader, tres via built-in)
 		var silly_resource: Resource = ResourceLoader.load(path)
 		if silly_resource == null:
-			push_error("Material Creator: Failed to load resource at %s" % path)
+			push_error("Material Creator: Failed to load resource at \"%s\"." % path)
 			return false
 		$VBoxContainer/AlbedoColorPicker.color = silly_resource.albedo_color
 		$VBoxContainer/MetallicSlider.value = silly_resource.metallic_strength

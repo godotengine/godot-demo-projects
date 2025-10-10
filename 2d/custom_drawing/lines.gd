@@ -50,11 +50,11 @@ func _draw() -> void:
 	draw_circle(margin + offset, 40 - antialiasing_width_offset * 0.5, Color.ORANGE, true, -1.0, use_antialiasing)
 
 	# `draw_set_transform()` is a stateful command: it affects *all* `draw_` methods within this
-	# `_draw()` function after it. This can be used to translate, rotate or scale `draw_` methods
+	# `_draw()` function after it. This can be used to translate, rotate, or scale `draw_` methods
 	# that don't offer dedicated parameters for this (such as `draw_primitive()` not having a position parameter).
 	# To reset back to the initial transform, call `draw_set_transform(Vector2())`.
 	#
-	# Draw an horizontally stretched circle.
+	# Draw a horizontally stretched circle.
 	offset += Vector2(200, 0)
 	draw_set_transform(margin + offset, 0.0, Vector2(3.0, 1.0))
 	draw_circle(Vector2(), 40, Color.ORANGE, false, line_width_thin, use_antialiasing)
@@ -82,7 +82,7 @@ func _draw() -> void:
 	offset += Vector2(100, 0)
 	draw_arc(margin + offset, 40, -0.25 * TAU, 0.5 * TAU, POINT_COUNT_LOW, Color.YELLOW, 6.0 - antialiasing_width_offset, use_antialiasing)
 
-	# Draw an horizontally stretched arc.
+	# Draw a horizontally stretched arc.
 	offset += Vector2(200, 0)
 	draw_set_transform(margin + offset, 0.0, Vector2(3.0, 1.0))
 	draw_arc(Vector2(), 40, -0.25 * TAU, 0.5 * TAU, POINT_COUNT_LOW, Color.YELLOW, line_width_thin, use_antialiasing)

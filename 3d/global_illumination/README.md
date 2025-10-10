@@ -1,7 +1,7 @@
 # Global Illumination
 
 This demo showcases Godot's global illumination systems:
-LightmapGI, VoxelGI, SDFGI, ReflectionProbe and screen-space effects like SSAO and SSIL.
+LightmapGI, VoxelGI, SDFGI, ReflectionProbe, and screen-space effects like SSAO and SSIL.
 
 Use the mouse to look around, <kbd>W</kbd>/<kbd>A</kbd>/<kbd>S</kbd>/<kbd>D</kbd>
 or arrow keys to move.
@@ -17,7 +17,7 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
 A sphere and box are parented to the camera to showcase dynamic object lighting.
 A ReflectionProbe is parented to the sphere to showcase real-time reflections.
 When the ReflectionProbe is hidden, it is disabled. In this case,
-VoxelGI, SDFGI or environment lighting will be used to provide fallback reflections.
+VoxelGI, SDFGI, or environment lighting will be used to provide fallback reflections.
 
 A Decal node is parented to the moving sphere and cube to provide simple shadows for them.
 This is especially effective when using the LightmapGI (All) global illumination mode,

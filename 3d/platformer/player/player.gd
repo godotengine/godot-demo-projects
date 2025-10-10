@@ -36,7 +36,7 @@ var coins := 0
 
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_pressed("reset_position") or global_position.y < -12:
+	if Input.is_action_pressed(&"reset_position") or global_position.y < -12:
 		# Player hit the reset button or fell off the map.
 		position = initial_position
 		velocity = Vector3.ZERO
@@ -48,10 +48,10 @@ func _physics_process(delta: float) -> void:
 	# Update coin count and its "parallax" copies.
 	# This gives text a pseudo-3D appearance while still using Label3D instead of the more limited TextMesh.
 	%CoinCount.text = str(coins)
-	%CoinCount.get_node("Parallax").text = str(coins)
-	%CoinCount.get_node("Parallax2").text = str(coins)
-	%CoinCount.get_node("Parallax3").text = str(coins)
-	%CoinCount.get_node("Parallax4").text = str(coins)
+	%CoinCount.get_node(^"Parallax").text = str(coins)
+	%CoinCount.get_node(^"Parallax2").text = str(coins)
+	%CoinCount.get_node(^"Parallax3").text = str(coins)
+	%CoinCount.get_node(^"Parallax4").text = str(coins)
 
 	velocity += gravity * delta
 
@@ -79,12 +79,12 @@ func _physics_process(delta: float) -> void:
 		if movement_direction.length() > 0.1 and not sharp_turn:
 			if horizontal_speed > 0.001:
 				horizontal_direction = adjust_facing(
-					horizontal_direction,
-					movement_direction,
-					delta,
-					1.0 / horizontal_speed * TURN_SPEED,
-					Vector3.UP
-				)
+						horizontal_direction,
+						movement_direction,
+						delta,
+						1.0 / horizontal_speed * TURN_SPEED,
+						Vector3.UP
+					)
 			else:
 				horizontal_direction = movement_direction
 
@@ -103,17 +103,17 @@ func _physics_process(delta: float) -> void:
 
 		if horizontal_speed > 0:
 			facing_mesh = adjust_facing(
-				facing_mesh,
-				movement_direction,
-				delta,
-				1.0 / horizontal_speed * TURN_SPEED,
-				Vector3.UP
-			)
+					facing_mesh,
+					movement_direction,
+					delta,
+					1.0 / horizontal_speed * TURN_SPEED,
+					Vector3.UP
+				)
 		var m3 := Basis(
-			-facing_mesh,
-			Vector3.UP,
-			-facing_mesh.cross(Vector3.UP).normalized()
-		).scaled(CHAR_SCALE)
+				-facing_mesh,
+				Vector3.UP,
+				-facing_mesh.cross(Vector3.UP).normalized()
+			).scaled(CHAR_SCALE)
 
 		$Player/Skeleton.set_transform(Transform3D(m3, mesh_xform.origin))
 
@@ -135,7 +135,7 @@ func _physics_process(delta: float) -> void:
 				horizontal_speed = 0
 			horizontal_velocity = horizontal_direction * horizontal_speed
 
-		if Input.is_action_just_released("jump") and velocity.y > 0.0:
+		if Input.is_action_just_released(&"jump") and velocity.y > 0.0:
 			# Reduce jump height if releasing the jump key before reaching the apex.
 			vertical_velocity *= 0.7
 
@@ -160,8 +160,8 @@ func _physics_process(delta: float) -> void:
 		bullet.set_transform($Player/Skeleton/Bullet.get_global_transform().orthonormalized())
 		get_parent().add_child(bullet)
 		bullet.set_linear_velocity(
-			$Player/Skeleton/Bullet.get_global_transform().basis[2].normalized() * BULLET_SPEED
-		)
+				$Player/Skeleton/Bullet.get_global_transform().basis[2].normalized() * BULLET_SPEED
+			)
 		bullet.add_collision_exception_with(self)
 		$SoundShoot.play()
 

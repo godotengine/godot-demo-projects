@@ -24,9 +24,9 @@ var _hit_count: int = 0
 func _ready() -> void:
 	_play_stats = PlayStats.new()
 	_play_stats.changed.connect(
-		func() -> void:
-			play_stats_updated.emit(_play_stats)
-	)
+			func() -> void:
+				play_stats_updated.emit(_play_stats)
+		)
 
 	var chart_data := ChartData.get_chart_data(chart)
 
@@ -58,7 +58,7 @@ func _process(_delta: float) -> void:
 
 	_miss_old_notes()
 
-	if Input.is_action_just_pressed("main_key"):
+	if Input.is_action_just_pressed(&"main_key"):
 		_handle_keypress()
 
 	if _notes.is_empty():

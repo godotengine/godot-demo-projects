@@ -18,4 +18,4 @@ func _process(_delta: float) -> void:
 
 
 func get_input_direction() -> Vector2:
-	return Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	return Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")

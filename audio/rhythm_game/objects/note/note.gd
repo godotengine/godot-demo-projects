@@ -42,8 +42,8 @@ func hit_perfect() -> void:
 	var tween := create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
-	tween.parallel().tween_property(self, "modulate:a", 0, 0.2)
-	tween.parallel().tween_property($Sprite2D, "scale", 1.5 * Vector2.ONE, 0.2)
+	tween.parallel().tween_property(self, ^"modulate:a", 0, 0.2)
+	tween.parallel().tween_property($Sprite2D, ^"scale", 1.5 * Vector2.ONE, 0.2)
 	tween.tween_callback(queue_free)
 
 
@@ -55,8 +55,8 @@ func hit_good() -> void:
 	var tween := create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
-	tween.parallel().tween_property(self, "modulate:a", 0, 0.2)
-	tween.parallel().tween_property($Sprite2D, "scale", 1.2 * Vector2.ONE, 0.2)
+	tween.parallel().tween_property(self, ^"modulate:a", 0, 0.2)
+	tween.parallel().tween_property($Sprite2D, ^"scale", 1.2 * Vector2.ONE, 0.2)
 	tween.tween_callback(queue_free)
 
 
@@ -66,7 +66,7 @@ func miss(stop_movement: bool = true) -> void:
 	modulate = Color.DARK_RED
 
 	var tween := create_tween()
-	tween.parallel().tween_property(self, "modulate:a", 0, 0.5)
+	tween.parallel().tween_property(self, ^"modulate:a", 0, 0.5)
 	tween.tween_callback(queue_free)
 
 

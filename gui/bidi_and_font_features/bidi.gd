@@ -1,6 +1,6 @@
 extends Control
 
-@onready var variable_font_variation: FontVariation = $"TabContainer/Variable fonts/VariableFontPreview".get_theme_font("font")
+@onready var variable_font_variation: FontVariation = $"TabContainer/Variable fonts/VariableFontPreview".get_theme_font(&"font")
 
 
 func _ready() -> void:
@@ -51,7 +51,7 @@ func _on_LineEditCustomSTDst_tree_entered() -> void:
 func _on_variable_size_value_changed(value: float) -> void:
 	$"TabContainer/Variable fonts/Variables/Size/Value".text = str(value)
 	# This is also available on non-variable fonts.
-	$"TabContainer/Variable fonts/VariableFontPreview".add_theme_font_size_override("font_size", value)
+	$"TabContainer/Variable fonts/VariableFontPreview".add_theme_font_size_override(&"font_size", value)
 
 
 func _on_variable_weight_value_changed(value: float) -> void:
@@ -116,7 +116,7 @@ func _on_system_font_weight_value_changed(value: float) -> void:
 		$"TabContainer/System fonts/VBoxContainer/Fantasy/Value",
 		$"TabContainer/System fonts/VBoxContainer/Custom/Value"
 	]:
-		var system_font: SystemFont = label.get_theme_font("font")
+		var system_font: SystemFont = label.get_theme_font(&"font")
 		system_font.font_weight = int(value)
 
 func _on_system_font_italic_toggled(button_pressed: bool) -> void:
@@ -128,10 +128,10 @@ func _on_system_font_italic_toggled(button_pressed: bool) -> void:
 		$"TabContainer/System fonts/VBoxContainer/Fantasy/Value",
 		$"TabContainer/System fonts/VBoxContainer/Custom/Value"
 	]:
-		var system_font: SystemFont = label.get_theme_font("font")
+		var system_font: SystemFont = label.get_theme_font(&"font")
 		system_font.font_italic = button_pressed
 
 
 func _on_system_font_name_text_changed(new_text: String) -> void:
-	var system_font: SystemFont = $"TabContainer/System fonts/VBoxContainer/Custom/FontName".get_theme_font("font")
+	var system_font: SystemFont = $"TabContainer/System fonts/VBoxContainer/Custom/FontName".get_theme_font(&"font")
 	system_font.font_names[0] = new_text

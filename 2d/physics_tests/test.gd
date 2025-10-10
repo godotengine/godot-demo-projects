@@ -19,7 +19,9 @@ class Circle2D:
 	func _draw() -> void:
 		draw_circle(center, radius, color)
 
+
 var _drawn_nodes := []
+
 
 func _enter_tree() -> void:
 	if not _enable_debug_collision:

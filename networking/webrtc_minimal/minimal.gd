@@ -23,11 +23,11 @@ func _ready() -> void:
 	# Let P1 create the offer.
 	p1.create_offer()
 
-	# Wait a second and send message from P1.
+	# Wait one second and send message from P1.
 	await get_tree().create_timer(1).timeout
 	ch1.put_packet("Hi from P1".to_utf8_buffer())
 
-	# Wait a second and send message from P2.
+	# Wait one second and send message from P2.
 	await get_tree().create_timer(1).timeout
 	ch2.put_packet("Hi from P2".to_utf8_buffer())
 

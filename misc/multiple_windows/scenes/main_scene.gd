@@ -75,7 +75,7 @@ func _on_draggable_window_close_pressed() -> void:
 
 
 func _on_bg_draggable_window_toggled(toggled_on: bool) -> void:
-	draggable_window.get_node("BG").visible = toggled_on
+	draggable_window.get_node(^"BG").visible = toggled_on
 
 
 func _on_passthrough_polygon_item_selected(index: int) -> void:
@@ -83,7 +83,7 @@ func _on_passthrough_polygon_item_selected(index: int) -> void:
 		0:
 			draggable_window.mouse_passthrough_polygon = []
 		1:
-			draggable_window.get_node("PassthroughGenerator").generate_polygon()
+			draggable_window.get_node(^"PassthroughGenerator").generate_polygon()
 		2:
 			draggable_window.mouse_passthrough_polygon = [
 					Vector2(16, 0), Vector2(16, 128),
@@ -118,6 +118,7 @@ func _on_file_dialog_options_item_selected(index: int) -> void:
 			file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_ANY
 		4:
 			file_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
+
 
 func _on_native_dialog_toggled(toggled_on: bool) -> void:
 	file_dialog.use_native_dialog = toggled_on

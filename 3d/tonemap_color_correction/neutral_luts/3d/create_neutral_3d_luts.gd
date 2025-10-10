@@ -13,7 +13,7 @@ func create_neutral_lut(name: String, size: int, vertical: bool):
 			(size * size) if vertical else size,
 			false,
 			Image.FORMAT_RGB8
-	)
+		)
 
 	for z in size:
 		var x_offset := int(z * size) if not vertical else 0
@@ -26,7 +26,7 @@ func create_neutral_lut(name: String, size: int, vertical: bool):
 						roundi(((x + 0.2) / float(size - 1)) * 255),
 						roundi(((y + 0.2) / float(size - 1)) * 255),
 						roundi(((z + 0.2) / float(size - 1)) * 255)
-				))
+					))
 
 	image.save_png("user://" + name + ".png")
 

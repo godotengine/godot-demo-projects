@@ -3,16 +3,16 @@ extends Node3D
 var open := false
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("toggle_doors"):
+	if event.is_action_pressed(&"toggle_doors"):
 		if open:
 			# Close the door.
 			# The occluder will be re-enabled when the animation ends
 			# using `_on_animation_player_animation_finished()`.
-			$AnimationPlayer.play_backwards("open")
+			$AnimationPlayer.play_backwards(&"open")
 			open = false
 		else:
 			# Open the door.
-			$AnimationPlayer.play("open")
+			$AnimationPlayer.play(&"open")
 			open = true
 			# Disable the occluder as soon as the door starts opening.
 			# The occluder is not part of the pivot to prevent it from having its

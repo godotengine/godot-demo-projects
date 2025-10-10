@@ -42,16 +42,18 @@ func recenter() -> void:
 	# Recenter character body.
 	character_body.transform = Transform3D()
 
+
 # `_get_movement_input()` returns our move input by querying the move action on each controller.
 func _get_movement_input() -> Vector2:
 	var movement : Vector2 = Vector2()
 
 	# If move is not bound to one of our controllers,
 	# that controller will return `Vector2.ZERO`.
-	movement += $LeftHand.get_vector2("move")
-	movement += $RightHand.get_vector2("move")
+	movement += $LeftHand.get_vector2(&"move")
+	movement += $RightHand.get_vector2(&"move")
 
 	return movement
+
 
 # `_process_on_physical_movement` handles the physical movement of the player
 # adjusting our character body position to "catch up to" the player.

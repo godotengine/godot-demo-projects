@@ -39,9 +39,9 @@ func request_move(pawn: Pawn, direction: Vector2i) -> Vector2i:
 			var target_pawn := get_cell_pawn(cell_target, cell_tile_id)
 			#print("Cell %s contains %s" % [cell_target, target_pawn.name])
 
-			if not target_pawn.has_node("DialoguePlayer"):
+			if not target_pawn.has_node(^"DialoguePlayer"):
 				return Vector2i.ZERO
 
-			dialogue_ui.show_dialogue(pawn, target_pawn.get_node("DialoguePlayer"))
+			dialogue_ui.show_dialogue(pawn, target_pawn.get_node(^"DialoguePlayer"))
 
 	return Vector2i.ZERO

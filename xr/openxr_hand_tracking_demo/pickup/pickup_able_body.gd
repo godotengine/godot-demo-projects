@@ -68,7 +68,7 @@ func pick_up(pick_up_by) -> void:
 	# Add code here to determine snap position and orientation.
 
 	# Now tween
-	tween.tween_property(self, "transform", snap_to, 0.1)
+	tween.tween_property(self, ^"transform", snap_to, 0.1)
 
 
 # Let this object go.

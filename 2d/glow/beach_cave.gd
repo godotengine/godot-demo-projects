@@ -10,7 +10,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and event.button_mask > 0:
 		cave.position.x = clampf(cave.position.x + event.screen_relative.x, -CAVE_LIMIT, 0)
 
-	if event.is_action_pressed("toggle_glow_map"):
+	if event.is_action_pressed(&"toggle_glow_map"):
 		if $WorldEnvironment.environment.glow_map:
 			$WorldEnvironment.environment.glow_map = null
 			# Restore glow intensity to its default value

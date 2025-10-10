@@ -31,7 +31,7 @@ func _process(_delta: float) -> void:
 		text = "Speed: " + ("%.0f" % speed) + " mph"
 
 	# Change speedometer color depending on speed in m/s (regardless of unit).
-	add_theme_color_override("font_color", gradient.sample(remap(car_body.linear_velocity.length(), 0.0, 30.0, 0.0, 1.0)))
+	add_theme_color_override(&"font_color", gradient.sample(remap(car_body.linear_velocity.length(), 0.0, 30.0, 0.0, 1.0)))
 
 
 func _on_spedometer_pressed() -> void:

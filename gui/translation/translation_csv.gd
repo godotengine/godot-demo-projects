@@ -38,7 +38,7 @@ func _print_intro() -> void:
 	# In CSV translation, use the appropriate key in the Object.tr() function to fetch
 	# the corresponding translation.
 	# This is the same for scene nodes containing user-facing texts to be translated.
-	print(tr("KEY_INTRO"))
+	print(tr(&"KEY_INTRO"))
 
 	# CSV does not support plural translations. If you need pluralization, you must use PO instead.
 

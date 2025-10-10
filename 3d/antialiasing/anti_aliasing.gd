@@ -74,7 +74,7 @@ func _process(delta: float) -> void:
 	fps_label.text = "%d FPS (%.2f mspf)" % [Engine.get_frames_per_second(), 1000.0 / Engine.get_frames_per_second()]
 	# Color FPS counter depending on framerate.
 	# The Gradient resource is stored as metadata within the FPSLabel node (accessible in the inspector).
-	fps_label.modulate = fps_label.get_meta("gradient").sample(remap(Engine.get_frames_per_second(), 0, 180, 0.0, 1.0))
+	fps_label.modulate = fps_label.get_meta(&"gradient").sample(remap(Engine.get_frames_per_second(), 0, 180, 0.0, 1.0))
 
 
 
@@ -144,9 +144,9 @@ func _on_fsr_sharpness_item_selected(index: int) -> void:
 
 func _on_viewport_size_changed() -> void:
 	$ViewportResolution.text = "Viewport resolution: %d×%d" % [
-		get_viewport().size.x * get_viewport().scaling_3d_scale,
-		get_viewport().size.y * get_viewport().scaling_3d_scale,
-	]
+			get_viewport().size.x * get_viewport().scaling_3d_scale,
+			get_viewport().size.y * get_viewport().scaling_3d_scale,
+		]
 
 
 func _on_v_sync_item_selected(index: int) -> void:

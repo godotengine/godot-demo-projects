@@ -32,12 +32,12 @@ func recenter() -> void:
 		XRServer.center_on_hmd(XRServer.RESET_BUT_KEEP_TILT, true)
 
 	# XRCamera3D node won't be updated yet, so go straight to the source!
-	var head_tracker: XRPositionalTracker = XRServer.get_tracker("head")
+	var head_tracker: XRPositionalTracker = XRServer.get_tracker(&"head")
 	if not head_tracker:
 		push_error("Couldn't locate head tracker!")
 		return
 
-	var pose: XRPose = head_tracker.get_pose("default")
+	var pose: XRPose = head_tracker.get_pose(&"default")
 	var head_transform: Transform3D = pose.get_adjusted_transform()
 
 	# Get neck transform in XROrigin3D space
@@ -53,16 +53,18 @@ func recenter() -> void:
 	# Finally reset character orientation
 	transform.basis = Basis()
 
+
 # Returns our move input by querying the move action on each controller.
 func _get_movement_input() -> Vector2:
 	var movement := Vector2()
 
 	# If move is not bound to one of our controllers,
 	# that controller will return `Vector2.ZERO`.
-	movement += $XROrigin3D/LeftHand.get_vector2("move")
-	movement += $XROrigin3D/RightHand.get_vector2("move")
+	movement += $XROrigin3D/LeftHand.get_vector2(&"move")
+	movement += $XROrigin3D/RightHand.get_vector2(&"move")
 
 	return movement
+
 
 # `_process_on_physical_movement()` handles the physical movement of the player
 # adjusting our character body position to "catch up to" the player.
@@ -113,6 +115,7 @@ func _process_on_physical_movement(delta: float) -> bool:
 		black_out.fade = 0.0
 		return false
 
+
 # `_process_movement_on_input()` handles movement through controller input.
 # We first handle rotating the player and then apply movement.
 # We also apply the effects of gravity at this point.
@@ -143,6 +146,7 @@ func _process_movement_on_input(is_colliding: bool, delta: float) -> void:
 	velocity.y -= gravity * delta
 
 	move_and_slide()
+
 
 # `_physics_process()` handles our player movement.
 func _physics_process(delta: float) -> void:

@@ -78,4 +78,4 @@ func exploded(_by_who: int) -> void:
 		return
 
 	stunned = true
-	$anim.play("stunned")
+	$anim.play(&"stunned")
