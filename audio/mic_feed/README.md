@@ -1,4 +1,9 @@
-# Audio Mic Input
+# Audio Mic Feed
+
+**This demo example is waiting for [PR#108773 Add MicrophoneFeed with direct access to the microphone input buffer](https://github.com/godotengine/godot/pull/108773)
+to be merged into the v4.6 branch.  This PR creates a MicrophoneServer which can 
+make a MicrophoneFeed that can draw audio data directly from the microphone buffer 
+without being tied to the clock timing of the audio system.**
 
 This example shows how to read microphone audio input data
 using the `PackedVector2Array Input.get_microphone_buffer(frames: int)`
