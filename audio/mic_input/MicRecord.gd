@@ -1,18 +1,18 @@
 extends Control
 
 var wav_recording: AudioStreamWAV
-var input_mix_rate : int = 44100
-var audio_chunk_size_ms : int = 20
-var audio_sample_size : int = 882
+var input_mix_rate: int = 44100
+var audio_chunk_size_ms: int = 20
+var audio_sample_size: int = 882
 
-var total_samples : int = 0
-var sample_duration : float = 0.0
-var recording_buffer : Variant = null
+var total_samples: int = 0
+var sample_duration: float = 0.0
+var recording_buffer: Variant = null
 
-var audio_sample_image : Image
-var audio_sample_texture : ImageTexture
-var generator_timestamp : float = 0.0
-var generator_freq : float = 0.0
+var audio_sample_image: Image
+var audio_sample_texture: ImageTexture
+var generator_timestamp: float = 0.0
+var generator_freq: float = 0.0
 
 var microphonefeed = null
 
@@ -46,17 +46,17 @@ func _ready() -> void:
 	audio_sample_texture = ImageTexture.create_from_image(audio_sample_image)
 	$MicTexture.material.set_shader_parameter("audiosample", audio_sample_texture)
 
-func _on_option_input_item_selected(index : int) -> void:
+func _on_option_input_item_selected(index: int) -> void:
 	var inputdevice : String = $OptionInput.get_item_text(index)
 	print("Set input device: ", inputdevice)
 	AudioServer.set_input_device(inputdevice)
 
-func _on_option_output_item_selected(index : int) -> void:
+func _on_option_output_item_selected(index: int) -> void:
 	var outputdevice : String = $OptionOutput.get_item_text(index)
 	print("Set output device: ", outputdevice)
 	AudioServer.set_output_device(outputdevice)
 
-func _on_microphone_on_toggled(toggled_on : bool) -> void:
+func _on_microphone_on_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		if OS.get_name() == "Android" and not OS.request_permission("android.permission.RECORD_AUDIO"):
 			print("Waiting for user response after requesting audio permissions")
@@ -77,12 +77,12 @@ func _on_microphone_on_toggled(toggled_on : bool) -> void:
 	else:
 		microphonefeed.set_active(false)
 
-func _on_mic_to_generator_toggled(toggled_on : bool) -> void:
+func _on_mic_to_generator_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		$AudioGenerator.stream.mix_rate = input_mix_rate
 	$AudioGenerator.playing = toggled_on
 
-func _process(delta : float) -> void:
+func _process(delta: float) -> void:
 	sample_duration += delta
 	while microphonefeed.get_frames_available() >= audio_sample_size:
 		var audio_samples : PackedVector2Array = microphonefeed.get_frames(audio_sample_size)
@@ -103,7 +103,7 @@ func _process(delta : float) -> void:
 			gplayback.push_frame(Vector2(a, a))
 			generator_timestamp += gdt
 
-func _on_record_button_toggled(toggled_on : bool) -> void:
+func _on_record_button_toggled(toggled_on: bool) -> void:
 	total_samples = 0
 	sample_duration = 0.0
 	if toggled_on:
@@ -148,7 +148,7 @@ func _on_play_button_pressed() -> void:
 	$AudioWav.stream = wav_recording
 	$AudioWav.play()
 
-func _on_play_music_toggled(toggled_on : bool) -> void:
+func _on_play_music_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		$AudioMusic.play()
 		$PlayMusic.text = "Stop Music"
@@ -167,7 +167,7 @@ func _on_open_user_folder_button_pressed() -> void:
 # 400Hz frequency can be used (from another device) to probe a stereo microphone
 # response due to where there should be 8 wavelengths in the space of 20ms (2.5ms per wave).
 # The wavelength is then 343/400=0.8575m long.
-func _on_option_tone_item_selected(index : int) -> void:
+func _on_option_tone_item_selected(index: int) -> void:
 	if index != 0:
 		$AudioGenerator.playing = true
 		if not $MicToGenerator.button_pressed and not $PlayMusic.button_pressed:
