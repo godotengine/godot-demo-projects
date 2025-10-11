@@ -15,7 +15,7 @@ func _ready() -> void:
 # The "click" event is a custom input action defined in
 # Project > Project Settings > Input Map tab.
 func _unhandled_input(event: InputEvent) -> void:
-	if not event.is_action_pressed("click"):
+	if not event.is_action_pressed(&"click"):
 		return
 
 	set_movement_target(get_global_mouse_position())

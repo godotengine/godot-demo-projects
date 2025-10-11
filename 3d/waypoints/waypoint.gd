@@ -47,7 +47,7 @@ func _process(_delta: float) -> void:
 	var viewport_base_size: Vector2i = (
 			get_viewport().content_scale_size if get_viewport().content_scale_size > Vector2i(0, 0)
 			else get_viewport().size
-	)
+		)
 
 	if not sticky:
 		# For non-sticky waypoints, we don't need to clamp and calculate
@@ -80,7 +80,7 @@ func _process(_delta: float) -> void:
 	position = Vector2(
 			clamp(unprojected_position.x, MARGIN, viewport_base_size.x - MARGIN),
 			clamp(unprojected_position.y, MARGIN, viewport_base_size.y - MARGIN)
-	)
+		)
 
 	label.visible = true
 	rotation = 0

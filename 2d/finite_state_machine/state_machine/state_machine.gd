@@ -20,6 +20,7 @@ var _active := false:
 		_active = value
 		set_active(value)
 
+
 func _enter_tree() -> void:
 	if start_state.is_empty():
 		start_state = get_child(0).get_path()

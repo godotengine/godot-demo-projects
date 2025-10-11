@@ -119,7 +119,7 @@ func _draw() -> void:
 	# Draw, provided for convenience and NOT required for screen-reader support.
 	for i in range(item_aes.size()):
 		draw_rect(item_rects[selected], Color(0.8, 0.8, 0.8, 0.5), false, 1.0)
-		draw_string(get_theme_font("font"), item_rects[i].position + Vector2(0, 30), str(item_values[i]), HORIZONTAL_ALIGNMENT_CENTER, 40.0)
+		draw_string(get_theme_font(&"font"), item_rects[i].position + Vector2(0, 30), str(item_values[i]), HORIZONTAL_ALIGNMENT_CENTER, 40.0)
 
 	if has_focus():
 		draw_rect(Rect2(Vector2(), get_size()), Color(0, 0, 1, 0.5), false, 3.0)

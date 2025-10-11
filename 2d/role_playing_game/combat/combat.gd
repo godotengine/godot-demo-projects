@@ -19,7 +19,7 @@ func initialize(combat_combatants: Array[PackedScene]) -> void:
 		var combatant := combatant_scene.instantiate()
 		if combatant is Combatant:
 			$Combatants.add_combatant(combatant)
-			combatant.get_node("Health").dead.connect(_on_combatant_death.bind(combatant))
+			combatant.get_node(^"Health").dead.connect(_on_combatant_death.bind(combatant))
 		else:
 			combatant.queue_free()
 	ui.initialize()
@@ -30,7 +30,7 @@ func clear_combat() -> void:
 	for n in $Combatants.get_children():
 		# Player characters.
 		n.queue_free()
-	for n in ui.get_node("Combatants").get_children():
+	for n in ui.get_node(^"Combatants").get_children():
 		# Health bars.
 		n.queue_free()
 

@@ -135,7 +135,7 @@ func _recursive_change_view_mode(current_node: Node) -> void:
 	if not current_node:
 		return
 
-	if current_node.has_method("set_view_mode"):
+	if current_node.has_method(&"set_view_mode"):
 		current_node.set_view_mode(view_mode_index)
 
 	for child in current_node.get_children():

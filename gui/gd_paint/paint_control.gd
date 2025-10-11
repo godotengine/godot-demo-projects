@@ -82,7 +82,7 @@ func _process(_delta: float) -> void:
 			# add the brush object to draw_elements_array.
 			if brush_mode == BrushMode.CIRCLE_SHAPE or brush_mode == BrushMode.RECTANGLE_SHAPE:
 				add_brush(mouse_pos, brush_mode)
-				# We handle undo's differently than either pencil or eraser mode, so we need to set undo
+				# We handle undos differently than either pencil or eraser mode, so we need to set undo
 				# element_list_num to -2 so we can tell if we need to undo a shape. See undo_stroke for details.
 				undo_element_list_num = UNDO_MODE_SHAPE
 		# Since we've released the left mouse, we need to get a new mouse_click_start_pos next time
@@ -119,9 +119,9 @@ func undo_stroke() -> void:
 		# Now that we've undone a shape, we cannot undo again until another stoke is added.
 		undo_element_list_num = UNDO_NONE
 		# NOTE: if we only had shape brushes, then we could remove the above line and could let the user
-		# undo until we have a empty element list.
+		# undo until we have an empty element list.
 
-	# Otherwise we're removing a either a pencil stroke or a eraser stroke.
+	# Otherwise we're removing either a pencil stroke or an eraser stroke.
 	else:
 		# Figure out how many elements/brushes we've added in the last stroke.
 		var elements_to_remove := brush_data_list.size() - undo_element_list_num
@@ -204,7 +204,7 @@ func _draw() -> void:
 					draw_circle(brush.brush_pos, brush.brush_size / 2, brush.brush_color)
 			BrushMode.ERASER:
 				# NOTE: this is a really cheap way of erasing that isn't really erasing!
-				# However, this gives similar results in a fairy simple way!
+				# However, this gives similar results in a fairly simple way!
 
 				# Erasing works exactly the same was as pencil does for both the rectangle shape and the circle shape,
 				# but instead of using brush.brush_color, we instead use bg_color instead.

@@ -74,7 +74,7 @@ func _on_enable_sun_toggled(button_pressed: bool) -> void:
 
 
 func _on_animate_lights_toggled(button_pressed: bool) -> void:
-	for animatable_node in get_tree().get_nodes_in_group("animatable"):
+	for animatable_node in get_tree().get_nodes_in_group(&"animatable"):
 		animatable_node.set_process(button_pressed)
 
 

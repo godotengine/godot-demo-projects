@@ -9,12 +9,12 @@ signal flee(winner: Combatant, loser: Combatant)
 
 func initialize() -> void:
 	for combatant in combatants_node.get_children():
-		var health := combatant.get_node("Health")
+		var health := combatant.get_node(^"Health")
 		var info := info_scene.instantiate()
-		var health_info := info.get_node("VBoxContainer/HealthContainer/Health")
+		var health_info := info.get_node(^"VBoxContainer/HealthContainer/Health")
 		health_info.value = health.life
 		health_info.max_value = health.max_life
-		info.get_node("VBoxContainer/NameContainer/Name").text = combatant.name
+		info.get_node(^"VBoxContainer/NameContainer/Name").text = combatant.name
 		health.health_changed.connect(health_info.set_value)
 		$Combatants.add_child(info)
 
@@ -22,25 +22,25 @@ func initialize() -> void:
 
 
 func _on_Attack_button_up() -> void:
-	if not combatants_node.get_node("Player").active:
+	if not combatants_node.get_node(^"Player").active:
 		return
 
-	combatants_node.get_node("Player").attack(combatants_node.get_node("Opponent"))
+	combatants_node.get_node(^"Player").attack(combatants_node.get_node(^"Opponent"))
 
 
 func _on_Defend_button_up() -> void:
-	if not combatants_node.get_node("Player").active:
+	if not combatants_node.get_node(^"Player").active:
 		return
 
-	combatants_node.get_node("Player").defend()
+	combatants_node.get_node(^"Player").defend()
 
 
 func _on_Flee_button_up() -> void:
-	if not combatants_node.get_node("Player").active:
+	if not combatants_node.get_node(^"Player").active:
 		return
 
-	combatants_node.get_node("Player").flee()
+	combatants_node.get_node(^"Player").flee()
 
-	var loser: Combatant = combatants_node.get_node("Player")
-	var winner: Combatant = combatants_node.get_node("Opponent")
+	var loser: Combatant = combatants_node.get_node(^"Player")
+	var winner: Combatant = combatants_node.get_node(^"Opponent")
 	flee.emit(winner, loser)

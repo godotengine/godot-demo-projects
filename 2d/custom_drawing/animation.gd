@@ -40,4 +40,4 @@ func _draw() -> void:
 			Color.MEDIUM_AQUAMARINE,
 			line_width_thin,
 			use_antialiasing
-	)
+		)

@@ -74,7 +74,7 @@ func _ready() -> void:
 		# Remove unsupported VoxelGI/SDFGI references from the label.
 		reflection_probe_mode_texts[0] = "Disabled - Using environment reflections (Fast)"
 		set_gi_mode(GIMode.NONE)
-		# Darken lights's energy to compensate for sRGB blending (without affecting sky rendering).
+		# Darken lights' energy to compensate for sRGB blending (without affecting sky rendering).
 		# This only applies to lights with shadows enabled.
 		$GrateOmniLight.light_energy = 0.25
 		$GarageOmniLight.light_energy = 0.5
@@ -94,7 +94,7 @@ Escape or F10: Toggle mouse capture"""
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("cycle_gi_mode"):
+	if event.is_action_pressed(&"cycle_gi_mode"):
 		if is_compatibility:
 			# Only LightmapGI is supported in Compatibility.
 			# Note that the actual GI mode is the opposite of what's being set here, due to a bug
@@ -103,10 +103,10 @@ func _input(event: InputEvent) -> void:
 		else:
 			set_gi_mode(wrapi(gi_mode + 1, 0, GIMode.MAX))
 
-	if event.is_action_pressed("cycle_reflection_probe_mode"):
+	if event.is_action_pressed(&"cycle_reflection_probe_mode"):
 		set_reflection_probe_mode(wrapi(reflection_probe_mode + 1, 0, ReflectionProbeMode.MAX))
 
-	if event.is_action_pressed("cycle_ssil_mode"):
+	if event.is_action_pressed(&"cycle_ssil_mode"):
 		set_ssil_mode(wrapi(ssil_mode + 1, 0, SSILMode.MAX))
 
 

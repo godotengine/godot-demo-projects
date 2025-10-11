@@ -96,10 +96,10 @@ func process_input(delta):
 
 			if anim_done:
 				if current_anim != "Aiming":
-					anim_player.play("Aiming")
+					anim_player.play(&"Aiming")
 					current_anim = "Aiming"
 				else:
-					anim_player.play("Idle")
+					anim_player.play(&"Idle")
 					current_anim = "Idle"
 
 				anim_done = false

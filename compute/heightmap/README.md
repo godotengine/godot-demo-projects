@@ -12,7 +12,7 @@ can try both options to compare the time it takes to generate the heightmap on
 the CPU and GPU respectively.
 
 For smaller noise textures, the CPU will often be faster, but the larger the
-gains are by using the GPU. On a PC with a NVIDIA GeForce RTX 3060 and
+gains are by using the GPU. On a PC with an NVIDIA GeForce RTX 3060 and
 11th-generation Intel Core i7 processor, the compute shader was tested to be
 faster for textures 1024×1024 and larger.
 

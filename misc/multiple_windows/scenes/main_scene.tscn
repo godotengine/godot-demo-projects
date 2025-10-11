@@ -5,9 +5,9 @@
 [ext_resource type="Script" uid="uid://b4ngyw7e2c75u" path="res://scenes/disable_other.gd" id="2_psh0l"]
 [ext_resource type="Script" uid="uid://evvrji8vwf5l" path="res://scenes/text_field.gd" id="3_bgndp"]
 [ext_resource type="PackedScene" uid="uid://ek1fmwy87san" path="res://scenes/draggable_window/draggable_window.tscn" id="4_diw6b"]
-[ext_resource type="PackedScene" uid="uid://dx84v67isxyjv" path="res://scenes/file_dialogue/file_dialog.tscn" id="5_f4o8g"]
-[ext_resource type="PackedScene" uid="uid://cudrukovmha7p" path="res://scenes/accept_dialogue/accept_dialog.tscn" id="6_st8be"]
-[ext_resource type="PackedScene" uid="uid://1nswovajdv3n" path="res://scenes/confimation_dialogue/confirmation_dialog.tscn" id="7_wii4q"]
+[ext_resource type="PackedScene" uid="uid://dx84v67isxyjv" path="res://scenes/file_dialog/file_dialog.tscn" id="5_f4o8g"]
+[ext_resource type="PackedScene" uid="uid://cudrukovmha7p" path="res://scenes/accept_dialog/accept_dialog.tscn" id="6_st8be"]
+[ext_resource type="PackedScene" uid="uid://1nswovajdv3n" path="res://scenes/confirmation_dialog/confirmation_dialog.tscn" id="7_wii4q"]
 [ext_resource type="PackedScene" uid="uid://p7lgllpnc8h8" path="res://scenes/popup/popup.tscn" id="8_vohc5"]
 [ext_resource type="PackedScene" uid="uid://j7j6fe7plvmt" path="res://scenes/popup_menu/popup_menu.tscn" id="9_b1y32"]
 [ext_resource type="PackedScene" uid="uid://dj15to28g17lb" path="res://scenes/popup_panel/popup_panel.tscn" id="10_rn47v"]
@@ -57,7 +57,7 @@ text = "Show window"
 
 [node name="WindowTitleEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-placeholder_text = "Window's Title"
+placeholder_text = "Window Title"
 
 [node name="TransientWindow" type="CheckButton" parent="HBoxContainer/VBoxContainer" node_paths=PackedStringArray("others")]
 layout_mode = 2
@@ -69,13 +69,11 @@ others = [NodePath("../ExclusiveWindow")]
 layout_mode = 2
 tooltip_text = "Needs transient enabled to work."
 disabled = true
-text = "Exclusive
-"
+text = "Exclusive"
 
 [node name="UnresizableWindow" type="CheckButton" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Unresizable
-"
+text = "Unresizable"
 
 [node name="BorderlessWindow" type="CheckButton" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -88,8 +86,7 @@ text = "Always on Top"
 [node name="TransparentWindow" type="CheckButton" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 tooltip_text = "Needs embed_subwindows disabled to work."
-text = "Transparent
-"
+text = "Transparent"
 
 [node name="HSeparator2" type="HSeparator" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -105,7 +102,7 @@ layout_mode = 2
 [node name="DraggableWindowButton" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainerDW"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Draggable window"
+text = "Draggable Window"
 
 [node name="Close" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainerDW"]
 layout_mode = 2
@@ -114,10 +111,9 @@ text = "X"
 [node name="DraggableWindowExplanation" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 12
-text = "This window uses Area2D to detect if user clicked inside of it.
-Since it's Area2D, you can change it's CollisionShape2D.
-But since Area2D is a Physics Object, \"Physics Object Picking\" inside of Window's properties hard to be enabled.
-"
+text = "This window uses an Area2D to detect if the user clicked inside of it.
+Since it's an Area2D, you can change its CollisionShape2D.
+But since Area2D is a Physics Object, the \"Physics Object Picking\" property has to be enabled in Window."
 fit_content = true
 
 [node name="BGDraggableWindow" type="CheckButton" parent="HBoxContainer/VBoxContainer"]
@@ -170,8 +166,7 @@ popup/item_4/id = 4
 
 [node name="NativeDialog" type="CheckButton" parent="HBoxContainer/VBoxContainer2"]
 layout_mode = 2
-text = "Use Native
-Dialog"
+text = "Use Native Dialog"
 
 [node name="FileDialogOutput" type="TextEdit" parent="HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(200, 150)
@@ -209,7 +204,7 @@ text = "Enter"
 [node name="AcceptOutput" type="TextEdit" parent="HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(200, 70)
 layout_mode = 2
-placeholder_text = "Dialogue result will show up here."
+placeholder_text = "Dialog result will show up here."
 editable = false
 wrap_mode = 1
 
@@ -223,7 +218,7 @@ horizontal_alignment = 1
 
 [node name="ConfirmationButton" type="Button" parent="HBoxContainer/VBoxContainer2"]
 layout_mode = 2
-text = "Show Dialogue"
+text = "Show Dialog"
 
 [node name="ConfirmationOutput" type="TextEdit" parent="HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(200, 35)
@@ -250,7 +245,7 @@ layout_mode = 2
 theme_override_font_sizes/normal_font_size = 12
 theme_override_font_sizes/mono_font_size = 12
 bbcode_enabled = true
-text = "Popup hiding on mouse exit is handled by via [code]mouse_exited[/code] signal"
+text = "Popup hiding on mouse exit is handled by via the [code]mouse_exited[/code] signal."
 fit_content = true
 
 [node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer3"]

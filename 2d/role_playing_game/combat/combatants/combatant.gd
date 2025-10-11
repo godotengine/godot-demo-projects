@@ -8,7 +8,7 @@ signal turn_finished
 
 var active := false: set = set_active
 
-@onready var animation_playback: AnimationNodeStateMachinePlayback = $Sprite2D/AnimationTree.get("parameters/playback")
+@onready var animation_playback: AnimationNodeStateMachinePlayback = $Sprite2D/AnimationTree.get(&"parameters/playback")
 
 func set_active(value: bool) -> void:
 	active = value
@@ -37,4 +37,4 @@ func flee() -> void:
 
 func take_damage(damage_to_take: float) -> void:
 	$Health.take_damage(damage_to_take)
-	animation_playback.start("take_damage")
+	animation_playback.start(&"take_damage")

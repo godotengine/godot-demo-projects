@@ -26,11 +26,11 @@ func _draw() -> void:
 		draw_animation_slice(ANIMATION_LENGTH, slice_begin, slice_end)
 		draw_set_transform(margin + offset, deg_to_rad(randf_range(-5.0, 5.0)))
 		draw_rect(
-			Rect2(Vector2(), Vector2(100, 50)),
-			Color.from_hsv(randf(), 0.4, 1.0),
-			true,
-			-1.0,
-			use_antialiasing
-	)
+				Rect2(Vector2(), Vector2(100, 50)),
+				Color.from_hsv(randf(), 0.4, 1.0),
+				true,
+				-1.0,
+				use_antialiasing
+			)
 
 	draw_end_animation()

@@ -13,16 +13,16 @@ func _process(delta):
 	else:
 		text += "Right hand\n"
 
-	var controller_tracker : XRPositionalTracker = XRServer.get_tracker("left_hand" if hand == 0 else "right_hand")
+	var controller_tracker : XRPositionalTracker = XRServer.get_tracker(&"left_hand" if hand == 0 else &"right_hand")
 	if controller_tracker:
 		var profile = controller_tracker.profile.replace("/interaction_profiles/", "").replace("/", " ")
 		text += "\nProfile: " + profile + "\n"
 
-		var pose : XRPose = controller_tracker.get_pose("palm_pose")
+		var pose : XRPose = controller_tracker.get_pose(&"palm_pose")
 		if pose and pose.tracking_confidence != XRPose.XR_TRACKING_CONFIDENCE_NONE:
 			text +=" - Using palm pose\n"
 		else:
-			pose = controller_tracker.get_pose("grip")
+			pose = controller_tracker.get_pose(&"grip")
 			if pose:
 				text +=" - Using grip pose\n"
 
@@ -40,7 +40,7 @@ func _process(delta):
 	else:
 		text += "\nNo controller tracker found!\n"
 
-	var hand_tracker : XRHandTracker = XRServer.get_tracker("/user/hand_tracker/left" if hand == 0 else "/user/hand_tracker/right")
+	var hand_tracker : XRHandTracker = XRServer.get_tracker(&"/user/hand_tracker/left" if hand == 0 else &"/user/hand_tracker/right")
 	if hand_tracker:
 		text += "\nHand tracker found\n"
 

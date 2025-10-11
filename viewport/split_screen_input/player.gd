@@ -9,16 +9,16 @@ var _movement: Vector2 = Vector2(0, 0) # Current movement rate of node.
 
 # Update movement variable based on input that reaches this SubViewport.
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ux_up") or event.is_action_released("ux_down"):
+	if event.is_action_pressed(&"ux_up") or event.is_action_released(&"ux_down"):
 		_movement.y -= 1
 		get_viewport().set_input_as_handled()
-	elif event.is_action_pressed("ux_down") or event.is_action_released("ux_up"):
+	elif event.is_action_pressed(&"ux_down") or event.is_action_released(&"ux_up"):
 		_movement.y += 1
 		get_viewport().set_input_as_handled()
-	elif event.is_action_pressed("ux_left") or event.is_action_released("ux_right"):
+	elif event.is_action_pressed(&"ux_left") or event.is_action_released(&"ux_right"):
 		_movement.x -= 1
 		get_viewport().set_input_as_handled()
-	elif event.is_action_pressed("ux_right") or event.is_action_released("ux_left"):
+	elif event.is_action_pressed(&"ux_right") or event.is_action_released(&"ux_left"):
 		_movement.x += 1
 		get_viewport().set_input_as_handled()
 

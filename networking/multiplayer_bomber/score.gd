@@ -30,10 +30,10 @@ func add_player(id: int, new_player_name: String) -> void:
 	label.text = new_player_name + "\n" + "0"
 	label.modulate = gamestate.get_player_color(new_player_name)
 	label.size_flags_horizontal = SIZE_EXPAND_FILL
-	label.add_theme_font_override("font", preload("res://montserrat.otf"))
-	label.add_theme_color_override("font_outline_color", Color.BLACK)
-	label.add_theme_constant_override("outline_size", 9)
-	label.add_theme_font_size_override("font_size", 18)
+	label.add_theme_font_override(&"font", preload("res://montserrat.otf"))
+	label.add_theme_color_override(&"font_outline_color", Color.BLACK)
+	label.add_theme_constant_override(&"outline_size", 9)
+	label.add_theme_font_size_override(&"font_size", 18)
 	add_child(label)
 
 	player_labels[id] = {

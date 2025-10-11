@@ -1,6 +1,8 @@
 extends Node
 
+
 @export var sprite: Sprite2D
+
 
 func generate_polygon():
 	# Make a bitmap out of a sprite.

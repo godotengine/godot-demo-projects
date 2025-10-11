@@ -160,7 +160,7 @@ func start_test() -> void:
 		animation_player.playback_process_mode = AnimationPlayer.ANIMATION_PROCESS_PHYSICS
 	else:
 		animation_player.playback_process_mode = AnimationPlayer.ANIMATION_PROCESS_IDLE
-	animation_player.play("Move")
+	animation_player.play(&"Move")
 
 	$LabelBodyType.text = "Body Type: " + _body_type[_current_body_index] + " \nCollision Shape: " + _current_shape
 

@@ -1,16 +1,16 @@
 extends Node3D
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("toggle_occlusion_culling"):
+	if event.is_action_pressed(&"toggle_occlusion_culling"):
 		get_viewport().use_occlusion_culling = not get_viewport().use_occlusion_culling
 		update_labels()
-	if event.is_action_pressed("toggle_mesh_lod"):
+	if event.is_action_pressed(&"toggle_mesh_lod"):
 		get_viewport().mesh_lod_threshold = 1.0 if is_zero_approx(get_viewport().mesh_lod_threshold) else 0.0
 		update_labels()
-	if event.is_action_pressed("cycle_draw_mode"):
+	if event.is_action_pressed(&"cycle_draw_mode"):
 		get_viewport().debug_draw = wrapi(get_viewport().debug_draw + 1, 0, 5) as Viewport.DebugDraw
 		update_labels()
-	if event.is_action_pressed("toggle_vsync"):
+	if event.is_action_pressed(&"toggle_vsync"):
 		if DisplayServer.window_get_vsync_mode() == DisplayServer.VSYNC_DISABLED:
 			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 		else:

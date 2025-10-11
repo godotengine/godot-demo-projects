@@ -22,10 +22,10 @@ func _on_steps_value_changed(value):
 	for bar_path in bars:
 		var bar = get_node(bar_path)
 		var shader_mat = bar.hdr_bar.material_override as ShaderMaterial
-		shader_mat.set_shader_parameter("steps", value)
+		shader_mat.set_shader_parameter(&"steps", value)
 	if hues:
 		var shader_mat = hues.material_override as ShaderMaterial
-		shader_mat.set_shader_parameter("steps", value)
+		shader_mat.set_shader_parameter(&"steps", value)
 
 
 func _on_color_picker_button_color_changed(color):
@@ -37,10 +37,10 @@ func _on_exponential_toggled(button_pressed):
 	for bar_path in bars:
 		var bar = get_node(bar_path)
 		var shader_mat = bar.hdr_bar.material_override as ShaderMaterial
-		shader_mat.set_shader_parameter("exponential_view", button_pressed)
+		shader_mat.set_shader_parameter(&"exponential_view", button_pressed)
 
 		shader_mat = bar.sdr_bar.material_override as ShaderMaterial
-		shader_mat.set_shader_parameter("exponential_view", button_pressed)
+		shader_mat.set_shader_parameter(&"exponential_view", button_pressed)
 	if hues:
 		var shader_mat = hues.material_override as ShaderMaterial
-		shader_mat.set_shader_parameter("exponential_view", button_pressed)
+		shader_mat.set_shader_parameter(&"exponential_view", button_pressed)

@@ -18,11 +18,13 @@ func _init(args: Variant) -> void:
 	x_filter = LowPassFilter.new()
 	dx_filter = LowPassFilter.new()
 
+
 func alpha(rate: float, cutoff: float) -> float:
 	var tau: float = 1.0 / (2 * PI * cutoff)
 	var te: float = 1.0 / rate
 
 	return 1.0 / (1.0 + tau/te)
+
 
 func filter(value: float, delta: float) -> float:
 	var rate: float = 1.0 / delta
@@ -32,11 +34,14 @@ func filter(value: float, delta: float) -> float:
 	var cutoff: float = min_cutoff + beta * abs(edx)
 	return x_filter.filter(value, alpha(rate, cutoff))
 
+
 class LowPassFilter:
 	var last_value: float
 
+
 	func _init() -> void:
 		last_value = 0
+
 
 	func filter(value: float, alpha: float) -> float:
 		var result := alpha * value + (1 - alpha) * last_value

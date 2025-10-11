@@ -10,6 +10,7 @@ var look_direction := Vector2.RIGHT:
 		look_direction = value
 		set_look_direction(value)
 
+
 func take_damage(attacker: Node, amount: float, effect: Node = null) -> void:
 	if is_ancestor_of(attacker):
 		return

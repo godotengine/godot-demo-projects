@@ -20,7 +20,7 @@ func _ready():
 
 
 func _unhandled_input(event):
-	if event.is_action_pressed("ui_accept") and $UserInterface/Retry.visible:
+	if event.is_action_pressed(&"ui_accept") and $UserInterface/Retry.visible:
 		get_tree().reload_current_scene()
 
 
@@ -29,7 +29,7 @@ func _on_mob_timer_timeout():
 	var mob = mob_scene.instantiate()
 
 	# Choose a random location on the SpawnPath.
-	var mob_spawn_location = get_node("SpawnPath/SpawnLocation")
+	var mob_spawn_location = get_node(^"SpawnPath/SpawnLocation")
 	mob_spawn_location.progress_ratio = randf()
 
 	# Communicate the spawn location and the player's location to the mob.

@@ -81,7 +81,7 @@ func _ready() -> void:
 
 	var floor_slider: Control = find_child("FloorMaxAngle")
 	if floor_slider:
-		floor_slider.get_node("HSlider").value = _floor_max_angle
+		floor_slider.get_node(^"HSlider").value = _floor_max_angle
 
 	_start_test()
 

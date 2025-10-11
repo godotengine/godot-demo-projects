@@ -114,7 +114,7 @@ func cycle_camera_type() -> void:
 			$Rig/Camera_TPS.make_current()
 		CameraType.CAM_TPS:
 			_cam_type = CameraType.CAM_FIXED
-			get_node("../Camera_Fixed").make_current()
+			get_node(^"../Camera_Fixed").make_current()
 
 	# Hide body in FPS view (but keep shadow casting to improve spatial awareness).
 	if _cam_type == CameraType.CAM_FPS:

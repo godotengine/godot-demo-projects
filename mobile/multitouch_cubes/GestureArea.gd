@@ -36,7 +36,7 @@ func _gui_input(event: InputEvent) -> void:
 
 	elif finger_count == 1:
 		# One finger => For rotating around X and Y.
-		# Accept one more press, unpress or drag.
+		# Accept one more press, unpress, or drag.
 		if event is InputEventScreenTouch:
 			if event.pressed:
 				# One more finger started touching.

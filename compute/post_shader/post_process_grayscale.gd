@@ -60,11 +60,11 @@ func _render_callback(p_effect_callback_type: EffectCallbackType, p_render_data:
 			# Create push constant.
 			# Must be aligned to 16 bytes and be in the same order as defined in the shader.
 			var push_constant := PackedFloat32Array([
-				size.x,
-				size.y,
-				0.0,
-				0.0,
-			])
+					size.x,
+					size.y,
+					0.0,
+					0.0,
+				])
 
 			# Loop through views just in case we're doing stereo rendering. No extra cost if this is mono.
 			var view_count: int = render_scene_buffers.get_view_count()

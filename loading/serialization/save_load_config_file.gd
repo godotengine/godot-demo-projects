@@ -42,7 +42,7 @@ func load_game() -> void:
 	player.sprite.rotation = config.get_value("player", "rotation")
 
 	# Remove existing enemies before adding new ones.
-	get_tree().call_group("enemy", "queue_free")
+	get_tree().call_group(&"enemy", &"queue_free")
 
 	var enemies: Array = config.get_value("enemies", "enemies")
 	var game := get_node(game_node)

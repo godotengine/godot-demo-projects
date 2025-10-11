@@ -15,7 +15,7 @@ A dynamic split screen system displays a single screen when
 the two players are close but a split view when they move apart.
 
 The splitting line can take any angle depending on the players'
-position, so it won't be either vertical or horizontal.
+positions, so it won't be either vertical or horizontal.
 
 This system was popularized by the Lego video games.
 

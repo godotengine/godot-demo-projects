@@ -23,7 +23,7 @@ const CHAIN_MAX_ITER = 10
 		var temp = get_node(skeleton_path)
 		if temp != null:
 			# If it has the method "get_bone_global_pose" it is likely a Skeleton3D
-			if temp.has_method("get_bone_global_pose"):
+			if temp.has_method(&"get_bone_global_pose"):
 				skeleton = temp
 				bone_IDs = {}
 
@@ -109,7 +109,7 @@ func _ready():
 	if target == null:
 		# NOTE: You MUST have a node called Target as a child of this node!
 		# So we create one if one doesn't already exist.
-		if not has_node("Target"):
+		if not has_node(^"Target"):
 			target = Node3D.new()
 			add_child(target)
 
@@ -127,7 +127,7 @@ func _ready():
 			_make_editor_sphere_at_node(target, Color.MAGENTA)
 
 	if middle_joint_target == null:
-		if not has_node("MiddleJoint"):
+		if not has_node(^"MiddleJoint"):
 			middle_joint_target = Node3D.new()
 			add_child(middle_joint_target)
 
@@ -243,7 +243,7 @@ func solve_chain():
 	else:
 		dir = -target.global_transform.basis.z.normalized()
 
-	# Get the target position (accounting for the final bone and it's length)
+	# Get the target position (accounting for the final bone and its length)
 	var target_pos = target.global_transform.origin + (dir * bones_in_chain_lengths[bone_nodes.size()-1])
 
 	# If we are using middle joint target (and have more than 2 bones), move our middle joint towards it!

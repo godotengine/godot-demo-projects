@@ -20,25 +20,25 @@ func _draw() -> void:
 	var antialiasing_width_offset := 1.0 if use_antialiasing else 0.0
 
 	var points := PackedVector2Array([
-		Vector2(0, 0),
-		Vector2(0, 60),
-		Vector2(60, 90),
-		Vector2(60, 0),
-		Vector2(40, 25),
-		Vector2(10, 40),
-	])
+			Vector2(0, 0),
+			Vector2(0, 60),
+			Vector2(60, 90),
+			Vector2(60, 0),
+			Vector2(40, 25),
+			Vector2(10, 40),
+		])
 	var colors := PackedColorArray([
-		Color.WHITE,
-		Color.RED,
-		Color.GREEN,
-		Color.BLUE,
-		Color.MAGENTA,
-		Color.MAGENTA,
-	])
+			Color.WHITE,
+			Color.RED,
+			Color.GREEN,
+			Color.BLUE,
+			Color.MAGENTA,
+			Color.MAGENTA,
+		])
 
 	var offset := Vector2()
 	# `draw_set_transform()` is a stateful command: it affects *all* `draw_` methods within this
-	# `_draw()` function after it. This can be used to translate, rotate or scale `draw_` methods
+	# `_draw()` function after it. This can be used to translate, rotate, or scale `draw_` methods
 	# that don't offer dedicated parameters for this (such as `draw_primitive()` not having a position parameter).
 	# To reset back to the initial transform, call `draw_set_transform(Vector2())`.
 	draw_set_transform(margin + offset)
@@ -57,7 +57,7 @@ func _draw() -> void:
 	draw_primitive(points.slice(0, 4), colors.slice(0, 4), PackedVector2Array())
 
 	# Draw a polygon with multiple colors that are interpolated between each point.
-	# Colors are specified in the same order as points' positions, but in a different array.
+	# Colors are specified in the same order as the points' positions, but in a different array.
 	offset = Vector2(0, 120)
 	draw_set_transform(margin + offset)
 	draw_polygon(points, colors)

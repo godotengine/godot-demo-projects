@@ -26,7 +26,7 @@ func _draw() -> void:
 			false,
 			line_width_thin,
 			use_antialiasing
-	)
+		)
 
 	offset += Vector2(120, 0)
 	draw_rect(
@@ -35,7 +35,7 @@ func _draw() -> void:
 			false,
 			2.0 - antialiasing_width_offset,
 			use_antialiasing
-	)
+		)
 
 	offset += Vector2(120, 0)
 	draw_rect(
@@ -44,7 +44,7 @@ func _draw() -> void:
 			false,
 			6.0 - antialiasing_width_offset,
 			use_antialiasing
-	)
+		)
 
 	# Draw a filled rectangle. The width parameter is ignored for filled rectangles (it's set to `-1.0` to avoid warnings).
 	# We also reduce the rectangle's size by half the antialiasing width offset.
@@ -56,10 +56,10 @@ func _draw() -> void:
 			true,
 			-1.0,
 			use_antialiasing
-	)
+		)
 
 	# `draw_set_transform()` is a stateful command: it affects *all* `draw_` methods within this
-	# `_draw()` function after it. This can be used to translate, rotate or scale `draw_` methods
+	# `_draw()` function after it. This can be used to translate, rotate, or scale `draw_` methods
 	# that don't offer dedicated parameters for this (such as `draw_rect()` not having a rotation parameter).
 	# To reset back to the initial transform, call `draw_set_transform(Vector2())`.
 	offset += Vector2(170, 0)
@@ -70,7 +70,7 @@ func _draw() -> void:
 			false,
 			line_width_thin,
 			use_antialiasing
-	)
+		)
 	offset += Vector2(120, 0)
 	draw_set_transform(margin + offset, deg_to_rad(22.5))
 	draw_rect(
@@ -79,7 +79,7 @@ func _draw() -> void:
 			false,
 			2.0 - antialiasing_width_offset,
 			use_antialiasing
-	)
+		)
 	offset += Vector2(120, 0)
 	draw_set_transform(margin + offset, deg_to_rad(22.5))
 	draw_rect(
@@ -88,7 +88,7 @@ func _draw() -> void:
 			false,
 			6.0 - antialiasing_width_offset,
 			use_antialiasing
-	)
+		)
 
 	# `draw_set_transform_matrix()` is a more advanced counterpart of `draw_set_transform()`.
 	# It can be used to apply transforms that are not supported by `draw_set_transform()`, such as
@@ -99,12 +99,12 @@ func _draw() -> void:
 	custom_transform.y.x -= 0.5
 	draw_set_transform_matrix(custom_transform)
 	draw_rect(
-		Rect2(Vector2(), Vector2(100, 50)),
-		Color.PURPLE,
-		false,
-		6.0 - antialiasing_width_offset,
-		use_antialiasing
-	)
+			Rect2(Vector2(), Vector2(100, 50)),
+			Color.PURPLE,
+			false,
+			6.0 - antialiasing_width_offset,
+			use_antialiasing
+		)
 	draw_set_transform(Vector2())
 
 	offset = Vector2(0, 250)

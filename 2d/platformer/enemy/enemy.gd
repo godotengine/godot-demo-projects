@@ -10,7 +10,7 @@ const WALK_SPEED = 22.0
 
 var _state := State.WALKING
 
-@onready var gravity: int = ProjectSettings.get("physics/2d/default_gravity")
+@onready var gravity: int = ProjectSettings.get(&"physics/2d/default_gravity")
 @onready var platform_detector := $PlatformDetector as RayCast2D
 @onready var floor_detector_left := $FloorDetectorLeft as RayCast2D
 @onready var floor_detector_right := $FloorDetectorRight as RayCast2D

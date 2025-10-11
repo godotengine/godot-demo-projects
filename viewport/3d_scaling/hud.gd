@@ -26,9 +26,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		filter_mode = wrapi(filter_mode + 1, Viewport.SCALING_3D_MODE_BILINEAR, Viewport.SCALING_3D_MODE_MAX) as Viewport.Scaling3DMode
 		viewport.scaling_3d_mode = filter_mode
 		filter_label.text = (
-				ClassDB.class_get_enum_constants("Viewport", "Scaling3DMode")[filter_mode]
+				ClassDB.class_get_enum_constants(&"Viewport", &"Scaling3DMode")[filter_mode]
 						.capitalize()
 						.replace("3d", "3D")
 						.replace("Mode", "Mode:")
 						.replace("Fsr", "FSR")
-		)
+			)

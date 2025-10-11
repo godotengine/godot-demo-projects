@@ -22,7 +22,7 @@ func update(_delta: float) -> void:
 		finished.emit(PLAYER_STATE.idle)
 	update_look_direction(input_direction)
 
-	if Input.is_action_pressed("run"):
+	if Input.is_action_pressed(&"run"):
 		speed = max_run_speed
 	else:
 		speed = max_walk_speed
@@ -30,7 +30,7 @@ func update(_delta: float) -> void:
 	var collision_info := move(speed, input_direction)
 	if not collision_info:
 		return
-	if speed == max_run_speed and collision_info.collider.is_in_group("environment"):
+	if speed == max_run_speed and collision_info.collider.is_in_group(&"environment"):
 		return
 
 

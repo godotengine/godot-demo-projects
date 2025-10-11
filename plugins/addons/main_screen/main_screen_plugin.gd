@@ -38,4 +38,4 @@ func _get_plugin_name() -> String:
 
 
 func _get_plugin_icon() -> Texture2D:
-	return get_editor_interface().get_base_control().get_theme_icon("Node", "EditorIcons")
+	return get_editor_interface().get_base_control().get_theme_icon(&"Node", &"EditorIcons")

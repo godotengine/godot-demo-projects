@@ -19,7 +19,7 @@ func _input(event: InputEvent) -> void:
 		rot.x = clamp(rot.x - event.screen_relative.y * MOUSE_SENSITIVITY, -1.57, 1.57)
 		transform.basis = Basis.from_euler(rot)
 
-	if event.is_action_pressed("toggle_mouse_capture"):
+	if event.is_action_pressed(&"toggle_mouse_capture"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 			Input.get_axis(&"move_left", &"move_right"),
 			0,
 			Input.get_axis(&"move_forward", &"move_back")
-	)
+		)
 
 	# Normalize motion to prevent diagonal movement from being
 	# `sqrt(2)` times faster than straight movement.

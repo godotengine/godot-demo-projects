@@ -3,7 +3,7 @@
 This project showcases how to load and save various file types without going
 through Godot's resource importing system.
 
-This is useful to load/save images, sounds, 3D scenes and ZIP archives at
+This is useful to load/save images, sounds, 3D scenes, and ZIP archives at
 run-time such as user-generated content, without requiring users to generate a
 PCK file through Godot.
 

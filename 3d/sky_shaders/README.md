@@ -14,7 +14,7 @@ resource dropdown.
 > **Warning**
 >
 > Sky shaders are rendered every frame if they use the `TIME` variable or are
-> otherwise updated every frame (e.g. if an uniform is updated in `_process()`
+> otherwise updated every frame (e.g. if a uniform is updated in `_process()`
 > or with an AnimationPlayer). This has a significant performance impact for
 > complex sky shaders. The performance impact can be reduced by adjusting the
 > radiance map properties in Environment, but it will remain significant.

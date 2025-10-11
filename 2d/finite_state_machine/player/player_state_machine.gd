@@ -36,6 +36,7 @@ func _unhandled_input(input_event: InputEvent) -> void:
 	if input_event.is_action_pressed(PLAYER_STATE.attack):
 		if current_state in [attack, stagger]:
 			return
+
 		_change_state(PLAYER_STATE.attack)
 		return
 

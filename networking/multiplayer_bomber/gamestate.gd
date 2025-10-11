@@ -32,7 +32,7 @@ func _player_connected(id: int) -> void:
 
 # Callback from SceneTree.
 func _player_disconnected(id: int) -> void:
-	if has_node("/root/World"):
+	if has_node(^"/root/World"):
 		# Game is in progress.
 		if multiplayer.is_server():
 			game_error.emit("Player " + players[id] + " disconnected")
@@ -79,12 +79,12 @@ func load_world() -> void:
 	# Change scene.
 	var world: Node2D = load("res://world.tscn").instantiate()
 	get_tree().get_root().add_child(world)
-	get_tree().get_root().get_node("Lobby").hide()
+	get_tree().get_root().get_node(^"Lobby").hide()
 
 	# Set up score.
-	world.get_node("Score").add_player(multiplayer.get_unique_id(), player_name)
+	world.get_node(^"Score").add_player(multiplayer.get_unique_id(), player_name)
 	for pn: int in players:
-		world.get_node("Score").add_player(pn, players[pn])
+		world.get_node(^"Score").add_player(pn, players[pn])
 
 	# Unpause and unleash the game!
 	get_tree().paused = false
@@ -112,7 +112,7 @@ func begin_game() -> void:
 	assert(multiplayer.is_server())
 	load_world.rpc()
 
-	var world: Node2D = get_tree().get_root().get_node("World")
+	var world: Node2D = get_tree().get_root().get_node(^"World")
 	var player_scene: PackedScene = load("res://player.tscn")
 
 	# Create a dictionary with peer ID. and respective spawn points.
@@ -129,15 +129,15 @@ func begin_game() -> void:
 		var player := player_scene.instantiate()
 		player.synced_position = spawn_pos
 		player.name = str(p_id)
-		world.get_node("Players").add_child(player)
+		world.get_node(^"Players").add_child(player)
 		# The RPC must be called after the player is added to the scene tree.
 		player.set_player_name.rpc(player_name if p_id == multiplayer.get_unique_id() else players[p_id])
 
 
 func end_game() -> void:
-	if has_node("/root/World"):
+	if has_node(^"/root/World"):
 		# If the game is in progress, end it.
-		get_node("/root/World").queue_free()
+		get_node(^"/root/World").queue_free()
 
 	game_ended.emit()
 	players.clear()

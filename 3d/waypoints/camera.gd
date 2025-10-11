@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 			Input.get_axis(&"move_left", &"move_right"),
 			0,
 			Input.get_axis(&"move_forward", &"move_back")
-	)
+		)
 
 	# Normalize motion to prevent diagonal movement from being
 	# `sqrt(2)` times faster than straight movement.

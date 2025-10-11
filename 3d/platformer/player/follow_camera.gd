@@ -52,19 +52,19 @@ func _physics_process(delta: float) -> void:
 			target + Basis(Vector3.UP, deg_to_rad(autoturn_ray_aperture)) * (difference),
 			0xffffffff,
 			collision_exception
-	))
+		))
 	var col := ds.intersect_ray(PhysicsRayQueryParameters3D.create(
 			target,
 			target + difference,
 			0xffffffff,
 			collision_exception
-	))
+		))
 	var col_right := ds.intersect_ray(PhysicsRayQueryParameters3D.create(
 			target,
 			target + Basis(Vector3.UP, deg_to_rad(-autoturn_ray_aperture)) * (difference),
 			0xffffffff,
 			collision_exception
-	))
+		))
 
 	if not col.is_empty():
 		# If main ray was occluded, get camera closer, this is the worst case scenario.

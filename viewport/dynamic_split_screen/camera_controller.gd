@@ -2,11 +2,11 @@ extends Node3D
 # Handle the motion of both player cameras as well as communication with the
 # SplitScreen shader to achieve the dynamic split screen effect
 #
-# Cameras are place on the segment joining the two players, either in the middle
+# Cameras are placed on the segment joining the two players, either in the middle
 # if players are close enough or at a fixed distance if they are not.
 # In the first case, both cameras being at the same location, only the view of
 # the first one is used for the entire screen thus allowing the players to play
-# on a unsplit screen.
+# on an unsplit screen.
 # In the second case, the screen is split in two with a line perpendicular to the
 # segment joining the two players.
 #
@@ -38,8 +38,8 @@ func _ready() -> void:
 
 	get_viewport().size_changed.connect(_on_size_changed)
 
-	view.material.set_shader_parameter("viewport1", viewport1.get_texture())
-	view.material.set_shader_parameter("viewport2", viewport2.get_texture())
+	view.material.set_shader_parameter(&"viewport1", viewport1.get_texture())
+	view.material.set_shader_parameter(&"viewport2", viewport2.get_texture())
 
 
 func _process(_delta: float) -> void:
@@ -75,11 +75,11 @@ func _update_splitscreen() -> void:
 	else:
 		thickness = split_line_thickness
 
-	view.material.set_shader_parameter("split_active", _is_split_state())
-	view.material.set_shader_parameter("player1_position", player1_position)
-	view.material.set_shader_parameter("player2_position", player2_position)
-	view.material.set_shader_parameter("split_line_thickness", thickness)
-	view.material.set_shader_parameter("split_line_color", split_line_color)
+	view.material.set_shader_parameter(&"split_active", _is_split_state())
+	view.material.set_shader_parameter(&"player1_position", player1_position)
+	view.material.set_shader_parameter(&"player2_position", player2_position)
+	view.material.set_shader_parameter(&"split_line_thickness", thickness)
+	view.material.set_shader_parameter(&"split_line_color", split_line_color)
 
 
 ## Returns `true` if split screen is active (which occurs when players are
@@ -97,7 +97,7 @@ func _on_size_changed() -> void:
 	$Viewport1.size = screen_size
 	$Viewport2.size = screen_size
 
-	view.material.set_shader_parameter("viewport_size", screen_size)
+	view.material.set_shader_parameter(&"viewport_size", screen_size)
 
 
 func _get_position_difference_in_world() -> Vector3:

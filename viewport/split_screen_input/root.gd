@@ -28,7 +28,7 @@ var config: Dictionary = {
 	"color": Color(),
 } # Split Screen configuration Dictionary.
 
-@onready var play_area: SubViewport = $PlayArea # The central Viewport, all Split Screens are sharing.
+@onready var play_area: SubViewport = $PlayArea # The central Viewport all Split Screens are sharing.
 
 
 # Initialize each Split Screen and each player node.

@@ -7,5 +7,5 @@ func _ready() -> void:
 
 
 func _on_close_requested() -> void:
-	print("%s %s was hidden." % [str(self.get_class()), name])
+	print("%s %s was hidden." % [str(get_class()), name])
 	hide()

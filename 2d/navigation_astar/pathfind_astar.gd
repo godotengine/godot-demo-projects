@@ -18,7 +18,7 @@ var _path := PackedVector2Array()
 func _ready() -> void:
 	# Region should match the size of the playable area plus one (in tiles).
 	# In this demo, the playable area is 17×9 tiles, so the rect size is 18×10.
-	# Depending on the setup TileMapLayer's get_used_rect() can also be used.
+	# Depending on the setup, TileMapLayer's get_used_rect() can also be used.
 	_astar.region = Rect2i(0, 0, 18, 10)
 	_astar.cell_size = CELL_SIZE
 	_astar.offset = CELL_SIZE * 0.5

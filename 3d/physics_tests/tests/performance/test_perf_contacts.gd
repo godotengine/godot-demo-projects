@@ -190,7 +190,7 @@ func _despawn_objects() -> void:
 	for spawn in spawns:
 		var spawn_parent := get_node(spawn)
 
-		# Remove objects in reversed order to avoid the overhead of changing children index in parent.
+		# Remove objects in reversed order to avoid the overhead of changing child index in parent.
 		var object_count := spawn_parent.get_child_count()
 		for object_index in object_count:
 			var node := spawn_parent.get_child(object_count - object_index - 1)

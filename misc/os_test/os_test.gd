@@ -19,27 +19,27 @@ func datetime_to_string(date: Dictionary) -> void:
 	):
 		# Date and time.
 		return "{year}-{month}-{day} {hour}:{minute}:{second}".format({
-			year = str(date.year).pad_zeros(2),
-			month = str(date.month).pad_zeros(2),
-			day = str(date.day).pad_zeros(2),
-			hour = str(date.hour).pad_zeros(2),
-			minute = str(date.minute).pad_zeros(2),
-			second = str(date.second).pad_zeros(2),
-		})
+				year = str(date.year).pad_zeros(2),
+				month = str(date.month).pad_zeros(2),
+				day = str(date.day).pad_zeros(2),
+				hour = str(date.hour).pad_zeros(2),
+				minute = str(date.minute).pad_zeros(2),
+				second = str(date.second).pad_zeros(2),
+			})
 	elif date.has("year") and date.has("month") and date.has("day"):
 		# Date only.
 		return "{year}-{month}-{day}".format({
-			year = str(date.year).pad_zeros(2),
-			month = str(date.month).pad_zeros(2),
-			day = str(date.day).pad_zeros(2),
-		})
+				year = str(date.year).pad_zeros(2),
+				month = str(date.month).pad_zeros(2),
+				day = str(date.day).pad_zeros(2),
+			})
 	else:
 		# Time only.
 		return "{hour}:{minute}:{second}".format({
-			hour = str(date.hour).pad_zeros(2),
-			minute = str(date.minute).pad_zeros(2),
-			second = str(date.second).pad_zeros(2),
-		})
+				hour = str(date.hour).pad_zeros(2),
+				minute = str(date.minute).pad_zeros(2),
+				second = str(date.second).pad_zeros(2),
+			})
 
 
 func scan_midi_inputs() -> String:
@@ -55,13 +55,14 @@ func scan_midi_inputs() -> String:
 
 func add_header(header: String) -> void:
 	rtl.append_text("\n[font_size=24][color=#5cf]{header}[/color][/font_size]\n[font_size=1]\n[/font_size]".format({
-		header = header,
-	}))
+			header = header,
+		}))
 
 	# Also print to the terminal for easy copy-pasting and headless usage.
 	print_rich("\n[b][u][color=blue]{header}[/color][/u][/b]\n".format({
-		header = header,
-	}))
+			header = header,
+		}))
+
 
 func add_line(key: String, value: Variant) -> void:
 	line_count += 1
@@ -71,20 +72,20 @@ func add_line(key: String, value: Variant) -> void:
 		value = "[color=6f7]true[/color]" if original_value else "[color=#f76]false[/color]"
 
 	rtl.append_text("{bgcolor}[color=#9df]{key}:[/color] {value}{bgcolor_end}\n".format({
-		key = key,
-		value = value if str(value) != "" else "[color=#fff8](empty)[/color]",
-		bgcolor = "[bgcolor=#8883]" if line_count % 2 == 0 else "",
-		bgcolor_end = "[/bgcolor]" if line_count % 2 == 0 else "",
-	}))
+			key = key,
+			value = value if str(value) != "" else "[color=#fff8](empty)[/color]",
+			bgcolor = "[bgcolor=#8883]" if line_count % 2 == 0 else "",
+			bgcolor_end = "[/bgcolor]" if line_count % 2 == 0 else "",
+		}))
 	if typeof(original_value) == TYPE_BOOL:
 		# Colorize boolean values (`print_rich()`-friendly version, using basic colors only).
 		value = "[color=green]true[/color]" if original_value else "[color=red]false[/color]"
 
 	# Also print to the terminal for easy copy-pasting and headless usage.
 	print_rich("[b][color=cyan]{key}:[/color][/b] {value}".format({
-		key = key,
-		value = value if str(value) != "" else "[code](empty)[/code]",
-	}))
+			key = key,
+			value = value if str(value) != "" else "[code](empty)[/code]",
+		}))
 
 
 func _ready() -> void:
@@ -118,14 +119,14 @@ func _ready() -> void:
 	add_line("Startup screen refresh rate", ("%f Hz" % DisplayServer.screen_get_refresh_rate()) if DisplayServer.screen_get_refresh_rate() > 0.0 else "")
 	add_line("Usable (safe) area rectangle", DisplayServer.get_display_safe_area())
 	add_line("Screen orientation", [
-		"Landscape",
-		"Portrait",
-		"Landscape (reverse)",
-		"Portrait (reverse)",
-		"Landscape (defined by sensor)",
-		"Portrait (defined by sensor)",
-		"Defined by sensor",
-	][DisplayServer.screen_get_orientation()])
+			"Landscape",
+			"Portrait",
+			"Landscape (reverse)",
+			"Portrait (reverse)",
+			"Landscape (defined by sensor)",
+			"Portrait (defined by sensor)",
+			"Defined by sensor",
+		][DisplayServer.screen_get_orientation()])
 
 	add_header("Engine")
 	add_line("Version", Engine.get_version_info()["string"])
@@ -214,16 +215,17 @@ func _ready() -> void:
 	if RenderingServer.get_current_rendering_method() != "gl_compatibility":
 		# Querying the adapter type isn't supported in Compatibility.
 		add_line("Adapter type", [
-			"Other (Unknown)",
-			"Integrated",
-			"Discrete",
-			"Virtual",
-			"CPU",
-		][RenderingServer.get_video_adapter_type()])
+				"Other (Unknown)",
+				"Integrated",
+				"Discrete",
+				"Virtual",
+				"CPU",
+			][RenderingServer.get_video_adapter_type()])
 	add_line("Adapter graphics API version", RenderingServer.get_video_adapter_api_version())
 
 	var video_adapter_driver_info := OS.get_video_adapter_driver_info()
 	if video_adapter_driver_info.size() > 0:
 		add_line("Adapter driver name", video_adapter_driver_info[0])
+
 	if video_adapter_driver_info.size() > 1:
 		add_line("Adapter driver version", video_adapter_driver_info[1])

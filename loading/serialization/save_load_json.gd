@@ -51,7 +51,7 @@ func load_game() -> void:
 	player.sprite.rotation = str_to_var(save_dict.player.rotation)
 
 	# Remove existing enemies before adding new ones.
-	get_tree().call_group("enemy", "queue_free")
+	get_tree().call_group(&"enemy", &"queue_free")
 
 	# Ensure the node structure is the same when loading.
 	var game := get_node(game_node)

@@ -8,7 +8,7 @@ A demo showing the various window management features available through
 - Minimizing and maximizing.
 - Moving the window around.
 - Making the window transparent.
-- Capturing, hiding or confining the mouse.
+- Capturing, hiding, or confining the mouse.
 - Getting various information about the screens, including DPI and refresh rate.
 
 Language: GDScript

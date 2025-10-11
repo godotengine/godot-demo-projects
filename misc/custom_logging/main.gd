@@ -19,7 +19,7 @@ func _ready() -> void:
 	printraw("Normal message 1 (raw). ")
 	printraw("Normal message 2 (raw).\n--------\n")
 
-	if bool(ProjectSettings.get_setting_with_override("application/run/flush_stdout_on_print")):
+	if bool(ProjectSettings.get_setting_with_override(&"application/run/flush_stdout_on_print")):
 		$FlushStdoutOnPrint.text = "Flush stdout on print: Yes (?)"
 	else:
 		$FlushStdoutOnPrint.text = "Flush stdout on print: No (?)"
@@ -51,7 +51,7 @@ func _on_print_error_pressed() -> void:
 
 
 func _on_open_logs_folder_pressed() -> void:
-	OS.shell_open(ProjectSettings.globalize_path(String(ProjectSettings.get_setting_with_override("debug/file_logging/log_path")).get_base_dir()))
+	OS.shell_open(ProjectSettings.globalize_path(String(ProjectSettings.get_setting_with_override(&"debug/file_logging/log_path")).get_base_dir()))
 
 
 func _on_crash_engine_pressed() -> void:

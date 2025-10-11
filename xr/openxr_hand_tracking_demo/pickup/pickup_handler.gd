@@ -2,7 +2,7 @@
 class_name PickupHandler3D
 extends Area3D
 
-# This area3D class detects all physics bodys based on
+# This area3D class detects all physics bodies based on
 # PickupAbleBody3D within range and handles the logic
 # for selecting the closest one and allowing pickup
 # of that object.

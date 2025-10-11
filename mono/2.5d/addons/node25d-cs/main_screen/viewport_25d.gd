@@ -70,23 +70,23 @@ func _process(delta):
 	for overlay_child in overlay_children:
 		var contains = false
 		for selected in selection:
-			if selected == overlay_child.get("node25d") and not view_mode_changed_this_frame:
+			if selected == overlay_child.get(&"node25d") and not view_mode_changed_this_frame:
 				contains = true
 		if not contains:
 			overlay_child.queue_free()
 
 	# Add new gizmos.
 	for selected in selection:
-		if selected.has_method("Node25DReady"):
+		if selected.has_method(&"Node25DReady"):
 			var new = true
 			for overlay_child in overlay_children:
-				if selected == overlay_child.get("node25d"):
+				if selected == overlay_child.get(&"node25d"):
 					new = false
 			if new:
 				var gizmo = gizmo_25d_scene.instantiate()
 				viewport_overlay.add_child(gizmo)
-				gizmo.set("node25d", selected)
-				gizmo.call("Initialize")
+				gizmo.set(&"node25d", selected)
+				gizmo.call(&"Initialize")
 
 
 # This only accepts input when the mouse is inside of the 2.5D viewport.
@@ -106,7 +106,7 @@ func _gui_input(event):
 			elif event.button_index == MOUSE_BUTTON_LEFT:
 				var overlay_children = viewport_overlay.get_children()
 				for overlay_child in overlay_children:
-					overlay_child.set("wantsToMove", true)
+					overlay_child.set(&"wantsToMove", true)
 				accept_event()
 		elif event.button_index == MOUSE_BUTTON_MIDDLE:
 			is_panning = false
@@ -114,7 +114,7 @@ func _gui_input(event):
 		elif event.button_index == MOUSE_BUTTON_LEFT:
 			var overlay_children = viewport_overlay.get_children()
 			for overlay_child in overlay_children:
-				overlay_child.set("wantsToMove", false)
+				overlay_child.set(&"wantsToMove", false)
 			accept_event()
 	elif event is InputEventMouseMotion:
 		if is_panning:
@@ -123,10 +123,10 @@ func _gui_input(event):
 
 
 func _recursive_change_view_mode(current_node):
-	if current_node.has_method("set_view_mode"):
+	if current_node.has_method(&"set_view_mode"):
 		current_node.set_view_mode(view_mode_index) # GDScript.
-	if current_node.has_method("SetViewMode"):
-		current_node.call("SetViewMode", view_mode_index) # C#.
+	if current_node.has_method(&"SetViewMode"):
+		current_node.call(&"SetViewMode", view_mode_index) # C#.
 	for child in current_node.get_children():
 		_recursive_change_view_mode(child)
 

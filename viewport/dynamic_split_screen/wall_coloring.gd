@@ -5,7 +5,7 @@ extends Node3D
 
 
 func _ready() -> void:
-	var walls := get_tree().get_nodes_in_group("walls")
+	var walls := get_tree().get_nodes_in_group(&"walls")
 	for wall in walls:
 		var material := StandardMaterial3D.new()
 		material.albedo_color = Color(randf(), randf(), randf())
