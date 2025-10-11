@@ -40,12 +40,13 @@ func _ready() -> void:
 	multi_mesh.set_instance_color(4, Color(0.7, 1, 1))
 	multi_mesh.mesh = sphere_mesh
 
+
 func _draw() -> void:
 	const margin := Vector2(300, 70)
 	var offset := Vector2()
 
 	# `draw_set_transform()` is a stateful command: it affects *all* `draw_` methods within this
-	# `_draw()` function after it. This can be used to translate, rotate or scale `draw_` methods
+	# `_draw()` function after it. This can be used to translate, rotate, or scale `draw_` methods
 	# that don't offer dedicated parameters for this (such as `draw_primitive()` not having a position parameter).
 	# To reset back to the initial transform, call `draw_set_transform(Vector2())`.
 	#

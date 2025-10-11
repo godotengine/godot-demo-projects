@@ -1,9 +1,11 @@
 extends Test
 
+
 const OPTION_TEST_CASE_HIT_FROM_INSIDE = "Test case/Hit from inside"
 
-var _hit_from_inside := false
-var _do_raycasts := false
+var _hit_from_inside: bool = false
+var _do_raycasts: bool = false
+
 
 func _ready() -> void:
 	var options: OptionMenu = $Options

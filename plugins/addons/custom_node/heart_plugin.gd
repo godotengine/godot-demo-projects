@@ -4,7 +4,8 @@ extends EditorPlugin
 
 func _enter_tree() -> void:
 	# When this plugin node enters tree, add the custom type.
-	add_custom_type("Heart", "Node2D", preload("res://addons/custom_node/heart.gd"), preload("res://addons/custom_node/heart_icon.png"))
+	var icon: Texture2D = preload("res://addons/custom_node/heart.png")
+	add_custom_type("Heart", "Node2D", preload("res://addons/custom_node/heart.gd"), icon)
 
 
 func _exit_tree() -> void:

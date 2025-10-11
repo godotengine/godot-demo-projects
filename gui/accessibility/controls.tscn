@@ -1,0 +1,207 @@
+[gd_scene load_steps=4 format=3 uid="uid://c476bneq2n380"]
+
+[ext_resource type="Script" uid="uid://cxnk00sr4uyf7" path="res://controls.gd" id="1_gpdjo"]
+[ext_resource type="Texture2D" uid="uid://c0am3gcgk8uf0" path="res://clear.svg" id="2_qo8cm"]
+[ext_resource type="Script" uid="uid://cl70yf5thtjy8" path="res://custom_control.gd" id="3_xwvqn"]
+
+[node name="Accessibility" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gpdjo")
+
+[node name="SectionNames" type="Label" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 16.0
+offset_right = 249.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 24
+text = "Accessible names:"
+
+[node name="NamesDescription1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 56.0
+offset_right = 1088.0
+offset_bottom = 88.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.5882353)
+text = "Readable name for control can be specified using \"accessible_name\" property."
+autowrap_mode = 2
+
+[node name="LabelName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 56.0
+offset_right = 115.0
+offset_bottom = 88.0
+text = "Name:"
+
+[node name="LineEditName" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 56.0
+offset_right = 336.0
+offset_bottom = 87.0
+accessibility_name = "Name"
+
+[node name="NamesDescription2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 104.0
+offset_right = 1088.0
+offset_bottom = 136.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.5882353)
+text = "Or by setting \"placeholder\" in case of input controls like \"LineEdit\"."
+autowrap_mode = 2
+
+[node name="NamesDescription4" type="Label" parent="."]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 152.0
+offset_right = 1088.0
+offset_bottom = 184.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.5882353)
+text = "Node without name still works with screen reader, but it's harder to determine its purpose."
+autowrap_mode = 2
+
+[node name="LabelType" type="Label" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 104.0
+offset_right = 115.0
+offset_bottom = 136.0
+text = "Type:"
+
+[node name="LineEditType" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 104.0
+offset_right = 336.0
+offset_bottom = 135.0
+placeholder_text = "Type"
+
+[node name="NamesDescription3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 200.0
+offset_right = 1088.0
+offset_bottom = 232.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.5882353)
+text = "Controls with a static \"text\" property, like \"Button\" will use it as the default readable name."
+autowrap_mode = 2
+
+[node name="LabelBroken" type="Label" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 152.0
+offset_right = 115.0
+offset_bottom = 184.0
+text = "No name:"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 152.0
+offset_right = 336.0
+offset_bottom = 183.0
+
+[node name="ButtonOK" type="Button" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 200.0
+offset_right = 127.0
+offset_bottom = 231.0
+text = "OK"
+
+[node name="ButtonClear" type="Button" parent="."]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 200.0
+offset_right = 160.0
+offset_bottom = 231.0
+accessibility_name = "Clear"
+icon = ExtResource("2_qo8cm")
+
+[node name="LabelRegion" type="Label" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 264.0
+offset_right = 173.0
+offset_bottom = 298.0
+theme_override_font_sizes/font_size = 24
+text = "Live region:"
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 304.0
+offset_right = 336.0
+offset_bottom = 352.0
+
+[node name="LabelRegion" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 264.0
+offset_bottom = 40.0
+accessibility_live = 2
+
+[node name="LineEditLiveReg" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 368.0
+offset_right = 336.0
+offset_bottom = 399.0
+placeholder_text = "Live region text"
+
+[node name="LiveDescription1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 304.0
+offset_right = 1088.0
+offset_bottom = 379.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.5882353)
+text = "Live regions (\"accessibility live\" property) can be used to announce changes to unfocused elements, depending on the setting screen reader will speak changes immediately or whenever the user is idle."
+autowrap_mode = 2
+
+[node name="LiveDescription2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 528.0
+offset_right = 1088.0
+offset_bottom = 603.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.5882353)
+text = "Accessibility support for a node can be fully customized by implementing \"ACCESSIBILITY_*\" notifications handler and associated virtual methods, see script attached to \"CustomControl\" node."
+autowrap_mode = 2
+
+[node name="ButtonSet" type="Button" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 416.0
+offset_right = 127.0
+offset_bottom = 447.0
+text = "Set"
+
+[node name="LabelCustom" type="Label" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 488.0
+offset_right = 249.0
+offset_bottom = 522.0
+theme_override_font_sizes/font_size = 24
+text = "Custom control:"
+
+[node name="CustomControl" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 64.0
+offset_top = 528.0
+offset_right = 364.0
+offset_bottom = 568.0
+focus_mode = 2
+script = ExtResource("3_xwvqn")
+
+[connection signal="pressed" from="ButtonSet" to="." method="_on_button_set_pressed"]

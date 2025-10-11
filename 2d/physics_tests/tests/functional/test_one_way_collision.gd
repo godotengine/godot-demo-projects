@@ -1,6 +1,7 @@
 @tool
 extends Test
 
+
 signal all_tests_done()
 signal test_done()
 
@@ -18,23 +19,23 @@ const OPTION_TEST_CASE_MOVING_PLATFORM_CHARACTER = "Test Cases/Moving Platform (
 const TEST_ALL_ANGLES_STEP = 15.0
 const TEST_ALL_ANGLES_MAX = 344.0
 
-@export_range(64, 256, 0.1) var _platform_size := 128.0:
+@export_range(64, 256, 0.1) var _platform_size: float = 128.0:
 	set(value):
 		if value == _platform_size:
 			return
 		_platform_size = value
 		_update_platform_size(value)
 
-@export_range(0, 360, 0.1) var _platform_angle := 0.0:
+@export_range(0, 360, 0.1) var _platform_angle: float = 0.0:
 	set(value):
 		if value == _platform_angle:
 			return
 		_platform_angle = value
 		_update_platform_angle(value)
 
-@export var _platform_speed := 0.0
+@export var _platform_speed: float = 0.0
 
-@export_range(0, 360, 0.1) var _body_angle := 0.0:
+@export_range(0, 360, 0.1) var _body_angle: float = 0.0:
 	set(value):
 		if value == _body_angle:
 			return
@@ -42,7 +43,7 @@ const TEST_ALL_ANGLES_MAX = 344.0
 		_update_rigidbody_angle(value)
 
 @export var _body_velocity := Vector2(400.0, 0.0)
-@export var _use_character_body := false
+@export var _use_character_body: bool = false
 
 @onready var options: OptionMenu = $Options
 
@@ -56,15 +57,15 @@ var _platform_velocity := Vector2.ZERO
 
 @onready var _target_area: Area2D = $TargetArea2D
 
-var _contact_detected := false
-var _target_entered := false
-var _test_passed := false
+var _contact_detected: bool = false
+var _target_entered: bool = false
+var _test_passed: bool = false
 var _test_step := 0
 
-var _test_all_angles := false
-var _lock_controls := false
+var _test_all_angles: bool = false
+var _lock_controls: bool = false
 
-var _test_canceled := false
+var _test_canceled: bool = false
 
 
 func _ready() -> void:
@@ -124,13 +125,13 @@ func _physics_process(delta: float) -> void:
 				_platform_body.global_position += motion
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and not event.pressed:
-		if event.keycode == KEY_0:
+func _input(input_event: InputEvent) -> void:
+	if input_event is InputEventKey and not input_event.pressed:
+		if input_event.keycode == KEY_0:
 			await _on_option_selected(OPTION_TEST_CASE_ALL)
-		if event.keycode == KEY_1:
+		if input_event.keycode == KEY_1:
 			await _on_option_selected(OPTION_OBJECT_TYPE_RIGIDBODY)
-		elif event.keycode == KEY_2:
+		elif input_event.keycode == KEY_2:
 			await _on_option_selected(OPTION_OBJECT_TYPE_CHARACTER)
 
 
@@ -347,7 +348,7 @@ func _test_all() -> void:
 
 
 func _start_test() -> void:
-	var test_label := "Testing: "
+	var test_label: String = "Testing: "
 
 	var platform_angle := _platform_template.rotation
 	if _platform_body:
@@ -510,7 +511,7 @@ func _on_timeout() -> void:
 
 
 func _set_result() -> void:
-	var result := ""
+	var result: String = ""
 	if _test_passed:
 		result = "PASSED"
 		$LabelResult.self_modulate = Color.GREEN

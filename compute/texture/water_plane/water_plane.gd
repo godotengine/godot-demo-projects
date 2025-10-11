@@ -41,10 +41,10 @@ func _ready() -> void:
 	# Get our texture from our material so we set our RID.
 	var material: ShaderMaterial = $MeshInstance3D.material_override
 	if material:
-		material.set_shader_parameter("effect_texture_size", texture_size)
+		material.set_shader_parameter(&"effect_texture_size", texture_size)
 
 		# Get our texture object.
-		texture = material.get_shader_parameter("effect_texture")
+		texture = material.get_shader_parameter(&"effect_texture")
 
 
 func _exit_tree() -> void:
@@ -55,16 +55,16 @@ func _exit_tree() -> void:
 	RenderingServer.call_on_render_thread(_free_compute_resources)
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(input_event: InputEvent) -> void:
 	# If tool enabled, we don't want to handle our input in the editor.
 	if Engine.is_editor_hint():
 		return
 
-	if event is InputEventMouseMotion or event is InputEventMouseButton:
-		mouse_pos = event.global_position
+	if input_event is InputEventMouseMotion or input_event is InputEventMouseButton:
+		mouse_pos = input_event.global_position
 
-	if event is InputEventMouseButton and event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
-		mouse_pressed = event.pressed
+	if input_event is InputEventMouseButton and input_event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
+		mouse_pressed = input_event.pressed
 
 
 func _check_mouse_pos() -> void:
@@ -143,13 +143,13 @@ var pipeline: RID
 var texture_rds: Array[RID] = [RID(), RID(), RID()]
 var texture_sets: Array[RID] = [RID(), RID(), RID()]
 
-func _create_uniform_set(texture_rd: RID) -> RID:
+func _create_uniform_set(texture_rd: RID, uniform_set: int) -> RID:
 	var uniform := RDUniform.new()
 	uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_IMAGE
 	uniform.binding = 0
 	uniform.add_id(texture_rd)
 	# Even though we're using 3 sets, they are identical, so we're kinda cheating.
-	return rd.uniform_set_create([uniform], shader, 0)
+	return rd.uniform_set_create([uniform], shader, uniform_set)
 
 
 func _initialize_compute_code(init_with_texture_size: Vector2i) -> void:
@@ -174,11 +174,9 @@ func _initialize_compute_code(init_with_texture_size: Vector2i) -> void:
 	tf.mipmaps = 1
 	tf.usage_bits = (
 			RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT |
-			RenderingDevice.TEXTURE_USAGE_COLOR_ATTACHMENT_BIT |
 			RenderingDevice.TEXTURE_USAGE_STORAGE_BIT |
-			RenderingDevice.TEXTURE_USAGE_CAN_UPDATE_BIT |
 			RenderingDevice.TEXTURE_USAGE_CAN_COPY_TO_BIT
-	)
+		)
 
 	for i in 3:
 		# Create our texture.
@@ -186,9 +184,6 @@ func _initialize_compute_code(init_with_texture_size: Vector2i) -> void:
 
 		# Make sure our textures are cleared.
 		rd.texture_clear(texture_rds[i], Color(0, 0, 0, 0), 0, 1, 0, 1)
-
-		# Now create our uniform set so we can use these textures in our shader.
-		texture_sets[i] = _create_uniform_set(texture_rds[i])
 
 
 func _render_process(with_next_texture: int, wave_point: Vector4, tex_size: Vector2i, p_damp: float) -> void:
@@ -215,9 +210,15 @@ func _render_process(with_next_texture: int, wave_point: Vector4, tex_size: Vect
 	@warning_ignore("integer_division")
 	var y_groups := (tex_size.y - 1) / 8 + 1
 
-	var next_set := texture_sets[with_next_texture]
-	var current_set := texture_sets[(with_next_texture - 1) % 3]
-	var previous_set := texture_sets[(with_next_texture - 2) % 3]
+	# Figure out which texture to assign to which set.
+	var current_texture_rd := texture_rds[(with_next_texture - 1) % 3]
+	var previous_texture_rd := texture_rds[(with_next_texture - 2) % 3]
+	var next_texture_rd := texture_rds[with_next_texture]
+
+	# Create our uniform sets so we can use these textures in our shader.
+	var current_set := _create_uniform_set(current_texture_rd, 0)
+	var previous_set := _create_uniform_set(previous_texture_rd, 1)
+	var next_set := _create_uniform_set(next_texture_rd, 2)
 
 	# Run our compute shader.
 	var compute_list := rd.compute_list_begin()

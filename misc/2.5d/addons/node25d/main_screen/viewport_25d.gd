@@ -1,11 +1,12 @@
 @tool
 extends Control
 
-var zoom_level := 0
-var is_panning = false
+
+var zoom_level: int = 0
+var is_panning: bool  = false
 var pan_center: Vector2
 var viewport_center: Vector2
-var view_mode_index := 0
+var view_mode_index: int = 0
 
 var editor_interface: EditorInterface  # Set in node25d_plugin.gd
 var moving = false
@@ -40,7 +41,7 @@ func _process(_delta: float) -> void:
 		return
 
 	# View mode polling.
-	var view_mode_changed_this_frame := false
+	var view_mode_changed_this_frame: bool = false
 	var new_view_mode := -1
 	if view_mode_button_group.get_pressed_button():
 		new_view_mode = view_mode_button_group.get_pressed_button().get_index()
@@ -73,7 +74,7 @@ func _process(_delta: float) -> void:
 	var selection := editor_interface.get_selection().get_selected_nodes()
 	var gizmos := viewport_overlay.get_children()
 	for gizmo in gizmos:
-		var contains := false
+		var contains: bool = false
 		for selected in selection:
 			if selected == gizmo.node_25d and not view_mode_changed_this_frame:
 				contains = true
@@ -99,35 +100,35 @@ func _ensure_node25d_has_gizmo(node: Node25D, gizmos: Array[Node]) -> void:
 
 
 # This only accepts input when the mouse is inside of the 2.5D viewport.
-func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.is_pressed():
-			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+func _gui_input(input_event: InputEvent) -> void:
+	if input_event is InputEventMouseButton:
+		if input_event.is_pressed():
+			if input_event.button_index == MOUSE_BUTTON_WHEEL_UP:
 				zoom_level += 1
 				accept_event()
-			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			elif input_event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				zoom_level -= 1
 				accept_event()
-			elif event.button_index == MOUSE_BUTTON_MIDDLE:
+			elif input_event.button_index == MOUSE_BUTTON_MIDDLE:
 				is_panning = true
-				pan_center = viewport_center - event.position / _get_zoom_amount()
+				pan_center = viewport_center - input_event.position / _get_zoom_amount()
 				accept_event()
-			elif event.button_index == MOUSE_BUTTON_LEFT:
+			elif input_event.button_index == MOUSE_BUTTON_LEFT:
 				var overlay_children := viewport_overlay.get_children()
 				for overlay_child in overlay_children:
 					overlay_child.wants_to_move = true
 				accept_event()
-		elif event.button_index == MOUSE_BUTTON_MIDDLE:
+		elif input_event.button_index == MOUSE_BUTTON_MIDDLE:
 			is_panning = false
 			accept_event()
-		elif event.button_index == MOUSE_BUTTON_LEFT:
+		elif input_event.button_index == MOUSE_BUTTON_LEFT:
 			var overlay_children := viewport_overlay.get_children()
 			for overlay_child in overlay_children:
 				overlay_child.wants_to_move = false
 			accept_event()
-	elif event is InputEventMouseMotion:
+	elif input_event is InputEventMouseMotion:
 		if is_panning:
-			viewport_center = pan_center + event.position / _get_zoom_amount()
+			viewport_center = pan_center + input_event.position / _get_zoom_amount()
 			accept_event()
 
 
@@ -135,7 +136,7 @@ func _recursive_change_view_mode(current_node: Node) -> void:
 	if not current_node:
 		return
 
-	if current_node.has_method("set_view_mode"):
+	if current_node.has_method(&"set_view_mode"):
 		current_node.set_view_mode(view_mode_index)
 
 	for child in current_node.get_children():

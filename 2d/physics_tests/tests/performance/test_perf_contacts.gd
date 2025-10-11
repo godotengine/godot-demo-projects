@@ -15,7 +15,7 @@ const OPTION_TYPE_CONCAVE_POLYGON = "Shape type/Concave Polygon"
 
 var _object_templates: Array[Node2D] = []
 
-var _log_physics := false
+var _log_physics: bool = false
 var _log_physics_time := 0
 var _log_physics_time_start := 0
 
@@ -199,7 +199,7 @@ func _despawn_objects() -> void:
 		if object_count == 0:
 			continue
 
-		# Remove objects in reversed order to avoid the overhead of changing children index in parent.
+		# Remove objects in reversed order to avoid the overhead of changing child index in parent.
 		for object_index in range(object_count):
 			var node: Node2D = spawn_parent.get_child(object_count - object_index - 1)
 			spawn_parent.remove_child(node)

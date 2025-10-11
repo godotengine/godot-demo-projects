@@ -1,11 +1,13 @@
 extends Control
 
+
 ## The FastNoiseLite object.
 @onready var noise: FastNoiseLite = $SeamlessNoiseTexture.texture.noise
 
 # Various noise parameters.
-var min_noise := -1.0
-var max_noise := 1.0
+var min_noise: float = -1.0
+var max_noise: float = 1.0
+
 
 func _ready() -> void:
 	# Set up noise with basic info.
@@ -26,8 +28,8 @@ func _refresh_shader_params() -> void:
 	@warning_ignore("integer_division")
 	var _max := (max_noise + 1) / 2
 	var _material: ShaderMaterial = $SeamlessNoiseTexture.material
-	_material.set_shader_parameter("min_value", _min)
-	_material.set_shader_parameter("max_value", _max)
+	_material.set_shader_parameter(&"min_value", _min)
+	_material.set_shader_parameter(&"max_value", _max)
 
 
 func _on_documentation_button_pressed() -> void:

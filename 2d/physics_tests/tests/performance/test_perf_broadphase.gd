@@ -8,7 +8,7 @@ const BOX_SPACE = Vector2(50, 50)
 
 var _objects: Array[Node2D] = []
 
-var _log_physics := false
+var _log_physics: bool = false
 var _log_physics_time := 0
 var _log_physics_time_start := 0
 
@@ -146,7 +146,7 @@ func _remove_objects() -> void:
 	Log.print_log("* Removing objects...")
 	var timer := Time.get_ticks_usec()
 
-	# Remove objects in reversed order to avoid the overhead of changing children index in parent.
+	# Remove objects in reversed order to avoid the overhead of changing child index in parent.
 	var object_count := _objects.size()
 	for object_index in object_count:
 		root_node.remove_child(_objects[object_count - object_index - 1])

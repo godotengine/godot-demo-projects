@@ -1,9 +1,11 @@
 extends Test
 
-@export var height := 10
-@export var width := 1
+
+@export var height: int = 10
+@export var width: int = 1
 @export var box_size := Vector2(40.0, 40.0)
 @export var box_spacing := Vector2(0.0, 0.0)
+
 
 func _ready() -> void:
 	_create_stack()

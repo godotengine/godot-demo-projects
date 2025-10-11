@@ -10,7 +10,7 @@ func add_menu_item(item_path: String, checkbox: bool = false, checked: bool = fa
 	var path_element_count := path_elements.size()
 	assert(path_element_count > 0)
 
-	var path := ""
+	var path: String = ""
 	var popup := get_popup()
 	for element_index in range(path_element_count - 1):
 		var popup_label := path_elements[element_index]

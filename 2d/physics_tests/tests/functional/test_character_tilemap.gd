@@ -1,5 +1,6 @@
 extends TestCharacter
 
+
 const OPTION_TEST_CASE_ALL = "Test Cases/TEST ALL (0)"
 const OPTION_TEST_CASE_JUMP_ONE_WAY_RIGID = "Test Cases/Jump through one-way tiles (Rigid Body)"
 const OPTION_TEST_CASE_JUMP_ONE_WAY_CHARACTER = "Test Cases/Jump through one-way tiles (Character Body)"
@@ -7,13 +8,14 @@ const OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_RIGID = "Test Cases/Jump through one-
 const OPTION_TEST_CASE_JUMP_ONE_WAY_CORNER_CHARACTER = "Test Cases/Jump through one-way corner (Character Body)"
 const OPTION_TEST_CASE_FALL_ONE_WAY_CHARACTER = "Test Cases/Fall and pushed on one-way tiles (Character Body)"
 
-var _test_jump_one_way := false
-var _test_jump_one_way_corner := false
-var _test_fall_one_way := false
+var _test_jump_one_way: bool = false
+var _test_jump_one_way_corner: bool = false
+var _test_fall_one_way: bool = false
 
 var _extra_body: PhysicsBody2D = null
 
-var _failed_reason := ""
+var _failed_reason: String = ""
+
 
 func _ready() -> void:
 	super._ready()
@@ -26,11 +28,11 @@ func _ready() -> void:
 	options.add_menu_item(OPTION_TEST_CASE_FALL_ONE_WAY_CHARACTER)
 
 
-func _input(event: InputEvent) -> void:
-	super._input(event)
+func _input(input_event: InputEvent) -> void:
+	super._input(input_event)
 
-	if event is InputEventKey and not event.pressed:
-		if event.keycode == KEY_0:
+	if input_event is InputEventKey and not input_event.pressed:
+		if input_event.keycode == KEY_0:
 			await _on_option_selected(OPTION_TEST_CASE_ALL)
 
 
@@ -113,7 +115,7 @@ func _test_all() -> void:
 
 
 func _set_result(test_passed: bool) -> void:
-	var result := ""
+	var result: String = ""
 	if test_passed:
 		result = "PASSED"
 	else:
@@ -187,7 +189,7 @@ func _start_fall_one_way() -> void:
 
 
 func _finalize_jump_one_way() -> void:
-	var passed := true
+	var passed: bool = true
 	if not $JumpTargetArea2D.overlaps_body(_moving_body):
 		passed = false
 		_failed_reason = ": the body wasn't able to jump all the way through."
@@ -199,7 +201,7 @@ func _finalize_jump_one_way() -> void:
 
 
 func _finalize_fall_one_way() -> void:
-	var passed := true
+	var passed: bool = true
 	if $FallTargetArea2D.overlaps_body(_moving_body):
 		passed = false
 		_failed_reason = ": the body was pushed through the one-way collision."

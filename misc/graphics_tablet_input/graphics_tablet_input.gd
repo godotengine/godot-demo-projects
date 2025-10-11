@@ -14,7 +14,7 @@ var event_tilt: Vector2
 var line_color := Color.BLACK
 var line_width: float = 3.0
 
-# If `true`, modulate line width accordding to pen pressure.
+# If `true`, modulate line width according to pen pressure.
 # This is done using a width curve that is continuously recreated to match the line's actual profile
 # as the line is being drawn by the user.
 var pressure_sensitive: bool = true
@@ -35,8 +35,8 @@ func _ready() -> void:
 	%TabletDriver.text = "Tablet driver: %s" % DisplayServer.tablet_get_current_driver()
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
+func _input(input_event: InputEvent) -> void:
+	if input_event is InputEventKey:
 		if Input.is_action_pressed(&"increase_line_width"):
 			$CanvasLayer/PanelContainer/Options/LineWidth/HSlider.value += 0.5
 			#_on_line_width_value_changed(line_width)
@@ -47,13 +47,13 @@ func _input(event: InputEvent) -> void:
 	if not stroke:
 		return
 
-	if event is InputEventMouseMotion:
-		var event_mouse_motion := event as InputEventMouseMotion
+	if input_event is InputEventMouseMotion:
+		var event_mouse_motion := input_event as InputEventMouseMotion
 		tablet_info.text = "Pressure: %.3f\nTilt: %.3v\nInverted pen: %s" % [
-			event_mouse_motion.pressure,
-			event_mouse_motion.tilt,
-			"Yes" if event_mouse_motion.pen_inverted else "No",
-		]
+				event_mouse_motion.pressure,
+				event_mouse_motion.tilt,
+				"Yes" if event_mouse_motion.pen_inverted else "No",
+			]
 
 		if event_mouse_motion.pressure <= 0 and stroke.points.size() > 1:
 			# Initial part of a stroke; create a new line.
@@ -61,6 +61,7 @@ func _input(event: InputEvent) -> void:
 			# Enable the buttons if they were previously disabled.
 			%ClearAllLines.disabled = false
 			%UndoLastLine.disabled = false
+
 		if event_mouse_motion.pressure > 0:
 			# Continue existing line.
 			stroke.add_point(event_mouse_motion.position)
@@ -73,7 +74,7 @@ func _input(event: InputEvent) -> void:
 					width_curve.add_point(Vector2(
 							float(pressure_idx) / pressures.size(),
 							pressures[pressure_idx]
-					))
+						))
 
 			# Split into a new line if it gets too long to avoid performance issues.
 			# This is mostly reached when input accumulation is disabled, as enabling
@@ -175,7 +176,7 @@ func _on_msaa_item_selected(index: int) -> void:
 
 func _on_max_fps_value_changed(value: float) -> void:
 	# Since the project has low-processor usage mode enabled, we change its sleep interval instead.
-	# Since this is a value in microseconds between frames, we have to convert it from a FPS value.
+	# Since this is a value in microseconds between frames, we have to convert it from an FPS value.
 	@warning_ignore("narrowing_conversion")
 	OS.low_processor_usage_mode_sleep_usec = 1_000_000.0 / value
 	$CanvasLayer/PanelContainer/Options/MaxFPS/Value.text = str(roundi(value))

@@ -2,8 +2,8 @@ extends OptionMenu
 
 
 class TestData:
-	var id := ""
-	var scene_path := ""
+	var id: String = ""
+	var scene_path: String = ""
 
 
 var _test_list: Array[TestData] = []

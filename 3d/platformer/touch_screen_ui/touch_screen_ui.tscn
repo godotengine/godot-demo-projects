@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://7bwmwbaeosl3"]
+
+[ext_resource type="Script" uid="uid://yp8a87rk1fng" path="res://touch_screen_ui.gd" id="1_xag24"]
+[ext_resource type="PackedScene" uid="uid://dctqlxdv5pu5h" path="res://touch_screen_ui/virtual_joystick/virtual_joystick_scene.tscn" id="2_2ea5h"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_7o5bd"]
+
+[node name="TouchScreenUI" type="CanvasLayer"]
+script = ExtResource("1_xag24")
+
+[node name="Virtual Joystick" parent="." instance=ExtResource("2_2ea5h")]
+deadzone_size = 0.0
+clampzone_size = 100.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -64.0
+offset_bottom = 64.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="jump" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/jump"]
+z_index = 5
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "JUMP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="jumpbtn" type="TouchScreenButton" parent="HBoxContainer/jump"]
+self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(124, 124)
+texture_normal = SubResource("CanvasTexture_7o5bd")
+action = "jump"
+
+[node name="shoot" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="shoot" type="Label" parent="HBoxContainer/shoot"]
+z_index = 5
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SHOOT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="shoot2" type="TouchScreenButton" parent="HBoxContainer/shoot"]
+self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(124, 124)
+texture_normal = SubResource("CanvasTexture_7o5bd")
+action = "shoot"

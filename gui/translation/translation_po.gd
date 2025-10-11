@@ -32,13 +32,13 @@ func _print_intro() -> void:
 
 	# In PO translation, you would use source string as the 'key' for the Object.tr() function.
 	# This is the same for scene nodes containing user-facing texts to be translated.
-	print(tr("Hello, this is a translation demo project."))
+	print(tr(&"Hello, this is a translation demo project."))
 
 	# PO plural translation example.
 	# The difference with CSV is that you must add the "plural_message" argument, because PO files
 	# expect the data (else undefine behaviour might occur).
 	var days_passed := randi_range(1, 3)
-	print(tr_n("One day ago.", "{days} days ago.", days_passed).format({ days = days_passed }))
+	print(tr_n(&"One day ago.", &"{days} days ago.", days_passed).format({ days = days_passed }))
 
 
 func _on_go_to_csv_translation_demo_pressed() -> void:

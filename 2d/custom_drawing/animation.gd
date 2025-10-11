@@ -2,7 +2,7 @@
 @tool
 extends Panel
 
-var use_antialiasing := false
+var use_antialiasing: bool = false
 
 var time := 0.0
 
@@ -40,4 +40,4 @@ func _draw() -> void:
 			Color.MEDIUM_AQUAMARINE,
 			line_width_thin,
 			use_antialiasing
-	)
+		)

@@ -15,10 +15,11 @@ var states_map := {}
 
 var states_stack := []
 var current_state: Node = null
-var _active := false:
+var _active: bool = false:
 	set(value):
 		_active = value
 		set_active(value)
+
 
 func _enter_tree() -> void:
 	if start_state.is_empty():
@@ -45,8 +46,8 @@ func set_active(value: bool) -> void:
 		current_state = null
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	current_state.handle_input(event)
+func _unhandled_input(input_event: InputEvent) -> void:
+	current_state.handle_input(input_event)
 
 
 func _physics_process(delta: float) -> void:

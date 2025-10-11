@@ -1,16 +1,18 @@
 class_name Test
 extends Node
 
+
 signal wait_done()
 
-@export var _enable_debug_collision := true
+@export var _enable_debug_collision: bool = true
 
 var _timer: Timer
-var _timer_started := false
+var _timer_started: bool = false
 
-var _wait_physics_ticks_counter := 0
+var _wait_physics_ticks_counter: int = 0
 
 var _drawn_nodes: Array[Node3D] = []
+
 
 func _enter_tree() -> void:
 	if not _enable_debug_collision:

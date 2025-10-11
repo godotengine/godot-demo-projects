@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://2hid4xcw3jf1"]
+
+[sub_resource type="Gradient" id="Gradient_cbx31"]
+colors = PackedColorArray(0.619608, 0.227451, 0, 1, 1, 0.564706, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_x8fbi"]
+fractal_lacunarity = 3.47
+fractal_gain = 1.105
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_41u45"]
+noise = SubResource("FastNoiseLite_x8fbi")
+color_ramp = SubResource("Gradient_cbx31")
+seamless = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cbx31"]
+noise = SubResource("FastNoiseLite_x8fbi")
+color_ramp = SubResource("Gradient_cbx31")
+seamless = true
+as_normal_map = true
+bump_strength = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbx31"]
+albedo_texture = SubResource("NoiseTexture2D_41u45")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_cbx31")
+texture_filter = 5
+
+[sub_resource type="SphereMesh" id="SphereMesh_6uqi0"]
+material = SubResource("StandardMaterial3D_cbx31")
+radius = 0.25
+height = 0.5
+radial_segments = 32
+rings = 16
+
+[node name="SoftBody3D" type="SoftBody3D"]
+mesh = SubResource("SphereMesh_6uqi0")
+pressure_coefficient = 1400.0

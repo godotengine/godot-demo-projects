@@ -3,7 +3,7 @@
 This project showcases how to load and save various file types without going
 through Godot's resource importing system.
 
-This is useful to load/save images, sounds, 3D scenes and ZIP archives at
+This is useful to load/save images, sounds, 3D scenes, and ZIP archives at
 run-time such as user-generated content, without requiring users to generate a
 PCK file through Godot.
 
@@ -31,7 +31,7 @@ this demo.
 [^3]: There are known issues with runtime FBX loading, as mentioned in issue
 [#96043](https://github.com/godotengine/godot/issues/96043).
 
-See the [Saving and Loading (Serialization)](/loading/serialization/) demo for
+See the [Saving and Loading (Serialization)](../serialization/) demo for
 an example of saving/loading game progress.
 
 Language: GDScript
@@ -49,5 +49,5 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
 - Files in `examples/3d_scenes/gltf/` are copyright
   [Poly Haven](https://polyhaven.com/a/plastic_monobloc_chair_01)
   and are licensed under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).
-- Files in `examples/audio/` are copyright [Red Eclipse](https://redeclipse.net)
+- Files in `examples/audio/` are copyright [Red Eclipse](https://www.redeclipse.net/)
   and are licensed under [CC BY-SA 4.0 International](https://www.creativecommons.org/licenses/by-sa/4.0/).

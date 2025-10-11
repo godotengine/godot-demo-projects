@@ -29,11 +29,11 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
 The base vehicle uses a
 [`VehicleBody3D`](https://docs.godotengine.org/en/latest/classes/class_vehiclebody3d.html)
 node. The trailer truck is tied together using a
-[`ConeJointTwist`](https://docs.godotengine.org/en/latest/classes/class_conetwistjoint.html)
+[`ConeJointTwist3D`](https://docs.godotengine.org/en/latest/classes/class_conetwistjoint3d.html)
 node, and the tow truck is tried together using a chain made of
 [`RigidBody3D`](https://docs.godotengine.org/en/latest/classes/class_rigidbody3d.html)
 nodes which are pinned together using
-[`PinJoint`](https://docs.godotengine.org/en/latest/classes/class_pinjoint.html) nodes.
+[`PinJoint3D`](https://docs.godotengine.org/en/latest/classes/class_pinjoint3d.html) nodes.
 
 ## Screenshots
 

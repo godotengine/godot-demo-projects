@@ -1,8 +1,10 @@
 extends CharacterBody2D
 
+
 var movement_speed := 200.0
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
+
 
 func _ready() -> void:
 	# These values need to be adjusted for the actor's speed
@@ -14,8 +16,8 @@ func _ready() -> void:
 
 # The "click" event is a custom input action defined in
 # Project > Project Settings > Input Map tab.
-func _unhandled_input(event: InputEvent) -> void:
-	if not event.is_action_pressed("click"):
+func _unhandled_input(input_event: InputEvent) -> void:
+	if not input_event.is_action_pressed(&"click"):
 		return
 
 	set_movement_target(get_global_mouse_position())

@@ -1,11 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://oq3nlri51jl3"]
+[gd_scene load_steps=8 format=3 uid="uid://jdug5q02vuny"]
 
-[ext_resource type="Script" path="res://Main.cs" id="1_t4q5g"]
-[ext_resource type="PackedScene" uid="uid://ixe1g4hv46xs" path="res://Mob.tscn" id="2_06wge"]
-[ext_resource type="PackedScene" uid="uid://u1nbrhmt1vqu" path="res://Player.tscn" id="3_ouh2a"]
-[ext_resource type="PackedScene" uid="uid://b0ljm4vbkww0f" path="res://HUD.tscn" id="4_f8bkj"]
-[ext_resource type="AudioStream" uid="uid://cwm86fnmnh0sh" path="res://art/House In a Forest Loop.ogg" id="5_dnvwy"]
-[ext_resource type="AudioStream" uid="uid://i4rhnwpnljso" path="res://art/gameover.wav" id="5_r2snl"]
+[ext_resource type="Script" uid="uid://chhp7avgvb6ci" path="res://Main.cs" id="1_t4q5g"]
+[ext_resource type="PackedScene" uid="uid://km3p7l56sgtx" path="res://Mob.tscn" id="2_06wge"]
+[ext_resource type="PackedScene" uid="uid://chv7x63ne2hrq" path="res://Player.tscn" id="3_ouh2a"]
+[ext_resource type="PackedScene" uid="uid://cqppxmb7k5e0u" path="res://HUD.tscn" id="4_f8bkj"]
+[ext_resource type="AudioStream" uid="uid://dylgctjwaj8oc" path="res://art/House In a Forest Loop.ogg" id="5_dnvwy"]
+[ext_resource type="AudioStream" uid="uid://bfcm743iwwnn0" path="res://art/gameover.wav" id="5_r2snl"]
 
 [sub_resource type="Curve2D" id="1"]
 _data = {
@@ -50,8 +50,6 @@ stream = ExtResource("5_dnvwy")
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_r2snl")
 
-[connection signal="Hit" from="Player" to="." method="GameOver"]
 [connection signal="timeout" from="MobTimer" to="." method="OnMobTimerTimeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="OnScoreTimerTimeout"]
 [connection signal="timeout" from="StartTimer" to="." method="OnStartTimerTimeout"]
-[connection signal="StartGame" from="HUD" to="." method="NewGame"]

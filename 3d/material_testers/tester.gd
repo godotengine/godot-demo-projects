@@ -1,5 +1,6 @@
 extends Node3D
 
+
 const INTERP_SPEED = 2
 const ROT_SPEED = 0.003
 const ZOOM_SPEED = 0.1
@@ -10,7 +11,6 @@ var tester_index := 0
 var rot_x := -0.5  # This must be kept in sync with RotationX.
 var rot_y := -0.5  # This must be kept in sync with CameraHolder.
 var zoom := 5.0
-var base_height := int(ProjectSettings.get_setting("display/window/size/viewport_height"))
 
 var backgrounds: Array[Dictionary] = [
 	{ path = "res://backgrounds/schelde.hdr", name = "Riverside" },
@@ -27,30 +27,36 @@ var backgrounds: Array[Dictionary] = [
 @onready var rotation_x: Node3D = $CameraHolder/RotationX
 @onready var camera: Camera3D = $CameraHolder/RotationX/Camera
 
+
 func _ready() -> void:
+	if RenderingServer.get_current_rendering_method() == "gl_compatibility":
+		# Tweak scene brightness to better match Forward+/Mobile.
+		$WorldEnvironment.environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+		$WorldEnvironment.environment.background_energy_multiplier = 2.0
+
 	for background in backgrounds:
 		get_node(^"UI/Background").add_item(background.name)
 
 	update_gui()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"ui_left"):
+func _unhandled_input(input_event: InputEvent) -> void:
+	if input_event.is_action_pressed(&"ui_left"):
 		_on_previous_pressed()
-	if event.is_action_pressed(&"ui_right"):
+	if input_event.is_action_pressed(&"ui_right"):
 		_on_next_pressed()
 
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+	if input_event is InputEventMouseButton:
+		if input_event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			zoom -= ZOOM_SPEED
-		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+		if input_event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			zoom += ZOOM_SPEED
 		zoom = clamp(zoom, 2, 8)
 		camera.position.z = zoom
 
-	if event is InputEventMouseMotion and event.button_mask & MAIN_BUTTONS:
-		# Compensate motion speed to be resolution-independent (based on the window height).
-		var relative_motion: Vector2 = event.relative * DisplayServer.window_get_size().y / base_height
+	if input_event is InputEventMouseMotion and input_event.button_mask & MAIN_BUTTONS:
+		# Use `screen_relative` to make mouse sensitivity independent of viewport resolution.
+		var relative_motion: Vector2 = input_event.screen_relative
 		rot_y -= relative_motion.x * ROT_SPEED
 		rot_y = clamp(rot_y, -1.95, 1.95)
 		rot_x -= relative_motion.y * ROT_SPEED

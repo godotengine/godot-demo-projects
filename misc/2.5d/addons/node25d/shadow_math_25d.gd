@@ -6,6 +6,7 @@
 class_name ShadowMath25D
 extends ShapeCast3D
 
+
 var _shadow_root: Node25D
 var _target_math: Node3D
 

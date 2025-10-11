@@ -1,7 +1,5 @@
-extends Pawn
-
-@export var combat_actor: PackedScene
-var lost := false
+extends Walker
 
 func _ready() -> void:
+	super._ready()
 	set_process(false)

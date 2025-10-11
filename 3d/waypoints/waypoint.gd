@@ -1,10 +1,11 @@
 extends Control
 
+
 ## Some margin to keep the marker away from the screen's corners.
 const MARGIN = 8
 
 ## The waypoint's text.
-@export var text := "Waypoint":
+@export var text: String = "Waypoint":
 	set(value):
 		text = value
 		# The label's text can only be set once the node is ready.
@@ -12,12 +13,13 @@ const MARGIN = 8
 			label.text = value
 
 ## If `true`, the waypoint sticks to the viewport's edges when moving off-screen.
-@export var sticky := true
+@export var sticky: bool = true
 
 @onready var camera := get_viewport().get_camera_3d()
 @onready var parent := get_parent()
 @onready var label: Label = $Label
 @onready var marker: TextureRect = $Marker
+
 
 func _ready() -> void:
 	self.text = text
@@ -47,7 +49,7 @@ func _process(_delta: float) -> void:
 	var viewport_base_size: Vector2i = (
 			get_viewport().content_scale_size if get_viewport().content_scale_size > Vector2i(0, 0)
 			else get_viewport().size
-	)
+		)
 
 	if not sticky:
 		# For non-sticky waypoints, we don't need to clamp and calculate
@@ -80,7 +82,7 @@ func _process(_delta: float) -> void:
 	position = Vector2(
 			clamp(unprojected_position.x, MARGIN, viewport_base_size.x - MARGIN),
 			clamp(unprojected_position.y, MARGIN, viewport_base_size.y - MARGIN)
-	)
+		)
 
 	label.visible = true
 	rotation = 0

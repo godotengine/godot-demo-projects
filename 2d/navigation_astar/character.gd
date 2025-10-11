@@ -1,5 +1,6 @@
 extends Node2D
 
+
 const PathFindAStar = preload("./pathfind_astar.gd")
 
 enum State {
@@ -21,11 +22,12 @@ var _next_point := Vector2()
 
 @onready var _tile_map: PathFindAStar = $"../TileMapLayer"
 
+
 func _ready() -> void:
 	_change_state(State.IDLE)
 
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if _state != State.FOLLOW:
 		return
 
@@ -38,13 +40,14 @@ func _process(_delta: float) -> void:
 		_next_point = _path[0]
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(input_event: InputEvent) -> void:
 	_click_position = get_global_mouse_position()
 	if _tile_map.is_point_walkable(_click_position):
-		if event.is_action_pressed(&"teleport_to", false, true):
+		if input_event.is_action_pressed(&"teleport_to", false, true):
 			_change_state(State.IDLE)
 			global_position = _tile_map.round_local_position(_click_position)
-		elif event.is_action_pressed(&"move_to"):
+			reset_physics_interpolation()
+		elif input_event.is_action_pressed(&"move_to"):
 			_change_state(State.FOLLOW)
 
 
@@ -52,7 +55,7 @@ func _move_to(local_position: Vector2) -> bool:
 	var desired_velocity: Vector2 = (local_position - position).normalized() * speed
 	var steering: Vector2 = desired_velocity - _velocity
 	_velocity += steering / MASS
-	position += _velocity * get_process_delta_time()
+	position += _velocity * get_physics_process_delta_time()
 	rotation = _velocity.angle()
 	return position.distance_to(local_position) < ARRIVE_DISTANCE
 

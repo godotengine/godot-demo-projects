@@ -7,9 +7,9 @@ var _gravity_force := 50.0
 var _jump_force := 1000.0
 var _velocity := Vector2.ZERO
 var _floor_max_angle := 45.0
-var _on_floor := false
-var _jumping := false
-var _keep_velocity := false
+var _on_floor: bool = false
+var _jumping: bool = false
+var _keep_velocity: bool = false
 
 func _ready() -> void:
 	gravity_scale = 0.0
@@ -68,6 +68,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		if acos(normal.dot(-Vector2.UP)) <= deg_to_rad(_floor_max_angle) + 0.01:
 			_jumping = false
 			_velocity.y = 0.0
+
 
 func is_on_floor() -> bool:
 	return _on_floor

@@ -1,17 +1,17 @@
-[gd_scene load_steps=28 format=3 uid="uid://bh7765vrq5muf"]
+[gd_scene load_steps=28 format=3 uid="uid://nhd55tk7kx8n"]
 
-[ext_resource type="Script" uid="uid://kt4hrufrklts" path="res://vehicles/vehicle.gd" id="1_qhfnb"]
+[ext_resource type="Script" uid="uid://g2bo8a5av2sn" path="res://vehicles/vehicle.gd" id="1_qhfnb"]
 [ext_resource type="ArrayMesh" uid="uid://bqrwin8ccgptt" path="res://vehicles/meshes/wheel.res" id="2_uwuq1"]
 [ext_resource type="ArrayMesh" uid="uid://cbpqxxd14g8un" path="res://vehicles/meshes/tow_truck.res" id="3_tv0o3"]
-[ext_resource type="Script" uid="uid://bgr2k6joe7a2f" path="res://vehicles/follow_camera.gd" id="4_wddne"]
+[ext_resource type="Script" uid="uid://bpgd2w0obg3tl" path="res://vehicles/follow_camera.gd" id="4_wddne"]
 [ext_resource type="ArrayMesh" uid="uid://ctglc27jx8xe2" path="res://vehicles/meshes/truck_cab.res" id="5_04cnp"]
-[ext_resource type="AudioStream" uid="uid://cb7wvsd6vygd3" path="res://vehicles/engine.wav" id="5_fwfew"]
-[ext_resource type="AudioStream" uid="uid://sy2li7u35867" path="res://vehicles/impact_1.wav" id="6_i7k5m"]
-[ext_resource type="AudioStream" uid="uid://bf0h7s81yr8nj" path="res://vehicles/impact_2.wav" id="7_hc8k7"]
-[ext_resource type="AudioStream" uid="uid://sun2n8a4xapl" path="res://vehicles/impact_3.wav" id="8_cbgcu"]
-[ext_resource type="AudioStream" uid="uid://dpbayeeufya21" path="res://vehicles/impact_4.wav" id="9_y8ei3"]
-[ext_resource type="Texture2D" uid="uid://d4ostmqwgytk" path="res://vehicles/particle_smoke.png" id="10_lfosv"]
-[ext_resource type="Texture2D" uid="uid://bju75l2w3r7vq" path="res://vehicles/blob_shadow.png" id="11_5ul8v"]
+[ext_resource type="AudioStream" uid="uid://2ukhlukq60ge" path="res://vehicles/engine.wav" id="5_fwfew"]
+[ext_resource type="AudioStream" uid="uid://bwmbj0hptxpp2" path="res://vehicles/impact_1.wav" id="6_i7k5m"]
+[ext_resource type="AudioStream" uid="uid://g504na8iwq65" path="res://vehicles/impact_2.wav" id="7_hc8k7"]
+[ext_resource type="AudioStream" uid="uid://cnrem1y1qiu0m" path="res://vehicles/impact_3.wav" id="8_cbgcu"]
+[ext_resource type="AudioStream" uid="uid://dyq28bk7fqj44" path="res://vehicles/impact_4.wav" id="9_y8ei3"]
+[ext_resource type="Texture2D" uid="uid://yexl3pkv5tea" path="res://vehicles/particle_smoke.png" id="10_lfosv"]
+[ext_resource type="Texture2D" uid="uid://c6nommjyxiscs" path="res://vehicles/blob_shadow.png" id="11_5ul8v"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0hbge"]
 size = Vector3(1.17624, 0.6963, 2.23996)
@@ -296,19 +296,16 @@ node_b = NodePath("../ChainB2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.644947, -1.85661)
 node_a = NodePath("../ChainB2")
 node_b = NodePath("../ChainB3")
-params/bias = 0.5
 
 [node name="PinJoint4" type="PinJoint3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.350687, -2.04279)
 node_a = NodePath("../ChainB3")
 node_b = NodePath("../ChainB4")
-params/bias = 0.5
 
 [node name="PinJoint5" type="PinJoint3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.217609, -2.33375)
 node_a = NodePath("../ChainB4")
 node_b = NodePath("../ChainB5")
-params/bias = 0.5
 
 [node name="Body2" type="VehicleBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00169557, 0.222867, -3.97518)

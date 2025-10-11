@@ -1,0 +1,141 @@
+[gd_scene load_steps=15 format=3 uid="uid://s52cgg7uphd6"]
+
+[ext_resource type="Script" uid="uid://b41sjqeps2qxd" path="res://player.gd" id="1_pq8q7"]
+[ext_resource type="PackedScene" uid="uid://dp55yaag2bftf" path="res://box.tscn" id="2_pyidc"]
+[ext_resource type="PackedScene" uid="uid://ceumdo48wl5fw" path="res://wall.tscn" id="3_vvh5c"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vvh5c"]
+
+[sub_resource type="Sky" id="Sky_28aoi"]
+sky_material = SubResource("ProceduralSkyMaterial_vvh5c")
+
+[sub_resource type="Environment" id="Environment_vvh5c"]
+background_mode = 2
+sky = SubResource("Sky_28aoi")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.3
+tonemap_mode = 4
+glow_enabled = true
+glow_hdr_threshold = 0.7
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vvh5c"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vvh5c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pq8q7"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_pq8q7"]
+size = Vector3(1, 1, 0.01)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pyidc"]
+transparency = 1
+no_depth_test = true
+albedo_color = Color(1, 1, 0, 0.501961)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vho56"]
+size = Vector3(10, 0.2, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vvh5c"]
+albedo_color = Color(0.178458, 0.199519, 0.338574, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vvh5c"]
+size = Vector3(10, 1, 10)
+
+[node name="Root" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vvh5c")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.258819, 0.616341, -0.743732, 0, 0.769968, 0.638083, 0.965926, -0.165148, 0.199282, 0, 6.24965, 0)
+shadow_enabled = true
+shadow_normal_bias = 2.7
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 15.0
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24778, 0)
+script = ExtResource("1_pq8q7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CylinderShape3D_vvh5c")
+
+[node name="Rig" type="Node3D" parent="Player"]
+physics_interpolation_mode = 2
+
+[node name="Mesh_Body" type="MeshInstance3D" parent="Player/Rig"]
+mesh = SubResource("CylinderMesh_vvh5c")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_pq8q7")
+
+[node name="Camera_TPS" type="Camera3D" parent="Player/Rig"]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 1.72429, 2.14884)
+
+[node name="Head" type="Node3D" parent="Player/Rig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12412, 0)
+
+[node name="Camera_FPS" type="Camera3D" parent="Player/Rig/Head"]
+current = true
+
+[node name="Mesh_Head" type="MeshInstance3D" parent="Player/Rig/Head"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.5)
+mesh = SubResource("PrismMesh_pq8q7")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_pyidc")
+
+[node name="Fire_Origin" type="Node3D" parent="Player/Rig/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.60726)
+
+[node name="Camera_Fixed" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.788161, 0.615469, 0, -0.615469, 0.788161, 0, 4.94837, 5.75259)
+
+[node name="Background" type="Node3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="Background"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("BoxMesh_vho56")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vvh5c")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Background/Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Background/Floor/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+shape = SubResource("BoxShape3D_vvh5c")
+
+[node name="Box" parent="Background" instance=ExtResource("2_pyidc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.596531, 2.19581)
+can_sleep = false
+
+[node name="Wall" parent="Background" instance=ExtResource("3_vvh5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="Wall2" parent="Background" instance=ExtResource("3_vvh5c")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -5)
+
+[node name="Wall3" parent="Background" instance=ExtResource("3_vvh5c")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5, 0, 0)
+
+[node name="Wall4" parent="Background" instance=ExtResource("3_vvh5c")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5, 0, 0)
+
+[node name="Label" type="Label" parent="."]
+self_modulate = Color(1, 1, 1, 0.627451)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -151.0
+offset_right = 181.0
+offset_bottom = -24.0
+grow_vertical = 0
+theme_override_constants/outline_size = 5
+text = "WASD - Move
+Space - Jump
+Left Mouse - Fire
+Tab - Toggle Camera
+R - Reset Player
+T - Toggle Physics Interpolation"

@@ -68,13 +68,13 @@ func start_animation() -> void:
 		# Here we are calling a lambda method that creates a sub-Tween.
 		# Any number of Tweens can animate a single object in the same time.
 		tween.parallel().tween_callback(func():
-			# Note that transition is set on Tween, but ease is set on Tweener.
-			# Values set on Tween will affect all Tweeners (as defaults) and values
-			# on Tweeners can override them.
-			sub_tween = create_tween().set_speed_scale(%SpeedSlider.value).set_trans(Tween.TRANS_SINE)
-			sub_tween.tween_property(icon, ^"position:y", -150.0, 0.5).as_relative().set_ease(Tween.EASE_OUT)
-			sub_tween.tween_property(icon, ^"position:y", 150.0, 0.5).as_relative().set_ease(Tween.EASE_IN)
-		)
+				# Note that transition is set on Tween, but ease is set on Tweener.
+				# Values set on Tween will affect all Tweeners (as defaults) and values
+				# on Tweeners can override them.
+				sub_tween = create_tween().set_speed_scale(%SpeedSlider.value).set_trans(Tween.TRANS_SINE)
+				sub_tween.tween_property(icon, ^"position:y", -150.0, 0.5).as_relative().set_ease(Tween.EASE_OUT)
+				sub_tween.tween_property(icon, ^"position:y", 150.0, 0.5).as_relative().set_ease(Tween.EASE_IN)
+			)
 
 	# Step 5
 
@@ -102,7 +102,7 @@ func start_animation() -> void:
 		var tweener := tween.tween_method(
 				func(v: float) -> void:
 					icon.position = path.position + path.curve.sample_baked(v), 0.0, path.curve.get_baked_length(), 3.0
-		).set_delay(0.5)
+			).set_delay(0.5)
 		tweener.set_ease(%Ease7.selected)
 		tweener.set_trans(%Trans7.selected)
 

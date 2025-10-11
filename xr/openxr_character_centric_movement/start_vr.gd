@@ -7,7 +7,7 @@ signal pose_recentered
 @export var maximum_refresh_rate : int = 90
 
 var xr_interface : OpenXRInterface
-var xr_is_focused := false
+var xr_is_focused: bool = false
 
 
 func _ready() -> void:

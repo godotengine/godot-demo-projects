@@ -14,7 +14,7 @@ func _update_fade() -> void:
 		$MeshInstance3D.visible = false
 	else:
 		if material:
-			material.set_shader_parameter("albedo", Color(0.0, 0.0, 0.0, fade))
+			material.set_shader_parameter(&"albedo", Color(0.0, 0.0, 0.0, fade))
 		$MeshInstance3D.visible = true
 
 

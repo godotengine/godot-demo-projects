@@ -1,20 +1,20 @@
-[gd_scene load_steps=17 format=3 uid="uid://b4aouv6fsdecc"]
+[gd_scene load_steps=17 format=3 uid="uid://cx5dvchcc2v3b"]
 
-[ext_resource type="Script" uid="uid://bh7qaqa6inb8n" path="res://combat/combat.gd" id="1"]
-[ext_resource type="Script" uid="uid://bokfxv77maemj" path="res://combat/turn_queue.gd" id="2"]
-[ext_resource type="Theme" uid="uid://dtao6d0ebglcf" path="res://theme/theme.tres" id="3"]
-[ext_resource type="Script" uid="uid://cp8eg0avq1egt" path="res://combat/interface/ui.gd" id="4"]
-[ext_resource type="PackedScene" uid="uid://bypumcqt7j0iv" path="res://combat/interface/info.tscn" id="5"]
-[ext_resource type="Texture2D" uid="uid://dh804n3h2bl5h" path="res://combat/background/combat_background.png" id="6"]
-[ext_resource type="Texture2D" uid="uid://mi3mmtft0snh" path="res://decoration/grass.png" id="7"]
-[ext_resource type="Material" uid="uid://blst65bnoqyam" path="res://decoration/wind_sway.tres" id="8"]
-[ext_resource type="Texture2D" uid="uid://m6yf6xcjcsw5" path="res://decoration/pebble.png" id="9"]
-[ext_resource type="Texture2D" uid="uid://dcs722r26k774" path="res://decoration/grass_variant.png" id="10"]
-[ext_resource type="Texture2D" uid="uid://cynl0x6vk4sf6" path="res://decoration/pebble_variant.png" id="11"]
-[ext_resource type="Texture2D" uid="uid://wkde1vn3wdqf" path="res://combat/background/arena.png" id="12"]
-[ext_resource type="Texture2D" uid="uid://t6o5bvgfegfx" path="res://combat/background/combat_shadow.png" id="13"]
-[ext_resource type="Texture2D" uid="uid://cr0xmj8c7wbyr" path="res://decoration/flower.png" id="14"]
-[ext_resource type="Texture2D" uid="uid://cdndsgpg08oui" path="res://decoration/flower_variant.png" id="15"]
+[ext_resource type="Script" uid="uid://b1s3aocfu3dh" path="res://combat/combat.gd" id="1"]
+[ext_resource type="Script" uid="uid://cjo4lltugi30v" path="res://combat/turn_queue.gd" id="2"]
+[ext_resource type="Theme" uid="uid://c5h87851xphsn" path="res://theme/theme.tres" id="3"]
+[ext_resource type="Script" uid="uid://k2df0cya36gy" path="res://combat/interface/ui.gd" id="4"]
+[ext_resource type="PackedScene" uid="uid://bcngatcb2aqck" path="res://combat/interface/info.tscn" id="5"]
+[ext_resource type="Texture2D" uid="uid://d1uavjhleqcmr" path="res://combat/background/combat_background.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://do71hfdbu65kx" path="res://decoration/grass.png" id="7"]
+[ext_resource type="Material" uid="uid://5na16rpclxk2" path="res://decoration/wind_sway.tres" id="8"]
+[ext_resource type="Texture2D" uid="uid://2ceuxn4ebsws" path="res://decoration/pebble.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://baxel68m2il5e" path="res://decoration/grass_variant.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://coirrxokxktp3" path="res://decoration/pebble_variant.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://bb3rs84bqmkli" path="res://combat/background/arena.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://dqdbxcdnkjxxt" path="res://combat/background/combat_shadow.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://dpkglykksi6ci" path="res://decoration/flower.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://2al2y10t8agi" path="res://decoration/flower_variant.png" id="15"]
 
 [sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
@@ -876,17 +876,19 @@ script = SubResource("1")
 script = ExtResource("2")
 combatants_list = NodePath("../Combatants")
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("combatants_node")]
+[node name="CombatCanvas" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="CombatCanvas" node_paths=PackedStringArray("combatants_node")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 theme = ExtResource("3")
 script = ExtResource("4")
-combatants_node = NodePath("../Combatants")
+combatants_node = NodePath("../../Combatants")
 info_scene = ExtResource("5")
 
-[node name="Combatants" type="HBoxContainer" parent="UI"]
+[node name="Combatants" type="HBoxContainer" parent="CombatCanvas/UI"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 77.0
@@ -894,37 +896,37 @@ offset_right = 1260.0
 offset_bottom = 328.0
 theme_override_constants/separation = 360
 
-[node name="Buttons" type="PanelContainer" parent="UI"]
+[node name="Buttons" type="PanelContainer" parent="CombatCanvas/UI"]
 layout_mode = 0
 offset_left = 80.0
 offset_top = 376.0
 offset_right = 1200.0
 offset_bottom = 698.0
 
-[node name="GridContainer" type="GridContainer" parent="UI/Buttons"]
+[node name="GridContainer" type="GridContainer" parent="CombatCanvas/UI/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
 
-[node name="Attack" type="Button" parent="UI/Buttons/GridContainer"]
+[node name="Attack" type="Button" parent="CombatCanvas/UI/Buttons/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Attack"
 
-[node name="Defend" type="Button" parent="UI/Buttons/GridContainer"]
+[node name="Defend" type="Button" parent="CombatCanvas/UI/Buttons/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Defend"
 
-[node name="Flee" type="Button" parent="UI/Buttons/GridContainer"]
+[node name="Flee" type="Button" parent="CombatCanvas/UI/Buttons/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Flee"
 
-[connection signal="button_up" from="UI/Buttons/GridContainer/Attack" to="UI" method="_on_Attack_button_up"]
-[connection signal="button_up" from="UI/Buttons/GridContainer/Defend" to="UI" method="_on_Defend_button_up"]
-[connection signal="button_up" from="UI/Buttons/GridContainer/Flee" to="UI" method="_on_Flee_button_up"]
+[connection signal="button_up" from="CombatCanvas/UI/Buttons/GridContainer/Attack" to="CombatCanvas/UI" method="_on_Attack_button_up"]
+[connection signal="button_up" from="CombatCanvas/UI/Buttons/GridContainer/Defend" to="CombatCanvas/UI" method="_on_Defend_button_up"]
+[connection signal="button_up" from="CombatCanvas/UI/Buttons/GridContainer/Flee" to="CombatCanvas/UI" method="_on_Flee_button_up"]

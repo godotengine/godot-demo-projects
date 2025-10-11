@@ -1,0 +1,85 @@
+[gd_scene load_steps=12 format=3 uid="uid://dobrffali1rl2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g14j6"]
+albedo_color = Color(1, 0.27, 0.27, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_g14j6"]
+material = SubResource("StandardMaterial3D_g14j6")
+radius = 0.02
+height = 0.04
+radial_segments = 16
+rings = 8
+
+[sub_resource type="Gradient" id="Gradient_c85u6"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nikp6"]
+gradient = SubResource("Gradient_c85u6")
+
+[sub_resource type="Curve" id="Curve_gflbs"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_h4t62"]
+curve = SubResource("Curve_gflbs")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sw3mb"]
+spread = 180.0
+initial_velocity_max = 0.25
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_h4t62")
+color_ramp = SubResource("GradientTexture1D_nikp6")
+
+[sub_resource type="Gradient" id="Gradient_jfmli"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_reuqr"]
+gradient = SubResource("Gradient_jfmli")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c85u6"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1.8247963, 0.60199416, 0.49019507, 1)
+albedo_texture = SubResource("GradientTexture2D_reuqr")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_nikp6"]
+material = SubResource("StandardMaterial3D_c85u6")
+size = Vector2(0.05, 0.05)
+
+[node name="Pin" type="MeshInstance3D"]
+cast_shadow = 0
+visibility_range_end = 10.0
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
+mesh = SubResource("SphereMesh_g14j6")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+visibility_range_end = 10.0
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_sw3mb")
+draw_pass_1 = SubResource("QuadMesh_nikp6")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(1, 0.3137255, 0.2509804, 1)
+light_energy = 0.05
+light_size = 0.25
+distance_fade_enabled = true
+distance_fade_begin = 10.0
+distance_fade_length = 5.0
+omni_range = 0.25
+omni_attenuation = 2.0

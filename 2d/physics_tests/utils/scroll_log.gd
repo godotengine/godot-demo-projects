@@ -1,6 +1,6 @@
 extends ScrollContainer
 
-@export var auto_scroll := false
+@export var auto_scroll: bool = false
 
 func _ready() -> void:
 	var scrollbar := get_v_scroll_bar()

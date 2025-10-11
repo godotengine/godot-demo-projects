@@ -1,9 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://bpfg1l8j4i08u"]
+[gd_scene load_steps=17 format=3 uid="uid://b8pm0gjtxvx0h"]
 
-[ext_resource type="Script" uid="uid://4fiju4j550yb" path="res://main.gd" id="1_o0pyp"]
-[ext_resource type="Texture2D" uid="uid://br4k6sn2rvgj" path="res://pattern.png" id="1_r22bv"]
-[ext_resource type="Script" uid="uid://c726jddgfchjb" path="res://post_process_shader.gd" id="1_rkpno"]
-[ext_resource type="Script" uid="uid://b10l0f4aslyya" path="res://post_process_grayscale.gd" id="2_pwabc"]
+[ext_resource type="Script" uid="uid://bgcj1kkxw14hu" path="res://main.gd" id="1_o0pyp"]
+[ext_resource type="Texture2D" uid="uid://b0cjowd5bho0a" path="res://pattern.png" id="1_r22bv"]
+[ext_resource type="Script" uid="uid://cb1wlilumbyeu" path="res://post_process_shader.gd" id="1_rkpno"]
+[ext_resource type="Script" uid="uid://b13773p7bdi5y" path="res://post_process_grayscale.gd" id="2_pwabc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lnmx8"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -35,8 +35,13 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("1_rkpno")
-shader_code = "	// Invert color.
-	color.rgb = vec3(1.0 - color.r, 1.0 - color.g, 1.0 - color.b);
+shader_code = "// Unproject
+vec4 unproj = vec4(uv_norm * 2.0 - 1.0, depth, 1.0);
+mat4 inv_projection_matrix = scene_data_block.data.inv_projection_matrix_view[view];
+vec4 vertex = inv_projection_matrix * unproj;
+vertex.xyz = vertex.xyz / vertex.w;
+
+color.rgb = clamp(vec3(vertex.x/20.0, vertex.y/20.0, -vertex.z/20.0), 0.0, 1.0);
 "
 
 [sub_resource type="Compositor" id="Compositor_xxhi4"]

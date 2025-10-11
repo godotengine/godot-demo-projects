@@ -46,6 +46,7 @@ func _on_MobTimer_timeout():
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
 
+
 func _on_ScoreTimer_timeout():
 	score += 1
 	$HUD.update_score(score)

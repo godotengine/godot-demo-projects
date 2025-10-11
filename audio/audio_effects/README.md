@@ -36,4 +36,4 @@ All sound effects are from [Freesound](https://freesound.org/) and licensed unde
 - [Static](https://freesound.org/people/dotY21/sounds/335203/) by dotY21
 
 ### Icon
-- [Equalizer](https://iconduck.com/icons/249702/equalizer) and licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+- Equalizer licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

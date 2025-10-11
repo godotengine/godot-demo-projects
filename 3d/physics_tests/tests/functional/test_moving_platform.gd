@@ -1,5 +1,6 @@
 extends Test
 
+
 const OPTION_BODY_TYPE = "Body Type/%s (%d)"
 
 const OPTION_SLOPE = "Physics options/Stop on slope (Character only)"
@@ -14,21 +15,22 @@ const SHAPE_CYLINDER = "Collision shapes/Cylinder"
 const SHAPE_SPHERE = "Collision shapes/Sphere"
 const SHAPE_CONVEX = "Collision shapes/Convex"
 
-var _slope := false
-var _snap := false
-var _friction := false
-var _rough := false
-var _animation_physics := false
+var _slope: bool = false
+var _snap: bool = false
+var _friction: bool = false
+var _rough: bool = false
+var _animation_physics: bool = false
 
 var _body_scene := {}
 var _key_list := []
 var _current_body_index := 0
-var _current_body_key := ""
+var _current_body_key: String = ""
 var _current_body: PhysicsBody3D = null
 var _body_type := ["CharacterBody3D", "RigidBody"]
 
 var _shapes := {}
-var _current_shape := ""
+var _current_shape: String = ""
+
 
 func _ready() -> void:
 	var options: OptionMenu = $Options
@@ -66,9 +68,9 @@ func _ready() -> void:
 	spawn_body_index(_current_body_index)
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and not event.pressed:
-		var _index: int = event.keycode - KEY_1
+func _input(input_event: InputEvent) -> void:
+	if input_event is InputEventKey and not input_event.pressed:
+		var _index: int = input_event.keycode - KEY_1
 		if _index >= 0 and _index < _key_list.size():
 			spawn_body_index(_index)
 
@@ -160,7 +162,7 @@ func start_test() -> void:
 		animation_player.playback_process_mode = AnimationPlayer.ANIMATION_PROCESS_PHYSICS
 	else:
 		animation_player.playback_process_mode = AnimationPlayer.ANIMATION_PROCESS_IDLE
-	animation_player.play("Move")
+	animation_player.play(&"Move")
 
 	$LabelBodyType.text = "Body Type: " + _body_type[_current_body_index] + " \nCollision Shape: " + _current_shape
 

@@ -13,10 +13,10 @@ func _ready():
 
 # Callback for our tween to set the energy level on our active pointer.
 func _update_energy(new_value : float):
-	var pointer = active_hand.get_node("Pointer")
+	var pointer = active_hand.get_node(^"Pointer")
 	var material : ShaderMaterial = pointer.material_override
 	if material:
-		material.set_shader_parameter("energy", new_value)
+		material.set_shader_parameter(&"energy", new_value)
 
 
 # Start our tween to show a pulse on our click.

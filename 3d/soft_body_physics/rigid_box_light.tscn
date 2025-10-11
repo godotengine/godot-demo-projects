@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://dq61a0iprlr5d"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ppyta"]
+friction = 0.75
+bounce = 0.4
+
+[sub_resource type="Gradient" id="Gradient_jgx4i"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 0.5, 0.5, 0.5, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nmss4"]
+gradient = SubResource("Gradient_jgx4i")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppyta"]
+albedo_color = Color(1.8771e-06, 0.751954, 0.25936, 1)
+albedo_texture = SubResource("GradientTexture2D_nmss4")
+uv1_scale = Vector3(3, 2, 1)
+texture_filter = 5
+
+[sub_resource type="BoxMesh" id="BoxMesh_ykrsh"]
+material = SubResource("StandardMaterial3D_ppyta")
+size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ppyta"]
+size = Vector3(0.25, 0.25, 0.25)
+
+[node name="RigidBoxLight" type="RigidBody3D"]
+collision_mask = 3
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_ppyta")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ykrsh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ppyta")

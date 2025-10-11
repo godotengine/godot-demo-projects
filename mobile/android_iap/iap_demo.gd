@@ -6,14 +6,14 @@ const TEST_ITEM_SKU = "my_in_app_purchase_sku"
 @onready var label: Label = $Label
 
 var payment: Object = null
-var test_item_purchase_token := ""
+var test_item_purchase_token: String = ""
 
 
 func _ready() -> void:
-	if Engine.has_singleton("GodotGooglePlayBilling"):
+	if Engine.has_singleton(&"GodotGooglePlayBilling"):
 		label.text += "\n\n\nTest item SKU: %s" % TEST_ITEM_SKU
 
-		payment = Engine.get_singleton("GodotGooglePlayBilling")
+		payment = Engine.get_singleton(&"GodotGooglePlayBilling")
 		# No params.
 		payment.connected.connect(_on_connected)
 		# No params.

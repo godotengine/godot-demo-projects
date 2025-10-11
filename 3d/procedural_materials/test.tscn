@@ -1,16 +1,16 @@
-[gd_scene load_steps=40 format=3 uid="uid://c4i1xdk0nc7s0"]
+[gd_scene load_steps=40 format=3 uid="uid://cu78or5wk08em"]
 
-[ext_resource type="Material" uid="uid://chsncadr63hoc" path="res://materials/grass.tres" id="4_gplko"]
-[ext_resource type="Material" uid="uid://3odjrwml2nes" path="res://materials/sand.tres" id="5_12jug"]
-[ext_resource type="Material" uid="uid://cw85kxowmkj37" path="res://materials/wet_concrete.tres" id="6_q1c2f"]
-[ext_resource type="Material" uid="uid://c5wve1c3hypfo" path="res://materials/marble.tres" id="7_ebvqo"]
-[ext_resource type="Material" uid="uid://cbijbaq5qol7n" path="res://materials/ice.tres" id="7_k1q1v"]
-[ext_resource type="Material" uid="uid://b74tdcluvrao6" path="res://materials/lava.tres" id="8_jphcw"]
-[ext_resource type="Material" uid="uid://68rvwiamrckm" path="res://materials/glass.tres" id="9_vei4q"]
-[ext_resource type="Script" path="res://scripts/grid.gd" id="10_wwlcf"]
-[ext_resource type="Shader" path="res://shaders/plasma.gdshader" id="11_aoush"]
-[ext_resource type="Texture2D" uid="uid://chjqieyps5n5r" path="res://checker.png" id="14"]
-[ext_resource type="Script" path="res://tester.gd" id="18"]
+[ext_resource type="Material" uid="uid://e5sfyb0xjjrd" path="res://materials/grass.tres" id="4_gplko"]
+[ext_resource type="Material" uid="uid://sy3hdf5ueaet" path="res://materials/sand.tres" id="5_12jug"]
+[ext_resource type="Material" uid="uid://2sudyb7x85k7" path="res://materials/wet_concrete.tres" id="6_q1c2f"]
+[ext_resource type="Material" uid="uid://bynwedxvks1no" path="res://materials/marble.tres" id="7_ebvqo"]
+[ext_resource type="Material" uid="uid://c6y0v3d18y345" path="res://materials/ice.tres" id="7_k1q1v"]
+[ext_resource type="Material" uid="uid://cyo28qn76a78l" path="res://materials/lava.tres" id="8_jphcw"]
+[ext_resource type="Material" uid="uid://vvdxcx0f27wv" path="res://materials/glass.tres" id="9_vei4q"]
+[ext_resource type="Script" uid="uid://qjov2q1jrh3g" path="res://scripts/grid.gd" id="10_wwlcf"]
+[ext_resource type="Shader" uid="uid://bse14pb44mx5c" path="res://shaders/plasma.gdshader" id="11_aoush"]
+[ext_resource type="Texture2D" uid="uid://douhbeycol3hk" path="res://checker.png" id="14"]
+[ext_resource type="Script" uid="uid://djylwpg4wqj07" path="res://tester.gd" id="18"]
 
 [sub_resource type="ProceduralSkyMaterial" id="9"]
 
@@ -66,8 +66,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sin37"]
 _data = {
-"RESET": SubResource("Animation_2qwoj"),
-"animate_textures": SubResource("Animation_nbv0n")
+&"RESET": SubResource("Animation_2qwoj"),
+&"animate_textures": SubResource("Animation_nbv0n")
 }
 
 [sub_resource type="SphereMesh" id="SphereMesh_be5u0"]
@@ -98,20 +98,20 @@ domain_warp_fractal_type = 2
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e1o5w"]
 width = 1024
 height = 1024
+noise = SubResource("FastNoiseLite_mc7b4")
+color_ramp = SubResource("Gradient_iy4y2")
 seamless = true
 seamless_blend_skirt = 0.0
-color_ramp = SubResource("Gradient_iy4y2")
-noise = SubResource("FastNoiseLite_mc7b4")
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_71qgk"]
 width = 1024
 height = 1024
-seamless = true
-seamless_blend_skirt = 0.065
-as_normal_map = true
-bump_strength = 2.0
-color_ramp = SubResource("Gradient_iy4y2")
 noise = SubResource("FastNoiseLite_mc7b4")
+color_ramp = SubResource("Gradient_iy4y2")
+seamless = true
+as_normal_map = true
+seamless_blend_skirt = 0.065
+bump_strength = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aq2a1"]
 albedo_texture = SubResource("NoiseTexture2D_e1o5w")
@@ -134,9 +134,9 @@ domain_warp_enabled = true
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e0bku"]
 width = 64
 height = 64
-seamless = true
-color_ramp = SubResource("Gradient_5l3re")
 noise = SubResource("FastNoiseLite_10olv")
+color_ramp = SubResource("Gradient_5l3re")
+seamless = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7qv4"]
 albedo_texture = SubResource("NoiseTexture2D_e0bku")
@@ -177,9 +177,9 @@ fractal_gain = 0.353
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n04ac"]
 width = 1024
 height = 1024
-seamless = true
-color_ramp = SubResource("Gradient_hsp0x")
 noise = SubResource("FastNoiseLite_r8ncc")
+color_ramp = SubResource("Gradient_hsp0x")
+seamless = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_25kcu"]
 seed = 60607
@@ -189,8 +189,8 @@ domain_warp_enabled = true
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pn44s"]
 width = 1024
 height = 1024
-seamless = true
 noise = SubResource("FastNoiseLite_25kcu")
+seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2p45w"]
 shader = ExtResource("11_aoush")
@@ -222,10 +222,10 @@ enable_shadows = true
 ambient_mode = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "animate_textures"
 libraries = {
-"": SubResource("AnimationLibrary_sin37")
+&"": SubResource("AnimationLibrary_sin37")
 }
+autoplay = "animate_textures"
 
 [node name="CameraHolder" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.125, 26)

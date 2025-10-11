@@ -9,7 +9,7 @@ enum CellType {
 
 @export var type := CellType.ACTOR
 
-var active := true: set = set_active
+var active: bool = true: set = set_active
 
 func set_active(value: bool) -> void:
 	active = value

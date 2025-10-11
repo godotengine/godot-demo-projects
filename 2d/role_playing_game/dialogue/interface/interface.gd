@@ -11,7 +11,7 @@ func show_dialogue(player: Pawn, dialogue: Node) -> void:
 	$Button.grab_focus()
 	dialogue_node = dialogue
 
-	for c in dialogue.get_signal_connection_list("dialogue_started"):
+	for c in dialogue.get_signal_connection_list(&"dialogue_started"):
 		if player == c.callable.get_object():
 			dialogue_node.start_dialogue()
 			$Name.text = "[center]" + dialogue_node.dialogue_name + "[/center]"

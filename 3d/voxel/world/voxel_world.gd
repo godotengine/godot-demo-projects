@@ -1,3 +1,4 @@
+class_name VoxelWorld
 extends Node
 # This file manages the creation and deletion of Chunks.
 
@@ -14,8 +15,8 @@ var _delete_distance := 0
 var effective_render_distance := 0
 var _old_player_chunk := Vector3i()
 
-var _generating := true
-var _deleting := false
+var _generating: bool = true
+var _deleting: bool = false
 
 var _chunks: Dictionary[Vector3i, Chunk] = {}
 
@@ -47,8 +48,7 @@ func _process(_delta: float) -> void:
 				if _chunks.has(chunk_position):
 					continue
 
-				var chunk := Chunk.new()
-				chunk.chunk_position = chunk_position
+				var chunk := Chunk.new(chunk_position)
 				_chunks[chunk_position] = chunk
 				add_child(chunk)
 				chunk.try_initial_generate_mesh(_chunks)
@@ -104,11 +104,6 @@ func set_block_global_position(block_global_position: Vector3i, block_id: int) -
 
 
 func clean_up() -> void:
-	for chunk_position_key: Vector3i in _chunks.keys():
-		var thread: Thread = _chunks[chunk_position_key]._thread
-		if thread:
-			thread.wait_to_finish()
-
 	_chunks = {}
 	set_process(false)
 
@@ -129,9 +124,6 @@ func _delete_far_away_chunks(player_chunk: Vector3i) -> void:
 	# Also take the opportunity to delete far away chunks.
 	for chunk_position_key: Vector3i in _chunks.keys():
 		if Vector3(player_chunk).distance_to(Vector3(chunk_position_key)) > _delete_distance:
-			var thread: Thread = _chunks[chunk_position_key]._thread
-			if thread:
-				thread.wait_to_finish()
 			_chunks[chunk_position_key].queue_free()
 			_chunks.erase(chunk_position_key)
 			deleted_this_frame += 1

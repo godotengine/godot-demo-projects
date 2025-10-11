@@ -11,7 +11,7 @@ More formats may be added in the future.
 For more information, see [Saving games](https://docs.godotengine.org/en/latest/tutorials/io/saving_games.html)
 in the documentation.
 
-See the [Run-time File Saving and Loading](/loading/runtime_save_load/) demo for
+See the [Run-time File Saving and Loading](../runtime_save_load/) demo for
 an example of loading various file types in an exported project without needing
 to import them.
 

@@ -15,7 +15,7 @@ enum AttackInputStates {
 
 var state: States = States.IDLE
 var attack_input_state := AttackInputStates.IDLE
-var ready_for_next_attack := false
+var ready_for_next_attack: bool = false
 const MAX_COMBO_COUNT = 3
 var combo_count := 0
 
@@ -38,6 +38,7 @@ var combo := [{
 ]
 
 var hit_objects := []
+
 
 func _ready() -> void:
 	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
@@ -63,15 +64,16 @@ func _change_state(new_state: States) -> void:
 			$AnimationPlayer.play(attack_current["animation"])
 			visible = true
 			monitoring = true
+
 	state = new_state
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(input_event: InputEvent) -> void:
 	if not state == States.ATTACK:
 		return
 	if attack_input_state != AttackInputStates.LISTENING:
 		return
-	if event.is_action_pressed("attack"):
+	if input_event.is_action_pressed(&"attack"):
 		attack_input_state = AttackInputStates.REGISTERED
 
 
@@ -96,7 +98,7 @@ func set_ready_for_next_attack() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if not body.has_node("Health"):
+	if not body.has_node(^"Health"):
 		return
 	if body.get_rid().get_id() in hit_objects:
 		return

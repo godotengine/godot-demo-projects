@@ -1,5 +1,6 @@
 extends Button
 
+
 func _ready() -> void:
 	# This ensures that this Node won't be paused, allowing it to
 	# process even when the SceneTree is paused. Without that it would

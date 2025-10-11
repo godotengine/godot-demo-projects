@@ -1,14 +1,16 @@
 extends RigidBody3D
 
-var _dir := 1.0
-var _distance := 10.0
-var _walk_spd := 100.0
-var _acceleration := 22.0
-var _is_on_floor := false
+
+var _dir: float = 1.0 # -1.0 or 1.0
+var _distance: float = 10.0
+var _walk_spd: float = 100.0
+var _acceleration: float = 22.0
+var _is_on_floor: bool = false
 
 @onready var _forward := -transform.basis.z
 @onready var _collision_shape := $CollisionShape
 @onready var _material: StandardMaterial3D = $CollisionShape/MeshInstance3D.get_active_material(0)
+
 
 func _ready() -> void:
 	if not _material:
@@ -24,20 +26,20 @@ func _process(_delta: float) -> void:
 
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
-	var delta := state.step
-	var velocity := (_forward * _dir * _walk_spd * delta) + (state.linear_velocity  * Vector3.UP)
+	var delta: float = state.step
+	var velocity := (_forward * _dir * _walk_spd * delta) + (state.linear_velocity * Vector3.UP)
 	state.linear_velocity = state.linear_velocity.move_toward(velocity, _acceleration * delta)
 
 	if state.transform.origin.z < -_distance:
-		_dir = -1
+		_dir = -1.0
 	if state.transform.origin.z > _distance:
-		_dir = 1
+		_dir = 1.0
 
 	ground_check()
 
 
 func ground_check() -> void:
-	var space_state := get_world_3d().direct_space_state
+	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
 	var shape := PhysicsShapeQueryParameters3D.new()
 	shape.transform = _collision_shape.global_transform
 	shape.shape_rid = _collision_shape.shape.get_rid()

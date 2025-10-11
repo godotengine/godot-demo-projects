@@ -1,5 +1,5 @@
 extends Node2D
-# This demo is an example of controling a high number of 2D objects with logic
+# This demo is an example of controlling a high number of 2D objects with logic
 # and collision without using nodes in the scene. This technique is a lot more
 # efficient than using instancing and nodes, but requires more programming and
 # is less visual. Bullets are managed together in the `bullets.gd` script.
@@ -17,7 +17,7 @@ var shape := RID()
 class Bullet:
 	var position := Vector2()
 	var speed := 1.0
-	# The body is stored as a RID, which is an "opaque" way to access resources.
+	# The body is stored as an RID, which is an "opaque" way to access resources.
 	# With large amounts of objects (thousands or more), it can be significantly
 	# faster to use RIDs compared to a high-level approach.
 	var body := RID()
@@ -42,9 +42,9 @@ func _ready() -> void:
 		# Place bullets randomly on the viewport and move bullets outside the
 		# play area so that they fade in nicely.
 		bullet.position = Vector2(
-			randf_range(0, get_viewport_rect().size.x) + get_viewport_rect().size.x,
-			randf_range(0, get_viewport_rect().size.y)
-		)
+				randf_range(0, get_viewport_rect().size.x) + get_viewport_rect().size.x,
+				randf_range(0, get_viewport_rect().size.y)
+			)
 		var transform2d := Transform2D()
 		transform2d.origin = bullet.position
 		PhysicsServer2D.body_set_state(bullet.body, PhysicsServer2D.BODY_STATE_TRANSFORM, transform2d)

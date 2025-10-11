@@ -36,7 +36,7 @@ func update_score(add_to_left: int) -> void:
 		score_right += 1
 		score_right_node.set_text(str(score_right))
 
-	var game_ended := false
+	var game_ended: bool = false
 	if score_left == SCORE_TO_WIN:
 		winner_left.show()
 		game_ended = true

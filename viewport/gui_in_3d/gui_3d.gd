@@ -1,7 +1,8 @@
 extends Node3D
 
+
 ## Used for checking if the mouse is inside the Area3D.
-var is_mouse_inside := false
+var is_mouse_inside: bool = false
 
 ## The last processed input touch/mouse event. Used to calculate relative movement.
 var last_event_pos2D := Vector2()
@@ -12,6 +13,7 @@ var last_event_time := -1.0
 @onready var node_viewport: SubViewport = $SubViewport
 @onready var node_quad: MeshInstance3D = $Quad
 @onready var node_area: Area3D = $Quad/Area3D
+
 
 func _ready() -> void:
 	node_area.mouse_entered.connect(_mouse_entered_area)
@@ -40,17 +42,17 @@ func _mouse_exited_area() -> void:
 	is_mouse_inside = false
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(input_event: InputEvent) -> void:
 	# Check if the event is a non-mouse/non-touch event
 	for mouse_event in [InputEventMouseButton, InputEventMouseMotion, InputEventScreenDrag, InputEventScreenTouch]:
-		if is_instance_of(event, mouse_event):
+		if is_instance_of(input_event, mouse_event):
 			# If the event is a mouse/touch event, then we can ignore it here, because it will be
 			# handled via Physics Picking.
 			return
-	node_viewport.push_input(event)
+	node_viewport.push_input(input_event)
 
 
-func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
+func _mouse_input_event(_camera: Camera3D, input_event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	# Get mesh size to detect edges and make conversions. This code only supports PlaneMesh and QuadMesh.
 	var quad_mesh_size: Vector2 = node_quad.mesh.size
 
@@ -90,20 +92,20 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 		event_pos2D = last_event_pos2D
 
 	# Set the event's position and global position.
-	event.position = event_pos2D
-	if event is InputEventMouse:
-		event.global_position = event_pos2D
+	input_event.position = event_pos2D
+	if input_event is InputEventMouse:
+		input_event.global_position = event_pos2D
 
 	# Calculate the relative event distance.
-	if event is InputEventMouseMotion or event is InputEventScreenDrag:
+	if input_event is InputEventMouseMotion or input_event is InputEventScreenDrag:
 		# If there is not a stored previous position, then we'll assume there is no relative motion.
 		if last_event_pos2D == null:
-			event.relative = Vector2(0, 0)
+			input_event.relative = Vector2(0, 0)
 		# If there is a stored previous position, then we'll calculate the relative position by subtracting
 		# the previous position from the new position. This will give us the distance the event traveled from prev_pos.
 		else:
-			event.relative = event_pos2D - last_event_pos2D
-			event.velocity = event.relative / (now - last_event_time)
+			input_event.relative = event_pos2D - last_event_pos2D
+			input_event.velocity = input_event.relative / (now - last_event_time)
 
 	# Update last_event_pos2D with the position we just calculated.
 	last_event_pos2D = event_pos2D
@@ -112,7 +114,7 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 	last_event_time = now
 
 	# Finally, send the processed input event to the viewport.
-	node_viewport.push_input(event)
+	node_viewport.push_input(input_event)
 
 
 func rotate_area_to_billboard() -> void:

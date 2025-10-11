@@ -1,8 +1,16 @@
 extends Control
 
-@onready var variable_font_variation: FontVariation = $"TabContainer/Variable fonts/VariableFontPreview".get_theme_font("font")
+@onready var variable_font_variation: FontVariation = $"TabContainer/Variable fonts/VariableFontPreview".get_theme_font(&"font")
+
 
 func _ready() -> void:
+	if OS.has_feature("web"):
+		$"TabContainer/System fonts/LabelVarInfo".text = "Loading system fonts is not supported on the Web platform."
+		$"TabContainer/System fonts/ValueSetter".visible = false
+		$"TabContainer/System fonts/Italic".visible = false
+		$"TabContainer/System fonts/Weight".visible = false
+		$"TabContainer/System fonts/VBoxContainer".visible = false
+
 	var tree: Tree = $"TabContainer/Text direction/Tree"
 	var root := tree.create_item()
 	tree.set_hide_root(true)
@@ -15,9 +23,10 @@ func _ready() -> void:
 	var fourth := tree.create_item(third)
 	fourth.set_text(0, "fourth")
 
+
 func _on_Tree_item_selected() -> void:
 	var tree: Tree = $"TabContainer/Text direction/Tree"
-	var path := ""
+	var path: String = ""
 	var item := tree.get_selected()
 	while item != null:
 		path = item.get_text(0) + "/" + path
@@ -25,11 +34,14 @@ func _on_Tree_item_selected() -> void:
 	$"TabContainer/Text direction/LineEditST".text = path
 	$"TabContainer/Text direction/LineEditNoST".text = path
 
+
 func _on_LineEditCustomSTDst_text_changed(new_text: String) -> void:
 	$"TabContainer/Text direction/LineEditCustomSTSource".text = new_text
 
+
 func _on_LineEditCustomSTSource_text_changed(new_text: String) -> void:
 	$"TabContainer/Text direction/LineEditCustomSTDst".text = new_text
+
 
 func _on_LineEditCustomSTDst_tree_entered() -> void:
 	# Refresh text to apply custom script once it's loaded.
@@ -39,7 +51,7 @@ func _on_LineEditCustomSTDst_tree_entered() -> void:
 func _on_variable_size_value_changed(value: float) -> void:
 	$"TabContainer/Variable fonts/Variables/Size/Value".text = str(value)
 	# This is also available on non-variable fonts.
-	$"TabContainer/Variable fonts/VariableFontPreview".add_theme_font_size_override("font_size", value)
+	$"TabContainer/Variable fonts/VariableFontPreview".add_theme_font_size_override(&"font_size", value)
 
 
 func _on_variable_weight_value_changed(value: float) -> void:
@@ -104,7 +116,7 @@ func _on_system_font_weight_value_changed(value: float) -> void:
 		$"TabContainer/System fonts/VBoxContainer/Fantasy/Value",
 		$"TabContainer/System fonts/VBoxContainer/Custom/Value"
 	]:
-		var system_font: SystemFont = label.get_theme_font("font")
+		var system_font: SystemFont = label.get_theme_font(&"font")
 		system_font.font_weight = int(value)
 
 func _on_system_font_italic_toggled(button_pressed: bool) -> void:
@@ -116,14 +128,10 @@ func _on_system_font_italic_toggled(button_pressed: bool) -> void:
 		$"TabContainer/System fonts/VBoxContainer/Fantasy/Value",
 		$"TabContainer/System fonts/VBoxContainer/Custom/Value"
 	]:
-		var system_font: SystemFont = label.get_theme_font("font")
+		var system_font: SystemFont = label.get_theme_font(&"font")
 		system_font.font_italic = button_pressed
 
 
 func _on_system_font_name_text_changed(new_text: String) -> void:
-	var system_font: SystemFont = $"TabContainer/System fonts/VBoxContainer/Custom/FontName".get_theme_font("font")
+	var system_font: SystemFont = $"TabContainer/System fonts/VBoxContainer/Custom/FontName".get_theme_font(&"font")
 	system_font.font_names[0] = new_text
-
-
-
-

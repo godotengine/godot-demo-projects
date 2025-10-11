@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://8ylj6j3vmxoy"]
+[gd_scene load_steps=6 format=3 uid="uid://dako8e30n1vv0"]
 
-[ext_resource type="Script" uid="uid://cjofko0oy4rnb" path="res://game.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://b4aouv6fsdecc" path="res://combat/combat.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://ckgv4m67a5kfj" path="res://grid_movement/exploration.tscn" id="3"]
+[ext_resource type="Script" uid="uid://2a62dnfq4o1b" path="res://game.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://cx5dvchcc2v3b" path="res://combat/combat.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dtaj2nc2g4cb8" path="res://grid_movement/exploration.tscn" id="3"]
 
 [sub_resource type="Animation" id="1"]
 length = 0.5
@@ -21,7 +21,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_53g8u"]
 _data = {
-&"fade": SubResource("1")
+&"fade_to_black": SubResource("1")
 }
 
 [node name="Game" type="Node" node_paths=PackedStringArray("combat_screen", "exploration_screen")]
@@ -31,13 +31,12 @@ exploration_screen = NodePath("Exploration")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_53g8u")
+&"": SubResource("AnimationLibrary_53g8u")
 }
 
 [node name="Transition" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="Transition"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

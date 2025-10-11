@@ -11,7 +11,7 @@ Renderer: Forward+
 ## How does it work?
 
 This demo shows how to implement IK using two different methods. One uses the
-[`SkeletonIK`](https://docs.godotengine.org/en/latest/classes/class_skeletonik.html)
+[`SkeletonIK3D`](https://docs.godotengine.org/en/latest/classes/class_skeletonik3d.html)
 node which is built into Godot. The other method is using a script
 called FABRIK (inside of the SADE plugin) for inverse kinematics.
 

@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://63kc5xgsocgn"]
+
+[ext_resource type="ArrayMesh" uid="uid://d0v7qmlt708qa" path="res://rounded_cube.obj" id="1_g2tbl"]
+
+[sub_resource type="Gradient" id="Gradient_cbx31"]
+colors = PackedColorArray(0.619608, 0.227451, 0, 1, 1, 0.564706, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_x8fbi"]
+fractal_lacunarity = 3.47
+fractal_gain = 1.105
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_41u45"]
+noise = SubResource("FastNoiseLite_x8fbi")
+color_ramp = SubResource("Gradient_cbx31")
+seamless = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cbx31"]
+noise = SubResource("FastNoiseLite_x8fbi")
+color_ramp = SubResource("Gradient_cbx31")
+seamless = true
+as_normal_map = true
+bump_strength = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbx31"]
+albedo_texture = SubResource("NoiseTexture2D_41u45")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_cbx31")
+uv1_scale = Vector3(2, 2, 2)
+texture_filter = 5
+
+[node name="SoftBody3D" type="SoftBody3D"]
+mesh = ExtResource("1_g2tbl")
+surface_material_override/0 = SubResource("StandardMaterial3D_cbx31")
+simulation_precision = 100
+total_mass = 10.01
+pressure_coefficient = 100.0

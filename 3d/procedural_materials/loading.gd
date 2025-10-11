@@ -1,6 +1,7 @@
 # This acts as a staging scene shown until the main scene is fully loaded.
 extends Control
 
+
 func _ready() -> void:
 	for i in 2:
 		# Wait 2 frames before starting to change to the main scene,

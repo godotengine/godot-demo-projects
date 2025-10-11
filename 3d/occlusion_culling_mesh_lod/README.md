@@ -26,7 +26,7 @@ will vary depending on your CPU and GPU model.
 
 > **Warning**
 >
-> If you are using a engine build that is not fully optimized, you may notice
+> If you are using an engine build that is not fully optimized, you may notice
 > that enabling occlusion culling decreases performance. This is because
 > occlusion culling is a demanding process on the CPU, which needs all the
 > build-time optimization it can get.

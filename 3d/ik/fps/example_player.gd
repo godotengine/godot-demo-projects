@@ -5,7 +5,7 @@ const norm_grav = -38.8
 const MAX_SPEED = 22
 const JUMP_SPEED = 26
 const ACCEL = 8.5
-# Sprinting variables. Similar to the varibles above, just allowing for quicker movement
+# Sprinting variables. Similar to the variables above, just allowing for quicker movement
 const MAX_SPRINT_SPEED = 34
 const SPRINT_ACCEL = 18
 # How fast we slow down, and the steepest angle we can climb.
@@ -96,10 +96,10 @@ func process_input(delta):
 
 			if anim_done:
 				if current_anim != "Aiming":
-					anim_player.play("Aiming")
+					anim_player.play(&"Aiming")
 					current_anim = "Aiming"
 				else:
-					anim_player.play("Idle")
+					anim_player.play(&"Idle")
 					current_anim = "Idle"
 
 				anim_done = false
@@ -139,7 +139,7 @@ func process_input(delta):
 	# ----------------------------------
 
 	# ----------------------------------
-	# Leaninng
+	# Leaning
 	if Input.is_key_pressed(KEY_Q):
 		lean_value += 1.2 * delta
 	elif Input.is_key_pressed(KEY_E):
@@ -204,8 +204,8 @@ func process_movement(delta):
 # Mouse based camera movement
 func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		rotate_y(deg_to_rad(event.relative.x * MOUSE_SENSITIVITY * -1))
-		camera_holder.rotate_x(deg_to_rad(event.relative.y * MOUSE_SENSITIVITY))
+		rotate_y(deg_to_rad(event.screen_relative.x * MOUSE_SENSITIVITY * -1))
+		camera_holder.rotate_x(deg_to_rad(event.screen_relative.y * MOUSE_SENSITIVITY))
 
 		# We need to clamp the camera's rotation so we cannot rotate ourselves upside down
 		var camera_rot = camera_holder.rotation_degrees

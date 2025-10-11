@@ -1,6 +1,6 @@
 # XR Hand Tracking Demo
 
-This is a demo showing OpenXRs hand tracking and controller tracking logic.
+This is a demo showing OpenXR's hand tracking and controller tracking logic.
 
 Language: GDScript
 
@@ -16,9 +16,9 @@ Renderer: Compatibility
 
 ## How does it work?
 
-Being able to see the players hands, and having those hands interact with elements in the environment are paramount to a good XR experience.
+Being able to see the player's hands, and having those hands interact with elements in the environment are paramount to a good XR experience.
 
-In this demo we look at the off the shelf logic for displaying a hand model that is automated based on either controller input or through optical tracking of the players hands.
+In this demo we look at the off the shelf logic for displaying a hand model that is automated based on either controller input or through optical tracking of the player's hands.
 We also implement logic that allows interaction based on input from the action map that allows the user to pick up the blocks in this demo.
 
 The problem this poses to us is that there have been two schools of thought around what hand tracking actually means,
@@ -45,21 +45,21 @@ and treats them as two versions of the same.
 Especially with controllers like the Valve Index, or with various data gloves that are treated as controllers,
 there is no discernible difference here.
 
-The hand tracking API is mostly used for visualising the players hand with bone positions either being inferred
+The hand tracking API is mostly used for visualising the player's hand with bone positions either being inferred
 from controller input or matching the optical tracking.
 For advanced gesture recognition you would still use this data however it is now accessible regardless of
 the physical means in which this data is obtained.
 
 At the same time, in this school of thought the action map system is seen as the primary means to gain input
-and is no longer restriced to input from controllers. The XR runtime is now responsible for recognising base
+and is no longer restricted to input from controllers. The XR runtime is now responsible for recognising base
 gestures such as pinching and pointing resulting in inputs that can be bound in the action map.
 
 OpenXR is moving towards this approach and this demo has been build in accordance with this however not all runtimes have been updated yet.
 
-SteamVR has followed this approach for a long time and works out of the box, however SteamVR treats everything as controllers resulting in some short comings when a Quest is used over Meta Link or Steam Link and optical hand tracking is used.
+SteamVR has followed this approach for a long time and works out of the box, however SteamVR treats everything as controllers resulting in some shortcomings when a Quest is used over Meta Link or Steam Link and optical hand tracking is used.
 
-Metas native Quest runtime on all versions of Quest now support OpenXRs "data source extension" which Godot enables when hand tracking is enabled.
-However Meta does not yet support OpenXRs "hand interaction profile extension" which is required.
+Metas native Quest runtime on all versions of Quest now support OpenXR's "data source extension" which Godot enables when hand tracking is enabled.
+However Meta does not yet support OpenXR's "hand interaction profile extension" which is required.
 
 Meta link is still trailing behind and does not support this brave new world **yet**.
 
@@ -67,7 +67,7 @@ For other runtimes like Picos, HTC, Varjos, Magic Leaps, etc. may or may not yet
 
 ### Conclusion
 
-Due to the wildgrowth in capabilities in XR runtimes,
+Due to the wild growth in capabilities in XR runtimes,
 and there being no solid way to detect the full limitations of the platform you are currently on,
 Godot XR Tools does not have support for the hand tracking API and purely relies on its own inferred hand positioning approach.
 
@@ -78,12 +78,12 @@ This demo project shows what that future looks like.
 
 ## Hand tracking API
 
-As mentioned, the hand tracking API is at the center of visualising the users hand.
+As mentioned, the hand tracking API is at the center of visualising the user's hand.
 In Godot 4.3 we overhauled the system so the XR Interface needs to convert hand tracking data to the Godot humanoid skeleton hand bone layout.
 This also means that this logic works both in WebXR, OpenXR and any other XR Interface that adds support for this feature.
 
 Hand tracking now also makes use of the new Skeleton Modifier logic in Godot 4.3 however
-the skeleton is posed in the hands local space, while positioning is provided through a XRNode3D node.
+the skeleton is posed in the hands local space, while positioning is provided through an XRNode3D node.
 
 This split is applied because:
 
@@ -105,7 +105,7 @@ This split is applied because:
 
 ## (Half) body Tracking API
 
-Just an honerable mention of this, this is not part of this demo but Godot now also has support
+Just an honorable mention of this, this is not part of this demo but Godot now also has support
 for half and full body tracking that includes hand tracking. This functionality however is only
 available on a limited number of XR runtimes.
 
@@ -125,7 +125,7 @@ differs between XR runtimes and can cause misalignment of the hand mesh.
 ## Action map
 
 As mentioned, we're using the action map here for input however when optical hand tracking is used
-we rely on OpenXRs hand interaction profile extension.
+we rely on OpenXR's hand interaction profile extension.
 Without support for this extension this demo will not fully function.
 
 This can be solved by checking that no interaction profile has been bound to our XRController3D node,

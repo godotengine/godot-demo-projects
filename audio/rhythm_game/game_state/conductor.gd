@@ -69,17 +69,17 @@ func _process(_delta: float) -> void:
 	# First, calculate the song time using data from the audio thread. This
 	# value is very jittery, but will always match what the player is hearing.
 	_song_time_audio = (
-		player.get_playback_position()
-		# The 1st beat may not start at second 0 of the audio track. Compensate
-		# with an offset setting.
-		- first_beat_offset_ms / 1000.0
-		# For most platforms, the playback position value updates in chunks,
-		# with each chunk being one "mix". Smooth this out by adding in the time
-		# since the last chunk was processed.
-		+ last_mix
-		# Current processed audio is heard later.
-		- _cached_output_latency
-	)
+			player.get_playback_position()
+			# The 1st beat may not start at second 0 of the audio track. Compensate
+			# with an offset setting.
+			- first_beat_offset_ms / 1000.0
+			# For most platforms, the playback position value updates in chunks,
+			# with each chunk being one "mix". Smooth this out by adding in the time
+			# since the last chunk was processed.
+			+ last_mix
+			# Current processed audio is heard later.
+			- _cached_output_latency
+		)
 
 	# Next, calculate the song time using the system clock at render rate. This
 	# value is very stable, but can drift from the playing audio due to pausing,
@@ -126,17 +126,17 @@ func play() -> void:
 
 	# Capture the start of the song using the system clock.
 	_song_time_begin = (
-		Time.get_ticks_usec() / 1000000.0
-		# The 1st beat may not start at second 0 of the audio track. Compensate
-		# with an offset setting.
-		+ first_beat_offset_ms / 1000.0
-		# Playback does not start immediately, but only when the next audio
-		# chunk is processed (the "mix" step). Add in the time until that
-		# happens.
-		+ AudioServer.get_time_to_next_mix()
-		# Add in additional output latency.
-		+ _cached_output_latency
-	)
+			Time.get_ticks_usec() / 1000000.0
+			# The 1st beat may not start at second 0 of the audio track. Compensate
+			# with an offset setting.
+			+ first_beat_offset_ms / 1000.0
+			# Playback does not start immediately, but only when the next audio
+			# chunk is processed (the "mix" step). Add in the time until that
+			# happens.
+			+ AudioServer.get_time_to_next_mix()
+			# Add in additional output latency.
+			+ _cached_output_latency
+		)
 
 
 func stop() -> void:

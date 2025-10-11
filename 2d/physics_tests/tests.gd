@@ -1,6 +1,6 @@
 extends Node
 
-var _tests := [
+var _tests: Array[Dictionary] = [
 	{
 		"id": "Functional Tests/Shapes",
 		"path": "res://tests/functional/test_shapes.tscn",
@@ -58,5 +58,5 @@ var _tests := [
 
 func _ready() -> void:
 	var test_menu: OptionMenu = $TestsMenu
-	for test: Variant in _tests:
+	for test: Dictionary in _tests:
 		test_menu.add_test(test.id, test.path)

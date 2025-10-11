@@ -1,0 +1,38 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Custom Logging"
+config/description="This demo showcases a custom logger implementation, which runs in parallel
+to the built-in logging facilities (including file logging). The custom logger
+displays all messages printed by the engine in an in-game console."
+config/tags=PackedStringArray("demo", "official")
+run/main_scene="uid://bukh5v13yl2og"
+config/features=PackedStringArray("4.5")
+run/low_processor_mode=true
+
+[autoload]
+
+CustomLoggerUI="*res://custom_logger_ui.tscn"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

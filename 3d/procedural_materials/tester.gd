@@ -1,42 +1,55 @@
 extends WorldEnvironment
 
+
 const ROT_SPEED = 0.003
 const ZOOM_SPEED = 0.125
 const MAIN_BUTTONS = MOUSE_BUTTON_MASK_LEFT | MOUSE_BUTTON_MASK_RIGHT | MOUSE_BUTTON_MASK_MIDDLE
 
-var tester_index := 0
-var rot_x := deg_to_rad(-22.5)  # This must be kept in sync with RotationX.
-var rot_y := deg_to_rad(90)  # This must be kept in sync with CameraHolder.
-var zoom := 2.5
-var base_height := int(ProjectSettings.get_setting("display/window/size/viewport_height"))
+var tester_index: int = 0
+var rot_x: float = deg_to_rad(-22.5)  # This must be kept in sync with RotationX.
+var rot_y: float = deg_to_rad(90)  # This must be kept in sync with CameraHolder.
+var zoom: float = 2.5
+var is_compatibility: bool = false
 
 @onready var testers: Node3D = $Testers
 @onready var camera_holder: Node3D = $CameraHolder  # Has a position and rotates on Y.
 @onready var rotation_x: Node3D = $CameraHolder/RotationX
 @onready var camera: Camera3D = $CameraHolder/RotationX/Camera3D
 
+
 func _ready() -> void:
+	if RenderingServer.get_current_rendering_method() == "gl_compatibility":
+		# Use PCF13 shadow filtering to improve quality (Medium maps to PCF5 instead).
+		RenderingServer.directional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_HIGH)
+
+		# Darken the light's energy to compensate for sRGB blending (without affecting sky rendering).
+		$DirectionalLight3D.sky_mode = DirectionalLight3D.SKY_MODE_SKY_ONLY
+		var new_light: DirectionalLight3D = $DirectionalLight3D.duplicate()
+		new_light.light_energy = 0.25
+		new_light.sky_mode = DirectionalLight3D.SKY_MODE_LIGHT_ONLY
+		add_child(new_light)
+
 	camera_holder.transform.basis = Basis.from_euler(Vector3(0, rot_y, 0))
 	rotation_x.transform.basis = Basis.from_euler(Vector3(rot_x, 0, 0))
 	update_gui()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"ui_left"):
+func _unhandled_input(input_event: InputEvent) -> void:
+	if input_event.is_action_pressed(&"ui_left"):
 		_on_previous_pressed()
-	if event.is_action_pressed(&"ui_right"):
+	if input_event.is_action_pressed(&"ui_right"):
 		_on_next_pressed()
 
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+	if input_event is InputEventMouseButton:
+		if input_event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			zoom -= ZOOM_SPEED
-		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+		if input_event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			zoom += ZOOM_SPEED
 		zoom = clampf(zoom, 1.5, 4)
 
-	if event is InputEventMouseMotion and event.button_mask & MAIN_BUTTONS:
-		# Compensate motion speed to be resolution-independent (based on the window height).
-		var relative_motion: Vector2 = event.relative * DisplayServer.window_get_size().y / base_height
+	if input_event is InputEventMouseMotion and input_event.button_mask & MAIN_BUTTONS:
+		# Use `screen_relative` to make mouse sensitivity independent of viewport resolution.
+		var relative_motion: Vector2 = input_event.screen_relative
 		rot_y -= relative_motion.x * ROT_SPEED
 		rot_x -= relative_motion.y * ROT_SPEED
 		rot_x = clampf(rot_x, deg_to_rad(-90), 0)

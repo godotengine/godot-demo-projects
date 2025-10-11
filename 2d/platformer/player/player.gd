@@ -12,9 +12,9 @@ const TERMINAL_VELOCITY = 700
 
 ## The player listens for input actions appended with this suffix.[br]
 ## Used to separate controls for multiple players in splitscreen.
-@export var action_suffix := ""
+@export var action_suffix: String = ""
 
-var gravity: int = ProjectSettings.get("physics/2d/default_gravity")
+var gravity: int = ProjectSettings.get(&"physics/2d/default_gravity")
 @onready var platform_detector := $PlatformDetector as RayCast2D
 @onready var animation_player := $AnimationPlayer as AnimationPlayer
 @onready var shoot_timer := $ShootAnimation as Timer
@@ -22,7 +22,7 @@ var gravity: int = ProjectSettings.get("physics/2d/default_gravity")
 @onready var jump_sound := $Jump as AudioStreamPlayer2D
 @onready var gun: Gun = sprite.get_node(^"Gun")
 @onready var camera := $Camera as Camera2D
-var _double_jump_charged := false
+var _double_jump_charged: bool = false
 
 
 func _physics_process(delta: float) -> void:
@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 	floor_stop_on_slope = not platform_detector.is_colliding()
 	move_and_slide()
 
-	var is_shooting := false
+	var is_shooting: bool = false
 	if Input.is_action_just_pressed("shoot" + action_suffix):
 		is_shooting = gun.shoot(sprite.scale.x)
 
@@ -59,7 +59,7 @@ func _physics_process(delta: float) -> void:
 		animation_player.play(animation)
 
 
-func get_new_animation(is_shooting := false) -> String:
+func get_new_animation(is_shooting: bool = false) -> String:
 	var animation_new: String
 	if is_on_floor():
 		if absf(velocity.x) > 0.1:

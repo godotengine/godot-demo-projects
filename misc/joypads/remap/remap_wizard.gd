@@ -1,5 +1,6 @@
 extends Node
 
+
 const DEADZONE = 0.3
 
 var joy_index: int = -1
@@ -17,23 +18,24 @@ var last_mapping: String = ""
 @onready var joy_mapping_full_axis: CheckBox = $Mapping/Margin/VBox/Info/Extra/FullAxis
 @onready var joy_mapping_axis_invert: CheckBox = $Mapping/Margin/VBox/Info/Extra/InvertAxis
 
+
 # Connected to Mapping.window_input, otherwise no gamepad events
 # will be received when the subwindow is focused.
-func _input(event: InputEvent) -> void:
+func _input(input_event: InputEvent) -> void:
 	if cur_step == -1:
 		return
 
 	# Ignore events not related to gamepads.
-	if event is not InputEventJoypadButton and event is not InputEventJoypadMotion:
+	if input_event is not InputEventJoypadButton and input_event is not InputEventJoypadMotion:
 		return
 
 	# Ignore devices other than the one being remapped. Handles accidental input and analog drift.
-	if event.device != joy_index:
+	if input_event.device != joy_index:
 		return
 
-	if event is InputEventJoypadMotion:
+	if input_event is InputEventJoypadMotion:
 		get_viewport().set_input_as_handled()
-		var motion := event as InputEventJoypadMotion
+		var motion := input_event as InputEventJoypadMotion
 		if abs(motion.axis_value) > DEADZONE:
 			var idx := motion.axis
 			var map := JoyMapping.new(JoyMapping.Type.AXIS, idx)
@@ -46,16 +48,16 @@ func _input(event: InputEvent) -> void:
 				map.axis = JoyMapping.Axis.HALF_MINUS
 			joy_mapping_text.text = map.to_human_string()
 			cur_mapping[steps[cur_step]] = map
-	elif event is InputEventJoypadButton and event.pressed:
+	elif input_event is InputEventJoypadButton and input_event.pressed:
 		get_viewport().set_input_as_handled()
-		var btn := event as InputEventJoypadButton
+		var btn := input_event as InputEventJoypadButton
 		var map := JoyMapping.new(JoyMapping.Type.BTN, btn.button_index)
 		joy_mapping_text.text = map.to_human_string()
 		cur_mapping[steps[cur_step]] = map
 
 
 func create_mapping_string(mapping: Dictionary) -> String:
-	var string := "%s,%s," % [joy_guid, joy_name]
+	var string: String = "%s,%s," % [joy_guid, joy_name]
 
 	for k: String in mapping:
 		var m: Variant = mapping[k]
@@ -63,7 +65,7 @@ func create_mapping_string(mapping: Dictionary) -> String:
 			continue
 		string += "%s:%s," % [k, str(m)]
 
-	var platform := "Unknown"
+	var platform: String = "Unknown"
 	if JoyMapping.PLATFORMS.keys().has(OS.get_name()):
 		platform = JoyMapping.PLATFORMS[OS.get_name()]
 

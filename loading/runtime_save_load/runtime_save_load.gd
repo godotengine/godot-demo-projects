@@ -73,7 +73,7 @@ func _on_scene_viewer_zoom_value_changed(value: float) -> void:
 func _on_zip_viewer_item_selected(index: int) -> void:
 	zip_viewer_file_preview.text = zip_reader.read_file(
 			zip_viewer_file_list.get_item_text(index)
-	).get_string_from_utf8()
+		).get_string_from_utf8()
 
 
 #region File exporting
@@ -234,7 +234,7 @@ func open_file(path: String) -> void:
 			font_file.load_dynamic_font(path)
 
 		if not font_file.data.is_empty():
-			font_viewer.add_theme_font_override("font", font_file)
+			font_viewer.add_theme_font_override(&"font", font_file)
 			reset_visibility()
 			font_viewer.visible = true
 			export_button.disabled = true
@@ -248,7 +248,7 @@ func open_file(path: String) -> void:
 		#
 		# Use `ProjectSettings.load_resource_pack()` to load PCK or ZIP files exported by Godot as
 		# additional data packs. That approach is preferred for DLCs, as it makes interacting with
-		# additional data packs seamless (virtual filesystem).
+		# additional data packs seamlessly (virtual filesystem).
 		zip_reader.open(path)
 		var files := zip_reader.get_files()
 		files.sort()

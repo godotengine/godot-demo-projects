@@ -1,16 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://br3bss6kac8pa"]
+[gd_scene load_steps=18 format=3 uid="uid://c17b4r0eub0qn"]
 
-[ext_resource type="PackedScene" uid="uid://d22k0sp2hinew" path="res://assets/gltf/LeftHandHumanoid.gltf" id="2_3hxem"]
-[ext_resource type="Script" uid="uid://dpqdbsepdkd4h" path="res://start_vr.gd" id="2_5rtkn"]
-[ext_resource type="PackedScene" uid="uid://dlswhmq6s52gu" path="res://assets/gltf/RightHandHumanoid.gltf" id="3_oifi1"]
-[ext_resource type="PackedScene" uid="uid://byif52d1xkl3u" path="res://pickup/pickup_handler.tscn" id="3_sg1io"]
-[ext_resource type="Texture2D" uid="uid://b1waowk6l76ap" path="res://assets/images/pattern.png" id="4_3x0ea"]
-[ext_resource type="PackedScene" uid="uid://dtabh705qyufu" path="res://hand_info.tscn" id="5_wlhtu"]
-[ext_resource type="Script" uid="uid://djo0o7s7ix543" path="res://hand_controller.gd" id="6_e5cto"]
-[ext_resource type="PackedScene" uid="uid://hanl00aqvu7u" path="res://objects/table.tscn" id="6_rfmma"]
-[ext_resource type="PackedScene" uid="uid://cerkxyasq8t8b" path="res://objects/box.tscn" id="7_6sqt7"]
-[ext_resource type="Script" uid="uid://dxi1173oqpsr5" path="res://hand_mesh.gd" id="7_yj2fr"]
-[ext_resource type="Script" uid="uid://bnt74t168r248" path="res://xr_hand_fallback_modifier_3d.gd" id="8_gdsnk"]
+[ext_resource type="PackedScene" uid="uid://3gjkc6qju2n3" path="res://assets/gltf/LeftHandHumanoid.gltf" id="2_3hxem"]
+[ext_resource type="Script" uid="uid://dmwdpfwh7uxw" path="res://start_vr.gd" id="2_5rtkn"]
+[ext_resource type="PackedScene" uid="uid://bymg1qpy1tu2w" path="res://assets/gltf/RightHandHumanoid.gltf" id="3_oifi1"]
+[ext_resource type="PackedScene" uid="uid://caospno4tdf1p" path="res://pickup/pickup_handler.tscn" id="3_sg1io"]
+[ext_resource type="Texture2D" uid="uid://dgbymd1aiyghq" path="res://assets/images/pattern.png" id="4_3x0ea"]
+[ext_resource type="PackedScene" uid="uid://b4ebsfoqnxu81" path="res://hand_info.tscn" id="5_wlhtu"]
+[ext_resource type="Script" uid="uid://bl113ujd2uagj" path="res://hand_controller.gd" id="6_e5cto"]
+[ext_resource type="PackedScene" uid="uid://daig77dk5yvhx" path="res://objects/table.tscn" id="6_rfmma"]
+[ext_resource type="PackedScene" uid="uid://b37oxqwt8r28" path="res://objects/box.tscn" id="7_6sqt7"]
+[ext_resource type="Script" uid="uid://dji5rxbje2en" path="res://hand_mesh.gd" id="7_yj2fr"]
+[ext_resource type="Script" uid="uid://dym3ekgbygprn" path="res://xr_hand_fallback_modifier_3d.gd" id="8_gdsnk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_eyx45"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -106,7 +106,6 @@ mesh = SubResource("SphereMesh_d5x0p")
 
 [node name="PickupHandler" parent="XROrigin3D/LeftHandController" instance=ExtResource("3_sg1io")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0, 0)
-pickup_action = "pickup"
 
 [node name="RightHandController" type="XRController3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
@@ -121,7 +120,6 @@ skeleton = NodePath("../../LeftHandController")
 
 [node name="PickupHandler" parent="XROrigin3D/RightHandController" instance=ExtResource("3_sg1io")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0, 0)
-pickup_action = "pickup"
 
 [node name="LeftHandMesh" type="XRNode3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)

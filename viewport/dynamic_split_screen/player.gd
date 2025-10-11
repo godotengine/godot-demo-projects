@@ -8,11 +8,11 @@ extends CharacterBody3D
 
 func _physics_process(_delta: float) -> void:
 	var move_direction := Input.get_vector(
-			&"move_left_player" + str(player_id),
-			&"move_right_player" + str(player_id),
-			&"move_up_player" + str(player_id),
-			&"move_down_player" + str(player_id),
-	)
+			"move_left_player" + str(player_id),
+			"move_right_player" + str(player_id),
+			"move_up_player" + str(player_id),
+			"move_down_player" + str(player_id),
+		)
 	velocity.x += move_direction.x * walk_speed
 	velocity.z += move_direction.y * walk_speed
 

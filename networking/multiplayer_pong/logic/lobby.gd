@@ -62,7 +62,7 @@ func _server_disconnected() -> void:
 
 #region Game creation methods
 func _end_game(with_error: String = "") -> void:
-	if has_node("/root/Pong"):
+	if has_node(^"/root/Pong"):
 		# Erase immediately, otherwise network might show
 		# errors (this is why we connected deferred above).
 		get_node(^"/root/Pong").free()

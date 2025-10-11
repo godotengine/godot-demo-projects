@@ -7,12 +7,13 @@ const OPTION_TEST_CASE_DETECT_FLOOR_MOTION_CHANGES = "Test Cases/Floor detection
 const MOTION_CHANGES_DIR = Vector2(1.0, 1.0)
 const MOTION_CHANGES_SPEEDS: Array[float] = [0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 50.0]
 
-var _test_floor_detection := false
-var _test_motion_changes := false
-var _floor_detected := false
-var _floor_lost := false
+var _test_floor_detection: bool = false
+var _test_motion_changes: bool = false
+var _floor_detected: bool = false
+var _floor_lost: bool = false
 
-var _failed_reason := ""
+var _failed_reason: String = ""
+
 
 func _ready() -> void:
 	super._ready()
@@ -42,11 +43,11 @@ func _physics_process(delta: float) -> void:
 			#Log.print_log("Velocity: %s" % velocity)
 
 
-func _input(event: InputEvent) -> void:
-	super._input(event)
+func _input(input_event: InputEvent) -> void:
+	super._input(input_event)
 
-	if event is InputEventKey and not event.pressed:
-		if event.keycode == KEY_0:
+	if input_event is InputEventKey and not input_event.pressed:
+		if input_event.keycode == KEY_0:
 			await _on_option_selected(OPTION_TEST_CASE_ALL)
 
 
@@ -118,7 +119,7 @@ func _test_all() -> void:
 
 
 func _set_result(test_passed: bool) -> void:
-	var result := ""
+	var result: String = ""
 	if test_passed:
 		result = "PASSED"
 	else:

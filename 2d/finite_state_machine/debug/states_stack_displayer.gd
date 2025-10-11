@@ -3,8 +3,8 @@ extends Panel
 @onready var fsm_node: Node = get_node(^"../../Player/StateMachine")
 
 func _process(_delta: float) -> void:
-	var states_names := ""
-	var numbers := ""
+	var states_names: String = ""
+	var numbers: String = ""
 	var index := 0
 
 	for state: Node in fsm_node.states_stack:

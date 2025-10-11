@@ -1,6 +1,7 @@
 extends Node3D
 
-var _is_parent_ready := false
+
+var _is_parent_ready: bool = false
 var _cube_points_math: Array[Node3D] = []
 var _cube_math_spatials: Array[Node3D] = []
 

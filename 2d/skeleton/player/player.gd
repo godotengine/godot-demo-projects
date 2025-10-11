@@ -16,8 +16,8 @@ const JUMP_VELOCITY = -400.0
 ## Maximum speed at which the player can fall.
 const TERMINAL_VELOCITY = 400
 
-var falling_slow := false
-var falling_fast := false
+var falling_slow: bool = false
+var falling_fast: bool = false
 var no_move_horizontal_time := 0.0
 
 @onready var gravity := float(ProjectSettings.get_setting("physics/2d/default_gravity"))
@@ -30,16 +30,16 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var is_jumping := false
-	if Input.is_action_just_pressed("jump"):
+	var is_jumping: bool = false
+	if Input.is_action_just_pressed(&"jump"):
 		is_jumping = try_jump()
-	elif Input.is_action_just_released("jump") and velocity.y < 0.0:
+	elif Input.is_action_just_released(&"jump") and velocity.y < 0.0:
 		# The player let go of jump early, reduce vertical momentum.
 		velocity.y *= 0.6
 	# Fall.
 	velocity.y = minf(TERMINAL_VELOCITY, velocity.y + gravity * delta)
 
-	var direction := Input.get_axis("move_left", "move_right") * WALK_SPEED
+	var direction := Input.get_axis(&"move_left", &"move_right") * WALK_SPEED
 	velocity.x = move_toward(velocity.x, direction, ACCELERATION_SPEED * delta)
 
 	if no_move_horizontal_time > 0.0:

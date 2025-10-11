@@ -9,20 +9,20 @@ func enter() -> void:
 
 	var input_direction := get_input_direction()
 	update_look_direction(input_direction)
-	owner.get_node(^"AnimationPlayer").play("walk")
+	owner.get_node(^"AnimationPlayer").play(PLAYER_STATE.walk)
 
 
-func handle_input(event: InputEvent) -> void:
-	return super.handle_input(event)
+func handle_input(input_event: InputEvent) -> void:
+	return super.handle_input(input_event)
 
 
 func update(_delta: float) -> void:
 	var input_direction := get_input_direction()
 	if input_direction.is_zero_approx():
-		finished.emit("idle")
+		finished.emit(PLAYER_STATE.idle)
 	update_look_direction(input_direction)
 
-	if Input.is_action_pressed("run"):
+	if Input.is_action_pressed(&"run"):
 		speed = max_run_speed
 	else:
 		speed = max_walk_speed
@@ -30,7 +30,7 @@ func update(_delta: float) -> void:
 	var collision_info := move(speed, input_direction)
 	if not collision_info:
 		return
-	if speed == max_run_speed and collision_info.collider.is_in_group("environment"):
+	if speed == max_run_speed and collision_info.collider.is_in_group(&"environment"):
 		return
 
 

@@ -1,12 +1,12 @@
 extends Node
 
 ## The URL we will connect to.
-var websocket_url := "ws://localhost:9080"
+var websocket_url: String = "ws://localhost:9080"
 
 var socket := WebSocketPeer.new()
 
 func log_message(message: String) -> void:
-	var time := "[color=#aaaaaa] %s |[/color] " % Time.get_time_string_from_system()
+	var time: String = "[color=#aaaaaa] %s |[/color] " % Time.get_time_string_from_system()
 	%TextClient.text += time + message + "\n"
 
 

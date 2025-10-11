@@ -1,42 +1,51 @@
 extends Node
 
+
 const ROT_SPEED = 0.003
 const ZOOM_SPEED = 0.125
 const MAIN_BUTTONS = MOUSE_BUTTON_MASK_LEFT | MOUSE_BUTTON_MASK_RIGHT | MOUSE_BUTTON_MASK_MIDDLE
 
-var tester_index := 0
-var rot_x := -TAU / 16  # This must be kept in sync with RotationX.
-var rot_y := TAU / 8  # This must be kept in sync with CameraHolder.
-var camera_distance := 4.0
-var base_height := int(ProjectSettings.get_setting("display/window/size/viewport_height"))
+var tester_index: int = 0
+var rot_x: float = -TAU / 16  # This must be kept in sync with RotationX.
+var rot_y: float = TAU / 8  # This must be kept in sync with CameraHolder.
+var camera_distance: float = 4.0
 
 @onready var testers: Node3D = $Testers
 @onready var camera_holder: Node3D = $CameraHolder  # Has a position and rotates on Y.
 @onready var rotation_x: Node3D = $CameraHolder/RotationX
 @onready var camera: Camera3D = $CameraHolder/RotationX/Camera3D
 
+
 func _ready() -> void:
+	if RenderingServer.get_current_rendering_method() == "gl_compatibility":
+		# Darken the light's energy to compensate for sRGB blending (without affecting sky rendering).
+		$DirectionalLight3D.sky_mode = DirectionalLight3D.SKY_MODE_SKY_ONLY
+		var new_light: DirectionalLight3D = $DirectionalLight3D.duplicate()
+		new_light.light_energy = 0.3
+		new_light.sky_mode = DirectionalLight3D.SKY_MODE_LIGHT_ONLY
+		add_child(new_light)
+
 	camera_holder.transform.basis = Basis.from_euler(Vector3(0, rot_y, 0))
 	rotation_x.transform.basis = Basis.from_euler(Vector3(rot_x, 0, 0))
 	update_gui()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"ui_left"):
+func _unhandled_input(input_event: InputEvent) -> void:
+	if input_event.is_action_pressed(&"ui_left"):
 		_on_previous_pressed()
-	if event.is_action_pressed(&"ui_right"):
+	if input_event.is_action_pressed(&"ui_right"):
 		_on_next_pressed()
 
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+	if input_event is InputEventMouseButton:
+		if input_event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			camera_distance -= ZOOM_SPEED
-		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+		if input_event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			camera_distance += ZOOM_SPEED
 		camera_distance = clamp(camera_distance, 1.5, 6)
 
-	if event is InputEventMouseMotion and event.button_mask & MAIN_BUTTONS:
-		# Compensate motion speed to be resolution-independent (based on the window height).
-		var relative_motion: Vector2 = event.relative * DisplayServer.window_get_size().y / base_height
+	if input_event is InputEventMouseMotion and input_event.button_mask & MAIN_BUTTONS:
+		# Use `screen_relative` to make mouse sensitivity independent of viewport resolution.
+		var relative_motion: Vector2 = input_event.screen_relative
 		rot_y -= relative_motion.x * ROT_SPEED
 		rot_x -= relative_motion.y * ROT_SPEED
 		rot_x = clamp(rot_x, -1.57, 0)

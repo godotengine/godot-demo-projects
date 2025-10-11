@@ -1,5 +1,6 @@
 extends Test
 
+
 const OPTION_TYPE_BOX = "Collision type/Box (1)"
 const OPTION_TYPE_SPHERE = "Collision type/Sphere (2)"
 const OPTION_TYPE_CAPSULE = "Collision type/Capsule (3)"
@@ -17,9 +18,10 @@ const OFFSET_RANGE = 3.0
 
 @export var offset := Vector3.ZERO
 
-var _update_collision := false
-var _collision_test_index := 0
+var _update_collision: bool = false
+var _collision_test_index: int = 0
 var _collision_shapes: Array[Shape3D] = []
+
 
 func _ready() -> void:
 	_initialize_collision_shapes()
@@ -47,17 +49,17 @@ func _ready() -> void:
 	_update_collision = true
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_1:
+func _input(input_event: InputEvent) -> void:
+	if input_event is InputEventKey and input_event.pressed:
+		if input_event.keycode == KEY_1:
 			_on_option_selected(OPTION_TYPE_BOX)
-		elif event.keycode == KEY_2:
+		elif input_event.keycode == KEY_2:
 			_on_option_selected(OPTION_TYPE_SPHERE)
-		elif event.keycode == KEY_3:
+		elif input_event.keycode == KEY_3:
 			_on_option_selected(OPTION_TYPE_CAPSULE)
-		elif event.keycode == KEY_4:
+		elif input_event.keycode == KEY_4:
 			_on_option_selected(OPTION_TYPE_CYLINDER)
-		elif event.keycode == KEY_5:
+		elif input_event.keycode == KEY_5:
 			_on_option_selected(OPTION_TYPE_CONVEX_POLYGON)
 
 

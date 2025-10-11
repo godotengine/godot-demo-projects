@@ -71,19 +71,19 @@ func _process(_delta: float) -> void:
 				# Transparent white modulate, non-alpha color channels are not changed here.
 				joypad_axes.get_node(str(axis)).self_modulate.a = scaled_alpha_value
 
-		# Highlight axis labels that are within the "active" value range. Simular to the button highlighting for loop below.
-		axes.get_node("Axis" + str(axis) + "/Label").add_theme_color_override("font_color", FONT_COLOR_DEFAULT)
+		# Highlight axis labels that are within the "active" value range. Similar to the button highlighting for loop below.
+		axes.get_node("Axis" + str(axis) + "/Label").add_theme_color_override(&"font_color", FONT_COLOR_DEFAULT)
 		if abs(axis_value) >= DEADZONE:
-			axes.get_node("Axis" + str(axis) + "/Label").add_theme_color_override("font_color", FONT_COLOR_ACTIVE)
+			axes.get_node("Axis" + str(axis) + "/Label").add_theme_color_override(&"font_color", FONT_COLOR_ACTIVE)
 
 	# Loop through the buttons and highlight the ones that are pressed.
 	for button in range(int(min(JOY_BUTTON_SDL_MAX, 21))):
 		if Input.is_joy_button_pressed(joy_num, button):
-			button_grid.get_child(button).add_theme_color_override("font_color", FONT_COLOR_ACTIVE)
+			button_grid.get_child(button).add_theme_color_override(&"font_color", FONT_COLOR_ACTIVE)
 			if button <= JOY_BUTTON_MISC1:
 				joypad_buttons.get_child(button).show()
 		else:
-			button_grid.get_child(button).add_theme_color_override("font_color", FONT_COLOR_DEFAULT)
+			button_grid.get_child(button).add_theme_color_override(&"font_color", FONT_COLOR_DEFAULT)
 			if button <= JOY_BUTTON_MISC1:
 				joypad_buttons.get_child(button).hide()
 
@@ -142,6 +142,7 @@ func set_joypad_name(joy_name: String, joy_guid: String) -> void:
 	# Make the rest of the UI appear as enabled.
 	for node: CanvasItem in [$JoypadDiagram, $Axes, $Buttons, $Vibration, $VBoxContainer]:
 		node.modulate.a = 1.0
+
 
 func clear_joypad_name() -> void:
 	joypad_name.set_text("[i]No controller detected at ID %d.[/i]" % joypad_number.value)

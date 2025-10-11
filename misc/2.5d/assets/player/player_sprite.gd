@@ -1,16 +1,18 @@
 @tool
 extends Sprite2D
 
+
 const ANIMATION_FRAMERATE = 15
 
-var _direction := 0
-var _progress := 0.0
+var _direction: int = 0
+var _progress: float = 0.0
 var _parent_node25d: Node25D
 var _parent_math: PlayerMath25D
 
 @onready var _stand: Texture2D = preload("res://assets/player/textures/stand.png")
 @onready var _jump: Texture2D = preload("res://assets/player/textures/jump.png")
 @onready var _run: Texture2D = preload("res://assets/player/textures/run.png")
+
 
 func _ready() -> void:
 	_parent_node25d = get_parent()

@@ -2,7 +2,7 @@
 # the key maps in a simple way through a dictionary.
 extends Node
 
-const keymaps_path := "user://keymaps.dat"
+const keymaps_path: String = "user://keymaps.dat"
 var keymaps: Dictionary
 
 

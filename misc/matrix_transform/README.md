@@ -14,7 +14,7 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
 
 ## How does it work?
 
-In both 2D and 3D, colored lines are drawn indicating the basis vectors as well as the origin vector. For 3D, this means cuboids. If you translate, rotate, scale, or shear the AxisMarker objects, you will be able to see how it affects the transform's component vectors, and all children objects are also appropriately transformed.
+In both 2D and 3D, colored lines are drawn indicating the basis vectors as well as the origin vector. For 3D, this means cuboids. If you translate, rotate, scale, or shear the AxisMarker objects, you will be able to see how it affects the transform's component vectors, and all child objects are also appropriately transformed.
 
 You are encouraged to manipulate the AxisMarker objects both in the main viewport and in the inspector. You are encouraged to duplicate them in the hierarchy and parent them any way you wish.
 
