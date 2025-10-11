@@ -1,15 +1,17 @@
 extends Camera3D
 
+
 const MAX_HEIGHT = 2.0
 const MIN_HEIGHT = 0.0
 
 var collision_exception: Array[RID] = []
 
-@export var min_distance := 0.5
-@export var max_distance := 3.5
-@export var angle_v_adjust := 0.0
-@export var autoturn_ray_aperture := 25.0
-@export var autoturn_speed := 50.0
+@export var min_distance: float = 0.5
+@export var max_distance: float = 3.5
+@export var angle_v_adjust: float = 0.0
+@export var autoturn_ray_aperture: float = 25.0
+@export var autoturn_speed: float = 50.0
+
 
 func _ready() -> void:
 	# Find collision exceptions for ray.

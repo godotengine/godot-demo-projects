@@ -10,7 +10,7 @@ extends Control
 @onready var fps_label := $FPSLabel
 @onready var resolution_label := $ResolutionLabel
 
-var counter := 0.0
+var counter: float = 0.0
 
 # When the screen changes size, we need to update the 3D
 # viewport quality setting. If we don't do this, the viewport will take
@@ -20,7 +20,7 @@ var viewport_start_size := Vector2(
 	ProjectSettings.get_setting(&"display/window/size/viewport_height")
 )
 
-var is_compatibility := false
+var is_compatibility: bool = false
 
 
 func _ready() -> void:

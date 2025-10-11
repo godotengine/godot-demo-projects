@@ -1,5 +1,6 @@
 extends Node3D
 
+
 const MOUSE_SENSITIVITY = 0.01
 const INITIAL_VELOCITY_STRENGTH = 0.5
 
@@ -13,11 +14,11 @@ const DIRECTIONAL_SHADOW_MAX_DISTANCE_MARGIN = 9.0
 @onready var directional_light: DirectionalLight3D = $DirectionalLight3D
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"reset_simulation"):
+func _unhandled_input(input_event: InputEvent) -> void:
+	if input_event.is_action_pressed(&"reset_simulation"):
 		get_tree().reload_current_scene()
 
-	if event.is_action_pressed(&"place_ragdoll"):
+	if input_event.is_action_pressed(&"place_ragdoll"):
 		var origin := camera.global_position
 		var target := camera.project_position(get_viewport().get_mouse_position(), 100)
 
@@ -33,27 +34,27 @@ func _unhandled_input(event: InputEvent) -> void:
 			ragdoll.initial_velocity = Vector3.FORWARD.rotated(Vector3.UP, randf_range(0, TAU)) * INITIAL_VELOCITY_STRENGTH
 			add_child(ragdoll)
 
-	if event.is_action_pressed(&"slow_motion"):
+	if input_event.is_action_pressed(&"slow_motion"):
 		Engine.time_scale = 0.25
 		# Don't set pitch scale too low as it sounds strange.
 		# `0.5` is the square root of `0.25` and gives a good result here.
 		AudioServer.playback_speed_scale = 0.5
 
-	if event.is_action_released(&"slow_motion"):
+	if input_event.is_action_released(&"slow_motion"):
 		Engine.time_scale = 1.0
 		AudioServer.playback_speed_scale = 1.0
 
 	# Pan the camera with right mouse button.
-	if event is InputEventMouseMotion:
-		var mouse_motion := event as InputEventMouseMotion
+	if input_event is InputEventMouseMotion:
+		var mouse_motion := input_event as InputEventMouseMotion
 		if mouse_motion.button_mask & MOUSE_BUTTON_RIGHT:
-			camera_pivot.global_rotation.x = clampf(camera_pivot.global_rotation.x - event.screen_relative.y * MOUSE_SENSITIVITY, -TAU * 0.249, TAU * 0.021)
-			camera_pivot.global_rotation.y -= event.screen_relative.x * MOUSE_SENSITIVITY
+			camera_pivot.global_rotation.x = clampf(camera_pivot.global_rotation.x - input_event.screen_relative.y * MOUSE_SENSITIVITY, -TAU * 0.249, TAU * 0.021)
+			camera_pivot.global_rotation.y -= input_event.screen_relative.x * MOUSE_SENSITIVITY
 
 	# Zoom with mouse wheel.
 	# This also adjusts shadow maximum distance to always cover the scene regardless of zoom level.
-	if event is InputEventMouseButton:
-		var mouse_button := event as InputEventMouseButton
+	if input_event is InputEventMouseButton:
+		var mouse_button := input_event as InputEventMouseButton
 		if mouse_button.button_index == MOUSE_BUTTON_WHEEL_UP:
 			camera.translate_object_local(Vector3.FORWARD * 0.5)
 			directional_light.directional_shadow_max_distance = camera.position.length() + DIRECTIONAL_SHADOW_MAX_DISTANCE_MARGIN

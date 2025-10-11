@@ -1,11 +1,13 @@
 extends Node
 
+
 enum LogType {
 	LOG,
 	ERROR,
 }
 
 signal entry_logged(message: String, type: LogType)
+
 
 func print_log(message: String) -> void:
 	print(message)

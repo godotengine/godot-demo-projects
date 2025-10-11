@@ -1,5 +1,6 @@
 extends Test
 
+
 const OPTION_BIG = "Floor options/Big"
 const OPTION_SMALL = "Floor options/Small"
 
@@ -8,12 +9,13 @@ const SHAPE_CONVEX = "Collision shapes/Convex"
 const SHAPE_BOX = "Collision shapes/Box"
 
 var _dynamic_shapes_scene: PackedScene
-var _floor_shapes := {}
-var _floor_size := "Small"
+var _floor_shapes: Dictionary[String, PackedScene] = {}
+var _floor_size: String = "Small"
 
 var _current_floor_name := SHAPE_CONCAVE
 var _current_bodies: Node3D
 var _current_floor: Node3D
+
 
 func _ready() -> void:
 	var options: OptionMenu = $Options

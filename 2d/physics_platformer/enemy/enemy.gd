@@ -11,7 +11,7 @@ enum State {
 var _state := State.WALKING
 
 var direction := -1
-var anim := ""
+var anim: String = ""
 
 @onready var rc_left := $RaycastLeft as RayCast2D
 @onready var rc_right := $RaycastRight as RayCast2D

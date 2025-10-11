@@ -5,7 +5,7 @@ var player_labels := {}
 func _process(_delta: float) -> void:
 	var rocks_left := $"../Rocks".get_child_count()
 	if rocks_left == 0:
-		var winner_name := ""
+		var winner_name: String = ""
 		var winner_score := 0
 		for p: int in player_labels:
 			if player_labels[p].score > winner_score:

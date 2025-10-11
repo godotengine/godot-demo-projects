@@ -1,13 +1,14 @@
 extends Node
 
+
 const ROT_SPEED = 0.003
 const ZOOM_SPEED = 0.125
 const MAIN_BUTTONS = MOUSE_BUTTON_MASK_LEFT | MOUSE_BUTTON_MASK_RIGHT | MOUSE_BUTTON_MASK_MIDDLE
 
-var tester_index := 0
-var rot_x := -TAU / 16  # This must be kept in sync with RotationX.
-var rot_y := TAU / 8  # This must be kept in sync with CameraHolder.
-var camera_distance := 4.0
+var tester_index: int = 0
+var rot_x: float = -TAU / 16  # This must be kept in sync with RotationX.
+var rot_y: float = TAU / 8  # This must be kept in sync with CameraHolder.
+var camera_distance: float = 4.0
 
 @onready var testers: Node3D = $Testers
 @onready var camera_holder: Node3D = $CameraHolder  # Has a position and rotates on Y.
@@ -29,22 +30,22 @@ func _ready() -> void:
 	update_gui()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"ui_left"):
+func _unhandled_input(input_event: InputEvent) -> void:
+	if input_event.is_action_pressed(&"ui_left"):
 		_on_previous_pressed()
-	if event.is_action_pressed(&"ui_right"):
+	if input_event.is_action_pressed(&"ui_right"):
 		_on_next_pressed()
 
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+	if input_event is InputEventMouseButton:
+		if input_event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			camera_distance -= ZOOM_SPEED
-		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+		if input_event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			camera_distance += ZOOM_SPEED
 		camera_distance = clamp(camera_distance, 1.5, 6)
 
-	if event is InputEventMouseMotion and event.button_mask & MAIN_BUTTONS:
+	if input_event is InputEventMouseMotion and input_event.button_mask & MAIN_BUTTONS:
 		# Use `screen_relative` to make mouse sensitivity independent of viewport resolution.
-		var relative_motion: Vector2 = event.screen_relative
+		var relative_motion: Vector2 = input_event.screen_relative
 		rot_y -= relative_motion.x * ROT_SPEED
 		rot_x -= relative_motion.y * ROT_SPEED
 		rot_x = clamp(rot_x, -1.57, 0)

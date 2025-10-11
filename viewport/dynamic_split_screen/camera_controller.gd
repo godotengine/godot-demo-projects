@@ -21,7 +21,7 @@ extends Node3D
 @export var max_separation := 20.0
 @export var split_line_thickness := 3.0
 @export var split_line_color := Color.BLACK
-@export var adaptive_split_line_thickness := true
+@export var adaptive_split_line_thickness: bool = true
 
 @onready var player1: CharacterBody3D = $"../Player1"
 @onready var player2: CharacterBody3D = $"../Player2"

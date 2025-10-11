@@ -1,7 +1,7 @@
 extends "ws_webrtc_client.gd"
 
 var rtc_mp := WebRTCMultiplayerPeer.new()
-var sealed := false
+var sealed: bool = false
 
 func _init() -> void:
 	connected.connect(_connected)

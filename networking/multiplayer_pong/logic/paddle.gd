@@ -2,10 +2,10 @@ extends Area2D
 
 const MOTION_SPEED = 150
 
-@export var left := false
+@export var left: bool = false
 
 var _motion := 0.0
-var _you_hidden := false
+var _you_hidden: bool = false
 
 @onready var _screen_size_y := get_viewport_rect().size.y
 

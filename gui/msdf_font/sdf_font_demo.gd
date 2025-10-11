@@ -1,7 +1,7 @@
 extends Control
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"toggle_msdf_font"):
+func _input(input_event: InputEvent) -> void:
+	if input_event.is_action_pressed(&"toggle_msdf_font"):
 		if %FontLabel.get_theme_font(&"font").multichannel_signed_distance_field:
 			%FontLabel.add_theme_font_override(&"font", preload("res://montserrat_semibold.ttf"))
 		else:

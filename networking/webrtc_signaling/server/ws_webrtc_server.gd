@@ -29,7 +29,7 @@ var peers: Dictionary = {}
 
 class Peer extends RefCounted:
 	var id := -1
-	var lobby := ""
+	var lobby: String = ""
 	var time := Time.get_ticks_msec()
 	var ws := WebSocketPeer.new()
 
@@ -54,9 +54,9 @@ class Peer extends RefCounted:
 class Lobby extends RefCounted:
 	var peers := {}
 	var host := -1
-	var sealed := false
+	var sealed: bool = false
 	var time := 0  # Value is in milliseconds.
-	var mesh := true
+	var mesh: bool = true
 
 	func _init(host_id: int, use_mesh: bool) -> void:
 		host = host_id
@@ -83,7 +83,7 @@ class Lobby extends RefCounted:
 			return false
 
 		peers.erase(peer.id)
-		var close := false
+		var close: bool = false
 		if peer.id == host:
 			# The room host disconnected, will disconnect all peers.
 			close = true

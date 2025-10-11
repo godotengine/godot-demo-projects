@@ -1,5 +1,6 @@
 extends Node3D
 
+
 func _ready() -> void:
 	if RenderingServer.get_current_rendering_method() == "gl_compatibility":
 		# Use PCF13 shadow filtering to improve quality (Medium maps to PCF5 instead).

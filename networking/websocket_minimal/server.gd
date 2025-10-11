@@ -7,7 +7,7 @@ var tcp_server := TCPServer.new()
 var socket := WebSocketPeer.new()
 
 func log_message(message: String) -> void:
-	var time := "[color=#aaaaaa] %s |[/color] " % Time.get_time_string_from_system()
+	var time: String = "[color=#aaaaaa] %s |[/color] " % Time.get_time_string_from_system()
 	%TextServer.text += time + message + "\n"
 
 

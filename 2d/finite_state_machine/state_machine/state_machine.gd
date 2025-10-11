@@ -15,7 +15,7 @@ var states_map := {}
 
 var states_stack := []
 var current_state: Node = null
-var _active := false:
+var _active: bool = false:
 	set(value):
 		_active = value
 		set_active(value)

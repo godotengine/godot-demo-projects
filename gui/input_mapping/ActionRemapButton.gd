@@ -1,6 +1,8 @@
 extends Button
 
-@export var action := "ui_up"
+
+@export var action: String = "ui_up"
+
 
 func _ready() -> void:
 	assert(InputMap.has_action(action))
@@ -24,23 +26,23 @@ func _toggled(is_button_pressed: bool) -> void:
 
 # NOTE: You can use the `_input()` callback instead, especially if
 # you want to work with gamepads.
-func _unhandled_key_input(event: InputEvent) -> void:
+func _unhandled_key_input(input_event: InputEvent) -> void:
 	# Skip if pressing Enter, so that the input mapping GUI can be navigated
 	# with the keyboard. The downside of this approach is that the Enter
 	# key can't be bound to actions.
-	if event is InputEventKey and event.keycode != KEY_ENTER:
-		remap_action_to(event)
+	if input_event is InputEventKey and input_event.keycode != KEY_ENTER:
+		remap_action_to(input_event)
 		button_pressed = false
 
 
-func remap_action_to(event: InputEvent) -> void:
+func remap_action_to(input_event: InputEvent) -> void:
 	# We first change the event in this game instance.
 	InputMap.action_erase_events(action)
-	InputMap.action_add_event(action, event)
+	InputMap.action_add_event(action, input_event)
 	# And then save it to the keymaps file.
-	KeyPersistence.keymaps[action] = event
+	KeyPersistence.keymaps[action] = input_event
 	KeyPersistence.save_keymap()
-	text = event.as_text()
+	text = input_event.as_text()
 
 
 func display_current_key() -> void:

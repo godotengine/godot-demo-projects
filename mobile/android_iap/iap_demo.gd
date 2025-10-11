@@ -6,7 +6,7 @@ const TEST_ITEM_SKU = "my_in_app_purchase_sku"
 @onready var label: Label = $Label
 
 var payment: Object = null
-var test_item_purchase_token := ""
+var test_item_purchase_token: String = ""
 
 
 func _ready() -> void:

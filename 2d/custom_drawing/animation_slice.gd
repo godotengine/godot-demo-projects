@@ -1,6 +1,8 @@
 extends Control
 
-var use_antialiasing := false
+
+var use_antialiasing: bool = false
+
 
 func _draw() -> void:
 	var margin := Vector2(240, 70)

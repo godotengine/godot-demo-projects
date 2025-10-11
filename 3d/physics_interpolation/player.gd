@@ -45,10 +45,10 @@ func _ready() -> void:
 	cycle_camera_type()
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		_yaw -= event.screen_relative.x * MOUSE_SENSITIVITY * 0.001
-		_pitch += event.screen_relative.y * MOUSE_SENSITIVITY * 0.002
+func _input(input_event: InputEvent) -> void:
+	if input_event is InputEventMouseMotion:
+		_yaw -= input_event.screen_relative.x * MOUSE_SENSITIVITY * 0.001
+		_pitch += input_event.screen_relative.y * MOUSE_SENSITIVITY * 0.002
 		_pitch = clamp(_pitch, -PI, PI)
 		$Rig.rotation = Vector3(0, _yaw, 0)
 

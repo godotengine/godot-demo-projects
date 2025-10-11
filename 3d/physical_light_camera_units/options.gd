@@ -1,9 +1,11 @@
 extends Control
 
+
 @export var sun: DirectionalLight3D
 @export var lightbulb_1: OmniLight3D
 @export var lightbulb_2: OmniLight3D
 @export var world_environment: WorldEnvironment
+
 
 ## Returns color from a given temperature in kelvins (6500K is nearly white).
 ## Valid range is [1000; 15000].

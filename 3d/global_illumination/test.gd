@@ -51,7 +51,7 @@ var gi_mode_texts: Array[String] = [
 var gi_mode := GIMode.NONE
 var reflection_probe_mode := ReflectionProbeMode.NONE
 var ssil_mode := SSILMode.NONE
-var is_compatibility := false
+var is_compatibility: bool = false
 
 # This is replaced further below if using Compatibility to point to a newly created DirectionalLight3D
 # (which does not affect sky rendering).
@@ -93,8 +93,8 @@ Escape or F10: Toggle mouse capture"""
 	set_ssil_mode(ssil_mode)
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"cycle_gi_mode"):
+func _input(input_event: InputEvent) -> void:
+	if input_event.is_action_pressed(&"cycle_gi_mode"):
 		if is_compatibility:
 			# Only LightmapGI is supported in Compatibility.
 			# Note that the actual GI mode is the opposite of what's being set here, due to a bug
@@ -103,10 +103,10 @@ func _input(event: InputEvent) -> void:
 		else:
 			set_gi_mode(wrapi(gi_mode + 1, 0, GIMode.MAX))
 
-	if event.is_action_pressed(&"cycle_reflection_probe_mode"):
+	if input_event.is_action_pressed(&"cycle_reflection_probe_mode"):
 		set_reflection_probe_mode(wrapi(reflection_probe_mode + 1, 0, ReflectionProbeMode.MAX))
 
-	if event.is_action_pressed(&"cycle_ssil_mode"):
+	if input_event.is_action_pressed(&"cycle_ssil_mode"):
 		set_ssil_mode(wrapi(ssil_mode + 1, 0, SSILMode.MAX))
 
 

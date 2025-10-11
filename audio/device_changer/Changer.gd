@@ -14,7 +14,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	var speaker_mode_text := "Stereo"
+	var speaker_mode_text: String = "Stereo"
 	var speaker_mode := AudioServer.get_speaker_mode()
 
 	if speaker_mode == AudioServer.SPEAKER_SURROUND_31:

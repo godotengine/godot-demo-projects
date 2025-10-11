@@ -55,16 +55,16 @@ func _exit_tree() -> void:
 	RenderingServer.call_on_render_thread(_free_compute_resources)
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(input_event: InputEvent) -> void:
 	# If tool enabled, we don't want to handle our input in the editor.
 	if Engine.is_editor_hint():
 		return
 
-	if event is InputEventMouseMotion or event is InputEventMouseButton:
-		mouse_pos = event.global_position
+	if input_event is InputEventMouseMotion or input_event is InputEventMouseButton:
+		mouse_pos = input_event.global_position
 
-	if event is InputEventMouseButton and event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
-		mouse_pressed = event.pressed
+	if input_event is InputEventMouseButton and input_event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
+		mouse_pressed = input_event.pressed
 
 
 func _check_mouse_pos() -> void:

@@ -103,7 +103,7 @@ func _process(delta: float) -> void:
 	var gyro := Input.get_gyroscope()
 
 	# Show our base values.
-	var format := "%.05f"
+	var format: String = "%.05f"
 
 	%AccX.text = format % acc.x
 	%AccY.text = format % acc.y

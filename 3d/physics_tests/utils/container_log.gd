@@ -1,5 +1,6 @@
 extends Control
 
+
 const MAX_ENTRIES = 100
 
 var _entry_template: Label

@@ -8,10 +8,10 @@ signal client_disconnected(peer_id: int)
 @export var handshake_headers := PackedStringArray()
 @export var supported_protocols := PackedStringArray()
 @export var handshake_timout := 3000
-@export var use_tls := false
+@export var use_tls: bool = false
 @export var tls_cert: X509Certificate
 @export var tls_key: CryptoKey
-@export var refuse_new_connections := false:
+@export var refuse_new_connections: bool = false:
 	set(refuse):
 		if refuse:
 			pending_peers.clear()

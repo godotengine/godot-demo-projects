@@ -1,7 +1,8 @@
 extends Label
 
+
 func _ready() -> void:
-	var engine_name := ""
+	var engine_name: String = ""
 	match System.get_physics_engine():
 		System.PhysicsEngine.GODOT_PHYSICS:
 			engine_name = "GodotPhysics 3D"

@@ -1,13 +1,14 @@
 extends RigidBody3D
 
-const ACCEL = 5.0
-const DEACCEL = 20.0
-const MAX_SPEED = 2.0
-const ROT_SPEED = 1.0
 
-var prev_advance := false
-var dying := false
-var rot_dir := 4
+const ACCEL: float = 5.0
+const DEACCEL: float = 20.0
+const MAX_SPEED: float = 2.0
+const ROT_SPEED: float = 1.0
+
+var prev_advance: bool = false
+var dying: bool = false
+var rot_dir: float = 4.0
 
 @onready var gravity := Vector3(
 		ProjectSettings.get_setting("physics/3d/default_gravity") * ProjectSettings.get_setting("physics/3d/default_gravity_vector")
@@ -16,6 +17,7 @@ var rot_dir := 4
 @onready var _animation_player := $Enemy/AnimationPlayer as AnimationPlayer
 @onready var _ray_floor := $Enemy/Skeleton/RayFloor as RayCast3D
 @onready var _ray_wall := $Enemy/Skeleton/RayWall as RayCast3D
+
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	var delta := state.get_step()
@@ -51,10 +53,10 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 				$SoundHit.play()
 				return
 
-	var advance := _ray_floor.is_colliding() and not _ray_wall.is_colliding()
+	var advance: bool = _ray_floor.is_colliding() and not _ray_wall.is_colliding()
 
-	var dir := ($Enemy/Skeleton as Node3D).get_transform().basis[2].normalized()
-	var deaccel_dir := dir
+	var dir: Vector3 = ($Enemy/Skeleton as Node3D).get_transform().basis.z.normalized()
+	var deaccel_dir: Vector3 = dir
 
 	if advance:
 		if dir.dot(lin_velocity) < MAX_SPEED:
@@ -67,7 +69,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		dir = Basis(up, rot_dir * ROT_SPEED * (delta)) * dir
 		$Enemy/Skeleton.set_transform(Transform3D().looking_at(-dir, up))
 
-	var dspeed := deaccel_dir.dot(lin_velocity)
+	var dspeed: float = deaccel_dir.dot(lin_velocity)
 	dspeed -= DEACCEL * delta
 	if dspeed < 0:
 		dspeed = 0

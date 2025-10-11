@@ -8,10 +8,10 @@ const BOMB_RATE = 0.5
 
 @export var synced_position := Vector2()
 
-@export var stunned := false
+@export var stunned: bool = false
 
 var last_bomb_time := BOMB_RATE
-var current_anim := ""
+var current_anim: String = ""
 
 @onready var inputs: Node = $Inputs
 

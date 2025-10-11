@@ -1,5 +1,6 @@
 extends Test
 
+
 const OPTION_JOINT_TYPE = "Joint Type/%s Joint (%d)"
 
 const OPTION_TEST_CASE_BODIES_COLLIDE = "Test case/Attached bodies collide"
@@ -10,27 +11,28 @@ const OPTION_TEST_CASE_CHANGE_POSITIONS = "Test case/Set body positions after ad
 
 const BOX_SIZE = Vector2(64, 64)
 
-var _update_joint := false
+var _update_joint: bool = false
 var _selected_joint: Joint2D = null
 
-var _bodies_collide := false
-var _world_attachement := false
-var _dynamic_attachement := false
-var _destroy_body := false
-var _change_positions := false
+var _bodies_collide: bool = false
+var _world_attachement: bool = false
+var _dynamic_attachement: bool = false
+var _destroy_body: bool = false
+var _change_positions: bool = false
 
-var _joint_types := {}
+var _joint_types: Dictionary[String, Joint2D] = {}
+
 
 func _ready() -> void:
 	var options: OptionMenu = $Options
 
 	var joints: Node2D = $Joints
 	for joint_index in joints.get_child_count():
-		var joint_node := joints.get_child(joint_index)
+		var joint_node: Joint2D = joints.get_child(joint_index)
 		joint_node.visible = false
 		var joint_name := String(joint_node.name)
-		var joint_short := joint_name.substr(0, joint_name.length() - 7)
-		var option_name := OPTION_JOINT_TYPE % [joint_short, joint_index + 1]
+		var joint_short: String = joint_name.substr(0, joint_name.length() - 7)
+		var option_name: String = OPTION_JOINT_TYPE % [joint_short, joint_index + 1]
 		options.add_menu_item(option_name)
 		_joint_types[option_name] = joint_node
 
@@ -54,9 +56,9 @@ func _process(_delta: float) -> void:
 		$LabelJointType.text = "Joint Type: " + String(_selected_joint.name)
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and not event.pressed:
-		var joint_index: int = event.keycode - KEY_1
+func _input(input_event: InputEvent) -> void:
+	if input_event is InputEventKey and not input_event.pressed:
+		var joint_index: int = input_event.keycode - KEY_1
 		if joint_index >= 0 and joint_index < _joint_types.size():
 			_selected_joint = _joint_types.values()[joint_index]
 			_update_joint = true

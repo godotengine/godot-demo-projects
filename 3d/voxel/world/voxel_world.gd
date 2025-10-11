@@ -15,8 +15,8 @@ var _delete_distance := 0
 var effective_render_distance := 0
 var _old_player_chunk := Vector3i()
 
-var _generating := true
-var _deleting := false
+var _generating: bool = true
+var _deleting: bool = false
 
 var _chunks: Dictionary[Vector3i, Chunk] = {}
 

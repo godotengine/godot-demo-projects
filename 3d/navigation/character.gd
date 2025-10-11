@@ -1,7 +1,7 @@
 extends Marker3D
 
 @export var character_speed := 10.0
-@export var show_path := true
+@export var show_path: bool = true
 
 var _nav_path_line: Line3D
 
@@ -33,7 +33,7 @@ func set_target_position(target_position: Vector3) -> void:
 	# Get a full navigation path with the NavigationServer API.
 	if show_path:
 		var start_position := global_transform.origin
-		var optimize := true
+		var optimize: bool = true
 		var navigation_map := get_world_3d().get_navigation_map()
 		var path := NavigationServer3D.map_get_path(
 				navigation_map,

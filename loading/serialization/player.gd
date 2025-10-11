@@ -26,12 +26,12 @@ func _process(_delta: float) -> void:
 	move_and_slide()
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"move_left"):
+func _input(input_event: InputEvent) -> void:
+	if input_event.is_action_pressed(&"move_left"):
 		sprite.rotation = PI / 2
-	elif event.is_action_pressed(&"move_right"):
+	elif input_event.is_action_pressed(&"move_right"):
 		sprite.rotation = -PI / 2
-	elif event.is_action_pressed(&"move_up"):
+	elif input_event.is_action_pressed(&"move_up"):
 		sprite.rotation = PI
-	elif event.is_action_pressed(&"move_down"):
+	elif input_event.is_action_pressed(&"move_down"):
 		sprite.rotation = 0.0

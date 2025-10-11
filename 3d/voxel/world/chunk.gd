@@ -13,7 +13,7 @@ const DIRECTIONS: Array[Vector3i] = [Vector3i.LEFT, Vector3i.RIGHT, Vector3i.DOW
 
 var data: Dictionary[Vector3i, int] = {}
 var chunk_position := Vector3i()
-var is_initial_mesh_generated := false
+var is_initial_mesh_generated: bool = false
 var mesh_task_id := 0
 
 static var box_shape: BoxShape3D = null

@@ -11,7 +11,7 @@ const BARS = 4
 const COMPENSATE_FRAMES = 2
 const COMPENSATE_HZ = 60.0
 
-var playing := false
+var playing: bool = false
 var sync_source := SyncSource.SYSTEM_CLOCK
 
 # Used by system clock.

@@ -1,6 +1,7 @@
 class_name TestCharacter
 extends Test
 
+
 enum BodyType {
 	CHARACTER_BODY,
 	CHARACTER_BODY_RAY,
@@ -20,19 +21,19 @@ const OPTION_MOVE_CHARACTER_CONSTANT_SPEED = "Move Options/Use constant speed (C
 
 @export var _initial_velocity := Vector2.ZERO
 @export var _constant_velocity := Vector2.ZERO
-@export var _motion_speed := 400.0
-@export var _gravity_force := 50.0
-@export var _jump_force := 1000.0
-@export var _snap_distance := 0.0
-@export var _floor_max_angle := 45.0
+@export var _motion_speed: float = 400.0
+@export var _gravity_force: float = 50.0
+@export var _jump_force: float = 1000.0
+@export var _snap_distance: float = 0.0
+@export var _floor_max_angle: float = 45.0
 @export var _body_type := BodyType.CHARACTER_BODY
 
 @onready var options: OptionMenu = $Options
 
-var _use_snap := true
-var _use_stop_on_slope := true
-var _use_floor_only := true
-var _use_constant_speed := false
+var _use_snap: bool = true
+var _use_stop_on_slope: bool = true
+var _use_floor_only: bool = true
+var _use_constant_speed: bool = false
 
 var _body_parent: Node = null
 var _character_body_template: CharacterBody2D = null
@@ -99,8 +100,8 @@ func _process(_delta: float) -> void:
 		label_floor.visible = false
 
 
-func _input(event: InputEvent) -> void:
-	var key_event := event as InputEventKey
+func _input(input_event: InputEvent) -> void:
+	var key_event := input_event as InputEventKey
 	if key_event and not key_event.pressed:
 		if key_event.keycode == KEY_1:
 			if _character_body_template:
@@ -180,7 +181,7 @@ func _start_test() -> void:
 		_moving_body.queue_free()
 		_moving_body = null
 
-	var test_label := "Testing: "
+	var test_label: String = "Testing: "
 
 	var template: PhysicsBody2D = null
 	match _body_type:
