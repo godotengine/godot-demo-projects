@@ -15,7 +15,7 @@ enum AttackInputStates {
 
 var state: States = States.IDLE
 var attack_input_state := AttackInputStates.IDLE
-var ready_for_next_attack := false
+var ready_for_next_attack: bool = false
 const MAX_COMBO_COUNT = 3
 var combo_count := 0
 

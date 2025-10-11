@@ -26,7 +26,7 @@ func _ready() -> void:
 
 func _on_Tree_item_selected() -> void:
 	var tree: Tree = $"TabContainer/Text direction/Tree"
-	var path := ""
+	var path: String = ""
 	var item := tree.get_selected()
 	while item != null:
 		path = item.get_text(0) + "/" + path

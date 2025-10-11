@@ -1,5 +1,6 @@
 extends WorldEnvironment
 
+
 const ROT_SPEED: float = 0.003
 const ZOOM_SPEED: float = 0.125
 const MAIN_BUTTONS: int = MOUSE_BUTTON_MASK_LEFT | MOUSE_BUTTON_MASK_RIGHT | MOUSE_BUTTON_MASK_MIDDLE
@@ -63,13 +64,13 @@ func _ready() -> void:
 	update_gui()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"ui_left"):
+func _unhandled_input(input_event: InputEvent) -> void:
+	if input_event.is_action_pressed(&"ui_left"):
 		_on_previous_pressed()
-	if event.is_action_pressed(&"ui_right"):
+	if input_event.is_action_pressed(&"ui_right"):
 		_on_next_pressed()
 
-	if event.is_action_pressed(&"reset_physics_simulation"):
+	if input_event.is_action_pressed(&"reset_physics_simulation"):
 		# Remove all additional (player-spawned) items.
 		for additional_item in additional_items:
 			additional_item.queue_free()
@@ -92,9 +93,9 @@ func _unhandled_input(event: InputEvent) -> void:
 					nodes_to_reset[idx].set_point_pinned(point, true)
 
 	if (
-			event.is_action_pressed(&"place_cloth") or
-			event.is_action_pressed(&"place_light_box") or
-			event.is_action_pressed(&"place_heavy_box")
+			input_event.is_action_pressed(&"place_cloth") or
+			input_event.is_action_pressed(&"place_light_box") or
+			input_event.is_action_pressed(&"place_heavy_box")
 	):
 		# Place a new item and track it in an additional items array, so we can limit
 		# the number of player-spawned items present in the scene at a given time.
@@ -111,11 +112,11 @@ func _unhandled_input(event: InputEvent) -> void:
 				additional_items.pop_front().queue_free()
 
 			var node: Node3D
-			if event.is_action_pressed(&"place_cloth"):
+			if input_event.is_action_pressed(&"place_cloth"):
 				node = Cloth.instantiate()
 				# Make user-placed cloth translucent to distinguish from the scene's own cloths.
 				node.transparency = 0.35
-			elif event.is_action_pressed(&"place_light_box"):
+			elif input_event.is_action_pressed(&"place_light_box"):
 				node = RigidBoxLight.instantiate()
 			else:
 				node = RigidBoxHeavy.instantiate()
@@ -124,16 +125,16 @@ func _unhandled_input(event: InputEvent) -> void:
 			add_child(node)
 			additional_items.push_back(node)
 
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+	if input_event is InputEventMouseButton:
+		if input_event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			zoom -= ZOOM_SPEED
-		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+		if input_event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			zoom += ZOOM_SPEED
 		zoom = clampf(zoom, 1.5, 4)
 
-	if event is InputEventMouseMotion and event.button_mask & MAIN_BUTTONS:
+	if input_event is InputEventMouseMotion and input_event.button_mask & MAIN_BUTTONS:
 		# Compensate motion speed to be resolution-independent (based on the window height).
-		var relative_motion: Vector2 = event.relative * DisplayServer.window_get_size().y / base_height
+		var relative_motion: Vector2 = input_event.relative * DisplayServer.window_get_size().y / base_height
 		rot_y -= relative_motion.x * ROT_SPEED
 		rot_x -= relative_motion.y * ROT_SPEED
 		rot_x = clampf(rot_x, deg_to_rad(-90), 0)

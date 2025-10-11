@@ -8,14 +8,14 @@ const OPTION_TYPE_CYLINDER = "Shape type/Cylinder"
 const OPTION_TYPE_CONVEX = "Shape type/Convex"
 
 @export var spawns: Array[NodePath] = []
-@export var spawn_count := 100
+@export var spawn_count: int = 100
 @export var spawn_randomize := Vector3.ZERO
 
 var _object_templates: Array[Node3D] = []
 
-var _log_physics := false
-var _log_physics_time := 0
-var _log_physics_time_start := 0
+var _log_physics: bool = false
+var _log_physics_time_usec: int = 0
+var _log_physics_time_usec_start: int = 0
 
 func _ready() -> void:
 	await start_timer(0.5).timeout
@@ -48,16 +48,16 @@ func _physics_process(delta: float) -> void:
 
 	if _log_physics:
 		var time := Time.get_ticks_usec()
-		var time_delta := time - _log_physics_time
-		var time_total := time - _log_physics_time_start
-		_log_physics_time = time
+		var time_delta := time - _log_physics_time_usec
+		var time_total := time - _log_physics_time_usec_start
+		_log_physics_time_usec = time
 		Log.print_log("  Physics Tick: %.3f ms (total = %.3f ms)" % [0.001 * time_delta, 0.001 * time_total])
 
 
 func _log_physics_start() -> void:
 	_log_physics = true
-	_log_physics_time_start = Time.get_ticks_usec()
-	_log_physics_time = _log_physics_time_start
+	_log_physics_time_usec_start = Time.get_ticks_usec()
+	_log_physics_time_usec = _log_physics_time_usec_start
 
 
 func _log_physics_stop() -> void:

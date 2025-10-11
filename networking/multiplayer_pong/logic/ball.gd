@@ -3,7 +3,7 @@ extends Area2D
 const DEFAULT_SPEED = 100.0
 
 var direction := Vector2.LEFT
-var stopped := false
+var stopped: bool = false
 var _speed := DEFAULT_SPEED
 
 @onready var _screen_size := get_viewport_rect().size

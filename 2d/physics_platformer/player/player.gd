@@ -14,11 +14,11 @@ const MAX_FLOOR_AIRBORNE_TIME = 0.15
 const BULLET_SCENE = preload("res://player/bullet.tscn")
 const ENEMY_SCENE = preload("res://enemy/enemy.tscn")
 
-var anim := ""
-var siding_left := false
-var jumping := false
-var stopping_jump := false
-var shooting := false
+var anim: String = ""
+var siding_left: bool = false
+var jumping: bool = false
+var stopping_jump: bool = false
+var shooting: bool = false
 
 var floor_h_velocity: float = 0.0
 
@@ -55,7 +55,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	floor_h_velocity = 0.0
 
 	# Find the floor (a contact with upwards facing collision normal).
-	var found_floor := false
+	var found_floor: bool = false
 	var floor_index := -1
 
 	for contact_index in state.get_contact_count():

@@ -1,12 +1,14 @@
 @tool
 extends Sprite2D
 
+
 @onready var _forty_five: Texture2D = preload("res://assets/platform/textures/forty_five.png")
 @onready var _isometric: Texture2D = preload("res://assets/platform/textures/isometric.png")
 @onready var _top_down: Texture2D = preload("res://assets/platform/textures/top_down.png")
 @onready var _front_side: Texture2D = preload("res://assets/platform/textures/front_side.png")
 @onready var _oblique_y: Texture2D = preload("res://assets/platform/textures/oblique_y.png")
 @onready var _oblique_z: Texture2D = preload("res://assets/platform/textures/oblique_z.png")
+
 
 func _process(_delta: float) -> void:
 	if not Engine.is_editor_hint():

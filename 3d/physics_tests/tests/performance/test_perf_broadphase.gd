@@ -1,17 +1,19 @@
 extends Test
 
+
 const BOX_SIZE = Vector3(0.8, 0.8, 0.8)
 const BOX_SPACE = Vector3(1.0, 1.0, 1.0)
 
-@export_range(1, 1000) var row_size := 20
-@export_range(1, 1000) var column_size := 20
-@export_range(1, 1000) var depth_size := 20
+@export_range(1, 1000) var row_size: int = 20
+@export_range(1, 1000) var column_size: int = 20
+@export_range(1, 1000) var depth_size: int = 20
 
 var _objects: Array[Node3D] = []
 
-var _log_physics := false
-var _log_physics_time := 0
-var _log_physics_time_start := 0
+var _log_physics: bool = false
+var _log_physics_time_usec: int = 0
+var _log_physics_time_usec_start: int = 0
+
 
 func _ready() -> void:
 	await start_timer(1.0).timeout
@@ -75,16 +77,16 @@ func _physics_process(delta: float) -> void:
 
 	if _log_physics:
 		var time := Time.get_ticks_usec()
-		var time_delta := time - _log_physics_time
-		var time_total := time - _log_physics_time_start
-		_log_physics_time = time
+		var time_delta := time - _log_physics_time_usec
+		var time_total := time - _log_physics_time_usec_start
+		_log_physics_time_usec = time
 		Log.print_log("  Physics Tick: %.3f ms (total = %.3f ms)" % [0.001 * time_delta, 0.001 * time_total])
 
 
 func _log_physics_start() -> void:
 	_log_physics = true
-	_log_physics_time_start = Time.get_ticks_usec()
-	_log_physics_time = _log_physics_time_start
+	_log_physics_time_usec_start = Time.get_ticks_usec()
+	_log_physics_time_usec = _log_physics_time_usec_start
 
 
 func _log_physics_stop() -> void:

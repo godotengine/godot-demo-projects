@@ -2,14 +2,15 @@ extends OptionMenu
 
 
 class TestData:
-	var id := ""
-	var scene_path := ""
+	var id: String = ""
+	var scene_path: String = ""
 
 
 var _test_list := []
 
 var _current_test: TestData = null
 var _current_test_scene: Node = null
+
 
 func _ready() -> void:
 	option_selected.connect(_on_option_selected)

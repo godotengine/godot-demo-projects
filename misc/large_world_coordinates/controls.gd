@@ -30,18 +30,18 @@ func _process(delta: float) -> void:
 		node_to_move.position.z += 1_000_000 * delta
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+func _input(input_event: InputEvent) -> void:
+	if input_event is InputEventMouseButton:
+		if input_event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			zoom -= ZOOM_SPEED
-		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+		if input_event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			zoom += ZOOM_SPEED
 		zoom = clampf(zoom, 4, 15)
 		camera.position.z = zoom
 
-	if event is InputEventMouseMotion and event.button_mask & MAIN_BUTTONS:
+	if input_event is InputEventMouseMotion and input_event.button_mask & MAIN_BUTTONS:
 		# Use `screen_relative` to make mouse sensitivity independent of viewport resolution.
-		var relative_motion: Vector2 = event.screen_relative
+		var relative_motion: Vector2 = input_event.screen_relative
 		rot_y -= relative_motion.x * ROT_SPEED
 		rot_x -= relative_motion.y * ROT_SPEED
 		rot_x = clampf(rot_x, -1.4, 0.16)

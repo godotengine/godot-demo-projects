@@ -1,5 +1,6 @@
 extends Node3D
 
+
 const MOUSE_SENSITIVITY = 0.001
 
 # The camera field of view to smoothly interpolate to.
@@ -19,30 +20,30 @@ func _process(delta: float) -> void:
 
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"toggle_gui"):
+func _input(input_event: InputEvent) -> void:
+	if input_event.is_action_pressed(&"toggle_gui"):
 		$Panel.visible = not $Panel.visible
 		$Help.visible = not $Help.visible
 
-	if event.is_action_pressed(&"toggle_spheres"):
+	if input_event.is_action_pressed(&"toggle_spheres"):
 		$Spheres.visible = not $Spheres.visible
 
-	if event.is_action_pressed(&"toggle_mouse_capture"):
+	if input_event.is_action_pressed(&"toggle_mouse_capture"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and event is InputEventMouseMotion:
+	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and input_event is InputEventMouseMotion:
 		# Mouselook.
-		var relative_motion: Vector2 = event.screen_relative
+		var relative_motion: Vector2 = input_event.screen_relative
 		$YawCamera.rotation.x = clampf($YawCamera.rotation.x - relative_motion.y * MOUSE_SENSITIVITY, -TAU * 0.25, TAU * 0.25)
 		$YawCamera.rotation.y -= relative_motion.x * MOUSE_SENSITIVITY
 
 	# Mouse wheel currently doesn't work in input actions. Hardcode mouse wheel as a workaround.
-	if event.is_action_pressed(&"increase_camera_fov") or Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_DOWN):
+	if input_event.is_action_pressed(&"increase_camera_fov") or Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_DOWN):
 		desired_fov = clampf(desired_fov + 5.0, 20.0, 120.0)
-	if event.is_action_pressed(&"decrease_camera_fov") or Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_UP):
+	if input_event.is_action_pressed(&"decrease_camera_fov") or Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_UP):
 		desired_fov = clampf(desired_fov - 5.0, 20.0, 120.0)
 
 

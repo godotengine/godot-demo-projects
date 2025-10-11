@@ -31,7 +31,7 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	var modetext := "Mode: "
+	var modetext: String = "Mode: "
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 		modetext += "Fullscreen\n"
 	else:
@@ -85,11 +85,11 @@ func _physics_process(_delta: float) -> void:
 	$Buttons/Button_MouseModeCaptured.set_pressed(Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED)
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		mouse_position = event.position
+func _input(input_event: InputEvent) -> void:
+	if input_event is InputEventMouseMotion:
+		mouse_position = input_event.position
 
-	if event is InputEventKey:
+	if input_event is InputEventKey:
 		if Input.is_action_pressed(&"mouse_mode_visible"):
 			observer.state = observer.State.MENU
 			_on_button_mouse_mode_visible_pressed()
@@ -111,7 +111,7 @@ func _input(event: InputEvent) -> void:
 
 
 func check_wm_api() -> bool:
-	var s := ""
+	var s: String = ""
 	if not DisplayServer.has_method(&"get_screen_count"):
 		s += " - get_screen_count()\n"
 	if not DisplayServer.has_method(&"window_get_current_screen"):

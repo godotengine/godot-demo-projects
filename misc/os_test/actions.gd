@@ -1,5 +1,6 @@
 extends Node
 
+
 func _ready() -> void:
 	if OS.has_feature("web"):
 		for button: Button in [

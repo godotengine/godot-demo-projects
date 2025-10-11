@@ -1,15 +1,17 @@
 class_name OptionMenu
 extends MenuButton
 
+
 signal option_selected(item_path: String)
 signal option_changed(item_path: String, checked: bool)
+
 
 func add_menu_item(item_path: String, checkbox: bool = false, checked: bool = false) -> void:
 	var path_elements := item_path.split("/", false)
 	var path_element_count := path_elements.size()
 	assert(path_element_count > 0)
 
-	var path := ""
+	var path: String = ""
 	var popup := get_popup()
 	for element_index in path_element_count - 1:
 		var popup_label := path_elements[element_index]

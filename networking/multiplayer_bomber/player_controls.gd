@@ -5,7 +5,7 @@ extends Node
 		# This will be sent by players, make sure values are within limits.
 		motion = clamp(value, Vector2(-1, -1), Vector2(1, 1))
 
-@export var bombing := false
+@export var bombing: bool = false
 
 func update() -> void:
 	var m := Vector2()

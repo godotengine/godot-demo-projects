@@ -8,26 +8,26 @@ var selected: int = 0
 
 # Input:
 
-func _gui_input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"ui_left"):
+func _gui_input(input_event: InputEvent) -> void:
+	if input_event.is_action_pressed(&"ui_left"):
 		selected = (selected - 1) % item_aes.size()
 		queue_redraw()
 		queue_accessibility_update() # Request node accessibility information update. Similar to "queue_redraw" for drawing.
 		accept_event()
 
-	if event.is_action_pressed(&"ui_right"):
+	if input_event.is_action_pressed(&"ui_right"):
 		selected = (selected + 1) % item_aes.size()
 		queue_redraw()
 		queue_accessibility_update()
 		accept_event()
 
-	if event.is_action_pressed(&"ui_up"):
+	if input_event.is_action_pressed(&"ui_up"):
 		item_values[selected] = clampi(item_values[selected] - 1, -100, 100)
 		queue_redraw()
 		queue_accessibility_update()
 		accept_event()
 
-	if event.is_action_pressed(&"ui_down"):
+	if input_event.is_action_pressed(&"ui_down"):
 		item_values[selected] = clampi(item_values[selected] + 1, -100, 100)
 		queue_redraw()
 		queue_accessibility_update()

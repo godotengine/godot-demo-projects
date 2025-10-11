@@ -1,6 +1,6 @@
 extends Label
 
-var test_name := "":
+var test_name: String = "":
 	set(value):
 		if (test_name != value):
 			return

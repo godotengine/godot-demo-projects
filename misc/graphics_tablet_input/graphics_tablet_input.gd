@@ -35,8 +35,8 @@ func _ready() -> void:
 	%TabletDriver.text = "Tablet driver: %s" % DisplayServer.tablet_get_current_driver()
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
+func _input(input_event: InputEvent) -> void:
+	if input_event is InputEventKey:
 		if Input.is_action_pressed(&"increase_line_width"):
 			$CanvasLayer/PanelContainer/Options/LineWidth/HSlider.value += 0.5
 			#_on_line_width_value_changed(line_width)
@@ -47,8 +47,8 @@ func _input(event: InputEvent) -> void:
 	if not stroke:
 		return
 
-	if event is InputEventMouseMotion:
-		var event_mouse_motion := event as InputEventMouseMotion
+	if input_event is InputEventMouseMotion:
+		var event_mouse_motion := input_event as InputEventMouseMotion
 		tablet_info.text = "Pressure: %.3f\nTilt: %.3v\nInverted pen: %s" % [
 				event_mouse_motion.pressure,
 				event_mouse_motion.tilt,

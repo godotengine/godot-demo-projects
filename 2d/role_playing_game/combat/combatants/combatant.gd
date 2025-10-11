@@ -6,7 +6,7 @@ signal turn_finished
 @export var damage := 1
 @export var defense := 1
 
-var active := false: set = set_active
+var active: bool = false: set = set_active
 
 @onready var animation_playback: AnimationNodeStateMachinePlayback = $Sprite2D/AnimationTree.get(&"parameters/playback")
 

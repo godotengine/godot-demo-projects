@@ -32,42 +32,42 @@ func _process(delta: float) -> void:
 	position += velocity
 
 
-func _input(event: InputEvent) -> void:
+func _input(input_event: InputEvent) -> void:
 	# Mouse look (only if the mouse is captured).
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	if input_event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		# Horizontal mouse look.
-		rot.y -= event.screen_relative.x * MOUSE_SENSITIVITY
+		rot.y -= input_event.screen_relative.x * MOUSE_SENSITIVITY
 		# Vertical mouse look.
-		rot.x = clamp(rot.x - event.screen_relative.y * MOUSE_SENSITIVITY, -1.57, 1.57)
+		rot.x = clamp(rot.x - input_event.screen_relative.y * MOUSE_SENSITIVITY, -1.57, 1.57)
 		transform.basis = Basis.from_euler(rot)
 
-	if event.is_action_pressed(&"toggle_mouse_capture"):
+	if input_event.is_action_pressed(&"toggle_mouse_capture"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-	if event.is_action_pressed(&"toggle_temporal_reprojection"):
+	if input_event.is_action_pressed(&"toggle_temporal_reprojection"):
 		get_world_3d().environment.volumetric_fog_temporal_reprojection_enabled = not get_world_3d().environment.volumetric_fog_temporal_reprojection_enabled
 		update_label()
-	elif event.is_action_pressed(&"increase_temporal_reprojection"):
+	elif input_event.is_action_pressed(&"increase_temporal_reprojection"):
 		get_world_3d().environment.volumetric_fog_temporal_reprojection_amount = clamp(get_world_3d().environment.volumetric_fog_temporal_reprojection_amount + 0.01, 0.5, 0.99)
 		update_label()
-	elif event.is_action_pressed(&"decrease_temporal_reprojection"):
+	elif input_event.is_action_pressed(&"decrease_temporal_reprojection"):
 		get_world_3d().environment.volumetric_fog_temporal_reprojection_amount = clamp(get_world_3d().environment.volumetric_fog_temporal_reprojection_amount - 0.01, 0.5, 0.99)
 		update_label()
-	elif event.is_action_pressed(&"increase_fog_density"):
+	elif input_event.is_action_pressed(&"increase_fog_density"):
 		get_world_3d().environment.volumetric_fog_density = clamp(get_world_3d().environment.volumetric_fog_density + 0.01, 0.0, 1.0)
 		update_label()
-	elif event.is_action_pressed(&"decrease_fog_density"):
+	elif input_event.is_action_pressed(&"decrease_fog_density"):
 		get_world_3d().environment.volumetric_fog_density = clamp(get_world_3d().environment.volumetric_fog_density - 0.01, 0.0, 1.0)
 		update_label()
-	elif event.is_action_pressed(&"increase_volumetric_fog_quality"):
+	elif input_event.is_action_pressed(&"increase_volumetric_fog_quality"):
 		volumetric_fog_volume_size = clamp(volumetric_fog_volume_size + 16, 16, 384)
 		volumetric_fog_volume_depth = clamp(volumetric_fog_volume_depth + 16, 16, 384)
 		RenderingServer.environment_set_volumetric_fog_volume_size(volumetric_fog_volume_size, volumetric_fog_volume_depth)
 		update_label()
-	elif event.is_action_pressed(&"decrease_volumetric_fog_quality"):
+	elif input_event.is_action_pressed(&"decrease_volumetric_fog_quality"):
 		volumetric_fog_volume_size = clamp(volumetric_fog_volume_size - 16, 16, 384)
 		volumetric_fog_volume_depth = clamp(volumetric_fog_volume_depth - 16, 16, 384)
 		RenderingServer.environment_set_volumetric_fog_volume_size(volumetric_fog_volume_size, volumetric_fog_volume_depth)

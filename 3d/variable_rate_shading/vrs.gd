@@ -1,5 +1,6 @@
 extends Node3D
 
+
 @onready var option_button: OptionButton = $CanvasLayer/VBoxContainer/HBoxContainer/OptionButton
 @onready var texture_rect: TextureRect = $CanvasLayer/VBoxContainer/TextureRect
 @onready var camera: Camera3D = $Camera3D
@@ -8,6 +9,7 @@ extends Node3D
 @export var texture: Texture
 
 var xr_interface: MobileVRInterface
+
 
 func _set_xr_mode() -> void:
 	var vrs_mode := get_viewport().vrs_mode

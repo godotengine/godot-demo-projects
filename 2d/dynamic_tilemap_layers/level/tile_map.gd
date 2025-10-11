@@ -1,7 +1,7 @@
 extends TileMapLayer
 
 # You can have multiple layers if you make this an array.
-var player_in_secret := false
+var player_in_secret: bool = false
 var layer_alpha := 1.0
 
 

@@ -8,7 +8,7 @@ const BOX_SPACE = Vector2(50, 50)
 
 var _objects: Array[Node2D] = []
 
-var _log_physics := false
+var _log_physics: bool = false
 var _log_physics_time := 0
 var _log_physics_time_start := 0
 

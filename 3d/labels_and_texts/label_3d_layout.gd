@@ -56,8 +56,8 @@ func set_health(p_health: int) -> void:
 
 	# Construct a health bar with `|` symbols brought very close to each other using
 	# a custom FontVariation on the HealthBarForeground and HealthBarBackground nodes.
-	var bar_text := ""
-	var bar_text_bg := ""
+	var bar_text: String = ""
+	var bar_text_bg: String = ""
 	for i in roundi((health / 100.0) * BAR_WIDTH):
 		bar_text += "|"
 	for i in BAR_WIDTH:

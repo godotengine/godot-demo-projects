@@ -1,6 +1,8 @@
 extends ScrollContainer
 
-@export var auto_scroll := false
+
+@export var auto_scroll: bool = false
+
 
 func _process(_delta: float) -> void:
 	if auto_scroll:

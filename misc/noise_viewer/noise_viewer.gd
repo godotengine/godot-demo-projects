@@ -1,11 +1,13 @@
 extends Control
 
+
 ## The FastNoiseLite object.
 @onready var noise: FastNoiseLite = $SeamlessNoiseTexture.texture.noise
 
 # Various noise parameters.
-var min_noise := -1.0
-var max_noise := 1.0
+var min_noise: float = -1.0
+var max_noise: float = 1.0
+
 
 func _ready() -> void:
 	# Set up noise with basic info.

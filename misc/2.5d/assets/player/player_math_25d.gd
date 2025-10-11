@@ -2,8 +2,9 @@
 class_name PlayerMath25D  # No icon necessary
 extends CharacterBody3D
 
-var vertical_speed := 0.0
-var isometric_controls := true
+
+var vertical_speed: float = 0.0
+var isometric_controls: bool = true
 
 @onready var _parent_node25d: Node25D = get_parent()
 

@@ -22,7 +22,7 @@ class CustomLogger extends Logger:
 			error_type: int,
 			script_backtraces: Array[ScriptBacktrace]
 	) -> void:
-		var prefix := ""
+		var prefix: String = ""
 		# The column at which to print the trace. Should match the length of the
 		# unformatted text above it.
 		var trace_indent := 0
@@ -41,8 +41,8 @@ class CustomLogger extends Logger:
 				prefix = "[color=#4bf][b]SHADER ERROR:[/b]"
 				trace_indent = 13
 
-		var trace := "%*s %s (%s:%s)" % [trace_indent, "at:", function, file, line]
-		var script_backtraces_text := ""
+		var trace: String = "%*s %s (%s:%s)" % [trace_indent, "at:", function, file, line]
+		var script_backtraces_text: String = ""
 		for backtrace in script_backtraces:
 			script_backtraces_text += backtrace.format(trace_indent - 3) + "\n"
 

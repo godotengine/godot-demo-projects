@@ -2,7 +2,7 @@
 @tool
 extends Panel
 
-var use_antialiasing := false
+var use_antialiasing: bool = false
 
 
 func _draw() -> void:

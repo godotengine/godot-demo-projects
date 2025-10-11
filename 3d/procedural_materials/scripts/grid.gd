@@ -3,9 +3,11 @@
 # which would make it much larger.
 extends MeshInstance3D
 
+
 const TEXTURE_SIZE = Vector2i(512, 512)
 const GRID_SIZE = 32
 const GRID_THICKNESS = 4
+
 
 func _ready() -> void:
 	var image := Image.create(TEXTURE_SIZE.x, TEXTURE_SIZE.y, false, Image.FORMAT_RGB8)

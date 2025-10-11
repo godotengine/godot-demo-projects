@@ -31,12 +31,12 @@ func _process(delta: float) -> void:
 	r_pos = Vector2.ZERO
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
+func _input(input_event: InputEvent) -> void:
+	if input_event is InputEventMouseMotion:
 		# Use `screen_relative` to make sensitivity independent of the viewport resolution.
-		r_pos = -event.screen_relative * MOUSE_SENSITIVITY
+		r_pos = -input_event.screen_relative * MOUSE_SENSITIVITY
 
-	if event.is_action(&"ui_cancel") and event.is_pressed() and not event.is_echo():
+	if input_event.is_action(&"ui_cancel") and input_event.is_pressed() and not input_event.is_echo():
 		if state == State.GRAB:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			state = State.MENU

@@ -1,6 +1,7 @@
 @tool
 extends EditorPlugin
 
+
 const MainPanel = preload("res://addons/node25d/main_screen/main_screen_25d.tscn")
 
 var main_panel_instance: VBoxContainer

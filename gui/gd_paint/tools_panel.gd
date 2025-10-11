@@ -40,8 +40,8 @@ func _physics_process(_delta: float) -> void:
 
 func button_pressed(button_name: String) -> void:
 	# If a brush mode button is pressed.
-	var tool_name := ""
-	var shape_name := ""
+	var tool_name: String = ""
+	var shape_name: String = ""
 
 	if button_name == "mode_pencil":
 		paint_control.brush_mode = paint_control.BrushMode.PENCIL

@@ -1,9 +1,11 @@
 extends Control
 
+
 @export var world_offset := Vector3.ZERO
 
 var _pos_offset: Vector2
 var _attachment: Node3D
+
 
 func _ready() -> void:
 	_pos_offset = position

@@ -48,7 +48,7 @@ void main() {
 	imageStore(color_image, uv, color);
 }"""
 
-@export_multiline var shader_code := "":
+@export_multiline var shader_code: String = "":
 	set(value):
 		mutex.lock()
 		shader_code = value

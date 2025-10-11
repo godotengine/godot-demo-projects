@@ -23,14 +23,14 @@ var brush_data_list: Array[Dictionary] = []
 
 # A boolean to hold whether or not the mouse is inside the drawing area, the mouse position last _process call
 # and the position of the mouse when the left mouse button was pressed.
-var is_mouse_in_drawing_area := false
+var is_mouse_in_drawing_area: bool = false
 var last_mouse_pos := Vector2()
 var mouse_click_start_pos := Vector2.INF
 
 # A boolean to tell whether we've set undo_elements_list_num, which holds the size of draw_elements_list
 # before a new stroke is added (unless the current brush mode is 'rectangle shape' or 'circle shape', in
 # which case we do things a little differently. See the undo_stroke function for more details).
-var undo_set := false
+var undo_set: bool = false
 var undo_element_list_num := -1
 
 # The current brush settings: The mode, size, color, and shape we have currently selected.

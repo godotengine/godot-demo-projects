@@ -107,7 +107,7 @@ const XBOX_OSX = {
 var type := Type.NONE
 var idx := -1
 var axis := Axis.FULL
-var inverted := false
+var inverted: bool = false
 
 func _init(p_type: Type = Type.NONE, p_idx: int = -1, p_axis: Axis = Axis.FULL) -> void:
 	type = p_type
@@ -119,9 +119,9 @@ func _to_string() -> String:
 	if type == Type.NONE:
 		return ""
 
-	var ts := "b" if type == Type.BTN else "a"
-	var prefix := ""
-	var suffix := "~" if inverted else ""
+	var ts: String = "b" if type == Type.BTN else "a"
+	var prefix: String = ""
+	var suffix: String = "~" if inverted else ""
 
 	match axis:
 		Axis.HALF_PLUS:
@@ -137,13 +137,13 @@ func to_human_string() -> String:
 		return "Button %d" % idx
 
 	if type == Type.AXIS:
-		var prefix := ""
+		var prefix: String = ""
 		match axis:
 			Axis.HALF_PLUS:
 				prefix = "(+) "
 			Axis.HALF_MINUS:
 				prefix = "(-) "
-		var suffix := " (inverted)" if inverted else ""
+		var suffix: String = " (inverted)" if inverted else ""
 		return "Axis %s%d%s" % [prefix, idx, suffix]
 
 	return ""

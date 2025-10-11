@@ -1,10 +1,11 @@
 extends Control
 
-var message_counter := 0
-var message_raw_counter := 0
-var message_stderr_counter := 0
-var warning_counter := 0
-var error_counter := 0
+
+var message_counter: int = 0
+var message_raw_counter: int = 0
+var message_stderr_counter: int = 0
+var warning_counter: int = 0
+var error_counter: int = 0
 
 
 func _ready() -> void:

@@ -1,8 +1,10 @@
 extends Test
 
-@export_range(1, 100) var height := 10
+
+@export_range(1, 100) var height: int = 10
 @export var box_size := Vector2(40.0, 40.0)
 @export var box_spacing := Vector2(0.0, 0.0)
+
 
 func _ready() -> void:
 	_create_pyramid()

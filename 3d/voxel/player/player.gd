@@ -120,10 +120,10 @@ func _physics_process(delta: float) -> void:
 		velocity.y = MOVEMENT_JUMP_VELOCITY
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
+func _input(input_event: InputEvent) -> void:
+	if input_event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			_mouse_motion += event.screen_relative
+			_mouse_motion += input_event.screen_relative
 
 
 func chunk_pos() -> Vector3i:

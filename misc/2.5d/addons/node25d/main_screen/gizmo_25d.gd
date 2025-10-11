@@ -1,6 +1,7 @@
 @tool
 extends Node2D
 
+
 # If the mouse is farther than this many pixels, it won't grab anything.
 const DEADZONE_RADIUS = 20.0
 const DEADZONE_RADIUS_SQ = DEADZONE_RADIUS * DEADZONE_RADIUS
@@ -13,21 +14,21 @@ var node_25d: Node25D
 var _spatial_node: Node3D
 
 # Input from Viewport25D, represents if the mouse is clicked.
-var wants_to_move = false
+var wants_to_move: bool = false
 
 # Used to control the state of movement.
-var _moving = false
+var _moving: bool = false
 var _start_mouse_position := Vector2.ZERO
 
 # Stores state of closest or currently used axis.
-var _dominant_axis
+var _dominant_axis: int = -1
 
 @onready var _lines = [$X, $Y, $Z]
 @onready var _viewport_overlay: SubViewport = get_parent()
 @onready var _viewport_25d_bg: ColorRect = _viewport_overlay.get_parent()
 
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	if not _lines:
 		return  # Somehow this node hasn't been set up yet.
 	if not node_25d or not _viewport_25d_bg:

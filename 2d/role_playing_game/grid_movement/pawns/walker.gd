@@ -5,7 +5,7 @@ extends Pawn
 @export var combat_actor: PackedScene
 @export var pose_anims: SpriteFrames
 
-var lost := false
+var lost: bool = false
 var grid_size: float
 
 @onready var grid : Grid = get_parent()

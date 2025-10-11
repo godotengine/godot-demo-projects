@@ -1,30 +1,32 @@
 extends RigidBody3D
 
-const MOUSE_DELTA_COEFFICIENT = 0.01
-const CAMERA_DISTANCE_COEFFICIENT = 0.2
 
-var _picked := false
+const MOUSE_DELTA_COEFFICIENT: float = 0.01
+const CAMERA_DISTANCE_COEFFICIENT: float = 0.2
+
+var _picked: bool = false
 var _last_mouse_pos := Vector2.ZERO
 var _mouse_pos := Vector2.ZERO
+
 
 func _ready() -> void:
 	input_ray_pickable = true
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+func _input(any_input_event: InputEvent) -> void:
+	if any_input_event is InputEventMouseButton:
+		if not any_input_event.pressed and any_input_event.button_index == MOUSE_BUTTON_LEFT:
 			_picked = false
 
-	if event is InputEventMouseMotion:
-		_mouse_pos = event.position
+	if any_input_event is InputEventMouseMotion:
+		_mouse_pos = any_input_event.position
 
 
-func _input_event(_camera: Camera3D, event: InputEvent, _position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
-	if event is InputEventMouseButton:
-		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+func _input_event(_camera: Camera3D, any_input_event: InputEvent, _position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
+	if any_input_event is InputEventMouseButton:
+		if any_input_event.pressed and any_input_event.button_index == MOUSE_BUTTON_LEFT:
 			_picked = true
-			_mouse_pos = event.position
+			_mouse_pos = any_input_event.position
 			_last_mouse_pos = _mouse_pos
 
 

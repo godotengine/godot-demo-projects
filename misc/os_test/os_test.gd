@@ -1,11 +1,13 @@
 extends Node
 
+
 @onready var rtl: RichTextLabel = $HBoxContainer/Features
 @onready var csharp_test: Node = $CSharpTest
 
 # Line number for alternate line coloring. Incremented by 1 each time a line is added
 # (ignoring headers).
-var line_count := 0
+var line_count: int = 0
+
 
 # Returns a human-readable string from a date and time, date, or time dictionary.
 func datetime_to_string(date: Dictionary) -> void:
@@ -48,7 +50,7 @@ func scan_midi_inputs() -> String:
 		return ""
 
 	OS.open_midi_inputs()
-	var devices := ", ".join(OS.get_connected_midi_inputs())
+	var devices: String = ", ".join(OS.get_connected_midi_inputs())
 	OS.close_midi_inputs()
 	return devices
 

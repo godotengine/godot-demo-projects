@@ -15,7 +15,7 @@ const OPTION_TYPE_CONCAVE_POLYGON = "Shape type/Concave Polygon"
 
 var _object_templates: Array[Node2D] = []
 
-var _log_physics := false
+var _log_physics: bool = false
 var _log_physics_time := 0
 var _log_physics_time_start := 0
 

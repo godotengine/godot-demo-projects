@@ -1,9 +1,11 @@
 extends CharacterBody3D
 
-@export var _stop_on_slopes := false
-@export var use_snap := false
 
-var _gravity := 20.0
+@export var _stop_on_slopes: bool = false
+@export var use_snap: bool = false
+
+var _gravity: float = 20.0
+
 
 func _physics_process(delta: float) -> void:
 	if is_on_floor():

@@ -28,8 +28,8 @@ func _ready() -> void:
 		add_child(compatibility_light)
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"cycle_mood"):
+func _input(input_event: InputEvent) -> void:
+	if input_event.is_action_pressed(&"cycle_mood"):
 		mood = wrapi(mood + 1, 0, Mood.MAX) as Mood
 
 

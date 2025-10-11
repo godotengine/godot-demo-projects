@@ -3,10 +3,10 @@ extends Control
 @export var target: NodePath
 @export var min_scale := 0.1
 @export var max_scale := 3.0
-@export var one_finger_rot_x := true
-@export var one_finger_rot_y := true
-@export var two_fingers_rot_z := true
-@export var two_fingers_zoom := true
+@export var one_finger_rot_x: bool = true
+@export var one_finger_rot_y: bool = true
+@export var two_fingers_rot_z: bool = true
+@export var two_fingers_zoom: bool = true
 
 var base_state := {}
 var curr_state := {}
@@ -16,69 +16,70 @@ var base_xform: Transform3D
 
 @onready var target_node: Node = get_node(target)
 
-func _gui_input(event: InputEvent) -> void:
+
+func _gui_input(input_event: InputEvent) -> void:
 	# We must start touching inside, but we can drag or unpress outside.
-#	if not (event is InputEventScreenDrag or
-#		(event is InputEventScreenTouch and (not event.pressed or get_global_rect().has_point(event.position)))):
+#	if not (input_event is InputEventScreenDrag or
+#		(input_event is InputEventScreenTouch and (not input_event.pressed or get_global_rect().has_point(input_event.position)))):
 #		return
 
 	var finger_count := base_state.size()
 
 	if finger_count == 0:
 		# No fingers => Accept press.
-		if event is InputEventScreenTouch:
-			if event.pressed:
+		if input_event is InputEventScreenTouch:
+			if input_event.pressed:
 				# A finger started touching.
 
 				base_state = {
-					event.index: event.position,
+					input_event.index: input_event.position,
 				}
 
 	elif finger_count == 1:
 		# One finger => For rotating around X and Y.
 		# Accept one more press, unpress, or drag.
-		if event is InputEventScreenTouch:
-			if event.pressed:
+		if input_event is InputEventScreenTouch:
+			if input_event.pressed:
 				# One more finger started touching.
 
 				# Reset the base state to the only current and the new fingers.
 				base_state = {
 					curr_state.keys()[0]: curr_state.values()[0],
-					event.index: event.position,
+					input_event.index: input_event.position,
 				}
 			else:
-				if base_state.has(event.index):
+				if base_state.has(input_event.index):
 					# Only touching finger released.
 
 					base_state.clear()
 
-		elif event is InputEventScreenDrag:
-			if curr_state.has(event.index):
+		elif input_event is InputEventScreenDrag:
+			if curr_state.has(input_event.index):
 				# Touching finger dragged.
-				var unit_drag := _px2unit(base_state[base_state.keys()[0]] - event.position)
+				var unit_drag := _px2unit(base_state[base_state.keys()[0]] - input_event.position)
 				if one_finger_rot_x:
 					target_node.global_rotate(Vector3.UP, deg_to_rad(180.0 * unit_drag.x))
 				if one_finger_rot_y:
 					target_node.global_rotate(Vector3.RIGHT, deg_to_rad(180.0 * unit_drag.y))
 				# Since rotating around two axes, we have to reset the base constantly.
-				curr_state[event.index] = event.position
-				base_state[event.index] = event.position
+				curr_state[input_event.index] = input_event.position
+				base_state[input_event.index] = input_event.position
 				base_xform = target_node.get_transform()
 
 	elif finger_count == 2:
 		# Two fingers => To pinch-zoom and rotate around Z.
 		# Accept unpress or drag.
-		if event is InputEventScreenTouch:
-			if not event.pressed and base_state.has(event.index):
+		if input_event is InputEventScreenTouch:
+			if not input_event.pressed and base_state.has(input_event.index):
 				# Some known touching finger released.
 
 				# Clear the base state
 				base_state.clear()
 
-		elif event is InputEventScreenDrag:
-			if curr_state.has(event.index):
+		elif input_event is InputEventScreenDrag:
+			if curr_state.has(input_event.index):
 				# Some known touching finger dragged.
-				curr_state[event.index] = event.position
+				curr_state[input_event.index] = input_event.position
 
 				# Compute base and current inter-finger vectors.
 				var base_segment: Vector3 = base_state[base_state.keys()[0]] - base_state[base_state.keys()[1]]

@@ -11,7 +11,7 @@ const MAX_PEERS = 12
 var peer: ENetMultiplayerPeer
 
 ## Our local player's name.
-var player_name := "The Warrior"
+var player_name: String = "The Warrior"
 
 # Names for remote players in id:name format.
 var players := {}

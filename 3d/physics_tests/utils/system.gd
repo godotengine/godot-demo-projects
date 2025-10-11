@@ -1,5 +1,6 @@
 extends Node
 
+
 enum PhysicsEngine {
 	GODOT_PHYSICS,
 	JOLT_PHYSICS,
@@ -7,6 +8,7 @@ enum PhysicsEngine {
 }
 
 var _engine := PhysicsEngine.OTHER
+
 
 func _enter_tree() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS

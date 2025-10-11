@@ -6,26 +6,26 @@ enum _Anim {
 	AIR,
 }
 
-const SHOOT_TIME = 1.5
-const SHOOT_SCALE = 2.0
-const CHAR_SCALE = Vector3(0.3, 0.3, 0.3)
-const MAX_SPEED = 6.0
-const TURN_SPEED = 40.0
-const JUMP_VELOCITY = 12.5
-const BULLET_SPEED = 20.0
-const AIR_IDLE_DEACCEL = false
-const ACCEL = 14.0
-const DEACCEL = 14.0
-const AIR_ACCEL_FACTOR = 0.5
-const SHARP_TURN_THRESHOLD = deg_to_rad(140.0)
+const SHOOT_TIME: float = 1.5
+const SHOOT_SCALE: float = 2.0
+const CHAR_SCALE := Vector3(0.3, 0.3, 0.3)
+const MAX_SPEED: float = 6.0
+const TURN_SPEED: float = 40.0
+const JUMP_VELOCITY: float = 12.5
+const BULLET_SPEED: float = 20.0
+const AIR_IDLE_DEACCEL: bool = false
+const ACCEL: float = 14.0
+const DEACCEL: float = 14.0
+const AIR_ACCEL_FACTOR: float = 0.5
+const SHARP_TURN_THRESHOLD: float = deg_to_rad(140.0)
 
 var movement_dir := Vector3()
-var jumping := false
-var prev_shoot := false
-var shoot_blend := 0.0
+var jumping: bool = false
+var prev_shoot: bool = false
+var shoot_blend: float = 0.0
 
 # Number of coins collected.
-var coins := 0
+var coins: int = 0
 
 @onready var initial_position := position
 @onready var gravity: Vector3 = ProjectSettings.get_setting("physics/3d/default_gravity") * \
