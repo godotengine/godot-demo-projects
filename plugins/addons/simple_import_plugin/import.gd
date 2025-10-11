@@ -7,7 +7,7 @@ enum Preset {
 
 
 func _get_importer_name() -> String:
-	return "demos.sillymaterial"
+	return "demos.mtxt"
 
 
 func _get_visible_name() -> String:
