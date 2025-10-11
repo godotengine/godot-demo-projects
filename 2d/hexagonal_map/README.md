@@ -1,6 +1,8 @@
 # Hexagonal Game
 
-Very simple demo showing a hexagonal TileMap and TileSet.
+Very simple demo showing a hexagonal TileMap and TileSet. Has two movement modes:
+* Moving from one hex tile to another.
+* Freely moving without snapping to tiles.
 
 Language: GDScript
 
