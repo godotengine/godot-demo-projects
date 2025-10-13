@@ -24,7 +24,7 @@ func _ready() -> void:
 
 	for d in AudioServer.get_output_device_list():
 		$OptionOutput.add_item(d)
-	assert ($OptionOutput.get_item_text($OptionOutput.selected) == "Default")
+	assert($OptionOutput.get_item_text($OptionOutput.selected) == "Default")
 
 	input_mix_rate = int(AudioServer.get_input_mix_rate())
 	print("Input mix rate: ", input_mix_rate)
