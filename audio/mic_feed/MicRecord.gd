@@ -165,6 +165,7 @@ func _on_save_button_pressed() -> void:
 func _on_open_user_folder_button_pressed() -> void:
 	OS.shell_open(ProjectSettings.globalize_path("user://"))
 
+
 # 400Hz frequency can be used (from another device) to probe a stereo microphone
 # response due to where there should be 8 wavelengths in the space of 20ms (2.5ms per wave).
 # The wavelength is then 343/400=0.8575m long.
