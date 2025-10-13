@@ -45,7 +45,7 @@ func _ready() -> void:
 	blank_image.resize(audio_sample_size)
 	audio_sample_image = Image.create_from_data(audio_sample_size, 1, false, Image.FORMAT_RGF, blank_image.to_byte_array())
 	audio_sample_texture = ImageTexture.create_from_image(audio_sample_image)
-	$MicTexture.material.set_shader_parameter("audiosample", audio_sample_texture)
+	$MicTexture.material.set_shader_parameter(&"audiosample", audio_sample_texture)
 
 func _on_option_input_item_selected(index: int) -> void:
 	var inputdevice: String = $OptionInput.get_item_text(index)
