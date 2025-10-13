@@ -5,29 +5,47 @@ signal hit
 @export var speed = 400 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 
+
 func _ready():
 	screen_size = get_viewport_rect().size
 	hide()
 
 
 func _process(delta):
+
+	### Handle player movement.
+	# Set the velocity vector to zero when no keys are pressed.
 	var velocity = Vector2.ZERO # The player's movement vector.
+	# Check for input and adjust the velocity vector accordingly.
 	if Input.is_action_pressed(&"move_right"):
 		velocity.x += 1
 	if Input.is_action_pressed(&"move_left"):
 		velocity.x -= 1
+	# Quick note: The y-axis in Godot points down
+	# so moving down increases y and moving up decreases y.
 	if Input.is_action_pressed(&"move_down"):
 		velocity.y += 1
 	if Input.is_action_pressed(&"move_up"):
 		velocity.y -= 1
 
+	# If the velocity vector's length is greater than zero, the player is moving.
 	if velocity.length() > 0:
+		# Normalize the velocity so that diagonal movement isn't faster.
+		# Then scale it by the speed value to get the final velocity.
 		velocity = velocity.normalized() * speed
+		#Play the animation if the player is moving.
 		$AnimatedSprite2D.play()
 	else:
+		#Stop the animation if the player is not moving.
 		$AnimatedSprite2D.stop()
 
+	# Move the player with the velocity vector and Delta time.
+	# Delta time is the time elapsed since the previous frame.
+	# Multiplying the velocity by Delta time ensures 
+	# that the player moves at the same speed regardless of the frame rate.
 	position += velocity * delta
+
+	# Ensure the player does not move off the screen.
 	position = position.clamp(Vector2.ZERO, screen_size)
 
 	if velocity.x != 0:
