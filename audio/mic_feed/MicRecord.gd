@@ -16,6 +16,7 @@ var generator_freq: float = 0.0
 
 var microphone_feed = null
 
+
 func _ready() -> void:
 	for d in AudioServer.get_input_device_list():
 		$OptionInput.add_item(d)
