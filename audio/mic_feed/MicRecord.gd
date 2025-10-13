@@ -162,6 +162,7 @@ func _on_save_button_pressed() -> void:
 	wav_recording.save_to_wav(save_path)
 	$Status.text = "Status: Saved WAV file to: %s\n(%s)" % [save_path, ProjectSettings.globalize_path(save_path)]
 
+
 func _on_open_user_folder_button_pressed() -> void:
 	OS.shell_open(ProjectSettings.globalize_path("user://"))
 
