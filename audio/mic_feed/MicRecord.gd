@@ -32,8 +32,8 @@ func _ready() -> void:
 	print("Project mix rate: ", ProjectSettings.get(&"audio/driver/mix_rate"))
 
 	if Engine.has_singleton("MicrophoneServer"):
-		microphonefeed = Engine.get_singleton("MicrophoneServer").get_feed(0)
-	if not microphonefeed:
+		microphone_feed = Engine.get_singleton("MicrophoneServer").get_feed(0)
+	if not microphone_feed:
 		$Status.text = "**** Error: requires PR#108773 to work"
 		print($Status.text)
 		set_process(false)
@@ -51,14 +51,14 @@ func _ready() -> void:
 
 func _on_option_input_item_selected(index: int) -> void:
 	var input_device: String = $OptionInput.get_item_text(index)
-	print("Set input device: ", inputdevice)
-	AudioServer.set_input_device(inputdevice)
+	print("Set input device: ", input_device)
+	AudioServer.set_input_device(input_device)
 
 
 func _on_option_output_item_selected(index: int) -> void:
 	var output_device: String = $OptionOutput.get_item_text(index)
-	print("Set output device: ", outputdevice)
-	AudioServer.set_output_device(outputdevice)
+	print("Set output device: ", output_device)
+	AudioServer.set_output_device(output_device)
 
 
 func _on_microphone_on_toggled(toggled_on: bool) -> void:
@@ -73,14 +73,14 @@ func _on_microphone_on_toggled(toggled_on: bool) -> void:
 			assert(permission == "android.permission.RECORD_AUDIO")
 			print("Audio permission granted ", granted)
 
-		if not microphonefeed.is_active():
-			microphonefeed.set_active(true)
+		if not microphone_feed.is_active():
+			microphone_feed.set_active(true)
 		total_samples = 0
 		sample_duration = 0.0
-		print("Input buffer length frames: ", microphonefeed.get_buffer_length_frames())
+		print("Input buffer length frames: ", microphone_feed.get_buffer_length_frames())
 		print("Input buffer length seconds: ", microphone_feed.get_buffer_length_frames() * 1.0 / input_mix_rate)
 	else:
-		microphonefeed.set_active(false)
+		microphone_feed.set_active(false)
 
 
 func _on_mic_to_generator_toggled(toggled_on: bool) -> void:
@@ -91,8 +91,8 @@ func _on_mic_to_generator_toggled(toggled_on: bool) -> void:
 
 func _process(delta: float) -> void:
 	sample_duration += delta
-	while microphonefeed.get_frames_available() >= audio_sample_size:
-		var audio_samples: PackedVector2Array = microphonefeed.get_frames(audio_sample_size)
+	while microphone_feed.get_frames_available() >= audio_sample_size:
+		var audio_samples: PackedVector2Array = microphone_feed.get_frames(audio_sample_size)
 		if audio_samples:
 			audio_sample_image.set_data(audio_sample_size, 1, false, Image.FORMAT_RGF, audio_samples.to_byte_array())
 			audio_sample_texture.update(audio_sample_image)
