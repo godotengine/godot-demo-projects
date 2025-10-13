@@ -14,7 +14,7 @@ var audio_sample_texture: ImageTexture
 var generator_timestamp: float = 0.0
 var generator_freq: float = 0.0
 
-var microphonefeed = null
+var microphone_feed = null
 
 func _ready() -> void:
 	for d in AudioServer.get_input_device_list():
