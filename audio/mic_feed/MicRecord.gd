@@ -20,7 +20,7 @@ var microphone_feed = null
 func _ready() -> void:
 	for d in AudioServer.get_input_device_list():
 		$OptionInput.add_item(d)
-	assert ($OptionInput.get_item_text($OptionInput.selected) == "Default")
+	assert($OptionInput.get_item_text($OptionInput.selected) == "Default")
 
 	for d in AudioServer.get_output_device_list():
 		$OptionOutput.add_item(d)
