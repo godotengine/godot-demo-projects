@@ -48,19 +48,28 @@ func _process(delta):
 	## Ensure the player does not move off the screen.
 	position = position.clamp(Vector2.ZERO, screen_size)
 
+	## Handle the player's animation and rotation based on movement direction.
 	if velocity.x != 0:
+		## If moving horizontally, use the "right" animation.
 		$AnimatedSprite2D.animation = &"right"
+		## Reset rotation of Sprite and trail when moving horizontally.
 		$AnimatedSprite2D.flip_v = false
 		$Trail.rotation = 0
+		## flip the sprite when moving left.
 		$AnimatedSprite2D.flip_h = velocity.x < 0
 	elif velocity.y != 0:
+		## If moving vertically, use the "up" animation.
 		$AnimatedSprite2D.animation = &"up"
-		rotation = PI if velocity.y > 0 else 0
+		## Turn the sprite upside down when moving down.
+		rotation = PI if velocity.y > 0 else 0.0
 
-
+## Called by the main scene to start the player.
 func start(pos):
+	## Initialize the player's position.
 	position = pos
+	## Reset the player's rotation.
 	rotation = 0
+	## Show the player and enable its collision shape.
 	show()
 	$CollisionShape2D.disabled = false
 
