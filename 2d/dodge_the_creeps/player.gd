@@ -71,6 +71,7 @@ func start(pos):
 	rotation = 0
 	## Show the player and enable its collision shape.
 	show()
+	## Enable the collision shape if we had disabled it when hit.
 	$CollisionShape2D.disabled = false
 
 
