@@ -1,7 +1,11 @@
 extends CanvasLayer
 
+## Initialize a signal to notify the main scene when to start the game.
 signal start_game
 
+## Called when you click on the "New Game" button in the HUD.
+## the vaiable Text is the text to display in the message label.
+## When the function is called, it shows the message specified in text.
 func show_message(text):
 	$MessageLabel.text = text
 	$MessageLabel.show()
