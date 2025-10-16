@@ -1,5 +1,7 @@
 extends Area2D
 
+## Initialize a signal to notify the main scene when the player is hit.
+## You can see now the signal in the editor when you select the Player node.
 signal hit
 
 @export var speed = 400 # How fast the player will move (pixels/sec).
