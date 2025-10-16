@@ -11,7 +11,7 @@ func show_message(text):
 	$MessageLabel.show()
 	$MessageTimer.start()
 
-
+## Called in the main.gd when the player hits a mob.
 func show_game_over():
 	show_message("Game Over")
 	await $MessageTimer.timeout
