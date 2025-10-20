@@ -13,7 +13,9 @@ func show_message(text):
 
 ## Called in the main.gd when the player hits a mob.
 func show_game_over():
+	## Show the "Game Over" message for 2 seconds.
 	show_message("Game Over")
+	## Wait for the message timer to time out before showing the start button.
 	await $MessageTimer.timeout
 	$MessageLabel.text = "Dodge the\nCreeps"
 	$MessageLabel.show()
