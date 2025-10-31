@@ -1,3 +1,5 @@
+## Basic extension just to be called in a scene tree
+## Godot's building blocks
 extends Node
 
 ## @export is for exposing variables in the editor.
@@ -39,10 +41,10 @@ func new_game():
 ## Called in a loop every time the MobTimer times out.
 ## Called exactly like a signal function.
 func _on_MobTimer_timeout():
-	# Create a new instance of the Mob scene.
+	## Create a new instance of the Mob scene.
 	var mob = mob_scene.instantiate()
 
-	# Choose a random location on Path2D.
+	## Choose a random location on Path2D.
 	## Get the MobSpawnLocation node inside the MobPath node.
 	## Be Careful with the path.
 	## Don't move the MobSpawnLocation node out of the MobPath node.
@@ -60,23 +62,23 @@ func _on_MobTimer_timeout():
 	## mob_spawn_location.progress_ratio = randf()
 	
 
-	# Set the mob's position to a random location.
+	## Set the mob's position to the random location picked above.
 	mob.position = mob_spawn_location.position
 
-	# Set the mob's direction perpendicular to the path direction.
-	## Notice in the editor that the MobSpawnLocation rotate following the path.
+	## Set the mob's direction perpendicular to the path direction.
+	## Notice in the editor that the MobSpawnLocation rotates following the path.
 	## So we can use its rotation to determine the direction of the mob.
 	## We add PI/2 to make the mob move perpendicular to the path.
 	## Remember that in Godot, a rotation is in radians.
 	## Even though we set the rotation in degrees in the editor,
 	## Godot converts it to radians internally.
 	## If you want to use degrees instead of radians,
-	## you can rotation_degrees property instead of rotation.
+	## you can use rotation_degrees property instead of rotation.
 	## EXAMPLE : var direction = mob_spawn_location.rotation_degrees + 90
 	## So here we set the direction to point inwards the screen.
 	var direction = mob_spawn_location.rotation + PI / 2
 
-	# Add some randomness to the direction.
+	## Add some randomness to the direction to avoid too much predictability.
 	## randf_range(a, b) returns a random float between a and b.
 	## Here we add a random value between -PI/4 and PI/4 to the direction.
 	## This makes the mob's movement less predictable and more interesting.
@@ -84,14 +86,14 @@ func _on_MobTimer_timeout():
 	## finally, set the mob's rotation to the direction.
 	mob.rotation = direction
 
-	# Choose the velocity for the mob.
+	## Choose the velocity for the mobs to add variety.
 	## We create a velocity vector with a random x value between 150 and 250.
 	## and a y value of 0.
 	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
 	## then we rotate the vector of the mob to point in the direction we set.
 	mob.linear_velocity = velocity.rotated(direction)
 
-	# Spawn the mob by adding it to the Main scene.
+	## Spawn the mob by adding it to the Main scene.
 	add_child(mob)
 
 ## Called when the ScoreTimer times out.

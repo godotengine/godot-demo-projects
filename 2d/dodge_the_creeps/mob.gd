@@ -1,3 +1,4 @@
+## Extends (or inherits) RigidBody2D to have physics simulation 
 extends RigidBody2D
 
 ## Called when the node enters the scene tree for the first time.

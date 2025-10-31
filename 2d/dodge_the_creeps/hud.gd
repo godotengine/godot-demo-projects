@@ -1,10 +1,11 @@
+## Extend from CanvasLayer for Rendering HUD objects in this specific layer
 extends CanvasLayer
 
 ## Initialize a signal to notify the main scene when to start the game.
 signal start_game
 
 ## Called when you click on the "New Game" button in the HUD.
-## the vaiable Text is the text to display in the message label.
+## the variable text is the text to display in the message label.
 ## When the function is called, it shows the message specified in text.
 func show_message(text):
 	$MessageLabel.text = text
@@ -19,7 +20,7 @@ func show_game_over():
 	## Using await to pause the function until the timer times out.
 	## This requires Godot 4.0 or later.
 	## You can also use a yield() in Godot 3.x, but await is preferred in Godot 4.x.
-	## It sequentally waits for the timer to finish before proceeding to the next line.
+	## It sequentially waits for the timer to finish before proceeding to the next line.
 	## ==> Good game flow control technique <==
 	await $MessageTimer.timeout
 	$MessageLabel.text = "Dodge the\nCreeps"
@@ -36,7 +37,7 @@ func show_game_over():
 	$StartButton.show()
 
 ## Called in main.gd to update the score display in the HUD.
-## It add +1 each time the timer times out.
+## It adds +1 each time the timer times out.
 func update_score(score):
 	## Update the ScoreLabel text with the new score.
 	## Convert the score to a string using str() function.
@@ -44,7 +45,7 @@ func update_score(score):
 	$ScoreLabel.text = str(score)
 
 ## Called when the StartButton is pressed.
-## Signal maked in the editor at the start button node.
+## Signal made in the editor at the start button node.
 func _on_StartButton_pressed():
 	$StartButton.hide()
 	## Emit the start_game signal to notify the main scene to start the game.

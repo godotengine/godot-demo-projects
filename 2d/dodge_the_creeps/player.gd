@@ -1,3 +1,4 @@
+## Player extends Area2D to have collision detection
 extends Area2D
 
 ## Initialize a signal to notify the main scene when the player is hit.
@@ -7,12 +8,12 @@ signal hit
 @export var speed = 400 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 
-
+## Called one time when the node enters the scene tree
 func _ready():
 	screen_size = get_viewport_rect().size
 	hide()
 
-
+## Called every frame to update this node state
 func _process(delta):
 
 	## Handle player movement.
@@ -38,7 +39,7 @@ func _process(delta):
 		## Play the animation if the player is moving.
 		$AnimatedSprite2D.play()
 	else:
-		#Stop the animation if the player is not moving.
+		## Stop the animation if the player is not moving.
 		$AnimatedSprite2D.stop()
 
 	## Move the player with the velocity vector and Delta time.
@@ -78,8 +79,9 @@ func start(pos):
 
 
 func _on_body_entered(_body):
-	hide() # Player disappears after being hit.
+	hide() ## Player disappears after being hit.
 	## Emit the hit signal so the main scene can handle it.
 	hit.emit()
-	# Must be deferred as we can't change physics properties on a physics callback.
+	## Disabling the area's collision shape can cause an error if it happens in the middle of the engine's collision processing. 
+	## Using set_deferred() tells Godot to wait to disable the shape until it's safe to do so.
 	$CollisionShape2D.set_deferred(&"disabled", true)
