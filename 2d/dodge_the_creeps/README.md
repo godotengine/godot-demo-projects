@@ -109,8 +109,7 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
   await get_tree().create_timer(1).timeout
   Manages temporal sequences without blocking the game (Godot 4.x).
 
-  📖 https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#awaiting-for-signals-    
-  or-coroutines
+  📖 https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#awaiting-signals-or-coroutines
 
   ### **5. Path2D & Random Spawning**
 
@@ -136,6 +135,7 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
   Defers modification until the collision engine is ready (avoids errors).
 
   📖 https://docs.godotengine.org/en/stable/classes/class_object.html#class-object-method-set-deferred
+  📖 https://docs.godotengine.org/en/stable/classes/class_object.html#class-object-method-call-deferred
 
   ---
   ## 📝 Important Notes from Comments
@@ -155,7 +155,7 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
 
   HUD Interface (hud.gd)
   - await for flow control (24-35): Sequential game flow technique
-  - create_timer() (31-35): Creates temporary timer without adding node
+  - create_timer() (31-35): Creates temporary timer without adding node yourself in the editor
 
   Mob Behavior (mob.gd)
   - Random animations (9-14): Uses pick_random() for variety
