@@ -1,87 +1,65 @@
-## Player extends Area2D to have collision detection
+## Player-controlled character with movement and collision detection
+## See README: Node Inheritance & Types, Signals
+## Area2D provides collision detection, signals enable inter-node communication
 extends Area2D
 
-## Initialize a signal to notify the main scene when the player is hit.
-## You can see now the signal in the editor when you select the Player node.
-signal hit
+signal hit  ## Emitted when player collides with enemy
 
-@export var speed = 400 # How fast the player will move (pixels/sec).
-var screen_size # Size of the game window.
+@export var speed = 400  ## Movement speed in pixels/sec
+var screen_size
 
-## Called one time when the node enters the scene tree
 func _ready():
 	screen_size = get_viewport_rect().size
 	hide()
 
-## Called every frame to update this node state
 func _process(delta):
-
-	## Handle player movement.
-	## Set the velocity vector to zero when no keys are pressed.
-	var velocity = Vector2.ZERO # The player's movement vector.
-	## Check for input and adjust the velocity vector accordingly.
+	## Handle input and movement
+	var velocity = Vector2.ZERO
 	if Input.is_action_pressed(&"move_right"):
 		velocity.x += 1
 	if Input.is_action_pressed(&"move_left"):
 		velocity.x -= 1
-	## Quick note: The y-axis in Godot points down
-	## so moving down increases y and moving up decreases y.
 	if Input.is_action_pressed(&"move_down"):
 		velocity.y += 1
 	if Input.is_action_pressed(&"move_up"):
 		velocity.y -= 1
 
-	## If the velocity vector's length is greater than zero, the player is moving.
 	if velocity.length() > 0:
-		## Normalize the velocity so that diagonal movement isn't faster.
-		## Then scale it by the speed value to get the final velocity.
+		## See README: Player Movement - Normalization
+		## Prevents diagonal movement from being faster than horizontal/vertical
 		velocity = velocity.normalized() * speed
-		## Play the animation if the player is moving.
 		$AnimatedSprite2D.play()
 	else:
-		## Stop the animation if the player is not moving.
 		$AnimatedSprite2D.stop()
 
-	## Move the player with the velocity vector and Delta time.
-	## Delta time is the time elapsed since the previous frame.
-	## Multiplying the velocity by Delta time ensures 
-	## that the player moves at the same speed regardless of the frame rate.
+	## See README: Player Movement - Delta Time
+	## Ensures constant movement speed regardless of framerate
 	position += velocity * delta
-
-	## Ensure the player does not move off the screen.
+	## See README: Player Movement - Screen clamping
+	## Keeps player within screen boundaries
 	position = position.clamp(Vector2.ZERO, screen_size)
 
-	## Handle the player's animation and rotation based on movement direction.
+	## Update animation based on movement direction
 	if velocity.x != 0:
-		## If moving horizontally, use the "right" animation.
 		$AnimatedSprite2D.animation = &"right"
-		## Reset rotation of Sprite and trail when moving horizontally.
 		$AnimatedSprite2D.flip_v = false
 		$Trail.rotation = 0
-		## flip the sprite when moving left.
 		$AnimatedSprite2D.flip_h = velocity.x < 0
 	elif velocity.y != 0:
-		## If moving vertically, use the "up" animation.
 		$AnimatedSprite2D.animation = &"up"
-		## Turn the sprite upside down when moving down.
 		rotation = PI if velocity.y > 0 else 0.0
 
-## Called by the main scene to start the player.
 func start(pos):
-	## Initialize the player's position.
+	## Initialize player at starting position
 	position = pos
-	## Reset the player's rotation.
 	rotation = 0
-	## Show the player and enable its collision shape.
 	show()
-	## Enable the collision shape if we had disabled it when hit.
 	$CollisionShape2D.disabled = false
 
-
 func _on_body_entered(_body):
-	hide() ## Player disappears after being hit.
-	## Emit the hit signal so the main scene can handle it.
+	## Handle collision with enemy
+	hide()
 	hit.emit()
-	## Disabling the area's collision shape can cause an error if it happens in the middle of the engine's collision processing. 
-	## Using set_deferred() tells Godot to wait to disable the shape until it's safe to do so.
+	## See README: set_deferred() - Physics engine safety
+	## Defers changes until physics engine is ready to avoid errors
 	$CollisionShape2D.set_deferred(&"disabled", true)

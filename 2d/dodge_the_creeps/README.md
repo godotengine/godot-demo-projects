@@ -29,7 +29,7 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
 
 
 ---
-  🗺️ Architecture Overview
+ ## 🗺️ Architecture Overview
 
   Dodge the Creeps is a simple 2D game with 4 main components:
 
@@ -42,7 +42,7 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
   emits hit signal → Main triggers game over
   
  ---
-  📂 Files at a Glance
+ ## 📂 Files at a Glance
 
   player.gd - Player-controlled character (Area2D)
   - _process(): handles movement/input
@@ -66,20 +66,20 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
   - _on_VisibilityNotifier2D_screen_exited(): removes off-screen mob
 
   ---
-  🔑 Key Godot Concepts
+  ## 🔑 Key Godot Concepts
 
-  1. Signals - Inter-node communication
+  ### **1. Signals - Inter-node communication**
 
-  # player.gd:6
+  #### player.gd:6
   signal hit
 
-  # hud.gd:5
+  #### hud.gd:5
   signal start_game
   Signals enable asynchronous communication between nodes without tight coupling.
 
   📖 https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html
 
-   2. Node Inheritance & Types
+   ### **2. Node Inheritance & Types**
 
   extends Area2D      # player.gd:2 - For collision detection
   extends Node        # main.gd:3 - Base container
@@ -89,56 +89,56 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
 
   📖 https://docs.godotengine.org/en/stable/getting_started/step_by_step/nodes_and_scenes.html
 
-  3. @export - Editor-exposed variables
+  ### **3. @export - Editor-exposed variables**
 
-  # player.gd:8
+  #### player.gd:8
   @export var speed = 400
 
-  # main.gd:7
+  #### main.gd:7
   @export var mob_scene: PackedScene
   Allows modifying values from the inspector without touching code.
 
   📖 https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_exports.html
 
-  4. await - Asynchronous flow control
+  ### **4. await - Asynchronous flow control**
 
-  # hud.gd:25
+  #### hud.gd:25
   await $MessageTimer.timeout
 
-  # hud.gd:35
+  #### hud.gd:35
   await get_tree().create_timer(1).timeout
   Manages temporal sequences without blocking the game (Godot 4.x).
 
   📖 https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#awaiting-for-signals-    
   or-coroutines
 
-  5. Path2D & Random Spawning
+  ### **5. Path2D & Random Spawning**
 
-  # main.gd:53-57
+  #### main.gd:53-57
   var mob_spawn_location = get_node(^"MobPath/MobSpawnLocation")
   mob_spawn_location.progress = randi()
   Uses a path to spawn mobs randomly along screen edges.
 
   📖 https://docs.godotengine.org/en/stable/classes/class_path2d.html
 
-  6. Groups & call_group()
+  ### **6. Groups & call_group()**
 
-  # main.gd:28
+  #### main.gd:28
   get_tree().call_group(&"mobs", &"queue_free")
   Calls a method on all nodes in a group (here: deletes all mobs).
 
   📖 https://docs.godotengine.org/en/stable/tutorials/scripting/groups.html
 
-  7. set_deferred() - Physics engine safety
+  ### **7. set_deferred() - Physics engine safety**
 
-  # player.gd:87
+  #### player.gd:87
   $CollisionShape2D.set_deferred(&"disabled", true)
   Defers modification until the collision engine is ready (avoids errors).
 
   📖 https://docs.godotengine.org/en/stable/classes/class_object.html#class-object-method-set-deferred
 
   ---
-  📝 Important Notes from Comments
+  ## 📝 Important Notes from Comments
 
   Player Movement (player.gd)
   - Delta Time (46-48): Ensures constant movement regardless of framerate
