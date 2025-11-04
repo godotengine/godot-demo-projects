@@ -1,13 +1,21 @@
 extends Node3D
 
+signal session_started
 signal focus_lost
 signal focus_gained
 signal pose_recentered
 
-@export var maximum_refresh_rate : int = 90
+## Set the highest refresh rate we wish to enable.
+## We'll find the closest matching one.
+@export var maximum_refresh_rate: int = 90
 
-var xr_interface : OpenXRInterface
+var xr_interface: OpenXRInterface
 var xr_is_focused: bool = false
+
+
+## Get our OpenXR Interface.
+func get_xr_interface() -> OpenXRInterface:
+	return xr_interface
 
 
 # Called when the node enters the scene tree for the first time.
@@ -15,7 +23,7 @@ func _ready() -> void:
 	xr_interface = XRServer.find_interface("OpenXR")
 	if xr_interface and xr_interface.is_initialized():
 		print("OpenXR instantiated successfully.")
-		var vp : Viewport = get_viewport()
+		var vp: Viewport = get_viewport()
 
 		# Enable XR on our viewport.
 		vp.use_xr = true
@@ -52,8 +60,7 @@ func _on_openxr_session_begun() -> void:
 
 	# See if we have a better refresh rate available.
 	var new_rate := current_refresh_rate
-	var available_rates: Array[float]
-	available_rates.assign(xr_interface.get_available_display_refresh_rates())
+	var available_rates: Array = xr_interface.get_available_display_refresh_rates()
 	if available_rates.is_empty():
 		print("OpenXR: Target does not support refresh rate extension")
 	elif available_rates.size() == 1:
@@ -74,6 +81,8 @@ func _on_openxr_session_begun() -> void:
 	# due to physics interpolation not being used.
 	Engine.physics_ticks_per_second = roundi(current_refresh_rate)
 
+	session_started.emit()
+
 
 # Handle OpenXR visible state.
 func _on_openxr_visible_state() -> void:
@@ -90,7 +99,7 @@ func _on_openxr_visible_state() -> void:
 		focus_lost.emit()
 
 
-# Handle OpenXR focused state
+# Handle OpenXR focused state.
 func _on_openxr_focused_state() -> void:
 	print("OpenXR gained focus")
 	xr_is_focused = true
