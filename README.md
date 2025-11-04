@@ -35,8 +35,8 @@ desktop. For the best performance, consider downloading the demos.
 
 - [Main website](https://godotengine.org)
 - [Source code](https://github.com/godotengine/godot)
-- [Documentation](http://docs.godotengine.org)
-- [Community hub](https://godotengine.org/community)
+- [Documentation](https://docs.godotengine.org/en/stable/)
+- [Community hub](https://godotengine.org/community/)
 - [TPS demo](https://github.com/godotengine/tps-demo)
 
 ## License

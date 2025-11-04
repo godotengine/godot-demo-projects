@@ -37,7 +37,7 @@ switch the active block using the brackets or with the middle mouse button.
 
 There is a settings menu for render distance and toggling the fog.
 Settings are stored inside of an
-[AutoLoad singleton](https://docs.godotengine.org/en/latest/getting_started/step_by_step/singletons_autoload.html)
+[AutoLoad singleton](https://docs.godotengine.org/en/latest/tutorials/scripting/singletons_autoload.html)
 called "Settings". This class will automatically save
 settings, and load them when the game opens, by using the
 [`FileAccess`](https://docs.godotengine.org/en/latest/classes/class_fileaccess.html) class.
@@ -58,7 +58,7 @@ Textures are from [Minetest Game](https://github.com/minetest/minetest_game).
 
 Some textures Copyright &copy; 2010-2018 Minetest contributors,
  CC BY-SA 3.0 Unported (Attribution-ShareAlike)
-http://creativecommons.org/licenses/by-sa/3.0/
+https://creativecommons.org/licenses/by-sa/3.0/
 
 Some textures Copyright &copy; 2010-2018 Minetest contributors,
  CC0 1.0 "No rights reserved"

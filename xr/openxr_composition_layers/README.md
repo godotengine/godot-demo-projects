@@ -65,4 +65,4 @@ Please follow [the instructions for deploying on Android in the manual](https://
 
 ## Screenshots
 
-![Screenshot](xr_composition_layer_demo.png)
+![Screenshot](screenshots/xr_composition_layer_demo.png)
