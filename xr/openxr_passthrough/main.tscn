@@ -1,0 +1,115 @@
+[gd_scene load_steps=16 format=3 uid="uid://bbjbbyv0fhdio"]
+
+[ext_resource type="Script" uid="uid://dxifqs8wuh6ut" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="Script" uid="uid://ya11aay321sc" path="res://start_vr.gd" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://biwe2rkf2ev74" path="res://assets/pattern.png" id="2_1bvp3"]
+[ext_resource type="Material" uid="uid://gv8hfr8vg41h" path="res://holepunch_material.tres" id="3_1bvp3"]
+[ext_resource type="Script" uid="uid://dfdohfoxewkas" path="res://fade_message.gd" id="5_lquwl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_h2yge"]
+sky_material = SubResource("ProceduralSkyMaterial_0xm2m")
+
+[sub_resource type="Environment" id="Environment_1bvp3"]
+background_mode = 2
+sky = SubResource("Sky_h2yge")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lquwl"]
+albedo_color = Color(0.30528784, 0.38964325, 0.17297015, 1)
+albedo_texture = ExtResource("2_1bvp3")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7mycd"]
+material = SubResource("StandardMaterial3D_lquwl")
+size = Vector2(3, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
+albedo_color = Color(0.31544167, 0.6204946, 0.8371844, 1)
+albedo_texture = ExtResource("2_1bvp3")
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
+material = SubResource("StandardMaterial3D_1bvp3")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lquwl"]
+radius = 0.1
+height = 0.75
+radial_segments = 16
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mycd"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_272bh"]
+material = SubResource("StandardMaterial3D_7mycd")
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_h2yge")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1bvp3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 5, 0)
+shadow_enabled = true
+shadow_bias = 0.01
+directional_shadow_max_distance = 20.0
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_7mycd")
+
+[node name="TestCube" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.644, 0.5, -1.6382425)
+mesh = SubResource("BoxMesh_0xm2m")
+
+[node name="TestCutout" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.15096724, 0.6760328, -0.44927582)
+material_override = ExtResource("3_1bvp3")
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_lquwl")
+
+[node name="StartVR" type="Node3D" parent="."]
+script = ExtResource("2_0xm2m")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="ButtonMessage" type="Label3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2133498, -0.9665807)
+pixel_size = 0.002
+text = "Press A or X to toggle passthrough mode."
+
+[node name="FadeMessage3D" type="Node3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1055869, -0.9665807)
+script = ExtResource("5_lquwl")
+metadata/_custom_type_script = "uid://dfdohfoxewkas"
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 0.86901176, 0.49479145, 0, -0.49479145, 0.86901176, 0, 1.5, 0)
+
+[node name="LeftHand" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+pose = &"grip"
+show_when_tracked = true
+
+[node name="Test" type="MeshInstance3D" parent="XROrigin3D/LeftHand"]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0)
+mesh = SubResource("BoxMesh_272bh")
+
+[node name="RightHand" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"right_hand"
+pose = &"grip"
+show_when_tracked = true
+
+[node name="Test" type="MeshInstance3D" parent="XROrigin3D/RightHand"]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0)
+mesh = SubResource("BoxMesh_272bh")
+
+[connection signal="session_started" from="StartVR" to="." method="_on_start_vr_session_started"]
+[connection signal="button_released" from="XROrigin3D/LeftHand" to="." method="_on_button_released"]
+[connection signal="button_released" from="XROrigin3D/RightHand" to="." method="_on_button_released"]
