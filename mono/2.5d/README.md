@@ -8,7 +8,9 @@ Language: [C#](https://docs.godotengine.org/en/latest/tutorials/scripting/c_shar
 
 Renderer: Compatibility
 
-Note: There is a GDScript version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/misc/2.5d).
+> [!NOTE]
+>
+> There is a GDScript version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/misc/2.5d).
 
 ## How does it work?
 
