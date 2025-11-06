@@ -174,8 +174,7 @@ func _initialize_compute_code(init_with_texture_size: Vector2i) -> void:
 	tf.usage_bits = (
 			RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT |
 			RenderingDevice.TEXTURE_USAGE_STORAGE_BIT |
-			RenderingDevice.TEXTURE_USAGE_CAN_COPY_TO_BIT |
-			RenderingDevice.TEXTURE_USAGE_CAN_COPY_FROM_BIT
+			RenderingDevice.TEXTURE_USAGE_CAN_COPY_TO_BIT
 		)
 
 	for i in 3:
