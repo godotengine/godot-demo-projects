@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://djbgtqgci6is1"]
+
+[ext_resource type="Texture2D" uid="uid://dkk04ow5f8clu" path="res://icon.svg" id="1_alri3"]
+[ext_resource type="Script" path="res://game/character.gd" id="1_dtr8n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tjudb"]
+size = Vector2(128, 128)
+
+[node name="Character" type="CharacterBody2D"]
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_dtr8n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_alri3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_tjudb")
+
+[node name="StunTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = -64.0
+offset_top = 70.0
+offset_right = 64.0
+offset_bottom = 94.0
+horizontal_alignment = 1
+
+[connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]
