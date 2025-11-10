@@ -19,7 +19,7 @@ adjustment_enabled = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w3j8l"]
 content_margin_left = 20.0
-content_margin_top = 50.0
+content_margin_top = 40.0
 content_margin_right = 20.0
 content_margin_bottom = 10.0
 bg_color = Color(0.231373, 0.231373, 0.231373, 0.768627)
@@ -240,13 +240,13 @@ popup/item_1/id = 1
 popup/item_2/text = "Enabled"
 popup/item_2/id = 2
 
-[node name="LimitFPSLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
+[node name="FPSLimitLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
 text = "Limit FPS:"
 
-[node name="LimitFPSSlider" type="HSlider" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
+[node name="FPSLimitSlider" type="HSlider" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -293,23 +293,25 @@ popup/item_2/id = 2
 popup/item_3/text = "8× (Slower)"
 popup/item_3/id = 3
 
-[node name="FXAALabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
+[node name="ScreenSpaceAALabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
-text = "Anti-Aliasing (FXAA):"
+text = "Screen-Space AA:"
 
-[node name="FXAAOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
+[node name="ScreenSpaceAAOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
 selected = 0
-item_count = 2
+item_count = 3
 popup/item_0/text = "Disabled (Fastest)"
 popup/item_0/id = 0
-popup/item_1/text = "Enabled (Fast)"
+popup/item_1/text = "FXAA (Fast)"
 popup/item_1/id = 1
+popup/item_2/text = "SMAA (Average)"
+popup/item_2/id = 2
 
 [node name="FOVLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2"]
 layout_mode = 2
@@ -657,10 +659,10 @@ horizontal_alignment = 2
 [connection signal="value_changed" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/FSRSharpnessSlider" to="." method="_on_fsr_sharpness_slider_value_changed"]
 [connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/FullscreenOptionButton" to="." method="_on_fullscreen_option_button_item_selected"]
 [connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/VsyncOptionButton" to="." method="_on_vsync_option_button_item_selected"]
-[connection signal="value_changed" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/LimitFPSSlider" to="." method="_on_limit_fps_slider_value_changed"]
+[connection signal="value_changed" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/FPSLimitSlider" to="." method="_on_fps_limit_slider_value_changed"]
 [connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/TAAOptionButton" to="." method="_on_taa_option_button_item_selected"]
 [connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/MSAAOptionButton" to="." method="_on_msaa_option_button_item_selected"]
-[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/FXAAOptionButton" to="." method="_on_fxaa_option_button_item_selected"]
+[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/ScreenSpaceAAOptionButton" to="." method="_on_screen_space_aa_option_button_item_selected"]
 [connection signal="value_changed" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/FOVSlider" to="." method="_on_fov_slider_value_changed"]
 [connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer4/ShadowSizeOptionButton" to="." method="_on_shadow_size_option_button_item_selected"]
 [connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer4/ShadowFilterOptionButton" to="." method="_on_shadow_filter_option_button_item_selected"]
