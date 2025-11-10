@@ -813,7 +813,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -68)
 mesh = SubResource("SphereMesh_v4x6x")
 
 [node name="Decal" type="Decal" parent="Testers/MovingDecal"]
-transform = Transform3D(-0.70710397, -1.0132787e-06, -0.7071092, 0.18301255, 0.96592563, -0.1830126, 0.68301517, -0.25881886, -0.68300986, 1, 1, 1)
+transform = Transform3D(-0.70710397, -1.0132787e-06, -0.7071092, 0.18301255, 0.9659256, -0.1830126, 0.68301517, -0.25881886, -0.68300986, 1, 1, 1)
 texture_albedo = ExtResource("3_2nulf")
 texture_normal = ExtResource("4_fdfpv")
 
@@ -886,20 +886,19 @@ offset_right = 394.0
 offset_bottom = 340.0
 theme_override_constants/separation = 10
 
-[node name="MSAAContainer" type="HBoxContainer" parent="Antialiasing"]
+[node name="MultisampleAAContainer" type="HBoxContainer" parent="Antialiasing"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Antialiasing/MSAAContainer"]
+[node name="Label" type="Label" parent="Antialiasing/MultisampleAAContainer"]
 custom_minimum_size = Vector2(120, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-text = "MSAA
-"
+text = "Multisample AA"
 vertical_alignment = 1
 
-[node name="MSAA" type="OptionButton" parent="Antialiasing/MSAAContainer"]
+[node name="MultisampleAA" type="OptionButton" parent="Antialiasing/MultisampleAAContainer"]
 custom_minimum_size = Vector2(235, 2.08165e-12)
 layout_mode = 2
 selected = 0
@@ -913,43 +912,43 @@ popup/item_2/id = 2
 popup/item_3/text = "8× (Slower)"
 popup/item_3/id = 3
 
-[node name="FXAAContainer" type="HBoxContainer" parent="Antialiasing"]
+[node name="ScreenSpaceAAContainer" type="HBoxContainer" parent="Antialiasing"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Antialiasing/FXAAContainer"]
+[node name="Label" type="Label" parent="Antialiasing/ScreenSpaceAAContainer"]
 custom_minimum_size = Vector2(120, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-text = "FXAA
-"
+text = "Screen-Space AA"
 vertical_alignment = 1
 
-[node name="FXAA" type="OptionButton" parent="Antialiasing/FXAAContainer"]
+[node name="ScreenSpaceAA" type="OptionButton" parent="Antialiasing/ScreenSpaceAAContainer"]
 custom_minimum_size = Vector2(235, 2.08165e-12)
 layout_mode = 2
 selected = 0
-item_count = 2
+item_count = 3
 popup/item_0/text = "Disabled (Fastest)"
 popup/item_0/id = 0
-popup/item_1/text = "Enabled (Fast)"
+popup/item_1/text = "FXAA (Fast)"
 popup/item_1/id = 1
+popup/item_2/text = "SMAA (Average)"
+popup/item_2/id = 2
 
-[node name="TAAContainer" type="HBoxContainer" parent="Antialiasing"]
+[node name="TemporalAAContainer" type="HBoxContainer" parent="Antialiasing"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Antialiasing/TAAContainer"]
+[node name="Label" type="Label" parent="Antialiasing/TemporalAAContainer"]
 custom_minimum_size = Vector2(120, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-text = "TAA
-"
+text = "Temporal AA"
 vertical_alignment = 1
 
-[node name="TAA" type="OptionButton" parent="Antialiasing/TAAContainer"]
+[node name="TemporalAA" type="OptionButton" parent="Antialiasing/TemporalAAContainer"]
 custom_minimum_size = Vector2(235, 2.08165e-12)
 layout_mode = 2
 selected = 0
@@ -983,20 +982,20 @@ popup/item_1/id = 1
 popup/item_2/text = "Enabled"
 popup/item_2/id = 2
 
-[node name="LimitFPSContainer" type="HBoxContainer" parent="Antialiasing"]
+[node name="FPSLimitContainer" type="HBoxContainer" parent="Antialiasing"]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="Antialiasing/LimitFPSContainer"]
+[node name="Label" type="Label" parent="Antialiasing/FPSLimitContainer"]
 custom_minimum_size = Vector2(120, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-text = "Limit FPS"
+text = "FPS Limit"
 vertical_alignment = 1
 
-[node name="LimitFPSScale" type="HSlider" parent="Antialiasing/LimitFPSContainer"]
+[node name="FPSLimitScale" type="HSlider" parent="Antialiasing/FPSLimitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1004,12 +1003,12 @@ size_flags_stretch_ratio = 3.0
 max_value = 300.0
 step = 10.0
 
-[node name="Value" type="Label" parent="Antialiasing/LimitFPSContainer"]
+[node name="Value" type="Label" parent="Antialiasing/FPSLimitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-text = "0"
+text = "∞"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1099,11 +1098,11 @@ metadata/gradient = SubResource("Gradient_ehij4")
 
 [connection signal="pressed" from="Previous" to="." method="_on_previous_pressed"]
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
-[connection signal="item_selected" from="Antialiasing/MSAAContainer/MSAA" to="." method="_on_msaa_item_selected"]
-[connection signal="item_selected" from="Antialiasing/FXAAContainer/FXAA" to="." method="_on_fxaa_item_selected"]
-[connection signal="item_selected" from="Antialiasing/TAAContainer/TAA" to="." method="_on_taa_item_selected"]
+[connection signal="item_selected" from="Antialiasing/MultisampleAAContainer/MultisampleAA" to="." method="_on_msaa_item_selected"]
+[connection signal="item_selected" from="Antialiasing/ScreenSpaceAAContainer/ScreenSpaceAA" to="." method="_on_screen_space_aa_item_selected"]
+[connection signal="item_selected" from="Antialiasing/TemporalAAContainer/TemporalAA" to="." method="_on_taa_item_selected"]
 [connection signal="item_selected" from="Antialiasing/VSyncContainer/VSync" to="." method="_on_v_sync_item_selected"]
-[connection signal="value_changed" from="Antialiasing/LimitFPSContainer/LimitFPSScale" to="." method="_on_limit_fps_scale_value_changed"]
+[connection signal="value_changed" from="Antialiasing/FPSLimitContainer/FPSLimitScale" to="." method="_on_fps_limit_scale_value_changed"]
 [connection signal="value_changed" from="Antialiasing/RenderScaleContainer/RenderScale" to="." method="_on_render_scale_value_changed"]
 [connection signal="toggled" from="Antialiasing/FidelityFXFSR" to="." method="_on_amd_fidelityfx_fsr1_toggled"]
 [connection signal="item_selected" from="Antialiasing/FSRSharpness" to="." method="_on_fsr_sharpness_item_selected"]

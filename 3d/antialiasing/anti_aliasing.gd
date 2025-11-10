@@ -23,8 +23,8 @@ func _ready() -> void:
 	if RenderingServer.get_current_rendering_method() == "gl_compatibility":
 		is_compatibility = true
 		# Hide unsupported features.
-		$Antialiasing/FXAAContainer.visible = false
-		$Antialiasing/TAAContainer.visible = false
+		$Antialiasing/ScreenSpaceAAContainer.visible = false
+		$Antialiasing/TemporalAAContainer.visible = false
 
 		# Darken the light's energy to compensate for sRGB blending (without affecting sky rendering).
 		$DirectionalLight3D.sky_mode = DirectionalLight3D.SKY_MODE_SKY_ONLY
@@ -78,8 +78,6 @@ func _process(delta: float) -> void:
 	fps_label.modulate = fps_label.get_meta(&"gradient").sample(remap(Engine.get_frames_per_second(), 0, 180, 0.0, 1.0))
 
 
-
-
 func _on_previous_pressed() -> void:
 	tester_index = max(0, tester_index - 1)
 	update_gui()
@@ -102,11 +100,11 @@ func _on_msaa_item_selected(index: int) -> void:
 	get_viewport().msaa_3d = index as Viewport.MSAA
 
 
-func _on_limit_fps_scale_value_changed(value: float) -> void:
+func _on_fps_limit_scale_value_changed(value: float) -> void:
 	# The rendering FPS affects the appearance of TAA, as higher framerates allow it to converge faster.
 	# On high refresh rate monitors, TAA ghosting issues may appear less noticeable as a result
 	# (if the GPU can keep up).
-	$Antialiasing/LimitFPSContainer/Value.text = str(value)
+	$Antialiasing/FPSLimitContainer/Value.text = str(roundi(value)) if not is_zero_approx(value) else "∞"
 	Engine.max_fps = roundi(value)
 
 
@@ -151,18 +149,19 @@ func _on_viewport_size_changed() -> void:
 
 
 func _on_v_sync_item_selected(index: int) -> void:
-	# Vsync is enabled by default.
+	# V-Sync is enabled by default.
 	# Vertical synchronization locks framerate and makes screen tearing not visible at the cost of
 	# higher input latency and stuttering when the framerate target is not met.
 	# Adaptive V-Sync automatically disables V-Sync when the framerate target is not met, and enables
 	# V-Sync otherwise. This prevents suttering and reduces input latency when the framerate target
 	# is not met, at the cost of visible tearing.
-	if index == 0: # Disabled (default)
-		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
-	elif index == 1: # Adaptive
-		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ADAPTIVE)
-	elif index == 2: # Enabled
-		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+	match index:
+		0: # Disabled (default)
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+		1: # Adaptive
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ADAPTIVE)
+		2: # Enabled
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 
 
 func _on_taa_item_selected(index: int) -> void:
@@ -171,7 +170,8 @@ func _on_taa_item_selected(index: int) -> void:
 	get_viewport().use_taa = index == 1
 
 
-func _on_fxaa_item_selected(index: int) -> void:
-	# Fast approximate anti-aliasing. Much faster than MSAA (and works on alpha scissor edges),
+func _on_screen_space_aa_item_selected(index: int) -> void:
+	# Screen-space antialiasing. Much faster than MSAA (and works on alpha scissor edges),
 	# but blurs the whole scene rendering slightly.
-	get_viewport().screen_space_aa = int(index == 1) as Viewport.ScreenSpaceAA
+	# SMAA looks sharper than FXAA and has better edge coverage, but is slower.
+	get_viewport().screen_space_aa = int(index) as Viewport.ScreenSpaceAA
