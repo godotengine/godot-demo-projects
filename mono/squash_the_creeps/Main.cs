@@ -15,6 +15,7 @@ public partial class Main : Node
         if (inputEvent.IsActionPressed("ui_accept") && GetNode<Control>("UserInterface/Retry").Visible)
         {
             // This restarts the current scene.
+            GetNode<AudioStreamPlayer>("/root/MusicPlayer").Play();
             GetTree().ReloadCurrentScene();
         }
     }
@@ -46,5 +47,6 @@ public partial class Main : Node
     {
         GetNode<Timer>("MobTimer").Stop();
         GetNode<Control>("UserInterface/Retry").Show();
+        GetNode<AudioStreamPlayer>("/root/MusicPlayer").Stop();
     }
 }
