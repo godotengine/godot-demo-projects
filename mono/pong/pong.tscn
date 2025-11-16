@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b33eutrho0ohc"]
+[gd_scene load_steps=13 format=3 uid="uid://b33eutrho0ohc"]
 
 [ext_resource type="Script" uid="uid://cyybip02uhw3c" path="res://Logic/Paddle.cs" id="1"]
 [ext_resource type="Texture2D" uid="uid://c1fewcisyhunx" path="res://paddle.png" id="2"]
@@ -8,17 +8,22 @@
 [ext_resource type="Script" uid="uid://b83oy4l4ydlw2" path="res://Logic/Wall.cs" id="7"]
 [ext_resource type="Script" uid="uid://cca41w3s2yfip" path="res://Logic/CeilingFloor.cs" id="8"]
 
-[sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(4, 16)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_trlu6"]
+radius = 4.371498
+height = 32.81201
 
-[sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(4, 4)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a6iag"]
+radius = 4.1849976
+height = 32.161987
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7860c"]
+radius = 4.501708
 
 [sub_resource type="RectangleShape2D" id="3"]
-size = Vector2(10, 200)
+size = Vector2(10, 400)
 
 [sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(320, 10)
+size = Vector2(640, 10)
 
 [node name="Pong" type="Node2D"]
 
@@ -36,7 +41,7 @@ script = ExtResource("1")
 texture = ExtResource("2")
 
 [node name="Collision" type="CollisionShape2D" parent="Left"]
-shape = SubResource("1")
+shape = SubResource("CapsuleShape2D_trlu6")
 
 [node name="Right" type="Area2D" parent="."]
 modulate = Color(1, 0, 1, 1)
@@ -47,7 +52,7 @@ script = ExtResource("1")
 texture = ExtResource("2")
 
 [node name="Collision" type="CollisionShape2D" parent="Right"]
-shape = SubResource("1")
+shape = SubResource("CapsuleShape2D_a6iag")
 
 [node name="Ball" type="Area2D" parent="."]
 position = Vector2(320.5, 191.124)
@@ -57,19 +62,18 @@ script = ExtResource("4")
 texture = ExtResource("5")
 
 [node name="Collision" type="CollisionShape2D" parent="Ball"]
-shape = SubResource("2")
+shape = SubResource("CircleShape2D_7860c")
 
 [node name="Separator" type="Sprite2D" parent="."]
 position = Vector2(320, 200)
 texture = ExtResource("6")
-
-[node name="Node2D" type="Node2D" parent="."]
 
 [node name="LeftWall" type="Area2D" parent="."]
 position = Vector2(-10, 200)
 script = ExtResource("7")
 
 [node name="Collision" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(5, 0)
 shape = SubResource("3")
 
 [node name="RightWall" type="Area2D" parent="."]
@@ -77,6 +81,7 @@ position = Vector2(650, 200)
 script = ExtResource("7")
 
 [node name="Collision" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(-5, 0)
 shape = SubResource("3")
 
 [node name="Ceiling" type="Area2D" parent="."]
@@ -84,6 +89,7 @@ position = Vector2(320, -10)
 script = ExtResource("8")
 
 [node name="Collision" type="CollisionShape2D" parent="Ceiling"]
+position = Vector2(0, 5)
 shape = SubResource("4")
 
 [node name="Floor" type="Area2D" parent="."]
@@ -92,6 +98,7 @@ script = ExtResource("8")
 _bounceDirection = -1
 
 [node name="Collision" type="CollisionShape2D" parent="Floor"]
+position = Vector2(0, -5)
 shape = SubResource("4")
 
 [connection signal="area_entered" from="Left" to="Left" method="OnAreaEntered"]
