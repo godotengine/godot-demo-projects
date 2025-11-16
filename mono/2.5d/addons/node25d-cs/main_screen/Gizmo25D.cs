@@ -33,7 +33,7 @@ public partial class Gizmo25D : Node2D
         lines[2] = linesRoot.GetChild<Line2D>(2);
     }
 
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         if (lines == null)
         {
@@ -55,7 +55,7 @@ public partial class Gizmo25D : Node2D
             {
                 // Unrelated, but needs a loop too.
                 Color modulateLine = lines[i].Modulate;
-    			modulateLine.a = 0.8f;
+    			modulateLine.A = 0.8f;
                 lines[i].Modulate = modulateLine;
 
     			var distance = DistanceToSegmentAtIndex(i, mousePosition);
@@ -74,7 +74,7 @@ public partial class Gizmo25D : Node2D
         }
 
         Color modulate = lines[dominantAxis].Modulate;
-    	modulate.a = 1;
+    	modulate.A = 1;
         lines[dominantAxis].Modulate = modulate;
 
     	if (!wantsToMove)
@@ -91,7 +91,7 @@ public partial class Gizmo25D : Node2D
         {
     		// Change modulate of unselected axes.
             modulate = lines[(dominantAxis + 1) % 3].Modulate;
-    		modulate.a = 0.5f;
+    		modulate.A = 0.5f;
             lines[(dominantAxis + 1) % 3].Modulate = modulate;
             lines[(dominantAxis + 2) % 3].Modulate = modulate;
 
@@ -107,7 +107,7 @@ public partial class Gizmo25D : Node2D
             }
     		// Apply movement.
             Transform3D t = spatialNode.Transform;
-    		t.origin += t.basis[dominantAxis] * movement;
+    		t.Origin += t.Basis[dominantAxis] * movement;
             spatialNode.Transform = t;
         }
     	else
@@ -117,13 +117,12 @@ public partial class Gizmo25D : Node2D
     		if (RoughlyRoundToPixels)
             {
                 Transform3D t = spatialNode.Transform;
-    			t.origin = (t.origin * Node25D.SCALE).Round() / Node25D.SCALE;
+    			t.Origin = (t.Origin * Node25D.SCALE).Round() / Node25D.SCALE;
                 spatialNode.Transform = t;
             }
         }
     	// Move the gizmo lines appropriately.
     	linesRoot.GlobalPosition = node25d.GlobalPosition;
-    	node25d.PropertyListChangedNotify();
     }
 
     // Initializes after _ready due to the onready vars, called manually in Viewport25D.gd.
