@@ -9,7 +9,7 @@ extends Sprite2D
 @onready var _oblique_z = preload("res://assets/platform/textures/oblique_z.png")
 
 func _process(_delta):
-	if not Engine.editor_hint:
+	if not Engine.is_editor_hint():
 		if Input.is_action_pressed(&"forty_five_mode"):
 			set_view_mode(0)
 		elif Input.is_action_pressed(&"isometric_mode"):
