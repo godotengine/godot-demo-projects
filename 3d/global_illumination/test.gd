@@ -115,7 +115,7 @@ func _input(input_event: InputEvent) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	fps.text = "FPS: " + str(int(Performance.get_monitor(Performance.TIME_FPS)))
+	fps.text = "%d FPS (%.2f mspf)" % [Engine.get_frames_per_second(), 1000.0 / Engine.get_frames_per_second()]
 
 
 func set_gi_mode(p_gi_mode: GIMode) -> void:
