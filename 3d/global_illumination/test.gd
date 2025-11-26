@@ -13,7 +13,7 @@ enum ReflectionProbeMode {
 	NONE,
 	ONCE,
 	ALWAYS,
-	MAX,
+	MAX,  # Maximum value of the enum, used internally.
 }
 
 enum SSILMode {
@@ -59,6 +59,7 @@ var is_compatibility: bool = false
 @onready var lightmap_gi_all_data: LightmapGIData = $LightmapGIAll.light_data
 @onready var environment: Environment = $WorldEnvironment.environment
 @onready var gi_mode_label: Label = $GIMode
+@onready var fps: Label = $FPS
 @onready var reflection_probe_mode_label: Label = $ReflectionProbeMode
 @onready var reflection_probe: ReflectionProbe = $Camera/ReflectiveSphere/ReflectionProbe
 @onready var ssil_mode_label: Label = $SSILMode
@@ -95,19 +96,26 @@ Escape or F10: Toggle mouse capture"""
 
 func _input(input_event: InputEvent) -> void:
 	if input_event.is_action_pressed(&"cycle_gi_mode"):
+		var incr: int = -1 if Input.is_key_pressed(KEY_SHIFT) else 1
 		if is_compatibility:
 			# Only LightmapGI is supported in Compatibility.
 			# Note that the actual GI mode is the opposite of what's being set here, due to a bug
 			# in the Compatibility rendering method.
-			set_gi_mode(wrapi(gi_mode + 1, 0, GIMode.VOXEL_GI))
+			set_gi_mode(wrapi(gi_mode + incr, 0, GIMode.VOXEL_GI))
 		else:
-			set_gi_mode(wrapi(gi_mode + 1, 0, GIMode.MAX))
+			set_gi_mode(wrapi(gi_mode + incr, 0, GIMode.MAX))
 
 	if input_event.is_action_pressed(&"cycle_reflection_probe_mode"):
-		set_reflection_probe_mode(wrapi(reflection_probe_mode + 1, 0, ReflectionProbeMode.MAX))
+		var incr: int = -1 if Input.is_key_pressed(KEY_SHIFT) else 1
+		set_reflection_probe_mode(wrapi(reflection_probe_mode + incr, 0, ReflectionProbeMode.MAX))
 
 	if input_event.is_action_pressed(&"cycle_ssil_mode"):
-		set_ssil_mode(wrapi(ssil_mode + 1, 0, SSILMode.MAX))
+		var incr: int = -1 if Input.is_key_pressed(KEY_SHIFT) else 1
+		set_ssil_mode(wrapi(ssil_mode + incr, 0, SSILMode.MAX))
+
+
+func _physics_process(_delta: float) -> void:
+	fps.text = "FPS: " + str(int(Performance.get_monitor(Performance.TIME_FPS)))
 
 
 func set_gi_mode(p_gi_mode: GIMode) -> void:
