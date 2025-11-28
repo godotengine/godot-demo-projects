@@ -59,18 +59,45 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="CameraDisplay" type="AspectRatioContainer" parent="."]
-layout_mode = 0
+[node name="CameraDisplay" type="Control" parent="."]
+anchors_preset = 0
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 700.0
 offset_bottom = 1260.0
-stretch_mode = 1
 
-[node name="CameraPreview" type="TextureRect" parent="CameraDisplay"]
+[node name="MirrorContainer" type="Control" parent="CameraDisplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="RotationContainer" type="Control" parent="CameraDisplay/MirrorContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AspectContainer" type="AspectRatioContainer" parent="CameraDisplay/MirrorContainer/RotationContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 3
+
+[node name="CameraPreview" type="TextureRect" parent="CameraDisplay/MirrorContainer/RotationContainer/AspectContainer"]
 material = SubResource("ShaderMaterial_lgiw1")
 layout_mode = 2
-stretch_mode = 5
+expand_mode = 1
+stretch_mode = 6
 
 [node name="DrawerContainer" type="Control" parent="."]
 modulate = Color(1, 1, 1, 0.5019608)
