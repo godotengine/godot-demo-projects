@@ -1,0 +1,43 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Audio Mic Input Demo"
+config/description="This is an example showing how one can record audio from
+the microphone and later play it back or save it to a file."
+config/tags=PackedStringArray("audio", "demo", "official")
+run/main_scene="res://MicRecord.tscn"
+config/features=PackedStringArray("4.6")
+run/low_processor_mode=true
+config/icon="res://icon.webp"
+
+[audio]
+
+driver/enable_input=true
+enable_audio_input=true
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=480
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/vsync/vsync_mode=0
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
