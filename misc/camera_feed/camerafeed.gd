@@ -191,7 +191,7 @@ func _update_scene_transform() -> void:
 		return
 
 	var preview_size := _get_preview_size(mat)
-	if preview_size.round() <= Vector2.ZERO:
+	if preview_size.round().x <= 0 or preview_size.round().y <= 0:
 		return
 
 	var is_front_camera := camera_feed.get_position() == CameraFeed.FeedPosition.FEED_FRONT
@@ -210,15 +210,15 @@ func _get_preview_size(mat: ShaderMaterial) -> Vector2:
 	var datatype := camera_feed.get_datatype() as CameraFeed.FeedDataType
 	match datatype:
 		CameraFeed.FeedDataType.FEED_RGB:
-			var texture: CameraTexture = mat.get_shader_parameter("rgb_texture")
+			var texture: CameraTexture = mat.get_shader_parameter(&"rgb_texture")
 			if texture:
 				return texture.get_size()
 		CameraFeed.FeedDataType.FEED_YCBCR_SEP:
-			var texture: CameraTexture = mat.get_shader_parameter("y_texture")
+			var texture: CameraTexture = mat.get_shader_parameter(&"y_texture")
 			if texture:
 				return texture.get_size()
 		CameraFeed.FeedDataType.FEED_YCBCR:
-			var texture: CameraTexture = mat.get_shader_parameter("ycbcr_texture")
+			var texture: CameraTexture = mat.get_shader_parameter(&"ycbcr_texture")
 			if texture:
 				return texture.get_size()
 	return Vector2.ZERO
@@ -241,10 +241,10 @@ func _on_frame_changed() -> void:
 
 func _setup_textures() -> void:
 	var mat: ShaderMaterial = camera_preview.material
-	var rgb_texture: CameraTexture = mat.get_shader_parameter("rgb_texture")
-	var y_texture: CameraTexture = mat.get_shader_parameter("y_texture")
-	var cbcr_texture: CameraTexture = mat.get_shader_parameter("cbcr_texture")
-	var ycbcr_texture: CameraTexture = mat.get_shader_parameter("ycbcr_texture")
+	var rgb_texture: CameraTexture = mat.get_shader_parameter(&"rgb_texture")
+	var y_texture: CameraTexture = mat.get_shader_parameter(&"y_texture")
+	var cbcr_texture: CameraTexture = mat.get_shader_parameter(&"cbcr_texture")
+	var ycbcr_texture: CameraTexture = mat.get_shader_parameter(&"ycbcr_texture")
 
 	rgb_texture.which_feed = CameraServer.FeedImage.FEED_RGBA_IMAGE
 	y_texture.which_feed = CameraServer.FeedImage.FEED_Y_IMAGE
@@ -257,26 +257,26 @@ func _setup_textures() -> void:
 	match datatype:
 		CameraFeed.FeedDataType.FEED_RGB:
 			rgb_texture.camera_feed_id = camera_feed.get_id()
-			mat.set_shader_parameter("rgb_texture", rgb_texture)
-			mat.set_shader_parameter("mode", ShaderMode.RGB)
+			mat.set_shader_parameter(&"rgb_texture", rgb_texture)
+			mat.set_shader_parameter(&"mode", ShaderMode.RGB)
 			preview_size = rgb_texture.get_size()
 		CameraFeed.FeedDataType.FEED_YCBCR_SEP:
 			y_texture.camera_feed_id = camera_feed.get_id()
 			cbcr_texture.camera_feed_id = camera_feed.get_id()
-			mat.set_shader_parameter("y_texture", y_texture)
-			mat.set_shader_parameter("cbcr_texture", cbcr_texture)
-			mat.set_shader_parameter("mode", ShaderMode.YCBCR_SEP)
+			mat.set_shader_parameter(&"y_texture", y_texture)
+			mat.set_shader_parameter(&"cbcr_texture", cbcr_texture)
+			mat.set_shader_parameter(&"mode", ShaderMode.YCBCR_SEP)
 			preview_size = y_texture.get_size()
 		CameraFeed.FeedDataType.FEED_YCBCR:
 			ycbcr_texture.camera_feed_id = camera_feed.get_id()
-			mat.set_shader_parameter("ycbcr_texture", ycbcr_texture)
-			mat.set_shader_parameter("mode", ShaderMode.YCBCR)
+			mat.set_shader_parameter(&"ycbcr_texture", ycbcr_texture)
+			mat.set_shader_parameter(&"mode", ShaderMode.YCBCR)
 			preview_size = ycbcr_texture.get_size()
 		_:
 			print("Skip formats that are not supported.")
 			return
 
-	if preview_size.round() <= Vector2.ZERO:
+	if preview_size.round().x <= 0 or preview_size.round().y <= 0:
 		return
 
 	var white_image := Image.create(int(preview_size.x), int(preview_size.y), false, Image.FORMAT_RGBA8)
