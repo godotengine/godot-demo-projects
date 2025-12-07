@@ -1,0 +1,823 @@
+[application]
+config/name="Sombras del Horizonte"
+config/version="1.0.0"
+run/main_scene="main.tscn"
+
+[display]
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="2d"
+window/stretch/scale="viewport"
+
+[image_loader]
+filter=false
+gen_mipmaps=false
+
+[rendering]
+quality/2d/use_pixel_snap=true# GameState.gd
+extends Node
+
+# Variables globales del juego
+var lives = 3
+var has_lunar_key = false
+var current_checkpoint = Vector2.ZERO
+var collected_trophy = false
+var current_map = 1
+
+# Señales para comunicación entre sistemas
+signal lives_changed(lives)
+signal key_collected
+signal trophy_collected
+signal checkpoint_activated(position)
+
+func _ready():
+	# Registrar esta instancia como autoload (Singleton)
+	pass
+
+func reset_game():
+	lives = 3
+	has_lunar_key = false
+	collected_trophy = false
+	current_checkpoint = Vector2.ZERO
+	current_map = 1
+	emit_signal("lives_changed", lives)
+
+func lose_life():
+	if lives > 0:
+		lives -= 1
+		emit_signal("lives_changed", lives)
+	
+	if lives <= 0:
+		# Reiniciar el juego si se acaban las vidas
+		reset_game()
+
+func collect_key():
+	has_lunar_key = true
+	emit_signal("key_collected")
+
+func collect_trophy():
+	collected_trophy = true
+	emit_signal("trophy_collected")
+	
+func activate_checkpoint(pos):
+	current_checkpoint = pos# player.gd - Script para el jugador con todas las mecánicas
+extends CharacterBody2D
+
+# Constantes de movimiento
+const SPEED = 100.0
+const JUMP_VELOCITY = -250.0
+const LUNAR_JUMP_MULTIPLIER = 1.8
+const LUNAR_JUMP_COOLDOWN = 8.0
+
+# Variables de estado
+var is_attacking = false
+var facing_right = true
+var health = 3
+var lunar_jump_cooldown_timer = 0.0
+var can_use_lunar_jump = true
+var invincible = false
+var invincibility_timer = 0.0
+var can_double_jump = false
+var double_jump_used = false
+
+# Referencias a nodos
+@onready var animation_player = $AnimationPlayer
+@onready var sprite = $Sprite2D
+@onready var hurt_cooldown_timer = $HurtCooldownTimer
+@onready var lunar_jump_cooldown = $LunarJumpCooldown
+@onready var double_jump_timer = $DoubleJumpTimer
+
+# Señales
+signal player_damaged
+signal player_healed
+signal player_dead
+signal player_won
+
+func _ready():
+	# Conectar señales
+	GameState.connect("lives_changed", _on_lives_changed)
+	
+	# Iniciar en el checkpoint actual si existe
+	if GameState.current_checkpoint != Vector2.ZERO:
+		position = GameState.current_checkpoint
+
+func _physics_process(delta):
+	# Manejar el temporizador de invencibilidad
+	if invincible:
+		invincibility_timer -= delta
+		if invincibility_timer <= 0:
+			invincible = false
+	
+	# Manejar el cooldown del salto lunar
+	if not can_use_lunar_jump:
+		lunar_jump_cooldown_timer -= delta
+		if lunar_jump_cooldown_timer <= 0:
+			can_use_lunar_jump = true
+
+	# Movimiento horizontal
+	var velocity = velocity
+	velocity.x = 0
+	var input_direction = Input.get_axis("move_left", "move_right")
+	velocity.x = input_direction * SPEED
+
+	# Cambiar dirección del sprite
+	if input_direction > 0:
+		facing_right = true
+		sprite.flip_h = false
+	elif input_direction < 0:
+		facing_right = false
+		sprite.flip_h = true
+
+	# Salto normal
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+		double_jump_used = false  # Resetear doble salto cuando toca suelo
+
+	# Doble salto (si está disponible)
+	if can_double_jump and Input.is_action_just_pressed("jump") and not is_on_floor() and not double_jump_used:
+		velocity.y = JUMP_VELOCITY * 0.8
+		double_jump_used = true
+
+	# Salto lunar (con cooldown)
+	if Input.is_action_just_pressed("special_jump") and can_use_lunar_jump and is_on_floor():
+		velocity.y = JUMP_VELOCITY * LUNAR_JUMP_MULTIPLIER
+		can_use_lunar_jump = false
+		lunar_jump_cooldown_timer = LUNAR_JUMP_COOLDOWN
+
+	# Aplicar gravedad
+	if not is_on_floor():
+		velocity.y += 1200 * delta
+
+	# Manejar ataque
+	if Input.is_action_just_pressed("attack") and not is_attacking:
+		attack()
+
+	move_and_slide()
+
+	# Actualizar animación
+	update_animation()
+
+func update_animation():
+	if is_attacking:
+		animation_player.play("attack")
+	elif velocity.y != 0:
+		if is_on_floor():
+			animation_player.play("idle")
+		else:
+			animation_player.play("jump")
+	elif abs(velocity.x) > 0:
+		animation_player.play("run")
+	else:
+		animation_player.play("idle")
+
+func attack():
+	is_attacking = true
+	animation_player.play("attack")
+	
+	# Detectar enemigos en el área de ataque
+	var attack_area = $AttackArea
+	for body in attack_area.get_overlapping_bodies():
+		if body.has_method("take_damage"):
+			body.take_damage(1)
+
+func take_damage(damage):
+	if invincible:
+		return
+	
+	invincible = true
+	invincibility_timer = 1.5
+	health -= damage
+	
+	# Actualizar vidas globales
+	GameState.lives = health
+	GameState.emit_signal("lives_changed", health)
+	
+	emit_signal("player_damaged")
+	animation_player.play("hurt")
+	
+	if health <= 0:
+		die()
+
+func heal(amount):
+	if health < 3:
+		health = min(3, health + amount)
+		GameState.lives = health
+		emit_signal("player_healed")
+
+func die():
+	emit_signal("player_dead")
+	# Revivir en el último checkpoint
+	if GameState.current_checkpoint != Vector2.ZERO:
+		position = GameState.current_checkpoint
+	health = 3
+	GameState.lives = health
+
+func _on_lives_changed(lives):
+	health = lives
+	if lives <= 0:
+		die()
+
+func _on_hurt_cooldown_timeout():
+	invincible = false
+
+func _on_lunar_jump_cooldown_timeout():
+	can_use_lunar_jump = true
+
+func _on_attack_timer_timeout():
+	is_attacking = false
+
+func _on_double_jump_timer_timeout():
+	can_double_jump = false
+	double_jump_used = false# enemy_base.gd - Clase base para todos los enemigos
+extends CharacterBody2D
+
+# Variables base para todos los enemigos
+var health = 1
+var max_health = 1
+var damage = 1
+var speed = 50.0
+var direction = 1
+var active = true
+
+# Señales
+signal enemy_dead(enemy)
+
+func _ready():
+	health = max_health
+
+func take_damage(damage_taken):
+	if not active:
+		return
+		
+	health -= damage_taken
+	if health <= 0:
+		die()
+
+func die():
+	active = false
+	emit_signal("enemy_dead", self)
+	queue_free()
+
+func _on_visibility_screen_exited():
+	# Eliminar enemigos lejanos para optimización
+	if active:
+		queue_free()# monkey.gd - Enemigo mono espectral en la jungla
+extends "res://scripts/enemy_base.gd"
+
+@onready var animation_player = $AnimationPlayer
+
+var detection_range = 100
+var jump_force = -200
+var jump_cooldown = 2.0
+var jump_timer = 0.0
+
+func _ready():
+	max_health = 1
+	health = max_health
+	speed = 30.0
+
+func _physics_process(delta):
+	if not active:
+		return
+	
+	# Actualizar temporizador de salto
+	jump_timer -= delta
+	
+	# Buscar al jugador
+	var player = get_player()
+	if player:
+		var distance_to_player = global_position.distance_to(player.global_position)
+		
+		if distance_to_player < detection_range and jump_timer <= 0:
+			# Saltar hacia el jugador
+			velocity = Vector2.ZERO
+			velocity.y = jump_force
+			var direction_to_player = 1 if player.global_position.x > global_position.x else -1
+			velocity.x = direction_to_player * speed
+			jump_timer = jump_cooldown
+			animation_player.play("jump")
+		else:
+			# Caminar normalmente
+			velocity.x = direction * speed
+			animation_player.play("walk")
+	
+	# Aplicar gravedad
+	if not is_on_floor():
+		velocity.y += 1200 * delta
+	
+	move_and_slide()
+
+func get_player():
+	# Buscar al jugador en la escena
+	var player = get_tree().get_first_node_in_group("player")
+	return player
+
+func _on_detection_area_body_entered(body):
+	if body.has_method("take_damage"):
+		body.take_damage(damage)# bat.gd - Murciélago de neón en la jungla
+extends "res://scripts/enemy_base.gd"
+
+@onready var animation_player = $AnimationPlayer
+
+var detection_range = 150
+var dive_speed = 150.0
+var return_speed = 80.0
+var dive_cooldown = 3.0
+var dive_timer = 0.0
+var is_diving = false
+var original_position = Vector2.ZERO
+
+func _ready():
+	max_health = 2
+	health = max_health
+	original_position = global_position
+
+func _physics_process(delta):
+	if not active:
+		return
+	
+	dive_timer -= delta
+	
+	var player = get_player()
+	if player and dive_timer <= 0:
+		var distance_to_player = global_position.distance_to(player.global_position)
+		
+		if distance_to_player < detection_range:
+			# Iniciar picada
+			is_diving = true
+			var direction_to_player = (player.global_position - global_position).normalized()
+			velocity = direction_to_player * dive_speed
+			animation_player.play("dive")
+		else:
+			# Volar de regreso a posición original
+			var direction_to_original = (original_position - global_position).normalized()
+			velocity = direction_to_original * return_speed
+			animation_player.play("fly")
+	else:
+		# Volar de regreso a posición original
+		var direction_to_original = (original_position - global_position).normalized()
+		velocity = direction_to_original * return_speed
+		animation_player.play("fly")
+	
+	move_and_slide()
+
+func get_player():
+	var player = get_tree().get_first_node_in_group("player")
+	return player
+
+func take_damage(damage_taken):
+	var previous_health = health
+	super.take_damage(damage_taken)
+	
+	# Si recibe daño mientras está en picada, cancelarla
+	if is_diving and previous_health > health:
+		is_diving = false
+		dive_timer = dive_cooldown
+
+func die():
+	animation_player.play("die")
+	super.die()
+
+func _on_detection_area_body_entered(body):
+	if body.has_method("take_damage"):
+		body.take_damage(damage)# boss_leaf.gd - Jefe Bestia de Hojas en la jungla
+extends "res://scripts/enemy_base.gd"
+
+@onready var animation_player = $AnimationPlayer
+
+var phase = 1
+var attack_cooldown = 2.0
+var attack_timer = 0.0
+var ground_slam_cooldown = 3.0
+var ground_slam_timer = 0.0
+var branch_drop_cooldown = 4.0
+var branch_drop_timer = 0.0
+
+func _ready():
+	max_health = 8
+	health = max_health
+	speed = 40.0
+
+func _physics_process(delta):
+	if not active:
+		return
+	
+	# Actualizar temporizadores
+	attack_timer -= delta
+	ground_slam_timer -= delta
+	branch_drop_timer -= delta
+	
+	# Cambiar de fase si es necesario
+	if phase == 1 and health <= max_health / 2:
+		phase = 2
+		speed = 60.0  # Aumentar velocidad en fase 2
+	
+	# Buscar al jugador
+	var player = get_player()
+	if player:
+		var direction_to_player = 1 if player.global_position.x > global_position.x else -1
+		
+		# Movimiento básico
+		velocity.x = direction_to_player * speed
+		
+		# Ataques
+		if attack_timer <= 0:
+			execute_attack()
+			attack_timer = attack_cooldown if phase == 1 else attack_cooldown * 0.7  # Más rápido en fase 2
+		
+		# Ataques específicos por fase
+		if phase == 1:
+			if ground_slam_timer <= 0:
+				ground_slam()
+				ground_slam_timer = ground_slam_cooldown
+		else:  # Fase 2
+			if branch_drop_timer <= 0:
+				drop_branches()
+				branch_drop_timer = branch_drop_cooldown * 0.6  # Más frecuente en fase 2
+	
+	# Aplicar gravedad
+	if not is_on_floor():
+		velocity.y += 1200 * delta
+	
+	move_and_slide()
+
+func execute_attack():
+	# Ataque básico de garra
+	var attack_area = $AttackArea
+	for body in attack_area.get_overlapping_bodies():
+		if body.has_method("take_damage"):
+			body.take_damage(damage)
+
+func ground_slam():
+	# Crear onda de choque en el suelo
+	var slam_area = $GroundSlamArea
+	for body in slam_area.get_overlapping_bodies():
+		if body.has_method("take_damage"):
+			body.take_damage(damage)
+
+func drop_branches():
+	# Soltar ramas en posiciones aleatorias
+	# En una implementación completa, crearíamos nodos de ramas
+	# Por ahora, solo simulamos el efecto
+	animation_player.play("drop_branches")
+
+func get_player():
+	var player = get_tree().get_first_node_in_group("player")
+	return player
+
+func die():
+	# Soltar la llave lunar
+	GameState.collect_key()
+	
+	# Reproducir animación de muerte
+	animation_player.play("die")
+	
+	# Enviar señal de jefe derrotado
+	GameState.emit_signal("boss_defeated", "leaf")
+	
+	super.die()# boss_echo.gd - Jefe Guardián del Eco en el desierto
+extends "res://scripts/enemy_base.gd"
+
+@onready var animation_player = $AnimationPlayer
+
+var phase = 1
+var sand_storm_cooldown = 4.0
+var sand_storm_timer = 0.0
+var heavy_attack_cooldown = 6.0
+var heavy_attack_timer = 0.0
+var summon_cooldown = 8.0
+var summon_timer = 0.0
+
+func _ready():
+	max_health = 10
+	health = max_health
+	speed = 30.0
+
+func _physics_process(delta):
+	if not active:
+		return
+	
+	# Actualizar temporizadores
+	sand_storm_timer -= delta
+	heavy_attack_timer -= delta
+	summon_timer -= delta
+	
+	# Cambiar de fase si es necesario
+	if phase == 1 and health <= max_health * 0.6:  # 60% de vida
+		phase = 2
+		speed = 50.0  # Aumentar velocidad en fase 2
+	
+	# Buscar al jugador
+	var player = get_player()
+	if player:
+		var direction_to_player = 1 if player.global_position.x > global_position.x else -1
+		
+		# Movimiento básico
+		velocity.x = direction_to_player * speed
+		
+		# Ataques
+		if phase == 1:
+			# Fase 1: tormenta de arena
+			if sand_storm_timer <= 0:
+				sand_storm_attack()
+				sand_storm_timer = sand_storm_cooldown
+		else:
+			# Fase 2: ataques más agresivos
+			if heavy_attack_timer <= 0:
+				heavy_attack()
+				heavy_attack_timer = heavy_attack_cooldown * 0.7
+			
+			if summon_timer <= 0:
+				summon_minions()
+				summon_timer = summon_cooldown
+	
+	# Aplicar gravedad
+	if not is_on_floor():
+		velocity.y += 1200 * delta
+	
+	move_and_slide()
+
+func sand_storm_attack():
+	# Activar área de tormenta de arena
+	var storm_area = $SandStormArea
+	storm_area.monitoring = true
+	await get_tree().create_timer(2.0).timeout
+	storm_area.monitoring = false
+
+func heavy_attack():
+	# Carga frontal o ataque pesado
+	animation_player.play("heavy_attack")
+	var attack_area = $HeavyAttackArea
+	for body in attack_area.get_overlapping_bodies():
+		if body.has_method("take_damage"):
+			body.take_damage(damage * 2)  # Daño aumentado
+
+func summon_minions():
+	# Invocar enemigos pequeños
+	# En una implementación completa, crearíamos instancias de enemigos
+	animation_player.play("summon")
+
+func get_player():
+	var player = get_tree().get_first_node_in_group("player")
+	return player
+
+func die():
+	# Abrir paso al templo (esto se manejaría en map_logic)
+	GameState.emit_signal("boss_defeated", "echo")
+	
+	# Reproducir animación de muerte
+	animation_player.play("die")
+	
+	super.die()# map_logic.gd - Controlador lógico de los mapas
+extends Node2D
+
+# Variables de estado
+var player_spawn_point = Vector2.ZERO
+var enemies_spawned = false
+var boss_active = false
+
+# Referencias a nodos
+@onready var player_spawn = $PlayerSpawn
+@onready var exit_area = $ExitArea
+@onready var checkpoint_manager = $CheckpointManager
+
+func _ready():
+	# Establecer punto de spawn del jugador
+	if player_spawn:
+		player_spawn_point = player_spawn.position
+	
+	# Conectar señal de salida
+	if exit_area:
+		exit_area.connect("body_entered", _on_exit_area_body_entered)
+
+func _physics_process(_delta):
+	# Verificar si el jugador tiene la llave lunar para acceder al templo
+	if GameState.current_map == 2:  # Desierto
+		var key_required_area = $KeyRequiredArea
+		if key_required_area and GameState.has_lunar_key == false:
+			var player = get_tree().get_first_node_in_group("player")
+			if player and key_required_area.get_overlapping_bodies().has(player):
+				show_message("Se necesita la Llave Lunar")
+	
+	# Verificar si hay que activar al jefe
+	if not boss_active and should_activate_boss():
+		activate_boss()
+
+func should_activate_boss():
+	# Lógica para activar al jefe (por ejemplo, cuando el jugador entra en un área)
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		var boss_activation_area = $BossActivationArea
+		if boss_activation_area and boss_activation_area.get_overlapping_bodies().has(player):
+			return true
+	return false
+
+func activate_boss():
+	boss_active = true
+	# Instanciar al jefe
+	var boss_scene = load(get_boss_scene_path())
+	if boss_scene:
+		var boss_instance = boss_scene.instantiate()
+		add_child(boss_instance)
+		boss_instance.global_position = $BossSpawn.position
+
+func get_boss_scene_path():
+	if GameState.current_map == 1:  # Jungla
+		return "res://scenes/boss_leaf.tscn"
+	elif GameState.current_map == 2:  # Desierto
+		return "res://scenes/boss_echo.tscn"
+	return ""
+
+func _on_exit_area_body_entered(body):
+	if body.has_method("get_groups") and "player" in body.get_groups():
+		transition_to_next_map()
+
+func transition_to_next_map():
+	if GameState.current_map == 1:  # Jungla -> Desierto
+		GameState.current_map = 2
+		get_tree().change_scene_to_file("res://scenes/desert_map.tscn")
+	elif GameState.current_map == 2:  # Desierto -> Templo
+		if GameState.has_lunar_key:
+			GameState.current_map = 3
+			get_tree().change_scene_to_file("res://scenes/temple_map.tscn")
+		else:
+			show_message("Necesitas la Llave Lunar para entrar al templo")
+
+func show_message(text):
+	# Mostrar mensaje al jugador (esto se conectará a la UI)
+	var ui = get_tree().get_first_node_in_group("ui")
+	if ui and ui.has_method("show_message"):
+		ui.show_message(text)
+
+func _on_player_damaged():
+	# Actualizar UI cuando el jugador recibe daño
+	var ui = get_tree().get_first_node_in_group("ui")
+	if ui and ui.has_method("update_health"):
+		ui.update_health(GameState.lives)# powerups.gd - Lógica para power-ups del juego
+extends Area2D
+
+enum PowerUpType { 
+    SPEED_BOOST = 0, 
+    HEALTH = 1, 
+    INVINCIBILITY = 2, 
+    DOUBLE_JUMP = 3 
+}
+
+@export var powerup_type: PowerUpType
+@export var duration: float = 5.0
+@export var value: int = 1
+
+var active = true
+
+func _on_body_entered(body):
+	if body.has_method("get_groups") and "player" in body.get_groups() and active:
+		apply_powerup(body)
+		queue_free()
+
+func apply_powerup(player):
+	active = false
+	
+	match powerup_type:
+		PowerUpType.SPEED_BOOST:
+			# Aumentar velocidad temporalmente
+			player.SPEED *= 2.0
+			await get_tree().create_timer(duration).timeout
+			player.SPEED /= 2.0
+			
+		PowerUpType.HEALTH:
+			# Curar al jugador
+			player.heal(value)
+			
+		PowerUpType.INVINCIBILITY:
+			# Hacer al jugador invencible temporalmente
+			player.invincible = true
+			await get_tree().create_timer(duration).timeout
+			player.invincible = false
+			
+		PowerUpType.DOUBLE_JUMP:
+			# Dar doble salto temporalmente
+			player.can_double_jump = true
+			await get_tree().create_timer(duration).timeout
+			player.can_double_jump = false# checkpoint.gd - Sistema de checkpoints
+extends Area2D
+
+@onready var animation_player = $AnimationPlayer
+
+var activated = false
+
+func _on_body_entered(body):
+	if body.has_method("get_groups") and "player" in body.get_groups() and not activated:
+		# Activar checkpoint
+		activated = true
+		GameState.activate_checkpoint(global_position)
+		
+		# Reproducir animación y sonido
+		animation_player.play("activate")
+		# Aquí iría el sonido de checkpoint
+		show_message("Checkpoint activado")
+		
+		# Enviar señal de checkpoint activado
+		if GameState.has_method("connect"):
+			GameState.emit_signal("checkpoint_activated", global_position)
+
+func show_message(text):
+	# Mostrar mensaje al jugador
+	var ui = get_tree().get_first_node_in_group("ui")
+	if ui and ui.has_method("show_message"):
+		ui.show_message(text)[gd_scene load_steps=6 format=3 uid="uid://main_scene_12345"]
+
+[node name="Main" type="Node2D"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+draw_bg = true
+
+[node name="UI/Control" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="UI/Control/HealthContainer" type="HBoxContainer" parent="UI/Control"]
+position = Vector2(10, 10)
+
+[node name="UI/Control/HealthContainer/Heart1" type="TextureRect" parent="UI/Control/HealthContainer"]
+texture = preload("res://assets/sprites/heart.png")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="UI/Control/HealthContainer/Heart2" type="TextureRect" parent="UI/Control/HealthContainer"]
+texture = preload("res://assets/sprites/heart.png")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="UI/Control/HealthContainer/Heart3" type="TextureRect" parent="UI/Control/HealthContainer"]
+texture = preload("res://assets/sprites/heart.png")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="UI/Control/KeyIcon" type="TextureRect" parent="UI/Control"]
+visible = false
+position = Vector2(100, 10)
+texture = preload("res://assets/sprites/key_lunar.png")
+
+[node name="UI/Control/DialogBox" type="Panel" parent="UI/Control"]
+visible = false
+position = Vector2(100, 500)
+size = Vector2(500, 100)
+theme_override_colors/font_color = Color(1, 1, 1)
+
+[node name="UI/Control/DialogBox/DialogLabel" type="Label" parent="UI/Control/DialogBox"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+autoshrink = true
+vertical_alignment = 1
+horizontal_alignment = 1
+text = "Texto de diálogo"
+
+[node name="UI/Control/DialogBox/OKButton" type="Button" parent="UI/Control/DialogBox"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -30.0
+offset_right = -10.0
+offset_bottom = -10.0
+text = "OK"
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(640, 300)
+scale = Vector2(2, 2)
+
+[node name="Player/Sprite2D" type="Sprite2D" parent="Player"]
+texture = preload("res://assets/sprites/player.png")
+
+[node name="Player/CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource(1)
+
+[node name="Player/AttackArea" type="Area2D" parent="Player"]
+collision_layer = 4
+collision_mask = 32
+
+[node name="Player/AttackArea/CollisionShape2D" type="CollisionShape2D" parent="Player/AttackArea"]
+shape = SubResource(2)
+
+[node name="Player/AnimationPlayer" type="AnimationPlayer" parent="Player"]
+
+[node name="Player/HurtCooldownTimer" type="Timer" parent="Player"]
+wait_time = 1.5
+
+[node name="Player/LunarJumpCooldown" type="Timer" parent="Player"]
+wait_time = 8.0
+
+[node name="Player/AttackTimer" type="Timer" parent="Player"]
+wait_time = 0.3
+
+[node name="Player/DoubleJumpTimer" type="Timer" parent="Player"]
+wait_time = 10.0
+
+[resource type="RectangleShape2D" id=1]
+size = Vector2(16, 32)
+
+[resource type="RectangleShape2D" id=2]
+size = Vector2(32, 20)
