@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvjlkpjvjxn0h"]
+[gd_scene format=3 uid="uid://dvjlkpjvjxn0h"]
 
 [ext_resource type="Script" uid="uid://dbbfvbf6ronrp" path="res://MicRecord.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://c2re52petqrvx" path="res://Intro.ogg" id="2"]
@@ -7,6 +7,19 @@
 [sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_tfvr1"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_tfvr1"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_wquce"]
+buffer_length = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wquce"]
+bg_color = Color(0.003921569, 0.6, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tfvr1"]
+bg_color = Color(0.46588308, 0.464213, 0.16954574, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m4htd"]
 shader = ExtResource("3_vkk4n")
@@ -20,15 +33,14 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -320.0
 offset_top = -240.0
-offset_right = 254.0
-offset_bottom = 210.0
+offset_right = -320.0
+offset_bottom = -240.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=670440240]
 stream = SubResource("AudioStreamMicrophone_tfvr1")
-bus = &"Microphone"
 
 [node name="AudioWav" type="AudioStreamPlayer" parent="." unique_id=908120451]
 autoplay = true
@@ -37,93 +49,173 @@ autoplay = true
 stream = ExtResource("2")
 volume_db = -6.0
 
-[node name="AudioGenerator" type="AudioStreamPlayer" parent="." unique_id=196621827]
+[node name="AudioGeneratorTone" type="AudioStreamPlayer" parent="." unique_id=196621827]
 stream = SubResource("AudioStreamGenerator_tfvr1")
-bus = &"Generate"
 
-[node name="Status" type="Label" parent="." unique_id=19234309]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-offset_bottom = 26.0
-grow_horizontal = 2
+[node name="AudioGeneratorFeedback" type="AudioStreamPlayer" parent="." unique_id=1078658231]
+stream = SubResource("AudioStreamGenerator_wquce")
+autoplay = true
+bus = &"MicFeedback"
+
+[node name="VBox" type="VBoxContainer" parent="." unique_id=529113503]
+layout_mode = 0
+offset_left = 11.0
+offset_right = 628.0
+offset_bottom = 84.0
+
+[node name="Label" type="Label" parent="VBox" unique_id=2004214704]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_wquce")
+text = "Microphone Recording Playback Test"
+horizontal_alignment = 1
+
+[node name="HBoxStatus" type="HBoxContainer" parent="VBox" unique_id=674736458]
+layout_mode = 2
+
+[node name="MicrophoneOn" type="Button" parent="VBox/HBoxStatus" unique_id=836407667]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tfvr1")
+toggle_mode = true
+text = "Microphone On"
+
+[node name="Status" type="Label" parent="VBox/HBoxStatus" unique_id=19234309]
+unique_name_in_owner = true
+layout_mode = 2
 text = "Status: "
 horizontal_alignment = 1
 
-[node name="MicrophoneOn" type="CheckBox" parent="." unique_id=1221710208]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 50.0
-offset_right = 154.0
-offset_bottom = 81.0
-tooltip_text = "Nothing works until you
-turn the microphone on."
-text = "Microphone On
-"
-
-[node name="MicToGenerator" type="CheckBox" parent="." unique_id=768166870]
-layout_mode = 0
-offset_left = 156.0
-offset_top = 50.0
-offset_right = 315.0
-offset_bottom = 81.0
-tooltip_text = "Warning: this will cause feedback
-unless you use headphones"
-text = "Mic to Output
-"
-
-[node name="InputMixRate" type="Label" parent="." unique_id=417503491]
-layout_mode = 0
-offset_left = 323.0
-offset_top = 56.0
-offset_right = 392.0
-offset_bottom = 79.0
+[node name="InputMixRate" type="Label" parent="VBox/HBoxStatus" unique_id=417503491]
+unique_name_in_owner = true
+layout_mode = 2
 text = "Mix rate:"
 
-[node name="SampleCount" type="Label" parent="." unique_id=1004694032]
-layout_mode = 0
-offset_left = 460.0
-offset_top = 56.0
-offset_right = 542.0
-offset_bottom = 79.0
+[node name="SampleCount" type="Label" parent="VBox/HBoxStatus" unique_id=1004694032]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
 text = "N-samples"
 
-[node name="RecordButton" type="Button" parent="." unique_id=1997803786]
-layout_mode = 0
-offset_left = 25.0
-offset_top = 167.0
-offset_right = 155.0
-offset_bottom = 207.0
+[node name="HBoxRecButtons" type="HBoxContainer" parent="VBox" unique_id=987726751]
+layout_mode = 2
+
+[node name="RecordButton" type="Button" parent="VBox/HBoxRecButtons" unique_id=1997803786]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
 toggle_mode = true
 text = "Record"
 
-[node name="PlayButton" type="Button" parent="." unique_id=430925426]
-layout_mode = 0
-offset_left = 172.0
-offset_top = 167.0
-offset_right = 302.0
-offset_bottom = 207.0
-disabled = true
-text = "Play"
+[node name="RecInfo" type="Label" parent="VBox/HBoxRecButtons" unique_id=183390875]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "--rec--"
+horizontal_alignment = 1
 
-[node name="PlayMusic" type="Button" parent="." unique_id=716725008]
-layout_mode = 0
-offset_left = 328.0
-offset_top = 167.0
-offset_right = 458.0
-offset_bottom = 207.0
+[node name="HBoxPlayButtons" type="HBoxContainer" parent="VBox" unique_id=1318889800]
+layout_mode = 2
+
+[node name="PlayRecording" type="Button" parent="VBox/HBoxPlayButtons" unique_id=430925426]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+disabled = true
+text = "Play Recording"
+
+[node name="PlayMusic" type="Button" parent="VBox/HBoxPlayButtons" unique_id=716725008]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
 toggle_mode = true
 text = "Play Music"
 
-[node name="MicTexture" type="ColorRect" parent="." unique_id=412364813]
+[node name="OptionTone" type="OptionButton" parent="VBox/HBoxPlayButtons" unique_id=43721618]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 5
+popup/item_0/text = "No tone"
+popup/item_0/id = 0
+popup/item_1/text = "200Hz"
+popup/item_1/id = 1
+popup/item_2/text = "400Hz"
+popup/item_2/id = 2
+popup/item_3/text = "1000Hz"
+popup/item_3/id = 3
+popup/item_4/text = "2000Hz"
+popup/item_4/id = 4
+
+[node name="HSeparator1" type="HSeparator" parent="VBox" unique_id=171383225]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="DeviceSelection" type="GridContainer" parent="VBox" unique_id=879816534]
+layout_mode = 2
+columns = 2
+
+[node name="LabelInputDevice" type="Label" parent="VBox/DeviceSelection" unique_id=683866696]
+layout_mode = 2
+text = "Input device:"
+
+[node name="OptionInput" type="OptionButton" parent="VBox/DeviceSelection" unique_id=473635666]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelOutputDevice" type="Label" parent="VBox/DeviceSelection" unique_id=1543718504]
+layout_mode = 2
+text = "Output device:"
+
+[node name="OptionOutput" type="OptionButton" parent="VBox/DeviceSelection" unique_id=788462783]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="VBox" unique_id=101084193]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HBoxMicOut" type="HBoxContainer" parent="VBox" unique_id=738487281]
+layout_mode = 2
+
+[node name="MicToGenerator" type="Button" parent="VBox/HBoxMicOut" unique_id=87946539]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+text = "Stream mic to output"
+
+[node name="VSeparator" type="VSeparator" parent="VBox/HBoxMicOut" unique_id=925089322]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="LagLabel" type="Label" parent="VBox/HBoxMicOut" unique_id=1502376535]
+layout_mode = 2
+text = "Playback Lag:"
+
+[node name="PlaybackLag" type="SpinBox" parent="VBox/HBoxMicOut" unique_id=1441911692]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+max_value = 5.0
+step = 0.1
+value = 1.0
+suffix = "Seconds"
+
+[node name="HSeparator3" type="HSeparator" parent="VBox" unique_id=42205186]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="MicTexture" type="ColorRect" parent="VBox" unique_id=412364813]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_m4htd")
-layout_mode = 0
-offset_left = 25.0
-offset_top = 223.0
-offset_right = 553.0
-offset_bottom = 312.0
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
 
 [node name="SaveButton" type="Button" parent="." unique_id=2018637404]
+unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = 31.0
 offset_top = 357.0
@@ -142,6 +234,7 @@ text = "user://record.wav"
 caret_blink = true
 
 [node name="OpenUserFolderButton" type="Button" parent="." unique_id=1455287259]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 offset_left = 33.0
@@ -150,64 +243,14 @@ offset_right = 196.0
 offset_bottom = 451.0
 text = "Open User Folder"
 
-[node name="OptionTone" type="OptionButton" parent="." unique_id=43721618]
-layout_mode = 0
-offset_left = 479.0
-offset_top = 171.0
-offset_right = 573.0
-offset_bottom = 202.0
-selected = 0
-item_count = 5
-popup/item_0/text = "No tone"
-popup/item_0/id = 0
-popup/item_1/text = "200Hz"
-popup/item_1/id = 1
-popup/item_2/text = "400Hz"
-popup/item_2/id = 2
-popup/item_3/text = "1000Hz"
-popup/item_3/id = 3
-popup/item_4/text = "2000Hz"
-popup/item_4/id = 4
-
-[node name="LabelInputDevice" type="Label" parent="." unique_id=683866696]
-layout_mode = 1
-anchors_preset = -1
-anchor_bottom = 0.5
-offset_left = 16.0
-offset_top = 85.0
-offset_right = 135.392
-offset_bottom = -112.714
-text = "Input device:"
-
-[node name="OptionInput" type="OptionButton" parent="." unique_id=473635666]
-layout_mode = 0
-offset_left = 137.0
-offset_top = 88.0
-offset_right = 169.0
-offset_bottom = 108.0
-
-[node name="LabelOutputDevice" type="Label" parent="." unique_id=1543718504]
-layout_mode = 0
-offset_left = 17.0
-offset_top = 120.0
-offset_right = 57.0
-offset_bottom = 143.0
-text = "Output device:"
-
-[node name="OptionOutput" type="OptionButton" parent="." unique_id=788462783]
-layout_mode = 0
-offset_left = 144.0
-offset_top = 122.0
-offset_right = 176.0
-offset_bottom = 142.0
-
-[connection signal="toggled" from="MicrophoneOn" to="." method="_on_microphone_on_toggled"]
-[connection signal="toggled" from="MicToGenerator" to="." method="_on_mic_to_generator_toggled"]
-[connection signal="toggled" from="RecordButton" to="." method="_on_record_button_toggled"]
-[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="toggled" from="PlayMusic" to="." method="_on_play_music_toggled"]
+[connection signal="finished" from="AudioWav" to="." method="_on_audio_wav_finished"]
+[connection signal="toggled" from="VBox/HBoxStatus/MicrophoneOn" to="." method="_on_microphone_on_toggled" flags=18]
+[connection signal="toggled" from="VBox/HBoxRecButtons/RecordButton" to="." method="_on_record_button_toggled"]
+[connection signal="pressed" from="VBox/HBoxPlayButtons/PlayRecording" to="." method="_on_play_recording_pressed"]
+[connection signal="toggled" from="VBox/HBoxPlayButtons/PlayMusic" to="." method="_on_play_music_toggled" flags=18]
+[connection signal="item_selected" from="VBox/HBoxPlayButtons/OptionTone" to="." method="_on_option_tone_item_selected"]
+[connection signal="item_selected" from="VBox/DeviceSelection/OptionInput" to="." method="_on_option_input_item_selected"]
+[connection signal="item_selected" from="VBox/DeviceSelection/OptionOutput" to="." method="_on_option_output_item_selected"]
+[connection signal="toggled" from="VBox/HBoxMicOut/MicToGenerator" to="." method="_on_mic_to_generator_toggled"]
 [connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="OpenUserFolderButton" to="." method="_on_open_user_folder_button_pressed"]
-[connection signal="item_selected" from="OptionTone" to="." method="_on_option_tone_item_selected"]
-[connection signal="item_selected" from="OptionInput" to="." method="_on_option_input_item_selected"]
-[connection signal="item_selected" from="OptionOutput" to="." method="_on_option_output_item_selected"]
