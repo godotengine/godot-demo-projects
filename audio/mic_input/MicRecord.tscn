@@ -74,7 +74,7 @@ layout_mode = 2
 
 [node name="MicrophoneOn" type="Button" parent="VBox/HBoxStatus" unique_id=836407667]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(140, 40)
+custom_minimum_size = Vector2(170, 40)
 layout_mode = 2
 theme_override_styles/pressed = SubResource("StyleBoxFlat_tfvr1")
 toggle_mode = true
@@ -103,7 +103,7 @@ layout_mode = 2
 
 [node name="RecordButton" type="Button" parent="VBox/HBoxRecButtons" unique_id=1997803786]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(140, 40)
+custom_minimum_size = Vector2(170, 40)
 layout_mode = 2
 toggle_mode = true
 text = "Record"
@@ -120,10 +120,10 @@ layout_mode = 2
 
 [node name="PlayRecording" type="Button" parent="VBox/HBoxPlayButtons" unique_id=430925426]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(140, 40)
+custom_minimum_size = Vector2(170, 40)
 layout_mode = 2
 disabled = true
-text = "Play Recording"
+text = "Play Wav Recording"
 
 [node name="PlayMusic" type="Button" parent="VBox/HBoxPlayButtons" unique_id=716725008]
 custom_minimum_size = Vector2(120, 0)
@@ -147,6 +147,28 @@ popup/item_3/text = "1000Hz"
 popup/item_3/id = 3
 popup/item_4/text = "2000Hz"
 popup/item_4/id = 4
+
+[node name="HBoxWavSave" type="HBoxContainer" parent="VBox" unique_id=1761125603]
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="VBox/HBoxWavSave" unique_id=2018637404]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 40)
+layout_mode = 2
+disabled = true
+toggle_mode = true
+text = "Save WAV To:"
+
+[node name="OpenUserFolderButton" type="Button" parent="VBox/HBoxWavSave" unique_id=1455287259]
+layout_mode = 2
+text = "Open User Folder"
+
+[node name="WavFilename" type="LineEdit" parent="VBox/HBoxWavSave" unique_id=430717980]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "user://record.wav"
+caret_blink = true
 
 [node name="HSeparator1" type="HSeparator" parent="VBox" unique_id=171383225]
 custom_minimum_size = Vector2(0, 20)
@@ -184,7 +206,13 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
-text = "Stream mic to output"
+text = "Stream out"
+
+[node name="RecordingToGenerator" type="Button" parent="VBox/HBoxMicOut" unique_id=1745907019]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+text = "Use recording"
 
 [node name="VSeparator" type="VSeparator" parent="VBox/HBoxMicOut" unique_id=925089322]
 custom_minimum_size = Vector2(10, 0)
@@ -192,16 +220,20 @@ layout_mode = 2
 
 [node name="LagLabel" type="Label" parent="VBox/HBoxMicOut" unique_id=1502376535]
 layout_mode = 2
-text = "Playback Lag:"
+text = "Target Lag (seconds):"
 
 [node name="PlaybackLag" type="SpinBox" parent="VBox/HBoxMicOut" unique_id=1441911692]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 max_value = 5.0
 step = 0.1
 value = 1.0
-suffix = "Seconds"
+suffix = "s"
+
+[node name="RealLagLabel" type="Label" parent="VBox/HBoxMicOut" unique_id=461137212]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Real lag:"
 
 [node name="HSeparator3" type="HSeparator" parent="VBox" unique_id=42205186]
 custom_minimum_size = Vector2(0, 20)
@@ -213,44 +245,14 @@ material = SubResource("ShaderMaterial_m4htd")
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
-[node name="SaveButton" type="Button" parent="." unique_id=2018637404]
-unique_name_in_owner = true
-visible = false
-layout_mode = 0
-offset_left = 31.0
-offset_top = 357.0
-offset_right = 161.0
-offset_bottom = 397.0
-disabled = true
-toggle_mode = true
-text = "Save WAV To:"
-
-[node name="Filename" type="LineEdit" parent="SaveButton" unique_id=430717980]
-layout_mode = 0
-offset_left = 150.0
-offset_right = 477.0
-offset_bottom = 40.0
-text = "user://record.wav"
-caret_blink = true
-
-[node name="OpenUserFolderButton" type="Button" parent="." unique_id=1455287259]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-offset_left = 33.0
-offset_top = 411.0
-offset_right = 196.0
-offset_bottom = 451.0
-text = "Open User Folder"
-
 [connection signal="finished" from="AudioWav" to="." method="_on_audio_wav_finished"]
 [connection signal="toggled" from="VBox/HBoxStatus/MicrophoneOn" to="." method="_on_microphone_on_toggled" flags=18]
 [connection signal="toggled" from="VBox/HBoxRecButtons/RecordButton" to="." method="_on_record_button_toggled"]
 [connection signal="pressed" from="VBox/HBoxPlayButtons/PlayRecording" to="." method="_on_play_recording_pressed"]
 [connection signal="toggled" from="VBox/HBoxPlayButtons/PlayMusic" to="." method="_on_play_music_toggled" flags=18]
 [connection signal="item_selected" from="VBox/HBoxPlayButtons/OptionTone" to="." method="_on_option_tone_item_selected"]
+[connection signal="pressed" from="VBox/HBoxWavSave/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="VBox/HBoxWavSave/OpenUserFolderButton" to="." method="_on_open_user_folder_button_pressed"]
 [connection signal="item_selected" from="VBox/DeviceSelection/OptionInput" to="." method="_on_option_input_item_selected"]
 [connection signal="item_selected" from="VBox/DeviceSelection/OptionOutput" to="." method="_on_option_output_item_selected"]
 [connection signal="toggled" from="VBox/HBoxMicOut/MicToGenerator" to="." method="_on_mic_to_generator_toggled"]
-[connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
-[connection signal="pressed" from="OpenUserFolderButton" to="." method="_on_open_user_folder_button_pressed"]
