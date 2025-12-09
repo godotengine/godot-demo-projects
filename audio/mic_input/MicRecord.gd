@@ -142,7 +142,7 @@ func _process(delta: float) -> void:
 
 func adjust_feedback_speed():
 	var target_time_lag: float = %PlaybackLag.value - AudioServer.get_time_to_next_mix()
-	var buffer_time_lag: float = (guessed_generator_feedback_buffer_frames - $AudioGeneratorFeedback.get_stream_playback().get_frames_available())*1.0/$AudioGeneratorFeedback.stream.mix_rate
+	var buffer_time_lag: float = (guessed_generator_feedback_buffer_frames - $AudioGeneratorFeedback.get_stream_playback().get_frames_available()) * 1.0 /$AudioGeneratorFeedback.stream.mix_rate
 	%RealLagLabel.text = "Real lag: %.2f" % (buffer_time_lag + AudioServer.get_time_to_next_mix())
 	var buffer_time_mismatch = buffer_time_lag - target_time_lag
 	if $AudioGeneratorFeedback.stream_paused:
