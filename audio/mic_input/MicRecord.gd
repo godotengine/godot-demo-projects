@@ -167,7 +167,7 @@ func adjust_feedback_speed():
 
 func _on_record_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		recording_buffer = [ ]
+		recording_buffer = []
 		recording_start_time = Time.get_ticks_msec() * 0.001
 		%RecordButton.text = "Stop"
 		%Status.text = "Status: Recording..."
