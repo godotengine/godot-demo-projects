@@ -96,7 +96,7 @@ func on_microphone_input_start() -> void:
 	guessed_generator_feedback_buffer_frames = nearest_po2(int(input_mix_rate * $AudioGeneratorFeedback.stream.buffer_length))
 	print("guessed_generator_feedback_buffer_frames ", guessed_generator_feedback_buffer_frames)
 	
-	var blank_image: PackedVector2Array = PackedVector2Array()
+	var blank_image: PackedVector2Array
 	blank_image.resize(audio_sample_size)
 	audio_sample_image = Image.create_from_data(audio_sample_size, 1, false, Image.FORMAT_RGF, blank_image.to_byte_array())
 	audio_sample_texture = ImageTexture.create_from_image(audio_sample_image)
@@ -121,7 +121,7 @@ func _process(delta: float) -> void:
 			audio_sample_texture.update(audio_sample_image)
 			if recording_buffer != null and len(recording_buffer) < max_recording_buffer_size:
 				recording_time = Time.get_ticks_msec() * 0.001 - recording_start_time
-				var nframes = len(recording_buffer)*audio_sample_size
+				var nframes = len(recording_buffer) * audio_sample_size
 				recording_buffer.append(audio_samples)
 				%RecInfo.text = "Frames: %d  Time: %.3f Frames/sec: %.0f" % [nframes, recording_time, nframes / recording_time]
 
@@ -182,7 +182,7 @@ func _on_record_button_toggled(toggled_on: bool) -> void:
 		%PlayRecording.disabled = false
 
 func buffer_to_wav(buffer: Variant) -> AudioStreamWAV:
-	var recording_data: PackedByteArray = PackedByteArray()
+	var recording_data: PackedByteArray
 	var data_size: int = 4 * audio_sample_size * len(buffer)
 	recording_data.resize(44 + data_size)
 	recording_data.encode_u32(0, 0x46464952) # RIFF
@@ -207,7 +207,7 @@ func buffer_to_wav(buffer: Variant) -> AudioStreamWAV:
 	return AudioStreamWAV.load_from_buffer(recording_data)
 
 func _on_play_recording_pressed() -> void:
-	assert (previous_recording != null)
+	assert(previous_recording != null)
 	if $AudioWav.stream == null:
 		$AudioWav.stream = buffer_to_wav(previous_recording)
 		$AudioWav.stream.mix_rate = input_mix_rate
@@ -228,7 +228,7 @@ func _on_play_music_toggled(toggled_on: bool, source_button: Variant) -> void:
 
 func _on_save_button_pressed() -> void:
 	var save_path: String = %WavFilename.text
-	assert (previous_recording != null)
+	assert(previous_recording != null)
 	if $AudioWav.stream == null:
 		$AudioWav.stream = buffer_to_wav(previous_recording)
 	$AudioWav.stream.save_to_wav(save_path)
