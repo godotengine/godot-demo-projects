@@ -44,6 +44,7 @@ func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout
 	%MicrophoneOn.button_pressed = true
 
+
 func _on_option_input_item_selected(index: int) -> void:
 	var input_device: String = %OptionInput.get_item_text(index)
 	print("Set input device: ", input_device)
