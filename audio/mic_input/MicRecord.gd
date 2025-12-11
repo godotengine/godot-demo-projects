@@ -1,16 +1,14 @@
 extends Control
 
-@onready var input_mix_rate: int = AudioServer.get_input_mix_rate()
+@onready var input_mix_rate: int = int(AudioServer.get_input_mix_rate())
 var audio_chunk_time: float = 0.02
 @onready var audio_sample_size: int = int(input_mix_rate * audio_chunk_time + 0.5)
 
 var recording_start_time: float = 0.0
 var recording_buffer: Variant = null
 var recording_time: float = 0.0
-@onready var max_recording_buffer_size: int = int(10 / audio_chunk_time)
-
-var previous_recording: Variant = null
-var previous_recording_index: int = 0
+var recording_index: int = 0
+const max_recording_time: float = 10.0
 
 var microphone_active: bool = false
 
@@ -85,9 +83,8 @@ func _on_microphone_on_toggled(toggled_on: bool, source_button: Variant) -> void
 	%OptionInput.disabled = microphone_active
 
 func on_microphone_input_start() -> void:
-	input_mix_rate = AudioServer.get_input_mix_rate()
+	input_mix_rate = int(AudioServer.get_input_mix_rate())
 	audio_sample_size = int(input_mix_rate * audio_chunk_time + 0.5)
-	max_recording_buffer_size = int(10 / audio_chunk_time)
 	print("Input mix rate: ", input_mix_rate)
 	print("Sample size: ", audio_sample_size)
 	%InputMixRate.text = "Mix rate: %d" % input_mix_rate
@@ -113,25 +110,31 @@ func _process_tone_generator() -> void:
 		gplayback.push_frame(Vector2(a, a))
 		generator_timestamp += gdt
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	while AudioServer.get_input_frames_available() >= audio_sample_size:
 		var audio_samples: PackedVector2Array = AudioServer.get_input_frames(audio_sample_size)
-		if audio_samples:
-			audio_sample_image.set_data(audio_sample_size, 1, false, Image.FORMAT_RGF, audio_samples.to_byte_array())
-			audio_sample_texture.update(audio_sample_image)
-			if recording_buffer != null and len(recording_buffer) < max_recording_buffer_size:
-				recording_time = Time.get_ticks_msec() * 0.001 - recording_start_time
-				var nframes = len(recording_buffer) * audio_sample_size
-				recording_buffer.append(audio_samples)
-				%RecInfo.text = "Frames: %d  Time: %.3f Frames/sec: %.0f" % [nframes, recording_time, nframes / recording_time]
+		if not audio_samples:
+			break
 
-			if %MicToGenerator.button_pressed:
-				if %RecordingToGenerator.button_pressed:
-					audio_samples = previous_recording[previous_recording_index]
-					previous_recording_index += 1
-					if previous_recording_index == len(previous_recording):
-						previous_recording_index = 0
-				$AudioGeneratorFeedback.get_stream_playback().push_buffer(audio_samples)
+		if %RecordingLoop.button_pressed and recording_buffer:
+			audio_samples = recording_buffer[recording_index]
+			recording_index += 1
+			if recording_index == len(recording_buffer):
+				recording_index = 0
+
+		audio_sample_image.set_data(audio_sample_size, 1, false, Image.FORMAT_RGF, audio_samples.to_byte_array())
+		audio_sample_texture.update(audio_sample_image)
+
+		if %RecordButton.button_pressed:
+			recording_time = Time.get_ticks_msec() * 0.001 - recording_start_time
+			var nframes: int = len(recording_buffer) * audio_sample_size
+			recording_buffer.append(audio_samples)
+			%RecInfo.text = "Frames: %d  Time: %.3f Frames/sec: %.0f" % [nframes, recording_time, nframes / recording_time]
+			if recording_time > 10.0:
+				%RecordButton.button_pressed = false
+
+		if %MicToGenerator.button_pressed:
+			$AudioGeneratorFeedback.get_stream_playback().push_buffer(audio_samples)
 
 	if %MicToGenerator.button_pressed:
 		if microphone_active:
@@ -140,11 +143,11 @@ func _process(delta: float) -> void:
 	if generator_freq != 0.0 and $AudioGeneratorTone.playing:
 		_process_tone_generator()
 
-func adjust_feedback_speed():
+func adjust_feedback_speed() -> void:
 	var target_time_lag: float = %PlaybackLag.value - AudioServer.get_time_to_next_mix()
 	var buffer_time_lag: float = (guessed_generator_feedback_buffer_frames - $AudioGeneratorFeedback.get_stream_playback().get_frames_available()) * 1.0 /$AudioGeneratorFeedback.stream.mix_rate
 	%RealLagLabel.text = "Real lag: %.2f" % (buffer_time_lag + AudioServer.get_time_to_next_mix())
-	var buffer_time_mismatch = buffer_time_lag - target_time_lag
+	var buffer_time_mismatch: float = buffer_time_lag - target_time_lag
 	if $AudioGeneratorFeedback.stream_paused:
 		if buffer_time_mismatch > 0.0:
 			print("Unpausing stream at target mismatch: ", buffer_time_mismatch)
@@ -169,17 +172,17 @@ func _on_record_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		recording_buffer = []
 		recording_start_time = Time.get_ticks_msec() * 0.001
+		%RecordingLoop.disabled = true
 		%RecordButton.text = "Stop"
 		%Status.text = "Status: Recording..."
 	else:
-		previous_recording = recording_buffer
-		previous_recording_index = 0
-		recording_buffer = null
+		recording_index = 0
 		$AudioWav.stream = null
 		%RecordButton.text = "Record"
 		%Status.text = ""
 		%SaveButton.disabled = false
 		%PlayRecording.disabled = false
+		%RecordingLoop.disabled = false
 
 func buffer_to_wav(buffer: Variant) -> AudioStreamWAV:
 	var recording_data: PackedByteArray
@@ -207,9 +210,9 @@ func buffer_to_wav(buffer: Variant) -> AudioStreamWAV:
 	return AudioStreamWAV.load_from_buffer(recording_data)
 
 func _on_play_recording_pressed() -> void:
-	assert(previous_recording != null)
+	assert(recording_buffer != null)
 	if $AudioWav.stream == null:
-		$AudioWav.stream = buffer_to_wav(previous_recording)
+		$AudioWav.stream = buffer_to_wav(recording_buffer)
 		$AudioWav.stream.mix_rate = input_mix_rate
 	$AudioWav.seek(0.0)
 	$AudioWav.play()
@@ -228,9 +231,9 @@ func _on_play_music_toggled(toggled_on: bool, source_button: Variant) -> void:
 
 func _on_save_button_pressed() -> void:
 	var save_path: String = %WavFilename.text
-	assert(previous_recording != null)
+	assert(recording_buffer != null)
 	if $AudioWav.stream == null:
-		$AudioWav.stream = buffer_to_wav(previous_recording)
+		$AudioWav.stream = buffer_to_wav(recording_buffer)
 	$AudioWav.stream.save_to_wav(save_path)
 	%Status.text = "Status: Saved WAV file to: %s\n(%s)" % [save_path, ProjectSettings.globalize_path(save_path)]
 
@@ -247,3 +250,6 @@ func _on_option_tone_item_selected(index: int) -> void:
 	else:
 		$AudioGeneratorTone.playing = false
 		generator_freq = 0.0
+
+func _on_recording_loop_toggled(toggled_on: bool) -> void:
+	%RecordButton.disabled = toggled_on
