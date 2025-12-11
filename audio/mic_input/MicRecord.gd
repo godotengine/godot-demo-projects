@@ -33,7 +33,7 @@ func _ready() -> void:
 	print("Project mix rate: ", ProjectSettings.get(&"audio/driver/mix_rate"))
 
 	if not AudioServer.has_method("get_input_frames"):
-		%Status.text = "**** Error: requires https://github.com/godotengine/godot/pull/113288 to work" 
+		%Status.text = "**** Error: requires https://github.com/godotengine/godot/pull/113288 to work"
 		print(%Status.text)
 		set_process(false)
 		$MicrophoneOn.disabled = true
@@ -92,7 +92,7 @@ func on_microphone_input_start() -> void:
 	$AudioGeneratorFeedback.stream.mix_rate = input_mix_rate
 	guessed_generator_feedback_buffer_frames = nearest_po2(int(input_mix_rate * $AudioGeneratorFeedback.stream.buffer_length))
 	print("guessed_generator_feedback_buffer_frames ", guessed_generator_feedback_buffer_frames)
-	
+
 	var blank_image: PackedVector2Array
 	blank_image.resize(audio_sample_size)
 	audio_sample_image = Image.create_from_data(audio_sample_size, 1, false, Image.FORMAT_RGF, blank_image.to_byte_array())
@@ -240,7 +240,7 @@ func _on_save_button_pressed() -> void:
 func _on_open_user_folder_button_pressed() -> void:
 	OS.shell_open(ProjectSettings.globalize_path("user://"))
 
-# A chunk size of 20ms is will be 8 wavelengths at 400Hz per chunk, 
+# A chunk size of 20ms is will be 8 wavelengths at 400Hz per chunk,
 # where the wavelength will be 343/400=0.8575m long.
 # Use this to plot the response of a stereo microphone.
 func _on_option_tone_item_selected(index: int) -> void:
