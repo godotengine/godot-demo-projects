@@ -21,4 +21,4 @@ Renderer: Compatibility
 Version: 4.6
 
 ## Screenshots
-<img width="639" height="500" alt="image" src="https://github.com/user-attachments/assets/e42ba103-8d0b-4955-8616-7205b59c5bdc" />
+<img width="630" height="512" alt="image" src="https://github.com/user-attachments/assets/6d0b4b2d-f28f-4ece-b3e5-1a42dc22d3b6" />
