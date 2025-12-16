@@ -12,57 +12,46 @@ shader_parameter/max_value = 10.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_7mycd"]
 
-[node name="ColourSweep" type="Control" unique_id=2134909220]
+[node name="ColorSweep" type="Control" unique_id=200515732]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_3qbqk")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1892849244]
-layout_mode = 0
-offset_left = 56.0
-offset_right = 1656.0
-offset_bottom = 991.0
-color = Color(0, 0, 0, 1)
-
-[node name="ColourSweepMesh" type="MeshInstance2D" parent="." unique_id=1587826267]
+[node name="ColourSweepMesh" type="MeshInstance2D" parent="." unique_id=1746056040]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_lquwl")
-position = Vector2(858.5, 512.5)
-scale = Vector2(1581, -947.00006)
+position = Vector2(415.99994, 302.99997)
+scale = Vector2(825.9999, -528)
 mesh = SubResource("QuadMesh_7mycd")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=948674504]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1791570623]
 layout_mode = 0
-offset_left = 68.0
 offset_top = 2.0
-offset_right = 1649.0
+offset_right = 832.0
 offset_bottom = 42.0
 alignment = 1
 
-[node name="Label" type="Label" parent="HBoxContainer" unique_id=534456178]
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=2032977299]
 layout_mode = 2
 text = "Min"
 
-[node name="MinHSlider" type="HSlider" parent="HBoxContainer" unique_id=795968557]
+[node name="MinHSlider" type="HSlider" parent="HBoxContainer" unique_id=978620449]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(315, 0)
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_vertical = 4
 min_value = -25.0
 max_value = 10.0
 step = 0.05000000000291038
-value = -17.999999999592543
+value = -13.999999999359712
 
-[node name="MinExposureLabel" type="Label" parent="HBoxContainer" unique_id=2008168738]
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="HBoxContainer" unique_id=491357772]
+[node name="Label2" type="Label" parent="HBoxContainer" unique_id=1688519211]
 layout_mode = 2
 text = "Max"
 
-[node name="MaxHSlider" type="HSlider" parent="HBoxContainer" unique_id=765134496]
+[node name="MaxHSlider" type="HSlider" parent="HBoxContainer" unique_id=350756504]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(315, 0)
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_vertical = 4
 min_value = -25.0
@@ -70,26 +59,23 @@ max_value = 10.0
 step = 0.05000000000291038
 value = 5.0000000017462405
 
-[node name="MinExposureLabel2" type="Label" parent="HBoxContainer" unique_id=1759171217]
-layout_mode = 2
-
-[node name="SweepMinLabel" type="Label" parent="." unique_id=1632347738]
+[node name="SweepMinLabel" type="Label" parent="." unique_id=1244247873]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 68.0
+offset_left = 2.0
 offset_top = 10.0
-offset_right = 365.0
+offset_right = 299.0
 offset_bottom = 33.0
-text = "-18.00 (linear 0.00000, 0 nits)"
+text = "-14.00 (0.000, 0.01 nits)"
 
-[node name="SweepMaxLabel" type="Label" parent="." unique_id=1457927625]
+[node name="SweepMaxLabel" type="Label" parent="." unique_id=1251600106]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 1325.0
+offset_left = 506.0
 offset_top = 10.0
-offset_right = 1649.0
+offset_right = 830.0
 offset_bottom = 33.0
-text = "+5.00 (linear 32.00000, 13824 nits)"
+text = "+5.00 (32.00, 13824 nits)"
 horizontal_alignment = 2
 
 [connection signal="value_changed" from="HBoxContainer/MinHSlider" to="." method="_on_min_h_slider_value_changed"]

@@ -230,9 +230,9 @@ layout_mode = 0
 offset_left = 327.0
 offset_right = 624.0
 offset_bottom = 75.0
-text = "DisplayServer Supports HDR: true
-RenderingDevice Supports HDR: true
-Window Supports HDR: true"
+text = "DisplayServer supports HDR: true
+RenderingDevice supports HDR: true
+Window supports HDR: true"
 script = ExtResource("8_5vw27")
 
 [node name="BlackWhiteMax" type="Control" parent="." unique_id=1868827823]
@@ -322,11 +322,15 @@ text = "1.00"
 horizontal_alignment = 1
 script = ExtResource("5_dg77c")
 
-[node name="ColourSweep" parent="." unique_id=2134909220 instance=ExtResource("6_7mycd")]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1892849244]
 layout_mode = 0
-offset_left = 273.0
-offset_top = 86.0
-offset_right = 273.0
-offset_bottom = 86.0
+offset_left = 320.0
+offset_top = 78.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorSweep" parent="ColorRect" unique_id=200515732 instance=ExtResource("6_7mycd")]
+layout_mode = 0
 
 [connection signal="pressed" from="VBoxContainer/ColorRect2/DeveloperSettings/Button" to="VBoxContainer/ColorRect/InGameHDRSettings" method="erase_settings"]
