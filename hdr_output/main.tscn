@@ -7,6 +7,9 @@
 [ext_resource type="Script" uid="uid://cpqmte6usoyyg" path="res://main/debug_info.gd" id="8_5vw27"]
 [ext_resource type="Script" uid="uid://dxtpfowo3fjm4" path="res://max_colour.gd" id="13_ycdy4"]
 
+[sub_resource type="SystemFont" id="SystemFont_7mycd"]
+font_names = PackedStringArray("Monospace")
+
 [node name="Control" type="Control" unique_id=1546781181]
 layout_mode = 3
 anchors_preset = 15
@@ -324,13 +327,51 @@ script = ExtResource("5_dg77c")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1892849244]
 layout_mode = 0
-offset_left = 320.0
+offset_left = 324.0
 offset_top = 78.0
 offset_right = 1152.0
 offset_bottom = 648.0
-color = Color(0, 0, 0, 1)
+color = Color(0.21568628, 0.21568628, 0.21568628, 1)
 
-[node name="ColorSweep" parent="ColorRect" unique_id=200515732 instance=ExtResource("6_7mycd")]
+[node name="Tab" type="ColorRect" parent="ColorRect" unique_id=261230258]
+layout_mode = 0
+offset_left = 596.0
+offset_top = -78.0
+offset_right = 828.0
+color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect" unique_id=660978631]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 35.0
+offset_right = 764.0
+offset_bottom = 535.0
+focus_mode = 2
+theme_override_fonts/mono_font = SubResource("SystemFont_7mycd")
+bbcode_enabled = true
+text = "[font_size=20]Steps to enable HDR output in your project:[/font_size]
+
+1) Ensure all Environment resources do [i]not[/i] use:
+	- Tonemap Mode: Filmic or ACES
+	- Glow Blend Mode: Soft Light
+	- Adjustments: Color Correction
+
+2) Configure [code]rendering/rendering_device/driver[/code] to the following:
+	- macos: metal
+	- ios: metal
+	- windows: d3d12
+
+3) Turn on [code]rendering/viewport/hdr_2d[/code] and also turn on Use HDR 2D of all Subviewport and Windows that should support HDR output.
+
+4) Turn on [code]display/window/hdr/request_hdr_output[/code] and also turn on HDR Output Requested of any other Windows that should support HDR output.
+
+5) Optional: provide in-game player settings to adjust HDR brightness and maximum luminance by copying [code]in_game_hdr_settings[/code] from this demo into your project."
+context_menu_enabled = true
+selection_enabled = true
+drag_and_drop_selection_enabled = false
+
+[node name="ColorSweep" parent="ColorRect" unique_id=784950953 instance=ExtResource("6_7mycd")]
+visible = false
 layout_mode = 0
 
 [connection signal="pressed" from="VBoxContainer/ColorRect2/DeveloperSettings/Button" to="VBoxContainer/ColorRect/InGameHDRSettings" method="erase_settings"]
