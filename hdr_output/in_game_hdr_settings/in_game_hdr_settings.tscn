@@ -1,0 +1,110 @@
+[gd_scene load_steps=2 format=3 uid="uid://jnc4cr2mhg00"]
+
+[ext_resource type="Script" uid="uid://dhrj6aw08a5o0" path="res://in_game_hdr_settings/in_game_hdr_settings.gd" id="1_4pceo"]
+
+[node name="InGameHDRSettings" type="VBoxContainer"]
+offset_right = 377.0
+offset_bottom = 225.0
+script = ExtResource("1_4pceo")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Player-facing in-game settings:"
+
+[node name="HDRCheckButton" type="CheckButton" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "HDR"
+
+[node name="HDROptions" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="HDROptions"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HDROptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HDROptions/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="HDROptions/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Brightness"
+
+[node name="BrightnessLabel" type="Label" parent="HDROptions/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "200"
+horizontal_alignment = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HDROptions/VBoxContainer"]
+layout_mode = 2
+
+[node name="BrightnessSlider" type="HSlider" parent="HDROptions/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 10.0
+max_value = 1000.0
+step = 10.0
+value = 200.0
+rounded = true
+
+[node name="ResetBrightness" type="Button" parent="HDROptions/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reset"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HDROptions/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="HDROptions/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Max luminance"
+
+[node name="MaxLumLabel" type="Label" parent="HDROptions/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1000"
+horizontal_alignment = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="HDROptions/VBoxContainer"]
+layout_mode = 2
+
+[node name="MaxLumSlider" type="HSlider" parent="HDROptions/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 200.0
+max_value = 2000.0
+step = 10.0
+value = 1000.0
+rounded = true
+
+[node name="ResetMaxLum" type="Button" parent="HDROptions/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reset"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "Save"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="toggled" from="HDRCheckButton" to="." method="_on_hdr_check_button_toggled"]
+[connection signal="drag_started" from="HDROptions/VBoxContainer/HBoxContainer3/BrightnessSlider" to="." method="_on_brightness_slider_drag_started"]
+[connection signal="value_changed" from="HDROptions/VBoxContainer/HBoxContainer3/BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]
+[connection signal="pressed" from="HDROptions/VBoxContainer/HBoxContainer3/ResetBrightness" to="." method="_on_reset_brightness_pressed"]
+[connection signal="drag_started" from="HDROptions/VBoxContainer/HBoxContainer4/MaxLumSlider" to="." method="_on_max_lum_slider_drag_started"]
+[connection signal="value_changed" from="HDROptions/VBoxContainer/HBoxContainer4/MaxLumSlider" to="." method="_on_max_lum_slider_value_changed"]
+[connection signal="pressed" from="HDROptions/VBoxContainer/HBoxContainer4/ResetMaxLum" to="." method="_on_reset_max_lum_pressed"]
+[connection signal="pressed" from="Button" to="." method="save_settings"]

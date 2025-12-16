@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://drlb4o61s5wsk"]
+
+[ext_resource type="Script" uid="uid://cqjmg63jbxlns" path="res://color_sweep/colour_sweep.gd" id="1_3qbqk"]
+[ext_resource type="Shader" uid="uid://upgu5h4jlibh" path="res://color_sweep/colour_sweep.gdshader" id="2_hfxc4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lquwl"]
+shader = ExtResource("2_hfxc4")
+shader_parameter/log2_min = -18.0
+shader_parameter/log2_max = 5.0
+shader_parameter/clip_to_max = false
+shader_parameter/max_value = 10.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_7mycd"]
+
+[node name="ColourSweep" type="Control" unique_id=2134909220]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_3qbqk")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1892849244]
+layout_mode = 0
+offset_left = 56.0
+offset_right = 1656.0
+offset_bottom = 991.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColourSweepMesh" type="MeshInstance2D" parent="." unique_id=1587826267]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_lquwl")
+position = Vector2(858.5, 512.5)
+scale = Vector2(1581, -947.00006)
+mesh = SubResource("QuadMesh_7mycd")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=948674504]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 2.0
+offset_right = 1649.0
+offset_bottom = 42.0
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=534456178]
+layout_mode = 2
+text = "Min"
+
+[node name="MinHSlider" type="HSlider" parent="HBoxContainer" unique_id=795968557]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(315, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -25.0
+max_value = 10.0
+step = 0.05000000000291038
+value = -17.999999999592543
+
+[node name="MinExposureLabel" type="Label" parent="HBoxContainer" unique_id=2008168738]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="HBoxContainer" unique_id=491357772]
+layout_mode = 2
+text = "Max"
+
+[node name="MaxHSlider" type="HSlider" parent="HBoxContainer" unique_id=765134496]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(315, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -25.0
+max_value = 10.0
+step = 0.05000000000291038
+value = 5.0000000017462405
+
+[node name="MinExposureLabel2" type="Label" parent="HBoxContainer" unique_id=1759171217]
+layout_mode = 2
+
+[node name="SweepMinLabel" type="Label" parent="." unique_id=1632347738]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 68.0
+offset_top = 10.0
+offset_right = 365.0
+offset_bottom = 33.0
+text = "-18.00 (linear 0.00000, 0 nits)"
+
+[node name="SweepMaxLabel" type="Label" parent="." unique_id=1457927625]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1325.0
+offset_top = 10.0
+offset_right = 1649.0
+offset_bottom = 33.0
+text = "+5.00 (linear 32.00000, 13824 nits)"
+horizontal_alignment = 2
+
+[connection signal="value_changed" from="HBoxContainer/MinHSlider" to="." method="_on_min_h_slider_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/MaxHSlider" to="." method="_on_max_h_slider_value_changed"]

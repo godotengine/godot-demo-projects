@@ -1,0 +1,332 @@
+[gd_scene format=3 uid="uid://cikrx8e0qde6d"]
+
+[ext_resource type="Script" uid="uid://c74bp7pq3jbkx" path="res://main/developer_settings.gd" id="2_7mycd"]
+[ext_resource type="PackedScene" uid="uid://jnc4cr2mhg00" path="res://in_game_hdr_settings/in_game_hdr_settings.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://bclxdn8806hud" path="res://main/max_val_label.gd" id="5_dg77c"]
+[ext_resource type="PackedScene" uid="uid://drlb4o61s5wsk" path="res://color_sweep/color_sweep.tscn" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://cpqmte6usoyyg" path="res://main/debug_info.gd" id="8_5vw27"]
+[ext_resource type="Script" uid="uid://dxtpfowo3fjm4" path="res://max_colour.gd" id="13_ycdy4"]
+
+[node name="Control" type="Control" unique_id=1546781181]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2107551733]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 648.0
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer" unique_id=467859451]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.21710123, 0.21710123, 0.21710123, 1)
+
+[node name="InGameHDRSettings" parent="VBoxContainer/ColorRect" unique_id=1002679391 instance=ExtResource("3_h2yge")]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 7.0
+offset_right = 315.0
+offset_bottom = 233.0
+
+[node name="ColorRect2" type="ColorRect" parent="VBoxContainer" unique_id=1685998796]
+custom_minimum_size = Vector2(0, 398)
+layout_mode = 2
+color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+
+[node name="DeveloperSettings" type="VBoxContainer" parent="VBoxContainer/ColorRect2" unique_id=763217887]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 8.0
+offset_right = 315.0
+offset_bottom = 374.0
+script = ExtResource("2_7mycd")
+
+[node name="Label" type="Label" parent="VBoxContainer/ColorRect2/DeveloperSettings" unique_id=2123018716]
+layout_mode = 2
+text = "Developer settings:"
+
+[node name="Button" type="Button" parent="VBoxContainer/ColorRect2/DeveloperSettings" unique_id=1727096126]
+layout_mode = 2
+text = "Erase player settings"
+
+[node name="Label3" type="Label" parent="VBoxContainer/ColorRect2/DeveloperSettings" unique_id=182639080]
+layout_mode = 2
+text = "Reference monitor calibration:"
+
+[node name="Control" type="Control" parent="VBoxContainer/ColorRect2/DeveloperSettings" unique_id=1779327274]
+custom_minimum_size = Vector2(0, 78)
+layout_mode = 2
+
+[node name="MaxLumAdjustBacking" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=1341568457]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 9.0
+offset_top = 4.0
+offset_right = 129.0
+offset_bottom = 74.0
+
+[node name="MaxLumAdjustBelow2" type="Polygon2D" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=144371379]
+unique_name_in_owner = true
+self_modulate = Color(0.8848981, 0.8848981, 0.8848981, 1)
+position = Vector2(40, 39)
+scale = Vector2(50, 50)
+polygon = PackedVector2Array(0, -0.5, 0.5, 0.5, -0.5, 0.5)
+
+[node name="MaxLumAdjustBelow3" type="Polygon2D" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=106732800]
+unique_name_in_owner = true
+self_modulate = Color(0.9407874, 0.9407874, 0.9407874, 1)
+position = Vector2(98, 39)
+scale = Vector2(50, 50)
+polygon = PackedVector2Array(0, -0.5, 0.5, 0.5, -0.5, 0.5)
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=443567928]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 4.0
+offset_right = 186.0
+offset_bottom = 39.0
+color = Color(1, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=1765336189]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 4.0
+offset_right = 243.0
+offset_bottom = 39.0
+pivot_offset = Vector2(44, 29)
+color = Color(0, 1, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=1445682559]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 4.0
+offset_right = 300.0
+offset_bottom = 39.0
+pivot_offset = Vector2(44, -4)
+color = Color(0, 0, 1, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=1104706596]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 39.0
+offset_right = 186.0
+offset_bottom = 74.0
+color = Color(1, 0, 0, 1)
+script = ExtResource("13_ycdy4")
+sdr_colour = Color(1, 0, 0, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=2138302032]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 39.0
+offset_right = 243.0
+offset_bottom = 74.0
+pivot_offset = Vector2(0, 29)
+color = Color(0, 1, 0, 1)
+script = ExtResource("13_ycdy4")
+sdr_colour = Color(0, 1, 0, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=1549780699]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 39.0
+offset_right = 300.0
+offset_bottom = 74.0
+pivot_offset = Vector2(0, -4)
+color = Color(0, 0, 1, 1)
+script = ExtResource("13_ycdy4")
+sdr_colour = Color(0, 0, 1, 1)
+
+[node name="Label2" type="Label" parent="VBoxContainer/ColorRect2/DeveloperSettings" unique_id=332601797]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 6
+text = "Set max luminance as high as possible while maintaining the visibility of both triangles and the hue and saturation of the three colors. Tap Reset to use the value reported by the display. Example:"
+autowrap_mode = 3
+
+[node name="Control2" type="Control" parent="VBoxContainer/ColorRect2/DeveloperSettings" unique_id=1021742490]
+custom_minimum_size = Vector2(0, 78)
+layout_mode = 2
+
+[node name="MaxLumAdjustBacking" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control2" unique_id=1125706939]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 4.0
+offset_right = 129.0
+offset_bottom = 74.0
+
+[node name="ExampleMaxLumAdjustBelow" type="Polygon2D" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control2" unique_id=1291892689]
+unique_name_in_owner = true
+self_modulate = Color(0.8848981, 0.8848981, 0.8848981, 1)
+position = Vector2(40, 39)
+scale = Vector2(50, 50)
+polygon = PackedVector2Array(0, -0.5, 0.5, 0.5, -0.5, 0.5)
+
+[node name="ExampleMaxLumAdjustBelow2" type="Polygon2D" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control2" unique_id=1861809390]
+unique_name_in_owner = true
+self_modulate = Color(0.9407874, 0.9407874, 0.9407874, 1)
+position = Vector2(98, 38.99997)
+scale = Vector2(50, 50)
+polygon = PackedVector2Array(0, -0.5, 0.5, 0.5, -0.5, 0.5)
+
+[node name="ColorRect7" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control2" unique_id=137267310]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 4.0
+offset_right = 186.0
+offset_bottom = 39.0
+color = Color(0.735357, 0, 0, 1)
+
+[node name="ColorRect8" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control2" unique_id=752449690]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 4.0
+offset_right = 243.0
+offset_bottom = 39.0
+pivot_offset = Vector2(44, 29)
+color = Color(0, 0.735357, 0, 1)
+
+[node name="ColorRect9" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control2" unique_id=167545516]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 4.0
+offset_right = 300.0
+offset_bottom = 39.0
+pivot_offset = Vector2(44, -4)
+color = Color(0, 0, 0.735357, 1)
+
+[node name="ColorRect10" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control2" unique_id=1401542410]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 39.0
+offset_right = 186.0
+offset_bottom = 74.0
+color = Color(1, 0, 0, 1)
+
+[node name="ColorRect11" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control2" unique_id=534544741]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 39.0
+offset_right = 243.0
+offset_bottom = 74.0
+pivot_offset = Vector2(44, 29)
+color = Color(0, 1, 0, 1)
+
+[node name="ColorRect12" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control2" unique_id=793779675]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 39.0
+offset_right = 300.0
+offset_bottom = 74.0
+pivot_offset = Vector2(44, -4)
+color = Color(0, 0, 1, 1)
+
+[node name="DebugInfo" type="Label" parent="." unique_id=480223336]
+layout_mode = 0
+offset_left = 327.0
+offset_right = 624.0
+offset_bottom = 75.0
+text = "DisplayServer Supports HDR: true
+RenderingDevice Supports HDR: true
+Window Supports HDR: true"
+script = ExtResource("8_5vw27")
+
+[node name="BlackWhiteMax" type="Control" parent="." unique_id=1868827823]
+custom_minimum_size = Vector2(97.615, 0)
+anchors_preset = 0
+offset_left = 643.0
+offset_top = 2.0
+offset_right = 903.0
+offset_bottom = 77.0
+
+[node name="Label" type="Label" parent="BlackWhiteMax" unique_id=1432220451]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 2.0
+offset_right = 89.0
+offset_bottom = 25.0
+text = "Black"
+horizontal_alignment = 1
+
+[node name="Black" type="ColorRect" parent="BlackWhiteMax" unique_id=255226634]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 25.0
+offset_right = 89.0
+offset_bottom = 45.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label4" type="Label" parent="BlackWhiteMax" unique_id=10137459]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 46.0
+offset_right = 89.0
+offset_bottom = 69.0
+text = "0.00"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="BlackWhiteMax" unique_id=733073890]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 2.0
+offset_right = 169.0
+offset_bottom = 25.0
+text = "White"
+horizontal_alignment = 1
+
+[node name="White" type="ColorRect" parent="BlackWhiteMax" unique_id=725348665]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 25.0
+offset_right = 169.0
+offset_bottom = 45.0
+
+[node name="Label5" type="Label" parent="BlackWhiteMax" unique_id=1454876637]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 46.0
+offset_right = 169.0
+offset_bottom = 69.0
+text = "1.00"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="BlackWhiteMax" unique_id=907524270]
+layout_mode = 0
+offset_left = 169.0
+offset_top = 2.0
+offset_right = 249.0
+offset_bottom = 25.0
+text = "Max"
+horizontal_alignment = 1
+
+[node name="Max" type="ColorRect" parent="BlackWhiteMax" unique_id=1672818577]
+layout_mode = 0
+offset_left = 169.0
+offset_top = 25.0
+offset_right = 249.0
+offset_bottom = 45.0
+script = ExtResource("13_ycdy4")
+sdr_colour = Color(1, 1, 1, 1)
+
+[node name="Label6" type="Label" parent="BlackWhiteMax" unique_id=1095042380]
+layout_mode = 0
+offset_left = 169.0
+offset_top = 46.0
+offset_right = 249.0
+offset_bottom = 69.0
+text = "1.00"
+horizontal_alignment = 1
+script = ExtResource("5_dg77c")
+
+[node name="ColourSweep" parent="." unique_id=2134909220 instance=ExtResource("6_7mycd")]
+layout_mode = 0
+offset_left = 273.0
+offset_top = 86.0
+offset_right = 273.0
+offset_bottom = 86.0
+
+[connection signal="pressed" from="VBoxContainer/ColorRect2/DeveloperSettings/Button" to="VBoxContainer/ColorRect/InGameHDRSettings" method="erase_settings"]
