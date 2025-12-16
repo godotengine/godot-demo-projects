@@ -1,0 +1,558 @@
+[gd_scene format=3 uid="uid://cikrx8e0qde6d"]
+
+[ext_resource type="Script" uid="uid://c74bp7pq3jbkx" path="res://main/developer_settings.gd" id="2_7mycd"]
+[ext_resource type="PackedScene" uid="uid://jnc4cr2mhg00" path="res://in_game_hdr_settings/in_game_hdr_settings.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://bclxdn8806hud" path="res://main/max_val_label.gd" id="5_dg77c"]
+[ext_resource type="PackedScene" uid="uid://drlb4o61s5wsk" path="res://color_sweep/color_sweep.tscn" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://fhoiawdcyegx" path="res://main/demo_scenes.gd" id="6_272bh"]
+[ext_resource type="Texture2D" uid="uid://b335ssbw6ynt6" path="res://output_max_linear_value/Super Mountain Dusk/mountain.png" id="7_5vw27"]
+[ext_resource type="Script" uid="uid://cpqmte6usoyyg" path="res://main/debug_info.gd" id="8_5vw27"]
+[ext_resource type="PackedScene" uid="uid://berd34e1fxw6d" path="res://output_max_linear_value/3d_scene.tscn" id="8_ycdy4"]
+[ext_resource type="Script" uid="uid://ow74i072fx6r" path="res://max_self_modulate.gd" id="9_4c57u"]
+[ext_resource type="Gradient" uid="uid://dmjqvtj2hbr57" path="res://output_max_linear_value/backing_gradient.tres" id="9_vivmo"]
+[ext_resource type="Script" uid="uid://bb4pv67imdsne" path="res://tonemap/subviewport_scale.gd" id="10_dg77c"]
+[ext_resource type="PackedScene" uid="uid://c0wukesav63su" path="res://tonemap/tonemap.tscn" id="11_dg77c"]
+[ext_resource type="Script" uid="uid://b6cwewu4wkvv5" path="res://setup_instructions/setup_instructions.gd" id="13_w48qg"]
+[ext_resource type="Script" uid="uid://dxtpfowo3fjm4" path="res://max_color.gd" id="13_ycdy4"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cegan"]
+gradient = ExtResource("9_vivmo")
+width = 250
+height = 100
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_w48qg"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_074og"]
+gradient = ExtResource("9_vivmo")
+width = 698
+height = 414
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_efxa6"]
+viewport_path = NodePath("DemoScenes/DemoScene_output_max_linear_value/MySubViewport")
+
+[sub_resource type="SystemFont" id="SystemFont_7mycd"]
+font_names = PackedStringArray("Monospace")
+subpixel_positioning = 0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ycdy4"]
+viewport_path = NodePath("DemoScenes/DemoScene_Tonemap/MySubViewport")
+
+[node name="Control" type="Control" unique_id=1546781181]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2107551733]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 648.0
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer" unique_id=467859451]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.21710123, 0.21710123, 0.21710123, 1)
+
+[node name="InGameHDRSettings" parent="VBoxContainer/ColorRect" unique_id=1002679391 instance=ExtResource("3_h2yge")]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 7.0
+offset_right = 315.0
+offset_bottom = 233.0
+
+[node name="ColorRect2" type="ColorRect" parent="VBoxContainer" unique_id=1685998796]
+custom_minimum_size = Vector2(0, 398)
+layout_mode = 2
+color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+
+[node name="DeveloperSettings" type="VBoxContainer" parent="VBoxContainer/ColorRect2" unique_id=763217887]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 8.0
+offset_right = 315.0
+offset_bottom = 374.0
+script = ExtResource("2_7mycd")
+
+[node name="Label" type="Label" parent="VBoxContainer/ColorRect2/DeveloperSettings" unique_id=2123018716]
+layout_mode = 2
+text = "Developer settings:"
+
+[node name="Button" type="Button" parent="VBoxContainer/ColorRect2/DeveloperSettings" unique_id=1727096126]
+layout_mode = 2
+text = "Erase Player Settings"
+
+[node name="Label3" type="Label" parent="VBoxContainer/ColorRect2/DeveloperSettings" unique_id=182639080]
+layout_mode = 2
+text = "Reference monitor calibration:"
+
+[node name="Control" type="Control" parent="VBoxContainer/ColorRect2/DeveloperSettings" unique_id=1779327274]
+custom_minimum_size = Vector2(0, 78)
+layout_mode = 2
+
+[node name="MaxLumAdjustBacking" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=1341568457]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 9.0
+offset_top = 4.0
+offset_right = 129.0
+offset_bottom = 74.0
+
+[node name="MaxLumAdjustBelow2" type="Polygon2D" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=144371379]
+unique_name_in_owner = true
+self_modulate = Color(0.8848981, 0.8848981, 0.8848981, 1)
+position = Vector2(40, 39)
+scale = Vector2(50, 50)
+polygon = PackedVector2Array(0, -0.5, 0.5, 0.5, -0.5, 0.5)
+
+[node name="MaxLumAdjustBelow3" type="Polygon2D" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=106732800]
+unique_name_in_owner = true
+self_modulate = Color(0.9407874, 0.9407874, 0.9407874, 1)
+position = Vector2(98, 39)
+scale = Vector2(50, 50)
+polygon = PackedVector2Array(0, -0.5, 0.5, 0.5, -0.5, 0.5)
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=443567928]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 4.0
+offset_right = 186.0
+offset_bottom = 39.0
+color = Color(1, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=1765336189]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 4.0
+offset_right = 243.0
+offset_bottom = 39.0
+pivot_offset = Vector2(44, 29)
+color = Color(0, 1, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=1445682559]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 4.0
+offset_right = 300.0
+offset_bottom = 39.0
+pivot_offset = Vector2(44, -4)
+color = Color(0, 0, 1, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=1104706596]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 39.0
+offset_right = 186.0
+offset_bottom = 74.0
+color = Color(1, 0, 0, 1)
+script = ExtResource("13_ycdy4")
+sdr_color = Color(1, 0, 0, 1)
+use_luminance_for_limit = false
+
+[node name="ColorRect5" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=2138302032]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 39.0
+offset_right = 243.0
+offset_bottom = 74.0
+pivot_offset = Vector2(0, 29)
+color = Color(0, 1, 0, 1)
+script = ExtResource("13_ycdy4")
+sdr_color = Color(0, 1, 0, 1)
+use_luminance_for_limit = false
+
+[node name="ColorRect6" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=1549780699]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 39.0
+offset_right = 300.0
+offset_bottom = 74.0
+pivot_offset = Vector2(0, -4)
+color = Color(0, 0, 1, 1)
+script = ExtResource("13_ycdy4")
+sdr_color = Color(0, 0, 1, 1)
+use_luminance_for_limit = false
+
+[node name="Label2" type="Label" parent="VBoxContainer/ColorRect2/DeveloperSettings" unique_id=332601797]
+custom_minimum_size = Vector2(200, 0)
+custom_maximum_size = Vector2(310, -1)
+layout_mode = 2
+size_flags_vertical = 6
+text = "Set maximum luminance as high as possible while maintaining the visibility of both triangles and the hue and saturation of the three colors. Example:"
+autowrap_mode = 3
+
+[node name="Control2" type="Control" parent="VBoxContainer/ColorRect2/DeveloperSettings" unique_id=1021742490]
+custom_minimum_size = Vector2(0, 78)
+layout_mode = 2
+
+[node name="MaxLumAdjustBacking" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control2" unique_id=1125706939]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 4.0
+offset_right = 129.0
+offset_bottom = 74.0
+
+[node name="ExampleMaxLumAdjustBelow" type="Polygon2D" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control2" unique_id=1291892689]
+unique_name_in_owner = true
+self_modulate = Color(0.8848981, 0.8848981, 0.8848981, 1)
+position = Vector2(40, 39)
+scale = Vector2(50, 50)
+polygon = PackedVector2Array(0, -0.5, 0.5, 0.5, -0.5, 0.5)
+
+[node name="ExampleMaxLumAdjustBelow2" type="Polygon2D" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control2" unique_id=1861809390]
+unique_name_in_owner = true
+self_modulate = Color(0.9407874, 0.9407874, 0.9407874, 1)
+position = Vector2(98, 38.99997)
+scale = Vector2(50, 50)
+polygon = PackedVector2Array(0, -0.5, 0.5, 0.5, -0.5, 0.5)
+
+[node name="ColorRect7" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control2" unique_id=137267310]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 4.0
+offset_right = 186.0
+offset_bottom = 39.0
+color = Color(0.735357, 0, 0, 1)
+
+[node name="ColorRect8" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control2" unique_id=752449690]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 4.0
+offset_right = 243.0
+offset_bottom = 39.0
+pivot_offset = Vector2(44, 29)
+color = Color(0, 0.735357, 0, 1)
+
+[node name="ColorRect9" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control2" unique_id=167545516]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 4.0
+offset_right = 300.0
+offset_bottom = 39.0
+pivot_offset = Vector2(44, -4)
+color = Color(0, 0, 0.735357, 1)
+
+[node name="ColorRect10" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control2" unique_id=1401542410]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 39.0
+offset_right = 186.0
+offset_bottom = 74.0
+color = Color(1, 0, 0, 1)
+
+[node name="ColorRect11" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control2" unique_id=534544741]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 39.0
+offset_right = 243.0
+offset_bottom = 74.0
+pivot_offset = Vector2(44, 29)
+color = Color(0, 1, 0, 1)
+
+[node name="ColorRect12" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control2" unique_id=793779675]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 39.0
+offset_right = 300.0
+offset_bottom = 74.0
+pivot_offset = Vector2(44, -4)
+color = Color(0, 0, 1, 1)
+
+[node name="DebugInfo" type="Label" parent="." unique_id=480223336]
+layout_mode = 0
+offset_left = 327.0
+offset_right = 600.0
+offset_bottom = 75.0
+mouse_filter = 0
+text = "Display Server supports HDR: true
+Renderer supports HDR: true
+Window supports HDR: true"
+script = ExtResource("8_5vw27")
+
+[node name="BlackWhiteMax" type="Control" parent="." unique_id=1868827823]
+custom_minimum_size = Vector2(97.615, 0)
+anchors_preset = 0
+offset_left = 601.0
+offset_top = 2.0
+offset_right = 861.0
+offset_bottom = 77.0
+
+[node name="Label" type="Label" parent="BlackWhiteMax" unique_id=1432220451]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 2.0
+offset_right = 89.0
+offset_bottom = 25.0
+text = "Black"
+horizontal_alignment = 1
+
+[node name="Black" type="ColorRect" parent="BlackWhiteMax" unique_id=255226634]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 25.0
+offset_right = 89.0
+offset_bottom = 45.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label4" type="Label" parent="BlackWhiteMax" unique_id=10137459]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 46.0
+offset_right = 89.0
+offset_bottom = 69.0
+text = "0.00"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="BlackWhiteMax" unique_id=733073890]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 2.0
+offset_right = 169.0
+offset_bottom = 25.0
+text = "White"
+horizontal_alignment = 1
+
+[node name="White" type="ColorRect" parent="BlackWhiteMax" unique_id=725348665]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 25.0
+offset_right = 169.0
+offset_bottom = 45.0
+
+[node name="Label5" type="Label" parent="BlackWhiteMax" unique_id=1454876637]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 46.0
+offset_right = 169.0
+offset_bottom = 69.0
+text = "1.00"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="BlackWhiteMax" unique_id=907524270]
+layout_mode = 0
+offset_left = 169.0
+offset_top = 2.0
+offset_right = 249.0
+offset_bottom = 25.0
+text = "Max"
+horizontal_alignment = 1
+
+[node name="Max" type="ColorRect" parent="BlackWhiteMax" unique_id=1672818577]
+layout_mode = 0
+offset_left = 169.0
+offset_top = 25.0
+offset_right = 249.0
+offset_bottom = 45.0
+script = ExtResource("13_ycdy4")
+use_luminance_for_limit = false
+
+[node name="Label6" type="Label" parent="BlackWhiteMax" unique_id=1095042380]
+layout_mode = 0
+offset_left = 169.0
+offset_top = 46.0
+offset_right = 249.0
+offset_bottom = 69.0
+text = "1.00"
+horizontal_alignment = 1
+script = ExtResource("5_dg77c")
+
+[node name="DemoScenes" type="ColorRect" parent="." unique_id=1892849244 node_paths=PackedStringArray("scenes")]
+layout_mode = 0
+offset_left = 324.0
+offset_top = 78.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+script = ExtResource("6_272bh")
+scenes = [NodePath("DemoScene_output_max_linear_value"), NodePath("DemoScene_Tonemap"), NodePath("DemoScene_ColorSweep"), NodePath("DemoScene_SetupInstructions")]
+
+[node name="Tab" type="ColorRect" parent="DemoScenes" unique_id=261230258]
+layout_mode = 0
+offset_left = 543.0
+offset_top = -61.0
+offset_right = 828.0
+color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+
+[node name="OptionButton" type="OptionButton" parent="DemoScenes/Tab" unique_id=1332299268]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 28.0
+offset_right = 277.0
+offset_bottom = 59.0
+selected = 0
+item_count = 4
+popup/item_0/text = "Output Maximum Linear Value"
+popup/item_0/id = 0
+popup/item_1/text = "Tonemap, Lighting, and Effects"
+popup/item_1/id = 1
+popup/item_2/text = "Color Sweep"
+popup/item_2/id = 2
+popup/item_3/text = "Setup Instructions"
+popup/item_3/id = 3
+
+[node name="Label" type="Label" parent="DemoScenes/Tab" unique_id=1342427115]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 3.0
+offset_right = 108.0
+offset_bottom = 26.0
+text = "Demo scene:"
+
+[node name="DemoScene_output_max_linear_value" type="Control" parent="DemoScenes" unique_id=1640634166]
+anchors_preset = 0
+offset_right = 828.0
+offset_bottom = 570.0
+script = ExtResource("10_dg77c")
+sub_viewport_initial_size = Vector2(350, 350)
+main_viewport_initial_size = Vector2(1152, 648)
+
+[node name="Sprite2D" type="Sprite2D" parent="DemoScenes/DemoScene_output_max_linear_value" unique_id=88010316]
+position = Vector2(598, 107)
+texture = SubResource("GradientTexture2D_cegan")
+
+[node name="HDRLabel" type="Label" parent="DemoScenes/DemoScene_output_max_linear_value/Sprite2D" unique_id=1664078869]
+self_modulate = Color(0.3882353, 0.7490196, 1, 1)
+offset_left = -125.0
+offset_top = -50.0
+offset_right = 125.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 46
+text = "Godot"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_4c57u")
+sdr_self_modulate = Color(0.3882353, 0.7490196, 1, 1)
+
+[node name="Mountain" type="Node2D" parent="DemoScenes/DemoScene_output_max_linear_value" unique_id=1183547058]
+position = Vector2(439, 195)
+
+[node name="Sun" type="ColorRect" parent="DemoScenes/DemoScene_output_max_linear_value/Mountain" unique_id=347517105]
+offset_left = 73.0
+offset_top = 8.0
+offset_right = 239.0
+offset_bottom = 108.0
+color = Color(0.99215686, 0.7058824, 0.41568628, 1)
+script = ExtResource("13_ycdy4")
+sdr_color = Color(0.99215686, 0.7058824, 0.41568628, 1)
+linear_limit = 2.8
+metadata/_edit_use_anchors_ = true
+
+[node name="Mountain" type="Sprite2D" parent="DemoScenes/DemoScene_output_max_linear_value/Mountain" unique_id=1827667879]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(160, 120)
+texture = ExtResource("7_5vw27")
+
+[node name="Label" type="Label" parent="DemoScenes/DemoScene_output_max_linear_value/Mountain" unique_id=2106881228]
+offset_left = -5.0
+offset_top = 241.0
+offset_right = 325.0
+offset_bottom = 264.0
+text = "Mountain artwork by Luis Zuno (Ansimuz)"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="DemoScenes/DemoScene_output_max_linear_value" unique_id=1500596003]
+position = Vector2(606.5, 130.5)
+mesh = SubResource("QuadMesh_w48qg")
+texture = SubResource("GradientTexture2D_074og")
+
+[node name="MySubViewport" type="SubViewport" parent="DemoScenes/DemoScene_output_max_linear_value" unique_id=1818848484]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+msaa_3d = 2
+use_hdr_2d = true
+scaling_3d_scale = 2.0
+size = Vector2i(350, 350)
+
+[node name="Node3D" parent="DemoScenes/DemoScene_output_max_linear_value/MySubViewport" unique_id=1416688204 instance=ExtResource("8_ycdy4")]
+
+[node name="ViewportSprite" type="Sprite2D" parent="DemoScenes/DemoScene_output_max_linear_value" unique_id=234860266]
+position = Vector2(222, 250)
+texture = SubResource("ViewportTexture_efxa6")
+
+[node name="DemoScene_SetupInstructions2" type="RichTextLabel" parent="DemoScenes/DemoScene_output_max_linear_value" unique_id=780302180]
+layout_mode = 0
+offset_top = 512.0
+offset_right = 828.0
+offset_bottom = 569.0
+theme_override_fonts/mono_font = SubResource("SystemFont_7mycd")
+bbcode_enabled = true
+text = "The output maximum linear value should only be used to present colors directly to the screen without tonemapping or influencing lighting, effects, or surrounding color. View the [url=https://docs.godotengine.org/en/latest/tutorials/rendering/hdr_output.html]manual page[/url] to learn more."
+horizontal_alignment = 1
+script = ExtResource("13_w48qg")
+
+[node name="DemoScene_Tonemap" type="Control" parent="DemoScenes" unique_id=1160571939]
+visible = false
+anchors_preset = 0
+offset_right = 828.0
+offset_bottom = 570.0
+script = ExtResource("10_dg77c")
+sub_viewport_initial_size = Vector2(828, 570)
+main_viewport_initial_size = Vector2(1152, 648)
+
+[node name="MySubViewport" type="SubViewport" parent="DemoScenes/DemoScene_Tonemap" unique_id=628806123]
+own_world_3d = true
+handle_input_locally = false
+msaa_3d = 2
+use_hdr_2d = true
+scaling_3d_scale = 2.0
+size = Vector2i(828, 570)
+
+[node name="Node3D" parent="DemoScenes/DemoScene_Tonemap/MySubViewport" unique_id=229028905 instance=ExtResource("11_dg77c")]
+
+[node name="ViewportSprite" type="Sprite2D" parent="DemoScenes/DemoScene_Tonemap" unique_id=448833630]
+position = Vector2(414, 285)
+texture = SubResource("ViewportTexture_ycdy4")
+
+[node name="DemoScene_ColorSweep" parent="DemoScenes" unique_id=784950953 instance=ExtResource("6_7mycd")]
+visible = false
+layout_mode = 0
+
+[node name="DemoScene_SetupInstructions" type="RichTextLabel" parent="DemoScenes" unique_id=660978631]
+visible = false
+layout_mode = 0
+offset_left = 7.0
+offset_top = 4.0
+offset_right = 820.0
+offset_bottom = 556.0
+focus_mode = 2
+theme_override_fonts/mono_font = SubResource("SystemFont_7mycd")
+bbcode_enabled = true
+text = "1) Ensure [i]no[/i] Environment resources use SDR-only features:
+	- Tonemap Mode: Filmic or ACES
+	- Glow Blend Mode: Soft Light
+	- Adjustments: Color Correction
+
+2) Configure the [code]rendering/renderer/rendering_method[/code] project setting to [code]mobile[/code] or [code]forward_plus[/code].
+
+3) Configure the [code]rendering/rendering_device/driver[/code] advanced project setting to [code]metal[/code] for iOS and [code]d3d12[/code] for Windows.
+
+4) Configure the [code]display/display_server/driver.linuxbsd[/code] project setting to [code]wayland[/code] and enable the [code]run/platforms/linuxbsd/prefer_wayland[/code] editor setting.
+
+5) Turn on the [code]rendering/viewport/hdr_2d[/code] project setting and enable [code]use_hdr_2d[/code] for all SubViewports and Windows that should support HDR output.
+
+6) Turn on the [code]display/window/hdr/request_hdr_output[/code] project setting and enable [code]hdr_output_requested[/code] for all other Windows that should support HDR output.
+
+7) [Optional] Provide in-game settings for the player by copying [code]in_game_hdr_settings[/code] from this demo to your project.
+
+View the [url=https://docs.godotengine.org/en/latest/tutorials/rendering/hdr_output.html]manual page[/url] to learn more about HDR output."
+context_menu_enabled = true
+vertical_alignment = 1
+selection_enabled = true
+drag_and_drop_selection_enabled = false
+script = ExtResource("13_w48qg")
+
+[connection signal="pressed" from="VBoxContainer/ColorRect2/DeveloperSettings/Button" to="VBoxContainer/ColorRect/InGameHDRSettings" method="erase_settings"]
+[connection signal="item_selected" from="DemoScenes/Tab/OptionButton" to="DemoScenes" method="_on_demo_scene_item_selected"]
+[connection signal="meta_clicked" from="DemoScenes/DemoScene_output_max_linear_value/DemoScene_SetupInstructions2" to="DemoScenes/DemoScene_output_max_linear_value/DemoScene_SetupInstructions2" method="_on_meta_clicked"]
+[connection signal="meta_clicked" from="DemoScenes/DemoScene_SetupInstructions" to="DemoScenes/DemoScene_SetupInstructions" method="_on_meta_clicked"]
