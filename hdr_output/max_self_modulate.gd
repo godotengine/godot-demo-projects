@@ -1,12 +1,12 @@
-extends Node
+extends CanvasItem
 
-@export var sdr_colour: Color = Color.WHITE
+@export var sdr_self_modulate: Color = Color.WHITE
 
 
 func _process(_delta: float) -> void:
 	# Adjust the brightness of color to be the brightest possible, regardless
 	# of SDR or HDR output.
-	self.color = normalize_color(sdr_colour, get_window().get_output_max_linear_value())
+	self_modulate = normalize_color(sdr_self_modulate, get_window().get_output_max_linear_value())
 
 
 func normalize_color(srgb_color, max_linear_value = 1.0):

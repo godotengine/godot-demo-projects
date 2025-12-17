@@ -5,11 +5,39 @@
 [ext_resource type="Script" uid="uid://bclxdn8806hud" path="res://main/max_val_label.gd" id="5_dg77c"]
 [ext_resource type="PackedScene" uid="uid://drlb4o61s5wsk" path="res://color_sweep/color_sweep.tscn" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://fhoiawdcyegx" path="res://main/demo_scenes.gd" id="6_272bh"]
+[ext_resource type="Texture2D" uid="uid://b335ssbw6ynt6" path="res://output_max_linear_value/Super Mountain Dusk/mountain.png" id="7_5vw27"]
 [ext_resource type="Script" uid="uid://cpqmte6usoyyg" path="res://main/debug_info.gd" id="8_5vw27"]
+[ext_resource type="Texture2D" uid="uid://cvecqn4m52x7x" path="res://output_max_linear_value/spark_particle2.png" id="8_kek77"]
+[ext_resource type="Script" uid="uid://ow74i072fx6r" path="res://max_self_modulate.gd" id="9_4c57u"]
 [ext_resource type="Script" uid="uid://dxtpfowo3fjm4" path="res://max_colour.gd" id="13_ycdy4"]
+
+[sub_resource type="Gradient" id="Gradient_4c57u"]
+offsets = PackedFloat32Array(0, 0.0769231, 0.16568, 0.266272, 0.378698, 0.491124, 0.609467, 0.704142, 0.804734, 0.911243, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.152961, 0, 1, 1, 0.726562, 0, 1, 0.78125, 1, 0, 1, 0.289062, 1, 0, 1, 0, 1, 0.472656, 1, 0, 1, 0.835938, 1, 0, 0.71875, 1, 1, 0.21875, 0, 1, 1, 1, 0, 0.773438, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_efxa6"]
+gradient = SubResource("Gradient_4c57u")
+
+[sub_resource type="Curve" id="Curve_4c57u"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.24940729, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_efxa6"]
+curve = SubResource("Curve_4c57u")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dg77c"]
+particle_flag_disable_z = true
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = 166.64998
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 23.879997
+linear_accel_max = 83.59
+scale_curve = SubResource("CurveTexture_efxa6")
+color_ramp = SubResource("GradientTexture1D_efxa6")
 
 [sub_resource type="SystemFont" id="SystemFont_7mycd"]
 font_names = PackedStringArray("Monospace")
+subpixel_positioning = 0
 
 [node name="Control" type="Control" unique_id=1546781181]
 layout_mode = 3
@@ -314,7 +342,6 @@ offset_top = 25.0
 offset_right = 249.0
 offset_bottom = 45.0
 script = ExtResource("13_ycdy4")
-sdr_colour = Color(1, 1, 1, 1)
 
 [node name="Label6" type="Label" parent="BlackWhiteMax" unique_id=1095042380]
 layout_mode = 0
@@ -334,7 +361,7 @@ offset_right = 1152.0
 offset_bottom = 648.0
 color = Color(0.21568628, 0.21568628, 0.21568628, 1)
 script = ExtResource("6_272bh")
-scenes = [NodePath("ColorSweep"), NodePath("ColorSweep"), NodePath("ColorSweep"), NodePath("RichTextLabel")]
+scenes = [NodePath("output_max_linear_value"), NodePath("ColorSweep"), NodePath("ColorSweep"), NodePath("RichTextLabel")]
 
 [node name="Tab" type="ColorRect" parent="DemoScenes" unique_id=261230258]
 layout_mode = 0
@@ -368,6 +395,45 @@ offset_right = 111.0
 offset_bottom = 26.0
 text = "Demo scene:"
 
+[node name="output_max_linear_value" type="Control" parent="DemoScenes" unique_id=1640634166]
+anchors_preset = 0
+offset_right = 828.0
+offset_bottom = 570.0
+
+[node name="Sun" type="ColorRect" parent="DemoScenes/output_max_linear_value" unique_id=347517105]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 34.0
+offset_right = 274.0
+offset_bottom = 134.0
+color = Color(0.99215686, 0.7058824, 0.41568628, 1)
+script = ExtResource("13_ycdy4")
+sdr_colour = Color(0.99215686, 0.7058824, 0.41568628, 1)
+
+[node name="Mountain" type="Sprite2D" parent="DemoScenes/output_max_linear_value" unique_id=1827667879]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(195, 146)
+texture = ExtResource("7_5vw27")
+
+[node name="Sparkles" type="GPUParticles2D" parent="DemoScenes/output_max_linear_value" unique_id=817018124]
+texture_filter = 1
+position = Vector2(534, 165)
+amount = 42
+texture = ExtResource("8_kek77")
+process_material = SubResource("ParticleProcessMaterial_dg77c")
+script = ExtResource("9_4c57u")
+
+[node name="Label" type="Label" parent="DemoScenes/output_max_linear_value" unique_id=558150534]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 338.0
+offset_right = 512.0
+offset_bottom = 413.0
+text = "Is this stuff placeholder or final?
+
+Maybe add some GUI stuff ?"
+
 [node name="ColorSweep" parent="DemoScenes" unique_id=784950953 instance=ExtResource("6_7mycd")]
 visible = false
 layout_mode = 0
@@ -396,7 +462,7 @@ text = "[font_size=20]Steps to enable HDR output in your project:[/font_size]
 
 3) Turn on the [code]rendering/viewport/hdr_2d[/code] project setting and also turn on \"Use HDR 2D\" of all Subviewport and Windows that should support HDR output.
 
-4) Turn on the [code]display/window/hdr/request_hdr_output[/code] project setting and also turn on \"HDR Output Requested\" of all Windows that should support HDR output.
+4) Turn on the [code]display/window/hdr/request_hdr_output[/code] project setting and also turn on \"HDR Output Requested\" of all other Windows that should support HDR output.
 
 5) [Optional] Provide in-game settings for the player to adjust HDR brightness and maximum luminance by copying [code]in_game_hdr_settings[/code] from this demo into your project."
 context_menu_enabled = true
