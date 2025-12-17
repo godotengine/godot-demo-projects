@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://jnc4cr2mhg00" path="res://in_game_hdr_settings/in_game_hdr_settings.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://bclxdn8806hud" path="res://main/max_val_label.gd" id="5_dg77c"]
 [ext_resource type="PackedScene" uid="uid://drlb4o61s5wsk" path="res://color_sweep/color_sweep.tscn" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://fhoiawdcyegx" path="res://main/demo_scenes.gd" id="6_272bh"]
 [ext_resource type="Script" uid="uid://cpqmte6usoyyg" path="res://main/debug_info.gd" id="8_5vw27"]
 [ext_resource type="Script" uid="uid://dxtpfowo3fjm4" path="res://max_colour.gd" id="13_ycdy4"]
 
@@ -241,9 +242,9 @@ script = ExtResource("8_5vw27")
 [node name="BlackWhiteMax" type="Control" parent="." unique_id=1868827823]
 custom_minimum_size = Vector2(97.615, 0)
 anchors_preset = 0
-offset_left = 643.0
+offset_left = 633.0
 offset_top = 2.0
-offset_right = 903.0
+offset_right = 893.0
 offset_bottom = 77.0
 
 [node name="Label" type="Label" parent="BlackWhiteMax" unique_id=1432220451]
@@ -325,53 +326,83 @@ text = "1.00"
 horizontal_alignment = 1
 script = ExtResource("5_dg77c")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1892849244]
+[node name="DemoScenes" type="ColorRect" parent="." unique_id=1892849244 node_paths=PackedStringArray("scenes")]
 layout_mode = 0
 offset_left = 324.0
 offset_top = 78.0
 offset_right = 1152.0
 offset_bottom = 648.0
 color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+script = ExtResource("6_272bh")
+scenes = [NodePath("ColorSweep"), NodePath("ColorSweep"), NodePath("ColorSweep"), NodePath("RichTextLabel")]
 
-[node name="Tab" type="ColorRect" parent="ColorRect" unique_id=261230258]
+[node name="Tab" type="ColorRect" parent="DemoScenes" unique_id=261230258]
 layout_mode = 0
-offset_left = 596.0
-offset_top = -78.0
+offset_left = 586.0
+offset_top = -61.0
 offset_right = 828.0
 color = Color(0.21568628, 0.21568628, 0.21568628, 1)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect" unique_id=660978631]
+[node name="OptionButton" type="OptionButton" parent="DemoScenes/Tab" unique_id=1332299268]
 layout_mode = 0
-offset_left = 67.0
-offset_top = 35.0
-offset_right = 764.0
-offset_bottom = 535.0
+offset_left = 9.0
+offset_top = 28.0
+offset_right = 234.0
+offset_bottom = 59.0
+selected = 0
+item_count = 4
+popup/item_0/text = "output_max_linear_value"
+popup/item_0/id = 0
+popup/item_1/text = "Environment"
+popup/item_1/id = 1
+popup/item_2/text = "Color sweep"
+popup/item_2/id = 2
+popup/item_3/text = "Setup instructions"
+popup/item_3/id = 3
+
+[node name="Label" type="Label" parent="DemoScenes/Tab" unique_id=1342427115]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 3.0
+offset_right = 111.0
+offset_bottom = 26.0
+text = "Demo scene:"
+
+[node name="ColorSweep" parent="DemoScenes" unique_id=784950953 instance=ExtResource("6_7mycd")]
+visible = false
+layout_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DemoScenes" unique_id=660978631]
+visible = false
+layout_mode = 0
+offset_left = 55.0
+offset_top = 5.0
+offset_right = 776.0
+offset_bottom = 551.0
 focus_mode = 2
 theme_override_fonts/mono_font = SubResource("SystemFont_7mycd")
 bbcode_enabled = true
 text = "[font_size=20]Steps to enable HDR output in your project:[/font_size]
 
-1) Ensure all Environment resources do [i]not[/i] use:
+1) Ensure all Environment resources do [i]not[/i] use SDR-only features:
 	- Tonemap Mode: Filmic or ACES
 	- Glow Blend Mode: Soft Light
 	- Adjustments: Color Correction
 
-2) Configure [code]rendering/rendering_device/driver[/code] to the following:
+2) Configure the [code]rendering/rendering_device/driver[/code] project setting to the following:
 	- macos: metal
 	- ios: metal
 	- windows: d3d12
 
-3) Turn on [code]rendering/viewport/hdr_2d[/code] and also turn on Use HDR 2D of all Subviewport and Windows that should support HDR output.
+3) Turn on the [code]rendering/viewport/hdr_2d[/code] project setting and also turn on \"Use HDR 2D\" of all Subviewport and Windows that should support HDR output.
 
-4) Turn on [code]display/window/hdr/request_hdr_output[/code] and also turn on HDR Output Requested of any other Windows that should support HDR output.
+4) Turn on the [code]display/window/hdr/request_hdr_output[/code] project setting and also turn on \"HDR Output Requested\" of all Windows that should support HDR output.
 
-5) Optional: provide in-game player settings to adjust HDR brightness and maximum luminance by copying [code]in_game_hdr_settings[/code] from this demo into your project."
+5) [Optional] Provide in-game settings for the player to adjust HDR brightness and maximum luminance by copying [code]in_game_hdr_settings[/code] from this demo into your project."
 context_menu_enabled = true
+vertical_alignment = 1
 selection_enabled = true
 drag_and_drop_selection_enabled = false
 
-[node name="ColorSweep" parent="ColorRect" unique_id=784950953 instance=ExtResource("6_7mycd")]
-visible = false
-layout_mode = 0
-
 [connection signal="pressed" from="VBoxContainer/ColorRect2/DeveloperSettings/Button" to="VBoxContainer/ColorRect/InGameHDRSettings" method="erase_settings"]
+[connection signal="item_selected" from="DemoScenes/Tab/OptionButton" to="DemoScenes" method="_on_demo_scene_item_selected"]
