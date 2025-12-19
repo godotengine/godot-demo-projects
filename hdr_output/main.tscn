@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://cpqmte6usoyyg" path="res://main/debug_info.gd" id="8_5vw27"]
 [ext_resource type="Texture2D" uid="uid://cvecqn4m52x7x" path="res://output_max_linear_value/spark_particle2.png" id="8_kek77"]
 [ext_resource type="Script" uid="uid://ow74i072fx6r" path="res://max_self_modulate.gd" id="9_4c57u"]
+[ext_resource type="Script" uid="uid://bb4pv67imdsne" path="res://environment/subviewport_scale.gd" id="10_dg77c"]
+[ext_resource type="PackedScene" uid="uid://c0wukesav63su" path="res://environment/3d_environment.tscn" id="11_dg77c"]
 [ext_resource type="Script" uid="uid://dxtpfowo3fjm4" path="res://max_colour.gd" id="13_ycdy4"]
 
 [sub_resource type="Gradient" id="Gradient_4c57u"]
@@ -34,6 +36,9 @@ linear_accel_min = 23.879997
 linear_accel_max = 83.59
 scale_curve = SubResource("CurveTexture_efxa6")
 color_ramp = SubResource("GradientTexture1D_efxa6")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_efxa6"]
+viewport_path = NodePath("DemoScenes/EnvironmentScene/SubViewport")
 
 [sub_resource type="SystemFont" id="SystemFont_7mycd"]
 font_names = PackedStringArray("Monospace")
@@ -361,7 +366,7 @@ offset_right = 1152.0
 offset_bottom = 648.0
 color = Color(0.21568628, 0.21568628, 0.21568628, 1)
 script = ExtResource("6_272bh")
-scenes = [NodePath("output_max_linear_value"), NodePath("ColorSweep"), NodePath("ColorSweep"), NodePath("RichTextLabel")]
+scenes = [NodePath("output_max_linear_value"), NodePath("EnvironmentScene"), NodePath("ColorSweep"), NodePath("RichTextLabel")]
 
 [node name="Tab" type="ColorRect" parent="DemoScenes" unique_id=261230258]
 layout_mode = 0
@@ -426,13 +431,48 @@ script = ExtResource("9_4c57u")
 
 [node name="Label" type="Label" parent="DemoScenes/output_max_linear_value" unique_id=558150534]
 layout_mode = 0
-offset_left = 264.0
-offset_top = 338.0
-offset_right = 512.0
-offset_bottom = 413.0
-text = "Is this stuff placeholder or final?
+offset_left = 99.0
+offset_top = 390.0
+offset_right = 707.0
+offset_bottom = 465.0
+text = "DRAFT DEMO PROJECT
+HELP WANTED
+Please let @allenwp know if you have a high quality demo for use in this scene."
+horizontal_alignment = 1
 
-Maybe add some GUI stuff ?"
+[node name="EnvironmentScene" type="Control" parent="DemoScenes" unique_id=1160571939]
+visible = false
+anchors_preset = 0
+offset_left = 99.0
+offset_top = 390.0
+offset_right = 139.0
+offset_bottom = 430.0
+script = ExtResource("10_dg77c")
+
+[node name="SubViewport" type="SubViewport" parent="DemoScenes/EnvironmentScene" unique_id=628806123]
+own_world_3d = true
+handle_input_locally = false
+msaa_3d = 2
+use_hdr_2d = true
+size = Vector2i(570, 570)
+render_target_update_mode = 4
+
+[node name="Node3D" parent="DemoScenes/EnvironmentScene/SubViewport" unique_id=229028905 instance=ExtResource("11_dg77c")]
+
+[node name="ViewportSprite" type="Sprite2D" parent="DemoScenes/EnvironmentScene" unique_id=448833630]
+position = Vector2(315, -105)
+texture = SubResource("ViewportTexture_efxa6")
+
+[node name="Label2" type="Label" parent="DemoScenes/EnvironmentScene" unique_id=476553587]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 96.0
+offset_right = 616.0
+offset_bottom = 171.0
+text = "DRAFT DEMO PROJECT
+HELP WANTED
+Please let @allenwp know if you have a high quality demo for use in this scene."
+horizontal_alignment = 1
 
 [node name="ColorSweep" parent="DemoScenes" unique_id=784950953 instance=ExtResource("6_7mycd")]
 visible = false
@@ -460,9 +500,9 @@ text = "[font_size=20]Steps to enable HDR output in your project:[/font_size]
 	- ios: metal
 	- windows: d3d12
 
-3) Turn on the [code]rendering/viewport/hdr_2d[/code] project setting and also turn on \"Use HDR 2D\" of all Subviewport and Windows that should support HDR output.
+3) Turn on the [code]rendering/viewport/hdr_2d[/code] project setting and also turn on [code]use_hdr_2d[/code] of all Subviewport and Windows that should support HDR output.
 
-4) Turn on the [code]display/window/hdr/request_hdr_output[/code] project setting and also turn on \"HDR Output Requested\" of all other Windows that should support HDR output.
+4) Turn on the [code]display/window/hdr/request_hdr_output[/code] project setting and also turn on [code]hdr_output_requested[/code] of all other Windows that should support HDR output.
 
 5) [Optional] Provide in-game settings for the player to adjust HDR brightness and maximum luminance by copying [code]in_game_hdr_settings[/code] from this demo into your project."
 context_menu_enabled = true
