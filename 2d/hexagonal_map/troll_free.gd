@@ -15,9 +15,7 @@ func become_active_troll() -> void:
 func _physics_process(_delta: float) -> void:
 	var prev_position: Vector2 = global_position
 
-	var motion := Vector2()
-	motion.x = Input.get_axis(&"move_left", &"move_right")
-	motion.y = Input.get_axis(&"move_up", &"move_down")
+	var motion: Vector2 = Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
 	# Make diagonal movement fit for hexagonal tiles.
 	motion.y *= TAN30DEG
 	velocity += motion.normalized() * MOTION_SPEED

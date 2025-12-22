@@ -67,10 +67,8 @@ func _input_dir_to_neighbor(input_dir: Vector2) -> int:
 func _process(_dt: float) -> void:
 	var motion: Vector2 = Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
 
-	# Use a hefty deadzone since aiming is very chunky.
-	const DEADZONE_SQ = 0.3 * 0.3
-	var want_movement: bool = motion.length_squared() > DEADZONE_SQ
-	if want_movement:
+	# InputMap has a hefty deadzone (aiming is discrete) so can just check for zero.
+	if not motion.is_zero_approx():
 		# If your perspective was closer to isometric, you should rotate the input
 		# to match the iso projection so you correctly interpret diagonal inputs:
 		#requested_iso_motion = motion.rotated(TAU * 1.0 / 10.0)
