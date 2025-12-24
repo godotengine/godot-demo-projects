@@ -64,9 +64,23 @@ func _input_dir_to_neighbor(input_dir: Vector2) -> int:
 	return CELL_NEIGHBOR_INVALID
 
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		var camera = get_viewport().get_camera_2d()
+		var offset: Vector2 = camera.get_global_mouse_position() - global_position
+		# Ignore input on top of our troll because it makes the pointer unpredictable.
+		const DEADZONE_SQ = 25.0 * 25.0
+		if offset.length_squared() > DEADZONE_SQ:
+			# Normalize to indicate full movement towards the mouse.
+			handle_input(offset.normalized())
+
+
 func _process(_dt: float) -> void:
 	var motion: Vector2 = Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
+	handle_input(motion)
 
+
+func handle_input(motion: Vector2):
 	# InputMap has a hefty deadzone (aiming is discrete) so can just check for zero.
 	if not motion.is_zero_approx():
 		# If your perspective was closer to isometric, you should rotate the input
