@@ -249,7 +249,7 @@ func _setup_textures() -> void:
 	rgb_texture.which_feed = CameraServer.FeedImage.FEED_RGBA_IMAGE
 	y_texture.which_feed = CameraServer.FeedImage.FEED_Y_IMAGE
 	cbcr_texture.which_feed = CameraServer.FeedImage.FEED_CBCR_IMAGE
-	ycbcr_texture.which_feed = CameraServer.FEED_YCBCR_IMAGE
+	ycbcr_texture.which_feed = CameraServer.FeedImage.FEED_YCBCR_IMAGE
 
 	var datatype := camera_feed.get_datatype() as CameraFeed.FeedDataType
 	var preview_size := Vector2.ZERO
