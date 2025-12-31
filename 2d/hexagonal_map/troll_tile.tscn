@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://guyl5tp23ex5"]
+
+[ext_resource type="Script" uid="uid://crpoxv2am8c2m" path="res://troll_tile.gd" id="1_87qsy"]
+[ext_resource type="Texture2D" uid="uid://bhkphpfidntnn" path="res://troll.png" id="2_34a22"]
+[ext_resource type="Texture2D" uid="uid://c72pk3msag483" path="res://arrow.png" id="3_34a22"]
+
+[node name="TileMovementTroll" type="Node2D"]
+script = ExtResource("1_87qsy")
+
+[node name="DestinationPointer" type="Node2D" parent="."]
+
+[node name="PointerVisual" type="Sprite2D" parent="DestinationPointer"]
+position = Vector2(42, 0)
+texture = ExtResource("3_34a22")
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visual"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+position = Vector2(-3.74084, -19.5)
+texture = ExtResource("2_34a22")
+
+[node name="Shadow" type="Sprite2D" parent="Visual"]
+modulate = Color(0, 0, 0, 0.501961)
+show_behind_parent = true
+position = Vector2(12.7014, -14.6056)
+scale = Vector2(0.794259, 1.04505)
+skew = 0.523599
+texture = ExtResource("2_34a22")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-3.74084, -19.5)
+process_callback = 0
