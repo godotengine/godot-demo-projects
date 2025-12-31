@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://mx52oimcwqtn"]
+
+[ext_resource type="Texture2D" uid="uid://bg8txxwsr4qn8" path="res://text_texture.tres" id="1_y2yqg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y2yqg"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_fji6l"]
+sky_material = SubResource("ProceduralSkyMaterial_y2yqg")
+
+[sub_resource type="Environment" id="Environment_73ytm"]
+background_mode = 2
+sky = SubResource("Sky_fji6l")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y2yqg"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("1_y2yqg")
+
+[sub_resource type="BoxMesh" id="BoxMesh_p1i0w"]
+
+[node name="3d" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_73ytm")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_y2yqg")
+mesh = SubResource("BoxMesh_p1i0w")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.7071068, 0.5, -0.5, 0, 0.7071068, 0.70710677, 0.7071068, -0.5, 0.5, -1, 1, 1)
