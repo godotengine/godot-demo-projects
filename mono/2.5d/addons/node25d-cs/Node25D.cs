@@ -1,10 +1,5 @@
 using Godot;
 using System;
-#if REAL_T_IS_DOUBLE
-using real_t = System.Double;
-#else
-using real_t = System.Single;
-#endif
 
 /// <summary>
 /// This node converts a 3D position to 2D using a 2.5D transformation matrix.
@@ -60,7 +55,7 @@ public partial class Node25D : Node2D, IComparable<Node25D>
         Node25DReady();
     }
 
-    public override void _Process(real_t delta)
+    public override void _Process(double delta)
     {
         Node25DProcess();
     }
@@ -127,7 +122,7 @@ public partial class Node25D : Node2D, IComparable<Node25D>
 
     private void CheckViewMode()
     {
-        if (!Engine.EditorHint)
+        if (!Engine.IsEditorHint())
         {
             if (Input.IsActionJustPressed("forty_five_mode"))
             {
@@ -167,9 +162,9 @@ public partial class Node25D : Node2D, IComparable<Node25D>
 
     public int CompareTo(Node25D other)
     {
-        real_t thisIndex = transform25D.spatialPosition.y + 0.001f * (transform25D.spatialPosition.x + transform25D.spatialPosition.z);
-        real_t otherIndex = other.transform25D.spatialPosition.y + 0.001f * (other.transform25D.spatialPosition.x + other.transform25D.spatialPosition.z);
-        real_t diff = thisIndex - otherIndex;
+        float thisIndex = transform25D.spatialPosition.Y + 0.001f * (transform25D.spatialPosition.X + transform25D.spatialPosition.Z);
+        float otherIndex = other.transform25D.spatialPosition.Y + 0.001f * (other.transform25D.spatialPosition.X + other.transform25D.spatialPosition.Z);
+        float diff = thisIndex - otherIndex;
         if (diff > 0)
         {
             return 1;
