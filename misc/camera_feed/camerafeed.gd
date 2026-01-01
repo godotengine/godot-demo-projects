@@ -44,10 +44,6 @@ func _adjust_ui() -> void:
 		rotation_container.pivot_offset = rotation_container.size / 2
 		rotation_container.rotation = saved_rotation
 
-	if camera_display.resized.is_connected(_adjust_ui):
-		camera_display.resized.disconnect(_adjust_ui)
-	camera_display.resized.connect(_adjust_ui, ConnectFlags.CONNECT_ONE_SHOT)
-
 
 func _reload_camera_list() -> void:
 	camera_list.clear()
@@ -180,6 +176,10 @@ func _start_camera_feed() -> void:
 	camera_feed.feed_is_active = true
 
 
+func _is_mobile_web() -> bool:
+	return OS.get_name() == "Web" and DisplayServer.is_touchscreen_available()
+
+
 func _update_scene_transform() -> void:
 	if not camera_feed or not camera_feed.feed_is_active:
 		return
@@ -197,13 +197,21 @@ func _update_scene_transform() -> void:
 	var is_front_camera := camera_feed.get_position() == CameraFeed.FeedPosition.FEED_FRONT
 	mirror_container.scale = Vector2(-1.0 if is_front_camera else 1.0, 1.0)
 
-	rotation_container.rotation = camera_feed.feed_transform.get_rotation()
-
-	var display_size := DisplayServer.window_get_size()
-	if display_size.x > display_size.y:
-		aspect_container.ratio = preview_size.x / preview_size.y
+	if OS.get_name() == "Web":
+		rotation_container.rotation = 0
+		if _is_mobile_web():
+			var display_size := DisplayServer.window_get_size()
+			var device_is_portrait := display_size.x < display_size.y
+			var preview_is_portrait := preview_size.x < preview_size.y
+			if device_is_portrait == preview_is_portrait:
+				aspect_container.ratio = preview_size.x / preview_size.y
+			else:
+				aspect_container.ratio = preview_size.y / preview_size.x
+		else:
+			aspect_container.ratio = preview_size.x / preview_size.y
 	else:
-		aspect_container.ratio = preview_size.y / preview_size.x
+		rotation_container.rotation = camera_feed.feed_transform.get_rotation()
+		aspect_container.ratio = preview_size.x / preview_size.y
 
 
 func _get_preview_size(mat: ShaderMaterial) -> Vector2:
@@ -313,6 +321,7 @@ func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_RESIZED, NOTIFICATION_WM_SIZE_CHANGED:
 			_adjust_ui()
+			_update_scene_transform()
 
 
 func _exit_tree() -> void:
