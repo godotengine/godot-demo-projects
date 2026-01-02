@@ -27,7 +27,17 @@ func _ready() -> void:
 	_initialized = true
 
 
+func _is_mobile() -> bool:
+	var os_name := OS.get_name()
+	if os_name in ["Android", "iOS"]:
+		return true
+	if os_name == "Web" and DisplayServer.is_touchscreen_available():
+		return true
+	return false
+
+
 func _adjust_ui() -> void:
+	_adjust_content_scale()
 	camera_display.size = camera_display.get_parent_area_size() - Vector2.ONE * DISPLAY_PADDING
 
 	var saved_mirror_scale: Vector2 = mirror_container.scale if mirror_container else Vector2.ONE
@@ -42,6 +52,16 @@ func _adjust_ui() -> void:
 		rotation_container.rotation = 0.0
 		rotation_container.pivot_offset = rotation_container.size / 2
 		rotation_container.rotation = saved_rotation
+
+
+func _adjust_content_scale() -> void:
+	if not _is_mobile():
+		return
+	var screen_size := DisplayServer.screen_get_size()
+	var shorter_edge := minf(screen_size.x, screen_size.y)
+	var scale_factor := shorter_edge / BASE_VIEWPORT_WIDTH
+	scale_factor = clampf(scale_factor, 1.0, 3.0)
+	get_tree().root.content_scale_factor = scale_factor
 
 
 func _reload_camera_list() -> void:
