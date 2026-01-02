@@ -2,8 +2,10 @@ extends Control
 
 const CAMERA_DEACTIVATION_DELAY := 0.1
 const DISPLAY_PADDING := 40.0
+const BASE_VIEWPORT_WIDTH := 720.0
 
 enum ShaderMode { RGB = 0, YCBCR_SEP = 1, YCBCR = 2 }
+enum MirrorMode { AUTO = 0, MIRROR = 1, NORMAL = 2 }
 
 @onready var camera_display := $CameraDisplay
 @onready var mirror_container := $CameraDisplay/MirrorContainer
@@ -12,6 +14,7 @@ enum ShaderMode { RGB = 0, YCBCR_SEP = 1, YCBCR = 2 }
 @onready var camera_preview := $CameraDisplay/MirrorContainer/RotationContainer/AspectContainer/CameraPreview
 @onready var camera_list := $DrawerContainer/Drawer/DrawerContent/VBoxContainer/CameraList
 @onready var format_list := $DrawerContainer/Drawer/DrawerContent/VBoxContainer/FormatList
+@onready var mirror_list := $DrawerContainer/Drawer/DrawerContent/VBoxContainer/MirrorList
 @onready var start_or_stop_button := $DrawerContainer/Drawer/DrawerContent/VBoxContainer/ButtonContainer/StartOrStopButton
 @onready var reload_button := $DrawerContainer/Drawer/DrawerContent/VBoxContainer/ButtonContainer/ReloadButton
 
@@ -23,8 +26,17 @@ var _texture_initialized := false
 
 func _ready() -> void:
 	_adjust_ui()
+	_setup_mirror_list()
 	_reload_camera_list()
 	_initialized = true
+
+
+func _setup_mirror_list() -> void:
+	mirror_list.clear()
+	mirror_list.add_item("Auto", MirrorMode.AUTO)
+	mirror_list.add_item("Mirror", MirrorMode.MIRROR)
+	mirror_list.add_item("Normal", MirrorMode.NORMAL)
+	mirror_list.select(MirrorMode.AUTO)
 
 
 func _is_mobile() -> bool:
@@ -212,8 +224,16 @@ func _update_scene_transform() -> void:
 	if preview_size.round().x <= 0 or preview_size.round().y <= 0:
 		return
 
-	var is_front_camera := camera_feed.get_position() == CameraFeed.FeedPosition.FEED_FRONT
-	mirror_container.scale = Vector2(-1.0 if is_front_camera else 1.0, 1.0)
+	var should_mirror: bool
+	match mirror_list.get_selected_id():
+		MirrorMode.MIRROR:
+			should_mirror = true
+		MirrorMode.NORMAL:
+			should_mirror = false
+		_:  # AUTO
+			var is_front_camera := camera_feed.get_position() == CameraFeed.FeedPosition.FEED_FRONT
+			should_mirror = is_front_camera
+	mirror_container.scale = Vector2(-1.0 if should_mirror else 1.0, 1.0)
 
 	if OS.get_name() == "Web":
 		rotation_container.rotation = 0
@@ -331,6 +351,10 @@ func _on_start_or_stop_button_pressed(change_label := true) -> void:
 func _on_reload_button_pressed() -> void:
 	_on_start_or_stop_button_pressed(false)
 	_reload_camera_list()
+
+
+func _on_mirror_list_item_selected(_index: int) -> void:
+	_update_scene_transform()
 
 
 func _notification(what: int) -> void:

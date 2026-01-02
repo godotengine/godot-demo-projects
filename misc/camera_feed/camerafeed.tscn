@@ -184,7 +184,16 @@ text = "Format"
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
+[node name="MirrorLabel" type="Label" parent="DrawerContainer/Drawer/DrawerContent/VBoxContainer"]
+layout_mode = 2
+text = "Mirror"
+
+[node name="MirrorList" type="OptionButton" parent="DrawerContainer/Drawer/DrawerContent/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
 [connection signal="pressed" from="DrawerContainer/Drawer/DrawerContent/VBoxContainer/ButtonContainer/StartOrStopButton" to="." method="_on_start_or_stop_button_pressed"]
 [connection signal="pressed" from="DrawerContainer/Drawer/DrawerContent/VBoxContainer/ButtonContainer/ReloadButton" to="." method="_on_reload_button_pressed"]
 [connection signal="item_selected" from="DrawerContainer/Drawer/DrawerContent/VBoxContainer/CameraList" to="." method="_on_camera_list_item_selected"]
 [connection signal="item_selected" from="DrawerContainer/Drawer/DrawerContent/VBoxContainer/FormatList" to="." method="_on_format_list_item_selected"]
+[connection signal="item_selected" from="DrawerContainer/Drawer/DrawerContent/VBoxContainer/MirrorList" to="." method="_on_mirror_list_item_selected"]
