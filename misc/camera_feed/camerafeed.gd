@@ -2,7 +2,6 @@ extends Control
 
 const CAMERA_DEACTIVATION_DELAY := 0.1
 const DISPLAY_PADDING := 40.0
-const DEFAULT_WEB_RESOLUTION: Dictionary = {"width": 640, "height": 480}
 
 enum ShaderMode { RGB = 0, YCBCR_SEP = 1, YCBCR = 2 }
 
@@ -156,8 +155,7 @@ func _on_format_list_item_selected(index: int) -> void:
 		await get_tree().create_timer(CAMERA_DEACTIVATION_DELAY).timeout
 
 	var os_name := OS.get_name()
-	var parameters: Dictionary = DEFAULT_WEB_RESOLUTION if os_name == "Web" else {}
-	camera_feed.set_format(index, parameters)
+	camera_feed.set_format(index, {})
 
 	await get_tree().process_frame
 	_start_camera_feed()
