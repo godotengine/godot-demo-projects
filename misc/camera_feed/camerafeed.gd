@@ -23,8 +23,10 @@ var _initialized := false
 var _cached_formats: Array = []
 var _last_feed_transform: Transform2D
 var _texture_initialized := false
+var _is_mobile := false
 
 func _ready() -> void:
+	_is_mobile = _check_is_mobile()
 	_adjust_ui()
 	_setup_mirror_list()
 	_reload_camera_list()
@@ -39,7 +41,7 @@ func _setup_mirror_list() -> void:
 	mirror_list.select(MirrorMode.AUTO)
 
 
-func _is_mobile() -> bool:
+func _check_is_mobile() -> bool:
 	var os_name := OS.get_name()
 	if os_name in ["Android", "iOS"]:
 		return true
@@ -67,7 +69,7 @@ func _adjust_ui() -> void:
 
 
 func _adjust_content_scale() -> void:
-	if not _is_mobile():
+	if not _is_mobile:
 		return
 	var screen_size := DisplayServer.screen_get_size()
 	var shorter_edge := minf(screen_size.x, screen_size.y)
