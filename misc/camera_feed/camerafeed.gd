@@ -166,10 +166,12 @@ func _update_format_list() -> void:
 		var format_name: String = format.get("format", "Unknown")
 		var item := "%s - %dx%d" % [format_name, width, height]
 
-		if format.has("frame_denominator") and format.has("frame_numerator"):
-			item += " : %s / %s" % [format["frame_numerator"], format["frame_denominator"]]
-		elif format.has("framerate_denominator") and format.has("framerate_numerator"):
-			item += " : %s / %s" % [format["framerate_numerator"], format["framerate_denominator"]]
+		var fps := _get_fps(format)
+		if fps > 0:
+			if is_equal_approx(fps, roundf(fps)):
+				item += " @ %dfps" % int(fps)
+			else:
+				item += " @ %.2ffps" % fps
 		format_list.add_item(item)
 
 	format_list.selected = 0
@@ -269,6 +271,18 @@ func _get_preview_size(mat: ShaderMaterial) -> Vector2:
 			if texture:
 				return texture.get_size()
 	return Vector2.ZERO
+
+
+func _get_fps(format: Dictionary) -> float:
+	var numerator: int = format.get("frame_numerator", 0)
+	var denominator: int = format.get("frame_denominator", 0)
+	if numerator <= 0 or denominator <= 0:
+		return 0.0
+	# Linux uses frame interval (fps = denominator / numerator).
+	# Other platforms use frame rate (fps = numerator / denominator).
+	if OS.get_name() == "Linux":
+		return float(denominator) / float(numerator)
+	return float(numerator) / float(denominator)
 
 
 func _on_frame_changed() -> void:
