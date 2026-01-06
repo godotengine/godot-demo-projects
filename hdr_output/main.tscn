@@ -9,8 +9,9 @@
 [ext_resource type="Script" uid="uid://cpqmte6usoyyg" path="res://main/debug_info.gd" id="8_5vw27"]
 [ext_resource type="Texture2D" uid="uid://cvecqn4m52x7x" path="res://output_max_linear_value/spark_particle2.png" id="8_kek77"]
 [ext_resource type="Script" uid="uid://ow74i072fx6r" path="res://max_self_modulate.gd" id="9_4c57u"]
-[ext_resource type="Script" uid="uid://bb4pv67imdsne" path="res://environment/subviewport_scale.gd" id="10_dg77c"]
+[ext_resource type="Script" path="res://environment/subviewport_scale.gd" id="10_dg77c"]
 [ext_resource type="PackedScene" uid="uid://c0wukesav63su" path="res://environment/3d_environment.tscn" id="11_dg77c"]
+[ext_resource type="Script" uid="uid://b6cwewu4wkvv5" path="res://setup_instructions/setup_instructions.gd" id="13_w48qg"]
 [ext_resource type="Script" uid="uid://dxtpfowo3fjm4" path="res://max_colour.gd" id="13_ycdy4"]
 
 [sub_resource type="Gradient" id="Gradient_4c57u"]
@@ -366,7 +367,7 @@ offset_right = 1152.0
 offset_bottom = 648.0
 color = Color(0.21568628, 0.21568628, 0.21568628, 1)
 script = ExtResource("6_272bh")
-scenes = [NodePath("output_max_linear_value"), NodePath("EnvironmentScene"), NodePath("ColorSweep"), NodePath("RichTextLabel")]
+scenes = [NodePath("output_max_linear_value"), NodePath("EnvironmentScene"), NodePath("ColorSweep"), NodePath("SetupInstructions")]
 
 [node name="Tab" type="ColorRect" parent="DemoScenes" unique_id=261230258]
 layout_mode = 0
@@ -405,20 +406,23 @@ anchors_preset = 0
 offset_right = 828.0
 offset_bottom = 570.0
 
-[node name="Sun" type="ColorRect" parent="DemoScenes/output_max_linear_value" unique_id=347517105]
-layout_mode = 0
-offset_left = 108.0
-offset_top = 34.0
-offset_right = 274.0
-offset_bottom = 134.0
+[node name="Mountain" type="Node2D" parent="DemoScenes/output_max_linear_value" unique_id=1183547058]
+position = Vector2(29, 27)
+
+[node name="Sun" type="ColorRect" parent="DemoScenes/output_max_linear_value/Mountain" unique_id=347517105]
+offset_left = 73.0
+offset_top = 8.0
+offset_right = 239.0
+offset_bottom = 108.0
 color = Color(0.99215686, 0.7058824, 0.41568628, 1)
 script = ExtResource("13_ycdy4")
 sdr_colour = Color(0.99215686, 0.7058824, 0.41568628, 1)
+max_linear_value_limit = 10.0
 
-[node name="Mountain" type="Sprite2D" parent="DemoScenes/output_max_linear_value" unique_id=1827667879]
+[node name="Mountain" type="Sprite2D" parent="DemoScenes/output_max_linear_value/Mountain" unique_id=1827667879]
 texture_filter = 1
 texture_repeat = 1
-position = Vector2(195, 146)
+position = Vector2(160, 120)
 texture = ExtResource("7_5vw27")
 
 [node name="Sparkles" type="GPUParticles2D" parent="DemoScenes/output_max_linear_value" unique_id=817018124]
@@ -431,14 +435,23 @@ script = ExtResource("9_4c57u")
 
 [node name="Label" type="Label" parent="DemoScenes/output_max_linear_value" unique_id=558150534]
 layout_mode = 0
-offset_left = 99.0
-offset_top = 390.0
-offset_right = 707.0
-offset_bottom = 465.0
+offset_left = 95.0
+offset_top = 458.0
+offset_right = 703.0
+offset_bottom = 533.0
 text = "DRAFT DEMO PROJECT
 HELP WANTED
 Please let @allenwp know if you have a high quality demo for use in this scene."
 horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="DemoScenes/output_max_linear_value" unique_id=2086992899]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 360.0
+offset_right = 519.0
+offset_bottom = 409.0
+text = "TODO: 3D model that uses
+output_max_linear_value"
 
 [node name="EnvironmentScene" type="Control" parent="DemoScenes" unique_id=1160571939]
 visible = false
@@ -474,11 +487,20 @@ HELP WANTED
 Please let @allenwp know if you have a high quality demo for use in this scene."
 horizontal_alignment = 1
 
+[node name="Label" type="Label" parent="DemoScenes/EnvironmentScene" unique_id=524097135]
+layout_mode = 0
+offset_left = -88.0
+offset_top = -374.0
+offset_right = 107.0
+offset_bottom = -325.0
+text = "TODO: 2D thing that uses
+overbright colours"
+
 [node name="ColorSweep" parent="DemoScenes" unique_id=784950953 instance=ExtResource("6_7mycd")]
 visible = false
 layout_mode = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="DemoScenes" unique_id=660978631]
+[node name="SetupInstructions" type="RichTextLabel" parent="DemoScenes" unique_id=660978631]
 visible = false
 layout_mode = 0
 offset_left = 55.0
@@ -504,11 +526,15 @@ text = "[font_size=20]Steps to enable HDR output in your project:[/font_size]
 
 4) Turn on the [code]display/window/hdr/request_hdr_output[/code] project setting and also turn on [code]hdr_output_requested[/code] of all other Windows that should support HDR output.
 
-5) [Optional] Provide in-game settings for the player to adjust HDR brightness and maximum luminance by copying [code]in_game_hdr_settings[/code] from this demo into your project."
+5) [Optional] Provide in-game settings for the player to adjust HDR brightness and maximum luminance by copying [code]in_game_hdr_settings[/code] from this demo into your project.
+
+View the [url=\"https://github.com/godotengine/godot-docs/pull/11548\"]manual page[/url] to learn more about HDR output."
 context_menu_enabled = true
 vertical_alignment = 1
 selection_enabled = true
 drag_and_drop_selection_enabled = false
+script = ExtResource("13_w48qg")
 
 [connection signal="pressed" from="VBoxContainer/ColorRect2/DeveloperSettings/Button" to="VBoxContainer/ColorRect/InGameHDRSettings" method="erase_settings"]
 [connection signal="item_selected" from="DemoScenes/Tab/OptionButton" to="DemoScenes" method="_on_demo_scene_item_selected"]
+[connection signal="meta_clicked" from="DemoScenes/SetupInstructions" to="DemoScenes/SetupInstructions" method="_on_meta_clicked"]
