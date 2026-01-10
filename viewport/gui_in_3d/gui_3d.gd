@@ -1,8 +1,52 @@
 extends Node3D
 
+@export var gui_scene : PackedScene :
+	set(new_scene):
+		gui_scene = new_scene
+		if node_viewport:
+			if _gui_scene_instance:
+				node_viewport.remove_child(_gui_scene_instance)
+				_gui_scene_instance.queue_free()
+			_gui_scene_instance = gui_scene.instantiate()
+			node_viewport.add_child(_gui_scene_instance)
+	get():
+		return gui_scene
+
+
+@export var screen_size_3d := Vector2(1, 1) :
+	set(new_size):
+		screen_size_3d = new_size
+		if node_collision:
+			node_quad.mesh.size = screen_size_3d
+			node_collision.shape.size.x = screen_size_3d.x
+			node_collision.shape.size.y = screen_size_3d.y
+	get():
+		return screen_size_3d
+
+
+@export var screen_size_2d := Vector2(512, 512) :
+	set(new_size):
+		screen_size_2d = new_size
+		if node_viewport:
+			node_viewport.size = screen_size_2d
+	get():
+		return screen_size_2d
+
+
+@export var billboard_mode : BaseMaterial3D.BillboardMode :
+	set(new_mode):
+		billboard_mode = new_mode
+		if billboard_mode != BaseMaterial3D.BillboardMode.BILLBOARD_DISABLED:
+			# run billboard specific code only if billboard mode is set
+			set_process(true)
+		else:
+			set_process(false)
+	get():
+		return billboard_mode
+
 
 ## Used for checking if the mouse is inside the Area3D.
-var is_mouse_inside: bool = false
+var is_mouse_inside := false
 
 ## The last processed input touch/mouse event. Used to calculate relative movement.
 var last_event_pos2D := Vector2()
@@ -10,19 +54,24 @@ var last_event_pos2D := Vector2()
 ## The time of the last event in seconds since engine start.
 var last_event_time := -1.0
 
+var _gui_scene_instance : Node = null
+
 @onready var node_viewport: SubViewport = $SubViewport
 @onready var node_quad: MeshInstance3D = $Quad
 @onready var node_area: Area3D = $Quad/Area3D
+@onready var node_collision: CollisionShape3D = $Quad/Area3D/CollisionShape3D
 
 
 func _ready() -> void:
+	# call setters
+	gui_scene = gui_scene
+	screen_size_3d = screen_size_3d
+	screen_size_2d = screen_size_2d
+	billboard_mode = billboard_mode
+
 	node_area.mouse_entered.connect(_mouse_entered_area)
 	node_area.mouse_exited.connect(_mouse_exited_area)
 	node_area.input_event.connect(_mouse_input_event)
-
-	# If the material is NOT set to use billboard settings, then avoid running billboard specific code
-	if node_quad.get_surface_override_material(0).billboard_mode == BaseMaterial3D.BillboardMode.BILLBOARD_DISABLED:
-		set_process(false)
 
 
 func _process(_delta: float) -> void:
@@ -65,8 +114,6 @@ func _mouse_input_event(_camera: Camera3D, input_event: InputEvent, event_positi
 	# Convert position to a coordinate space relative to the Area3D node.
 	# NOTE: `affine_inverse()` accounts for the Area3D node's scale, rotation, and position in the scene!
 	event_pos3D = node_quad.global_transform.affine_inverse() * event_pos3D
-
-	# TODO: Adapt to bilboard mode or avoid completely.
 
 	var event_pos2D := Vector2()
 
@@ -118,21 +165,20 @@ func _mouse_input_event(_camera: Camera3D, input_event: InputEvent, event_positi
 
 
 func rotate_area_to_billboard() -> void:
-	var billboard_mode: BaseMaterial3D.BillboardMode = node_quad.get_surface_override_material(0).billboard_mode
+		# custom billboard implementation - needed for rotate physics (collision) node,
+		# but also apply to mesh node (instead of using billboard material) to keep it in sync with collision shape
 
-	# Try to match the area with the material's billboard setting, if enabled.
-	if billboard_mode > 0:
 		# Get the camera.
 		var camera := get_viewport().get_camera_3d()
 		# Look in the same direction as the camera.
 		var look := camera.to_global(Vector3(0, 0, -100)) - camera.global_transform.origin
-		look = node_area.position + look
+		look = node_quad.position + look
 
 		# Y-Billboard: Lock Y rotation, but gives bad results if the camera is tilted.
 		if billboard_mode == 2:
 			look = Vector3(look.x, 0, look.z)
 
-		node_area.look_at(look, Vector3.UP)
+		node_quad.look_at(look, Vector3.UP)
 
 		# Rotate in the Z axis to compensate camera tilt.
-		node_area.rotate_object_local(Vector3.BACK, camera.rotation.z)
+		node_quad.rotate_object_local(Vector3.BACK, camera.rotation.z)
