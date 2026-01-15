@@ -1,10 +1,5 @@
 using Godot;
 using System.Collections.Generic;
-#if REAL_T_IS_DOUBLE
-using real_t = System.Double;
-#else
-using real_t = System.Single;
-#endif
 
 /// <summary>
 /// Assigns Z-index values to Node25D children.
@@ -18,7 +13,7 @@ public partial class YSort25D : Node // Note: NOT Node2D, Node25D, or Node2D
     [Export]
     public bool sortEnabled = true;
 
-    public override void _Process(real_t delta)
+    public override void _Process(double delta)
     {
         if (sortEnabled)
         {
