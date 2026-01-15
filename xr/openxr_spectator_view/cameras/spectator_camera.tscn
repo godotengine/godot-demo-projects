@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://b2e8441cdqg6d"]
+
+[ext_resource type="Script" uid="uid://ci0gsq3yqe1wt" path="res://cameras/spectator_camera.gd" id="1_0ekcx"]
+[ext_resource type="Shader" uid="uid://dqhkrv0efh3w" path="res://shaders/color.gdshader" id="2_s80j5"]
+[ext_resource type="Shader" uid="uid://ju0j2tg5psem" path="res://shaders/textured_unshaded.gdshader" id="3_lc8yd"]
+[ext_resource type="Script" uid="uid://cff5qp2u2ycdo" path="res://cameras/spectator_camera_area.gd" id="4_823mk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lc8yd"]
+render_priority = 0
+shader = ExtResource("2_s80j5")
+shader_parameter/albedo_color = Color(0.21230483, 0.21230483, 0.21230483, 1)
+shader_parameter/metallic = 0.30000000447036
+shader_parameter/roughness = 0.80000001192096
+shader_parameter/specular = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_823mk"]
+material = SubResource("ShaderMaterial_lc8yd")
+size = Vector3(0.15, 0.15, 0.3)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_uepmo"]
+material = SubResource("ShaderMaterial_lc8yd")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.05
+
+[sub_resource type="BoxMesh" id="BoxMesh_k3q65"]
+material = SubResource("ShaderMaterial_lc8yd")
+size = Vector3(0.3, 0.15, 0.01)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_823mk"]
+render_priority = 0
+shader = ExtResource("3_lc8yd")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_s80j5"]
+size = Vector2(0.27, 0.135)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uepmo"]
+size = Vector3(0.468, 0.15, 0.1)
+
+[node name="SpectatorCamera" type="Camera3D"]
+cull_mask = 1048573
+script = ExtResource("1_0ekcx")
+
+[node name="CameraBody" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+layers = 2
+mesh = SubResource("BoxMesh_823mk")
+
+[node name="Lens" type="MeshInstance3D" parent="CameraBody"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -0.175)
+layers = 2
+mesh = SubResource("CylinderMesh_uepmo")
+
+[node name="DisplayContainer" type="MeshInstance3D" parent="CameraBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24195343, 0, -0.11492422)
+layers = 2
+mesh = SubResource("BoxMesh_k3q65")
+
+[node name="Display" type="MeshInstance3D" parent="CameraBody/DisplayContainer"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.009058937)
+layers = 2
+material_override = SubResource("ShaderMaterial_823mk")
+mesh = SubResource("QuadMesh_s80j5")
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("4_823mk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.158, 0, 0.1)
+shape = SubResource("BoxShape3D_uepmo")
