@@ -8,10 +8,10 @@ Included settings are:
 
 - UI scale.
 - Resolution scale.
-- Display filter (bilinear or AMD FidelityFX Super Resolution 1.0).
+- Display filter (bilinear, AMD FidelityFX Super Resolution 1.0 or 2.2).
 - Fullscreen.
 - V-Sync (traditional and adaptive).
-- Anti-aliasing (MSAA and FXAA).
+- Anti-aliasing (MSAA, FXAA, SMAA, TAA).
 - Camera field of view.
 
 **Effect settings:**

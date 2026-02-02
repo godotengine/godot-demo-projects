@@ -5,7 +5,7 @@ on:
       - master
 
 env:
-  GODOT_VERSION: 4.3
+  GODOT_VERSION: 4.5.1
 
 jobs:
   export-html5:
@@ -13,10 +13,10 @@ jobs:
     name: Export projects to Web and deploy to GitHub Pages
     runs-on: ubuntu-24.04
     container:
-      image: barichello/godot-ci:4.3
+      image: barichello/godot-ci:4.5.1
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup
         run: |

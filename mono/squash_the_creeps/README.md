@@ -29,6 +29,10 @@ Language: C#
 
 Renderer: Forward+
 
+> [!NOTE]
+>
+> There is a GDScript version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/3d/squash_the_creeps).
+
 ## Screenshots
 
 ![Screenshot](screenshots/squash_the_creeps.webp)

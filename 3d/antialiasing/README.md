@@ -1,13 +1,17 @@
 # 3D Anti-Aliasing
 
-This project showcases the various 3D antialiasing techniques supported by Godot.
+This project showcases the various [3D antialiasing](https://docs.godotengine.org/en/latest/tutorials/3d/3d_antialiasing.html)
+techniques supported by Godot.
 
 - **Multisample antialiasing (MSAA):** High quality, high performance cost.
   Does not blur the image.
   - Does not affect shader-induced aliasing (such as specular aliasing) or alpha
 	scissor materials, so these will remain aliased.
-- **Fast approximate antialiasing (FXAA):** Medium quality, low performance cost.
+- **Fast approximate antialiasing (FXAA):** Low quality, low performance cost.
   Slightly blurs the image.
+- **Subpixel morphological antialiasing (SMAA):** Medium quality, moderate performance
+  cost. Slightly blurs the image, but not as much as FXAA. Godot only supports
+  the spatial version of SMAA, also called SMAA 1x.
 - **Temporal antialiasing (TAA):** High-quality, low performance cost. Slightly
   blurs the image (but less so than FXAA).
   - Antialiasing quality is worse on fast-moving objects than other methods,

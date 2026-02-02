@@ -29,6 +29,10 @@ Language: GDScript
 
 Renderer: Forward+
 
+> [!NOTE]
+>
+> There is a C# version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/squash_the_creeps).
+
 Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2751
 
 ## Screenshots

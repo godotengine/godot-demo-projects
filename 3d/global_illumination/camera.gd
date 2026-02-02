@@ -30,14 +30,16 @@ func _input(input_event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	var motion := Vector3(
 			Input.get_axis(&"move_left", &"move_right"),
-			0,
+			0.0,
 			Input.get_axis(&"move_forward", &"move_back")
 		)
+	var motion_y: float = Input.get_axis(&"move_down", &"move_up")
 
 	# Normalize motion to prevent diagonal movement from being
 	# `sqrt(2)` times faster than straight movement.
 	motion = motion.normalized()
 
 	velocity += MOVE_SPEED * delta * (transform.basis * motion)
+	velocity += Vector3(0.0, MOVE_SPEED * delta * motion_y, 0.0)
 	velocity *= 0.85
 	position += velocity

@@ -29,7 +29,7 @@ func _ready() -> void:
 		%UnsupportedLabel.visible = true
 		mark_as_unsupported(%FilterOptionButton)
 		mark_as_unsupported(%TAAOptionButton)
-		mark_as_unsupported(%FXAAOptionButton)
+		mark_as_unsupported(%ScreenSpaceAAOptionButton)
 		mark_as_unsupported(%SDFGIOptionButton)
 		mark_as_unsupported(%SSAOOptionButton)
 		mark_as_unsupported(%SSReflectionsOptionButton)
@@ -134,18 +134,19 @@ func _on_vsync_option_button_item_selected(index: int) -> void:
 	# Adaptive V-Sync automatically disables V-Sync when the framerate target is not met, and enables
 	# V-Sync otherwise. This prevents stuttering and reduces input latency when the framerate target
 	# is not met, at the cost of visible tearing.
-	if index == 0: # Disabled (default)
-		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
-	elif index == 1: # Adaptive
-		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ADAPTIVE)
-	elif index == 2: # Enabled
-		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+	match index:
+		0: # Disabled (default)
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+		1: # Adaptive
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ADAPTIVE)
+		2: # Enabled
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 
 
-func _on_limit_fps_slider_value_changed(value: float):
+func _on_fps_limit_slider_value_changed(value: float):
 	# The maximum number of frames per second that can be rendered.
 	# A value of 0 means "no limit".
-	Engine.max_fps = value
+	Engine.max_fps = roundi(value)
 
 
 func _on_msaa_option_button_item_selected(index: int) -> void:
@@ -167,10 +168,10 @@ func _on_taa_option_button_item_selected(index: int) -> void:
 	get_viewport().use_taa = index == 1
 
 
-func _on_fxaa_option_button_item_selected(index: int) -> void:
+func _on_screen_space_aa_option_button_item_selected(index: int) -> void:
 	# Fast approximate anti-aliasing. Much faster than MSAA (and works on alpha scissor edges),
 	# but blurs the whole scene rendering slightly.
-	get_viewport().screen_space_aa = int(index == 1) as Viewport.ScreenSpaceAA
+	get_viewport().screen_space_aa = int(index) as Viewport.ScreenSpaceAA
 
 
 func _on_fullscreen_option_button_item_selected(index: int) -> void:
@@ -395,7 +396,7 @@ func _on_saturation_slider_value_changed(value: float) -> void:
 func _on_very_low_preset_pressed() -> void:
 	%TAAOptionButton.selected = 0
 	%MSAAOptionButton.selected = 0
-	%FXAAOptionButton.selected = 0
+	%ScreenSpaceAAOptionButton.selected = 0
 	%ShadowSizeOptionButton.selected = 0
 	%ShadowFilterOptionButton.selected = 0
 	%MeshLODOptionButton.selected = 0
@@ -410,7 +411,7 @@ func _on_very_low_preset_pressed() -> void:
 func _on_low_preset_pressed() -> void:
 	%TAAOptionButton.selected = 0
 	%MSAAOptionButton.selected = 0
-	%FXAAOptionButton.selected = 1
+	%ScreenSpaceAAOptionButton.selected = 1
 	%ShadowSizeOptionButton.selected = 1
 	%ShadowFilterOptionButton.selected = 1
 	%MeshLODOptionButton.selected = 1
@@ -426,7 +427,7 @@ func _on_low_preset_pressed() -> void:
 func _on_medium_preset_pressed() -> void:
 	%TAAOptionButton.selected = 1
 	%MSAAOptionButton.selected = 0
-	%FXAAOptionButton.selected = 0
+	%ScreenSpaceAAOptionButton.selected = 2
 	%ShadowSizeOptionButton.selected = 2
 	%ShadowFilterOptionButton.selected = 2
 	%MeshLODOptionButton.selected = 1
@@ -442,7 +443,7 @@ func _on_medium_preset_pressed() -> void:
 func _on_high_preset_pressed() -> void:
 	%TAAOptionButton.selected = 1
 	%MSAAOptionButton.selected = 0
-	%FXAAOptionButton.selected = 0
+	%ScreenSpaceAAOptionButton.selected = 2
 	%ShadowSizeOptionButton.selected = 3
 	%ShadowFilterOptionButton.selected = 3
 	%MeshLODOptionButton.selected = 2
@@ -458,7 +459,7 @@ func _on_high_preset_pressed() -> void:
 func _on_ultra_preset_pressed() -> void:
 	%TAAOptionButton.selected = 1
 	%MSAAOptionButton.selected = 1
-	%FXAAOptionButton.selected = 0
+	%ScreenSpaceAAOptionButton.selected = 2
 	%ShadowSizeOptionButton.selected = 4
 	%ShadowFilterOptionButton.selected = 4
 	%MeshLODOptionButton.selected = 3
@@ -475,7 +476,7 @@ func update_preset() -> void:
 	# Simulate options being manually selected to run their respective update code.
 	%TAAOptionButton.item_selected.emit(%TAAOptionButton.selected)
 	%MSAAOptionButton.item_selected.emit(%MSAAOptionButton.selected)
-	%FXAAOptionButton.item_selected.emit(%FXAAOptionButton.selected)
+	%ScreenSpaceAAOptionButton.item_selected.emit(%ScreenSpaceAAOptionButton.selected)
 	%ShadowSizeOptionButton.item_selected.emit(%ShadowSizeOptionButton.selected)
 	%ShadowFilterOptionButton.item_selected.emit(%ShadowFilterOptionButton.selected)
 	%MeshLODOptionButton.item_selected.emit(%MeshLODOptionButton.selected)
