@@ -219,7 +219,7 @@ func _render_process(with_next_texture: int, wave_point: Vector4, tex_size: Vect
 	@warning_ignore("integer_division")
 	var y_groups := (tex_size.y - 1) / 8 + 1
 
-	# Figure out which uniforms to assign.
+	# Figure out which texture to assign to which set.
 	var current_set := texture_sets[with_next_texture * 3]
 	var previous_set := texture_sets[with_next_texture * 3 + 1]
 	var next_set := texture_sets[with_next_texture * 3 + 2]
