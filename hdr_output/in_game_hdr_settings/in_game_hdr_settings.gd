@@ -17,7 +17,7 @@ func _on_visibility_changed() -> void:
 
 func _ready() -> void:
 	var window: Window = get_window()
-	var window_id = get_window().get_window_id()
+	var window_id = window.get_window_id()
 	var hdr_settings: ConfigFile = ConfigFile.new()
 	if hdr_settings.load(HDR_SETTINGS_FILE) == OK:
 		window.hdr_output_requested = hdr_settings.get_value(HDR_SETTINGS_SECTION, "hdr_output_requested", window.hdr_output_requested)
@@ -30,7 +30,7 @@ func _ready() -> void:
 
 func save_settings() -> void:
 	var window: Window = get_window()
-	var window_id = get_window().get_window_id()
+	var window_id = window.get_window_id()
 	var hdr_settings: ConfigFile = ConfigFile.new()
 	hdr_settings.set_value(HDR_SETTINGS_SECTION, "hdr_output_requested", window.hdr_output_requested)
 	if window.hdr_output_requested:
@@ -47,9 +47,8 @@ func erase_settings() -> void:
 
 
 func _process(_delta: float) -> void:
-	var window: Window = get_window()
 	var window_id = get_window().get_window_id()
-	var hdr_supported := window.is_hdr_output_supported()
+	var hdr_supported := DisplayServer.window_is_hdr_output_supported(window_id)
 	%HDRCheckButton.disabled = !hdr_supported
 
 	var hdr_output_enabled: bool = DisplayServer.window_is_hdr_output_enabled(window_id)
