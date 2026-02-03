@@ -513,19 +513,19 @@ theme_override_fonts/mono_font = SubResource("SystemFont_7mycd")
 bbcode_enabled = true
 text = "[font_size=20]Steps to enable HDR output in your project:[/font_size]
 
-1) Ensure all Environment resources do [i]not[/i] use SDR-only features:
+1) Ensure [i]no[/i] Environment resources use SDR-only features:
 	- Tonemap Mode: Filmic or ACES
 	- Glow Blend Mode: Soft Light
 	- Adjustments: Color Correction
 
 2) Configure the [code]rendering/rendering_device/driver[/code] project setting to the following:
-	- macos: metal
-	- ios: metal
-	- windows: d3d12
+	- macOS: metal
+	- iOS: metal
+	- Windows: d3d12
 
-3) Turn on the [code]rendering/viewport/hdr_2d[/code] project setting and also turn on [code]use_hdr_2d[/code] of all Subviewport and Windows that should support HDR output.
+3) Turn on the [code]rendering/viewport/hdr_2d[/code] project setting and enable [code]use_hdr_2d[/code] of all Subviewports and Windows that should support HDR output.
 
-4) Turn on the [code]display/window/hdr/request_hdr_output[/code] project setting and also turn on [code]hdr_output_requested[/code] of all other Windows that should support HDR output.
+4) Turn on the [code]display/window/hdr/request_hdr_output[/code] project setting and enable [code]hdr_output_requested[/code] of all other Windows that should support HDR output.
 
 5) [Optional] Provide in-game settings for the player to adjust HDR brightness and maximum luminance by copying [code]in_game_hdr_settings[/code] from this demo into your project.
 

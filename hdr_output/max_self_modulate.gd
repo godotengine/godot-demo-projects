@@ -10,7 +10,7 @@ func _process(_delta: float) -> void:
 	var max_linear_value = get_window().get_output_max_linear_value()
 	if max_linear_value_limit >= 0.0:
 		max_linear_value = minf(max_linear_value, max_linear_value_limit)
-	self.self_modulate = normalize_color(sdr_self_modulate, max_linear_value)
+	self_modulate = normalize_color(sdr_self_modulate, max_linear_value)
 
 
 func normalize_color(srgb_color, max_linear_value = 1.0):

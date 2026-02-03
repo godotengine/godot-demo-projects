@@ -12,8 +12,7 @@ void fragment() {
 	float log2_value = UV.x * (log2_max - log2_min) + log2_min;
 	float scale = pow(2.0, log2_value);
 
-	if (UV.y >= top_bar)
-	{
+	if (UV.y >= top_bar) {
 		float padding = 0.005;
 		float y = (UV.y - top_bar - padding) / (1.0 - top_bar - padding * 2.0);
 		y = clamp(y, 0.0, 1.0);
@@ -24,9 +23,7 @@ void fragment() {
 			col.r = 1.0;
 			col.g = y / segments;
 			col.b = 0.0;
-		}
-		else if (y < segments * 2.0)
-		{
+		} else if (y < segments * 2.0) {
 			col.r = (y - segments * 2.0) / -segments;
 			col.g = 1.0;
 			col.b = 0.0;
@@ -81,18 +78,18 @@ void fragment() {
 			}
 			float tick_threshold = scale * 0.02;
 			if ((scale > 1.0 - tick_threshold && scale < 1.0 + tick_threshold)
-				|| (scale > 0.0 - tick_threshold && scale < 0.0 + tick_threshold)
-				|| (scale > 0.1 - tick_threshold && scale < 0.1 + tick_threshold)) {
+					|| (scale > 0.0 - tick_threshold && scale < 0.0 + tick_threshold)
+					|| (scale > 0.1 - tick_threshold && scale < 0.1 + tick_threshold)) {
 				color = vec3(tick_col);
 			} else if (UV.y > 0.04
-				&& ((scale > 0.9 - tick_threshold && scale < 0.9 + tick_threshold)
-				|| (scale > 0.8 - tick_threshold && scale < 0.8 + tick_threshold)
-				|| (scale > 0.7 - tick_threshold && scale < 0.7 + tick_threshold)
-				|| (scale > 0.6 - tick_threshold && scale < 0.6 + tick_threshold)
-				|| (scale > 0.5 - tick_threshold && scale < 0.5 + tick_threshold)
-				|| (scale > 0.4 - tick_threshold && scale < 0.4 + tick_threshold)
-				|| (scale > 0.3 - tick_threshold && scale < 0.3 + tick_threshold)
-				|| (scale > 0.2 - tick_threshold && scale < 0.2 + tick_threshold))) {
+					&& ((scale > 0.9 - tick_threshold && scale < 0.9 + tick_threshold)
+					|| (scale > 0.8 - tick_threshold && scale < 0.8 + tick_threshold)
+					|| (scale > 0.7 - tick_threshold && scale < 0.7 + tick_threshold)
+					|| (scale > 0.6 - tick_threshold && scale < 0.6 + tick_threshold)
+					|| (scale > 0.5 - tick_threshold && scale < 0.5 + tick_threshold)
+					|| (scale > 0.4 - tick_threshold && scale < 0.4 + tick_threshold)
+					|| (scale > 0.3 - tick_threshold && scale < 0.3 + tick_threshold)
+					|| (scale > 0.2 - tick_threshold && scale < 0.2 + tick_threshold))) {
 				color = vec3(tick_col);
 			}
 		}
