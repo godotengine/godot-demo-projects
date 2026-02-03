@@ -1,6 +1,6 @@
 extends Node
 
-@export var sdr_colour: Color = Color.WHITE
+@export var sdr_color: Color = Color.WHITE
 @export_range(0, 20, 0.1, "or_less", "or_greater") var max_linear_value_limit: float = -1.0
 
 
@@ -10,7 +10,7 @@ func _process(_delta: float) -> void:
 	var max_linear_value = get_window().get_output_max_linear_value()
 	if max_linear_value_limit >= 0.0:
 		max_linear_value = minf(max_linear_value, max_linear_value_limit)
-	self.color = normalize_color(sdr_colour, max_linear_value)
+	self.color = normalize_color(sdr_color, max_linear_value)
 
 
 func normalize_color(srgb_color, max_linear_value = 1.0):
