@@ -47,7 +47,7 @@ void fragment() {
 		color = col * scale;
 	} else {
 		color = vec3(1.0) * scale;
-		
+
 		if (UV.y < 0.01) {
 			// Max  value mark:
 			float max_log2 = log2(max_value);
@@ -83,7 +83,7 @@ void fragment() {
 			}
 		}
 	}
-	
+
 	if (clip_to_max) {
 		color = min(color, max_value);
 	}
