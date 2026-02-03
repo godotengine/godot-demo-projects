@@ -1,9 +1,4 @@
 using Godot;
-#if REAL_T_IS_DOUBLE
-using real_t = System.Double;
-#else
-using real_t = System.Single;
-#endif
 
 [Tool]
 public partial class PlayerSprite : Sprite2D
@@ -24,9 +19,11 @@ public partial class PlayerSprite : Sprite2D
         _parentMath = _parent.GetChild<PlayerMath25D>(0);
     }
 
-    public override void _Process(real_t delta)
+    public override void _Process(double delta)
     {
-	    if (Engine.EditorHint)
+        float deltaf = (float) delta;
+
+	    if (Engine.IsEditorHint())
         {
 		    return; // Don't run this in the editor.
         }
@@ -34,7 +31,7 @@ public partial class PlayerSprite : Sprite2D
         bool movement = CheckMovement(); // Always run to get direction, but don't always use return bool.
 
         // Test-only move and collide, check if the player is on the ground.
-        var k = _parentMath.MoveAndCollide(Vector3.Down * 10 * delta, true, true, true);
+        var k = _parentMath.MoveAndCollide(Vector3.Down * 10 * deltaf, true, 0.001f, true);
         if (k != null)
         {
             if (movement)
@@ -44,9 +41,9 @@ public partial class PlayerSprite : Sprite2D
                 Texture = _run;
                 if (Input.IsActionPressed("movement_modifier"))
                 {
-                    delta /= 2;
+                    deltaf /= 2;
                 }
-                _progress = (_progress + FRAMERATE * delta) % 6;
+                _progress = (_progress + FRAMERATE * deltaf) % 6;
                 Frame = _direction * 6 + (int)_progress;
             }
             else
@@ -73,28 +70,28 @@ public partial class PlayerSprite : Sprite2D
         switch (viewModeIndex)
         {
             case 0:
-                t.x = new Vector2(1, 0);
-                t.y = new Vector2(0, 0.75f);
+                t.X = new Vector2(1, 0);
+                t.Y = new Vector2(0, 0.75f);
                 break;
             case 1:
-                t.x = new Vector2(1, 0);
-                t.y = new Vector2(0, 1);
+                t.X = new Vector2(1, 0);
+                t.Y = new Vector2(0, 1);
                 break;
             case 2:
-                t.x = new Vector2(1, 0);
-                t.y = new Vector2(0, 0.5f);
+                t.X = new Vector2(1, 0);
+                t.Y = new Vector2(0, 0.5f);
                 break;
             case 3:
-                t.x = new Vector2(1, 0);
-                t.y = new Vector2(0, 1);
+                t.X = new Vector2(1, 0);
+                t.Y = new Vector2(0, 1);
                 break;
             case 4:
-                t.x = new Vector2(1, 0);
-                t.y = new Vector2(0.75f, 0.75f);
+                t.X = new Vector2(1, 0);
+                t.Y = new Vector2(0.75f, 0.75f);
                 break;
             case 5:
-                t.x = new Vector2(1, 0.25f);
-                t.y = new Vector2(0, 1);
+                t.X = new Vector2(1, 0.25f);
+                t.Y = new Vector2(0, 1);
                 break;
         }
         Transform = t;
@@ -105,7 +102,7 @@ public partial class PlayerSprite : Sprite2D
     /// </summary>
     private void SpriteBasis()
     {
-        if (!Engine.EditorHint)
+        if (!Engine.IsEditorHint())
         {
             if (Input.IsActionPressed("forty_five_mode"))
             {

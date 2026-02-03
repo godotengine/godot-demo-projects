@@ -41,9 +41,9 @@ public struct Transform25D : IEquatable<Transform25D>
     {
         get
         {
-            Vector2 pos = spatialPosition.x * basis.x;
-            pos += spatialPosition.y * basis.y;
-            pos += spatialPosition.z * basis.z;
+            Vector2 pos = spatialPosition.X * basis.x;
+            pos += spatialPosition.Y * basis.y;
+            pos += spatialPosition.Z * basis.z;
             return pos;
         }
     }

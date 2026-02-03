@@ -1,9 +1,4 @@
 using Godot;
-#if REAL_T_IS_DOUBLE
-using real_t = System.Double;
-#else
-using real_t = System.Single;
-#endif
 
 /// <summary>
 /// Adds a simple shadow below an object.
@@ -16,7 +11,7 @@ public partial class ShadowMath25D : CharacterBody3D
     /// <summary>
     /// The maximum distance below objects that shadows will appear.
     /// </summary>
-    public real_t shadowLength = 1000;
+    public float shadowLength = 1000.0f;
     private Node25D shadowRoot;
     private Node3D targetMath;
 
@@ -27,7 +22,7 @@ public partial class ShadowMath25D : CharacterBody3D
         targetMath = shadowRoot.GetParent().GetChild<Node25D>(index - 1).GetChild<Node3D>(0);
     }
 
-    public override void _Process(real_t delta)
+    public override void _Process(double delta)
     {
         if (targetMath == null)
         {

@@ -1,9 +1,4 @@
 using Godot;
-#if REAL_T_IS_DOUBLE
-using real_t = System.Double;
-#else
-using real_t = System.Single;
-#endif
 
 /// <summary>
 /// Handles Player-specific behavior like moving. We calculate such things with CharacterBody3D.
@@ -11,7 +6,7 @@ using real_t = System.Single;
 public partial class PlayerMath25D : CharacterBody3D
 {
     private Node25D _parent;
-    public real_t verticalSpeed = 0;
+    public float verticalSpeed = 0.0f;
     public bool isometricControls = true;
 
     public override void _Ready()
@@ -19,8 +14,10 @@ public partial class PlayerMath25D : CharacterBody3D
         _parent = GetParent<Node25D>();
     }
 
-    public override void _Process(real_t delta)
+    public override void _Process(double delta)
     {
+        float deltaf = (float) delta;
+
         if (Input.IsActionPressed("exit"))
         {
             GetTree().Quit();
@@ -28,7 +25,7 @@ public partial class PlayerMath25D : CharacterBody3D
 
         if (Input.IsActionJustPressed("view_cube_demo"))
         {
-            GetTree().ChangeScene("res://assets/cube/cube.tscn");
+            GetTree().ChangeSceneToFile("res://assets/cube/cube.tscn");
             return;
         }
 
@@ -44,15 +41,15 @@ public partial class PlayerMath25D : CharacterBody3D
         }
         else
         {
-            HorizontalMovement(delta);
-            VerticalMovement(delta);
+            HorizontalMovement(deltaf);
+            VerticalMovement(deltaf);
         }
     }
 
     /// <summary>
     /// Checks WASD and Shift for horizontal movement via MoveAndSlide.
     /// </summary>
-    private void HorizontalMovement(real_t delta)
+    private void HorizontalMovement(float delta)
     {
         Vector3 localX = Vector3.Right;
         Vector3 localZ = Vector3.Back;
@@ -65,21 +62,22 @@ public partial class PlayerMath25D : CharacterBody3D
 
         // Gather player input and add directional movement to a Vector3 variable.
         Vector2 movementVec2 = Input.GetVector("move_left", "move_right", "move_forward", "move_back");
-        Vector3 moveDir = localX * movementVec2.x + localZ * movementVec2.y;
+        Vector3 moveDir = localX * movementVec2.X + localZ * movementVec2.Y;
 
         moveDir = moveDir * delta * 600;
         if (Input.IsActionPressed("movement_modifier"))
         {
             moveDir /= 2;
         }
-        MoveAndSlide(moveDir);
+        Velocity =  moveDir;
+        MoveAndSlide();
     }
 
     /// <summary>
     /// Checks Jump and applies gravity and vertical speed via MoveAndCollide.
     /// </summary>
     /// <param name="delta">Time delta since last call</param>
-    private void VerticalMovement(real_t delta)
+    private void VerticalMovement(float delta)
     {
         if (Input.IsActionJustPressed("jump"))
         {

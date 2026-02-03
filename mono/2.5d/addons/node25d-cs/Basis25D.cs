@@ -2,12 +2,6 @@ using Godot;
 using System;
 using System.Runtime.InteropServices;
 
-#if GODOT_REAL_T_IS_DOUBLE
-using real_t = System.Double;
-#else
-using real_t = System.Single;
-#endif
-
 /// <summary>
 /// Basis25D structure for performing 2.5D transform math.
 /// Note: All code assumes that Y is UP in 3D, and DOWN in 2D.
@@ -28,23 +22,23 @@ public struct Basis25D : IEquatable<Basis25D>
     // Setting a row to zero means no movement in that direction.
     public Vector3 Row0
     {
-        get { return new Vector3(x.x, y.x, z.x); }
+        get { return new Vector3(x.X, y.X, z.X); }
         set
         {
-            x.x = value.x;
-            y.x = value.y;
-            z.x = value.z;
+            x.X = value.X;
+            y.X = value.Y;
+            z.X = value.Z;
         }
     }
 
     public Vector3 Row1
     {
-        get { return new Vector3(x.y, y.y, z.y); }
+        get { return new Vector3(x.Y, y.Y, z.Y); }
         set
         {
-            x.y = value.x;
-            y.y = value.y;
-            z.y = value.z;
+            x.Y = value.X;
+            y.Y = value.Y;
+            z.Y = value.Z;
         }
     }
 
@@ -72,7 +66,7 @@ public struct Basis25D : IEquatable<Basis25D>
         }
     }
 
-    public real_t this[int columnIndex, int rowIndex]
+    public float this[int columnIndex, int rowIndex]
     {
         get
         {
@@ -106,10 +100,10 @@ public struct Basis25D : IEquatable<Basis25D>
     /// Try to keep this number away from a multiple of Tau/4 (or Pi/2) radians.
     /// </summary>
     /// <param name="angle">The angle, in radians, between the Y axis and the X/Z axes.</param>
-    public static Basis25D Dimetric(real_t angle)
+    public static Basis25D Dimetric(float angle)
     {
-        real_t sin = Mathf.Sin(angle);
-        real_t cos = Mathf.Cos(angle);
+        float sin = Mathf.Sin(angle);
+        float cos = Mathf.Cos(angle);
         return new Basis25D(sin, -cos, 0, -1, -sin, -cos);
     }
 
@@ -126,14 +120,14 @@ public struct Basis25D : IEquatable<Basis25D>
         y = yAxis;
         z = zAxis;
     }
-    public Basis25D(real_t xx, real_t xy, real_t yx, real_t yy, real_t zx, real_t zy)
+    public Basis25D(float xx, float xy, float yx, float yy, float zx, float zy)
     {
         x = new Vector2(xx, xy);
         y = new Vector2(yx, yy);
         z = new Vector2(zx, zy);
     }
 
-    public static Basis25D operator *(Basis25D b, real_t s)
+    public static Basis25D operator *(Basis25D b, float s)
     {
         b.x *= s;
         b.y *= s;
@@ -141,7 +135,7 @@ public struct Basis25D : IEquatable<Basis25D>
         return b;
     }
 
-    public static Basis25D operator /(Basis25D b, real_t s)
+    public static Basis25D operator /(Basis25D b, float s)
     {
         b.x /= s;
         b.y /= s;
