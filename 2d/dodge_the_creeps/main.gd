@@ -27,7 +27,7 @@ func _on_MobTimer_timeout():
 
 	# Choose a random location on Path2D.
 	var mob_spawn_location = get_node(^"MobPath/MobSpawnLocation")
-	mob_spawn_location.progress = randi()
+	mob_spawn_location.progress_ratio = randf()
 
 	# Set the mob's position to a random location.
 	mob.position = mob_spawn_location.position

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bggkaprn62fwm"]
+[gd_scene format=3 uid="uid://bggkaprn62fwm"]
 
 [ext_resource type="Script" uid="uid://c4wt6ace7hycd" path="res://main.gd" id="1_0r6n5"]
 [ext_resource type="PackedScene" uid="uid://cao351pllxqpa" path="res://mob.tscn" id="2_50pww"]
@@ -13,11 +13,11 @@ _data = {
 }
 point_count = 5
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" unique_id=1975992027]
 script = ExtResource("1_0r6n5")
 mob_scene = ExtResource("2_50pww")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=569320965]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -25,31 +25,31 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.219608, 0.372549, 0.380392, 1)
 
-[node name="Player" parent="." instance=ExtResource("3_veqnc")]
+[node name="Player" parent="." unique_id=927660131 instance=ExtResource("3_veqnc")]
 
-[node name="MobTimer" type="Timer" parent="."]
+[node name="MobTimer" type="Timer" parent="." unique_id=228987391]
 wait_time = 0.5
 
-[node name="ScoreTimer" type="Timer" parent="."]
+[node name="ScoreTimer" type="Timer" parent="." unique_id=451982858]
 
-[node name="StartTimer" type="Timer" parent="."]
+[node name="StartTimer" type="Timer" parent="." unique_id=238316384]
 wait_time = 2.0
 one_shot = true
 
-[node name="StartPosition" type="Marker2D" parent="."]
+[node name="StartPosition" type="Marker2D" parent="." unique_id=568887530]
 position = Vector2(240, 450)
 
-[node name="MobPath" type="Path2D" parent="."]
+[node name="MobPath" type="Path2D" parent="." unique_id=694323229]
 curve = SubResource("1")
 
-[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" unique_id=1080274542]
 
-[node name="HUD" parent="." instance=ExtResource("4_0qnje")]
+[node name="HUD" parent="." unique_id=1879130737 instance=ExtResource("4_0qnje")]
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=267371681]
 stream = ExtResource("5_55d8h")
 
-[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+[node name="DeathSound" type="AudioStreamPlayer" parent="." unique_id=1715684712]
 stream = ExtResource("6_hp1r0")
 
 [connection signal="hit" from="Player" to="." method="game_over"]
