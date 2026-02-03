@@ -18,8 +18,7 @@ void fragment() {
 		y = clamp(y, 0.0, 1.0);
 		float segments = 1.0 / 6.0;
 		vec3 col = vec3(0);
-		if (y < segments)
-		{
+		if (y < segments) {
 			col.r = 1.0;
 			col.g = y / segments;
 			col.b = 0.0;
@@ -27,36 +26,26 @@ void fragment() {
 			col.r = (y - segments * 2.0) / -segments;
 			col.g = 1.0;
 			col.b = 0.0;
-		}
-		else if (y < segments * 3.0)
-		{
+		} else if (y < segments * 3.0) {
 			col.r = 0.0;
 			col.g = 1.0;
 			col.b = (y - segments * 2.0) / segments;
-		}
-		else if (y < segments * 4.0)
-		{
+		} else if (y < segments * 4.0) {
 			col.r = 0.0;
 			col.g = (y - segments * 4.0) / -segments;
 			col.b = 1.0;
-		}
-		else if (y < segments * 5.0)
-		{
+		} else if (y < segments * 5.0) {
 			col.r = (y - segments * 4.0) / segments;
 			col.g = 0.0;
 			col.b = 1.0;
-		}
-		else
-		{
+		} else {
 			col.r = 1.0;
 			col.g = 0.0;
 			col.b = (y - segments * 6.0) / -segments;
 		}
 
 		color = col * scale;
-	}
-	else
-	{
+	} else {
 		color = vec3(1.0) * scale;
 		
 		if (UV.y < 0.01) {
