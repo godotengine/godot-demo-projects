@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://clhke86mq8b7m"]
+[gd_scene load_steps=11 format=3 uid="uid://clhke86mq8b7m"]
 
 [ext_resource type="PackedScene" uid="uid://ul1fp38n6h7k" path="res://gui_panel_3d.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://b6w45me7tdr80" path="res://gui.tscn" id="2_yk1yt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1lgdv"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -54,6 +55,9 @@ shadow_enabled = true
 environment = SubResource("Environment_niyks")
 
 [node name="GUIPanel3D" parent="." instance=ExtResource("1")]
+gui_scene = ExtResource("2_yk1yt")
+screen_size_3d = Vector2(3, 2)
+screen_size_2d = Vector2(560, 360)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 3)
