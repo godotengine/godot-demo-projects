@@ -1,11 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://dnbdk0yqxr2wy"]
+[gd_scene format=3 uid="uid://dnbdk0yqxr2wy"]
 
 [ext_resource type="PackedScene" uid="uid://dpgfy033dc715" path="res://town/model/town_model.gltf" id="1_amwer"]
 [ext_resource type="Script" uid="uid://di7cre4unhk3f" path="res://town/town_scene.gd" id="1_gxe8p"]
-[ext_resource type="Script" uid="uid://i2wsujhhpwj2" path="res://spedometer.gd" id="2"]
+[ext_resource type="Script" uid="uid://i2wsujhhpwj2" path="res://speedometer.gd" id="2"]
 [ext_resource type="Material" uid="uid://boboc4pk5t03s" path="res://town/sky_day.tres" id="2_1df3w"]
 [ext_resource type="Material" uid="uid://dwj22a5ckgpms" path="res://town/materials/grass.tres" id="2_ubld8"]
 [ext_resource type="Material" uid="uid://bhrhj1ylqw2tp" path="res://town/materials/cement.tres" id="3_8s61a"]
+[ext_resource type="PackedScene" uid="uid://cf2bmynxs522" path="res://town/lamp/lamp_scene.tscn" id="3_clgdk"]
+[ext_resource type="PackedScene" uid="uid://dpgyvcypghjek" path="res://town/tree/scene.gltf" id="3_pxdqy"]
+[ext_resource type="Texture2D" uid="uid://dctnd5sdo5ydj" path="res://town/ui/turbometer.webp" id="8_clgdk"]
+[ext_resource type="Texture2D" uid="uid://hccdo2xu0fl" path="res://town/ui/turbometer_background.webp" id="8_tyv8r"]
 
 [sub_resource type="Sky" id="Sky_1gf0c"]
 sky_material = ExtResource("2_1df3w")
@@ -13,19 +17,161 @@ sky_material = ExtResource("2_1df3w")
 [sub_resource type="Environment" id="Environment_dauhq"]
 background_mode = 2
 sky = SubResource("Sky_1gf0c")
+ambient_light_sky_contribution = 0.5
 tonemap_mode = 4
 glow_intensity = 0.5
-glow_blend_mode = 1
 fog_enabled = true
-fog_light_color = Color(0.62, 0.6014, 0.6014, 1)
+fog_light_color = Color(0.7254902, 0.91764706, 1, 1)
 fog_density = 0.0015
 fog_sky_affect = 0.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pxdqy"]
+height = 7.2680664
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_w44mb"]
+content_margin_top = 0.0
+content_margin_bottom = 0.0
+color = Color(1, 1, 1, 1)
+grow_begin = -8.0
+grow_end = -8.0
+
+[sub_resource type="Animation" id="Animation_tyv8r"]
+resource_name = "Idle"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:theme_override_colors/font_outline_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.46711743, 0.46711743, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.48684698, 0.48684698, 0.48684698, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.12085515]
+}
+
+[sub_resource type="Animation" id="Animation_w44mb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:theme_override_colors/font_outline_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.46711743, 0.46711743, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.48684698, 0.48684698, 0.48684698, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.12085515]
+}
+
+[sub_resource type="Animation" id="Animation_pvdab"]
+resource_name = "TURBO"
+length = 0.3
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:theme_override_colors/font_outline_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0.3444354, 0, 1), Color(1, 0.734516, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0.82693917, 0, 1), Color(1, 0.12493098, 0, 1), Color(1, 0.4092583, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.049999997, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.12085515, 0.13720608, -0.12085515, 0.13720608, -0.12085515, 0.13720608]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w44mb"]
+_data = {
+&"Idle": SubResource("Animation_tyv8r"),
+&"RESET": SubResource("Animation_w44mb"),
+&"TURBO": SubResource("Animation_pvdab")
+}
 
 [sub_resource type="InputEventAction" id="InputEventAction_a4722"]
 action = &"cycle_speedometer_unit"
 
 [sub_resource type="Shortcut" id="Shortcut_msvqx"]
 events = [SubResource("InputEventAction_a4722")]
+
+[sub_resource type="Gradient" id="Gradient_nng2a"]
+offsets = PackedFloat32Array(0, 0.2, 1)
+colors = PackedColorArray(0.7019608, 0.9019608, 1, 1, 1, 1, 1, 1, 1, 0.3019608, 0.101960786, 1)
 
 [sub_resource type="Gradient" id="Gradient_jks6h"]
 offsets = PackedFloat32Array(0)
@@ -45,13 +191,18 @@ gradient = SubResource("Gradient_1rnu2")
 width = 128
 height = 128
 
-[node name="TownScene" type="Node3D"]
+[node name="TownScene" type="Node3D" unique_id=1990567779]
 script = ExtResource("1_gxe8p")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=710399183]
+unique_name_in_owner = true
 environment = SubResource("Environment_dauhq")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="AmbientSound" type="AudioStreamPlayer" parent="." unique_id=1768893818]
+autoplay = true
+bus = &"Ambient"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1020825067]
 transform = Transform3D(-0.793955, 0.350561, -0.496732, -0.295414, 0.491651, 0.819152, 0.531381, 0.797111, -0.286788, 11.0084, 12.3453, -31.3148)
 light_energy = 1.45
 shadow_enabled = true
@@ -60,169 +211,214 @@ shadow_blur = 1.5
 directional_shadow_mode = 0
 directional_shadow_max_distance = 80.0
 
-[node name="ArtificialLights" type="Node3D" parent="."]
-visible = false
+[node name="Lamps" type="Node3D" parent="." unique_id=1215593960]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="ArtificialLights"]
-transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, 38.1028, 10.5868, 14.8252)
-light_color = Color(1, 0.941176, 0.705882, 1)
-light_energy = 2.0
-shadow_enabled = true
-shadow_bias = 0.06
-shadow_blur = 2.0
-distance_fade_enabled = true
-distance_fade_begin = 100.0
-distance_fade_shadow = 35.0
-distance_fade_length = 15.0
-omni_range = 15.0
+[node name="Lamp" parent="Lamps" unique_id=197257794 instance=ExtResource("3_clgdk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.826617, 10.281145, 21.406624)
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="ArtificialLights"]
-transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, 13.1028, 11.5868, 20.8252)
-light_color = Color(1, 0.941176, 0.705882, 1)
-light_energy = 2.0
-shadow_enabled = true
-shadow_bias = 0.06
-shadow_blur = 2.0
-distance_fade_enabled = true
-distance_fade_begin = 100.0
-distance_fade_shadow = 35.0
-distance_fade_length = 15.0
-omni_range = 15.0
+[node name="Lamp2" parent="Lamps" unique_id=2090522149 instance=ExtResource("3_clgdk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.36482, 8.762463, 17.41033)
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="ArtificialLights"]
-transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, 14.1028, 11.5868, -6.1748)
-light_color = Color(1, 0.941176, 0.705882, 1)
-light_energy = 2.0
-shadow_enabled = true
-shadow_bias = 0.06
-shadow_blur = 2.0
-distance_fade_enabled = true
-distance_fade_begin = 100.0
-distance_fade_shadow = 35.0
-distance_fade_length = 15.0
-omni_range = 15.0
+[node name="Lamp3" parent="Lamps" unique_id=535773629 instance=ExtResource("3_clgdk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.877937, 11.294644, -5.150609)
 
-[node name="OmniLight3D4" type="OmniLight3D" parent="ArtificialLights"]
-transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, 36.1028, 13.5868, -7.1748)
-light_color = Color(1, 0.941176, 0.705882, 1)
-light_energy = 2.0
-shadow_enabled = true
-shadow_bias = 0.06
-shadow_blur = 2.0
-distance_fade_enabled = true
-distance_fade_begin = 100.0
-distance_fade_shadow = 35.0
-distance_fade_length = 15.0
-omni_range = 15.0
+[node name="Lamp5" parent="Lamps" unique_id=1464671789 instance=ExtResource("3_clgdk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.558727, 9.149303, -7.0745764)
 
-[node name="OmniLight3D5" type="OmniLight3D" parent="ArtificialLights"]
-transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, 45.1028, 13.5868, -17.1748)
-light_color = Color(1, 0.941176, 0.705882, 1)
-light_energy = 2.0
-shadow_enabled = true
-shadow_bias = 0.06
-shadow_blur = 2.0
-distance_fade_enabled = true
-distance_fade_begin = 100.0
-distance_fade_shadow = 35.0
-distance_fade_length = 15.0
-omni_range = 15.0
+[node name="Lamp6" parent="Lamps" unique_id=1356141107 instance=ExtResource("3_clgdk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.047234, 5.208529, 4.7793546)
 
-[node name="OmniLight3D6" type="OmniLight3D" parent="ArtificialLights"]
-transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, -20.8972, 7.58679, 4.8252)
-light_color = Color(1, 0.941176, 0.705882, 1)
-light_energy = 2.0
-shadow_enabled = true
-shadow_bias = 0.06
-shadow_blur = 2.0
-distance_fade_enabled = true
-distance_fade_begin = 100.0
-distance_fade_shadow = 35.0
-distance_fade_length = 15.0
-omni_range = 15.0
+[node name="Lamp7" parent="Lamps" unique_id=1311607581 instance=ExtResource("3_clgdk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.494762, 5.208529, 4.762315)
 
-[node name="OmniLight3D7" type="OmniLight3D" parent="ArtificialLights"]
-transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, -15.8972, 7.58679, 20.8252)
-light_color = Color(1, 0.941176, 0.705882, 1)
-light_energy = 2.0
-shadow_enabled = true
-shadow_bias = 0.06
-shadow_blur = 2.0
-distance_fade_enabled = true
-distance_fade_begin = 100.0
-distance_fade_shadow = 35.0
-distance_fade_length = 15.0
-omni_range = 15.0
+[node name="Lamp8" parent="Lamps" unique_id=1266984698 instance=ExtResource("3_clgdk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.80326, 5.208529, 22.523823)
 
-[node name="OmniLight3D8" type="OmniLight3D" parent="ArtificialLights"]
-transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, -44.8972, 10.5868, 4.8252)
-light_color = Color(1, 0.941176, 0.705882, 1)
-light_energy = 2.0
-shadow_enabled = true
-shadow_bias = 0.06
-shadow_blur = 2.0
-distance_fade_enabled = true
-distance_fade_begin = 100.0
-distance_fade_shadow = 35.0
-distance_fade_length = 15.0
-omni_range = 15.0
+[node name="Lamp9" parent="Lamps" unique_id=427644885 instance=ExtResource("3_clgdk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.958977, 8.124198, -17.695438)
 
-[node name="OmniLight3D9" type="OmniLight3D" parent="ArtificialLights"]
-transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, -43.8972, 10.5868, -15.1748)
-light_color = Color(1, 0.941176, 0.705882, 1)
-light_energy = 2.0
-shadow_enabled = true
-shadow_bias = 0.06
-shadow_blur = 2.0
-distance_fade_enabled = true
-distance_fade_begin = 100.0
-distance_fade_shadow = 35.0
-distance_fade_length = 15.0
-omni_range = 15.0
+[node name="Lamp10" parent="Lamps" unique_id=1199446858 instance=ExtResource("3_clgdk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.080837, 8.124197, 0.42528152)
 
-[node name="OmniLight3D10" type="OmniLight3D" parent="ArtificialLights"]
-transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, -15.7972, 3.58679, -71.175)
-light_color = Color(1, 0.941176, 0.705882, 1)
-light_energy = 2.0
-shadow_enabled = true
-shadow_bias = 0.06
-shadow_blur = 2.0
-distance_fade_enabled = true
-distance_fade_begin = 100.0
-distance_fade_shadow = 35.0
-distance_fade_length = 15.0
-omni_range = 15.0
+[node name="Lamp4" parent="Lamps" unique_id=2075708260 instance=ExtResource("3_clgdk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.96642, 11.294643, -7.1991215)
 
-[node name="InstancePos" type="Marker3D" parent="."]
+[node name="InstancePos" type="Marker3D" parent="." unique_id=89081834]
+unique_name_in_owner = true
 transform = Transform3D(3.57628e-07, 0, -1, 0, 1, 0, 1, 0, 3.57628e-07, 35.48, 8.72405, 14.335)
 
-[node name="TownModel" parent="." instance=ExtResource("1_amwer")]
+[node name="TownModel" parent="." unique_id=1541596250 instance=ExtResource("1_amwer")]
 
-[node name="GrassMesh" parent="TownModel/Terrain" index="0"]
+[node name="GrassMesh" parent="TownModel/Terrain" parent_id_path=PackedInt32Array(1541596250, 1537880450) index="0" unique_id=1999125698]
 surface_material_override/0 = ExtResource("2_ubld8")
 
-[node name="RoadMesh" parent="TownModel/Terrain" index="2"]
+[node name="RoadMesh" parent="TownModel/Terrain" parent_id_path=PackedInt32Array(1541596250, 1537880450) index="2" unique_id=952483985]
 surface_material_override/0 = ExtResource("3_8s61a")
 
-[node name="OuterGroundMesh" parent="TownModel/Terrain" index="4"]
+[node name="OuterGroundMesh" parent="TownModel/Terrain" parent_id_path=PackedInt32Array(1541596250, 1537880450) index="4" unique_id=580083069]
 surface_material_override/0 = ExtResource("2_ubld8")
 
-[node name="RacetrackMesh" parent="TownModel/Racetrack/RacetrackMain" index="0"]
+[node name="RacetrackMesh" parent="TownModel/Racetrack/RacetrackMain" parent_id_path=PackedInt32Array(1541596250, 1117447578) index="0" unique_id=434904741]
 surface_material_override/0 = ExtResource("3_8s61a")
 
-[node name="Spedometer" type="Button" parent="."]
-custom_minimum_size = Vector2(140, 40)
+[node name="Trees" type="Node3D" parent="TownModel" unique_id=637052945]
+
+[node name="Tree" parent="TownModel/Trees" unique_id=1581148790 instance=ExtResource("3_pxdqy")]
+transform = Transform3D(0.375, 0, 0, 0, 0.375, 0, 0, 0, 0.375, 5.548664, 9.214607, 21.853706)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="TownModel/Trees/Tree" unique_id=488670663]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8510952, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TownModel/Trees/Tree/StaticBody3D" unique_id=1571753715]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.774849, 0)
+shape = SubResource("CapsuleShape3D_pxdqy")
+
+[node name="Tree2" parent="TownModel/Trees" unique_id=764955330 instance=ExtResource("3_pxdqy")]
+transform = Transform3D(-0.1781004, 0, 0.27185518, 0, 0.325, 0, -0.27185518, 0, -0.1781004, 22.705954, 8.334187, -12.540859)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="TownModel/Trees/Tree2" unique_id=1391753394]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8510952, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TownModel/Trees/Tree2/StaticBody3D" unique_id=258816822]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.774849, 0)
+shape = SubResource("CapsuleShape3D_pxdqy")
+
+[node name="Tree3" parent="TownModel/Trees" unique_id=2087257218 instance=ExtResource("3_pxdqy")]
+transform = Transform3D(0.10563323, 0, 0.42713186, 0, 0.44, 0, -0.42713186, 0, 0.10563323, 50.709362, 10.075925, -6.032544)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="TownModel/Trees/Tree3" unique_id=138405085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8510952, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TownModel/Trees/Tree3/StaticBody3D" unique_id=145018392]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.774849, 0)
+shape = SubResource("CapsuleShape3D_pxdqy")
+
+[node name="Tree4" parent="TownModel/Trees" unique_id=660503783 instance=ExtResource("3_pxdqy")]
+transform = Transform3D(0.41906354, 0, 0.13411105, 0, 0.44, 0, -0.13411105, 0, 0.41906354, -12.516531, 12.71288, -15.442337)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="TownModel/Trees/Tree4" unique_id=209875123]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8510952, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TownModel/Trees/Tree4/StaticBody3D" unique_id=985760218]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.774849, 0)
+shape = SubResource("CapsuleShape3D_pxdqy")
+
+[node name="Tree5" parent="TownModel/Trees" unique_id=2122104116 instance=ExtResource("3_pxdqy")]
+transform = Transform3D(0.23812625, 0, -0.17412893, 0, 0.295, 0, 0.17412893, 0, 0.23812625, -20.612381, 3.7711592, 1.7494526)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="TownModel/Trees/Tree5" unique_id=1121566210]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8510952, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TownModel/Trees/Tree5/StaticBody3D" unique_id=359408452]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.774849, 0)
+shape = SubResource("CapsuleShape3D_pxdqy")
+
+[node name="GameUI" type="VBoxContainer" parent="." unique_id=870721625]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 168.0
+offset_bottom = 98.0
+theme_override_constants/separation = 20
+
+[node name="Back" type="Button" parent="GameUI" unique_id=2142412231]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "« Back"
+
+[node name="PanelContainer" type="PanelContainer" parent="GameUI" unique_id=205809658]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GameUI/PanelContainer" unique_id=1853055574]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/PanelContainer/MarginContainer" unique_id=1818956248]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GameUI/PanelContainer/MarginContainer/VBoxContainer" unique_id=1745945643]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
+text = "F1 - Toggle controls"
+
+[node name="Controls" type="VBoxContainer" parent="GameUI/PanelContainer/MarginContainer/VBoxContainer" unique_id=886070146]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GameUI/PanelContainer/MarginContainer/VBoxContainer/Controls" unique_id=514069778]
+layout_mode = 2
+text = "Arrows - Drive
+Enter - Honk
+Shift - Turbo
+L - Headlights"
+
+[node name="HSeparator" type="HSeparator" parent="GameUI/PanelContainer/MarginContainer/VBoxContainer/Controls" unique_id=1593160399]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_w44mb")
+
+[node name="Label2" type="Label" parent="GameUI/PanelContainer/MarginContainer/VBoxContainer/Controls" unique_id=1268511783]
+layout_mode = 2
+text = "U - Cycle speed units
+C - Cycle camera
+M - Cycle mood"
+
+[node name="CarUI" type="HBoxContainer" parent="." unique_id=883662698]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -164.0
-offset_top = -64.0
+offset_left = -428.0
+offset_top = -92.0
 offset_right = -24.0
 offset_bottom = -24.0
 grow_horizontal = 0
 grow_vertical = 0
+
+[node name="Turbometer" type="TextureProgressBar" parent="CarUI" unique_id=1826510602]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 10.0
+step = 0.0
+value = 10.0
+texture_under = ExtResource("8_tyv8r")
+texture_progress = ExtResource("8_clgdk")
+texture_progress_offset = Vector2(2, 2)
+
+[node name="Label" type="Label" parent="CarUI/Turbometer" unique_id=2108878540]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -25.0
+offset_right = 61.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.12085515
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0.48684698, 0.48684698, 0.48684698, 1)
+theme_override_colors/font_outline_color = Color(1, 0.46711743, 0.46711743, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 30
+text = "TURBO"
+
+[node name="TurboAnimator" type="AnimationPlayer" parent="CarUI/Turbometer" unique_id=1708193836]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_w44mb")
+autoplay = &"Idle"
+
+[node name="Speedometer" type="Button" parent="CarUI" unique_id=294256170]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+size_flags_vertical = 8
 focus_mode = 0
 action_mode = 0
 shortcut = SubResource("Shortcut_msvqx")
@@ -230,22 +426,16 @@ shortcut_feedback = false
 shortcut_in_tooltip = false
 text = "Speed: ???"
 script = ExtResource("2")
+tint_gradient = SubResource("Gradient_nng2a")
 
-[node name="Back" type="Button" parent="."]
-offset_left = 24.0
-offset_top = 24.0
-offset_right = 92.0
-offset_bottom = 56.0
-text = "« Back"
-
-[node name="TouchTurnLeft" type="Control" parent="."]
+[node name="TouchTurnLeft" type="Control" parent="." unique_id=325944973]
 layout_mode = 3
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 grow_vertical = 2
 
-[node name="TurnLeft" type="TouchScreenButton" parent="TouchTurnLeft"]
+[node name="TurnLeft" type="TouchScreenButton" parent="TouchTurnLeft" unique_id=727790093]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(0, -256)
 scale = Vector2(2.5, 4)
@@ -255,7 +445,7 @@ passby_press = true
 action = "turn_left"
 visibility_mode = 1
 
-[node name="TouchReverse" type="Control" parent="."]
+[node name="TouchReverse" type="Control" parent="." unique_id=155125709]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -265,7 +455,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Reverse" type="TouchScreenButton" parent="TouchReverse"]
+[node name="Reverse" type="TouchScreenButton" parent="TouchReverse" unique_id=1277398991]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(-256, -256)
 scale = Vector2(4, 4)
@@ -275,7 +465,7 @@ passby_press = true
 action = "reverse"
 visibility_mode = 1
 
-[node name="TouchTurnRight" type="Control" parent="."]
+[node name="TouchTurnRight" type="Control" parent="." unique_id=1012524599]
 layout_mode = 3
 anchors_preset = 6
 anchor_left = 1.0
@@ -285,7 +475,7 @@ anchor_bottom = 0.5
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="TurnRight" type="TouchScreenButton" parent="TouchTurnRight"]
+[node name="TurnRight" type="TouchScreenButton" parent="TouchTurnRight" unique_id=1611600317]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(-320, -256)
 scale = Vector2(2.5, 4)
@@ -295,6 +485,6 @@ passby_press = true
 action = "turn_right"
 visibility_mode = 1
 
-[connection signal="pressed" from="Spedometer" to="Spedometer" method="_on_spedometer_pressed"]
+[connection signal="pressed" from="CarUI/Speedometer" to="CarUI/Speedometer" method="_on_speedometer_pressed"]
 
 [editable path="TownModel"]
