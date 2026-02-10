@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://ca1ylm5bxdfyg"]
+[gd_scene format=3 uid="uid://ca1ylm5bxdfyg"]
 
 [ext_resource type="Script" uid="uid://pi6en6ue07ei" path="res://MicRecord.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://bgqfd2ntpuhgs" path="res://Intro.ogg" id="2"]
 
 [sub_resource type="AudioStreamMicrophone" id="1"]
 
-[node name="MicRecord" type="Control"]
+[node name="MicRecord" type="Control" unique_id=1768840330]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -20,19 +20,19 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 
-[node name="AudioStreamRecord" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamRecord" type="AudioStreamPlayer" parent="." unique_id=1198489189]
 stream = SubResource("1")
 autoplay = true
 bus = &"Record"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=698077023]
 autoplay = true
 
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=1775608158]
 stream = ExtResource("2")
 volume_db = -6.0
 
-[node name="Status" type="Label" parent="."]
+[node name="Status" type="Label" parent="." unique_id=1537270469]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -41,7 +41,7 @@ grow_horizontal = 2
 text = "Status: "
 horizontal_alignment = 1
 
-[node name="RecordButton" type="Button" parent="."]
+[node name="RecordButton" type="Button" parent="." unique_id=56358096]
 layout_mode = 0
 offset_left = 29.0
 offset_top = 77.0
@@ -49,7 +49,7 @@ offset_right = 159.0
 offset_bottom = 117.0
 text = "Record"
 
-[node name="PlayButton" type="Button" parent="."]
+[node name="PlayButton" type="Button" parent="." unique_id=1129070934]
 layout_mode = 0
 offset_left = 209.0
 offset_top = 77.0
@@ -58,7 +58,7 @@ offset_bottom = 117.0
 disabled = true
 text = "Play"
 
-[node name="PlayMusic" type="Button" parent="."]
+[node name="PlayMusic" type="Button" parent="." unique_id=1628944654]
 layout_mode = 0
 offset_left = 30.0
 offset_top = 395.0
@@ -66,7 +66,7 @@ offset_right = 160.0
 offset_bottom = 435.0
 text = "Play Music"
 
-[node name="FormatLabel" type="Label" parent="."]
+[node name="FormatLabel" type="Label" parent="." unique_id=566936885]
 layout_mode = 0
 offset_left = 33.0
 offset_top = 153.0
@@ -74,7 +74,7 @@ offset_right = 102.0
 offset_bottom = 179.0
 text = "Format:"
 
-[node name="FormatOptionButton" type="OptionButton" parent="."]
+[node name="FormatOptionButton" type="OptionButton" parent="." unique_id=517073290]
 layout_mode = 0
 offset_left = 131.0
 offset_top = 150.0
@@ -89,7 +89,7 @@ popup/item_1/id = 1
 popup/item_2/text = "IMA ADPCM Compression"
 popup/item_2/id = 2
 
-[node name="MixRateLabel" type="Label" parent="."]
+[node name="MixRateLabel" type="Label" parent="." unique_id=1009222970]
 layout_mode = 0
 offset_left = 33.0
 offset_top = 192.0
@@ -97,7 +97,7 @@ offset_right = 102.0
 offset_bottom = 218.0
 text = "Mix rate:"
 
-[node name="MixRateOptionButton" type="OptionButton" parent="."]
+[node name="MixRateOptionButton" type="OptionButton" parent="." unique_id=1727372864]
 layout_mode = 0
 offset_left = 131.0
 offset_top = 189.0
@@ -118,7 +118,7 @@ popup/item_4/id = 4
 popup/item_5/text = "48000 Hz"
 popup/item_5/id = 5
 
-[node name="StereoLabel" type="Label" parent="."]
+[node name="StereoLabel" type="Label" parent="." unique_id=381505690]
 layout_mode = 0
 offset_left = 33.0
 offset_top = 233.0
@@ -126,7 +126,7 @@ offset_right = 102.0
 offset_bottom = 259.0
 text = "Stereo:"
 
-[node name="StereoCheckButton" type="CheckButton" parent="."]
+[node name="StereoCheckButton" type="CheckButton" parent="." unique_id=635165237]
 layout_mode = 0
 offset_left = 126.0
 offset_top = 233.0
@@ -134,7 +134,7 @@ offset_right = 170.0
 offset_bottom = 264.0
 button_pressed = true
 
-[node name="SaveButton" type="Button" parent="."]
+[node name="SaveButton" type="Button" parent="." unique_id=459059943]
 layout_mode = 0
 offset_left = 29.0
 offset_top = 284.0
@@ -143,7 +143,7 @@ offset_bottom = 324.0
 disabled = true
 text = "Save WAV To:"
 
-[node name="Filename" type="LineEdit" parent="SaveButton"]
+[node name="Filename" type="LineEdit" parent="SaveButton" unique_id=114974800]
 layout_mode = 0
 offset_left = 180.0
 offset_right = 507.0
@@ -151,7 +151,7 @@ offset_bottom = 40.0
 text = "user://record.wav"
 caret_blink = true
 
-[node name="OpenUserFolderButton" type="Button" parent="."]
+[node name="OpenUserFolderButton" type="Button" parent="." unique_id=878634155]
 layout_mode = 1
 offset_left = 209.0
 offset_top = 334.0

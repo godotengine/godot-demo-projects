@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://ogcwmabk7x24"]
+[gd_scene format=3 uid="uid://ogcwmabk7x24"]
 
 [ext_resource type="Texture2D" uid="uid://dkl7yvfg3ivr3" path="res://fire_particle.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://u86xc5c6mawi" path="res://smoke_particle.png" id="2"]
@@ -10,10 +10,6 @@
 [sub_resource type="Environment" id="Environment_y7usk"]
 background_mode = 3
 glow_levels/1 = 1.0
-glow_levels/2 = 0.8
-glow_levels/3 = 0.4
-glow_levels/4 = 0.1
-glow_levels/5 = 0.0
 glow_blend_mode = 0
 glow_hdr_threshold = 0.01
 
@@ -455,13 +451,13 @@ _data = {
 &"move_particles": SubResource("Animation_bl3q0")
 }
 
-[node name="GPUParticles3D" type="WorldEnvironment"]
+[node name="GPUParticles3D" type="WorldEnvironment" unique_id=1481111802]
 environment = SubResource("Environment_y7usk")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1579716303]
 offset = Vector2(576, 324)
 
-[node name="Fire" type="GPUParticles2D" parent="." groups=["trailable_particles"]]
+[node name="Fire" type="GPUParticles2D" parent="." unique_id=1697815287 groups=["trailable_particles"]]
 texture_filter = 4
 material = SubResource("1")
 position = Vector2(122, 486)
@@ -470,7 +466,7 @@ texture = ExtResource("1")
 preprocess = 1.0
 process_material = SubResource("6")
 
-[node name="Flipbook" type="GPUParticles2D" parent="."]
+[node name="Flipbook" type="GPUParticles2D" parent="." unique_id=1078792387]
 texture_filter = 4
 material = SubResource("7")
 position = Vector2(392, 215)
@@ -482,7 +478,7 @@ fixed_fps = 0
 interpolate = false
 process_material = SubResource("8")
 
-[node name="Smoke" type="GPUParticles2D" parent="."]
+[node name="Smoke" type="GPUParticles2D" parent="." unique_id=457682977]
 texture_filter = 4
 position = Vector2(362, 478)
 amount = 32
@@ -491,7 +487,7 @@ lifetime = 2.0
 preprocess = 2.0
 process_material = SubResource("11")
 
-[node name="Magic" type="GPUParticles2D" parent="." groups=["trailable_particles"]]
+[node name="Magic" type="GPUParticles2D" parent="." unique_id=542400257 groups=["trailable_particles"]]
 texture_filter = 4
 material = SubResource("12")
 position = Vector2(554, 494)
@@ -502,15 +498,15 @@ preprocess = 2.0
 randomness = 1.0
 process_material = SubResource("19")
 
-[node name="Path2D" type="Path2D" parent="."]
+[node name="Path2D" type="Path2D" parent="." unique_id=980802270]
 position = Vector2(0, 88)
 curve = SubResource("Curve2D_oi78q")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" unique_id=719852354]
 position = Vector2(558, 265)
 rotation = 0.79609853
 
-[node name="MagicGlobalCoordinates" type="GPUParticles2D" parent="Path2D/PathFollow2D" groups=["trailable_particles"]]
+[node name="MagicGlobalCoordinates" type="GPUParticles2D" parent="Path2D/PathFollow2D" unique_id=760384775 groups=["trailable_particles"]]
 texture_filter = 4
 material = SubResource("12")
 amount = 200
@@ -519,7 +515,7 @@ lifetime = 2.0
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_fcq72")
 
-[node name="Explosion" type="GPUParticles2D" parent="." groups=["trailable_particles"]]
+[node name="Explosion" type="GPUParticles2D" parent="." unique_id=1760398929 groups=["trailable_particles"]]
 texture_filter = 4
 material = SubResource("20")
 position = Vector2(613.467, 182.62)
@@ -531,7 +527,7 @@ preprocess = 2.0
 explosiveness = 1.0
 process_material = SubResource("27")
 
-[node name="EmitMask" type="GPUParticles2D" parent="."]
+[node name="EmitMask" type="GPUParticles2D" parent="." unique_id=231870245]
 texture_filter = 4
 position = Vector2(41, -68)
 amount = 180
@@ -541,7 +537,7 @@ preprocess = 0.2
 visibility_rect = Rect2(26.0055, 90.0015, 199.176, 95.0445)
 process_material = SubResource("28")
 
-[node name="OutlineMask" type="GPUParticles2D" parent="."]
+[node name="OutlineMask" type="GPUParticles2D" parent="." unique_id=1685515130]
 texture_filter = 4
 position = Vector2(42, 52)
 amount = 180
@@ -551,7 +547,7 @@ preprocess = 0.2
 visibility_rect = Rect2(26.0055, 90.0015, 199.176, 95.0445)
 process_material = SubResource("29")
 
-[node name="DirectionMask" type="GPUParticles2D" parent="."]
+[node name="DirectionMask" type="GPUParticles2D" parent="." unique_id=1811128386]
 texture_filter = 4
 position = Vector2(40, 180)
 amount = 180
@@ -561,7 +557,7 @@ preprocess = 0.2
 visibility_rect = Rect2(26.0055, 90.0015, 199.176, 95.0445)
 process_material = SubResource("30")
 
-[node name="ParticlesWithSubemitter" type="GPUParticles2D" parent="." groups=["trailable_particles"]]
+[node name="ParticlesWithSubemitter" type="GPUParticles2D" parent="." unique_id=844963883 groups=["trailable_particles"]]
 texture_filter = 4
 position = Vector2(864, 272)
 amount = 15
@@ -570,7 +566,7 @@ texture = ExtResource("3")
 preprocess = 1.0
 process_material = SubResource("ParticleProcessMaterial_jod5w")
 
-[node name="SubemitterEndSparks" type="GPUParticles2D" parent="ParticlesWithSubemitter" groups=["trailable_particles"]]
+[node name="SubemitterEndSparks" type="GPUParticles2D" parent="ParticlesWithSubemitter" unique_id=1809416433 groups=["trailable_particles"]]
 texture_filter = 4
 position = Vector2(-808, -248)
 emitting = false
@@ -580,7 +576,7 @@ texture = ExtResource("3")
 preprocess = 1.0
 process_material = SubResource("ParticleProcessMaterial_m4hvx")
 
-[node name="SubemitterEndSmoke" type="GPUParticles2D" parent="ParticlesWithSubemitter/SubemitterEndSparks" groups=["trailable_particles"]]
+[node name="SubemitterEndSmoke" type="GPUParticles2D" parent="ParticlesWithSubemitter/SubemitterEndSparks" unique_id=1376292031 groups=["trailable_particles"]]
 texture_filter = 4
 emitting = false
 amount = 15
@@ -590,7 +586,7 @@ fixed_fps = 0
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_mcjyg")
 
-[node name="Turbulence" type="GPUParticles2D" parent="."]
+[node name="Turbulence" type="GPUParticles2D" parent="." unique_id=2719059]
 position = Vector2(768, 328)
 amount = 50
 texture = ExtResource("2")
@@ -600,7 +596,7 @@ fixed_fps = 0
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_vbd24")
 
-[node name="CollisionRigid" type="GPUParticles2D" parent="." groups=["trailable_particles"]]
+[node name="CollisionRigid" type="GPUParticles2D" parent="." unique_id=1893426144 groups=["trailable_particles"]]
 texture_filter = 4
 position = Vector2(978, 331)
 amount = 150
@@ -613,7 +609,7 @@ collision_base_size = 0.5
 trail_sections = 16
 process_material = SubResource("ParticleProcessMaterial_mg3j6")
 
-[node name="CollisionHideOnContact" type="GPUParticles2D" parent="." groups=["trailable_particles"]]
+[node name="CollisionHideOnContact" type="GPUParticles2D" parent="." unique_id=643012771 groups=["trailable_particles"]]
 texture_filter = 4
 position = Vector2(1083, -6)
 amount = 150
@@ -625,7 +621,7 @@ interpolate = false
 collision_base_size = 0.0
 process_material = SubResource("ParticleProcessMaterial_jtilh")
 
-[node name="CollisionHideOnContactSpawnSubemitter" type="GPUParticles2D" parent="." groups=["trailable_particles"]]
+[node name="CollisionHideOnContactSpawnSubemitter" type="GPUParticles2D" parent="." unique_id=49742220 groups=["trailable_particles"]]
 texture_filter = 4
 position = Vector2(1072, 650)
 amount = 100
@@ -638,7 +634,7 @@ interpolate = false
 collision_base_size = 0.0
 process_material = SubResource("ParticleProcessMaterial_wbw05")
 
-[node name="CollisionSubemitter" type="GPUParticles2D" parent="CollisionHideOnContactSpawnSubemitter" groups=["trailable_particles"]]
+[node name="CollisionSubemitter" type="GPUParticles2D" parent="CollisionHideOnContactSpawnSubemitter" unique_id=1924604490 groups=["trailable_particles"]]
 texture_filter = 4
 emitting = false
 amount = 50
@@ -650,63 +646,61 @@ interpolate = false
 collision_base_size = 0.0
 process_material = SubResource("ParticleProcessMaterial_oib53")
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=1782635358]
 position = Vector2(136, -56)
 occluder = SubResource("OccluderPolygon2D_2aqyc")
 metadata/_edit_group_ = true
 
-[node name="Polygon2D" type="Polygon2D" parent="LightOccluder2D"]
+[node name="Polygon2D" type="Polygon2D" parent="LightOccluder2D" unique_id=674295895]
 color = Color(1, 1, 0.537255, 0.270588)
 polygon = PackedVector2Array(770, 451, 777, 410, 828, 404, 853, 447, 853, 494, 805, 518, 763, 493)
 
-[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="." unique_id=1793928510]
 position = Vector2(232, -24)
 occluder = SubResource("OccluderPolygon2D_2aqyc")
 metadata/_edit_group_ = true
 
-[node name="Polygon2D" type="Polygon2D" parent="LightOccluder2D2"]
+[node name="Polygon2D" type="Polygon2D" parent="LightOccluder2D2" unique_id=1674425191]
 color = Color(1, 1, 0.537255, 0.270588)
 polygon = PackedVector2Array(770, 451, 777, 410, 828, 404, 853, 447, 853, 494, 805, 518, 763, 493)
 
-[node name="LightOccluder2D3" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="." unique_id=381981496]
 position = Vector2(1064, -392)
 rotation = 1.14325
 occluder = SubResource("OccluderPolygon2D_2aqyc")
 metadata/_edit_group_ = true
 
-[node name="Polygon2D" type="Polygon2D" parent="LightOccluder2D3"]
+[node name="Polygon2D" type="Polygon2D" parent="LightOccluder2D3" unique_id=540285447]
 color = Color(1, 1, 0.537255, 0.270588)
 polygon = PackedVector2Array(770, 451, 777, 410, 828, 404, 853, 447, 853, 494, 805, 518, 763, 493)
 
-[node name="LightOccluder2D4" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="." unique_id=2114572572]
 position = Vector2(949, -414)
 rotation = 1.14325
 occluder = SubResource("OccluderPolygon2D_2aqyc")
 metadata/_edit_group_ = true
 
-[node name="Polygon2D" type="Polygon2D" parent="LightOccluder2D4"]
+[node name="Polygon2D" type="Polygon2D" parent="LightOccluder2D4" unique_id=1472796031]
 color = Color(1, 1, 0.537255, 0.270588)
 polygon = PackedVector2Array(770, 451, 777, 410, 828, 404, 853, 447, 853, 494, 805, 518, 763, 493)
 
-[node name="LightOccluder2D5" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D5" type="LightOccluder2D" parent="." unique_id=688662768]
 position = Vector2(989, -302)
 rotation = 1.14325
 occluder = SubResource("OccluderPolygon2D_2aqyc")
 metadata/_edit_group_ = true
 
-[node name="Polygon2D" type="Polygon2D" parent="LightOccluder2D5"]
+[node name="Polygon2D" type="Polygon2D" parent="LightOccluder2D5" unique_id=443359839]
 color = Color(1, 1, 0.537255, 0.270588)
 polygon = PackedVector2Array(770, 451, 777, 410, 828, 404, 853, 447, 853, 494, 805, 518, 763, 493)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_j1xdo")
-}
-autoplay = "move_particles"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=342321881]
+libraries/ = SubResource("AnimationLibrary_j1xdo")
+autoplay = &"move_particles"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=884504156]
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1152297485]
 process_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
@@ -722,7 +716,7 @@ Up/Down arrows: Adjust particle trail length
 G: Toggle glow"
 script = ExtResource("6_5a71v")
 
-[node name="UnsupportedLabel" type="Label" parent="CanvasLayer"]
+[node name="UnsupportedLabel" type="Label" parent="CanvasLayer" unique_id=1424327040]
 process_mode = 3
 visible = false
 self_modulate = Color(1, 1, 1, 0.6)

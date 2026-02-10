@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cok4iesy3xy4p"]
+[gd_scene format=3 uid="uid://cok4iesy3xy4p"]
 
 [ext_resource type="Script" uid="uid://11k0j760qglt" path="res://ui.gd" id="1_wnf2v"]
 [ext_resource type="Shader" uid="uid://cj2y13jadvnu0" path="res://cursor.gdshader" id="2_hngl5"]
@@ -10,7 +10,7 @@ font_size = 64
 shader = ExtResource("2_hngl5")
 shader_parameter/color = Color(1, 1, 1, 1)
 
-[node name="UI" type="Control"]
+[node name="UI" type="Control" unique_id=1820323343]
 custom_minimum_size = Vector2(1024, 512)
 layout_mode = 3
 anchors_preset = 0
@@ -18,7 +18,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_wnf2v")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1204246683]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +27,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.638554, 0.499437, 0.164002, 0.384314)
 
-[node name="TopLabel" type="Label" parent="."]
+[node name="TopLabel" type="Label" parent="." unique_id=2087783780]
 layout_mode = 0
 offset_left = 25.0
 offset_top = 17.0
@@ -36,7 +36,7 @@ offset_bottom = 40.0
 text = "This is a test!"
 label_settings = SubResource("LabelSettings_cnxo1")
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=250896296]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -52,7 +52,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 64
 text = "Press this button"
 
-[node name="CountLabel" type="Label" parent="."]
+[node name="CountLabel" type="Label" parent="." unique_id=1252998984]
 layout_mode = 0
 offset_left = 39.0
 offset_top = 316.0
@@ -63,7 +63,7 @@ label_settings = SubResource("LabelSettings_cnxo1")
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Cursor" type="ColorRect" parent="."]
+[node name="Cursor" type="ColorRect" parent="." unique_id=1323856567]
 process_mode = 4
 material = SubResource("ShaderMaterial_84eui")
 layout_mode = 0

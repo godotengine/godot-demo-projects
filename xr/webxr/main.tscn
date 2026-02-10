@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dismxfxe7wvdn"]
+[gd_scene format=3 uid="uid://dismxfxe7wvdn"]
 
 [ext_resource type="Script" uid="uid://b71y6j7lamjqg" path="res://main.gd" id="1_ig7tw"]
 
@@ -20,38 +20,38 @@ size = Vector3(0.1, 0.1, 0.1)
 [sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
 size = Vector3(0.1, 0.1, 0.1)
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" unique_id=43032616]
 script = ExtResource("1_ig7tw")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1198473418]
 environment = SubResource("Environment_6ff2h")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1075889462]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
-[node name="XROrigin3D" type="XROrigin3D" parent="."]
+[node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=1723498643]
 
-[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=882356361]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
-[node name="LeftController" type="XRController3D" parent="XROrigin3D"]
+[node name="LeftController" type="XRController3D" parent="XROrigin3D" unique_id=1164426693]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, 0)
 tracker = &"left_hand"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftController"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftController" unique_id=71104548]
 mesh = SubResource("BoxMesh_gv5m4")
 
-[node name="RightController" type="XRController3D" parent="XROrigin3D"]
+[node name="RightController" type="XRController3D" parent="XROrigin3D" unique_id=362318247]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0)
 tracker = &"right_hand"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightController"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightController" unique_id=623479085]
 mesh = SubResource("BoxMesh_f3sb7")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=695210784]
 
-[node name="EnterVRButton" type="Button" parent="CanvasLayer"]
+[node name="EnterVRButton" type="Button" parent="CanvasLayer" unique_id=1018522561]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1qshhfft682v"]
+[gd_scene format=3 uid="uid://b1qshhfft682v"]
 
 [ext_resource type="Script" uid="uid://btvgkhmgpgs6" path="res://menu/options/options.gd" id="1"]
 [ext_resource type="Theme" uid="uid://c52ndra5ud4ew" path="res://menu/theme/theme.tres" id="1_1y7gy"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://lm2uk4loltmg" path="res://menu/button_hover.png" id="6_idu7c"]
 [ext_resource type="Texture2D" uid="uid://danemt63tb8ma" path="res://menu/button_focus.png" id="7_gmbws"]
 
-[node name="Options" type="Control"]
+[node name="Options" type="Control" unique_id=525488540]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -19,7 +19,7 @@ grow_vertical = 2
 theme = ExtResource("1_1y7gy")
 script = ExtResource("1")
 
-[node name="CenterAnchor" type="Control" parent="."]
+[node name="CenterAnchor" type="Control" parent="." unique_id=193037538]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -29,7 +29,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="OptionsBackground" type="ColorRect" parent="CenterAnchor"]
+[node name="OptionsBackground" type="ColorRect" parent="CenterAnchor" unique_id=684938923]
 self_modulate = Color(0.45098, 0.45098, 0.45098, 1)
 custom_minimum_size = Vector2(1000, 250)
 layout_mode = 1
@@ -46,7 +46,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.25098, 0.25098, 0.25098, 0.627451)
 
-[node name="OptionButtons" type="GridContainer" parent="CenterAnchor/OptionsBackground"]
+[node name="OptionButtons" type="GridContainer" parent="CenterAnchor/OptionsBackground" unique_id=318500562]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -62,14 +62,14 @@ theme_override_constants/h_separation = 20
 columns = 2
 script = ExtResource("2")
 
-[node name="RenderDistanceLabel" type="Label" parent="CenterAnchor/OptionsBackground/OptionButtons"]
+[node name="RenderDistanceLabel" type="Label" parent="CenterAnchor/OptionsBackground/OptionButtons" unique_id=249143552]
 layout_mode = 2
 size_flags_vertical = 5
 theme_override_font_sizes/font_size = 60
 text = "Render distance: 3"
 horizontal_alignment = 2
 
-[node name="RenderDistanceSlider" type="HSlider" parent="CenterAnchor/OptionsBackground/OptionButtons"]
+[node name="RenderDistanceSlider" type="HSlider" parent="CenterAnchor/OptionsBackground/OptionButtons" unique_id=562286204]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -77,19 +77,19 @@ min_value = 3.0
 max_value = 10.0
 value = 7.0
 
-[node name="FogLabel" type="Label" parent="CenterAnchor/OptionsBackground/OptionButtons"]
+[node name="FogLabel" type="Label" parent="CenterAnchor/OptionsBackground/OptionButtons" unique_id=1137357347]
 layout_mode = 2
 size_flags_vertical = 5
 theme_override_font_sizes/font_size = 60
 text = "Fog Enabled"
 horizontal_alignment = 2
 
-[node name="FogCheckBox" type="CheckBox" parent="CenterAnchor/OptionsBackground/OptionButtons"]
+[node name="FogCheckBox" type="CheckBox" parent="CenterAnchor/OptionsBackground/OptionButtons" unique_id=964353172]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterAnchor"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterAnchor" unique_id=127740109]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -104,14 +104,14 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Back" type="TextureButton" parent="CenterAnchor/HBoxContainer"]
+[node name="Back" type="TextureButton" parent="CenterAnchor/HBoxContainer" unique_id=1621122781]
 layout_mode = 2
 texture_normal = ExtResource("3")
 texture_pressed = ExtResource("5_g68rn")
 texture_hover = ExtResource("6_idu7c")
 texture_focused = ExtResource("7_gmbws")
 
-[node name="Label" type="Label" parent="CenterAnchor/HBoxContainer/Back"]
+[node name="Label" type="Label" parent="CenterAnchor/HBoxContainer/Back" unique_id=1567805557]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0

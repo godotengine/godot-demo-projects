@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c670q7x53qcd2"]
+[gd_scene format=3 uid="uid://c670q7x53qcd2"]
 
 [ext_resource type="Script" uid="uid://c5ghnah0xtulh" path="res://player/player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bnbll6ldmnc7y" path="res://world/textures/texture_sheet.png" id="2"]
@@ -34,24 +34,24 @@ uv1_scale = Vector3(3, 2, 1)
 material = SubResource("StandardMaterial3D_yw30f")
 size = Vector3(1.001, 1.001, 1.001)
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" unique_id=1417084798]
 collision_layer = 0
 script = ExtResource("1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1050407592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("1")
 
-[node name="Head" type="Node3D" parent="."]
+[node name="Head" type="Node3D" parent="." unique_id=1959391908]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Head"]
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=824380459]
 attributes = SubResource("CameraAttributesPractical_jyixh")
 
-[node name="RayCast3D" type="RayCast3D" parent="Head"]
+[node name="RayCast3D" type="RayCast3D" parent="Head" unique_id=425940247]
 target_position = Vector3(0, 0, -5)
 
-[node name="SelectedBlock" type="TextureRect" parent="."]
+[node name="SelectedBlock" type="TextureRect" parent="." unique_id=232290072]
 texture_filter = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -67,7 +67,7 @@ grow_vertical = 0
 texture = SubResource("2")
 expand_mode = 1
 
-[node name="AimPreview" type="MeshInstance3D" parent="."]
+[node name="AimPreview" type="MeshInstance3D" parent="." unique_id=201830824]
 top_level = true
 visible = false
 mesh = SubResource("BoxMesh_qjkh3")

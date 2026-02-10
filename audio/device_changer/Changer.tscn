@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbqyflksen34l"]
+[gd_scene format=3 uid="uid://dbqyflksen34l"]
 
 [ext_resource type="Script" uid="uid://dcq6xugkscly5" path="res://Changer.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://c7rgji6r0kglt" path="res://Intro.ogg" id="2"]
 
-[node name="Changer" type="Control"]
+[node name="Changer" type="Control" unique_id=1811865181]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -18,14 +18,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 
-[node name="ItemList" type="ItemList" parent="."]
+[node name="ItemList" type="ItemList" parent="." unique_id=972922055]
 layout_mode = 0
 offset_left = 57.0
 offset_top = 33.0
 offset_right = 960.0
 offset_bottom = 228.0
 
-[node name="DeviceInfo" type="Label" parent="."]
+[node name="DeviceInfo" type="Label" parent="." unique_id=1372283429]
 layout_mode = 0
 offset_left = -64.0
 offset_top = 248.0
@@ -33,7 +33,7 @@ offset_right = 1046.0
 offset_bottom = 284.0
 horizontal_alignment = 1
 
-[node name="SetDevice" type="Button" parent="."]
+[node name="SetDevice" type="Button" parent="." unique_id=2091872629]
 layout_mode = 0
 offset_left = 425.723
 offset_top = 309.733
@@ -41,7 +41,7 @@ offset_right = 556.723
 offset_bottom = 354.733
 text = "Set Device"
 
-[node name="PlayAudio" type="Button" parent="."]
+[node name="PlayAudio" type="Button" parent="." unique_id=1560762511]
 layout_mode = 0
 offset_left = 424.0
 offset_top = 373.0
@@ -49,7 +49,7 @@ offset_right = 557.0
 offset_bottom = 414.0
 text = "Play Audio"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=865066939]
 stream = ExtResource("2")
 volume_db = -6.0
 

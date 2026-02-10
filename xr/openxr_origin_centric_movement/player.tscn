@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dd0ja4vjmdbnr"]
+[gd_scene format=3 uid="uid://dd0ja4vjmdbnr"]
 
 [ext_resource type="Script" uid="uid://fcwuqcgyw55y" path="res://player.gd" id="1_d31c7"]
 [ext_resource type="PackedScene" uid="uid://51508nbqo77c" path="res://objects/black_out.tscn" id="2_ecfc5"]
@@ -8,38 +8,38 @@ size = Vector3(0.05, 0.05, 0.05)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xe2ly"]
 
-[node name="XROrigin3D" type="XROrigin3D"]
+[node name="XROrigin3D" type="XROrigin3D" unique_id=1425964268]
 current = true
 script = ExtResource("1_d31c7")
 
-[node name="XRCamera3D" type="XRCamera3D" parent="."]
+[node name="XRCamera3D" type="XRCamera3D" parent="." unique_id=1716211507]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.1)
 far = 1000.0
 
-[node name="Neck" type="Node3D" parent="XRCamera3D"]
+[node name="Neck" type="Node3D" parent="XRCamera3D" unique_id=1461671529]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.1)
 
-[node name="BlackOut" parent="XRCamera3D" instance=ExtResource("2_ecfc5")]
+[node name="BlackOut" parent="XRCamera3D" unique_id=1325962642 instance=ExtResource("2_ecfc5")]
 
-[node name="LeftHand" type="XRController3D" parent="."]
+[node name="LeftHand" type="XRController3D" parent="." unique_id=516301695]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"left_hand"
 pose = &"aim"
 
-[node name="PlaceholderHand" type="MeshInstance3D" parent="LeftHand"]
+[node name="PlaceholderHand" type="MeshInstance3D" parent="LeftHand" unique_id=1187499383]
 mesh = SubResource("BoxMesh_sldd7")
 
-[node name="RightHand" type="XRController3D" parent="."]
+[node name="RightHand" type="XRController3D" parent="." unique_id=957498216]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
 tracker = &"right_hand"
 pose = &"aim"
 
-[node name="PlaceholderHand" type="MeshInstance3D" parent="RightHand"]
+[node name="PlaceholderHand" type="MeshInstance3D" parent="RightHand" unique_id=355491569]
 mesh = SubResource("BoxMesh_sldd7")
 skeleton = NodePath("../../LeftHand")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=2053598607]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=85351062]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_xe2ly")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dsqy8lxrpip13"]
+[gd_scene format=3 uid="uid://dsqy8lxrpip13"]
 
 [ext_resource type="Script" uid="uid://ddbwt6ntihs35" path="res://player/player.gd" id="3"]
 [ext_resource type="AudioStream" uid="uid://c1i84mve6y67g" path="res://player/jump.wav" id="5"]
@@ -185,46 +185,44 @@ _data = {
 [sub_resource type="RectangleShape2D" id="11"]
 size = Vector2(42.5, 54.5)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=457318108]
 scale = Vector2(0.8, 0.8)
 collision_mask = 30
 floor_constant_speed = true
 platform_on_leave = 2
 script = ExtResource("3")
 
-[node name="ShootAnimation" type="Timer" parent="."]
+[node name="ShootAnimation" type="Timer" parent="." unique_id=436026377]
 wait_time = 0.2
 one_shot = true
 
-[node name="PlatformDetector" type="RayCast2D" parent="."]
+[node name="PlatformDetector" type="RayCast2D" parent="." unique_id=205811814]
 target_position = Vector2(0, 6)
 collision_mask = 8
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=202817017]
 position = Vector2(0, -14)
 texture = ExtResource("9")
 hframes = 8
 vframes = 8
 frame = 42
 
-[node name="Gun" type="Marker2D" parent="Sprite2D"]
+[node name="Gun" type="Marker2D" parent="Sprite2D" unique_id=1823254857]
 position = Vector2(14, 1)
 script = ExtResource("8")
 
-[node name="Shoot" type="AudioStreamPlayer2D" parent="Sprite2D/Gun"]
+[node name="Shoot" type="AudioStreamPlayer2D" parent="Sprite2D/Gun" unique_id=1036518396]
 position = Vector2(-30.6589, -6.13176)
 stream = ExtResource("6")
 
-[node name="Cooldown" type="Timer" parent="Sprite2D/Gun"]
+[node name="Cooldown" type="Timer" parent="Sprite2D/Gun" unique_id=935250789]
 wait_time = 0.3
 one_shot = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_jnr5f")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=615569074]
+libraries/ = SubResource("AnimationLibrary_jnr5f")
 
-[node name="Camera" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="." unique_id=371545283]
 position = Vector2(0, -28)
 offset = Vector2(0, 50)
 process_callback = 0
@@ -233,38 +231,38 @@ limit_top = -250
 limit_right = 1425
 limit_bottom = 690
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1531075157]
 position = Vector2(0, -14)
 shape = SubResource("11")
 
-[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+[node name="Jump" type="AudioStreamPlayer2D" parent="." unique_id=2076416565]
 stream = ExtResource("5")
 volume_db = -3.0
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=770402058]
 layer = 0
 
-[node name="Left" type="TouchScreenButton" parent="UI"]
+[node name="Left" type="TouchScreenButton" parent="UI" unique_id=1237442796]
 position = Vector2(157, 813)
 scale = Vector2(2, 2)
 passby_press = true
 action = "move_left"
 visibility_mode = 1
 
-[node name="Right" type="TouchScreenButton" parent="UI"]
+[node name="Right" type="TouchScreenButton" parent="UI" unique_id=1268206583]
 position = Vector2(425, 813)
 scale = Vector2(2, 2)
 passby_press = true
 action = "move_right"
 visibility_mode = 1
 
-[node name="Jump" type="TouchScreenButton" parent="UI"]
+[node name="Jump" type="TouchScreenButton" parent="UI" unique_id=1743232442]
 position = Vector2(1871, 813)
 scale = Vector2(2, 2)
 action = "jump"
 visibility_mode = 1
 
-[node name="Fire" type="TouchScreenButton" parent="UI"]
+[node name="Fire" type="TouchScreenButton" parent="UI" unique_id=1801225248]
 position = Vector2(1870, 564)
 scale = Vector2(2, 2)
 action = "shoot"

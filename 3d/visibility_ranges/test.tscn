@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dgn1g0labb2h6"]
+[gd_scene format=3 uid="uid://dgn1g0labb2h6"]
 
 [ext_resource type="Script" uid="uid://bcxxkodf114ro" path="res://camera.gd" id="1_yepcp"]
 [ext_resource type="Script" uid="uid://b7erm757yjt5k" path="res://tree_clusters.gd" id="2_ydews"]
@@ -84,31 +84,31 @@ uv1_scale = Vector3(2048, 1536, 1)
 uv2_scale = Vector3(64, 32, 1)
 texture_filter = 5
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=272270818]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1519536716]
 transform = Transform3D(-0.292632, 0.955563, -0.0355886, -0.845857, -0.241319, 0.4757, 0.445973, 0.169308, 0.878887, 0, 11, 0)
 shadow_enabled = true
 shadow_bias = 0.05
 shadow_blur = 1.5
 directional_shadow_max_distance = 200.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=446775355]
 environment = SubResource("Environment_w7n8k")
 
-[node name="Ground" type="MeshInstance3D" parent="."]
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=402183406]
 mesh = SubResource("BoxMesh_qxf28")
 surface_material_override/0 = SubResource("StandardMaterial3D_lf55d")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=721432836]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 200)
 fov = 74.0
 script = ExtResource("1_yepcp")
 
-[node name="TreeClusters" type="Node3D" parent="."]
+[node name="TreeClusters" type="Node3D" parent="." unique_id=672126484]
 script = ExtResource("2_ydews")
 
-[node name="Loading" type="Control" parent="TreeClusters"]
+[node name="Loading" type="Control" parent="TreeClusters" unique_id=180089056]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -116,7 +116,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="TreeClusters/Loading"]
+[node name="ColorRect" type="ColorRect" parent="TreeClusters/Loading" unique_id=1031709182]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -125,7 +125,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.501961)
 
-[node name="Label" type="Label" parent="TreeClusters/Loading"]
+[node name="Label" type="Label" parent="TreeClusters/Loading" unique_id=459031657]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -143,7 +143,7 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 32
 text = "Loading, please wait…"
 
-[node name="VisibilityRanges" type="Label" parent="TreeClusters"]
+[node name="VisibilityRanges" type="Label" parent="TreeClusters" unique_id=1160928523]
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 208.0
@@ -152,7 +152,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Visibility ranges: Enabled"
 
-[node name="FadeMode" type="Label" parent="TreeClusters"]
+[node name="FadeMode" type="Label" parent="TreeClusters" unique_id=1166449374]
 offset_left = 16.0
 offset_top = 48.0
 offset_right = 208.0
@@ -161,7 +161,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Fade mode: Enabled (Transparency)"
 
-[node name="FPSLabel" type="Label" parent="."]
+[node name="FPSLabel" type="Label" parent="." unique_id=1019551427]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -175,7 +175,7 @@ theme_override_constants/outline_size = 4
 horizontal_alignment = 2
 script = ExtResource("3_vep8a")
 
-[node name="Help" type="Label" parent="."]
+[node name="Help" type="Label" parent="." unique_id=1413559280]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0

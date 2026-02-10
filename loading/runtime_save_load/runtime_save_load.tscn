@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://vorg2qrj4tja"]
+[gd_scene format=3 uid="uid://vorg2qrj4tja"]
 
 [ext_resource type="Script" uid="uid://derw0ry6d87ho" path="res://runtime_save_load.gd" id="1_2gu2h"]
 
-[node name="RuntimeLoadSave" type="Control"]
+[node name="RuntimeLoadSave" type="Control" unique_id=19216344]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2gu2h")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=57257049]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,11 +23,11 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=558581020]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Help" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Help" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1781632075]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.752941)
 text = "This project showcases how to load and save various file types without going through Godot's resource importing system.
@@ -35,109 +35,109 @@ This is useful to load/save images, sounds, 3D scenes and ZIP archives at run-ti
 without requiring users to generate a PCK file through Godot."
 autowrap_mode = 2
 
-[node name="Instructions" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Instructions" type="Label" parent="MarginContainer/VBoxContainer" unique_id=350769938]
 layout_mode = 2
 text = "Select a file to load (look in the \"examples\" folder):"
 autowrap_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=50383477]
 layout_mode = 2
 
-[node name="FilePath" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="FilePath" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=410382176]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Click \"Browse\" on the right or enter path to file"
 
-[node name="Browse" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Browse" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=34522914]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Browse"
 
-[node name="FileDialog" type="FileDialog" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="FileDialog" type="FileDialog" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1943044875]
 title = "Open a File"
 size = Vector2i(392, 175)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
 
-[node name="Result" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Result" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=455256499]
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 
-[node name="PlainTextViewer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/Result"]
+[node name="PlainTextViewer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/Result" unique_id=1899501321]
 visible = false
 custom_minimum_size = Vector2(1050, 400)
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Result/PlainTextViewer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Result/PlainTextViewer" unique_id=1204498325]
 custom_minimum_size = Vector2(1050, 400)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.941176, 0.627451, 1)
 autowrap_mode = 2
 
-[node name="TextureViewer" type="TextureRect" parent="MarginContainer/VBoxContainer/Result"]
+[node name="TextureViewer" type="TextureRect" parent="MarginContainer/VBoxContainer/Result" unique_id=595917001]
 visible = false
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 expand_mode = 3
 
-[node name="AudioPlayer" type="Button" parent="MarginContainer/VBoxContainer/Result"]
+[node name="AudioPlayer" type="Button" parent="MarginContainer/VBoxContainer/Result" unique_id=1269321942]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Play Audio"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/Result/AudioPlayer"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/Result/AudioPlayer" unique_id=1731777045]
 volume_db = -10.0
 
-[node name="Information" type="Label" parent="MarginContainer/VBoxContainer/Result/AudioPlayer"]
+[node name="Information" type="Label" parent="MarginContainer/VBoxContainer/Result/AudioPlayer" unique_id=1131172532]
 layout_mode = 0
 offset_top = 48.0
 offset_right = 40.0
 offset_bottom = 71.0
 
-[node name="SceneViewer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer/Result"]
+[node name="SceneViewer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer/Result" unique_id=1083853242]
 visible = false
 custom_minimum_size = Vector2(1050, 400)
 layout_mode = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="MarginContainer/VBoxContainer/Result/SceneViewer"]
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/VBoxContainer/Result/SceneViewer" unique_id=400299543]
 handle_input_locally = false
 msaa_3d = 2
 scaling_3d_scale = 2.0
 size = Vector2i(1050, 400)
 render_target_update_mode = 0
 
-[node name="Camera3D" type="Camera3D" parent="MarginContainer/VBoxContainer/Result/SceneViewer/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/VBoxContainer/Result/SceneViewer/SubViewport" unique_id=373019175]
 transform = Transform3D(0.877582, -0.229849, 0.420736, 0, 0.877582, 0.479426, -0.479426, -0.420736, 0.770151, 26.1772, 30.2846, 47.917)
 projection = 1
 size = 1.2
 near = 0.001
 far = 100.0
 
-[node name="KeyLight" type="DirectionalLight3D" parent="MarginContainer/VBoxContainer/Result/SceneViewer/SubViewport"]
+[node name="KeyLight" type="DirectionalLight3D" parent="MarginContainer/VBoxContainer/Result/SceneViewer/SubViewport" unique_id=479459090]
 transform = Transform3D(0.775472, 0.453626, -0.439166, 0, 0.695563, 0.718465, 0.631382, -0.557149, 0.53939, -2.78761, 4.56046, 3.42378)
 shadow_enabled = true
 directional_shadow_mode = 0
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 20.0
 
-[node name="FillLight" type="DirectionalLight3D" parent="MarginContainer/VBoxContainer/Result/SceneViewer/SubViewport"]
+[node name="FillLight" type="DirectionalLight3D" parent="MarginContainer/VBoxContainer/Result/SceneViewer/SubViewport" unique_id=1073581215]
 transform = Transform3D(-0.775472, -0.453626, 0.439166, 4.2942e-09, 0.695563, 0.718465, -0.631382, 0.557149, -0.53939, -2.78761, 2.56046, 3.42378)
 light_energy = 0.3
 shadow_bias = 0.04
 directional_shadow_mode = 0
 directional_shadow_max_distance = 30.0
 
-[node name="BackLight" type="DirectionalLight3D" parent="MarginContainer/VBoxContainer/Result/SceneViewer/SubViewport"]
+[node name="BackLight" type="DirectionalLight3D" parent="MarginContainer/VBoxContainer/Result/SceneViewer/SubViewport" unique_id=883991862]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2.78761, 0.56046, 3.42378)
 light_energy = 0.1
 shadow_bias = 0.04
 directional_shadow_mode = 0
 directional_shadow_max_distance = 30.0
 
-[node name="Zoom" type="HSlider" parent="MarginContainer/VBoxContainer/Result/SceneViewer"]
+[node name="Zoom" type="HSlider" parent="MarginContainer/VBoxContainer/Result/SceneViewer" unique_id=405443522]
 custom_minimum_size = Vector2(1050, 0)
 layout_mode = 2
 min_value = -100.0
@@ -145,7 +145,7 @@ max_value = -0.1
 step = 0.0
 value = -1.2
 
-[node name="FontViewer" type="Label" parent="MarginContainer/VBoxContainer/Result"]
+[node name="FontViewer" type="Label" parent="MarginContainer/VBoxContainer/Result" unique_id=1328948179]
 visible = false
 custom_minimum_size = Vector2(1050, 400)
 layout_mode = 2
@@ -158,17 +158,18 @@ NOPQRSTUVWXYZ
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ZIPViewer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/Result"]
+[node name="ZIPViewer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/Result" unique_id=463883116]
 visible = false
 custom_minimum_size = Vector2(1050, 400)
 layout_mode = 2
+split_offsets = PackedInt32Array(525)
 split_offset = 525
 
-[node name="FileList" type="ItemList" parent="MarginContainer/VBoxContainer/Result/ZIPViewer"]
+[node name="FileList" type="ItemList" parent="MarginContainer/VBoxContainer/Result/ZIPViewer" unique_id=2026481305]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="FilePreview" type="Label" parent="MarginContainer/VBoxContainer/Result/ZIPViewer"]
+[node name="FilePreview" type="Label" parent="MarginContainer/VBoxContainer/Result/ZIPViewer" unique_id=899292312]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -177,17 +178,17 @@ theme_override_colors/font_color = Color(0.631373, 0.862745, 1, 1)
 autowrap_mode = 2
 text_overrun_behavior = 3
 
-[node name="ErrorLabel" type="Label" parent="MarginContainer/VBoxContainer/Result"]
+[node name="ErrorLabel" type="Label" parent="MarginContainer/VBoxContainer/Result" unique_id=517321008]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.501961, 0.501961, 1)
 theme_override_font_sizes/font_size = 24
 
-[node name="Export" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Export" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1125191431]
 layout_mode = 2
 text = "Export"
 
-[node name="FileDialog" type="FileDialog" parent="MarginContainer/VBoxContainer/Export"]
+[node name="FileDialog" type="FileDialog" parent="MarginContainer/VBoxContainer/Export" unique_id=921853529]
 title = "Export File"
 access = 2
 

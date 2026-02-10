@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://1edquvuh4xlu"]
+[gd_scene format=3 uid="uid://1edquvuh4xlu"]
 
 [ext_resource type="Script" uid="uid://bbiup6xhh6s17" path="res://logic/paddle.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://ybn78qkuq21d" path="res://paddle.png" id="2"]
@@ -20,79 +20,79 @@ size = Vector2(20, 400)
 [sub_resource type="RectangleShape2D" id="4"]
 size = Vector2(640, 20)
 
-[node name="Pong" type="Node2D"]
+[node name="Pong" type="Node2D" unique_id=955338785]
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=803382122]
 offset_right = 640.0
 offset_bottom = 400.0
 color = Color(0.141176, 0.152941, 0.164706, 1)
 
-[node name="Left" type="Area2D" parent="."]
+[node name="Left" type="Area2D" parent="." unique_id=1813648679]
 modulate = Color(0, 1, 1, 1)
 position = Vector2(67.6285, 192.594)
 script = ExtResource("1")
 
-[node name="Sprite2D" type="Sprite2D" parent="Left"]
+[node name="Sprite2D" type="Sprite2D" parent="Left" unique_id=63896141]
 texture = ExtResource("2")
 
-[node name="Collision" type="CollisionShape2D" parent="Left"]
+[node name="Collision" type="CollisionShape2D" parent="Left" unique_id=425901789]
 shape = SubResource("1")
 
-[node name="Right" type="Area2D" parent="."]
+[node name="Right" type="Area2D" parent="." unique_id=1762219232]
 modulate = Color(1, 0, 1, 1)
 position = Vector2(563.815, 188.919)
 script = ExtResource("1")
 
-[node name="Sprite2D" type="Sprite2D" parent="Right"]
+[node name="Sprite2D" type="Sprite2D" parent="Right" unique_id=510026471]
 texture = ExtResource("2")
 
-[node name="Collision" type="CollisionShape2D" parent="Right"]
+[node name="Collision" type="CollisionShape2D" parent="Right" unique_id=1439229462]
 shape = SubResource("1")
 
-[node name="Ball" type="Area2D" parent="."]
+[node name="Ball" type="Area2D" parent="." unique_id=548893558]
 position = Vector2(320.5, 191.124)
 script = ExtResource("4")
 
-[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+[node name="Sprite2D" type="Sprite2D" parent="Ball" unique_id=426188314]
 texture = ExtResource("5")
 
-[node name="Collision" type="CollisionShape2D" parent="Ball"]
+[node name="Collision" type="CollisionShape2D" parent="Ball" unique_id=1934890566]
 shape = SubResource("2")
 
-[node name="Separator" type="Sprite2D" parent="."]
+[node name="Separator" type="Sprite2D" parent="." unique_id=247447272]
 position = Vector2(320, 200)
 texture = ExtResource("6")
 
-[node name="LeftWall" type="Area2D" parent="."]
+[node name="LeftWall" type="Area2D" parent="." unique_id=2003719181]
 position = Vector2(-10, 200)
 script = ExtResource("7")
 
-[node name="Collision" type="CollisionShape2D" parent="LeftWall"]
+[node name="Collision" type="CollisionShape2D" parent="LeftWall" unique_id=130228766]
 shape = SubResource("3")
 
-[node name="RightWall" type="Area2D" parent="."]
+[node name="RightWall" type="Area2D" parent="." unique_id=1028647402]
 position = Vector2(650, 200)
 script = ExtResource("7")
 
-[node name="Collision" type="CollisionShape2D" parent="RightWall"]
+[node name="Collision" type="CollisionShape2D" parent="RightWall" unique_id=246191491]
 shape = SubResource("3")
 
-[node name="Ceiling" type="Area2D" parent="."]
+[node name="Ceiling" type="Area2D" parent="." unique_id=725670398]
 position = Vector2(320, -10)
 script = ExtResource("8")
 
-[node name="Collision" type="CollisionShape2D" parent="Ceiling"]
+[node name="Collision" type="CollisionShape2D" parent="Ceiling" unique_id=768251525]
 shape = SubResource("4")
 
-[node name="Floor" type="Area2D" parent="."]
+[node name="Floor" type="Area2D" parent="." unique_id=4813690]
 position = Vector2(320, 410)
 script = ExtResource("8")
 _bounce_direction = -1
 
-[node name="Collision" type="CollisionShape2D" parent="Floor"]
+[node name="Collision" type="CollisionShape2D" parent="Floor" unique_id=1735079208]
 shape = SubResource("4")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=957432765]
 offset = Vector2(320, 200)
 
 [connection signal="area_entered" from="Left" to="Left" method="_on_area_entered"]

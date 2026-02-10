@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cit5kj8rbqphf"]
+[gd_scene format=3 uid="uid://cit5kj8rbqphf"]
 
 [ext_resource type="Script" uid="uid://g2bo8a5av2sn" path="res://vehicles/vehicle.gd" id="1_r806m"]
 [ext_resource type="Texture2D" uid="uid://yexl3pkv5tea" path="res://vehicles/particle_smoke.png" id="2_1gkvk"]
@@ -51,15 +51,15 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_p5xtl"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="CarBase" type="Node3D"]
+[node name="CarBase" type="Node3D" unique_id=1586069049]
 
-[node name="Body" type="VehicleBody3D" parent="."]
+[node name="Body" type="VehicleBody3D" parent="." unique_id=492563846]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00169557, 0.222867, -0.0955184)
 physics_material_override = SubResource("PhysicsMaterial_l7i2k")
 center_of_mass_mode = 1
 script = ExtResource("1_r806m")
 
-[node name="Wheel1" type="VehicleWheel3D" parent="Body"]
+[node name="Wheel1" type="VehicleWheel3D" parent="Body" unique_id=1397255951]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.573678, 0.115169, 1.10416)
 use_as_traction = true
 use_as_steering = true
@@ -70,12 +70,12 @@ suspension_travel = 2.0
 suspension_stiffness = 40.0
 damping_compression = 0.88
 
-[node name="Wheel1" type="MeshInstance3D" parent="Body/Wheel1"]
+[node name="Wheel1" type="MeshInstance3D" parent="Body/Wheel1" unique_id=1796401041]
 layers = 2
 gi_mode = 2
 mesh = ExtResource("2_3cqaw")
 
-[node name="Wheel2" type="VehicleWheel3D" parent="Body"]
+[node name="Wheel2" type="VehicleWheel3D" parent="Body" unique_id=201982580]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.573678, 0.115169, -0.783403)
 use_as_traction = true
 wheel_roll_influence = 0.4
@@ -85,12 +85,12 @@ suspension_travel = 2.0
 suspension_stiffness = 40.0
 damping_compression = 0.88
 
-[node name="Wheel2" type="MeshInstance3D" parent="Body/Wheel2"]
+[node name="Wheel2" type="MeshInstance3D" parent="Body/Wheel2" unique_id=1413047541]
 layers = 2
 gi_mode = 2
 mesh = ExtResource("2_3cqaw")
 
-[node name="Wheel3" type="VehicleWheel3D" parent="Body"]
+[node name="Wheel3" type="VehicleWheel3D" parent="Body" unique_id=707845024]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.573678, 0.115169, 1.10416)
 use_as_traction = true
 use_as_steering = true
@@ -101,12 +101,12 @@ suspension_travel = 2.0
 suspension_stiffness = 40.0
 damping_compression = 0.88
 
-[node name="Wheel3" type="MeshInstance3D" parent="Body/Wheel3"]
+[node name="Wheel3" type="MeshInstance3D" parent="Body/Wheel3" unique_id=1986233601]
 layers = 2
 gi_mode = 2
 mesh = ExtResource("2_3cqaw")
 
-[node name="Wheel4" type="VehicleWheel3D" parent="Body"]
+[node name="Wheel4" type="VehicleWheel3D" parent="Body" unique_id=1445450787]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.573678, 0.115169, -0.783403)
 use_as_traction = true
 wheel_roll_influence = 0.4
@@ -116,24 +116,24 @@ suspension_travel = 2.0
 suspension_stiffness = 40.0
 damping_compression = 0.88
 
-[node name="Wheel4" type="MeshInstance3D" parent="Body/Wheel4"]
+[node name="Wheel4" type="MeshInstance3D" parent="Body/Wheel4" unique_id=111205750]
 layers = 2
 gi_mode = 2
 mesh = ExtResource("2_3cqaw")
 
-[node name="Body" type="MeshInstance3D" parent="Body"]
+[node name="Body" type="MeshInstance3D" parent="Body" unique_id=1194420073]
 layers = 2
 gi_mode = 2
 mesh = ExtResource("3_cqia8")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body" unique_id=1128489443]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.588269, 0.0774262)
 shape = SubResource("BoxShape3D_x74tc")
 
-[node name="CameraBase" type="Node3D" parent="Body"]
+[node name="CameraBase" type="Node3D" parent="Body" unique_id=1270681842]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.97449, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Body/CameraBase"]
+[node name="Camera3D" type="Camera3D" parent="Body/CameraBase" unique_id=1873510239]
 transform = Transform3D(-1, 2.11495e-08, -8.48259e-08, 0, 0.970296, 0.241922, 8.74228e-08, 0.241922, -0.970296, 0, 2.032, -4.394)
 fov = 74.0
 near = 0.1
@@ -142,19 +142,19 @@ min_distance = 4.0
 max_distance = 5.0
 height = 1.25
 
-[node name="EngineSound" type="AudioStreamPlayer3D" parent="Body"]
+[node name="EngineSound" type="AudioStreamPlayer3D" parent="Body" unique_id=1306205447]
 stream = ExtResource("5_m8g7o")
 pitch_scale = 0.05
 autoplay = true
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="ImpactSound" type="AudioStreamPlayer3D" parent="Body"]
+[node name="ImpactSound" type="AudioStreamPlayer3D" parent="Body" unique_id=1332915353]
 stream = SubResource("AudioStreamRandomizer_bpr2q")
 volume_db = -10.0
 max_polyphony = 3
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="Body"]
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Body" unique_id=757931987]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.201696, -0.022867, -1.10448)
 amount = 125
 lifetime = 1.25
@@ -169,7 +169,7 @@ angle_max = 360.0
 scale_amount_curve = SubResource("Curve_4j5vd")
 color_ramp = SubResource("Gradient_p5xtl")
 
-[node name="BlobShadow" type="Decal" parent="Body"]
+[node name="BlobShadow" type="Decal" parent="Body" unique_id=515762079]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
 size = Vector3(1.6, 4, 3)
 texture_albedo = ExtResource("11_3ryw5")
@@ -177,11 +177,11 @@ upper_fade = 2.0
 lower_fade = 1.0
 cull_mask = 1048573
 
-[node name="AudioListener3D" type="AudioListener3D" parent="Body"]
+[node name="AudioListener3D" type="AudioListener3D" parent="Body" unique_id=425777938]
 current = true
 
-[node name="InteriorCameraPosition" type="Marker3D" parent="Body"]
+[node name="InteriorCameraPosition" type="Marker3D" parent="Body" unique_id=1505624587]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.9, 0.3)
 
-[node name="TopDownCameraPosition" type="Marker3D" parent="Body"]
+[node name="TopDownCameraPosition" type="Marker3D" parent="Body" unique_id=693785568]
 transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, 1, 8.74228e-08, 1, -4.37114e-08, 0.00169557, 15.7771, 0.0955178)

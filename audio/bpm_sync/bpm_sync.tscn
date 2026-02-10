@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhgpwi5jwbhj5"]
+[gd_scene format=3 uid="uid://bhgpwi5jwbhj5"]
 
 [ext_resource type="Texture2D" uid="uid://cn6g8csrcvnbo" path="res://play_system_button_hl.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://b87kkjv3tojau" path="res://play_sound_button.png" id="2"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c5dwfe3w00xd6" path="res://play_system_button.png" id="5"]
 [ext_resource type="Script" uid="uid://bcra2mu211xfd" path="res://bpm_sync.gd" id="7"]
 
-[node name="BPMSync" type="Panel"]
+[node name="BPMSync" type="Panel" unique_id=858428463]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -18,7 +18,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("7")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1723966214]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -41,11 +41,11 @@ text = "Press one of the buttons."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Player" type="AudioStreamPlayer" parent="."]
+[node name="Player" type="AudioStreamPlayer" parent="." unique_id=31552577]
 stream = ExtResource("3")
 volume_db = -6.0
 
-[node name="PlaySystem" type="TextureButton" parent="."]
+[node name="PlaySystem" type="TextureButton" parent="." unique_id=209692501]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -62,7 +62,7 @@ texture_normal = ExtResource("5")
 texture_pressed = ExtResource("5")
 texture_hover = ExtResource("1")
 
-[node name="PlaySound" type="TextureButton" parent="."]
+[node name="PlaySound" type="TextureButton" parent="." unique_id=1336294051]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3g7ixn60jkwc"]
+[gd_scene format=3 uid="uid://b3g7ixn60jkwc"]
 
 [ext_resource type="Script" uid="uid://bucsl5avrup6l" path="res://game_splitscreen.gd" id="1_60qgt"]
 [ext_resource type="PackedScene" uid="uid://bw4o5bonstovl" path="res://gui/pause_menu_splitscreen.tscn" id="2_xkexm"]
@@ -12,11 +12,11 @@
 gradient = SubResource("Gradient_77njx")
 width = 2
 
-[node name="GameSplitscreen" type="Node"]
+[node name="GameSplitscreen" type="Node" unique_id=1687835120]
 process_mode = 3
 script = ExtResource("1_60qgt")
 
-[node name="Black" type="ColorRect" parent="."]
+[node name="Black" type="ColorRect" parent="." unique_id=2013401300]
 process_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,7 +25,7 @@ offset_right = 6.10352e-05
 offset_bottom = 3.05176e-05
 color = Color(0, 0, 0, 1)
 
-[node name="SplitContainer" type="HSplitContainer" parent="Black"]
+[node name="SplitContainer" type="HSplitContainer" parent="Black" unique_id=648615839]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,13 +36,13 @@ theme_override_constants/separation = 0
 theme_override_icons/grabber = SubResource("GradientTexture1D_5sxld")
 dragger_visibility = 1
 
-[node name="ViewportContainer1" type="SubViewportContainer" parent="Black/SplitContainer"]
+[node name="ViewportContainer1" type="SubViewportContainer" parent="Black/SplitContainer" unique_id=695024105]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="Viewport1" type="SubViewport" parent="Black/SplitContainer/ViewportContainer1"]
+[node name="Viewport1" type="SubViewport" parent="Black/SplitContainer/ViewportContainer1" unique_id=1278576161]
 unique_name_in_owner = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
@@ -50,9 +50,9 @@ audio_listener_enable_2d = true
 size = Vector2i(399, 480)
 render_target_update_mode = 4
 
-[node name="Level" parent="Black/SplitContainer/ViewportContainer1/Viewport1" instance=ExtResource("3_e0nyr")]
+[node name="Level" parent="Black/SplitContainer/ViewportContainer1/Viewport1" unique_id=1987057291 instance=ExtResource("3_e0nyr")]
 
-[node name="Player1" parent="Black/SplitContainer/ViewportContainer1/Viewport1" instance=ExtResource("4_8j0va")]
+[node name="Player1" parent="Black/SplitContainer/ViewportContainer1/Viewport1" unique_id=1560919728 instance=ExtResource("4_8j0va")]
 unique_name_in_owner = true
 modulate = Color(1, 1.5, 2.5, 1)
 z_index = 3
@@ -60,7 +60,7 @@ position = Vector2(100, 636.5)
 scale = Vector2(1, 1)
 action_suffix = "_p1"
 
-[node name="Player2" parent="Black/SplitContainer/ViewportContainer1/Viewport1" instance=ExtResource("4_8j0va")]
+[node name="Player2" parent="Black/SplitContainer/ViewportContainer1/Viewport1" unique_id=1494580024 instance=ExtResource("4_8j0va")]
 unique_name_in_owner = true
 modulate = Color(3, 1, 1, 1)
 z_index = 3
@@ -68,13 +68,13 @@ position = Vector2(160, 636.5)
 scale = Vector2(1, 1)
 action_suffix = "_p2"
 
-[node name="ViewportContainer2" type="SubViewportContainer" parent="Black/SplitContainer"]
+[node name="ViewportContainer2" type="SubViewportContainer" parent="Black/SplitContainer" unique_id=1466400981]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="Viewport2" type="SubViewport" parent="Black/SplitContainer/ViewportContainer2"]
+[node name="Viewport2" type="SubViewport" parent="Black/SplitContainer/ViewportContainer2" unique_id=986244409]
 unique_name_in_owner = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
@@ -82,12 +82,12 @@ audio_listener_enable_2d = true
 size = Vector2i(399, 480)
 render_target_update_mode = 4
 
-[node name="ParallaxBackground" parent="Black/SplitContainer/ViewportContainer2/Viewport2" instance=ExtResource("5_47vt4")]
+[node name="ParallaxBackground" parent="Black/SplitContainer/ViewportContainer2/Viewport2" unique_id=1935440390 instance=ExtResource("5_47vt4")]
 
-[node name="InterfaceLayer" type="CanvasLayer" parent="."]
+[node name="InterfaceLayer" type="CanvasLayer" parent="." unique_id=1729022326]
 layer = 100
 
-[node name="PauseMenu" parent="InterfaceLayer" instance=ExtResource("2_xkexm")]
+[node name="PauseMenu" parent="InterfaceLayer" unique_id=2027766477 instance=ExtResource("2_xkexm")]
 
 [connection signal="coin_collected" from="Black/SplitContainer/ViewportContainer1/Viewport1/Player1" to="InterfaceLayer/PauseMenu" method="_on_coin_collected"]
 [connection signal="coin_collected" from="Black/SplitContainer/ViewportContainer1/Viewport1/Player2" to="InterfaceLayer/PauseMenu" method="_on_coin_collected"]

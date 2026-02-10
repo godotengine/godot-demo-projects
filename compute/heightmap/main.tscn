@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctptnotc1or6f"]
+[gd_scene format=3 uid="uid://ctptnotc1or6f"]
 
 [ext_resource type="Script" uid="uid://birx25108riec" path="res://main.gd" id="1_r4h6n"]
 
@@ -9,7 +9,7 @@ colors = PackedColorArray(0, 0.686275, 0.658824, 1, 0.542081, 0.741499, 1, 1)
 gradient = SubResource("Gradient_l3ffd")
 fill_to = Vector2(1, 1)
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" unique_id=1853132735]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,7 +19,7 @@ grow_vertical = 2
 script = ExtResource("1_r4h6n")
 shader_file = "res://compute_shader.glsl"
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=595946485]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,7 +28,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_uwj8q")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1541907231]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,116 +36,116 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1640795054]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/VBoxContainer" unique_id=1547396384]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer" unique_id=696559434]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=399085103]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Create Island"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="HSeparator" type="HSeparator" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=348190026]
 layout_mode = 2
 
-[node name="GridContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="GridContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=365739905]
 layout_mode = 2
 alignment = 1
 
-[node name="SeedLabel" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer"]
+[node name="SeedLabel" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=734765707]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Seed"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="SeedInput" type="SpinBox" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer"]
+[node name="SeedInput" type="SpinBox" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=1732807529]
 custom_minimum_size = Vector2(140, 35)
 layout_mode = 2
 max_value = 1000000000000.0
 
-[node name="RandomButton" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer"]
+[node name="RandomButton" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=477683510]
 layout_mode = 2
 text = "Random"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1296310880]
 layout_mode = 2
 alignment = 1
 
-[node name="CreateButtonGPU" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="CreateButtonGPU" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=512194681]
 custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Create (GPU)"
 
-[node name="CreateButtonCPU" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="CreateButtonCPU" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1628308586]
 custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Create (CPU)"
 
-[node name="PanelContainer2" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="CenterContainer/VBoxContainer" unique_id=1553506931]
 custom_minimum_size = Vector2(1034, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer2" unique_id=1374704468]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=760437594]
 layout_mode = 2
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/GridContainer"]
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/GridContainer" unique_id=1719842142]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 text = "Raw Heightmap"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/GridContainer"]
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/GridContainer" unique_id=320089636]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 text = "Computed Island"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="RawHeightmap" type="TextureRect" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/GridContainer"]
+[node name="RawHeightmap" type="TextureRect" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/GridContainer" unique_id=1999644451]
 custom_minimum_size = Vector2(384, 384)
 layout_mode = 2
 size_flags_horizontal = 3
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ComputedHeightmap" type="TextureRect" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/GridContainer"]
+[node name="ComputedHeightmap" type="TextureRect" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/GridContainer" unique_id=1334678033]
 custom_minimum_size = Vector2(384, 384)
 layout_mode = 2
 size_flags_horizontal = 3
 expand_mode = 1
 stretch_mode = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=1910346151]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer" unique_id=18551406]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Time elapsed: "
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer" unique_id=2124238277]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3

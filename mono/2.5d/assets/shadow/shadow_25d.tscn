@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvo6brwl4jo7b"]
+[gd_scene format=3 uid="uid://bvo6brwl4jo7b"]
 
 [ext_resource type="Script" uid="uid://cjenry74w02wp" path="res://addons/node25d-cs/Node25D.cs" id="1"]
 [ext_resource type="Texture2D" uid="uid://cxml28nm8b651" path="res://addons/node25d-cs/icons/node_25d_icon.png" id="2"]
@@ -10,7 +10,7 @@
 [sub_resource type="BoxShape3D" id="1"]
 size = Vector3(1, 0.002, 1)
 
-[node name="Shadow25D" type="Node2D"]
+[node name="Shadow25D" type="Node2D" unique_id=638500371]
 visible = false
 script = ExtResource("1")
 __meta__ = {
@@ -18,7 +18,7 @@ __meta__ = {
 }
 spatialPosition = Vector3(0, 10, 0)
 
-[node name="ShadowMath25D" type="CharacterBody3D" parent="."]
+[node name="ShadowMath25D" type="CharacterBody3D" parent="." unique_id=1865442828]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 collision_layer = 16
 collision_mask = 16
@@ -27,10 +27,10 @@ __meta__ = {
 "_editor_icon": ExtResource("4")
 }
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ShadowMath25D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ShadowMath25D" unique_id=1336221611]
 shape = SubResource("1")
 
-[node name="ShadowSprite" type="Sprite2D" parent="."]
+[node name="ShadowSprite" type="Sprite2D" parent="." unique_id=1564595900]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5")
 script = ExtResource("6")

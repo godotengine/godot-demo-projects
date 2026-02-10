@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://1mex317rxrtr"]
+[gd_scene format=3 uid="uid://1mex317rxrtr"]
 
 [ext_resource type="Script" uid="uid://du6se81t8j1fe" path="res://test_scene.gd" id="1_oue8n"]
 [ext_resource type="Shader" uid="uid://buysxqtcxhhgb" path="res://gradients/hues.gdshader" id="2_dw6v8"]
@@ -11,7 +11,6 @@ ambient_light_source = 1
 reflected_light_source = 1
 tonemap_white = 6.0
 glow_intensity = 0.09
-glow_blend_mode = 1
 fog_density = 0.025
 adjustment_enabled = true
 
@@ -23,50 +22,50 @@ shader_parameter/exponential_view = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_06xbs"]
 
-[node name="Gradients" type="Node3D" node_paths=PackedStringArray("world_environment")]
+[node name="Gradients" type="Node3D" unique_id=351594439 node_paths=PackedStringArray("world_environment")]
 script = ExtResource("1_oue8n")
 world_environment = NodePath("WorldEnvironment")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1005180467]
 environment = SubResource("Environment_lqw28")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1578647082]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 projection = 1
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="Label3D" type="Label3D" parent="." unique_id=859792763]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -0.873761, 0.279246, 0)
 text = "0.0"
 horizontal_alignment = 0
 vertical_alignment = 2
 
-[node name="Label3D4" type="Label3D" parent="."]
+[node name="Label3D4" type="Label3D" parent="." unique_id=1944029435]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0.867011, 0.279246, 0)
 text = "6.0"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=368578138]
 transform = Transform3D(1.7376, 0, 0, 0, 0.707668, 0, 0, 0, 1, 0, -0.0814103, 0)
 material_override = SubResource("ShaderMaterial_2qf08")
 mesh = SubResource("QuadMesh_06xbs")
 
-[node name="Controls" type="Node" parent="." node_paths=PackedStringArray("max_value_label", "hues")]
+[node name="Controls" type="Node" parent="." unique_id=1474875849 node_paths=PackedStringArray("max_value_label", "hues")]
 script = ExtResource("4_jldl5")
 max_value_label = NodePath("../Label3D4")
 hues = NodePath("../MeshInstance3D")
 
-[node name="StepsControls" type="HBoxContainer" parent="Controls"]
+[node name="StepsControls" type="HBoxContainer" parent="Controls" unique_id=118159852]
 offset_left = 937.0
 offset_top = 85.0
 offset_right = 1137.0
 offset_bottom = 125.0
 
-[node name="Label" type="Label" parent="Controls/StepsControls"]
+[node name="Label" type="Label" parent="Controls/StepsControls" unique_id=237114517]
 layout_mode = 2
 text = "Max Value"
 
-[node name="Steps" type="HSlider" parent="Controls/StepsControls"]
+[node name="Steps" type="HSlider" parent="Controls/StepsControls" unique_id=1922616295]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -74,14 +73,14 @@ min_value = 1.0
 max_value = 20.0
 value = 6.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Controls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls" unique_id=269069453]
 offset_left = 14.0
 offset_top = 604.0
 offset_right = 420.0
 offset_bottom = 644.0
 theme_override_constants/separation = 10
 
-[node name="Exponential" type="CheckButton" parent="Controls/HBoxContainer"]
+[node name="Exponential" type="CheckButton" parent="Controls/HBoxContainer" unique_id=1720204134]
 layout_mode = 2
 tooltip_text = "Uses a power 2 exponential function. This allows for easier viewing of the darker range of values."
 text = "Exponential Scale"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://jbsqinrst71x"]
+[gd_scene format=3 uid="uid://jbsqinrst71x"]
 
 [ext_resource type="PackedScene" uid="uid://tpgxjpc126ld" path="res://tests/static_scene.tscn" id="1"]
 [ext_resource type="Script" uid="uid://mj1krpr0l1cu" path="res://tests/performance/test_perf_contacts.gd" id="2"]
@@ -14,64 +14,64 @@ radius = 15.0
 [sub_resource type="CapsuleShape2D" id="3"]
 height = 35.0
 
-[node name="Test" type="Node2D"]
+[node name="Test" type="Node2D" unique_id=1188874277]
 script = ExtResource("2")
 spawns = Array[NodePath]([NodePath("SpawnTarget1")])
 spawn_count = 500
 spawn_randomize = Vector2(10, 10)
 _enable_debug_collision = false
 
-[node name="Options" parent="." instance=ExtResource("4")]
+[node name="Options" parent="." unique_id=253825003 instance=ExtResource("4")]
 
-[node name="SpawnTarget1" type="Node2D" parent="."]
+[node name="SpawnTarget1" type="Node2D" parent="." unique_id=1311673421]
 position = Vector2(512, 400)
 
-[node name="StaticScene" parent="." instance=ExtResource("1")]
+[node name="StaticScene" parent="." unique_id=1848054815 instance=ExtResource("1")]
 position = Vector2(0, 125.017)
 
-[node name="DynamicShapes" type="Node2D" parent="."]
+[node name="DynamicShapes" type="Node2D" parent="." unique_id=704563245]
 
-[node name="RigidBodyRectangle" type="RigidBody2D" parent="DynamicShapes"]
+[node name="RigidBodyRectangle" type="RigidBody2D" parent="DynamicShapes" unique_id=2039286066]
 position = Vector2(0, 1024)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DynamicShapes/RigidBodyRectangle"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DynamicShapes/RigidBodyRectangle" unique_id=1188151468]
 shape = SubResource("1")
 debug_color = Color(1, 1, 0, 0.0980392)
 
-[node name="RigidBodySphere" type="RigidBody2D" parent="DynamicShapes"]
+[node name="RigidBodySphere" type="RigidBody2D" parent="DynamicShapes" unique_id=2091673009]
 position = Vector2(100, 1024)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DynamicShapes/RigidBodySphere"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DynamicShapes/RigidBodySphere" unique_id=1991074960]
 shape = SubResource("2")
 debug_color = Color(1, 1, 0, 0.0980392)
 
-[node name="RigidBodyCapsule" type="RigidBody2D" parent="DynamicShapes"]
+[node name="RigidBodyCapsule" type="RigidBody2D" parent="DynamicShapes" unique_id=1656405818]
 position = Vector2(200, 1024)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DynamicShapes/RigidBodyCapsule"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DynamicShapes/RigidBodyCapsule" unique_id=1502107283]
 shape = SubResource("3")
 debug_color = Color(1, 1, 0, 0.0980392)
 
-[node name="RigidBodyConvexPolygon" type="RigidBody2D" parent="DynamicShapes"]
+[node name="RigidBodyConvexPolygon" type="RigidBody2D" parent="DynamicShapes" unique_id=766589103]
 position = Vector2(300, 1024)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DynamicShapes/RigidBodyConvexPolygon"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DynamicShapes/RigidBodyConvexPolygon" unique_id=1612603478]
 scale = Vector2(0.25, 0.25)
 polygon = PackedVector2Array(10.7, -54.5, 28.3596, -49.4067, 47.6282, -34.3806, 57.9717, -20.9447, 50.9869, 35.2694, 38.8, 47.5, 15.9852, 54.3613, -14.9507, 54.1845, -36.5, 48.1, -50.4828, 36.33, -58.0115, -20.515, -46.9473, -34.7342, -26.0876, -50.1138, -11.4152, -54.5332)
 
-[node name="GodotIcon" type="Sprite2D" parent="DynamicShapes/RigidBodyConvexPolygon"]
+[node name="GodotIcon" type="Sprite2D" parent="DynamicShapes/RigidBodyConvexPolygon" unique_id=892559346]
 self_modulate = Color(1, 1, 1, 0.392157)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3")
 
-[node name="RigidBodyConcavePolygon" type="RigidBody2D" parent="DynamicShapes"]
+[node name="RigidBodyConcavePolygon" type="RigidBody2D" parent="DynamicShapes" unique_id=1269892822]
 position = Vector2(400, 1024)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DynamicShapes/RigidBodyConcavePolygon"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DynamicShapes/RigidBodyConcavePolygon" unique_id=323430949]
 scale = Vector2(0.25, 0.25)
 polygon = PackedVector2Array(-5.93512, -43.2195, 6.44476, -42.9695, 11.127, -54.3941, 26.9528, -49.4309, 26.2037, -36.508, 37.5346, -28.1737, 47.6282, -34.3806, 58.0427, -20.9631, 51.113, -10.2876, 50.9869, 35.2694, 38.8, 47.5, 15.9852, 54.3613, -14.9507, 54.1845, -36.5, 48.1, -50.4828, 36.33, -51.3668, -9.98545, -57.8889, -20.5885, -46.9473, -34.7342, -37.4014, -28.547, -26.0876, -37.0323, -26.9862, -49.15, -11.4152, -54.5332)
 
-[node name="GodotIcon" type="Sprite2D" parent="DynamicShapes/RigidBodyConcavePolygon"]
+[node name="GodotIcon" type="Sprite2D" parent="DynamicShapes/RigidBodyConcavePolygon" unique_id=528737965]
 self_modulate = Color(1, 1, 1, 0.392157)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3")

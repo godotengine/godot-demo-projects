@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c0q5hsswj8dqf"]
+[gd_scene format=3 uid="uid://c0q5hsswj8dqf"]
 
 [ext_resource type="Script" uid="uid://c83vs7rrucfhr" path="res://player/player.gd" id="1"]
 [ext_resource type="Script" uid="uid://dlo1v7qh2cevv" path="res://player/follow_camera.gd" id="2"]
@@ -92,32 +92,32 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0.01)
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" unique_id=87667949]
 script = ExtResource("1")
 
-[node name="CollisionCapsule" type="CollisionShape3D" parent="."]
+[node name="CollisionCapsule" type="CollisionShape3D" parent="." unique_id=1675305350]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
 shape = SubResource("1")
 
-[node name="Target" type="Node3D" parent="."]
+[node name="Target" type="Node3D" parent="." unique_id=2054456626]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.95244, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Target"]
+[node name="Camera3D" type="Camera3D" parent="Target" unique_id=1542850600]
 transform = Transform3D(1, 0, 0, 0, 0.871263, 0.490817, 0, -0.490817, 0.871263, 0, 2.59805, 1.25672)
 current = true
 fov = 74.0
 near = 0.1
 script = ExtResource("2")
 
-[node name="Player" parent="." instance=ExtResource("3_uccbe")]
+[node name="Player" parent="." unique_id=840561040 instance=ExtResource("3_uccbe")]
 
-[node name="Robot" parent="Player/Skeleton/Skeleton3D" index="0"]
+[node name="Robot" parent="Player/Skeleton/Skeleton3D" parent_id_path=PackedInt32Array(840561040, 1598164129) index="0" unique_id=539677236]
 layers = 2
 
-[node name="Bullet" type="Marker3D" parent="Player/Skeleton" index="1"]
+[node name="Bullet" type="Marker3D" parent="Player/Skeleton" parent_id_path=PackedInt32Array(840561040, 1191142475) index="1" unique_id=1801053936]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.94071, 3.6408, 3.3802)
 
-[node name="CoinCount" type="Label3D" parent="Player/Skeleton" index="2"]
+[node name="CoinCount" type="Label3D" parent="Player/Skeleton" parent_id_path=PackedInt32Array(840561040, 1191142475) index="2" unique_id=535417165]
 unique_name_in_owner = true
 transform = Transform3D(-3.33333, 0, -2.91409e-07, 0, 3.33333, 0, 2.91409e-07, 0, -3.33333, 0, 7.51037, 0.531589)
 double_sided = false
@@ -126,7 +126,7 @@ modulate = Color(1, 0.8, 0.4, 1)
 text = "123"
 font_size = 48
 
-[node name="Parallax" type="Label3D" parent="Player/Skeleton/CoinCount"]
+[node name="Parallax" type="Label3D" parent="Player/Skeleton/CoinCount" unique_id=1056288237]
 transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0, 0, -0.01)
 double_sided = false
 no_depth_test = true
@@ -134,7 +134,7 @@ modulate = Color(0.8, 0.64, 0.32, 1)
 text = "123"
 font_size = 48
 
-[node name="Parallax2" type="Label3D" parent="Player/Skeleton/CoinCount"]
+[node name="Parallax2" type="Label3D" parent="Player/Skeleton/CoinCount" unique_id=765213958]
 transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0, 0, -0.02)
 double_sided = false
 no_depth_test = true
@@ -142,7 +142,7 @@ modulate = Color(0.6, 0.48, 0.24, 1)
 text = "123"
 font_size = 48
 
-[node name="Parallax3" type="Label3D" parent="Player/Skeleton/CoinCount"]
+[node name="Parallax3" type="Label3D" parent="Player/Skeleton/CoinCount" unique_id=1608885341]
 transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0, 0, -0.03)
 double_sided = false
 no_depth_test = true
@@ -150,7 +150,7 @@ modulate = Color(0.4, 0.318667, 0.156, 1)
 text = "123"
 font_size = 48
 
-[node name="Parallax4" type="Label3D" parent="Player/Skeleton/CoinCount"]
+[node name="Parallax4" type="Label3D" parent="Player/Skeleton/CoinCount" unique_id=60028113]
 transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0, 0, -0.04)
 double_sided = false
 no_depth_test = true
@@ -158,7 +158,7 @@ modulate = Color(0.2, 0.159333, 0.078, 1)
 text = "123"
 font_size = 48
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1379071397]
 root_node = NodePath("../Player")
 tree_root = SubResource("23")
 anim_player = NodePath("../Player/AnimationPlayer")
@@ -169,14 +169,14 @@ parameters/scale/scale = 1.5
 parameters/speed/blend_amount = 0.0
 parameters/state/blend_amount = 0.0
 
-[node name="SoundShoot" type="AudioStreamPlayer" parent="."]
+[node name="SoundShoot" type="AudioStreamPlayer" parent="." unique_id=448631088]
 stream = SubResource("AudioStreamRandomizer_basvh")
 
-[node name="SoundJump" type="AudioStreamPlayer" parent="."]
+[node name="SoundJump" type="AudioStreamPlayer" parent="." unique_id=1262360255]
 stream = SubResource("AudioStreamRandomizer_axa7i")
 volume_db = -6.0
 
-[node name="BlobShadow" type="Decal" parent="." groups=["bad_performer"]]
+[node name="BlobShadow" type="Decal" parent="." unique_id=2115472635 groups=["bad_performer"]]
 size = Vector3(1.6, 12, 1.6)
 texture_albedo = SubResource("GradientTexture2D_kvc1x")
 albedo_mix = 0.8

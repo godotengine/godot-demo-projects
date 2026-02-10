@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://duuq3oa8yi6yi"]
+[gd_scene format=3 uid="uid://duuq3oa8yi6yi"]
 
 [ext_resource type="Script" uid="uid://dubik1f5fneps" path="res://utils/label_fps.gd" id="1"]
 [ext_resource type="Script" uid="uid://ca4gk4ef7jc6f" path="res://utils/label_version.gd" id="2"]
@@ -17,7 +17,7 @@
 [sub_resource type="StyleBoxFlat" id="1"]
 bg_color = Color(0, 0, 0, 0.176471)
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" unique_id=2128203463]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +27,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("12")
 
-[node name="TestsMenu" type="MenuButton" parent="."]
+[node name="TestsMenu" type="MenuButton" parent="." unique_id=1051533574]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
@@ -37,7 +37,7 @@ text = "Tests"
 flat = false
 script = ExtResource("4")
 
-[node name="LabelControls" type="Label" parent="."]
+[node name="LabelControls" type="Label" parent="." unique_id=1639582477]
 layout_mode = 0
 offset_left = 157.0
 offset_top = 13.0
@@ -46,7 +46,7 @@ offset_bottom = 27.0
 theme_override_constants/outline_size = 4
 text = "P: Toggle Pause  |  R: Restart  |  C: Toggle Collision  |  F: Toggle Fullscreen  |  ESC: Quit"
 
-[node name="LabelFPS" type="Label" parent="."]
+[node name="LabelFPS" type="Label" parent="." unique_id=1221424336]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -61,7 +61,7 @@ theme_override_constants/outline_size = 4
 text = "FPS: 0"
 script = ExtResource("1")
 
-[node name="LabelEngine" type="Label" parent="."]
+[node name="LabelEngine" type="Label" parent="." unique_id=285515091]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -77,7 +77,7 @@ theme_override_constants/outline_size = 4
 text = "Physics engine:"
 script = ExtResource("3")
 
-[node name="LabelVersion" type="Label" parent="."]
+[node name="LabelVersion" type="Label" parent="." unique_id=1425389712]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -93,7 +93,7 @@ theme_override_constants/outline_size = 4
 text = "Godot version:"
 script = ExtResource("2")
 
-[node name="LabelTest" type="Label" parent="."]
+[node name="LabelTest" type="Label" parent="." unique_id=789147083]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -108,7 +108,7 @@ theme_override_constants/outline_size = 4
 text = "Test:"
 script = ExtResource("5")
 
-[node name="LabelPause" type="Label" parent="."]
+[node name="LabelPause" type="Label" parent="." unique_id=238168997]
 modulate = Color(1, 1, 0, 1)
 layout_mode = 1
 anchors_preset = 5
@@ -124,7 +124,7 @@ theme_override_font_sizes/font_size = 24
 text = "Paused"
 script = ExtResource("6")
 
-[node name="Options" type="VBoxContainer" parent="."]
+[node name="Options" type="VBoxContainer" parent="." unique_id=1461871449]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -136,7 +136,7 @@ offset_bottom = 168.0
 grow_horizontal = 0
 theme_override_constants/separation = 6
 
-[node name="TicksPerSecond" type="HBoxContainer" parent="Options"]
+[node name="TicksPerSecond" type="HBoxContainer" parent="Options" unique_id=538503540]
 layout_mode = 2
 tooltip_text = "Higher values make physics more precise at the cost of higher CPU utilization.
 Low values may result in objects phasing through each other (tunneling).
@@ -144,14 +144,14 @@ Physics ticks per second are automatically multiplied by Time Scale in this proj
 theme_override_constants/separation = 10
 script = ExtResource("8_dg77c")
 
-[node name="Label" type="Label" parent="Options/TicksPerSecond"]
+[node name="Label" type="Label" parent="Options/TicksPerSecond" unique_id=1576971871]
 custom_minimum_size = Vector2(164, 0)
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Ticks per Second"
 
-[node name="HSlider" type="HSlider" parent="Options/TicksPerSecond"]
+[node name="HSlider" type="HSlider" parent="Options/TicksPerSecond" unique_id=247607595]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -160,13 +160,13 @@ max_value = 240.0
 step = 10.0
 value = 60.0
 
-[node name="Value" type="Label" parent="Options/TicksPerSecond"]
+[node name="Value" type="Label" parent="Options/TicksPerSecond" unique_id=549785606]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "60"
 
-[node name="TimeScale" type="HBoxContainer" parent="Options"]
+[node name="TimeScale" type="HBoxContainer" parent="Options" unique_id=5056712]
 layout_mode = 2
 tooltip_text = "Game speed multiplier. Physics ticks per second are
 automatically multiplied by Time Scale in this project
@@ -174,14 +174,14 @@ to ensure accurate simulation regardless of time scale."
 theme_override_constants/separation = 10
 script = ExtResource("9_ycdy4")
 
-[node name="Label" type="Label" parent="Options/TimeScale"]
+[node name="Label" type="Label" parent="Options/TimeScale" unique_id=151694134]
 custom_minimum_size = Vector2(164, 0)
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Time Scale"
 
-[node name="HSlider" type="HSlider" parent="Options/TimeScale"]
+[node name="HSlider" type="HSlider" parent="Options/TimeScale" unique_id=8530608]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -189,13 +189,13 @@ max_value = 5.0
 step = 0.5
 value = 0.5
 
-[node name="Value" type="Label" parent="Options/TimeScale"]
+[node name="Value" type="Label" parent="Options/TimeScale" unique_id=1344187457]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "1.0×"
 
-[node name="MaxStepsPerFrame" type="HBoxContainer" parent="Options"]
+[node name="MaxStepsPerFrame" type="HBoxContainer" parent="Options" unique_id=1684706066]
 layout_mode = 2
 tooltip_text = "Physics will slow down if more physics steps
 than this value need to be simulated in a
@@ -203,14 +203,14 @@ single rendered frame."
 theme_override_constants/separation = 10
 script = ExtResource("10_w48qg")
 
-[node name="Label" type="Label" parent="Options/MaxStepsPerFrame"]
+[node name="Label" type="Label" parent="Options/MaxStepsPerFrame" unique_id=856708187]
 custom_minimum_size = Vector2(164, 0)
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Max Steps per Frame"
 
-[node name="HSlider" type="HSlider" parent="Options/MaxStepsPerFrame"]
+[node name="HSlider" type="HSlider" parent="Options/MaxStepsPerFrame" unique_id=1839821832]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -218,13 +218,13 @@ min_value = 1.0
 max_value = 20.0
 value = 8.0
 
-[node name="Value" type="Label" parent="Options/MaxStepsPerFrame"]
+[node name="Value" type="Label" parent="Options/MaxStepsPerFrame" unique_id=233340329]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "8"
 
-[node name="PhysicsInterpolation" type="CheckButton" parent="Options"]
+[node name="PhysicsInterpolation" type="CheckButton" parent="Options" unique_id=594845751]
 custom_minimum_size = Vector2(217, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -235,7 +235,7 @@ button_pressed = true
 text = "Physics Interpolation"
 script = ExtResource("11_ycdy4")
 
-[node name="PanelLog" type="Panel" parent="."]
+[node name="PanelLog" type="Panel" parent="." unique_id=859449411]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -249,7 +249,7 @@ grow_vertical = 0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("1")
 
-[node name="ButtonClear" type="Button" parent="PanelLog"]
+[node name="ButtonClear" type="Button" parent="PanelLog" unique_id=1294766683]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -265,7 +265,7 @@ grow_vertical = 0
 focus_mode = 0
 text = "Clear"
 
-[node name="CheckBoxScroll" type="CheckButton" parent="PanelLog"]
+[node name="CheckBoxScroll" type="CheckButton" parent="PanelLog" unique_id=377719472]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -282,7 +282,7 @@ focus_mode = 0
 button_pressed = true
 text = "Automatic Scrolling"
 
-[node name="ScrollLog" type="ScrollContainer" parent="PanelLog"]
+[node name="ScrollLog" type="ScrollContainer" parent="PanelLog" unique_id=2110387942]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 5.0
@@ -291,14 +291,14 @@ offset_bottom = 210.0
 script = ExtResource("11")
 auto_scroll = true
 
-[node name="VBoxLog" type="VBoxContainer" parent="PanelLog/ScrollLog"]
+[node name="VBoxLog" type="VBoxContainer" parent="PanelLog/ScrollLog" unique_id=1138962883]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 2
 script = ExtResource("10")
 
-[node name="LabelLog" type="Label" parent="PanelLog/ScrollLog/VBoxLog"]
+[node name="LabelLog" type="Label" parent="PanelLog/ScrollLog/VBoxLog" unique_id=1624492529]
 layout_mode = 2
 text = "Log start"
 max_lines_visible = 5

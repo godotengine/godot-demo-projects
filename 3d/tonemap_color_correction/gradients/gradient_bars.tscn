@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccd6edxucbhdd"]
+[gd_scene format=3 uid="uid://ccd6edxucbhdd"]
 
 [ext_resource type="Script" uid="uid://ch8a54cxqnwgw" path="res://gradients/gradient_bars.gd" id="1_idd8e"]
 [ext_resource type="Shader" uid="uid://dpk86f83pyurd" path="res://gradients/gradient_steps.gdshader" id="2_njjq2"]
@@ -19,25 +19,25 @@ shader_parameter/my_color = Color(1, 1, 1, 1)
 shader_parameter/steps = 1
 shader_parameter/exponential_view = true
 
-[node name="Gradients" type="Node3D" node_paths=PackedStringArray("sdr_bar", "hdr_bar", "label")]
+[node name="Gradients" type="Node3D" unique_id=478987073 node_paths=PackedStringArray("sdr_bar", "hdr_bar", "label")]
 script = ExtResource("1_idd8e")
 sdr_bar = NodePath("0-to-1")
 hdr_bar = NodePath("0-to-HDR")
 label = NodePath("Label3D")
 
-[node name="0-to-HDR" type="MeshInstance3D" parent="."]
+[node name="0-to-HDR" type="MeshInstance3D" parent="." unique_id=1665493313]
 transform = Transform3D(0.83, 0, 0, 0, 0.043, 0, 0, 0, 1, 0.458494, 0, 0)
 material_override = SubResource("ShaderMaterial_oxi6c")
 mesh = SubResource("QuadMesh_p6ckv")
 skeleton = NodePath("../..")
 
-[node name="0-to-1" type="MeshInstance3D" parent="."]
+[node name="0-to-1" type="MeshInstance3D" parent="." unique_id=1783242458]
 transform = Transform3D(0.83, 0, 0, 0, 0.043, 0, 0, 0, 1, -0.383273, 0, 0)
 material_override = SubResource("ShaderMaterial_tnbw4")
 mesh = SubResource("QuadMesh_p6ckv")
 skeleton = NodePath("../..")
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="Label3D" type="Label3D" parent="." unique_id=569382908]
 transform = Transform3D(0.124, 0, 0, 0, 0.124, 0, 0, 0, 0.124, -0.804691, 0.0298065, 0)
 text = "#000000"
 outline_size = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://e3ko2k5vfsph"]
+[gd_scene format=3 uid="uid://e3ko2k5vfsph"]
 
 [ext_resource type="Script" uid="uid://k86266poffsc" path="res://custom_drawing.gd" id="1_rtndo"]
 [ext_resource type="Script" uid="uid://bs2i4k2suatwx" path="res://lines.gd" id="2_exx0l"]
@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://m1872t0qa0i4" path="res://animation.gd" id="8_yrx86"]
 [ext_resource type="Script" uid="uid://dxbst4jd731sx" path="res://animation_slice.gd" id="9_obj11"]
 
-[node name="CustomDrawing" type="Control"]
+[node name="CustomDrawing" type="Control" unique_id=963888680]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,7 +19,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rtndo")
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="." unique_id=1589194508]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -29,12 +29,12 @@ grow_horizontal = 2
 grow_vertical = 2
 current_tab = 0
 
-[node name="Lines" type="Panel" parent="TabContainer"]
+[node name="Lines" type="Panel" parent="TabContainer" unique_id=296015393]
 layout_mode = 2
 script = ExtResource("2_exx0l")
 metadata/_tab_index = 0
 
-[node name="DrawLine" type="Label" parent="TabContainer/Lines"]
+[node name="DrawLine" type="Label" parent="TabContainer/Lines" unique_id=1856889571]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 48.0
@@ -44,7 +44,7 @@ theme_override_colors/font_color = Color(0.501961, 1, 0.501961, 1)
 text = "draw_line()
 draw_dashed_line()"
 
-[node name="DrawCircle" type="Label" parent="TabContainer/Lines"]
+[node name="DrawCircle" type="Label" parent="TabContainer/Lines" unique_id=548666699]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 154.0
@@ -53,7 +53,7 @@ offset_bottom = 177.0
 theme_override_colors/font_color = Color(0.501961, 1, 0.501961, 1)
 text = "draw_circle()"
 
-[node name="DrawArc" type="Label" parent="TabContainer/Lines"]
+[node name="DrawArc" type="Label" parent="TabContainer/Lines" unique_id=1494225085]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 264.0
@@ -62,13 +62,13 @@ offset_bottom = 287.0
 theme_override_colors/font_color = Color(0.501961, 1, 0.501961, 1)
 text = "draw_arc()"
 
-[node name="Rectangles" type="Panel" parent="TabContainer"]
+[node name="Rectangles" type="Panel" parent="TabContainer" unique_id=279393032]
 visible = false
 layout_mode = 2
 script = ExtResource("3_yrx86")
 metadata/_tab_index = 1
 
-[node name="DrawRect" type="Label" parent="TabContainer/Rectangles"]
+[node name="DrawRect" type="Label" parent="TabContainer/Rectangles" unique_id=1307736687]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 48.0
@@ -77,7 +77,7 @@ offset_bottom = 71.0
 theme_override_colors/font_color = Color(0.501961, 1, 0.501961, 1)
 text = "draw_rect()"
 
-[node name="DrawStyleBox" type="Label" parent="TabContainer/Rectangles"]
+[node name="DrawStyleBox" type="Label" parent="TabContainer/Rectangles" unique_id=681418184]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 296.0
@@ -85,13 +85,13 @@ offset_right = 153.0
 offset_bottom = 319.0
 text = "draw_style_box()"
 
-[node name="Polygons" type="Panel" parent="TabContainer"]
+[node name="Polygons" type="Panel" parent="TabContainer" unique_id=716884485]
 visible = false
 layout_mode = 2
 script = ExtResource("4_obj11")
 metadata/_tab_index = 2
 
-[node name="DrawPrimitive" type="Label" parent="TabContainer/Polygons"]
+[node name="DrawPrimitive" type="Label" parent="TabContainer/Polygons" unique_id=1835091148]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 48.0
@@ -99,7 +99,7 @@ offset_right = 207.0
 offset_bottom = 97.0
 text = "draw_primitive()"
 
-[node name="DrawPolygon" type="Label" parent="TabContainer/Polygons"]
+[node name="DrawPolygon" type="Label" parent="TabContainer/Polygons" unique_id=1462152479]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 168.0
@@ -108,7 +108,7 @@ offset_bottom = 217.0
 text = "draw_polygon()
 draw_colored_polygon()"
 
-[node name="DrawPolyline" type="Label" parent="TabContainer/Polygons"]
+[node name="DrawPolyline" type="Label" parent="TabContainer/Polygons" unique_id=318986606]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 264.0
@@ -118,7 +118,7 @@ theme_override_colors/font_color = Color(0.501961, 1, 0.501961, 1)
 text = "draw_polyline()
 draw_polyline_colors()"
 
-[node name="DrawMultiline" type="Label" parent="TabContainer/Polygons"]
+[node name="DrawMultiline" type="Label" parent="TabContainer/Polygons" unique_id=42519267]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 392.0
@@ -128,13 +128,13 @@ theme_override_colors/font_color = Color(0.501961, 1, 0.501961, 1)
 text = "draw_multiline()
 draw_multiline_colors()"
 
-[node name="Meshes" type="Panel" parent="TabContainer"]
+[node name="Meshes" type="Panel" parent="TabContainer" unique_id=1131697077]
 visible = false
 layout_mode = 2
 script = ExtResource("5_exx0l")
 metadata/_tab_index = 3
 
-[node name="DrawMesh" type="Label" parent="TabContainer/Meshes"]
+[node name="DrawMesh" type="Label" parent="TabContainer/Meshes" unique_id=1438615787]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 48.0
@@ -142,7 +142,7 @@ offset_right = 207.0
 offset_bottom = 97.0
 text = "draw_mesh()"
 
-[node name="DrawMultiMesh" type="Label" parent="TabContainer/Meshes"]
+[node name="DrawMultiMesh" type="Label" parent="TabContainer/Meshes" unique_id=1730155188]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 208.0
@@ -150,14 +150,14 @@ offset_right = 207.0
 offset_bottom = 257.0
 text = "draw_multimesh()"
 
-[node name="Textures" type="Panel" parent="TabContainer"]
+[node name="Textures" type="Panel" parent="TabContainer" unique_id=759040210]
 visible = false
 texture_repeat = 2
 layout_mode = 2
 script = ExtResource("5_84cac")
 metadata/_tab_index = 4
 
-[node name="DrawTexture" type="Label" parent="TabContainer/Textures"]
+[node name="DrawTexture" type="Label" parent="TabContainer/Textures" unique_id=1430127551]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 48.0
@@ -166,7 +166,7 @@ offset_bottom = 97.0
 text = "draw_texture()
 draw_texture_rect()"
 
-[node name="DrawTextureRectRegion" type="Label" parent="TabContainer/Textures"]
+[node name="DrawTextureRectRegion" type="Label" parent="TabContainer/Textures" unique_id=837438457]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 392.0
@@ -174,13 +174,13 @@ offset_right = 231.0
 offset_bottom = 415.0
 text = "draw_texture_rect_region()"
 
-[node name="Text" type="Panel" parent="TabContainer"]
+[node name="Text" type="Panel" parent="TabContainer" unique_id=201509104]
 visible = false
 layout_mode = 2
 script = ExtResource("6_4w081")
 metadata/_tab_index = 5
 
-[node name="DrawChar" type="Label" parent="TabContainer/Text"]
+[node name="DrawChar" type="Label" parent="TabContainer/Text" unique_id=1860320291]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 48.0
@@ -189,13 +189,13 @@ offset_bottom = 97.0
 text = "draw_char()
 draw_string()"
 
-[node name="Animation" type="Panel" parent="TabContainer"]
+[node name="Animation" type="Panel" parent="TabContainer" unique_id=1599610818]
 visible = false
 layout_mode = 2
 script = ExtResource("8_yrx86")
 metadata/_tab_index = 6
 
-[node name="DrawArcTime" type="Label" parent="TabContainer/Animation"]
+[node name="DrawArcTime" type="Label" parent="TabContainer/Animation" unique_id=1219883775]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 48.0
@@ -205,7 +205,7 @@ theme_override_colors/font_color = Color(0.501961, 1, 0.501961, 1)
 text = "draw_arc()
 + time variable"
 
-[node name="DrawAnimationSlice" type="Label" parent="TabContainer/Animation"]
+[node name="DrawAnimationSlice" type="Label" parent="TabContainer/Animation" unique_id=203131812]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 216.0
@@ -213,7 +213,7 @@ offset_right = 201.0
 offset_bottom = 265.0
 text = "draw_animation_slice()"
 
-[node name="AnimationSlice" type="Control" parent="TabContainer/Animation"]
+[node name="AnimationSlice" type="Control" parent="TabContainer/Animation" unique_id=2018092307]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -223,7 +223,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("9_obj11")
 
-[node name="Options" type="HBoxContainer" parent="."]
+[node name="Options" type="HBoxContainer" parent="." unique_id=781515086]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -235,11 +235,11 @@ offset_bottom = -24.0
 grow_vertical = 0
 theme_override_constants/separation = 20
 
-[node name="MSAA2DLabel" type="Label" parent="Options"]
+[node name="MSAA2DLabel" type="Label" parent="Options" unique_id=1619569982]
 layout_mode = 2
 text = "MSAA 2D"
 
-[node name="MSAA2DOptionButton" type="OptionButton" parent="Options"]
+[node name="MSAA2DOptionButton" type="OptionButton" parent="Options" unique_id=41518632]
 layout_mode = 2
 selected = 0
 item_count = 4
@@ -252,10 +252,10 @@ popup/item_2/id = 2
 popup/item_3/text = "8×"
 popup/item_3/id = 3
 
-[node name="VSeparator" type="VSeparator" parent="Options"]
+[node name="VSeparator" type="VSeparator" parent="Options" unique_id=2012714849]
 layout_mode = 2
 
-[node name="DrawAntialiasing" type="CheckButton" parent="Options"]
+[node name="DrawAntialiasing" type="CheckButton" parent="Options" unique_id=85416285]
 layout_mode = 2
 tooltip_text = "Performs antialiasing by adding a feathered outline
 to lines that are drawn in 2D. This is generally faster to render

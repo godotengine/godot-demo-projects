@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c17b4r0eub0qn"]
+[gd_scene format=3 uid="uid://c17b4r0eub0qn"]
 
 [ext_resource type="PackedScene" uid="uid://3gjkc6qju2n3" path="res://assets/gltf/LeftHandHumanoid.gltf" id="2_3hxem"]
 [ext_resource type="Script" uid="uid://dmwdpfwh7uxw" path="res://start_vr.gd" id="2_5rtkn"]
@@ -39,22 +39,22 @@ subdivide_depth = 10
 radius = 0.01
 height = 0.02
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" unique_id=1288509691]
 
-[node name="StartVR" type="Node3D" parent="."]
+[node name="StartVR" type="Node3D" parent="." unique_id=1237672918]
 script = ExtResource("2_5rtkn")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1067263153]
 environment = SubResource("Environment_0xu52")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=212839333]
 transform = Transform3D(0.397904, -0.794516, 0.458712, 0, 0.499998, 0.866026, -0.917427, -0.344595, 0.198951, 0, 5, 0)
 directional_shadow_max_distance = 10.0
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=2075817668]
 mesh = SubResource("PlaneMesh_6hhse")
 
-[node name="RecenterInfo" type="Label3D" parent="Floor"]
+[node name="RecenterInfo" type="Label3D" parent="Floor" unique_id=1101802641]
 transform = Transform3D(0.59873, 0, 0.800951, 0, 1, 0, -0.800951, 0, 0.59873, -1.76283, 1.50033, -0.380399)
 pixel_size = 0.003
 text = "If you are not facing the table,
@@ -68,70 +68,69 @@ In SteamVR, open the menu and
 select recenter and follow
 instructions"
 
-[node name="Table" parent="." instance=ExtResource("6_rfmma")]
+[node name="Table" parent="." unique_id=1938310904 instance=ExtResource("6_rfmma")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
 
-[node name="Box01" parent="Table" instance=ExtResource("7_6sqt7")]
+[node name="Box01" parent="Table" unique_id=607964254 instance=ExtResource("7_6sqt7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.941084, 0)
 
-[node name="Box02" parent="Table" instance=ExtResource("7_6sqt7")]
+[node name="Box02" parent="Table" unique_id=1677557311 instance=ExtResource("7_6sqt7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13752, 0.941084, 0)
 
-[node name="Box03" parent="Table" instance=ExtResource("7_6sqt7")]
+[node name="Box03" parent="Table" unique_id=77250749 instance=ExtResource("7_6sqt7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0746718, 1.06282, 0)
 
-[node name="LeftHandInfo" parent="Table" node_paths=PackedStringArray("fallback_mesh") instance=ExtResource("5_wlhtu")]
+[node name="LeftHandInfo" parent="Table" unique_id=1760315995 node_paths=PackedStringArray("fallback_mesh") instance=ExtResource("5_wlhtu")]
 transform = Transform3D(0.939693, -0.085635, 0.331126, 0, 0.968147, 0.25038, -0.34202, -0.23528, 0.909761, -0.713026, 0.8718, -0.309953)
 fallback_mesh = NodePath("../../XROrigin3D/LeftHandController/FullbackMesh")
 
-[node name="RightHandInfo" parent="Table" node_paths=PackedStringArray("fallback_mesh") instance=ExtResource("5_wlhtu")]
+[node name="RightHandInfo" parent="Table" unique_id=166019423 node_paths=PackedStringArray("fallback_mesh") instance=ExtResource("5_wlhtu")]
 transform = Transform3D(0.939693, 0.085635, -0.331126, 0, 0.968147, 0.25038, 0.34202, -0.23528, 0.909761, 0.278022, 0.8718, -0.381943)
 hand = 1
 fallback_mesh = NodePath("../../XROrigin3D/RightHandController/FullbackMesh")
 
-[node name="XROrigin3D" type="XROrigin3D" parent="."]
+[node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=1143024626]
 
-[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=1264073145]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
-[node name="LeftHandController" type="XRController3D" parent="XROrigin3D"]
+[node name="LeftHandController" type="XRController3D" parent="XROrigin3D" unique_id=1877387115]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"left_hand"
 pose = &"palm_pose"
 show_when_tracked = true
 script = ExtResource("6_e5cto")
 
-[node name="FullbackMesh" type="MeshInstance3D" parent="XROrigin3D/LeftHandController"]
+[node name="FullbackMesh" type="MeshInstance3D" parent="XROrigin3D/LeftHandController" unique_id=1488260741]
 mesh = SubResource("SphereMesh_d5x0p")
 
-[node name="PickupHandler" parent="XROrigin3D/LeftHandController" instance=ExtResource("3_sg1io")]
+[node name="PickupHandler" parent="XROrigin3D/LeftHandController" unique_id=1692466426 instance=ExtResource("3_sg1io")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0, 0)
 
-[node name="RightHandController" type="XRController3D" parent="XROrigin3D"]
+[node name="RightHandController" type="XRController3D" parent="XROrigin3D" unique_id=573945542]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
 tracker = &"right_hand"
 pose = &"palm_pose"
 show_when_tracked = true
 script = ExtResource("6_e5cto")
 
-[node name="FullbackMesh" type="MeshInstance3D" parent="XROrigin3D/RightHandController"]
+[node name="FullbackMesh" type="MeshInstance3D" parent="XROrigin3D/RightHandController" unique_id=237611828]
 mesh = SubResource("SphereMesh_d5x0p")
 skeleton = NodePath("../../LeftHandController")
 
-[node name="PickupHandler" parent="XROrigin3D/RightHandController" instance=ExtResource("3_sg1io")]
+[node name="PickupHandler" parent="XROrigin3D/RightHandController" unique_id=287391616 instance=ExtResource("3_sg1io")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0, 0)
 
-[node name="LeftHandMesh" type="XRNode3D" parent="XROrigin3D"]
+[node name="LeftHandMesh" type="XRNode3D" parent="XROrigin3D" unique_id=128183319]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"/user/hand_tracker/left"
 script = ExtResource("7_yj2fr")
 
-[node name="LeftHandHumanoid2" parent="XROrigin3D/LeftHandMesh" instance=ExtResource("2_3hxem")]
+[node name="LeftHandHumanoid2" parent="XROrigin3D/LeftHandMesh" unique_id=1103021127 instance=ExtResource("2_3hxem")]
 
-[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/LeftHandMesh/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D" index="1"]
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/LeftHandMesh/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D" parent_id_path=PackedInt32Array(1103021127, 224312886) index="1" unique_id=1973581196]
 
-[node name="XRHandFallbackModifier3D" type="SkeletonModifier3D" parent="XROrigin3D/LeftHandMesh/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D" index="2"]
-_import_path = NodePath("")
+[node name="XRHandFallbackModifier3D" type="SkeletonModifier3D" parent="XROrigin3D/LeftHandMesh/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D" parent_id_path=PackedInt32Array(1103021127, 224312886) index="2" unique_id=554109447]
 unique_name_in_owner = false
 process_mode = 0
 process_priority = 0
@@ -151,19 +150,18 @@ influence = 1.0
 script = ExtResource("8_gdsnk")
 grip_action = "pickup"
 
-[node name="RightHandMesh" type="XRNode3D" parent="XROrigin3D"]
+[node name="RightHandMesh" type="XRNode3D" parent="XROrigin3D" unique_id=84293060]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
 tracker = &"/user/hand_tracker/right"
 script = ExtResource("7_yj2fr")
 hand = 1
 
-[node name="RightHandHumanoid2" parent="XROrigin3D/RightHandMesh" instance=ExtResource("3_oifi1")]
+[node name="RightHandHumanoid2" parent="XROrigin3D/RightHandMesh" unique_id=90653821 instance=ExtResource("3_oifi1")]
 
-[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/RightHandMesh/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="1"]
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/RightHandMesh/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" parent_id_path=PackedInt32Array(90653821, 116516788) index="1" unique_id=1677190653]
 hand_tracker = &"/user/hand_tracker/right"
 
-[node name="XRHandFallbackModifier3D" type="SkeletonModifier3D" parent="XROrigin3D/RightHandMesh/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="2"]
-_import_path = NodePath("")
+[node name="XRHandFallbackModifier3D" type="SkeletonModifier3D" parent="XROrigin3D/RightHandMesh/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" parent_id_path=PackedInt32Array(90653821, 116516788) index="2" unique_id=1145812469]
 unique_name_in_owner = false
 process_mode = 0
 process_priority = 0

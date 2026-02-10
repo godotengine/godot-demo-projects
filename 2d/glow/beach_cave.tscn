@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b10wtqanipk5w"]
+[gd_scene format=3 uid="uid://b10wtqanipk5w"]
 
 [ext_resource type="Script" uid="uid://cxjmb68vunhny" path="res://beach_cave.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c3rttr7mrjqd1" path="res://ocean_beach.png" id="2"]
@@ -15,10 +15,10 @@ glow_strength = 0.88
 glow_bloom = 0.08
 glow_blend_mode = 0
 
-[node name="BeachCave" type="Node2D"]
+[node name="BeachCave" type="Node2D" unique_id=379183590]
 script = ExtResource("1")
 
-[node name="Beach" type="Sprite2D" parent="."]
+[node name="Beach" type="Sprite2D" parent="." unique_id=529115765]
 modulate = Color(2, 2, 2, 1)
 self_modulate = Color(2, 2, 2, 1)
 texture = ExtResource("2")
@@ -26,19 +26,19 @@ centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 3840, 720)
 
-[node name="Cave" type="Sprite2D" parent="."]
+[node name="Cave" type="Sprite2D" parent="." unique_id=1890384977]
 self_modulate = Color(0.233166, 0.221219, 0.23582, 1)
 scale = Vector2(1.2, 1)
 texture = ExtResource("3")
 centered = false
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1687056898]
 environment = SubResource("1")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=962517249]
 offset = Vector2(540, 360)
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=211507946]
 visible = false
 offset_left = 18.0
 offset_top = 18.0

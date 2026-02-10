@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://l523ox2awhi6"]
+[gd_scene format=4 uid="uid://l523ox2awhi6"]
 
 [ext_resource type="TileSet" uid="uid://yrsot2k3h8rd" path="res://tileset.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://cwchcyc0t4cgv" path="res://rock.tscn" id="2"]
@@ -6,279 +6,279 @@
 [ext_resource type="FontFile" uid="uid://cm4wvgsyhdc2w" path="res://montserrat.otf" id="4"]
 [ext_resource type="Script" uid="uid://r8wlac3jv6ck" path="res://bomb_spawner.gd" id="6_ac5ja"]
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" unique_id=567359237]
 
-[node name="Layer0" type="TileMapLayer" parent="."]
+[node name="Layer0" type="TileMapLayer" parent="." unique_id=1793808601]
 use_parent_material = true
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAwAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAABAAAAAAABAAIAAAABAAAAAAABAAMAAAABAAAAAAABAAQAAAABAAAAAAABAAUAAAABAAAAAAABAAYAAAABAAAAAAABAAcAAAABAAAAAAABAAgAAAABAAAAAAABAAkAAAABAAAAAAABAAoAAAABAAAAAAABAAsAAAABAAAAAAABAAwAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAABAAAAAAACAAIAAAAAAAAAAAACAAMAAAABAAAAAAACAAQAAAAAAAAAAAACAAUAAAABAAAAAAACAAYAAAAAAAAAAAACAAcAAAABAAAAAAACAAgAAAAAAAAAAAACAAkAAAABAAAAAAACAAoAAAAAAAAAAAACAAsAAAABAAAAAAACAAwAAAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAABAAAAAAADAAIAAAABAAAAAAADAAMAAAABAAAAAAADAAQAAAABAAAAAAADAAUAAAABAAAAAAADAAYAAAABAAAAAAADAAcAAAABAAAAAAADAAgAAAAAAAAAAAADAAkAAAABAAAAAAADAAoAAAABAAAAAAADAAsAAAABAAAAAAADAAwAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAABAAAAAAAEAAIAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAUAAAABAAAAAAAEAAYAAAAAAAAAAAAEAAcAAAABAAAAAAAEAAgAAAAAAAAAAAAEAAkAAAABAAAAAAAEAAoAAAAAAAAAAAAEAAsAAAABAAAAAAAEAAwAAAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAABAAAAAAAFAAIAAAABAAAAAAAFAAMAAAABAAAAAAAFAAQAAAABAAAAAAAFAAUAAAABAAAAAAAFAAYAAAABAAAAAAAFAAcAAAABAAAAAAAFAAgAAAABAAAAAAAFAAkAAAABAAAAAAAFAAoAAAABAAAAAAAFAAsAAAABAAAAAAAFAAwAAAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAABAAAAAAAGAAIAAAAAAAAAAAAGAAMAAAABAAAAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAAGAAcAAAABAAAAAAAGAAgAAAAAAAAAAAAGAAkAAAABAAAAAAAGAAoAAAAAAAAAAAAGAAsAAAABAAAAAAAGAAwAAAAAAAAAAAAHAAAAAAAAAAAAAAAHAAEAAAABAAAAAAAHAAIAAAABAAAAAAAHAAMAAAABAAAAAAAHAAQAAAABAAAAAAAHAAUAAAABAAAAAAAHAAYAAAABAAAAAAAHAAcAAAABAAAAAAAHAAgAAAABAAAAAAAHAAkAAAABAAAAAAAHAAoAAAABAAAAAAAHAAsAAAABAAAAAAAHAAwAAAAAAAAAAAAIAAAAAAAAAAAAAAAIAAEAAAABAAAAAAAIAAIAAAAAAAAAAAAIAAMAAAABAAAAAAAIAAQAAAAAAAAAAAAIAAUAAAABAAAAAAAIAAYAAAAAAAAAAAAIAAcAAAABAAAAAAAIAAgAAAAAAAAAAAAIAAkAAAABAAAAAAAIAAoAAAAAAAAAAAAIAAsAAAABAAAAAAAIAAwAAAAAAAAAAAAJAAAAAAAAAAAAAAAJAAEAAAABAAAAAAAJAAIAAAABAAAAAAAJAAMAAAABAAAAAAAJAAQAAAABAAAAAAAJAAUAAAABAAAAAAAJAAYAAAABAAAAAAAJAAcAAAABAAAAAAAJAAgAAAABAAAAAAAJAAkAAAABAAAAAAAJAAoAAAABAAAAAAAJAAsAAAABAAAAAAAJAAwAAAAAAAAAAAAKAAAAAAAAAAAAAAAKAAEAAAABAAAAAAAKAAIAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAABAAAAAAAKAAYAAAAAAAAAAAAKAAcAAAABAAAAAAAKAAgAAAAAAAAAAAAKAAkAAAABAAAAAAAKAAoAAAAAAAAAAAAKAAsAAAABAAAAAAAKAAwAAAAAAAAAAAALAAAAAAAAAAAAAAALAAEAAAABAAAAAAALAAIAAAAAAAAAAAALAAMAAAABAAAAAAALAAQAAAABAAAAAAALAAUAAAABAAAAAAALAAYAAAABAAAAAAALAAcAAAABAAAAAAALAAgAAAABAAAAAAALAAkAAAABAAAAAAALAAoAAAABAAAAAAALAAsAAAABAAAAAAALAAwAAAAAAAAAAAAMAAAAAAAAAAAAAAAMAAEAAAABAAAAAAAMAAIAAAAAAAAAAAAMAAMAAAABAAAAAAAMAAQAAAAAAAAAAAAMAAUAAAABAAAAAAAMAAYAAAAAAAAAAAAMAAcAAAABAAAAAAAMAAgAAAAAAAAAAAAMAAkAAAABAAAAAAAMAAoAAAAAAAAAAAAMAAsAAAABAAAAAAAMAAwAAAAAAAAAAAANAAAAAAAAAAAAAAANAAEAAAABAAAAAAANAAIAAAAAAAAAAAANAAMAAAABAAAAAAANAAQAAAABAAAAAAANAAUAAAABAAAAAAANAAYAAAAAAAAAAAANAAcAAAABAAAAAAANAAgAAAAAAAAAAAANAAkAAAABAAAAAAANAAoAAAABAAAAAAANAAsAAAABAAAAAAANAAwAAAAAAAAAAAAOAAAAAAAAAAAAAAAOAAEAAAABAAAAAAAOAAIAAAAAAAAAAAAOAAMAAAABAAAAAAAOAAQAAAAAAAAAAAAOAAUAAAABAAAAAAAOAAYAAAAAAAAAAAAOAAcAAAABAAAAAAAOAAgAAAAAAAAAAAAOAAkAAAABAAAAAAAOAAoAAAAAAAAAAAAOAAsAAAABAAAAAAAOAAwAAAAAAAAAAAAPAAAAAAAAAAAAAAAPAAEAAAABAAAAAAAPAAIAAAABAAAAAAAPAAMAAAABAAAAAAAPAAQAAAABAAAAAAAPAAUAAAABAAAAAAAPAAYAAAAAAAAAAAAPAAcAAAABAAAAAAAPAAgAAAABAAAAAAAPAAkAAAABAAAAAAAPAAoAAAABAAAAAAAPAAsAAAABAAAAAAAPAAwAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAEAAAABAAAAAAAQAAIAAAAAAAAAAAAQAAMAAAABAAAAAAAQAAQAAAAAAAAAAAAQAAUAAAABAAAAAAAQAAYAAAAAAAAAAAAQAAcAAAABAAAAAAAQAAgAAAAAAAAAAAAQAAkAAAABAAAAAAAQAAoAAAAAAAAAAAAQAAsAAAABAAAAAAAQAAwAAAAAAAAAAAARAAAAAAAAAAAAAAARAAEAAAABAAAAAAARAAIAAAABAAAAAAARAAMAAAABAAAAAAARAAQAAAABAAAAAAARAAUAAAABAAAAAAARAAYAAAABAAAAAAARAAcAAAABAAAAAAARAAgAAAABAAAAAAARAAkAAAABAAAAAAARAAoAAAABAAAAAAARAAsAAAABAAAAAAARAAwAAAAAAAAAAAASAAAAAAAAAAAAAAASAAEAAAABAAAAAAASAAIAAAAAAAAAAAASAAMAAAABAAAAAAASAAQAAAAAAAAAAAASAAUAAAAAAAAAAAASAAYAAAAAAAAAAAASAAcAAAABAAAAAAASAAgAAAAAAAAAAAASAAkAAAABAAAAAAASAAoAAAAAAAAAAAASAAsAAAABAAAAAAASAAwAAAAAAAAAAAATAAAAAAAAAAAAAAATAAEAAAABAAAAAAATAAIAAAABAAAAAAATAAMAAAABAAAAAAATAAQAAAABAAAAAAATAAUAAAABAAAAAAATAAYAAAABAAAAAAATAAcAAAABAAAAAAATAAgAAAABAAAAAAATAAkAAAABAAAAAAATAAoAAAABAAAAAAATAAsAAAABAAAAAAATAAwAAAAAAAAAAAAUAAAAAAAAAAAAAAAUAAEAAAAAAAAAAAAUAAIAAAAAAAAAAAAUAAMAAAAAAAAAAAAUAAQAAAAAAAAAAAAUAAUAAAAAAAAAAAAUAAYAAAAAAAAAAAAUAAcAAAAAAAAAAAAUAAgAAAAAAAAAAAAUAAkAAAAAAAAAAAAUAAoAAAAAAAAAAAAUAAsAAAAAAAAAAAAUAAwAAAAAAAAAAAAVAAAAAAAAAAAAAAAVAAEAAAAAAAAAAAAVAAIAAAAAAAAAAAAVAAMAAAAAAAAAAAAVAAQAAAAAAAAAAAAVAAUAAAAAAAAAAAAVAAYAAAAAAAAAAAAVAAcAAAAAAAAAAAAVAAgAAAAAAAAAAAAVAAkAAAAAAAAAAAAVAAoAAAAAAAAAAAAVAAsAAAAAAAAAAAAVAAwAAAAAAAAAAAA=")
 tile_set = ExtResource("1")
 rendering_quadrant_size = 48
 
-[node name="SpawnPoints" type="Node2D" parent="."]
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=418760078]
 
-[node name="0" type="Marker2D" parent="SpawnPoints"]
+[node name="0" type="Marker2D" parent="SpawnPoints" unique_id=1995321736]
 position = Vector2(72, 72)
 
-[node name="1" type="Marker2D" parent="SpawnPoints"]
+[node name="1" type="Marker2D" parent="SpawnPoints" unique_id=928387376]
 position = Vector2(264, 216)
 
-[node name="2" type="Marker2D" parent="SpawnPoints"]
+[node name="2" type="Marker2D" parent="SpawnPoints" unique_id=1130833705]
 position = Vector2(72, 456)
 
-[node name="3" type="Marker2D" parent="SpawnPoints"]
+[node name="3" type="Marker2D" parent="SpawnPoints" unique_id=1680982331]
 position = Vector2(360, 552)
 
-[node name="4" type="Marker2D" parent="SpawnPoints"]
+[node name="4" type="Marker2D" parent="SpawnPoints" unique_id=864320443]
 position = Vector2(840, 360)
 
-[node name="5" type="Marker2D" parent="SpawnPoints"]
+[node name="5" type="Marker2D" parent="SpawnPoints" unique_id=229357008]
 position = Vector2(456, 264)
 
-[node name="6" type="Marker2D" parent="SpawnPoints"]
+[node name="6" type="Marker2D" parent="SpawnPoints" unique_id=32015464]
 position = Vector2(696, 264)
 
-[node name="7" type="Marker2D" parent="SpawnPoints"]
+[node name="7" type="Marker2D" parent="SpawnPoints" unique_id=520118484]
 position = Vector2(744, 456)
 
-[node name="8" type="Marker2D" parent="SpawnPoints"]
+[node name="8" type="Marker2D" parent="SpawnPoints" unique_id=2084267457]
 position = Vector2(312, 456)
 
-[node name="9" type="Marker2D" parent="SpawnPoints"]
+[node name="9" type="Marker2D" parent="SpawnPoints" unique_id=1701927637]
 position = Vector2(696, 72)
 
-[node name="10" type="Marker2D" parent="SpawnPoints"]
+[node name="10" type="Marker2D" parent="SpawnPoints" unique_id=1793816438]
 position = Vector2(504, 72)
 
-[node name="11" type="Marker2D" parent="SpawnPoints"]
+[node name="11" type="Marker2D" parent="SpawnPoints" unique_id=1757061144]
 position = Vector2(936, 72)
 
-[node name="Rocks" type="Node2D" parent="."]
+[node name="Rocks" type="Node2D" parent="." unique_id=1142949343]
 
-[node name="Rock0" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock0" parent="Rocks" unique_id=220354504 instance=ExtResource("2")]
 position = Vector2(120, 72)
 
-[node name="Rock1" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock1" parent="Rocks" unique_id=947119766 instance=ExtResource("2")]
 position = Vector2(264, 168)
 
-[node name="Rock2" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock2" parent="Rocks" unique_id=614998047 instance=ExtResource("2")]
 position = Vector2(264, 120)
 
-[node name="Rock3" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock3" parent="Rocks" unique_id=1542660570 instance=ExtResource("2")]
 position = Vector2(216, 72)
 
-[node name="Rock4" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock4" parent="Rocks" unique_id=2102650845 instance=ExtResource("2")]
 position = Vector2(264, 72)
 
-[node name="Rock5" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock5" parent="Rocks" unique_id=762219518 instance=ExtResource("2")]
 position = Vector2(312, 72)
 
-[node name="Rock6" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock6" parent="Rocks" unique_id=217531004 instance=ExtResource("2")]
 position = Vector2(552, 168)
 
-[node name="Rock7" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock7" parent="Rocks" unique_id=1162387421 instance=ExtResource("2")]
 position = Vector2(600, 168)
 
-[node name="Rock8" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock8" parent="Rocks" unique_id=1353925474 instance=ExtResource("2")]
 position = Vector2(552, 216)
 
-[node name="Rock9" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock9" parent="Rocks" unique_id=57157230 instance=ExtResource("2")]
 position = Vector2(264, 312)
 
-[node name="Rock10" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock10" parent="Rocks" unique_id=1819855745 instance=ExtResource("2")]
 position = Vector2(120, 360)
 
-[node name="Rock11" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock11" parent="Rocks" unique_id=2030812034 instance=ExtResource("2")]
 position = Vector2(168, 360)
 
-[node name="Rock12" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock12" parent="Rocks" unique_id=1173650093 instance=ExtResource("2")]
 position = Vector2(216, 360)
 
-[node name="Rock13" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock13" parent="Rocks" unique_id=648953002 instance=ExtResource("2")]
 position = Vector2(120, 264)
 
-[node name="Rock14" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock14" parent="Rocks" unique_id=929835754 instance=ExtResource("2")]
 position = Vector2(168, 216)
 
-[node name="Rock15" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock15" parent="Rocks" unique_id=1111840620 instance=ExtResource("2")]
 position = Vector2(72, 360)
 
-[node name="Rock16" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock16" parent="Rocks" unique_id=503094041 instance=ExtResource("2")]
 position = Vector2(72, 312)
 
-[node name="Rock17" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock17" parent="Rocks" unique_id=482465408 instance=ExtResource("2")]
 position = Vector2(72, 264)
 
-[node name="Rock18" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock18" parent="Rocks" unique_id=1941254669 instance=ExtResource("2")]
 position = Vector2(360, 360)
 
-[node name="Rock19" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock19" parent="Rocks" unique_id=439958239 instance=ExtResource("2")]
 position = Vector2(408, 360)
 
-[node name="Rock20" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock20" parent="Rocks" unique_id=1594879527 instance=ExtResource("2")]
 position = Vector2(504, 360)
 
-[node name="Rock21" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock21" parent="Rocks" unique_id=1958867547 instance=ExtResource("2")]
 position = Vector2(600, 360)
 
-[node name="Rock22" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock22" parent="Rocks" unique_id=1199696857 instance=ExtResource("2")]
 position = Vector2(648, 360)
 
-[node name="Rock23" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock23" parent="Rocks" unique_id=1171730618 instance=ExtResource("2")]
 position = Vector2(504, 456)
 
-[node name="Rock24" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock24" parent="Rocks" unique_id=229874558 instance=ExtResource("2")]
 position = Vector2(552, 456)
 
-[node name="Rock25" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock25" parent="Rocks" unique_id=1015224842 instance=ExtResource("2")]
 position = Vector2(552, 408)
 
-[node name="Rock26" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock26" parent="Rocks" unique_id=1499907311 instance=ExtResource("2")]
 position = Vector2(360, 456)
 
-[node name="Rock27" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock27" parent="Rocks" unique_id=1435367539 instance=ExtResource("2")]
 position = Vector2(360, 504)
 
-[node name="Rock28" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock28" parent="Rocks" unique_id=980795295 instance=ExtResource("2")]
 position = Vector2(264, 504)
 
-[node name="Rock29" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock29" parent="Rocks" unique_id=1335195197 instance=ExtResource("2")]
 position = Vector2(264, 552)
 
-[node name="Rock30" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock30" parent="Rocks" unique_id=441942592 instance=ExtResource("2")]
 position = Vector2(168, 456)
 
-[node name="Rock31" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock31" parent="Rocks" unique_id=698212092 instance=ExtResource("2")]
 position = Vector2(168, 504)
 
-[node name="Rock32" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock32" parent="Rocks" unique_id=1142797306 instance=ExtResource("2")]
 position = Vector2(72, 552)
 
-[node name="Rock33" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock33" parent="Rocks" unique_id=789304724 instance=ExtResource("2")]
 position = Vector2(120, 552)
 
-[node name="Rock34" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock34" parent="Rocks" unique_id=437402791 instance=ExtResource("2")]
 position = Vector2(504, 552)
 
-[node name="Rock35" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock35" parent="Rocks" unique_id=1251678371 instance=ExtResource("2")]
 position = Vector2(600, 552)
 
-[node name="Rock36" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock36" parent="Rocks" unique_id=1839324204 instance=ExtResource("2")]
 position = Vector2(648, 552)
 
-[node name="Rock37" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock37" parent="Rocks" unique_id=666952835 instance=ExtResource("2")]
 position = Vector2(648, 504)
 
-[node name="Rock38" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock38" parent="Rocks" unique_id=2017251575 instance=ExtResource("2")]
 position = Vector2(456, 216)
 
-[node name="Rock39" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock39" parent="Rocks" unique_id=1206256381 instance=ExtResource("2")]
 position = Vector2(360, 216)
 
-[node name="Rock40" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock40" parent="Rocks" unique_id=1056009766 instance=ExtResource("2")]
 position = Vector2(360, 168)
 
-[node name="Rock41" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock41" parent="Rocks" unique_id=703196827 instance=ExtResource("2")]
 position = Vector2(456, 120)
 
-[node name="Rock42" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock42" parent="Rocks" unique_id=869114790 instance=ExtResource("2")]
 position = Vector2(456, 408)
 
-[node name="Rock43" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock43" parent="Rocks" unique_id=798830502 instance=ExtResource("2")]
 position = Vector2(456, 456)
 
-[node name="Rock44" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock44" parent="Rocks" unique_id=735095704 instance=ExtResource("2")]
 position = Vector2(456, 504)
 
-[node name="Rock45" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock45" parent="Rocks" unique_id=798586750 instance=ExtResource("2")]
 position = Vector2(600, 264)
 
-[node name="Rock46" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock46" parent="Rocks" unique_id=410347557 instance=ExtResource("2")]
 position = Vector2(600, 72)
 
-[node name="Rock47" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock47" parent="Rocks" unique_id=1103150048 instance=ExtResource("2")]
 position = Vector2(408, 72)
 
-[node name="Rock48" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock48" parent="Rocks" unique_id=350688359 instance=ExtResource("2")]
 position = Vector2(792, 168)
 
-[node name="Rock49" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock49" parent="Rocks" unique_id=1706440809 instance=ExtResource("2")]
 position = Vector2(744, 168)
 
-[node name="Rock50" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock50" parent="Rocks" unique_id=402427092 instance=ExtResource("2")]
 position = Vector2(744, 264)
 
-[node name="Rock51" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock51" parent="Rocks" unique_id=1181791585 instance=ExtResource("2")]
 position = Vector2(792, 264)
 
-[node name="Rock52" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock52" parent="Rocks" unique_id=1655980051 instance=ExtResource("2")]
 position = Vector2(744, 360)
 
-[node name="Rock53" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock53" parent="Rocks" unique_id=1728121791 instance=ExtResource("2")]
 position = Vector2(744, 408)
 
-[node name="Rock54" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock54" parent="Rocks" unique_id=1968817450 instance=ExtResource("2")]
 position = Vector2(792, 552)
 
-[node name="Rock55" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock55" parent="Rocks" unique_id=1963168478 instance=ExtResource("2")]
 position = Vector2(840, 552)
 
-[node name="Rock56" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock56" parent="Rocks" unique_id=503298579 instance=ExtResource("2")]
 position = Vector2(840, 504)
 
-[node name="Rock57" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock57" parent="Rocks" unique_id=1397750323 instance=ExtResource("2")]
 position = Vector2(840, 312)
 
-[node name="Rock58" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock58" parent="Rocks" unique_id=2135876352 instance=ExtResource("2")]
 position = Vector2(840, 264)
 
-[node name="Rock59" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock59" parent="Rocks" unique_id=1234098801 instance=ExtResource("2")]
 position = Vector2(840, 216)
 
-[node name="Rock60" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock60" parent="Rocks" unique_id=631160515 instance=ExtResource("2")]
 position = Vector2(840, 120)
 
-[node name="Rock61" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock61" parent="Rocks" unique_id=1641798992 instance=ExtResource("2")]
 position = Vector2(792, 72)
 
-[node name="Rock62" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock62" parent="Rocks" unique_id=1304542289 instance=ExtResource("2")]
 position = Vector2(840, 72)
 
-[node name="Rock63" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock63" parent="Rocks" unique_id=918744463 instance=ExtResource("2")]
 position = Vector2(936, 216)
 
-[node name="Rock64" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock64" parent="Rocks" unique_id=1543387305 instance=ExtResource("2")]
 position = Vector2(936, 264)
 
-[node name="Rock65" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock65" parent="Rocks" unique_id=580698198 instance=ExtResource("2")]
 position = Vector2(936, 408)
 
-[node name="Rock66" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock66" parent="Rocks" unique_id=2080537332 instance=ExtResource("2")]
 position = Vector2(888, 456)
 
-[node name="Rock67" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock67" parent="Rocks" unique_id=92532108 instance=ExtResource("2")]
 position = Vector2(936, 456)
 
-[node name="Rock68" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock68" parent="Rocks" unique_id=285854577 instance=ExtResource("2")]
 position = Vector2(792, 456)
 
-[node name="Rock69" parent="Rocks" instance=ExtResource("2")]
+[node name="Rock69" parent="Rocks" unique_id=1165186078 instance=ExtResource("2")]
 position = Vector2(840, 456)
 
-[node name="Players" type="Node2D" parent="."]
+[node name="Players" type="Node2D" parent="." unique_id=1204594401]
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1110278187]
 offset_right = 1056.0
 offset_bottom = 48.0
 color = Color(0, 0, 0, 0.501961)
 
-[node name="Score" type="HBoxContainer" parent="."]
+[node name="Score" type="HBoxContainer" parent="." unique_id=371795955]
 offset_right = 1024.0
 offset_bottom = 40.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource("3")
 
-[node name="Winner" type="Label" parent="."]
+[node name="Winner" type="Label" parent="." unique_id=170980847]
 visible = false
 offset_right = 1031.0
 offset_bottom = 617.0
@@ -290,7 +290,7 @@ theme_override_fonts/font = ExtResource("4")
 text = "THE WINNER IS:
 YOU"
 
-[node name="ExitGame" type="Button" parent="Winner"]
+[node name="ExitGame" type="Button" parent="Winner" unique_id=378213371]
 layout_mode = 0
 offset_left = 384.0
 offset_top = 408.0
@@ -301,14 +301,14 @@ size_flags_vertical = 2
 theme_override_fonts/font = ExtResource("4")
 text = "EXIT GAME"
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1608085034]
 offset = Vector2(512, 300)
 process_callback = 0
 
-[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=165151297]
 spawn_path = NodePath("../Players")
 
-[node name="BombSpawner" type="MultiplayerSpawner" parent="."]
+[node name="BombSpawner" type="MultiplayerSpawner" parent="." unique_id=1836509659]
 spawn_path = NodePath("..")
 script = ExtResource("6_ac5ja")
 

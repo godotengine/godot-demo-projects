@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bc4a8j7okb15h"]
+[gd_scene format=3 uid="uid://bc4a8j7okb15h"]
 
 [ext_resource type="Texture2D" uid="uid://dh5f4544n38df" path="res://player/bullet.webp" id="1"]
 [ext_resource type="AudioStream" uid="uid://cwqx3s5fy0q7t" path="res://enemy/explode.wav" id="2"]
@@ -248,27 +248,27 @@ blend_mode = 1
 offsets = PackedFloat32Array(0.5, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" unique_id=596459649]
 collision_layer = 2
 collision_mask = 24
 script = ExtResource("5")
 
-[node name="PlatformDetector" type="RayCast2D" parent="."]
+[node name="PlatformDetector" type="RayCast2D" parent="." unique_id=973558554]
 position = Vector2(0, 6)
 target_position = Vector2(0, 8)
 collision_mask = 8
 
-[node name="FloorDetectorLeft" type="RayCast2D" parent="."]
+[node name="FloorDetectorLeft" type="RayCast2D" parent="." unique_id=910279955]
 position = Vector2(-15, -4)
 target_position = Vector2(0, 35)
 collision_mask = 24
 
-[node name="FloorDetectorRight" type="RayCast2D" parent="."]
+[node name="FloorDetectorRight" type="RayCast2D" parent="." unique_id=782144340]
 position = Vector2(15.5, -3)
 target_position = Vector2(0, 35)
 collision_mask = 24
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=78034897]
 material = SubResource("1")
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("4")
@@ -276,16 +276,14 @@ flip_h = true
 hframes = 8
 vframes = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_0kjfc")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1362484596]
+libraries/ = SubResource("AnimationLibrary_0kjfc")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1682765481]
 rotation = -1.5708
 shape = SubResource("5")
 
-[node name="Explosion" type="CPUParticles2D" parent="."]
+[node name="Explosion" type="CPUParticles2D" parent="." unique_id=1322275026]
 self_modulate = Color(1, 1, 1, 0.12)
 material = SubResource("6")
 emitting = false
@@ -302,8 +300,8 @@ spread = 180.0
 gravity = Vector2(0, -250)
 color_ramp = SubResource("7")
 
-[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+[node name="Hit" type="AudioStreamPlayer2D" parent="." unique_id=1791067492]
 stream = ExtResource("3")
 
-[node name="Explode" type="AudioStreamPlayer2D" parent="."]
+[node name="Explode" type="AudioStreamPlayer2D" parent="." unique_id=453738939]
 stream = ExtResource("2")

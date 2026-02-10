@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cxmt2qecrc6vm"]
+[gd_scene format=3 uid="uid://cxmt2qecrc6vm"]
 
 [ext_resource type="Script" uid="uid://bgcnf7ewyhig2" path="res://utils/camera_orbit.gd" id="1"]
 [ext_resource type="Script" uid="uid://b1v12fjnld82l" path="res://tests/functional/test_moving_platform.gd" id="2"]
@@ -63,56 +63,56 @@ _data = {
 &"RESET": SubResource("Animation_jtts3")
 }
 
-[node name="Test2" type="Node3D"]
+[node name="Test2" type="Node3D" unique_id=1406220869]
 script = ExtResource("2")
 
-[node name="LabelBodyType" type="Label" parent="."]
+[node name="LabelBodyType" type="Label" parent="." unique_id=183164353]
 offset_left = 14.0
 offset_top = 78.0
 offset_right = 171.0
 offset_bottom = 92.0
 text = "Body Type: "
 
-[node name="Options" parent="." instance=ExtResource("3")]
+[node name="Options" parent="." unique_id=779188662 instance=ExtResource("3")]
 offset_top = 153.0
 offset_right = 134.0
 offset_bottom = 182.0
 
-[node name="Bodies" type="Node3D" parent="."]
+[node name="Bodies" type="Node3D" parent="." unique_id=369413087]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="Bodies"]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="Bodies" unique_id=1339263936]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -4.18538, 0)
 collision_layer = 2
 script = ExtResource("4")
 _stop_on_slopes = true
 use_snap = true
 
-[node name="Capsule" type="CollisionShape3D" parent="Bodies/CharacterBody3D"]
+[node name="Capsule" type="CollisionShape3D" parent="Bodies/CharacterBody3D" unique_id=2135135049]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("1")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="Box" type="CollisionShape3D" parent="Bodies/CharacterBody3D"]
+[node name="Box" type="CollisionShape3D" parent="Bodies/CharacterBody3D" unique_id=1309925050]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("2")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="Cylinder" type="CollisionShape3D" parent="Bodies/CharacterBody3D"]
+[node name="Cylinder" type="CollisionShape3D" parent="Bodies/CharacterBody3D" unique_id=1213253960]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("3")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="Sphere" type="CollisionShape3D" parent="Bodies/CharacterBody3D"]
+[node name="Sphere" type="CollisionShape3D" parent="Bodies/CharacterBody3D" unique_id=1291414204]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("4")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="Convex" type="CollisionShape3D" parent="Bodies/CharacterBody3D"]
+[node name="Convex" type="CollisionShape3D" parent="Bodies/CharacterBody3D" unique_id=1786893968]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("5")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="RigidBody" type="RigidBody3D" parent="Bodies"]
+[node name="RigidBody" type="RigidBody3D" parent="Bodies" unique_id=1515755350]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -4.18538, 0)
 collision_layer = 4
 axis_lock_angular_x = true
@@ -120,47 +120,45 @@ axis_lock_angular_y = true
 axis_lock_angular_z = true
 physics_material_override = SubResource("7")
 
-[node name="Capsule" type="CollisionShape3D" parent="Bodies/RigidBody"]
+[node name="Capsule" type="CollisionShape3D" parent="Bodies/RigidBody" unique_id=679570895]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("1")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="Box" type="CollisionShape3D" parent="Bodies/RigidBody"]
+[node name="Box" type="CollisionShape3D" parent="Bodies/RigidBody" unique_id=226505292]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("2")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="Cylinder" type="CollisionShape3D" parent="Bodies/RigidBody"]
+[node name="Cylinder" type="CollisionShape3D" parent="Bodies/RigidBody" unique_id=1463779514]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("3")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="Sphere" type="CollisionShape3D" parent="Bodies/RigidBody"]
+[node name="Sphere" type="CollisionShape3D" parent="Bodies/RigidBody" unique_id=683532048]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("4")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="Convex" type="CollisionShape3D" parent="Bodies/RigidBody"]
+[node name="Convex" type="CollisionShape3D" parent="Bodies/RigidBody" unique_id=957735608]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("5")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="Platforms" type="Node3D" parent="."]
+[node name="Platforms" type="Node3D" parent="." unique_id=1795278903]
 
-[node name="MovingPlatform" type="AnimatableBody3D" parent="Platforms"]
+[node name="MovingPlatform" type="AnimatableBody3D" parent="Platforms" unique_id=1481209126]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -4.235, 0)
 
-[node name="CollisionShape" type="CollisionShape3D" parent="Platforms/MovingPlatform"]
+[node name="CollisionShape" type="CollisionShape3D" parent="Platforms/MovingPlatform" unique_id=128389141]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 shape = SubResource("8")
 debug_color = Color(0.533333, 0, 1, 1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/MovingPlatform"]
-libraries = {
-&"": SubResource("AnimationLibrary_jtts3")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/MovingPlatform" unique_id=530806875]
+libraries/ = SubResource("AnimationLibrary_jtts3")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1743898615]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 current = true
 script = ExtResource("1")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cd8v82xj6j5v3"]
+[gd_scene format=3 uid="uid://cd8v82xj6j5v3"]
 
 [ext_resource type="Script" uid="uid://tc1n3lyeumgv" path="res://addons/node25d-cs/main_screen/viewport_25d.gd" id="1"]
 
@@ -8,95 +8,95 @@ viewport_path = NodePath("Viewport25D/Viewport2D")
 [sub_resource type="ViewportTexture" id="2"]
 viewport_path = NodePath("Viewport25D/ViewportOverlay")
 
-[node name="MainScreen25D" type="VBoxContainer"]
+[node name="MainScreen25D" type="VBoxContainer" unique_id=1414122504]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TopBar" type="HBoxContainer" parent="."]
+[node name="TopBar" type="HBoxContainer" parent="." unique_id=94151861]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ViewModeButtons" type="HBoxContainer" parent="TopBar"]
+[node name="ViewModeButtons" type="HBoxContainer" parent="TopBar" unique_id=1615158382]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="45Degree" type="CheckBox" parent="TopBar/ViewModeButtons"]
+[node name="45Degree" type="CheckBox" parent="TopBar/ViewModeButtons" unique_id=514325058]
 layout_mode = 2
 text = "45 Degree"
 
-[node name="Isometric" type="CheckBox" parent="TopBar/ViewModeButtons"]
+[node name="Isometric" type="CheckBox" parent="TopBar/ViewModeButtons" unique_id=724748640]
 layout_mode = 2
 text = "Isometric"
 
-[node name="TopDown" type="CheckBox" parent="TopBar/ViewModeButtons"]
+[node name="TopDown" type="CheckBox" parent="TopBar/ViewModeButtons" unique_id=1591985242]
 layout_mode = 2
 text = "Top Down"
 
-[node name="FrontSide" type="CheckBox" parent="TopBar/ViewModeButtons"]
+[node name="FrontSide" type="CheckBox" parent="TopBar/ViewModeButtons" unique_id=509964532]
 layout_mode = 2
 text = "Front Side"
 
-[node name="ObliqueY" type="CheckBox" parent="TopBar/ViewModeButtons"]
+[node name="ObliqueY" type="CheckBox" parent="TopBar/ViewModeButtons" unique_id=837727291]
 layout_mode = 2
 text = "Oblique Y"
 
-[node name="ObliqueZ" type="CheckBox" parent="TopBar/ViewModeButtons"]
+[node name="ObliqueZ" type="CheckBox" parent="TopBar/ViewModeButtons" unique_id=982729040]
 layout_mode = 2
 text = "Oblique Z"
 
-[node name="Zoom" type="HBoxContainer" parent="TopBar"]
+[node name="Zoom" type="HBoxContainer" parent="TopBar" unique_id=244288640]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="ZoomOut" type="Button" parent="TopBar/Zoom"]
+[node name="ZoomOut" type="Button" parent="TopBar/Zoom" unique_id=716793366]
 layout_mode = 2
 text = "-"
 
-[node name="ZoomPercent" type="Label" parent="TopBar/Zoom"]
+[node name="ZoomPercent" type="Label" parent="TopBar/Zoom" unique_id=1874481621]
 layout_mode = 2
 text = "100%"
 horizontal_alignment = 1
 clip_text = true
 
-[node name="ZoomReset" type="Button" parent="TopBar/Zoom/ZoomPercent"]
+[node name="ZoomReset" type="Button" parent="TopBar/Zoom/ZoomPercent" unique_id=843120297]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="ZoomIn" type="Button" parent="TopBar/Zoom"]
+[node name="ZoomIn" type="Button" parent="TopBar/Zoom" unique_id=1869333160]
 layout_mode = 2
 text = "+"
 
-[node name="Viewport25D" type="ColorRect" parent="."]
+[node name="Viewport25D" type="ColorRect" parent="." unique_id=1734180358]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0.301961, 0.301961, 0.301961, 1)
 script = ExtResource("1")
 
-[node name="Viewport2D" type="SubViewport" parent="Viewport25D"]
+[node name="Viewport2D" type="SubViewport" parent="Viewport25D" unique_id=850697619]
 disable_3d = true
 transparent_bg = true
 size = Vector2i(1600, 864)
 
-[node name="ViewportOverlay" type="SubViewport" parent="Viewport25D"]
+[node name="ViewportOverlay" type="SubViewport" parent="Viewport25D" unique_id=1192671588]
 disable_3d = true
 transparent_bg = true
 size = Vector2i(1600, 864)
 
-[node name="ViewportTexture" type="TextureRect" parent="Viewport25D"]
+[node name="ViewportTexture" type="TextureRect" parent="Viewport25D" unique_id=1397920170]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = SubResource("1")
 expand_mode = 1
 
-[node name="Overlay" type="TextureRect" parent="Viewport25D/ViewportTexture"]
+[node name="Overlay" type="TextureRect" parent="Viewport25D/ViewportTexture" unique_id=1343160298]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0

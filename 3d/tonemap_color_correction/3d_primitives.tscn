@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://h2ti08g4pehd"]
+[gd_scene format=3 uid="uid://h2ti08g4pehd"]
 
 [ext_resource type="Script" uid="uid://du6se81t8j1fe" path="res://test_scene.gd" id="1_vpdan"]
 
@@ -20,7 +20,6 @@ tonemap_mode = 2
 tonemap_white = 6.0
 glow_enabled = true
 glow_intensity = 0.09
-glow_blend_mode = 1
 fog_enabled = true
 fog_density = 0.025
 fog_aerial_perspective = 1.0
@@ -110,11 +109,11 @@ albedo_color = Color(0.25098, 0.25098, 1, 1)
 metallic = 1.0
 roughness = 0.5
 
-[node name="3DPrimitives" type="Node3D" node_paths=PackedStringArray("world_environment")]
+[node name="3DPrimitives" type="Node3D" unique_id=1985488746 node_paths=PackedStringArray("world_environment")]
 script = ExtResource("1_vpdan")
 world_environment = NodePath("WorldEnvironment")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=904209867]
 transform = Transform3D(0.866126, 0.13782, -0.480448, 0.0352591, 0.941991, 0.333781, 0.49858, -0.306037, 0.811024, -2.58974, 2.10013, -4.66397)
 light_color = Color(0.776471, 0.917647, 1, 1)
 light_energy = 0.4
@@ -125,137 +124,137 @@ directional_shadow_mode = 0
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 12.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1290429021]
 environment = SubResource("Environment_lqw28")
 
-[node name="Ground" type="MeshInstance3D" parent="."]
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=1951464327]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.4, 1)
 mesh = SubResource("BoxMesh_ff240")
 surface_material_override/0 = SubResource("StandardMaterial3D_4ldfp")
 
-[node name="Testers" type="Node3D" parent="."]
+[node name="Testers" type="Node3D" parent="." unique_id=318708506]
 
-[node name="GlowingBox" type="MeshInstance3D" parent="Testers"]
+[node name="GlowingBox" type="MeshInstance3D" parent="Testers" unique_id=736627556]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, 0)
 mesh = SubResource("BoxMesh_6wvpc")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_l4mxj")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Testers/GlowingBox"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Testers/GlowingBox" unique_id=81487952]
 light_energy = 2.0
 shadow_blur = 2.0
 
-[node name="GlowingSphere" type="MeshInstance3D" parent="Testers"]
+[node name="GlowingSphere" type="MeshInstance3D" parent="Testers" unique_id=215859198]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, 0)
 mesh = SubResource("SphereMesh_qnmea")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_l4mxj")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Testers/GlowingSphere"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Testers/GlowingSphere" unique_id=1667842348]
 light_energy = 2.0
 shadow_blur = 2.0
 
-[node name="MirrorSphere" type="MeshInstance3D" parent="Testers"]
+[node name="MirrorSphere" type="MeshInstance3D" parent="Testers" unique_id=472271707]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.5, -1)
 mesh = SubResource("SphereMesh_qnmea")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_kssqo")
 
-[node name="WhiteBox" type="MeshInstance3D" parent="Testers"]
+[node name="WhiteBox" type="MeshInstance3D" parent="Testers" unique_id=277459062]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, 0)
 mesh = SubResource("BoxMesh_6wvpc")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_4geml")
 
-[node name="WhiteSphere" type="MeshInstance3D" parent="Testers"]
+[node name="WhiteSphere" type="MeshInstance3D" parent="Testers" unique_id=1008420508]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.5, 0)
 mesh = SubResource("SphereMesh_qnmea")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_4geml")
 
-[node name="WhiteMetallicSphere" type="MeshInstance3D" parent="Testers"]
+[node name="WhiteMetallicSphere" type="MeshInstance3D" parent="Testers" unique_id=587937217]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.5, -1)
 mesh = SubResource("SphereMesh_qnmea")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_3eq2w")
 
-[node name="GrayBox" type="MeshInstance3D" parent="Testers"]
+[node name="GrayBox" type="MeshInstance3D" parent="Testers" unique_id=1865258600]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 0)
 mesh = SubResource("BoxMesh_6wvpc")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_uqci1")
 
-[node name="GraySphere" type="MeshInstance3D" parent="Testers"]
+[node name="GraySphere" type="MeshInstance3D" parent="Testers" unique_id=1618386616]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, 0)
 mesh = SubResource("SphereMesh_qnmea")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_uqci1")
 
-[node name="GrayMetallicSphere" type="MeshInstance3D" parent="Testers"]
+[node name="GrayMetallicSphere" type="MeshInstance3D" parent="Testers" unique_id=1708945467]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -1)
 mesh = SubResource("SphereMesh_qnmea")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_8sl4i")
 
-[node name="RedBox" type="MeshInstance3D" parent="Testers"]
+[node name="RedBox" type="MeshInstance3D" parent="Testers" unique_id=394618636]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 0)
 mesh = SubResource("BoxMesh_6wvpc")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_pauuc")
 
-[node name="RedSphere" type="MeshInstance3D" parent="Testers"]
+[node name="RedSphere" type="MeshInstance3D" parent="Testers" unique_id=681387198]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.5, 0)
 mesh = SubResource("SphereMesh_qnmea")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_pauuc")
 
-[node name="RedMetallicSphere" type="MeshInstance3D" parent="Testers"]
+[node name="RedMetallicSphere" type="MeshInstance3D" parent="Testers" unique_id=1524159455]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.5, -1)
 mesh = SubResource("SphereMesh_qnmea")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_8w4e2")
 
-[node name="GreenBox" type="MeshInstance3D" parent="Testers"]
+[node name="GreenBox" type="MeshInstance3D" parent="Testers" unique_id=1107185393]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_6wvpc")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_cb5og")
 
-[node name="GreenSphere" type="MeshInstance3D" parent="Testers"]
+[node name="GreenSphere" type="MeshInstance3D" parent="Testers" unique_id=980080578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 mesh = SubResource("SphereMesh_qnmea")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_cb5og")
 
-[node name="GreenMetallicSphere" type="MeshInstance3D" parent="Testers"]
+[node name="GreenMetallicSphere" type="MeshInstance3D" parent="Testers" unique_id=143219321]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -1)
 mesh = SubResource("SphereMesh_qnmea")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ah8ww")
 
-[node name="BlueBox" type="MeshInstance3D" parent="Testers"]
+[node name="BlueBox" type="MeshInstance3D" parent="Testers" unique_id=914074311]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, 0)
 mesh = SubResource("BoxMesh_6wvpc")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ako3b")
 
-[node name="BlueSphere" type="MeshInstance3D" parent="Testers"]
+[node name="BlueSphere" type="MeshInstance3D" parent="Testers" unique_id=1183970622]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.5, 0)
 mesh = SubResource("SphereMesh_qnmea")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ako3b")
 
-[node name="BlueMetallicSphere" type="MeshInstance3D" parent="Testers"]
+[node name="BlueMetallicSphere" type="MeshInstance3D" parent="Testers" unique_id=69884955]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.5, -1)
 mesh = SubResource("SphereMesh_qnmea")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_suuj5")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=360822311]
 transform = Transform3D(0.942327, -0.0710023, 0.327076, 6.57846e-09, 0.977239, 0.212141, -0.334694, -0.199906, 0.920879, 0.669204, 2.35, 4.04922)
 fov = 50.0
 
-[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+[node name="ReflectionProbe" type="ReflectionProbe" parent="." unique_id=1069828908]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2, 0)
 size = Vector3(512, 512, 512)
 enable_shadows = true

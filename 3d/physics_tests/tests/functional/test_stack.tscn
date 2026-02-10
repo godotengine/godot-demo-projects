@@ -1,17 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://xv02mjodmiv5"]
+[gd_scene format=3 uid="uid://xv02mjodmiv5"]
 
 [ext_resource type="Script" uid="uid://nit4q1o0d6fw" path="res://tests/functional/test_stack.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://6k8y26t0c7xq" path="res://tests/static_scene_plane.tscn" id="2"]
 [ext_resource type="Script" uid="uid://bgcnf7ewyhig2" path="res://utils/camera_orbit.gd" id="4"]
 
-[node name="Test" type="Node3D"]
+[node name="Test" type="Node3D" unique_id=260387061]
 script = ExtResource("1")
 
-[node name="Stack" type="Node3D" parent="."]
+[node name="Stack" type="Node3D" parent="." unique_id=1344778386]
 
-[node name="StaticBodyPlane" parent="." instance=ExtResource("2")]
+[node name="StaticBodyPlane" parent="." unique_id=889476983 instance=ExtResource("2")]
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=303612589]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.53602, 12.2684)
 current = true
 script = ExtResource("4")

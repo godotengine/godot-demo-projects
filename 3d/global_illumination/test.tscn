@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://i5l2qmc6po57"]
+[gd_scene format=3 uid="uid://i5l2qmc6po57"]
 
 [ext_resource type="PackedScene" uid="uid://bchlrstw5vflj" path="res://zdm2.glb" id="1"]
 [ext_resource type="PackedScene" uid="uid://cw16occp7kj1w" path="res://cube.glb" id="3"]
@@ -8,14 +8,10 @@
 [ext_resource type="LightmapGIData" uid="uid://xmpb2se1j30h" path="res://zdm2_indirect.lmbake" id="5_14bmd"]
 [ext_resource type="Script" uid="uid://bhbw755yss12a" path="res://camera.gd" id="6"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_30v8t"]
-sky_top_color = Color(0.568627, 0.698039, 0.807843, 1)
-sky_horizon_color = Color(0.672549, 0.704902, 0.734314, 1)
-ground_bottom_color = Color(0.121569, 0.121569, 0.129412, 1)
-ground_horizon_color = Color(0.672549, 0.704902, 0.734314, 1)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vbegm"]
 
 [sub_resource type="Sky" id="Sky_4q314"]
-sky_material = SubResource("ProceduralSkyMaterial_30v8t")
+sky_material = SubResource("ProceduralSkyMaterial_vbegm")
 
 [sub_resource type="Environment" id="Environment_bau0c"]
 background_mode = 2
@@ -51,37 +47,41 @@ albedo_color = Color(0.811765, 1, 0.764706, 1)
 metallic = 1.0
 roughness = 0.0
 
-[node name="Test" type="Node3D"]
+[node name="Test" type="Node3D" unique_id=562380932]
 script = ExtResource("5")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=14190112]
 environment = SubResource("Environment_bau0c")
 
-[node name="Zdm2LightmapAll" parent="." instance=ExtResource("1")]
+[node name="Zdm2LightmapAll" parent="." unique_id=299195381 instance=ExtResource("1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 visible = false
 
-[node name="Zdm2LightmapIndirect" parent="." instance=ExtResource("1")]
+[node name="Zdm2LightmapIndirect" parent="." unique_id=1688332759 instance=ExtResource("1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
-[node name="VoxelGI" type="VoxelGI" parent="."]
+[node name="VoxelGI" type="VoxelGI" parent="." unique_id=437858698]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 6, 2.5)
 visible = false
 size = Vector3(78, 37, 60)
 data = ExtResource("3_1netx")
 
-[node name="LightmapGIAll" type="LightmapGI" parent="."]
+[node name="LightmapGIAll" type="LightmapGI" parent="." unique_id=1368512883]
 visible = false
 quality = 3
+supersampling = true
+supersampling_factor = 4.0
 generate_probes_subdiv = 3
 light_data = ExtResource("4_7vqwx")
 
-[node name="LightmapGIIndirect" type="LightmapGI" parent="."]
+[node name="LightmapGIIndirect" type="LightmapGI" parent="." unique_id=798782325]
 quality = 3
+supersampling = true
+supersampling_factor = 4.0
 generate_probes_subdiv = 3
 light_data = ExtResource("5_14bmd")
 
-[node name="Sun" type="DirectionalLight3D" parent="."]
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1218624422]
 transform = Transform3D(0.889832, -0.251497, 0.380722, 0, 0.834387, 0.551179, -0.456289, -0.490456, 0.742464, 4.47302, 6.47568, 8.72305)
 shadow_enabled = true
 shadow_bias = 0.04
@@ -90,7 +90,7 @@ directional_shadow_blend_splits = true
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 75.0
 
-[node name="GrateOmniLight" type="OmniLight3D" parent="."]
+[node name="GrateOmniLight" type="OmniLight3D" parent="." unique_id=1187184664]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9461, -1.33084, -5.52646)
 light_color = Color(1, 0.905882, 0.470588, 1)
 shadow_enabled = true
@@ -99,7 +99,7 @@ shadow_blur = 2.0
 omni_range = 10.0
 omni_attenuation = 2.0
 
-[node name="GarageOmniLight" type="OmniLight3D" parent="."]
+[node name="GarageOmniLight" type="OmniLight3D" parent="." unique_id=1549159695]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.6053, -1.96042, -13.798)
 light_color = Color(0.984314, 0.552941, 1, 1)
 light_energy = 15.0
@@ -109,7 +109,7 @@ shadow_blur = 2.0
 omni_range = 10.0
 omni_attenuation = 2.0
 
-[node name="CornerSpotLight" type="SpotLight3D" parent="."]
+[node name="CornerSpotLight" type="SpotLight3D" parent="." unique_id=1914893830]
 transform = Transform3D(0.909405, -0.0463933, 0.413316, -0.290385, -0.782269, 0.551118, 0.297756, -0.62121, -0.724872, -14.0594, -1.81824, 12.3035)
 light_color = Color(1, 0, 0, 1)
 light_energy = 14.77
@@ -117,23 +117,23 @@ spot_range = 15.0
 spot_attenuation = 2.0
 spot_angle_attenuation = 0.5
 
-[node name="GlowingBox" parent="." instance=ExtResource("3")]
+[node name="GlowingBox" parent="." unique_id=409294293 instance=ExtResource("3")]
 transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 0.25, -0.681709, -0.108265, 25.4051)
 
-[node name="Cube" parent="GlowingBox" index="0"]
+[node name="Cube" parent="GlowingBox" index="0" unique_id=1704451439]
 surface_material_override/0 = SubResource("StandardMaterial3D_1n5k1")
 
-[node name="Camera" type="Camera3D" parent="."]
+[node name="Camera" type="Camera3D" parent="." unique_id=1644179133]
 transform = Transform3D(-0.99752325, -0.0071959156, 0.069968455, -8.943681e-09, 0.99475306, 0.1023054, -0.07033751, 0.10205201, -0.9922893, 11.7976, 1.49898, 9.54247)
 script = ExtResource("6")
 
-[node name="Box" type="MeshInstance3D" parent="Camera"]
+[node name="Box" type="MeshInstance3D" parent="Camera" unique_id=900934727]
 transform = Transform3D(0.999999, -5.12227e-09, 9.68575e-08, 2.79397e-09, 0.999999, 8.9407e-08, 7.45058e-09, -1.11759e-07, 0.999999, -1.4, -0.999998, -3.99998)
 layers = 2
 gi_mode = 0
 mesh = SubResource("8")
 
-[node name="BlobShadow" type="Decal" parent="Camera/Box"]
+[node name="BlobShadow" type="Decal" parent="Camera/Box" unique_id=1584427917]
 transform = Transform3D(-0.997524, -0.00613033, -0.0700699, -0.00719589, 0.999863, 0.0149653, 0.0699686, 0.015432, -0.997431, 0.0499506, -0.507917, -0.035697)
 size = Vector3(2.5, 4, 2.5)
 texture_albedo = SubResource("GradientTexture2D_uu8pf")
@@ -142,14 +142,14 @@ upper_fade = 1.0
 lower_fade = 1.0
 cull_mask = 1048573
 
-[node name="ReflectiveSphere" type="MeshInstance3D" parent="Camera"]
+[node name="ReflectiveSphere" type="MeshInstance3D" parent="Camera" unique_id=1421367747]
 transform = Transform3D(-0.997523, -8.41886e-09, -0.0703376, -0.00719589, 0.994753, 0.102052, 0.0699685, 0.102305, -0.992289, 0.16733, -1.22931, -3.81225)
 layers = 2
 gi_mode = 0
 mesh = SubResource("2")
 surface_material_override/0 = SubResource("StandardMaterial3D_7doxp")
 
-[node name="ReflectionProbe" type="ReflectionProbe" parent="Camera/ReflectiveSphere"]
+[node name="ReflectionProbe" type="ReflectionProbe" parent="Camera/ReflectiveSphere" unique_id=306878039]
 transform = Transform3D(1, -8.38189e-09, -8.9407e-08, 5.58791e-09, 1, -5.21541e-07, 4.47035e-08, 1.11759e-07, 1, 0, 0, 0)
 max_distance = 50.0
 size = Vector3(22, 22, 22)
@@ -157,7 +157,7 @@ box_projection = true
 enable_shadows = true
 ambient_mode = 0
 
-[node name="BlobShadow" type="Decal" parent="Camera/ReflectiveSphere"]
+[node name="BlobShadow" type="Decal" parent="Camera/ReflectiveSphere" unique_id=2055636992]
 transform = Transform3D(1, -1.3766786e-14, 0, 1.3322678e-15, 1, 1.5987212e-14, 0, -2.842171e-14, 1, 0, -1, -1.9073486e-06)
 size = Vector3(2.5, 4, 2.5)
 texture_albedo = SubResource("GradientTexture2D_uu8pf")
@@ -166,7 +166,7 @@ upper_fade = 1.0
 lower_fade = 1.0
 cull_mask = 1048573
 
-[node name="GIMode" type="Label" parent="."]
+[node name="GIMode" type="Label" parent="." unique_id=552998929]
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 263.0
@@ -175,7 +175,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Global illumination: None (Fastest)"
 
-[node name="FPS" type="Label" parent="."]
+[node name="FPS" type="Label" parent="." unique_id=541458100]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -188,7 +188,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "60 FPS (16.67 mspf)"
 
-[node name="ReflectionProbeMode" type="Label" parent="."]
+[node name="ReflectionProbeMode" type="Label" parent="." unique_id=1699617064]
 offset_left = 16.0
 offset_top = 48.0
 offset_right = 148.0
@@ -197,7 +197,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Reflection probe: Disabled - Using environment, VoxelGI or SDFGI reflections (Fast)"
 
-[node name="SSILMode" type="Label" parent="."]
+[node name="SSILMode" type="Label" parent="." unique_id=235295080]
 offset_left = 16.0
 offset_top = 80.0
 offset_right = 365.0
@@ -206,7 +206,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Screen-space lighting effects: Disabled (Fast)"
 
-[node name="Help" type="Label" parent="."]
+[node name="Help" type="Label" parent="." unique_id=355601677]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0

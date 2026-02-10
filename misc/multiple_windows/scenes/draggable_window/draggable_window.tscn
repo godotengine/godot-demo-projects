@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ek1fmwy87san"]
+[gd_scene format=3 uid="uid://ek1fmwy87san"]
 
 [ext_resource type="Texture2D" uid="uid://pgdemhy0xqog" path="res://scenes/draggable_window/hand.svg" id="1_y4nm8"]
 [ext_resource type="Script" uid="uid://d1nq2ipicit18" path="res://scenes/draggable_window/draggable_region.gd" id="2_pflw3"]
@@ -10,7 +10,7 @@ size = Vector2(256, 256)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvhp1"]
 size = Vector2(128, 128)
 
-[node name="DraggableWindow" type="Window"]
+[node name="DraggableWindow" type="Window" unique_id=667268672]
 transparent_bg = true
 physics_object_picking = true
 oversampling_override = 1.0
@@ -20,21 +20,21 @@ borderless = true
 always_on_top = true
 transparent = true
 
-[node name="BG" type="Sprite2D" parent="."]
+[node name="BG" type="Sprite2D" parent="." unique_id=1585117384]
 visible = false
 texture = SubResource("PlaceholderTexture2D_ghj85")
 centered = false
 
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="Icon" type="Sprite2D" parent="." unique_id=103664661]
 position = Vector2(64, 64)
 texture = ExtResource("1_y4nm8")
 
-[node name="Area2D" type="Area2D" parent="Icon"]
+[node name="Area2D" type="Area2D" parent="Icon" unique_id=613557355]
 script = ExtResource("2_pflw3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/Area2D" unique_id=1814379680]
 shape = SubResource("RectangleShape2D_cvhp1")
 
-[node name="PassthroughGenerator" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+[node name="PassthroughGenerator" type="Node" parent="." unique_id=475175372 node_paths=PackedStringArray("sprite")]
 script = ExtResource("3_20753")
 sprite = NodePath("../Icon")

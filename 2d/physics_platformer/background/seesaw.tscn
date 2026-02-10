@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bin4djw4oa087"]
+[gd_scene format=3 uid="uid://bin4djw4oa087"]
 
 [ext_resource type="Texture2D" uid="uid://dcee0qf0cuphp" path="res://background/plank.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://d3kbycm85x1ms" path="res://background/plankpin.png" id="2"]
@@ -9,27 +9,27 @@ size = Vector2(128, 8)
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(16, 27)
 
-[node name="Seesaw" type="Node2D"]
+[node name="Seesaw" type="Node2D" unique_id=68439185]
 
-[node name="Plank" type="RigidBody2D" parent="."]
+[node name="Plank" type="RigidBody2D" parent="." unique_id=1529097142]
 mass = 5.10204
 
-[node name="Sprite2D" type="Sprite2D" parent="Plank"]
+[node name="Sprite2D" type="Sprite2D" parent="Plank" unique_id=1099129359]
 texture = ExtResource("1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Plank"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plank" unique_id=633000078]
 shape = SubResource("1")
 
-[node name="Pin" type="PinJoint2D" parent="."]
+[node name="Pin" type="PinJoint2D" parent="." unique_id=1272793055]
 node_a = NodePath("../Plank")
 node_b = NodePath("../Pillar")
 
-[node name="Pillar" type="StaticBody2D" parent="."]
+[node name="Pillar" type="StaticBody2D" parent="." unique_id=1377122313]
 
-[node name="Sprite2D" type="Sprite2D" parent="Pillar"]
+[node name="Sprite2D" type="Sprite2D" parent="Pillar" unique_id=421841427]
 position = Vector2(0, 10)
 texture = ExtResource("2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pillar"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pillar" unique_id=415788026]
 position = Vector2(0, 12.5)
 shape = SubResource("2")

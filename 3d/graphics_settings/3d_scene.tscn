@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cgk7gj7nxwv5y"]
+[gd_scene format=3 uid="uid://cgk7gj7nxwv5y"]
 
 [ext_resource type="PackedScene" uid="uid://dwg6j61bfy2hc" path="res://polyhaven/dutch_ship_medium_1k.gltf" id="1_1kw2t"]
 
@@ -92,9 +92,9 @@ albedo_color = Color(0.254902, 0.254902, 0.254902, 1)
 emission_enabled = true
 emission = Color(1, 0.815686, 0, 1)
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=2044403110]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1671677736]
 transform = Transform3D(-0.248173, 0.823973, -0.509391, 0.0500525, 0.536046, 0.842704, 0.967422, 0.18364, -0.174274, 0, 0, 0)
 shadow_enabled = true
 shadow_bias = 0.05
@@ -102,70 +102,68 @@ directional_shadow_mode = 0
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 17.0
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=421079486]
 transform = Transform3D(0.863149, -0.214154, 0.457287, 0, 0.905611, 0.42411, -0.504949, -0.36607, 0.781677, 2.50865, 3.97686, 8.84854)
 fov = 50.0
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1656557684]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02753, -1.19209e-07, 0.710748)
 shadow_enabled = true
 shadow_bias = 0.04
 
-[node name="WhiteBox" type="MeshInstance3D" parent="."]
+[node name="WhiteBox" type="MeshInstance3D" parent="." unique_id=412332089]
 mesh = SubResource("BoxMesh_vm88u")
 
-[node name="WhiteBoxMoving" type="MeshInstance3D" parent="."]
+[node name="WhiteBoxMoving" type="MeshInstance3D" parent="." unique_id=862229940]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.849952, -0.1, 3.0726)
 gi_mode = 0
 mesh = SubResource("BoxMesh_vm88u")
 
-[node name="GreenEmissiveBox" type="MeshInstance3D" parent="."]
+[node name="GreenEmissiveBox" type="MeshInstance3D" parent="." unique_id=289076564]
 transform = Transform3D(1.1804, 0, -0.190789, 0, 1.64407, 0, 0.339276, 0, 0.663786, 1.43118, 0, 0.586329)
 mesh = SubResource("BoxMesh_07f2q")
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=130669030]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.60722, 0)
 mesh = SubResource("QuadMesh_2uocv")
 
-[node name="PurpleBox" type="MeshInstance3D" parent="."]
+[node name="PurpleBox" type="MeshInstance3D" parent="." unique_id=411271189]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.365823, -0.778727, 0.564842)
 mesh = SubResource("BoxMesh_twdwb")
 surface_material_override/0 = SubResource("StandardMaterial3D_brk07")
 
-[node name="Mirror" type="MeshInstance3D" parent="."]
+[node name="Mirror" type="MeshInstance3D" parent="." unique_id=544030297]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 mesh = SubResource("BoxMesh_3im6l")
 surface_material_override/0 = SubResource("StandardMaterial3D_q4uaa")
 
-[node name="ReflectiveSphere" type="MeshInstance3D" parent="."]
+[node name="ReflectiveSphere" type="MeshInstance3D" parent="." unique_id=1047390919]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4368, 0, 0)
 mesh = SubResource("SphereMesh_38g8l")
 surface_material_override/0 = SubResource("StandardMaterial3D_aho7u")
 
-[node name="FogVolume" type="FogVolume" parent="."]
+[node name="FogVolume" type="FogVolume" parent="." unique_id=1496107193]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342018, -1.18089, 0.661332)
 material = SubResource("FogMaterial_tldur")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_m14lt")
-}
-autoplay = "move"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1672967907]
+libraries/ = SubResource("AnimationLibrary_m14lt")
+autoplay = &"move"
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=2114436099]
 transform = Transform3D(0.0245702, 0.999698, -0.000796034, 0, 0.000796274, 1, 0.999698, -0.0245702, 1.95646e-05, -0.864742, 2.11809, 3.11561)
 light_color = Color(1, 0.815686, 0, 1)
 light_energy = 5.0
 shadow_enabled = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SpotLight3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SpotLight3D" unique_id=1171185647]
 transform = Transform3D(1, -1.81899e-12, 0, 0, -4.37685e-08, -1, 1.81899e-12, 1, -4.3744e-08, 0, 0, 0)
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_7m76j")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_n7odx")
 
-[node name="Ships" type="Node3D" parent="."]
+[node name="Ships" type="Node3D" parent="." unique_id=1223428159]
 
-[node name="dutch_ship_medium_1k" parent="Ships" instance=ExtResource("1_1kw2t")]
+[node name="dutch_ship_medium_1k" parent="Ships" unique_id=170045198 instance=ExtResource("1_1kw2t")]
 transform = Transform3D(-0.173205, 0, -0.1, 0, 0.2, 0, 0.1, 0, -0.173205, 2.28974, 0, 4.55752)

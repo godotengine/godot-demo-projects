@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bmqseu73mjad"]
+[gd_scene format=3 uid="uid://bmqseu73mjad"]
 
 [ext_resource type="FontFile" uid="uid://d1mmlriolfrl8" path="res://fonts/Xolonium-Regular.ttf" id="3_ds7iv"]
 [ext_resource type="FontFile" uid="uid://c7poe4tx633lt" path="res://fonts/Xolonium-Regular-MSDF.ttf" id="4_omdth"]
@@ -142,22 +142,20 @@ shading_mode = 0
 albedo_texture = ExtResource("7_w00di")
 texture_filter = 0
 
-[node name="LabelsAndTexts" type="WorldEnvironment"]
+[node name="LabelsAndTexts" type="WorldEnvironment" unique_id=1223717753]
 environment = SubResource("11")
 script = ExtResource("18")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_ecfcr")
-}
-autoplay = "move"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1743212390]
+libraries/ = SubResource("AnimationLibrary_ecfcr")
+autoplay = &"move"
 
-[node name="Plane" type="MeshInstance3D" parent="."]
+[node name="Plane" type="MeshInstance3D" parent="." unique_id=140393094]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22)
 layers = 2
 mesh = SubResource("14")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=700285158]
 transform = Transform3D(0.909487, -0.23874, 0.340349, 0, 0.818672, 0.574262, -0.415733, -0.522284, 0.744571, 3.9506, 3.39961, 3.54442)
 shadow_enabled = true
 shadow_bias = 0.04
@@ -166,19 +164,19 @@ directional_shadow_mode = 0
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 24.0
 
-[node name="CameraHolder" type="Node3D" parent="."]
+[node name="CameraHolder" type="Node3D" parent="." unique_id=1914683884]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.125, 0)
 
-[node name="RotationX" type="Node3D" parent="CameraHolder"]
+[node name="RotationX" type="Node3D" parent="CameraHolder" unique_id=518506265]
 
-[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX"]
+[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX" unique_id=2057867895]
 fov = 70.0
 
-[node name="Testers" type="Node3D" parent="."]
+[node name="Testers" type="Node3D" parent="." unique_id=351721399]
 
-[node name="BasicLabel3D" type="Node3D" parent="Testers"]
+[node name="BasicLabel3D" type="Node3D" parent="Testers" unique_id=617469669]
 
-[node name="Label3D" type="Label3D" parent="Testers/BasicLabel3D"]
+[node name="Label3D" type="Label3D" parent="Testers/BasicLabel3D" unique_id=302814643]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.6, 0)
 texture_filter = 5
 outline_modulate = Color(0.270588, 0.270588, 0.270588, 1)
@@ -189,14 +187,14 @@ outline_size = 3
 autowrap_mode = 2
 width = 460.0
 
-[node name="Wall" type="MeshInstance3D" parent="Testers/BasicLabel3D"]
+[node name="Wall" type="MeshInstance3D" parent="Testers/BasicLabel3D" unique_id=1000428253]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0654575, 0.5, 0)
 mesh = SubResource("BoxMesh_770hc")
 
-[node name="TwoSidedLabel3D" type="Node3D" parent="Testers"]
+[node name="TwoSidedLabel3D" type="Node3D" parent="Testers" unique_id=670722397]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 
-[node name="Front" type="Label3D" parent="Testers/TwoSidedLabel3D"]
+[node name="Front" type="Label3D" parent="Testers/TwoSidedLabel3D" unique_id=1155814479]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.7, 0)
 double_sided = false
 texture_filter = 5
@@ -206,7 +204,7 @@ font_size = 48
 outline_size = 3
 vertical_alignment = 0
 
-[node name="Back" type="Label3D" parent="Testers/TwoSidedLabel3D"]
+[node name="Back" type="Label3D" parent="Testers/TwoSidedLabel3D" unique_id=344419316]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0.7, 0)
 double_sided = false
 texture_filter = 5
@@ -217,10 +215,10 @@ font_size = 48
 outline_size = 3
 vertical_alignment = 0
 
-[node name="ShadedLabel3D" type="Node3D" parent="Testers"]
+[node name="ShadedLabel3D" type="Node3D" parent="Testers" unique_id=996211615]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 
-[node name="AlphaCutDisabled" type="Label3D" parent="Testers/ShadedLabel3D"]
+[node name="AlphaCutDisabled" type="Label3D" parent="Testers/ShadedLabel3D" unique_id=2085679396]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.3, 0)
 shaded = true
 texture_filter = 5
@@ -232,7 +230,7 @@ font_size = 48
 outline_size = 3
 line_spacing = -6.0
 
-[node name="AlphaCutDiscard" type="Label3D" parent="Testers/ShadedLabel3D"]
+[node name="AlphaCutDiscard" type="Label3D" parent="Testers/ShadedLabel3D" unique_id=1161127431]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.1, 0)
 cast_shadow = 1
 shaded = true
@@ -247,7 +245,7 @@ font_size = 44
 outline_size = 3
 line_spacing = -6.0
 
-[node name="AlphaCutOpaquePrepass" type="Label3D" parent="Testers/ShadedLabel3D"]
+[node name="AlphaCutOpaquePrepass" type="Label3D" parent="Testers/ShadedLabel3D" unique_id=1163316867]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.9, 0)
 cast_shadow = 1
 shaded = true
@@ -261,17 +259,17 @@ font_size = 48
 outline_size = 3
 line_spacing = -6.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ShadedLabel3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ShadedLabel3D" unique_id=839425611]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.71175, 1.61301)
 transparency = 0.33
 mesh = SubResource("BoxMesh_juuw1")
 
-[node name="Label3DFontTypes" type="Node3D" parent="Testers"]
+[node name="Label3DFontTypes" type="Node3D" parent="Testers" unique_id=506493048]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
 
-[node name="AnimationOrigin" type="Node3D" parent="Testers/Label3DFontTypes"]
+[node name="AnimationOrigin" type="Node3D" parent="Testers/Label3DFontTypes" unique_id=814861979]
 
-[node name="Raster" type="Label3D" parent="Testers/Label3DFontTypes/AnimationOrigin"]
+[node name="Raster" type="Label3D" parent="Testers/Label3DFontTypes/AnimationOrigin" unique_id=522717185]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.4, 1)
 texture_filter = 5
 text = "Label3D
@@ -280,7 +278,7 @@ font = ExtResource("3_ds7iv")
 font_size = 40
 outline_size = 9
 
-[node name="MSDF" type="Label3D" parent="Testers/Label3DFontTypes/AnimationOrigin"]
+[node name="MSDF" type="Label3D" parent="Testers/Label3DFontTypes/AnimationOrigin" unique_id=570903619]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.4, -1)
 texture_filter = 5
 text = "Label3D
@@ -289,7 +287,7 @@ font = ExtResource("4_omdth")
 font_size = 40
 outline_size = 4
 
-[node name="RasterMipmaps" type="Label3D" parent="Testers/Label3DFontTypes/AnimationOrigin"]
+[node name="RasterMipmaps" type="Label3D" parent="Testers/Label3DFontTypes/AnimationOrigin" unique_id=1338186240]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.8, 1)
 texture_filter = 5
 text = "Label3D
@@ -299,7 +297,7 @@ font = ExtResource("6_ewmy5")
 font_size = 40
 outline_size = 9
 
-[node name="MSDFMipmaps" type="Label3D" parent="Testers/Label3DFontTypes/AnimationOrigin"]
+[node name="MSDFMipmaps" type="Label3D" parent="Testers/Label3DFontTypes/AnimationOrigin" unique_id=911091238]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.8, -1)
 texture_filter = 5
 text = "Label3D
@@ -309,10 +307,10 @@ font = ExtResource("5_syv27")
 font_size = 40
 outline_size = 4
 
-[node name="Label3DBillboardModes" type="Node3D" parent="Testers"]
+[node name="Label3DBillboardModes" type="Node3D" parent="Testers" unique_id=140265231]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
 
-[node name="Disabled" type="Label3D" parent="Testers/Label3DBillboardModes"]
+[node name="Disabled" type="Label3D" parent="Testers/Label3DBillboardModes" unique_id=131933583]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.2, 1)
 texture_filter = 5
 modulate = Color(0.996078, 1, 0.333333, 1)
@@ -320,7 +318,7 @@ text = "Disabled"
 font_size = 48
 outline_size = 3
 
-[node name="Enabled" type="Label3D" parent="Testers/Label3DBillboardModes"]
+[node name="Enabled" type="Label3D" parent="Testers/Label3DBillboardModes" unique_id=842040752]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.2, -1)
 billboard = 1
 texture_filter = 5
@@ -330,7 +328,7 @@ text = "Enabled"
 font_size = 48
 outline_size = 3
 
-[node name="YBillboard" type="Label3D" parent="Testers/Label3DBillboardModes"]
+[node name="YBillboard" type="Label3D" parent="Testers/Label3DBillboardModes" unique_id=540249593]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.7, 0)
 billboard = 2
 texture_filter = 5
@@ -340,10 +338,10 @@ text = "Y-Billboard"
 font_size = 48
 outline_size = 3
 
-[node name="Label3DDistanceFade" type="Node3D" parent="Testers"]
+[node name="Label3DDistanceFade" type="Node3D" parent="Testers" unique_id=395620290]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
 
-[node name="NoDistanceFade" type="Label3D" parent="Testers/Label3DDistanceFade"]
+[node name="NoDistanceFade" type="Label3D" parent="Testers/Label3DDistanceFade" unique_id=1495050577]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.3, 1)
 texture_filter = 5
 modulate = Color(1, 0.741176, 0.831373, 1)
@@ -352,7 +350,7 @@ Distance Fade"
 font_size = 40
 outline_size = 4
 
-[node name="DistanceFade" type="Label3D" parent="Testers/Label3DDistanceFade"]
+[node name="DistanceFade" type="Label3D" parent="Testers/Label3DDistanceFade" unique_id=2146557462]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.3, -1)
 visibility_range_end = 5.0
 visibility_range_end_margin = 2.5
@@ -364,7 +362,7 @@ Distance Fade"
 font_size = 40
 outline_size = 4
 
-[node name="NoDistanceFadeBillboard" type="Label3D" parent="Testers/Label3DDistanceFade"]
+[node name="NoDistanceFadeBillboard" type="Label3D" parent="Testers/Label3DDistanceFade" unique_id=378021577]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.1, 1)
 billboard = 1
 texture_filter = 5
@@ -375,7 +373,7 @@ Distance Fade
 font_size = 40
 outline_size = 4
 
-[node name="DistanceFadeBillboard" type="Label3D" parent="Testers/Label3DDistanceFade"]
+[node name="DistanceFadeBillboard" type="Label3D" parent="Testers/Label3DDistanceFade" unique_id=2024242184]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.1, -1)
 visibility_range_end = 5.0
 visibility_range_end_margin = 2.5
@@ -389,7 +387,7 @@ Distance Fade
 font_size = 40
 outline_size = 4
 
-[node name="DistanceFadeFixedSize" type="Label3D" parent="Testers/Label3DDistanceFade"]
+[node name="DistanceFadeFixedSize" type="Label3D" parent="Testers/Label3DDistanceFade" unique_id=1171319055]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.000778437, 0.50287, -1.90735e-05)
 visibility_range_end = 5.0
 visibility_range_end_margin = 2.5
@@ -405,10 +403,10 @@ Distance Fade
 font_size = 40
 outline_size = 4
 
-[node name="Label3DDepthTest" type="Node3D" parent="Testers"]
+[node name="Label3DDepthTest" type="Node3D" parent="Testers" unique_id=1439042359]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
 
-[node name="WithDepthTest" type="Label3D" parent="Testers/Label3DDepthTest"]
+[node name="WithDepthTest" type="Label3D" parent="Testers/Label3DDepthTest" unique_id=1314511732]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, 1)
 texture_filter = 5
 modulate = Color(0.623529, 0.784314, 1, 1)
@@ -416,7 +414,7 @@ text = "With Depth Test"
 font_size = 40
 outline_size = 4
 
-[node name="NoDepthTest" type="Label3D" parent="Testers/Label3DDepthTest"]
+[node name="NoDepthTest" type="Label3D" parent="Testers/Label3DDepthTest" unique_id=1285361578]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, -1)
 no_depth_test = true
 texture_filter = 5
@@ -425,7 +423,7 @@ text = "No Depth Test"
 font_size = 40
 outline_size = 4
 
-[node name="NoDepthTestXray" type="Label3D" parent="Testers/Label3DDepthTest"]
+[node name="NoDepthTestXray" type="Label3D" parent="Testers/Label3DDepthTest" unique_id=2018564048]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, -1)
 no_depth_test = true
 texture_filter = 5
@@ -435,7 +433,7 @@ text = "No Depth Test
 (X-Ray with second Label3D)"
 outline_size = 4
 
-[node name="DepthTestXray" type="Label3D" parent="Testers/Label3DDepthTest"]
+[node name="DepthTestXray" type="Label3D" parent="Testers/Label3DDepthTest" unique_id=2005450975]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, -1)
 texture_filter = 5
 modulate = Color(1, 0.607843, 0.290196, 1)
@@ -443,14 +441,14 @@ text = "No Depth Test
 (X-Ray with second Label3D)"
 outline_size = 4
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/Label3DDepthTest"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/Label3DDepthTest" unique_id=1481771381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0.5, 0)
 mesh = SubResource("SphereMesh_wsjfy")
 
-[node name="Label3DIcons" type="Node3D" parent="Testers"]
+[node name="Label3DIcons" type="Node3D" parent="Testers" unique_id=1720686228]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -28)
 
-[node name="Monochrome" type="Label3D" parent="Testers/Label3DIcons"]
+[node name="Monochrome" type="Label3D" parent="Testers/Label3DIcons" unique_id=449705007]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0.4, 1)
 cast_shadow = 1
 billboard = 1
@@ -462,7 +460,7 @@ font = ExtResource("7_wvpht")
 font_size = 128
 outline_size = 6
 
-[node name="Monochrome2" type="Label3D" parent="Testers/Label3DIcons"]
+[node name="Monochrome2" type="Label3D" parent="Testers/Label3DIcons" unique_id=1550373587]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0.4, 0)
 cast_shadow = 1
 billboard = 1
@@ -474,7 +472,7 @@ font = ExtResource("7_wvpht")
 font_size = 128
 outline_size = 6
 
-[node name="Monochrome3" type="Label3D" parent="Testers/Label3DIcons"]
+[node name="Monochrome3" type="Label3D" parent="Testers/Label3DIcons" unique_id=277111938]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0.4, -1)
 cast_shadow = 1
 billboard = 1
@@ -486,7 +484,7 @@ font = ExtResource("7_wvpht")
 font_size = 128
 outline_size = 6
 
-[node name="ColorBlue" type="Label3D" parent="Testers/Label3DIcons"]
+[node name="ColorBlue" type="Label3D" parent="Testers/Label3DIcons" unique_id=1092801560]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 1.3, 0)
 cast_shadow = 1
 double_sided = false
@@ -497,7 +495,7 @@ text = ""
 font = ExtResource("7_wvpht")
 font_size = 96
 
-[node name="ColorWhite" type="Label3D" parent="Testers/Label3DIcons"]
+[node name="ColorWhite" type="Label3D" parent="Testers/Label3DIcons" unique_id=1300199987]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.001, 1.3, 0)
 cast_shadow = 1
 double_sided = false
@@ -507,7 +505,7 @@ text = ""
 font = ExtResource("7_wvpht")
 font_size = 96
 
-[node name="ColorGray" type="Label3D" parent="Testers/Label3DIcons"]
+[node name="ColorGray" type="Label3D" parent="Testers/Label3DIcons" unique_id=1055155173]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.002, 1.3, 0)
 cast_shadow = 1
 double_sided = false
@@ -518,11 +516,11 @@ text = ""
 font = ExtResource("7_wvpht")
 font_size = 96
 
-[node name="Label3DHealthBar" type="Node3D" parent="Testers"]
+[node name="Label3DHealthBar" type="Node3D" parent="Testers" unique_id=1990778342]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32)
 script = ExtResource("8_rvw0p")
 
-[node name="Name" type="Label3D" parent="Testers/Label3DHealthBar"]
+[node name="Name" type="Label3D" parent="Testers/Label3DHealthBar" unique_id=1764169520]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.4, 0)
 extra_cull_margin = 1.0
 offset = Vector2(-160, 0)
@@ -534,7 +532,7 @@ outline_size = 4
 horizontal_alignment = 0
 width = 230.0
 
-[node name="Health" type="Label3D" parent="Testers/Label3DHealthBar"]
+[node name="Health" type="Label3D" parent="Testers/Label3DHealthBar" unique_id=92293969]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.4, 0)
 extra_cull_margin = 1.0
 offset = Vector2(120, 0)
@@ -546,7 +544,7 @@ text = "89%"
 font = ExtResource("5_syv27")
 outline_size = 4
 
-[node name="HealthBarForeground" type="Label3D" parent="Testers/Label3DHealthBar"]
+[node name="HealthBarForeground" type="Label3D" parent="Testers/Label3DHealthBar" unique_id=771690116]
 transform = Transform3D(-1.74846e-07, 0, 1, 0, 1, 0, -4, 0, -4.37114e-08, 0, 0.4, 0)
 extra_cull_margin = 1.0
 offset = Vector2(-45, -35)
@@ -560,7 +558,7 @@ font_size = 16
 outline_size = 0
 horizontal_alignment = 0
 
-[node name="HealthBarBackground" type="Label3D" parent="Testers/Label3DHealthBar"]
+[node name="HealthBarBackground" type="Label3D" parent="Testers/Label3DHealthBar" unique_id=1297164408]
 transform = Transform3D(-1.69382e-07, 0, 1, 0, 1, 0, -3.875, 0, -4.37114e-08, 0, 0.4, 0)
 extra_cull_margin = 1.0
 offset = Vector2(0, -35)
@@ -575,7 +573,7 @@ font = SubResource("FontVariation_hue2h")
 font_size = 16
 outline_size = 6
 
-[node name="Name2" type="Label" parent="Testers/Label3DHealthBar"]
+[node name="Name2" type="Label" parent="Testers/Label3DHealthBar" unique_id=2033655730]
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 193.0
@@ -583,7 +581,7 @@ offset_bottom = 47.0
 text = "Name"
 vertical_alignment = 1
 
-[node name="LineEdit" type="LineEdit" parent="Testers/Label3DHealthBar"]
+[node name="LineEdit" type="LineEdit" parent="Testers/Label3DHealthBar" unique_id=1752775635]
 offset_left = 88.0
 offset_top = 16.0
 offset_right = 236.0
@@ -591,61 +589,61 @@ offset_bottom = 47.0
 text = "Example"
 caret_blink = true
 
-[node name="TextMesh" type="Node3D" parent="Testers"]
+[node name="TextMesh" type="Node3D" parent="Testers" unique_id=954047208]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -36)
 
-[node name="IconAudio" type="MeshInstance3D" parent="Testers/TextMesh"]
+[node name="IconAudio" type="MeshInstance3D" parent="Testers/TextMesh" unique_id=366524661]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.4, 0.5)
 mesh = SubResource("TextMesh_xlu0q")
 surface_material_override/0 = SubResource("StandardMaterial3D_ri5nw")
 
-[node name="IconSuccess" type="MeshInstance3D" parent="Testers/TextMesh"]
+[node name="IconSuccess" type="MeshInstance3D" parent="Testers/TextMesh" unique_id=1438723179]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.4, -0.5)
 mesh = SubResource("TextMesh_u3elb")
 surface_material_override/0 = SubResource("StandardMaterial3D_ri5nw")
 
-[node name="NoDepth" type="MeshInstance3D" parent="Testers/TextMesh"]
+[node name="NoDepth" type="MeshInstance3D" parent="Testers/TextMesh" unique_id=486160430]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.9, 0)
 mesh = SubResource("TextMesh_u00sq")
 surface_material_override/0 = SubResource("StandardMaterial3D_ri5nw")
 
-[node name="Text" type="MeshInstance3D" parent="Testers/TextMesh"]
+[node name="Text" type="MeshInstance3D" parent="Testers/TextMesh" unique_id=1203751310]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, 0)
 mesh = SubResource("TextMesh_cf5wd")
 surface_material_override/0 = SubResource("StandardMaterial3D_ri5nw")
 
-[node name="LowDetail" type="MeshInstance3D" parent="Testers/TextMesh"]
+[node name="LowDetail" type="MeshInstance3D" parent="Testers/TextMesh" unique_id=427624094]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.1, 0)
 mesh = SubResource("TextMesh_0mhsg")
 surface_material_override/0 = SubResource("StandardMaterial3D_ri5nw")
 
-[node name="TextMeshEffects" type="Node3D" parent="Testers"]
+[node name="TextMeshEffects" type="Node3D" parent="Testers" unique_id=1706100816]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -40)
 
-[node name="AdditiveBlending" type="MeshInstance3D" parent="Testers/TextMeshEffects"]
+[node name="AdditiveBlending" type="MeshInstance3D" parent="Testers/TextMeshEffects" unique_id=1250679696]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.1, 0)
 mesh = SubResource("TextMesh_ddkjo")
 surface_material_override/0 = SubResource("StandardMaterial3D_iyglb")
 
-[node name="Metallic" type="MeshInstance3D" parent="Testers/TextMeshEffects"]
+[node name="Metallic" type="MeshInstance3D" parent="Testers/TextMeshEffects" unique_id=429575566]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, 0)
 mesh = SubResource("TextMesh_idsby")
 surface_material_override/0 = SubResource("StandardMaterial3D_mdg0l")
 
-[node name="CurvatureShader" type="MeshInstance3D" parent="Testers/TextMeshEffects"]
+[node name="CurvatureShader" type="MeshInstance3D" parent="Testers/TextMeshEffects" unique_id=858641463]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.9, 0)
 mesh = SubResource("TextMesh_0sjgn")
 surface_material_override/0 = SubResource("ShaderMaterial_iuh2c")
 
-[node name="TextMeshTexture" type="Node3D" parent="Testers"]
+[node name="TextMeshTexture" type="Node3D" parent="Testers" unique_id=435563810]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -44)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/TextMeshTexture"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/TextMeshTexture" unique_id=1312074903]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.1, 0)
 mesh = SubResource("TextMesh_fqc7s")
 surface_material_override/0 = SubResource("StandardMaterial3D_i3bnm")
 
-[node name="TestName" type="Label" parent="."]
+[node name="TestName" type="Label" parent="." unique_id=1824621049]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -662,7 +660,7 @@ theme_override_constants/outline_size = 7
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 
-[node name="Previous" type="Button" parent="."]
+[node name="Previous" type="Button" parent="." unique_id=1777705828]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -673,7 +671,7 @@ offset_bottom = -24.0
 grow_vertical = 0
 text = "«  Previous"
 
-[node name="Next" type="Button" parent="."]
+[node name="Next" type="Button" parent="." unique_id=299460613]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://0q7gcx8h0wjg"]
+[gd_scene format=3 uid="uid://0q7gcx8h0wjg"]
 
 [ext_resource type="Script" uid="uid://cnklsegp6n0ik" path="res://paint_control.gd" id="1"]
 [ext_resource type="Script" uid="uid://dum5j5wu6quna" path="res://tools_panel.gd" id="2"]
@@ -26,7 +26,7 @@ region = Rect2(0, 16, 16, 16)
 atlas = ExtResource("3")
 region = Rect2(16, 16, 16, 16)
 
-[node name="PaintRoot" type="Control"]
+[node name="PaintRoot" type="Control" unique_id=1932738941]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,7 +34,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DrawingAreaBG" type="Panel" parent="."]
+[node name="DrawingAreaBG" type="Panel" parent="." unique_id=542940751]
 layout_mode = 0
 anchor_left = 0.342
 anchor_right = 1.0
@@ -45,7 +45,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_4ksjc")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = true
 
-[node name="PaintControl" type="Control" parent="."]
+[node name="PaintControl" type="Control" parent="." unique_id=1599245761]
 anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -55,7 +55,7 @@ script = ExtResource("1")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="ToolsPanel" type="Panel" parent="."]
+[node name="ToolsPanel" type="Panel" parent="." unique_id=25925917]
 layout_mode = 0
 offset_right = 350.0
 offset_bottom = 600.0
@@ -64,7 +64,7 @@ script = ExtResource("2")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = true
 
-[node name="LabelTools" type="Label" parent="ToolsPanel"]
+[node name="LabelTools" type="Label" parent="ToolsPanel" unique_id=1958033076]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 6.0
@@ -74,7 +74,7 @@ text = "Selected tool: Pencil"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="ButtonToolPencil" type="Button" parent="ToolsPanel"]
+[node name="ButtonToolPencil" type="Button" parent="ToolsPanel" unique_id=629429498]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 30.0
@@ -83,7 +83,7 @@ offset_bottom = 85.0
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="TextureRect" type="TextureRect" parent="ToolsPanel/ButtonToolPencil"]
+[node name="TextureRect" type="TextureRect" parent="ToolsPanel/ButtonToolPencil" unique_id=49679444]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -97,7 +97,7 @@ texture = SubResource("AtlasTexture_v0gbg")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="ButtonToolEraser" type="Button" parent="ToolsPanel"]
+[node name="ButtonToolEraser" type="Button" parent="ToolsPanel" unique_id=312548275]
 layout_mode = 0
 offset_left = 110.0
 offset_top = 30.0
@@ -106,7 +106,7 @@ offset_bottom = 85.0
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="TextureRect2" type="TextureRect" parent="ToolsPanel/ButtonToolEraser"]
+[node name="TextureRect2" type="TextureRect" parent="ToolsPanel/ButtonToolEraser" unique_id=955719162]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -120,7 +120,7 @@ texture = SubResource("AtlasTexture_j7akv")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="ButtonToolRectangle" type="Button" parent="ToolsPanel"]
+[node name="ButtonToolRectangle" type="Button" parent="ToolsPanel" unique_id=2025153232]
 layout_mode = 0
 offset_left = 180.0
 offset_top = 30.0
@@ -129,7 +129,7 @@ offset_bottom = 85.0
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="TextureRect" type="TextureRect" parent="ToolsPanel/ButtonToolRectangle"]
+[node name="TextureRect" type="TextureRect" parent="ToolsPanel/ButtonToolRectangle" unique_id=1559391430]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -143,7 +143,7 @@ texture = SubResource("AtlasTexture_63q87")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="ButtonToolCircle" type="Button" parent="ToolsPanel"]
+[node name="ButtonToolCircle" type="Button" parent="ToolsPanel" unique_id=1710375668]
 layout_mode = 0
 offset_left = 250.0
 offset_top = 30.0
@@ -152,7 +152,7 @@ offset_bottom = 85.0
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="TextureRect" type="TextureRect" parent="ToolsPanel/ButtonToolCircle"]
+[node name="TextureRect" type="TextureRect" parent="ToolsPanel/ButtonToolCircle" unique_id=1324756187]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -166,7 +166,7 @@ texture = SubResource("AtlasTexture_t52fe")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="LabelBrushColor" type="Label" parent="ToolsPanel"]
+[node name="LabelBrushColor" type="Label" parent="ToolsPanel" unique_id=695687506]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 91.0
@@ -176,7 +176,7 @@ text = "Current color"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="ColorPickerBrush" type="ColorPickerButton" parent="ToolsPanel"]
+[node name="ColorPickerBrush" type="ColorPickerButton" parent="ToolsPanel" unique_id=1301038621]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 115.0
@@ -185,13 +185,13 @@ offset_bottom = 155.0
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="BrushSettings" type="Control" parent="ToolsPanel"]
+[node name="BrushSettings" type="Control" parent="ToolsPanel" unique_id=1086556840]
 anchors_preset = 0
 offset_top = 200.0
 offset_right = 350.0
 offset_bottom = 375.0
 
-[node name="LabelBrushSize" type="Label" parent="ToolsPanel/BrushSettings"]
+[node name="LabelBrushSize" type="Label" parent="ToolsPanel/BrushSettings" unique_id=1867921880]
 layout_mode = 0
 offset_left = 20.0
 offset_top = -37.0
@@ -201,7 +201,7 @@ text = "Brush size: 32px"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="HScrollBarBrushSize" type="HScrollBar" parent="ToolsPanel/BrushSettings"]
+[node name="HScrollBarBrushSize" type="HScrollBar" parent="ToolsPanel/BrushSettings" unique_id=1818180377]
 layout_mode = 0
 offset_left = 20.0
 offset_top = -8.0
@@ -213,7 +213,7 @@ value = 32.0
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="LabelBrushShape" type="Label" parent="ToolsPanel/BrushSettings"]
+[node name="LabelBrushShape" type="Label" parent="ToolsPanel/BrushSettings" unique_id=196614440]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 29.0
@@ -223,7 +223,7 @@ text = "Brush shape: Circle"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="ButtonShapeBox" type="Button" parent="ToolsPanel/BrushSettings"]
+[node name="ButtonShapeBox" type="Button" parent="ToolsPanel/BrushSettings" unique_id=2106991057]
 layout_mode = 0
 offset_left = 100.0
 offset_top = 59.0
@@ -232,7 +232,7 @@ offset_bottom = 114.0
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="TextureRect" type="TextureRect" parent="ToolsPanel/BrushSettings/ButtonShapeBox"]
+[node name="TextureRect" type="TextureRect" parent="ToolsPanel/BrushSettings/ButtonShapeBox" unique_id=2026128724]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -246,7 +246,7 @@ texture = SubResource("AtlasTexture_63q87")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="ButtonShapeCircle" type="Button" parent="ToolsPanel/BrushSettings"]
+[node name="ButtonShapeCircle" type="Button" parent="ToolsPanel/BrushSettings" unique_id=927387723]
 layout_mode = 0
 offset_left = 190.0
 offset_top = 59.0
@@ -255,7 +255,7 @@ offset_bottom = 114.0
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="TextureRect" type="TextureRect" parent="ToolsPanel/BrushSettings/ButtonShapeCircle"]
+[node name="TextureRect" type="TextureRect" parent="ToolsPanel/BrushSettings/ButtonShapeCircle" unique_id=1730301056]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -269,7 +269,7 @@ texture = SubResource("AtlasTexture_t52fe")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="LabelBackgroundColor" type="Label" parent="ToolsPanel"]
+[node name="LabelBackgroundColor" type="Label" parent="ToolsPanel" unique_id=315489857]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 323.0
@@ -279,7 +279,7 @@ text = "Background color"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="ColorPickerBackground" type="ColorPickerButton" parent="ToolsPanel"]
+[node name="ColorPickerBackground" type="ColorPickerButton" parent="ToolsPanel" unique_id=165000675]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 351.0
@@ -290,7 +290,7 @@ edit_alpha = false
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="LabelStats" type="Label" parent="ToolsPanel"]
+[node name="LabelStats" type="Label" parent="ToolsPanel" unique_id=2037670693]
 modulate = Color(0.414062, 0.414062, 0.414062, 1)
 layout_mode = 0
 offset_left = 20.0
@@ -301,7 +301,7 @@ text = "Brush objects: 00000"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="ButtonUndo" type="Button" parent="ToolsPanel"]
+[node name="ButtonUndo" type="Button" parent="ToolsPanel" unique_id=382148486]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 415.0
@@ -311,7 +311,7 @@ text = "Undo last stroke"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="ButtonSave" type="Button" parent="ToolsPanel"]
+[node name="ButtonSave" type="Button" parent="ToolsPanel" unique_id=1228907065]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 506.0
@@ -321,7 +321,7 @@ text = "Save picture"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="ButtonClear" type="Button" parent="ToolsPanel"]
+[node name="ButtonClear" type="Button" parent="ToolsPanel" unique_id=24920518]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 550.0
@@ -331,7 +331,7 @@ text = "Clear picture"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="SaveFileDialog" type="FileDialog" parent="."]
+[node name="SaveFileDialog" type="FileDialog" parent="." unique_id=1128001449]
 size = Vector2i(800, 300)
 min_size = Vector2i(800, 300)
 access = 2

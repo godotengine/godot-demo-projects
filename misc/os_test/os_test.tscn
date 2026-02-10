@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2c0pl5bga2qv"]
+[gd_scene format=3 uid="uid://c2c0pl5bga2qv"]
 
 [ext_resource type="Script" uid="uid://btatgn7xlogjk" path="res://os_test.gd" id="1"]
 [ext_resource type="Script" uid="uid://cwpd1hb6r814m" path="res://actions.gd" id="4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dl4cr"]
 
-[node name="OSTest" type="Panel"]
+[node name="OSTest" type="Panel" unique_id=940490937]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,7 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=581763570]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,7 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 
-[node name="Features" type="RichTextLabel" parent="HBoxContainer"]
+[node name="Features" type="RichTextLabel" parent="HBoxContainer" unique_id=1857712818]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -35,109 +35,109 @@ theme_override_constants/line_separation = 6
 theme_override_styles/focus = SubResource("StyleBoxEmpty_dl4cr")
 bbcode_enabled = true
 
-[node name="Actions" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Actions" type="VBoxContainer" parent="HBoxContainer" unique_id=973305979]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("4")
 
-[node name="Label" type="Label" parent="HBoxContainer/Actions"]
+[node name="Label" type="Label" parent="HBoxContainer/Actions" unique_id=245210641]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Actions"
 horizontal_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="HBoxContainer/Actions"]
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/Actions" unique_id=295287146]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
 
-[node name="OpenShellWeb" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+[node name="OpenShellWeb" type="Button" parent="HBoxContainer/Actions/GridContainer" unique_id=520724540]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Open Shell (web)"
 
-[node name="OpenShellFolder" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+[node name="OpenShellFolder" type="Button" parent="HBoxContainer/Actions/GridContainer" unique_id=2141152915]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Open Shell (folder)"
 
-[node name="ChangeWindowTitle" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+[node name="ChangeWindowTitle" type="Button" parent="HBoxContainer/Actions/GridContainer" unique_id=403655760]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Change Window Title"
 
-[node name="ChangeWindowIcon" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+[node name="ChangeWindowIcon" type="Button" parent="HBoxContainer/Actions/GridContainer" unique_id=242922113]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Change Window Icon"
 
-[node name="MoveWindowToForeground" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+[node name="MoveWindowToForeground" type="Button" parent="HBoxContainer/Actions/GridContainer" unique_id=1713141486]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Move Window to Foreground"
 
-[node name="RequestAttention" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+[node name="RequestAttention" type="Button" parent="HBoxContainer/Actions/GridContainer" unique_id=1747379615]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Request Attention"
 
-[node name="VibrateDeviceShort" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+[node name="VibrateDeviceShort" type="Button" parent="HBoxContainer/Actions/GridContainer" unique_id=1223519416]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Vibrate Device (200 ms)"
 
-[node name="VibrateDeviceLong" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+[node name="VibrateDeviceLong" type="Button" parent="HBoxContainer/Actions/GridContainer" unique_id=2140074782]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Vibrate Device (1000 ms)"
 
-[node name="AddGlobalMenuItems" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+[node name="AddGlobalMenuItems" type="Button" parent="HBoxContainer/Actions/GridContainer" unique_id=1226696966]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Add Global Menu Items"
 
-[node name="RemoveGlobalMenuItem" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+[node name="RemoveGlobalMenuItem" type="Button" parent="HBoxContainer/Actions/GridContainer" unique_id=2003332824]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Remove Global Menu Item"
 
-[node name="GetClipboard" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+[node name="GetClipboard" type="Button" parent="HBoxContainer/Actions/GridContainer" unique_id=1125046180]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Get Clipboard Contents"
 
-[node name="SetClipboard" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+[node name="SetClipboard" type="Button" parent="HBoxContainer/Actions/GridContainer" unique_id=468430197]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Set Clipboard Contents"
 
-[node name="DisplayAlert" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+[node name="DisplayAlert" type="Button" parent="HBoxContainer/Actions/GridContainer" unique_id=920180215]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Display Alert"
 
-[node name="KillCurrentProcess" type="Button" parent="HBoxContainer/Actions/GridContainer"]
+[node name="KillCurrentProcess" type="Button" parent="HBoxContainer/Actions/GridContainer" unique_id=1322754274]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Kill Current Process"
 
-[node name="CSharpTest" type="Node" parent="."]
+[node name="CSharpTest" type="Node" parent="." unique_id=321606031]
 
 [connection signal="pressed" from="HBoxContainer/Actions/GridContainer/OpenShellWeb" to="HBoxContainer/Actions" method="_on_open_shell_web_pressed"]
 [connection signal="pressed" from="HBoxContainer/Actions/GridContainer/OpenShellFolder" to="HBoxContainer/Actions" method="_on_open_shell_folder_pressed"]

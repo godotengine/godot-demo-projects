@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://3kr4d8o2t0f3"]
+[gd_scene format=3 uid="uid://3kr4d8o2t0f3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ppyta"]
 friction = 0.75
@@ -26,13 +26,13 @@ size = Vector3(0.25, 0.25, 0.25)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ppyta"]
 size = Vector3(0.25, 0.25, 0.25)
 
-[node name="RigidBoxHeavy" type="RigidBody3D"]
+[node name="RigidBoxHeavy" type="RigidBody3D" unique_id=1447152582]
 collision_mask = 3
 mass = 1000.0
 physics_material_override = SubResource("PhysicsMaterial_ppyta")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1262627613]
 mesh = SubResource("BoxMesh_ykrsh")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1737885789]
 shape = SubResource("BoxShape3D_ppyta")

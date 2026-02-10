@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dv2yxsk2pn2j"]
+[gd_scene format=3 uid="uid://dv2yxsk2pn2j"]
 
 [ext_resource type="Script" uid="uid://cgqtbj15ccooo" path="res://scenes/main/main.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://bulc5hfbdv74n" path="res://game_state/conductor.gd" id="2_1bvp3"]
@@ -9,39 +9,39 @@
 [ext_resource type="Script" uid="uid://ckyphmlthwp78" path="res://game_state/metronome.gd" id="7_hujxm"]
 [ext_resource type="AudioStream" uid="uid://dq5yga0ylyuhh" path="res://music/Perc_MetronomeQuartz_hi.wav" id="8_yyfjg"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=1552747287]
 script = ExtResource("1_0xm2m")
 
-[node name="PauseHandler" type="Node" parent="."]
+[node name="PauseHandler" type="Node" parent="." unique_id=52225631]
 process_mode = 3
 script = ExtResource("2_7mycd")
 
-[node name="Conductor" type="Node" parent="." node_paths=PackedStringArray("player")]
+[node name="Conductor" type="Node" parent="." unique_id=630216901 node_paths=PackedStringArray("player")]
 process_mode = 3
 script = ExtResource("2_1bvp3")
 player = NodePath("../Player")
 bpm = 116.052
 first_beat_offset_ms = 8283
 
-[node name="Player" type="AudioStreamPlayer" parent="."]
+[node name="Player" type="AudioStreamPlayer" parent="." unique_id=83078979]
 stream = ExtResource("2_h2yge")
 volume_db = -12.0
 
-[node name="Notes" type="Node2D" parent="." node_paths=PackedStringArray("conductor")]
+[node name="Notes" type="Node2D" parent="." unique_id=555600113 node_paths=PackedStringArray("conductor")]
 position = Vector2(640, 594)
 script = ExtResource("4_lquwl")
 conductor = NodePath("../Conductor")
 
-[node name="Guide" parent="." instance=ExtResource("6_ow5a4")]
+[node name="Guide" parent="." unique_id=1230145443 instance=ExtResource("6_ow5a4")]
 position = Vector2(640, 594)
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1641181851]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 
-[node name="TutorialLabel" type="Label" parent="Control"]
+[node name="TutorialLabel" type="Label" parent="Control" unique_id=2046608933]
 layout_mode = 1
 offset_left = 16.0
 offset_top = 16.0
@@ -51,63 +51,63 @@ text = "Space to hit notes
 Esc or P to pause
 R to restart"
 
-[node name="SettingsVBox" type="VBoxContainer" parent="Control"]
+[node name="SettingsVBox" type="VBoxContainer" parent="Control" unique_id=1091856933]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 157.0
 offset_right = 367.0
 offset_bottom = 398.0
 
-[node name="UseFilteredCheckBox" type="CheckBox" parent="Control/SettingsVBox"]
+[node name="UseFilteredCheckBox" type="CheckBox" parent="Control/SettingsVBox" unique_id=161184992]
 layout_mode = 2
 focus_mode = 0
 button_pressed = true
 text = "Enable smoothing filter on playback position"
 
-[node name="Control" type="Control" parent="Control/SettingsVBox"]
+[node name="Control" type="Control" parent="Control/SettingsVBox" unique_id=1339950176]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 
-[node name="MetronomeCheckBox" type="CheckBox" parent="Control/SettingsVBox"]
+[node name="MetronomeCheckBox" type="CheckBox" parent="Control/SettingsVBox" unique_id=1933801877]
 layout_mode = 2
 focus_mode = 0
 text = "Enable metronome"
 
-[node name="InputLatencyHBox" type="HBoxContainer" parent="Control/SettingsVBox"]
+[node name="InputLatencyHBox" type="HBoxContainer" parent="Control/SettingsVBox" unique_id=18669202]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Label" type="Label" parent="Control/SettingsVBox/InputLatencyHBox"]
+[node name="Label" type="Label" parent="Control/SettingsVBox/InputLatencyHBox" unique_id=1963094043]
 layout_mode = 2
 text = "Input Latency (ms):"
 
-[node name="SpinBox" type="SpinBox" parent="Control/SettingsVBox/InputLatencyHBox"]
+[node name="SpinBox" type="SpinBox" parent="Control/SettingsVBox/InputLatencyHBox" unique_id=462947815]
 layout_mode = 2
 min_value = -100.0
 max_value = 1000.0
 value = 20.0
 rounded = true
 
-[node name="LatencyInstructionsLabel" type="Label" parent="Control/SettingsVBox"]
+[node name="LatencyInstructionsLabel" type="Label" parent="Control/SettingsVBox" unique_id=1914040754]
 layout_mode = 2
 text = "(Increase this if you are hitting notes too late)"
 
-[node name="Control2" type="Control" parent="Control/SettingsVBox"]
+[node name="Control2" type="Control" parent="Control/SettingsVBox" unique_id=487476885]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 
-[node name="ScrollSpeedInstructionsLabel" type="Label" parent="Control/SettingsVBox"]
+[node name="ScrollSpeedInstructionsLabel" type="Label" parent="Control/SettingsVBox" unique_id=575341510]
 layout_mode = 2
 text = "Scroll Speed:"
 
-[node name="ScrollSpeedHBox" type="HBoxContainer" parent="Control/SettingsVBox"]
+[node name="ScrollSpeedHBox" type="HBoxContainer" parent="Control/SettingsVBox" unique_id=1667676722]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="CenterContainer" type="CenterContainer" parent="Control/SettingsVBox/ScrollSpeedHBox"]
+[node name="CenterContainer" type="CenterContainer" parent="Control/SettingsVBox/ScrollSpeedHBox" unique_id=930760841]
 layout_mode = 2
 
-[node name="HSlider" type="HSlider" parent="Control/SettingsVBox/ScrollSpeedHBox/CenterContainer"]
+[node name="HSlider" type="HSlider" parent="Control/SettingsVBox/ScrollSpeedHBox/CenterContainer" unique_id=42610830]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 focus_mode = 0
@@ -118,50 +118,50 @@ value = 400.0
 tick_count = 17
 ticks_on_borders = true
 
-[node name="Label" type="Label" parent="Control/SettingsVBox/ScrollSpeedHBox"]
+[node name="Label" type="Label" parent="Control/SettingsVBox/ScrollSpeedHBox" unique_id=626957345]
 layout_mode = 2
 text = "400"
 
-[node name="ShowOffsetCheckBox" type="CheckBox" parent="Control/SettingsVBox"]
+[node name="ShowOffsetCheckBox" type="CheckBox" parent="Control/SettingsVBox" unique_id=1815901882]
 layout_mode = 2
 focus_mode = 0
 text = "Show offset on judgment"
 
-[node name="StatsVBox" type="VBoxContainer" parent="Control"]
+[node name="StatsVBox" type="VBoxContainer" parent="Control" unique_id=525050292]
 layout_mode = 0
 offset_left = 900.0
 offset_top = 361.0
 offset_right = 1066.0
 offset_bottom = 465.0
 
-[node name="PerfectLabel" type="Label" parent="Control/StatsVBox"]
+[node name="PerfectLabel" type="Label" parent="Control/StatsVBox" unique_id=1605164126]
 layout_mode = 2
 text = "Perfect: 0"
 
-[node name="GoodLabel" type="Label" parent="Control/StatsVBox"]
+[node name="GoodLabel" type="Label" parent="Control/StatsVBox" unique_id=1450539735]
 layout_mode = 2
 text = "Good: 0"
 
-[node name="MissLabel" type="Label" parent="Control/StatsVBox"]
+[node name="MissLabel" type="Label" parent="Control/StatsVBox" unique_id=606983864]
 layout_mode = 2
 text = "Miss: 0"
 
-[node name="HitErrorLabel" type="Label" parent="Control/StatsVBox"]
+[node name="HitErrorLabel" type="Label" parent="Control/StatsVBox" unique_id=1274361653]
 layout_mode = 2
 text = "Avg Hit Offset: 0.0 ms"
 
-[node name="ChartVBox" type="VBoxContainer" parent="Control"]
+[node name="ChartVBox" type="VBoxContainer" parent="Control" unique_id=1345356978]
 layout_mode = 0
 offset_left = 900.0
 offset_top = 60.0
 offset_right = 1066.0
 offset_bottom = 118.0
 
-[node name="Label" type="Label" parent="Control/ChartVBox"]
+[node name="Label" type="Label" parent="Control/ChartVBox" unique_id=938163595]
 layout_mode = 2
 text = "Chart:"
 
-[node name="OptionButton" type="OptionButton" parent="Control/ChartVBox"]
+[node name="OptionButton" type="OptionButton" parent="Control/ChartVBox" unique_id=819068877]
 layout_mode = 2
 focus_mode = 0
 selected = 0
@@ -172,7 +172,7 @@ popup/item_0/id = 1
 popup/item_1/text = "Sync Test"
 popup/item_1/id = 0
 
-[node name="SongCompleteLabel" type="Label" parent="Control"]
+[node name="SongCompleteLabel" type="Label" parent="Control" unique_id=184715840]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -193,7 +193,7 @@ Press R to play again"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PauseLabel" type="Label" parent="Control"]
+[node name="PauseLabel" type="Label" parent="Control" unique_id=477248466]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -212,7 +212,7 @@ text = "Paused"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="JudgmentHBox" type="HBoxContainer" parent="Control"]
+[node name="JudgmentHBox" type="HBoxContainer" parent="Control" unique_id=1514221599]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -227,51 +227,48 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 200
 
-[node name="LJudgmentLabel" type="Label" parent="Control/JudgmentHBox"]
+[node name="LJudgmentLabel" type="Label" parent="Control/JudgmentHBox" unique_id=892439854]
 layout_mode = 2
 text = "Perfect!!"
 horizontal_alignment = 1
 
-[node name="RJudgmentLabel" type="Label" parent="Control/JudgmentHBox"]
+[node name="RJudgmentLabel" type="Label" parent="Control/JudgmentHBox" unique_id=502299966]
 layout_mode = 2
 text = "Perfect!!"
 horizontal_alignment = 1
 
-[node name="ErrorGraphVBox" type="VBoxContainer" parent="Control"]
+[node name="ErrorGraphVBox" type="VBoxContainer" parent="Control" unique_id=1512138820]
 layout_mode = 1
 offset_left = 900.0
 offset_top = 518.0
 offset_right = 1250.0
 offset_bottom = 665.0
 
-[node name="Label" type="Label" parent="Control/ErrorGraphVBox"]
+[node name="Label" type="Label" parent="Control/ErrorGraphVBox" unique_id=692058729]
 layout_mode = 2
 text = "Error Graph:"
 
-[node name="CenterContainer" type="CenterContainer" parent="Control/ErrorGraphVBox"]
+[node name="CenterContainer" type="CenterContainer" parent="Control/ErrorGraphVBox" unique_id=1505383910]
 layout_mode = 2
 
-[node name="GraphBackground" type="Panel" parent="Control/ErrorGraphVBox/CenterContainer"]
+[node name="GraphBackground" type="Panel" parent="Control/ErrorGraphVBox/CenterContainer" unique_id=1602903949]
 custom_minimum_size = Vector2(350, 120)
 layout_mode = 2
 
-[node name="TimeGraph" type="Control" parent="Control/ErrorGraphVBox/CenterContainer"]
+[node name="TimeGraph" type="Control" parent="Control/ErrorGraphVBox/CenterContainer" unique_id=1584982559]
 custom_minimum_size = Vector2(350, 120)
 layout_mode = 2
 
-[node name="JudgmentsGraph" type="Control" parent="Control/ErrorGraphVBox/CenterContainer"]
+[node name="JudgmentsGraph" type="Control" parent="Control/ErrorGraphVBox/CenterContainer" unique_id=351169663]
 custom_minimum_size = Vector2(350, 120)
 layout_mode = 2
 
-[node name="Metronome" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("conductor")]
+[node name="Metronome" type="AudioStreamPlayer" parent="." unique_id=1993530119 node_paths=PackedStringArray("conductor")]
 stream = ExtResource("8_yyfjg")
 volume_db = 2.0
 script = ExtResource("7_hujxm")
 conductor = NodePath("../Conductor")
 
-[connection signal="note_hit" from="Notes" to="." method="_on_note_hit"]
-[connection signal="play_stats_updated" from="Notes" to="." method="_on_play_stats_updated"]
-[connection signal="song_finished" from="Notes" to="." method="_on_song_finished"]
 [connection signal="toggled" from="Control/SettingsVBox/UseFilteredCheckBox" to="." method="_on_use_filtered_check_box_toggled"]
 [connection signal="toggled" from="Control/SettingsVBox/MetronomeCheckBox" to="." method="_on_metronome_check_box_toggled"]
 [connection signal="value_changed" from="Control/SettingsVBox/InputLatencyHBox/SpinBox" to="." method="_on_input_latency_spin_box_value_changed"]

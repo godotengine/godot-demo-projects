@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bskv5lihd8t7j"]
+[gd_scene format=3 uid="uid://bskv5lihd8t7j"]
 
 [ext_resource type="PackedScene" uid="uid://bjwdpy5q8aknh" path="res://observer/observer.tscn" id="1"]
 [ext_resource type="Script" uid="uid://va2h4t5lvqnb" path="res://control.gd" id="2"]
@@ -28,18 +28,18 @@ size = Vector3(5, 5, 5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3qo5i"]
 
-[node name="WindowManagement" type="Node3D"]
+[node name="WindowManagement" type="Node3D" unique_id=675719626]
 
-[node name="Observer" parent="." instance=ExtResource("1")]
+[node name="Observer" parent="." unique_id=544067251 instance=ExtResource("1")]
 transform = Transform3D(0.910685, 0, -0.4131, 0, 1, 0, 0.4131, 0, 0.910685, -4.81287, -0.152566, 9.90641)
 
-[node name="TestCube" type="MeshInstance3D" parent="."]
+[node name="TestCube" type="MeshInstance3D" parent="." unique_id=1023739242]
 mesh = SubResource("2")
 
-[node name="TestCube2" type="MeshInstance3D" parent="."]
+[node name="TestCube2" type="MeshInstance3D" parent="." unique_id=1575414426]
 mesh = SubResource("BoxMesh_3qo5i")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=558352104]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,7 +50,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource("2")
 
-[node name="Buttons" type="VBoxContainer" parent="Control"]
+[node name="Buttons" type="VBoxContainer" parent="Control" unique_id=152890337]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -63,7 +63,7 @@ theme_override_constants/separation = 5
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_Fullscreen" type="Button" parent="Control/Buttons"]
+[node name="Button_Fullscreen" type="Button" parent="Control/Buttons" unique_id=702606214]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -72,7 +72,7 @@ text = "Fullscreen"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_FixedSize" type="Button" parent="Control/Buttons"]
+[node name="Button_FixedSize" type="Button" parent="Control/Buttons" unique_id=1097814616]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -81,7 +81,7 @@ text = "Fixed Size"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_Minimized" type="Button" parent="Control/Buttons"]
+[node name="Button_Minimized" type="Button" parent="Control/Buttons" unique_id=1654791782]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -90,7 +90,7 @@ text = "Minimized"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_Maximized" type="Button" parent="Control/Buttons"]
+[node name="Button_Maximized" type="Button" parent="Control/Buttons" unique_id=1526973519]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -99,7 +99,7 @@ text = "Maximized"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_MoveTo" type="Button" parent="Control/Buttons"]
+[node name="Button_MoveTo" type="Button" parent="Control/Buttons" unique_id=966430645]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -107,7 +107,7 @@ text = "Move To"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_Resize" type="Button" parent="Control/Buttons"]
+[node name="Button_Resize" type="Button" parent="Control/Buttons" unique_id=1177065977]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -115,7 +115,7 @@ text = "Resize"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_Screen0" type="Button" parent="Control/Buttons"]
+[node name="Button_Screen0" type="Button" parent="Control/Buttons" unique_id=1480961596]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -123,7 +123,7 @@ text = "Screen0"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_Screen1" type="Button" parent="Control/Buttons"]
+[node name="Button_Screen1" type="Button" parent="Control/Buttons" unique_id=807384542]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -131,7 +131,7 @@ text = "Screen1"
 metadata/_edit_layout_mode = 0
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_MouseModes" type="Label" parent="Control/Buttons"]
+[node name="Label_MouseModes" type="Label" parent="Control/Buttons" unique_id=88170730]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -139,7 +139,7 @@ text = "Mouse Modes:"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_MouseModeVisible" type="Button" parent="Control/Buttons"]
+[node name="Button_MouseModeVisible" type="Button" parent="Control/Buttons" unique_id=1356867515]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -148,7 +148,7 @@ text = "[F1] MOUSE_MODE_VISIBLE"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_MouseModeHidden" type="Button" parent="Control/Buttons"]
+[node name="Button_MouseModeHidden" type="Button" parent="Control/Buttons" unique_id=1111412518]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -157,7 +157,7 @@ text = "[F2] MOUSE_MODE_HIDDEN"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_MouseModeCaptured" type="Button" parent="Control/Buttons"]
+[node name="Button_MouseModeCaptured" type="Button" parent="Control/Buttons" unique_id=1367972038]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -166,7 +166,7 @@ text = "[F3] MOUSE_MODE_CAPTURED"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_MouseModeConfined" type="Button" parent="Control/Buttons"]
+[node name="Button_MouseModeConfined" type="Button" parent="Control/Buttons" unique_id=1285090437]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -175,7 +175,7 @@ text = "[F4] MOUSE_MODE_CONFINED"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Button_MouseModeConfinedHidden" type="Button" parent="Control/Buttons"]
+[node name="Button_MouseModeConfinedHidden" type="Button" parent="Control/Buttons" unique_id=873850618]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -184,7 +184,7 @@ text = "[F5] MOUSE_MODE_CONFINED_HIDDEN"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_MouseModeCaptured_KeyInfo" type="Label" parent="Control/Buttons"]
+[node name="Label_MouseModeCaptured_KeyInfo" type="Label" parent="Control/Buttons" unique_id=475172102]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -194,7 +194,7 @@ A, D: Strafe left, right"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Labels" type="VBoxContainer" parent="Control"]
+[node name="Labels" type="VBoxContainer" parent="Control" unique_id=20359125]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -210,7 +210,7 @@ theme_override_constants/separation = 10
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_Mode" type="Label" parent="Control/Labels"]
+[node name="Label_Mode" type="Label" parent="Control/Labels" unique_id=149995456]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -218,7 +218,7 @@ text = "Mode:"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_Position" type="Label" parent="Control/Labels"]
+[node name="Label_Position" type="Label" parent="Control/Labels" unique_id=327660027]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -226,7 +226,7 @@ text = "Position:"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_Size" type="Label" parent="Control/Labels"]
+[node name="Label_Size" type="Label" parent="Control/Labels" unique_id=791698316]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -234,7 +234,7 @@ text = "Size:"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_MousePosition" type="Label" parent="Control/Labels"]
+[node name="Label_MousePosition" type="Label" parent="Control/Labels" unique_id=272065145]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -242,7 +242,7 @@ text = "Mouse Position:"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_Screen_Count" type="Label" parent="Control/Labels"]
+[node name="Label_Screen_Count" type="Label" parent="Control/Labels" unique_id=2101402105]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -250,7 +250,7 @@ text = "Screen_Count:"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_Screen_Current" type="Label" parent="Control/Labels"]
+[node name="Label_Screen_Current" type="Label" parent="Control/Labels" unique_id=2043903186]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -258,7 +258,7 @@ text = "Screen:"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_Screen0_Resolution" type="Label" parent="Control/Labels"]
+[node name="Label_Screen0_Resolution" type="Label" parent="Control/Labels" unique_id=1340018501]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -266,7 +266,7 @@ text = "Screen0 Resolution: "
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_Screen0_Position" type="Label" parent="Control/Labels"]
+[node name="Label_Screen0_Position" type="Label" parent="Control/Labels" unique_id=879760563]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -274,7 +274,7 @@ text = "Screen0 Position: "
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_Screen0_DPI" type="Label" parent="Control/Labels"]
+[node name="Label_Screen0_DPI" type="Label" parent="Control/Labels" unique_id=1119821969]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -282,7 +282,7 @@ text = "Screen0 DPI:"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_Screen0_RefreshRate" type="Label" parent="Control/Labels"]
+[node name="Label_Screen0_RefreshRate" type="Label" parent="Control/Labels" unique_id=640401102]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -290,7 +290,7 @@ text = "Screen0 Refresh Rate:"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_Screen1_Resolution" type="Label" parent="Control/Labels"]
+[node name="Label_Screen1_Resolution" type="Label" parent="Control/Labels" unique_id=42434516]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -298,7 +298,7 @@ text = "Screen1 Resolution: "
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_Screen1_Position" type="Label" parent="Control/Labels"]
+[node name="Label_Screen1_Position" type="Label" parent="Control/Labels" unique_id=1628333706]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -306,7 +306,7 @@ text = "Screen1 Position: "
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_Screen1_DPI" type="Label" parent="Control/Labels"]
+[node name="Label_Screen1_DPI" type="Label" parent="Control/Labels" unique_id=2144933233]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -314,7 +314,7 @@ text = "Screen1 DPI:"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="Label_Screen1_RefreshRate" type="Label" parent="Control/Labels"]
+[node name="Label_Screen1_RefreshRate" type="Label" parent="Control/Labels" unique_id=632355398]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -322,10 +322,10 @@ text = "Screen1 Refresh Rate:"
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = false
 
-[node name="ImplementationDialog" type="AcceptDialog" parent="Control"]
+[node name="ImplementationDialog" type="AcceptDialog" parent="Control" unique_id=1877448966]
 size = Vector2i(470, 213)
 
-[node name="Text" type="Label" parent="Control/ImplementationDialog"]
+[node name="Text" type="Label" parent="Control/ImplementationDialog" unique_id=1890017924]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 462.0
@@ -340,7 +340,7 @@ across platforms.
 Your platform lacks the following methods at the moment:
 "
 
-[node name="CheckButton" type="CheckButton" parent="Control"]
+[node name="CheckButton" type="CheckButton" parent="Control" unique_id=121792162]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0

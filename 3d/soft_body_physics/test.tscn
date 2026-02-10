@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://jd2ugphk1bfv"]
+[gd_scene format=3 uid="uid://jd2ugphk1bfv"]
 
 [ext_resource type="PackedScene" uid="uid://des4hyap4pon" path="res://cloth.tscn" id="3_6uqi0"]
 [ext_resource type="PackedScene" uid="uid://2hid4xcw3jf1" path="res://sphere.tscn" id="4_ppyta"]
@@ -56,29 +56,27 @@ material = SubResource("StandardMaterial3D_6uqi0")
 [sub_resource type="BoxShape3D" id="BoxShape3D_g14j6"]
 size = Vector3(3, 3, 0.5)
 
-[node name="WorldEnvironment" type="WorldEnvironment"]
+[node name="WorldEnvironment" type="WorldEnvironment" unique_id=1359357989]
 environment = SubResource("11")
 script = ExtResource("18")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_ecfcr")
-}
-autoplay = "move"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1859053660]
+libraries/ = SubResource("AnimationLibrary_ecfcr")
+autoplay = &"move"
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=220551564]
 
-[node name="Plane" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="Plane" type="MeshInstance3D" parent="StaticBody3D" unique_id=266644836]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 layers = 2
 mesh = SubResource("14")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=849431782]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 shape = SubResource("WorldBoundaryShape3D_g14j6")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1129628395]
 transform = Transform3D(-0.770897, 0.365782, -0.52146, -7.63748e-10, 0.818671, 0.574263, 0.63696, 0.442697, -0.631111, 3.9506, 3.39961, 3.54442)
 shadow_enabled = true
 shadow_bias = 0.04
@@ -87,75 +85,75 @@ directional_shadow_mode = 0
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 20.0
 
-[node name="CameraHolder" type="Node3D" parent="."]
+[node name="CameraHolder" type="Node3D" parent="." unique_id=1589564902]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.125, 12)
 
-[node name="RotationX" type="Node3D" parent="CameraHolder"]
+[node name="RotationX" type="Node3D" parent="CameraHolder" unique_id=53187041]
 
-[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX"]
+[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX" unique_id=770152690]
 fov = 70.0
 
-[node name="Testers" type="Node3D" parent="."]
+[node name="Testers" type="Node3D" parent="." unique_id=884813527]
 
-[node name="ClothPhysics" type="Node3D" parent="Testers"]
+[node name="ClothPhysics" type="Node3D" parent="Testers" unique_id=1424116613]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
 
-[node name="Cloth" parent="Testers/ClothPhysics" instance=ExtResource("3_6uqi0")]
+[node name="Cloth" parent="Testers/ClothPhysics" unique_id=193654747 instance=ExtResource("3_6uqi0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Testers/ClothPhysics"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Testers/ClothPhysics" unique_id=1596294458]
 transform = Transform3D(0.851651, 0.309976, 0.422618, -0.34202, 0.939693, 0, -0.397131, -0.144544, 0.906308, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ClothPhysics/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ClothPhysics/StaticBody3D" unique_id=1652706603]
 mesh = SubResource("BoxMesh_ppyta")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/ClothPhysics/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/ClothPhysics/StaticBody3D" unique_id=1408054293]
 shape = SubResource("BoxShape3D_ykrsh")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="Testers/ClothPhysics"]
+[node name="StaticBody3D2" type="StaticBody3D" parent="Testers/ClothPhysics" unique_id=1887948374]
 transform = Transform3D(0.212913, 0.0774939, 0.105655, -0.085505, 0.234923, -3.0889e-10, -0.0992828, -0.036136, 0.226577, 0.193735, 0.587308, -0.09034)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ClothPhysics/StaticBody3D2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ClothPhysics/StaticBody3D2" unique_id=357849108]
 mesh = SubResource("BoxMesh_ppyta")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/ClothPhysics/StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/ClothPhysics/StaticBody3D2" unique_id=2140122508]
 shape = SubResource("BoxShape3D_ykrsh")
 
-[node name="SoftBoxes" type="Node3D" parent="Testers"]
+[node name="SoftBoxes" type="Node3D" parent="Testers" unique_id=1721884786]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 
-[node name="Box" parent="Testers/SoftBoxes" instance=ExtResource("6_vbegm")]
+[node name="Box" parent="Testers/SoftBoxes" unique_id=447568849 instance=ExtResource("6_vbegm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
 
-[node name="Box2" parent="Testers/SoftBoxes" instance=ExtResource("6_vbegm")]
+[node name="Box2" parent="Testers/SoftBoxes" unique_id=1522965913 instance=ExtResource("6_vbegm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.90000004, 1, 0)
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Testers/SoftBoxes"]
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Testers/SoftBoxes" unique_id=963268510]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.6, -2.62268e-08)
 use_collision = true
 polygon = PackedVector2Array(0.458662, -0.458186, 0.222452, -0.352707, 0.261384, -0.169098, 0.403376, -0.143968, 0.627135, -0.181435, 0.737105, -0.303279, 0.648884, -0.455454)
 
-[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="Testers/SoftBoxes"]
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="Testers/SoftBoxes" unique_id=1877191558]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.726544, 0.6, -0.572491)
 use_collision = true
 polygon = PackedVector2Array(0.458662, -0.458186, 0.222452, -0.352707, 0.261384, -0.169098, 0.403376, -0.143968, 0.627135, -0.181435, 0.737105, -0.303279, 0.648884, -0.455454)
 
-[node name="CSGPolygon3D3" type="CSGPolygon3D" parent="Testers/SoftBoxes"]
+[node name="CSGPolygon3D3" type="CSGPolygon3D" parent="Testers/SoftBoxes" unique_id=421123356]
 transform = Transform3D(1, 0, 0, 0, -0.992629, 0.121194, 0, -0.121194, -0.992629, -0.726544, 0.6, -0.572491)
 use_collision = true
 polygon = PackedVector2Array(0.458662, -0.458186, 0.222452, -0.352707, 0.261384, -0.169098, 0.403376, -0.143968, 0.627135, -0.181435, 0.737105, -0.303279, 0.648884, -0.455454)
 
-[node name="CSGPolygon3D4" type="CSGPolygon3D" parent="Testers/SoftBoxes"]
+[node name="CSGPolygon3D4" type="CSGPolygon3D" parent="Testers/SoftBoxes" unique_id=2110825635]
 transform = Transform3D(1, 0, 0, 0, -0.992629, 0.121194, 0, -0.121194, -0.992629, -0.216217, -0.0966039, -0.68374)
 use_collision = true
 polygon = PackedVector2Array(0.458662, -0.458186, 0.222452, -0.352707, 0.261384, -0.169098, 0.403376, -0.143968, 0.627135, -0.181435, 0.737105, -0.303279, 0.648884, -0.455454)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Testers/SoftBoxes"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Testers/SoftBoxes" unique_id=274094256]
 use_collision = true
 size = Vector3(2.5, 1, 2.5)
 material = SubResource("StandardMaterial3D_6uqi0")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Testers/SoftBoxes/CSGBox3D"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Testers/SoftBoxes/CSGBox3D" unique_id=1677164965]
 transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0.9, 0)
 operation = 2
 radius = 0.9
@@ -163,75 +161,75 @@ radial_segments = 96
 rings = 32
 material = SubResource("StandardMaterial3D_6uqi0")
 
-[node name="RigidBoxHeavy" parent="Testers/SoftBoxes" instance=ExtResource("5_ykrsh")]
+[node name="RigidBoxHeavy" parent="Testers/SoftBoxes" unique_id=961202350 instance=ExtResource("5_ykrsh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0.4)
 
-[node name="RigidBoxHeavy2" parent="Testers/SoftBoxes" instance=ExtResource("5_ykrsh")]
+[node name="RigidBoxHeavy2" parent="Testers/SoftBoxes" unique_id=906605596 instance=ExtResource("5_ykrsh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 2, -0.1)
 
-[node name="RigidBoxLight" parent="Testers/SoftBoxes" instance=ExtResource("6_g14j6")]
+[node name="RigidBoxLight" parent="Testers/SoftBoxes" unique_id=1815141359 instance=ExtResource("6_g14j6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 1.5, -0.0999997)
 
-[node name="RigidBoxLight2" parent="Testers/SoftBoxes" instance=ExtResource("6_g14j6")]
+[node name="RigidBoxLight2" parent="Testers/SoftBoxes" unique_id=1147640041 instance=ExtResource("6_g14j6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 1.5, 0.2)
 
-[node name="RigidBoxLight3" parent="Testers/SoftBoxes" instance=ExtResource("6_g14j6")]
+[node name="RigidBoxLight3" parent="Testers/SoftBoxes" unique_id=1741340153 instance=ExtResource("6_g14j6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 2.6, -0.6)
 
-[node name="InvisibleWalls" type="StaticBody3D" parent="Testers/SoftBoxes"]
+[node name="InvisibleWalls" type="StaticBody3D" parent="Testers/SoftBoxes" unique_id=2097537149]
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/SoftBoxes/InvisibleWalls"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/SoftBoxes/InvisibleWalls" unique_id=107077380]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 1.5, 1.5)
 shape = SubResource("BoxShape3D_g14j6")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Testers/SoftBoxes/InvisibleWalls"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Testers/SoftBoxes/InvisibleWalls" unique_id=520197452]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.5, 1.5, -0.25)
 shape = SubResource("BoxShape3D_g14j6")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Testers/SoftBoxes/InvisibleWalls"]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Testers/SoftBoxes/InvisibleWalls" unique_id=1926282410]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.25, 1.5, -1.5)
 shape = SubResource("BoxShape3D_g14j6")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="Testers/SoftBoxes/InvisibleWalls"]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Testers/SoftBoxes/InvisibleWalls" unique_id=56942674]
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 1.5, 1.5, 0.25)
 shape = SubResource("BoxShape3D_g14j6")
 
-[node name="SoftSpheres" type="Node3D" parent="Testers"]
+[node name="SoftSpheres" type="Node3D" parent="Testers" unique_id=187409262]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 
-[node name="Sphere" parent="Testers/SoftSpheres" instance=ExtResource("4_ppyta")]
+[node name="Sphere" parent="Testers/SoftSpheres" unique_id=340244052 instance=ExtResource("4_ppyta")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="Sphere2" parent="Testers/SoftSpheres" instance=ExtResource("4_ppyta")]
+[node name="Sphere2" parent="Testers/SoftSpheres" unique_id=2111452490 instance=ExtResource("4_ppyta")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.6, 0)
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Testers/SoftSpheres"]
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Testers/SoftSpheres" unique_id=1143251811]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.6, -2.62268e-08)
 use_collision = true
 polygon = PackedVector2Array(0.458662, -0.458186, 0.222452, -0.352707, 0.261384, -0.169098, 0.403376, -0.143968, 0.627135, -0.181435, 0.737105, -0.303279, 0.648884, -0.455454)
 
-[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="Testers/SoftSpheres"]
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="Testers/SoftSpheres" unique_id=627113712]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.726544, 0.6, -0.572491)
 use_collision = true
 polygon = PackedVector2Array(0.458662, -0.458186, 0.222452, -0.352707, 0.261384, -0.169098, 0.403376, -0.143968, 0.627135, -0.181435, 0.737105, -0.303279, 0.648884, -0.455454)
 
-[node name="CSGPolygon3D3" type="CSGPolygon3D" parent="Testers/SoftSpheres"]
+[node name="CSGPolygon3D3" type="CSGPolygon3D" parent="Testers/SoftSpheres" unique_id=1549895548]
 transform = Transform3D(1, 0, 0, 0, -0.992629, 0.121194, 0, -0.121194, -0.992629, -0.726544, 0.6, -0.572491)
 use_collision = true
 polygon = PackedVector2Array(0.458662, -0.458186, 0.222452, -0.352707, 0.261384, -0.169098, 0.403376, -0.143968, 0.627135, -0.181435, 0.737105, -0.303279, 0.648884, -0.455454)
 
-[node name="CSGPolygon3D4" type="CSGPolygon3D" parent="Testers/SoftSpheres"]
+[node name="CSGPolygon3D4" type="CSGPolygon3D" parent="Testers/SoftSpheres" unique_id=1159467752]
 transform = Transform3D(1, 0, 0, 0, -0.992629, 0.121194, 0, -0.121194, -0.992629, -0.216217, -0.0966039, -0.68374)
 use_collision = true
 polygon = PackedVector2Array(0.458662, -0.458186, 0.222452, -0.352707, 0.261384, -0.169098, 0.403376, -0.143968, 0.627135, -0.181435, 0.737105, -0.303279, 0.648884, -0.455454)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Testers/SoftSpheres"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Testers/SoftSpheres" unique_id=1458109400]
 use_collision = true
 size = Vector3(2.5, 1, 2.5)
 material = SubResource("StandardMaterial3D_6uqi0")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Testers/SoftSpheres/CSGBox3D"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Testers/SoftSpheres/CSGBox3D" unique_id=1592808162]
 transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0.9, 0)
 operation = 2
 radius = 0.9
@@ -239,166 +237,166 @@ radial_segments = 96
 rings = 32
 material = SubResource("StandardMaterial3D_6uqi0")
 
-[node name="RigidBoxHeavy" parent="Testers/SoftSpheres" instance=ExtResource("5_ykrsh")]
+[node name="RigidBoxHeavy" parent="Testers/SoftSpheres" unique_id=62345646 instance=ExtResource("5_ykrsh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0.4)
 
-[node name="RigidBoxHeavy2" parent="Testers/SoftSpheres" instance=ExtResource("5_ykrsh")]
+[node name="RigidBoxHeavy2" parent="Testers/SoftSpheres" unique_id=33971840 instance=ExtResource("5_ykrsh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 2, -0.1)
 
-[node name="RigidBoxLight" parent="Testers/SoftSpheres" instance=ExtResource("6_g14j6")]
+[node name="RigidBoxLight" parent="Testers/SoftSpheres" unique_id=1175354203 instance=ExtResource("6_g14j6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 1.5, -0.0999997)
 
-[node name="RigidBoxLight2" parent="Testers/SoftSpheres" instance=ExtResource("6_g14j6")]
+[node name="RigidBoxLight2" parent="Testers/SoftSpheres" unique_id=1457848396 instance=ExtResource("6_g14j6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 1.5, 0.2)
 
-[node name="RigidBoxLight3" parent="Testers/SoftSpheres" instance=ExtResource("6_g14j6")]
+[node name="RigidBoxLight3" parent="Testers/SoftSpheres" unique_id=1414601353 instance=ExtResource("6_g14j6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 2.6, -0.6)
 
-[node name="InvisibleWalls" type="StaticBody3D" parent="Testers/SoftSpheres"]
+[node name="InvisibleWalls" type="StaticBody3D" parent="Testers/SoftSpheres" unique_id=706432360]
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/SoftSpheres/InvisibleWalls"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/SoftSpheres/InvisibleWalls" unique_id=156535400]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 1.5, 1.5)
 shape = SubResource("BoxShape3D_g14j6")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Testers/SoftSpheres/InvisibleWalls"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Testers/SoftSpheres/InvisibleWalls" unique_id=1095313453]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.5, 1.5, -0.25)
 shape = SubResource("BoxShape3D_g14j6")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Testers/SoftSpheres/InvisibleWalls"]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Testers/SoftSpheres/InvisibleWalls" unique_id=278482168]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.25, 1.5, -1.5)
 shape = SubResource("BoxShape3D_g14j6")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="Testers/SoftSpheres/InvisibleWalls"]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Testers/SoftSpheres/InvisibleWalls" unique_id=855513945]
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 1.5, 1.5, 0.25)
 shape = SubResource("BoxShape3D_g14j6")
 
-[node name="CentralImpulseTimer" type="Node3D" parent="Testers"]
+[node name="CentralImpulseTimer" type="Node3D" parent="Testers" unique_id=906076186]
 
-[node name="Cloth" parent="Testers/CentralImpulseTimer" instance=ExtResource("3_6uqi0")]
+[node name="Cloth" parent="Testers/CentralImpulseTimer" unique_id=1515835019 instance=ExtResource("3_6uqi0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Testers/CentralImpulseTimer"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Testers/CentralImpulseTimer" unique_id=1925813402]
 transform = Transform3D(0.851651, 0.309976, 0.422618, -0.34202, 0.939693, 0, -0.397131, -0.144544, 0.906308, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/CentralImpulseTimer/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/CentralImpulseTimer/StaticBody3D" unique_id=341406653]
 mesh = SubResource("BoxMesh_ppyta")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/CentralImpulseTimer/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/CentralImpulseTimer/StaticBody3D" unique_id=192489579]
 shape = SubResource("BoxShape3D_ykrsh")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="Testers/CentralImpulseTimer"]
+[node name="StaticBody3D2" type="StaticBody3D" parent="Testers/CentralImpulseTimer" unique_id=1852194660]
 transform = Transform3D(0.212913, 0.0774939, 0.105655, -0.085505, 0.234923, -3.0889e-10, -0.0992828, -0.036136, 0.226577, 0.193735, 0.587308, -0.09034)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/CentralImpulseTimer/StaticBody3D2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/CentralImpulseTimer/StaticBody3D2" unique_id=1724350842]
 mesh = SubResource("BoxMesh_ppyta")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/CentralImpulseTimer/StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/CentralImpulseTimer/StaticBody3D2" unique_id=356961076]
 shape = SubResource("BoxShape3D_ykrsh")
 
-[node name="Timer" type="Timer" parent="Testers/CentralImpulseTimer"]
+[node name="Timer" type="Timer" parent="Testers/CentralImpulseTimer" unique_id=377364744]
 wait_time = 1.5
 autostart = true
 
-[node name="RigidBoxHeavy" parent="Testers/CentralImpulseTimer" instance=ExtResource("5_ykrsh")]
+[node name="RigidBoxHeavy" parent="Testers/CentralImpulseTimer" unique_id=1281400104 instance=ExtResource("5_ykrsh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.3, -0.6)
 
-[node name="RigidBoxHeavy2" parent="Testers/CentralImpulseTimer" instance=ExtResource("5_ykrsh")]
+[node name="RigidBoxHeavy2" parent="Testers/CentralImpulseTimer" unique_id=712987937 instance=ExtResource("5_ykrsh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 1.3, 0.6)
 
-[node name="RigidBoxLight" parent="Testers/CentralImpulseTimer" instance=ExtResource("6_g14j6")]
+[node name="RigidBoxLight" parent="Testers/CentralImpulseTimer" unique_id=918688386 instance=ExtResource("6_g14j6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, 0.1)
 
-[node name="CentralForceWind" type="Node3D" parent="Testers"]
+[node name="CentralForceWind" type="Node3D" parent="Testers" unique_id=292881232]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 
-[node name="Cloth" parent="Testers/CentralForceWind" instance=ExtResource("3_6uqi0")]
+[node name="Cloth" parent="Testers/CentralForceWind" unique_id=591452243 instance=ExtResource("3_6uqi0")]
 transform = Transform3D(0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, -0.38637, 0.896472, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Testers/CentralForceWind"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Testers/CentralForceWind" unique_id=1144300403]
 transform = Transform3D(0.851651, 0.309976, 0.422618, -0.34202, 0.939693, 0, -0.397131, -0.144544, 0.906308, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/CentralForceWind/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/CentralForceWind/StaticBody3D" unique_id=1491974360]
 mesh = SubResource("BoxMesh_ppyta")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/CentralForceWind/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/CentralForceWind/StaticBody3D" unique_id=1223302134]
 shape = SubResource("BoxShape3D_ykrsh")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="Testers/CentralForceWind"]
+[node name="StaticBody3D2" type="StaticBody3D" parent="Testers/CentralForceWind" unique_id=484164191]
 transform = Transform3D(0.212913, 0.0774939, 0.105655, -0.085505, 0.234923, -3.0889e-10, -0.0992828, -0.036136, 0.226577, 0.193735, 0.587308, -0.09034)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/CentralForceWind/StaticBody3D2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/CentralForceWind/StaticBody3D2" unique_id=1051052774]
 mesh = SubResource("BoxMesh_ppyta")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/CentralForceWind/StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/CentralForceWind/StaticBody3D2" unique_id=992587050]
 shape = SubResource("BoxShape3D_ykrsh")
 
-[node name="PerPointImpulseTimer" type="Node3D" parent="Testers"]
+[node name="PerPointImpulseTimer" type="Node3D" parent="Testers" unique_id=1308440047]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 
-[node name="PointTrackers" type="Node3D" parent="Testers/PerPointImpulseTimer"]
+[node name="PointTrackers" type="Node3D" parent="Testers/PerPointImpulseTimer" unique_id=494735748]
 
-[node name="PointTracker" parent="Testers/PerPointImpulseTimer/PointTrackers" instance=ExtResource("8_ehkex")]
+[node name="PointTracker" parent="Testers/PerPointImpulseTimer/PointTrackers" unique_id=327144755 instance=ExtResource("8_ehkex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 1.02, 0.79999995)
 skeleton = NodePath("../..")
 metadata/point = 0
 
-[node name="PointTracker2" parent="Testers/PerPointImpulseTimer/PointTrackers" instance=ExtResource("8_ehkex")]
+[node name="PointTracker2" parent="Testers/PerPointImpulseTimer/PointTrackers" unique_id=328914352 instance=ExtResource("8_ehkex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 1.02, 0.79999995)
 skeleton = NodePath("../..")
 metadata/point = 64
 
-[node name="PointTracker3" parent="Testers/PerPointImpulseTimer/PointTrackers" instance=ExtResource("8_ehkex")]
+[node name="PointTracker3" parent="Testers/PerPointImpulseTimer/PointTrackers" unique_id=624043913 instance=ExtResource("8_ehkex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 1.02, -0.8000002)
 skeleton = NodePath("../..")
 metadata/point = 4160
 
-[node name="PointTracker4" parent="Testers/PerPointImpulseTimer/PointTrackers" instance=ExtResource("8_ehkex")]
+[node name="PointTracker4" parent="Testers/PerPointImpulseTimer/PointTrackers" unique_id=1080182223 instance=ExtResource("8_ehkex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 1.02, -0.8000002)
 skeleton = NodePath("../..")
 metadata/point = 4224
 
-[node name="Cloth" parent="Testers/PerPointImpulseTimer" instance=ExtResource("3_6uqi0")]
+[node name="Cloth" parent="Testers/PerPointImpulseTimer" unique_id=1260245506 instance=ExtResource("3_6uqi0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Testers/PerPointImpulseTimer"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Testers/PerPointImpulseTimer" unique_id=698302672]
 transform = Transform3D(0.851651, 0.309976, 0.422618, -0.34202, 0.939693, 0, -0.397131, -0.144544, 0.906308, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/PerPointImpulseTimer/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/PerPointImpulseTimer/StaticBody3D" unique_id=907112593]
 mesh = SubResource("BoxMesh_ppyta")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/PerPointImpulseTimer/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/PerPointImpulseTimer/StaticBody3D" unique_id=275327219]
 shape = SubResource("BoxShape3D_ykrsh")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="Testers/PerPointImpulseTimer"]
+[node name="StaticBody3D2" type="StaticBody3D" parent="Testers/PerPointImpulseTimer" unique_id=356460076]
 transform = Transform3D(0.212913, 0.0774939, 0.105655, -0.085505, 0.234923, -3.0889e-10, -0.0992828, -0.036136, 0.226577, 0.193735, 0.587308, -0.09034)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/PerPointImpulseTimer/StaticBody3D2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/PerPointImpulseTimer/StaticBody3D2" unique_id=960845994]
 mesh = SubResource("BoxMesh_ppyta")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/PerPointImpulseTimer/StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/PerPointImpulseTimer/StaticBody3D2" unique_id=1034164839]
 shape = SubResource("BoxShape3D_ykrsh")
 
-[node name="Timer" type="Timer" parent="Testers/PerPointImpulseTimer"]
+[node name="Timer" type="Timer" parent="Testers/PerPointImpulseTimer" unique_id=823480554]
 wait_time = 1.5
 autostart = true
 
-[node name="PinnedPoints" type="Node3D" parent="Testers"]
+[node name="PinnedPoints" type="Node3D" parent="Testers" unique_id=1082107153]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
 
-[node name="Pin" parent="Testers/PinnedPoints" instance=ExtResource("8_ehkex")]
+[node name="Pin" parent="Testers/PinnedPoints" unique_id=382954122 instance=ExtResource("8_ehkex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 1.02, 0.8)
 
-[node name="Pin2" parent="Testers/PinnedPoints" instance=ExtResource("8_ehkex")]
+[node name="Pin2" parent="Testers/PinnedPoints" unique_id=1505262755 instance=ExtResource("8_ehkex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8000001, 1.02, 0.8000002)
 
-[node name="Pin3" parent="Testers/PinnedPoints" instance=ExtResource("8_ehkex")]
+[node name="Pin3" parent="Testers/PinnedPoints" unique_id=1518483623 instance=ExtResource("8_ehkex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 1.02, -0.8000002)
 
-[node name="Pin4" parent="Testers/PinnedPoints" instance=ExtResource("8_ehkex")]
+[node name="Pin4" parent="Testers/PinnedPoints" unique_id=861951313 instance=ExtResource("8_ehkex")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8000001, 1.02, -0.8000002)
 
-[node name="PinnedCloth" parent="Testers/PinnedPoints" instance=ExtResource("3_6uqi0")]
+[node name="PinnedCloth" parent="Testers/PinnedPoints" unique_id=321127279 instance=ExtResource("3_6uqi0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 pinned_points = [0, 4160, 64, 4224]
 attachments/0/point_index = 0
@@ -414,25 +412,25 @@ attachments/3/point_index = 4224
 attachments/3/spatial_attachment_path = NodePath("")
 attachments/3/offset = Vector3(0, 0, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Testers/PinnedPoints"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Testers/PinnedPoints" unique_id=1450762164]
 transform = Transform3D(0.851651, 0.309976, 0.422618, -0.34202, 0.939693, 0, -0.397131, -0.144544, 0.906308, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/PinnedPoints/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/PinnedPoints/StaticBody3D" unique_id=473393587]
 mesh = SubResource("BoxMesh_ppyta")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/PinnedPoints/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/PinnedPoints/StaticBody3D" unique_id=1970380391]
 shape = SubResource("BoxShape3D_ykrsh")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="Testers/PinnedPoints"]
+[node name="StaticBody3D2" type="StaticBody3D" parent="Testers/PinnedPoints" unique_id=513880280]
 transform = Transform3D(0.212913, 0.0774939, 0.105655, -0.085505, 0.234923, -3.0889e-10, -0.0992828, -0.036136, 0.226577, 0.193735, 0.587308, -0.09034)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/PinnedPoints/StaticBody3D2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/PinnedPoints/StaticBody3D2" unique_id=489282424]
 mesh = SubResource("BoxMesh_ppyta")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/PinnedPoints/StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testers/PinnedPoints/StaticBody3D2" unique_id=1548030849]
 shape = SubResource("BoxShape3D_ykrsh")
 
-[node name="TestName" type="Label" parent="."]
+[node name="TestName" type="Label" parent="." unique_id=1380765324]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -449,7 +447,7 @@ theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 
-[node name="Previous" type="Button" parent="."]
+[node name="Previous" type="Button" parent="." unique_id=298518238]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -460,7 +458,7 @@ offset_bottom = -24.0
 grow_vertical = 0
 text = "«  Previous"
 
-[node name="Next" type="Button" parent="."]
+[node name="Next" type="Button" parent="." unique_id=1780172794]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -474,7 +472,7 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Next  »"
 
-[node name="Help" type="Label" parent="."]
+[node name="Help" type="Label" parent="." unique_id=2135203018]
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 312.0

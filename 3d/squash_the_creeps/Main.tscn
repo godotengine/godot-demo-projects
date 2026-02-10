@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dypovwakhdvh8"]
+[gd_scene format=3 uid="uid://dypovwakhdvh8"]
 
 [ext_resource type="Script" uid="uid://dw420o3v2u8v1" path="res://Main.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dsg2w2pxbtxpj" path="res://Player.tscn" id="2"]
@@ -41,22 +41,22 @@ _data = {
 }
 point_count = 5
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" unique_id=1282231444]
 script = ExtResource("1")
 mob_scene = ExtResource("3")
 
-[node name="Ground" type="StaticBody3D" parent="."]
+[node name="Ground" type="StaticBody3D" parent="." unique_id=362376342]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 collision_layer = 4
 collision_mask = 0
 
-[node name="CollisionShape" type="CollisionShape3D" parent="Ground"]
+[node name="CollisionShape" type="CollisionShape3D" parent="Ground" unique_id=651218745]
 shape = SubResource("1")
 
-[node name="MeshInstance" type="MeshInstance3D" parent="Ground"]
+[node name="MeshInstance" type="MeshInstance3D" parent="Ground" unique_id=646228264]
 mesh = SubResource("2")
 
-[node name="Walls" type="StaticBody3D" parent="."]
+[node name="Walls" type="StaticBody3D" parent="." unique_id=1528939861]
 editor_description = "These invisible walls are used to prevent the player from escaping the playable area.
 
 These walls use WorldBoundaryShape3D collision shapes, which are infinitely large planes
@@ -65,23 +65,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 collision_layer = 4
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls" unique_id=32243725]
 transform = Transform3D(1, 0, 0, 0, 1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 10, 11)
 shape = SubResource("WorldBoundaryShape3D_i5n5q")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls" unique_id=664593385]
 transform = Transform3D(-4.37114e-08, 1, -1.31134e-07, 0, 1.31134e-07, 1, 1, 4.37114e-08, -5.73206e-15, -13, 10, -4.76837e-07)
 shape = SubResource("WorldBoundaryShape3D_i5n5q")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Walls"]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Walls" unique_id=132581995]
 transform = Transform3D(4.37114e-08, -1, 2.18557e-07, 3.82137e-15, -2.18557e-07, -1, 1, 4.37114e-08, -5.73206e-15, 14, 10, -4.76837e-07)
 shape = SubResource("WorldBoundaryShape3D_i5n5q")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="Walls"]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Walls" unique_id=1138066146]
 transform = Transform3D(1, 5.96046e-08, -1.42109e-14, 3.82137e-15, -2.18557e-07, -1, -5.96046e-08, 1, -2.18557e-07, 9.53674e-07, 10, -20)
 shape = SubResource("WorldBoundaryShape3D_i5n5q")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=272639454]
 transform = Transform3D(0.5, -0.777049, 0.382355, 0, 0.441506, 0.897258, -0.866025, -0.448629, 0.220753, 0, 12.5592, 14.7757)
 shadow_enabled = true
 shadow_bias = 0.04
@@ -90,55 +90,55 @@ directional_shadow_mode = 0
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 40.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1297429196]
 environment = SubResource("Environment_0tcge")
 
-[node name="Player" parent="." instance=ExtResource("2")]
+[node name="Player" parent="." unique_id=985166443 instance=ExtResource("2")]
 
-[node name="CameraPivot" type="Marker3D" parent="."]
+[node name="CameraPivot" type="Marker3D" parent="." unique_id=1080290623]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.183514, 0, 0)
 
-[node name="Camera" type="Camera3D" parent="CameraPivot"]
+[node name="Camera" type="Camera3D" parent="CameraPivot" unique_id=1639545054]
 transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 9.53674e-07, 19)
 projection = 1
 fov = 48.6
 size = 24.0
 far = 40.0
 
-[node name="Cylinders" type="Node3D" parent="."]
+[node name="Cylinders" type="Node3D" parent="." unique_id=1795321286]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 
-[node name="MeshInstance" type="MeshInstance3D" parent="Cylinders"]
+[node name="MeshInstance" type="MeshInstance3D" parent="Cylinders" unique_id=1426849890]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, -15)
 mesh = SubResource("3")
 
-[node name="MeshInstance3" type="MeshInstance3D" parent="Cylinders"]
+[node name="MeshInstance3" type="MeshInstance3D" parent="Cylinders" unique_id=127860795]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 1, -15)
 mesh = SubResource("3")
 
-[node name="MeshInstance2" type="MeshInstance3D" parent="Cylinders"]
+[node name="MeshInstance2" type="MeshInstance3D" parent="Cylinders" unique_id=2145697031]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 1, 16)
 mesh = SubResource("3")
 
-[node name="MeshInstance4" type="MeshInstance3D" parent="Cylinders"]
+[node name="MeshInstance4" type="MeshInstance3D" parent="Cylinders" unique_id=1108538867]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 16)
 mesh = SubResource("3")
 
-[node name="SpawnPath" type="Path3D" parent="."]
+[node name="SpawnPath" type="Path3D" parent="." unique_id=936764489]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 curve = SubResource("5")
 
-[node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
+[node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath" unique_id=397721802]
 transform = Transform3D(-4.3711346e-08, 0, 0.999999, 0, 1, 0, -0.999999, 0, -4.3711346e-08, 14, 0, -15)
 rotation_mode = 1
 cubic_interp = false
 loop = false
 
-[node name="MobTimer" type="Timer" parent="."]
+[node name="MobTimer" type="Timer" parent="." unique_id=1560174727]
 wait_time = 0.5
 autostart = true
 
-[node name="UserInterface" type="Control" parent="."]
+[node name="UserInterface" type="Control" parent="." unique_id=865172312]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -147,7 +147,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_gnyca")
 
-[node name="ScoreLabel" type="Label" parent="UserInterface"]
+[node name="ScoreLabel" type="Label" parent="UserInterface" unique_id=1265427150]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
@@ -158,14 +158,14 @@ theme_override_font_sizes/font_size = 32
 text = "Score: 0"
 script = ExtResource("6")
 
-[node name="Retry" type="ColorRect" parent="UserInterface"]
+[node name="Retry" type="ColorRect" parent="UserInterface" unique_id=414945007]
 visible = false
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0, 0, 0, 0.447059)
 
-[node name="Label" type="Label" parent="UserInterface/Retry"]
+[node name="Label" type="Label" parent="UserInterface/Retry" unique_id=1375680139]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

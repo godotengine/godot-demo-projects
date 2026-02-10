@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b0b3a84nshig7"]
+[gd_scene format=3 uid="uid://b0b3a84nshig7"]
 
 [ext_resource type="Script" uid="uid://bg7p3mgqdcspf" path="res://player/bullet/bullet.gd" id="1"]
 
@@ -138,24 +138,22 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 [sub_resource type="SphereShape3D" id="SphereShape3D_vq2ey"]
 radius = 0.27
 
-[node name="Bullet" type="RigidBody3D"]
+[node name="Bullet" type="RigidBody3D" unique_id=1905720963]
 mass = 0.4
 script = ExtResource("1")
 
-[node name="Sphere" type="MeshInstance3D" parent="."]
+[node name="Sphere" type="MeshInstance3D" parent="." unique_id=1336560178]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00159812, 0.0110106, 0.0045104)
 cast_shadow = 0
 mesh = SubResource("SphereMesh_gjrxu")
 surface_material_override/0 = SubResource("StandardMaterial3D_aw6a5")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=416086992]
 callback_mode_process = 0
-libraries = {
-&"": SubResource("AnimationLibrary_pyoek")
-}
-autoplay = "life"
+libraries/ = SubResource("AnimationLibrary_pyoek")
+autoplay = &"life"
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+[node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=2046344250]
 cast_shadow = 0
 amount = 16
 lifetime = 0.4
@@ -166,10 +164,10 @@ gravity = Vector3(0, 0, 0)
 scale_amount_curve = SubResource("Curve_4e8sm")
 color_ramp = SubResource("Gradient_ic2ol")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1610408109]
 shape = SubResource("SphereShape3D_vq2ey")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=912304643]
 light_color = Color(1, 0.733333, 0.278431, 1)
 shadow_enabled = true
 shadow_bias = 0.03

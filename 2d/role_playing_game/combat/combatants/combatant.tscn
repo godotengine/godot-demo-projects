@@ -1,15 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://c10fjiuf6t856"]
+[gd_scene format=3 uid="uid://c10fjiuf6t856"]
 
 [ext_resource type="Script" uid="uid://cufqc061b80cd" path="res://combat/combatants/combatant.gd" id="1"]
 [ext_resource type="Script" uid="uid://dnuxdpkv3ckrq" path="res://combat/combatants/health.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://rdpn3n6t1ita" path="res://combat/combatants/sprites/sprite.tscn" id="3"]
 
-[node name="Combatant" type="Node2D"]
+[node name="Combatant" type="Node2D" unique_id=1490421423]
 script = ExtResource("1")
 damage = 2
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node" parent="." unique_id=188119126]
 script = ExtResource("2")
 life = 10
 
-[node name="Sprite2D" parent="." instance=ExtResource("3")]
+[node name="Sprite2D" parent="." unique_id=988224128 instance=ExtResource("3")]

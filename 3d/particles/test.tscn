@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://df4ssnidpmiop"]
+[gd_scene format=3 uid="uid://df4ssnidpmiop"]
 
 [ext_resource type="Texture2D" uid="uid://6kc8qumfqvg3" path="res://kenney/smoke_05.png" id="3_pmhp8"]
 [ext_resource type="CompressedTexture3D" uid="uid://duy4vgwssutj4" path="res://test.GPUParticlesCollisionSDF3D_data.exr" id="4_wcrow"]
@@ -643,21 +643,19 @@ height = 0.05
 radial_segments = 8
 rings = 4
 
-[node name="WorldEnvironment" type="WorldEnvironment"]
+[node name="WorldEnvironment" type="WorldEnvironment" unique_id=1614867239]
 environment = SubResource("11")
 script = ExtResource("18")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_ecfcr")
-}
-autoplay = "move"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=12736471]
+libraries/ = SubResource("AnimationLibrary_ecfcr")
+autoplay = &"move"
 
-[node name="Plane" type="MeshInstance3D" parent="."]
+[node name="Plane" type="MeshInstance3D" parent="." unique_id=1535239691]
 layers = 2
 mesh = SubResource("14")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1815554872]
 transform = Transform3D(-0.668269, 0.661498, -0.340349, 0.5619, 0.748663, 0.351813, 0.48753, 0.0438635, -0.872004, 3.9506, 3.39961, 3.54442)
 shadow_enabled = true
 shadow_bias = 0.04
@@ -665,20 +663,20 @@ directional_shadow_mode = 0
 directional_shadow_fade_start = 0.9
 directional_shadow_max_distance = 15.0
 
-[node name="CameraHolder" type="Node3D" parent="."]
+[node name="CameraHolder" type="Node3D" parent="." unique_id=249635705]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.125, 26)
 
-[node name="RotationX" type="Node3D" parent="CameraHolder"]
+[node name="RotationX" type="Node3D" parent="CameraHolder" unique_id=1870373868]
 
-[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX"]
+[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX" unique_id=810733611]
 fov = 70.0
 
-[node name="Testers" type="Node3D" parent="."]
+[node name="Testers" type="Node3D" parent="." unique_id=1663136029]
 
-[node name="CPUParticlesForceField" type="Node3D" parent="Testers"]
+[node name="CPUParticlesForceField" type="Node3D" parent="Testers" unique_id=462094416]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 26)
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="Testers/CPUParticlesForceField"]
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Testers/CPUParticlesForceField" unique_id=1981778351]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 amount = 750
 lifetime = 5.0
@@ -694,10 +692,10 @@ scale_amount_min = 0.1
 scale_amount_max = 1.5
 color_ramp = SubResource("Gradient_drqcv")
 
-[node name="CPUParticlesExplosion" type="Node3D" parent="Testers"]
+[node name="CPUParticlesExplosion" type="Node3D" parent="Testers" unique_id=1698390092]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22)
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="Testers/CPUParticlesExplosion"]
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Testers/CPUParticlesExplosion" unique_id=82960058]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 amount = 400
 lifetime = 1.3
@@ -717,54 +715,54 @@ scale_amount_min = 0.0
 color = Color(4, 4, 4, 1)
 color_ramp = SubResource("Gradient_or8rt")
 
-[node name="Decal4" type="Decal" parent="Testers/CPUParticlesExplosion"]
+[node name="Decal4" type="Decal" parent="Testers/CPUParticlesExplosion" unique_id=794188004]
 size = Vector3(5, 0.02, 5)
 texture_albedo = ExtResource("3_pmhp8")
 modulate = Color(0, 0, 0, 1)
 
-[node name="Decal5" type="Decal" parent="Testers/CPUParticlesExplosion"]
+[node name="Decal5" type="Decal" parent="Testers/CPUParticlesExplosion" unique_id=1913383363]
 transform = Transform3D(0.562646, 0, -0.826698, 0, 1, 0, 0.826698, 0, 0.562646, 0, 0, 0)
 size = Vector3(5, 0.02, 5)
 texture_albedo = ExtResource("3_pmhp8")
 modulate = Color(0, 0, 0, 1)
 
-[node name="Decal6" type="Decal" parent="Testers/CPUParticlesExplosion"]
+[node name="Decal6" type="Decal" parent="Testers/CPUParticlesExplosion" unique_id=212907914]
 transform = Transform3D(-0.481494, 0, -0.87645, 0, 1, 0, 0.87645, 0, -0.481494, 0, 0, 0)
 size = Vector3(5, 0.02, 5)
 texture_albedo = ExtResource("3_pmhp8")
 modulate = Color(0, 0, 0, 1)
 
-[node name="GPUParticlesFire" type="Node3D" parent="Testers"]
+[node name="GPUParticlesFire" type="Node3D" parent="Testers" unique_id=1027424202]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesFire"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesFire" unique_id=2066946851]
 amount = 125
 fixed_fps = 0
 interpolate = false
 process_material = SubResource("ParticlesMaterial_wcmum")
 draw_pass_1 = SubResource("QuadMesh_783ir")
 
-[node name="Decal" type="Decal" parent="Testers/GPUParticlesFire"]
+[node name="Decal" type="Decal" parent="Testers/GPUParticlesFire" unique_id=551931959]
 size = Vector3(2, 0.02, 2)
 texture_albedo = ExtResource("3_pmhp8")
 modulate = Color(0, 0, 0, 1)
 
-[node name="Decal2" type="Decal" parent="Testers/GPUParticlesFire"]
+[node name="Decal2" type="Decal" parent="Testers/GPUParticlesFire" unique_id=1425605076]
 transform = Transform3D(0.562646, 0, -0.826698, 0, 1, 0, 0.826698, 0, 0.562646, 0, 0, 0)
 size = Vector3(3, 0.02, 2.2)
 texture_albedo = ExtResource("3_pmhp8")
 modulate = Color(0, 0, 0, 1)
 
-[node name="Decal3" type="Decal" parent="Testers/GPUParticlesFire"]
+[node name="Decal3" type="Decal" parent="Testers/GPUParticlesFire" unique_id=1298800017]
 transform = Transform3D(-0.481494, 0, -0.87645, 0, 1, 0, 0.87645, 0, -0.481494, 0, 0, 0)
 size = Vector3(3.2, 0.02, 2.6)
 texture_albedo = ExtResource("3_pmhp8")
 modulate = Color(0, 0, 0, 1)
 
-[node name="GPUParticlesSmoke" type="Node3D" parent="Testers"]
+[node name="GPUParticlesSmoke" type="Node3D" parent="Testers" unique_id=1986263607]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesSmoke"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesSmoke" unique_id=493841559]
 amount = 100
 lifetime = 1.5
 fixed_fps = 0
@@ -773,27 +771,27 @@ draw_order = 1
 process_material = SubResource("ParticlesMaterial_a3ot6")
 draw_pass_1 = SubResource("QuadMesh_edvlt")
 
-[node name="Decal4" type="Decal" parent="Testers/GPUParticlesSmoke"]
+[node name="Decal4" type="Decal" parent="Testers/GPUParticlesSmoke" unique_id=509260508]
 size = Vector3(2, 0.02, 2)
 texture_albedo = ExtResource("3_pmhp8")
 modulate = Color(0, 0, 0, 1)
 
-[node name="Decal5" type="Decal" parent="Testers/GPUParticlesSmoke"]
+[node name="Decal5" type="Decal" parent="Testers/GPUParticlesSmoke" unique_id=886780088]
 transform = Transform3D(0.562646, 0, -0.826698, 0, 1, 0, 0.826698, 0, 0.562646, 0, 0, 0)
 size = Vector3(3, 0.02, 2.2)
 texture_albedo = ExtResource("3_pmhp8")
 modulate = Color(0, 0, 0, 1)
 
-[node name="Decal6" type="Decal" parent="Testers/GPUParticlesSmoke"]
+[node name="Decal6" type="Decal" parent="Testers/GPUParticlesSmoke" unique_id=1297078863]
 transform = Transform3D(-0.481494, 0, -0.87645, 0, 1, 0, 0.87645, 0, -0.481494, 0, 0, 0)
 size = Vector3(3.2, 0.02, 2.6)
 texture_albedo = ExtResource("3_pmhp8")
 modulate = Color(0, 0, 0, 1)
 
-[node name="GPUParticlesAttractor" type="Node3D" parent="Testers"]
+[node name="GPUParticlesAttractor" type="Node3D" parent="Testers" unique_id=553568910]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesAttractor"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesAttractor" unique_id=738239664]
 amount = 300
 lifetime = 3.0
 fixed_fps = 0
@@ -801,21 +799,21 @@ interpolate = false
 process_material = SubResource("ParticlesMaterial_4noo4")
 draw_pass_1 = SubResource("QuadMesh_mkwq1")
 
-[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="Testers/GPUParticlesAttractor"]
+[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="Testers/GPUParticlesAttractor" unique_id=43369781]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, 0)
 strength = 50.0
 cull_mask = 1
 radius = 2.0
 metadata/_edit_group_ = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/GPUParticlesAttractor/GPUParticlesAttractorSphere3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/GPUParticlesAttractor/GPUParticlesAttractorSphere3D" unique_id=34846924]
 mesh = SubResource("SphereMesh_s80dr")
 surface_material_override/0 = SubResource("StandardMaterial3D_ihtrr")
 
-[node name="GPUParticlesTurbulence" type="Node3D" parent="Testers"]
+[node name="GPUParticlesTurbulence" type="Node3D" parent="Testers" unique_id=1880681570]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesTurbulence"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesTurbulence" unique_id=1869926396]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 layers = 2
 amount = 300
@@ -824,10 +822,10 @@ interpolate = false
 process_material = SubResource("ParticleProcessMaterial_fdjih")
 draw_pass_1 = SubResource("QuadMesh_7ay8c")
 
-[node name="GPUParticlesCollision" type="Node3D" parent="Testers"]
+[node name="GPUParticlesCollision" type="Node3D" parent="Testers" unique_id=978452103]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesCollision"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesCollision" unique_id=1429911502]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 amount = 50
 lifetime = 2.0
@@ -838,23 +836,23 @@ visibility_aabb = AABB(-1.63511, -1.25001, -1.31512, 3.0892, 2.15487, 2.91765)
 process_material = SubResource("ParticlesMaterial_ft0gs")
 draw_pass_1 = SubResource("BoxMesh_88317")
 
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Testers/GPUParticlesCollision"]
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Testers/GPUParticlesCollision" unique_id=608523768]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 size = Vector3(4, 2, 4)
 
-[node name="MovingBox" type="MeshInstance3D" parent="Testers/GPUParticlesCollision"]
+[node name="MovingBox" type="MeshInstance3D" parent="Testers/GPUParticlesCollision" unique_id=91572906]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, -0.45, -0.5)
 mesh = SubResource("BoxMesh_3dp4g")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_3jlyg")
 
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Testers/GPUParticlesCollision/MovingBox"]
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Testers/GPUParticlesCollision/MovingBox" unique_id=403341251]
 size = Vector3(1, 1, 1)
 
-[node name="GPUParticlesCollisionGlobalCoords" type="Node3D" parent="Testers"]
+[node name="GPUParticlesCollisionGlobalCoords" type="Node3D" parent="Testers" unique_id=1882569445]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesCollisionGlobalCoords"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesCollisionGlobalCoords" unique_id=1667050450]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 extra_cull_margin = 3.0
 amount = 50
@@ -866,33 +864,33 @@ visibility_aabb = AABB(-1.50087, -1.25001, -1.4745, 3.19423, 2.13905, 3.02308)
 process_material = SubResource("ParticlesMaterial_ft0gs")
 draw_pass_1 = SubResource("BoxMesh_88317")
 
-[node name="GPUParticlesCollisionBox3D2" type="GPUParticlesCollisionBox3D" parent="Testers/GPUParticlesCollisionGlobalCoords"]
+[node name="GPUParticlesCollisionBox3D2" type="GPUParticlesCollisionBox3D" parent="Testers/GPUParticlesCollisionGlobalCoords" unique_id=99502966]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 size = Vector3(4, 2, 4)
 
-[node name="MovingBox" type="MeshInstance3D" parent="Testers/GPUParticlesCollisionGlobalCoords"]
+[node name="MovingBox" type="MeshInstance3D" parent="Testers/GPUParticlesCollisionGlobalCoords" unique_id=709229059]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, -0.45, -0.5)
 mesh = SubResource("BoxMesh_3dp4g")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_3jlyg")
 
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Testers/GPUParticlesCollisionGlobalCoords/MovingBox"]
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Testers/GPUParticlesCollisionGlobalCoords/MovingBox" unique_id=1124970534]
 size = Vector3(1, 1, 1)
 
-[node name="GPUParticles3DFoam" type="Node3D" parent="Testers"]
+[node name="GPUParticles3DFoam" type="Node3D" parent="Testers" unique_id=1015297556]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticles3DFoam"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticles3DFoam" unique_id=320174571]
 amount = 200
 fixed_fps = 0
 interpolate = false
 process_material = SubResource("ParticlesMaterial_pe2at")
 draw_pass_1 = SubResource("SphereMesh_rowu5")
 
-[node name="GPUParticlesTrails" type="Node3D" parent="Testers"]
+[node name="GPUParticlesTrails" type="Node3D" parent="Testers" unique_id=2018649393]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesTrails"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesTrails" unique_id=1816296603]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 amount = 50
 lifetime = 2.0
@@ -904,14 +902,14 @@ draw_passes = 2
 draw_pass_1 = SubResource("TubeTrailMesh_slq55")
 draw_pass_2 = null
 
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Testers/GPUParticlesTrails"]
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Testers/GPUParticlesTrails" unique_id=1743259322]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 size = Vector3(4, 2, 4)
 
-[node name="GPUParticlesSubemitterAtEnd" type="Node3D" parent="Testers"]
+[node name="GPUParticlesSubemitterAtEnd" type="Node3D" parent="Testers" unique_id=1989301993]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesSubemitterAtEnd"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesSubemitterAtEnd" unique_id=837495552]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 amount = 15
 sub_emitter = NodePath("Subemitter")
@@ -921,7 +919,7 @@ interpolate = false
 process_material = SubResource("ParticlesMaterial_87mxs")
 draw_pass_1 = SubResource("BoxMesh_olbrk")
 
-[node name="Subemitter" type="GPUParticles3D" parent="Testers/GPUParticlesSubemitterAtEnd/GPUParticles3D"]
+[node name="Subemitter" type="GPUParticles3D" parent="Testers/GPUParticlesSubemitterAtEnd/GPUParticles3D" unique_id=1507708498]
 emitting = false
 amount = 15
 fixed_fps = 0
@@ -930,14 +928,14 @@ collision_base_size = 0.1
 process_material = SubResource("ParticlesMaterial_tvato")
 draw_pass_1 = SubResource("SphereMesh_g7qur")
 
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Testers/GPUParticlesSubemitterAtEnd"]
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Testers/GPUParticlesSubemitterAtEnd" unique_id=276750554]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 size = Vector3(4, 2, 4)
 
-[node name="GPUParticlesSubemitterOnCollision" type="Node3D" parent="Testers"]
+[node name="GPUParticlesSubemitterOnCollision" type="Node3D" parent="Testers" unique_id=19650961]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -18)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesSubemitterOnCollision"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesSubemitterOnCollision" unique_id=625241286]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
 amount = 15
 sub_emitter = NodePath("Subemitter")
@@ -948,7 +946,7 @@ collision_base_size = 0.1
 process_material = SubResource("ParticlesMaterial_b7k7i")
 draw_pass_1 = SubResource("BoxMesh_olbrk")
 
-[node name="Subemitter" type="GPUParticles3D" parent="Testers/GPUParticlesSubemitterOnCollision/GPUParticles3D"]
+[node name="Subemitter" type="GPUParticles3D" parent="Testers/GPUParticlesSubemitterOnCollision/GPUParticles3D" unique_id=1334322427]
 emitting = false
 amount = 150
 lifetime = 10.0
@@ -958,14 +956,14 @@ collision_base_size = 0.1
 process_material = SubResource("ParticlesMaterial_6htaw")
 draw_pass_1 = SubResource("SphereMesh_g7qur")
 
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Testers/GPUParticlesSubemitterOnCollision"]
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Testers/GPUParticlesSubemitterOnCollision" unique_id=1997517038]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 size = Vector3(4, 2, 4)
 
-[node name="GPUParticlesCollisionSDF" type="Node3D" parent="Testers"]
+[node name="GPUParticlesCollisionSDF" type="Node3D" parent="Testers" unique_id=1523713203]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesCollisionSDF"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesCollisionSDF" unique_id=1297472005]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 amount = 150
 lifetime = 1.5
@@ -976,39 +974,39 @@ visibility_aabb = AABB(-1.63511, -1.25001, -1.31512, 3.0892, 2.15487, 2.91765)
 process_material = SubResource("ParticleProcessMaterial_4f0te")
 draw_pass_1 = SubResource("SphereMesh_whk10")
 
-[node name="GPUParticlesCollisionSDF3D" type="GPUParticlesCollisionSDF3D" parent="Testers/GPUParticlesCollisionSDF"]
+[node name="GPUParticlesCollisionSDF3D" type="GPUParticlesCollisionSDF3D" parent="Testers/GPUParticlesCollisionSDF" unique_id=1597866443]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 size = Vector3(4, 1, 4)
 texture = ExtResource("4_wcrow")
 
-[node name="Tube" type="MeshInstance3D" parent="Testers/GPUParticlesCollisionSDF"]
+[node name="Tube" type="MeshInstance3D" parent="Testers/GPUParticlesCollisionSDF" unique_id=1526406127]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("TubeTrailMesh_rusnm")
 skeleton = NodePath("../../GPUParticlesCollisionHeightfield")
 
-[node name="Roof" type="MeshInstance3D" parent="Testers/GPUParticlesCollisionSDF"]
+[node name="Roof" type="MeshInstance3D" parent="Testers/GPUParticlesCollisionSDF" unique_id=2053054099]
 transform = Transform3D(0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, -1, 0.8, 0)
 mesh = SubResource("BoxMesh_frpx7")
 skeleton = NodePath("../../GPUParticlesCollisionHeightfield")
 
-[node name="Slope" type="MeshInstance3D" parent="Testers/GPUParticlesCollisionSDF"]
+[node name="Slope" type="MeshInstance3D" parent="Testers/GPUParticlesCollisionSDF" unique_id=1608165534]
 transform = Transform3D(-4.2222e-08, 1.13133e-08, -1, 0.866025, 0.5, -3.09086e-08, 0.5, -0.866025, -3.09086e-08, -1, 0.1, 0.599998)
 mesh = SubResource("BoxMesh_frpx7")
 skeleton = NodePath("../../GPUParticlesCollisionHeightfield")
 
-[node name="Slope2" type="MeshInstance3D" parent="Testers/GPUParticlesCollisionSDF"]
+[node name="Slope2" type="MeshInstance3D" parent="Testers/GPUParticlesCollisionSDF" unique_id=2146601711]
 transform = Transform3D(-4.2222e-08, 1.13133e-08, 1, 0.5, 0.866026, 1.13133e-08, -0.866025, 0.5, -4.2222e-08, -1, 0.1, -0.400002)
 mesh = SubResource("BoxMesh_frpx7")
 skeleton = NodePath("../../GPUParticlesCollisionHeightfield")
 
-[node name="Floor" type="MeshInstance3D" parent="Testers/GPUParticlesCollisionSDF"]
+[node name="Floor" type="MeshInstance3D" parent="Testers/GPUParticlesCollisionSDF" unique_id=228183698]
 mesh = SubResource("BoxMesh_dcd5l")
 skeleton = NodePath("../../GPUParticlesCollisionHeightfield")
 
-[node name="GPUParticlesCollisionHeightfield" type="Node3D" parent="Testers"]
+[node name="GPUParticlesCollisionHeightfield" type="Node3D" parent="Testers" unique_id=812677722]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -26)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesCollisionHeightfield"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/GPUParticlesCollisionHeightfield" unique_id=255665884]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 amount = 150
 lifetime = 1.5
@@ -1019,34 +1017,34 @@ visibility_aabb = AABB(-1.63511, -1.25001, -1.31512, 3.0892, 2.15487, 2.91765)
 process_material = SubResource("ParticleProcessMaterial_4f0te")
 draw_pass_1 = SubResource("SphereMesh_8xbmh")
 
-[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="Testers/GPUParticlesCollisionHeightfield"]
+[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="Testers/GPUParticlesCollisionHeightfield" unique_id=575314006]
 size = Vector3(4, 2, 4)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Testers/GPUParticlesCollisionHeightfield"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Testers/GPUParticlesCollisionHeightfield" unique_id=424624195]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 size = Vector3(3.5, 1, 3.5)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Testers/GPUParticlesCollisionHeightfield/CSGBox3D"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="Testers/GPUParticlesCollisionHeightfield/CSGBox3D" unique_id=1214775753]
 transform = Transform3D(1, 0, 0, 0, 0.996064, 0.0886335, 0, -0.0886335, 0.996064, 0, 0.92037, -0.361961)
 operation = 2
 size = Vector3(4, 1, 4)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="Testers/GPUParticlesCollisionHeightfield/CSGBox3D"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="Testers/GPUParticlesCollisionHeightfield/CSGBox3D" unique_id=1945234183]
 transform = Transform3D(0.638543, 0.331028, -0.694755, -0.177732, 0.94179, 0.285381, 0.748782, -0.0587477, 0.660207, 0.886086, 0.849547, 0.346458)
 operation = 2
 size = Vector3(4, 1, 4)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="Testers/GPUParticlesCollisionHeightfield/CSGBox3D"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="Testers/GPUParticlesCollisionHeightfield/CSGBox3D" unique_id=2004766166]
 transform = Transform3D(0.61798, -0.298242, -0.727428, 0.239637, 0.95268, -0.187014, 0.748782, -0.0587477, 0.660207, -0.249068, 0.868665, 0.346458)
 operation = 2
 size = Vector3(4, 1, 4)
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="Testers/GPUParticlesCollisionHeightfield/CSGBox3D"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="Testers/GPUParticlesCollisionHeightfield/CSGBox3D" unique_id=1130704327]
 transform = Transform3D(0.453442, 0.771907, -0.44559, -0.483441, 0.633015, 0.604629, 0.748782, -0.0587477, 0.660207, -0.310878, 1.96879, 0.695173)
 operation = 2
 size = Vector3(4, 1, 4)
 
-[node name="TestName" type="Label" parent="."]
+[node name="TestName" type="Label" parent="." unique_id=1113582877]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -1063,7 +1061,7 @@ theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 
-[node name="Previous" type="Button" parent="."]
+[node name="Previous" type="Button" parent="." unique_id=1175723405]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -1074,7 +1072,7 @@ offset_bottom = -24.0
 grow_vertical = 0
 text = "«  Previous"
 
-[node name="Next" type="Button" parent="."]
+[node name="Next" type="Button" parent="." unique_id=851502559]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0

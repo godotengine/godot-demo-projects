@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d4k7aa6mluvns"]
+[gd_scene format=3 uid="uid://d4k7aa6mluvns"]
 
 [ext_resource type="Script" uid="uid://be1h3wc6eo6qd" path="res://controls.gd" id="1_ojycn"]
 
@@ -178,9 +178,9 @@ _data = {
 &"move_text_around": SubResource("Animation_ww6nu")
 }
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=469605317]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1519025367]
 transform = Transform3D(-0.98244, -0.0593698, 0.176879, 0.0241111, 0.899674, 0.435897, -0.185013, 0.432507, -0.882444, 0.181812, 3.12655, 5.93493)
 shadow_enabled = true
 shadow_bias = 0.04
@@ -188,55 +188,55 @@ shadow_blur = 2.0
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 35.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=585907484]
 environment = SubResource("Environment_ixbrf")
 
-[node name="Move" type="Node3D" parent="."]
+[node name="Move" type="Node3D" parent="." unique_id=1133355259]
 
-[node name="Ground" type="MeshInstance3D" parent="Move"]
+[node name="Ground" type="MeshInstance3D" parent="Move" unique_id=1765979075]
 transform = Transform3D(-1, 0, -3.82137e-15, 0, 1, -8.74228e-08, 3.82137e-15, -8.74228e-08, -1, -7.45058e-09, -8, 0)
 mesh = SubResource("BoxMesh_rpkrt")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_eicib")
 
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Move/Ground"]
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Move/Ground" unique_id=520076092]
 transform = Transform3D(-7.37408e-15, 4.37114e-08, -1, 8.74228e-08, 1, 4.37114e-08, 1, -8.74228e-08, -1.31061e-14, -7.45058e-09, 9.53674e-07, 9.53674e-07)
 size = Vector3(16, 16, 16)
 
-[node name="Flat" type="MeshInstance3D" parent="Move"]
+[node name="Flat" type="MeshInstance3D" parent="Move" unique_id=43709333]
 transform = Transform3D(1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, 0, -0.5, 4.9)
 mesh = SubResource("BoxMesh_1f2ne")
 
-[node name="Sphere" type="MeshInstance3D" parent="Move"]
+[node name="Sphere" type="MeshInstance3D" parent="Move" unique_id=1817656032]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("SphereMesh_q0pwk")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ekrgh")
 
-[node name="GPUParticlesCollisionSphere3D" type="GPUParticlesCollisionSphere3D" parent="Move/Sphere"]
+[node name="GPUParticlesCollisionSphere3D" type="GPUParticlesCollisionSphere3D" parent="Move/Sphere" unique_id=34489301]
 radius = 2.0
 
-[node name="Text" type="MeshInstance3D" parent="Move"]
+[node name="Text" type="MeshInstance3D" parent="Move" unique_id=1157510206]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.70893, 2)
 cast_shadow = 0
 mesh = SubResource("TextMesh_oxha3")
 surface_material_override/0 = SubResource("StandardMaterial3D_wvbit")
 
-[node name="Torus" type="MeshInstance3D" parent="Move"]
+[node name="Torus" type="MeshInstance3D" parent="Move" unique_id=809292033]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("TorusMesh_44mpc")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_i8ybo")
 
-[node name="CameraHolder" type="Node3D" parent="Move"]
+[node name="CameraHolder" type="Node3D" parent="Move" unique_id=1973448674]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
-[node name="RotationX" type="Node3D" parent="Move/CameraHolder"]
+[node name="RotationX" type="Node3D" parent="Move/CameraHolder" unique_id=1202423388]
 
-[node name="Camera3D" type="Camera3D" parent="Move/CameraHolder/RotationX"]
+[node name="Camera3D" type="Camera3D" parent="Move/CameraHolder/RotationX" unique_id=1804962342]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 7)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Move"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Move" unique_id=1126549983]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 0)
 amount = 500
 lifetime = 3.0
@@ -248,7 +248,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_r08do")
 draw_pass_1 = SubResource("SphereMesh_f1qcl")
 
-[node name="Controls" type="VBoxContainer" parent="." node_paths=PackedStringArray("camera", "camera_holder", "rotation_x", "node_to_move")]
+[node name="Controls" type="VBoxContainer" parent="." unique_id=1648371453 node_paths=PackedStringArray("camera", "camera_holder", "rotation_x", "node_to_move")]
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 350.0
@@ -260,7 +260,7 @@ camera_holder = NodePath("../Move/CameraHolder")
 rotation_x = NodePath("../Move/CameraHolder/RotationX")
 node_to_move = NodePath("../Move")
 
-[node name="HelpLabel" type="Label" parent="Controls"]
+[node name="HelpLabel" type="Label" parent="Controls" unique_id=1128768117]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.666667, 0.666667, 1)
@@ -270,14 +270,14 @@ text = "Double precision is not enabled in this engine build.
 Visible shaking is expected at high coordinate levels
 (±65,536 or more on any axis)."
 
-[node name="Button" type="Button" parent="Controls"]
+[node name="Button" type="Button" parent="Controls" unique_id=1441201748]
 layout_mode = 2
 text = "Open Documentation"
 
-[node name="HSeparator" type="HSeparator" parent="Controls"]
+[node name="HSeparator" type="HSeparator" parent="Controls" unique_id=1691523085]
 layout_mode = 2
 
-[node name="Coordinates" type="RichTextLabel" parent="Controls"]
+[node name="Coordinates" type="RichTextLabel" parent="Controls" unique_id=381062105]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
@@ -286,7 +286,7 @@ theme_override_constants/outline_size = 4
 bbcode_enabled = true
 text = "Object coordinates:"
 
-[node name="IncrementX" type="CheckButton" parent="Controls"]
+[node name="IncrementX" type="CheckButton" parent="Controls" unique_id=1377997410]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
@@ -296,7 +296,7 @@ theme_override_constants/outline_size = 4
 button_pressed = true
 text = "Increment X (10,000 per second)"
 
-[node name="IncrementY" type="CheckButton" parent="Controls"]
+[node name="IncrementY" type="CheckButton" parent="Controls" unique_id=1398247513]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
@@ -305,7 +305,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Increment Y (100,000 per second)"
 
-[node name="IncrementZ" type="CheckButton" parent="Controls"]
+[node name="IncrementZ" type="CheckButton" parent="Controls" unique_id=1841947720]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
@@ -314,56 +314,54 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Increment Z (1,000,000 per second)"
 
-[node name="GoTo" type="Label" parent="Controls"]
+[node name="GoTo" type="Label" parent="Controls" unique_id=2048538207]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Go to X coordinate:"
 
-[node name="HFlowContainer" type="HFlowContainer" parent="Controls"]
+[node name="HFlowContainer" type="HFlowContainer" parent="Controls" unique_id=1349637719]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="Controls/HFlowContainer"]
+[node name="Button" type="Button" parent="Controls/HFlowContainer" unique_id=1245685175]
 layout_mode = 2
 text = "0 (Reset All)"
 
-[node name="Button2" type="Button" parent="Controls/HFlowContainer"]
+[node name="Button2" type="Button" parent="Controls/HFlowContainer" unique_id=1444258732]
 layout_mode = 2
 text = "10,000"
 
-[node name="Button3" type="Button" parent="Controls/HFlowContainer"]
+[node name="Button3" type="Button" parent="Controls/HFlowContainer" unique_id=760315057]
 layout_mode = 2
 text = "100,000"
 
-[node name="Button4" type="Button" parent="Controls/HFlowContainer"]
+[node name="Button4" type="Button" parent="Controls/HFlowContainer" unique_id=2140956280]
 layout_mode = 2
 text = "1,000,000"
 
-[node name="Button5" type="Button" parent="Controls/HFlowContainer"]
+[node name="Button5" type="Button" parent="Controls/HFlowContainer" unique_id=883668876]
 layout_mode = 2
 text = "10,000,000"
 
-[node name="Button6" type="Button" parent="Controls/HFlowContainer"]
+[node name="Button6" type="Button" parent="Controls/HFlowContainer" unique_id=1786305335]
 layout_mode = 2
 text = "100,000,000"
 
-[node name="Button7" type="Button" parent="Controls/HFlowContainer"]
+[node name="Button7" type="Button" parent="Controls/HFlowContainer" unique_id=92259599]
 layout_mode = 2
 text = "1,000,000,000"
 
-[node name="Button8" type="Button" parent="Controls/HFlowContainer"]
+[node name="Button8" type="Button" parent="Controls/HFlowContainer" unique_id=647832043]
 layout_mode = 2
 text = "1,000,000,000,000"
 
-[node name="Button9" type="Button" parent="Controls/HFlowContainer"]
+[node name="Button9" type="Button" parent="Controls/HFlowContainer" unique_id=1744203161]
 layout_mode = 2
 text = "10,000,000,000,000"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_2gye4")
-}
-autoplay = "move_text_around"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=935766595]
+libraries/ = SubResource("AnimationLibrary_2gye4")
+autoplay = &"move_text_around"
 
 [connection signal="pressed" from="Controls/Button" to="Controls" method="_on_open_documentation_pressed"]
 [connection signal="pressed" from="Controls/HFlowContainer/Button" to="Controls" method="_on_go_to_button_pressed" binds= [0]]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ksucw5a5e8ed"]
+[gd_scene format=3 uid="uid://ksucw5a5e8ed"]
 
 [ext_resource type="Script" uid="uid://cy6huu2i7hvie" path="res://joypads.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://blcqwg1exaeuc" path="res://joypad_diagram.tscn" id="2"]
@@ -44,7 +44,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 3
 
-[node name="JoypadsDemo" type="Control"]
+[node name="JoypadsDemo" type="Control" unique_id=638673023]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,32 +57,32 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 
-[node name="JoypadDiagram" parent="." instance=ExtResource("2")]
+[node name="JoypadDiagram" parent="." unique_id=1619980562 instance=ExtResource("2")]
 position = Vector2(415, 183)
 scale = Vector2(0.5, 0.5)
 
-[node name="DeviceInfo" type="HBoxContainer" parent="."]
+[node name="DeviceInfo" type="HBoxContainer" parent="." unique_id=778072740]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 50.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="DeviceInfo"]
+[node name="Label" type="Label" parent="DeviceInfo" unique_id=1754085112]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Device"
 
-[node name="JoyNumber" type="SpinBox" parent="DeviceInfo"]
+[node name="JoyNumber" type="SpinBox" parent="DeviceInfo" unique_id=702565488]
 layout_mode = 2
 size_flags_vertical = 0
 max_value = 16.0
 
-[node name="VSeparator" type="VSeparator" parent="DeviceInfo"]
+[node name="VSeparator" type="VSeparator" parent="DeviceInfo" unique_id=1440112129]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="JoyName" type="RichTextLabel" parent="DeviceInfo"]
+[node name="JoyName" type="RichTextLabel" parent="DeviceInfo" unique_id=841063832]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -93,24 +93,24 @@ scroll_active = false
 context_menu_enabled = true
 selection_enabled = true
 
-[node name="Axes" type="VBoxContainer" parent="."]
+[node name="Axes" type="VBoxContainer" parent="." unique_id=650518098]
 layout_mode = 0
 offset_top = 62.0
 offset_right = 255.0
 offset_bottom = 322.0
 theme_override_constants/separation = -2
 
-[node name="Axis0" type="HBoxContainer" parent="Axes"]
+[node name="Axis0" type="HBoxContainer" parent="Axes" unique_id=218354479]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Axes/Axis0"]
+[node name="Label" type="Label" parent="Axes/Axis0" unique_id=409400679]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 0.3
 text = "Axis 0"
 
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis0"]
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis0" unique_id=493221155]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -120,7 +120,7 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="RichTextLabel" parent="Axes/Axis0/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis0/ProgressBar" unique_id=249712444]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
@@ -131,17 +131,17 @@ bbcode_enabled = true
 text = "[center]0[/center]"
 scroll_active = false
 
-[node name="Axis1" type="HBoxContainer" parent="Axes"]
+[node name="Axis1" type="HBoxContainer" parent="Axes" unique_id=1476756203]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Axes/Axis1"]
+[node name="Label" type="Label" parent="Axes/Axis1" unique_id=90274866]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 0.3
 text = "Axis 1"
 
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis1"]
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis1" unique_id=1291401734]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -151,7 +151,7 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="RichTextLabel" parent="Axes/Axis1/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis1/ProgressBar" unique_id=1424450249]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
@@ -162,17 +162,17 @@ bbcode_enabled = true
 text = "[center]0[/center]"
 scroll_active = false
 
-[node name="Axis2" type="HBoxContainer" parent="Axes"]
+[node name="Axis2" type="HBoxContainer" parent="Axes" unique_id=1409266726]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Axes/Axis2"]
+[node name="Label" type="Label" parent="Axes/Axis2" unique_id=833966335]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 0.3
 text = "Axis 2"
 
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis2"]
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis2" unique_id=423224707]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -182,7 +182,7 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="RichTextLabel" parent="Axes/Axis2/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis2/ProgressBar" unique_id=522392358]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
@@ -193,17 +193,17 @@ bbcode_enabled = true
 text = "[center]0[/center]"
 scroll_active = false
 
-[node name="Axis3" type="HBoxContainer" parent="Axes"]
+[node name="Axis3" type="HBoxContainer" parent="Axes" unique_id=2007058672]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Axes/Axis3"]
+[node name="Label" type="Label" parent="Axes/Axis3" unique_id=2073705961]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 0.3
 text = "Axis 3"
 
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis3"]
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis3" unique_id=489376467]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -213,7 +213,7 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="RichTextLabel" parent="Axes/Axis3/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis3/ProgressBar" unique_id=227038555]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
@@ -224,17 +224,17 @@ bbcode_enabled = true
 text = "[center]0[/center]"
 scroll_active = false
 
-[node name="Axis4" type="HBoxContainer" parent="Axes"]
+[node name="Axis4" type="HBoxContainer" parent="Axes" unique_id=276812663]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Axes/Axis4"]
+[node name="Label" type="Label" parent="Axes/Axis4" unique_id=2013764387]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 0.3
 text = "Axis 4"
 
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis4"]
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis4" unique_id=562585022]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -244,7 +244,7 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="RichTextLabel" parent="Axes/Axis4/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis4/ProgressBar" unique_id=1351267387]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
@@ -255,17 +255,17 @@ bbcode_enabled = true
 text = "[center]0[/center]"
 scroll_active = false
 
-[node name="Axis5" type="HBoxContainer" parent="Axes"]
+[node name="Axis5" type="HBoxContainer" parent="Axes" unique_id=2137461300]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Axes/Axis5"]
+[node name="Label" type="Label" parent="Axes/Axis5" unique_id=1861572275]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 0.3
 text = "Axis 5"
 
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis5"]
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis5" unique_id=1177827680]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -275,7 +275,7 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="RichTextLabel" parent="Axes/Axis5/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis5/ProgressBar" unique_id=583405141]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
@@ -286,17 +286,17 @@ bbcode_enabled = true
 text = "[center]0[/center]"
 scroll_active = false
 
-[node name="Axis6" type="HBoxContainer" parent="Axes"]
+[node name="Axis6" type="HBoxContainer" parent="Axes" unique_id=376549173]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Axes/Axis6"]
+[node name="Label" type="Label" parent="Axes/Axis6" unique_id=226209912]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 0.3
 text = "Axis 6"
 
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis6"]
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis6" unique_id=54211353]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -306,7 +306,7 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="RichTextLabel" parent="Axes/Axis6/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis6/ProgressBar" unique_id=1687181218]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
@@ -317,17 +317,17 @@ bbcode_enabled = true
 text = "[center]0[/center]"
 scroll_active = false
 
-[node name="Axis7" type="HBoxContainer" parent="Axes"]
+[node name="Axis7" type="HBoxContainer" parent="Axes" unique_id=1262791050]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Axes/Axis7"]
+[node name="Label" type="Label" parent="Axes/Axis7" unique_id=741711891]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 0.3
 text = "Axis 7"
 
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis7"]
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis7" unique_id=1279222739]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -337,7 +337,7 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="RichTextLabel" parent="Axes/Axis7/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis7/ProgressBar" unique_id=948773843]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
@@ -348,17 +348,17 @@ bbcode_enabled = true
 text = "[center]0[/center]"
 scroll_active = false
 
-[node name="Axis8" type="HBoxContainer" parent="Axes"]
+[node name="Axis8" type="HBoxContainer" parent="Axes" unique_id=2113203138]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Axes/Axis8"]
+[node name="Label" type="Label" parent="Axes/Axis8" unique_id=176662583]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 0.3
 text = "Axis 8"
 
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis8"]
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis8" unique_id=1621492490]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -368,7 +368,7 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="RichTextLabel" parent="Axes/Axis8/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis8/ProgressBar" unique_id=2058035961]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
@@ -379,17 +379,17 @@ bbcode_enabled = true
 text = "[center]0[/center]"
 scroll_active = false
 
-[node name="Axis9" type="HBoxContainer" parent="Axes"]
+[node name="Axis9" type="HBoxContainer" parent="Axes" unique_id=1576557649]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Axes/Axis9"]
+[node name="Label" type="Label" parent="Axes/Axis9" unique_id=1723826544]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 0.3
 text = "Axis 9"
 
-[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis9"]
+[node name="ProgressBar" type="ProgressBar" parent="Axes/Axis9" unique_id=1017058596]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -399,7 +399,7 @@ min_value = -100.0
 step = 0.0001
 show_percentage = false
 
-[node name="Value" type="RichTextLabel" parent="Axes/Axis9/ProgressBar"]
+[node name="Value" type="RichTextLabel" parent="Axes/Axis9/ProgressBar" unique_id=1060064136]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 0
 anchor_right = 1.0
@@ -410,7 +410,7 @@ bbcode_enabled = true
 text = "[center]0[/center]"
 scroll_active = false
 
-[node name="Buttons" type="VBoxContainer" parent="."]
+[node name="Buttons" type="VBoxContainer" parent="." unique_id=1269715176]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -423,143 +423,143 @@ offset_bottom = -34.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="Label" type="Label" parent="Buttons"]
+[node name="Label" type="Label" parent="Buttons" unique_id=2050378839]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Buttons:"
 
-[node name="ButtonGrid" type="GridContainer" parent="Buttons"]
+[node name="ButtonGrid" type="GridContainer" parent="Buttons" unique_id=1330118840]
 layout_mode = 2
 columns = 8
 
-[node name="0" type="Label" parent="Buttons/ButtonGrid"]
+[node name="0" type="Label" parent="Buttons/ButtonGrid" unique_id=752685989]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "0"
 
-[node name="1" type="Label" parent="Buttons/ButtonGrid"]
+[node name="1" type="Label" parent="Buttons/ButtonGrid" unique_id=655721554]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "1"
 
-[node name="2" type="Label" parent="Buttons/ButtonGrid"]
+[node name="2" type="Label" parent="Buttons/ButtonGrid" unique_id=2067963255]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "2"
 
-[node name="3" type="Label" parent="Buttons/ButtonGrid"]
+[node name="3" type="Label" parent="Buttons/ButtonGrid" unique_id=1815806319]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "3"
 
-[node name="4" type="Label" parent="Buttons/ButtonGrid"]
+[node name="4" type="Label" parent="Buttons/ButtonGrid" unique_id=342278283]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "4"
 
-[node name="5" type="Label" parent="Buttons/ButtonGrid"]
+[node name="5" type="Label" parent="Buttons/ButtonGrid" unique_id=1940888195]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "5"
 
-[node name="6" type="Label" parent="Buttons/ButtonGrid"]
+[node name="6" type="Label" parent="Buttons/ButtonGrid" unique_id=1030617424]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "6"
 
-[node name="7" type="Label" parent="Buttons/ButtonGrid"]
+[node name="7" type="Label" parent="Buttons/ButtonGrid" unique_id=163915351]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "7"
 
-[node name="8" type="Label" parent="Buttons/ButtonGrid"]
+[node name="8" type="Label" parent="Buttons/ButtonGrid" unique_id=2012222316]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "8"
 
-[node name="9" type="Label" parent="Buttons/ButtonGrid"]
+[node name="9" type="Label" parent="Buttons/ButtonGrid" unique_id=212117243]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "9"
 
-[node name="10" type="Label" parent="Buttons/ButtonGrid"]
+[node name="10" type="Label" parent="Buttons/ButtonGrid" unique_id=554047324]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "10"
 
-[node name="11" type="Label" parent="Buttons/ButtonGrid"]
+[node name="11" type="Label" parent="Buttons/ButtonGrid" unique_id=1577896246]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "11"
 
-[node name="12" type="Label" parent="Buttons/ButtonGrid"]
+[node name="12" type="Label" parent="Buttons/ButtonGrid" unique_id=1226006576]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "12"
 
-[node name="13" type="Label" parent="Buttons/ButtonGrid"]
+[node name="13" type="Label" parent="Buttons/ButtonGrid" unique_id=1179659903]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "13"
 
-[node name="14" type="Label" parent="Buttons/ButtonGrid"]
+[node name="14" type="Label" parent="Buttons/ButtonGrid" unique_id=2061259692]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "14"
 
-[node name="15" type="Label" parent="Buttons/ButtonGrid"]
+[node name="15" type="Label" parent="Buttons/ButtonGrid" unique_id=1766199145]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "15"
 
-[node name="16" type="Label" parent="Buttons/ButtonGrid"]
+[node name="16" type="Label" parent="Buttons/ButtonGrid" unique_id=717175680]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "16"
 
-[node name="17" type="Label" parent="Buttons/ButtonGrid"]
+[node name="17" type="Label" parent="Buttons/ButtonGrid" unique_id=1239704544]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "17"
 
-[node name="18" type="Label" parent="Buttons/ButtonGrid"]
+[node name="18" type="Label" parent="Buttons/ButtonGrid" unique_id=1900348427]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "18"
 
-[node name="19" type="Label" parent="Buttons/ButtonGrid"]
+[node name="19" type="Label" parent="Buttons/ButtonGrid" unique_id=1024631684]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "19"
 
-[node name="20" type="Label" parent="Buttons/ButtonGrid"]
+[node name="20" type="Label" parent="Buttons/ButtonGrid" unique_id=301280987]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "20"
 
-[node name="Vibration" type="VBoxContainer" parent="."]
+[node name="Vibration" type="VBoxContainer" parent="." unique_id=686141822]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -568,79 +568,79 @@ offset_top = -144.0
 offset_right = 270.0
 grow_vertical = 0
 
-[node name="Weak" type="HBoxContainer" parent="Vibration"]
+[node name="Weak" type="HBoxContainer" parent="Vibration" unique_id=1417776639]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Vibration/Weak"]
+[node name="Label" type="Label" parent="Vibration/Weak" unique_id=1578711476]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Vibration Weak Motor:"
 
-[node name="Value" type="SpinBox" parent="Vibration/Weak"]
+[node name="Value" type="SpinBox" parent="Vibration/Weak" unique_id=703215020]
 layout_mode = 2
 size_flags_vertical = 3
 max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="Strong" type="HBoxContainer" parent="Vibration"]
+[node name="Strong" type="HBoxContainer" parent="Vibration" unique_id=2033496600]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Vibration/Strong"]
+[node name="Label" type="Label" parent="Vibration/Strong" unique_id=440488663]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Vibration Strong Motor:"
 
-[node name="Value" type="SpinBox" parent="Vibration/Strong"]
+[node name="Value" type="SpinBox" parent="Vibration/Strong" unique_id=1506420036]
 layout_mode = 2
 size_flags_vertical = 3
 max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="Duration" type="HBoxContainer" parent="Vibration"]
+[node name="Duration" type="HBoxContainer" parent="Vibration" unique_id=972790522]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Vibration/Duration"]
+[node name="Label" type="Label" parent="Vibration/Duration" unique_id=756076085]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Vibration Duration:"
 
-[node name="Value" type="SpinBox" parent="Vibration/Duration"]
+[node name="Value" type="SpinBox" parent="Vibration/Duration" unique_id=108341692]
 layout_mode = 2
 size_flags_vertical = 3
 max_value = 10.0
 step = 0.1
 value = 1.0
 
-[node name="HSeparator" type="HSeparator" parent="Vibration"]
+[node name="HSeparator" type="HSeparator" parent="Vibration" unique_id=1867797450]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="Buttons" type="HBoxContainer" parent="Vibration"]
+[node name="Buttons" type="HBoxContainer" parent="Vibration" unique_id=1723078614]
 layout_mode = 2
 
-[node name="Start" type="Button" parent="Vibration/Buttons"]
+[node name="Start" type="Button" parent="Vibration/Buttons" unique_id=1368720511]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 focus_mode = 0
 text = "Start Vibration"
 
-[node name="VSeparator" type="VSeparator" parent="Vibration/Buttons"]
+[node name="VSeparator" type="VSeparator" parent="Vibration/Buttons" unique_id=1927700202]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="Stop" type="Button" parent="Vibration/Buttons"]
+[node name="Stop" type="Button" parent="Vibration/Buttons" unique_id=524559057]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Stop Vibration"
 
-[node name="VBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="HBoxContainer" parent="." unique_id=400236891]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -653,19 +653,19 @@ grow_horizontal = 0
 grow_vertical = 0
 alignment = 1
 
-[node name="Clear" type="Button" parent="VBoxContainer"]
+[node name="Clear" type="Button" parent="VBoxContainer" unique_id=923970874]
 layout_mode = 2
 text = "Set Raw Mapping"
 
-[node name="Remap" type="Button" parent="VBoxContainer"]
+[node name="Remap" type="Button" parent="VBoxContainer" unique_id=1750521358]
 layout_mode = 2
 text = "Remap"
 
-[node name="Show" type="Button" parent="VBoxContainer"]
+[node name="Show" type="Button" parent="VBoxContainer" unique_id=887345514]
 layout_mode = 2
 text = "Show"
 
-[node name="RemapWizard" parent="." instance=ExtResource("3")]
+[node name="RemapWizard" parent="." unique_id=835052650 instance=ExtResource("3")]
 
 [connection signal="meta_clicked" from="DeviceInfo/JoyName" to="." method="_on_joy_name_meta_clicked"]
 [connection signal="pressed" from="Vibration/Buttons/Start" to="." method="_on_start_vibration_pressed"]

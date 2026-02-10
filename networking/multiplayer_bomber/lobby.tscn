@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://xpk2m2jmpaox"]
+[gd_scene format=3 uid="uid://xpk2m2jmpaox"]
 
 [ext_resource type="Script" uid="uid://tpi1sqvgg2qf" path="res://lobby.gd" id="1"]
 
-[node name="Lobby" type="Control"]
+[node name="Lobby" type="Control" unique_id=125506540]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,7 +13,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource("1")
 
-[node name="Players" type="Panel" parent="."]
+[node name="Players" type="Panel" parent="." unique_id=1013754916]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -30,7 +30,7 @@ grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="Label" type="Label" parent="Players"]
+[node name="Label" type="Label" parent="Players" unique_id=637272658]
 layout_mode = 0
 offset_left = 26.0
 offset_top = 7.0
@@ -41,7 +41,7 @@ size_flags_vertical = 0
 text = "Awaiting Players..."
 horizontal_alignment = 1
 
-[node name="Start" type="Button" parent="Players"]
+[node name="Start" type="Button" parent="Players" unique_id=1342955133]
 layout_mode = 0
 offset_left = 68.0
 offset_top = 307.0
@@ -51,7 +51,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "START!"
 
-[node name="List" type="ItemList" parent="Players"]
+[node name="List" type="ItemList" parent="Players" unique_id=392983837]
 layout_mode = 0
 offset_left = 25.0
 offset_top = 37.0
@@ -60,7 +60,7 @@ offset_bottom = 296.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="PortForward" type="Label" parent="Players"]
+[node name="PortForward" type="Label" parent="Players" unique_id=43167564]
 layout_mode = 0
 offset_left = -124.0
 offset_top = 375.0
@@ -71,7 +71,7 @@ text = "If you want non-LAN clients to connect,
 make sure the port 10567 in UDP
 is forwarded on your router."
 
-[node name="FindPublicIP" type="LinkButton" parent="Players"]
+[node name="FindPublicIP" type="LinkButton" parent="Players" unique_id=835172016]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 409.5
@@ -79,7 +79,7 @@ offset_right = 408.0
 offset_bottom = 432.5
 text = "Find your public IP address"
 
-[node name="Connect" type="Panel" parent="."]
+[node name="Connect" type="Panel" parent="." unique_id=1250458413]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -95,7 +95,7 @@ grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="NameLabel" type="Label" parent="Connect"]
+[node name="NameLabel" type="Label" parent="Connect" unique_id=2019522305]
 layout_mode = 0
 offset_left = 14.0
 offset_top = 11.0
@@ -105,7 +105,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Name:"
 
-[node name="Name" type="LineEdit" parent="Connect"]
+[node name="Name" type="LineEdit" parent="Connect" unique_id=980379627]
 layout_mode = 0
 offset_left = 17.0
 offset_top = 38.0
@@ -115,7 +115,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "The Warrior"
 
-[node name="IPLabel" type="Label" parent="Connect"]
+[node name="IPLabel" type="Label" parent="Connect" unique_id=1567189526]
 layout_mode = 0
 offset_left = 15.0
 offset_top = 74.0
@@ -126,7 +126,7 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 16
 text = "IP:"
 
-[node name="IPAddress" type="LineEdit" parent="Connect"]
+[node name="IPAddress" type="LineEdit" parent="Connect" unique_id=355729617]
 layout_mode = 0
 offset_left = 17.0
 offset_top = 102.0
@@ -136,7 +136,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "127.0.0.1"
 
-[node name="Host" type="Button" parent="Connect"]
+[node name="Host" type="Button" parent="Connect" unique_id=884396924]
 layout_mode = 0
 offset_left = 181.0
 offset_top = 38.0
@@ -146,7 +146,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Host"
 
-[node name="Join" type="Button" parent="Connect"]
+[node name="Join" type="Button" parent="Connect" unique_id=1609824487]
 layout_mode = 0
 offset_left = 181.0
 offset_top = 102.0
@@ -156,7 +156,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Join"
 
-[node name="ErrorLabel" type="Label" parent="Connect"]
+[node name="ErrorLabel" type="Label" parent="Connect" unique_id=2060731581]
 layout_mode = 0
 offset_left = 15.0
 offset_top = 138.0
@@ -166,7 +166,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.820312, 0.291595, 0.291595, 1)
 
-[node name="ErrorDialog" type="AcceptDialog" parent="."]
+[node name="ErrorDialog" type="AcceptDialog" parent="." unique_id=142008537]
 
 [connection signal="pressed" from="Players/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Players/FindPublicIP" to="." method="_on_find_public_ip_pressed"]

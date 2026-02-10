@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://clhke86mq8b7m"]
+[gd_scene format=3 uid="uid://clhke86mq8b7m"]
 
 [ext_resource type="PackedScene" uid="uid://ul1fp38n6h7k" path="res://gui_panel_3d.tscn" id="1"]
 
@@ -43,63 +43,61 @@ _data = {
 albedo_color = Color(0.722656, 0.791992, 1, 1)
 roughness = 0.0
 
-[node name="GUIin3D" type="Node3D"]
+[node name="GUIin3D" type="Node3D" unique_id=266018267]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1202417633]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 visible = false
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1411142490]
 environment = SubResource("Environment_niyks")
 
-[node name="GUIPanel3D" parent="." instance=ExtResource("1")]
+[node name="GUIPanel3D" parent="." unique_id=480736778 instance=ExtResource("1")]
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=581846446]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 3)
 fov = 74.0
 near = 0.1
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1176901106]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38866, 1.2413, 2.72141)
 shadow_enabled = true
 shadow_blur = 3.0
 omni_range = 10.0
 
-[node name="Camera_Move" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_uw4n0")
-}
-autoplay = "Move_camera"
+[node name="Camera_Move" type="AnimationPlayer" parent="." unique_id=1976009546]
+libraries/ = SubResource("AnimationLibrary_uw4n0")
+autoplay = &"Move_camera"
 
-[node name="Background" type="Node3D" parent="."]
+[node name="Background" type="Node3D" parent="." unique_id=1387915983]
 
-[node name="Wall" type="MeshInstance3D" parent="Background"]
+[node name="Wall" type="MeshInstance3D" parent="Background" unique_id=2093468025]
 transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, -2.60819, 0.589247, -2.08943)
 mesh = SubResource("2")
 
-[node name="Wall2" type="MeshInstance3D" parent="Background"]
+[node name="Wall2" type="MeshInstance3D" parent="Background" unique_id=2111795547]
 transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, 5.08055, 0.589247, -2.08943)
 mesh = SubResource("2")
 
-[node name="Wall3" type="MeshInstance3D" parent="Background"]
+[node name="Wall3" type="MeshInstance3D" parent="Background" unique_id=897765734]
 transform = Transform3D(-1.74846e-07, -4, 0, -1.74846e-07, 7.64274e-15, -4, 4, -1.74846e-07, -1.74846e-07, 9.04446, 0.589247, 1.62058)
 mesh = SubResource("2")
 
-[node name="Floor" type="MeshInstance3D" parent="Background"]
+[node name="Floor" type="MeshInstance3D" parent="Background" unique_id=1278800425]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -2.60819, -2.68765, 1.46502)
 mesh = SubResource("2")
 
-[node name="Floor2" type="MeshInstance3D" parent="Background"]
+[node name="Floor2" type="MeshInstance3D" parent="Background" unique_id=1605933432]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 5.08055, -2.68765, 1.46502)
 mesh = SubResource("2")
 
-[node name="Cube" type="MeshInstance3D" parent="Background"]
+[node name="Cube" type="MeshInstance3D" parent="Background" unique_id=31051218]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25901, -0.598608, 0.374871)
 mesh = SubResource("3")
 surface_material_override/0 = SubResource("4")
 
-[node name="Cube2" type="MeshInstance3D" parent="Background"]
+[node name="Cube2" type="MeshInstance3D" parent="Background" unique_id=1921303554]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.88761, 2.01326, 0.374871)
 mesh = SubResource("3")
 surface_material_override/0 = SubResource("4")

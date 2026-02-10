@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqguuy0aao4cr"]
+[gd_scene format=3 uid="uid://dqguuy0aao4cr"]
 
 [ext_resource type="Texture2D" uid="uid://t1yntfol7yga" path="res://icon.webp" id="1_8tycj"]
 [ext_resource type="Script" uid="uid://cidbihqfdp2ne" path="res://tree.gd" id="2_68sc3"]
@@ -19,7 +19,7 @@ corner_radius_bottom_left = 5
 [sub_resource type="FoldableGroup" id="FoldableGroup_wdd8d"]
 allow_folding_all = true
 
-[node name="ControlGallery" type="Control"]
+[node name="ControlGallery" type="Control" unique_id=78764481]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +27,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MainPanel" type="ColorRect" parent="."]
+[node name="MainPanel" type="ColorRect" parent="." unique_id=1034846833]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,7 +36,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.211765, 0.211765, 0.211765, 1)
 
-[node name="HSplitContainer" type="HSplitContainer" parent="MainPanel"]
+[node name="HSplitContainer" type="HSplitContainer" parent="MainPanel" unique_id=1275855520]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,26 +50,26 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 theme_override_constants/minimum_grab_thickness = 24
 
-[node name="BasicControls" type="PanelContainer" parent="MainPanel/HSplitContainer"]
+[node name="BasicControls" type="PanelContainer" parent="MainPanel/HSplitContainer" unique_id=628401494]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_bl4wp")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/HSplitContainer/BasicControls"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/HSplitContainer/BasicControls" unique_id=883181152]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Title" type="Label" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer"]
+[node name="Title" type="Label" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer" unique_id=1110287641]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Basic controls"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer"]
+[node name="Button" type="Button" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer" unique_id=904492456]
 layout_mode = 2
 text = "Button"
 
-[node name="LinkButton" type="LinkButton" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer"]
+[node name="LinkButton" type="LinkButton" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer" unique_id=2022276294]
 layout_mode = 2
 tooltip_text = "This is a tooltip.
 
@@ -77,53 +77,53 @@ Its background is styled using the TooltipPanel class within a Theme resource.
 Its text is styled using the TooltipLabel class within a Theme resource."
 text = "LinkButton (hover me for tooltip)"
 
-[node name="ColorPickerContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer"]
+[node name="ColorPickerContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer" unique_id=1708761196]
 layout_mode = 2
 
-[node name="ColorPickerButton" type="ColorPickerButton" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/ColorPickerContainer"]
+[node name="ColorPickerButton" type="ColorPickerButton" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/ColorPickerContainer" unique_id=1495684353]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 color = Color(0.278431, 0.54902, 0.74902, 1)
 
-[node name="Label" type="Label" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/ColorPickerContainer"]
+[node name="Label" type="Label" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/ColorPickerContainer" unique_id=957577956]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "ColorPickerButton"
 
-[node name="CheckBox" type="CheckBox" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer"]
+[node name="CheckBox" type="CheckBox" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer" unique_id=1270598086]
 layout_mode = 2
 text = "CheckBox"
 
-[node name="CheckButton" type="CheckButton" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer"]
+[node name="CheckButton" type="CheckButton" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer" unique_id=580803055]
 layout_mode = 2
 text = "CheckButton"
 
-[node name="LineEdit" type="LineEdit" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer" unique_id=1971128392]
 layout_mode = 2
 text = "LineEdit"
 
-[node name="TextEdit" type="TextEdit" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer"]
+[node name="TextEdit" type="TextEdit" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer" unique_id=733473856]
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 text = "TextEdit
 
 Unlike LineEdit, I accept multiple lines."
 
-[node name="Label" type="Label" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer"]
+[node name="Label" type="Label" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer" unique_id=759413544]
 layout_mode = 2
 text = "Label"
 
-[node name="TabContainer" type="TabContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer" unique_id=689183550]
 custom_minimum_size = Vector2(0, 236)
 layout_mode = 2
 current_tab = 0
 
-[node name="Tab 1" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer"]
+[node name="Tab 1" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer" unique_id=1140292982]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 1"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 1" unique_id=19013188]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -135,7 +135,7 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 30
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 1/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 1/MarginContainer" unique_id=2121543761]
 layout_mode = 2
 focus_mode = 2
 bbcode_enabled = true
@@ -143,12 +143,12 @@ text = "[center]RichTextLabel: [color=#8ff]Tab 1[/color] is selected.[/center]"
 context_menu_enabled = true
 selection_enabled = true
 
-[node name="Tab 2" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer"]
+[node name="Tab 2" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer" unique_id=1377173406]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 2"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 2" unique_id=1564521247]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -160,7 +160,7 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 30
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 2/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 2/MarginContainer" unique_id=1867012619]
 layout_mode = 2
 focus_mode = 2
 bbcode_enabled = true
@@ -168,12 +168,12 @@ text = "[center]RichTextLabel: [color=#ff8]Tab 2[/color] is selected.[/center]"
 context_menu_enabled = true
 selection_enabled = true
 
-[node name="Tab 3" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer"]
+[node name="Tab 3" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer" unique_id=1930679710]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 3"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 3" unique_id=812917956]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -185,7 +185,7 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 30
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 3/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 3/MarginContainer" unique_id=103690741]
 layout_mode = 2
 focus_mode = 2
 bbcode_enabled = true
@@ -193,12 +193,12 @@ text = "[center]RichTextLabel: [color=#8f8]Tab 3[/color] is selected.[/center]"
 context_menu_enabled = true
 selection_enabled = true
 
-[node name="Tab 4" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer"]
+[node name="Tab 4" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer" unique_id=1269043326]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 4"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 4" unique_id=204317753]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -210,7 +210,7 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 30
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 4/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 4/MarginContainer" unique_id=1991540811]
 layout_mode = 2
 focus_mode = 2
 bbcode_enabled = true
@@ -218,12 +218,12 @@ text = "[center]RichTextLabel: [color=#f88]Tab 4[/color] is selected.[/center]"
 context_menu_enabled = true
 selection_enabled = true
 
-[node name="Tab 5" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer"]
+[node name="Tab 5" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer" unique_id=952875062]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 5"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 5" unique_id=790172499]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -235,7 +235,7 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 30
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 5/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 5/MarginContainer" unique_id=2069495207]
 layout_mode = 2
 focus_mode = 2
 bbcode_enabled = true
@@ -243,12 +243,12 @@ text = "[center]RichTextLabel: [color=#f8f]Tab 5[/color] is selected.[/center]"
 context_menu_enabled = true
 selection_enabled = true
 
-[node name="Tab 6" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer"]
+[node name="Tab 6" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer" unique_id=1642309054]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 6"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 6" unique_id=1967267626]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -260,7 +260,7 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 30
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 6/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 6/MarginContainer" unique_id=389132194]
 layout_mode = 2
 focus_mode = 2
 bbcode_enabled = true
@@ -268,12 +268,12 @@ text = "[center]RichTextLabel: [color=#b8f]Tab 6[/color] is selected.[/center]"
 context_menu_enabled = true
 selection_enabled = true
 
-[node name="Tab 7" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer"]
+[node name="Tab 7" type="Control" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer" unique_id=637743948]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 6
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 7"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 7" unique_id=191909952]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -285,7 +285,7 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 30
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 7/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer/TabContainer/Tab 7/MarginContainer" unique_id=1024371952]
 layout_mode = 2
 focus_mode = 2
 bbcode_enabled = true
@@ -293,85 +293,85 @@ text = "[center]RichTextLabel: [color=#fb6]Tab 7[/color] is selected.[/center]"
 context_menu_enabled = true
 selection_enabled = true
 
-[node name="VSplitContainer" type="VSplitContainer" parent="MainPanel/HSplitContainer"]
+[node name="VSplitContainer" type="VSplitContainer" parent="MainPanel/HSplitContainer" unique_id=1004997238]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme_override_constants/separation = 0
 theme_override_constants/minimum_grab_thickness = 24
 
-[node name="Numbers" type="PanelContainer" parent="MainPanel/HSplitContainer/VSplitContainer"]
+[node name="Numbers" type="PanelContainer" parent="MainPanel/HSplitContainer/VSplitContainer" unique_id=294909274]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bl4wp")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers" unique_id=1638249311]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer"]
+[node name="Title" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer" unique_id=1283071032]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Numbers"
 horizontal_alignment = 1
 
-[node name="SpinBox" type="SpinBox" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer"]
+[node name="SpinBox" type="SpinBox" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer" unique_id=1560052117]
 custom_minimum_size = Vector2(255, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 prefix = "SpinBox"
 
-[node name="HSliderContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer"]
+[node name="HSliderContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer" unique_id=2100582010]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="HSlider" type="HSlider" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/HSliderContainer"]
+[node name="HSlider" type="HSlider" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/HSliderContainer" unique_id=1574616656]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 value = 50.0
 
-[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/HSliderContainer"]
+[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/HSliderContainer" unique_id=2143002255]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "HSlider"
 
-[node name="ProgressBarContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer"]
+[node name="ProgressBarContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer" unique_id=420632005]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ProgressBar" type="ProgressBar" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/ProgressBarContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/ProgressBarContainer" unique_id=179912655]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 value = 50.0
 
-[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/ProgressBarContainer"]
+[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/ProgressBarContainer" unique_id=1199026510]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "ProgressBar"
 
-[node name="HSeparatorContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer"]
+[node name="HSeparatorContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer" unique_id=1108687981]
 layout_mode = 2
 
-[node name="HSeparatorLeft" type="HSeparator" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/HSeparatorContainer"]
+[node name="HSeparatorLeft" type="HSeparator" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/HSeparatorContainer" unique_id=1784174493]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/HSeparatorContainer"]
+[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/HSeparatorContainer" unique_id=1956410353]
 layout_mode = 2
 text = "HSeparator"
 
-[node name="HSeparatorRight" type="HSeparator" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/HSeparatorContainer"]
+[node name="HSeparatorRight" type="HSeparator" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/HSeparatorContainer" unique_id=1304747999]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TextureProgressContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer"]
+[node name="TextureProgressContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer" unique_id=1740446843]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/TextureProgressContainer"]
+[node name="Control" type="Control" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/TextureProgressContainer" unique_id=207220786]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/TextureProgressContainer/Control"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/TextureProgressContainer/Control" unique_id=1266030049]
 layout_mode = 0
 offset_right = 128.0
 offset_bottom = 128.0
@@ -380,36 +380,36 @@ value = 67.0
 fill_mode = 4
 texture_progress = ExtResource("1_8tycj")
 
-[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/TextureProgressContainer"]
+[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/TextureProgressContainer" unique_id=455224450]
 layout_mode = 2
 text = "TextureProgressBar"
 
-[node name="Lists" type="PanelContainer" parent="MainPanel/HSplitContainer/VSplitContainer"]
+[node name="Lists" type="PanelContainer" parent="MainPanel/HSplitContainer/VSplitContainer" unique_id=1301511605]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.5
 theme_override_styles/panel = SubResource("StyleBoxFlat_bl4wp")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists" unique_id=2016675810]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer"]
+[node name="Title" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer" unique_id=1247316934]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Lists"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer" unique_id=659921552]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer" unique_id=1824269238]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="OptionButton" type="OptionButton" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1730384275]
 layout_mode = 2
 size_flags_horizontal = 0
 selected = 0
@@ -427,7 +427,7 @@ popup/item_4/text = "Disabled Item"
 popup/item_4/id = 2
 popup/item_4/disabled = true
 
-[node name="MenuButton" type="MenuButton" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="MenuButton" type="MenuButton" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1777755964]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -460,27 +460,27 @@ popup/item_7/text = "Radio Item 2"
 popup/item_7/checkable = 2
 popup/item_7/id = 7
 
-[node name="RadioButtons" type="VBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="RadioButtons" type="VBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1525383131]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="CheckBox" type="CheckBox" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer/RadioButtons"]
+[node name="CheckBox" type="CheckBox" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer/RadioButtons" unique_id=703522899]
 layout_mode = 2
 button_pressed = true
 button_group = SubResource("ButtonGroup_t0nh8")
 text = "CheckBox with ButtonGroup assigned 1"
 
-[node name="CheckBox2" type="CheckBox" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer/RadioButtons"]
+[node name="CheckBox2" type="CheckBox" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer/RadioButtons" unique_id=1521518677]
 layout_mode = 2
 button_group = SubResource("ButtonGroup_t0nh8")
 text = "CheckBox with ButtonGroup assigned 2"
 
-[node name="CheckBox3" type="CheckBox" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer/RadioButtons"]
+[node name="CheckBox3" type="CheckBox" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer/RadioButtons" unique_id=2041257619]
 layout_mode = 2
 button_group = SubResource("ButtonGroup_t0nh8")
 text = "CheckBox with ButtonGroup assigned 3"
 
-[node name="ItemList" type="ItemList" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="ItemList" type="ItemList" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1661352594]
 layout_mode = 2
 size_flags_vertical = 3
 select_mode = 1
@@ -494,42 +494,42 @@ item_2/disabled = true
 item_3/text = "ItemList - Item 3 with icon assigned"
 item_3/icon = ExtResource("1_8tycj")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer" unique_id=1071481159]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Tree" type="Tree" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Tree" type="Tree" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=125709688]
 layout_mode = 2
 size_flags_vertical = 3
 select_mode = 2
 script = ExtResource("2_68sc3")
 
-[node name="FoldableContainer" type="FoldableContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="FoldableContainer" type="FoldableContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1596310168]
 layout_mode = 2
 title = "FoldableContainer with FoldableGroup"
 foldable_group = SubResource("FoldableGroup_wdd8d")
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2/FoldableContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2/FoldableContainer" unique_id=706497807]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
-[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2/FoldableContainer/MarginContainer"]
+[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2/FoldableContainer/MarginContainer" unique_id=1464441158]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7529412, 0.7529412, 0.7529412, 1)
 text = "FoldableGroup only allows one of the
 FoldableContainers to be open at a time"
 
-[node name="FoldableContainer2" type="FoldableContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="FoldableContainer2" type="FoldableContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1967159995]
 layout_mode = 2
 folded = true
 title = "FoldableContainer with FoldableGroup"
 title_position = 1
 foldable_group = SubResource("FoldableGroup_wdd8d")
 
-[node name="MarginContainer2" type="MarginContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2/FoldableContainer2"]
+[node name="MarginContainer2" type="MarginContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2/FoldableContainer2" unique_id=1738378453]
 visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
@@ -537,7 +537,7 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
-[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2/FoldableContainer2/MarginContainer2"]
+[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Lists/VBoxContainer/HBoxContainer/VBoxContainer2/FoldableContainer2/MarginContainer2" unique_id=148091940]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7529412, 0.7529412, 0.7529412, 1)
 text = "Second foldable container

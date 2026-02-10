@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2umstx7btqjf"]
+[gd_scene format=3 uid="uid://c2umstx7btqjf"]
 
 [ext_resource type="Script" uid="uid://b3tarlivf2ay2" path="res://Mob.cs" id="1_g64pt"]
 [ext_resource type="PackedScene" uid="uid://dlo80ccya72eu" path="res://art/mob.glb" id="2_e23op"]
@@ -40,29 +40,27 @@ _data = {
 &"float": SubResource("Animation_t3png")
 }
 
-[node name="Mob" type="CharacterBody3D" groups=["mob"]]
+[node name="Mob" type="CharacterBody3D" unique_id=589382219 groups=["mob"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.011, 2.08165e-12)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_g64pt")
 
-[node name="Pivot" type="Node3D" parent="."]
+[node name="Pivot" type="Node3D" parent="." unique_id=2033835021]
 
-[node name="Character" parent="Pivot" instance=ExtResource("2_e23op")]
+[node name="Character" parent="Pivot" unique_id=461502306 instance=ExtResource("2_e23op")]
 transform = Transform3D(1, -4.03349e-16, 3.44493e-16, 3.44493e-16, 0.987688, 0.156434, -4.03349e-16, -0.156434, 0.987688, 2.08165e-12, 0.35, 2.08165e-12)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1116390039]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.528, 2.08165e-12)
 shape = SubResource("BoxShape3D_svwdt")
 
-[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=771583956]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.062, 0.332)
 aabb = AABB(-1.2, 0.251, -1.571, 2.41, 1.093, 3.172)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_sw56c")
-}
-autoplay = "float"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=234505311]
+libraries/ = SubResource("AnimationLibrary_sw56c")
+autoplay = &"float"
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="OnVisibleOnScreenNotifierScreenExited"]

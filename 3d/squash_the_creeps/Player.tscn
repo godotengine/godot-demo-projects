@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dsg2w2pxbtxpj"]
+[gd_scene format=3 uid="uid://dsg2w2pxbtxpj"]
 
 [ext_resource type="Script" uid="uid://bt0gbjqdcejsu" path="res://Player.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dolueyckipny0" path="res://art/player.glb" id="2"]
@@ -47,49 +47,47 @@ _data = {
 &"float": SubResource("3")
 }
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" unique_id=1303651581]
 collision_mask = 2147483654
 script = ExtResource("1")
 
-[node name="Pivot" type="Node3D" parent="."]
+[node name="Pivot" type="Node3D" parent="." unique_id=295021524]
 
-[node name="Character" parent="Pivot" instance=ExtResource("2")]
+[node name="Character" parent="Pivot" unique_id=1042623862 instance=ExtResource("2")]
 transform = Transform3D(1, 0, 0, 0, 0.987214, 0.1594, 0, -0.1594, 0.987214, 0, 0.348069, 0)
 
-[node name="CollisionShape" type="CollisionShape3D" parent="."]
+[node name="CollisionShape" type="CollisionShape3D" parent="." unique_id=2003493605]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.771765, 0)
 shape = SubResource("1")
 
-[node name="MobDetector" type="Area3D" parent="."]
+[node name="MobDetector" type="Area3D" parent="." unique_id=1359286148]
 collision_layer = 0
 collision_mask = 2
 monitorable = false
 
-[node name="CollisionShape" type="CollisionShape3D" parent="MobDetector"]
+[node name="CollisionShape" type="CollisionShape3D" parent="MobDetector" unique_id=1612705618]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06491, 0)
 shape = SubResource("2")
 
-[node name="CollisionShape2" type="CollisionShape3D" parent="MobDetector"]
+[node name="CollisionShape2" type="CollisionShape3D" parent="MobDetector" unique_id=702391106]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.455268, 0.95, 1.1423)
 shape = SubResource("CylinderShape3D_76fa1")
 
-[node name="CollisionShape3" type="CollisionShape3D" parent="MobDetector"]
+[node name="CollisionShape3" type="CollisionShape3D" parent="MobDetector" unique_id=455578002]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.716365, 0.95, 1.71889)
 shape = SubResource("CylinderShape3D_76fa1")
 
-[node name="CollisionShape4" type="CollisionShape3D" parent="MobDetector"]
+[node name="CollisionShape4" type="CollisionShape3D" parent="MobDetector" unique_id=490725183]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.730546, 0.95, 1.69713)
 shape = SubResource("CylinderShape3D_76fa1")
 
-[node name="CollisionShape5" type="CollisionShape3D" parent="MobDetector"]
+[node name="CollisionShape5" type="CollisionShape3D" parent="MobDetector" unique_id=1940621160]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45857, 0.95, 1.15318)
 shape = SubResource("CylinderShape3D_76fa1")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1152676890]
 callback_mode_process = 0
-libraries = {
-&"": SubResource("AnimationLibrary_aq6tr")
-}
-autoplay = "float"
+libraries/ = SubResource("AnimationLibrary_aq6tr")
+autoplay = &"float"
 
 [connection signal="body_entered" from="MobDetector" to="." method="_on_MobDetector_body_entered"]

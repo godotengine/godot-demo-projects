@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://p0rko5txsymd"]
+[gd_scene format=3 uid="uid://p0rko5txsymd"]
 
 [ext_resource type="Script" uid="uid://dlmqxfuw34s5" path="res://fps/simple_bullet.gd" id="1"]
 
@@ -16,7 +16,7 @@ emission_energy_multiplier = 1.8
 [sub_resource type="SphereShape3D" id="4"]
 radius = 0.4
 
-[node name="SimpleBullet" type="RigidBody3D"]
+[node name="SimpleBullet" type="RigidBody3D" unique_id=1047558887]
 mass = 2.0
 physics_material_override = SubResource("1")
 gravity_scale = 3.0
@@ -25,11 +25,11 @@ continuous_cd = true
 linear_damp = 0.4
 script = ExtResource("1")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2002443945]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 cast_shadow = 0
 mesh = SubResource("2")
 surface_material_override/0 = SubResource("3")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=740251751]
 shape = SubResource("4")

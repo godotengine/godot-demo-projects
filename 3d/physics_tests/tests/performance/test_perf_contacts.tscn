@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cp1w313hrtoxl"]
+[gd_scene format=3 uid="uid://cp1w313hrtoxl"]
 
 [ext_resource type="PackedScene" uid="uid://bu0pj5w6euynk" path="res://tests/static_scene.tscn" id="1"]
 [ext_resource type="Script" uid="uid://dbyv2xuh2e5wj" path="res://tests/performance/test_perf_contacts.gd" id="2"]
@@ -18,79 +18,79 @@ points = PackedVector3Array(-0.7, 0, -0.7, -0.3, 0, 0.8, 0.8, 0, -0.3, 0, -1, 0)
 
 [sub_resource type="WorldBoundaryShape3D" id="6"]
 
-[node name="Test" type="Node3D"]
+[node name="Test" type="Node3D" unique_id=25340389]
 script = ExtResource("2")
 spawns = Array[NodePath]([NodePath("SpawnTarget1")])
 spawn_count = 500
 spawn_randomize = Vector3(0.2, 0.2, 0.2)
 _enable_debug_collision = false
 
-[node name="Options" parent="." instance=ExtResource("4")]
+[node name="Options" parent="." unique_id=1210216489 instance=ExtResource("4")]
 
-[node name="SpawnTarget1" type="Node3D" parent="."]
+[node name="SpawnTarget1" type="Node3D" parent="." unique_id=1382020980]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.06418, -1.24693)
 
-[node name="DynamicShapes" type="Node3D" parent="."]
+[node name="DynamicShapes" type="Node3D" parent="." unique_id=1835254651]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.3192, 1.2359, 38.0117)
 
-[node name="RigidBodyBox" type="RigidBody3D" parent="DynamicShapes"]
+[node name="RigidBodyBox" type="RigidBody3D" parent="DynamicShapes" unique_id=1856287238]
 
-[node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyBox"]
+[node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyBox" unique_id=1335380570]
 shape = SubResource("1")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="RigidBodyCapsule" type="RigidBody3D" parent="DynamicShapes"]
+[node name="RigidBodyCapsule" type="RigidBody3D" parent="DynamicShapes" unique_id=2136813826]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
-[node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyCapsule"]
+[node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyCapsule" unique_id=374549129]
 shape = SubResource("2")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="RigidBodyCylinder" type="RigidBody3D" parent="DynamicShapes"]
+[node name="RigidBodyCylinder" type="RigidBody3D" parent="DynamicShapes" unique_id=719851156]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
-[node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyCylinder"]
+[node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyCylinder" unique_id=1502815354]
 shape = SubResource("3")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="RigidBodyConvex" type="RigidBody3D" parent="DynamicShapes"]
+[node name="RigidBodyConvex" type="RigidBody3D" parent="DynamicShapes" unique_id=500270947]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 
-[node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyConvex"]
+[node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodyConvex" unique_id=1556441055]
 shape = SubResource("4")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="RigidBodySphere" type="RigidBody3D" parent="DynamicShapes"]
+[node name="RigidBodySphere" type="RigidBody3D" parent="DynamicShapes" unique_id=1760240824]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 
-[node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodySphere"]
+[node name="CollisionShape" type="CollisionShape3D" parent="DynamicShapes/RigidBodySphere" unique_id=113293633]
 shape = SubResource("5")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="StaticBodyWalls" type="StaticBody3D" parent="."]
+[node name="StaticBodyWalls" type="StaticBody3D" parent="." unique_id=1706999739]
 
-[node name="CollisionShape1" type="CollisionShape3D" parent="StaticBodyWalls"]
+[node name="CollisionShape1" type="CollisionShape3D" parent="StaticBodyWalls" unique_id=224598729]
 transform = Transform3D(-1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0, 1, -5, 0, 0)
 shape = SubResource("6")
 debug_color = Color(0, 0.533333, 1, 1)
 
-[node name="CollisionShape2" type="CollisionShape3D" parent="StaticBodyWalls"]
+[node name="CollisionShape2" type="CollisionShape3D" parent="StaticBodyWalls" unique_id=952271199]
 transform = Transform3D(-1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 5, 0, 0)
 shape = SubResource("6")
 debug_color = Color(0, 0.533333, 1, 1)
 
-[node name="CollisionShape3" type="CollisionShape3D" parent="StaticBodyWalls"]
+[node name="CollisionShape3" type="CollisionShape3D" parent="StaticBodyWalls" unique_id=754490548]
 transform = Transform3D(2.6543e-14, 1.62921e-07, 1, 1, -1.62921e-07, 1.56125e-19, 1.62921e-07, 1, -1.62921e-07, 0, 0, -5)
 shape = SubResource("6")
 debug_color = Color(0, 0.533333, 1, 1)
 
-[node name="CollisionShape4" type="CollisionShape3D" parent="StaticBodyWalls"]
+[node name="CollisionShape4" type="CollisionShape3D" parent="StaticBodyWalls" unique_id=877479574]
 transform = Transform3D(2.6543e-14, 1.62921e-07, -1, 1, -1.62921e-07, -1.56125e-19, -1.62921e-07, -1, -1.62921e-07, 0, 0, 5)
 shape = SubResource("6")
 debug_color = Color(0, 0.533333, 1, 1)
 
-[node name="StaticScene" parent="." instance=ExtResource("1")]
+[node name="StaticScene" parent="." unique_id=111623955 instance=ExtResource("1")]
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1902213892]
 transform = Transform3D(1, 0, 0, 0, 0.881757, 0.471705, 0, -0.471705, 0.881757, 0, 20.4125, 41.0426)
 script = ExtResource("5")
