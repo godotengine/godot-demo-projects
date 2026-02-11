@@ -154,7 +154,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	# Strong sideways wind force, which pushes the cloth while airborne and
 	# makes it wave around once it has landed.
-	const WIND_FORCE: float = 2_450_000.0
+	const WIND_FORCE: float = 100.0
 	for node in $Testers/CentralForceWind.get_children():
 		if node is SoftBody3D:
 			node.apply_central_force(Vector3(1.0, 0.0, 0.0) * WIND_FORCE * delta)
@@ -194,7 +194,7 @@ func _on_central_impulse_timer_timeout() -> void:
 	# When using `apply_central_impulse()` instead of `apply_impulse()`,
 	# we have to use a much larger value to get significant movement as the impulse is distributed
 	# across all points.
-	const INTENSITY: float = 8000.0
+	const INTENSITY: float = 1.0
 
 	for node in $Testers/CentralImpulseTimer.get_children():
 		if node is SoftBody3D:
@@ -203,7 +203,7 @@ func _on_central_impulse_timer_timeout() -> void:
 
 
 func _on_per_point_impulse_timer_timeout() -> void:
-	const INTENSITY: float = 600.0
+	const INTENSITY: float = 0.2
 
 	for node in $Testers/PerPointImpulseTimer.get_children():
 		if node is SoftBody3D:
