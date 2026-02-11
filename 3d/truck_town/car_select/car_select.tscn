@@ -1,19 +1,43 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgq7v1pxgrqtq"]
+[gd_scene format=3 uid="uid://cgq7v1pxgrqtq"]
 
-[ext_resource type="Script" uid="uid://b6oqxg642iyvi" path="res://car_select/car_select.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://ppxannqo6rtg" path="res://car_select/choose_van.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://ieqt5ql863tb" path="res://car_select/choose_trailer.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://ci5uqy6ljstal" path="res://car_select/choose_tow.png" id="4"]
-
-[sub_resource type="FontVariation" id="FontVariation_hqcvw"]
-variation_embolden = 1.0
-variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
-spacing_glyph = -1
-spacing_space = 4
+[ext_resource type="Script" uid="uid://b6oqxg642iyvi" path="res://car_select/car_select.gd" id="1_jrgrs"]
+[ext_resource type="Texture2D" uid="uid://ppxannqo6rtg" path="res://car_select/choose_van.png" id="2_8injy"]
+[ext_resource type="Texture2D" uid="uid://ieqt5ql863tb" path="res://car_select/choose_trailer.png" id="3_uu0k4"]
+[ext_resource type="Texture2D" uid="uid://ci5uqy6ljstal" path="res://car_select/choose_tow.png" id="4_y5qrv"]
+[ext_resource type="Texture2D" uid="uid://cjmg136aa35d7" path="res://car_select/audio_on.png" id="5_8injy"]
+[ext_resource type="Texture2D" uid="uid://eu0i3m0c3kki" path="res://car_select/audio_off.png" id="6_uu0k4"]
+[ext_resource type="Texture2D" uid="uid://7imikkhjt0t" path="res://trucktown.png" id="7_uu0k4"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_lcrm3"]
 
-[node name="CarSelect" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5qrv"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.427493, 0.42749307, 0.42749307, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8injy"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_8injy"]
+font_size = 22
+
+[node name="CarSelect" type="Control" unique_id=278128104]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -28,9 +52,10 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
-script = ExtResource("1")
+script = ExtResource("1_jrgrs")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="CarContainer" type="HBoxContainer" parent="." unique_id=741482576]
+unique_name_in_owner = true
 layout_mode = 0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -39,45 +64,25 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="MiniVan" type="Button" parent="HBoxContainer"]
+[node name="MiniVan" type="Button" parent="CarContainer" unique_id=1052280894]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-icon = ExtResource("2")
+icon = ExtResource("2_8injy")
 
-[node name="TrailerTruck" type="Button" parent="HBoxContainer"]
+[node name="TrailerTruck" type="Button" parent="CarContainer" unique_id=1750997618]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-icon = ExtResource("3")
+icon = ExtResource("3_uu0k4")
 
-[node name="TowTruck" type="Button" parent="HBoxContainer"]
+[node name="TowTruck" type="Button" parent="CarContainer" unique_id=1979324274]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-icon = ExtResource("4")
+icon = ExtResource("4_y5qrv")
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -180.0
-offset_top = 32.0
-offset_right = 180.0
-offset_bottom = 123.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.494118, 0.858824, 0.960784, 1)
-theme_override_colors/font_shadow_color = Color(0, 0.25098, 1, 0.12549)
-theme_override_colors/font_outline_color = Color(0.105882, 0.278431, 0.47451, 1)
-theme_override_constants/shadow_offset_x = 6
-theme_override_constants/shadow_offset_y = 6
-theme_override_constants/outline_size = 38
-theme_override_constants/shadow_outline_size = 38
-theme_override_fonts/font = SubResource("FontVariation_hqcvw")
-theme_override_font_sizes/font_size = 64
-text = "Truck Town"
-
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="MoodPanel" type="PanelContainer" parent="." unique_id=987428814]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -91,46 +96,142 @@ offset_bottom = 205.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MoodPanel" unique_id=647794826]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MoodPanel/MarginContainer" unique_id=1702282786]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MoodPanel/MarginContainer/HBoxContainer" unique_id=387498769]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 text = "Mood"
 
-[node name="Sunrise" type="CheckBox" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Sunrise" type="CheckBox" parent="MoodPanel/MarginContainer/HBoxContainer" unique_id=893251957]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 button_group = SubResource("ButtonGroup_lcrm3")
 text = "Sunrise"
 
-[node name="Day" type="CheckBox" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Day" type="CheckBox" parent="MoodPanel/MarginContainer/HBoxContainer" unique_id=1121484157]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 button_pressed = true
 button_group = SubResource("ButtonGroup_lcrm3")
 text = "Day"
 
-[node name="Sunset" type="CheckBox" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Sunset" type="CheckBox" parent="MoodPanel/MarginContainer/HBoxContainer" unique_id=1115499041]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 button_group = SubResource("ButtonGroup_lcrm3")
 text = "Sunset"
 
-[node name="Night" type="CheckBox" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Night" type="CheckBox" parent="MoodPanel/MarginContainer/HBoxContainer" unique_id=467681337]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 button_group = SubResource("ButtonGroup_lcrm3")
 text = "Night"
 
-[connection signal="pressed" from="HBoxContainer/MiniVan" to="." method="_on_mini_van_pressed"]
-[connection signal="pressed" from="HBoxContainer/TrailerTruck" to="." method="_on_trailer_truck_pressed"]
-[connection signal="pressed" from="HBoxContainer/TowTruck" to="." method="_on_tow_truck_pressed"]
+[node name="OptionsPanel" type="PanelContainer" parent="." unique_id=1225626292]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -325.0
+offset_top = 220.0
+offset_right = 325.0
+offset_bottom = 261.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsPanel" unique_id=1019820646]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OptionsPanel/MarginContainer" unique_id=823199951]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="OptionsPanel/MarginContainer/HBoxContainer" unique_id=594642781]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+text = "Options"
+
+[node name="SDFGI" type="CheckBox" parent="OptionsPanel/MarginContainer/HBoxContainer" unique_id=391285140]
+unique_name_in_owner = true
+layout_mode = 2
+text = "SDFGI"
+
+[node name="Audio" type="HBoxContainer" parent="OptionsPanel/MarginContainer/HBoxContainer" unique_id=1143737421]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Mute" type="TextureButton" parent="OptionsPanel/MarginContainer/HBoxContainer/Audio" unique_id=1478725009]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("5_8injy")
+texture_pressed = ExtResource("6_uu0k4")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Volume" type="HSlider" parent="OptionsPanel/MarginContainer/HBoxContainer/Audio" unique_id=732946787]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxFlat_y5qrv")
+max_value = 1.0
+step = 0.01
+
+[node name="LoadingPanel" type="PanelContainer" parent="." unique_id=379577787]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8injy")
+
+[node name="CenterContainer" type="CenterContainer" parent="LoadingPanel" unique_id=561441320]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LoadingPanel/CenterContainer" unique_id=1051026624]
+layout_mode = 2
+text = "Loading...
+(this might take a while)"
+label_settings = SubResource("LabelSettings_8injy")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1991765919]
+layout_mode = 0
+offset_left = 92.0
+offset_top = -156.0
+offset_right = 933.35535
+offset_bottom = 338.0
+mouse_filter = 2
+texture = ExtResource("7_uu0k4")
+expand_mode = 1
+
+[connection signal="pressed" from="CarContainer/MiniVan" to="." method="_on_mini_van_pressed"]
+[connection signal="pressed" from="CarContainer/TrailerTruck" to="." method="_on_trailer_truck_pressed"]
+[connection signal="pressed" from="CarContainer/TowTruck" to="." method="_on_tow_truck_pressed"]
+[connection signal="toggled" from="OptionsPanel/MarginContainer/HBoxContainer/Audio/Mute" to="." method="_on_mute_toggled"]
+[connection signal="value_changed" from="OptionsPanel/MarginContainer/HBoxContainer/Audio/Volume" to="." method="_on_volume_value_changed"]

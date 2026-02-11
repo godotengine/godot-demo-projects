@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://nhd55tk7kx8n"]
+[gd_scene format=3 uid="uid://nhd55tk7kx8n"]
 
 [ext_resource type="Script" uid="uid://g2bo8a5av2sn" path="res://vehicles/vehicle.gd" id="1_qhfnb"]
 [ext_resource type="ArrayMesh" uid="uid://bqrwin8ccgptt" path="res://vehicles/meshes/wheel.res" id="2_uwuq1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bpgd2w0obg3tl" path="res://vehicles/follow_camera.gd" id="4_wddne"]
 [ext_resource type="ArrayMesh" uid="uid://ctglc27jx8xe2" path="res://vehicles/meshes/truck_cab.res" id="5_04cnp"]
 [ext_resource type="AudioStream" uid="uid://2ukhlukq60ge" path="res://vehicles/engine.wav" id="5_fwfew"]
+[ext_resource type="AudioStream" uid="uid://u3wks6g4rp2h" path="res://vehicles/honk_1.wav" id="5_uafkt"]
 [ext_resource type="AudioStream" uid="uid://bwmbj0hptxpp2" path="res://vehicles/impact_1.wav" id="6_i7k5m"]
 [ext_resource type="AudioStream" uid="uid://g504na8iwq65" path="res://vehicles/impact_2.wav" id="7_hc8k7"]
 [ext_resource type="AudioStream" uid="uid://cnrem1y1qiu0m" path="res://vehicles/impact_3.wav" id="8_cbgcu"]
@@ -90,14 +91,14 @@ friction = 0.5
 [sub_resource type="BoxShape3D" id="BoxShape3D_hbuqf"]
 size = Vector3(0.954078, 1, 2.32662)
 
-[node name="TowTruck" type="Node3D"]
+[node name="TowTruck" type="Node3D" unique_id=1775214323]
 
-[node name="Body" type="VehicleBody3D" parent="."]
+[node name="Body" type="VehicleBody3D" parent="." unique_id=293290968 groups=["car"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00169557, 0.222867, -0.0955184)
 center_of_mass_mode = 1
 script = ExtResource("1_qhfnb")
 
-[node name="Wheel1" type="VehicleWheel3D" parent="Body"]
+[node name="Wheel1" type="VehicleWheel3D" parent="Body" unique_id=1944405630]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.573678, 0.000773743, 1.10416)
 use_as_traction = true
 use_as_steering = true
@@ -107,12 +108,12 @@ wheel_friction_slip = 1.0
 suspension_stiffness = 30.0
 damping_compression = 0.88
 
-[node name="Wheel1" type="MeshInstance3D" parent="Body/Wheel1"]
+[node name="Wheel1" type="MeshInstance3D" parent="Body/Wheel1" unique_id=831596561]
 layers = 2
 gi_mode = 2
 mesh = ExtResource("2_uwuq1")
 
-[node name="Wheel2" type="VehicleWheel3D" parent="Body"]
+[node name="Wheel2" type="VehicleWheel3D" parent="Body" unique_id=1833702058]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.573678, 0.000773743, -0.783403)
 use_as_traction = true
 wheel_roll_influence = 0.4
@@ -121,12 +122,12 @@ wheel_friction_slip = 1.0
 suspension_stiffness = 30.0
 damping_compression = 0.88
 
-[node name="Wheel2" type="MeshInstance3D" parent="Body/Wheel2"]
+[node name="Wheel2" type="MeshInstance3D" parent="Body/Wheel2" unique_id=1195737239]
 layers = 2
 gi_mode = 2
 mesh = ExtResource("2_uwuq1")
 
-[node name="Wheel3" type="VehicleWheel3D" parent="Body"]
+[node name="Wheel3" type="VehicleWheel3D" parent="Body" unique_id=1317372190]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.573678, 0.000773743, 1.10416)
 use_as_traction = true
 use_as_steering = true
@@ -136,12 +137,12 @@ wheel_friction_slip = 1.0
 suspension_stiffness = 30.0
 damping_compression = 0.88
 
-[node name="Wheel3" type="MeshInstance3D" parent="Body/Wheel3"]
+[node name="Wheel3" type="MeshInstance3D" parent="Body/Wheel3" unique_id=1805557188]
 layers = 2
 gi_mode = 2
 mesh = ExtResource("2_uwuq1")
 
-[node name="Wheel4" type="VehicleWheel3D" parent="Body"]
+[node name="Wheel4" type="VehicleWheel3D" parent="Body" unique_id=692540378]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.573678, 0.000773743, -0.783403)
 use_as_traction = true
 wheel_roll_influence = 0.4
@@ -150,20 +151,20 @@ wheel_friction_slip = 1.0
 suspension_stiffness = 30.0
 damping_compression = 0.88
 
-[node name="Wheel4" type="MeshInstance3D" parent="Body/Wheel4"]
+[node name="Wheel4" type="MeshInstance3D" parent="Body/Wheel4" unique_id=1312535520]
 layers = 2
 gi_mode = 2
 mesh = ExtResource("2_uwuq1")
 
-[node name="Body" type="MeshInstance3D" parent="Body"]
+[node name="Body" type="MeshInstance3D" parent="Body" unique_id=2013530899]
 layers = 2
 gi_mode = 2
 mesh = ExtResource("3_tv0o3")
 
-[node name="CameraBase" type="Node3D" parent="Body"]
+[node name="CameraBase" type="Node3D" parent="Body" unique_id=1452839951]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.97449, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Body/CameraBase"]
+[node name="Camera3D" type="Camera3D" parent="Body/CameraBase" unique_id=274290659]
 transform = Transform3D(-1, 2.11495e-08, -8.48259e-08, 0, 0.970296, 0.241922, 8.74227e-08, 0.241922, -0.970295, 0, 2.032, -4.394)
 current = true
 fov = 74.0
@@ -173,24 +174,28 @@ min_distance = 5.0
 max_distance = 7.0
 height = 1.75
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body" unique_id=1409961841]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.391365, 0.158069)
 shape = SubResource("BoxShape3D_0hbge")
 
-[node name="EngineSound" type="AudioStreamPlayer3D" parent="Body"]
+[node name="EngineSound" type="AudioStreamPlayer3D" parent="Body" unique_id=1222857366]
 stream = ExtResource("5_fwfew")
 pitch_scale = 0.05
 autoplay = true
-attenuation_filter_cutoff_hz = 20500.0
+bus = &"Vehicle"
 
-[node name="ImpactSound" type="AudioStreamPlayer3D" parent="Body"]
+[node name="ImpactSound" type="AudioStreamPlayer3D" parent="Body" unique_id=633494895]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.391365, 0.158069)
 stream = SubResource("AudioStreamRandomizer_aad58")
 volume_db = -10.0
 max_polyphony = 3
-attenuation_filter_cutoff_hz = 20500.0
+bus = &"Vehicle"
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="Body"]
+[node name="HonkSound" type="AudioStreamPlayer3D" parent="Body" unique_id=1388982396]
+stream = ExtResource("5_uafkt")
+bus = &"Vehicle"
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Body" unique_id=2144505691]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.201696, -0.022867, -1.10448)
 amount = 125
 lifetime = 1.25
@@ -205,7 +210,7 @@ angle_max = 360.0
 scale_amount_curve = SubResource("Curve_kr6si")
 color_ramp = SubResource("Gradient_38b5g")
 
-[node name="BlobShadow" type="Decal" parent="Body"]
+[node name="BlobShadow" type="Decal" parent="Body" unique_id=841414498]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00169557, -0.222867, 0.145518)
 size = Vector3(1.6, 4, 3)
 texture_albedo = ExtResource("11_5ul8v")
@@ -213,107 +218,125 @@ upper_fade = 2.0
 lower_fade = 1.0
 cull_mask = 1048573
 
-[node name="AudioListener3D" type="AudioListener3D" parent="Body"]
+[node name="HeadlightL" type="SpotLight3D" parent="Body" unique_id=1894363050 groups=["headlight"]]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0.47014517, 0.12125607, 1.3797973)
+light_color = Color(1, 0.9411765, 0.8627451, 1)
+light_energy = 0.0
+shadow_enabled = true
+spot_range = 30.0
+spot_angle = 60.0
+spot_angle_attenuation = 2.0
+
+[node name="HeadlightR" type="SpotLight3D" parent="Body" unique_id=123862018 groups=["headlight"]]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -0.4761951, 0.1287088, 1.3784128)
+light_color = Color(1, 0.9411765, 0.8627451, 1)
+light_energy = 0.0
+shadow_enabled = true
+spot_range = 30.0
+spot_angle = 60.0
+spot_angle_attenuation = 2.0
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Body" unique_id=1588650231]
 current = true
 
-[node name="InteriorCameraPosition" type="Marker3D" parent="Body"]
+[node name="InteriorCameraPosition" type="Marker3D" parent="Body" unique_id=1981673128]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.9, 0.3)
 
-[node name="TopDownCameraPosition" type="Marker3D" parent="Body"]
+[node name="TopDownCameraPosition" type="Marker3D" parent="Body" unique_id=302585488]
 transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, 1, 8.74228e-08, 1, -4.37114e-08, 0.00169557, 15.7771, 0.0955178)
 
-[node name="ChainB1" type="RigidBody3D" parent="."]
+[node name="ChainB1" type="RigidBody3D" parent="." unique_id=1651819882]
 transform = Transform3D(1, 0, 0, 0, 0.846248, -0.53279, 0, 0.53279, 0.846248, 0, 1.10846, -1.55698)
 
-[node name="Chain1" type="MeshInstance3D" parent="ChainB1"]
+[node name="Chain1" type="MeshInstance3D" parent="ChainB1" unique_id=1214635214]
 layers = 2
 gi_mode = 2
 mesh = SubResource("CapsuleMesh_i2aww")
 surface_material_override/0 = SubResource("StandardMaterial3D_nrety")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainB1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainB1" unique_id=610173722]
 shape = SubResource("CapsuleShape3D_eoojf")
 
-[node name="ChainB2" type="RigidBody3D" parent="."]
+[node name="ChainB2" type="RigidBody3D" parent="." unique_id=1967073732]
 transform = Transform3D(1, 0, 0, 0, 0.846248, -0.53279, 0, 0.53279, 0.846248, 0, 0.803378, -1.75806)
 
-[node name="Chain1" type="MeshInstance3D" parent="ChainB2"]
+[node name="Chain1" type="MeshInstance3D" parent="ChainB2" unique_id=156513413]
 layers = 2
 gi_mode = 2
 mesh = SubResource("CapsuleMesh_i2aww")
 surface_material_override/0 = SubResource("StandardMaterial3D_so248")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainB2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainB2" unique_id=1583664940]
 shape = SubResource("CapsuleShape3D_eoojf")
 
-[node name="ChainB3" type="RigidBody3D" parent="."]
+[node name="ChainB3" type="RigidBody3D" parent="." unique_id=1535398880]
 transform = Transform3D(1, 0, 0, 0, 0.846248, -0.53279, 0, 0.53279, 0.846248, 0, 0.490045, -1.96106)
 
-[node name="Chain1" type="MeshInstance3D" parent="ChainB3"]
+[node name="Chain1" type="MeshInstance3D" parent="ChainB3" unique_id=631454883]
 layers = 2
 gi_mode = 2
 mesh = SubResource("CapsuleMesh_i2aww")
 surface_material_override/0 = SubResource("StandardMaterial3D_c2qj1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainB3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainB3" unique_id=1728967797]
 shape = SubResource("CapsuleShape3D_eoojf")
 
-[node name="ChainB4" type="RigidBody3D" parent="."]
+[node name="ChainB4" type="RigidBody3D" parent="." unique_id=2123880108]
 transform = Transform3D(1, 0, 0, 0, 0.447167, -0.894451, 0, 0.894451, 0.447167, 0, 0.290326, -2.19413)
 
-[node name="Chain1" type="MeshInstance3D" parent="ChainB4"]
+[node name="Chain1" type="MeshInstance3D" parent="ChainB4" unique_id=133896270]
 layers = 2
 gi_mode = 2
 mesh = SubResource("CapsuleMesh_i2aww")
 surface_material_override/0 = SubResource("StandardMaterial3D_ffy5m")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainB4"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainB4" unique_id=789357418]
 shape = SubResource("CapsuleShape3D_eoojf")
 
-[node name="ChainB5" type="RigidBody3D" parent="."]
+[node name="ChainB5" type="RigidBody3D" parent="." unique_id=856489696]
 transform = Transform3D(1, 0, 0, 0, 0.0993884, -0.995049, 0, 0.995049, 0.0993884, 0, 0.205717, -2.50193)
 
-[node name="Chain1" type="MeshInstance3D" parent="ChainB5"]
+[node name="Chain1" type="MeshInstance3D" parent="ChainB5" unique_id=1911957333]
 layers = 2
 gi_mode = 2
 mesh = SubResource("CapsuleMesh_i2aww")
 surface_material_override/0 = SubResource("StandardMaterial3D_l1evv")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainB5"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChainB5" unique_id=2000230156]
 shape = SubResource("CapsuleShape3D_eoojf")
 
-[node name="PinJoint1" type="PinJoint3D" parent="."]
+[node name="PinJoint1" type="PinJoint3D" parent="." unique_id=1335524152]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28044, -1.4153)
 node_a = NodePath("../Body")
 node_b = NodePath("../ChainB1")
 
-[node name="PinJoint2" type="PinJoint3D" parent="."]
+[node name="PinJoint2" type="PinJoint3D" parent="." unique_id=1252202759]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.962693, -1.6492)
 node_a = NodePath("../ChainB1")
 node_b = NodePath("../ChainB2")
 
-[node name="PinJoint3" type="PinJoint3D" parent="."]
+[node name="PinJoint3" type="PinJoint3D" parent="." unique_id=1009647433]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.644947, -1.85661)
 node_a = NodePath("../ChainB2")
 node_b = NodePath("../ChainB3")
 
-[node name="PinJoint4" type="PinJoint3D" parent="."]
+[node name="PinJoint4" type="PinJoint3D" parent="." unique_id=1397716308]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.350687, -2.04279)
 node_a = NodePath("../ChainB3")
 node_b = NodePath("../ChainB4")
 
-[node name="PinJoint5" type="PinJoint3D" parent="."]
+[node name="PinJoint5" type="PinJoint3D" parent="." unique_id=22342942]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.217609, -2.33375)
 node_a = NodePath("../ChainB4")
 node_b = NodePath("../ChainB5")
 
-[node name="Body2" type="VehicleBody3D" parent="."]
+[node name="Body2" type="VehicleBody3D" parent="." unique_id=1376132408]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00169557, 0.222867, -3.97518)
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_hvgqm")
 center_of_mass_mode = 1
 
-[node name="Wheel1" type="VehicleWheel3D" parent="Body2"]
+[node name="Wheel1" type="VehicleWheel3D" parent="Body2" unique_id=537335536]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.573678, 0.115169, 1.10416)
 use_as_traction = true
 use_as_steering = true
@@ -324,12 +347,12 @@ suspension_travel = 2.0
 suspension_stiffness = 40.0
 damping_compression = 0.88
 
-[node name="Wheel1" type="MeshInstance3D" parent="Body2/Wheel1"]
+[node name="Wheel1" type="MeshInstance3D" parent="Body2/Wheel1" unique_id=1384069206]
 layers = 2
 gi_mode = 2
 mesh = ExtResource("2_uwuq1")
 
-[node name="Wheel2" type="VehicleWheel3D" parent="Body2"]
+[node name="Wheel2" type="VehicleWheel3D" parent="Body2" unique_id=1824369258]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.573678, 0.115169, -0.783403)
 use_as_traction = true
 wheel_roll_influence = 0.4
@@ -339,12 +362,12 @@ suspension_travel = 2.0
 suspension_stiffness = 40.0
 damping_compression = 0.88
 
-[node name="Wheel2" type="MeshInstance3D" parent="Body2/Wheel2"]
+[node name="Wheel2" type="MeshInstance3D" parent="Body2/Wheel2" unique_id=229833674]
 layers = 2
 gi_mode = 2
 mesh = ExtResource("2_uwuq1")
 
-[node name="Wheel3" type="VehicleWheel3D" parent="Body2"]
+[node name="Wheel3" type="VehicleWheel3D" parent="Body2" unique_id=1214503060]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.573678, 0.115169, 1.10416)
 use_as_traction = true
 use_as_steering = true
@@ -355,12 +378,12 @@ suspension_travel = 2.0
 suspension_stiffness = 40.0
 damping_compression = 0.88
 
-[node name="Wheel3" type="MeshInstance3D" parent="Body2/Wheel3"]
+[node name="Wheel3" type="MeshInstance3D" parent="Body2/Wheel3" unique_id=538985204]
 layers = 2
 gi_mode = 2
 mesh = ExtResource("2_uwuq1")
 
-[node name="Wheel4" type="VehicleWheel3D" parent="Body2"]
+[node name="Wheel4" type="VehicleWheel3D" parent="Body2" unique_id=1563138953]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.573678, 0.115169, -0.783403)
 use_as_traction = true
 wheel_roll_influence = 0.4
@@ -370,21 +393,21 @@ suspension_travel = 2.0
 suspension_stiffness = 40.0
 damping_compression = 0.88
 
-[node name="Wheel4" type="MeshInstance3D" parent="Body2/Wheel4"]
+[node name="Wheel4" type="MeshInstance3D" parent="Body2/Wheel4" unique_id=1085085640]
 layers = 2
 gi_mode = 2
 mesh = ExtResource("2_uwuq1")
 
-[node name="Body" type="MeshInstance3D" parent="Body2"]
+[node name="Body" type="MeshInstance3D" parent="Body2" unique_id=1135896339]
 layers = 2
 gi_mode = 2
 mesh = ExtResource("5_04cnp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Body2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body2" unique_id=585780685]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.588269, 0.0774262)
 shape = SubResource("BoxShape3D_hbuqf")
 
-[node name="BlobShadow" type="Decal" parent="Body2"]
+[node name="BlobShadow" type="Decal" parent="Body2" unique_id=1318761797]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00169557, -0.122867, 0.0251799)
 size = Vector3(1.6, 4, 3)
 texture_albedo = ExtResource("11_5ul8v")
@@ -392,7 +415,7 @@ upper_fade = 2.0
 lower_fade = 1.0
 cull_mask = 1048573
 
-[node name="PinJoint6" type="PinJoint3D" parent="."]
+[node name="PinJoint6" type="PinJoint3D" parent="." unique_id=1945174364]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.148269, -2.64894)
 node_a = NodePath("../ChainB5")
 node_b = NodePath("../Body2")

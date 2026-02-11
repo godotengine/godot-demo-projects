@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cf2bmynxs522"]
+
+[ext_resource type="Script" uid="uid://dxc8ruvy368cy" path="res://town/lamp/lamp_scene.gd" id="1_cletn"]
+[ext_resource type="PackedScene" uid="uid://b3cpmxc6oy0fh" path="res://town/lamp/scene.gltf" id="1_wddoj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pxdqy"]
+height = 7.2680664
+
+[node name="Lamp" type="Node3D" unique_id=197257794 node_paths=PackedStringArray("Light")]
+script = ExtResource("1_cletn")
+light = NodePath("Light")
+
+[node name="Mesh" parent="." unique_id=538594422 instance=ExtResource("1_wddoj")]
+transform = Transform3D(0.74, 0, 0, 0, 0.74, 0, 0, 0, 0.74, 0, 0, 0)
+
+[node name="Light" type="OmniLight3D" parent="." unique_id=900840872]
+transform = Transform3D(0.74777937, 0.36788473, -0.5527086, 0, 0.8324587, 0.5540872, 0.6639473, -0.414335, 0.6224954, 0, 3.108294, 0)
+visible = false
+light_color = Color(1, 0.941176, 0.705882, 1)
+light_energy = 2.0
+shadow_enabled = true
+shadow_bias = 0.06
+shadow_blur = 2.0
+shadow_caster_mask = 4294967293
+distance_fade_enabled = true
+distance_fade_begin = 100.0
+distance_fade_shadow = 35.0
+distance_fade_length = 15.0
+omni_range = 15.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=41662539]
+transform = Transform3D(0.375, 0, 0, 0, 0.375, 0, 0, 0, 0.375, 0, 0.0969038, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=785858647]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.774849, 0)
+shape = SubResource("CapsuleShape3D_pxdqy")
