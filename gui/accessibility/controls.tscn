@@ -1,10 +1,48 @@
-[gd_scene load_steps=4 format=3 uid="uid://c476bneq2n380"]
+[gd_scene format=3 uid="uid://c476bneq2n380"]
 
 [ext_resource type="Script" uid="uid://cxnk00sr4uyf7" path="res://controls.gd" id="1_gpdjo"]
 [ext_resource type="Texture2D" uid="uid://c0am3gcgk8uf0" path="res://clear.svg" id="2_qo8cm"]
 [ext_resource type="Script" uid="uid://cl70yf5thtjy8" path="res://custom_control.gd" id="3_xwvqn"]
+[ext_resource type="Script" uid="uid://dvbs307awwvnv" path="res://custom_control_2.gd" id="4_ff64o"]
 
-[node name="Accessibility" type="Control"]
+[sub_resource type="AccessibilitySettings" id="AccessibilitySettings_kxvun"]
+accessibility_name = "Item 1"
+role = 30
+role_description = "Custom Item"
+supported_actions = 7
+list_item_index = -1
+list_item_level = 0
+list_item_selected = false
+list_item_expanded = false
+
+[sub_resource type="AccessibilitySettings" id="AccessibilitySettings_kq3yo"]
+accessibility_name = "Item 2"
+role = 28
+role_description = "Other Item"
+supported_actions = 7
+list_item_index = -1
+list_item_level = 0
+list_item_selected = false
+list_item_expanded = false
+
+[sub_resource type="AccessibilitySettings" id="AccessibilitySettings_ff64o"]
+accessibility_name = "List"
+role = 29
+role_description = "Custom List"
+list_item_count = 2
+list_vertical = false
+subelement_count = 2
+subelement_0/settings = SubResource("AccessibilitySettings_kxvun")
+subelement_0/bounds = Rect2(0, 0, 20, 20)
+subelement_1/settings = SubResource("AccessibilitySettings_kq3yo")
+subelement_1/bounds = Rect2(25, 0, 20, 20)
+
+[sub_resource type="AccessibilitySettings" id="AccessibilitySettings_kxtwu"]
+role = 0
+role_description = "Custom Type"
+supported_actions = 7
+
+[node name="Accessibility" type="Control" unique_id=1453211934]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,7 +51,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gpdjo")
 
-[node name="SectionNames" type="Label" parent="."]
+[node name="SectionNames" type="Label" parent="." unique_id=28373016]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 16.0
@@ -22,7 +60,7 @@ offset_bottom = 50.0
 theme_override_font_sizes/font_size = 24
 text = "Accessible names:"
 
-[node name="NamesDescription1" type="Label" parent="."]
+[node name="NamesDescription1" type="Label" parent="." unique_id=249529227]
 layout_mode = 0
 offset_left = 376.0
 offset_top = 56.0
@@ -32,7 +70,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.5882353)
 text = "Readable name for control can be specified using \"accessible_name\" property."
 autowrap_mode = 2
 
-[node name="LabelName" type="Label" parent="."]
+[node name="LabelName" type="Label" parent="." unique_id=2106805352]
 layout_mode = 0
 offset_left = 64.0
 offset_top = 56.0
@@ -40,7 +78,7 @@ offset_right = 115.0
 offset_bottom = 88.0
 text = "Name:"
 
-[node name="LineEditName" type="LineEdit" parent="."]
+[node name="LineEditName" type="LineEdit" parent="." unique_id=19483074]
 layout_mode = 0
 offset_left = 152.0
 offset_top = 56.0
@@ -48,7 +86,7 @@ offset_right = 336.0
 offset_bottom = 87.0
 accessibility_name = "Name"
 
-[node name="NamesDescription2" type="Label" parent="."]
+[node name="NamesDescription2" type="Label" parent="." unique_id=1892241008]
 layout_mode = 0
 offset_left = 376.0
 offset_top = 104.0
@@ -58,7 +96,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.5882353)
 text = "Or by setting \"placeholder\" in case of input controls like \"LineEdit\"."
 autowrap_mode = 2
 
-[node name="NamesDescription4" type="Label" parent="."]
+[node name="NamesDescription4" type="Label" parent="." unique_id=1489009555]
 layout_mode = 0
 offset_left = 376.0
 offset_top = 152.0
@@ -68,7 +106,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.5882353)
 text = "Node without name still works with screen reader, but it's harder to determine its purpose."
 autowrap_mode = 2
 
-[node name="LabelType" type="Label" parent="."]
+[node name="LabelType" type="Label" parent="." unique_id=1504772694]
 layout_mode = 0
 offset_left = 64.0
 offset_top = 104.0
@@ -76,7 +114,7 @@ offset_right = 115.0
 offset_bottom = 136.0
 text = "Type:"
 
-[node name="LineEditType" type="LineEdit" parent="."]
+[node name="LineEditType" type="LineEdit" parent="." unique_id=1562094845]
 layout_mode = 0
 offset_left = 152.0
 offset_top = 104.0
@@ -84,7 +122,7 @@ offset_right = 336.0
 offset_bottom = 135.0
 placeholder_text = "Type"
 
-[node name="NamesDescription3" type="Label" parent="."]
+[node name="NamesDescription3" type="Label" parent="." unique_id=1597882351]
 layout_mode = 0
 offset_left = 376.0
 offset_top = 200.0
@@ -94,7 +132,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.5882353)
 text = "Controls with a static \"text\" property, like \"Button\" will use it as the default readable name."
 autowrap_mode = 2
 
-[node name="LabelBroken" type="Label" parent="."]
+[node name="LabelBroken" type="Label" parent="." unique_id=1300573247]
 layout_mode = 0
 offset_left = 64.0
 offset_top = 152.0
@@ -102,14 +140,14 @@ offset_right = 115.0
 offset_bottom = 184.0
 text = "No name:"
 
-[node name="LineEdit" type="LineEdit" parent="."]
+[node name="LineEdit" type="LineEdit" parent="." unique_id=2073359725]
 layout_mode = 0
 offset_left = 152.0
 offset_top = 152.0
 offset_right = 336.0
 offset_bottom = 183.0
 
-[node name="ButtonOK" type="Button" parent="."]
+[node name="ButtonOK" type="Button" parent="." unique_id=54971543]
 layout_mode = 0
 offset_left = 64.0
 offset_top = 200.0
@@ -117,7 +155,7 @@ offset_right = 127.0
 offset_bottom = 231.0
 text = "OK"
 
-[node name="ButtonClear" type="Button" parent="."]
+[node name="ButtonClear" type="Button" parent="." unique_id=2107548578]
 layout_mode = 0
 offset_left = 136.0
 offset_top = 200.0
@@ -126,7 +164,7 @@ offset_bottom = 231.0
 accessibility_name = "Clear"
 icon = ExtResource("2_qo8cm")
 
-[node name="LabelRegion" type="Label" parent="."]
+[node name="LabelRegion" type="Label" parent="." unique_id=1682599908]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 264.0
@@ -135,14 +173,14 @@ offset_bottom = 298.0
 theme_override_font_sizes/font_size = 24
 text = "Live region:"
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=2054805026]
 layout_mode = 0
 offset_left = 64.0
 offset_top = 304.0
 offset_right = 336.0
 offset_bottom = 352.0
 
-[node name="LabelRegion" type="Label" parent="Panel"]
+[node name="LabelRegion" type="Label" parent="Panel" unique_id=777399218]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
@@ -150,7 +188,7 @@ offset_right = 264.0
 offset_bottom = 40.0
 accessibility_live = 2
 
-[node name="LineEditLiveReg" type="LineEdit" parent="."]
+[node name="LineEditLiveReg" type="LineEdit" parent="." unique_id=1618491842]
 layout_mode = 0
 offset_left = 64.0
 offset_top = 368.0
@@ -158,7 +196,7 @@ offset_right = 336.0
 offset_bottom = 399.0
 placeholder_text = "Live region text"
 
-[node name="LiveDescription1" type="Label" parent="."]
+[node name="LiveDescription" type="Label" parent="." unique_id=893323190]
 layout_mode = 0
 offset_left = 376.0
 offset_top = 304.0
@@ -168,7 +206,15 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.5882353)
 text = "Live regions (\"accessibility live\" property) can be used to announce changes to unfocused elements, depending on the setting screen reader will speak changes immediately or whenever the user is idle."
 autowrap_mode = 2
 
-[node name="LiveDescription2" type="Label" parent="."]
+[node name="ButtonSet" type="Button" parent="." unique_id=1894834366]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 416.0
+offset_right = 127.0
+offset_bottom = 447.0
+text = "Set"
+
+[node name="CustomDescription1" type="Label" parent="." unique_id=2065766683]
 layout_mode = 0
 offset_left = 376.0
 offset_top = 528.0
@@ -178,24 +224,16 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.5882353)
 text = "Accessibility support for a node can be fully customized by implementing \"ACCESSIBILITY_*\" notifications handler and associated virtual methods, see script attached to \"CustomControl\" node."
 autowrap_mode = 2
 
-[node name="ButtonSet" type="Button" parent="."]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 416.0
-offset_right = 127.0
-offset_bottom = 447.0
-text = "Set"
-
-[node name="LabelCustom" type="Label" parent="."]
+[node name="LabelCustom1" type="Label" parent="." unique_id=1493016568]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 488.0
 offset_right = 249.0
 offset_bottom = 522.0
 theme_override_font_sizes/font_size = 24
-text = "Custom control:"
+text = "Custom control (Notifications):"
 
-[node name="CustomControl" type="Control" parent="."]
+[node name="CustomControl1" type="Control" parent="." unique_id=1004576241]
 anchors_preset = 0
 offset_left = 64.0
 offset_top = 528.0
@@ -203,5 +241,53 @@ offset_right = 364.0
 offset_bottom = 568.0
 focus_mode = 2
 script = ExtResource("3_xwvqn")
+
+[node name="CustomDescription2" type="Label" parent="." unique_id=1346147006]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 664.0
+offset_right = 1088.0
+offset_bottom = 739.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.5882353)
+text = "Accessibility support for a node can be customized using an \"AccessibilitySettings\" resource."
+autowrap_mode = 2
+
+[node name="CustomDescription3" type="Label" parent="." unique_id=1326963225]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 744.0
+offset_right = 1088.0
+offset_bottom = 784.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.5882353)
+text = "\"AccessibilitySettings\" can be used to customize the behavior of existing controls as well."
+autowrap_mode = 2
+
+[node name="LabelCustom2" type="Label" parent="." unique_id=47207203]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 624.0
+offset_right = 395.0
+offset_bottom = 658.0
+theme_override_font_sizes/font_size = 24
+text = "Custom control (Settings):"
+
+[node name="CustomControl2" type="Control" parent="." unique_id=990190549]
+accessibility_settings = SubResource("AccessibilitySettings_ff64o")
+anchors_preset = 0
+offset_left = 64.0
+offset_top = 664.0
+offset_right = 364.0
+offset_bottom = 704.0
+focus_mode = 2
+script = ExtResource("4_ff64o")
+
+[node name="Button" type="Button" parent="." unique_id=647869187]
+accessibility_settings = SubResource("AccessibilitySettings_kxtwu")
+layout_mode = 0
+offset_left = 64.0
+offset_top = 744.0
+offset_right = 192.0
+offset_bottom = 775.0
+text = "Not a Button"
 
 [connection signal="pressed" from="ButtonSet" to="." method="_on_button_set_pressed"]
