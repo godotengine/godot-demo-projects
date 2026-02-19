@@ -1,35 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjwlb6svjyotu"]
+[gd_scene format=3 uid="uid://cjwlb6svjyotu"]
 
 [ext_resource type="Script" uid="uid://bgcnf7ewyhig2" path="res://utils/camera_orbit.gd" id="1"]
 [ext_resource type="Script" uid="uid://6wvc1tk7sngi" path="res://tests/functional/test_joints.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://cybvr671wfdyq" path="res://tests/test_options.tscn" id="3"]
 
-[node name="Test" type="Node3D"]
+[node name="Test" type="Node3D" unique_id=729562655]
 script = ExtResource("2")
 
-[node name="LabelJointType" type="Label" parent="."]
+[node name="LabelJointType" type="Label" parent="." unique_id=791659514]
 offset_left = 14.0
 offset_top = 78.0
 offset_right = 171.0
 offset_bottom = 92.0
 text = "Joint Type: "
 
-[node name="Options" parent="." instance=ExtResource("3")]
+[node name="Options" parent="." unique_id=1572822843 instance=ExtResource("3")]
 
-[node name="Joints" type="Node3D" parent="."]
+[node name="Joints" type="Node3D" parent="." unique_id=553932042]
 
-[node name="PinJoint" type="PinJoint3D" parent="Joints"]
+[node name="PinJoint" type="PinJoint3D" parent="Joints" unique_id=462813666]
 
-[node name="HingeJoint" type="HingeJoint3D" parent="Joints"]
+[node name="HingeJoint" type="HingeJoint3D" parent="Joints" unique_id=2058425754]
 
-[node name="SliderJoint" type="SliderJoint3D" parent="Joints"]
+[node name="SliderJoint" type="SliderJoint3D" parent="Joints" unique_id=1463325751]
 
-[node name="ConeTwistJoint" type="ConeTwistJoint3D" parent="Joints"]
+[node name="ConeTwistJoint" type="ConeTwistJoint3D" parent="Joints" unique_id=680186955]
 
-[node name="Generic6DOFJoint" type="Generic6DOFJoint3D" parent="Joints"]
+[node name="Generic6DOFJoint" type="Generic6DOFJoint3D" parent="Joints" unique_id=732201554]
 
-[node name="Objects" type="Node3D" parent="."]
+[node name="Objects" type="Node3D" parent="." unique_id=1063423932]
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=347622606]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.19796)
 script = ExtResource("1")

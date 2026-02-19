@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4jcpna34qx6a"]
+[gd_scene format=3 uid="uid://b4jcpna34qx6a"]
 
 [ext_resource type="Script" uid="uid://d2un836phqms8" path="res://server.gd" id="1"]
 [ext_resource type="Script" uid="uid://dpuggchn4sr5m" path="res://client.gd" id="2"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" unique_id=1270643834]
 
-[node name="Server" type="Node" parent="."]
+[node name="Server" type="Node" parent="." unique_id=753310297]
 script = ExtResource("1")
 
-[node name="Client" type="Node" parent="."]
+[node name="Client" type="Node" parent="." unique_id=1096864024]
 script = ExtResource("2")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=354924186]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,7 +19,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=758820189]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,48 +27,48 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ServerContainer" type="VBoxContainer" parent="Control/HBoxContainer"]
+[node name="ServerContainer" type="VBoxContainer" parent="Control/HBoxContainer" unique_id=2009075788]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LabelServer" type="Label" parent="Control/HBoxContainer/ServerContainer"]
+[node name="LabelServer" type="Label" parent="Control/HBoxContainer/ServerContainer" unique_id=1673134641]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.666667, 0.666667, 0.666667, 1)
 theme_override_font_sizes/font_size = 30
 text = "Server"
 
-[node name="ButtonPong" type="Button" parent="Control/HBoxContainer/ServerContainer"]
+[node name="ButtonPong" type="Button" parent="Control/HBoxContainer/ServerContainer" unique_id=154359106]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 30
 text = "Send Pong"
 
-[node name="TextServer" type="RichTextLabel" parent="Control/HBoxContainer/ServerContainer"]
+[node name="TextServer" type="RichTextLabel" parent="Control/HBoxContainer/ServerContainer" unique_id=1346647416]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
 scroll_following = true
 
-[node name="ClientContainer" type="VBoxContainer" parent="Control/HBoxContainer"]
+[node name="ClientContainer" type="VBoxContainer" parent="Control/HBoxContainer" unique_id=1814170859]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LabelClient" type="Label" parent="Control/HBoxContainer/ClientContainer"]
+[node name="LabelClient" type="Label" parent="Control/HBoxContainer/ClientContainer" unique_id=1997167493]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.666667, 0.666667, 0.666667, 1)
 theme_override_font_sizes/font_size = 30
 text = "Client"
 
-[node name="ButtonPing" type="Button" parent="Control/HBoxContainer/ClientContainer"]
+[node name="ButtonPing" type="Button" parent="Control/HBoxContainer/ClientContainer" unique_id=1307662545]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 30
 text = "Send Ping"
 
-[node name="TextClient" type="RichTextLabel" parent="Control/HBoxContainer/ClientContainer"]
+[node name="TextClient" type="RichTextLabel" parent="Control/HBoxContainer/ClientContainer" unique_id=304511354]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3

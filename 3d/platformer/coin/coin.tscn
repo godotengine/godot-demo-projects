@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dx000heks00a4"]
+[gd_scene format=3 uid="uid://dx000heks00a4"]
 
 [ext_resource type="Script" uid="uid://fn1k5qs2om5m" path="res://coin/coin.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://bfv4s1m7io5gv" path="res://coin/sound_coin.wav" id="2"]
@@ -217,17 +217,17 @@ point_count = 3
 [sub_resource type="Gradient" id="8"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="Coin" type="Area3D"]
+[node name="Coin" type="Area3D" unique_id=1951153673]
 input_ray_pickable = false
 script = ExtResource("1")
 
-[node name="Circle" type="MeshInstance3D" parent="."]
+[node name="Circle" type="MeshInstance3D" parent="." unique_id=563892935]
 transform = Transform3D(1, 0, 0, 0, -3.6199901e-06, -1, 0, 1, -3.6199901e-06, 0.00550658, 0.532125, 0.000651598)
 layers = 2
 mesh = SubResource("CylinderMesh_fpglg")
 surface_material_override/0 = ExtResource("2_n0rbc")
 
-[node name="GlowSprite" type="MeshInstance3D" parent="."]
+[node name="GlowSprite" type="MeshInstance3D" parent="." unique_id=1007174989]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 visibility_range_begin = 3.0
 visibility_range_begin_margin = 3.0
@@ -235,20 +235,18 @@ visibility_range_fade_mode = 1
 mesh = SubResource("QuadMesh_kqa4x")
 surface_material_override/0 = SubResource("StandardMaterial3D_7q0mq")
 
-[node name="Animation" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_7v453")
-}
-autoplay = "spin"
+[node name="Animation" type="AnimationPlayer" parent="." unique_id=563121356]
+libraries/ = SubResource("AnimationLibrary_7v453")
+autoplay = &"spin"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1878845567]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00894194, 0.575859, 0.0193955)
 shape = SubResource("5")
 
-[node name="Sound" type="AudioStreamPlayer3D" parent="."]
+[node name="Sound" type="AudioStreamPlayer3D" parent="." unique_id=697953223]
 stream = ExtResource("2")
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+[node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=1338257585]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000732422, 0.542954, 0)
 emitting = false
 amount = 16

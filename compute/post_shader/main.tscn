@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b8pm0gjtxvx0h"]
+[gd_scene format=3 uid="uid://b8pm0gjtxvx0h"]
 
 [ext_resource type="Script" uid="uid://bgcj1kkxw14hu" path="res://main.gd" id="1_o0pyp"]
 [ext_resource type="Texture2D" uid="uid://b0cjowd5bho0a" path="res://pattern.png" id="1_r22bv"]
@@ -72,10 +72,10 @@ texture_filter = 5
 [sub_resource type="BoxMesh" id="BoxMesh_h605a"]
 material = SubResource("StandardMaterial3D_188mc")
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" unique_id=1764253080]
 script = ExtResource("1_o0pyp")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=439399309]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 shadow_bias = 0.04
@@ -83,27 +83,27 @@ directional_shadow_mode = 0
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 15.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1331595915]
 environment = SubResource("Environment_fjaix")
 compositor = SubResource("Compositor_xxhi4")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=767319753]
 transform = Transform3D(0.866025, -0.129409, 0.482963, -1.54268e-08, 0.965926, 0.258819, -0.5, -0.224144, 0.836516, 1, 1.2, 2)
 fov = 60.0
 
-[node name="Ground" type="MeshInstance3D" parent="."]
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=1725071444]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.01202)
 mesh = SubResource("PlaneMesh_82vj7")
 
-[node name="Sphere" type="MeshInstance3D" parent="."]
+[node name="Sphere" type="MeshInstance3D" parent="." unique_id=1941343562]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.796)
 mesh = SubResource("SphereMesh_iuyuf")
 
-[node name="Box" type="MeshInstance3D" parent="."]
+[node name="Box" type="MeshInstance3D" parent="." unique_id=1939830753]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.333, 0.5, -0.392)
 mesh = SubResource("BoxMesh_h605a")
 
-[node name="Info" type="Label" parent="."]
+[node name="Info" type="Label" parent="." unique_id=400803310]
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 64.0
@@ -112,7 +112,7 @@ theme_override_constants/outline_size = 4
 text = "Grayscale effect: Enabled
 Shader effect: Disabled"
 
-[node name="Help" type="Label" parent="."]
+[node name="Help" type="Label" parent="." unique_id=233042773]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0

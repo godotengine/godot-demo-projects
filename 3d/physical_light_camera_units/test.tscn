@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://0yko6oxwl0n7"]
+[gd_scene format=3 uid="uid://0yko6oxwl0n7"]
 
 [ext_resource type="PackedScene" uid="uid://bnmjiwr2ptb5w" path="res://living_room.glb" id="1_oncn7"]
 [ext_resource type="Script" uid="uid://qebxtmehy4vg" path="res://options.gd" id="2_hjhvo"]
@@ -28,13 +28,13 @@ auto_exposure_enabled = true
 auto_exposure_speed = 1.0
 frustum_focal_length = 25.0
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=938536005]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1486830361]
 environment = SubResource("Environment_3p42x")
 camera_attributes = SubResource("CameraAttributesPhysical_n2bnf")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1226231141]
 transform = Transform3D(-0.887673, -0.456539, 0.0600684, 0.273782, -0.418382, 0.866025, -0.370243, 0.785193, 0.496379, 0, 0, 0)
 light_angular_distance = 0.5
 light_bake_mode = 1
@@ -45,28 +45,28 @@ directional_shadow_blend_splits = true
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 15.0
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1596279738]
 transform = Transform3D(-0.824458, 0.0252143, -0.565361, 0, 0.999007, 0.0445544, 0.565923, 0.0367332, -0.82364, -2.93199, 2.20651, -1.8947)
 attributes = SubResource("CameraAttributesPhysical_drxnu")
 current = true
 
-[node name="LivingRoom" parent="." instance=ExtResource("1_oncn7")]
+[node name="LivingRoom" parent="." unique_id=629066613 instance=ExtResource("1_oncn7")]
 
-[node name="Lightbulb1" type="OmniLight3D" parent="."]
+[node name="Lightbulb1" type="OmniLight3D" parent="." unique_id=2030200179]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 2, 3.19673, 0)
 light_intensity_lumens = 800.0
 light_temperature = 5000.0
 light_size = 0.1
 shadow_enabled = true
 
-[node name="Lightbulb2" type="OmniLight3D" parent="."]
+[node name="Lightbulb2" type="OmniLight3D" parent="." unique_id=215667929]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -2, 3.197, 0)
 light_intensity_lumens = 800.0
 light_temperature = 5000.0
 light_size = 0.1
 shadow_enabled = true
 
-[node name="Options" type="Control" parent="." node_paths=PackedStringArray("sun", "lightbulb_1", "lightbulb_2", "world_environment")]
+[node name="Options" type="Control" parent="." unique_id=912883112 node_paths=PackedStringArray("sun", "lightbulb_1", "lightbulb_2", "world_environment")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -79,18 +79,18 @@ lightbulb_1 = NodePath("../Lightbulb1")
 lightbulb_2 = NodePath("../Lightbulb2")
 world_environment = NodePath("../WorldEnvironment")
 
-[node name="Light" type="VBoxContainer" parent="Options"]
+[node name="Light" type="VBoxContainer" parent="Options" unique_id=839628990]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 516.0
 offset_bottom = 69.0
 
-[node name="TimeOfDay" type="HBoxContainer" parent="Options/Light"]
+[node name="TimeOfDay" type="HBoxContainer" parent="Options/Light" unique_id=1030841819]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="Options/Light/TimeOfDay"]
+[node name="Label" type="Label" parent="Options/Light/TimeOfDay" unique_id=1254976]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -98,14 +98,14 @@ theme_override_constants/outline_size = 4
 text = "Time of Day"
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="Options/Light/TimeOfDay"]
+[node name="HSlider" type="HSlider" parent="Options/Light/TimeOfDay" unique_id=450021916]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 max_value = 1410.0
 value = 840.0
 
-[node name="Value" type="Label" parent="Options/Light/TimeOfDay"]
+[node name="Value" type="Label" parent="Options/Light/TimeOfDay" unique_id=1780347136]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -113,11 +113,11 @@ theme_override_constants/outline_size = 4
 text = "14:00"
 vertical_alignment = 1
 
-[node name="SunIntensity" type="HBoxContainer" parent="Options/Light"]
+[node name="SunIntensity" type="HBoxContainer" parent="Options/Light" unique_id=1327717762]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="Options/Light/SunIntensity"]
+[node name="Label" type="Label" parent="Options/Light/SunIntensity" unique_id=86295832]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -125,7 +125,7 @@ theme_override_constants/outline_size = 4
 text = "Sun Intensity"
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="Options/Light/SunIntensity"]
+[node name="HSlider" type="HSlider" parent="Options/Light/SunIntensity" unique_id=1978017539]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -133,7 +133,7 @@ max_value = 200000.0
 step = 2000.0
 value = 100000.0
 
-[node name="Value" type="Label" parent="Options/Light/SunIntensity"]
+[node name="Value" type="Label" parent="Options/Light/SunIntensity" unique_id=260028667]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -141,11 +141,11 @@ theme_override_constants/outline_size = 4
 text = "100000 lux"
 vertical_alignment = 1
 
-[node name="Lightbulb1Intensity" type="HBoxContainer" parent="Options/Light"]
+[node name="Lightbulb1Intensity" type="HBoxContainer" parent="Options/Light" unique_id=1274285565]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="Options/Light/Lightbulb1Intensity"]
+[node name="Label" type="Label" parent="Options/Light/Lightbulb1Intensity" unique_id=585930391]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -153,7 +153,7 @@ theme_override_constants/outline_size = 4
 text = "Lightbulb 1 Intensity"
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="Options/Light/Lightbulb1Intensity"]
+[node name="HSlider" type="HSlider" parent="Options/Light/Lightbulb1Intensity" unique_id=1488535077]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -161,7 +161,7 @@ max_value = 3000.0
 step = 50.0
 value = 800.0
 
-[node name="Value" type="Label" parent="Options/Light/Lightbulb1Intensity"]
+[node name="Value" type="Label" parent="Options/Light/Lightbulb1Intensity" unique_id=810917506]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -169,11 +169,11 @@ theme_override_constants/outline_size = 4
 text = "800 lm"
 vertical_alignment = 1
 
-[node name="Lightbulb1Temperature" type="HBoxContainer" parent="Options/Light"]
+[node name="Lightbulb1Temperature" type="HBoxContainer" parent="Options/Light" unique_id=956367431]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="Options/Light/Lightbulb1Temperature"]
+[node name="Label" type="Label" parent="Options/Light/Lightbulb1Temperature" unique_id=1201349041]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -183,7 +183,7 @@ text = "Lightbulb 1 Temperature"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="Options/Light/Lightbulb1Temperature"]
+[node name="HSlider" type="HSlider" parent="Options/Light/Lightbulb1Temperature" unique_id=379247193]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -192,7 +192,7 @@ max_value = 15000.0
 step = 100.0
 value = 5000.0
 
-[node name="Value" type="Label" parent="Options/Light/Lightbulb1Temperature"]
+[node name="Value" type="Label" parent="Options/Light/Lightbulb1Temperature" unique_id=879371316]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -200,11 +200,11 @@ theme_override_constants/outline_size = 4
 text = "5000 K"
 vertical_alignment = 1
 
-[node name="Lightbulb2Intensity" type="HBoxContainer" parent="Options/Light"]
+[node name="Lightbulb2Intensity" type="HBoxContainer" parent="Options/Light" unique_id=1765608849]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="Options/Light/Lightbulb2Intensity"]
+[node name="Label" type="Label" parent="Options/Light/Lightbulb2Intensity" unique_id=779050774]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -212,7 +212,7 @@ theme_override_constants/outline_size = 4
 text = "Lightbulb 2 Intensity"
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="Options/Light/Lightbulb2Intensity"]
+[node name="HSlider" type="HSlider" parent="Options/Light/Lightbulb2Intensity" unique_id=644268584]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -220,7 +220,7 @@ max_value = 3000.0
 step = 50.0
 value = 800.0
 
-[node name="Value" type="Label" parent="Options/Light/Lightbulb2Intensity"]
+[node name="Value" type="Label" parent="Options/Light/Lightbulb2Intensity" unique_id=1486672113]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -228,11 +228,11 @@ theme_override_constants/outline_size = 4
 text = "800 lm"
 vertical_alignment = 1
 
-[node name="Lightbulb2Temperature" type="HBoxContainer" parent="Options/Light"]
+[node name="Lightbulb2Temperature" type="HBoxContainer" parent="Options/Light" unique_id=1726232845]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="Options/Light/Lightbulb2Temperature"]
+[node name="Label" type="Label" parent="Options/Light/Lightbulb2Temperature" unique_id=1067990247]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -241,7 +241,7 @@ theme_override_font_sizes/font_size = 14
 text = "Lightbulb 2 Temperature"
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="Options/Light/Lightbulb2Temperature"]
+[node name="HSlider" type="HSlider" parent="Options/Light/Lightbulb2Temperature" unique_id=1694692567]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -250,7 +250,7 @@ max_value = 15000.0
 step = 100.0
 value = 5000.0
 
-[node name="Value" type="Label" parent="Options/Light/Lightbulb2Temperature"]
+[node name="Value" type="Label" parent="Options/Light/Lightbulb2Temperature" unique_id=1499140782]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -258,14 +258,14 @@ theme_override_constants/outline_size = 4
 text = "5000 K"
 vertical_alignment = 1
 
-[node name="SDFGI" type="CheckButton" parent="Options/Light"]
+[node name="SDFGI" type="CheckButton" parent="Options/Light" unique_id=468151874]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "SDF Global Illumination"
 
-[node name="Camera" type="VBoxContainer" parent="Options"]
+[node name="Camera" type="VBoxContainer" parent="Options" unique_id=1872274240]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -276,18 +276,18 @@ offset_right = 516.0
 offset_bottom = -16.0
 grow_vertical = 0
 
-[node name="FocusDistance" type="HBoxContainer" parent="Options/Camera"]
+[node name="FocusDistance" type="HBoxContainer" parent="Options/Camera" unique_id=1483569480]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="Options/Camera/FocusDistance"]
+[node name="Label" type="Label" parent="Options/Camera/FocusDistance" unique_id=1448564426]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Focus Distance"
 
-[node name="HSlider" type="HSlider" parent="Options/Camera/FocusDistance"]
+[node name="HSlider" type="HSlider" parent="Options/Camera/FocusDistance" unique_id=1169937781]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -296,50 +296,50 @@ max_value = 20.0
 step = 0.1
 value = 10.0
 
-[node name="Value" type="Label" parent="Options/Camera/FocusDistance"]
+[node name="Value" type="Label" parent="Options/Camera/FocusDistance" unique_id=141163982]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "10 m"
 
-[node name="FocalLength" type="HBoxContainer" parent="Options/Camera"]
+[node name="FocalLength" type="HBoxContainer" parent="Options/Camera" unique_id=303109219]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="Options/Camera/FocalLength"]
+[node name="Label" type="Label" parent="Options/Camera/FocalLength" unique_id=1995052799]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Focal Length"
 
-[node name="HSlider" type="HSlider" parent="Options/Camera/FocalLength"]
+[node name="HSlider" type="HSlider" parent="Options/Camera/FocalLength" unique_id=1468235804]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 min_value = 10.0
 value = 25.0
 
-[node name="Value" type="Label" parent="Options/Camera/FocalLength"]
+[node name="Value" type="Label" parent="Options/Camera/FocalLength" unique_id=1787708356]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "25 mm"
 
-[node name="Aperture" type="HBoxContainer" parent="Options/Camera"]
+[node name="Aperture" type="HBoxContainer" parent="Options/Camera" unique_id=1468734526]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="Options/Camera/Aperture"]
+[node name="Label" type="Label" parent="Options/Camera/Aperture" unique_id=403807478]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Aperture"
 
-[node name="HSlider" type="HSlider" parent="Options/Camera/Aperture"]
+[node name="HSlider" type="HSlider" parent="Options/Camera/Aperture" unique_id=613994066]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -348,25 +348,25 @@ max_value = 64.0
 step = 0.5
 value = 16.0
 
-[node name="Value" type="Label" parent="Options/Camera/Aperture"]
+[node name="Value" type="Label" parent="Options/Camera/Aperture" unique_id=1412714164]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "16.0 f-stop"
 
-[node name="ShutterSpeed" type="HBoxContainer" parent="Options/Camera"]
+[node name="ShutterSpeed" type="HBoxContainer" parent="Options/Camera" unique_id=165994475]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="Options/Camera/ShutterSpeed"]
+[node name="Label" type="Label" parent="Options/Camera/ShutterSpeed" unique_id=77757571]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Shutter Speed"
 
-[node name="HSlider" type="HSlider" parent="Options/Camera/ShutterSpeed"]
+[node name="HSlider" type="HSlider" parent="Options/Camera/ShutterSpeed" unique_id=302363508]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -375,25 +375,25 @@ max_value = 2000.0
 step = 10.0
 value = 100.0
 
-[node name="Value" type="Label" parent="Options/Camera/ShutterSpeed"]
+[node name="Value" type="Label" parent="Options/Camera/ShutterSpeed" unique_id=853126308]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "1/100"
 
-[node name="Sensitivity" type="HBoxContainer" parent="Options/Camera"]
+[node name="Sensitivity" type="HBoxContainer" parent="Options/Camera" unique_id=1296501721]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="Options/Camera/Sensitivity"]
+[node name="Label" type="Label" parent="Options/Camera/Sensitivity" unique_id=788793749]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Sensitivity"
 
-[node name="HSlider" type="HSlider" parent="Options/Camera/Sensitivity"]
+[node name="HSlider" type="HSlider" parent="Options/Camera/Sensitivity" unique_id=1148610891]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -402,25 +402,25 @@ max_value = 6400.0
 step = 50.0
 value = 100.0
 
-[node name="Value" type="Label" parent="Options/Camera/Sensitivity"]
+[node name="Value" type="Label" parent="Options/Camera/Sensitivity" unique_id=407922035]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "100 ISO"
 
-[node name="AutoexposureSpeed" type="HBoxContainer" parent="Options/Camera"]
+[node name="AutoexposureSpeed" type="HBoxContainer" parent="Options/Camera" unique_id=64178985]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="Options/Camera/AutoexposureSpeed"]
+[node name="Label" type="Label" parent="Options/Camera/AutoexposureSpeed" unique_id=359626881]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "Auto Exposure Speed"
 
-[node name="HSlider" type="HSlider" parent="Options/Camera/AutoexposureSpeed"]
+[node name="HSlider" type="HSlider" parent="Options/Camera/AutoexposureSpeed" unique_id=638201206]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -428,7 +428,7 @@ max_value = 10.0
 step = 0.1
 value = 1.0
 
-[node name="Value" type="Label" parent="Options/Camera/AutoexposureSpeed"]
+[node name="Value" type="Label" parent="Options/Camera/AutoexposureSpeed" unique_id=822273051]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)

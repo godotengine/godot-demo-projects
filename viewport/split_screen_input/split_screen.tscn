@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://db3nuuj3pqwor"]
+[gd_scene format=3 uid="uid://db3nuuj3pqwor"]
 
 [ext_resource type="Script" uid="uid://6gcil5jhkod3" path="res://split_screen.gd" id="1_4fp0b"]
 [ext_resource type="Script" uid="uid://phh002xa445q" path="res://sub_viewport_container.gd" id="2_v8t84"]
@@ -8,35 +8,35 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m48mh"]
 size = Vector2(128, 128)
 
-[node name="Split" type="VBoxContainer"]
+[node name="Split" type="VBoxContainer" unique_id=334739601]
 auto_translate_mode = 1
 offset_right = 350.0
 offset_bottom = 374.0
 script = ExtResource("1_4fp0b")
 
-[node name="OptionButton" type="OptionButton" parent="."]
+[node name="OptionButton" type="OptionButton" parent="." unique_id=1376738709]
 auto_translate_mode = 1
 layout_mode = 2
 
-[node name="InputRoutingViewportContainer" type="SubViewportContainer" parent="."]
+[node name="InputRoutingViewportContainer" type="SubViewportContainer" parent="." unique_id=2133028040]
 auto_translate_mode = 1
 layout_mode = 2
 script = ExtResource("2_v8t84")
 
-[node name="SubViewport" type="SubViewport" parent="InputRoutingViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="InputRoutingViewportContainer" unique_id=1327171656]
 handle_input_locally = false
 size = Vector2i(350, 350)
 render_target_update_mode = 4
 
-[node name="Player" type="CharacterBody2D" parent="InputRoutingViewportContainer/SubViewport"]
+[node name="Player" type="CharacterBody2D" parent="InputRoutingViewportContainer/SubViewport" unique_id=70740530]
 script = ExtResource("5_1qhfw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InputRoutingViewportContainer/SubViewport/Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InputRoutingViewportContainer/SubViewport/Player" unique_id=1321029429]
 shape = SubResource("RectangleShape2D_m48mh")
 
-[node name="Sprite2D" type="Sprite2D" parent="InputRoutingViewportContainer/SubViewport/Player"]
+[node name="Sprite2D" type="Sprite2D" parent="InputRoutingViewportContainer/SubViewport/Player" unique_id=291547810]
 texture = ExtResource("4_787wn")
 
-[node name="Camera2D" type="Camera2D" parent="InputRoutingViewportContainer/SubViewport/Player"]
+[node name="Camera2D" type="Camera2D" parent="InputRoutingViewportContainer/SubViewport/Player" unique_id=862053170]
 
 [connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]

@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqpcm161knnn1"]
+[gd_scene format=3 uid="uid://cqpcm161knnn1"]
 
 [ext_resource type="Script" uid="uid://c87jcpkcmth34" path="res://options.gd" id="1_20y27"]
 [ext_resource type="PackedScene" uid="uid://h2ti08g4pehd" path="res://3d_primitives.tscn" id="2_leeh8"]
 [ext_resource type="PackedScene" uid="uid://byvjhthaxvdvy" path="res://gradients.tscn" id="3_py7p5"]
 [ext_resource type="PackedScene" uid="uid://1mex317rxrtr" path="res://hues.tscn" id="4_pbomq"]
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=340646530]
 
-[node name="Options" type="VBoxContainer" parent="."]
+[node name="Options" type="VBoxContainer" parent="." unique_id=1857000316]
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 576.0
@@ -15,15 +15,15 @@ offset_bottom = 82.0
 script = ExtResource("1_20y27")
 scenes = Array[PackedScene]([ExtResource("2_leeh8"), ExtResource("3_py7p5"), ExtResource("4_pbomq")])
 
-[node name="TonemapMode" type="HBoxContainer" parent="Options"]
+[node name="TonemapMode" type="HBoxContainer" parent="Options" unique_id=2012620302]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="SceneLabel" type="Label" parent="Options/TonemapMode"]
+[node name="SceneLabel" type="Label" parent="Options/TonemapMode" unique_id=1959235669]
 layout_mode = 2
 text = "Scene"
 
-[node name="SceneOptionButton" type="OptionButton" parent="Options/TonemapMode"]
+[node name="SceneOptionButton" type="OptionButton" parent="Options/TonemapMode" unique_id=972864765]
 layout_mode = 2
 selected = 0
 item_count = 3
@@ -34,11 +34,11 @@ popup/item_1/id = 1
 popup/item_2/text = "Hues"
 popup/item_2/id = 2
 
-[node name="Label" type="Label" parent="Options/TonemapMode"]
+[node name="Label" type="Label" parent="Options/TonemapMode" unique_id=794580199]
 layout_mode = 2
 text = "Tonemap Mode"
 
-[node name="OptionButton" type="OptionButton" parent="Options/TonemapMode"]
+[node name="OptionButton" type="OptionButton" parent="Options/TonemapMode" unique_id=1187868181]
 layout_mode = 2
 selected = 2
 item_count = 5
@@ -53,19 +53,19 @@ popup/item_3/id = 3
 popup/item_4/text = "AgX"
 popup/item_4/id = 4
 
-[node name="Exposure" type="HBoxContainer" parent="Options/TonemapMode"]
+[node name="Exposure" type="HBoxContainer" parent="Options/TonemapMode" unique_id=1243197675]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="Options/TonemapMode/Exposure"]
+[node name="Label" type="Label" parent="Options/TonemapMode/Exposure" unique_id=628990127]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Exposure"
 horizontal_alignment = 2
 
-[node name="HSlider" type="HSlider" parent="Options/TonemapMode/Exposure"]
+[node name="HSlider" type="HSlider" parent="Options/TonemapMode/Exposure" unique_id=370824783]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -74,25 +74,25 @@ max_value = 5.0
 step = 0.1
 value = 1.0
 
-[node name="Value" type="Label" parent="Options/TonemapMode/Exposure"]
+[node name="Value" type="Label" parent="Options/TonemapMode/Exposure" unique_id=1282257349]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 text = "1.0"
 
-[node name="Whitepoint" type="HBoxContainer" parent="Options/TonemapMode"]
+[node name="Whitepoint" type="HBoxContainer" parent="Options/TonemapMode" unique_id=1375939203]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="Options/TonemapMode/Whitepoint"]
+[node name="Label" type="Label" parent="Options/TonemapMode/Whitepoint" unique_id=32884293]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Whitepoint"
 horizontal_alignment = 2
 
-[node name="HSlider" type="HSlider" parent="Options/TonemapMode/Whitepoint"]
+[node name="HSlider" type="HSlider" parent="Options/TonemapMode/Whitepoint" unique_id=91388008]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -101,21 +101,21 @@ max_value = 16.0
 step = 0.1
 value = 1.0
 
-[node name="Value" type="Label" parent="Options/TonemapMode/Whitepoint"]
+[node name="Value" type="Label" parent="Options/TonemapMode/Whitepoint" unique_id=854353934]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 text = "6.0"
 
-[node name="ColorCorrection" type="HBoxContainer" parent="Options"]
+[node name="ColorCorrection" type="HBoxContainer" parent="Options" unique_id=540115847]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="Options/ColorCorrection"]
+[node name="Label" type="Label" parent="Options/ColorCorrection" unique_id=1294205263]
 layout_mode = 2
 text = "Color Correction"
 
-[node name="OptionButton" type="OptionButton" parent="Options/ColorCorrection"]
+[node name="OptionButton" type="OptionButton" parent="Options/ColorCorrection" unique_id=83540396]
 layout_mode = 2
 selected = 0
 item_count = 20
@@ -160,19 +160,19 @@ popup/item_18/id = 18
 popup/item_19/text = "Yellowed (3D)"
 popup/item_19/id = 19
 
-[node name="Saturation" type="HBoxContainer" parent="Options/ColorCorrection"]
+[node name="Saturation" type="HBoxContainer" parent="Options/ColorCorrection" unique_id=2051052250]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="Options/ColorCorrection/Saturation"]
+[node name="Label" type="Label" parent="Options/ColorCorrection/Saturation" unique_id=1983854287]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Saturation"
 horizontal_alignment = 2
 
-[node name="HSlider" type="HSlider" parent="Options/ColorCorrection/Saturation"]
+[node name="HSlider" type="HSlider" parent="Options/ColorCorrection/Saturation" unique_id=1183544730]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -182,13 +182,13 @@ step = 0.1
 value = 1.0
 tick_count = 3
 
-[node name="Value" type="Label" parent="Options/ColorCorrection/Saturation"]
+[node name="Value" type="Label" parent="Options/ColorCorrection/Saturation" unique_id=636568031]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 text = "1.0"
 
-[node name="Debanding" type="CheckButton" parent="Options"]
+[node name="Debanding" type="CheckButton" parent="Options" unique_id=591409050]
 layout_mode = 2
 size_flags_horizontal = 0
 button_pressed = true

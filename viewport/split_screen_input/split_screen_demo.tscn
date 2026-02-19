@@ -1,12 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6rmkiaj8404h"]
+[gd_scene format=3 uid="uid://b6rmkiaj8404h"]
 
 [ext_resource type="Script" uid="uid://db1rlmm1lqfb1" path="res://root.gd" id="1_2itit"]
 [ext_resource type="PackedScene" uid="uid://db3nuuj3pqwor" path="res://split_screen.tscn" id="1_mcbdt"]
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node" unique_id=1408881300]
 script = ExtResource("1_2itit")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1932950387]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,7 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="SplitScreen1" parent="." instance=ExtResource("1_mcbdt")]
+[node name="SplitScreen1" parent="." unique_id=2020711691 instance=ExtResource("1_mcbdt")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -27,7 +27,7 @@ offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SplitScreen2" parent="." instance=ExtResource("1_mcbdt")]
+[node name="SplitScreen2" parent="." unique_id=1634385009 instance=ExtResource("1_mcbdt")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -41,7 +41,7 @@ grow_horizontal = 2
 grow_vertical = 2
 init_position = Vector2(132, 0)
 
-[node name="SplitScreen3" parent="." instance=ExtResource("1_mcbdt")]
+[node name="SplitScreen3" parent="." unique_id=1609644638 instance=ExtResource("1_mcbdt")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -55,7 +55,7 @@ grow_horizontal = 2
 grow_vertical = 2
 init_position = Vector2(0, 132)
 
-[node name="SplitScreen4" parent="." instance=ExtResource("1_mcbdt")]
+[node name="SplitScreen4" parent="." unique_id=1720889092 instance=ExtResource("1_mcbdt")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -69,5 +69,5 @@ grow_horizontal = 2
 grow_vertical = 2
 init_position = Vector2(132, 132)
 
-[node name="PlayArea" type="SubViewport" parent="."]
+[node name="PlayArea" type="SubViewport" parent="." unique_id=1135421651]
 render_target_update_mode = 4

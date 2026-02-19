@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://ymeqwdbiylr1"]
+[gd_scene format=4 uid="uid://ymeqwdbiylr1"]
 
 [ext_resource type="Texture2D" uid="uid://d3xv0tylpjj3d" path="res://sprites/space.png" id="1_2jdkd"]
 [ext_resource type="TileSet" uid="uid://daneaou22xgt2" path="res://tileset/tileset.tres" id="2_aylbj"]
@@ -22,22 +22,22 @@ point_count = 3
 offsets = PackedFloat32Array(0, 0.692737, 1)
 colors = PackedColorArray(1, 0.893555, 0, 1, 0.265625, 1, 0.490903, 1, 0.0154343, 0.688679, 0.987793, 1)
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" unique_id=1630765438]
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="." unique_id=1607876727]
 texture = ExtResource("1_2jdkd")
 offset = Vector2(576, 324)
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1862814924]
 tile_map_data = PackedByteArray("AAABAAEAAAAAAAAAAAAFAAEAAAAAAAAAAAAJAAEAAAAAAAAAAAAOAAEAAAAAAAAAAAAJAAMAAAAAAAAAAAAKAAMAAAAAAAAAAAALAAMAAAAAAAAAAAAIAAMAAAAAAAAAAAAHAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAADAAQAAAAAAAAAAAACAAQAAAAAAAAAAAABAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAABAAgAAAAAAAAAAAACAAgAAAAAAAAAAAADAAgAAAAAAAAAAAAEAAgAAAAAAAAAAAAFAAgAAAAAAAAAAAAGAAgAAAAAAAAAAAAHAAgAAAAAAAAAAAAIAAgAAAAAAAAAAAAJAAgAAAAAAAAAAAAJAAcAAAAAAAAAAAAKAAYAAAAAAAAAAAALAAYAAAAAAAAAAAAMAAYAAAAAAAAAAAAPAAcAAAAAAAAAAAAPAAYAAAAAAAAAAAAPAAUAAAAAAAAAAAAPAAQAAAAAAAAAAAAQAAMAAAAAAAAAAAANAAQAAAAAAAAAAAA=")
 tile_set = ExtResource("2_aylbj")
 script = ExtResource("3_taaih")
 
-[node name="Character" type="Marker2D" parent="."]
+[node name="Character" type="Marker2D" parent="." unique_id=137178209]
 position = Vector2(32, 32)
 script = ExtResource("4_ticbk")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Character"]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Character" unique_id=1482266482]
 material = SubResource("1")
 position = Vector2(-20, 0)
 rotation = 1.5708
@@ -53,10 +53,10 @@ initial_velocity_max = 50.0
 scale_amount_curve = SubResource("2")
 color_ramp = SubResource("3")
 
-[node name="Sprite2D" type="Sprite2D" parent="Character"]
+[node name="Sprite2D" type="Sprite2D" parent="Character" unique_id=1698622878]
 position = Vector2(7, 0)
 texture = ExtResource("6_b3lcn")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=630037047]
 offset = Vector2(576, 324)
 process_callback = 0

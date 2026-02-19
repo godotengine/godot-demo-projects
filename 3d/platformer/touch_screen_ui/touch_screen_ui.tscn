@@ -1,18 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://7bwmwbaeosl3"]
+[gd_scene format=3 uid="uid://7bwmwbaeosl3"]
 
 [ext_resource type="Script" uid="uid://yp8a87rk1fng" path="res://touch_screen_ui.gd" id="1_xag24"]
 [ext_resource type="PackedScene" uid="uid://dctqlxdv5pu5h" path="res://touch_screen_ui/virtual_joystick/virtual_joystick_scene.tscn" id="2_2ea5h"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_7o5bd"]
 
-[node name="TouchScreenUI" type="CanvasLayer"]
+[node name="TouchScreenUI" type="CanvasLayer" unique_id=1674989612]
 script = ExtResource("1_xag24")
 
-[node name="Virtual Joystick" parent="." instance=ExtResource("2_2ea5h")]
+[node name="Virtual Joystick" parent="." unique_id=1150714435 instance=ExtResource("2_2ea5h")]
 deadzone_size = 0.0
 clampzone_size = 100.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=703022123]
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -24,11 +24,11 @@ offset_bottom = 64.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="jump" type="Control" parent="HBoxContainer"]
+[node name="jump" type="Control" parent="HBoxContainer" unique_id=1039387675]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/jump"]
+[node name="Label" type="Label" parent="HBoxContainer/jump" unique_id=1818796984]
 z_index = 5
 z_as_relative = false
 layout_mode = 1
@@ -41,17 +41,17 @@ text = "JUMP"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="jumpbtn" type="TouchScreenButton" parent="HBoxContainer/jump"]
+[node name="jumpbtn" type="TouchScreenButton" parent="HBoxContainer/jump" unique_id=2054360951]
 self_modulate = Color(0, 0, 0, 1)
 scale = Vector2(124, 124)
 texture_normal = SubResource("CanvasTexture_7o5bd")
 action = "jump"
 
-[node name="shoot" type="Control" parent="HBoxContainer"]
+[node name="shoot" type="Control" parent="HBoxContainer" unique_id=686099121]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="shoot" type="Label" parent="HBoxContainer/shoot"]
+[node name="shoot" type="Label" parent="HBoxContainer/shoot" unique_id=342058421]
 z_index = 5
 z_as_relative = false
 layout_mode = 1
@@ -64,7 +64,7 @@ text = "SHOOT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="shoot2" type="TouchScreenButton" parent="HBoxContainer/shoot"]
+[node name="shoot2" type="TouchScreenButton" parent="HBoxContainer/shoot" unique_id=2134891827]
 self_modulate = Color(0, 0, 0, 1)
 scale = Vector2(124, 124)
 texture_normal = SubResource("CanvasTexture_7o5bd")

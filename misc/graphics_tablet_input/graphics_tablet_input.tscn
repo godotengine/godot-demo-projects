@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ccuepidukgq0e"]
+[gd_scene format=3 uid="uid://ccuepidukgq0e"]
 
 [ext_resource type="Script" uid="uid://b0fmcs80ffm3s" path="res://graphics_tablet_input.gd" id="1_fhuxi"]
 
@@ -39,7 +39,7 @@ action = &"toggle_tilt_vector"
 [sub_resource type="Shortcut" id="Shortcut_231fk"]
 events = [SubResource("InputEventAction_4p65y")]
 
-[node name="ColorRect" type="ColorRect"]
+[node name="ColorRect" type="ColorRect" unique_id=324136194]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -48,61 +48,61 @@ grow_vertical = 2
 mouse_default_cursor_shape = 3
 script = ExtResource("1_fhuxi")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1833434671]
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=454718528]
 offset_right = 264.0
 offset_bottom = 648.0
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_0pp2f")
 
-[node name="Options" type="VBoxContainer" parent="CanvasLayer/PanelContainer"]
+[node name="Options" type="VBoxContainer" parent="CanvasLayer/PanelContainer" unique_id=1043471702]
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 10
 
-[node name="UndoLastLine" type="Button" parent="CanvasLayer/PanelContainer/Options"]
+[node name="UndoLastLine" type="Button" parent="CanvasLayer/PanelContainer/Options" unique_id=1384094447]
 unique_name_in_owner = true
 layout_mode = 2
 disabled = true
 shortcut = SubResource("Shortcut_3mcds")
 text = "Undo Last Line"
 
-[node name="ClearAllLines" type="Button" parent="CanvasLayer/PanelContainer/Options"]
+[node name="ClearAllLines" type="Button" parent="CanvasLayer/PanelContainer/Options" unique_id=331150843]
 unique_name_in_owner = true
 layout_mode = 2
 disabled = true
 shortcut = SubResource("Shortcut_5wv4g")
 text = "Clear All Lines"
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/PanelContainer/Options"]
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/PanelContainer/Options" unique_id=684895149]
 layout_mode = 2
 
-[node name="LineColor" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Options"]
+[node name="LineColor" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Options" unique_id=474049681]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/Options/LineColor"]
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/Options/LineColor" unique_id=1164620775]
 layout_mode = 2
 text = "Line Color"
 
-[node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/PanelContainer/Options/LineColor"]
+[node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/PanelContainer/Options/LineColor" unique_id=1531374219]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
 shortcut = SubResource("Shortcut_1nmmy")
 
-[node name="LineWidth" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Options"]
+[node name="LineWidth" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Options" unique_id=363719018]
 layout_mode = 2
 tooltip_text = "(-: Decrease, +: Increase)"
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/Options/LineWidth"]
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/Options/LineWidth" unique_id=113915703]
 layout_mode = 2
 text = "Line Width"
 
-[node name="HSlider" type="HSlider" parent="CanvasLayer/PanelContainer/Options/LineWidth"]
+[node name="HSlider" type="HSlider" parent="CanvasLayer/PanelContainer/Options/LineWidth" unique_id=303002201]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -111,13 +111,13 @@ max_value = 20.0
 step = 0.5
 value = 3.0
 
-[node name="Value" type="Label" parent="CanvasLayer/PanelContainer/Options/LineWidth"]
+[node name="Value" type="Label" parent="CanvasLayer/PanelContainer/Options/LineWidth" unique_id=824532780]
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 text = "3.0"
 horizontal_alignment = 1
 
-[node name="PressureSensitive" type="CheckButton" parent="CanvasLayer/PanelContainer/Options"]
+[node name="PressureSensitive" type="CheckButton" parent="CanvasLayer/PanelContainer/Options" unique_id=1861503839]
 layout_mode = 2
 tooltip_text = "If enabled, modulates line width according to pen pressure.
 This has no effect if drawing with a mouse or a tablet
@@ -126,7 +126,7 @@ button_pressed = true
 shortcut = SubResource("Shortcut_mnr5q")
 text = "Pressure-Sensitive"
 
-[node name="ShowTiltVector" type="CheckButton" parent="CanvasLayer/PanelContainer/Options"]
+[node name="ShowTiltVector" type="CheckButton" parent="CanvasLayer/PanelContainer/Options" unique_id=319378340]
 layout_mode = 2
 tooltip_text = "If enabled, shows a visual representation of the tilt vector
 reported by the graphics tablet. Tilt is not supported by all
@@ -135,18 +135,18 @@ button_pressed = true
 shortcut = SubResource("Shortcut_231fk")
 text = "Show Tilt Vector"
 
-[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/PanelContainer/Options"]
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/PanelContainer/Options" unique_id=352835719]
 layout_mode = 2
 
-[node name="MSAA" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Options"]
+[node name="MSAA" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Options" unique_id=1629482593]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/Options/MSAA"]
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/Options/MSAA" unique_id=1123941218]
 layout_mode = 2
 text = "MSAA 2D"
 
-[node name="OptionButton" type="OptionButton" parent="CanvasLayer/PanelContainer/Options/MSAA"]
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/PanelContainer/Options/MSAA" unique_id=1619638126]
 layout_mode = 2
 selected = 3
 item_count = 4
@@ -159,15 +159,15 @@ popup/item_2/id = 2
 popup/item_3/text = "8×"
 popup/item_3/id = 3
 
-[node name="MaxFPS" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Options"]
+[node name="MaxFPS" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Options" unique_id=47620639]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/Options/MaxFPS"]
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/Options/MaxFPS" unique_id=366712676]
 layout_mode = 2
 text = "Max FPS"
 
-[node name="HSlider" type="HSlider" parent="CanvasLayer/PanelContainer/Options/MaxFPS"]
+[node name="HSlider" type="HSlider" parent="CanvasLayer/PanelContainer/Options/MaxFPS" unique_id=756108633]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -176,13 +176,13 @@ max_value = 240.0
 step = 5.0
 value = 145.0
 
-[node name="Value" type="Label" parent="CanvasLayer/PanelContainer/Options/MaxFPS"]
+[node name="Value" type="Label" parent="CanvasLayer/PanelContainer/Options/MaxFPS" unique_id=1780973878]
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 text = "145"
 horizontal_alignment = 1
 
-[node name="VSync" type="CheckButton" parent="CanvasLayer/PanelContainer/Options"]
+[node name="VSync" type="CheckButton" parent="CanvasLayer/PanelContainer/Options" unique_id=595293286]
 layout_mode = 2
 tooltip_text = "Disable V-Sync to achieve lower input latency.
 
@@ -190,7 +190,7 @@ Note that Android, iOS, and Web platforms enforce
 V-Sync at a system level with no reliable way to disable it."
 text = "V-Sync"
 
-[node name="InputAccumulation" type="CheckButton" parent="CanvasLayer/PanelContainer/Options"]
+[node name="InputAccumulation" type="CheckButton" parent="CanvasLayer/PanelContainer/Options" unique_id=1215952987]
 layout_mode = 2
 tooltip_text = "If enabled, inputs are collected and merged into a single input event on every rendered frame.
 Usually this is enabled in Godot, but this project disables it by default.
@@ -199,11 +199,11 @@ This should be left disabled for drawing apps that expect precise input,
 as lines can become visibly jagged otherwise."
 text = "Input Accumulation"
 
-[node name="Spacer" type="Control" parent="CanvasLayer/PanelContainer/Options"]
+[node name="Spacer" type="Control" parent="CanvasLayer/PanelContainer/Options" unique_id=422900849]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TabletInfo" type="Label" parent="CanvasLayer/PanelContainer/Options"]
+[node name="TabletInfo" type="Label" parent="CanvasLayer/PanelContainer/Options" unique_id=353883062]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.67451)
 layout_mode = 2
@@ -211,7 +211,7 @@ text = "Pressure: 0.000
 Tilt: (0.000, 0.000)
 Inverted pen: No"
 
-[node name="TabletDriver" type="Label" parent="CanvasLayer/PanelContainer/Options"]
+[node name="TabletDriver" type="Label" parent="CanvasLayer/PanelContainer/Options" unique_id=1502077248]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2

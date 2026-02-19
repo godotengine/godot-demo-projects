@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://s52cgg7uphd6"]
+[gd_scene format=3 uid="uid://s52cgg7uphd6"]
 
 [ext_resource type="Script" uid="uid://b41sjqeps2qxd" path="res://player.gd" id="1_pq8q7"]
 [ext_resource type="PackedScene" uid="uid://dp55yaag2bftf" path="res://box.tscn" id="2_pyidc"]
@@ -43,12 +43,12 @@ albedo_color = Color(0.178458, 0.199519, 0.338574, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_vvh5c"]
 size = Vector3(10, 1, 10)
 
-[node name="Root" type="Node3D"]
+[node name="Root" type="Node3D" unique_id=904365328]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=37740260]
 environment = SubResource("Environment_vvh5c")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1493308851]
 transform = Transform3D(0.258819, 0.616341, -0.743732, 0, 0.769968, 0.638083, 0.965926, -0.165148, 0.199282, 0, 6.24965, 0)
 shadow_enabled = true
 shadow_normal_bias = 2.7
@@ -56,73 +56,73 @@ directional_shadow_mode = 0
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 15.0
 
-[node name="Player" type="CharacterBody3D" parent="."]
+[node name="Player" type="CharacterBody3D" parent="." unique_id=451685886]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24778, 0)
 script = ExtResource("1_pq8q7")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=947795799]
 shape = SubResource("CylinderShape3D_vvh5c")
 
-[node name="Rig" type="Node3D" parent="Player"]
+[node name="Rig" type="Node3D" parent="Player" unique_id=625551938]
 physics_interpolation_mode = 2
 
-[node name="Mesh_Body" type="MeshInstance3D" parent="Player/Rig"]
+[node name="Mesh_Body" type="MeshInstance3D" parent="Player/Rig" unique_id=765192795]
 mesh = SubResource("CylinderMesh_vvh5c")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_pq8q7")
 
-[node name="Camera_TPS" type="Camera3D" parent="Player/Rig"]
+[node name="Camera_TPS" type="Camera3D" parent="Player/Rig" unique_id=2035414787]
 transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 1.72429, 2.14884)
 
-[node name="Head" type="Node3D" parent="Player/Rig"]
+[node name="Head" type="Node3D" parent="Player/Rig" unique_id=1684336430]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12412, 0)
 
-[node name="Camera_FPS" type="Camera3D" parent="Player/Rig/Head"]
+[node name="Camera_FPS" type="Camera3D" parent="Player/Rig/Head" unique_id=117583996]
 current = true
 
-[node name="Mesh_Head" type="MeshInstance3D" parent="Player/Rig/Head"]
+[node name="Mesh_Head" type="MeshInstance3D" parent="Player/Rig/Head" unique_id=1026860438]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.5)
 mesh = SubResource("PrismMesh_pq8q7")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_pyidc")
 
-[node name="Fire_Origin" type="Node3D" parent="Player/Rig/Head"]
+[node name="Fire_Origin" type="Node3D" parent="Player/Rig/Head" unique_id=1522052784]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.60726)
 
-[node name="Camera_Fixed" type="Camera3D" parent="."]
+[node name="Camera_Fixed" type="Camera3D" parent="." unique_id=353717658]
 transform = Transform3D(1, 0, 0, 0, 0.788161, 0.615469, 0, -0.615469, 0.788161, 0, 4.94837, 5.75259)
 
-[node name="Background" type="Node3D" parent="."]
+[node name="Background" type="Node3D" parent="." unique_id=2126008684]
 
-[node name="Floor" type="MeshInstance3D" parent="Background"]
+[node name="Floor" type="MeshInstance3D" parent="Background" unique_id=1095223674]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 mesh = SubResource("BoxMesh_vho56")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vvh5c")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Background/Floor"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Background/Floor" unique_id=1498753706]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Background/Floor/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Background/Floor/StaticBody3D" unique_id=2019191669]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 shape = SubResource("BoxShape3D_vvh5c")
 
-[node name="Box" parent="Background" instance=ExtResource("2_pyidc")]
+[node name="Box" parent="Background" unique_id=1643581943 instance=ExtResource("2_pyidc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.596531, 2.19581)
 can_sleep = false
 
-[node name="Wall" parent="Background" instance=ExtResource("3_vvh5c")]
+[node name="Wall" parent="Background" unique_id=1413812309 instance=ExtResource("3_vvh5c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 
-[node name="Wall2" parent="Background" instance=ExtResource("3_vvh5c")]
+[node name="Wall2" parent="Background" unique_id=152336677 instance=ExtResource("3_vvh5c")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -5)
 
-[node name="Wall3" parent="Background" instance=ExtResource("3_vvh5c")]
+[node name="Wall3" parent="Background" unique_id=315184325 instance=ExtResource("3_vvh5c")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5, 0, 0)
 
-[node name="Wall4" parent="Background" instance=ExtResource("3_vvh5c")]
+[node name="Wall4" parent="Background" unique_id=692845477 instance=ExtResource("3_vvh5c")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5, 0, 0)
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=438026368]
 self_modulate = Color(1, 1, 1, 0.627451)
 anchors_preset = 2
 anchor_top = 1.0

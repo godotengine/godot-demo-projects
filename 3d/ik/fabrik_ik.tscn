@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://boy8g6mm3wy72"]
+[gd_scene format=3 uid="uid://boy8g6mm3wy72"]
 
 [ext_resource type="Material" uid="uid://uslxtfi8ihx7" path="res://checker_floor.mat.tres" id="1_5n7t5"]
 [ext_resource type="PackedScene" uid="uid://41fxuoounr3" path="res://model/godot_battle_bot.dae" id="2"]
@@ -17,37 +17,38 @@ size = Vector2(40, 40)
 albedo_color = Color(0, 0.191406, 0.765625, 1)
 roughness = 0.0
 
-[node name="FABRIK_IK" type="Node3D"]
+[node name="FABRIK_IK" type="Node3D" unique_id=619582598]
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1881998598]
 mesh = SubResource("1")
 surface_material_override/0 = ExtResource("1_5n7t5")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=638726606]
 transform = Transform3D(0.56827, 0.673454, -0.472789, 0, 0.574581, 0.818448, 0.822842, -0.465099, 0.326517, -9.77531, 11.5204, 11.766)
 
-[node name="GodotBattleBot" parent="." instance=ExtResource("2")]
+[node name="GodotBattleBot" parent="." unique_id=1597213571 instance=ExtResource("2")]
 
-[node name="godot_battle_bot" parent="GodotBattleBot/Armature/Skeleton3D" index="0"]
+[node name="godot_battle_bot" parent="GodotBattleBot/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1597213571, 525861788) index="0" unique_id=1318908502]
+skeleton = NodePath("..")
 surface_material_override/0 = ExtResource("3")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=36648775]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5, 11)
 fov = 74.0
 script = ExtResource("5")
 MOVEMENT_SPEED = -8.0
 flip_axis = true
 
-[node name="Targets" type="Node3D" parent="Camera3D"]
+[node name="Targets" type="Node3D" parent="Camera3D" unique_id=696512591]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 
-[node name="IK_LookAt_Head" type="Node3D" parent="Camera3D/Targets"]
+[node name="IK_LookAt_Head" type="Node3D" parent="Camera3D/Targets" unique_id=455930906]
 script = ExtResource("6")
 skeleton_path = NodePath("../../../GodotBattleBot/Armature/Skeleton3D")
 bone_name = "Head"
 additional_rotation = Vector3(90, 0, 0)
 
-[node name="IK_FABRIK_Left_Arm" type="Node3D" parent="Camera3D/Targets"]
+[node name="IK_FABRIK_Left_Arm" type="Node3D" parent="Camera3D/Targets" unique_id=1198369346]
 script = ExtResource("8")
 skeleton_path = NodePath("../../../GodotBattleBot/Armature/Skeleton3D")
 bones_in_chain = PackedStringArray("Left_UpperArm", "Left_LowerArm")
@@ -56,10 +57,10 @@ chain_iterations = 10
 limit_chain_iterations = false
 use_middle_joint_target = true
 
-[node name="Target" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Left_Arm"]
+[node name="Target" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Left_Arm" unique_id=424778641]
 transform = Transform3D(0.518503, 0, -0.855076, 0, 1, 0, 0.855076, 0, 0.518503, 1.13159, 0, -0.155596)
 
-[node name="IK_LookAt_LH" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Left_Arm/Target"]
+[node name="IK_LookAt_LH" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Left_Arm/Target" unique_id=1135173591]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.343393, -0.133381, 0.836605)
 script = ExtResource("6")
 skeleton_path = NodePath("../../../../../GodotBattleBot/Armature/Skeleton3D")
@@ -69,50 +70,51 @@ position_using_additional_bone = true
 additional_bone_name = "Left_LowerArm"
 additional_bone_length = 3.0
 
-[node name="MiddleJoint" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Left_Arm"]
+[node name="MiddleJoint" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Left_Arm" unique_id=966033612]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.16849, 0, -5.31922)
 
-[node name="Left_UpperArm2" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Left_Arm"]
+[node name="Left_UpperArm2" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Left_Arm" unique_id=282917862]
 transform = Transform3D(-0.120249, 0.882081, -0.455493, -0.0511926, 0.452703, 0.890191, 0.991424, 0.130363, -0.00928126, 1.53444, 0.30189, -3.23425)
 
-[node name="Left_LowerArm2" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Left_Arm"]
+[node name="Left_LowerArm2" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Left_Arm" unique_id=627533654]
 transform = Transform3D(-0.773624, -0.0228999, 0.633231, 2.98023e-08, 0.999347, 0.03614, -0.633645, 0.0279588, -0.773119, 2.94998, 0.10378, -2.37569)
 
-[node name="IK_FABRIK_Right_Arm" type="Node3D" parent="Camera3D/Targets"]
+[node name="IK_FABRIK_Right_Arm" type="Node3D" parent="Camera3D/Targets" unique_id=1891442696]
 script = ExtResource("8")
 skeleton_path = NodePath("../../../GodotBattleBot/Armature/Skeleton3D")
 bones_in_chain = PackedStringArray("Right_UpperArm", "Right_LowerArm", "Right_Hand")
 bones_in_chain_lengths = PackedFloat32Array(1.97, 3, 1.2)
+chain_iterations = 2
 limit_chain_iterations = false
 use_middle_joint_target = true
 
-[node name="Target" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Right_Arm"]
+[node name="Target" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Right_Arm" unique_id=422190397]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.229958, 0, 0.929313)
 
-[node name="IK_LookAt_RH" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Right_Arm/Target"]
+[node name="IK_LookAt_RH" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Right_Arm/Target" unique_id=1110894136]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0544824, -0.133381, 0.332403)
 script = ExtResource("6")
 skeleton_path = NodePath("../../../../../GodotBattleBot/Armature/Skeleton3D")
 bone_name = "Right_Hand"
 additional_rotation = Vector3(0, 0, 90)
 
-[node name="MiddleJoint" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Right_Arm"]
+[node name="MiddleJoint" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Right_Arm" unique_id=1363764633]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.34515, 0, -3.7843)
 
-[node name="Right_UpperArm2" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Right_Arm"]
+[node name="Right_UpperArm2" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Right_Arm" unique_id=2109547633]
 transform = Transform3D(-0.00773287, 0.890205, 0.455493, 0.0143814, -0.455361, 0.890191, 0.999866, 0.0134343, -0.00928123, -1.5334, 0.30189, -3.23425)
 
-[node name="Right_LowerArm2" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Right_Arm"]
+[node name="Right_LowerArm2" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Right_Arm" unique_id=1567012813]
 transform = Transform3D(-0.792023, 0.0165711, -0.610266, -1.49012e-08, 0.999631, 0.0271438, 0.610491, 0.0214986, -0.791732, -2.89561, 0.100755, -2.31866)
 
-[node name="Right_Hand2" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Right_Arm"]
+[node name="Right_Hand2" type="Node3D" parent="Camera3D/Targets/IK_FABRIK_Right_Arm" unique_id=1442146826]
 transform = Transform3D(-0.678336, 0.00698721, -0.734719, -2.32831e-09, 0.999955, 0.00950961, 0.734752, 0.00645071, -0.678305, -1.07914, 0.020072, 0.03791)
 
-[node name="1MeterCube" type="MeshInstance3D" parent="Camera3D/Targets"]
+[node name="1MeterCube" type="MeshInstance3D" parent="Camera3D/Targets" unique_id=1093626638]
 mesh = SubResource("3")
 surface_material_override/0 = SubResource("4")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1572362522]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -120,7 +122,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LabelExtra" type="Label" parent="Control"]
+[node name="LabelExtra" type="Label" parent="Control" unique_id=1673221024]
 layout_mode = 1
 offset_right = 623.0
 offset_bottom = 98.0
@@ -128,7 +130,7 @@ text = "NOTE: You will get a few errors when saving with FABRIK IK nodes in your
 This is a known bug. Please ignore the errors for now, as they do not do anything
 (They're just annoying. If you find a fix, please add it to the demo repository!)"
 
-[node name="Panel" type="Panel" parent="Control"]
+[node name="Panel" type="Panel" parent="Control" unique_id=1329392613]
 modulate = Color(1, 1, 1, 0.784314)
 layout_mode = 1
 anchors_preset = 12
@@ -141,7 +143,7 @@ offset_right = 4.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Label" type="Label" parent="Control/Panel"]
+[node name="Label" type="Label" parent="Control/Panel" unique_id=226445450]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -153,7 +155,7 @@ Move mouse to move IK targets
 (Using 3 bones in the right hand, only 2 in the left. 3+ recommended)"
 horizontal_alignment = 1
 
-[node name="LabelLeft" type="Label" parent="Control/Panel"]
+[node name="LabelLeft" type="Label" parent="Control/Panel" unique_id=932423205]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -166,7 +168,7 @@ grow_horizontal = 0
 text = "Left Hand"
 horizontal_alignment = 1
 
-[node name="LabelRight" type="Label" parent="Control/Panel"]
+[node name="LabelRight" type="Label" parent="Control/Panel" unique_id=637791777]
 layout_mode = 0
 offset_left = 184.0
 offset_top = 2.0
@@ -175,7 +177,7 @@ offset_bottom = 25.0
 text = "Right Hand"
 horizontal_alignment = 1
 
-[node name="ButtonNext" type="Button" parent="Control"]
+[node name="ButtonNext" type="Button" parent="Control" unique_id=1521095051]
 layout_mode = 0
 anchor_left = 1.0
 anchor_top = 1.0
@@ -189,7 +191,7 @@ text = "Next scene"
 script = ExtResource("10")
 scene_to_change_to = "res://skeleton_ik.tscn"
 
-[node name="ButtonPrev" type="Button" parent="Control"]
+[node name="ButtonPrev" type="Button" parent="Control" unique_id=1162678486]
 layout_mode = 0
 anchor_top = 1.0
 anchor_bottom = 1.0

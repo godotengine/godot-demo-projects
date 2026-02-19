@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://61j61cp3lk64"]
+[gd_scene format=3 uid="uid://61j61cp3lk64"]
 
 [ext_resource type="Texture2D" uid="uid://b5hx4sl4x5thk" path="res://burano.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://dt8eicdcewdxi" path="res://splat.png" id="2"]
@@ -51,7 +51,7 @@ _data = {
 &"maskmotion": SubResource("2")
 }
 
-[node name="Lightmask" type="Control"]
+[node name="Lightmask" type="Control" unique_id=1408048694]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,7 +61,7 @@ grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="Burano" type="TextureRect" parent="."]
+[node name="Burano" type="TextureRect" parent="." unique_id=1877224100]
 material = SubResource("1")
 layout_mode = 0
 offset_right = 800.0
@@ -70,26 +70,24 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 texture = ExtResource("1")
 
-[node name="Light1" type="PointLight2D" parent="."]
+[node name="Light1" type="PointLight2D" parent="." unique_id=837697525]
 position = Vector2(601.028, 242.639)
 blend_mode = 2
 texture = ExtResource("2")
 
-[node name="Light2" type="PointLight2D" parent="."]
+[node name="Light2" type="PointLight2D" parent="." unique_id=1425584049]
 position = Vector2(196.528, 185.139)
 blend_mode = 2
 texture = ExtResource("2")
 
-[node name="Light3" type="PointLight2D" parent="."]
+[node name="Light3" type="PointLight2D" parent="." unique_id=1824720667]
 position = Vector2(442.528, 411.139)
 blend_mode = 2
 texture = ExtResource("2")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_co4us")
-}
-autoplay = "maskmotion"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1290885634]
+libraries/ = SubResource("AnimationLibrary_co4us")
+autoplay = &"maskmotion"
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1484775239]
 offset = Vector2(576, 324)

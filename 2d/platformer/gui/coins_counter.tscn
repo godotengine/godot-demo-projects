@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cbxfkqpq2rynb"]
+[gd_scene format=3 uid="uid://cbxfkqpq2rynb"]
 
 [ext_resource type="Theme" uid="uid://bc4kpaija14nv" path="res://gui/theme.tres" id="1_mctnl"]
 [ext_resource type="Texture2D" uid="uid://gwsn8ufh1n7i" path="res://level/coin.webp" id="2"]
@@ -96,7 +96,7 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="CoinsCounter" type="Panel"]
+[node name="CoinsCounter" type="Panel" unique_id=1407430856]
 offset_left = 5.0
 offset_top = 5.0
 offset_right = 100.0
@@ -104,7 +104,7 @@ offset_bottom = 45.0
 theme = ExtResource("1_mctnl")
 script = ExtResource("3")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1249769116]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -121,7 +121,7 @@ text = "99"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1948616029]
 position = Vector2(23.5, 24.5)
 sprite_frames = SubResource("6")
 animation = &"coin_spinning"

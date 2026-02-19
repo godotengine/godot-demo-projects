@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhgyilxufjioq"]
+[gd_scene format=3 uid="uid://bhgyilxufjioq"]
 
 [ext_resource type="Script" uid="uid://qcncmx710eij" path="res://troll.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bhkphpfidntnn" path="res://troll.png" id="2"]
@@ -6,13 +6,13 @@
 [sub_resource type="CircleShape2D" id="1"]
 radius = 16.0
 
-[node name="Troll" type="CharacterBody2D"]
+[node name="Troll" type="CharacterBody2D" unique_id=842969520]
 script = ExtResource("1")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1483262846]
 texture = ExtResource("2")
 
-[node name="Shadow" type="Sprite2D" parent="."]
+[node name="Shadow" type="Sprite2D" parent="." unique_id=966088251]
 modulate = Color(0, 0, 0, 0.501961)
 show_behind_parent = true
 position = Vector2(16.4422, 4.89438)
@@ -20,9 +20,9 @@ scale = Vector2(0.794259, 1.04505)
 skew = 0.523599
 texture = ExtResource("2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1494530205]
 position = Vector2(3.24216, 19.453)
 shape = SubResource("1")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2145554253]
 process_callback = 0

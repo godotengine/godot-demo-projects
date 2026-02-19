@@ -1,23 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6fbfbdl73g72"]
+[gd_scene format=3 uid="uid://c6fbfbdl73g72"]
 
 [ext_resource type="Texture2D" uid="uid://uptqordg8d6j" path="res://brickfloor.png" id="1"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(48, 48)
 
-[node name="TileScene" type="Node2D"]
+[node name="TileScene" type="Node2D" unique_id=297493973]
 
-[node name="Wall" type="Sprite2D" parent="."]
+[node name="Wall" type="Sprite2D" parent="." unique_id=1581660853]
 position = Vector2(24, 24)
 texture = ExtResource("1")
 region_rect = Rect2(0, 0, 48, 48)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Wall"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall" unique_id=709395495]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/StaticBody2D" unique_id=1651105053]
 shape = SubResource("1")
 
-[node name="Floor" type="Sprite2D" parent="."]
+[node name="Floor" type="Sprite2D" parent="." unique_id=2009834809]
 position = Vector2(72, 24)
 texture = ExtResource("1")
 region_rect = Rect2(48, 0, 48, 48)

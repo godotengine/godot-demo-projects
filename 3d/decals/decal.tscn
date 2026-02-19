@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://di77j81xltd72"]
+[gd_scene format=3 uid="uid://di77j81xltd72"]
 
 [ext_resource type="Texture2D" uid="uid://cajy52sy8h18n" path="res://textures/paint.png" id="1_1ro0v"]
 
@@ -77,15 +77,13 @@ _data = {
 &"fade": SubResource("Animation_ev4ve")
 }
 
-[node name="DecalHolder" type="Node3D"]
+[node name="DecalHolder" type="Node3D" unique_id=1743033615]
 
-[node name="Decal" type="Decal" parent="."]
+[node name="Decal" type="Decal" parent="." unique_id=1056435650]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 size = Vector3(0.001, 0.001, 0.001)
 texture_albedo = ExtResource("1_1ro0v")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_kqdmn")
-}
-autoplay = "fade"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1786175303]
+libraries/ = SubResource("AnimationLibrary_kqdmn")
+autoplay = &"fade"

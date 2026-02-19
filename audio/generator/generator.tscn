@@ -1,18 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://sfkwkk2b0rwo"]
+[gd_scene format=3 uid="uid://sfkwkk2b0rwo"]
 
 [ext_resource type="Script" uid="uid://cfj6jorivqiha" path="res://generator_demo.gd" id="1"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_8tsrq"]
 
-[node name="Generator" type="Node"]
+[node name="Generator" type="Node" unique_id=1397117054]
 script = ExtResource("1")
 
-[node name="Player" type="AudioStreamPlayer" parent="."]
+[node name="Player" type="AudioStreamPlayer" parent="." unique_id=861080736]
 stream = SubResource("AudioStreamGenerator_8tsrq")
 volume_db = -12.041
 autoplay = true
 
-[node name="CenterContainer" type="VBoxContainer" parent="."]
+[node name="CenterContainer" type="VBoxContainer" parent="." unique_id=273977112]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -26,23 +26,23 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="FrequencyTitle" type="Label" parent="CenterContainer"]
+[node name="FrequencyTitle" type="Label" parent="CenterContainer" unique_id=1524530128]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.466667, 0.882353, 1, 1)
 theme_override_font_sizes/font_size = 24
 text = "Generated Audio Frequency"
 
-[node name="Frequency" type="HBoxContainer" parent="CenterContainer"]
+[node name="Frequency" type="HBoxContainer" parent="CenterContainer" unique_id=1591049854]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="FrequencyLabel" type="Label" parent="CenterContainer/Frequency"]
+[node name="FrequencyLabel" type="Label" parent="CenterContainer/Frequency" unique_id=801276000]
 unique_name_in_owner = true
 layout_mode = 2
 text = "440 Hz"
 
-[node name="FrequencyHSlider" type="HSlider" parent="CenterContainer/Frequency"]
+[node name="FrequencyHSlider" type="HSlider" parent="CenterContainer/Frequency" unique_id=1089272818]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -50,27 +50,27 @@ min_value = 100.0
 max_value = 1000.0
 value = 440.0
 
-[node name="HSeparator" type="HSeparator" parent="CenterContainer"]
+[node name="HSeparator" type="HSeparator" parent="CenterContainer" unique_id=1286809767]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="VolumeTitle" type="Label" parent="CenterContainer"]
+[node name="VolumeTitle" type="Label" parent="CenterContainer" unique_id=1054980892]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.466667, 0.882353, 1, 1)
 theme_override_font_sizes/font_size = 24
 text = "Playback Volume"
 
-[node name="Volume" type="HBoxContainer" parent="CenterContainer"]
+[node name="Volume" type="HBoxContainer" parent="CenterContainer" unique_id=1630093702]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="VolumeLabel" type="Label" parent="CenterContainer/Volume"]
+[node name="VolumeLabel" type="Label" parent="CenterContainer/Volume" unique_id=1732409430]
 unique_name_in_owner = true
 layout_mode = 2
 text = "-12.04 dB"
 
-[node name="VolumeHSlider" type="HSlider" parent="CenterContainer/Volume"]
+[node name="VolumeHSlider" type="HSlider" parent="CenterContainer/Volume" unique_id=419882717]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1

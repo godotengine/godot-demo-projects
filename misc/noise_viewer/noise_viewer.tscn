@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://crattgb7ch6wx"]
+[gd_scene format=3 uid="uid://crattgb7ch6wx"]
 
 [ext_resource type="Script" uid="uid://brcvqn7fyadhq" path="res://noise_viewer.gd" id="1_a6h72"]
 [ext_resource type="Material" uid="uid://bahg3k1m6ubp8" path="res://noise_viewer_material.tres" id="2_lywnk"]
@@ -8,7 +8,7 @@
 [sub_resource type="NoiseTexture2D" id="2"]
 noise = SubResource("1")
 
-[node name="NoiseViewer" type="Control"]
+[node name="NoiseViewer" type="Control" unique_id=1490178020]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,7 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_a6h72")
 
-[node name="SeamlessNoiseTexture" type="TextureRect" parent="."]
+[node name="SeamlessNoiseTexture" type="TextureRect" parent="." unique_id=1501931709]
 material = ExtResource("2_lywnk")
 layout_mode = 1
 anchors_preset = 8
@@ -37,7 +37,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("2")
 
-[node name="ButtonsContainer" type="VBoxContainer" parent="."]
+[node name="ButtonsContainer" type="VBoxContainer" parent="." unique_id=1222084390]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -46,20 +46,20 @@ offset_left = -137.0
 offset_bottom = 44.0
 grow_horizontal = 0
 
-[node name="DocumentationButton" type="Button" parent="ButtonsContainer"]
+[node name="DocumentationButton" type="Button" parent="ButtonsContainer" unique_id=1981311809]
 layout_mode = 2
 text = "API Documentation"
 
-[node name="RandomSeedButton" type="Button" parent="ButtonsContainer"]
+[node name="RandomSeedButton" type="Button" parent="ButtonsContainer" unique_id=371746521]
 layout_mode = 2
 text = "Random Seed"
 
-[node name="ParameterContainer" type="VBoxContainer" parent="."]
+[node name="ParameterContainer" type="VBoxContainer" parent="." unique_id=334280664]
 layout_mode = 0
 offset_right = 280.0
 offset_bottom = 136.0
 
-[node name="SeedSpinBox" type="SpinBox" parent="ParameterContainer"]
+[node name="SeedSpinBox" type="SpinBox" parent="ParameterContainer" unique_id=1017088924]
 layout_mode = 2
 min_value = -2147480000.0
 max_value = 2147480000.0
@@ -67,7 +67,7 @@ allow_greater = true
 allow_lesser = true
 prefix = "Seed:"
 
-[node name="FrequencySpinBox" type="SpinBox" parent="ParameterContainer"]
+[node name="FrequencySpinBox" type="SpinBox" parent="ParameterContainer" unique_id=1173873153]
 layout_mode = 2
 min_value = -100000.0
 max_value = 100000.0
@@ -76,27 +76,27 @@ value = 0.00999999999476131
 allow_greater = true
 prefix = "Frequency:"
 
-[node name="FractalOctavesSpinBox" type="SpinBox" parent="ParameterContainer"]
+[node name="FractalOctavesSpinBox" type="SpinBox" parent="ParameterContainer" unique_id=496972015]
 layout_mode = 2
 min_value = 1.0
 max_value = 9.0
 value = 1.0
 prefix = "Fractal Octaves:"
 
-[node name="FractalGainSpinBox" type="SpinBox" parent="ParameterContainer"]
+[node name="FractalGainSpinBox" type="SpinBox" parent="ParameterContainer" unique_id=1661694959]
 layout_mode = 2
 max_value = 1000.0
 step = 0.05
 allow_greater = true
 prefix = "Fractal Gain:"
 
-[node name="FractalLacunaritySpinBox" type="SpinBox" parent="ParameterContainer"]
+[node name="FractalLacunaritySpinBox" type="SpinBox" parent="ParameterContainer" unique_id=1079811745]
 layout_mode = 2
 step = 0.05
 allow_greater = true
 prefix = "Fractal Lacunarity:"
 
-[node name="ClipContainer" type="VBoxContainer" parent="."]
+[node name="ClipContainer" type="VBoxContainer" parent="." unique_id=1911766398]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -105,7 +105,7 @@ offset_top = -52.0
 offset_right = 280.0
 grow_vertical = 0
 
-[node name="MinClipSpinBox" type="SpinBox" parent="ClipContainer"]
+[node name="MinClipSpinBox" type="SpinBox" parent="ClipContainer" unique_id=1945275000]
 layout_mode = 2
 min_value = -1.0
 max_value = 1.0
@@ -113,7 +113,7 @@ step = 0.01
 value = -1.0
 prefix = "Clip Min:"
 
-[node name="MaxClipSpinBox" type="SpinBox" parent="ClipContainer"]
+[node name="MaxClipSpinBox" type="SpinBox" parent="ClipContainer" unique_id=1756397325]
 layout_mode = 2
 min_value = -1.0
 max_value = 1.0

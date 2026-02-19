@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfi02p842hxck"]
+[gd_scene format=3 uid="uid://bfi02p842hxck"]
 
 [ext_resource type="Script" uid="uid://drqhtg0onjeuf" path="res://demo/main.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://d0xak1rv4tda0" path="res://demo/client_ui.tscn" id="2"]
 [ext_resource type="Script" uid="uid://16sfrgros1ps" path="res://server/ws_webrtc_server.gd" id="3"]
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" unique_id=846917499]
 layout_mode = 3
 anchor_left = 0.0136719
 anchor_top = 0.0166667
@@ -12,60 +12,60 @@ anchor_right = 0.986328
 anchor_bottom = 0.983333
 script = ExtResource("1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=692986734]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Signaling" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Signaling" type="HBoxContainer" parent="VBoxContainer" unique_id=1704468021]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/Signaling"]
+[node name="Label" type="Label" parent="VBoxContainer/Signaling" unique_id=2030172392]
 layout_mode = 2
 text = "Signaling server:"
 
-[node name="Port" type="SpinBox" parent="VBoxContainer/Signaling"]
+[node name="Port" type="SpinBox" parent="VBoxContainer/Signaling" unique_id=947653214]
 layout_mode = 2
 min_value = 1025.0
 max_value = 65535.0
 value = 9080.0
 
-[node name="ListenButton" type="Button" parent="VBoxContainer/Signaling"]
+[node name="ListenButton" type="Button" parent="VBoxContainer/Signaling" unique_id=889164289]
 layout_mode = 2
 toggle_mode = true
 text = "Listen"
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/Signaling"]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/Signaling" unique_id=83347839]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="LinkButton" type="LinkButton" parent="VBoxContainer/Signaling/CenterContainer"]
+[node name="LinkButton" type="LinkButton" parent="VBoxContainer/Signaling/CenterContainer" unique_id=2117678697]
 modulate = Color(1, 0.956863, 0.207843, 1)
 layout_mode = 2
 text = "Make sure to download the GDExtension WebRTC Plugin and place it in the project folder"
 
-[node name="Clients" type="GridContainer" parent="VBoxContainer"]
+[node name="Clients" type="GridContainer" parent="VBoxContainer" unique_id=381667770]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
 
-[node name="ClientUI" parent="VBoxContainer/Clients" instance=ExtResource("2")]
+[node name="ClientUI" parent="VBoxContainer/Clients" unique_id=1326961882 instance=ExtResource("2")]
 layout_mode = 2
 
-[node name="ClientUI2" parent="VBoxContainer/Clients" instance=ExtResource("2")]
+[node name="ClientUI2" parent="VBoxContainer/Clients" unique_id=2049339921 instance=ExtResource("2")]
 layout_mode = 2
 
-[node name="ClientUI3" parent="VBoxContainer/Clients" instance=ExtResource("2")]
+[node name="ClientUI3" parent="VBoxContainer/Clients" unique_id=1156840778 instance=ExtResource("2")]
 layout_mode = 2
 
-[node name="ClientUI4" parent="VBoxContainer/Clients" instance=ExtResource("2")]
+[node name="ClientUI4" parent="VBoxContainer/Clients" unique_id=1670863601 instance=ExtResource("2")]
 layout_mode = 2
 
-[node name="Server" type="Node" parent="."]
+[node name="Server" type="Node" parent="." unique_id=1883081563]
 script = ExtResource("3")
 
 [connection signal="toggled" from="VBoxContainer/Signaling/ListenButton" to="." method="_on_listen_toggled"]

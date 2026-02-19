@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dcpy1a0rk8cb8"]
+[gd_scene format=3 uid="uid://dcpy1a0rk8cb8"]
 
 [ext_resource type="Script" uid="uid://cwi8jmbb33c0i" path="res://tests/functional/test_character.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cwjfkltvisc0n" path="res://tests/test_options.tscn" id="3"]
@@ -31,28 +31,28 @@ radius = 32.0
 [sub_resource type="SeparationRayShape2D" id="RayShape2D_w83f0"]
 length = 64.0
 
-[node name="Test" type="Node2D"]
+[node name="Test" type="Node2D" unique_id=708037199]
 script = ExtResource("1")
 _snap_distance = 32.0
 _floor_max_angle = 60.0
 
-[node name="LabelTestType" type="Label" parent="."]
+[node name="LabelTestType" type="Label" parent="." unique_id=1608347537]
 offset_left = 14.0
 offset_top = 79.0
 offset_right = 145.0
 offset_bottom = 93.0
 text = "Testing: "
 
-[node name="Options" parent="." instance=ExtResource("3")]
+[node name="Options" parent="." unique_id=1934766548 instance=ExtResource("3")]
 
-[node name="LabelFloor" type="Label" parent="."]
+[node name="LabelFloor" type="Label" parent="." unique_id=1412264601]
 offset_left = 14.0
 offset_top = 237.929
 offset_right = 145.0
 offset_bottom = 251.929
 text = "ON FLOOR"
 
-[node name="LabelControls" type="Label" parent="."]
+[node name="LabelControls" type="Label" parent="." unique_id=306282668]
 offset_left = 14.0
 offset_top = 263.291
 offset_right = 145.0
@@ -60,7 +60,7 @@ offset_bottom = 294.291
 text = "LEFT/RIGHT - MOVE
 UP - JUMP"
 
-[node name="FloorMaxAngle" type="HBoxContainer" parent="."]
+[node name="FloorMaxAngle" type="HBoxContainer" parent="." unique_id=772465303]
 offset_left = 14.0
 offset_top = 160.0
 offset_right = 476.0
@@ -68,47 +68,47 @@ offset_bottom = 186.0
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="Label" type="Label" parent="FloorMaxAngle"]
+[node name="Label" type="Label" parent="FloorMaxAngle" unique_id=1454121721]
 layout_mode = 2
 text = "Floor Max angle"
 
-[node name="HSlider" type="HSlider" parent="FloorMaxAngle"]
+[node name="HSlider" type="HSlider" parent="FloorMaxAngle" unique_id=412005815]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 180.0
 script = ExtResource("3_cd5g0")
 snap_step = 5.0
 
-[node name="LabelValue" type="Label" parent="FloorMaxAngle"]
+[node name="LabelValue" type="Label" parent="FloorMaxAngle" unique_id=1362034584]
 layout_mode = 2
 text = "0.0"
 script = ExtResource("4_eoplu")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1742613051]
 position = Vector2(100, 450)
 collision_mask = 2147483649
 script = ExtResource("7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=418049460]
 shape = SubResource("3")
 debug_color = Color(0, 1, 0, 0.0980392)
 
-[node name="CharacterBodyRay2D" type="CharacterBody2D" parent="."]
+[node name="CharacterBodyRay2D" type="CharacterBody2D" parent="." unique_id=1681799428]
 position = Vector2(100, 450)
 collision_mask = 2147483649
 script = ExtResource("7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBodyRay2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBodyRay2D" unique_id=1343232865]
 position = Vector2(0, -16)
 shape = SubResource("CircleShape2D_llvur")
 debug_color = Color(0, 1, 0, 0.0980392)
 
-[node name="CollisionShapeRay2D" type="CollisionShape2D" parent="CharacterBodyRay2D"]
+[node name="CollisionShapeRay2D" type="CollisionShape2D" parent="CharacterBodyRay2D" unique_id=1936911797]
 position = Vector2(0, -16)
 shape = SubResource("RayShape2D_3lv1w")
 debug_color = Color(0, 1, 0, 0.0980392)
 
-[node name="RigidDynamicBody2D" type="RigidBody2D" parent="."]
+[node name="RigidDynamicBody2D" type="RigidBody2D" parent="." unique_id=2086705732]
 position = Vector2(100, 450)
 collision_mask = 2147483649
 physics_material_override = SubResource("1")
@@ -116,11 +116,11 @@ lock_rotation = true
 contact_monitor = true
 script = ExtResource("6")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidDynamicBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidDynamicBody2D" unique_id=1003504887]
 shape = SubResource("2")
 debug_color = Color(1, 1, 0, 0.0980392)
 
-[node name="RigidBodyRay2D" type="RigidBody2D" parent="."]
+[node name="RigidBodyRay2D" type="RigidBody2D" parent="." unique_id=385727826]
 position = Vector2(100, 450)
 collision_mask = 2147483649
 physics_material_override = SubResource("1")
@@ -128,22 +128,22 @@ lock_rotation = true
 contact_monitor = true
 script = ExtResource("6")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBodyRay2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBodyRay2D" unique_id=540796978]
 position = Vector2(-7.62939e-06, -16)
 shape = SubResource("CircleShape2D_dr08f")
 debug_color = Color(1, 1, 0, 0.0980392)
 
-[node name="CollisionShapeRay2D" type="CollisionShape2D" parent="RigidBodyRay2D"]
+[node name="CollisionShapeRay2D" type="CollisionShape2D" parent="RigidBodyRay2D" unique_id=1487362999]
 position = Vector2(-7.62939e-06, -16)
 shape = SubResource("RayShape2D_w83f0")
 debug_color = Color(1, 1, 0, 0.0980392)
 
-[node name="StaticSceneFlat" parent="." instance=ExtResource("4")]
+[node name="StaticSceneFlat" parent="." unique_id=1651722863 instance=ExtResource("4")]
 position = Vector2(0, 12)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=547964258]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=944757009]
 polygon = PackedVector2Array(171.04, 529.248, 379.275, 294.316, 506.084, 429.135, 648.26, 322.058, 868.746, 322.058, 985.282, 36.6919, 1242.91, 531.917)
 
 [connection signal="value_changed" from="FloorMaxAngle/HSlider" to="." method="_update_floor_max_angle"]

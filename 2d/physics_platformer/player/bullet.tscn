@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bev68x5r1igtw"]
+[gd_scene format=3 uid="uid://bev68x5r1igtw"]
 
 [ext_resource type="Script" uid="uid://di2vgtp2fodw2" path="res://player/bullet.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://n28mue73qnk0" path="res://player/bullet.png" id="2"]
@@ -55,11 +55,11 @@ _data = {
 &"shutdown": SubResource("3")
 }
 
-[node name="Bullet" type="RigidBody2D"]
+[node name="Bullet" type="RigidBody2D" unique_id=473089145]
 continuous_cd = 2
 script = ExtResource("1")
 
-[node name="GPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="CPUParticles2D" parent="." unique_id=1623680574]
 material = SubResource("1")
 emitting = false
 texture = ExtResource("2")
@@ -68,18 +68,16 @@ speed_scale = 3.0
 spread = 0.0
 gravity = Vector2(0, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=93974332]
 texture = ExtResource("2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=964228795]
 shape = SubResource("2")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=954750638]
 one_shot = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_hkd2b")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1099933579]
+libraries/ = SubResource("AnimationLibrary_hkd2b")
 
 [connection signal="timeout" from="Timer" to="." method="disable"]

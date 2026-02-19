@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://rdpn3n6t1ita"]
+[gd_scene format=3 uid="uid://rdpn3n6t1ita"]
 
 [ext_resource type="Texture2D" uid="uid://cay5bn64ydidw" path="res://combat/combatants/sprites/shadow.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://d2epgeh5n54vq" path="res://combat/combatants/sprites/player_battle.png" id="2"]
@@ -117,26 +117,24 @@ states/take_damage/node = SubResource("AnimationNodeAnimation_ylufg")
 states/take_damage/position = Vector2(700.667, 192.667)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_cg2b2"), "idle", "take_damage", SubResource("AnimationNodeStateMachineTransition_8xcit"), "take_damage", "idle", SubResource("AnimationNodeStateMachineTransition_5sgx1")]
 
-[node name="Sprite2D" type="Node2D"]
+[node name="Sprite2D" type="Node2D" unique_id=1900105355]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_cqku5")
-}
-autoplay = "idle"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1933635192]
+libraries/ = SubResource("AnimationLibrary_cqku5")
+autoplay = &"idle"
 next/take_damage = &"idle"
 
-[node name="Pivot" type="Marker2D" parent="."]
+[node name="Pivot" type="Marker2D" parent="." unique_id=1280663663]
 
-[node name="Shadow" type="Sprite2D" parent="Pivot"]
+[node name="Shadow" type="Sprite2D" parent="Pivot" unique_id=234603862]
 modulate = Color(0.196078, 0.0235294, 0.329412, 0.301961)
 position = Vector2(0, -4.44299)
 texture = ExtResource("1")
 
-[node name="Body" type="Sprite2D" parent="Pivot"]
+[node name="Body" type="Sprite2D" parent="Pivot" unique_id=1862246720]
 position = Vector2(0, -41)
 texture = ExtResource("2")
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=144422457]
 tree_root = SubResource("AnimationNodeStateMachine_mjsen")
 anim_player = NodePath("../AnimationPlayer")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://wvujv0rh5x41"]
+[gd_scene format=3 uid="uid://wvujv0rh5x41"]
 
 [ext_resource type="Script" uid="uid://cl7il12q62e17" path="res://player.gd" id="1_d31c7"]
 [ext_resource type="PackedScene" uid="uid://xdk8q24f5cf4" path="res://objects/black_out.tscn" id="2_ecfc5"]
@@ -8,37 +8,37 @@
 [sub_resource type="BoxMesh" id="BoxMesh_sldd7"]
 size = Vector3(0.05, 0.05, 0.05)
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=1325168950]
 script = ExtResource("1_d31c7")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1807425073]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_xe2ly")
 
-[node name="XROrigin3D" type="XROrigin3D" parent="."]
+[node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=1776236325]
 
-[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=1592013901]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.1)
 far = 1000.0
 
-[node name="Neck" type="Node3D" parent="XROrigin3D/XRCamera3D"]
+[node name="Neck" type="Node3D" parent="XROrigin3D/XRCamera3D" unique_id=863112946]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.1)
 
-[node name="BlackOut" parent="XROrigin3D/XRCamera3D" instance=ExtResource("2_ecfc5")]
+[node name="BlackOut" parent="XROrigin3D/XRCamera3D" unique_id=219316249 instance=ExtResource("2_ecfc5")]
 
-[node name="LeftHand" type="XRController3D" parent="XROrigin3D"]
+[node name="LeftHand" type="XRController3D" parent="XROrigin3D" unique_id=2029468984]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"left_hand"
 pose = &"aim"
 
-[node name="PlaceholderHand" type="MeshInstance3D" parent="XROrigin3D/LeftHand"]
+[node name="PlaceholderHand" type="MeshInstance3D" parent="XROrigin3D/LeftHand" unique_id=1605901446]
 mesh = SubResource("BoxMesh_sldd7")
 
-[node name="RightHand" type="XRController3D" parent="XROrigin3D"]
+[node name="RightHand" type="XRController3D" parent="XROrigin3D" unique_id=1722177350]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
 tracker = &"right_hand"
 pose = &"aim"
 
-[node name="PlaceholderHand" type="MeshInstance3D" parent="XROrigin3D/RightHand"]
+[node name="PlaceholderHand" type="MeshInstance3D" parent="XROrigin3D/RightHand" unique_id=1304660857]
 mesh = SubResource("BoxMesh_sldd7")
 skeleton = NodePath("../../LeftHand")

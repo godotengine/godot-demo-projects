@@ -1,74 +1,74 @@
-[gd_scene load_steps=3 format=3 uid="uid://djfeeafrwi8tf"]
+[gd_scene format=3 uid="uid://djfeeafrwi8tf"]
 
 [ext_resource type="Script" uid="uid://c2wvf7xms0xcy" path="res://remap/remap_wizard.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://blcqwg1exaeuc" path="res://joypad_diagram.tscn" id="2"]
 
-[node name="RemapWizard" type="Node"]
+[node name="RemapWizard" type="Node" unique_id=571420617]
 script = ExtResource("1")
 
-[node name="Start" type="Window" parent="."]
+[node name="Start" type="Window" parent="." unique_id=542428119]
 position = Vector2i(100, 80)
 size = Vector2i(400, 333)
 visible = false
 min_size = Vector2i(400, 333)
 
-[node name="Margin" type="MarginContainer" parent="Start"]
+[node name="Margin" type="MarginContainer" parent="Start" unique_id=1286468248]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Layout" type="VBoxContainer" parent="Start/Margin"]
+[node name="Layout" type="VBoxContainer" parent="Start/Margin" unique_id=425038918]
 layout_mode = 2
 alignment = 1
 
-[node name="HTML5" type="VBoxContainer" parent="Start/Margin/Layout"]
+[node name="HTML5" type="VBoxContainer" parent="Start/Margin/Layout" unique_id=1784363502]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Start/Margin/Layout/HTML5"]
+[node name="Label" type="Label" parent="Start/Margin/Layout/HTML5" unique_id=329164903]
 layout_mode = 2
 text = "Try a common mapping:"
 
-[node name="known" type="HBoxContainer" parent="Start/Margin/Layout/HTML5"]
+[node name="known" type="HBoxContainer" parent="Start/Margin/Layout/HTML5" unique_id=1018558948]
 layout_mode = 2
 alignment = 1
 
-[node name="Xbox" type="Button" parent="Start/Margin/Layout/HTML5/known"]
+[node name="Xbox" type="Button" parent="Start/Margin/Layout/HTML5/known" unique_id=1845183268]
 layout_mode = 2
 text = "Xbox"
 
-[node name="XboxOSX" type="Button" parent="Start/Margin/Layout/HTML5/known"]
+[node name="XboxOSX" type="Button" parent="Start/Margin/Layout/HTML5/known" unique_id=1263270853]
 layout_mode = 2
 text = "Xbox (OSX)"
 
-[node name="Label" type="Label" parent="Start/Margin/Layout"]
+[node name="Label" type="Label" parent="Start/Margin/Layout" unique_id=829543112]
 layout_mode = 2
 text = "Or start the wizard"
 
-[node name="Buttons" type="HBoxContainer" parent="Start/Margin/Layout"]
+[node name="Buttons" type="HBoxContainer" parent="Start/Margin/Layout" unique_id=959064540]
 layout_mode = 2
 
-[node name="Cancel" type="Button" parent="Start/Margin/Layout/Buttons"]
+[node name="Cancel" type="Button" parent="Start/Margin/Layout/Buttons" unique_id=611547854]
 layout_mode = 2
 text = "Cancel"
 
-[node name="Control" type="Control" parent="Start/Margin/Layout/Buttons"]
+[node name="Control" type="Control" parent="Start/Margin/Layout/Buttons" unique_id=409477365]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Wizard" type="Button" parent="Start/Margin/Layout/Buttons"]
+[node name="Wizard" type="Button" parent="Start/Margin/Layout/Buttons" unique_id=1635416120]
 layout_mode = 2
 text = "Wizard"
 
-[node name="Mapping" type="Window" parent="."]
+[node name="Mapping" type="Window" parent="." unique_id=1960786560]
 oversampling_override = 1.0
 position = Vector2i(130, 100)
 size = Vector2i(340, 400)
 visible = false
 min_size = Vector2i(340, 100)
 
-[node name="Margin" type="MarginContainer" parent="Mapping"]
+[node name="Margin" type="MarginContainer" parent="Mapping" unique_id=1987499146]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -79,92 +79,92 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="VBox" type="VBoxContainer" parent="Mapping/Margin"]
+[node name="VBox" type="VBoxContainer" parent="Mapping/Margin" unique_id=1504851968]
 layout_mode = 2
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Mapping/Margin/VBox"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Mapping/Margin/VBox" unique_id=1536550415]
 custom_minimum_size = Vector2(0, 260)
 layout_mode = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="Mapping/Margin/VBox/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="Mapping/Margin/VBox/SubViewportContainer" unique_id=1585075051]
 handle_input_locally = false
 size = Vector2i(2, 260)
 render_target_update_mode = 0
 
-[node name="JoypadDiagram" parent="Mapping/Margin/VBox/SubViewportContainer/SubViewport" instance=ExtResource("2")]
+[node name="JoypadDiagram" parent="Mapping/Margin/VBox/SubViewportContainer/SubViewport" unique_id=1418688776 instance=ExtResource("2")]
 position = Vector2(0, 0)
 
-[node name="Camera2D" type="Camera2D" parent="Mapping/Margin/VBox/SubViewportContainer/SubViewport"]
+[node name="Camera2D" type="Camera2D" parent="Mapping/Margin/VBox/SubViewportContainer/SubViewport" unique_id=1546600176]
 
-[node name="Info" type="VBoxContainer" parent="Mapping/Margin/VBox"]
+[node name="Info" type="VBoxContainer" parent="Mapping/Margin/VBox" unique_id=119013763]
 layout_mode = 2
 
-[node name="Text" type="HBoxContainer" parent="Mapping/Margin/VBox/Info"]
+[node name="Text" type="HBoxContainer" parent="Mapping/Margin/VBox/Info" unique_id=571188553]
 layout_mode = 2
 
-[node name="Text" type="Label" parent="Mapping/Margin/VBox/Info/Text"]
+[node name="Text" type="Label" parent="Mapping/Margin/VBox/Info/Text" unique_id=509400196]
 layout_mode = 2
 text = "Currently selected: "
 
-[node name="Value" type="Label" parent="Mapping/Margin/VBox/Info/Text"]
+[node name="Value" type="Label" parent="Mapping/Margin/VBox/Info/Text" unique_id=510062606]
 layout_mode = 2
 
-[node name="Extra" type="HBoxContainer" parent="Mapping/Margin/VBox/Info"]
+[node name="Extra" type="HBoxContainer" parent="Mapping/Margin/VBox/Info" unique_id=1479807245]
 layout_mode = 2
 
-[node name="FullAxis" type="CheckBox" parent="Mapping/Margin/VBox/Info/Extra"]
+[node name="FullAxis" type="CheckBox" parent="Mapping/Margin/VBox/Info/Extra" unique_id=1803751121]
 layout_mode = 2
 text = "Full axis"
 
-[node name="InvertAxis" type="CheckBox" parent="Mapping/Margin/VBox/Info/Extra"]
+[node name="InvertAxis" type="CheckBox" parent="Mapping/Margin/VBox/Info/Extra" unique_id=1902528227]
 layout_mode = 2
 text = "Invert Axis"
 
-[node name="Buttons" type="HBoxContainer" parent="Mapping/Margin/VBox/Info"]
+[node name="Buttons" type="HBoxContainer" parent="Mapping/Margin/VBox/Info" unique_id=2004586568]
 layout_mode = 2
 
-[node name="Prev" type="Button" parent="Mapping/Margin/VBox/Info/Buttons"]
+[node name="Prev" type="Button" parent="Mapping/Margin/VBox/Info/Buttons" unique_id=1652937818]
 layout_mode = 2
 text = "Previous"
 
-[node name="Control" type="Control" parent="Mapping/Margin/VBox/Info/Buttons"]
+[node name="Control" type="Control" parent="Mapping/Margin/VBox/Info/Buttons" unique_id=1832165268]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Skip" type="Button" parent="Mapping/Margin/VBox/Info/Buttons"]
+[node name="Skip" type="Button" parent="Mapping/Margin/VBox/Info/Buttons" unique_id=1329933199]
 layout_mode = 2
 text = "Skip"
 
-[node name="Control2" type="Control" parent="Mapping/Margin/VBox/Info/Buttons"]
+[node name="Control2" type="Control" parent="Mapping/Margin/VBox/Info/Buttons" unique_id=1602801933]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Next" type="Button" parent="Mapping/Margin/VBox/Info/Buttons"]
+[node name="Next" type="Button" parent="Mapping/Margin/VBox/Info/Buttons" unique_id=1133711441]
 layout_mode = 2
 text = "Next"
 
-[node name="MapWindow" type="Window" parent="."]
+[node name="MapWindow" type="Window" parent="." unique_id=696340189]
 position = Vector2i(100, 80)
 size = Vector2i(400, 400)
 visible = false
 min_size = Vector2i(400, 400)
 
-[node name="Margin" type="MarginContainer" parent="MapWindow"]
+[node name="Margin" type="MarginContainer" parent="MapWindow" unique_id=1896902387]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MapWindow/Margin"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MapWindow/Margin" unique_id=1795779565]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MapWindow/Margin/VBoxContainer"]
+[node name="Label" type="Label" parent="MapWindow/Margin/VBoxContainer" unique_id=124008999]
 layout_mode = 2
 text = "This is the resulting remap string:"
 
-[node name="TextEdit" type="TextEdit" parent="MapWindow/Margin/VBoxContainer"]
+[node name="TextEdit" type="TextEdit" parent="MapWindow/Margin/VBoxContainer" unique_id=806418459]
 layout_mode = 2
 size_flags_vertical = 3
 

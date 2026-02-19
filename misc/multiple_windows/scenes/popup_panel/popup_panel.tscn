@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://dj15to28g17lb"]
+[gd_scene format=3 uid="uid://dj15to28g17lb"]
 
 [sub_resource type="GDScript" id="GDScript_aqitk"]
 script/source = "extends ProgressBar
@@ -7,20 +7,21 @@ func _on_h_slider_value_changed(_value: float) -> void:
 	value = _value
 "
 
-[node name="PopupPanel" type="PopupPanel"]
+[node name="PopupPanel" type="PopupPanel" unique_id=342680870]
+oversampling_override = 1.0
 visible = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2000772659]
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 96.0
 offset_bottom = 96.0
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer" unique_id=985068578]
 layout_mode = 2
 script = SubResource("GDScript_aqitk")
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer"]
+[node name="HSlider" type="HSlider" parent="VBoxContainer" unique_id=1109801070]
 layout_mode = 2
 
 [connection signal="value_changed" from="VBoxContainer/HSlider" to="VBoxContainer/ProgressBar" method="_on_h_slider_value_changed"]

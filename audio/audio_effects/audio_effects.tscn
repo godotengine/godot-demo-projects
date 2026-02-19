@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ddd8lnuvrusns"]
+[gd_scene format=3 uid="uid://ddd8lnuvrusns"]
 
 [ext_resource type="Script" uid="uid://cocxhls31jcj8" path="res://audio_effects.gd" id="1_axtfn"]
 [ext_resource type="AudioStream" uid="uid://dc40epfogqj7b" path="res://sfx/music_monkeys_spinning_monkeys.ogg" id="2_j5kgy"]
@@ -14,7 +14,7 @@
 variation_embolden = 1.0
 spacing_glyph = 1
 
-[node name="AudioEffects" type="CenterContainer"]
+[node name="AudioEffects" type="CenterContainer" unique_id=705806150]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,52 +24,52 @@ size_flags_horizontal = 4
 script = ExtResource("1_axtfn")
 metadata/_edit_lock_ = true
 
-[node name="SoundEffects" type="Node" parent="."]
+[node name="SoundEffects" type="Node" parent="." unique_id=631476036]
 
-[node name="Music" type="AudioStreamPlayer" parent="SoundEffects"]
+[node name="Music" type="AudioStreamPlayer" parent="SoundEffects" unique_id=1232998974]
 stream = ExtResource("2_j5kgy")
 volume_db = -18.0
 bus = &"Music"
 
-[node name="Ding" type="AudioStreamPlayer" parent="SoundEffects"]
+[node name="Ding" type="AudioStreamPlayer" parent="SoundEffects" unique_id=1406842440]
 stream = ExtResource("3_uy531")
 volume_db = -18.0
 
-[node name="Glass" type="AudioStreamPlayer" parent="SoundEffects"]
+[node name="Glass" type="AudioStreamPlayer" parent="SoundEffects" unique_id=1337177269]
 stream = ExtResource("4_ec4qa")
 volume_db = -18.0
 
-[node name="Meow" type="AudioStreamPlayer" parent="SoundEffects"]
+[node name="Meow" type="AudioStreamPlayer" parent="SoundEffects" unique_id=844564896]
 stream = ExtResource("5_y5hbb")
 volume_db = -18.0
 
-[node name="Beeps" type="AudioStreamPlayer" parent="SoundEffects"]
+[node name="Beeps" type="AudioStreamPlayer" parent="SoundEffects" unique_id=965787278]
 stream = ExtResource("6_7l1yr")
 volume_db = -18.0
 
-[node name="Trombone" type="AudioStreamPlayer" parent="SoundEffects"]
+[node name="Trombone" type="AudioStreamPlayer" parent="SoundEffects" unique_id=1002909144]
 stream = ExtResource("7_7ug2d")
 volume_db = -18.0
 
-[node name="Static" type="AudioStreamPlayer" parent="SoundEffects"]
+[node name="Static" type="AudioStreamPlayer" parent="SoundEffects" unique_id=357349932]
 stream = ExtResource("8_ifh36")
 volume_db = -18.0
 
-[node name="Whistle" type="AudioStreamPlayer" parent="SoundEffects"]
+[node name="Whistle" type="AudioStreamPlayer" parent="SoundEffects" unique_id=1730642886]
 stream = ExtResource("9_xhiv2")
 volume_db = -18.0
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1252072164]
 layout_mode = 2
 
-[node name="SoundEffectButtons" type="Control" parent="Control"]
+[node name="SoundEffectButtons" type="Control" parent="Control" unique_id=332862184]
 anchors_preset = 0
 offset_left = -576.0
 offset_top = -324.0
 offset_right = -576.0
 offset_bottom = -324.0
 
-[node name="ToggleMusic" type="CheckButton" parent="Control/SoundEffectButtons"]
+[node name="ToggleMusic" type="CheckButton" parent="Control/SoundEffectButtons" unique_id=745836013]
 layout_mode = 0
 offset_left = 520.0
 offset_top = 56.0
@@ -79,7 +79,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 text = "Music"
 
-[node name="DingButton" type="Button" parent="Control/SoundEffectButtons"]
+[node name="DingButton" type="Button" parent="Control/SoundEffectButtons" unique_id=1564988102]
 layout_mode = 0
 offset_left = 64.0
 offset_top = 176.0
@@ -89,7 +89,7 @@ theme_override_fonts/font = SubResource("FontVariation_kjess")
 text = "DING
 "
 
-[node name="GlassButton" type="Button" parent="Control/SoundEffectButtons"]
+[node name="GlassButton" type="Button" parent="Control/SoundEffectButtons" unique_id=1723407412]
 layout_mode = 0
 offset_left = 282.0
 offset_top = 176.0
@@ -99,7 +99,7 @@ theme_override_fonts/font = SubResource("FontVariation_kjess")
 text = "GLASS
 SHATTER"
 
-[node name="MeowButton" type="Button" parent="Control/SoundEffectButtons"]
+[node name="MeowButton" type="Button" parent="Control/SoundEffectButtons" unique_id=1246214922]
 layout_mode = 0
 offset_left = 520.0
 offset_top = 176.0
@@ -108,7 +108,7 @@ offset_bottom = 240.0
 theme_override_fonts/font = SubResource("FontVariation_kjess")
 text = "MEOW"
 
-[node name="BeepsButton" type="Button" parent="Control/SoundEffectButtons"]
+[node name="BeepsButton" type="Button" parent="Control/SoundEffectButtons" unique_id=1039693908]
 layout_mode = 0
 offset_left = 744.0
 offset_top = 176.0
@@ -119,7 +119,7 @@ text = "NEGATIVE
 BEEPS
 "
 
-[node name="TromboneButton" type="Button" parent="Control/SoundEffectButtons"]
+[node name="TromboneButton" type="Button" parent="Control/SoundEffectButtons" unique_id=567216595]
 layout_mode = 0
 offset_left = 971.0
 offset_top = 176.0
@@ -129,7 +129,7 @@ theme_override_fonts/font = SubResource("FontVariation_kjess")
 text = "SAD
 TROMBONE"
 
-[node name="StaticButton" type="Button" parent="Control/SoundEffectButtons"]
+[node name="StaticButton" type="Button" parent="Control/SoundEffectButtons" unique_id=471060705]
 layout_mode = 0
 offset_left = 400.0
 offset_top = 312.0
@@ -139,7 +139,7 @@ theme_override_fonts/font = SubResource("FontVariation_kjess")
 text = "RADIO
 STATIC"
 
-[node name="WhistleButton" type="Button" parent="Control/SoundEffectButtons"]
+[node name="WhistleButton" type="Button" parent="Control/SoundEffectButtons" unique_id=33994065]
 layout_mode = 0
 offset_left = 636.0
 offset_top = 312.0
@@ -149,7 +149,7 @@ theme_override_fonts/font = SubResource("FontVariation_kjess")
 text = "WHISTLE
 "
 
-[node name="AudioEffectButtons" type="GridContainer" parent="Control"]
+[node name="AudioEffectButtons" type="GridContainer" parent="Control" unique_id=728319544]
 layout_mode = 0
 offset_left = -449.0
 offset_top = 194.0
@@ -157,77 +157,77 @@ offset_right = 460.0
 offset_bottom = 295.0
 columns = 6
 
-[node name="ToggleAmplify" type="CheckButton" parent="Control/AudioEffectButtons"]
+[node name="ToggleAmplify" type="CheckButton" parent="Control/AudioEffectButtons" unique_id=1480956887]
 layout_mode = 2
 text = "Amplify"
 
-[node name="ToggleBandLimiter" type="CheckButton" parent="Control/AudioEffectButtons"]
+[node name="ToggleBandLimiter" type="CheckButton" parent="Control/AudioEffectButtons" unique_id=1988844283]
 layout_mode = 2
 text = "BandLimiter
 "
 
-[node name="ToggleBandPassFilter" type="CheckButton" parent="Control/AudioEffectButtons"]
+[node name="ToggleBandPassFilter" type="CheckButton" parent="Control/AudioEffectButtons" unique_id=17130446]
 layout_mode = 2
 text = "BandPassFilter"
 
-[node name="ToggleChorus" type="CheckButton" parent="Control/AudioEffectButtons"]
+[node name="ToggleChorus" type="CheckButton" parent="Control/AudioEffectButtons" unique_id=1966058824]
 layout_mode = 2
 text = "Chorus
 "
 
-[node name="ToggleCompressor" type="CheckButton" parent="Control/AudioEffectButtons"]
+[node name="ToggleCompressor" type="CheckButton" parent="Control/AudioEffectButtons" unique_id=142269403]
 layout_mode = 2
 text = "Compressor"
 
-[node name="ToggleDelay" type="CheckButton" parent="Control/AudioEffectButtons"]
+[node name="ToggleDelay" type="CheckButton" parent="Control/AudioEffectButtons" unique_id=1730967007]
 layout_mode = 2
 text = "Delay"
 
-[node name="ToggleDistortion" type="CheckButton" parent="Control/AudioEffectButtons"]
+[node name="ToggleDistortion" type="CheckButton" parent="Control/AudioEffectButtons" unique_id=723715936]
 layout_mode = 2
 text = "Distortion"
 
-[node name="ToggleEQ6" type="CheckButton" parent="Control/AudioEffectButtons"]
+[node name="ToggleEQ6" type="CheckButton" parent="Control/AudioEffectButtons" unique_id=716468649]
 layout_mode = 2
 text = "EQ6 "
 
-[node name="ToggleEQ10" type="CheckButton" parent="Control/AudioEffectButtons"]
+[node name="ToggleEQ10" type="CheckButton" parent="Control/AudioEffectButtons" unique_id=171737281]
 layout_mode = 2
 text = "EQ10"
 
-[node name="ToggleEQ21" type="CheckButton" parent="Control/AudioEffectButtons"]
+[node name="ToggleEQ21" type="CheckButton" parent="Control/AudioEffectButtons" unique_id=1299782394]
 layout_mode = 2
 text = "EQ21"
 
-[node name="ToggleHighPassFilter" type="CheckButton" parent="Control/AudioEffectButtons"]
+[node name="ToggleHighPassFilter" type="CheckButton" parent="Control/AudioEffectButtons" unique_id=180348313]
 layout_mode = 2
 text = "HighPassFilter"
 
-[node name="ToggleLowShelfFilter" type="CheckButton" parent="Control/AudioEffectButtons"]
+[node name="ToggleLowShelfFilter" type="CheckButton" parent="Control/AudioEffectButtons" unique_id=1459373901]
 layout_mode = 2
 text = "LowShelfFilter"
 
-[node name="ToggleNotchFilter" type="CheckButton" parent="Control/AudioEffectButtons"]
+[node name="ToggleNotchFilter" type="CheckButton" parent="Control/AudioEffectButtons" unique_id=839579932]
 layout_mode = 2
 text = "NotchFilter"
 
-[node name="TogglePanner" type="CheckButton" parent="Control/AudioEffectButtons"]
+[node name="TogglePanner" type="CheckButton" parent="Control/AudioEffectButtons" unique_id=108272238]
 layout_mode = 2
 text = "Panner"
 
-[node name="TogglePhaser" type="CheckButton" parent="Control/AudioEffectButtons"]
+[node name="TogglePhaser" type="CheckButton" parent="Control/AudioEffectButtons" unique_id=1146617316]
 layout_mode = 2
 text = "Phaser"
 
-[node name="TogglePitchShift" type="CheckButton" parent="Control/AudioEffectButtons"]
+[node name="TogglePitchShift" type="CheckButton" parent="Control/AudioEffectButtons" unique_id=960288098]
 layout_mode = 2
 text = "PitchShift"
 
-[node name="ToggleReverb" type="CheckButton" parent="Control/AudioEffectButtons"]
+[node name="ToggleReverb" type="CheckButton" parent="Control/AudioEffectButtons" unique_id=1479600453]
 layout_mode = 2
 text = "Reverb"
 
-[node name="ToggleStereoEnhance" type="CheckButton" parent="Control/AudioEffectButtons"]
+[node name="ToggleStereoEnhance" type="CheckButton" parent="Control/AudioEffectButtons" unique_id=2109211463]
 layout_mode = 2
 text = "StereoEnhance"
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://v251md8vmtrx"]
+[gd_scene format=3 uid="uid://v251md8vmtrx"]
 
 [ext_resource type="Script" uid="uid://nrqcurd1o8rk" path="res://main.gd" id="1_t20f6"]
 [ext_resource type="Shader" uid="uid://dmh645r7cquap" path="res://sky_volumetric_clouds.gdshader" id="2_7kao2"]
@@ -330,24 +330,22 @@ tonemap_white = 6.0
 fog_density = 0.25
 fog_aerial_perspective = 1.0
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=31460495]
 transform = Transform3D(1, 0.0003427, -0.00016891, -0.000342464, 0.999999, 0.00143352, 0.000169389, -0.00143346, 0.999999, 0, 0, 0)
 script = ExtResource("1_t20f6")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mqv34")
-}
-autoplay = "day_night_cycle"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=502925248]
+libraries/ = SubResource("AnimationLibrary_mqv34")
+autoplay = &"day_night_cycle"
 speed_scale = 0.1
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=909624148]
 offset_right = 493.0
 offset_bottom = 186.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=817383086]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -359,55 +357,55 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1637411935]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="TimeOfDay" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="TimeOfDay" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1172007933]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay" unique_id=1598471328]
 layout_mode = 2
 text = "Time of Day"
 
-[node name="HSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay"]
+[node name="HSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay" unique_id=222362023]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 max_value = 30.0
 step = 0.01
 
-[node name="Value" type="Label" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay"]
+[node name="Value" type="Label" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay" unique_id=2139279340]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.15
 text = "12:00"
 
-[node name="HSeparator" type="VSeparator" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay"]
+[node name="HSeparator" type="VSeparator" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay" unique_id=346250372]
 layout_mode = 2
 
-[node name="SpeedMinus" type="Button" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay"]
+[node name="SpeedMinus" type="Button" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay" unique_id=291569464]
 layout_mode = 2
 text = "  -  "
 
-[node name="CurrentSpeed" type="Label" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay"]
+[node name="CurrentSpeed" type="Label" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay" unique_id=34471457]
 layout_mode = 2
 text = "1.00×"
 
-[node name="SpeedPlus" type="Button" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay"]
+[node name="SpeedPlus" type="Button" parent="Panel/MarginContainer/VBoxContainer/TimeOfDay" unique_id=831147413]
 layout_mode = 2
 text = "  +  "
 
-[node name="Clouds" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="Clouds" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1241008224]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="CoverageLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Clouds"]
+[node name="CoverageLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Clouds" unique_id=540905292]
 layout_mode = 2
 text = "Cloud Coverage"
 
-[node name="CoverageSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/Clouds"]
+[node name="CoverageSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/Clouds" unique_id=1055432017]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -415,21 +413,21 @@ max_value = 0.99
 step = 0.01
 value = 0.2
 
-[node name="CoverageValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/Clouds"]
+[node name="CoverageValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/Clouds" unique_id=765079320]
 custom_minimum_size = Vector2(33, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.15
 text = "20%"
 
-[node name="HSeparator" type="VSeparator" parent="Panel/MarginContainer/VBoxContainer/Clouds"]
+[node name="HSeparator" type="VSeparator" parent="Panel/MarginContainer/VBoxContainer/Clouds" unique_id=808526805]
 layout_mode = 2
 
-[node name="DensityLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Clouds"]
+[node name="DensityLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Clouds" unique_id=793183677]
 layout_mode = 2
 text = "Density"
 
-[node name="DensitySlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/Clouds"]
+[node name="DensitySlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/Clouds" unique_id=472508020]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -438,27 +436,27 @@ max_value = 0.99
 step = 0.01
 value = 0.05
 
-[node name="DensityValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/Clouds"]
+[node name="DensityValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/Clouds" unique_id=920639331]
 custom_minimum_size = Vector2(33, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.15
 text = "5%"
 
-[node name="HSeparator2" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer" unique_id=354750234]
 layout_mode = 2
 
-[node name="ProcessMode" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="ProcessMode" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=112540186]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/ProcessMode"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/ProcessMode" unique_id=2037880772]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.32
 text = "Process Mode"
 
-[node name="OptionButton" type="OptionButton" parent="Panel/MarginContainer/VBoxContainer/ProcessMode"]
+[node name="OptionButton" type="OptionButton" parent="Panel/MarginContainer/VBoxContainer/ProcessMode" unique_id=607644997]
 layout_mode = 2
 size_flags_horizontal = 3
 selected = 1
@@ -470,17 +468,17 @@ popup/item_1/id = 1
 popup/item_2/text = "Real-Time"
 popup/item_2/id = 2
 
-[node name="RadianceSize" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="RadianceSize" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1107790065]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/RadianceSize"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/RadianceSize" unique_id=454213599]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.32
 text = "Radiance Size"
 
-[node name="OptionButton" type="OptionButton" parent="Panel/MarginContainer/VBoxContainer/RadianceSize"]
+[node name="OptionButton" type="OptionButton" parent="Panel/MarginContainer/VBoxContainer/RadianceSize" unique_id=1887856617]
 layout_mode = 2
 size_flags_horizontal = 3
 selected = 0
@@ -496,20 +494,20 @@ popup/item_3/id = 3
 popup/item_4/text = "512 (Slowest)"
 popup/item_4/id = 4
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2075429509]
 environment = SubResource("3")
 
-[node name="YawLight" type="Node3D" parent="."]
+[node name="YawLight" type="Node3D" parent="." unique_id=1378195877]
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 0, 0, 0)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="YawLight"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="YawLight" unique_id=717146066]
 transform = Transform3D(1.0000002, 0, 0, 0, 0.8065315, 0.5911911, 0, -0.5911912, 0.8065314, -0.000684916, 2, 0.00286704)
 light_color = Color(0.87513953, 0.92508376, 0.9344481, 1)
 
-[node name="Spheres" type="Node3D" parent="."]
+[node name="Spheres" type="Node3D" parent="." unique_id=204014692]
 script = ExtResource("5_00idb")
 
-[node name="RoughnessLabel" type="Label3D" parent="Spheres"]
+[node name="RoughnessLabel" type="Label3D" parent="Spheres" unique_id=130139531]
 transform = Transform3D(1, 0.00017379, -0.000511611, 0.00051161, 7.57864e-08, 1, 0.00017379, -1, -1.36206e-08, 0.000828605, 0.500142, 5.70057)
 shaded = true
 double_sided = false
@@ -517,7 +515,7 @@ text = "-  Roughness  +"
 font_size = 64
 outline_size = 24
 
-[node name="RoughnessLabel2" type="Label3D" parent="Spheres"]
+[node name="RoughnessLabel2" type="Label3D" parent="Spheres" unique_id=2132348874]
 transform = Transform3D(-1, -0.000172721, -0.000173317, -0.000172821, -0.00286709, 0.999997, -0.000173217, 0.999997, 0.00286705, -0.00110257, 0.516483, -5.69942)
 shaded = true
 double_sided = false
@@ -525,7 +523,7 @@ text = "+  Roughness  -"
 font_size = 64
 outline_size = 24
 
-[node name="MetallicLabel" type="Label3D" parent="Spheres"]
+[node name="MetallicLabel" type="Label3D" parent="Spheres" unique_id=1109447637]
 transform = Transform3D(-0.000173158, 1, 0.00109107, -0.00126419, -0.00109129, 0.999999, 1, 0.000171779, 0.00126438, -5.70014, 0.500033, 0.00153612)
 shaded = true
 double_sided = false
@@ -533,7 +531,7 @@ text = "-  Metallic  +"
 font_size = 64
 outline_size = 24
 
-[node name="MetallicLabel2" type="Label3D" parent="Spheres"]
+[node name="MetallicLabel2" type="Label3D" parent="Spheres" unique_id=1211523525]
 transform = Transform3D(0.000172955, -0.999999, -0.001776, 0.00160297, -0.00177572, 0.999998, -1, -0.000175801, 0.00160266, 5.69987, 0.50394, -0.000389313)
 shaded = true
 double_sided = false
@@ -541,13 +539,13 @@ text = "+  Metallic  -"
 font_size = 64
 outline_size = 24
 
-[node name="YawCamera" type="Node3D" parent="."]
+[node name="YawCamera" type="Node3D" parent="." unique_id=307354673]
 
-[node name="Camera3D" type="Camera3D" parent="YawCamera"]
+[node name="Camera3D" type="Camera3D" parent="YawCamera" unique_id=654728704]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
 fov = 65.0
 
-[node name="Help" type="Label" parent="."]
+[node name="Help" type="Label" parent="." unique_id=878519610]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhejmmtouwmb7"]
+[gd_scene format=3 uid="uid://bhejmmtouwmb7"]
 
 [ext_resource type="Material" uid="uid://uslxtfi8ihx7" path="res://checker_floor.mat.tres" id="1_hknxn"]
 [ext_resource type="PackedScene" uid="uid://41fxuoounr3" path="res://model/godot_battle_bot.dae" id="2"]
@@ -10,47 +10,48 @@
 [sub_resource type="PlaneMesh" id="1"]
 size = Vector2(40, 40)
 
-[node name="LookAtIK" type="Node3D"]
+[node name="LookAtIK" type="Node3D" unique_id=1270906128]
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1904581028]
 mesh = SubResource("1")
 surface_material_override/0 = ExtResource("1_hknxn")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=802953425]
 transform = Transform3D(0.56827, 0.673454, -0.472789, 0, 0.574581, 0.818448, 0.822842, -0.465099, 0.326517, -9.77531, 11.5204, 11.766)
 
-[node name="GodotBattleBot" parent="." instance=ExtResource("2")]
+[node name="GodotBattleBot" parent="." unique_id=1885728319 instance=ExtResource("2")]
 
-[node name="godot_battle_bot" parent="GodotBattleBot/Armature/Skeleton3D" index="0"]
+[node name="godot_battle_bot" parent="GodotBattleBot/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1885728319, 525861788) index="0" unique_id=1318908502]
+skeleton = NodePath("..")
 surface_material_override/0 = ExtResource("3")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1658680134]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.501, 11)
 fov = 74.0
 script = ExtResource("5")
 MOVEMENT_SPEED = -3.0
 flip_axis = true
 
-[node name="Targets" type="Node3D" parent="Camera3D"]
+[node name="Targets" type="Node3D" parent="Camera3D" unique_id=741126674]
 
-[node name="IK_LookAt_Head" type="Node3D" parent="Camera3D/Targets"]
+[node name="IK_LookAt_Head" type="Node3D" parent="Camera3D/Targets" unique_id=1831056956]
 script = ExtResource("6")
 skeleton_path = NodePath("../../../GodotBattleBot/Armature/Skeleton3D")
 bone_name = "Head"
 additional_rotation = Vector3(90, 0, 0)
 
-[node name="IK_LookAt_LeftArm" type="Node3D" parent="Camera3D/Targets"]
+[node name="IK_LookAt_LeftArm" type="Node3D" parent="Camera3D/Targets" unique_id=955761370]
 script = ExtResource("6")
 skeleton_path = NodePath("../../../GodotBattleBot/Armature/Skeleton3D")
 bone_name = "Left_UpperArm"
 
-[node name="IK_LookAt_RightArm" type="Node3D" parent="Camera3D/Targets"]
+[node name="IK_LookAt_RightArm" type="Node3D" parent="Camera3D/Targets" unique_id=1566146707]
 script = ExtResource("6")
 skeleton_path = NodePath("../../../GodotBattleBot/Armature/Skeleton3D")
 bone_name = "Right_UpperArm"
 additional_rotation = Vector3(0, 0, 180)
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=462134543]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,7 +59,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="Control"]
+[node name="Panel" type="Panel" parent="Control" unique_id=705234921]
 modulate = Color(1, 1, 1, 0.784314)
 layout_mode = 0
 anchor_top = 1.0
@@ -68,7 +69,7 @@ offset_left = -2.0
 offset_top = -70.0
 offset_right = 4.0
 
-[node name="Label" type="Label" parent="Control/Panel"]
+[node name="Label" type="Label" parent="Control/Panel" unique_id=2009846465]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -80,7 +81,7 @@ text = "LookAt IK
 Move mouse to move IK targets"
 horizontal_alignment = 1
 
-[node name="ButtonNext" type="Button" parent="Control"]
+[node name="ButtonNext" type="Button" parent="Control" unique_id=142924612]
 layout_mode = 0
 anchor_left = 1.0
 anchor_top = 1.0

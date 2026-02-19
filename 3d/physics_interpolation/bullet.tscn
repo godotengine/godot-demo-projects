@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://gjf8kev7ql0f"]
+[gd_scene format=3 uid="uid://gjf8kev7ql0f"]
 
 [ext_resource type="Script" uid="uid://chllfa742iupc" path="res://bullet.gd" id="1_v7oki"]
 [ext_resource type="Texture2D" uid="uid://cwp1uymu882d7" path="res://spark_particle.png" id="2_v8qja"]
@@ -55,31 +55,31 @@ rings = 12
 albedo_color = Color(0.431649, 0.57319, 0.501392, 1)
 metallic = 1.0
 
-[node name="Bullet" type="RigidBody3D"]
+[node name="Bullet" type="RigidBody3D" unique_id=1155370318]
 collision_layer = 2
 physics_material_override = SubResource("PhysicsMaterial_v8qja")
 script = ExtResource("1_v7oki")
 scale_curve = SubResource("Curve_t4vbm")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1790154474]
 shape = SubResource("SphereShape3D_rtl8c")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1451857437]
 amount = 64
 transform_align = 1
 process_material = SubResource("ParticleProcessMaterial_v7oki")
 draw_pass_1 = SubResource("QuadMesh_rtl8c")
 
-[node name="Scaler" type="Node3D" parent="."]
+[node name="Scaler" type="Node3D" parent="." unique_id=1413547449]
 transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scaler"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scaler" unique_id=1988560832]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 mesh = SubResource("SphereMesh_v7oki")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_v7oki")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=92977416]
 wait_time = 5.0
 autostart = true
 

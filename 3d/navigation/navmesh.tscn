@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://brij10gekpohw"]
+[gd_scene format=3 uid="uid://brij10gekpohw"]
 
 [ext_resource type="Script" uid="uid://dt8kbohmm8jtl" path="res://navmesh.gd" id="1"]
 [ext_resource type="NavigationMesh" uid="uid://ii7ckx3dvrs2" path="res://navmesh.res" id="2_lcfvj"]
@@ -23,43 +23,42 @@ albedo_color = Color(1.01075e-06, 0, 0.451248, 1)
 metallic = 0.3
 roughness = 0.1
 
-[node name="Node3D" type="Node3D"]
-_import_path = NodePath(".")
+[node name="Node3D" type="Node3D" unique_id=1604041276]
 script = ExtResource("1")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1374263830]
 environment = SubResource("Environment_c0if4")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1632162422]
 transform = Transform3D(-0.723713, -0.678436, -0.12635, -0.277002, 0.11789, 0.95361, -0.632068, 0.725139, -0.273247, 10.0773, 5.02381, 0)
 shadow_enabled = true
 directional_shadow_mode = 0
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 35.0
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1748827021]
 navigation_mesh = ExtResource("2_lcfvj")
 
-[node name="LevelMesh" type="MeshInstance3D" parent="NavigationRegion3D"]
+[node name="LevelMesh" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1835821594]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.0452547, 0)
 mesh = ExtResource("3_bu7c5")
 surface_material_override/0 = SubResource("StandardMaterial3D_2y26t")
 
-[node name="CameraBase" type="Node3D" parent="."]
+[node name="CameraBase" type="Node3D" parent="." unique_id=200835748]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07475, 0, 1.96678)
 
-[node name="Camera3D" type="Camera3D" parent="CameraBase"]
+[node name="Camera3D" type="Camera3D" parent="CameraBase" unique_id=1819331882]
 transform = Transform3D(-0.560554, -0.429252, 0.708182, 0.106298, 0.8108, 0.575591, -0.821267, 0.397928, -0.408869, 18.091, 14.744, -7.017)
 fov = 50.0
 near = 0.1
 
-[node name="RobotBase" type="Marker3D" parent="."]
+[node name="RobotBase" type="Marker3D" parent="." unique_id=1140816611]
 script = ExtResource("4_u7d3d")
 
-[node name="Robot" type="MeshInstance3D" parent="RobotBase"]
+[node name="Robot" type="MeshInstance3D" parent="RobotBase" unique_id=1130579556]
 transform = Transform3D(-0.6, 0, -9.05975e-08, 0, 0.6, 0, 9.05975e-08, 0, -0.6, 0, 1, 0)
 gi_mode = 2
 mesh = ExtResource("5_17f0w")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="RobotBase"]
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="RobotBase" unique_id=1808648605]
 path_desired_distance = 0.1

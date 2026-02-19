@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dxq1b4cth265d"]
+[gd_scene format=3 uid="uid://dxq1b4cth265d"]
 
 [ext_resource type="Script" uid="uid://e3fsq0i746o1" path="res://bullets.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://c33jd3nwdqtb4" path="res://face_happy.png" id="3"]
@@ -22,18 +22,18 @@ animations = [{
 [sub_resource type="CircleShape2D" id="2"]
 radius = 27.0
 
-[node name="Shower" type="Node2D"]
+[node name="Shower" type="Node2D" unique_id=598434821]
 
-[node name="Bullets" type="Node2D" parent="."]
+[node name="Bullets" type="Node2D" parent="." unique_id=1614408549]
 script = ExtResource("2")
 
-[node name="Player" type="Area2D" parent="."]
+[node name="Player" type="Area2D" parent="." unique_id=1438649763]
 script = ExtResource("5")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=1834098533]
 sprite_frames = SubResource("1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1966553877]
 shape = SubResource("2")
 
 [connection signal="body_shape_entered" from="Player" to="Player" method="_on_body_shape_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://7642fvoycxw2"]
+[gd_scene format=3 uid="uid://7642fvoycxw2"]
 
 [ext_resource type="Script" uid="uid://nfckl3monpto" path="res://csg.gd" id="1_v0cxj"]
 [ext_resource type="Texture2D" uid="uid://6i5o10jcqgdy" path="res://textures/checker.png" id="2_smte3"]
@@ -47,16 +47,16 @@ _data = {
 }
 point_count = 14
 
-[node name="CSG" type="WorldEnvironment"]
+[node name="CSG" type="WorldEnvironment" unique_id=1267808110]
 environment = SubResource("11")
 script = ExtResource("1_v0cxj")
 
-[node name="Plane" type="MeshInstance3D" parent="."]
+[node name="Plane" type="MeshInstance3D" parent="." unique_id=1782253255]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34)
 layers = 2
 mesh = SubResource("14")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1977680922]
 transform = Transform3D(0.909487, -0.23874, 0.340349, 0, 0.818672, 0.574262, -0.415733, -0.522284, 0.744571, 3.9506, 3.39961, 3.54442)
 shadow_enabled = true
 shadow_bias = 0.02
@@ -65,40 +65,40 @@ directional_shadow_mode = 0
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 38.0
 
-[node name="CameraHolder" type="Node3D" parent="."]
+[node name="CameraHolder" type="Node3D" parent="." unique_id=710332536]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.125, -12)
 
-[node name="RotationX" type="Node3D" parent="CameraHolder"]
+[node name="RotationX" type="Node3D" parent="CameraHolder" unique_id=499446061]
 
-[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX"]
+[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX" unique_id=1352328906]
 fov = 70.0
 
-[node name="Testers" type="Node3D" parent="."]
+[node name="Testers" type="Node3D" parent="." unique_id=986644918]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
 
-[node name="Union" type="Node3D" parent="Testers"]
+[node name="Union" type="Node3D" parent="Testers" unique_id=561929269]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Testers/Union"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Testers/Union" unique_id=1239561239]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 size = Vector3(2, 2, 2)
 material = ExtResource("3_5yyaq")
 
-[node name="Union" type="CSGSphere3D" parent="Testers/Union/CSGBox3D"]
+[node name="Union" type="CSGSphere3D" parent="Testers/Union/CSGBox3D" unique_id=1410288114]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1)
 radius = 1.25
 radial_segments = 48
 rings = 24
 material = ExtResource("4_dsi4m")
 
-[node name="Subtraction" type="Node3D" parent="Testers"]
+[node name="Subtraction" type="Node3D" parent="Testers" unique_id=353205121]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Testers/Subtraction"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Testers/Subtraction" unique_id=261209417]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 size = Vector3(2, 2, 2)
 material = ExtResource("3_5yyaq")
 
-[node name="Subtraction" type="CSGSphere3D" parent="Testers/Subtraction/CSGBox3D"]
+[node name="Subtraction" type="CSGSphere3D" parent="Testers/Subtraction/CSGBox3D" unique_id=1926037461]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1)
 operation = 2
 radius = 1.25
@@ -106,15 +106,15 @@ radial_segments = 48
 rings = 24
 material = ExtResource("4_dsi4m")
 
-[node name="Intersection" type="Node3D" parent="Testers"]
+[node name="Intersection" type="Node3D" parent="Testers" unique_id=1188208508]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Testers/Intersection"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Testers/Intersection" unique_id=245820217]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 size = Vector3(2, 2, 2)
 material = ExtResource("3_5yyaq")
 
-[node name="Intersection" type="CSGSphere3D" parent="Testers/Intersection/CSGBox3D"]
+[node name="Intersection" type="CSGSphere3D" parent="Testers/Intersection/CSGBox3D" unique_id=590250285]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1)
 operation = 1
 radius = 1.25
@@ -122,45 +122,45 @@ radial_segments = 48
 rings = 24
 material = ExtResource("4_dsi4m")
 
-[node name="Polygon" type="Node3D" parent="Testers"]
+[node name="Polygon" type="Node3D" parent="Testers" unique_id=1796828244]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Testers/Polygon"]
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Testers/Polygon" unique_id=776154870]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -2, 1, 0)
 polygon = PackedVector2Array(1.97985, -1.00313, 1.36693, -1.29612, 1.32819, -1.03648, 0.960622, -1.10397, 0.921527, -0.8641, 0.597863, -0.77587, 1.00768, -0.429439, 0.764833, -0.115922, 1.48587, 0.232759, 1.2437, 1.07821, 2.62762, 0.534357, 2.67403, -0.267332, 2.27938, -0.778446, 2.21227, -0.676807, 1.91633, -0.876959)
 material = ExtResource("3_5yyaq")
 
-[node name="PolygonSmooth" type="Node3D" parent="Testers"]
+[node name="PolygonSmooth" type="Node3D" parent="Testers" unique_id=599891354]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Testers/PolygonSmooth"]
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Testers/PolygonSmooth" unique_id=974130742]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -2, 1, 0)
 polygon = PackedVector2Array(1.95194, -0.990847, 1.92148, -1.01962, 1.43216, -1.25982, 1.38584, -1.27643, 1.36401, -1.24908, 1.33744, -1.0793, 1.32278, -1.03191, 1.28547, -1.01666, 1.013, -1.08448, 0.971659, -1.08859, 0.955454, -1.04985, 0.943871, -0.920988, 0.925653, -0.865746, 0.864986, -0.850041, 0.640266, -0.792847, 0.597863, -0.77587, 0.645241, -0.719688, 0.93992, -0.481997, 0.989505, -0.429039, 0.976147, -0.381588, 0.818906, -0.170561, 0.791262, -0.111433, 0.845728, -0.0659084, 1.40951, 0.192732, 1.46512, 0.232662, 1.46771, 0.288633, 1.25859, 0.997908, 1.25968, 1.06335, 1.33272, 1.05265, 2.56909, 0.559853, 2.61883, 0.532381, 2.63101, 0.510941, 2.63631, 0.467999, 2.67393, -0.193757, 2.66945, -0.259835, 2.64656, -0.311504, 2.30896, -0.724446, 2.28023, -0.746366, 2.25265, -0.726253, 2.22996, -0.694118, 2.20632, -0.676943, 2.16658, -0.696314, 1.95738, -0.831232, 1.92657, -0.862581, 1.93092, -0.895866, 1.94963, -0.959759)
 smooth_faces = true
 material = ExtResource("3_5yyaq")
 
-[node name="Slope" type="Node3D" parent="Testers"]
+[node name="Slope" type="Node3D" parent="Testers" unique_id=2000175279]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Testers/Slope"]
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Testers/Slope" unique_id=101668389]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1)
 polygon = PackedVector2Array(0, -1, 0, 0, 2, -1)
 depth = 2.0
 material = ExtResource("3_5yyaq")
 
-[node name="Staircase" type="Node3D" parent="Testers"]
+[node name="Staircase" type="Node3D" parent="Testers" unique_id=1865647790]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Testers/Staircase"]
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Testers/Staircase" unique_id=933965500]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1)
 polygon = PackedVector2Array(0, -1, 0, 0, 0.5, 0, 0.5, -0.25, 1, -0.25, 1, -0.5, 1.5, -0.5, 1.5, -0.75, 2, -0.75, 2, -1)
 depth = 2.0
 material = ExtResource("3_5yyaq")
 
-[node name="StaircaseSpin" type="Node3D" parent="Testers"]
+[node name="StaircaseSpin" type="Node3D" parent="Testers" unique_id=1500007448]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -28)
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Testers/StaircaseSpin"]
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Testers/StaircaseSpin" unique_id=1363827634]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1)
 polygon = PackedVector2Array(0, -1, 0, 0, 0.5, 0, 0.5, -0.25, 1, -0.25, 1, -0.5, 1.5, -0.5, 1.5, -0.75, 2, -0.75, 2, -1)
 mode = 1
@@ -168,104 +168,104 @@ spin_degrees = 90.0
 spin_sides = 32
 material = ExtResource("3_5yyaq")
 
-[node name="Curves" type="Node3D" parent="Testers"]
+[node name="Curves" type="Node3D" parent="Testers" unique_id=127410623]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32)
 
-[node name="Inner" type="CSGBox3D" parent="Testers/Curves"]
+[node name="Inner" type="CSGBox3D" parent="Testers/Curves" unique_id=89078110]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.5)
 size = Vector3(2, 2, 2)
 material = ExtResource("3_5yyaq")
 
-[node name="Subtraction" type="CSGCylinder3D" parent="Testers/Curves/Inner"]
+[node name="Subtraction" type="CSGCylinder3D" parent="Testers/Curves/Inner" unique_id=1430518632]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 operation = 2
 radius = 1.0
 sides = 48
 material = ExtResource("4_dsi4m")
 
-[node name="Outer" type="CSGBox3D" parent="Testers/Curves"]
+[node name="Outer" type="CSGBox3D" parent="Testers/Curves" unique_id=283331194]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, 1.5)
 size = Vector3(1, 2, 2)
 material = ExtResource("3_5yyaq")
 
-[node name="Intersection" type="CSGCylinder3D" parent="Testers/Curves/Outer"]
+[node name="Intersection" type="CSGCylinder3D" parent="Testers/Curves/Outer" unique_id=513627728]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -1)
 operation = 1
 radius = 1.0
 sides = 48
 material = ExtResource("4_dsi4m")
 
-[node name="Pillar" type="Node3D" parent="Testers"]
+[node name="Pillar" type="Node3D" parent="Testers" unique_id=592835825]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -36)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Testers/Pillar"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Testers/Pillar" unique_id=867341278]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 radius = 0.25
 height = 1.0
 sides = 32
 material = ExtResource("3_5yyaq")
 
-[node name="Base" type="CSGCylinder3D" parent="Testers/Pillar/CSGCylinder3D"]
+[node name="Base" type="CSGCylinder3D" parent="Testers/Pillar/CSGCylinder3D" unique_id=1180817718]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.475, 0)
 height = 0.05
 sides = 32
 material = ExtResource("3_5yyaq")
 
-[node name="CSGSphere3DBottom" type="CSGSphere3D" parent="Testers/Pillar/CSGCylinder3D"]
+[node name="CSGSphere3DBottom" type="CSGSphere3D" parent="Testers/Pillar/CSGCylinder3D" unique_id=1851879515]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.55, 0)
 radius = 0.4
 radial_segments = 32
 rings = 16
 material = ExtResource("4_dsi4m")
 
-[node name="HalfSphereCut" type="CSGBox3D" parent="Testers/Pillar/CSGCylinder3D/CSGSphere3DBottom"]
+[node name="HalfSphereCut" type="CSGBox3D" parent="Testers/Pillar/CSGCylinder3D/CSGSphere3DBottom" unique_id=407158539]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
 operation = 2
 material = ExtResource("3_5yyaq")
 
-[node name="CSGSphere3DTop" type="CSGSphere3D" parent="Testers/Pillar/CSGCylinder3D"]
+[node name="CSGSphere3DTop" type="CSGSphere3D" parent="Testers/Pillar/CSGCylinder3D" unique_id=2019432153]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0.8, 0)
 radius = 0.4
 radial_segments = 32
 rings = 16
 material = ExtResource("4_dsi4m")
 
-[node name="HalfSphereCut" type="CSGBox3D" parent="Testers/Pillar/CSGCylinder3D/CSGSphere3DTop"]
+[node name="HalfSphereCut" type="CSGBox3D" parent="Testers/Pillar/CSGCylinder3D/CSGSphere3DTop" unique_id=1349196927]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
 operation = 2
 material = ExtResource("3_5yyaq")
 
-[node name="Top" type="CSGCylinder3D" parent="Testers/Pillar/CSGCylinder3D"]
+[node name="Top" type="CSGCylinder3D" parent="Testers/Pillar/CSGCylinder3D" unique_id=1537181680]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.825, 0)
 height = 0.151
 sides = 32
 material = ExtResource("3_5yyaq")
 
-[node name="Indentation" type="CSGBox3D" parent="Testers/Pillar/CSGCylinder3D"]
+[node name="Indentation" type="CSGBox3D" parent="Testers/Pillar/CSGCylinder3D" unique_id=1968757452]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0.450001)
 operation = 2
 size = Vector3(0.1, 1.25, 0.5)
 material = ExtResource("4_dsi4m")
 
-[node name="Indentation2" type="CSGBox3D" parent="Testers/Pillar/CSGCylinder3D"]
+[node name="Indentation2" type="CSGBox3D" parent="Testers/Pillar/CSGCylinder3D" unique_id=1208040949]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, -0.450001)
 operation = 2
 size = Vector3(0.1, 1.25, 0.5)
 material = ExtResource("4_dsi4m")
 
-[node name="Indentation3" type="CSGBox3D" parent="Testers/Pillar/CSGCylinder3D"]
+[node name="Indentation3" type="CSGBox3D" parent="Testers/Pillar/CSGCylinder3D" unique_id=798078606]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.450001, 0.15, 0)
 operation = 2
 size = Vector3(0.1, 1.25, 0.5)
 material = ExtResource("4_dsi4m")
 
-[node name="Indentation4" type="CSGBox3D" parent="Testers/Pillar/CSGCylinder3D"]
+[node name="Indentation4" type="CSGBox3D" parent="Testers/Pillar/CSGCylinder3D" unique_id=1572243925]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.450001, 0.15, 0)
 operation = 2
 size = Vector3(0.1, 1.25, 0.5)
 material = ExtResource("4_dsi4m")
 
-[node name="CSGTorus3D" type="CSGTorus3D" parent="Testers/Pillar/CSGCylinder3D"]
+[node name="CSGTorus3D" type="CSGTorus3D" parent="Testers/Pillar/CSGCylinder3D" unique_id=1883810378]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 operation = 2
 inner_radius = 0.25
@@ -274,95 +274,95 @@ sides = 32
 ring_sides = 5
 material = ExtResource("4_dsi4m")
 
-[node name="BeveledCube" type="Node3D" parent="Testers"]
+[node name="BeveledCube" type="Node3D" parent="Testers" unique_id=1816990733]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Testers/BeveledCube"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Testers/BeveledCube" unique_id=1225335154]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 size = Vector3(2, 2, 2)
 material = ExtResource("3_5yyaq")
 
-[node name="Bevel" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D"]
+[node name="Bevel" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D" unique_id=740074154]
 transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 1, 1, 0)
 operation = 2
 size = Vector3(0.2, 2, 2.01)
 material = ExtResource("4_dsi4m")
 
-[node name="Bevel2" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D"]
+[node name="Bevel2" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D" unique_id=2071158188]
 transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.5, -1.5, 0)
 operation = 2
 size = Vector3(0.2, 2, 2.01)
 material = ExtResource("4_dsi4m")
 
-[node name="Bevel3" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D"]
+[node name="Bevel3" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D" unique_id=997443295]
 transform = Transform3D(-3.09086e-08, 3.09086e-08, -1, 0.707107, 0.707107, 0, 0.707107, -0.707107, -4.37114e-08, -2.98023e-08, 1, 1)
 operation = 2
 size = Vector3(0.2, 2, 2.01)
 material = ExtResource("4_dsi4m")
 
-[node name="Bevel4" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D"]
+[node name="Bevel4" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D" unique_id=1857706473]
 transform = Transform3D(-3.09086e-08, 3.09086e-08, -1, 0.707107, 0.707107, 0, 0.707107, -0.707107, -4.37114e-08, 2.98023e-08, -1.5, -0.5)
 operation = 2
 size = Vector3(0.2, 2, 2.01)
 material = ExtResource("4_dsi4m")
 
-[node name="Bevel5" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D"]
+[node name="Bevel5" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D" unique_id=576347401]
 transform = Transform3D(-0.707107, 0.707107, -8.74228e-08, 0.707107, 0.707107, 0, 6.18172e-08, -6.18172e-08, -1, -1, 1, 0)
 operation = 2
 size = Vector3(0.2, 2, 2.01)
 material = ExtResource("4_dsi4m")
 
-[node name="Bevel6" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D"]
+[node name="Bevel6" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D" unique_id=1652803891]
 transform = Transform3D(-0.707107, 0.707107, -8.74228e-08, 0.707107, 0.707107, 0, 6.18172e-08, -6.18172e-08, -1, 0.5, -1.5, 0)
 operation = 2
 size = Vector3(0.2, 2, 2.01)
 material = ExtResource("4_dsi4m")
 
-[node name="Bevel7" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D"]
+[node name="Bevel7" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D" unique_id=1789621292]
 transform = Transform3D(-3.09086e-08, 3.09086e-08, 1, 0.707107, 0.707107, 0, -0.707107, 0.707107, -4.37114e-08, -4.84288e-08, 1, -1)
 operation = 2
 size = Vector3(0.2, 2, 2.01)
 material = ExtResource("4_dsi4m")
 
-[node name="Bevel8" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D"]
+[node name="Bevel8" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D" unique_id=556175341]
 transform = Transform3D(-3.09086e-08, 3.09086e-08, 1, 0.707107, 0.707107, 0, -0.707107, 0.707107, -4.37114e-08, 2.6077e-08, -1.5, 0.5)
 operation = 2
 size = Vector3(0.2, 2, 2.01)
 material = ExtResource("4_dsi4m")
 
-[node name="Bevel9" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D"]
+[node name="Bevel9" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D" unique_id=644129806]
 transform = Transform3D(-0.707107, 2.18557e-08, 0.707107, 1.09809e-22, 1, -3.09086e-08, -0.707107, -2.18557e-08, -0.707107, 1, 0.05, 1)
 operation = 2
 size = Vector3(0.2, 2, 2.01)
 material = ExtResource("4_dsi4m")
 
-[node name="Bevel10" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D"]
+[node name="Bevel10" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D" unique_id=123354020]
 transform = Transform3D(-0.707107, 2.18557e-08, 0.707107, 1.09809e-22, 1, -3.09086e-08, -0.707107, -2.18557e-08, -0.707107, -1, 0.05, -1)
 operation = 2
 size = Vector3(0.2, 2, 2.01)
 material = ExtResource("4_dsi4m")
 
-[node name="Bevel11" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D"]
+[node name="Bevel11" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D" unique_id=1485160238]
 transform = Transform3D(0.707107, 2.18557e-08, 0.707107, 1.09809e-22, 1, -3.09086e-08, -0.707107, 2.18557e-08, 0.707107, -1, 0.05, 1)
 operation = 2
 size = Vector3(0.2, 2, 2.01)
 material = ExtResource("4_dsi4m")
 
-[node name="Bevel12" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D"]
+[node name="Bevel12" type="CSGBox3D" parent="Testers/BeveledCube/CSGBox3D" unique_id=1826530215]
 transform = Transform3D(0.707107, 2.18557e-08, 0.707107, 1.09809e-22, 1, -3.09086e-08, -0.707107, 2.18557e-08, 0.707107, 1, 0.05, -1)
 operation = 2
 size = Vector3(0.2, 2, 2.01)
 material = ExtResource("4_dsi4m")
 
-[node name="HoleFix" type="CSGBox3D" parent="Testers/BeveledCube"]
+[node name="HoleFix" type="CSGBox3D" parent="Testers/BeveledCube" unique_id=192891426]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 size = Vector3(1.8, 1.8, 1.8)
 material = ExtResource("3_5yyaq")
 
-[node name="Road" type="Node3D" parent="Testers"]
+[node name="Road" type="Node3D" parent="Testers" unique_id=1550289937]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -43.5)
 
-[node name="RoadSides" type="CSGPolygon3D" parent="Testers/Road"]
+[node name="RoadSides" type="CSGPolygon3D" parent="Testers/Road" unique_id=1660011748]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.85, 0, 0.0499992)
 polygon = PackedVector2Array(-0.95, 0.05, -1, 0.15, -1.05, 0.8, -1.05, 0.9, -1, 1, -0.95, 0.95, -0.9, 0.95, 0.9, 0.95, 0.95, 0.95, 1, 1, 1.05, 0.9, 1.05, 0.85, 1, 0.15, 0.95, 0.05, 0.85, 0, -0.85, 0)
 mode = 2
@@ -379,7 +379,7 @@ path_joined = true
 smooth_faces = true
 material = SubResource("StandardMaterial3D_mn32f")
 
-[node name="RoadTop" type="CSGPolygon3D" parent="Testers/Road"]
+[node name="RoadTop" type="CSGPolygon3D" parent="Testers/Road" unique_id=227627926]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.85, 0, 0.0499992)
 polygon = PackedVector2Array(-0.9, 0.95, -0.868166, 0.959208, -0.766865, 0.985865, -0.7, 1, -0.65, 1, 0.7, 1, 0.75, 1, 0.795656, 0.989936, 0.922454, 0.957303, 0.95, 0.95)
 mode = 2
@@ -396,11 +396,11 @@ path_joined = true
 smooth_faces = true
 material = SubResource("StandardMaterial3D_bvrof")
 
-[node name="Path3D" type="Path3D" parent="Testers/Road"]
+[node name="Path3D" type="Path3D" parent="Testers/Road" unique_id=296886838]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 curve = SubResource("Curve3D_nevyg")
 
-[node name="TestName" type="Label" parent="."]
+[node name="TestName" type="Label" parent="." unique_id=2107475262]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -417,7 +417,7 @@ theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 
-[node name="Previous" type="Button" parent="."]
+[node name="Previous" type="Button" parent="." unique_id=801242142]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -428,7 +428,7 @@ offset_bottom = -24.0
 grow_vertical = 0
 text = "«  Previous"
 
-[node name="Next" type="Button" parent="."]
+[node name="Next" type="Button" parent="." unique_id=1399716480]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0

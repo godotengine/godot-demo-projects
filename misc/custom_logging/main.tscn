@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvwl54opy6eev"]
+[gd_scene format=3 uid="uid://bvwl54opy6eev"]
 
 [ext_resource type="Script" uid="uid://c0en755bdwyr0" path="res://main.gd" id="1_ig7tw"]
 
@@ -17,7 +17,7 @@ corner_detail = 3
 [sub_resource type="Theme" id="Theme_0xm2m"]
 TooltipPanel/styles/panel = SubResource("StyleBoxFlat_ig7tw")
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" unique_id=1800413306]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +27,7 @@ grow_vertical = 2
 theme = SubResource("Theme_0xm2m")
 script = ExtResource("1_ig7tw")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=314771924]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -43,7 +43,7 @@ The custom logger replicates the output seen in the terminal, which may differ
 from the one displayed in the editor Output panel.
 Try running Godot from a terminal to see the difference."
 
-[node name="FlushStdoutOnPrint" type="Label" parent="."]
+[node name="FlushStdoutOnPrint" type="Label" parent="." unique_id=237766084]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -63,7 +63,7 @@ mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
 text = "Flush stdout on print: Yes (?)"
 
-[node name="Actions" type="HBoxContainer" parent="."]
+[node name="Actions" type="HBoxContainer" parent="." unique_id=951372408]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -75,35 +75,35 @@ offset_bottom = -28.0
 grow_vertical = 0
 theme_override_constants/separation = 8
 
-[node name="PrintMessage" type="Button" parent="Actions"]
+[node name="PrintMessage" type="Button" parent="Actions" unique_id=1610140029]
 layout_mode = 2
 text = "Print Message"
 
-[node name="PrintMessageRaw" type="Button" parent="Actions"]
+[node name="PrintMessageRaw" type="Button" parent="Actions" unique_id=1241663947]
 layout_mode = 2
 text = "Print Message (raw)"
 
-[node name="PrintMessageStderr" type="Button" parent="Actions"]
+[node name="PrintMessageStderr" type="Button" parent="Actions" unique_id=957974330]
 layout_mode = 2
 text = "Print Message (stderr)"
 
-[node name="PrintWarning" type="Button" parent="Actions"]
+[node name="PrintWarning" type="Button" parent="Actions" unique_id=1729159566]
 layout_mode = 2
 text = "Print Warning"
 
-[node name="PrintError" type="Button" parent="Actions"]
+[node name="PrintError" type="Button" parent="Actions" unique_id=1126064319]
 layout_mode = 2
 text = "Print Error"
 
-[node name="VSeparator" type="VSeparator" parent="Actions"]
+[node name="VSeparator" type="VSeparator" parent="Actions" unique_id=1571113505]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="OpenLogsFolder" type="Button" parent="Actions"]
+[node name="OpenLogsFolder" type="Button" parent="Actions" unique_id=1224437112]
 layout_mode = 2
 text = "Open Logs Folder"
 
-[node name="CrashEngine" type="Button" parent="Actions"]
+[node name="CrashEngine" type="Button" parent="Actions" unique_id=742322594]
 layout_mode = 2
 tooltip_text = "Crashing the engine produces a stack trace written in the log file,
 as well as terminal output. The crash backtrace is not available from scripting

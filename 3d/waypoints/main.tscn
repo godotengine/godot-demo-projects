@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dnxr4arl856gq"]
+[gd_scene format=3 uid="uid://dnxr4arl856gq"]
 
 [ext_resource type="Script" uid="uid://cy8ebc4vsdfue" path="res://camera.gd" id="1"]
 [ext_resource type="Script" uid="uid://bddkt5dg3lt83" path="res://main.gd" id="1_nvv4i"]
@@ -54,59 +54,59 @@ background_mode = 2
 sky = SubResource("Sky_47fsp")
 tonemap_mode = 4
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" unique_id=1971028105]
 script = ExtResource("1_nvv4i")
 
-[node name="BlueCube" type="MeshInstance3D" parent="."]
+[node name="BlueCube" type="MeshInstance3D" parent="." unique_id=2098357348]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
 mesh = SubResource("6")
 
-[node name="WaypointAnchor" type="Marker3D" parent="BlueCube"]
+[node name="WaypointAnchor" type="Marker3D" parent="BlueCube" unique_id=1009710506]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Waypoint" parent="BlueCube/WaypointAnchor" instance=ExtResource("2")]
+[node name="Waypoint" parent="BlueCube/WaypointAnchor" unique_id=2056031682 instance=ExtResource("2")]
 modulate = Color(0.501961, 0.764706, 1, 1)
 text = "Blue Waypoint"
 
-[node name="GreenCube" type="MeshInstance3D" parent="."]
+[node name="GreenCube" type="MeshInstance3D" parent="." unique_id=1627014380]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
 mesh = SubResource("8")
 
-[node name="WaypointAnchor" type="Marker3D" parent="GreenCube"]
+[node name="WaypointAnchor" type="Marker3D" parent="GreenCube" unique_id=1905473838]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Waypoint" parent="GreenCube/WaypointAnchor" instance=ExtResource("2")]
+[node name="Waypoint" parent="GreenCube/WaypointAnchor" unique_id=1051132247 instance=ExtResource("2")]
 modulate = Color(0.419608, 1, 0.427451, 1)
 text = "Green Waypoint"
 
-[node name="YellowCube" type="MeshInstance3D" parent="."]
+[node name="YellowCube" type="MeshInstance3D" parent="." unique_id=1688583953]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
 mesh = SubResource("10")
 
-[node name="WaypointAnchor" type="Marker3D" parent="YellowCube"]
+[node name="WaypointAnchor" type="Marker3D" parent="YellowCube" unique_id=2080453402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Waypoint" parent="YellowCube/WaypointAnchor" instance=ExtResource("2")]
+[node name="Waypoint" parent="YellowCube/WaypointAnchor" unique_id=520078875 instance=ExtResource("2")]
 modulate = Color(1, 0.992157, 0.419608, 1)
 text = "Yellow Waypoint (non-sticky)"
 sticky = false
 
-[node name="RedCube" type="MeshInstance3D" parent="."]
+[node name="RedCube" type="MeshInstance3D" parent="." unique_id=1393155383]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
 mesh = SubResource("12")
 
-[node name="WaypointAnchor" type="Marker3D" parent="RedCube"]
+[node name="WaypointAnchor" type="Marker3D" parent="RedCube" unique_id=1254431120]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Waypoint" parent="RedCube/WaypointAnchor" instance=ExtResource("2")]
+[node name="Waypoint" parent="RedCube/WaypointAnchor" unique_id=1808374417 instance=ExtResource("2")]
 modulate = Color(1, 0.466667, 0.427451, 1)
 text = "Red Waypoint"
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1885392552]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 8)
 script = ExtResource("1")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=864309041]
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 325.0
@@ -116,17 +116,17 @@ theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 18
 text = "Press Esc or F10 to toggle mouse capture"
 
-[node name="Ground" type="MeshInstance3D" parent="."]
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=1815480665]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("2")
 
-[node name="WhiteCube" type="MeshInstance3D" parent="."]
+[node name="WhiteCube" type="MeshInstance3D" parent="." unique_id=1419508960]
 mesh = SubResource("4")
 
-[node name="Environment" type="WorldEnvironment" parent="."]
+[node name="Environment" type="WorldEnvironment" parent="." unique_id=1914466512]
 environment = SubResource("Environment_ob0ys")
 
-[node name="Sun" type="DirectionalLight3D" parent="."]
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=734301431]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 shadow_bias = 0.04

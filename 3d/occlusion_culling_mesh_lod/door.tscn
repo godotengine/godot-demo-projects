@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://djjyyk824u858"]
+[gd_scene format=3 uid="uid://djjyyk824u858"]
 
 [ext_resource type="Script" uid="uid://dsudku2dqwa2r" path="res://door.gd" id="1_cd56o"]
 
@@ -49,29 +49,27 @@ _data = {
 &"open": SubResource("Animation_6r4px")
 }
 
-[node name="Door" type="Node3D"]
+[node name="Door" type="Node3D" unique_id=1549611156]
 script = ExtResource("1_cd56o")
 
-[node name="Pivot" type="Node3D" parent="."]
+[node name="Pivot" type="Node3D" parent="." unique_id=501674250]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 1.2)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot" unique_id=2091023646]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, -1.2)
 mesh = SubResource("BoxMesh_uwx0y")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot/MeshInstance3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot/MeshInstance3D" unique_id=116373013]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.8)
 mesh = SubResource("BoxMesh_uj7hy")
 surface_material_override/0 = SubResource("StandardMaterial3D_yypcp")
 
-[node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=372560907]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 occluder = SubResource("BoxOccluder3D_gavni")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_5gp0p")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=193135326]
+libraries/ = SubResource("AnimationLibrary_5gp0p")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

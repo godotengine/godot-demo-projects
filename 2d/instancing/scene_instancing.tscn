@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cxilyufxrpxnl"]
+[gd_scene format=3 uid="uid://cxilyufxrpxnl"]
 
 [ext_resource type="Script" uid="uid://ddixb3b1nv1lo" path="res://ball_factory.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://c4y4kia1qlvfw" path="res://ball.tscn" id="2"]
@@ -33,11 +33,11 @@ bounce = 0.4
 [sub_resource type="PhysicsMaterial" id="10"]
 bounce = 0.4
 
-[node name="SceneInstancing" type="Node2D"]
+[node name="SceneInstancing" type="Node2D" unique_id=698894988]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=32521740]
 
-[node name="InfoLabel" type="Label" parent="CanvasLayer"]
+[node name="InfoLabel" type="Label" parent="CanvasLayer" unique_id=1519772637]
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 370.0
@@ -46,59 +46,59 @@ text = "Click the mouse to spawn a new Ball instance."
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="BallFactory" type="Node2D" parent="."]
+[node name="BallFactory" type="Node2D" parent="." unique_id=852567556]
 script = ExtResource("1")
 
-[node name="Static" type="StaticBody2D" parent="."]
+[node name="Static" type="StaticBody2D" parent="." unique_id=715001484]
 position = Vector2(184, 32)
 
-[node name="Collision" type="CollisionPolygon2D" parent="Static"]
+[node name="Collision" type="CollisionPolygon2D" parent="Static" unique_id=832813743]
 polygon = PackedVector2Array(8.68994, 22.1976, 50.4445, 556.656, 292.621, 501.54, 335.36, 550.855, 510.039, 563.135, 542.137, 526.368, 567.463, 515.822, 612.463, 506.822, 667.291, 495.079, 747.553, 553.575, 793.806, 6.70509, 802.465, 601.097, 4.43558, 596.186)
 
-[node name="Polygon2D" type="Polygon2D" parent="Static"]
+[node name="Polygon2D" type="Polygon2D" parent="Static" unique_id=262151525]
 color = Color(1, 0.266667, 0.419608, 1)
 polygon = PackedVector2Array(8.68994, 22.1976, 50.4445, 556.656, 292.621, 501.54, 335.36, 550.855, 510.039, 563.135, 542.137, 526.368, 567.463, 515.822, 612.463, 506.822, 667.291, 495.079, 747.553, 553.575, 793.806, 6.70509, 802.465, 601.097, 4.43558, 596.186)
 
-[node name="Ball1" parent="." instance=ExtResource("2")]
+[node name="Ball1" parent="." unique_id=2146276118 instance=ExtResource("2")]
 position = Vector2(407.823, 193.773)
 physics_material_override = SubResource("1")
 
-[node name="Ball2" parent="." instance=ExtResource("2")]
+[node name="Ball2" parent="." unique_id=705490365 instance=ExtResource("2")]
 position = Vector2(572.078, 245.215)
 physics_material_override = SubResource("2")
 
-[node name="Ball3" parent="." instance=ExtResource("2")]
+[node name="Ball3" parent="." unique_id=160663270 instance=ExtResource("2")]
 position = Vector2(623.52, 136.013)
 physics_material_override = SubResource("3")
 
-[node name="Ball4" parent="." instance=ExtResource("2")]
+[node name="Ball4" parent="." unique_id=897982383 instance=ExtResource("2")]
 position = Vector2(419.555, 368.858)
 physics_material_override = SubResource("4")
 
-[node name="Ball5" parent="." instance=ExtResource("2")]
+[node name="Ball5" parent="." unique_id=1865650190 instance=ExtResource("2")]
 position = Vector2(693.555, 394.858)
 physics_material_override = SubResource("5")
 
-[node name="Ball6" parent="." instance=ExtResource("2")]
+[node name="Ball6" parent="." unique_id=418134803 instance=ExtResource("2")]
 position = Vector2(819.555, 179.858)
 physics_material_override = SubResource("6")
 
-[node name="Ball7" parent="." instance=ExtResource("2")]
+[node name="Ball7" parent="." unique_id=658938548 instance=ExtResource("2")]
 position = Vector2(815.872, 357.88)
 physics_material_override = SubResource("7")
 
-[node name="Ball8" parent="." instance=ExtResource("2")]
+[node name="Ball8" parent="." unique_id=1148313017 instance=ExtResource("2")]
 position = Vector2(713.97, 237.561)
 physics_material_override = SubResource("8")
 
-[node name="Ball9" parent="." instance=ExtResource("2")]
+[node name="Ball9" parent="." unique_id=439490435 instance=ExtResource("2")]
 position = Vector2(285.489, 199.502)
 physics_material_override = SubResource("9")
 
-[node name="Ball10" parent="." instance=ExtResource("2")]
+[node name="Ball10" parent="." unique_id=697590344 instance=ExtResource("2")]
 position = Vector2(327.756, 327.139)
 physics_material_override = SubResource("10")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1262495056]
 offset = Vector2(576, 324)
 process_callback = 0

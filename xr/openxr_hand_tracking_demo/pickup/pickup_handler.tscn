@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://caospno4tdf1p"]
+[gd_scene format=3 uid="uid://caospno4tdf1p"]
 
 [ext_resource type="Script" uid="uid://cx7yb754h5x7p" path="res://pickup/pickup_handler.gd" id="1_5qec3"]
 
@@ -7,10 +7,10 @@ resource_local_to_scene = true
 margin = 0.001
 radius = 0.3
 
-[node name="PickupHandler" type="Area3D"]
+[node name="PickupHandler" type="Area3D" unique_id=52980310]
 script = ExtResource("1_5qec3")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1133300440]
 shape = SubResource("SphereShape3D_i5on0")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cngp0vqqyaxac"]
+[gd_scene format=3 uid="uid://cngp0vqqyaxac"]
 
 [ext_resource type="Script" uid="uid://cdj0v5tynuatr" path="res://piano_keys/piano_key.gd" id="1"]
 [ext_resource type="Script" uid="uid://b3hjdvrg0whlt" path="res://piano_keys/piano_key_color.gd" id="2"]
 
-[node name="PianoKey" type="Control"]
+[node name="PianoKey" type="Control" unique_id=1789032655]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 20.0
@@ -12,7 +12,7 @@ size_flags_horizontal = 3
 mouse_filter = 2
 script = ExtResource("1")
 
-[node name="Key" type="ColorRect" parent="."]
+[node name="Key" type="ColorRect" parent="." unique_id=1515406869]
 layout_mode = 0
 anchor_left = 0.5
 anchor_right = 1.5
@@ -23,7 +23,7 @@ size_flags_horizontal = 3
 color = Color(0, 0, 0, 1)
 script = ExtResource("2")
 
-[node name="ColorTimer" type="Timer" parent="."]
+[node name="ColorTimer" type="Timer" parent="." unique_id=1346025265]
 one_shot = true
 
 [connection signal="timeout" from="ColorTimer" to="." method="deactivate"]

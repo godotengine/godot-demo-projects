@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dt13mo16pfgrv"]
+[gd_scene format=3 uid="uid://dt13mo16pfgrv"]
 
 [ext_resource type="Script" uid="uid://n4cogbf8t5kb" path="res://enemy/enemy.gd" id="1_hjwkx"]
 [ext_resource type="Texture2D" uid="uid://dotinr3h2y7e8" path="res://enemy/enemy.png" id="2_org2d"]
@@ -142,51 +142,49 @@ radius = 7.0
 offsets = PackedFloat32Array(0.5, 1)
 colors = PackedColorArray(1, 1, 1, 0.501961, 0, 0, 0, 0)
 
-[node name="Enemy" type="RigidBody2D"]
+[node name="Enemy" type="RigidBody2D" unique_id=1178630446]
 physics_material_override = SubResource("PhysicsMaterial_eyxlk")
 lock_rotation = true
 contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_hjwkx")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_ay0tp")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=473404497]
+libraries/ = SubResource("AnimationLibrary_ay0tp")
 
-[node name="SoundExplode" type="AudioStreamPlayer2D" parent="."]
+[node name="SoundExplode" type="AudioStreamPlayer2D" parent="." unique_id=1304382245]
 stream = ExtResource("5_t2e2f")
 
-[node name="SoundHit" type="AudioStreamPlayer2D" parent="."]
+[node name="SoundHit" type="AudioStreamPlayer2D" parent="." unique_id=1261565850]
 position = Vector2(0, -1)
 stream = ExtResource("4_5rkwm")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1847664982]
 rect = Rect2(-150, -100, 300, 200)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=584270471]
 texture = ExtResource("2_org2d")
 hframes = 8
 
-[node name="Shape1" type="CollisionShape2D" parent="."]
+[node name="Shape1" type="CollisionShape2D" parent="." unique_id=1019070265]
 position = Vector2(-0.54036, -1.08072)
 shape = SubResource("5")
 
-[node name="Shape2" type="CollisionShape2D" parent="."]
+[node name="Shape2" type="CollisionShape2D" parent="." unique_id=2074664711]
 position = Vector2(3.24216, 1.62108)
 shape = SubResource("5")
 
-[node name="Shape3" type="CollisionShape2D" parent="."]
+[node name="Shape3" type="CollisionShape2D" parent="." unique_id=1084760241]
 position = Vector2(-6.2475, 1.76707)
 shape = SubResource("5")
 
-[node name="RaycastLeft" type="RayCast2D" parent="."]
+[node name="RaycastLeft" type="RayCast2D" parent="." unique_id=191827520]
 position = Vector2(-14, -4.672)
 
-[node name="RaycastRight" type="RayCast2D" parent="."]
+[node name="RaycastRight" type="RayCast2D" parent="." unique_id=261023271]
 position = Vector2(11, -4.672)
 
-[node name="Explosion" type="CPUParticles2D" parent="."]
+[node name="Explosion" type="CPUParticles2D" parent="." unique_id=917878361]
 modulate = Color(1, 1, 1, 0.685843)
 emitting = false
 amount = 32

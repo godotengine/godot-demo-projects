@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://34i0qxyhkmnt"]
+[gd_scene format=3 uid="uid://34i0qxyhkmnt"]
 
 [ext_resource type="Script" uid="uid://cxpgygel7r0ih" path="res://pause_button.gd" id="1"]
 [ext_resource type="Script" uid="uid://8a5fca3pnriq" path="res://process_mode.gd" id="2_0dpmq"]
@@ -33,27 +33,25 @@ action = &"toggle_pause"
 [sub_resource type="Shortcut" id="Shortcut_mmc83"]
 events = [SubResource("InputEventAction_6y126")]
 
-[node name="PauseScene" type="Node3D"]
+[node name="PauseScene" type="Node3D" unique_id=1515290433]
 
-[node name="Cube" type="MeshInstance3D" parent="."]
+[node name="Cube" type="MeshInstance3D" parent="." unique_id=224807142]
 mesh = SubResource("1")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=883130505]
 transform = Transform3D(0.707107, -0.241845, 0.664463, 0, 0.939693, 0.34202, -0.707107, -0.241845, 0.664463, 2, 1, 2)
 fov = 74.0
 near = 0.1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_5vmwp")
-}
-autoplay = "spin"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1685402005]
+libraries/ = SubResource("AnimationLibrary_5vmwp")
+autoplay = &"spin"
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=731676835]
 transform = Transform3D(0.707107, -0.353554, 0.612373, 0, 0.866026, 0.5, -0.707107, -0.353554, 0.612373, 2, 2, 2)
 spot_range = 6.0
 
-[node name="PauseButton" type="Button" parent="."]
+[node name="PauseButton" type="Button" parent="." unique_id=1205361136]
 process_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -71,7 +69,7 @@ shortcut = SubResource("Shortcut_mmc83")
 text = "Pause"
 script = ExtResource("1")
 
-[node name="ProcessMode" type="HBoxContainer" parent="."]
+[node name="ProcessMode" type="HBoxContainer" parent="." unique_id=2093379509]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -85,11 +83,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 12
 
-[node name="Label" type="Label" parent="ProcessMode"]
+[node name="Label" type="Label" parent="ProcessMode" unique_id=285522429]
 layout_mode = 2
 text = "Cube Process Mode"
 
-[node name="OptionButton" type="OptionButton" parent="ProcessMode"]
+[node name="OptionButton" type="OptionButton" parent="ProcessMode" unique_id=1992636027]
 process_mode = 3
 layout_mode = 2
 selected = 0

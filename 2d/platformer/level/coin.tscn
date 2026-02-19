@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfg1bqmq1k47c"]
+[gd_scene format=3 uid="uid://dfg1bqmq1k47c"]
 
 [ext_resource type="Texture2D" uid="uid://gwsn8ufh1n7i" path="res://level/coin.webp" id="1"]
 [ext_resource type="AudioStream" uid="uid://df5qjknnq7dqx" path="res://player/coin_pickup.wav" id="3"]
@@ -164,26 +164,24 @@ _data = {
 [sub_resource type="CircleShape2D" id="3"]
 radius = 10.0499
 
-[node name="Coin" type="Area2D"]
+[node name="Coin" type="Area2D" unique_id=143622931]
 collision_layer = 0
 monitorable = false
 script = ExtResource("4")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=842016281]
 scale = Vector2(0.65, 0.65)
 texture = ExtResource("1")
 hframes = 8
 vframes = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_i7oeb")
-}
-autoplay = "spinning"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1273516692]
+libraries/ = SubResource("AnimationLibrary_i7oeb")
+autoplay = &"spinning"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1939044530]
 shape = SubResource("3")
 
-[node name="Pickup" type="AudioStreamPlayer2D" parent="."]
+[node name="Pickup" type="AudioStreamPlayer2D" parent="." unique_id=469882844]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

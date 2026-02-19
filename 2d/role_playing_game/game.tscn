@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dako8e30n1vv0"]
+[gd_scene format=3 uid="uid://dako8e30n1vv0"]
 
 [ext_resource type="Script" uid="uid://2a62dnfq4o1b" path="res://game.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cx5dvchcc2v3b" path="res://combat/combat.tscn" id="2"]
@@ -24,29 +24,27 @@ _data = {
 &"fade_to_black": SubResource("1")
 }
 
-[node name="Game" type="Node" node_paths=PackedStringArray("combat_screen", "exploration_screen")]
+[node name="Game" type="Node" unique_id=1712702090 node_paths=PackedStringArray("combat_screen", "exploration_screen")]
 script = ExtResource("1")
 combat_screen = NodePath("Combat")
 exploration_screen = NodePath("Exploration")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_53g8u")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=73377330]
+libraries/ = SubResource("AnimationLibrary_53g8u")
 
-[node name="Transition" type="CanvasLayer" parent="."]
+[node name="Transition" type="CanvasLayer" parent="." unique_id=1805845816]
 
-[node name="ColorRect" type="ColorRect" parent="Transition"]
+[node name="ColorRect" type="ColorRect" parent="Transition" unique_id=1377939207]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
 color = Color(0.0703125, 0.0703125, 0.0703125, 0)
 
-[node name="Combat" parent="." instance=ExtResource("2")]
+[node name="Combat" parent="." unique_id=1001598935 instance=ExtResource("2")]
 visible = false
 
-[node name="Exploration" parent="." instance=ExtResource("3")]
+[node name="Exploration" parent="." unique_id=499429218 instance=ExtResource("3")]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1887632648]
 offset = Vector2(640, 360)

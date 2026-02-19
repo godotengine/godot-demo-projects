@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bfhceyyqyc7s6"]
+[gd_scene format=3 uid="uid://bfhceyyqyc7s6"]
 
 [ext_resource type="Material" uid="uid://b8m5n5xvvf2jk" path="res://tree_material.tres" id="1_784bs"]
 [ext_resource type="Material" uid="uid://be3mjmhs6wugu" path="res://trunk_material.tres" id="2_ap7c2"]
@@ -28,11 +28,11 @@ radial_segments = 4
 rings = 1
 cap_bottom = false
 
-[node name="Tree" type="Node3D"]
+[node name="Tree" type="Node3D" unique_id=899049521]
 
-[node name="HighDetail" type="Node3D" parent="."]
+[node name="HighDetail" type="Node3D" parent="." unique_id=847302865]
 
-[node name="Top" type="MeshInstance3D" parent="HighDetail" groups=["tree_high_detail"]]
+[node name="Top" type="MeshInstance3D" parent="HighDetail" unique_id=292667488 groups=["tree_high_detail"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 visibility_range_end = 20.0
 visibility_range_end_margin = 5.0
@@ -41,7 +41,7 @@ mesh = SubResource("CylinderMesh_6uoay")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("1_784bs")
 
-[node name="Trunk" type="MeshInstance3D" parent="HighDetail" groups=["tree_high_detail"]]
+[node name="Trunk" type="MeshInstance3D" parent="HighDetail" unique_id=2083396924 groups=["tree_high_detail"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 visibility_range_end = 20.0
 visibility_range_end_margin = 5.0
@@ -50,9 +50,9 @@ mesh = SubResource("CylinderMesh_qqg4e")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("2_ap7c2")
 
-[node name="LowDetail" type="Node3D" parent="."]
+[node name="LowDetail" type="Node3D" parent="." unique_id=400968112]
 
-[node name="Top" type="MeshInstance3D" parent="LowDetail" groups=["tree_low_detail"]]
+[node name="Top" type="MeshInstance3D" parent="LowDetail" unique_id=619449007 groups=["tree_low_detail"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 visibility_range_begin = 15.0
 visibility_range_end = 200.0
@@ -62,7 +62,7 @@ mesh = SubResource("CylinderMesh_74uyc")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("1_784bs")
 
-[node name="Trunk" type="MeshInstance3D" parent="LowDetail" groups=["tree_low_detail"]]
+[node name="Trunk" type="MeshInstance3D" parent="LowDetail" unique_id=568865072 groups=["tree_low_detail"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 visibility_range_begin = 15.0
 visibility_range_end = 200.0

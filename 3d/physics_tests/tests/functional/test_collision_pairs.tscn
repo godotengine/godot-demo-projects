@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://yb81eptaqtpf"]
+[gd_scene format=3 uid="uid://yb81eptaqtpf"]
 
 [ext_resource type="Shape3D" uid="uid://bw5uxoec226wp" path="res://assets/robot_head/godot3_robot_head_collision.tres" id="1"]
 [ext_resource type="Script" uid="uid://di8x85rry2sbi" path="res://tests/functional/test_collision_pairs.gd" id="2"]
@@ -16,12 +16,12 @@
 [sub_resource type="ConvexPolygonShape3D" id="5"]
 points = PackedVector3Array(-0.7, 0, -0.7, -0.3, 0, 0.8, 0.8, 0, -0.3, 0, -1, 0)
 
-[node name="Test" type="Node3D"]
+[node name="Test" type="Node3D" unique_id=2096934616]
 script = ExtResource("2")
 
-[node name="Options" parent="." instance=ExtResource("5")]
+[node name="Options" parent="." unique_id=603690670 instance=ExtResource("5")]
 
-[node name="Controls" type="VBoxContainer" parent="."]
+[node name="Controls" type="VBoxContainer" parent="." unique_id=600339453]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,110 +31,110 @@ offset_right = -806.0
 offset_bottom = -141.0
 theme_override_constants/separation = 10
 
-[node name="OffsetX" type="HBoxContainer" parent="Controls"]
+[node name="OffsetX" type="HBoxContainer" parent="Controls" unique_id=499336832]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="Label" type="Label" parent="Controls/OffsetX"]
+[node name="Label" type="Label" parent="Controls/OffsetX" unique_id=341731274]
 layout_mode = 2
 text = "Offset X"
 
-[node name="HSlider" type="HSlider" parent="Controls/OffsetX"]
+[node name="HSlider" type="HSlider" parent="Controls/OffsetX" unique_id=1740343116]
 custom_minimum_size = Vector2(230, 2.08165e-12)
 layout_mode = 2
 min_value = -1.0
 max_value = 1.0
 step = 0.01
 
-[node name="OffsetY" type="HBoxContainer" parent="Controls"]
+[node name="OffsetY" type="HBoxContainer" parent="Controls" unique_id=642315159]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="Label" type="Label" parent="Controls/OffsetY"]
+[node name="Label" type="Label" parent="Controls/OffsetY" unique_id=1623151926]
 layout_mode = 2
 text = "Offset Y"
 
-[node name="HSlider" type="HSlider" parent="Controls/OffsetY"]
+[node name="HSlider" type="HSlider" parent="Controls/OffsetY" unique_id=1100020278]
 custom_minimum_size = Vector2(230, 2.08165e-12)
 layout_mode = 2
 min_value = -1.0
 max_value = 1.0
 step = 0.01
 
-[node name="OffsetZ" type="HBoxContainer" parent="Controls"]
+[node name="OffsetZ" type="HBoxContainer" parent="Controls" unique_id=1195697367]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="Label" type="Label" parent="Controls/OffsetZ"]
+[node name="Label" type="Label" parent="Controls/OffsetZ" unique_id=1964010021]
 layout_mode = 2
 text = "Offset Z"
 
-[node name="HSlider" type="HSlider" parent="Controls/OffsetZ"]
+[node name="HSlider" type="HSlider" parent="Controls/OffsetZ" unique_id=1901417783]
 custom_minimum_size = Vector2(230, 2.08165e-12)
 layout_mode = 2
 min_value = -1.0
 max_value = 1.0
 step = 0.01
 
-[node name="Shapes" type="Node3D" parent="."]
+[node name="Shapes" type="Node3D" parent="." unique_id=528396240]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.35591, 0)
 
-[node name="RigidBodyBox" type="RigidBody3D" parent="Shapes"]
+[node name="RigidBodyBox" type="RigidBody3D" parent="Shapes" unique_id=1857340851]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
 freeze = true
 
-[node name="CollisionShape" type="CollisionShape3D" parent="Shapes/RigidBodyBox"]
+[node name="CollisionShape" type="CollisionShape3D" parent="Shapes/RigidBodyBox" unique_id=1511010259]
 transform = Transform3D(0.579556, 0.0885213, 0.145926, 0, 0.939693, -0.205212, -0.155291, 0.330366, 0.544604, 0, 0, 0)
 shape = SubResource("1")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="RigidBodySphere" type="RigidBody3D" parent="Shapes"]
+[node name="RigidBodySphere" type="RigidBody3D" parent="Shapes" unique_id=1578131611]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
 freeze = true
 
-[node name="CollisionShape" type="CollisionShape3D" parent="Shapes/RigidBodySphere"]
+[node name="CollisionShape" type="CollisionShape3D" parent="Shapes/RigidBodySphere" unique_id=616218696]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 shape = SubResource("2")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="RigidBodyCapsule" type="RigidBody3D" parent="Shapes"]
+[node name="RigidBodyCapsule" type="RigidBody3D" parent="Shapes" unique_id=1523147907]
 freeze = true
 
-[node name="CollisionShape" type="CollisionShape3D" parent="Shapes/RigidBodyCapsule"]
+[node name="CollisionShape" type="CollisionShape3D" parent="Shapes/RigidBodyCapsule" unique_id=1211764362]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 shape = SubResource("3")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="RigidBodyCylinder" type="RigidBody3D" parent="Shapes"]
+[node name="RigidBodyCylinder" type="RigidBody3D" parent="Shapes" unique_id=1256154315]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 freeze = true
 
-[node name="CollisionShape" type="CollisionShape3D" parent="Shapes/RigidBodyCylinder"]
+[node name="CollisionShape" type="CollisionShape3D" parent="Shapes/RigidBodyCylinder" unique_id=1659409218]
 transform = Transform3D(0.772741, -0.258819, 2.59821e-08, 0.2, 0.933013, -0.207055, 0.0535898, 0.25, 0.772741, 0, 0, 0)
 shape = SubResource("4")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="RigidBodyConvexPolygon" type="RigidBody3D" parent="Shapes"]
+[node name="RigidBodyConvexPolygon" type="RigidBody3D" parent="Shapes" unique_id=1850793828]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.211, 0)
 freeze = true
 
-[node name="CollisionShape" type="CollisionShape3D" parent="Shapes/RigidBodyConvexPolygon"]
+[node name="CollisionShape" type="CollisionShape3D" parent="Shapes/RigidBodyConvexPolygon" unique_id=1590052378]
 transform = Transform3D(2, 0, 0, 0, 2.95442, 0.347296, 0, -0.520945, 1.96962, 0, 0.35, 0)
 shape = SubResource("5")
 debug_color = Color(1, 1, 0, 1)
 
-[node name="RigidBodyConcavePolygon" type="StaticBody3D" parent="Shapes"]
+[node name="RigidBodyConcavePolygon" type="StaticBody3D" parent="Shapes" unique_id=1932806900]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -6, 3.934)
 
-[node name="CollisionShape" type="CollisionShape3D" parent="Shapes/RigidBodyConcavePolygon"]
+[node name="CollisionShape" type="CollisionShape3D" parent="Shapes/RigidBodyConcavePolygon" unique_id=462523558]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 shape = ExtResource("1")
 debug_color = Color(0, 0.533333, 1, 1)
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=66216047]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.38087, 11.8164)
 script = ExtResource("4")
 

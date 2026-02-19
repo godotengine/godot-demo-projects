@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dsqn0vre7npvu"]
+[gd_scene format=3 uid="uid://dsqn0vre7npvu"]
 
 [ext_resource type="Script" uid="uid://bctcyb2y6vuvd" path="res://player/player_controller.gd" id="1"]
 [ext_resource type="Script" uid="uid://c5dcvd5nvu0e0" path="res://player/player_state_machine.gd" id="2"]
@@ -41,67 +41,65 @@ _data = {
 &"walk": SubResource("3")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=36282354]
 script = ExtResource("1")
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." unique_id=352966517]
 script = ExtResource("2")
 
-[node name="Idle" type="Node" parent="StateMachine"]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=23509125]
 script = ExtResource("3")
 
-[node name="Move" type="Node" parent="StateMachine"]
+[node name="Move" type="Node" parent="StateMachine" unique_id=1181324630]
 script = ExtResource("4")
 
-[node name="Jump" type="Node" parent="StateMachine"]
+[node name="Jump" type="Node" parent="StateMachine" unique_id=1100846346]
 script = ExtResource("5")
 
-[node name="Stagger" type="Node" parent="StateMachine"]
+[node name="Stagger" type="Node" parent="StateMachine" unique_id=1877601174]
 script = ExtResource("6")
 
-[node name="Attack" type="Node" parent="StateMachine"]
+[node name="Attack" type="Node" parent="StateMachine" unique_id=656585786]
 script = ExtResource("7")
 
-[node name="Die" type="Node" parent="StateMachine"]
+[node name="Die" type="Node" parent="StateMachine" unique_id=130975603]
 script = ExtResource("8")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_vi1hn")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=952173775]
+libraries/ = SubResource("AnimationLibrary_vi1hn")
 
-[node name="Shadow" type="Sprite2D" parent="."]
+[node name="Shadow" type="Sprite2D" parent="." unique_id=548440157]
 self_modulate = Color(1, 1, 1, 0.361098)
 position = Vector2(0, -4)
 texture = ExtResource("9")
 
-[node name="BodyPivot" type="Marker2D" parent="."]
+[node name="BodyPivot" type="Marker2D" parent="." unique_id=969108435]
 
-[node name="Body" type="Sprite2D" parent="BodyPivot"]
+[node name="Body" type="Sprite2D" parent="BodyPivot" unique_id=1480506968]
 position = Vector2(0, -58)
 texture = ExtResource("10")
 
-[node name="BulletSpawn" type="Node2D" parent="BodyPivot"]
+[node name="BulletSpawn" type="Node2D" parent="BodyPivot" unique_id=1506281386]
 position = Vector2(0, -58)
 script = ExtResource("11")
 
-[node name="CooldownTimer" type="Timer" parent="BodyPivot/BulletSpawn"]
+[node name="CooldownTimer" type="Timer" parent="BodyPivot/BulletSpawn" unique_id=430476620]
 wait_time = 0.2
 one_shot = true
 
-[node name="WeaponPivot" type="Marker2D" parent="BodyPivot"]
+[node name="WeaponPivot" type="Marker2D" parent="BodyPivot" unique_id=1470035703]
 position = Vector2(0, -58)
 script = ExtResource("12")
 
-[node name="Offset" type="Marker2D" parent="BodyPivot/WeaponPivot"]
+[node name="Offset" type="Marker2D" parent="BodyPivot/WeaponPivot" unique_id=327354530]
 position = Vector2(110, 0)
 
-[node name="Sword" parent="BodyPivot/WeaponPivot/Offset" instance=ExtResource("13")]
+[node name="Sword" parent="BodyPivot/WeaponPivot/Offset" unique_id=2042083530 instance=ExtResource("13")]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1598865355]
 polygon = PackedVector2Array(-20, 0, -20, -20, 20, -20, 20, 0)
 
-[node name="StateNameDisplayer" type="Label" parent="."]
+[node name="StateNameDisplayer" type="Label" parent="." unique_id=1046719461]
 offset_left = -109.0
 offset_top = -180.0
 offset_right = 110.0

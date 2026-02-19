@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cu78or5wk08em"]
+[gd_scene format=3 uid="uid://cu78or5wk08em"]
 
 [ext_resource type="Material" uid="uid://e5sfyb0xjjrd" path="res://materials/grass.tres" id="4_gplko"]
 [ext_resource type="Material" uid="uid://sy3hdf5ueaet" path="res://materials/sand.tres" id="5_12jug"]
@@ -197,15 +197,15 @@ shader = ExtResource("11_aoush")
 shader_parameter/noise1 = SubResource("NoiseTexture2D_n04ac")
 shader_parameter/noise2 = SubResource("NoiseTexture2D_pn44s")
 
-[node name="WorldEnvironment" type="WorldEnvironment"]
+[node name="WorldEnvironment" type="WorldEnvironment" unique_id=1693764320]
 environment = SubResource("11")
 script = ExtResource("18")
 
-[node name="Plane" type="MeshInstance3D" parent="."]
+[node name="Plane" type="MeshInstance3D" parent="." unique_id=1194016645]
 layers = 2
 mesh = SubResource("14")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=174795189]
 transform = Transform3D(0.909487, -0.23874, 0.340349, 0, 0.818672, 0.574262, -0.415733, -0.522284, 0.744571, 3.9506, 3.39961, 3.54442)
 shadow_enabled = true
 shadow_bias = 0.04
@@ -213,7 +213,7 @@ directional_shadow_mode = 0
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 24.0
 
-[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+[node name="ReflectionProbe" type="ReflectionProbe" parent="." unique_id=1804909176]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 8)
 max_distance = 100.0
 size = Vector3(100, 100, 100)
@@ -221,187 +221,185 @@ box_projection = true
 enable_shadows = true
 ambient_mode = 0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_sin37")
-}
-autoplay = "animate_textures"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=355997233]
+libraries/ = SubResource("AnimationLibrary_sin37")
+autoplay = &"animate_textures"
 
-[node name="CameraHolder" type="Node3D" parent="."]
+[node name="CameraHolder" type="Node3D" parent="." unique_id=1936734524]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.125, 26)
 
-[node name="RotationX" type="Node3D" parent="CameraHolder"]
+[node name="RotationX" type="Node3D" parent="CameraHolder" unique_id=420307763]
 
-[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX"]
+[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX" unique_id=482803175]
 fov = 70.0
 
-[node name="Testers" type="Node3D" parent="."]
+[node name="Testers" type="Node3D" parent="." unique_id=412324460]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 
-[node name="NoiseTextureGrass" type="Node3D" parent="Testers"]
+[node name="NoiseTextureGrass" type="Node3D" parent="Testers" unique_id=1241315601]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, 22)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureGrass"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureGrass" unique_id=1341141862]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 mesh = SubResource("SphereMesh_be5u0")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("4_gplko")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureGrass"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureGrass" unique_id=701085404]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("BoxMesh_opf1g")
 surface_material_override/0 = ExtResource("4_gplko")
 
-[node name="NoiseTextureSand" type="Node3D" parent="Testers"]
+[node name="NoiseTextureSand" type="Node3D" parent="Testers" unique_id=1549056007]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, 18)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureSand"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureSand" unique_id=787916819]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 mesh = SubResource("SphereMesh_be5u0")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("5_12jug")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureSand"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureSand" unique_id=846457135]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("BoxMesh_opf1g")
 surface_material_override/0 = ExtResource("5_12jug")
 
-[node name="NoiseTextureWetConcrete" type="Node3D" parent="Testers"]
+[node name="NoiseTextureWetConcrete" type="Node3D" parent="Testers" unique_id=904471283]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, 14)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureWetConcrete"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureWetConcrete" unique_id=277852965]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 mesh = SubResource("SphereMesh_be5u0")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("6_q1c2f")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureWetConcrete"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureWetConcrete" unique_id=809267331]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("BoxMesh_opf1g")
 surface_material_override/0 = ExtResource("6_q1c2f")
 
-[node name="NoiseTextureBathroomFloorTile" type="Node3D" parent="Testers"]
+[node name="NoiseTextureBathroomFloorTile" type="Node3D" parent="Testers" unique_id=1949398314]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, 10)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureBathroomFloorTile"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureBathroomFloorTile" unique_id=1705105663]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 mesh = SubResource("SphereMesh_be5u0")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_aq2a1")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureBathroomFloorTile"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureBathroomFloorTile" unique_id=1187029559]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("BoxMesh_opf1g")
 surface_material_override/0 = SubResource("StandardMaterial3D_aq2a1")
 
-[node name="NoiseTextureIce" type="Node3D" parent="Testers"]
+[node name="NoiseTextureIce" type="Node3D" parent="Testers" unique_id=1825592128]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, 6)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureIce"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureIce" unique_id=295227985]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 mesh = SubResource("SphereMesh_be5u0")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("7_k1q1v")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureIce"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureIce" unique_id=301219956]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("BoxMesh_opf1g")
 surface_material_override/0 = ExtResource("7_k1q1v")
 
-[node name="NoiseTextureMarble" type="Node3D" parent="Testers"]
+[node name="NoiseTextureMarble" type="Node3D" parent="Testers" unique_id=458085733]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, 2)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureMarble"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureMarble" unique_id=379697742]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 mesh = SubResource("SphereMesh_be5u0")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("7_ebvqo")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureMarble"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureMarble" unique_id=129615232]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("BoxMesh_opf1g")
 surface_material_override/0 = ExtResource("7_ebvqo")
 
-[node name="NoiseTextureLava" type="Node3D" parent="Testers"]
+[node name="NoiseTextureLava" type="Node3D" parent="Testers" unique_id=934434398]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, -2)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureLava"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureLava" unique_id=1823982663]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 mesh = SubResource("SphereMesh_be5u0")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("8_jphcw")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureLava"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureLava" unique_id=154579504]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("BoxMesh_opf1g")
 surface_material_override/0 = ExtResource("8_jphcw")
 
-[node name="NoiseTextureGlass" type="Node3D" parent="Testers"]
+[node name="NoiseTextureGlass" type="Node3D" parent="Testers" unique_id=1732984147]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, -6)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureGlass"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTextureGlass" unique_id=750964613]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00275182, -0.244153, -0.000101089)
 mesh = SubResource("SphereMesh_be5u0")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("9_vei4q")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureGlass"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTextureGlass" unique_id=987470660]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("BoxMesh_opf1g")
 surface_material_override/0 = ExtResource("9_vei4q")
 
-[node name="NoiseTexturePixelArt" type="Node3D" parent="Testers"]
+[node name="NoiseTexturePixelArt" type="Node3D" parent="Testers" unique_id=2075457809]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, -10)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTexturePixelArt"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/NoiseTexturePixelArt" unique_id=1553272280]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00275182, -0.244153, -0.000101089)
 mesh = SubResource("SphereMesh_be5u0")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_k7qv4")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTexturePixelArt"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/NoiseTexturePixelArt" unique_id=2146216441]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("BoxMesh_opf1g")
 surface_material_override/0 = SubResource("StandardMaterial3D_k7qv4")
 
-[node name="ScriptGrid" type="Node3D" parent="Testers"]
+[node name="ScriptGrid" type="Node3D" parent="Testers" unique_id=806274278]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, -14)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ScriptGrid"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ScriptGrid" unique_id=702555558]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00275182, -0.244153, -0.000101089)
 mesh = SubResource("SphereMesh_be5u0")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_msbte")
 script = ExtResource("10_wwlcf")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/ScriptGrid"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/ScriptGrid" unique_id=1283154234]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("BoxMesh_opf1g")
 surface_material_override/0 = SubResource("StandardMaterial3D_msbte")
 
-[node name="ShaderPlasma" type="Node3D" parent="Testers"]
+[node name="ShaderPlasma" type="Node3D" parent="Testers" unique_id=2042851381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, -18)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ShaderPlasma"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ShaderPlasma" unique_id=814823822]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00275182, -0.244153, -0.000101089)
 mesh = SubResource("SphereMesh_be5u0")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_4ovjj")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/ShaderPlasma"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/ShaderPlasma" unique_id=1637533371]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("BoxMesh_opf1g")
 surface_material_override/0 = SubResource("StandardMaterial3D_4ovjj")
 
-[node name="SubViewport" type="SubViewport" parent="Testers/ShaderPlasma"]
+[node name="SubViewport" type="SubViewport" parent="Testers/ShaderPlasma" unique_id=187654210]
 size = Vector2i(1024, 1024)
 
-[node name="ColorRect" type="ColorRect" parent="Testers/ShaderPlasma/SubViewport"]
+[node name="ColorRect" type="ColorRect" parent="Testers/ShaderPlasma/SubViewport" unique_id=462133457]
 material = SubResource("ShaderMaterial_2p45w")
 offset_right = 1024.0
 offset_bottom = 1024.0
 
-[node name="TestName" type="Label" parent="."]
+[node name="TestName" type="Label" parent="." unique_id=1687917171]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -418,7 +416,7 @@ theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 
-[node name="Previous" type="Button" parent="."]
+[node name="Previous" type="Button" parent="." unique_id=1371620671]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -429,7 +427,7 @@ offset_bottom = -24.0
 grow_vertical = 0
 text = "«  Previous"
 
-[node name="Next" type="Button" parent="."]
+[node name="Next" type="Button" parent="." unique_id=2133515779]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0

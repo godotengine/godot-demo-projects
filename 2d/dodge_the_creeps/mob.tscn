@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cao351pllxqpa"]
+[gd_scene format=3 uid="uid://cao351pllxqpa"]
 
 [ext_resource type="Script" uid="uid://cypxpb8arjrqt" path="res://mob.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dun74wipekpfq" path="res://art/enemyFlyingAlt_1.png" id="2"]
@@ -48,20 +48,20 @@ animations = [{
 radius = 37.0
 height = 100.0
 
-[node name="Mob" type="RigidBody2D" groups=["mobs"]]
+[node name="Mob" type="RigidBody2D" unique_id=371809901 groups=["mobs"]]
 collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1998522389]
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("1")
 animation = &"walk"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1880423722]
 rotation = 1.5708
 shape = SubResource("2")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=959995349]
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

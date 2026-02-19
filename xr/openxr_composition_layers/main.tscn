@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cad101esb8m7f"]
+[gd_scene format=3 uid="uid://cad101esb8m7f"]
 
 [ext_resource type="Script" uid="uid://jcm4ubt4a6a6" path="res://main.gd" id="1_oboy8"]
 [ext_resource type="Script" uid="uid://dhuent4huy53h" path="res://start_vr.gd" id="1_xxyg6"]
@@ -51,59 +51,59 @@ size = Vector2(1000, 1000)
 subdivide_width = 15
 subdivide_depth = 15
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" unique_id=1128511697]
 script = ExtResource("1_oboy8")
 
-[node name="StartVR" type="Node3D" parent="."]
+[node name="StartVR" type="Node3D" parent="." unique_id=1472321650]
 script = ExtResource("1_xxyg6")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=654486107]
 environment = SubResource("Environment_niqal")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1144818775]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 
-[node name="UIViewport" type="SubViewport" parent="."]
+[node name="UIViewport" type="SubViewport" parent="." unique_id=449174553]
 disable_3d = true
 transparent_bg = true
 size = Vector2i(1024, 512)
 render_target_update_mode = 4
 
-[node name="UI" parent="UIViewport" instance=ExtResource("2_ee2ui")]
+[node name="UI" parent="UIViewport" unique_id=1144641576 instance=ExtResource("2_ee2ui")]
 
-[node name="XROrigin3D" type="XROrigin3D" parent="."]
+[node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=1440393398]
 current = true
 
-[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=1374880957]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 current = true
 
-[node name="LeftHand" type="XRController3D" parent="XROrigin3D"]
+[node name="LeftHand" type="XRController3D" parent="XROrigin3D" unique_id=946530855]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"left_hand"
 pose = &"aim"
 show_when_tracked = true
 
-[node name="HandMesh" type="MeshInstance3D" parent="XROrigin3D/LeftHand"]
+[node name="HandMesh" type="MeshInstance3D" parent="XROrigin3D/LeftHand" unique_id=1229462102]
 mesh = SubResource("SphereMesh_078nk")
 
-[node name="Pointer" parent="XROrigin3D/LeftHand" instance=ExtResource("4_qvtse")]
+[node name="Pointer" parent="XROrigin3D/LeftHand" unique_id=309689604 instance=ExtResource("4_qvtse")]
 visible = false
 material_override = SubResource("ShaderMaterial_272bh")
 
-[node name="RightHand" type="XRController3D" parent="XROrigin3D"]
+[node name="RightHand" type="XRController3D" parent="XROrigin3D" unique_id=1280236101]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
 tracker = &"right_hand"
 pose = &"aim"
 show_when_tracked = true
 
-[node name="HandMesh" type="MeshInstance3D" parent="XROrigin3D/RightHand"]
+[node name="HandMesh" type="MeshInstance3D" parent="XROrigin3D/RightHand" unique_id=1357397072]
 mesh = SubResource("SphereMesh_078nk")
 
-[node name="Pointer" parent="XROrigin3D/RightHand" instance=ExtResource("4_qvtse")]
+[node name="Pointer" parent="XROrigin3D/RightHand" unique_id=937136687 instance=ExtResource("4_qvtse")]
 material_override = SubResource("ShaderMaterial_5vw27")
 
-[node name="OpenXRCompositionLayerEquirect" type="OpenXRCompositionLayerEquirect" parent="XROrigin3D" node_paths=PackedStringArray("layer_viewport", "controller")]
+[node name="OpenXRCompositionLayerEquirect" type="OpenXRCompositionLayerEquirect" parent="XROrigin3D" unique_id=2033815361 node_paths=PackedStringArray("layer_viewport", "controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 layer_viewport = NodePath("../../UIViewport")
 alpha_blend = true
@@ -113,7 +113,7 @@ lower_vertical_angle = 0.436332
 script = ExtResource("4_211j6")
 controller = NodePath("../RightHand")
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1374557979]
 mesh = SubResource("PlaneMesh_leufb")
 
 [connection signal="button_pressed" from="XROrigin3D/LeftHand" to="." method="_on_left_hand_button_pressed"]

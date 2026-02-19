@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dnbdk0yqxr2wy"]
+[gd_scene format=3 uid="uid://dnbdk0yqxr2wy"]
 
 [ext_resource type="PackedScene" uid="uid://dpgfy033dc715" path="res://town/model/town_model.gltf" id="1_amwer"]
 [ext_resource type="Script" uid="uid://di7cre4unhk3f" path="res://town/town_scene.gd" id="1_gxe8p"]
@@ -15,7 +15,6 @@ background_mode = 2
 sky = SubResource("Sky_1gf0c")
 tonemap_mode = 4
 glow_intensity = 0.5
-glow_blend_mode = 1
 fog_enabled = true
 fog_light_color = Color(0.62, 0.6014, 0.6014, 1)
 fog_density = 0.0015
@@ -45,13 +44,13 @@ gradient = SubResource("Gradient_1rnu2")
 width = 128
 height = 128
 
-[node name="TownScene" type="Node3D"]
+[node name="TownScene" type="Node3D" unique_id=493478138]
 script = ExtResource("1_gxe8p")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=805408255]
 environment = SubResource("Environment_dauhq")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=971070256]
 transform = Transform3D(-0.793955, 0.350561, -0.496732, -0.295414, 0.491651, 0.819152, 0.531381, 0.797111, -0.286788, 11.0084, 12.3453, -31.3148)
 light_energy = 1.45
 shadow_enabled = true
@@ -60,10 +59,10 @@ shadow_blur = 1.5
 directional_shadow_mode = 0
 directional_shadow_max_distance = 80.0
 
-[node name="ArtificialLights" type="Node3D" parent="."]
+[node name="ArtificialLights" type="Node3D" parent="." unique_id=293691700]
 visible = false
 
-[node name="OmniLight3D" type="OmniLight3D" parent="ArtificialLights"]
+[node name="OmniLight3D" type="OmniLight3D" parent="ArtificialLights" unique_id=838070728]
 transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, 38.1028, 10.5868, 14.8252)
 light_color = Color(1, 0.941176, 0.705882, 1)
 light_energy = 2.0
@@ -76,7 +75,7 @@ distance_fade_shadow = 35.0
 distance_fade_length = 15.0
 omni_range = 15.0
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="ArtificialLights"]
+[node name="OmniLight3D2" type="OmniLight3D" parent="ArtificialLights" unique_id=718931949]
 transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, 13.1028, 11.5868, 20.8252)
 light_color = Color(1, 0.941176, 0.705882, 1)
 light_energy = 2.0
@@ -89,7 +88,7 @@ distance_fade_shadow = 35.0
 distance_fade_length = 15.0
 omni_range = 15.0
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="ArtificialLights"]
+[node name="OmniLight3D3" type="OmniLight3D" parent="ArtificialLights" unique_id=1930899254]
 transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, 14.1028, 11.5868, -6.1748)
 light_color = Color(1, 0.941176, 0.705882, 1)
 light_energy = 2.0
@@ -102,7 +101,7 @@ distance_fade_shadow = 35.0
 distance_fade_length = 15.0
 omni_range = 15.0
 
-[node name="OmniLight3D4" type="OmniLight3D" parent="ArtificialLights"]
+[node name="OmniLight3D4" type="OmniLight3D" parent="ArtificialLights" unique_id=40172455]
 transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, 36.1028, 13.5868, -7.1748)
 light_color = Color(1, 0.941176, 0.705882, 1)
 light_energy = 2.0
@@ -115,7 +114,7 @@ distance_fade_shadow = 35.0
 distance_fade_length = 15.0
 omni_range = 15.0
 
-[node name="OmniLight3D5" type="OmniLight3D" parent="ArtificialLights"]
+[node name="OmniLight3D5" type="OmniLight3D" parent="ArtificialLights" unique_id=1491319232]
 transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, 45.1028, 13.5868, -17.1748)
 light_color = Color(1, 0.941176, 0.705882, 1)
 light_energy = 2.0
@@ -128,7 +127,7 @@ distance_fade_shadow = 35.0
 distance_fade_length = 15.0
 omni_range = 15.0
 
-[node name="OmniLight3D6" type="OmniLight3D" parent="ArtificialLights"]
+[node name="OmniLight3D6" type="OmniLight3D" parent="ArtificialLights" unique_id=1638129001]
 transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, -20.8972, 7.58679, 4.8252)
 light_color = Color(1, 0.941176, 0.705882, 1)
 light_energy = 2.0
@@ -141,7 +140,7 @@ distance_fade_shadow = 35.0
 distance_fade_length = 15.0
 omni_range = 15.0
 
-[node name="OmniLight3D7" type="OmniLight3D" parent="ArtificialLights"]
+[node name="OmniLight3D7" type="OmniLight3D" parent="ArtificialLights" unique_id=399480720]
 transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, -15.8972, 7.58679, 20.8252)
 light_color = Color(1, 0.941176, 0.705882, 1)
 light_energy = 2.0
@@ -154,7 +153,7 @@ distance_fade_shadow = 35.0
 distance_fade_length = 15.0
 omni_range = 15.0
 
-[node name="OmniLight3D8" type="OmniLight3D" parent="ArtificialLights"]
+[node name="OmniLight3D8" type="OmniLight3D" parent="ArtificialLights" unique_id=1280757016]
 transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, -44.8972, 10.5868, 4.8252)
 light_color = Color(1, 0.941176, 0.705882, 1)
 light_energy = 2.0
@@ -167,7 +166,7 @@ distance_fade_shadow = 35.0
 distance_fade_length = 15.0
 omni_range = 15.0
 
-[node name="OmniLight3D9" type="OmniLight3D" parent="ArtificialLights"]
+[node name="OmniLight3D9" type="OmniLight3D" parent="ArtificialLights" unique_id=1568378297]
 transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, -43.8972, 10.5868, -15.1748)
 light_color = Color(1, 0.941176, 0.705882, 1)
 light_energy = 2.0
@@ -180,7 +179,7 @@ distance_fade_shadow = 35.0
 distance_fade_length = 15.0
 omni_range = 15.0
 
-[node name="OmniLight3D10" type="OmniLight3D" parent="ArtificialLights"]
+[node name="OmniLight3D10" type="OmniLight3D" parent="ArtificialLights" unique_id=344140724]
 transform = Transform3D(0.747779, 0.367885, -0.552709, 0, 0.832459, 0.554087, 0.663947, -0.414335, 0.622495, -15.7972, 3.58679, -71.175)
 light_color = Color(1, 0.941176, 0.705882, 1)
 light_energy = 2.0
@@ -193,24 +192,24 @@ distance_fade_shadow = 35.0
 distance_fade_length = 15.0
 omni_range = 15.0
 
-[node name="InstancePos" type="Marker3D" parent="."]
+[node name="InstancePos" type="Marker3D" parent="." unique_id=1526667576]
 transform = Transform3D(3.57628e-07, 0, -1, 0, 1, 0, 1, 0, 3.57628e-07, 35.48, 8.72405, 14.335)
 
-[node name="TownModel" parent="." instance=ExtResource("1_amwer")]
+[node name="TownModel" parent="." unique_id=164213113 instance=ExtResource("1_amwer")]
 
-[node name="GrassMesh" parent="TownModel/Terrain" index="0"]
+[node name="GrassMesh" parent="TownModel/Terrain" parent_id_path=PackedInt32Array(164213113, 1537880450) index="0" unique_id=1999125698]
 surface_material_override/0 = ExtResource("2_ubld8")
 
-[node name="RoadMesh" parent="TownModel/Terrain" index="2"]
+[node name="RoadMesh" parent="TownModel/Terrain" parent_id_path=PackedInt32Array(164213113, 1537880450) index="2" unique_id=952483985]
 surface_material_override/0 = ExtResource("3_8s61a")
 
-[node name="OuterGroundMesh" parent="TownModel/Terrain" index="4"]
+[node name="OuterGroundMesh" parent="TownModel/Terrain" parent_id_path=PackedInt32Array(164213113, 1537880450) index="4" unique_id=580083069]
 surface_material_override/0 = ExtResource("2_ubld8")
 
-[node name="RacetrackMesh" parent="TownModel/Racetrack/RacetrackMain" index="0"]
+[node name="RacetrackMesh" parent="TownModel/Racetrack/RacetrackMain" parent_id_path=PackedInt32Array(164213113, 1117447578) index="0" unique_id=434904741]
 surface_material_override/0 = ExtResource("3_8s61a")
 
-[node name="Spedometer" type="Button" parent="."]
+[node name="Spedometer" type="Button" parent="." unique_id=1863769307]
 custom_minimum_size = Vector2(140, 40)
 anchors_preset = 3
 anchor_left = 1.0
@@ -231,21 +230,21 @@ shortcut_in_tooltip = false
 text = "Speed: ???"
 script = ExtResource("2")
 
-[node name="Back" type="Button" parent="."]
+[node name="Back" type="Button" parent="." unique_id=1470227157]
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 92.0
 offset_bottom = 56.0
 text = "« Back"
 
-[node name="TouchTurnLeft" type="Control" parent="."]
+[node name="TouchTurnLeft" type="Control" parent="." unique_id=499092116]
 layout_mode = 3
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 grow_vertical = 2
 
-[node name="TurnLeft" type="TouchScreenButton" parent="TouchTurnLeft"]
+[node name="TurnLeft" type="TouchScreenButton" parent="TouchTurnLeft" unique_id=807206304]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(0, -256)
 scale = Vector2(2.5, 4)
@@ -255,7 +254,7 @@ passby_press = true
 action = "turn_left"
 visibility_mode = 1
 
-[node name="TouchReverse" type="Control" parent="."]
+[node name="TouchReverse" type="Control" parent="." unique_id=893583860]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -265,7 +264,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Reverse" type="TouchScreenButton" parent="TouchReverse"]
+[node name="Reverse" type="TouchScreenButton" parent="TouchReverse" unique_id=1881902857]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(-256, -256)
 scale = Vector2(4, 4)
@@ -275,7 +274,7 @@ passby_press = true
 action = "reverse"
 visibility_mode = 1
 
-[node name="TouchTurnRight" type="Control" parent="."]
+[node name="TouchTurnRight" type="Control" parent="." unique_id=1863560338]
 layout_mode = 3
 anchors_preset = 6
 anchor_left = 1.0
@@ -285,7 +284,7 @@ anchor_bottom = 0.5
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="TurnRight" type="TouchScreenButton" parent="TouchTurnRight"]
+[node name="TurnRight" type="TouchScreenButton" parent="TouchTurnRight" unique_id=239937827]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(-320, -256)
 scale = Vector2(2.5, 4)

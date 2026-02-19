@@ -1,28 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqayqu4cd46ms"]
+[gd_scene format=3 uid="uid://bqayqu4cd46ms"]
 
 [ext_resource type="PackedScene" uid="uid://ep13situ5bnn" path="res://chat.tscn" id="1_i673i"]
 [ext_resource type="Script" uid="uid://bgxrirtmalem3" path="res://server.gd" id="1_urpfw"]
 [ext_resource type="Script" uid="uid://sgtvdyjovl50" path="res://websocket/WebSocketServer.gd" id="3_0eqsy"]
 
-[node name="Server" instance=ExtResource("1_i673i")]
+[node name="Server" unique_id=11165687 instance=ExtResource("1_i673i")]
 script = ExtResource("1_urpfw")
 
-[node name="WebSocketServer" type="Node" parent="." index="0"]
+[node name="WebSocketServer" type="Node" parent="." index="0" unique_id=1069643141]
 script = ExtResource("3_0eqsy")
 supported_protocols = PackedStringArray("demo-chat")
 
-[node name="Panel" parent="." index="1"]
+[node name="Panel" parent="." index="1" unique_id=482541183]
 layout_mode = 1
 anchors_preset = 15
 
-[node name="VBoxContainer" parent="Panel" index="0"]
+[node name="VBoxContainer" parent="Panel" index="0" unique_id=1424037224]
 layout_mode = 1
 anchors_preset = 15
 
-[node name="Host" parent="Panel/VBoxContainer/Connect" index="0"]
+[node name="Host" parent="Panel/VBoxContainer/Connect" parent_id_path=PackedInt32Array(2004823531) index="0" unique_id=1239500471]
 visible = false
 
-[node name="Connect" parent="Panel/VBoxContainer/Connect" index="1"]
+[node name="Connect" parent="Panel/VBoxContainer/Connect" parent_id_path=PackedInt32Array(2004823531) index="1" unique_id=528645539]
 visible = false
 
 [connection signal="client_connected" from="WebSocketServer" to="." method="_on_web_socket_server_client_connected"]

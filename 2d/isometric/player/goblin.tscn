@@ -1,4 +1,4 @@
-[gd_scene load_steps=264 format=3 uid="uid://ipxyktw0t1p0"]
+[gd_scene format=3 uid="uid://ipxyktw0t1p0"]
 
 [ext_resource type="Texture2D" uid="uid://clxu2bgvw8xe" path="res://player/goblin.png" id="1"]
 [ext_resource type="Script" uid="uid://cojxlmw1wb6qf" path="res://player/goblin.gd" id="2"]
@@ -1894,31 +1894,31 @@ height = 14.0
 [sub_resource type="OccluderPolygon2D" id="661"]
 polygon = PackedVector2Array(16.25, 18.75, 18.75, 36.25, 15, 38.75, 6.25, 42.5, -5, 42.5, -13.75, 41.25, -18.75, 37.5, -15, 20)
 
-[node name="Goblin" type="CharacterBody2D"]
+[node name="Goblin" type="CharacterBody2D" unique_id=1654130240]
 script = ExtResource("2")
 
-[node name="Shadow" type="Sprite2D" parent="."]
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1168527690]
 modulate = Color(0.129412, 0.0745098, 0.192157, 0.647059)
 position = Vector2(0, -0.406251)
 scale = Vector2(0.78125, 0.362305)
 texture = SubResource("663")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=289254656]
 position = Vector2(0, -35)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("260")
 animation = &"front_idle"
 frame = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1393437622]
 position = Vector2(0, -7)
 rotation = 1.5708
 shape = SubResource("1")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=483432850]
 process_callback = 0
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=431374245]
 visible = false
 light_mask = 16
 position = Vector2(0, -31)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbbihkbue04fe"]
+[gd_scene format=3 uid="uid://cbbihkbue04fe"]
 
 [ext_resource type="Script" uid="uid://bs0hb3m2215pl" path="res://addons/node25d/node_25d.gd" id="1"]
 [ext_resource type="Script" uid="uid://br0dxaiqp2vnh" path="res://assets/player/player_math_25d.gd" id="3"]
@@ -7,20 +7,20 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b17hs"]
 
-[node name="Player25D" type="Node2D"]
+[node name="Player25D" type="Node2D" unique_id=1645296961]
 z_index = 100
 position = Vector2(0, -11.313708)
 script = ExtResource("1")
 spatial_position = Vector3(0, 0.5, 0)
 
-[node name="PlayerMath25D" type="CharacterBody3D" parent="."]
+[node name="PlayerMath25D" type="CharacterBody3D" parent="." unique_id=862159579]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("3")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerMath25D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerMath25D" unique_id=1078965718]
 shape = SubResource("CapsuleShape3D_b17hs")
 
-[node name="PlayerSprite" type="Sprite2D" parent="."]
+[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=487507907]
 z_index = 1
 scale = Vector2(1, 0.75)
 texture = ExtResource("4")
@@ -29,4 +29,4 @@ hframes = 2
 vframes = 5
 script = ExtResource("5")
 
-[node name="PlayerCamera" type="Camera2D" parent="PlayerSprite"]
+[node name="PlayerCamera" type="Camera2D" parent="PlayerSprite" unique_id=2138833322]

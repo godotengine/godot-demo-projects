@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://djtl7wpimep6k"]
+[gd_scene format=3 uid="uid://djtl7wpimep6k"]
 
 [ext_resource type="Texture2D" uid="uid://bfgsucq0jx2cb" path="res://textures/paint.png" id="3_2nulf"]
 [ext_resource type="PackedScene" uid="uid://chlh878qnorc7" path="res://thin_lines.tscn" id="3_5ehjl"]
@@ -536,22 +536,20 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 offsets = PackedFloat32Array(0, 0.333, 0.667, 1)
 colors = PackedColorArray(1, 0.17, 0.17, 1, 1, 0.816, 0.08, 1, 0.644, 1, 0.11, 1, 0.14, 0.885333, 1, 1)
 
-[node name="AntiAliasingTestScene" type="WorldEnvironment"]
+[node name="AntiAliasingTestScene" type="WorldEnvironment" unique_id=530522218]
 environment = SubResource("11")
 script = ExtResource("18")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_ecfcr")
-}
-autoplay = "move"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=95807823]
+libraries/ = SubResource("AnimationLibrary_ecfcr")
+autoplay = &"move"
 
-[node name="Plane" type="MeshInstance3D" parent="."]
+[node name="Plane" type="MeshInstance3D" parent="." unique_id=2060213786]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -38)
 layers = 2
 mesh = SubResource("14")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=452359052]
 transform = Transform3D(0.909487, -0.23874, 0.340349, 0, 0.818672, 0.574262, -0.415733, -0.522284, 0.744571, 3.9506, 3.39961, 3.54442)
 shadow_enabled = true
 shadow_bias = 0.03
@@ -561,159 +559,159 @@ directional_shadow_mode = 0
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 25.0
 
-[node name="CameraHolder" type="Node3D" parent="."]
+[node name="CameraHolder" type="Node3D" parent="." unique_id=1393058118]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.125, 0)
 
-[node name="RotationX" type="Node3D" parent="CameraHolder"]
+[node name="RotationX" type="Node3D" parent="CameraHolder" unique_id=235419452]
 
-[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX"]
+[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX" unique_id=754425541]
 fov = 70.0
 
-[node name="Testers" type="Node3D" parent="."]
+[node name="Testers" type="Node3D" parent="." unique_id=1144675124]
 
-[node name="StaticObject" type="Node3D" parent="Testers"]
+[node name="StaticObject" type="Node3D" parent="Testers" unique_id=1043244404]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/StaticObject"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/StaticObject" unique_id=1591387621]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0)
 mesh = SubResource("BoxMesh_gwe28")
 surface_material_override/0 = SubResource("StandardMaterial3D_x42ya")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/StaticObject"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testers/StaticObject" unique_id=1259408294]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, 0)
 mesh = SubResource("BoxMesh_gwe28")
 surface_material_override/0 = SubResource("StandardMaterial3D_6yfdy")
 
-[node name="ThinLines" parent="Testers" instance=ExtResource("3_5ehjl")]
+[node name="ThinLines" parent="Testers" unique_id=393135708 instance=ExtResource("3_5ehjl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 
-[node name="Plane" type="MeshInstance3D" parent="Testers/ThinLines"]
+[node name="Plane" type="MeshInstance3D" parent="Testers/ThinLines" unique_id=1895135036]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.002, 0)
 mesh = SubResource("PlaneMesh_nllvr")
 skeleton = NodePath("../../TransparencyAlphaBlend")
 surface_material_override/0 = SubResource("StandardMaterial3D_bjmm1")
 
-[node name="TransparencyAlphaBlend" type="Node3D" parent="Testers"]
+[node name="TransparencyAlphaBlend" type="Node3D" parent="Testers" unique_id=89275740]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Testers/TransparencyAlphaBlend"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Testers/TransparencyAlphaBlend" unique_id=1872846831]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.501, 0)
 mesh = SubResource("BoxMesh_gwe28")
 surface_material_override/0 = SubResource("StandardMaterial3D_qcf1j")
 
-[node name="Plane" type="MeshInstance3D" parent="Testers/TransparencyAlphaBlend"]
+[node name="Plane" type="MeshInstance3D" parent="Testers/TransparencyAlphaBlend" unique_id=1426789894]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.002, 0)
 mesh = SubResource("PlaneMesh_nllvr")
 surface_material_override/0 = SubResource("StandardMaterial3D_bjmm1")
 
-[node name="TransparencyAlphaScissor" type="Node3D" parent="Testers"]
+[node name="TransparencyAlphaScissor" type="Node3D" parent="Testers" unique_id=1462698431]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Testers/TransparencyAlphaScissor"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Testers/TransparencyAlphaScissor" unique_id=993192176]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.501, 0)
 mesh = SubResource("BoxMesh_gwe28")
 surface_material_override/0 = SubResource("StandardMaterial3D_xbqpl")
 
-[node name="Plane2" type="MeshInstance3D" parent="Testers/TransparencyAlphaScissor"]
+[node name="Plane2" type="MeshInstance3D" parent="Testers/TransparencyAlphaScissor" unique_id=1326712739]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.002, 0)
 mesh = SubResource("PlaneMesh_nllvr")
 skeleton = NodePath("../../TransparencyAlphaBlend")
 surface_material_override/0 = SubResource("StandardMaterial3D_bjmm1")
 
-[node name="TransparencyAlphaScissorAntialiasingBlend" type="Node3D" parent="Testers"]
+[node name="TransparencyAlphaScissorAntialiasingBlend" type="Node3D" parent="Testers" unique_id=1711482820]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Testers/TransparencyAlphaScissorAntialiasingBlend"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Testers/TransparencyAlphaScissorAntialiasingBlend" unique_id=1946058395]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.501, 0)
 mesh = SubResource("BoxMesh_gwe28")
 surface_material_override/0 = SubResource("StandardMaterial3D_txrd8")
 
-[node name="Plane3" type="MeshInstance3D" parent="Testers/TransparencyAlphaScissorAntialiasingBlend"]
+[node name="Plane3" type="MeshInstance3D" parent="Testers/TransparencyAlphaScissorAntialiasingBlend" unique_id=1447523337]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.002, 0)
 mesh = SubResource("PlaneMesh_nllvr")
 skeleton = NodePath("../../TransparencyAlphaBlend")
 surface_material_override/0 = SubResource("StandardMaterial3D_bjmm1")
 
-[node name="TransparencyAlphaScissorAntialiasingClip" type="Node3D" parent="Testers"]
+[node name="TransparencyAlphaScissorAntialiasingClip" type="Node3D" parent="Testers" unique_id=88645719]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Testers/TransparencyAlphaScissorAntialiasingClip"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Testers/TransparencyAlphaScissorAntialiasingClip" unique_id=1956943563]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.501, 0)
 mesh = SubResource("BoxMesh_gwe28")
 surface_material_override/0 = SubResource("StandardMaterial3D_xhqpm")
 
-[node name="Plane4" type="MeshInstance3D" parent="Testers/TransparencyAlphaScissorAntialiasingClip"]
+[node name="Plane4" type="MeshInstance3D" parent="Testers/TransparencyAlphaScissorAntialiasingClip" unique_id=583190729]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.002, 0)
 mesh = SubResource("PlaneMesh_nllvr")
 skeleton = NodePath("../../TransparencyAlphaBlend")
 surface_material_override/0 = SubResource("StandardMaterial3D_bjmm1")
 
-[node name="TransparencyAlphaHash" type="Node3D" parent="Testers"]
+[node name="TransparencyAlphaHash" type="Node3D" parent="Testers" unique_id=725670392]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Testers/TransparencyAlphaHash"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Testers/TransparencyAlphaHash" unique_id=2017646659]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.501, 0)
 mesh = SubResource("BoxMesh_gwe28")
 surface_material_override/0 = SubResource("StandardMaterial3D_mjkwh")
 
-[node name="Plane5" type="MeshInstance3D" parent="Testers/TransparencyAlphaHash"]
+[node name="Plane5" type="MeshInstance3D" parent="Testers/TransparencyAlphaHash" unique_id=253309038]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.002, 0)
 mesh = SubResource("PlaneMesh_nllvr")
 skeleton = NodePath("../../TransparencyAlphaBlend")
 surface_material_override/0 = SubResource("StandardMaterial3D_bjmm1")
 
-[node name="TransparencyDepthPrepass" type="Node3D" parent="Testers"]
+[node name="TransparencyDepthPrepass" type="Node3D" parent="Testers" unique_id=1141388027]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -28)
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Testers/TransparencyDepthPrepass"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Testers/TransparencyDepthPrepass" unique_id=481839879]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.501, 0)
 mesh = SubResource("BoxMesh_gwe28")
 surface_material_override/0 = SubResource("StandardMaterial3D_f4l4p")
 
-[node name="Plane6" type="MeshInstance3D" parent="Testers/TransparencyDepthPrepass"]
+[node name="Plane6" type="MeshInstance3D" parent="Testers/TransparencyDepthPrepass" unique_id=2095977670]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.002, 0)
 mesh = SubResource("PlaneMesh_nllvr")
 skeleton = NodePath("../../TransparencyAlphaBlend")
 surface_material_override/0 = SubResource("StandardMaterial3D_bjmm1")
 
-[node name="ComplexObject" parent="Testers" instance=ExtResource("3_fa2bl")]
+[node name="ComplexObject" parent="Testers" unique_id=2138220670 instance=ExtResource("3_fa2bl")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.35, -32)
 
-[node name="PointRendering" type="Node3D" parent="Testers"]
+[node name="PointRendering" type="Node3D" parent="Testers" unique_id=826685807]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -36)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/PointRendering"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/PointRendering" unique_id=748734400]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("SphereMesh_kfkna")
 surface_material_override/0 = SubResource("StandardMaterial3D_rfedc")
 
-[node name="MovingObject" type="Node3D" parent="Testers"]
+[node name="MovingObject" type="Node3D" parent="Testers" unique_id=1084167816]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/MovingObject"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/MovingObject" unique_id=1491356497]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_gwe28")
 surface_material_override/0 = SubResource("StandardMaterial3D_x42ya")
 
-[node name="RotatingObject" type="Node3D" parent="Testers"]
+[node name="RotatingObject" type="Node3D" parent="Testers" unique_id=800998895]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -44)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/RotatingObject"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/RotatingObject" unique_id=847251562]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_gwe28")
 surface_material_override/0 = SubResource("StandardMaterial3D_x42ya")
 
-[node name="ScalingObject" type="Node3D" parent="Testers"]
+[node name="ScalingObject" type="Node3D" parent="Testers" unique_id=1966930741]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -48)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ScalingObject"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ScalingObject" unique_id=347514637]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_gwe28")
 surface_material_override/0 = SubResource("StandardMaterial3D_x42ya")
 
-[node name="StaticCPUParticles" type="Node3D" parent="Testers"]
+[node name="StaticCPUParticles" type="Node3D" parent="Testers" unique_id=289527952]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -52)
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="Testers/StaticCPUParticles"]
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Testers/StaticCPUParticles" unique_id=841035782]
 amount = 100
 draw_order = 1
 mesh = SubResource("QuadMesh_imrxg")
@@ -726,7 +724,7 @@ scale_amount_max = 0.25
 scale_amount_curve = SubResource("Curve_v0n7y")
 color_ramp = SubResource("Gradient_e7gyf")
 
-[node name="CPUParticles3D2" type="CPUParticles3D" parent="Testers/StaticCPUParticles/CPUParticles3D"]
+[node name="CPUParticles3D2" type="CPUParticles3D" parent="Testers/StaticCPUParticles/CPUParticles3D" unique_id=1222133372]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.2, 0)
 amount = 20
 mesh = SubResource("BoxMesh_88317")
@@ -740,10 +738,10 @@ scale_amount_min = 0.25
 scale_amount_max = 2.5
 scale_amount_curve = SubResource("Curve_sutnd")
 
-[node name="MovingCPUParticles" type="Node3D" parent="Testers"]
+[node name="MovingCPUParticles" type="Node3D" parent="Testers" unique_id=150565616]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -56)
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="Testers/MovingCPUParticles"]
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Testers/MovingCPUParticles" unique_id=901428783]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 amount = 100
 lifetime = 0.5
@@ -761,7 +759,7 @@ scale_amount_curve = SubResource("Curve_v0n7y")
 color = Color(6, 2, 6, 1)
 color_ramp = SubResource("Gradient_e7gyf")
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="Testers/MovingCPUParticles/CPUParticles3D"]
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Testers/MovingCPUParticles/CPUParticles3D" unique_id=135824526]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 amount = 20
 mesh = SubResource("BoxMesh_88317")
@@ -771,10 +769,10 @@ initial_velocity_min = 2.5
 initial_velocity_max = 2.5
 scale_amount_curve = SubResource("Curve_sutnd")
 
-[node name="StaticGPUParticles" type="Node3D" parent="Testers"]
+[node name="StaticGPUParticles" type="Node3D" parent="Testers" unique_id=1226128821]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -60)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/StaticGPUParticles"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/StaticGPUParticles" unique_id=811339876]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 amount = 50
 lifetime = 2.0
@@ -784,14 +782,14 @@ visibility_aabb = AABB(-1.63511, -1.25001, -1.31512, 3.0892, 2.15487, 2.91765)
 process_material = SubResource("ParticlesMaterial_ft0gs")
 draw_pass_1 = SubResource("BoxMesh_88317")
 
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Testers/StaticGPUParticles"]
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Testers/StaticGPUParticles" unique_id=1061587751]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 size = Vector3(4, 2, 4)
 
-[node name="MovingGPUParticles" type="Node3D" parent="Testers"]
+[node name="MovingGPUParticles" type="Node3D" parent="Testers" unique_id=161886590]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -64)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/MovingGPUParticles"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Testers/MovingGPUParticles" unique_id=2090736243]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 extra_cull_margin = 3.0
 amount = 50
@@ -802,47 +800,47 @@ visibility_aabb = AABB(-1.50087, -1.25001, -1.4745, 3.19423, 2.13905, 3.02308)
 process_material = SubResource("ParticlesMaterial_ft0gs")
 draw_pass_1 = SubResource("BoxMesh_88317")
 
-[node name="GPUParticlesCollisionBox3D2" type="GPUParticlesCollisionBox3D" parent="Testers/MovingGPUParticles"]
+[node name="GPUParticlesCollisionBox3D2" type="GPUParticlesCollisionBox3D" parent="Testers/MovingGPUParticles" unique_id=211868659]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 size = Vector3(4, 2, 4)
 
-[node name="MovingDecal" type="Node3D" parent="Testers"]
+[node name="MovingDecal" type="Node3D" parent="Testers" unique_id=531109991]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -68)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/MovingDecal"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/MovingDecal" unique_id=1105826705]
 mesh = SubResource("SphereMesh_v4x6x")
 
-[node name="Decal" type="Decal" parent="Testers/MovingDecal"]
-transform = Transform3D(-0.70710397, -1.0132787e-06, -0.7071092, 0.18301255, 0.9659256, -0.1830126, 0.68301517, -0.25881886, -0.68300986, 1, 1, 1)
+[node name="Decal" type="Decal" parent="Testers/MovingDecal" unique_id=1186019737]
+transform = Transform3D(-0.70710397, -1.0132786e-06, -0.7071092, 0.18301255, 0.9659255, -0.1830126, 0.68301517, -0.25881884, -0.68300986, 1, 1, 1)
 texture_albedo = ExtResource("3_2nulf")
 texture_normal = ExtResource("4_fdfpv")
 
-[node name="ScrollingUVAnimation" type="Node3D" parent="Testers"]
+[node name="ScrollingUVAnimation" type="Node3D" parent="Testers" unique_id=1997952159]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -72)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ScrollingUVAnimation"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ScrollingUVAnimation" unique_id=1730329080]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("CylinderMesh_5qy8k")
 surface_material_override/0 = SubResource("StandardMaterial3D_53dqy")
 
-[node name="ScrollingUVCustomShader" type="Node3D" parent="Testers"]
+[node name="ScrollingUVCustomShader" type="Node3D" parent="Testers" unique_id=782085995]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -76)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ScrollingUVCustomShader"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/ScrollingUVCustomShader" unique_id=1082748319]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("CylinderMesh_5qy8k")
 surface_material_override/0 = SubResource("ShaderMaterial_ltvd2")
 
-[node name="CustomShaderVertexMovement" type="Node3D" parent="Testers"]
+[node name="CustomShaderVertexMovement" type="Node3D" parent="Testers" unique_id=270301858]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -80)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/CustomShaderVertexMovement"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testers/CustomShaderVertexMovement" unique_id=245013320]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 extra_cull_margin = 1.0
 mesh = SubResource("CylinderMesh_oopii")
 surface_material_override/0 = SubResource("ShaderMaterial_fbaw5")
 
-[node name="TestName" type="Label" parent="."]
+[node name="TestName" type="Label" parent="." unique_id=379288432]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -857,7 +855,7 @@ theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 
-[node name="Previous" type="Button" parent="."]
+[node name="Previous" type="Button" parent="." unique_id=1733248100]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -867,7 +865,7 @@ offset_right = 135.0
 offset_bottom = -24.0
 text = "«  Previous"
 
-[node name="Next" type="Button" parent="."]
+[node name="Next" type="Button" parent="." unique_id=1662216547]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -879,17 +877,17 @@ offset_right = -24.0
 offset_bottom = -24.0
 text = "Next  »"
 
-[node name="Antialiasing" type="VBoxContainer" parent="."]
+[node name="Antialiasing" type="VBoxContainer" parent="." unique_id=1723676447]
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 394.0
 offset_bottom = 340.0
 theme_override_constants/separation = 10
 
-[node name="MultisampleAAContainer" type="HBoxContainer" parent="Antialiasing"]
+[node name="MultisampleAAContainer" type="HBoxContainer" parent="Antialiasing" unique_id=1955254791]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Antialiasing/MultisampleAAContainer"]
+[node name="Label" type="Label" parent="Antialiasing/MultisampleAAContainer" unique_id=1640503169]
 custom_minimum_size = Vector2(120, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -898,7 +896,7 @@ theme_override_constants/outline_size = 4
 text = "Multisample AA"
 vertical_alignment = 1
 
-[node name="MultisampleAA" type="OptionButton" parent="Antialiasing/MultisampleAAContainer"]
+[node name="MultisampleAA" type="OptionButton" parent="Antialiasing/MultisampleAAContainer" unique_id=528281962]
 custom_minimum_size = Vector2(235, 2.08165e-12)
 layout_mode = 2
 selected = 0
@@ -912,10 +910,10 @@ popup/item_2/id = 2
 popup/item_3/text = "8× (Slower)"
 popup/item_3/id = 3
 
-[node name="ScreenSpaceAAContainer" type="HBoxContainer" parent="Antialiasing"]
+[node name="ScreenSpaceAAContainer" type="HBoxContainer" parent="Antialiasing" unique_id=150906838]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Antialiasing/ScreenSpaceAAContainer"]
+[node name="Label" type="Label" parent="Antialiasing/ScreenSpaceAAContainer" unique_id=1527028846]
 custom_minimum_size = Vector2(120, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -924,7 +922,7 @@ theme_override_constants/outline_size = 4
 text = "Screen-Space AA"
 vertical_alignment = 1
 
-[node name="ScreenSpaceAA" type="OptionButton" parent="Antialiasing/ScreenSpaceAAContainer"]
+[node name="ScreenSpaceAA" type="OptionButton" parent="Antialiasing/ScreenSpaceAAContainer" unique_id=881299517]
 custom_minimum_size = Vector2(235, 2.08165e-12)
 layout_mode = 2
 selected = 0
@@ -936,10 +934,10 @@ popup/item_1/id = 1
 popup/item_2/text = "SMAA (Average)"
 popup/item_2/id = 2
 
-[node name="TemporalAAContainer" type="HBoxContainer" parent="Antialiasing"]
+[node name="TemporalAAContainer" type="HBoxContainer" parent="Antialiasing" unique_id=598248594]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Antialiasing/TemporalAAContainer"]
+[node name="Label" type="Label" parent="Antialiasing/TemporalAAContainer" unique_id=579853154]
 custom_minimum_size = Vector2(120, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -948,7 +946,7 @@ theme_override_constants/outline_size = 4
 text = "Temporal AA"
 vertical_alignment = 1
 
-[node name="TemporalAA" type="OptionButton" parent="Antialiasing/TemporalAAContainer"]
+[node name="TemporalAA" type="OptionButton" parent="Antialiasing/TemporalAAContainer" unique_id=1321745170]
 custom_minimum_size = Vector2(235, 2.08165e-12)
 layout_mode = 2
 selected = 0
@@ -958,10 +956,10 @@ popup/item_0/id = 0
 popup/item_1/text = "Enabled (Average)"
 popup/item_1/id = 1
 
-[node name="VSyncContainer" type="HBoxContainer" parent="Antialiasing"]
+[node name="VSyncContainer" type="HBoxContainer" parent="Antialiasing" unique_id=1356581312]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Antialiasing/VSyncContainer"]
+[node name="Label" type="Label" parent="Antialiasing/VSyncContainer" unique_id=612398323]
 custom_minimum_size = Vector2(120, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -970,7 +968,7 @@ theme_override_constants/outline_size = 4
 text = "V-Sync"
 vertical_alignment = 1
 
-[node name="VSync" type="OptionButton" parent="Antialiasing/VSyncContainer"]
+[node name="VSync" type="OptionButton" parent="Antialiasing/VSyncContainer" unique_id=368682977]
 custom_minimum_size = Vector2(235, 2.08165e-12)
 layout_mode = 2
 selected = 0
@@ -982,11 +980,11 @@ popup/item_1/id = 1
 popup/item_2/text = "Enabled"
 popup/item_2/id = 2
 
-[node name="FPSLimitContainer" type="HBoxContainer" parent="Antialiasing"]
+[node name="FPSLimitContainer" type="HBoxContainer" parent="Antialiasing" unique_id=1170548973]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="Antialiasing/FPSLimitContainer"]
+[node name="Label" type="Label" parent="Antialiasing/FPSLimitContainer" unique_id=581454409]
 custom_minimum_size = Vector2(120, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -995,7 +993,7 @@ theme_override_constants/outline_size = 4
 text = "FPS Limit"
 vertical_alignment = 1
 
-[node name="FPSLimitScale" type="HSlider" parent="Antialiasing/FPSLimitContainer"]
+[node name="FPSLimitScale" type="HSlider" parent="Antialiasing/FPSLimitContainer" unique_id=760741085]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1003,7 +1001,7 @@ size_flags_stretch_ratio = 3.0
 max_value = 300.0
 step = 10.0
 
-[node name="Value" type="Label" parent="Antialiasing/FPSLimitContainer"]
+[node name="Value" type="Label" parent="Antialiasing/FPSLimitContainer" unique_id=1148609638]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -1012,11 +1010,11 @@ text = "∞"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RenderScaleContainer" type="HBoxContainer" parent="Antialiasing"]
+[node name="RenderScaleContainer" type="HBoxContainer" parent="Antialiasing" unique_id=1980197180]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="Antialiasing/RenderScaleContainer"]
+[node name="Label" type="Label" parent="Antialiasing/RenderScaleContainer" unique_id=1803333355]
 custom_minimum_size = Vector2(120, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1025,7 +1023,7 @@ theme_override_constants/outline_size = 4
 text = "Render Scale"
 vertical_alignment = 1
 
-[node name="RenderScale" type="HSlider" parent="Antialiasing/RenderScaleContainer"]
+[node name="RenderScale" type="HSlider" parent="Antialiasing/RenderScaleContainer" unique_id=870425893]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1035,7 +1033,7 @@ max_value = 2.0
 step = 0.01
 value = 1.0
 
-[node name="Value" type="Label" parent="Antialiasing/RenderScaleContainer"]
+[node name="Value" type="Label" parent="Antialiasing/RenderScaleContainer" unique_id=489137100]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -1044,14 +1042,14 @@ text = "100%"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FidelityFXFSR" type="CheckButton" parent="Antialiasing"]
+[node name="FidelityFXFSR" type="CheckButton" parent="Antialiasing" unique_id=1630563606]
 visible = false
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "AMD FidelityFX Super Resolution 1.0"
 
-[node name="FSRSharpness" type="OptionButton" parent="Antialiasing"]
+[node name="FSRSharpness" type="OptionButton" parent="Antialiasing" unique_id=504273231]
 visible = false
 layout_mode = 2
 selected = 3
@@ -1067,7 +1065,7 @@ popup/item_3/id = 3
 popup/item_4/text = "Highest FSR Sharpness"
 popup/item_4/id = 4
 
-[node name="ViewportResolution" type="Label" parent="."]
+[node name="ViewportResolution" type="Label" parent="." unique_id=1365136605]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -1081,7 +1079,7 @@ theme_override_constants/outline_size = 4
 text = "Viewport resolution: 1152×648"
 horizontal_alignment = 2
 
-[node name="FPSLabel" type="Label" parent="."]
+[node name="FPSLabel" type="Label" parent="." unique_id=1924211132]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0

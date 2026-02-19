@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbknjwlpbdyit"]
+[gd_scene format=3 uid="uid://dbknjwlpbdyit"]
 
 [ext_resource type="Script" uid="uid://drffb8ty178f0" path="res://sdf_font_demo.gd" id="1_05k3u"]
 [ext_resource type="FontFile" uid="uid://b4ngef7pot3yp" path="res://montserrat_semibold_msdf.ttf" id="1_eart1"]
@@ -46,7 +46,7 @@ _data = {
 &"zoomin_zoomout": SubResource("2")
 }
 
-[node name="SDFFontDemo" type="Control"]
+[node name="SDFFontDemo" type="Control" unique_id=1241967680]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,12 +55,12 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_05k3u")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=183250173]
 layout_mode = 0
 offset_right = 285.0
 offset_bottom = 107.0
 
-[node name="FontMode" type="Label" parent="."]
+[node name="FontMode" type="Label" parent="." unique_id=615776437]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = 16.0
@@ -69,7 +69,7 @@ offset_right = 218.0
 offset_bottom = 68.0
 text = "Font rendering: MSDF"
 
-[node name="OutlineSize" type="HBoxContainer" parent="."]
+[node name="OutlineSize" type="HBoxContainer" parent="." unique_id=332352676]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 56.0
@@ -77,25 +77,25 @@ offset_right = 286.0
 offset_bottom = 96.0
 theme_override_constants/separation = 8
 
-[node name="Label" type="Label" parent="OutlineSize"]
+[node name="Label" type="Label" parent="OutlineSize" unique_id=113250470]
 layout_mode = 2
 text = "Outline size:"
 
-[node name="HSlider" type="HSlider" parent="OutlineSize"]
+[node name="HSlider" type="HSlider" parent="OutlineSize" unique_id=1006800733]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 max_value = 20.0
 value = 5.0
 
-[node name="Value" type="Label" parent="OutlineSize"]
+[node name="Value" type="Label" parent="OutlineSize" unique_id=1663755520]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.23
 text = "5"
 
-[node name="Help" type="Label" parent="."]
+[node name="Help" type="Label" parent="." unique_id=377570889]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -109,29 +109,25 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "S: Toggle between traditional and MSDF font rendering"
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=2033118326]
 layout_mode = 0
 offset_left = 576.0
 offset_top = 324.0
 offset_right = 576.0
 offset_bottom = 324.0
 
-[node name="Base" type="Control" parent="CenterContainer"]
+[node name="Base" type="Control" parent="CenterContainer" unique_id=1317448160]
 layout_mode = 2
 
-[node name="Rotate" type="AnimationPlayer" parent="CenterContainer/Base"]
-libraries = {
-&"": SubResource("AnimationLibrary_88vp7")
-}
-autoplay = "rotate"
+[node name="Rotate" type="AnimationPlayer" parent="CenterContainer/Base" unique_id=468350656]
+libraries/ = SubResource("AnimationLibrary_88vp7")
+autoplay = &"rotate"
 
-[node name="Zoom" type="AnimationPlayer" parent="CenterContainer/Base"]
-libraries = {
-&"": SubResource("AnimationLibrary_j5dlp")
-}
-autoplay = "zoomin_zoomout"
+[node name="Zoom" type="AnimationPlayer" parent="CenterContainer/Base" unique_id=2126642397]
+libraries/ = SubResource("AnimationLibrary_j5dlp")
+autoplay = &"zoomin_zoomout"
 
-[node name="FontLabel" type="Label" parent="CenterContainer/Base"]
+[node name="FontLabel" type="Label" parent="CenterContainer/Base" unique_id=537922364]
 unique_name_in_owner = true
 z_index = -1
 layout_mode = 0

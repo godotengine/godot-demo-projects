@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cihf5g1mykew5"]
+[gd_scene format=3 uid="uid://cihf5g1mykew5"]
 
 [ext_resource type="Script" uid="uid://b2lkkxlht81rf" path="res://water_plane/water_plane.gd" id="1_ltm8k"]
 [ext_resource type="Shader" uid="uid://b17o6n615iaq0" path="res://water_plane/water_shader.gdshader" id="1_rujqj"]
@@ -32,20 +32,20 @@ sky_material = SubResource("PanoramaSkyMaterial_xm1lt")
 background_mode = 2
 sky = SubResource("Sky_ng08w")
 
-[node name="WaterPlane" type="Area3D"]
+[node name="WaterPlane" type="Area3D" unique_id=959460087]
 script = ExtResource("1_ltm8k")
 damp = 2.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1091023890]
 material_override = SubResource("ShaderMaterial_qy6ln")
 mesh = SubResource("PlaneMesh_wl5mm")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=292978399]
 shape = SubResource("BoxShape3D_gvcbg")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1382254362]
 transform = Transform3D(0.983217, 5.59419e-08, 0.182442, -0.178298, 0.211922, 0.960885, -0.0386633, -0.977287, 0.208365, 0, 1.12002, 0)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=410245865]
 environment = SubResource("Environment_iw7ig")

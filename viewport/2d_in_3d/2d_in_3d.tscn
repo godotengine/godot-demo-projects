@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://krfj5m7jt0lj"]
+[gd_scene format=3 uid="uid://krfj5m7jt0lj"]
 
 [ext_resource type="Script" uid="uid://bptdwreo6k2wf" path="res://2d_in_3d.gd" id="1_b8rgl"]
 [ext_resource type="Script" uid="uid://d2qeeiw660dmk" path="res://pong.gd" id="2"]
@@ -61,99 +61,99 @@ background_mode = 2
 sky = SubResource("Sky_7gemw")
 tonemap_mode = 4
 
-[node name="2Din3D" type="Node3D"]
+[node name="2Din3D" type="Node3D" unique_id=155312354]
 script = ExtResource("1_b8rgl")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=569072833]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0.5)
 fov = 60.0
 
-[node name="ViewportQuad" type="MeshInstance3D" parent="."]
+[node name="ViewportQuad" type="MeshInstance3D" parent="." unique_id=178986143]
 transform = Transform3D(2, 0, 0, 0, 0, -1.333, 0, 1, 0, 0, 1.2, -4.25)
 material_override = SubResource("6")
 mesh = SubResource("1")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1992557537]
 size = Vector2i(600, 400)
 render_target_update_mode = 4
 
-[node name="Pong" type="Node2D" parent="SubViewport"]
+[node name="Pong" type="Node2D" parent="SubViewport" unique_id=330083784]
 script = ExtResource("2")
 
-[node name="Background" type="Panel" parent="SubViewport/Pong"]
+[node name="Background" type="Panel" parent="SubViewport/Pong" unique_id=521419215]
 offset_right = 600.0
 offset_bottom = 400.0
 
-[node name="Ball" type="Sprite2D" parent="SubViewport/Pong"]
+[node name="Ball" type="Sprite2D" parent="SubViewport/Pong" unique_id=1056286741]
 position = Vector2(300, 200)
 texture = ExtResource("3")
 
-[node name="LeftPaddle" type="Sprite2D" parent="SubViewport/Pong"]
+[node name="LeftPaddle" type="Sprite2D" parent="SubViewport/Pong" unique_id=597308157]
 position = Vector2(20, 200)
 texture = ExtResource("4")
 
-[node name="RightPaddle" type="Sprite2D" parent="SubViewport/Pong"]
+[node name="RightPaddle" type="Sprite2D" parent="SubViewport/Pong" unique_id=318369201]
 position = Vector2(580, 200)
 texture = ExtResource("5")
 
-[node name="Separator" type="Sprite2D" parent="SubViewport/Pong"]
+[node name="Separator" type="Sprite2D" parent="SubViewport/Pong" unique_id=237065752]
 position = Vector2(298, 200)
 texture = ExtResource("6")
 
-[node name="Environment" type="Node3D" parent="."]
+[node name="Environment" type="Node3D" parent="." unique_id=1277363438]
 
-[node name="Floor" type="MeshInstance3D" parent="Environment"]
+[node name="Floor" type="MeshInstance3D" parent="Environment" unique_id=1598796676]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -1, -2)
 mesh = SubResource("1")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("2")
 
-[node name="Pillar1" type="Node3D" parent="Environment"]
+[node name="Pillar1" type="Node3D" parent="Environment" unique_id=1168708352]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -3, -0.2, -4)
 
-[node name="PillarBottom" type="MeshInstance3D" parent="Environment/Pillar1"]
+[node name="PillarBottom" type="MeshInstance3D" parent="Environment/Pillar1" unique_id=1050772412]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("3")
 surface_material_override/0 = SubResource("StandardMaterial3D_trcb6")
 
-[node name="PillarTop" type="MeshInstance3D" parent="Environment/Pillar1"]
+[node name="PillarTop" type="MeshInstance3D" parent="Environment/Pillar1" unique_id=965389455]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
 mesh = SubResource("3")
 surface_material_override/0 = SubResource("StandardMaterial3D_bqwig")
 
-[node name="PillarMiddle" type="MeshInstance3D" parent="Environment/Pillar1"]
+[node name="PillarMiddle" type="MeshInstance3D" parent="Environment/Pillar1" unique_id=1182581001]
 transform = Transform3D(0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, 0, 2.5, 0)
 mesh = SubResource("3")
 surface_material_override/0 = SubResource("StandardMaterial3D_elot5")
 
-[node name="Pillar2" type="Node3D" parent="Environment"]
+[node name="Pillar2" type="Node3D" parent="Environment" unique_id=1142509269]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 3, -0.2, -4)
 
-[node name="PillarBottom" type="MeshInstance3D" parent="Environment/Pillar2"]
+[node name="PillarBottom" type="MeshInstance3D" parent="Environment/Pillar2" unique_id=2095787574]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("3")
 surface_material_override/0 = SubResource("StandardMaterial3D_phrtn")
 
-[node name="PillarTop" type="MeshInstance3D" parent="Environment/Pillar2"]
+[node name="PillarTop" type="MeshInstance3D" parent="Environment/Pillar2" unique_id=975379815]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
 mesh = SubResource("3")
 surface_material_override/0 = SubResource("StandardMaterial3D_omrd7")
 
-[node name="PillarMiddle" type="MeshInstance3D" parent="Environment/Pillar2"]
+[node name="PillarMiddle" type="MeshInstance3D" parent="Environment/Pillar2" unique_id=2126973660]
 transform = Transform3D(0.7, 0, 0, 0, 2, 0, 0, 0, 0.7, 0, 2.5, 0)
 mesh = SubResource("3")
 surface_material_override/0 = SubResource("StandardMaterial3D_dvcyb")
 
-[node name="PillarBack" type="MeshInstance3D" parent="Environment"]
+[node name="PillarBack" type="MeshInstance3D" parent="Environment" unique_id=632126925]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 1.2, -4.5)
 mesh = SubResource("5")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("4")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment" unique_id=1509041056]
 environment = SubResource("Environment_fvsgw")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment" unique_id=571264816]
 transform = Transform3D(0.623013, -0.733525, 0.271653, 0.321394, 0.55667, 0.766045, -0.713134, -0.389948, 0.582563, 0, 10, 0)
 light_energy = 0.15
 shadow_enabled = true

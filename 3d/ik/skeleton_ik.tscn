@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://di7sdmf1v6ycu"]
+[gd_scene format=3 uid="uid://di7sdmf1v6ycu"]
 
 [ext_resource type="Script" uid="uid://bexg0uejjl5b6" path="res://skeleton_ik_runner.gd" id="1"]
 [ext_resource type="Material" uid="uid://uslxtfi8ihx7" path="res://checker_floor.mat.tres" id="1_f0bh8"]
@@ -17,47 +17,48 @@ size = Vector2(40, 40)
 albedo_color = Color(0, 0.191406, 0.765625, 1)
 roughness = 0.0
 
-[node name="SkeletonIK3D" type="Node3D"]
+[node name="SkeletonIK3D" type="Node3D" unique_id=1281719955]
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=310628638]
 mesh = SubResource("1")
 surface_material_override/0 = ExtResource("1_f0bh8")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2120199900]
 transform = Transform3D(0.56827, 0.673454, -0.472789, 0, 0.574581, 0.818448, 0.822842, -0.465099, 0.326517, -9.77531, 11.5204, 11.766)
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1544650002]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5, 11)
 fov = 74.0
 script = ExtResource("5")
 MOVEMENT_SPEED = -8.0
 flip_axis = true
 
-[node name="Targets" type="Node3D" parent="Camera3D"]
+[node name="Targets" type="Node3D" parent="Camera3D" unique_id=1544703751]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 
-[node name="IK_LookAt_Head" type="Node3D" parent="Camera3D/Targets"]
+[node name="IK_LookAt_Head" type="Node3D" parent="Camera3D/Targets" unique_id=315563113]
 script = ExtResource("9")
 skeleton_path = NodePath("../../../GodotBattleBot/Armature/Skeleton3D")
 bone_name = "Head"
 additional_rotation = Vector3(90, 0, 0)
 
-[node name="1MeterCube" type="MeshInstance3D" parent="Camera3D/Targets"]
+[node name="1MeterCube" type="MeshInstance3D" parent="Camera3D/Targets" unique_id=385146625]
 mesh = SubResource("3")
 surface_material_override/0 = SubResource("4")
 
-[node name="TargetLeft" type="Marker3D" parent="Camera3D/Targets"]
+[node name="TargetLeft" type="Marker3D" parent="Camera3D/Targets" unique_id=632202794]
 transform = Transform3D(-0.179447, 0.98366, -0.0145678, 0.981822, 0.178142, -0.0654973, -0.0618319, -0.0260563, -0.997746, 0.653517, -0.112305, -0.760886)
 
-[node name="TargetRight" type="Marker3D" parent="Camera3D/Targets"]
+[node name="TargetRight" type="Marker3D" parent="Camera3D/Targets" unique_id=81448917]
 transform = Transform3D(-0.0217688, 0.998559, -0.0490576, 0.992503, 0.0274873, 0.119085, 0.120262, -0.0460975, -0.991671, -0.683053, 0.0251284, -0.811513)
 
-[node name="GodotBattleBot" parent="." instance=ExtResource("4")]
+[node name="GodotBattleBot" parent="." unique_id=2140034081 instance=ExtResource("4")]
 
-[node name="godot_battle_bot" parent="GodotBattleBot/Armature/Skeleton3D" index="0"]
+[node name="godot_battle_bot" parent="GodotBattleBot/Armature/Skeleton3D" parent_id_path=PackedInt32Array(2140034081, 525861788) index="0" unique_id=1318908502]
+skeleton = NodePath("..")
 surface_material_override/0 = ExtResource("6")
 
-[node name="SkeletonIK_Left" type="SkeletonIK3D" parent="GodotBattleBot/Armature/Skeleton3D" index="1"]
+[node name="SkeletonIK_Left" type="SkeletonIK3D" parent="GodotBattleBot/Armature/Skeleton3D" parent_id_path=PackedInt32Array(2140034081, 525861788) index="1" unique_id=951982571]
 process_priority = 1
 root_bone = &"Left_UpperArm"
 tip_bone = &"Left_Hand"
@@ -66,7 +67,7 @@ magnet = Vector3(8, 6, 0)
 target_node = NodePath("../../../../Camera3D/Targets/TargetLeft")
 script = ExtResource("1")
 
-[node name="SkeletonIK_Right" type="SkeletonIK3D" parent="GodotBattleBot/Armature/Skeleton3D" index="2"]
+[node name="SkeletonIK_Right" type="SkeletonIK3D" parent="GodotBattleBot/Armature/Skeleton3D" parent_id_path=PackedInt32Array(2140034081, 525861788) index="2" unique_id=1263513143]
 process_priority = 1
 root_bone = &"Right_UpperArm"
 tip_bone = &"Right_Hand"
@@ -75,7 +76,7 @@ magnet = Vector3(-8, 6, 0)
 target_node = NodePath("../../../../Camera3D/Targets/TargetRight")
 script = ExtResource("1")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=647083885]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -83,7 +84,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="Control"]
+[node name="Panel" type="Panel" parent="Control" unique_id=923190480]
 modulate = Color(1, 1, 1, 0.784314)
 layout_mode = 1
 anchors_preset = 12
@@ -96,7 +97,7 @@ offset_right = 4.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Label" type="Label" parent="Control/Panel"]
+[node name="Label" type="Label" parent="Control/Panel" unique_id=1312468304]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -111,7 +112,7 @@ text = "SkeletonIK3D node
 Move mouse to move IK targets"
 horizontal_alignment = 1
 
-[node name="ButtonNext" type="Button" parent="Control"]
+[node name="ButtonNext" type="Button" parent="Control" unique_id=1017442384]
 layout_mode = 0
 anchor_left = 1.0
 anchor_top = 1.0
@@ -125,7 +126,7 @@ text = "Next scene"
 script = ExtResource("8")
 scene_to_change_to = "res://fps/fps_example.tscn"
 
-[node name="ButtonPrev" type="Button" parent="Control"]
+[node name="ButtonPrev" type="Button" parent="Control" unique_id=1541698575]
 layout_mode = 0
 anchor_top = 1.0
 anchor_bottom = 1.0

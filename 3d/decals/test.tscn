@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://coi06mo5qbvxq"]
+[gd_scene format=3 uid="uid://coi06mo5qbvxq"]
 
 [ext_resource type="Texture2D" uid="uid://b3b0ww0vfk0fd" path="res://textures/plasma_emissive.png" id="3_h6kom"]
 [ext_resource type="Texture2D" uid="uid://4bhl2pjc5lpa" path="res://textures/plasma_stain.png" id="4_86yk0"]
@@ -189,29 +189,27 @@ data = PackedVector3Array(0, 0.625, 0.625, 0.625, -0.625, 0.625, -0.625, -0.625,
 transparency = 1
 albedo_color = Color(0, 0, 0, 0.509804)
 
-[node name="WorldEnvironment" type="WorldEnvironment"]
+[node name="WorldEnvironment" type="WorldEnvironment" unique_id=313554056]
 environment = SubResource("11")
 script = ExtResource("18")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_ecfcr")
-}
-autoplay = "move"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=162858572]
+libraries/ = SubResource("AnimationLibrary_ecfcr")
+autoplay = &"move"
 
-[node name="StaticBody3d" type="StaticBody3D" parent="."]
+[node name="StaticBody3d" type="StaticBody3D" parent="." unique_id=1536684895]
 
-[node name="Plane" type="MeshInstance3D" parent="StaticBody3d"]
+[node name="Plane" type="MeshInstance3D" parent="StaticBody3d" unique_id=744137911]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 layers = 2
 mesh = SubResource("14")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3d" type="CollisionShape3D" parent="StaticBody3d"]
+[node name="CollisionShape3d" type="CollisionShape3D" parent="StaticBody3d" unique_id=1354307026]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -6)
 shape = SubResource("BoxShape3D_biamo")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1259022890]
 transform = Transform3D(-0.770897, 0.365782, -0.52146, -7.63748e-10, 0.818671, 0.574263, 0.63696, 0.442697, -0.631111, 3.9506, 3.39961, 3.54442)
 shadow_enabled = true
 shadow_bias = 0.04
@@ -220,134 +218,134 @@ directional_shadow_mode = 0
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 24.0
 
-[node name="CameraHolder" type="Node3D" parent="."]
+[node name="CameraHolder" type="Node3D" parent="." unique_id=1980669632]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.125, 12)
 
-[node name="RotationX" type="Node3D" parent="CameraHolder"]
+[node name="RotationX" type="Node3D" parent="CameraHolder" unique_id=30203580]
 
-[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX"]
+[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX" unique_id=1779755000]
 fov = 70.0
 
-[node name="PlasmaEmission" type="Decal" parent="."]
+[node name="PlasmaEmission" type="Decal" parent="." unique_id=1806599758]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 12)
 size = Vector3(0.4, 0.2, 0.4)
 texture_emission = ExtResource("3_h6kom")
 
-[node name="PlasmaStain" type="Decal" parent="."]
+[node name="PlasmaStain" type="Decal" parent="." unique_id=1057074770]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 12)
 size = Vector3(0.4, 0.2, 0.4)
 texture_albedo = ExtResource("4_86yk0")
 normal_fade = 0.5
 
-[node name="Testers" type="Node3D" parent="."]
+[node name="Testers" type="Node3D" parent="." unique_id=913495061]
 
-[node name="BulletPlasmaDecals" type="MeshInstance3D" parent="Testers"]
+[node name="BulletPlasmaDecals" type="MeshInstance3D" parent="Testers" unique_id=679165155]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0.1, 12)
 mesh = SubResource("15")
 
-[node name="PlasmaStain2" type="Decal" parent="Testers/BulletPlasmaDecals"]
+[node name="PlasmaStain2" type="Decal" parent="Testers/BulletPlasmaDecals" unique_id=662808407]
 transform = Transform3D(0.818988, 0.544513, -0.181012, -0.544512, 0.637975, -0.544512, -0.181012, 0.544513, 0.818988, -0.343497, 0.0645585, 0.508513)
 size = Vector3(0.1, 0.2, 0.1)
 texture_albedo = ExtResource("4_86yk0")
 normal_fade = 0.5
 
-[node name="PlasmaStain3" type="Decal" parent="Testers/BulletPlasmaDecals"]
+[node name="PlasmaStain3" type="Decal" parent="Testers/BulletPlasmaDecals" unique_id=1451626654]
 transform = Transform3D(0.322374, -0.258134, -0.910737, -0.372803, 0.849727, -0.372803, 0.870111, 0.459707, 0.177697, 0.0179672, 0.0645585, 0.457714)
 size = Vector3(0.1, 0.2, 0.1)
 texture_albedo = ExtResource("4_86yk0")
 normal_fade = 0.5
 
-[node name="PlasmaStain4" type="Decal" parent="Testers/BulletPlasmaDecals"]
+[node name="PlasmaStain4" type="Decal" parent="Testers/BulletPlasmaDecals" unique_id=1530248664]
 transform = Transform3D(0.322374, -0.258134, -0.910737, -0.372803, 0.849727, -0.372803, 0.870111, 0.459707, 0.177697, -0.279583, 0.0645585, 0.135519)
 size = Vector3(0.1, 0.2, 0.1)
 texture_albedo = ExtResource("4_86yk0")
 normal_fade = 0.5
 
-[node name="PlasmaStain5" type="Decal" parent="Testers/BulletPlasmaDecals"]
+[node name="PlasmaStain5" type="Decal" parent="Testers/BulletPlasmaDecals" unique_id=210824132]
 transform = Transform3D(-0.781204, 0.439943, -0.442913, 0.177237, 0.836588, 0.51837, 0.598589, 0.326452, -0.731519, 0.147337, 0.0645586, 0.171896)
 size = Vector3(0.1, 0.2, 0.1)
 texture_albedo = ExtResource("4_86yk0")
 normal_fade = 0.5
 
-[node name="PaintDecals" type="Node3D" parent="Testers"]
+[node name="PaintDecals" type="Node3D" parent="Testers" unique_id=371938620]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 
-[node name="BluePaint" type="Decal" parent="Testers/PaintDecals"]
+[node name="BluePaint" type="Decal" parent="Testers/PaintDecals" unique_id=1338564365]
 texture_albedo = ExtResource("5_1d4vo")
 texture_normal = ExtResource("6_qfx85")
 modulate = Color(0.0235294, 0.121569, 1, 1)
 
-[node name="PurplePaint" type="Decal" parent="Testers/PaintDecals"]
+[node name="PurplePaint" type="Decal" parent="Testers/PaintDecals" unique_id=1924945126]
 transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 0.430567, -2.0597e-08, -0.314452)
 size = Vector3(1, 2, 1)
 texture_albedo = ExtResource("5_1d4vo")
 texture_normal = ExtResource("6_qfx85")
 modulate = Color(0.662745, 0.247059, 1, 1)
 
-[node name="CyanPaint" type="Decal" parent="Testers/PaintDecals"]
+[node name="CyanPaint" type="Decal" parent="Testers/PaintDecals" unique_id=1688767347]
 transform = Transform3D(0.991172, 0, 0.132585, 0.0845414, 0.770335, -0.63201, -0.102135, 0.637639, 0.763534, -0.436872, 1.2699e-08, 0.06318)
 size = Vector3(1, 2, 1)
 texture_albedo = ExtResource("5_1d4vo")
 texture_normal = ExtResource("6_qfx85")
 modulate = Color(0.164706, 0.741176, 0.776471, 1)
 
-[node name="Arrow1" type="Decal" parent="Testers/PaintDecals"]
+[node name="Arrow1" type="Decal" parent="Testers/PaintDecals" unique_id=804043473]
 transform = Transform3D(-0.707107, 0, 0.707107, 0.244151, 0.938499, 0.244151, -0.663619, 0.345282, -0.663619, 1.18236, 0, 1.04792)
 size = Vector3(0.8, 2, 0.5)
 texture_albedo = ExtResource("7_4xxma")
 texture_normal = ExtResource("8_40dxq")
 modulate = Color(1, 0.0705882, 0.0980392, 1)
 
-[node name="Arrow2" type="Decal" parent="Testers/PaintDecals"]
+[node name="Arrow2" type="Decal" parent="Testers/PaintDecals" unique_id=15430262]
 transform = Transform3D(-0.783964, 0, -0.620806, 0, 1, 0, 0.620806, 0, -0.783964, 1.28394, 7.53473e-08, -1.18734)
 size = Vector3(0.8, 2, 0.36)
 texture_albedo = ExtResource("7_4xxma")
 texture_normal = ExtResource("8_40dxq")
 modulate = Color(1, 0.0705882, 0.0980392, 1)
 
-[node name="Arrow3" type="Decal" parent="Testers/PaintDecals"]
+[node name="Arrow3" type="Decal" parent="Testers/PaintDecals" unique_id=1780580243]
 transform = Transform3D(0.741555, 0, -0.670893, 0, 1, 0, 0.670893, 0, 0.741555, -1.15131, 2.10201e-07, -1.38808)
 size = Vector3(1, 2, 0.5)
 texture_albedo = ExtResource("7_4xxma")
 texture_normal = ExtResource("8_40dxq")
 modulate = Color(1, 0.0705882, 0.0980392, 1)
 
-[node name="Arrow4" type="Decal" parent="Testers/PaintDecals"]
+[node name="Arrow4" type="Decal" parent="Testers/PaintDecals" unique_id=189232302]
 transform = Transform3D(0.79937, 0, 0.600839, 0, 1, 0, -0.600839, 0, 0.79937, -1.34612, 3.63008e-07, 1.11909)
 size = Vector3(0.8, 2, 0.5)
 texture_albedo = ExtResource("7_4xxma")
 texture_normal = ExtResource("8_40dxq")
 modulate = Color(1, 0.0705882, 0.0980392, 1)
 
-[node name="WaterPuddle" type="Decal" parent="Testers"]
+[node name="WaterPuddle" type="Decal" parent="Testers" unique_id=865504431]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 size = Vector3(4, 2, 4)
 texture_albedo = ExtResource("9_o80vp")
 texture_orm = ExtResource("10_rt6a0")
 albedo_mix = 0.0
 
-[node name="ReflectionProbe" type="ReflectionProbe" parent="Testers/WaterPuddle"]
+[node name="ReflectionProbe" type="ReflectionProbe" parent="Testers/WaterPuddle" unique_id=1464269424]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 size = Vector3(16, 16, 16)
 box_projection = true
 
-[node name="CircleBlobShadow" type="MeshInstance3D" parent="Testers"]
+[node name="CircleBlobShadow" type="MeshInstance3D" parent="Testers" unique_id=890008539]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("17")
 
-[node name="Decal" type="Decal" parent="Testers/CircleBlobShadow"]
+[node name="Decal" type="Decal" parent="Testers/CircleBlobShadow" unique_id=1562629939]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 texture_albedo = SubResource("GradientTexture2D_p8www")
 normal_fade = 0.5
 lower_fade = 1.0
 
-[node name="ScifiDecals" type="MeshInstance3D" parent="Testers"]
+[node name="ScifiDecals" type="MeshInstance3D" parent="Testers" unique_id=618731483]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -4)
 mesh = SubResource("18")
 
-[node name="Pivot" type="Node3D" parent="Testers/ScifiDecals"]
+[node name="Pivot" type="Node3D" parent="Testers/ScifiDecals" unique_id=870979731]
 
-[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot"]
+[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot" unique_id=1299214442]
 transform = Transform3D(1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, -5.96046e-08, 0.888154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("11_wbqnf")
@@ -355,7 +353,7 @@ texture_normal = ExtResource("12_mlk6d")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot"]
+[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot" unique_id=877047181]
 transform = Transform3D(-4.37114e-08, -1.62921e-07, -1, -1, 7.1215e-15, 4.37114e-08, 0, 1, -1.62921e-07, 0, 0.4, 0.838154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("13_p1ikw")
@@ -363,10 +361,10 @@ texture_normal = ExtResource("14_yj8ff")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Pivot2" type="Node3D" parent="Testers/ScifiDecals"]
+[node name="Pivot2" type="Node3D" parent="Testers/ScifiDecals" unique_id=83467562]
 transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 0, 0, 0)
 
-[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot2"]
+[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot2" unique_id=786470473]
 transform = Transform3D(1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, -5.96046e-08, 0.888154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("15_ct5bp")
@@ -374,7 +372,7 @@ texture_normal = ExtResource("16_0mhgx")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot2"]
+[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot2" unique_id=2094073061]
 transform = Transform3D(-4.37114e-08, -1.19209e-07, -1, -1, 7.1215e-15, 4.37114e-08, 0, 1, -1.19209e-07, 0, 0.4, 0.838154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("11_bbefl")
@@ -382,10 +380,10 @@ texture_normal = ExtResource("12_tq8hn")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Pivot3" type="Node3D" parent="Testers/ScifiDecals"]
+[node name="Pivot3" type="Node3D" parent="Testers/ScifiDecals" unique_id=1620055523]
 transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 0, 0, 0)
 
-[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot3"]
+[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot3" unique_id=2129917449]
 transform = Transform3D(1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, -5.96046e-08, 0.888154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("15_ct5bp")
@@ -393,7 +391,7 @@ texture_normal = ExtResource("16_0mhgx")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot3"]
+[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot3" unique_id=224834362]
 transform = Transform3D(-4.37114e-08, -1.19209e-07, -1, -1, 7.1215e-15, 4.37114e-08, 0, 1, -1.19209e-07, 0, 0.4, 0.838154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("11_bbefl")
@@ -401,10 +399,10 @@ texture_normal = ExtResource("12_tq8hn")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Pivot4" type="Node3D" parent="Testers/ScifiDecals"]
+[node name="Pivot4" type="Node3D" parent="Testers/ScifiDecals" unique_id=1591319515]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0)
 
-[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot4"]
+[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot4" unique_id=2100453017]
 transform = Transform3D(1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, -5.96046e-08, 0.888154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("11_wbqnf")
@@ -412,7 +410,7 @@ texture_normal = ExtResource("12_mlk6d")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot4"]
+[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot4" unique_id=1047124569]
 transform = Transform3D(-4.37114e-08, -1.62921e-07, -1, -1, 7.1215e-15, 4.37114e-08, 0, 1, -1.62921e-07, 0, 0.4, 0.838154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("13_p1ikw")
@@ -420,10 +418,10 @@ texture_normal = ExtResource("14_yj8ff")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Pivot6" type="Node3D" parent="Testers/ScifiDecals"]
+[node name="Pivot6" type="Node3D" parent="Testers/ScifiDecals" unique_id=1650088992]
 transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 0, 0, 0)
 
-[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot6"]
+[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot6" unique_id=1804910326]
 transform = Transform3D(1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, -5.96046e-08, 0.888154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("15_ct5bp")
@@ -431,7 +429,7 @@ texture_normal = ExtResource("16_0mhgx")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot6"]
+[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot6" unique_id=116207265]
 transform = Transform3D(-4.37114e-08, -1.19209e-07, -1, -1, 7.1215e-15, 4.37114e-08, 0, 1, -1.19209e-07, 2.38419e-07, 0.4, 0.838154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("11_bbefl")
@@ -439,10 +437,10 @@ texture_normal = ExtResource("12_tq8hn")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Pivot7" type="Node3D" parent="Testers/ScifiDecals"]
+[node name="Pivot7" type="Node3D" parent="Testers/ScifiDecals" unique_id=629887120]
 transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 0, 0, 0)
 
-[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot7"]
+[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot7" unique_id=437412018]
 transform = Transform3D(1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, -5.96046e-08, 0.888154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("15_ct5bp")
@@ -450,7 +448,7 @@ texture_normal = ExtResource("16_0mhgx")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot7"]
+[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot7" unique_id=291512194]
 transform = Transform3D(-4.37114e-08, -1.19209e-07, -1, -1, 7.1215e-15, 4.37114e-08, 0, 1, -1.19209e-07, 1.19209e-07, 0.4, 0.838154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("11_bbefl")
@@ -458,10 +456,10 @@ texture_normal = ExtResource("12_tq8hn")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Pivot8" type="Node3D" parent="Testers/ScifiDecals"]
+[node name="Pivot8" type="Node3D" parent="Testers/ScifiDecals" unique_id=1739821234]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot8"]
+[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot8" unique_id=1881281288]
 transform = Transform3D(1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, -5.96046e-08, 0.888154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("11_wbqnf")
@@ -469,7 +467,7 @@ texture_normal = ExtResource("12_mlk6d")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot8"]
+[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot8" unique_id=1349403116]
 transform = Transform3D(-4.37114e-08, -1.62921e-07, -1, -1, 7.1215e-15, 4.37114e-08, 0, 1, -1.62921e-07, 8.146e-09, 0.4, 0.838154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("13_p1ikw")
@@ -477,10 +475,10 @@ texture_normal = ExtResource("14_yj8ff")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Pivot9" type="Node3D" parent="Testers/ScifiDecals"]
+[node name="Pivot9" type="Node3D" parent="Testers/ScifiDecals" unique_id=929924533]
 transform = Transform3D(-0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866025, 0, 0, 0)
 
-[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot9"]
+[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot9" unique_id=1880246680]
 transform = Transform3D(1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, -5.96046e-08, 0.888154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("15_ct5bp")
@@ -488,7 +486,7 @@ texture_normal = ExtResource("16_0mhgx")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot9"]
+[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot9" unique_id=1273048244]
 transform = Transform3D(-4.37114e-08, -1.19209e-07, -1, -1, 7.1215e-15, 4.37114e-08, 0, 1, -1.19209e-07, 2.38419e-07, 0.4, 0.838154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("11_bbefl")
@@ -496,10 +494,10 @@ texture_normal = ExtResource("12_tq8hn")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Pivot10" type="Node3D" parent="Testers/ScifiDecals"]
+[node name="Pivot10" type="Node3D" parent="Testers/ScifiDecals" unique_id=1628060404]
 transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 0, 0, 0)
 
-[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot10"]
+[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot10" unique_id=300384456]
 transform = Transform3D(1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, -5.96046e-08, 0.888154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("15_ct5bp")
@@ -507,7 +505,7 @@ texture_normal = ExtResource("16_0mhgx")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot10"]
+[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot10" unique_id=906417557]
 transform = Transform3D(-4.37114e-08, -1.19209e-07, -1, -1, 7.1215e-15, 4.37114e-08, 0, 1, -1.19209e-07, 0, 0.4, 0.838154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("11_bbefl")
@@ -515,10 +513,10 @@ texture_normal = ExtResource("12_tq8hn")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Pivot11" type="Node3D" parent="Testers/ScifiDecals"]
+[node name="Pivot11" type="Node3D" parent="Testers/ScifiDecals" unique_id=1624111796]
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 0, 0, 0)
 
-[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot11"]
+[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot11" unique_id=253797831]
 transform = Transform3D(1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, -5.96046e-08, 0.888154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("11_wbqnf")
@@ -526,7 +524,7 @@ texture_normal = ExtResource("12_mlk6d")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot11"]
+[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot11" unique_id=957456003]
 transform = Transform3D(-4.37114e-08, -1.62921e-07, -1, -1, 7.1215e-15, 4.37114e-08, 0, 1, -1.62921e-07, 0, 0.4, 0.838154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("13_p1ikw")
@@ -534,10 +532,10 @@ texture_normal = ExtResource("14_yj8ff")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Pivot12" type="Node3D" parent="Testers/ScifiDecals"]
+[node name="Pivot12" type="Node3D" parent="Testers/ScifiDecals" unique_id=254838839]
 transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 0, 0, 0)
 
-[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot12"]
+[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot12" unique_id=1360159523]
 transform = Transform3D(1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, -5.96046e-08, 0.888154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("15_ct5bp")
@@ -545,7 +543,7 @@ texture_normal = ExtResource("16_0mhgx")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot12"]
+[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot12" unique_id=1997022853]
 transform = Transform3D(-4.37114e-08, -1.19209e-07, -1, -1, 7.1215e-15, 4.37114e-08, 0, 1, -1.19209e-07, 0, 0.4, 0.838154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("11_bbefl")
@@ -553,10 +551,10 @@ texture_normal = ExtResource("12_tq8hn")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Pivot13" type="Node3D" parent="Testers/ScifiDecals"]
+[node name="Pivot13" type="Node3D" parent="Testers/ScifiDecals" unique_id=2137946409]
 transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0, 0, 0)
 
-[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot13"]
+[node name="Decal" type="Decal" parent="Testers/ScifiDecals/Pivot13" unique_id=817102207]
 transform = Transform3D(1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, -5.96046e-08, 0.888154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("15_ct5bp")
@@ -564,7 +562,7 @@ texture_normal = ExtResource("16_0mhgx")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot13"]
+[node name="Decal2" type="Decal" parent="Testers/ScifiDecals/Pivot13" unique_id=1974555275]
 transform = Transform3D(-4.37114e-08, -1.19209e-07, -1, -1, 7.1215e-15, 4.37114e-08, 0, 1, -1.19209e-07, 0, 0.4, 0.838154)
 size = Vector3(0.4, 0.1, 0.4)
 texture_albedo = ExtResource("11_bbefl")
@@ -572,23 +570,23 @@ texture_normal = ExtResource("12_tq8hn")
 upper_fade = 0.0
 lower_fade = 0.0
 
-[node name="StaticBody3d" type="StaticBody3D" parent="Testers/ScifiDecals"]
+[node name="StaticBody3d" type="StaticBody3D" parent="Testers/ScifiDecals" unique_id=316962490]
 
-[node name="CollisionShape3d" type="CollisionShape3D" parent="Testers/ScifiDecals/StaticBody3d"]
+[node name="CollisionShape3d" type="CollisionShape3D" parent="Testers/ScifiDecals/StaticBody3d" unique_id=1312590953]
 shape = SubResource("ConcavePolygonShape3D_540vc")
 
-[node name="BuffEffect" type="MeshInstance3D" parent="Testers"]
+[node name="BuffEffect" type="MeshInstance3D" parent="Testers" unique_id=855883144]
 transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 0, 0.625, -8)
 mesh = SubResource("20")
 
-[node name="Decal" type="Decal" parent="Testers/BuffEffect"]
+[node name="Decal" type="Decal" parent="Testers/BuffEffect" unique_id=733153936]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 size = Vector3(2, 0.2, 2)
 texture_albedo = SubResource("GradientTexture1D_a7rt8")
 lower_fade = 2.0
 cull_mask = 1048573
 
-[node name="Noise" type="Decal" parent="Testers/BuffEffect"]
+[node name="Noise" type="Decal" parent="Testers/BuffEffect" unique_id=1016343110]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76837e-07, 0, 4.76837e-07)
 size = Vector3(2.4, 2.4, 2.4)
 texture_emission = SubResource("22")
@@ -597,40 +595,40 @@ upper_fade = 1.0
 lower_fade = 1.0
 cull_mask = 1048573
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Testers/BuffEffect"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Testers/BuffEffect" unique_id=301834660]
 omni_range = 2.0
 
-[node name="StaticBody3d" type="StaticBody3D" parent="Testers/BuffEffect"]
+[node name="StaticBody3d" type="StaticBody3D" parent="Testers/BuffEffect" unique_id=2128285035]
 
-[node name="CollisionShape3d" type="CollisionShape3D" parent="Testers/BuffEffect/StaticBody3d"]
+[node name="CollisionShape3d" type="CollisionShape3D" parent="Testers/BuffEffect/StaticBody3d" unique_id=1242437604]
 shape = SubResource("ConcavePolygonShape3D_ji6be")
 
-[node name="NormalMapDecals" type="Node3D" parent="Testers"]
+[node name="NormalMapDecals" type="Node3D" parent="Testers" unique_id=1951318859]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
 
-[node name="AlbedoAndNormal" type="Decal" parent="Testers/NormalMapDecals"]
+[node name="AlbedoAndNormal" type="Decal" parent="Testers/NormalMapDecals" unique_id=1279498100]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.5, 0, 0.5)
 size = Vector3(0.9, 2, 0.9)
 texture_albedo = ExtResource("13_ef2mf")
 texture_normal = ExtResource("14_je5ga")
 
-[node name="NormalOnly" type="Decal" parent="Testers/NormalMapDecals"]
+[node name="NormalOnly" type="Decal" parent="Testers/NormalMapDecals" unique_id=396877415]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.5, 0, -0.5)
 size = Vector3(0.9, 2, 0.9)
 texture_albedo = ExtResource("13_ef2mf")
 texture_normal = ExtResource("14_je5ga")
 albedo_mix = 0.0
 
-[node name="Metallic" type="Decal" parent="Testers/NormalMapDecals"]
+[node name="Metallic" type="Decal" parent="Testers/NormalMapDecals" unique_id=295969666]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.5, 0, -0.5)
 size = Vector3(0.9, 2, 0.9)
 texture_albedo = ExtResource("13_ef2mf")
 texture_orm = ExtResource("14_je5ga")
 
-[node name="DistanceFade" type="Node3D" parent="Testers"]
+[node name="DistanceFade" type="Node3D" parent="Testers" unique_id=251948143]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
 
-[node name="FadeInstant" type="Decal" parent="Testers/DistanceFade"]
+[node name="FadeInstant" type="Decal" parent="Testers/DistanceFade" unique_id=1634245426]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 1)
 size = Vector3(0.9, 2, 0.9)
 texture_albedo = ExtResource("13_ef2mf")
@@ -639,7 +637,7 @@ distance_fade_enabled = true
 distance_fade_begin = 2.5
 distance_fade_length = 0.0
 
-[node name="FadeShort" type="Decal" parent="Testers/DistanceFade"]
+[node name="FadeShort" type="Decal" parent="Testers/DistanceFade" unique_id=72301972]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.37114e-08, 0, 0)
 size = Vector3(0.9, 2, 0.9)
 texture_albedo = ExtResource("13_ef2mf")
@@ -648,7 +646,7 @@ distance_fade_enabled = true
 distance_fade_begin = 2.5
 distance_fade_length = 4.0
 
-[node name="FadeLong" type="Decal" parent="Testers/DistanceFade"]
+[node name="FadeLong" type="Decal" parent="Testers/DistanceFade" unique_id=1476736329]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.74228e-08, 0, -1)
 size = Vector3(0.9, 2, 0.9)
 texture_albedo = ExtResource("13_ef2mf")
@@ -656,38 +654,38 @@ texture_normal = ExtResource("14_je5ga")
 distance_fade_enabled = true
 distance_fade_begin = 2.5
 
-[node name="DecalOnAnimatedMesh" type="Node3D" parent="Testers"]
+[node name="DecalOnAnimatedMesh" type="Node3D" parent="Testers" unique_id=1868007526]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
 
-[node name="MeshInstance3D" type="CSGPolygon3D" parent="Testers/DecalOnAnimatedMesh"]
+[node name="MeshInstance3D" type="CSGPolygon3D" parent="Testers/DecalOnAnimatedMesh" unique_id=626043287]
 transform = Transform3D(1.81e-06, -0.5, 1.26759e-06, -0.5, -1.81e-06, 0, 4.58867e-12, -1.26759e-06, -0.5, -0.2, 0.533, -1.2)
 polygon = PackedVector2Array(1.15169, 1.35582, 0.729312, 1.29533, 0.554833, 1.23374, 0.435784, 1.09796, 0.361882, 0.887341, 0.412757, 0.611052, 0.758998, 0.422739, 0.384498, 0.190765, 0.588904, -0.138054, 0.736963, -0.347946, 0.427403, -0.434159, 0.232681, -0.621885, 0.44651, -0.650564, 0.681617, -0.737513, 0.440746, -0.899571, 0.192035, -0.985283, 0.430578, -1.22857, 0.214074, -1.39598, -0.0173832, -1.48613, 0.124956, -1.63571, 0.123744, -1.79062, -0.116978, -1.97817, -0.204488, -2.19687, -0.235596, -2.53431, -0.159419, -2.7278, -0.0343629, -2.9045, 0.200674, -2.97162, 0.462571, -3.02083, 0.438012, -3.11726, 0.353296, -3.20987, 0.290757, -3.31923, 0.186643, -3.40472, 0.159113, -3.5266, 0.206544, -3.87093, 0.282832, -4.26662, 0.678756, -4.45616, 0.829207, -4.52975, 0.978125, -4.55559, 1.08966, -4.5122, 1.46058, -4.30374)
 depth = 5.0
 smooth_faces = true
 
-[node name="Decal" type="Decal" parent="Testers/DecalOnAnimatedMesh"]
+[node name="Decal" type="Decal" parent="Testers/DecalOnAnimatedMesh" unique_id=1481906073]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.533127, 0)
 texture_albedo = ExtResource("5_1d4vo")
 normal_fade = 0.55
 cull_mask = 1048573
 
-[node name="DecalOnTransparentMesh" type="Node3D" parent="Testers"]
+[node name="DecalOnTransparentMesh" type="Node3D" parent="Testers" unique_id=89212605]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
 
-[node name="MeshInstance3D" type="CSGPolygon3D" parent="Testers/DecalOnTransparentMesh"]
+[node name="MeshInstance3D" type="CSGPolygon3D" parent="Testers/DecalOnTransparentMesh" unique_id=387843701]
 transform = Transform3D(-0.257422, -0.428642, 7.54979e-08, -0.428642, 0.257422, -2.05022e-08, -2.12934e-08, -7.52786e-08, -0.5, -0.76252, 0.99066, -1.2)
 material_override = SubResource("StandardMaterial3D_0cgya")
 polygon = PackedVector2Array(1.15169, 1.35582, 0.729312, 1.29533, 0.554833, 1.23374, 0.435784, 1.09796, 0.361882, 0.887341, 0.412757, 0.611052, 0.758998, 0.422739, 0.384498, 0.190765, 0.588904, -0.138054, 0.736963, -0.347946, 0.427403, -0.434159, 0.232681, -0.621885, 0.44651, -0.650564, 0.681617, -0.737513, 0.440746, -0.899571, 0.192035, -0.985283, 0.430578, -1.22857, 0.214074, -1.39598, -0.0173832, -1.48613, 0.124956, -1.63571, 0.123744, -1.79062, -0.116978, -1.97817, -0.204488, -2.19687, -0.235596, -2.53431, -0.159419, -2.7278, -0.0343629, -2.9045, 0.200674, -2.97162, 0.462571, -3.02083, 0.438012, -3.11726, 0.353296, -3.20987, 0.290757, -3.31923, 0.186643, -3.40472, 0.159113, -3.5266, 0.206544, -3.87093, 0.282832, -4.26662, 0.678756, -4.45616, 0.829207, -4.52975, 0.978125, -4.55559, 1.08966, -4.5122, 1.46058, -4.30374)
 depth = 5.0
 smooth_faces = true
 
-[node name="Decal" type="Decal" parent="Testers/DecalOnTransparentMesh"]
+[node name="Decal" type="Decal" parent="Testers/DecalOnTransparentMesh" unique_id=892387038]
 transform = Transform3D(-0.951057, 0, 0.309017, 0, 1, 0, -0.309017, 0, -0.951057, 0, 0.533127, 0)
 texture_albedo = ExtResource("5_1d4vo")
 normal_fade = 0.55
 cull_mask = 1048573
 
-[node name="TestName" type="Label" parent="."]
+[node name="TestName" type="Label" parent="." unique_id=479984527]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -704,7 +702,7 @@ theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 
-[node name="Previous" type="Button" parent="."]
+[node name="Previous" type="Button" parent="." unique_id=1035595715]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -715,7 +713,7 @@ offset_bottom = -24.0
 grow_vertical = 0
 text = "«  Previous"
 
-[node name="Next" type="Button" parent="."]
+[node name="Next" type="Button" parent="." unique_id=658080343]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -729,7 +727,7 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Next  »"
 
-[node name="Label2" type="Label" parent="."]
+[node name="Label2" type="Label" parent="." unique_id=884954143]
 offset_left = 24.0
 offset_top = 63.0
 offset_right = 273.0
@@ -738,20 +736,20 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 text = "P: Place Decal at Cursor Position"
 
-[node name="DecalFilterMode" type="HBoxContainer" parent="."]
+[node name="DecalFilterMode" type="HBoxContainer" parent="." unique_id=723137001]
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 210.0
 offset_bottom = 55.0
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="DecalFilterMode"]
+[node name="Label" type="Label" parent="DecalFilterMode" unique_id=14047580]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 text = "Decal Filter Mode:"
 
-[node name="OptionButton" type="OptionButton" parent="DecalFilterMode"]
+[node name="OptionButton" type="OptionButton" parent="DecalFilterMode" unique_id=1588906598]
 layout_mode = 2
 selected = 4
 item_count = 6

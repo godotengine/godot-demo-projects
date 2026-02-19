@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c76ahfbqcyip1"]
+[gd_scene format=3 uid="uid://c76ahfbqcyip1"]
 
 [ext_resource type="Script" uid="uid://cxjetbbdk8gyk" path="res://3d_in_2d.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bqf4lcb6h7mo5" path="res://robot_demo.png" id="2"]
@@ -50,26 +50,26 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="3Din2D" type="Node2D"]
+[node name="3Din2D" type="Node2D" unique_id=1726340126]
 script = ExtResource("1")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1952147331]
 transparent_bg = true
 msaa_3d = 2
 size = Vector2i(300, 300)
 render_target_update_mode = 4
 
-[node name="Robot3D" parent="SubViewport" instance=ExtResource("3")]
+[node name="Robot3D" parent="SubViewport" unique_id=87932620 instance=ExtResource("3")]
 
-[node name="ViewportSprite" type="Sprite2D" parent="."]
+[node name="ViewportSprite" type="Sprite2D" parent="." unique_id=1828452929]
 position = Vector2(650, 300)
 texture = SubResource("ViewportTexture_2squv")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=162452204]
 texture_filter = 1
 position = Vector2(350, 300)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("7")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=373943297]
 offset = Vector2(512, 300)
