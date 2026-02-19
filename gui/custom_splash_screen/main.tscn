@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://bn6b80q25bhta"]
+
+[ext_resource type="Script" uid="uid://715k1racyrfh" path="res://main.gd" id="1_ig7tw"]
+
+[sub_resource type="Animation" id="Animation_ig7tw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeOverlay:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0xm2m"]
+resource_name = "fade_in"
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeOverlay:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h2yge"]
+_data = {
+&"RESET": SubResource("Animation_ig7tw"),
+&"fade_in": SubResource("Animation_0xm2m")
+}
+
+[node name="Main" type="Control" unique_id=1142167984]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ig7tw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1460411920]
+libraries/ = SubResource("AnimationLibrary_h2yge")
+autoplay = &"fade_in"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=599486103]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = -29.0
+offset_right = 32.5
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1171576141]
+layout_mode = 2
+text = "Splash screen is done showing.
+"
+
+[node name="Restart" type="Button" parent="VBoxContainer" unique_id=2004518519]
+layout_mode = 2
+text = "Restart"
+
+[node name="FadeOverlay" type="ColorRect" parent="." unique_id=1557877616]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_pressed"]
