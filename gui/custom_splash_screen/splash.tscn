@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://dl1vi5a1071ri"]
+
+[ext_resource type="Script" uid="uid://bp6t8e3w70pgg" path="res://splash.gd" id="1_b04ml"]
+[ext_resource type="Texture2D" uid="uid://l50osuywnjic" path="res://particle_flipbook.webp" id="2_13jq6"]
+[ext_resource type="Texture2D" uid="uid://bs7vsn84kw2xb" path="res://logo_large_color_dark.svg" id="2_50j67"]
+
+[sub_resource type="Animation" id="Animation_13jq6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Logo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(269, 199.99994)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FadeOverlay:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xoh7v"]
+resource_name = "splash"
+length = 4.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Logo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 3, 4),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Vector2(269, 230), Vector2(269, 200), Vector2(269, 200), Vector2(269, 170)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FadeOverlay:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wyt6d"]
+_data = {
+&"RESET": SubResource("Animation_13jq6"),
+&"splash": SubResource("Animation_xoh7v")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xoh7v"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_13jq6"]
+_data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_wyt6d"]
+offsets = PackedFloat32Array(0, 0.16049382, 0.25308642, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Splash" type="Control" unique_id=319112182]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b04ml")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1733050888]
+libraries/ = SubResource("AnimationLibrary_wyt6d")
+autoplay = &"splash"
+
+[node name="Background" type="ColorRect" parent="." unique_id=957655142]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.9655171)
+
+[node name="Particles" type="CPUParticles2D" parent="." unique_id=943680877]
+material = SubResource("CanvasItemMaterial_xoh7v")
+position = Vector2(576, 324)
+amount = 40
+texture = ExtResource("2_13jq6")
+lifetime = 3.0
+preprocess = 3.0
+emission_shape = 3
+emission_rect_extents = Vector2(576, 324)
+gravity = Vector2(0, 0)
+radial_accel_min = 40.0
+radial_accel_max = 40.0
+angle_min = -15.0
+angle_max = 15.0
+scale_amount_min = 0.4
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_13jq6")
+color = Color(0.0925, 0.12925005, 0.25, 1)
+color_ramp = SubResource("Gradient_wyt6d")
+anim_offset_max = 1.0
+
+[node name="Logo" type="TextureRect" parent="." unique_id=1301183704]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -307.0
+offset_top = -124.00006
+offset_right = 307.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_50j67")
+
+[node name="FadeOverlay" type="ColorRect" parent="." unique_id=1983466719]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
