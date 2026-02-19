@@ -1,0 +1,36 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Custom Splash Screen"
+config/tags=PackedStringArray("demo", "gui", "official")
+run/main_scene="uid://dl1vi5a1071ri"
+config/features=PackedStringArray("4.6")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
+
+[display]
+
+window/stretch/mode="canvas_items"
+
+[editor]
+
+movie_writer/movie_file="/tmp/input.png"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
