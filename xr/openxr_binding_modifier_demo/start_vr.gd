@@ -88,7 +88,7 @@ func _on_openxr_visible_state() -> void:
 		focus_lost.emit()
 
 
-# Handle OpenXR focused state
+# Handle OpenXR focused state.
 func _on_openxr_focused_state() -> void:
 	print("OpenXR gained focus")
 	xr_is_focused = true
