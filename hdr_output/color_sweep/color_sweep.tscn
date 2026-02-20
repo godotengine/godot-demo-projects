@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://drlb4o61s5wsk"]
+
+[ext_resource type="Script" uid="uid://cqjmg63jbxlns" path="res://color_sweep/color_sweep.gd" id="1_3qbqk"]
+[ext_resource type="Shader" uid="uid://upgu5h4jlibh" path="res://color_sweep/color_sweep.gdshader" id="2_hfxc4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lquwl"]
+shader = ExtResource("2_hfxc4")
+shader_parameter/log2_min = -18.0
+shader_parameter/log2_max = 5.0
+shader_parameter/clip_to_max = false
+shader_parameter/max_value = 10.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_7mycd"]
+
+[node name="ColorSweep" type="Control" unique_id=784950953]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_3qbqk")
+
+[node name="ColorSweepMesh" type="MeshInstance2D" parent="." unique_id=852978860]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_lquwl")
+position = Vector2(414.00003, 303)
+scale = Vector2(822.00006, -528.00006)
+mesh = SubResource("QuadMesh_7mycd")
+
+[node name="Tooltip" type="Control" parent="." unique_id=1015235051]
+anchors_preset = 0
+offset_left = 3.0
+offset_top = 39.0
+offset_right = 825.0
+offset_bottom = 567.0
+tooltip_text = "The upper tick mark indicates
+output_max_linear_value.
+
+The other tick marks are multiples
+of 0.01, 0.1, 1.0, 10.0, etc., with
+the rightmost white tick mark
+indicating 0.1 and the leftmost
+black tick mark indicating 0.2."
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=832456838]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 828.0
+offset_bottom = 42.0
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=873923751]
+layout_mode = 2
+text = "Min"
+
+[node name="MinHSlider" type="HSlider" parent="HBoxContainer" unique_id=2106554318]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -25.0
+max_value = 10.0
+step = 0.05000000000291038
+value = -13.999999999359712
+
+[node name="Label2" type="Label" parent="HBoxContainer" unique_id=473575971]
+layout_mode = 2
+text = "Max"
+
+[node name="MaxHSlider" type="HSlider" parent="HBoxContainer" unique_id=1145534836]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -25.0
+max_value = 10.0
+step = 0.05000000000291038
+value = 5.0000000017462405
+
+[node name="SweepMinLabel" type="Label" parent="." unique_id=648280970]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 4.0
+offset_top = 10.0
+offset_right = 301.0
+offset_bottom = 33.0
+text = "0.000 (0.01 nits)"
+
+[node name="SweepMaxLabel" type="Label" parent="." unique_id=177120907]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 499.0
+offset_top = 10.0
+offset_right = 823.0
+offset_bottom = 33.0
+text = "32.00 (13824.00 nits)"
+horizontal_alignment = 2
+
+[connection signal="value_changed" from="HBoxContainer/MinHSlider" to="." method="_on_min_h_slider_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/MaxHSlider" to="." method="_on_max_h_slider_value_changed"]

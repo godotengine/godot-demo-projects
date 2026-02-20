@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c0wukesav63su"]
+
+[ext_resource type="PackedScene" uid="uid://cyg6jtuudogcg" path="res://environment/gpu_particles_fire.tscn" id="1_oevuw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7l7or"]
+sky_top_color = Color(0.34199998, 0.5161667, 0.76, 1)
+
+[sub_resource type="Sky" id="Sky_oevuw"]
+sky_material = SubResource("ProceduralSkyMaterial_7l7or")
+
+[sub_resource type="Environment" id="Environment_dg77c"]
+background_mode = 2
+sky = SubResource("Sky_oevuw")
+tonemap_mode = 4
+tonemap_agx_contrast = 1.32
+
+[node name="Node3D" type="Node3D" unique_id=229028905]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=522993847]
+environment = SubResource("Environment_dg77c")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1229274230]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.0156713)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1268142717]
+
+[node name="GPUParticlesFire" parent="." unique_id=1592479161 instance=ExtResource("1_oevuw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7439877, 0)
