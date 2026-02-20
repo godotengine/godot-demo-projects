@@ -1,6 +1,9 @@
 extends CanvasItem
 
+# Set this to your desired color when the CanvasItem's base color is white.
 @export var sdr_self_modulate: Color = Color.WHITE
+
+# Set this to -1.0 to not limit the maximum linear color value.
 @export_range(0, 20, 0.1, "or_less", "or_greater") var max_linear_value_limit: float = -1.0
 
 
