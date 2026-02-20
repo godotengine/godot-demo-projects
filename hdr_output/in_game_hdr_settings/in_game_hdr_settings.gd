@@ -4,8 +4,8 @@ const HDR_SETTINGS_FILE = "user://hdr_settings.cfg"
 const HDR_SETTINGS_SECTION = "HDR"
 
 
-var _auto_adjust_reference: bool = false
-var _auto_adjust_max: bool = false
+var _auto_adjust_reference: bool = true
+var _auto_adjust_max: bool = true
 
 
 func _on_visibility_changed() -> void:
@@ -21,11 +21,18 @@ func _ready() -> void:
 	var hdr_settings: ConfigFile = ConfigFile.new()
 	if hdr_settings.load(HDR_SETTINGS_FILE) == OK:
 		window.hdr_output_requested = hdr_settings.get_value(HDR_SETTINGS_SECTION, "hdr_output_requested", window.hdr_output_requested)
-		DisplayServer.window_set_hdr_output_reference_luminance(hdr_settings.get_value(HDR_SETTINGS_SECTION, "hdr_output_reference_luminance", DisplayServer.window_get_hdr_output_reference_luminance(window_id)), window_id)
-		DisplayServer.window_set_hdr_output_max_luminance(hdr_settings.get_value(HDR_SETTINGS_SECTION, "hdr_output_max_luminance", DisplayServer.window_get_hdr_output_max_luminance(window_id)), window_id)
+		if supports_manual_reference_luminance():
+			DisplayServer.window_set_hdr_output_reference_luminance(hdr_settings.get_value(HDR_SETTINGS_SECTION, "hdr_output_reference_luminance", DisplayServer.window_get_hdr_output_reference_luminance(window_id)), window_id)
+		if supports_manual_max_luminance():
+			DisplayServer.window_set_hdr_output_max_luminance(hdr_settings.get_value(HDR_SETTINGS_SECTION, "hdr_output_max_luminance", DisplayServer.window_get_hdr_output_max_luminance(window_id)), window_id)
 	
 	_auto_adjust_reference = DisplayServer.window_get_hdr_output_reference_luminance(window_id) < 0
 	_auto_adjust_max = DisplayServer.window_get_hdr_output_max_luminance(window_id) < 0
+	
+	%BrightnessDisplay.visible = supports_manual_reference_luminance()
+	%BrightnessAdjustment.visible = supports_manual_reference_luminance()
+	%MaxLumDisplay.visible = supports_manual_max_luminance()
+	%MaxLumAdjustment.visible = supports_manual_max_luminance()
 
 
 func save_settings() -> void:
@@ -44,6 +51,20 @@ func erase_settings() -> void:
 	if hdr_settings.load(HDR_SETTINGS_FILE) == OK:
 		hdr_settings.erase_section(HDR_SETTINGS_SECTION)
 		hdr_settings.save(HDR_SETTINGS_FILE)
+
+
+func supports_manual_reference_luminance() -> bool:
+	if DisplayServer.get_name() == &"Windows":
+		return true
+	else:
+		return false
+
+
+func supports_manual_max_luminance() -> bool:
+	if DisplayServer.get_name() == &"Windows":
+		return true
+	else:
+		return false
 
 
 func _process(_delta: float) -> void:
