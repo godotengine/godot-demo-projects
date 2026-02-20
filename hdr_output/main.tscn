@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://bb4pv67imdsne" path="res://environment/subviewport_scale.gd" id="10_dg77c"]
 [ext_resource type="PackedScene" uid="uid://c0wukesav63su" path="res://environment/3d_environment.tscn" id="11_dg77c"]
 [ext_resource type="Script" uid="uid://b6cwewu4wkvv5" path="res://setup_instructions/setup_instructions.gd" id="13_w48qg"]
-[ext_resource type="Script" uid="uid://dxtpfowo3fjm4" path="res://max_colour.gd" id="13_ycdy4"]
+[ext_resource type="Script" uid="uid://dxtpfowo3fjm4" path="res://max_color.gd" id="13_ycdy4"]
 
 [sub_resource type="Gradient" id="Gradient_4c57u"]
 offsets = PackedFloat32Array(0, 0.0769231, 0.16568, 0.266272, 0.378698, 0.491124, 0.609467, 0.704142, 0.804734, 0.911243, 1)
@@ -155,7 +155,7 @@ offset_right = 186.0
 offset_bottom = 74.0
 color = Color(1, 0, 0, 1)
 script = ExtResource("13_ycdy4")
-sdr_colour = Color(1, 0, 0, 1)
+sdr_color = Color(1, 0, 0, 1)
 
 [node name="ColorRect5" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=2138302032]
 layout_mode = 0
@@ -166,7 +166,7 @@ offset_bottom = 74.0
 pivot_offset = Vector2(0, 29)
 color = Color(0, 1, 0, 1)
 script = ExtResource("13_ycdy4")
-sdr_colour = Color(0, 1, 0, 1)
+sdr_color = Color(0, 1, 0, 1)
 
 [node name="ColorRect6" type="ColorRect" parent="VBoxContainer/ColorRect2/DeveloperSettings/Control" unique_id=1549780699]
 layout_mode = 0
@@ -177,7 +177,7 @@ offset_bottom = 74.0
 pivot_offset = Vector2(0, -4)
 color = Color(0, 0, 1, 1)
 script = ExtResource("13_ycdy4")
-sdr_colour = Color(0, 0, 1, 1)
+sdr_color = Color(0, 0, 1, 1)
 
 [node name="Label2" type="Label" parent="VBoxContainer/ColorRect2/DeveloperSettings" unique_id=332601797]
 custom_minimum_size = Vector2(200, 0)
@@ -417,7 +417,7 @@ offset_right = 239.0
 offset_bottom = 108.0
 color = Color(0.99215686, 0.7058824, 0.41568628, 1)
 script = ExtResource("13_ycdy4")
-sdr_colour = Color(0.99215686, 0.7058824, 0.41568628, 1)
+sdr_color = Color(0.99215686, 0.7058824, 0.41568628, 1)
 max_linear_value_limit = 10.0
 
 [node name="Mountain" type="Sprite2D" parent="DemoScenes/output_max_linear_value/Mountain" unique_id=1827667879]
@@ -495,7 +495,7 @@ offset_top = -374.0
 offset_right = 107.0
 offset_bottom = -325.0
 text = "TODO: 2D thing that uses
-overbright colours"
+overbright colors"
 
 [node name="ColorSweep" parent="DemoScenes" unique_id=784950953 instance=ExtResource("6_7mycd")]
 visible = false
@@ -513,21 +513,21 @@ theme_override_fonts/mono_font = SubResource("SystemFont_7mycd")
 bbcode_enabled = true
 text = "[font_size=20]Steps to enable HDR output in your project:[/font_size]
 
-1) Ensure all Environment resources do [i]not[/i] use SDR-only features:
+1) Ensure [i]no[/i] Environment resources use SDR-only features:
 	- Tonemap Mode: Filmic or ACES
 	- Glow Blend Mode: Soft Light
 	- Adjustments: Color Correction
 
 2) Configure the [code]rendering/rendering_device/driver[/code] project setting to the following:
-	- macos: metal
-	- ios: metal
-	- windows: d3d12
+	- macOS: metal
+	- iOS: metal
+	- Windows: d3d12
 
-3) Turn on the [code]rendering/viewport/hdr_2d[/code] project setting and also turn on [code]use_hdr_2d[/code] of all Subviewport and Windows that should support HDR output.
+3) Turn on the [code]rendering/viewport/hdr_2d[/code] project setting and enable [code]use_hdr_2d[/code] for all Subviewports and Windows that should support HDR output.
 
-4) Turn on the [code]display/window/hdr/request_hdr_output[/code] project setting and also turn on [code]hdr_output_requested[/code] of all other Windows that should support HDR output.
+4) Turn on the [code]display/window/hdr/request_hdr_output[/code] project setting and enable [code]hdr_output_requested[/code] for all other Windows that should support HDR output.
 
-5) [Optional] Provide in-game settings for the player to adjust HDR brightness and maximum luminance by copying [code]in_game_hdr_settings[/code] from this demo into your project.
+5) [Optional] Provide in-game settings for the player to adjust HDR brightness and maximum luminance by copying [code]in_game_hdr_settings[/code] from this demo to your project.
 
 View the [url=\"https://github.com/godotengine/godot-docs/pull/11548\"]manual page[/url] to learn more about HDR output."
 context_menu_enabled = true

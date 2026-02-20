@@ -70,12 +70,12 @@ func supports_manual_max_luminance() -> bool:
 func _process(_delta: float) -> void:
 	var window_id = get_window().get_window_id()
 	var hdr_supported := DisplayServer.window_is_hdr_output_supported(window_id)
-	%HDRCheckButton.disabled = !hdr_supported
+	%HDRCheckButton.disabled = not hdr_supported
 
 	var hdr_output_enabled: bool = DisplayServer.window_is_hdr_output_enabled(window_id)
 	if %HDRCheckButton.button_pressed != hdr_output_enabled:
 		%HDRCheckButton.button_pressed = hdr_output_enabled
-	%HDROptions.visible = hdr_output_enabled && hdr_supported
+	%HDROptions.visible = hdr_output_enabled and hdr_supported
 	
 	%BrightnessSlider.max_value = DisplayServer.window_get_hdr_output_current_max_luminance()
 	%BrightnessSlider.value = DisplayServer.window_get_hdr_output_current_reference_luminance(window_id)
@@ -91,18 +91,18 @@ func _process(_delta: float) -> void:
 
 func _on_hdr_check_button_toggled(toggled_on: bool) -> void:
 	# Request HDR output to the display.
-	if !%HDRCheckButton.disabled:
+	if not %HDRCheckButton.disabled:
 		get_window().hdr_output_requested = toggled_on
 
 
 func _on_brightness_slider_value_changed(value: float) -> void:
-	if !_auto_adjust_reference:
+	if not _auto_adjust_reference:
 		var window_id = get_window().get_window_id()
 		DisplayServer.window_set_hdr_output_reference_luminance(value, window_id)
 
 
 func _on_max_lum_slider_value_changed(value: float) -> void:
-	if !_auto_adjust_max:
+	if not _auto_adjust_max:
 		var window_id = get_window().get_window_id()
 		DisplayServer.window_set_hdr_output_max_luminance(value, window_id)
 
