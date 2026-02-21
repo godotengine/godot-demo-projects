@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://cosjr7whfc78d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_afgmo"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 2.5
+
+[sub_resource type="Gradient" id="Gradient_3tq41"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.370079, 0.724409, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.207843, 1, 1, 1, 0.0352941, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mht1q"]
+gradient = SubResource("Gradient_3tq41")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0.01)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pmykn"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_texture = SubResource("GradientTexture2D_mht1q")
+texture_filter = 4
+billboard_mode = 1
+
+[node name="LampPost" type="Node3D"]
+
+[node name="Base" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+
+[node name="Pole" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+use_collision = true
+size = Vector3(0.2, 5, 0.2)
+
+[node name="Light" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+radial_segments = 6
+rings = 3
+material = SubResource("StandardMaterial3D_afgmo")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Light"]
+light_specular = 0.1
+omni_range = 15.0
+
+[node name="Sprite3D" type="Sprite3D" parent="Light"]
+material_override = SubResource("StandardMaterial3D_pmykn")
+pixel_size = 0.05
+texture = SubResource("GradientTexture2D_mht1q")
