@@ -1,4 +1,4 @@
-class_name VirtualJoystick
+class_name VirtualJoystickAddon
 extends Control
 
 ## A simple virtual joystick for touchscreens, with useful options.
