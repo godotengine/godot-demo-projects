@@ -15,7 +15,21 @@ extends Node2D
 	set(value):
 		color = value
 		queue_redraw()
+		
+## The pivot point of the circle, relative to the center.		
+@export var pivot:Vector2:
+	set(value):
+		# since a pivot is basically a virtual Node2D inbetween,
+		# we shift our own position here, so the pivot position
+		# happens to be at local (0,0).
+		
+		# first undo any old displacement by the previous pivot
+		global_position = global_transform * (-pivot)
+		# then move to handle the displacement of the new pivot
+		global_position = global_transform * (value)
+		pivot = value
+		queue_redraw()		
 
 
 func _draw() -> void:
-	draw_circle(Vector2.ZERO, radius, color)
+	draw_circle(-pivot, radius, color)

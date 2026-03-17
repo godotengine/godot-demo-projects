@@ -31,7 +31,7 @@ func _edit_get_rect(gizmo: EditorCanvasItemGizmo) -> Rect2:
 	
 	# This is a centered circle, so the rectangle only depends on the radius.
 	var radius:float = circle.radius
-	return Rect2(Vector2(-radius, -radius), Vector2(radius * 2, radius * 2))
+	return Rect2(Vector2(-radius, -radius) - circle.pivot, Vector2(radius * 2, radius * 2))
 	 
 ## If we override _edit_get_rect, we also must override _edit_set_rect. This
 ## function will be called by the editor if the user modifies the bounding
@@ -53,7 +53,50 @@ func _edit_set_rect(gizmo: EditorCanvasItemGizmo, boundary: Rect2) -> void:
 	
 	# The editor handles undo and redo for these size changes so
 	# that is not something we need to care about.
+
+## This tells the editor whether our canvas item has a custom pivot.
+## Enabling this, will draw the custom pivot and allow the user to change it.	
+func _has_pivot(_gizmo: EditorCanvasItemGizmo) -> bool:
+	return true
 	
+## Returns the position of the pivot relative to the node's position. Note that
+## this must return the position where pivot should be drawn.
+func _get_pivot(_gizmo: EditorCanvasItemGizmo) -> Vector2:
+	# Since our circle implements the pivot by offsetting the drawing, the
+	# pivot point is always at the node position, so we return Vector2.ZERO here.	
+	return Vector2.ZERO
+	
+## Updates the position of the pivot. The given given pivot is relative to the 
+## node's position.	
+func _set_pivot(gizmo: EditorCanvasItemGizmo, pivot: Vector2) -> void:
+	var circle:Circle = gizmo.get_canvas_item()
+	# The new pivot we get here is relative to the node position. Since
+	# we offset the circle drawing by the pivot, our pivot position is always
+	# at the node position. This means that the pivot we get is relative to
+	# our old pivot (which visually was at the node position). Therefore we add 
+	# it to the circle's pivot rather than overwriting it. If you implement 
+	# pivots differently, you may need to do different calculations here.
+	circle.pivot = circle.pivot + pivot
+	
+## When dragging the pivot around, the editor constantly takes snapshots of the editor
+## state and restores them before applying a new pivot. It also uses these snapshots
+## to provide undo/redo for pivot movement, so we don't have to take care of this. 	
+func _edit_get_state(gizmo: EditorCanvasItemGizmo) -> Dictionary:
+	var circle:Circle = gizmo.get_canvas_item()
+	# the base state (transform, etc.) is automatically saved from the 
+	# underlying node, so we only need to add what is custom to our node. In our case
+	# this is just the pivot field.
+	return {"pivot" : circle.pivot }	
+	
+## The editor calls this when a snapshot is to be restored. Note that this implementation
+## is called before the underlying canvas item's implementation, so we can be sure we see
+## the exact same state that we had right after creating the snapshot.	
+func _edit_set_state(gizmo: EditorCanvasItemGizmo, state: Dictionary) -> void:
+	var circle:Circle = gizmo.get_canvas_item()
+	# Again, the underlying CanvasItem will restore the transform, so we only need
+	# to take care about the pivot.
+	circle.pivot = state.pivot
+
 ## We can override _redraw to add custom selection shapes and handles that makes working
 ## with our nodes nicer in the editor. 
 func _redraw(gizmo: EditorCanvasItemGizmo) -> void:
@@ -76,7 +119,10 @@ func _redraw(gizmo: EditorCanvasItemGizmo) -> void:
 	var circle_polygon:PackedVector2Array = []
 	for i:int in 16:
 		var angle:float = i * TAU / 16.0
-		circle_polygon.append(Vector2(cos(angle), sin(angle)) * circle.radius)
+		circle_polygon.append(
+			(Vector2(cos(angle), sin(angle)) * circle.radius)
+			- circle.pivot # drawing is offset by the pivot, so we need to take this into account
+		)
 	gizmo.add_collision_polygon(circle_polygon)			
 
 	# Lets also add a custom handle so we can edit the radius nicely
@@ -87,7 +133,9 @@ func _redraw(gizmo: EditorCanvasItemGizmo) -> void:
 	
 	# Handle positions are relative to the node. We put the radius handle
 	# at a 45 degree angle, so it doesn't overlap with the scaling handles
-	var handle_pos:Vector2 = Vector2(sin(PI/4.0), cos(PI/4.0)) * circle.radius
+	var handle_pos:Vector2 = \
+		Vector2(sin(PI/4.0), cos(PI/4.0)) * circle.radius \
+		- circle.pivot
 	gizmo.add_handles([handle_pos])	
 	
 ## If we add custom handles, we should override this method to give the editor
@@ -130,7 +178,10 @@ func _set_handle(gizmo: EditorCanvasItemGizmo, handle_id: int, _secondary: bool,
 	# The position that we get is relative to the node, so we can just
 	# look at how far away from the center the user has dragged the handle
 	# to set the new radius
-	var new_radius:float = position.length()
+	
+	# The center is offset by the pivot
+	var center := -circle.pivot
+	var new_radius:float = (position - center).length()
 	circle.radius = new_radius
 	
 ## Once the user releases the handle or aborts the handle movement, the editor will call this method
