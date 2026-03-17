@@ -1,4 +1,3 @@
-@tool
 extends Node
 
 @export var sdr_color: Color = Color.WHITE
