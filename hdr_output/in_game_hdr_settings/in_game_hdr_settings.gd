@@ -25,10 +25,10 @@ func _ready() -> void:
 			DisplayServer.window_set_hdr_output_reference_luminance(hdr_settings.get_value(HDR_SETTINGS_SECTION, "hdr_output_reference_luminance", DisplayServer.window_get_hdr_output_reference_luminance(window_id)), window_id)
 		if overriding_max_luminance_supported():
 			DisplayServer.window_set_hdr_output_max_luminance(hdr_settings.get_value(HDR_SETTINGS_SECTION, "hdr_output_max_luminance", DisplayServer.window_get_hdr_output_max_luminance(window_id)), window_id)
-	
+
 	_auto_adjust_reference = DisplayServer.window_get_hdr_output_reference_luminance(window_id) < 0
 	_auto_adjust_max = DisplayServer.window_get_hdr_output_max_luminance(window_id) < 0
-	
+
 	%BrightnessDisplay.visible = overriding_reference_luminance_supported()
 	%BrightnessAdjustment.visible = overriding_reference_luminance_supported()
 	%MaxLumDisplay.visible = overriding_max_luminance_supported()
@@ -54,18 +54,14 @@ func erase_settings() -> void:
 
 
 func overriding_reference_luminance_supported() -> bool:
-	if DisplayServer.get_name() == &"Windows":
-		return true
-	else:
-		return false
+	return DisplayServer.get_name() == &"Windows"
 
 
 func overriding_max_luminance_supported() -> bool:
 	var display_server_name = DisplayServer.get_name()
-	if display_server_name == &"Windows" || display_server_name == &"macOS":
-		return true
-	else:
-		return false
+	return display_server_name == &"Windows" \
+		or display_server_name == &"macOS" \
+		or (display_server_name == &"embedded" and OS.get_name() == &"macOS")
 
 
 func _process(_delta: float) -> void:
@@ -77,15 +73,15 @@ func _process(_delta: float) -> void:
 	if %HDRCheckButton.button_pressed != hdr_output_enabled:
 		%HDRCheckButton.button_pressed = hdr_output_enabled
 	%HDROptions.visible = hdr_output_enabled and hdr_supported
-	
+
 	%BrightnessSlider.max_value = DisplayServer.window_get_hdr_output_current_max_luminance()
 	%BrightnessSlider.value = DisplayServer.window_get_hdr_output_current_reference_luminance(window_id)
 	%BrightnessLabel.text = "%0.0f" % DisplayServer.window_get_hdr_output_current_reference_luminance(window_id)
-	
+
 	$%MaxLumSlider.min_value = DisplayServer.window_get_hdr_output_current_reference_luminance(window_id)
 	%MaxLumSlider.value = DisplayServer.window_get_hdr_output_current_max_luminance()
 	%MaxLumLabel.text = "%0.0f" % DisplayServer.window_get_hdr_output_current_max_luminance()
-	
+
 	%ResetBrightness.disabled = DisplayServer.window_get_hdr_output_reference_luminance(window_id) < 0
 	%ResetMaxLum.disabled = DisplayServer.window_get_hdr_output_max_luminance(window_id) < 0
 
