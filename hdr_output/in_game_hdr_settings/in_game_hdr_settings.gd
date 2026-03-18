@@ -60,8 +60,8 @@ func overriding_reference_luminance_supported() -> bool:
 func overriding_max_luminance_supported() -> bool:
 	var display_server_name = DisplayServer.get_name()
 	return display_server_name == &"Windows" \
-		or display_server_name == &"macOS" \
-		or (display_server_name == &"embedded" and OS.get_name() == &"macOS")
+			or display_server_name == &"macOS" \
+			or (display_server_name == &"embedded" and OS.get_name() == &"macOS")
 
 
 func _process(_delta: float) -> void:
