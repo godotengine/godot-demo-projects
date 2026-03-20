@@ -7,38 +7,49 @@
 [ext_resource type="Script" uid="uid://fhoiawdcyegx" path="res://main/demo_scenes.gd" id="6_272bh"]
 [ext_resource type="Texture2D" uid="uid://b335ssbw6ynt6" path="res://output_max_linear_value/Super Mountain Dusk/mountain.png" id="7_5vw27"]
 [ext_resource type="Script" uid="uid://cpqmte6usoyyg" path="res://main/debug_info.gd" id="8_5vw27"]
-[ext_resource type="Texture2D" uid="uid://cvecqn4m52x7x" path="res://output_max_linear_value/spark_particle2.png" id="8_kek77"]
+[ext_resource type="PackedScene" uid="uid://berd34e1fxw6d" path="res://output_max_linear_value/3d_scene.tscn" id="8_ycdy4"]
 [ext_resource type="Script" uid="uid://ow74i072fx6r" path="res://max_self_modulate.gd" id="9_4c57u"]
 [ext_resource type="Script" uid="uid://bb4pv67imdsne" path="res://environment/subviewport_scale.gd" id="10_dg77c"]
-[ext_resource type="PackedScene" uid="uid://c0wukesav63su" path="res://environment/3d_environment.tscn" id="11_dg77c"]
+[ext_resource type="PackedScene" uid="uid://c0wukesav63su" path="res://environment/environment.tscn" id="11_dg77c"]
 [ext_resource type="Script" uid="uid://b6cwewu4wkvv5" path="res://setup_instructions/setup_instructions.gd" id="13_w48qg"]
 [ext_resource type="Script" uid="uid://dxtpfowo3fjm4" path="res://max_color.gd" id="13_ycdy4"]
-
-[sub_resource type="Gradient" id="Gradient_4c57u"]
-offsets = PackedFloat32Array(0, 0.0769231, 0.16568, 0.266272, 0.378698, 0.491124, 0.609467, 0.704142, 0.804734, 0.911243, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 0.152961, 0, 1, 1, 0.726562, 0, 1, 0.78125, 1, 0, 1, 0.289062, 1, 0, 1, 0, 1, 0.472656, 1, 0, 1, 0.835938, 1, 0, 0.71875, 1, 1, 0.21875, 0, 1, 1, 1, 0, 0.773438, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_efxa6"]
-gradient = SubResource("Gradient_4c57u")
-
-[sub_resource type="Curve" id="Curve_4c57u"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.24940729, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_efxa6"]
-curve = SubResource("Curve_4c57u")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dg77c"]
-particle_flag_disable_z = true
-radial_velocity_min = -2.2351742e-05
-radial_velocity_max = 166.64998
-gravity = Vector3(0, 0, 0)
-linear_accel_min = 23.879997
-linear_accel_max = 83.59
-scale_curve = SubResource("CurveTexture_efxa6")
-color_ramp = SubResource("GradientTexture1D_efxa6")
+[ext_resource type="Texture2D" uid="uid://de38mbn6q5ay6" path="res://godot.svg" id="14_w48qg"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_efxa6"]
+viewport_path = NodePath("DemoScenes/DemoScene_output_max_linear_value/SubViewport")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yaehf"]
+polygon = PackedVector2Array(-42, -8, -48, -17, -39, -28, -30, -24, -22, -30, -22, -40, -10, -45, -5, -36, 4, -36, 9, -45, 23, -41, 22, -30, 30, -24, 38, -29, 48, -17, 41, -9, 42, 27, 41, 30, 38, 34, 32, 38, 22, 43, 9, 45, -8, 45, -21, 43, -32, 38, -38, 33, -41, 29, -41, 26, -41, -8)
+
+[sub_resource type="Gradient" id="Gradient_vivmo"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.2, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.62100005, 1, 1, 1, 0.193, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2cqfq"]
+gradient = SubResource("Gradient_vivmo")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w48qg"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_2cqfq"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yaehf"]
+gradient = SubResource("Gradient_2cqfq")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ycdy4"]
 viewport_path = NodePath("DemoScenes/DemoScene_WorldEnvironment/SubViewport")
 
 [sub_resource type="SystemFont" id="SystemFont_7mycd"]
@@ -89,7 +100,7 @@ text = "Developer settings:"
 
 [node name="Button" type="Button" parent="VBoxContainer/ColorRect2/DeveloperSettings" unique_id=1727096126]
 layout_mode = 2
-text = "Erase player settings"
+text = "Erase Player Settings"
 
 [node name="Label3" type="Label" parent="VBoxContainer/ColorRect2/DeveloperSettings" unique_id=182639080]
 layout_mode = 2
@@ -376,7 +387,7 @@ scenes = [NodePath("DemoScene_output_max_linear_value"), NodePath("DemoScene_Wor
 
 [node name="Tab" type="ColorRect" parent="DemoScenes" unique_id=261230258]
 layout_mode = 0
-offset_left = 586.0
+offset_left = 579.0
 offset_top = -61.0
 offset_right = 828.0
 color = Color(0.21568628, 0.21568628, 0.21568628, 1)
@@ -389,13 +400,13 @@ offset_right = 234.0
 offset_bottom = 59.0
 selected = 0
 item_count = 4
-popup/item_0/text = "Output max linear value"
+popup/item_0/text = "Output Max. Linear Value"
 popup/item_0/id = 0
-popup/item_1/text = "WorldEnvironment"
+popup/item_1/text = "WorldEnvironment (Glow)"
 popup/item_1/id = 1
-popup/item_2/text = "Color sweep"
+popup/item_2/text = "Color Sweep"
 popup/item_2/id = 2
-popup/item_3/text = "Setup instructions"
+popup/item_3/text = "Setup Instructions"
 popup/item_3/id = 3
 
 [node name="Label" type="Label" parent="DemoScenes/Tab" unique_id=1342427115]
@@ -410,9 +421,10 @@ text = "Demo scene:"
 anchors_preset = 0
 offset_right = 828.0
 offset_bottom = 570.0
+script = ExtResource("10_dg77c")
 
 [node name="Mountain" type="Node2D" parent="DemoScenes/DemoScene_output_max_linear_value" unique_id=1183547058]
-position = Vector2(496, 83)
+position = Vector2(448, 171)
 
 [node name="Sun" type="ColorRect" parent="DemoScenes/DemoScene_output_max_linear_value/Mountain" unique_id=347517105]
 offset_left = 73.0
@@ -430,20 +442,12 @@ texture_repeat = 1
 position = Vector2(160, 120)
 texture = ExtResource("7_5vw27")
 
-[node name="Sparkles" type="GPUParticles2D" parent="DemoScenes/DemoScene_output_max_linear_value" unique_id=817018124]
-texture_filter = 1
-position = Vector2(657, 442)
-amount = 42
-texture = ExtResource("8_kek77")
-process_material = SubResource("ParticleProcessMaterial_dg77c")
-script = ExtResource("9_4c57u")
-
-[node name="HDR_Label" type="Label" parent="DemoScenes/DemoScene_output_max_linear_value" unique_id=1664078869]
+[node name="HDRLabel" type="Label" parent="DemoScenes/DemoScene_output_max_linear_value" unique_id=1664078869]
 layout_mode = 0
-offset_left = 496.0
-offset_top = 11.0
-offset_right = 816.0
-offset_bottom = 75.0
+offset_left = 448.0
+offset_top = 99.0
+offset_right = 768.0
+offset_bottom = 163.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 7
@@ -453,34 +457,57 @@ horizontal_alignment = 1
 script = ExtResource("9_4c57u")
 sdr_self_modulate = Color(0.3882353, 0.7490196, 1, 1)
 
-[node name="Label" type="Label" parent="DemoScenes/DemoScene_output_max_linear_value" unique_id=558150534]
-layout_mode = 0
-offset_left = 95.0
-offset_top = 458.0
-offset_right = 703.0
-offset_bottom = 533.0
-text = "DRAFT DEMO PROJECT
-HELP WANTED
-Please let @allenwp know if you have a high quality demo for use in this scene."
-horizontal_alignment = 1
+[node name="SubViewport" type="SubViewport" parent="DemoScenes/DemoScene_output_max_linear_value" unique_id=1818848484]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+msaa_3d = 2
+use_hdr_2d = true
+scaling_3d_scale = 2.0
+size = Vector2i(350, 350)
 
-[node name="Label2" type="Label" parent="DemoScenes/DemoScene_output_max_linear_value" unique_id=2086992899]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 32.0
-offset_right = 236.0
-offset_bottom = 81.0
-text = "TODO: 3D model that uses
-output_max_linear_value"
+[node name="Node3D" parent="DemoScenes/DemoScene_output_max_linear_value/SubViewport" unique_id=1416688204 instance=ExtResource("8_ycdy4")]
 
-[node name="Label4" type="Label" parent="DemoScenes/DemoScene_output_max_linear_value" unique_id=1381563025]
-layout_mode = 0
-offset_left = 34.0
-offset_top = 400.0
-offset_right = 258.0
-offset_bottom = 449.0
-text = "TODO: 2D scene that uses
-output_max_linear_value"
+[node name="ViewportSprite" type="Sprite2D" parent="DemoScenes/DemoScene_output_max_linear_value" unique_id=234860266]
+position = Vector2(233, 116)
+texture = SubResource("ViewportTexture_efxa6")
+
+[node name="Icon" type="Sprite2D" parent="DemoScenes/DemoScene_output_max_linear_value" unique_id=83378712]
+position = Vector2(234, 392)
+texture = ExtResource("14_w48qg")
+metadata/_edit_group_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="DemoScenes/DemoScene_output_max_linear_value/Icon" unique_id=1561460060]
+occluder = SubResource("OccluderPolygon2D_yaehf")
+metadata/_edit_lock_ = true
+
+[node name="PointLight2DTop" type="PointLight2D" parent="DemoScenes/DemoScene_output_max_linear_value/Icon" unique_id=1199620582]
+position = Vector2(-2, -64)
+energy = 20.85
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 1.0
+texture = SubResource("GradientTexture2D_2cqfq")
+texture_scale = 0.75
+
+[node name="Sprite2D" type="Sprite2D" parent="DemoScenes/DemoScene_output_max_linear_value/Icon/PointLight2DTop" unique_id=30895936]
+material = SubResource("CanvasItemMaterial_w48qg")
+texture = SubResource("GradientTexture2D_yaehf")
+script = ExtResource("9_4c57u")
+
+[node name="PointLight2DBottom" type="PointLight2D" parent="DemoScenes/DemoScene_output_max_linear_value/Icon" unique_id=1958589575]
+position = Vector2(0, 64)
+energy = 20.85
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 1.0
+texture = SubResource("GradientTexture2D_2cqfq")
+texture_scale = 0.75
+
+[node name="Sprite2D" type="Sprite2D" parent="DemoScenes/DemoScene_output_max_linear_value/Icon/PointLight2DBottom" unique_id=1075308165]
+material = SubResource("CanvasItemMaterial_w48qg")
+texture = SubResource("GradientTexture2D_yaehf")
+script = ExtResource("9_4c57u")
 
 [node name="DemoScene_WorldEnvironment" type="Control" parent="DemoScenes" unique_id=1160571939]
 visible = false
@@ -496,43 +523,16 @@ own_world_3d = true
 handle_input_locally = false
 msaa_3d = 2
 use_hdr_2d = true
+scaling_3d_scale = 2.0
 size = Vector2i(570, 570)
-render_target_update_mode = 4
+size_2d_override = Vector2i(570, 570)
+size_2d_override_stretch = true
 
 [node name="Node3D" parent="DemoScenes/DemoScene_WorldEnvironment/SubViewport" unique_id=229028905 instance=ExtResource("11_dg77c")]
 
 [node name="ViewportSprite" type="Sprite2D" parent="DemoScenes/DemoScene_WorldEnvironment" unique_id=448833630]
 position = Vector2(315, -105)
-texture = SubResource("ViewportTexture_efxa6")
-
-[node name="Label2" type="Label" parent="DemoScenes/DemoScene_WorldEnvironment" unique_id=476553587]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 96.0
-offset_right = 616.0
-offset_bottom = 171.0
-text = "DRAFT DEMO PROJECT
-HELP WANTED
-Please let @allenwp know if you have a high quality demo for use in this scene."
-horizontal_alignment = 1
-
-[node name="Label3" type="Label" parent="DemoScenes/DemoScene_WorldEnvironment" unique_id=1179914737]
-layout_mode = 0
-offset_left = -67.0
-offset_top = -358.0
-offset_right = 137.0
-offset_bottom = -309.0
-text = "TODO: 3D scene that uses
-overbright colours, glow, etc."
-
-[node name="Label" type="Label" parent="DemoScenes/DemoScene_WorldEnvironment" unique_id=524097135]
-layout_mode = 0
-offset_left = -65.0
-offset_top = 10.0
-offset_right = 130.0
-offset_bottom = 59.0
-text = "TODO: 2D scene that uses
-overbright colours, glow, etc."
+texture = SubResource("ViewportTexture_ycdy4")
 
 [node name="DemoScene_ColorSweep" parent="DemoScenes" unique_id=784950953 instance=ExtResource("6_7mycd")]
 visible = false

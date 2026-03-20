@@ -10,5 +10,7 @@ func _ready() -> void:
 
 
 func _root_viewport_size_changed() -> void:
+	# Automatically change viewport resolution according to the window size.
+	# This ensures the viewport remains crisp at window sizes higher than the default.
 	viewport.size = Vector2.ONE * get_viewport().size.y
 	viewport_sprite.scale = Vector2.ONE * viewport_initial_size.y / get_viewport().size.y

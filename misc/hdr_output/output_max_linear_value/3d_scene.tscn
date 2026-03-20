@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://berd34e1fxw6d"]
+
+[ext_resource type="Script" uid="uid://ndthsccs3w4f" path="res://max_emission.gd" id="1_p08v0"]
+
+[sub_resource type="Gradient" id="Gradient_p08v0"]
+offsets = PackedFloat32Array(0.9, 1)
+colors = PackedColorArray(0.34407577, 0.34407574, 0.34407574, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_njmsf"]
+gradient = SubResource("Gradient_p08v0")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7feuc"]
+albedo_texture = SubResource("GradientTexture2D_njmsf")
+uv1_scale = Vector3(8, 8, 8)
+
+[sub_resource type="TorusMesh" id="TorusMesh_rvlcr"]
+material = SubResource("StandardMaterial3D_7feuc")
+ring_segments = 64
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p08v0"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_njmsf"]
+material = SubResource("StandardMaterial3D_p08v0")
+radius = 0.4
+height = 0.8
+
+[node name="Node3D" type="Node3D" unique_id=1416688204]
+
+[node name="Torus" type="MeshInstance3D" parent="." unique_id=995126212]
+mesh = SubResource("TorusMesh_rvlcr")
+
+[node name="EmissiveSphere" type="MeshInstance3D" parent="Torus" unique_id=1851142467]
+mesh = SubResource("SphereMesh_njmsf")
+script = ExtResource("1_p08v0")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=541939234]
+transform = Transform3D(0.877983, -0.23644595, 0.41622013, 0, 0.8694949, 0.49394187, -0.47869185, -0.43367255, 0.76340175, 1.682942, 1.9177022, 3.0806046)
+fov = 32.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=620705289]
+transform = Transform3D(0.72655267, -0.46460825, 0.5062217, 0, 0.7367396, 0.6761766, -0.6871108, -0.4912779, 0.5352801, 1.0939837, 1.4612691, 1.1567811)
