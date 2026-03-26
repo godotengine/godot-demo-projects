@@ -2,6 +2,9 @@
 @tool
 extends Panel
 
+# Unused, but defined anyway to avoid script errors when the parent sets the property.
+var use_antialiasing: bool = false
+
 # You must hold a reference to the Resources either as member variables or within an Array or Dictionary.
 # Otherwise, they get freed automatically and the renderer won't be able to draw them.
 var text_mesh := TextMesh.new()
