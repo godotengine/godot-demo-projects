@@ -1,0 +1,96 @@
+[gd_scene load_steps=11 format=3 uid="uid://cn6s3kxlkt6ml"]
+
+[ext_resource type="Script" uid="uid://dknfswmyiegk8" path="res://main.gd" id="1_2eojn"]
+[ext_resource type="Shader" uid="uid://dqhkrv0efh3w" path="res://shaders/color.gdshader" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://ckuw0ps7vjw7e" path="res://world/world.tscn" id="2_j3t0x"]
+[ext_resource type="Script" uid="uid://i1xei4qhq1xq" path="res://start_vr.gd" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bhqkd635yjwnq" path="res://xr_pointer.tscn" id="4_lquwl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bvp3"]
+render_priority = 0
+shader = ExtResource("2_h2yge")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/specular = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_b2416"]
+material = SubResource("ShaderMaterial_1bvp3")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
+render_priority = 0
+shader = ExtResource("2_h2yge")
+shader_parameter/albedo_color = Color(0.24477637, 0.2447764, 0.24477637, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/specular = 0.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lquwl"]
+material = SubResource("ShaderMaterial_h2yge")
+radius = 0.04
+height = 0.15
+radial_segments = 16
+rings = 4
+
+[sub_resource type="BoxMesh" id="BoxMesh_go2t1"]
+material = SubResource("ShaderMaterial_1bvp3")
+size = Vector3(0.01, 0.01, 0.01)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_2eojn")
+
+[node name="StartVR" type="Node3D" parent="."]
+script = ExtResource("4_1bvp3")
+maximum_refresh_rate = 144
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+cull_mask = 1048571
+
+[node name="PlaceholderHead" type="MeshInstance3D" parent="XROrigin3D/XRCamera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0335748, 0.0557129)
+layers = 4
+mesh = SubResource("SphereMesh_b2416")
+
+[node name="PlaceholderHMD" type="MeshInstance3D" parent="XROrigin3D/XRCamera3D/PlaceholderHead"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.015012741, -0.06617409)
+mesh = SubResource("CapsuleMesh_lquwl")
+
+[node name="LeftHandAim" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+pose = &"aim"
+show_when_tracked = true
+
+[node name="PlaceholderHand" type="MeshInstance3D" parent="XROrigin3D/LeftHandAim"]
+mesh = SubResource("BoxMesh_go2t1")
+
+[node name="XRPointer" parent="XROrigin3D/LeftHandAim" instance=ExtResource("4_lquwl")]
+
+[node name="RightHandAim" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"right_hand"
+pose = &"aim"
+show_when_tracked = true
+
+[node name="PlaceholderHand" type="MeshInstance3D" parent="XROrigin3D/RightHandAim"]
+mesh = SubResource("BoxMesh_go2t1")
+skeleton = NodePath("../../LeftHandAim")
+
+[node name="XRPointer" parent="XROrigin3D/RightHandAim" instance=ExtResource("4_lquwl")]
+
+[node name="CameraTracker" type="XRController3D" parent="XROrigin3D"]
+tracker = &"/user/vive_tracker_htcx/role/camera"
+pose = &"camera_pose"
+
+[node name="CameraRemoteTransform3D" type="RemoteTransform3D" parent="XROrigin3D/CameraTracker"]
+unique_name_in_owner = true
+
+[node name="World" parent="." instance=ExtResource("2_j3t0x")]
+
+[connection signal="button_pressed" from="XROrigin3D/LeftHandAim" to="." method="_on_left_hand_aim_button_pressed"]
+[connection signal="button_pressed" from="XROrigin3D/RightHandAim" to="." method="_on_right_hand_aim_button_pressed"]
