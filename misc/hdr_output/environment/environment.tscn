@@ -1,0 +1,146 @@
+[gd_scene format=3 uid="uid://c0wukesav63su"]
+
+[sub_resource type="Environment" id="Environment_dg77c"]
+background_mode = 3
+tonemap_mode = 4
+tonemap_agx_contrast = 1.32
+glow_enabled = true
+glow_levels/2 = 0.0
+glow_levels/3 = 0.8
+glow_levels/4 = 0.4
+glow_levels/5 = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7l7or"]
+top_radius = 0.03
+bottom_radius = 0.03
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oevuw"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_tkka1"]
+material = SubResource("StandardMaterial3D_oevuw")
+radius = 0.05
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7l7or"]
+albedo_color = Color(1, 0.5493962, 0.5986284, 1)
+roughness = 0.0
+clearcoat_enabled = true
+clearcoat_roughness = 0.31
+
+[sub_resource type="SphereMesh" id="SphereMesh_oevuw"]
+material = SubResource("StandardMaterial3D_7l7or")
+radius = 0.375
+height = 0.75
+radial_segments = 72
+rings = 36
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tkka1"]
+albedo_color = Color(0.44710672, 0.80776864, 0.3290965, 1)
+roughness = 0.0
+clearcoat_enabled = true
+clearcoat_roughness = 0.31
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s1otk"]
+albedo_color = Color(0.34436056, 0.74700457, 0.99999994, 1)
+roughness = 0.0
+clearcoat_enabled = true
+clearcoat_roughness = 0.31
+
+[sub_resource type="Gradient" id="Gradient_7l7or"]
+offsets = PackedFloat32Array(0.99, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oevuw"]
+frequency = 1.0
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tkka1"]
+noise = SubResource("FastNoiseLite_oevuw")
+color_ramp = SubResource("Gradient_7l7or")
+
+[node name="Node3D" type="Node3D" unique_id=229028905]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=156044056]
+transform = Transform3D(0.9178169, 0.08523689, -0.38774574, -7.697416e-09, 0.97668, 0.2147004, 0.39700386, -0.19705567, 0.8964134, -1.0187049, 0.83452606, 1.3353662)
+light_energy = 0.15
+light_specular = 0.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=522993847]
+environment = SubResource("Environment_dg77c")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1229274230]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.0156713)
+fov = 45.0
+
+[node name="Lamp" type="MeshInstance3D" parent="." unique_id=321365129]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+mesh = SubResource("CylinderMesh_7l7or")
+
+[node name="Light" type="MeshInstance3D" parent="Lamp" unique_id=1909140459]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("SphereMesh_tkka1")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lamp/Light" unique_id=594898934]
+light_energy = 4.0
+omni_attenuation = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=344805122]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58128446, 0.32147843, -0.5052085)
+mesh = SubResource("SphereMesh_oevuw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=857458263]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21871549, 0.32147843, -0.5052085)
+mesh = SubResource("SphereMesh_oevuw")
+surface_material_override/0 = SubResource("StandardMaterial3D_tkka1")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1406017480]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0187155, 0.32147843, -0.5052085)
+mesh = SubResource("SphereMesh_oevuw")
+surface_material_override/0 = SubResource("StandardMaterial3D_s1otk")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1972221275]
+modulate = Color(3.2944162, 3.2944162, 3.2944162, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_tkka1")
+
+[node name="Label" type="Label" parent="." unique_id=1860946694]
+anchors_preset = -1
+anchor_left = 0.41015625
+anchor_top = 0.7368827
+anchor_right = 0.58984375
+anchor_bottom = 0.80632716
+offset_left = 44.5
+offset_top = 3.0517578e-05
+offset_right = -44.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(1, 1, 0.4834036, 1)
+theme_override_font_sizes/font_size = 32
+text = "Example Text"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="." unique_id=1530623982]
+anchors_preset = -1
+anchor_left = 0.3246528
+anchor_top = 0.82330245
+anchor_right = 0.6753472
+anchor_bottom = 0.8927469
+offset_left = 98.5
+offset_right = -98.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(1.8247963, 1.8247963, 0.9043261, 1)
+theme_override_font_sizes/font_size = 32
+text = "Example Text (Overbright)"
+metadata/_edit_use_anchors_ = true
