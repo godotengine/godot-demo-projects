@@ -1,7 +1,7 @@
 # 3D Lights and Shadows
 
 This project showcases various 3D light and shadow features supported by Godot.
-This includes contact-hardening shadows (PCSS) and light projectors.
+This includes contact-hardening shadows (PCSS), light projectors, and area lights.
 
 The background sky uses a PhysicalSkyMaterial, which allows for the sky colors
 to be automatically adjusted as the sun performs a day/night cycle. The radiance

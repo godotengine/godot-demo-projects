@@ -33,7 +33,7 @@ func _unhandled_input(input_event: InputEvent) -> void:
 			zoom -= ZOOM_SPEED
 		if input_event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			zoom += ZOOM_SPEED
-		zoom = clamp(zoom, 1.5, 4)
+		zoom = clamp(zoom, 1.5, 5)
 
 	if input_event is InputEventMouseMotion and input_event.button_mask & MAIN_BUTTONS:
 		# Use `screen_relative` to make mouse sensitivity independent of viewport resolution.
