@@ -26,7 +26,7 @@ func _ready() -> void:
 	_play_stats.changed.connect(
 			func() -> void:
 				play_stats_updated.emit(_play_stats)
-		)
+				)
 
 	var chart_data := ChartData.get_chart_data(chart)
 
