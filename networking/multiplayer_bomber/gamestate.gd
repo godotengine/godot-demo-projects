@@ -122,12 +122,10 @@ func begin_game() -> void:
 	for p: int in players:
 		spawn_points[p] = spawn_point_idx
 		spawn_point_idx += 1
-		
+
 	var spawner: MultiplayerSpawner = world.get_node(^"PlayerSpawner")
 	for p_id: int in spawn_points:
 		var spawn_pos: Vector2 = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
-		# The RPC must be called after the player is added to the scene tree.
-		
 		var player = spawner.spawn([spawn_pos, p_id])
 		player.set_player_name.rpc(player_name if p_id == multiplayer.get_unique_id() else players[p_id])
 
