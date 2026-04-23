@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://d33sfdrj7ggti"]
 
+[ext_resource type="Texture2D" uid="uid://btvdblpgygyck" path="res://checker_roughness.png" id="3_g14j6"]
 [ext_resource type="Script" uid="uid://3w6r6b15au0o" path="res://day_night_cycle.gd" id="3_qt5yq"]
 [ext_resource type="Script" uid="uid://m8bn4f8a2b08" path="res://spin.gd" id="3_umwj4"]
+[ext_resource type="Texture2D" uid="uid://byrh2ums1vbom" path="res://checker_normal.png" id="3_vbegm"]
 [ext_resource type="Texture2D" uid="uid://dvqui03puxa8b" path="res://logo_projector.png" id="5_ink5e"]
+[ext_resource type="Texture2D" uid="uid://o6snii78ed56" path="res://area_light_star.svg" id="8_ehkex"]
+[ext_resource type="Texture2D" uid="uid://f0jv2ffctkpb" path="res://area_light_star_outline.svg" id="9_xersf"]
 [ext_resource type="Texture2D" uid="uid://dfqxluotbjtnl" path="res://checker.png" id="14"]
 [ext_resource type="Script" uid="uid://dhge0bbmeood6" path="res://tester.gd" id="18"]
 
@@ -22,6 +26,11 @@ fog_aerial_perspective = 1.0
 [sub_resource type="StandardMaterial3D" id="13"]
 diffuse_mode = 1
 albedo_texture = ExtResource("14")
+roughness = 0.8
+roughness_texture = ExtResource("3_g14j6")
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("3_vbegm")
 uv1_scale = Vector3(32, 32, 1)
 texture_filter = 5
 
@@ -64,12 +73,70 @@ roughness = 0.75
 metallic = 1.0
 roughness = 0.88
 
+[sub_resource type="Gradient" id="Gradient_ehkex"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xersf"]
+gradient = SubResource("Gradient_ehkex")
+
+[sub_resource type="Gradient" id="Gradient_00tp4"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_77dp3"]
+gradient = SubResource("Gradient_00tp4")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5tkv4"]
+albedo_texture = SubResource("GradientTexture2D_xersf")
+roughness = 0.15
+roughness_texture = SubResource("GradientTexture2D_77dp3")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0m0f1"]
+material = SubResource("StandardMaterial3D_5tkv4")
+size = Vector2(3, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vbegm"]
+diffuse_mode = 1
+albedo_texture = ExtResource("14")
+metallic = 1.0
+roughness_texture = ExtResource("3_g14j6")
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("3_vbegm")
+uv1_scale = Vector3(2, 1, 1)
+texture_filter = 5
+
 [sub_resource type="TorusMesh" id="TorusMesh_1m8cl"]
+material = SubResource("StandardMaterial3D_vbegm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xersf"]
+diffuse_mode = 1
+albedo_texture = ExtResource("14")
+metallic = 1.0
+roughness_texture = ExtResource("3_g14j6")
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("3_vbegm")
+uv1_scale = Vector3(0.75, 0.5, 0.25)
+texture_filter = 5
 
 [sub_resource type="BoxMesh" id="BoxMesh_u7sma"]
+material = SubResource("StandardMaterial3D_xersf")
 size = Vector3(0.5, 0.5, 0.5)
+subdivide_width = 3
+subdivide_height = 3
+subdivide_depth = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ehkex"]
+diffuse_mode = 1
+albedo_texture = ExtResource("14")
+metallic = 1.0
+roughness_texture = ExtResource("3_g14j6")
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("3_vbegm")
+uv1_scale = Vector3(1, 2, 1)
+texture_filter = 5
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_c5g5m"]
+material = SubResource("StandardMaterial3D_ehkex")
 top_radius = 0.0
 
 [sub_resource type="Gradient" id="Gradient_dfnk8"]
@@ -86,6 +153,26 @@ height = 128
 noise = SubResource("FastNoiseLite_ekg3u")
 color_ramp = SubResource("Gradient_dfnk8")
 seamless = true
+
+[sub_resource type="Gradient" id="Gradient_vbegm"]
+offsets = PackedFloat32Array(0, 0.9, 1)
+colors = PackedColorArray(18.892157, 18.892157, 18.892157, 1, 1, 1, 1, 0.994, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ehkex"]
+gradient = SubResource("Gradient_vbegm")
+width = 100
+height = 100
+use_hdr = true
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vbegm"]
+gradient = SubResource("Gradient_vbegm")
+width = 400
+height = 10
+use_hdr = true
+fill = 2
+fill_from = Vector2(0.5, 0.5)
 
 [node name="WorldEnvironment" type="WorldEnvironment" unique_id=1100998775]
 environment = SubResource("11")
@@ -136,6 +223,14 @@ transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 
 mesh = SubResource("TorusMesh_txea0")
 surface_material_override/0 = SubResource("StandardMaterial3D_pqd2q")
 
+[node name="FloorMirror" type="MeshInstance3D" parent="." unique_id=1991390489]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5489407, 0.0013056546, -22)
+mesh = SubResource("PlaneMesh_0m0f1")
+
+[node name="FloorMirror2" type="MeshInstance3D" parent="." unique_id=1133524219]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4510593, 0.0013056546, -22)
+mesh = SubResource("PlaneMesh_0m0f1")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=74852899 groups=["animatable"]]
 transform = Transform3D(0.965224, 0.021904, 0.260505, 0.0170597, -0.999637, 0.0208427, 0.260867, -0.0156738, -0.965248, 3.9506, 3.39961, 3.54442)
 visible = false
@@ -143,8 +238,7 @@ shadow_enabled = true
 shadow_bias = 0.05
 shadow_blur = 2.0
 directional_shadow_mode = 0
-directional_shadow_fade_start = 1.0
-directional_shadow_max_distance = 30.0
+directional_shadow_max_distance = 32.0
 script = ExtResource("3_qt5yq")
 
 [node name="CameraHolder" type="Node3D" parent="." unique_id=1483948199]
@@ -271,7 +365,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 10)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.1, -0.5)
 light_color = Color(1, 0.454902, 0.211765, 1)
 light_energy = 3.0
-shadow_blur = 3.0
 omni_range = 0.55
 omni_attenuation = 2.0
 
@@ -279,14 +372,12 @@ omni_attenuation = 2.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -0.5)
 light_color = Color(1, 0.454902, 0.211765, 1)
 light_energy = 3.0
-shadow_blur = 3.0
 omni_range = 0.55
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="Testers/OmniLightAttenuation" unique_id=1244392171]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.1, -0.5)
 light_color = Color(1, 0.454902, 0.211765, 1)
 light_energy = 3.0
-shadow_blur = 3.0
 omni_range = 0.55
 omni_attenuation = 0.5
 
@@ -294,7 +385,6 @@ omni_attenuation = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.1, 0.5)
 light_color = Color(1, 0.454902, 0.211765, 1)
 light_energy = 3.0
-shadow_blur = 3.0
 omni_range = 0.55
 omni_attenuation = 0.0
 
@@ -302,7 +392,6 @@ omni_attenuation = 0.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.5)
 light_color = Color(1, 0.454902, 0.211765, 1)
 light_energy = 3.0
-shadow_blur = 3.0
 omni_range = 0.55
 omni_attenuation = -2.0
 
@@ -310,7 +399,6 @@ omni_attenuation = -2.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.1, 0.5)
 light_color = Color(1, 0.454902, 0.211765, 1)
 light_energy = 3.0
-shadow_blur = 3.0
 omni_range = 0.55
 omni_attenuation = -0.5
 
@@ -405,7 +493,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -6)
 mesh = SubResource("TorusMesh_1m8cl")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Testers/SpotLightWithProjector" unique_id=1075261658 groups=["animatable"]]
-transform = Transform3D(0.866025, -2.18557e-08, 0.5, -0.5, -3.78552e-08, 0.866025, 0, -1, -4.37114e-08, 0, 1.4, 0)
+transform = Transform3D(-2.9802322e-08, -0.8660253, 0.50000006, 0, 0.50000024, 0.86602503, -0.99999964, 4.3711367e-08, -2.980232e-08, 0, 1.4, 0)
 light_color = Color(0.686275, 0.568627, 0.909804, 1)
 light_energy = 4.0
 light_projector = ExtResource("5_ink5e")
@@ -438,7 +526,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -10)
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1, 0.4, 0)
 light_color = Color(0.686275, 0.568627, 0.909804, 1)
 light_energy = 3.0
-shadow_blur = 3.0
 spot_range = 2.0
 spot_attenuation = -2.0
 spot_angle = 40.0
@@ -447,7 +534,6 @@ spot_angle = 40.0
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.4, 0)
 light_color = Color(0.686275, 0.568627, 0.909804, 1)
 light_energy = 3.0
-shadow_blur = 3.0
 spot_range = 2.0
 spot_attenuation = -2.0
 spot_angle = 40.0
@@ -457,7 +543,6 @@ spot_angle_attenuation = 2.0
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1, 0.4, 0)
 light_color = Color(0.686275, 0.568627, 0.909804, 1)
 light_energy = 3.0
-shadow_blur = 3.0
 spot_range = 2.0
 spot_attenuation = -2.0
 spot_angle = 40.0
@@ -467,7 +552,6 @@ spot_angle_attenuation = 0.5
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1, 0.4, 1)
 light_color = Color(0.686275, 0.568627, 0.909804, 1)
 light_energy = 3.0
-shadow_blur = 3.0
 spot_range = 2.0
 spot_attenuation = -2.0
 spot_angle = 40.0
@@ -477,7 +561,6 @@ spot_angle_attenuation = 0.305739
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.4, 1)
 light_color = Color(0.686275, 0.568627, 0.909804, 1)
 light_energy = 3.0
-shadow_blur = 3.0
 spot_range = 2.0
 spot_attenuation = -2.0
 spot_angle = 40.0
@@ -487,11 +570,247 @@ spot_angle_attenuation = 3.4822
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1, 0.4, 1)
 light_color = Color(0.686275, 0.568627, 0.909804, 1)
 light_energy = 3.0
-shadow_blur = 3.0
 spot_range = 2.0
 spot_attenuation = -2.0
 spot_angle = 40.0
 spot_angle_attenuation = 21.1121
+
+[node name="AreaLightNoShadows" type="MeshInstance3D" parent="Testers" unique_id=1748390383]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -14)
+mesh = SubResource("TorusMesh_1m8cl")
+
+[node name="AreaLight3D" type="AreaLight3D" parent="Testers/AreaLightNoShadows" unique_id=91834674 groups=["animatable"]]
+transform = Transform3D(-2.9802322e-08, -0.8660253, 0.50000006, 0, 0.50000024, 0.86602503, -0.99999964, 4.3711367e-08, -2.980232e-08, 0, 1.4, 0)
+light_color = Color(0.39306805, 0.71123195, 0.6435863, 1)
+light_energy = 1.5
+light_size = 0.1
+script = ExtResource("3_umwj4")
+metadata/_edit_group_ = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Testers/AreaLightNoShadows/AreaLight3D" unique_id=753371329]
+modulate = Color(0.54102784, 0.9658199, 0.8766528, 1)
+texture_filter = 5
+texture = SubResource("GradientTexture2D_ehkex")
+
+[node name="Box" type="MeshInstance3D" parent="Testers/AreaLightNoShadows" unique_id=506878242]
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="SmallBox" type="MeshInstance3D" parent="Testers/AreaLightNoShadows" unique_id=216143142]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.3, 0)
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="Cone" type="MeshInstance3D" parent="Testers/AreaLightNoShadows" unique_id=478109061]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.8, 0)
+mesh = SubResource("CylinderMesh_c5g5m")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="AreaLightWithShadows" type="MeshInstance3D" parent="Testers" unique_id=469462191]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -18)
+mesh = SubResource("TorusMesh_1m8cl")
+
+[node name="AreaLight3D" type="AreaLight3D" parent="Testers/AreaLightWithShadows" unique_id=1631874860 groups=["animatable"]]
+transform = Transform3D(-2.9802322e-08, -0.8660253, 0.50000006, 0, 0.50000024, 0.86602503, -0.99999964, 4.3711367e-08, -2.980232e-08, 0, 1.4, 0)
+light_color = Color(0.39306805, 0.71123195, 0.6435863, 1)
+light_energy = 1.5
+light_size = 0.0
+shadow_enabled = true
+shadow_bias = 0.03
+shadow_normal_bias = 4.0
+shadow_blur = 5.0
+script = ExtResource("3_umwj4")
+metadata/_edit_group_ = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Testers/AreaLightWithShadows/AreaLight3D" unique_id=2064682678]
+modulate = Color(0.39215687, 0.70980394, 0.6431373, 1)
+texture = SubResource("GradientTexture2D_ehkex")
+
+[node name="Box" type="MeshInstance3D" parent="Testers/AreaLightWithShadows" unique_id=1080349238]
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="SmallBox" type="MeshInstance3D" parent="Testers/AreaLightWithShadows" unique_id=688365662]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.3, 0)
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="Cone" type="MeshInstance3D" parent="Testers/AreaLightWithShadows" unique_id=1477487789]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.8, 0)
+mesh = SubResource("CylinderMesh_c5g5m")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="AreaLightWithPCSSShadows" type="MeshInstance3D" parent="Testers" unique_id=464347075]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -22)
+mesh = SubResource("TorusMesh_1m8cl")
+
+[node name="AreaLight3D" type="AreaLight3D" parent="Testers/AreaLightWithPCSSShadows" unique_id=200158801 groups=["animatable"]]
+transform = Transform3D(-2.9802322e-08, -0.8660253, 0.50000006, 0, 0.50000024, 0.86602503, -0.99999964, 4.3711367e-08, -2.980232e-08, 0, 1.4, 0)
+light_color = Color(0.39306805, 0.71123195, 0.6435863, 1)
+light_energy = 1.5
+shadow_enabled = true
+shadow_bias = 0.03
+shadow_normal_bias = 4.0
+script = ExtResource("3_umwj4")
+metadata/_edit_group_ = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Testers/AreaLightWithPCSSShadows/AreaLight3D" unique_id=628860282]
+modulate = Color(0.39215687, 0.70980394, 0.6431373, 1)
+texture = SubResource("GradientTexture2D_ehkex")
+
+[node name="Box" type="MeshInstance3D" parent="Testers/AreaLightWithPCSSShadows" unique_id=992394368]
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="SmallBox" type="MeshInstance3D" parent="Testers/AreaLightWithPCSSShadows" unique_id=1742048889]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.3, 0)
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="Cone" type="MeshInstance3D" parent="Testers/AreaLightWithPCSSShadows" unique_id=1639410043]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.8, 0)
+mesh = SubResource("CylinderMesh_c5g5m")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="AreaLightWithTexture" type="MeshInstance3D" parent="Testers" unique_id=1512501013]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -26)
+mesh = SubResource("TorusMesh_1m8cl")
+
+[node name="AreaLight3D" type="AreaLight3D" parent="Testers/AreaLightWithTexture" unique_id=1520435152 groups=["animatable"]]
+transform = Transform3D(-2.9802322e-08, -0.8660253, 0.50000006, 0, 0.50000024, 0.86602503, -0.99999964, 4.3711367e-08, -2.980232e-08, 0, 1.4, 0)
+light_color = Color(0.39306805, 0.71123195, 0.6435863, 1)
+light_energy = 4.0
+light_size = 0.0
+shadow_enabled = true
+shadow_bias = 0.03
+shadow_normal_bias = 4.0
+shadow_blur = 5.0
+area_texture = ExtResource("5_ink5e")
+script = ExtResource("3_umwj4")
+metadata/_edit_group_ = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Testers/AreaLightWithTexture/AreaLight3D" unique_id=2106566141]
+modulate = Color(0.39215687, 0.70980394, 0.6431373, 1)
+pixel_size = 0.004
+texture = ExtResource("5_ink5e")
+
+[node name="Box" type="MeshInstance3D" parent="Testers/AreaLightWithTexture" unique_id=1502988336]
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="SmallBox" type="MeshInstance3D" parent="Testers/AreaLightWithTexture" unique_id=2144800751]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.3, 0)
+mesh = SubResource("BoxMesh_u7sma")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="Cone" type="MeshInstance3D" parent="Testers/AreaLightWithTexture" unique_id=1969576849]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.8, 0)
+mesh = SubResource("CylinderMesh_c5g5m")
+skeleton = NodePath("../../OmniLightNoShadows")
+
+[node name="AreaLightShapes" type="Node3D" parent="Testers" unique_id=2088114523]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -30)
+
+[node name="BigLine" type="AreaLight3D" parent="Testers/AreaLightShapes" unique_id=11612626]
+transform = Transform3D(-1, -8.742278e-08, -3.8213718e-15, 0, -4.37114e-08, 1, -8.742278e-08, 1, 4.37114e-08, 0, 0.7019069, 0)
+light_color = Color(0.39306805, 0.71123195, 0.6435863, 1)
+light_energy = 3.0
+area_range = 2.0
+area_size = Vector2(4, 0.05)
+metadata/_edit_group_ = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Testers/AreaLightShapes/BigLine" unique_id=74739063]
+modulate = Color(0.39215687, 0.70980394, 0.6431373, 1)
+texture_filter = 5
+texture = SubResource("GradientTexture2D_vbegm")
+
+[node name="Star" type="AreaLight3D" parent="Testers/AreaLightShapes" unique_id=1262296582]
+transform = Transform3D(-0.25881913, -1.9747222e-07, 0.9659258, 0.9659258, 4.0732537e-08, 0.25881913, -9.04542e-08, 1, 1.8020114e-07, 2.1552916, 0.09509228, 1.1999992)
+light_color = Color(0.39306805, 0.71123195, 0.6435863, 1)
+light_energy = 3.0
+area_range = 2.0
+area_size = Vector2(0.5, 0.5)
+area_texture = ExtResource("8_ehkex")
+metadata/_edit_group_ = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Testers/AreaLightShapes/Star" unique_id=345953329]
+modulate = Color(0.39215687, 0.70980394, 0.6431373, 1)
+pixel_size = 0.002
+texture_filter = 5
+texture = ExtResource("8_ehkex")
+
+[node name="StarOutline" type="AreaLight3D" parent="Testers/AreaLightShapes" unique_id=345687058]
+transform = Transform3D(-0.25881913, -1.9747222e-07, 0.9659258, 0.9659258, 4.0732537e-08, 0.25881913, -9.04542e-08, 1, 1.8020114e-07, 2.1032362, 0.28818518, 0.6)
+light_color = Color(0.39306805, 0.71123195, 0.6435863, 1)
+light_energy = 3.0
+area_range = 2.0
+area_size = Vector2(0.5, 0.5)
+area_texture = ExtResource("9_xersf")
+metadata/_edit_group_ = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Testers/AreaLightShapes/StarOutline" unique_id=1722670942]
+modulate = Color(0.39215687, 0.70980394, 0.6431373, 1)
+pixel_size = 0.002
+texture_filter = 5
+texture = ExtResource("9_xersf")
+
+[node name="Line" type="AreaLight3D" parent="Testers/AreaLightShapes" unique_id=1189580522]
+transform = Transform3D(0.0022541515, 0.0047258986, -0.9999863, 0.43050522, 0.9025729, 0.005235964, 0.90258527, -0.43051112, 1.1924717e-08, -2, 0.20190687, -1)
+light_color = Color(0.39306805, 0.71123195, 0.6435863, 1)
+light_energy = 3.0
+area_range = 2.0
+area_size = Vector2(2, 0.025)
+metadata/_edit_group_ = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Testers/AreaLightShapes/Line" unique_id=1710433070]
+modulate = Color(0.39215687, 0.70980394, 0.6431373, 1)
+pixel_size = 0.005
+texture_filter = 5
+texture = SubResource("GradientTexture2D_vbegm")
+
+[node name="Line2" type="AreaLight3D" parent="Testers/AreaLightShapes" unique_id=1829750589]
+transform = Transform3D(-0.012020615, 0.025201641, 0.9996101, -0.43034327, 0.90223336, -0.02792164, -0.90258527, -0.43051112, -4.3324015e-08, 2, 0.20190687, -1)
+light_color = Color(0.39306805, 0.71123195, 0.6435863, 1)
+light_energy = 3.0
+area_range = 2.0
+area_size = Vector2(2, 0.025)
+metadata/_edit_group_ = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Testers/AreaLightShapes/Line2" unique_id=539578758]
+modulate = Color(0.39215687, 0.70980394, 0.6431373, 1)
+pixel_size = 0.005
+texture_filter = 5
+texture = SubResource("GradientTexture2D_vbegm")
+
+[node name="Star2" type="AreaLight3D" parent="Testers/AreaLightShapes" unique_id=1209141117]
+transform = Transform3D(0.25881913, 8.9754856e-08, -0.9659258, 0.9659258, 5.3084328e-08, 0.25881913, 7.45058e-08, -1, -7.295729e-08, -2.148236, 0.09509216, 1.2000008)
+light_color = Color(0.39306805, 0.71123195, 0.6435863, 1)
+light_energy = 3.0
+area_range = 2.0
+area_size = Vector2(0.5, 0.5)
+area_texture = ExtResource("8_ehkex")
+metadata/_edit_group_ = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Testers/AreaLightShapes/Star2" unique_id=603503168]
+modulate = Color(0.39215687, 0.70980394, 0.6431373, 1)
+pixel_size = 0.002
+texture_filter = 5
+texture = ExtResource("8_ehkex")
+
+[node name="StarOutline2" type="AreaLight3D" parent="Testers/AreaLightShapes" unique_id=2001721860]
+transform = Transform3D(0.25881913, 8.9754856e-08, -0.9659258, 0.9659258, 5.3084328e-08, 0.25881913, 7.45058e-08, -1, -7.295729e-08, -2.0964725, 0.28827733, 0.6000004)
+light_color = Color(0.39306805, 0.71123195, 0.6435863, 1)
+light_energy = 3.0
+area_range = 2.0
+area_size = Vector2(0.5, 0.5)
+area_texture = ExtResource("9_xersf")
+metadata/_edit_group_ = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Testers/AreaLightShapes/StarOutline2" unique_id=1465779421]
+modulate = Color(0.39215687, 0.70980394, 0.6431373, 1)
+pixel_size = 0.002
+texture_filter = 5
+texture = ExtResource("9_xersf")
 
 [node name="TestName" type="Label" parent="." unique_id=1011156549]
 anchors_preset = 7
@@ -584,15 +903,15 @@ focus_mode = 0
 selected = 2
 item_count = 5
 popup/item_0/text = "1024×1024 (Faster)"
-popup/item_0/id = 2
+popup/item_0/id = 0
 popup/item_1/text = "2048×2048 (Fast)"
-popup/item_1/id = 3
+popup/item_1/id = 0
 popup/item_2/text = "4096×4096 (Average)"
-popup/item_2/id = 4
+popup/item_2/id = 0
 popup/item_3/text = "8192×8192 (Slow)"
-popup/item_3/id = 5
+popup/item_3/id = 0
 popup/item_4/text = "16384×16384 (Slowest)"
-popup/item_4/id = 6
+popup/item_4/id = 0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1354013357]
 layout_mode = 2
@@ -616,15 +935,15 @@ item_count = 6
 popup/item_0/text = "Hard (Fastest)"
 popup/item_0/id = 0
 popup/item_1/text = "Soft Very Low (Faster)"
-popup/item_1/id = 1
+popup/item_1/id = 0
 popup/item_2/text = "Soft Low (Fast)"
-popup/item_2/id = 2
+popup/item_2/id = 0
 popup/item_3/text = "Soft Medium (Average)"
-popup/item_3/id = 3
+popup/item_3/id = 0
 popup/item_4/text = "Soft High (Slow)"
-popup/item_4/id = 5
+popup/item_4/id = 0
 popup/item_5/text = "Soft Ultra (Slowest)"
-popup/item_5/id = 6
+popup/item_5/id = 0
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer" unique_id=1633772490]
 layout_mode = 2
@@ -648,15 +967,15 @@ item_count = 6
 popup/item_0/text = "Nearest"
 popup/item_0/id = 0
 popup/item_1/text = "Linear"
-popup/item_1/id = 1
+popup/item_1/id = 0
 popup/item_2/text = "Nearest + Mipmaps"
-popup/item_2/id = 2
+popup/item_2/id = 0
 popup/item_3/text = "Linear + Mipmaps"
-popup/item_3/id = 3
+popup/item_3/id = 0
 popup/item_4/text = "Nearest + Mipmaps + 16× Anisotropic"
-popup/item_4/id = 4
+popup/item_4/id = 0
 popup/item_5/text = "Linear + Mipmaps + 16× Anisotropic"
-popup/item_5/id = 5
+popup/item_5/id = 0
 
 [connection signal="pressed" from="Previous" to="." method="_on_previous_pressed"]
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
