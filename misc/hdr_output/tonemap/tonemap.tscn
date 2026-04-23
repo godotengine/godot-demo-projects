@@ -1,0 +1,534 @@
+[gd_scene format=3 uid="uid://c0wukesav63su"]
+
+[ext_resource type="Script" uid="uid://d2i1kn5pps4tv" path="res://tonemap/sphere_and_light.gd" id="1_ot7qo"]
+[ext_resource type="PackedScene" uid="uid://bijyfxd7bo21v" path="res://output_max_linear_value/geodesic-sphere.glb" id="2_ot7qo"]
+[ext_resource type="Script" uid="uid://8fnkvv7j1nwv" path="res://output_max_linear_value/rotate.gd" id="3_rg21v"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vmfqk"]
+sky_top_color = Color(0.049761154, 0.103845485, 0.16248065, 1)
+sky_horizon_color = Color(0.107977085, 0.1828079, 0.27524596, 1)
+ground_bottom_color = Color(0.10980392, 0.18431373, 0.27450982, 1)
+ground_horizon_color = Color(0.10980392, 0.18431373, 0.27450982, 1)
+sun_angle_max = 0.0
+
+[sub_resource type="Sky" id="Sky_m6i5d"]
+sky_material = SubResource("ProceduralSkyMaterial_vmfqk")
+
+[sub_resource type="Environment" id="Environment_dg77c"]
+background_mode = 2
+sky = SubResource("Sky_m6i5d")
+tonemap_mode = 4
+tonemap_agx_contrast = 1.32
+glow_enabled = true
+glow_levels/4 = 0.2
+glow_levels/5 = 0.1
+glow_blend_mode = 0
+glow_hdr_luminance_cap = 32.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_c6jif"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vmfqk"]
+albedo_color = Color(0.10980392, 0.18431373, 0.27450982, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7l7or"]
+albedo_color = Color(1, 0.2784314, 0.36862746, 1)
+roughness = 0.0
+clearcoat_enabled = true
+clearcoat_roughness = 0.31
+
+[sub_resource type="SphereMesh" id="SphereMesh_oevuw"]
+material = SubResource("StandardMaterial3D_7l7or")
+radius = 0.375
+height = 0.75
+radial_segments = 72
+rings = 36
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tkka1"]
+albedo_color = Color(0.44705883, 0.8784314, 0.32941177, 1)
+roughness = 0.0
+clearcoat_enabled = true
+clearcoat_roughness = 0.31
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s1otk"]
+albedo_color = Color(0.2901961, 0.47843137, 1, 1)
+roughness = 0.0
+clearcoat_enabled = true
+clearcoat_roughness = 0.31
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m6i5d"]
+albedo_color = Color(0.22350419, 0.25080395, 0.26138347, 1)
+metallic = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ot7qo"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 6.38
+
+[sub_resource type="Animation" id="Animation_m6i5d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SphereAndLight:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.9473517, 1.130393, 0.053055763)]
+}
+
+[sub_resource type="Animation" id="Animation_ot7qo"]
+resource_name = "sphere_bob"
+length = 4.0
+loop_mode = 1
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SphereAndLight:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.9473517, 1.130393, 0.053055763), Vector3(-0.947, 1.01, 0.053), Vector3(-0.9473517, 1.130393, 0.053055763)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rg21v"]
+_data = {
+&"RESET": SubResource("Animation_m6i5d"),
+&"sphere_bob": SubResource("Animation_ot7qo")
+}
+
+[node name="Node3D" type="Node3D" unique_id=229028905]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=522993847]
+environment = SubResource("Environment_dg77c")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1229274230]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75747645, 3.0156713)
+fov = 45.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1961520966]
+transform = Transform3D(0.79246473, -2.6660349e-08, 0.60991776, -0.60991776, -3.463973e-08, 0.79246473, 0, -1, -4.371138e-08, 1.9249785, 2.1055994, 0)
+light_energy = 13.444
+shadow_enabled = true
+spot_range = 6.91
+spot_angle = 29.37
+spot_angle_attenuation = 0.3077856
+
+[node name="ground" type="MeshInstance3D" parent="." unique_id=407017710]
+transform = Transform3D(5.0484633, -2.9802322e-08, 0, 0, 0.9999999, 0, 1.4210855e-14, 3.5527137e-15, 6.078054, 0, 0, 0)
+mesh = SubResource("PlaneMesh_c6jif")
+surface_material_override/0 = SubResource("StandardMaterial3D_vmfqk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=344805122]
+transform = Transform3D(0.60885054, 0, 0, 0, 0.60885054, 0, 0, 0, 0.60885054, 0.028592557, 0.22877693, 0.27279603)
+mesh = SubResource("SphereMesh_oevuw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=857458263]
+transform = Transform3D(0.9591212, 0, 0, 0, 0.9591212, 0, 0, 0, 0.9591212, 0.47377914, 0.3583469, -0.5257255)
+mesh = SubResource("SphereMesh_oevuw")
+surface_material_override/0 = SubResource("StandardMaterial3D_tkka1")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1406017480]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0099103, 0.3746478, 0.20718941)
+mesh = SubResource("SphereMesh_oevuw")
+surface_material_override/0 = SubResource("StandardMaterial3D_s1otk")
+
+[node name="SphereAndLight" type="Node3D" parent="." unique_id=1110493003]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9473517, 1.130393, 0.053055763)
+script = ExtResource("1_ot7qo")
+color_speed = 0.02
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SphereAndLight" unique_id=1295079564]
+light_color = Color(0, 1, 0, 1)
+light_energy = 1.64
+shadow_enabled = true
+
+[node name="geodesic-sphere" parent="SphereAndLight" unique_id=1021905098 instance=ExtResource("2_ot7qo")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+script = ExtResource("3_rg21v")
+rotation_speed = 0.3
+
+[node name="GD_mesh_001" parent="SphereAndLight/geodesic-sphere" index="0" unique_id=2133520667]
+material_override = SubResource("StandardMaterial3D_m6i5d")
+cast_shadow = 0
+
+[node name="GD_mesh_002" parent="SphereAndLight/geodesic-sphere" index="1" unique_id=499267432]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_003" parent="SphereAndLight/geodesic-sphere" index="2" unique_id=556201997]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_004" parent="SphereAndLight/geodesic-sphere" index="3" unique_id=1126959242]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_005" parent="SphereAndLight/geodesic-sphere" index="4" unique_id=266088316]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_006" parent="SphereAndLight/geodesic-sphere" index="5" unique_id=274392398]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_007" parent="SphereAndLight/geodesic-sphere" index="6" unique_id=745829996]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_008" parent="SphereAndLight/geodesic-sphere" index="7" unique_id=1459601663]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_009" parent="SphereAndLight/geodesic-sphere" index="8" unique_id=1874089565]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_010" parent="SphereAndLight/geodesic-sphere" index="9" unique_id=2003909080]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_011" parent="SphereAndLight/geodesic-sphere" index="10" unique_id=1757188376]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_012" parent="SphereAndLight/geodesic-sphere" index="11" unique_id=1091460465]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_013" parent="SphereAndLight/geodesic-sphere" index="12" unique_id=65282174]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_014" parent="SphereAndLight/geodesic-sphere" index="13" unique_id=1779238487]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_015" parent="SphereAndLight/geodesic-sphere" index="14" unique_id=571778950]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_016" parent="SphereAndLight/geodesic-sphere" index="15" unique_id=459885781]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_017" parent="SphereAndLight/geodesic-sphere" index="16" unique_id=318667292]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_018" parent="SphereAndLight/geodesic-sphere" index="17" unique_id=412168135]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_019" parent="SphereAndLight/geodesic-sphere" index="18" unique_id=1603007259]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_020" parent="SphereAndLight/geodesic-sphere" index="19" unique_id=1550723683]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_021" parent="SphereAndLight/geodesic-sphere" index="20" unique_id=584113496]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_022" parent="SphereAndLight/geodesic-sphere" index="21" unique_id=1114763457]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_023" parent="SphereAndLight/geodesic-sphere" index="22" unique_id=170587104]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_024" parent="SphereAndLight/geodesic-sphere" index="23" unique_id=786418321]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_025" parent="SphereAndLight/geodesic-sphere" index="24" unique_id=624094561]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_026" parent="SphereAndLight/geodesic-sphere" index="25" unique_id=1471194978]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_027" parent="SphereAndLight/geodesic-sphere" index="26" unique_id=752757445]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_028" parent="SphereAndLight/geodesic-sphere" index="27" unique_id=1448328704]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_029" parent="SphereAndLight/geodesic-sphere" index="28" unique_id=1724498754]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_030" parent="SphereAndLight/geodesic-sphere" index="29" unique_id=1269807725]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_031" parent="SphereAndLight/geodesic-sphere" index="30" unique_id=1668596986]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_032" parent="SphereAndLight/geodesic-sphere" index="31" unique_id=1623744311]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_033" parent="SphereAndLight/geodesic-sphere" index="32" unique_id=1531174508]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_034" parent="SphereAndLight/geodesic-sphere" index="33" unique_id=1461232889]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_035" parent="SphereAndLight/geodesic-sphere" index="34" unique_id=1936154284]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_036" parent="SphereAndLight/geodesic-sphere" index="35" unique_id=1354033856]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_037" parent="SphereAndLight/geodesic-sphere" index="36" unique_id=176051782]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_038" parent="SphereAndLight/geodesic-sphere" index="37" unique_id=806094075]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_039" parent="SphereAndLight/geodesic-sphere" index="38" unique_id=350969964]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_040" parent="SphereAndLight/geodesic-sphere" index="39" unique_id=511507370]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_041" parent="SphereAndLight/geodesic-sphere" index="40" unique_id=519325267]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_042" parent="SphereAndLight/geodesic-sphere" index="41" unique_id=888865102]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_043" parent="SphereAndLight/geodesic-sphere" index="42" unique_id=652137768]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_044" parent="SphereAndLight/geodesic-sphere" index="43" unique_id=399836353]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_045" parent="SphereAndLight/geodesic-sphere" index="44" unique_id=818097272]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_046" parent="SphereAndLight/geodesic-sphere" index="45" unique_id=1348311966]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_047" parent="SphereAndLight/geodesic-sphere" index="46" unique_id=1210331117]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_048" parent="SphereAndLight/geodesic-sphere" index="47" unique_id=334759399]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_049" parent="SphereAndLight/geodesic-sphere" index="48" unique_id=885878974]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_050" parent="SphereAndLight/geodesic-sphere" index="49" unique_id=1814964599]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_051" parent="SphereAndLight/geodesic-sphere" index="50" unique_id=1346493468]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_052" parent="SphereAndLight/geodesic-sphere" index="51" unique_id=1906500654]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_053" parent="SphereAndLight/geodesic-sphere" index="52" unique_id=1313081450]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_054" parent="SphereAndLight/geodesic-sphere" index="53" unique_id=1927605702]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_055" parent="SphereAndLight/geodesic-sphere" index="54" unique_id=187081341]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_056" parent="SphereAndLight/geodesic-sphere" index="55" unique_id=246518194]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_057" parent="SphereAndLight/geodesic-sphere" index="56" unique_id=1638892166]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_058" parent="SphereAndLight/geodesic-sphere" index="57" unique_id=252670682]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_059" parent="SphereAndLight/geodesic-sphere" index="58" unique_id=754106345]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_060" parent="SphereAndLight/geodesic-sphere" index="59" unique_id=841782824]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_061" parent="SphereAndLight/geodesic-sphere" index="60" unique_id=251518450]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_062" parent="SphereAndLight/geodesic-sphere" index="61" unique_id=1598256708]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_063" parent="SphereAndLight/geodesic-sphere" index="62" unique_id=363042779]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_064" parent="SphereAndLight/geodesic-sphere" index="63" unique_id=622563064]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_065" parent="SphereAndLight/geodesic-sphere" index="64" unique_id=1409400246]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_066" parent="SphereAndLight/geodesic-sphere" index="65" unique_id=564743824]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_067" parent="SphereAndLight/geodesic-sphere" index="66" unique_id=559200743]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_068" parent="SphereAndLight/geodesic-sphere" index="67" unique_id=2097113237]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_069" parent="SphereAndLight/geodesic-sphere" index="68" unique_id=523233423]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_070" parent="SphereAndLight/geodesic-sphere" index="69" unique_id=421815462]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_071" parent="SphereAndLight/geodesic-sphere" index="70" unique_id=208909333]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_072" parent="SphereAndLight/geodesic-sphere" index="71" unique_id=1402969237]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_073" parent="SphereAndLight/geodesic-sphere" index="72" unique_id=1643235631]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_074" parent="SphereAndLight/geodesic-sphere" index="73" unique_id=1304343944]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_075" parent="SphereAndLight/geodesic-sphere" index="74" unique_id=1657589128]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_076" parent="SphereAndLight/geodesic-sphere" index="75" unique_id=830965729]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_077" parent="SphereAndLight/geodesic-sphere" index="76" unique_id=433923213]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_078" parent="SphereAndLight/geodesic-sphere" index="77" unique_id=1958824488]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_079" parent="SphereAndLight/geodesic-sphere" index="78" unique_id=700764987]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_080" parent="SphereAndLight/geodesic-sphere" index="79" unique_id=1996195884]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_081" parent="SphereAndLight/geodesic-sphere" index="80" unique_id=1285002736]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_082" parent="SphereAndLight/geodesic-sphere" index="81" unique_id=181968332]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_083" parent="SphereAndLight/geodesic-sphere" index="82" unique_id=1795192704]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_084" parent="SphereAndLight/geodesic-sphere" index="83" unique_id=535631127]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_085" parent="SphereAndLight/geodesic-sphere" index="84" unique_id=256616357]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_086" parent="SphereAndLight/geodesic-sphere" index="85" unique_id=737685296]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_087" parent="SphereAndLight/geodesic-sphere" index="86" unique_id=635814337]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_088" parent="SphereAndLight/geodesic-sphere" index="87" unique_id=155991254]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_089" parent="SphereAndLight/geodesic-sphere" index="88" unique_id=651910967]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_090" parent="SphereAndLight/geodesic-sphere" index="89" unique_id=1309314267]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_091" parent="SphereAndLight/geodesic-sphere" index="90" unique_id=1243895275]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_092" parent="SphereAndLight/geodesic-sphere" index="91" unique_id=1374537363]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="GD_mesh_093" parent="SphereAndLight/geodesic-sphere" index="92" unique_id=878847658]
+material_override = SubResource("StandardMaterial3D_ot7qo")
+cast_shadow = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2109509239]
+libraries/ = SubResource("AnimationLibrary_rg21v")
+autoplay = &"sphere_bob"
+
+[editable path="SphereAndLight/geodesic-sphere"]
