@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://bcmepm05qldy5"]
+
+[ext_resource type="Texture2D" uid="uid://bc3n2sen32mqx" path="res://sky.png" id="1_0n6b1"]
+[ext_resource type="PackedScene" uid="uid://dfyswwfb8j6iv" path="res://player.tscn" id="2_cwuyg"]
+[ext_resource type="PackedScene" uid="uid://bsm3bc2kg4yk4" path="res://e1m1.bsp" id="3_oi3di"]
+[ext_resource type="PackedScene" uid="uid://bbj30jyv46r1t" path="res://enemy/enemy.tscn" id="4_errvf"]
+[ext_resource type="CompressedTexture3D" uid="uid://qgj3lwwrrgj" path="res://level.GPUParticlesCollisionSDF3D_data.exr" id="5_myd3n"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_33kw8"]
+panorama = ExtResource("1_0n6b1")
+filter = false
+
+[sub_resource type="Sky" id="Sky_xd4ok"]
+sky_material = SubResource("PanoramaSkyMaterial_33kw8")
+
+[sub_resource type="Environment" id="Environment_b1dvs"]
+background_mode = 2
+sky = SubResource("Sky_xd4ok")
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.1
+tonemap_mode = 4
+tonemap_exposure = 1.3
+tonemap_white = 6.0
+fog_enabled = true
+fog_light_color = Color(0.117647, 0.156863, 0.196078, 1)
+fog_density = 0.006
+fog_sky_affect = 0.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_b1dvs")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.236491, -0.970858, -0.0388079, 0.265457, 0.0261379, 0.963768, -0.934668, -0.238224, 0.263902, 2.61962, -0.479115, -1.60764)
+light_color = Color(0.308, 0.369333, 0.4, 1)
+light_energy = 10.0
+light_cull_mask = 4294967291
+shadow_enabled = true
+shadow_bias = 0.04
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 75.0
+
+[node name="Player" parent="." instance=ExtResource("2_cwuyg")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -50, 3, -33)
+
+[node name="e1m1" parent="." instance=ExtResource("3_oi3di")]
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource("4_errvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource("4_errvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -23)
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource("4_errvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -24)
+
+[node name="Enemy4" parent="Enemies" instance=ExtResource("4_errvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 4.5, -24)
+
+[node name="Enemy5" parent="Enemies" instance=ExtResource("4_errvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 4.5, -19)
+
+[node name="GPUParticlesCollisionSDF3D" type="GPUParticlesCollisionSDF3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.5, 10, 11)
+size = Vector3(157, 50, 142)
+resolution = 4
+texture = ExtResource("5_myd3n")
