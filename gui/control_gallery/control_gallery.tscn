@@ -14,6 +14,21 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="CodeHighlighter" id="CodeHighlighter_wdd8d"]
+number_color = Color(1, 1, 0, 1)
+symbol_color = Color(0.46666667, 0.6666667, 0.73333335, 1)
+function_color = Color(0.35999995, 0.9, 0.9, 1)
+member_variable_color = Color(1, 0.5019608, 0, 1)
+keyword_colors = {
+"func": Color(0.9, 0.45, 0.45, 1),
+"return": Color(0.9, 0.54, 0.9, 1)
+}
+color_regions = {
+"\" \"": Color(0.9, 0.9, 0.45, 1),
+"#": Color(0.6, 0.6, 0.6, 1),
+"' '": Color(0.9019608, 0.9019608, 0.4509804, 1)
+}
+
 [sub_resource type="ButtonGroup" id="ButtonGroup_t0nh8"]
 
 [sub_resource type="FoldableGroup" id="FoldableGroup_wdd8d"]
@@ -49,6 +64,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 theme_override_constants/minimum_grab_thickness = 24
+drag_area_highlight_in_editor = true
 
 [node name="BasicControls" type="PanelContainer" parent="MainPanel/HSplitContainer" unique_id=628401494]
 layout_mode = 2
@@ -102,20 +118,50 @@ text = "CheckButton"
 [node name="LineEdit" type="LineEdit" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer" unique_id=1971128392]
 layout_mode = 2
 text = "LineEdit"
+placeholder_text = "LineEdit placeholder"
 
 [node name="TextEdit" type="TextEdit" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer" unique_id=733473856]
-custom_minimum_size = Vector2(0, 110)
+custom_minimum_size = Vector2(0, 96)
 layout_mode = 2
 text = "TextEdit
-
 Unlike LineEdit, I accept multiple lines."
+placeholder_text = "TextEdit placeholder"
+tab_input_mode = false
+
+[node name="CodeEdit" type="CodeEdit" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer" unique_id=281670255]
+custom_minimum_size = Vector2(0, 122)
+layout_mode = 2
+text = "# CodeEdit
+func get_engine_name():
+	return \"Godot Engine\"
+"
+placeholder_text = "CodeEdit placeholder"
+syntax_highlighter = SubResource("CodeHighlighter_wdd8d")
+highlight_all_occurrences = true
+highlight_current_line = true
+draw_control_chars = true
+draw_tabs = true
+draw_spaces = true
+symbol_lookup_on_click = true
+symbol_tooltip_on_hover = true
+line_folding = true
+line_length_guidelines = Array[int]([24])
+gutters_draw_breakpoints_gutter = true
+gutters_draw_bookmarks = true
+gutters_draw_executing_lines = true
+gutters_draw_line_numbers = true
+gutters_draw_fold_gutter = true
+code_completion_enabled = true
+indent_automatic = true
+auto_brace_completion_enabled = true
+auto_brace_completion_highlight_matching = true
 
 [node name="Label" type="Label" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer" unique_id=759413544]
 layout_mode = 2
 text = "Label"
 
 [node name="TabContainer" type="TabContainer" parent="MainPanel/HSplitContainer/BasicControls/VBoxContainer" unique_id=689183550]
-custom_minimum_size = Vector2(0, 236)
+custom_minimum_size = Vector2(0, 140)
 layout_mode = 2
 current_tab = 0
 
@@ -299,79 +345,90 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme_override_constants/separation = 0
 theme_override_constants/minimum_grab_thickness = 24
+split_offsets = PackedInt32Array(242)
+drag_area_highlight_in_editor = true
+split_offset = 242
 
-[node name="Numbers" type="PanelContainer" parent="MainPanel/HSplitContainer/VSplitContainer" unique_id=294909274]
+[node name="HSplitContainer" type="HSplitContainer" parent="MainPanel/HSplitContainer/VSplitContainer" unique_id=935146205]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_constants/minimum_grab_thickness = 24
+split_offsets = PackedInt32Array(375)
+drag_area_highlight_in_editor = true
+split_offset = 375
+
+[node name="Numbers" type="PanelContainer" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer" unique_id=294909274]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bl4wp")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers" unique_id=1638249311]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Numbers" unique_id=1638249311]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer" unique_id=1283071032]
+[node name="Title" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Numbers/VBoxContainer" unique_id=1283071032]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Numbers"
 horizontal_alignment = 1
 
-[node name="SpinBox" type="SpinBox" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer" unique_id=1560052117]
+[node name="SpinBox" type="SpinBox" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Numbers/VBoxContainer" unique_id=1560052117]
 custom_minimum_size = Vector2(255, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 prefix = "SpinBox"
 
-[node name="HSliderContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer" unique_id=2100582010]
+[node name="HSliderContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Numbers/VBoxContainer" unique_id=2100582010]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="HSlider" type="HSlider" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/HSliderContainer" unique_id=1574616656]
+[node name="HSlider" type="HSlider" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Numbers/VBoxContainer/HSliderContainer" unique_id=1574616656]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 value = 50.0
 
-[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/HSliderContainer" unique_id=2143002255]
+[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Numbers/VBoxContainer/HSliderContainer" unique_id=2143002255]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "HSlider"
 
-[node name="ProgressBarContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer" unique_id=420632005]
+[node name="ProgressBarContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Numbers/VBoxContainer" unique_id=420632005]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ProgressBar" type="ProgressBar" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/ProgressBarContainer" unique_id=179912655]
+[node name="ProgressBar" type="ProgressBar" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Numbers/VBoxContainer/ProgressBarContainer" unique_id=179912655]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 value = 50.0
 
-[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/ProgressBarContainer" unique_id=1199026510]
+[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Numbers/VBoxContainer/ProgressBarContainer" unique_id=1199026510]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "ProgressBar"
 
-[node name="HSeparatorContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer" unique_id=1108687981]
+[node name="HSeparatorContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Numbers/VBoxContainer" unique_id=1108687981]
 layout_mode = 2
 
-[node name="HSeparatorLeft" type="HSeparator" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/HSeparatorContainer" unique_id=1784174493]
+[node name="HSeparatorLeft" type="HSeparator" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Numbers/VBoxContainer/HSeparatorContainer" unique_id=1784174493]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/HSeparatorContainer" unique_id=1956410353]
+[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Numbers/VBoxContainer/HSeparatorContainer" unique_id=1956410353]
 layout_mode = 2
 text = "HSeparator"
 
-[node name="HSeparatorRight" type="HSeparator" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/HSeparatorContainer" unique_id=1304747999]
+[node name="HSeparatorRight" type="HSeparator" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Numbers/VBoxContainer/HSeparatorContainer" unique_id=1304747999]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TextureProgressContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer" unique_id=1740446843]
+[node name="TextureProgressContainer" type="HBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Numbers/VBoxContainer" unique_id=1740446843]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/TextureProgressContainer" unique_id=207220786]
+[node name="Control" type="Control" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Numbers/VBoxContainer/TextureProgressContainer" unique_id=207220786]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/TextureProgressContainer/Control" unique_id=1266030049]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Numbers/VBoxContainer/TextureProgressContainer/Control" unique_id=1266030049]
 layout_mode = 0
 offset_right = 128.0
 offset_bottom = 128.0
@@ -380,9 +437,42 @@ value = 67.0
 fill_mode = 4
 texture_progress = ExtResource("1_8tycj")
 
-[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/Numbers/VBoxContainer/TextureProgressContainer" unique_id=455224450]
+[node name="Label" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Numbers/VBoxContainer/TextureProgressContainer" unique_id=455224450]
 layout_mode = 2
 text = "TextureProgressBar"
+
+[node name="Dialogs" type="PanelContainer" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer" unique_id=660090653]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bl4wp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Dialogs" unique_id=1444634711]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Dialogs/VBoxContainer" unique_id=1025956935]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "GraphEdit"
+horizontal_alignment = 1
+
+[node name="GraphEdit" type="GraphEdit" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Dialogs/VBoxContainer" unique_id=1609113676]
+layout_mode = 2
+size_flags_vertical = 3
+minimap_size = Vector2(72, 72)
+
+[node name="GraphFrame" type="GraphFrame" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Dialogs/VBoxContainer/GraphEdit" unique_id=1920294285]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 52.0
+offset_right = 253.0
+offset_bottom = 170.0
+mouse_filter = 1
+position_offset = Vector2(111, 52)
+title = "GraphFrame"
+
+[node name="GraphNode" type="GraphNode" parent="MainPanel/HSplitContainer/VSplitContainer/HSplitContainer/Dialogs/VBoxContainer/GraphEdit/GraphFrame" unique_id=1093302256]
+layout_mode = 2
+mouse_filter = 1
+title = "GraphNode"
 
 [node name="Lists" type="PanelContainer" parent="MainPanel/HSplitContainer/VSplitContainer" unique_id=1301511605]
 layout_mode = 2
