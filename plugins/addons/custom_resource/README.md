@@ -20,22 +20,3 @@ Using this method you can specify any name, base type, script, and (optionally) 
 There is also another way to add custom Resource types, which is using the `class_name` keyword in a script,
 or [using the `[GlobalClass]` attribute above a class declaration in C#](https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_global_classes.html).
 Both approaches work for Resources just as they do for Nodes.
-
-## When to use a custom Resource over a custom Node
-
-Resources are well-suited to plain data that does not need to live in the scene tree:
-character stats, item definitions, dialogue lines, configuration sets, and so on.
-A single Resource file can be loaded once and shared between many scenes,
-which keeps the project organized and reduces duplication.
-Pick a custom Node when the type genuinely needs to participate in the scene tree
-(for example, to draw, process input, or be parented to other nodes).
-
-For a more comprehensive example of working with custom Resources — including custom
-loading, saving, and import logic — see the `material_creator` plugin in this project.
-
-## Trying it out
-
-1. Enable the plugin in **Project > Project Settings > Plugins**.
-2. In the FileSystem dock, right-click and choose **New Resource…**, then pick **Stats**.
-3. Save the resource (for example, as `res://hero_stats.tres`).
-4. Double-click the file to edit `max_health`, `strength`, and `speed` in the inspector.
