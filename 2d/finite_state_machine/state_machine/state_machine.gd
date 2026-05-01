@@ -22,18 +22,24 @@ var _active: bool = false:
 
 
 func _enter_tree() -> void:
+	var initial_state: Node
 	if start_state.is_empty():
-		start_state = get_child(0).get_path()
+		# Children have not entered the tree yet during their parent's
+		# _enter_tree(), so calling get_path() on get_child(0) would return
+		# an empty NodePath. Resolve to the Node reference directly.
+		initial_state = get_child(0)
+	else:
+		initial_state = get_node(start_state)
 	for child in get_children():
 		var err: bool = child.finished.connect(_change_state)
 		if err:
 			printerr(err)
-	initialize(start_state)
+	initialize(initial_state)
 
 
-func initialize(initial_state: NodePath) -> void:
+func initialize(initial_state: Node) -> void:
 	_active = true
-	states_stack.push_front(get_node(initial_state))
+	states_stack.push_front(initial_state)
 	current_state = states_stack[0]
 	current_state.enter()
 
