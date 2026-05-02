@@ -7,7 +7,6 @@ public partial class BombSpawner : MultiplayerSpawner
     public override void _Ready()
     {
         SpawnFunction = new Callable(this, MethodName._spawn_bomb);
-
     }
 
     public Area2D _spawn_bomb(Array data)

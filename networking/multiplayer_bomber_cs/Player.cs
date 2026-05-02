@@ -5,7 +5,6 @@ using Array = Godot.Collections.Array;
 
 public partial class Player : CharacterBody2D
 {
-
     // The player's movement speed (in pixels per second).
     private static float MOTION_SPEED = 90.0f;
 
@@ -27,7 +26,6 @@ public partial class Player : CharacterBody2D
         Position = synced_position;
         if (Name.ToString().IsValidInt())
         {
-
             GetNode("Inputs/InputsSync").Call("set_multiplayer_authority", Name.ToString().ToInt());
         }
     }
@@ -48,7 +46,8 @@ public partial class Player : CharacterBody2D
             // And increase the bomb cooldown spawning one if the client wants to
             last_bomb_time += delta;
 
-            if (!stunned && IsMultiplayerAuthority() && GetNode("Inputs").Get("bombing").AsBool() && last_bomb_time >= BOMB_RATE)
+            if (!stunned && IsMultiplayerAuthority() && GetNode("Inputs").Get("bombing").AsBool() &&
+                last_bomb_time >= BOMB_RATE)
             {
                 last_bomb_time = 0;
                 GetNode<MultiplayerSpawner>("../../BombSpawner").Spawn(new Array([Position, Name.ToString().ToInt()]));
@@ -98,7 +97,6 @@ public partial class Player : CharacterBody2D
             GetNode<AnimationPlayer>("anim").Play(newAnimation);
         }
     }
-
 
 
     [Rpc(CallLocal = true)]

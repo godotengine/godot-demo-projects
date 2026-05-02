@@ -57,5 +57,4 @@ public partial class Bomb : Area2D
     {
         in_area.Remove(body);
     }
-
 }

@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 public partial class Score : HBoxContainer
@@ -10,6 +9,7 @@ public partial class Score : HBoxContainer
         public string Name;
         public Label Label;
     }
+
     private Dictionary<long, PlayerLabel> playerLabels = new();
 
     public override void _Ready()
@@ -64,7 +64,6 @@ public partial class Score : HBoxContainer
             Label = label,
             Score = 0
         };
-
     }
 
     public void _on_exit_game_pressed()

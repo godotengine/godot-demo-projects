@@ -3,18 +3,13 @@ using System;
 
 public partial class PlayerControls : Node
 {
-
     private Vector2 _motion = new();
 
     [Export]
     public Vector2 motion
     {
         get => _motion;
-        set
-        {
-            _motion = value.Clamp(new Vector2(-1, -1), new Vector2(1, 1));
-        }
-
+        set { _motion = value.Clamp(new Vector2(-1, -1), new Vector2(1, 1)); }
     }
 
     [Export] public bool bombing;
