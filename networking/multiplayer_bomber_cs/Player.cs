@@ -98,8 +98,6 @@ public partial class Player : CharacterBody2D
         }
     }
 
-
-    [Rpc(CallLocal = true)]
     public void set_player_name(string value)
     {
         var label = GetNode<Label>("label");

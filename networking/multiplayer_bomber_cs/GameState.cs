@@ -172,7 +172,7 @@ public partial class GameState : Node
             var spawn_pos = world.GetNode<Node2D>("SpawnPoints/" + spawn_points[p_id]).Position;
 
             GetNode<MultiplayerSpawner>("/root/World/Players/PlayerSpawner")
-                .Spawn(new Godot.Collections.Array([spawn_pos, p_id.ToString().ToInt()]));
+                .Spawn(new Godot.Collections.Array([spawn_pos, p_id.ToString().ToInt(), players[p_id]]));
         }
 
         // Unpause and unleash the game!

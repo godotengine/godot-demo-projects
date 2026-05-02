@@ -17,6 +17,7 @@ public partial class PlayerSpawner : MultiplayerSpawner
 
 		player.synced_position = data[0].AsVector2();
 		player.Name = data[1].AsString();
+		player.set_player_name(data[2].AsString());
 		return player;
 	}
 }
