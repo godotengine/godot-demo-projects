@@ -56,7 +56,8 @@ func _process(_delta: float) -> void:
 		# If we do not have a position for when the mouse was first clicked, then this must
 		# be the first time is_mouse_button_pressed has been called since the mouse button was
 		# released, so we need to store the position.
-		if mouse_click_start_pos.is_equal_approx(Vector2.INF):
+		var stroke_just_started := mouse_click_start_pos.is_equal_approx(Vector2.INF)
+		if stroke_just_started:
 			mouse_click_start_pos = mouse_pos
 
 		# If the mouse is inside the canvas and the mouse is 1px away from the position of the mouse last _process call.
@@ -69,8 +70,16 @@ func _process(_delta: float) -> void:
 					if undo_set == false:
 						undo_set = true
 						undo_element_list_num = brush_data_list.size()
-					# Add the brush object to draw_elements_array.
-					add_brush(mouse_pos, brush_mode)
+					# On the first sample of a new stroke we just place a single brush at the mouse
+					# position. On subsequent samples we interpolate from the previous mouse
+					# position so that fast mouse motion does not leave gaps between brushes.
+					# When last_mouse_pos was outside the canvas (e.g. the cursor briefly left
+					# the drawing area mid-stroke) we also fall back to a single brush so we
+					# don't draw a line through the area outside the canvas.
+					if stroke_just_started or not drawing_area_rect.has_point(last_mouse_pos):
+						add_brush(mouse_pos, brush_mode)
+					else:
+						add_brush_line(last_mouse_pos, mouse_pos, brush_mode)
 
 	else:
 		# We've finished our stroke, so we can set a new undo (if a new stroke is made).
@@ -186,6 +195,19 @@ func add_brush(mouse_pos: Vector2, type: BrushMode) -> void:
 	# Add the brush and update/draw all of the brushes.
 	brush_data_list.append(new_brush)
 	queue_redraw()
+
+
+# Adds a series of brush samples along the line from `from` to `to` so that fast
+# mouse motion does not leave visible gaps between brushes. We step roughly once
+# per pixel along the line; this is the same idea as Bresenham's line algorithm,
+# expressed parametrically because brush positions are stored as floats.
+func add_brush_line(from: Vector2, to: Vector2, type: BrushMode) -> void:
+	var steps := int(ceil(from.distance_to(to)))
+	if steps <= 1:
+		add_brush(to, type)
+		return
+	for i in range(1, steps + 1):
+		add_brush(from.lerp(to, float(i) / float(steps)), type)
 
 
 func _draw() -> void:
