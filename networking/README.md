@@ -2,6 +2,6 @@
 
 These demos showcase networking and/or multiplayer features.
 
-Languages: All have GDScript, WebRTC uses some GDExtension
+Languages: Projects ending with `_cs` are C#. All others use GDScript, WebRTC uses some GDExtension
 
 Renderer: All are Compatibility
