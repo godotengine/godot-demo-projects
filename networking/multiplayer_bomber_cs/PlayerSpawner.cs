@@ -12,12 +12,11 @@ public partial class PlayerSpawner : MultiplayerSpawner
 
 	public CharacterBody2D _spawn_player(Array data)
 	{
-		// TODO: Validation
 		var player = GD.Load<PackedScene>("res://player.tscn").Instantiate<Player>();
 
-		player.synced_position = data[0].AsVector2();
+		player.SyncedPosition = data[0].AsVector2();
 		player.Name = data[1].AsString();
-		player.set_player_name(data[2].AsString());
+		player.SetPlayerName(data[2].AsString());
 		return player;
 	}
 }

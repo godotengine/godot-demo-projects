@@ -6,27 +6,27 @@ using Array = Godot.Collections.Array;
 public partial class Player : CharacterBody2D
 {
     // The player's movement speed (in pixels per second).
-    private static float MOTION_SPEED = 90.0f;
+    private static float _motionSpeed = 90.0f;
 
     // The delay before which you can place a new bomb (in seconds).
-    private static float BOMB_RATE = 0.5f;
+    private static float _bombRate = 0.5f;
 
-    [Export] public Vector2 synced_position = new Vector2();
+    [Export] public Vector2 SyncedPosition = new Vector2();
 
-    [Export] private bool stunned = false;
+    [Export] private bool _stunned = false;
 
-    private double last_bomb_time = BOMB_RATE;
-    private string current_anim = "";
+    private double _lastBombTime = _bombRate;
+    private string _currentAnim = "";
 
 
     public override void _Ready()
     {
-        this.stunned = false;
-        Console.WriteLine("Pos:" + synced_position);
-        Position = synced_position;
+        this._stunned = false;
+        Console.WriteLine("Pos:" + SyncedPosition);
+        Position = SyncedPosition;
         if (Name.ToString().IsValidInt())
         {
-            GetNode("Inputs/InputsSync").Call("set_multiplayer_authority", Name.ToString().ToInt());
+            GetNode<MultiplayerSynchronizer>("Inputs/InputsSync").SetMultiplayerAuthority(Name.ToString().ToInt());
         }
     }
 
@@ -35,34 +35,34 @@ public partial class Player : CharacterBody2D
         if (Multiplayer.MultiplayerPeer == null || Multiplayer.GetUniqueId().ToString() == Name.ToString())
         {
             // The client which this player represent will update the controls state, and notify it to everyone.
-            GetNode("Inputs").Call("update");
+            GetNode<PlayerControls>("Inputs").Update();
         }
 
         if (Multiplayer.MultiplayerPeer == null || IsMultiplayerAuthority())
         {
             // The server updates the position that will be notified to the clients.
-            synced_position = Position;
+            SyncedPosition = Position;
 
             // And increase the bomb cooldown spawning one if the client wants to
-            last_bomb_time += delta;
+            _lastBombTime += delta;
 
-            if (!stunned && IsMultiplayerAuthority() && GetNode("Inputs").Get("bombing").AsBool() &&
-                last_bomb_time >= BOMB_RATE)
+            if (!_stunned && IsMultiplayerAuthority() && GetNode<PlayerControls>("Inputs").Bombing &&
+                _lastBombTime >= _bombRate)
             {
-                last_bomb_time = 0;
+                _lastBombTime = 0;
                 GetNode<MultiplayerSpawner>("../../BombSpawner").Spawn(new Array([Position, Name.ToString().ToInt()]));
             }
         }
         else
         {
             // The client simply updates the position to the last known one.
-            Position = synced_position;
+            Position = SyncedPosition;
         }
 
-        if (!stunned)
+        if (!_stunned)
         {
             // Everybody runs physics. i.e. clients try to predict where they will be during the next frame.
-            Velocity = GetNode("Inputs").Get("motion").AsVector2() * MOTION_SPEED;
+            Velocity = GetNode<PlayerControls>("Inputs").Motion * _motionSpeed;
             MoveAndSlide();
         }
 
@@ -86,38 +86,38 @@ public partial class Player : CharacterBody2D
             newAnimation = "walk_right";
         }
 
-        if (stunned)
+        if (_stunned)
         {
             newAnimation = "stunned";
         }
 
-        if (newAnimation != current_anim)
+        if (newAnimation != _currentAnim)
         {
-            current_anim = newAnimation;
+            _currentAnim = newAnimation;
             GetNode<AnimationPlayer>("anim").Play(newAnimation);
         }
     }
 
-    public void set_player_name(string value)
+    public void SetPlayerName(string value)
     {
         var label = GetNode<Label>("label");
         label.Text = value;
         // Assign a random color to the player based on its name.
-        var color = GameState.get_player_color(value);
+        var color = GameState.GetPlayerColor(value);
 
         label.Modulate = color;
         GetNode<Sprite2D>("sprite").Modulate = color;
     }
 
     [Rpc(CallLocal = true)]
-    public void exploded(int _by_who)
+    public void Exploded(int byWho)
     {
-        if (stunned)
+        if (_stunned)
         {
             return;
         }
 
-        stunned = true;
+        _stunned = true;
         GetNode<AnimationPlayer>("anim").Play("stunned");
     }
 }

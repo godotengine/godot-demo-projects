@@ -7,11 +7,11 @@ public partial class Lobby : Control
     {
         // Called every time the node is added to the scene.
         var gamestate = GetNode<GameState>("/root/GameState");
-        gamestate.connection_failed += _on_connection_failed;
-        gamestate.connection_succeeded += _on_connection_success;
-        gamestate.player_list_changed += refresh_lobby;
-        gamestate.game_ended += _on_game_ended;
-        gamestate.game_error += _on_game_error;
+        gamestate.ConnectionFailed += OnConnectionFailed;
+        gamestate.ConnectionSucceeded += OnConnectionSuccess;
+        gamestate.PlayerListChanged += RefreshLobby;
+        gamestate.GameEnded += OnGameEnded;
+        gamestate.GameError += OnGameError;
 
         // Set the player name according to the system username. Fallback to the path.
         var nameLabel = GetNode<LineEdit>("Connect/Name");
@@ -21,8 +21,8 @@ public partial class Lobby : Control
         }
         else
         {
-            var desktop_path = OS.GetSystemDir(OS.SystemDir.Desktop).Replace("\\", "/").Split("/");
-            nameLabel.Text = desktop_path[desktop_path.Length - 2];
+            var desktopPath = OS.GetSystemDir(OS.SystemDir.Desktop).Replace("\\", "/").Split("/");
+            nameLabel.Text = desktopPath[desktopPath.Length - 2];
         }
     }
 
@@ -40,11 +40,11 @@ public partial class Lobby : Control
         GetNode<Panel>("Players").Show();
         errLabel.Text = "";
 
-        var player_name = name.Text;
+        var playerName = name.Text;
         var gamestate = GetNode<GameState>("/root/GameState");
-        gamestate.host_game(player_name);
-        GetWindow().Title = ProjectSettings.GetSetting("application/config/name") + ": Server (" + player_name + ")";
-        refresh_lobby();
+        gamestate.HostGame(playerName);
+        GetWindow().Title = ProjectSettings.GetSetting("application/config/name") + ": Server (" + playerName + ")";
+        RefreshLobby();
     }
 
     void _on_join_pressed()
@@ -70,26 +70,26 @@ public partial class Lobby : Control
         GetNode<Button>("Connect/Host").Disabled = true;
         GetNode<Button>("Connect/Join").Disabled = true;
 
-        var player_name = name.Text;
+        var playerName = name.Text;
         var gamestate = GetNode<GameState>("/root/GameState");
-        gamestate.join_game(ip, player_name);
-        GetWindow().Title = ProjectSettings.GetSetting("application/config/name") + ": Client (" + player_name + ")";
+        gamestate.JoinGame(ip, playerName);
+        GetWindow().Title = ProjectSettings.GetSetting("application/config/name") + ": Client (" + playerName + ")";
     }
 
-    void _on_connection_success()
+    void OnConnectionSuccess()
     {
         GetNode<Panel>("Connect").Hide();
         GetNode<Panel>("Players").Show();
     }
 
-    void _on_connection_failed()
+    void OnConnectionFailed()
     {
         GetNode<Button>("Connect/Host").Disabled = false;
         GetNode<Button>("Connect/Join").Disabled = false;
         GetNode<Label>("Connect/ErrorLabel").SetText("Connection failed.");
     }
 
-    void _on_game_ended()
+    void OnGameEnded()
     {
         Show();
         GetNode<Panel>("Connect").Show();
@@ -99,7 +99,7 @@ public partial class Lobby : Control
     }
 
 
-    void _on_game_error(string errtxt)
+    void OnGameError(string errtxt)
     {
         var errDialog = GetNode<AcceptDialog>("ErrorDialog");
         errDialog.DialogText = errtxt;
@@ -108,14 +108,14 @@ public partial class Lobby : Control
         GetNode<Button>("Connect/Join").Disabled = false;
     }
 
-    void refresh_lobby()
+    void RefreshLobby()
     {
         var gamestate = GetNode<GameState>("/root/GameState");
-        var players = gamestate.get_player_list();
+        var players = gamestate.GetPlayerList();
         players.Sort();
         var playerList = GetNode<ItemList>("Players/List");
         playerList.Clear();
-        playerList.AddItem(gamestate.player_name + " (you)");
+        playerList.AddItem(gamestate.PlayerName + " (you)");
         foreach (var p in players)
         {
             playerList.AddItem(p);
@@ -126,7 +126,7 @@ public partial class Lobby : Control
 
     void _on_start_pressed()
     {
-        GetNode<GameState>("/root/GameState").begin_game();
+        GetNode<GameState>("/root/GameState").BeginGame();
     }
 
 

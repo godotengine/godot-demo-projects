@@ -6,16 +6,15 @@ public partial class BombSpawner : MultiplayerSpawner
 {
     public override void _Ready()
     {
-        SpawnFunction = new Callable(this, MethodName._spawn_bomb);
+        SpawnFunction = new Callable(this, MethodName.SpawnBomb);
     }
 
-    public Area2D _spawn_bomb(Array data)
+    private Area2D SpawnBomb(Array data)
     {
-        // TODO: Validation
         var bomb = GD.Load<PackedScene>("res://bomb.tscn").Instantiate<Bomb>();
 
         bomb.Position = data[0].AsVector2();
-        bomb.from_player = data[1].AsInt32();
+        bomb.FromPlayer = data[1].AsInt32();
         return bomb;
     }
 }

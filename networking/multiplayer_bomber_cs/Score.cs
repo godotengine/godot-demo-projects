@@ -10,7 +10,7 @@ public partial class Score : HBoxContainer
 		public Label Label;
 	}
 
-	private Dictionary<long, PlayerLabel> playerLabels = new();
+	private Dictionary<long, PlayerLabel> _playerLabels = new();
 
 	public override void _Ready()
 	{
@@ -24,7 +24,7 @@ public partial class Score : HBoxContainer
 		{
 			var winnerName = "";
 			var winnerScore = 0;
-			foreach (var player in playerLabels.Values)
+			foreach (var player in _playerLabels.Values)
 			{
 				if (player.Score > winnerScore)
 				{
@@ -38,19 +38,19 @@ public partial class Score : HBoxContainer
 		}
 	}
 
-	void increase_score(int for_who)
+	public void IncreaseScore(int forWho)
 	{
-		var player = playerLabels[for_who];
+		var player = _playerLabels[forWho];
 		player.Score += 1;
 		player.Label.SetText(player.Name + "\n" + player.Score);
 	}
 
-	public void add_player(long id, string new_player_name)
+	public void AddPlayer(long id, string newPlayerName)
 	{
 		var label = new Label();
 		label.HorizontalAlignment = HorizontalAlignment.Center;
-		label.Text = new_player_name + "\n" + 0;
-		label.Modulate = GetNode("/root/GameState").Call("get_player_color", new_player_name).AsColor();
+		label.Text = newPlayerName + "\n" + 0;
+		label.Modulate = GameState.GetPlayerColor(newPlayerName);
 		label.SizeFlagsHorizontal = SizeFlags.ExpandFill;
 		label.AddThemeFontOverride("font", GD.Load<Font>("res://montserrat.otf"));
 		label.AddThemeColorOverride("font_outline_color", Colors.Black);
@@ -58,9 +58,9 @@ public partial class Score : HBoxContainer
 		label.AddThemeFontSizeOverride("font_size", 18);
 		AddChild(label);
 
-		playerLabels[id] = new PlayerLabel()
+		_playerLabels[id] = new PlayerLabel()
 		{
-			Name = new_player_name,
+			Name = newPlayerName,
 			Label = label,
 			Score = 0
 		};
@@ -68,6 +68,6 @@ public partial class Score : HBoxContainer
 
 	public void _on_exit_game_pressed()
 	{
-		GetNode("/root/GameState").Call("end_game");
+		GetNode<GameState>("/root/GameState").EndGame();
 	}
 }

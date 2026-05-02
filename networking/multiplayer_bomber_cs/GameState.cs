@@ -8,107 +8,107 @@ public partial class GameState : Node
     // Default game server port. Can be any number between 1024 and 49151.
     // Not on the list of registered or common ports as of May 2024:
     // https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers
-    private int DEFAULT_PORT = 10567;
+    private int _defaultPort = 10567;
 
     // The maximum number of players.
-    private int MAX_PEERS = 12;
+    private int _maxPeers = 12;
 
-    private ENetMultiplayerPeer peer;
+    private ENetMultiplayerPeer _peer;
 
     // Our local player's name.
-    public string player_name = "The Warrior";
+    public string PlayerName = "The Warrior";
 
     // Names for remote players in id:name format.
-    private Dictionary<long, string> players = new();
-    private int[] players_ready = [];
+    private Dictionary<long, string> _players = new();
+    private int[] _playersReady = [];
 
     // Signals to let lobby GUI know what's going on.
     [Signal]
-    public delegate void player_list_changedEventHandler();
+    public delegate void PlayerListChangedEventHandler();
 
     [Signal]
-    public delegate void connection_failedEventHandler();
+    public delegate void ConnectionFailedEventHandler();
 
     [Signal]
-    public delegate void connection_succeededEventHandler();
+    public delegate void ConnectionSucceededEventHandler();
 
     [Signal]
-    public delegate void game_endedEventHandler();
+    public delegate void GameEndedEventHandler();
 
     [Signal]
-    public delegate void game_errorEventHandler(string what);
+    public delegate void GameErrorEventHandler(string what);
 
     // Callback from SceneTree.
-    void _player_connected(long id)
+    void PlayerConnected(long id)
     {
         // Registration of a client beings here, tell the connected player that we are here.
-        RpcId(id, MethodName.register_player, player_name);
+        RpcId(id, MethodName.RegisterPlayer, PlayerName);
     }
 
 
     // Callback from SceneTree.
-    void _player_disconnected(long id)
+    void PlayerDisconnected(long id)
     {
         if (HasNode("/root/World"))
         {
             // Game is in progress.
             if (Multiplayer.IsServer())
             {
-                EmitSignal(SignalName.game_error, "Player " + players[id] + " disconnected");
-                end_game();
+                EmitSignal(SignalName.GameError, "Player " + _players[id] + " disconnected");
+                EndGame();
             }
         }
         else
         {
             // Game is not in progress.
             // Unregister this player.
-            unregister_player(id);
+            UnregisterPlayer(id);
         }
     }
 
 
     // Callback from SceneTree, only for clients (not server).
-    void _connected_ok()
+    void ConnectedOk()
     {
         // We just connected to a server
-        EmitSignal(SignalName.connection_succeeded);
+        EmitSignal(SignalName.ConnectionSucceeded);
     }
 
 
     // Callback from SceneTree, only for clients (not server).
-    void _server_disconnected()
+    void ServerDisconnected()
     {
-        EmitSignal(SignalName.game_error, "Server disconnected");
-        end_game();
+        EmitSignal(SignalName.GameError, "Server disconnected");
+        EndGame();
     }
 
 
     // Callback from SceneTree, only for clients (not server).
-    void _connected_fail()
+    void ConnectedFail()
     {
         Multiplayer.SetMultiplayerPeer(null); // Remove peer
-        EmitSignal(SignalName.connection_failed);
+        EmitSignal(SignalName.ConnectionFailed);
     }
 
 
     // Lobby management functions.
     [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-    void register_player(string new_player_name)
+    void RegisterPlayer(string newPlayerName)
     {
         var id = Multiplayer.GetRemoteSenderId();
-        players[id] = new_player_name;
-        EmitSignal(SignalName.player_list_changed);
+        _players[id] = newPlayerName;
+        EmitSignal(SignalName.PlayerListChanged);
     }
 
 
-    void unregister_player(long id)
+    void UnregisterPlayer(long id)
     {
-        players.Remove(id);
-        EmitSignal(SignalName.player_list_changed);
+        _players.Remove(id);
+        EmitSignal(SignalName.PlayerListChanged);
     }
 
     [Rpc(CallLocal = true)]
-    void load_world()
+    void LoadWorld()
     {
         // Change scene.
         var world = GD.Load<PackedScene>("res://world.tscn").Instantiate<Node2D>();
@@ -116,72 +116,69 @@ public partial class GameState : Node
         GetTree().GetRoot().GetNode<Control>("Lobby").Hide();
 
         // Set up score.
-        world.GetNode<Score>("Score").add_player(Multiplayer.GetUniqueId(), player_name);
+        world.GetNode<Score>("Score").AddPlayer(Multiplayer.GetUniqueId(), PlayerName);
 
-        foreach (var pn in players)
+        foreach (var pn in _players)
         {
-            world.GetNode<Score>("Score").add_player(pn.Key, pn.Value);
+            world.GetNode<Score>("Score").AddPlayer(pn.Key, pn.Value);
         }
     }
 
 
-    public void host_game(string new_player_name)
+    public void HostGame(string newPlayerName)
     {
-        player_name = new_player_name;
-        peer = new ENetMultiplayerPeer();
-        peer.CreateServer(DEFAULT_PORT, MAX_PEERS);
-        Multiplayer.SetMultiplayerPeer(peer);
+        PlayerName = newPlayerName;
+        _peer = new ENetMultiplayerPeer();
+        _peer.CreateServer(_defaultPort, _maxPeers);
+        Multiplayer.SetMultiplayerPeer(_peer);
     }
 
 
-    public void join_game(string ip, string new_player_name)
+    public void JoinGame(string ip, string newPlayerName)
     {
-        player_name = new_player_name;
-        peer = new ENetMultiplayerPeer();
-        peer.CreateClient(ip, DEFAULT_PORT);
-        Multiplayer.SetMultiplayerPeer(peer);
+        PlayerName = newPlayerName;
+        _peer = new ENetMultiplayerPeer();
+        _peer.CreateClient(ip, _defaultPort);
+        Multiplayer.SetMultiplayerPeer(_peer);
     }
 
-    public List<string> get_player_list()
+    public List<string> GetPlayerList()
     {
-        return players.Values.ToList();
+        return _players.Values.ToList();
     }
 
 
-    public void begin_game()
+    public void BeginGame()
     {
-        // TODO server validation    
-
-        Rpc(MethodName.load_world);
+        Rpc(MethodName.LoadWorld);
 
         var world = GetTree().GetRoot().GetNode<Node2D>("World");
 
         // Create a dictionary with peer ID. and respective spawn points.
-        // TODO: This could be improved by randomizing spawn points for players.
-        var spawn_points = new Dictionary<long, int>();
-        spawn_points[1] = 0; // Server in spawn point 0.
-        var spawn_point_idx = 1;
-        foreach (var p in players.Keys)
+        var spawnPoints = new Dictionary<long, int>();
+        spawnPoints[1] = 0; // Server in spawn point 0.
+        var spawnPointIdx = 1;
+        foreach (var p in _players.Keys)
         {
-            spawn_points[p] = spawn_point_idx;
-            spawn_point_idx += 1;
+            spawnPoints[p] = spawnPointIdx;
+            spawnPointIdx += 1;
         }
 
-        foreach (var p_id in spawn_points.Keys)
+        foreach (var pId in spawnPoints.Keys)
         {
-            var spawn_pos = world.GetNode<Node2D>("SpawnPoints/" + spawn_points[p_id]).Position;
+            var spawnPos = world.GetNode<Node2D>("SpawnPoints/" + spawnPoints[pId]).Position;
 
-            var playerName = p_id == Multiplayer.GetUniqueId() ? player_name : players[p_id];
+            var playerName = pId == Multiplayer.GetUniqueId() ? PlayerName : _players[pId];
 
             GetNode<MultiplayerSpawner>("/root/World/Players/PlayerSpawner")
-                .Spawn(new Godot.Collections.Array([spawn_pos, p_id.ToString().ToInt(), playerName]));
+                .Spawn(new Godot.Collections.Array([spawnPos, pId.ToString().ToInt(), playerName]));
         }
 
         // Unpause and unleash the game!
         GetTree().Paused = false;
     }
 
-    void end_game()
+    public void EndGame()
     {
         if (HasNode("/root/World"))
         {
@@ -189,22 +186,22 @@ public partial class GameState : Node
             GetNode("/root/World").QueueFree();
         }
 
-        EmitSignal(SignalName.game_ended);
-        players.Clear();
+        EmitSignal(SignalName.GameEnded);
+        _players.Clear();
     }
 
     public override void _Ready()
     {
-        Multiplayer.PeerConnected += _player_connected;
-        Multiplayer.PeerDisconnected += _player_disconnected;
-        Multiplayer.ConnectedToServer += _connected_ok;
-        Multiplayer.ConnectionFailed += _connected_fail;
-        Multiplayer.ServerDisconnected += _server_disconnected;
+        Multiplayer.PeerConnected += PlayerConnected;
+        Multiplayer.PeerDisconnected += PlayerDisconnected;
+        Multiplayer.ConnectedToServer += ConnectedOk;
+        Multiplayer.ConnectionFailed += ConnectedFail;
+        Multiplayer.ServerDisconnected += ServerDisconnected;
     }
 
     // Returns an unique-looking player color based on the name's hash.
-    public static Color get_player_color(string p_name)
+    public static Color GetPlayerColor(string pName)
     {
-        return Color.FromHsv(Mathf.Wrap(p_name.Hash() * 0.001f, 0.0f, 1.0f), 0.6f, 1.0f);
+        return Color.FromHsv(Mathf.Wrap(pName.Hash() * 0.001f, 0.0f, 1.0f), 0.6f, 1.0f);
     }
 }

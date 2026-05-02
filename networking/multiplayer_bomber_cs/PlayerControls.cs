@@ -6,15 +6,15 @@ public partial class PlayerControls : Node
 	private Vector2 _motion = new();
 
 	[Export]
-	public Vector2 motion
+	public Vector2 Motion
 	{
 		get => _motion;
 		set { _motion = value.Clamp(new Vector2(-1, -1), new Vector2(1, 1)); }
 	}
 
-	[Export] public bool bombing;
+	[Export] public bool Bombing;
 
-	public void update()
+	public void Update()
 	{
 		var m = new Vector2();
 		if (Input.IsActionPressed("move_left"))
@@ -37,7 +37,7 @@ public partial class PlayerControls : Node
 			m += new Vector2(0, 1);
 		}
 
-		motion = m;
-		bombing = Input.IsActionPressed("set_bomb");
+		Motion = m;
+		Bombing = Input.IsActionPressed("set_bomb");
 	}
 }
