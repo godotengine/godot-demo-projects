@@ -20,7 +20,7 @@ public partial class Bomb : Area2D
         for (int i = 0; i < _inArea.Count; i++)
         {
             var item = _inArea[i].AsGodotObject();
-            if (item.HasMethod("exploded"))
+            if (item.HasMethod("Exploded"))
             {
                 // Checks if there is wall in between bomb and the object.
                 var worldState = GetWorld2D().DirectSpaceState;
