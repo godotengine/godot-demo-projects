@@ -13,7 +13,7 @@ public partial class Player : CharacterBody2D
 
     [Export] public Vector2 SyncedPosition = new Vector2();
 
-    [Export] private bool _stunned = false;
+    [Export] public bool Stunned = false;
 
     private double _lastBombTime = _bombRate;
     private string _currentAnim = "";
@@ -21,7 +21,7 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready()
     {
-        this._stunned = false;
+        this.Stunned = false;
         Console.WriteLine("Pos:" + SyncedPosition);
         Position = SyncedPosition;
         if (Name.ToString().IsValidInt())
@@ -46,7 +46,7 @@ public partial class Player : CharacterBody2D
             // And increase the bomb cooldown spawning one if the client wants to
             _lastBombTime += delta;
 
-            if (!_stunned && IsMultiplayerAuthority() && GetNode<PlayerControls>("Inputs").Bombing &&
+            if (!Stunned && IsMultiplayerAuthority() && GetNode<PlayerControls>("Inputs").Bombing &&
                 _lastBombTime >= _bombRate)
             {
                 _lastBombTime = 0;
@@ -59,7 +59,7 @@ public partial class Player : CharacterBody2D
             Position = SyncedPosition;
         }
 
-        if (!_stunned)
+        if (!Stunned)
         {
             // Everybody runs physics. i.e. clients try to predict where they will be during the next frame.
             Velocity = GetNode<PlayerControls>("Inputs").Motion * _motionSpeed;
@@ -86,7 +86,7 @@ public partial class Player : CharacterBody2D
             newAnimation = "walk_right";
         }
 
-        if (_stunned)
+        if (Stunned)
         {
             newAnimation = "stunned";
         }
@@ -112,12 +112,12 @@ public partial class Player : CharacterBody2D
     [Rpc(CallLocal = true)]
     public void Exploded(int byWho)
     {
-        if (_stunned)
+        if (Stunned)
         {
             return;
         }
 
-        _stunned = true;
+        Stunned = true;
         GetNode<AnimationPlayer>("anim").Play("stunned");
     }
 }
