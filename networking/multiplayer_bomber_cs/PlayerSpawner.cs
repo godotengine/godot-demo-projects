@@ -15,7 +15,7 @@ public partial class PlayerSpawner : MultiplayerSpawner
 		// TODO: Validation
 		var player = GD.Load<PackedScene>("res://player.tscn").Instantiate<Player>();
 
-		player.Position = data[0].AsVector2();
+		player.synced_position = data[0].AsVector2();
 		player.Name = data[1].AsString();
 		return player;
 	}

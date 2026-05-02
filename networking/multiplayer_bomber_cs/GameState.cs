@@ -155,7 +155,6 @@ public partial class GameState : Node
         Rpc(MethodName.load_world);
 
         var world = GetTree().GetRoot().GetNode<Node2D>("World");
-        var player_scene = GD.Load<PackedScene>("res://player.tscn");
 
         // Create a dictionary with peer ID. and respective spawn points.
         // TODO: This could be improved by randomizing spawn points for players.
@@ -172,8 +171,8 @@ public partial class GameState : Node
         {
             var spawn_pos = world.GetNode<Node2D>("SpawnPoints/" + spawn_points[p_id]).Position;
 
-            GetNode<MultiplayerSpawner>("PlayerSpawner")
-                .Spawn(new Godot.Collections.Array([spawn_pos, Name.ToString().ToInt()]));
+            GetNode<MultiplayerSpawner>("/root/World/Players/PlayerSpawner")
+                .Spawn(new Godot.Collections.Array([spawn_pos, p_id.ToString().ToInt()]));
         }
 
         // Unpause and unleash the game!

@@ -267,6 +267,10 @@ position = Vector2(840, 456)
 
 [node name="Players" type="Node2D" parent="." unique_id=1204594401]
 
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="Players" unique_id=165151297]
+spawn_path = NodePath("..")
+script = ExtResource("5_dwbse")
+
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1110278187]
 offset_right = 1056.0
 offset_bottom = 48.0
@@ -305,10 +309,6 @@ text = "EXIT GAME"
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1608085034]
 offset = Vector2(512, 300)
 process_callback = 0
-
-[node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=165151297]
-spawn_path = NodePath("../Players")
-script = ExtResource("5_dwbse")
 
 [node name="BombSpawner" type="MultiplayerSpawner" parent="." unique_id=1836509659]
 spawn_path = NodePath("..")
