@@ -12,7 +12,7 @@ public partial class Player : CharacterBody2D
 	// The delay before which you can place a new bomb (in seconds).
 	private static  float BOMB_RATE = 0.5f;
 
-	[Export] private Vector2 synced_position = new Vector2();
+	[Export] public Vector2 synced_position = new Vector2();
 
 	[Export] private bool stunned = false;
 
@@ -104,7 +104,7 @@ public partial class Player : CharacterBody2D
 		var label = GetNode<Label>("label");
 		label.Text = value;
 		// Assign a random color to the player based on its name.
-		var color = GetNode("/root/gamestate").Call("get_player_color", value).AsColor();
+		var color = GetNode("/root/GameState").Call("get_player_color", value).AsColor();
 
 		label.Modulate = color;
 		GetNode<Sprite2D>("sprite").Modulate = color;

@@ -10,7 +10,7 @@ public partial class Score : HBoxContainer
 		public string Name;
 		public Label Label;
 	}
-	private Dictionary<int, PlayerLabel> playerLabels = new();
+	private Dictionary<long, PlayerLabel> playerLabels = new();
 	
 	public override void _Ready()
 	{
@@ -45,12 +45,12 @@ public partial class Score : HBoxContainer
 		player.Label.SetText(player.Name + "\n" + player.Score);
 	}
 
-	void add_player(int id, string new_player_name)
+	public void add_player(long id, string new_player_name)
 	{
 		var label = new Label();
 		label.HorizontalAlignment = HorizontalAlignment.Center;
 		label.Text = new_player_name + "\n" + 0;
-		label.Modulate = GetNode("/root/gamestate").Call("get_player_color", new_player_name).AsColor();
+		label.Modulate = GetNode("/root/GameState").Call("get_player_color", new_player_name).AsColor();
 		label.SizeFlagsHorizontal = SizeFlags.ExpandFill;
 		label.AddThemeFontOverride("font", GD.Load<Font>("res://montserrat.otf"));
 		label.AddThemeColorOverride("font_outline_color", Colors.Black);
@@ -69,6 +69,6 @@ public partial class Score : HBoxContainer
 
 	public void _on_exit_game_pressed()
 	{
-		GetNode("/root/gamestate").Call("end_game");
+		GetNode("/root/GameState").Call("end_game");
 	}
 }
