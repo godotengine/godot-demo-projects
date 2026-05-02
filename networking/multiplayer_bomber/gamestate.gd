@@ -86,9 +86,6 @@ func load_world() -> void:
 	for pn: int in players:
 		world.get_node(^"Score").add_player(pn, players[pn])
 
-	# Unpause and unleash the game!
-	get_tree().paused = false
-
 
 func host_game(new_player_name: String) -> void:
 	player_name = new_player_name
@@ -111,8 +108,9 @@ func get_player_list() -> Array:
 func begin_game() -> void:
 	assert(multiplayer.is_server())
 
+	load_world.rpc()
+
 	var world: Node2D = get_tree().get_root().get_node(^"World")
-	var player_scene: PackedScene = load("res://player.tscn")
 
 	# Create a dictionary with peer ID. and respective spawn points.
 	# TODO: This could be improved by randomizing spawn points for players.
@@ -125,14 +123,15 @@ func begin_game() -> void:
 
 	for p_id: int in spawn_points:
 		var spawn_pos: Vector2 = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
-		var player := player_scene.instantiate()
-		player.synced_position = spawn_pos
-		player.name = str(p_id)
-		world.get_node(^"Players").add_child(player)
-		# The RPC must be called after the player is added to the scene tree.
-		player.set_player_name.rpc(player_name if p_id == multiplayer.get_unique_id() else players[p_id])
 		
-	load_world.rpc()
+		# The RPC must be called after the player is added to the scene tree.
+		var player_name : String = (player_name if p_id == multiplayer.get_unique_id() else players[p_id])
+		
+		get_tree().get_root().get_node(^"World/Players/PlayerSpawner").spawn([spawn_pos, str(p_id).to_int(), player_name])
+		
+	# Unpause and unleash the game!
+	get_tree().paused = false
+	
 
 
 func end_game() -> void:
