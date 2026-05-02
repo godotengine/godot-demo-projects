@@ -6,7 +6,7 @@ using Array = Godot.Collections.Array;
 public partial class Bomb : Area2D
 {
 	private Array in_area = new ();
-	private int from_player;
+	public int from_player;
 	
 	// Called from the animation.
 	public void explode()
