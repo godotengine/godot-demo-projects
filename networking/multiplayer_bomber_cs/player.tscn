@@ -1,0 +1,204 @@
+[gd_scene format=3 uid="uid://df8f82vhvgtfm"]
+
+[ext_resource type="Script" uid="uid://ddalk1r2gq7u5" path="res://player.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cyxandjldh0au" path="res://charwalk.png" id="2"]
+[ext_resource type="FontFile" uid="uid://cm4wvgsyhdc2w" path="res://montserrat.otf" id="3"]
+[ext_resource type="Script" uid="uid://bg0l1jcqcn3b7" path="res://player_controls.gd" id="4_k1vfr"]
+
+[sub_resource type="CircleShape2D" id="1"]
+radius = 16.0
+
+[sub_resource type="Animation" id="2"]
+resource_name = "standing"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 4, 8, 12]
+}
+
+[sub_resource type="Animation" id="3"]
+resource_name = "stunned"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:stunned")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-6.28319, 0.0]
+}
+
+[sub_resource type="Animation" id="4"]
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 4, 8, 12]
+}
+
+[sub_resource type="Animation" id="5"]
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 5, 9, 13]
+}
+
+[sub_resource type="Animation" id="6"]
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 7, 11, 15]
+}
+
+[sub_resource type="Animation" id="7"]
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [2, 6, 10, 14]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yb83i"]
+_data = {
+&"standing": SubResource("2"),
+&"stunned": SubResource("3"),
+&"walk_down": SubResource("4"),
+&"walk_left": SubResource("5"),
+&"walk_right": SubResource("6"),
+&"walk_up": SubResource("7")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_5huhx"]
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_sh64w"]
+properties/0/path = NodePath(".:synced_position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("label:text")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_w53uu"]
+properties/0/path = NodePath(".:motion")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:bombing")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="player" type="CharacterBody2D" unique_id=1262329161]
+z_index = 10
+motion_mode = 1
+script = ExtResource("1")
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=1537842009]
+position = Vector2(0.0750351, 6.23615)
+rotation = -6.28319
+texture = ExtResource("2")
+offset = Vector2(-0.0750351, -6.23615)
+hframes = 4
+vframes = 4
+
+[node name="shape" type="CollisionShape2D" parent="." unique_id=1082045004]
+shape = SubResource("1")
+
+[node name="anim" type="AnimationPlayer" parent="." unique_id=365298786]
+libraries/ = SubResource("AnimationLibrary_yb83i")
+
+[node name="label" type="Label" parent="." unique_id=1237995107]
+offset_left = -82.0
+offset_top = -35.0
+offset_right = 85.0
+offset_bottom = -14.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 16
+text = "Player 1"
+label_settings = SubResource("LabelSettings_5huhx")
+horizontal_alignment = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1095522834]
+replication_config = SubResource("SceneReplicationConfig_sh64w")
+
+[node name="Inputs" type="Node" parent="." unique_id=531290523]
+script = ExtResource("4_k1vfr")
+
+[node name="InputsSync" type="MultiplayerSynchronizer" parent="Inputs" unique_id=1701054962]
+replication_config = SubResource("SceneReplicationConfig_w53uu")
