@@ -31,7 +31,16 @@ public partial class Bomb : Area2D
                 // TODO: double check. GDScript: `if result.collider is not TileMap:`
                 if (result.TryGetValue("collider", out var collider) && collider.AsGodotObject() is not TileMapLayer)
                 {
-                    item.Call("exploded", from_player);
+                    if (collider.Obj is Player pl)
+                    {
+                        pl.Rpc("exploded", from_player);
+                    }
+
+                    if (collider.Obj is Rock rock)
+                    {
+                        rock.Rpc("exploded", from_player);
+                    }
+                    
                 }
             }
         }
