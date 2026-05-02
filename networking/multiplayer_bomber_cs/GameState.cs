@@ -171,19 +171,11 @@ public partial class GameState : Node
         foreach (var p_id in spawn_points.Keys)
         {
             var spawn_pos = world.GetNode<Node2D>("SpawnPoints/" + spawn_points[p_id]).Position;
-            var player = player_scene.Instantiate<Player>();
-            player.synced_position = spawn_pos;
-            player.Name = p_id.ToString();
-            world.GetNode("Players").AddChild(player);
 
-            // TODO: why is this logic like this?
-            // GDScript: player.set_player_name.rpc(player_name if p_id == multiplayer.get_unique_id() else players[p_id])
-            var remotePlayerName = p_id == Multiplayer.GetUniqueId() ? player_name : players[p_id];
-            // The RPC must be called after the player is added to the scene tree.
-
-            player.Rpc(Player.MethodName.set_player_name, remotePlayerName);
+            GetNode<MultiplayerSpawner>("PlayerSpawner")
+                .Spawn(new Godot.Collections.Array([spawn_pos, Name.ToString().ToInt()]));
         }
-        
+
         // Unpause and unleash the game!
         GetTree().Paused = false;
     }
