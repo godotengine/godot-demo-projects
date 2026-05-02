@@ -203,7 +203,7 @@ public partial class GameState : Node
     }
 
     // Returns an unique-looking player color based on the name's hash.
-    Color get_player_color(string p_name)
+    public static Color get_player_color(string p_name)
     {
         return Color.FromHsv(Mathf.Wrap(p_name.Hash() * 0.001f, 0.0f, 1.0f), 0.6f, 1.0f);
     }
