@@ -122,9 +122,6 @@ public partial class GameState : Node
         {
             world.GetNode<Score>("Score").add_player(pn.Key, pn.Value);
         }
-
-        // Unpause and unleash the game!
-        GetTree().Paused = false;
     }
 
 
@@ -186,6 +183,9 @@ public partial class GameState : Node
 
             player.Rpc(Player.MethodName.set_player_name, remotePlayerName);
         }
+        
+        // Unpause and unleash the game!
+        GetTree().Paused = false;
     }
 
     void end_game()

@@ -110,7 +110,6 @@ func get_player_list() -> Array:
 
 func begin_game() -> void:
 	assert(multiplayer.is_server())
-	load_world.rpc()
 
 	var world: Node2D = get_tree().get_root().get_node(^"World")
 	var player_scene: PackedScene = load("res://player.tscn")
@@ -132,6 +131,8 @@ func begin_game() -> void:
 		world.get_node(^"Players").add_child(player)
 		# The RPC must be called after the player is added to the scene tree.
 		player.set_player_name.rpc(player_name if p_id == multiplayer.get_unique_id() else players[p_id])
+		
+	load_world.rpc()
 
 
 func end_game() -> void:
