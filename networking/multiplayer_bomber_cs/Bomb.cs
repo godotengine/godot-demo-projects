@@ -27,7 +27,7 @@ public partial class Bomb : Area2D
                 var query = PhysicsRayQueryParameters2D.Create(Position, item.Get("position").AsVector2());
                 query.HitFromInside = true;
                 var result = worldState.IntersectRay(query);
-                
+
                 if (result.TryGetValue("collider", out var collider))
                 {
                     if (collider.Obj is Player pl)
