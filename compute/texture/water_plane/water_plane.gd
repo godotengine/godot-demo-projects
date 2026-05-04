@@ -32,8 +32,10 @@ var add_wave_point: Vector4
 var mouse_pos: Vector2
 var mouse_pressed: bool = false
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+# Use _enter_tree so the compute resources and texture binding are recreated
+# whenever the node re-enters the scene tree (e.g. switching scene tabs in the
+# editor or a runtime scene reload). _ready only fires on the first entry.
+func _enter_tree() -> void:
 	# In case we're running stuff on the rendering thread
 	# we need to do our initialisation on that thread.
 	RenderingServer.call_on_render_thread(_initialize_compute_code.bind(texture_size))
