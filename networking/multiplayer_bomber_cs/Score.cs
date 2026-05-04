@@ -33,7 +33,7 @@ public partial class Score : HBoxContainer
 				}
 			}
 
-			GetNode<Label>("../Winner").SetText("THE WINNER IS:\n" + winnerName);
+			GetNode<Label>("../Winner").Text = "THE WINNER IS:\n" + winnerName;
 			GetNode<Label>("../Winner").Show();
 		}
 	}
@@ -42,7 +42,7 @@ public partial class Score : HBoxContainer
 	{
 		var player = _playerLabels[forWho];
 		player.Score += 1;
-		player.Label.SetText(player.Name + "\n" + player.Score);
+		player.Label.Text = player.Name + "\n" + player.Score;
 	}
 
 	public void AddPlayer(long id, string newPlayerName)

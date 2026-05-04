@@ -86,7 +86,7 @@ public partial class Lobby : Control
     {
         GetNode<Button>("Connect/Host").Disabled = false;
         GetNode<Button>("Connect/Join").Disabled = false;
-        GetNode<Label>("Connect/ErrorLabel").SetText("Connection failed.");
+        GetNode<Label>("Connect/ErrorLabel").Text = "Connection failed.";
     }
 
     void OnGameEnded()
