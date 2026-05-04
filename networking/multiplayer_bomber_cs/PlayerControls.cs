@@ -9,7 +9,7 @@ public partial class PlayerControls : Node
 	public Vector2 Motion
 	{
 		get => _motion;
-		set { _motion = value.Clamp(new Vector2(-1, -1), new Vector2(1, 1)); }
+		set { _motion = value.Clamp(-1, 1); }
 	}
 
 	[Export] public bool Bombing;
