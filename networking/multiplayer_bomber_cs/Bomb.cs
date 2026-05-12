@@ -1,6 +1,4 @@
 using Godot;
-using System;
-using System.Linq;
 using Array = Godot.Collections.Array;
 
 public partial class Bomb : Area2D
