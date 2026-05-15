@@ -16,10 +16,13 @@ Check out this demo on the asset library: https://godotengine.org/asset-library/
 
 # How does it work?
 
-This project contains 4 plugins:
+This project contains 5 plugins:
 
 * The custom node plugin shows how to create a custom node type
   using `add_custom_type`. [More info](addons/custom_node).
+
+* The custom resource plugin shows how to create a custom Resource type
+  using `add_custom_type`. [More info](addons/custom_resource).
 
 * The main screen plugin is a minimal example of how to create a plugin
   with a main screen. [More info](addons/main_screen).
