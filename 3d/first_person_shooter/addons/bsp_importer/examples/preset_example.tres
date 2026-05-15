@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="BSPImportPreset" load_steps=6 format=3 uid="uid://cqh32qika2saw"]
+
+[ext_resource type="PackedScene" uid="uid://d3nve3gu13gp" path="res://addons/bsp_importer/examples/trigger_example.tscn" id="1_5lmtp"]
+[ext_resource type="PackedScene" uid="uid://bq7hi3koeh0ua" path="res://addons/bsp_importer/examples/lava_example_template.tscn" id="2_amq21"]
+[ext_resource type="Script" uid="uid://bblkqbg3tu5cm" path="res://addons/bsp_importer/bsp_import_preset.gd" id="3_3jh6d"]
+[ext_resource type="PackedScene" uid="uid://bfpqit3ge55dc" path="res://addons/bsp_importer/examples/slime_example_template.tscn" id="4_hntkd"]
+[ext_resource type="PackedScene" uid="uid://c1sip6qdohlf8" path="res://addons/bsp_importer/examples/water_example_template.tscn" id="5_5me6m"]
+
+[resource]
+script = ExtResource("3_3jh6d")
+inverse_scale_factor = 32.0
+ignored_flags = []
+generate_texture_materials = true
+material_path_pattern = "res://materials/{texture_name}_material.tres"
+texture_material_rename = {
+"texture_name1": "res://material/texture_name1_material.tres"
+}
+save_separate_materials = true
+overwrite_existing_materials = false
+texture_path_pattern = "res://textures/{texture_name}.png"
+texture_emission_path_pattern = "res://textures/{texture_name}_emission.png"
+texture_path_remap = {
+&"texture_name1_example": "res://textures/texture_name1_example.png"
+}
+transparent_texture_prefix = "{"
+palette_palette_path = "res://textures/palette.lmp"
+fullbright_range = [224, 255]
+overwrite_existing_textures = false
+water_scene_template = ExtResource("5_5me6m")
+slime_scene_template = ExtResource("4_hntkd")
+lava_scene_template = ExtResource("2_amq21")
+entity_path_pattern = "res://entities/{classname}.tscn"
+entity_remap = {
+&"trigger_example": ExtResource("1_5lmtp")
+}
+entity_offsets_quake_units = {
+&"example_offset_entity_classname": Vector3(16, 16, 0)
+}
+import_lights = true
+light_brightness_scale = 16.0
+generate_occlusion_culling = true
+culling_textures_exclude = Array[StringName]([])
+separate_mesh_on_grid = false
+mesh_separation_grid_size = 256.0
+use_triangle_collision = false
+ignore_missing_entities = false
+post_import_script = ""
