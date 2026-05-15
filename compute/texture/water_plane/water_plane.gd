@@ -32,27 +32,41 @@ var add_wave_point: Vector4
 var mouse_pos: Vector2
 var mouse_pressed: bool = false
 
+# Set on the render thread once compute resources have been (re)created. The
+# main thread checks this in _process so it doesn't bind freed RIDs in the
+# window between scene re-entry and the render thread finishing init.
+var ready_for_render: bool = false
+
 # Use _enter_tree so the compute resources and texture binding are recreated
 # whenever the node re-enters the scene tree (e.g. switching scene tabs in the
 # editor or a runtime scene reload). _ready only fires on the first entry.
 func _enter_tree() -> void:
+	next_texture = 0
+
+	# Create our own Texture2DRD and bind it to the material rather than
+	# reading the SubResource declared in the scene. The SubResource doesn't
+	# survive a scene unload reliably, so owning the lifetime here keeps the
+	# binding consistent across reloads.
+	texture = Texture2DRD.new()
+
+	var material: ShaderMaterial = $MeshInstance3D.material_override
+	if material:
+		material.set_shader_parameter(&"effect_texture", texture)
+		material.set_shader_parameter(&"effect_texture_size", texture_size)
+
 	# In case we're running stuff on the rendering thread
 	# we need to do our initialisation on that thread.
 	RenderingServer.call_on_render_thread(_initialize_compute_code.bind(texture_size))
 
-	# Get our texture from our material so we set our RID.
-	var material: ShaderMaterial = $MeshInstance3D.material_override
-	if material:
-		material.set_shader_parameter(&"effect_texture_size", texture_size)
-
-		# Get our texture object.
-		texture = material.get_shader_parameter(&"effect_texture")
-
 
 func _exit_tree() -> void:
+	# Block _process from touching compute resources until the next init.
+	ready_for_render = false
+
 	# Make sure we clean up!
 	if texture:
 		texture.texture_rd_rid = RID()
+		texture = null
 
 	RenderingServer.call_on_render_thread(_free_compute_resources)
 
@@ -115,12 +129,16 @@ func _process(delta: float) -> void:
 	else:
 		add_wave_point.z = mouse_size if mouse_pressed else 0.0
 
+	# Wait until the render thread has (re)initialised compute resources before
+	# advancing or dispatching, otherwise we'd bind freed RIDs left from the
+	# previous tree lifecycle.
+	if not ready_for_render:
+		return
+
 	# Increase our next texture index.
 	next_texture = (next_texture + 1) % 3
 
 	# Update our texture to show our next result (we are about to create).
-	# Note that `_initialize_compute_code` may not have run yet so the first
-	# frame this my be an empty RID.
 	if texture:
 		texture.texture_rd_rid = texture_rds[next_texture]
 
@@ -196,6 +214,9 @@ func _initialize_compute_code(init_with_texture_size: Vector2i) -> void:
 		texture_sets[i * 3 + 1] = _create_uniform_set(previous_texture_rd, 1)
 		texture_sets[i * 3 + 2] = _create_uniform_set(next_texture_rd, 2)
 
+	# Resources are live; main-thread _process can start binding and dispatching.
+	ready_for_render = true
+
 
 func _render_process(with_next_texture: int, wave_point: Vector4, tex_size: Vector2i, p_damp: float) -> void:
 	# We don't have structures (yet) so we need to build our push constant
@@ -257,3 +278,10 @@ func _free_compute_resources() -> void:
 
 	if shader:
 		rd.free_rid(shader)
+
+	# Reset so the next init starts from a known-empty state and any stale
+	# read from the main thread doesn't observe freed RIDs.
+	texture_rds = [RID(), RID(), RID()]
+	texture_sets = [RID(), RID(), RID(), RID(), RID(), RID(), RID(), RID(), RID()]
+	shader = RID()
+	pipeline = RID()
