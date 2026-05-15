@@ -197,15 +197,18 @@ func add_brush(mouse_pos: Vector2, type: BrushMode) -> void:
 	queue_redraw()
 
 
-# Adds a series of brush samples along the line from `from` to `to` so that fast
-# mouse motion does not leave visible gaps between brushes. We step roughly once
-# per pixel along the line; this is the same idea as Bresenham's line algorithm,
-# expressed parametrically because brush positions are stored as floats.
+# Adds a series of brush samples along the line from `from` to `to` so that
+# fast mouse motion does not leave visible gaps between brushes. We step at
+# roughly a quarter of the brush size (clamped to at least 1px) so adjacent
+# brushes still overlap generously while keeping the brush count - and hence
+# the redraw cost, since `_draw` walks the full list every frame - bounded.
 func add_brush_line(from: Vector2, to: Vector2, type: BrushMode) -> void:
-	var steps := int(ceil(from.distance_to(to)))
-	if steps <= 1:
+	var step := maxf(1.0, float(brush_size) / 4.0)
+	var distance := from.distance_to(to)
+	if distance <= step:
 		add_brush(to, type)
 		return
+	var steps := int(ceil(distance / step))
 	for i in range(1, steps + 1):
 		add_brush(from.lerp(to, float(i) / float(steps)), type)
 
