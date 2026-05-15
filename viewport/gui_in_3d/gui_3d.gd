@@ -4,11 +4,31 @@ extends Node3D
 ## Used for checking if the mouse is inside the Area3D.
 var is_mouse_inside: bool = false
 
-## The last processed input touch/mouse event. Used to calculate relative movement.
+## The position of the last input event from the *previous* frame, used to
+## calculate relative movement for [InputEventMouseMotion] and
+## [InputEventScreenDrag] events. See [member record_pos2D] for why this is
+## not updated inside the same frame.
 var last_event_pos2D := Vector2()
 
-## The time of the last event in seconds since engine start.
+## The time of the last input event from the previous frame, in seconds since
+## engine start.
 var last_event_time := -1.0
+
+## The frame in which the last update of [member last_event_pos2D] happened.
+## Used to ensure [member last_event_pos2D] / [member last_event_time] are only
+## refreshed once per frame, so events sharing a frame (e.g. a paired
+## [InputEventMouseMotion] / [InputEventScreenDrag] when
+## `input_devices/pointing/emulate_touch_from_mouse` is enabled) compute their
+## relative motion against the previous frame, not against each other.
+var record_frame: int = -1
+
+## The position of the most recent input event in the current frame. Promoted
+## into [member last_event_pos2D] on the next frame's first event.
+var record_pos2D := Vector2()
+
+## The time of the most recent input event in the current frame. Promoted
+## into [member last_event_time] on the next frame's first event.
+var record_event_time: float = -1.0
 
 @onready var node_viewport: SubViewport = $SubViewport
 @onready var node_quad: MeshInstance3D = $Quad
@@ -91,6 +111,24 @@ func _mouse_input_event(_camera: Camera3D, input_event: InputEvent, event_positi
 		# Fall back to the last known event position.
 		event_pos2D = last_event_pos2D
 
+	# Only promote the staged position/time into last_event_pos2D / last_event_time
+	# on the first event of each frame. This way, every event in a frame computes
+	# its relative motion against the previous frame's final position, instead of
+	# against an earlier event in the same frame (which would zero out the second
+	# event's relative motion when several events share a position, as happens
+	# with paired InputEventMouseMotion / InputEventScreenDrag from emulated
+	# touch).
+	var current_frame := Engine.get_process_frames()
+	if record_frame != current_frame:
+		record_frame = current_frame
+		last_event_pos2D = record_pos2D
+		last_event_time = record_event_time
+
+	# Stage this event so the next frame's first event sees the most recent
+	# position rather than the earliest position of the previous frame.
+	record_pos2D = event_pos2D
+	record_event_time = now
+
 	# Set the event's position and global position.
 	input_event.position = event_pos2D
 	if input_event is InputEventMouse:
@@ -98,20 +136,15 @@ func _mouse_input_event(_camera: Camera3D, input_event: InputEvent, event_positi
 
 	# Calculate the relative event distance.
 	if input_event is InputEventMouseMotion or input_event is InputEventScreenDrag:
-		# If there is not a stored previous position, then we'll assume there is no relative motion.
-		if last_event_pos2D == null:
+		# If there is no stored previous position yet, assume no relative motion.
+		if last_event_time < 0.0:
 			input_event.relative = Vector2(0, 0)
-		# If there is a stored previous position, then we'll calculate the relative position by subtracting
-		# the previous position from the new position. This will give us the distance the event traveled from prev_pos.
+		# Otherwise compute relative motion against the previous frame's final
+		# position. This will give us the distance the event traveled since the
+		# end of the previous frame.
 		else:
 			input_event.relative = event_pos2D - last_event_pos2D
 			input_event.velocity = input_event.relative / (now - last_event_time)
-
-	# Update last_event_pos2D with the position we just calculated.
-	last_event_pos2D = event_pos2D
-
-	# Update last_event_time to current time.
-	last_event_time = now
 
 	# Finally, send the processed input event to the viewport.
 	node_viewport.push_input(input_event)
