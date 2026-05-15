@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bxnqwe78d3rkc"]
+
+[ext_resource type="Script" uid="uid://dpm4r1c6t8vkz" path="res://main.gd" id="1"]
+
+[node name="Main" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="StatusLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 800.0
+offset_bottom = 96.0
+autowrap_mode = 2
+text = "HeavySlot is currently an InstancePlaceholder."
+
+[node name="LoadButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 112.0
+offset_right = 248.0
+offset_bottom = 152.0
+text = "Load Heavy Scene"
+
+[node name="HeavySlot" parent="." instance_placeholder="res://heavy_scene.tscn"]
+
+[connection signal="pressed" from="LoadButton" to="." method="_on_load_button_pressed"]
