@@ -7,13 +7,12 @@
 [sub_resource type="Environment" id="1"]
 background_mode = 3
 ambient_light_sky_contribution = 0.0
+tonemap_mode = 4
+tonemap_agx_contrast = 1.0
 glow_enabled = true
-glow_levels/3 = 0.0
-glow_levels/4 = 1.0
-glow_levels/7 = 1.0
-glow_strength = 0.88
-glow_bloom = 0.08
-glow_blend_mode = 0
+glow_levels/5 = 0.1
+glow_levels/6 = 0.1
+glow_levels/7 = 0.02
 
 [node name="BeachCave" type="Node2D" unique_id=379183590]
 script = ExtResource("1")
@@ -38,13 +37,15 @@ environment = SubResource("1")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=962517249]
 offset = Vector2(540, 360)
 
-[node name="Label" type="Label" parent="." unique_id=211507946]
-visible = false
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1571277078]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=211507946]
 offset_left = 18.0
 offset_top = 18.0
 offset_right = 294.0
 offset_bottom = 70.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
+theme_override_constants/outline_size = 6
 text = "Drag left and right with the mouse
 G: Toggle glow map (lens dirt effect)"
