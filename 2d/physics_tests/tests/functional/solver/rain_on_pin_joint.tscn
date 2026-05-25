@@ -1,0 +1,138 @@
+[gd_scene format=3 uid="uid://cwfsgi63o1pod"]
+
+[ext_resource type="Script" uid="uid://bjckrk4dmnguh" path="res://tests/functional/solver/rain_spawner.gd" id="2_w8rqi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rl7rh"]
+size = Vector2(0, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0fdrj"]
+radius = 20.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_foa4q"]
+size = Vector2(300, 20)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0fdrj"]
+
+[node name="RainOnPinJoint" type="Node2D" unique_id=1327340147]
+
+[node name="CantileveredBeam" type="StaticBody2D" parent="." unique_id=1315170967]
+unique_name_in_owner = true
+position = Vector2(129, 259)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CantileveredBeam" unique_id=799502497]
+shape = SubResource("RectangleShape2D_rl7rh")
+
+[node name="RainSpawner" type="Node2D" parent="." unique_id=848283850]
+position = Vector2(300, -65)
+script = ExtResource("2_w8rqi")
+
+[node name="SpawnTimer" type="Timer" parent="RainSpawner" unique_id=1206903970]
+wait_time = 0.5
+autostart = true
+
+[node name="Lever1" type="Node2D" parent="." unique_id=1434451354]
+position = Vector2(300, 300)
+
+[node name="PinJoint2DLever1" type="PinJoint2D" parent="Lever1" unique_id=1370430001]
+unique_name_in_owner = true
+position = Vector2(-20, 0)
+node_a = NodePath("StaticBody2D")
+node_b = NodePath("../RigidBody2D")
+angular_limit_enabled = true
+angular_limit_lower = -0.2617994
+angular_limit_upper = 0.2617994
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Lever1/PinJoint2DLever1" unique_id=1526426481]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lever1/PinJoint2DLever1/StaticBody2D" unique_id=1985752402]
+shape = SubResource("CircleShape2D_0fdrj")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Lever1" unique_id=1940580592]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lever1/RigidBody2D" unique_id=1549961216]
+shape = SubResource("RectangleShape2D_foa4q")
+
+[node name="LowerLimit" type="Line2D" parent="Lever1" unique_id=1271109450]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(-20, 0)
+rotation = -0.2617994
+points = PackedVector2Array(-130, 0, 170, 0)
+width = 1.0
+
+[node name="UpperLimit" type="Line2D" parent="Lever1" unique_id=1022594586]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(-20, 0)
+rotation = 0.2617994
+points = PackedVector2Array(-130, 0, 170, 0)
+width = 1.0
+
+[node name="Lever2" type="Node2D" parent="." unique_id=1644240585]
+position = Vector2(800, 300)
+
+[node name="LowerLimit" type="Line2D" parent="Lever2" unique_id=287089944]
+visible = false
+modulate = Color(1, 0, 0, 1)
+position = Vector2(-100, 0)
+rotation = -0.5235988
+points = PackedVector2Array(-50, 0, 250, 0)
+width = 1.0
+
+[node name="UpperLimit" type="Line2D" parent="Lever2" unique_id=586593678]
+visible = false
+modulate = Color(1, 0, 0, 1)
+position = Vector2(-100, 0)
+rotation = 0.5235988
+points = PackedVector2Array(-50, 0, 250, 0)
+width = 1.0
+
+[node name="PinJoint2DLever2" type="PinJoint2D" parent="Lever2" unique_id=647322840]
+unique_name_in_owner = true
+position = Vector2(-100, 0)
+node_a = NodePath("StaticBody2D")
+node_b = NodePath("../RigidBody2D")
+angular_limit_lower = -0.5235988
+angular_limit_upper = 0.5235988
+motor_enabled = true
+motor_target_velocity = -3.1415927
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Lever2/PinJoint2DLever2" unique_id=221424010]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lever2/PinJoint2DLever2/StaticBody2D" unique_id=755175220]
+shape = SubResource("CircleShape2D_0fdrj")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Lever2" unique_id=2349510]
+continuous_cd = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lever2/RigidBody2D" unique_id=802327767]
+shape = SubResource("RectangleShape2D_foa4q")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1542910147]
+position = Vector2(282, -4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=109410884]
+position = Vector2(288, 646)
+shape = SubResource("WorldBoundaryShape2D_0fdrj")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=936930901]
+position = Vector2(501, 589)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=780982211]
+position = Vector2(288, 646)
+shape = SubResource("WorldBoundaryShape2D_0fdrj")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=1458071085]
+position = Vector2(649, -5)
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=861829250]
+position = Vector2(288, 646)
+shape = SubResource("WorldBoundaryShape2D_0fdrj")
+
+[connection signal="timeout" from="RainSpawner/SpawnTimer" to="RainSpawner" method="_on_spawn_timer_timeout"]

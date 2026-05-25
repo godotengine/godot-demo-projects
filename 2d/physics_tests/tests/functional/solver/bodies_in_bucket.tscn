@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://b2425idb2urkl"]
+
+[ext_resource type="Script" uid="uid://bu4llp5vwwdk3" path="res://tests/functional/solver/body_spawner.gd" id="1_60g6e"]
+[ext_resource type="PackedScene" uid="uid://cj5t3sbxdiqss" path="res://tests/functional/solver/test_bodies/concave_polygon.tscn" id="2_eqv8g"]
+[ext_resource type="PackedScene" uid="uid://bwbkdtvokfwr3" path="res://tests/functional/solver/test_bodies/convex_polygon.tscn" id="3_k3wic"]
+[ext_resource type="PackedScene" uid="uid://nqx8bxc67lyq" path="res://tests/functional/solver/test_bodies/circle.tscn" id="4_eqv8g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rl7rh"]
+size = Vector2(0, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0fdrj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rp5ok"]
+size = Vector2(500, 30)
+
+[node name="BodiesInBucket" type="Node2D" unique_id=1327340147]
+
+[node name="TimeControl" type="Node2D" parent="." unique_id=296966780]
+
+[node name="CantileveredBeam" type="StaticBody2D" parent="." unique_id=1315170967]
+unique_name_in_owner = true
+position = Vector2(129, 259)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CantileveredBeam" unique_id=799502497]
+shape = SubResource("RectangleShape2D_rl7rh")
+
+[node name="BodySpawner" type="Node2D" parent="." unique_id=848283850]
+position = Vector2(597, -65)
+script = ExtResource("1_60g6e")
+body_scenes = Array[PackedScene]([ExtResource("2_eqv8g"), ExtResource("3_k3wic"), ExtResource("4_eqv8g")])
+body_spawn_roll = Array[int]([20, 80, 200])
+
+[node name="SpawnTimer" type="Timer" parent="BodySpawner" unique_id=1206903970]
+wait_time = 0.1
+autostart = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1542910147]
+position = Vector2(282, -4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=109410884]
+position = Vector2(288, 646)
+shape = SubResource("WorldBoundaryShape2D_0fdrj")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=936930901]
+position = Vector2(501, 589)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=780982211]
+position = Vector2(288, 646)
+shape = SubResource("WorldBoundaryShape2D_0fdrj")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=1458071085]
+position = Vector2(649, -5)
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=861829250]
+position = Vector2(288, 646)
+shape = SubResource("WorldBoundaryShape2D_0fdrj")
+
+[node name="Bucket" type="Node2D" parent="." unique_id=221439261]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bucket" unique_id=2024476473]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bucket/StaticBody2D" unique_id=760324576]
+position = Vector2(600, 600)
+shape = SubResource("RectangleShape2D_rp5ok")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Bucket/StaticBody2D" unique_id=873470206]
+position = Vector2(289.99997, 353.99997)
+rotation = -1.8325957
+shape = SubResource("RectangleShape2D_rp5ok")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Bucket/StaticBody2D" unique_id=1491156732]
+position = Vector2(917, 356)
+rotation = 1.8325957
+shape = SubResource("RectangleShape2D_rp5ok")
+
+[connection signal="timeout" from="BodySpawner/SpawnTimer" to="BodySpawner" method="_on_spawn_timer_timeout"]
