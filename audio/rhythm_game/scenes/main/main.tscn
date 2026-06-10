@@ -269,6 +269,9 @@ volume_db = 2.0
 script = ExtResource("7_hujxm")
 conductor = NodePath("../Conductor")
 
+[connection signal="note_hit" from="Notes" to="." method="_on_note_hit"]
+[connection signal="play_stats_updated" from="Notes" to="." method="_on_play_stats_updated"]
+[connection signal="song_finished" from="Notes" to="." method="_on_song_finished"]
 [connection signal="toggled" from="Control/SettingsVBox/UseFilteredCheckBox" to="." method="_on_use_filtered_check_box_toggled"]
 [connection signal="toggled" from="Control/SettingsVBox/MetronomeCheckBox" to="." method="_on_metronome_check_box_toggled"]
 [connection signal="value_changed" from="Control/SettingsVBox/InputLatencyHBox/SpinBox" to="." method="_on_input_latency_spin_box_value_changed"]
