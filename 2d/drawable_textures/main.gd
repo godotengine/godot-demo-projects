@@ -77,7 +77,7 @@ func _on_canvas_gui_input(event: InputEvent) -> void:
 func _paint_at(pos: Vector2, erase: bool) -> void:
 	# Execute the GPU blit.
 	var brush_size = Vector2i(brush.width, brush.height)
-	var top_left: Vector2 = pos - (brush_size / 2.0)
+	var top_left = Vector2i(pos - (brush_size / 2.0))
 	var rect = Rect2i(top_left, brush_size)
 
 	if brush_mode == BrushMode.CIRCLE:
