@@ -10,14 +10,27 @@ config_version=5
 
 [application]
 
-config/name="Drawable textures"
-config/description="This is a simple example of how drawable textures can be used."
+config/name="Drawable Textures"
+config/description="This is a simple example of how drawable textures can be used
+for texture painting."
 config/tags=PackedStringArray("2d", "demo")
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.7")
+run/low_processor_mode=true
 config/icon="res://icon.webp"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/vsync/vsync_mode=0
+
+[physics]
+
+3d/physics_engine="Dummy"
 
 [rendering]
 
+rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

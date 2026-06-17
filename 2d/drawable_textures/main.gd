@@ -1,5 +1,9 @@
 extends Node
 
+enum BrushMode {
+	CIRCLE,
+	GODOT_LOGO,
+}
 
 @export var drawing_canvas: TextureRect
 @export var cube: MeshInstance3D
@@ -17,11 +21,11 @@ var eraser: GradientTexture2D
 var background_color: Color = Color.WHITE
 
 ## A way to check if we're using the Godot stamp or normal brush.
-var brush_mode: bool = true
+var brush_mode: BrushMode = BrushMode.CIRCLE
 
 
 func _ready() -> void:
-	# First we create & set up the drawable texure. After that we can attach it
+	# First, we create and set up the drawable texure. After that, we can attach it
 	# to the nodes we want such as the texture rect and the albedo texture
 	# for our mesh instance 3D cube.
 	drawable_texture = DrawableTexture2D.new()
@@ -69,51 +73,50 @@ func _on_canvas_gui_input(event: InputEvent) -> void:
 			_paint_at(event.position, true)
 
 
-#--- Painting logic ---
-
+#region Painting logic.
 func _paint_at(pos: Vector2, erase: bool) -> void:
 	# Execute the GPU blit.
 	var brush_size = Vector2i(brush.width, brush.height)
-	var top_left = pos - (brush_size / 2.0)
+	var top_left: Vector2 = pos - (brush_size / 2.0)
 	var rect = Rect2i(top_left, brush_size)
 
-	if brush_mode:
+	if brush_mode == BrushMode.CIRCLE:
 		drawable_texture.blit_rect(rect, eraser if erase else brush, Color.WHITE, 0, null)
 	else:
-		drawable_texture.blit_rect(rect, godot_brush, Color.WHITE, 0, null)
+		# Any Texture2D is accepted by DrawableTexture`blit_rect()`'s second parameter,
+		# so we can safely ignore the warning.
+		@warning_ignore("incompatible_ternary")
+		drawable_texture.blit_rect(rect, eraser if erase else godot_brush, Color.WHITE, 0, null)
+#endregion
 
 
-#--- Color changing buttons + brush size changing functions ---
-
+#region Color changing buttons + brush size changing functions.
 func change_brush_color(event: InputEvent, color: Color) -> void:
 	if event is InputEventMouseButton:
 		var mouse_event: InputEventMouseButton = event
 		if mouse_event.button_index == MOUSE_BUTTON_LEFT and mouse_event.is_pressed():
 			brush.gradient.set_color(0, color)
 			brush.gradient.set_color(1, Color(color, 0.0))
-			print("Brush changed to color: ", color)
-			brush_mode = true
+			brush_mode = BrushMode.CIRCLE
 
 
 func change_brush_to_godot(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		var mouse_event: InputEventMouseButton = event
 		if mouse_event.button_index == MOUSE_BUTTON_LEFT and mouse_event.is_pressed():
-			brush_mode = false
-			print("Brush changed to Godot")
+			brush_mode = BrushMode.GODOT_LOGO
+#endregion
 
 
 func _on_size_h_slider_value_changed(value: float) -> void:
-	var size: int = int(value)
+	var size := int(value)
 	brush.width = size
 	brush.height = size
 	eraser.width = size
 	eraser.height = size
-	print("Brush size set to: ", size)
 
 
-#--- 3D scene buttons for switching visible mesh instance ---
-
+#region 3D scene buttons for switching visible mesh instance.
 func _on_cube_button_pressed() -> void:
 	cube.visible = true
 	sphere.visible = false
@@ -122,3 +125,4 @@ func _on_cube_button_pressed() -> void:
 func _on_sphere_button_pressed() -> void:
 	cube.visible = false
 	sphere.visible = true
+#endregion

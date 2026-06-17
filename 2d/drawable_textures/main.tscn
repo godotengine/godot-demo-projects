@@ -6,10 +6,16 @@
 [sub_resource type="DrawableTexture2D" id="DrawableTexture2D_klhbv"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_klhbv"]
+size = Vector3(1.41, 1.41, 1.41)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
+texture_filter = 5
 
 [sub_resource type="SphereMesh" id="SphereMesh_ig7tw"]
+radius = 1.0
+height = 2.0
+radial_segments = 96
+rings = 48
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -30,7 +36,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0r6n5")
-drawing_canvas = NodePath("HBox/DrawingPanel/VBoxContainer/Canvas")
+drawing_canvas = NodePath("HBox/DrawingPanel/VBoxContainer/CenterContainer/Canvas")
 cube = NodePath("HBox/SubViewportContainer/SubViewport/Cube")
 sphere = NodePath("HBox/SubViewportContainer/SubViewport/Sphere")
 color_rects = [NodePath("HBox/DrawingPanel/VBoxContainer/HFlowContainer/ColorRect1"), NodePath("HBox/DrawingPanel/VBoxContainer/HFlowContainer/ColorRect2"), NodePath("HBox/DrawingPanel/VBoxContainer/HFlowContainer/ColorRect3"), NodePath("HBox/DrawingPanel/VBoxContainer/HFlowContainer/ColorRect4"), NodePath("HBox/DrawingPanel/VBoxContainer/HFlowContainer/ColorRect5"), NodePath("HBox/DrawingPanel/VBoxContainer/HFlowContainer/ColorRect6"), NodePath("HBox/DrawingPanel/VBoxContainer/HFlowContainer/ColorRect7"), NodePath("HBox/DrawingPanel/VBoxContainer/HFlowContainer/ColorRect8"), NodePath("HBox/DrawingPanel/VBoxContainer/HFlowContainer/ColorRect9")]
@@ -55,13 +61,19 @@ layout_mode = 2
 [node name="InfoLabel" type="Label" parent="HBox/DrawingPanel/VBoxContainer" unique_id=271490460]
 layout_mode = 2
 text = "Left click: Draw  -  Right click: Erase"
+horizontal_alignment = 1
 
-[node name="Canvas" type="TextureRect" parent="HBox/DrawingPanel/VBoxContainer" unique_id=1370381970]
+[node name="CenterContainer" type="CenterContainer" parent="HBox/DrawingPanel/VBoxContainer" unique_id=1293749677]
+layout_mode = 2
+
+[node name="Canvas" type="TextureRect" parent="HBox/DrawingPanel/VBoxContainer/CenterContainer" unique_id=1370381970]
 layout_mode = 2
 texture = SubResource("DrawableTexture2D_klhbv")
 
 [node name="HFlowContainer" type="HFlowContainer" parent="HBox/DrawingPanel/VBoxContainer" unique_id=1350832831]
+custom_minimum_size = Vector2(440, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="ColorRect1" type="ColorRect" parent="HBox/DrawingPanel/VBoxContainer/HFlowContainer" unique_id=1748411533]
 custom_minimum_size = Vector2(40, 40)
@@ -114,9 +126,11 @@ texture = ExtResource("2_0xm2m")
 expand_mode = 1
 
 [node name="SizeHSlider" type="HSlider" parent="HBox/DrawingPanel/VBoxContainer" unique_id=139431584]
+custom_minimum_size = Vector2(440, 0)
 layout_mode = 2
-min_value = 1.0
-value = 1.0
+size_flags_horizontal = 4
+min_value = 5.0
+value = 64.0
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="HBox" unique_id=1491721114]
 layout_mode = 2
@@ -127,6 +141,9 @@ metadata/_edit_lock_ = true
 
 [node name="SubViewport" type="SubViewport" parent="HBox/SubViewportContainer" unique_id=1215502726]
 handle_input_locally = false
+msaa_3d = 2
+scaling_3d_scale = 2.0
+anisotropic_filtering_level = 4
 size = Vector2i(689, 648)
 render_target_update_mode = 4
 
@@ -149,24 +166,25 @@ text = "Sphere"
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="HBox/SubViewportContainer/SubViewport" unique_id=125079681]
 transform = Transform3D(-0.38675436, -0.79335403, -0.4701179, 0.41424805, -0.6049208, 0.680051, -0.8239052, 0.068267316, 0.562601, 0, 0, 0)
 light_indirect_energy = 7.588
-shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="HBox/SubViewportContainer/SubViewport" unique_id=1069803078]
+fov = 55.0
 
 [node name="Cube" type="MeshInstance3D" parent="HBox/SubViewportContainer/SubViewport" unique_id=2019066286]
-transform = Transform3D(0.83867055, 0.40283188, -0.36654884, 1.1767322e-07, 0.6730124, 0.7396312, 0.5446389, -0.620307, 0.56443566, 0, 0, -2.6364567)
+transform = Transform3D(0.7071067, 0.49999997, -0.49999994, 0, 0.70710677, 0.7071067, 0.7071067, -0.49999997, 0.49999994, 0, -0.05, -2.636)
 mesh = SubResource("BoxMesh_klhbv")
 surface_material_override/0 = SubResource("StandardMaterial3D_0xm2m")
 
 [node name="Sphere" type="MeshInstance3D" parent="HBox/SubViewportContainer/SubViewport" unique_id=858141954]
 transform = Transform3D(-0.99470276, 0.022073168, -0.10039453, 0, 0.9766723, 0.21473533, 0.102792434, 0.21359783, -0.97149867, 0, 0, -2.6364567)
+visible = false
 mesh = SubResource("SphereMesh_ig7tw")
 surface_material_override/0 = SubResource("StandardMaterial3D_0xm2m")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="HBox/SubViewportContainer/SubViewport" unique_id=83739609]
 environment = SubResource("Environment_h2yge")
 
-[connection signal="gui_input" from="HBox/DrawingPanel/VBoxContainer/Canvas" to="." method="_on_canvas_gui_input"]
+[connection signal="gui_input" from="HBox/DrawingPanel/VBoxContainer/CenterContainer/Canvas" to="." method="_on_canvas_gui_input"]
 [connection signal="value_changed" from="HBox/DrawingPanel/VBoxContainer/SizeHSlider" to="." method="_on_size_h_slider_value_changed"]
 [connection signal="pressed" from="HBox/SubViewportContainer/SubViewport/ButtonsHBox/CubeButton" to="." method="_on_cube_button_pressed"]
 [connection signal="pressed" from="HBox/SubViewportContainer/SubViewport/ButtonsHBox/SphereButton" to="." method="_on_sphere_button_pressed"]
