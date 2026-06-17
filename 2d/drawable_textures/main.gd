@@ -109,7 +109,7 @@ func _on_size_h_slider_value_changed(value: float) -> void:
 	brush.height = size
 	eraser.width = size
 	eraser.height = size
-	print("Brush size to: ", size)
+	print("Brush size set to: ", size)
 
 
 #--- 3D scene buttons for switching visible mesh instance ---
