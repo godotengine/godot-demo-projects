@@ -21,7 +21,7 @@ var brush_mode: bool = true
 
 
 func _ready() -> void:
-	# First we create & setup the drawable texure. After that we can attach it
+	# First we create & set up the drawable texure. After that we can attach it
 	# onto the nodes we want such as the texture rect and the albedo texture
 	# for our mesh instance 3D cube.
 	drawable_texture = DrawableTexture2D.new()
