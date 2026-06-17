@@ -36,7 +36,7 @@ func _ready() -> void:
 	brush.fill_from = Vector2(0.5, 0.5)
 	brush.fill_to = Vector2(0.5, 1.0)
 
-	# Setting black to the default color for the brush.
+	# Setting black as the default color for the brush.
 	brush.gradient = Gradient.new()
 	brush.gradient.set_color(0, Color.BLACK)
 	brush.gradient.set_color(1, Color(0,0,0,0)) # Fading edges.
