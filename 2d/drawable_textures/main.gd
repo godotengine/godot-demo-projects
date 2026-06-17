@@ -41,7 +41,7 @@ func _ready() -> void:
 	brush.gradient.set_color(0, Color.BLACK)
 	brush.gradient.set_color(1, Color(0,0,0,0)) # Fading edges.
 
-	# Creating the "eraser" is just another "brush" but with the background
+	# Creating the "eraser" as just another "brush" but with the background
 	# color to fake the erasing effect.
 	eraser = GradientTexture2D.new()
 	eraser.fill = GradientTexture2D.FILL_RADIAL
