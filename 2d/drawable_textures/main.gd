@@ -16,7 +16,8 @@ var eraser: GradientTexture2D
 
 var background_color: Color = Color.WHITE
 
-var brush_mode: bool = true ## A way to check if we're using the Godot stamp or normal brush.
+## A way to check if we're using the Godot stamp or normal brush.
+var brush_mode: bool = true
 
 
 func _ready() -> void:
