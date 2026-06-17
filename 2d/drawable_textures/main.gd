@@ -19,7 +19,6 @@ var background_color: Color = Color.WHITE
 var brush_mode: bool = true ## A way to check if we're using the Godot stamp or normal brush.
 
 
-
 func _ready() -> void:
 	# First we create & setup the drawable texure. After that we can attach it
 	# onto the nodes we want such as the texture rect and the albedo texture
