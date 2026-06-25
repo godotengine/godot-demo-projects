@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bw7ctlk1oblox"]
+
+[ext_resource type="Texture2D" uid="uid://dm6sh6t5nfmmc" path="res://icon.svg" id="1_rkf5a"]
+
+[sub_resource type="SceneSaveloadConfig" id="SceneSaveloadConfig_t0koa"]
+properties/0/path = NodePath(".:position")
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/sync = true
+
+[node name="Enemy" type="Node2D"]
+
+[node name="Icon" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0.486275, 1, 1)
+texture = ExtResource("1_rkf5a")
+
+[node name="SaveloadSynchronizer" type="SaveloadSynchronizer" parent="."]
+saveload_config = SubResource("SceneSaveloadConfig_t0koa")

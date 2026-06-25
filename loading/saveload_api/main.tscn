@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxiryehmclcsv"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_h4sb6"]
+[ext_resource type="PackedScene" uid="uid://b6tneivslk4kq" path="res://player.tscn" id="2_udeoi"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_h4sb6")
+
+[node name="Player" parent="." instance=ExtResource("2_udeoi")]
+position = Vector2(455, 286)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="SaveloadSpawner" type="SaveloadSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://enemy.tscn")
+spawn_path = NodePath("../Enemies")
+spawn_limit = 8
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 294.0
+offset_bottom = 173.0
+text = "Move: arrow keys
+Spawn enemy: enter
+Save: ctrl+s
+Open: ctrl+o"
