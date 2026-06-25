@@ -75,7 +75,7 @@ func _ready() -> void:
 	for test: Dictionary in _tests:
 		test_menu.add_test(test.id, test.path)
 
-	var arguments := { }
+	var arguments := {}
 	for arg in OS.get_cmdline_user_args():
 		if arg.contains("="):
 			var key_value := arg.split("=")
