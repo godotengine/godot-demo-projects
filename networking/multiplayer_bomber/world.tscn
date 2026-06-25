@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cwchcyc0t4cgv" path="res://rock.tscn" id="2"]
 [ext_resource type="Script" uid="uid://i0malmurqy3m" path="res://score.gd" id="3"]
 [ext_resource type="FontFile" uid="uid://cm4wvgsyhdc2w" path="res://montserrat.otf" id="4"]
+[ext_resource type="Script" uid="uid://dnawfxew5j3m0" path="res://player_spawner.gd" id="5_dwbse"]
 [ext_resource type="Script" uid="uid://r8wlac3jv6ck" path="res://bomb_spawner.gd" id="6_ac5ja"]
 
 [node name="World" type="Node2D" unique_id=567359237]
@@ -307,6 +308,7 @@ process_callback = 0
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=165151297]
 spawn_path = NodePath("../Players")
+script = ExtResource("5_dwbse")
 
 [node name="BombSpawner" type="MultiplayerSpawner" parent="." unique_id=1836509659]
 spawn_path = NodePath("..")
