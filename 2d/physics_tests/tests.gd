@@ -139,7 +139,7 @@ func _on_max_steps_per_frame_value_changed(value: float) -> void:
 
 func _on_solver_iterations_value_changed(value: float) -> void:
 	%SolverIterationsValue.text = str(roundi(value))
-	PhysicsServer2D.space_set_param(get_viewport().find_world_2d().space, PhysicsServer2D.SPACE_PARAM_SOLVER_ITERATIONS,roundi(value))
+	PhysicsServer2D.space_set_param(get_viewport().find_world_2d().space, PhysicsServer2D.SPACE_PARAM_SOLVER_ITERATIONS, roundi(value))
 
 
 func _on_contact_bias_value_changed(value: float) -> void:
