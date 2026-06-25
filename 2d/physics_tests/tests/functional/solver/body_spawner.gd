@@ -37,6 +37,7 @@ func spawn_body() -> void:
 	add_child(rb)
 	vn.screen_exited.connect(_on_screen_exited.bind(rb))
 
+
 func _on_screen_exited(rb: RigidBody2D) -> void:
 	rb.queue_free()
 
