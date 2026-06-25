@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="RefereeResource" load_steps=6 format=3 uid="uid://gmxiboapmwbn"]
+
+[ext_resource type="Script" path="res://saving/character_resource.gd" id="1_ejgby"]
+[ext_resource type="Script" path="res://saving/referee_resource.gd" id="2_8vmsp"]
+
+[sub_resource type="Resource" id="Resource_i0qnr"]
+script = ExtResource("1_ejgby")
+character_name = "Alice"
+position = Vector2(698.258, 252.281)
+move_direction = Vector2(0.661847, -0.749639)
+base_speed = 100.0
+it_speed_multiplier = 2.0
+path_to_whose_it = NodePath("/root/Main/GameLayer/Player")
+player_controlled = false
+stunned = false
+stun_duration = 2.0
+stun_time_left = 0.0
+
+[sub_resource type="Resource" id="Resource_v1ijj"]
+script = ExtResource("1_ejgby")
+character_name = "Bob"
+position = Vector2(937.998, 534.374)
+move_direction = Vector2(0.999973, -0.00736911)
+base_speed = 100.0
+it_speed_multiplier = 2.0
+path_to_whose_it = NodePath("/root/Main/GameLayer/Player")
+player_controlled = false
+stunned = false
+stun_duration = 2.0
+stun_time_left = 0.0
+
+[sub_resource type="Resource" id="Resource_2ij7d"]
+script = ExtResource("1_ejgby")
+character_name = "you"
+position = Vector2(446, 538)
+move_direction = Vector2(0, 0)
+base_speed = 100.0
+it_speed_multiplier = 2.0
+path_to_whose_it = NodePath("/root/Main/GameLayer/Player")
+player_controlled = true
+stunned = false
+stun_duration = 2.0
+stun_time_left = 0.0
+
+[resource]
+script = ExtResource("2_8vmsp")
+path_to_whose_it = NodePath("/root/Main/GameLayer/Player")
+path_to_who_starts_as_it = NodePath("GameLayer/Player")
+player_resource = SubResource("Resource_2ij7d")
+other_alice_resource = SubResource("Resource_i0qnr")
+other_bob_resource = SubResource("Resource_v1ijj")
+prompt_text = "Tag, you are it!"
