@@ -27,7 +27,7 @@ public partial class ShadowMath25D : CharacterBody3D
         targetMath = shadowRoot.GetParent().GetChild<Node25D>(index - 1).GetChild<Node3D>(0);
     }
 
-    public override void _Process(real_t delta)
+    public override void _Process(double delta)
     {
         if (targetMath == null)
         {
