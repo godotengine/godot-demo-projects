@@ -13,41 +13,41 @@ using real_t = System.Single;
 [Tool]
 public partial class ShadowMath25D : CharacterBody3D
 {
-    /// <summary>
-    /// The maximum distance below objects that shadows will appear.
-    /// </summary>
-    public real_t shadowLength = 1000;
-    private Node25D shadowRoot;
-    private Node3D targetMath;
+	/// <summary>
+	/// The maximum distance below objects that shadows will appear.
+	/// </summary>
+	public real_t shadowLength = 1000;
+	private Node25D shadowRoot;
+	private Node3D targetMath;
 
-    public override void _Ready()
-    {
-        shadowRoot = GetParent<Node25D>();
-        int index = shadowRoot.GetIndex();
-        targetMath = shadowRoot.GetParent().GetChild<Node25D>(index - 1).GetChild<Node3D>(0);
-    }
+	public override void _Ready()
+	{
+		shadowRoot = GetParent<Node25D>();
+		int index = shadowRoot.GetIndex();
+		targetMath = shadowRoot.GetParent().GetChild<Node25D>(index - 1).GetChild<Node3D>(0);
+	}
 
-    public override void _Process(real_t delta)
-    {
-        if (targetMath == null)
-        {
-            if (shadowRoot != null)
-            {
-                shadowRoot.Visible = false;
-            }
-            return; // Shadow is not in a valid place.
-        }
+	public override void _Process(double delta)
+	{
+		if (targetMath == null)
+		{
+			if (shadowRoot != null)
+			{
+				shadowRoot.Visible = false;
+			}
+			return; // Shadow is not in a valid place.
+		}
 
-        Position = targetMath.Position;
-        var k = MoveAndCollide(Vector3.Down * shadowLength);
-        if (k == null)
-        {
-            shadowRoot.Visible = false;
-        }
-        else
-        {
-            shadowRoot.Visible = true;
-            GlobalTransform = Transform;
-        }
-    }
+		Position = targetMath.Position;
+		var k = MoveAndCollide(Vector3.Down * shadowLength);
+		if (k == null)
+		{
+			shadowRoot.Visible = false;
+		}
+		else
+		{
+			shadowRoot.Visible = true;
+			GlobalTransform = Transform;
+		}
+	}
 }

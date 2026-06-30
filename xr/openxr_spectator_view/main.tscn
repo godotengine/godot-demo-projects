@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cn6s3kxlkt6ml"]
+[gd_scene format=3 uid="uid://cn6s3kxlkt6ml"]
 
 [ext_resource type="Script" uid="uid://dknfswmyiegk8" path="res://main.gd" id="1_2eojn"]
 [ext_resource type="Shader" uid="uid://dqhkrv0efh3w" path="res://shaders/color.gdshader" id="2_h2yge"]
@@ -38,59 +38,59 @@ rings = 4
 material = SubResource("ShaderMaterial_1bvp3")
 size = Vector3(0.01, 0.01, 0.01)
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" unique_id=1130806479]
 script = ExtResource("1_2eojn")
 
-[node name="StartVR" type="Node3D" parent="."]
+[node name="StartVR" type="Node3D" parent="." unique_id=1041591819]
 script = ExtResource("4_1bvp3")
 maximum_refresh_rate = 144
 
-[node name="XROrigin3D" type="XROrigin3D" parent="."]
+[node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=1487026587]
 
-[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=2072288312]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 cull_mask = 1048571
 
-[node name="PlaceholderHead" type="MeshInstance3D" parent="XROrigin3D/XRCamera3D"]
+[node name="PlaceholderHead" type="MeshInstance3D" parent="XROrigin3D/XRCamera3D" unique_id=1503921264]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0335748, 0.0557129)
 layers = 4
 mesh = SubResource("SphereMesh_b2416")
 
-[node name="PlaceholderHMD" type="MeshInstance3D" parent="XROrigin3D/XRCamera3D/PlaceholderHead"]
+[node name="PlaceholderHMD" type="MeshInstance3D" parent="XROrigin3D/XRCamera3D/PlaceholderHead" unique_id=1273581382]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.015012741, -0.06617409)
 mesh = SubResource("CapsuleMesh_lquwl")
 
-[node name="LeftHandAim" type="XRController3D" parent="XROrigin3D"]
+[node name="LeftHandAim" type="XRController3D" parent="XROrigin3D" unique_id=1707594173]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"left_hand"
 pose = &"aim"
 show_when_tracked = true
 
-[node name="PlaceholderHand" type="MeshInstance3D" parent="XROrigin3D/LeftHandAim"]
+[node name="PlaceholderHand" type="MeshInstance3D" parent="XROrigin3D/LeftHandAim" unique_id=696335186]
 mesh = SubResource("BoxMesh_go2t1")
 
-[node name="XRPointer" parent="XROrigin3D/LeftHandAim" instance=ExtResource("4_lquwl")]
+[node name="XRPointer" parent="XROrigin3D/LeftHandAim" unique_id=1563615239 instance=ExtResource("4_lquwl")]
 
-[node name="RightHandAim" type="XRController3D" parent="XROrigin3D"]
+[node name="RightHandAim" type="XRController3D" parent="XROrigin3D" unique_id=493597311]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
 tracker = &"right_hand"
 pose = &"aim"
 show_when_tracked = true
 
-[node name="PlaceholderHand" type="MeshInstance3D" parent="XROrigin3D/RightHandAim"]
+[node name="PlaceholderHand" type="MeshInstance3D" parent="XROrigin3D/RightHandAim" unique_id=34481417]
 mesh = SubResource("BoxMesh_go2t1")
 skeleton = NodePath("../../LeftHandAim")
 
-[node name="XRPointer" parent="XROrigin3D/RightHandAim" instance=ExtResource("4_lquwl")]
+[node name="XRPointer" parent="XROrigin3D/RightHandAim" unique_id=2114468980 instance=ExtResource("4_lquwl")]
 
-[node name="CameraTracker" type="XRController3D" parent="XROrigin3D"]
+[node name="CameraTracker" type="XRController3D" parent="XROrigin3D" unique_id=203791347]
 tracker = &"/user/vive_tracker_htcx/role/camera"
 pose = &"camera_pose"
 
-[node name="CameraRemoteTransform3D" type="RemoteTransform3D" parent="XROrigin3D/CameraTracker"]
+[node name="CameraRemoteTransform3D" type="RemoteTransform3D" parent="XROrigin3D/CameraTracker" unique_id=1012746948]
 unique_name_in_owner = true
 
-[node name="World" parent="." instance=ExtResource("2_j3t0x")]
+[node name="World" parent="." unique_id=865336902 instance=ExtResource("2_j3t0x")]
 
 [connection signal="button_pressed" from="XROrigin3D/LeftHandAim" to="." method="_on_left_hand_aim_button_pressed"]
 [connection signal="button_pressed" from="XROrigin3D/RightHandAim" to="." method="_on_right_hand_aim_button_pressed"]

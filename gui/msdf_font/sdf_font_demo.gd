@@ -18,4 +18,4 @@ func update_label() -> void:
 
 func _on_outline_size_value_changed(value: float) -> void:
 	%FontLabel.add_theme_constant_override(&"outline_size", int(value))
-	%Value.text = str(value)
+	%Value.text = str(int(value))
