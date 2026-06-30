@@ -83,31 +83,31 @@ func _ready() -> void:
 		else:
 			arguments[arg.trim_prefix("--")] = ""
 
-	if arguments.has("ticks_per_second"):
-		Engine.physics_ticks_per_second = int(arguments["ticks_per_second"])
+	if arguments.has("ticks-per-second"):
+		Engine.physics_ticks_per_second = int(arguments["ticks-per-second"])
 		%TicksPerSecond.value = Engine.physics_ticks_per_second
 
-	if arguments.has("time_scale"):
-		Engine.time_scale = float(arguments["time_scale"])
+	if arguments.has("time-scale"):
+		Engine.time_scale = float(arguments["time-scale"])
 		%TimeScale.value = Engine.time_scale
 
-	if arguments.has("max_steps_per_frame"):
-		Engine.max_physics_steps_per_frame = int(arguments["max_steps_per_frame"])
+	if arguments.has("max-steps-per-frame"):
+		Engine.max_physics_steps_per_frame = int(arguments["max-steps-per-frame"])
 		%MaxStepsPerFrame.value = Engine.max_physics_steps_per_frame
 
-	if arguments.has("solver_iterations"):
-		%SolverIterations.value = int(arguments["solver_iterations"])
-		PhysicsServer2D.space_set_param(get_viewport().find_world_2d().space, PhysicsServer2D.SPACE_PARAM_SOLVER_ITERATIONS, int(arguments["solver_iterations"]))
+	if arguments.has("solver-iterations"):
+		%SolverIterations.value = int(arguments["solver-iterations"])
+		PhysicsServer2D.space_set_param(get_viewport().find_world_2d().space, PhysicsServer2D.SPACE_PARAM_SOLVER_ITERATIONS, int(arguments["solver-iterations"]))
 
-	if arguments.has("contact_bias"):
-		%ContactBias.value = float(arguments["contact_bias"])
-		PhysicsServer2D.space_set_param(get_viewport().find_world_2d().space, PhysicsServer2D.SPACE_PARAM_CONTACT_DEFAULT_BIAS, float(arguments["contact_bias"]))
+	if arguments.has("contact-bias"):
+		%ContactBias.value = float(arguments["contact-bias"])
+		PhysicsServer2D.space_set_param(get_viewport().find_world_2d().space, PhysicsServer2D.SPACE_PARAM_CONTACT_DEFAULT_BIAS, float(arguments["contact-bias"]))
 
-	if arguments.has("constraint_bias"):
-		%ConstraintBias.value = float(arguments["constraint_bias"])
-		PhysicsServer2D.space_set_param(get_viewport().find_world_2d().space, PhysicsServer2D.SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, float(arguments["constraint_bias"]))
+	if arguments.has("constraint-bias"):
+		%ConstraintBias.value = float(arguments["constraint-bias"])
+		PhysicsServer2D.space_set_param(get_viewport().find_world_2d().space, PhysicsServer2D.SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, float(arguments["constraint-bias"]))
 
-	if arguments.has("physics_interpolation"):
+	if arguments.has("physics-interpolation"):
 		var arg: String = arguments["physics_interpolation"].to_lower()
 		get_tree().physics_interpolation = arg == "true" or arg == "on"
 		%PhysicsInterpolation.button_pressed = get_tree().physics_interpolation
@@ -115,8 +115,8 @@ func _ready() -> void:
 	if arguments.has("fullscreen"):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
-	if arguments.has("test_scene"):
-		test_menu.start_test_from_scene.call_deferred(arguments["test_scene"])
+	if arguments.has("test-scene"):
+		test_menu.start_test_from_scene.call_deferred(arguments["test-scene"])
 
 
 func _on_ticks_per_second_value_changed(value: float) -> void:
