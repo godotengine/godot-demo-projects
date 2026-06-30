@@ -1,13 +1,13 @@
 # Spawn random RigidBody scenes.
 extends Node2D
 
-@export var body_scenes : Array[PackedScene]
-@export var body_spawn_roll : Array[int]
-@export var mass : float = 0.27
+@export var body_scenes: Array[PackedScene]
+@export var body_spawn_roll: Array[int]
+@export var mass: float = 0.27
 
 var _rng := RandomNumberGenerator.new()
-var _total_roll : int = 0
-var _accum_roll : Array[int]
+var _total_roll: int = 0
+var _accum_roll: Array[int]
 
 
 func _sum(accum: int, number: int) -> int:
@@ -23,7 +23,7 @@ func _ready() -> void:
 
 func spawn_body() -> void:
 	var rndi := _rng.randi_range(0, _total_roll)
-	var pick : int = 0
+	var pick: int = 0
 	for i in body_spawn_roll.size():
 		if rndi <= _accum_roll[i]:
 			pick = i
