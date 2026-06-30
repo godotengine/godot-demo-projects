@@ -112,9 +112,6 @@ func _ready() -> void:
 		get_tree().physics_interpolation = arg == "true" or arg == "on"
 		%PhysicsInterpolation.button_pressed = get_tree().physics_interpolation
 
-	if arguments.has("fullscreen"):
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-
 	if arguments.has("test-scene"):
 		test_menu.start_test_from_scene.call_deferred(arguments["test-scene"])
 
