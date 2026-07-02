@@ -1,0 +1,360 @@
+[gd_scene load_steps=24 format=3 uid="uid://dkdk37kpjui3q"]
+
+[ext_resource type="Script" path="res://vehicle.gd" id="1_7ma2j"]
+[ext_resource type="PackedScene" uid="uid://l0xjd05idone" path="res://assets/gokart/scene.gltf" id="2_kfcgm"]
+[ext_resource type="ArrayMesh" uid="uid://6tmtkswqlu1o" path="res://assets/gokart/SeparatedMeshes/SteeringWheelRing.mesh" id="3_lrptk"]
+[ext_resource type="Material" uid="uid://2xqcil35ckmf" path="res://assets/gokart/materials/Material.015.nocull.tres" id="3_o3bfy"]
+[ext_resource type="ArrayMesh" uid="uid://don64v7xmdgg" path="res://assets/gokart/SeparatedMeshes/SteeringWheelCenter.mesh" id="4_mhhi7"]
+[ext_resource type="ArrayMesh" uid="uid://b5h5cyytrbbtt" path="res://assets/gokart/SeparatedMeshes/SteeringWheelDisplay.mesh" id="5_vfed0"]
+[ext_resource type="ArrayMesh" uid="uid://jpn14bb16qis" path="res://assets/gokart/SeparatedMeshes/SteeringWheelDisplayHolder.mesh" id="6_h64mi"]
+[ext_resource type="ArrayMesh" uid="uid://dadqutpbe104x" path="res://assets/gokart/SeparatedMeshes/SteeringWheelBracket.mesh" id="7_5cxcj"]
+[ext_resource type="ArrayMesh" uid="uid://8xlmvfu6g4jf" path="res://assets/gokart/SeparatedMeshes/FrontWheelAxle.mesh" id="10_ww2pm"]
+[ext_resource type="ArrayMesh" uid="uid://c14r4hymxpooh" path="res://assets/gokart/SeparatedMeshes/FrontWheel.mesh" id="11_ag0wg"]
+[ext_resource type="ArrayMesh" uid="uid://dfy8qw7iroj4l" path="res://assets/gokart/SeparatedMeshes/FrontWheelHub.mesh" id="12_abuu3"]
+[ext_resource type="PackedScene" uid="uid://bbvciliw3xnf6" path="res://objects/black_out.tscn" id="16_bmfua"]
+[ext_resource type="ArrayMesh" uid="uid://hnyoxv2odu1y" path="res://assets/gokart/SeparatedMeshes/RearWheel.mesh" id="16_oucwn"]
+[ext_resource type="ArrayMesh" uid="uid://dum2fans1uiw1" path="res://assets/gokart/SeparatedMeshes/RearWheelHub.mesh" id="17_it00k"]
+[ext_resource type="PackedScene" uid="uid://cj3hkqph5hlf4" path="res://objects/hand.tscn" id="17_qry2o"]
+[ext_resource type="Shader" path="res://shaders/transparent_textured.gdshader" id="18_xm0si"]
+[ext_resource type="PackedScene" uid="uid://dal5i1c6mh07h" path="res://InfoUI.tscn" id="19_m6ejn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fiiud"]
+size = Vector3(1.64766, 0.1, 1.93739)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7n65n"]
+points = PackedVector3Array(0.851964, 0.1675, 1.0133, -0.780105, -0.237986, 0.0365355, -0.153729, 1.34105, 0.342991, 0.055483, -1.25704, 0.00777698, 0.055483, 1.25704, 0.00777698, 0.527111, -0.366754, 1.02921, -0.237577, -1.29905, 0.342991, -0.656657, 0.754277, 0.259159, 0.527112, 0.366754, 1.02921, -0.740505, -0.125494, 0.342991, -0.614781, 0.707166, 0.00260986, 0.809957, -0.335263, 0.971389, -0.237577, -0.921778, -0.0340243, -0.488959, -1.08954, 0.259159, 0.758876, 0.313753, 1.10142, -0.0698798, -1.34105, 0.342991, -0.405275, 1.17329, 0.301075, -0.782348, 0.209507, 0.301075, -0.424014, -1.03493, 0.0350808, 0.0138048, 1.34105, 0.00777698, 0.710182, -0.348052, 1.09401, 0.212607, 0.265312, 0.883992, -0.237577, 0.963784, -0.0340243, -0.774435, 0.11802, 0.000908487, -0.656657, -0.754277, 0.259159, 0.0138048, -1.34105, 0.00777698, -0.0280375, 1.34105, 0.301075, 0.809957, 0.335263, 0.971389, -0.654479, -0.629089, 0.00222349, 0.212559, -0.265248, 0.883912, -0.46249, 0.992135, 0.0364561, -0.405275, -1.17329, 0.301075)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d6sje"]
+points = PackedVector3Array(-0.210139, -2.06126, 0.0146781, -0.437945, 1.91823, 1.09208, -0.665752, 3.39888, 0.0669962, -0.665752, -3.77675, 0.864185, 0.245474, -1.9543, 0.0669962, 0.245474, -1.9543, 0.978132, 0.245474, 1.6906, 0.0669962, -0.665752, -3.66258, 0.0669962, 0.0176675, 3.05708, 0.864185, -0.665752, 3.51305, 0.864185, 0.0176675, -3.32078, 0.180944, 0.245474, 1.6906, 0.978132, -0.437945, -2.18193, 1.09208, -0.0962357, 3.17125, 0.0669962, 0.0176675, -3.32078, 0.864185, -0.00511316, 1.71322, 0.01, -0.324042, -3.66258, 0.0669962, -0.324042, 3.39888, 0.0669962, 0.0176675, 3.05708, 0.180944, 0.0914322, -1.84036, 0.0199459, 0.0176675, -3.20661, 0.0669962, -0.210139, 1.79857, 0.0144116, -0.665752, -3.77675, 0.180944, -0.665752, 3.51305, 0.180944, -0.00511316, -1.97692, 0.01, 0.0176675, 2.94291, 0.0669962, 0.0914323, 1.57666, 0.0199456, -0.0962357, -3.43495, 0.0669962)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bst5e"]
+render_priority = 0
+shader = ExtResource("18_xm0si")
+shader_parameter/use_vertex_uv = null
+shader_parameter/swap_uv = true
+shader_parameter/scale_uv = Vector2(1.115, 1.905)
+shader_parameter/offset_uv = Vector2(-0.06, -0.235)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ceit6"]
+size = Vector3(4, 4, 4)
+
+[sub_resource type="SphereMesh" id="SphereMesh_pu3u7"]
+radius = 0.1
+height = 0.2
+
+[node name="VehicleBody3D" type="VehicleBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+script = ExtResource("1_7ma2j")
+
+[node name="CollisionShapeBody" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_fiiud")
+
+[node name="CollisionShapeFrontBumper" type="CollisionShape3D" parent="."]
+transform = Transform3D(-2.3891e-08, -0.546563, -1.12937e-07, 0, -1.12937e-07, 0.546563, -0.546563, 2.3891e-08, 4.93665e-15, 0.000471619, -0.163553, 0.988823)
+shape = SubResource("ConvexPolygonShape3D_7n65n")
+
+[node name="CollisionShapeRearBumper" type="CollisionShape3D" parent="."]
+transform = Transform3D(-1.06308e-08, -0.243205, -5.0254e-08, 0, -5.0254e-08, 0.243205, -0.243205, 1.06308e-08, 2.19667e-15, -0.0269299, -0.163553, -1.18411)
+shape = SubResource("ConvexPolygonShape3D_d6sje")
+
+[node name="GoKart" parent="." instance=ExtResource("2_kfcgm")]
+
+[node name="Sketchfab_model" parent="GoKart" index="0"]
+transform = Transform3D(-2.3891e-08, -0.546563, -2.3891e-08, 0, -2.3891e-08, 0.546563, -0.546563, 2.3891e-08, 1.04431e-15, 0.008, 0.401, 0)
+
+[node name="Cube_002_Material_0" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cube_002" index="0"]
+transform = Transform3D(1, 0, 8.47033e-22, 0, 1, 3.94809e-22, 1.69407e-21, 2.84217e-14, 1, 0, 0.0877885, 2.98023e-08)
+
+[node name="Cube_003" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="2"]
+transform = Transform3D(100, 8.74228e-06, 3.82137e-13, 0, -4.37114e-06, 100, -8.74228e-06, 100, 4.37114e-06, -2.7362, -61.5129, 60.0056)
+
+[node name="Cube_003_Material_0" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cube_003" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 7.75957e-23, 0, 7.75957e-23, 1, 3.72529e-09, 0.0411277, 0)
+
+[node name="Cylinder_002" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="5"]
+visible = false
+
+[node name="Cylinder_002_Material_017_0" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cylinder_002" index="0"]
+transform = Transform3D(1, 0, 3.55271e-15, 0, 1, -3.28406e-15, 3.55271e-15, -3.28406e-15, 1, 0, 0, 0)
+
+[node name="Cylinder_003" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="6"]
+visible = false
+
+[node name="Cylinder_001" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="7"]
+visible = false
+
+[node name="Cylinder_005" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="8"]
+visible = false
+
+[node name="Cylinder_011" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="12"]
+transform = Transform3D(-1.69175, 1.51318e-07, -0.520452, -0.520452, 2.27497e-08, 1.69175, 1.51318e-07, 1.77, 2.27497e-08, -172.225, -84.1333, -25.2716)
+
+[node name="Cube_014" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="14"]
+transform = Transform3D(100, 0, -3.25261e-19, -8.13152e-20, -1.62921e-05, 100, 0, -100, -1.62921e-05, -183.002, -81.4564, -33.6323)
+
+[node name="Cylinder_016" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="18"]
+visible = false
+
+[node name="Cube_019" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="20"]
+visible = false
+
+[node name="Cube_020" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="21"]
+visible = false
+
+[node name="Cylinder_017" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="25"]
+visible = false
+
+[node name="Cylinder_020" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="28"]
+transform = Transform3D(-2.75807, 0.63771, 4.35477, 7.75996e-07, -5.13919, 0.752581, 4.40121, 0.399629, 2.72896, -177.225, -81.5338, 58.4788)
+
+[node name="Cube_025" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="29"]
+transform = Transform3D(-6.1, 5.33279e-07, -2.33104e-14, -1.69407e-21, -2.6664e-07, -6.1, -5.33279e-07, -6.1, 2.66639e-07, -132.503, -74.2827, 83.9287)
+
+[node name="Cube_026" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="30"]
+transform = Transform3D(3.81578, -1.36625, -5.97206e-08, 0, -1.77162e-07, 4.053, -1.36625, -3.81578, -1.66793e-07, -127.44, -74.2827, 82.1501)
+
+[node name="Cube_026_Material_016_0" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cube_026" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 8.88178e-16, 0, 8.88178e-16, 1, 0, 0, 0)
+
+[node name="Cylinder_021" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="31"]
+visible = false
+
+[node name="Cylinder_022" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="32"]
+transform = Transform3D(-3.017, 2.63755e-07, 0, 2.52762e-07, 2.89126, -0.861922, -7.53516e-08, -0.861922, -2.89126, -111.078, -86.9866, 48.7189)
+
+[node name="Plane" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="35"]
+visible = false
+
+[node name="Cube_027" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="39"]
+visible = false
+
+[node name="Cube_030" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="40"]
+visible = false
+
+[node name="Cube_028" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="41"]
+visible = false
+
+[node name="Cube_029" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="42"]
+visible = false
+
+[node name="Cube_031" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="43"]
+visible = false
+
+[node name="Cube_010" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="47"]
+transform = Transform3D(-20.8027, -0.196706, 3.90512, 3.90381, 0.151158, 20.8033, 0.221214, -21.1655, 0.112279, 53.9649, -67.1415, 81.4674)
+
+[node name="Cube_010_Material_004_0" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cube_010" index="0"]
+transform = Transform3D(1, -9.31323e-10, -1.49012e-08, 9.31323e-10, 1, -5.82077e-10, 1.49012e-08, 4.65661e-10, 1, 0, 0, 0)
+
+[node name="Cube_015" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="51"]
+transform = Transform3D(49.245, -2.27374e-13, 0, 6.77626e-21, -2.15257e-06, 49.245, -2.27374e-13, -49.245, -2.15257e-06, 94.8705, -141.41, -88.6269)
+
+[node name="Cube_015_Material_015_0" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cube_015" index="0"]
+transform = Transform3D(1, 3.55271e-15, -4.23516e-22, -3.55271e-15, 1, 1.67037e-22, 0, 7.10543e-15, 1, 0, 0, 0)
+material_override = ExtResource("3_o3bfy")
+
+[node name="Cube_021" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="52"]
+visible = false
+
+[node name="Cylinder_015" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode" index="56"]
+visible = false
+
+[node name="Cylinder_015_Material_008_0" parent="GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cylinder_015" index="0"]
+transform = Transform3D(1, -5.68434e-14, -2.98023e-08, 0, 1, 1.7053e-13, 0, 1.13687e-13, 1, 0, 0, 0)
+
+[node name="SteeringWheelAnchor" type="Node3D" parent="."]
+transform = Transform3D(-3.26138e-08, 0.225543, -2.91715e-07, -0.171469, -2.14302e-07, -0.146521, -0.146521, 2.00588e-07, 0.171469, 0.0164261, 0.450171, 0.293507)
+
+[node name="SteeringWheelPivot" type="Node3D" parent="SteeringWheelAnchor"]
+unique_name_in_owner = true
+transform = Transform3D(1, -2.84217e-13, 0, 5.68434e-14, 1, 5.68434e-14, 0, -3.41061e-13, 1, 0, 0, 0)
+
+[node name="SteeringWheelRing" type="MeshInstance3D" parent="SteeringWheelAnchor/SteeringWheelPivot"]
+transform = Transform3D(1.021, 3.53301e-08, 2.98023e-07, 3.53305e-08, -1.021, -1.67607e-06, 1.78814e-07, 1.54981e-06, -1.10418, -0.0524793, 0.000651516, 0.0899056)
+mesh = ExtResource("3_lrptk")
+skeleton = NodePath("../../../GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cylinder_016/Cylinder_016_Material_007_0")
+
+[node name="SteeringWheelCenter" type="MeshInstance3D" parent="SteeringWheelAnchor/SteeringWheelPivot"]
+transform = Transform3D(1, -5.68434e-14, 0, 5.68434e-14, 1, 5.68434e-14, 0, -1.13687e-13, 1, 0, 0, 0)
+mesh = ExtResource("4_mhhi7")
+skeleton = NodePath("../../../GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cylinder_015/Cylinder_015_Material_008_0")
+
+[node name="SteeringWheelDisplay" type="MeshInstance3D" parent="SteeringWheelAnchor/SteeringWheelPivot"]
+unique_name_in_owner = true
+transform = Transform3D(0.257848, 8.92237e-09, 5.96046e-08, 8.92248e-09, -0.257848, -3.91396e-07, 2.98023e-08, 3.91396e-07, -0.257848, -0.167944, -0.00943883, 0.184493)
+material_override = SubResource("ShaderMaterial_bst5e")
+mesh = ExtResource("5_vfed0")
+skeleton = NodePath("../../../GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cube_020/Cube_020_Material_010_0")
+
+[node name="SteeringWheelDisplayHolder" type="MeshInstance3D" parent="SteeringWheelAnchor/SteeringWheelPivot"]
+transform = Transform3D(0.257848, 8.92237e-09, 4.47035e-08, 8.92248e-09, -0.257848, -3.91396e-07, 2.98023e-08, 3.91396e-07, -0.257848, -0.167944, -0.00943883, 0.184493)
+mesh = ExtResource("6_h64mi")
+skeleton = NodePath("../../../GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cube_019/Cube_019_Material_009_0")
+
+[node name="SteeringWheelBracket" type="MeshInstance3D" parent="SteeringWheelAnchor/SteeringWheelPivot"]
+transform = Transform3D(0.133479, 4.6188e-09, 0, 4.61882e-09, -0.133479, -2.02612e-07, -7.45058e-09, 2.02612e-07, -0.133479, -0.106638, -0.135079, 0.249272)
+mesh = ExtResource("7_5cxcj")
+skeleton = NodePath("../../../GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cube_021/Cube_021_Material_021_0")
+
+[node name="LeftHandAnchor" type="RemoteTransform3D" parent="SteeringWheelAnchor/SteeringWheelPivot"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37116e-08, -1.19209e-07, 1, -1, 0, -4.37117e-08, 1.13687e-13, -1, -1.19209e-07, 0, 1, 5.96046e-08)
+update_scale = false
+
+[node name="RightHandAnchor" type="RemoteTransform3D" parent="SteeringWheelAnchor/SteeringWheelPivot"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37115e-08, -1.19209e-07, 1, -1, 0, -4.37116e-08, 1.7053e-13, -1, -1.19209e-07, 0, -1, -1.19209e-07)
+update_scale = false
+
+[node name="HandDetector" type="Area3D" parent="SteeringWheelAnchor"]
+unique_name_in_owner = true
+transform = Transform3D(0.707107, -2.84217e-13, -0.707107, 1.56319e-13, 1, -1.7053e-13, 0.707107, -1.7053e-13, 0.707107, 0, 0, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SteeringWheelAnchor/HandDetector"]
+transform = Transform3D(0.996882, -4.83169e-13, 0.0789115, -1.51545e-13, 1, 0, -0.0789115, -2.27374e-13, 0.996882, 0, 0, 0)
+shape = SubResource("BoxShape3D_ceit6")
+
+[node name="LeftForwardWheel" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475, 0, 0.73)
+use_as_steering = true
+wheel_radius = 0.2
+wheel_rest_length = 0.0
+suspension_travel = 0.01
+suspension_stiffness = 500.0
+suspension_max_force = 10000.0
+damping_compression = 0.95
+damping_relaxation = 0.95
+
+[node name="LeftFrontWheelAxle" type="MeshInstance3D" parent="LeftForwardWheel"]
+transform = Transform3D(-1.22392e-09, 0, -0.028, 0, 0.028, 0, 0.028, 0, -1.22392e-09, 0.03, 0, 0)
+mesh = ExtResource("10_ww2pm")
+skeleton = NodePath("../../GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cylinder_021/Cylinder_021_Material_015_0")
+
+[node name="LeftFrontWheel" type="MeshInstance3D" parent="LeftForwardWheel"]
+transform = Transform3D(-8.85404e-09, 8.88178e-16, 0.202557, 0, 0.202557, 8.88178e-16, -0.202557, -7.94093e-23, -8.85404e-09, 0.166, 0, 0)
+mesh = ExtResource("11_ag0wg")
+skeleton = NodePath("../../GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cylinder_001/Cylinder_001_Material_017_0")
+
+[node name="LeftFrontWheelHub" type="MeshInstance3D" parent="LeftForwardWheel"]
+transform = Transform3D(-8.85404e-09, 8.88178e-16, 0.202557, 0, 0.202557, 8.88178e-16, -0.202557, -7.94093e-23, -8.85404e-09, 0.166, 0, 0)
+mesh = ExtResource("12_abuu3")
+skeleton = NodePath("../../GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cylinder_001/Cylinder_001_Material_018_0")
+
+[node name="LeftFrontWheelHub2" type="MeshInstance3D" parent="LeftForwardWheel"]
+transform = Transform3D(-8.85404e-09, 0, -0.202557, 0, 0.202557, 0, 0.202557, 0, -8.85404e-09, 0.36613, 0, 0)
+mesh = ExtResource("12_abuu3")
+skeleton = NodePath("../../GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cylinder_001/Cylinder_001_Material_018_0")
+
+[node name="RightForwardWheel" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.475, 0, 0.73)
+use_as_steering = true
+wheel_radius = 0.2
+wheel_rest_length = 0.0
+suspension_travel = 0.01
+suspension_stiffness = 500.0
+suspension_max_force = 10000.0
+damping_compression = 0.95
+damping_relaxation = 0.95
+
+[node name="RightFrontWheelAxle" type="MeshInstance3D" parent="RightForwardWheel"]
+transform = Transform3D(-1.24097e-09, -1.11022e-16, 0.0283901, 0, 0.0283901, 3.33067e-16, -0.0283901, 3.30872e-24, -1.24097e-09, -0.027, 0, 0)
+mesh = ExtResource("10_ww2pm")
+skeleton = NodePath("../../GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cylinder_017/Cylinder_017_Material_015_0")
+
+[node name="RightFrontWheel" type="MeshInstance3D" parent="RightForwardWheel"]
+transform = Transform3D(8.87341e-09, 1.77468e-08, 0.203, -3.06521e-08, -0.203, 1.77468e-08, 0.203, -3.06521e-08, -8.87341e-09, -0.355322, -1.49012e-08, 0)
+mesh = ExtResource("11_ag0wg")
+skeleton = NodePath("../../GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cylinder_002/Cylinder_002_Material_017_0")
+
+[node name="RightFrontWheelHub" type="MeshInstance3D" parent="RightForwardWheel"]
+transform = Transform3D(-8.87341e-09, 0, -0.203, 0, 0.203, 0, 0.203, 0, -8.87341e-09, -0.159, 0, 0)
+mesh = ExtResource("12_abuu3")
+skeleton = NodePath("../../GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cylinder_002/Cylinder_002_Material_018_0")
+
+[node name="RightFrontWheelHub2" type="MeshInstance3D" parent="RightForwardWheel"]
+transform = Transform3D(-8.87341e-09, 0, 0.203, 0, 0.203, 0, -0.203, 0, -8.87341e-09, -0.357962, 0, 0)
+mesh = ExtResource("12_abuu3")
+skeleton = NodePath("../../GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cylinder_002/Cylinder_002_Material_018_0")
+
+[node name="LeftBackWheel" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.835339, 0.01, -0.759)
+use_as_traction = true
+wheel_radius = 0.21
+wheel_rest_length = 0.0
+wheel_friction_slip = 8.0
+suspension_travel = 0.01
+suspension_stiffness = 500.0
+suspension_max_force = 10000.0
+damping_compression = 0.95
+damping_relaxation = 0.95
+
+[node name="LeftRearWheel" type="MeshInstance3D" parent="LeftBackWheel"]
+transform = Transform3D(-9.26725e-09, 8.88178e-16, 0.21201, 0, 0.21201, 1.77636e-15, -0.21201, -5.29396e-23, -9.26725e-09, -0.067, 0, 0)
+mesh = ExtResource("16_oucwn")
+skeleton = NodePath("../../GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cylinder_005/Cylinder_005_Material_017_0")
+
+[node name="LeftRearWheelHub" type="MeshInstance3D" parent="LeftBackWheel"]
+transform = Transform3D(-9.26725e-09, 8.88178e-16, 0.21201, 0, 0.21201, 1.77636e-15, -0.21201, -5.29396e-23, -9.26725e-09, -0.067, 0, 0)
+mesh = ExtResource("17_it00k")
+skeleton = NodePath("../../GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cylinder_005/Cylinder_005_Material_018_0")
+
+[node name="RightBackWheel" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.835, 0.01, -0.759)
+use_as_traction = true
+wheel_radius = 0.21
+wheel_rest_length = 0.0
+wheel_friction_slip = 8.0
+suspension_travel = 0.01
+suspension_stiffness = 500.0
+suspension_max_force = 10000.0
+damping_compression = 0.95
+damping_relaxation = 0.95
+
+[node name="RightRearWheel" type="MeshInstance3D" parent="RightBackWheel"]
+transform = Transform3D(-9.26681e-09, 0, -0.212, 0, 0.212, 0, 0.212, 0, -9.26681e-09, 0.0739019, -0.00122055, 0.000597239)
+mesh = ExtResource("16_oucwn")
+skeleton = NodePath("../../GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cylinder_003/Cylinder_003_Material_017_0")
+
+[node name="RightRearWheelHub" type="MeshInstance3D" parent="RightBackWheel"]
+transform = Transform3D(-9.26725e-09, 0, -0.21201, 0, 0.21201, 0, 0.21201, 0, -9.26725e-09, 0.0785389, 0, 5.96046e-08)
+mesh = ExtResource("17_it00k")
+skeleton = NodePath("../../GoKart/Sketchfab_model/Gokart _fbx/RootNode/Cylinder_005/Cylinder_005_Material_018_0")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.784301, -0.477039)
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+unique_name_in_owner = true
+
+[node name="BlackOut" parent="XROrigin3D/XRCamera3D" instance=ExtResource("16_bmfua")]
+unique_name_in_owner = true
+
+[node name="LeftHand" parent="XROrigin3D" instance=ExtResource("17_qry2o")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, -0.5)
+
+[node name="RightHand" parent="XROrigin3D" instance=ExtResource("17_qry2o")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.5, -0.5)
+tracker = &"right_hand"
+pose = &"default"
+
+[node name="TestHead" type="MeshInstance3D" parent="XROrigin3D"]
+mesh = SubResource("SphereMesh_pu3u7")
+skeleton = NodePath("../..")
+
+[node name="InfoViewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
+disable_3d = true
+size = Vector2i(512, 256)
+render_target_update_mode = 4
+
+[node name="InfoUI" parent="InfoViewport" instance=ExtResource("19_m6ejn")]
+unique_name_in_owner = true
+
+[connection signal="body_entered" from="SteeringWheelAnchor/HandDetector" to="." method="_on_hand_detector_body_entered"]
+[connection signal="body_exited" from="SteeringWheelAnchor/HandDetector" to="." method="_on_hand_detector_body_exited"]
+
+[editable path="GoKart"]
