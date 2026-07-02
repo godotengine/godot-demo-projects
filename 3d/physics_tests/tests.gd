@@ -1,6 +1,6 @@
 extends Node
 
-var _tests : Array[Dictionary] = [
+var _tests: Array[Dictionary] = [
 	{
 		"id": "Functional Tests/Shapes",
 		"path": "res://tests/functional/test_shapes.tscn",

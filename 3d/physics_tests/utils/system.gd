@@ -8,7 +8,7 @@ enum PhysicsEngine {
 }
 
 var _engine := PhysicsEngine.OTHER
-var _step_once : bool = false
+var _step_once: bool = false
 
 func _enter_tree() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
