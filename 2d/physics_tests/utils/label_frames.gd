@@ -1,6 +1,6 @@
 extends Label
 
-var _unpaused_frame_count : int = 0
+var _unpaused_frame_count: int = 0
 
 
 func reset() -> void:

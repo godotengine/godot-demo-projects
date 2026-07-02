@@ -1,6 +1,6 @@
 extends Node
 
-var _tests : Array[Dictionary] = [
+var _tests: Array[Dictionary] = [
 	{
 		"id": "Functional Tests/Shapes",
 		"path": "res://tests/functional/test_shapes.tscn",
@@ -108,7 +108,7 @@ func _ready() -> void:
 		PhysicsServer2D.space_set_param(get_viewport().find_world_2d().space, PhysicsServer2D.SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS, float(arguments["constraint-bias"]))
 
 	if arguments.has("physics-interpolation"):
-		var arg: String = arguments["physics_interpolation"].to_lower()
+		var arg: String = arguments["physics-interpolation"].to_lower()
 		get_tree().physics_interpolation = arg == "true" or arg == "on"
 		%PhysicsInterpolation.button_pressed = get_tree().physics_interpolation
 

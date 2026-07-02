@@ -2,7 +2,7 @@
 # side by side comparisons.
 extends Node2D
 
-@export var mass : float = 0.27
+@export var mass: float = 0.27
 var rng := RandomNumberGenerator.new()
 
 
