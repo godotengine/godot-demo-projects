@@ -1,6 +1,5 @@
 extends OptionMenu
 
-
 class TestData:
 	var id: String = ""
 	var scene_path: String = ""
@@ -18,6 +17,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(&"restart_test"):
+		%LabelFrames.reset()
 		if _current_test:
 			_start_test(_current_test)
 
@@ -29,6 +29,12 @@ func add_test(id: String, scene_path: String) -> void:
 	_test_list.append(test_data)
 
 	add_menu_item(id)
+
+
+func start_test_from_scene(scene_path: String) -> void:
+	for test: TestData in _test_list:
+		if test.scene_path == scene_path:
+			_start_test(test)
 
 
 func _on_option_selected(item_path: String) -> void:
@@ -50,5 +56,5 @@ func _start_test(test: TestData) -> void:
 	get_tree().root.add_child(_current_test_scene)
 	get_tree().root.move_child(_current_test_scene, 0)
 
-	var label_test: Label = $"../LabelTest"
+	var label_test: Label = %LabelTest
 	label_test.test_name = test.id

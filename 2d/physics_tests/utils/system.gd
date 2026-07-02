@@ -5,7 +5,9 @@ enum PhysicsEngine {
 	OTHER,
 }
 
-var _engine: PhysicsEngine = PhysicsEngine.OTHER
+var _engine : PhysicsEngine = PhysicsEngine.OTHER
+var _step_once : bool = false
+
 
 func _enter_tree() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -14,7 +16,7 @@ func _enter_tree() -> void:
 	# (same as the Debug > Visible Collision Shapes option).
 	get_tree().debug_collisions_hint = true
 
-	var engine_string:= String(ProjectSettings.get_setting("physics/2d/physics_engine"))
+	var engine_string := String(ProjectSettings.get_setting("physics/2d/physics_engine"))
 	match engine_string:
 		"DEFAULT":
 			_engine = PhysicsEngine.GODOT_PHYSICS
@@ -44,6 +46,28 @@ func _process(_delta: float) -> void:
 
 	if Input.is_action_just_pressed(&"exit"):
 		get_tree().quit()
+
+
+func _physics_process(_delta: float) -> void:
+	# Step pause after NOTIFICATION_INTERNAL_PHYSICS_PROCESS
+	# and before engine physics step.
+	if Input.is_action_just_pressed(&"step_once"):
+		if get_tree().paused:
+			_unpause.call_deferred()
+			_step_once = true
+		else:
+			_pause.call_deferred()
+	elif _step_once:
+		_pause.call_deferred()
+		_step_once = false
+
+
+func _pause() -> void:
+	get_tree().paused = true
+
+
+func _unpause() -> void:
+	get_tree().paused = false
 
 
 func get_physics_engine() -> PhysicsEngine:
