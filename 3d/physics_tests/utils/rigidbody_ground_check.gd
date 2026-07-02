@@ -32,13 +32,14 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if state.transform.origin.z > _distance:
 		_dir = 1.0
 
-	ground_check()
+	ground_check(delta)
 
 
-func ground_check() -> void:
+func ground_check(delta: float) -> void:
 	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
 	var shape := PhysicsShapeQueryParameters3D.new()
 	shape.transform = _collision_shape.global_transform
+	shape.transform.origin += get_gravity() * delta
 	shape.shape_rid = _collision_shape.shape.get_rid()
 	shape.collision_mask = 2
 	var result := space_state.get_rest_info(shape)
