@@ -9,20 +9,17 @@ var _is_on_floor: bool = false
 
 @onready var _forward := -transform.basis.z
 @onready var _collision_shape := $CollisionShape
-@onready var _material: StandardMaterial3D = $CollisionShape/MeshInstance3D.get_active_material(0)
 
 
 func _ready() -> void:
-	if not _material:
-		_material = StandardMaterial3D.new()
-		$CollisionShape/MeshInstance3D.set_surface_override_material(0, _material)
+	$CollisionShape.debug_color = Color.RED
 
 
 func _process(_delta: float) -> void:
 	if _is_on_floor:
-		_material.albedo_color = Color.WHITE
+		$CollisionShape.debug_color = Color.WHITE
 	else:
-		_material.albedo_color = Color.RED
+		$CollisionShape.debug_color = Color.RED
 
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
