@@ -42,7 +42,7 @@ func _horizontal_movement(_delta: float) -> void:
 	var move_dir: Vector3 = local_x * movement_vec2.x + local_z * movement_vec2.y
 
 	velocity = move_dir * 10
-	if Input.is_action_pressed(&"movement_modifier"):
+	if Input.is_action_pressed(&"movementd_modifier"):
 		velocity /= 2
 
 	move_and_slide()

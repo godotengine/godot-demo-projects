@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://qb615fcqh8x0"]
+[gd_scene format=3 uid="uid://qb615fcqh8x0"]
 
 [ext_resource type="Script" uid="uid://wq3v75egxo18" path="res://spectator.gd" id="1_ktigi"]
 [ext_resource type="PackedScene" uid="uid://cn6s3kxlkt6ml" path="res://main.tscn" id="2_1qy5m"]
@@ -10,22 +10,22 @@
 shader = ExtResource("2_ygl07")
 shader_parameter/layer = 0.0
 
-[node name="Spectator" type="Node2D"]
+[node name="Spectator" type="Node2D" unique_id=1285989616]
 script = ExtResource("1_ktigi")
 
-[node name="HMDView" type="ColorRect" parent="."]
+[node name="HMDView" type="ColorRect" parent="." unique_id=301545676]
 visible = false
 material = SubResource("ShaderMaterial_wue56")
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="UI" type="VBoxContainer" parent="."]
+[node name="UI" type="VBoxContainer" parent="." unique_id=1509190389]
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 194.0
 offset_bottom = 96.0
 
-[node name="SpectatorView" type="OptionButton" parent="UI"]
+[node name="SpectatorView" type="OptionButton" parent="UI" unique_id=766747626]
 layout_mode = 2
 selected = 0
 item_count = 4
@@ -38,30 +38,30 @@ popup/item_2/id = 2
 popup/item_3/text = "Right eye"
 popup/item_3/id = 3
 
-[node name="TrackCamera" type="CheckBox" parent="UI"]
+[node name="TrackCamera" type="CheckBox" parent="UI" unique_id=1712366219]
 layout_mode = 2
 text = "Track Camera"
 
-[node name="ZoomSlider" type="HSlider" parent="UI"]
+[node name="ZoomSlider" type="HSlider" parent="UI" unique_id=1051685827]
 layout_mode = 2
 min_value = 0.1
 max_value = 5.0
 step = 0.1
 value = 1.0
 
-[node name="SpectatorCamera" parent="." node_paths=PackedStringArray("lookat_node") instance=ExtResource("3_c5j1e")]
+[node name="SpectatorCamera" parent="." unique_id=59498010 node_paths=PackedStringArray("lookat_node") instance=ExtResource("3_c5j1e")]
 transform = Transform3D(-0.93230504, 0, -0.36167306, 0, 1, 0, 0.36167306, 0, -0.93230504, -0.6824608, 1.9581485, -1.6361948)
 lookat_node = NodePath("../VRSubViewport/Main/XROrigin3D/XRCamera3D")
 
-[node name="StabilizedCamera" type="Camera3D" parent="." node_paths=PackedStringArray("xr_camera")]
+[node name="StabilizedCamera" type="Camera3D" parent="." unique_id=1508410117 node_paths=PackedStringArray("xr_camera")]
 script = ExtResource("3_6skb3")
 xr_camera = NodePath("../VRSubViewport/Main/XROrigin3D/XRCamera3D")
 
-[node name="VRSubViewport" type="SubViewport" parent="."]
+[node name="VRSubViewport" type="SubViewport" parent="." unique_id=2043879756]
 msaa_3d = 1
 use_debanding = true
 
-[node name="Main" parent="VRSubViewport" instance=ExtResource("2_1qy5m")]
+[node name="Main" parent="VRSubViewport" unique_id=408253849 instance=ExtResource("2_1qy5m")]
 
 [connection signal="item_selected" from="UI/SpectatorView" to="." method="_on_spectator_view_item_selected"]
 [connection signal="toggled" from="UI/TrackCamera" to="." method="_on_track_camera_toggled"]

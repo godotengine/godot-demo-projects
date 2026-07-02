@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c18kajc4sbkqv"]
+[gd_scene format=3 uid="uid://c18kajc4sbkqv"]
 
 [ext_resource type="Shader" uid="uid://j8dcfmfbgojp" path="res://shaders/textured.gdshader" id="1_slppi"]
 [ext_resource type="Texture2D" uid="uid://rek0t7kubpx4" path="res://assets/pattern.png" id="2_0scsl"]
@@ -20,10 +20,10 @@ shader_parameter/uv1_offset = Vector3(0, 0, 0)
 material = SubResource("ShaderMaterial_v1io3")
 size = Vector2(1000, 1000)
 
-[node name="Floor" type="StaticBody3D"]
+[node name="Floor" type="StaticBody3D" unique_id=10178534]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=392442430]
 shape = SubResource("WorldBoundaryShape3D_h7spe")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1004143862]
 mesh = SubResource("PlaneMesh_2x6s1")
