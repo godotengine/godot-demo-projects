@@ -1,0 +1,22 @@
+[gd_resource type="Texture2DRD" script_class="MeshTextureRD" load_steps=6 format=3 uid="uid://bg8txxwsr4qn8"]
+
+[ext_resource type="RDShaderFile" uid="uid://bsbaafha2qt2x" path="res://base_texture.glsl" id="1_rjie5"]
+[ext_resource type="Script" uid="uid://cdfq6x7v36k1e" path="res://mesh_texture_rd.gd" id="2_cjslc"]
+
+[sub_resource type="Gradient" id="Gradient_1bvp3"]
+interpolation_color_space = 2
+colors = PackedColorArray(0.692862, 0.522376, 0.466238, 1, 0.634748, 0.521037, 0.665456, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lquwl"]
+gradient = SubResource("Gradient_1bvp3")
+
+[sub_resource type="TextMesh" id="TextMesh_7mycd"]
+text = "Rasterize Mesh Texture"
+
+[resource]
+script = ExtResource("2_cjslc")
+size = Vector2i(552, 131)
+mesh = SubResource("TextMesh_7mycd")
+base_texture = SubResource("GradientTexture2D_lquwl")
+projection = Projection(1.095, 0, 0, 0, 0, -5.53, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1)
+metadata/_custom_type_script = "uid://cdfq6x7v36k1e"
