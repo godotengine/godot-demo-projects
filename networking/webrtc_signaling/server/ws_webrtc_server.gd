@@ -45,8 +45,8 @@ class Peer extends RefCounted:
 
 	func send(type: int, id: int, data: String = "") -> void:
 		return ws.send_text(JSON.stringify({
-			"type": type,
-			"id": id,
+			"type": str(type),
+			"id": str(id),
 			"data": data,
 		}))
 
