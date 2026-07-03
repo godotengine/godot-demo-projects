@@ -19,7 +19,7 @@ public partial class PlayerMath25D : CharacterBody3D
         _parent = GetParent<Node25D>();
     }
 
-    public override void _Process(real_t delta)
+    public override void _Process(double delta)
     {
         if (Input.IsActionPressed("exit"))
         {
@@ -28,7 +28,7 @@ public partial class PlayerMath25D : CharacterBody3D
 
         if (Input.IsActionJustPressed("view_cube_demo"))
         {
-            GetTree().ChangeScene("res://assets/cube/cube.tscn");
+            GetTree().ChangeSceneToFile("res://assets/cube/cube.tscn");
             return;
         }
 
@@ -37,8 +37,9 @@ public partial class PlayerMath25D : CharacterBody3D
             isometricControls = !isometricControls;
         }
 
-        if (Input.IsActionPressed("reset_position"))
+        if (Input.IsActionPressed("reset_position") || Position.Y <= -100)
         {
+            // Reset player position if the player fell down into the void.
             Transform = new Transform3D(Basis.Identity, Vector3.Up * 10);
             verticalSpeed = 0;
         }
@@ -52,7 +53,7 @@ public partial class PlayerMath25D : CharacterBody3D
     /// <summary>
     /// Checks WASD and Shift for horizontal movement via MoveAndSlide.
     /// </summary>
-    private void HorizontalMovement(real_t delta)
+    private void HorizontalMovement(double delta)
     {
         Vector3 localX = Vector3.Right;
         Vector3 localZ = Vector3.Back;
@@ -65,27 +66,27 @@ public partial class PlayerMath25D : CharacterBody3D
 
         // Gather player input and add directional movement to a Vector3 variable.
         Vector2 movementVec2 = Input.GetVector("move_left", "move_right", "move_forward", "move_back");
-        Vector3 moveDir = localX * movementVec2.x + localZ * movementVec2.y;
+        Velocity = localX * movementVec2.X + localZ * movementVec2.Y;
 
-        moveDir = moveDir * delta * 600;
+        Velocity = Velocity * (float)delta * 2250;
         if (Input.IsActionPressed("movement_modifier"))
         {
-            moveDir /= 2;
+            Velocity /= 2;
         }
-        MoveAndSlide(moveDir);
+        MoveAndSlide();
     }
 
     /// <summary>
     /// Checks Jump and applies gravity and vertical speed via MoveAndCollide.
     /// </summary>
     /// <param name="delta">Time delta since last call</param>
-    private void VerticalMovement(real_t delta)
+    private void VerticalMovement(double delta)
     {
         if (Input.IsActionJustPressed("jump"))
         {
-            verticalSpeed = 1.25f;
+            verticalSpeed = 0.25f;
         }
-        verticalSpeed -= delta * 5; // Gravity
+        verticalSpeed -= (float)delta; // Gravity
         var k = MoveAndCollide(Vector3.Up * verticalSpeed);
         if (k != null)
         {

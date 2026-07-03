@@ -47,13 +47,13 @@ theme_override_constants/table_v_separation = 10
 theme_override_styles/focus = SubResource("StyleBoxEmpty_q1hwu")
 bbcode_enabled = true
 text = "RichTextLabel is a flexible way of adding text to your project, with support for [i]italics[/i], [b]bold[/b] and [i][b]both[/b][/i].
-[u]Underline[/u] and [s]strikethrough[/s] work too, including with [u][i]italics[/i][/u], [u][b]bold[/b][/u] and [u][i][b]both[/b][/i][/u].
+[u]Underline[/u] and [s]strikethrough[/s] work too, including with [u color=red][i]italics[/i][/u], [u color=green][b]bold[/b][/u] and [u color=yellow][i][b]both[/b][/i][/u].
 
 Text [color=#4cf]color[/color], [fgcolor=#49c9]foreground [color=#4cf]color[/color][/fgcolor]  and  [bgcolor=#49c9]background [color=#4cf]color[/color][/bgcolor]  can be adjusted.
 
 It's also possible to include [img]res://unicorn_icon.png[/img] [font_size=24]custom images[/font_size], as well as [color=aqua][url=https://godotengine.org]custom URLs[/url][/color]. [hint=This displays a hint.]Hover this to display a tooltip![/hint]
 Left alignment is default,[center]but center alignment is supported,[/center][right]as well as right alignment.[/right]
-
+[hr width=50% height=2 color=#fff3]
 [fill][dropcap font_size=48 color=yellow margins=0,-10,0,-12]F[/dropcap]ill alignment is also supported, and allows writing very long text that will end up fitting the horizontal space entirely with words of joy. Drop caps are also supported. When using a drop cap, the first character of a paragraph is made larger, taking up several lines of text and optionally using a specific font or color.[/fill]
 
 Several effects are also available:    [pulse]Pulse[/pulse]    [wave]Wave[/wave]    [tornado]Tornado[/tornado]    [shake]Shake[/shake]    [fade start=75 length=7]Fade[/fade]    [rainbow]Rainbow[/rainbow]
@@ -94,5 +94,21 @@ shortcut = SubResource("Shortcut_n2ck8")
 shortcut_in_tooltip = false
 text = "Pause"
 
+[node name="PrintToConsole" type="Button" parent="." unique_id=1812609511]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 108.0
+offset_top = -42.0
+offset_right = 264.0
+grow_vertical = 0
+tooltip_text = "Prints the RichTextLabel's text to the Output panel and terminal standard output using the `print_rich()` method."
+shortcut = SubResource("Shortcut_n2ck8")
+shortcut_in_tooltip = false
+text = "Print to Console"
+
 [connection signal="meta_clicked" from="RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="toggled" from="Pause" to="." method="_on_pause_toggled"]
+[connection signal="pressed" from="PrintToConsole" to="." method="_on_print_to_console_pressed"]

@@ -4,7 +4,7 @@
 # (with their rect spread across the whole viewport, and Anchor set to Full Rect).
 extends Control
 
-var base_window_size := Vector2(
+var base_window_size := Vector2i(
 		ProjectSettings.get_setting("display/window/size/viewport_width"),
 		ProjectSettings.get_setting("display/window/size/viewport_height")
 	)
@@ -81,30 +81,30 @@ func _on_resized() -> void:
 	update_container.call_deferred()
 
 
-func _on_gui_margin_drag_ended(_value_changed: bool) -> void:
+func _on_gui_margin_value_changed(value: float) -> void:
 	gui_margin = $"Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMargin/HSlider".value
-	$"Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMargin/Value".text = str(gui_margin)
+	$"Panel/AspectRatioContainer/Panel/CenterContainer/Options/GUIMargin/Value".text = str(int(gui_margin))
 	update_container.call_deferred()
 
 
 func _on_window_base_size_item_selected(index: int) -> void:
 	match index:
 		0:  # 648×648 (1:1)
-			base_window_size = Vector2(648, 648)
+			base_window_size = Vector2i(648, 648)
 		1:  # 640×480 (4:3)
-			base_window_size = Vector2(640, 480)
+			base_window_size = Vector2i(640, 480)
 		2:  # 720×480 (3:2)
-			base_window_size = Vector2(720, 480)
+			base_window_size = Vector2i(720, 480)
 		3:  # 800×600 (4:3)
-			base_window_size = Vector2(800, 600)
+			base_window_size = Vector2i(800, 600)
 		4:  # 1152×648 (16:9)
-			base_window_size = Vector2(1152, 648)
+			base_window_size = Vector2i(1152, 648)
 		5:  # 1280×720 (16:9)
-			base_window_size = Vector2(1280, 720)
+			base_window_size = Vector2i(1280, 720)
 		6:  # 1280×800 (16:10)
-			base_window_size = Vector2(1280, 800)
+			base_window_size = Vector2i(1280, 800)
 		7:  # 1680×720 (21:9)
-			base_window_size = Vector2(1680, 720)
+			base_window_size = Vector2i(1680, 720)
 
 	get_window().content_scale_size = base_window_size
 	update_container.call_deferred()
@@ -124,11 +124,26 @@ func _on_window_stretch_aspect_item_selected(index: int) -> void:
 	get_window().content_scale_aspect = stretch_aspect
 
 
-func _on_window_scale_factor_drag_ended(_value_changed: bool) -> void:
+func update_window_scale_factor() -> void:
 	scale_factor = $"Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowScaleFactor/HSlider".value
 	$"Panel/AspectRatioContainer/Panel/CenterContainer/Options/WindowScaleFactor/Value".text = "%d%%" % (scale_factor * 100)
 	get_window().content_scale_factor = scale_factor
 
 
+func _on_window_scale_factor_drag_ended(_value_changed: bool) -> void:
+	# Wait before the slider is done dragging when using integer scaling.
+	# Otherwise, when dragging the slider with the mouse, the scale will
+	# constantly go back-and-forth between 1x and 2x.
+	if get_window().content_scale_stretch == Window.CONTENT_SCALE_STRETCH_INTEGER:
+		update_window_scale_factor()
+
+
+func _on_window_scale_factor_value_changed(_value: float) -> void:
+	# When using fractional scaling, unlike integer scaling, we can safely change
+	# the scale factor while the slider is being dragged.
+	if get_window().content_scale_stretch == Window.CONTENT_SCALE_STRETCH_FRACTIONAL:
+		update_window_scale_factor()
+
+
 func _on_window_stretch_scale_mode_item_selected(index: int) -> void:
-	get_window().content_scale_stretch = index
+	get_window().content_scale_stretch = index as Window.ContentScaleStretch

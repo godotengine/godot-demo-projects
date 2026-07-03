@@ -28,23 +28,23 @@ public struct Basis25D : IEquatable<Basis25D>
     // Setting a row to zero means no movement in that direction.
     public Vector3 Row0
     {
-        get { return new Vector3(x.x, y.x, z.x); }
+        get { return new Vector3(x.X, y.X, z.X); }
         set
         {
-            x.x = value.x;
-            y.x = value.y;
-            z.x = value.z;
+            x.X = value.X;
+            y.X = value.Y;
+            z.X = value.Z;
         }
     }
 
     public Vector3 Row1
     {
-        get { return new Vector3(x.y, y.y, z.y); }
+        get { return new Vector3(x.Y, y.Y, z.Y); }
         set
         {
-            x.y = value.x;
-            y.y = value.y;
-            z.y = value.z;
+            x.Y = value.X;
+            y.Y = value.Y;
+            z.Y = value.Z;
         }
     }
 

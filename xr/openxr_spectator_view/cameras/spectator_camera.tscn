@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2e8441cdqg6d"]
+[gd_scene format=3 uid="uid://b2e8441cdqg6d"]
 
 [ext_resource type="Script" uid="uid://ci0gsq3yqe1wt" path="res://cameras/spectator_camera.gd" id="1_0ekcx"]
 [ext_resource type="Shader" uid="uid://dqhkrv0efh3w" path="res://shaders/color.gdshader" id="2_s80j5"]
@@ -40,34 +40,34 @@ size = Vector2(0.27, 0.135)
 [sub_resource type="BoxShape3D" id="BoxShape3D_uepmo"]
 size = Vector3(0.468, 0.15, 0.1)
 
-[node name="SpectatorCamera" type="Camera3D"]
+[node name="SpectatorCamera" type="Camera3D" unique_id=385011362]
 cull_mask = 1048573
 script = ExtResource("1_0ekcx")
 
-[node name="CameraBody" type="MeshInstance3D" parent="."]
+[node name="CameraBody" type="MeshInstance3D" parent="." unique_id=1923996266]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
 layers = 2
 mesh = SubResource("BoxMesh_823mk")
 
-[node name="Lens" type="MeshInstance3D" parent="CameraBody"]
+[node name="Lens" type="MeshInstance3D" parent="CameraBody" unique_id=1058719057]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -0.175)
 layers = 2
 mesh = SubResource("CylinderMesh_uepmo")
 
-[node name="DisplayContainer" type="MeshInstance3D" parent="CameraBody"]
+[node name="DisplayContainer" type="MeshInstance3D" parent="CameraBody" unique_id=1850188563]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24195343, 0, -0.11492422)
 layers = 2
 mesh = SubResource("BoxMesh_k3q65")
 
-[node name="Display" type="MeshInstance3D" parent="CameraBody/DisplayContainer"]
+[node name="Display" type="MeshInstance3D" parent="CameraBody/DisplayContainer" unique_id=1081184826]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.009058937)
 layers = 2
 material_override = SubResource("ShaderMaterial_823mk")
 mesh = SubResource("QuadMesh_s80j5")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=1550843297]
 script = ExtResource("4_823mk")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=996566642]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.158, 0, 0.1)
 shape = SubResource("BoxShape3D_uepmo")

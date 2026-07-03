@@ -49,13 +49,13 @@ func _on_LineEditCustomSTDst_tree_entered() -> void:
 
 
 func _on_variable_size_value_changed(value: float) -> void:
-	$"TabContainer/Variable fonts/Variables/Size/Value".text = str(value)
+	$"TabContainer/Variable fonts/Variables/Size/Value".text = str(int(value))
 	# This is also available on non-variable fonts.
 	$"TabContainer/Variable fonts/VariableFontPreview".add_theme_font_size_override(&"font_size", value)
 
 
 func _on_variable_weight_value_changed(value: float) -> void:
-	$"TabContainer/Variable fonts/Variables/Weight/Value".text = str(value)
+	$"TabContainer/Variable fonts/Variables/Weight/Value".text = str(int(value))
 	# Workaround to make the variable font axis value effective. This requires duplicating the dictionary.
 	var dict := variable_font_variation.variation_opentype.duplicate()
 	dict["weight"] = value
@@ -63,7 +63,7 @@ func _on_variable_weight_value_changed(value: float) -> void:
 
 
 func _on_variable_slant_value_changed(value: float) -> void:
-	$"TabContainer/Variable fonts/Variables/Slant/Value".text = str(value)
+	$"TabContainer/Variable fonts/Variables/Slant/Value".text = str(int(value))
 	# Workaround to make the variable font axis value effective. This requires duplicating the dictionary.
 	var dict := variable_font_variation.variation_opentype.duplicate()
 	dict["slant"] = value
@@ -107,7 +107,7 @@ func _on_system_font_value_text_changed(new_text: String) -> void:
 
 
 func _on_system_font_weight_value_changed(value: float) -> void:
-	$"TabContainer/System fonts/Weight/Value".text = str(value)
+	$"TabContainer/System fonts/Weight/Value".text = str(int(value))
 	for label: Label in [
 		$"TabContainer/System fonts/VBoxContainer/SansSerif/Value",
 		$"TabContainer/System fonts/VBoxContainer/Serif/Value",
@@ -134,4 +134,4 @@ func _on_system_font_italic_toggled(button_pressed: bool) -> void:
 
 func _on_system_font_name_text_changed(new_text: String) -> void:
 	var system_font: SystemFont = $"TabContainer/System fonts/VBoxContainer/Custom/FontName".get_theme_font(&"font")
-	system_font.font_names[0] = new_text
+	system_font.font_names = [new_text]

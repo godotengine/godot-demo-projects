@@ -28,7 +28,7 @@ public partial class CubeMath : Node3D
         }
     }
 
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         if (Input.IsActionPressed("exit"))
         {
@@ -37,15 +37,15 @@ public partial class CubeMath : Node3D
 
         if (Input.IsActionJustPressed("view_cube_demo"))
         {
-            GetTree().ChangeScene("res://assets/demo_scene.tscn");
+            GetTree().ChangeSceneToFile("res://assets/demo_scene.tscn");
             return;
         }
 
         if (_isParentReady)
         {
-            RotateX(delta * (Input.GetActionStrength("move_back") - Input.GetActionStrength("move_forward")));
-            RotateY(delta * (Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left")));
-            RotateZ(delta * (Input.GetActionStrength("move_counterclockwise") - Input.GetActionStrength("move_clockwise")));
+            RotateX((float)delta * (Input.GetActionStrength("move_back") - Input.GetActionStrength("move_forward")));
+            RotateY((float)delta * (Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left")));
+            RotateZ((float)delta * (Input.GetActionStrength("move_counterclockwise") - Input.GetActionStrength("move_clockwise")));
             if (Input.IsActionJustPressed("reset_position"))
             {
                 Transform = Transform3D.Identity;
