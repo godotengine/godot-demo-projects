@@ -5,7 +5,7 @@ on:
       - master
 
 env:
-  GODOT_VERSION: 4.5.1
+  GODOT_VERSION: 4.7
 
 jobs:
   export-html5:
@@ -13,7 +13,7 @@ jobs:
     name: Export projects to Web and deploy to GitHub Pages
     runs-on: ubuntu-24.04
     container:
-      image: barichello/godot-ci:4.5.1
+      image: barichello/godot-ci:4.7
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -34,7 +34,6 @@ jobs:
             2d/glow/ \
             2d/navigation_mesh_chunks/ \
             2d/physics_tests/ \
-            3d/labels_and_texts/ \
             3d/decals/ \
             3d/ik/ \
             3d/navigation_mesh_chunks/ \
@@ -50,21 +49,26 @@ jobs:
             audio/midi_piano/ \
             audio/spectrum/ \
             compute/ \
-            gui/msdf_font/ \
-            gui/translation/ \
+            gui/accessibility \
             loading/runtime_save_load \
-            misc/compute_shader_heightmap \
+            misc/hdr_output \
             misc/large_world_coordinates/ \
             misc/matrix_transform/ \
+            misc/multiple_windows/ \
             mobile/android_iap/ \
             mobile/sensors/ \
             mono/ \
             networking/ \
             plugins/ \
-            xr/openxr_character_centric_movement \
-            xr/openxr_composition_layers \
-            xr/openxr_hand_tracking_demo \
-            xr/openxr_origin_centric_movement
+            xr/mobile_vr_interface_demo/ \
+            xr/openxr_binding_modifier_demo/ \
+            xr/openxr_character_centric_movement/ \
+            xr/openxr_composition_layers/ \
+            xr/openxr_hand_tracking_demo/ \
+            xr/openxr_origin_centric_movement/   \
+            xr/openxr_passthrough/ \
+            xr/openxr_render_models/ \
+            xr/openxr_spectator_view/
 
           for panorama in 3d/material_testers/backgrounds/*.hdr; do
             # Decrease the resolution to get below the 100 MB PCK size limit.
