@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://bjtq8ms34mbqr"]
+
+[ext_resource type="Script" uid="uid://crygy3fdob3jd" path="res://item.gd" id="1_ttk8k"]
+[ext_resource type="Texture2D" uid="uid://7xhdlw5bn7fx" path="res://assets/kenney_scribble-platformer/PNG/Default/item_rod.png" id="3_ys7tt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttk8k"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
+content_margin_bottom = 15.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 2
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+corner_detail = 7
+
+[node name="Item" type="PanelContainer" unique_id=199005532]
+custom_minimum_size = Vector2(200, 260)
+offset_right = 180.0
+offset_bottom = 260.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ttk8k")
+script = ExtResource("1_ttk8k")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=619115328]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=1121130331]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+
+[node name="image" type="TextureRect" parent="VBoxContainer/Control" unique_id=1151171363]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = -85.0
+offset_right = 85.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.6981317
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("3_ys7tt")
+stretch_mode = 5
+
+[node name="name" type="Label" parent="VBoxContainer" unique_id=662890100]
+layout_mode = 2
+text = "Godot"
+horizontal_alignment = 1
+
+[node name="price" type="Label" parent="VBoxContainer" unique_id=648394350]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.87486136, 0.12518393, 1)
+text = "$10"
+horizontal_alignment = 1
+
+[node name="buy" type="Button" parent="VBoxContainer" unique_id=663295359]
+layout_mode = 2
+text = "Buy"
+
+[node name="consume" type="Button" parent="VBoxContainer" unique_id=1994243319]
+visible = false
+layout_mode = 2
+text = "Consume"
