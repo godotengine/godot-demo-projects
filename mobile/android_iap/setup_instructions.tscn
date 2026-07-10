@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://depkfknb3soa7"]
+
+[ext_resource type="Script" uid="uid://bi24va52mmmbt" path="res://setup_instructions.gd" id="1_gu777"]
+
+[node name="Setup Instructions" type="VBoxContainer" unique_id=1579429384]
+anchors_preset = -1
+anchor_left = 0.10555556
+anchor_top = 0.05
+anchor_right = 0.89444447
+anchor_bottom = 0.95234376
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+script = ExtResource("1_gu777")
+metadata/_edit_use_anchors_ = true
+
+[node name="Title" type="Label" parent="." unique_id=2134785280]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Godot Google Play Billing"
+horizontal_alignment = 1
+
+[node name="spacer" type="Control" parent="." unique_id=1292569996]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="." unique_id=1179944966]
+layout_mode = 2
+text = "Requirements:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2109427100]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=1563709849]
+layout_mode = 2
+text = "1. Android gradle build setup:"
+
+[node name="LinkButton" type="LinkButton" parent="HBoxContainer" unique_id=1498001532]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.69803923, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0.9411765, 1, 1)
+text = "Documentation"
+uri = "https://docs.godotengine.org/en/stable/tutorials/export/android_gradle_build.html"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=711566423]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer2" unique_id=1262749546]
+layout_mode = 2
+text = "2. Google Play Console account:"
+
+[node name="LinkButton" type="LinkButton" parent="HBoxContainer2" unique_id=760248499]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.69803923, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0.9411765, 1, 1)
+text = "Documentation"
+uri = "https://godot-sdk-integrations.github.io/godot-google-play-billing/google_play_console_setup.html"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="." unique_id=1654635474]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer3" unique_id=1230637329]
+layout_mode = 2
+text = "3. Install GodotGooglePlayBilling:"
+
+[node name="LinkButton" type="LinkButton" parent="HBoxContainer3" unique_id=1707640880]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.69803923, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0.9411765, 1, 1)
+text = "Documentation"
+uri = "https://godot-sdk-integrations.github.io/godot-google-play-billing/installation.html"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=828681406]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=652396432]
+layout_mode = 2
+text = "4. Create one-time products in play console and copy it's product IDs into inapp_products variable in store.tscn.
+Default IDs are blaster, shield_round, sword, and spear."
+autowrap_mode = 2
+
+[node name="spacer2" type="Control" parent="." unique_id=546067086]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="continue_btn" type="Button" parent="." unique_id=219266693]
+custom_minimum_size = Vector2(192, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Continue"
+
+[connection signal="pressed" from="continue_btn" to="." method="_on_continue_btn_pressed"]

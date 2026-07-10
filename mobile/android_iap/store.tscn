@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://dc7crk1oibkit"]
+
+[ext_resource type="Script" uid="uid://c6wix5bnggakv" path="res://store.gd" id="1_3hi0p"]
+[ext_resource type="Texture2D" uid="uid://bpeh44jwxonhw" path="res://assets/kenney_scribble-platformer/PNG/Default/item_spear.png" id="3_ecxbg"]
+[ext_resource type="Texture2D" uid="uid://cqpiqhrhv8iv0" path="res://assets/close.png" id="3_s3f3m"]
+[ext_resource type="Texture2D" uid="uid://qlb7m0n8dmqb" path="res://assets/kenney_scribble-platformer/PNG/Default/item_sword.png" id="4_nvomd"]
+[ext_resource type="Texture2D" uid="uid://cls0apd10d51j" path="res://assets/kenney_scribble-platformer/PNG/Default/item_shieldRound.png" id="5_0sk1s"]
+[ext_resource type="Texture2D" uid="uid://bxi4l1pi6p7ph" path="res://assets/kenney_scribble-platformer/PNG/Default/item_blaster.png" id="8_jdax8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3hi0p"]
+content_margin_left = 26.0
+content_margin_top = 26.0
+content_margin_right = 26.0
+content_margin_bottom = 26.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x7ts4"]
+content_margin_top = 26.0
+content_margin_bottom = 26.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3hi0p"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.11764706, 0.11764706, 0.11764706, 1)
+
+[node name="Store" type="VSplitContainer" unique_id=967199979]
+anchors_preset = -1
+anchor_left = 0.09791667
+anchor_top = 0.06015625
+anchor_right = 0.90208334
+anchor_bottom = 0.9421875
+grow_horizontal = 2
+grow_vertical = 2
+split_offsets = PackedInt32Array(-200)
+touch_dragger_enabled = true
+split_offset = -200
+script = ExtResource("1_3hi0p")
+inapp_products = Dictionary[String, Texture]({
+"blaster": ExtResource("8_jdax8"),
+"shield_round": ExtResource("5_0sk1s"),
+"spear": ExtResource("3_ecxbg"),
+"sword": ExtResource("4_nvomd")
+})
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=140080133]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=1899864894]
+layout_mode = 2
+
+[node name="Exit" type="TextureButton" parent="VBoxContainer/Control" unique_id=556092381]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -32.0
+offset_bottom = 32.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("3_s3f3m")
+stretch_mode = 5
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer" unique_id=2073586143]
+layout_mode = 2
+size_flags_vertical = 3
+tab_alignment = 1
+current_tab = 0
+
+[node name="Store" type="ScrollContainer" parent="VBoxContainer/TabContainer" unique_id=2007225045]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3hi0p")
+metadata/_tab_index = 0
+
+[node name="ItemContainer" type="HFlowContainer" parent="VBoxContainer/TabContainer/Store" unique_id=1900750675]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 32
+alignment = 1
+last_wrap_alignment = 1
+
+[node name="PurchasedItems" type="ScrollContainer" parent="VBoxContainer/TabContainer" unique_id=862716643]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_x7ts4")
+metadata/_tab_index = 1
+
+[node name="ItemContainer" type="HFlowContainer" parent="VBoxContainer/TabContainer/PurchasedItems" unique_id=1466416116]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 32
+alignment = 1
+last_wrap_alignment = 1
+
+[node name="DebugMessage" type="RichTextLabel" parent="." unique_id=1213001971]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3hi0p")
+
+[connection signal="pressed" from="VBoxContainer/Control/Exit" to="." method="_on_exit_pressed"]
+[connection signal="tab_changed" from="VBoxContainer/TabContainer" to="." method="_on_tab_container_tab_changed"]
