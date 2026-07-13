@@ -2,10 +2,10 @@
 
 [ext_resource type="TileSet" uid="uid://yrsot2k3h8rd" path="res://tileset.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://cwchcyc0t4cgv" path="res://rock.tscn" id="2"]
-[ext_resource type="Script" uid="uid://i0malmurqy3m" path="res://score.gd" id="3"]
-[ext_resource type="Script" uid="uid://cehuhnae40dmu" path="res://player_spawner.gd" id="3_dwbse"]
+[ext_resource type="Script" uid="uid://bi7whq5ytcv6d" path="res://Score.cs" id="3_036b0"]
 [ext_resource type="FontFile" uid="uid://cm4wvgsyhdc2w" path="res://montserrat.otf" id="4"]
-[ext_resource type="Script" uid="uid://r8wlac3jv6ck" path="res://bomb_spawner.gd" id="6_ac5ja"]
+[ext_resource type="Script" uid="uid://c6oyl1mlm2uqq" path="res://BombSpawner.cs" id="5_036b0"]
+[ext_resource type="Script" uid="uid://dtrqy1t6w3eg3" path="res://PlayerSpawner.cs" id="5_dwbse"]
 
 [node name="World" type="Node2D" unique_id=567359237]
 
@@ -269,7 +269,7 @@ position = Vector2(840, 456)
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="Players" unique_id=165151297]
 spawn_path = NodePath("..")
-script = ExtResource("3_dwbse")
+script = ExtResource("5_dwbse")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1110278187]
 offset_right = 1056.0
@@ -281,7 +281,7 @@ offset_right = 1024.0
 offset_bottom = 40.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-script = ExtResource("3")
+script = ExtResource("3_036b0")
 
 [node name="Winner" type="Label" parent="." unique_id=170980847]
 visible = false
@@ -312,6 +312,6 @@ process_callback = 0
 
 [node name="BombSpawner" type="MultiplayerSpawner" parent="." unique_id=1836509659]
 spawn_path = NodePath("..")
-script = ExtResource("6_ac5ja")
+script = ExtResource("5_036b0")
 
 [connection signal="pressed" from="Winner/ExitGame" to="Score" method="_on_exit_game_pressed"]
