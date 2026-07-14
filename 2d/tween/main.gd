@@ -74,7 +74,7 @@ func start_animation() -> void:
 				sub_tween = create_tween().set_speed_scale(%SpeedSlider.value).set_trans(Tween.TRANS_SINE)
 				sub_tween.tween_property(icon, ^"position:y", -150.0, 0.5).as_relative().set_ease(Tween.EASE_OUT)
 				sub_tween.tween_property(icon, ^"position:y", 150.0, 0.5).as_relative().set_ease(Tween.EASE_IN)
-			)
+		)
 
 	# Step 5
 
