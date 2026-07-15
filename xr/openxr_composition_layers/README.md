@@ -4,8 +4,10 @@ This is a demo for an OpenXR project where we showcase the new compositor layer 
 This is a companion to the [OpenXR composition layers manual page](https://docs.godotengine.org/en/latest/tutorials/xr/openxr_composition_layers.html).
 
 Language: GDScript
+
 Renderer: Compatibility
-Minimum Godot Version: 4.3
+
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/openxr-compositor-layer-demo/
 
 ## How does it work?
 

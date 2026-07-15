@@ -9,13 +9,7 @@ Language: GDScript
 
 Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2764
-
-> Note: this demo requires Godot 4.2 or later
-
-## Screenshots
-
-![Screenshot](screenshots/compute_texture.webp)
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/compute-texture-demo/
 
 ## Technical description
 
@@ -38,3 +32,7 @@ The material shader uses a standard gradient approach by sampling the height map
 
 Files in the `polyhaven/` folder are downloaded from <https://polyhaven.com/a/industrial_sunset_puresky>
 and are licensed under CC0 1.0 Universal.
+
+## Screenshots
+
+![Screenshot](screenshots/compute_texture.webp)

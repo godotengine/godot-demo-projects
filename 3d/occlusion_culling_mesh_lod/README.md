@@ -24,7 +24,7 @@ While running the demo, you can toggle the use of mesh LOD and occlusion culling
 to view the performance difference these features make in this project. Results
 will vary depending on your CPU and GPU model.
 
-> **Warning**
+> [!WARNING]
 >
 > If you are using an engine build that is not fully optimized, you may notice
 > that enabling occlusion culling decreases performance. This is because
@@ -32,12 +32,14 @@ will vary depending on your CPU and GPU model.
 > build-time optimization it can get.
 >
 > Official builds are fully optimized, but self-compiled builds are not fully
-> optimized by default (use the `optimize=speed use_lto=yes` SCons options).
+> optimized by default (use the `production=yes` SCons option).
 
 Language: GDScript
 
 Renderer: Forward+
 
-## Screenshot
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/occlusion-culling-and-mesh-lod-demo/
+
+## Screenshots
 
 ![Screenshot](screenshots/occlusion_culling_mesh_lod.webp)

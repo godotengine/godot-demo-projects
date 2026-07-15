@@ -7,7 +7,12 @@ Language: [C#](https://docs.godotengine.org/en/latest/tutorials/scripting/c_shar
 
 Renderer: Compatibility
 
-Note: There is a GDScript version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/networking/multiplayer_pong).
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/pong-multiplayer-with-csharp-demo/
+
+> [!NOTE]
+>
+> There is a GDScript version available
+> [here](https://github.com/godotengine/godot-demo-projects/tree/master/networking/multiplayer_pong).
 
 ## Screenshots
 

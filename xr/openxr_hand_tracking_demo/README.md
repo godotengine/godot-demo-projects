@@ -6,9 +6,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-> [!NOTE]
->
-> This demo requires Godot 4.4 or later
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/openxr-hand-tracking-demo/
 
 ## Screenshots
 
@@ -185,4 +183,3 @@ Note that Godot currently can't run using the WMR OpenXR runtime. Install SteamV
 
 You must install the Android build templates and OpenXR loader plugin and configure an export template for your device.
 Please follow [the instructions for deploying on Android in the manual](https://docs.godotengine.org/en/stable/tutorials/xr/deploying_to_android.html).
-

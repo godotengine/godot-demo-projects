@@ -10,7 +10,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2769
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/gui-input-mapping-demo/
 
 ## Screenshots
 

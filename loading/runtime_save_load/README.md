@@ -38,7 +38,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2779
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/run-time-file-saving-and-loading-demo/
 
 ## Screenshots
 

@@ -6,7 +6,7 @@ Language: GDScript
 
 Renderer: Mobile
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2724
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/particles-2d-demo/
 
 ## How does it work?
 

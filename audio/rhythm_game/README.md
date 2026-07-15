@@ -13,7 +13,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: TBD
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/rhythm-game-demo/
 
 ## Screenshots
 

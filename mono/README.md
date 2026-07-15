@@ -1,7 +1,7 @@
-# Mono Demos
+# C\# Demos
 
 These demos are written in [C#](https://docs.godotengine.org/en/latest/tutorials/scripting/c_sharp/index.html).
-You must have the Mono version of Godot to run these.
+You must have the .NET version of Godot to run these.
 
 Languages: All have [C#](https://docs.godotengine.org/en/latest/tutorials/scripting/c_sharp/index.html),
 2.5D has some GDScript

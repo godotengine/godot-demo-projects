@@ -7,7 +7,7 @@ Language: GDScript
 
 Renderer: Mobile
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2795
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/mobile-sensors-demo/
 
 ## Screenshots
 

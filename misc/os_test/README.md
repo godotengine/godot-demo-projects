@@ -12,7 +12,7 @@ Language: GDScript and some [C#](https://docs.godotengine.org/en/latest/tutorial
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2789
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/operating-system-testing-demo/
 
 ## How does it work?
 

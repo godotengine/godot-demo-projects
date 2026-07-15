@@ -6,14 +6,17 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/0000
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/openxr-binding-modifier-demo/
 
 ## How does it work?
 
 OpenXR has introduced a system called binding modifiers that allow you to add additional logic to the action map.
 Currently there are only two modifiers available but more will likely be coming.
 
-**Warning:** Binding modifiers are optional features that need to be enabled and may not be available on all platforms.
+> [!WARNING]
+>
+> Binding modifiers are optional features that need to be enabled and may not
+> be available on all platforms.
 
 ## Local Floor Reference Space
 
@@ -21,8 +24,9 @@ This demo uses the local floor reference space so the player is centered by defa
 
 If your player isn't standing in the correct spot, try a system recenter.
 This is different per runtime, for instance:
-- On Quest (including with SteamLink) hold the Meta button for 3 seconds to initiate a recenter.
-- On SteamVR open the in headset SteamVR menu and choose the recenter option from the menu.
+
+- On Quest (including with SteamLink), hold the Meta button for 3 seconds to initiate a recenter.
+- On SteamVR, open the in headset SteamVR menu and choose the recenter option from the menu.
 
 ## Action map
 
@@ -47,7 +51,10 @@ Optionally you can also add a modifier to further control this behavior.
 
 ![Screenshot](screenshots/dpad_modifier.png)
 
-**Note:** This modifier is created for the interaction profile with the modifier button on the right hand side.
+> [!NOTE]
+>
+> This modifier is created for the interaction profile with the modifier button
+> on the right hand side.
 
 ## Running on PCVR
 

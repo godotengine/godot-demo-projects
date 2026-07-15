@@ -2,9 +2,6 @@
 
 This contains multiple plugin demos, all placed in a project for convenience.
 
-Due to [issue #36713](https://github.com/godotengine/godot/issues/36713),
-you need to open the project to import the assets once, then close, then open.
-
 See the [documentation on editor plugins](https://docs.godotengine.org/en/latest/tutorials/plugins/editor/index.html)
 for more information.
 
@@ -12,25 +9,25 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2802
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/plugin-demo/
 
 # How does it work?
 
 This project contains 4 plugins:
 
-* The custom node plugin shows how to create a custom node type
+- The custom node plugin shows how to create a custom node type
   using `add_custom_type`. [More info](addons/custom_node).
 
-* The main screen plugin is a minimal example of how to create a plugin
+- The main screen plugin is a minimal example of how to create a plugin
   with a main screen. [More info](addons/main_screen).
 
-* The material creator plugin shows how to add a custom dock with some
+- The material creator plugin shows how to add a custom dock with some
   simple functionality, and shows how to create a custom Resource type
   with custom loading, saving, importing, and exporting logic,
   including editor integrations. [More info](addons/material_creator).
 
-* The simple import plugin shows how to make a simple plugin handle importing
-  a custom file type (mtxt). [More info](addons/simple_import_plugin).
+- The simple import plugin shows how to make a simple plugin handle importing
+  a custom file type (`*.mtxt`). [More info](addons/simple_import_plugin).
 
 To use these plugins in another project, copy any of these
 folders to the `addons/` folder in a Godot project, and then

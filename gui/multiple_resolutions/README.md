@@ -1,12 +1,14 @@
 # Multiple Resolutions and Aspect Ratios
 
-**Note:** This demo is intended to showcase what Godot can do in terms of
-supporting multiple resolutions and aspect ratios. As such, this demo very
-full-featured but it's also fairly complex to understand.
-
-If you're in a hurry and want to implement *decent* support for multiple
-resolutions and aspect ratios in your game, see [Multiple resolutions crash
-course](#multiple-resolutions-crash-course).
+> [!NOTE]
+>
+> This demo is intended to showcase what Godot can do in terms of
+> supporting multiple resolutions and aspect ratios. As such, this demo is highly
+> full-featured but it's also fairly complex to understand.
+>
+> If you're in a hurry and want to implement *decent* support for multiple
+> resolutions and aspect ratios in your game, see [Multiple resolutions crash
+> course](#multiple-resolutions-crash-course).
 
 ___
 
@@ -45,7 +47,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2771
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/multiple-resolutions-and-aspect-ratios-demo/
 
 ## Technical notes
 

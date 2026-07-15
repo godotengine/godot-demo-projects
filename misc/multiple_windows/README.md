@@ -15,6 +15,8 @@ Language: GDScript
 
 Renderer: Compatbility
 
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/multiple-windows-demo/
+
 ## Screenshots
 
 ![Screenshot](screenshots/screenshot.webp)

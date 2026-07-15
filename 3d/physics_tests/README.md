@@ -14,7 +14,7 @@ Language: GDScript
 
 Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2747
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/physics-tests-3d-demo/
 
 ## Screenshots
 

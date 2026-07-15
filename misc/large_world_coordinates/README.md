@@ -13,16 +13,17 @@ See the
 [Large world coordinates documentation](https://docs.godotengine.org/en/latest/tutorials/physics/large_world_coordinates.html)
 for more information.
 
-> **Warning**
+> [!WARNING]
 >
 > Official Godot builds do **not** have double-precision support enabled for performance reasons.
-> You need to compile a custom engine build to use double precision support.
+> You need to compile a custom engine build with the `precision=double` SCons option
+> to use double precision support.
 
 Languages: GDScript
 
 Renderer: Mobile
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2786
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/large-world-coordinates-demo/
 
 ## Screenshots
 

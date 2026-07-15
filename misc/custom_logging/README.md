@@ -12,6 +12,8 @@ Language: GDScript
 
 Renderer: Compatibility
 
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/custom-logging-demo/
+
 ## Screenshots
 
 ![Screenshot](screenshots/custom_logging.webp)

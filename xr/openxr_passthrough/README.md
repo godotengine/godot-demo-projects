@@ -6,9 +6,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-> [!NOTE]
->
-> This demo requires Godot 4.5 or later
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/openxr-passthrough-demo/
 
 ## Screenshots
 
@@ -59,5 +57,3 @@ This demo works best on standalone headsets as many support passthrough.
 You **must** install the Android build templates and OpenXR vendors plugin.
 This project does include an `export_preset.cfg` file with example setups for some of these devices.
 Please follow [the instructions for deploying on Android in the manual](https://docs.godotengine.org/en/stable/tutorials/xr/deploying_to_android.html).
-
-

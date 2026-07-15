@@ -8,9 +8,11 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Note: The non-multiplayer version is available [here](https://github.com/godotengine/godot-demo-projects/tree/master/2d/pong).
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/pong-multiplayer-demo/
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2798
+> [!NOTE]
+>
+> The non-multiplayer version is available [here](https://github.com/godotengine/godot-demo-projects/tree/master/2d/pong).
 
 ## Screenshots
 

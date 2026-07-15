@@ -7,7 +7,7 @@ Language: [Godot shader language](https://docs.godotengine.org/en/latest/tutoria
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2732
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/sprite-shaders-demo/
 
 ## Screenshots
 

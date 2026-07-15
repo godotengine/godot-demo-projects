@@ -10,7 +10,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2760
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/audio-mic-record-demo/
 
 ## Screenshots
 

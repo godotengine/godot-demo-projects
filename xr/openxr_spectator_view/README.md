@@ -8,9 +8,7 @@ Language: GDScript
 
 Renderer: Compatibility, Mobile
 
-> [!NOTE]
->
-> This demo requires Godot 4.5.1 or later
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/openxr-spectator-view-demo/
 
 ## How does it work?
 

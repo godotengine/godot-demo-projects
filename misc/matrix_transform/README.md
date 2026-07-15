@@ -2,7 +2,9 @@
 
 This demo project is a playground where you can visualize how transforms work.
 
-Do not "run" this project. You are only meant to use it within the Godot editor.
+> [!NOTE]
+>
+> Do not "run" this project, as nothing will appear. You are only meant to use it within the Godot editor.
 
 For more information, see the [Matrices and Transforms](https://docs.godotengine.org/en/latest/tutorials/math/matrices_and_transforms.html) article.
 
@@ -10,7 +12,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2787
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/matrix-transform-demo/
 
 ## How does it work?
 

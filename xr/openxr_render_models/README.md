@@ -6,9 +6,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-> [!NOTE]
->
-> This demo requires Godot 4.5 or later
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/openxr-render-models-demo/
 
 ## Screenshots
 
@@ -46,5 +44,3 @@ This project can be run as normal for PCVR. Ensure that an OpenXR runtime has be
 
 You must install the Android build templates and OpenXR loader plugin and configure an export template for your device.
 Please follow [the instructions for deploying on Android in the manual](https://docs.godotengine.org/en/stable/tutorials/xr/deploying_to_android.html).
-
-

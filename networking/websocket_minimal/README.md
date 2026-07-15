@@ -6,4 +6,4 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2800
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/websocket-minimal-demo/

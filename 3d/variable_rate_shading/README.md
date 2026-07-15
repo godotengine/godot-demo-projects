@@ -10,7 +10,7 @@ Language: GDScript
 
 Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2753
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/variable-rate-shading-demo/
 
 ## Screenshots
 

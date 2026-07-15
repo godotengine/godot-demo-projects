@@ -7,7 +7,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2810
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/openxr-origin-centric-movement-demo/
 
 ## How does it work?
 
