@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="RefereeResource" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://saving/character_resource.gd" id="1_h1ono"]
+[ext_resource type="Script" path="res://saving/referee_resource.gd" id="2_78op6"]
+
+[sub_resource type="Resource" id="Resource_w1yqq"]
+script = ExtResource("1_h1ono")
+character_name = "Alice"
+position = Vector2(1264.42, 95.576)
+move_direction = Vector2(-0.877135, 0.480243)
+base_speed = 100.0
+it_speed_multiplier = 2.0
+path_to_whose_it = NodePath("/root/Main/GameLayer/OtherAlice")
+player_controlled = false
+stunned = true
+stun_duration = 2.0
+stun_time_left = 0.416701
+
+[sub_resource type="Resource" id="Resource_kvrvr"]
+script = ExtResource("1_h1ono")
+character_name = "Bob"
+position = Vector2(1264.42, 671.499)
+move_direction = Vector2(0, 1)
+base_speed = 100.0
+it_speed_multiplier = 2.0
+path_to_whose_it = NodePath("/root/Main/GameLayer/OtherAlice")
+player_controlled = false
+stunned = false
+stun_duration = 2.0
+stun_time_left = 0.0
+
+[sub_resource type="Resource" id="Resource_afe07"]
+script = ExtResource("1_h1ono")
+character_name = "you"
+position = Vector2(1026.77, 225.695)
+move_direction = Vector2(0, 0)
+base_speed = 100.0
+it_speed_multiplier = 2.0
+path_to_whose_it = NodePath("/root/Main/GameLayer/OtherAlice")
+player_controlled = true
+stunned = false
+stun_duration = 2.0
+stun_time_left = 0.0
+
+[resource]
+script = ExtResource("2_78op6")
+path_to_whose_it = NodePath("/root/Main/GameLayer/OtherAlice")
+path_to_who_starts_as_it = NodePath("GameLayer/Player")
+player_resource = SubResource("Resource_afe07")
+other_alice_resource = SubResource("Resource_w1yqq")
+other_bob_resource = SubResource("Resource_kvrvr")
+prompt_text = "Tag, Alice is it!"
