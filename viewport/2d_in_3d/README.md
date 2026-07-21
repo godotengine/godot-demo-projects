@@ -6,7 +6,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2803
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/viewport-2d-in-3d-demo/
 
 ## How does it work?
 

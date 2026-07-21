@@ -9,3 +9,5 @@ for more information.
 Languages: GDScript
 
 Renderer: Mobile
+
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/hdr-output-demo/

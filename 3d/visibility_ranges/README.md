@@ -11,14 +11,16 @@ toggle the fade mode between *transparency* (the default in this demo) and
 *hysteresis* (which is slightly faster, but results in more jarring
 transitions).
 
-> **Note**
+> [!NOTE]
 >
 > Performance is expected to decrease significantly after disabling visibility ranges,
 > as all trees will be drawn with full detail regardless of distance.
 
 Language: GDScript
 
-Renderer: Forward Plus
+Renderer: Forward+
+
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/visibility-ranges-hlod-demo/
 
 ## How does it work?
 

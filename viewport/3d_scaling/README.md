@@ -10,8 +10,8 @@ Language: GDScript
 
 Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2805
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/viewport-3d-resolution-scaling-demo/
 
-## Screenshot
+## Screenshots
 
 ![3D Resolution Scaling](screenshots/3d_scaling.webp)

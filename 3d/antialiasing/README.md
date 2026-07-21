@@ -51,6 +51,8 @@ Language: GDScript
 
 Renderer: Forward+
 
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/anti-aliasing-3d-demo/
+
 ## Screenshots
 
 ![Screenshot](screenshots/antialiasing.webp)

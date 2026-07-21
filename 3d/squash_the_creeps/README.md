@@ -29,17 +29,17 @@ Language: GDScript
 
 Renderer: Forward+
 
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/squash-the-creeps-demo/
+
 > [!NOTE]
 >
 > There is a C# version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/squash_the_creeps).
-
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2751
 
 ## Screenshots
 
 ![Screenshot](screenshots/squash_the_creeps.webp)
 
-## Copying
+## License
 
 `art/House In a Forest Loop.ogg` Copyright &copy; 2012 [HorrorPen](https://opengameart.org/users/horrorpen), [CC-BY 3.0: Attribution](https://creativecommons.org/licenses/by/3.0/). Source: https://opengameart.org/content/loop-house-in-a-forest
 

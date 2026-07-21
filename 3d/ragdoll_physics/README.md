@@ -33,6 +33,8 @@ Language: GDScript
 
 Renderer: Forward+
 
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/ragdoll-physics-demo/
+
 ## Screenshots
 
 ![Screenshot](screenshots/ragdoll_physics.webp)

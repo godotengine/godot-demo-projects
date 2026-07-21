@@ -7,7 +7,7 @@ Language: GDScript
 
 Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2745
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/particles-3d-demo/
 
 ## Screenshots
 

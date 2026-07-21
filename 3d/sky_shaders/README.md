@@ -11,7 +11,7 @@ volumetric clouds were added after converting PhysicalSkyMaterial to a
 ShaderMaterial using the **Convert to ShaderMaterial** button in the editor
 resource dropdown.
 
-> **Warning**
+> [!WARNING]
 >
 > Sky shaders are rendered every frame if they use the `TIME` variable or are
 > otherwise updated every frame (e.g. if a uniform is updated in `_process()`
@@ -27,7 +27,9 @@ resource dropdown.
 
 Language: GDScript
 
-Renderer: Forward Plus
+Renderer: Forward+
+
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/sky-shaders-3d-demo/
 
 ## How does it work?
 

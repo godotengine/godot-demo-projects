@@ -1,4 +1,4 @@
-# A WebSocket signaling server/client for WebRTC.
+# WebSocket signaling server/client for WebRTC
 
 This demo is divided in 4 parts:
 
@@ -8,11 +8,16 @@ This demo is divided in 4 parts:
   - Itself divided into raw protocol and `WebRTCMultiplayer` handling.
 - The `demo` contains a small app that uses it.
 
-**NOTE**: You must extract the [latest version](https://github.com/godotengine/webrtc-native/releases) of the WebRTC GDExtension plugin in the project folder to run from desktop.
+> [!NOTE]
+>
+> You **must** extract the [latest version](https://github.com/godotengine/webrtc-native/releases)
+> of the WebRTC GDExtension plugin in the project folder to run this demo on desktop platforms.
 
 Language: GDScript
 
 Renderer: Compatibility
+
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/websocket-signaling-demo/
 
 ## Protocol
 

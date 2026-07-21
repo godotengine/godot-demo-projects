@@ -10,7 +10,11 @@ The demo is intended as a sample implementation to help developers understand ho
 - Handle purchase updates
 - Acknowledge and consume purchases correctly
 
----
+Language: GDScript
+
+Renderer: Compatibility
+
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/android-iap-demo/
 
 ## Requirements
 
@@ -20,9 +24,7 @@ The demo is intended as a sample implementation to help developers understand ho
 - An Android app created in Play Console (draft app is sufficient)
 - At least one in-app product configured
 
----
-
-## Running the Demo
+## Running the demo
 
 1. Open the project in Godot.
 2. Configure the Android export preset. Set the correct **package name** (must match Play Console).
@@ -30,14 +32,10 @@ The demo is intended as a sample implementation to help developers understand ho
 4. Build and install the app.
 6. Make sure the app is uploaded to Play Console (Internal Testing is enough).
 
----
-
 ## Notes
 
 - Billing works for apps installed via **Google Play**.
 - Debug APKs installed manually will only work if the Google Play Store account on the device is added as a **license tester** in Play Console.
-
----
 
 ## Screenshots
 

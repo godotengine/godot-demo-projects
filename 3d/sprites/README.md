@@ -29,6 +29,8 @@ Language: GDScript
 
 Renderer: Forward+
 
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/sprites-and-animated-sprites-3d-demo/
+
 ## Screenshots
 
 ![Screenshot](screenshots/3d_sprites.webp)

@@ -11,7 +11,7 @@ Language: GDScript
 
 Renderer: Mobile
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2715
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/glow-for-2d-demo/
 
 ## Screenshots
 

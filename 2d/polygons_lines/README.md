@@ -20,6 +20,8 @@ Language: GDScript
 
 Renderer: Mobile
 
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/polygons-and-lines-2d-demo/
+
 ## Screenshots
 
 ![Screenshot](screenshots/polygons_lines.webp)

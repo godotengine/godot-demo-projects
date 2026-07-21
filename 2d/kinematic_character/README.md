@@ -9,7 +9,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2719
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/kinematic-character-2d-demo/
 
 ## Screenshots
 

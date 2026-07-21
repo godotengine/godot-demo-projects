@@ -20,6 +20,8 @@ Language: GDScript
 
 Renderer: Compatibility
 
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/physics-interpolation-demo/
+
 ## Screenshots
 
 ![Screenshot](screenshots/physics_interpolation.webp)

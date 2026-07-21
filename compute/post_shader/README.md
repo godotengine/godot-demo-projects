@@ -7,11 +7,7 @@ Language: GDScript
 
 Renderer: Forward+
 
-> Note: this demo requires Godot 4.3 or later
-
-## Screenshots
-
-![Screenshot](screenshots/post_process_shader.webp)
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/compositor-effects-post-processing-demo/
 
 ## Technical description
 
@@ -37,3 +33,8 @@ namely `post_process_grayscale.glsl` and is compiled on initialisation.
 For editing a project this means that the shader is compiled once when the effect is loaded.
 Making changes to the `glsl` file will require reloading the scene.
 The advantage of this approach is that Godot can precompile the `glsl` file.
+
+
+## Screenshots
+
+![Screenshot](screenshots/post_process_shader.webp)

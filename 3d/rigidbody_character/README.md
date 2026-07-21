@@ -9,7 +9,7 @@ Language: GDScript
 
 Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2750
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/rigidbody-character-3d-demo/
 
 ## How does it work?
 

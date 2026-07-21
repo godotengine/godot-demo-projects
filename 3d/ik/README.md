@@ -8,6 +8,8 @@ Language: GDScript
 
 Renderer: Forward+
 
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/inverse-kinematics-3d-demo/
+
 ## How does it work?
 
 This demo shows how to implement IK using two different methods. One uses the

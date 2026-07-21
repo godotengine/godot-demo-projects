@@ -6,7 +6,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2720
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/light2d-as-mask-demo/
 
 ## Screenshots
 

@@ -12,9 +12,9 @@ can try both options to compare the time it takes to generate the heightmap on
 the CPU and GPU respectively.
 
 For smaller noise textures, the CPU will often be faster, but the larger the
-gains are by using the GPU. On a PC with an NVIDIA GeForce RTX 3060 and
-11th-generation Intel Core i7 processor, the compute shader was tested to be
-faster for textures 1024×1024 and larger.
+texture, the more performance gains are obtained by using the GPU.
+On a PC with an NVIDIA GeForce RTX 3060 and 11th-generation Intel Core i7 processor,
+the compute shader was tested to be faster for textures 1024×1024 and larger.
 
 The dimensions of the image can be set on the exported **Dimensions** property
 on the main scene. By default, it's set to 2048, which creates a 2048×2048
@@ -30,5 +30,9 @@ heightmap.
 Languages: GDScript, GLSL
 
 Renderer: Mobile
+
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/compute-shader-heightmap-demo/
+
+## Screenshots
 
 ![Compute Shader Heightmap](screenshots/heightmap.webp)

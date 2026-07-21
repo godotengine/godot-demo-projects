@@ -3,7 +3,7 @@
 This is a demo implementing different types of trucks of
 varying complexity using vehicle physics.
 
-## Controls:
+## Controls
 
 - <kbd>Up Arrow</kbd>, <kbd>W</kbd>, <kbd>Gamepad Right Trigger</kbd>: Accelerate
 - <kbd>Down Arrow</kbd>, <kbd>S</kbd>, <kbd>Space</kbd>, <kbd>Gamepad Left Trigger</kbd>, <kbd>Gamepad B/Circle</kbd>, <kbd>Gamepad X/Square</kbd>: Brake/reverse
@@ -25,7 +25,7 @@ Language: GDScript
 
 Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2752
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/truck-town-demo/
 
 ## How does it work?
 

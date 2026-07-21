@@ -8,11 +8,11 @@ Language: GDScript
 
 Renderer: Compatibility
 
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/pong-with-gdscript-demo/
+
 > [!NOTE]
 >
 > There is a C# version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/pong).
-
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2728
 
 ## How does it work?
 

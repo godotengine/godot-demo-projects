@@ -32,7 +32,7 @@ Language: GDScript
 
 Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2749
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/procedural-materials-demo/
 
 ## Screenshots
 

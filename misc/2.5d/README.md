@@ -8,11 +8,11 @@ Language: GDScript
 
 Renderer: Compatibility
 
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/project-with-gdscript-2-5d-demo/
+
 > [!NOTE]
 >
 > There is a C# version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/2.5d).
-
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2783
 
 ## How does it work?
 
@@ -40,6 +40,6 @@ The plugin also adds YSort25D to sort Node25D nodes, and ShadowMath25D for calcu
 
 ![2.5D Editor Viewport](screenshots/editor.png)
 
-## Music License
+## Music license
 
 `assets/mr_mrs_robot.ogg` Copyright &copy; circa 2008 Juan Linietsky, CC-BY: Attribution.

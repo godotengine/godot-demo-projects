@@ -7,7 +7,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2807
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/gui-in-3d-demo/
 
 ## Screenshots
 

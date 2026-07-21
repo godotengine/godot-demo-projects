@@ -10,6 +10,8 @@ Language: GDScript
 
 Renderer: Compatibility
 
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/drawable-textures-demo/
+
 ## Screenshots
 
 ![Drawable Textures](screenshots/screenshot.webp)

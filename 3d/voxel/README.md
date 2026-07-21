@@ -7,7 +7,7 @@ Language: GDScript
 
 Renderer: Forward+
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2755
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/voxel-game-demo/
 
 ## How does it work?
 

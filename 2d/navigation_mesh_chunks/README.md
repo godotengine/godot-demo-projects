@@ -8,7 +8,7 @@ Language: GDScript
 
 Renderer: Compatibility
 
-> Note: this demo requires Godot 4.3 or later
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/navigation-mesh-chunks-2d-demo/
 
 ## Screenshots
 

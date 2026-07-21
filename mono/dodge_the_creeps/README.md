@@ -12,6 +12,8 @@ Language: [C#](https://docs.godotengine.org/en/latest/tutorials/scripting/c_shar
 
 Renderer: Compatibility
 
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/dodge-the-creeps-with-csharp-demo/
+
 > [!NOTE]
 >
 > There is a GDScript version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/2d/dodge_the_creeps).
@@ -22,7 +24,7 @@ Renderer: Compatibility
 
 ![Screenshot](screenshots/dodge.png)
 
-## Copying
+## License
 
 `art/House In a Forest Loop.ogg` Copyright &copy; 2012 [HorrorPen](https://opengameart.org/users/horrorpen), [CC-BY 3.0: Attribution](https://creativecommons.org/licenses/by/3.0/). Source: https://opengameart.org/content/loop-house-in-a-forest
 

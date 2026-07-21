@@ -7,11 +7,11 @@ The *multi-channel* part refers to the font texture being generated in a way tha
 for higher precision when rendering the font. This allows MSDF fonts to be more readable
 at small font sizes compared to single-channel signed distance field fonts.
 
-Language: This demo contains no code.
+Language: GDScript
 
 Renderer: Compatibility
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2770
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/multi-channel-signed-distance-field-font-demo/
 
 ## Screenshots
 

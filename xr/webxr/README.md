@@ -2,8 +2,10 @@
 
 This is a minimal demo of WebXR rendering and controller support.
 
-When exporting to the Web platform, make sure to include the WebXR Polyfill and WebXR Layers Polyfill which will fill holes in web browsers' WebXR support.
-To include these polyfills, open the **Export** window and copy the following code into the `Head Include` field of the Web export preset:
+When exporting to the Web platform, make sure to include the WebXR Polyfill and
+WebXR Layers Polyfill which will fill holes in web browsers' WebXR support. To
+include these polyfills, open the **Export** window and copy the following code
+into the **Head Include** property of the Web export preset:
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/webxr-polyfill@latest/build/webxr-polyfill.min.js"></script>
@@ -19,3 +21,5 @@ var layersPolyfill = new WebXRLayersPolyfill();
 Language: GDScript
 
 Renderer: Compatibility
+
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/webxr-demo/
