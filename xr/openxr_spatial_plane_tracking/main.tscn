@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://cdqfu166lefa"]
+
+[ext_resource type="Script" uid="uid://cfmf50ymmwrqi" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://nfjygtrqe5en" path="res://start_xr.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://3gjkc6qju2n3" path="res://assets/gltf/LeftHandHumanoid.gltf" id="2_lquwl"]
+[ext_resource type="PackedScene" uid="uid://bymg1qpy1tu2w" path="res://assets/gltf/RightHandHumanoid.gltf" id="3_7mycd"]
+[ext_resource type="Shader" uid="uid://dh3wo1is7jwsv" path="res://shaders/hand.gdshader" id="3_272bh"]
+[ext_resource type="Script" uid="uid://cequc1ay7gwtr" path="res://spatial_entities/spatial_entities_manager.gd" id="4_272bh"]
+[ext_resource type="PackedScene" uid="uid://dy8b1kf4wem8f" path="res://spatial_entities/spatial_entities_plane_tracker.tscn" id="6_272bh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_h2yge"]
+sky_material = SubResource("ProceduralSkyMaterial_0xm2m")
+
+[sub_resource type="Environment" id="Environment_1bvp3"]
+background_mode = 2
+sky = SubResource("Sky_h2yge")
+tonemap_mode = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lquwl"]
+render_priority = 0
+shader = ExtResource("3_272bh")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+
+[node name="Main" type="Node3D" unique_id=847115212]
+script = ExtResource("1_0xm2m")
+
+[node name="StartXR" type="Node" parent="." unique_id=1631757705]
+script = ExtResource("1_ig7tw")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1407251239]
+environment = SubResource("Environment_1bvp3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=630873419]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=1368531969]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=1416060266]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="LeftHand" type="XRNode3D" parent="XROrigin3D" unique_id=957667398]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"/user/hand_tracker/left"
+show_when_tracked = true
+
+[node name="LeftHandHumanoid2" parent="XROrigin3D/LeftHand" unique_id=1567117664 instance=ExtResource("2_lquwl")]
+
+[node name="LeftHandHumanoidMesh" parent="XROrigin3D/LeftHand/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D" parent_id_path=PackedInt32Array(1567117664, 1789842742) index="0" unique_id=1185421871]
+material_override = SubResource("ShaderMaterial_lquwl")
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/LeftHand/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D" parent_id_path=PackedInt32Array(1567117664, 1789842742) index="1" unique_id=1805812653]
+
+[node name="RightHand" type="XRNode3D" parent="XROrigin3D" unique_id=1802018444]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"/user/hand_tracker/right"
+show_when_tracked = true
+
+[node name="RightHandHumanoid2" parent="XROrigin3D/RightHand" unique_id=1807890026 instance=ExtResource("3_7mycd")]
+
+[node name="RightHandHumanoidMesh" parent="XROrigin3D/RightHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" parent_id_path=PackedInt32Array(1807890026, 965877912) index="0" unique_id=1157989195]
+material_override = SubResource("ShaderMaterial_lquwl")
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/RightHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" parent_id_path=PackedInt32Array(1807890026, 965877912) index="1" unique_id=103702234]
+hand_tracker = &"/user/hand_tracker/right"
+
+[node name="SpatialEntitiesManager" type="Node3D" parent="XROrigin3D" unique_id=1755393256]
+script = ExtResource("4_272bh")
+plane_tracker_scene = ExtResource("6_272bh")
+metadata/_custom_type_script = "uid://cequc1ay7gwtr"
+
+[connection signal="session_begun" from="StartXR" to="." method="_on_start_xr_session_begun"]
+
+[editable path="XROrigin3D/LeftHand/LeftHandHumanoid2"]
+[editable path="XROrigin3D/RightHand/RightHandHumanoid2"]
