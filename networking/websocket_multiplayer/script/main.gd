@@ -14,7 +14,7 @@ var peer := WebSocketMultiplayerPeer.new()
 
 
 func _init() -> void:
-	peer.supported_protocols = ["ludus"]
+	peer.supported_protocols = [PROTO_NAME]
 
 
 func _ready() -> void:
