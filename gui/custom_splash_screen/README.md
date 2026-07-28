@@ -13,6 +13,8 @@ Language: GDScript
 
 Renderer: Compatibility
 
+Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/custom-splash-screen-demo/
+
 ## How it works
 
 - Project settings are configured in a way to hide the default splash screen.
