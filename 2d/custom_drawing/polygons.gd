@@ -15,10 +15,6 @@ func _draw() -> void:
 	# of non-antialiased line drawing, as draw antialiasing tends to make lines look thicker.
 	var line_width_thin := 0.5 if use_antialiasing else -1.0
 
-	# Make thick lines 1 pixel thinner when draw antialiasing is enabled,
-	# as draw antialiasing tends to make lines look thicker.
-	var antialiasing_width_offset := 1.0 if use_antialiasing else 0.0
-
 	var points := PackedVector2Array([
 			Vector2(0, 0),
 			Vector2(0, 60),
@@ -75,11 +71,11 @@ func _draw() -> void:
 
 	offset += Vector2(90, 0)
 	draw_set_transform(margin + offset)
-	draw_polyline(points, Color.SKY_BLUE, 2.0 - antialiasing_width_offset, use_antialiasing)
+	draw_polyline(points, Color.SKY_BLUE, 2.0, use_antialiasing)
 
 	offset += Vector2(90, 0)
 	draw_set_transform(margin + offset)
-	draw_polyline(points, Color.SKY_BLUE, 6.0 - antialiasing_width_offset, use_antialiasing)
+	draw_polyline(points, Color.SKY_BLUE, 6.0, use_antialiasing)
 
 	offset += Vector2(90, 0)
 	draw_set_transform(margin + offset)
@@ -87,11 +83,11 @@ func _draw() -> void:
 
 	offset += Vector2(90, 0)
 	draw_set_transform(margin + offset)
-	draw_polyline_colors(points, colors, 2.0 - antialiasing_width_offset, use_antialiasing)
+	draw_polyline_colors(points, colors, 2.0, use_antialiasing)
 
 	offset += Vector2(90, 0)
 	draw_set_transform(margin + offset)
-	draw_polyline_colors(points, colors, 6.0 - antialiasing_width_offset, use_antialiasing)
+	draw_polyline_colors(points, colors, 6.0, use_antialiasing)
 
 	# Draw multiple lines in a single draw command. Unlike `draw_polyline()`,
 	# lines are not connected to the last segment.
@@ -103,11 +99,11 @@ func _draw() -> void:
 
 	offset += Vector2(90, 0)
 	draw_set_transform(margin + offset)
-	draw_multiline(points, Color.SKY_BLUE, 2.0 - antialiasing_width_offset, use_antialiasing)
+	draw_multiline(points, Color.SKY_BLUE, 2.0, use_antialiasing)
 
 	offset += Vector2(90, 0)
 	draw_set_transform(margin + offset)
-	draw_multiline(points, Color.SKY_BLUE, 6.0 - antialiasing_width_offset, use_antialiasing)
+	draw_multiline(points, Color.SKY_BLUE, 6.0, use_antialiasing)
 
 	# `draw_multiline_colors()` makes it possible to draw lines of different colors in a single
 	# draw command, although gradients are not possible this way (unlike `draw_polygon()` and `draw_polyline()`).
@@ -119,8 +115,8 @@ func _draw() -> void:
 
 	offset += Vector2(90, 0)
 	draw_set_transform(margin + offset)
-	draw_multiline_colors(points, colors.slice(0, 3), 2.0 - antialiasing_width_offset, use_antialiasing)
+	draw_multiline_colors(points, colors.slice(0, 3), 2.0, use_antialiasing)
 
 	offset += Vector2(90, 0)
 	draw_set_transform(margin + offset)
-	draw_multiline_colors(points, colors.slice(0, 3), 6.0 - antialiasing_width_offset, use_antialiasing)
+	draw_multiline_colors(points, colors.slice(0, 3), 6.0, use_antialiasing)

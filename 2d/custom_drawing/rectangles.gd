@@ -15,10 +15,6 @@ func _draw() -> void:
 	# of non-antialiased line drawing, as draw antialiasing tends to make lines look thicker.
 	var line_width_thin := 0.5 if use_antialiasing else -1.0
 
-	# Make thick lines 1 pixel thinner when draw antialiasing is enabled,
-	# as draw antialiasing tends to make lines look thicker.
-	var antialiasing_width_offset := 1.0 if use_antialiasing else 0.0
-
 	var offset := Vector2()
 	draw_rect(
 			Rect2(margin + offset, Vector2(100, 50)),
@@ -33,7 +29,7 @@ func _draw() -> void:
 			Rect2(margin + offset, Vector2(100, 50)),
 			Color.PURPLE,
 			false,
-			2.0 - antialiasing_width_offset,
+			2.0,
 			use_antialiasing
 		)
 
@@ -42,16 +38,14 @@ func _draw() -> void:
 			Rect2(margin + offset, Vector2(100, 50)),
 			Color.PURPLE,
 			false,
-			6.0 - antialiasing_width_offset,
+			6.0,
 			use_antialiasing
 		)
 
 	# Draw a filled rectangle. The width parameter is ignored for filled rectangles (it's set to `-1.0` to avoid warnings).
-	# We also reduce the rectangle's size by half the antialiasing width offset.
-	# Otherwise, the rectangle becomes very slightly larger when draw antialiasing is enabled.
 	offset += Vector2(120, 0)
 	draw_rect(
-			Rect2(margin + offset, Vector2(100, 50)).grow(-antialiasing_width_offset * 0.5),
+			Rect2(margin + offset, Vector2(100, 50)),
 			Color.PURPLE,
 			true,
 			-1.0,
@@ -77,7 +71,7 @@ func _draw() -> void:
 			Rect2(Vector2(), Vector2(100, 50)),
 			Color.PURPLE,
 			false,
-			2.0 - antialiasing_width_offset,
+			2.0,
 			use_antialiasing
 		)
 	offset += Vector2(120, 0)
@@ -86,7 +80,7 @@ func _draw() -> void:
 			Rect2(Vector2(), Vector2(100, 50)),
 			Color.PURPLE,
 			false,
-			6.0 - antialiasing_width_offset,
+			6.0,
 			use_antialiasing
 		)
 
@@ -102,7 +96,7 @@ func _draw() -> void:
 			Rect2(Vector2(), Vector2(100, 50)),
 			Color.PURPLE,
 			false,
-			6.0 - antialiasing_width_offset,
+			6.0,
 			use_antialiasing
 		)
 	draw_set_transform(Vector2())
