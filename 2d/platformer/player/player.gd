@@ -14,7 +14,6 @@ const TERMINAL_VELOCITY = 700
 ## Used to separate controls for multiple players in splitscreen.
 @export var action_suffix: String = ""
 
-var gravity: int = ProjectSettings.get(&"physics/2d/default_gravity")
 @onready var platform_detector := $PlatformDetector as RayCast2D
 @onready var animation_player := $AnimationPlayer as AnimationPlayer
 @onready var shoot_timer := $ShootAnimation as Timer
@@ -34,7 +33,7 @@ func _physics_process(delta: float) -> void:
 		# The player let go of jump early, reduce vertical momentum.
 		velocity.y *= 0.6
 	# Fall.
-	velocity.y = minf(TERMINAL_VELOCITY, velocity.y + gravity * delta)
+	velocity.y = minf(TERMINAL_VELOCITY, velocity.y + get_gravity().y * delta)
 
 	var direction := Input.get_axis("move_left" + action_suffix, "move_right" + action_suffix) * WALK_SPEED
 	velocity.x = move_toward(velocity.x, direction, ACCELERATION_SPEED * delta)

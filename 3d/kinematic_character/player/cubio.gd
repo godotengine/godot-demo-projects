@@ -6,7 +6,6 @@ const ACCELERATION = 4
 const DECELERATION = 4
 
 @onready var camera: Camera3D = $Target/Camera3D
-@onready var gravity := float(-ProjectSettings.get_setting("physics/3d/default_gravity"))
 @onready var start_position := position
 
 
@@ -38,7 +37,7 @@ func _physics_process(delta: float) -> void:
 		dir /= dir.length()
 
 	# Apply gravity.
-	velocity.y += delta * gravity
+	velocity += get_gravity() * delta
 
 	# Using only the horizontal velocity, interpolate towards the input.
 	var hvel := velocity

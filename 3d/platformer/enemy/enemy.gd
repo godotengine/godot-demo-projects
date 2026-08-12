@@ -10,10 +10,6 @@ var prev_advance: bool = false
 var dying: bool = false
 var rot_dir: float = 4.0
 
-@onready var gravity := Vector3(
-		ProjectSettings.get_setting("physics/3d/default_gravity") * ProjectSettings.get_setting("physics/3d/default_gravity_vector")
-)
-
 @onready var _animation_player := $Enemy/AnimationPlayer as AnimationPlayer
 @onready var _ray_floor := $Enemy/Skeleton/RayFloor as RayCast3D
 @onready var _ray_wall := $Enemy/Skeleton/RayWall as RayCast3D
@@ -22,13 +18,10 @@ var rot_dir: float = 4.0
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	var delta := state.get_step()
 	var lin_velocity := state.get_linear_velocity()
-	var grav := state.get_total_gravity()
-	# get_total_gravity returns zero for the first few frames, leading to errors.
-	if grav.is_zero_approx():
-		grav = gravity
 
-	lin_velocity += grav * delta # Apply gravity.
-	var up := -grav.normalized()
+ 	# Apply gravity.
+	lin_velocity += get_gravity() * delta
+	var up := -get_gravity().normalized()
 
 	if dying:
 		state.set_linear_velocity(lin_velocity)
@@ -61,7 +54,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if advance:
 		if dir.dot(lin_velocity) < MAX_SPEED:
 			lin_velocity += dir * ACCEL * delta
-		deaccel_dir = dir.cross(gravity).normalized()
+		deaccel_dir = dir.cross(get_gravity()).normalized()
 	else:
 		if prev_advance:
 			rot_dir = 1

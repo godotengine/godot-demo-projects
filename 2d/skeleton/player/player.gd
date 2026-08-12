@@ -20,7 +20,6 @@ var falling_slow: bool = false
 var falling_fast: bool = false
 var no_move_horizontal_time := 0.0
 
-@onready var gravity := float(ProjectSettings.get_setting("physics/2d/default_gravity"))
 @onready var sprite: Node2D = $Sprite2D
 @onready var sprite_scale := sprite.scale.x
 
@@ -37,7 +36,7 @@ func _physics_process(delta: float) -> void:
 		# The player let go of jump early, reduce vertical momentum.
 		velocity.y *= 0.6
 	# Fall.
-	velocity.y = minf(TERMINAL_VELOCITY, velocity.y + gravity * delta)
+	velocity.y = minf(TERMINAL_VELOCITY, velocity.y + get_gravity().y * delta)
 
 	var direction := Input.get_axis(&"move_left", &"move_right") * WALK_SPEED
 	velocity.x = move_toward(velocity.x, direction, ACCELERATION_SPEED * delta)

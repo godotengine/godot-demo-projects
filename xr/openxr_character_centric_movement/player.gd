@@ -5,9 +5,6 @@ extends CharacterBody3D
 @export var movement_speed := 5.0
 @export var movement_acceleration := 5.0
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity := float(ProjectSettings.get_setting("physics/3d/default_gravity"))
-
 # Helper variables to keep our code readable.
 @onready var origin_node: XROrigin3D = $XROrigin3D
 @onready var camera_node: XRCamera3D = $XROrigin3D/XRCamera3D
@@ -143,7 +140,7 @@ func _process_movement_on_input(is_colliding: bool, delta: float) -> void:
 			velocity.z = move_toward(velocity.z, 0, delta * movement_acceleration)
 
 	# Always handle gravity
-	velocity.y -= gravity * delta
+	velocity += get_gravity() * delta
 
 	move_and_slide()
 

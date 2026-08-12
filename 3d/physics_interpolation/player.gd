@@ -30,8 +30,6 @@ enum CameraType {
 # (Note that we toggle this in `_ready()`, so it actually starts with FPS camera.)
 var _cam_type := CameraType.CAM_FIXED
 
-var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
-
 
 func _ready() -> void:
 	# Capture the mouse (stops the mouse cursor from showing and ensures it stays within the window).
@@ -187,7 +185,7 @@ func _physics_process(delta: float) -> void:
 	move.z = input.y
 
 	# Apply gravity.
-	move.y -= gravity * delta
+	move += get_gravity() * delta
 
 	# Apply mouse rotation to the move, so that it is now in global space.
 	move = move.rotated(Vector3(0, 1, 0), _yaw)

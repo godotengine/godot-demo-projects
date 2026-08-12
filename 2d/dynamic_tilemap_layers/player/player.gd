@@ -5,7 +5,6 @@ const WALK_MAX_SPEED = 200
 const STOP_FORCE = 1300
 const JUMP_SPEED = 200
 
-@onready var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta: float) -> void:
 	# Horizontal movement code. First, get the player's input.
@@ -20,7 +19,7 @@ func _physics_process(delta: float) -> void:
 	velocity.x = clamp(velocity.x, -WALK_MAX_SPEED, WALK_MAX_SPEED)
 
 	# Vertical movement code. Apply gravity.
-	velocity.y += gravity * delta
+	velocity += get_gravity() * delta
 
 	# Move based on the velocity and snap to the ground.
 	# TODO: This information should be set to the CharacterBody properties instead of arguments: snap, Vector2.DOWN, Vector2.UP

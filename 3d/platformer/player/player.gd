@@ -28,9 +28,6 @@ var shoot_blend: float = 0.0
 var coins: int = 0
 
 @onready var initial_position := position
-@onready var gravity: Vector3 = ProjectSettings.get_setting("physics/3d/default_gravity") * \
-		ProjectSettings.get_setting("physics/3d/default_gravity_vector")
-
 @onready var _camera := $Target/Camera3D as Camera3D
 @onready var _animation_tree := $AnimationTree as AnimationTree
 
@@ -53,7 +50,7 @@ func _physics_process(delta: float) -> void:
 	%CoinCount.get_node(^"Parallax3").text = str(coins)
 	%CoinCount.get_node(^"Parallax4").text = str(coins)
 
-	velocity += gravity * delta
+	velocity += get_gravity() * delta
 
 	var anim := _Anim.FLOOR
 
