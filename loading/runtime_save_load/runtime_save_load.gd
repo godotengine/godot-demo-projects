@@ -6,6 +6,7 @@ extends Control
 @onready var plain_text_viewer_label := $MarginContainer/VBoxContainer/Result/PlainTextViewer/Label as Label
 @onready var texture_viewer := $MarginContainer/VBoxContainer/Result/TextureViewer as TextureRect
 @onready var audio_player := $MarginContainer/VBoxContainer/Result/AudioPlayer as Button
+@onready var audio_player_volume_label := $MarginContainer/VBoxContainer/Result/AudioPlayer/Volume/Value as Label
 @onready var audio_player_information := $MarginContainer/VBoxContainer/Result/AudioPlayer/Information as Label
 @onready var audio_stream_player := $MarginContainer/VBoxContainer/Result/AudioPlayer/AudioStreamPlayer as AudioStreamPlayer
 @onready var scene_viewer := $MarginContainer/VBoxContainer/Result/SceneViewer as SubViewportContainer
@@ -44,6 +45,10 @@ func reset_visibility() -> void:
 
 	error_label.visible = false
 	export_button.disabled = false
+
+
+func _ready() -> void:
+	reset_visibility()
 
 
 func _on_browse_pressed() -> void:
@@ -152,20 +157,49 @@ func open_file(path: String) -> void:
 			or path_lower.ends_with(".jpeg")
 			or path_lower.ends_with(".png")
 			or path_lower.ends_with(".webp")
-			or path_lower.ends_with(".svg")
 			or path_lower.ends_with(".tga")
 			or path_lower.ends_with(".bmp")
+			or path_lower.ends_with(".exr")
 	):
-		# This method handles everything, from format detection based on
+		# This method handles most formats, from format detection based on
 		# file extension to reading the file from disk. If you need error handling
-		# or more control (such as changing the scale SVG is loaded at),
+		# or more control (such as changing the scale an SVG is rasterized at),
 		# use the `load_*_from_buffer()` (where `*` is a file extension)
 		# and `load_svg_from_string()` methods from the Image class.
 		var image := Image.load_from_file(path)
+
 		reset_visibility()
 		export_file_dialog.filters = ["*.png ; PNG Image", "*.jpg, *.jpeg ; JPEG Image", "*.webp ; WebP Image"]
 		texture_viewer.visible = true
 		texture_viewer.texture = ImageTexture.create_from_image(image)
+
+	elif (
+			path_lower.ends_with(".dds")
+			or path_lower.ends_with(".ktx")
+			or path_lower.ends_with(".ktx2")
+	):
+		# Handle VRAM-compressed texture formats, which are not imported by Godot but are loaded directly.
+		# `Image.load_from_file()` does not work on these formats, so manual methods must be used instead.
+		var image := Image.new()
+		if path_lower.ends_with(".dds"):
+			image.load_dds_from_buffer(FileAccess.get_file_as_bytes(path))
+		else:
+			image.load_ktx_from_buffer(FileAccess.get_file_as_bytes(path))
+
+		reset_visibility()
+		export_file_dialog.filters = ["*.png ; PNG Image", "*.jpg, *.jpeg ; JPEG Image", "*.webp ; WebP Image"]
+		texture_viewer.visible = true
+		texture_viewer.texture = ImageTexture.create_from_image(image)
+
+	elif path_lower.ends_with(".svg"):
+		# Load SVG as a DPITexture.
+		# Compared to using `Image.load_from_file()`, this will automatically re-rasterize the SVG
+		# to match the node's current scale and Viewport oversampling. This ensures it stays crisp
+		# in various viewing conditions.
+		reset_visibility()
+		export_file_dialog.filters = ["*.png ; PNG Image", "*.jpg, *.jpeg ; JPEG Image", "*.webp ; WebP Image"]
+		texture_viewer.visible = true
+		texture_viewer.texture = DPITexture.create_from_string(FileAccess.get_file_as_string(path))
 
 	# Audio.
 	elif path_lower.ends_with(".ogg") or path_lower.ends_with(".mp3") or path_lower.ends_with(".wav"):
@@ -177,12 +211,22 @@ func open_file(path: String) -> void:
 			audio_stream_player.stream = AudioStreamMP3.load_from_file(path)
 		elif path_lower.ends_with(".wav"):
 			audio_stream_player.stream = AudioStreamWAV.load_from_file(path)
+
 		reset_visibility()
 		export_button.disabled = true
 		audio_player.visible = true
 		var duration := roundi(audio_stream_player.stream.get_length())
 		@warning_ignore("integer_division")
 		audio_player_information.text = "Duration: %02d:%02d" % [duration / 60, duration % 60]
+		# Show metadata tags from the audio file (track, artist, album, ...).
+		# NOTE: Godot currently doesn't support reading metadata tags from MP3 files.
+		if audio_stream_player.stream is AudioStreamOggVorbis:
+			var ogg_vorbis: AudioStreamOggVorbis = audio_stream_player.stream
+			# Display each metadata on its own line.
+			audio_player_information.text += "\nMetadata:\n%s" % str(ogg_vorbis.tags).replace(", ", ", \n\t")
+		elif audio_stream_player.stream is AudioStreamWAV:
+			var wav: AudioStreamWAV = audio_stream_player.stream
+			audio_player_information.text += "\nMetadata:\n%s" % str(wav.tags).replace(", ", ", \n\t")
 
 	# 3D scenes.
 	elif path_lower.ends_with(".gltf") or path_lower.ends_with(".glb") or path_lower.ends_with(".fbx"):
@@ -197,6 +241,7 @@ func open_file(path: String) -> void:
 			var error := gltf_document.append_from_file(path, gltf_state)
 			if error == OK:
 				scene_viewer_root_node = gltf_document.generate_scene(gltf_state)
+
 				reset_visibility()
 				scene_viewer.add_child(scene_viewer_root_node)
 				export_file_dialog.filters = ["*.gltf ; glTF Text Scene", "*.glb ; glTF Binary Scene"]
@@ -209,6 +254,7 @@ func open_file(path: String) -> void:
 			var error := fbx_document.append_from_file(path, fbx_state)
 			if error == OK:
 				scene_viewer_root_node = fbx_document.generate_scene(fbx_state)
+
 				reset_visibility()
 				scene_viewer.add_child(scene_viewer_root_node)
 				export_file_dialog.filters = ["*.fbx ; FBX Scene"]
@@ -235,6 +281,7 @@ func open_file(path: String) -> void:
 
 		if not font_file.data.is_empty():
 			font_viewer.add_theme_font_override(&"font", font_file)
+
 			reset_visibility()
 			font_viewer.visible = true
 			export_button.disabled = true
@@ -253,6 +300,7 @@ func open_file(path: String) -> void:
 		var files := zip_reader.get_files()
 		files.sort()
 		export_file_dialog.filters = ["*.zip ; ZIP Archive"]
+
 		reset_visibility()
 		for file in files:
 			zip_viewer_file_list.add_item(file, null)
@@ -271,3 +319,9 @@ func open_file(path: String) -> void:
 			plain_text_viewer_label.text = file_contents
 			reset_visibility()
 			plain_text_viewer.visible = true
+
+
+func _on_volume_slider_value_changed(value: float) -> void:
+	# Use linear volume for the volume slider, as it better matches perceptual hearing.
+	audio_stream_player.volume_linear = value
+	audio_player_volume_label.text = "%d%%" % (value * 100)
