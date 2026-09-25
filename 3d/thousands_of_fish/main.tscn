@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://jhr0q4037bl8"]
+
+[ext_resource type="Script" uid="uid://c65js5387joft" path="res://animated_fish.gd" id="1_ig7tw"]
+[ext_resource type="ArrayMesh" uid="uid://p8ubp50vk0nm" path="res://fish/fish1.obj" id="3_272bh"]
+[ext_resource type="Script" uid="uid://8pfxa2g7u2le" path="res://multi_fish.gd" id="4_7mycd"]
+[ext_resource type="Script" uid="uid://bhh3gs7tf0q1t" path="res://camera_3d.gd" id="6_7mycd"]
+[ext_resource type="Shader" uid="uid://xh5iuglh6fx8" path="res://particle_fish.gdshader" id="7_272bh"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_1bvp3"]
+transform_format = 1
+use_custom_data = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_efxa6"]
+shader = ExtResource("7_272bh")
+
+[sub_resource type="Environment" id="Environment_ulc20"]
+background_mode = 1
+background_color = Color(0.14994985, 0.5166276, 0.64854014, 1)
+background_energy_multiplier = 1.2
+sky_custom_fov = 102.0
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 2.2
+fog_light_color = Color(1.4439226e-07, 0.39560136, 0.6323764, 1)
+fog_light_energy = 1.35
+fog_sun_scatter = 0.11
+fog_sky_affect = 0.887
+fog_depth_curve = 0.6372804
+fog_depth_end = 281.8
+
+[node name="Node3D" type="Node3D" unique_id=606103675]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=726794683]
+transform = Transform3D(-0.5778576, -0.694379, 0.42885715, 0, 0.5254716, 0.8508111, -0.8161376, 0.4916477, -0.3036478, 0, 0, 0)
+light_color = Color(0, 0.5883741, 0.58852565, 1)
+light_energy = 2.0
+shadow_enabled = true
+directional_shadow_max_distance = 159.0
+
+[node name="AnimatedFish" type="MeshInstance3D" parent="." unique_id=1824869319]
+instance_shader_parameters/time_scale = 3.0
+instance_shader_parameters/twist = 1.5
+script = ExtResource("1_ig7tw")
+fish = ExtResource("3_272bh")
+
+[node name="MultiFish" type="MultiMeshInstance3D" parent="." unique_id=1136613835]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -250, 0, 0)
+multimesh = SubResource("MultiMesh_1bvp3")
+script = ExtResource("4_7mycd")
+
+[node name="Label3D" type="Label3D" parent="MultiFish" unique_id=577374405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 60, 60)
+pixel_size = 0.1
+billboard = 1
+no_depth_test = true
+text = "MultiMesh
+(controlled on CPU)"
+font_size = 64
+outline_size = 24
+
+[node name="ParticleFish" type="GPUParticles3D" parent="." unique_id=1671476996]
+extra_cull_margin = 209.9
+ignore_occlusion_culling = true
+amount = 2000
+lifetime = 20.0
+preprocess = 20.0
+process_material = SubResource("ShaderMaterial_efxa6")
+
+[node name="Label3D" type="Label3D" parent="ParticleFish" unique_id=1943913428]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 60, 60)
+pixel_size = 0.1
+billboard = 1
+no_depth_test = true
+text = "Particles
+(controlled on GPU)"
+font_size = 64
+outline_size = 24
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=370069100]
+environment = SubResource("Environment_ulc20")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1932145011]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, -50, 60, 200)
+current = true
+script = ExtResource("6_7mycd")
