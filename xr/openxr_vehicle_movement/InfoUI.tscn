@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://dal5i1c6mh07h"]
+
+[ext_resource type="Script" path="res://InfoUI.gd" id="1_sj0oq"]
+
+[node name="InfoUI" type="CanvasLayer"]
+script = ExtResource("1_sj0oq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(512, 256)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.341176, 0.580392, 0.368627, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 25.0
+offset_top = 10.0
+offset_right = 499.0
+offset_bottom = 158.0
+
+[node name="FPS" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "FPS: 000"
+
+[node name="Velocity" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Velocity: 000"
