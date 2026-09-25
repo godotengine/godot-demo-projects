@@ -1,14 +1,25 @@
 [gd_resource type="AudioBusLayout" format=3 uid="uid://clbivl7k30h50"]
 
-[sub_resource type="AudioEffectRecord" id="AudioEffectRecord_fo272"]
+[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_j3pel"]
+resource_name = "PitchShift"
+
+[sub_resource type="AudioEffectRecord" id="AudioEffectRecord_j3pel"]
 resource_name = "Record"
 
 [resource]
-bus/1/name = &"Record"
+bus/1/name = &"MicFeedback"
 bus/1/solo = false
-bus/1/mute = true
+bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = 0.0
 bus/1/send = &"Master"
-bus/1/effect/0/effect = SubResource("AudioEffectRecord_fo272")
+bus/1/effect/0/effect = SubResource("AudioEffectPitchShift_j3pel")
 bus/1/effect/0/enabled = true
+bus/2/name = &"Record"
+bus/2/solo = false
+bus/2/mute = true
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectRecord_j3pel")
+bus/2/effect/0/enabled = true
