@@ -24,7 +24,7 @@ public partial class Paddle : Area2D
         float input = Input.GetActionStrength(_down) - Input.GetActionStrength(_up);
         Vector2 position = Position; // Required so that we can modify position.y.
         position += new Vector2(0, input * MoveSpeed * (float)delta);
-        position = new(position.X, Mathf.Clamp(position.Y, 16, GetViewportRect().Size.X - 16));
+        position = new(position.X, Mathf.Clamp(position.Y, 16, GetViewportRect().Size.Y - 16));
         Position = position;
     }
 
