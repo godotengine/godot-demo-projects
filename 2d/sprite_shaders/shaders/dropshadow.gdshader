@@ -4,6 +4,13 @@ render_mode blend_mix;
 uniform float radius = 5.0;
 uniform vec4 modulate : source_color;
 
+// Allows CanvasItem `modulate` and `self_modulate` properties to work as intended.
+varying vec4 vertex_color;
+
+void vertex() {
+	vertex_color = COLOR;
+}
+
 void fragment() {
 	vec2 ps = TEXTURE_PIXEL_SIZE;
 
@@ -20,5 +27,5 @@ void fragment() {
 	shadow *= modulate;
 
 	vec4 col = texture(TEXTURE, UV);
-	COLOR = mix(shadow, col, col.a);
+	COLOR = mix(shadow, col, col.a) * vertex_color;
 }

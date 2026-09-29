@@ -4,6 +4,13 @@ render_mode blend_premul_alpha;
 uniform float radius = 5.0;
 uniform float amount = 0.25;
 
+// Allows CanvasItem `modulate` and `self_modulate` properties to work as intended.
+varying vec4 vertex_color;
+
+void vertex() {
+	vertex_color = COLOR;
+}
+
 void fragment() {
 	float r = radius;
 	vec2 ps = TEXTURE_PIXEL_SIZE;
@@ -33,5 +40,5 @@ void fragment() {
 	glow *= amount;
 	col.rgb *= col.a;
 
-	COLOR = glow + col;
+	COLOR = (glow + col) * vertex_color * vertex_color.a;
 }
