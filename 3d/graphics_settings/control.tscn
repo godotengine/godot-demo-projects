@@ -37,6 +37,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gm54x")
 
+[node name="SaveTimer" type="Timer" parent="." unique_id=2070164271]
+unique_name_in_owner = true
+wait_time = 0.2
+one_shot = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=466335979]
 environment = SubResource("Environment_1f0b2")
 
@@ -114,7 +119,8 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
 text = "UI Scale:"
 
-[node name="UIScaleOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer" unique_id=1211567228]
+[node name="UIScaleOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer" unique_id=118397552]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
@@ -137,25 +143,130 @@ theme_override_colors/font_color = Color(0.683425, 0.916893, 1, 1)
 text = "Video Settings"
 horizontal_alignment = 1
 
-[node name="UnsupportedLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer" unique_id=1660759298]
+[node name="RendererInfoLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer" unique_id=1660759298]
 unique_name_in_owner = true
-visible = false
 self_modulate = Color(1, 1, 1, 0.6)
 layout_mode = 2
-text = "Some settings are not supported
-on the Compatibility rendering method."
+text = "Renderer info label
+may span two lines."
+
+[node name="RestartButton" type="Button" parent="SettingsMenu/ScrollContainer/VBoxContainer" unique_id=1723888051]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Restart to Change Renderer"
 
 [node name="GridContainer2" type="GridContainer" parent="SettingsMenu/ScrollContainer/VBoxContainer" unique_id=1707844832]
 layout_mode = 2
 columns = 2
 
-[node name="QualityLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=992383098]
+[node name="RendererLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=1014719812]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Renderer:"
+
+[node name="RendererOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=55575427]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+selected = 0
+item_count = 7
+popup/item_0/text = "Forward+ - Vulkan"
+popup/item_0/id = 0
+popup/item_1/text = "Forward+ - Direct3D 12"
+popup/item_1/id = 4
+popup/item_2/text = "Forward+ - Metal"
+popup/item_2/id = 3
+popup/item_3/text = "Mobile - Vulkan"
+popup/item_3/id = 1
+popup/item_4/text = "Mobile - Direct3D 12"
+popup/item_4/id = 6
+popup/item_5/text = "Mobile - Metal"
+popup/item_5/id = 5
+popup/item_6/text = "Compatibility - OpenGL"
+popup/item_6/id = 2
+
+[node name="DisplayModeLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=1831491143]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Display Mode:"
+
+[node name="DisplayModeOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=819915264]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+selected = 0
+item_count = 3
+popup/item_0/text = "Window"
+popup/item_0/id = 0
+popup/item_1/text = "Fullscreen (Borderless)"
+popup/item_1/id = 1
+popup/item_2/text = "Fullscreen (Exclusive)"
+popup/item_2/id = 2
+
+[node name="VsyncLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=1857578489]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "V-Sync:"
+
+[node name="VsyncOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=103410445]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+selected = 0
+item_count = 4
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Adaptive"
+popup/item_1/id = 1
+popup/item_2/text = "Enabled"
+popup/item_2/id = 2
+popup/item_3/text = "Mailbox"
+popup/item_3/id = 3
+
+[node name="FPSLimitLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=981135457]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "FPS Limit:"
+
+[node name="FPSLimitOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=486345538]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+selected = 0
+item_count = 7
+popup/item_0/text = "Unlimited"
+popup/item_0/id = 0
+popup/item_1/text = "30 FPS"
+popup/item_1/id = 1
+popup/item_2/text = "60 FPS"
+popup/item_2/id = 2
+popup/item_3/text = "120 FPS"
+popup/item_3/id = 3
+popup/item_4/text = "144 FPS"
+popup/item_4/id = 4
+popup/item_5/text = "165 FPS"
+popup/item_5/id = 5
+popup/item_6/text = "240 FPS"
+popup/item_6/id = 6
+
+[node name="ResolutionScaleLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=68588680]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
 text = "Resolution Scale:"
 
-[node name="QualitySlider" type="HSlider" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=1333401496]
+[node name="ResolutionScaleSlider" type="HSlider" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=1702484851]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -164,25 +275,27 @@ max_value = 2.0
 step = 0.05
 value = 1.0
 
-[node name="FilterLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=289989774]
+[node name="DisplayFilterLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=289989774]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
 text = "Display Filter:"
 
-[node name="FilterOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=1061216317]
+[node name="DisplayFilterOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=696533154]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
-selected = 0
-item_count = 3
-popup/item_0/text = "Bilinear (Fastest)"
+selected = 1
+item_count = 4
+popup/item_0/text = "Nearest (Fastest)"
 popup/item_0/id = 0
-popup/item_1/text = "FSR 1.0 (Fast)"
+popup/item_1/text = "Bilinear (Fastest)"
 popup/item_1/id = 1
-popup/item_2/text = "FSR 2.2 (Slow)"
+popup/item_2/text = "FSR 1.0 (Fast)"
 popup/item_2/id = 2
+popup/item_3/text = "FSR 2.2 (Slow)"
+popup/item_3/id = 3
 
 [node name="FSRSharpnessLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=1306292707]
 unique_name_in_owner = true
@@ -202,58 +315,7 @@ max_value = 2.0
 step = 0.2
 value = 0.2
 
-[node name="FullscreenLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=1065881737]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 16
-text = "Fullscreen:"
-
-[node name="FullscreenOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=2139716908]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 16
-selected = 0
-item_count = 3
-popup/item_0/text = "Disabled"
-popup/item_0/id = 0
-popup/item_1/text = "Enabled (Borderless)"
-popup/item_1/id = 1
-popup/item_2/text = "Enabled (Exclusive)"
-popup/item_2/id = 2
-
-[node name="VsyncLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=1142362079]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 16
-text = "V-Sync:"
-
-[node name="VsyncOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=1540114547]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 16
-selected = 0
-item_count = 3
-popup/item_0/text = "Disabled"
-popup/item_0/id = 0
-popup/item_1/text = "Adaptive"
-popup/item_1/id = 1
-popup/item_2/text = "Enabled"
-popup/item_2/id = 2
-
-[node name="FPSLimitLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=879870779]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 16
-text = "Limit FPS:"
-
-[node name="FPSLimitSlider" type="HSlider" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=1976361991]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-max_value = 300.0
-step = 10.0
-
-[node name="TAALabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=1432291161]
+[node name="TAALabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=1962627302]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
@@ -320,6 +382,7 @@ theme_override_font_sizes/font_size = 16
 text = "Field of View:"
 
 [node name="FOVSlider" type="HSlider" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2" unique_id=2081588049]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -387,6 +450,28 @@ popup/item_4/text = "Very High (Slow)"
 popup/item_4/id = 4
 popup/item_5/text = "Ultra (Slower)"
 popup/item_5/id = 5
+
+[node name="ContactShadowsLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer4" unique_id=278700015]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Contact Shadows:"
+
+[node name="ContactShadowsOptionButton" type="OptionButton" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer4" unique_id=393211215]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+selected = 2
+item_count = 4
+popup/item_0/text = "Disabled (Fastest)"
+popup/item_0/id = 0
+popup/item_1/text = "Low (Faster)"
+popup/item_1/id = 1
+popup/item_2/text = "Medium (Fast)"
+popup/item_2/id = 2
+popup/item_3/text = "High (Average)"
+popup/item_3/id = 3
 
 [node name="MeshLODLabel" type="Label" parent="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer4" unique_id=1285439368]
 layout_mode = 2
@@ -571,6 +656,7 @@ theme_override_font_sizes/font_size = 16
 text = "Brightness:"
 
 [node name="BrightnessSlider" type="HSlider" parent="SettingsMenu/ScrollContainer/VBoxContainer/Adjustments" unique_id=302780290]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -586,6 +672,7 @@ theme_override_font_sizes/font_size = 16
 text = "Contrast:"
 
 [node name="ContrastSlider" type="HSlider" parent="SettingsMenu/ScrollContainer/VBoxContainer/Adjustments" unique_id=1042085925]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -601,6 +688,7 @@ theme_override_font_sizes/font_size = 16
 text = "Saturation:"
 
 [node name="SaturationSlider" type="HSlider" parent="SettingsMenu/ScrollContainer/VBoxContainer/Adjustments" unique_id=1017671620]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -648,24 +736,28 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 horizontal_alignment = 2
 
+[connection signal="timeout" from="SaveTimer" to="." method="_on_save_timer_timeout"]
 [connection signal="pressed" from="SettingsMenu/ScrollContainer/VBoxContainer/Presets/VeryLowPreset" to="." method="_on_very_low_preset_pressed"]
 [connection signal="pressed" from="SettingsMenu/ScrollContainer/VBoxContainer/Presets/LowPreset" to="." method="_on_low_preset_pressed"]
 [connection signal="pressed" from="SettingsMenu/ScrollContainer/VBoxContainer/Presets/MediumPreset" to="." method="_on_medium_preset_pressed"]
 [connection signal="pressed" from="SettingsMenu/ScrollContainer/VBoxContainer/Presets/HighPreset" to="." method="_on_high_preset_pressed"]
 [connection signal="pressed" from="SettingsMenu/ScrollContainer/VBoxContainer/Presets/UltraPreset" to="." method="_on_ultra_preset_pressed"]
 [connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer/UIScaleOptionButton" to="." method="_on_ui_scale_option_button_item_selected"]
-[connection signal="value_changed" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/QualitySlider" to="." method="_on_quality_slider_value_changed"]
-[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/FilterOptionButton" to="." method="_on_filter_option_button_item_selected"]
-[connection signal="value_changed" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/FSRSharpnessSlider" to="." method="_on_fsr_sharpness_slider_value_changed"]
-[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/FullscreenOptionButton" to="." method="_on_fullscreen_option_button_item_selected"]
+[connection signal="pressed" from="SettingsMenu/ScrollContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/RendererOptionButton" to="." method="_on_rendering_method_option_button_item_selected"]
+[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/DisplayModeOptionButton" to="." method="_on_display_mode_option_button_item_selected"]
 [connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/VsyncOptionButton" to="." method="_on_vsync_option_button_item_selected"]
-[connection signal="value_changed" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/FPSLimitSlider" to="." method="_on_fps_limit_slider_value_changed"]
+[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/FPSLimitOptionButton" to="." method="_on_fps_limit_option_button_item_selected"]
+[connection signal="value_changed" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/ResolutionScaleSlider" to="." method="_on_resolution_scale_slider_value_changed"]
+[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/DisplayFilterOptionButton" to="." method="_on_display_filter_option_button_item_selected"]
+[connection signal="value_changed" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/FSRSharpnessSlider" to="." method="_on_fsr_sharpness_slider_value_changed"]
 [connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/TAAOptionButton" to="." method="_on_taa_option_button_item_selected"]
 [connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/MSAAOptionButton" to="." method="_on_msaa_option_button_item_selected"]
 [connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/ScreenSpaceAAOptionButton" to="." method="_on_screen_space_aa_option_button_item_selected"]
 [connection signal="value_changed" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer2/FOVSlider" to="." method="_on_fov_slider_value_changed"]
 [connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer4/ShadowSizeOptionButton" to="." method="_on_shadow_size_option_button_item_selected"]
 [connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer4/ShadowFilterOptionButton" to="." method="_on_shadow_filter_option_button_item_selected"]
+[connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer4/ContactShadowsOptionButton" to="." method="_on_contact_shadows_option_button_item_selected"]
 [connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/GridContainer4/MeshLODOptionButton" to="." method="_on_mesh_lod_option_button_item_selected"]
 [connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/Environment/SDFGIOptionButton" to="." method="_on_sdfgi_option_button_item_selected"]
 [connection signal="item_selected" from="SettingsMenu/ScrollContainer/VBoxContainer/Environment/GlowOptionButton" to="." method="_on_glow_option_button_item_selected"]
@@ -676,4 +768,4 @@ horizontal_alignment = 2
 [connection signal="value_changed" from="SettingsMenu/ScrollContainer/VBoxContainer/Adjustments/BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]
 [connection signal="value_changed" from="SettingsMenu/ScrollContainer/VBoxContainer/Adjustments/ContrastSlider" to="." method="_on_contrast_slider_value_changed"]
 [connection signal="value_changed" from="SettingsMenu/ScrollContainer/VBoxContainer/Adjustments/SaturationSlider" to="." method="_on_saturation_slider_value_changed"]
-[connection signal="toggled" from="HideShowButton" to="." method="_on_HideShowButton_toggled"]
+[connection signal="toggled" from="HideShowButton" to="." method="_on_hide_show_button_toggled"]
