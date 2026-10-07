@@ -72,10 +72,12 @@ func set_player_name(value: String) -> void:
 	$sprite.modulate = Color(0.5, 0.5, 0.5) + gamestate.get_player_color(value)
 
 
-@rpc("call_local")
+@rpc("call_local", "reliable")
 func exploded(_by_who: int) -> void:
-	if stunned:
-		return
-
+	# Every peer must restart the same animation, even if its previous stun ended a frame earlier
+	# or later. Ignoring the event based on local animation state can leave peers at different
+	# sprite rotations after consecutive explosions.
 	stunned = true
+	current_anim = &"stunned"
+	$anim.stop()
 	$anim.play(&"stunned")
