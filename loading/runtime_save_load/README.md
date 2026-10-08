@@ -16,7 +16,7 @@ Can be loaded and saved at run-time:
 
 Can be loaded at run-time:
 
-- Images (TGA, BMP, SVG[^2])
+- Images (TGA, BMP, EXR, DDS, KTX, SVG[^2])
 - 3D scenes (FBX[^3])
 - Audio (Ogg Vorbis, MP3, WAV)
 - Fonts (TTF, OTF, WOFF, WOFF2, PFB, PFM, BMFont)
