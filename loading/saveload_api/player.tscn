@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6tneivslk4kq"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_0r5m6"]
+[ext_resource type="Texture2D" uid="uid://dm6sh6t5nfmmc" path="res://icon.svg" id="1_jpk80"]
+
+[sub_resource type="SceneSaveloadConfig" id="SceneSaveloadConfig_k2tv0"]
+properties/0/path = NodePath(".:position")
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/sync = true
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_0r5m6")
+
+[node name="SaveloadSynchronizer" type="SaveloadSynchronizer" parent="."]
+saveload_config = SubResource("SceneSaveloadConfig_k2tv0")
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("1_jpk80")
