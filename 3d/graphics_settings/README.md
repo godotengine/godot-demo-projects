@@ -8,14 +8,16 @@ Included settings are:
 
 - UI scale.
 - Resolution scale.
-- Display filter (bilinear, AMD FidelityFX Super Resolution 1.0 or 2.2).
+- Rendering method and driver (requires a restart to apply changes).
+- Display filter (nearest, bilinear, AMD FidelityFX Super Resolution 1.0 or 2.2).
 - Fullscreen.
-- V-Sync (traditional and adaptive).
+- V-Sync (traditional, adaptive, mailbox).
 - Anti-aliasing (MSAA, FXAA, SMAA, TAA).
 - Camera field of view.
 
 **Effect settings:**
 
+- Shadow map resolution, filter quality, and screen-space contact shadows.
 - Signed distance field global illumination (SDFGI).
 - Bloom (glow).
 - Screen-space ambient occlusion (SSAO).
@@ -26,10 +28,10 @@ Included settings are:
 
 Language: GDScript
 
-Renderer: Forward+
+Renderer: Forward+ (can be changed when running the project)
 
 Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/graphics-settings-3d-demo/
 
 ## Screenshots
 
-![Screenshot](screenshots/interface.png)
+![Screenshot](screenshots/graphics_settings.webp)
