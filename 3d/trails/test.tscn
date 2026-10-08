@@ -1,0 +1,921 @@
+[gd_scene format=3 uid="uid://df4ssnidpmiop"]
+
+[ext_resource type="Shader" uid="uid://df224sl4dxep7" path="res://trail_texture.gdshader" id="3_ykrsh"]
+[ext_resource type="Shader" uid="uid://brv6ri3fcegi7" path="res://trail_lightning.gdshader" id="4_g14j6"]
+[ext_resource type="Texture2D" uid="uid://y4u52phgpj4r" path="res://lightning.png" id="5_vbegm"]
+[ext_resource type="Shader" uid="uid://bjypmqpn174mn" path="res://trail_sword.gdshader" id="6_g14j6"]
+[ext_resource type="Shader" uid="uid://l43xm3eywcba" path="res://trail_smoke.gdshader" id="6_vbegm"]
+[ext_resource type="Texture2D" uid="uid://cwm0nhfkv84ci" path="res://checker.png" id="14"]
+[ext_resource type="Script" uid="uid://bunsi5g027v5r" path="res://tester.gd" id="18"]
+
+[sub_resource type="ProceduralSkyMaterial" id="9"]
+
+[sub_resource type="Sky" id="10"]
+sky_material = SubResource("9")
+
+[sub_resource type="Environment" id="11"]
+background_mode = 2
+background_energy_multiplier = 0.5
+sky = SubResource("10")
+tonemap_mode = 4
+
+[sub_resource type="Animation" id="Animation_qdnt6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Testers/TrailLengthTimeVsDistance/Time/PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Testers/TrailLengthTimeVsDistance/Distance/PathFollow3D:progress_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Testers/TrailWidthCurve/Path3D/PathFollow3D:progress_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Testers/TrailGradient/Path3D/PathFollow3D:progress_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Testers/TrailAlignLocalVsBillboard/Local/PathFollow3D:progress_ratio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Testers/TrailAlignLocalVsBillboard/Billboard/PathFollow3D:progress_ratio")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Testers/TrailTextureDashed/Path3D/PathFollow3D:progress_ratio")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Testers/TrailTextureTapered/Path3D/PathFollow3D:progress_ratio")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Testers/TrailTextureDashedPinUV/Path3D/PathFollow3D:progress_ratio")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Testers/TrailShaderLightning/Path3D/PathFollow3D:progress_ratio")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Testers/TrailCorkscrew/Path3D/PathFollow3D:progress_ratio")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Testers/TrailCorkscrew/Path3D/PathFollow3D/RotationPivot:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Testers/TrailSword/Sword:rotation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.2653637, 0.863938, 0)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Testers/TrailShaderSmoke/Path3D/PathFollow3D:progress_ratio")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="12"]
+resource_name = "move"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Testers/TrailLengthTimeVsDistance/Time/PathFollow3D:progress_ratio")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Testers/TrailLengthTimeVsDistance/Distance/PathFollow3D:progress_ratio")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Testers/TrailWidthCurve/Path3D/PathFollow3D:progress_ratio")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Testers/TrailGradient/Path3D/PathFollow3D:progress_ratio")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Testers/TrailAlignLocalVsBillboard/Local/PathFollow3D:progress_ratio")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Testers/TrailAlignLocalVsBillboard/Billboard/PathFollow3D:progress_ratio")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Testers/TrailTextureDashed/Path3D/PathFollow3D:progress_ratio")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Testers/TrailTextureTapered/Path3D/PathFollow3D:progress_ratio")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Testers/TrailTextureDashedPinUV/Path3D/PathFollow3D:progress_ratio")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Testers/TrailShaderLightning/Path3D/PathFollow3D:progress_ratio")
+tracks/9/interp = 2
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Testers/TrailCorkscrew/Path3D/PathFollow3D:progress_ratio")
+tracks/10/interp = 2
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Testers/TrailCorkscrew/Path3D/PathFollow3D/RotationPivot:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 62.831852)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Testers/TrailSword/Sword:rotation")
+tracks/12/interp = 2
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.2653637, 0.863938, 0), Vector3(-0.106826104, -0.4442053, -0.86564714)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Testers/TrailShaderSmoke/Path3D/PathFollow3D:progress_ratio")
+tracks/13/interp = 2
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ecfcr"]
+_data = {
+&"RESET": SubResource("Animation_qdnt6"),
+&"move": SubResource("12")
+}
+
+[sub_resource type="StandardMaterial3D" id="13"]
+diffuse_mode = 1
+albedo_texture = ExtResource("14")
+uv1_scale = Vector3(32, 32, 1)
+texture_filter = 5
+
+[sub_resource type="PlaneMesh" id="14"]
+material = SubResource("13")
+size = Vector2(128, 128)
+
+[sub_resource type="Curve3D" id="Curve3D_8uh7m"]
+closed = true
+_data = {
+"points": PackedVector3Array(-1, 0, 0, 1, 0, 0, -1.2438813, 0.5, 1.2564869, -0.90000004, 0, 0, 0.90000004, 0, 0, 1.2561187, 0.5, -1.2435131, 0, 0, -1, 0, 0, 1, 2.2630634, 0.5, 0.017089844, 1, 0, 0, -1, 0, 0, 1.2561187, 0.5, 1.2564869, 1, 0, 0, -1, 0, 0, -1.2438813, 0.5, -1.2435131, 0, 0, -1, 0, 0, 1, -2.2480688, 0.5, 0.0051078796),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[sub_resource type="Curve" id="Curve_8uh7m"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 3.296484, 3.296484, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_6uqi0"]
+offsets = PackedFloat32Array(0, 0.1, 0.2, 0.6, 1)
+colors = PackedColorArray(0, 0, 1, 0, 0, 0.45490196, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0.39607844, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_ppyta"]
+offsets = PackedFloat32Array(0, 0.4)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6uqi0"]
+gradient = SubResource("Gradient_ppyta")
+width = 1
+fill_from = Vector2(1, 1)
+fill_to = Vector2(1, 0.5)
+repeat = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ykrsh"]
+render_priority = 0
+shader = ExtResource("3_ykrsh")
+shader_parameter/texture_albedo = SubResource("GradientTexture2D_6uqi0")
+
+[sub_resource type="Gradient" id="Gradient_8uh7m"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6uqi0"]
+gradient = SubResource("Gradient_8uh7m")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6uqi0"]
+render_priority = 0
+shader = ExtResource("3_ykrsh")
+shader_parameter/texture_albedo = SubResource("GradientTexture1D_6uqi0")
+
+[sub_resource type="Curve" id="Curve_ppyta"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.8, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_ykrsh"]
+offsets = PackedFloat32Array(0, 0.028735632, 0.1, 0.6, 1)
+colors = PackedColorArray(1, 0.8980392, 0, 0, 1, 0.8980392, 0, 1, 1, 0.6764355, 0.29802954, 1, 0.21875, 0, 1, 1, 1, 0, 1, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6uqi0"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6uqi0"]
+width = 16
+height = 16
+noise = SubResource("FastNoiseLite_6uqi0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ehkex"]
+render_priority = 0
+shader = ExtResource("4_g14j6")
+shader_parameter/texture_albedo = ExtResource("5_vbegm")
+shader_parameter/texture_vertex_distortion = SubResource("NoiseTexture2D_6uqi0")
+shader_parameter/vertex_distortion_strength = 0.5000004987499995
+shader_parameter/brightness = 5.0000002375
+shader_parameter/scroll_speed = 5.000004987500006
+
+[sub_resource type="Gradient" id="Gradient_g14j6"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vbegm"]
+gradient = SubResource("Gradient_g14j6")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g14j6"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 0.86413574, 0.671875, 1)
+albedo_texture = SubResource("GradientTexture2D_vbegm")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_ykrsh"]
+material = SubResource("StandardMaterial3D_g14j6")
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_00tp4"]
+offsets = PackedFloat32Array(0.0057471264, 0.1, 1)
+colors = PackedColorArray(1, 0.8784314, 0.5882353, 1, 0.3137255, 0.3137255, 0.3137255, 0.9372549, 0.5019608, 0.5019608, 0.5019608, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ppyta"]
+render_priority = 0
+shader = ExtResource("6_vbegm")
+shader_parameter/texture_albedo = ExtResource("5_vbegm")
+shader_parameter/texture_vertex_distortion = SubResource("NoiseTexture2D_6uqi0")
+shader_parameter/vertex_distortion_strength = 0.30000048924999945
+shader_parameter/alpha_intensity = 2.000000095
+shader_parameter/scroll_speed = -0.4999952737500024
+
+[sub_resource type="Curve" id="Curve_6uqi0"]
+_data = [Vector2(1e-05, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_vbegm"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6uqi0"]
+size = Vector3(0.15, 0.05, 0.3)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ppyta"]
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.15
+radial_segments = 24
+rings = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_6uqi0"]
+radius = 0.05
+height = 0.1
+radial_segments = 24
+rings = 12
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6uqi0"]
+top_radius = 0.01
+bottom_radius = 0.05
+radial_segments = 24
+rings = 0
+
+[sub_resource type="Gradient" id="Gradient_ehkex"]
+offsets = PackedFloat32Array(0, 0.3448276, 1)
+colors = PackedColorArray(0.73, 0.9505, 1, 1, 0.53515625, 0.9237366, 1, 0.6551724, 0, 0.6666665, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_xersf"]
+offsets = PackedFloat32Array(0, 0.5068493, 1)
+colors = PackedColorArray(1, 1, 1, 0.0479452, 0.8684082, 0.3984375, 1, 0.5304935, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_00tp4"]
+gradient = SubResource("Gradient_xersf")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g14j6"]
+render_priority = 0
+shader = ExtResource("6_g14j6")
+shader_parameter/texture_albedo = SubResource("GradientTexture2D_00tp4")
+shader_parameter/brightness = 2.000000095
+
+[node name="WorldEnvironment" type="WorldEnvironment" unique_id=1614867239]
+environment = SubResource("11")
+script = ExtResource("18")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=12736471]
+libraries/ = SubResource("AnimationLibrary_ecfcr")
+autoplay = &"move"
+
+[node name="Plane" type="MeshInstance3D" parent="." unique_id=1535239691]
+layers = 2
+mesh = SubResource("14")
+metadata/_edit_lock_ = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1815554872]
+transform = Transform3D(-0.668269, 0.661498, -0.340349, 0.5619, 0.748663, 0.351813, 0.48753, 0.0438635, -0.872004, 3.9506, 3.39961, 3.54442)
+light_energy = 0.5
+shadow_bias = 0.04
+directional_shadow_mode = 0
+directional_shadow_fade_start = 0.9
+directional_shadow_max_distance = 15.0
+
+[node name="CameraHolder" type="Node3D" parent="." unique_id=249635705]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.125, 18)
+
+[node name="RotationX" type="Node3D" parent="CameraHolder" unique_id=1870373868]
+
+[node name="Camera3D" type="Camera3D" parent="CameraHolder/RotationX" unique_id=810733611]
+fov = 70.0
+
+[node name="Testers" type="Node3D" parent="." unique_id=1663136029]
+
+[node name="TrailLengthTimeVsDistance" type="Node3D" parent="Testers" unique_id=462094416]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18)
+
+[node name="Time" type="Path3D" parent="Testers/TrailLengthTimeVsDistance" unique_id=1267836232]
+curve = SubResource("Curve3D_8uh7m")
+
+[node name="Label3D" type="Label3D" parent="Testers/TrailLengthTimeVsDistance/Time" unique_id=403538328]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.5, 1)
+visibility_range_end = 5.0
+billboard = 1
+alpha_cut = 1
+text = "Time"
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Testers/TrailLengthTimeVsDistance/Time" unique_id=1246726676]
+transform = Transform3D(-4.3704798e-08, 0, -0.9998492, 0, 0.99999595, 0, 0.9998492, 0, -4.3704798e-08, -1.2438813, 0.5, 1.2564869)
+
+[node name="Trail3D" type="Trail3D" parent="Testers/TrailLengthTimeVsDistance/Time/PathFollow3D" unique_id=784245995]
+custom_aabb = AABB(-0.3, -0.3, -0.3, 0.6, 0.6, 0.6)
+lifetime = 1.0
+min_section_length = 0.05
+
+[node name="Distance" type="Path3D" parent="Testers/TrailLengthTimeVsDistance" unique_id=2068990854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+curve = SubResource("Curve3D_8uh7m")
+
+[node name="Label3D" type="Label3D" parent="Testers/TrailLengthTimeVsDistance/Distance" unique_id=807773938]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.5, 1)
+visibility_range_end = 5.0
+billboard = 1
+alpha_cut = 1
+text = "Distance"
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Testers/TrailLengthTimeVsDistance/Distance" unique_id=444296245]
+transform = Transform3D(-4.3704798e-08, 0, -0.9998492, 0, 0.99999595, 0, 0.9998492, 0, -4.3704798e-08, -1.2438813, 0.5, 1.2564869)
+
+[node name="Trail3D" type="Trail3D" parent="Testers/TrailLengthTimeVsDistance/Distance/PathFollow3D" unique_id=1176943303]
+custom_aabb = AABB(-0.3, -0.3, -0.3, 0.6, 0.6, 0.6)
+limit_mode = 1
+max_length = 5.0
+min_section_length = 0.05
+
+[node name="TrailAlignLocalVsBillboard" type="Node3D" parent="Testers" unique_id=1634738348]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14)
+
+[node name="Local" type="Path3D" parent="Testers/TrailAlignLocalVsBillboard" unique_id=138607110]
+curve = SubResource("Curve3D_8uh7m")
+
+[node name="Label3D" type="Label3D" parent="Testers/TrailAlignLocalVsBillboard/Local" unique_id=1038582257]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.5, 1)
+visibility_range_end = 5.0
+billboard = 1
+alpha_cut = 1
+text = "Local"
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Testers/TrailAlignLocalVsBillboard/Local" unique_id=659180271]
+transform = Transform3D(-4.3704798e-08, 0, -0.9998492, 0, 0.99999595, 0, 0.9998492, 0, -4.3704798e-08, -1.2438813, 0.5, 1.2564869)
+
+[node name="Trail3D" type="Trail3D" parent="Testers/TrailAlignLocalVsBillboard/Local/PathFollow3D" unique_id=1982357805]
+custom_aabb = AABB(-0.3, -0.3, -0.3, 0.6, 0.6, 0.6)
+lifetime = 1.0
+mesh_alignment = 0
+min_section_length = 0.05
+
+[node name="Billboard" type="Path3D" parent="Testers/TrailAlignLocalVsBillboard" unique_id=266218555]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+curve = SubResource("Curve3D_8uh7m")
+
+[node name="Label3D" type="Label3D" parent="Testers/TrailAlignLocalVsBillboard/Billboard" unique_id=334721614]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.5, 1)
+visibility_range_end = 5.0
+billboard = 1
+alpha_cut = 1
+text = "Billboard"
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Testers/TrailAlignLocalVsBillboard/Billboard" unique_id=2064229934]
+transform = Transform3D(-4.3704798e-08, 0, -0.9998492, 0, 0.99999595, 0, 0.9998492, 0, -4.3704798e-08, -1.2438813, 0.5, 1.2564869)
+
+[node name="Trail3D" type="Trail3D" parent="Testers/TrailAlignLocalVsBillboard/Billboard/PathFollow3D" unique_id=1704350041]
+custom_aabb = AABB(-0.3, -0.3, -0.3, 0.6, 0.6, 0.6)
+limit_mode = 1
+max_length = 5.0
+min_section_length = 0.05
+
+[node name="TrailWidthCurve" type="Node3D" parent="Testers" unique_id=1799389864]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="Path3D" type="Path3D" parent="Testers/TrailWidthCurve" unique_id=1567148562]
+curve = SubResource("Curve3D_8uh7m")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Testers/TrailWidthCurve/Path3D" unique_id=2062323271]
+transform = Transform3D(-4.3704798e-08, 0, -0.9998492, 0, 0.99999595, 0, 0.9998492, 0, -4.3704798e-08, -1.2438813, 0.5, 1.2564869)
+
+[node name="Trail3D" type="Trail3D" parent="Testers/TrailWidthCurve/Path3D/PathFollow3D" unique_id=864786327]
+custom_aabb = AABB(-0.2, -0.2, -0.2, 0.4, 0.4, 0.4)
+lifetime = 2.0
+width = 0.2
+width_curve = SubResource("Curve_8uh7m")
+color = Color(0, 1, 0.3764706, 0.5411765)
+mesh_alignment = 0
+material_mode = 1
+min_section_length = 0.05
+
+[node name="TrailGradient" type="Node3D" parent="Testers" unique_id=868463122]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+
+[node name="Path3D" type="Path3D" parent="Testers/TrailGradient" unique_id=731821801]
+curve = SubResource("Curve3D_8uh7m")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Testers/TrailGradient/Path3D" unique_id=2053632342]
+transform = Transform3D(-4.3704798e-08, 0, -0.9998492, 0, 0.99999595, 0, 0.9998492, 0, -4.3704798e-08, -1.2438813, 0.5, 1.2564869)
+
+[node name="Trail3D" type="Trail3D" parent="Testers/TrailGradient/Path3D/PathFollow3D" unique_id=561231931]
+custom_aabb = AABB(-0.3, -0.3, -0.3, 0.6, 0.6, 0.6)
+lifetime = 1.5
+color_gradient = SubResource("Gradient_6uqi0")
+material_mode = 1
+min_section_length = 0.05
+
+[node name="TrailTextureTapered" type="Node3D" parent="Testers" unique_id=500867284]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="Path3D" type="Path3D" parent="Testers/TrailTextureTapered" unique_id=1635663823]
+curve = SubResource("Curve3D_8uh7m")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Testers/TrailTextureTapered/Path3D" unique_id=732645553]
+transform = Transform3D(-4.3704798e-08, 0, -0.9998492, 0, 0.99999595, 0, 0.9998492, 0, -4.3704798e-08, -1.2438813, 0.5, 1.2564869)
+
+[node name="Trail3D" type="Trail3D" parent="Testers/TrailTextureTapered/Path3D/PathFollow3D" unique_id=418814140]
+custom_aabb = AABB(-0.3, -0.3, -0.3, 0.6, 0.6, 0.6)
+lifetime = 1.5
+color_gradient = SubResource("Gradient_6uqi0")
+material_mode = 2
+material = SubResource("ShaderMaterial_ykrsh")
+tiling_multiplier = 4.0
+pin_uv = true
+min_section_length = 0.05
+
+[node name="TrailTextureDashed" type="Node3D" parent="Testers" unique_id=325994402]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Path3D" type="Path3D" parent="Testers/TrailTextureDashed" unique_id=1114252213]
+curve = SubResource("Curve3D_8uh7m")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Testers/TrailTextureDashed/Path3D" unique_id=1100550422]
+transform = Transform3D(-4.3704798e-08, 0, -0.9998492, 0, 0.99999595, 0, 0.9998492, 0, -4.3704798e-08, -1.2438813, 0.5, 1.2564869)
+
+[node name="Trail3D" type="Trail3D" parent="Testers/TrailTextureDashed/Path3D/PathFollow3D" unique_id=233775854]
+custom_aabb = AABB(-0.3, -0.3, -0.3, 0.6, 0.6, 0.6)
+lifetime = 1.5
+color_gradient = SubResource("Gradient_6uqi0")
+material_mode = 2
+material = SubResource("ShaderMaterial_6uqi0")
+tiling_multiplier = 4.0
+min_section_length = 0.05
+
+[node name="TrailTextureDashedPinUV" type="Node3D" parent="Testers" unique_id=252879116]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+
+[node name="Path3D" type="Path3D" parent="Testers/TrailTextureDashedPinUV" unique_id=18539775]
+curve = SubResource("Curve3D_8uh7m")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Testers/TrailTextureDashedPinUV/Path3D" unique_id=1484477573]
+transform = Transform3D(-4.3704798e-08, 0, -0.9998492, 0, 0.99999595, 0, 0.9998492, 0, -4.3704798e-08, -1.2438813, 0.5, 1.2564869)
+
+[node name="Trail3D" type="Trail3D" parent="Testers/TrailTextureDashedPinUV/Path3D/PathFollow3D" unique_id=1058926508]
+custom_aabb = AABB(-0.3, -0.3, -0.3, 0.6, 0.6, 0.6)
+lifetime = 1.5
+color_gradient = SubResource("Gradient_6uqi0")
+material_mode = 2
+material = SubResource("ShaderMaterial_6uqi0")
+tiling_multiplier = 4.0
+pin_uv = true
+min_section_length = 0.05
+
+[node name="TrailShaderLightning" type="Node3D" parent="Testers" unique_id=1321539052]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="Path3D" type="Path3D" parent="Testers/TrailShaderLightning" unique_id=113748861]
+curve = SubResource("Curve3D_8uh7m")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Testers/TrailShaderLightning/Path3D" unique_id=1357268848]
+transform = Transform3D(-4.3704798e-08, 0, -0.9998492, 0, 0.99999595, 0, 0.9998492, 0, -4.3704798e-08, -1.2438813, 0.5, 1.2564869)
+
+[node name="Trail3D" type="Trail3D" parent="Testers/TrailShaderLightning/Path3D/PathFollow3D" unique_id=878224811]
+custom_aabb = AABB(-0.6, -0.6, -0.6, 1.2, 1.2, 1.2)
+lifetime = 1.5
+width = 0.6
+width_curve = SubResource("Curve_ppyta")
+color_gradient = SubResource("Gradient_ykrsh")
+material_mode = 2
+material = SubResource("ShaderMaterial_ehkex")
+min_section_length = 0.05
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Testers/TrailShaderLightning/Path3D/PathFollow3D" unique_id=278880554]
+transform = Transform3D(1.0001547, 0, 0, 0, 0.99999994, 0, 0, 0, 1.0001547, 0, 0, 0)
+light_color = Color(1, 0.7265625, 0, 1)
+light_energy = 2.0
+omni_range = 0.8
+omni_attenuation = 2.0
+
+[node name="QuadBillboard" type="MeshInstance3D" parent="Testers/TrailShaderLightning/Path3D/PathFollow3D" unique_id=1028090445]
+mesh = SubResource("QuadMesh_ykrsh")
+
+[node name="TrailShaderSmoke" type="Node3D" parent="Testers" unique_id=1307484282]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14)
+
+[node name="Path3D" type="Path3D" parent="Testers/TrailShaderSmoke" unique_id=888315719]
+curve = SubResource("Curve3D_8uh7m")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Testers/TrailShaderSmoke/Path3D" unique_id=1879746268]
+transform = Transform3D(-4.3704798e-08, 0, -0.9998492, 0, 0.99999595, 0, 0.9998492, 0, -4.3704798e-08, -1.2438813, 0.5, 1.2564869)
+
+[node name="Trail3D" type="Trail3D" parent="Testers/TrailShaderSmoke/Path3D/PathFollow3D" unique_id=327711139]
+custom_aabb = AABB(-0.8, -0.8, -0.8, 1.6, 1.6, 1.6)
+lifetime = 1.5
+width = 0.8
+width_curve = SubResource("Curve_ppyta")
+color_gradient = SubResource("Gradient_00tp4")
+material_mode = 2
+material = SubResource("ShaderMaterial_ppyta")
+pin_uv = true
+min_section_length = 0.05
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Testers/TrailShaderSmoke/Path3D/PathFollow3D" unique_id=1149546565]
+light_color = Color(1, 0.7265625, 0, 1)
+light_energy = 2.0
+omni_range = 0.8
+omni_attenuation = 2.0
+
+[node name="QuadBillboard" type="MeshInstance3D" parent="Testers/TrailShaderSmoke/Path3D/PathFollow3D" unique_id=1738553196]
+mesh = SubResource("QuadMesh_ykrsh")
+
+[node name="TrailCorkscrew" type="Node3D" parent="Testers" unique_id=981374800]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -18)
+
+[node name="Path3D" type="Path3D" parent="Testers/TrailCorkscrew" unique_id=941848647]
+curve = SubResource("Curve3D_8uh7m")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Testers/TrailCorkscrew/Path3D" unique_id=1019011640]
+transform = Transform3D(-4.3704798e-08, 0, -0.9998492, 0, 0.99999595, 0, 0.9998492, 0, -4.3704798e-08, -1.2438813, 0.5, 1.2564869)
+
+[node name="RotationPivot" type="Node3D" parent="Testers/TrailCorkscrew/Path3D/PathFollow3D" unique_id=856949226]
+
+[node name="Trail3DCenter" type="Trail3D" parent="Testers/TrailCorkscrew/Path3D/PathFollow3D/RotationPivot" unique_id=773438883]
+transform = Transform3D(0.99999994, 0, -2.9802322e-08, 3.7252903e-09, 0.9999998, 0, 2.9802322e-08, 0, 0.99999994, 0, 0, 0)
+custom_aabb = AABB(-0.1, -0.1, -0.1, 0.2, 0.2, 0.2)
+lifetime = 1.5
+width = 0.1
+width_curve = SubResource("Curve_6uqi0")
+color = Color(1, 1, 1, 0.5019608)
+color_gradient = SubResource("Gradient_vbegm")
+material_mode = 1
+tiling_multiplier = 4.0
+pin_uv = true
+min_section_length = 0.05
+
+[node name="Trail3DBlue" type="Trail3D" parent="Testers/TrailCorkscrew/Path3D/PathFollow3D/RotationPivot" unique_id=1432879854]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, 0.1, -0.1, 0)
+custom_aabb = AABB(-0.1, -0.1, -0.1, 0.2, 0.2, 0.2)
+lifetime = 1.5
+width = 0.1
+width_curve = SubResource("Curve_6uqi0")
+color = Color(0, 0.5647059, 1, 1)
+color_gradient = SubResource("Gradient_vbegm")
+material_mode = 1
+tiling_multiplier = 4.0
+pin_uv = true
+min_section_length = 0.05
+
+[node name="Trail3DGreen" type="Trail3D" parent="Testers/TrailCorkscrew/Path3D/PathFollow3D/RotationPivot" unique_id=990184042]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -0.1, 0.1, 0)
+custom_aabb = AABB(-0.1, -0.1, -0.1, 0.2, 0.2, 0.2)
+lifetime = 1.5
+width = 0.1
+width_curve = SubResource("Curve_6uqi0")
+color = Color(0, 1, 0.71875, 1)
+color_gradient = SubResource("Gradient_vbegm")
+material_mode = 1
+tiling_multiplier = 4.0
+pin_uv = true
+min_section_length = 0.05
+
+[node name="TrailSword" type="Node3D" parent="Testers" unique_id=996368067]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22)
+
+[node name="Sword" type="Node3D" parent="Testers/TrailSword" unique_id=1540521017]
+transform = Transform3D(0.64944804, 0.72521186, 0.22865853, 0, 0.30070576, -0.95371705, -0.76040596, 0.6193895, 0.19529283, 0, 2, 1)
+
+[node name="Base" type="MeshInstance3D" parent="Testers/TrailSword/Sword" unique_id=1314716825]
+transform = Transform3D(1.0000001, 2.9802322e-08, -2.9802322e-08, -2.9802322e-08, 0, 1, -1.4901161e-08, -1.0000001, 2.9802322e-08, 9.536743e-07, 0, -0.0050001144)
+mesh = SubResource("BoxMesh_6uqi0")
+
+[node name="BaseCylinder" type="MeshInstance3D" parent="Testers/TrailSword/Sword" unique_id=1927569401]
+transform = Transform3D(1.0000001, -7.45058e-08, -8.881784e-16, -2.9802322e-08, 1.5893256e-08, 1, -1.4901157e-08, -1, -1.3909066e-08, 5.2390297e-09, -1.5148987e-09, 0.09531707)
+mesh = SubResource("CylinderMesh_ppyta")
+
+[node name="BaseTip" type="MeshInstance3D" parent="Testers/TrailSword/Sword" unique_id=700498699]
+transform = Transform3D(1.0000001, 2.9802322e-08, -2.9802322e-08, -2.9802322e-08, 0, 1, -1.4901161e-08, -1.0000001, 2.9802322e-08, 9.4771383e-07, 0, 0.19499992)
+mesh = SubResource("SphereMesh_6uqi0")
+
+[node name="Blade" type="MeshInstance3D" parent="Testers/TrailSword/Sword" unique_id=1385286322]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -1)
+mesh = SubResource("CylinderMesh_6uqi0")
+
+[node name="Trail3D" type="Trail3D" parent="Testers/TrailSword/Sword/Blade" unique_id=220110152]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+custom_aabb = AABB(-2, -2, -2, 4, 4, 4)
+width = 2.0
+color_gradient = SubResource("Gradient_ehkex")
+mesh_alignment = 0
+material_mode = 2
+material = SubResource("ShaderMaterial_g14j6")
+min_section_length = 0.05
+
+[node name="TestName" type="Label" parent="." unique_id=1113582877]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -58.0
+offset_right = 192.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="Previous" type="Button" parent="." unique_id=1175723405]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -55.0
+offset_right = 135.0
+offset_bottom = -24.0
+grow_vertical = 0
+text = "«  Previous"
+
+[node name="Next" type="Button" parent="." unique_id=851502559]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -55.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Next  »"
+
+[connection signal="pressed" from="Previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
