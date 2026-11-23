@@ -118,18 +118,20 @@ func _process(_delta: float) -> void:
 	$Gyro/Values/AccelerometerZ/ProgressBar.value = accelerometer.z
 	$Gyro/Values/AccelerometerZ/ProgressBar/Value.text = "%+.1f" % accelerometer.z
 
-	for finger_sprite: Sprite2D in $Touchpad/Fingers.get_children():
-		# Only show fingers that are currently being pressed.
-		finger_sprite.visible = false
+	for touchpad in Input.get_joy_num_touchpads(cur_joy):
+		var touchpad_node: Panel = get_node("Touchpads/%d" % touchpad)
+		for finger_sprite: Sprite2D in touchpad_node.get_node(^"Fingers").get_children():
+			# Only show fingers that are currently being pressed.
+			finger_sprite.visible = false
 
-	for finger: int in Input.get_joy_touchpad_fingers(cur_joy):
-		var finger_sprite: Sprite2D = $Touchpad/Fingers.get_node(str(finger))
-		finger_sprite.visible = true
-		finger_sprite.position = Vector2(
-				remap(Input.get_joy_touchpad_finger_position(cur_joy, finger).x, 0.0, 1.0, 0.0, $Touchpad.size.x),
-				remap(Input.get_joy_touchpad_finger_position(cur_joy, finger).y, 0.0, 1.0, 0.0, $Touchpad.size.y),
-			)
-		finger_sprite.modulate.a = Input.get_joy_touchpad_finger_pressure(cur_joy, finger)
+		for finger: int in Input.get_joy_touchpad_fingers(cur_joy):
+			var finger_sprite: Sprite2D = touchpad_node.get_node(^"Fingers").get_node(str(finger))
+			finger_sprite.visible = true
+			finger_sprite.position = Vector2(
+					remap(Input.get_joy_touchpad_finger_position(cur_joy, finger, touchpad).x, 0.0, 1.0, 0.0, touchpad_node.size.x),
+					remap(Input.get_joy_touchpad_finger_position(cur_joy, finger, touchpad).y, 0.0, 1.0, 0.0, touchpad_node.size.y),
+				)
+			finger_sprite.self_modulate.g = Input.get_joy_touchpad_finger_pressure(cur_joy, finger, touchpad)
 
 	$LED.visible = Input.has_joy_light(cur_joy)
 	$LED/Buttons/SetJoyLight.disabled = set_joy_light_continuously
@@ -197,7 +199,17 @@ func set_joypad_name(joy_name: String, joy_guid: String) -> void:
 
 
 func update_extra_feature_visibility() -> void:
-	$Touchpad.visible = Input.get_joy_num_touchpads(cur_joy) >= 1
+	$Touchpads.visible = Input.get_joy_num_touchpads(cur_joy) >= 1
+	# Adjust the number of touchpad visualizers depending on the current joypad's touchpad count.
+	if Input.get_joy_num_touchpads(cur_joy) > $Touchpads.get_child_count():
+		for touchpad in Input.get_joy_num_touchpads(cur_joy) - 1:
+			var new_touchpad: Control = $Touchpads.get_child(0).duplicate()
+			new_touchpad.name = str(touchpad)
+			$Touchpads.add_child(new_touchpad, true)
+	elif Input.get_joy_num_touchpads(cur_joy) < $Touchpads.get_child_count():
+		for touchpad in Input.get_joy_num_touchpads(cur_joy):
+			$Touchpads.get_child(-1).queue_free()
+
 	Input.set_joy_motion_sensors_enabled(cur_joy, true)
 	reset_gyro()
 	set_joy_light_continuously = false
