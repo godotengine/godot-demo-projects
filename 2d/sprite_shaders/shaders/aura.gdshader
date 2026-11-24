@@ -5,6 +5,13 @@ render_mode blend_premul_alpha;
 uniform float aura_width = 2.0;
 uniform vec4 aura_color : source_color;
 
+// Allows CanvasItem `modulate` and `self_modulate` properties to work as intended.
+varying vec4 vertex_color;
+
+void vertex() {
+	vertex_color = COLOR;
+}
+
 void fragment() {
 	vec4 col = texture(TEXTURE, UV);
 	vec2 ps = TEXTURE_PIXEL_SIZE;
@@ -30,6 +37,7 @@ void fragment() {
 
 	col.rgb *= col.a;
 
-	COLOR = col;
+	COLOR = col * vertex_color;
 	COLOR.rgb += aura_color.rgb * (maxa - mina);
+	COLOR *= vertex_color * vertex_color.a;
 }

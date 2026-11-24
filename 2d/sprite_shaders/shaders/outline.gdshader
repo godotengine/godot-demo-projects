@@ -3,6 +3,13 @@ shader_type canvas_item;
 uniform float outline_width = 2.0;
 uniform vec4 outline_color : source_color;
 
+// Allows CanvasItem `modulate` and `self_modulate` properties to work as intended.
+varying vec4 vertex_color;
+
+void vertex() {
+	vertex_color = COLOR;
+}
+
 void fragment() {
 	vec4 col = texture(TEXTURE, UV);
 	vec2 ps = TEXTURE_PIXEL_SIZE;
@@ -26,5 +33,5 @@ void fragment() {
 	maxa = max(a, maxa);
 	mina = min(a, mina);
 
-	COLOR = mix(col, outline_color, maxa - mina);
+	COLOR = mix(col, outline_color, maxa - mina) * vertex_color;
 }
