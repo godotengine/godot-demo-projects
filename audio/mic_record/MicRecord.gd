@@ -96,4 +96,3 @@ func _on_stereo_check_button_toggled(button_pressed: bool) -> void:
 
 func _on_open_user_folder_button_pressed() -> void:
 	OS.shell_open(ProjectSettings.globalize_path("user://"))
-
