@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://dy8b1kf4wem8f"]
+
+[ext_resource type="Script" uid="uid://cwtvxssqdm5lu" path="res://spatial_entities/spatial_entities_plane_tracker.gd" id="1_0iy5a"]
+[ext_resource type="Shader" uid="uid://b6yrsyvgades8" path="res://shaders/wireframe.gdshader" id="2_otf88"]
+[ext_resource type="Shader" uid="uid://dwy6cvxqtd223" path="res://shaders/hole_punch.gdshader" id="3_2fqov"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wg0hh"]
+render_priority = 1
+shader = ExtResource("2_otf88")
+shader_parameter/albedo = Color(0, 0, 0, 0)
+shader_parameter/wire_color = Color(1, 1, 1, 1)
+shader_parameter/wire_width = 1.0000000475
+shader_parameter/wire_smoothness = 0.0010000000475
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0iy5a"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_wg0hh")
+shader = ExtResource("3_2fqov")
+shader_parameter/albedo = Color(0, 0, 0, 1)
+
+[node name="SpatialEntitiesPlaneTracker" type="XRAnchor3D" unique_id=1878630652]
+script = ExtResource("1_0iy5a")
+material = SubResource("ShaderMaterial_0iy5a")
+
+[node name="Description" type="Label3D" parent="." unique_id=1930725520]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.005)
+pixel_size = 0.001
+text = "Unknown plane"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1579516942]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1778840681]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=916075768]
