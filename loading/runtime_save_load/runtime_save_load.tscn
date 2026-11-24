@@ -59,6 +59,7 @@ size = Vector2i(392, 175)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
+use_native_dialog = true
 
 [node name="Result" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=455256499]
 custom_minimum_size = Vector2(0, 400)
@@ -83,6 +84,7 @@ layout_mode = 2
 expand_mode = 3
 
 [node name="AudioPlayer" type="Button" parent="MarginContainer/VBoxContainer/Result" unique_id=1269321942]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Play Audio"
@@ -95,6 +97,31 @@ layout_mode = 0
 offset_top = 48.0
 offset_right = 40.0
 offset_bottom = 71.0
+
+[node name="Volume" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Result/AudioPlayer" unique_id=908897314]
+layout_mode = 0
+offset_left = -95.0
+offset_top = -56.0
+offset_right = 203.0
+offset_bottom = -16.0
+mouse_filter = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Result/AudioPlayer/Volume" unique_id=714426186]
+layout_mode = 2
+text = "Volume"
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/Result/AudioPlayer/Volume" unique_id=1138017320]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 0.32
+
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/Result/AudioPlayer/Volume" unique_id=1363300885]
+layout_mode = 2
+text = "32%"
 
 [node name="SceneViewer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer/Result" unique_id=1083853242]
 visible = false
@@ -191,11 +218,13 @@ text = "Export"
 [node name="FileDialog" type="FileDialog" parent="MarginContainer/VBoxContainer/Export" unique_id=921853529]
 title = "Export File"
 access = 2
+use_native_dialog = true
 
 [connection signal="text_submitted" from="MarginContainer/VBoxContainer/HBoxContainer/FilePath" to="." method="_on_file_path_text_submitted"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Browse" to="." method="_on_browse_pressed"]
 [connection signal="file_selected" from="MarginContainer/VBoxContainer/HBoxContainer/FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Result/AudioPlayer" to="." method="_on_audio_player_pressed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/Result/AudioPlayer/Volume/HSlider" to="." method="_on_volume_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/Result/SceneViewer/Zoom" to="." method="_on_scene_viewer_zoom_value_changed"]
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/Result/ZIPViewer/FileList" to="." method="_on_zip_viewer_item_selected"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Export" to="." method="_on_export_pressed"]
