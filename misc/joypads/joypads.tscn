@@ -86,17 +86,18 @@ script = ExtResource("1")
 position = Vector2(415, 183)
 scale = Vector2(0.5, 0.5)
 
-[node name="Touchpad" type="Panel" parent="." unique_id=1913529993]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -256.0
-offset_bottom = 128.0
-grow_horizontal = 0
+[node name="Touchpads" type="HBoxContainer" parent="." unique_id=982649512]
+layout_mode = 0
+offset_left = 678.0
+offset_right = 972.0
+offset_bottom = 129.0
+
+[node name="0" type="Panel" parent="Touchpads" unique_id=1913529993]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_pv37u")
 
-[node name="Label" type="Label" parent="Touchpad" unique_id=1929357839]
+[node name="Label" type="Label" parent="Touchpads/0" unique_id=1929357839]
 modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 1
 anchors_preset = 8
@@ -112,20 +113,19 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Touchpad"
 
-[node name="Fingers" type="Control" parent="Touchpad" unique_id=1604224535]
+[node name="Fingers" type="Control" parent="Touchpads/0" unique_id=1604224535]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="0" type="Sprite2D" parent="Touchpad/Fingers" unique_id=1283717958]
+[node name="0" type="Sprite2D" parent="Touchpads/0/Fingers" unique_id=1283717958]
 visible = false
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_1c1k8")
 region_enabled = true
 region_rect = Rect2(0, 0, 45, 45)
 
-[node name="Label" type="Label" parent="Touchpad/Fingers/0" unique_id=1823711755]
-modulate = Color(0, 0, 0, 1)
+[node name="Label" type="Label" parent="Touchpads/0/Fingers/0" unique_id=1823711755]
 z_index = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -137,12 +137,15 @@ offset_top = -45.0
 offset_right = -13.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 1, 0, 1)
+theme_override_constants/outline_size = 11
 theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="1" type="Sprite2D" parent="Touchpad/Fingers" unique_id=1265495872]
+[node name="1" type="Sprite2D" parent="Touchpads/0/Fingers" unique_id=1265495872]
 visible = false
 position = Vector2(48, 0)
 scale = Vector2(0.5, 0.5)
@@ -150,8 +153,7 @@ texture = ExtResource("3_1c1k8")
 region_enabled = true
 region_rect = Rect2(0, 0, 45, 45)
 
-[node name="Label" type="Label" parent="Touchpad/Fingers/1" unique_id=461532491]
-modulate = Color(0, 0, 0, 1)
+[node name="Label" type="Label" parent="Touchpads/0/Fingers/1" unique_id=461532491]
 z_index = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -163,12 +165,15 @@ offset_top = -45.0
 offset_right = -13.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 1, 0, 1)
+theme_override_constants/outline_size = 11
 theme_override_font_sizes/font_size = 32
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="2" type="Sprite2D" parent="Touchpad/Fingers" unique_id=404511936]
+[node name="2" type="Sprite2D" parent="Touchpads/0/Fingers" unique_id=404511936]
 visible = false
 position = Vector2(48, 0)
 scale = Vector2(0.5, 0.5)
@@ -176,8 +181,7 @@ texture = ExtResource("3_1c1k8")
 region_enabled = true
 region_rect = Rect2(0, 0, 45, 45)
 
-[node name="Label" type="Label" parent="Touchpad/Fingers/2" unique_id=1734611656]
-modulate = Color(0, 0, 0, 1)
+[node name="Label" type="Label" parent="Touchpads/0/Fingers/2" unique_id=1734611656]
 z_index = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -189,12 +193,15 @@ offset_top = -45.0
 offset_right = -13.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 1, 0, 1)
+theme_override_constants/outline_size = 11
 theme_override_font_sizes/font_size = 32
 text = "2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="3" type="Sprite2D" parent="Touchpad/Fingers" unique_id=289367297]
+[node name="3" type="Sprite2D" parent="Touchpads/0/Fingers" unique_id=289367297]
 visible = false
 position = Vector2(48, 0)
 scale = Vector2(0.5, 0.5)
@@ -202,8 +209,7 @@ texture = ExtResource("3_1c1k8")
 region_enabled = true
 region_rect = Rect2(0, 0, 45, 45)
 
-[node name="Label" type="Label" parent="Touchpad/Fingers/3" unique_id=1977061478]
-modulate = Color(0, 0, 0, 1)
+[node name="Label" type="Label" parent="Touchpads/0/Fingers/3" unique_id=1977061478]
 z_index = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -215,12 +221,15 @@ offset_top = -45.0
 offset_right = -13.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 1, 0, 1)
+theme_override_constants/outline_size = 11
 theme_override_font_sizes/font_size = 32
 text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="4" type="Sprite2D" parent="Touchpad/Fingers" unique_id=1343154832]
+[node name="4" type="Sprite2D" parent="Touchpads/0/Fingers" unique_id=1343154832]
 visible = false
 position = Vector2(48, 0)
 scale = Vector2(0.5, 0.5)
@@ -228,8 +237,7 @@ texture = ExtResource("3_1c1k8")
 region_enabled = true
 region_rect = Rect2(0, 0, 45, 45)
 
-[node name="Label" type="Label" parent="Touchpad/Fingers/4" unique_id=1499300541]
-modulate = Color(0, 0, 0, 1)
+[node name="Label" type="Label" parent="Touchpads/0/Fingers/4" unique_id=1499300541]
 z_index = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -241,6 +249,9 @@ offset_top = -45.0
 offset_right = -13.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 1, 0, 1)
+theme_override_constants/outline_size = 11
 theme_override_font_sizes/font_size = 32
 text = "4"
 horizontal_alignment = 1
