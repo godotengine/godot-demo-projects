@@ -1,0 +1,68 @@
+[gd_scene load_steps=14 format=3 uid="uid://cnk1inmvelj4x"]
+
+[ext_resource type="Texture2D" uid="uid://crm65s53yy1n6" path="res://godot_icon.svg" id="1_7mycd"]
+[ext_resource type="RDShaderFile" uid="uid://bsbaafha2qt2x" path="res://base_texture.glsl" id="2_7mycd"]
+[ext_resource type="Script" uid="uid://cdfq6x7v36k1e" path="res://mesh_texture_rd.gd" id="3_5vw27"]
+[ext_resource type="ArrayMesh" uid="uid://j7duroqwmiuw" path="res://2d_array_mesh.tres" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://bg8txxwsr4qn8" path="res://text_texture.tres" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://mx52oimcwqtn" path="res://3d.tscn" id="6_7mycd"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_kek77"]
+
+[sub_resource type="Texture2DRD" id="Texture2DRD_5vw27"]
+script = ExtResource("3_5vw27")
+clear_color = Color(0.412266, 0.447241, 0.735728, 1)
+mesh = SubResource("PrismMesh_kek77")
+base_texture = ExtResource("1_7mycd")
+projection = Projection(-0.6, -1.3, 0, 0, 1.1, -1.67, 0, 0, -0.76, 0, -1.2, 0, 0, -0.26, 0, 1.36)
+
+[sub_resource type="TorusMesh" id="TorusMesh_lquwl"]
+
+[sub_resource type="Texture2DRD" id="Texture2DRD_7mycd"]
+script = ExtResource("3_5vw27")
+clear_color = Color(0.271125, 0.510188, 0.620698, 1)
+mesh = SubResource("TorusMesh_lquwl")
+base_texture = ExtResource("1_7mycd")
+projection = Projection(-0.7, -0.92, 0.5, 0, 0.25, -1.5, 0.32, 0, 1.43, -0.14, 0.48, 0.14, 0.1, 0.02, 0.75, 1.85)
+metadata/_custom_type_script = "uid://delyovxoqvijt"
+
+[sub_resource type="QuadMesh" id="QuadMesh_1bvp3"]
+
+[sub_resource type="Texture2DRD" id="Texture2DRD_lquwl"]
+script = ExtResource("3_5vw27")
+clear_color = Color(0.572798, 0.384286, 0.683792, 0.337255)
+mesh = SubResource("QuadMesh_1bvp3")
+base_texture = ExtResource("1_7mycd")
+projection = Projection(1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+metadata/_custom_type_script = "uid://delyovxoqvijt"
+
+[sub_resource type="Texture2DRD" id="Texture2DRD_272bh"]
+script = ExtResource("3_5vw27")
+mesh = ExtResource("4_1bvp3")
+base_texture = ExtResource("1_7mycd")
+projection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 100)
+metadata/_custom_type_script = "uid://cdfq6x7v36k1e"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Prism" type="Sprite2D" parent="."]
+position = Vector2(573, 321)
+texture = SubResource("Texture2DRD_5vw27")
+
+[node name="Torus" type="Sprite2D" parent="."]
+position = Vector2(898, 319)
+texture = SubResource("Texture2DRD_7mycd")
+
+[node name="Quad" type="Sprite2D" parent="."]
+position = Vector2(252, 321)
+texture = SubResource("Texture2DRD_lquwl")
+
+[node name="Text" type="Sprite2D" parent="."]
+position = Vector2(293, 89)
+texture = ExtResource("4_lquwl")
+
+[node name="3d" parent="." instance=ExtResource("6_7mycd")]
+
+[node name="2DMesh" type="Sprite2D" parent="."]
+position = Vector2(244, 797)
+texture = SubResource("Texture2DRD_272bh")
