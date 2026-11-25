@@ -1,0 +1,63 @@
+[gd_scene load_steps=12 format=3 uid="uid://db1q04xf4urua"]
+
+[ext_resource type="Texture2D" uid="uid://cijwjq531rxx8" path="res://assets/polyhaven/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="1_mp22n"]
+[ext_resource type="Texture2D" uid="uid://rek0t7kubpx4" path="res://assets/pattern.png" id="1_sbpla"]
+[ext_resource type="PackedScene" uid="uid://dkdk37kpjui3q" path="res://vehicle.tscn" id="2_x0meh"]
+[ext_resource type="Script" path="res://start_vr.gd" id="3_d042y"]
+[ext_resource type="PackedScene" uid="uid://du5twm6cwhq6j" path="res://track.tscn" id="4_ddbiu"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_k7hwg"]
+panorama = ExtResource("1_mp22n")
+
+[sub_resource type="Sky" id="Sky_f7epq"]
+sky_material = SubResource("PanoramaSkyMaterial_k7hwg")
+
+[sub_resource type="Environment" id="Environment_ctbfb"]
+background_mode = 2
+sky = SubResource("Sky_f7epq")
+ambient_light_sky_contribution = 0.5
+tonemap_mode = 2
+tonemap_white = 3.37
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jptbt"]
+albedo_color = Color(0.211765, 0.717647, 0.160784, 1)
+albedo_texture = ExtResource("1_sbpla")
+uv1_scale = Vector3(100, 100, 100)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_judwf"]
+size = Vector2(1000, 1000)
+subdivide_width = 10
+subdivide_depth = 10
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_k6vqu"]
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ctbfb")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.318358, -0.888444, -0.33063, 0.447532, -0.44832, 0.773772, -0.835681, 0.0983687, 0.540334, 0, 3.74613, 0)
+light_energy = 0.5
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_max_distance = 10.0
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, 0)
+material_override = SubResource("StandardMaterial3D_jptbt")
+mesh = SubResource("PlaneMesh_judwf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_k6vqu")
+
+[node name="Vehicle" parent="." instance=ExtResource("2_x0meh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.54837, 0.2, 0)
+
+[node name="StartVR" type="Node3D" parent="."]
+script = ExtResource("3_d042y")
+maximum_refresh_rate = 144
+
+[node name="Track" parent="." instance=ExtResource("4_ddbiu")]
