@@ -1,0 +1,81 @@
+[gd_scene load_steps=15 format=3 uid="uid://co81w70dexljf"]
+
+[ext_resource type="Script" path="res://Scene/Global.gd" id="1_cd6h1"]
+[ext_resource type="Texture2D" uid="uid://cvkw7nw14yaeh" path="res://Assets/Background.png" id="1_ffoqa"]
+[ext_resource type="PackedScene" uid="uid://oi24n36kk5c3" path="res://Scene/player.tscn" id="2_7n3bw"]
+[ext_resource type="Script" path="res://Scene/Camera2D.gd" id="2_lgfue"]
+[ext_resource type="Texture2D" uid="uid://y8et8pdoxcqb" path="res://Assets/Line.png" id="3_d01u6"]
+[ext_resource type="Texture2D" uid="uid://bgwh6tdr5h8uj" path="res://Assets/Plate.png" id="4_g45ka"]
+[ext_resource type="Script" path="res://Scene/TileMapLine.gd" id="5_ay6os"]
+[ext_resource type="FontFile" uid="uid://dp3ilscvmip0a" path="res://Assets/Fonts/LexendGiga-Bold.ttf" id="5_lyewb"]
+[ext_resource type="Script" path="res://Scene/Label.gd" id="5_xomo3"]
+[ext_resource type="AudioStream" uid="uid://3vwpadb5x8sn" path="res://Assets/Sounds/score.wav" id="15_hft6l"]
+[ext_resource type="AudioStream" uid="uid://dhpgvsu6xk48g" path="res://Assets/Sounds/game_over.wav" id="16_xkd6w"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y5ugg"]
+texture = ExtResource("3_d01u6")
+texture_region_size = Vector2i(80, 16)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_548oa"]
+texture = ExtResource("4_g45ka")
+texture_region_size = Vector2i(80, 16)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_1xwqf"]
+tile_size = Vector2i(80, 16)
+physics_layer_0/collision_layer = 2
+sources/0 = SubResource("TileSetAtlasSource_y5ugg")
+sources/1 = SubResource("TileSetAtlasSource_548oa")
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_cd6h1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(400, 180)
+script = ExtResource("2_lgfue")
+
+[node name="Background" type="TextureRect" parent="Camera2D"]
+offset_left = -780.665
+offset_top = -489.155
+offset_right = 416.335
+offset_bottom = 92.845
+scale = Vector2(1.47851, 1.79854)
+pivot_offset = Vector2(225, 168)
+texture = ExtResource("1_ffoqa")
+stretch_mode = 1
+
+[node name="Label" type="Label" parent="Camera2D"]
+offset_left = 288.0
+offset_top = -155.0
+offset_right = 396.0
+offset_bottom = -100.0
+theme_override_fonts/font = ExtResource("5_lyewb")
+theme_override_font_sizes/font_size = 42
+text = "56"
+horizontal_alignment = 1
+script = ExtResource("5_xomo3")
+
+[node name="Player" parent="." instance=ExtResource("2_7n3bw")]
+position = Vector2(126, 99)
+collision_mask = 7
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_1xwqf")
+format = 2
+script = ExtResource("5_ay6os")
+
+[node name="Hit_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_hft6l")
+
+[node name="Game_over" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_xkd6w")
+
+[connection signal="game_over" from="TileMap" to="." method="_on_tile_map_game_over"]
+[connection signal="game_over" from="TileMap" to="Player" method="_game_over"]
+[connection signal="score" from="TileMap" to="Camera2D/Label" method="_on_score"]
+[connection signal="finished" from="Game_over" to="." method="_on_game_over_finished"]
